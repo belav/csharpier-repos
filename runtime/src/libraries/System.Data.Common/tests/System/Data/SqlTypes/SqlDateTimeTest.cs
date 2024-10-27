@@ -25,22 +25,24 @@
 // OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-using Xunit;
-using System.Xml;
 using System.Data.SqlTypes;
+using System.Xml;
+using Xunit;
 
 namespace System.Data.Tests.SqlTypes
 {
     public class SqlDateTimeTest
     {
-        private long[] _myTicks = {
-            631501920000000000L,    // 25 Feb 2002 - 00:00:00
-            631502475130080000L,    // 25 Feb 2002 - 15:25:13,8
-            631502115130080000L,    // 25 Feb 2002 - 05:25:13,8
-            631502115000000000L,    // 25 Feb 2002 - 05:25:00
-            631502115130000000L,    // 25 Feb 2002 - 05:25:13
-            631502079130000000L,    // 25 Feb 2002 - 04:25:13
-            629197085770000000L     // 06 Nov 1994 - 08:49:37
+        private long[] _myTicks =
+        {
+            631501920000000000L, // 25 Feb 2002 - 00:00:00
+            631502475130080000L, // 25 Feb 2002 - 15:25:13,8
+            631502115130080000L, // 25 Feb 2002 - 05:25:13,8
+            631502115000000000L, // 25 Feb 2002 - 05:25:00
+            631502115130000000L, // 25 Feb 2002 - 05:25:13
+            631502079130000000L, // 25 Feb 2002 - 04:25:13
+            629197085770000000L // 06 Nov 1994 - 08:49:37
+            ,
         };
 
         private SqlDateTime _test1;
@@ -59,8 +61,7 @@ namespace System.Data.Tests.SqlTypes
         public void Create()
         {
             // SqlDateTime (DateTime)
-            SqlDateTime cTest = new SqlDateTime(
-                new DateTime(2002, 5, 19, 3, 34, 0));
+            SqlDateTime cTest = new SqlDateTime(new DateTime(2002, 5, 19, 3, 34, 0));
             Assert.Equal(2002, cTest.Value.Year);
 
             // SqlDateTime (int, int)

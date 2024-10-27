@@ -14,23 +14,33 @@ internal sealed class ProjectCommandLineApplication : CommandLineApplication
 
     public IReporter Reporter { get; private set; }
 
-    public ProjectCommandLineApplication(IReporter reporter, bool throwOnUnexpectedArg = true, bool continueAfterUnexpectedArg = false, bool treatUnmatchedOptionsAsArguments = false)
+    public ProjectCommandLineApplication(
+        IReporter reporter,
+        bool throwOnUnexpectedArg = true,
+        bool continueAfterUnexpectedArg = false,
+        bool treatUnmatchedOptionsAsArguments = false
+    )
         : base(throwOnUnexpectedArg, continueAfterUnexpectedArg, treatUnmatchedOptionsAsArguments)
     {
         ProjectOption = Option(
             "-p|--project",
             Resources.ProjectOption_Description,
-            CommandOptionType.SingleValue);
+            CommandOptionType.SingleValue
+        );
 
         OutputOption = Option(
             "-o|--output",
             Resources.CreateCommand_OutputOption_Description,
-            CommandOptionType.SingleValue);
+            CommandOptionType.SingleValue
+        );
 
         Reporter = reporter;
     }
 
-    public ProjectCommandLineApplication Command(string name, Action<ProjectCommandLineApplication> configuration)
+    public ProjectCommandLineApplication Command(
+        string name,
+        Action<ProjectCommandLineApplication> configuration
+    )
     {
         var command = new ProjectCommandLineApplication(Reporter) { Name = name, Parent = this };
         Commands.Add(command);

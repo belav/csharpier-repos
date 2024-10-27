@@ -42,8 +42,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.method001.method001
 {
     public class Test
@@ -82,8 +80,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.method002.method002
 {
@@ -124,8 +120,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.method003.method003
 {
     public class Test
@@ -147,22 +141,23 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
                 }
                 catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
                 {
-                    if (ErrorVerifier.Verify(RuntimeErrorId.BindToVoidMethodButExpectResult, e.Message))
+                    if (
+                        ErrorVerifier.Verify(
+                            RuntimeErrorId.BindToVoidMethodButExpectResult,
+                            e.Message
+                        )
+                    )
                         return 0;
                 }
 
                 return 1;
             }
 
-            private void b(dynamic d)
-            {
-            }
+            private void b(dynamic d) { }
         }
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.staticgenericmethod001.staticgenericmethod001
 {
@@ -202,8 +197,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.staticgenericmethod002.staticgenericmethod002
 {
     public class Test
@@ -228,7 +221,9 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
             try
             {
                 //This should not compile if the return type of Foo is not dynamic
-                MyClass<int>.Foo().Bar();
+                MyClass<int>
+                    .Foo()
+                    .Bar();
             }
             catch (Microsoft.CSharp.RuntimeBinder.RuntimeBinderException e)
             {
@@ -241,8 +236,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     }
     // </Code>
 }
-
-
 
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.staticmethod001.staticmethod001
 {
@@ -282,17 +275,15 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.declarations.returnType.methods.staticmethod002.staticmethod002
 {
     static // <Title> Having dynamic as a return type</Title>
-           // <Description>
-           // </Description>
-           // <RelatedBugs></RelatedBugs>
-           //<Expects Status=success></Expects>
-           // <Code>
-public class MyClass
+    // <Description>
+    // </Description>
+    // <RelatedBugs></RelatedBugs>
+    //<Expects Status=success></Expects>
+    // <Code>
+    public class MyClass
     {
         public static dynamic Foo(this int x)
         {

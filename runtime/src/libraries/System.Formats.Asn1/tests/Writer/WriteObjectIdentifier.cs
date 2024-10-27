@@ -13,7 +13,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteObjectIdentifier_String(
             AsnEncodingRules ruleSet,
             string oidValue,
-            string expectedHex)
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteObjectIdentifier(oidValue);
@@ -26,7 +27,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteObjectIdentifier_Span(
             AsnEncodingRules ruleSet,
             string oidValue,
-            string expectedHex)
+            string expectedHex
+        )
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.WriteObjectIdentifier(oidValue.AsSpan());
@@ -39,7 +41,8 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteOid_InvalidValue_String(
             string description,
             AsnEncodingRules ruleSet,
-            string nonOidValue)
+            string nonOidValue
+        )
         {
             _ = description;
             AsnWriter writer = new AsnWriter(ruleSet);
@@ -48,13 +51,15 @@ namespace System.Formats.Asn1.Tests.Writer
             {
                 AssertExtensions.Throws<ArgumentNullException>(
                     "oidValue",
-                    () => writer.WriteObjectIdentifier(nonOidValue));
+                    () => writer.WriteObjectIdentifier(nonOidValue)
+                );
             }
             else
             {
                 AssertExtensions.Throws<ArgumentException>(
                     "oidValue",
-                    () => writer.WriteObjectIdentifier(nonOidValue));
+                    () => writer.WriteObjectIdentifier(nonOidValue)
+                );
             }
         }
 
@@ -63,14 +68,16 @@ namespace System.Formats.Asn1.Tests.Writer
         public void VerifyWriteOid_InvalidValue_Span(
             string description,
             AsnEncodingRules ruleSet,
-            string nonOidValue)
+            string nonOidValue
+        )
         {
             _ = description;
             AsnWriter writer = new AsnWriter(ruleSet);
 
             AssertExtensions.Throws<ArgumentException>(
                 "oidValue",
-                () => writer.WriteObjectIdentifier(nonOidValue.AsSpan()));
+                () => writer.WriteObjectIdentifier(nonOidValue.AsSpan())
+            );
         }
 
         [Theory]
@@ -92,7 +99,10 @@ namespace System.Formats.Asn1.Tests.Writer
         public void WriteObjectIdentifier_CustomTag_Span(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            writer.WriteObjectIdentifier("1.3.14.3.2.26".AsSpan(), new Asn1Tag(TagClass.Application, 2));
+            writer.WriteObjectIdentifier(
+                "1.3.14.3.2.26".AsSpan(),
+                new Asn1Tag(TagClass.Application, 2)
+            );
 
             Verify(writer, "42052B0E03021A");
         }
@@ -114,9 +124,13 @@ namespace System.Formats.Asn1.Tests.Writer
                     }
                     else
                     {
-                        writer.WriteObjectIdentifier((string)null, new Asn1Tag(TagClass.ContextSpecific, 6));
+                        writer.WriteObjectIdentifier(
+                            (string)null,
+                            new Asn1Tag(TagClass.ContextSpecific, 6)
+                        );
                     }
-                });
+                }
+            );
         }
 
         [Theory]
@@ -129,11 +143,13 @@ namespace System.Formats.Asn1.Tests.Writer
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteObjectIdentifier("1.1", Asn1Tag.Null));
+                () => writer.WriteObjectIdentifier("1.1", Asn1Tag.Null)
+            );
 
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.WriteObjectIdentifier("1.1".AsSpan(), Asn1Tag.Null));
+                () => writer.WriteObjectIdentifier("1.1".AsSpan(), Asn1Tag.Null)
+            );
         }
 
         [Theory]
@@ -145,8 +161,15 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
 
             const string OidValue = "1.1";
-            Asn1Tag constructedOid = new Asn1Tag(UniversalTagNumber.ObjectIdentifier, isConstructed: true);
-            Asn1Tag constructedContext0 = new Asn1Tag(TagClass.ContextSpecific, 0, isConstructed: true);
+            Asn1Tag constructedOid = new Asn1Tag(
+                UniversalTagNumber.ObjectIdentifier,
+                isConstructed: true
+            );
+            Asn1Tag constructedContext0 = new Asn1Tag(
+                TagClass.ContextSpecific,
+                0,
+                isConstructed: true
+            );
 
             writer.WriteObjectIdentifier(OidValue, constructedOid);
             writer.WriteObjectIdentifier(OidValue, constructedContext0);
@@ -159,30 +182,10 @@ namespace System.Formats.Asn1.Tests.Writer
         public static IEnumerable<object[]> ValidOidData { get; } =
             new object[][]
             {
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "0.0",
-                    "060100",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.CER,
-                    "1.0",
-                    "060128",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.DER,
-                    "2.0",
-                    "060150",
-                },
-                new object[]
-                {
-                    AsnEncodingRules.BER,
-                    "1.3.14.3.2.26",
-                    "06052B0E03021A",
-                },
+                new object[] { AsnEncodingRules.BER, "0.0", "060100" },
+                new object[] { AsnEncodingRules.CER, "1.0", "060128" },
+                new object[] { AsnEncodingRules.DER, "2.0", "060150" },
+                new object[] { AsnEncodingRules.BER, "1.3.14.3.2.26", "06052B0E03021A" },
                 new object[]
                 {
                     AsnEncodingRules.CER,
@@ -226,7 +229,12 @@ namespace System.Formats.Asn1.Tests.Writer
                 new object[] { "Double zero - third RID", AsnEncodingRules.CER, "0.1.00" },
                 new object[] { "Leading zero - third RID", AsnEncodingRules.DER, "0.1.023" },
                 new object[] { "Invalid character first position", AsnEncodingRules.BER, "a.1.23" },
-                new object[] { "Invalid character second position", AsnEncodingRules.CER, "0,1.23" },
+                new object[]
+                {
+                    "Invalid character second position",
+                    AsnEncodingRules.CER,
+                    "0,1.23",
+                },
                 new object[] { "Invalid character second rid", AsnEncodingRules.DER, "0.1q.23" },
                 new object[] { "Invalid character third rid", AsnEncodingRules.BER, "0.1.23q" },
             };

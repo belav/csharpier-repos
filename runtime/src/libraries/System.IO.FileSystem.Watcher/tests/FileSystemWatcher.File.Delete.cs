@@ -68,7 +68,16 @@ namespace System.IO.Tests
         [OuterLoop("This test has a longer than average timeout and may fail intermittently")]
         public void FileSystemWatcher_File_Delete_DeepDirectoryStructure()
         {
-            string deepDir = CreateTestDirectory(TestDirectory, "dir", "dir", "dir", "dir", "dir", "dir", "dir");
+            string deepDir = CreateTestDirectory(
+                TestDirectory,
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir",
+                "dir"
+            );
             using (var watcher = new FileSystemWatcher(TestDirectory, "*"))
             {
                 watcher.IncludeSubdirectories = true;
@@ -80,28 +89,47 @@ namespace System.IO.Tests
                 Action cleanup = () => File.Create(fileName).Dispose();
                 cleanup();
 
-                ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, fileName, LongWaitTimeout);
+                ExpectEvent(
+                    watcher,
+                    WatcherChangeTypes.Deleted,
+                    action,
+                    cleanup,
+                    fileName,
+                    LongWaitTimeout
+                );
             }
         }
 
         [ConditionalFact(typeof(MountHelper), nameof(MountHelper.CanCreateSymbolicLinks))]
         public void FileSystemWatcher_File_Delete_SymLink()
         {
-            FileSystemWatcherTest.Execute(() =>
-            {
-                string dir = CreateTestDirectory(TestDirectory, "dir");
-                string temp = CreateTestFile();
-                using (var watcher = new FileSystemWatcher(dir, "*"))
+            FileSystemWatcherTest.Execute(
+                () =>
                 {
-                    // Make the symlink in our path (to the temp file) and make sure an event is raised
-                    string symLinkPath = Path.Combine(dir, GetRandomLinkName());
-                    Action action = () => File.Delete(symLinkPath);
-                    Action cleanup = () => Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, false));
-                    cleanup();
+                    string dir = CreateTestDirectory(TestDirectory, "dir");
+                    string temp = CreateTestFile();
+                    using (var watcher = new FileSystemWatcher(dir, "*"))
+                    {
+                        // Make the symlink in our path (to the temp file) and make sure an event is raised
+                        string symLinkPath = Path.Combine(dir, GetRandomLinkName());
+                        Action action = () => File.Delete(symLinkPath);
+                        Action cleanup = () =>
+                            Assert.True(MountHelper.CreateSymbolicLink(symLinkPath, temp, false));
+                        cleanup();
 
-                    ExpectEvent(watcher, WatcherChangeTypes.Deleted, action, cleanup, symLinkPath);
-                }
-            }, maxAttempts: DefaultAttemptsForExpectedEvent, backoffFunc: (iteration) => RetryDelayMilliseconds, retryWhen: e => e is XunitException);
+                        ExpectEvent(
+                            watcher,
+                            WatcherChangeTypes.Deleted,
+                            action,
+                            cleanup,
+                            symLinkPath
+                        );
+                    }
+                },
+                maxAttempts: DefaultAttemptsForExpectedEvent,
+                backoffFunc: (iteration) => RetryDelayMilliseconds,
+                retryWhen: e => e is XunitException
+            );
         }
 
         [Fact]

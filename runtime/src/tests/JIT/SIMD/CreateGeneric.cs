@@ -9,8 +9,8 @@ namespace VectorMathTests
 {
     public class Program
     {
-		const float EPS = Single.Epsilon * 5;
-		
+        const float EPS = Single.Epsilon * 5;
+
         [Fact]
         public static int TestEntryPoint()
         {

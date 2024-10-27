@@ -41,29 +41,33 @@ namespace System.Net.WebSockets
             IEnumerable<string> secWebSocketProtocols,
             string secWebSocketVersion,
             string secWebSocketKey,
-            WebSocket webSocket)
+            WebSocket webSocket
+        )
         {
             Contract.Assert(requestUri != null, "requestUri shouldn't be null");
             Contract.Assert(headers != null, "headers shouldn't be null");
             Contract.Assert(cookieCollection != null, "cookieCollection shouldn't be null");
-            Contract.Assert(secWebSocketProtocols != null, "secWebSocketProtocols shouldn't be null");
-            Contract.Assert(webSocket != null, "webSocket shouldn't be null"); 
+            Contract.Assert(
+                secWebSocketProtocols != null,
+                "secWebSocketProtocols shouldn't be null"
+            );
+            Contract.Assert(webSocket != null, "webSocket shouldn't be null");
 
             m_CookieCollection = new CookieCollection();
             m_CookieCollection.Add(cookieCollection);
 
             m_Headers = new NameValueCollection(headers);
-            m_User = CopyPrincipal(user); 
+            m_User = CopyPrincipal(user);
 
             m_RequestUri = requestUri;
-            m_IsAuthenticated = isAuthenticated; 
-            m_IsLocal = isLocal; 
-            m_IsSecureConnection = isSecureConnection; 
-            m_Origin = origin; 
+            m_IsAuthenticated = isAuthenticated;
+            m_IsLocal = isLocal;
+            m_IsSecureConnection = isSecureConnection;
+            m_Origin = origin;
             m_SecWebSocketProtocols = secWebSocketProtocols;
-            m_SecWebSocketVersion = secWebSocketVersion; 
+            m_SecWebSocketVersion = secWebSocketVersion;
             m_SecWebSocketKey = secWebSocketKey;
-            m_WebSocket = webSocket; 
+            m_WebSocket = webSocket;
         }
 
         public override Uri RequestUri
@@ -129,30 +133,44 @@ namespace System.Net.WebSockets
         private static IPrincipal CopyPrincipal(IPrincipal user)
         {
             // Copy IPrincipal to the new WebSocket object. m_User gets disposed when
-            // HttpListenerContext is closed. 
+            // HttpListenerContext is closed.
             IPrincipal retVal = null;
             if (user != null)
             {
                 if (user as WindowsPrincipal == null)
                 {
                     // authtype Basic
-                    HttpListenerBasicIdentity basicIdentity = user.Identity as HttpListenerBasicIdentity;
+                    HttpListenerBasicIdentity basicIdentity =
+                        user.Identity as HttpListenerBasicIdentity;
                     if (basicIdentity != null)
                     {
-                        retVal = new GenericPrincipal((new HttpListenerBasicIdentity(basicIdentity.Name, 
-                            basicIdentity.Password)), null);
+                        retVal = new GenericPrincipal(
+                            (
+                                new HttpListenerBasicIdentity(
+                                    basicIdentity.Name,
+                                    basicIdentity.Password
+                                )
+                            ),
+                            null
+                        );
                     }
                 }
                 else
                 {
-                    // Digest, Negotiate, NTLM 
+                    // Digest, Negotiate, NTLM
                     WindowsIdentity windowsIdentity = (WindowsIdentity)user.Identity;
-                    retVal = new WindowsPrincipal(HttpListener.CreateWindowsIdentity(windowsIdentity.Token, 
-                        windowsIdentity.AuthenticationType, WindowsAccountType.Normal, true));
+                    retVal = new WindowsPrincipal(
+                        HttpListener.CreateWindowsIdentity(
+                            windowsIdentity.Token,
+                            windowsIdentity.AuthenticationType,
+                            WindowsAccountType.Normal,
+                            true
+                        )
+                    );
                 }
             }
 
-            return retVal; 
+            return retVal;
         }
     }
 }

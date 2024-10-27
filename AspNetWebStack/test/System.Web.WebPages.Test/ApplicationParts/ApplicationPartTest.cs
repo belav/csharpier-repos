@@ -14,8 +14,14 @@ namespace System.Web.WebPages.Test
             // Arrange
             var assembly = new Mock<TestResourceAssembly>().Object;
 
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ApplicationPart(assembly, rootVirtualPath: null), "rootVirtualPath");
-            Assert.ThrowsArgumentNullOrEmptyString(() => new ApplicationPart(assembly, rootVirtualPath: String.Empty), "rootVirtualPath");
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ApplicationPart(assembly, rootVirtualPath: null),
+                "rootVirtualPath"
+            );
+            Assert.ThrowsArgumentNullOrEmptyString(
+                () => new ApplicationPart(assembly, rootVirtualPath: String.Empty),
+                "rootVirtualPath"
+            );
         }
 
         [Fact]

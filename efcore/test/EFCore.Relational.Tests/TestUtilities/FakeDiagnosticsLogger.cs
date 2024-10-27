@@ -10,11 +10,9 @@ public class FakeDiagnosticsLogger<T> : IDiagnosticsLogger<T>, ILogger
 {
     public ILoggingOptions Options { get; } = new LoggingOptions();
 
-    public bool ShouldLogSensitiveData()
-        => false;
+    public bool ShouldLogSensitiveData() => false;
 
-    public ILogger Logger
-        => this;
+    public ILogger Logger => this;
 
     public DiagnosticSource DiagnosticSource { get; } = new DiagnosticListener("Fake");
 
@@ -25,18 +23,14 @@ public class FakeDiagnosticsLogger<T> : IDiagnosticsLogger<T>, ILogger
         EventId eventId,
         TState state,
         Exception exception,
-        Func<TState, Exception, string> formatter)
-    {
-    }
+        Func<TState, Exception, string> formatter
+    ) { }
 
-    public bool IsEnabled(LogLevel logLevel)
-        => true;
+    public bool IsEnabled(LogLevel logLevel) => true;
 
-    public bool IsEnabled(EventId eventId, LogLevel logLevel)
-        => true;
+    public bool IsEnabled(EventId eventId, LogLevel logLevel) => true;
 
-    public IDisposable BeginScope<TState>(TState state)
-        => null;
+    public IDisposable BeginScope<TState>(TState state) => null;
 
     public virtual LoggingDefinitions Definitions { get; } = new TestRelationalLoggingDefinitions();
 

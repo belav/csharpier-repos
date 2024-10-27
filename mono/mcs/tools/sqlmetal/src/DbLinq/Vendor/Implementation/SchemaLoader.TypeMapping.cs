@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,7 +21,7 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
@@ -38,9 +38,7 @@ namespace DbLinq.Vendor.Implementation
         /// This class is used as fallback when no matching type was found.
         /// If we have the case, then something is missing from DbMetal
         /// </summary>
-        internal class UnknownType
-        {
-        }
+        internal class UnknownType { }
 
         /// <summary>
         /// Default IDataType implementation (see IDataType for details)
@@ -81,153 +79,157 @@ namespace DbLinq.Vendor.Implementation
 
             switch (dataTypeL)
             {
-            // string
-            case "c":
-            case "char":
-            case "character":
-            case "character varying":
-            case "inet":
-            case "long":
-            case "longtext":
-            case "long varchar":
-            case "mediumtext":
-            case "nchar":
-            case "ntext":
-            case "nvarchar":
-            case "nvarchar2":
-            case "string":
-            case "text":
-            case "varchar":
-            case "varchar2":
-            case "clob":    // oracle type
-            case "nclob":   // oracle type
-            case "rowid":   // oracle type
-            case "urowid":  // oracle type
-            case "tinytext": // mysql type
-                return typeof(String);
+                // string
+                case "c":
+                case "char":
+                case "character":
+                case "character varying":
+                case "inet":
+                case "long":
+                case "longtext":
+                case "long varchar":
+                case "mediumtext":
+                case "nchar":
+                case "ntext":
+                case "nvarchar":
+                case "nvarchar2":
+                case "string":
+                case "text":
+                case "varchar":
+                case "varchar2":
+                case "clob": // oracle type
+                case "nclob": // oracle type
+                case "rowid": // oracle type
+                case "urowid": // oracle type
+                case "tinytext": // mysql type
+                    return typeof(String);
 
-            // bool
-            case "bit":
-            case "bool":
-            case "boolean":
-                return typeof(Boolean);
-
-            // int8
-            case "tinyint":
-                if (dataType.Length == 1)
+                // bool
+                case "bit":
+                case "bool":
+                case "boolean":
                     return typeof(Boolean);
-                // tinyint is supposed to be signed
-                // but we can have explicit sign
-                if (dataType.Unsigned ?? false)
-                    return typeof(Byte);
-                // default case, unsigned
-                return typeof(SByte);
 
-            // int16
-            case "short":
-            case "smallint":
-                if (dataType.Unsigned ?? false)
-                    return typeof(UInt16);
-                return typeof(Int16);
-
-            // int32
-            case "int":
-            case "integer":
-            case "mediumint":
-                if (dataType.Unsigned ?? false)
-                    return typeof(UInt32);
-                return typeof(Int32);
-
-            // int64
-            case "bigint":
-                return typeof(Int64);
-
-            // single
-            case "float":
-            case "float4":
-            case "real":
-            case "binary_float":   // oracle type
-            case "unsigned float": // mysql type
-            case "float unsigned": // mysql type
-                return typeof(Single);
-
-            // double
-            case "double":
-            case "double precision":
-            case "binary_double":  // oracle type
-            case "unsigned double":// mysql type
-            case "double unsigned":// mysql type
-                return typeof(Double);
-
-            // decimal
-            case "decimal":
-            case "money":
-            case "numeric":
-                return typeof(Decimal);
-            case "number": // special oracle type
-                if (dataType.Precision.HasValue && (dataType.Scale ?? 0) == 0)
-                {
-                    if (dataType.Precision.Value == 1)
+                // int8
+                case "tinyint":
+                    if (dataType.Length == 1)
                         return typeof(Boolean);
-                    if (dataType.Precision.Value <= 4)
-                        return typeof(Int16);
-                    if (dataType.Precision.Value <= 9)
-                        return typeof(Int32);
-                    if (dataType.Precision.Value <= 19)
-                        return typeof(Int64);
-                }
-                return typeof(Decimal);
+                    // tinyint is supposed to be signed
+                    // but we can have explicit sign
+                    if (dataType.Unsigned ?? false)
+                        return typeof(Byte);
+                    // default case, unsigned
+                    return typeof(SByte);
 
-            // time interval
-            case "interval":
-                return typeof(TimeSpan);
+                // int16
+                case "short":
+                case "smallint":
+                    if (dataType.Unsigned ?? false)
+                        return typeof(UInt16);
+                    return typeof(Int16);
 
-            //enum
-            case "enum":
-            case "set":
-                return MapEnumDbType(dataType);
+                // int32
+                case "int":
+                case "integer":
+                case "mediumint":
+                    if (dataType.Unsigned ?? false)
+                        return typeof(UInt32);
+                    return typeof(Int32);
 
-            // date
-            case "date":
-            case "datetime":
-            case "ingresdate":
-            case "timestamp":
-            case "timestamp without time zone":
-            case "timestamp with time zone":
-            case "time":
-            case "time without time zone": //reported by twain_bu...@msn.com,
-            case "time with time zone":
-                return typeof(DateTime);
+                // int64
+                case "bigint":
+                    return typeof(Int64);
 
-            // byte[]
-            case "binary":
-            case "blob":
-            case "bytea":
-            case "byte varying":
-            case "image":
-            case "longblob":
-            case "long byte":
-            case "oid":
-            case "sytea":
-            case "mediumblob":
-            case "tinyblob":
-            case "raw":       // oracle type
-            case "long raw":  // oracle type
-            case "varbinary":
-                return typeof(Byte[]);
+                // single
+                case "float":
+                case "float4":
+                case "real":
+                case "binary_float": // oracle type
+                case "unsigned float": // mysql type
+                case "float unsigned": // mysql type
+                    return typeof(Single);
 
-            // PostgreSQL, for example has an uuid type that can be mapped as a Guid
-            case "uuid":
-                return typeof(Guid);
+                // double
+                case "double":
+                case "double precision":
+                case "binary_double": // oracle type
+                case "unsigned double": // mysql type
+                case "double unsigned": // mysql type
+                    return typeof(Double);
 
-            case "void":
-                return null;
+                // decimal
+                case "decimal":
+                case "money":
+                case "numeric":
+                    return typeof(Decimal);
+                case "number": // special oracle type
+                    if (dataType.Precision.HasValue && (dataType.Scale ?? 0) == 0)
+                    {
+                        if (dataType.Precision.Value == 1)
+                            return typeof(Boolean);
+                        if (dataType.Precision.Value <= 4)
+                            return typeof(Int16);
+                        if (dataType.Precision.Value <= 9)
+                            return typeof(Int32);
+                        if (dataType.Precision.Value <= 19)
+                            return typeof(Int64);
+                    }
+                    return typeof(Decimal);
 
-            // if we fall to this case, we must handle the type
-            default:
-                throw new ArgumentException(
-                    string.Format("Don't know how to convert the SQL type '{0}' into a managed type.", dataTypeL),
-                    "dataType");
+                // time interval
+                case "interval":
+                    return typeof(TimeSpan);
+
+                //enum
+                case "enum":
+                case "set":
+                    return MapEnumDbType(dataType);
+
+                // date
+                case "date":
+                case "datetime":
+                case "ingresdate":
+                case "timestamp":
+                case "timestamp without time zone":
+                case "timestamp with time zone":
+                case "time":
+                case "time without time zone": //reported by twain_bu...@msn.com,
+                case "time with time zone":
+                    return typeof(DateTime);
+
+                // byte[]
+                case "binary":
+                case "blob":
+                case "bytea":
+                case "byte varying":
+                case "image":
+                case "longblob":
+                case "long byte":
+                case "oid":
+                case "sytea":
+                case "mediumblob":
+                case "tinyblob":
+                case "raw": // oracle type
+                case "long raw": // oracle type
+                case "varbinary":
+                    return typeof(Byte[]);
+
+                // PostgreSQL, for example has an uuid type that can be mapped as a Guid
+                case "uuid":
+                    return typeof(Guid);
+
+                case "void":
+                    return null;
+
+                // if we fall to this case, we must handle the type
+                default:
+                    throw new ArgumentException(
+                        string.Format(
+                            "Don't know how to convert the SQL type '{0}' into a managed type.",
+                            dataTypeL
+                        ),
+                        "dataType"
+                    );
             }
         }
 
@@ -317,9 +319,13 @@ namespace DbLinq.Vendor.Implementation
                 throw new NotImplementedException();
             }
 
-            protected override ConstructorInfo GetConstructorImpl(BindingFlags bindingAttr, Binder binder,
-                                                                  CallingConventions callConvention, Type[] types,
-                                                                  ParameterModifier[] modifiers)
+            protected override ConstructorInfo GetConstructorImpl(
+                BindingFlags bindingAttr,
+                Binder binder,
+                CallingConventions callConvention,
+                Type[] types,
+                ParameterModifier[] modifiers
+            )
             {
                 throw new NotImplementedException();
             }
@@ -369,9 +375,14 @@ namespace DbLinq.Vendor.Implementation
                 throw new NotImplementedException();
             }
 
-            protected override MethodInfo GetMethodImpl(string name, BindingFlags bindingAttr, Binder binder,
-                                                        CallingConventions callConvention, Type[] types,
-                                                        ParameterModifier[] modifiers)
+            protected override MethodInfo GetMethodImpl(
+                string name,
+                BindingFlags bindingAttr,
+                Binder binder,
+                CallingConventions callConvention,
+                Type[] types,
+                ParameterModifier[] modifiers
+            )
             {
                 throw new NotImplementedException();
             }
@@ -396,8 +407,14 @@ namespace DbLinq.Vendor.Implementation
                 throw new NotImplementedException();
             }
 
-            protected override PropertyInfo GetPropertyImpl(string name, BindingFlags bindingAttr, Binder binder,
-                                                            Type returnType, Type[] types, ParameterModifier[] modifiers)
+            protected override PropertyInfo GetPropertyImpl(
+                string name,
+                BindingFlags bindingAttr,
+                Binder binder,
+                Type returnType,
+                Type[] types,
+                ParameterModifier[] modifiers
+            )
             {
                 throw new NotImplementedException();
             }
@@ -412,9 +429,16 @@ namespace DbLinq.Vendor.Implementation
                 throw new NotImplementedException();
             }
 
-            public override object InvokeMember(string name, BindingFlags invokeAttr, Binder binder, object target,
-                                                object[] args, ParameterModifier[] modifiers, CultureInfo culture,
-                                                string[] namedParameters)
+            public override object InvokeMember(
+                string name,
+                BindingFlags invokeAttr,
+                Binder binder,
+                object target,
+                object[] args,
+                ParameterModifier[] modifiers,
+                CultureInfo culture,
+                string[] namedParameters
+            )
             {
                 throw new NotImplementedException();
             }
@@ -436,8 +460,14 @@ namespace DbLinq.Vendor.Implementation
             #endregion
         }
 
-        protected static Regex DefaultEnumDefinitionEx = new Regex(@"\s*(enum|set)\s*\((?<values>.*)\s*\)\s*", RegexOptions.Compiled);
-        protected static Regex EnumValuesEx = new Regex(@"\'(?<value>\w*)\'\s*,?\s*", RegexOptions.Compiled);
+        protected static Regex DefaultEnumDefinitionEx = new Regex(
+            @"\s*(enum|set)\s*\((?<values>.*)\s*\)\s*",
+            RegexOptions.Compiled
+        );
+        protected static Regex EnumValuesEx = new Regex(
+            @"\'(?<value>\w*)\'\s*,?\s*",
+            RegexOptions.Compiled
+        );
 
         /// <summary>
         /// Maps a type to enum type, if possible.

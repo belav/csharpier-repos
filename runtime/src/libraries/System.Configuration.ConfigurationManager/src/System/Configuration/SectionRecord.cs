@@ -85,7 +85,8 @@ namespace System.Configuration
                 // When we don't have file input the lock mode for children is the same for LockChildren and LockChildrenWithoutFileInput
                 bool result = LockChildren;
 
-                if (HasFileInput) result = _flags[FlagChildrenLockWithoutFileInput];
+                if (HasFileInput)
+                    result = _flags[FlagChildrenLockWithoutFileInput];
 
                 return result;
             }
@@ -107,19 +108,22 @@ namespace System.Configuration
 
         internal List<SectionInput> LocationInputs { get; private set; }
 
-        internal SectionInput LastLocationInput => HasLocationInputs ? LocationInputs[LocationInputs.Count - 1] : null;
+        internal SectionInput LastLocationInput =>
+            HasLocationInputs ? LocationInputs[LocationInputs.Count - 1] : null;
 
         internal bool HasFileInput => FileInput != null;
 
         internal SectionInput FileInput { get; private set; }
 
-        internal bool HasIndirectLocationInputs
-            => (IndirectLocationInputs != null) && (IndirectLocationInputs.Count > 0);
+        internal bool HasIndirectLocationInputs =>
+            (IndirectLocationInputs != null) && (IndirectLocationInputs.Count > 0);
 
         internal List<SectionInput> IndirectLocationInputs { get; private set; }
 
-        internal SectionInput LastIndirectLocationInput
-            => HasIndirectLocationInputs ? IndirectLocationInputs[IndirectLocationInputs.Count - 1] : null;
+        internal SectionInput LastIndirectLocationInput =>
+            HasIndirectLocationInputs
+                ? IndirectLocationInputs[IndirectLocationInputs.Count - 1]
+                : null;
 
         internal bool HasInput => HasLocationInputs || HasFileInput || HasIndirectLocationInputs;
 
@@ -135,17 +139,21 @@ namespace System.Configuration
         {
             get
             {
-                if (HasLocationInputs) foreach (SectionInput input in LocationInputs) if (input.HasErrors) return true;
+                if (HasLocationInputs)
+                    foreach (SectionInput input in LocationInputs)
+                        if (input.HasErrors)
+                            return true;
 
                 if (HasIndirectLocationInputs)
-                    foreach (SectionInput input in IndirectLocationInputs) if (input.HasErrors) return true;
+                    foreach (SectionInput input in IndirectLocationInputs)
+                        if (input.HasErrors)
+                            return true;
 
                 return HasFileInput && FileInput.HasErrors;
             }
         }
 
-        internal void
-            AddLocationInput(SectionInput sectionInput)
+        internal void AddLocationInput(SectionInput sectionInput)
         {
             AddLocationInputImpl(sectionInput, false);
         }
@@ -159,7 +167,8 @@ namespace System.Configuration
             }
 
             if (forChildren != OverrideMode.Inherit)
-                _flags[FlagLockChildren] = (forSelf == OverrideMode.Deny) || (forChildren == OverrideMode.Deny);
+                _flags[FlagLockChildren] =
+                    (forSelf == OverrideMode.Deny) || (forChildren == OverrideMode.Deny);
         }
 
         // AddFileInput
@@ -171,8 +180,13 @@ namespace System.Configuration
 
             // If the file input has an explicit value for its children locking - use it
             // Note we dont change the current lock setting
-            if (!sectionInput.HasErrors &&
-                (sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode != OverrideMode.Inherit))
+            if (
+                !sectionInput.HasErrors
+                && (
+                    sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode
+                    != OverrideMode.Inherit
+                )
+            )
             {
                 // Store the current setting before applying the lock from the file input
                 // So that if the user changes the current OverrideMode on this configKey to "Inherit"
@@ -181,8 +195,10 @@ namespace System.Configuration
                 // resolved up to our immediate parent which does not inlcude normal and indirect location imputs
                 _flags[FlagChildrenLockWithoutFileInput] = LockChildren;
 
-                ChangeLockSettings(OverrideMode.Inherit,
-                    sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode);
+                ChangeLockSettings(
+                    OverrideMode.Inherit,
+                    sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode
+                );
             }
         }
 
@@ -198,14 +214,12 @@ namespace System.Configuration
             }
         }
 
-        internal void
-            AddIndirectLocationInput(SectionInput sectionInput)
+        internal void AddIndirectLocationInput(SectionInput sectionInput)
         {
             AddLocationInputImpl(sectionInput, true);
         }
 
-        private void
-            AddLocationInputImpl(SectionInput sectionInput, bool isIndirectLocation)
+        private void AddLocationInputImpl(SectionInput sectionInput, bool isIndirectLocation)
         {
             List<SectionInput> inputs = isIndirectLocation
                 ? IndirectLocationInputs
@@ -219,8 +233,10 @@ namespace System.Configuration
             {
                 inputs = new List<SectionInput>(1);
 
-                if (isIndirectLocation) IndirectLocationInputs = inputs;
-                else LocationInputs = inputs;
+                if (isIndirectLocation)
+                    IndirectLocationInputs = inputs;
+                else
+                    LocationInputs = inputs;
             }
 
             // The list of locationSections is traversed from child to parent,
@@ -237,7 +253,10 @@ namespace System.Configuration
             // This method will be first called for indirect input closest to the location config
             if (!sectionInput.HasErrors && !_flags[flag])
             {
-                OverrideMode modeLocation = sectionInput.SectionXmlInfo.OverrideModeSetting.OverrideMode;
+                OverrideMode modeLocation = sectionInput
+                    .SectionXmlInfo
+                    .OverrideModeSetting
+                    .OverrideMode;
 
                 if (modeLocation != OverrideMode.Inherit)
                 {
@@ -250,7 +269,8 @@ namespace System.Configuration
         internal void ClearRawXml()
         {
             if (HasLocationInputs)
-                foreach (SectionInput locationInput in LocationInputs) locationInput.SectionXmlInfo.RawXml = null;
+                foreach (SectionInput locationInput in LocationInputs)
+                    locationInput.SectionXmlInfo.RawXml = null;
 
             if (HasIndirectLocationInputs)
             {
@@ -258,14 +278,17 @@ namespace System.Configuration
                     indirectLocationInput.SectionXmlInfo.RawXml = null;
             }
 
-            if (HasFileInput) FileInput.SectionXmlInfo.RawXml = null;
+            if (HasFileInput)
+                FileInput.SectionXmlInfo.RawXml = null;
         }
 
         internal void ClearResult()
         {
             FileInput?.ClearResult();
 
-            if (LocationInputs != null) foreach (SectionInput input in LocationInputs) input.ClearResult();
+            if (LocationInputs != null)
+                foreach (SectionInput input in LocationInputs)
+                    input.ClearResult();
 
             Result = s_unevaluated;
             ResultRuntimeObject = s_unevaluated;
@@ -276,7 +299,8 @@ namespace System.Configuration
             List<ConfigurationException> allErrors = null;
 
             if (HasLocationInputs)
-                foreach (SectionInput input in LocationInputs) ErrorsHelper.AddErrors(ref allErrors, input.Errors);
+                foreach (SectionInput input in LocationInputs)
+                    ErrorsHelper.AddErrors(ref allErrors, input.Errors);
 
             if (HasIndirectLocationInputs)
             {
@@ -284,14 +308,16 @@ namespace System.Configuration
                     ErrorsHelper.AddErrors(ref allErrors, input.Errors);
             }
 
-            if (HasFileInput) ErrorsHelper.AddErrors(ref allErrors, FileInput.Errors);
+            if (HasFileInput)
+                ErrorsHelper.AddErrors(ref allErrors, FileInput.Errors);
 
             return allErrors;
         }
 
         internal void ThrowOnErrors()
         {
-            if (HasErrors) throw new ConfigurationErrorsException(GetAllErrors());
+            if (HasErrors)
+                throw new ConfigurationErrorsException(GetAllErrors());
         }
     }
 }

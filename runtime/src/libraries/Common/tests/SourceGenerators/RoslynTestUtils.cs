@@ -27,7 +27,9 @@ namespace SourceGenerators.Tests
         public static AdhocWorkspace CreateTestWorkspace()
         {
             AdhocWorkspace workspace = new AdhocWorkspace();
-            workspace.AddSolution(SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create()));
+            workspace.AddSolution(
+                SolutionInfo.Create(SolutionId.CreateNewId(), VersionStamp.Create())
+            );
             return workspace;
         }
 
@@ -40,7 +42,8 @@ namespace SourceGenerators.Tests
             AdhocWorkspace workspace,
             IEnumerable<Assembly>? references,
             bool includeBaseReferences = true,
-            LanguageVersion langVersion = LanguageVersion.Preview)
+            LanguageVersion langVersion = LanguageVersion.Preview
+        )
         {
             string corelib = Assembly.GetAssembly(typeof(object))!.Location;
             string runtimeDir = Path.GetDirectoryName(corelib)!;
@@ -49,8 +52,12 @@ namespace SourceGenerators.Tests
             if (includeBaseReferences)
             {
                 refs.Add(MetadataReference.CreateFromFile(corelib));
-                refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "netstandard.dll")));
-                refs.Add(MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll")));
+                refs.Add(
+                    MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "netstandard.dll"))
+                );
+                refs.Add(
+                    MetadataReference.CreateFromFile(Path.Combine(runtimeDir, "System.Runtime.dll"))
+                );
             }
 
             if (references != null)
@@ -62,10 +69,13 @@ namespace SourceGenerators.Tests
             }
 
             return workspace
-                .CurrentSolution
-                .AddProject("Test", "test.dll", "C#")
+                .CurrentSolution.AddProject("Test", "test.dll", "C#")
                 .WithMetadataReferences(refs)
-                .WithCompilationOptions(new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary).WithNullableContextOptions(NullableContextOptions.Enable))
+                .WithCompilationOptions(
+                    new CSharpCompilationOptions(
+                        OutputKind.DynamicallyLinkedLibrary
+                    ).WithNullableContextOptions(NullableContextOptions.Enable)
+                )
                 .WithParseOptions(new CSharpParseOptions(langVersion));
         }
 
@@ -79,7 +89,8 @@ namespace SourceGenerators.Tests
         {
             foreach (Document doc in proj.Documents)
             {
-                SemanticModel? sm = await doc.GetSemanticModelAsync(CancellationToken.None).ConfigureAwait(false);
+                SemanticModel? sm = await doc.GetSemanticModelAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
                 Assert.NotNull(sm);
 
                 foreach (Diagnostic d in sm!.GetDiagnostics())
@@ -91,7 +102,11 @@ namespace SourceGenerators.Tests
             }
         }
 
-        public static Project WithDocuments(this Project project, IEnumerable<string> sources, IEnumerable<string>? sourceNames = null)
+        public static Project WithDocuments(
+            this Project project,
+            IEnumerable<string> sources,
+            IEnumerable<string>? sourceNames = null
+        )
         {
             int count = 0;
             Project result = project;
@@ -155,7 +170,10 @@ namespace SourceGenerators.Tests
         /// <summary>
         /// Runs a Roslyn generator over a set of source files.
         /// </summary>
-        public static async Task<(ImmutableArray<Diagnostic>, ImmutableArray<GeneratedSourceResult>)> RunGenerator(
+        public static async Task<(
+            ImmutableArray<Diagnostic>,
+            ImmutableArray<GeneratedSourceResult>
+        )> RunGenerator(
 #if ROSLYN4_0_OR_GREATER
             IIncrementalGenerator generator,
 #else
@@ -165,29 +183,40 @@ namespace SourceGenerators.Tests
             IEnumerable<string> sources,
             bool includeBaseReferences = true,
             LanguageVersion langVersion = LanguageVersion.Preview,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             using var workspace = CreateTestWorkspace();
-            Project proj = CreateTestProject(workspace, references, includeBaseReferences, langVersion);
+            Project proj = CreateTestProject(
+                workspace,
+                references,
+                includeBaseReferences,
+                langVersion
+            );
             proj = proj.WithDocuments(sources);
             Assert.True(proj.Solution.Workspace.TryApplyChanges(proj.Solution));
-            Compilation? comp = await proj!.GetCompilationAsync(CancellationToken.None).ConfigureAwait(false);
+            Compilation? comp = await proj!
+                .GetCompilationAsync(CancellationToken.None)
+                .ConfigureAwait(false);
             return RunGenerator(comp!, generator, cancellationToken);
         }
 
         /// <summary>
         /// Runs a Roslyn generator given a Compilation.
         /// </summary>
-        public static (ImmutableArray<Diagnostic>, ImmutableArray<GeneratedSourceResult>) RunGenerator(
+        public static (
+            ImmutableArray<Diagnostic>,
+            ImmutableArray<GeneratedSourceResult>
+        ) RunGenerator(
             Compilation compilation,
 #if ROSLYN4_0_OR_GREATER
             IIncrementalGenerator generator,
 #else
             ISourceGenerator generator,
 #endif
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-
             CSharpGeneratorDriver cgd = CSharpGeneratorDriver.Create(new[] { generator });
             GeneratorDriver gd = cgd.RunGenerators(compilation, cancellationToken);
 
@@ -201,7 +230,8 @@ namespace SourceGenerators.Tests
         public static async Task<IList<Diagnostic>> RunAnalyzer(
             DiagnosticAnalyzer analyzer,
             IEnumerable<Assembly> references,
-            IEnumerable<string> sources)
+            IEnumerable<string> sources
+        )
         {
             using var workspace = CreateTestWorkspace();
             Project proj = CreateTestProject(workspace, references);
@@ -213,7 +243,10 @@ namespace SourceGenerators.Tests
             ImmutableArray<DiagnosticAnalyzer> analyzers = ImmutableArray.Create(analyzer);
 
             Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-            return await comp!.WithAnalyzers(analyzers).GetAllDiagnosticsAsync().ConfigureAwait(false);
+            return await comp!
+                .WithAnalyzers(analyzers)
+                .GetAllDiagnosticsAsync()
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -226,7 +259,8 @@ namespace SourceGenerators.Tests
             IEnumerable<string> sources,
             IEnumerable<string>? sourceNames = null,
             string? defaultNamespace = null,
-            string? extraFile = null)
+            string? extraFile = null
+        )
         {
             using var workspace = CreateTestWorkspace();
             Project proj = CreateTestProject(workspace, references);
@@ -246,7 +280,10 @@ namespace SourceGenerators.Tests
             while (true)
             {
                 Compilation? comp = await proj!.GetCompilationAsync().ConfigureAwait(false);
-                ImmutableArray<Diagnostic> diags = await comp!.WithAnalyzers(analyzers).GetAllDiagnosticsAsync().ConfigureAwait(false);
+                ImmutableArray<Diagnostic> diags = await comp!
+                    .WithAnalyzers(analyzers)
+                    .GetAllDiagnosticsAsync()
+                    .ConfigureAwait(false);
                 if (diags.IsEmpty)
                 {
                     // no more diagnostics reported by the analyzers
@@ -258,7 +295,12 @@ namespace SourceGenerators.Tests
                 {
                     Document? doc = proj.GetDocument(d.Location.SourceTree);
 
-                    CodeFixContext context = new CodeFixContext(doc!, d, (action, _) => actions.Add(action), CancellationToken.None);
+                    CodeFixContext context = new CodeFixContext(
+                        doc!,
+                        d,
+                        (action, _) => actions.Add(action),
+                        CancellationToken.None
+                    );
                     await fixer.RegisterCodeFixesAsync(context).ConfigureAwait(false);
                 }
 
@@ -268,8 +310,13 @@ namespace SourceGenerators.Tests
                     break;
                 }
 
-                ImmutableArray<CodeActionOperation> operations = await actions[0].GetOperationsAsync(CancellationToken.None).ConfigureAwait(false);
-                Solution solution = operations.OfType<ApplyChangesOperation>().Single().ChangedSolution;
+                ImmutableArray<CodeActionOperation> operations = await actions[0]
+                    .GetOperationsAsync(CancellationToken.None)
+                    .ConfigureAwait(false);
+                Solution solution = operations
+                    .OfType<ApplyChangesOperation>()
+                    .Single()
+                    .ChangedSolution;
                 Project? changedProj = solution.GetProject(proj.Id);
                 if (changedProj != proj)
                 {
@@ -284,7 +331,9 @@ namespace SourceGenerators.Tests
                 List<string> l = sourceNames.ToList();
                 for (int i = 0; i < count; i++)
                 {
-                    SourceText s = await proj.FindDocument(l[i]).GetTextAsync().ConfigureAwait(false);
+                    SourceText s = await proj.FindDocument(l[i])
+                        .GetTextAsync()
+                        .ConfigureAwait(false);
                     results.Add(ReplaceLineEndings(s.ToString()));
                 }
             }
@@ -292,26 +341,37 @@ namespace SourceGenerators.Tests
             {
                 for (int i = 0; i < count; i++)
                 {
-                    SourceText s = await proj.FindDocument($"src-{i}.cs").GetTextAsync().ConfigureAwait(false);
+                    SourceText s = await proj.FindDocument($"src-{i}.cs")
+                        .GetTextAsync()
+                        .ConfigureAwait(false);
                     results.Add(ReplaceLineEndings(s.ToString()));
                 }
             }
 
             if (extraFile != null)
             {
-                SourceText s = await proj.FindDocument(extraFile).GetTextAsync().ConfigureAwait(false);
+                SourceText s = await proj.FindDocument(extraFile)
+                    .GetTextAsync()
+                    .ConfigureAwait(false);
                 results.Add(ReplaceLineEndings(s.ToString()));
             }
 
             return results;
         }
 
-        public static bool CompareLines(string[] expectedLines, SourceText sourceText, out string message)
+        public static bool CompareLines(
+            string[] expectedLines,
+            SourceText sourceText,
+            out string message
+        )
         {
             if (expectedLines.Length != sourceText.Lines.Count)
             {
-                message = string.Format("Line numbers do not match. Expected: {0} lines, but generated {1}",
-                    expectedLines.Length, sourceText.Lines.Count);
+                message = string.Format(
+                    "Line numbers do not match. Expected: {0} lines, but generated {1}",
+                    expectedLines.Length,
+                    sourceText.Lines.Count
+                );
                 return false;
             }
             int index = 0;
@@ -320,8 +380,13 @@ namespace SourceGenerators.Tests
                 string expectedLine = expectedLines[index];
                 if (!expectedLine.Equals(textLine.ToString(), StringComparison.Ordinal))
                 {
-                    message = string.Format("Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
-                        textLine.LineNumber + 1, Environment.NewLine, expectedLine, textLine);
+                    message = string.Format(
+                        "Line {0} does not match.{1}Expected Line:{1}{2}{1}Actual Line:{1}{3}",
+                        textLine.LineNumber + 1,
+                        Environment.NewLine,
+                        expectedLine,
+                        textLine
+                    );
                     return false;
                 }
                 index++;
@@ -345,7 +410,9 @@ namespace SourceGenerators.Tests
         private static async Task<Document> RecreateDocumentAsync(Document document)
         {
             SourceText newText = await document.GetTextAsync().ConfigureAwait(false);
-            return document.WithText(SourceText.From(newText.ToString(), newText.Encoding, newText.ChecksumAlgorithm));
+            return document.WithText(
+                SourceText.From(newText.ToString(), newText.Encoding, newText.ChecksumAlgorithm)
+            );
         }
 
         private static string ReplaceLineEndings(string text) =>

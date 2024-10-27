@@ -63,7 +63,11 @@ public class EnableAuthenticatorModel : PageModel
         ///     directly from your code. This API may change or be removed in future releases.
         /// </summary>
         [Required]
-        [StringLength(7, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
+        [StringLength(
+            7,
+            ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.",
+            MinimumLength = 6
+        )]
         [DataType(DataType.Text)]
         [Display(Name = "Verification Code")]
         public string Code { get; set; } = default!;
@@ -82,18 +86,21 @@ public class EnableAuthenticatorModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel where TUser : class
+internal sealed class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly ILogger<EnableAuthenticatorModel> _logger;
     private readonly UrlEncoder _urlEncoder;
 
-    private const string AuthenticatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
+    private const string AuthenticatorUriFormat =
+        "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
     public EnableAuthenticatorModel(
         UserManager<TUser> userManager,
         ILogger<EnableAuthenticatorModel> logger,
-        UrlEncoder urlEncoder)
+        UrlEncoder urlEncoder
+    )
     {
         _userManager = userManager;
         _logger = logger;
@@ -131,7 +138,10 @@ internal sealed class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel
         var verificationCode = Input.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
 
         var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
-            user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+            user,
+            _userManager.Options.Tokens.AuthenticatorTokenProvider,
+            verificationCode
+        );
 
         if (!is2faTokenValid)
         {
@@ -142,7 +152,10 @@ internal sealed class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel
 
         await _userManager.SetTwoFactorEnabledAsync(user, true);
         await _userManager.GetUserIdAsync(user);
-        _logger.LogInformation(LoggerEventIds.TwoFAEnabled, "User has enabled 2FA with an authenticator app.");
+        _logger.LogInformation(
+            LoggerEventIds.TwoFAEnabled,
+            "User has enabled 2FA with an authenticator app."
+        );
 
         StatusMessage = "Your authenticator app has been verified.";
 
@@ -198,6 +211,7 @@ internal sealed class EnableAuthenticatorModel<TUser> : EnableAuthenticatorModel
             AuthenticatorUriFormat,
             _urlEncoder.Encode("Microsoft.AspNetCore.Identity.UI"),
             _urlEncoder.Encode(email),
-            unformattedKey);
+            unformattedKey
+        );
     }
 }

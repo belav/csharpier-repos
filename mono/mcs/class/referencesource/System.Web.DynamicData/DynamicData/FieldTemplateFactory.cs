@@ -7,11 +7,13 @@ using System.Web.Compilation;
 using System.Web.Hosting;
 using System.Web.UI.WebControls;
 
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     /// <summary>
     /// Default implementation of IFieldTemplateFactory. It uses user controls for the field templates.
     /// </summary>
-    public class FieldTemplateFactory : IFieldTemplateFactory {
+    public class FieldTemplateFactory : IFieldTemplateFactory
+    {
         private const string IntegerField = "Integer";
         private const string ForeignKeyField = "ForeignKey";
         private const string ChildrenField = "Children";
@@ -28,7 +30,8 @@ namespace System.Web.DynamicData {
 
         /// <summary>
         /// </summary>
-        public FieldTemplateFactory() {
+        public FieldTemplateFactory()
+        {
             InitTypesToTemplateNamesTable();
             BuildTypeFallbackTable();
             _templateFactory = new TemplateFactory("FieldTemplates");
@@ -36,41 +39,38 @@ namespace System.Web.DynamicData {
 
         // For unit test purpose
         internal FieldTemplateFactory(VirtualPathProvider vpp)
-            : this() {
+            : this()
+        {
             _templateFactory.VirtualPathProvider = vpp;
         }
 
         /// <summary>
         /// Sets the folder containing the user controls. By default, this is ~/DynamicData/FieldTemplates/
         /// </summary>
-        public string TemplateFolderVirtualPath {
-            get {
-                return _templateFactory.TemplateFolderVirtualPath;
-            }
-            set {
-                _templateFactory.TemplateFolderVirtualPath = value;
-            }
+        public string TemplateFolderVirtualPath
+        {
+            get { return _templateFactory.TemplateFolderVirtualPath; }
+            set { _templateFactory.TemplateFolderVirtualPath = value; }
         }
 
         /// <summary>
         /// The MetaModel that the factory is associated with
         /// </summary>
-        public MetaModel Model {
-            get {
-                return _templateFactory.Model;
-            }
-            private set {
-                _templateFactory.Model = value;
-            }
+        public MetaModel Model
+        {
+            get { return _templateFactory.Model; }
+            private set { _templateFactory.Model = value; }
         }
 
-        private void InitTypesToTemplateNamesTable() {
+        private void InitTypesToTemplateNamesTable()
+        {
             _typesToTemplateNames = new Dictionary<Type, string>();
             _typesToTemplateNames[typeof(int)] = FieldTemplateFactory.IntegerField;
             _typesToTemplateNames[typeof(string)] = DataType.Text.ToString();
         }
 
-        private void BuildTypeFallbackTable() {
+        private void BuildTypeFallbackTable()
+        {
             _typesFallBacks = new Dictionary<Type, Type>();
             _typesFallBacks[typeof(float)] = typeof(decimal);
             _typesFallBacks[typeof(double)] = typeof(decimal);
@@ -89,10 +89,11 @@ namespace System.Web.DynamicData {
             _typesFallBacks[typeof(DbGeography)] = typeof(string);
             _typesFallBacks[typeof(DbGeometry)] = typeof(string);
 
-            // 
+            //
         }
 
-        private Type GetFallBackType(Type t) {
+        private Type GetFallBackType(Type t)
+        {
             // Check if there is a fallback type
             Type fallbackType;
             if (_typesFallBacks.TryGetValue(t, out fallbackType))
@@ -102,11 +103,17 @@ namespace System.Web.DynamicData {
         }
 
         // Internal for unit test purpose
-        internal string GetFieldTemplateVirtualPathWithCaching(MetaColumn column, DataBoundControlMode mode, string uiHint) {
+        internal string GetFieldTemplateVirtualPathWithCaching(
+            MetaColumn column,
+            DataBoundControlMode mode,
+            string uiHint
+        )
+        {
             // Compute a cache key based on all the input paramaters
             long cacheKey = Misc.CombineHashCodes(uiHint, column, mode);
 
-            Func<string> templatePathFactoryFunction = () => GetFieldTemplateVirtualPath(column, mode, uiHint);
+            Func<string> templatePathFactoryFunction = () =>
+                GetFieldTemplateVirtualPath(column, mode, uiHint);
 
             return _templateFactory.GetTemplatePath(cacheKey, templatePathFactoryFunction);
         }
@@ -118,28 +125,40 @@ namespace System.Web.DynamicData {
         /// <param name="mode">The mode (Readonly, Edit, Insert) for which the field template is needed</param>
         /// <param name="uiHint">The UIHint (if any) that should affect the field template lookup</param>
         /// <returns></returns>
-        public virtual string GetFieldTemplateVirtualPath(MetaColumn column, DataBoundControlMode mode, string uiHint) {
-
+        public virtual string GetFieldTemplateVirtualPath(
+            MetaColumn column,
+            DataBoundControlMode mode,
+            string uiHint
+        )
+        {
             mode = PreprocessMode(column, mode);
 
             bool hasDataTypeAttribute = column != null && column.DataTypeAttribute != null;
 
             // Set the UIHint in some special cases, but don't do it if we already have one or
             // if we have a DataTypeAttribute
-            if (String.IsNullOrEmpty(uiHint) && !hasDataTypeAttribute) {
+            if (String.IsNullOrEmpty(uiHint) && !hasDataTypeAttribute)
+            {
                 // Check if it's an association
                 // Or if it is an enum
-                if (column is MetaForeignKeyColumn) {
+                if (column is MetaForeignKeyColumn)
+                {
                     uiHint = FieldTemplateFactory.ForeignKeyField;
-                } else if (column is MetaChildrenColumn) {
+                }
+                else if (column is MetaChildrenColumn)
+                {
                     var childrenColumn = (MetaChildrenColumn)column;
-                    if (childrenColumn.IsManyToMany) {
+                    if (childrenColumn.IsManyToMany)
+                    {
                         uiHint = FieldTemplateFactory.ManyToManyField;
                     }
-                    else {
+                    else
+                    {
                         uiHint = FieldTemplateFactory.ChildrenField;
                     }
-                } else if (column.ColumnType.IsEnum) {
+                }
+                else if (column.ColumnType.IsEnum)
+                {
                     uiHint = FieldTemplateFactory.EnumerationField;
                 }
             }
@@ -151,40 +170,57 @@ namespace System.Web.DynamicData {
         /// Gets a chance to change the mode.  e.g. an Edit mode request can be turned into ReadOnly mode
         /// if the column is a primary key
         /// </summary>
-        public virtual DataBoundControlMode PreprocessMode(MetaColumn column, DataBoundControlMode mode) {
-            if (column == null) {
+        public virtual DataBoundControlMode PreprocessMode(
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
+            if (column == null)
+            {
                 throw new ArgumentNullException("column");
             }
 
             // Primary keys can't be edited, so put them in readonly mode.  Note that this
             // does not apply to Insert mode, which is fine
-            if (column.IsPrimaryKey && mode == DataBoundControlMode.Edit) {
+            if (column.IsPrimaryKey && mode == DataBoundControlMode.Edit)
+            {
                 mode = DataBoundControlMode.ReadOnly;
             }
 
             // Generated columns should never be editable/insertable
-            if (column.IsGenerated) {
+            if (column.IsGenerated)
+            {
                 mode = DataBoundControlMode.ReadOnly;
             }
 
             // ReadOnly columns cannot be edited nor inserted, and are always in Display mode
-            if (column.IsReadOnly) {
-                if (mode == DataBoundControlMode.Insert && column.AllowInitialValue) {
+            if (column.IsReadOnly)
+            {
+                if (mode == DataBoundControlMode.Insert && column.AllowInitialValue)
+                {
                     // but don't change the mode if we're in insert and an initial value is allowed
-                } else {
+                }
+                else
+                {
                     mode = DataBoundControlMode.ReadOnly;
                 }
             }
 
             // If initial value is not allowed set mode to ReadOnly
-            if (mode == DataBoundControlMode.Insert && !column.AllowInitialValue) {
+            if (mode == DataBoundControlMode.Insert && !column.AllowInitialValue)
+            {
                 mode = DataBoundControlMode.ReadOnly;
             }
 
-            if (column is MetaForeignKeyColumn) {
+            if (column is MetaForeignKeyColumn)
+            {
                 // If the foreign key is part of the primary key (e.g. Order and Product in Order_Details table),
                 // change the mode to ReadOnly so that they can't be edited.
-                if (mode == DataBoundControlMode.Edit && ((MetaForeignKeyColumn)column).IsPrimaryKeyInThisTable) {
+                if (
+                    mode == DataBoundControlMode.Edit
+                    && ((MetaForeignKeyColumn)column).IsPrimaryKeyInThisTable
+                )
+                {
                     mode = DataBoundControlMode.ReadOnly;
                 }
             }
@@ -192,11 +228,17 @@ namespace System.Web.DynamicData {
             return mode;
         }
 
-        private string GetVirtualPathWithModeFallback(string templateName, MetaColumn column, DataBoundControlMode mode) {
+        private string GetVirtualPathWithModeFallback(
+            string templateName,
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
             // Try not only the requested mode, but others if needed.  Basically:
             // - an edit template can default to an item template
             // - an insert template can default to an edit template, then to an item template
-            for (var currentMode = mode; currentMode >= 0; currentMode--) {
+            for (var currentMode = mode; currentMode >= 0; currentMode--)
+            {
                 string virtualPath = GetVirtualPathForMode(templateName, column, currentMode);
                 if (virtualPath != null)
                     return virtualPath;
@@ -206,10 +248,15 @@ namespace System.Web.DynamicData {
             return null;
         }
 
-        private string GetVirtualPathForMode(string templateName, MetaColumn column, DataBoundControlMode mode) {
-
+        private string GetVirtualPathForMode(
+            string templateName,
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
             // If we got a template name, try it
-            if (!String.IsNullOrEmpty(templateName)) {
+            if (!String.IsNullOrEmpty(templateName))
+            {
                 string virtualPath = GetVirtualPathIfExists(templateName, column, mode);
                 if (virtualPath != null)
                     return virtualPath;
@@ -219,13 +266,18 @@ namespace System.Web.DynamicData {
             return GetVirtualPathForTypeWithFallback(column.ColumnType, column, mode);
         }
 
-        private string GetVirtualPathForTypeWithFallback(Type fieldType, MetaColumn column, DataBoundControlMode mode) {
-
+        private string GetVirtualPathForTypeWithFallback(
+            Type fieldType,
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
             string templateName;
             string virtualPath;
 
             // If we have a data type attribute
-            if (column.DataTypeAttribute != null) {
+            if (column.DataTypeAttribute != null)
+            {
                 templateName = column.DataTypeAttribute.GetDataTypeName();
 
                 // Try to get the path from it
@@ -245,7 +297,8 @@ namespace System.Web.DynamicData {
                 return virtualPath;
 
             // If our type name table has an entry for it, try it
-            if (_typesToTemplateNames.TryGetValue(fieldType, out templateName)) {
+            if (_typesToTemplateNames.TryGetValue(fieldType, out templateName))
+            {
                 virtualPath = GetVirtualPathIfExists(templateName, column, mode);
                 if (virtualPath != null)
                     return virtualPath;
@@ -262,7 +315,12 @@ namespace System.Web.DynamicData {
             return GetVirtualPathForTypeWithFallback(fallbackType, column, mode);
         }
 
-        private string GetVirtualPathIfExists(string templateName, MetaColumn column, DataBoundControlMode mode) {
+        private string GetVirtualPathIfExists(
+            string templateName,
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
             // Build the path
             string virtualPath = BuildVirtualPath(templateName, column, mode);
 
@@ -283,13 +341,20 @@ namespace System.Web.DynamicData {
         /// <param name="column"></param>
         /// <param name="mode"></param>
         /// <returns></returns>
-        public virtual string BuildVirtualPath(string templateName, MetaColumn column, DataBoundControlMode mode) {
-            if (String.IsNullOrEmpty(templateName)) {
+        public virtual string BuildVirtualPath(
+            string templateName,
+            MetaColumn column,
+            DataBoundControlMode mode
+        )
+        {
+            if (String.IsNullOrEmpty(templateName))
+            {
                 throw new ArgumentNullException("templateName");
             }
 
             string modePathModifier = null;
-            switch (mode) {
+            switch (mode)
+            {
                 case DataBoundControlMode.ReadOnly:
                     modePathModifier = String.Empty;
                     break;
@@ -304,13 +369,18 @@ namespace System.Web.DynamicData {
                     break;
             }
 
-            return String.Format(CultureInfo.InvariantCulture,
-                TemplateFolderVirtualPath + "{0}{1}.ascx", templateName, modePathModifier);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                TemplateFolderVirtualPath + "{0}{1}.ascx",
+                templateName,
+                modePathModifier
+            );
         }
 
         #region IFieldTemplateFactory Members
 
-        public virtual void Initialize(MetaModel model) {
+        public virtual void Initialize(MetaModel model)
+        {
             Model = model;
         }
 
@@ -318,14 +388,22 @@ namespace System.Web.DynamicData {
         /// See IFieldTemplateFactory for details.
         /// </summary>
         /// <returns></returns>
-        public virtual IFieldTemplate CreateFieldTemplate(MetaColumn column, DataBoundControlMode mode, string uiHint) {
+        public virtual IFieldTemplate CreateFieldTemplate(
+            MetaColumn column,
+            DataBoundControlMode mode,
+            string uiHint
+        )
+        {
             string fieldTemplatePath = GetFieldTemplateVirtualPathWithCaching(column, mode, uiHint);
 
             if (fieldTemplatePath == null)
                 return null;
 
-            return (IFieldTemplate)BuildManager.CreateInstanceFromVirtualPath(
-                fieldTemplatePath, typeof(IFieldTemplate));
+            return (IFieldTemplate)
+                BuildManager.CreateInstanceFromVirtualPath(
+                    fieldTemplatePath,
+                    typeof(IFieldTemplate)
+                );
         }
 
         #endregion

@@ -11,8 +11,18 @@ namespace System.Reflection.Emit.Tests
     {
         public static IEnumerable<object[]> MakeGenericMethod_TestData()
         {
-            yield return new object[] { new string[] { "T" }, new Type[] { typeof(string) }, typeof(void) };
-            yield return new object[] { new string[] { "T", "U" }, new Type[] { typeof(string), typeof(int) }, typeof(int) };
+            yield return new object[]
+            {
+                new string[] { "T" },
+                new Type[] { typeof(string) },
+                typeof(void),
+            };
+            yield return new object[]
+            {
+                new string[] { "T", "U" },
+                new Type[] { typeof(string), typeof(int) },
+                typeof(int),
+            };
         }
 
         [Theory]
@@ -21,8 +31,14 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
 
-            MethodBuilder builder = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
-            Type[] typeParameters = builder.DefineGenericParameters(names).Select(a => a.AsType()).ToArray();
+            MethodBuilder builder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            Type[] typeParameters = builder
+                .DefineGenericParameters(names)
+                .Select(a => a.AsType())
+                .ToArray();
             builder.SetParameters(typeParameters);
             builder.SetReturnType(returnType);
 
@@ -36,8 +52,14 @@ namespace System.Reflection.Emit.Tests
         {
             Type returnType = typeof(void);
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder builder = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
-            Type[] typeParameters = builder.DefineGenericParameters(new string[] { "T" }).Select(a => a.AsType()).ToArray();
+            MethodBuilder builder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            Type[] typeParameters = builder
+                .DefineGenericParameters(new string[] { "T" })
+                .Select(a => a.AsType())
+                .ToArray();
             builder.SetParameters(typeParameters);
             builder.SetReturnType(returnType);
 
@@ -50,8 +72,14 @@ namespace System.Reflection.Emit.Tests
             Type returnType = typeof(void);
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder builder = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
-            Type[] typeParameters = builder.DefineGenericParameters(new string[] { "T" }).Select(a => a.AsType()).ToArray();
+            MethodBuilder builder = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            Type[] typeParameters = builder
+                .DefineGenericParameters(new string[] { "T" })
+                .Select(a => a.AsType())
+                .ToArray();
             builder.SetParameters(typeParameters);
             builder.SetReturnType(returnType);
 
@@ -64,8 +92,14 @@ namespace System.Reflection.Emit.Tests
             Type returnType = typeof(void);
 
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract);
-            MethodBuilder builder = type.DefineMethod("Test", MethodAttributes.Public | MethodAttributes.Static);
-            Type[] typeParameters = builder.DefineGenericParameters(new string[] { "T" }).Select(a => a.AsType()).ToArray();
+            MethodBuilder builder = type.DefineMethod(
+                "Test",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
+            Type[] typeParameters = builder
+                .DefineGenericParameters(new string[] { "T" })
+                .Select(a => a.AsType())
+                .ToArray();
             builder.SetParameters(typeParameters);
             builder.SetReturnType(returnType);
 

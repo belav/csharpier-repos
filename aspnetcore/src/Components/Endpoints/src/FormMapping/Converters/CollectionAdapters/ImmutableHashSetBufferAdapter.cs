@@ -5,19 +5,31 @@ using System.Collections.Immutable;
 
 namespace Microsoft.AspNetCore.Components.Endpoints.FormMapping;
 
-internal sealed class ImmutableHashSetBufferAdapter<TElement> : ICollectionBufferAdapter<ImmutableHashSet<TElement>, ImmutableHashSet<TElement>.Builder, TElement>
+internal sealed class ImmutableHashSetBufferAdapter<TElement>
+    : ICollectionBufferAdapter<
+        ImmutableHashSet<TElement>,
+        ImmutableHashSet<TElement>.Builder,
+        TElement
+    >
 {
-    public static ImmutableHashSet<TElement>.Builder CreateBuffer() => ImmutableHashSet.CreateBuilder<TElement>();
+    public static ImmutableHashSet<TElement>.Builder CreateBuffer() =>
+        ImmutableHashSet.CreateBuilder<TElement>();
 
-    public static ImmutableHashSet<TElement>.Builder Add(ref ImmutableHashSet<TElement>.Builder buffer, TElement element)
+    public static ImmutableHashSet<TElement>.Builder Add(
+        ref ImmutableHashSet<TElement>.Builder buffer,
+        TElement element
+    )
     {
         buffer.Add(element);
         return buffer;
     }
 
-    public static ImmutableHashSet<TElement> ToResult(ImmutableHashSet<TElement>.Builder buffer) => buffer.ToImmutable();
+    public static ImmutableHashSet<TElement> ToResult(ImmutableHashSet<TElement>.Builder buffer) =>
+        buffer.ToImmutable();
 
-    public static CollectionConverter<IImmutableSet<TElement>> CreateInterfaceConverter(FormDataConverter<TElement> elementConverter)
+    public static CollectionConverter<IImmutableSet<TElement>> CreateInterfaceConverter(
+        FormDataConverter<TElement> elementConverter
+    )
     {
         return new CollectionConverter<
             IImmutableSet<TElement>,
@@ -26,8 +38,10 @@ internal sealed class ImmutableHashSetBufferAdapter<TElement> : ICollectionBuffe
                 ImmutableHashSet<TElement>,
                 ImmutableHashSetBufferAdapter<TElement>,
                 ImmutableHashSet<TElement>.Builder,
-                TElement>,
+                TElement
+            >,
             ImmutableHashSet<TElement>.Builder,
-            TElement>(elementConverter);
+            TElement
+        >(elementConverter);
     }
 }

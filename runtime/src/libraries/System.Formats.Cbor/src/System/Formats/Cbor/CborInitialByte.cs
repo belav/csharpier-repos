@@ -45,7 +45,10 @@ namespace System.Formats.Cbor
         public CborInitialByte(CborMajorType majorType, CborAdditionalInfo additionalInfo)
         {
             Debug.Assert((byte)majorType < 8, "CBOR Major Type is out of range");
-            Debug.Assert((byte)additionalInfo < 32, "CBOR initial byte additional info is out of range");
+            Debug.Assert(
+                (byte)additionalInfo < 32,
+                "CBOR initial byte additional info is out of range"
+            );
 
             InitialByte = (byte)(((byte)majorType << 5) | (byte)additionalInfo);
         }
@@ -56,6 +59,7 @@ namespace System.Formats.Cbor
         }
 
         public CborMajorType MajorType => (CborMajorType)(InitialByte >> 5);
-        public CborAdditionalInfo AdditionalInfo => (CborAdditionalInfo)(InitialByte & AdditionalInformationMask);
+        public CborAdditionalInfo AdditionalInfo =>
+            (CborAdditionalInfo)(InitialByte & AdditionalInformationMask);
     }
 }

@@ -36,10 +36,10 @@ public class SqlServerStringMemberTranslator : IMemberTranslator
         SqlExpression? instance,
         MemberInfo member,
         Type returnType,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (member.Name == nameof(string.Length)
-            && instance?.Type == typeof(string))
+        if (member.Name == nameof(string.Length) && instance?.Type == typeof(string))
         {
             return _sqlExpressionFactory.Convert(
                 _sqlExpressionFactory.Function(
@@ -47,8 +47,10 @@ public class SqlServerStringMemberTranslator : IMemberTranslator
                     new[] { instance },
                     nullable: true,
                     argumentsPropagateNullability: new[] { true },
-                    typeof(long)),
-                returnType);
+                    typeof(long)
+                ),
+                returnType
+            );
         }
 
         return null;

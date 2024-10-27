@@ -13,7 +13,11 @@ namespace Microsoft.Extensions.Configuration
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
         private readonly IConfigurationSection _section;
 
-        public ConfigurationSectionDebugView(IConfigurationSection section, string path, IConfigurationProvider? provider)
+        public ConfigurationSectionDebugView(
+            IConfigurationSection section,
+            string path,
+            IConfigurationProvider? provider
+        )
         {
             _section = section;
             Path = path;
@@ -40,13 +44,17 @@ namespace Microsoft.Extensions.Configuration
             return s;
         }
 
-        internal static List<ConfigurationSectionDebugView> FromConfiguration(IConfiguration current, IConfigurationRoot root)
+        internal static List<ConfigurationSectionDebugView> FromConfiguration(
+            IConfiguration current,
+            IConfigurationRoot root
+        )
         {
             var data = new List<ConfigurationSectionDebugView>();
 
             var stack = new Stack<IConfiguration>();
             stack.Push(current);
-            int prefixLength = (current is IConfigurationSection rootSection) ? rootSection.Path.Length + 1 : 0;
+            int prefixLength =
+                (current is IConfigurationSection rootSection) ? rootSection.Path.Length + 1 : 0;
             while (stack.Count > 0)
             {
                 IConfiguration config = stack.Pop();
@@ -68,7 +76,10 @@ namespace Microsoft.Extensions.Configuration
             return data;
         }
 
-        internal static IConfigurationProvider? GetValueProvider(IConfigurationRoot root, string key)
+        internal static IConfigurationProvider? GetValueProvider(
+            IConfigurationRoot root,
+            string key
+        )
         {
             foreach (IConfigurationProvider provider in root.Providers.Reverse())
             {

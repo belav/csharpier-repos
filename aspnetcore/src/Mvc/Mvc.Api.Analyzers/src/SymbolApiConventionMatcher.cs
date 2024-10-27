@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 internal static class SymbolApiConventionMatcher
 {
-    internal static bool IsMatch(ApiControllerSymbolCache symbolCache, IMethodSymbol method, IMethodSymbol conventionMethod)
+    internal static bool IsMatch(
+        ApiControllerSymbolCache symbolCache,
+        IMethodSymbol method,
+        IMethodSymbol conventionMethod
+    )
     {
         return MethodMatches() && ParametersMatch();
 
@@ -45,8 +49,18 @@ internal static class SymbolApiConventionMatcher
                 var nameMatchBehavior = GetNameMatchBehavior(symbolCache, conventionParameter);
                 var typeMatchBehavior = GetTypeMatchBehavior(symbolCache, conventionParameter);
 
-                if (!IsTypeMatch(methodParameters[i].Type, conventionParameter.Type, typeMatchBehavior) ||
-                    !IsNameMatch(methodParameters[i].Name, conventionParameter.Name, nameMatchBehavior))
+                if (
+                    !IsTypeMatch(
+                        methodParameters[i].Type,
+                        conventionParameter.Type,
+                        typeMatchBehavior
+                    )
+                    || !IsNameMatch(
+                        methodParameters[i].Name,
+                        conventionParameter.Name,
+                        nameMatchBehavior
+                    )
+                )
                 {
                     return false;
                 }
@@ -58,12 +72,19 @@ internal static class SymbolApiConventionMatcher
         }
     }
 
-    internal static SymbolApiConventionNameMatchBehavior GetNameMatchBehavior(ApiControllerSymbolCache symbolCache, ISymbol symbol)
+    internal static SymbolApiConventionNameMatchBehavior GetNameMatchBehavior(
+        ApiControllerSymbolCache symbolCache,
+        ISymbol symbol
+    )
     {
-        var attribute = symbol.GetAttributes(symbolCache.ApiConventionNameMatchAttribute).FirstOrDefault();
-        if (attribute == null ||
-            attribute.ConstructorArguments.Length != 1 ||
-            attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum)
+        var attribute = symbol
+            .GetAttributes(symbolCache.ApiConventionNameMatchAttribute)
+            .FirstOrDefault();
+        if (
+            attribute == null
+            || attribute.ConstructorArguments.Length != 1
+            || attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum
+        )
         {
             return SymbolApiConventionNameMatchBehavior.Exact;
         }
@@ -72,7 +93,9 @@ internal static class SymbolApiConventionMatcher
 
         if (argEnum == null)
         {
-            throw new InvalidOperationException($"{nameof(symbolCache.ApiConventionNameMatchAttribute)} does not appear well formed.");
+            throw new InvalidOperationException(
+                $"{nameof(symbolCache.ApiConventionNameMatchAttribute)} does not appear well formed."
+            );
         }
 
         var intValue = (int)argEnum;
@@ -80,12 +103,19 @@ internal static class SymbolApiConventionMatcher
         return (SymbolApiConventionNameMatchBehavior)intValue;
     }
 
-    internal static SymbolApiConventionTypeMatchBehavior GetTypeMatchBehavior(ApiControllerSymbolCache symbolCache, ISymbol symbol)
+    internal static SymbolApiConventionTypeMatchBehavior GetTypeMatchBehavior(
+        ApiControllerSymbolCache symbolCache,
+        ISymbol symbol
+    )
     {
-        var attribute = symbol.GetAttributes(symbolCache.ApiConventionTypeMatchAttribute).FirstOrDefault();
-        if (attribute == null ||
-            attribute.ConstructorArguments.Length != 1 ||
-            attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum)
+        var attribute = symbol
+            .GetAttributes(symbolCache.ApiConventionTypeMatchAttribute)
+            .FirstOrDefault();
+        if (
+            attribute == null
+            || attribute.ConstructorArguments.Length != 1
+            || attribute.ConstructorArguments[0].Kind != TypedConstantKind.Enum
+        )
         {
             return SymbolApiConventionTypeMatchBehavior.AssignableFrom;
         }
@@ -102,7 +132,11 @@ internal static class SymbolApiConventionMatcher
         return (SymbolApiConventionTypeMatchBehavior)intValue;
     }
 
-    internal static bool IsNameMatch(string name, string conventionName, SymbolApiConventionNameMatchBehavior nameMatchBehavior)
+    internal static bool IsNameMatch(
+        string name,
+        string conventionName,
+        SymbolApiConventionNameMatchBehavior nameMatchBehavior
+    )
     {
         switch (nameMatchBehavior)
         {
@@ -177,11 +211,22 @@ internal static class SymbolApiConventionMatcher
 
             // Match the remaining letters with exact case. i.e. match "ame" from "personName", "name"
             index++;
-            return string.Compare(name, index, conventionName, 1, conventionName.Length - 1, StringComparison.Ordinal) == 0;
+            return string.Compare(
+                    name,
+                    index,
+                    conventionName,
+                    1,
+                    conventionName.Length - 1,
+                    StringComparison.Ordinal
+                ) == 0;
         }
     }
 
-    internal static bool IsTypeMatch(ITypeSymbol type, ITypeSymbol conventionType, SymbolApiConventionTypeMatchBehavior typeMatchBehavior)
+    internal static bool IsTypeMatch(
+        ITypeSymbol type,
+        ITypeSymbol conventionType,
+        SymbolApiConventionTypeMatchBehavior typeMatchBehavior
+    )
     {
         switch (typeMatchBehavior)
         {
@@ -199,7 +244,7 @@ internal static class SymbolApiConventionMatcher
     internal enum SymbolApiConventionTypeMatchBehavior
     {
         Any,
-        AssignableFrom
+        AssignableFrom,
     }
 
     internal enum SymbolApiConventionNameMatchBehavior

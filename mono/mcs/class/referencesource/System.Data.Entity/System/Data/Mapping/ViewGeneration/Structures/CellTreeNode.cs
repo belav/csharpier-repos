@@ -23,7 +23,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
     // The WHERE clause is of the form X1 OR X2 OR ... where each Xi is a multiconstant
     internal abstract partial class CellTreeNode : InternalBase
     {
-
         #region Constructor
         // effects: Creates a cell tree node with a reference to projectedSlotMap for
         // deciphering the fields in this
@@ -49,7 +48,7 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // effects: Returns the operation being performed by this node
         internal abstract CellTreeOpType OpType { get; }
 
-        // effects: Returns the right domain map associated with this celltreenode 
+        // effects: Returns the right domain map associated with this celltreenode
         internal abstract MemberDomainMap RightDomainMap { get; }
 
         internal abstract FragmentQuery LeftFragmentQuery { get; }
@@ -88,8 +87,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         #region Abstract Methods
         // effects: Given a leaf cell node and the slots required by the parent, returns
         // a CqlBlock corresponding to the tree rooted at this
-        internal abstract CqlBlock ToCqlBlock(bool[] requiredSlots, CqlIdentifiers identifiers, ref int blockAliasNum,
-            ref List<WithRelationship> withRelationships);
+        internal abstract CqlBlock ToCqlBlock(
+            bool[] requiredSlots,
+            CqlIdentifiers identifiers,
+            ref int blockAliasNum,
+            ref List<WithRelationship> withRelationships
+        );
 
         // Effects: Returns true if slot at slot number "slot" is projected
         // by some node in tree rooted at this
@@ -97,8 +100,14 @@ namespace System.Data.Mapping.ViewGeneration.Structures
 
         // Standard accept method for visitor pattern. TOutput is the return
         // type for visitor methods.
-        internal abstract TOutput Accept<TInput, TOutput>(CellTreeVisitor<TInput, TOutput> visitor, TInput param);
-        internal abstract TOutput Accept<TInput, TOutput>(SimpleCellTreeVisitor<TInput, TOutput> visitor, TInput param);
+        internal abstract TOutput Accept<TInput, TOutput>(
+            CellTreeVisitor<TInput, TOutput> visitor,
+            TInput param
+        );
+        internal abstract TOutput Accept<TInput, TOutput>(
+            SimpleCellTreeVisitor<TInput, TOutput> visitor,
+            TInput param
+        );
         #endregion
 
         #region Visitor methods
@@ -136,9 +145,10 @@ namespace System.Data.Mapping.ViewGeneration.Structures
         // A OP (B OP C) is the same as (A OP B) OP C or A OP B OP C
         internal static bool IsAssociativeOp(CellTreeOpType opType)
         {
-            // This is not true for LOJ and LASJ            
-            return opType == CellTreeOpType.IJ || opType == CellTreeOpType.Union ||
-                opType == CellTreeOpType.FOJ;
+            // This is not true for LOJ and LASJ
+            return opType == CellTreeOpType.IJ
+                || opType == CellTreeOpType.Union
+                || opType == CellTreeOpType.FOJ;
         }
 
         // effects: Returns an array of booleans where bool[i] is set to true
@@ -192,7 +202,6 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             return ProjectedSlotMap.IsBoolSlot(slotNum, NumBoolSlots);
         }
 
-
         // effects: Returns the slot numbers corresponding to the key fields
         // in the m_projectedSlotMap
         protected IEnumerable<int> KeySlots
@@ -220,7 +229,12 @@ namespace System.Data.Mapping.ViewGeneration.Structures
             // Using empty identifiers over here since we do not use this for the actual CqlGeneration
             CqlIdentifiers identifiers = new CqlIdentifiers();
             List<WithRelationship> withRelationships = new List<WithRelationship>();
-            CqlBlock block = ToCqlBlock(requiredSlots, identifiers, ref blockAliasNum, ref withRelationships);
+            CqlBlock block = ToCqlBlock(
+                requiredSlots,
+                identifiers,
+                ref blockAliasNum,
+                ref withRelationships
+            );
             block.AsEsql(builder, false, 1);
         }
         #endregion

@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading;
 using System.Threading.Tasks;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
-using System.Linq;
+using Xunit;
+
 namespace System.IO.Compression.Tests
 {
     public class ZipFile_ExtractToDirectoryFiltered : ZipFileTestBase
@@ -17,13 +18,18 @@ namespace System.IO.Compression.Tests
         {
             using (TempDirectory destinationDirectory = new TempDirectory())
             {
-                ZipFile.ExtractToDirectory("Filter.zip", destinationDirectory.Path, (path) => path.EndsWith(".txt"));
+                ZipFile.ExtractToDirectory(
+                    "Filter.zip",
+                    destinationDirectory.Path,
+                    (path) => path.EndsWith(".txt")
+                );
                 Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, ".txt")));
                 Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, ".pkg.txt")));
                 Assert.True(File.Exists(Path.Combine(destinationDirectory.Path, ".txt.txt")));
-                Assert.True(Directory.EnumerateFileSystemEntries(destinationDirectory.Path).Count() == 3);
+                Assert.True(
+                    Directory.EnumerateFileSystemEntries(destinationDirectory.Path).Count() == 3
+                );
             }
         }
-
     }
 }

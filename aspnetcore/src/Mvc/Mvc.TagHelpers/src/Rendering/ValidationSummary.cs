@@ -21,5 +21,5 @@ public enum ValidationSummary
     /// <summary>
     /// Validation summary with all errors.
     /// </summary>
-    All
+    All,
 }

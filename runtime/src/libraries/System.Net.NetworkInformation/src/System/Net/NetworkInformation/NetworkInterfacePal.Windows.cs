@@ -18,18 +18,12 @@ namespace System.Net.NetworkInformation
 
         public static int LoopbackInterfaceIndex
         {
-            get
-            {
-                return SystemNetworkInterface.InternalLoopbackInterfaceIndex;
-            }
+            get { return SystemNetworkInterface.InternalLoopbackInterfaceIndex; }
         }
 
         public static int IPv6LoopbackInterfaceIndex
         {
-            get
-            {
-                return SystemNetworkInterface.InternalIPv6LoopbackInterfaceIndex;
-            }
+            get { return SystemNetworkInterface.InternalIPv6LoopbackInterfaceIndex; }
         }
     }
 }

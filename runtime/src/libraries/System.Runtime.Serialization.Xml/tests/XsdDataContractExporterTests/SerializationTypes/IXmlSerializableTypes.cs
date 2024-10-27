@@ -39,9 +39,12 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             }
 
             ICollection currentSchemas = schemas.Schemas();
-            foreach (XmlSchema schema in currentSchemas) 
+            foreach (XmlSchema schema in currentSchemas)
             {
-                if ((schema.TargetNamespace == null && ns.Length == 0) || ns.Equals(schema.TargetNamespace))
+                if (
+                    (schema.TargetNamespace == null && ns.Length == 0)
+                    || ns.Equals(schema.TargetNamespace)
+                )
                     return schema;
             }
             if (ns.Length > 0)
@@ -49,7 +52,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 XmlSchema newSchema = new XmlSchema();
                 newSchema.TargetNamespace = ns;
                 newSchema.Namespaces.Add("tns", ns);
-                schemas.Add(newSchema); 
+                schemas.Add(newSchema);
                 return newSchema;
             }
             return null;
@@ -57,7 +60,11 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [XmlSchemaProvider("StaticGetSchema")]
-    [XmlRoot(ElementName ="ComplexTypeElement", Namespace ="http://ElementNs/", IsNullable = false)]
+    [XmlRoot(
+        ElementName = "ComplexTypeElement",
+        Namespace = "http://ElementNs/",
+        IsNullable = false
+    )]
     public class ComplexType : XmlSerializableBase
     {
         static XmlSchemaType StaticGetSchema(XmlSchemaSet schemas)
@@ -95,7 +102,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [XmlSchemaProvider("StaticGetSchema")]
-    [XmlRoot(ElementName ="IntElement", Namespace ="http://ElementNs/", IsNullable = false)]
+    [XmlRoot(ElementName = "IntElement", Namespace = "http://ElementNs/", IsNullable = false)]
     public struct XsdInt : IXmlSerializable
     {
         static XmlQualifiedName StaticGetSchema(XmlSchemaSet schemas)
@@ -121,7 +128,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [XmlSchemaProvider("StaticGetSchema")]
-    [XmlRoot(ElementName ="StringElement", Namespace ="http://ElementNs/", IsNullable = true)]
+    [XmlRoot(ElementName = "StringElement", Namespace = "http://ElementNs/", IsNullable = true)]
     public class XsdString : IXmlSerializable
     {
         static XmlQualifiedName StaticGetSchema(XmlSchemaSet schemas)
@@ -147,7 +154,11 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [XmlSchemaProvider("StaticGetSchema")]
-    [XmlRoot(ElementName="ComplexStructElement", Namespace="http://ElementNs/", IsNullable = false)]
+    [XmlRoot(
+        ElementName = "ComplexStructElement",
+        Namespace = "http://ElementNs/",
+        IsNullable = false
+    )]
     public struct ComplexStruct : IXmlSerializable
     {
         static XmlSchemaType StaticGetSchema(XmlSchemaSet schemas)
@@ -183,7 +194,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     }
 
     [XmlSchemaProvider("StaticGetSchema")]
-    [XmlRoot(ElementName ="AnonElement", Namespace ="http://ElementNs/", IsNullable = true)]
+    [XmlRoot(ElementName = "AnonElement", Namespace = "http://ElementNs/", IsNullable = true)]
     public class AnonymousType : XmlSerializableBase
     {
         static XmlSchemaType StaticGetSchema(XmlSchemaSet schemas)
@@ -199,35 +210,23 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         }
     }
 
-    public class NoSchema : XmlSerializableBase
-    {
-    }
+    public class NoSchema : XmlSerializableBase { }
 
     [XmlRoot]
-    public class EmptyXmlRoot : XmlSerializableBase
-    {
-    }
-    
-    [XmlRoot(IsNullable=true)]
-    public class NullableOnlyXmlRoot : XmlSerializableBase
-    {
-    }
-    
-    [XmlRoot(ElementName=null)]
-    public class NullElementXmlRoot : XmlSerializableBase
-    {
-    }
-    
-    [XmlRoot(ElementName="")]
-    public class EmptyElementXmlRoot : XmlSerializableBase
-    {
-    }
+    public class EmptyXmlRoot : XmlSerializableBase { }
 
-    [XmlSchemaProvider(null, IsAny=true)]
-    public class AnyBasic : XmlSerializableBase
-    {
-    }
-    
+    [XmlRoot(IsNullable = true)]
+    public class NullableOnlyXmlRoot : XmlSerializableBase { }
+
+    [XmlRoot(ElementName = null)]
+    public class NullElementXmlRoot : XmlSerializableBase { }
+
+    [XmlRoot(ElementName = "")]
+    public class EmptyElementXmlRoot : XmlSerializableBase { }
+
+    [XmlSchemaProvider(null, IsAny = true)]
+    public class AnyBasic : XmlSerializableBase { }
+
     [XmlSchemaProvider("StaticGetSchema", IsAny = true)]
     public class AnyWithSchemaTypeMethod : XmlSerializableBase
     {
@@ -287,16 +286,20 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             throw new NotImplementedException();
         }
     }
-    
+
     [XmlSchemaProvider("GetTypedDataSetSchema")]
     [XmlRoot("TypedDataSet", Namespace = "http://datasetns/")]
     public class TypedDataSet : DataSet
     {
-        public static System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(System.Xml.Schema.XmlSchemaSet xs)
+        public static System.Xml.Schema.XmlSchemaComplexType GetTypedDataSetSchema(
+            System.Xml.Schema.XmlSchemaSet xs
+        )
         {
             TypedDataSet ds = new TypedDataSet();
-            System.Xml.Schema.XmlSchemaComplexType type = new System.Xml.Schema.XmlSchemaComplexType();
-            System.Xml.Schema.XmlSchemaSequence sequence = new System.Xml.Schema.XmlSchemaSequence();
+            System.Xml.Schema.XmlSchemaComplexType type =
+                new System.Xml.Schema.XmlSchemaComplexType();
+            System.Xml.Schema.XmlSchemaSequence sequence =
+                new System.Xml.Schema.XmlSchemaSequence();
             xs.Add(ds.GetSchemaSerializable());
             if (PublishLegacyWSDL())
             {
@@ -317,7 +320,8 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
                 any2.ProcessContents = System.Xml.Schema.XmlSchemaContentProcessing.Lax;
                 sequence.Items.Add(any2);
                 sequence.MaxOccurs = System.Decimal.MaxValue;
-                System.Xml.Schema.XmlSchemaAttribute attribute = new System.Xml.Schema.XmlSchemaAttribute();
+                System.Xml.Schema.XmlSchemaAttribute attribute =
+                    new System.Xml.Schema.XmlSchemaAttribute();
                 attribute.Name = "namespace";
                 attribute.FixedValue = ds.Namespace;
                 type.Attributes.Add(attribute);
@@ -325,6 +329,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             type.Particle = sequence;
             return type;
         }
+
         protected override System.Xml.Schema.XmlSchema GetSchemaSerializable()
         {
             System.IO.MemoryStream stream = new System.IO.MemoryStream();
@@ -332,6 +337,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
             stream.Position = 0;
             return System.Xml.Schema.XmlSchema.Read(new System.Xml.XmlTextReader(stream), null);
         }
+
         protected static bool PublishLegacyWSDL()
         {
             //System.Collections.Specialized.NameValueCollection settings = ((System.Collections.Specialized.NameValueCollection)(System.Configuration.ConfigurationManager.GetSection("system.data.dataset")));
@@ -364,7 +370,7 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
         AnyBasic[] anyArray;
         AnyWithSchemaTypeMethod anyWithSchemaType;
         AnyWithQnameMethod anyWithQname;
-    	AnyImplicitWithSchemaTypeMethod anyImplicitWithSchemaType;
+        AnyImplicitWithSchemaTypeMethod anyImplicitWithSchemaType;
         AnyImplicitWithQnameMethod anyImplicitWithQname;
         NoSchemaProviderWithSchema noSchemaProviderWithSchema;
         XmlElement xmlElement;
@@ -377,23 +383,22 @@ namespace System.Runtime.Serialization.Xml.XsdDataContractExporterTests
     [Serializable]
     public class SqlTypeContainer
     {
-		// The following were disabled in NetFx test... but should work now.
-		// SqlBinary, SqlChars, SqlInt32, SqlString, SqlDateTime, SqlGuid
+        // The following were disabled in NetFx test... but should work now.
+        // SqlBinary, SqlChars, SqlInt32, SqlString, SqlDateTime, SqlGuid
 
-            public SqlBinary sqlBinary = new SqlBinary(new byte[]{4,2});
-            public SqlByte sqlByte = new SqlByte(4);
-            public SqlBytes sqlBytes = new SqlBytes(new byte[]{4,2});
-            public SqlChars sqlChars = new SqlChars(new char[]{'4', '2'});
-            public SqlDecimal sqlDecimal = new SqlDecimal(4.2);
-            public SqlDouble sqlDouble = new SqlDouble(4.2);
-            public SqlInt16 sqlInt16 = new SqlInt16(42);
-            public SqlInt32 sqlInt32 = new SqlInt32(42);
-            public SqlInt64 sqlInt64 = new SqlInt64(42L);
-            public SqlMoney sqlMoney = new SqlMoney(42);
-            public SqlSingle sqlSingle = new SqlSingle(4.2);
-            public SqlString sqlString = new SqlString("MySqlString");
-            public SqlDateTime sqlDateTime = new SqlDateTime();
-            public SqlGuid sqlGuid = new SqlGuid();
+        public SqlBinary sqlBinary = new SqlBinary(new byte[] { 4, 2 });
+        public SqlByte sqlByte = new SqlByte(4);
+        public SqlBytes sqlBytes = new SqlBytes(new byte[] { 4, 2 });
+        public SqlChars sqlChars = new SqlChars(new char[] { '4', '2' });
+        public SqlDecimal sqlDecimal = new SqlDecimal(4.2);
+        public SqlDouble sqlDouble = new SqlDouble(4.2);
+        public SqlInt16 sqlInt16 = new SqlInt16(42);
+        public SqlInt32 sqlInt32 = new SqlInt32(42);
+        public SqlInt64 sqlInt64 = new SqlInt64(42L);
+        public SqlMoney sqlMoney = new SqlMoney(42);
+        public SqlSingle sqlSingle = new SqlSingle(4.2);
+        public SqlString sqlString = new SqlString("MySqlString");
+        public SqlDateTime sqlDateTime = new SqlDateTime();
+        public SqlGuid sqlGuid = new SqlGuid();
     }
 }
-

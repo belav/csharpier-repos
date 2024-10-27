@@ -25,13 +25,16 @@ namespace Internal.JitInterface
         }
 
         private CorJitFlag[] _jitFlags;
-        private Dictionary<string, string> _config = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+        private Dictionary<string, string> _config = new Dictionary<string, string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public static void Initialize(
             TargetDetails target,
             IEnumerable<CorJitFlag> jitFlags,
             IEnumerable<KeyValuePair<string, string>> parameters,
-            string jitPath = null)
+            string jitPath = null
+        )
         {
             var config = new JitConfigProvider(jitFlags, parameters);
 
@@ -40,34 +43,45 @@ namespace Internal.JitInterface
             if (Interlocked.CompareExchange(ref s_instance, config, null) != null)
                 throw new InvalidOperationException();
 
-            NativeLibrary.SetDllImportResolver(typeof(CorInfoImpl).Assembly, (libName, assembly, searchPath) =>
-            {
-                IntPtr libHandle = IntPtr.Zero;
-                if (libName == CorInfoImpl.JitLibrary)
+            NativeLibrary.SetDllImportResolver(
+                typeof(CorInfoImpl).Assembly,
+                (libName, assembly, searchPath) =>
                 {
-                    if (!string.IsNullOrEmpty(jitPath))
+                    IntPtr libHandle = IntPtr.Zero;
+                    if (libName == CorInfoImpl.JitLibrary)
                     {
-                        libHandle = NativeLibrary.Load(jitPath);
+                        if (!string.IsNullOrEmpty(jitPath))
+                        {
+                            libHandle = NativeLibrary.Load(jitPath);
+                        }
+                        else
+                        {
+                            libHandle = NativeLibrary.Load(
+                                "clrjit_" + GetTargetSpec(target),
+                                assembly,
+                                searchPath
+                            );
+                        }
                     }
-                    else
+                    if (libName == CorInfoImpl.JitSupportLibrary)
                     {
-                        libHandle = NativeLibrary.Load("clrjit_" + GetTargetSpec(target), assembly, searchPath);
+                        libHandle = NativeLibrary.Load(
+                            "jitinterface_"
+                                + RuntimeInformation
+                                    .ProcessArchitecture.ToString()
+                                    .ToLowerInvariant(),
+                            assembly,
+                            searchPath
+                        );
                     }
+                    return libHandle;
                 }
-                if (libName == CorInfoImpl.JitSupportLibrary)
-                {
-                    libHandle = NativeLibrary.Load("jitinterface_" + RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant(), assembly, searchPath);
-                }
-                return libHandle;
-            });
+            );
 
             CorInfoImpl.Startup(CorInfoImpl.TargetToOs(target));
         }
 
-        public IntPtr UnmanagedInstance
-        {
-            get;
-        }
+        public IntPtr UnmanagedInstance { get; }
 
         public IEnumerable<CorJitFlag> Flags => _jitFlags;
 
@@ -76,7 +90,10 @@ namespace Internal.JitInterface
         /// </summary>
         /// <param name="jitFlags">A collection of JIT compiler flags.</param>
         /// <param name="parameters">A collection of parameter name/value pairs.</param>
-        public JitConfigProvider(IEnumerable<CorJitFlag> jitFlags, IEnumerable<KeyValuePair<string, string>> parameters)
+        public JitConfigProvider(
+            IEnumerable<CorJitFlag> jitFlags,
+            IEnumerable<KeyValuePair<string, string>> parameters
+        )
         {
             ArrayBuilder<CorJitFlag> jitFlagBuilder = default(ArrayBuilder<CorJitFlag>);
             foreach (CorJitFlag jitFlag in jitFlags)
@@ -108,8 +125,10 @@ namespace Internal.JitInterface
             // Note: Parse the string as hex
             string stringValue;
             int intValue;
-            if (_config.TryGetValue(name, out stringValue) &&
-                int.TryParse(stringValue, NumberStyles.AllowHexSpecifier, null, out intValue))
+            if (
+                _config.TryGetValue(name, out stringValue)
+                && int.TryParse(stringValue, NumberStyles.AllowHexSpecifier, null, out intValue)
+            )
             {
                 return intValue;
             }
@@ -130,7 +149,9 @@ namespace Internal.JitInterface
 
         private static string GetTargetSpec(TargetDetails target)
         {
-            string targetOSComponent = (target.OperatingSystem == TargetOS.Windows ? "win" : "unix");
+            string targetOSComponent = (
+                target.OperatingSystem == TargetOS.Windows ? "win" : "unix"
+            );
             string targetArchComponent = target.Architecture switch
             {
                 TargetArchitecture.X86 => "x86",
@@ -138,15 +159,22 @@ namespace Internal.JitInterface
                 TargetArchitecture.ARM => "arm",
                 TargetArchitecture.ARM64 => "arm64",
                 TargetArchitecture.LoongArch64 => "loongarch64",
-                _ => throw new NotImplementedException(target.Architecture.ToString())
+                _ => throw new NotImplementedException(target.Architecture.ToString()),
             };
 
-            if ((target.Architecture == TargetArchitecture.ARM64) || (target.Architecture == TargetArchitecture.ARM))
+            if (
+                (target.Architecture == TargetArchitecture.ARM64)
+                || (target.Architecture == TargetArchitecture.ARM)
+            )
             {
                 targetOSComponent = "universal";
             }
 
-            return targetOSComponent + '_' + targetArchComponent + "_" + RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
+            return targetOSComponent
+                + '_'
+                + targetArchComponent
+                + "_"
+                + RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
         }
 
         #region Unmanaged instance
@@ -161,7 +189,8 @@ namespace Internal.JitInterface
             void** callbacks = (void**)Marshal.AllocCoTaskMem(sizeof(IntPtr) * numCallbacks);
 
             callbacks[0] = (delegate* unmanaged<IntPtr, char*, int, int>)&getIntConfigValue;
-            callbacks[1] = (delegate* unmanaged<IntPtr, char*, char*, int, int>)&getStringConfigValue;
+            callbacks[1] = (delegate* unmanaged<IntPtr, char*, char*, int, int>)
+                &getStringConfigValue;
 
             IntPtr instance = Marshal.AllocCoTaskMem(sizeof(IntPtr));
             *(IntPtr*)instance = (IntPtr)callbacks;
@@ -176,7 +205,12 @@ namespace Internal.JitInterface
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe int getStringConfigValue(IntPtr thisHandle, char* name, char* retBuffer, int retBufferLength)
+        private static unsafe int getStringConfigValue(
+            IntPtr thisHandle,
+            char* name,
+            char* retBuffer,
+            int retBufferLength
+        )
         {
             string result = s_instance.GetStringConfigValue(new string(name));
 

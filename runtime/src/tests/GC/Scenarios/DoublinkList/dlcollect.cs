@@ -7,52 +7,51 @@
 /* to see if GC can handle Collections references correctly.
 /**************************************************************/
 
-namespace DoubLink {
+namespace DoubLink
+{
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
 
     public class DLCollect
     {
-
-        internal DoubLink []Mv_Doub;
+        internal DoubLink[] Mv_Doub;
         internal List<DoubLink> Mv_Collect;
 
-        public static int Main(String [] Args)
+        public static int Main(String[] Args)
         {
             int iRep = 0;
             int iObj = 0;
 
             Console.WriteLine("Test should return with ExitCode 100 ...");
-            switch( Args.Length )
+            switch (Args.Length)
             {
                 case 1:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 20;
                     }
-                break;
+                    break;
 
                 case 2:
-                    if (!Int32.TryParse( Args[0], out iRep ))
+                    if (!Int32.TryParse(Args[0], out iRep))
                     {
                         iRep = 20;
                     }
-                    if (!Int32.TryParse( Args[1], out iObj ))
+                    if (!Int32.TryParse(Args[1], out iObj))
                     {
                         iObj = 10;
                     }
-                break;
+                    break;
 
                 default:
                     iRep = 20;
                     iObj = 10;
-                break;
-
+                    break;
             }
 
             DLCollect Mv_Leak = new DLCollect();
-            if(Mv_Leak.runTest(iRep, iObj ))
+            if (Mv_Leak.runTest(iRep, iObj))
             {
                 Console.WriteLine("Test Passed");
                 return 100;
@@ -60,7 +59,6 @@ namespace DoubLink {
 
             Console.WriteLine("Test Failed");
             return 1;
-
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
@@ -105,14 +103,13 @@ namespace DoubLink {
             return success;
         }
 
-
         [MethodImpl(MethodImplOptions.NoInlining)]
         // Do not inline the method that creates GC objects, because it could
         // extend their live intervals until the end of the parent method.
         public void CreateDLinkListsWithLeak(int iRep, int iObj, int iters)
         {
             Mv_Collect = new List<DoubLink>(iRep);
-            for(int i = 0; i < iters; i++)
+            for (int i = 0; i < iters; i++)
             {
                 SetLink(iRep, iObj);
                 Mv_Collect.RemoveRange(0, Mv_Collect.Count);
@@ -120,12 +117,11 @@ namespace DoubLink {
             }
         }
 
-
         public void SetLink(int iRep, int iObj)
         {
             Mv_Doub = new DoubLink[iRep];
 
-            for(int i=0; i<iRep; i++)
+            for (int i = 0; i < iRep; i++)
             {
                 // create DoubLink element in array
                 Mv_Doub[i] = new DoubLink(iObj);
@@ -136,8 +132,6 @@ namespace DoubLink {
                 // kill reference to DoubLink in array
                 Mv_Doub[i] = null;
             }
-
         }
-
     }
 }

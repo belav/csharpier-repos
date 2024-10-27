@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a store which stores a user's recovery codes.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Updates the recovery codes for the user while invalidating any previous recovery codes.
@@ -20,7 +21,11 @@ public interface IUserTwoFactorRecoveryCodeStore<TUser> : IUserStore<TUser> wher
     /// <param name="recoveryCodes">The new recovery codes for the user.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The new recovery codes for the user.</returns>
-    Task ReplaceCodesAsync(TUser user, IEnumerable<string> recoveryCodes, CancellationToken cancellationToken);
+    Task ReplaceCodesAsync(
+        TUser user,
+        IEnumerable<string> recoveryCodes,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Returns whether a recovery code is valid for a user. Note: recovery codes are only valid

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -37,44 +37,51 @@ using System.ServiceModel.Security;
 
 namespace MonoTests.System.ServiceModel.Channels
 {
-	public abstract class OutputChannelBase : ChannelBase, IOutputChannel
-	{
-		ChannelFactoryBase channel_factory;
+    public abstract class OutputChannelBase : ChannelBase, IOutputChannel
+    {
+        ChannelFactoryBase channel_factory;
 
-		public OutputChannelBase (ChannelFactoryBase factory)
-			: base (factory)
-		{
-			this.channel_factory = factory;
-		}
+        public OutputChannelBase(ChannelFactoryBase factory)
+            : base(factory)
+        {
+            this.channel_factory = factory;
+        }
 
-		protected override TimeSpan DefaultCloseTimeout {
-			get { return TimeSpan.FromSeconds (5); }
-		}
+        protected override TimeSpan DefaultCloseTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
+        }
 
-		protected override TimeSpan DefaultOpenTimeout {
-			get { return TimeSpan.FromSeconds (5); }
-		}
+        protected override TimeSpan DefaultOpenTimeout
+        {
+            get { return TimeSpan.FromSeconds(5); }
+        }
 
-		public abstract EndpointAddress RemoteAddress { get; }
+        public abstract EndpointAddress RemoteAddress { get; }
 
-		public abstract Uri Via { get; }
+        public abstract Uri Via { get; }
 
-		// Send
+        // Send
 
-		public void Send (Message message)
-		{
-			Send (message, DefaultSendTimeout);
-		}
+        public void Send(Message message)
+        {
+            Send(message, DefaultSendTimeout);
+        }
 
-		public abstract void Send (Message message, TimeSpan timeout);
+        public abstract void Send(Message message, TimeSpan timeout);
 
-		public IAsyncResult BeginSend (Message message, AsyncCallback callback, object state)
-		{
-			return BeginSend (message, DefaultSendTimeout, callback, state);
-		}
+        public IAsyncResult BeginSend(Message message, AsyncCallback callback, object state)
+        {
+            return BeginSend(message, DefaultSendTimeout, callback, state);
+        }
 
-		public abstract IAsyncResult BeginSend (Message message, TimeSpan timeout, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginSend(
+            Message message,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
 
-		public abstract void EndSend (IAsyncResult result);
-	}
+        public abstract void EndSend(IAsyncResult result);
+    }
 }

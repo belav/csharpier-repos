@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal readonly ImmutableArray<ModuleInstance> Modules;
         internal readonly DebugInformationFormat DebugFormat;
 
-        internal RuntimeInstance(ImmutableArray<ModuleInstance> modules, DebugInformationFormat debugFormat)
+        internal RuntimeInstance(
+            ImmutableArray<ModuleInstance> modules,
+            DebugInformationFormat debugFormat
+        )
         {
             Modules = modules;
             DebugFormat = debugFormat;
@@ -34,7 +37,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
 
         internal static RuntimeInstance Create(IEnumerable<ModuleInstance> modules)
         {
-            return new RuntimeInstance(ImmutableArray.CreateRange(modules), DebugInformationFormat.Pdb);
+            return new RuntimeInstance(
+                ImmutableArray.CreateRange(modules),
+                DebugInformationFormat.Pdb
+            );
         }
 
         internal static RuntimeInstance Create(
@@ -42,15 +48,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             IEnumerable<MetadataReference> references,
             DebugInformationFormat debugFormat,
             bool includeLocalSignatures,
-            bool includeIntrinsicAssembly)
+            bool includeIntrinsicAssembly
+        )
         {
             var module = compilation.ToModuleInstance(debugFormat, includeLocalSignatures);
 
-            references ??= ExpressionCompilerTestHelpers.GetEmittedReferences(compilation, module.GetMetadataReader());
+            references ??= ExpressionCompilerTestHelpers.GetEmittedReferences(
+                compilation,
+                module.GetMetadataReader()
+            );
 
             if (includeIntrinsicAssembly)
             {
-                references = references.Concat(new[] { ExpressionCompilerTestHelpers.IntrinsicAssemblyReference });
+                references = references.Concat(
+                    new[] { ExpressionCompilerTestHelpers.IntrinsicAssemblyReference }
+                );
             }
 
             return Create(module, references, debugFormat);
@@ -59,12 +71,13 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         internal static RuntimeInstance Create(
             ModuleInstance module,
             IEnumerable<MetadataReference> references,
-            DebugInformationFormat debugFormat)
+            DebugInformationFormat debugFormat
+        )
         {
             // Create modules for the references and the program
             var modules = ImmutableArray.CreateRange(
-                references.Select(r => r.ToModuleInstance()).
-                Concat(new[] { module }));
+                references.Select(r => r.ToModuleInstance()).Concat(new[] { module })
+            );
 
             VerifyAllModules(modules);
             return new RuntimeInstance(modules, debugFormat);
@@ -76,7 +89,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
         /// </summary>
         private static void VerifyAllModules(IEnumerable<ModuleInstance> modules)
         {
-            var blocks = modules.Select(m => m.MetadataBlock).Select(b => ModuleMetadata.CreateFromMetadata(b.Pointer, b.Size));
+            var blocks = modules
+                .Select(m => m.MetadataBlock)
+                .Select(b => ModuleMetadata.CreateFromMetadata(b.Pointer, b.Size));
             var names = new HashSet<string>(blocks.Select(b => b.Name));
             foreach (var block in blocks)
             {

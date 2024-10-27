@@ -28,19 +28,22 @@ public class LockedNavigationStartup
             app.UseDeveloperExceptionPage();
         }
 
-        app.Map("/locked-navigation", app =>
-        {
-            app.UseStaticFiles();
-
-            app.UseAuthentication();
-
-            app.UseRouting();
-            app.UseEndpoints(endpoints =>
+        app.Map(
+            "/locked-navigation",
+            app =>
             {
-                endpoints.MapRazorPages();
-                endpoints.MapFallbackToPage("/LockedNavigationHost");
-                endpoints.MapBlazorHub();
-            });
-        });
+                app.UseStaticFiles();
+
+                app.UseAuthentication();
+
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/LockedNavigationHost");
+                    endpoints.MapBlazorHub();
+                });
+            }
+        );
     }
 }

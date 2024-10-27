@@ -10,7 +10,9 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 internal sealed class BodyControl
 {
     private static readonly ThrowingWasUpgradedWriteOnlyStream _throwingResponseStream = new();
-    private static readonly ThrowingPipeWriter _throwingUpgradedPipeWriter = new(CoreStrings.ResponseStreamWasUpgraded);
+    private static readonly ThrowingPipeWriter _throwingUpgradedPipeWriter = new(
+        CoreStrings.ResponseStreamWasUpgraded
+    );
     private readonly HttpResponseStream _response;
     private readonly HttpResponsePipeWriter _responseWriter;
     private readonly HttpRequestPipeReader _requestReader;
@@ -55,7 +57,9 @@ internal sealed class BodyControl
         return _upgradeStream;
     }
 
-    public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(MessageBody body)
+    public (Stream request, Stream response, PipeReader reader, PipeWriter writer) Start(
+        MessageBody body
+    )
     {
         CanHaveBody = !body.IsEmpty;
         _requestReader.StartAcceptingReads(body);
@@ -68,7 +72,12 @@ internal sealed class BodyControl
             _upgradeableResponse.SetInnerStream(_response);
             _upgradeablePipeWriter.SetInnerPipe(_responseWriter);
             // upgradeable requests should never have a request body
-            return (_emptyRequest, _upgradeableResponse, _emptyRequestReader, _upgradeablePipeWriter);
+            return (
+                _emptyRequest,
+                _upgradeableResponse,
+                _emptyRequestReader,
+                _upgradeablePipeWriter
+            );
         }
         else if (body.ExtendedConnect)
         {

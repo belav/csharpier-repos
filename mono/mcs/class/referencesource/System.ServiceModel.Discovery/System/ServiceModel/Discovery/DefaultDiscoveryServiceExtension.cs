@@ -13,12 +13,13 @@ namespace System.ServiceModel.Discovery
             this.discoveryService = new DefaultDiscoveryService(
                 this,
                 new DiscoveryMessageSequenceGenerator(),
-                duplicateMessageHistoryLength);
+                duplicateMessageHistoryLength
+            );
         }
 
         protected override DiscoveryService GetDiscoveryService()
         {
-            return this.discoveryService;   
+            return this.discoveryService;
         }
     }
 }

@@ -7,16 +7,15 @@ namespace System.Net.PeerToPeer
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Security.Permissions;
-    using System.Runtime.InteropServices;
     using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.InteropServices;
     using System.Runtime.Serialization;
-   
+    using System.Security.Permissions;
+    using System.Text;
 
     /// <remarks>
-    /// The PeerNameRegistration class registers a peer name record 
+    /// The PeerNameRegistration class registers a peer name record
     /// </remarks>
     [Serializable]
     public class PeerNameRegistration : IDisposable, ISerializable
@@ -24,11 +23,10 @@ namespace System.Net.PeerToPeer
         //-----------------------------------------------------------------------
         //Native constant to indicate auto address selection
         //-----------------------------------------------------------------------
-        private const UInt32 PEER_PNRP_AUTO_ADDRESSES  =  unchecked((UInt32)(-1));
-
+        private const UInt32 PEER_PNRP_AUTO_ADDRESSES = unchecked((UInt32)(-1));
 
         //-----------------------------------------------------------------------
-        //Internal PeerNameRecord to hold information. 
+        //Internal PeerNameRecord to hold information.
         //-----------------------------------------------------------------------
         private PeerNameRecord m_PeerNameRecord = new PeerNameRecord();
         private int m_Port;
@@ -52,7 +50,7 @@ namespace System.Net.PeerToPeer
         private PeerName m_RegisteredPeerName;
 
         //-----------------------------------------------------------------------
-        //We should support the scenario where you publish just the data 
+        //We should support the scenario where you publish just the data
         //but no end points. This flag tells us whether to use auto endpoint selection
         //or not
         //-----------------------------------------------------------------------
@@ -70,12 +68,10 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// Empty constructor so that users can populate the 
+        /// Empty constructor so that users can populate the
         /// information later
         /// </summary>
-        public PeerNameRegistration()
-        {
-        }
+        public PeerNameRegistration() { }
 
         /// <summary>
         /// This constuctor popuates the PeerNameRecord and registers automatically
@@ -83,16 +79,16 @@ namespace System.Net.PeerToPeer
         /// </summary>
         /// <param name="name">PeerName to register</param>
         /// <param name="port">Port to register on</param>
-        public PeerNameRegistration(PeerName name, int port) : this(name, port, null)
-        {
-        }
+        public PeerNameRegistration(PeerName name, int port)
+            : this(name, port, null) { }
+
         /// <summary>
         /// This constuctor popuates the PeerNameRecord and registers automatically
         /// Registers with automatic address selection within the cloud
         /// </summary>
         /// <param name="name">PeerName to register</param>
         /// <param name="port">Port to register on</param>
-        /// <param name="cloud">A specific cloud to regster in</param>/// 
+        /// <param name="cloud">A specific cloud to regster in</param>///
         public PeerNameRegistration(PeerName name, int port, Cloud cloud)
         {
             if (name == null)
@@ -108,15 +104,21 @@ namespace System.Net.PeerToPeer
                 throw new ArgumentOutOfRangeException("port", SR.GetString(SR.Pnrp_PortOutOfRange));
             }
 
-
             m_PeerNameRecord.PeerName = name;
             m_Port = port;
             m_Cloud = cloud;
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Created a PeerNameRegistration with PeerName {0}, Port {1}, Cloud {2} - Proceeding to register", name, port, cloud);
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Created a PeerNameRegistration with PeerName {0}, Port {1}, Cloud {2} - Proceeding to register",
+                name,
+                port,
+                cloud
+            );
         }
 
         /// <summary>
-        /// Property accessor to examine/change and perhaps call 
+        /// Property accessor to examine/change and perhaps call
         /// Update() to update the registration information
         /// </summary>
         internal PeerNameRecord PeerNameRecord
@@ -133,93 +135,61 @@ namespace System.Net.PeerToPeer
 
         public int Port
         {
-            get
-            {
-                return m_Port;
-            }
+            get { return m_Port; }
             set
             {
                 if (value < IPEndPoint.MinPort || value > IPEndPoint.MaxPort)
                 {
-                    throw new ArgumentOutOfRangeException("port", SR.GetString(SR.Pnrp_PortOutOfRange));
+                    throw new ArgumentOutOfRangeException(
+                        "port",
+                        SR.GetString(SR.Pnrp_PortOutOfRange)
+                    );
                 }
 
                 m_Port = value;
             }
         }
 
-
         public PeerName PeerName
         {
-            get
-            {
-                return m_PeerNameRecord.PeerName;
-            }
+            get { return m_PeerNameRecord.PeerName; }
             set
             {
 
                 m_PeerNameRecord.PeerName = value;
-
             }
         }
 
         public IPEndPointCollection EndPointCollection
         {
-            get
-            {
-                return m_PeerNameRecord.EndPointCollection;
-            }
+            get { return m_PeerNameRecord.EndPointCollection; }
         }
 
         public Cloud Cloud
         {
-            get
-            {
-                return m_Cloud;
-            }
-            set
-            {
-                m_Cloud = value;
-            }
+            get { return m_Cloud; }
+            set { m_Cloud = value; }
         }
 
         public string Comment
         {
-            get
-            {
-                return m_PeerNameRecord.Comment;
-            }
-            set
-            {
-                m_PeerNameRecord.Comment = value;
-            }
+            get { return m_PeerNameRecord.Comment; }
+            set { m_PeerNameRecord.Comment = value; }
         }
         public byte[] Data
         {
-            get
-            {
-                return m_PeerNameRecord.Data;
-            }
-            set
-            {
-                m_PeerNameRecord.Data = value;
-            }
+            get { return m_PeerNameRecord.Data; }
+            set { m_PeerNameRecord.Data = value; }
         }
 
         public bool UseAutoEndPointSelection
         {
-            get
-            {
-                return m_UseAutoEndPointSelection;
-            }
-            set
-            {
-                m_UseAutoEndPointSelection = value;
-            }
+            get { return m_UseAutoEndPointSelection; }
+            set { m_UseAutoEndPointSelection = value; }
         }
 
         /// <summary>
-        /// Return the flag to indicate whether we 
+        /// Return the flag to indicate whether we
         /// registered or not
         /// </summary>
         /// <returns></returns>
@@ -239,9 +209,9 @@ namespace System.Net.PeerToPeer
         }
 
         /// <summary>
-        /// This method is called if empty constructor is used and the 
-        /// information in the PeerNameRecord is set. Register needs to 
-        /// be called since we did not automatically register through the 
+        /// This method is called if empty constructor is used and the
+        /// information in the PeerNameRecord is set. Register needs to
+        /// be called since we did not automatically register through the
         /// constructor
         /// </summary>
         // <SecurityKernel Critical="True" Ring="1">
@@ -250,9 +220,14 @@ namespace System.Net.PeerToPeer
         [System.Security.SecurityCritical]
         public void Start()
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Proceeding to register through the Register method()");
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Proceeding to register through the Register method()"
+            );
             InternalRegister();
         }
 
@@ -296,17 +271,15 @@ namespace System.Net.PeerToPeer
             //------------------------------------------
             //If auto address selection is turned off
             //then there must be atleast Data or Endpoints
-            //specified 
+            //specified
             //------------------------------------------
             if (!m_UseAutoEndPointSelection)
             {
-                if ((EndPointCollection.Count == 0) &&
-                     (Data == null || Data.Length <= 0))
+                if ((EndPointCollection.Count == 0) && (Data == null || Data.Length <= 0))
                 {
                     throw new PeerToPeerException(SR.GetString(SR.Pnrp_BlobOrEndpointListNeeded));
                 }
             }
-
 
             //-------------------------------------------------
             //Demand for the Unrestricted Pnrp Permission
@@ -314,7 +287,7 @@ namespace System.Net.PeerToPeer
             PnrpPermission.UnrestrictedPnrpPermission.Demand();
 
             //---------------------------------------------------------------
-            //No perf hit here, real native call happens only one time if it 
+            //No perf hit here, real native call happens only one time if it
             //did not already happen
             //---------------------------------------------------------------
             UnsafeP2PNativeMethods.PnrpStartup();
@@ -324,7 +297,11 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "InternalRegister() is called with the following Info");
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "InternalRegister() is called with the following Info"
+                );
                 m_PeerNameRecord.TracePeerNameRecord();
             }
 
@@ -367,18 +344,23 @@ namespace System.Net.PeerToPeer
                     //-------------------------------------------------
                     regInfo.wport = (ushort)m_Port;
 
-                    if(m_UseAutoEndPointSelection)
+                    if (m_UseAutoEndPointSelection)
                         regInfo.cAddresses = PEER_PNRP_AUTO_ADDRESSES;
 
                     //-------------------------------------------------
                     //Call the native API to register
                     //-------------------------------------------------
-                    int result = UnsafeP2PNativeMethods.PeerPnrpRegister(m_PeerNameRecord.PeerName.ToString(),
-                                        ref regInfo,
-                                        out m_RegistrationHandle);
+                    int result = UnsafeP2PNativeMethods.PeerPnrpRegister(
+                        m_PeerNameRecord.PeerName.ToString(),
+                        ref regInfo,
+                        out m_RegistrationHandle
+                    );
                     if (result != 0)
                     {
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotRegisterPeerName), result);
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Pnrp_CouldNotRegisterPeerName),
+                            result
+                        );
                     }
                 }
                 else
@@ -397,7 +379,9 @@ namespace System.Net.PeerToPeer
                             IntPtr* pAddress = (IntPtr*)pSocketAddrList;
                             for (int i = 0; i < m_PeerNameRecord.EndPointCollection.Count; i++)
                             {
-                                byte[] sockaddr = SystemNetHelpers.SOCKADDRFromIPEndPoint(m_PeerNameRecord.EndPointCollection[i]);
+                                byte[] sockaddr = SystemNetHelpers.SOCKADDRFromIPEndPoint(
+                                    m_PeerNameRecord.EndPointCollection[i]
+                                );
                                 GCHandles[i] = GCHandle.Alloc(sockaddr, GCHandleType.Pinned);
                                 IntPtr psockAddr = GCHandles[i].AddrOfPinnedObject();
                                 pAddress[i] = psockAddr;
@@ -405,12 +389,17 @@ namespace System.Net.PeerToPeer
                         }
                         regInfo.ArrayOfSOCKADDRIN6Pointers = pSocketAddrList;
                         regInfo.cAddresses = (UInt32)numAddresses;
-                        int result = UnsafeP2PNativeMethods.PeerPnrpRegister(m_PeerNameRecord.PeerName.ToString(),
-                                            ref regInfo,
-                                            out m_RegistrationHandle);
+                        int result = UnsafeP2PNativeMethods.PeerPnrpRegister(
+                            m_PeerNameRecord.PeerName.ToString(),
+                            ref regInfo,
+                            out m_RegistrationHandle
+                        );
                         if (result != 0)
                         {
-                            throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotRegisterPeerName), result);
+                            throw PeerToPeerException.CreateFromHr(
+                                SR.GetString(SR.Pnrp_CouldNotRegisterPeerName),
+                                result
+                            );
                         }
                     }
                     finally
@@ -432,11 +421,15 @@ namespace System.Net.PeerToPeer
                 {
                     handle.Free();
                 }
-
             }
             m_RegisteredPeerName = m_PeerNameRecord.PeerName;
             m_IsRegistered = true;
-            Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Registration is successful. The handle is {0}", m_RegistrationHandle.DangerousGetHandle());
+            Logging.P2PTraceSource.TraceEvent(
+                TraceEventType.Information,
+                0,
+                "Registration is successful. The handle is {0}",
+                m_RegistrationHandle.DangerousGetHandle()
+            );
         }
 
         /// <summary>
@@ -462,7 +455,8 @@ namespace System.Net.PeerToPeer
             //-------------------------------------------------
             //Check for the dead object
             //-------------------------------------------------
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
             //-------------------------------------------------
             //If there is no existing registration to update
@@ -482,24 +476,25 @@ namespace System.Net.PeerToPeer
             }
 
             //-------------------------------------------------
-            //If the current PeerName associated with the 
-            //current registration is not the same as the 
+            //If the current PeerName associated with the
+            //current registration is not the same as the
             //PeerName given now - throw
             //-------------------------------------------------
             if (!m_RegisteredPeerName.Equals(m_PeerNameRecord.PeerName))
             {
-                throw new InvalidOperationException(SR.GetString(SR.Pnrp_CantChangePeerNameAfterRegistration));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Pnrp_CantChangePeerNameAfterRegistration)
+                );
             }
 
             //------------------------------------------
             //If auto address selection is turned off
             //then there must be atleast Data or Endpoints
-            //specified 
+            //specified
             //------------------------------------------
             if (!m_UseAutoEndPointSelection)
             {
-                if ((EndPointCollection.Count == 0) ||
-                     (Data == null || Data.Length <= 0))
+                if ((EndPointCollection.Count == 0) || (Data == null || Data.Length <= 0))
                 {
                     throw new PeerToPeerException(SR.GetString(SR.Pnrp_BlobOrEndpointListNeeded));
                 }
@@ -515,7 +510,11 @@ namespace System.Net.PeerToPeer
             //---------------------------------------------------------------
             if (Logging.P2PTraceSource.Switch.ShouldTrace(TraceEventType.Information))
             {
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Update() is called with the following Info");
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Update() is called with the following Info"
+                );
                 m_PeerNameRecord.TracePeerNameRecord();
             }
 
@@ -531,7 +530,8 @@ namespace System.Net.PeerToPeer
                 GCHandle handle = GCHandle.Alloc(m_PeerNameRecord.Data, GCHandleType.Pinned);
                 regInfo.payLoad.pbPayload = handle.AddrOfPinnedObject(); //m_PeerNameRecord.Data;
                 handle.Free();
-            };
+            }
+            ;
             //-------------------------------------------------
             //Set comment
             //-------------------------------------------------
@@ -557,10 +557,16 @@ namespace System.Net.PeerToPeer
                 regInfo.wport = (ushort)m_Port;
                 regInfo.cAddresses = PEER_PNRP_AUTO_ADDRESSES;
 
-                int result = UnsafeP2PNativeMethods.PeerPnrpUpdateRegistration(m_RegistrationHandle, ref regInfo);
+                int result = UnsafeP2PNativeMethods.PeerPnrpUpdateRegistration(
+                    m_RegistrationHandle,
+                    ref regInfo
+                );
                 if (result != 0)
                 {
-                    throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotRegisterPeerName), result);
+                    throw PeerToPeerException.CreateFromHr(
+                        SR.GetString(SR.Pnrp_CouldNotRegisterPeerName),
+                        result
+                    );
                 }
                 return;
             }
@@ -580,7 +586,9 @@ namespace System.Net.PeerToPeer
                         IntPtr* pAddress = (IntPtr*)pSocketAddrList;
                         for (int i = 0; i < m_PeerNameRecord.EndPointCollection.Count; i++)
                         {
-                            byte[] sockaddr = SystemNetHelpers.SOCKADDRFromIPEndPoint(m_PeerNameRecord.EndPointCollection[i]);
+                            byte[] sockaddr = SystemNetHelpers.SOCKADDRFromIPEndPoint(
+                                m_PeerNameRecord.EndPointCollection[i]
+                            );
                             GCHandles[i] = GCHandle.Alloc(sockaddr, GCHandleType.Pinned);
                             IntPtr psockAddr = GCHandles[i].AddrOfPinnedObject();
                             pAddress[i] = psockAddr;
@@ -588,10 +596,16 @@ namespace System.Net.PeerToPeer
                     }
                     regInfo.ArrayOfSOCKADDRIN6Pointers = pSocketAddrList;
                     regInfo.cAddresses = (UInt32)numAddresses;
-                    int result = UnsafeP2PNativeMethods.PeerPnrpUpdateRegistration(m_RegistrationHandle, ref regInfo);
+                    int result = UnsafeP2PNativeMethods.PeerPnrpUpdateRegistration(
+                        m_RegistrationHandle,
+                        ref regInfo
+                    );
                     if (result != 0)
                     {
-                        throw PeerToPeerException.CreateFromHr(SR.GetString(SR.Pnrp_CouldNotRegisterPeerName), result);
+                        throw PeerToPeerException.CreateFromHr(
+                            SR.GetString(SR.Pnrp_CouldNotRegisterPeerName),
+                            result
+                        );
                     }
                 }
                 finally
@@ -606,13 +620,17 @@ namespace System.Net.PeerToPeer
                     }
                 }
 
-                Logging.P2PTraceSource.TraceEvent(TraceEventType.Information, 0, "Update of existing registration is successful. The handle is {0}", m_RegistrationHandle.DangerousGetHandle());
+                Logging.P2PTraceSource.TraceEvent(
+                    TraceEventType.Information,
+                    0,
+                    "Update of existing registration is successful. The handle is {0}",
+                    m_RegistrationHandle.DangerousGetHandle()
+                );
             }
-
         }
 
         /// <summary>
-        /// Unregister the existing registration. 
+        /// Unregister the existing registration.
         /// </summary>
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="SafeHandle.get_IsInvalid():System.Boolean" />
@@ -623,15 +641,16 @@ namespace System.Net.PeerToPeer
         [System.Security.SecurityCritical]
         public void Stop()
         {
-            if (m_Disposed) throw new ObjectDisposedException(this.GetType().FullName);
+            if (m_Disposed)
+                throw new ObjectDisposedException(this.GetType().FullName);
 
             //-------------------------------------------------
             //No registration happened previously - throw
             //-------------------------------------------------
-			if(m_RegistrationHandle.IsInvalid || m_RegistrationHandle.IsClosed)
-			{
-				throw new InvalidOperationException(SR.GetString(SR.Pnrp_NoRegistrationFound));
-			}
+            if (m_RegistrationHandle.IsInvalid || m_RegistrationHandle.IsClosed)
+            {
+                throw new InvalidOperationException(SR.GetString(SR.Pnrp_NoRegistrationFound));
+            }
 
             //-------------------------------------------------
             //Demand for the Unrestricted Pnrp Permission
@@ -640,14 +659,15 @@ namespace System.Net.PeerToPeer
 
             m_RegistrationHandle.Dispose();
 
-			m_PeerNameRecord = new PeerNameRecord();
+            m_PeerNameRecord = new PeerNameRecord();
 
             m_RegisteredPeerName = null;
-			
+
             m_IsRegistered = false;
         }
 
         private bool m_Disposed;
+
         /// <summary>
         /// Dispose explicit
         /// </summary>
@@ -656,6 +676,7 @@ namespace System.Net.PeerToPeer
             Dispose(true);
             GC.SuppressFinalize(this);
         }
+
         /// <summary>
         /// Dispose impl
         /// </summary>
@@ -668,44 +689,50 @@ namespace System.Net.PeerToPeer
                 {
                     Stop();
                 }
-                catch (ObjectDisposedException)
-                {
-                }
-                catch (InvalidOperationException)
-                {
-                }
+                catch (ObjectDisposedException) { }
+                catch (InvalidOperationException) { }
                 //rest throw since we don't expect any other exceptions
             }
             m_Disposed = true;
         }
 
-        
         /// <summary>
-        /// Constructor to enable serialization 
+        /// Constructor to enable serialization
         /// </summary>
         /// <param name="serializationInfo"></param>
         /// <param name="streamingContext"></param>
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter
+        )]
         protected PeerNameRegistration(SerializationInfo info, StreamingContext context)
         {
             m_Port = info.GetInt32("_Port");
             m_UseAutoEndPointSelection = info.GetBoolean("_UseAutoEndPointSelection");
             m_Cloud = info.GetValue("_Cloud", typeof(Cloud)) as Cloud;
-            m_PeerNameRecord = info.GetValue("_PeerNameRecord", typeof(PeerNameRecord)) as PeerNameRecord;
+            m_PeerNameRecord =
+                info.GetValue("_PeerNameRecord", typeof(PeerNameRecord)) as PeerNameRecord;
         }
-
 
         // <SecurityKernel Critical="True" Ring="0">
         // <SatisfiesLinkDemand Name="GetObjectData(SerializationInfo, StreamingContext):Void" />
         // </SecurityKernel>
-        [SuppressMessage("Microsoft.Security", "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase", Justification = "System.Net.dll is still using pre-v4 security model and needs this demand")]
+        [SuppressMessage(
+            "Microsoft.Security",
+            "CA2123:OverrideLinkDemandsShouldBeIdenticalToBase",
+            Justification = "System.Net.dll is still using pre-v4 security model and needs this demand"
+        )]
         [System.Security.SecurityCritical]
-        [SecurityPermission(SecurityAction.LinkDemand, Flags = SecurityPermissionFlag.SerializationFormatter, SerializationFormatter = true)]
+        [SecurityPermission(
+            SecurityAction.LinkDemand,
+            Flags = SecurityPermissionFlag.SerializationFormatter,
+            SerializationFormatter = true
+        )]
         void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context)
         {
             GetObjectData(info, context);
         }
-        
+
         /// <summary>
         /// This is made virtual so that derived types can be implemented correctly
         /// </summary>
@@ -719,10 +746,5 @@ namespace System.Net.PeerToPeer
             info.AddValue("_Cloud", m_Cloud);
             info.AddValue("_PeerNameRecord", m_PeerNameRecord);
         }
-        
-
     }
 }
-
-
-

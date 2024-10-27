@@ -15,7 +15,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         public readonly TextSpan Span;
 
-        public RazorMappedSpanResult(string filePath, LinePositionSpan linePositionSpan, TextSpan span)
+        public RazorMappedSpanResult(
+            string filePath,
+            LinePositionSpan linePositionSpan,
+            TextSpan span
+        )
         {
             if (string.IsNullOrEmpty(filePath))
             {

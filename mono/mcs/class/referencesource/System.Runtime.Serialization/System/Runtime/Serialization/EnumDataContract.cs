@@ -9,10 +9,10 @@ namespace System.Runtime.Serialization
     using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Reflection;
-    using System.Threading;
-    using System.Text;
-    using System.Xml;
     using System.Security;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
 
 #if USE_REFEMIT
     public sealed class EnumDataContract : DataContract
@@ -20,13 +20,17 @@ namespace System.Runtime.Serialization
     internal sealed class EnumDataContract : DataContract
 #endif
     {
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
-            + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of CriticalHelper which keeps state that is cached statically for serialization."
+                + " Static fields are marked SecurityCritical or readonly to prevent data from being modified or leaked to other components in appdomain."
+        )]
         [SecurityCritical]
         EnumDataContractCriticalHelper helper;
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal EnumDataContract()
             : base(new EnumDataContractCriticalHelper())
@@ -34,8 +38,10 @@ namespace System.Runtime.Serialization
             helper = base.Helper as EnumDataContractCriticalHelper;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Initializes SecurityCritical field 'helper'.",
-            Safe = "Doesn't leak anything.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Initializes SecurityCritical field 'helper'.",
+            Safe = "Doesn't leak anything."
+        )]
         [SecuritySafeCritical]
         internal EnumDataContract(Type type)
             : base(new EnumDataContractCriticalHelper(type))
@@ -43,29 +49,34 @@ namespace System.Runtime.Serialization
             helper = base.Helper as EnumDataContractCriticalHelper;
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical static cache to look up base contract name for a type.",
-            Safe = "Read only access.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical static cache to look up base contract name for a type.",
+            Safe = "Read only access."
+        )]
         [SecuritySafeCritical]
-        static internal XmlQualifiedName GetBaseContractName(Type type)
+        internal static XmlQualifiedName GetBaseContractName(Type type)
         {
             return EnumDataContractCriticalHelper.GetBaseContractName(type);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Accesses SecurityCritical static cache to look up a base contract name.",
-            Safe = "Read only access.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Accesses SecurityCritical static cache to look up a base contract name.",
+            Safe = "Read only access."
+        )]
         [SecuritySafeCritical]
-        static internal Type GetBaseType(XmlQualifiedName baseContractName)
+        internal static Type GetBaseType(XmlQualifiedName baseContractName)
         {
             return EnumDataContractCriticalHelper.GetBaseType(baseContractName);
         }
 
         internal XmlQualifiedName BaseContractName
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical BaseContractName property.",
-                Safe = "BaseContractName only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical BaseContractName property.",
+                Safe = "BaseContractName only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.BaseContractName; }
-
             [Fx.Tag.SecurityNote(Critical = "Sets the critical BaseContractName property.")]
             [SecurityCritical]
             set { helper.BaseContractName = value; }
@@ -73,11 +84,12 @@ namespace System.Runtime.Serialization
 
         internal List<DataMember> Members
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical Members property.",
-                Safe = "Members only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical Members property.",
+                Safe = "Members only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.Members; }
-
             [Fx.Tag.SecurityNote(Critical = "Sets the critical Members property.")]
             [SecurityCritical]
             set { helper.Members = value; }
@@ -85,11 +97,12 @@ namespace System.Runtime.Serialization
 
         internal List<long> Values
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical Values property.",
-                Safe = "Values only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical Values property.",
+                Safe = "Values only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.Values; }
-
             [Fx.Tag.SecurityNote(Critical = "Sets the critical Values property.")]
             [SecurityCritical]
             set { helper.Values = value; }
@@ -97,11 +110,12 @@ namespace System.Runtime.Serialization
 
         internal bool IsFlags
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical IsFlags property.",
-                Safe = "IsFlags only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical IsFlags property.",
+                Safe = "IsFlags only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.IsFlags; }
-
             [Fx.Tag.SecurityNote(Critical = "Sets the critical IsFlags property.")]
             [SecurityCritical]
             set { helper.IsFlags = value; }
@@ -109,16 +123,20 @@ namespace System.Runtime.Serialization
 
         internal bool IsULong
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical IsULong property.",
-                Safe = "IsULong only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical IsULong property.",
+                Safe = "IsULong only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.IsULong; }
         }
 
         XmlDictionaryString[] ChildElementNames
         {
-            [Fx.Tag.SecurityNote(Critical = "Fetches the critical ChildElementNames property.",
-                Safe = "ChildElementNames only needs to be protected for write.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Fetches the critical ChildElementNames property.",
+                Safe = "ChildElementNames only needs to be protected for write."
+            )]
             [SecuritySafeCritical]
             get { return helper.ChildElementNames; }
         }
@@ -128,8 +146,10 @@ namespace System.Runtime.Serialization
             get { return false; }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds all state used for (de)serializing enums."
-            + " Since the data is cached statically, we lock down access to it.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds all state used for (de)serializing enums."
+                + " Since the data is cached statically, we lock down access to it."
+        )]
 #if !NO_SECURITY_ATTRIBUTES
         [SecurityCritical(SecurityCriticalScope.Everything)]
 #endif
@@ -160,22 +180,30 @@ namespace System.Runtime.Serialization
                 Add(typeof(ulong), "unsignedLong");
             }
 
-            [SuppressMessage(FxCop.Category.Usage, "CA2301:EmbeddableTypesInContainersRule", MessageId = "typeToName", Justification = "No need to support type equivalence here.")]
-            static internal void Add(Type type, string localName)
+            [SuppressMessage(
+                FxCop.Category.Usage,
+                "CA2301:EmbeddableTypesInContainersRule",
+                MessageId = "typeToName",
+                Justification = "No need to support type equivalence here."
+            )]
+            internal static void Add(Type type, string localName)
             {
-                XmlQualifiedName stableName = CreateQualifiedName(localName, Globals.SchemaNamespace);
+                XmlQualifiedName stableName = CreateQualifiedName(
+                    localName,
+                    Globals.SchemaNamespace
+                );
                 typeToName.Add(type, stableName);
                 nameToType.Add(stableName, type);
             }
 
-            static internal XmlQualifiedName GetBaseContractName(Type type)
+            internal static XmlQualifiedName GetBaseContractName(Type type)
             {
                 XmlQualifiedName retVal = null;
                 typeToName.TryGetValue(type, out retVal);
                 return retVal;
             }
 
-            static internal Type GetBaseType(XmlQualifiedName baseContractName)
+            internal static Type GetBaseType(XmlQualifiedName baseContractName)
             {
                 Type retVal = null;
                 nameToType.TryGetValue(baseContractName, out retVal);
@@ -210,27 +238,35 @@ namespace System.Runtime.Serialization
                     if (dataContractAttribute.IsReference)
                     {
                         DataContract.ThrowInvalidDataContractException(
-                                SR.GetString(SR.EnumTypeCannotHaveIsReference,
-                                    DataContract.GetClrTypeFullName(type),
-                                    dataContractAttribute.IsReference,
-                                    false),
-                                type);
+                            SR.GetString(
+                                SR.EnumTypeCannotHaveIsReference,
+                                DataContract.GetClrTypeFullName(type),
+                                dataContractAttribute.IsReference,
+                                false
+                            ),
+                            type
+                        );
                     }
                 }
             }
 
             internal XmlQualifiedName BaseContractName
             {
-                get
-                {
-                    return baseContractName;
-                }
+                get { return baseContractName; }
                 set
                 {
                     baseContractName = value;
                     Type baseType = GetBaseType(baseContractName);
                     if (baseType == null)
-                        ThrowInvalidDataContractException(SR.GetString(SR.InvalidEnumBaseType, value.Name, value.Namespace, StableName.Name, StableName.Namespace));
+                        ThrowInvalidDataContractException(
+                            SR.GetString(
+                                SR.InvalidEnumBaseType,
+                                value.Name,
+                                value.Namespace,
+                                StableName.Name,
+                                StableName.Namespace
+                            )
+                        );
                     ImportBaseType(baseType);
                 }
             }
@@ -272,7 +308,8 @@ namespace System.Runtime.Serialization
             {
                 Type type = this.UnderlyingType;
                 FieldInfo[] fields = type.GetFields(BindingFlags.Static | BindingFlags.Public);
-                Dictionary<string, DataMember> memberValuesTable = new Dictionary<string, DataMember>();
+                Dictionary<string, DataMember> memberValuesTable =
+                    new Dictionary<string, DataMember>();
                 List<DataMember> tempMembers = new List<DataMember>(fields.Length);
                 List<long> tempValues = new List<long>(fields.Length);
 
@@ -282,29 +319,61 @@ namespace System.Runtime.Serialization
                     bool enumMemberValid = false;
                     if (hasDataContract)
                     {
-                        object[] memberAttributes = field.GetCustomAttributes(Globals.TypeOfEnumMemberAttribute, false);
+                        object[] memberAttributes = field.GetCustomAttributes(
+                            Globals.TypeOfEnumMemberAttribute,
+                            false
+                        );
                         if (memberAttributes != null && memberAttributes.Length > 0)
                         {
                             if (memberAttributes.Length > 1)
-                                ThrowInvalidDataContractException(SR.GetString(SR.TooManyEnumMembers, DataContract.GetClrTypeFullName(field.DeclaringType), field.Name));
-                            EnumMemberAttribute memberAttribute = (EnumMemberAttribute)memberAttributes[0];
+                                ThrowInvalidDataContractException(
+                                    SR.GetString(
+                                        SR.TooManyEnumMembers,
+                                        DataContract.GetClrTypeFullName(field.DeclaringType),
+                                        field.Name
+                                    )
+                                );
+                            EnumMemberAttribute memberAttribute = (EnumMemberAttribute)
+                                memberAttributes[0];
 
                             DataMember memberContract = new DataMember(field);
                             if (memberAttribute.IsValueSetExplicitly)
                             {
-                                if (memberAttribute.Value == null || memberAttribute.Value.Length == 0)
-                                    ThrowInvalidDataContractException(SR.GetString(SR.InvalidEnumMemberValue, field.Name, DataContract.GetClrTypeFullName(type)));
+                                if (
+                                    memberAttribute.Value == null
+                                    || memberAttribute.Value.Length == 0
+                                )
+                                    ThrowInvalidDataContractException(
+                                        SR.GetString(
+                                            SR.InvalidEnumMemberValue,
+                                            field.Name,
+                                            DataContract.GetClrTypeFullName(type)
+                                        )
+                                    );
                                 memberContract.Name = memberAttribute.Value;
                             }
                             else
                                 memberContract.Name = field.Name;
-                            ClassDataContract.CheckAndAddMember(tempMembers, memberContract, memberValuesTable);
+                            ClassDataContract.CheckAndAddMember(
+                                tempMembers,
+                                memberContract,
+                                memberValuesTable
+                            );
                             enumMemberValid = true;
                         }
 
-                        object[] dataMemberAttributes = field.GetCustomAttributes(Globals.TypeOfDataMemberAttribute, false);
+                        object[] dataMemberAttributes = field.GetCustomAttributes(
+                            Globals.TypeOfDataMemberAttribute,
+                            false
+                        );
                         if (dataMemberAttributes != null && dataMemberAttributes.Length > 0)
-                            ThrowInvalidDataContractException(SR.GetString(SR.DataMemberOnEnumField, DataContract.GetClrTypeFullName(field.DeclaringType), field.Name));
+                            ThrowInvalidDataContractException(
+                                SR.GetString(
+                                    SR.DataMemberOnEnumField,
+                                    DataContract.GetClrTypeFullName(field.DeclaringType),
+                                    field.Name
+                                )
+                            );
                     }
                     else
                     {
@@ -312,7 +381,11 @@ namespace System.Runtime.Serialization
                         {
                             DataMember memberContract = new DataMember(field);
                             memberContract.Name = field.Name;
-                            ClassDataContract.CheckAndAddMember(tempMembers, memberContract, memberValuesTable);
+                            ClassDataContract.CheckAndAddMember(
+                                tempMembers,
+                                memberContract,
+                                memberValuesTable
+                            );
                             enumMemberValid = true;
                         }
                     }
@@ -335,7 +408,9 @@ namespace System.Runtime.Serialization
 
         internal void WriteEnumValue(XmlWriterDelegator writer, object value)
         {
-            long longValue = IsULong ? (long)((IConvertible)value).ToUInt64(null) : ((IConvertible)value).ToInt64(null);
+            long longValue = IsULong
+                ? (long)((IConvertible)value).ToUInt64(null)
+                : ((IConvertible)value).ToInt64(null);
             for (int i = 0; i < Values.Count; i++)
             {
                 if (longValue == Values[i])
@@ -371,13 +446,29 @@ namespace System.Runtime.Serialization
                 }
                 // enforce that enum value was completely parsed
                 if (longValue != 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidEnumValueOnWrite, value, DataContract.GetClrTypeFullName(UnderlyingType))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.InvalidEnumValueOnWrite,
+                                value,
+                                DataContract.GetClrTypeFullName(UnderlyingType)
+                            )
+                        )
+                    );
 
                 if (noneWritten && zeroIndex >= 0)
                     writer.WriteString(ChildElementNames[zeroIndex].Value);
             }
             else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidEnumValueOnWrite, value, DataContract.GetClrTypeFullName(UnderlyingType))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    XmlObjectSerializer.CreateSerializationException(
+                        SR.GetString(
+                            SR.InvalidEnumValueOnWrite,
+                            value,
+                            DataContract.GetClrTypeFullName(UnderlyingType)
+                        )
+                    )
+                );
         }
 
         internal object ReadEnumValue(XmlReaderDelegator reader)
@@ -417,7 +508,15 @@ namespace System.Runtime.Serialization
             else
             {
                 if (stringValue.Length == 0)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidEnumValueOnRead, stringValue, DataContract.GetClrTypeFullName(UnderlyingType))));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        XmlObjectSerializer.CreateSerializationException(
+                            SR.GetString(
+                                SR.InvalidEnumValueOnRead,
+                                stringValue,
+                                DataContract.GetClrTypeFullName(UnderlyingType)
+                            )
+                        )
+                    );
                 longValue = ReadEnumValue(stringValue, 0, stringValue.Length);
             }
 
@@ -431,12 +530,23 @@ namespace System.Runtime.Serialization
             for (int i = 0; i < Members.Count; i++)
             {
                 string memberName = Members[i].Name;
-                if (memberName.Length == count && String.CompareOrdinal(value, index, memberName, 0, count) == 0)
+                if (
+                    memberName.Length == count
+                    && String.CompareOrdinal(value, index, memberName, 0, count) == 0
+                )
                 {
                     return Values[i];
                 }
             }
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(XmlObjectSerializer.CreateSerializationException(SR.GetString(SR.InvalidEnumValueOnRead, value.Substring(index, count), DataContract.GetClrTypeFullName(UnderlyingType))));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                XmlObjectSerializer.CreateSerializationException(
+                    SR.GetString(
+                        SR.InvalidEnumValueOnRead,
+                        value.Substring(index, count),
+                        DataContract.GetClrTypeFullName(UnderlyingType)
+                    )
+                )
+            );
         }
 
         internal string GetStringFromEnumValue(long value)
@@ -455,7 +565,10 @@ namespace System.Runtime.Serialization
                 return XmlConverter.ToInt64(value);
         }
 
-        internal override bool Equals(object other, Dictionary<DataContractPairKey, object> checkedContracts)
+        internal override bool Equals(
+            object other,
+            Dictionary<DataContractPairKey, object> checkedContracts
+        )
         {
             if (IsEqualOrChecked(other, checkedContracts))
                 return true;
@@ -465,9 +578,13 @@ namespace System.Runtime.Serialization
                 EnumDataContract dataContract = other as EnumDataContract;
                 if (dataContract != null)
                 {
-                    if (Members.Count != dataContract.Members.Count || Values.Count != dataContract.Values.Count)
+                    if (
+                        Members.Count != dataContract.Members.Count
+                        || Values.Count != dataContract.Values.Count
+                    )
                         return false;
-                    string[] memberNames1 = new string[Members.Count], memberNames2 = new string[Members.Count];
+                    string[] memberNames1 = new string[Members.Count],
+                        memberNames2 = new string[Members.Count];
                     for (int i = 0; i < Members.Count; i++)
                     {
                         memberNames1[i] = Members[i].Name;
@@ -492,18 +609,24 @@ namespace System.Runtime.Serialization
             return base.GetHashCode();
         }
 
-        public override void WriteXmlValue(XmlWriterDelegator xmlWriter, object obj, XmlObjectSerializerWriteContext context)
+        public override void WriteXmlValue(
+            XmlWriterDelegator xmlWriter,
+            object obj,
+            XmlObjectSerializerWriteContext context
+        )
         {
             WriteEnumValue(xmlWriter, obj);
         }
 
-        public override object ReadXmlValue(XmlReaderDelegator xmlReader, XmlObjectSerializerReadContext context)
+        public override object ReadXmlValue(
+            XmlReaderDelegator xmlReader,
+            XmlObjectSerializerReadContext context
+        )
         {
             object obj = ReadEnumValue(xmlReader);
             if (context != null)
                 context.AddNewObject(obj);
             return obj;
         }
-
     }
 }

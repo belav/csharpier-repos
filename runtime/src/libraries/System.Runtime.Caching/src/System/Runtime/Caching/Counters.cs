@@ -21,7 +21,11 @@ namespace System.Runtime.Caching
         private DiagnosticCounter[] _counters;
         private long[] _counterValues;
 
-        internal Counters(string cacheName) : base(EVENT_SOURCE_NAME_ROOT + (cacheName ?? throw new ArgumentNullException(nameof(cacheName))))
+        internal Counters(string cacheName)
+            : base(
+                EVENT_SOURCE_NAME_ROOT
+                    + (cacheName ?? throw new ArgumentNullException(nameof(cacheName)))
+            )
         {
             InitDisposableMembers();
         }
@@ -34,13 +38,32 @@ namespace System.Runtime.Caching
             {
                 _counters = new DiagnosticCounter[NUM_COUNTERS];
                 _counterValues = new long[NUM_COUNTERS];
-                _counters[(int)CounterName.Entries] = CreatePollingCounter("entries", "Cache Entries", (int)CounterName.Entries);
-                _counters[(int)CounterName.Hits] = CreatePollingCounter("hits", "Cache Hits", (int)CounterName.Hits);
-                _counters[(int)CounterName.Misses] = CreatePollingCounter("misses", "Cache Misses", (int)CounterName.Misses);
-                _counters[(int)CounterName.Trims] = CreatePollingCounter("trims", "Cache Trims", (int)CounterName.Trims);
+                _counters[(int)CounterName.Entries] = CreatePollingCounter(
+                    "entries",
+                    "Cache Entries",
+                    (int)CounterName.Entries
+                );
+                _counters[(int)CounterName.Hits] = CreatePollingCounter(
+                    "hits",
+                    "Cache Hits",
+                    (int)CounterName.Hits
+                );
+                _counters[(int)CounterName.Misses] = CreatePollingCounter(
+                    "misses",
+                    "Cache Misses",
+                    (int)CounterName.Misses
+                );
+                _counters[(int)CounterName.Trims] = CreatePollingCounter(
+                    "trims",
+                    "Cache Trims",
+                    (int)CounterName.Trims
+                );
 
-                _counters[(int)CounterName.Turnover] = new IncrementingPollingCounter("turnover", this,
-                    () => (double)_counterValues[(int)CounterName.Turnover])
+                _counters[(int)CounterName.Turnover] = new IncrementingPollingCounter(
+                    "turnover",
+                    this,
+                    () => (double)_counterValues[(int)CounterName.Turnover]
+                )
                 {
                     DisplayName = "Cache Turnover Rate",
                 };
@@ -48,8 +71,15 @@ namespace System.Runtime.Caching
                 // This two-step dance with hit-ratio was an old perf-counter artifact. There only needs
                 // to be one polling counter here, rather than the two-part perf counter. Still keeping array
                 // indexes and raw counter values consistent between NetFx and Core code though.
-                _counters[(int)CounterName.HitRatio] = new PollingCounter("hit-ratio", this,
-                    () =>((double)_counterValues[(int)CounterName.HitRatio]/(double)_counterValues[(int)CounterName.HitRatioBase]) * 100d)
+                _counters[(int)CounterName.HitRatio] = new PollingCounter(
+                    "hit-ratio",
+                    this,
+                    () =>
+                        (
+                            (double)_counterValues[(int)CounterName.HitRatio]
+                            / (double)_counterValues[(int)CounterName.HitRatioBase]
+                        ) * 100d
+                )
                 {
                     DisplayName = "Cache Hit Ratio",
                 };
@@ -64,7 +94,11 @@ namespace System.Runtime.Caching
             }
         }
 
-        private PollingCounter CreatePollingCounter(string name, string displayName, int counterIndex)
+        private PollingCounter CreatePollingCounter(
+            string name,
+            string displayName,
+            int counterIndex
+        )
         {
             return new PollingCounter(name, this, () => (double)_counterValues[counterIndex])
             {
@@ -77,7 +111,10 @@ namespace System.Runtime.Caching
             DiagnosticCounter[] counters = _counters;
 
             // ensure this only happens once
-            if (counters != null && Interlocked.CompareExchange(ref _counters, null, counters) == counters)
+            if (
+                counters != null
+                && Interlocked.CompareExchange(ref _counters, null, counters) == counters
+            )
             {
                 for (int i = 0; i < NUM_COUNTERS; i++)
                 {
@@ -91,11 +128,13 @@ namespace System.Runtime.Caching
             int idx = (int)name;
             Interlocked.Increment(ref _counterValues[idx]);
         }
+
         internal void IncrementBy(CounterName name, long value)
         {
             int idx = (int)name;
             Interlocked.Add(ref _counterValues[idx], value);
         }
+
         internal void Decrement(CounterName name)
         {
             int idx = (int)name;
@@ -103,21 +142,15 @@ namespace System.Runtime.Caching
         }
 #else
 #pragma warning disable CA1822, IDE0060
-        internal Counters(string cacheName)
-        {
-        }
-        public new void Dispose()
-        {
-        }
-        internal void Increment(CounterName name)
-        {
-        }
-        internal void IncrementBy(CounterName name, long value)
-        {
-        }
-        internal void Decrement(CounterName name)
-        {
-        }
+        internal Counters(string cacheName) { }
+
+        public new void Dispose() { }
+
+        internal void Increment(CounterName name) { }
+
+        internal void IncrementBy(CounterName name, long value) { }
+
+        internal void Decrement(CounterName name) { }
 #pragma warning restore CA1822, IDE0060
 #endif
     }

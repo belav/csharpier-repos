@@ -25,8 +25,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 return true;
             }
 
-            public override string ToString()
-                => string.Format("({0})", string.Join(",", (object[])matchers));
+            public override string ToString() =>
+                string.Format("({0})", string.Join(",", (object[])matchers));
         }
     }
 }

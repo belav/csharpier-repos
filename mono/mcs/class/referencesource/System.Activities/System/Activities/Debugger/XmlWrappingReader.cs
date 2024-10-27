@@ -135,7 +135,9 @@ namespace System.Activities.Debugger
         {
             get
             {
-                return (this.baseReaderAsLineInfo == null) ? 0 : this.baseReaderAsLineInfo.LineNumber;
+                return (this.baseReaderAsLineInfo == null)
+                    ? 0
+                    : this.baseReaderAsLineInfo.LineNumber;
             }
         }
 
@@ -143,7 +145,9 @@ namespace System.Activities.Debugger
         {
             get
             {
-                return (this.baseReaderAsLineInfo == null) ? 0 : this.baseReaderAsLineInfo.LinePosition;
+                return (this.baseReaderAsLineInfo == null)
+                    ? 0
+                    : this.baseReaderAsLineInfo.LinePosition;
             }
         }
 
@@ -159,10 +163,7 @@ namespace System.Activities.Debugger
 
         protected IXmlLineInfo BaseReaderAsLineInfo
         {
-            get
-            {
-                return this.baseReaderAsLineInfo;
-            }
+            get { return this.baseReaderAsLineInfo; }
         }
 
         public override string this[int i]
@@ -257,17 +258,25 @@ namespace System.Activities.Debugger
 
         public virtual bool HasLineInfo()
         {
-            return (this.baseReaderAsLineInfo == null) ? false : this.baseReaderAsLineInfo.HasLineInfo();
+            return (this.baseReaderAsLineInfo == null)
+                ? false
+                : this.baseReaderAsLineInfo.HasLineInfo();
         }
 
         string IXmlNamespaceResolver.LookupPrefix(string namespaceName)
         {
-            return (this.baseReaderAsNamespaceResolver == null) ? null : this.baseReaderAsNamespaceResolver.LookupPrefix(namespaceName);
+            return (this.baseReaderAsNamespaceResolver == null)
+                ? null
+                : this.baseReaderAsNamespaceResolver.LookupPrefix(namespaceName);
         }
 
-        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(XmlNamespaceScope scope)
+        IDictionary<string, string> IXmlNamespaceResolver.GetNamespacesInScope(
+            XmlNamespaceScope scope
+        )
         {
-            return (this.baseReaderAsNamespaceResolver == null) ? null : this.baseReaderAsNamespaceResolver.GetNamespacesInScope(scope);
+            return (this.baseReaderAsNamespaceResolver == null)
+                ? null
+                : this.baseReaderAsNamespaceResolver.GetNamespacesInScope(scope);
         }
 
         protected override void Dispose(bool disposing)

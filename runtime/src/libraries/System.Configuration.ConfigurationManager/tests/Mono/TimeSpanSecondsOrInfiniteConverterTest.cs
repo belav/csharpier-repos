@@ -82,7 +82,10 @@ namespace MonoTests.System.Configuration
             TimeSpanSecondsOrInfiniteConverter cv = new TimeSpanSecondsOrInfiniteConverter();
             object o = null;
 
-            AssertExtensions.Throws<ArgumentException>(null, () => o = cv.ConvertFrom(null, null, "100.5"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => o = cv.ConvertFrom(null, null, "100.5")
+            );
             Assert.Null(o);
         }
 
@@ -110,8 +113,14 @@ namespace MonoTests.System.Configuration
 
             /* infinity tests */
             Assert.Equal("Infinite", cv.ConvertTo(null, null, TimeSpan.MaxValue, typeof(string)));
-            Assert.Equal("Infinite", cv.ConvertTo(null, null, new TimeSpan(long.MaxValue), typeof(string)));
-            Assert.Equal("922337203685", cv.ConvertTo(null, null, new TimeSpan(long.MaxValue - 1), typeof(string)));
+            Assert.Equal(
+                "Infinite",
+                cv.ConvertTo(null, null, new TimeSpan(long.MaxValue), typeof(string))
+            );
+            Assert.Equal(
+                "922337203685",
+                cv.ConvertTo(null, null, new TimeSpan(long.MaxValue - 1), typeof(string))
+            );
         }
 
         [Fact]
@@ -119,7 +128,9 @@ namespace MonoTests.System.Configuration
         {
             TimeSpanSecondsOrInfiniteConverter cv = new TimeSpanSecondsOrInfiniteConverter();
 
-            Assert.Throws<NullReferenceException>(() => cv.ConvertTo(null, null, null, typeof(string)));
+            Assert.Throws<NullReferenceException>(
+                () => cv.ConvertTo(null, null, null, typeof(string))
+            );
         }
 
         [Fact]
@@ -127,7 +138,10 @@ namespace MonoTests.System.Configuration
         {
             TimeSpanSecondsOrInfiniteConverter cv = new TimeSpanSecondsOrInfiniteConverter();
 
-            AssertExtensions.Throws<ArgumentException>(null, () => cv.ConvertTo(null, null, 59, typeof(string)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => cv.ConvertTo(null, null, 59, typeof(string))
+            );
         }
 
         [Fact]

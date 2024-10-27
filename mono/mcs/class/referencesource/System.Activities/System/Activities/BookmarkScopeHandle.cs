@@ -6,19 +6,19 @@ namespace System.Activities
 {
     using System;
     using System.Runtime;
-    using System.Runtime.Serialization;
     using System.Runtime.DurableInstancing;
+    using System.Runtime.Serialization;
 
     [DataContract]
     public sealed class BookmarkScopeHandle : Handle
     {
         BookmarkScope bookmarkScope;
 
-        static BookmarkScopeHandle defaultBookmarkScopeHandle = new BookmarkScopeHandle(BookmarkScope.Default);
+        static BookmarkScopeHandle defaultBookmarkScopeHandle = new BookmarkScopeHandle(
+            BookmarkScope.Default
+        );
 
-        public BookmarkScopeHandle()
-        {
-        }
+        public BookmarkScopeHandle() { }
 
         internal BookmarkScopeHandle(BookmarkScope bookmarkScope)
         {
@@ -31,18 +31,12 @@ namespace System.Activities
 
         public static BookmarkScopeHandle Default
         {
-            get 
-            {
-                return defaultBookmarkScopeHandle;
-            }
+            get { return defaultBookmarkScopeHandle; }
         }
 
         public BookmarkScope BookmarkScope
         {
-            get 
-            {
-                return this.bookmarkScope;
-            }
+            get { return this.bookmarkScope; }
         }
 
         [DataMember(EmitDefaultValue = false, Name = "bookmarkScope")]
@@ -75,7 +69,9 @@ namespace System.Activities
             this.ThrowIfContextIsNullOrDisposed(context);
             if (this.bookmarkScope != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CreateBookmarkScopeFailed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CreateBookmarkScopeFailed)
+                );
             }
 
             this.ThrowIfUninitialized();
@@ -88,14 +84,16 @@ namespace System.Activities
             this.ThrowIfContextIsNullOrDisposed(context);
             if (this.bookmarkScope != null)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CreateBookmarkScopeFailed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CreateBookmarkScopeFailed)
+                );
             }
 
             this.ThrowIfUninitialized();
             this.bookmarkScope = context.CreateBookmarkScope(scopeId, this);
             this.bookmarkScope.IncrementHandleReferenceCount();
         }
-        
+
         public void Initialize(NativeActivityContext context, Guid scope)
         {
             this.ThrowIfContextIsNullOrDisposed(context);
@@ -108,9 +106,14 @@ namespace System.Activities
             if (this.bookmarkScope != null)
             {
                 int scopeRefCount = this.bookmarkScope.DecrementHandleReferenceCount();
-                DisassociateInstanceKeysExtension extension = context.GetExtension<DisassociateInstanceKeysExtension>();
+                DisassociateInstanceKeysExtension extension =
+                    context.GetExtension<DisassociateInstanceKeysExtension>();
                 // We only unregister the BookmarkScope if the extension exists and is enabled and if we had the last reference to it.
-                if ((extension != null) && extension.AutomaticDisassociationEnabled && (scopeRefCount == 0))
+                if (
+                    (extension != null)
+                    && extension.AutomaticDisassociationEnabled
+                    && (scopeRefCount == 0)
+                )
                 {
                     context.UnregisterBookmarkScope(this.bookmarkScope);
                 }
@@ -119,5 +122,3 @@ namespace System.Activities
         }
     }
 }
-
-

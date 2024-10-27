@@ -30,30 +30,49 @@ public class InMemoryStoreTest : IdentitySpecificationTestBase<PocoUser, PocoRol
         user.PasswordHash = hashedPassword;
     }
 
-    protected override PocoUser CreateTestUser(string namePrefix = "", string email = "", string phoneNumber = "",
-        bool lockoutEnabled = false, DateTimeOffset? lockoutEnd = default(DateTimeOffset?), bool useNamePrefixAsUserName = false)
+    protected override PocoUser CreateTestUser(
+        string namePrefix = "",
+        string email = "",
+        string phoneNumber = "",
+        bool lockoutEnabled = false,
+        DateTimeOffset? lockoutEnd = default(DateTimeOffset?),
+        bool useNamePrefixAsUserName = false
+    )
     {
         return new PocoUser
         {
-            UserName = useNamePrefixAsUserName ? namePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
+            UserName = useNamePrefixAsUserName
+                ? namePrefix
+                : string.Format(CultureInfo.InvariantCulture, "{0}{1}", namePrefix, Guid.NewGuid()),
             Email = email,
             PhoneNumber = phoneNumber,
             LockoutEnabled = lockoutEnabled,
-            LockoutEnd = lockoutEnd
+            LockoutEnd = lockoutEnd,
         };
     }
 
-    protected override PocoRole CreateTestRole(string roleNamePrefix = "", bool useRoleNamePrefixAsRoleName = false)
+    protected override PocoRole CreateTestRole(
+        string roleNamePrefix = "",
+        bool useRoleNamePrefixAsRoleName = false
+    )
     {
-        var roleName = useRoleNamePrefixAsRoleName ? roleNamePrefix : string.Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
+        var roleName = useRoleNamePrefixAsRoleName
+            ? roleNamePrefix
+            : string.Format(CultureInfo.InvariantCulture, "{0}{1}", roleNamePrefix, Guid.NewGuid());
         return new PocoRole(roleName);
     }
 
-    protected override Expression<Func<PocoUser, bool>> UserNameEqualsPredicate(string userName) => u => u.UserName == userName;
+    protected override Expression<Func<PocoUser, bool>> UserNameEqualsPredicate(string userName) =>
+        u => u.UserName == userName;
 
-    protected override Expression<Func<PocoRole, bool>> RoleNameEqualsPredicate(string roleName) => r => r.Name == roleName;
+    protected override Expression<Func<PocoRole, bool>> RoleNameEqualsPredicate(string roleName) =>
+        r => r.Name == roleName;
 
-    protected override Expression<Func<PocoUser, bool>> UserNameStartsWithPredicate(string userName) => u => u.UserName.StartsWith(userName, StringComparison.Ordinal);
+    protected override Expression<Func<PocoUser, bool>> UserNameStartsWithPredicate(
+        string userName
+    ) => u => u.UserName.StartsWith(userName, StringComparison.Ordinal);
 
-    protected override Expression<Func<PocoRole, bool>> RoleNameStartsWithPredicate(string roleName) => r => r.Name.StartsWith(roleName, StringComparison.Ordinal);
+    protected override Expression<Func<PocoRole, bool>> RoleNameStartsWithPredicate(
+        string roleName
+    ) => r => r.Name.StartsWith(roleName, StringComparison.Ordinal);
 }

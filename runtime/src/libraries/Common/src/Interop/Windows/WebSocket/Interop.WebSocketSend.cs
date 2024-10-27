@@ -15,13 +15,15 @@ internal static partial class Interop
             SafeHandle webSocketHandle,
             BufferType bufferType,
             ref Buffer buffer,
-            IntPtr applicationContext);
+            IntPtr applicationContext
+        );
 
         [LibraryImport(Libraries.WebSocket, EntryPoint = "WebSocketSend")]
         internal static partial int WebSocketSendWithoutBody_Raw(
             SafeHandle webSocketHandle,
             BufferType bufferType,
             IntPtr buffer,
-            IntPtr applicationContext);
+            IntPtr applicationContext
+        );
     }
 }

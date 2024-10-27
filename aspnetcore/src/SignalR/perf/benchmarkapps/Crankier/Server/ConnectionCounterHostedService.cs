@@ -47,14 +47,15 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
 
                     if (_lastSummary != null)
                     {
-                        Console.WriteLine(@"[{0:hh\:mm\:ss}] Current: {1}, peak: {2}, connected: {3}, disconnected: {4}, rate: {5}/s",
+                        Console.WriteLine(
+                            @"[{0:hh\:mm\:ss}] Current: {1}, peak: {2}, connected: {3}, disconnected: {4}, rate: {5}/s",
                             elapsed,
                             summary.CurrentConnections,
                             summary.PeakConnections,
                             summary.TotalConnected - _lastSummary.TotalConnected,
                             summary.TotalDisconnected - _lastSummary.TotalDisconnected,
                             summary.CurrentConnections - _lastSummary.CurrentConnections
-                            );
+                        );
                     }
 
                     _lastSummary = summary;

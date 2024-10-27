@@ -17,7 +17,8 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
 
         public InExpressionValuesExpandingExpressionVisitor(
             ISqlExpressionFactory sqlExpressionFactory,
-            IReadOnlyDictionary<string, object> parametersValues)
+            IReadOnlyDictionary<string, object> parametersValues
+        )
         {
             _sqlExpressionFactory = sqlExpressionFactory;
             _parametersValues = parametersValues;
@@ -56,7 +57,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                         {
                             if (value is not (SqlConstantExpression or SqlParameterExpression))
                             {
-                                throw new InvalidOperationException(CosmosStrings.OnlyConstantsAndParametersAllowedInContains);
+                                throw new InvalidOperationException(
+                                    CosmosStrings.OnlyConstantsAndParametersAllowedInContains
+                                );
                             }
 
                             if (IsNull(value))
@@ -75,24 +78,29 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
                         throw new UnreachableException();
                 }
 
-                var updatedInExpression = inValues.Count > 0
-                    ? _sqlExpressionFactory.In((SqlExpression)Visit(inExpression.Item), inValues)
-                    : null;
+                var updatedInExpression =
+                    inValues.Count > 0
+                        ? _sqlExpressionFactory.In(
+                            (SqlExpression)Visit(inExpression.Item),
+                            inValues
+                        )
+                        : null;
 
                 var nullCheckExpression = hasNullValue
                     ? _sqlExpressionFactory.IsNull(inExpression.Item)
                     : null;
 
-                if (updatedInExpression != null
-                    && nullCheckExpression != null)
+                if (updatedInExpression != null && nullCheckExpression != null)
                 {
                     return _sqlExpressionFactory.OrElse(updatedInExpression, nullCheckExpression);
                 }
 
-                if (updatedInExpression == null
-                    && nullCheckExpression == null)
+                if (updatedInExpression == null && nullCheckExpression == null)
                 {
-                    return _sqlExpressionFactory.Equal(_sqlExpressionFactory.Constant(true), _sqlExpressionFactory.Constant(false));
+                    return _sqlExpressionFactory.Equal(
+                        _sqlExpressionFactory.Constant(true),
+                        _sqlExpressionFactory.Constant(false)
+                    );
                 }
 
                 return (SqlExpression)updatedInExpression ?? nullCheckExpression;
@@ -101,8 +109,9 @@ public partial class CosmosShapedQueryCompilingExpressionVisitor
             return base.Visit(expression);
         }
 
-        private bool IsNull(SqlExpression expression)
-            => expression is SqlConstantExpression { Value: null }
-                || expression is SqlParameterExpression { Name: string parameterName } && _parametersValues[parameterName] is null;
+        private bool IsNull(SqlExpression expression) =>
+            expression is SqlConstantExpression { Value: null }
+            || expression is SqlParameterExpression { Name: string parameterName }
+                && _parametersValues[parameterName] is null;
     }
 }

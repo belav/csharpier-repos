@@ -70,9 +70,7 @@ namespace System.Security.Cryptography.Tests
             }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override long Seek(long offset, SeekOrigin origin)
         {
@@ -89,10 +87,22 @@ namespace System.Security.Cryptography.Tests
             throw new NotSupportedException();
         }
 
-        public override bool CanRead { get { return _data != null; } }
-        public override bool CanSeek { get { return false; } }
-        public override bool CanWrite { get { return false; } }
-        public override long Length { get { throw new NotSupportedException(); } }
+        public override bool CanRead
+        {
+            get { return _data != null; }
+        }
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+        public override bool CanWrite
+        {
+            get { return false; }
+        }
+        public override long Length
+        {
+            get { throw new NotSupportedException(); }
+        }
 
         public override long Position
         {

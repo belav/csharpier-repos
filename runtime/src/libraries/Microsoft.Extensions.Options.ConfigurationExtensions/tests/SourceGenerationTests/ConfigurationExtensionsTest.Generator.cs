@@ -20,33 +20,19 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             OptionsBuilder<FakeOptions>? optionsBuilder = CreateOptionsBuilder();
 
             // Newline between instance and invocation using configureBinder argument (with the dot on the first line)
-            optionsBuilder.
-                Bind(s_emptyConfig, configureBinder: null);
+            optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
 
             // Newline between instance and invocation using configureBinder argument (with the dot on the second line)
-            optionsBuilder
-                .Bind(s_emptyConfig, configureBinder: null);
+            optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
 
             // Newline between instance and invocation (with the dot on the first line)
-            optionsBuilder.
-                Bind(s_emptyConfig);
+            optionsBuilder.Bind(s_emptyConfig);
 
             // Newline between instance and invocation (with the dot on the second line)
-            optionsBuilder
-                .Bind(s_emptyConfig);
+            optionsBuilder.Bind(s_emptyConfig);
 
             // Newlines in every place possible
-            optionsBuilder
-                .
-                Bind
-                (
-                    s_emptyConfig
-                    ,
-                    configureBinder
-                    :
-                    null
-                )
-                ;
+            optionsBuilder.Bind(s_emptyConfig, configureBinder: null);
         }
 
         [Fact]
@@ -55,36 +41,16 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             OptionsBuilder<FakeOptions>? optionsBuilder = CreateOptionsBuilder();
 
             // Newline between instance and invocation using configureBinder argument (with the dot on the first line)
-            optionsBuilder.
-                BindConfiguration(configSectionPath: "path",
-                _ => { });
+            optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
             // Newline between instance and invocation using configureBinder argument (with the dot on the second line)
-            optionsBuilder
-                .BindConfiguration(configSectionPath: "path",
-                _ => { });
+            optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
             // Newlines between the instance and invocation and within the arguments. No indentation before invocation.
-            optionsBuilder.
-            BindConfiguration(
-                configSectionPath: "path",
-                _ => { });
+            optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
 
             // Newlines in every place possible
-            optionsBuilder
-                .
-                BindConfiguration
-                (
-                    configSectionPath
-                    :
-                    "path"
-                    ,
-                    _
-                    =>
-                    {
-                    }
-                )
-                ;
+            optionsBuilder.BindConfiguration(configSectionPath: "path", _ => { });
         }
 
         [Fact]
@@ -94,25 +60,10 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             IServiceCollection services = new ServiceCollection();
 
             // Newlines between each method call
-            services
-                .Configure<FakeOptions>(s_emptyConfig)
-                .AddOptions<FakeOptions>();
+            services.Configure<FakeOptions>(s_emptyConfig).AddOptions<FakeOptions>();
 
             // Newlines in every place possible
-            services
-                .
-                Configure
-                <
-                    FakeOptions
-                >
-                (
-                    name
-                    :
-                    null!
-                    ,
-                    s_emptyConfig
-                )
-                ;
+            services.Configure<FakeOptions>(name: null!, s_emptyConfig);
         }
 
         [Fact]
@@ -122,39 +73,16 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             IServiceCollection services = new ServiceCollection();
 
             // Bind: Newlines in every place possible
-            OptionsBuilderConfigurationExtensions
-                .
-                Bind
-                (
-                    optionsBuilder
-                    ,
-                    s_emptyConfig
-                )
-                ;
+            OptionsBuilderConfigurationExtensions.Bind(optionsBuilder, s_emptyConfig);
 
             // // BindConfiguration: Newlines in every place possible
-            OptionsBuilderConfigurationExtensions
-                .
-                BindConfiguration
-                (
-                    optionsBuilder
-                    ,
-                    "path"
-                );
+            OptionsBuilderConfigurationExtensions.BindConfiguration(optionsBuilder, "path");
 
             // Configure: Newlines in every place possible
-            OptionsConfigurationServiceCollectionExtensions
-                .
-                Configure
-                <
-                    FakeOptions
-                >
-                (
-                    services
-                    ,
-                    s_emptyConfig
-                )
-                ;
+            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(
+                services,
+                s_emptyConfig
+            );
         }
 
         [Fact]
@@ -163,15 +91,42 @@ namespace Microsoft.Extensions.Options.ConfigurationExtensions.Tests
             OptionsBuilder<FakeOptions>? optionsBuilder = CreateOptionsBuilder();
             IServiceCollection services = new ServiceCollection();
 
-            OptionsBuilderConfigurationExtensions.Bind(config: s_emptyConfig, optionsBuilder: optionsBuilder);
-            OptionsBuilderConfigurationExtensions.Bind(configureBinder: _ => { }, config: s_emptyConfig, optionsBuilder: optionsBuilder);
+            OptionsBuilderConfigurationExtensions.Bind(
+                config: s_emptyConfig,
+                optionsBuilder: optionsBuilder
+            );
+            OptionsBuilderConfigurationExtensions.Bind(
+                configureBinder: _ => { },
+                config: s_emptyConfig,
+                optionsBuilder: optionsBuilder
+            );
 
-            OptionsBuilderConfigurationExtensions.BindConfiguration(configureBinder: _ => { }, configSectionPath: "path", optionsBuilder: optionsBuilder);
+            OptionsBuilderConfigurationExtensions.BindConfiguration(
+                configureBinder: _ => { },
+                configSectionPath: "path",
+                optionsBuilder: optionsBuilder
+            );
 
-            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(config: s_emptyConfig, services: services);
-            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(name: "", config: s_emptyConfig, services: services);
-            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(configureBinder: _ => { }, config: s_emptyConfig, services: services);
-            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(name: "", configureBinder: _ => { }, config: s_emptyConfig, services: services);
+            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(
+                config: s_emptyConfig,
+                services: services
+            );
+            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(
+                name: "",
+                config: s_emptyConfig,
+                services: services
+            );
+            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(
+                configureBinder: _ => { },
+                config: s_emptyConfig,
+                services: services
+            );
+            OptionsConfigurationServiceCollectionExtensions.Configure<FakeOptions>(
+                name: "",
+                configureBinder: _ => { },
+                config: s_emptyConfig,
+                services: services
+            );
         }
     }
 }

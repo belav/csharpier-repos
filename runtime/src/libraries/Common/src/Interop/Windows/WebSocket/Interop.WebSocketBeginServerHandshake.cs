@@ -17,6 +17,7 @@ internal static partial class Interop
             HttpHeader[] requestHeaders,
             uint requestHeaderCount,
             out IntPtr responseHeadersPtr,
-            out uint responseHeaderCount);
+            out uint responseHeaderCount
+        );
     }
 }

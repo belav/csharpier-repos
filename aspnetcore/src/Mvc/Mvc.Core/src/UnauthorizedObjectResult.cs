@@ -17,7 +17,8 @@ public class UnauthorizedObjectResult : ObjectResult
     /// <summary>
     /// Creates a new <see cref="UnauthorizedObjectResult"/> instance.
     /// </summary>
-    public UnauthorizedObjectResult([ActionResultObjectValue] object? value) : base(value)
+    public UnauthorizedObjectResult([ActionResultObjectValue] object? value)
+        : base(value)
     {
         StatusCode = DefaultStatusCode;
     }

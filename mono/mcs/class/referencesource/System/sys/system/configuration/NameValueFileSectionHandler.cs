@@ -4,11 +4,12 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System.Configuration.Internal;
     using System.IO;
-    using System.Xml;
     using System.Runtime.Versioning;
+    using System.Xml;
 
     /// <internalonly/>
     /// <devdoc>
@@ -16,16 +17,17 @@ namespace System.Configuration {
     /// This section handler allows &lt;appSettings file="user.config" /&gt;
     /// The file pointed to by the file= attribute is read as if it is
     /// an appSettings section in the config file.
-    /// Note: the user.config file must have its root element match the 
-    /// section referring to it.  So if appSettings has a file="user.config" 
+    /// Note: the user.config file must have its root element match the
+    /// section referring to it.  So if appSettings has a file="user.config"
     /// attribute the root element in user.config must also be named appSettings.
     /// </para>
     /// </devdoc>
-    public class NameValueFileSectionHandler : IConfigurationSectionHandler {
-
+    public class NameValueFileSectionHandler : IConfigurationSectionHandler
+    {
         [ResourceExposure(ResourceScope.None)]
         [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
-        public object Create(object parent, object configContext, XmlNode section) {
+        public object Create(object parent, object configContext, XmlNode section)
+        {
             object result = parent;
 
             // parse XML
@@ -33,11 +35,13 @@ namespace System.Configuration {
 
             result = NameValueSectionHandler.CreateStatic(result, section);
 
-            if (fileAttribute != null && fileAttribute.Value.Length != 0) {
+            if (fileAttribute != null && fileAttribute.Value.Length != 0)
+            {
                 string filename = null;
                 filename = fileAttribute.Value;
                 IConfigErrorInfo configXmlNode = fileAttribute as IConfigErrorInfo;
-                if (configXmlNode == null) {
+                if (configXmlNode == null)
+                {
                     return null;
                 }
 
@@ -45,22 +49,34 @@ namespace System.Configuration {
                 string directory = Path.GetDirectoryName(configFile);
                 string sourceFileFullPath = Path.Combine(directory, filename);
 
-                if (File.Exists(sourceFileFullPath)) {
-
+                if (File.Exists(sourceFileFullPath))
+                {
                     ConfigXmlDocument doc = new ConfigXmlDocument();
-                    try {
+                    try
+                    {
                         doc.Load(sourceFileFullPath);
                     }
-                    catch (XmlException e) {
-                        throw new ConfigurationErrorsException(e.Message, e, sourceFileFullPath, e.LineNumber);
+                    catch (XmlException e)
+                    {
+                        throw new ConfigurationErrorsException(
+                            e.Message,
+                            e,
+                            sourceFileFullPath,
+                            e.LineNumber
+                        );
                     }
 
-                    if (section.Name != doc.DocumentElement.Name) {
+                    if (section.Name != doc.DocumentElement.Name)
+                    {
                         throw new ConfigurationErrorsException(
-                                        SR.GetString(SR.Config_name_value_file_section_file_invalid_root, section.Name),
-                                        doc.DocumentElement);
+                            SR.GetString(
+                                SR.Config_name_value_file_section_file_invalid_root,
+                                section.Name
+                            ),
+                            doc.DocumentElement
+                        );
                     }
-                
+
                     result = NameValueSectionHandler.CreateStatic(result, doc.DocumentElement);
                 }
             }

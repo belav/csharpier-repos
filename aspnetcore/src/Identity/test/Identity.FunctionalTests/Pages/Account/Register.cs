@@ -36,12 +36,15 @@ public class Register : DefaultUIPage
 
     public async Task<Index> SubmitRegisterFormForValidUserAsync(string userName, string password)
     {
-        var registered = await Client.SendAsync(_registerForm, new Dictionary<string, string>()
-        {
-            ["Input_Email"] = userName,
-            ["Input_Password"] = password,
-            ["Input_ConfirmPassword"] = password
-        });
+        var registered = await Client.SendAsync(
+            _registerForm,
+            new Dictionary<string, string>()
+            {
+                ["Input_Email"] = userName,
+                ["Input_Password"] = password,
+                ["Input_ConfirmPassword"] = password,
+            }
+        );
 
         var registeredLocation = ResponseAssert.IsRedirect(registered);
         Assert.Equal(Index.Path, registeredLocation.ToString());
@@ -51,20 +54,34 @@ public class Register : DefaultUIPage
         return new Index(Client, index, Context.WithAuthenticatedUser());
     }
 
-    public async Task<RegisterConfirmation> SubmitRegisterFormWithConfirmation(string userName, string password, bool hasRealEmail = false)
+    public async Task<RegisterConfirmation> SubmitRegisterFormWithConfirmation(
+        string userName,
+        string password,
+        bool hasRealEmail = false
+    )
     {
-        var registered = await Client.SendAsync(_registerForm, new Dictionary<string, string>()
-        {
-            ["Input_Email"] = userName,
-            ["Input_Password"] = password,
-            ["Input_ConfirmPassword"] = password
-        });
+        var registered = await Client.SendAsync(
+            _registerForm,
+            new Dictionary<string, string>()
+            {
+                ["Input_Email"] = userName,
+                ["Input_Password"] = password,
+                ["Input_ConfirmPassword"] = password,
+            }
+        );
 
         var registeredLocation = ResponseAssert.IsRedirect(registered);
-        Assert.Equal(RegisterConfirmation.Path + "?email=" + userName + "&returnUrl=%2F", registeredLocation.ToString());
+        Assert.Equal(
+            RegisterConfirmation.Path + "?email=" + userName + "&returnUrl=%2F",
+            registeredLocation.ToString()
+        );
         var registerResponse = await Client.GetAsync(registeredLocation);
         var register = await ResponseAssert.IsHtmlDocumentAsync(registerResponse);
 
-        return new RegisterConfirmation(Client, register, hasRealEmail ? Context.WithRealEmailSender() : Context);
+        return new RegisterConfirmation(
+            Client,
+            register,
+            hasRealEmail ? Context.WithRealEmailSender() : Context
+        );
     }
 }

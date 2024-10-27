@@ -22,9 +22,8 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
 
-using System.Data.Common;
 using System.Collections;
-
+using System.Data.Common;
 using Xunit;
 
 namespace System.Data.Tests
@@ -73,21 +72,21 @@ namespace System.Data.Tests
         public void RowInAccessibleTest()
         {
             Assert.Throws<InvalidOperationException>(() =>
-           {
-               DataTableReader reader = new DataTableReader(_dt);
-               try
-               {
-                   reader.Read();
-                   reader.Read(); // 2nd row
-                   _dt.Rows[1].Delete();
-                   string value = reader[1].ToString();
-               }
-               finally
-               {
-                   if (reader != null && !reader.IsClosed)
-                       reader.Close();
-               }
-           });
+            {
+                DataTableReader reader = new DataTableReader(_dt);
+                try
+                {
+                    reader.Read();
+                    reader.Read(); // 2nd row
+                    _dt.Rows[1].Delete();
+                    string value = reader[1].ToString();
+                }
+                finally
+                {
+                    if (reader != null && !reader.IsClosed)
+                        reader.Close();
+                }
+            });
         }
 
         [Fact]
@@ -144,13 +143,19 @@ namespace System.Data.Tests
                 DataTable schema = reader.GetSchemaTable();
 
                 Assert.Equal(_dt.Columns.Count, schema.Rows.Count);
-                Assert.Equal(_dt.Columns[1].DataType.ToString(), schema.Rows[1]["DataType"].ToString());
+                Assert.Equal(
+                    _dt.Columns[1].DataType.ToString(),
+                    schema.Rows[1]["DataType"].ToString()
+                );
 
                 reader.NextResult(); //schema should change here
                 schema = reader.GetSchemaTable();
 
                 Assert.Equal(another.Columns.Count, schema.Rows.Count);
-                Assert.Equal(another.Columns[0].DataType.ToString(), schema.Rows[0]["DataType"].ToString());
+                Assert.Equal(
+                    another.Columns[0].DataType.ToString(),
+                    schema.Rows[0]["DataType"].ToString()
+                );
             }
             finally
             {
@@ -275,19 +280,22 @@ namespace System.Data.Tests
         [Fact]
         public void NoTablesTest()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                DataTableReader reader = new DataTableReader(new DataTable[] { });
-                try
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
                 {
-                    reader.Read();
+                    DataTableReader reader = new DataTableReader(new DataTable[] { });
+                    try
+                    {
+                        reader.Read();
+                    }
+                    finally
+                    {
+                        if (reader != null && !reader.IsClosed)
+                            reader.Close();
+                    }
                 }
-                finally
-                {
-                    if (reader != null && !reader.IsClosed)
-                        reader.Close();
-                }
-            });
+            );
         }
 
         [Fact]
@@ -524,7 +532,7 @@ namespace System.Data.Tests
                 reader.Read(); // first row
                 reader.Read(); // second row
                 _dt.Clear();
-                
+
                 Assert.Throws<RowNotInTableException>(() => (int)reader[0]);
 
                 // clear and add test
@@ -633,8 +641,12 @@ namespace System.Data.Tests
             testTable.Columns.Add("col_expression_local", typeof(int));
             testTable.Columns["col_expression_local"].Expression = "col_int*5";
 
-            ds.Relations.Add("rel", new DataColumn[] { testTable1.Columns["col1"] },
-                    new DataColumn[] { testTable.Columns["col_int"] }, false);
+            ds.Relations.Add(
+                "rel",
+                new DataColumn[] { testTable1.Columns["col1"] },
+                new DataColumn[] { testTable.Columns["col_int"] },
+                false
+            );
             testTable.Columns.Add("col_expression_ext");
             testTable.Columns["col_expression_ext"].Expression = "parent.col2";
 
@@ -655,7 +667,10 @@ namespace System.Data.Tests
                 Assert.Equal(testTable.TableName, schemaTable.Rows[i]["BaseTableName"]);
                 Assert.Equal(ds.DataSetName, schemaTable.Rows[i]["BaseCatalogName"]);
                 Assert.Equal(DBNull.Value, schemaTable.Rows[i]["BaseSchemaName"]);
-                Assert.Equal(schemaTable.Rows[i]["BaseColumnName"], schemaTable.Rows[i]["ColumnName"]);
+                Assert.Equal(
+                    schemaTable.Rows[i]["BaseColumnName"],
+                    schemaTable.Rows[i]["ColumnName"]
+                );
                 Assert.False((bool)schemaTable.Rows[i]["IsRowVersion"]);
             }
 

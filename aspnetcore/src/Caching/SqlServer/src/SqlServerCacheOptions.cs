@@ -45,9 +45,6 @@ public class SqlServerCacheOptions : IOptions<SqlServerCacheOptions>
 
     SqlServerCacheOptions IOptions<SqlServerCacheOptions>.Value
     {
-        get
-        {
-            return this;
-        }
+        get { return this; }
     }
 }

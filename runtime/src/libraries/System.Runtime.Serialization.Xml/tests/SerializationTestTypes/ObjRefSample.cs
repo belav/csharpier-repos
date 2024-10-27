@@ -11,7 +11,9 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public string Data;
+
         public SimpleDC() { }
+
         public SimpleDC(bool init)
         {
             Data = "This is a string";
@@ -28,6 +30,7 @@ namespace SerializationTestTypes
         public string RefData;
 
         public SimpleDCWithSimpleDMRef() { }
+
         public SimpleDCWithSimpleDMRef(bool init)
         {
             Data = "This is a string";
@@ -45,6 +48,7 @@ namespace SerializationTestTypes
         public SimpleDC RefData;
 
         public SimpleDCWithRef() { }
+
         public SimpleDCWithRef(bool init)
         {
             Data = new SimpleDC(true);
@@ -62,6 +66,7 @@ namespace SerializationTestTypes
         public SimpleDCWithRef RefData;
 
         public ContainsSimpleDCWithRef() { }
+
         public ContainsSimpleDCWithRef(bool init)
         {
             Data = new SimpleDCWithRef(true);
@@ -86,7 +91,9 @@ namespace SerializationTestTypes
     {
         [DataMember(IsRequired = false)]
         public string Data;
+
         public SimpleDCWithIsRequiredFalse() { }
+
         public SimpleDCWithIsRequiredFalse(bool init)
         {
             Data = "This is a string";
@@ -101,6 +108,7 @@ namespace SerializationTestTypes
 
         [DataMember]
         public SimpleStructDC RefData;
+
         public SimpleStructDCWithRef(bool init)
         {
             Data = new SimpleStructDC(true);
@@ -127,6 +135,7 @@ namespace SerializationTestTypes
         public SimpleStructDCWithRef Data5;
 
         public Mixed1() { }
+
         public Mixed1(bool init)
         {
             Data1 = new SimpleDC(true);
@@ -137,7 +146,11 @@ namespace SerializationTestTypes
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersioned", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersioned",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersioned1 : IExtensibleDataObject
     {
         [DataMember]
@@ -145,7 +158,9 @@ namespace SerializationTestTypes
 
         [DataMember]
         public SimpleDC RefData;
+
         public DCVersioned1() { }
+
         public DCVersioned1(bool init)
         {
             this.Data = new SimpleDC(true);
@@ -156,24 +171,23 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersioned2", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersioned2",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersioned2 : IExtensibleDataObject
     {
         [DataMember]
         public SimpleDC Data;
 
         public DCVersioned2() { }
+
         public DCVersioned2(bool init)
         {
             this.Data = new SimpleDC(true);
@@ -183,24 +197,23 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainer", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainer",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainer1 : IExtensibleDataObject
     {
         [DataMember]
         public DCVersioned1 DataVersion1;
 
         public DCVersionedContainer1() { }
+
         public DCVersionedContainer1(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -210,18 +223,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV1", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV1",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainerVersion1 : IExtensibleDataObject
     {
         [DataMember]
@@ -236,8 +247,8 @@ namespace SerializationTestTypes
         [DataMember]
         public DCVersioned2 RefDataVersion2;
 
-
         public DCVersionedContainerVersion1() { }
+
         public DCVersionedContainerVersion1(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -251,18 +262,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV2", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV2",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     public class DCVersionedContainerVersion2 : IExtensibleDataObject
     {
         [DataMember]
@@ -272,6 +281,7 @@ namespace SerializationTestTypes
         public DCVersioned2 DataVersion2;
 
         public DCVersionedContainerVersion2() { }
+
         public DCVersionedContainerVersion2(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -282,18 +292,16 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
-    [DataContract(IsReference = true, Name = "DCVersionedContainerV3", Namespace = "SerializationTestTypes.ExtensionData")]
+    [DataContract(
+        IsReference = true,
+        Name = "DCVersionedContainerV3",
+        Namespace = "SerializationTestTypes.ExtensionData"
+    )]
     [KnownType(typeof(DCVersioned1))]
     public class DCVersionedContainerVersion3 : IExtensibleDataObject
     {
@@ -309,6 +317,7 @@ namespace SerializationTestTypes
         public DCVersioned2 NewDataVersion2;
 
         public DCVersionedContainerVersion3() { }
+
         public DCVersionedContainerVersion3(bool init)
         {
             this.DataVersion1 = new DCVersioned1(true);
@@ -320,14 +329,8 @@ namespace SerializationTestTypes
 
         public ExtensionDataObject ExtensionData
         {
-            get
-            {
-                return _extensionData;
-            }
-            set
-            {
-                _extensionData = value;
-            }
+            get { return _extensionData; }
+            set { _extensionData = value; }
         }
     }
 
@@ -361,7 +364,5 @@ namespace SerializationTestTypes
         }
     }
 
-    public class IgnoreMemberAttribute : Attribute
-    {
-    }
+    public class IgnoreMemberAttribute : Attribute { }
 }

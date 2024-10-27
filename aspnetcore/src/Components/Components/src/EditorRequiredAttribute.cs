@@ -11,6 +11,4 @@ namespace Microsoft.AspNetCore.Components;
 /// </para>
 /// </summary>
 [AttributeUsage(AttributeTargets.Property, AllowMultiple = false)]
-public sealed class EditorRequiredAttribute : Attribute
-{
-}
+public sealed class EditorRequiredAttribute : Attribute { }

@@ -3,17 +3,17 @@
 // -----------------------------------------------------------------------
 using System;
 using System.Reflection;
-using Microsoft.Internal;
 using System.Threading;
+using Microsoft.Internal;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
-    // Instead of representing properties as an actual PropertyInfo, we need to 
-    // represent them as two MethodInfo objects one for each accessor. This is so 
-    // that cached attribute part can go from a metadata token -> XXXInfo without 
-    // needing to walk all members of a particular type. Unfortunately, (probably 
-    // because you never see one of them in an IL stream), Reflection does not allow 
-    // you to go from a metadata token -> PropertyInfo like it does with types, 
+    // Instead of representing properties as an actual PropertyInfo, we need to
+    // represent them as two MethodInfo objects one for each accessor. This is so
+    // that cached attribute part can go from a metadata token -> XXXInfo without
+    // needing to walk all members of a particular type. Unfortunately, (probably
+    // because you never see one of them in an IL stream), Reflection does not allow
+    // you to go from a metadata token -> PropertyInfo like it does with types,
     // fields, and methods.
 
     internal class ReflectionProperty : ReflectionWritableMember
@@ -119,6 +119,5 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             this.UnderlyingSetMethod.SafeInvoke(instance, value);
         }
-
     }
 }

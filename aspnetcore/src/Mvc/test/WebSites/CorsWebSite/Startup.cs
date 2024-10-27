@@ -17,54 +17,58 @@ public class Startup
                 "AllowAnySimpleRequest",
                 builder =>
                 {
-                    builder.AllowAnyOrigin()
-                           .WithMethods("GET", "POST", "HEAD");
-                });
+                    builder.AllowAnyOrigin().WithMethods("GET", "POST", "HEAD");
+                }
+            );
 
             options.AddPolicy(
                 "AllowSpecificOrigin",
                 builder =>
                 {
                     builder.WithOrigins("http://example.com");
-                });
+                }
+            );
 
             options.AddPolicy(
                 "WithCredentials",
                 builder =>
                 {
-                    builder.AllowCredentials()
-                           .WithOrigins("http://example.com");
-                });
+                    builder.AllowCredentials().WithOrigins("http://example.com");
+                }
+            );
 
             options.AddPolicy(
                 "WithCredentialsAndOtherSettings",
                 builder =>
                 {
-                    builder.AllowCredentials()
-                           .WithOrigins("http://example.com")
-                           .AllowAnyHeader()
-                           .WithMethods("PUT", "POST")
-                           .WithExposedHeaders("exposed1", "exposed2");
-                });
+                    builder
+                        .AllowCredentials()
+                        .WithOrigins("http://example.com")
+                        .AllowAnyHeader()
+                        .WithMethods("PUT", "POST")
+                        .WithExposedHeaders("exposed1", "exposed2");
+                }
+            );
 
             options.AddPolicy(
                 "AllowAll",
                 builder =>
                 {
-                    builder.AllowAnyMethod()
-                           .AllowAnyHeader()
-                           .AllowAnyOrigin();
-                });
+                    builder.AllowAnyMethod().AllowAnyHeader().AllowAnyOrigin();
+                }
+            );
 
             options.AddPolicy(
                 "Allow example.com",
                 builder =>
                 {
-                    builder.AllowCredentials()
-                           .AllowAnyMethod()
-                           .AllowAnyHeader()
-                           .WithOrigins("http://example.com");
-                });
+                    builder
+                        .AllowCredentials()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader()
+                        .WithOrigins("http://example.com");
+                }
+            );
         });
     }
 
@@ -78,7 +82,5 @@ public class Startup
         });
     }
 
-    protected virtual void ConfigureMvcOptions(MvcOptions options)
-    {
-    }
+    protected virtual void ConfigureMvcOptions(MvcOptions options) { }
 }

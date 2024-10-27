@@ -29,48 +29,42 @@
 using System;
 using System.Collections.Generic;
 
-namespace Microsoft.Build.Framework {
-	[Serializable]
-	public class BuildStartedEventArgs : BuildStatusEventArgs {
+namespace Microsoft.Build.Framework
+{
+    [Serializable]
+    public class BuildStartedEventArgs : BuildStatusEventArgs
+    {
+        IDictionary<string, string> buildEnvironment;
 
-		IDictionary<string, string> buildEnvironment;
-	
-		protected BuildStartedEventArgs ()
-		{
-		}
+        protected BuildStartedEventArgs() { }
 
-		public BuildStartedEventArgs (string message,
-					      string helpKeyword)
-			: base (message, helpKeyword, null)
-		{
-		}
+        public BuildStartedEventArgs(string message, string helpKeyword)
+            : base(message, helpKeyword, null) { }
 
-		public BuildStartedEventArgs (string message,
-					      string helpKeyword,
-					      IDictionary<string, string> environmentOfBuild)
-			: base (message, helpKeyword, null)
-		{
-			buildEnvironment = environmentOfBuild;
-		}
+        public BuildStartedEventArgs(
+            string message,
+            string helpKeyword,
+            IDictionary<string, string> environmentOfBuild
+        )
+            : base(message, helpKeyword, null)
+        {
+            buildEnvironment = environmentOfBuild;
+        }
 
-		public BuildStartedEventArgs (string message,
-					      string helpKeyword,
-					      DateTime eventTimestamp)
-			: base (message, helpKeyword, null, eventTimestamp)
-		{
-		}
+        public BuildStartedEventArgs(string message, string helpKeyword, DateTime eventTimestamp)
+            : base(message, helpKeyword, null, eventTimestamp) { }
 
-		public BuildStartedEventArgs (string message,
-					      string helpKeyword,
-					      DateTime eventTimestamp,
-					      params object [] messageArgs)
-			: base (message, helpKeyword, null, eventTimestamp, messageArgs)
-		{
-		}
+        public BuildStartedEventArgs(
+            string message,
+            string helpKeyword,
+            DateTime eventTimestamp,
+            params object[] messageArgs
+        )
+            : base(message, helpKeyword, null, eventTimestamp, messageArgs) { }
 
-		public IDictionary<string, string> BuildEnvironment {
-			get { return buildEnvironment; }
-		}
-	}
+        public IDictionary<string, string> BuildEnvironment
+        {
+            get { return buildEnvironment; }
+        }
+    }
 }
-

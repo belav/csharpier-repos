@@ -20,7 +20,9 @@ namespace System.Numerics.Tests
             VerifyPowString(BigInteger.One.ToString() + " " + BigInteger.Zero.ToString() + " bPow");
 
             // Pow Method - 0^(0)
-            VerifyPowString(BigInteger.Zero.ToString() + " " + BigInteger.Zero.ToString() + " bPow");
+            VerifyPowString(
+                BigInteger.Zero.ToString() + " " + BigInteger.Zero.ToString() + " bPow"
+            );
 
             // Pow Method - Two Small BigIntegers
             for (int i = 0; i < s_samples; i++)
@@ -63,13 +65,22 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X^1 = X
-            VerifyIdentityString(BigInteger.One + " " + int.MaxValue + " bPow", Int32.MaxValue.ToString());
-            VerifyIdentityString(BigInteger.One + " " + long.MaxValue + " bPow", Int64.MaxValue.ToString());
+            VerifyIdentityString(
+                BigInteger.One + " " + int.MaxValue + " bPow",
+                Int32.MaxValue.ToString()
+            );
+            VerifyIdentityString(
+                BigInteger.One + " " + long.MaxValue + " bPow",
+                Int64.MaxValue.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(BigInteger.One + " " + randBigInt + "bPow", randBigInt.Substring(0, randBigInt.Length - 1));
+                VerifyIdentityString(
+                    BigInteger.One + " " + randBigInt + "bPow",
+                    randBigInt.Substring(0, randBigInt.Length - 1)
+                );
             }
         }
 
@@ -80,13 +91,22 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: X^0 = 1
-            VerifyIdentityString(BigInteger.Zero + " " + int.MaxValue + " bPow", BigInteger.One.ToString());
-            VerifyIdentityString(BigInteger.Zero + " " + long.MaxValue + " bPow", BigInteger.One.ToString());
+            VerifyIdentityString(
+                BigInteger.Zero + " " + int.MaxValue + " bPow",
+                BigInteger.One.ToString()
+            );
+            VerifyIdentityString(
+                BigInteger.Zero + " " + long.MaxValue + " bPow",
+                BigInteger.One.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomByteArray(s_random));
-                VerifyIdentityString(BigInteger.Zero + " " + randBigInt + "bPow", BigInteger.One.ToString());
+                VerifyIdentityString(
+                    BigInteger.Zero + " " + randBigInt + "bPow",
+                    BigInteger.One.ToString()
+                );
             }
         }
 
@@ -97,12 +117,18 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: 0^X = 0
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.Zero + " bPow", BigInteger.Zero.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.Zero + " bPow",
+                BigInteger.Zero.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomPosByteArray(s_random, 4));
-                VerifyIdentityString(randBigInt + BigInteger.Zero + " bPow", BigInteger.Zero.ToString());
+                VerifyIdentityString(
+                    randBigInt + BigInteger.Zero + " bPow",
+                    BigInteger.Zero.ToString()
+                );
             }
         }
 
@@ -113,12 +139,18 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Axiom: 1^X = 1
-            VerifyIdentityString(int.MaxValue + " " + BigInteger.One + " bPow", BigInteger.One.ToString());
+            VerifyIdentityString(
+                int.MaxValue + " " + BigInteger.One + " bPow",
+                BigInteger.One.ToString()
+            );
 
             for (int i = 0; i < s_samples; i++)
             {
                 string randBigInt = Print(GetRandomPosByteArray(s_random, 4));
-                VerifyIdentityString(randBigInt + BigInteger.One + " bPow", BigInteger.One.ToString());
+                VerifyIdentityString(
+                    randBigInt + BigInteger.One + " bPow",
+                    BigInteger.One.ToString()
+                );
             }
         }
 
@@ -146,13 +178,17 @@ namespace System.Numerics.Tests
             // Pow Method - 1^(-1)
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                VerifyPowString(BigInteger.MinusOne.ToString() + " " + BigInteger.One.ToString() + " bPow");
+                VerifyPowString(
+                    BigInteger.MinusOne.ToString() + " " + BigInteger.One.ToString() + " bPow"
+                );
             });
 
             // Pow Method - 0^(-1)
             Assert.Throws<ArgumentOutOfRangeException>(() =>
             {
-                VerifyPowString(BigInteger.MinusOne.ToString() + " " + BigInteger.Zero.ToString() + " bPow");
+                VerifyPowString(
+                    BigInteger.MinusOne.ToString() + " " + BigInteger.Zero.ToString() + " bPow"
+                );
             });
 
             // Pow Method - Negative Exponent
@@ -173,8 +209,9 @@ namespace System.Numerics.Tests
             var bytes = new byte[1000];
             bytes[bytes.Length - 1] = 1;
 
-            Assert.Throws<OverflowException>(() =>
-                BigInteger.Pow(new BigInteger(bytes), int.MaxValue));
+            Assert.Throws<OverflowException>(
+                () => BigInteger.Pow(new BigInteger(bytes), int.MaxValue)
+            );
         }
 
         private static void VerifyPowString(string opstring)

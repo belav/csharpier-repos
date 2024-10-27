@@ -14,26 +14,16 @@ namespace System.IdentityModel.Selectors
     [Serializable]
     internal class UIInitializationException : Exception
     {
-
         public UIInitializationException()
-        : base()
-        {
-        }
+            : base() { }
 
-        public UIInitializationException( string message )
-        : base( message )
-        {
-        }
+        public UIInitializationException(string message)
+            : base(message) { }
 
-        public UIInitializationException( string message, Exception innerException )
-        : base( message, innerException )
-        {
-        }
+        public UIInitializationException(string message, Exception innerException)
+            : base(message, innerException) { }
 
-        protected UIInitializationException( SerializationInfo info, StreamingContext context )
-        : base( info, context )
-        {
-        }
-        
+        protected UIInitializationException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

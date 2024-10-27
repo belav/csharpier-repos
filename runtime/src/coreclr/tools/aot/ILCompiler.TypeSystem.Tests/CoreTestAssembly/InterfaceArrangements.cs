@@ -9,7 +9,7 @@ namespace InterfaceArrangements
     interface I1 { }
 
     interface I2 : I1 { }
-    
+
     interface IGen1<T> { }
 
     class NoInterfaces { }
@@ -18,7 +18,7 @@ namespace InterfaceArrangements
 
     class Base<T> : IGen1<T>, I1 { }
 
-    class Mid<U,V> : Base<U>, IGen1<V> { }
+    class Mid<U, V> : Base<U>, IGen1<V> { }
 
     class DerivedFromMid : Mid<string, string>, IGen1<string> { }
 

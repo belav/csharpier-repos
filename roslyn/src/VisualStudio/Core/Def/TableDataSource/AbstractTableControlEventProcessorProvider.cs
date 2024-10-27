@@ -8,21 +8,26 @@ using Microsoft.VisualStudio.Shell.TableControl;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
 {
-    internal abstract class AbstractTableControlEventProcessorProvider<TItem> : ITableControlEventProcessorProvider
+    internal abstract class AbstractTableControlEventProcessorProvider<TItem>
+        : ITableControlEventProcessorProvider
         where TItem : TableItem
     {
-        public ITableControlEventProcessor GetAssociatedEventProcessor(IWpfTableControl tableControl)
-            => CreateEventProcessor();
+        public ITableControlEventProcessor GetAssociatedEventProcessor(
+            IWpfTableControl tableControl
+        ) => CreateEventProcessor();
 
-        protected virtual EventProcessor CreateEventProcessor()
-            => new();
+        protected virtual EventProcessor CreateEventProcessor() => new();
 
         protected class EventProcessor : TableControlEventProcessorBase
         {
-            protected static AbstractTableEntriesSnapshot<TItem>? GetEntriesSnapshot(ITableEntryHandle entryHandle)
-                => GetEntriesSnapshot(entryHandle, out _);
+            protected static AbstractTableEntriesSnapshot<TItem>? GetEntriesSnapshot(
+                ITableEntryHandle entryHandle
+            ) => GetEntriesSnapshot(entryHandle, out _);
 
-            protected static AbstractTableEntriesSnapshot<TItem>? GetEntriesSnapshot(ITableEntryHandle entryHandle, out int index)
+            protected static AbstractTableEntriesSnapshot<TItem>? GetEntriesSnapshot(
+                ITableEntryHandle entryHandle,
+                out int index
+            )
             {
                 if (!entryHandle.TryGetSnapshot(out var snapshot, out index))
                 {
@@ -32,7 +37,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 return snapshot as AbstractTableEntriesSnapshot<TItem>;
             }
 
-            public override void PreprocessNavigate(ITableEntryHandle entryHandle, TableEntryNavigateEventArgs e)
+            public override void PreprocessNavigate(
+                ITableEntryHandle entryHandle,
+                TableEntryNavigateEventArgs e
+            )
             {
                 var roslynSnapshot = GetEntriesSnapshot(entryHandle, out var index);
                 if (roslynSnapshot == null)
@@ -47,7 +55,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
                 // to point to some random file in error or more.
 
                 // TODO: Use a threaded-wait-dialog here so we can cancel navigation.
-                var options = new NavigationOptions(PreferProvisionalTab: e.IsPreview, ActivateTab: e.ShouldActivate);
+                var options = new NavigationOptions(
+                    PreferProvisionalTab: e.IsPreview,
+                    ActivateTab: e.ShouldActivate
+                );
                 e.Handled = roslynSnapshot.TryNavigateTo(index, options, CancellationToken.None);
             }
         }

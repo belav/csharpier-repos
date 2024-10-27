@@ -16,7 +16,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new ComplexModelDto(null, Enumerable.Empty<ModelMetadata>()),
-                "modelMetadata");
+                "modelMetadata"
+            );
         }
 
         [Fact]
@@ -28,7 +29,8 @@ namespace System.Web.Http.ModelBinding.Binders
             // Act & assert
             Assert.ThrowsArgumentNull(
                 () => new ComplexModelDto(modelMetadata, null),
-                "propertyMetadata");
+                "propertyMetadata"
+            );
         }
 
         [Fact]
@@ -49,7 +51,13 @@ namespace System.Web.Http.ModelBinding.Binders
 
         private static ModelMetadata GetModelMetadata()
         {
-            return new ModelMetadata(new EmptyModelMetadataProvider(), typeof(object), null, typeof(object), "PropertyName");
+            return new ModelMetadata(
+                new EmptyModelMetadataProvider(),
+                typeof(object),
+                null,
+                typeof(object),
+                "PropertyName"
+            );
         }
     }
 }

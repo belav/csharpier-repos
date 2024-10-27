@@ -33,7 +33,8 @@ public class IdentityConstants
     /// <summary>
     /// The scheme used to identify Two Factor authentication cookies for saving the Remember Me state.
     /// </summary>
-    public static readonly string TwoFactorRememberMeScheme = IdentityPrefix + ".TwoFactorRememberMe";
+    public static readonly string TwoFactorRememberMeScheme =
+        IdentityPrefix + ".TwoFactorRememberMe";
 
     /// <summary>
     /// The scheme used to identify Two Factor authentication cookies for round tripping user identities.

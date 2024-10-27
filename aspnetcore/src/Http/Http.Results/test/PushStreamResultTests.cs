@@ -12,11 +12,14 @@ public class PushStreamResultTests
     [Fact]
     public async Task PushStreamResultsExposeTheResponseBody()
     {
-        var result = new PushStreamHttpResult(body => body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask(), contentType: null);
+        var result = new PushStreamHttpResult(
+            body => body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask(),
+            contentType: null
+        );
 
         var httpContext = new DefaultHttpContext
         {
-            RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider()
+            RequestServices = new ServiceCollection().AddLogging().BuildServiceProvider(),
         };
         var ms = new MemoryStream();
         httpContext.Response.Body = ms;
@@ -34,7 +37,8 @@ public class PushStreamResultTests
         var stream = Stream.Null;
         var contentType = "text/plain; charset=us-ascii; p1=p1-value";
         var expectedMediaType = contentType;
-        var callback = (Stream body) => body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask();
+        var callback = (Stream body) =>
+            body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask();
 
         // Act
         var result = new PushStreamHttpResult(callback, contentType);
@@ -52,7 +56,8 @@ public class PushStreamResultTests
         var expectedMediaType = contentType;
         var lastModified = new DateTimeOffset();
         var entityTag = new EntityTagHeaderValue("\"Etag\"");
-        var callback = (Stream body) => body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask();
+        var callback = (Stream body) =>
+            body.WriteAsync(Encoding.UTF8.GetBytes("Hello World").AsMemory()).AsTask();
 
         // Act
         var result = new PushStreamHttpResult(callback, contentType)
@@ -75,7 +80,10 @@ public class PushStreamResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
@@ -86,7 +94,12 @@ public class PushStreamResultTests
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IFileHttpResult>(new PushStreamHttpResult(s => Task.CompletedTask, contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IFileHttpResult>(
+            new PushStreamHttpResult(s => Task.CompletedTask, contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
         Assert.Equal(downloadName, result.FileDownloadName);
     }
@@ -99,7 +112,12 @@ public class PushStreamResultTests
         var downloadName = "sample.zip";
 
         // Act & Assert
-        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(new PushStreamHttpResult(s => Task.CompletedTask, contentType) { FileDownloadName = downloadName });
+        var result = Assert.IsAssignableFrom<IContentTypeHttpResult>(
+            new PushStreamHttpResult(s => Task.CompletedTask, contentType)
+            {
+                FileDownloadName = downloadName,
+            }
+        );
         Assert.Equal(contentType, result.ContentType);
     }
 }

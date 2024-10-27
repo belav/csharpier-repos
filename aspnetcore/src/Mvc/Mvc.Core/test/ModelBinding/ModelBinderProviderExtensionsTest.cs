@@ -10,11 +10,11 @@ public class ModelBinderProviderExtensionsTest
     {
         // Arrange
         var list = new List<IModelBinderProvider>
-            {
-                new FooModelBinderProvider(),
-                new BarModelBinderProvider(),
-                new FooModelBinderProvider()
-            };
+        {
+            new FooModelBinderProvider(),
+            new BarModelBinderProvider(),
+            new FooModelBinderProvider(),
+        };
 
         // Act
         list.RemoveType(typeof(FooModelBinderProvider));
@@ -29,11 +29,11 @@ public class ModelBinderProviderExtensionsTest
     {
         // Arrange
         var list = new List<IModelBinderProvider>
-            {
-                new FooModelBinderProvider(),
-                new BarModelBinderProvider(),
-                new FooModelBinderProvider()
-            };
+        {
+            new FooModelBinderProvider(),
+            new BarModelBinderProvider(),
+            new FooModelBinderProvider(),
+        };
 
         // Act
         list.RemoveType<FooModelBinderProvider>();

@@ -14,19 +14,16 @@ internal sealed class DefaultDistributedSessionStore : IDistributedSessionStore
 
     public ICollection<EncodedKey> Keys => _store.Keys;
 
-    public bool TryGetValue(EncodedKey key, [MaybeNullWhen(false)] out byte[] value)
-        => _store.TryGetValue(key, out value);
+    public bool TryGetValue(EncodedKey key, [MaybeNullWhen(false)] out byte[] value) =>
+        _store.TryGetValue(key, out value);
 
     public void SetValue(EncodedKey key, byte[] value) => _store[key] = value;
 
-    public bool Remove(EncodedKey encodedKey)
-        => _store.Remove(encodedKey);
+    public bool Remove(EncodedKey encodedKey) => _store.Remove(encodedKey);
 
-    public void Clear()
-        => _store.Clear();
+    public void Clear() => _store.Clear();
 
-    public IEnumerator<KeyValuePair<EncodedKey, byte[]>> GetEnumerator()
-        => _store.GetEnumerator();
+    public IEnumerator<KeyValuePair<EncodedKey, byte[]>> GetEnumerator() => _store.GetEnumerator();
 
     IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 }

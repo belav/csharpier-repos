@@ -15,14 +15,17 @@ namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 /// calling <see cref="MvcCoreMvcBuilderExtensions.SetCompatibilityVersion(IMvcBuilder, CompatibilityVersion)"/>
 /// or <see cref="MvcCoreMvcCoreBuilderExtensions.SetCompatibilityVersion(IMvcCoreBuilder, CompatibilityVersion)"/>.
 /// </remarks>
-[Obsolete("This API is obsolete and will be removed in a future version. Consider removing usages.",
+[Obsolete(
+    "This API is obsolete and will be removed in a future version. Consider removing usages.",
     DiagnosticId = "ASP5001",
-    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}")]
+    UrlFormat = "https://aka.ms/aspnetcore-warnings/{0}"
+)]
 public class MvcCompatibilityOptions
 {
     /// <summary>
     /// Gets or sets the application's configured <see cref="Mvc.CompatibilityVersion"/>.
     /// </summary>
     /// <value>the default value is <see cref="CompatibilityVersion.Version_3_0"/>.</value>
-    public CompatibilityVersion CompatibilityVersion { get; set; } = CompatibilityVersion.Version_3_0;
+    public CompatibilityVersion CompatibilityVersion { get; set; } =
+        CompatibilityVersion.Version_3_0;
 }

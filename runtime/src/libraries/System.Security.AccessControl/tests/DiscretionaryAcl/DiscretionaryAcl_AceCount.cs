@@ -35,8 +35,14 @@ namespace System.Security.AccessControl.Tests
             revision = 0;
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = false;
             isDS = false;
@@ -48,17 +54,32 @@ namespace System.Security.AccessControl.Tests
             capacity = 1;
             rawAcl = new RawAcl(revision, capacity);
             //223 has all AceFlags
-            gAce = new CommonAce((AceFlags)223, AceQualifier.AccessAllowed, 1,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")), false, null);
+            gAce = new CommonAce(
+                (AceFlags)223,
+                AceQualifier.AccessAllowed,
+                1,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BG")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
-            gAce = new CommonAce(AceFlags.None, AceQualifier.AccessDenied, 2,
-                new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")), false, null);
+            gAce = new CommonAce(
+                AceFlags.None,
+                AceQualifier.AccessDenied,
+                2,
+                new SecurityIdentifier(
+                    Utils.TranslateStringConstFormatSidToStandardFormatSid("BA")
+                ),
+                false,
+                null
+            );
             rawAcl.InsertAce(0, gAce);
             isContainer = true;
             isDS = false;
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             Assert.True(2 == discretionaryAcl.Count);
-
         }
 
         [Fact]
@@ -76,19 +97,28 @@ namespace System.Security.AccessControl.Tests
             //case 1, DiscretionaryAcl with huge number of Aces
             revision = 0;
             capacity = 1;
-            sid = new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)).ToString();
+            sid = new SecurityIdentifier(
+                Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+            ).ToString();
             rawAcl = new RawAcl(revision, capacity);
             for (int i = 0; i < 1820; i++)
             {
-                gAce = new CommonAce(AceFlags.None, AceQualifier.AccessAllowed, i + 1,
-                    new SecurityIdentifier(Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + i.ToString())), false, null);
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    i + 1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid + i.ToString())
+                    ),
+                    false,
+                    null
+                );
                 rawAcl.InsertAce(0, gAce);
             }
             isContainer = true;
             isDS = false;
             discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
             Assert.True(1820 == discretionaryAcl.Count);
-
         }
     }
 }

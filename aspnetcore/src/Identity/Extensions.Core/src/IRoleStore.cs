@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for a storage and management of roles.
 /// </summary>
 /// <typeparam name="TRole">The type that represents a role.</typeparam>
-public interface IRoleStore<TRole> : IDisposable where TRole : class
+public interface IRoleStore<TRole> : IDisposable
+    where TRole : class
 {
     /// <summary>
     /// Creates a new role in a store as an asynchronous operation.
@@ -77,7 +78,11 @@ public interface IRoleStore<TRole> : IDisposable where TRole : class
     /// <param name="normalizedName">The normalized name to set</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetNormalizedRoleNameAsync(TRole role, string? normalizedName, CancellationToken cancellationToken);
+    Task SetNormalizedRoleNameAsync(
+        TRole role,
+        string? normalizedName,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Finds the role who has the specified ID as an asynchronous operation.

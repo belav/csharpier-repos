@@ -28,7 +28,7 @@ public class WindowsPrincipalTests
             // fails with ERROR_TRUSTED_RELATIONSHIP_FAILURE (resulting in an exception).
             const int ERROR_TRUSTED_RELATIONSHIP_FAILURE = 0x6FD;
             Win32Exception win32Exception = new Win32Exception(ERROR_TRUSTED_RELATIONSHIP_FAILURE);
-            
+
             Assert.Equal(win32Exception.Message, e.Message);
         }
     }
@@ -40,7 +40,9 @@ public class WindowsPrincipalTests
         {
             WindowsPrincipal principal = new WindowsPrincipal(id);
 
-            int manualCount = principal.Claims.Count(c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim));
+            int manualCount = principal.Claims.Count(c =>
+                c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
+            );
             int autoCount = principal.DeviceClaims.Count();
 
             Assert.Equal(manualCount, autoCount);
@@ -54,7 +56,9 @@ public class WindowsPrincipalTests
         {
             WindowsPrincipal principal = new WindowsPrincipal(id);
             Claim[] allClaims = principal.Claims.ToArray();
-            int deviceCount = allClaims.Count(c => c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim));
+            int deviceCount = allClaims.Count(c =>
+                c.Properties.ContainsKey(ClaimTypes.WindowsDeviceClaim)
+            );
             int manualCount = allClaims.Length - deviceCount;
             int autoCount = principal.UserClaims.Count();
 

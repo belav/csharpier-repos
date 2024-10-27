@@ -24,18 +24,31 @@ namespace Roslyn.Test.Utilities
 {
     public static class RuntimeEnvironmentFactory
     {
-        private static readonly Lazy<IRuntimeEnvironmentFactory> s_lazyFactory = new Lazy<IRuntimeEnvironmentFactory>(RuntimeUtilities.GetRuntimeEnvironmentFactory);
+        private static readonly Lazy<IRuntimeEnvironmentFactory> s_lazyFactory =
+            new Lazy<IRuntimeEnvironmentFactory>(RuntimeUtilities.GetRuntimeEnvironmentFactory);
 
-        internal static IRuntimeEnvironment Create(IEnumerable<ModuleData> additionalDependencies = null)
+        internal static IRuntimeEnvironment Create(
+            IEnumerable<ModuleData> additionalDependencies = null
+        )
         {
             return s_lazyFactory.Value.Create(additionalDependencies);
         }
 
-        public static void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput)
+        public static void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        )
         {
             using (var runtimeEnvironment = Create())
             {
-                runtimeEnvironment.CaptureOutput(action, expectedLength, out output, out errorOutput);
+                runtimeEnvironment.CaptureOutput(
+                    action,
+                    expectedLength,
+                    out output,
+                    out errorOutput
+                );
             }
         }
     }
@@ -54,10 +67,15 @@ namespace Roslyn.Test.Utilities
                 // We didn't emit a discrete PDB file, so we'll look for an embedded PDB instead.
                 using (var peReader = new PEReader(Assembly))
                 {
-                    DebugDirectoryEntry portablePdbEntry = peReader.ReadDebugDirectory().FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
+                    DebugDirectoryEntry portablePdbEntry = peReader
+                        .ReadDebugDirectory()
+                        .FirstOrDefault(e => e.Type == DebugDirectoryEntryType.EmbeddedPortablePdb);
                     if (portablePdbEntry.DataSize != 0)
                     {
-                        using (var embeddedMetadataProvider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(portablePdbEntry))
+                        using (
+                            var embeddedMetadataProvider =
+                                peReader.ReadEmbeddedPortablePdbDebugDirectoryData(portablePdbEntry)
+                        )
                         {
                             var mdReader = embeddedMetadataProvider.GetMetadataReader();
                             pdb = readMetadata(mdReader);
@@ -84,13 +102,20 @@ namespace Roslyn.Test.Utilities
 
         private static IEnumerable<ModuleMetadata> EnumerateModules(Metadata metadata)
         {
-            return (metadata.Kind == MetadataImageKind.Assembly) ? ((AssemblyMetadata)metadata).GetModules().AsEnumerable() : SpecializedCollections.SingletonEnumerable((ModuleMetadata)metadata);
+            return (metadata.Kind == MetadataImageKind.Assembly)
+                ? ((AssemblyMetadata)metadata).GetModules().AsEnumerable()
+                : SpecializedCollections.SingletonEnumerable((ModuleMetadata)metadata);
         }
 
         /// <summary>
         /// Emit all of the references which are not directly or indirectly a <see cref="Compilation"/> value.
         /// </summary>
-        internal static void EmitReferences(Compilation compilation, HashSet<string> fullNameSet, List<ModuleData> dependencies, AssemblyIdentity corLibIdentity)
+        internal static void EmitReferences(
+            Compilation compilation,
+            HashSet<string> fullNameSet,
+            List<ModuleData> dependencies,
+            AssemblyIdentity corLibIdentity
+        )
         {
             // NOTE: specifically don't need to consider previous submissions since they will always be compilations.
             foreach (var metadataReference in compilation.References)
@@ -107,7 +132,7 @@ namespace Roslyn.Test.Utilities
                     ? ((AssemblyMetadata)metadata).GetAssembly().Identity
                     : null;
 
-                // If this is an indirect reference to a Compilation then it is already been emitted 
+                // If this is an indirect reference to a Compilation then it is already been emitted
                 // so no more work to be done.
                 if (isManifestModule && fullNameSet.Contains(identity.GetDisplayName()))
                 {
@@ -117,25 +142,31 @@ namespace Roslyn.Test.Utilities
                 var isCorLib = isManifestModule && corLibIdentity == identity;
                 foreach (var module in EnumerateModules(metadata))
                 {
-                    ImmutableArray<byte> bytes = module.Module.PEReaderOpt.GetEntireImage().GetContent();
+                    ImmutableArray<byte> bytes = module
+                        .Module.PEReaderOpt.GetEntireImage()
+                        .GetContent();
                     ModuleData moduleData;
                     if (isManifestModule)
                     {
                         fullNameSet.Add(identity.GetDisplayName());
-                        moduleData = new ModuleData(identity,
-                                                    OutputKind.DynamicallyLinkedLibrary,
-                                                    bytes,
-                                                    pdb: default(ImmutableArray<byte>),
-                                                    inMemoryModule: true,
-                                                    isCorLib);
+                        moduleData = new ModuleData(
+                            identity,
+                            OutputKind.DynamicallyLinkedLibrary,
+                            bytes,
+                            pdb: default(ImmutableArray<byte>),
+                            inMemoryModule: true,
+                            isCorLib
+                        );
                     }
                     else
                     {
-                        moduleData = new ModuleData(module.Name,
-                                                    bytes,
-                                                    pdb: default(ImmutableArray<byte>),
-                                                    inMemoryModule: true,
-                                                    isCorLib: false);
+                        moduleData = new ModuleData(
+                            module.Name,
+                            bytes,
+                            pdb: default(ImmutableArray<byte>),
+                            inMemoryModule: true,
+                            isCorLib: false
+                        );
                     }
 
                     dependencies.Add(moduleData);
@@ -196,28 +227,39 @@ namespace Roslyn.Test.Utilities
             List<ModuleData> dependencies,
             DiagnosticBag diagnostics,
             CompilationTestData testData,
-            EmitOptions emitOptions)
+            EmitOptions emitOptions
+        )
         {
-            var corLibIdentity = compilation.GetSpecialType(SpecialType.System_Object).ContainingAssembly.Identity;
+            var corLibIdentity = compilation
+                .GetSpecialType(SpecialType.System_Object)
+                .ContainingAssembly.Identity;
 
             // A Compilation can appear multiple times in a dependency graph as both a Compilation and as a MetadataReference
-            // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use 
+            // value.  Iterate the Compilations eagerly so they are always emitted directly and later references can re-use
             // the value.  This gives better, and consistent, diagnostic information.
             var referencedCompilations = FindReferencedCompilations(compilation);
             var fullNameSet = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
 
             foreach (var referencedCompilation in referencedCompilations)
             {
-                var emitData = EmitCompilationCore(referencedCompilation, null, diagnostics, null, emitOptions);
+                var emitData = EmitCompilationCore(
+                    referencedCompilation,
+                    null,
+                    diagnostics,
+                    null,
+                    emitOptions
+                );
                 if (emitData.HasValue)
                 {
                     var identity = referencedCompilation.Assembly.Identity;
-                    var moduleData = new ModuleData(identity,
-                                                    OutputKind.DynamicallyLinkedLibrary,
-                                                    emitData.Value.Assembly,
-                                                    pdb: default(ImmutableArray<byte>),
-                                                    inMemoryModule: true,
-                                                    isCorLib: corLibIdentity == identity);
+                    var moduleData = new ModuleData(
+                        identity,
+                        OutputKind.DynamicallyLinkedLibrary,
+                        emitData.Value.Assembly,
+                        pdb: default(ImmutableArray<byte>),
+                        inMemoryModule: true,
+                        isCorLib: corLibIdentity == identity
+                    );
                     fullNameSet.Add(moduleData.Id.FullName);
                     dependencies.Add(moduleData);
                 }
@@ -229,7 +271,13 @@ namespace Roslyn.Test.Utilities
                 EmitReferences(current, fullNameSet, dependencies, corLibIdentity);
             }
 
-            return EmitCompilationCore(compilation, manifestResources, diagnostics, testData, emitOptions);
+            return EmitCompilationCore(
+                compilation,
+                manifestResources,
+                diagnostics,
+                testData,
+                emitOptions
+            );
         }
 
         internal static EmitOutput? EmitCompilationCore(
@@ -237,19 +285,25 @@ namespace Roslyn.Test.Utilities
             IEnumerable<ResourceDescription> manifestResources,
             DiagnosticBag diagnostics,
             CompilationTestData testData,
-            EmitOptions emitOptions)
+            EmitOptions emitOptions
+        )
         {
-            emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(DebugInformationFormat.Embedded);
+            emitOptions ??= EmitOptions.Default.WithDebugInformationFormat(
+                DebugInformationFormat.Embedded
+            );
 
             using var executableStream = new MemoryStream();
 
             var pdb = default(ImmutableArray<byte>);
             var assembly = default(ImmutableArray<byte>);
-            var pdbStream = (emitOptions.DebugInformationFormat != DebugInformationFormat.Embedded) ? new MemoryStream() : null;
+            var pdbStream =
+                (emitOptions.DebugInformationFormat != DebugInformationFormat.Embedded)
+                    ? new MemoryStream()
+                    : null;
 
             // Note: don't forget to name the source inputs to get them embedded for debugging
-            var embeddedTexts = compilation.SyntaxTrees
-                .Select(t => (filePath: t.FilePath, text: t.GetText()))
+            var embeddedTexts = compilation
+                .SyntaxTrees.Select(t => (filePath: t.FilePath, text: t.GetText()))
                 .Where(t => t.text.CanBeEmbedded && !string.IsNullOrEmpty(t.filePath))
                 .Select(t => EmbeddedText.FromSource(t.filePath, t.text))
                 .ToImmutableArray();
@@ -270,7 +324,8 @@ namespace Roslyn.Test.Utilities
                     embeddedTexts,
                     rebuildData: null,
                     testData: testData,
-                    cancellationToken: default);
+                    cancellationToken: default
+                );
             }
             finally
             {
@@ -292,14 +347,17 @@ namespace Roslyn.Test.Utilities
             return null;
         }
 
-        public static string DumpAssemblyData(IEnumerable<ModuleData> modules, out string dumpDirectory)
+        public static string DumpAssemblyData(
+            IEnumerable<ModuleData> modules,
+            out string dumpDirectory
+        )
         {
             dumpDirectory = null;
 
             var sb = new StringBuilder();
             foreach (var module in modules)
             {
-                // Limit the number of dumps to 10.  After 10 we're likely in a bad state and are 
+                // Limit the number of dumps to 10.  After 10 we're likely in a bad state and are
                 // dumping lots of unnecessary data.
                 if (s_dumpCount > 10)
                 {
@@ -334,7 +392,10 @@ namespace Roslyn.Test.Utilities
                         fileName = identity.Name;
                     }
 
-                    string pePath = Path.Combine(dumpDirectory, fileName + module.Kind.GetDefaultExtension());
+                    string pePath = Path.Combine(
+                        dumpDirectory,
+                        fileName + module.Kind.GetDefaultExtension()
+                    );
                     try
                     {
                         module.Image.WriteToFile(pePath);
@@ -391,16 +452,34 @@ namespace Roslyn.Test.Utilities
 
     public interface IRuntimeEnvironment : IDisposable
     {
-        void Emit(Compilation mainCompilation, IEnumerable<ResourceDescription> manifestResources, EmitOptions emitOptions, bool usePdbForDebugging = false);
-        int Execute(string moduleName, string[] args, string expectedOutput, bool trimOutput = true);
+        void Emit(
+            Compilation mainCompilation,
+            IEnumerable<ResourceDescription> manifestResources,
+            EmitOptions emitOptions,
+            bool usePdbForDebugging = false
+        );
+        int Execute(
+            string moduleName,
+            string[] args,
+            string expectedOutput,
+            bool trimOutput = true
+        );
         ImmutableArray<byte> GetMainImage();
         ImmutableArray<byte> GetMainPdb();
         ImmutableArray<Diagnostic> GetDiagnostics();
-        SortedSet<string> GetMemberSignaturesFromMetadata(string fullyQualifiedTypeName, string memberName);
+        SortedSet<string> GetMemberSignaturesFromMetadata(
+            string fullyQualifiedTypeName,
+            string memberName
+        );
         IList<ModuleData> GetAllModuleData();
         void Verify(Verification verification);
         string[] VerifyModules(string[] modulesToVerify);
-        void CaptureOutput(Action action, int expectedLength, out string output, out string errorOutput);
+        void CaptureOutput(
+            Action action,
+            int expectedLength,
+            out string output,
+            out string errorOutput
+        );
     }
 
     internal interface IInternalRuntimeEnvironment

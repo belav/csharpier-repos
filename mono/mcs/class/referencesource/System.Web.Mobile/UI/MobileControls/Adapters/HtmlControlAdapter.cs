@@ -1,20 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="HtmlControlAdapter.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System.Collections;
 using System.Diagnostics;
+using System.Security.Permissions;
 using System.Web.UI.MobileControls;
 using System.Web.UI.MobileControls.Adapters;
-using System.Security.Permissions;
 
 #if COMPILING_FOR_SHIPPED_SOURCE
 namespace System.Web.UI.MobileControls.ShippedAdapterSource
 #else
 namespace System.Web.UI.MobileControls.Adapters
-#endif    
+#endif
 
 {
     /*
@@ -23,36 +23,35 @@ namespace System.Web.UI.MobileControls.Adapters
      * Copyright (c) 2000 Microsoft Corporation
      */
     /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter"]/*' />
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class HtmlControlAdapter : System.Web.UI.MobileControls.Adapters.ControlAdapter
     {
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.PageAdapter"]/*' />
         protected HtmlPageAdapter PageAdapter
         {
-            get
-            {
-                return ((HtmlPageAdapter)Page.Adapter);
-            }
+            get { return ((HtmlPageAdapter)Page.Adapter); }
         }
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.FormAdapter"]/*' />
         protected HtmlFormAdapter FormAdapter
         {
-            get
-            {
-                return (HtmlFormAdapter)Control.Form.Adapter;
-            }
+            get { return (HtmlFormAdapter)Control.Form.Adapter; }
         }
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.RequiresFormTag"]/*' />
         public virtual bool RequiresFormTag
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.Render"]/*' />
@@ -76,9 +75,10 @@ namespace System.Web.UI.MobileControls.Adapters
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.RenderPostBackEventAsAttribute"]/*' />
         protected void RenderPostBackEventAsAttribute(
-            HtmlMobileTextWriter writer, 
-            String attributeName, 
-            String argument)
+            HtmlMobileTextWriter writer,
+            String attributeName,
+            String argument
+        )
         {
             writer.Write(" ");
             writer.Write(attributeName);
@@ -91,7 +91,8 @@ namespace System.Web.UI.MobileControls.Adapters
         protected void RenderPostBackEventAsAnchor(
             HtmlMobileTextWriter writer,
             String argument,
-            String linkText)
+            String linkText
+        )
         {
             writer.EnterStyle(Style);
             writer.WriteBeginTag("a");
@@ -106,8 +107,14 @@ namespace System.Web.UI.MobileControls.Adapters
         protected void RenderBeginLink(HtmlMobileTextWriter writer, String target)
         {
             bool queryStringWritten = false;
-            bool appendCookieless = (PageAdapter.PersistCookielessData)  && 
-                    (!( (target.StartsWith("http:", StringComparison.Ordinal)) || (target.StartsWith("https:", StringComparison.Ordinal)) ));
+            bool appendCookieless =
+                (PageAdapter.PersistCookielessData)
+                && (
+                    !(
+                        (target.StartsWith("http:", StringComparison.Ordinal))
+                        || (target.StartsWith("https:", StringComparison.Ordinal))
+                    )
+                );
             writer.WriteBeginTag("a");
             writer.Write(" href=\"");
 
@@ -125,7 +132,7 @@ namespace System.Web.UI.MobileControls.Adapters
                         targetUrl = PageAdapter.GetFormUrl(form);
                     }
                 }
-                
+
                 if (targetUrl == null)
                 {
                     RenderPostBackEventReference(writer, form.UniqueID);
@@ -154,11 +161,11 @@ namespace System.Web.UI.MobileControls.Adapters
             }
 
             IDictionary dictionary = PageAdapter.CookielessDataDictionary;
-            if((dictionary != null) && (appendCookieless))
+            if ((dictionary != null) && (appendCookieless))
             {
-                foreach(String name in dictionary.Keys)
+                foreach (String name in dictionary.Keys)
                 {
-                    if(queryStringWritten)
+                    if (queryStringWritten)
                     {
                         writer.Write('&');
                     }
@@ -187,9 +194,7 @@ namespace System.Web.UI.MobileControls.Adapters
         // Can be used by adapter that allow its subclass to add more
         // specific attributes
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.AddAttributes"]/*' />
-        protected virtual void AddAttributes(HtmlMobileTextWriter writer)
-        {
-        }
+        protected virtual void AddAttributes(HtmlMobileTextWriter writer) { }
 
         // Can be used by adapter that adds the custom attribute "accesskey"
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.AddAccesskeyAttribute"]/*' />
@@ -204,17 +209,18 @@ namespace System.Web.UI.MobileControls.Adapters
         // Can be used by adapter that adds custom attributes for
         // multi-media functionalities
 
-        private readonly static String [] _multiMediaAttributes =
-            { "src",
-              "soundstart",
-              "loop",
-              "volume",
-              "vibration",
-              "viblength" };
+        private readonly static String[] _multiMediaAttributes =
+        {
+            "src",
+            "soundstart",
+            "loop",
+            "volume",
+            "vibration",
+            "viblength",
+        };
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.AddJPhoneMultiMediaAttributes"]/*' />
-        protected virtual void AddJPhoneMultiMediaAttributes(
-            HtmlMobileTextWriter writer)
+        protected virtual void AddJPhoneMultiMediaAttributes(HtmlMobileTextWriter writer)
         {
             if (Device.SupportsJPhoneMultiMediaAttributes)
             {
@@ -225,8 +231,7 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
 
-        private void AddCustomAttribute(HtmlMobileTextWriter writer,
-                                        String attributeName)
+        private void AddCustomAttribute(HtmlMobileTextWriter writer, String attributeName)
         {
             String attributeValue = ((IAttributeAccessor)Control).GetAttribute(attributeName);
             if (!String.IsNullOrEmpty(attributeValue))
@@ -236,9 +241,7 @@ namespace System.Web.UI.MobileControls.Adapters
         }
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.RenderAsHiddenInputField"]/*' />
-        protected virtual void RenderAsHiddenInputField(HtmlMobileTextWriter writer)
-        {
-        }
+        protected virtual void RenderAsHiddenInputField(HtmlMobileTextWriter writer) { }
 
         // Renders hidden variables for IPostBackDataHandlers which are
         // not displayed due to pagination or secondary UI.
@@ -249,7 +252,11 @@ namespace System.Web.UI.MobileControls.Adapters
                 foreach (Control child in ctl.Controls)
                 {
                     // Note: Control.Form != null.
-                    if (!child.Visible || child == Control.Form.Header || child == Control.Form.Footer)
+                    if (
+                        !child.Visible
+                        || child == Control.Form.Header
+                        || child == Control.Form.Footer
+                    )
                     {
                         continue;
                     }
@@ -258,9 +265,15 @@ namespace System.Web.UI.MobileControls.Adapters
 
                     if (mobileCtl != null)
                     {
-                        if (mobileCtl.IsVisibleOnPage(page)
-                            && (mobileCtl == ((HtmlFormAdapter)mobileCtl.Form.Adapter).SecondaryUIControl ||
-                            null == ((HtmlFormAdapter)mobileCtl.Form.Adapter).SecondaryUIControl))
+                        if (
+                            mobileCtl.IsVisibleOnPage(page)
+                            && (
+                                mobileCtl
+                                    == ((HtmlFormAdapter)mobileCtl.Form.Adapter).SecondaryUIControl
+                                || null
+                                    == ((HtmlFormAdapter)mobileCtl.Form.Adapter).SecondaryUIControl
+                            )
+                        )
                         {
                             if (mobileCtl.FirstPage == mobileCtl.LastPage)
                             {
@@ -292,7 +305,8 @@ namespace System.Web.UI.MobileControls.Adapters
         //  SECONDARY UI SUPPORT
         /////////////////////////////////////////////////////////////////////
 
-        internal const int NotSecondaryUIInit = -1;  // For initialization of private consts in derived classes.
+        internal const int NotSecondaryUIInit = -1; // For initialization of private consts in derived classes.
+
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.NotSecondaryUI"]/*' />
         protected static readonly int NotSecondaryUI = NotSecondaryUIInit;
 
@@ -301,7 +315,7 @@ namespace System.Web.UI.MobileControls.Adapters
         {
             get
             {
-                if (Control == null || Control.Form == null) 
+                if (Control == null || Control.Form == null)
                 {
                     return NotSecondaryUI;
                 }
@@ -310,10 +324,7 @@ namespace System.Web.UI.MobileControls.Adapters
                     return ((HtmlFormAdapter)Control.Form.Adapter).GetSecondaryUIMode(Control);
                 }
             }
-            set
-            {
-                ((HtmlFormAdapter)Control.Form.Adapter).SetSecondaryUIMode(Control, value);
-            }
+            set { ((HtmlFormAdapter)Control.Form.Adapter).SetSecondaryUIMode(Control, value); }
         }
 
         /// <include file='doc\HtmlControlAdapter.uex' path='docs/doc[@for="HtmlControlAdapter.ExitSecondaryUIMode"]/*' />
@@ -335,7 +346,7 @@ namespace System.Web.UI.MobileControls.Adapters
         public override Object SaveAdapterState()
         {
             int mode = SecondaryUIMode;
-            if (mode != NotSecondaryUI) 
+            if (mode != NotSecondaryUI)
             {
                 return mode;
             }
@@ -345,5 +356,4 @@ namespace System.Web.UI.MobileControls.Adapters
             }
         }
     }
-
 }

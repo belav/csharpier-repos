@@ -6,7 +6,6 @@ using System.Speech.Recognition;
 
 namespace System.Speech.Internal.GrammarBuilding
 {
-
     internal sealed class SemanticKeyElement : BuilderElements
     {
         #region Constructors
@@ -67,7 +66,12 @@ namespace System.Speech.Internal.GrammarBuilding
             return semanticKeyElement;
         }
 
-        internal override IElement CreateElement(IElementFactory elementFactory, IElement parent, IRule rule, IdentifierCollection ruleIds)
+        internal override IElement CreateElement(
+            IElementFactory elementFactory,
+            IElement parent,
+            IRule rule,
+            IdentifierCollection ruleIds
+        )
         {
             // Create the rule associated with this key
             _ruleRef.Rule.CreateElement(elementFactory, parent, rule, ruleIds);
@@ -84,10 +88,7 @@ namespace System.Speech.Internal.GrammarBuilding
 
         internal override string DebugSummary
         {
-            get
-            {
-                return _ruleRef.Rule.DebugSummary;
-            }
+            get { return _ruleRef.Rule.DebugSummary; }
         }
 
         #endregion

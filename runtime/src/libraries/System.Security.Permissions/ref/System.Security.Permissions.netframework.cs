@@ -10,7 +10,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.DirectoryServices.DirectoryServicesPermissionAccess))]
 [assembly: TypeForwardedTo(typeof(System.DirectoryServices.DirectoryServicesPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.DirectoryServices.DirectoryServicesPermissionEntry))]
-[assembly: TypeForwardedTo(typeof(System.DirectoryServices.DirectoryServicesPermissionEntryCollection))]
+[assembly: TypeForwardedTo(
+    typeof(System.DirectoryServices.DirectoryServicesPermissionEntryCollection)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.IPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.ISecurityEncodable))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.CodeAccessSecurityAttribute))]
@@ -29,7 +31,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceControllerPermissionAccess))]
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceControllerPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceControllerPermissionEntry))]
-[assembly: TypeForwardedTo(typeof(System.ServiceProcess.ServiceControllerPermissionEntryCollection))]
+[assembly: TypeForwardedTo(
+    typeof(System.ServiceProcess.ServiceControllerPermissionEntryCollection)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.CodeAccessPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.HostProtectionException))]
 [assembly: TypeForwardedTo(typeof(System.Security.HostSecurityManager))]
@@ -108,14 +112,20 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.HostProtectionResource))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.IsolatedStorageContainment))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.IsolatedStorageFilePermission))]
-[assembly: TypeForwardedTo(typeof(System.Security.Permissions.IsolatedStorageFilePermissionAttribute))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Permissions.IsolatedStorageFilePermissionAttribute)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.IsolatedStoragePermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.IsolatedStoragePermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.IUnrestrictedPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermissionAccessEntry))]
-[assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermissionAccessEntryCollection))]
-[assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Permissions.KeyContainerPermissionAccessEntryCollection)
+)]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Permissions.KeyContainerPermissionAccessEntryEnumerator)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.KeyContainerPermissionFlags))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.MediaPermission))]
@@ -128,7 +138,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.PrincipalPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.PrincipalPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.PublisherIdentityPermission))]
-[assembly: TypeForwardedTo(typeof(System.Security.Permissions.PublisherIdentityPermissionAttribute))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Permissions.PublisherIdentityPermissionAttribute)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.ReflectionPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.ReflectionPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.ReflectionPermissionFlag))]
@@ -144,7 +156,9 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.StorePermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.StorePermissionFlags))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.StrongNameIdentityPermission))]
-[assembly: TypeForwardedTo(typeof(System.Security.Permissions.StrongNameIdentityPermissionAttribute))]
+[assembly: TypeForwardedTo(
+    typeof(System.Security.Permissions.StrongNameIdentityPermissionAttribute)
+)]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.StrongNamePublicKeyBlob))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.TypeDescriptorPermission))]
 [assembly: TypeForwardedTo(typeof(System.Security.Permissions.TypeDescriptorPermissionAttribute))]
@@ -173,10 +187,14 @@ using System.Runtime.CompilerServices;
 [assembly: TypeForwardedTo(typeof(System.Net.PeerToPeer.PnrpPermissionAttribute))]
 [assembly: TypeForwardedTo(typeof(System.Net.PeerToPeer.PnrpScope))]
 [assembly: TypeForwardedTo(typeof(System.Net.PeerToPeer.Collaboration.PeerCollaborationPermission))]
-[assembly: TypeForwardedTo(typeof(System.Net.PeerToPeer.Collaboration.PeerCollaborationPermissionAttribute))]
+[assembly: TypeForwardedTo(
+    typeof(System.Net.PeerToPeer.Collaboration.PeerCollaborationPermissionAttribute)
+)]
 [assembly: TypeForwardedTo(typeof(System.Net.NetworkInformation.NetworkInformationAccess))]
 [assembly: TypeForwardedTo(typeof(System.Net.NetworkInformation.NetworkInformationPermission))]
-[assembly: TypeForwardedTo(typeof(System.Net.NetworkInformation.NetworkInformationPermissionAttribute))]
+[assembly: TypeForwardedTo(
+    typeof(System.Net.NetworkInformation.NetworkInformationPermissionAttribute)
+)]
 [assembly: TypeForwardedTo(typeof(System.Net.Mail.SmtpAccess))]
 [assembly: TypeForwardedTo(typeof(System.Net.Mail.SmtpPermission))]
 [assembly: TypeForwardedTo(typeof(System.Net.Mail.SmtpPermissionAttribute))]

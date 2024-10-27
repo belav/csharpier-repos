@@ -182,18 +182,18 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -202,19 +202,19 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
         context.Add(chunky);
 
@@ -409,8 +409,8 @@ public class MemberEntryTest
         public ICollection<Chunky>? Monkeys { get; set; }
     }
 
-    private static Chunky CreateChunky(int id = 0)
-        => new()
+    private static Chunky CreateChunky(int id = 0) =>
+        new()
         {
             Id = id,
             Chunk = new Chunk { Size = 1, Shape = "Sphere" },
@@ -421,18 +421,18 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new Milk
             {
@@ -441,23 +441,23 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
-    private static Cherry CreateCherry(int id = 0)
-        => new()
+    private static Cherry CreateCherry(int id = 0) =>
+        new()
         {
             Id = id,
             Culture = new FieldCulture
@@ -467,18 +467,18 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             Milk = new FieldMilk
             {
@@ -487,19 +487,19 @@ public class MemberEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
-            }
+                Validation = false,
+            },
         };
 
     private struct Culture
@@ -596,8 +596,8 @@ public class MemberEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 
@@ -605,81 +605,103 @@ public class MemberEntryTest
 
         protected internal override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Chunky>(
-                b =>
-                {
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+            modelBuilder.Entity<Chunky>(b =>
+            {
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.Milk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.Milk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
 
-            modelBuilder.Entity<Cherry>(
-                b =>
-                {
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+            modelBuilder.Entity<Cherry>(b =>
+            {
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.Milk, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.Milk,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
         }
     }
 }

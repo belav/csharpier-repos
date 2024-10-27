@@ -33,9 +33,15 @@ internal sealed class InstanceFieldTable
     // This should behave somewhat like EditAndContinueModule::ResolveOrAddField (and EnCAddedField::Allocate)
     //   we want to create some storage space that has the same lifetime as the instance object.
 
-    internal static FieldStore GetInstanceFieldFieldStore(object inst, IntPtr type, uint fielddef_token)
+    internal static FieldStore GetInstanceFieldFieldStore(
+        object inst,
+        IntPtr type,
+        uint fielddef_token
+    )
     {
-        return _singleton.GetOrCreateInstanceFields(inst).LookupOrAdd(new RuntimeTypeHandle (type), fielddef_token);
+        return _singleton
+            .GetOrCreateInstanceFields(inst)
+            .LookupOrAdd(new RuntimeTypeHandle(type), fielddef_token);
     }
 
     private static readonly InstanceFieldTable _singleton = new();
@@ -47,8 +53,7 @@ internal sealed class InstanceFieldTable
         _table = new();
     }
 
-    private InstanceFields GetOrCreateInstanceFields(object key)
-        => _table.GetOrCreateValue(key);
+    private InstanceFields GetOrCreateInstanceFields(object key) => _table.GetOrCreateValue(key);
 
     private sealed class InstanceFields
     {
@@ -61,15 +66,18 @@ internal sealed class InstanceFieldTable
             _lock = new();
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Hot reload required untrimmed apps")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Hot reload required untrimmed apps"
+        )]
         public FieldStore LookupOrAdd(RuntimeTypeHandle type, uint key)
         {
             if (_fields.TryGetValue(key, out FieldStore? v))
                 return v;
             lock (_lock)
             {
-                if (_fields.TryGetValue (key, out FieldStore? v2))
+                if (_fields.TryGetValue(key, out FieldStore? v2))
                     return v2;
 
                 FieldStore s = FieldStore.Create(type);
@@ -78,7 +86,6 @@ internal sealed class InstanceFieldTable
             }
         }
     }
-
 }
 
 // This is similar to System.Diagnostics.EditAndContinueHelper in CoreCLR, except instead of
@@ -92,15 +99,17 @@ internal sealed class FieldStore
     // keep in sync with hot_reload-internals.h
     private readonly object? _loc;
 
-    private FieldStore (object? loc)
+    private FieldStore(object? loc)
     {
         _loc = loc;
     }
 
     [RequiresUnreferencedCode("Hot reload required untrimmed apps")]
-    public static FieldStore Create (RuntimeTypeHandle type)
+    public static FieldStore Create(RuntimeTypeHandle type)
     {
-        Type t = Type.GetTypeFromHandle(type) ?? throw new ArgumentException(SR.Arg_InvalidHandle, nameof(type));
+        Type t =
+            Type.GetTypeFromHandle(type)
+            ?? throw new ArgumentException(SR.Arg_InvalidHandle, nameof(type));
         object? loc;
         if (t.IsPrimitive || t.IsValueType)
             loc = RuntimeHelpers.GetUninitializedObject(t);

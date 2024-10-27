@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,14 +26,16 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms {
-	[Flags]
-	public enum AccessibleSelection {
-		None		= 0x00000000,
-		TakeFocus	= 0x00000001,
-		TakeSelection	= 0x00000002,
-		ExtendSelection	= 0x00000004,
-		AddSelection	= 0x00000008,
-		RemoveSelection	= 0x00000010
-	}
+namespace System.Windows.Forms
+{
+    [Flags]
+    public enum AccessibleSelection
+    {
+        None = 0x00000000,
+        TakeFocus = 0x00000001,
+        TakeSelection = 0x00000002,
+        ExtendSelection = 0x00000004,
+        AddSelection = 0x00000008,
+        RemoveSelection = 0x00000010,
+    }
 }

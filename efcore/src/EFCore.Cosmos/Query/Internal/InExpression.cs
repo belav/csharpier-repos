@@ -22,10 +22,9 @@ public class InExpression : SqlExpression
     public InExpression(
         SqlExpression item,
         IReadOnlyList<SqlExpression> values,
-        CoreTypeMapping typeMapping)
-        : this(item, values, valuesParameter: null, typeMapping)
-    {
-    }
+        CoreTypeMapping typeMapping
+    )
+        : this(item, values, valuesParameter: null, typeMapping) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -36,16 +35,16 @@ public class InExpression : SqlExpression
     public InExpression(
         SqlExpression item,
         SqlParameterExpression valuesParameter,
-        CoreTypeMapping typeMapping)
-        : this(item, values: null, valuesParameter, typeMapping)
-    {
-    }
+        CoreTypeMapping typeMapping
+    )
+        : this(item, values: null, valuesParameter, typeMapping) { }
 
     private InExpression(
         SqlExpression item,
         IReadOnlyList<SqlExpression>? values,
         SqlParameterExpression? valuesParameter,
-        CoreTypeMapping? typeMapping)
+        CoreTypeMapping? typeMapping
+    )
         : base(typeof(bool), typeMapping)
     {
         Item = item;
@@ -118,8 +117,8 @@ public class InExpression : SqlExpression
     /// </summary>
     /// <param name="typeMapping">A relational type mapping to apply.</param>
     /// <returns>A new expression which has supplied type mapping.</returns>
-    public virtual InExpression ApplyTypeMapping(CoreTypeMapping? typeMapping)
-        => new(Item, Values, ValuesParameter, typeMapping);
+    public virtual InExpression ApplyTypeMapping(CoreTypeMapping? typeMapping) =>
+        new(Item, Values, ValuesParameter, typeMapping);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -127,10 +126,8 @@ public class InExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InExpression Update(SqlExpression item, IReadOnlyList<SqlExpression> values)
-        => item != Item || values != Values
-            ? new InExpression(item, values, TypeMapping!)
-            : this;
+    public virtual InExpression Update(SqlExpression item, IReadOnlyList<SqlExpression> values) =>
+        item != Item || values != Values ? new InExpression(item, values, TypeMapping!) : this;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -138,8 +135,11 @@ public class InExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual InExpression Update(SqlExpression item, SqlParameterExpression valuesParameter)
-        => item != Item || ValuesParameter != valuesParameter
+    public virtual InExpression Update(
+        SqlExpression item,
+        SqlParameterExpression valuesParameter
+    ) =>
+        item != Item || ValuesParameter != valuesParameter
             ? new InExpression(item, valuesParameter, TypeMapping!)
             : this;
 
@@ -152,12 +152,14 @@ public class InExpression : SqlExpression
     public virtual InExpression Update(
         SqlExpression item,
         IReadOnlyList<SqlExpression>? values,
-        SqlParameterExpression? valuesParameter)
+        SqlParameterExpression? valuesParameter
+    )
     {
         if (!(values is null ^ valuesParameter is null))
         {
             throw new ArgumentException(
-                CosmosStrings.OneOfTwoValuesMustBeSet(nameof(values), nameof(valuesParameter)));
+                CosmosStrings.OneOfTwoValuesMustBeSet(nameof(values), nameof(valuesParameter))
+            );
         }
 
         return item == Item && values == Values && valuesParameter == ValuesParameter
@@ -209,18 +211,25 @@ public class InExpression : SqlExpression
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is InExpression inExpression
-                && Equals(inExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (ReferenceEquals(this, obj) || obj is InExpression inExpression && Equals(inExpression));
 
-    private bool Equals(InExpression inExpression)
-        => base.Equals(inExpression)
-            && Item.Equals(inExpression.Item)
-            && (ValuesParameter?.Equals(inExpression.ValuesParameter) ?? inExpression.ValuesParameter == null)
-            && (ReferenceEquals(Values, inExpression.Values)
-                || (Values is not null && inExpression.Values is not null && Values.SequenceEqual(inExpression.Values)));
+    private bool Equals(InExpression inExpression) =>
+        base.Equals(inExpression)
+        && Item.Equals(inExpression.Item)
+        && (
+            ValuesParameter?.Equals(inExpression.ValuesParameter)
+            ?? inExpression.ValuesParameter == null
+        )
+        && (
+            ReferenceEquals(Values, inExpression.Values)
+            || (
+                Values is not null
+                && inExpression.Values is not null
+                && Values.SequenceEqual(inExpression.Values)
+            )
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

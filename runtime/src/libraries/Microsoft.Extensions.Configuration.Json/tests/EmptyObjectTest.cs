@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void EmptyObject_AddsAsNull()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""key"": { },
             }";
 
@@ -24,7 +25,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void NullObject_AddsEmptyString()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""key"": null,
             }";
 
@@ -37,7 +39,8 @@ namespace Microsoft.Extensions.Configuration.Json.Test
         [Fact]
         public void NestedObject_DoesNotAddParent()
         {
-            var json = @"{
+            var json =
+                @"{
                 ""key"": {
                     ""nested"": ""value""
                 },

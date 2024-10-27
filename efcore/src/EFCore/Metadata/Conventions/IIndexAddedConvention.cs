@@ -18,5 +18,6 @@ public interface IIndexAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessIndexAdded(
         IConventionIndexBuilder indexBuilder,
-        IConventionContext<IConventionIndexBuilder> context);
+        IConventionContext<IConventionIndexBuilder> context
+    );
 }

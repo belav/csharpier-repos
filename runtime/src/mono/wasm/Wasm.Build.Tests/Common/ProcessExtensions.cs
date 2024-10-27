@@ -15,7 +15,9 @@ namespace Wasm.Build.Tests
 #if NET451
         private static readonly bool _isWindows = true;
 #else
-        private static readonly bool _isWindows = RuntimeInformation.IsOSPlatform(OSPlatform.Windows);
+        private static readonly bool _isWindows = RuntimeInformation.IsOSPlatform(
+            OSPlatform.Windows
+        );
 #endif
         private static readonly TimeSpan _defaultTimeout = TimeSpan.FromSeconds(30);
 
@@ -33,7 +35,8 @@ namespace Wasm.Build.Tests
                     "taskkill",
                     $"/T /F /PID {process.Id}",
                     timeout,
-                    out stdout);
+                    out stdout
+                );
             }
             else
             {
@@ -50,11 +53,7 @@ namespace Wasm.Build.Tests
         private static void GetAllChildIdsUnix(int parentId, ISet<int> children, TimeSpan timeout)
         {
             string stdout;
-            var exitCode = RunProcessAndWaitForExit(
-                "pgrep",
-                $"-P {parentId}",
-                timeout,
-                out stdout);
+            var exitCode = RunProcessAndWaitForExit("pgrep", $"-P {parentId}", timeout, out stdout);
 
             if (exitCode == 0 && !string.IsNullOrEmpty(stdout))
             {
@@ -83,21 +82,22 @@ namespace Wasm.Build.Tests
         private static void KillProcessUnix(int processId, TimeSpan timeout)
         {
             string stdout;
-            RunProcessAndWaitForExit(
-                "kill",
-                $"-TERM {processId}",
-                timeout,
-                out stdout);
+            RunProcessAndWaitForExit("kill", $"-TERM {processId}", timeout, out stdout);
         }
 
-        private static int RunProcessAndWaitForExit(string fileName, string arguments, TimeSpan timeout, out string stdout)
+        private static int RunProcessAndWaitForExit(
+            string fileName,
+            string arguments,
+            TimeSpan timeout,
+            out string stdout
+        )
         {
             var startInfo = new ProcessStartInfo
             {
                 FileName = fileName,
                 Arguments = arguments,
                 RedirectStandardOutput = true,
-                UseShellExecute = false
+                UseShellExecute = false,
             };
 
             var process = Process.Start(startInfo);

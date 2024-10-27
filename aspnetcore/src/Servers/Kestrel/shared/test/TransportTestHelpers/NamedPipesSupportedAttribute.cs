@@ -3,7 +3,10 @@
 
 namespace Microsoft.AspNetCore.InternalTesting;
 
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = false
+)]
 public class NamedPipesSupportedAttribute : Attribute, ITestCondition
 {
     public bool IsMet => OperatingSystem.IsWindows();

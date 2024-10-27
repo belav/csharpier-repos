@@ -22,7 +22,8 @@ internal static class MvcDetector
         return MvcFacts.IsController(
             typeSymbol,
             wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ControllerAttribute),
-            wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute));
+            wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonControllerAttribute)
+        );
     }
 
     public static bool IsAction(IMethodSymbol methodSymbol, WellKnownTypes wellKnownTypes)
@@ -34,6 +35,7 @@ internal static class MvcDetector
         return MvcFacts.IsControllerAction(
             methodSymbol,
             wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_NonActionAttribute),
-            idisposableDispose);
+            idisposableDispose
+        );
     }
 }

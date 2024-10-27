@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.CommandLine.Parsing;
-using FluentAssertions;
 using System.Linq;
+using FluentAssertions;
 using Xunit;
 
 namespace System.CommandLine.Tests
@@ -129,12 +129,11 @@ namespace System.CommandLine.Tests
         {
             Action create = () => new CliOption<string>("name", "");
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -142,12 +141,11 @@ namespace System.CommandLine.Tests
         {
             Action create = () => new CliOption<string>("name", "  \t");
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Be("Names and aliases cannot be null, empty, or consist entirely of whitespace.");
         }
 
         [Fact]
@@ -155,9 +153,7 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<string>("--help", "-h", "/?");
 
-            option.Aliases
-                  .Should()
-                  .BeEquivalentTo("-h", "/?");
+            option.Aliases.Should().BeEquivalentTo("-h", "/?");
         }
 
         [Theory]
@@ -165,34 +161,35 @@ namespace System.CommandLine.Tests
         [InlineData(" -x")]
         [InlineData("--aa aa")]
         public void When_an_option_is_created_with_a_name_that_contains_whitespace_then_an_informative_error_is_returned(
-            string name)
+            string name
+        )
         {
             Action create = () => new CliOption<string>(name);
 
-            create.Should()
-                  .Throw<ArgumentException>()
-                  .Which
-                  .Message
-                  .Should()
-                  .Contain($"Names and aliases cannot contain whitespace: \"{name}\"");
+            create
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Names and aliases cannot contain whitespace: \"{name}\"");
         }
 
         [Theory]
         [InlineData("-x ")]
         [InlineData(" -x")]
         [InlineData("--aa aa")]
-        public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(string alias)
+        public void When_an_option_alias_is_added_and_contains_whitespace_then_an_informative_error_is_returned(
+            string alias
+        )
         {
             var option = new CliOption<bool>("-x");
 
             Action addAlias = () => option.Aliases.Add(alias);
 
-            addAlias.Should()
-                    .Throw<ArgumentException>()
-                    .Which
-                    .Message
-                    .Should()
-                    .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
+            addAlias
+                .Should()
+                .Throw<ArgumentException>()
+                .Which.Message.Should()
+                .Contain($"Names and aliases cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -205,12 +202,7 @@ namespace System.CommandLine.Tests
             var optionB = new CliOption<string>(prefix + "b");
             var optionC = new CliOption<string>(prefix + "c");
 
-            var rootCommand = new CliRootCommand
-                              {
-                                  optionA,
-                                  optionB,
-                                  optionC
-                              };
+            var rootCommand = new CliRootCommand { optionA, optionB, optionC };
 
             var result = rootCommand.Parse(prefix + "c value-for-c " + prefix + "a value-for-a");
 
@@ -222,10 +214,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_T_default_value_can_be_set_via_the_constructor()
         {
-            var option = new CliOption<int>("-x")
-            {
-                DefaultValueFactory = _ => 123
-            };
+            var option = new CliOption<int>("-x") { DefaultValueFactory = _ => 123 };
 
             new CliRootCommand { option }
                 .Parse("")
@@ -238,10 +227,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_T_default_value_can_be_set_after_instantiation()
         {
-            var option = new CliOption<int>("-x")
-            {
-                DefaultValueFactory = (_) => 123
-            };
+            var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
 
             new CliRootCommand { option }
                 .Parse("")
@@ -250,7 +236,7 @@ namespace System.CommandLine.Tests
                 .Should()
                 .Be(123);
         }
-        
+
         [Fact]
         public void Option_T_default_value_factory_can_be_set_after_instantiation()
         {
@@ -271,16 +257,18 @@ namespace System.CommandLine.Tests
         {
             var option = new CliOption<int>("-x") { DefaultValueFactory = (_) => 123 };
             option.Validators.Add(symbol =>
-                                    symbol.AddError(symbol.Tokens
-                                                                .Select(t => t.Value)
-                                                                .Where(v => v == "123")
-                                                                .Select(_ => "ERR")
-                                                                .First()));
+                symbol.AddError(
+                    symbol
+                        .Tokens.Select(t => t.Value)
+                        .Where(v => v == "123")
+                        .Select(_ => "ERR")
+                        .First()
+                )
+            );
 
             new CliRootCommand { option }
                 .Parse("-x 123")
-                .Errors
-                .Select(e => e.Message)
+                .Errors.Select(e => e.Message)
                 .Should()
                 .BeEquivalentTo(new[] { "ERR" });
         }
@@ -291,14 +279,10 @@ namespace System.CommandLine.Tests
             var option = new CliOption<string>("-x");
 
             var result = new CliRootCommand { option }.Parse("");
-            result.GetResult(option)
-                .Should()
-                .BeNull();
-            result.GetValue(option)
-                .Should()
-                .BeNull();
+            result.GetResult(option).Should().BeNull();
+            result.GetValue(option).Should().BeNull();
         }
-   
+
         [Fact]
         public void Option_of_boolean_defaults_to_false_when_not_specified()
         {
@@ -306,12 +290,8 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("");
 
-            result.GetResult(option)
-                .Should()
-                .BeNull();
-            result.GetValue(option)
-                .Should()
-                .BeFalse();
+            result.GetResult(option).Should().BeNull();
+            result.GetValue(option).Should().BeFalse();
         }
 
         [Fact]
@@ -322,19 +302,21 @@ namespace System.CommandLine.Tests
 
             var result = new CliRootCommand { option }.Parse("--color Fuschia");
 
-            result.Errors
-                  .Select(e => e.Message)
-                  .Should()
-                  .BeEquivalentTo(new[] { $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'" });
+            result
+                .Errors.Select(e => e.Message)
+                .Should()
+                .BeEquivalentTo(
+                    new[]
+                    {
+                        $"Argument 'Fuschia' not recognized. Must be one of:\n\t'Red'\n\t'Green'",
+                    }
+                );
         }
 
         [Fact]
         public void Option_result_provides_identifier_token_if_name_was_provided()
         {
-            var option = new CliOption<int>("--name")
-            {
-                Aliases = { "-n" }
-            };
+            var option = new CliOption<int>("--name") { Aliases = { "-n" } };
 
             var result = new CliRootCommand { option }.Parse("--name 123");
 
@@ -344,10 +326,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void Option_result_provides_identifier_token_if_alias_was_provided()
         {
-            var option = new CliOption<int>("--name")
-            {
-                Aliases = { "-n" }
-            };
+            var option = new CliOption<int>("--name") { Aliases = { "-n" } };
 
             var result = new CliRootCommand { option }.Parse("-n 123");
 
@@ -359,48 +338,38 @@ namespace System.CommandLine.Tests
         [InlineData("--name 123 --name 456", 2)]
         [InlineData("-n 123 --name 456", 2)]
         [InlineData("--name 123 -x different-option --name 456", 2)]
-        public void Number_of_occurrences_of_identifier_token_is_exposed_by_option_result(string commandLine, int expectedCount)
+        public void Number_of_occurrences_of_identifier_token_is_exposed_by_option_result(
+            string commandLine,
+            int expectedCount
+        )
         {
-            var option = new CliOption<int>("--name")
-            {
-                Aliases = { "-n" }
-            };
+            var option = new CliOption<int>("--name") { Aliases = { "-n" } };
 
-            var root = new CliRootCommand
-            {
-                option,
-                new CliOption<string>("-x")
-            };
+            var root = new CliRootCommand { option, new CliOption<string>("-x") };
 
             var optionResult = root.Parse(commandLine).GetResult(option);
 
             optionResult.IdentifierTokenCount.Should().Be(expectedCount);
         }
 
-        [Fact] 
+        [Fact]
         public void Multiple_identifier_token_instances_without_argument_tokens_can_be_parsed()
         {
             var option = new CliOption<bool>("-v");
 
-            var root = new CliRootCommand
-            {
-                option
-            };
+            var root = new CliRootCommand { option };
 
             var result = root.Parse("-v -v -v");
 
             result.GetValue(option).Should().BeTrue();
         }
 
-        [Fact] 
+        [Fact]
         public void Multiple_bundled_identifier_token_instances_without_argument_tokens_can_be_parsed()
         {
             var option = new CliOption<bool>("-v");
 
-            var root = new CliRootCommand
-            {
-                option
-            };
+            var root = new CliRootCommand { option };
 
             var result = root.Parse("-vvv");
 
@@ -410,19 +379,19 @@ namespace System.CommandLine.Tests
         [Theory] // https://github.com/dotnet/command-line-api/issues/669
         [InlineData("-vvv")]
         [InlineData("-v -v -v")]
-        public void Custom_parser_can_be_used_to_implement_int_binding_based_on_token_count(string commandLine)
+        public void Custom_parser_can_be_used_to_implement_int_binding_based_on_token_count(
+            string commandLine
+        )
         {
             var option = new CliOption<int>("-v")
             {
                 Arity = ArgumentArity.Zero,
                 AllowMultipleArgumentsPerToken = true,
-                CustomParser = argumentResult => ((OptionResult)argumentResult.Parent).IdentifierTokenCount,
+                CustomParser = argumentResult =>
+                    ((OptionResult)argumentResult.Parent).IdentifierTokenCount,
             };
 
-            var root = new CliRootCommand
-            {
-                option
-            };
+            var root = new CliRootCommand { option };
 
             var result = root.Parse(commandLine);
 

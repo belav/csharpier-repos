@@ -12,35 +12,33 @@ public class b452950
 
     public static int Main(string[] args)
     {
-
         int numIterations = 0;
-        if (args.Length >0)
+        if (args.Length > 0)
         {
             Int32.TryParse(args[0], out numIterations);
-            if (numIterations<0)
+            if (numIterations < 0)
             {
-                numIterations=DEFAULT;
+                numIterations = DEFAULT;
             }
         }
         else
         {
-            numIterations= DEFAULT;
+            numIterations = DEFAULT;
         }
 
         // fragment the heap
-        for (int i=0; i<numIterations; i++)
+        for (int i = 0; i < numIterations; i++)
         {
-            byte[] b = new byte[1024*50];
+            byte[] b = new byte[1024 * 50];
             list.Add(GCHandle.Alloc(b, GCHandleType.Pinned));
-            byte[] b2 = new byte[1024*50];
-
+            byte[] b2 = new byte[1024 * 50];
         }
 
         int gcCount = GC.CollectionCount(GC.MaxGeneration);
         Console.WriteLine(gcCount);
 
         // if we do a full collection <= (5% of the interations) times, we pass
-        if (gcCount <= (numIterations*0.05))
+        if (gcCount <= (numIterations * 0.05))
         {
             Console.WriteLine("Passed");
             return 100;
@@ -50,4 +48,3 @@ public class b452950
         return 1;
     }
 }
-

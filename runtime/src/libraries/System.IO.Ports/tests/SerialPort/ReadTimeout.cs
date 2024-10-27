@@ -28,7 +28,11 @@ namespace System.IO.Ports.Tests
         private const int MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT = 1000;
         private const int NUM_TRYS = 5;
 
-        private enum ThrowAt { Set, Open };
+        private enum ThrowAt
+        {
+            Set,
+            Open,
+        };
 
         #region Test Cases
 
@@ -36,7 +40,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Default_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying default ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying default ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyInfiniteTimeout(Read_byte_int_int, false);
         }
 
@@ -44,7 +50,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Default_Read_char_int_int()
         {
-            Debug.WriteLine("Verifying default ReadTimeout with Read(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying default ReadTimeout with Read(char[] buffer, int offset, int count)"
+            );
             VerifyInfiniteTimeout(Read_char_int_int, false);
         }
 
@@ -76,7 +84,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Infinite_Read_byte_int_int()
         {
-            Debug.WriteLine("Verifying infinite ReadTimeout with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying infinite ReadTimeout with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyInfiniteTimeout(Read_byte_int_int, true);
         }
 
@@ -84,7 +94,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasLoopbackOrNullModem))]
         public void ReadTimeout_Infinite_Read_char_int_int()
         {
-            Debug.WriteLine("Verifying infinite ReadTimeout with Read(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying infinite ReadTimeout with Read(char[] buffer, int offset, int count)"
+            );
             VerifyInfiniteTimeout(Read_char_int_int, true);
         }
 
@@ -116,7 +128,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_Read_byte_int_int_BeforeOpen()
         {
-            Debug.WriteLine("Verifying setting ReadTimeout=0 before Open() with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying setting ReadTimeout=0 before Open() with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyZeroTimeoutBeforeOpen(Read_byte_int_int);
         }
 
@@ -124,7 +138,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_Read_char_int_int_BeforeOpen()
         {
-            Debug.WriteLine("Verifying setting ReadTimeout=0 before Open() with Read(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying setting ReadTimeout=0 before Open() with Read(char[] buffer, int offset, int count)"
+            );
             VerifyZeroTimeoutBeforeOpen(Read_char_int_int);
         }
 
@@ -156,7 +172,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_Read_byte_int_int_AfterOpen()
         {
-            Debug.WriteLine("Verifying setting ReadTimeout=0 after Open() with Read(byte[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying setting ReadTimeout=0 after Open() with Read(byte[] buffer, int offset, int count)"
+            );
             VerifyZeroTimeoutAfterOpen(Read_byte_int_int);
         }
 
@@ -164,7 +182,9 @@ namespace System.IO.Ports.Tests
         [ConditionalFact(nameof(HasOneSerialPort))]
         public void ReadTimeout_0_Read_char_int_int_AfterOpen()
         {
-            Debug.WriteLine("Verifying setting ReadTimeout=0 after Open() with Read(char[] buffer, int offset, int count)");
+            Debug.WriteLine(
+                "Verifying setting ReadTimeout=0 after Open() with Read(char[] buffer, int offset, int count)"
+            );
             VerifyZeroTimeoutAfterOpen(Read_char_int_int);
         }
 
@@ -212,7 +232,10 @@ namespace System.IO.Ports.Tests
         #endregion
 
         #region Verification for Test Cases
-        private static void VerifyInfiniteTimeout(Action<SerialPort> readMethod, bool setInfiniteTimeout)
+        private static void VerifyInfiniteTimeout(
+            Action<SerialPort> readMethod,
+            bool setInfiniteTimeout
+        )
         {
             using (SerialPort com1 = TCSupport.InitFirstSerialPort())
             using (SerialPort com2 = TCSupport.InitSecondSerialPort(com1))
@@ -220,7 +243,10 @@ namespace System.IO.Ports.Tests
                 SerialPortProperties serPortProp = new SerialPortProperties();
 
                 serPortProp.SetAllPropertiesToOpenDefaults();
-                serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+                serPortProp.SetProperty(
+                    "PortName",
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                );
                 serPortProp.SetProperty("WriteTimeout", 10);
 
                 com1.WriteTimeout = 10;
@@ -253,7 +279,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyZeroTimeoutBeforeOpen(Action<SerialPort> readMethod)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.ReadTimeout = 0;
                 com.Open();
@@ -264,7 +294,11 @@ namespace System.IO.Ports.Tests
 
         private void VerifyZeroTimeoutAfterOpen(Action<SerialPort> readMethod)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 com.Open();
                 com.ReadTimeout = 0;
@@ -281,7 +315,10 @@ namespace System.IO.Ports.Tests
             int actualTime = 0;
 
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             serPortProp.SetProperty("ReadTimeout", 0);
             serPortProp.SetProperty("WriteTimeout", 1000);
@@ -296,7 +333,12 @@ namespace System.IO.Ports.Tests
 
             if (MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT < sw.ElapsedMilliseconds)
             {
-                Fail("Err_2570ajdlkj!!! Read Method {0} timed out in {1}ms expected something less then {2}ms", readMethod.Method.Name, sw.ElapsedMilliseconds, MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT);
+                Fail(
+                    "Err_2570ajdlkj!!! Read Method {0} timed out in {1}ms expected something less then {2}ms",
+                    readMethod.Method.Name,
+                    sw.ElapsedMilliseconds,
+                    MAX_ACCEPTABLE_WARMUP_ZERO_TIMEOUT
+                );
             }
 
             sw.Reset();
@@ -316,17 +358,25 @@ namespace System.IO.Ports.Tests
 
             if (MAX_ACCEPTABLE_ZERO_TIMEOUT < actualTime)
             {
-                Fail("ERROR!!! Read Method {0} timed out in {1}ms expected something less then {2}ms", readMethod.Method.Name, actualTime, MAX_ACCEPTABLE_ZERO_TIMEOUT);
+                Fail(
+                    "ERROR!!! Read Method {0} timed out in {1}ms expected something less then {2}ms",
+                    readMethod.Method.Name,
+                    actualTime,
+                    MAX_ACCEPTABLE_ZERO_TIMEOUT
+                );
             }
 
             serPortProp.VerifyPropertiesAndPrint(com);
             com.ReadTimeout = 0;
         }
 
-
         private void VerifyException(int readTimeout, ThrowAt throwAt, Type expectedException)
         {
-            using (SerialPort com = new SerialPort(TCSupport.LocalMachineSerialInfo.FirstAvailablePortName))
+            using (
+                SerialPort com = new SerialPort(
+                    TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+                )
+            )
             {
                 VerifyExceptionAtOpen(com, readTimeout, throwAt, expectedException);
 
@@ -337,15 +387,22 @@ namespace System.IO.Ports.Tests
             }
         }
 
-
-        private void VerifyExceptionAtOpen(SerialPort com, int readTimeout, ThrowAt throwAt, Type expectedException)
+        private void VerifyExceptionAtOpen(
+            SerialPort com,
+            int readTimeout,
+            ThrowAt throwAt,
+            Type expectedException
+        )
         {
             int origReadTimeout = com.ReadTimeout;
 
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             serPortProp.SetAllPropertiesToDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             if (ThrowAt.Open == throwAt)
                 serPortProp.SetProperty("ReadTimeout", readTimeout);
@@ -359,18 +416,28 @@ namespace System.IO.Ports.Tests
 
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected Open() throw {0} and {1} was thrown", expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -378,33 +445,48 @@ namespace System.IO.Ports.Tests
             com.ReadTimeout = origReadTimeout;
         }
 
-
-        private void VerifyExceptionAfterOpen(SerialPort com, int readTimeout, Type expectedException)
+        private void VerifyExceptionAfterOpen(
+            SerialPort com,
+            int readTimeout,
+            Type expectedException
+        )
         {
             SerialPortProperties serPortProp = new SerialPortProperties();
 
             com.Open();
             serPortProp.SetAllPropertiesToOpenDefaults();
-            serPortProp.SetProperty("PortName", TCSupport.LocalMachineSerialInfo.FirstAvailablePortName);
+            serPortProp.SetProperty(
+                "PortName",
+                TCSupport.LocalMachineSerialInfo.FirstAvailablePortName
+            );
 
             try
             {
                 com.ReadTimeout = readTimeout;
                 if (null != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReadTimeout after Open() to throw {0} and nothing was thrown", expectedException);
+                    Fail(
+                        "ERROR!!! Expected setting the ReadTimeout after Open() to throw {0} and nothing was thrown",
+                        expectedException
+                    );
                 }
             }
             catch (Exception e)
             {
                 if (null == expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReadTimeout after Open() NOT to throw an exception and {0} was thrown", e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the ReadTimeout after Open() NOT to throw an exception and {0} was thrown",
+                        e.GetType()
+                    );
                 }
                 else if (e.GetType() != expectedException)
                 {
-                    Fail("ERROR!!! Expected setting the ReadTimeout after Open() throw {0} and {1} was thrown",
-                        expectedException, e.GetType());
+                    Fail(
+                        "ERROR!!! Expected setting the ReadTimeout after Open() throw {0} and {1} was thrown",
+                        expectedException,
+                        e.GetType()
+                    );
                 }
             }
 
@@ -420,7 +502,6 @@ namespace System.IO.Ports.Tests
             catch (TimeoutException) { }
         }
 
-
         private void Read_char_int_int(SerialPort com)
         {
             try
@@ -429,7 +510,6 @@ namespace System.IO.Ports.Tests
             }
             catch (TimeoutException) { }
         }
-
 
         private void ReadByte(SerialPort com)
         {
@@ -440,7 +520,6 @@ namespace System.IO.Ports.Tests
             catch (TimeoutException) { }
         }
 
-
         private void ReadChar(SerialPort com)
         {
             try
@@ -450,7 +529,6 @@ namespace System.IO.Ports.Tests
             catch (TimeoutException) { }
         }
 
-
         private void ReadLine(SerialPort com)
         {
             try
@@ -459,7 +537,6 @@ namespace System.IO.Ports.Tests
             }
             catch (TimeoutException) { }
         }
-
 
         private void ReadTo(SerialPort com)
         {

@@ -8,10 +8,7 @@ public class LdapSettingsValidationTests
     [Fact]
     public void EnabledWithoutDomainThrows()
     {
-        var settings = new LdapSettings
-        {
-            EnableLdapClaimResolution = true
-        };
+        var settings = new LdapSettings { EnableLdapClaimResolution = true };
 
         Assert.Throws<ArgumentException>(() => settings.Validate());
     }
@@ -22,7 +19,7 @@ public class LdapSettingsValidationTests
         var settings = new LdapSettings
         {
             EnableLdapClaimResolution = true,
-            MachineAccountPassword = "Passw0rd"
+            MachineAccountPassword = "Passw0rd",
         };
 
         Assert.Throws<ArgumentException>(() => settings.Validate());

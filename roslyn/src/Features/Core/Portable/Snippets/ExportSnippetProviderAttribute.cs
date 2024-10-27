@@ -10,9 +10,11 @@ namespace Microsoft.CodeAnalysis.Snippets
 {
     [MetadataAttribute]
     [AttributeUsage(AttributeTargets.Class)]
-    internal sealed class ExportSnippetProviderAttribute(string name, string language) : ExportAttribute(typeof(ISnippetProvider))
+    internal sealed class ExportSnippetProviderAttribute(string name, string language)
+        : ExportAttribute(typeof(ISnippetProvider))
     {
         public string Name { get; } = name ?? throw new ArgumentNullException(nameof(name));
-        public string Language { get; } = language ?? throw new ArgumentNullException(nameof(language));
+        public string Language { get; } =
+            language ?? throw new ArgumentNullException(nameof(language));
     }
 }

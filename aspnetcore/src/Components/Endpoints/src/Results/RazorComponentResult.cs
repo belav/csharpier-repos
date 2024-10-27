@@ -15,17 +15,17 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// </summary>
 public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentTypeHttpResult
 {
-    private static readonly IReadOnlyDictionary<string, object?> EmptyParameters
-        = new Dictionary<string, object?>().AsReadOnly();
+    private static readonly IReadOnlyDictionary<string, object?> EmptyParameters = new Dictionary<
+        string,
+        object?
+    >().AsReadOnly();
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
     /// </summary>
     /// <param name="componentType">The type of the component to render. This must implement <see cref="IComponent"/>.</param>
     public RazorComponentResult([DynamicallyAccessedMembers(Component)] Type componentType)
-        : this(componentType, ReadOnlyDictionary<string, object?>.Empty)
-    {
-    }
+        : this(componentType, ReadOnlyDictionary<string, object?>.Empty) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
@@ -34,10 +34,9 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// <param name="parameters">Parameters for the component.</param>
     public RazorComponentResult(
         [DynamicallyAccessedMembers(Component)] Type componentType,
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] object parameters)
-        : this(componentType, CoerceParametersObjectToDictionary(parameters))
-    {
-    }
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] object parameters
+    )
+        : this(componentType, CoerceParametersObjectToDictionary(parameters)) { }
 
     /// <summary>
     /// Constructs an instance of <see cref="RazorComponentResult"/>.
@@ -46,7 +45,8 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// <param name="parameters">Parameters for the component.</param>
     public RazorComponentResult(
         [DynamicallyAccessedMembers(Component)] Type componentType,
-        IReadOnlyDictionary<string, object?> parameters)
+        IReadOnlyDictionary<string, object?> parameters
+    )
     {
         ArgumentNullException.ThrowIfNull(componentType);
         ArgumentNullException.ThrowIfNull(parameters);
@@ -57,10 +57,12 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
         Parameters = parameters ?? EmptyParameters;
     }
 
-    private static IReadOnlyDictionary<string, object?> CoerceParametersObjectToDictionary(object? parameters)
-        => parameters is null
-        ? throw new ArgumentNullException(nameof(parameters))
-        : (IReadOnlyDictionary<string, object?>)PropertyHelper.ObjectToDictionary(parameters);
+    private static IReadOnlyDictionary<string, object?> CoerceParametersObjectToDictionary(
+        object? parameters
+    ) =>
+        parameters is null
+            ? throw new ArgumentNullException(nameof(parameters))
+            : (IReadOnlyDictionary<string, object?>)PropertyHelper.ObjectToDictionary(parameters);
 
     /// <summary>
     /// Gets the component type.
@@ -96,6 +98,6 @@ public class RazorComponentResult : IResult, IStatusCodeHttpResult, IContentType
     /// </summary>
     /// <param name="httpContext">An <see cref="HttpContext" /> associated with the current request.</param >
     /// <returns >A <see cref="T:System.Threading.Tasks.Task" /> which will complete when execution is completed.</returns >
-    public Task ExecuteAsync(HttpContext httpContext)
-        => RazorComponentResultExecutor.ExecuteAsync(httpContext, this);
+    public Task ExecuteAsync(HttpContext httpContext) =>
+        RazorComponentResultExecutor.ExecuteAsync(httpContext, this);
 }

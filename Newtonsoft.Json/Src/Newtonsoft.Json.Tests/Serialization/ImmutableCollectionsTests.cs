@@ -48,25 +48,26 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeList()
         {
-            ImmutableList<string> l = ImmutableList.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableList<string> l = ImmutableList.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeList()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -83,14 +84,17 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeListInterface()
         {
-            string json = @"[
+            string json =
+                @"[
         'Volibear',
         'Teemo',
         'Katarina'
       ]";
 
             // what sorcery is this?!
-            IImmutableList<string> champions = JsonConvert.DeserializeObject<IImmutableList<string>>(json);
+            IImmutableList<string> champions = JsonConvert.DeserializeObject<
+                IImmutableList<string>
+            >(json);
 
             Assert.AreEqual(3, champions.Count);
             Assert.AreEqual("Volibear", champions[0]);
@@ -103,25 +107,26 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeArray()
         {
-            ImmutableArray<string> l = ImmutableArray.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableArray<string> l = ImmutableArray.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeArray()
         {
-            string json = @"[
+            string json =
+                @"[
           ""One"",
           ""II"",
           ""3""
@@ -139,8 +144,10 @@ namespace Newtonsoft.Json.Tests.Serialization
         public void SerializeDefaultArray()
         {
             ExceptionAssert.Throws<InvalidOperationException>(
-                () => JsonConvert.SerializeObject(default(ImmutableArray<int>), Formatting.Indented),
-                "This operation cannot be performed on a default instance of ImmutableArray<T>.  Consider initializing the array, or checking the ImmutableArray<T>.IsDefault property.");
+                () =>
+                    JsonConvert.SerializeObject(default(ImmutableArray<int>), Formatting.Indented),
+                "This operation cannot be performed on a default instance of ImmutableArray<T>.  Consider initializing the array, or checking the ImmutableArray<T>.IsDefault property."
+            );
         }
         #endregion
 
@@ -148,25 +155,26 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeQueue()
         {
-            ImmutableQueue<string> l = ImmutableQueue.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableQueue<string> l = ImmutableQueue.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""One"",
   ""II"",
   ""3""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeQueue()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -183,13 +191,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeQueueInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            IImmutableQueue<string> l = JsonConvert.DeserializeObject<IImmutableQueue<string>>(json);
+            IImmutableQueue<string> l = JsonConvert.DeserializeObject<IImmutableQueue<string>>(
+                json
+            );
 
             Assert.AreEqual(3, l.Count());
             Assert.AreEqual("One", l.ElementAt(0));
@@ -202,25 +213,26 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeStack()
         {
-            ImmutableStack<string> l = ImmutableStack.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableStack<string> l = ImmutableStack.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""3"",
   ""II"",
   ""One""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeStack()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -237,13 +249,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeStackInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            IImmutableStack<string> l = JsonConvert.DeserializeObject<IImmutableStack<string>>(json);
+            IImmutableStack<string> l = JsonConvert.DeserializeObject<IImmutableStack<string>>(
+                json
+            );
 
             Assert.AreEqual(3, l.Count());
             Assert.AreEqual("3", l.ElementAt(0));
@@ -256,12 +271,9 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeHashSet()
         {
-            ImmutableHashSet<string> l = ImmutableHashSet.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableHashSet<string> l = ImmutableHashSet.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
 
@@ -275,13 +287,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeHashSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            ImmutableHashSet<string> l = JsonConvert.DeserializeObject<ImmutableHashSet<string>>(json);
+            ImmutableHashSet<string> l = JsonConvert.DeserializeObject<ImmutableHashSet<string>>(
+                json
+            );
 
             Assert.AreEqual(3, l.Count());
             Assert.IsTrue(l.Contains("3"));
@@ -292,7 +307,8 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeHashSetInterface()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
@@ -313,31 +329,34 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeSortedSet()
         {
-            ImmutableSortedSet<string> l = ImmutableSortedSet.CreateRange(new List<string>
-            {
-                "One",
-                "II",
-                "3"
-            });
+            ImmutableSortedSet<string> l = ImmutableSortedSet.CreateRange(
+                new List<string> { "One", "II", "3" }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""3"",
   ""II"",
   ""One""
-]", json);
+]",
+                json
+            );
         }
 
         [Test]
         public void DeserializeSortedSet()
         {
-            string json = @"[
+            string json =
+                @"[
   ""One"",
   ""II"",
   ""3""
 ]";
 
-            ImmutableSortedSet<string> l = JsonConvert.DeserializeObject<ImmutableSortedSet<string>>(json);
+            ImmutableSortedSet<string> l = JsonConvert.DeserializeObject<
+                ImmutableSortedSet<string>
+            >(json);
 
             Assert.AreEqual(3, l.Count());
             Assert.IsTrue(l.Contains("3"));
@@ -350,12 +369,14 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeDictionary()
         {
-            ImmutableDictionary<int, string> l = ImmutableDictionary.CreateRange(new Dictionary<int, string>
-            {
-                { 1, "One" },
-                { 2, "II" },
-                { 3, "3" }
-            });
+            ImmutableDictionary<int, string> l = ImmutableDictionary.CreateRange(
+                new Dictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" },
+                }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
             JObject a = JObject.Parse(json);
@@ -368,13 +389,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            ImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<ImmutableDictionary<int, string>>(json);
+            ImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<
+                ImmutableDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);
@@ -385,13 +409,16 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void DeserializeDictionaryInterface()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            IImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<IImmutableDictionary<int, string>>(json);
+            IImmutableDictionary<int, string> l = JsonConvert.DeserializeObject<
+                IImmutableDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);
@@ -406,31 +433,39 @@ namespace Newtonsoft.Json.Tests.Serialization
         [Test]
         public void SerializeSortedDictionary()
         {
-            ImmutableSortedDictionary<int, string> l = ImmutableSortedDictionary.CreateRange(new SortedDictionary<int, string>
-            {
-                { 1, "One" },
-                { 2, "II" },
-                { 3, "3" }
-            });
+            ImmutableSortedDictionary<int, string> l = ImmutableSortedDictionary.CreateRange(
+                new SortedDictionary<int, string>
+                {
+                    { 1, "One" },
+                    { 2, "II" },
+                    { 3, "3" },
+                }
+            );
 
             string json = JsonConvert.SerializeObject(l, Formatting.Indented);
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
-}", json);
+}",
+                json
+            );
         }
 
         [Test]
         public void DeserializeSortedDictionary()
         {
-            string json = @"{
+            string json =
+                @"{
   ""1"": ""One"",
   ""2"": ""II"",
   ""3"": ""3""
 }";
 
-            ImmutableSortedDictionary<int, string> l = JsonConvert.DeserializeObject<ImmutableSortedDictionary<int, string>>(json);
+            ImmutableSortedDictionary<int, string> l = JsonConvert.DeserializeObject<
+                ImmutableSortedDictionary<int, string>
+            >(json);
 
             Assert.AreEqual(3, l.Count);
             Assert.AreEqual("One", l[1]);

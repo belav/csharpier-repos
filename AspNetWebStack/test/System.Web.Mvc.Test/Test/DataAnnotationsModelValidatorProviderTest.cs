@@ -24,20 +24,24 @@ namespace System.Web.Mvc.Test
             }
         }
 
-        private class MyValidationAttributeAdapter : DataAnnotationsModelValidator<MyValidationAttribute>
+        private class MyValidationAttributeAdapter
+            : DataAnnotationsModelValidator<MyValidationAttribute>
         {
-            public MyValidationAttributeAdapter(ModelMetadata metadata, ControllerContext context, MyValidationAttribute attribute)
-                : base(metadata, context, attribute)
-            {
-            }
+            public MyValidationAttributeAdapter(
+                ModelMetadata metadata,
+                ControllerContext context,
+                MyValidationAttribute attribute
+            )
+                : base(metadata, context, attribute) { }
         }
 
         private class MyValidationAttributeAdapterBadCtor : ModelValidator
         {
-            public MyValidationAttributeAdapterBadCtor(ModelMetadata metadata, ControllerContext context)
-                : base(metadata, context)
-            {
-            }
+            public MyValidationAttributeAdapterBadCtor(
+                ModelMetadata metadata,
+                ControllerContext context
+            )
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -47,16 +51,16 @@ namespace System.Web.Mvc.Test
 
         private class MyDefaultValidationAttributeAdapter : DataAnnotationsModelValidator
         {
-            public MyDefaultValidationAttributeAdapter(ModelMetadata metadata, ControllerContext context, ValidationAttribute attribute)
-                : base(metadata, context, attribute)
-            {
-            }
+            public MyDefaultValidationAttributeAdapter(
+                ModelMetadata metadata,
+                ControllerContext context,
+                ValidationAttribute attribute
+            )
+                : base(metadata, context, attribute) { }
         }
 
         [MyValidation]
-        private class MyValidatedClass
-        {
-        }
+        private class MyValidatedClass { }
 
         [Fact]
         public void RegisterAdapter()
@@ -66,17 +70,25 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                DataAnnotationsModelValidatorProvider.AttributeFactories = new Dictionary<Type, DataAnnotationsModelValidationFactory>();
+                DataAnnotationsModelValidatorProvider.AttributeFactories =
+                    new Dictionary<Type, DataAnnotationsModelValidationFactory>();
 
                 // Act
-                DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(MyValidationAttribute), typeof(MyValidationAttributeAdapter));
+                DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                    typeof(MyValidationAttribute),
+                    typeof(MyValidationAttributeAdapter)
+                );
 
                 // Assert
                 var type = DataAnnotationsModelValidatorProvider.AttributeFactories.Keys.Single();
                 Assert.Equal(typeof(MyValidationAttribute), type);
 
-                var factory = DataAnnotationsModelValidatorProvider.AttributeFactories.Values.Single();
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(object));
+                var factory =
+                    DataAnnotationsModelValidatorProvider.AttributeFactories.Values.Single();
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(object)
+                );
                 var context = new ControllerContext();
                 var attribute = new MyValidationAttribute();
                 var validator = factory(metadata, context, attribute);
@@ -93,28 +105,53 @@ namespace System.Web.Mvc.Test
         {
             // Attribute type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapter(null, typeof(MyValidationAttributeAdapter)),
-                "attributeType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                        null,
+                        typeof(MyValidationAttributeAdapter)
+                    ),
+                "attributeType"
+            );
 
             // Adapter type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(MyValidationAttribute), null),
-                "adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                        typeof(MyValidationAttribute),
+                        null
+                    ),
+                "adapterType"
+            );
 
             // Validation attribute must derive from ValidationAttribute
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(object), typeof(MyValidationAttributeAdapter)),
-                "The type System.Object must derive from System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: attributeType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                        typeof(object),
+                        typeof(MyValidationAttributeAdapter)
+                    ),
+                "The type System.Object must derive from System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: attributeType"
+            );
 
             // Adapter must derive from ModelValidator
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(MyValidationAttribute), typeof(object)),
-                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                        typeof(MyValidationAttribute),
+                        typeof(object)
+                    ),
+                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType"
+            );
 
             // Adapter must have the expected constructor
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapter(typeof(MyValidationAttribute), typeof(MyValidationAttributeAdapterBadCtor)),
-                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttributeAdapterBadCtor must have a public constructor which accepts three parameters of types System.Web.Mvc.ModelMetadata, System.Web.Mvc.ControllerContext, and System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttribute\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapter(
+                        typeof(MyValidationAttribute),
+                        typeof(MyValidationAttributeAdapterBadCtor)
+                    ),
+                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttributeAdapterBadCtor must have a public constructor which accepts three parameters of types System.Web.Mvc.ModelMetadata, System.Web.Mvc.ControllerContext, and System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttribute\r\nParameter name: adapterType"
+            );
         }
 
         [Fact]
@@ -125,16 +162,26 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                DataAnnotationsModelValidatorProvider.AttributeFactories = new Dictionary<Type, DataAnnotationsModelValidationFactory>();
-                DataAnnotationsModelValidationFactory factory = delegate { return null; };
+                DataAnnotationsModelValidatorProvider.AttributeFactories =
+                    new Dictionary<Type, DataAnnotationsModelValidationFactory>();
+                DataAnnotationsModelValidationFactory factory = delegate
+                {
+                    return null;
+                };
 
                 // Act
-                DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(typeof(MyValidationAttribute), factory);
+                DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(
+                    typeof(MyValidationAttribute),
+                    factory
+                );
 
                 // Assert
                 var type = DataAnnotationsModelValidatorProvider.AttributeFactories.Keys.Single();
                 Assert.Equal(typeof(MyValidationAttribute), type);
-                Assert.Same(factory, DataAnnotationsModelValidatorProvider.AttributeFactories.Values.Single());
+                Assert.Same(
+                    factory,
+                    DataAnnotationsModelValidatorProvider.AttributeFactories.Values.Single()
+                );
             }
             finally
             {
@@ -150,17 +197,28 @@ namespace System.Web.Mvc.Test
             // Attribute type cannot be null
             Assert.ThrowsArgumentNull(
                 () => DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(null, factory),
-                "attributeType");
+                "attributeType"
+            );
 
             // Factory cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(typeof(MyValidationAttribute), null),
-                "factory");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(
+                        typeof(MyValidationAttribute),
+                        null
+                    ),
+                "factory"
+            );
 
             // Validation attribute must derive from ValidationAttribute
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(typeof(object), factory),
-                "The type System.Object must derive from System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: attributeType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterAdapterFactory(
+                        typeof(object),
+                        factory
+                    ),
+                "The type System.Object must derive from System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: attributeType"
+            );
         }
 
         [Fact]
@@ -171,12 +229,19 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(MyValidatedClass));
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(MyValidatedClass)
+                );
                 var context = new ControllerContext();
-                DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(typeof(MyDefaultValidationAttributeAdapter));
+                DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(
+                    typeof(MyDefaultValidationAttributeAdapter)
+                );
 
                 // Act
-                var result = new DataAnnotationsModelValidatorProvider().GetValidators(metadata, context).Single();
+                var result = new DataAnnotationsModelValidatorProvider()
+                    .GetValidators(metadata, context)
+                    .Single();
 
                 // Assert
                 Assert.IsType<MyDefaultValidationAttributeAdapter>(result);
@@ -193,17 +258,23 @@ namespace System.Web.Mvc.Test
             // Adapter type cannot be null
             Assert.ThrowsArgumentNull(
                 () => DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(null),
-                "adapterType");
+                "adapterType"
+            );
 
             // Adapter must derive from ModelValidator
             Assert.Throws<ArgumentException>(
                 () => DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(typeof(object)),
-                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType");
+                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType"
+            );
 
             // Adapter must have the expected constructor
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(typeof(MyValidationAttributeAdapterBadCtor)),
-                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttributeAdapterBadCtor must have a public constructor which accepts three parameters of types System.Web.Mvc.ModelMetadata, System.Web.Mvc.ControllerContext, and System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterDefaultAdapter(
+                        typeof(MyValidationAttributeAdapterBadCtor)
+                    ),
+                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidationAttributeAdapterBadCtor must have a public constructor which accepts three parameters of types System.Web.Mvc.ModelMetadata, System.Web.Mvc.ControllerContext, and System.ComponentModel.DataAnnotations.ValidationAttribute\r\nParameter name: adapterType"
+            );
         }
 
         [Fact]
@@ -214,14 +285,22 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(MyValidatedClass));
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(MyValidatedClass)
+                );
                 var context = new ControllerContext();
                 ModelValidator validator = new Mock<ModelValidator>(metadata, context).Object;
-                DataAnnotationsModelValidationFactory factory = delegate { return validator; };
+                DataAnnotationsModelValidationFactory factory = delegate
+                {
+                    return validator;
+                };
                 DataAnnotationsModelValidatorProvider.RegisterDefaultAdapterFactory(factory);
 
                 // Act
-                var result = new DataAnnotationsModelValidatorProvider().GetValidators(metadata, context).Single();
+                var result = new DataAnnotationsModelValidatorProvider()
+                    .GetValidators(metadata, context)
+                    .Single();
 
                 // Assert
                 Assert.Same(validator, result);
@@ -238,7 +317,8 @@ namespace System.Web.Mvc.Test
             // Factory cannot be null
             Assert.ThrowsArgumentNull(
                 () => DataAnnotationsModelValidatorProvider.RegisterDefaultAdapterFactory(null),
-                "factory");
+                "factory"
+            );
         }
 
         // IValidatableObject adapter registration
@@ -246,9 +326,7 @@ namespace System.Web.Mvc.Test
         private class MyValidatableAdapter : ModelValidator
         {
             public MyValidatableAdapter(ModelMetadata metadata, ControllerContext context)
-                : base(metadata, context)
-            {
-            }
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -258,10 +336,12 @@ namespace System.Web.Mvc.Test
 
         private class MyValidatableAdapterBadCtor : ModelValidator
         {
-            public MyValidatableAdapterBadCtor(ModelMetadata metadata, ControllerContext context, int unused)
-                : base(metadata, context)
-            {
-            }
+            public MyValidatableAdapterBadCtor(
+                ModelMetadata metadata,
+                ControllerContext context,
+                int unused
+            )
+                : base(metadata, context) { }
 
             public override IEnumerable<ModelValidationResult> Validate(object container)
             {
@@ -285,18 +365,26 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                DataAnnotationsModelValidatorProvider.ValidatableFactories = new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
+                DataAnnotationsModelValidatorProvider.ValidatableFactories =
+                    new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
                 IValidatableObject validatable = new Mock<IValidatableObject>().Object;
 
                 // Act
-                DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(validatable.GetType(), typeof(MyValidatableAdapter));
+                DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                    validatable.GetType(),
+                    typeof(MyValidatableAdapter)
+                );
 
                 // Assert
                 var type = DataAnnotationsModelValidatorProvider.ValidatableFactories.Keys.Single();
                 Assert.Equal(validatable.GetType(), type);
 
-                var factory = DataAnnotationsModelValidatorProvider.ValidatableFactories.Values.Single();
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(object));
+                var factory =
+                    DataAnnotationsModelValidatorProvider.ValidatableFactories.Values.Single();
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(object)
+                );
                 var context = new ControllerContext();
                 var validator = factory(metadata, context);
                 Assert.IsType<MyValidatableAdapter>(validator);
@@ -312,28 +400,53 @@ namespace System.Web.Mvc.Test
         {
             // Attribute type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(null, typeof(MyValidatableAdapter)),
-                "modelType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                        null,
+                        typeof(MyValidatableAdapter)
+                    ),
+                "modelType"
+            );
 
             // Adapter type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(typeof(MyValidatableClass), null),
-                "adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                        typeof(MyValidatableClass),
+                        null
+                    ),
+                "adapterType"
+            );
 
             // Validation attribute must derive from ValidationAttribute
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(typeof(object), typeof(MyValidatableAdapter)),
-                "The type System.Object must derive from System.ComponentModel.DataAnnotations.IValidatableObject\r\nParameter name: modelType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                        typeof(object),
+                        typeof(MyValidatableAdapter)
+                    ),
+                "The type System.Object must derive from System.ComponentModel.DataAnnotations.IValidatableObject\r\nParameter name: modelType"
+            );
 
             // Adapter must derive from ModelValidator
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(typeof(MyValidatableClass), typeof(object)),
-                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                        typeof(MyValidatableClass),
+                        typeof(object)
+                    ),
+                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType"
+            );
 
             // Adapter must have the expected constructor
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(typeof(MyValidatableClass), typeof(MyValidatableAdapterBadCtor)),
-                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidatableAdapterBadCtor must have a public constructor which accepts two parameters of types System.Web.Mvc.ModelMetadata and System.Web.Mvc.ControllerContext.\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapter(
+                        typeof(MyValidatableClass),
+                        typeof(MyValidatableAdapterBadCtor)
+                    ),
+                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidatableAdapterBadCtor must have a public constructor which accepts two parameters of types System.Web.Mvc.ModelMetadata and System.Web.Mvc.ControllerContext.\r\nParameter name: adapterType"
+            );
         }
 
         [Fact]
@@ -344,16 +457,26 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                DataAnnotationsModelValidatorProvider.ValidatableFactories = new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
-                DataAnnotationsValidatableObjectAdapterFactory factory = delegate { return null; };
+                DataAnnotationsModelValidatorProvider.ValidatableFactories =
+                    new Dictionary<Type, DataAnnotationsValidatableObjectAdapterFactory>();
+                DataAnnotationsValidatableObjectAdapterFactory factory = delegate
+                {
+                    return null;
+                };
 
                 // Act
-                DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(typeof(MyValidatableClass), factory);
+                DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(
+                    typeof(MyValidatableClass),
+                    factory
+                );
 
                 // Assert
                 var type = DataAnnotationsModelValidatorProvider.ValidatableFactories.Keys.Single();
                 Assert.Equal(typeof(MyValidatableClass), type);
-                Assert.Same(factory, DataAnnotationsModelValidatorProvider.ValidatableFactories.Values.Single());
+                Assert.Same(
+                    factory,
+                    DataAnnotationsModelValidatorProvider.ValidatableFactories.Values.Single()
+                );
             }
             finally
             {
@@ -368,18 +491,33 @@ namespace System.Web.Mvc.Test
 
             // Attribute type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(null, factory),
-                "modelType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(
+                        null,
+                        factory
+                    ),
+                "modelType"
+            );
 
             // Factory cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(typeof(MyValidatableClass), null),
-                "factory");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(
+                        typeof(MyValidatableClass),
+                        null
+                    ),
+                "factory"
+            );
 
             // Validation attribute must derive from ValidationAttribute
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(typeof(object), factory),
-                "The type System.Object must derive from System.ComponentModel.DataAnnotations.IValidatableObject\r\nParameter name: modelType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterValidatableObjectAdapterFactory(
+                        typeof(object),
+                        factory
+                    ),
+                "The type System.Object must derive from System.ComponentModel.DataAnnotations.IValidatableObject\r\nParameter name: modelType"
+            );
         }
 
         [Fact]
@@ -390,12 +528,19 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(MyValidatableClass));
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(MyValidatableClass)
+                );
                 var context = new ControllerContext();
-                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(typeof(MyValidatableAdapter));
+                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(
+                    typeof(MyValidatableAdapter)
+                );
 
                 // Act
-                var result = new DataAnnotationsModelValidatorProvider().GetValidators(metadata, context).Single();
+                var result = new DataAnnotationsModelValidatorProvider()
+                    .GetValidators(metadata, context)
+                    .Single();
 
                 // Assert
                 Assert.IsType<MyValidatableAdapter>(result);
@@ -411,18 +556,30 @@ namespace System.Web.Mvc.Test
         {
             // Adapter type cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(null),
-                "adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(
+                        null
+                    ),
+                "adapterType"
+            );
 
             // Adapter must derive from ModelValidator
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(typeof(object)),
-                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(
+                        typeof(object)
+                    ),
+                "The type System.Object must derive from System.Web.Mvc.ModelValidator\r\nParameter name: adapterType"
+            );
 
             // Adapter must have the expected constructor
             Assert.Throws<ArgumentException>(
-                () => DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(typeof(MyValidatableAdapterBadCtor)),
-                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidatableAdapterBadCtor must have a public constructor which accepts two parameters of types System.Web.Mvc.ModelMetadata and System.Web.Mvc.ControllerContext.\r\nParameter name: adapterType");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapter(
+                        typeof(MyValidatableAdapterBadCtor)
+                    ),
+                "The type System.Web.Mvc.Test.DataAnnotationsModelValidatorProviderTest+MyValidatableAdapterBadCtor must have a public constructor which accepts two parameters of types System.Web.Mvc.ModelMetadata and System.Web.Mvc.ControllerContext.\r\nParameter name: adapterType"
+            );
         }
 
         [Fact]
@@ -433,14 +590,24 @@ namespace System.Web.Mvc.Test
             try
             {
                 // Arrange
-                var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(MyValidatableClass));
+                var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                    () => null,
+                    typeof(MyValidatableClass)
+                );
                 var context = new ControllerContext();
                 ModelValidator validator = new Mock<ModelValidator>(metadata, context).Object;
-                DataAnnotationsValidatableObjectAdapterFactory factory = delegate { return validator; };
-                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(factory);
+                DataAnnotationsValidatableObjectAdapterFactory factory = delegate
+                {
+                    return validator;
+                };
+                DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(
+                    factory
+                );
 
                 // Act
-                var result = new DataAnnotationsModelValidatorProvider().GetValidators(metadata, context).Single();
+                var result = new DataAnnotationsModelValidatorProvider()
+                    .GetValidators(metadata, context)
+                    .Single();
 
                 // Assert
                 Assert.Same(validator, result);
@@ -456,8 +623,12 @@ namespace System.Web.Mvc.Test
         {
             // Factory cannot be null
             Assert.ThrowsArgumentNull(
-                () => DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(null),
-                "factory");
+                () =>
+                    DataAnnotationsModelValidatorProvider.RegisterDefaultValidatableObjectAdapterFactory(
+                        null
+                    ),
+                "factory"
+            );
         }
 
         // Pre-configured adapters
@@ -468,30 +639,102 @@ namespace System.Web.Mvc.Test
             {
                 return new TheoryDataSet<Type, ValidationAttribute, Type, string>
                 {
-                    { typeof(RangeAttribute), new RangeAttribute(1, 100), typeof(RangeAttributeAdapter), null },
-                    { typeof(RegularExpressionAttribute), new RegularExpressionAttribute("abc"), typeof(RegularExpressionAttributeAdapter), null },
-                    { typeof(RequiredAttribute), new RequiredAttribute(), typeof(RequiredAttributeAdapter), null },
-                    { typeof(StringLengthAttribute), new StringLengthAttribute(6), typeof(StringLengthAttributeAdapter), null },
-                    { typeof(MaxLengthAttribute), new MaxLengthAttribute(), typeof(MaxLengthAttributeAdapter), null },
-                    { typeof(MinLengthAttribute), new MinLengthAttribute(1), typeof(MinLengthAttributeAdapter), null },
-                    { typeof(MembershipPasswordAttribute), new MembershipPasswordAttribute(), typeof(MembershipPasswordAttributeAdapter), null },
-                    { typeof(DataAnnotationsCompareAttribute), new DataAnnotationsCompareAttribute("other"), typeof(CompareAttributeAdapter), null },
-                    { typeof(FileExtensionsAttribute), new FileExtensionsAttribute(), typeof(FileExtensionsAttributeAdapter), null },
-                    { typeof(CreditCardAttribute), new CreditCardAttribute(), typeof(DataTypeAttributeAdapter), "creditcard" },
-                    { typeof(EmailAddressAttribute), new EmailAddressAttribute(), typeof(DataTypeAttributeAdapter), "email" },
-                    { typeof(PhoneAttribute), new PhoneAttribute(), typeof(DataTypeAttributeAdapter), "phone" },
-                    { typeof(UrlAttribute), new UrlAttribute(), typeof(DataTypeAttributeAdapter), "url" },
+                    {
+                        typeof(RangeAttribute),
+                        new RangeAttribute(1, 100),
+                        typeof(RangeAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(RegularExpressionAttribute),
+                        new RegularExpressionAttribute("abc"),
+                        typeof(RegularExpressionAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(RequiredAttribute),
+                        new RequiredAttribute(),
+                        typeof(RequiredAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(StringLengthAttribute),
+                        new StringLengthAttribute(6),
+                        typeof(StringLengthAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(MaxLengthAttribute),
+                        new MaxLengthAttribute(),
+                        typeof(MaxLengthAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(MinLengthAttribute),
+                        new MinLengthAttribute(1),
+                        typeof(MinLengthAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(MembershipPasswordAttribute),
+                        new MembershipPasswordAttribute(),
+                        typeof(MembershipPasswordAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(DataAnnotationsCompareAttribute),
+                        new DataAnnotationsCompareAttribute("other"),
+                        typeof(CompareAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(FileExtensionsAttribute),
+                        new FileExtensionsAttribute(),
+                        typeof(FileExtensionsAttributeAdapter),
+                        null
+                    },
+                    {
+                        typeof(CreditCardAttribute),
+                        new CreditCardAttribute(),
+                        typeof(DataTypeAttributeAdapter),
+                        "creditcard"
+                    },
+                    {
+                        typeof(EmailAddressAttribute),
+                        new EmailAddressAttribute(),
+                        typeof(DataTypeAttributeAdapter),
+                        "email"
+                    },
+                    {
+                        typeof(PhoneAttribute),
+                        new PhoneAttribute(),
+                        typeof(DataTypeAttributeAdapter),
+                        "phone"
+                    },
+                    {
+                        typeof(UrlAttribute),
+                        new UrlAttribute(),
+                        typeof(DataTypeAttributeAdapter),
+                        "url"
+                    },
                 };
             }
         }
 
         [Theory]
         [PropertyData("KnownAdapterTypeData")]
-        public void AdapterForKnownTypeRegistered(Type attributeType, ValidationAttribute validationAttr,
-            Type expectedAdapterType, string expectedRuleName)
+        public void AdapterForKnownTypeRegistered(
+            Type attributeType,
+            ValidationAttribute validationAttr,
+            Type expectedAdapterType,
+            string expectedRuleName
+        )
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(object));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(object)
+            );
             var context = new ControllerContext();
             var adapters = DataAnnotationsModelValidatorProvider.AttributeFactories;
             var adapterFactory = adapters.Single(kvp => kvp.Key == attributeType).Value;
@@ -517,7 +760,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(DummyClassWithDummyValidationAttribute));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(DummyClassWithDummyValidationAttribute)
+            );
 
             // Act
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -527,14 +773,10 @@ namespace System.Web.Mvc.Test
             Assert.IsType<DataAnnotationsModelValidator>(validator);
         }
 
-        private class DummyValidationAttribute : ValidationAttribute
-        {
-        }
+        private class DummyValidationAttribute : ValidationAttribute { }
 
         [DummyValidation]
-        private class DummyClassWithDummyValidationAttribute
-        {
-        }
+        private class DummyClassWithDummyValidationAttribute { }
 
         // Default IValidatableObject adapter factory
 
@@ -545,7 +787,10 @@ namespace System.Web.Mvc.Test
             var provider = new DataAnnotationsModelValidatorProvider();
             var mockValidatable = new Mock<IValidatableObject>();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, mockValidatable.Object.GetType());
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                mockValidatable.Object.GetType()
+            );
 
             // Act
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -562,7 +807,10 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForType(() => null, typeof(string));
+            var metadata = ModelMetadataProviders.Current.GetMetadataForType(
+                () => null,
+                typeof(string)
+            );
 
             // Act
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -577,7 +825,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(DummyRequiredAttributeHelperClass), "WithoutAttribute");
+            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(DummyRequiredAttributeHelperClass),
+                "WithoutAttribute"
+            );
 
             // Act
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -594,7 +846,11 @@ namespace System.Web.Mvc.Test
             // Arrange
             var provider = new DataAnnotationsModelValidatorProvider();
             var context = new ControllerContext();
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(DummyRequiredAttributeHelperClass), "WithAttribute");
+            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(DummyRequiredAttributeHelperClass),
+                "WithAttribute"
+            );
 
             // Act
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -616,7 +872,11 @@ namespace System.Web.Mvc.Test
                 // Arrange
                 var provider = new DataAnnotationsModelValidatorProvider();
                 var context = new ControllerContext();
-                var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(DummyRequiredAttributeHelperClass), "WithoutAttribute");
+                var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                    () => null,
+                    typeof(DummyRequiredAttributeHelperClass),
+                    "WithoutAttribute"
+                );
 
                 // Act
                 IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
@@ -626,7 +886,8 @@ namespace System.Web.Mvc.Test
             }
             finally
             {
-                DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes = true;
+                DataAnnotationsModelValidatorProvider.AddImplicitRequiredAttributeForValueTypes =
+                    true;
             }
         }
 
@@ -645,12 +906,21 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ObservableModel model = new ObservableModel();
-            ModelMetadata metadata = new DataAnnotationsModelMetadataProvider().GetMetadataForProperty(() => model.TheProperty, typeof(ObservableModel), "TheProperty");
+            ModelMetadata metadata =
+                new DataAnnotationsModelMetadataProvider().GetMetadataForProperty(
+                    () => model.TheProperty,
+                    typeof(ObservableModel),
+                    "TheProperty"
+                );
             ControllerContext controllerContext = new ControllerContext();
 
             // Act
-            ModelValidator[] validators = new DataAnnotationsModelValidatorProvider().GetValidators(metadata, controllerContext).ToArray();
-            ModelValidationResult[] results = validators.SelectMany(o => o.Validate(model)).ToArray();
+            ModelValidator[] validators = new DataAnnotationsModelValidatorProvider()
+                .GetValidators(metadata, controllerContext)
+                .ToArray();
+            ModelValidationResult[] results = validators
+                .SelectMany(o => o.Validate(model))
+                .ToArray();
 
             // Assert
             Assert.Empty(validators);
@@ -727,9 +997,10 @@ namespace System.Web.Mvc.Test
             IEnumerable<ModelValidator> validators = provider.GetValidators(metadata, context);
 
             // Assert
-            ModelClientValidationRule[] clientRule = validators.SelectMany(v => v.GetClientValidationRules())
-                                                               .OrderBy(t => t.GetType().Name)
-                                                               .ToArray();
+            ModelClientValidationRule[] clientRule = validators
+                .SelectMany(v => v.GetClientValidationRules())
+                .OrderBy(t => t.GetType().Name)
+                .ToArray();
             Assert.IsType<ModelClientValidationMaxLengthRule>(clientRule[0]);
             Assert.IsType<ModelClientValidationMinLengthRule>(clientRule[1]);
         }

@@ -7,6 +7,6 @@ namespace Microsoft.EntityFrameworkCore;
 
 public class BadDataJsonDeserializationSqlServerTest : BadDataJsonDeserializationTestBase
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => base.OnConfiguring(optionsBuilder.UseSqlServer(b => b.UseNetTopologySuite()));
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        base.OnConfiguring(optionsBuilder.UseSqlServer(b => b.UseNetTopologySuite()));
 }

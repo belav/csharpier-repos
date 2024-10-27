@@ -17,6 +17,6 @@ namespace Microsoft.CodeAnalysis.AddImport
         /// <summary>
         /// Place imports outside the namespace definition.
         /// </summary>
-        OutsideNamespace
+        OutsideNamespace,
     }
 }

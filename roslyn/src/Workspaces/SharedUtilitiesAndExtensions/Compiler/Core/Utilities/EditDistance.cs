@@ -27,10 +27,10 @@ namespace Roslyn.Utilities
     ///
     /// Specifically, this implementation satisfies the following inequality: D(x, y) + D(y, z) >= D(x, z)
     /// (where D is the edit distance).
-    ///</summary> 
+    ///</summary>
     internal readonly struct EditDistance(string text) : IDisposable
     {
-        // Our edit distance algorithm makes use of an 'infinite' value.  A value so high that it 
+        // Our edit distance algorithm makes use of an 'infinite' value.  A value so high that it
         // could never participate in an edit distance (and effectively means the path through it
         // is dead).
         //
@@ -65,14 +65,21 @@ namespace Roslyn.Utilities
             ArrayPool<char>.ReleaseArray(_sourceLowerCaseCharacters);
         }
 
-        public static int GetEditDistance(string source, string target, int threshold = int.MaxValue)
+        public static int GetEditDistance(
+            string source,
+            string target,
+            int threshold = int.MaxValue
+        )
         {
             using var editDistance = new EditDistance(source);
             return editDistance.GetEditDistance(target, threshold);
         }
 
-        public static int GetEditDistance(char[] source, char[] target, int threshold = int.MaxValue)
-            => GetEditDistance(source.AsSpan(), target.AsSpan(), threshold);
+        public static int GetEditDistance(
+            char[] source,
+            char[] target,
+            int threshold = int.MaxValue
+        ) => GetEditDistance(source.AsSpan(), target.AsSpan(), threshold);
 
         public int GetEditDistance(string target, int threshold = int.MaxValue)
         {
@@ -85,7 +92,8 @@ namespace Roslyn.Utilities
                 return GetEditDistance(
                     _sourceLowerCaseCharacters.AsSpan(0, _source.Length),
                     targetLowerCaseCharacters.AsSpan(0, target.Length),
-                    threshold);
+                    threshold
+                );
             }
             finally
             {
@@ -94,16 +102,18 @@ namespace Roslyn.Utilities
         }
 
         private const int MaxMatrixPoolDimension = 64;
-        private static readonly ThreadLocal<int[,]> t_matrixPool =
-            new(() => InitializeMatrix(new int[MaxMatrixPoolDimension, MaxMatrixPoolDimension]));
+        private static readonly ThreadLocal<int[,]> t_matrixPool = new(
+            () => InitializeMatrix(new int[MaxMatrixPoolDimension, MaxMatrixPoolDimension])
+        );
 
         // To find swapped characters we make use of a table that keeps track of the last location
         // we found that character.  For performance reasons we only do this work for ascii characters
         // (i.e. with value <= 127).  This allows us to just use a simple array we can index into instead
         // of needing something more expensive like a dictionary.
         private const int LastSeenIndexLength = 128;
-        private static readonly ThreadLocal<int[]> t_lastSeenIndexPool =
-            new(() => new int[LastSeenIndexLength]);
+        private static readonly ThreadLocal<int[]> t_lastSeenIndexPool = new(
+            () => new int[LastSeenIndexLength]
+        );
 
         private static int[,] GetMatrix(int width, int height)
         {
@@ -159,24 +169,32 @@ namespace Roslyn.Utilities
             return matrix;
         }
 
-        public static int GetEditDistance(ReadOnlySpan<char> source, ReadOnlySpan<char> target, int threshold = int.MaxValue)
+        public static int GetEditDistance(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> target,
+            int threshold = int.MaxValue
+        )
         {
             return source.Length <= target.Length
                 ? GetEditDistanceWorker(source, target, threshold)
                 : GetEditDistanceWorker(target, source, threshold);
         }
 
-        private static int GetEditDistanceWorker(ReadOnlySpan<char> source, ReadOnlySpan<char> target, int threshold)
+        private static int GetEditDistanceWorker(
+            ReadOnlySpan<char> source,
+            ReadOnlySpan<char> target,
+            int threshold
+        )
         {
             // Note: sourceLength will always be smaller or equal to targetLength.
             //
-            // Also Note: sourceLength and targetLength values will mutate and represent the lengths 
+            // Also Note: sourceLength and targetLength values will mutate and represent the lengths
             // of the portions of the arrays we want to compare.  However, even after mutation, hte
             // invariant that sourceLength is <= targetLength will remain.
             Debug.Assert(source.Length <= target.Length);
 
             // First:
-            // Determine the common prefix/suffix portions of the strings.  We don't even need to 
+            // Determine the common prefix/suffix portions of the strings.  We don't even need to
             // consider them as they won't add anything to the edit cost.
             while (source.Length > 0 && source[source.Length - 1] == target[target.Length - 1])
             {
@@ -205,7 +223,7 @@ namespace Roslyn.Utilities
                 return targetLength <= threshold ? targetLength : BeyondThreshold;
             }
 
-            // The is the minimum number of edits we'd have to make.  i.e. if  'source' and 
+            // The is the minimum number of edits we'd have to make.  i.e. if  'source' and
             // 'target' are the same length, then we might not need to make any edits.  However,
             // if target has length 10 and source has length 7, then we're going to have to
             // make at least 3 edits no matter what.
@@ -222,15 +240,15 @@ namespace Roslyn.Utilities
             // Say we want to find the edit distance between "sunday" and "saturday".  Our initial
             // matrix will be:
             //
-            // (Note: for purposes of this explanation we will not be trimming off the common 
-            // prefix/suffix of the strings.  That optimization does not affect any of the 
+            // (Note: for purposes of this explanation we will not be trimming off the common
+            // prefix/suffix of the strings.  That optimization does not affect any of the
             // remainder of the explanation).
             //
             //           s u n d a y
             //      ----------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
             //      |∞ 0 1 2 3 4 5 6
-            //    s |∞ 1 
+            //    s |∞ 1
             //    a |∞ 2
             //    t |∞ 3
             //    u |∞ 4
@@ -239,37 +257,37 @@ namespace Roslyn.Utilities
             //    a |∞ 7
             //    y |∞ 8
             //
-            // Note that the matrix will always be square, or a rectangle that is taller htan it is 
+            // Note that the matrix will always be square, or a rectangle that is taller htan it is
             // longer.  Our 'source' is at the top, and our 'target' is on the left.  The edit distance
-            // between any prefix of 'source' and any prefix of 'target' can then be found in 
+            // between any prefix of 'source' and any prefix of 'target' can then be found in
             // the unfilled area of the matrix.  Specifically, if we have source.substring(0, m) and
             // target.substring(0, n), then the edit distance for them can be found at matrix position
             // (m+1, n+1).  This is why the 1'th row and 1'th column can be prefilled.  They represent
             // the cost to go from the empty target to the full source or the empty source to the full
-            // target (respectively).  So, if we wanted to know the edit distance between "sun" and 
+            // target (respectively).  So, if we wanted to know the edit distance between "sun" and
             // "sat", we'd look at (3+1, 3+1).  It then follows that our final edit distance between
             // the full source and target is in the lower right corner of this matrix.
             //
             // If we fill out the matrix fully we'll get:
-            //          
+            //
             //           s u n d a y <-- source
             //      ----------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
             //      |∞ 0 1 2 3 4 5 6
-            //    s |∞ 1 0 1 2 3 4 5 
-            //    a |∞ 2 1 1 2 3 3 4 
-            //    t |∞ 3 2 2 2 3 4 4 
-            //    u |∞ 4 3 2 3 3 4 5 
-            //    r |∞ 5 4 3 3 4 4 5 
-            //    d |∞ 6 5 4 4 3 4 5 
-            //    a |∞ 7 6 5 5 4 3 4 
+            //    s |∞ 1 0 1 2 3 4 5
+            //    a |∞ 2 1 1 2 3 3 4
+            //    t |∞ 3 2 2 2 3 4 4
+            //    u |∞ 4 3 2 3 3 4 5
+            //    r |∞ 5 4 3 3 4 4 5
+            //    d |∞ 6 5 4 4 3 4 5
+            //    a |∞ 7 6 5 5 4 3 4
             //    y |∞ 8 7 6 6 5 4 3 <--
             //                     ^
             //                     |
             //
             // So in this case, the edit distance is 3.  Or, specifically, the edits:
             //
-            //      Sunday -> Replace("n", "r") -> 
+            //      Sunday -> Replace("n", "r") ->
             //      Surday -> Insert("a") ->
             //      Saurday -> Insert("t") ->
             //      Saturday
@@ -296,7 +314,7 @@ namespace Roslyn.Utilities
             //      ----------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
             //      |∞ 0 1 2 3 4 5 6
-            //    s |∞ 1 
+            //    s |∞ 1
             //    a |∞ 2
             //    t |∞ 3
             //    u |∞ 4
@@ -312,15 +330,15 @@ namespace Roslyn.Utilities
             // always be greater than or equal to the value in (i-1, j-1).  i.e. the edit distance of
             // any two strings is going to be *at best* equal to the edit distance of those two strings
             // without their final characters.  If their final characters are the same, they'll have the
-            // same edit distance.  If they are different, the edit distance will be greater.  Given 
-            // that we know the final edit distance is in the lower right, we can discover something 
+            // same edit distance.  If they are different, the edit distance will be greater.  Given
+            // that we know the final edit distance is in the lower right, we can discover something
             // useful in the matrix.
             //
             //           s u n d a y
             //      ----------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
             //      |∞ 0 1 2 3 4 5 6
-            //    s |∞ 1 
+            //    s |∞ 1
             //    a |∞ 2
             //    t |∞ 3 `
             //    u |∞ 4   `
@@ -329,14 +347,14 @@ namespace Roslyn.Utilities
             //    a |∞ 7         `
             //    y |∞ 8           *
             //
-            // The slashes are the "bottom" diagonal leading to the lower right.  The value in the 
-            // lower right will be strictly equal to or greater than any value on this diagonal.  
-            // Thus, if that value exceeds the threshold, we know we can stop immediately as the 
+            // The slashes are the "bottom" diagonal leading to the lower right.  The value in the
+            // lower right will be strictly equal to or greater than any value on this diagonal.
+            // Thus, if that value exceeds the threshold, we know we can stop immediately as the
             // total edit distance must be greater than the threshold.
             //
             // We can use similar logic to avoid even having to examine more of the matrix when we
             // have a threshold. First, consider the same diagonal.
-            // 
+            //
             //           s u n d a y
             //      ----------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
@@ -368,7 +386,7 @@ namespace Roslyn.Utilities
             //    a |∞ 7         `
             //    y |∞ 8     y - - *
             //
-            // Here we see that the final edit distance will be "y+3".  Again, if the edit 
+            // Here we see that the final edit distance will be "y+3".  Again, if the edit
             // distance threshold is less than 3, then no path from y will provide a good
             // enough edit distance.
             //
@@ -388,7 +406,7 @@ namespace Roslyn.Utilities
             //    a |∞ 7   - - - ` |
             //    y |∞ 8     - - - *
             //
-            // Now, also consider that it will take a minimum of targetLength-sourceLength edits 
+            // Now, also consider that it will take a minimum of targetLength-sourceLength edits
             // just to move to the lower diagonal from the upper diagonal.  That leaves
             // 'threshold - (targetLength - sourceLength)' edits remaining.  In this example, that
             // means '3 - (8 - 6)' = 1.  Because of this our lower diagonal offset is capped at:
@@ -418,16 +436,16 @@ namespace Roslyn.Utilities
             //    u |∞ 4 - `   ` |
             //    r |∞ 5   - `   ` |
             //    d |∞ 6     - `   `
-            //    a |∞ 7       - `  
+            //    a |∞ 7       - `
             //    y |∞ 8         - *
             //
-            // Or, effectively, we only need to examine 'threshold - (targetLength - sourceLength)' 
+            // Or, effectively, we only need to examine 'threshold - (targetLength - sourceLength)'
             // above and below the diagonals.
             //
             // In practice, when a threshold is provided it is normally capped at '2'.  Given that,
             // the most around the diagonal we'll ever have to check is +/- 2 elements.  i.e. with
             // strings of length 10 we'd only check:
-            // 
+            //
             //           a b c d e f g h i j
             //      ------------------------
             //      |∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞ ∞
@@ -443,7 +461,7 @@ namespace Roslyn.Utilities
             //    u |∞ 9             * * * *
             //    v |∞10               * * *
             //
-            // or 10+18+16=44.  Or only 44%. if our threshold is two and our strings differ by length 
+            // or 10+18+16=44.  Or only 44%. if our threshold is two and our strings differ by length
             // 2 then we have:
             //
             //           a b c d e f g h
@@ -458,8 +476,8 @@ namespace Roslyn.Utilities
             //    r |∞ 6       * * *
             //    s |∞ 7         * * *
             //    t |∞ 8           * * *
-            //    u |∞ 9             * * 
-            //    v |∞10               *  
+            //    u |∞ 9             * *
+            //    v |∞10               *
             //
             // Then we examine 8+8+8=24 out of 80, or only 30% of the matrix.  As the strings
             // get larger, the savings increase as well.
@@ -469,9 +487,9 @@ namespace Roslyn.Utilities
             // The highest cost it can be to convert a source to target is targetLength.  i.e.
             // changing all the characters in source to target (which would be be 'sourceLength'
             // changes), and then adding all the missing characters in 'target' (which is
-            // 'targetLength' - 'sourceLength' changes).  Combined that's 'targetLength'.  
+            // 'targetLength' - 'sourceLength' changes).  Combined that's 'targetLength'.
             //
-            // So we can just cap our threshold here.  This makes some of the walking code 
+            // So we can just cap our threshold here.  This makes some of the walking code
             // below simpler.
             threshold = Math.Min(threshold, targetLength);
 
@@ -494,7 +512,7 @@ namespace Roslyn.Utilities
 
                 // If we're examining only a subportion of the column, then we need to make sure
                 // that the values outside that range are set to Infinity.  That way we don't
-                // consider them when we look through edit paths from above (for this column) or 
+                // consider them when we look through edit paths from above (for this column) or
                 // from the left (for the next column).
                 if (jStart > 1)
                 {
@@ -510,7 +528,10 @@ namespace Roslyn.Utilities
                 {
                     var targetChar = target[j - 1];
 
-                    var i1 = targetChar < LastSeenIndexLength ? characterToLastSeenIndex_inSource[targetChar] : 0;
+                    var i1 =
+                        targetChar < LastSeenIndexLength
+                            ? characterToLastSeenIndex_inSource[targetChar]
+                            : 0;
                     var j1 = lastMatchIndex_inTarget;
 
                     var matched = sourceChar == targetChar;
@@ -523,7 +544,8 @@ namespace Roslyn.Utilities
                         matrix[i, j] + (matched ? 0 : 1),
                         matrix[i + 1, j] + 1,
                         matrix[i, j + 1] + 1,
-                        matrix[i1, j1] + (i - i1 - 1) + 1 + (j - j1 - 1));
+                        matrix[i1, j1] + (i - i1 - 1) + 1 + (j - j1 - 1)
+                    );
                 }
 
                 if (sourceChar < LastSeenIndexLength)
@@ -535,7 +557,7 @@ namespace Roslyn.Utilities
                 // strings.  So matrix[i+1,i+1] is the cost for the upper-left diagonal of the
                 // matrix.  matrix[i+1,i+1+minimumEditCount] is the cost for the lower right diagonal.
                 // Here we are simply getting the lowest cost edit of hese two substrings so far.
-                // If this lowest cost edit is greater than our threshold, then there is no need 
+                // If this lowest cost edit is greater than our threshold, then there is no need
                 // to proceed.
                 if (matrix[i + 1, i + minimumEditCount + 1] > threshold)
                 {
@@ -563,8 +585,8 @@ namespace Roslyn.Utilities
             return sb.ToString().Trim();
         }
 
-        private static int GetValue(Dictionary<char, int> da, char c)
-            => da.TryGetValue(c, out var value) ? value : 0;
+        private static int GetValue(Dictionary<char, int> da, char c) =>
+            da.TryGetValue(c, out var value) ? value : 0;
 
         private static int Min(int v1, int v2, int v3, int v4)
         {
@@ -601,7 +623,8 @@ namespace Roslyn.Utilities
         }
     }
 
-    internal class SimplePool<T>(Func<T> allocate) where T : class
+    internal class SimplePool<T>(Func<T> allocate)
+        where T : class
     {
         private readonly object _gate = new();
         private readonly Stack<T> _values = new();

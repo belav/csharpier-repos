@@ -16,7 +16,12 @@ namespace System.Buffers.Text
         //   2017-06-12T05:30:45.7680000Z           (Z is short for "+00:00" but also distinguishes DateTimeKind.Utc from DateTimeKind.Local)
         //   2017-06-12T05:30:45.7680000            (interpreted as local time wrt to current time zone)
         //
-        private static bool TryParseDateTimeOffsetO(ReadOnlySpan<byte> source, out DateTimeOffset value, out int bytesConsumed, out DateTimeKind kind)
+        private static bool TryParseDateTimeOffsetO(
+            ReadOnlySpan<byte> source,
+            out DateTimeOffset value,
+            out int bytesConsumed,
+            out DateTimeKind kind
+        )
         {
             if (source.Length < 27)
             {
@@ -182,7 +187,15 @@ namespace System.Buffers.Text
                 uint digit6 = source[25] - 48u; // '0'
                 uint digit7 = source[26] - 48u; // '0'
 
-                if (digit1 > 9 || digit2 > 9 || digit3 > 9 || digit4 > 9 || digit5 > 9 || digit6 > 9 || digit7 > 9)
+                if (
+                    digit1 > 9
+                    || digit2 > 9
+                    || digit3 > 9
+                    || digit4 > 9
+                    || digit5 > 9
+                    || digit6 > 9
+                    || digit7 > 9
+                )
                 {
                     value = default;
                     bytesConsumed = 0;
@@ -190,13 +203,36 @@ namespace System.Buffers.Text
                     return false;
                 }
 
-                fraction = (int)(digit1 * 1000000 + digit2 * 100000 + digit3 * 10000 + digit4 * 1000 + digit5 * 100 + digit6 * 10 + digit7);
+                fraction = (int)(
+                    digit1 * 1000000
+                    + digit2 * 100000
+                    + digit3 * 10000
+                    + digit4 * 1000
+                    + digit5 * 100
+                    + digit6 * 10
+                    + digit7
+                );
             }
 
             byte offsetChar = (source.Length <= 27) ? default : source[27];
-            if (offsetChar != 'Z' && offsetChar != Utf8Constants.Plus && offsetChar != Utf8Constants.Minus)
+            if (
+                offsetChar != 'Z'
+                && offsetChar != Utf8Constants.Plus
+                && offsetChar != Utf8Constants.Minus
+            )
             {
-                if (!TryCreateDateTimeOffsetInterpretingDataAsLocalTime(year: year, month: month, day: day, hour: hour, minute: minute, second: second, fraction: fraction, out value))
+                if (
+                    !TryCreateDateTimeOffsetInterpretingDataAsLocalTime(
+                        year: year,
+                        month: month,
+                        day: day,
+                        hour: hour,
+                        minute: minute,
+                        second: second,
+                        fraction: fraction,
+                        out value
+                    )
+                )
                 {
                     value = default;
                     bytesConsumed = 0;
@@ -211,7 +247,21 @@ namespace System.Buffers.Text
             if (offsetChar == 'Z')
             {
                 // Same as specifying an offset of "+00:00", except that DateTime's Kind gets set to UTC rather than Local
-                if (!TryCreateDateTimeOffset(year: year, month: month, day: day, hour: hour, minute: minute, second: second, fraction: fraction, offsetNegative: false, offsetHours: 0, offsetMinutes: 0, out value))
+                if (
+                    !TryCreateDateTimeOffset(
+                        year: year,
+                        month: month,
+                        day: day,
+                        hour: hour,
+                        minute: minute,
+                        second: second,
+                        fraction: fraction,
+                        offsetNegative: false,
+                        offsetHours: 0,
+                        offsetMinutes: 0,
+                        out value
+                    )
+                )
                 {
                     value = default;
                     bytesConsumed = 0;
@@ -273,7 +323,21 @@ namespace System.Buffers.Text
                 offsetMinutes = (int)(digit1 * 10 + digit2);
             }
 
-            if (!TryCreateDateTimeOffset(year: year, month: month, day: day, hour: hour, minute: minute, second: second, fraction: fraction, offsetNegative: offsetChar == Utf8Constants.Minus, offsetHours: offsetHours, offsetMinutes: offsetMinutes, out value))
+            if (
+                !TryCreateDateTimeOffset(
+                    year: year,
+                    month: month,
+                    day: day,
+                    hour: hour,
+                    minute: minute,
+                    second: second,
+                    fraction: fraction,
+                    offsetNegative: offsetChar == Utf8Constants.Minus,
+                    offsetHours: offsetHours,
+                    offsetMinutes: offsetMinutes,
+                    out value
+                )
+            )
             {
                 value = default;
                 bytesConsumed = 0;

@@ -62,8 +62,7 @@ public class Employee
 
     public Employee Manager { get; set; }
 
-    protected bool Equals(Employee other)
-        => EmployeeID == other.EmployeeID;
+    protected bool Equals(Employee other) => EmployeeID == other.EmployeeID;
 
     public override bool Equals(object obj)
     {
@@ -74,13 +73,10 @@ public class Employee
 
         return ReferenceEquals(this, obj)
             ? true
-            : obj.GetType() == GetType()
-            && Equals((Employee)obj);
+            : obj.GetType() == GetType() && Equals((Employee)obj);
     }
 
-    public override int GetHashCode()
-        => EmployeeID.GetHashCode();
+    public override int GetHashCode() => EmployeeID.GetHashCode();
 
-    public override string ToString()
-        => "Employee " + EmployeeID;
+    public override string ToString() => "Employee " + EmployeeID;
 }

@@ -11,7 +11,8 @@ namespace TagHelpersWebSite.TagHelpers;
 public class DictionaryPrefixTestTagHelper : TagHelper
 {
     [HtmlAttributeName(DictionaryAttributePrefix = "prefix-")]
-    public IDictionary<string, ModelExpression> PrefixValues { get; set; } = new Dictionary<string, ModelExpression>();
+    public IDictionary<string, ModelExpression> PrefixValues { get; set; } =
+        new Dictionary<string, ModelExpression>();
 
     public override void Process(TagHelperContext context, TagHelperOutput output)
     {

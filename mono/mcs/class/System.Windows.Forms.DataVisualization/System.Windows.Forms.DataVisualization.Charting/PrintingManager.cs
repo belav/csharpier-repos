@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,39 +27,44 @@ using System.Drawing.Printing;
 
 namespace System.Windows.Forms.DataVisualization.Charting
 {
-	public class PrintingManager : IDisposable
-	{
-		public PrintDocument PrintDocument { get; set; }
+    public class PrintingManager : IDisposable
+    {
+        public PrintDocument PrintDocument { get; set; }
 
-		[MonoTODO]
-		public void Dispose ()
-		{
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		protected virtual void Dispose (bool disposing)
-		{
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		public void PageSetup ()
-		{
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		public void Print (bool showPrintDialog)
-		{
-			throw new NotImplementedException();
-		}
-		[MonoTODO]
-		public void PrintPaint (Graphics graphics,Rectangle position)
-		{
-			throw new NotImplementedException ();
-		}
-		[MonoTODO]
-		public void PrintPreview ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public void Dispose()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        protected virtual void Dispose(bool disposing)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void PageSetup()
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void Print(bool showPrintDialog)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void PrintPaint(Graphics graphics, Rectangle position)
+        {
+            throw new NotImplementedException();
+        }
+
+        [MonoTODO]
+        public void PrintPreview()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

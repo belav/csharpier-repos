@@ -22,6 +22,12 @@ namespace System.Web.Http.Validation
         /// <param name="actionContext">The <see cref="HttpActionContext"/> within which the model is being validated.</param>
         /// <param name="keyPrefix">The <see cref="string"/> to append to the key for any validation errors.</param>
         /// <returns><c>true</c>if <paramref name="model"/> is valid, <c>false</c> otherwise.</returns>
-        bool Validate(object model, Type type, ModelMetadataProvider metadataProvider, HttpActionContext actionContext, string keyPrefix);
+        bool Validate(
+            object model,
+            Type type,
+            ModelMetadataProvider metadataProvider,
+            HttpActionContext actionContext,
+            string keyPrefix
+        );
     }
 }

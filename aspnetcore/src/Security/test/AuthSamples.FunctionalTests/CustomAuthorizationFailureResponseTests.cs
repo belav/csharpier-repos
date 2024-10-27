@@ -9,11 +9,14 @@ using Xunit;
 
 namespace AuthSamples.FunctionalTests;
 
-public class CustomAuthorizationFailureResponseTests : IClassFixture<WebApplicationFactory<CustomAuthorizationFailureResponse.Startup>>
+public class CustomAuthorizationFailureResponseTests
+    : IClassFixture<WebApplicationFactory<CustomAuthorizationFailureResponse.Startup>>
 {
     private HttpClient Client { get; }
 
-    public CustomAuthorizationFailureResponseTests(WebApplicationFactory<CustomAuthorizationFailureResponse.Startup> fixture)
+    public CustomAuthorizationFailureResponseTests(
+        WebApplicationFactory<CustomAuthorizationFailureResponse.Startup> fixture
+    )
     {
         Client = fixture.CreateClient();
     }

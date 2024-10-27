@@ -1,21 +1,21 @@
 #pragma warning disable 1634, 1691
 using System;
-using System.Globalization;
 using System.Collections;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel.Design.Serialization;
 using System.Diagnostics;
+using System.Globalization;
 using System.IO;
 using System.Reflection;
 using System.Text;
 using System.Threading;
-using System.Xml;
 using System.Transactions;
-using SES = System.EnterpriseServices;
 using System.Workflow.ComponentModel;
 using System.Workflow.Runtime.Hosting;
+using System.Xml;
+using SES = System.EnterpriseServices;
 
 namespace System.Workflow.Runtime
 {
@@ -25,25 +25,36 @@ namespace System.Workflow.Runtime
     {
         internal static int ContextId(Activity activity)
         {
-            return ((ActivityExecutionContextInfo)ContextActivity(activity).GetValue(Activity.ActivityExecutionContextInfoProperty)).ContextId;
+            return (
+                (ActivityExecutionContextInfo)
+                    ContextActivity(activity)
+                        .GetValue(Activity.ActivityExecutionContextInfoProperty)
+            ).ContextId;
         }
 
         internal static Activity ContextActivity(Activity activity)
         {
             Activity contextActivity = activity;
-            while (contextActivity != null && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty) == null)
+            while (
+                contextActivity != null
+                && contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty) == null
+            )
                 contextActivity = contextActivity.Parent;
             return contextActivity;
         }
+
         internal static Activity ParentContextActivity(Activity activity)
         {
             Activity contextActivity = ContextActivity(activity);
-            ActivityExecutionContextInfo executionContextInfo = (ActivityExecutionContextInfo)contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
+            ActivityExecutionContextInfo executionContextInfo = (ActivityExecutionContextInfo)
+                contextActivity.GetValue(Activity.ActivityExecutionContextInfoProperty);
             if (executionContextInfo.ParentContextId == -1)
                 return null;
 
-            return RetrieveWorkflowExecutor(activity).GetContextActivityForId(executionContextInfo.ParentContextId);
+            return RetrieveWorkflowExecutor(activity)
+                .GetContextActivityForId(executionContextInfo.ParentContextId);
         }
+
         internal static IWorkflowCoreRuntime RetrieveWorkflowExecutor(Activity activity)
         {
             // fetch workflow executor
@@ -52,10 +63,12 @@ namespace System.Workflow.Runtime
             while (rootActivity != null && rootActivity.Parent != null)
                 rootActivity = rootActivity.Parent;
             if (rootActivity != null)
-                workflowExecutor = (IWorkflowCoreRuntime)rootActivity.GetValue(WorkflowExecutor.WorkflowExecutorProperty);
+                workflowExecutor = (IWorkflowCoreRuntime)
+                    rootActivity.GetValue(WorkflowExecutor.WorkflowExecutorProperty);
 
             return workflowExecutor;
         }
+
         internal static Activity RootContextActivity(Activity activity)
         {
             return RetrieveWorkflowExecutor(activity).RootActivity;

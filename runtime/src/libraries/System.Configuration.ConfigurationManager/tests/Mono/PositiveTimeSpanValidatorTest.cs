@@ -64,7 +64,10 @@ namespace MonoTests.System.Configuration
         public void Validate_fail2()
         {
             PositiveTimeSpanValidator v = new PositiveTimeSpanValidator();
-            AssertExtensions.Throws<ArgumentException>(null, () => v.Validate(new TimeSpan(-10000)));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => v.Validate(new TimeSpan(-10000))
+            );
         }
     }
 }

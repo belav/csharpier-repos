@@ -13,8 +13,7 @@ internal abstract partial class GreenNode
     [NonCopyable]
     public ref struct NodeEnumerable(GreenNode node)
     {
-        public readonly Enumerator GetEnumerator()
-            => new Enumerator(node);
+        public readonly Enumerator GetEnumerator() => new Enumerator(node);
 
         [NonCopyable]
         public ref struct Enumerator
@@ -27,12 +26,12 @@ internal abstract partial class GreenNode
             public Enumerator(GreenNode node)
             {
                 _current = node;
-                _stack = ArrayBuilder<Syntax.InternalSyntax.ChildSyntaxList.Enumerator>.GetInstance();
+                _stack =
+                    ArrayBuilder<Syntax.InternalSyntax.ChildSyntaxList.Enumerator>.GetInstance();
                 _stack.Push(node.ChildNodesAndTokens().GetEnumerator());
             }
 
-            public readonly void Dispose()
-                => _stack.Free();
+            public readonly void Dispose() => _stack.Free();
 
             public readonly GreenNode Current
             {

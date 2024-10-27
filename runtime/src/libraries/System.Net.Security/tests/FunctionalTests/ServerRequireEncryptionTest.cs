@@ -23,21 +23,46 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task ServerRequireEncryption_ClientRequireEncryption_ConnectWithEncryption()
         {
-            (NetworkStream clientStream, NetworkStream serverStream) = TestHelper.GetConnectedTcpStreams();
+            (NetworkStream clientStream, NetworkStream serverStream) =
+                TestHelper.GetConnectedTcpStreams();
             using (clientStream)
             using (serverStream)
             {
-                using (var client = new SslStream(clientStream, false, TestHelper.AllowAnyServerCertificate, null, EncryptionPolicy.RequireEncryption))
+                using (
+                    var client = new SslStream(
+                        clientStream,
+                        false,
+                        TestHelper.AllowAnyServerCertificate,
+                        null,
+                        EncryptionPolicy.RequireEncryption
+                    )
+                )
                 using (var server = new SslStream(serverStream))
                 {
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                        client.AuthenticateAsClientAsync("localhost", null, SslProtocolSupport.DefaultSslProtocols, false),
-                        server.AuthenticateAsServerAsync(TestConfiguration.ServerCertificate));
+                        client.AuthenticateAsClientAsync(
+                            "localhost",
+                            null,
+                            SslProtocolSupport.DefaultSslProtocols,
+                            false
+                        ),
+                        server.AuthenticateAsServerAsync(TestConfiguration.ServerCertificate)
+                    );
 
-                    _log.WriteLine("Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
-                        clientStream.Socket.RemoteEndPoint, client.CipherAlgorithm, client.CipherStrength);
-                    Assert.True(client.CipherAlgorithm != CipherAlgorithmType.Null, "Cipher algorithm should not be NULL");
-                    Assert.True(client.CipherStrength > 0, "Cipher strength should be greater than 0");
+                    _log.WriteLine(
+                        "Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
+                        clientStream.Socket.RemoteEndPoint,
+                        client.CipherAlgorithm,
+                        client.CipherStrength
+                    );
+                    Assert.True(
+                        client.CipherAlgorithm != CipherAlgorithmType.Null,
+                        "Cipher algorithm should not be NULL"
+                    );
+                    Assert.True(
+                        client.CipherStrength > 0,
+                        "Cipher strength should be greater than 0"
+                    );
                 }
             }
         }
@@ -45,44 +70,93 @@ namespace System.Net.Security.Tests
         [Fact]
         public async Task ServerRequireEncryption_ClientAllowNoEncryption_ConnectWithEncryption()
         {
-            (NetworkStream clientStream, NetworkStream serverStream) = TestHelper.GetConnectedTcpStreams();
+            (NetworkStream clientStream, NetworkStream serverStream) =
+                TestHelper.GetConnectedTcpStreams();
             using (clientStream)
             using (serverStream)
             {
 #pragma warning disable SYSLIB0040 // NoEncryption and AllowNoEncryption are obsolete
-                using (var client = new SslStream(clientStream, false, TestHelper.AllowAnyServerCertificate, null, EncryptionPolicy.AllowNoEncryption))
+                using (
+                    var client = new SslStream(
+                        clientStream,
+                        false,
+                        TestHelper.AllowAnyServerCertificate,
+                        null,
+                        EncryptionPolicy.AllowNoEncryption
+                    )
+                )
 #pragma warning restore SYSLIB0040
                 using (var server = new SslStream(serverStream))
                 {
                     await TestConfiguration.WhenAllOrAnyFailedWithTimeout(
-                        client.AuthenticateAsClientAsync("localhost", null, SslProtocolSupport.DefaultSslProtocols, false),
-                        server.AuthenticateAsServerAsync(TestConfiguration.ServerCertificate));
+                        client.AuthenticateAsClientAsync(
+                            "localhost",
+                            null,
+                            SslProtocolSupport.DefaultSslProtocols,
+                            false
+                        ),
+                        server.AuthenticateAsServerAsync(TestConfiguration.ServerCertificate)
+                    );
 
-                    _log.WriteLine("Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
-                        clientStream.Socket.RemoteEndPoint, client.CipherAlgorithm, client.CipherStrength);
-                    Assert.True(client.CipherAlgorithm != CipherAlgorithmType.Null, "Cipher algorithm should not be NULL");
-                    Assert.True(client.CipherStrength > 0, "Cipher strength should be greater than 0");
+                    _log.WriteLine(
+                        "Client authenticated to server({0}) with encryption cipher: {1} {2}-bit strength",
+                        clientStream.Socket.RemoteEndPoint,
+                        client.CipherAlgorithm,
+                        client.CipherStrength
+                    );
+                    Assert.True(
+                        client.CipherAlgorithm != CipherAlgorithmType.Null,
+                        "Cipher algorithm should not be NULL"
+                    );
+                    Assert.True(
+                        client.CipherStrength > 0,
+                        "Cipher strength should be greater than 0"
+                    );
                 }
             }
         }
 
-        [ConditionalFact(typeof(TestConfiguration), nameof(TestConfiguration.SupportsNullEncryption))]
+        [ConditionalFact(
+            typeof(TestConfiguration),
+            nameof(TestConfiguration.SupportsNullEncryption)
+        )]
         public async Task ServerRequireEncryption_ClientNoEncryption_NoConnect()
         {
-            (NetworkStream clientStream, NetworkStream serverStream) = TestHelper.GetConnectedTcpStreams();
+            (NetworkStream clientStream, NetworkStream serverStream) =
+                TestHelper.GetConnectedTcpStreams();
             using (clientStream)
             using (serverStream)
             {
 #pragma warning disable SYSLIB0040 // NoEncryption and AllowNoEncryption are obsolete
-                using (var client = new SslStream(clientStream, false, TestHelper.AllowAnyServerCertificate, null, EncryptionPolicy.NoEncryption))
+                using (
+                    var client = new SslStream(
+                        clientStream,
+                        false,
+                        TestHelper.AllowAnyServerCertificate,
+                        null,
+                        EncryptionPolicy.NoEncryption
+                    )
+                )
 #pragma warning restore SYSLIB0040
                 using (var server = new SslStream(serverStream))
                 {
-                    Task serverTask = server.AuthenticateAsServerAsync(TestConfiguration.ServerCertificate);
-#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete                    
-                    await Assert.ThrowsAsync(TestConfiguration.SupportsHandshakeAlerts ? typeof(AuthenticationException) : typeof(IOException), () =>
-                            client.AuthenticateAsClientAsync("localhost", null, SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12, false));
-#pragma warning restore SYSLIB0039                            
+                    Task serverTask = server.AuthenticateAsServerAsync(
+                        TestConfiguration.ServerCertificate
+                    );
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
+                    await Assert.ThrowsAsync(
+                        TestConfiguration.SupportsHandshakeAlerts
+                            ? typeof(AuthenticationException)
+                            : typeof(IOException),
+                        () =>
+                            client.AuthenticateAsClientAsync(
+                                "localhost",
+                                null,
+                                SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12,
+                                false
+                            )
+                    );
+#pragma warning restore SYSLIB0039
                     try
                     {
                         await serverTask.WaitAsync(TestConfiguration.PassingTestTimeout);

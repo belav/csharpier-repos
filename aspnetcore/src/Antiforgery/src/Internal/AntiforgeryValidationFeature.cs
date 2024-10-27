@@ -2,9 +2,15 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 namespace Microsoft.AspNetCore.Antiforgery;
 
-internal sealed class AntiforgeryValidationFeature(bool isValid, AntiforgeryValidationException? exception) : IAntiforgeryValidationFeature
+internal sealed class AntiforgeryValidationFeature(
+    bool isValid,
+    AntiforgeryValidationException? exception
+) : IAntiforgeryValidationFeature
 {
-    public static readonly IAntiforgeryValidationFeature Valid = new AntiforgeryValidationFeature(true, null);
+    public static readonly IAntiforgeryValidationFeature Valid = new AntiforgeryValidationFeature(
+        true,
+        null
+    );
 
     public bool IsValid { get; } = isValid;
     public Exception? Error { get; } = exception;

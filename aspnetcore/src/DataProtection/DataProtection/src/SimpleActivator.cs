@@ -27,12 +27,26 @@ internal class SimpleActivator : IActivator
         _services = services;
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2072", Justification = "Unknown type names are rarely used by apps. Handle trimmed types by providing a useful error message.")]
-    [UnconditionalSuppressMessage("Trimmer", "IL2075", Justification = "Unknown type names are rarely used by apps. Handle trimmed types by providing a useful error message.")]
-    public virtual object CreateInstance([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type expectedBaseType, string implementationTypeName)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2072",
+        Justification = "Unknown type names are rarely used by apps. Handle trimmed types by providing a useful error message."
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2075",
+        Justification = "Unknown type names are rarely used by apps. Handle trimmed types by providing a useful error message."
+    )]
+    public virtual object CreateInstance(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+            Type expectedBaseType,
+        string implementationTypeName
+    )
     {
         // Would the assignment even work?
-        var implementationType = TypeExtensions.GetTypeWithTrimFriendlyErrorMessage(implementationTypeName);
+        var implementationType = TypeExtensions.GetTypeWithTrimFriendlyErrorMessage(
+            implementationTypeName
+        );
         expectedBaseType.AssertIsAssignableFrom(implementationType);
 
         // If no IServiceProvider was specified, prefer .ctor() [if it exists]
@@ -46,7 +60,9 @@ internal class SimpleActivator : IActivator
         }
 
         // If an IServiceProvider was specified or if .ctor() doesn't exist, prefer .ctor(IServiceProvider) [if it exists]
-        var ctorWhichTakesServiceProvider = implementationType.GetConstructor(_serviceProviderTypeArray);
+        var ctorWhichTakesServiceProvider = implementationType.GetConstructor(
+            _serviceProviderTypeArray
+        );
         if (ctorWhichTakesServiceProvider != null)
         {
             return ctorWhichTakesServiceProvider.Invoke(new[] { _services });

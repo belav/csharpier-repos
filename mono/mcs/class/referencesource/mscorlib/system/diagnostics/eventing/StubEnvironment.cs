@@ -8,18 +8,20 @@ namespace Microsoft.Diagnostics.Tracing.Internal
 namespace System.Diagnostics.Tracing.Internal
 #endif
 {
+    using System.Reflection;
+    using Microsoft.Reflection;
 #if ES_BUILD_AGAINST_DOTNET_V35
     using Microsoft.Internal;
 #endif
-    using Microsoft.Reflection;
-    using System.Reflection;
 
     internal static class Environment
     {
         public static readonly string NewLine = System.Environment.NewLine;
 
         public static int TickCount
-        { get { return System.Environment.TickCount; } }
+        {
+            get { return System.Environment.TickCount; }
+        }
 
         public static string GetResourceString(string key, params object[] args)
         {
@@ -28,13 +30,13 @@ namespace System.Diagnostics.Tracing.Internal
                 return string.Format(fmt, args);
 
             string sargs = String.Empty;
-            foreach(var arg in args)
+            foreach (var arg in args)
             {
                 if (sargs != String.Empty)
                     sargs += ", ";
                 sargs += arg.ToString();
             }
-          
+
             return key + " (" + sargs + ")";
         }
 
@@ -43,7 +45,10 @@ namespace System.Diagnostics.Tracing.Internal
             return GetResourceString(key, args);
         }
 
-        private static System.Resources.ResourceManager rm = new System.Resources.ResourceManager("Microsoft.Diagnostics.Tracing.Messages", typeof(Environment).Assembly());
+        private static System.Resources.ResourceManager rm = new System.Resources.ResourceManager(
+            "Microsoft.Diagnostics.Tracing.Messages",
+            typeof(Environment).Assembly()
+        );
     }
 }
 
@@ -57,6 +62,7 @@ namespace Microsoft.Diagnostics.Contracts.Internal
         {
             Assert(invariant, string.Empty);
         }
+
         public static void Assert(bool invariant, string message)
         {
             if (!invariant)
@@ -66,11 +72,10 @@ namespace Microsoft.Diagnostics.Contracts.Internal
                 throw new Exception("Assertion failed: " + message);
             }
         }
-        public static void EndContractBlock()
-        { }
+
+        public static void EndContractBlock() { }
     }
 }
-
 
 namespace Microsoft.Internal
 {
@@ -94,7 +99,10 @@ namespace Microsoft.Internal
     {
         private readonly T1 m_Item1;
 
-        public T1 Item1 { get { return m_Item1; } }
+        public T1 Item1
+        {
+            get { return m_Item1; }
+        }
 
         public Tuple(T1 item1)
         {
@@ -112,10 +120,7 @@ namespace Microsoft.Internal
 
         int Size
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
     }
 
@@ -125,8 +130,14 @@ namespace Microsoft.Internal
         private readonly T1 m_Item1;
         private readonly T2 m_Item2;
 
-        public T1 Item1 { get { return m_Item1; } }
-        public T2 Item2 { get { return m_Item2; } }
+        public T1 Item1
+        {
+            get { return m_Item1; }
+        }
+        public T2 Item2
+        {
+            get { return m_Item2; }
+        }
 
         public Tuple(T1 item1, T2 item2)
         {
@@ -147,14 +158,10 @@ namespace Microsoft.Internal
 
         int Size
         {
-            get
-            {
-                return 2;
-            }
+            get { return 2; }
         }
     }
 }
-
 #endif
 
 namespace Microsoft.Reflection
@@ -165,81 +172,155 @@ namespace Microsoft.Reflection
     [Flags]
     public enum BindingFlags
     {
-        DeclaredOnly = 0x02,        // Only look at the members declared on the Type
-        Instance     = 0x04,        // Include Instance members in search
-        Static       = 0x08,        // Include Static members in search
-        Public       = 0x10,        // Include Public members in search
-        NonPublic    = 0x20,        // Include Non-Public members in search
+        DeclaredOnly = 0x02, // Only look at the members declared on the Type
+        Instance = 0x04, // Include Instance members in search
+        Static = 0x08, // Include Static members in search
+        Public = 0x10, // Include Public members in search
+        NonPublic = 0x20, // Include Non-Public members in search
     }
-    
-    public enum TypeCode {
-        Empty = 0,                  // Null reference
-        Object = 1,                 // Instance that isn't a value
-        DBNull = 2,                 // Database null value
-        Boolean = 3,                // Boolean
-        Char = 4,                   // Unicode character
-        SByte = 5,                  // Signed 8-bit integer
-        Byte = 6,                   // Unsigned 8-bit integer
-        Int16 = 7,                  // Signed 16-bit integer
-        UInt16 = 8,                 // Unsigned 16-bit integer
-        Int32 = 9,                  // Signed 32-bit integer
-        UInt32 = 10,                // Unsigned 32-bit integer
-        Int64 = 11,                 // Signed 64-bit integer
-        UInt64 = 12,                // Unsigned 64-bit integer
-        Single = 13,                // IEEE 32-bit float
-        Double = 14,                // IEEE 64-bit double
-        Decimal = 15,               // Decimal
-        DateTime = 16,              // DateTime
-        String = 18,                // Unicode character string
+
+    public enum TypeCode
+    {
+        Empty = 0, // Null reference
+        Object = 1, // Instance that isn't a value
+        DBNull = 2, // Database null value
+        Boolean = 3, // Boolean
+        Char = 4, // Unicode character
+        SByte = 5, // Signed 8-bit integer
+        Byte = 6, // Unsigned 8-bit integer
+        Int16 = 7, // Signed 16-bit integer
+        UInt16 = 8, // Unsigned 16-bit integer
+        Int32 = 9, // Signed 32-bit integer
+        UInt32 = 10, // Unsigned 32-bit integer
+        Int64 = 11, // Signed 64-bit integer
+        UInt64 = 12, // Unsigned 64-bit integer
+        Single = 13, // IEEE 32-bit float
+        Double = 14, // IEEE 64-bit double
+        Decimal = 15, // Decimal
+        DateTime = 16, // DateTime
+        String = 18, // Unicode character string
     }
 #endif
+
     static class ReflectionExtensions
     {
 #if !ES_BUILD_PCL
-        
+
         //
         // Type extension methods
         //
-        public static bool IsEnum(this Type type) { return type.IsEnum; }
-        public static bool IsAbstract(this Type type) { return type.IsAbstract; }
-        public static bool IsSealed(this Type type) { return type.IsSealed; }
-        public static Type BaseType(this Type type) { return type.BaseType; }
-        public static Assembly Assembly(this Type type) { return type.Assembly; }
-        public static TypeCode GetTypeCode(this Type type) { return Type.GetTypeCode(type); }
+        public static bool IsEnum(this Type type)
+        {
+            return type.IsEnum;
+        }
 
-        public static bool ReflectionOnly(this Assembly assm) { return assm.ReflectionOnly; }
+        public static bool IsAbstract(this Type type)
+        {
+            return type.IsAbstract;
+        }
+
+        public static bool IsSealed(this Type type)
+        {
+            return type.IsSealed;
+        }
+
+        public static Type BaseType(this Type type)
+        {
+            return type.BaseType;
+        }
+
+        public static Assembly Assembly(this Type type)
+        {
+            return type.Assembly;
+        }
+
+        public static TypeCode GetTypeCode(this Type type)
+        {
+            return Type.GetTypeCode(type);
+        }
+
+        public static bool ReflectionOnly(this Assembly assm)
+        {
+            return assm.ReflectionOnly;
+        }
 
 #else // ES_BUILD_PCL
 
         //
         // Type extension methods
         //
-        public static bool IsEnum(this Type type) { return type.GetTypeInfo().IsEnum; }
-        public static bool IsAbstract(this Type type) { return type.GetTypeInfo().IsAbstract; }
-        public static bool IsSealed(this Type type) { return type.GetTypeInfo().IsSealed; }
-        public static Type BaseType(this Type type) { return type.GetTypeInfo().BaseType; }
-        public static Assembly Assembly(this Type type) { return type.GetTypeInfo().Assembly; }
+        public static bool IsEnum(this Type type)
+        {
+            return type.GetTypeInfo().IsEnum;
+        }
+
+        public static bool IsAbstract(this Type type)
+        {
+            return type.GetTypeInfo().IsAbstract;
+        }
+
+        public static bool IsSealed(this Type type)
+        {
+            return type.GetTypeInfo().IsSealed;
+        }
+
+        public static Type BaseType(this Type type)
+        {
+            return type.GetTypeInfo().BaseType;
+        }
+
+        public static Assembly Assembly(this Type type)
+        {
+            return type.GetTypeInfo().Assembly;
+        }
 
         public static MethodInfo[] GetMethods(this Type type, BindingFlags flags)
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System.Diagnostics.Debug.Assert((flags & ~(BindingFlags.DeclaredOnly|BindingFlags.Instance|BindingFlags.Static|BindingFlags.Public|BindingFlags.NonPublic)) == 0);
+            System.Diagnostics.Debug.Assert(
+                (
+                    flags
+                    & ~(
+                        BindingFlags.DeclaredOnly
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                    )
+                ) == 0
+            );
             Func<MethodInfo, bool> visFilter;
             Func<MethodInfo, bool> instFilter;
             switch (flags & (BindingFlags.Public | BindingFlags.NonPublic))
             {
-                case 0: visFilter = mi => false; break;
-                case BindingFlags.Public: visFilter = mi => mi.IsPublic; break;
-                case BindingFlags.NonPublic: visFilter = mi => !mi.IsPublic; break;
-                default: visFilter = mi => true; break;
+                case 0:
+                    visFilter = mi => false;
+                    break;
+                case BindingFlags.Public:
+                    visFilter = mi => mi.IsPublic;
+                    break;
+                case BindingFlags.NonPublic:
+                    visFilter = mi => !mi.IsPublic;
+                    break;
+                default:
+                    visFilter = mi => true;
+                    break;
             }
             switch (flags & (BindingFlags.Instance | BindingFlags.Static))
             {
-                case 0: instFilter = mi => false; break;
-                case BindingFlags.Instance: instFilter = mi => !mi.IsStatic; break;
-                case BindingFlags.Static: instFilter = mi => mi.IsStatic; break;
-                default: instFilter = mi => true; break;
+                case 0:
+                    instFilter = mi => false;
+                    break;
+                case BindingFlags.Instance:
+                    instFilter = mi => !mi.IsStatic;
+                    break;
+                case BindingFlags.Static:
+                    instFilter = mi => mi.IsStatic;
+                    break;
+                default:
+                    instFilter = mi => true;
+                    break;
             }
             List<MethodInfo> methodInfos = new List<MethodInfo>();
             foreach (var declaredMethod in type.GetTypeInfo().DeclaredMethods)
@@ -249,26 +330,54 @@ namespace Microsoft.Reflection
             }
             return methodInfos.ToArray();
         }
+
         public static FieldInfo[] GetFields(this Type type, BindingFlags flags)
         {
             // Minimal implementation to cover only the cases we need
             System.Diagnostics.Debug.Assert((flags & BindingFlags.DeclaredOnly) != 0);
-            System.Diagnostics.Debug.Assert((flags & ~(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic)) == 0);
+            System.Diagnostics.Debug.Assert(
+                (
+                    flags
+                    & ~(
+                        BindingFlags.DeclaredOnly
+                        | BindingFlags.Instance
+                        | BindingFlags.Static
+                        | BindingFlags.Public
+                        | BindingFlags.NonPublic
+                    )
+                ) == 0
+            );
             Func<FieldInfo, bool> visFilter;
             Func<FieldInfo, bool> instFilter;
             switch (flags & (BindingFlags.Public | BindingFlags.NonPublic))
             {
-                case 0: visFilter = fi => false; break;
-                case BindingFlags.Public: visFilter = fi => fi.IsPublic; break;
-                case BindingFlags.NonPublic: visFilter = fi => !fi.IsPublic; break;
-                default: visFilter = fi => true; break;
+                case 0:
+                    visFilter = fi => false;
+                    break;
+                case BindingFlags.Public:
+                    visFilter = fi => fi.IsPublic;
+                    break;
+                case BindingFlags.NonPublic:
+                    visFilter = fi => !fi.IsPublic;
+                    break;
+                default:
+                    visFilter = fi => true;
+                    break;
             }
             switch (flags & (BindingFlags.Instance | BindingFlags.Static))
             {
-                case 0: instFilter = fi => false; break;
-                case BindingFlags.Instance: instFilter = fi => !fi.IsStatic; break;
-                case BindingFlags.Static: instFilter = fi => fi.IsStatic; break;
-                default: instFilter = fi => true; break;
+                case 0:
+                    instFilter = fi => false;
+                    break;
+                case BindingFlags.Instance:
+                    instFilter = fi => !fi.IsStatic;
+                    break;
+                case BindingFlags.Static:
+                    instFilter = fi => fi.IsStatic;
+                    break;
+                default:
+                    instFilter = fi => true;
+                    break;
             }
             List<FieldInfo> fieldInfos = new List<FieldInfo>();
             foreach (var declaredField in type.GetTypeInfo().DeclaredFields)
@@ -278,10 +387,11 @@ namespace Microsoft.Reflection
             }
             return fieldInfos.ToArray();
         }
+
         public static Type GetNestedType(this Type type, string nestedTypeName)
         {
             TypeInfo ti = null;
-            foreach(var nt in type.GetTypeInfo().DeclaredNestedTypes)
+            foreach (var nt in type.GetTypeInfo().DeclaredNestedTypes)
             {
                 if (nt.Name == nestedTypeName)
                 {
@@ -291,31 +401,50 @@ namespace Microsoft.Reflection
             }
             return ti == null ? null : ti.AsType();
         }
-        public static TypeCode GetTypeCode(this Type type) 
+
+        public static TypeCode GetTypeCode(this Type type)
         {
-            if (type == typeof(bool)) return TypeCode.Boolean;
-            else if (type == typeof(byte)) return TypeCode.Byte;
-            else if (type == typeof(char)) return TypeCode.Char;
-            else if (type == typeof(ushort)) return TypeCode.UInt16;
-            else if (type == typeof(uint)) return TypeCode.UInt32;
-            else if (type == typeof(ulong)) return TypeCode.UInt64;
-            else if (type == typeof(sbyte)) return TypeCode.SByte;
-            else if (type == typeof(short)) return TypeCode.Int16;
-            else if (type == typeof(int)) return TypeCode.Int32;
-            else if (type == typeof(long)) return TypeCode.Int64;
-            else if (type == typeof(string)) return TypeCode.String;
-            else if (type == typeof(float)) return TypeCode.Single;
-            else if (type == typeof(double)) return TypeCode.Double;
-            else if (type == typeof(DateTime)) return TypeCode.DateTime;
-            else if (type == (typeof(Decimal))) return TypeCode.Decimal;
-            else return TypeCode.Object;
+            if (type == typeof(bool))
+                return TypeCode.Boolean;
+            else if (type == typeof(byte))
+                return TypeCode.Byte;
+            else if (type == typeof(char))
+                return TypeCode.Char;
+            else if (type == typeof(ushort))
+                return TypeCode.UInt16;
+            else if (type == typeof(uint))
+                return TypeCode.UInt32;
+            else if (type == typeof(ulong))
+                return TypeCode.UInt64;
+            else if (type == typeof(sbyte))
+                return TypeCode.SByte;
+            else if (type == typeof(short))
+                return TypeCode.Int16;
+            else if (type == typeof(int))
+                return TypeCode.Int32;
+            else if (type == typeof(long))
+                return TypeCode.Int64;
+            else if (type == typeof(string))
+                return TypeCode.String;
+            else if (type == typeof(float))
+                return TypeCode.Single;
+            else if (type == typeof(double))
+                return TypeCode.Double;
+            else if (type == typeof(DateTime))
+                return TypeCode.DateTime;
+            else if (type == (typeof(Decimal)))
+                return TypeCode.Decimal;
+            else
+                return TypeCode.Object;
         }
 
         //
         // FieldInfo extension methods
         //
         public static object GetRawConstantValue(this FieldInfo fi)
-        { return fi.GetValue(null); }
+        {
+            return fi.GetValue(null);
+        }
 
         //
         // Assembly extension methods
@@ -336,14 +465,23 @@ namespace System.Security
 {
     class SuppressUnmanagedCodeSecurityAttribute : Attribute { }
 
-    enum SecurityAction { Demand }
+    enum SecurityAction
+    {
+        Demand,
+    }
 }
+
 namespace System.Security.Permissions
 {
-    class HostProtectionAttribute : Attribute { public bool MayLeakOnAbort { get; set; } }
+    class HostProtectionAttribute : Attribute
+    {
+        public bool MayLeakOnAbort { get; set; }
+    }
+
     class PermissionSetAttribute : Attribute
-    { 
+    {
         public PermissionSetAttribute(System.Security.SecurityAction action) { }
+
         public bool Unrestricted { get; set; }
     }
 }

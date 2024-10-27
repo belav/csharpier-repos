@@ -16,12 +16,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.WebTransport;
 #pragma warning disable CA2252 // WebTransport is a preview feature
 internal sealed class WebTransportSession : IWebTransportSession
 {
-    private static readonly IStreamDirectionFeature _outputStreamDirectionFeature = new DefaultStreamDirectionFeature(canRead: false, canWrite: true);
+    private static readonly IStreamDirectionFeature _outputStreamDirectionFeature =
+        new DefaultStreamDirectionFeature(canRead: false, canWrite: true);
 
     private readonly CancellationTokenRegistration _connectionClosedRegistration;
 
     // stores all created streams (pending or accepted)
     private readonly ConcurrentDictionary<long, WebTransportStream> _openStreams = new();
+
     // stores all pending streams that have not been accepted yet
     private readonly Channel<WebTransportStream> _pendingStreams;
 
@@ -29,10 +31,16 @@ internal sealed class WebTransportSession : IWebTransportSession
     private readonly Http3Stream _connectStream = default!;
     private bool _isClosing;
 
-    private static readonly ReadOnlyMemory<byte> OutputStreamHeader = new(new byte[] {
-            0x40 /*quic variable-length integer length*/,
+    private static readonly ReadOnlyMemory<byte> OutputStreamHeader = new(
+        new byte[]
+        {
+            0x40 /*quic variable-length integer length*/
+            ,
             (byte)Http3StreamType.WebTransportUnidirectional,
-            0x00 /*body*/});
+            0x00 /*body*/
+            ,
+        }
+    );
 
     internal const string WebTransportProtocolValue = "webtransport";
     internal const string VersionEnabledIndicator = "1";
@@ -52,11 +60,14 @@ internal sealed class WebTransportSession : IWebTransportSession
         _pendingStreams = Channel.CreateUnbounded<WebTransportStream>();
 
         // listener to abort if this connection is closed
-        _connectionClosedRegistration = connection._multiplexedContext.ConnectionClosed.Register(static state =>
-        {
-            var session = (WebTransportSession)state!;
-            session.OnClientConnectionClosed();
-        }, this);
+        _connectionClosedRegistration = connection._multiplexedContext.ConnectionClosed.Register(
+            static state =>
+            {
+                var session = (WebTransportSession)state!;
+                session.OnClientConnectionClosed();
+            },
+            this
+        );
     }
 
     void IWebTransportSession.Abort(int errorCode)
@@ -106,7 +117,9 @@ internal sealed class WebTransportSession : IWebTransportSession
             {
                 if (exception.InnerException is not null)
                 {
-                    stream.Value.Abort(new ConnectionAbortedException(exception.Message, exception.InnerException));
+                    stream.Value.Abort(
+                        new ConnectionAbortedException(exception.Message, exception.InnerException)
+                    );
                 }
                 else
                 {
@@ -119,7 +132,9 @@ internal sealed class WebTransportSession : IWebTransportSession
         _pendingStreams.Writer.Complete();
     }
 
-    public async ValueTask<ConnectionContext?> OpenUnidirectionalStreamAsync(CancellationToken cancellationToken)
+    public async ValueTask<ConnectionContext?> OpenUnidirectionalStreamAsync(
+        CancellationToken cancellationToken
+    )
     {
         if (_isClosing)
         {
@@ -128,7 +143,10 @@ internal sealed class WebTransportSession : IWebTransportSession
         // create the stream
         var features = new FeatureCollection();
         features.Set(_outputStreamDirectionFeature);
-        var connectionContext = await _connection._multiplexedContext.ConnectAsync(features, cancellationToken);
+        var connectionContext = await _connection._multiplexedContext.ConnectAsync(
+            features,
+            cancellationToken
+        );
         var streamContext = _connection.CreateHttpStreamContext(connectionContext);
         var stream = new WebTransportStream(streamContext, WebTransportStreamType.Output);
 
@@ -159,11 +177,17 @@ internal sealed class WebTransportSession : IWebTransportSession
                 _openStreams.Remove(stream.StreamId, out _);
             }
 
-            stream.Abort(new ConnectionAbortedException(CoreStrings.WebTransportFailedToAddStreamToPendingQueue));
+            stream.Abort(
+                new ConnectionAbortedException(
+                    CoreStrings.WebTransportFailedToAddStreamToPendingQueue
+                )
+            );
         }
     }
 
-    public async ValueTask<ConnectionContext?> AcceptStreamAsync(CancellationToken cancellationToken)
+    public async ValueTask<ConnectionContext?> AcceptStreamAsync(
+        CancellationToken cancellationToken
+    )
     {
         if (_isClosing)
         {

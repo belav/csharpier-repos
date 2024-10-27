@@ -21,7 +21,8 @@ namespace Tests.Integration
             batch.AddExportedValue("CISimpleValue", 42);
             container.Compose(batch);
 
-            SimpleConstructorInjectedObject simple = container.GetExportedValue<SimpleConstructorInjectedObject>();
+            SimpleConstructorInjectedObject simple =
+                container.GetExportedValue<SimpleConstructorInjectedObject>();
 
             Assert.Equal(42, simple.CISimpleValue);
         }
@@ -35,9 +36,11 @@ namespace Tests.Integration
         public class AWithOptionalParameter
         {
             [ImportingConstructor]
-            public AWithOptionalParameter([Import(AllowDefault = true)]IOptionalRef import,
-                [Import("ContractThatShouldNotBeFound", AllowDefault = true)]int value,
-                [Import(AllowDefault=true)]OptionalExportProvided provided)
+            public AWithOptionalParameter(
+                [Import(AllowDefault = true)] IOptionalRef import,
+                [Import("ContractThatShouldNotBeFound", AllowDefault = true)] int value,
+                [Import(AllowDefault = true)] OptionalExportProvided provided
+            )
             {
                 Assert.Null(import);
                 Assert.Equal(0, value);
@@ -62,12 +65,17 @@ namespace Tests.Integration
             private IEnumerable<int> _values;
 
             [ImportingConstructor]
-            public AWithCollectionArgument([ImportMany("MyConstructorCollectionItem")]IEnumerable<int> values)
+            public AWithCollectionArgument(
+                [ImportMany("MyConstructorCollectionItem")] IEnumerable<int> values
+            )
             {
                 this._values = values;
             }
 
-            public IEnumerable<int> Values { get { return this._values; } }
+            public IEnumerable<int> Values
+            {
+                get { return this._values; }
+            }
         }
 
         [Fact]
@@ -153,9 +161,7 @@ namespace Tests.Integration
         public class ClassWithNotFoundConstructorArgs
         {
             [ImportingConstructor]
-            public ClassWithNotFoundConstructorArgs([Import("ContractThatDoesntExist")]int i)
-            {
-            }
+            public ClassWithNotFoundConstructorArgs([Import("ContractThatDoesntExist")] int i) { }
         }
 
         private CompositionContainer GetContainerWithCatalog()
@@ -169,19 +175,19 @@ namespace Tests.Integration
         public class InvalidImportManyCI
         {
             [ImportingConstructor]
-            public InvalidImportManyCI(
-                [ImportMany]List<MyExport> exports)
-            {
-            }
+            public InvalidImportManyCI([ImportMany] List<MyExport> exports) { }
         }
 
         [Fact]
         public void ImportMany_ConstructorParameter_OnNonAssiganbleType_ShouldThrowCompositionException()
         {
-            var container = ContainerFactory.CreateWithAttributedCatalog(typeof(InvalidImportManyCI));
+            var container = ContainerFactory.CreateWithAttributedCatalog(
+                typeof(InvalidImportManyCI)
+            );
 
             Assert.Throws<CompositionException>(
-                () => container.GetExportedValue<InvalidImportManyCI>());
+                () => container.GetExportedValue<InvalidImportManyCI>()
+            );
         }
     }
 }

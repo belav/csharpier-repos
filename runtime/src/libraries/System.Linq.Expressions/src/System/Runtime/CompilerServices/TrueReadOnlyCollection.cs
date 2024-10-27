@@ -12,8 +12,6 @@ namespace System.Runtime.CompilerServices
         /// !!! DOES NOT COPY THE ARRAY !!!
         /// </summary>
         public TrueReadOnlyCollection(params T[] list)
-            : base(list)
-        {
-        }
+            : base(list) { }
     }
 }

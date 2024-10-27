@@ -15,11 +15,17 @@ namespace System.Web.Http
 {
     public class AuthorizeAttributeTest
     {
-        private readonly Mock<HttpActionDescriptor> _actionDescriptorMock = new Mock<HttpActionDescriptor>() { CallBase = true };
-        private readonly Collection<AllowAnonymousAttribute> _allowAnonymousAttributeCollection = new Collection<AllowAnonymousAttribute>(new AllowAnonymousAttribute[] { new AllowAnonymousAttribute() });
+        private readonly Mock<HttpActionDescriptor> _actionDescriptorMock =
+            new Mock<HttpActionDescriptor>() { CallBase = true };
+        private readonly Collection<AllowAnonymousAttribute> _allowAnonymousAttributeCollection =
+            new Collection<AllowAnonymousAttribute>(
+                new AllowAnonymousAttribute[] { new AllowAnonymousAttribute() }
+            );
         private readonly MockableAuthorizeAttribute _attribute;
-        private readonly Mock<MockableAuthorizeAttribute> _attributeMock = new Mock<MockableAuthorizeAttribute>() { CallBase = true };
-        private readonly Mock<HttpControllerDescriptor> _controllerDescriptorMock = new Mock<HttpControllerDescriptor>() { CallBase = true };
+        private readonly Mock<MockableAuthorizeAttribute> _attributeMock =
+            new Mock<MockableAuthorizeAttribute>() { CallBase = true };
+        private readonly Mock<HttpControllerDescriptor> _controllerDescriptorMock =
+            new Mock<HttpControllerDescriptor>() { CallBase = true };
         private readonly HttpControllerContext _controllerContext;
         private readonly HttpActionContext _actionContext;
         private readonly Mock<IPrincipal> _principalMock = new Mock<IPrincipal>();
@@ -29,11 +35,26 @@ namespace System.Web.Http
         {
             _attribute = _attributeMock.Object;
             _controllerContext = new Mock<HttpControllerContext>() { CallBase = true }.Object;
-            _controllerDescriptorMock.Setup(cd => cd.GetCustomAttributes<AllowAnonymousAttribute>()).Returns(new Collection<AllowAnonymousAttribute>(Enumerable.Empty<AllowAnonymousAttribute>().ToList()));
-            _actionDescriptorMock.Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>()).Returns(new Collection<AllowAnonymousAttribute>(Enumerable.Empty<AllowAnonymousAttribute>().ToList()));
+            _controllerDescriptorMock
+                .Setup(cd => cd.GetCustomAttributes<AllowAnonymousAttribute>())
+                .Returns(
+                    new Collection<AllowAnonymousAttribute>(
+                        Enumerable.Empty<AllowAnonymousAttribute>().ToList()
+                    )
+                );
+            _actionDescriptorMock
+                .Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>())
+                .Returns(
+                    new Collection<AllowAnonymousAttribute>(
+                        Enumerable.Empty<AllowAnonymousAttribute>().ToList()
+                    )
+                );
             _controllerContext.ControllerDescriptor = _controllerDescriptorMock.Object;
             _controllerContext.Request = _request;
-            _actionContext = ContextUtil.CreateActionContext(_controllerContext, _actionDescriptorMock.Object);
+            _actionContext = ContextUtil.CreateActionContext(
+                _controllerContext,
+                _actionDescriptorMock.Object
+            );
             _controllerContext.RequestContext.Principal = _principalMock.Object;
         }
 
@@ -42,7 +63,11 @@ namespace System.Web.Http
         {
             AuthorizeAttribute attribute = new AuthorizeAttribute();
 
-            Assert.Reflection.StringProperty(attribute, a => a.Roles, expectedDefaultValue: String.Empty);
+            Assert.Reflection.StringProperty(
+                attribute,
+                a => a.Roles,
+                expectedDefaultValue: String.Empty
+            );
         }
 
         [Fact]
@@ -50,7 +75,11 @@ namespace System.Web.Http
         {
             AuthorizeAttribute attribute = new AuthorizeAttribute();
 
-            Assert.Reflection.StringProperty(attribute, a => a.Users, expectedDefaultValue: String.Empty);
+            Assert.Reflection.StringProperty(
+                attribute,
+                a => a.Users,
+                expectedDefaultValue: String.Empty
+            );
         }
 
         [Fact]
@@ -71,10 +100,13 @@ namespace System.Web.Http
         [Fact]
         public void OnAuthorization_IfContextParameterIsNull_ThrowsException()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                _attribute.OnAuthorization(actionContext: null);
-            }, "actionContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    _attribute.OnAuthorization(actionContext: null);
+                },
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -179,8 +211,11 @@ namespace System.Web.Http
         [Fact]
         public void OnAuthorization_IfActionDescriptorIsMarkedWithAllowAnonymousAttribute_DoesNotShortCircuitResponse()
         {
-            _actionDescriptorMock.Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>()).Returns(_allowAnonymousAttributeCollection);
-            Mock<MockableAuthorizeAttribute> authorizeAttributeMock = new Mock<MockableAuthorizeAttribute>() { CallBase = true };
+            _actionDescriptorMock
+                .Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>())
+                .Returns(_allowAnonymousAttributeCollection);
+            Mock<MockableAuthorizeAttribute> authorizeAttributeMock =
+                new Mock<MockableAuthorizeAttribute>() { CallBase = true };
             AuthorizeAttribute attribute = authorizeAttributeMock.Object;
 
             attribute.OnAuthorization(_actionContext);
@@ -191,8 +226,11 @@ namespace System.Web.Http
         [Fact]
         public void OnAuthorization_IfControllerDescriptorIsMarkedWithAllowAnonymousAttribute_DoesNotShortCircuitResponse()
         {
-            _controllerDescriptorMock.Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>()).Returns(_allowAnonymousAttributeCollection);
-            Mock<MockableAuthorizeAttribute> authorizeAttributeMock = new Mock<MockableAuthorizeAttribute>() { CallBase = true };
+            _controllerDescriptorMock
+                .Setup(ad => ad.GetCustomAttributes<AllowAnonymousAttribute>())
+                .Returns(_allowAnonymousAttributeCollection);
+            Mock<MockableAuthorizeAttribute> authorizeAttributeMock =
+                new Mock<MockableAuthorizeAttribute>() { CallBase = true };
             AuthorizeAttribute attribute = authorizeAttributeMock.Object;
 
             attribute.OnAuthorization(_actionContext);
@@ -203,9 +241,12 @@ namespace System.Web.Http
         [Fact]
         public void OnAuthorization_IfRequestNotAuthorized_CallsHandleUnauthorizedRequest()
         {
-            Mock<MockableAuthorizeAttribute> authorizeAttributeMock = new Mock<MockableAuthorizeAttribute>() { CallBase = true };
+            Mock<MockableAuthorizeAttribute> authorizeAttributeMock =
+                new Mock<MockableAuthorizeAttribute>() { CallBase = true };
             _principalMock.Setup(p => p.Identity.IsAuthenticated).Returns(false);
-            authorizeAttributeMock.Setup(a => a.HandleUnauthorizedRequestPublic(_actionContext)).Verifiable();
+            authorizeAttributeMock
+                .Setup(a => a.HandleUnauthorizedRequestPublic(_actionContext))
+                .Verifiable();
             AuthorizeAttribute attribute = authorizeAttributeMock.Object;
 
             attribute.OnAuthorization(_actionContext);
@@ -216,10 +257,13 @@ namespace System.Web.Http
         [Fact]
         public void HandleUnauthorizedRequest_IfContextParameterIsNull_ThrowsArgumentNullException()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                _attribute.HandleUnauthorizedRequestPublic(context: null);
-            }, "actionContext");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    _attribute.HandleUnauthorizedRequestPublic(context: null);
+                },
+                "actionContext"
+            );
         }
 
         [Fact]
@@ -234,7 +278,10 @@ namespace System.Web.Http
 
         [Theory]
         [PropertyData("SplitStringTestData")]
-        public void SplitString_SplitsOnCommaAndTrimsWhitespaceAndIgnoresEmptyStrings(string input, params string[] expectedResult)
+        public void SplitString_SplitsOnCommaAndTrimsWhitespaceAndIgnoresEmptyStrings(
+            string input,
+            params string[] expectedResult
+        )
         {
             string[] result = AuthorizeAttribute.SplitString(input);
 
@@ -245,7 +292,8 @@ namespace System.Web.Http
         {
             get
             {
-                return new ParamsTheoryDataSet<string, string>() {
+                return new ParamsTheoryDataSet<string, string>()
+                {
                     { null },
                     { String.Empty },
                     { "   " },
@@ -270,7 +318,10 @@ namespace System.Web.Http
         {
             Assert.NotNull(actionContext.Response);
             Assert.Equal(HttpStatusCode.Unauthorized, actionContext.Response.StatusCode);
-            Assert.Same(actionContext.ControllerContext.Request, actionContext.Response.RequestMessage);
+            Assert.Same(
+                actionContext.ControllerContext.Request,
+                actionContext.Response.RequestMessage
+            );
         }
 
         public class MockableAuthorizeAttribute : AuthorizeAttribute

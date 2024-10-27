@@ -14,10 +14,18 @@ namespace System.Web.Razor.Parser
 
         private StringComparison Comparison
         {
-            get { return CaseSensitive ? StringComparison.Ordinal : StringComparison.OrdinalIgnoreCase; }
+            get
+            {
+                return CaseSensitive
+                    ? StringComparison.Ordinal
+                    : StringComparison.OrdinalIgnoreCase;
+            }
         }
 
-        public override void ParseSection(Tuple<string, string> nestingSequences, bool caseSensitive)
+        public override void ParseSection(
+            Tuple<string, string> nestingSequences,
+            bool caseSensitive
+        )
         {
             if (Context == null)
             {
@@ -48,14 +56,15 @@ namespace System.Web.Razor.Parser
         {
             do
             {
-                SkipToAndParseCode(sym => sym.Type == HtmlSymbolType.OpenAngle || AtEnd(nestingSequenceComponents));
+                SkipToAndParseCode(sym =>
+                    sym.Type == HtmlSymbolType.OpenAngle || AtEnd(nestingSequenceComponents)
+                );
                 ScanTagInDocumentContext();
                 if (!EndOfFile && AtEnd(nestingSequenceComponents))
                 {
                     break;
                 }
-            }
-            while (!EndOfFile);
+            } while (!EndOfFile);
 
             PutCurrentBack();
         }
@@ -66,8 +75,8 @@ namespace System.Web.Razor.Parser
             while (nesting > 0 && !EndOfFile)
             {
                 SkipToAndParseCode(sym =>
-                    sym.Type == HtmlSymbolType.Text ||
-                    sym.Type == HtmlSymbolType.OpenAngle);
+                    sym.Type == HtmlSymbolType.Text || sym.Type == HtmlSymbolType.OpenAngle
+                );
                 if (At(HtmlSymbolType.Text))
                 {
                     nesting += ProcessTextToken(nestingSequences, nesting);
@@ -97,7 +106,10 @@ namespace System.Web.Razor.Parser
                 {
                     foreach (string component in nestingSequenceComponents)
                     {
-                        if (!EndOfFile && !String.Equals(CurrentSymbol.Content, component, Comparison))
+                        if (
+                            !EndOfFile
+                            && !String.Equals(CurrentSymbol.Content, component, Comparison)
+                        )
                         {
                             return false;
                         }
@@ -122,10 +134,20 @@ namespace System.Web.Razor.Parser
         {
             for (int i = 0; i < CurrentSymbol.Content.Length; i++)
             {
-                int nestingDelta = HandleNestingSequence(nestingSequences.Item1, i, currentNesting, 1);
+                int nestingDelta = HandleNestingSequence(
+                    nestingSequences.Item1,
+                    i,
+                    currentNesting,
+                    1
+                );
                 if (nestingDelta == 0)
                 {
-                    nestingDelta = HandleNestingSequence(nestingSequences.Item2, i, currentNesting, -1);
+                    nestingDelta = HandleNestingSequence(
+                        nestingSequences.Item2,
+                        i,
+                        currentNesting,
+                        -1
+                    );
                 }
 
                 if (nestingDelta != 0)
@@ -136,11 +158,18 @@ namespace System.Web.Razor.Parser
             return 0;
         }
 
-        private int HandleNestingSequence(string sequence, int position, int currentNesting, int retIfMatched)
+        private int HandleNestingSequence(
+            string sequence,
+            int position,
+            int currentNesting,
+            int retIfMatched
+        )
         {
-            if (sequence != null &&
-                CurrentSymbol.Content[position] == sequence[0] &&
-                position + sequence.Length <= CurrentSymbol.Content.Length)
+            if (
+                sequence != null
+                && CurrentSymbol.Content[position] == sequence[0]
+                && position + sequence.Length <= CurrentSymbol.Content.Length
+            )
             {
                 string possibleStart = CurrentSymbol.Content.Substring(position, sequence.Length);
                 if (String.Equals(possibleStart, sequence, Comparison))
@@ -151,7 +180,11 @@ namespace System.Web.Razor.Parser
                     PutCurrentBack();
 
                     // Carve up the symbol
-                    Tuple<HtmlSymbol, HtmlSymbol> pair = Language.SplitSymbol(sym, position, HtmlSymbolType.Text);
+                    Tuple<HtmlSymbol, HtmlSymbol> pair = Language.SplitSymbol(
+                        sym,
+                        position,
+                        HtmlSymbolType.Text
+                    );
                     HtmlSymbol preSequence = pair.Item1;
                     Debug.Assert(pair.Item2 != null);
                     pair = Language.SplitSymbol(pair.Item2, sequence.Length, HtmlSymbolType.Text);

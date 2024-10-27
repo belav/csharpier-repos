@@ -30,12 +30,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeForwardsForCaret()
         {
             var markup =
-@"[|if ({|placeholder:true|})
+                @"[|if ({|placeholder:true|})
 {
 }|] $$";
 
             var expectedLSPSnippet =
-@"if (${1:true})
+                @"if (${1:true})
 {
 } $0";
 
@@ -46,12 +46,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForCaret()
         {
             var markup =
-@"$$ [|if ({|placeholder:true|})
+                @"$$ [|if ({|placeholder:true|})
 {
 }|]";
 
             var expectedLSPSnippet =
-@"$0 if (${1:true})
+                @"$0 if (${1:true})
 {
 }";
 
@@ -62,12 +62,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeForwardsForPlaceholder()
         {
             var markup =
-@"[|if (true)
+                @"[|if (true)
 {$$
 }|] {|placeholder:test|}";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
 {$0
 } ${1:test}";
 
@@ -78,12 +78,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForPlaceholder()
         {
             var markup =
-@"{|placeholder:test|} [|if (true)
+                @"{|placeholder:test|} [|if (true)
 {$$
 }|]";
 
             var expectedLSPSnippet =
-@"${1:test} if (true)
+                @"${1:test} if (true)
 {$0
 }";
 
@@ -94,12 +94,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeForwardsForPlaceholderThenCaret()
         {
             var markup =
-@"[|if (true)
+                @"[|if (true)
 {
 }|] {|placeholder:test|} $$";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
 {
 } ${1:test} $0";
 
@@ -110,12 +110,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeForwardsForCaretThenPlaceholder()
         {
             var markup =
-@"[|if (true)
+                @"[|if (true)
 {
 }|] $$ {|placeholder:test|}";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
 {
 } $0 ${1:test}";
 
@@ -126,12 +126,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForPlaceholderThenCaret()
         {
             var markup =
-@"{|placeholder:test|} $$ [|if (true)
+                @"{|placeholder:test|} $$ [|if (true)
 {
 }|]";
 
             var expectedLSPSnippet =
-@"${1:test} $0 if (true)
+                @"${1:test} $0 if (true)
 {
 }";
 
@@ -142,12 +142,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForCaretThenPlaceholder()
         {
             var markup =
-@"$$ {|placeholder:test|} [|if (true)
+                @"$$ {|placeholder:test|} [|if (true)
 {
 }|]";
 
             var expectedLSPSnippet =
-@"$0 ${1:test} if (true)
+                @"$0 ${1:test} if (true)
 {
 }";
 
@@ -158,12 +158,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForCaretForwardsForPlaceholder()
         {
             var markup =
-@"$$ [|if (true)
+                @"$$ [|if (true)
 {
 }|] {|placeholder:test|}";
 
             var expectedLSPSnippet =
-@"$0 if (true)
+                @"$0 if (true)
 {
 } ${1:test}";
 
@@ -174,12 +174,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeBackwardsForPlaceholderForwardsForCaret()
         {
             var markup =
-@"{|placeholder:test|} [|if (true)
+                @"{|placeholder:test|} [|if (true)
 {
 }|] $$";
 
             var expectedLSPSnippet =
-@"${1:test} if (true)
+                @"${1:test} if (true)
 {
 } $0";
 
@@ -190,7 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodForwardsForCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     [|if ({|placeholder:true|})
     {
@@ -198,7 +198,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if (${1:true})
+                @"if (${1:true})
     {
     } $0";
 
@@ -209,7 +209,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     $$ [|if ({|placeholder:true|})
     {
@@ -217,7 +217,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"$0 if (${1:true})
+                @"$0 if (${1:true})
     {
     }";
 
@@ -228,7 +228,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodForwardsForPlaceholder()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     [|if (true)
      {$$
@@ -236,7 +236,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
      {$0
      } ${1:test}";
 
@@ -247,14 +247,14 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForPlaceholder()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     {|placeholder:test|} [|if (true)
     {$$
     }|]";
 
             var expectedLSPSnippet =
-@"${1:test} if (true)
+                @"${1:test} if (true)
     {$0
     }";
 
@@ -265,7 +265,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodForwardsForPlaceholderThenCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     [|if (true)
     {
@@ -273,7 +273,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
     {
     } ${1:test} $0";
 
@@ -284,7 +284,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodForwardsForCaretThenPlaceholder()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     [|if (true)
     {
@@ -292,7 +292,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if (true)
+                @"if (true)
     {
     } $0 ${1:test}";
 
@@ -303,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForPlaceholderThenCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     {|placeholder:test|} $$ [|if (true)
     {
@@ -311,7 +311,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"${1:test} $0 if (true)
+                @"${1:test} $0 if (true)
     {
     }";
 
@@ -322,7 +322,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForCaretThenPlaceholder()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     $$ {|placeholder:test|} [|if (true)
     {
@@ -330,7 +330,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"$0 ${1:test} if (true)
+                @"$0 ${1:test} if (true)
     {
     }";
 
@@ -341,7 +341,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForCaretForwardsForPlaceholder()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     $$ [|if (true)
     {
@@ -349,7 +349,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"$0 if (true)
+                @"$0 if (true)
     {
     } ${1:test}";
 
@@ -360,7 +360,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodBackwardsForPlaceholderForwardsForCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     {|placeholder:test|} [|if (true)
     {
@@ -368,7 +368,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"${1:test} if (true)
+                @"${1:test} if (true)
     {
     } $0";
 
@@ -379,7 +379,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestExtendSnippetTextChangeInMethodWithCodeBeforeAndAfterBackwardsForPlaceholderForwardsForCaret()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     var x = 5;
     {|placeholder:test|} [|if (true)
@@ -390,7 +390,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"${1:test} if (true)
+                @"${1:test} if (true)
     {
     } $0";
 
@@ -402,9 +402,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         {
             var testString = "foo bar quux baz";
             using var workspace = CreateWorkspaceFromCode(testString);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
-            var lspSnippetString = RoslynLSPSnippetConverter.GenerateLSPSnippetAsync(document, caretPosition: 12,
-                ImmutableArray<SnippetPlaceholder>.Empty, new TextChange(new TextSpan(8, 0), "quux"), triggerLocation: 12, CancellationToken.None).Result;
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
+            var lspSnippetString = RoslynLSPSnippetConverter
+                .GenerateLSPSnippetAsync(
+                    document,
+                    caretPosition: 12,
+                    ImmutableArray<SnippetPlaceholder>.Empty,
+                    new TextChange(new TextSpan(8, 0), "quux"),
+                    triggerLocation: 12,
+                    CancellationToken.None
+                )
+                .Result;
             AssertEx.EqualOrDiff("quux$0", lspSnippetString);
         }
 
@@ -413,9 +423,19 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         {
             var testString = "foo bar quux baz";
             using var workspace = CreateWorkspaceFromCode(testString);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
-            var lspSnippetString = RoslynLSPSnippetConverter.GenerateLSPSnippetAsync(document, caretPosition: 12,
-                ImmutableArray<SnippetPlaceholder>.Empty, new TextChange(new TextSpan(4, 4), "bar quux"), triggerLocation: 12, CancellationToken.None).Result;
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
+            var lspSnippetString = RoslynLSPSnippetConverter
+                .GenerateLSPSnippetAsync(
+                    document,
+                    caretPosition: 12,
+                    ImmutableArray<SnippetPlaceholder>.Empty,
+                    new TextChange(new TextSpan(4, 4), "bar quux"),
+                    triggerLocation: 12,
+                    CancellationToken.None
+                )
+                .Result;
             AssertEx.EqualOrDiff("bar quux$0", lspSnippetString);
         }
 
@@ -427,12 +447,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestForLoopSnippet()
         {
             var markup =
-@"[|for (var {|placeholder1:i|} = 0; {|placeholder1:i|} < {|placeholder2:length|}; {|placeholder1:i|}++)
+                @"[|for (var {|placeholder1:i|} = 0; {|placeholder1:i|} < {|placeholder2:length|}; {|placeholder1:i|}++)
 {$$
 }|]";
 
             var expectedLSPSnippet =
-@"for (var ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++)
+                @"for (var ${1:i} = 0; ${1:i} < ${2:length}; ${1:i}++)
 {$0
 }";
 
@@ -443,7 +463,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestIfSnippetSamePlaceholderCursorLocation()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     var x = 5;
     [|if ({|placeholder:true|}$$)
@@ -454,7 +474,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if (${1:true}$0)
+                @"if (${1:true}$0)
     {
     }";
 
@@ -465,7 +485,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
         public Task TestIfSnippetSameCursorPlaceholderLocation()
         {
             var markup =
-@"public void Method()
+                @"public void Method()
 {
     var x = 5;
     [|if ($${|placeholder:true|})
@@ -476,7 +496,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 }";
 
             var expectedLSPSnippet =
-@"if ($0${1:true})
+                @"if ($0${1:true})
     {
     }";
 
@@ -485,23 +505,45 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Snippets
 
         #endregion
 
-        protected static TestWorkspace CreateWorkspaceFromCode(string code)
-         => TestWorkspace.CreateCSharp(code);
+        protected static TestWorkspace CreateWorkspaceFromCode(string code) =>
+            TestWorkspace.CreateCSharp(code);
 
         private static async Task TestAsync(string markup, string output)
         {
-            MarkupTestFile.GetPositionAndSpans(markup, out var text, out var cursorPosition, out IDictionary<string, ImmutableArray<TextSpan>> placeholderDictionary);
+            MarkupTestFile.GetPositionAndSpans(
+                markup,
+                out var text,
+                out var cursorPosition,
+                out IDictionary<string, ImmutableArray<TextSpan>> placeholderDictionary
+            );
             var stringSpan = placeholderDictionary[""].First();
-            var textChange = new TextChange(new TextSpan(stringSpan.Start, 0), text.Substring(stringSpan.Start, stringSpan.Length));
+            var textChange = new TextChange(
+                new TextSpan(stringSpan.Start, 0),
+                text.Substring(stringSpan.Start, stringSpan.Length)
+            );
             var placeholders = GetSnippetPlaceholders(text, placeholderDictionary);
             using var workspace = CreateWorkspaceFromCode(markup);
-            var document = workspace.CurrentSolution.GetRequiredDocument(workspace.Documents.First().Id);
+            var document = workspace.CurrentSolution.GetRequiredDocument(
+                workspace.Documents.First().Id
+            );
 
-            var lspSnippetString = await RoslynLSPSnippetConverter.GenerateLSPSnippetAsync(document, cursorPosition!.Value, placeholders, textChange, stringSpan.Start, CancellationToken.None).ConfigureAwait(false);
+            var lspSnippetString = await RoslynLSPSnippetConverter
+                .GenerateLSPSnippetAsync(
+                    document,
+                    cursorPosition!.Value,
+                    placeholders,
+                    textChange,
+                    stringSpan.Start,
+                    CancellationToken.None
+                )
+                .ConfigureAwait(false);
             AssertEx.EqualOrDiff(output, lspSnippetString);
         }
 
-        private static ImmutableArray<SnippetPlaceholder> GetSnippetPlaceholders(string text, IDictionary<string, ImmutableArray<TextSpan>> placeholderDictionary)
+        private static ImmutableArray<SnippetPlaceholder> GetSnippetPlaceholders(
+            string text,
+            IDictionary<string, ImmutableArray<TextSpan>> placeholderDictionary
+        )
         {
             using var _ = ArrayBuilder<SnippetPlaceholder>.GetInstance(out var arrayBuilder);
             foreach (var kvp in placeholderDictionary)

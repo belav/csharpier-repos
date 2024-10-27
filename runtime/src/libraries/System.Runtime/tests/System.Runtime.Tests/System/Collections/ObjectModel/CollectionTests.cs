@@ -58,7 +58,10 @@ namespace System.Collections.ObjectModel.Tests
             Type type = il.GetType();
             Assert.Equal(1, type.GenericTypeArguments.Length);
             Assert.Equal(typeof(int), type.GenericTypeArguments[0]);
-            Assert.Equal("System.Collections.Generic.List`1", string.Format("{0}.{1}", type.Namespace, type.Name));
+            Assert.Equal(
+                "System.Collections.Generic.List`1",
+                string.Format("{0}.{1}", type.Namespace, type.Name)
+            );
         }
 
         [Fact]
@@ -78,18 +81,27 @@ namespace System.Collections.ObjectModel.Tests
             var collection = new ModifiableCollection<int>(s_intArray);
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[-1]);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[s_intArray.Length]);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection[s_intArray.Length]
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => s_empty[0]);
 
             AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[-1] = 0);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection[s_intArray.Length] = 0);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection[s_intArray.Length] = 0
+            );
         }
 
         [Fact]
         public static void Item_Set_InvalidType_ThrowsArgumentException()
         {
             var collection = new Collection<int>(new Collection<int>(s_intArray));
-            AssertExtensions.Throws<ArgumentException>("value", () => ((IList)collection)[1] = "Two");
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => ((IList)collection)[1] = "Two"
+            );
         }
 
         [Fact]
@@ -171,8 +183,14 @@ namespace System.Collections.ObjectModel.Tests
         public static void Insert_InvalidIndex_ThrowsArgumentOutOfRangeException()
         {
             var collection = new ModifiableCollection<int>(s_intArray);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(-1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.Insert(s_intArray.Length + 1, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection.Insert(-1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection.Insert(s_intArray.Length + 1, 0)
+            );
         }
 
         [Fact]
@@ -206,9 +224,20 @@ namespace System.Collections.ObjectModel.Tests
             int[] intArray = new int[s_intArray.Length + targetIndex];
 
             Assert.Throws<ArgumentNullException>(() => collection.CopyTo(null, 0));
-            AssertExtensions.Throws<ArgumentException>(null, () => ((ICollection)collection).CopyTo(new int[s_intArray.Length, s_intArray.Length], 0));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    ((ICollection)collection).CopyTo(
+                        new int[s_intArray.Length, s_intArray.Length],
+                        0
+                    )
+            );
             Assert.Throws<ArgumentOutOfRangeException>(() => collection.CopyTo(intArray, -1));
-            AssertExtensions.Throws<ArgumentException>("destinationArray", "", () => collection.CopyTo(intArray, s_intArray.Length - 1));
+            AssertExtensions.Throws<ArgumentException>(
+                "destinationArray",
+                "",
+                () => collection.CopyTo(intArray, s_intArray.Length - 1)
+            );
 
             collection.CopyTo(intArray, targetIndex);
             for (int i = targetIndex; i < intArray.Length; i++)
@@ -269,26 +298,32 @@ namespace System.Collections.ObjectModel.Tests
         public static void RemoveAt_InvalidIndex_ThrowsArgumentOutOfRangeException()
         {
             var collection = new ModifiableCollection<int>(s_intSequence);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => collection.RemoveAt(s_intArray.Length));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection.RemoveAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => collection.RemoveAt(s_intArray.Length)
+            );
         }
 
         [Fact]
         public static void MembersForwardedToUnderlyingIList()
         {
             var expectedApiCalls =
-                IListApi.Count |
-                IListApi.IsReadOnly |
-                IListApi.IndexerGet |
-                IListApi.IndexerSet |
-                IListApi.Insert |
-                IListApi.Clear |
-                IListApi.Contains |
-                IListApi.CopyTo |
-                IListApi.GetEnumeratorGeneric |
-                IListApi.IndexOf |
-                IListApi.RemoveAt |
-                IListApi.GetEnumerator;
+                IListApi.Count
+                | IListApi.IsReadOnly
+                | IListApi.IndexerGet
+                | IListApi.IndexerSet
+                | IListApi.Insert
+                | IListApi.Clear
+                | IListApi.Contains
+                | IListApi.CopyTo
+                | IListApi.GetEnumeratorGeneric
+                | IListApi.IndexOf
+                | IListApi.RemoveAt
+                | IListApi.GetEnumerator;
 
             var list = new CallTrackingIList<int>(expectedApiCalls);
             var collection = new Collection<int>(list);
@@ -328,7 +363,10 @@ namespace System.Collections.ObjectModel.Tests
         public void IList_Add_ValidItemButThrowsInvalidCastExceptionFromOverride_ThrowsInvalidCastException()
         {
             var collection = new ObservableCollection<int>();
-            collection.CollectionChanged += delegate { throw new InvalidCastException(); };
+            collection.CollectionChanged += delegate
+            {
+                throw new InvalidCastException();
+            };
 
             Assert.Throws<InvalidCastException>(() => ((IList)collection).Add(1));
         }
@@ -337,7 +375,10 @@ namespace System.Collections.ObjectModel.Tests
         public void IList_Insert_ValidItemButThrowsInvalidCastExceptionFromOverride_ThrowsInvalidCastException()
         {
             var collection = new ObservableCollection<int>();
-            collection.CollectionChanged += delegate { throw new InvalidCastException(); };
+            collection.CollectionChanged += delegate
+            {
+                throw new InvalidCastException();
+            };
 
             Assert.Throws<InvalidCastException>(() => ((IList)collection).Insert(0, 1));
         }
@@ -346,29 +387,27 @@ namespace System.Collections.ObjectModel.Tests
         public void IList_Item_Set_ValidItemButThrowsInvalidCastExceptionFromOverride_ThrowsInvalidCastException()
         {
             var collection = new ObservableCollection<int>() { 1 };
-            collection.CollectionChanged += delegate { throw new InvalidCastException(); };
+            collection.CollectionChanged += delegate
+            {
+                throw new InvalidCastException();
+            };
 
             Assert.Throws<InvalidCastException>(() => ((IList)collection)[0] = 2);
         }
 
         private class TestCollection<T> : Collection<T>
         {
-            public TestCollection()
-            {
-            }
+            public TestCollection() { }
 
-            public TestCollection(IList<T> items) : base(items)
-            {
-            }
+            public TestCollection(IList<T> items)
+                : base(items) { }
 
             public IList<T> GetItems() => Items;
         }
 
         private class ModifiableCollection<T> : Collection<T>
         {
-            public ModifiableCollection()
-            {
-            }
+            public ModifiableCollection() { }
 
             public ModifiableCollection(IList<T> items)
             {

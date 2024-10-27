@@ -15,12 +15,22 @@ namespace System.Runtime.Serialization
         /// Provides access to the internal "ThrowIfDeserializationInProgress" method on <see cref="SerializationInfo"/>.
         /// No-ops if the Serialization Guard feature is disabled or unavailable.
         /// </summary>
-        public static void ThrowIfDeserializationInProgress(string switchSuffix, ref int cachedValue)
+        public static void ThrowIfDeserializationInProgress(
+            string switchSuffix,
+            ref int cachedValue
+        )
         {
             ThrowIfDeserializationInProgress(null, switchSuffix, ref cachedValue);
 
-            [UnsafeAccessor(UnsafeAccessorKind.StaticMethod, Name = "ThrowIfDeserializationInProgress")]
-            static extern void ThrowIfDeserializationInProgress(SerializationInfo? thisPtr, string switchSuffix, ref int cachedValue);
+            [UnsafeAccessor(
+                UnsafeAccessorKind.StaticMethod,
+                Name = "ThrowIfDeserializationInProgress"
+            )]
+            static extern void ThrowIfDeserializationInProgress(
+                SerializationInfo? thisPtr,
+                string switchSuffix,
+                ref int cachedValue
+            );
         }
     }
 }

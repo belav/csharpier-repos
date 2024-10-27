@@ -28,27 +28,28 @@ namespace System.Text.Json.Serialization.Tests
         public object MyStruct { get; set; }
 
         public static readonly string s_json =
-            @"{" +
-                @"""MyInt16"" : 1," +
-                @"""MyInt32"" : 2," +
-                @"""MyInt64"" : 3," +
-                @"""MyUInt16"" : 4," +
-                @"""MyUInt32"" : 5," +
-                @"""MyUInt64"" : 6," +
-                @"""MyByte"" : 7," +
-                @"""MySByte"" : 8," +
-                @"""MyChar"" : ""a""," +
-                @"""MyString"" : ""Hello""," +
-                @"""MyBooleanTrue"" : true," +
-                @"""MyBooleanFalse"" : false," +
-                @"""MySingle"" : 1.1," +
-                @"""MyDouble"" : 2.2," +
-                @"""MyDecimal"" : 3.3," +
-                @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z""," +
-                @"""MyGuid"" : ""5BB9D872-DA8A-471E-AA70-08E19102683D""," +
-                @"""MyEnum"" : 2," + // int by default
-                @"""MyStruct"" : { ""One"" : 1, ""Two"" : 3.14 }" +
-            @"}";
+            @"{"
+            + @"""MyInt16"" : 1,"
+            + @"""MyInt32"" : 2,"
+            + @"""MyInt64"" : 3,"
+            + @"""MyUInt16"" : 4,"
+            + @"""MyUInt32"" : 5,"
+            + @"""MyUInt64"" : 6,"
+            + @"""MyByte"" : 7,"
+            + @"""MySByte"" : 8,"
+            + @"""MyChar"" : ""a"","
+            + @"""MyString"" : ""Hello"","
+            + @"""MyBooleanTrue"" : true,"
+            + @"""MyBooleanFalse"" : false,"
+            + @"""MySingle"" : 1.1,"
+            + @"""MyDouble"" : 2.2,"
+            + @"""MyDecimal"" : 3.3,"
+            + @"""MyDateTime"" : ""2019-01-30T12:01:02.0000000Z"","
+            + @"""MyGuid"" : ""5BB9D872-DA8A-471E-AA70-08E19102683D"","
+            + @"""MyEnum"" : 2,"
+            + // int by default
+            @"""MyStruct"" : { ""One"" : 1, ""Two"" : 3.14 }"
+            + @"}";
 
         public static readonly byte[] s_data = Encoding.UTF8.GetBytes(s_json);
 
@@ -134,10 +135,16 @@ namespace System.Text.Json.Serialization.Tests
             Assert.Equal(2.2d, ((JsonElement)MyDouble).GetDouble());
             Assert.IsType<JsonElement>(MyDateTime);
             Assert.Equal(JsonValueKind.String, ((JsonElement)MyDateTime).ValueKind);
-            Assert.Equal(new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc), ((JsonElement)MyDateTime).GetDateTime());
+            Assert.Equal(
+                new DateTime(2019, 1, 30, 12, 1, 2, DateTimeKind.Utc),
+                ((JsonElement)MyDateTime).GetDateTime()
+            );
             Assert.IsType<JsonElement>(MyGuid);
             Assert.Equal(JsonValueKind.String, ((JsonElement)MyGuid).ValueKind);
-            Assert.Equal(new Guid("5BB9D872-DA8A-471E-AA70-08E19102683D"), ((JsonElement)MyGuid).GetGuid());
+            Assert.Equal(
+                new Guid("5BB9D872-DA8A-471E-AA70-08E19102683D"),
+                ((JsonElement)MyGuid).GetGuid()
+            );
             Assert.IsType<JsonElement>(MyEnum);
             Assert.Equal(JsonValueKind.Number, ((JsonElement)MyEnum).ValueKind);
             Assert.Equal(SampleEnum.Two, (SampleEnum)((JsonElement)MyEnum).GetUInt32());

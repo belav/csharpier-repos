@@ -30,27 +30,42 @@ namespace System.Security.Cryptography
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "MD5"
         /// </summary>
-        public static HashAlgorithmName MD5 { get { return new HashAlgorithmName("MD5"); } }
+        public static HashAlgorithmName MD5
+        {
+            get { return new HashAlgorithmName("MD5"); }
+        }
 
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "SHA1"
         /// </summary>
-        public static HashAlgorithmName SHA1 { get { return new HashAlgorithmName("SHA1"); } }
+        public static HashAlgorithmName SHA1
+        {
+            get { return new HashAlgorithmName("SHA1"); }
+        }
 
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "SHA256"
         /// </summary>
-        public static HashAlgorithmName SHA256 { get { return new HashAlgorithmName("SHA256"); } }
+        public static HashAlgorithmName SHA256
+        {
+            get { return new HashAlgorithmName("SHA256"); }
+        }
 
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "SHA384"
         /// </summary>
-        public static HashAlgorithmName SHA384 { get { return new HashAlgorithmName("SHA384"); } }
+        public static HashAlgorithmName SHA384
+        {
+            get { return new HashAlgorithmName("SHA384"); }
+        }
 
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "SHA512"
         /// </summary>
-        public static HashAlgorithmName SHA512 { get { return new HashAlgorithmName("SHA512"); } }
+        public static HashAlgorithmName SHA512
+        {
+            get { return new HashAlgorithmName("SHA512"); }
+        }
 
         /// <summary>
         /// Gets a <see cref="HashAlgorithmName" /> representing "SHA3-256"
@@ -192,7 +207,9 @@ namespace System.Security.Cryptography
                 return value;
             }
 
-            throw new CryptographicException(SR.Format(SR.Cryptography_InvalidHashAlgorithmOid, oidValue));
+            throw new CryptographicException(
+                SR.Format(SR.Cryptography_InvalidHashAlgorithmOid, oidValue)
+            );
         }
     }
 }

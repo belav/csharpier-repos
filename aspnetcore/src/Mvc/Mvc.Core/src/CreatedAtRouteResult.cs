@@ -25,9 +25,7 @@ public class CreatedAtRouteResult : ObjectResult
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <param name="value">The value to format in the entity body.</param>
     public CreatedAtRouteResult(object? routeValues, [ActionResultObjectValue] object? value)
-        : this(routeName: null, routeValues: routeValues, value: value)
-    {
-    }
+        : this(routeName: null, routeValues: routeValues, value: value) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="CreatedAtRouteResult"/> class with the values
@@ -39,7 +37,8 @@ public class CreatedAtRouteResult : ObjectResult
     public CreatedAtRouteResult(
         string? routeName,
         object? routeValues,
-        [ActionResultObjectValue] object? value)
+        [ActionResultObjectValue] object? value
+    )
         : base(value)
     {
         RouteName = routeName;

@@ -23,22 +23,35 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             {
                 ModelBinderProviders = new ModelBinderProviderCollection(),
                 ModelMetadata = GetMetadataForObject(new Person()),
-                ModelName = "someName"
+                ModelName = "someName",
             };
 
             Mock<IExtensibleModelBinder> mockDtoBinder = new Mock<IExtensibleModelBinder>();
             mockDtoBinder
-                .Setup(o => o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>()))
+                .Setup(o =>
+                    o.BindModel(controllerContext, It.IsAny<ExtensibleModelBindingContext>())
+                )
                 .Returns(
                     delegate(ControllerContext cc, ExtensibleModelBindingContext mbc2)
                     {
                         return true; // just return the DTO unchanged
-                    });
-            bindingContext.ModelBinderProviders.RegisterBinderForType(typeof(ComplexModelDto), mockDtoBinder.Object, true /* suppressPrefixCheck */);
+                    }
+                );
+            bindingContext.ModelBinderProviders.RegisterBinderForType(
+                typeof(ComplexModelDto),
+                mockDtoBinder.Object,
+                true /* suppressPrefixCheck */
+            );
 
-            Mock<TestableMutableObjectModelBinder> mockTestableBinder = new Mock<TestableMutableObjectModelBinder> { CallBase = true };
-            mockTestableBinder.Setup(o => o.EnsureModelPublic(controllerContext, bindingContext)).Verifiable();
-            mockTestableBinder.Setup(o => o.GetMetadataForPropertiesPublic(controllerContext, bindingContext)).Returns(new ModelMetadata[0]).Verifiable();
+            Mock<TestableMutableObjectModelBinder> mockTestableBinder =
+                new Mock<TestableMutableObjectModelBinder> { CallBase = true };
+            mockTestableBinder
+                .Setup(o => o.EnsureModelPublic(controllerContext, bindingContext))
+                .Verifiable();
+            mockTestableBinder
+                .Setup(o => o.GetMetadataForPropertiesPublic(controllerContext, bindingContext))
+                .Returns(new ModelMetadata[0])
+                .Verifiable();
             TestableMutableObjectModelBinder testableBinder = mockTestableBinder.Object;
             testableBinder.MetadataProvider = new DataAnnotationsModelMetadataProvider();
 
@@ -123,10 +136,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
             object retModel = testableBinder.CreateModelPublic(null, bindingContext);
@@ -139,7 +153,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void CreateModelThrowsIfModelTypeHasNoParameterlessConstructor()
         {
             // Arrange
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = GetMetadataForType(typeof(NoParameterlessCtor)),
@@ -148,7 +163,8 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act & Assert, confirming type name and full stack are available in Exception
             MissingMethodException exception = Assert.Throws<MissingMethodException>(
                 () => testableBinder.CreateModelPublic(null, bindingContext),
-                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.MutableObjectModelBinderTest+NoParameterlessCtor'.");
+                "No parameterless constructor defined for this object. Object type 'Microsoft.Web.Mvc.ModelBinding.Test.MutableObjectModelBinderTest+NoParameterlessCtor'."
+            );
             Assert.Contains("System.Activator.CreateInstance(", exception.ToString());
         }
 
@@ -158,10 +174,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(new Person())
+                ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            Mock<TestableMutableObjectModelBinder> mockTestableBinder = new Mock<TestableMutableObjectModelBinder> { CallBase = true };
+            Mock<TestableMutableObjectModelBinder> mockTestableBinder =
+                new Mock<TestableMutableObjectModelBinder> { CallBase = true };
             TestableMutableObjectModelBinder testableBinder = mockTestableBinder.Object;
 
             // Act
@@ -171,7 +188,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             // Assert
             Assert.Same(originalModel, newModel);
-            mockTestableBinder.Verify(o => o.CreateModelPublic(null, bindingContext), Times.Never());
+            mockTestableBinder.Verify(
+                o => o.CreateModelPublic(null, bindingContext),
+                Times.Never()
+            );
         }
 
         [Fact]
@@ -180,11 +200,15 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
-            Mock<TestableMutableObjectModelBinder> mockTestableBinder = new Mock<TestableMutableObjectModelBinder> { CallBase = true };
-            mockTestableBinder.Setup(o => o.CreateModelPublic(null, bindingContext)).Returns(new Person()).Verifiable();
+            Mock<TestableMutableObjectModelBinder> mockTestableBinder =
+                new Mock<TestableMutableObjectModelBinder> { CallBase = true };
+            mockTestableBinder
+                .Setup(o => o.CreateModelPublic(null, bindingContext))
+                .Returns(new Person())
+                .Verifiable();
             TestableMutableObjectModelBinder testableBinder = mockTestableBinder.Object;
 
             // Act
@@ -206,14 +230,18 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion))
+                ModelMetadata = GetMetadataForType(typeof(PersonWithBindExclusion)),
             };
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            IEnumerable<ModelMetadata> propertyMetadatas = testableBinder.GetMetadataForPropertiesPublic(null, bindingContext);
-            string[] returnedPropertyNames = propertyMetadatas.Select(o => o.PropertyName).ToArray();
+            IEnumerable<ModelMetadata> propertyMetadatas =
+                testableBinder.GetMetadataForPropertiesPublic(null, bindingContext);
+            string[] returnedPropertyNames = propertyMetadatas
+                .Select(o => o.PropertyName)
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedPropertyNames, returnedPropertyNames);
@@ -223,18 +251,30 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void GetMetadataForProperties_WithoutBindAttribute()
         {
             // Arrange
-            string[] expectedPropertyNames = new[] { "DateOfBirth", "DateOfDeath", "ValueTypeRequired", "FirstName", "LastName", "PropertyWithDefaultValue" };
+            string[] expectedPropertyNames = new[]
+            {
+                "DateOfBirth",
+                "DateOfDeath",
+                "ValueTypeRequired",
+                "FirstName",
+                "LastName",
+                "PropertyWithDefaultValue",
+            };
 
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            IEnumerable<ModelMetadata> propertyMetadatas = testableBinder.GetMetadataForPropertiesPublic(null, bindingContext);
-            string[] returnedPropertyNames = propertyMetadatas.Select(o => o.PropertyName).ToArray();
+            IEnumerable<ModelMetadata> propertyMetadatas =
+                testableBinder.GetMetadataForPropertiesPublic(null, bindingContext);
+            string[] returnedPropertyNames = propertyMetadatas
+                .Select(o => o.PropertyName)
+                .ToArray();
 
             // Assert
             Assert.Equal(expectedPropertyNames, returnedPropertyNames);
@@ -249,7 +289,11 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Act
             HashSet<string> requiredProperties;
             HashSet<string> skipProperties;
-            MutableObjectModelBinder.GetRequiredPropertiesCollection(modelType, out requiredProperties, out skipProperties);
+            MutableObjectModelBinder.GetRequiredPropertiesCollection(
+                modelType,
+                out requiredProperties,
+                out skipProperties
+            );
 
             // Assert
             Assert.Equal(new[] { "Required" }, requiredProperties.ToArray());
@@ -262,16 +306,27 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
-            controllerContext.Controller.ViewData.ModelState.AddModelError("foo.bar", "Some existing error.");
+            controllerContext.Controller.ViewData.ModelState.AddModelError(
+                "foo.bar",
+                "Some existing error."
+            );
 
             ModelMetadata modelMetadata = GetMetadataForType(typeof(Person));
             ModelValidationNode validationNode = new ModelValidationNode(modelMetadata, "foo");
-            ModelValidatedEventArgs e = new ModelValidatedEventArgs(controllerContext, null /* parentNode */);
+            ModelValidatedEventArgs e = new ModelValidatedEventArgs(
+                controllerContext,
+                null /* parentNode */
+            );
 
             // Act
-            EventHandler<ModelValidatedEventArgs> handler = MutableObjectModelBinder.CreateNullCheckFailedHandler(controllerContext, modelMetadata, null /* incomingValue */);
+            EventHandler<ModelValidatedEventArgs> handler =
+                MutableObjectModelBinder.CreateNullCheckFailedHandler(
+                    controllerContext,
+                    modelMetadata,
+                    null /* incomingValue */
+                );
             handler(validationNode, e);
 
             // Assert
@@ -284,20 +339,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
 
             ModelMetadata modelMetadata = GetMetadataForType(typeof(Person));
             ModelValidationNode validationNode = new ModelValidationNode(modelMetadata, "foo");
-            ModelValidatedEventArgs e = new ModelValidatedEventArgs(controllerContext, null /* parentNode */);
+            ModelValidatedEventArgs e = new ModelValidatedEventArgs(
+                controllerContext,
+                null /* parentNode */
+            );
 
             // Act
-            EventHandler<ModelValidatedEventArgs> handler = MutableObjectModelBinder.CreateNullCheckFailedHandler(controllerContext, modelMetadata, null /* incomingValue */);
+            EventHandler<ModelValidatedEventArgs> handler =
+                MutableObjectModelBinder.CreateNullCheckFailedHandler(
+                    controllerContext,
+                    modelMetadata,
+                    null /* incomingValue */
+                );
             handler(validationNode, e);
 
             // Assert
             Assert.True(controllerContext.Controller.ViewData.ModelState.ContainsKey("foo"));
-            Assert.Equal("A value is required.", controllerContext.Controller.ViewData.ModelState["foo"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "A value is required.",
+                controllerContext.Controller.ViewData.ModelState["foo"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -306,19 +372,31 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
 
             ModelMetadata modelMetadata = GetMetadataForType(typeof(Person));
             ModelValidationNode validationNode = new ModelValidationNode(modelMetadata, "foo");
-            ModelValidatedEventArgs e = new ModelValidatedEventArgs(controllerContext, null /* parentNode */);
+            ModelValidatedEventArgs e = new ModelValidatedEventArgs(
+                controllerContext,
+                null /* parentNode */
+            );
 
             // Act
-            ModelBinderErrorMessageProvider originalProvider = ModelBinderConfig.ValueRequiredErrorMessageProvider;
+            ModelBinderErrorMessageProvider originalProvider =
+                ModelBinderConfig.ValueRequiredErrorMessageProvider;
             try
             {
-                ModelBinderConfig.ValueRequiredErrorMessageProvider = delegate { return null; };
-                EventHandler<ModelValidatedEventArgs> handler = MutableObjectModelBinder.CreateNullCheckFailedHandler(controllerContext, modelMetadata, null /* incomingValue */);
+                ModelBinderConfig.ValueRequiredErrorMessageProvider = delegate
+                {
+                    return null;
+                };
+                EventHandler<ModelValidatedEventArgs> handler =
+                    MutableObjectModelBinder.CreateNullCheckFailedHandler(
+                        controllerContext,
+                        modelMetadata,
+                        null /* incomingValue */
+                    );
                 handler(validationNode, e);
             }
             finally
@@ -337,7 +415,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ModelWithBindRequired model = new ModelWithBindRequired
             {
                 Name = "original value",
-                Age = -20
+                Age = -20,
             };
 
             ModelMetadata containerMetadata = GetMetadataForObject(model);
@@ -346,19 +424,30 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = containerMetadata,
-                ModelName = "theModel"
+                ModelName = "theModel",
             };
-            ComplexModelDto dto = new ComplexModelDto(containerMetadata, containerMetadata.Properties);
+            ComplexModelDto dto = new ComplexModelDto(
+                containerMetadata,
+                containerMetadata.Properties
+            );
 
             ModelMetadata nameProperty = dto.PropertyMetadata.Single(o => o.PropertyName == "Name");
-            dto.Results[nameProperty] = new ComplexModelDtoResult("John Doe", new ModelValidationNode(nameProperty, ""));
+            dto.Results[nameProperty] = new ComplexModelDtoResult(
+                "John Doe",
+                new ModelValidationNode(nameProperty, "")
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act & assert
             Assert.Throws<InvalidOperationException>(
-                delegate { testableBinder.ProcessDto(controllerContext, bindingContext, dto); },
-                @"A value for 'theModel.Age' is required but was not present in the request.");
+                delegate
+                {
+                    testableBinder.ProcessDto(controllerContext, bindingContext, dto);
+                },
+                @"A value for 'theModel.Age' is required but was not present in the request."
+            );
 
             Assert.Equal("original value", model.Name);
             Assert.Equal(-20, model.Age);
@@ -369,27 +458,40 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         {
             // Arrange
             DateTime dob = new DateTime(2001, 1, 1);
-            Person model = new Person
-            {
-                DateOfBirth = dob
-            };
+            Person model = new Person { DateOfBirth = dob };
             ModelMetadata containerMetadata = GetMetadataForObject(model);
 
             ControllerContext controllerContext = new ControllerContext();
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = containerMetadata
+                ModelMetadata = containerMetadata,
             };
-            ComplexModelDto dto = new ComplexModelDto(containerMetadata, containerMetadata.Properties);
+            ComplexModelDto dto = new ComplexModelDto(
+                containerMetadata,
+                containerMetadata.Properties
+            );
 
-            ModelMetadata firstNameProperty = dto.PropertyMetadata.Single(o => o.PropertyName == "FirstName");
-            dto.Results[firstNameProperty] = new ComplexModelDtoResult("John", new ModelValidationNode(firstNameProperty, ""));
-            ModelMetadata lastNameProperty = dto.PropertyMetadata.Single(o => o.PropertyName == "LastName");
-            dto.Results[lastNameProperty] = new ComplexModelDtoResult("Doe", new ModelValidationNode(lastNameProperty, ""));
-            ModelMetadata dobProperty = dto.PropertyMetadata.Single(o => o.PropertyName == "DateOfBirth");
+            ModelMetadata firstNameProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "FirstName"
+            );
+            dto.Results[firstNameProperty] = new ComplexModelDtoResult(
+                "John",
+                new ModelValidationNode(firstNameProperty, "")
+            );
+            ModelMetadata lastNameProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "LastName"
+            );
+            dto.Results[lastNameProperty] = new ComplexModelDtoResult(
+                "Doe",
+                new ModelValidationNode(lastNameProperty, "")
+            );
+            ModelMetadata dobProperty = dto.PropertyMetadata.Single(o =>
+                o.PropertyName == "DateOfBirth"
+            );
             dto.Results[dobProperty] = null;
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
             testableBinder.ProcessDto(controllerContext, bindingContext, dto);
@@ -407,21 +509,33 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(new Person())
+                ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "PropertyWithDefaultValue");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "PropertyWithDefaultValue"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             var person = Assert.IsType<Person>(bindingContext.Model);
@@ -435,14 +549,21 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForType(typeof(Person))
+                ModelMetadata = GetMetadataForType(typeof(Person)),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "NonUpdateableProperty");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "NonUpdateableProperty"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
             testableBinder.SetPropertyPublic(null, bindingContext, propertyMetadata, dtoResult);
@@ -458,21 +579,32 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             Person model = new Person();
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(model)
+                ModelMetadata = GetMetadataForObject(model),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "DateOfBirth");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfBirth"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(new DateTime(2001, 1, 1), validationNode);
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                new DateTime(2001, 1, 1),
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             validationNode.Validate(controllerContext);
@@ -485,28 +617,34 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
         public void SetProperty_PropertyIsSettable_SetterThrows_RecordsError()
         {
             // Arrange
-            Person model = new Person
-            {
-                DateOfBirth = new DateTime(1900, 1, 1)
-            };
+            Person model = new Person { DateOfBirth = new DateTime(1900, 1, 1) };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
-                ModelMetadata = GetMetadataForObject(model)
+                ModelMetadata = GetMetadataForObject(model),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "DateOfDeath");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfDeath"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(new DateTime(1800, 1, 1), validationNode);
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                new DateTime(1800, 1, 1),
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
             testableBinder.SetPropertyPublic(null, bindingContext, propertyMetadata, dtoResult);
 
             // Assert
-            Assert.Equal("Date of death can't be before date of birth." + Environment.NewLine
-                       + "Parameter name: value",
-                         bindingContext.ModelState["foo"].Errors[0].Exception.Message);
+            Assert.Equal(
+                "Date of death can't be before date of birth."
+                    + Environment.NewLine
+                    + "Parameter name: value",
+                bindingContext.ModelState["foo"].Errors[0].Exception.Message
+            );
         }
 
         [Fact]
@@ -515,21 +653,33 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new Person()),
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "DateOfBirth");
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "DateOfBirth"
+            );
             ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             Assert.True(controllerContext.Controller.ViewData.ModelState.IsValid);
@@ -543,26 +693,44 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new Person()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "ValueTypeRequired");
-            ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo.ValueTypeRequired");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "ValueTypeRequired"
+            );
+            ModelValidationNode validationNode = new ModelValidationNode(
+                propertyMetadata,
+                "foo.ValueTypeRequired"
+            );
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             Assert.False(bindingContext.ModelState.IsValid);
-            Assert.Equal("Sample message", bindingContext.ModelState["foo.ValueTypeRequired"].Errors[0].ErrorMessage);
+            Assert.Equal(
+                "Sample message",
+                bindingContext.ModelState["foo.ValueTypeRequired"].Errors[0].ErrorMessage
+            );
         }
 
         [Fact]
@@ -572,29 +740,47 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new ModelWhosePropertySetterThrows()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "NameNoAttribute");
-            ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo.NameNoAttribute");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "NameNoAttribute"
+            );
+            ModelValidationNode validationNode = new ModelValidationNode(
+                propertyMetadata,
+                "foo.NameNoAttribute"
+            );
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             Assert.False(bindingContext.ModelState.IsValid);
-            ModelError error = Assert.Single(bindingContext.ModelState["foo.NameNoAttribute"].Errors);
-            Assert.Equal("This is a different exception." + Environment.NewLine
-                       + "Parameter name: value",
-                         error.Exception.Message);
+            ModelError error = Assert.Single(
+                bindingContext.ModelState["foo.NameNoAttribute"].Errors
+            );
+            Assert.Equal(
+                "This is a different exception." + Environment.NewLine + "Parameter name: value",
+                error.Exception.Message
+            );
         }
 
         [Fact]
@@ -603,22 +789,37 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
             // Arrange
             ControllerContext controllerContext = new ControllerContext
             {
-                Controller = new EmptyController()
+                Controller = new EmptyController(),
             };
             ExtensibleModelBindingContext bindingContext = new ExtensibleModelBindingContext
             {
                 ModelMetadata = GetMetadataForObject(new ModelWhosePropertySetterThrows()),
-                ModelName = "foo"
+                ModelName = "foo",
             };
 
-            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o => o.PropertyName == "Name");
-            ModelValidationNode validationNode = new ModelValidationNode(propertyMetadata, "foo.Name");
-            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(null /* model */, validationNode);
+            ModelMetadata propertyMetadata = bindingContext.ModelMetadata.Properties.Single(o =>
+                o.PropertyName == "Name"
+            );
+            ModelValidationNode validationNode = new ModelValidationNode(
+                propertyMetadata,
+                "foo.Name"
+            );
+            ComplexModelDtoResult dtoResult = new ComplexModelDtoResult(
+                null /* model */
+                ,
+                validationNode
+            );
 
-            TestableMutableObjectModelBinder testableBinder = new TestableMutableObjectModelBinder();
+            TestableMutableObjectModelBinder testableBinder =
+                new TestableMutableObjectModelBinder();
 
             // Act
-            testableBinder.SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
+            testableBinder.SetPropertyPublic(
+                controllerContext,
+                bindingContext,
+                propertyMetadata,
+                dtoResult
+            );
 
             // Assert
             Assert.False(bindingContext.ModelState.IsValid);
@@ -628,19 +829,26 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private static ModelMetadata GetMetadataForCanUpdateProperty(string propertyName)
         {
-            DataAnnotationsModelMetadataProvider metadataProvider = new DataAnnotationsModelMetadataProvider();
-            return metadataProvider.GetMetadataForProperty(null, typeof(MyModelTestingCanUpdateProperty), propertyName);
+            DataAnnotationsModelMetadataProvider metadataProvider =
+                new DataAnnotationsModelMetadataProvider();
+            return metadataProvider.GetMetadataForProperty(
+                null,
+                typeof(MyModelTestingCanUpdateProperty),
+                propertyName
+            );
         }
 
         private static ModelMetadata GetMetadataForObject(object o)
         {
-            DataAnnotationsModelMetadataProvider metadataProvider = new DataAnnotationsModelMetadataProvider();
+            DataAnnotationsModelMetadataProvider metadataProvider =
+                new DataAnnotationsModelMetadataProvider();
             return metadataProvider.GetMetadataForType(() => o, o.GetType());
         }
 
         private static ModelMetadata GetMetadataForType(Type t)
         {
-            DataAnnotationsModelMetadataProvider metadataProvider = new DataAnnotationsModelMetadataProvider();
+            DataAnnotationsModelMetadataProvider metadataProvider =
+                new DataAnnotationsModelMetadataProvider();
             return metadataProvider.GetMetadataForType(null, t);
         }
 
@@ -657,7 +865,10 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 {
                     if (value < DateOfBirth)
                     {
-                        throw new ArgumentOutOfRangeException("value", "Date of death can't be before date of birth.");
+                        throw new ArgumentOutOfRangeException(
+                            "value",
+                            "Date of death can't be before date of birth."
+                        );
                     }
                     _dateOfDeath = value;
                 }
@@ -676,9 +887,7 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
 
         private class NoParameterlessCtor
         {
-            public NoParameterlessCtor(int parameter)
-            {
-            }
+            public NoParameterlessCtor(int parameter) { }
         }
 
         private class PersonWithBindExclusion
@@ -751,49 +960,75 @@ namespace Microsoft.Web.Mvc.ModelBinding.Test
                 return CanUpdatePropertyPublic(propertyMetadata);
             }
 
-            public virtual object CreateModelPublic(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            public virtual object CreateModelPublic(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 return base.CreateModel(controllerContext, bindingContext);
             }
 
-            protected override object CreateModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            protected override object CreateModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 return CreateModelPublic(controllerContext, bindingContext);
             }
 
-            public virtual void EnsureModelPublic(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            public virtual void EnsureModelPublic(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 base.EnsureModel(controllerContext, bindingContext);
             }
 
-            protected override void EnsureModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            protected override void EnsureModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 EnsureModelPublic(controllerContext, bindingContext);
             }
 
-            public virtual IEnumerable<ModelMetadata> GetMetadataForPropertiesPublic(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            public virtual IEnumerable<ModelMetadata> GetMetadataForPropertiesPublic(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 return base.GetMetadataForProperties(controllerContext, bindingContext);
             }
 
-            protected override IEnumerable<ModelMetadata> GetMetadataForProperties(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            protected override IEnumerable<ModelMetadata> GetMetadataForProperties(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 return GetMetadataForPropertiesPublic(controllerContext, bindingContext);
             }
 
-            public virtual void SetPropertyPublic(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext, ModelMetadata propertyMetadata, ComplexModelDtoResult dtoResult)
+            public virtual void SetPropertyPublic(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext,
+                ModelMetadata propertyMetadata,
+                ComplexModelDtoResult dtoResult
+            )
             {
                 base.SetProperty(controllerContext, bindingContext, propertyMetadata, dtoResult);
             }
 
-            protected override void SetProperty(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext, ModelMetadata propertyMetadata, ComplexModelDtoResult dtoResult)
+            protected override void SetProperty(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext,
+                ModelMetadata propertyMetadata,
+                ComplexModelDtoResult dtoResult
+            )
             {
                 SetPropertyPublic(controllerContext, bindingContext, propertyMetadata, dtoResult);
             }
         }
 
-        private class EmptyController : Controller
-        {
-        }
+        private class EmptyController : Controller { }
     }
 }

@@ -1,19 +1,19 @@
 ﻿#region MIT license
-// 
+//
 // MIT license
 //
 // Copyright (c) 2007-2008 Jiri Moudry, Pascal Craponne
-// 
+//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -21,25 +21,22 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-// 
+//
 #endregion
 
 using System;
-using System.Reflection;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
-
+using System.Reflection;
+using System.Text;
+using Data = DbLinq.Data;
+using IExecuteResult = System.Data.Linq.IExecuteResult;
 #if MONO_STRICT
 using System.Data.Linq;
 #else
 using DbLinq.Data.Linq;
 #endif
-
-using Data = DbLinq.Data;
-
-using IExecuteResult = System.Data.Linq.IExecuteResult;
-using System.Text;
 
 namespace DbLinq.Vendor.Implementation
 {
@@ -78,7 +75,13 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="rows"></param>
         /// <param name="pageSize"></param>
         /// <param name="transaction"></param>
-        public virtual void BulkInsert<T>(Table<T> table, List<T> rows, int pageSize, IDbTransaction transaction) where T : class
+        public virtual void BulkInsert<T>(
+            Table<T> table,
+            List<T> rows,
+            int pageSize,
+            IDbTransaction transaction
+        )
+            where T : class
         {
             throw new NotImplementedException();
         }
@@ -96,7 +99,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="method"></param>
         /// <param name="sqlParams"></param>
         /// <returns></returns>
-        public abstract IExecuteResult ExecuteMethodCall(DataContext context, MethodInfo method, params object[] sqlParams);
+        public abstract IExecuteResult ExecuteMethodCall(
+            DataContext context,
+            MethodInfo method,
+            params object[] sqlParams
+        );
 
         /// <summary>
         /// Creates the data adapter.
@@ -112,22 +119,37 @@ namespace DbLinq.Vendor.Implementation
         /// Gets the connection string server part name.
         /// </summary>
         /// <value>The connection string server.</value>
-        protected virtual string ConnectionStringServer { get { return "server"; } }
+        protected virtual string ConnectionStringServer
+        {
+            get { return "server"; }
+        }
+
         /// <summary>
         /// Gets the connection string user part name.
         /// </summary>
         /// <value>The connection string user.</value>
-        protected virtual string ConnectionStringUser { get { return "user id"; } }
+        protected virtual string ConnectionStringUser
+        {
+            get { return "user id"; }
+        }
+
         /// <summary>
         /// Gets the connection string password part name.
         /// </summary>
         /// <value>The connection string password.</value>
-        protected virtual string ConnectionStringPassword { get { return "password"; } }
+        protected virtual string ConnectionStringPassword
+        {
+            get { return "password"; }
+        }
+
         /// <summary>
         /// Gets the connection string database part name.
         /// </summary>
         /// <value>The connection string database.</value>
-        protected virtual string ConnectionStringDatabase { get { return "database"; } }
+        protected virtual string ConnectionStringDatabase
+        {
+            get { return "database"; }
+        }
 
         /// <summary>
         /// Adds the connection string part.
@@ -135,7 +157,11 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="parts">The parts.</param>
         /// <param name="name">The name.</param>
         /// <param name="value">The value.</param>
-        protected void AppendConnectionString(StringBuilder connectionString, string name, string value)
+        protected void AppendConnectionString(
+            StringBuilder connectionString,
+            string name,
+            string value
+        )
         {
             if (!string.IsNullOrEmpty(value) && !string.IsNullOrEmpty(name))
                 connectionString.AppendFormat("{0}={1};", name, value);
@@ -161,7 +187,8 @@ namespace DbLinq.Vendor.Implementation
             if (host == null)
                 return;
             var colonIdx = host.IndexOf(':');
-            string port = colonIdx < 0 || host.Length == (colonIdx + 1) ? null : host.Substring(colonIdx + 1);
+            string port =
+                colonIdx < 0 || host.Length == (colonIdx + 1) ? null : host.Substring(colonIdx + 1);
             if (colonIdx >= 0)
                 host = host.Substring(0, colonIdx);
             AppendConnectionString(connectionString, ConnectionStringServer, host);
@@ -182,7 +209,12 @@ namespace DbLinq.Vendor.Implementation
         /// <param name="userName">Login user name</param>
         /// <param name="password">Login password</param>
         /// <returns></returns>
-        public virtual string BuildConnectionString(string host, string databaseName, string userName, string password)
+        public virtual string BuildConnectionString(
+            string host,
+            string databaseName,
+            string userName,
+            string password
+        )
         {
             var connectionString = new StringBuilder();
             AppendServer(connectionString, host);
@@ -197,25 +229,31 @@ namespace DbLinq.Vendor.Implementation
         /// </summary>
         public IDbConnection CreateDbConnection(string connectionString)
         {
-            var reConnectionType = new System.Text.RegularExpressions.Regex(@"DbLinqConnectionType=([^;]*);?");
+            var reConnectionType = new System.Text.RegularExpressions.Regex(
+                @"DbLinqConnectionType=([^;]*);?"
+            );
             string connTypeVal = null;
             if (!reConnectionType.IsMatch(connectionString))
             {
-                connTypeVal = "System.Data.SqlClient.SqlConnection, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+                connTypeVal =
+                    "System.Data.SqlClient.SqlConnection, System.Data, Version=2.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
             }
             else
             {
-                var    match        = reConnectionType.Match(connectionString);
-                connTypeVal         = match.Groups[1].Value;
-                connectionString    = reConnectionType.Replace(connectionString, "");
+                var match = reConnectionType.Match(connectionString);
+                connTypeVal = match.Groups[1].Value;
+                connectionString = reConnectionType.Replace(connectionString, "");
             }
 
-            var    connType     = Type.GetType(connTypeVal);
+            var connType = Type.GetType(connTypeVal);
             if (connType == null)
-                throw new ArgumentException(string.Format(
+                throw new ArgumentException(
+                    string.Format(
                         "Could not load the specified DbLinqConnectionType `{0}'.",
-                        connTypeVal),
-                    "connectionString");
+                        connTypeVal
+                    ),
+                    "connectionString"
+                );
             return (IDbConnection)Activator.CreateInstance(connType, connectionString);
         }
     }

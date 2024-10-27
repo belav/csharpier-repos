@@ -3,9 +3,8 @@
 
 using System;
 using System.Diagnostics;
-
-using Internal.TypeSystem;
 using Internal.Runtime;
+using Internal.TypeSystem;
 
 namespace ILCompiler.DependencyAnalysis
 {
@@ -19,7 +18,8 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     public sealed class CanonicalEETypeNode : EETypeNode
     {
-        public CanonicalEETypeNode(NodeFactory factory, TypeDesc type) : base(factory, type)
+        public CanonicalEETypeNode(NodeFactory factory, TypeDesc type)
+            : base(factory, type)
         {
             Debug.Assert(!type.IsCanonicalDefinitionType(CanonicalFormKind.Any));
             Debug.Assert(type.IsCanonicalSubtype(CanonicalFormKind.Any));
@@ -30,6 +30,7 @@ namespace ILCompiler.DependencyAnalysis
         public override bool StaticDependenciesAreComputed => true;
         public override bool IsShareable => IsTypeNodeShareable(_type);
         protected override bool EmitVirtualSlotsAndInterfaces => true;
+
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
@@ -39,19 +40,30 @@ namespace ILCompiler.DependencyAnalysis
             // Ensure that we track the necessary type symbol if we are working with a constructed type symbol.
             // The emitter will ensure we don't emit both, but this allows us assert that we only generate
             // relocs to nodes we emit.
-            dependencyList.Add(factory.NecessaryTypeSymbol(_type), "Necessary type symbol related to CanonicalEETypeNode");
+            dependencyList.Add(
+                factory.NecessaryTypeSymbol(_type),
+                "Necessary type symbol related to CanonicalEETypeNode"
+            );
 
             DefType closestDefType = _type.GetClosestDefType();
 
             dependencyList.Add(factory.VTable(closestDefType), "VTable");
 
             if (_type.IsCanonicalSubtype(CanonicalFormKind.Universal))
-                dependencyList.Add(factory.NativeLayout.TemplateTypeLayout(_type), "Universal generic types always have template layout");
+                dependencyList.Add(
+                    factory.NativeLayout.TemplateTypeLayout(_type),
+                    "Universal generic types always have template layout"
+                );
 
             // Track generic virtual methods that will get added to the GVM tables
             if ((_virtualMethodAnalysisFlags & VirtualMethodAnalysisFlags.NeedsGvmEntries) != 0)
             {
-                dependencyList.Add(new DependencyListEntry(factory.TypeGVMEntries(_type.GetTypeDefinition()), "Type with generic virtual methods"));
+                dependencyList.Add(
+                    new DependencyListEntry(
+                        factory.TypeGVMEntries(_type.GetTypeDefinition()),
+                        "Type with generic virtual methods"
+                    )
+                );
 
                 AddDependenciesForUniversalGVMSupport(factory, _type, ref dependencyList);
             }
@@ -61,12 +73,17 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override ISymbolNode GetBaseTypeNode(NodeFactory factory)
         {
-            return _type.BaseType != null ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation()) : null;
+            return _type.BaseType != null
+                ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation())
+                : null;
         }
 
-        protected override FrozenRuntimeTypeNode GetFrozenRuntimeTypeNode(NodeFactory factory) => throw new NotSupportedException();
+        protected override FrozenRuntimeTypeNode GetFrozenRuntimeTypeNode(NodeFactory factory) =>
+            throw new NotSupportedException();
 
-        protected override ISymbolNode GetNonNullableValueTypeArrayElementTypeNode(NodeFactory factory)
+        protected override ISymbolNode GetNonNullableValueTypeArrayElementTypeNode(
+            NodeFactory factory
+        )
         {
             return factory.ConstructedTypeSymbol(((ArrayType)_type).ElementType);
         }
@@ -94,7 +111,10 @@ namespace ILCompiler.DependencyAnalysis
             GCDescEncoder.EncodeGCDesc(ref builder, _type);
         }
 
-        protected override void OutputInterfaceMap(NodeFactory factory, ref ObjectDataBuilder objData)
+        protected override void OutputInterfaceMap(
+            NodeFactory factory,
+            ref ObjectDataBuilder objData
+        )
         {
             for (int i = 0; i < _type.RuntimeInterfaces.Length; i++)
             {

@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 
 namespace System.Speech.Internal.Synthesis
 {
-
     internal sealed class WaveHeader : IDisposable
     {
         #region Constructors
@@ -27,6 +26,7 @@ namespace System.Speech.Internal.Synthesis
         {
             Dispose(false);
         }
+
         public void Dispose()
         {
             Dispose(true);
@@ -84,10 +84,7 @@ namespace System.Speech.Internal.Synthesis
 
         internal int SizeHDR
         {
-            get
-            {
-                return Marshal.SizeOf<Interop.WinMM.WAVEHDR>();
-            }
+            get { return Marshal.SizeOf<Interop.WinMM.WAVEHDR>(); }
         }
 
         #endregion
@@ -100,24 +97,28 @@ namespace System.Speech.Internal.Synthesis
         /// and is returning it to the application.
         /// </summary>
         internal const int WHDR_DONE = 0x00000001;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// Set by Windows to indicate that the buffer has been prepared with the
         /// waveInPrepareHeader or waveOutPrepareHeader function.
         /// </summary>
         internal const int WHDR_PREPARED = 0x00000002;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// This buffer is the first buffer in a loop. This flag is used only with
         /// output buffers.
         /// </summary>
         internal const int WHDR_BEGINLOOP = 0x00000004;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// This buffer is the last buffer in a loop. This flag is used only with
         /// output buffers.
         /// </summary>
         internal const int WHDR_ENDLOOP = 0x00000008;
+
         /// <summary>
         /// Used by dwFlags in WaveHeader
         /// Set by Windows to indicate that the buffer is queued for playback.

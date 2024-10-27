@@ -7,17 +7,9 @@ namespace MonoTests.DataSource
 {
     public abstract class DynamicDataTable
     {
-        public string Name
-        {
-            get;
-            set;
-        }
+        public string Name { get; set; }
 
-        public Type DataType
-        {
-            get;
-            set;
-        }
-        public abstract List<DynamicDataColumn> GetColumns ();
+        public Type DataType { get; set; }
+        public abstract List<DynamicDataColumn> GetColumns();
     }
 }

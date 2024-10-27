@@ -17,9 +17,7 @@ public class EntityTypeParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="serviceProperties">The associated <see cref="IServiceProperty" /> objects, or <see langword="null" />.</param>
     public EntityTypeParameterBinding(params IPropertyBase[]? serviceProperties)
-        : base(typeof(IEntityType), typeof(IEntityType), serviceProperties)
-    {
-    }
+        : base(typeof(IEntityType), typeof(IEntityType), serviceProperties) { }
 
     /// <summary>
     ///     Creates an expression tree representing the binding of the value of a property from a
@@ -30,15 +28,19 @@ public class EntityTypeParameterBinding : ServiceParameterBinding
     /// <returns>The expression tree.</returns>
     public override Expression BindToParameter(
         Expression materializationExpression,
-        Expression bindingInfoExpression)
+        Expression bindingInfoExpression
+    )
     {
-        var result = bindingInfoExpression.Type == typeof(IEntityType) || bindingInfoExpression.Type == typeof(IComplexType)
-            ? bindingInfoExpression
-            : Expression.Property(bindingInfoExpression, nameof(ParameterBindingInfo.StructuralType));
+        var result =
+            bindingInfoExpression.Type == typeof(IEntityType)
+            || bindingInfoExpression.Type == typeof(IComplexType)
+                ? bindingInfoExpression
+                : Expression.Property(
+                    bindingInfoExpression,
+                    nameof(ParameterBindingInfo.StructuralType)
+                );
 
-        return ServiceType != typeof(ITypeBase)
-            ? Expression.Convert(result, ServiceType)
-            : result;
+        return ServiceType != typeof(ITypeBase) ? Expression.Convert(result, ServiceType) : result;
     }
 
     /// <summary>
@@ -46,6 +48,6 @@ public class EntityTypeParameterBinding : ServiceParameterBinding
     /// </summary>
     /// <param name="consumedProperties">The new consumed properties.</param>
     /// <returns>A copy with replaced consumed properties.</returns>
-    public override ParameterBinding With(IPropertyBase[] consumedProperties)
-        => new EntityTypeParameterBinding(consumedProperties);
+    public override ParameterBinding With(IPropertyBase[] consumedProperties) =>
+        new EntityTypeParameterBinding(consumedProperties);
 }

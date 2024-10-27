@@ -14,7 +14,8 @@ internal static partial class Interop
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             byte* optionValue,
-            ref int optionLength);
+            ref int optionLength
+        );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static partial SocketError getsockopt(
@@ -22,7 +23,8 @@ internal static partial class Interop
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             out Linger optionValue,
-            ref int optionLength);
+            ref int optionLength
+        );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static partial SocketError getsockopt(
@@ -30,7 +32,8 @@ internal static partial class Interop
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             out IPMulticastRequest optionValue,
-            ref int optionLength);
+            ref int optionLength
+        );
 
         [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static partial SocketError getsockopt(
@@ -38,6 +41,7 @@ internal static partial class Interop
             SocketOptionLevel optionLevel,
             SocketOptionName optionName,
             out IPv6MulticastRequest optionValue,
-            ref int optionLength);
+            ref int optionLength
+        );
     }
 }

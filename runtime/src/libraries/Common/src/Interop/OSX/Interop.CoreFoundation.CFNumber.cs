@@ -17,6 +17,10 @@ internal static partial class Interop
         }
 
         [LibraryImport(Libraries.CoreFoundationLibrary)]
-        private static unsafe partial int CFNumberGetValue(IntPtr handle, CFNumberType type, int* value);
+        private static unsafe partial int CFNumberGetValue(
+            IntPtr handle,
+            CFNumberType type,
+            int* value
+        );
     }
 }

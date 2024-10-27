@@ -12,15 +12,15 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
-public class ServerLocalizationTest : ServerTestBase<BasicTestAppServerSiteFixture<InternationalizationStartup>>
+public class ServerLocalizationTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<InternationalizationStartup>>
 {
     public ServerLocalizationTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<InternationalizationStartup> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     protected override void InitializeAsyncCore()
     {

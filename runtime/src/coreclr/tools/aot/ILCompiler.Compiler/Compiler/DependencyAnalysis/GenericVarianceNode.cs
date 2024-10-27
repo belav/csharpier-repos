@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 using GenericVariance = Internal.Runtime.GenericVariance;
 
@@ -59,9 +57,11 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -4687913;
+
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             return _details.CompareToImpl(((GenericVarianceNode)other)._details);
@@ -79,8 +79,14 @@ namespace ILCompiler.DependencyAnalysis
             Debug.Assert(typeDefinition.IsTypeDefinition);
             Debug.Assert(typeDefinition.HasInstantiation);
 
-            Debug.Assert((byte)Internal.TypeSystem.GenericVariance.Contravariant == (byte)GenericVariance.Contravariant);
-            Debug.Assert((byte)Internal.TypeSystem.GenericVariance.Covariant == (byte)GenericVariance.Covariant);
+            Debug.Assert(
+                (byte)Internal.TypeSystem.GenericVariance.Contravariant
+                    == (byte)GenericVariance.Contravariant
+            );
+            Debug.Assert(
+                (byte)Internal.TypeSystem.GenericVariance.Covariant
+                    == (byte)GenericVariance.Covariant
+            );
 
             Variance = new GenericVariance[typeDefinition.Instantiation.Length];
             int i = 0;

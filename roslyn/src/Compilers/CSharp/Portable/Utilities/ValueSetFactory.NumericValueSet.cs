@@ -19,15 +19,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// <summary>
         /// The implementation of a value set for an numeric type <typeparamref name="T"/>.
         /// </summary>
-        private sealed class NumericValueSet<T, TTC> : IValueSet<T> where TTC : struct, INumericTC<T>
+        private sealed class NumericValueSet<T, TTC> : IValueSet<T>
+            where TTC : struct, INumericTC<T>
         {
             private readonly ImmutableArray<(T first, T last)> _intervals;
 
-            public static readonly NumericValueSet<T, TTC> AllValues = new NumericValueSet<T, TTC>(default(TTC).MinValue, default(TTC).MaxValue);
+            public static readonly NumericValueSet<T, TTC> AllValues = new NumericValueSet<T, TTC>(
+                default(TTC).MinValue,
+                default(TTC).MaxValue
+            );
 
-            public static readonly NumericValueSet<T, TTC> NoValues = new NumericValueSet<T, TTC>(ImmutableArray<(T first, T last)>.Empty);
+            public static readonly NumericValueSet<T, TTC> NoValues = new NumericValueSet<T, TTC>(
+                ImmutableArray<(T first, T last)>.Empty
+            );
 
-            internal NumericValueSet(T first, T last) : this(ImmutableArray.Create((first, last)))
+            internal NumericValueSet(T first, T last)
+                : this(ImmutableArray.Create((first, last)))
             {
                 Debug.Assert(default(TTC).Related(LessThanOrEqual, first, last));
             }
@@ -36,14 +43,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
 #if DEBUG
                 TTC tc = default;
-                Debug.Assert(intervals.Length == 0 || tc.Related(GreaterThanOrEqual, intervals[0].first, tc.MinValue));
+                Debug.Assert(
+                    intervals.Length == 0
+                        || tc.Related(GreaterThanOrEqual, intervals[0].first, tc.MinValue)
+                );
                 for (int i = 0, n = intervals.Length; i < n; i++)
                 {
-                    Debug.Assert(tc.Related(LessThanOrEqual, intervals[i].first, intervals[i].last));
+                    Debug.Assert(
+                        tc.Related(LessThanOrEqual, intervals[i].first, intervals[i].last)
+                    );
                     if (i != 0)
                     {
                         // intervals are in increasing order with a gap between them
-                        Debug.Assert(tc.Related(LessThan, tc.Next(intervals[i - 1].last), intervals[i].first));
+                        Debug.Assert(
+                            tc.Related(LessThan, tc.Next(intervals[i - 1].last), intervals[i].first)
+                        );
                     }
                 }
 #endif
@@ -61,7 +75,10 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                     // Prefer a value near zero.
                     var tc = default(TTC);
-                    var gz = NumericValueSetFactory<T, TTC>.Instance.Related(BinaryOperatorKind.GreaterThanOrEqual, tc.Zero);
+                    var gz = NumericValueSetFactory<T, TTC>.Instance.Related(
+                        BinaryOperatorKind.GreaterThanOrEqual,
+                        tc.Zero
+                    );
                     var t = (NumericValueSet<T, TTC>)this.Intersect(gz);
                     if (!t.IsEmpty)
                         return tc.ToConstantValue(t._intervals[0].first);
@@ -76,10 +93,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case LessThan:
                     case LessThanOrEqual:
-                        return _intervals.Length > 0 && tc.Related(relation, _intervals[0].first, value);
+                        return _intervals.Length > 0
+                            && tc.Related(relation, _intervals[0].first, value);
                     case GreaterThan:
                     case GreaterThanOrEqual:
-                        return _intervals.Length > 0 && tc.Related(relation, _intervals[_intervals.Length - 1].last, value);
+                        return _intervals.Length > 0
+                            && tc.Related(relation, _intervals[_intervals.Length - 1].last, value);
                     case Equal:
                         return anyIntervalContains(0, _intervals.Length - 1, value);
                     default:
@@ -94,9 +113,19 @@ namespace Microsoft.CodeAnalysis.CSharp
                             return false;
 
                         if (lastIntervalIndex == firstIntervalIndex)
-                            return tc.Related(GreaterThanOrEqual, value, _intervals[lastIntervalIndex].first) && tc.Related(LessThanOrEqual, value, _intervals[lastIntervalIndex].last);
+                            return tc.Related(
+                                    GreaterThanOrEqual,
+                                    value,
+                                    _intervals[lastIntervalIndex].first
+                                )
+                                && tc.Related(
+                                    LessThanOrEqual,
+                                    value,
+                                    _intervals[lastIntervalIndex].last
+                                );
 
-                        int midIndex = firstIntervalIndex + (lastIntervalIndex - firstIntervalIndex) / 2;
+                        int midIndex =
+                            firstIntervalIndex + (lastIntervalIndex - firstIntervalIndex) / 2;
                         if (tc.Related(LessThanOrEqual, value, _intervals[midIndex].last))
                             lastIntervalIndex = midIndex;
                         else
@@ -105,7 +134,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 }
             }
 
-            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) => value.IsBad || Any(relation, default(TTC).FromConstantValue(value));
+            bool IValueSet.Any(BinaryOperatorKind relation, ConstantValue value) =>
+                value.IsBad || Any(relation, default(TTC).FromConstantValue(value));
 
             public bool All(BinaryOperatorKind relation, T value)
             {
@@ -122,13 +152,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case GreaterThanOrEqual:
                         return tc.Related(relation, _intervals[0].first, value);
                     case Equal:
-                        return _intervals.Length == 1 && tc.Related(Equal, _intervals[0].first, value) && tc.Related(Equal, _intervals[0].last, value);
+                        return _intervals.Length == 1
+                            && tc.Related(Equal, _intervals[0].first, value)
+                            && tc.Related(Equal, _intervals[0].last, value);
                     default:
                         throw ExceptionUtilities.UnexpectedValue(relation);
                 }
             }
 
-            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) => !value.IsBad && All(relation, default(TTC).FromConstantValue(value));
+            bool IValueSet.All(BinaryOperatorKind relation, ConstantValue value) =>
+                !value.IsBad && All(relation, default(TTC).FromConstantValue(value));
 
             public IValueSet<T> Complement()
             {
@@ -185,7 +218,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        Add(builder, Max(leftInterval.first, rightInterval.first), Min(leftInterval.last, rightInterval.last));
+                        Add(
+                            builder,
+                            Max(leftInterval.first, rightInterval.first),
+                            Min(leftInterval.last, rightInterval.last)
+                        );
                         if (tc.Related(LessThan, leftInterval.last, rightInterval.last))
                         {
                             l++;
@@ -214,8 +251,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                 Debug.Assert(tc.Related(LessThanOrEqual, first, last));
                 Debug.Assert(tc.Related(GreaterThanOrEqual, first, tc.MinValue));
                 Debug.Assert(tc.Related(LessThanOrEqual, last, tc.MaxValue));
-                Debug.Assert(builder.Count == 0 || tc.Related(LessThanOrEqual, builder.Last().first, first));
-                if (builder.Count > 0 && (tc.Related(Equal, tc.MinValue, first) || tc.Related(GreaterThanOrEqual, builder.Last().last, tc.Prev(first))))
+                Debug.Assert(
+                    builder.Count == 0 || tc.Related(LessThanOrEqual, builder.Last().first, first)
+                );
+                if (
+                    builder.Count > 0
+                    && (
+                        tc.Related(Equal, tc.MinValue, first)
+                        || tc.Related(GreaterThanOrEqual, builder.Last().last, tc.Prev(first))
+                    )
+                )
                 {
                     // merge with previous interval when adjacent
                     var oldLastInterval = builder.Pop();
@@ -227,6 +272,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     builder.Add((first, last));
                 }
             }
+
             private static T Min(T a, T b)
             {
                 TTC tc = default;
@@ -266,7 +312,11 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     else
                     {
-                        Add(builder, Min(leftInterval.first, rightInterval.first), Max(leftInterval.last, rightInterval.last));
+                        Add(
+                            builder,
+                            Min(leftInterval.first, rightInterval.first),
+                            Max(leftInterval.last, rightInterval.last)
+                        );
                         l++;
                         r++;
                     }
@@ -320,12 +370,15 @@ namespace Microsoft.CodeAnalysis.CSharp
             public override string ToString()
             {
                 TTC tc = default;
-                return string.Join(",", this._intervals.Select(p => $"[{tc.ToString(p.first)}..{tc.ToString(p.last)}]"));
+                return string.Join(
+                    ",",
+                    this._intervals.Select(p => $"[{tc.ToString(p.first)}..{tc.ToString(p.last)}]")
+                );
             }
 
             public override bool Equals(object? obj) =>
-                obj is NumericValueSet<T, TTC> other &&
-                this._intervals.SequenceEqual(other._intervals);
+                obj is NumericValueSet<T, TTC> other
+                && this._intervals.SequenceEqual(other._intervals);
 
             public override int GetHashCode()
             {

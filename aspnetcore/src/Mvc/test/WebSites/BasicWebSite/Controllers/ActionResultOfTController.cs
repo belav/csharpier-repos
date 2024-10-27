@@ -16,7 +16,7 @@ public class ActionResultOfTController : Controller
             return BadRequest();
         }
 
-        return new Product { SampleInt = productId.Value, };
+        return new Product { SampleInt = productId.Value };
     }
 
     [HttpGet]

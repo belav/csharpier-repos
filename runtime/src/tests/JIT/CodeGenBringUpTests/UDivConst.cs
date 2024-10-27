@@ -117,9 +117,7 @@ public static class UDivProgram
             UDivConst.U4_Div_0(42);
             return Fail;
         }
-        catch (DivideByZeroException)
-        {
-        }
+        catch (DivideByZeroException) { }
         catch (Exception)
         {
             return Fail;
@@ -167,9 +165,7 @@ public static class UDivProgram
             UDivConst.U8_Div_0(42);
             return Fail;
         }
-        catch (DivideByZeroException)
-        {
-        }
+        catch (DivideByZeroException) { }
         catch (Exception)
         {
             return Fail;

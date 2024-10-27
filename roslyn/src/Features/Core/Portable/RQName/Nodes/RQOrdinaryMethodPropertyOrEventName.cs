@@ -25,25 +25,24 @@ namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
             get { return Name; }
         }
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateConstructorName()
-            => new(RQNameStrings.MethName, RQNameStrings.SpecialConstructorName);
+        public static RQOrdinaryMethodPropertyOrEventName CreateConstructorName() =>
+            new(RQNameStrings.MethName, RQNameStrings.SpecialConstructorName);
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateDestructorName()
-            => new(RQNameStrings.MethName, RQNameStrings.SpecialDestructorName);
+        public static RQOrdinaryMethodPropertyOrEventName CreateDestructorName() =>
+            new(RQNameStrings.MethName, RQNameStrings.SpecialDestructorName);
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryIndexerName()
-            => new(RQNameStrings.PropName, RQNameStrings.SpecialIndexerName);
+        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryIndexerName() =>
+            new(RQNameStrings.PropName, RQNameStrings.SpecialIndexerName);
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryMethodName(string name)
-            => new(RQNameStrings.MethName, name);
+        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryMethodName(string name) =>
+            new(RQNameStrings.MethName, name);
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryEventName(string name)
-            => new(RQNameStrings.EventName, name);
+        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryEventName(string name) =>
+            new(RQNameStrings.EventName, name);
 
-        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryPropertyName(string name)
-            => new(RQNameStrings.PropName, name);
+        public static RQOrdinaryMethodPropertyOrEventName CreateOrdinaryPropertyName(string name) =>
+            new(RQNameStrings.PropName, name);
 
-        public override SimpleGroupNode ToSimpleTree()
-            => new(_constructType, Name);
+        public override SimpleGroupNode ToSimpleTree() => new(_constructType, Name);
     }
 }

@@ -25,8 +25,8 @@ public class TestSet
         int nSuccesses = 0;
         int nFailures = 0;
 
-        CountResults(new GoryManagedPresentTest().Run(),        ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
-        
+        CountResults(new GoryManagedPresentTest().Run(), ref nSuccesses, ref nFailures); // FAIL: needs skip to parent code <TODO> investigate </TODO>
+
         if (0 == nFailures)
         {
             Console.WriteLine("OVERALL PASS: " + nSuccesses + " tests");
@@ -43,14 +43,14 @@ public class TestSet
 class GoryManagedPresentTest
 {
     Trace _trace;
-    
+
     void foo(int dummy)
     {
         _trace.Write("1");
         try
         {
             _trace.Write("2");
-            try 
+            try
             {
                 _trace.Write("3");
                 if (1234 == dummy)
@@ -76,7 +76,7 @@ class GoryManagedPresentTest
 
         _trace.Write("****");
 
-    MyLabel:
+        MyLabel:
         _trace.Write("~~~~");
     }
 
@@ -89,7 +89,7 @@ class GoryManagedPresentTest
             foo(1234);
             _trace.Write("%%%%");
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             Console.WriteLine(e);
             _trace.Write("6");
@@ -98,4 +98,3 @@ class GoryManagedPresentTest
         return _trace.Match();
     }
 }
-

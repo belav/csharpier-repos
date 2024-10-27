@@ -29,7 +29,8 @@ namespace Grpc.Shared.Server;
 /// <typeparam name="TService">Service type for this method.</typeparam>
 /// <typeparam name="TRequest">Request message type for this method.</typeparam>
 /// <typeparam name="TResponse">Response message type for this method.</typeparam>
-internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TResponse> : ServerMethodInvokerBase<TService, TRequest, TResponse>
+internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TResponse>
+    : ServerMethodInvokerBase<TService, TRequest, TResponse>
     where TRequest : class
     where TResponse : class
     where TService : class
@@ -48,29 +49,36 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
         DuplexStreamingServerMethod<TService, TRequest, TResponse> invoker,
         Method<TRequest, TResponse> method,
         MethodOptions options,
-        IGrpcServiceActivator<TService> serviceActivator)
+        IGrpcServiceActivator<TService> serviceActivator
+    )
         : base(method, options, serviceActivator)
     {
         _invoker = invoker;
 
         if (Options.HasInterceptors)
         {
-            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(Options.Interceptors);
-            _pipelineInvoker = interceptorPipeline.DuplexStreamingPipeline(ResolvedInterceptorInvoker);
+            var interceptorPipeline = new InterceptorPipelineBuilder<TRequest, TResponse>(
+                Options.Interceptors
+            );
+            _pipelineInvoker = interceptorPipeline.DuplexStreamingPipeline(
+                ResolvedInterceptorInvoker
+            );
         }
     }
 
-    private async Task ResolvedInterceptorInvoker(IAsyncStreamReader<TRequest> requestStream, IServerStreamWriter<TResponse> responseStream, ServerCallContext resolvedContext)
+    private async Task ResolvedInterceptorInvoker(
+        IAsyncStreamReader<TRequest> requestStream,
+        IServerStreamWriter<TResponse> responseStream,
+        ServerCallContext resolvedContext
+    )
     {
         GrpcActivatorHandle<TService> serviceHandle = default;
         try
         {
-            serviceHandle = ServiceActivator.Create(resolvedContext.GetHttpContext().RequestServices);
-            await _invoker(
-                serviceHandle.Instance,
-                requestStream,
-                responseStream,
-                resolvedContext);
+            serviceHandle = ServiceActivator.Create(
+                resolvedContext.GetHttpContext().RequestServices
+            );
+            await _invoker(serviceHandle.Instance, requestStream, responseStream, resolvedContext);
         }
         finally
         {
@@ -89,7 +97,12 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
     /// <param name="requestStream">The <typeparamref name="TRequest"/> reader.</param>
     /// <param name="responseStream">The <typeparamref name="TResponse"/> writer.</param>
     /// <returns>A <see cref="Task"/> that represents the asynchronous method.</returns>
-    public async Task Invoke(HttpContext httpContext, ServerCallContext serverCallContext, IAsyncStreamReader<TRequest> requestStream, IServerStreamWriter<TResponse> responseStream)
+    public async Task Invoke(
+        HttpContext httpContext,
+        ServerCallContext serverCallContext,
+        IAsyncStreamReader<TRequest> requestStream,
+        IServerStreamWriter<TResponse> responseStream
+    )
     {
         if (_pipelineInvoker == null)
         {
@@ -101,7 +114,8 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
                     serviceHandle.Instance,
                     requestStream,
                     responseStream,
-                    serverCallContext);
+                    serverCallContext
+                );
             }
             finally
             {
@@ -113,10 +127,7 @@ internal sealed class DuplexStreamingServerMethodInvoker<TService, TRequest, TRe
         }
         else
         {
-            await _pipelineInvoker(
-                requestStream,
-                responseStream,
-                serverCallContext);
+            await _pipelineInvoker(requestStream, responseStream, serverCallContext);
         }
     }
 }

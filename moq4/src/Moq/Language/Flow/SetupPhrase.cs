@@ -6,7 +6,6 @@ using System.Diagnostics;
 
 namespace Moq.Language.Flow
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal abstract class SetupPhrase : ICallbackResult, IVerifies, IThrowsResult
@@ -28,7 +27,6 @@ namespace Moq.Language.Flow
         abstract class SetupPhrase : ICallbackResult, IVerifies, IThrowsResult
     */
     abstract class SetupPhrase : ICallbackResult, IVerifies, IThrowsResult
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private MethodCall setup;
@@ -121,67 +119,131 @@ namespace Moq.Language.Flow
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6>(Action<T1, T2, T3, T4, T5, T6> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6>(
+            Action<T1, T2, T3, T4, T5, T6> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7>(Action<T1, T2, T3, T4, T5, T6, T7> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7>(
+            Action<T1, T2, T3, T4, T5, T6, T7> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8>(Action<T1, T2, T3, T4, T5, T6, T7, T8> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> callback)
+        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13>(
+            Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13> callback
+        )
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> callback)
+        public ICallbackResult Callback<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14
+        >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14> callback)
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> callback)
+        public ICallbackResult Callback<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15
+        >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15> callback)
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
         }
 
-        public ICallbackResult Callback<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16>(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> callback)
+        public ICallbackResult Callback<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16
+        >(Action<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16> callback)
         {
             this.setup.SetCallbackBehavior(callback);
             return this;
@@ -199,7 +261,8 @@ namespace Moq.Language.Flow
             return this;
         }
 
-        public IThrowsResult Throws<TException>() where TException : Exception, new()
+        public IThrowsResult Throws<TException>()
+            where TException : Exception, new()
         {
             this.setup.SetThrowExceptionBehavior(new TException());
             return this;
@@ -211,103 +274,280 @@ namespace Moq.Language.Flow
             return this;
         }
 
-        public IThrowsResult Throws<TException>(Func<TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<TException>(Func<TException> exceptionFunction)
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T, TException>(Func<T, TException> exceptionFunction)
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, TException>(Func<T1, T2, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, TException>(Func<T1, T2, TException> exceptionFunction)
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, TException>(Func<T1, T2, T3, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, TException>(
+            Func<T1, T2, T3, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, TException>(Func<T1, T2, T3, T4, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, TException>(
+            Func<T1, T2, T3, T4, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, TException>(Func<T1, T2, T3, T4, T5, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, TException>(
+            Func<T1, T2, T3, T4, T5, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, TException>(Func<T1, T2, T3, T4, T5, T6, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, TException>(
+            Func<T1, T2, T3, T4, T5, T6, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, TException>(Func<T1, T2, T3, T4, T5, T6, T7, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TException>(
+            Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, TException> exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            TException
+        >(
+            Func<
+                T1,
+                T2,
+                T3,
+                T4,
+                T5,
+                T6,
+                T7,
+                T8,
+                T9,
+                T10,
+                T11,
+                T12,
+                T13,
+                TException
+            > exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            TException
+        >(
+            Func<
+                T1,
+                T2,
+                T3,
+                T4,
+                T5,
+                T6,
+                T7,
+                T8,
+                T9,
+                T10,
+                T11,
+                T12,
+                T13,
+                T14,
+                TException
+            > exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            TException
+        >(
+            Func<
+                T1,
+                T2,
+                T3,
+                T4,
+                T5,
+                T6,
+                T7,
+                T8,
+                T9,
+                T10,
+                T11,
+                T12,
+                T13,
+                T14,
+                T15,
+                TException
+            > exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
         }
 
-        public IThrowsResult Throws<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TException>(Func<T1, T2, T3, T4, T5, T6, T7, T8, T9, T10, T11, T12, T13, T14, T15, T16, TException> exceptionFunction) where TException : Exception
+        public IThrowsResult Throws<
+            T1,
+            T2,
+            T3,
+            T4,
+            T5,
+            T6,
+            T7,
+            T8,
+            T9,
+            T10,
+            T11,
+            T12,
+            T13,
+            T14,
+            T15,
+            T16,
+            TException
+        >(
+            Func<
+                T1,
+                T2,
+                T3,
+                T4,
+                T5,
+                T6,
+                T7,
+                T8,
+                T9,
+                T10,
+                T11,
+                T12,
+                T13,
+                T14,
+                T15,
+                T16,
+                TException
+            > exceptionFunction
+        )
+            where TException : Exception
         {
             this.Setup.SetThrowComputedExceptionBehavior(exceptionFunction);
             return this;
@@ -328,7 +568,8 @@ namespace Moq.Language.Flow
 
         public void Verifiable(Times times) => this.Verifiable(times, null);
 
-        public void Verifiable(Func<Times> times, string failMessage) => this.Verifiable(times(), failMessage);
+        public void Verifiable(Func<Times> times, string failMessage) =>
+            this.Verifiable(times(), failMessage);
 
         public void Verifiable(Times times, string failMessage)
         {

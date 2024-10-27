@@ -45,10 +45,8 @@ public class WebHostService : ServiceBase
         // started the service, because otherwise we might introduce unwanted
         // race conditions.
         _host
-            .Services
-            .GetRequiredService<IHostApplicationLifetime>()
-            .ApplicationStopping
-            .Register(() =>
+            .Services.GetRequiredService<IHostApplicationLifetime>()
+            .ApplicationStopping.Register(() =>
             {
                 if (!_stopRequestedByWindows)
                 {

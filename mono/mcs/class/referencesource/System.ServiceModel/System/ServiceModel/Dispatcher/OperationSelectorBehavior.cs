@@ -5,38 +5,58 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Reflection;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Collections;
-    using System.Reflection;
 
     class OperationSelectorBehavior : IContractBehavior
     {
-        void IContractBehavior.Validate(ContractDescription description, ServiceEndpoint endpoint)
-        {
-        }
+        void IContractBehavior.Validate(
+            ContractDescription description,
+            ServiceEndpoint endpoint
+        ) { }
 
-        void IContractBehavior.AddBindingParameters(ContractDescription description, ServiceEndpoint endpoint, BindingParameterCollection parameters)
-        {
-        }
+        void IContractBehavior.AddBindingParameters(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            BindingParameterCollection parameters
+        ) { }
 
-        void IContractBehavior.ApplyDispatchBehavior(ContractDescription description, ServiceEndpoint endpoint, DispatchRuntime dispatch)
+        void IContractBehavior.ApplyDispatchBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            DispatchRuntime dispatch
+        )
         {
             if (dispatch.ClientRuntime != null)
-                dispatch.ClientRuntime.OperationSelector = new MethodInfoOperationSelector(description, MessageDirection.Output); 
+                dispatch.ClientRuntime.OperationSelector = new MethodInfoOperationSelector(
+                    description,
+                    MessageDirection.Output
+                );
         }
 
-        void IContractBehavior.ApplyClientBehavior(ContractDescription description, ServiceEndpoint endpoint, ClientRuntime proxy)
+        void IContractBehavior.ApplyClientBehavior(
+            ContractDescription description,
+            ServiceEndpoint endpoint,
+            ClientRuntime proxy
+        )
         {
-            proxy.OperationSelector = new MethodInfoOperationSelector(description, MessageDirection.Input);
+            proxy.OperationSelector = new MethodInfoOperationSelector(
+                description,
+                MessageDirection.Input
+            );
         }
 
         internal class MethodInfoOperationSelector : IClientOperationSelector
         {
             Dictionary<object, string> operationMap;
 
-            internal MethodInfoOperationSelector(ContractDescription description, MessageDirection directionThatRequiresClientOpSelection)
+            internal MethodInfoOperationSelector(
+                ContractDescription description,
+                MessageDirection directionThatRequiresClientOpSelection
+            )
             {
                 operationMap = new Dictionary<object, string>();
 
@@ -50,13 +70,16 @@ namespace System.ServiceModel.Dispatcher
                             if (!operationMap.ContainsKey(operation.SyncMethod.MethodHandle))
                                 operationMap.Add(operation.SyncMethod.MethodHandle, operation.Name);
                         }
-    
+
                         if (operation.BeginMethod != null)
                         {
                             if (!operationMap.ContainsKey(operation.BeginMethod.MethodHandle))
                             {
-                                operationMap.Add(operation.BeginMethod.MethodHandle, operation.Name);
-                                operationMap.Add(operation.EndMethod.MethodHandle, operation.Name);                    
+                                operationMap.Add(
+                                    operation.BeginMethod.MethodHandle,
+                                    operation.Name
+                                );
+                                operationMap.Add(operation.EndMethod.MethodHandle, operation.Name);
                             }
                         }
 

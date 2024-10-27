@@ -10,10 +10,12 @@ namespace Microsoft.AspNetCore.Mvc.Analyzers;
 [DiagnosticAnalyzer(LanguageNames.CSharp)]
 public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyzer
 {
-    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } = ImmutableArray.Create(
-        DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods,
-        DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods,
-        DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels);
+    public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics { get; } =
+        ImmutableArray.Create(
+            DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods,
+            DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods,
+            DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels
+        );
 
     public override void Initialize(AnalysisContext context)
     {
@@ -23,7 +25,10 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyze
         context.RegisterCompilationStartAction(context =>
         {
             var typeCache = new TypeCache(context.Compilation);
-            if (typeCache.PageModelAttribute == null || typeCache.PageModelAttribute.TypeKind == TypeKind.Error)
+            if (
+                typeCache.PageModelAttribute == null
+                || typeCache.PageModelAttribute.TypeKind == TypeKind.Error
+            )
             {
                 // No-op if we can't find types we care about.
                 return;
@@ -33,91 +38,124 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyze
         });
     }
 
-    private static void InitializeWorker(CompilationStartAnalysisContext context, TypeCache typeCache)
+    private static void InitializeWorker(
+        CompilationStartAnalysisContext context,
+        TypeCache typeCache
+    )
     {
-        context.RegisterSymbolAction(context =>
-        {
-            var method = (IMethodSymbol)context.Symbol;
-
-            var declaringType = method.ContainingType;
-            if (!IsPageModel(declaringType, typeCache.PageModelAttribute) || !IsPageHandlerMethod(method))
+        context.RegisterSymbolAction(
+            context =>
             {
-                return;
-            }
+                var method = (IMethodSymbol)context.Symbol;
 
-            ReportFilterDiagnostic(context, method, typeCache.IFilterMetadata);
-            ReportFilterDiagnostic(context, method, typeCache.AuthorizeAttribute);
-            ReportFilterDiagnostic(context, method, typeCache.AllowAnonymousAttribute);
+                var declaringType = method.ContainingType;
+                if (
+                    !IsPageModel(declaringType, typeCache.PageModelAttribute)
+                    || !IsPageHandlerMethod(method)
+                )
+                {
+                    return;
+                }
 
-            ReportRouteDiagnostic(context, method, typeCache.IRouteTemplateProvider);
-        }, SymbolKind.Method);
+                ReportFilterDiagnostic(context, method, typeCache.IFilterMetadata);
+                ReportFilterDiagnostic(context, method, typeCache.AuthorizeAttribute);
+                ReportFilterDiagnostic(context, method, typeCache.AllowAnonymousAttribute);
 
-        context.RegisterSymbolAction(context =>
-        {
-            var type = (INamedTypeSymbol)context.Symbol;
-            if (!IsPageModel(type, typeCache.PageModelAttribute))
+                ReportRouteDiagnostic(context, method, typeCache.IRouteTemplateProvider);
+            },
+            SymbolKind.Method
+        );
+
+        context.RegisterSymbolAction(
+            context =>
             {
-                return;
-            }
+                var type = (INamedTypeSymbol)context.Symbol;
+                if (!IsPageModel(type, typeCache.PageModelAttribute))
+                {
+                    return;
+                }
 
-            ReportRouteDiagnosticOnModel(context, type, typeCache.IRouteTemplateProvider);
-        }, SymbolKind.NamedType);
+                ReportRouteDiagnosticOnModel(context, type, typeCache.IRouteTemplateProvider);
+            },
+            SymbolKind.NamedType
+        );
     }
 
     private static bool IsPageHandlerMethod(IMethodSymbol method)
     {
-        return method.MethodKind == MethodKind.Ordinary &&
-            !method.IsStatic &&
-            !method.IsGenericMethod &&
-            method.DeclaredAccessibility == Accessibility.Public;
+        return method.MethodKind == MethodKind.Ordinary
+            && !method.IsStatic
+            && !method.IsGenericMethod
+            && method.DeclaredAccessibility == Accessibility.Public;
     }
 
     private static bool IsPageModel(INamedTypeSymbol type, INamedTypeSymbol pageAttributeModel)
     {
-        return type.TypeKind == TypeKind.Class &&
-            !type.IsStatic &&
-            type.HasAttribute(pageAttributeModel, inherit: true);
+        return type.TypeKind == TypeKind.Class
+            && !type.IsStatic
+            && type.HasAttribute(pageAttributeModel, inherit: true);
     }
 
-    private static void ReportRouteDiagnosticOnModel(SymbolAnalysisContext context, INamedTypeSymbol typeSymbol, INamedTypeSymbol routeAttribute)
+    private static void ReportRouteDiagnosticOnModel(
+        SymbolAnalysisContext context,
+        INamedTypeSymbol typeSymbol,
+        INamedTypeSymbol routeAttribute
+    )
     {
         var attribute = GetAttribute(typeSymbol, routeAttribute);
         if (attribute != null)
         {
             var location = GetAttributeLocation(context, attribute);
 
-            context.ReportDiagnostic(Diagnostic.Create(
-                DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels,
-                location,
-                attribute.AttributeClass.Name));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.MVC1003_RouteAttributesShouldNotBeAppliedToPageModels,
+                    location,
+                    attribute.AttributeClass.Name
+                )
+            );
         }
     }
 
-    private static void ReportRouteDiagnostic(SymbolAnalysisContext context, IMethodSymbol method, INamedTypeSymbol routeAttribute)
+    private static void ReportRouteDiagnostic(
+        SymbolAnalysisContext context,
+        IMethodSymbol method,
+        INamedTypeSymbol routeAttribute
+    )
     {
         var attribute = GetAttribute(method, routeAttribute);
         if (attribute != null)
         {
             var location = GetAttributeLocation(context, attribute);
 
-            context.ReportDiagnostic(Diagnostic.Create(
-                DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods,
-                location,
-                attribute.AttributeClass.Name));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.MVC1002_RouteAttributesShouldNotBeAppliedToPageHandlerMethods,
+                    location,
+                    attribute.AttributeClass.Name
+                )
+            );
         }
     }
 
-    private static void ReportFilterDiagnostic(SymbolAnalysisContext context, IMethodSymbol method, INamedTypeSymbol filterAttribute)
+    private static void ReportFilterDiagnostic(
+        SymbolAnalysisContext context,
+        IMethodSymbol method,
+        INamedTypeSymbol filterAttribute
+    )
     {
         var attribute = GetAttribute(method, filterAttribute);
         if (attribute != null)
         {
             var location = GetAttributeLocation(context, attribute);
 
-            context.ReportDiagnostic(Diagnostic.Create(
-                DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods,
-                location,
-                attribute.AttributeClass.Name));
+            context.ReportDiagnostic(
+                Diagnostic.Create(
+                    DiagnosticDescriptors.MVC1001_FiltersShouldNotBeAppliedToPageHandlerMethods,
+                    location,
+                    attribute.AttributeClass.Name
+                )
+            );
         }
     }
 
@@ -134,7 +172,10 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyze
         return null;
     }
 
-    private static Location GetAttributeLocation(SymbolAnalysisContext context, AttributeData attribute)
+    private static Location GetAttributeLocation(
+        SymbolAnalysisContext context,
+        AttributeData attribute
+    )
     {
         var syntax = attribute.ApplicationSyntaxReference.GetSyntax(context.CancellationToken);
         return syntax?.GetLocation() ?? Location.None;
@@ -144,11 +185,17 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyze
     {
         public TypeCache(Compilation compilation)
         {
-            PageModelAttribute = compilation.GetTypeByMetadataName(SymbolNames.PageModelAttributeType);
+            PageModelAttribute = compilation.GetTypeByMetadataName(
+                SymbolNames.PageModelAttributeType
+            );
             IFilterMetadata = compilation.GetTypeByMetadataName(SymbolNames.IFilterMetadataType);
             AuthorizeAttribute = compilation.GetTypeByMetadataName(SymbolNames.AuthorizeAttribute);
-            AllowAnonymousAttribute = compilation.GetTypeByMetadataName(SymbolNames.AllowAnonymousAttribute);
-            IRouteTemplateProvider = compilation.GetTypeByMetadataName(SymbolNames.IRouteTemplateProvider);
+            AllowAnonymousAttribute = compilation.GetTypeByMetadataName(
+                SymbolNames.AllowAnonymousAttribute
+            );
+            IRouteTemplateProvider = compilation.GetTypeByMetadataName(
+                SymbolNames.IRouteTemplateProvider
+            );
         }
 
         public INamedTypeSymbol PageModelAttribute { get; }

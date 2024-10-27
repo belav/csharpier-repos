@@ -1,16 +1,15 @@
 //------------------------------------------------------------------------------
 // <copyright file="TokenBinding.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Security.Authentication.ExtendedProtection
 {
-
     public enum TokenBindingType
     {
         Provided = 0,
-        Referred = 1
+        Referred = 1,
     };
 
     public class TokenBinding
@@ -28,10 +27,6 @@ namespace System.Security.Authentication.ExtendedProtection
             return (_rawTokenBindingId != null) ? (byte[])_rawTokenBindingId.Clone() : null;
         }
 
-        public TokenBindingType BindingType
-        {
-            get;
-            private set;
-        }
+        public TokenBindingType BindingType { get; private set; }
     }
-} 
+}

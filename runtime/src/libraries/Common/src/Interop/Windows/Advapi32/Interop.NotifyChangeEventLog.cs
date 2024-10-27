@@ -10,6 +10,9 @@ internal static partial class Interop
     {
         [LibraryImport(Libraries.Advapi32, SetLastError = true)]
         [return: MarshalAs(UnmanagedType.Bool)]
-        public static partial bool NotifyChangeEventLog(SafeEventLogReadHandle hEventLog, SafeWaitHandle hEvent);
+        public static partial bool NotifyChangeEventLog(
+            SafeEventLogReadHandle hEventLog,
+            SafeWaitHandle hEvent
+        );
     }
 }

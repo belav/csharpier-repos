@@ -58,10 +58,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Comment;
-            }
+            get { return XmlNodeType.Comment; }
         }
 
         /// <summary>
@@ -72,16 +69,14 @@ namespace System.Xml.Linq
         /// </exception>
         public string Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Value);
                 this.value = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Value);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Value);
             }
         }
 

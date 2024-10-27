@@ -39,7 +39,11 @@ namespace System.Runtime
         /// to unpredictable results.  For that reason, this method should not be used in production code and calling it
         /// produces a compile-time warning.</para>
         /// </remarks>
-        [Obsolete(Obsoletions.ControlledExecutionRunMessage, DiagnosticId = Obsoletions.ControlledExecutionRunDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.ControlledExecutionRunMessage,
+            DiagnosticId = Obsoletions.ControlledExecutionRunDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public static void Run(Action action, CancellationToken cancellationToken)
         {
             ArgumentNullException.ThrowIfNull(action);
@@ -48,7 +52,9 @@ namespace System.Runtime
             // on this thread, fail.
             if (t_executing)
             {
-                throw new InvalidOperationException(SR.InvalidOperation_NestedControlledExecutionRun);
+                throw new InvalidOperationException(
+                    SR.InvalidOperation_NestedControlledExecutionRun
+                );
             }
 
             // Store the current thread so that it may be referenced by the Canceler.Cancel callback if one occurs.
@@ -62,7 +68,10 @@ namespace System.Runtime
                 // Register for aborting.  From this moment until ctr.Unregister is called, this thread is subject to being
                 // interrupted at any moment.  This could happen during the call to UnsafeRegister if cancellation has
                 // already been requested at the time of the registration.
-                CancellationTokenRegistration ctr = cancellationToken.UnsafeRegister(e => ((Canceler)e!).Cancel(), canceler);
+                CancellationTokenRegistration ctr = cancellationToken.UnsafeRegister(
+                    e => ((Canceler)e!).Cancel(),
+                    canceler
+                );
                 try
                 {
                     // Invoke the caller's code.
@@ -98,7 +107,9 @@ namespace System.Runtime
                 // We don't want to leak ThreadAbortExceptions to user code.  Instead, translate the exception into
                 // an OperationCanceledException, preserving stack trace details from the ThreadAbortException in
                 // order to aid in diagnostics and debugging.
-                OperationCanceledException e = cancellationToken.IsCancellationRequested ? new(cancellationToken) : new();
+                OperationCanceledException e = cancellationToken.IsCancellationRequested
+                    ? new(cancellationToken)
+                    : new();
                 if (tae.StackTrace is string stackTrace)
                 {
                     ExceptionDispatchInfo.SetRemoteStackTrace(e, stackTrace);

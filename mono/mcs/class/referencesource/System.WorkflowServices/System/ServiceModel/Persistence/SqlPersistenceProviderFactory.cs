@@ -20,7 +20,9 @@ namespace System.ServiceModel.Persistence
     using System.Text;
     using System.Xml;
 
-    [Obsolete("The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*")]
+    [Obsolete(
+        "The WF3 types are deprecated.  Instead, please use the new WF4 types from System.Activities.*"
+    )]
     public class SqlPersistenceProviderFactory : PersistenceProviderFactory
     {
         static readonly TimeSpan maxSecondsTimeSpan = TimeSpan.FromSeconds(int.MaxValue);
@@ -41,16 +43,16 @@ namespace System.ServiceModel.Persistence
         UpdateHandler updateHandler;
 
         public SqlPersistenceProviderFactory(string connectionString)
-            : this(connectionString, false, TimeSpan.Zero)
-        {
-        }
+            : this(connectionString, false, TimeSpan.Zero) { }
 
         public SqlPersistenceProviderFactory(string connectionString, bool serializeAsText)
-            : this(connectionString, serializeAsText, TimeSpan.Zero)
-        {
-        }
+            : this(connectionString, serializeAsText, TimeSpan.Zero) { }
 
-        public SqlPersistenceProviderFactory(string connectionString, bool serializeAsText, TimeSpan lockTimeout)
+        public SqlPersistenceProviderFactory(
+            string connectionString,
+            bool serializeAsText,
+            TimeSpan lockTimeout
+        )
         {
             this.ConnectionString = connectionString;
             this.LockTimeout = lockTimeout;
@@ -78,12 +80,15 @@ namespace System.ServiceModel.Persistence
                 switch (key)
                 {
                     case connectionStringNameParameter:
-                        ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[parameters[key]];
+                        ConnectionStringSettings settings = ConfigurationManager.ConnectionStrings[
+                            parameters[key]
+                        ];
 
                         if (settings == null)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                                SR2.GetString(SR2.ConnectionStringNameIncorrect, parameters[key]));
+                                SR2.GetString(SR2.ConnectionStringNameIncorrect, parameters[key])
+                            );
                         }
 
                         this.connectionString = settings.ConnectionString;
@@ -92,19 +97,33 @@ namespace System.ServiceModel.Persistence
                         this.SerializeAsText = bool.Parse(parameters[key]);
                         break;
                     case lockTimeoutParameter:
-                        this.LockTimeout = TimeSpan.Parse(parameters[key], CultureInfo.InvariantCulture);
+                        this.LockTimeout = TimeSpan.Parse(
+                            parameters[key],
+                            CultureInfo.InvariantCulture
+                        );
                         break;
                     default:
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                             key,
-                            SR2.GetString(SR2.UnknownSqlPersistenceConfigurationParameter, key, connectionStringNameParameter, serializeAsTextParameter, lockTimeoutParameter));
+                            SR2.GetString(
+                                SR2.UnknownSqlPersistenceConfigurationParameter,
+                                key,
+                                connectionStringNameParameter,
+                                serializeAsTextParameter,
+                                lockTimeoutParameter
+                            )
+                        );
                 }
             }
 
             if (this.connectionString == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
-                    SR2.GetString(SR2.ConnectionStringNameParameterRequired, connectionStringNameParameter));
+                    SR2.GetString(
+                        SR2.ConnectionStringNameParameterRequired,
+                        connectionStringNameParameter
+                    )
+                );
             }
 
             this.loadHandler = new LoadHandler(this);
@@ -116,10 +135,7 @@ namespace System.ServiceModel.Persistence
 
         public string ConnectionString
         {
-            get
-            {
-                return this.connectionString;
-            }
+            get { return this.connectionString; }
             set
             {
                 if (string.IsNullOrEmpty(value))
@@ -132,21 +148,22 @@ namespace System.ServiceModel.Persistence
 
         public TimeSpan LockTimeout
         {
-            get
-            {
-                return this.lockTimeout;
-            }
+            get { return this.lockTimeout; }
             set
             {
                 // Allowed values are TimeSpan.Zero (no locking), TimeSpan.MaxValue (infinite locking),
                 // and any values between 1 and int.MaxValue seconds
-                if (value < TimeSpan.Zero ||
-                    (value > TimeSpan.FromSeconds(int.MaxValue) && value != TimeSpan.MaxValue))
+                if (
+                    value < TimeSpan.Zero
+                    || (value > TimeSpan.FromSeconds(int.MaxValue) && value != TimeSpan.MaxValue)
+                )
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                         new ArgumentOutOfRangeException(
-                        "value",
-                        SR2.GetString(SR2.LockTimeoutOutOfRange)));
+                            "value",
+                            SR2.GetString(SR2.LockTimeoutOutOfRange)
+                        )
+                    );
                 }
                 this.lockTimeout = value;
             }
@@ -154,14 +171,8 @@ namespace System.ServiceModel.Persistence
 
         public bool SerializeAsText
         {
-            get
-            {
-                return this.serializeAsText;
-            }
-            set
-            {
-                this.serializeAsText = value;
-            }
+            get { return this.serializeAsText; }
+            set { this.serializeAsText = value; }
         }
 
         protected override TimeSpan DefaultCloseTimeout
@@ -194,8 +205,10 @@ namespace System.ServiceModel.Persistence
                 }
                 else
                 {
-                    Fx.Assert(this.lockTimeout <= TimeSpan.FromSeconds(int.MaxValue),
-                        "The lockTimeout should have been checked in the constructor.");
+                    Fx.Assert(
+                        this.lockTimeout <= TimeSpan.FromSeconds(int.MaxValue),
+                        "The lockTimeout should have been checked in the constructor."
+                    );
 
                     return Convert.ToInt32(this.lockTimeout.TotalSeconds);
                 }
@@ -208,7 +221,10 @@ namespace System.ServiceModel.Persistence
 
             if (Guid.Empty == id)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("id", SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "id",
+                    SR2.GetString(SR2.SqlPersistenceProviderRequiresNonEmptyGuid)
+                );
             }
 
             return new SqlPersistenceProvider(id, this);
@@ -228,23 +244,29 @@ namespace System.ServiceModel.Persistence
             }
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ValidateCommandTimeout(timeout);
 
             return new CloseAsyncResult(this, timeout, callback, state);
         }
 
-        protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ValidateCommandTimeout(timeout);
 
             return new OpenAsyncResult(this, timeout, callback, state);
         }
 
-        protected override void OnClose(TimeSpan timeout)
-        {
-        }
+        protected override void OnClose(TimeSpan timeout) { }
 
         protected override void OnEndClose(IAsyncResult result)
         {
@@ -283,8 +305,10 @@ namespace System.ServiceModel.Persistence
 
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new PersistenceException(
-                    SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
-                    e));
+                        SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
+                        e
+                    )
+                );
             }
         }
 
@@ -296,14 +320,23 @@ namespace System.ServiceModel.Persistence
             }
             else
             {
-                Fx.Assert(timeout <= TimeSpan.FromSeconds(int.MaxValue),
-                    "Timeout should have been validated before entering this method.");
+                Fx.Assert(
+                    timeout <= TimeSpan.FromSeconds(int.MaxValue),
+                    "Timeout should have been validated before entering this method."
+                );
 
                 return Convert.ToInt32(timeout.TotalSeconds);
             }
         }
 
-        IAsyncResult BeginCreate(Guid id, object instance, TimeSpan timeout, bool unlockInstance, AsyncCallback callback, object state)
+        IAsyncResult BeginCreate(
+            Guid id,
+            object instance,
+            TimeSpan timeout,
+            bool unlockInstance,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfDisposedOrNotOpen();
 
@@ -314,11 +347,26 @@ namespace System.ServiceModel.Persistence
 
             ValidateCommandTimeout(timeout);
 
-            return new OperationAsyncResult(this.createHandler, this, id, timeout, callback, state, instance, unlockInstance);
+            return new OperationAsyncResult(
+                this.createHandler,
+                this,
+                id,
+                timeout,
+                callback,
+                state,
+                instance,
+                unlockInstance
+            );
         }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA1801")]
-        IAsyncResult BeginDelete(Guid id, object instance, TimeSpan timeout, AsyncCallback callback, object state)
+        IAsyncResult BeginDelete(
+            Guid id,
+            object instance,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfDisposedOrNotOpen();
 
@@ -327,13 +375,27 @@ namespace System.ServiceModel.Persistence
             return new OperationAsyncResult(this.deleteHandler, this, id, timeout, callback, state);
         }
 
-        IAsyncResult BeginLoad(Guid id, TimeSpan timeout, bool lockInstance, AsyncCallback callback, object state)
+        IAsyncResult BeginLoad(
+            Guid id,
+            TimeSpan timeout,
+            bool lockInstance,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfDisposedOrNotOpen();
 
             ValidateCommandTimeout(timeout);
 
-            return new OperationAsyncResult(this.loadHandler, this, id, timeout, callback, state, lockInstance);
+            return new OperationAsyncResult(
+                this.loadHandler,
+                this,
+                id,
+                timeout,
+                callback,
+                state,
+                lockInstance
+            );
         }
 
         IAsyncResult BeginUnlock(Guid id, TimeSpan timeout, AsyncCallback callback, object state)
@@ -345,7 +407,14 @@ namespace System.ServiceModel.Persistence
             return new OperationAsyncResult(this.unlockHandler, this, id, timeout, callback, state);
         }
 
-        IAsyncResult BeginUpdate(Guid id, object instance, TimeSpan timeout, bool unlockInstance, AsyncCallback callback, object state)
+        IAsyncResult BeginUpdate(
+            Guid id,
+            object instance,
+            TimeSpan timeout,
+            bool unlockInstance,
+            AsyncCallback callback,
+            object state
+        )
         {
             base.ThrowIfDisposedOrNotOpen();
 
@@ -356,7 +425,16 @@ namespace System.ServiceModel.Persistence
 
             ValidateCommandTimeout(timeout);
 
-            return new OperationAsyncResult(this.updateHandler, this, id, timeout, callback, state, instance, unlockInstance);
+            return new OperationAsyncResult(
+                this.updateHandler,
+                this,
+                id,
+                timeout,
+                callback,
+                state,
+                instance,
+                unlockInstance
+            );
         }
 
         void CleanupCommand(SqlCommand command)
@@ -425,7 +503,10 @@ namespace System.ServiceModel.Persistence
             }
             else
             {
-                XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader((byte[])serializedInstance, XmlDictionaryReaderQuotas.Max);
+                XmlDictionaryReader dictionaryReader = XmlDictionaryReader.CreateBinaryReader(
+                    (byte[])serializedInstance,
+                    XmlDictionaryReaderQuotas.Max
+                );
 
                 instance = serializer.ReadObject(dictionaryReader);
 
@@ -547,10 +628,14 @@ namespace System.ServiceModel.Persistence
 
         void PerformOpen(TimeSpan timeout)
         {
-            string lowerCaseConnectionString = this.connectionString.ToUpper(CultureInfo.InvariantCulture);
+            string lowerCaseConnectionString = this.connectionString.ToUpper(
+                CultureInfo.InvariantCulture
+            );
 
-            if (!lowerCaseConnectionString.Contains("CONNECTION TIMEOUT") &&
-                !lowerCaseConnectionString.Contains("CONNECTIONTIMEOUT"))
+            if (
+                !lowerCaseConnectionString.Contains("CONNECTION TIMEOUT")
+                && !lowerCaseConnectionString.Contains("CONNECTIONTIMEOUT")
+            )
             {
                 this.canonicalConnectionString = this.connectionString.Trim();
 
@@ -572,14 +657,19 @@ namespace System.ServiceModel.Persistence
                     Dictionary<string, string> openParameters = new Dictionary<string, string>(2)
                     {
                         { "IsLocking", this.IsLockingTurnedOn ? "True" : "False" },
-                        { "LockTimeout", this.lockTimeout.ToString() }
+                        { "LockTimeout", this.lockTimeout.ToString() },
                     };
 
                     TraceRecord record = new DictionaryTraceRecord(openParameters);
 
-                    TraceUtility.TraceEvent(TraceEventType.Information,
-                        TraceCode.SqlPersistenceProviderOpenParameters, SR.GetString(SR.TraceCodeSqlPersistenceProviderOpenParameters),
-                        record, this, null);
+                    TraceUtility.TraceEvent(
+                        TraceEventType.Information,
+                        TraceCode.SqlPersistenceProviderOpenParameters,
+                        SR.GetString(SR.TraceCodeSqlPersistenceProviderOpenParameters),
+                        record,
+                        this,
+                        null
+                    );
                 }
 
                 connection.Open();
@@ -589,18 +679,31 @@ namespace System.ServiceModel.Persistence
             this.hostId = Guid.NewGuid();
         }
 
-        object PerformOperation(OperationHandler handler, Guid id, TimeSpan timeout, params object[] additionalParameters)
+        object PerformOperation(
+            OperationHandler handler,
+            Guid id,
+            TimeSpan timeout,
+            params object[] additionalParameters
+        )
         {
             int resultCode;
             object returnValue = null;
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR2.GetString(SR2.SqlPrsistenceProviderOperationAndInstanceId, handler.OperationName, id.ToString());
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.SqlPersistenceProviderSQLCallStart, SR.GetString(SR.TraceCodeSqlPersistenceProviderSQLCallStart),
+                string traceText = SR2.GetString(
+                    SR2.SqlPrsistenceProviderOperationAndInstanceId,
+                    handler.OperationName,
+                    id.ToString()
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SqlPersistenceProviderSQLCallStart,
+                    SR.GetString(SR.TraceCodeSqlPersistenceProviderSQLCallStart),
                     new StringTraceRecord("OperationDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
 
             try
@@ -644,19 +747,29 @@ namespace System.ServiceModel.Persistence
 
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                     new PersistenceException(
-                    SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
-                    e));
+                        SR2.GetString(SR2.PersistenceOperationError, handler.OperationName),
+                        e
+                    )
+                );
             }
 
             Exception toThrow = handler.ProcessResult(resultCode, id, returnValue);
 
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                string traceText = SR2.GetString(SR2.SqlPrsistenceProviderOperationAndInstanceId, handler.OperationName, id.ToString());
-                TraceUtility.TraceEvent(TraceEventType.Information,
-                    TraceCode.SqlPersistenceProviderSQLCallEnd, SR.GetString(SR.TraceCodeSqlPersistenceProviderSQLCallEnd),
+                string traceText = SR2.GetString(
+                    SR2.SqlPrsistenceProviderOperationAndInstanceId,
+                    handler.OperationName,
+                    id.ToString()
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.SqlPersistenceProviderSQLCallEnd,
+                    SR.GetString(SR.TraceCodeSqlPersistenceProviderSQLCallEnd),
                     new StringTraceRecord("OperationDetail", traceText),
-                    this, null);
+                    this,
+                    null
+                );
             }
 
             if (toThrow != null)
@@ -699,18 +812,29 @@ namespace System.ServiceModel.Persistence
 
         void ValidateCommandTimeout(TimeSpan timeout)
         {
-            if (timeout <= TimeSpan.Zero ||
-                (timeout > SqlPersistenceProviderFactory.maxSecondsTimeSpan && timeout != TimeSpan.MaxValue))
+            if (
+                timeout <= TimeSpan.Zero
+                || (
+                    timeout > SqlPersistenceProviderFactory.maxSecondsTimeSpan
+                    && timeout != TimeSpan.MaxValue
+                )
+            )
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                     "timeout",
-                    SR2.GetString(SR2.CommandTimeoutOutOfRange));
+                    SR2.GetString(SR2.CommandTimeoutOutOfRange)
+                );
             }
         }
 
         class CloseAsyncResult : AsyncResult
         {
-            public CloseAsyncResult(SqlPersistenceProviderFactory provider, TimeSpan timeout, AsyncCallback callback, object state)
+            public CloseAsyncResult(
+                SqlPersistenceProviderFactory provider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 // There is no point in even pretending SqlConnection.Close needs async
@@ -728,9 +852,7 @@ namespace System.ServiceModel.Persistence
         class CreateHandler : OperationHandler
         {
             public CreateHandler(SqlPersistenceProviderFactory provider)
-                : base(provider)
-            {
-            }
+                : base(provider) { }
 
             public override string OperationName
             {
@@ -748,18 +870,25 @@ namespace System.ServiceModel.Persistence
                     case 2: // Some other error
                         return new PersistenceException(SR2.GetString(SR2.InsertFailed, id));
                     default:
-                        return
-                            new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
+                        return new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
                 }
             }
 
-            public override void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters)
+            public override void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            )
             {
-                Fx.Assert(additionalParameters != null && additionalParameters.Length == 2,
-                    "Should have had 2 additional parameters.");
+                Fx.Assert(
+                    additionalParameters != null && additionalParameters.Length == 2,
+                    "Should have had 2 additional parameters."
+                );
 
-                Fx.Assert(additionalParameters[1].GetType() == typeof(bool),
-                    "Parameter at index 1 should have been a boolean.");
+                Fx.Assert(
+                    additionalParameters[1].GetType() == typeof(bool),
+                    "Parameter at index 1 should have been a boolean."
+                );
 
                 object instance = additionalParameters[0];
 
@@ -787,11 +916,17 @@ namespace System.ServiceModel.Persistence
                 command.Parameters.Add(instanceParameter);
                 command.Parameters.Add(instanceXmlParameter);
 
-                SqlParameter unlockInstanceParameter = new SqlParameter("@unlockInstance", SqlDbType.Bit);
+                SqlParameter unlockInstanceParameter = new SqlParameter(
+                    "@unlockInstance",
+                    SqlDbType.Bit
+                );
                 unlockInstanceParameter.Value = (bool)additionalParameters[1];
                 command.Parameters.Add(unlockInstanceParameter);
 
-                SqlParameter lockOwnerParameter = new SqlParameter("@hostId", SqlDbType.UniqueIdentifier);
+                SqlParameter lockOwnerParameter = new SqlParameter(
+                    "@hostId",
+                    SqlDbType.UniqueIdentifier
+                );
                 lockOwnerParameter.Value = this.provider.hostId;
                 command.Parameters.Add(lockOwnerParameter);
 
@@ -808,9 +943,7 @@ namespace System.ServiceModel.Persistence
         class DeleteHandler : OperationHandler
         {
             public DeleteHandler(SqlPersistenceProviderFactory provider)
-                : base(provider)
-            {
-            }
+                : base(provider) { }
 
             public override string OperationName
             {
@@ -824,21 +957,27 @@ namespace System.ServiceModel.Persistence
                     case 0: // Success
                         return null;
                     case 1: // Instance not found
-                        return
-                            new InstanceNotFoundException(id);
+                        return new InstanceNotFoundException(id);
                     case 2: // Could not acquire lock
-                        return new InstanceLockException(id, SR2.GetString(SR2.DidNotOwnLock, id, OperationName));
+                        return new InstanceLockException(
+                            id,
+                            SR2.GetString(SR2.DidNotOwnLock, id, OperationName)
+                        );
                     default:
-                        return
-                            new PersistenceException(
-                            SR2.GetString(SR2.UnknownStoredProcResult));
+                        return new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
                 }
             }
 
-            public override void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters)
+            public override void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            )
             {
-                Fx.Assert(additionalParameters == null || additionalParameters.Length == 0,
-                    "Should not have gotten any additional parameters.");
+                Fx.Assert(
+                    additionalParameters == null || additionalParameters.Length == 0,
+                    "Should not have gotten any additional parameters."
+                );
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "DeleteInstance";
@@ -847,7 +986,10 @@ namespace System.ServiceModel.Persistence
                 idParameter.Value = id;
                 command.Parameters.Add(idParameter);
 
-                SqlParameter hostIdParameter = new SqlParameter("@hostId", SqlDbType.UniqueIdentifier);
+                SqlParameter hostIdParameter = new SqlParameter(
+                    "@hostId",
+                    SqlDbType.UniqueIdentifier
+                );
                 hostIdParameter.Value = this.provider.hostId;
                 command.Parameters.Add(hostIdParameter);
 
@@ -864,9 +1006,7 @@ namespace System.ServiceModel.Persistence
         class LoadHandler : OperationHandler
         {
             public LoadHandler(SqlPersistenceProviderFactory provider)
-                : base(provider)
-            {
-            }
+                : base(provider) { }
 
             public override bool ExecuteReader
             {
@@ -918,8 +1058,9 @@ namespace System.ServiceModel.Persistence
                         toReturn = new InstanceLockException(id);
                         break;
                     default:
-                        toReturn =
-                            new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
+                        toReturn = new PersistenceException(
+                            SR2.GetString(SR2.UnknownStoredProcResult)
+                        );
                         break;
                 }
 
@@ -927,20 +1068,30 @@ namespace System.ServiceModel.Persistence
                 {
                     if (loadedInstance == null)
                     {
-                        toReturn = new PersistenceException(SR2.GetString(SR2.SerializationFormatMismatch));
+                        toReturn = new PersistenceException(
+                            SR2.GetString(SR2.SerializationFormatMismatch)
+                        );
                     }
                 }
 
                 return toReturn;
             }
 
-            public override void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters)
+            public override void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            )
             {
-                Fx.Assert(additionalParameters != null && additionalParameters.Length == 1,
-                    "Should have had 1 additional parameter.");
+                Fx.Assert(
+                    additionalParameters != null && additionalParameters.Length == 1,
+                    "Should have had 1 additional parameter."
+                );
 
-                Fx.Assert(additionalParameters[0].GetType() == typeof(bool),
-                    "Parameter 0 should have been a boolean.");
+                Fx.Assert(
+                    additionalParameters[0].GetType() == typeof(bool),
+                    "Parameter 0 should have been a boolean."
+                );
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "LoadInstance";
@@ -949,11 +1100,17 @@ namespace System.ServiceModel.Persistence
                 idParameter.Value = id;
                 command.Parameters.Add(idParameter);
 
-                SqlParameter lockInstanceParameter = new SqlParameter("@lockInstance", SqlDbType.Bit);
+                SqlParameter lockInstanceParameter = new SqlParameter(
+                    "@lockInstance",
+                    SqlDbType.Bit
+                );
                 lockInstanceParameter.Value = (bool)additionalParameters[0];
                 command.Parameters.Add(lockInstanceParameter);
 
-                SqlParameter hostIdParameter = new SqlParameter("@hostId", SqlDbType.UniqueIdentifier);
+                SqlParameter hostIdParameter = new SqlParameter(
+                    "@hostId",
+                    SqlDbType.UniqueIdentifier
+                );
                 hostIdParameter.Value = this.provider.hostId;
                 command.Parameters.Add(hostIdParameter);
 
@@ -972,11 +1129,15 @@ namespace System.ServiceModel.Persistence
             SqlPersistenceProviderFactory provider;
             TimeSpan timeout;
 
-            public OpenAsyncResult(SqlPersistenceProviderFactory provider, TimeSpan timeout, AsyncCallback callback, object state)
+            public OpenAsyncResult(
+                SqlPersistenceProviderFactory provider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
-                Fx.Assert(provider != null,
-                    "Provider should never be null.");
+                Fx.Assert(provider != null, "Provider should never be null.");
 
                 this.provider = provider;
                 this.timeout = timeout;
@@ -1004,10 +1165,10 @@ namespace System.ServiceModel.Persistence
                         throw;
                     }
 
-                    completionException =
-                        new PersistenceException(
+                    completionException = new PersistenceException(
                         SR2.GetString(SR2.ErrorOpeningSqlPersistenceProvider),
-                        e);
+                        e
+                    );
                 }
 
                 Complete(false, completionException);
@@ -1017,7 +1178,9 @@ namespace System.ServiceModel.Persistence
         class OperationAsyncResult : AsyncResult
         {
             protected SqlPersistenceProviderFactory provider;
-            static AsyncCallback commandCallback = Fx.ThunkCallback(new AsyncCallback(CommandExecutionComplete));
+            static AsyncCallback commandCallback = Fx.ThunkCallback(
+                new AsyncCallback(CommandExecutionComplete)
+            );
 
             SqlCommand command;
             OperationHandler handler;
@@ -1027,11 +1190,18 @@ namespace System.ServiceModel.Persistence
 
             // We are using virtual methods from the constructor on purpose
             [SuppressMessage("Microsoft.Usage", "CA2214")]
-            public OperationAsyncResult(OperationHandler handler, SqlPersistenceProviderFactory provider, Guid id, TimeSpan timeout, AsyncCallback callback, object state, params object[] additionalParameters)
+            public OperationAsyncResult(
+                OperationHandler handler,
+                SqlPersistenceProviderFactory provider,
+                Guid id,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state,
+                params object[] additionalParameters
+            )
                 : base(callback, state)
             {
-                Fx.Assert(provider != null,
-                    "Provider should never be null.");
+                Fx.Assert(provider != null, "Provider should never be null.");
 
                 this.handler = handler;
                 this.provider = provider;
@@ -1044,13 +1214,18 @@ namespace System.ServiceModel.Persistence
                 }
 
                 TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
-                SqlConnection connection = this.provider.OpenConnection(timeoutHelper.RemainingTime());
+                SqlConnection connection = this.provider.OpenConnection(
+                    timeoutHelper.RemainingTime()
+                );
 
                 bool completeSelf = false;
                 Exception delayedException = null;
                 try
                 {
-                    this.command = this.provider.CreateCommand(connection, timeoutHelper.RemainingTime());
+                    this.command = this.provider.CreateCommand(
+                        connection,
+                        timeoutHelper.RemainingTime()
+                    );
 
                     this.handler.SetupCommand(this.command, this.id, additionalParameters);
 
@@ -1096,7 +1271,13 @@ namespace System.ServiceModel.Persistence
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
                             new PersistenceException(
-                            SR2.GetString(SR2.PersistenceOperationError, this.handler.OperationName), e));
+                                SR2.GetString(
+                                    SR2.PersistenceOperationError,
+                                    this.handler.OperationName
+                                ),
+                                e
+                            )
+                        );
                     }
                 }
 
@@ -1121,7 +1302,9 @@ namespace System.ServiceModel.Persistence
 
             public static object End(IAsyncResult result)
             {
-                OperationAsyncResult operationResult = AsyncResult.End<OperationAsyncResult>(result);
+                OperationAsyncResult operationResult = AsyncResult.End<OperationAsyncResult>(
+                    result
+                );
 
                 return operationResult.Instance;
             }
@@ -1147,9 +1330,13 @@ namespace System.ServiceModel.Persistence
                         throw;
                     }
 
-                    completionException =
-                        new PersistenceException(
-                        SR2.GetString(SR2.PersistenceOperationError, operationResult.handler.OperationName), e);
+                    completionException = new PersistenceException(
+                        SR2.GetString(
+                            SR2.PersistenceOperationError,
+                            operationResult.handler.OperationName
+                        ),
+                        e
+                    );
                 }
                 finally
                 {
@@ -1209,14 +1396,12 @@ namespace System.ServiceModel.Persistence
                 get { return false; }
             }
 
-            public abstract string OperationName
-            { get; }
+            public abstract string OperationName { get; }
 
             public virtual bool ShortcutExecution
             {
                 get { return false; }
             }
-
 
             public virtual object ProcessReader(SqlDataReader reader)
             {
@@ -1225,7 +1410,11 @@ namespace System.ServiceModel.Persistence
 
             public abstract Exception ProcessResult(int resultCode, Guid id, object loadedInstance);
 
-            public abstract void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters);
+            public abstract void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            );
         }
 
         class SqlPersistenceProvider : LockingPersistenceProvider
@@ -1248,34 +1437,74 @@ namespace System.ServiceModel.Persistence
                 get { return TimeSpan.FromSeconds(15); }
             }
 
-            public override IAsyncResult BeginCreate(object instance, TimeSpan timeout, bool unlockInstance, AsyncCallback callback, object state)
+            public override IAsyncResult BeginCreate(
+                object instance,
+                TimeSpan timeout,
+                bool unlockInstance,
+                AsyncCallback callback,
+                object state
+            )
             {
                 base.ThrowIfDisposedOrNotOpen();
-                return this.factory.BeginCreate(this.Id, instance, timeout, unlockInstance, callback, state);
+                return this.factory.BeginCreate(
+                    this.Id,
+                    instance,
+                    timeout,
+                    unlockInstance,
+                    callback,
+                    state
+                );
             }
 
-            public override IAsyncResult BeginDelete(object instance, TimeSpan timeout, AsyncCallback callback, object state)
+            public override IAsyncResult BeginDelete(
+                object instance,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 base.ThrowIfDisposedOrNotOpen();
                 return this.factory.BeginDelete(this.Id, instance, timeout, callback, state);
             }
 
-            public override IAsyncResult BeginLoad(TimeSpan timeout, bool lockInstance, AsyncCallback callback, object state)
+            public override IAsyncResult BeginLoad(
+                TimeSpan timeout,
+                bool lockInstance,
+                AsyncCallback callback,
+                object state
+            )
             {
                 base.ThrowIfDisposedOrNotOpen();
                 return this.factory.BeginLoad(this.Id, timeout, lockInstance, callback, state);
             }
 
-            public override IAsyncResult BeginUnlock(TimeSpan timeout, AsyncCallback callback, object state)
+            public override IAsyncResult BeginUnlock(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 base.ThrowIfDisposedOrNotOpen();
                 return this.factory.BeginUnlock(this.Id, timeout, callback, state);
             }
 
-            public override IAsyncResult BeginUpdate(object instance, TimeSpan timeout, bool unlockInstance, AsyncCallback callback, object state)
+            public override IAsyncResult BeginUpdate(
+                object instance,
+                TimeSpan timeout,
+                bool unlockInstance,
+                AsyncCallback callback,
+                object state
+            )
             {
                 base.ThrowIfDisposedOrNotOpen();
-                return this.factory.BeginUpdate(this.Id, instance, timeout, unlockInstance, callback, state);
+                return this.factory.BeginUpdate(
+                    this.Id,
+                    instance,
+                    timeout,
+                    unlockInstance,
+                    callback,
+                    state
+                );
             }
 
             public override object Create(object instance, TimeSpan timeout, bool unlockInstance)
@@ -1333,23 +1562,27 @@ namespace System.ServiceModel.Persistence
                 return this.factory.Update(this.Id, instance, timeout, unlockInstance);
             }
 
-            protected override void OnAbort()
-            {
-            }
+            protected override void OnAbort() { }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
 
-            protected override IAsyncResult OnBeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginOpen(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 return new CompletedAsyncResult(callback, state);
             }
 
-            protected override void OnClose(TimeSpan timeout)
-            {
-            }
+            protected override void OnClose(TimeSpan timeout) { }
 
             protected override void OnEndClose(IAsyncResult result)
             {
@@ -1361,17 +1594,13 @@ namespace System.ServiceModel.Persistence
                 CompletedAsyncResult.End(result);
             }
 
-            protected override void OnOpen(TimeSpan timeout)
-            {
-            }
+            protected override void OnOpen(TimeSpan timeout) { }
         }
 
         class UnlockHandler : OperationHandler
         {
             public UnlockHandler(SqlPersistenceProviderFactory provider)
-                : base(provider)
-            {
-            }
+                : base(provider) { }
 
             public override string OperationName
             {
@@ -1390,20 +1619,27 @@ namespace System.ServiceModel.Persistence
                     case 0: // Success
                         return null;
                     case 1: // Instance not found
-                        return
-                            new InstanceNotFoundException(id);
+                        return new InstanceNotFoundException(id);
                     case 2: // Could not acquire lock
-                        return new InstanceLockException(id, SR2.GetString(SR2.DidNotOwnLock, id, OperationName));
+                        return new InstanceLockException(
+                            id,
+                            SR2.GetString(SR2.DidNotOwnLock, id, OperationName)
+                        );
                     default:
-                        return
-                            new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
+                        return new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
                 }
             }
 
-            public override void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters)
+            public override void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            )
             {
-                Fx.Assert(additionalParameters == null || additionalParameters.Length == 0,
-                    "There should not be any additional parameters.");
+                Fx.Assert(
+                    additionalParameters == null || additionalParameters.Length == 0,
+                    "There should not be any additional parameters."
+                );
 
                 command.CommandType = CommandType.StoredProcedure;
                 command.CommandText = "UnlockInstance";
@@ -1412,7 +1648,10 @@ namespace System.ServiceModel.Persistence
                 idParameter.Value = id;
                 command.Parameters.Add(idParameter);
 
-                SqlParameter hostIdParameter = new SqlParameter("@hostId", SqlDbType.UniqueIdentifier);
+                SqlParameter hostIdParameter = new SqlParameter(
+                    "@hostId",
+                    SqlDbType.UniqueIdentifier
+                );
                 hostIdParameter.Value = this.provider.hostId;
                 command.Parameters.Add(hostIdParameter);
 
@@ -1429,9 +1668,7 @@ namespace System.ServiceModel.Persistence
         class UpdateHandler : OperationHandler
         {
             public UpdateHandler(SqlPersistenceProviderFactory provider)
-                : base(provider)
-            {
-            }
+                : base(provider) { }
 
             public override string OperationName
             {
@@ -1445,22 +1682,35 @@ namespace System.ServiceModel.Persistence
                     case 0: // Success
                         return null;
                     case 1: // Instance did not exist
-                        return new InstanceNotFoundException(id, SR2.GetString(SR2.InstanceNotFoundForUpdate, id));
+                        return new InstanceNotFoundException(
+                            id,
+                            SR2.GetString(SR2.InstanceNotFoundForUpdate, id)
+                        );
                     case 2: // Did not have lock
-                        return new InstanceLockException(id, SR2.GetString(SR2.DidNotOwnLock, id, OperationName));
+                        return new InstanceLockException(
+                            id,
+                            SR2.GetString(SR2.DidNotOwnLock, id, OperationName)
+                        );
                     default:
-                        return
-                            new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
+                        return new PersistenceException(SR2.GetString(SR2.UnknownStoredProcResult));
                 }
             }
 
-            public override void SetupCommand(SqlCommand command, Guid id, params object[] additionalParameters)
+            public override void SetupCommand(
+                SqlCommand command,
+                Guid id,
+                params object[] additionalParameters
+            )
             {
-                Fx.Assert(additionalParameters != null && additionalParameters.Length == 2,
-                    "Should have had 2 additional parameters.");
+                Fx.Assert(
+                    additionalParameters != null && additionalParameters.Length == 2,
+                    "Should have had 2 additional parameters."
+                );
 
-                Fx.Assert(additionalParameters[1].GetType() == typeof(bool),
-                    "Parameter at index 1 should have been a boolean.");
+                Fx.Assert(
+                    additionalParameters[1].GetType() == typeof(bool),
+                    "Parameter at index 1 should have been a boolean."
+                );
 
                 object instance = additionalParameters[0];
 
@@ -1488,11 +1738,17 @@ namespace System.ServiceModel.Persistence
                 command.Parameters.Add(instanceParameter);
                 command.Parameters.Add(instanceXmlParameter);
 
-                SqlParameter unlockInstanceParameter = new SqlParameter("@unlockInstance", SqlDbType.Bit);
+                SqlParameter unlockInstanceParameter = new SqlParameter(
+                    "@unlockInstance",
+                    SqlDbType.Bit
+                );
                 unlockInstanceParameter.Value = (bool)additionalParameters[1];
                 command.Parameters.Add(unlockInstanceParameter);
 
-                SqlParameter lockOwnerParameter = new SqlParameter("@hostId", SqlDbType.UniqueIdentifier);
+                SqlParameter lockOwnerParameter = new SqlParameter(
+                    "@hostId",
+                    SqlDbType.UniqueIdentifier
+                );
                 lockOwnerParameter.Value = this.provider.hostId;
                 command.Parameters.Add(lockOwnerParameter);
 

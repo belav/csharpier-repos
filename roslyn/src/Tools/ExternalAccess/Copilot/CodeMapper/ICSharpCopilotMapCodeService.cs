@@ -15,5 +15,6 @@ internal interface ICSharpCopilotMapCodeService
         Document document,
         ImmutableArray<string> contents,
         ImmutableArray<(Document document, TextSpan textSpan)> prioritizedFocusLocations,
-        CancellationToken cancellationToken);
+        CancellationToken cancellationToken
+    );
 }

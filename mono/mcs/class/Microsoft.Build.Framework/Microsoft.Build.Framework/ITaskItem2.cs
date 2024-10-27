@@ -13,7 +13,7 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
 //
@@ -32,17 +32,16 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-	[System.Runtime.InteropServices.GuidAttribute ("ac6d5a59-f877-461b-88e3-b2f06fce0cb9")]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public interface ITaskItem2 : ITaskItem
-	{
-		string EvaluatedIncludeEscaped { get; set; }
-		
-		string GetMetadataValueEscaped (string metadataName);
-		
-		void SetMetadataValueLiteral (string metadataName, string metadataValue);
-		
-		IDictionary CloneCustomMetadataEscaped ();
-	}
-}
+    [System.Runtime.InteropServices.GuidAttribute("ac6d5a59-f877-461b-88e3-b2f06fce0cb9")]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public interface ITaskItem2 : ITaskItem
+    {
+        string EvaluatedIncludeEscaped { get; set; }
 
+        string GetMetadataValueEscaped(string metadataName);
+
+        void SetMetadataValueLiteral(string metadataName, string metadataValue);
+
+        IDictionary CloneCustomMetadataEscaped();
+    }
+}

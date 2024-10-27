@@ -23,9 +23,9 @@ using System;
 
 namespace System.DirectoryServices.ActiveDirectory
 {
-	public enum ReplicationSpan
-	{
-		IntraSite,
-		InterSite
-	}
+    public enum ReplicationSpan
+    {
+        IntraSite,
+        InterSite,
+    }
 }

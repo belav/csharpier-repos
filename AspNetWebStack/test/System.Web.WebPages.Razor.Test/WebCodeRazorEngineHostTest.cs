@@ -54,7 +54,10 @@ namespace System.Web.WebPages.Razor.Test
         public void ConstructorWithVirtualAndPhysicalPathSetsDefaultProperties()
         {
             // Act
-            WebCodeRazorHost host = new WebCodeRazorHost("~/Foo/App_Code/Bar/Baz/Qux.cshtml", @"C:\Qux.doodad");
+            WebCodeRazorHost host = new WebCodeRazorHost(
+                "~/Foo/App_Code/Bar/Baz/Qux.cshtml",
+                @"C:\Qux.doodad"
+            );
 
             // Assert
             Assert.Equal("System.Web.WebPages.HelperPage", host.DefaultBaseClass);
@@ -74,7 +77,8 @@ namespace System.Web.WebPages.Razor.Test
                 "TestClass",
                 "TestNamespace",
                 "TestFile.cshtml",
-                shouldGenerateLinePragmas: true);
+                shouldGenerateLinePragmas: true
+            );
 
             // Act
             host.PostProcessGeneratedCode(context);
@@ -88,22 +92,21 @@ namespace System.Web.WebPages.Razor.Test
         {
             // Arrange
             WebCodeRazorHost host = new WebCodeRazorHost("Foo.cshtml");
-            CodeGeneratorContext context =
-                CodeGeneratorContext.Create(
-                    host,
-                    () => new CSharpCodeWriter(),
-                    "TestClass",
-                    "TestNamespace",
-                    "Foo.cshtml",
-                    shouldGenerateLinePragmas: true);
+            CodeGeneratorContext context = CodeGeneratorContext.Create(
+                host,
+                () => new CSharpCodeWriter(),
+                "TestClass",
+                "TestNamespace",
+                "Foo.cshtml",
+                shouldGenerateLinePragmas: true
+            );
 
             // Act
             host.PostProcessGeneratedCode(context);
 
             // Assert
-            CodeMemberProperty appInstance = context.GeneratedClass
-                .Members
-                .OfType<CodeMemberProperty>()
+            CodeMemberProperty appInstance = context
+                .GeneratedClass.Members.OfType<CodeMemberProperty>()
                 .Where(p => p.Name.Equals("ApplicationInstance"))
                 .SingleOrDefault();
             Assert.NotNull(appInstance);

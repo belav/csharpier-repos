@@ -19,7 +19,16 @@ namespace System.IO.Pipelines.Tests
         public BufferSegmentPoolTest()
         {
             _pool = new TestMemoryPool();
-            _pipe = new Pipe(new PipeOptions(_pool, readerScheduler: PipeScheduler.Inline, writerScheduler: PipeScheduler.Inline, pauseWriterThreshold: 0, resumeWriterThreshold: 0, useSynchronizationContext: false));
+            _pipe = new Pipe(
+                new PipeOptions(
+                    _pool,
+                    readerScheduler: PipeScheduler.Inline,
+                    writerScheduler: PipeScheduler.Inline,
+                    pauseWriterThreshold: 0,
+                    resumeWriterThreshold: 0,
+                    useSynchronizationContext: false
+                )
+            );
         }
 
         public void Dispose()
@@ -97,7 +106,10 @@ namespace System.IO.Pipelines.Tests
             // Assert Pipe.MaxSegmentPoolSize pooled segments
             for (int i = 0; i < PipeOptions.Default.MaxSegmentPoolSize; i++)
             {
-                Assert.Same(oldSegments[i], newSegments[PipeOptions.Default.MaxSegmentPoolSize - i - 1]);
+                Assert.Same(
+                    oldSegments[i],
+                    newSegments[PipeOptions.Default.MaxSegmentPoolSize - i - 1]
+                );
             }
 
             // The last segment shouldn't exist in the new list of segments at all (it should be new)
@@ -107,11 +119,12 @@ namespace System.IO.Pipelines.Tests
         private static List<ReadOnlySequenceSegment<byte>> GetSegments(ReadResult result)
         {
             SequenceMarshal.TryGetReadOnlySequenceSegment(
-                           result.Buffer,
-                           out ReadOnlySequenceSegment<byte> start,
-                           out int startIndex,
-                           out ReadOnlySequenceSegment<byte> end,
-                           out int endIndex);
+                result.Buffer,
+                out ReadOnlySequenceSegment<byte> start,
+                out int startIndex,
+                out ReadOnlySequenceSegment<byte> end,
+                out int endIndex
+            );
 
             var segments = new List<ReadOnlySequenceSegment<byte>>();
 

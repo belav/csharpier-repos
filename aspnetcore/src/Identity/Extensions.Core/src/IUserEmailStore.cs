@@ -10,7 +10,8 @@ namespace Microsoft.AspNetCore.Identity;
 /// Provides an abstraction for the storage and management of user email addresses.
 /// </summary>
 /// <typeparam name="TUser">The type encapsulating a user.</typeparam>
-public interface IUserEmailStore<TUser> : IUserStore<TUser> where TUser : class
+public interface IUserEmailStore<TUser> : IUserStore<TUser>
+    where TUser : class
 {
     /// <summary>
     /// Sets the <paramref name="email"/> address for a <paramref name="user"/>.
@@ -77,5 +78,9 @@ public interface IUserEmailStore<TUser> : IUserStore<TUser> where TUser : class
     /// <param name="normalizedEmail">The normalized email to set for the specified <paramref name="user"/>.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The task object representing the asynchronous operation.</returns>
-    Task SetNormalizedEmailAsync(TUser user, string? normalizedEmail, CancellationToken cancellationToken);
+    Task SetNormalizedEmailAsync(
+        TUser user,
+        string? normalizedEmail,
+        CancellationToken cancellationToken
+    );
 }

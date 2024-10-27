@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,94 +28,92 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.CodeDom;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.CodeDom {
+namespace MonoCasTests.System.CodeDom
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class CodeDirectiveCollectionCas
+    {
+        private CodeDirective cd;
+        private CodeDirective[] array;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class CodeDirectiveCollectionCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            cd = new CodeDirective();
+            array = new CodeDirective[1] { cd };
+        }
 
-		private CodeDirective cd;
-		private CodeDirective[] array;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			cd = new CodeDirective ();
-			array = new CodeDirective[1] { cd };
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor0_Deny_Unrestricted()
+        {
+            CodeDirectiveCollection coll = new CodeDirectiveCollection();
+            Assert.AreEqual(0, coll.Add(cd), "Add");
+            Assert.AreSame(cd, coll[0], "this[int]");
+            coll.CopyTo(array, 0);
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cd), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cd), "IndexOf");
+            coll.Insert(0, cd);
+            coll.Remove(cd);
+        }
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor1_Deny_Unrestricted()
+        {
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(array);
+            coll.CopyTo(array, 0);
+            Assert.AreEqual(1, coll.Add(cd), "Add");
+            Assert.AreSame(cd, coll[0], "this[int]");
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cd), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cd), "IndexOf");
+            coll.Insert(0, cd);
+            coll.Remove(cd);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor0_Deny_Unrestricted ()
-		{
-			CodeDirectiveCollection coll = new CodeDirectiveCollection ();
-			Assert.AreEqual (0, coll.Add (cd), "Add");
-			Assert.AreSame (cd, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cd), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cd), "IndexOf");
-			coll.Insert (0, cd);
-			coll.Remove (cd);
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor2_Deny_Unrestricted()
+        {
+            CodeDirectiveCollection c = new CodeDirectiveCollection();
+            CodeDirectiveCollection coll = new CodeDirectiveCollection(c);
+            Assert.AreEqual(0, coll.Add(cd), "Add");
+            Assert.AreSame(cd, coll[0], "this[int]");
+            coll.CopyTo(array, 0);
+            coll.AddRange(array);
+            coll.AddRange(coll);
+            Assert.IsTrue(coll.Contains(cd), "Contains");
+            Assert.AreEqual(0, coll.IndexOf(cd), "IndexOf");
+            coll.Insert(0, cd);
+            coll.Remove(cd);
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor1_Deny_Unrestricted ()
-		{
-			CodeDirectiveCollection coll = new CodeDirectiveCollection (array);
-			coll.CopyTo (array, 0);
-			Assert.AreEqual (1, coll.Add (cd), "Add");
-			Assert.AreSame (cd, coll[0], "this[int]");
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cd), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cd), "IndexOf");
-			coll.Insert (0, cd);
-			coll.Remove (cd);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor2_Deny_Unrestricted ()
-		{
-			CodeDirectiveCollection c = new CodeDirectiveCollection ();
-			CodeDirectiveCollection coll = new CodeDirectiveCollection (c);
-			Assert.AreEqual (0, coll.Add (cd), "Add");
-			Assert.AreSame (cd, coll[0], "this[int]");
-			coll.CopyTo (array, 0);
-			coll.AddRange (array);
-			coll.AddRange (coll);
-			Assert.IsTrue (coll.Contains (cd), "Contains");
-			Assert.AreEqual (0, coll.IndexOf (cd), "IndexOf");
-			coll.Insert (0, cd);
-			coll.Remove (cd);
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			ConstructorInfo ci = typeof (CodeDirectiveCollection).GetConstructor (new Type[0]);
-			Assert.IsNotNull (ci, "default .ctor");
-			Assert.IsNotNull (ci.Invoke (null), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            ConstructorInfo ci = typeof(CodeDirectiveCollection).GetConstructor(new Type[0]);
+            Assert.IsNotNull(ci, "default .ctor");
+            Assert.IsNotNull(ci.Invoke(null), "invoke");
+        }
+    }
 }
-

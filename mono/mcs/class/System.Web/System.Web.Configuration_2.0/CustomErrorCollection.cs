@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,110 +29,126 @@
 //
 
 using System;
-using System.Configuration;
 using System.Collections;
+using System.Configuration;
 
+namespace System.Web.Configuration
+{
+    [ConfigurationCollection(
+        typeof(CustomError),
+        AddItemName = "error",
+        CollectionType = ConfigurationElementCollectionType.BasicMap
+    )]
+    public sealed class CustomErrorCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-namespace System.Web.Configuration {
+        static CustomErrorCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-	[ConfigurationCollection (typeof (CustomError), AddItemName = "error", CollectionType = ConfigurationElementCollectionType.BasicMap)]
-	public sealed class CustomErrorCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+        public void Add(CustomError customError)
+        {
+            BaseAdd(customError);
+        }
 
-		static CustomErrorCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		public void Add (CustomError customError)
-		{
-			BaseAdd (customError);
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new CustomError();
+        }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((CustomError)element).StatusCode.ToString();
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new CustomError ();
-		}
+        public string GetKey(int index)
+        {
+            return (string)BaseGetKey(index);
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((CustomError)element).StatusCode.ToString();
-		}
+        public CustomError Get(string statusCode)
+        {
+            return (CustomError)BaseGet(statusCode);
+        }
 
-		public string GetKey (int index)
-		{
-			return (string)BaseGetKey (index);
-		}
+        public CustomError Get(int index)
+        {
+            return (CustomError)BaseGet(index);
+        }
 
-		public CustomError Get (string statusCode)
-		{
-			return (CustomError)BaseGet (statusCode);
-		}
+        public void Remove(string statusCode)
+        {
+            BaseRemove(statusCode);
+        }
 
-		public CustomError Get (int index)
-		{
-			return (CustomError)BaseGet (index);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		public void Remove (string statusCode)
-		{
-			BaseRemove (statusCode);
-		}
+        public void Set(CustomError customError)
+        {
+            CustomError existing = Get(customError.StatusCode.ToString());
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+            if (existing == null)
+            {
+                Add(customError);
+            }
+            else
+            {
+                int index = BaseIndexOf(existing);
+                RemoveAt(index);
+                BaseAdd(index, customError);
+            }
+        }
 
-		public void Set (CustomError customError)
-		{
-			CustomError existing = Get (customError.StatusCode.ToString());
+        public string[] AllKeys
+        {
+            get
+            {
+                string[] keys = new string[Count];
+                for (int i = 0; i < Count; i++)
+                    keys[i] = this[i].StatusCode.ToString();
+                return keys;
+            }
+        }
 
-			if (existing == null) {
-				Add (customError);
-			}
-			else {
-				int index = BaseIndexOf (existing);
-				RemoveAt (index);
-				BaseAdd (index, customError);
-			}
-		}
+        public override ConfigurationElementCollectionType CollectionType
+        {
+            get { return ConfigurationElementCollectionType.BasicMap; }
+        }
 
-		public string[] AllKeys {
-			get {
-				string[] keys = new string[Count];
-				for (int i = 0; i < Count; i ++)
-					keys[i] = this[i].StatusCode.ToString();
-				return keys;
-			}
-		}
+        protected override string ElementName
+        {
+            get { return "error"; }
+        }
 
-		public override ConfigurationElementCollectionType CollectionType {
-			get { return ConfigurationElementCollectionType.BasicMap; }
-		}
+        public CustomError this[int index]
+        {
+            get { return (CustomError)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    RemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
 
-		protected override string ElementName {
-			get { return "error"; }
-		}
+        public new CustomError this[string statusCode]
+        {
+            get { return (CustomError)BaseGet(statusCode); }
+        }
 
-		public CustomError this [int index] {
-			get { return (CustomError)BaseGet (index); }
-			set { if (BaseGet (index) != null) RemoveAt (index); BaseAdd (index, value); }
-		}
-
-		public new CustomError this [string statusCode] {
-			get { return (CustomError)BaseGet (statusCode); }
-		}
-
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
-

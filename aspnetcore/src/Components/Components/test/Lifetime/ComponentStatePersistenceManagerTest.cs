@@ -22,10 +22,12 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 0, 1, 2, 3, 4 };
         var state = new Dictionary<string, byte[]>
         {
-            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(data)
+            ["MyState"] = JsonSerializer.SerializeToUtf8Bytes(data),
         };
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
 
         // Act
         await lifetime.RestoreStateAsync(store);
@@ -40,17 +42,18 @@ public class ComponentStatePersistenceManagerTest
     public async Task RestoreStateAsync_ThrowsOnDoubleInitialization()
     {
         // Arrange
-        var state = new Dictionary<string, byte[]>
-        {
-            ["MyState"] = [0, 1, 2, 3, 4]
-        };
+        var state = new Dictionary<string, byte[]> { ["MyState"] = [0, 1, 2, 3, 4] };
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
 
         await lifetime.RestoreStateAsync(store);
 
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => lifetime.RestoreStateAsync(store));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => lifetime.RestoreStateAsync(store)
+        );
     }
 
     [Fact]
@@ -59,7 +62,9 @@ public class ComponentStatePersistenceManagerTest
         // Arrange
         var state = new Dictionary<string, byte[]>();
         var store = new CompositeTestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
 
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
@@ -72,7 +77,9 @@ public class ComponentStatePersistenceManagerTest
 
         // Act
         // Assert
-        await Assert.ThrowsAsync<InvalidOperationException>(() => lifetime.PersistStateAsync(store, renderer));
+        await Assert.ThrowsAsync<InvalidOperationException>(
+            () => lifetime.PersistStateAsync(store, renderer)
+        );
     }
 
     [Fact]
@@ -81,16 +88,21 @@ public class ComponentStatePersistenceManagerTest
         // Arrange
         var state = new Dictionary<string, byte[]>();
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
 
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
 
-        lifetime.State.RegisterOnPersisting(() =>
-        {
-            lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
-            return Task.CompletedTask;
-        }, new TestRenderMode());
+        lifetime.State.RegisterOnPersisting(
+            () =>
+            {
+                lifetime.State.PersistAsJson("MyState", new byte[] { 1, 2, 3, 4 });
+                return Task.CompletedTask;
+            },
+            new TestRenderMode()
+        );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -106,12 +118,21 @@ public class ComponentStatePersistenceManagerTest
         // Arrange
         var state = new Dictionary<string, byte[]>();
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
         var renderer = new TestRenderer();
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime.State.RegisterOnPersisting(() => { invoked = true; return default; }, new TestRenderMode());
+        lifetime.State.RegisterOnPersisting(
+            () =>
+            {
+                invoked = true;
+                return default;
+            },
+            new TestRenderMode()
+        );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -126,7 +147,9 @@ public class ComponentStatePersistenceManagerTest
         // Arrange
         var state = new Dictionary<string, byte[]>();
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
         var renderer = new TestRenderer();
 
         var sequence = new List<int> { };
@@ -134,8 +157,24 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        lifetime.State.RegisterOnPersisting(async () => { sequence.Add(1); await tcs.Task; sequence.Add(3); }, new TestRenderMode());
-        lifetime.State.RegisterOnPersisting(async () => { sequence.Add(2); await tcs2.Task; sequence.Add(4); }, new TestRenderMode());
+        lifetime.State.RegisterOnPersisting(
+            async () =>
+            {
+                sequence.Add(1);
+                await tcs.Task;
+                sequence.Add(3);
+            },
+            new TestRenderMode()
+        );
+        lifetime.State.RegisterOnPersisting(
+            async () =>
+            {
+                sequence.Add(2);
+                await tcs2.Task;
+                sequence.Add(4);
+            },
+            new TestRenderMode()
+        );
 
         // Act
         var persistTask = lifetime.PersistStateAsync(store, renderer);
@@ -154,7 +193,9 @@ public class ComponentStatePersistenceManagerTest
         // Arrange
         var state = new Dictionary<string, byte[]>();
         var store = new TestStore(state);
-        var lifetime = new ComponentStatePersistenceManager(NullLogger<ComponentStatePersistenceManager>.Instance);
+        var lifetime = new ComponentStatePersistenceManager(
+            NullLogger<ComponentStatePersistenceManager>.Instance
+        );
         var renderer = new TestRenderer();
 
         var sequence = new List<int> { };
@@ -162,8 +203,18 @@ public class ComponentStatePersistenceManagerTest
         var tcs = new TaskCompletionSource();
         var tcs2 = new TaskCompletionSource();
 
-        var subscription1 = lifetime.State.RegisterOnPersisting(async () => { sequence.Add(1); await tcs.Task; sequence.Add(3); });
-        var subscription2 = lifetime.State.RegisterOnPersisting(async () => { sequence.Add(2); await tcs2.Task; sequence.Add(4); });
+        var subscription1 = lifetime.State.RegisterOnPersisting(async () =>
+        {
+            sequence.Add(1);
+            await tcs.Task;
+            sequence.Add(3);
+        });
+        var subscription2 = lifetime.State.RegisterOnPersisting(async () =>
+        {
+            sequence.Add(2);
+            await tcs2.Task;
+            sequence.Add(4);
+        });
 
         // Act
         subscription1.Dispose();
@@ -193,8 +244,18 @@ public class ComponentStatePersistenceManagerTest
         var data = new byte[] { 1, 2, 3, 4 };
         var invoked = false;
 
-        lifetime.State.RegisterOnPersisting(() => throw new InvalidOperationException(), new TestRenderMode());
-        lifetime.State.RegisterOnPersisting(() => { invoked = true; return Task.CompletedTask; }, new TestRenderMode());
+        lifetime.State.RegisterOnPersisting(
+            () => throw new InvalidOperationException(),
+            new TestRenderMode()
+        );
+        lifetime.State.RegisterOnPersisting(
+            () =>
+            {
+                invoked = true;
+                return Task.CompletedTask;
+            },
+            new TestRenderMode()
+        );
 
         // Act
         await lifetime.PersistStateAsync(store, renderer);
@@ -219,8 +280,22 @@ public class ComponentStatePersistenceManagerTest
         var invoked = false;
         var tcs = new TaskCompletionSource();
 
-        lifetime.State.RegisterOnPersisting(async () => { await tcs.Task; throw new InvalidOperationException(); }, new TestRenderMode());
-        lifetime.State.RegisterOnPersisting(() => { invoked = true; return Task.CompletedTask; }, new TestRenderMode());
+        lifetime.State.RegisterOnPersisting(
+            async () =>
+            {
+                await tcs.Task;
+                throw new InvalidOperationException();
+            },
+            new TestRenderMode()
+        );
+        lifetime.State.RegisterOnPersisting(
+            () =>
+            {
+                invoked = true;
+                return Task.CompletedTask;
+            },
+            new TestRenderMode()
+        );
 
         // Act
         var persistTask = lifetime.PersistStateAsync(store, renderer);
@@ -236,9 +311,8 @@ public class ComponentStatePersistenceManagerTest
 
     private class TestRenderer : Renderer
     {
-        public TestRenderer() : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance)
-        {
-        }
+        public TestRenderer()
+            : base(new ServiceCollection().BuildServiceProvider(), NullLoggerFactory.Instance) { }
 
         private readonly Dispatcher _dispatcher = Dispatcher.CreateDefault();
 
@@ -277,7 +351,9 @@ public class ComponentStatePersistenceManagerTest
         }
     }
 
-    private class CompositeTestStore : IPersistentComponentStateStore,  IEnumerable<IPersistentComponentStateStore>
+    private class CompositeTestStore
+        : IPersistentComponentStateStore,
+            IEnumerable<IPersistentComponentStateStore>
     {
         public CompositeTestStore(IDictionary<string, byte[]> initialState)
         {
@@ -310,8 +386,5 @@ public class ComponentStatePersistenceManagerTest
         }
     }
 
-    private class TestRenderMode : IComponentRenderMode
-    {
-
-    }
+    private class TestRenderMode : IComponentRenderMode { }
 }

@@ -16,13 +16,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public class CSharpEncapsulateField : AbstractEditorTest
     {
         public CSharpEncapsulateField()
-            : base(nameof(CSharpEncapsulateField))
-        {
-        }
+            : base(nameof(CSharpEncapsulateField)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
-        private const string TestSource = @"
+        private const string TestSource =
+            @"
 namespace myNamespace
 {
     class Program
@@ -42,13 +41,31 @@ namespace myNamespace
             var encapsulateField = TestServices.EncapsulateField;
             var dialog = TestServices.PreviewChangesDialog;
             await encapsulateField.InvokeAsync(HangMitigatingCancellationToken);
-            await dialog.VerifyOpenAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.ClickCancelAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.VerifyClosedAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
+            await dialog.VerifyOpenAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.ClickCancelAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.VerifyClosedAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
             await encapsulateField.InvokeAsync(HangMitigatingCancellationToken);
-            await dialog.VerifyOpenAsync(encapsulateField.DialogName, HangMitigatingCancellationToken);
-            await dialog.ClickApplyAndWaitForFeatureAsync(encapsulateField.DialogName, FeatureAttribute.EncapsulateField, HangMitigatingCancellationToken);
-            await TestServices.EditorVerifier.TextContainsAsync("public static int? Param { get => param; set => param = value; }");
+            await dialog.VerifyOpenAsync(
+                encapsulateField.DialogName,
+                HangMitigatingCancellationToken
+            );
+            await dialog.ClickApplyAndWaitForFeatureAsync(
+                encapsulateField.DialogName,
+                FeatureAttribute.EncapsulateField,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.EditorVerifier.TextContainsAsync(
+                "public static int? Param { get => param; set => param = value; }"
+            );
         }
 
         [IdeFact]
@@ -58,13 +75,25 @@ namespace myNamespace
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using (var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(HangMitigatingCancellationToken))
+            await using (
+                var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices.EditorVerifier.CodeActionAsync("Encapsulate field: 'param' (and use property)", applyFix: true, blockUntilComplete: true, cancellationToken: HangMitigatingCancellationToken);
+                await TestServices.Editor.InvokeCodeActionListAsync(
+                    HangMitigatingCancellationToken
+                );
+                await TestServices.EditorVerifier.CodeActionAsync(
+                    "Encapsulate field: 'param' (and use property)",
+                    applyFix: true,
+                    blockUntilComplete: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             }
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 namespace myNamespace
 {
     class Program
@@ -78,7 +107,9 @@ namespace myNamespace
             Param = 80;
         }
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
@@ -88,13 +119,25 @@ namespace myNamespace
 
             // Suspend file change notification during code action application, since spurious file change notifications
             // can cause silent failure to apply the code action if they occur within this block.
-            await using (var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(HangMitigatingCancellationToken))
+            await using (
+                var fileChangeRestorer = await TestServices.Shell.PauseFileChangesAsync(
+                    HangMitigatingCancellationToken
+                )
+            )
             {
-                await TestServices.Editor.InvokeCodeActionListAsync(HangMitigatingCancellationToken);
-                await TestServices.EditorVerifier.CodeActionAsync("Encapsulate field: 'param' (but still use field)", applyFix: true, blockUntilComplete: true, cancellationToken: HangMitigatingCancellationToken);
+                await TestServices.Editor.InvokeCodeActionListAsync(
+                    HangMitigatingCancellationToken
+                );
+                await TestServices.EditorVerifier.CodeActionAsync(
+                    "Encapsulate field: 'param' (but still use field)",
+                    applyFix: true,
+                    blockUntilComplete: true,
+                    cancellationToken: HangMitigatingCancellationToken
+                );
             }
 
-            await TestServices.EditorVerifier.TextContainsAsync(@"
+            await TestServices.EditorVerifier.TextContainsAsync(
+                @"
 namespace myNamespace
 {
     class Program
@@ -108,7 +151,9 @@ namespace myNamespace
             param = 80;
         }
     }
-}", cancellationToken: HangMitigatingCancellationToken);
+}",
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

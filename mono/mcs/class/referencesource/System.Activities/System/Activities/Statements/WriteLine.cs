@@ -5,49 +5,44 @@
 namespace System.Activities.Statements
 {
     using System;
+    using System.Activities.Validation;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.IO;
     using System.Runtime;
-    using System.Activities.Validation;
-    using System.Collections.Generic;
     using System.Windows.Markup;
-    using System.Collections.ObjectModel;
 
     [ContentProperty("Text")]
     public sealed class WriteLine : CodeActivity
     {
-        public WriteLine()
-        {
-        }
+        public WriteLine() { }
 
         [DefaultValue(null)]
-        public InArgument<TextWriter> TextWriter 
-        {
-            get;
-            set;
-        }
+        public InArgument<TextWriter> TextWriter { get; set; }
 
         [DefaultValue(null)]
-        public InArgument<string> Text 
-        {
-            get;
-            set;
-        }
+        public InArgument<string> Text { get; set; }
 
         protected override void CacheMetadata(CodeActivityMetadata metadata)
         {
-            RuntimeArgument textArgument = new RuntimeArgument("Text", typeof(string), ArgumentDirection.In);
+            RuntimeArgument textArgument = new RuntimeArgument(
+                "Text",
+                typeof(string),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.Text, textArgument);
 
-            RuntimeArgument textWriterArgument = new RuntimeArgument("TextWriter", typeof(TextWriter), ArgumentDirection.In);
+            RuntimeArgument textWriterArgument = new RuntimeArgument(
+                "TextWriter",
+                typeof(TextWriter),
+                ArgumentDirection.In
+            );
             metadata.Bind(this.TextWriter, textWriterArgument);
 
             metadata.SetArgumentsCollection(
-                new Collection<RuntimeArgument>
-                {
-                    textArgument,
-                    textWriterArgument
-                });
+                new Collection<RuntimeArgument> { textArgument, textWriterArgument }
+            );
         }
 
         protected override void Execute(CodeActivityContext context)

@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
+using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
+using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
 using static System.Runtime.Intrinsics.X86.Avx;
 using static System.Runtime.Intrinsics.X86.Avx2;
-using System.Runtime.Intrinsics;
-using System.Runtime.CompilerServices;
-using System;
 
 internal class Scene
 {
@@ -16,7 +16,12 @@ internal class Scene
     public LightPacket256[] Lights;
     public Camera Camera;
 
-    public Scene(ObjectPacket256[] things, LightPacket256[] lights, Camera camera) { Things = things; Lights = lights; Camera = camera; }
+    public Scene(ObjectPacket256[] things, LightPacket256[] lights, Camera camera)
+    {
+        Things = things;
+        Lights = lights;
+        Camera = camera;
+    }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
     public VectorPacket256 Normals(Vector256<int> things, VectorPacket256 pos)
@@ -46,5 +51,4 @@ internal class Scene
         }
         return rfl;
     }
-
 }

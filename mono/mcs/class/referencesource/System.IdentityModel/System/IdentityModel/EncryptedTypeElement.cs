@@ -101,7 +101,6 @@ namespace System.IdentityModel
 
                 _keyInfo.KeyIdentifier = value;
             }
-
         }
 
         public abstract void ReadExtensions(XmlDictionaryReader reader);
@@ -124,7 +123,6 @@ namespace System.IdentityModel
                 _type = value;
             }
         }
-
 
         /// <summary>
         /// Reads an "EncryptedType" xmlfragment
@@ -149,18 +147,28 @@ namespace System.IdentityModel
             reader.MoveToContent();
 
             // <EncryptedMethod>? 0 - 1
-            if (reader.IsStartElement(XmlEncryptionConstants.Elements.EncryptionMethod, XmlEncryptionConstants.Namespace))
+            if (
+                reader.IsStartElement(
+                    XmlEncryptionConstants.Elements.EncryptionMethod,
+                    XmlEncryptionConstants.Namespace
+                )
+            )
             {
                 _encryptionMethod.ReadXml(reader);
             }
 
             // <KeyInfo>? 0 - 1
             reader.MoveToContent();
-            if (reader.IsStartElement(XD.XmlSignatureDictionary.KeyInfo.Value, XD.XmlSignatureDictionary.Namespace.Value))
+            if (
+                reader.IsStartElement(
+                    XD.XmlSignatureDictionary.KeyInfo.Value,
+                    XD.XmlSignatureDictionary.Namespace.Value
+                )
+            )
             {
                 _keyInfo = new KeyInfo(_keyInfoSerializer);
 
-                // if there is a keyInfo, we need to reset the default which is 
+                // if there is a keyInfo, we need to reset the default which is
                 // contains a single EmptyKeyInfoClause
                 if (_keyInfoSerializer.CanReadKeyIdentifier(reader))
                 {

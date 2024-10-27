@@ -11,7 +11,7 @@ namespace System.Diagnostics.PerformanceData
         /// <summary>
         /// Single means that at any time CounterSet should only have at most 1 active instance.
         /// </summary>
-        Single = 0,          // PERF_COUNTERSET_SINGLE_INSTANCE
+        Single = 0, // PERF_COUNTERSET_SINGLE_INSTANCE
 
         /// <summary>
         /// Multiple means that CounterSet could have multiple active instances.
@@ -41,6 +41,8 @@ namespace System.Diagnostics.PerformanceData
         /// InstanceAggregate only exists in Longhonr Server. Counter consumption applications aggregate raw
         /// counter data for active instances with the same instance name.
         /// </summary>
-        InstanceAggregate = 0x00000016  // PERF_COUNTERSET_INSTANCE_AGGREGATE
+        InstanceAggregate =
+            0x00000016 // PERF_COUNTERSET_INSTANCE_AGGREGATE
+        ,
     }
 }

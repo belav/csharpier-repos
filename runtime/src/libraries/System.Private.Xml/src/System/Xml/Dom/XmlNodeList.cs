@@ -20,7 +20,10 @@ namespace System.Xml
 
         // Retrieves a node at the given index.
         [System.Runtime.CompilerServices.IndexerName("ItemOf")]
-        public virtual XmlNode? this[int i] { get { return Item(i); } }
+        public virtual XmlNode? this[int i]
+        {
+            get { return Item(i); }
+        }
 
         void IDisposable.Dispose()
         {

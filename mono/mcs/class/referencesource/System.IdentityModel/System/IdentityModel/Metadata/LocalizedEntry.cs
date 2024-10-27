@@ -16,9 +16,7 @@ namespace System.IdentityModel.Metadata
         /// Empty constructor.
         /// </summary>
         protected LocalizedEntry()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         /// <summary>
         /// Constructor that uses a <see cref="CultureInfo"/>.

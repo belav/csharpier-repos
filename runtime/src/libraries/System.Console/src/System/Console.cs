@@ -20,13 +20,15 @@ namespace System
         // in particular when input is redirected and data may be consumed from a larger source. This 4K default size is the
         // same as is currently used by most other environments/languages tried.
         internal const int ReadBufferSize = 4096;
+
         // There's no visible functional impact to the write buffer size, and as we auto flush on every write,
         // there's little benefit to having a large buffer.  So we use a smaller buffer size to reduce working set.
         private const int WriteBufferSize = 256;
 
         private static readonly object s_syncObject = new object();
         private static TextReader? s_in;
-        private static TextWriter? s_out, s_error;
+        private static TextWriter? s_out,
+            s_error;
         private static Encoding? s_inputEncoding;
         private static Encoding? s_outputEncoding;
         private static bool s_isOutTextWriterRedirected;
@@ -159,7 +161,9 @@ namespace System
             {
                 if (IsInputRedirected)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_ConsoleKeyAvailableOnFile);
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_ConsoleKeyAvailableOnFile
+                    );
                 }
 
                 return ConsolePal.KeyAvailable;
@@ -205,7 +209,10 @@ namespace System
                     {
                         if (s_out == null)
                         {
-                            Volatile.Write(ref s_out, CreateOutputWriter(ConsolePal.OpenStandardOutput()));
+                            Volatile.Write(
+                                ref s_out,
+                                CreateOutputWriter(ConsolePal.OpenStandardOutput())
+                            );
                         }
                         return s_out;
                     }
@@ -225,7 +232,10 @@ namespace System
                     {
                         if (s_error == null)
                         {
-                            Volatile.Write(ref s_error, CreateOutputWriter(ConsolePal.OpenStandardError()));
+                            Volatile.Write(
+                                ref s_error,
+                                CreateOutputWriter(ConsolePal.OpenStandardError())
+                            );
                         }
                         return s_error;
                     }
@@ -235,16 +245,19 @@ namespace System
 
         private static TextWriter CreateOutputWriter(Stream outputStream)
         {
-            return outputStream == Stream.Null ?
-                TextWriter.Null :
-                TextWriter.Synchronized(new StreamWriter(
-                    stream: outputStream,
-                    encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
-                    bufferSize: WriteBufferSize,
-                    leaveOpen: true)
+            return outputStream == Stream.Null
+                ? TextWriter.Null
+                : TextWriter.Synchronized(
+                    new StreamWriter(
+                        stream: outputStream,
+                        encoding: OutputEncoding.RemovePreamble(), // This ensures no prefix is written to the stream.
+                        bufferSize: WriteBufferSize,
+                        leaveOpen: true
+                    )
                     {
-                        AutoFlush = true
-                    });
+                        AutoFlush = true,
+                    }
+                );
         }
 
         private static StrongBox<bool>? _isStdInRedirected;
@@ -255,12 +268,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdInRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdInRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdInRedirected, new StrongBox<bool>(ConsolePal.IsInputRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdInRedirected,
+                        new StrongBox<bool>(ConsolePal.IsInputRedirectedCore())
+                    );
                     return _isStdInRedirected;
                 }
             }
@@ -270,12 +287,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdOutRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdOutRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdOutRedirected, new StrongBox<bool>(ConsolePal.IsOutputRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdOutRedirected,
+                        new StrongBox<bool>(ConsolePal.IsOutputRedirectedCore())
+                    );
                     return _isStdOutRedirected;
                 }
             }
@@ -285,12 +306,16 @@ namespace System
         {
             get
             {
-                StrongBox<bool> redirected = Volatile.Read(ref _isStdErrRedirected) ?? EnsureInitialized();
+                StrongBox<bool> redirected =
+                    Volatile.Read(ref _isStdErrRedirected) ?? EnsureInitialized();
                 return redirected.Value;
 
                 static StrongBox<bool> EnsureInitialized()
                 {
-                    Volatile.Write(ref _isStdErrRedirected, new StrongBox<bool>(ConsolePal.IsErrorRedirectedCore()));
+                    Volatile.Write(
+                        ref _isStdErrRedirected,
+                        new StrongBox<bool>(ConsolePal.IsErrorRedirectedCore())
+                    );
                     return _isStdErrRedirected;
                 }
             }
@@ -526,10 +551,7 @@ namespace System
             [UnsupportedOSPlatform("browser")]
             [UnsupportedOSPlatform("ios")]
             [UnsupportedOSPlatform("tvos")]
-            set
-            {
-                ConsolePal.Title = value ?? throw new ArgumentNullException(nameof(value));
-            }
+            set { ConsolePal.Title = value ?? throw new ArgumentNullException(nameof(value)); }
         }
 
         [UnsupportedOSPlatform("android")]
@@ -548,15 +570,52 @@ namespace System
         }
 
         [SupportedOSPlatform("windows")]
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop
+        )
         {
-            ConsolePal.MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, ' ', ConsoleColor.Black, BackgroundColor);
+            ConsolePal.MoveBufferArea(
+                sourceLeft,
+                sourceTop,
+                sourceWidth,
+                sourceHeight,
+                targetLeft,
+                targetTop,
+                ' ',
+                ConsoleColor.Black,
+                BackgroundColor
+            );
         }
 
         [SupportedOSPlatform("windows")]
-        public static void MoveBufferArea(int sourceLeft, int sourceTop, int sourceWidth, int sourceHeight, int targetLeft, int targetTop, char sourceChar, ConsoleColor sourceForeColor, ConsoleColor sourceBackColor)
+        public static void MoveBufferArea(
+            int sourceLeft,
+            int sourceTop,
+            int sourceWidth,
+            int sourceHeight,
+            int targetLeft,
+            int targetTop,
+            char sourceChar,
+            ConsoleColor sourceForeColor,
+            ConsoleColor sourceBackColor
+        )
         {
-            ConsolePal.MoveBufferArea(sourceLeft, sourceTop, sourceWidth, sourceHeight, targetLeft, targetTop, sourceChar, sourceForeColor, sourceBackColor);
+            ConsolePal.MoveBufferArea(
+                sourceLeft,
+                sourceTop,
+                sourceWidth,
+                sourceHeight,
+                targetLeft,
+                targetTop,
+                sourceChar,
+                sourceForeColor,
+                sourceBackColor
+            );
         }
 
         [UnsupportedOSPlatform("android")]
@@ -575,9 +634,17 @@ namespace System
         {
             // Basic argument validation.  The PAL implementation may provide further validation.
             if (left < 0 || left >= short.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(left), left, SR.ArgumentOutOfRange_ConsoleBufferBoundaries);
+                throw new ArgumentOutOfRangeException(
+                    nameof(left),
+                    left,
+                    SR.ArgumentOutOfRange_ConsoleBufferBoundaries
+                );
             if (top < 0 || top >= short.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(top), top, SR.ArgumentOutOfRange_ConsoleBufferBoundaries);
+                throw new ArgumentOutOfRangeException(
+                    nameof(top),
+                    top,
+                    SR.ArgumentOutOfRange_ConsoleBufferBoundaries
+                );
 
             ConsolePal.SetCursorPosition(left, top);
         }
@@ -603,8 +670,14 @@ namespace System
                         Debug.Assert(s_sigQuitRegistration is null);
 
                         Action<PosixSignalContext> handler = HandlePosixSignal;
-                        s_sigIntRegistration = PosixSignalRegistration.Create(PosixSignal.SIGINT, handler);
-                        s_sigQuitRegistration = PosixSignalRegistration.Create(PosixSignal.SIGQUIT, handler);
+                        s_sigIntRegistration = PosixSignalRegistration.Create(
+                            PosixSignal.SIGINT,
+                            handler
+                        );
+                        s_sigQuitRegistration = PosixSignalRegistration.Create(
+                            PosixSignal.SIGQUIT,
+                            handler
+                        );
                     }
                 }
             }
@@ -839,54 +912,84 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public static void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             Out.WriteLine(format, arg0);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public static void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             Out.WriteLine(format, arg0, arg1);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public static void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             Out.WriteLine(format, arg0, arg1, arg2);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[]? arg)
+        public static void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[]? arg
+        )
         {
-            if (arg == null)                       // avoid ArgumentNullException from String.Format
+            if (arg == null) // avoid ArgumentNullException from String.Format
                 Out.WriteLine(format, null, null); // faster than Out.WriteLine(format, (Object)arg);
             else
                 Out.WriteLine(format, arg);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public static void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             Out.Write(format, arg0);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public static void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             Out.Write(format, arg0, arg1);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1, object? arg2)
+        public static void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1,
+            object? arg2
+        )
         {
             Out.Write(format, arg0, arg1, arg2);
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
-        public static void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[]? arg)
+        public static void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[]? arg
+        )
         {
-            if (arg == null)                   // avoid ArgumentNullException from String.Format
+            if (arg == null) // avoid ArgumentNullException from String.Format
                 Out.Write(format, null, null); // faster than Out.Write(format, (Object)arg);
             else
                 Out.Write(format, arg);
@@ -978,7 +1081,11 @@ namespace System
 
             if (s_cancelCallbacks is ConsoleCancelEventHandler handler)
             {
-                var args = new ConsoleCancelEventArgs(ctx.Signal == PosixSignal.SIGINT ? ConsoleSpecialKey.ControlC : ConsoleSpecialKey.ControlBreak);
+                var args = new ConsoleCancelEventArgs(
+                    ctx.Signal == PosixSignal.SIGINT
+                        ? ConsoleSpecialKey.ControlC
+                        : ConsoleSpecialKey.ControlBreak
+                );
                 args.Cancel = ctx.Cancel;
                 handler(null, args);
                 ctx.Cancel = args.Cancel;

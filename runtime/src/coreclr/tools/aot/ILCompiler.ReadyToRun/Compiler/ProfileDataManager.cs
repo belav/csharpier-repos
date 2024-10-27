@@ -18,10 +18,12 @@ namespace ILCompiler
     {
         private readonly IBCProfileParser _ibcParser;
         private readonly List<ProfileData> _inputData = new List<ProfileData>();
+
         // Profile data specified on the command line as .mibc files. This
         // cannot be modified after loading and is accessed concurrently
         // without locks.
         private readonly ProfileDataMap _inputProfileData;
+
         // When synthesis is enabled, this represents the map of methods with
         // synthesized PGO data. This is accessed and modified concurrently.
         private readonly ProfileDataMap _synthesizedProfileData;
@@ -29,21 +31,23 @@ namespace ILCompiler
         private readonly CallChainProfile _callChainProfile;
         private readonly GdvEntityFinder _gdvEntityFinder;
 
-        public ProfileDataManager(Logger logger,
-                                  IEnumerable<ModuleDesc> possibleReferenceModules,
-                                  IEnumerable<ModuleDesc> inputModules,
-                                  IEnumerable<ModuleDesc> versionBubbleModules,
-                                  IEnumerable<ModuleDesc> crossModuleInlineModules,
-                                  ModuleDesc nonLocalGenericsHome,
-                                  IReadOnlyList<string> mibcFiles,
-                                  MIbcProfileParser.MibcGroupParseRules parseRule,
-                                  CallChainProfile callChainProfile,
-                                  CompilerTypeSystemContext context,
-                                  ReadyToRunCompilationModuleGroupBase compilationGroup,
-                                  bool embedPgoDataInR2RImage,
-                                  bool parseIbcData,
-                                  Func<MethodDesc, bool> canBeIncludedInCurrentCompilation,
-                                  bool synthesizeRandomPgoData)
+        public ProfileDataManager(
+            Logger logger,
+            IEnumerable<ModuleDesc> possibleReferenceModules,
+            IEnumerable<ModuleDesc> inputModules,
+            IEnumerable<ModuleDesc> versionBubbleModules,
+            IEnumerable<ModuleDesc> crossModuleInlineModules,
+            ModuleDesc nonLocalGenericsHome,
+            IReadOnlyList<string> mibcFiles,
+            MIbcProfileParser.MibcGroupParseRules parseRule,
+            CallChainProfile callChainProfile,
+            CompilerTypeSystemContext context,
+            ReadyToRunCompilationModuleGroupBase compilationGroup,
+            bool embedPgoDataInR2RImage,
+            bool parseIbcData,
+            Func<MethodDesc, bool> canBeIncludedInCurrentCompilation,
+            bool synthesizeRandomPgoData
+        )
         {
             EmbedPgoDataInR2RImage = embedPgoDataInR2RImage;
             _ibcParser = new IBCProfileParser(logger, possibleReferenceModules);
@@ -75,7 +79,16 @@ namespace ILCompiler
                 {
                     using (PEReader peReader = MIbcProfileParser.OpenMibcAsPEReader(file))
                     {
-                        _inputData.Add(MIbcProfileParser.ParseMIbcFile(context, peReader, versionBubbleModuleStrings, onlyParseItemsDefinedInAssembly, crossModuleInlineModules: crossModuleStrings, parseRule: parseRule));
+                        _inputData.Add(
+                            MIbcProfileParser.ParseMIbcFile(
+                                context,
+                                peReader,
+                                versionBubbleModuleStrings,
+                                onlyParseItemsDefinedInAssembly,
+                                crossModuleInlineModules: crossModuleStrings,
+                                parseRule: parseRule
+                            )
+                        );
                     }
                 }
             }
@@ -95,7 +108,10 @@ namespace ILCompiler
             if (synthesizeRandomPgoData)
             {
                 _gdvEntityFinder = new GdvEntityFinder(context, versionBubble);
-                _synthesizedProfileData = new ProfileDataMap(nonLocalGenericsHome, _compilationGroup);
+                _synthesizedProfileData = new ProfileDataMap(
+                    nonLocalGenericsHome,
+                    _compilationGroup
+                );
             }
         }
 
@@ -130,7 +146,11 @@ namespace ILCompiler
         public bool SynthesizeRandomPgoData => _synthesizedProfileData != null;
         public CallChainProfile CallChainProfile => _callChainProfile;
 
-        public MethodProfileData GetAllowSynthesis(Compilation comp, MethodDesc method, out bool isSynthesized)
+        public MethodProfileData GetAllowSynthesis(
+            Compilation comp,
+            MethodDesc method,
+            out bool isSynthesized
+        )
         {
             MethodProfileData existingProfileData = _inputProfileData[method];
             if (existingProfileData != null || _synthesizedProfileData == null)
@@ -155,7 +175,14 @@ namespace ILCompiler
             // We only support synthesizing PGO data for normal methods.
             if (method.GetTypicalMethodDefinition() is EcmaMethod)
             {
-                profileData = new MethodProfileData(method, MethodProfilingDataFlags.ReadMethodCode, 0, null, 0, SynthesizeSchema(comp, method));
+                profileData = new MethodProfileData(
+                    method,
+                    MethodProfilingDataFlags.ReadMethodCode,
+                    0,
+                    null,
+                    0,
+                    SynthesizeSchema(comp, method)
+                );
 
                 lock (_synthesizedProfileData)
                 {
@@ -202,7 +229,8 @@ namespace ILCompiler
                     if (targetMeth.Signature.IsStatic || !targetMeth.IsTypicalMethodDefinition)
                         continue;
 
-                    bool isDelegateInvoke = targetMeth.OwningType.IsDelegate && targetMeth.Name == "Invoke";
+                    bool isDelegateInvoke =
+                        targetMeth.OwningType.IsDelegate && targetMeth.Name == "Invoke";
 
                     if (opcode != ILOpcode.callvirt && !isDelegateInvoke)
                         continue;
@@ -212,7 +240,10 @@ namespace ILCompiler
 
                     if (isDelegateInvoke)
                     {
-                        entities = SampleMethodsCompatibleWithDelegateInvocation(targetMeth.Signature, rand);
+                        entities = SampleMethodsCompatibleWithDelegateInvocation(
+                            targetMeth.Signature,
+                            rand
+                        );
                         kind = PgoInstrumentationKind.HandleHistogramMethods;
                     }
                     else
@@ -231,7 +262,8 @@ namespace ILCompiler
                             Count = 1,
                             ILOffset = instructionOffset,
                             DataLong = 104729,
-                        });
+                        }
+                    );
 
                     elems.Add(
                         new PgoSchemaElem
@@ -239,8 +271,9 @@ namespace ILCompiler
                             InstrumentationKind = kind,
                             Count = entities.Count,
                             ILOffset = instructionOffset,
-                            DataObject = entities.ToArray()
-                        });
+                            DataObject = entities.ToArray(),
+                        }
+                    );
                 }
                 else
                 {
@@ -258,10 +291,15 @@ namespace ILCompiler
             }
         }
 
-        private List<TypeSystemEntityOrUnknown> SampleMethodsCompatibleWithDelegateInvocation(MethodSignature delegateSignature, Random rand)
+        private List<TypeSystemEntityOrUnknown> SampleMethodsCompatibleWithDelegateInvocation(
+            MethodSignature delegateSignature,
+            Random rand
+        )
         {
             Debug.Assert(_gdvEntityFinder != null);
-            IList<MethodDesc> compatible = _gdvEntityFinder.GetCompatibleWithDelegateInvoke(delegateSignature);
+            IList<MethodDesc> compatible = _gdvEntityFinder.GetCompatibleWithDelegateInvoke(
+                delegateSignature
+            );
 
             return PickSample(compatible, rand);
         }
@@ -274,7 +312,8 @@ namespace ILCompiler
             return PickSample(implementers, rand);
         }
 
-        private List<TypeSystemEntityOrUnknown> PickSample<T>(IList<T> list, Random rand) where T : TypeSystemEntity
+        private List<TypeSystemEntityOrUnknown> PickSample<T>(IList<T> list, Random rand)
+            where T : TypeSystemEntity
         {
             const int sampleSize = 3;
             List<TypeSystemEntityOrUnknown> result = new(sampleSize);
@@ -320,17 +359,21 @@ namespace ILCompiler
             private readonly ModuleDesc _nonLocalGenericsHome;
             private readonly ReadyToRunCompilationModuleGroupBase _compilationGroup;
             private readonly Dictionary<MethodDesc, MethodProfileData> _profileData = new();
-            private readonly Dictionary<ModuleDesc, HashSet<MethodDesc>> _placedProfileMethods = new();
+            private readonly Dictionary<ModuleDesc, HashSet<MethodDesc>> _placedProfileMethods =
+                new();
             private readonly HashSet<MethodDesc> _placedProfileMethodsAll = new();
 
-            public ProfileDataMap(ModuleDesc nonLocalGenericsHome, ReadyToRunCompilationModuleGroupBase compilationGroup)
+            public ProfileDataMap(
+                ModuleDesc nonLocalGenericsHome,
+                ReadyToRunCompilationModuleGroupBase compilationGroup
+            )
             {
                 _nonLocalGenericsHome = nonLocalGenericsHome;
                 _compilationGroup = compilationGroup;
             }
 
-            public MethodProfileData this[MethodDesc method]
-                => _profileData.GetValueOrDefault(method);
+            public MethodProfileData this[MethodDesc method] =>
+                _profileData.GetValueOrDefault(method);
 
             public void LoadByMerging(IEnumerable<ProfileData> data)
             {
@@ -348,23 +391,33 @@ namespace ILCompiler
             }
 
             public bool Contains(MethodDesc md) => _profileData.ContainsKey(md);
- 
-            private void AssociateMethodProfileDataWithModule(MethodDesc method, MethodProfileData profileData)
+
+            private void AssociateMethodProfileDataWithModule(
+                MethodDesc method,
+                MethodProfileData profileData
+            )
             {
                 // If the method is not excluded from processing
-                if (profileData.Flags.HasFlag(MethodProfilingDataFlags.ExcludeHotMethodCode) ||
-                    profileData.Flags.HasFlag(MethodProfilingDataFlags.ExcludeColdMethodCode))
+                if (
+                    profileData.Flags.HasFlag(MethodProfilingDataFlags.ExcludeHotMethodCode)
+                    || profileData.Flags.HasFlag(MethodProfilingDataFlags.ExcludeColdMethodCode)
+                )
                 {
                     return;
                 }
 
                 // Check for methods which are defined within the version bubble, and only rely on other modules within the bubble
-                if (!_compilationGroup.VersionsWithMethodBody(method) && !_compilationGroup.CrossModuleCompileable(method))
+                if (
+                    !_compilationGroup.VersionsWithMethodBody(method)
+                    && !_compilationGroup.CrossModuleCompileable(method)
+                )
                     return; // Method not contained within version bubble and not cross module compileable
 
                 ModuleDesc home = null;
-                if (_compilationGroup.ContainsType(method.OwningType) &&
-                    (method.OwningType is MetadataType declaringType))
+                if (
+                    _compilationGroup.ContainsType(method.OwningType)
+                    && (method.OwningType is MetadataType declaringType)
+                )
                 {
                     // In this case the method is placed in its natural home (which is the defining module of the method)
                     home = declaringType.Module;
@@ -372,7 +425,10 @@ namespace ILCompiler
                 else
                 {
                     // If the defining module is not within the input set, if the nonLocalGenericsHome is provided, place it there
-                    if ((_nonLocalGenericsHome != null) && (method.GetTypicalMethodDefinition() != method))
+                    if (
+                        (_nonLocalGenericsHome != null)
+                        && (method.GetTypicalMethodDefinition() != method)
+                    )
                     {
                         home = _nonLocalGenericsHome;
                     }
@@ -412,7 +468,10 @@ namespace ILCompiler
             private readonly Dictionary<MethodSignature, List<MethodDesc>> _delegateTargets;
             private readonly Dictionary<TypeDesc, List<TypeDesc>> _implementers;
 
-            public GdvEntityFinder(CompilerTypeSystemContext context, IEnumerable<ModuleDesc> modules)
+            public GdvEntityFinder(
+                CompilerTypeSystemContext context,
+                IEnumerable<ModuleDesc> modules
+            )
             {
                 Dictionary<MethodSignature, HashSet<MethodDesc>> delegateTargets = new();
                 Dictionary<TypeDesc, HashSet<TypeDesc>> implementers = new();
@@ -427,19 +486,29 @@ namespace ILCompiler
                         {
                             try
                             {
-                                if (!method.Signature.IsStatic && !method.IsAbstract && !method.IsGenericMethodDefinition)
+                                if (
+                                    !method.Signature.IsStatic
+                                    && !method.IsAbstract
+                                    && !method.IsGenericMethodDefinition
+                                )
                                 {
                                     context.EnsureLoadableMethod(method);
 
-                                    if (!delegateTargets.TryGetValue(method.Signature, out HashSet<MethodDesc> set))
-                                        delegateTargets.Add(method.Signature, set = new HashSet<MethodDesc>());
+                                    if (
+                                        !delegateTargets.TryGetValue(
+                                            method.Signature,
+                                            out HashSet<MethodDesc> set
+                                        )
+                                    )
+                                        delegateTargets.Add(
+                                            method.Signature,
+                                            set = new HashSet<MethodDesc>()
+                                        );
 
                                     set.Add(method);
                                 }
                             }
-                            catch (TypeSystemException)
-                            {
-                            }
+                            catch (TypeSystemException) { }
                         }
 
                         try
@@ -450,8 +519,16 @@ namespace ILCompiler
 
                                 void AddImplemented(TypeDesc implemented)
                                 {
-                                    if (!implementers.TryGetValue(implemented, out HashSet<TypeDesc> set))
-                                        implementers.Add(implemented, set = new HashSet<TypeDesc>());
+                                    if (
+                                        !implementers.TryGetValue(
+                                            implemented,
+                                            out HashSet<TypeDesc> set
+                                        )
+                                    )
+                                        implementers.Add(
+                                            implemented,
+                                            set = new HashSet<TypeDesc>()
+                                        );
 
                                     set.Add(type);
                                 }
@@ -469,35 +546,48 @@ namespace ILCompiler
                                 }
                             }
                         }
-                        catch (TypeSystemException)
-                        {
-                        }
+                        catch (TypeSystemException) { }
                     }
                 }
 
-                _delegateTargets = delegateTargets.ToDictionary(kvp => kvp.Key, kvp =>
-                {
-                    List<MethodDesc> list = new(kvp.Value);
-                    list.MergeSort(TypeSystemComparer.Instance.Compare);
-                    return list;
-                });
+                _delegateTargets = delegateTargets.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp =>
+                    {
+                        List<MethodDesc> list = new(kvp.Value);
+                        list.MergeSort(TypeSystemComparer.Instance.Compare);
+                        return list;
+                    }
+                );
 
-                _implementers = implementers.ToDictionary(kvp => kvp.Key, kvp =>
-                {
-                    List<TypeDesc> list = new(kvp.Value);
-                    list.MergeSort(TypeSystemComparer.Instance.Compare);
-                    return list;
-                });
+                _implementers = implementers.ToDictionary(
+                    kvp => kvp.Key,
+                    kvp =>
+                    {
+                        List<TypeDesc> list = new(kvp.Value);
+                        list.MergeSort(TypeSystemComparer.Instance.Compare);
+                        return list;
+                    }
+                );
             }
 
-            public IList<MethodDesc> GetCompatibleWithDelegateInvoke(MethodSignature delegateInvokeSignature)
+            public IList<MethodDesc> GetCompatibleWithDelegateInvoke(
+                MethodSignature delegateInvokeSignature
+            )
             {
-                return _delegateTargets.TryGetValue(delegateInvokeSignature, out List<MethodDesc> methods) ? methods : Array.Empty<MethodDesc>();
+                return _delegateTargets.TryGetValue(
+                    delegateInvokeSignature,
+                    out List<MethodDesc> methods
+                )
+                    ? methods
+                    : Array.Empty<MethodDesc>();
             }
 
             public IList<TypeDesc> GetImplementers(TypeDesc type)
             {
-                return _implementers.TryGetValue(type, out List<TypeDesc> types) ? types : Array.Empty<TypeDesc>();
+                return _implementers.TryGetValue(type, out List<TypeDesc> types)
+                    ? types
+                    : Array.Empty<TypeDesc>();
             }
         }
     }

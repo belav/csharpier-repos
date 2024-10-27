@@ -11,7 +11,9 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class ModelCodeGeneratorSelector : LanguageBasedSelector<IModelCodeGenerator>, IModelCodeGeneratorSelector
+public class ModelCodeGeneratorSelector
+    : LanguageBasedSelector<IModelCodeGenerator>,
+        IModelCodeGeneratorSelector
 {
     private readonly IEnumerable<TemplatedModelGenerator> _templatedModelGenerators;
 
@@ -28,7 +30,8 @@ public class ModelCodeGeneratorSelector : LanguageBasedSelector<IModelCodeGenera
     }
 
     /// <inheritdoc />
-    public virtual IModelCodeGenerator Select(ModelCodeGenerationOptions options)
-        => _templatedModelGenerators.LastOrDefault(g => options.ProjectDir != null && g.HasTemplates(options.ProjectDir))
-            ?? Select(options.Language);
+    public virtual IModelCodeGenerator Select(ModelCodeGenerationOptions options) =>
+        _templatedModelGenerators.LastOrDefault(g =>
+            options.ProjectDir != null && g.HasTemplates(options.ProjectDir)
+        ) ?? Select(options.Language);
 }

@@ -12,7 +12,10 @@ namespace System.Web.Http.ApiExplorer
         [ResponseType(typeof(User))]
         public IHttpActionResult Get()
         {
-            return Content<User>(HttpStatusCode.OK, new User { FirstName = "foo", LastName = "bar" });
+            return Content<User>(
+                HttpStatusCode.OK,
+                new User { FirstName = "foo", LastName = "bar" }
+            );
         }
 
         [ResponseType(typeof(User))]

@@ -80,7 +80,7 @@ namespace System.MemoryTests
             bool success = srcMemory.TryCopyTo(dst);
             Assert.False(success);
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // TryCopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // TryCopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]
@@ -92,7 +92,7 @@ namespace System.MemoryTests
             ReadOnlyMemory<int> srcMemory = src;
             Assert.Throws<ArgumentException>(() => srcMemory.CopyTo(dst));
             int[] expected = { 99, 100 };
-            Assert.Equal<int>(expected, dst);  // CopyTo() checks for sufficient space before doing any copying.
+            Assert.Equal<int>(expected, dst); // CopyTo() checks for sufficient space before doing any copying.
         }
 
         [Fact]

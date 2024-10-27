@@ -15,7 +15,8 @@ internal static partial class Interop
     {
         private const string MapsFileName = "/maps";
 
-        private static string GetMapsFilePathForProcess(int pid) => string.Create(null, stackalloc char[256], $"{RootPath}{(uint)pid}{MapsFileName}");
+        private static string GetMapsFilePathForProcess(int pid) =>
+            string.Create(null, stackalloc char[256], $"{RootPath}{(uint)pid}{MapsFileName}");
 
         internal static ProcessModuleCollection? ParseMapsModules(int pid)
         {
@@ -39,7 +40,17 @@ internal static partial class Interop
 
             foreach (string line in lines)
             {
-                if (!TryParseMapsEntry(line, out (long StartAddress, int Size, bool HasReadAndExecFlags, string Path) parsedLine))
+                if (
+                    !TryParseMapsEntry(
+                        line,
+                        out (
+                            long StartAddress,
+                            int Size,
+                            bool HasReadAndExecFlags,
+                            string Path
+                        ) parsedLine
+                    )
+                )
                 {
                     // Invalid entry for the purposes of ProcessModule parsing,
                     // discard flushing the current module if it exists.
@@ -48,9 +59,11 @@ internal static partial class Interop
                 }
 
                 // Check if entry is a continuation of the current module.
-                if (module is not null &&
-                    module.FileName == parsedLine.Path &&
-                    (long)module.BaseAddress + module.ModuleMemorySize == parsedLine.StartAddress)
+                if (
+                    module is not null
+                    && module.FileName == parsedLine.Path
+                    && (long)module.BaseAddress + module.ModuleMemorySize == parsedLine.StartAddress
+                )
                 {
                     // Is continuation, update the current module.
                     module.ModuleMemorySize += parsedLine.Size;
@@ -64,7 +77,9 @@ internal static partial class Interop
                 module = new ProcessModule(parsedLine.Path, Path.GetFileName(parsedLine.Path))
                 {
                     ModuleMemorySize = parsedLine.Size,
-                    EntryPointAddress = IntPtr.Zero // unknown
+                    EntryPointAddress =
+                        IntPtr.Zero // unknown
+                    ,
                 };
 
                 // on 32-bit platforms, it throws System.OverflowException with IntPtr.ctor(Int64),
@@ -93,7 +108,10 @@ internal static partial class Interop
             }
         }
 
-        private static bool TryParseMapsEntry(string line, out (long StartAddress, int Size, bool HasReadAndExecFlags, string Path) parsedLine)
+        private static bool TryParseMapsEntry(
+            string line,
+            out (long StartAddress, int Size, bool HasReadAndExecFlags, string Path) parsedLine
+        )
         {
             // Use a StringParser to avoid string.Split costs
             var parser = new StringParser(line, separator: ' ', skipEmpty: true);
@@ -132,8 +150,20 @@ internal static partial class Interop
                 int pos = s.IndexOf('-', start, end - start);
                 if (pos > 0)
                 {
-                    if (long.TryParse(s.AsSpan(start, pos), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out long startingAddress) &&
-                        long.TryParse(s.AsSpan(pos + 1, end - (pos + 1)), NumberStyles.HexNumber, CultureInfo.InvariantCulture, out long endingAddress))
+                    if (
+                        long.TryParse(
+                            s.AsSpan(start, pos),
+                            NumberStyles.HexNumber,
+                            CultureInfo.InvariantCulture,
+                            out long startingAddress
+                        )
+                        && long.TryParse(
+                            s.AsSpan(pos + 1, end - (pos + 1)),
+                            NumberStyles.HexNumber,
+                            CultureInfo.InvariantCulture,
+                            out long endingAddress
+                        )
+                    )
                     {
                         return (startingAddress, (int)(endingAddress - startingAddress));
                     }

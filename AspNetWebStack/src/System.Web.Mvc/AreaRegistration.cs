@@ -27,9 +27,8 @@ namespace System.Web.Mvc
 
         private static bool IsAreaRegistrationType(Type type)
         {
-            return
-                typeof(AreaRegistration).IsAssignableFrom(type) &&
-                type.GetConstructor(Type.EmptyTypes) != null;
+            return typeof(AreaRegistration).IsAssignableFrom(type)
+                && type.GetConstructor(Type.EmptyTypes) != null;
         }
 
         public static void RegisterAllAreas()
@@ -42,12 +41,21 @@ namespace System.Web.Mvc
             RegisterAllAreas(RouteTable.Routes, new BuildManagerWrapper(), state);
         }
 
-        internal static void RegisterAllAreas(RouteCollection routes, IBuildManager buildManager, object state)
+        internal static void RegisterAllAreas(
+            RouteCollection routes,
+            IBuildManager buildManager,
+            object state
+        )
         {
-            List<Type> areaRegistrationTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(TypeCacheName, IsAreaRegistrationType, buildManager);
+            List<Type> areaRegistrationTypes = TypeCacheUtil.GetFilteredTypesFromAssemblies(
+                TypeCacheName,
+                IsAreaRegistrationType,
+                buildManager
+            );
             foreach (Type areaRegistrationType in areaRegistrationTypes)
             {
-                AreaRegistration registration = (AreaRegistration)Activator.CreateInstance(areaRegistrationType);
+                AreaRegistration registration = (AreaRegistration)
+                    Activator.CreateInstance(areaRegistrationType);
                 registration.CreateContextAndRegister(routes, state);
             }
         }

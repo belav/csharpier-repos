@@ -23,7 +23,11 @@ public class SkipIfEnvironmentVariableNotEnabledAttribute : Attribute, ITestCond
     {
         get
         {
-            return string.Equals(Environment.GetEnvironmentVariable(_environmentVariableName), "true", StringComparison.OrdinalIgnoreCase);
+            return string.Equals(
+                Environment.GetEnvironmentVariable(_environmentVariableName),
+                "true",
+                StringComparison.OrdinalIgnoreCase
+            );
         }
     }
 

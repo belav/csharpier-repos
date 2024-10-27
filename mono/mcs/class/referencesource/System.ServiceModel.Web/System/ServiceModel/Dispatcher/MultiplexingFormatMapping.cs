@@ -14,10 +14,10 @@ namespace System.ServiceModel.Dispatcher
         protected string writeCharset;
         protected WebContentTypeMapper contentTypeMapper;
 
-        abstract public WebMessageFormat MessageFormat { get; }
-        abstract public WebContentFormat ContentFormat { get; }
-        abstract public string DefaultMediaType { get; }
-        abstract protected MessageEncoder Encoder { get; }
+        public abstract WebMessageFormat MessageFormat { get; }
+        public abstract WebContentFormat ContentFormat { get; }
+        public abstract string DefaultMediaType { get; }
+        protected abstract MessageEncoder Encoder { get; }
 
         ContentType defaultContentType;
 
@@ -27,13 +27,19 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (defaultContentType == null)
                 {
-                    defaultContentType = new ContentType(this.DefaultMediaType) { CharSet = this.writeCharset };
+                    defaultContentType = new ContentType(this.DefaultMediaType)
+                    {
+                        CharSet = this.writeCharset,
+                    };
                 }
                 return defaultContentType;
             }
         }
 
-        public MultiplexingFormatMapping(Encoding writeEncoding, WebContentTypeMapper contentTypeMapper)
+        public MultiplexingFormatMapping(
+            Encoding writeEncoding,
+            WebContentTypeMapper contentTypeMapper
+        )
         {
             if (writeEncoding == null)
             {
@@ -44,11 +50,17 @@ namespace System.ServiceModel.Dispatcher
             this.contentTypeMapper = contentTypeMapper;
         }
 
-        public bool CanFormatResponse(ContentType acceptHeaderElement, bool matchCharset, out ContentType contentType)
+        public bool CanFormatResponse(
+            ContentType acceptHeaderElement,
+            bool matchCharset,
+            out ContentType contentType
+        )
         {
             if (acceptHeaderElement == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("acceptHeaderElement");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "acceptHeaderElement"
+                );
             }
 
             // Scrub the content type so that it is only mediaType and the charset
@@ -56,22 +68,33 @@ namespace System.ServiceModel.Dispatcher
             contentType = new ContentType(acceptHeaderElement.MediaType);
             contentType.CharSet = this.DefaultContentType.CharSet;
             string contentTypeStr = contentType.ToString();
-            
-            if (matchCharset &&
-                !string.IsNullOrEmpty(charset) &&
-                !string.Equals(charset, this.DefaultContentType.CharSet, StringComparison.OrdinalIgnoreCase))
+
+            if (
+                matchCharset
+                && !string.IsNullOrEmpty(charset)
+                && !string.Equals(
+                    charset,
+                    this.DefaultContentType.CharSet,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return false;
             }
 
-            if (this.contentTypeMapper != null &&
-                this.contentTypeMapper.GetMessageFormatForContentType(contentType.MediaType) == this.ContentFormat)
+            if (
+                this.contentTypeMapper != null
+                && this.contentTypeMapper.GetMessageFormatForContentType(contentType.MediaType)
+                    == this.ContentFormat
+            )
             {
                 return true;
             }
 
-            if (this.Encoder.IsContentTypeSupported(contentTypeStr) && 
-                (charset == null || contentType.CharSet == this.DefaultContentType.CharSet))
+            if (
+                this.Encoder.IsContentTypeSupported(contentTypeStr)
+                && (charset == null || contentType.CharSet == this.DefaultContentType.CharSet)
+            )
             {
                 return true;
             }
@@ -79,5 +102,4 @@ namespace System.ServiceModel.Dispatcher
             return false;
         }
     }
-
 }

@@ -46,7 +46,13 @@ namespace System.Activities.Validation
             QuickSort(items, 0, items.Count - 1, comparer);
         }
 
-        static int BinarySearch<T>(IList<T> items, int startIndex, int length, T value, IComparer<T> comparer)
+        static int BinarySearch<T>(
+            IList<T> items,
+            int startIndex,
+            int length,
+            T value,
+            IComparer<T> comparer
+        )
         {
             int start = startIndex;
             int end = (startIndex + length) - 1;
@@ -70,7 +76,12 @@ namespace System.Activities.Validation
             return ~start;
         }
 
-        static void QuickSort<T>(IList<T> items, int startIndex, int endIndex, IComparer<T> comparer)
+        static void QuickSort<T>(
+            IList<T> items,
+            int startIndex,
+            int endIndex,
+            IComparer<T> comparer
+        )
         {
             Stack<int> bounds = new Stack<int>();
             do
@@ -103,16 +114,15 @@ namespace System.Activities.Validation
 
                 if (pivotIndex + 1 < endIndex)
                 {
-                    bounds.Push(pivotIndex + 1); 
+                    bounds.Push(pivotIndex + 1);
                     bounds.Push(endIndex);
                 }
 
                 if (startIndex < pivotIndex - 1)
                 {
-                    bounds.Push(startIndex); 
+                    bounds.Push(startIndex);
                     bounds.Push(pivotIndex - 1);
                 }
-
             } while (bounds.Count != 0);
         }
 

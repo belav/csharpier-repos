@@ -28,21 +28,26 @@ public class SqlServerValueGeneratorSelectorTest
         AssertGenerator<BinaryValueGenerator>("Binary");
     }
 
-    private void AssertGenerator<TExpected>(string propertyName, bool useHiLo = false, bool useKeySequence = false)
+    private void AssertGenerator<TExpected>(
+        string propertyName,
+        bool useHiLo = false,
+        bool useKeySequence = false
+    )
     {
         var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>(
-            b =>
-            {
-                b.Property(e => e.Custom).HasValueGenerator<CustomValueGenerator>();
-                b.Property(propertyName).ValueGeneratedOnAdd();
-                b.HasKey(propertyName);
-            });
+        builder.Entity<AnEntity>(b =>
+        {
+            b.Property(e => e.Custom).HasValueGenerator<CustomValueGenerator>();
+            b.Property(propertyName).ValueGeneratedOnAdd();
+            b.HasKey(propertyName);
+        });
 
         if (useHiLo)
         {
             builder.UseHiLo();
-            Assert.NotNull(builder.Model.FindSequence(SqlServerModelExtensions.DefaultHiLoSequenceName));
+            Assert.NotNull(
+                builder.Model.FindSequence(SqlServerModelExtensions.DefaultHiLoSequenceName)
+            );
         }
 
         if (useKeySequence)
@@ -53,43 +58,51 @@ public class SqlServerValueGeneratorSelectorTest
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = SqlServerTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
-        Assert.IsType<TExpected>(selector.Select(entityType.FindProperty(propertyName), entityType));
+        Assert.IsType<TExpected>(
+            selector.Select(entityType.FindProperty(propertyName), entityType)
+        );
     }
 
     [ConditionalFact]
     public void Returns_temp_guid_generator_when_default_sql_set()
     {
         var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>(
-            b =>
-            {
-                b.Property(e => e.Guid).HasDefaultValueSql("newid()");
-                b.HasKey(e => e.Guid);
-            });
+        builder.Entity<AnEntity>(b =>
+        {
+            b.Property(e => e.Guid).HasDefaultValueSql("newid()");
+            b.HasKey(e => e.Guid);
+        });
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = SqlServerTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
-        Assert.IsType<TemporaryGuidValueGenerator>(selector.Select(entityType.FindProperty("Guid"), entityType));
+        Assert.IsType<TemporaryGuidValueGenerator>(
+            selector.Select(entityType.FindProperty("Guid"), entityType)
+        );
     }
 
     [ConditionalFact]
     public void Returns_temp_string_generator_when_default_sql_set()
     {
         var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>(
-            b =>
-            {
-                b.Property(e => e.String).ValueGeneratedOnAdd().HasDefaultValueSql("Foo");
-                b.HasKey(e => e.String);
-            });
+        builder.Entity<AnEntity>(b =>
+        {
+            b.Property(e => e.String).ValueGeneratedOnAdd().HasDefaultValueSql("Foo");
+            b.HasKey(e => e.String);
+        });
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = SqlServerTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
         var generator = selector.Select(entityType.FindProperty("String"), entityType);
         Assert.IsType<TemporaryStringValueGenerator>(generator);
@@ -100,16 +113,17 @@ public class SqlServerValueGeneratorSelectorTest
     public void Returns_temp_binary_generator_when_default_sql_set()
     {
         var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>(
-            b =>
-            {
-                b.HasKey(e => e.Binary);
-                b.Property(e => e.Binary).HasDefaultValueSql("Foo").ValueGeneratedOnAdd();
-            });
+        builder.Entity<AnEntity>(b =>
+        {
+            b.HasKey(e => e.Binary);
+            b.Property(e => e.Binary).HasDefaultValueSql("Foo").ValueGeneratedOnAdd();
+        });
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = SqlServerTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
         var generator = selector.Select(entityType.FindProperty("Binary"), entityType);
         Assert.IsType<TemporaryBinaryValueGenerator>(generator);
@@ -156,20 +170,26 @@ public class SqlServerValueGeneratorSelectorTest
     public void Throws_for_unsupported_combinations()
     {
         var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-        builder.Entity<AnEntity>(
-            b =>
-            {
-                b.Property(e => e.Random).ValueGeneratedOnAdd();
-                b.HasKey(e => e.Random);
-            });
+        builder.Entity<AnEntity>(b =>
+        {
+            b.Property(e => e.Random).ValueGeneratedOnAdd();
+            b.HasKey(e => e.Random);
+        });
         var model = builder.FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = InMemoryTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = InMemoryTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
         Assert.Equal(
             CoreStrings.NoValueGenerator("Random", "AnEntity", "Something"),
-            Assert.Throws<NotSupportedException>(() => selector.Select(entityType.FindProperty("Random"), entityType)).Message);
+            Assert
+                .Throws<NotSupportedException>(
+                    () => selector.Select(entityType.FindProperty("Random"), entityType)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -179,16 +199,18 @@ public class SqlServerValueGeneratorSelectorTest
 
         builder.Entity<AnEntity>();
 
-        builder
-            .UseHiLo()
-            .HasSequence<int>(SqlServerModelExtensions.DefaultHiLoSequenceName);
+        builder.UseHiLo().HasSequence<int>(SqlServerModelExtensions.DefaultHiLoSequenceName);
 
         var model = builder.UseHiLo().FinalizeModel();
         var entityType = model.FindEntityType(typeof(AnEntity));
 
-        var selector = SqlServerTestHelpers.Instance.CreateContextServices(model).GetRequiredService<IValueGeneratorSelector>();
+        var selector = SqlServerTestHelpers
+            .Instance.CreateContextServices(model)
+            .GetRequiredService<IValueGeneratorSelector>();
 
-        Assert.IsType<SqlServerSequenceHiLoValueGenerator<int>>(selector.Select(entityType.FindProperty("Id"), entityType));
+        Assert.IsType<SqlServerSequenceHiLoValueGenerator<int>>(
+            selector.Select(entityType.FindProperty("Id"), entityType)
+        );
     }
 
     private class AnEntity
@@ -216,16 +238,13 @@ public class SqlServerValueGeneratorSelectorTest
     {
         public int Id { get; set; }
 
-        public int CompareTo(Something other)
-            => throw new NotImplementedException();
+        public int CompareTo(Something other) => throw new NotImplementedException();
     }
 
     private class CustomValueGenerator : ValueGenerator<int>
     {
-        public override int Next(EntityEntry entry)
-            => throw new NotImplementedException();
+        public override int Next(EntityEntry entry) => throw new NotImplementedException();
 
-        public override bool GeneratesTemporaryValues
-            => false;
+        public override bool GeneratesTemporaryValues => false;
     }
 }

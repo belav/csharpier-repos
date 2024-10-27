@@ -19,7 +19,8 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
     /// <param name="csharpDependencies">The dependencies.</param>
     public CSharpMigrationsGenerator(
         MigrationsCodeGeneratorDependencies dependencies,
-        CSharpMigrationsGeneratorDependencies csharpDependencies)
+        CSharpMigrationsGeneratorDependencies csharpDependencies
+    )
         : base(dependencies)
     {
         CSharpDependencies = csharpDependencies;
@@ -30,22 +31,19 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
     /// </summary>
     protected virtual CSharpMigrationsGeneratorDependencies CSharpDependencies { get; }
 
-    private ICSharpHelper Code
-        => CSharpDependencies.CSharpHelper;
+    private ICSharpHelper Code => CSharpDependencies.CSharpHelper;
 
     /// <summary>
     ///     Gets the file extension code files should use.
     /// </summary>
     /// <value> The file extension. </value>
-    public override string FileExtension
-        => ".cs";
+    public override string FileExtension => ".cs";
 
     /// <summary>
     ///     Gets the programming language supported by this service.
     /// </summary>
     /// <value> The language. </value>
-    public override string Language
-        => "C#";
+    public override string Language => "C#";
 
     /// <summary>
     ///     Generates the migration code.
@@ -59,43 +57,44 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         string? migrationNamespace,
         string migrationName,
         IReadOnlyList<MigrationOperation> upOperations,
-        IReadOnlyList<MigrationOperation> downOperations)
+        IReadOnlyList<MigrationOperation> downOperations
+    )
     {
         var builder = new IndentedStringBuilder();
         var namespaces = new List<string> { "Microsoft.EntityFrameworkCore.Migrations" };
         namespaces.AddRange(GetNamespaces(upOperations.Concat(downOperations)));
         foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
         {
-            builder
-                .Append("using ")
-                .Append(n)
-                .AppendLine(";");
+            builder.Append("using ").Append(n).AppendLine(";");
         }
 
-        builder
-            .AppendLine()
-            .AppendLine("#nullable disable");
+        builder.AppendLine().AppendLine("#nullable disable");
 
         // Suppress "Prefer jagged arrays over multidimensional" when we have a seeding operation with a multidimensional array
         if (HasMultidimensionalArray(upOperations.Concat(downOperations)))
         {
             builder
                 .AppendLine()
-                .AppendLine("#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional");
+                .AppendLine(
+                    "#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional"
+                );
         }
 
         if (!string.IsNullOrEmpty(migrationNamespace))
         {
             builder
                 .AppendLine()
-                .Append("namespace ").AppendLine(Code.Namespace(migrationNamespace))
+                .Append("namespace ")
+                .AppendLine(Code.Namespace(migrationNamespace))
                 .AppendLine("{")
                 .IncrementIndent();
         }
 
         builder
             .AppendLine("/// <inheritdoc />")
-            .Append("public partial class ").Append(Code.Identifier(migrationName)).AppendLine(" : Migration")
+            .Append("public partial class ")
+            .Append(Code.Identifier(migrationName))
+            .AppendLine(" : Migration")
             .AppendLine("{");
         using (builder.Indent())
         {
@@ -105,7 +104,11 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
                 .AppendLine("{");
             using (builder.Indent())
             {
-                CSharpDependencies.CSharpMigrationOperationGenerator.Generate("migrationBuilder", upOperations, builder);
+                CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
+                    "migrationBuilder",
+                    upOperations,
+                    builder
+                );
             }
 
             builder
@@ -117,28 +120,28 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
                 .AppendLine("{");
             using (builder.Indent())
             {
-                CSharpDependencies.CSharpMigrationOperationGenerator.Generate("migrationBuilder", downOperations, builder);
+                CSharpDependencies.CSharpMigrationOperationGenerator.Generate(
+                    "migrationBuilder",
+                    downOperations,
+                    builder
+                );
             }
 
-            builder
-                .AppendLine()
-                .AppendLine("}");
+            builder.AppendLine().AppendLine("}");
         }
 
         builder.AppendLine("}");
 
         if (!string.IsNullOrEmpty(migrationNamespace))
         {
-            builder
-                .DecrementIndent()
-                .AppendLine("}");
+            builder.DecrementIndent().AppendLine("}");
         }
 
         return builder.ToString();
     }
 
-    private static void AppendAutoGeneratedTag(IndentedStringBuilder builder)
-        => builder.AppendLine("// <auto-generated />");
+    private static void AppendAutoGeneratedTag(IndentedStringBuilder builder) =>
+        builder.AppendLine("// <auto-generated />");
 
     /// <summary>
     ///     Generates the migration metadata code.
@@ -154,7 +157,8 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         Type contextType,
         string migrationName,
         string migrationId,
-        IModel targetModel)
+        IModel targetModel
+    )
     {
         var builder = new IndentedStringBuilder();
         AppendAutoGeneratedTag(builder);
@@ -163,7 +167,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
             "Microsoft.EntityFrameworkCore",
             "Microsoft.EntityFrameworkCore.Infrastructure",
             "Microsoft.EntityFrameworkCore.Migrations",
-            "Microsoft.EntityFrameworkCore.Storage.ValueConversion"
+            "Microsoft.EntityFrameworkCore.Storage.ValueConversion",
         };
         if (!string.IsNullOrEmpty(contextType.Namespace))
         {
@@ -173,29 +177,30 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         namespaces.AddRange(GetNamespaces(targetModel));
         foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
         {
-            builder
-                .Append("using ")
-                .Append(n)
-                .AppendLine(";");
+            builder.Append("using ").Append(n).AppendLine(";");
         }
 
-        builder
-            .AppendLine()
-            .AppendLine("#nullable disable");
+        builder.AppendLine().AppendLine("#nullable disable");
 
         if (!string.IsNullOrEmpty(migrationNamespace))
         {
             builder
                 .AppendLine()
-                .Append("namespace ").AppendLine(Code.Namespace(migrationNamespace))
+                .Append("namespace ")
+                .AppendLine(Code.Namespace(migrationNamespace))
                 .AppendLine("{")
                 .IncrementIndent();
         }
 
         builder
-            .Append("[DbContext(typeof(").Append(Code.Reference(contextType)).AppendLine("))]")
-            .Append("[Migration(").Append(Code.Literal(migrationId)).AppendLine(")]")
-            .Append("partial class ").AppendLine(Code.Identifier(migrationName))
+            .Append("[DbContext(typeof(")
+            .Append(Code.Reference(contextType))
+            .AppendLine("))]")
+            .Append("[Migration(")
+            .Append(Code.Literal(migrationId))
+            .AppendLine(")]")
+            .Append("partial class ")
+            .AppendLine(Code.Identifier(migrationName))
             .AppendLine("{");
         using (builder.Indent())
         {
@@ -211,7 +216,11 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
             using (builder.Indent())
             {
                 // TODO: Optimize. This is repeated below
-                CSharpDependencies.CSharpSnapshotGenerator.Generate("modelBuilder", targetModel, builder);
+                CSharpDependencies.CSharpSnapshotGenerator.Generate(
+                    "modelBuilder",
+                    targetModel,
+                    builder
+                );
             }
 
             builder
@@ -227,9 +236,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
 
         if (!string.IsNullOrEmpty(migrationNamespace))
         {
-            builder
-                .DecrementIndent()
-                .AppendLine("}");
+            builder.DecrementIndent().AppendLine("}");
         }
 
         return builder.ToString();
@@ -247,7 +254,8 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         string? modelSnapshotNamespace,
         Type contextType,
         string modelSnapshotName,
-        IModel model)
+        IModel model
+    )
     {
         var builder = new IndentedStringBuilder();
         AppendAutoGeneratedTag(builder);
@@ -255,7 +263,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         {
             "Microsoft.EntityFrameworkCore",
             "Microsoft.EntityFrameworkCore.Infrastructure",
-            "Microsoft.EntityFrameworkCore.Storage.ValueConversion"
+            "Microsoft.EntityFrameworkCore.Storage.ValueConversion",
         };
         if (!string.IsNullOrEmpty(contextType.Namespace))
         {
@@ -265,28 +273,28 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
         namespaces.AddRange(GetNamespaces(model));
         foreach (var n in namespaces.OrderBy(x => x, new NamespaceComparer()).Distinct())
         {
-            builder
-                .Append("using ")
-                .Append(n)
-                .AppendLine(";");
+            builder.Append("using ").Append(n).AppendLine(";");
         }
 
-        builder
-            .AppendLine()
-            .AppendLine("#nullable disable");
+        builder.AppendLine().AppendLine("#nullable disable");
 
         if (!string.IsNullOrEmpty(modelSnapshotNamespace))
         {
             builder
                 .AppendLine()
-                .Append("namespace ").AppendLine(Code.Namespace(modelSnapshotNamespace))
+                .Append("namespace ")
+                .AppendLine(Code.Namespace(modelSnapshotNamespace))
                 .AppendLine("{")
                 .IncrementIndent();
         }
 
         builder
-            .Append("[DbContext(typeof(").Append(Code.Reference(contextType)).AppendLine("))]")
-            .Append("partial class ").Append(Code.Identifier(modelSnapshotName)).AppendLine(" : ModelSnapshot")
+            .Append("[DbContext(typeof(")
+            .Append(Code.Reference(contextType))
+            .AppendLine("))]")
+            .Append("partial class ")
+            .Append(Code.Identifier(modelSnapshotName))
+            .AppendLine(" : ModelSnapshot")
             .AppendLine("{");
         using (builder.Indent())
         {
@@ -316,9 +324,7 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
 
         if (!string.IsNullOrEmpty(modelSnapshotNamespace))
         {
-            builder
-                .DecrementIndent()
-                .AppendLine("}");
+            builder.DecrementIndent().AppendLine("}");
         }
 
         return builder.ToString();
@@ -326,16 +332,25 @@ public class CSharpMigrationsGenerator : MigrationsCodeGenerator
 
     private bool HasMultidimensionalArray(IEnumerable<MigrationOperation> operations)
     {
-        return operations.Any(
-            o =>
-                (o is InsertDataOperation insertDataOperation
-                    && IsMultidimensional(insertDataOperation.Values))
-                || (o is UpdateDataOperation updateDataOperation
-                    && (IsMultidimensional(updateDataOperation.Values) || IsMultidimensional(updateDataOperation.KeyValues)))
-                || (o is DeleteDataOperation deleteDataOperation
-                    && IsMultidimensional(deleteDataOperation.KeyValues)));
+        return operations.Any(o =>
+            (
+                o is InsertDataOperation insertDataOperation
+                && IsMultidimensional(insertDataOperation.Values)
+            )
+            || (
+                o is UpdateDataOperation updateDataOperation
+                && (
+                    IsMultidimensional(updateDataOperation.Values)
+                    || IsMultidimensional(updateDataOperation.KeyValues)
+                )
+            )
+            || (
+                o is DeleteDataOperation deleteDataOperation
+                && IsMultidimensional(deleteDataOperation.KeyValues)
+            )
+        );
 
-        static bool IsMultidimensional(Array array)
-            => array.GetLength(0) > 1 && array.GetLength(1) > 1;
+        static bool IsMultidimensional(Array array) =>
+            array.GetLength(0) > 1 && array.GetLength(1) > 1;
     }
 }

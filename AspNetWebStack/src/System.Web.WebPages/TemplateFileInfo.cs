@@ -4,7 +4,7 @@
 namespace System.Web.WebPages
 {
     /// <summary>
-    /// TemplateFileInfo specifies properties of a template such as VirtualPath. 
+    /// TemplateFileInfo specifies properties of a template such as VirtualPath.
     /// This type allows us to modify the behavior of ITemplateFile between releases without changing the interface.
     /// </summary>
     public class TemplateFileInfo

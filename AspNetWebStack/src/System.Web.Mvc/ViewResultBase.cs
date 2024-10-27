@@ -19,7 +19,11 @@ namespace System.Web.Mvc
             get { return ViewData.Model; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This entire type is meant to be mutable.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This entire type is meant to be mutable."
+        )]
         public TempDataDictionary TempData
         {
             get
@@ -47,7 +51,11 @@ namespace System.Web.Mvc
             }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This entire type is meant to be mutable.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This entire type is meant to be mutable."
+        )]
         public ViewDataDictionary ViewData
         {
             get
@@ -61,7 +69,11 @@ namespace System.Web.Mvc
             set { _viewData = value; }
         }
 
-        [SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly", Justification = "This entire type is meant to be mutable.")]
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA2227:CollectionPropertiesShouldBeReadOnly",
+            Justification = "This entire type is meant to be mutable."
+        )]
         public ViewEngineCollection ViewEngineCollection
         {
             get { return _viewEngineCollection ?? ViewEngines.Engines; }

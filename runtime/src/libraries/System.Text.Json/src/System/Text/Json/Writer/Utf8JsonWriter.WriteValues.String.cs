@@ -115,11 +115,15 @@ namespace System.Text.Json
         // TODO: https://github.com/dotnet/runtime/issues/29293
         private void WriteStringMinimized(ReadOnlySpan<char> escapedValue)
         {
-            Debug.Assert(escapedValue.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 3);
+            Debug.Assert(
+                escapedValue.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - 3
+            );
 
             // All ASCII, 2 quotes => escapedValue.Length + 2
             // Optionally, 1 list separator, and up to 3x growth when transcoding
-            int maxRequired = (escapedValue.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 3;
+            int maxRequired =
+                (escapedValue.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 3;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -145,11 +149,21 @@ namespace System.Text.Json
             int indent = Indentation;
             Debug.Assert(indent <= 2 * _options.MaxDepth);
 
-            Debug.Assert(escapedValue.Length < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding) - indent - 3 - s_newLineLength);
+            Debug.Assert(
+                escapedValue.Length
+                    < (int.MaxValue / JsonConstants.MaxExpansionFactorWhileTranscoding)
+                        - indent
+                        - 3
+                        - s_newLineLength
+            );
 
             // All ASCII, 2 quotes => indent + escapedValue.Length + 2
             // Optionally, 1 list separator, 1-2 bytes for new line, and up to 3x growth when transcoding
-            int maxRequired = indent + (escapedValue.Length * JsonConstants.MaxExpansionFactorWhileTranscoding) + 3 + s_newLineLength;
+            int maxRequired =
+                indent
+                + (escapedValue.Length * JsonConstants.MaxExpansionFactorWhileTranscoding)
+                + 3
+                + s_newLineLength;
 
             if (_memory.Length - BytesPending < maxRequired)
             {
@@ -182,18 +196,27 @@ namespace System.Text.Json
 
         private void WriteStringEscapeValue(ReadOnlySpan<char> value, int firstEscapeIndexVal)
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= value.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= value.Length
+            );
             Debug.Assert(firstEscapeIndexVal >= 0 && firstEscapeIndexVal < value.Length);
 
             char[]? valueArray = null;
 
             int length = JsonWriterHelper.GetMaxEscapedLength(value.Length, firstEscapeIndexVal);
 
-            Span<char> escapedValue = length <= JsonConstants.StackallocCharThreshold ?
-                stackalloc char[JsonConstants.StackallocCharThreshold] :
-                (valueArray = ArrayPool<char>.Shared.Rent(length));
+            Span<char> escapedValue =
+                length <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (valueArray = ArrayPool<char>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(value, escapedValue, firstEscapeIndexVal, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                value,
+                escapedValue,
+                firstEscapeIndexVal,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStringByOptions(escapedValue.Slice(0, written));
 
@@ -329,18 +352,30 @@ namespace System.Text.Json
 
         private void WriteStringEscapeValue(ReadOnlySpan<byte> utf8Value, int firstEscapeIndexVal)
         {
-            Debug.Assert(int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length);
+            Debug.Assert(
+                int.MaxValue / JsonConstants.MaxExpansionFactorWhileEscaping >= utf8Value.Length
+            );
             Debug.Assert(firstEscapeIndexVal >= 0 && firstEscapeIndexVal < utf8Value.Length);
 
             byte[]? valueArray = null;
 
-            int length = JsonWriterHelper.GetMaxEscapedLength(utf8Value.Length, firstEscapeIndexVal);
+            int length = JsonWriterHelper.GetMaxEscapedLength(
+                utf8Value.Length,
+                firstEscapeIndexVal
+            );
 
-            Span<byte> escapedValue = length <= JsonConstants.StackallocByteThreshold ?
-                stackalloc byte[JsonConstants.StackallocByteThreshold] :
-                (valueArray = ArrayPool<byte>.Shared.Rent(length));
+            Span<byte> escapedValue =
+                length <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (valueArray = ArrayPool<byte>.Shared.Rent(length));
 
-            JsonWriterHelper.EscapeString(utf8Value, escapedValue, firstEscapeIndexVal, _options.Encoder, out int written);
+            JsonWriterHelper.EscapeString(
+                utf8Value,
+                escapedValue,
+                firstEscapeIndexVal,
+                _options.Encoder,
+                out int written
+            );
 
             WriteStringByOptions(escapedValue.Slice(0, written));
 

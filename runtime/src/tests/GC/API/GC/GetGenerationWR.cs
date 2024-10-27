@@ -11,7 +11,6 @@ public class Dummy
     }
 }
 
-
 public class CreateObj
 {
     private Dummy _obj;
@@ -22,7 +21,6 @@ public class CreateObj
         _obj = new Dummy();
         _weak = new WeakReference(_obj);
     }
-
 
     public bool RunTest()
     {
@@ -47,7 +45,6 @@ public class CreateObj
         return false;
     }
 
-
     public static int Main()
     {
         CreateObj temp = new CreateObj();
@@ -62,6 +59,3 @@ public class CreateObj
         return 1;
     }
 }
-
-
-

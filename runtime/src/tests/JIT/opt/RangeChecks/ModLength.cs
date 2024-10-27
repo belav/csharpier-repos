@@ -50,7 +50,9 @@ public class ModLength
             {
                 return;
             }
-            throw new InvalidOperationException($"{typeof(T)} exception was expected, actual: {e.GetType()}");
+            throw new InvalidOperationException(
+                $"{typeof(T)} exception was expected, actual: {e.GetType()}"
+            );
         }
         throw new InvalidOperationException($"{typeof(T)} exception was expected");
     }

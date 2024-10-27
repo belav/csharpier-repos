@@ -10,17 +10,18 @@ namespace System.Data.ProviderBase
 {
     internal class DbMetaDataFactory
     { // V1.2.3300
-
         private readonly DataSet _metaDataCollectionsDataSet;
         private string _normalizedServerVersion;
         private string _serverVersionString;
+
         // well known column names
         private const string _collectionName = "CollectionName";
         private const string _populationMechanism = "PopulationMechanism";
         private const string _populationString = "PopulationString";
         private const string _maximumVersion = "MaximumVersion";
         private const string _minimumVersion = "MinimumVersion";
-        private const string _dataSourceProductVersionNormalized = "DataSourceProductVersionNormalized";
+        private const string _dataSourceProductVersionNormalized =
+            "DataSourceProductVersionNormalized";
         private const string _dataSourceProductVersion = "DataSourceProductVersion";
         private const string _restrictionNumber = "RestrictionNumber";
         private const string _numberOfRestrictions = "NumberOfRestrictions";
@@ -32,7 +33,11 @@ namespace System.Data.ProviderBase
         private const string _sqlCommand = "SQLCommand";
         private const string _prepareCollection = "PrepareCollection";
 
-        public DbMetaDataFactory(Stream xmlStream, string serverVersion, string normalizedServerVersion)
+        public DbMetaDataFactory(
+            Stream xmlStream,
+            string serverVersion,
+            string normalizedServerVersion
+        )
         {
             ADP.CheckArgumentNull(xmlStream, "xmlStream");
             ADP.CheckArgumentNull(serverVersion, "serverVersion");
@@ -47,29 +52,23 @@ namespace System.Data.ProviderBase
 
         protected DataSet CollectionDataSet
         {
-            get
-            {
-                return _metaDataCollectionsDataSet;
-            }
+            get { return _metaDataCollectionsDataSet; }
         }
 
         protected string ServerVersion
         {
-            get
-            {
-                return _serverVersionString;
-            }
+            get { return _serverVersionString; }
         }
 
         protected string ServerVersionNormalized
         {
-            get
-            {
-                return _normalizedServerVersion;
-            }
+            get { return _normalizedServerVersion; }
         }
 
-        protected DataTable CloneAndFilterCollection(string collectionName, string[]? hiddenColumnNames)
+        protected DataTable CloneAndFilterCollection(
+            string collectionName,
+            string[]? hiddenColumnNames
+        )
         {
             DataTable? sourceTable;
             DataTable destinationTable;
@@ -88,7 +87,11 @@ namespace System.Data.ProviderBase
             destinationTable.Locale = CultureInfo.InvariantCulture;
             destinationColumns = destinationTable.Columns;
 
-            filteredSourceColumns = FilterColumns(sourceTable, hiddenColumnNames, destinationColumns);
+            filteredSourceColumns = FilterColumns(
+                sourceTable,
+                hiddenColumnNames,
+                destinationColumns
+            );
 
             foreach (DataRow row in sourceTable.Rows)
             {
@@ -97,7 +100,10 @@ namespace System.Data.ProviderBase
                     newRow = destinationTable.NewRow();
                     for (int i = 0; i < destinationColumns.Count; i++)
                     {
-                        newRow[destinationColumns[i]] = row[filteredSourceColumns[i], DataRowVersion.Current];
+                        newRow[destinationColumns[i]] = row[
+                            filteredSourceColumns[i],
+                            DataRowVersion.Current
+                        ];
                     }
                     destinationTable.Rows.Add(newRow);
                     newRow.AcceptChanges();
@@ -122,18 +128,33 @@ namespace System.Data.ProviderBase
             }
         }
 
-        private DataTable ExecuteCommand(DataRow requestedCollectionRow, string?[]? restrictions, DbConnection connection)
+        private DataTable ExecuteCommand(
+            DataRow requestedCollectionRow,
+            string?[]? restrictions,
+            DbConnection connection
+        )
         {
-            DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]!;
-            DataColumn populationStringColumn = metaDataCollectionsTable.Columns[_populationString]!;
-            DataColumn numberOfRestrictionsColumn = metaDataCollectionsTable.Columns[_numberOfRestrictions]!;
+            DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[
+                DbMetaDataCollectionNames.MetaDataCollections
+            ]!;
+            DataColumn populationStringColumn = metaDataCollectionsTable.Columns[
+                _populationString
+            ]!;
+            DataColumn numberOfRestrictionsColumn = metaDataCollectionsTable.Columns[
+                _numberOfRestrictions
+            ]!;
             DataColumn collectionNameColumn = metaDataCollectionsTable.Columns[_collectionName]!;
             //DataColumn  restrictionNameColumn = metaDataCollectionsTable.Columns[_restrictionName];
 
             Debug.Assert(requestedCollectionRow != null);
-            string sqlCommand = (requestedCollectionRow[populationStringColumn, DataRowVersion.Current] as string)!;
-            int numberOfRestrictions = (int)requestedCollectionRow[numberOfRestrictionsColumn, DataRowVersion.Current];
-            string collectionName = (requestedCollectionRow[collectionNameColumn, DataRowVersion.Current] as string)!;
+            string sqlCommand = (
+                requestedCollectionRow[populationStringColumn, DataRowVersion.Current] as string
+            )!;
+            int numberOfRestrictions = (int)
+                requestedCollectionRow[numberOfRestrictionsColumn, DataRowVersion.Current];
+            string collectionName = (
+                requestedCollectionRow[collectionNameColumn, DataRowVersion.Current] as string
+            )!;
 
             if ((restrictions != null) && (restrictions.Length > numberOfRestrictions))
             {
@@ -149,7 +170,11 @@ namespace System.Data.ProviderBase
             {
                 DbParameter restrictionParameter = command.CreateParameter();
 
-                if ((restrictions != null) && (restrictions.Length > i) && (restrictions[i] != null))
+                if (
+                    (restrictions != null)
+                    && (restrictions.Length > i)
+                    && (restrictions[i] != null)
+                )
                 {
                     restrictionParameter.Value = restrictions[i];
                 }
@@ -157,7 +182,6 @@ namespace System.Data.ProviderBase
                 {
                     // This is where we have to assign null to the value of the parameter.
                     restrictionParameter.Value = DBNull.Value;
-
                 }
 
                 restrictionParameter.ParameterName = GetParameterName(collectionName, i + 1);
@@ -207,7 +231,11 @@ namespace System.Data.ProviderBase
             return resultTable;
         }
 
-        private static DataColumn[] FilterColumns(DataTable sourceTable, string[]? hiddenColumnNames, DataColumnCollection destinationColumns)
+        private static DataColumn[] FilterColumns(
+            DataTable sourceTable,
+            string[]? hiddenColumnNames,
+            DataColumnCollection destinationColumns
+        )
         {
             DataColumn newDestinationColumn;
             int currentColumn;
@@ -233,7 +261,10 @@ namespace System.Data.ProviderBase
             {
                 if (IncludeThisColumn(sourceColumn, hiddenColumnNames))
                 {
-                    newDestinationColumn = new DataColumn(sourceColumn.ColumnName, sourceColumn.DataType);
+                    newDestinationColumn = new DataColumn(
+                        sourceColumn.ColumnName,
+                        sourceColumn.DataType
+                    );
                     destinationColumns.Add(newDestinationColumn);
                     filteredSourceColumns[currentColumn] = sourceColumn;
                     currentColumn++;
@@ -249,17 +280,24 @@ namespace System.Data.ProviderBase
             bool haveMultipleInexactMatches;
             string? candidateCollectionName;
 
-            DataTable? metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections];
+            DataTable? metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[
+                DbMetaDataCollectionNames.MetaDataCollections
+            ];
             if (metaDataCollectionsTable == null)
             {
                 throw ADP.InvalidXml();
             }
 
-            DataColumn? collectionNameColumn = metaDataCollectionsTable.Columns[DbMetaDataColumnNames.CollectionName];
+            DataColumn? collectionNameColumn = metaDataCollectionsTable.Columns[
+                DbMetaDataColumnNames.CollectionName
+            ];
 
             if ((null == collectionNameColumn) || (typeof(string) != collectionNameColumn.DataType))
             {
-                throw ADP.InvalidXmlMissingColumn(DbMetaDataCollectionNames.MetaDataCollections, DbMetaDataColumnNames.CollectionName);
+                throw ADP.InvalidXmlMissingColumn(
+                    DbMetaDataCollectionNames.MetaDataCollections,
+                    DbMetaDataColumnNames.CollectionName
+                );
             }
 
             DataRow? requestedCollectionRow = null;
@@ -272,10 +310,14 @@ namespace System.Data.ProviderBase
 
             foreach (DataRow row in metaDataCollectionsTable.Rows)
             {
-                candidateCollectionName = row[collectionNameColumn, DataRowVersion.Current] as string;
+                candidateCollectionName =
+                    row[collectionNameColumn, DataRowVersion.Current] as string;
                 if (ADP.IsEmpty(candidateCollectionName))
                 {
-                    throw ADP.InvalidXmlInvalidValue(DbMetaDataCollectionNames.MetaDataCollections, DbMetaDataColumnNames.CollectionName);
+                    throw ADP.InvalidXmlInvalidValue(
+                        DbMetaDataCollectionNames.MetaDataCollections,
+                        DbMetaDataColumnNames.CollectionName
+                    );
                 }
 
                 if (ADP.CompareInsensitiveInvariant(candidateCollectionName, collectionName))
@@ -329,14 +371,17 @@ namespace System.Data.ProviderBase
             }
 
             return requestedCollectionRow;
-
         }
 
         private void FixUpVersion(DataTable dataSourceInfoTable)
         {
-            Debug.Assert(dataSourceInfoTable.TableName == DbMetaDataCollectionNames.DataSourceInformation);
+            Debug.Assert(
+                dataSourceInfoTable.TableName == DbMetaDataCollectionNames.DataSourceInformation
+            );
             DataColumn? versionColumn = dataSourceInfoTable.Columns[_dataSourceProductVersion];
-            DataColumn? normalizedVersionColumn = dataSourceInfoTable.Columns[_dataSourceProductVersionNormalized];
+            DataColumn? normalizedVersionColumn = dataSourceInfoTable.Columns[
+                _dataSourceProductVersionNormalized
+            ];
 
             if ((versionColumn == null) || (normalizedVersionColumn == null))
             {
@@ -365,7 +410,9 @@ namespace System.Data.ProviderBase
             DataColumn? restrictionNumber = null;
             string? result = null;
 
-            restrictionsTable = _metaDataCollectionsDataSet.Tables[DbMetaDataCollectionNames.Restrictions];
+            restrictionsTable = _metaDataCollectionsDataSet.Tables[
+                DbMetaDataCollectionNames.Restrictions
+            ];
             if (restrictionsTable != null)
             {
                 restrictionColumns = restrictionsTable.Columns;
@@ -378,16 +425,23 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            if ((parameterName == null) || (collectionName == null) || (restrictionName == null) || (restrictionNumber == null))
+            if (
+                (parameterName == null)
+                || (collectionName == null)
+                || (restrictionName == null)
+                || (restrictionNumber == null)
+            )
             {
                 throw ADP.MissingRestrictionColumn();
             }
 
             foreach (DataRow restriction in restrictionsTable!.Rows)
             {
-                if (((string)restriction[collectionName] == neededCollectionName) &&
-                    ((int)restriction[restrictionNumber] == neededRestrictionNumber) &&
-                    (SupportedByCurrentVersion(restriction)))
+                if (
+                    ((string)restriction[collectionName] == neededCollectionName)
+                    && ((int)restriction[restrictionNumber] == neededRestrictionNumber)
+                    && (SupportedByCurrentVersion(restriction))
+                )
                 {
                     result = (string)restriction[parameterName];
                     break;
@@ -400,21 +454,32 @@ namespace System.Data.ProviderBase
             }
 
             return result;
-
         }
 
-        public virtual DataTable GetSchema(DbConnection connection, string collectionName, string?[]? restrictions)
+        public virtual DataTable GetSchema(
+            DbConnection connection,
+            string collectionName,
+            string?[]? restrictions
+        )
         {
             Debug.Assert(_metaDataCollectionsDataSet != null);
 
-            DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[DbMetaDataCollectionNames.MetaDataCollections]!;
-            DataColumn populationMechanismColumn = metaDataCollectionsTable.Columns[_populationMechanism]!;
-            DataColumn collectionNameColumn = metaDataCollectionsTable.Columns[DbMetaDataColumnNames.CollectionName]!;
+            DataTable metaDataCollectionsTable = _metaDataCollectionsDataSet.Tables[
+                DbMetaDataCollectionNames.MetaDataCollections
+            ]!;
+            DataColumn populationMechanismColumn = metaDataCollectionsTable.Columns[
+                _populationMechanism
+            ]!;
+            DataColumn collectionNameColumn = metaDataCollectionsTable.Columns[
+                DbMetaDataColumnNames.CollectionName
+            ]!;
             string[]? hiddenColumns;
             DataTable? requestedSchema;
 
             DataRow? requestedCollectionRow = FindMetaDataCollectionRow(collectionName);
-            string exactCollectionName = (requestedCollectionRow[collectionNameColumn, DataRowVersion.Current] as string)!;
+            string exactCollectionName = (
+                requestedCollectionRow[collectionNameColumn, DataRowVersion.Current] as string
+            )!;
 
             if (ADP.IsEmptyArray(restrictions) == false)
             {
@@ -429,7 +494,9 @@ namespace System.Data.ProviderBase
                 }
             }
 
-            string populationMechanism = (requestedCollectionRow[populationMechanismColumn, DataRowVersion.Current] as string)!;
+            string populationMechanism = (
+                requestedCollectionRow[populationMechanismColumn, DataRowVersion.Current] as string
+            )!;
             switch (populationMechanism)
             {
                 case _dataTable:
@@ -462,11 +529,19 @@ namespace System.Data.ProviderBase
                     break;
 
                 case _sqlCommand:
-                    requestedSchema = ExecuteCommand(requestedCollectionRow, restrictions, connection);
+                    requestedSchema = ExecuteCommand(
+                        requestedCollectionRow,
+                        restrictions,
+                        connection
+                    );
                     break;
 
                 case _prepareCollection:
-                    requestedSchema = PrepareCollection(exactCollectionName, restrictions, connection);
+                    requestedSchema = PrepareCollection(
+                        exactCollectionName,
+                        restrictions,
+                        connection
+                    );
                     break;
 
                 default:
@@ -507,7 +582,11 @@ namespace System.Data.ProviderBase
             return result;
         }
 
-        protected virtual DataTable PrepareCollection(string collectionName, string?[]? restrictions, DbConnection connection)
+        protected virtual DataTable PrepareCollection(
+            string collectionName,
+            string?[]? restrictions,
+            DbConnection connection
+        )
         {
             throw ADP.NotSupported();
         }
@@ -528,7 +607,14 @@ namespace System.Data.ProviderBase
                 {
                     if (version != DBNull.Value)
                     {
-                        if (0 > string.Compare(_normalizedServerVersion, (string)version, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            0
+                            > string.Compare(
+                                _normalizedServerVersion,
+                                (string)version,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             result = false;
                         }
@@ -547,7 +633,14 @@ namespace System.Data.ProviderBase
                     {
                         if (version != DBNull.Value)
                         {
-                            if (0 < string.Compare(_normalizedServerVersion, (string)version, StringComparison.OrdinalIgnoreCase))
+                            if (
+                                0
+                                < string.Compare(
+                                    _normalizedServerVersion,
+                                    (string)version,
+                                    StringComparison.OrdinalIgnoreCase
+                                )
+                            )
                             {
                                 result = false;
                             }

@@ -23,10 +23,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     public partial class SyntaxFactory
     {
-        public static NameColonSyntax NameColon(IdentifierNameSyntax name)
-            => NameColon(name, Token(SyntaxKind.ColonToken));
+        public static NameColonSyntax NameColon(IdentifierNameSyntax name) =>
+            NameColon(name, Token(SyntaxKind.ColonToken));
 
-        public static NameColonSyntax NameColon(string name)
-            => NameColon(IdentifierName(name));
+        public static NameColonSyntax NameColon(string name) => NameColon(IdentifierName(name));
     }
 }

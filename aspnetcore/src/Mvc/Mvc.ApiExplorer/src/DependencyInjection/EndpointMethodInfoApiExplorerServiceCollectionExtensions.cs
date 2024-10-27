@@ -20,11 +20,21 @@ public static class EndpointMetadataApiExplorerServiceCollectionExtensions
     public static IServiceCollection AddEndpointsApiExplorer(this IServiceCollection services)
     {
         // Try to add default services in case MVC services aren't added.
-        services.TryAddSingleton<IActionDescriptorCollectionProvider, DefaultActionDescriptorCollectionProvider>();
-        services.TryAddSingleton<IApiDescriptionGroupCollectionProvider, ApiDescriptionGroupCollectionProvider>();
+        services.TryAddSingleton<
+            IActionDescriptorCollectionProvider,
+            DefaultActionDescriptorCollectionProvider
+        >();
+        services.TryAddSingleton<
+            IApiDescriptionGroupCollectionProvider,
+            ApiDescriptionGroupCollectionProvider
+        >();
 
         services.TryAddEnumerable(
-            ServiceDescriptor.Transient<IApiDescriptionProvider, EndpointMetadataApiDescriptionProvider>());
+            ServiceDescriptor.Transient<
+                IApiDescriptionProvider,
+                EndpointMetadataApiDescriptionProvider
+            >()
+        );
 
         return services;
     }

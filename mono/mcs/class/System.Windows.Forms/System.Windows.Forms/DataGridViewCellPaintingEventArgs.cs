@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,119 +27,160 @@
 using System.ComponentModel;
 using System.Drawing;
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public class DataGridViewCellPaintingEventArgs : HandledEventArgs
+    {
+        private DataGridView dataGridView;
+        private Graphics graphics;
+        private Rectangle clipBounds;
+        private Rectangle cellBounds;
+        private int rowIndex;
+        private int columnIndex;
+        private DataGridViewElementStates cellState;
+        private object cellValue;
+        private object formattedValue;
+        private string errorText;
+        private DataGridViewCellStyle cellStyle;
+        private DataGridViewAdvancedBorderStyle advancedBorderStyle;
+        private DataGridViewPaintParts paintParts;
 
-	public class DataGridViewCellPaintingEventArgs : HandledEventArgs {
+        public DataGridViewCellPaintingEventArgs(
+            DataGridView dataGridView,
+            Graphics graphics,
+            Rectangle clipBounds,
+            Rectangle cellBounds,
+            int rowIndex,
+            int columnIndex,
+            DataGridViewElementStates cellState,
+            object value,
+            object formattedValue,
+            string errorText,
+            DataGridViewCellStyle cellStyle,
+            DataGridViewAdvancedBorderStyle advancedBorderStyle,
+            DataGridViewPaintParts paintParts
+        )
+        {
+            this.dataGridView = dataGridView;
+            this.graphics = graphics;
+            this.clipBounds = clipBounds;
+            this.cellBounds = cellBounds;
+            this.rowIndex = rowIndex;
+            this.columnIndex = columnIndex;
+            this.cellState = cellState;
+            this.cellValue = value;
+            this.formattedValue = formattedValue;
+            this.errorText = errorText;
+            this.cellStyle = cellStyle;
+            this.advancedBorderStyle = advancedBorderStyle;
+            this.paintParts = paintParts;
+        }
 
-		private DataGridView dataGridView;
-		private Graphics graphics;
-		private Rectangle clipBounds; 
-		private Rectangle cellBounds;
-		private int rowIndex;
-		private int columnIndex;
-		private DataGridViewElementStates cellState;
-		private object cellValue;
-		private object formattedValue;
-		private string errorText;
-		private DataGridViewCellStyle cellStyle;
-		private DataGridViewAdvancedBorderStyle advancedBorderStyle;
-		private DataGridViewPaintParts paintParts;
+        public DataGridViewAdvancedBorderStyle AdvancedBorderStyle
+        {
+            get { return advancedBorderStyle; }
+        }
 
-		public DataGridViewCellPaintingEventArgs (DataGridView dataGridView, Graphics graphics, Rectangle clipBounds, Rectangle cellBounds, int rowIndex, int columnIndex, DataGridViewElementStates cellState, object value, object formattedValue, string errorText, DataGridViewCellStyle cellStyle, DataGridViewAdvancedBorderStyle advancedBorderStyle, DataGridViewPaintParts paintParts) {
-			this.dataGridView = dataGridView;
-			this.graphics = graphics;
-			this.clipBounds = clipBounds;
-			this.cellBounds = cellBounds;
-			this.rowIndex = rowIndex;
-			this.columnIndex = columnIndex;
-			this.cellState = cellState;
-			this.cellValue = value;
-			this.formattedValue = formattedValue;
-			this.errorText = errorText;
-			this.cellStyle = cellStyle;
-			this.advancedBorderStyle = advancedBorderStyle;
-			this.paintParts = paintParts;
-		}
+        public Rectangle CellBounds
+        {
+            get { return cellBounds; }
+        }
 
-		public DataGridViewAdvancedBorderStyle AdvancedBorderStyle {
-			get { return advancedBorderStyle; }
-		}
+        public DataGridViewCellStyle CellStyle
+        {
+            get { return cellStyle; }
+        }
 
-		public Rectangle CellBounds {
-			get { return cellBounds; }
-		}
+        public Rectangle ClipBounds
+        {
+            get { return clipBounds; }
+        }
 
-		public DataGridViewCellStyle CellStyle {
-			get { return cellStyle; }
-		}
+        public int ColumnIndex
+        {
+            get { return columnIndex; }
+        }
 
-		public Rectangle ClipBounds {
-			get { return clipBounds; }
-		}
+        public string ErrorText
+        {
+            get { return errorText; }
+        }
 
-		public int ColumnIndex {
-			get { return columnIndex; }
-		}
+        public object FormattedValue
+        {
+            get { return formattedValue; }
+        }
 
-		public string ErrorText {
-			get { return errorText; }
-		}
+        public Graphics Graphics
+        {
+            get { return graphics; }
+        }
 
-		public object FormattedValue {
-			get { return formattedValue; }
-		}
+        public DataGridViewPaintParts PaintParts
+        {
+            get { return paintParts; }
+        }
 
-		public Graphics Graphics {
-			get { return graphics; }
-		}
+        public int RowIndex
+        {
+            get { return rowIndex; }
+        }
 
-		public DataGridViewPaintParts PaintParts {
-			get { return paintParts; }
-		}
+        public DataGridViewElementStates State
+        {
+            get { return cellState; }
+        }
 
-		public int RowIndex {
-			get { return rowIndex; }
-		}
+        public object Value
+        {
+            get { return cellValue; }
+        }
 
-		public DataGridViewElementStates State {
-			get { return cellState; }
-		}
+        public void Paint(Rectangle clipBounds, DataGridViewPaintParts paintParts)
+        {
+            if (rowIndex < -1 || rowIndex >= dataGridView.Rows.Count)
+                throw new InvalidOperationException("Invalid \"RowIndex.\"");
+            if (columnIndex < -1 || columnIndex >= dataGridView.Columns.Count)
+                throw new InvalidOperationException("Invalid \"ColumnIndex.\"");
 
-		public object Value {
-			get { return cellValue; }
-		}
+            DataGridViewCell cell;
 
-		public void Paint (Rectangle clipBounds, DataGridViewPaintParts paintParts) {
-			if (rowIndex < -1 || rowIndex >= dataGridView.Rows.Count)
-				throw new InvalidOperationException("Invalid \"RowIndex.\"");
-			if (columnIndex < -1 || columnIndex >= dataGridView.Columns.Count)
-				throw new InvalidOperationException("Invalid \"ColumnIndex.\"");
+            if (rowIndex == -1 && columnIndex == -1)
+                cell = dataGridView.TopLeftHeaderCell;
+            else if (rowIndex == -1)
+                cell = dataGridView.Columns[columnIndex].HeaderCell;
+            else if (columnIndex == -1)
+                cell = dataGridView.Rows[rowIndex].HeaderCell;
+            else
+                cell = dataGridView.Rows[rowIndex].Cells[columnIndex];
 
-			DataGridViewCell cell;
+            cell.PaintInternal(
+                graphics,
+                clipBounds,
+                cellBounds,
+                rowIndex,
+                cellState,
+                Value,
+                formattedValue,
+                errorText,
+                cellStyle,
+                advancedBorderStyle,
+                paintParts
+            );
+        }
 
-			if (rowIndex == -1 && columnIndex == -1)
-				cell = dataGridView.TopLeftHeaderCell;
-			else if (rowIndex == -1)
-				cell = dataGridView.Columns[columnIndex].HeaderCell;
-			else if (columnIndex == -1)
-				cell = dataGridView.Rows[rowIndex].HeaderCell;
-			else
-				cell = dataGridView.Rows[rowIndex].Cells[columnIndex];
+        public void PaintBackground(Rectangle clipBounds, bool cellsPaintSelectionBackground)
+        {
+            Paint(clipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
+        }
 
-			cell.PaintInternal (graphics, clipBounds, cellBounds, rowIndex, cellState, Value, formattedValue, errorText, cellStyle, advancedBorderStyle, paintParts);				
-		}
-
-		public void PaintBackground (Rectangle clipBounds, bool cellsPaintSelectionBackground)
-		{
-			Paint (clipBounds, DataGridViewPaintParts.Background | DataGridViewPaintParts.Border);
-		}
-			
-		[MonoInternalNote ("Needs row header cell edit pencil glyph")]
-		public void PaintContent (Rectangle clipBounds)
-		{
-			Paint (clipBounds, DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground);
-		}
-
-	}
-
+        [MonoInternalNote("Needs row header cell edit pencil glyph")]
+        public void PaintContent(Rectangle clipBounds)
+        {
+            Paint(
+                clipBounds,
+                DataGridViewPaintParts.ContentBackground | DataGridViewPaintParts.ContentForeground
+            );
+        }
+    }
 }

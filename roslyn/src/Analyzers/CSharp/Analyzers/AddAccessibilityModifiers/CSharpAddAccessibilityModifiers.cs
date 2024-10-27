@@ -11,20 +11,20 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 {
-    internal class CSharpAddAccessibilityModifiers : AbstractAddAccessibilityModifiers<MemberDeclarationSyntax>
+    internal class CSharpAddAccessibilityModifiers
+        : AbstractAddAccessibilityModifiers<MemberDeclarationSyntax>
     {
         public static readonly CSharpAddAccessibilityModifiers Instance = new();
 
-        protected CSharpAddAccessibilityModifiers()
-        {
-        }
+        protected CSharpAddAccessibilityModifiers() { }
 
         public override bool ShouldUpdateAccessibilityModifier(
             IAccessibilityFacts accessibilityFacts,
             MemberDeclarationSyntax member,
             AccessibilityModifiersRequired option,
             out SyntaxToken name,
-            out bool modifierAdded)
+            out bool modifierAdded
+        )
         {
             modifierAdded = false;
 

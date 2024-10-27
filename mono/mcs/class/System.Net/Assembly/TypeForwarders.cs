@@ -26,23 +26,56 @@
 
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.Cookie))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.CookieCollection))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.CookieContainer))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.CookieException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.HttpRequestHeader))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.HttpStatusCode))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.CookieCollection)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.CookieContainer)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.CookieException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.HttpRequestHeader)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.HttpStatusCode)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.WebRequest))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.HttpWebRequest))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.HttpWebRequest)
+)]
 [assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.WebResponse))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.HttpWebResponse))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.ICredentials))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.IWebRequestCreate))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkCredential))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.ProtocolViolationException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.WebException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.WebExceptionStatus))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.WebHeaderCollection))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkAddressChangedEventHandler))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkChange))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(typeof(System.Net.NetworkInformation.NetworkInterface))]
-
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.HttpWebResponse)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.ICredentials)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.IWebRequestCreate)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkCredential)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.ProtocolViolationException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.WebException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.WebExceptionStatus)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.WebHeaderCollection)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.NetworkAddressChangedEventHandler)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.NetworkChange)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedToAttribute(
+    typeof(System.Net.NetworkInformation.NetworkInterface)
+)]

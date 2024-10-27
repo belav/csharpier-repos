@@ -24,7 +24,8 @@ public class TypeMaterializationInfo
         Type modelClrType,
         IProperty? property,
         RelationalTypeMapping mapping,
-        bool? nullable = null)
+        bool? nullable = null
+    )
     {
         ProviderClrType = mapping.Converter?.ProviderClrType ?? modelClrType;
         ModelClrType = modelClrType;
@@ -63,28 +64,29 @@ public class TypeMaterializationInfo
     /// </summary>
     /// <param name="other">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
-    protected virtual bool Equals(TypeMaterializationInfo other)
-        => ProviderClrType == other.ProviderClrType
-            && ModelClrType == other.ModelClrType
-            && Equals(Mapping, other.Mapping)
-            && Equals(Property, other.Property)
-            && IsNullable == other.IsNullable;
+    protected virtual bool Equals(TypeMaterializationInfo other) =>
+        ProviderClrType == other.ProviderClrType
+        && ModelClrType == other.ModelClrType
+        && Equals(Mapping, other.Mapping)
+        && Equals(Property, other.Property)
+        && IsNullable == other.IsNullable;
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
     /// </summary>
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
-    public override bool Equals(object? obj)
-        => obj is not null
-            && (ReferenceEquals(this, obj)
-                || obj.GetType() == GetType()
-                && Equals((TypeMaterializationInfo)obj));
+    public override bool Equals(object? obj) =>
+        obj is not null
+        && (
+            ReferenceEquals(this, obj)
+            || obj.GetType() == GetType() && Equals((TypeMaterializationInfo)obj)
+        );
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
-    public override int GetHashCode()
-        => HashCode.Combine(ProviderClrType, ModelClrType, Mapping, Property, IsNullable);
+    public override int GetHashCode() =>
+        HashCode.Combine(ProviderClrType, ModelClrType, Mapping, Property, IsNullable);
 }

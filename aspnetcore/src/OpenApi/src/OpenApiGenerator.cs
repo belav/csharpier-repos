@@ -40,7 +40,8 @@ internal sealed class OpenApiGenerator
     /// <param name="serviceProviderIsService">The service to determine if the type is available from the <see cref="IServiceProvider"/>.</param>
     internal OpenApiGenerator(
         IHostEnvironment? environment,
-        IServiceProviderIsService? serviceProviderIsService)
+        IServiceProviderIsService? serviceProviderIsService
+    )
     {
         _environment = environment;
         _serviceProviderIsService = serviceProviderIsService;
@@ -56,11 +57,16 @@ internal sealed class OpenApiGenerator
     internal OpenApiOperation? GetOpenApiOperation(
         MethodInfo methodInfo,
         EndpointMetadataCollection metadata,
-        RoutePattern pattern)
+        RoutePattern pattern
+    )
     {
-        if (metadata.GetMetadata<IHttpMethodMetadata>() is { } httpMethodMetadata &&
-            httpMethodMetadata.HttpMethods.SingleOrDefault() is { } method &&
-            metadata.GetMetadata<IExcludeFromDescriptionMetadata>() is null or { ExcludeFromDescription: false })
+        if (
+            metadata.GetMetadata<IHttpMethodMetadata>() is { } httpMethodMetadata
+            && httpMethodMetadata.HttpMethods.SingleOrDefault() is { } method
+            && metadata.GetMetadata<IExcludeFromDescriptionMetadata>()
+                is null
+                    or { ExcludeFromDescription: false }
+        )
         {
             return GetOperation(method, methodInfo, metadata, pattern);
         }
@@ -68,7 +74,12 @@ internal sealed class OpenApiGenerator
         return null;
     }
 
-    private OpenApiOperation GetOperation(string httpMethod, MethodInfo methodInfo, EndpointMetadataCollection metadata, RoutePattern pattern)
+    private OpenApiOperation GetOperation(
+        string httpMethod,
+        MethodInfo methodInfo,
+        EndpointMetadataCollection metadata,
+        RoutePattern pattern
+    )
     {
         var disableInferredBody = ShouldDisableInferredBody(httpMethod);
         return new OpenApiOperation
@@ -79,22 +90,25 @@ internal sealed class OpenApiGenerator
             Tags = GetOperationTags(methodInfo, metadata),
             Parameters = GetOpenApiParameters(methodInfo, pattern, disableInferredBody),
             RequestBody = GetOpenApiRequestBody(methodInfo, metadata, pattern, disableInferredBody),
-            Responses = GetOpenApiResponses(methodInfo, metadata)
+            Responses = GetOpenApiResponses(methodInfo, metadata),
         };
 
         static bool ShouldDisableInferredBody(string method)
         {
             // GET, DELETE, HEAD, CONNECT, TRACE, and OPTIONS normally do not contain bodies
-            return method.Equals(HttpMethods.Get, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Delete, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Head, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Options, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Trace, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
+            return method.Equals(HttpMethods.Get, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Delete, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Head, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Options, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Trace, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
         }
     }
 
-    private static OpenApiResponses GetOpenApiResponses(MethodInfo method, EndpointMetadataCollection metadata)
+    private static OpenApiResponses GetOpenApiResponses(
+        MethodInfo method,
+        EndpointMetadataCollection metadata
+    )
     {
         var responses = new OpenApiResponses();
         var responseType = method.ReturnType;
@@ -125,7 +139,13 @@ internal sealed class OpenApiGenerator
 
             if (discoveredTypeAnnotation == typeof(void))
             {
-                if (responseType != null && (statusCode == StatusCodes.Status200OK || statusCode == StatusCodes.Status201Created))
+                if (
+                    responseType != null
+                    && (
+                        statusCode == StatusCodes.Status200OK
+                        || statusCode == StatusCodes.Status201Created
+                    )
+                )
                 {
                     discoveredTypeAnnotation = responseType;
                 }
@@ -136,14 +156,18 @@ internal sealed class OpenApiGenerator
                 discoveredContentTypeAnnotation.Add(contentType);
             }
 
-            discoveredTypeAnnotation = discoveredTypeAnnotation == null || discoveredTypeAnnotation == typeof(void)
-                ? responseType
-                : discoveredTypeAnnotation;
+            discoveredTypeAnnotation =
+                discoveredTypeAnnotation == null || discoveredTypeAnnotation == typeof(void)
+                    ? responseType
+                    : discoveredTypeAnnotation;
 
             if (discoveredTypeAnnotation is not null)
             {
                 GenerateDefaultContent(discoveredContentTypeAnnotation, discoveredTypeAnnotation);
-                eligibileAnnotations[statusCode] = (discoveredTypeAnnotation, discoveredContentTypeAnnotation);
+                eligibileAnnotations[statusCode] = (
+                    discoveredTypeAnnotation,
+                    discoveredContentTypeAnnotation
+                );
             }
         }
 
@@ -156,7 +180,13 @@ internal sealed class OpenApiGenerator
 
             if (discoveredTypeAnnotation == typeof(void))
             {
-                if (responseType != null && (statusCode == StatusCodes.Status200OK || statusCode == StatusCodes.Status201Created))
+                if (
+                    responseType != null
+                    && (
+                        statusCode == StatusCodes.Status200OK
+                        || statusCode == StatusCodes.Status201Created
+                    )
+                )
                 {
                     // ProducesResponseTypeAttribute's constructor defaults to setting "Type" to void when no value is specified.
                     // In this event, use the action's return type for 200 or 201 status codes. This lets you decorate an action with a
@@ -168,7 +198,9 @@ internal sealed class OpenApiGenerator
                 {
                     // Determine whether or not the type was provided by the user. If so, favor it over the default
                     // error type for 4xx client errors if no response type is specified.
-                    discoveredTypeAnnotation = defaultErrorType is not null ? defaultErrorType : discoveredTypeAnnotation;
+                    discoveredTypeAnnotation = defaultErrorType is not null
+                        ? defaultErrorType
+                        : discoveredTypeAnnotation;
                 }
                 else if (providerMetadata is IApiDefaultResponseMetadataProvider)
                 {
@@ -178,12 +210,16 @@ internal sealed class OpenApiGenerator
 
             providerMetadata.SetContentTypes(discoveredContentTypeAnnotation);
 
-            discoveredTypeAnnotation = discoveredTypeAnnotation == null || discoveredTypeAnnotation == typeof(void)
-                ? responseType
-                : discoveredTypeAnnotation;
+            discoveredTypeAnnotation =
+                discoveredTypeAnnotation == null || discoveredTypeAnnotation == typeof(void)
+                    ? responseType
+                    : discoveredTypeAnnotation;
 
             GenerateDefaultContent(discoveredContentTypeAnnotation, discoveredTypeAnnotation);
-            eligibileAnnotations[statusCode] = (discoveredTypeAnnotation, discoveredContentTypeAnnotation);
+            eligibileAnnotations[statusCode] = (
+                discoveredTypeAnnotation,
+                discoveredContentTypeAnnotation
+            );
         }
 
         if (responseType != null && eligibileAnnotations.Count == 0)
@@ -207,16 +243,19 @@ internal sealed class OpenApiGenerator
             responses[statusCode.ToString(CultureInfo.InvariantCulture)] = new OpenApiResponse
             {
                 Content = responseContent,
-                Description = GetResponseDescription(statusCode)
+                Description = GetResponseDescription(statusCode),
             };
         }
         return responses;
     }
 
-    private static string GetResponseDescription(int statusCode)
-        => ReasonPhrases.GetReasonPhrase(statusCode);
+    private static string GetResponseDescription(int statusCode) =>
+        ReasonPhrases.GetReasonPhrase(statusCode);
 
-    private static void GenerateDefaultContent(MediaTypeCollection discoveredContentTypeAnnotation, Type? discoveredTypeAnnotation)
+    private static void GenerateDefaultContent(
+        MediaTypeCollection discoveredContentTypeAnnotation,
+        Type? discoveredTypeAnnotation
+    )
     {
         if (discoveredContentTypeAnnotation.Count == 0)
         {
@@ -235,31 +274,55 @@ internal sealed class OpenApiGenerator
         }
     }
 
-    private static void GenerateDefaultResponses(Dictionary<int, (Type?, MediaTypeCollection)> eligibleAnnotations, Type responseType)
+    private static void GenerateDefaultResponses(
+        Dictionary<int, (Type?, MediaTypeCollection)> eligibleAnnotations,
+        Type responseType
+    )
     {
         if (responseType == typeof(void))
         {
-            eligibleAnnotations.Add(StatusCodes.Status200OK, (responseType, new MediaTypeCollection()));
+            eligibleAnnotations.Add(
+                StatusCodes.Status200OK,
+                (responseType, new MediaTypeCollection())
+            );
         }
         else if (responseType == typeof(string))
         {
-            eligibleAnnotations.Add(StatusCodes.Status200OK, (responseType, new MediaTypeCollection() { "text/plain" }));
+            eligibleAnnotations.Add(
+                StatusCodes.Status200OK,
+                (responseType, new MediaTypeCollection() { "text/plain" })
+            );
         }
         else
         {
-            eligibleAnnotations.Add(StatusCodes.Status200OK, (responseType, new MediaTypeCollection() { "application/json" }));
+            eligibleAnnotations.Add(
+                StatusCodes.Status200OK,
+                (responseType, new MediaTypeCollection() { "application/json" })
+            );
         }
     }
 
-    private OpenApiRequestBody? GetOpenApiRequestBody(MethodInfo methodInfo, EndpointMetadataCollection metadata, RoutePattern pattern, bool disableInferredBody)
+    private OpenApiRequestBody? GetOpenApiRequestBody(
+        MethodInfo methodInfo,
+        EndpointMetadataCollection metadata,
+        RoutePattern pattern,
+        bool disableInferredBody
+    )
     {
         var hasFormOrBodyParameter = false;
         ParameterInfo? requestBodyParameter = null;
 
-        var parameters = PropertyAsParameterInfo.Flatten(methodInfo.GetParameters(), ParameterBindingMethodCache);
+        var parameters = PropertyAsParameterInfo.Flatten(
+            methodInfo.GetParameters(),
+            ParameterBindingMethodCache
+        );
         foreach (var parameter in parameters)
         {
-            var (bodyOrFormParameter, _, _) = GetOpenApiParameterLocation(parameter, pattern, disableInferredBody);
+            var (bodyOrFormParameter, _, _) = GetOpenApiParameterLocation(
+                parameter,
+                pattern,
+                disableInferredBody
+            );
             hasFormOrBodyParameter |= bodyOrFormParameter;
             if (hasFormOrBodyParameter)
             {
@@ -283,7 +346,7 @@ internal sealed class OpenApiGenerator
                 return new OpenApiRequestBody()
                 {
                     Required = !acceptsMetadata.IsOptional,
-                    Content = requestBodyContent
+                    Content = requestBodyContent,
                 };
             }
         }
@@ -292,8 +355,14 @@ internal sealed class OpenApiGenerator
         {
             if (requestBodyContent.Count == 0)
             {
-                var isFormType = requestBodyParameter.ParameterType == typeof(IFormFile) || requestBodyParameter.ParameterType == typeof(IFormFileCollection);
-                var hasFormAttribute = requestBodyParameter.GetCustomAttributes().OfType<IFromFormMetadata>().FirstOrDefault() != null;
+                var isFormType =
+                    requestBodyParameter.ParameterType == typeof(IFormFile)
+                    || requestBodyParameter.ParameterType == typeof(IFormFileCollection);
+                var hasFormAttribute =
+                    requestBodyParameter
+                        .GetCustomAttributes()
+                        .OfType<IFromFormMetadata>()
+                        .FirstOrDefault() != null;
                 if (isFormType || hasFormAttribute)
                 {
                     requestBodyContent["multipart/form-data"] = new OpenApiMediaType();
@@ -306,22 +375,27 @@ internal sealed class OpenApiGenerator
 
             var nullabilityContext = new NullabilityInfoContext();
             var nullability = nullabilityContext.Create(requestBodyParameter);
-            var allowEmpty = requestBodyParameter.GetCustomAttributes().OfType<IFromBodyMetadata>().SingleOrDefault()?.AllowEmpty ?? false;
-            var isOptional = requestBodyParameter.HasDefaultValue
+            var allowEmpty =
+                requestBodyParameter
+                    .GetCustomAttributes()
+                    .OfType<IFromBodyMetadata>()
+                    .SingleOrDefault()
+                    ?.AllowEmpty ?? false;
+            var isOptional =
+                requestBodyParameter.HasDefaultValue
                 || nullability.ReadState != NullabilityState.NotNull
                 || allowEmpty;
 
-            return new OpenApiRequestBody
-            {
-                Required = !isOptional,
-                Content = requestBodyContent
-            };
+            return new OpenApiRequestBody { Required = !isOptional, Content = requestBodyContent };
         }
 
         return null;
     }
 
-    private List<OpenApiTag> GetOperationTags(MethodInfo methodInfo, EndpointMetadataCollection metadata)
+    private List<OpenApiTag> GetOperationTags(
+        MethodInfo methodInfo,
+        EndpointMetadataCollection metadata
+    )
     {
         var metadataList = metadata.GetOrderedMetadata<ITagsMetadata>();
 
@@ -342,7 +416,10 @@ internal sealed class OpenApiGenerator
 
         string controllerName;
 
-        if (methodInfo.DeclaringType is not null && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType))
+        if (
+            methodInfo.DeclaringType is not null
+            && !TypeHelper.IsCompilerGeneratedType(methodInfo.DeclaringType)
+        )
         {
             controllerName = methodInfo.DeclaringType.Name;
         }
@@ -356,19 +433,32 @@ internal sealed class OpenApiGenerator
         return new List<OpenApiTag>() { new OpenApiTag() { Name = controllerName } };
     }
 
-    private List<OpenApiParameter> GetOpenApiParameters(MethodInfo methodInfo, RoutePattern pattern, bool disableInferredBody)
+    private List<OpenApiParameter> GetOpenApiParameters(
+        MethodInfo methodInfo,
+        RoutePattern pattern,
+        bool disableInferredBody
+    )
     {
-        var parameters = PropertyAsParameterInfo.Flatten(methodInfo.GetParameters(), ParameterBindingMethodCache);
+        var parameters = PropertyAsParameterInfo.Flatten(
+            methodInfo.GetParameters(),
+            ParameterBindingMethodCache
+        );
         var openApiParameters = new List<OpenApiParameter>();
 
         foreach (var parameter in parameters)
         {
             if (parameter.Name is null)
             {
-                throw new InvalidOperationException($"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name.");
+                throw new InvalidOperationException(
+                    $"Encountered a parameter of type '{parameter.ParameterType}' without a name. Parameters must have a name."
+                );
             }
 
-            var (_, parameterLocation, attributeName) = GetOpenApiParameterLocation(parameter, pattern, disableInferredBody);
+            var (_, parameterLocation, attributeName) = GetOpenApiParameterLocation(
+                parameter,
+                pattern,
+                disableInferredBody
+            );
 
             // if the parameter doesn't have a valid location
             // then we should ignore it
@@ -381,13 +471,18 @@ internal sealed class OpenApiGenerator
             var isOptional = parameter is PropertyAsParameterInfo argument
                 ? argument.IsOptional
                 : parameter.HasDefaultValue || nullability.ReadState != NullabilityState.NotNull;
-            var name = attributeName ?? (pattern.GetParameter(parameter.Name) is { } routeParameter ? routeParameter.Name : parameter.Name);
+            var name =
+                attributeName
+                ?? (
+                    pattern.GetParameter(parameter.Name) is { } routeParameter
+                        ? routeParameter.Name
+                        : parameter.Name
+                );
             var openApiParameter = new OpenApiParameter()
             {
                 Name = name,
                 In = parameterLocation,
-                Required = !isOptional
-
+                Required = !isOptional,
             };
             openApiParameters.Add(openApiParameter);
         }
@@ -395,7 +490,15 @@ internal sealed class OpenApiGenerator
         return openApiParameters;
     }
 
-    private (bool isBodyOrForm, ParameterLocation? locatedIn, string? name) GetOpenApiParameterLocation(ParameterInfo parameter, RoutePattern pattern, bool disableInferredBody)
+    private (
+        bool isBodyOrForm,
+        ParameterLocation? locatedIn,
+        string? name
+    ) GetOpenApiParameterLocation(
+        ParameterInfo parameter,
+        RoutePattern pattern,
+        bool disableInferredBody
+    )
     {
         var attributes = parameter.GetCustomAttributes();
 
@@ -419,18 +522,26 @@ internal sealed class OpenApiGenerator
         {
             return (true, null, null);
         }
-        else if (parameter.CustomAttributes.Any(a => typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType) || typeof(FromKeyedServicesAttribute) == a.AttributeType) ||
-                parameter.ParameterType == typeof(HttpContext) ||
-                parameter.ParameterType == typeof(HttpRequest) ||
-                parameter.ParameterType == typeof(HttpResponse) ||
-                parameter.ParameterType == typeof(ClaimsPrincipal) ||
-                parameter.ParameterType == typeof(CancellationToken) ||
-                ParameterBindingMethodCache.HasBindAsyncMethod(parameter) ||
-                _serviceProviderIsService?.IsService(parameter.ParameterType) == true)
+        else if (
+            parameter.CustomAttributes.Any(a =>
+                typeof(IFromServiceMetadata).IsAssignableFrom(a.AttributeType)
+                || typeof(FromKeyedServicesAttribute) == a.AttributeType
+            )
+            || parameter.ParameterType == typeof(HttpContext)
+            || parameter.ParameterType == typeof(HttpRequest)
+            || parameter.ParameterType == typeof(HttpResponse)
+            || parameter.ParameterType == typeof(ClaimsPrincipal)
+            || parameter.ParameterType == typeof(CancellationToken)
+            || ParameterBindingMethodCache.HasBindAsyncMethod(parameter)
+            || _serviceProviderIsService?.IsService(parameter.ParameterType) == true
+        )
         {
             return (false, null, null);
         }
-        else if (parameter.ParameterType == typeof(string) || ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType))
+        else if (
+            parameter.ParameterType == typeof(string)
+            || ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType)
+        )
         {
             // Path vs query cannot be determined by RequestDelegateFactory at startup currently because of the layering, but can be done here.
             if (parameter.Name is { } name && pattern.GetParameter(name) is not null)
@@ -442,14 +553,26 @@ internal sealed class OpenApiGenerator
                 return (false, ParameterLocation.Query, null);
             }
         }
-        else if (parameter.ParameterType == typeof(IFormFile) || parameter.ParameterType == typeof(IFormFileCollection))
+        else if (
+            parameter.ParameterType == typeof(IFormFile)
+            || parameter.ParameterType == typeof(IFormFileCollection)
+        )
         {
             return (true, null, null);
         }
-        else if (disableInferredBody && (
-                 parameter.ParameterType == typeof(string[]) ||
-                 parameter.ParameterType == typeof(StringValues) ||
-                 (parameter.ParameterType.IsArray && ParameterBindingMethodCache.HasTryParseMethod(parameter.ParameterType.GetElementType()!))))
+        else if (
+            disableInferredBody
+            && (
+                parameter.ParameterType == typeof(string[])
+                || parameter.ParameterType == typeof(StringValues)
+                || (
+                    parameter.ParameterType.IsArray
+                    && ParameterBindingMethodCache.HasTryParseMethod(
+                        parameter.ParameterType.GetElementType()!
+                    )
+                )
+            )
+        )
         {
             return (false, ParameterLocation.Query, null);
         }

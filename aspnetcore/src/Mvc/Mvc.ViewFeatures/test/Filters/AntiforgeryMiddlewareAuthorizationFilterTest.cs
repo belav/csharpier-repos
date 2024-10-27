@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Core.Filters;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Logging.Abstractions;
+
 namespace Microsoft.AspNetCore.Mvc.ViewFeatures.Test.Filters;
 
 public class AntiforgeryMiddlewareAuthorizationFilterTest
@@ -15,10 +16,19 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
     public async Task FiltersWorks_MiddlewareInvoked_InvalidFeature()
     {
         // Arrange
-        var filter = new AntiforgeryMiddlewareAuthorizationFilter(NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+        var filter = new AntiforgeryMiddlewareAuthorizationFilter(
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var httpContext = new DefaultHttpContext();
-        httpContext.Items[AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey] = new object();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(false, new AntiforgeryValidationException(string.Empty)));
+        httpContext.Items[
+            AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey
+        ] = new object();
+        httpContext.Features.Set<IAntiforgeryValidationFeature>(
+            new AntiforgeryValidationFeature(
+                false,
+                new AntiforgeryValidationException(string.Empty)
+            )
+        );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -33,10 +43,16 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
     public async Task FiltersWorks_MiddlewareInvoked_ValidFeature()
     {
         // Arrange
-        var filter = new AntiforgeryMiddlewareAuthorizationFilter(NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+        var filter = new AntiforgeryMiddlewareAuthorizationFilter(
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var httpContext = new DefaultHttpContext();
-        httpContext.Items[AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey] = new object();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(true, null));
+        httpContext.Items[
+            AntiforgeryMiddlewareAuthorizationFilter.AntiforgeryMiddlewareWithEndpointInvokedKey
+        ] = new object();
+        httpContext.Features.Set<IAntiforgeryValidationFeature>(
+            new AntiforgeryValidationFeature(true, null)
+        );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -51,9 +67,16 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
     public async Task FiltersWorks_MiddlewareNotInvoked_InvalidFeature()
     {
         // Arrange
-        var filter = new AntiforgeryMiddlewareAuthorizationFilter(NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+        var filter = new AntiforgeryMiddlewareAuthorizationFilter(
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(false, new AntiforgeryValidationException(string.Empty)));
+        httpContext.Features.Set<IAntiforgeryValidationFeature>(
+            new AntiforgeryValidationFeature(
+                false,
+                new AntiforgeryValidationException(string.Empty)
+            )
+        );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -68,9 +91,13 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
     public async Task FiltersWorks_MiddlewareNotInvoked_ValidFeature()
     {
         // Arrange
-        var filter = new AntiforgeryMiddlewareAuthorizationFilter(NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance);
+        var filter = new AntiforgeryMiddlewareAuthorizationFilter(
+            NullLogger<AntiforgeryMiddlewareAuthorizationFilter>.Instance
+        );
         var httpContext = new DefaultHttpContext();
-        httpContext.Features.Set<IAntiforgeryValidationFeature>(new AntiforgeryValidationFeature(true, null));
+        httpContext.Features.Set<IAntiforgeryValidationFeature>(
+            new AntiforgeryValidationFeature(true, null)
+        );
         var actionContext = new ActionContext(httpContext, new RouteData(), new ActionDescriptor());
         var context = new AuthorizationFilterContext(actionContext, new[] { filter });
 
@@ -81,7 +108,10 @@ public class AntiforgeryMiddlewareAuthorizationFilterTest
         Assert.Null(context.Result);
     }
 
-    private class AntiforgeryValidationFeature(bool isValid, AntiforgeryValidationException exception) : IAntiforgeryValidationFeature
+    private class AntiforgeryValidationFeature(
+        bool isValid,
+        AntiforgeryValidationException exception
+    ) : IAntiforgeryValidationFeature
     {
         public bool IsValid { get; } = isValid;
         public Exception Error { get; } = exception;

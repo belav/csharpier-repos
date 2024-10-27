@@ -29,7 +29,8 @@ namespace NetCoreServer
             string transferEncoding = context.Request.Headers["Transfer-Encoding"];
             if (!string.IsNullOrEmpty(transferEncoding))
             {
-                context.Response.Headers["X-HttpRequest-Headers-TransferEncoding"] = transferEncoding;
+                context.Response.Headers["X-HttpRequest-Headers-TransferEncoding"] =
+                    transferEncoding;
             }
 
             // Compute MD5 hash of received request body.
@@ -40,7 +41,10 @@ namespace NetCoreServer
 
             // Skip MD5 checksum for empty request body
             // or for requests which opt to skip it due to [ActiveIssue("https://github.com/dotnet/runtime/issues/37669", TestPlatforms.Browser)]
-            if (bodyLength == 0 || !string.IsNullOrEmpty(context.Request.Headers["Content-MD5-Skip"]))
+            if (
+                bodyLength == 0
+                || !string.IsNullOrEmpty(context.Request.Headers["Content-MD5-Skip"])
+            )
             {
                 context.Response.StatusCode = 200;
                 return;
@@ -68,13 +72,16 @@ namespace NetCoreServer
             }
         }
 
-        private static async Task<(byte[] MD5Hash, int BodyLength)> ComputeMD5HashRequestBodyAsync(HttpContext context)
+        private static async Task<(byte[] MD5Hash, int BodyLength)> ComputeMD5HashRequestBodyAsync(
+            HttpContext context
+        )
         {
             Stream requestStream = context.Request.Body;
             byte[] buffer = new byte[16 * 1024];
             using (MD5 md5 = MD5.Create())
             {
-                int read, size = 0;
+                int read,
+                    size = 0;
                 while ((read = await requestStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                 {
                     size += read;

@@ -27,52 +27,53 @@
 
 
 using System;
-using Microsoft.Build.Framework; 
+using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 
-namespace Microsoft.Build.Tasks {
-	public sealed class Message : TaskExtension {
-	
-		string			importance;
-		string			text;
-	
-		public Message ()
-		{
-		}
+namespace Microsoft.Build.Tasks
+{
+    public sealed class Message : TaskExtension
+    {
+        string importance;
+        string text;
 
-		public override bool Execute ()
-		{
-			if (text == null)
-				return true;
+        public Message() { }
 
-			MessageImportance	messageImportance;
-			
-			if (importance == null)
-				messageImportance = MessageImportance.Normal;
-			else if (string.Equals ("low", importance, StringComparison.OrdinalIgnoreCase))
-				messageImportance = MessageImportance.Low;
-			else if (string.Equals ("normal", importance, StringComparison.OrdinalIgnoreCase))
-				messageImportance = MessageImportance.Normal;
-			else if (string.Equals ("high", importance, StringComparison.OrdinalIgnoreCase))
-				messageImportance = MessageImportance.High;
-			else {
-				return false;
-			}
-			
-			Log.LogMessage (messageImportance, text, null);
+        public override bool Execute()
+        {
+            if (text == null)
+                return true;
 
-			return true;
-		}
-		
-		public string Importance {
-			get { return importance; }
-			set { importance = value; }
-		}
+            MessageImportance messageImportance;
 
-		public string Text {
-			get { return text; }
-			set { text = value; }
-		}
-	}
+            if (importance == null)
+                messageImportance = MessageImportance.Normal;
+            else if (string.Equals("low", importance, StringComparison.OrdinalIgnoreCase))
+                messageImportance = MessageImportance.Low;
+            else if (string.Equals("normal", importance, StringComparison.OrdinalIgnoreCase))
+                messageImportance = MessageImportance.Normal;
+            else if (string.Equals("high", importance, StringComparison.OrdinalIgnoreCase))
+                messageImportance = MessageImportance.High;
+            else
+            {
+                return false;
+            }
+
+            Log.LogMessage(messageImportance, text, null);
+
+            return true;
+        }
+
+        public string Importance
+        {
+            get { return importance; }
+            set { importance = value; }
+        }
+
+        public string Text
+        {
+            get { return text; }
+            set { text = value; }
+        }
+    }
 }
-

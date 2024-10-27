@@ -5,18 +5,16 @@
 namespace System.ServiceModel.Configuration
 {
     using System;
-    using System.ServiceModel;
     using System.Configuration;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Security.Cryptography;
+    using System.ServiceModel;
     using System.Xml;
 
     public sealed partial class DnsElement : ConfigurationElement
     {
-        public DnsElement()
-        {
-        }
+        public DnsElement() { }
 
         [ConfigurationProperty(ConfigurationStrings.Value, DefaultValue = "")]
         [StringValidator(MinLength = 0)]
@@ -34,5 +32,4 @@ namespace System.ServiceModel.Configuration
             }
         }
     }
-
 }

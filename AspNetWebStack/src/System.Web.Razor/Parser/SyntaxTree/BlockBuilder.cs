@@ -22,7 +22,11 @@ namespace System.Web.Razor.Parser.SyntaxTree
             CodeGenerator = original.CodeGenerator;
         }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "Type is the most appropriate name for this property and there is little chance of confusion with GetType")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "Type is the most appropriate name for this property and there is little chance of confusion with GetType"
+        )]
         public BlockType? Type { get; set; }
 
         public IList<SyntaxTreeNode> Children { get; private set; }

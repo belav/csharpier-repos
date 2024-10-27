@@ -20,20 +20,25 @@ public class PropertyColumn<TGridItem, TProp> : ColumnBase<TGridItem>
     /// <summary>
     /// Defines the value to be displayed in this column's cells.
     /// </summary>
-    [Parameter, EditorRequired] public Expression<Func<TGridItem, TProp>> Property { get; set; } = default!;
+    [Parameter, EditorRequired]
+    public Expression<Func<TGridItem, TProp>> Property { get; set; } = default!;
 
     /// <summary>
     /// Optionally specifies a format string for the value.
     ///
     /// Using this requires the <typeparamref name="TProp"/> type to implement <see cref="IFormattable" />.
     /// </summary>
-    [Parameter] public string? Format { get; set; }
+    [Parameter]
+    public string? Format { get; set; }
 
     /// <inheritdoc/>
     public override GridSort<TGridItem>? SortBy
     {
         get => _sortBuilder;
-        set => throw new NotSupportedException($"PropertyColumn generates this member internally. For custom sorting rules, see '{typeof(TemplateColumn<TGridItem>)}'.");
+        set =>
+            throw new NotSupportedException(
+                $"PropertyColumn generates this member internally. For custom sorting rules, see '{typeof(TemplateColumn<TGridItem>)}'."
+            );
     }
 
     /// <inheritdoc />
@@ -53,12 +58,19 @@ public class PropertyColumn<TGridItem, TProp> : ColumnBase<TGridItem>
 
                 // If the type is nullable, we're interested in formatting the underlying type
                 var nullableUnderlyingTypeOrNull = Nullable.GetUnderlyingType(typeof(TProp));
-                if (!typeof(IFormattable).IsAssignableFrom(nullableUnderlyingTypeOrNull ?? typeof(TProp)))
+                if (
+                    !typeof(IFormattable).IsAssignableFrom(
+                        nullableUnderlyingTypeOrNull ?? typeof(TProp)
+                    )
+                )
                 {
-                    throw new InvalidOperationException($"A '{nameof(Format)}' parameter was supplied, but the type '{typeof(TProp)}' does not implement '{typeof(IFormattable)}'.");
+                    throw new InvalidOperationException(
+                        $"A '{nameof(Format)}' parameter was supplied, but the type '{typeof(TProp)}' does not implement '{typeof(IFormattable)}'."
+                    );
                 }
 
-                _cellTextFunc = item => ((IFormattable?)compiledPropertyExpression!(item))?.ToString(Format, null);
+                _cellTextFunc = item =>
+                    ((IFormattable?)compiledPropertyExpression!(item))?.ToString(Format, null);
             }
             else
             {
@@ -75,6 +87,6 @@ public class PropertyColumn<TGridItem, TProp> : ColumnBase<TGridItem>
     }
 
     /// <inheritdoc />
-    protected internal override void CellContent(RenderTreeBuilder builder, TGridItem item)
-        => builder.AddContent(0, _cellTextFunc!(item));
+    protected internal override void CellContent(RenderTreeBuilder builder, TGridItem item) =>
+        builder.AddContent(0, _cellTextFunc!(item));
 }

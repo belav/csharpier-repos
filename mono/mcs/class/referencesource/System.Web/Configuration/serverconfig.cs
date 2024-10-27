@@ -4,28 +4,28 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Configuration {
-
-    using System.Configuration;
+namespace System.Web.Configuration
+{
     using System.Collections;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
     using System.Security;
     using System.Security.Permissions;
     using System.Text;
     using System.Threading;
-    using System.Web.Util;
-    using System.Web.Hosting;
     using System.Web.Caching;
     using System.Web.Compilation;
+    using System.Web.Hosting;
+    using System.Web.Util;
     using Microsoft.Win32;
 
     //
     // Abstracts differences between config retreived from IIS 6 metabase
     // and config retreived from new IIS7 configuration system.
     //
-    static internal class ServerConfig {
-
+    static internal class ServerConfig
+    {
         static int s_iisMajorVersion = 0;
 
         static object s_expressConfigsLock = new object();
@@ -36,30 +36,46 @@ namespace System.Web.Configuration {
         static string s_iisExpressVersion;
 
         // used in non-default domains only, by the ClientBuildManager
-        internal static string IISExpressVersion {
-            get {
-                return s_iisExpressVersion;
-            }
-            set {
-                if (Thread.GetDomain().IsDefaultAppDomain() || (s_iisExpressVersion != null && s_iisExpressVersion != value ))
+        internal static string IISExpressVersion
+        {
+            get { return s_iisExpressVersion; }
+            set
+            {
+                if (
+                    Thread.GetDomain().IsDefaultAppDomain()
+                    || (s_iisExpressVersion != null && s_iisExpressVersion != value)
+                )
                     throw new InvalidOperationException();
                 s_iisExpressVersion = value;
             }
         }
 
-        internal static bool UseMetabase {
-            [RegistryPermissionAttribute(SecurityAction.Assert, Read = "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\InetStp")]
-            get {
-                if (IISExpressVersion != null) {
+        internal static bool UseMetabase
+        {
+            [RegistryPermissionAttribute(
+                SecurityAction.Assert,
+                Read = "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\InetStp"
+            )]
+            get
+            {
+                if (IISExpressVersion != null)
+                {
                     return false;
                 }
-                if (s_iisMajorVersion == 0) {
+                if (s_iisMajorVersion == 0)
+                {
                     int version;
-                    try {
-                        object ver = Registry.GetValue("HKEY_LOCAL_MACHINE\\Software\\Microsoft\\InetStp", "MajorVersion", 0);
+                    try
+                    {
+                        object ver = Registry.GetValue(
+                            "HKEY_LOCAL_MACHINE\\Software\\Microsoft\\InetStp",
+                            "MajorVersion",
+                            0
+                        );
                         version = (ver != null) ? (int)ver : -1;
                     }
-                    catch (ArgumentException) {
+                    catch (ArgumentException)
+                    {
                         // Ignore ArgumentException from Registry.GetValue. This may indicate that the key does not exist, i.e. IIS not installed
                         version = -1; // Key not found
                     }
@@ -70,30 +86,39 @@ namespace System.Web.Configuration {
             }
         }
 
-        static internal IServerConfig GetInstance() {
+        internal static IServerConfig GetInstance()
+        {
             // IIS 7 bits on <= IIS 6: use the metabase
-            if (UseMetabase) {
+            if (UseMetabase)
+            {
                 return MetabaseServerConfig.GetInstance();
             }
-            if (IISExpressVersion == null) {
+            if (IISExpressVersion == null)
+            {
                 return ProcessHostServerConfig.GetInstance();
             }
             return ExpressServerConfig.GetInstance(IISExpressVersion);
         }
 
-        static internal IServerConfig GetDefaultDomainInstance(string version) {
-            if (version == null) {
+        internal static IServerConfig GetDefaultDomainInstance(string version)
+        {
+            if (version == null)
+            {
                 return GetInstance();
             }
             ExpressServerConfig expressConfig = null;
-            lock (s_expressConfigsLock) {
-                if (s_expressConfigs == null) {
-                    if (!Thread.GetDomain().IsDefaultAppDomain()) {
+            lock (s_expressConfigsLock)
+            {
+                if (s_expressConfigs == null)
+                {
+                    if (!Thread.GetDomain().IsDefaultAppDomain())
+                    {
                         throw new InvalidOperationException();
                     }
                     s_expressConfigs = new Dictionary<string, ExpressServerConfig>(3);
                 }
-                if (!s_expressConfigs.TryGetValue(version, out expressConfig)) {
+                if (!s_expressConfigs.TryGetValue(version, out expressConfig))
+                {
                     expressConfig = new ExpressServerConfig(version);
                     s_expressConfigs[version] = expressConfig;
                 }
@@ -106,20 +131,29 @@ namespace System.Web.Configuration {
         // to resolve paths.
         //
         static int s_useServerConfig = -1;
-        static internal bool UseServerConfig {
-            get {
-                if (s_useServerConfig == -1) {
+        internal static bool UseServerConfig
+        {
+            get
+            {
+                if (s_useServerConfig == -1)
+                {
                     int useServerConfig = 0;
                     // Must use web server config if there is no hosting environment
-                    if (!HostingEnvironment.IsHosted) {
+                    if (!HostingEnvironment.IsHosted)
+                    {
                         useServerConfig = 1;
                     }
                     // Hosting environment is the web server
-                    else if (HostingEnvironment.ApplicationHostInternal is ISAPIApplicationHost) {
+                    else if (HostingEnvironment.ApplicationHostInternal is ISAPIApplicationHost)
+                    {
                         useServerConfig = 1;
                     }
                     // Hosting environment is the web server
-                    else if (HostingEnvironment.IsUnderIISProcess && !BuildManagerHost.InClientBuildManager) {
+                    else if (
+                        HostingEnvironment.IsUnderIISProcess
+                        && !BuildManagerHost.InClientBuildManager
+                    )
+                    {
                         useServerConfig = 1;
                     }
                     Interlocked.CompareExchange(ref s_useServerConfig, useServerConfig, -1);
@@ -128,6 +162,5 @@ namespace System.Web.Configuration {
                 return s_useServerConfig == 1;
             }
         }
-
     }
 }

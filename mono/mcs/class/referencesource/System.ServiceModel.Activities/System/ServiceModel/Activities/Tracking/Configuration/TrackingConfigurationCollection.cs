@@ -5,13 +5,14 @@
 namespace System.ServiceModel.Activities.Tracking.Configuration
 {
     using System.Configuration;
-    using System.Runtime;
     using System.Diagnostics.CodeAnalysis;
+    using System.Runtime;
 
     // Base class for all the workflow tracking configuration collections
     [Fx.Tag.XamlVisible(false)]
-    public class TrackingConfigurationCollection<TConfigurationElement> : ConfigurationElementCollection
-        where TConfigurationElement : TrackingConfigurationElement, new ()
+    public class TrackingConfigurationCollection<TConfigurationElement>
+        : ConfigurationElementCollection
+        where TConfigurationElement : TrackingConfigurationElement, new()
     {
         public override ConfigurationElementCollectionType CollectionType
         {
@@ -20,10 +21,7 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
 
         public TConfigurationElement this[int index]
         {
-            get
-            {
-                return (TConfigurationElement)base.BaseGet(index);
-            }
+            get { return (TConfigurationElement)base.BaseGet(index); }
             set
             {
                 // Only validate input if config is not Read-Only, otherwise
@@ -49,8 +47,11 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
             return new TConfigurationElement();
         }
 
-        [SuppressMessage(FxCop.Category.Configuration, FxCop.Rule.ConfigurationPropertyAttributeRule,
-            Justification = "This property is defined by the base class to compute unique key.")]
+        [SuppressMessage(
+            FxCop.Category.Configuration,
+            FxCop.Rule.ConfigurationPropertyAttributeRule,
+            Justification = "This property is defined by the base class to compute unique key."
+        )]
         protected override object GetElementKey(ConfigurationElement element)
         {
             return ((TrackingConfigurationElement)element).ElementKey;

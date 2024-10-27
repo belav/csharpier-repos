@@ -18,11 +18,13 @@ namespace Roslyn.Utilities
         private const string SerializationFormat = "4";
 
         public SpellChecker(IEnumerable<string> corpus)
-            : this(BKTree.Create(corpus))
-        {
-        }
+            : this(BKTree.Create(corpus)) { }
 
-        public void FindSimilarWords(ref TemporaryArray<string> similarWords, string value, bool substringsAreSimilar)
+        public void FindSimilarWords(
+            ref TemporaryArray<string> similarWords,
+            string value,
+            bool substringsAreSimilar
+        )
         {
             using var result = TemporaryArray<string>.Empty;
             using var checker = new WordSimilarityChecker(value, substringsAreSimilar);

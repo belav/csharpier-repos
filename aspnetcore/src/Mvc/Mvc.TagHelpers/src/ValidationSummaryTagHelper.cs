@@ -69,8 +69,10 @@ public class ValidationSummaryTagHelper : TagHelper
                         message: Resources.FormatInvalidEnumArgument(
                             nameof(value),
                             value,
-                            typeof(ValidationSummary).FullName),
-                        paramName: nameof(value));
+                            typeof(ValidationSummary).FullName
+                        ),
+                        paramName: nameof(value)
+                    );
             }
         }
     }
@@ -92,7 +94,8 @@ public class ValidationSummaryTagHelper : TagHelper
             excludePropertyErrors: ValidationSummary == ValidationSummary.ModelOnly,
             message: null,
             headerTag: null,
-            htmlAttributes: null);
+            htmlAttributes: null
+        );
         if (tagBuilder == null)
         {
             // The generator determined no element was necessary.

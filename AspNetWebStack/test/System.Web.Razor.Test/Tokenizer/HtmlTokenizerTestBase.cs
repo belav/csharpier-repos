@@ -9,14 +9,22 @@ namespace System.Web.Razor.Test.Tokenizer
 {
     public abstract class HtmlTokenizerTestBase : TokenizerTestBase<HtmlSymbol, HtmlSymbolType>
     {
-        private static HtmlSymbol _ignoreRemaining = new HtmlSymbol(0, 0, 0, String.Empty, HtmlSymbolType.Unknown);
+        private static HtmlSymbol _ignoreRemaining = new HtmlSymbol(
+            0,
+            0,
+            0,
+            String.Empty,
+            HtmlSymbolType.Unknown
+        );
 
         protected override HtmlSymbol IgnoreRemaining
         {
             get { return _ignoreRemaining; }
         }
 
-        protected override Tokenizer<HtmlSymbol, HtmlSymbolType> CreateTokenizer(ITextDocument source)
+        protected override Tokenizer<HtmlSymbol, HtmlSymbolType> CreateTokenizer(
+            ITextDocument source
+        )
         {
             return new HtmlTokenizer(source);
         }

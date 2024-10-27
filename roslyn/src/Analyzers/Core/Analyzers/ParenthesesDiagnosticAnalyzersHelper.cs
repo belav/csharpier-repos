@@ -13,13 +13,23 @@ namespace Microsoft.CodeAnalysis.RemoveUnnecessaryParentheses
 {
     internal static class ParenthesesDiagnosticAnalyzersHelper
     {
-        internal static ImmutableHashSet<IOption2> Options = ImmutableHashSet.Create<IOption2>(CodeStyleOptions2.ArithmeticBinaryParentheses, CodeStyleOptions2.RelationalBinaryParentheses, CodeStyleOptions2.OtherBinaryParentheses, CodeStyleOptions2.OtherParentheses);
+        internal static ImmutableHashSet<IOption2> Options = ImmutableHashSet.Create<IOption2>(
+            CodeStyleOptions2.ArithmeticBinaryParentheses,
+            CodeStyleOptions2.RelationalBinaryParentheses,
+            CodeStyleOptions2.OtherBinaryParentheses,
+            CodeStyleOptions2.OtherParentheses
+        );
 
-        internal static CodeStyleOption2<ParenthesesPreference> GetLanguageOption(AnalyzerOptionsProvider options, PrecedenceKind precedenceKind)
-            => precedenceKind switch
+        internal static CodeStyleOption2<ParenthesesPreference> GetLanguageOption(
+            AnalyzerOptionsProvider options,
+            PrecedenceKind precedenceKind
+        ) =>
+            precedenceKind switch
             {
-                PrecedenceKind.Arithmetic or PrecedenceKind.Shift or PrecedenceKind.Bitwise => options.ArithmeticBinaryParentheses,
-                PrecedenceKind.Relational or PrecedenceKind.Equality => options.RelationalBinaryParentheses,
+                PrecedenceKind.Arithmetic or PrecedenceKind.Shift or PrecedenceKind.Bitwise =>
+                    options.ArithmeticBinaryParentheses,
+                PrecedenceKind.Relational or PrecedenceKind.Equality =>
+                    options.RelationalBinaryParentheses,
                 PrecedenceKind.Logical or PrecedenceKind.Coalesce => options.OtherBinaryParentheses,
                 PrecedenceKind.Other => options.OtherParentheses,
                 _ => throw ExceptionUtilities.UnexpectedValue(precedenceKind),

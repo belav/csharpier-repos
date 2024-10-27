@@ -26,7 +26,10 @@ namespace System.ComponentModel.Tests
         {
             var attribute = new InheritanceAttribute(inheritanceLevel);
             Assert.Equal(inheritanceLevel, attribute.InheritanceLevel);
-            Assert.Equal(inheritanceLevel == InheritanceLevel.NotInherited, attribute.IsDefaultAttribute());
+            Assert.Equal(
+                inheritanceLevel == InheritanceLevel.NotInherited,
+                attribute.IsDefaultAttribute()
+            );
         }
 
         [Fact]
@@ -75,8 +78,18 @@ namespace System.ComponentModel.Tests
             var attribute = new InheritanceAttribute(InheritanceLevel.Inherited);
 
             yield return new object[] { attribute, attribute, true };
-            yield return new object[] { attribute, new InheritanceAttribute(InheritanceLevel.Inherited), true };
-            yield return new object[] { attribute, new InheritanceAttribute(InheritanceLevel.InheritedReadOnly), false };
+            yield return new object[]
+            {
+                attribute,
+                new InheritanceAttribute(InheritanceLevel.Inherited),
+                true,
+            };
+            yield return new object[]
+            {
+                attribute,
+                new InheritanceAttribute(InheritanceLevel.InheritedReadOnly),
+                false,
+            };
 
             yield return new object[] { attribute, new object(), false };
             yield return new object[] { attribute, null, false };
@@ -84,7 +97,11 @@ namespace System.ComponentModel.Tests
 
         [Theory]
         [MemberData(nameof(Equals_TestData))]
-        public void Equals_Object_ReturnsExpected(InheritanceAttribute attribute, object other, bool expected)
+        public void Equals_Object_ReturnsExpected(
+            InheritanceAttribute attribute,
+            object other,
+            bool expected
+        )
         {
             Assert.Equal(expected, attribute.Equals(other));
             if (other is InheritanceAttribute)
@@ -97,7 +114,9 @@ namespace System.ComponentModel.Tests
         [InlineData(InheritanceLevel.NotInherited)]
         [InlineData(InheritanceLevel.Inherited)]
         [InlineData(InheritanceLevel.InheritedReadOnly)]
-        public void ToString_ValidInheritanceLevel_ReturnsExpected(InheritanceLevel inheritanceLevel)
+        public void ToString_ValidInheritanceLevel_ReturnsExpected(
+            InheritanceLevel inheritanceLevel
+        )
         {
             var attribute = new InheritanceAttribute(inheritanceLevel);
             Assert.Equal(inheritanceLevel.ToString(), attribute.ToString());
@@ -106,7 +125,9 @@ namespace System.ComponentModel.Tests
         [Theory]
         [InlineData(InheritanceLevel.Inherited - 1)]
         [InlineData(InheritanceLevel.NotInherited + 1)]
-        public void ToString_InvalidInheritanceLevel_ThrowsArgumentException(InheritanceLevel inheritanceLevel)
+        public void ToString_InvalidInheritanceLevel_ThrowsArgumentException(
+            InheritanceLevel inheritanceLevel
+        )
         {
             var attribute = new InheritanceAttribute(inheritanceLevel);
             AssertExtensions.Throws<ArgumentException>(null, () => attribute.ToString());

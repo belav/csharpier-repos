@@ -24,7 +24,10 @@ public class PropertyAsParameterInfoTests
     {
         // Arrange & Act
         var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.NoAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.NoAttribute));
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.NoAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Assert
@@ -36,7 +39,10 @@ public class PropertyAsParameterInfoTests
     public void PropertyAsParameterInfoTests_ContainsPropertyCustomAttributes()
     {
         // Arrange
-        var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.WithTestAttribute));
+        var propertyInfo = GetProperty(
+            typeof(ArgumentList),
+            nameof(ArgumentList.WithTestAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo);
 
         // Act & Assert
@@ -48,7 +54,10 @@ public class PropertyAsParameterInfoTests
     {
         // Arrange
         var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.NoAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.WithTestAttribute));
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.WithTestAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Act & Assert
@@ -59,8 +68,14 @@ public class PropertyAsParameterInfoTests
     public void PropertyAsParameterInfoTests_WithConstructorArgument_FallbackToPropertyCustomAttributes()
     {
         // Arrange
-        var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.WithTestAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.NoAttribute));
+        var propertyInfo = GetProperty(
+            typeof(ArgumentList),
+            nameof(ArgumentList.WithTestAttribute)
+        );
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.NoAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Act & Assert
@@ -71,24 +86,31 @@ public class PropertyAsParameterInfoTests
     public void PropertyAsParameterInfoTests_ContainsPropertyCustomAttributesData()
     {
         // Arrange
-        var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.WithTestAttribute));
+        var propertyInfo = GetProperty(
+            typeof(ArgumentList),
+            nameof(ArgumentList.WithTestAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo);
 
         // Act
         var attributes = parameterInfo.GetCustomAttributesData();
 
         // Assert
-        Assert.Single(
-            attributes,
-            a => typeof(TestAttribute).IsAssignableFrom(a.AttributeType));
+        Assert.Single(attributes, a => typeof(TestAttribute).IsAssignableFrom(a.AttributeType));
     }
 
     [Fact]
     public void PropertyAsParameterInfoTests_WithConstructorArgument_MergePropertyAndParameterCustomAttributesData()
     {
         // Arrange & Act
-        var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.WithTestAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.WithSampleAttribute));
+        var propertyInfo = GetProperty(
+            typeof(ArgumentList),
+            nameof(ArgumentList.WithTestAttribute)
+        );
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.WithSampleAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Act
@@ -97,37 +119,44 @@ public class PropertyAsParameterInfoTests
         // Assert
         Assert.Single(
             parameterInfo.GetCustomAttributesData(),
-            a => typeof(TestAttribute).IsAssignableFrom(a.AttributeType));
+            a => typeof(TestAttribute).IsAssignableFrom(a.AttributeType)
+        );
         Assert.Single(
             parameterInfo.GetCustomAttributesData(),
-            a => typeof(SampleAttribute).IsAssignableFrom(a.AttributeType));
+            a => typeof(SampleAttribute).IsAssignableFrom(a.AttributeType)
+        );
     }
 
     [Fact]
     public void PropertyAsParameterInfoTests_WithConstructorArgument_MergePropertyAndParameterCustomAttributes()
     {
         // Arrange
-        var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.WithTestAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.WithSampleAttribute));
+        var propertyInfo = GetProperty(
+            typeof(ArgumentList),
+            nameof(ArgumentList.WithTestAttribute)
+        );
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.WithSampleAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Act
         var attributes = parameterInfo.GetCustomAttributes(true);
 
         // Assert
-        Assert.Single(
-            attributes,
-            a => typeof(TestAttribute).IsAssignableFrom(a.GetType()));
-        Assert.Single(
-            attributes,
-            a => typeof(SampleAttribute).IsAssignableFrom(a.GetType()));
+        Assert.Single(attributes, a => typeof(TestAttribute).IsAssignableFrom(a.GetType()));
+        Assert.Single(attributes, a => typeof(SampleAttribute).IsAssignableFrom(a.GetType()));
     }
 
     [Fact]
     public void PropertyAsParameterInfoTests_ContainsPropertyInheritedCustomAttributes()
     {
         // Arrange & Act
-        var propertyInfo = GetProperty(typeof(DerivedArgumentList), nameof(DerivedArgumentList.WithTestAttribute));
+        var propertyInfo = GetProperty(
+            typeof(DerivedArgumentList),
+            nameof(DerivedArgumentList.WithTestAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo);
 
         // Assert
@@ -166,21 +195,26 @@ public class PropertyAsParameterInfoTests
     {
         // Arrange & Act
         var propertyInfo = GetProperty(typeof(ArgumentList), nameof(ArgumentList.NoAttribute));
-        var parameter = GetParameter(nameof(ArgumentList.DefaultMethod), nameof(ArgumentList.NoAttribute));
+        var parameter = GetParameter(
+            nameof(ArgumentList.DefaultMethod),
+            nameof(ArgumentList.NoAttribute)
+        );
         var parameterInfo = new PropertyAsParameterInfo(propertyInfo, parameter);
 
         // Assert
         Assert.False(parameterInfo.HasDefaultValue);
     }
 
-    private static PropertyInfo GetProperty(Type containerType, string propertyName)
-        => containerType.GetProperty(propertyName);
+    private static PropertyInfo GetProperty(Type containerType, string propertyName) =>
+        containerType.GetProperty(propertyName);
 
     private static ParameterInfo GetParameter(string methodName, string parameterName)
     {
         var methodInfo = typeof(ArgumentList).GetMethod(methodName);
         var parameters = methodInfo.GetParameters();
-        return parameters.Single(p => p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase));
+        return parameters.Single(p =>
+            p.Name.Equals(parameterName, StringComparison.OrdinalIgnoreCase)
+        );
     }
 
     private class ArgumentList
@@ -197,8 +231,8 @@ public class PropertyAsParameterInfoTests
             int noAttribute,
             [Test] int withTestAttribute,
             [Sample] int withSampleAttribute,
-            int withDefaultValue = 10)
-        { }
+            int withDefaultValue = 10
+        ) { }
     }
 
     private class DerivedArgumentList : ArgumentList
@@ -212,13 +246,10 @@ public class PropertyAsParameterInfoTests
     }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter, Inherited = true)]
-    private class SampleAttribute : Attribute
-    { }
+    private class SampleAttribute : Attribute { }
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Parameter, Inherited = true)]
-    private class TestAttribute : Attribute
-    { }
+    private class TestAttribute : Attribute { }
 
-    private class DerivedTestAttribute : TestAttribute
-    { }
+    private class DerivedTestAttribute : TestAttribute { }
 }

@@ -18,7 +18,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 {
     internal abstract partial class AbstractCSharpReducer
     {
-        protected abstract class AbstractReductionRewriter : CSharpSyntaxRewriter, IReductionRewriter
+        protected abstract class AbstractReductionRewriter
+            : CSharpSyntaxRewriter,
+                IReductionRewriter
         {
             private readonly ObjectPool<IReductionRewriter> _pool;
 
@@ -35,10 +37,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             private readonly HashSet<SyntaxNode> _processedParentNodes = new();
 
-            protected AbstractReductionRewriter(ObjectPool<IReductionRewriter> pool)
-                => _pool = pool;
+            protected AbstractReductionRewriter(ObjectPool<IReductionRewriter> pool) =>
+                _pool = pool;
 
-            public void Initialize(ParseOptions parseOptions, SimplifierOptions options, CancellationToken cancellationToken)
+            public void Initialize(
+                ParseOptions parseOptions,
+                SimplifierOptions options,
+                CancellationToken cancellationToken
+            )
             {
                 Contract.ThrowIfNull(options);
 
@@ -68,8 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 Contract.ThrowIfNull(SemanticModel);
             }
 
-            private static SyntaxNode GetParentNode(SyntaxNode node)
-                => node switch
+            private static SyntaxNode GetParentNode(SyntaxNode node) =>
+                node switch
                 {
                     ExpressionSyntax expression => GetParentNode(expression),
                     PatternSyntax pattern => GetParentNode(pattern),
@@ -84,7 +90,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 // expressions as they could be affected by this change.
 
                 SyntaxNode parent = expression;
-                for (var current = (SyntaxNode)expression; current != null; current = current.Parent)
+                for (
+                    var current = (SyntaxNode)expression;
+                    current != null;
+                    current = current.Parent
+                )
                 {
                     // if we're in an argument, walk up into that as well as the change in one argument can affect
                     // other arguments in a call.
@@ -112,10 +122,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
             private static SyntaxNode GetParentNode(CrefSyntax cref)
             {
-                var topMostCref = cref
-                    .AncestorsAndSelf()
-                    .OfType<CrefSyntax>()
-                    .Last();
+                var topMostCref = cref.AncestorsAndSelf().OfType<CrefSyntax>().Last();
 
                 Contract.ThrowIfNull(topMostCref.Parent);
                 return topMostCref.Parent;
@@ -124,7 +131,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
             protected SyntaxNode? SimplifyNode<TNode>(
                 TNode node,
                 SyntaxNode? newNode,
-                Func<TNode, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxNode> simplifier)
+                Func<
+                    TNode,
+                    SemanticModel,
+                    CSharpSimplifierOptions,
+                    CancellationToken,
+                    SyntaxNode
+                > simplifier
+            )
                 where TNode : SyntaxNode
             {
                 var parentNode = GetParentNode(node);
@@ -145,7 +159,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
 
                 if (!node.HasAnnotation(SimplificationHelpers.DoNotSimplifyAnnotation))
                 {
-                    var simplifiedNode = simplifier(node, this.SemanticModel, this.Options, this.CancellationToken);
+                    var simplifiedNode = simplifier(
+                        node,
+                        this.SemanticModel,
+                        this.Options,
+                        this.CancellationToken
+                    );
                     if (simplifiedNode != node)
                     {
                         _processedParentNodes.Add(parentNode);
@@ -157,7 +176,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return node;
             }
 
-            protected SyntaxToken SimplifyToken(SyntaxToken token, Func<SyntaxToken, SemanticModel, CSharpSimplifierOptions, CancellationToken, SyntaxToken> simplifier)
+            protected SyntaxToken SimplifyToken(
+                SyntaxToken token,
+                Func<
+                    SyntaxToken,
+                    SemanticModel,
+                    CSharpSimplifierOptions,
+                    CancellationToken,
+                    SyntaxToken
+                > simplifier
+            )
             {
                 RequireInitialized();
 
@@ -168,7 +196,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                     : token;
             }
 
-            public override SyntaxNode VisitElementAccessExpression(ElementAccessExpressionSyntax node)
+            public override SyntaxNode VisitElementAccessExpression(
+                ElementAccessExpressionSyntax node
+            )
             {
                 // Note that we prefer simplifying the argument list before the expression
                 var argumentList = (BracketedArgumentListSyntax)this.Visit(node.ArgumentList);
@@ -186,7 +216,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification
                 return node.Update(expression, argumentList);
             }
 
-            public SyntaxNodeOrToken VisitNodeOrToken(SyntaxNodeOrToken nodeOrToken, SemanticModel semanticModel, bool simplifyAllDescendants)
+            public SyntaxNodeOrToken VisitNodeOrToken(
+                SyntaxNodeOrToken nodeOrToken,
+                SemanticModel semanticModel,
+                bool simplifyAllDescendants
+            )
             {
                 this.SemanticModel = semanticModel;
                 this.alwaysSimplify = simplifyAllDescendants;

@@ -76,114 +76,135 @@
 
     ******************************************************************************/
 
-namespace System.Web.Configuration {
+namespace System.Web.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Configuration;
     using System.Globalization;
     using System.IO;
+    using System.Security.Permissions;
     using System.Text;
     using System.Web.Util;
-    using System.ComponentModel;
-    using System.Security.Permissions;
+    using System.Xml;
 
-    public sealed class FormsAuthenticationConfiguration : ConfigurationElement {
-        private static readonly ConfigurationElementProperty s_elemProperty = 
-            new ConfigurationElementProperty(new CallbackValidator(typeof(FormsAuthenticationConfiguration), Validate));
+    public sealed class FormsAuthenticationConfiguration : ConfigurationElement
+    {
+        private static readonly ConfigurationElementProperty s_elemProperty =
+            new ConfigurationElementProperty(
+                new CallbackValidator(typeof(FormsAuthenticationConfiguration), Validate)
+            );
 
         private static ConfigurationPropertyCollection _properties;
 
-        private static readonly ConfigurationProperty _propCredentials =
-                                        new ConfigurationProperty("credentials", 
-                                        typeof(FormsAuthenticationCredentials), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propName =
-            new ConfigurationProperty("name",
-                                        typeof(string),
-                                        ".ASPXAUTH",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propLoginUrl =
-            new ConfigurationProperty("loginUrl",
-                                        typeof(string),
-                                        "login.aspx",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propDefaultUrl =
-            new ConfigurationProperty("defaultUrl",
-                                        typeof(string),
-                                        "default.aspx",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propProtection =
-            new ConfigurationProperty("protection", 
-                                        typeof(FormsProtectionEnum), 
-                                        FormsProtectionEnum.All, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propTimeout =
-            new ConfigurationProperty("timeout",
-                                        typeof(TimeSpan),
-                                        TimeSpan.FromMinutes(30.0),
-                                        StdValidatorsAndConverters.TimeSpanMinutesConverter,
-                                        new TimeSpanValidator(TimeSpan.FromMinutes(1), TimeSpan.MaxValue),
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propPath =
-            new ConfigurationProperty("path",
-                                        typeof(string),
-                                        "/",
-                                        null,
-                                        StdValidatorsAndConverters.NonEmptyStringValidator,
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propRequireSSL =
-            new ConfigurationProperty("requireSSL", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
+        private static readonly ConfigurationProperty _propCredentials = new ConfigurationProperty(
+            "credentials",
+            typeof(FormsAuthenticationCredentials),
+            null,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propName = new ConfigurationProperty(
+            "name",
+            typeof(string),
+            ".ASPXAUTH",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propLoginUrl = new ConfigurationProperty(
+            "loginUrl",
+            typeof(string),
+            "login.aspx",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propDefaultUrl = new ConfigurationProperty(
+            "defaultUrl",
+            typeof(string),
+            "default.aspx",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propProtection = new ConfigurationProperty(
+            "protection",
+            typeof(FormsProtectionEnum),
+            FormsProtectionEnum.All,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propTimeout = new ConfigurationProperty(
+            "timeout",
+            typeof(TimeSpan),
+            TimeSpan.FromMinutes(30.0),
+            StdValidatorsAndConverters.TimeSpanMinutesConverter,
+            new TimeSpanValidator(TimeSpan.FromMinutes(1), TimeSpan.MaxValue),
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propPath = new ConfigurationProperty(
+            "path",
+            typeof(string),
+            "/",
+            null,
+            StdValidatorsAndConverters.NonEmptyStringValidator,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propRequireSSL = new ConfigurationProperty(
+            "requireSSL",
+            typeof(bool),
+            false,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propSlidingExpiration =
-            new ConfigurationProperty("slidingExpiration", 
-                                        typeof(bool), 
-                                        true, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propCookieless =
-            new ConfigurationProperty("cookieless", 
-                                        typeof(HttpCookieMode), 
-                                        HttpCookieMode.UseDeviceProfile, 
-                                        ConfigurationPropertyOptions.None);
-        
-        private static readonly ConfigurationProperty _propDomain =
-            new ConfigurationProperty("domain", 
-                                        typeof(string), 
-                                        null, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "slidingExpiration",
+                typeof(bool),
+                true,
+                ConfigurationPropertyOptions.None
+            );
+
+        private static readonly ConfigurationProperty _propCookieless = new ConfigurationProperty(
+            "cookieless",
+            typeof(HttpCookieMode),
+            HttpCookieMode.UseDeviceProfile,
+            ConfigurationPropertyOptions.None
+        );
+
+        private static readonly ConfigurationProperty _propDomain = new ConfigurationProperty(
+            "domain",
+            typeof(string),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         private static readonly ConfigurationProperty _propEnableCrossAppRedirects =
-            new ConfigurationProperty("enableCrossAppRedirects", 
-                                        typeof(bool), 
-                                        false, 
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "enableCrossAppRedirects",
+                typeof(bool),
+                false,
+                ConfigurationPropertyOptions.None
+            );
 
         private static readonly ConfigurationProperty _propTicketCompatibilityMode =
-            new ConfigurationProperty("ticketCompatibilityMode",
-                                        typeof(TicketCompatibilityMode),
-                                        TicketCompatibilityMode.Framework20,
-                                        ConfigurationPropertyOptions.None);
+            new ConfigurationProperty(
+                "ticketCompatibilityMode",
+                typeof(TicketCompatibilityMode),
+                TicketCompatibilityMode.Framework20,
+                ConfigurationPropertyOptions.None
+            );
 
-        static FormsAuthenticationConfiguration() {
+        static FormsAuthenticationConfiguration()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
             _properties.Add(_propCredentials);
@@ -201,33 +222,32 @@ namespace System.Web.Configuration {
             _properties.Add(_propTicketCompatibilityMode);
         }
 
-        public FormsAuthenticationConfiguration() {
-        }
+        public FormsAuthenticationConfiguration() { }
 
-        protected override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         [ConfigurationProperty("credentials")]
-        public FormsAuthenticationCredentials Credentials {
-            get {
-                return (FormsAuthenticationCredentials)base[_propCredentials];
-            }
+        public FormsAuthenticationCredentials Credentials
+        {
+            get { return (FormsAuthenticationCredentials)base[_propCredentials]; }
         }
 
         [ConfigurationProperty("name", DefaultValue = ".ASPXAUTH")]
         [StringValidator(MinLength = 1)]
-        public string Name {
-            get {
-                return (string)base[_propName];
-            }
-            set {
-                if (String.IsNullOrEmpty(value)) {
+        public string Name
+        {
+            get { return (string)base[_propName]; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
                     base[_propName] = _propName.DefaultValue;
                 }
-                else {
+                else
+                {
                     base[_propName] = value;
                 }
             }
@@ -235,15 +255,17 @@ namespace System.Web.Configuration {
 
         [ConfigurationProperty("loginUrl", DefaultValue = "login.aspx")]
         [StringValidator(MinLength = 1)]
-        public string LoginUrl {
-            get {
-                return (string)base[_propLoginUrl];
-            }
-            set {
-                if (String.IsNullOrEmpty(value)) {
+        public string LoginUrl
+        {
+            get { return (string)base[_propLoginUrl]; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
                     base[_propLoginUrl] = _propLoginUrl.DefaultValue;
                 }
-                else {
+                else
+                {
                     base[_propLoginUrl] = value;
                 }
             }
@@ -251,143 +273,140 @@ namespace System.Web.Configuration {
 
         [ConfigurationProperty("defaultUrl", DefaultValue = "default.aspx")]
         [StringValidator(MinLength = 1)]
-        public string DefaultUrl {
-            get {
-                return (string)base[_propDefaultUrl];
-            }
-            set {
-                if (String.IsNullOrEmpty(value)) {
+        public string DefaultUrl
+        {
+            get { return (string)base[_propDefaultUrl]; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
                     base[_propDefaultUrl] = _propDefaultUrl.DefaultValue;
                 }
-                else {
+                else
+                {
                     base[_propDefaultUrl] = value;
                 }
             }
         }
 
         [ConfigurationProperty("protection", DefaultValue = FormsProtectionEnum.All)]
-        public FormsProtectionEnum Protection {
-            get {
-                return (FormsProtectionEnum)base[_propProtection];
-            }
-            set {
-                base[_propProtection] = value;
-            }
+        public FormsProtectionEnum Protection
+        {
+            get { return (FormsProtectionEnum)base[_propProtection]; }
+            set { base[_propProtection] = value; }
         }
 
         [ConfigurationProperty("timeout", DefaultValue = "00:30:00")]
-        [TimeSpanValidator(MinValueString="00:01:00", MaxValueString=TimeSpanValidatorAttribute.TimeSpanMaxValue)]
+        [TimeSpanValidator(
+            MinValueString = "00:01:00",
+            MaxValueString = TimeSpanValidatorAttribute.TimeSpanMaxValue
+        )]
         [TypeConverter(typeof(TimeSpanMinutesConverter))]
-        public TimeSpan Timeout {
-            get {
-                return (TimeSpan)base[_propTimeout];
-            }
-            set {
-                base[_propTimeout] = value;
-            }
+        public TimeSpan Timeout
+        {
+            get { return (TimeSpan)base[_propTimeout]; }
+            set { base[_propTimeout] = value; }
         }
 
         [ConfigurationProperty("path", DefaultValue = "/")]
         [StringValidator(MinLength = 1)]
-        public string Path {
-            get {
-                return (string)base[_propPath];
-            }
-            set {
-                if (String.IsNullOrEmpty(value)) {
+        public string Path
+        {
+            get { return (string)base[_propPath]; }
+            set
+            {
+                if (String.IsNullOrEmpty(value))
+                {
                     base[_propPath] = _propPath.DefaultValue;
                 }
-                else {
+                else
+                {
                     base[_propPath] = value;
                 }
             }
         }
 
         [ConfigurationProperty("requireSSL", DefaultValue = false)]
-        public bool RequireSSL {
-            get {
-                return (bool)base[_propRequireSSL];
-            }
-            set {
-                base[_propRequireSSL] = value;
-            }
+        public bool RequireSSL
+        {
+            get { return (bool)base[_propRequireSSL]; }
+            set { base[_propRequireSSL] = value; }
         }
 
         [ConfigurationProperty("slidingExpiration", DefaultValue = true)]
-        public bool SlidingExpiration {
-            get {
-                return (bool)base[_propSlidingExpiration];
-            }
-            set {
-                base[_propSlidingExpiration] = value;
-            }
+        public bool SlidingExpiration
+        {
+            get { return (bool)base[_propSlidingExpiration]; }
+            set { base[_propSlidingExpiration] = value; }
         }
 
         [ConfigurationProperty("enableCrossAppRedirects", DefaultValue = false)]
-        public bool EnableCrossAppRedirects {
-            get {
-                return (bool)base[_propEnableCrossAppRedirects];
-            }
-            set {
-                base[_propEnableCrossAppRedirects] = value;
-            }
+        public bool EnableCrossAppRedirects
+        {
+            get { return (bool)base[_propEnableCrossAppRedirects]; }
+            set { base[_propEnableCrossAppRedirects] = value; }
         }
 
-
         [ConfigurationProperty("cookieless", DefaultValue = HttpCookieMode.UseDeviceProfile)]
-        public HttpCookieMode Cookieless {
-            get {
-                return (HttpCookieMode)base[_propCookieless];
-            }
-            set {
-                base[_propCookieless] = value;
-            }
+        public HttpCookieMode Cookieless
+        {
+            get { return (HttpCookieMode)base[_propCookieless]; }
+            set { base[_propCookieless] = value; }
         }
 
         [ConfigurationProperty("domain", DefaultValue = "")]
-        public string Domain {
-            get {
-                return (string)base[_propDomain];
-            }
-            set {
-                base[_propDomain] = value;
-            }
+        public string Domain
+        {
+            get { return (string)base[_propDomain]; }
+            set { base[_propDomain] = value; }
         }
 
-        [ConfigurationProperty("ticketCompatibilityMode", DefaultValue = TicketCompatibilityMode.Framework20)]
-        public TicketCompatibilityMode TicketCompatibilityMode {
-            get {
-                return (TicketCompatibilityMode)base[_propTicketCompatibilityMode];
-            }
-            set {
-                base[_propTicketCompatibilityMode] = value;
-            }
+        [ConfigurationProperty(
+            "ticketCompatibilityMode",
+            DefaultValue = TicketCompatibilityMode.Framework20
+        )]
+        public TicketCompatibilityMode TicketCompatibilityMode
+        {
+            get { return (TicketCompatibilityMode)base[_propTicketCompatibilityMode]; }
+            set { base[_propTicketCompatibilityMode] = value; }
         }
 
-        protected override ConfigurationElementProperty ElementProperty {
-            get {
-                return s_elemProperty;
-            }
+        protected override ConfigurationElementProperty ElementProperty
+        {
+            get { return s_elemProperty; }
         }
-        private static void Validate(object value) {
-            if (value == null) {
+
+        private static void Validate(object value)
+        {
+            if (value == null)
+            {
                 throw new ArgumentNullException("forms");
             }
 
             FormsAuthenticationConfiguration elem = (FormsAuthenticationConfiguration)value;
 
-            if (StringUtil.StringStartsWith(elem.LoginUrl, "\\\\") || 
-                (elem.LoginUrl.Length > 1 && elem.LoginUrl[1] == ':')) {
-                throw new ConfigurationErrorsException(SR.GetString(SR.Auth_bad_url), 
-                    elem.ElementInformation.Properties["loginUrl"].Source, 
-                    elem.ElementInformation.Properties["loginUrl"].LineNumber);
+            if (
+                StringUtil.StringStartsWith(elem.LoginUrl, "\\\\")
+                || (elem.LoginUrl.Length > 1 && elem.LoginUrl[1] == ':')
+            )
+            {
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Auth_bad_url),
+                    elem.ElementInformation.Properties["loginUrl"].Source,
+                    elem.ElementInformation.Properties["loginUrl"].LineNumber
+                );
             }
 
-            if (StringUtil.StringStartsWith(elem.DefaultUrl, "\\\\") || 
-                (elem.DefaultUrl.Length > 1 && elem.DefaultUrl[1] == ':')) {
-                throw new ConfigurationErrorsException(SR.GetString(SR.Auth_bad_url), 
-                    elem.ElementInformation.Properties["defaultUrl"].Source, 
-                    elem.ElementInformation.Properties["defaultUrl"].LineNumber);
+            if (
+                StringUtil.StringStartsWith(elem.DefaultUrl, "\\\\")
+                || (elem.DefaultUrl.Length > 1 && elem.DefaultUrl[1] == ':')
+            )
+            {
+                throw new ConfigurationErrorsException(
+                    SR.GetString(SR.Auth_bad_url),
+                    elem.ElementInformation.Properties["defaultUrl"].Source,
+                    elem.ElementInformation.Properties["defaultUrl"].LineNumber
+                );
             }
         }
     } // class FormsAuthenticationConfiguration

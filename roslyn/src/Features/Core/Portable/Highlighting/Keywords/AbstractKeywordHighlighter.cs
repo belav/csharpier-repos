@@ -11,25 +11,41 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.Highlighting
 {
-    internal abstract class AbstractKeywordHighlighter<TNode> : AbstractKeywordHighlighter where TNode : SyntaxNode
+    internal abstract class AbstractKeywordHighlighter<TNode> : AbstractKeywordHighlighter
+        where TNode : SyntaxNode
     {
         protected sealed override bool IsHighlightableNode(SyntaxNode node) => node is TNode;
 
-        protected sealed override void AddHighlightsForNode(SyntaxNode node, List<TextSpan> highlights, CancellationToken cancellationToken)
-            => AddHighlights((TNode)node, highlights, cancellationToken);
+        protected sealed override void AddHighlightsForNode(
+            SyntaxNode node,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        ) => AddHighlights((TNode)node, highlights, cancellationToken);
 
-        protected abstract void AddHighlights(TNode node, List<TextSpan> highlights, CancellationToken cancellationToken);
+        protected abstract void AddHighlights(
+            TNode node,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        );
     }
 
     internal abstract class AbstractKeywordHighlighter : IHighlighter
     {
-        private static readonly ObjectPool<List<TextSpan>> s_textSpanListPool = new(() => new List<TextSpan>());
-        private static readonly ObjectPool<List<SyntaxToken>> s_tokenListPool = new(() => new List<SyntaxToken>());
+        private static readonly ObjectPool<List<TextSpan>> s_textSpanListPool = new(
+            () => new List<TextSpan>()
+        );
+        private static readonly ObjectPool<List<SyntaxToken>> s_tokenListPool = new(
+            () => new List<SyntaxToken>()
+        );
 
         protected abstract bool IsHighlightableNode(SyntaxNode node);
 
         public void AddHighlights(
-            SyntaxNode root, int position, List<TextSpan> highlights, CancellationToken cancellationToken)
+            SyntaxNode root,
+            int position,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        )
         {
             using (s_textSpanListPool.GetPooledObject(out var tempHighlights))
             using (s_tokenListPool.GetPooledObject(out var touchingTokens))
@@ -69,18 +85,30 @@ namespace Microsoft.CodeAnalysis.Highlighting
             return false;
         }
 
-        protected abstract void AddHighlightsForNode(SyntaxNode node, List<TextSpan> highlights, CancellationToken cancellationToken);
+        protected abstract void AddHighlightsForNode(
+            SyntaxNode node,
+            List<TextSpan> highlights,
+            CancellationToken cancellationToken
+        );
 
-        protected static TextSpan EmptySpan(int position)
-            => new(position, 0);
+        protected static TextSpan EmptySpan(int position) => new(position, 0);
 
-        internal static void AddTouchingTokens(SyntaxNode root, int position, List<SyntaxToken> tokens)
+        internal static void AddTouchingTokens(
+            SyntaxNode root,
+            int position,
+            List<SyntaxToken> tokens
+        )
         {
             AddTouchingTokens(root, position, tokens, findInsideTrivia: true);
             AddTouchingTokens(root, position, tokens, findInsideTrivia: false);
         }
 
-        private static void AddTouchingTokens(SyntaxNode root, int position, List<SyntaxToken> tokens, bool findInsideTrivia)
+        private static void AddTouchingTokens(
+            SyntaxNode root,
+            int position,
+            List<SyntaxToken> tokens,
+            bool findInsideTrivia
+        )
         {
             var token = root.FindToken(position, findInsideTrivia);
             if (!tokens.Contains(token))

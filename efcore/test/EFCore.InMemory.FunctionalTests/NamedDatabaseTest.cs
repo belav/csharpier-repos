@@ -10,8 +10,7 @@ public class NamedDatabaseTest
     {
         using (var context = new PusheenContext())
         {
-            context.Add(
-                new Pusheen { Activity = "In a box" });
+            context.Add(new Pusheen { Activity = "In a box" });
             context.SaveChanges();
         }
 
@@ -26,8 +25,7 @@ public class NamedDatabaseTest
     {
         using (var context = new PusheenContext(nameof(PusheenContext)))
         {
-            context.Add(
-                new Pusheen { Activity = "In a box" });
+            context.Add(new Pusheen { Activity = "In a box" });
             context.SaveChanges();
         }
 
@@ -40,13 +38,16 @@ public class NamedDatabaseTest
     [ConditionalFact]
     public void Database_per_service_provider_is_default()
     {
-        var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true);
-        var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true);
+        var provider1 = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
+        var provider2 = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
 
         using (var context = new PusheenContext(nameof(PusheenContext), provider1))
         {
-            context.Add(
-                new Pusheen { Activity = "In a box" });
+            context.Add(new Pusheen { Activity = "In a box" });
             context.SaveChanges();
         }
 
@@ -54,8 +55,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "With some yarn" });
+            context.Add(new Pusheen { Activity = "With some yarn" });
             context.SaveChanges();
         }
 
@@ -75,8 +75,7 @@ public class NamedDatabaseTest
     {
         using (var context = new PusheenContext("Cats"))
         {
-            context.Add(
-                new Pusheen { Activity = "In a box" });
+            context.Add(new Pusheen { Activity = "In a box" });
             context.SaveChanges();
         }
 
@@ -84,8 +83,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "With some yarn" });
+            context.Add(new Pusheen { Activity = "With some yarn" });
             context.SaveChanges();
         }
 
@@ -103,13 +101,16 @@ public class NamedDatabaseTest
     [ConditionalFact]
     public void Named_databases_shared_per_service_provider()
     {
-        var provider1 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true);
-        var provider2 = new ServiceCollection().AddEntityFrameworkInMemoryDatabase().BuildServiceProvider(validateScopes: true);
+        var provider1 = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
+        var provider2 = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .BuildServiceProvider(validateScopes: true);
 
         using (var context = new PusheenContext("Cats", provider1))
         {
-            context.Add(
-                new Pusheen { Activity = "In a box" });
+            context.Add(new Pusheen { Activity = "In a box" });
             context.SaveChanges();
         }
 
@@ -117,8 +118,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "With some yarn" });
+            context.Add(new Pusheen { Activity = "With some yarn" });
             context.SaveChanges();
         }
 
@@ -126,8 +126,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "On a scooter" });
+            context.Add(new Pusheen { Activity = "On a scooter" });
             context.SaveChanges();
         }
 
@@ -135,8 +134,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "Is a DJ" });
+            context.Add(new Pusheen { Activity = "Is a DJ" });
             context.SaveChanges();
         }
 
@@ -144,8 +142,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "Goes to sleep" });
+            context.Add(new Pusheen { Activity = "Goes to sleep" });
             context.SaveChanges();
         }
 
@@ -153,8 +150,7 @@ public class NamedDatabaseTest
         {
             Assert.Empty(context.Pusheens);
 
-            context.Add(
-                new Pusheen { Activity = "Loves magic unicorns" });
+            context.Add(new Pusheen { Activity = "Loves magic unicorns" });
             context.SaveChanges();
         }
 
@@ -195,9 +191,7 @@ public class NamedDatabaseTest
         private readonly IServiceProvider _serviceProvider;
 
         public PusheenContext(IServiceProvider serviceProvider = null)
-            : this(null, serviceProvider)
-        {
-        }
+            : this(null, serviceProvider) { }
 
         public PusheenContext(string databaseName, IServiceProvider serviceProvider = null)
         {

@@ -2,7 +2,5 @@
 
 public class C : A<B<C>, C>
 {
-	public static void Main ()
-	{
-	}
+    public static void Main() { }
 }

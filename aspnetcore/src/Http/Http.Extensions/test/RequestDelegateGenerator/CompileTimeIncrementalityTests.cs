@@ -19,7 +19,10 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.All(outputSteps, (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason));
+        Assert.All(
+            outputSteps,
+            (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
+        );
     }
 
     [Fact]
@@ -31,7 +34,10 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.All(outputSteps, (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason));
+        Assert.All(
+            outputSteps,
+            (value) => Assert.Equal(IncrementalStepRunReason.Cached, value.Reason)
+        );
     }
 
     [Fact]
@@ -43,7 +49,8 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.Collection(outputSteps,
+        Assert.Collection(
+            outputSteps,
             // First source output for diagnostics is unchanged.
             step => Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
             // Second source output for generated code is changed.
@@ -54,7 +61,8 @@ public class CompileTimeIncrementalityTests : RequestDelegateCreationTestBase
     [Fact]
     public async Task MapAction_ChangeBodyParamNullability_TriggersUpdate_ForSourceOnly()
     {
-        var source = $"""app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)} todo) => TypedResults.Ok(todo));""";
+        var source =
+            $"""app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)} todo) => TypedResults.Ok(todo));""";
         var updatedSource = $"""
 #pragma warning disable CS8622
 app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedResults.Ok(todo));
@@ -64,7 +72,8 @@ app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedRes
         var (result, compilation) = await RunGeneratorAsync(source, updatedSource);
         var outputSteps = GetRunStepOutputs(result);
 
-        Assert.Collection(outputSteps,
+        Assert.Collection(
+            outputSteps,
             // First source output for diagnostics is unchanged.
             step => Assert.Equal(IncrementalStepRunReason.Unchanged, step.Reason),
             // Second source output for generated code is changed.
@@ -72,8 +81,10 @@ app.MapGet("/", ([{typeof(FromBodyAttribute)}] {typeof(Todo)}? todo) => TypedRes
         );
     }
 
-    private static IEnumerable<(object Value, IncrementalStepRunReason Reason)> GetRunStepOutputs(GeneratorRunResult? result)
-        => result?.TrackedOutputSteps
-            .SelectMany(step => step.Value)
+    private static IEnumerable<(object Value, IncrementalStepRunReason Reason)> GetRunStepOutputs(
+        GeneratorRunResult? result
+    ) =>
+        result
+            ?.TrackedOutputSteps.SelectMany(step => step.Value)
             .SelectMany(value => value.Outputs);
 }

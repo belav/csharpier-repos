@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,11 +33,11 @@ using System.Linq;
 using System.Text;
 using NUnit.Framework;
 
-namespace MonoTests.System.IO.Packaging {
-
+namespace MonoTests.System.IO.Packaging
+{
     [TestFixture]
-    public class PackageTest : TestBase {
-
+    public class PackageTest : TestBase
+    {
         //static void Main (string [] args)
         //{
         //    PackageTest t = new PackageTest ();
@@ -47,397 +47,424 @@ namespace MonoTests.System.IO.Packaging {
         //}
         string path = "test.package";
 
-        public override void Setup ()
+        public override void Setup()
         {
-            if (File.Exists (path))
-                File.Delete (path);
+            if (File.Exists(path))
+                File.Delete(path);
         }
 
-        public override void TearDown ()
+        public override void TearDown()
         {
-            try {
+            try
+            {
                 if (package != null)
-                    package.Close ();
-            } catch {
+                    package.Close();
+            }
+            catch
+            {
                 // FIXME: This shouldn't be required when i implement this
             }
-            if (File.Exists (path))
-                File.Delete (path);
+            if (File.Exists(path))
+                File.Delete(path);
         }
 
         [Test]
-        public void CheckContentFile ()
+        public void CheckContentFile()
         {
-            MemoryStream stream = new MemoryStream ();
-            package = Package.Open (stream, FileMode.Create, FileAccess.ReadWrite);
-            package.CreatePart (uris[0], "custom/type");
-            package.CreateRelationship (uris[1], TargetMode.External, "relType");
+            MemoryStream stream = new MemoryStream();
+            package = Package.Open(stream, FileMode.Create, FileAccess.ReadWrite);
+            package.CreatePart(uris[0], "custom/type");
+            package.CreateRelationship(uris[1], TargetMode.External, "relType");
 
-            package.Close ();
-            package = Package.Open (new MemoryStream (stream.ToArray ()), FileMode.Open, FileAccess.ReadWrite);
-            package.Close ();
-            package = Package.Open (new MemoryStream (stream.ToArray ()), FileMode.Open, FileAccess.ReadWrite);
+            package.Close();
+            package = Package.Open(
+                new MemoryStream(stream.ToArray()),
+                FileMode.Open,
+                FileAccess.ReadWrite
+            );
+            package.Close();
+            package = Package.Open(
+                new MemoryStream(stream.ToArray()),
+                FileMode.Open,
+                FileAccess.ReadWrite
+            );
 
-            Assert.AreEqual (2, package.GetParts ().Count (), "#1");
-            Assert.AreEqual (1, package.GetRelationships ().Count (), "#2");
+            Assert.AreEqual(2, package.GetParts().Count(), "#1");
+            Assert.AreEqual(1, package.GetRelationships().Count(), "#2");
         }
 
         [Test]
-        [ExpectedException (typeof (FileFormatException))]
-        public void CorruptStream ()
+        [ExpectedException(typeof(FileFormatException))]
+        public void CorruptStream()
         {
-            stream = new FakeStream (true, true, true);
-            stream.Write (new byte [1024], 0, 1024);
-            package = Package.Open (stream);
+            stream = new FakeStream(true, true, true);
+            stream.Write(new byte[1024], 0, 1024);
+            package = Package.Open(stream);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void FileShareReadWrite ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void FileShareReadWrite()
         {
-            package = Package.Open (path, FileMode.Create, FileAccess.ReadWrite, FileShare.ReadWrite);
+            package = Package.Open(
+                path,
+                FileMode.Create,
+                FileAccess.ReadWrite,
+                FileShare.ReadWrite
+            );
         }
 
         [Test]
-        [ExpectedException (typeof (FileNotFoundException))]
-        public void OpenNonExistantPath ()
+        [ExpectedException(typeof(FileNotFoundException))]
+        public void OpenNonExistantPath()
         {
-            package = Package.Open (path, FileMode.Open);
+            package = Package.Open(path, FileMode.Open);
         }
 
         [Test]
-        public void NonExistantPath ()
+        public void NonExistantPath()
         {
-            package = Package.Open (path);
+            package = Package.Open(path);
         }
 
         [Test]
-        public void PreExistingPath ()
+        public void PreExistingPath()
         {
-            package = Package.Open (path);
-            package.Close ();
-            package = Package.Open (path);
-        } 
-		
-		[Test]
-		public void Close_FileStreamNotClosed ()
-		{
-			using (var stream = new FileStream (path, FileMode.OpenOrCreate, FileAccess.ReadWrite)) {
-				var package = Package.Open (stream, FileMode.OpenOrCreate);
-				package.CreatePart (uris [0], contentType);
-				package.Close ();
-				stream.Read (new byte [1024], 0, 1024);
-			}
-		}
-		
-		[Test]
-		public void Close_MemoryStreamNotClosed ()
-		{
-			using (var stream = new MemoryStream ()) {
-				var package = Package.Open (stream, FileMode.OpenOrCreate);
-				package.CreatePart (uris [0], contentType);
-				package.Close ();
-				stream.Read (new byte [1024], 0, 1024);
-			}
-		}
-		
-		[Test]
-		public void Close_Twice ()
-		{
-			var package = Package.Open (new MemoryStream (), FileMode.OpenOrCreate);
-			package.Close ();
-			package.Close ();
-		}
-		
-		[Test]
-		public void Dispose_Twice ()
-		{
-			var package = Package.Open (new MemoryStream (), FileMode.OpenOrCreate);
-			((IDisposable) package).Dispose ();
-			((IDisposable) package).Dispose ();
-		}
-		
-        [Test]
-        public void CreatePath ()
-        {
-            package = Package.Open (path, FileMode.Create);
-            Assert.AreEqual (FileAccess.ReadWrite, package.FileOpenAccess, "#1");
+            package = Package.Open(path);
+            package.Close();
+            package = Package.Open(path);
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void CreatePathReadonly ()
+        public void Close_FileStreamNotClosed()
         {
-            package = Package.Open (path, FileMode.Create, FileAccess.Read);
-            package.Close ();
+            using (var stream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
+            {
+                var package = Package.Open(stream, FileMode.OpenOrCreate);
+                package.CreatePart(uris[0], contentType);
+                package.Close();
+                stream.Read(new byte[1024], 0, 1024);
+            }
         }
 
         [Test]
-        public void CreatePathTwice ()
+        public void Close_MemoryStreamNotClosed()
         {
-            package = Package.Open (path, FileMode.Create);
-            package.Close ();
-            package = Package.Open (path, FileMode.Open);
-            Assert.AreEqual (FileAccess.ReadWrite, package.FileOpenAccess);
+            using (var stream = new MemoryStream())
+            {
+                var package = Package.Open(stream, FileMode.OpenOrCreate);
+                package.CreatePart(uris[0], contentType);
+                package.Close();
+                stream.Read(new byte[1024], 0, 1024);
+            }
         }
 
         [Test]
-        public void OpenPackageMultipleTimes ()
+        public void Close_Twice()
         {
-            var filename = Path.GetTempFileName ();
-            try {
-                using (var file = File.Open (filename, FileMode.OpenOrCreate)) {
-                    var package = Package.Open (file, FileMode.OpenOrCreate);
-                    var part = package.CreatePart (new Uri ("/test", UriKind.Relative), "test/type");
-                    using (var stream = part.GetStream ())
-                        stream.Write (new byte [1024 * 1024], 0, 1024 * 1024);
-                    package.Close ();
+            var package = Package.Open(new MemoryStream(), FileMode.OpenOrCreate);
+            package.Close();
+            package.Close();
+        }
+
+        [Test]
+        public void Dispose_Twice()
+        {
+            var package = Package.Open(new MemoryStream(), FileMode.OpenOrCreate);
+            ((IDisposable)package).Dispose();
+            ((IDisposable)package).Dispose();
+        }
+
+        [Test]
+        public void CreatePath()
+        {
+            package = Package.Open(path, FileMode.Create);
+            Assert.AreEqual(FileAccess.ReadWrite, package.FileOpenAccess, "#1");
+        }
+
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CreatePathReadonly()
+        {
+            package = Package.Open(path, FileMode.Create, FileAccess.Read);
+            package.Close();
+        }
+
+        [Test]
+        public void CreatePathTwice()
+        {
+            package = Package.Open(path, FileMode.Create);
+            package.Close();
+            package = Package.Open(path, FileMode.Open);
+            Assert.AreEqual(FileAccess.ReadWrite, package.FileOpenAccess);
+        }
+
+        [Test]
+        public void OpenPackageMultipleTimes()
+        {
+            var filename = Path.GetTempFileName();
+            try
+            {
+                using (var file = File.Open(filename, FileMode.OpenOrCreate))
+                {
+                    var package = Package.Open(file, FileMode.OpenOrCreate);
+                    var part = package.CreatePart(new Uri("/test", UriKind.Relative), "test/type");
+                    using (var stream = part.GetStream())
+                        stream.Write(new byte[1024 * 1024], 0, 1024 * 1024);
+                    package.Close();
                 }
-                
-                for (int i = 0; i < 10; i++) {
-                    using (var file = File.Open (filename, FileMode.OpenOrCreate))
-                    using (var package = Package.Open (file)) {
-                        package.GetParts ();
-                        package.GetRelationships ();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    using (var file = File.Open(filename, FileMode.OpenOrCreate))
+                    using (var package = Package.Open(file))
+                    {
+                        package.GetParts();
+                        package.GetRelationships();
                     }
                 }
-            } finally {
-                if (File.Exists (filename))
-                    File.Delete (filename);
             }
-        }
-        
-        [Test]
-        public void OpenPathReadonly ()
-        {
-            package = Package.Open (path, FileMode.Create);
-            package.CreatePart (uris[0], contentType);
-            package.CreateRelationship (uris[1], TargetMode.External, "relType");
-            package.Close ();
-            package = Package.Open (path, FileMode.Open, FileAccess.Read);
-            Assert.AreEqual (2, package.GetParts ().Count (), "#1");
-            Assert.AreEqual (1, package.GetRelationships ().Count (), "#2");
-            Assert.AreEqual (FileAccess.Read, package.FileOpenAccess, "Should be read access");
-            try {
-                package.CreatePart (uris [0], contentType);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
-            }
-
-            try {
-                package.CreateRelationship (uris [0], TargetMode.Internal, contentType);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
-            }
-
-            try {
-                package.DeletePart (uris [0]);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
-            }
-
-            try {
-                package.DeleteRelationship (contentType);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
+            finally
+            {
+                if (File.Exists(filename))
+                    File.Delete(filename);
             }
         }
 
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ReadableStream ()
+        public void OpenPathReadonly()
         {
-            stream = new FakeStream (true, false, false);
-            package = Package.Open (stream);
-        }
-
-        [Test]
-        [ExpectedException (typeof (FileFormatException))]
-        public void ReadableSeekableStream ()
-        {
-            stream = new FakeStream (true, false, true);
-            package = Package.Open (stream);
-
-            try {
-                package.DeleteRelationship (contentType);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
+            package = Package.Open(path, FileMode.Create);
+            package.CreatePart(uris[0], contentType);
+            package.CreateRelationship(uris[1], TargetMode.External, "relType");
+            package.Close();
+            package = Package.Open(path, FileMode.Open, FileAccess.Read);
+            Assert.AreEqual(2, package.GetParts().Count(), "#1");
+            Assert.AreEqual(1, package.GetRelationships().Count(), "#2");
+            Assert.AreEqual(FileAccess.Read, package.FileOpenAccess, "Should be read access");
+            try
+            {
+                package.CreatePart(uris[0], contentType);
+                Assert.Fail("Cannot modify a read-only package");
             }
-        }
+            catch (IOException) { }
 
-        [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void ReadOnlyAccess ()
-        {
-            stream = new FakeStream (true, false, true);
-            package = Package.Open (path, FileMode.CreateNew, FileAccess.Read);
-
-            try {
-                package.DeleteRelationship (contentType);
-                Assert.Fail ("Cannot modify a read-only package");
-            } catch (IOException) {
-
+            try
+            {
+                package.CreateRelationship(uris[0], TargetMode.Internal, contentType);
+                Assert.Fail("Cannot modify a read-only package");
             }
+            catch (IOException) { }
+
+            try
+            {
+                package.DeletePart(uris[0]);
+                Assert.Fail("Cannot modify a read-only package");
+            }
+            catch (IOException) { }
+
+            try
+            {
+                package.DeleteRelationship(contentType);
+                Assert.Fail("Cannot modify a read-only package");
+            }
+            catch (IOException) { }
         }
 
         [Test]
-        [Category ("NotWorking")]
-        [Ignore ("I'm not supposed to write to the relation stream unless i'm flushing")]
-        public void RelationshipPartGetStream ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ReadableStream()
         {
-            package = Package.Open (path);
-            package.CreateRelationship (uris [0], TargetMode.External, "rel");
-            PackagePart p = package.GetPart (relationshipUri);
-            Assert.IsNotNull (p, "#0");
-            Stream s = p.GetStream ();
-            Assert.AreEqual (0, s.Length, "#1");
-            Assert.IsTrue (s.CanRead, "#2");
-            Assert.IsTrue (s.CanSeek, "#3");
-            Assert.IsFalse (s.CanTimeout, "#4");
-            Assert.IsTrue (s.CanWrite, "#5");
+            stream = new FakeStream(true, false, false);
+            package = Package.Open(stream);
         }
 
         [Test]
-        [ExpectedException (typeof (IOException))]
-        public void SetFileModeOnUnwriteableStream ()
+        [ExpectedException(typeof(FileFormatException))]
+        public void ReadableSeekableStream()
         {
-            stream = new FakeStream (true, false, true);
-            package = Package.Open (stream, FileMode.Truncate);
+            stream = new FakeStream(true, false, true);
+            package = Package.Open(stream);
+
+            try
+            {
+                package.DeleteRelationship(contentType);
+                Assert.Fail("Cannot modify a read-only package");
+            }
+            catch (IOException) { }
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void SetAppendOnWriteableStream ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void ReadOnlyAccess()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Append);
+            stream = new FakeStream(true, false, true);
+            package = Package.Open(path, FileMode.CreateNew, FileAccess.Read);
+
+            try
+            {
+                package.DeleteRelationship(contentType);
+                Assert.Fail("Cannot modify a read-only package");
+            }
+            catch (IOException) { }
         }
 
         [Test]
-        public void SetCreateNewOnWriteableStream ()
+        [Category("NotWorking")]
+        [Ignore("I'm not supposed to write to the relation stream unless i'm flushing")]
+        public void RelationshipPartGetStream()
         {
-            package = Package.Open (stream, FileMode.CreateNew);
+            package = Package.Open(path);
+            package.CreateRelationship(uris[0], TargetMode.External, "rel");
+            PackagePart p = package.GetPart(relationshipUri);
+            Assert.IsNotNull(p, "#0");
+            Stream s = p.GetStream();
+            Assert.AreEqual(0, s.Length, "#1");
+            Assert.IsTrue(s.CanRead, "#2");
+            Assert.IsTrue(s.CanSeek, "#3");
+            Assert.IsFalse(s.CanTimeout, "#4");
+            Assert.IsTrue(s.CanWrite, "#5");
         }
 
         [Test]
         [ExpectedException(typeof(IOException))]
-        public void SetCreateNewOnWriteableStream2 ()
+        public void SetFileModeOnUnwriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            stream.Write (new byte [1000], 0, 1000);
-            package = Package.Open (stream, FileMode.CreateNew);
-            Assert.AreEqual (0, stream.Length, "#1");
+            stream = new FakeStream(true, false, true);
+            package = Package.Open(stream, FileMode.Truncate);
         }
 
         [Test]
-        public void SetCreateOnWriteableStream ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void SetAppendOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Create);
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Append);
         }
 
         [Test]
-        [ExpectedException (typeof (FileFormatException))]
-        public void SetOpenOnWriteableStream ()
+        public void SetCreateNewOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Open);
+            package = Package.Open(stream, FileMode.CreateNew);
         }
 
         [Test]
-        public void SetOpenOrCreateOnWriteableStream ()
+        [ExpectedException(typeof(IOException))]
+        public void SetCreateNewOnWriteableStream2()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.OpenOrCreate);
+            stream = new FakeStream(true, true, true);
+            stream.Write(new byte[1000], 0, 1000);
+            package = Package.Open(stream, FileMode.CreateNew);
+            Assert.AreEqual(0, stream.Length, "#1");
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void SetTruncateOnWriteableStream ()
+        public void SetCreateOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Truncate);
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Create);
         }
 
         [Test]
-        [ExpectedException (typeof (NotSupportedException))]
-        public void SetTruncateOnWriteablePath ()
+        [ExpectedException(typeof(FileFormatException))]
+        public void SetOpenOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            File.Create (path).Close ();
-            package = Package.Open (path, FileMode.Truncate);
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Open);
         }
 
         [Test]
-        [ExpectedException (typeof (FileFormatException))]
-        public void StreamOpen ()
+        public void SetOpenOrCreateOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Open);
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.OpenOrCreate);
         }
 
         [Test]
-        public void StreamCreate ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void SetTruncateOnWriteableStream()
         {
-            stream = new FakeStream (true, true, true);
-            package = Package.Open (stream, FileMode.Create);
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Truncate);
         }
 
         [Test]
-        [ExpectedException (typeof (IOException))]
-        public void UnusableStream ()
+        [ExpectedException(typeof(NotSupportedException))]
+        public void SetTruncateOnWriteablePath()
         {
-            stream = new FakeStream (false, false, false);
-            package = Package.Open (stream);
+            stream = new FakeStream(true, true, true);
+            File.Create(path).Close();
+            package = Package.Open(path, FileMode.Truncate);
+        }
+
+        [Test]
+        [ExpectedException(typeof(FileFormatException))]
+        public void StreamOpen()
+        {
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Open);
+        }
+
+        [Test]
+        public void StreamCreate()
+        {
+            stream = new FakeStream(true, true, true);
+            package = Package.Open(stream, FileMode.Create);
+        }
+
+        [Test]
+        [ExpectedException(typeof(IOException))]
+        public void UnusableStream()
+        {
+            stream = new FakeStream(false, false, false);
+            package = Package.Open(stream);
         }
 
         // Bug - I'm passing in FileAccess.Write but it thinks I've passed FileAccess.Read
         [Test]
-        [ExpectedException (typeof (ArgumentException))]
-        public void WriteAccessDoesntExist ()
+        [ExpectedException(typeof(ArgumentException))]
+        public void WriteAccessDoesntExist()
         {
-            package = Package.Open (path, FileMode.OpenOrCreate, FileAccess.Write);
+            package = Package.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
         }
 
         [Test]
-        public void ReadWriteAccessDoesntExist ()
+        public void ReadWriteAccessDoesntExist()
         {
-            package = Package.Open (path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
+            package = Package.Open(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
         }
 
         [Test]
-        [ExpectedException (typeof (FileFormatException))]
-        public void WriteOnlyAccessExists ()
+        [ExpectedException(typeof(FileFormatException))]
+        public void WriteOnlyAccessExists()
         {
-            File.Create (path).Close ();
-            package = Package.Open (path, FileMode.OpenOrCreate, FileAccess.Write);
+            File.Create(path).Close();
+            package = Package.Open(path, FileMode.OpenOrCreate, FileAccess.Write);
         }
 
         [Test]
-        public void Check_ZipDateTime ()
+        public void Check_ZipDateTime()
         {
-            using (var zipStream = new FileStream (path, FileMode.OpenOrCreate, FileAccess.ReadWrite))
-            using (package = Package.Open (zipStream, FileMode.OpenOrCreate)) {
-                var part = package.CreatePart (new Uri ("/test", UriKind.Relative), "test/type");
-                using (var stream = part.GetStream ())
-                    stream.Write (new byte [1024 * 1024], 0, 1024 * 1024);
+            using (
+                var zipStream = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite)
+            )
+            using (package = Package.Open(zipStream, FileMode.OpenOrCreate))
+            {
+                var part = package.CreatePart(new Uri("/test", UriKind.Relative), "test/type");
+                using (var stream = part.GetStream())
+                    stream.Write(new byte[1024 * 1024], 0, 1024 * 1024);
             }
 
-            using (var stream = new FileStream (path, FileMode.Open, FileAccess.Read))
+            using (var stream = new FileStream(path, FileMode.Open, FileAccess.Read))
             using (var archive = new ZipArchive(stream))
-            {                
+            {
                 foreach (var entry in archive.Entries)
                 {
-                    Assert.AreEqual (DateTime.Now.Year, entry.LastWriteTime.Year);
-                    Assert.AreEqual (DateTime.Now.Month, entry.LastWriteTime.Month);
-                    Assert.AreEqual (DateTime.Now.Day, entry.LastWriteTime.Day);
+                    Assert.AreEqual(DateTime.Now.Year, entry.LastWriteTime.Year);
+                    Assert.AreEqual(DateTime.Now.Month, entry.LastWriteTime.Month);
+                    Assert.AreEqual(DateTime.Now.Day, entry.LastWriteTime.Day);
                 }
             }
-        }           
+        }
     }
 }

@@ -21,7 +21,8 @@ namespace System.Diagnostics.Tracing
             string name,
             PropertyInfo propertyInfo,
             TraceLoggingTypeInfo typeInfo,
-            EventFieldAttribute? fieldAttribute)
+            EventFieldAttribute? fieldAttribute
+        )
         {
             this.name = name;
             this.propertyInfo = propertyInfo;

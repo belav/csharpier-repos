@@ -36,14 +36,15 @@ namespace SerializationTestTypes
     }
 
     [DataContract(Name = "EmptyDCType", Namespace = "http://www.Default.com")]
-    public class EmptyDCType
-    {
-    }
+    public class EmptyDCType { }
 
     [KnownType(typeof(EmptyDCType))]
     public class POCOObjectContainer
     {
-        public POCOObjectContainer() { Data = new EmptyDCType(); }
+        public POCOObjectContainer()
+        {
+            Data = new EmptyDCType();
+        }
 
         public object Data;
 
@@ -78,7 +79,6 @@ namespace SerializationTestTypes
         public object unknown2 = new SerializationTestTypes.Employee();
     }
 
-
     [DataContract(Namespace = "NonExistNamespace")]
     public class Employee
     {
@@ -112,8 +112,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Alpha alpha = new Alpha();
+
         [DataMember]
         public Beta beta = new Beta();
+
         [DataMember]
         public Charlie charlie = new Charlie();
     }
@@ -123,8 +125,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Beta beta1 = new Beta();
+
         [DataMember]
         public Charlie charlie = new Charlie();
+
         [DataMember]
         public Beta beta2 = new Beta();
     }
@@ -134,8 +138,10 @@ namespace SerializationTestTypes
     {
         [DataMember]
         public Charlie charlie1 = new Charlie();
+
         [DataMember]
         public Beta beta = new Beta();
+
         [DataMember]
         public Charlie charlie2 = new Charlie();
     }
@@ -179,10 +185,16 @@ namespace SerializationTestTypes
     {
         [DataMember]
         private ArrayList _arrayList = new ArrayList() { new Person() };
+
         [DataMember]
-        private Dictionary<int, object> _dictionary = new Dictionary<int, object>() { { 001, new CharClass() } };
+        private Dictionary<int, object> _dictionary = new Dictionary<int, object>()
+        {
+            { 001, new CharClass() },
+        };
+
         [DataMember]
         private Hashtable _hashtable = new Hashtable() { { "one", new Version1() } };
+
         [DataMember]
         private object[] _singleDimArray = new object[] { new Employee() };
     }
@@ -248,11 +260,17 @@ namespace SerializationTestTypes
                     _fxPrimitivesInCollectionList.Add(typeof(List<short>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<int>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<long>));
-                    _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Boolean>>));
+                    _fxPrimitivesInCollectionList.Add(
+                        typeof(List<System.Nullable<System.Boolean>>)
+                    );
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Byte>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Char>>));
-                    _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.DateTime>>));
-                    _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Decimal>>));
+                    _fxPrimitivesInCollectionList.Add(
+                        typeof(List<System.Nullable<System.DateTime>>)
+                    );
+                    _fxPrimitivesInCollectionList.Add(
+                        typeof(List<System.Nullable<System.Decimal>>)
+                    );
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Double>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Guid>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Int16>>));
@@ -260,7 +278,9 @@ namespace SerializationTestTypes
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Int64>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.SByte>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.Single>>));
-                    _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.TimeSpan>>));
+                    _fxPrimitivesInCollectionList.Add(
+                        typeof(List<System.Nullable<System.TimeSpan>>)
+                    );
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.UInt16>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.UInt32>>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.UInt64>>));
@@ -274,7 +294,9 @@ namespace SerializationTestTypes
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Xml.XmlElement>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.Xml.XmlNode[]>));
                     _fxPrimitivesInCollectionList.Add(typeof(List<System.DateTimeOffset>));
-                    _fxPrimitivesInCollectionList.Add(typeof(List<System.Nullable<System.DateTimeOffset>>));
+                    _fxPrimitivesInCollectionList.Add(
+                        typeof(List<System.Nullable<System.DateTimeOffset>>)
+                    );
                 }
                 return _fxPrimitivesInCollectionList;
             }
@@ -553,7 +575,9 @@ namespace SerializationTestTypes
                     _sampleTypeList.Add(typeof(SampleListTExplicitWithDC));
                     _sampleTypeList.Add(typeof(SampleListTExplicitWithoutDC));
                     _sampleTypeList.Add(typeof(SampleListTExplicitWithCDC));
-                    _sampleTypeList.Add(typeof(SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM));
+                    _sampleTypeList.Add(
+                        typeof(SampleListTExplicitWithCDCContainsPublicDCClassPrivateDM)
+                    );
                     _sampleTypeList.Add(typeof(SampleListTExplicitWithCDCContainsPrivateDC));
                     _sampleTypeList.Add(typeof(SampleICollectionTImplicitWithDC));
                     _sampleTypeList.Add(typeof(SampleICollectionTImplicitWithoutDC));
@@ -612,7 +636,9 @@ namespace SerializationTestTypes
                     _sampleTypeList.Add(typeof(IReadWriteXmlWriteBinHex_EqualityDefined));
                     _sampleTypeList.Add(typeof(PrivateDefaultCtorIXmlSerializables));
                     _sampleTypeList.Add(typeof(PublicIXmlSerializablesWithPublicSchemaProvider));
-                    _sampleTypeList.Add(typeof(PublicExplicitIXmlSerializablesWithPublicSchemaProvider));
+                    _sampleTypeList.Add(
+                        typeof(PublicExplicitIXmlSerializablesWithPublicSchemaProvider)
+                    );
                     _sampleTypeList.Add(typeof(PublicIXmlSerializablesWithPrivateSchemaProvider));
                     _sampleTypeList.Add(typeof(PublicDCClassPublicDM));
                     _sampleTypeList.Add(typeof(PublicDCClassPrivateDM));
@@ -620,17 +646,25 @@ namespace SerializationTestTypes
                     _sampleTypeList.Add(typeof(PublicDCClassMixedDM));
                     _sampleTypeList.Add(typeof(PublicDCClassPublicDM_DerivedDCClassPublic));
                     _sampleTypeList.Add(typeof(PublicDCClassPrivateDM_DerivedDCClassPublic));
-                    _sampleTypeList.Add(typeof(PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM));
+                    _sampleTypeList.Add(
+                        typeof(PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM)
+                    );
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassPublicDM_PublicDCClassPrivateDM));
-                    _sampleTypeList.Add(typeof(Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM));
-                    _sampleTypeList.Add(typeof(Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM));
+                    _sampleTypeList.Add(
+                        typeof(Prop_SetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM)
+                    );
+                    _sampleTypeList.Add(
+                        typeof(Prop_GetPrivate_PublicDCClassPublicDM_PublicDCClassPrivateDM)
+                    );
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassPublicDM));
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassPrivateDM));
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassInternalDM));
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassMixedDM));
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassPublicDM_DerivedDCClassPublic));
                     _sampleTypeList.Add(typeof(Prop_PublicDCClassPrivateDM_DerivedDCClassPublic));
-                    _sampleTypeList.Add(typeof(Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM));
+                    _sampleTypeList.Add(
+                        typeof(Prop_PublicDCClassPublicDM_DerivedDCClassPublicContainsPrivateDM)
+                    );
                     _sampleTypeList.Add(typeof(Prop_SetPrivate_PublicDCClassPublicDM));
                     _sampleTypeList.Add(typeof(Prop_GetPrivate_PublicDCClassPublicDM));
                     _sampleTypeList.Add(typeof(Derived_Override_Prop_All_Public));
@@ -691,8 +725,10 @@ namespace SerializationTestTypes
     {
         public static bool CompareIObjectRefTypes(object serialized, object deSerialized)
         {
-            Dictionary<DataContract, List<RefData>> alreadyRefdValues = ObjectRefUtil.GetReferenceCounts(serialized);
-            Dictionary<DataContract, List<RefData>> alreadyRefdValues2 = ObjectRefUtil.GetReferenceCounts(deSerialized);
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues =
+                ObjectRefUtil.GetReferenceCounts(serialized);
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues2 =
+                ObjectRefUtil.GetReferenceCounts(deSerialized);
             if (!ObjectRefUtil.IsEqual(alreadyRefdValues, alreadyRefdValues2))
             {
                 return false;
@@ -714,7 +750,8 @@ namespace SerializationTestTypes
         public override bool Equals(object obj)
         {
             RefData other = obj as RefData;
-            if (other == null) return false;
+            if (other == null)
+                return false;
             return (object.ReferenceEquals(this.Data, other.Data));
         }
 
@@ -735,23 +772,35 @@ namespace SerializationTestTypes
     {
         public static Dictionary<DataContract, List<RefData>> GetReferenceCounts(object data)
         {
-            Dictionary<DataContract, List<RefData>> nonRefdValues = new Dictionary<DataContract, List<RefData>>();
+            Dictionary<DataContract, List<RefData>> nonRefdValues =
+                new Dictionary<DataContract, List<RefData>>();
             return GetReferenceCounts(data, ref nonRefdValues);
         }
 
-        public static Dictionary<DataContract, List<RefData>> GetReferenceCounts(object data, ref Dictionary<DataContract, List<RefData>> nonRefdValues)
+        public static Dictionary<DataContract, List<RefData>> GetReferenceCounts(
+            object data,
+            ref Dictionary<DataContract, List<RefData>> nonRefdValues
+        )
         {
-            Dictionary<DataContract, List<RefData>> alreadyRefdValues = new Dictionary<DataContract, List<RefData>>();
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues =
+                new Dictionary<DataContract, List<RefData>>();
             Type type = data.GetType();
-            DataContract dataContract = DataContract.GetDataContract(type, supportCollectionDataContract);
+            DataContract dataContract = DataContract.GetDataContract(
+                type,
+                supportCollectionDataContract
+            );
             s_refStack.Clear();
             FindAndAddRefd(data, dataContract, ref alreadyRefdValues, ref nonRefdValues);
             return alreadyRefdValues;
         }
 
-        public static bool IsEqual(Dictionary<DataContract, List<RefData>> alreadyRefdValues1, Dictionary<DataContract, List<RefData>> alreadyRefdValues2)
+        public static bool IsEqual(
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues1,
+            Dictionary<DataContract, List<RefData>> alreadyRefdValues2
+        )
         {
-            if (alreadyRefdValues1.Count != alreadyRefdValues2.Count) return false;
+            if (alreadyRefdValues1.Count != alreadyRefdValues2.Count)
+                return false;
             foreach (KeyValuePair<DataContract, List<RefData>> kp in alreadyRefdValues1)
             {
                 if (alreadyRefdValues2.ContainsKey(kp.Key))
@@ -777,14 +826,19 @@ namespace SerializationTestTypes
         }
 
         private static Stack<RefData> s_refStack = new Stack<RefData>();
+
         /// <summary>
         /// </summary>
         /// <param name="data"></param>
         /// <param name="dataContract"></param>
         /// <param name="alreadyRefdValues"></param>
         /// <param name="nonRefdValues"></param>
-        private static void FindAndAddRefd(object data, DataContract dataContract, ref Dictionary<DataContract, List<RefData>> alreadyRefdValues
-                                        , ref Dictionary<DataContract, List<RefData>> nonRefdValues)
+        private static void FindAndAddRefd(
+            object data,
+            DataContract dataContract,
+            ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
+            ref Dictionary<DataContract, List<RefData>> nonRefdValues
+        )
         {
             RefData refData = new RefData(data);
             FindRefUpdateRef(refData, dataContract, ref alreadyRefdValues, ref nonRefdValues);
@@ -801,7 +855,13 @@ namespace SerializationTestTypes
         }
 
         public static bool supportCollectionDataContract = true;
-        private static void FindRefUpdateRef(RefData refData, DataContract dataContract, ref Dictionary<DataContract, List<RefData>> alreadyRefdValues, ref Dictionary<DataContract, List<RefData>> nonRefdValues)
+
+        private static void FindRefUpdateRef(
+            RefData refData,
+            DataContract dataContract,
+            ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
+            ref Dictionary<DataContract, List<RefData>> nonRefdValues
+        )
         {
             if (dataContract.IsReference)
             {
@@ -813,7 +873,9 @@ namespace SerializationTestTypes
                     }
                     else
                     {
-                        alreadyRefdValues[dataContract][alreadyRefdValues[dataContract].IndexOf(refData)].RefCount++;
+                        alreadyRefdValues[dataContract][
+                            alreadyRefdValues[dataContract].IndexOf(refData)
+                        ].RefCount++;
                     }
                 }
                 else
@@ -833,7 +895,9 @@ namespace SerializationTestTypes
                     }
                     else
                     {
-                        nonRefdValues[dataContract][nonRefdValues[dataContract].IndexOf(refData)].RefCount++;
+                        nonRefdValues[dataContract][
+                            nonRefdValues[dataContract].IndexOf(refData)
+                        ].RefCount++;
                     }
                 }
                 else
@@ -844,7 +908,13 @@ namespace SerializationTestTypes
                 }
             }
         }
-        private static void FindRefHandleMembers(object data, DataContract dataContract, ref Dictionary<DataContract, List<RefData>> alreadyRefdValues, ref Dictionary<DataContract, List<RefData>> nonRefdValues)
+
+        private static void FindRefHandleMembers(
+            object data,
+            DataContract dataContract,
+            ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
+            ref Dictionary<DataContract, List<RefData>> nonRefdValues
+        )
         {
             if (dataContract is ClassDataContract)
             {
@@ -854,7 +924,15 @@ namespace SerializationTestTypes
                     object memberData = member.GetMemberValue(data);
                     if (memberData != null)
                     {
-                        FindAndAddRefd(memberData, DataContract.GetDataContract(memberData.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                        FindAndAddRefd(
+                            memberData,
+                            DataContract.GetDataContract(
+                                memberData.GetType(),
+                                supportCollectionDataContract
+                            ),
+                            ref alreadyRefdValues,
+                            ref nonRefdValues
+                        );
                     }
                 }
             }
@@ -865,13 +943,26 @@ namespace SerializationTestTypes
                 {
                     if (obj != null)
                     {
-                        FindAndAddRefd(obj, DataContract.GetDataContract(obj.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                        FindAndAddRefd(
+                            obj,
+                            DataContract.GetDataContract(
+                                obj.GetType(),
+                                supportCollectionDataContract
+                            ),
+                            ref alreadyRefdValues,
+                            ref nonRefdValues
+                        );
                     }
                 }
             }
             else if (dataContract is CollectionDataContract)
             {
-                FindRefHandleCollectionDataContractMembers(data, dataContract, ref alreadyRefdValues, ref nonRefdValues);
+                FindRefHandleCollectionDataContractMembers(
+                    data,
+                    dataContract,
+                    ref alreadyRefdValues,
+                    ref nonRefdValues
+                );
             }
             else if (dataContract is EnumDataContract || dataContract is PrimitiveDataContract)
             {
@@ -883,7 +974,12 @@ namespace SerializationTestTypes
             }
         }
 
-        private static void FindRefHandleCollectionDataContractMembers(object data, DataContract dataContract, ref Dictionary<DataContract, List<RefData>> alreadyRefdValues, ref Dictionary<DataContract, List<RefData>> nonRefdValues)
+        private static void FindRefHandleCollectionDataContractMembers(
+            object data,
+            DataContract dataContract,
+            ref Dictionary<DataContract, List<RefData>> alreadyRefdValues,
+            ref Dictionary<DataContract, List<RefData>> nonRefdValues
+        )
         {
             CollectionDataContract collectionContract = dataContract as CollectionDataContract;
             if (!collectionContract.IsDictionary)
@@ -892,7 +988,15 @@ namespace SerializationTestTypes
                 {
                     if (obj != null)
                     {
-                        FindAndAddRefd(obj, DataContract.GetDataContract(obj.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                        FindAndAddRefd(
+                            obj,
+                            DataContract.GetDataContract(
+                                obj.GetType(),
+                                supportCollectionDataContract
+                            ),
+                            ref alreadyRefdValues,
+                            ref nonRefdValues
+                        );
                     }
                 }
             }
@@ -905,14 +1009,30 @@ namespace SerializationTestTypes
                     {
                         if (key != null)
                         {
-                            FindAndAddRefd(key, DataContract.GetDataContract(key.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                            FindAndAddRefd(
+                                key,
+                                DataContract.GetDataContract(
+                                    key.GetType(),
+                                    supportCollectionDataContract
+                                ),
+                                ref alreadyRefdValues,
+                                ref nonRefdValues
+                            );
                         }
                     }
                     foreach (object value in dictionary.Values)
                     {
                         if (value != null)
                         {
-                            FindAndAddRefd(value, DataContract.GetDataContract(value.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                            FindAndAddRefd(
+                                value,
+                                DataContract.GetDataContract(
+                                    value.GetType(),
+                                    supportCollectionDataContract
+                                ),
+                                ref alreadyRefdValues,
+                                ref nonRefdValues
+                            );
                         }
                     }
                 }
@@ -923,7 +1043,10 @@ namespace SerializationTestTypes
                         object dictEnumObj = null;
                         try
                         {
-                            dictEnumObj = collectionContract.GetEnumeratorMethod.Invoke(data, new object[] { });
+                            dictEnumObj = collectionContract.GetEnumeratorMethod.Invoke(
+                                data,
+                                new object[] { }
+                            );
                         }
                         catch (Exception) { }
                         IDictionaryEnumerator dictEnum = dictEnumObj as IDictionaryEnumerator;
@@ -931,21 +1054,39 @@ namespace SerializationTestTypes
                         {
                             while (dictEnum.MoveNext())
                             {
-                                FindAndAddRefd(dictEnum.Key, DataContract.GetDataContract(dictEnum.Key.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                                FindAndAddRefd(
+                                    dictEnum.Key,
+                                    DataContract.GetDataContract(
+                                        dictEnum.Key.GetType(),
+                                        supportCollectionDataContract
+                                    ),
+                                    ref alreadyRefdValues,
+                                    ref nonRefdValues
+                                );
                             }
                             dictEnum.Reset();
                             while (dictEnum.MoveNext())
                             {
                                 if (dictEnum.Value != null)
                                 {
-                                    FindAndAddRefd(dictEnum.Value, DataContract.GetDataContract(dictEnum.Value.GetType(), supportCollectionDataContract), ref alreadyRefdValues, ref nonRefdValues);
+                                    FindAndAddRefd(
+                                        dictEnum.Value,
+                                        DataContract.GetDataContract(
+                                            dictEnum.Value.GetType(),
+                                            supportCollectionDataContract
+                                        ),
+                                        ref alreadyRefdValues,
+                                        ref nonRefdValues
+                                    );
                                 }
                             }
                         }
                     }
                     else
                     {
-                        throw new Exception("TestDriver Exception: Dictionary CollectionDataCotnract Type Not Supported");
+                        throw new Exception(
+                            "TestDriver Exception: Dictionary CollectionDataCotnract Type Not Supported"
+                        );
                     }
                 }
             }

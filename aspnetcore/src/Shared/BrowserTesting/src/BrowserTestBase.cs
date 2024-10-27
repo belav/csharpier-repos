@@ -18,12 +18,15 @@ namespace Microsoft.AspNetCore.BrowserTesting;
 public class BrowserTestBase : LoggedTest, IAsyncLifetime
 {
     private static readonly bool _isCIEnvironment =
-        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild")) ||
-        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("Helix"));
+        !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("ContinuousIntegrationBuild"))
+        || !string.IsNullOrWhiteSpace(Environment.GetEnvironmentVariable("Helix"));
 
-    private static readonly BrowserManagerConfiguration _config = new BrowserManagerConfiguration(CreateConfiguration());
+    private static readonly BrowserManagerConfiguration _config = new BrowserManagerConfiguration(
+        CreateConfiguration()
+    );
 
-    public BrowserTestBase(ITestOutputHelper output = null) : base(output) { }
+    public BrowserTestBase(ITestOutputHelper output = null)
+        : base(output) { }
 
     protected override async Task InitializeCoreAsync(TestContext context)
     {
@@ -42,7 +45,7 @@ public class BrowserTestBase : LoggedTest, IAsyncLifetime
             PlatformID.Win32NT => "win",
             PlatformID.Unix => "linux",
             PlatformID.MacOSX => "osx",
-            _ => null
+            _ => null,
         };
 
         var builder = new ConfigurationBuilder()
@@ -51,13 +54,20 @@ public class BrowserTestBase : LoggedTest, IAsyncLifetime
 
         if (_isCIEnvironment)
         {
-            builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.ci.json"), optional: true)
-                .AddJsonFile(Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"), optional: true);
+            builder
+                .AddJsonFile(Path.Combine(basePath, "playwrightSettings.ci.json"), optional: true)
+                .AddJsonFile(
+                    Path.Combine(basePath, $"playwrightSettings.ci.{os}.json"),
+                    optional: true
+                );
         }
 
         if (Debugger.IsAttached)
         {
-            builder.AddJsonFile(Path.Combine(basePath, "playwrightSettings.debug.json"), optional: true);
+            builder.AddJsonFile(
+                Path.Combine(basePath, "playwrightSettings.debug.json"),
+                optional: true
+            );
         }
 
         return builder.Build();

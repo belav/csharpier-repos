@@ -3,7 +3,6 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
-
 using Internal.Text;
 using Internal.TypeSystem;
 
@@ -30,7 +29,8 @@ namespace ILCompiler.DependencyAnalysis
             _inlined = inlined;
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         protected override void OnMarked(NodeFactory factory)
         {
@@ -48,19 +48,22 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            string mangledName = _type == null ? "_inlinedThreadStatics" : GetMangledName(_type, nameMangler);
+            string mangledName =
+                _type == null ? "_inlinedThreadStatics" : GetMangledName(_type, nameMangler);
             sb.Append(mangledName);
         }
 
         private ISymbolNode GetGCStaticEETypeNode(NodeFactory factory)
         {
-            GCPointerMap map = _type != null ?
-                GCPointerMap.FromThreadStaticLayout(_type) :
-                GCPointerMap.FromInlinedThreadStatics(
-                    _inlined.GetTypes(),
-                    _inlined.GetOffsets(),
-                    _inlined.GetSize(),
-                    factory.Target.PointerSize);
+            GCPointerMap map =
+                _type != null
+                    ? GCPointerMap.FromThreadStaticLayout(_type)
+                    : GCPointerMap.FromInlinedThreadStatics(
+                        _inlined.GetTypes(),
+                        _inlined.GetOffsets(),
+                        _inlined.GetSize(),
+                        factory.Target.PointerSize
+                    );
 
             return factory.GCStaticEEType(map);
         }
@@ -69,16 +72,27 @@ namespace ILCompiler.DependencyAnalysis
         {
             DependencyList result = new DependencyList();
 
-            result.Add(new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable"));
+            result.Add(
+                new DependencyListEntry(GetGCStaticEETypeNode(factory), "ThreadStatic MethodTable")
+            );
 
             if (_type != null)
             {
                 if (factory.PreinitializationManager.HasEagerStaticConstructor(_type))
                 {
-                    result.Add(new DependencyListEntry(factory.EagerCctorIndirection(_type.GetStaticConstructor()), "Eager .cctor"));
+                    result.Add(
+                        new DependencyListEntry(
+                            factory.EagerCctorIndirection(_type.GetStaticConstructor()),
+                            "Eager .cctor"
+                        )
+                    );
                 }
 
-                ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref result, factory, _type.Module);
+                ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                    ref result,
+                    factory,
+                    _type.Module
+                );
             }
             else
             {
@@ -86,13 +100,27 @@ namespace ILCompiler.DependencyAnalysis
                 {
                     if (factory.PreinitializationManager.HasEagerStaticConstructor(type))
                     {
-                        result.Add(new DependencyListEntry(factory.EagerCctorIndirection(type.GetStaticConstructor()), "Eager .cctor"));
+                        result.Add(
+                            new DependencyListEntry(
+                                factory.EagerCctorIndirection(type.GetStaticConstructor()),
+                                "Eager .cctor"
+                            )
+                        );
                     }
 
                     // inlined threadstatics do not need the index for execution, but may need it for debug visualization.
-                    result.Add(new DependencyListEntry(factory.TypeThreadStaticIndex(type), "ThreadStatic index for debug visualization"));
+                    result.Add(
+                        new DependencyListEntry(
+                            factory.TypeThreadStaticIndex(type),
+                            "ThreadStatic index for debug visualization"
+                        )
+                    );
 
-                    ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(ref result, factory, type.Module);
+                    ModuleUseBasedDependencyAlgorithm.AddDependenciesDueToModuleUse(
+                        ref result,
+                        factory,
+                        type.Module
+                    );
                 }
             }
 
@@ -100,11 +128,11 @@ namespace ILCompiler.DependencyAnalysis
         }
 
         public override bool HasConditionalStaticDependencies =>
-            _type != null ?
-                _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type:
-                false;
+            _type != null ? _type.ConvertToCanonForm(CanonicalFormKind.Specific) != _type : false;
 
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory)
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        )
         {
             Debug.Assert(_type != null);
 
@@ -112,15 +140,23 @@ namespace ILCompiler.DependencyAnalysis
             // bases in the type info hashtable. The type symbol node does such accounting.
             return new CombinedDependencyListEntry[]
             {
-                new CombinedDependencyListEntry(factory.NecessaryTypeSymbol(_type),
-                    factory.NativeLayout.TemplateTypeLayout(_type.ConvertToCanonForm(CanonicalFormKind.Specific)),
-                    "Keeping track of template-constructable type static bases"),
+                new CombinedDependencyListEntry(
+                    factory.NecessaryTypeSymbol(_type),
+                    factory.NativeLayout.TemplateTypeLayout(
+                        _type.ConvertToCanonForm(CanonicalFormKind.Specific)
+                    ),
+                    "Keeping track of template-constructable type static bases"
+                ),
             };
         }
 
         public override bool StaticDependenciesAreComputed => true;
 
-        public override void EncodeData(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // At runtime, an instance of the GCStaticEEType will be created and a GCHandle to it
             // will be written in this location.

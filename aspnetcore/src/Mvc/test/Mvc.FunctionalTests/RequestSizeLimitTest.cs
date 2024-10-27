@@ -8,11 +8,14 @@ using Microsoft.AspNetCore.Hosting;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class RequestSizeLimitTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupRequestLimitSize>>
+public class RequestSizeLimitTest
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupRequestLimitSize>>
 {
     public RequestSizeLimitTest(MvcTestFixture<BasicWebSite.StartupRequestLimitSize> fixture)
     {
-        var factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        var factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
         Client = factory.CreateDefaultClient();
     }
 
@@ -33,14 +36,16 @@ public class RequestSizeLimitTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Act
         var response = await Client.PostAsync(
             "RequestSizeLimit/RequestSizeLimitCheckBeforeAntiforgeryValidation",
-            new FormUrlEncodedContent(kvps));
+            new FormUrlEncodedContent(kvps)
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
         var result = await response.Content.ReadAsStringAsync();
         Assert.Contains(
             "InvalidOperationException: Request content size is greater than the limit size",
-            result);
+            result
+        );
     }
 
     [Fact]
@@ -55,7 +60,8 @@ public class RequestSizeLimitTest : IClassFixture<MvcTestFixture<BasicWebSite.St
         // Act
         var response = await Client.PostAsync(
             "RequestSizeLimit/RequestSizeLimitCheckBeforeAntiforgeryValidation",
-            new FormUrlEncodedContent(kvps));
+            new FormUrlEncodedContent(kvps)
+        );
 
         // Assert
         Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);

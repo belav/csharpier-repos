@@ -6,7 +6,7 @@
 //------------------------------------------------------------------------------
 
 #if DontUse
-// XPathContext is not used any more but comments in it and Replacer visitor may be used to 
+// XPathContext is not used any more but comments in it and Replacer visitor may be used to
 // optimize code XSLT generates on last().
 using System;
 using System.Diagnostics;
@@ -15,9 +15,10 @@ using System.Xml;
 using System.Xml.XPath;
 using MS.Internal.Xml;
 
-namespace System.Xml.Xsl.XPath {
-
-    internal class XPathContext {
+namespace System.Xml.Xsl.XPath
+{
+    internal class XPathContext
+    {
         // Context is the most fundamental concept of XPath
         // In docs it is -- "current node-set" and "current node in this node-set"
         // on practice in this implementation we have "current node" (C), "position of current node in current node-set" (P)
@@ -67,52 +68,71 @@ namespace System.Xml.Xsl.XPath {
         // -- It look like solution is group (a/b) with For(DocOrderDistinct(...)) and we are set.
 
         // Methods that deal with XPath context. Xslt.QilGenerator calls these method as well:
-        public static QilNode GetCurrentNode(QilTuple context) {
+        public static QilNode GetCurrentNode(QilTuple context)
+        {
             Debug.Assert(context != null);
             Debug.Assert(GetTuple(context).For.Type == QilNodeType.For);
             return GetTuple(context).For;
         }
 
-        public static QilNode GetCurrentPosition(QilFactory f, QilTuple context) {
+        public static QilNode GetCurrentPosition(QilFactory f, QilTuple context)
+        {
             Debug.Assert(context != null);
-            if (context.Where.Type != QilNodeType.True) {
+            if (context.Where.Type != QilNodeType.True)
+            {
                 Debug.Assert(context.For.Type == QilNodeType.For);
                 // convert context (1) --> (2)
                 QilIterator for2 = f.For(context.For.Binding);
-                QilNode     cnd2 = new Replacer(f).Replace(/*inExpr:*/context.Where, /*from:*/context.For, /*to:*/for2);
+                QilNode cnd2 = new Replacer(f).Replace( /*inExpr:*/
+                    context.Where, /*from:*/
+                    context.For, /*to:*/
+                    for2
+                );
                 context.For.Binding = f.OldTuple(for2, cnd2, for2);
                 context.Where = f.True();
             }
-            return f.Convert(f.PositionOf((QilIterator)XPathContext.GetCurrentNode(context)), f.TypeFactory.Double());
+            return f.Convert(
+                f.PositionOf((QilIterator)XPathContext.GetCurrentNode(context)),
+                f.TypeFactory.Double()
+            );
         }
 
-        public static QilNode GetLastPosition(QilFactory f, QilTuple context) {
+        public static QilNode GetLastPosition(QilFactory f, QilTuple context)
+        {
             return f.Convert(f.Length(context.Clone(f)), f.TypeFactory.Double());
         }
 
-        public static QilTuple GetTuple(QilTuple context) {
+        public static QilTuple GetTuple(QilTuple context)
+        {
             Debug.Assert(context != null);
-            if (context.For.Type == QilNodeType.Let) {
+            if (context.For.Type == QilNodeType.Let)
+            {
                 Debug.Assert(context.Where.Type == QilNodeType.True);
                 Debug.Assert(context.Return.Type == QilNodeType.OldTuple);
-                return (QilTuple) context.Return;
+                return (QilTuple)context.Return;
             }
             return context;
         }
 
-        private class Replacer : QilActiveVisitor {
-            QilIterator from, to;
+        private class Replacer : QilActiveVisitor
+        {
+            QilIterator from,
+                to;
 
-            public Replacer(QilFactory f) : base(f) {}
+            public Replacer(QilFactory f)
+                : base(f) { }
 
-            public QilNode Replace(QilNode inExpr, QilIterator from, QilIterator to) {
+            public QilNode Replace(QilNode inExpr, QilIterator from, QilIterator to)
+            {
                 this.from = from;
-                this.to   = to  ;
+                this.to = to;
                 return Visit(inExpr);
             }
 
-            protected override QilNode VisitClassReference(QilNode it) {
-                if (it == from) {
+            protected override QilNode VisitClassReference(QilNode it)
+            {
+                if (it == from)
+                {
                     return to;
                 }
                 return it;

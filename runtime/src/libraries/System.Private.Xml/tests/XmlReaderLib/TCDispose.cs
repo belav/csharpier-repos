@@ -13,19 +13,32 @@ namespace System.Xml.Tests
         {
             // for function Variation1
             {
-                this.AddChild(new CVariation(Variation1) { Attribute = new Variation("Test Integrity of all values after Dispose") });
+                this.AddChild(
+                    new CVariation(Variation1)
+                    {
+                        Attribute = new Variation("Test Integrity of all values after Dispose"),
+                    }
+                );
             }
-
 
             // for function Variation2
             {
-                this.AddChild(new CVariation(Variation2) { Attribute = new Variation("Call Dispose Multiple(3) Times") });
+                this.AddChild(
+                    new CVariation(Variation2)
+                    {
+                        Attribute = new Variation("Call Dispose Multiple(3) Times"),
+                    }
+                );
             }
-
 
             // for function Variation3
             {
-                this.AddChild(new CVariation(Variation3) { Attribute = new Variation("Check Dispose with Exclusive Stream") });
+                this.AddChild(
+                    new CVariation(Variation3)
+                    {
+                        Attribute = new Variation("Check Dispose with Exclusive Stream"),
+                    }
+                );
             }
         }
     }

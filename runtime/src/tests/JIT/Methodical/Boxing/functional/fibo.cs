@@ -5,15 +5,13 @@
 using System;
 using Xunit;
 
-
 namespace BoxTest_fibo_cs
 {
     public class Test
     {
         protected object Fibonacci(object num, object flag)
         {
-            if (num.GetType() != typeof(int) ||
-                flag.GetType() != typeof(bool))
+            if (num.GetType() != typeof(int) || flag.GetType() != typeof(bool))
                 throw new Exception();
 
             return Fibonacci2(num, flag);

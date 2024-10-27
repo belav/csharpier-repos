@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Caches the return values for <see cref="GetIdForErrorCode(int)"/>.
         /// </summary>
-        private static readonly ConcurrentDictionary<(string prefix, int code), string> s_errorIdCache = new ConcurrentDictionary<(string prefix, int code), string>();
+        private static readonly ConcurrentDictionary<
+            (string prefix, int code),
+            string
+        > s_errorIdCache = new ConcurrentDictionary<(string prefix, int code), string>();
 
         /// <summary>
         /// Given an error code, get the severity (warning or error) of the code.
@@ -90,13 +93,22 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a simple language specific diagnostic for given error code.
         /// </summary>
-        public abstract Diagnostic CreateDiagnostic(int code, Location location, params object[] args);
+        public abstract Diagnostic CreateDiagnostic(
+            int code,
+            Location location,
+            params object[] args
+        );
 
         /// <summary>
-        /// Given a message identifier (e.g., CS0219), severity, warning as error and a culture, 
+        /// Given a message identifier (e.g., CS0219), severity, warning as error and a culture,
         /// get the entire prefix (e.g., "error CS0219: Warning as Error:" for C# or "error BC42024:" for VB) used on error messages.
         /// </summary>
-        public abstract string GetMessagePrefix(string id, DiagnosticSeverity severity, bool isWarningAsError, CultureInfo? culture);
+        public abstract string GetMessagePrefix(
+            string id,
+            DiagnosticSeverity severity,
+            bool isWarningAsError,
+            CultureInfo? culture
+        );
 
         /// <summary>
         /// Convert given symbol to string representation.
@@ -111,10 +123,14 @@ namespace Microsoft.CodeAnalysis
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/issues/31964",
             AllowCaptures = false,
-            Constraint = "Frequently called by error list filtering; avoid allocations")]
+            Constraint = "Frequently called by error list filtering; avoid allocations"
+        )]
         public string GetIdForErrorCode(int errorCode)
         {
-            return s_errorIdCache.GetOrAdd((CodePrefix, errorCode), key => key.prefix + key.code.ToString("0000"));
+            return s_errorIdCache.GetOrAdd(
+                (CodePrefix, errorCode),
+                key => key.prefix + key.code.ToString("0000")
+            );
         }
 
         /// <summary>
@@ -124,13 +140,19 @@ namespace Microsoft.CodeAnalysis
         /// A new <see cref="DiagnosticInfo"/> with new effective severity based on the options or null if the
         /// diagnostic has been suppressed.
         /// </returns>
-        public abstract ReportDiagnostic GetDiagnosticReport(DiagnosticInfo diagnosticInfo, CompilationOptions options);
+        public abstract ReportDiagnostic GetDiagnosticReport(
+            DiagnosticInfo diagnosticInfo,
+            CompilationOptions options
+        );
 
         /// <summary>
         /// Filter a <see cref="DiagnosticInfo"/> based on the compilation options so that /nowarn and /warnaserror etc. take effect.options
         /// </summary>
         /// <returns>A <see cref="DiagnosticInfo"/> with effective severity based on option or null if suppressed.</returns>
-        public DiagnosticInfo? FilterDiagnosticInfo(DiagnosticInfo diagnosticInfo, CompilationOptions options)
+        public DiagnosticInfo? FilterDiagnosticInfo(
+            DiagnosticInfo diagnosticInfo,
+            CompilationOptions options
+        )
         {
             var report = this.GetDiagnosticReport(diagnosticInfo, options);
             switch (report)
@@ -154,7 +176,7 @@ namespace Microsoft.CodeAnalysis
         internal abstract bool ShouldAssertExpectedMessageArgumentsLength(int errorCode);
 #endif
 
-        // Common error messages 
+        // Common error messages
 
         public abstract int ERR_FailedToCreateTempFile { get; }
         public abstract int ERR_MultipleAnalyzerConfigsInSameDir { get; }
@@ -207,8 +229,22 @@ namespace Microsoft.CodeAnalysis
         public abstract int ERR_MetadataReferencesNotSupported { get; }
         public abstract int ERR_LinkedNetmoduleMetadataMustProvideFullPEImage { get; }
 
-        public abstract void ReportDuplicateMetadataReferenceStrong(DiagnosticBag diagnostics, Location location, MetadataReference reference, AssemblyIdentity identity, MetadataReference equivalentReference, AssemblyIdentity equivalentIdentity);
-        public abstract void ReportDuplicateMetadataReferenceWeak(DiagnosticBag diagnostics, Location location, MetadataReference reference, AssemblyIdentity identity, MetadataReference equivalentReference, AssemblyIdentity equivalentIdentity);
+        public abstract void ReportDuplicateMetadataReferenceStrong(
+            DiagnosticBag diagnostics,
+            Location location,
+            MetadataReference reference,
+            AssemblyIdentity identity,
+            MetadataReference equivalentReference,
+            AssemblyIdentity equivalentIdentity
+        );
+        public abstract void ReportDuplicateMetadataReferenceWeak(
+            DiagnosticBag diagnostics,
+            Location location,
+            MetadataReference reference,
+            AssemblyIdentity identity,
+            MetadataReference equivalentReference,
+            AssemblyIdentity equivalentIdentity
+        );
 
         // signing:
         public abstract int ERR_PublicKeyFileFailure { get; }
@@ -252,34 +288,81 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Takes an exception produced while writing to a file stream and produces a diagnostic.
         /// </summary>
-        public void ReportStreamWriteException(Exception e, string filePath, DiagnosticBag diagnostics)
+        public void ReportStreamWriteException(
+            Exception e,
+            string filePath,
+            DiagnosticBag diagnostics
+        )
         {
-            diagnostics.Add(CreateDiagnostic(ERR_OutputWriteFailed, Location.None, filePath, e.Message));
+            diagnostics.Add(
+                CreateDiagnostic(ERR_OutputWriteFailed, Location.None, filePath, e.Message)
+            );
         }
 
-        protected abstract void ReportInvalidAttributeArgument(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, AttributeData attribute);
+        protected abstract void ReportInvalidAttributeArgument(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            AttributeData attribute
+        );
 
-        public void ReportInvalidAttributeArgument(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, AttributeData attribute)
+        public void ReportInvalidAttributeArgument(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            AttributeData attribute
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
-                ReportInvalidAttributeArgument(diagnosticBag, attributeSyntax, parameterIndex, attribute);
+                ReportInvalidAttributeArgument(
+                    diagnosticBag,
+                    attributeSyntax,
+                    parameterIndex,
+                    attribute
+                );
             }
         }
 
-        protected abstract void ReportInvalidNamedArgument(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex, ITypeSymbol attributeClass, string parameterName);
+        protected abstract void ReportInvalidNamedArgument(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex,
+            ITypeSymbol attributeClass,
+            string parameterName
+        );
 
-        public void ReportInvalidNamedArgument(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex, ITypeSymbol attributeClass, string parameterName)
+        public void ReportInvalidNamedArgument(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex,
+            ITypeSymbol attributeClass,
+            string parameterName
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
-                ReportInvalidNamedArgument(diagnosticBag, attributeSyntax, namedArgumentIndex, attributeClass, parameterName);
+                ReportInvalidNamedArgument(
+                    diagnosticBag,
+                    attributeSyntax,
+                    namedArgumentIndex,
+                    attributeClass,
+                    parameterName
+                );
             }
         }
 
-        protected abstract void ReportParameterNotValidForType(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex);
+        protected abstract void ReportParameterNotValidForType(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex
+        );
 
-        public void ReportParameterNotValidForType(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, int namedArgumentIndex)
+        public void ReportParameterNotValidForType(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int namedArgumentIndex
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
@@ -287,29 +370,73 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected abstract void ReportMarshalUnmanagedTypeNotValidForFields(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute);
+        protected abstract void ReportMarshalUnmanagedTypeNotValidForFields(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        );
 
-        public void ReportMarshalUnmanagedTypeNotValidForFields(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute)
+        public void ReportMarshalUnmanagedTypeNotValidForFields(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
-                ReportMarshalUnmanagedTypeNotValidForFields(diagnosticBag, attributeSyntax, parameterIndex, unmanagedTypeName, attribute);
+                ReportMarshalUnmanagedTypeNotValidForFields(
+                    diagnosticBag,
+                    attributeSyntax,
+                    parameterIndex,
+                    unmanagedTypeName,
+                    attribute
+                );
             }
         }
 
-        protected abstract void ReportMarshalUnmanagedTypeOnlyValidForFields(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute);
+        protected abstract void ReportMarshalUnmanagedTypeOnlyValidForFields(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        );
 
-        public void ReportMarshalUnmanagedTypeOnlyValidForFields(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, int parameterIndex, string unmanagedTypeName, AttributeData attribute)
+        public void ReportMarshalUnmanagedTypeOnlyValidForFields(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            int parameterIndex,
+            string unmanagedTypeName,
+            AttributeData attribute
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
-                ReportMarshalUnmanagedTypeOnlyValidForFields(diagnosticBag, attributeSyntax, parameterIndex, unmanagedTypeName, attribute);
+                ReportMarshalUnmanagedTypeOnlyValidForFields(
+                    diagnosticBag,
+                    attributeSyntax,
+                    parameterIndex,
+                    unmanagedTypeName,
+                    attribute
+                );
             }
         }
 
-        protected abstract void ReportAttributeParameterRequired(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName);
+        protected abstract void ReportAttributeParameterRequired(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName
+        );
 
-        public void ReportAttributeParameterRequired(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName)
+        public void ReportAttributeParameterRequired(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
@@ -317,13 +444,28 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        protected abstract void ReportAttributeParameterRequired(DiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName1, string parameterName2);
+        protected abstract void ReportAttributeParameterRequired(
+            DiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName1,
+            string parameterName2
+        );
 
-        public void ReportAttributeParameterRequired(BindingDiagnosticBag diagnostics, SyntaxNode attributeSyntax, string parameterName1, string parameterName2)
+        public void ReportAttributeParameterRequired(
+            BindingDiagnosticBag diagnostics,
+            SyntaxNode attributeSyntax,
+            string parameterName1,
+            string parameterName2
+        )
         {
             if (diagnostics.DiagnosticBag is DiagnosticBag diagnosticBag)
             {
-                ReportAttributeParameterRequired(diagnosticBag, attributeSyntax, parameterName1, parameterName2);
+                ReportAttributeParameterRequired(
+                    diagnosticBag,
+                    attributeSyntax,
+                    parameterName1,
+                    parameterName2
+                );
             }
         }
 

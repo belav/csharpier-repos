@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
 {
     public class EnumerableExtensionTests
     {
-        private static IEnumerable<T> Enumerable<T>(params T[] values)
-            => values;
+        private static IEnumerable<T> Enumerable<T>(params T[] values) => values;
 
         [Fact]
         public void TestDo()
@@ -38,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         }
 
         [Fact]
-        public void TestSetEquals()
-            => Assert.True(Enumerable(1, 2, 3, 4).SetEquals(Enumerable(4, 2, 3, 1)));
+        public void TestSetEquals() =>
+            Assert.True(Enumerable(1, 2, 3, 4).SetEquals(Enumerable(4, 2, 3, 1)));
 
         [Fact]
         public void TestIsEmpty()
@@ -73,7 +72,11 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Extensions
         [Fact]
         public void TestFlatten()
         {
-            var sequence = Enumerable(Enumerable("a", "b"), Enumerable("c", "d"), Enumerable("e", "f"));
+            var sequence = Enumerable(
+                Enumerable("a", "b"),
+                Enumerable("c", "d"),
+                Enumerable("e", "f")
+            );
             Assert.True(sequence.Flatten().SequenceEqual(Enumerable("a", "b", "c", "d", "e", "f")));
         }
 

@@ -17,9 +17,14 @@ namespace System.ComponentModel.Composition.Hosting
         /// </summary>
         private sealed class RecompositionManager
         {
-            private readonly WeakReferenceCollection<PartManager> _partsToIndex = new WeakReferenceCollection<PartManager>();
-            private readonly WeakReferenceCollection<PartManager> _partsToUnindex = new WeakReferenceCollection<PartManager>();
-            private readonly Dictionary<string, WeakReferenceCollection<PartManager>> _partManagerIndex = new Dictionary<string, WeakReferenceCollection<PartManager>>();
+            private readonly WeakReferenceCollection<PartManager> _partsToIndex =
+                new WeakReferenceCollection<PartManager>();
+            private readonly WeakReferenceCollection<PartManager> _partsToUnindex =
+                new WeakReferenceCollection<PartManager>();
+            private readonly Dictionary<
+                string,
+                WeakReferenceCollection<PartManager>
+            > _partManagerIndex = new Dictionary<string, WeakReferenceCollection<PartManager>>();
 
             public void AddPartToIndex(PartManager partManager)
             {
@@ -47,12 +52,20 @@ namespace System.ComponentModel.Composition.Hosting
                 return parts;
             }
 
-            public static IEnumerable<ImportDefinition> GetAffectedImports(ComposablePart part, IEnumerable<ExportDefinition> changedExports)
+            public static IEnumerable<ImportDefinition> GetAffectedImports(
+                ComposablePart part,
+                IEnumerable<ExportDefinition> changedExports
+            )
             {
-                return part.ImportDefinitions.Where(import => IsAffectedImport(import, changedExports));
+                return part.ImportDefinitions.Where(import =>
+                    IsAffectedImport(import, changedExports)
+                );
             }
 
-            private static bool IsAffectedImport(ImportDefinition import, IEnumerable<ExportDefinition> changedExports)
+            private static bool IsAffectedImport(
+                ImportDefinition import,
+                IEnumerable<ExportDefinition> changedExports
+            )
             {
                 // This could be more efficient still if the export definitions were indexed by contract name,
                 // only worth revisiting if we need to squeeze more performance out of recomposition
@@ -69,7 +82,12 @@ namespace System.ComponentModel.Composition.Hosting
 
             public IEnumerable<PartManager> GetPartsImporting(string contractName)
             {
-                if (!_partManagerIndex.TryGetValue(contractName, out WeakReferenceCollection<PartManager>? partManagerList))
+                if (
+                    !_partManagerIndex.TryGetValue(
+                        contractName,
+                        out WeakReferenceCollection<PartManager>? partManagerList
+                    )
+                )
                 {
                     return Enumerable.Empty<PartManager>();
                 }
@@ -81,7 +99,12 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 foreach (string contractName in partManager.GetImportedContractNames())
                 {
-                    if (!_partManagerIndex.TryGetValue(contractName, out WeakReferenceCollection<PartManager>? indexEntries))
+                    if (
+                        !_partManagerIndex.TryGetValue(
+                            contractName,
+                            out WeakReferenceCollection<PartManager>? indexEntries
+                        )
+                    )
                     {
                         indexEntries = new WeakReferenceCollection<PartManager>();
                         _partManagerIndex.Add(contractName, indexEntries);
@@ -98,7 +121,12 @@ namespace System.ComponentModel.Composition.Hosting
             {
                 foreach (string contractName in partManager.GetImportedContractNames())
                 {
-                    if (_partManagerIndex.TryGetValue(contractName, out WeakReferenceCollection<PartManager>? indexEntries))
+                    if (
+                        _partManagerIndex.TryGetValue(
+                            contractName,
+                            out WeakReferenceCollection<PartManager>? indexEntries
+                        )
+                    )
                     {
                         indexEntries.Remove(partManager);
                         var aliveItems = indexEntries.AliveItemsToList();

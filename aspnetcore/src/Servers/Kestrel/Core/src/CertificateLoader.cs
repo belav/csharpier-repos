@@ -28,7 +28,12 @@ public static class CertificateLoader
     /// <param name="storeLocation">The certificate store location.</param>
     /// <param name="allowInvalid">Whether or not to load certificates that are considered invalid.</param>
     /// <returns>The loaded certificate.</returns>
-    public static X509Certificate2 LoadFromStoreCert(string subject, string storeName, StoreLocation storeLocation, bool allowInvalid)
+    public static X509Certificate2 LoadFromStoreCert(
+        string subject,
+        string storeName,
+        StoreLocation storeLocation,
+        bool allowInvalid
+    )
     {
         using (var store = new X509Store(storeName, storeLocation))
         {
@@ -39,16 +44,23 @@ public static class CertificateLoader
             {
                 store.Open(OpenFlags.ReadOnly);
                 storeCertificates = store.Certificates;
-                foreach (var certificate in storeCertificates.Find(X509FindType.FindBySubjectName, subject, !allowInvalid)
-                    .OfType<X509Certificate2>()
-                    .Where(IsCertificateAllowedForServerAuth)
-                    .Where(DoesCertificateHaveAnAccessiblePrivateKey)
-                    .OrderByDescending(certificate => certificate.NotAfter))
+                foreach (
+                    var certificate in storeCertificates
+                        .Find(X509FindType.FindBySubjectName, subject, !allowInvalid)
+                        .OfType<X509Certificate2>()
+                        .Where(IsCertificateAllowedForServerAuth)
+                        .Where(DoesCertificateHaveAnAccessiblePrivateKey)
+                        .OrderByDescending(certificate => certificate.NotAfter)
+                )
                 {
                     // Pick the first one if there's no exact match as a fallback to substring default.
                     foundCertificate ??= certificate;
 
-                    if (certificate.GetNameInfo(X509NameType.SimpleName, forIssuer: false).Equals(subject, StringComparison.InvariantCultureIgnoreCase))
+                    if (
+                        certificate
+                            .GetNameInfo(X509NameType.SimpleName, forIssuer: false)
+                            .Equals(subject, StringComparison.InvariantCultureIgnoreCase)
+                    )
                     {
                         foundCertificate = certificate;
                         break;
@@ -57,7 +69,14 @@ public static class CertificateLoader
 
                 if (foundCertificate == null)
                 {
-                    throw new InvalidOperationException(CoreStrings.FormatCertNotFoundInStore(subject, storeLocation, storeName, allowInvalid));
+                    throw new InvalidOperationException(
+                        CoreStrings.FormatCertNotFoundInStore(
+                            subject,
+                            storeLocation,
+                            storeName,
+                            allowInvalid
+                        )
+                    );
                 }
 
                 return foundCertificate;
@@ -103,13 +122,16 @@ public static class CertificateLoader
         return !hasEkuExtension;
     }
 
-    internal static bool DoesCertificateHaveAnAccessiblePrivateKey(X509Certificate2 certificate)
-        => certificate.HasPrivateKey;
+    internal static bool DoesCertificateHaveAnAccessiblePrivateKey(X509Certificate2 certificate) =>
+        certificate.HasPrivateKey;
 
-    internal static bool DoesCertificateHaveASubjectAlternativeName(X509Certificate2 certificate)
-        => certificate.Extensions.OfType<X509SubjectAlternativeNameExtension>().Any();
+    internal static bool DoesCertificateHaveASubjectAlternativeName(X509Certificate2 certificate) =>
+        certificate.Extensions.OfType<X509SubjectAlternativeNameExtension>().Any();
 
-    private static void DisposeCertificates(X509Certificate2Collection? certificates, X509Certificate2? except)
+    private static void DisposeCertificates(
+        X509Certificate2Collection? certificates,
+        X509Certificate2? except
+    )
     {
         if (certificates != null)
         {

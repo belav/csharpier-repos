@@ -22,7 +22,9 @@ internal static class SystemTextJsonExtensions
     {
         if (reader.TokenType != JsonTokenType.StartObject)
         {
-            throw new InvalidDataException($"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Object.");
+            throw new InvalidDataException(
+                $"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Object."
+            );
         }
     }
 
@@ -53,7 +55,9 @@ internal static class SystemTextJsonExtensions
     {
         if (reader.TokenType != JsonTokenType.StartArray)
         {
-            throw new InvalidDataException($"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Array.");
+            throw new InvalidDataException(
+                $"Unexpected JSON Token Type '{reader.GetTokenString()}'. Expected a JSON Array."
+            );
         }
     }
 
@@ -75,7 +79,9 @@ internal static class SystemTextJsonExtensions
 
         if (reader.TokenType != JsonTokenType.String)
         {
-            throw new InvalidDataException($"Expected '{propertyName}' to be of type {JsonTokenType.String}.");
+            throw new InvalidDataException(
+                $"Expected '{propertyName}' to be of type {JsonTokenType.String}."
+            );
         }
 
         return reader.GetString()!;
@@ -92,7 +98,9 @@ internal static class SystemTextJsonExtensions
 
         if (reader.TokenType != JsonTokenType.Number)
         {
-            throw new InvalidDataException($"Expected '{propertyName}' to be of type {JsonTokenType.Number}.");
+            throw new InvalidDataException(
+                $"Expected '{propertyName}' to be of type {JsonTokenType.Number}."
+            );
         }
 
         return reader.GetInt32();
@@ -109,7 +117,9 @@ internal static class SystemTextJsonExtensions
 
         if (reader.TokenType != JsonTokenType.Number)
         {
-            throw new InvalidDataException($"Expected '{propertyName}' to be of type {JsonTokenType.Number}.");
+            throw new InvalidDataException(
+                $"Expected '{propertyName}' to be of type {JsonTokenType.Number}."
+            );
         }
 
         return reader.GetInt64();

@@ -26,7 +26,13 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             _tokenizedInclusivePrefixes = C14nUtil.TokenizeInclusivePrefixList(inclusivePrefixes);
             _canonicalWriterStream = new MemoryStream();
             _encoder = new CanonicalEncoder(_canonicalWriterStream);
-            _canonicalWriter = new CanonicalWriter(_encoder, _tokenizedInclusivePrefixes, includeComments, null, 0);
+            _canonicalWriter = new CanonicalWriter(
+                _encoder,
+                _tokenizedInclusivePrefixes,
+                includeComments,
+                null,
+                0
+            );
         }
 
         public byte[] CanonicalizeUsingDictionaryReader(XmlReader reader)
@@ -37,7 +43,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             XmlDictionaryReader dicReader = XmlDictionaryReader.CreateDictionaryReader(reader);
             dicReader.MoveToContent();
 
-            dicReader.StartCanonicalization(_canonicalWriterStream, _includeComments, _tokenizedInclusivePrefixes);
+            dicReader.StartCanonicalization(
+                _canonicalWriterStream,
+                _includeComments,
+                _tokenizedInclusivePrefixes
+            );
             dicReader.Skip();
             dicReader.EndCanonicalization();
 
@@ -51,7 +61,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             _canonicalWriterStream.SetLength(0);
             _canonicalWriter.IncludeComments = _includeComments;
             _canonicalWriter.SetInclusivePrefixes(_tokenizedInclusivePrefixes);
-            _canonicalWriter.ContextProvider = (IAncestralNamespaceContextProvider)AncestralNamespaceContextProviderProxy.CreateContextProvider(reader);
+            _canonicalWriter.ContextProvider = (IAncestralNamespaceContextProvider)
+                AncestralNamespaceContextProviderProxy.CreateContextProvider(reader);
 
             reader.MoveToContent();
             _canonicalWriter.WriteNode(reader, false);
@@ -83,7 +94,11 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                 }
             }
 
-            dicWriter.StartCanonicalization(_canonicalWriterStream, _includeComments, _tokenizedInclusivePrefixes);
+            dicWriter.StartCanonicalization(
+                _canonicalWriterStream,
+                _includeComments,
+                _tokenizedInclusivePrefixes
+            );
             reader.MoveToContent();
             dicWriter.WriteNode(reader, false);
 
@@ -95,7 +110,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
 
         public byte[] CanonicalizeUsingClrLibrary(object input)
         {
-            XmlDsigExcC14NTransform t = new XmlDsigExcC14NTransform(_includeComments, _inclusivePrefixes);
+            XmlDsigExcC14NTransform t = new XmlDsigExcC14NTransform(
+                _includeComments,
+                _inclusivePrefixes
+            );
             t.LoadInput(input);
             MemoryStream s = (MemoryStream)t.GetOutput(typeof(Stream));
             return s.ToArray();

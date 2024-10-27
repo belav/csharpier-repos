@@ -22,20 +22,29 @@ public class UrlHelperFactory : IUrlHelperFactory
 
         if (httpContext == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(ActionContext.HttpContext),
-                nameof(ActionContext)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(ActionContext.HttpContext),
+                    nameof(ActionContext)
+                )
+            );
         }
 
         if (httpContext.Items == null)
         {
-            throw new ArgumentException(Resources.FormatPropertyOfTypeCannotBeNull(
-                nameof(HttpContext.Items),
-                nameof(HttpContext)));
+            throw new ArgumentException(
+                Resources.FormatPropertyOfTypeCannotBeNull(
+                    nameof(HttpContext.Items),
+                    nameof(HttpContext)
+                )
+            );
         }
 
         // Perf: Create only one UrlHelper per context
-        if (httpContext.Items.TryGetValue(typeof(IUrlHelper), out var value) && value is IUrlHelper urlHelper)
+        if (
+            httpContext.Items.TryGetValue(typeof(IUrlHelper), out var value)
+            && value is IUrlHelper urlHelper
+        )
         {
             return urlHelper;
         }
@@ -47,10 +56,7 @@ public class UrlHelperFactory : IUrlHelperFactory
             var linkGenerator = services.GetRequiredService<LinkGenerator>();
             var endpointDataSource = services.GetRequiredService<EndpointDataSource>();
 
-            urlHelper = new EndpointRoutingUrlHelper(
-                context,
-                linkGenerator,
-                endpointDataSource);
+            urlHelper = new EndpointRoutingUrlHelper(context, linkGenerator, endpointDataSource);
         }
         else
         {

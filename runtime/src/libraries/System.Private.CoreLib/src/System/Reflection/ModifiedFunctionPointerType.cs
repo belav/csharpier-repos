@@ -10,7 +10,8 @@ namespace System.Reflection
 {
     internal sealed partial class ModifiedFunctionPointerType : ModifiedType
     {
-        private const string CallingConventionTypePrefix = "System.Runtime.CompilerServices.CallConv";
+        private const string CallingConventionTypePrefix =
+            "System.Runtime.CompilerServices.CallConv";
 
         private Type[]? _parameterTypes;
         private Type? _returnType;
@@ -27,7 +28,11 @@ namespace System.Reflection
 
             Type Initialize()
             {
-                Interlocked.CompareExchange(ref _returnType, GetTypeParameter(UnmodifiedType.GetFunctionPointerReturnType(), 0), null);
+                Interlocked.CompareExchange(
+                    ref _returnType,
+                    GetTypeParameter(UnmodifiedType.GetFunctionPointerReturnType(), 0),
+                    null
+                );
                 return _returnType!;
             }
         }
@@ -69,9 +74,16 @@ namespace System.Reflection
                     break;
                 case SignatureCallingConvention.Unmanaged:
                     // For the above cases, there will be no other custom calling convention modifiers.
-                    foreach (Type type in GetFunctionPointerReturnType().GetOptionalCustomModifiers())
+                    foreach (
+                        Type type in GetFunctionPointerReturnType().GetOptionalCustomModifiers()
+                    )
                     {
-                        if (type.FullName!.StartsWith(CallingConventionTypePrefix, StringComparison.Ordinal))
+                        if (
+                            type.FullName!.StartsWith(
+                                CallingConventionTypePrefix,
+                                StringComparison.Ordinal
+                            )
+                        )
                         {
                             builder.Add(type);
                         }

@@ -19,12 +19,19 @@ class WrappedString
 class WrappedStringCustomMarshaler : ICustomMarshaler
 {
     public void CleanUpManagedData(object ManagedObj) { }
-    public void CleanUpNativeData(IntPtr pNativeData) { Marshal.ZeroFreeCoTaskMemAnsi(pNativeData); }
+
+    public void CleanUpNativeData(IntPtr pNativeData)
+    {
+        Marshal.ZeroFreeCoTaskMemAnsi(pNativeData);
+    }
 
     public int GetNativeDataSize() => IntPtr.Size;
 
-    public IntPtr MarshalManagedToNative(object ManagedObj) => Marshal.StringToCoTaskMemAnsi(((WrappedString)ManagedObj)._str);
-    public object MarshalNativeToManaged(IntPtr pNativeData) => new WrappedString(Marshal.PtrToStringAnsi(pNativeData));
+    public IntPtr MarshalManagedToNative(object ManagedObj) =>
+        Marshal.StringToCoTaskMemAnsi(((WrappedString)ManagedObj)._str);
+
+    public object MarshalNativeToManaged(IntPtr pNativeData) =>
+        new WrappedString(Marshal.PtrToStringAnsi(pNativeData));
 
     public static ICustomMarshaler GetInstance(string cookie) => new WrappedStringCustomMarshaler();
 }
@@ -42,7 +49,13 @@ namespace CustomMarshalers
     public class CustomMarshalerTest
     {
         [DllImport("CustomMarshalerNative", CharSet = CharSet.Ansi)]
-        private static extern int NativeParseInt([MarshalAs(UnmanagedType.CustomMarshaler, MarshalTypeRef = typeof(WrappedStringCustomMarshaler))] WrappedString str);
+        private static extern int NativeParseInt(
+            [MarshalAs(
+                UnmanagedType.CustomMarshaler,
+                MarshalTypeRef = typeof(WrappedStringCustomMarshaler)
+            )]
+                WrappedString str
+        );
 
         public int ParseInt(string str)
         {
@@ -50,4 +63,3 @@ namespace CustomMarshalers
         }
     }
 }
-

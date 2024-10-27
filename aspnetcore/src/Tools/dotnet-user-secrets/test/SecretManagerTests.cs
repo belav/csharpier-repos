@@ -60,11 +60,18 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
     [Fact]
     public void Error_Project_DoesNotExist()
     {
-        var projectPath = Path.Combine(_fixture.GetTempSecretProject(), "does_not_exist", "TestProject.csproj");
+        var projectPath = Path.Combine(
+            _fixture.GetTempSecretProject(),
+            "does_not_exist",
+            "TestProject.csproj"
+        );
         var secretManager = CreateProgram();
 
         secretManager.RunInternal("list", "--project", projectPath);
-        Assert.Contains(Resources.FormatError_ProjectPath_NotFound(projectPath), _console.GetOutput());
+        Assert.Contains(
+            Resources.FormatError_ProjectPath_NotFound(projectPath),
+            _console.GetOutput()
+        );
     }
 
     [Fact]
@@ -77,7 +84,12 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
 
         secretManager.RunInternal("list", "-p", ".." + Path.DirectorySeparatorChar, "--verbose");
 
-        Assert.Contains(Resources.FormatMessage_Project_File_Path(Path.Combine(cwd, "..", "TestProject.csproj")), _console.GetOutput());
+        Assert.Contains(
+            Resources.FormatMessage_Project_File_Path(
+                Path.Combine(cwd, "..", "TestProject.csproj")
+            ),
+            _console.GetOutput()
+        );
     }
 
     [Theory]
@@ -86,34 +98,41 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
     public void SetSecrets(bool fromCurrentDirectory)
     {
         var secrets = new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key1", Guid.NewGuid().ToString()),
-                        new KeyValuePair<string, string>("Facebook:AppId", Guid.NewGuid().ToString()),
-                        new KeyValuePair<string, string>(@"key-@\/.~123!#$%^&*())-+==", @"key-@\/.~123!#$%^&*())-+=="),
-                        new KeyValuePair<string, string>("key2", string.Empty),
-                        new KeyValuePair<string, string>("-oneDashedKey", "-oneDashedValue"),
-                        new KeyValuePair<string, string>("--twoDashedKey", "--twoDashedValue")
-                    };
+        {
+            new KeyValuePair<string, string>("key1", Guid.NewGuid().ToString()),
+            new KeyValuePair<string, string>("Facebook:AppId", Guid.NewGuid().ToString()),
+            new KeyValuePair<string, string>(
+                @"key-@\/.~123!#$%^&*())-+==",
+                @"key-@\/.~123!#$%^&*())-+=="
+            ),
+            new KeyValuePair<string, string>("key2", string.Empty),
+            new KeyValuePair<string, string>("-oneDashedKey", "-oneDashedValue"),
+            new KeyValuePair<string, string>("--twoDashedKey", "--twoDashedValue"),
+        };
 
         var projectPath = _fixture.GetTempSecretProject();
-        var dir = fromCurrentDirectory
-            ? projectPath
-            : Path.GetTempPath();
+        var dir = fromCurrentDirectory ? projectPath : Path.GetTempPath();
         var secretManager = new Program(_console, dir);
 
         foreach (var secret in secrets)
         {
-            var parameters = fromCurrentDirectory ?
-                new string[] { "set", secret.Key, secret.Value, "--verbose" } :
-                new string[] { "set", secret.Key, secret.Value, "-p", projectPath, "--verbose" };
+            var parameters = fromCurrentDirectory
+                ? new string[] { "set", secret.Key, secret.Value, "--verbose" }
+                : new string[] { "set", secret.Key, secret.Value, "-p", projectPath, "--verbose" };
             secretManager.RunInternal(parameters);
         }
 
         foreach (var keyValue in secrets)
         {
             Assert.Contains(
-                string.Format(CultureInfo.InvariantCulture, "Successfully saved {0} = {1} to the secret store.", keyValue.Key, keyValue.Value),
-                _console.GetOutput());
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Successfully saved {0} = {1} to the secret store.",
+                    keyValue.Key,
+                    keyValue.Value
+                ),
+                _console.GetOutput()
+            );
         }
 
         _console.ClearOutput();
@@ -124,17 +143,23 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         foreach (var keyValue in secrets)
         {
             Assert.Contains(
-                string.Format(CultureInfo.InvariantCulture, "{0} = {1}", keyValue.Key, keyValue.Value),
-                _console.GetOutput());
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} = {1}",
+                    keyValue.Key,
+                    keyValue.Value
+                ),
+                _console.GetOutput()
+            );
         }
 
         // Remove secrets.
         _console.ClearOutput();
         foreach (var secret in secrets)
         {
-            var parameters = fromCurrentDirectory ?
-                new string[] { "remove", secret.Key, "--verbose" } :
-                new string[] { "remove", secret.Key, "-p", projectPath, "--verbose" };
+            var parameters = fromCurrentDirectory
+                ? new string[] { "remove", secret.Key, "--verbose" }
+                : new string[] { "remove", secret.Key, "-p", projectPath, "--verbose" };
             secretManager.RunInternal(parameters);
         }
 
@@ -154,9 +179,15 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         var secretManager = CreateProgram();
 
         secretManager.RunInternal("set", "secret1", "value1", "-p", projectPath, "--verbose");
-        Assert.Contains("Successfully saved secret1 = value1 to the secret store.", _console.GetOutput());
+        Assert.Contains(
+            "Successfully saved secret1 = value1 to the secret store.",
+            _console.GetOutput()
+        );
         secretManager.RunInternal("set", "secret1", "value2", "-p", projectPath, "--verbose");
-        Assert.Contains("Successfully saved secret1 = value2 to the secret store.", _console.GetOutput());
+        Assert.Contains(
+            "Successfully saved secret1 = value2 to the secret store.",
+            _console.GetOutput()
+        );
 
         _console.ClearOutput();
 
@@ -172,15 +203,46 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         var secretManager = CreateProgram();
 
         secretManager.RunInternal("-v", "set", "secret1", "value1", "-p", projectPath);
-        Assert.Contains(string.Format(CultureInfo.InvariantCulture, "Project file path {0}.", Path.Combine(projectPath, "TestProject.csproj")), _console.GetOutput());
-        Assert.Contains(string.Format(CultureInfo.InvariantCulture, "Secrets file path {0}.", PathHelper.GetSecretsPathFromSecretsId(secretId)), _console.GetOutput());
-        Assert.Contains("Successfully saved secret1 = value1 to the secret store.", _console.GetOutput());
+        Assert.Contains(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "Project file path {0}.",
+                Path.Combine(projectPath, "TestProject.csproj")
+            ),
+            _console.GetOutput()
+        );
+        Assert.Contains(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "Secrets file path {0}.",
+                PathHelper.GetSecretsPathFromSecretsId(secretId)
+            ),
+            _console.GetOutput()
+        );
+        Assert.Contains(
+            "Successfully saved secret1 = value1 to the secret store.",
+            _console.GetOutput()
+        );
         _console.ClearOutput();
 
         secretManager.RunInternal("-v", "list", "-p", projectPath);
 
-        Assert.Contains(string.Format(CultureInfo.InvariantCulture, "Project file path {0}.", Path.Combine(projectPath, "TestProject.csproj")), _console.GetOutput());
-        Assert.Contains(string.Format(CultureInfo.InvariantCulture, "Secrets file path {0}.", PathHelper.GetSecretsPathFromSecretsId(secretId)), _console.GetOutput());
+        Assert.Contains(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "Project file path {0}.",
+                Path.Combine(projectPath, "TestProject.csproj")
+            ),
+            _console.GetOutput()
+        );
+        Assert.Contains(
+            string.Format(
+                CultureInfo.InvariantCulture,
+                "Secrets file path {0}.",
+                PathHelper.GetSecretsPathFromSecretsId(secretId)
+            ),
+            _console.GetOutput()
+        );
         Assert.Contains("secret1 = value1", _console.GetOutput());
     }
 
@@ -216,7 +278,11 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         var projectPath = _fixture.GetTempSecretProject(out secretId);
         var secretsFile = PathHelper.GetSecretsPathFromSecretsId(secretId);
         Directory.CreateDirectory(Path.GetDirectoryName(secretsFile));
-        File.WriteAllText(secretsFile, @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }", Encoding.UTF8);
+        File.WriteAllText(
+            secretsFile,
+            @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }",
+            Encoding.UTF8
+        );
         var secretManager = CreateProgram();
         secretManager.RunInternal("list", "-p", projectPath, "--verbose");
         Assert.Contains("AzureAd:ClientSecret = abcdéƒ©˙î", _console.GetOutput());
@@ -229,7 +295,11 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         var projectPath = _fixture.GetTempSecretProject(out id);
         var secretsFile = PathHelper.GetSecretsPathFromSecretsId(id);
         Directory.CreateDirectory(Path.GetDirectoryName(secretsFile));
-        File.WriteAllText(secretsFile, @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }", Encoding.UTF8);
+        File.WriteAllText(
+            secretsFile,
+            @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }",
+            Encoding.UTF8
+        );
         var secretManager = new Program(_console, Path.GetDirectoryName(projectPath));
         secretManager.RunInternal("list", "--id", id, "--json");
         var stdout = _console.GetOutput();
@@ -245,17 +315,25 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         var projectPath = _fixture.GetTempSecretProject(out secretId);
         var secretsFile = PathHelper.GetSecretsPathFromSecretsId(secretId);
         Directory.CreateDirectory(Path.GetDirectoryName(secretsFile));
-        File.WriteAllText(secretsFile, @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }", Encoding.UTF8);
+        File.WriteAllText(
+            secretsFile,
+            @"{ ""AzureAd"": { ""ClientSecret"": ""abcdéƒ©˙î""} }",
+            Encoding.UTF8
+        );
         var secretManager = CreateProgram();
         secretManager.RunInternal("set", "AzureAd:ClientSecret", "¡™£¢∞", "-p", projectPath);
         secretManager.RunInternal("list", "-p", projectPath);
 
         Assert.Contains("AzureAd:ClientSecret = ¡™£¢∞", _console.GetOutput());
         var fileContents = File.ReadAllText(secretsFile, Encoding.UTF8);
-        Assert.Equal(@"{
+        Assert.Equal(
+            @"{
     ""AzureAd:ClientSecret"": ""¡™£¢∞""
 }",
-            fileContents, ignoreLineEndingDifferences: true, ignoreWhiteSpaceDifferences: true);
+            fileContents,
+            ignoreLineEndingDifferences: true,
+            ignoreWhiteSpaceDifferences: true
+        );
     }
 
     [Fact]
@@ -274,54 +352,71 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
     {
         var projectPath = _fixture.GetTempSecretProject();
 
-        var dir = fromCurrentDirectory
-            ? projectPath
-            : Path.GetTempPath();
+        var dir = fromCurrentDirectory ? projectPath : Path.GetTempPath();
 
         var secretManager = new Program(_console, dir);
 
         var secrets = new KeyValuePair<string, string>[]
-                    {
-                            new KeyValuePair<string, string>("key1", Guid.NewGuid().ToString()),
-                            new KeyValuePair<string, string>("Facebook:AppId", Guid.NewGuid().ToString()),
-                            new KeyValuePair<string, string>(@"key-@\/.~123!#$%^&*())-+==", @"key-@\/.~123!#$%^&*())-+=="),
-                            new KeyValuePair<string, string>("key2", string.Empty)
-                    };
+        {
+            new KeyValuePair<string, string>("key1", Guid.NewGuid().ToString()),
+            new KeyValuePair<string, string>("Facebook:AppId", Guid.NewGuid().ToString()),
+            new KeyValuePair<string, string>(
+                @"key-@\/.~123!#$%^&*())-+==",
+                @"key-@\/.~123!#$%^&*())-+=="
+            ),
+            new KeyValuePair<string, string>("key2", string.Empty),
+        };
 
         foreach (var secret in secrets)
         {
-            var parameters = fromCurrentDirectory ?
-                new string[] { "set", secret.Key, secret.Value, "--verbose" } :
-                new string[] { "set", secret.Key, secret.Value, "-p", projectPath, "--verbose" };
+            var parameters = fromCurrentDirectory
+                ? new string[] { "set", secret.Key, secret.Value, "--verbose" }
+                : new string[] { "set", secret.Key, secret.Value, "-p", projectPath, "--verbose" };
             secretManager.RunInternal(parameters);
         }
 
         foreach (var keyValue in secrets)
         {
             Assert.Contains(
-                string.Format(CultureInfo.InvariantCulture, "Successfully saved {0} = {1} to the secret store.", keyValue.Key, keyValue.Value),
-                _console.GetOutput());
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Successfully saved {0} = {1} to the secret store.",
+                    keyValue.Key,
+                    keyValue.Value
+                ),
+                _console.GetOutput()
+            );
         }
 
         // Verify secrets are persisted.
         _console.ClearOutput();
-        var args = fromCurrentDirectory ?
-            new string[] { "list", "--verbose" } :
-            new string[] { "list", "-p", projectPath, "--verbose" };
+        var args = fromCurrentDirectory
+            ? new string[] { "list", "--verbose" }
+            : new string[] { "list", "-p", projectPath, "--verbose" };
         secretManager.RunInternal(args);
         foreach (var keyValue in secrets)
         {
             Assert.Contains(
-                string.Format(CultureInfo.InvariantCulture, "{0} = {1}", keyValue.Key, keyValue.Value),
-                _console.GetOutput());
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0} = {1}",
+                    keyValue.Key,
+                    keyValue.Value
+                ),
+                _console.GetOutput()
+            );
         }
 
         // Clear secrets.
         _console.ClearOutput();
-        args = fromCurrentDirectory ? new string[] { "clear", "--verbose" } : new string[] { "clear", "-p", projectPath, "--verbose" };
+        args = fromCurrentDirectory
+            ? new string[] { "clear", "--verbose" }
+            : new string[] { "clear", "-p", projectPath, "--verbose" };
         secretManager.RunInternal(args);
 
-        args = fromCurrentDirectory ? new string[] { "list", "--verbose" } : new string[] { "list", "-p", projectPath, "--verbose" };
+        args = fromCurrentDirectory
+            ? new string[] { "list", "--verbose" }
+            : new string[] { "list", "-p", projectPath, "--verbose" };
         secretManager.RunInternal(args);
         Assert.Contains(Resources.Error_No_Secrets_Found, _console.GetOutput());
     }
@@ -335,12 +430,18 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
 
         secretManager.RunInternal("init", "-p", project);
 
-        Assert.DoesNotContain(Resources.FormatError_ProjectMissingId(project), _console.GetOutput());
+        Assert.DoesNotContain(
+            Resources.FormatError_ProjectMissingId(project),
+            _console.GetOutput()
+        );
         Assert.DoesNotContain("--help", _console.GetOutput());
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.Windows, SkipReason = "UnixFileMode is not supported on Windows.")]
+    [OSSkipCondition(
+        OperatingSystems.Windows,
+        SkipReason = "UnixFileMode is not supported on Windows."
+    )]
     public void SetSecrets_CreatesFileWithUserOnlyUnixFileMode()
     {
         var projectPath = _fixture.GetTempSecretProject();
@@ -349,6 +450,9 @@ public class SecretManagerTests : IClassFixture<UserSecretsTestFixture>
         secretManager.RunInternal("set", "key1", Guid.NewGuid().ToString(), "--verbose");
 
         Assert.NotNull(secretManager.SecretsFilePath);
-        Assert.Equal(UnixFileMode.UserRead | UnixFileMode.UserWrite, File.GetUnixFileMode(secretManager.SecretsFilePath));
+        Assert.Equal(
+            UnixFileMode.UserRead | UnixFileMode.UserWrite,
+            File.GetUnixFileMode(secretManager.SecretsFilePath)
+        );
     }
 }

@@ -19,7 +19,11 @@ internal class AssemblyComponentLibraryDescriptor
     /// <param name="name">The assembly name.</param>
     /// <param name="pages">The list of pages in the assembly.</param>
     /// <param name="components">The list of components in the assembly.</param>
-    public AssemblyComponentLibraryDescriptor(string name, IReadOnlyList<PageComponentBuilder> pages, IReadOnlyList<ComponentBuilder> components)
+    public AssemblyComponentLibraryDescriptor(
+        string name,
+        IReadOnlyList<PageComponentBuilder> pages,
+        IReadOnlyList<ComponentBuilder> components
+    )
     {
         ArgumentException.ThrowIfNullOrEmpty(nameof(name));
         ArgumentNullException.ThrowIfNull(pages);

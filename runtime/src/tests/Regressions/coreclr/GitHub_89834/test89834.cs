@@ -19,8 +19,8 @@ public class test89834
         int status = 103;
         Console.WriteLine("boo");
 
-        EventHandler<FirstChanceExceptionEventArgs> handler =
-            (s, e) => FirstChanceExceptionCallback(e.Exception, ref status);
+        EventHandler<FirstChanceExceptionEventArgs> handler = (s, e) =>
+            FirstChanceExceptionCallback(e.Exception, ref status);
 
         AppDomain.CurrentDomain.FirstChanceException += handler;
         try
@@ -76,7 +76,9 @@ public class test89834
             return 101;
         }
 
-        Console.WriteLine($"Throwing Frame: [{throwingFrame.GetMethod().Name}, 0x{GetOffset(throwingFrame):X}]");
+        Console.WriteLine(
+            $"Throwing Frame: [{throwingFrame.GetMethod().Name}, 0x{GetOffset(throwingFrame):X}]"
+        );
 
         StackTrace threadStackTrace = new(fNeedFileInfo: false);
         ReadOnlySpan<StackFrame> threadStackFrames = threadStackTrace.GetFrames();
@@ -87,10 +89,14 @@ public class test89834
         {
             StackFrame threadStackFrame = threadStackFrames[index];
 
-            Console.WriteLine($"- [{threadStackFrame.GetMethod().Name}, 0x{GetOffset(threadStackFrame):X}]");
+            Console.WriteLine(
+                $"- [{threadStackFrame.GetMethod().Name}, 0x{GetOffset(threadStackFrame):X}]"
+            );
 
-            if (throwingFrame.GetMethod() == threadStackFrame.GetMethod() &&
-                GetOffset(throwingFrame) == GetOffset(threadStackFrame))
+            if (
+                throwingFrame.GetMethod() == threadStackFrame.GetMethod()
+                && GetOffset(throwingFrame) == GetOffset(threadStackFrame)
+            )
             {
                 break;
             }
@@ -113,17 +119,13 @@ public class test89834
         using CancellationTokenSource source = new();
         CancellationToken token = source.Token;
 
-        Task innerTask = Task.Run(
-            () => Task.Delay(Timeout.InfiniteTimeSpan, token),
-            token);
+        Task innerTask = Task.Run(() => Task.Delay(Timeout.InfiniteTimeSpan, token), token);
 
         try
         {
             source.Cancel();
             await innerTask;
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
     }
 }

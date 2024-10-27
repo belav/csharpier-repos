@@ -12,7 +12,9 @@ namespace Roslyn.Test.Utilities
 {
     public sealed class EqualityUnit<T>
     {
-        private static readonly ReadOnlyCollection<T> s_emptyCollection = new ReadOnlyCollection<T>(new T[] { });
+        private static readonly ReadOnlyCollection<T> s_emptyCollection = new ReadOnlyCollection<T>(
+            new T[] { }
+        );
 
         public readonly T Value;
         public readonly ReadOnlyCollection<T> EqualValues;
@@ -32,7 +34,8 @@ namespace Roslyn.Test.Utilities
         public EqualityUnit(
             T value,
             ReadOnlyCollection<T> equalValues,
-            ReadOnlyCollection<T> notEqualValues)
+            ReadOnlyCollection<T> notEqualValues
+        )
         {
             Value = value;
             EqualValues = equalValues;
@@ -44,7 +47,8 @@ namespace Roslyn.Test.Utilities
             return new EqualityUnit<T>(
                 Value,
                 EqualValues.Concat(equalValues).ToList().AsReadOnly(),
-                NotEqualValues);
+                NotEqualValues
+            );
         }
 
         public EqualityUnit<T> WithNotEqualValues(params T[] notEqualValues)
@@ -52,7 +56,8 @@ namespace Roslyn.Test.Utilities
             return new EqualityUnit<T>(
                 Value,
                 EqualValues,
-                NotEqualValues.Concat(notEqualValues).ToList().AsReadOnly());
+                NotEqualValues.Concat(notEqualValues).ToList().AsReadOnly()
+            );
         }
     }
 }

@@ -17,18 +17,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
     public class ChangeToIEnumerableTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public ChangeToIEnumerableTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpChangeToIEnumerableCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpChangeToIEnumerableCodeFixProvider());
 
         [Fact]
         public async Task TestChangeToIEnumerableObjectMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -41,8 +39,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -60,8 +57,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableTupleMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -74,8 +70,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -93,8 +88,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableListMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -107,8 +101,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 using System;
                 using System.Collections.Generic;
 
@@ -126,8 +119,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableWithListReturningMethodWithNullableArgument()
         {
-            var initial =
-                """
+            var initial = """
                 #nullable enable
 
                 using System;
@@ -142,8 +134,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                 }
                 """;
 
-            var expected =
-                """
+            var expected = """
                 #nullable enable
 
                 using System;
@@ -163,8 +154,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableGenericIEnumerableMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -182,8 +172,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableGenericIEnumeratorMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections.Generic;
 
@@ -201,8 +190,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableIEnumeratorMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -220,8 +208,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableIEnumerableMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -239,8 +226,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
         [Fact]
         public async Task TestChangeToIEnumerableVoidMethod()
         {
-            var initial =
-                """
+            var initial = """
                 using System;
                 using System.Collections;
 
@@ -334,7 +320,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
@@ -372,7 +359,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem(7087, @"https://github.com/dotnet/roslyn/issues/7087")]
@@ -412,7 +400,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Iterator
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

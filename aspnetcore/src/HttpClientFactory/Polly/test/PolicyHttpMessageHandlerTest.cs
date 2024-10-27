@@ -64,11 +64,13 @@ public class PolicyHttpMessageHandlerTest
         var expectedRequest = new HttpRequestMessage();
 
         HttpRequestMessage policySelectorRequest = null;
-        var handler = new TestPolicyHttpMessageHandler((req) =>
-        {
-            policySelectorRequest = req;
-            return policy;
-        });
+        var handler = new TestPolicyHttpMessageHandler(
+            (req) =>
+            {
+                policySelectorRequest = req;
+                return policy;
+            }
+        );
 
         var callCount = 0;
         var expected = new HttpResponseMessage();
@@ -103,8 +105,7 @@ public class PolicyHttpMessageHandlerTest
     public async Task SendAsync_StaticPolicy_PolicyTriggers_CanReexecuteSendAsync_FirstResponseDisposed()
     {
         // Arrange
-        var policy = HttpPolicyExtensions.HandleTransientHttpError()
-            .RetryAsync(retryCount: 1);
+        var policy = HttpPolicyExtensions.HandleTransientHttpError().RetryAsync(retryCount: 1);
 
         var callCount = 0;
         var fakeContent = new FakeContent();
@@ -134,7 +135,7 @@ public class PolicyHttpMessageHandlerTest
                 {
                     throw new InvalidOperationException();
                 }
-            }
+            },
         };
         var invoke = new HttpMessageInvoker(handler);
 
@@ -151,10 +152,13 @@ public class PolicyHttpMessageHandlerTest
     public async Task MultipleHandlers_CanReexecuteSendAsync_FirstResponseDisposed()
     {
         // Arrange
-        var policy1 = HttpPolicyExtensions.HandleTransientHttpError()
-            .RetryAsync(retryCount: 1);
-        var policy2 = HttpPolicyExtensions.HandleTransientHttpError()
-            .CircuitBreakerAsync(handledEventsAllowedBeforeBreaking: 2, durationOfBreak: TimeSpan.FromSeconds(10));
+        var policy1 = HttpPolicyExtensions.HandleTransientHttpError().RetryAsync(retryCount: 1);
+        var policy2 = HttpPolicyExtensions
+            .HandleTransientHttpError()
+            .CircuitBreakerAsync(
+                handledEventsAllowedBeforeBreaking: 2,
+                durationOfBreak: TimeSpan.FromSeconds(10)
+            );
 
         var callCount = 0;
         var fakeContent = new FakeContent();
@@ -186,7 +190,7 @@ public class PolicyHttpMessageHandlerTest
                 {
                     throw new InvalidOperationException();
                 }
-            }
+            },
         };
         var invoke = new HttpMessageInvoker(handler1);
 
@@ -203,10 +207,12 @@ public class PolicyHttpMessageHandlerTest
     public async Task SendAsync_DynamicPolicy_PolicySelectorReturnsNull_ThrowsException()
     {
         // Arrange
-        var handler = new TestPolicyHttpMessageHandler((req) =>
-        {
-            return null;
-        });
+        var handler = new TestPolicyHttpMessageHandler(
+            (req) =>
+            {
+                return null;
+            }
+        );
 
         var expected = new HttpResponseMessage();
 
@@ -219,7 +225,8 @@ public class PolicyHttpMessageHandlerTest
         // Assert
         Assert.Equal(
             "The 'policySelector' function must return a non-null policy instance. To create a policy that takes no action, use 'Policy.NoOpAsync<HttpResponseMessage>()'.",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -229,9 +236,11 @@ public class PolicyHttpMessageHandlerTest
         var policy = Policy<HttpResponseMessage>
             .Handle<TimeoutRejectedException>() // Handle timeouts by retrying
             .RetryAsync(retryCount: 5)
-            .WrapAsync(Policy
-                .TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(50)) // Apply a 50ms timeout
-                .WrapAsync(Policy.NoOpAsync<HttpResponseMessage>()));
+            .WrapAsync(
+                Policy
+                    .TimeoutAsync<HttpResponseMessage>(TimeSpan.FromMilliseconds(50)) // Apply a 50ms timeout
+                    .WrapAsync(Policy.NoOpAsync<HttpResponseMessage>())
+            );
 
         var handler = new TestPolicyHttpMessageHandler(policy);
 
@@ -331,10 +340,12 @@ public class PolicyHttpMessageHandlerTest
     public async Task SendAsync_NoContextSet_DynamicPolicySelectorThrows_CleansUpContext()
     {
         // Arrange
-        var handler = new TestPolicyHttpMessageHandler((req) =>
-        {
-            throw new InvalidOperationException();
-        });
+        var handler = new TestPolicyHttpMessageHandler(
+            (req) =>
+            {
+                throw new InvalidOperationException();
+            }
+        );
 
         var request = new HttpRequestMessage();
 
@@ -411,24 +422,34 @@ public class PolicyHttpMessageHandlerTest
 
     private class TestPolicyHttpMessageHandler : PolicyHttpMessageHandler
     {
-        public Func<HttpRequestMessage, Context, CancellationToken, Task<HttpResponseMessage>> OnSendAsync { get; set; }
+        public Func<
+            HttpRequestMessage,
+            Context,
+            CancellationToken,
+            Task<HttpResponseMessage>
+        > OnSendAsync { get; set; }
 
         public TestPolicyHttpMessageHandler(IAsyncPolicy<HttpResponseMessage> policy)
-            : base(policy)
-        {
-        }
+            : base(policy) { }
 
-        public TestPolicyHttpMessageHandler(Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector)
-            : base(policySelector)
-        {
-        }
+        public TestPolicyHttpMessageHandler(
+            Func<HttpRequestMessage, IAsyncPolicy<HttpResponseMessage>> policySelector
+        )
+            : base(policySelector) { }
 
-        public new Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public new Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return base.SendAsync(request, cancellationToken);
         }
 
-        protected override Task<HttpResponseMessage> SendCoreAsync(HttpRequestMessage request, Context context, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendCoreAsync(
+            HttpRequestMessage request,
+            Context context,
+            CancellationToken cancellationToken
+        )
         {
             Assert.NotNull(OnSendAsync);
             return OnSendAsync(request, context, cancellationToken);
@@ -437,9 +458,16 @@ public class PolicyHttpMessageHandlerTest
 
     private class TestHandler : HttpMessageHandler
     {
-        public Func<HttpRequestMessage, CancellationToken, Task<HttpResponseMessage>> OnSendAsync { get; set; }
+        public Func<
+            HttpRequestMessage,
+            CancellationToken,
+            Task<HttpResponseMessage>
+        > OnSendAsync { get; set; }
 
-        protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             Assert.NotNull(OnSendAsync);
             return OnSendAsync(request, cancellationToken);
@@ -448,9 +476,8 @@ public class PolicyHttpMessageHandlerTest
 
     private class FakeContent : StringContent
     {
-        public FakeContent() : base("hello world")
-        {
-        }
+        public FakeContent()
+            : base("hello world") { }
 
         public bool Disposed { get; set; }
 

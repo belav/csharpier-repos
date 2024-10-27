@@ -6,13 +6,16 @@
 // <owner current="true" primary="false">laled</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
+    public enum CommandType
+    {
+        Text = 0x1,
 
-    public enum CommandType {
-        Text            = 0x1,
-      //Table           = 0x2,
+        //Table           = 0x2,
         StoredProcedure = 0x4,
-      //File            = 0x100,
-        TableDirect     = 0x200,
+
+        //File            = 0x100,
+        TableDirect = 0x200,
     }
 }

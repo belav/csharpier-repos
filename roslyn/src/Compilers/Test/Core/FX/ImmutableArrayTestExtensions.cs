@@ -26,7 +26,13 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         /// <param name="path">File path.</param>
         internal static void WriteToFile(this ImmutableArray<byte> bytes, string path)
         {
-            using var fileStream = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.Read, BufferSize);
+            using var fileStream = new FileStream(
+                path,
+                FileMode.Create,
+                FileAccess.Write,
+                FileShare.Read,
+                BufferSize
+            );
             WriteToStream(bytes, fileStream);
         }
 

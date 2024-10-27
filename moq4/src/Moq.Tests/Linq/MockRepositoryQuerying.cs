@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System.Linq;
-
 using Xunit;
 
 namespace Moq.Tests.Linq
@@ -10,7 +9,6 @@ namespace Moq.Tests.Linq
     public class MockRepositoryQuerying
     {
         public class GivenAStrictFactory
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private MockRepository repository;
@@ -75,7 +73,6 @@ namespace Moq.Tests.Linq
         }
 
         public class Strict_mocks
-
         /* Unmerged change from project 'Moq.Tests(net6.0)'
         Before:
                     private MockRepository repository;
@@ -100,7 +97,9 @@ namespace Moq.Tests.Linq
             [Fact]
             public void Strict_Of_with_expression_will_throw_for_non_setup_property()
             {
-                var foo = this.repository.Of<IFoo>(f => f.Id == default, MockBehavior.Strict).First();
+                var foo = this
+                    .repository.Of<IFoo>(f => f.Id == default, MockBehavior.Strict)
+                    .First();
                 _ = foo.Id;
                 Assert.Throws<MockException>(() => _ = foo.Name);
             }

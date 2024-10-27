@@ -18,7 +18,11 @@ public readonly struct HeaderPropagationContext
     /// <param name="httpContext">The <see cref="Http.HttpContext"/> associated with the current request.</param>
     /// <param name="headerName">The header name.</param>
     /// <param name="headerValue">The header value present in the current request.</param>
-    public HeaderPropagationContext(HttpContext httpContext, string headerName, StringValues headerValue)
+    public HeaderPropagationContext(
+        HttpContext httpContext,
+        string headerName,
+        StringValues headerValue
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
         ArgumentNullException.ThrowIfNull(headerName);

@@ -10,5 +10,6 @@ public class MiddlewareFilterAttribute<T> : MiddlewareFilterAttribute
     /// <summary>
     /// Instantiates a new instance of <see cref="MiddlewareFilterAttribute"/>.
     /// </summary>
-    public MiddlewareFilterAttribute() : base(typeof(T)) { }
+    public MiddlewareFilterAttribute()
+        : base(typeof(T)) { }
 }

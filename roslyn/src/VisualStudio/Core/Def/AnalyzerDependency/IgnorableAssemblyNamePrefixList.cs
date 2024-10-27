@@ -20,7 +20,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             _prefix = prefix;
         }
 
-        public bool Includes(AssemblyIdentity assemblyIdentity)
-            => assemblyIdentity.Name.StartsWith(_prefix);
+        public bool Includes(AssemblyIdentity assemblyIdentity) =>
+            assemblyIdentity.Name.StartsWith(_prefix);
     }
 }

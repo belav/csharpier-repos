@@ -150,7 +150,8 @@ public class ResourcesData
     /// <summary>
     /// "assembly" (.dll) resources
     /// </summary>
-    public ResourceHashesByNameDictionary assembly { get; set; } = new ResourceHashesByNameDictionary();
+    public ResourceHashesByNameDictionary assembly { get; set; } =
+        new ResourceHashesByNameDictionary();
 
     /// <summary>
     /// "debug" (.pdb) resources

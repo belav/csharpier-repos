@@ -10,6 +10,6 @@ namespace console_project
         Wednesday = 4,
         Thursday = 8,
         Friday = 16,
-        All = Monday | Tuesday | Wednesday | Thursday | Friday
+        All = Monday | Tuesday | Wednesday | Thursday | Friday,
     }
 }

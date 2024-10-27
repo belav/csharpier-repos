@@ -16,5 +16,6 @@ public interface ITagHelperFactory
     /// </summary>
     /// <param name="context"><see cref="ViewContext"/> for the executing view.</param>
     /// <returns>The tag helper.</returns>
-    TTagHelper CreateTagHelper<TTagHelper>(ViewContext context) where TTagHelper : ITagHelper;
+    TTagHelper CreateTagHelper<TTagHelper>(ViewContext context)
+        where TTagHelper : ITagHelper;
 }

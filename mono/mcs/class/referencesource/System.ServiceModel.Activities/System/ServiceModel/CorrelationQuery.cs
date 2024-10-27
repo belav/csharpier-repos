@@ -18,20 +18,20 @@ namespace System.ServiceModel
     {
         Collection<MessageQuerySet> selectAdditional;
 
-        public CorrelationQuery()
-        {
-        }
+        public CorrelationQuery() { }
 
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
-            Justification = "TODO 87762, remove the set")]
-        [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.PropertyExternalTypesMustBeKnown,
-            Justification = "This property is XAML friendly, no need to add KnownXamlExternal")]
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.CollectionPropertiesShouldBeReadOnly,
+            Justification = "TODO 87762, remove the set"
+        )]
+        [SuppressMessage(
+            FxCop.Category.Xaml,
+            FxCop.Rule.PropertyExternalTypesMustBeKnown,
+            Justification = "This property is XAML friendly, no need to add KnownXamlExternal"
+        )]
         [DefaultValue(null)]
-        public MessageQuerySet Select
-        {
-            get;
-            set;
-        }
+        public MessageQuerySet Select { get; set; }
 
         public Collection<MessageQuerySet> SelectAdditional
         {
@@ -45,20 +45,15 @@ namespace System.ServiceModel
             }
         }
 
-        [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.PropertyExternalTypesMustBeKnown,
-            Justification = "This property is XAML friendly, no need to add KnownXamlExternal")]
+        [SuppressMessage(
+            FxCop.Category.Xaml,
+            FxCop.Rule.PropertyExternalTypesMustBeKnown,
+            Justification = "This property is XAML friendly, no need to add KnownXamlExternal"
+        )]
         [DefaultValue(null)]
-        public MessageFilter Where
-        {
-            get;
-            set;
-        }
+        public MessageFilter Where { get; set; }
 
-        internal bool IsDefaultContextQuery
-        {
-            get;
-            set;
-        }
+        internal bool IsDefaultContextQuery { get; set; }
 
         public override bool Equals(object other)
         {
@@ -90,7 +85,12 @@ namespace System.ServiceModel
         {
             foreach (CorrelationQuery query in queries)
             {
-                if (!(query.Where is CorrelationActionMessageFilter || query.Where is ActionMessageFilter))
+                if (
+                    !(
+                        query.Where is CorrelationActionMessageFilter
+                        || query.Where is ActionMessageFilter
+                    )
+                )
                 {
                     return false;
                 }
@@ -99,7 +99,10 @@ namespace System.ServiceModel
             return true;
         }
 
-        internal static CorrelationQuery FindCorrelationQueryForAction(IEnumerable<CorrelationQuery> queries, string action)
+        internal static CorrelationQuery FindCorrelationQueryForAction(
+            IEnumerable<CorrelationQuery> queries,
+            string action
+        )
         {
             string localAction = action != null ? action : String.Empty;
             foreach (CorrelationQuery query in queries)
@@ -107,14 +110,20 @@ namespace System.ServiceModel
                 // if the action is wildcard, we have a match all
                 if (query.Where is CorrelationActionMessageFilter)
                 {
-                    if (((CorrelationActionMessageFilter)query.Where).Action == localAction || localAction == MessageHeaders.WildcardAction)
+                    if (
+                        ((CorrelationActionMessageFilter)query.Where).Action == localAction
+                        || localAction == MessageHeaders.WildcardAction
+                    )
                     {
                         return query;
                     }
                 }
                 else if (query.Where is ActionMessageFilter)
                 {
-                    if (((ActionMessageFilter)query.Where).Actions.Contains(localAction) || localAction == MessageHeaders.WildcardAction)
+                    if (
+                        ((ActionMessageFilter)query.Where).Actions.Contains(localAction)
+                        || localAction == MessageHeaders.WildcardAction
+                    )
                     {
                         return query;
                     }
@@ -126,8 +135,8 @@ namespace System.ServiceModel
 
         internal CorrelationQuery Clone()
         {
-            CorrelationQuery cloneQuery = new CorrelationQuery 
-            {   
+            CorrelationQuery cloneQuery = new CorrelationQuery
+            {
                 Select = this.Select,
                 IsDefaultContextQuery = this.IsDefaultContextQuery,
                 Where = this.Where,
@@ -144,9 +153,7 @@ namespace System.ServiceModel
 
         class QueryCollection : Collection<MessageQuerySet>
         {
-            public QueryCollection()
-            {
-            }
+            public QueryCollection() { }
 
             protected override void InsertItem(int index, MessageQuerySet item)
             {

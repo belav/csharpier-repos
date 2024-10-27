@@ -5,6 +5,5 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class ManyToManyHeterogeneousQueryInMemoryTest : ManyToManyHeterogeneousQueryTestBase
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => InMemoryTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
 }

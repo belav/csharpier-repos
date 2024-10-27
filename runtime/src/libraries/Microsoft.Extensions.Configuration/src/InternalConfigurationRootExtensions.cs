@@ -18,16 +18,27 @@ namespace Microsoft.Extensions.Configuration
         /// <param name="root">Configuration from which to retrieve sub-sections.</param>
         /// <param name="path">Key of a section of which children to retrieve.</param>
         /// <returns>Immediate children sub-sections of section specified by key.</returns>
-        internal static IEnumerable<IConfigurationSection> GetChildrenImplementation(this IConfigurationRoot root, string? path)
+        internal static IEnumerable<IConfigurationSection> GetChildrenImplementation(
+            this IConfigurationRoot root,
+            string? path
+        )
         {
-            using ReferenceCountedProviders? reference = (root as ConfigurationManager)?.GetProvidersReference();
+            using ReferenceCountedProviders? reference = (
+                root as ConfigurationManager
+            )?.GetProvidersReference();
             IEnumerable<IConfigurationProvider> providers = reference?.Providers ?? root.Providers;
 
             IEnumerable<IConfigurationSection> children = providers
-                .Aggregate(Enumerable.Empty<string>(),
-                    (seed, source) => source.GetChildKeys(seed, path))
+                .Aggregate(
+                    Enumerable.Empty<string>(),
+                    (seed, source) => source.GetChildKeys(seed, path)
+                )
                 .Distinct(StringComparer.OrdinalIgnoreCase)
-                .Select(key => root.GetSection(path == null ? key : path + ConfigurationPath.KeyDelimiter + key));
+                .Select(key =>
+                    root.GetSection(
+                        path == null ? key : path + ConfigurationPath.KeyDelimiter + key
+                    )
+                );
 
             if (reference is null)
             {

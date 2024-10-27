@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
         public CompilationAvailableTaggerEventSource(
             ITextBuffer subjectBuffer,
             IAsynchronousOperationListener asyncListener,
-            params ITaggerEventSource[] eventSources)
+            params ITaggerEventSource[] eventSources
+        )
         {
             _subjectBuffer = subjectBuffer;
             _eventSource = new CompilationAvailableEventSource(asyncListener);
@@ -69,18 +70,17 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
             _eventSource.Dispose();
         }
 
-        public void Pause()
-            => _underlyingSource.Pause();
+        public void Pause() => _underlyingSource.Pause();
 
-        public void Resume()
-            => _underlyingSource.Resume();
+        public void Resume() => _underlyingSource.Resume();
 
         private void OnUnderlyingSourceChanged(object? sender, TaggerEventArgs args)
         {
             // First, notify anyone listening to us that something definitely changed.
             this.Changed?.Invoke(this, args);
 
-            var document = _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
+            var document =
+                _subjectBuffer.CurrentSnapshot.GetOpenDocumentInCurrentContextWithChanges();
             if (document == null)
                 return;
 

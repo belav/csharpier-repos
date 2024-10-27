@@ -19,9 +19,7 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public DateTimeOffsetToBinaryConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -34,12 +32,7 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     ///     facets for the converted data.
     /// </param>
     public DateTimeOffsetToBinaryConverter(ConverterMappingHints? mappingHints)
-        : base(
-            v => ToLong(v),
-            v => ToDateTimeOffset(v),
-            mappingHints)
-    {
-    }
+        : base(v => ToLong(v), v => ToDateTimeOffset(v), mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -48,10 +41,8 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public static DateTimeOffset ToDateTimeOffset(long v)
-        => new(
-            new DateTime((v >> 11) * 1000),
-            new TimeSpan(0, (int)((v << 53) >> 53), 0));
+    public static DateTimeOffset ToDateTimeOffset(long v) =>
+        new(new DateTime((v >> 11) * 1000), new TimeSpan(0, (int)((v << 53) >> 53), 0));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,12 +51,16 @@ public class DateTimeOffsetToBinaryConverter : ValueConverter<DateTimeOffset, lo
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public static long ToLong(DateTimeOffset v)
-        => ((v.Ticks / 1000) << 11) | ((long)v.Offset.TotalMinutes & 0x7FF);
+    public static long ToLong(DateTimeOffset v) =>
+        ((v.Ticks / 1000) << 11) | ((long)v.Offset.TotalMinutes & 0x7FF);
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(DateTimeOffset), typeof(long), i => new DateTimeOffsetToBinaryConverter(i.MappingHints));
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(DateTimeOffset),
+            typeof(long),
+            i => new DateTimeOffsetToBinaryConverter(i.MappingHints)
+        );
 }

@@ -10,9 +10,11 @@ namespace System.IO.Tests
     [PlatformSpecific(TestPlatforms.AnyUnix)]
     public class PathTests_Unix : PathTestsBase
     {
-        [Theory,
+        [
+            Theory,
             MemberData(nameof(TestData_GetPathRoot_Unc)),
-            MemberData(nameof(TestData_GetPathRoot_DevicePaths))]
+            MemberData(nameof(TestData_GetPathRoot_DevicePaths))
+        ]
         public static void GetPathRoot(string value, string expected)
         {
             // UNCs and device paths have no special meaning in Unix
@@ -21,9 +23,7 @@ namespace System.IO.Tests
             Assert.True(Path.GetPathRoot(value.AsSpan()).IsEmpty);
         }
 
-        [Theory,
-            InlineData("B:", "B:"),
-            InlineData("A:.", "A:.")]
+        [Theory, InlineData("B:", "B:"), InlineData("A:.", "A:.")]
         public void GetFileName_Volume(string path, string expected)
         {
             // No such thing as a drive relative path on Unix.
@@ -42,21 +42,31 @@ namespace System.IO.Tests
             yield return new string[] { "~/", "~/" };
             yield return new string[] { ".tmp/", ".tmp" };
             yield return new string[] { "./tmp/", "./tmp" };
-            yield return new string[] { "/home/someuser/sometempdir/", "/home/someuser/sometempdir/" };
-            yield return new string[] { "/home/someuser/some tempdir/", "/home/someuser/some tempdir/" };
+            yield return new string[]
+            {
+                "/home/someuser/sometempdir/",
+                "/home/someuser/sometempdir/",
+            };
+            yield return new string[]
+            {
+                "/home/someuser/some tempdir/",
+                "/home/someuser/some tempdir/",
+            };
             yield return new string[] { "/tmp/", null };
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void GetTempPath_SetEnvVar_Unix()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
+            RemoteExecutor
+                .Invoke(() =>
                 {
-                    GetTempPath_SetEnvVar_Helper("TMPDIR", tempPath[0], tempPath[1]);
-                }
-            }).Dispose();
+                    foreach (string[] tempPath in GetTempPath_SetEnvVar_Data())
+                    {
+                        GetTempPath_SetEnvVar_Helper("TMPDIR", tempPath[0], tempPath[1]);
+                    }
+                })
+                .Dispose();
         }
 
         [Fact]
@@ -68,59 +78,63 @@ namespace System.IO.Tests
             Assert.Equal(Path.Combine(curDir, "\r\n"), Path.GetFullPath("\r\n"));
         }
 
-        public static TheoryData<string, string, string> GetFullPath_BasePath_BasicExpansions_TestData_Unix => new TheoryData<string, string, string>
-        {
-            { @"/home/git", @"/home/git", @"/home/git" },
-            { "", @"/home/git", @"/home/git" },
-            { "..", @"/home/git", @"/home" },
-            { @"/home/git/././././././", @"/home/git", @"/home/git/" },
-            { @"/home/git///.", @"/home/git", @"/home/git" },
-            { @"/home/git/../git/./../git", @"/home/git", @"/home/git" },
-            { @"/home/git/somedir/..", @"/home/git", @"/home/git" },
-            { @"/home/git/./", @"/home/git", @"/home/git/" },
-            { @"/home/../../../../..", @"/home/git", @"/" },
-            { @"/home///", @"/home/git", @"/home/" },
-            { "tmp", @"/home/git", @"/home/git/tmp" },
-            { "tmp/bar/..", @"/home/git", @"/home/git/tmp" },
-            { "tmp/..", @"/home/git", @"/home/git" },
-            { "tmp/./bar/../", @"/home/git", @"/home/git/tmp/" },
-            { "tmp/bar/../../", @"/home/git", @"/home/git/" },
-            { "tmp/bar/../next/../", @"/home/git", @"/home/git/tmp/" },
-            { "tmp/bar/next", @"/home/git", @"/home/git/tmp/bar/next" },
+        public static TheoryData<
+            string,
+            string,
+            string
+        > GetFullPath_BasePath_BasicExpansions_TestData_Unix =>
+            new TheoryData<string, string, string>
+            {
+                { @"/home/git", @"/home/git", @"/home/git" },
+                { "", @"/home/git", @"/home/git" },
+                { "..", @"/home/git", @"/home" },
+                { @"/home/git/././././././", @"/home/git", @"/home/git/" },
+                { @"/home/git///.", @"/home/git", @"/home/git" },
+                { @"/home/git/../git/./../git", @"/home/git", @"/home/git" },
+                { @"/home/git/somedir/..", @"/home/git", @"/home/git" },
+                { @"/home/git/./", @"/home/git", @"/home/git/" },
+                { @"/home/../../../../..", @"/home/git", @"/" },
+                { @"/home///", @"/home/git", @"/home/" },
+                { "tmp", @"/home/git", @"/home/git/tmp" },
+                { "tmp/bar/..", @"/home/git", @"/home/git/tmp" },
+                { "tmp/..", @"/home/git", @"/home/git" },
+                { "tmp/./bar/../", @"/home/git", @"/home/git/tmp/" },
+                { "tmp/bar/../../", @"/home/git", @"/home/git/" },
+                { "tmp/bar/../next/../", @"/home/git", @"/home/git/tmp/" },
+                { "tmp/bar/next", @"/home/git", @"/home/git/tmp/bar/next" },
+                // Rooted
+                { @"/tmp/bar", @"/home/git", @"/tmp/bar" },
+                { @"/bar", @"/home/git", @"/bar" },
+                { @"/tmp/..", @"/home/git", @"/" },
+                { @"/tmp/bar/..", @"/home/git", @"/tmp" },
+                { @"/tmp/..", @"/home/git", @"/" },
+                { @"/", @"/home/git", @"/" },
+                { @"/tmp/../../../bar", @"/home/git", @"/bar" },
+                { @"/bar/././././../../..", @"/home/git", @"/" },
+                { @"/../../tmp/../../", @"/home/git", @"/" },
+                { @"/../../tmp/bar/..", @"/home/git", @"/tmp" },
+                { @"/tmp/..", @"/home/git", @"/" },
+                { @"/././../../../../", @"/home/git", @"/" },
+                { @"/tmp/../../../../../bar", @"/home/git", @"/bar" },
+                { @"/./././bar/../../../", @"/home/git", @"/" },
+                { @"/tmp/..", @"/home/git", @"/" },
+                { @"/../../tmp/bar/..", @"/home/git", @"/tmp" },
+                { @"/tmp/..", @"/home/git", @"/" },
+                { @"../../../", @"/home/git", @"/" },
+                { @"../.././././bar/../../../", @"/home/git", @"/" },
+                { @"../../.././tmp/..", @"/home/git", @"/" },
+                { @"../../../tmp/bar/..", @"/home/git", @"/tmp" },
+                { @"../../././tmp/..", @"/home/git", @"/" },
+                { @"././../../../", @"/home/git", @"/" },
+                { @"../tmp/../..", @"/home", @"/" },
+            };
 
-            // Rooted
-            { @"/tmp/bar", @"/home/git", @"/tmp/bar" },
-            { @"/bar", @"/home/git", @"/bar" },
-            { @"/tmp/..", @"/home/git", @"/" },
-            { @"/tmp/bar/..", @"/home/git", @"/tmp" },
-            { @"/tmp/..", @"/home/git", @"/" },
-            { @"/", @"/home/git", @"/" },
-
-            { @"/tmp/../../../bar", @"/home/git", @"/bar" },
-            { @"/bar/././././../../..", @"/home/git", @"/" },
-            { @"/../../tmp/../../", @"/home/git", @"/" },
-            { @"/../../tmp/bar/..", @"/home/git", @"/tmp" },
-            { @"/tmp/..", @"/home/git", @"/" },
-            { @"/././../../../../", @"/home/git", @"/" },
-
-            { @"/tmp/../../../../../bar", @"/home/git", @"/bar" },
-            { @"/./././bar/../../../", @"/home/git", @"/" },
-            { @"/tmp/..", @"/home/git", @"/" },
-            { @"/../../tmp/bar/..", @"/home/git", @"/tmp" },
-            { @"/tmp/..", @"/home/git", @"/" },
-            { @"../../../", @"/home/git", @"/" },
-
-            { @"../.././././bar/../../../", @"/home/git", @"/" },
-            { @"../../.././tmp/..", @"/home/git", @"/" },
-            { @"../../../tmp/bar/..", @"/home/git", @"/tmp" },
-            { @"../../././tmp/..", @"/home/git", @"/" },
-            { @"././../../../", @"/home/git", @"/" },
-            { @"../tmp/../..", @"/home", @"/" }
-        };
-
-        [Theory,
-           MemberData(nameof(GetFullPath_BasePath_BasicExpansions_TestData_Unix))]
-        public static void GetFullPath_BasicExpansions_Unix(string path, string basePath, string expected)
+        [Theory, MemberData(nameof(GetFullPath_BasePath_BasicExpansions_TestData_Unix))]
+        public static void GetFullPath_BasicExpansions_Unix(
+            string path,
+            string basePath,
+            string expected
+        )
         {
             string fullPath = Path.GetFullPath(path, basePath);
             Assert.Equal(expected, fullPath);
@@ -158,31 +172,35 @@ namespace System.IO.Tests
         [Fact]
         public void GetFullPath_ThrowsOnEmbeddedNulls()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => Path.GetFullPath("/gi\0t", "/foo/bar"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => Path.GetFullPath("/gi\0t", "/foo/bar")
+            );
         }
 
-        public static TheoryData<string, string> TestData_TrimEndingDirectorySeparator => new TheoryData<string, string>
-        {
-            { @"/folder/", @"/folder" },
-            { @"folder/", @"folder" },
-            { @"", @"" },
-            { @"/", @"/" },
-            { null, null }
-        };
+        public static TheoryData<string, string> TestData_TrimEndingDirectorySeparator =>
+            new TheoryData<string, string>
+            {
+                { @"/folder/", @"/folder" },
+                { @"folder/", @"folder" },
+                { @"", @"" },
+                { @"/", @"/" },
+                { null, null },
+            };
 
-        public static TheoryData<string, bool> TestData_EndsInDirectorySeparator => new TheoryData<string, bool>
-        {
-            { @"/", true },
-            { @"/folder/", true },
-            { @"//", true },
-            { @"folder", false },
-            { @"folder/", true },
-            { @"", false },
-            { null, false }
-        };
+        public static TheoryData<string, bool> TestData_EndsInDirectorySeparator =>
+            new TheoryData<string, bool>
+            {
+                { @"/", true },
+                { @"/folder/", true },
+                { @"//", true },
+                { @"folder", false },
+                { @"folder/", true },
+                { @"", false },
+                { null, false },
+            };
 
-        [Theory,
-            MemberData(nameof(TestData_TrimEndingDirectorySeparator))]
+        [Theory, MemberData(nameof(TestData_TrimEndingDirectorySeparator))]
         public void TrimEndingDirectorySeparator_String(string path, string expected)
         {
             string trimmed = Path.TrimEndingDirectorySeparator(path);
@@ -190,8 +208,7 @@ namespace System.IO.Tests
             Assert.Same(trimmed, Path.TrimEndingDirectorySeparator(trimmed));
         }
 
-        [Theory,
-            MemberData(nameof(TestData_TrimEndingDirectorySeparator))]
+        [Theory, MemberData(nameof(TestData_TrimEndingDirectorySeparator))]
         public void TrimEndingDirectorySeparator_ReadOnlySpan(string path, string expected)
         {
             ReadOnlySpan<char> trimmed = Path.TrimEndingDirectorySeparator(path.AsSpan());
@@ -199,15 +216,13 @@ namespace System.IO.Tests
             PathAssert.Equal(trimmed, Path.TrimEndingDirectorySeparator(trimmed));
         }
 
-        [Theory,
-            MemberData(nameof(TestData_EndsInDirectorySeparator))]
+        [Theory, MemberData(nameof(TestData_EndsInDirectorySeparator))]
         public void EndsInDirectorySeparator_String(string path, bool expected)
         {
             Assert.Equal(expected, Path.EndsInDirectorySeparator(path));
         }
 
-        [Theory,
-            MemberData(nameof(TestData_EndsInDirectorySeparator))]
+        [Theory, MemberData(nameof(TestData_EndsInDirectorySeparator))]
         public void EndsInDirectorySeparator_ReadOnlySpan(string path, bool expected)
         {
             Assert.Equal(expected, Path.EndsInDirectorySeparator(path.AsSpan()));

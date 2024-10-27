@@ -12,7 +12,11 @@ namespace System.Data.Objects.DataClasses
     /// Indicates that the given method is a proxy for an EDM function.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method, Inherited = false, AllowMultiple = false)]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Edm")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Naming",
+        "CA1704:IdentifiersShouldBeSpelledCorrectly",
+        MessageId = "Edm"
+    )]
     public sealed class EdmFunctionAttribute : Attribute
     {
         private readonly string _namespaceName;
@@ -32,11 +36,17 @@ namespace System.Data.Objects.DataClasses
         /// <summary>
         /// The namespace name of the EDM function represented by the attributed method
         /// </summary>
-        public string NamespaceName { get { return _namespaceName; } }
-        
+        public string NamespaceName
+        {
+            get { return _namespaceName; }
+        }
+
         /// <summary>
         /// The function name of the EDM function represented by the attributed method
         /// </summary>
-        public string FunctionName { get { return _functionName; } }
+        public string FunctionName
+        {
+            get { return _functionName; }
+        }
     }
 }

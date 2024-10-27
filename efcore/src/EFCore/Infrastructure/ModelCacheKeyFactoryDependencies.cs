@@ -45,7 +45,5 @@ public sealed record ModelCacheKeyFactoryDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public ModelCacheKeyFactoryDependencies()
-    {
-    }
+    public ModelCacheKeyFactoryDependencies() { }
 }

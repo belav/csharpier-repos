@@ -22,12 +22,14 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void AddReferences()
         {
-            var options = ScriptOptions.Default.
-                AddReferences(typeof(int).GetTypeInfo().Assembly).
-                AddReferences(typeof(int).GetTypeInfo().Assembly).
-                AddReferences(MetadataReference.CreateFromAssemblyInternal(typeof(int).GetTypeInfo().Assembly)).
-                AddReferences("System.Linq").
-                AddReferences("System.Linq");
+            var options = ScriptOptions
+                .Default.AddReferences(typeof(int).GetTypeInfo().Assembly)
+                .AddReferences(typeof(int).GetTypeInfo().Assembly)
+                .AddReferences(
+                    MetadataReference.CreateFromAssemblyInternal(typeof(int).GetTypeInfo().Assembly)
+                )
+                .AddReferences("System.Linq")
+                .AddReferences("System.Linq");
 
             Assert.Equal(GacFileResolver.IsAvailable ? 5 : 30, options.MetadataReferences.Length);
         }
@@ -35,40 +37,90 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void AddReferences_Errors()
         {
-            var moduleRef = ModuleMetadata.CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00).GetReference();
+            var moduleRef = ModuleMetadata
+                .CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00)
+                .GetReference();
 
-            var options = ScriptOptions.Default.WithReferences(ImmutableArray<MetadataReference>.Empty);
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((MetadataReference[])null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences(new MetadataReference[] { null }));
+            var options = ScriptOptions.Default.WithReferences(
+                ImmutableArray<MetadataReference>.Empty
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((MetadataReference[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.AddReferences(new MetadataReference[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((IEnumerable<MetadataReference>)null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences((IEnumerable<MetadataReference>)new MetadataReference[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((IEnumerable<MetadataReference>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () =>
+                    options.AddReferences(
+                        (IEnumerable<MetadataReference>)new MetadataReference[] { null }
+                    )
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((Assembly[])null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences(new Assembly[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((Assembly[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.AddReferences(new Assembly[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((IEnumerable<Assembly>)null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences((IEnumerable<Assembly>)new Assembly[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((IEnumerable<Assembly>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.AddReferences((IEnumerable<Assembly>)new Assembly[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((string[])null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences(new string[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((string[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.AddReferences(new string[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.AddReferences((IEnumerable<string>)null));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.AddReferences((IEnumerable<string>)new string[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.AddReferences((IEnumerable<string>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.AddReferences((IEnumerable<string>)new string[] { null })
+            );
         }
 
         [Fact]
         public void WithReferences()
         {
-            var empty = ScriptOptions.Default.WithReferences(ImmutableArray<MetadataReference>.Empty);
+            var empty = ScriptOptions.Default.WithReferences(
+                ImmutableArray<MetadataReference>.Empty
+            );
 
             var options = empty.WithReferences("System.Linq", "system.linq");
             Assert.Equal(2, options.MetadataReferences.Length);
 
-            options = empty.WithReferences(typeof(int).GetTypeInfo().Assembly, typeof(int).GetTypeInfo().Assembly);
+            options = empty.WithReferences(
+                typeof(int).GetTypeInfo().Assembly,
+                typeof(int).GetTypeInfo().Assembly
+            );
             Assert.Equal(2, options.MetadataReferences.Length);
 
-            var assemblyRef = ModuleMetadata.CreateFromImage(TestResources.SymbolsTests.Methods.CSMethods).GetReference();
+            var assemblyRef = ModuleMetadata
+                .CreateFromImage(TestResources.SymbolsTests.Methods.CSMethods)
+                .GetReference();
 
             options = empty.WithReferences(assemblyRef, assemblyRef);
             Assert.Equal(2, options.MetadataReferences.Length);
@@ -77,41 +129,93 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Fact]
         public void WithReferences_Errors()
         {
-            var moduleRef = ModuleMetadata.CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00).GetReference();
+            var moduleRef = ModuleMetadata
+                .CreateFromImage(TestResources.MetadataTests.NetModule01.ModuleCS00)
+                .GetReference();
 
-            var options = ScriptOptions.Default.WithReferences(ImmutableArray<MetadataReference>.Empty);
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((MetadataReference[])null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((IEnumerable<MetadataReference>)null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences(default(ImmutableArray<MetadataReference>)));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(new MetadataReference[] { null }));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(ImmutableArray.Create((MetadataReference)null)));
+            var options = ScriptOptions.Default.WithReferences(
+                ImmutableArray<MetadataReference>.Empty
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((MetadataReference[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((IEnumerable<MetadataReference>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences(default(ImmutableArray<MetadataReference>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(new MetadataReference[] { null })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(ImmutableArray.Create((MetadataReference)null))
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((Assembly[])null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((IEnumerable<Assembly>)null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences(default(ImmutableArray<Assembly>)));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(new Assembly[] { null }));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(ImmutableArray.Create((Assembly)null)));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((Assembly[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((IEnumerable<Assembly>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences(default(ImmutableArray<Assembly>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(new Assembly[] { null })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(ImmutableArray.Create((Assembly)null))
+            );
 
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((string[])null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences((IEnumerable<string>)null));
-            Assert.Throws<ArgumentNullException>("references", () => options.WithReferences(default(ImmutableArray<string>)));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(new string[] { null }));
-            Assert.Throws<ArgumentNullException>("references[0]", () => options.WithReferences(ImmutableArray.Create((string)null)));
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((string[])null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences((IEnumerable<string>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references",
+                () => options.WithReferences(default(ImmutableArray<string>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(new string[] { null })
+            );
+            Assert.Throws<ArgumentNullException>(
+                "references[0]",
+                () => options.WithReferences(ImmutableArray.Create((string)null))
+            );
         }
 
         [Fact]
         public void AddNamespaces()
         {
             // we only check if the specified name is a valid CLR namespace name, it might not be a valid C#/VB namespace name:
-            var options = ScriptOptions.Default.
-                AddImports("").
-                AddImports("blah.").
-                AddImports("b\0lah").
-                AddImports(".blah").
-                AddImports("b\0lah").
-                AddImports(".blah");
+            var options = ScriptOptions
+                .Default.AddImports("")
+                .AddImports("blah.")
+                .AddImports("b\0lah")
+                .AddImports(".blah")
+                .AddImports("b\0lah")
+                .AddImports(".blah");
 
-            AssertEx.Equal(new[] { "", "blah.", "b\0lah", ".blah", "b\0lah", ".blah" }, options.Imports);
+            AssertEx.Equal(
+                new[] { "", "blah.", "b\0lah", ".blah", "b\0lah", ".blah" },
+                options.Imports
+            );
         }
 
         [Fact]
@@ -119,14 +223,29 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         {
             var options = ScriptOptions.Default;
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.AddImports((string[])null));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.AddImports((string[])null)
+            );
             Assert.Throws<ArgumentNullException>("imports[0]", () => options.AddImports([null]));
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.AddImports((IEnumerable<string>)null));
-            Assert.Throws<ArgumentNullException>("imports[0]", () => options.AddImports((IEnumerable<string>)new string[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.AddImports((IEnumerable<string>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "imports[0]",
+                () => options.AddImports((IEnumerable<string>)new string[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.AddImports(default(ImmutableArray<string>)));
-            Assert.Throws<ArgumentNullException>("imports[0]", () => options.AddImports(ImmutableArray.Create((string)null)));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.AddImports(default(ImmutableArray<string>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "imports[0]",
+                () => options.AddImports(ImmutableArray.Create((string)null))
+            );
 
             // we only check if the specified name is a valid CLR namespace name, it might not be a valid C#/VB namespace name:
             options.AddImports("");
@@ -140,14 +259,29 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         {
             var options = ScriptOptions.Default;
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.WithImports((string[])null));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.WithImports((string[])null)
+            );
             Assert.Throws<ArgumentNullException>("imports[0]", () => options.WithImports([null]));
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.WithImports((IEnumerable<string>)null));
-            Assert.Throws<ArgumentNullException>("imports[0]", () => options.WithImports((IEnumerable<string>)new string[] { null }));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.WithImports((IEnumerable<string>)null)
+            );
+            Assert.Throws<ArgumentNullException>(
+                "imports[0]",
+                () => options.WithImports((IEnumerable<string>)new string[] { null })
+            );
 
-            Assert.Throws<ArgumentNullException>("imports", () => options.WithImports(default(ImmutableArray<string>)));
-            Assert.Throws<ArgumentNullException>("imports[0]", () => options.WithImports(ImmutableArray.Create((string)null)));
+            Assert.Throws<ArgumentNullException>(
+                "imports",
+                () => options.WithImports(default(ImmutableArray<string>))
+            );
+            Assert.Throws<ArgumentNullException>(
+                "imports[0]",
+                () => options.WithImports(ImmutableArray.Create((string)null))
+            );
 
             // we only check if the specified name is a valid CLR namespace name, it might not be a valid C#/VB namespace name:
             options.WithImports("");
@@ -168,7 +302,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void WithEmitDebugInformation_SetsEmitDebugInformation()
         {
             Assert.True(ScriptOptions.Default.WithEmitDebugInformation(true).EmitDebugInformation);
-            Assert.False(ScriptOptions.Default.WithEmitDebugInformation(false).EmitDebugInformation);
+            Assert.False(
+                ScriptOptions.Default.WithEmitDebugInformation(false).EmitDebugInformation
+            );
             Assert.False(ScriptOptions.Default.EmitDebugInformation);
         }
 
@@ -216,7 +352,8 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         public void AllowUnsafe_Is_AppliedTo_CompilationOption(bool allowUnsafe)
         {
             var scriptOptions = ScriptOptions.Default.WithAllowUnsafe(allowUnsafe);
-            var compilation = (CSharpCompilation)CSharpScript.Create(string.Empty, scriptOptions).GetCompilation();
+            var compilation = (CSharpCompilation)
+                CSharpScript.Create(string.Empty, scriptOptions).GetCompilation();
             Assert.Equal(scriptOptions.AllowUnsafe, compilation.Options.AllowUnsafe);
         }
 
@@ -252,14 +389,19 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [InlineData(OptimizationLevel.Release)]
         public void WithOptimizationLevel_SetsOptimizationLevel(OptimizationLevel optimizationLevel)
         {
-            Assert.Equal(ScriptOptions.Default.WithOptimizationLevel(optimizationLevel).OptimizationLevel, optimizationLevel);
+            Assert.Equal(
+                ScriptOptions.Default.WithOptimizationLevel(optimizationLevel).OptimizationLevel,
+                optimizationLevel
+            );
             Assert.Equal(OptimizationLevel.Debug, ScriptOptions.Default.OptimizationLevel);
         }
 
         [Theory]
         [InlineData(OptimizationLevel.Debug)]
         [InlineData(OptimizationLevel.Release)]
-        public void WithOptimizationLevel_SameValueTwice_DoesNotCreateNewInstance(OptimizationLevel optimizationLevel)
+        public void WithOptimizationLevel_SameValueTwice_DoesNotCreateNewInstance(
+            OptimizationLevel optimizationLevel
+        )
         {
             var options = ScriptOptions.Default.WithOptimizationLevel(optimizationLevel);
             Assert.Same(options, options.WithOptimizationLevel(optimizationLevel));
@@ -268,7 +410,9 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [Theory]
         [InlineData(OptimizationLevel.Debug)]
         [InlineData(OptimizationLevel.Release)]
-        public void OptimizationLevel_Is_AppliedTo_CompilationOption(OptimizationLevel optimizationLevel)
+        public void OptimizationLevel_Is_AppliedTo_CompilationOption(
+            OptimizationLevel optimizationLevel
+        )
         {
             var scriptOptions = ScriptOptions.Default.WithOptimizationLevel(optimizationLevel);
             var compilation = CSharpScript.Create(string.Empty, scriptOptions).GetCompilation();
@@ -283,7 +427,10 @@ namespace Microsoft.CodeAnalysis.Scripting.Test
         [InlineData(4)]
         public void WithWarningLevel_SetsWarningLevel(int warningLevel)
         {
-            Assert.Equal(ScriptOptions.Default.WithWarningLevel(warningLevel).WarningLevel, warningLevel);
+            Assert.Equal(
+                ScriptOptions.Default.WithWarningLevel(warningLevel).WarningLevel,
+                warningLevel
+            );
             Assert.Equal(4, ScriptOptions.Default.WarningLevel);
         }
 

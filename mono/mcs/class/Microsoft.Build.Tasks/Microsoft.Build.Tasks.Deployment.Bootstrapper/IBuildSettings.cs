@@ -30,71 +30,35 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.Bootstrapper {
+namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
+{
+    [InterfaceType(ComInterfaceType.InterfaceIsDual)]
+    [Guid("87EEBC69-0948-4ce6-A2DE-819162B87CC6")]
+    [ComVisible(true)]
+    public interface IBuildSettings
+    {
+        string ApplicationFile { get; set; }
 
-	[InterfaceType (ComInterfaceType.InterfaceIsDual)]
-	[Guid ("87EEBC69-0948-4ce6-A2DE-819162B87CC6")]
-	[ComVisible (true)]
-	public interface IBuildSettings {
-		
-		string ApplicationFile {
-			get;
-			set;
-		}
-		
-		string ApplicationName {
-			get;
-			set;
-		}
-		
-		string ApplicationUrl {
-			get;
-			set;
-		}
-		
-		ComponentsLocation ComponentsLocation {
-			get;
-			set;
-		}
-		
-		string ComponentsUrl {
-			get;
-			set;
-		}
-		
-		bool CopyComponents {
-			get;
-			set;
-		}
-		
-		int FallbackLCID {
-			get;
-			set;
-		}
-		
-		int LCID {
-			get;
-			set;
-		}
-		
-		string OutputPath {
-			get;
-			set;
-		}
-		
-		ProductBuilderCollection ProductBuilders {
-			get;
-		}
-		
-		string SupportUrl {
-			get;
-			set;
-		}
-		
-		bool Validate {
-			get;
-			set;
-		}
-	}
+        string ApplicationName { get; set; }
+
+        string ApplicationUrl { get; set; }
+
+        ComponentsLocation ComponentsLocation { get; set; }
+
+        string ComponentsUrl { get; set; }
+
+        bool CopyComponents { get; set; }
+
+        int FallbackLCID { get; set; }
+
+        int LCID { get; set; }
+
+        string OutputPath { get; set; }
+
+        ProductBuilderCollection ProductBuilders { get; }
+
+        string SupportUrl { get; set; }
+
+        bool Validate { get; set; }
+    }
 }
-

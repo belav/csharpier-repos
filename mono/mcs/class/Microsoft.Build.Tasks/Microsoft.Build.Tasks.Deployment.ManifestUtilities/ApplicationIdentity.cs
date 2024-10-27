@@ -30,29 +30,32 @@ using System;
 using System.Runtime.InteropServices;
 using Microsoft.Build.Framework;
 
-namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities {
-	
-	[ComVisible (false)]
-	public sealed class ApplicationIdentity {
-		
-		public ApplicationIdentity (string url,
-					    AssemblyIdentity deployManifestIdentity,
-					    AssemblyIdentity applicationManifestIdentity)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public ApplicationIdentity (string url,
-					    string deployManifestPath,
-					    string applicationManifestPath)
-		{
-			throw new NotImplementedException ();
-		}
-		
-		public override string ToString ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
-}
+namespace Microsoft.Build.Tasks.Deployment.ManifestUtilities
+{
+    [ComVisible(false)]
+    public sealed class ApplicationIdentity
+    {
+        public ApplicationIdentity(
+            string url,
+            AssemblyIdentity deployManifestIdentity,
+            AssemblyIdentity applicationManifestIdentity
+        )
+        {
+            throw new NotImplementedException();
+        }
 
+        public ApplicationIdentity(
+            string url,
+            string deployManifestPath,
+            string applicationManifestPath
+        )
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+    }
+}

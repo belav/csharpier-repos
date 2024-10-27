@@ -17,17 +17,32 @@ namespace System.ComponentModel.Composition.Factories
 
         public static CompositionError Create(Exception exception)
         {
-            return Create(CompositionErrorId.Unknown, (string)null, (ICompositionElement)null, exception);
+            return Create(
+                CompositionErrorId.Unknown,
+                (string)null,
+                (ICompositionElement)null,
+                exception
+            );
         }
 
         public static CompositionError Create(string message)
         {
-            return Create(CompositionErrorId.Unknown, message, (ICompositionElement)null, (Exception)null);
+            return Create(
+                CompositionErrorId.Unknown,
+                message,
+                (ICompositionElement)null,
+                (Exception)null
+            );
         }
 
         public static CompositionError Create(string message, Exception exception)
         {
-            return Create(CompositionErrorId.Unknown, message, (ICompositionElement)null, exception);
+            return Create(
+                CompositionErrorId.Unknown,
+                message,
+                (ICompositionElement)null,
+                exception
+            );
         }
 
         public static CompositionError Create(CompositionErrorId errorId)
@@ -35,12 +50,21 @@ namespace System.ComponentModel.Composition.Factories
             return Create(errorId, errorId.ToString(), (ICompositionElement)null, (Exception)null);
         }
 
-        public static CompositionError Create(CompositionErrorId errorId, string message, Exception exception)
+        public static CompositionError Create(
+            CompositionErrorId errorId,
+            string message,
+            Exception exception
+        )
         {
             return new CompositionError(errorId, message, (ICompositionElement)null, exception);
         }
 
-        public static CompositionError Create(CompositionErrorId errorId, string message, ICompositionElement element, Exception exception)
+        public static CompositionError Create(
+            CompositionErrorId errorId,
+            string message,
+            ICompositionElement element,
+            Exception exception
+        )
         {
             return new CompositionError(errorId, message, element, exception);
         }
@@ -54,7 +78,7 @@ namespace System.ComponentModel.Composition.Factories
 
         private static Exception CreateFromDslCore(string format)
         {
-            List<Tuple<string, string>> identifiers = new List<Tuple<string,string>>();
+            List<Tuple<string, string>> identifiers = new List<Tuple<string, string>>();
 
             StringBuilder token = new StringBuilder();
             StringReader reader = new StringReader(format);
@@ -117,12 +141,19 @@ namespace System.ComponentModel.Composition.Factories
             return new CompositionException("", exception, errors);
         }
 
-        private static void AddIdentifier(List<Tuple<string, string>> identifiers, StringBuilder identifier)
+        private static void AddIdentifier(
+            List<Tuple<string, string>> identifiers,
+            StringBuilder identifier
+        )
         {
             AddIdentifier(identifiers, identifier, (string)null);
         }
 
-        private static void AddIdentifier(List<Tuple<string, string>> identifiers, StringBuilder identifier, string dsl)
+        private static void AddIdentifier(
+            List<Tuple<string, string>> identifiers,
+            StringBuilder identifier,
+            string dsl
+        )
         {
             if (identifier.Length == 0)
                 return;

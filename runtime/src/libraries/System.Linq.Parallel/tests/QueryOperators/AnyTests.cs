@@ -84,7 +84,12 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Any_OneFalse_Longrunning(int count, int position)
         {
             Any_OneFalse(count, position);
@@ -99,7 +104,12 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(OnlyOneData), new int[] { /* Sources.OuterLoopCount */ })]
+        [MemberData(
+            nameof(OnlyOneData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
         public static void Any_OneTrue_Longrunning(int count, int position)
         {
             Any_OneTrue(count, position);
@@ -118,14 +128,35 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Any_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Any(x => { canceler(); return false; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
         public static void Any_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Any(x => { canceler(); return false; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Any(x => { canceler(); return false; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
+            );
         }
 
         [Fact]
@@ -138,20 +169,48 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Any_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Any(x => { throw new DeliberateTestException(); }));
-            AssertThrows.Wrapped<DeliberateTestException>(() => UnorderedSources.Default(1).Select((Func<int, int>)(x => { throw new DeliberateTestException(); })).Any());
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Any(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    UnorderedSources
+                        .Default(1)
+                        .Select(
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+                        .Any()
+            );
         }
 
         [Fact]
         public static void Any_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<bool>)null).Any(x => x));
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => ParallelEnumerable.Empty<bool>().Any(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<bool>)null).Any(x => x)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => ParallelEnumerable.Empty<bool>().Any(null)
+            );
         }
 
         public static IEnumerable<int> InfiniteEnumerable()
         {
-            while (true) yield return 0;
+            while (true)
+                yield return 0;
         }
     }
 }

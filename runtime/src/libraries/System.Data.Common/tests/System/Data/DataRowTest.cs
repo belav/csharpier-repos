@@ -53,12 +53,10 @@ namespace System.Data.Tests
             DataTable namesTable = new DataTable("Names");
             DataColumn idColumn = new DataColumn();
 
-
             idColumn.DataType = typeof(int);
             idColumn.ColumnName = "Id";
             idColumn.AutoIncrement = true;
             namesTable.Columns.Add(idColumn);
-
 
             DataColumn fNameColumn = new DataColumn();
             fNameColumn.DataType = typeof(string);
@@ -71,7 +69,6 @@ namespace System.Data.Tests
             lNameColumn.ColumnName = "LName";
             lNameColumn.DefaultValue = "LName";
             namesTable.Columns.Add(lNameColumn);
-
 
             // Set the primary key for the table
             DataColumn[] keys = new DataColumn[1];
@@ -133,16 +130,13 @@ namespace System.Data.Tests
                 Assert.Equal("Name " + i, r["fName"]);
             }
 
-
             // Create a DataView with the table.
             DataRowCollection rc = _table.Rows;
             rc[0].Delete();
             rc[2].Delete();
 
-
             Assert.Equal("Deleted", rc[0].RowState.ToString());
             Assert.Equal("Deleted", rc[2].RowState.ToString());
-
 
             // Accept changes
             _table.AcceptChanges();
@@ -175,7 +169,6 @@ namespace System.Data.Tests
             colC.ColumnName = "Id";
             colC.AutoIncrement = true;
             tableC.Columns.Add(colC);
-
 
             colC = new DataColumn();
             colC.DataType = typeof(string);
@@ -683,18 +676,26 @@ namespace System.Data.Tests
             parent.Columns.Add("id", typeof(int));
             DataTable child = ds.Tables.Add("child");
             child.Columns.Add("idref", typeof(int));
-            Constraint uniqueId = new UniqueConstraint("uniqueId",
-                                  new DataColumn[] { parent.Columns["id"] }, true);
+            Constraint uniqueId = new UniqueConstraint(
+                "uniqueId",
+                new DataColumn[] { parent.Columns["id"] },
+                true
+            );
             parent.Constraints.Add(uniqueId);
-            ForeignKeyConstraint fkc = new ForeignKeyConstraint("ParentChildConstraint", new DataColumn[] { parent.Columns["id"] },
-                      new DataColumn[] { child.Columns["idref"] });
+            ForeignKeyConstraint fkc = new ForeignKeyConstraint(
+                "ParentChildConstraint",
+                new DataColumn[] { parent.Columns["id"] },
+                new DataColumn[] { child.Columns["idref"] }
+            );
 
             child.Constraints.Add(fkc);
 
-            DataRelation relateParentChild = new DataRelation("relateParentChild",
-                                         new DataColumn[] { parent.Columns["id"] },
-                                         new DataColumn[] { child.Columns["idref"] },
-                                         false);
+            DataRelation relateParentChild = new DataRelation(
+                "relateParentChild",
+                new DataColumn[] { parent.Columns["id"] },
+                new DataColumn[] { child.Columns["idref"] },
+                false
+            );
             ds.Relations.Add(relateParentChild);
 
             ds.EnforceConstraints = false;
@@ -711,17 +712,17 @@ namespace System.Data.Tests
         public void DetachedRowItemException()
         {
             Assert.Throws<RowNotInTableException>(() =>
-           {
-               DataTable dt = new DataTable("table");
-               dt.Columns.Add("col");
-               dt.Rows.Add((new object[] { "val" }));
+            {
+                DataTable dt = new DataTable("table");
+                dt.Columns.Add("col");
+                dt.Rows.Add((new object[] { "val" }));
 
-               DataRow dr = dt.NewRow();
-               Assert.Equal(DataRowState.Detached, dr.RowState);
-               dr.CancelEdit();
-               Assert.Equal(DataRowState.Detached, dr.RowState);
-               object o = dr["col"];
-           });
+                DataRow dr = dt.NewRow();
+                Assert.Equal(DataRowState.Detached, dr.RowState);
+                dr.CancelEdit();
+                Assert.Equal(DataRowState.Detached, dr.RowState);
+                object o = dr["col"];
+            });
         }
 
         [Fact]
@@ -822,19 +823,19 @@ namespace System.Data.Tests
             parent1.Rows.Add(parent1Row);
             parent2.Rows.Add(parent2Row);
 
-
             childRow1.SetParentRow(null, relation2);
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 
-            Assert.Throws<InvalidConstraintException>(() => childRow1.SetParentRow(parent1Row, relation2));
+            Assert.Throws<InvalidConstraintException>(
+                () => childRow1.SetParentRow(parent1Row, relation2)
+            );
             Assert.Equal(DBNull.Value, childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
 
             childRow1.SetParentRow(parent1Row, relation1);
             Assert.Equal("p1c1", childRow1[childColumn1]);
             Assert.Equal(DBNull.Value, childRow1[childColumn2]);
-
 
             childRow1.SetParentRow(null, relation2);
             Assert.Equal("p1c1", childRow1[childColumn1]);

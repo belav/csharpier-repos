@@ -20,7 +20,10 @@ internal static class ExpressionVisitorExtensions
     /// <returns>
     ///     The modified expression list, if any of the elements were modified; otherwise, returns the original expression list.
     /// </returns>
-    public static IReadOnlyList<Expression> Visit(this ExpressionVisitor visitor, IReadOnlyList<Expression> nodes)
+    public static IReadOnlyList<Expression> Visit(
+        this ExpressionVisitor visitor,
+        IReadOnlyList<Expression> nodes
+    )
     {
         Expression[]? newNodes = null;
         for (int i = 0, n = nodes.Count; i < n; i++)
@@ -60,7 +63,8 @@ internal static class ExpressionVisitorExtensions
     public static IReadOnlyList<T> VisitAndConvert<T>(
         this ExpressionVisitor visitor,
         IReadOnlyList<T> nodes,
-        [CallerMemberName] string? callerName = null)
+        [CallerMemberName] string? callerName = null
+    )
         where T : Expression
     {
         T[]? newNodes = null;
@@ -68,7 +72,9 @@ internal static class ExpressionVisitorExtensions
         {
             if (visitor.Visit(nodes[i]) is not T node)
             {
-                throw new InvalidOperationException(CoreStrings.MustRewriteToSameNode(callerName, typeof(T).Name));
+                throw new InvalidOperationException(
+                    CoreStrings.MustRewriteToSameNode(callerName, typeof(T).Name)
+                );
             }
 
             if (newNodes is not null)
@@ -104,7 +110,11 @@ internal static class ExpressionVisitorExtensions
     ///     The modified node list, if any of the elements were modified;
     ///     otherwise, returns the original node list.
     /// </returns>
-    public static IReadOnlyList<T> Visit<T>(this ExpressionVisitor visitor, IReadOnlyList<T> nodes, Func<T, T> elementVisitor)
+    public static IReadOnlyList<T> Visit<T>(
+        this ExpressionVisitor visitor,
+        IReadOnlyList<T> nodes,
+        Func<T, T> elementVisitor
+    )
     {
         T[]? newNodes = null;
         for (int i = 0, n = nodes.Count; i < n; i++)

@@ -13,9 +13,14 @@ namespace System.Security.Cryptography
     {
         protected RandomNumberGenerator() { }
 
-        public static RandomNumberGenerator Create() => RandomNumberGeneratorImplementation.s_singleton;
+        public static RandomNumberGenerator Create() =>
+            RandomNumberGeneratorImplementation.s_singleton;
 
-        [Obsolete(Obsoletions.CryptoStringFactoryMessage, DiagnosticId = Obsoletions.CryptoStringFactoryDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.CryptoStringFactoryMessage,
+            DiagnosticId = Obsoletions.CryptoStringFactoryDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(CryptoConfig.CreateFromNameUnreferencedCodeMessage)]
         public static RandomNumberGenerator? Create(string rngName)
         {
@@ -133,8 +138,7 @@ namespace System.Security.Cryptography
             {
                 RandomNumberGeneratorImplementation.FillSpan(oneUintBytes);
                 result = mask & oneUint;
-            }
-            while (result > range);
+            } while (result > range);
 
             return (int)result + fromInclusive;
         }
@@ -234,12 +238,14 @@ namespace System.Security.Cryptography
             ArgumentOutOfRangeException.ThrowIfNegative(length);
 
 #pragma warning disable 8500
-            return string.Create(length,
+            return string.Create(
+                length,
                 (IntPtr)(&choices),
                 static (destination, state) =>
                 {
                     GetItemsCore(*(ReadOnlySpan<char>*)state, destination);
-                });
+                }
+            );
 #pragma warning restore 8500
         }
 
@@ -314,7 +320,9 @@ namespace System.Security.Cryptography
 
             const int RandomBufferSize = 64; // If this changes, the tests need to be updated since they try to exercise boundary conditions.
             Span<byte> randomBuffer = stackalloc byte[RandomBufferSize];
-            HexConverter.Casing casing = lowercase ? HexConverter.Casing.Lower : HexConverter.Casing.Upper;
+            HexConverter.Casing casing = lowercase
+                ? HexConverter.Casing.Lower
+                : HexConverter.Casing.Upper;
 
             // Don't overfill the buffer if the destination is smaller than the buffer size. We need to round up when
             // when dividing by two to account for an odd-length destination.
@@ -325,9 +333,9 @@ namespace System.Security.Cryptography
             // HexConverter can only write in multiples of two. If the length is odd, get back to an even length.
             if (destination.Length % 2 != 0)
             {
-                destination[0] = lowercase ?
-                    HexConverter.ToCharLower(remainingRandom[0]) :
-                    HexConverter.ToCharUpper(remainingRandom[0]);
+                destination[0] = lowercase
+                    ? HexConverter.ToCharLower(remainingRandom[0])
+                    : HexConverter.ToCharUpper(remainingRandom[0]);
 
                 destination = destination.Slice(1);
                 remainingRandom = remainingRandom.Slice(1);

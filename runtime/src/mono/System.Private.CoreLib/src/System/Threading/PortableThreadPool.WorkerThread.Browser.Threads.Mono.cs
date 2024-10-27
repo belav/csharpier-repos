@@ -25,23 +25,34 @@ namespace System.Threading
                     AppContextConfigHelper.GetInt32Config(
                         "System.Threading.ThreadPool.UnfairSemaphoreSpinLimit",
                         SemaphoreSpinCountDefault,
-                        false),
+                        false
+                    ),
                     onWait: () =>
                     {
                         if (NativeRuntimeEventSource.Log.IsEnabled())
                         {
                             NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadWait(
-                                (uint)ThreadPoolInstance._separated.counts.VolatileRead().NumExistingThreads);
+                                (uint)
+                                    ThreadPoolInstance
+                                        ._separated.counts.VolatileRead()
+                                        .NumExistingThreads
+                            );
                         }
-                    });
+                    }
+                );
 
             private static readonly ThreadStart s_workerThreadStart = WorkerThreadStart;
 
-            private sealed record SemaphoreWaitState(PortableThreadPool ThreadPoolInstance, LowLevelLock ThreadAdjustmentLock, WebWorkerEventLoop.KeepaliveToken KeepaliveToken)
+            private sealed record SemaphoreWaitState(
+                PortableThreadPool ThreadPoolInstance,
+                LowLevelLock ThreadAdjustmentLock,
+                WebWorkerEventLoop.KeepaliveToken KeepaliveToken
+            )
             {
                 public bool SpinWait = true;
 
-                public void ResetIteration() {
+                public void ResetIteration()
+                {
                     SpinWait = true;
                 }
             }
@@ -55,12 +66,20 @@ namespace System.Threading
                 if (NativeRuntimeEventSource.Log.IsEnabled())
                 {
                     NativeRuntimeEventSource.Log.ThreadPoolWorkerThreadStart(
-                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads);
+                        (uint)threadPoolInstance._separated.counts.VolatileRead().NumExistingThreads
+                    );
                 }
 
                 LowLevelLock threadAdjustmentLock = threadPoolInstance._threadAdjustmentLock;
                 var keepaliveToken = WebWorkerEventLoop.KeepalivePush();
-                SemaphoreWaitState state = new(threadPoolInstance, threadAdjustmentLock, keepaliveToken) { SpinWait = true };
+                SemaphoreWaitState state = new(
+                    threadPoolInstance,
+                    threadAdjustmentLock,
+                    keepaliveToken
+                )
+                {
+                    SpinWait = true,
+                };
                 // set up the callbacks for semaphore waits, tell
                 // emscripten to keep the thread alive, and return to
                 // the JS event loop.
@@ -68,17 +87,34 @@ namespace System.Threading
                 // return from thread start with keepalive - the thread will stay alive in the JS event loop
             }
 
-            private static readonly Action<LowLevelLifoAsyncWaitSemaphore, object?> s_WorkLoopSemaphoreSuccess = new(WorkLoopSemaphoreSuccess);
-            private static readonly Action<LowLevelLifoAsyncWaitSemaphore, object?> s_WorkLoopSemaphoreTimedOut = new(WorkLoopSemaphoreTimedOut);
+            private static readonly Action<
+                LowLevelLifoAsyncWaitSemaphore,
+                object?
+            > s_WorkLoopSemaphoreSuccess = new(WorkLoopSemaphoreSuccess);
+            private static readonly Action<
+                LowLevelLifoAsyncWaitSemaphore,
+                object?
+            > s_WorkLoopSemaphoreTimedOut = new(WorkLoopSemaphoreTimedOut);
 
-            private static void WaitForWorkLoop(LowLevelLifoAsyncWaitSemaphore semaphore, SemaphoreWaitState state)
+            private static void WaitForWorkLoop(
+                LowLevelLifoAsyncWaitSemaphore semaphore,
+                SemaphoreWaitState state
+            )
             {
-                semaphore.PrepareAsyncWait(ThreadPoolThreadTimeoutMs, s_WorkLoopSemaphoreSuccess, s_WorkLoopSemaphoreTimedOut, state);
+                semaphore.PrepareAsyncWait(
+                    ThreadPoolThreadTimeoutMs,
+                    s_WorkLoopSemaphoreSuccess,
+                    s_WorkLoopSemaphoreTimedOut,
+                    state
+                );
                 // thread should still be kept alive
                 Debug.Assert(state.KeepaliveToken.Valid);
             }
 
-            private static void WorkLoopSemaphoreSuccess(LowLevelLifoAsyncWaitSemaphore semaphore, object? stateObject)
+            private static void WorkLoopSemaphoreSuccess(
+                LowLevelLifoAsyncWaitSemaphore semaphore,
+                object? stateObject
+            )
             {
                 SemaphoreWaitState state = (SemaphoreWaitState)stateObject!;
                 WorkerDoWork(state.ThreadPoolInstance, ref state.SpinWait);
@@ -86,10 +122,14 @@ namespace System.Threading
                 WaitForWorkLoop(semaphore, state);
             }
 
-            private static void WorkLoopSemaphoreTimedOut(LowLevelLifoAsyncWaitSemaphore semaphore, object? stateObject)
+            private static void WorkLoopSemaphoreTimedOut(
+                LowLevelLifoAsyncWaitSemaphore semaphore,
+                object? stateObject
+            )
             {
                 SemaphoreWaitState state = (SemaphoreWaitState)stateObject!;
-                if (ShouldExitWorker(state.ThreadPoolInstance, state.ThreadAdjustmentLock)) {
+                if (ShouldExitWorker(state.ThreadPoolInstance, state.ThreadAdjustmentLock))
+                {
                     // we're done, kill the thread.
 
                     // we're wrapped in an emscripten eventloop handler which will consult the
@@ -97,7 +137,9 @@ namespace System.Threading
                     // unregister the thread from Mono
                     state.KeepaliveToken.Pop();
                     return;
-                } else {
+                }
+                else
+                {
                     // more work showed up while we were shutting down, go around one more time
                     state.ResetIteration();
                     WaitForWorkLoop(semaphore, state);

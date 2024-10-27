@@ -18,7 +18,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Symbols.ModuleInitializers
         [Fact]
         public void IgnoredOnReturnValue()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -39,13 +40,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnMethodParameter()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -65,13 +68,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnGenericParameter()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -91,13 +96,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnClass()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 [ModuleInitializer]
@@ -116,13 +123,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnEvent()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -141,13 +150,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnProperty()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -166,13 +177,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnIndexer()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -191,13 +204,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnField()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -216,13 +231,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnModule()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 [module: ModuleInitializer]
@@ -237,13 +254,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredOnAssembly()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 [assembly: ModuleInitializer]
@@ -258,13 +277,15 @@ namespace System.Runtime.CompilerServices { class ModuleInitializerAttribute : S
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
 
         [Fact]
         public void IgnoredWhenConstructorArgumentIsSpecified()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.CompilerServices;
 
 class C
@@ -291,7 +312,8 @@ namespace System.Runtime.CompilerServices
                     Assert.Equal(MetadataImportOptions.All, ((PEModuleSymbol)module).ImportOptions);
                     var rootModuleType = (TypeSymbol)module.GlobalNamespace.GetMember("<Module>");
                     Assert.Null(rootModuleType.GetMember(".cctor"));
-                });
+                }
+            );
         }
     }
 }

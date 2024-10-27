@@ -18,7 +18,6 @@ namespace System.Xml.XmlSchemaTests
             _output = output;
         }
 
-
         //-----------------------------------------------------------------------------------
 
         //[Variation(Desc = "v1.6 - Include: A(ns-a) include B(ns-a) which includes C(ns-a) ", Priority = 2, Params = new object[] { "include_v7_a.xsd", 1, "ns-a:e3" })]

@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,55 +26,60 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("decb9cc7-c08f-4ea5-be91-a8fc637ce2d2")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIPrefService
+    {
+        #region nsIPrefService
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int readUserPrefs([MarshalAs(UnmanagedType.Interface)] nsIFile aFile);
 
-	[Guid ("decb9cc7-c08f-4ea5-be91-a8fc637ce2d2")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIPrefService {
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int resetPrefs();
 
-#region nsIPrefService
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int readUserPrefs (
-				[MarshalAs (UnmanagedType.Interface)]   nsIFile aFile);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int resetUserPrefs();
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int resetPrefs ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int savePrefFile([MarshalAs(UnmanagedType.Interface)] nsIFile aFile);
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int resetUserPrefs ();
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getBranch(
+            [MarshalAs(UnmanagedType.LPStr)] string aPrefRoot,
+            [MarshalAs(UnmanagedType.Interface)] out nsIPrefBranch ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int savePrefFile (
-				[MarshalAs (UnmanagedType.Interface)]   nsIFile aFile);
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getDefaultBranch(
+            [MarshalAs(UnmanagedType.LPStr)] string aPrefRoot,
+            [MarshalAs(UnmanagedType.Interface)] out nsIPrefBranch ret
+        );
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getBranch (
-				[MarshalAs (UnmanagedType.LPStr)]   string aPrefRoot,[MarshalAs (UnmanagedType.Interface)]  out nsIPrefBranch ret);
+        #endregion
+    }
 
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getDefaultBranch (
-				[MarshalAs (UnmanagedType.LPStr)]   string aPrefRoot,[MarshalAs (UnmanagedType.Interface)]  out nsIPrefBranch ret);
-
-#endregion
-	}
-
-
-	internal class nsPrefService {
-		public static nsIPrefService GetProxy (Mono.WebBrowser.IWebBrowser control, nsIPrefService obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIPrefService).GUID, obj);
-			return o as nsIPrefService;
-		}
-	}
+    internal class nsPrefService
+    {
+        public static nsIPrefService GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIPrefService obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIPrefService).GUID, obj);
+            return o as nsIPrefService;
+        }
+    }
 }

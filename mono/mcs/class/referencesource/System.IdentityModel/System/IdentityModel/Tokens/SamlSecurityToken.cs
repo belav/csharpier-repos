@@ -4,31 +4,29 @@
 
 namespace System.IdentityModel.Tokens
 {
+    using System.CodeDom;
     using System.Collections;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Text;
-    using System.Xml.Serialization;
-    using System.Xml;
-    using System.Xml.Schema;
-    using System.CodeDom;
-    using System.Runtime.Serialization;
     using System.Globalization;
-    using System.Threading;
-    using System.IdentityModel.Selectors;
     using System.IdentityModel.Policy;
+    using System.IdentityModel.Selectors;
+    using System.IO;
     using System.Reflection;
+    using System.Runtime.Serialization;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-    using System.IO;
+    using System.Text;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.Schema;
+    using System.Xml.Serialization;
 
     public class SamlSecurityToken : SecurityToken
     {
         SamlAssertion assertion;
 
-        protected SamlSecurityToken()
-        {
-        }
+        protected SamlSecurityToken() { }
 
         public SamlSecurityToken(SamlAssertion assertion)
         {
@@ -51,10 +49,7 @@ namespace System.IdentityModel.Tokens
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
         {
-            get
-            {
-                return this.assertion.SecurityKeys;
-            }
+            get { return this.assertion.SecurityKeys; }
         }
 
         public SamlAssertion Assertion
@@ -101,17 +96,21 @@ namespace System.IdentityModel.Tokens
             if (typeof(T) == typeof(SamlAssertionKeyIdentifierClause))
                 return new SamlAssertionKeyIdentifierClause(this.Id) as T;
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnableToCreateTokenReference)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.UnableToCreateTokenReference))
+            );
         }
 
-        public override bool MatchesKeyIdentifierClause(SecurityKeyIdentifierClause keyIdentifierClause)
+        public override bool MatchesKeyIdentifierClause(
+            SecurityKeyIdentifierClause keyIdentifierClause
+        )
         {
-            SamlAssertionKeyIdentifierClause samlKeyIdentifierClause = keyIdentifierClause as SamlAssertionKeyIdentifierClause;
+            SamlAssertionKeyIdentifierClause samlKeyIdentifierClause =
+                keyIdentifierClause as SamlAssertionKeyIdentifierClause;
             if (samlKeyIdentifierClause != null)
                 return samlKeyIdentifierClause.Matches(this.Id);
 
             return false;
         }
     }
-
 }

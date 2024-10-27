@@ -10,16 +10,20 @@ namespace System.Collections.Specialized.Tests
 {
     public class HybridDictionaryValuesTests : ICollection_NonGeneric_Tests
     {
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
 
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
 
         protected override bool IsReadOnly => true;
         protected override bool SupportsSerialization => false;
 
-        protected override ICollection NonGenericICollectionFactory() => new HybridDictionary().Values;
+        protected override ICollection NonGenericICollectionFactory() =>
+            new HybridDictionary().Values;
 
         protected override ICollection NonGenericICollectionFactory(int count)
         {
@@ -39,9 +43,12 @@ namespace System.Collections.Specialized.Tests
             return Convert.ToBase64String(bytes);
         }
 
-        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) => Debug.Assert(false);
+        protected override void AddToCollection(ICollection collection, int numberOfItemsToAdd) =>
+            Debug.Assert(false);
 
-        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(ModifyOperation operations) => new List<ModifyEnumerable>();
+        protected override IEnumerable<ModifyEnumerable> GetModifyEnumerables(
+            ModifyOperation operations
+        ) => new List<ModifyEnumerable>();
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
@@ -61,36 +68,51 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException), () => collection.CopyTo(arr, count));
+            Assert.Throws(
+                count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException),
+                () => collection.CopyTo(arr, count)
+            );
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(int count)
+        public override void ICollection_NonGeneric_CopyTo_IndexEqualToArrayCount_ThrowsArgumentException(
+            int count
+        )
         {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
             if (count > 0)
-                Assert.Throws(count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException), () => collection.CopyTo(array, count));
+                Assert.Throws(
+                    count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException),
+                    () => collection.CopyTo(array, count)
+                );
             else
                 collection.CopyTo(array, count); // does nothing since the array is empty
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(int count)
+        public override void ICollection_NonGeneric_CopyTo_NotEnoughSpaceInOffsettedArray_ThrowsArgumentException(
+            int count
+        )
         {
             if (count > 0) // Want the T array to have at least 1 element
             {
                 ICollection collection = NonGenericICollectionFactory(count);
                 object[] array = new object[count];
-                Assert.Throws(count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException), () => collection.CopyTo(array, 1));
+                Assert.Throws(
+                    count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException),
+                    () => collection.CopyTo(array, 1)
+                );
             }
         }
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(int count)
+        public override void ICollection_NonGeneric_CopyTo_IndexLargerThanArrayCount_ThrowsAnyArgumentException(
+            int count
+        )
         {
             ICollection collection = NonGenericICollectionFactory(count);
             object[] array = new object[count];
@@ -101,7 +123,10 @@ namespace System.Collections.Specialized.Tests
                 return;
             }
 
-            Assert.Throws(count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException), () => collection.CopyTo(array, count + 1));
+            Assert.Throws(
+                count < 10 ? typeof(IndexOutOfRangeException) : typeof(ArgumentException),
+                () => collection.CopyTo(array, count + 1)
+            );
         }
     }
 }

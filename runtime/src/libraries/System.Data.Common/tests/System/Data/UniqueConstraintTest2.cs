@@ -25,7 +25,6 @@
 
 using Xunit;
 
-
 namespace System.Data.Tests
 {
     public class UniqueConstraintTest2
@@ -52,7 +51,8 @@ namespace System.Data.Tests
             DataTable dtParent = DataProvider.CreateParentDataTable();
             ds.Tables.Add(dtParent);
 
-            UniqueConstraint uc1, uc2;
+            UniqueConstraint uc1,
+                uc2;
             uc1 = new UniqueConstraint(dtParent.Columns[0]);
 
             uc2 = new UniqueConstraint(dtParent.Columns[1]);
@@ -155,7 +155,9 @@ namespace System.Data.Tests
             // Ctor - add existing column
             dtParent.Rows.Add(new object[] { 99, "str1", "str2" });
             dtParent.Constraints.Add(uc);
-            Assert.Throws<ConstraintException>(() => dtParent.Rows.Add(new object[] { 99, "str1", "str2" }));
+            Assert.Throws<ConstraintException>(
+                () => dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
+            );
 
             DataTable dtChild = DataProvider.CreateChildDataTable();
             uc = new UniqueConstraint(dtChild.Columns[1]);
@@ -173,13 +175,19 @@ namespace System.Data.Tests
 
             // Check the created UniqueConstraint
             dtParent.Columns[0].Unique = true;
-            Assert.Equal(typeof(UniqueConstraint).FullName, dtParent.Constraints[0].GetType().FullName);
+            Assert.Equal(
+                typeof(UniqueConstraint).FullName,
+                dtParent.Constraints[0].GetType().FullName
+            );
 
             // add UniqueConstarint that don't belong to the table
-            AssertExtensions.Throws<ArgumentException>(null, () =>
-            {
-                dtParent.Constraints.Add(uc);
-            });
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                {
+                    dtParent.Constraints.Add(uc);
+                }
+            );
         }
 
         [Fact]
@@ -207,12 +215,16 @@ namespace System.Data.Tests
             DataTable dtParent = DataProvider.CreateParentDataTable();
 
             // Ctor - parent
-            UniqueConstraint uc = new UniqueConstraint(new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] });
+            UniqueConstraint uc = new UniqueConstraint(
+                new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] }
+            );
 
             // Ctor - add existing column
             dtParent.Rows.Add(new object[] { 99, "str1", "str2" });
             dtParent.Constraints.Add(uc);
-            Assert.Throws<ConstraintException>(() => dtParent.Rows.Add(new object[] { 99, "str1", "str2" }));
+            Assert.Throws<ConstraintException>(
+                () => dtParent.Rows.Add(new object[] { 99, "str1", "str2" })
+            );
 
             DataTable dtChild = DataProvider.CreateChildDataTable();
             uc = new UniqueConstraint(new DataColumn[] { dtChild.Columns[0], dtChild.Columns[1] });
@@ -283,7 +295,10 @@ namespace System.Data.Tests
         {
             DataTable dtParent = DataProvider.CreateParentDataTable();
 
-            UniqueConstraint uc = new UniqueConstraint("myConstraint", new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] });
+            UniqueConstraint uc = new UniqueConstraint(
+                "myConstraint",
+                new DataColumn[] { dtParent.Columns[0], dtParent.Columns[1] }
+            );
 
             // Ctor name
             Assert.Equal("myConstraint", uc.ConstraintName);
@@ -293,7 +308,11 @@ namespace System.Data.Tests
         public void Ctor_NameDataColumnsPrimary()
         {
             DataTable dtParent = DataProvider.CreateParentDataTable();
-            UniqueConstraint uc = new UniqueConstraint("myConstraint", new DataColumn[] { dtParent.Columns[0] }, false);
+            UniqueConstraint uc = new UniqueConstraint(
+                "myConstraint",
+                new DataColumn[] { dtParent.Columns[0] },
+                false
+            );
             dtParent.Constraints.Add(uc);
 
             // primary key 1
@@ -303,7 +322,11 @@ namespace System.Data.Tests
             Assert.Equal("myConstraint", uc.ConstraintName);
 
             dtParent.Constraints.Remove(uc);
-            uc = new UniqueConstraint("myConstraint", new DataColumn[] { dtParent.Columns[0] }, true);
+            uc = new UniqueConstraint(
+                "myConstraint",
+                new DataColumn[] { dtParent.Columns[0] },
+                true
+            );
             dtParent.Constraints.Add(uc);
 
             // primary key 2

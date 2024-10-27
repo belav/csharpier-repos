@@ -28,46 +28,46 @@
 
 namespace System.Security.Cryptography
 {
-	public sealed class ECDsaOpenSsl : ECDsa
-	{
-		public ECDsaOpenSsl ()
-		{
-			throw new NotImplementedException ();
-		}
+    public sealed class ECDsaOpenSsl : ECDsa
+    {
+        public ECDsaOpenSsl()
+        {
+            throw new NotImplementedException();
+        }
 
-		public ECDsaOpenSsl (int keySize)
-		{
-			throw new NotImplementedException ();
-		}
+        public ECDsaOpenSsl(int keySize)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ECDsaOpenSsl(IntPtr handle)
-		{
-			throw new NotImplementedException ();
-		}
+        public ECDsaOpenSsl(IntPtr handle)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ECDsaOpenSsl (ECCurve curve)
-		{
-			throw new NotImplementedException ();
-		}
+        public ECDsaOpenSsl(ECCurve curve)
+        {
+            throw new NotImplementedException();
+        }
 
-		public ECDsaOpenSsl (SafeEvpPKeyHandle pkeyHandle)
-		{
-			throw new NotImplementedException ();
-		}
+        public ECDsaOpenSsl(SafeEvpPKeyHandle pkeyHandle)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override byte[] SignHash (byte[] hash)
-		{
-			throw new NotImplementedException ();
-		}
+        public override byte[] SignHash(byte[] hash)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool VerifyHash (byte[] hash, byte[] signature)
-		{
-			throw new NotImplementedException ();
-		}
+        public override bool VerifyHash(byte[] hash, byte[] signature)
+        {
+            throw new NotImplementedException();
+        }
 
-		public SafeEvpPKeyHandle DuplicateKeyHandle ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public SafeEvpPKeyHandle DuplicateKeyHandle()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

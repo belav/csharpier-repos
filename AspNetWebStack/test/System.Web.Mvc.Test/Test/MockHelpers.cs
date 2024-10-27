@@ -9,12 +9,19 @@ namespace System.Web.Mvc.Test
 {
     public static class MockHelpers
     {
-        public static ISetup<HttpContextBase> ExpectMvcVersionResponseHeader(this Mock<HttpContextBase> mock)
+        public static ISetup<HttpContextBase> ExpectMvcVersionResponseHeader(
+            this Mock<HttpContextBase> mock
+        )
         {
-            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly("System.Web.Mvc", typeof(Controller));
+            Version mvcVersion = VersionTestHelper.GetVersionFromAssembly(
+                "System.Web.Mvc",
+                typeof(Controller)
+            );
 
             string majorMinor = mvcVersion.Major + "." + mvcVersion.Minor;
-            return mock.Setup(r => r.Response.AppendHeader(MvcHandler.MvcVersionHeaderName, majorMinor));
+            return mock.Setup(r =>
+                r.Response.AppendHeader(MvcHandler.MvcVersionHeaderName, majorMinor)
+            );
         }
     }
 }

@@ -3,7 +3,6 @@
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class VerifyInvocationCount : Behavior
@@ -25,7 +24,6 @@ namespace Moq.Behaviors
         sealed class VerifyInvocationCount : Behavior
     */
     sealed class VerifyInvocationCount : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private int count;

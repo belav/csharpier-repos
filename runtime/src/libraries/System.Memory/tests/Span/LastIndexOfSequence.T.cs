@@ -10,7 +10,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart()
         {
-            Span<int> span = new Span<int>(new int[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            Span<int> span = new Span<int>(
+                new int[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             Span<int> value = new Span<int>(new int[] { 5, 1, 77 });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -28,7 +30,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart()
         {
-            Span<int> span = new Span<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 8, 9, 77, 0, 1 });
+            Span<int> span = new Span<int>(
+                new int[]
+                {
+                    0,
+                    1,
+                    77,
+                    2,
+                    3,
+                    77,
+                    77,
+                    4,
+                    5,
+                    77,
+                    77,
+                    77,
+                    88,
+                    6,
+                    6,
+                    77,
+                    77,
+                    8,
+                    9,
+                    77,
+                    0,
+                    1,
+                }
+            );
             Span<int> value = new Span<int>(new int[] { 77, 77, 88 });
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
@@ -37,7 +65,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch()
         {
-            Span<int> span = new Span<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            Span<int> span = new Span<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             Span<int> value = new Span<int>(new int[] { 77, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -46,7 +76,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch()
         {
-            Span<int> span = new Span<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            Span<int> span = new Span<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             Span<int> value = new Span<int>(new int[] { 100, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -74,7 +106,9 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue()
         {
             // A zero-length value is always "found" at the end of the span.
-            Span<int> span = new Span<int>(new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            Span<int> span = new Span<int>(
+                new int[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             Span<int> value = new Span<int>(Array.Empty<int>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);
@@ -128,7 +162,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart_String()
         {
-            Span<string> span = new Span<string>(new string[] { "5", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            Span<string> span = new Span<string>(
+                new string[]
+                {
+                    "5",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             Span<string> value = new Span<string>(new string[] { "5", "1", "77" });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -137,7 +194,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMultipleMatch_String()
         {
-            Span<string> span = new Span<string>(new string[] { "1", "2", "3", "1", "2", "3", "1", "2", "3" });
+            Span<string> span = new Span<string>(
+                new string[] { "1", "2", "3", "1", "2", "3", "1", "2", "3" }
+            );
             Span<string> value = new Span<string>(new string[] { "2", "3" });
             int index = span.LastIndexOf(value);
             Assert.Equal(7, index);
@@ -146,7 +205,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart_String()
         {
-            Span<string> span = new Span<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "8", "9", "77", "0", "1" });
+            Span<string> span = new Span<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "8",
+                    "9",
+                    "77",
+                    "0",
+                    "1",
+                }
+            );
             Span<string> value = new Span<string>(new string[] { "77", "77", "88" });
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
@@ -155,7 +240,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch_String()
         {
-            Span<string> span = new Span<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            Span<string> span = new Span<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             Span<string> value = new Span<string>(new string[] { "77", "77", "88", "99" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -164,7 +272,30 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch_String()
         {
-            Span<string> span = new Span<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            Span<string> span = new Span<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             Span<string> value = new Span<string>(new string[] { "100", "77", "88", "99" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -182,7 +313,11 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceJustPastVeryEnd_String()
         {
-            Span<string> span = new Span<string>(new string[] { "0", "1", "2", "3", "4", "5" }, 0, 5);
+            Span<string> span = new Span<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" },
+                0,
+                5
+            );
             Span<string> value = new Span<string>(new string[] { "3", "4", "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -192,7 +327,30 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue_String()
         {
             // A zero-length value is always "found" at the end of the span.
-            Span<string> span = new Span<string>(new string[] { "0", "1", "77", "2", "3", "77", "77", "4", "5", "77", "77", "77", "88", "6", "6", "77", "77", "88", "9" });
+            Span<string> span = new Span<string>(
+                new string[]
+                {
+                    "0",
+                    "1",
+                    "77",
+                    "2",
+                    "3",
+                    "77",
+                    "77",
+                    "4",
+                    "5",
+                    "77",
+                    "77",
+                    "77",
+                    "88",
+                    "6",
+                    "6",
+                    "77",
+                    "77",
+                    "88",
+                    "9",
+                }
+            );
             Span<string> value = new Span<string>(Array.Empty<string>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);
@@ -228,15 +386,26 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceLengthOneValueJustPasttVeryEnd_String()
         {
-            Span<string> span = new Span<string>(new string[] { "0", "1", "2", "3", "4", "5" }, 0, 5);
+            Span<string> span = new Span<string>(
+                new string[] { "0", "1", "2", "3", "4", "5" },
+                0,
+                5
+            );
             Span<string> value = new Span<string>(new string[] { "5" });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
         }
 
         [Theory]
-        [MemberData(nameof(TestHelpers.LastIndexOfNullSequenceData), MemberType = typeof(TestHelpers))]
-        public static void LastIndexOfNullSequence_String(string[] spanInput, string[] searchInput, int expected)
+        [MemberData(
+            nameof(TestHelpers.LastIndexOfNullSequenceData),
+            MemberType = typeof(TestHelpers)
+        )]
+        public static void LastIndexOfNullSequence_String(
+            string[] spanInput,
+            string[] searchInput,
+            int expected
+        )
         {
             Span<string> theStrings = spanInput;
             Assert.Equal(expected, theStrings.LastIndexOf(searchInput));

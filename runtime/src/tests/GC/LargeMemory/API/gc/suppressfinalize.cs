@@ -3,25 +3,30 @@
 
 using System;
 
-public sealed class SuppressFinalizeTest {
-
+public sealed class SuppressFinalizeTest
+{
     private uint size = 0;
 
-    public SuppressFinalizeTest(uint size ) {
+    public SuppressFinalizeTest(uint size)
+    {
         this.size = size;
     }
 
-
-    public bool RunTests() {
-
+    public bool RunTests()
+    {
         LargeObject lo;
-        try {
+        try
+        {
             lo = new LargeObject(size, true);
             GC.SuppressFinalize(lo);
-        } catch (OutOfMemoryException) {
+        }
+        catch (OutOfMemoryException)
+        {
             Console.WriteLine("Large Memory Machine required");
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Console.WriteLine("Unexpected Exception:");
             Console.WriteLine(e);
             return false;
@@ -31,13 +36,17 @@ public sealed class SuppressFinalizeTest {
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        return (LargeObject.FinalizedCount==0);
+        return (LargeObject.FinalizedCount == 0);
     }
 
-    public static int Main(string[] args) {
-        SuppressFinalizeTest test = new SuppressFinalizeTest(MemCheck.ParseSizeMBAndLimitByAvailableMem(args));
+    public static int Main(string[] args)
+    {
+        SuppressFinalizeTest test = new SuppressFinalizeTest(
+            MemCheck.ParseSizeMBAndLimitByAvailableMem(args)
+        );
 
-        if (test.RunTests()) {
+        if (test.RunTests())
+        {
             Console.WriteLine("Test passed");
             return 100;
         }

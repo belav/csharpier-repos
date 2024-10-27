@@ -66,9 +66,11 @@ namespace System.Security.Authentication.ExtendedProtection
             return false;
         }
 
-        public ServiceNameCollection Merge(string serviceName) => new ServiceNameCollection(InnerList, serviceName);
+        public ServiceNameCollection Merge(string serviceName) =>
+            new ServiceNameCollection(InnerList, serviceName);
 
-        public ServiceNameCollection Merge(IEnumerable serviceNames) => new ServiceNameCollection(InnerList, serviceNames);
+        public ServiceNameCollection Merge(IEnumerable serviceNames) =>
+            new ServiceNameCollection(InnerList, serviceNames);
 
         /// <summary>
         /// Normalize, check for duplicates, and add each unique value.
@@ -211,7 +213,14 @@ namespace System.Security.Authentication.ExtendedProtection
                     port = hostAndPort.Slice(colonIndex + 1); // Excludes colon
 
                     // Loosely validate the port just to make sure it was a port and not something else.
-                    if (!ushort.TryParse(port, NumberStyles.Integer, CultureInfo.InvariantCulture, out _))
+                    if (
+                        !ushort.TryParse(
+                            port,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out _
+                        )
+                    )
                     {
                         return inputServiceName;
                     }
@@ -222,9 +231,10 @@ namespace System.Security.Authentication.ExtendedProtection
 
                 // Re-validate the host.
                 hostType = Uri.CheckHostName(
-                    host.Length == hostPortAndDistinguisher.Length ?
-                        hostPortAndDistinguisher :
-                        host.ToString());
+                    host.Length == hostPortAndDistinguisher.Length
+                        ? hostPortAndDistinguisher
+                        : host.ToString()
+                );
             }
 
             if (hostType != UriHostNameType.Dns)
@@ -242,18 +252,37 @@ namespace System.Security.Authentication.ExtendedProtection
 
             // We need to avoid any unexpected exceptions on this code path.
             const string HttpSchemeAndDelimiter = UriScheme.Http + UriScheme.SchemeDelimiter;
-            if (!Uri.TryCreate(string.Concat(HttpSchemeAndDelimiter, host), UriKind.Absolute, out constructedUri))
+            if (
+                !Uri.TryCreate(
+                    string.Concat(HttpSchemeAndDelimiter, host),
+                    UriKind.Absolute,
+                    out constructedUri
+                )
+            )
             {
                 return inputServiceName;
             }
 
             string normalizedHost = constructedUri.GetComponents(
-                UriComponents.NormalizedHost, UriFormat.SafeUnescaped);
+                UriComponents.NormalizedHost,
+                UriFormat.SafeUnescaped
+            );
 
-            string normalizedServiceName = string.Concat(prefix, normalizedHost, port, distinguisher);
+            string normalizedServiceName = string.Concat(
+                prefix,
+                normalizedHost,
+                port,
+                distinguisher
+            );
 
             // Don't return the new one unless we absolutely have to.  It may have only changed casing.
-            if (string.Equals(inputServiceName, normalizedServiceName, StringComparison.OrdinalIgnoreCase))
+            if (
+                string.Equals(
+                    inputServiceName,
+                    normalizedServiceName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return inputServiceName;
             }

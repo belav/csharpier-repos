@@ -13,10 +13,13 @@ namespace System.ServiceModel.Activities.Tracking.Configuration
     /// Configure StateMachineStateQueries element in DotNetConfig.xsd file.
     /// </summary>
     [Fx.Tag.XamlVisible(false)]
-    [ConfigurationCollection(typeof(StateMachineStateQueryElement),
+    [ConfigurationCollection(
+        typeof(StateMachineStateQueryElement),
         CollectionType = ConfigurationElementCollectionType.BasicMap,
-        AddItemName = TrackingConfigurationStrings.StateMachineStateQuery)]
-    public class StateMachineStateQueryElementCollection : TrackingConfigurationCollection<StateMachineStateQueryElement>
+        AddItemName = TrackingConfigurationStrings.StateMachineStateQuery
+    )]
+    public class StateMachineStateQueryElementCollection
+        : TrackingConfigurationCollection<StateMachineStateQueryElement>
     {
         /// <summary>
         /// Generate the StateMachineTrackingQuery element in the DotNetConfig.xsd file.

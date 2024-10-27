@@ -15,7 +15,7 @@ public class UploadFilesController : Controller
         {
             Name = user.Name,
             Age = user.Age,
-            Biography = await user.ReadBiography()
+            Biography = await user.ReadBiography(),
         };
 
         return resultUser;
@@ -32,7 +32,10 @@ public class UploadFilesController : Controller
         var files = new Dictionary<string, List<string>>();
         foreach (var keyValuePair in product.Specs)
         {
-            files.Add(keyValuePair.Key, keyValuePair.Value?.Select(formFile => formFile?.FileName).ToList());
+            files.Add(
+                keyValuePair.Key,
+                keyValuePair.Value?.Select(formFile => formFile?.FileName).ToList()
+            );
         }
 
         return new { Name = product.Name, Specs = files };

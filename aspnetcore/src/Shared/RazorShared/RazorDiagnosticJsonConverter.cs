@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Razor.Serialization;
 
 internal sealed class RazorDiagnosticJsonConverter : JsonConverter
 {
-    public static readonly RazorDiagnosticJsonConverter Instance = new RazorDiagnosticJsonConverter();
+    public static readonly RazorDiagnosticJsonConverter Instance =
+        new RazorDiagnosticJsonConverter();
     private const string RazorDiagnosticMessageKey = "Message";
 
     public override bool CanConvert(Type objectType)
@@ -19,7 +20,12 @@ internal sealed class RazorDiagnosticJsonConverter : JsonConverter
         return typeof(RazorDiagnostic).IsAssignableFrom(objectType);
     }
 
-    public override object ReadJson(JsonReader reader, Type objectType, object existingValue, JsonSerializer serializer)
+    public override object ReadJson(
+        JsonReader reader,
+        Type objectType,
+        object existingValue,
+        JsonSerializer serializer
+    )
     {
         if (reader.TokenType != JsonToken.StartObject)
         {
@@ -38,7 +44,11 @@ internal sealed class RazorDiagnosticJsonConverter : JsonConverter
         var characterIndex = span[nameof(SourceSpan.CharacterIndex)].Value<int>();
         var length = span[nameof(SourceSpan.Length)].Value<int>();
 
-        var descriptor = new RazorDiagnosticDescriptor(id, () => message, (RazorDiagnosticSeverity)severity);
+        var descriptor = new RazorDiagnosticDescriptor(
+            id,
+            () => message,
+            (RazorDiagnosticSeverity)severity
+        );
         var sourceSpan = new SourceSpan(filePath, absoluteIndex, lineIndex, characterIndex, length);
 
         return RazorDiagnostic.Create(descriptor, sourceSpan);
@@ -51,7 +61,11 @@ internal sealed class RazorDiagnosticJsonConverter : JsonConverter
         writer.WriteStartObject();
         WriteProperty(writer, nameof(RazorDiagnostic.Id), diagnostic.Id);
         WriteProperty(writer, nameof(RazorDiagnostic.Severity), (int)diagnostic.Severity);
-        WriteProperty(writer, RazorDiagnosticMessageKey, diagnostic.GetMessage(CultureInfo.CurrentCulture));
+        WriteProperty(
+            writer,
+            RazorDiagnosticMessageKey,
+            diagnostic.GetMessage(CultureInfo.CurrentCulture)
+        );
 
         writer.WritePropertyName(nameof(RazorDiagnostic.Span));
         writer.WriteStartObject();

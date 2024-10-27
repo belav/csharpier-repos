@@ -20,7 +20,8 @@ public class Test_struct2
     [Fact]
     public static void TestEntryPoint()
     {
-        S sM, sM2;
+        S sM,
+            sM2;
 
         sM.str = "test";
         sM2.str = "test2";

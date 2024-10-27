@@ -14,6 +14,7 @@ namespace Microsoft.DotNet.Cli.Build.Framework
         {
             return "\x1B[31m" + text + "\x1B[39m";
         }
+
         public static string Green(this string text)
         {
             return "\x1B[32m" + text + "\x1B[39m";

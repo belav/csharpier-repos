@@ -39,13 +39,16 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
 
             public T this[int index] => _items[index];
             public int Count => _items.Length;
+
             public IEnumerator<T> GetEnumerator() => throw new NotImplementedException();
+
             IEnumerator IEnumerable.GetEnumerator() => throw new NotImplementedException();
         }
 
         private class SignlessEqualityComparer : IEqualityComparer<int>
         {
             public bool Equals(int x, int y) => Math.Abs(x) == Math.Abs(y);
+
             public int GetHashCode(int obj) => throw new NotImplementedException();
         }
 
@@ -55,7 +58,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, Enumerable.Range(1, 5).IndexOf(6));
             Assert.Equal(2, Enumerable.Range(1, 5).IndexOf(3));
 
-            Assert.Equal(-1, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(6));
+            Assert.Equal(
+                -1,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(6)
+            );
             Assert.Equal(0, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(5));
 
             Assert.Equal(-1, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(6));
@@ -70,8 +76,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(-1, Enumerable.Range(1, 5).IndexOf(-6, comparer));
             Assert.Equal(2, Enumerable.Range(1, 5).IndexOf(-3, comparer));
 
-            Assert.Equal(-1, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-6, comparer));
-            Assert.Equal(0, ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-5, comparer));
+            Assert.Equal(
+                -1,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-6, comparer)
+            );
+            Assert.Equal(
+                0,
+                ((IEnumerable<int>)SpecializedCollections.SingletonList(5)).IndexOf(-5, comparer)
+            );
 
             Assert.Equal(-1, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(-6, comparer));
             Assert.Equal(0, ((IEnumerable<int>)new ReadOnlyList<int>(5)).IndexOf(-5, comparer));

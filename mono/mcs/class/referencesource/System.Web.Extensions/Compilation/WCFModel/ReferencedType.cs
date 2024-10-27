@@ -31,15 +31,8 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string TypeName
         {
-            get
-            {
-                return m_TypeName;
-            }
-            set
-            {
-                m_TypeName = value;
-            }
+            get { return m_TypeName; }
+            set { m_TypeName = value; }
         }
     }
 }
-

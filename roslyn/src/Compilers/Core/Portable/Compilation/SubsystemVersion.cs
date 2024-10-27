@@ -13,11 +13,11 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis
 {
     /// <summary>
-    /// Represents subsystem version, see /subsystemversion command line 
+    /// Represents subsystem version, see /subsystemversion command line
     /// option for details and valid values.
-    /// 
+    ///
     /// The following table lists common subsystem versions of Windows.
-    /// 
+    ///
     /// Windows version             Subsystem version
     ///   - Windows 2000                5.00
     ///   - Windows XP                  5.01
@@ -48,7 +48,7 @@ namespace Microsoft.CodeAnalysis
         public static SubsystemVersion Windows2000 => new SubsystemVersion(5, 0);
 
         /// <summary>
-        /// Subsystem version: Windows XP 
+        /// Subsystem version: Windows XP
         /// </summary>
         public static SubsystemVersion WindowsXP => new SubsystemVersion(5, 1);
 
@@ -107,9 +107,17 @@ namespace Microsoft.CodeAnalysis
 
                 int majorValue;
 
-                if (major != major.Trim() ||
-                    !int.TryParse(major, NumberStyles.None, CultureInfo.InvariantCulture, out majorValue) ||
-                    majorValue >= 65356 || majorValue < 0)
+                if (
+                    major != major.Trim()
+                    || !int.TryParse(
+                        major,
+                        NumberStyles.None,
+                        CultureInfo.InvariantCulture,
+                        out majorValue
+                    )
+                    || majorValue >= 65356
+                    || majorValue < 0
+                )
                 {
                     return false;
                 }
@@ -120,9 +128,17 @@ namespace Microsoft.CodeAnalysis
 
                 if (minor != null)
                 {
-                    if (minor != minor.Trim() ||
-                        !int.TryParse(minor, NumberStyles.None, CultureInfo.InvariantCulture, out minorValue) ||
-                        minorValue >= 65356 || minorValue < 0)
+                    if (
+                        minor != minor.Trim()
+                        || !int.TryParse(
+                            minor,
+                            NumberStyles.None,
+                            CultureInfo.InvariantCulture,
+                            out minorValue
+                        )
+                        || minorValue >= 65356
+                        || minorValue < 0
+                    )
                     {
                         return false;
                     }
@@ -168,7 +184,10 @@ namespace Microsoft.CodeAnalysis
                     return Windows8;
 
                 default:
-                    throw new ArgumentOutOfRangeException(CodeAnalysisResources.OutputKindNotSupported, "outputKind");
+                    throw new ArgumentOutOfRangeException(
+                        CodeAnalysisResources.OutputKindNotSupported,
+                        "outputKind"
+                    );
             }
         }
 
@@ -179,9 +198,10 @@ namespace Microsoft.CodeAnalysis
         {
             get
             {
-                return this.Major >= 0 &&
-                       this.Minor >= 0 &&
-                       this.Major < 65536 && this.Minor < 65536;
+                return this.Major >= 0
+                    && this.Minor >= 0
+                    && this.Major < 65536
+                    && this.Minor < 65536;
             }
         }
 

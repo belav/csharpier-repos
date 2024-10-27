@@ -235,17 +235,23 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (policyData.ApplicationCertPolicies != null)
             {
-                applicationCertPolicies = ReadCertPolicyExtension(policyData.ApplicationCertPolicies);
+                applicationCertPolicies = ReadCertPolicyExtension(
+                    policyData.ApplicationCertPolicies
+                );
             }
 
             if (policyData.CertPolicies != null)
             {
-                policy.DeclaredCertificatePolicies = ReadCertPolicyExtension(policyData.CertPolicies);
+                policy.DeclaredCertificatePolicies = ReadCertPolicyExtension(
+                    policyData.CertPolicies
+                );
             }
 
-            if (policyData.CertPolicyMappings!= null)
+            if (policyData.CertPolicyMappings != null)
             {
-                policy.PolicyMapping = ReadCertPolicyMappingsExtension(policyData.CertPolicyMappings);
+                policy.PolicyMapping = ReadCertPolicyMappingsExtension(
+                    policyData.CertPolicyMappings
+                );
             }
 
             if (policyData.CertPolicyConstraints != null)
@@ -261,7 +267,9 @@ namespace System.Security.Cryptography.X509Certificates
 
             if (policyData.InhibitAnyPolicyExtension != null)
             {
-                policy.InhibitAnyDepth = ReadInhibitAnyPolicyExtension(policyData.InhibitAnyPolicyExtension);
+                policy.InhibitAnyDepth = ReadInhibitAnyPolicyExtension(
+                    policyData.InhibitAnyPolicyExtension
+                );
             }
 
             policy.DeclaredApplicationPolicies = applicationCertPolicies ?? ekus;
@@ -269,8 +277,12 @@ namespace System.Security.Cryptography.X509Certificates
             policy.ImplicitAnyApplicationPolicy = policy.DeclaredApplicationPolicies == null;
             policy.ImplicitAnyCertificatePolicy = policy.DeclaredCertificatePolicies == null;
 
-            policy.SpecifiedAnyApplicationPolicy = CheckExplicitAnyPolicy(policy.DeclaredApplicationPolicies);
-            policy.SpecifiedAnyCertificatePolicy = CheckExplicitAnyPolicy(policy.DeclaredCertificatePolicies);
+            policy.SpecifiedAnyApplicationPolicy = CheckExplicitAnyPolicy(
+                policy.DeclaredApplicationPolicies
+            );
+            policy.SpecifiedAnyCertificatePolicy = CheckExplicitAnyPolicy(
+                policy.DeclaredCertificatePolicies
+            );
 
             return policy;
         }
@@ -301,11 +313,15 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static void ReadCertPolicyConstraintsExtension(byte[] rawData, CertificatePolicy policy)
+        private static void ReadCertPolicyConstraintsExtension(
+            byte[] rawData,
+            CertificatePolicy policy
+        )
         {
             PolicyConstraintsAsn constraints = PolicyConstraintsAsn.Decode(
                 rawData,
-                AsnEncodingRules.DER);
+                AsnEncodingRules.DER
+            );
 
             policy.RequireExplicitPolicyDepth = constraints.RequireExplicitPolicyDepth;
             policy.InhibitMappingDepth = constraints.InhibitMappingDepth;
@@ -346,7 +362,11 @@ namespace System.Security.Cryptography.X509Certificates
                 HashSet<string> policies = new HashSet<string>();
                 while (sequenceReader.HasData)
                 {
-                    PolicyInformationAsn.Decode(ref sequenceReader, rawData, out PolicyInformationAsn policyInformation);
+                    PolicyInformationAsn.Decode(
+                        ref sequenceReader,
+                        rawData,
+                        out PolicyInformationAsn policyInformation
+                    );
                     policies.Add(policyInformation.PolicyIdentifier);
 
                     // There is an optional policy qualifier here, but it is for information
@@ -364,7 +384,9 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static List<CertificatePolicyMappingAsn> ReadCertPolicyMappingsExtension(byte[] rawData)
+        private static List<CertificatePolicyMappingAsn> ReadCertPolicyMappingsExtension(
+            byte[] rawData
+        )
         {
             try
             {
@@ -372,10 +394,14 @@ namespace System.Security.Cryptography.X509Certificates
                 AsnValueReader sequenceReader = reader.ReadSequence();
                 reader.ThrowIfNotEmpty();
 
-                List<CertificatePolicyMappingAsn> mappings = new List<CertificatePolicyMappingAsn>();
+                List<CertificatePolicyMappingAsn> mappings =
+                    new List<CertificatePolicyMappingAsn>();
                 while (sequenceReader.HasData)
                 {
-                    CertificatePolicyMappingAsn.Decode(ref sequenceReader, out CertificatePolicyMappingAsn mapping);
+                    CertificatePolicyMappingAsn.Decode(
+                        ref sequenceReader,
+                        out CertificatePolicyMappingAsn mapping
+                    );
                     mappings.Add(mapping);
                 }
 

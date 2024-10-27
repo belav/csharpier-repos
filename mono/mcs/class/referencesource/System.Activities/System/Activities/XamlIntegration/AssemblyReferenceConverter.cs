@@ -20,22 +20,31 @@ namespace System.Activities.XamlIntegration
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             string stringValue = value as string;
             if (stringValue != null)
             {
                 AssemblyReference result = new AssemblyReference
                 {
-                    AssemblyName = new AssemblyName(stringValue)
+                    AssemblyName = new AssemblyName(stringValue),
                 };
 
                 XamlSchemaContext schemaContext = GetSchemaContext(context);
-                if (schemaContext != null &&
-                    schemaContext.ReferenceAssemblies != null &&
-                    schemaContext.ReferenceAssemblies.Count > 0)
+                if (
+                    schemaContext != null
+                    && schemaContext.ReferenceAssemblies != null
+                    && schemaContext.ReferenceAssemblies.Count > 0
+                )
                 {
-                    Assembly assembly = ResolveAssembly(result.AssemblyName, schemaContext.ReferenceAssemblies);
+                    Assembly assembly = ResolveAssembly(
+                        result.AssemblyName,
+                        schemaContext.ReferenceAssemblies
+                    );
                     if (assembly != null)
                     {
                         result.Assembly = assembly;
@@ -59,7 +68,12 @@ namespace System.Activities.XamlIntegration
             return destinationType == typeof(string);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             AssemblyReference reference = value as AssemblyReference;
             if (destinationType == typeof(string) && reference != null)
@@ -71,13 +85,18 @@ namespace System.Activities.XamlIntegration
                 else if (reference.Assembly != null)
                 {
                     XamlSchemaContext schemaContext = GetSchemaContext(context);
-                    if (schemaContext == null || schemaContext.FullyQualifyAssemblyNamesInClrNamespaces)
+                    if (
+                        schemaContext == null
+                        || schemaContext.FullyQualifyAssemblyNamesInClrNamespaces
+                    )
                     {
                         return reference.Assembly.FullName;
                     }
                     else
                     {
-                        AssemblyName assemblyName = AssemblyReference.GetFastAssemblyName(reference.Assembly);
+                        AssemblyName assemblyName = AssemblyReference.GetFastAssemblyName(
+                            reference.Assembly
+                        );
                         return assemblyName.Name;
                     }
                 }
@@ -92,11 +111,16 @@ namespace System.Activities.XamlIntegration
 
         private static XamlSchemaContext GetSchemaContext(ITypeDescriptorContext context)
         {
-            IXamlSchemaContextProvider provider = context.GetService(typeof(IXamlSchemaContextProvider)) as IXamlSchemaContextProvider;
+            IXamlSchemaContextProvider provider =
+                context.GetService(typeof(IXamlSchemaContextProvider))
+                as IXamlSchemaContextProvider;
             return provider != null ? provider.SchemaContext : null;
         }
 
-        private static Assembly ResolveAssembly(AssemblyName assemblyReference, IEnumerable<Assembly> assemblies)
+        private static Assembly ResolveAssembly(
+            AssemblyName assemblyReference,
+            IEnumerable<Assembly> assemblies
+        )
         {
             foreach (Assembly assembly in assemblies)
             {

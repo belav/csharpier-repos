@@ -27,7 +27,8 @@ internal static class TestContextFactory
         TimeProvider timeProvider = null,
         DateHeaderValueManager dateHeaderValueManager = null,
         ConnectionManager connectionManager = null,
-        Heartbeat heartbeat = null)
+        Heartbeat heartbeat = null
+    )
     {
         var context = new ServiceContext
         {
@@ -39,7 +40,7 @@ internal static class TestContextFactory
             ConnectionManager = connectionManager,
             Heartbeat = heartbeat,
             ServerOptions = serverOptions,
-            Metrics = new KestrelMetrics(new TestMeterFactory())
+            Metrics = new KestrelMetrics(new TestMeterFactory()),
         };
 
         return context;
@@ -53,7 +54,8 @@ internal static class TestContextFactory
         MemoryPool<byte> memoryPool = null,
         IPEndPoint localEndPoint = null,
         IPEndPoint remoteEndPoint = null,
-        ITimeoutControl timeoutControl = null)
+        ITimeoutControl timeoutControl = null
+    )
     {
         var context = new HttpConnectionContext(
             "TestConnectionId",
@@ -65,7 +67,8 @@ internal static class TestContextFactory
             memoryPool ?? MemoryPool<byte>.Shared,
             localEndPoint,
             remoteEndPoint,
-            CreateMetricsContext(connectionContext));
+            CreateMetricsContext(connectionContext)
+        );
         context.TimeoutControl = timeoutControl;
         context.Transport = transport;
 
@@ -79,7 +82,8 @@ internal static class TestContextFactory
         MemoryPool<byte> memoryPool = null,
         IPEndPoint localEndPoint = null,
         IPEndPoint remoteEndPoint = null,
-        ITimeoutControl timeoutControl = null)
+        ITimeoutControl timeoutControl = null
+    )
     {
         var http3ConnectionContext = new HttpMultiplexedConnectionContext(
             "TEST",
@@ -90,9 +94,10 @@ internal static class TestContextFactory
             connectionFeatures ?? new FeatureCollection(),
             memoryPool ?? PinnedBlockMemoryPoolFactory.Create(),
             localEndPoint,
-            remoteEndPoint)
+            remoteEndPoint
+        )
         {
-            TimeoutControl = timeoutControl
+            TimeoutControl = timeoutControl,
         };
 
         return http3ConnectionContext;
@@ -102,13 +107,15 @@ internal static class TestContextFactory
         ServerAddressesFeature serverAddressesFeature,
         KestrelServerOptions serverOptions,
         ILogger logger,
-        Func<ListenOptions, Task> createBinding)
+        Func<ListenOptions, Task> createBinding
+    )
     {
         var context = new AddressBindContext(
             serverAddressesFeature,
             serverOptions,
             logger,
-            (listenOptions, cancellationToken) => createBinding(listenOptions));
+            (listenOptions, cancellationToken) => createBinding(listenOptions)
+        );
 
         return context;
     }
@@ -117,13 +124,15 @@ internal static class TestContextFactory
         ServerAddressesFeature serverAddressesFeature,
         KestrelServerOptions serverOptions,
         ILogger logger,
-        Func<ListenOptions, CancellationToken, Task> createBinding)
+        Func<ListenOptions, CancellationToken, Task> createBinding
+    )
     {
         var context = new AddressBindContext(
             serverAddressesFeature,
             serverOptions,
             logger,
-            createBinding);
+            createBinding
+        );
 
         return context;
     }
@@ -141,11 +150,11 @@ internal static class TestContextFactory
         Http2PeerSettings serverPeerSettings = null,
         Http2FrameWriter frameWriter = null,
         InputFlowControl connectionInputFlowControl = null,
-        ITimeoutControl timeoutControl = null)
+        ITimeoutControl timeoutControl = null
+    )
     {
         var connectionContext = new DefaultConnectionContext();
-        var context = new Http2StreamContext
-        (
+        var context = new Http2StreamContext(
             connectionId: connectionId ?? "TestConnectionId",
             protocols: HttpProtocols.Http2,
             altSvcHeader: null,
@@ -178,7 +187,8 @@ internal static class TestContextFactory
         IPEndPoint remoteEndPoint = null,
         IDuplexPipe transport = null,
         ITimeoutControl timeoutControl = null,
-        IHttp3StreamLifetimeHandler streamLifetimeHandler = null)
+        IHttp3StreamLifetimeHandler streamLifetimeHandler = null
+    )
     {
         var http3ConnectionContext = CreateHttp3ConnectionContext(
             new TestMultiplexedConnectionContext(),
@@ -187,15 +197,15 @@ internal static class TestContextFactory
             memoryPool,
             localEndPoint,
             remoteEndPoint,
-            timeoutControl);
+            timeoutControl
+        );
 
         var http3Conection = new Http3Connection(http3ConnectionContext)
         {
-            _streamLifetimeHandler = streamLifetimeHandler
+            _streamLifetimeHandler = streamLifetimeHandler,
         };
 
-        return new Http3StreamContext
-        (
+        return new Http3StreamContext(
             connectionId: connectionId ?? "TestConnectionId",
             protocols: HttpProtocols.Http3,
             altSvcHeader: null,
@@ -216,20 +226,22 @@ internal static class TestContextFactory
 
     public static ConnectionMetricsContext CreateMetricsContext(ConnectionContext connectionContext)
     {
-        return new ConnectionMetricsContext(connectionContext,
-            currentConnectionsCounterEnabled: false, connectionDurationEnabled: false, queuedConnectionsCounterEnabled: false,
-            queuedRequestsCounterEnabled: false, currentUpgradedRequestsCounterEnabled: false, currentTlsHandshakesCounterEnabled: false);
+        return new ConnectionMetricsContext(
+            connectionContext,
+            currentConnectionsCounterEnabled: false,
+            connectionDurationEnabled: false,
+            queuedConnectionsCounterEnabled: false,
+            queuedRequestsCounterEnabled: false,
+            currentUpgradedRequestsCounterEnabled: false,
+            currentTlsHandshakesCounterEnabled: false
+        );
     }
 
     private class TestHttp2StreamLifetimeHandler : IHttp2StreamLifetimeHandler
     {
-        public void DecrementActiveClientStreamCount()
-        {
-        }
+        public void DecrementActiveClientStreamCount() { }
 
-        public void OnStreamCompleted(Http2Stream stream)
-        {
-        }
+        public void OnStreamCompleted(Http2Stream stream) { }
     }
 
     private class TestMultiplexedConnectionContext : MultiplexedConnectionContext
@@ -238,20 +250,21 @@ internal static class TestContextFactory
         public override IFeatureCollection Features { get; }
         public override IDictionary<object, object> Items { get; set; }
 
-        public override void Abort()
-        {
-        }
+        public override void Abort() { }
 
-        public override void Abort(ConnectionAbortedException abortReason)
-        {
-        }
+        public override void Abort(ConnectionAbortedException abortReason) { }
 
-        public override ValueTask<ConnectionContext> AcceptAsync(CancellationToken cancellationToken = default)
+        public override ValueTask<ConnectionContext> AcceptAsync(
+            CancellationToken cancellationToken = default
+        )
         {
             return default;
         }
 
-        public override ValueTask<ConnectionContext> ConnectAsync(IFeatureCollection features = null, CancellationToken cancellationToken = default)
+        public override ValueTask<ConnectionContext> ConnectAsync(
+            IFeatureCollection features = null,
+            CancellationToken cancellationToken = default
+        )
         {
             return default;
         }

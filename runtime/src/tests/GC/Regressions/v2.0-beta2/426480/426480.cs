@@ -6,7 +6,6 @@
 using System;
 using System.Runtime.CompilerServices;
 
-
 public class Bug426480
 {
     public static int s_i = 0;

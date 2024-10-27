@@ -66,5 +66,5 @@ public enum DbContextLoggerOptions
     /// <remarks>
     ///     Includes <see cref="Level" />, <see cref="Category" />, <see cref="Id" />, <see cref="UtcTime" />.
     /// </remarks>
-    DefaultWithUtcTime = Level | Category | Id | UtcTime
+    DefaultWithUtcTime = Level | Category | Id | UtcTime,
 }

@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
         [MemberData(nameof(ExternalPdbFormats))]
         public void MethodExtents(DebugInformationFormat format)
         {
-            var source0 = MarkedSource(@"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""1111111111111111111111111111111111111111""
+            var source0 = MarkedSource(
+                @"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""1111111111111111111111111111111111111111""
 using System;
 
 public class C
@@ -52,9 +53,12 @@ public class C
         }</N:1>;
     }
 }                              
-", fileName: @"C:\Enc1.cs");
+",
+                fileName: @"C:\Enc1.cs"
+            );
 
-            var source1 = MarkedSource(@"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""2222222222222222222222222222222222222222""
+            var source1 = MarkedSource(
+                @"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""2222222222222222222222222222222222222222""
 using System;
 
 public class C
@@ -83,9 +87,12 @@ public class C
 
     int E() => 1;
 }
-", fileName: @"C:\Enc1.cs");
+",
+                fileName: @"C:\Enc1.cs"
+            );
 
-            var source2 = MarkedSource(@"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""3333333333333333333333333333333333333333""
+            var source2 = MarkedSource(
+                @"#pragma checksum ""C:\Enc1.cs"" ""{ff1816ec-aa5e-4d10-87f7-6f4963833460}"" ""3333333333333333333333333333333333333333""
 using System;
 
 public class C
@@ -116,9 +123,15 @@ public class C
 
     int B() => 4;
 }
-", fileName: @"C:\Enc1.cs");
+",
+                fileName: @"C:\Enc1.cs"
+            );
 
-            var compilation0 = CreateCompilation(source0.Tree, options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All), assemblyName: "EncMethodExtents");
+            var compilation0 = CreateCompilation(
+                source0.Tree,
+                options: ComSafeDebugDll.WithMetadataImportOptions(MetadataImportOptions.All),
+                assemblyName: "EncMethodExtents"
+            );
             var compilation1 = compilation0.WithSource(source1.Tree);
             var compilation2 = compilation1.WithSource(source2.Tree);
 
@@ -126,7 +139,10 @@ public class C
             compilation1.VerifyDiagnostics();
             compilation2.VerifyDiagnostics();
 
-            var v0 = CompileAndVerify(compilation0, emitOptions: EmitOptions.Default.WithDebugInformationFormat(format));
+            var v0 = CompileAndVerify(
+                compilation0,
+                emitOptions: EmitOptions.Default.WithDebugInformationFormat(format)
+            );
             var md0 = ModuleMetadata.CreateFromImage(v0.EmittedAssemblyData);
 
             var f0 = compilation0.GetMember<MethodSymbol>("C.F");
@@ -142,22 +158,30 @@ public class C
 
             var b2 = compilation2.GetMember<MethodSymbol>("C.B");
 
-            var generation0 = CreateInitialBaseline(compilation0, md0, v0.CreateSymReader().GetEncMethodDebugInfo);
+            var generation0 = CreateInitialBaseline(
+                compilation0,
+                md0,
+                v0.CreateSymReader().GetEncMethodDebugInfo
+            );
 
             var syntaxMap1 = GetSyntaxMapFromMarkers(source0, source1);
             var diff1 = compilation1.EmitDifference(
                 generation0,
                 ImmutableArray.Create(
                     SemanticEdit.Create(SemanticEditKind.Update, f0, f1, syntaxMap1),
-                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)));
+                    SemanticEdit.Create(SemanticEditKind.Update, g0, g1, syntaxMap1)
+                )
+            );
 
             diff1.VerifySynthesizedMembers(
                 "C: {<>c}",
-                "C.<>c: {<>9__3_0, <>9__3_2, <>9__3_3#1, <>9__3_1, <G>b__3_0, <G>b__3_1, <G>b__3_2, <G>b__3_3#1}");
+                "C.<>c: {<>9__3_0, <>9__3_2, <>9__3_3#1, <>9__3_1, <G>b__3_0, <G>b__3_1, <G>b__3_2, <G>b__3_3#1}"
+            );
 
             var reader1 = diff1.GetMetadata().Reader;
 
-            CheckEncLogDefinitions(reader1,
+            CheckEncLogDefinitions(
+                reader1,
                 Row(3, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(4, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddField),
@@ -168,22 +192,27 @@ public class C
                 Row(9, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(3, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
-                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default));
+                Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default)
+            );
 
             if (format == DebugInformationFormat.PortablePdb)
             {
                 using var pdbProvider = MetadataReaderProvider.FromPortablePdbImage(diff1.PdbDelta);
 
-                CheckEncMap(pdbProvider.GetMetadataReader(),
+                CheckEncMap(
+                    pdbProvider.GetMetadataReader(),
                     Handle(2, TableIndex.MethodDebugInformation),
                     Handle(4, TableIndex.MethodDebugInformation),
                     Handle(8, TableIndex.MethodDebugInformation),
                     Handle(9, TableIndex.MethodDebugInformation),
                     Handle(10, TableIndex.MethodDebugInformation),
-                    Handle(11, TableIndex.MethodDebugInformation));
+                    Handle(11, TableIndex.MethodDebugInformation)
+                );
             }
 
-            diff1.VerifyPdb(Enumerable.Range(0x06000001, 20), @"
+            diff1.VerifyPdb(
+                Enumerable.Range(0x06000001, 20),
+                @"
 <symbols>
   <files>
     <file id=""1"" name=""C:\Enc1.cs"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""0B-95-CB-78-00-AE-C7-34-45-D9-FB-31-E4-30-A4-0E-FC-EA-9E-95"" />
@@ -263,7 +292,8 @@ public class C
     </method>
   </methods>
 </symbols>
-");
+"
+            );
             var syntaxMap2 = GetSyntaxMapFromMarkers(source1, source2);
             var diff2 = compilation2.EmitDifference(
                 diff1.NextGeneration,
@@ -271,15 +301,19 @@ public class C
                     SemanticEdit.Create(SemanticEditKind.Update, f1, f2, syntaxMap2),
                     SemanticEdit.Create(SemanticEditKind.Update, g1, g2, syntaxMap2),
                     SemanticEdit.Create(SemanticEditKind.Update, a1, a2, syntaxMap2),
-                    SemanticEdit.Create(SemanticEditKind.Insert, null, b2)));
+                    SemanticEdit.Create(SemanticEditKind.Insert, null, b2)
+                )
+            );
 
             diff2.VerifySynthesizedMembers(
                 "C: {<>c}",
-                "C.<>c: {<>9__3_3#1, <>9__3_1, <G>b__3_1, <G>b__3_3#1, <>9__3_0, <>9__3_2, <G>b__3_0, <G>b__3_2}");
+                "C.<>c: {<>9__3_3#1, <>9__3_1, <G>b__3_1, <G>b__3_3#1, <>9__3_0, <>9__3_2, <G>b__3_0, <G>b__3_2}"
+            );
 
             var reader2 = diff2.GetMetadata().Reader;
 
-            CheckEncLogDefinitions(reader2,
+            CheckEncLogDefinitions(
+                reader2,
                 Row(5, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(6, TableIndex.StandAloneSig, EditAndContinueOperation.Default),
                 Row(1, TableIndex.MethodDef, EditAndContinueOperation.Default),
@@ -290,13 +324,15 @@ public class C
                 Row(10, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(11, TableIndex.MethodDef, EditAndContinueOperation.Default),
                 Row(2, TableIndex.TypeDef, EditAndContinueOperation.AddMethod),
-                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default));
+                Row(12, TableIndex.MethodDef, EditAndContinueOperation.Default)
+            );
 
             if (format == DebugInformationFormat.PortablePdb)
             {
                 using var pdbProvider = MetadataReaderProvider.FromPortablePdbImage(diff2.PdbDelta);
 
-                CheckEncMap(pdbProvider.GetMetadataReader(),
+                CheckEncMap(
+                    pdbProvider.GetMetadataReader(),
                     Handle(1, TableIndex.MethodDebugInformation),
                     Handle(2, TableIndex.MethodDebugInformation),
                     Handle(4, TableIndex.MethodDebugInformation),
@@ -304,10 +340,13 @@ public class C
                     Handle(9, TableIndex.MethodDebugInformation),
                     Handle(10, TableIndex.MethodDebugInformation),
                     Handle(11, TableIndex.MethodDebugInformation),
-                    Handle(12, TableIndex.MethodDebugInformation));
+                    Handle(12, TableIndex.MethodDebugInformation)
+                );
             }
 
-            diff2.VerifyPdb(Enumerable.Range(0x06000001, 20), @"
+            diff2.VerifyPdb(
+                Enumerable.Range(0x06000001, 20),
+                @"
 <symbols>
   <files>
     <file id=""1"" name=""C:\Enc1.cs"" language=""C#"" checksumAlgorithm=""SHA1"" checksum=""9C-B9-FF-18-0E-9F-A4-22-93-85-A8-5A-06-11-43-1E-64-3E-88-06"" />
@@ -383,7 +422,8 @@ public class C
     </method>
   </methods>
 </symbols>
-");
+"
+            );
         }
     }
 }

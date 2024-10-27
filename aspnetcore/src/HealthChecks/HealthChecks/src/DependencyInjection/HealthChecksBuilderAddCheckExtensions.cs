@@ -32,7 +32,8 @@ public static class HealthChecksBuilderAddCheckExtensions
         string name,
         IHealthCheck instance,
         HealthStatus? failureStatus,
-        IEnumerable<string> tags)
+        IEnumerable<string> tags
+    )
     {
         return AddCheck(builder, name, instance, failureStatus, tags, default);
     }
@@ -50,20 +51,27 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// <param name="tags">A list of tags that can be used to filter health checks.</param>
     /// <param name="timeout">An optional <see cref="TimeSpan"/> representing the timeout of the check.</param>
     /// <returns>The <see cref="IHealthChecksBuilder"/>.</returns>
-    [SuppressMessage("ApiDesign", "RS0026:Do not add multiple public overloads with optional parameters", Justification = "Required to maintain compatibility")]
+    [SuppressMessage(
+        "ApiDesign",
+        "RS0026:Do not add multiple public overloads with optional parameters",
+        Justification = "Required to maintain compatibility"
+    )]
     public static IHealthChecksBuilder AddCheck(
         this IHealthChecksBuilder builder,
         string name,
         IHealthCheck instance,
         HealthStatus? failureStatus = null,
         IEnumerable<string>? tags = null,
-        TimeSpan? timeout = null)
+        TimeSpan? timeout = null
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
         ArgumentNullThrowHelper.ThrowIfNull(instance);
 
-        return builder.Add(new HealthCheckRegistration(name, instance, failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(name, instance, failureStatus, tags, timeout)
+        );
     }
 
     /// <summary>
@@ -85,11 +93,15 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// access to services from the dependency injection container.
     /// </remarks>
     // 2.0 BACKCOMPAT OVERLOAD -- DO NOT TOUCH
-    public static IHealthChecksBuilder AddCheck<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+    public static IHealthChecksBuilder AddCheck<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
-        IEnumerable<string> tags) where T : class, IHealthCheck
+        IEnumerable<string> tags
+    )
+        where T : class, IHealthCheck
     {
         return AddCheck<T>(builder, name, failureStatus, tags, default);
     }
@@ -113,20 +125,35 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// with any lifetime it will be used. Otherwise an instance of type <typeparamref name="T"/> will be constructed with
     /// access to services from the dependency injection container.
     /// </remarks>
-    public static IHealthChecksBuilder AddCheck<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+    public static IHealthChecksBuilder AddCheck<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus = null,
         IEnumerable<string>? tags = null,
-        TimeSpan? timeout = null) where T : class, IHealthCheck
+        TimeSpan? timeout = null
+    )
+        where T : class, IHealthCheck
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
 
-        return builder.Add(new HealthCheckRegistration(name, GetServiceOrCreateInstance, failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(
+                name,
+                GetServiceOrCreateInstance,
+                failureStatus,
+                tags,
+                timeout
+            )
+        );
 
-        [UnconditionalSuppressMessage("Trimming", "IL2091",
-           Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method.")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2091",
+            Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method."
+        )]
         static T GetServiceOrCreateInstance(IServiceProvider serviceProvider) =>
             ActivatorUtilities.GetServiceOrCreateInstance<T>(serviceProvider);
     }
@@ -147,8 +174,9 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
-        this IHealthChecksBuilder builder, string name, params object[] args) where T : class, IHealthCheck
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(this IHealthChecksBuilder builder, string name, params object[] args)
+        where T : class, IHealthCheck
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
@@ -173,11 +201,14 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    )
+        where T : class, IHealthCheck
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
@@ -203,20 +234,26 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
         IEnumerable<string>? tags,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    )
+        where T : class, IHealthCheck
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
 
         return builder.Add(new HealthCheckRegistration(name, CreateInstance, failureStatus, tags));
 
-        [UnconditionalSuppressMessage("Trimming", "IL2091",
-           Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method.")]
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2091",
+            Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method."
+        )]
         T CreateInstance(IServiceProvider serviceProvider) =>
             ActivatorUtilities.CreateInstance<T>(serviceProvider, args);
     }
@@ -240,21 +277,30 @@ public static class HealthChecksBuilderAddCheckExtensions
     /// instance when needed. Additional arguments can be provided to the constructor via <paramref name="args"/>.
     /// </remarks>
     public static IHealthChecksBuilder AddTypeActivatedCheck<
-        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(
         this IHealthChecksBuilder builder,
         string name,
         HealthStatus? failureStatus,
         IEnumerable<string> tags,
         TimeSpan timeout,
-        params object[] args) where T : class, IHealthCheck
+        params object[] args
+    )
+        where T : class, IHealthCheck
     {
         ArgumentNullThrowHelper.ThrowIfNull(builder);
         ArgumentNullThrowHelper.ThrowIfNull(name);
 
-        return builder.Add(new HealthCheckRegistration(name, CreateInstance, failureStatus, tags, timeout));
+        return builder.Add(
+            new HealthCheckRegistration(name, CreateInstance, failureStatus, tags, timeout)
+        );
 
-        [UnconditionalSuppressMessage("Trimming", "IL2091",
-            Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method.")]
-        T CreateInstance(IServiceProvider serviceProvider) => ActivatorUtilities.CreateInstance<T>(serviceProvider, args);
+        [UnconditionalSuppressMessage(
+            "Trimming",
+            "IL2091",
+            Justification = "DynamicallyAccessedMemberTypes.PublicConstructors is enforced by calling method."
+        )]
+        T CreateInstance(IServiceProvider serviceProvider) =>
+            ActivatorUtilities.CreateInstance<T>(serviceProvider, args);
     }
 }

@@ -5,25 +5,30 @@ using System;
 using System.Runtime.Caching.Configuration;
 using System.Security;
 
-namespace System.Runtime.Caching {
+namespace System.Runtime.Caching
+{
     // PhysicalMemoryMonitor monitors the amound of physical memory used on the machine
     // and helps us determine when to drop entries to avoid paging and GC thrashing.
     // The limit is configurable (see ConfigUtil.cs).
-    internal sealed class PhysicalMemoryMonitor : MemoryMonitor {
+    internal sealed class PhysicalMemoryMonitor : MemoryMonitor
+    {
         const int MIN_TOTAL_MEMORY_TRIM_PERCENT = 10;
         static readonly long TARGET_TOTAL_MEMORY_TRIM_INTERVAL_TICKS = 5 * TimeSpan.TicksPerMinute;
 
-        // Returns the percentage of physical machine memory that can be consumed by an 
+        // Returns the percentage of physical machine memory that can be consumed by an
         // application before ASP.NET starts forcibly removing items from the cache.
-        internal long MemoryLimit {
+        internal long MemoryLimit
+        {
             get { return _pressureHigh; }
         }
 
-        private PhysicalMemoryMonitor() {
+        private PhysicalMemoryMonitor()
+        {
             // hide default ctor
         }
 
-        internal PhysicalMemoryMonitor(int physicalMemoryLimitPercentage) {
+        internal PhysicalMemoryMonitor(int physicalMemoryLimitPercentage)
+        {
             /*
               The chart below shows physical memory in megabytes, and the 1, 3, and 10% values.
               When we reach "middle" pressure, we begin trimming the cache.
@@ -79,19 +84,24 @@ namespace System.Runtime.Caching {
 
             long memory = TotalPhysical;
             Dbg.Assert(memory != 0, "memory != 0");
-            if (memory >= 0x100000000) {
+            if (memory >= 0x100000000)
+            {
                 _pressureHigh = 99;
             }
-            else if (memory >= 0x80000000) {
+            else if (memory >= 0x80000000)
+            {
                 _pressureHigh = 98;
             }
-            else if (memory >= 0x40000000) {
+            else if (memory >= 0x40000000)
+            {
                 _pressureHigh = 97;
             }
-            else if (memory >= 0x30000000) {
+            else if (memory >= 0x30000000)
+            {
                 _pressureHigh = 96;
             }
-            else {
+            else
+            {
                 _pressureHigh = 95;
             }
 
@@ -106,12 +116,16 @@ namespace System.Runtime.Caching {
         }
 
         [SecuritySafeCritical]
-        protected override int GetCurrentPressure() {
+        protected override int GetCurrentPressure()
+        {
 #if MONO
-            var pc = new System.Diagnostics.PerformanceCounter ("Mono Memory", "Available Physical Memory");
+            var pc = new System.Diagnostics.PerformanceCounter(
+                "Mono Memory",
+                "Available Physical Memory"
+            );
             long availableMemory = pc.RawValue;
 
-            int memoryLoad = (int) ((100 * availableMemory) / TotalPhysical);
+            int memoryLoad = (int)((100 * availableMemory) / TotalPhysical);
 #else
             MEMORYSTATUSEX memoryStatusEx = new MEMORYSTATUSEX();
             memoryStatusEx.Init();
@@ -121,47 +135,67 @@ namespace System.Runtime.Caching {
             int memoryLoad = memoryStatusEx.dwMemoryLoad;
 #endif
             //if (_pressureHigh != 0) {
-                // PerfCounter: Cache Percentage Machine Memory Limit Used
-                //    = total physical memory used / total physical memory used limit
-                //PerfCounters.SetCounter(AppPerfCounter.CACHE_PERCENT_MACH_MEM_LIMIT_USED, memoryLoad);
+            // PerfCounter: Cache Percentage Machine Memory Limit Used
+            //    = total physical memory used / total physical memory used limit
+            //PerfCounters.SetCounter(AppPerfCounter.CACHE_PERCENT_MACH_MEM_LIMIT_USED, memoryLoad);
             //}
 
             return memoryLoad;
         }
 
-        internal override int GetPercentToTrim(DateTime lastTrimTime, int lastTrimPercent) {
+        internal override int GetPercentToTrim(DateTime lastTrimTime, int lastTrimPercent)
+        {
             int percent = 0;
-            if (IsAboveHighPressure()) {
-                // choose percent such that we don't repeat this for ~5 (TARGET_TOTAL_MEMORY_TRIM_INTERVAL) minutes, 
+            if (IsAboveHighPressure())
+            {
+                // choose percent such that we don't repeat this for ~5 (TARGET_TOTAL_MEMORY_TRIM_INTERVAL) minutes,
                 // but keep the percentage between 10 and 50.
                 DateTime utcNow = DateTime.UtcNow;
                 long ticksSinceTrim = utcNow.Subtract(lastTrimTime).Ticks;
-                if (ticksSinceTrim > 0) {
-                    percent = Math.Min(50, (int)((lastTrimPercent * TARGET_TOTAL_MEMORY_TRIM_INTERVAL_TICKS) / ticksSinceTrim));
+                if (ticksSinceTrim > 0)
+                {
+                    percent = Math.Min(
+                        50,
+                        (int)(
+                            (lastTrimPercent * TARGET_TOTAL_MEMORY_TRIM_INTERVAL_TICKS)
+                            / ticksSinceTrim
+                        )
+                    );
                     percent = Math.Max(MIN_TOTAL_MEMORY_TRIM_PERCENT, percent);
                 }
 
 #if PERF
-                SafeNativeMethods.OutputDebugString(String.Format("PhysicalMemoryMonitor.GetPercentToTrim: percent={0:N}, lastTrimPercent={1:N}, secondsSinceTrim={2:N}\n",
-                                                    percent,
-                                                    lastTrimPercent,
-                                                    ticksSinceTrim/TimeSpan.TicksPerSecond));
+                SafeNativeMethods.OutputDebugString(
+                    String.Format(
+                        "PhysicalMemoryMonitor.GetPercentToTrim: percent={0:N}, lastTrimPercent={1:N}, secondsSinceTrim={2:N}\n",
+                        percent,
+                        lastTrimPercent,
+                        ticksSinceTrim / TimeSpan.TicksPerSecond
+                    )
+                );
 #endif
             }
 
             return percent;
         }
 
-        internal void SetLimit(int physicalMemoryLimitPercentage) {
-            if (physicalMemoryLimitPercentage == 0) {
+        internal void SetLimit(int physicalMemoryLimitPercentage)
+        {
+            if (physicalMemoryLimitPercentage == 0)
+            {
                 // use defaults
                 return;
             }
             _pressureHigh = Math.Max(3, physicalMemoryLimitPercentage);
             _pressureLow = Math.Max(1, _pressureHigh - 9);
 #if DBG
-            Dbg.Trace("MemoryCacheStats", "PhysicalMemoryMonitor.SetLimit: _pressureHigh=" + _pressureHigh +
-                        ", _pressureLow=" + _pressureLow);
+            Dbg.Trace(
+                "MemoryCacheStats",
+                "PhysicalMemoryMonitor.SetLimit: _pressureHigh="
+                    + _pressureHigh
+                    + ", _pressureLow="
+                    + _pressureLow
+            );
 #endif
         }
     }

@@ -8,7 +8,10 @@ namespace Microsoft.AspNetCore.Server.IIS.Core;
 
 internal sealed class IISEnvironmentFeature : IIISEnvironmentFeature
 {
-    public static bool TryCreate(IConfiguration configuration, [NotNullWhen(true)] out IIISEnvironmentFeature? result)
+    public static bool TryCreate(
+        IConfiguration configuration,
+        [NotNullWhen(true)] out IIISEnvironmentFeature? result
+    )
     {
         var feature = new IISEnvironmentFeature(configuration);
 

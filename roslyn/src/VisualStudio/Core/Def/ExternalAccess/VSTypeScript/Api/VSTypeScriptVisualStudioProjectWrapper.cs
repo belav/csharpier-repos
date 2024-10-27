@@ -11,8 +11,8 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
 {
     internal sealed partial class VSTypeScriptVisualStudioProjectWrapper
     {
-        public VSTypeScriptVisualStudioProjectWrapper(ProjectSystemProject underlyingObject)
-            => Project = underlyingObject;
+        public VSTypeScriptVisualStudioProjectWrapper(ProjectSystemProject underlyingObject) =>
+            Project = underlyingObject;
 
         public ProjectId Id => Project.Id;
 
@@ -22,23 +22,32 @@ namespace Microsoft.VisualStudio.LanguageServices.ExternalAccess.VSTypeScript.Ap
             set => Project.DisplayName = value;
         }
 
-        public void AddSourceFile(string fullPath)
-            => Project.AddSourceFile(fullPath, SourceCodeKind.Regular);
+        public void AddSourceFile(string fullPath) =>
+            Project.AddSourceFile(fullPath, SourceCodeKind.Regular);
 
-        public DocumentId AddSourceTextContainer(SourceTextContainer sourceTextContainer, string fullPath, bool isLspContainedDocument = false)
+        public DocumentId AddSourceTextContainer(
+            SourceTextContainer sourceTextContainer,
+            string fullPath,
+            bool isLspContainedDocument = false
+        )
         {
-            var documentServiceProvider = isLspContainedDocument ? LspContainedDocumentServiceProvider.Instance : null;
-            return Project.AddSourceTextContainer(sourceTextContainer, fullPath, SourceCodeKind.Regular, documentServiceProvider: documentServiceProvider);
+            var documentServiceProvider = isLspContainedDocument
+                ? LspContainedDocumentServiceProvider.Instance
+                : null;
+            return Project.AddSourceTextContainer(
+                sourceTextContainer,
+                fullPath,
+                SourceCodeKind.Regular,
+                documentServiceProvider: documentServiceProvider
+            );
         }
 
-        public void RemoveSourceFile(string fullPath)
-            => Project.RemoveSourceFile(fullPath);
+        public void RemoveSourceFile(string fullPath) => Project.RemoveSourceFile(fullPath);
 
-        public void RemoveSourceTextContainer(SourceTextContainer sourceTextContainer)
-            => Project.RemoveSourceTextContainer(sourceTextContainer);
+        public void RemoveSourceTextContainer(SourceTextContainer sourceTextContainer) =>
+            Project.RemoveSourceTextContainer(sourceTextContainer);
 
-        public void RemoveFromWorkspace()
-            => Project.RemoveFromWorkspace();
+        public void RemoveFromWorkspace() => Project.RemoveFromWorkspace();
 
         internal ProjectSystemProject Project { get; }
     }

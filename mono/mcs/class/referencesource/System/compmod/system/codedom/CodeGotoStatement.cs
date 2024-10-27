@@ -1,48 +1,45 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeGotoStatement.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeGotoStatement : CodeStatement {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeGotoStatement : CodeStatement
+    {
         private string label;
 
-        public CodeGotoStatement() {
-        }
-        
-        public CodeGotoStatement(string label) {
+        public CodeGotoStatement() { }
+
+        public CodeGotoStatement(string label)
+        {
             Label = label;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Label {
-            get {
-                return label;
-            }
-            set {
+        public string Label
+        {
+            get { return label; }
+            set
+            {
                 if (String.IsNullOrEmpty(value))
                     throw new ArgumentNullException("value");
-                    
+
                 this.label = value;
             }
         }

@@ -4,11 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web {
+namespace System.Web
+{
     using System.IO;
 
-    internal abstract class HttpResponseInternalBase : HttpResponseBase {
-        public virtual TextWriter SwitchWriter(TextWriter writer) {
+    internal abstract class HttpResponseInternalBase : HttpResponseBase
+    {
+        public virtual TextWriter SwitchWriter(TextWriter writer)
+        {
             throw new NotImplementedException();
         }
     }

@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void CreateBuilder()
         {
-            ImmutableSegmentedList<string>.Builder builder = ImmutableSegmentedList.CreateBuilder<string>();
+            ImmutableSegmentedList<string>.Builder builder =
+                ImmutableSegmentedList.CreateBuilder<string>();
             Assert.NotNull(builder);
         }
 
@@ -93,7 +94,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            var builder = ImmutableSegmentedList<int>.Empty.AddRange(Enumerable.Range(1, 10)).ToBuilder();
+            var builder = ImmutableSegmentedList<int>
+                .Empty.AddRange(Enumerable.Range(1, 10))
+                .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
 
             var enumerator = builder.GetEnumerator();
@@ -152,7 +155,9 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(new[] { 1, 2, 3, 4, 5, 6 }, mutable);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(-1, new int[0]));
-            Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(mutable.Count + 1, new int[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => mutable.InsertRange(mutable.Count + 1, new int[0])
+            );
         }
 
         [Fact]
@@ -275,7 +280,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 (b, v) => b.IndexOf(v),
                 (b, v, i) => b.IndexOf(v, i),
                 (b, v, i, c) => b.IndexOf(v, i, c),
-                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -287,7 +293,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
                 (b, v, eq) => b.LastIndexOf(v, b.Count > 0 ? b.Count - 1 : 0, b.Count, eq),
                 (b, v, i) => b.LastIndexOf(v, i),
                 (b, v, i, c) => b.LastIndexOf(v, i, c),
-                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -355,12 +362,20 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/54429")]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableSegmentedList.CreateBuilder<int>());
-            ImmutableSegmentedList<string>.Builder builder = ImmutableSegmentedList.CreateBuilder<string>();
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableSegmentedList.CreateBuilder<int>()
+            );
+            ImmutableSegmentedList<string>.Builder builder =
+                ImmutableSegmentedList.CreateBuilder<string>();
             builder.Add("One");
             builder.Add("Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                builder
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>()!.State
+                == DebuggerBrowsableState.RootHidden
+            );
             string[]? items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(builder, items);
         }
@@ -368,8 +383,12 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact(Skip = "Not implemented: https://github.com/dotnet/roslyn/issues/54429")]
         public static void TestDebuggerAttributes_Null()
         {
-            Type proxyType = DebuggerAttributes.GetProxyType(ImmutableSegmentedList.CreateBuilder<string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null!));
+            Type proxyType = DebuggerAttributes.GetProxyType(
+                ImmutableSegmentedList.CreateBuilder<string>()
+            );
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null!)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -401,7 +420,8 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void ToImmutableList()
         {
-            ImmutableSegmentedList<int>.Builder builder = ImmutableSegmentedList.CreateBuilder<int>();
+            ImmutableSegmentedList<int>.Builder builder =
+                ImmutableSegmentedList.CreateBuilder<int>();
             builder.Add(0);
             builder.Add(1);
             builder.Add(2);
@@ -420,7 +440,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.False(list.IsEmpty);
 
             ImmutableSegmentedList<int>.Builder? nullBuilder = null;
-            Assert.Throws<ArgumentNullException>("builder", () => nullBuilder!.ToImmutableSegmentedList());
+            Assert.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder!.ToImmutableSegmentedList()
+            );
         }
 
         protected override IEnumerable<T> GetEnumerableOf<T>(params T[] contents)
@@ -428,7 +451,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return ImmutableSegmentedList<T>.Empty.AddRange(contents).ToBuilder();
         }
 
-        private protected override void RemoveAllTestHelper<T>(ImmutableSegmentedList<T> list, Predicate<T> test)
+        private protected override void RemoveAllTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        )
         {
             var builder = list.ToBuilder();
             var bcl = list.ToList();
@@ -439,7 +465,11 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal<T>(bcl, builder.ToList());
         }
 
-        private protected override void ReverseTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count)
+        private protected override void ReverseTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        )
         {
             var expected = list.ToList();
             expected.Reverse(index, count);
@@ -453,67 +483,120 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return list.ToBuilder();
         }
 
-        private protected override ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(ImmutableSegmentedList<T> list, Converter<T, TOutput> converter)
-            => list.ToBuilder().ConvertAll(converter);
+        private protected override ImmutableSegmentedList<TOutput> ConvertAllImpl<T, TOutput>(
+            ImmutableSegmentedList<T> list,
+            Converter<T, TOutput> converter
+        ) => list.ToBuilder().ConvertAll(converter);
 
-        private protected override void ForEachImpl<T>(ImmutableSegmentedList<T> list, Action<T> action)
-            => list.ToBuilder().ForEach(action);
+        private protected override void ForEachImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Action<T> action
+        ) => list.ToBuilder().ForEach(action);
 
-        private protected override ImmutableSegmentedList<T> GetRangeImpl<T>(ImmutableSegmentedList<T> list, int index, int count)
-            => list.ToBuilder().GetRange(index, count);
+        private protected override ImmutableSegmentedList<T> GetRangeImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count
+        ) => list.ToBuilder().GetRange(index, count);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array)
-            => list.ToBuilder().CopyTo(array);
+        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array) =>
+            list.ToBuilder().CopyTo(array);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, T[] array, int arrayIndex)
-            => list.ToBuilder().CopyTo(array, arrayIndex);
+        private protected override void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T[] array,
+            int arrayIndex
+        ) => list.ToBuilder().CopyTo(array, arrayIndex);
 
-        private protected override void CopyToImpl<T>(ImmutableSegmentedList<T> list, int index, T[] array, int arrayIndex, int count)
-            => list.ToBuilder().CopyTo(index, array, arrayIndex, count);
+        private protected override void CopyToImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            T[] array,
+            int arrayIndex,
+            int count
+        ) => list.ToBuilder().CopyTo(index, array, arrayIndex, count);
 
-        private protected override bool ExistsImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.ToBuilder().Exists(match);
+        private protected override bool ExistsImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.ToBuilder().Exists(match);
 
-        private protected override T? FindImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            where T : default
-            => list.ToBuilder().Find(match);
+        private protected override T? FindImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        )
+            where T : default => list.ToBuilder().Find(match);
 
-        private protected override ImmutableSegmentedList<T> FindAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.ToBuilder().FindAll(match);
+        private protected override ImmutableSegmentedList<T> FindAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.ToBuilder().FindAll(match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.ToBuilder().FindIndex(match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.ToBuilder().FindIndex(match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match)
-            => list.ToBuilder().FindIndex(startIndex, match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        ) => list.ToBuilder().FindIndex(startIndex, match);
 
-        private protected override int FindIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match)
-            => list.ToBuilder().FindIndex(startIndex, count, match);
+        private protected override int FindIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        ) => list.ToBuilder().FindIndex(startIndex, count, match);
 
-        private protected override T? FindLastImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            where T : default
-            => list.ToBuilder().FindLast(match);
+        private protected override T? FindLastImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        )
+            where T : default => list.ToBuilder().FindLast(match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> match)
-            => list.ToBuilder().FindLastIndex(match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> match
+        ) => list.ToBuilder().FindLastIndex(match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, Predicate<T> match)
-            => list.ToBuilder().FindLastIndex(startIndex, match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            Predicate<T> match
+        ) => list.ToBuilder().FindLastIndex(startIndex, match);
 
-        private protected override int FindLastIndexImpl<T>(ImmutableSegmentedList<T> list, int startIndex, int count, Predicate<T> match)
-            => list.ToBuilder().FindLastIndex(startIndex, count, match);
+        private protected override int FindLastIndexImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int startIndex,
+            int count,
+            Predicate<T> match
+        ) => list.ToBuilder().FindLastIndex(startIndex, count, match);
 
-        private protected override bool TrueForAllImpl<T>(ImmutableSegmentedList<T> list, Predicate<T> test)
-            => list.ToBuilder().TrueForAll(test);
+        private protected override bool TrueForAllImpl<T>(
+            ImmutableSegmentedList<T> list,
+            Predicate<T> test
+        ) => list.ToBuilder().TrueForAll(test);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item)
-            => list.ToBuilder().BinarySearch(item);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T item
+        ) => list.ToBuilder().BinarySearch(item);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, T item, IComparer<T>? comparer)
-            => list.ToBuilder().BinarySearch(item, comparer);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            T item,
+            IComparer<T>? comparer
+        ) => list.ToBuilder().BinarySearch(item, comparer);
 
-        private protected override int BinarySearchImpl<T>(ImmutableSegmentedList<T> list, int index, int count, T item, IComparer<T>? comparer)
-            => list.ToBuilder().BinarySearch(index, count, item, comparer);
+        private protected override int BinarySearchImpl<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            T item,
+            IComparer<T>? comparer
+        ) => list.ToBuilder().BinarySearch(index, count, item, comparer);
 
         private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list)
         {
@@ -522,21 +605,32 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             return builder.ToImmutable().ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, Comparison<T> comparison)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            Comparison<T> comparison
+        )
         {
             var builder = list.ToBuilder();
             builder.Sort(comparison);
             return builder.ToImmutable().ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, IComparer<T>? comparer)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            IComparer<T>? comparer
+        )
         {
             var builder = list.ToBuilder();
             builder.Sort(comparer);
             return builder.ToImmutable().ToList();
         }
 
-        private protected override List<T> SortTestHelper<T>(ImmutableSegmentedList<T> list, int index, int count, IComparer<T>? comparer)
+        private protected override List<T> SortTestHelper<T>(
+            ImmutableSegmentedList<T> list,
+            int index,
+            int count,
+            IComparer<T>? comparer
+        )
         {
             var builder = list.ToBuilder();
             builder.Sort(index, count, comparer);

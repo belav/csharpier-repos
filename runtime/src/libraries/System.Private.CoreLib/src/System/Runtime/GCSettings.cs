@@ -8,7 +8,7 @@ namespace System.Runtime
     public enum GCLargeObjectHeapCompactionMode
     {
         Default = 1,
-        CompactOnce = 2
+        CompactOnce = 2,
     }
 
     // These settings are the same format as in the GC in the runtime.
@@ -18,7 +18,7 @@ namespace System.Runtime
         Interactive = 1,
         LowLatency = 2,
         SustainedLowLatency = 3,
-        NoGCRegion = 4
+        NoGCRegion = 4,
     }
 
     public static partial class GCSettings
@@ -26,7 +26,9 @@ namespace System.Runtime
         private enum SetLatencyModeStatus
         {
             Succeeded = 0,
-            NoGCInProgress = 1 // NoGCRegion is in progress, can't change pause mode.
+            NoGCInProgress =
+                1 // NoGCRegion is in progress, can't change pause mode.
+            ,
         }
 
         public static GCLatencyMode LatencyMode
@@ -34,8 +36,7 @@ namespace System.Runtime
             get => GetGCLatencyMode();
             set
             {
-                if ((value < GCLatencyMode.Batch) ||
-                    (value > GCLatencyMode.SustainedLowLatency))
+                if ((value < GCLatencyMode.Batch) || (value > GCLatencyMode.SustainedLowLatency))
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }
@@ -46,7 +47,10 @@ namespace System.Runtime
                     throw new InvalidOperationException(SR.InvalidOperation_SetLatencyModeNoGC);
                 }
 
-                Debug.Assert(status == SetLatencyModeStatus.Succeeded, $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}.");
+                Debug.Assert(
+                    status == SetLatencyModeStatus.Succeeded,
+                    $"Unexpected return value '{status}' from {nameof(SetGCLatencyMode)}."
+                );
             }
         }
 
@@ -55,8 +59,10 @@ namespace System.Runtime
             get => GetLOHCompactionMode();
             set
             {
-                if ((value < GCLargeObjectHeapCompactionMode.Default) ||
-                    (value > GCLargeObjectHeapCompactionMode.CompactOnce))
+                if (
+                    (value < GCLargeObjectHeapCompactionMode.Default)
+                    || (value > GCLargeObjectHeapCompactionMode.CompactOnce)
+                )
                 {
                     ThrowHelper.ArgumentOutOfRangeException_Enum_Value();
                 }

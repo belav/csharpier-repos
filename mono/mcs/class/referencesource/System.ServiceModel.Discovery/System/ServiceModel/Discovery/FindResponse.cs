@@ -17,18 +17,18 @@ namespace System.ServiceModel.Discovery
         internal FindResponse()
         {
             this.endpoints = new Collection<EndpointDiscoveryMetadata>();
-            this.messageSequenceTable = new Dictionary<EndpointDiscoveryMetadata, DiscoveryMessageSequence>();
+            this.messageSequenceTable =
+                new Dictionary<EndpointDiscoveryMetadata, DiscoveryMessageSequence>();
         }
 
         public Collection<EndpointDiscoveryMetadata> Endpoints
         {
-            get
-            {
-                return this.endpoints;
-            }
+            get { return this.endpoints; }
         }
 
-        public DiscoveryMessageSequence GetMessageSequence(EndpointDiscoveryMetadata endpointDiscoveryMetadata)
+        public DiscoveryMessageSequence GetMessageSequence(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata
+        )
         {
             if (endpointDiscoveryMetadata == null)
             {
@@ -36,16 +36,26 @@ namespace System.ServiceModel.Discovery
             }
 
             DiscoveryMessageSequence messageSequence = null;
-            if (!this.messageSequenceTable.TryGetValue(endpointDiscoveryMetadata, out messageSequence))
+            if (
+                !this.messageSequenceTable.TryGetValue(
+                    endpointDiscoveryMetadata,
+                    out messageSequence
+                )
+            )
             {
-                throw FxTrace.Exception.Argument("endpointDiscoveryMetadata", SR2.DiscoveryFindResponseMessageSequenceNotFound);
+                throw FxTrace.Exception.Argument(
+                    "endpointDiscoveryMetadata",
+                    SR2.DiscoveryFindResponseMessageSequenceNotFound
+                );
             }
 
             return messageSequence;
         }
 
-        internal void AddDiscoveredEndpoint(EndpointDiscoveryMetadata endpointDiscoveryMetadata,
-            DiscoveryMessageSequence messageSequence)
+        internal void AddDiscoveredEndpoint(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            DiscoveryMessageSequence messageSequence
+        )
         {
             this.messageSequenceTable.Add(endpointDiscoveryMetadata, messageSequence);
             this.endpoints.Add(endpointDiscoveryMetadata);

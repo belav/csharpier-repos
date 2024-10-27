@@ -12,18 +12,17 @@ public class AttributeMatcherTest
     [Theory]
     [InlineData(new object[] { new[] { "required-attr" } })]
     [InlineData(new object[] { new[] { "first-attr", "second-attr" } })]
-    public void TryDetermineMode_ReturnsFalseIfNoAttributeMatchesAllRequiredAttributes(string[] modeAttributes)
+    public void TryDetermineMode_ReturnsFalseIfNoAttributeMatchesAllRequiredAttributes(
+        string[] modeAttributes
+    )
     {
         // Arrange
-        var modeInfos = new[]
-        {
-                new ModeAttributes<Mode>(Mode.A, modeAttributes)
-            };
+        var modeInfos = new[] { new ModeAttributes<Mode>(Mode.A, modeAttributes) };
         var attributes = new TagHelperAttributeList
-            {
-                new TagHelperAttribute("first-attr", "value"),
-                new TagHelperAttribute("not-in-any-mode", "value")
-            };
+        {
+            new TagHelperAttribute("first-attr", "value"),
+            new TagHelperAttribute("not-in-any-mode", "value"),
+        };
         var context = MakeTagHelperContext(attributes);
 
         // Act
@@ -40,16 +39,16 @@ public class AttributeMatcherTest
         // Arrange
         var modeInfos = new[]
         {
-                new ModeAttributes<Mode>(Mode.A, new[] { "a-required-attributes" }),
-                new ModeAttributes<Mode>(Mode.B, new[] { "first-attr", "second-attr" }),
-                new ModeAttributes<Mode>(Mode.C, new[] { "first-attr", "third-attr" }),
-            };
+            new ModeAttributes<Mode>(Mode.A, new[] { "a-required-attributes" }),
+            new ModeAttributes<Mode>(Mode.B, new[] { "first-attr", "second-attr" }),
+            new ModeAttributes<Mode>(Mode.C, new[] { "first-attr", "third-attr" }),
+        };
         var attributes = new TagHelperAttributeList
-            {
-                new TagHelperAttribute("first-attr", "value"),
-                new TagHelperAttribute("second-attr", "value"),
-                new TagHelperAttribute("not-in-any-mode", "value")
-            };
+        {
+            new TagHelperAttribute("first-attr", "value"),
+            new TagHelperAttribute("second-attr", "value"),
+            new TagHelperAttribute("not-in-any-mode", "value"),
+        };
         var context = MakeTagHelperContext(attributes);
 
         // Act
@@ -67,18 +66,18 @@ public class AttributeMatcherTest
         // Arrange
         var modeInfos = new[]
         {
-                new ModeAttributes<Mode>(Mode.A, new[] { "first-attr" }),
-                new ModeAttributes<Mode>(Mode.B, new[] { "first-attr", "second-attr" }),
-                new ModeAttributes<Mode>(Mode.D, new[] { "second-attr", "third-attr" }),
-                new ModeAttributes<Mode>(Mode.C, new[] { "first-attr", "second-attr", "third-attr" }),
-            };
+            new ModeAttributes<Mode>(Mode.A, new[] { "first-attr" }),
+            new ModeAttributes<Mode>(Mode.B, new[] { "first-attr", "second-attr" }),
+            new ModeAttributes<Mode>(Mode.D, new[] { "second-attr", "third-attr" }),
+            new ModeAttributes<Mode>(Mode.C, new[] { "first-attr", "second-attr", "third-attr" }),
+        };
         var attributes = new TagHelperAttributeList
-            {
-                new TagHelperAttribute("first-attr", "value"),
-                new TagHelperAttribute("second-attr", "value"),
-                new TagHelperAttribute("third-attr", "value"),
-                new TagHelperAttribute("not-in-any-mode", "value")
-            };
+        {
+            new TagHelperAttribute("first-attr", "value"),
+            new TagHelperAttribute("second-attr", "value"),
+            new TagHelperAttribute("third-attr", "value"),
+            new TagHelperAttribute("not-in-any-mode", "value"),
+        };
         var context = MakeTagHelperContext(attributes);
 
         // Act
@@ -96,7 +95,8 @@ public class AttributeMatcherTest
             tagName: "test",
             allAttributes: attributes,
             items: new Dictionary<object, object>(),
-            uniqueId: Guid.NewGuid().ToString("N"));
+            uniqueId: Guid.NewGuid().ToString("N")
+        );
     }
 
     private enum Mode
@@ -104,6 +104,6 @@ public class AttributeMatcherTest
         A = 0,
         B = 1,
         C = 3,
-        D = 4
+        D = 4,
     };
 }

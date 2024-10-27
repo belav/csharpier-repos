@@ -20,14 +20,12 @@ public class FunctionColumnMapping : ColumnMappingBase, IFunctionColumnMapping
     public FunctionColumnMapping(
         IProperty property,
         FunctionColumn column,
-        FunctionMapping functionMapping)
-        : base(property, column, functionMapping)
-    {
-    }
+        FunctionMapping functionMapping
+    )
+        : base(property, column, functionMapping) { }
 
     /// <inheritdoc />
-    public virtual IFunctionMapping FunctionMapping
-        => (IFunctionMapping)TableMapping;
+    public virtual IFunctionMapping FunctionMapping => (IFunctionMapping)TableMapping;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,9 +33,10 @@ public class FunctionColumnMapping : ColumnMappingBase, IFunctionColumnMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping GetTypeMapping()
-        => Property.FindRelationalTypeMapping(
-            StoreObjectIdentifier.DbFunction(FunctionMapping.DbFunction.Name))!;
+    protected override RelationalTypeMapping GetTypeMapping() =>
+        Property.FindRelationalTypeMapping(
+            StoreObjectIdentifier.DbFunction(FunctionMapping.DbFunction.Name)
+        )!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -45,8 +44,8 @@ public class FunctionColumnMapping : ColumnMappingBase, IFunctionColumnMapping
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IFunctionColumnMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IFunctionColumnMapping)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     IFunctionColumn IFunctionColumnMapping.Column
     {

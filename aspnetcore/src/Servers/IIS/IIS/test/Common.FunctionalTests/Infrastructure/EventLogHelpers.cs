@@ -15,7 +15,12 @@ namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 public class EventLogHelpers
 {
-    public static void VerifyEventLogEvent(IISDeploymentResult deploymentResult, string expectedRegexMatchString, ILogger logger, bool allowMultiple = false)
+    public static void VerifyEventLogEvent(
+        IISDeploymentResult deploymentResult,
+        string expectedRegexMatchString,
+        ILogger logger,
+        bool allowMultiple = false
+    )
     {
         Assert.True(deploymentResult.HostProcess.HasExited);
 
@@ -28,13 +33,21 @@ public class EventLogHelpers
         {
             foreach (var entry in entries)
             {
-                logger.LogInformation("'{Message}', generated {Generated}, written {Written}", entry.Message, entry.TimeGenerated, entry.TimeWritten);
+                logger.LogInformation(
+                    "'{Message}', generated {Generated}, written {Written}",
+                    entry.Message,
+                    entry.TimeGenerated,
+                    entry.TimeWritten
+                );
             }
             throw;
         }
     }
 
-    public static void VerifyEventLogEvents(IISDeploymentResult deploymentResult, params string[] expectedRegexMatchString)
+    public static void VerifyEventLogEvents(
+        IISDeploymentResult deploymentResult,
+        params string[] expectedRegexMatchString
+    )
     {
         Assert.True(deploymentResult.HostProcess.HasExited);
 
@@ -49,7 +62,10 @@ public class EventLogHelpers
             }
         }
 
-        Assert.True(0 == entries.Count, $"Some entries were not matched by any regex {FormatEntries(entries)}");
+        Assert.True(
+            0 == entries.Count,
+            $"Some entries were not matched by any regex {FormatEntries(entries)}"
+        );
     }
 
     public static string OnlyOneAppPerAppPool()
@@ -57,7 +73,6 @@ public class EventLogHelpers
         if (DeployerSelector.HasNewShim)
         {
             return "Only one in-process application is allowed per IIS application pool. Please assign the application '(.*)' to a different IIS application pool.";
-
         }
         else
         {
@@ -65,12 +80,19 @@ public class EventLogHelpers
         }
     }
 
-    private static EventLogEntry[] AssertEntry(string regexString, IEnumerable<EventLogEntry> entries, bool allowMultiple = false)
+    private static EventLogEntry[] AssertEntry(
+        string regexString,
+        IEnumerable<EventLogEntry> entries,
+        bool allowMultiple = false
+    )
     {
         var expectedRegex = new Regex(regexString, RegexOptions.Singleline);
         var matchedEntries = entries.Where(entry => expectedRegex.IsMatch(entry.Message)).ToArray();
         Assert.True(matchedEntries.Length > 0, $"No entries matched by '{regexString}'");
-        Assert.True(allowMultiple || matchedEntries.Length < 2, $"Multiple entries matched by '{regexString}': {FormatEntries(matchedEntries)}");
+        Assert.True(
+            allowMultiple || matchedEntries.Length < 2,
+            $"Multiple entries matched by '{regexString}': {FormatEntries(matchedEntries)}"
+        );
         return matchedEntries;
     }
 
@@ -98,16 +120,20 @@ public class EventLogHelpers
                 break;
             }
 
-            if (eventLogEntry.ReplacementStrings == null ||
-                eventLogEntry.ReplacementStrings.Length < 3)
+            if (
+                eventLogEntry.ReplacementStrings == null
+                || eventLogEntry.ReplacementStrings.Length < 3
+            )
             {
                 continue;
             }
 
             // ReplacementStings == EventData collection in EventLog
             // This is unaffected if event providers are not registered correctly
-            if (eventLogEntry.Source == AncmVersionToMatch(deploymentResult) &&
-                processIdString == eventLogEntry.ReplacementStrings[1])
+            if (
+                eventLogEntry.Source == AncmVersionToMatch(deploymentResult)
+                && processIdString == eventLogEntry.ReplacementStrings[1]
+            )
             {
                 yield return eventLogEntry;
             }
@@ -116,9 +142,13 @@ public class EventLogHelpers
 
     private static string AncmVersionToMatch(IISDeploymentResult deploymentResult)
     {
-        return "IIS " +
-            (deploymentResult.DeploymentParameters.ServerType == ServerType.IISExpress ? "Express " : "") +
-            "AspNetCore Module V2";
+        return "IIS "
+            + (
+                deploymentResult.DeploymentParameters.ServerType == ServerType.IISExpress
+                    ? "Express "
+                    : ""
+            )
+            + "AspNetCore Module V2";
     }
 
     public static string Started(IISDeploymentResult deploymentResult)
@@ -177,7 +207,10 @@ public class EventLogHelpers
         return "Failed to gracefully shutdown application 'MACHINE/WEBROOT/APPHOST/.*?'.";
     }
 
-    public static string InProcessThreadException(IISDeploymentResult deploymentResult, string reason)
+    public static string InProcessThreadException(
+        IISDeploymentResult deploymentResult,
+        string reason
+    )
     {
         return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' hit unexpected managed exception{reason}";
     }
@@ -193,7 +226,12 @@ public class EventLogHelpers
             return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' hit unexpected managed background thread exit, exit code = '{code}'.";
         }
     }
-    public static string InProcessThreadExitStdOut(IISDeploymentResult deploymentResult, string code, string output)
+
+    public static string InProcessThreadExitStdOut(
+        IISDeploymentResult deploymentResult,
+        string code,
+        string output
+    )
     {
         if (DeployerSelector.HasNewHandler)
         {
@@ -222,19 +260,22 @@ public class EventLogHelpers
         }
     }
 
-    public static string OutOfProcessFailedToStart(IISDeploymentResult deploymentResult, string output)
+    public static string OutOfProcessFailedToStart(
+        IISDeploymentResult deploymentResult,
+        string output
+    )
     {
         if (DeployerSelector.HasNewShim)
         {
-            return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to start process with " +
-                $"commandline '(.*)' with multiple retries. " +
-                $"Failed to bind to port '(.*)'. First 30KB characters of captured stdout and stderr logs from multiple retries:\r\n{output}";
+            return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to start process with "
+                + $"commandline '(.*)' with multiple retries. "
+                + $"Failed to bind to port '(.*)'. First 30KB characters of captured stdout and stderr logs from multiple retries:\r\n{output}";
         }
         else
         {
-            return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to start process with " +
-                $"commandline '(.*)' with multiple retries. " +
-                $"The last try of listening port is '(.*)'. See previous warnings for details.";
+            return $"Application '/LM/W3SVC/1/ROOT' with physical root '{EscapedContentRoot(deploymentResult)}' failed to start process with "
+                + $"commandline '(.*)' with multiple retries. "
+                + $"The last try of listening port is '(.*)'. See previous warnings for details.";
         }
     }
 
@@ -248,7 +289,9 @@ public class EventLogHelpers
         return $"Unable to load '(.*)'. This might be caused by a bitness mismatch between IIS application pool and published application.";
     }
 
-    public static string InProcessFailedToFindNativeDependencies(IISDeploymentResult deploymentResult)
+    public static string InProcessFailedToFindNativeDependencies(
+        IISDeploymentResult deploymentResult
+    )
     {
         if (DeployerSelector.HasNewShim)
         {
@@ -256,9 +299,9 @@ public class EventLogHelpers
         }
         else
         {
-            return "Invoking hostfxr to find the inprocess request handler failed without finding any native dependencies. " +
-                "This most likely means the app is misconfigured, please check the versions of Microsoft.NetCore.App and Microsoft.AspNetCore.App that " +
-                "are targeted by the application and are installed on the machine.";
+            return "Invoking hostfxr to find the inprocess request handler failed without finding any native dependencies. "
+                + "This most likely means the app is misconfigured, please check the versions of Microsoft.NetCore.App and Microsoft.AspNetCore.App that "
+                + "are targeted by the application and are installed on the machine.";
         }
     }
 
@@ -272,7 +315,6 @@ public class EventLogHelpers
         if (DeployerSelector.HasNewShim)
         {
             return "Could not find the assembly '(.*)' referenced for the in-process application. Please confirm the Microsoft.AspNetCore.Server.IIS or Microsoft.AspNetCore.App is referenced in your application.";
-
         }
         else
         {
@@ -280,10 +322,12 @@ public class EventLogHelpers
         }
     }
 
-    public static string CouldNotStartStdoutFileRedirection(string file, IISDeploymentResult deploymentResult)
+    public static string CouldNotStartStdoutFileRedirection(
+        string file,
+        IISDeploymentResult deploymentResult
+    )
     {
-        return
-            $"Could not start stdout file redirection to '{Regex.Escape(file)}' with application base '{EscapedContentRoot(deploymentResult)}'.";
+        return $"Could not start stdout file redirection to '{Regex.Escape(file)}' with application base '{EscapedContentRoot(deploymentResult)}'.";
     }
 
     public static string CouldNotFindHandler()

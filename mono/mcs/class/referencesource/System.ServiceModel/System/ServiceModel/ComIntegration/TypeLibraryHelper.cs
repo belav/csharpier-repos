@@ -15,25 +15,31 @@ namespace System.ServiceModel.ComIntegration
 
     sealed class TypeLibraryHelper
     {
-
-        internal static Assembly GenerateAssemblyFromNativeTypeLibrary(Guid iid, Guid typeLibraryID, ITypeLib typeLibrary)
+        internal static Assembly GenerateAssemblyFromNativeTypeLibrary(
+            Guid iid,
+            Guid typeLibraryID,
+            ITypeLib typeLibrary
+        )
         {
             TypeLibraryHelper helper = GetHelperInstance();
             try
             {
-                return helper.GenerateAssemblyFromNativeTypeLibInternal(iid, typeLibraryID, typeLibrary);
-
+                return helper.GenerateAssemblyFromNativeTypeLibInternal(
+                    iid,
+                    typeLibraryID,
+                    typeLibrary
+                );
             }
             finally
             {
                 ReleaseHelperInstance();
             }
-
-
         }
+
         private static object instanceLock = new object();
         private static TypeLibraryHelper instance;
         private static int instanceCount = 0;
+
         private static TypeLibraryHelper GetHelperInstance()
         {
             lock (instanceLock)
@@ -56,35 +62,53 @@ namespace System.ServiceModel.ComIntegration
                 instance = null;
         }
 
-
         internal class ConversionEventHandler : ITypeLibImporterNotifySink
         {
-
             Guid iid;
             Guid typeLibraryID;
+
             public ConversionEventHandler(Guid iid, Guid typeLibraryID)
             {
                 this.iid = iid;
                 this.typeLibraryID = typeLibraryID;
             }
 
-            void ITypeLibImporterNotifySink.ReportEvent(ImporterEventKind eventKind, int eventCode, string eventMsg)
+            void ITypeLibImporterNotifySink.ReportEvent(
+                ImporterEventKind eventKind,
+                int eventCode,
+                string eventMsg
+            )
             {
-                ComPlusTLBImportTrace.Trace(TraceEventType.Verbose, TraceCode.ComIntegrationTLBImportConverterEvent,
-                            SR.TraceCodeComIntegrationTLBImportConverterEvent, iid, typeLibraryID, eventKind, eventCode, eventMsg);
+                ComPlusTLBImportTrace.Trace(
+                    TraceEventType.Verbose,
+                    TraceCode.ComIntegrationTLBImportConverterEvent,
+                    SR.TraceCodeComIntegrationTLBImportConverterEvent,
+                    iid,
+                    typeLibraryID,
+                    eventKind,
+                    eventCode,
+                    eventMsg
+                );
             }
 
             Assembly ITypeLibImporterNotifySink.ResolveRef(object typeLib)
             {
-
                 ITypeLib tlb = typeLib as ITypeLib;
                 IntPtr ptr = IntPtr.Zero;
                 try
                 {
                     tlb.GetLibAttr(out ptr);
-                    System.Runtime.InteropServices.ComTypes.TYPELIBATTR attr = (System.Runtime.InteropServices.ComTypes.TYPELIBATTR)Marshal.PtrToStructure(ptr, typeof(System.Runtime.InteropServices.ComTypes.TYPELIBATTR));
-                    return TypeLibraryHelper.GenerateAssemblyFromNativeTypeLibrary(iid, attr.guid, typeLib as ITypeLib);
-
+                    System.Runtime.InteropServices.ComTypes.TYPELIBATTR attr =
+                        (System.Runtime.InteropServices.ComTypes.TYPELIBATTR)
+                            Marshal.PtrToStructure(
+                                ptr,
+                                typeof(System.Runtime.InteropServices.ComTypes.TYPELIBATTR)
+                            );
+                    return TypeLibraryHelper.GenerateAssemblyFromNativeTypeLibrary(
+                        iid,
+                        attr.guid,
+                        typeLib as ITypeLib
+                    );
                 }
                 finally
                 {
@@ -92,12 +116,10 @@ namespace System.ServiceModel.ComIntegration
                         tlb.ReleaseTLibAttr(ptr);
                 }
             }
-
         }
 
         TypeLibConverter TypelibraryConverter = new TypeLibConverter();
         Dictionary<Guid, Assembly> TypelibraryAssembly = new Dictionary<Guid, Assembly>();
-
 
         private string GetRandomName()
         {
@@ -105,7 +127,12 @@ namespace System.ServiceModel.ComIntegration
             String strGuid = guid.ToString();
             return strGuid.Replace('-', '_');
         }
-        private Assembly GenerateAssemblyFromNativeTypeLibInternal(Guid iid, Guid typeLibraryID, ITypeLib typeLibrary)
+
+        private Assembly GenerateAssemblyFromNativeTypeLibInternal(
+            Guid iid,
+            Guid typeLibraryID,
+            ITypeLib typeLibrary
+        )
         {
             Assembly asm = null;
 
@@ -121,22 +148,39 @@ namespace System.ServiceModel.ComIntegration
                         string notused2 = "";
                         int notused3;
                         string namespaceName;
-                        typeLibrary.GetDocumentation(-1, out namespaceName, out notused1, out notused3, out notused2);
+                        typeLibrary.GetDocumentation(
+                            -1,
+                            out namespaceName,
+                            out notused1,
+                            out notused3,
+                            out notused2
+                        );
                         if (String.IsNullOrEmpty(namespaceName))
                         {
                             throw Fx.AssertAndThrowFatal("Assembly cannot be null");
                         }
                         assemblyName = String.Concat(namespaceName, GetRandomName(), ".dll");
-                        asm = TypelibraryConverter.ConvertTypeLibToAssembly(typeLibrary, assemblyName, TypeLibImporterFlags.SerializableValueClasses, new ConversionEventHandler(iid, typeLibraryID), null, null, namespaceName, null);
+                        asm = TypelibraryConverter.ConvertTypeLibToAssembly(
+                            typeLibrary,
+                            assemblyName,
+                            TypeLibImporterFlags.SerializableValueClasses,
+                            new ConversionEventHandler(iid, typeLibraryID),
+                            null,
+                            null,
+                            namespaceName,
+                            null
+                        );
                         TypelibraryAssembly[typeLibraryID] = asm;
                     }
                 }
-
             }
             catch (ReflectionTypeLoadException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.FailedToConvertTypelibraryToAssembly)));
-
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.FailedToConvertTypelibraryToAssembly)
+                    )
+                );
             }
 
             if (asm == null)

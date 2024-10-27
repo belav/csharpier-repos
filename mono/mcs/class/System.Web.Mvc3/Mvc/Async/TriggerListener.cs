@@ -1,4 +1,5 @@
-﻿namespace System.Web.Mvc.Async {
+﻿namespace System.Web.Mvc.Async
+{
     using System;
     using System.Threading;
 
@@ -9,48 +10,57 @@
 
     // This class is thread-safe.
 
-    internal sealed class TriggerListener {
-
+    internal sealed class TriggerListener
+    {
         private readonly Trigger _activateTrigger;
         private volatile Action _continuation;
         private readonly SingleEntryGate _continuationFiredGate = new SingleEntryGate();
         private int _outstandingTriggers;
         private readonly Trigger _setContinuationTrigger;
 
-        public TriggerListener() {
+        public TriggerListener()
+        {
             _activateTrigger = CreateTrigger();
             _setContinuationTrigger = CreateTrigger();
         }
 
-        public void Activate() {
+        public void Activate()
+        {
             _activateTrigger.Fire();
         }
 
-        public Trigger CreateTrigger() {
+        public Trigger CreateTrigger()
+        {
             Interlocked.Increment(ref _outstandingTriggers);
 
             SingleEntryGate triggerFiredGate = new SingleEntryGate();
-            return new Trigger(() => {
-                if (triggerFiredGate.TryEnter()) {
+            return new Trigger(() =>
+            {
+                if (triggerFiredGate.TryEnter())
+                {
                     HandleTriggerFired();
                 }
             });
         }
 
-        private void HandleTriggerFired() {
-            if (Interlocked.Decrement(ref _outstandingTriggers) == 0) {
-                if (_continuationFiredGate.TryEnter()) {
+        private void HandleTriggerFired()
+        {
+            if (Interlocked.Decrement(ref _outstandingTriggers) == 0)
+            {
+                if (_continuationFiredGate.TryEnter())
+                {
                     _continuation();
                 }
             }
         }
 
-        public void SetContinuation(Action continuation) {
-            if (continuation != null) {
+        public void SetContinuation(Action continuation)
+        {
+            if (continuation != null)
+            {
                 _continuation = continuation;
                 _setContinuationTrigger.Fire();
             }
         }
-
     }
 }

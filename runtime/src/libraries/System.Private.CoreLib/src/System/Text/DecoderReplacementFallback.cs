@@ -8,15 +8,15 @@ namespace System.Text
 {
     public sealed class DecoderReplacementFallback : DecoderFallback
     {
-        internal static readonly DecoderReplacementFallback s_default = new DecoderReplacementFallback();
+        internal static readonly DecoderReplacementFallback s_default =
+            new DecoderReplacementFallback();
 
         // Our variables
         private readonly string _strDefault;
 
         // Construction.  Default replacement fallback uses no best fit and ? replacement string
-        public DecoderReplacementFallback() : this("?")
-        {
-        }
+        public DecoderReplacementFallback()
+            : this("?") { }
 
         public DecoderReplacementFallback(string replacement)
         {
@@ -34,7 +34,7 @@ namespace System.Text
                     {
                         // if already had a high one, stop
                         if (bFoundHigh)
-                            break;  // break & throw at the bFoundHIgh below
+                            break; // break & throw at the bFoundHIgh below
                         bFoundHigh = true;
                     }
                     else
@@ -56,7 +56,10 @@ namespace System.Text
                     break;
             }
             if (bFoundHigh)
-                throw new ArgumentException(SR.Argument_InvalidCharSequenceNoIndex, nameof(replacement));
+                throw new ArgumentException(
+                    SR.Argument_InvalidCharSequenceNoIndex,
+                    nameof(replacement)
+                );
 
             _strDefault = replacement;
         }
@@ -70,8 +73,7 @@ namespace System.Text
         public override int MaxCharCount => _strDefault.Length;
 
         public override bool Equals([NotNullWhen(true)] object? value) =>
-            value is DecoderReplacementFallback that &&
-            _strDefault == that._strDefault;
+            value is DecoderReplacementFallback that && _strDefault == that._strDefault;
 
         public override int GetHashCode() => _strDefault.GetHashCode();
     }
@@ -129,8 +131,10 @@ namespace System.Text
             }
 
             // Now make sure its in the expected range
-            Debug.Assert(_fallbackIndex < _strDefault.Length && _fallbackIndex >= 0,
-                            "Index exceeds buffer range");
+            Debug.Assert(
+                _fallbackIndex < _strDefault.Length && _fallbackIndex >= 0,
+                "Index exceeds buffer range"
+            );
 
             return _strDefault[_fallbackIndex];
         }
@@ -152,7 +156,9 @@ namespace System.Text
         // How many characters left to output?
         public override int Remaining =>
             // Our count is 0 for 1 character left.
-            (_fallbackCount < 0) ? 0 : _fallbackCount;
+            (_fallbackCount < 0)
+                ? 0
+                : _fallbackCount;
 
         // Clear the buffer
         public override unsafe void Reset()

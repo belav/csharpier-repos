@@ -25,12 +25,14 @@ namespace System.ComponentModel
         /// <summary>
         /// Convert the given value to a string using the given radix
         /// </summary>
-        internal override object FromString(string value, int radix) => throw new NotImplementedException(); // This method shouldn't be called anyway for the Half type as it doesn't support hex formatting.
+        internal override object FromString(string value, int radix) =>
+            throw new NotImplementedException(); // This method shouldn't be called anyway for the Half type as it doesn't support hex formatting.
 
         /// <summary>
         /// Convert the given value to a string using the given formatInfo
         /// </summary>
-        internal override object FromString(string value, NumberFormatInfo? formatInfo) => Half.Parse(value, formatInfo);
+        internal override object FromString(string value, NumberFormatInfo? formatInfo) =>
+            Half.Parse(value, formatInfo);
 
         /// <summary>
         /// Convert the given value from a string using the given formatInfo

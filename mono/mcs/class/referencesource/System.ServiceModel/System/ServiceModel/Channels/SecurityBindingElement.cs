@@ -4,9 +4,9 @@
 namespace System.ServiceModel.Channels
 {
     using System;
-    using System.Diagnostics;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
+    using System.Diagnostics;
     using System.Globalization;
     using System.IdentityModel.Selectors;
     using System.IdentityModel.Tokens;
@@ -15,8 +15,8 @@ namespace System.ServiceModel.Channels
     using System.Security.Authentication.ExtendedProtection;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
-    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Security;
     using System.ServiceModel.Security.Tokens;
     using System.Text;
@@ -25,14 +25,16 @@ namespace System.ServiceModel.Channels
     public abstract class SecurityBindingElement : BindingElement
     {
         internal const string defaultAlgorithmSuiteString = ConfigurationStrings.Default;
-        internal static readonly SecurityAlgorithmSuite defaultDefaultAlgorithmSuite = SecurityAlgorithmSuite.Default;
+        internal static readonly SecurityAlgorithmSuite defaultDefaultAlgorithmSuite =
+            SecurityAlgorithmSuite.Default;
         internal const bool defaultIncludeTimestamp = true;
         internal const bool defaultAllowInsecureTransport = false;
-        internal const MessageProtectionOrder defaultMessageProtectionOrder = MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
+        internal const MessageProtectionOrder defaultMessageProtectionOrder =
+            MessageProtectionOrder.SignBeforeEncryptAndEncryptSignature;
         internal const bool defaultRequireSignatureConfirmation = false;
         internal const bool defaultEnableUnsecuredResponse = false;
         internal const bool defaultProtectTokens = false;
-        
+
         SecurityAlgorithmSuite defaultAlgorithmSuite;
         SupportingTokenParameters endpointSupportingTokenParameters;
         SupportingTokenParameters optionalEndpointSupportingTokenParameters;
@@ -47,7 +49,7 @@ namespace System.ServiceModel.Channels
         InternalDuplexBindingElement internalDuplexBindingElement;
         long maxReceivedMessageSize = TransportDefaults.MaxReceivedMessageSize;
         XmlDictionaryReaderQuotas readerQuotas;
-        bool doNotEmitTrust = false; // true if user create a basic http standard binding, the custombinding equivalent will not set this flag 
+        bool doNotEmitTrust = false; // true if user create a basic http standard binding, the custombinding equivalent will not set this flag
         bool supportsExtendedProtectionPolicy;
         bool allowInsecureTransport;
         bool enableUnsecuredResponse;
@@ -64,8 +66,10 @@ namespace System.ServiceModel.Channels
             this.localServiceSettings = new LocalServiceSecuritySettings();
             this.endpointSupportingTokenParameters = new SupportingTokenParameters();
             this.optionalEndpointSupportingTokenParameters = new SupportingTokenParameters();
-            this.operationSupportingTokenParameters = new Dictionary<string, SupportingTokenParameters>();
-            this.optionalOperationSupportingTokenParameters = new Dictionary<string, SupportingTokenParameters>();
+            this.operationSupportingTokenParameters =
+                new Dictionary<string, SupportingTokenParameters>();
+            this.optionalOperationSupportingTokenParameters =
+                new Dictionary<string, SupportingTokenParameters>();
             this.securityHeaderLayout = SecurityProtocolFactory.defaultSecurityHeaderLayout;
             this.allowInsecureTransport = defaultAllowInsecureTransport;
             this.enableUnsecuredResponse = defaultEnableUnsecuredResponse;
@@ -76,34 +80,47 @@ namespace System.ServiceModel.Channels
             : base(elementToBeCloned)
         {
             if (elementToBeCloned == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("elementToBeCloned");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "elementToBeCloned"
+                );
 
             this.defaultAlgorithmSuite = elementToBeCloned.defaultAlgorithmSuite;
             this.includeTimestamp = elementToBeCloned.includeTimestamp;
             this.keyEntropyMode = elementToBeCloned.keyEntropyMode;
             this.messageSecurityVersion = elementToBeCloned.messageSecurityVersion;
             this.securityHeaderLayout = elementToBeCloned.securityHeaderLayout;
-            this.endpointSupportingTokenParameters = (SupportingTokenParameters)elementToBeCloned.endpointSupportingTokenParameters.Clone();
-            this.optionalEndpointSupportingTokenParameters = (SupportingTokenParameters)elementToBeCloned.optionalEndpointSupportingTokenParameters.Clone();
-            this.operationSupportingTokenParameters = new Dictionary<string, SupportingTokenParameters>();
+            this.endpointSupportingTokenParameters = (SupportingTokenParameters)
+                elementToBeCloned.endpointSupportingTokenParameters.Clone();
+            this.optionalEndpointSupportingTokenParameters = (SupportingTokenParameters)
+                elementToBeCloned.optionalEndpointSupportingTokenParameters.Clone();
+            this.operationSupportingTokenParameters =
+                new Dictionary<string, SupportingTokenParameters>();
             foreach (string key in elementToBeCloned.operationSupportingTokenParameters.Keys)
             {
-                this.operationSupportingTokenParameters[key] = (SupportingTokenParameters)elementToBeCloned.operationSupportingTokenParameters[key].Clone();
+                this.operationSupportingTokenParameters[key] = (SupportingTokenParameters)
+                    elementToBeCloned.operationSupportingTokenParameters[key].Clone();
             }
-            this.optionalOperationSupportingTokenParameters = new Dictionary<string, SupportingTokenParameters>();
-            foreach (string key in elementToBeCloned.optionalOperationSupportingTokenParameters.Keys)
+            this.optionalOperationSupportingTokenParameters =
+                new Dictionary<string, SupportingTokenParameters>();
+            foreach (
+                string key in elementToBeCloned.optionalOperationSupportingTokenParameters.Keys
+            )
             {
-                this.optionalOperationSupportingTokenParameters[key] = (SupportingTokenParameters)elementToBeCloned.optionalOperationSupportingTokenParameters[key].Clone();
+                this.optionalOperationSupportingTokenParameters[key] = (SupportingTokenParameters)
+                    elementToBeCloned.optionalOperationSupportingTokenParameters[key].Clone();
             }
-            this.localClientSettings = (LocalClientSecuritySettings)elementToBeCloned.localClientSettings.Clone();
-            this.localServiceSettings = (LocalServiceSecuritySettings)elementToBeCloned.localServiceSettings.Clone();
+            this.localClientSettings = (LocalClientSecuritySettings)
+                elementToBeCloned.localClientSettings.Clone();
+            this.localServiceSettings = (LocalServiceSecuritySettings)
+                elementToBeCloned.localServiceSettings.Clone();
             this.internalDuplexBindingElement = elementToBeCloned.internalDuplexBindingElement;
             this.maxReceivedMessageSize = elementToBeCloned.maxReceivedMessageSize;
             this.readerQuotas = elementToBeCloned.readerQuotas;
             this.doNotEmitTrust = elementToBeCloned.doNotEmitTrust;
             this.allowInsecureTransport = elementToBeCloned.allowInsecureTransport;
             this.enableUnsecuredResponse = elementToBeCloned.enableUnsecuredResponse;
-            this.supportsExtendedProtectionPolicy = elementToBeCloned.supportsExtendedProtectionPolicy;
+            this.supportsExtendedProtectionPolicy =
+                elementToBeCloned.supportsExtendedProtectionPolicy;
             this.protectTokens = elementToBeCloned.protectTokens;
         }
 
@@ -115,47 +132,36 @@ namespace System.ServiceModel.Channels
 
         public SupportingTokenParameters EndpointSupportingTokenParameters
         {
-            get
-            {
-                return this.endpointSupportingTokenParameters;
-            }
+            get { return this.endpointSupportingTokenParameters; }
         }
 
         public SupportingTokenParameters OptionalEndpointSupportingTokenParameters
         {
-            get
-            {
-                return this.optionalEndpointSupportingTokenParameters;
-            }
+            get { return this.optionalEndpointSupportingTokenParameters; }
         }
-
 
         public IDictionary<string, SupportingTokenParameters> OperationSupportingTokenParameters
         {
-            get
-            {
-                return this.operationSupportingTokenParameters;
-            }
+            get { return this.operationSupportingTokenParameters; }
         }
 
-        public IDictionary<string, SupportingTokenParameters> OptionalOperationSupportingTokenParameters
+        public IDictionary<
+            string,
+            SupportingTokenParameters
+        > OptionalOperationSupportingTokenParameters
         {
-            get
-            {
-                return this.optionalOperationSupportingTokenParameters;
-            }
+            get { return this.optionalOperationSupportingTokenParameters; }
         }
 
         public SecurityHeaderLayout SecurityHeaderLayout
         {
-            get
-            {
-                return this.securityHeaderLayout;
-            }
+            get { return this.securityHeaderLayout; }
             set
             {
                 if (!SecurityHeaderLayoutHelper.IsDefined(value))
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
 
                 this.securityHeaderLayout = value;
             }
@@ -163,107 +169,74 @@ namespace System.ServiceModel.Channels
 
         public MessageSecurityVersion MessageSecurityVersion
         {
-            get
-            {
-                return this.messageSecurityVersion;
-            }
+            get { return this.messageSecurityVersion; }
             set
             {
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 this.messageSecurityVersion = value;
             }
         }
 
         public bool EnableUnsecuredResponse
         {
-            get
-            {
-                return this.enableUnsecuredResponse;
-            }
-            set
-            {
-                this.enableUnsecuredResponse = value;
-            }
+            get { return this.enableUnsecuredResponse; }
+            set { this.enableUnsecuredResponse = value; }
         }
 
         public bool IncludeTimestamp
         {
-            get
-            {
-                return this.includeTimestamp;
-            }
-            set
-            {
-                this.includeTimestamp = value;
-            }
+            get { return this.includeTimestamp; }
+            set { this.includeTimestamp = value; }
         }
 
         public bool AllowInsecureTransport
         {
-            get
-            {
-                return this.allowInsecureTransport;
-            }
-            set
-            {
-                this.allowInsecureTransport = value;
-            }
+            get { return this.allowInsecureTransport; }
+            set { this.allowInsecureTransport = value; }
         }
 
         public SecurityAlgorithmSuite DefaultAlgorithmSuite
         {
-            get
-            {
-                return this.defaultAlgorithmSuite;
-            }
+            get { return this.defaultAlgorithmSuite; }
             set
             {
                 if (value == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentNullException("value")
+                    );
                 this.defaultAlgorithmSuite = value;
             }
         }
 
         public bool ProtectTokens
         {
-            get
-            {
-                return this.protectTokens;
-            }
-            set
-            {
-                this.protectTokens = value;
-            }
+            get { return this.protectTokens; }
+            set { this.protectTokens = value; }
         }
 
         public LocalClientSecuritySettings LocalClientSettings
         {
-            get
-            {
-                return this.localClientSettings;
-            }
+            get { return this.localClientSettings; }
         }
 
         public LocalServiceSecuritySettings LocalServiceSettings
         {
-            get
-            {
-                return this.localServiceSettings;
-            }
+            get { return this.localServiceSettings; }
         }
 
         public SecurityKeyEntropyMode KeyEntropyMode
         {
-            get
-            {
-                return this.keyEntropyMode;
-            }
+            get { return this.keyEntropyMode; }
             set
             {
                 if (!SecurityKeyEntropyModeHelper.IsDefined(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value"));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException("value")
+                    );
                 }
                 this.keyEntropyMode = value;
             }
@@ -302,7 +275,11 @@ namespace System.ServiceModel.Channels
             set { this.readerQuotas = value; }
         }
 
-        void GetSupportingTokensCapabilities(ICollection<SecurityTokenParameters> parameters, out bool supportsClientAuth, out bool supportsWindowsIdentity)
+        void GetSupportingTokensCapabilities(
+            ICollection<SecurityTokenParameters> parameters,
+            out bool supportsClientAuth,
+            out bool supportsWindowsIdentity
+        )
         {
             supportsClientAuth = false;
             supportsWindowsIdentity = false;
@@ -315,35 +292,61 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void GetSupportingTokensCapabilities(SupportingTokenParameters requirements, out bool supportsClientAuth, out bool supportsWindowsIdentity)
+        void GetSupportingTokensCapabilities(
+            SupportingTokenParameters requirements,
+            out bool supportsClientAuth,
+            out bool supportsWindowsIdentity
+        )
         {
             supportsClientAuth = false;
             supportsWindowsIdentity = false;
             bool tmpSupportsClientAuth;
             bool tmpSupportsWindowsIdentity;
-            this.GetSupportingTokensCapabilities(requirements.Endorsing, out tmpSupportsClientAuth, out tmpSupportsWindowsIdentity);
+            this.GetSupportingTokensCapabilities(
+                requirements.Endorsing,
+                out tmpSupportsClientAuth,
+                out tmpSupportsWindowsIdentity
+            );
             supportsClientAuth = supportsClientAuth || tmpSupportsClientAuth;
             supportsWindowsIdentity = supportsWindowsIdentity || tmpSupportsWindowsIdentity;
 
-            this.GetSupportingTokensCapabilities(requirements.SignedEndorsing, out tmpSupportsClientAuth, out tmpSupportsWindowsIdentity);
+            this.GetSupportingTokensCapabilities(
+                requirements.SignedEndorsing,
+                out tmpSupportsClientAuth,
+                out tmpSupportsWindowsIdentity
+            );
             supportsClientAuth = supportsClientAuth || tmpSupportsClientAuth;
             supportsWindowsIdentity = supportsWindowsIdentity || tmpSupportsWindowsIdentity;
 
-            this.GetSupportingTokensCapabilities(requirements.SignedEncrypted, out tmpSupportsClientAuth, out tmpSupportsWindowsIdentity);
+            this.GetSupportingTokensCapabilities(
+                requirements.SignedEncrypted,
+                out tmpSupportsClientAuth,
+                out tmpSupportsWindowsIdentity
+            );
             supportsClientAuth = supportsClientAuth || tmpSupportsClientAuth;
             supportsWindowsIdentity = supportsWindowsIdentity || tmpSupportsWindowsIdentity;
         }
 
-        internal void GetSupportingTokensCapabilities(out bool supportsClientAuth, out bool supportsWindowsIdentity)
+        internal void GetSupportingTokensCapabilities(
+            out bool supportsClientAuth,
+            out bool supportsWindowsIdentity
+        )
         {
-            this.GetSupportingTokensCapabilities(this.EndpointSupportingTokenParameters, out supportsClientAuth, out supportsWindowsIdentity);
+            this.GetSupportingTokensCapabilities(
+                this.EndpointSupportingTokenParameters,
+                out supportsClientAuth,
+                out supportsWindowsIdentity
+            );
         }
 
         // SecureConversation needs a demuxer below security to 1) demux between the security sessions and 2) demux the SCT issue and renewal messages
         // to the authenticator
-        internal void AddDemuxerForSecureConversation(ChannelBuilder builder, BindingContext secureConversationBindingContext)
+        internal void AddDemuxerForSecureConversation(
+            ChannelBuilder builder,
+            BindingContext secureConversationBindingContext
+        )
         {
-            // add a demuxer element  right below security unless there's a demuxer already present below and the only 
+            // add a demuxer element  right below security unless there's a demuxer already present below and the only
             // binding elements between security and the demuxer are "ancillary" binding elements like message encoding element and
             // stream-security upgrade element. We could always add the channel demuxer below security but not doing so in the ancillary
             // binding elements case improves perf
@@ -351,7 +354,10 @@ namespace System.ServiceModel.Channels
             bool doesBindingHaveShapeChangingElements = false;
             for (int i = 0; i < builder.Binding.Elements.Count; ++i)
             {
-                if ((builder.Binding.Elements[i] is MessageEncodingBindingElement) || (builder.Binding.Elements[i] is StreamUpgradeBindingElement))
+                if (
+                    (builder.Binding.Elements[i] is MessageEncodingBindingElement)
+                    || (builder.Binding.Elements[i] is StreamUpgradeBindingElement)
+                )
                 {
                     continue;
                 }
@@ -383,7 +389,8 @@ namespace System.ServiceModel.Channels
 
         internal void ApplyPropertiesOnDemuxer(ChannelBuilder builder, BindingContext context)
         {
-            Collection<ChannelDemuxerBindingElement> demuxerElements = builder.Binding.Elements.FindAll<ChannelDemuxerBindingElement>();
+            Collection<ChannelDemuxerBindingElement> demuxerElements =
+                builder.Binding.Elements.FindAll<ChannelDemuxerBindingElement>();
             foreach (ChannelDemuxerBindingElement element in demuxerElements)
             {
                 if (element != null)
@@ -393,26 +400,38 @@ namespace System.ServiceModel.Channels
                 }
             }
         }
-        
-        static BindingContext CreateIssuerBindingContextForNegotiation(BindingContext issuerBindingContext)
+
+        static BindingContext CreateIssuerBindingContextForNegotiation(
+            BindingContext issuerBindingContext
+        )
         {
-            TransportBindingElement transport = issuerBindingContext.RemainingBindingElements.Find<TransportBindingElement>();
+            TransportBindingElement transport =
+                issuerBindingContext.RemainingBindingElements.Find<TransportBindingElement>();
             if (transport == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TransportBindingElementNotFound)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.TransportBindingElementNotFound))
+                );
             }
             ChannelDemuxerBindingElement demuxer = null;
             // pick the demuxer above transport (i.e. the last demuxer in the array)
             for (int i = 0; i < issuerBindingContext.RemainingBindingElements.Count; ++i)
             {
-                if (issuerBindingContext.RemainingBindingElements[i] is ChannelDemuxerBindingElement)
+                if (
+                    issuerBindingContext.RemainingBindingElements[i] is ChannelDemuxerBindingElement
+                )
                 {
-                    demuxer = (ChannelDemuxerBindingElement) issuerBindingContext.RemainingBindingElements[i];
+                    demuxer = (ChannelDemuxerBindingElement)
+                        issuerBindingContext.RemainingBindingElements[i];
                 }
             }
             if (demuxer == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ChannelDemuxerBindingElementNotFound)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.ChannelDemuxerBindingElementNotFound)
+                    )
+                );
             }
             BindingElementCollection negotiationBindingElements = new BindingElementCollection();
             negotiationBindingElements.Add(demuxer.Clone());
@@ -424,56 +443,94 @@ namespace System.ServiceModel.Channels
             binding.ReceiveTimeout = issuerBindingContext.Binding.ReceiveTimeout;
             if (issuerBindingContext.ListenUriBaseAddress != null)
             {
-                return new BindingContext(binding, new BindingParameterCollection(issuerBindingContext.BindingParameters), issuerBindingContext.ListenUriBaseAddress,
-                    issuerBindingContext.ListenUriRelativeAddress, issuerBindingContext.ListenUriMode);
+                return new BindingContext(
+                    binding,
+                    new BindingParameterCollection(issuerBindingContext.BindingParameters),
+                    issuerBindingContext.ListenUriBaseAddress,
+                    issuerBindingContext.ListenUriRelativeAddress,
+                    issuerBindingContext.ListenUriMode
+                );
             }
             else
             {
-                return new BindingContext(binding, new BindingParameterCollection(issuerBindingContext.BindingParameters));
+                return new BindingContext(
+                    binding,
+                    new BindingParameterCollection(issuerBindingContext.BindingParameters)
+                );
             }
         }
 
-        protected static void SetIssuerBindingContextIfRequired(SecurityTokenParameters parameters, BindingContext issuerBindingContext)
+        protected static void SetIssuerBindingContextIfRequired(
+            SecurityTokenParameters parameters,
+            BindingContext issuerBindingContext
+        )
         {
             if (parameters is SslSecurityTokenParameters)
             {
-                ((SslSecurityTokenParameters)parameters).IssuerBindingContext = CreateIssuerBindingContextForNegotiation(issuerBindingContext);
+                ((SslSecurityTokenParameters)parameters).IssuerBindingContext =
+                    CreateIssuerBindingContextForNegotiation(issuerBindingContext);
             }
             else if (parameters is SspiSecurityTokenParameters)
             {
-                ((SspiSecurityTokenParameters)parameters).IssuerBindingContext = CreateIssuerBindingContextForNegotiation(issuerBindingContext);
+                ((SspiSecurityTokenParameters)parameters).IssuerBindingContext =
+                    CreateIssuerBindingContextForNegotiation(issuerBindingContext);
             }
         }
 
-        static void SetIssuerBindingContextIfRequired(SupportingTokenParameters supportingParameters, BindingContext issuerBindingContext)
+        static void SetIssuerBindingContextIfRequired(
+            SupportingTokenParameters supportingParameters,
+            BindingContext issuerBindingContext
+        )
         {
             for (int i = 0; i < supportingParameters.Endorsing.Count; ++i)
             {
-                SetIssuerBindingContextIfRequired(supportingParameters.Endorsing[i], issuerBindingContext);
+                SetIssuerBindingContextIfRequired(
+                    supportingParameters.Endorsing[i],
+                    issuerBindingContext
+                );
             }
             for (int i = 0; i < supportingParameters.SignedEndorsing.Count; ++i)
             {
-                SetIssuerBindingContextIfRequired(supportingParameters.SignedEndorsing[i], issuerBindingContext);
+                SetIssuerBindingContextIfRequired(
+                    supportingParameters.SignedEndorsing[i],
+                    issuerBindingContext
+                );
             }
             for (int i = 0; i < supportingParameters.Signed.Count; ++i)
             {
-                SetIssuerBindingContextIfRequired(supportingParameters.Signed[i], issuerBindingContext);
+                SetIssuerBindingContextIfRequired(
+                    supportingParameters.Signed[i],
+                    issuerBindingContext
+                );
             }
             for (int i = 0; i < supportingParameters.SignedEncrypted.Count; ++i)
             {
-                SetIssuerBindingContextIfRequired(supportingParameters.SignedEncrypted[i], issuerBindingContext);
+                SetIssuerBindingContextIfRequired(
+                    supportingParameters.SignedEncrypted[i],
+                    issuerBindingContext
+                );
             }
         }
 
         void SetIssuerBindingContextIfRequired(BindingContext issuerBindingContext)
         {
-            SetIssuerBindingContextIfRequired(this.EndpointSupportingTokenParameters, issuerBindingContext);
-            SetIssuerBindingContextIfRequired(this.OptionalEndpointSupportingTokenParameters, issuerBindingContext);
-            foreach (SupportingTokenParameters parameters in this.OperationSupportingTokenParameters.Values)
+            SetIssuerBindingContextIfRequired(
+                this.EndpointSupportingTokenParameters,
+                issuerBindingContext
+            );
+            SetIssuerBindingContextIfRequired(
+                this.OptionalEndpointSupportingTokenParameters,
+                issuerBindingContext
+            );
+            foreach (
+                SupportingTokenParameters parameters in this.OperationSupportingTokenParameters.Values
+            )
             {
                 SetIssuerBindingContextIfRequired(parameters, issuerBindingContext);
             }
-            foreach (SupportingTokenParameters parameters in this.OptionalOperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters parameters in this.OptionalOperationSupportingTokenParameters.Values
+            )
             {
                 SetIssuerBindingContextIfRequired(parameters, issuerBindingContext);
             }
@@ -481,42 +538,54 @@ namespace System.ServiceModel.Channels
 
         internal bool RequiresChannelDemuxer(SecurityTokenParameters parameters)
         {
-            return ((parameters is SecureConversationSecurityTokenParameters)
-                    || (parameters is SslSecurityTokenParameters)
-                    || (parameters is SspiSecurityTokenParameters));
+            return (
+                (parameters is SecureConversationSecurityTokenParameters)
+                || (parameters is SslSecurityTokenParameters)
+                || (parameters is SspiSecurityTokenParameters)
+            );
         }
 
         internal virtual bool RequiresChannelDemuxer()
         {
-            foreach (SecurityTokenParameters parameters in EndpointSupportingTokenParameters.Endorsing)
+            foreach (
+                SecurityTokenParameters parameters in EndpointSupportingTokenParameters.Endorsing
+            )
             {
                 if (RequiresChannelDemuxer(parameters))
                 {
                     return true;
                 }
             }
-            foreach (SecurityTokenParameters parameters in EndpointSupportingTokenParameters.SignedEndorsing)
+            foreach (
+                SecurityTokenParameters parameters in EndpointSupportingTokenParameters.SignedEndorsing
+            )
             {
                 if (RequiresChannelDemuxer(parameters))
                 {
                     return true;
                 }
             }
-            foreach (SecurityTokenParameters parameters in OptionalEndpointSupportingTokenParameters.Endorsing)
+            foreach (
+                SecurityTokenParameters parameters in OptionalEndpointSupportingTokenParameters.Endorsing
+            )
             {
                 if (RequiresChannelDemuxer(parameters))
                 {
                     return true;
                 }
             }
-            foreach (SecurityTokenParameters parameters in OptionalEndpointSupportingTokenParameters.SignedEndorsing)
+            foreach (
+                SecurityTokenParameters parameters in OptionalEndpointSupportingTokenParameters.SignedEndorsing
+            )
             {
                 if (RequiresChannelDemuxer(parameters))
                 {
                     return true;
                 }
             }
-            foreach (SupportingTokenParameters supportingParameters in OperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters supportingParameters in OperationSupportingTokenParameters.Values
+            )
             {
                 foreach (SecurityTokenParameters parameters in supportingParameters.Endorsing)
                 {
@@ -533,7 +602,9 @@ namespace System.ServiceModel.Channels
                     }
                 }
             }
-            foreach (SupportingTokenParameters supportingParameters in OptionalOperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters supportingParameters in OptionalOperationSupportingTokenParameters.Values
+            )
             {
                 foreach (SecurityTokenParameters parameters in supportingParameters.Endorsing)
                 {
@@ -555,13 +626,18 @@ namespace System.ServiceModel.Channels
 
         internal bool IsUnderlyingListenerDuplex<TChannel>(BindingContext context)
         {
-            return ((typeof(TChannel) == typeof(IDuplexSessionChannel)) && context.CanBuildInnerChannelListener<IDuplexChannel>()
-                && !context.CanBuildInnerChannelListener<IDuplexSessionChannel>());
+            return (
+                (typeof(TChannel) == typeof(IDuplexSessionChannel))
+                && context.CanBuildInnerChannelListener<IDuplexChannel>()
+                && !context.CanBuildInnerChannelListener<IDuplexSessionChannel>()
+            );
         }
 
         void SetPrivacyNoticeUriIfRequired(SecurityProtocolFactory factory, Binding binding)
         {
-            PrivacyNoticeBindingElement privacyElement = binding.CreateBindingElements().Find<PrivacyNoticeBindingElement>();
+            PrivacyNoticeBindingElement privacyElement = binding
+                .CreateBindingElements()
+                .Find<PrivacyNoticeBindingElement>();
             if (privacyElement != null)
             {
                 factory.PrivacyNoticeUri = privacyElement.Url;
@@ -569,12 +645,22 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal void ConfigureProtocolFactory(SecurityProtocolFactory factory, SecurityCredentialsManager credentialsManager, bool isForService, BindingContext issuerBindingContext, Binding binding)
+        internal void ConfigureProtocolFactory(
+            SecurityProtocolFactory factory,
+            SecurityCredentialsManager credentialsManager,
+            bool isForService,
+            BindingContext issuerBindingContext,
+            Binding binding
+        )
         {
             if (factory == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("factory"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("factory")
+                );
             if (credentialsManager == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("credentialsManager"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("credentialsManager")
+                );
 
             factory.AddTimestamp = this.IncludeTimestamp;
             factory.IncomingAlgorithmSuite = this.DefaultAlgorithmSuite;
@@ -583,7 +669,8 @@ namespace System.ServiceModel.Channels
 
             if (!isForService)
             {
-                factory.TimestampValidityDuration = this.LocalClientSettings.TimestampValidityDuration;
+                factory.TimestampValidityDuration =
+                    this.LocalClientSettings.TimestampValidityDuration;
                 factory.DetectReplays = this.LocalClientSettings.DetectReplays;
                 factory.MaxCachedNonces = this.LocalClientSettings.ReplayCacheSize;
                 factory.MaxClockSkew = this.LocalClientSettings.MaxClockSkew;
@@ -591,12 +678,13 @@ namespace System.ServiceModel.Channels
 
                 if (this.LocalClientSettings.DetectReplays)
                 {
-                  factory.NonceCache = this.LocalClientSettings.NonceCache;
+                    factory.NonceCache = this.LocalClientSettings.NonceCache;
                 }
             }
             else
             {
-                factory.TimestampValidityDuration = this.LocalServiceSettings.TimestampValidityDuration;
+                factory.TimestampValidityDuration =
+                    this.LocalServiceSettings.TimestampValidityDuration;
                 factory.DetectReplays = this.LocalServiceSettings.DetectReplays;
                 factory.MaxCachedNonces = this.LocalServiceSettings.ReplayCacheSize;
                 factory.MaxClockSkew = this.LocalServiceSettings.MaxClockSkew;
@@ -604,73 +692,100 @@ namespace System.ServiceModel.Channels
 
                 if (this.LocalServiceSettings.DetectReplays)
                 {
-                   factory.NonceCache = this.LocalServiceSettings.NonceCache;
+                    factory.NonceCache = this.LocalServiceSettings.NonceCache;
                 }
             }
-            
-            factory.SecurityBindingElement = (SecurityBindingElement) this.Clone();
+
+            factory.SecurityBindingElement = (SecurityBindingElement)this.Clone();
             factory.SecurityBindingElement.SetIssuerBindingContextIfRequired(issuerBindingContext);
             factory.SecurityTokenManager = credentialsManager.CreateSecurityTokenManager();
-            SecurityTokenSerializer tokenSerializer = factory.SecurityTokenManager.CreateSecurityTokenSerializer(this.messageSecurityVersion.SecurityTokenVersion);
-            factory.StandardsManager = new SecurityStandardsManager(this.messageSecurityVersion, tokenSerializer);
+            SecurityTokenSerializer tokenSerializer =
+                factory.SecurityTokenManager.CreateSecurityTokenSerializer(
+                    this.messageSecurityVersion.SecurityTokenVersion
+                );
+            factory.StandardsManager = new SecurityStandardsManager(
+                this.messageSecurityVersion,
+                tokenSerializer
+            );
             if (!isForService)
             {
                 SetPrivacyNoticeUriIfRequired(factory, binding);
             }
         }
 
-        internal abstract SecurityProtocolFactory CreateSecurityProtocolFactory<TChannel>(BindingContext context, SecurityCredentialsManager credentialsManager,
-        bool isForService, BindingContext issuanceBindingContext);
+        internal abstract SecurityProtocolFactory CreateSecurityProtocolFactory<TChannel>(
+            BindingContext context,
+            SecurityCredentialsManager credentialsManager,
+            bool isForService,
+            BindingContext issuanceBindingContext
+        );
 
-        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(BindingContext context)
+        public override IChannelFactory<TChannel> BuildChannelFactory<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
             if (!this.CanBuildChannelFactory<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)), "TChannel"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)),
+                        "TChannel"
+                    )
+                );
             }
 
             this.readerQuotas = context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (readerQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
+                    )
+                );
             }
 
             TransportBindingElement transportBindingElement = null;
-            
+
             if (context.RemainingBindingElements != null)
-                transportBindingElement = context.RemainingBindingElements.Find<TransportBindingElement>();
+                transportBindingElement =
+                    context.RemainingBindingElements.Find<TransportBindingElement>();
 
             if (transportBindingElement != null)
                 this.maxReceivedMessageSize = transportBindingElement.MaxReceivedMessageSize;
 
             IChannelFactory<TChannel> result = this.BuildChannelFactoryCore<TChannel>(context);
 
-            // attach the ExtendedProtectionPolicy to the securityProtcolFactory so it will be 
+            // attach the ExtendedProtectionPolicy to the securityProtcolFactory so it will be
             // available when building the channel.
             if (transportBindingElement != null)
             {
                 SecurityChannelFactory<TChannel> scf = result as SecurityChannelFactory<TChannel>;
                 if (scf != null && scf.SecurityProtocolFactory != null)
                 {
-                    scf.SecurityProtocolFactory.ExtendedProtectionPolicy = transportBindingElement.GetProperty<ExtendedProtectionPolicy>(context);
+                    scf.SecurityProtocolFactory.ExtendedProtectionPolicy =
+                        transportBindingElement.GetProperty<ExtendedProtectionPolicy>(context);
                 }
             }
 
             return result;
-
         }
 
-        protected abstract IChannelFactory<TChannel> BuildChannelFactoryCore<TChannel>(BindingContext context);
+        protected abstract IChannelFactory<TChannel> BuildChannelFactoryCore<TChannel>(
+            BindingContext context
+        );
 
         public override bool CanBuildChannelFactory<TChannel>(BindingContext context)
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
-            InternalDuplexBindingElement.AddDuplexFactorySupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexFactorySupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (this.SessionMode)
             {
@@ -682,28 +797,51 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            return typeof(TChannel) == typeof(IOutputChannel) || typeof(TChannel) == typeof(IOutputSessionChannel) ||
-                (this.SupportsDuplex && (typeof(TChannel) == typeof(IDuplexChannel) || typeof(TChannel) == typeof(IDuplexSessionChannel))) ||
-                (this.SupportsRequestReply && (typeof(TChannel) == typeof(IRequestChannel) || typeof(TChannel) == typeof(IRequestSessionChannel)));
+            return typeof(TChannel) == typeof(IOutputChannel)
+                || typeof(TChannel) == typeof(IOutputSessionChannel)
+                || (
+                    this.SupportsDuplex
+                    && (
+                        typeof(TChannel) == typeof(IDuplexChannel)
+                        || typeof(TChannel) == typeof(IDuplexSessionChannel)
+                    )
+                )
+                || (
+                    this.SupportsRequestReply
+                    && (
+                        typeof(TChannel) == typeof(IRequestChannel)
+                        || typeof(TChannel) == typeof(IRequestSessionChannel)
+                    )
+                );
         }
 
         bool CanBuildSessionChannelFactory<TChannel>(BindingContext context)
         {
-            if (!(context.CanBuildInnerChannelFactory<IRequestChannel>()
-                || context.CanBuildInnerChannelFactory<IRequestSessionChannel>()
-                || context.CanBuildInnerChannelFactory<IDuplexChannel>()
-                || context.CanBuildInnerChannelFactory<IDuplexSessionChannel>()))
+            if (
+                !(
+                    context.CanBuildInnerChannelFactory<IRequestChannel>()
+                    || context.CanBuildInnerChannelFactory<IRequestSessionChannel>()
+                    || context.CanBuildInnerChannelFactory<IDuplexChannel>()
+                    || context.CanBuildInnerChannelFactory<IDuplexSessionChannel>()
+                )
+            )
             {
                 return false;
             }
 
             if (typeof(TChannel) == typeof(IRequestSessionChannel))
             {
-                return (context.CanBuildInnerChannelFactory<IRequestChannel>() || context.CanBuildInnerChannelFactory<IRequestSessionChannel>());
+                return (
+                    context.CanBuildInnerChannelFactory<IRequestChannel>()
+                    || context.CanBuildInnerChannelFactory<IRequestSessionChannel>()
+                );
             }
             else if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
-                return (context.CanBuildInnerChannelFactory<IDuplexChannel>() || context.CanBuildInnerChannelFactory<IDuplexSessionChannel>());
+                return (
+                    context.CanBuildInnerChannelFactory<IDuplexChannel>()
+                    || context.CanBuildInnerChannelFactory<IDuplexSessionChannel>()
+                );
             }
             else
             {
@@ -711,25 +849,37 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(BindingContext context)
+        public override IChannelListener<TChannel> BuildChannelListener<TChannel>(
+            BindingContext context
+        )
         {
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
             if (!this.CanBuildChannelListener<TChannel>(context))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)), "TChannel"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.GetString(SR.ChannelTypeNotSupported, typeof(TChannel)),
+                        "TChannel"
+                    )
+                );
             }
 
             this.readerQuotas = context.GetInnerProperty<XmlDictionaryReaderQuotas>();
             if (readerQuotas == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.EncodingBindingElementDoesNotHandleReaderQuotas)
+                    )
+                );
             }
 
             TransportBindingElement transportBindingElement = null;
             if (context.RemainingBindingElements != null)
-                transportBindingElement = context.RemainingBindingElements.Find<TransportBindingElement>();
+                transportBindingElement =
+                    context.RemainingBindingElements.Find<TransportBindingElement>();
 
             if (transportBindingElement != null)
                 this.maxReceivedMessageSize = transportBindingElement.MaxReceivedMessageSize;
@@ -737,7 +887,9 @@ namespace System.ServiceModel.Channels
             return this.BuildChannelListenerCore<TChannel>(context);
         }
 
-        protected abstract IChannelListener<TChannel> BuildChannelListenerCore<TChannel>(BindingContext context)
+        protected abstract IChannelListener<TChannel> BuildChannelListenerCore<TChannel>(
+            BindingContext context
+        )
             where TChannel : class, IChannel;
 
         public override bool CanBuildChannelListener<TChannel>(BindingContext context)
@@ -745,7 +897,10 @@ namespace System.ServiceModel.Channels
             if (context == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("context");
 
-            InternalDuplexBindingElement.AddDuplexListenerSupport(context, ref this.internalDuplexBindingElement);
+            InternalDuplexBindingElement.AddDuplexListenerSupport(
+                context,
+                ref this.internalDuplexBindingElement
+            );
 
             if (this.SessionMode)
             {
@@ -757,29 +912,52 @@ namespace System.ServiceModel.Channels
                 return false;
             }
 
-            return typeof(TChannel) == typeof(IInputChannel) || typeof(TChannel) == typeof(IInputSessionChannel) ||
-                (this.SupportsDuplex && (typeof(TChannel) == typeof(IDuplexChannel) || typeof(TChannel) == typeof(IDuplexSessionChannel))) ||
-                (this.SupportsRequestReply && (typeof(TChannel) == typeof(IReplyChannel) || typeof(TChannel) == typeof(IReplySessionChannel)));
+            return typeof(TChannel) == typeof(IInputChannel)
+                || typeof(TChannel) == typeof(IInputSessionChannel)
+                || (
+                    this.SupportsDuplex
+                    && (
+                        typeof(TChannel) == typeof(IDuplexChannel)
+                        || typeof(TChannel) == typeof(IDuplexSessionChannel)
+                    )
+                )
+                || (
+                    this.SupportsRequestReply
+                    && (
+                        typeof(TChannel) == typeof(IReplyChannel)
+                        || typeof(TChannel) == typeof(IReplySessionChannel)
+                    )
+                );
         }
 
         bool CanBuildSessionChannelListener<TChannel>(BindingContext context)
             where TChannel : class, IChannel
         {
-            if (!(context.CanBuildInnerChannelListener<IReplyChannel>()
-                || context.CanBuildInnerChannelListener<IReplySessionChannel>()
-                || context.CanBuildInnerChannelListener<IDuplexChannel>()
-                || context.CanBuildInnerChannelListener<IDuplexSessionChannel>()))
+            if (
+                !(
+                    context.CanBuildInnerChannelListener<IReplyChannel>()
+                    || context.CanBuildInnerChannelListener<IReplySessionChannel>()
+                    || context.CanBuildInnerChannelListener<IDuplexChannel>()
+                    || context.CanBuildInnerChannelListener<IDuplexSessionChannel>()
+                )
+            )
             {
                 return false;
             }
 
             if (typeof(TChannel) == typeof(IReplySessionChannel))
             {
-                return (context.CanBuildInnerChannelListener<IReplyChannel>() || context.CanBuildInnerChannelListener<IReplySessionChannel>());
+                return (
+                    context.CanBuildInnerChannelListener<IReplyChannel>()
+                    || context.CanBuildInnerChannelListener<IReplySessionChannel>()
+                );
             }
             else if (typeof(TChannel) == typeof(IDuplexSessionChannel))
             {
-                return (context.CanBuildInnerChannelListener<IDuplexChannel>() || context.CanBuildInnerChannelListener<IDuplexSessionChannel>());
+                return (
+                    context.CanBuildInnerChannelListener<IDuplexChannel>()
+                    || context.CanBuildInnerChannelListener<IDuplexSessionChannel>()
+                );
             }
             else
             {
@@ -793,7 +971,9 @@ namespace System.ServiceModel.Channels
             this.OptionalEndpointSupportingTokenParameters.SetKeyDerivation(requireDerivedKeys);
             foreach (SupportingTokenParameters t in this.OperationSupportingTokenParameters.Values)
                 t.SetKeyDerivation(requireDerivedKeys);
-            foreach (SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values
+            )
             {
                 t.SetKeyDerivation(requireDerivedKeys);
             }
@@ -804,7 +984,11 @@ namespace System.ServiceModel.Channels
             if (!this.EndpointSupportingTokenParameters.IsSetKeyDerivation(requireDerivedKeys))
                 return false;
 
-            if (!this.OptionalEndpointSupportingTokenParameters.IsSetKeyDerivation(requireDerivedKeys))
+            if (
+                !this.OptionalEndpointSupportingTokenParameters.IsSetKeyDerivation(
+                    requireDerivedKeys
+                )
+            )
                 return false;
 
             foreach (SupportingTokenParameters t in this.OperationSupportingTokenParameters.Values)
@@ -812,7 +996,9 @@ namespace System.ServiceModel.Channels
                 if (!t.IsSetKeyDerivation(requireDerivedKeys))
                     return false;
             }
-            foreach (SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters t in this.OptionalOperationSupportingTokenParameters.Values
+            )
             {
                 if (!t.IsSetKeyDerivation(requireDerivedKeys))
                     return false;
@@ -820,18 +1006,30 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        internal ChannelProtectionRequirements GetProtectionRequirements(AddressingVersion addressing, ProtectionLevel defaultProtectionLevel)
+        internal ChannelProtectionRequirements GetProtectionRequirements(
+            AddressingVersion addressing,
+            ProtectionLevel defaultProtectionLevel
+        )
         {
             if (addressing == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("addressing");
 
             ChannelProtectionRequirements result = new ChannelProtectionRequirements();
-            ProtectionLevel supportedRequestProtectionLevel = this.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel;
-            ProtectionLevel supportedResponseProtectionLevel = this.GetIndividualProperty<ISecurityCapabilities>().SupportedResponseProtectionLevel;
+            ProtectionLevel supportedRequestProtectionLevel =
+                this.GetIndividualProperty<ISecurityCapabilities>().SupportedRequestProtectionLevel;
+            ProtectionLevel supportedResponseProtectionLevel =
+                this.GetIndividualProperty<ISecurityCapabilities>().SupportedResponseProtectionLevel;
 
-            bool canSupportMoreThanTheDefault = 
-                (ProtectionLevelHelper.IsStrongerOrEqual(supportedRequestProtectionLevel, defaultProtectionLevel)
-                && ProtectionLevelHelper.IsStrongerOrEqual(supportedResponseProtectionLevel, defaultProtectionLevel));
+            bool canSupportMoreThanTheDefault = (
+                ProtectionLevelHelper.IsStrongerOrEqual(
+                    supportedRequestProtectionLevel,
+                    defaultProtectionLevel
+                )
+                && ProtectionLevelHelper.IsStrongerOrEqual(
+                    supportedResponseProtectionLevel,
+                    defaultProtectionLevel
+                )
+            );
             if (canSupportMoreThanTheDefault)
             {
                 MessagePartSpecification signedParts = new MessagePartSpecification();
@@ -857,16 +1055,40 @@ namespace System.ServiceModel.Channels
                 if (addressing.DefaultFaultAction != null)
                 {
                     // Faults that do not specify a particular action
-                    result.IncomingSignatureParts.AddParts(signedParts, addressing.DefaultFaultAction);
-                    result.OutgoingSignatureParts.AddParts(signedParts, addressing.DefaultFaultAction);
-                    result.IncomingEncryptionParts.AddParts(encryptedParts, addressing.DefaultFaultAction);
-                    result.OutgoingEncryptionParts.AddParts(encryptedParts, addressing.DefaultFaultAction);
+                    result.IncomingSignatureParts.AddParts(
+                        signedParts,
+                        addressing.DefaultFaultAction
+                    );
+                    result.OutgoingSignatureParts.AddParts(
+                        signedParts,
+                        addressing.DefaultFaultAction
+                    );
+                    result.IncomingEncryptionParts.AddParts(
+                        encryptedParts,
+                        addressing.DefaultFaultAction
+                    );
+                    result.OutgoingEncryptionParts.AddParts(
+                        encryptedParts,
+                        addressing.DefaultFaultAction
+                    );
                 }
                 // Infrastructure faults
-                result.IncomingSignatureParts.AddParts(signedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result.OutgoingSignatureParts.AddParts(signedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result.IncomingEncryptionParts.AddParts(encryptedParts, FaultCodeConstants.Actions.NetDispatcher);
-                result.OutgoingEncryptionParts.AddParts(encryptedParts, FaultCodeConstants.Actions.NetDispatcher);
+                result.IncomingSignatureParts.AddParts(
+                    signedParts,
+                    FaultCodeConstants.Actions.NetDispatcher
+                );
+                result.OutgoingSignatureParts.AddParts(
+                    signedParts,
+                    FaultCodeConstants.Actions.NetDispatcher
+                );
+                result.IncomingEncryptionParts.AddParts(
+                    encryptedParts,
+                    FaultCodeConstants.Actions.NetDispatcher
+                );
+                result.OutgoingEncryptionParts.AddParts(
+                    encryptedParts,
+                    FaultCodeConstants.Actions.NetDispatcher
+                );
             }
 
             return result;
@@ -896,8 +1118,10 @@ namespace System.ServiceModel.Channels
 
         ISecurityCapabilities GetSecurityCapabilities(BindingContext context)
         {
-            ISecurityCapabilities thisSecurityCapability = this.GetIndividualISecurityCapabilities();
-            ISecurityCapabilities lowerSecurityCapability = context.GetInnerProperty<ISecurityCapabilities>();
+            ISecurityCapabilities thisSecurityCapability =
+                this.GetIndividualISecurityCapabilities();
+            ISecurityCapabilities lowerSecurityCapability =
+                context.GetInnerProperty<ISecurityCapabilities>();
             if (lowerSecurityCapability == null)
             {
                 return thisSecurityCapability;
@@ -905,11 +1129,26 @@ namespace System.ServiceModel.Channels
             else
             {
                 bool supportsClientAuth = thisSecurityCapability.SupportsClientAuthentication;
-                bool supportsClientWindowsIdentity = thisSecurityCapability.SupportsClientWindowsIdentity;
-                bool supportsServerAuth = thisSecurityCapability.SupportsServerAuthentication || lowerSecurityCapability.SupportsServerAuthentication;
-                ProtectionLevel requestProtectionLevel = ProtectionLevelHelper.Max(thisSecurityCapability.SupportedRequestProtectionLevel, lowerSecurityCapability.SupportedRequestProtectionLevel);
-                ProtectionLevel responseProtectionLevel = ProtectionLevelHelper.Max(thisSecurityCapability.SupportedResponseProtectionLevel, lowerSecurityCapability.SupportedResponseProtectionLevel);
-                return new SecurityCapabilities(supportsClientAuth, supportsServerAuth, supportsClientWindowsIdentity, requestProtectionLevel, responseProtectionLevel);
+                bool supportsClientWindowsIdentity =
+                    thisSecurityCapability.SupportsClientWindowsIdentity;
+                bool supportsServerAuth =
+                    thisSecurityCapability.SupportsServerAuthentication
+                    || lowerSecurityCapability.SupportsServerAuthentication;
+                ProtectionLevel requestProtectionLevel = ProtectionLevelHelper.Max(
+                    thisSecurityCapability.SupportedRequestProtectionLevel,
+                    lowerSecurityCapability.SupportedRequestProtectionLevel
+                );
+                ProtectionLevel responseProtectionLevel = ProtectionLevelHelper.Max(
+                    thisSecurityCapability.SupportedResponseProtectionLevel,
+                    lowerSecurityCapability.SupportedResponseProtectionLevel
+                );
+                return new SecurityCapabilities(
+                    supportsClientAuth,
+                    supportsServerAuth,
+                    supportsClientWindowsIdentity,
+                    requestProtectionLevel,
+                    responseProtectionLevel
+                );
             }
         }
 
@@ -917,7 +1156,9 @@ namespace System.ServiceModel.Channels
         // reflected in the corresponding IsMutualCertificateBinding() method.
         static public SecurityBindingElement CreateMutualCertificateBindingElement()
         {
-            return CreateMutualCertificateBindingElement(MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11);
+            return CreateMutualCertificateBindingElement(
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
+            );
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
@@ -926,17 +1167,22 @@ namespace System.ServiceModel.Channels
             return IsMutualCertificateBinding(sbe, false);
         }
 
-        static public AsymmetricSecurityBindingElement CreateCertificateSignatureBindingElement()
+        public static AsymmetricSecurityBindingElement CreateCertificateSignatureBindingElement()
         {
             AsymmetricSecurityBindingElement result;
 
             result = new AsymmetricSecurityBindingElement(
                 new X509SecurityTokenParameters( // recipient
                     X509KeyIdentifierClauseType.Any,
-                    SecurityTokenInclusionMode.Never, false),
+                    SecurityTokenInclusionMode.Never,
+                    false
+                ),
                 new X509SecurityTokenParameters( // initiator
                     X509KeyIdentifierClauseType.Any,
-                    SecurityTokenInclusionMode.AlwaysToRecipient, false));
+                    SecurityTokenInclusionMode.AlwaysToRecipient,
+                    false
+                )
+            );
 
             // this is a one way binding so the client cannot detect replays
             result.IsCertificateSignatureBinding = true;
@@ -948,14 +1194,19 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsMutualCertificateBinding() method.
-        static public SecurityBindingElement CreateMutualCertificateBindingElement(MessageSecurityVersion version)
+        static public SecurityBindingElement CreateMutualCertificateBindingElement(
+            MessageSecurityVersion version
+        )
         {
             return CreateMutualCertificateBindingElement(version, false);
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsMutualCertificateBinding() method.
-        static public SecurityBindingElement CreateMutualCertificateBindingElement(MessageSecurityVersion version, bool allowSerializedSigningTokenOnReply)
+        static public SecurityBindingElement CreateMutualCertificateBindingElement(
+            MessageSecurityVersion version,
+            bool allowSerializedSigningTokenOnReply
+        )
         {
             if (version == null)
             {
@@ -968,24 +1219,32 @@ namespace System.ServiceModel.Channels
                 result = new AsymmetricSecurityBindingElement(
                     new X509SecurityTokenParameters( // recipient
                         X509KeyIdentifierClauseType.Any,
-                        SecurityTokenInclusionMode.Never, 
-                        false),
+                        SecurityTokenInclusionMode.Never,
+                        false
+                    ),
                     new X509SecurityTokenParameters( // initiator
                         X509KeyIdentifierClauseType.Any,
-                        SecurityTokenInclusionMode.AlwaysToRecipient, false),
-                    allowSerializedSigningTokenOnReply);
+                        SecurityTokenInclusionMode.AlwaysToRecipient,
+                        false
+                    ),
+                    allowSerializedSigningTokenOnReply
+                );
             }
             else
             {
                 result = new SymmetricSecurityBindingElement(
                     new X509SecurityTokenParameters( // protection
                         X509KeyIdentifierClauseType.Thumbprint,
-                        SecurityTokenInclusionMode.Never));
+                        SecurityTokenInclusionMode.Never
+                    )
+                );
                 result.EndpointSupportingTokenParameters.Endorsing.Add(
                     new X509SecurityTokenParameters(
                         X509KeyIdentifierClauseType.Thumbprint,
-                        SecurityTokenInclusionMode.AlwaysToRecipient, 
-                        false));
+                        SecurityTokenInclusionMode.AlwaysToRecipient,
+                        false
+                    )
+                );
                 ((SymmetricSecurityBindingElement)result).RequireSignatureConfirmation = true;
             }
 
@@ -998,18 +1257,33 @@ namespace System.ServiceModel.Channels
 
         internal static bool IsMutualCertificateDuplexBinding(SecurityBindingElement sbe)
         {
-
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
             AsymmetricSecurityBindingElement asbe = sbe as AsymmetricSecurityBindingElement;
             if (asbe != null)
             {
-                X509SecurityTokenParameters recipient = asbe.RecipientTokenParameters as X509SecurityTokenParameters;
-                if (recipient == null || (recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Any  && recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint) || recipient.InclusionMode != SecurityTokenInclusionMode.AlwaysToInitiator)
+                X509SecurityTokenParameters recipient =
+                    asbe.RecipientTokenParameters as X509SecurityTokenParameters;
+                if (
+                    recipient == null
+                    || (
+                        recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Any
+                        && recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                    )
+                    || recipient.InclusionMode != SecurityTokenInclusionMode.AlwaysToInitiator
+                )
                     return false;
 
-                X509SecurityTokenParameters initiator = asbe.InitiatorTokenParameters as X509SecurityTokenParameters;
-                if (initiator == null || (initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Any && initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint) || initiator.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient)
+                X509SecurityTokenParameters initiator =
+                    asbe.InitiatorTokenParameters as X509SecurityTokenParameters;
+                if (
+                    initiator == null
+                    || (
+                        initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Any
+                        && initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                    )
+                    || initiator.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient
+                )
                     return false;
 
                 if (!sbe.EndpointSupportingTokenParameters.IsEmpty())
@@ -1024,20 +1298,32 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsMutualCertificateBinding(SecurityBindingElement sbe, bool allowSerializedSigningTokenOnReply)
+        internal static bool IsMutualCertificateBinding(
+            SecurityBindingElement sbe,
+            bool allowSerializedSigningTokenOnReply
+        )
         {
-
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
             AsymmetricSecurityBindingElement asbe = sbe as AsymmetricSecurityBindingElement;
             if (asbe != null)
             {
-                X509SecurityTokenParameters recipient = asbe.RecipientTokenParameters as X509SecurityTokenParameters;
-                if (recipient == null || recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Any || recipient.InclusionMode != SecurityTokenInclusionMode.Never)
+                X509SecurityTokenParameters recipient =
+                    asbe.RecipientTokenParameters as X509SecurityTokenParameters;
+                if (
+                    recipient == null
+                    || recipient.X509ReferenceStyle != X509KeyIdentifierClauseType.Any
+                    || recipient.InclusionMode != SecurityTokenInclusionMode.Never
+                )
                     return false;
 
-                X509SecurityTokenParameters initiator = asbe.InitiatorTokenParameters as X509SecurityTokenParameters;
-                if (initiator == null || initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Any || initiator.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient)
+                X509SecurityTokenParameters initiator =
+                    asbe.InitiatorTokenParameters as X509SecurityTokenParameters;
+                if (
+                    initiator == null
+                    || initiator.X509ReferenceStyle != X509KeyIdentifierClauseType.Any
+                    || initiator.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient
+                )
                     return false;
 
                 if (!sbe.EndpointSupportingTokenParameters.IsEmpty())
@@ -1049,21 +1335,34 @@ namespace System.ServiceModel.Channels
                 if (ssbe == null)
                     return false;
 
-                X509SecurityTokenParameters x509Parameters = ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
-                if (x509Parameters == null || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never)
+                X509SecurityTokenParameters x509Parameters =
+                    ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
+                if (
+                    x509Parameters == null
+                    || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                    || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never
+                )
                     return false;
 
                 SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-                if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 0 || parameters.Endorsing.Count != 1 || parameters.SignedEndorsing.Count != 0)
+                if (
+                    parameters.Signed.Count != 0
+                    || parameters.SignedEncrypted.Count != 0
+                    || parameters.Endorsing.Count != 1
+                    || parameters.SignedEndorsing.Count != 0
+                )
                     return false;
 
                 x509Parameters = parameters.Endorsing[0] as X509SecurityTokenParameters;
-                if (x509Parameters == null || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint || x509Parameters.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient)
+                if (
+                    x509Parameters == null
+                    || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                    || x509Parameters.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient
+                )
                     return false;
 
                 if (!ssbe.RequireSignatureConfirmation)
                     return false;
-
             }
             return true;
         }
@@ -1077,8 +1376,11 @@ namespace System.ServiceModel.Channels
             result = new SymmetricSecurityBindingElement(
                 new X509SecurityTokenParameters( // protection
                     X509KeyIdentifierClauseType.Thumbprint,
-                    SecurityTokenInclusionMode.Never));
-            result.MessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
+                    SecurityTokenInclusionMode.Never
+                )
+            );
+            result.MessageSecurityVersion =
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
             result.RequireSignatureConfirmation = true;
 
             return result;
@@ -1096,8 +1398,13 @@ namespace System.ServiceModel.Channels
 
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
-            X509SecurityTokenParameters x509Parameters = ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
-            if (x509Parameters == null || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never)
+            X509SecurityTokenParameters x509Parameters =
+                ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
+            if (
+                x509Parameters == null
+                || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never
+            )
                 return false;
 
             if (!sbe.EndpointSupportingTokenParameters.IsEmpty())
@@ -1106,12 +1413,16 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static public AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement()
+        public static AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement()
         {
-            return CreateMutualCertificateDuplexBindingElement(MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11);
+            return CreateMutualCertificateDuplexBindingElement(
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11
+            );
         }
 
-        static public AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement(MessageSecurityVersion version)
+        public static AsymmetricSecurityBindingElement CreateMutualCertificateDuplexBindingElement(
+            MessageSecurityVersion version
+        )
         {
             if (version == null)
             {
@@ -1124,24 +1435,30 @@ namespace System.ServiceModel.Channels
                 result = new AsymmetricSecurityBindingElement(
                     new X509SecurityTokenParameters( // recipient
                         X509KeyIdentifierClauseType.Any,
-                        SecurityTokenInclusionMode.AlwaysToInitiator, 
-                        false),
+                        SecurityTokenInclusionMode.AlwaysToInitiator,
+                        false
+                    ),
                     new X509SecurityTokenParameters( // initiator
                         X509KeyIdentifierClauseType.Any,
                         SecurityTokenInclusionMode.AlwaysToRecipient,
-                        false));
+                        false
+                    )
+                );
             }
             else
             {
                 result = new AsymmetricSecurityBindingElement(
                     new X509SecurityTokenParameters( // recipient
                         X509KeyIdentifierClauseType.Thumbprint,
-                        SecurityTokenInclusionMode.AlwaysToInitiator, 
-                        false),
+                        SecurityTokenInclusionMode.AlwaysToInitiator,
+                        false
+                    ),
                     new X509SecurityTokenParameters( // initiator
                         X509KeyIdentifierClauseType.Thumbprint,
                         SecurityTokenInclusionMode.AlwaysToRecipient,
-                        false));
+                        false
+                    )
+                );
             }
 
             result.MessageSecurityVersion = version;
@@ -1156,10 +1473,14 @@ namespace System.ServiceModel.Channels
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
                 new X509SecurityTokenParameters(
                     X509KeyIdentifierClauseType.Thumbprint,
-                    SecurityTokenInclusionMode.Never));
+                    SecurityTokenInclusionMode.Never
+                )
+            );
             result.EndpointSupportingTokenParameters.SignedEncrypted.Add(
-                new UserNameSecurityTokenParameters());
-            result.MessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
+                new UserNameSecurityTokenParameters()
+            );
+            result.MessageSecurityVersion =
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
 
             return result;
         }
@@ -1173,15 +1494,26 @@ namespace System.ServiceModel.Channels
             if (ssbe == null)
                 return false;
 
-            X509SecurityTokenParameters x509Parameters = ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
-            if (x509Parameters == null || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never)
+            X509SecurityTokenParameters x509Parameters =
+                ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
+            if (
+                x509Parameters == null
+                || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never
+            )
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 1 || parameters.Endorsing.Count != 0 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 1
+                || parameters.Endorsing.Count != 0
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
-            UserNameSecurityTokenParameters userNameParameters = parameters.SignedEncrypted[0] as UserNameSecurityTokenParameters;
+            UserNameSecurityTokenParameters userNameParameters =
+                parameters.SignedEncrypted[0] as UserNameSecurityTokenParameters;
             if (userNameParameters == null)
                 return false;
 
@@ -1193,7 +1525,8 @@ namespace System.ServiceModel.Channels
         static public SymmetricSecurityBindingElement CreateKerberosBindingElement()
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
-                new KerberosSecurityTokenParameters());
+                new KerberosSecurityTokenParameters()
+            );
             result.DefaultAlgorithmSuite = SecurityAlgorithmSuite.KerberosDefault;
             return result;
         }
@@ -1206,7 +1539,8 @@ namespace System.ServiceModel.Channels
             if (ssbe == null)
                 return false;
 
-            KerberosSecurityTokenParameters parameters = ssbe.ProtectionTokenParameters as KerberosSecurityTokenParameters;
+            KerberosSecurityTokenParameters parameters =
+                ssbe.ProtectionTokenParameters as KerberosSecurityTokenParameters;
             if (parameters == null)
                 return false;
 
@@ -1216,24 +1550,32 @@ namespace System.ServiceModel.Channels
             return true;
         }
 
-        static public SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement()
+        public static SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement()
         {
-            return CreateSspiNegotiationBindingElement(SspiSecurityTokenParameters.defaultRequireCancellation);
+            return CreateSspiNegotiationBindingElement(
+                SspiSecurityTokenParameters.defaultRequireCancellation
+            );
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSspiNegotiationBinding() method.
-        static public SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement(bool requireCancellation)
+        static public SymmetricSecurityBindingElement CreateSspiNegotiationBindingElement(
+            bool requireCancellation
+        )
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
-                new SspiSecurityTokenParameters(requireCancellation));
+                new SspiSecurityTokenParameters(requireCancellation)
+            );
             return result;
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsSspiNegotiationBinding(SecurityBindingElement sbe, bool requireCancellation)
+        internal static bool IsSspiNegotiationBinding(
+            SecurityBindingElement sbe,
+            bool requireCancellation
+        )
         {
-            SymmetricSecurityBindingElement ssbe  = sbe as SymmetricSecurityBindingElement;
+            SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
 
             if (ssbe == null)
                 return false;
@@ -1241,30 +1583,43 @@ namespace System.ServiceModel.Channels
             if (!sbe.EndpointSupportingTokenParameters.IsEmpty())
                 return false;
 
-            SspiSecurityTokenParameters sspiParameters = ssbe.ProtectionTokenParameters as SspiSecurityTokenParameters;
+            SspiSecurityTokenParameters sspiParameters =
+                ssbe.ProtectionTokenParameters as SspiSecurityTokenParameters;
             if (sspiParameters == null)
                 return false;
 
             return sspiParameters.RequireCancellation == requireCancellation;
         }
 
-
-        static public SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(bool requireClientCertificate)
+        public static SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
+            bool requireClientCertificate
+        )
         {
-            return CreateSslNegotiationBindingElement(requireClientCertificate, SslSecurityTokenParameters.defaultRequireCancellation);
+            return CreateSslNegotiationBindingElement(
+                requireClientCertificate,
+                SslSecurityTokenParameters.defaultRequireCancellation
+            );
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSslNegotiationBinding() method.
-        static public SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(bool requireClientCertificate, bool requireCancellation)
+        static public SymmetricSecurityBindingElement CreateSslNegotiationBindingElement(
+            bool requireClientCertificate,
+            bool requireCancellation
+        )
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
-                new SslSecurityTokenParameters(requireClientCertificate, requireCancellation));
+                new SslSecurityTokenParameters(requireClientCertificate, requireCancellation)
+            );
             return result;
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsSslNegotiationBinding(SecurityBindingElement sbe, bool requireClientCertificate, bool requireCancellation)
+        internal static bool IsSslNegotiationBinding(
+            SecurityBindingElement sbe,
+            bool requireClientCertificate,
+            bool requireCancellation
+        )
         {
             SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
             if (ssbe == null)
@@ -1273,34 +1628,50 @@ namespace System.ServiceModel.Channels
             if (!sbe.EndpointSupportingTokenParameters.IsEmpty())
                 return false;
 
-            SslSecurityTokenParameters sslParameters = ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
+            SslSecurityTokenParameters sslParameters =
+                ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
             if (sslParameters == null)
                 return false;
 
-            return sslParameters.RequireClientCertificate == requireClientCertificate && sslParameters.RequireCancellation == requireCancellation;
-
+            return sslParameters.RequireClientCertificate == requireClientCertificate
+                && sslParameters.RequireCancellation == requireCancellation;
         }
-        static public SymmetricSecurityBindingElement CreateIssuedTokenBindingElement(IssuedSecurityTokenParameters issuedTokenParameters)
+
+        public static SymmetricSecurityBindingElement CreateIssuedTokenBindingElement(
+            IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuedTokenParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuedTokenParameters"
+                );
             if (issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.IssuedTokenAuthenticationModeRequiresSymmetricIssuedKey));
-            SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(issuedTokenParameters);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.IssuedTokenAuthenticationModeRequiresSymmetricIssuedKey)
+                );
+            SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
+                issuedTokenParameters
+            );
             return result;
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForCertificateBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForCertificateBindingElement(IssuedSecurityTokenParameters issuedTokenParameters)
+        static public SymmetricSecurityBindingElement CreateIssuedTokenForCertificateBindingElement(
+            IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuedTokenParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuedTokenParameters"
+                );
 
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
                 new X509SecurityTokenParameters(
                     X509KeyIdentifierClauseType.Thumbprint,
-                    SecurityTokenInclusionMode.Never));
+                    SecurityTokenInclusionMode.Never
+                )
+            );
             if (issuedTokenParameters.KeyType == SecurityKeyType.BearerKey)
             {
                 result.EndpointSupportingTokenParameters.SignedEncrypted.Add(issuedTokenParameters);
@@ -1316,7 +1687,10 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsIssuedTokenForCertificateBinding(SecurityBindingElement sbe, out IssuedSecurityTokenParameters issuedTokenParameters)
+        internal static bool IsIssuedTokenForCertificateBinding(
+            SecurityBindingElement sbe,
+            out IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             issuedTokenParameters = null;
             SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
@@ -1328,24 +1702,43 @@ namespace System.ServiceModel.Channels
 
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
-            X509SecurityTokenParameters x509Parameters = ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
-            if (x509Parameters == null || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never)
+            X509SecurityTokenParameters x509Parameters =
+                ssbe.ProtectionTokenParameters as X509SecurityTokenParameters;
+            if (
+                x509Parameters == null
+                || x509Parameters.X509ReferenceStyle != X509KeyIdentifierClauseType.Thumbprint
+                || x509Parameters.InclusionMode != SecurityTokenInclusionMode.Never
+            )
                 return false;
 
             SupportingTokenParameters parameters = ssbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || (parameters.SignedEncrypted.Count == 0 && parameters.Endorsing.Count == 0) || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || (parameters.SignedEncrypted.Count == 0 && parameters.Endorsing.Count == 0)
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
             if ((parameters.SignedEncrypted.Count == 1) && (parameters.Endorsing.Count == 0))
             {
-                issuedTokenParameters = parameters.SignedEncrypted[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey)
+                issuedTokenParameters =
+                    parameters.SignedEncrypted[0] as IssuedSecurityTokenParameters;
+                if (
+                    issuedTokenParameters != null
+                    && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey
+                )
                     return false;
             }
             else if ((parameters.Endorsing.Count == 1) && (parameters.SignedEncrypted.Count == 0))
             {
                 issuedTokenParameters = parameters.Endorsing[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && (issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey))
+                if (
+                    issuedTokenParameters != null
+                    && (
+                        issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey
+                        && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey
+                    )
+                )
                     return false;
             }
             return (issuedTokenParameters != null);
@@ -1353,26 +1746,44 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(IssuedSecurityTokenParameters issuedTokenParameters)
+        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
+            IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
-            return CreateIssuedTokenForSslBindingElement(issuedTokenParameters, SslSecurityTokenParameters.defaultRequireCancellation);
+            return CreateIssuedTokenForSslBindingElement(
+                issuedTokenParameters,
+                SslSecurityTokenParameters.defaultRequireCancellation
+            );
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsIssuedTokenForSslBinding(SecurityBindingElement sbe, out IssuedSecurityTokenParameters issuedTokenParameters)
+        internal static bool IsIssuedTokenForSslBinding(
+            SecurityBindingElement sbe,
+            out IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
-            return IsIssuedTokenForSslBinding(sbe, SslSecurityTokenParameters.defaultRequireCancellation, out issuedTokenParameters);
+            return IsIssuedTokenForSslBinding(
+                sbe,
+                SslSecurityTokenParameters.defaultRequireCancellation,
+                out issuedTokenParameters
+            );
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(IssuedSecurityTokenParameters issuedTokenParameters, bool requireCancellation)
+        static public SymmetricSecurityBindingElement CreateIssuedTokenForSslBindingElement(
+            IssuedSecurityTokenParameters issuedTokenParameters,
+            bool requireCancellation
+        )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuedTokenParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuedTokenParameters"
+                );
 
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
-                new SslSecurityTokenParameters(false, requireCancellation));
+                new SslSecurityTokenParameters(false, requireCancellation)
+            );
             if (issuedTokenParameters.KeyType == SecurityKeyType.BearerKey)
             {
                 result.EndpointSupportingTokenParameters.SignedEncrypted.Add(issuedTokenParameters);
@@ -1388,7 +1799,11 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsIssuedTokenForSslBinding(SecurityBindingElement sbe, bool requireCancellation, out IssuedSecurityTokenParameters issuedTokenParameters)
+        internal static bool IsIssuedTokenForSslBinding(
+            SecurityBindingElement sbe,
+            bool requireCancellation,
+            out IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             issuedTokenParameters = null;
             SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
@@ -1400,52 +1815,80 @@ namespace System.ServiceModel.Channels
 
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
-            SslSecurityTokenParameters sslParameters = ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
+            SslSecurityTokenParameters sslParameters =
+                ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
             if (sslParameters == null)
                 return false;
 
-            if (sslParameters.RequireClientCertificate || sslParameters.RequireCancellation != requireCancellation)
+            if (
+                sslParameters.RequireClientCertificate
+                || sslParameters.RequireCancellation != requireCancellation
+            )
                 return false;
 
             SupportingTokenParameters parameters = ssbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || (parameters.SignedEncrypted.Count == 0 && parameters.Endorsing.Count == 0) || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || (parameters.SignedEncrypted.Count == 0 && parameters.Endorsing.Count == 0)
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
             if ((parameters.SignedEncrypted.Count == 1) && (parameters.Endorsing.Count == 0))
             {
-                issuedTokenParameters = parameters.SignedEncrypted[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey)
+                issuedTokenParameters =
+                    parameters.SignedEncrypted[0] as IssuedSecurityTokenParameters;
+                if (
+                    issuedTokenParameters != null
+                    && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey
+                )
                     return false;
             }
             else if ((parameters.Endorsing.Count == 1) && (parameters.SignedEncrypted.Count == 0))
             {
                 issuedTokenParameters = parameters.Endorsing[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && (issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey))
+                if (
+                    issuedTokenParameters != null
+                    && (
+                        issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey
+                        && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey
+                    )
+                )
                     return false;
             }
             return (issuedTokenParameters != null);
         }
 
-        static public SymmetricSecurityBindingElement CreateUserNameForSslBindingElement()
+        public static SymmetricSecurityBindingElement CreateUserNameForSslBindingElement()
         {
-            return CreateUserNameForSslBindingElement(SslSecurityTokenParameters.defaultRequireCancellation);
+            return CreateUserNameForSslBindingElement(
+                SslSecurityTokenParameters.defaultRequireCancellation
+            );
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsUserNameForSslBinding() method.
-        static public SymmetricSecurityBindingElement CreateUserNameForSslBindingElement(bool requireCancellation)
+        static public SymmetricSecurityBindingElement CreateUserNameForSslBindingElement(
+            bool requireCancellation
+        )
         {
             SymmetricSecurityBindingElement result = new SymmetricSecurityBindingElement(
-                new SslSecurityTokenParameters(false, requireCancellation));
+                new SslSecurityTokenParameters(false, requireCancellation)
+            );
             result.EndpointSupportingTokenParameters.SignedEncrypted.Add(
-                new UserNameSecurityTokenParameters());
-            result.MessageSecurityVersion = MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
+                new UserNameSecurityTokenParameters()
+            );
+            result.MessageSecurityVersion =
+                MessageSecurityVersion.WSSecurity11WSTrustFebruary2005WSSecureConversationFebruary2005WSSecurityPolicy11;
 
             return result;
         }
 
         // this method reverses CreateMutualCertificateBindingElement() logic
-        internal static bool IsUserNameForSslBinding(SecurityBindingElement sbe, bool requireCancellation)
+        internal static bool IsUserNameForSslBinding(
+            SecurityBindingElement sbe,
+            bool requireCancellation
+        )
         {
             // Do not check MessageSecurityVersion: it maybe changed by the wrapper element and gets checked later in the SecuritySection.AreBindingsMatching()
 
@@ -1454,17 +1897,24 @@ namespace System.ServiceModel.Channels
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 1 || parameters.Endorsing.Count != 0 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 1
+                || parameters.Endorsing.Count != 0
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
             if (!(parameters.SignedEncrypted[0] is UserNameSecurityTokenParameters))
                 return false;
 
-            SslSecurityTokenParameters sslParameters = ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
+            SslSecurityTokenParameters sslParameters =
+                ssbe.ProtectionTokenParameters as SslSecurityTokenParameters;
             if (sslParameters == null)
                 return false;
 
-            return sslParameters.RequireCancellation == requireCancellation && !sslParameters.RequireClientCertificate;
+            return sslParameters.RequireCancellation == requireCancellation
+                && !sslParameters.RequireClientCertificate;
         }
 
         // If any changes are made to this method, please make sure that they are
@@ -1473,7 +1923,8 @@ namespace System.ServiceModel.Channels
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
             result.EndpointSupportingTokenParameters.SignedEncrypted.Add(
-                new UserNameSecurityTokenParameters());
+                new UserNameSecurityTokenParameters()
+            );
             result.IncludeTimestamp = true;
             result.LocalClientSettings.DetectReplays = false;
             result.LocalServiceSettings.DetectReplays = false;
@@ -1491,10 +1942,16 @@ namespace System.ServiceModel.Channels
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 1 || parameters.Endorsing.Count != 0 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 1
+                || parameters.Endorsing.Count != 0
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
-            UserNameSecurityTokenParameters userNameParameters = parameters.SignedEncrypted[0] as UserNameSecurityTokenParameters;
+            UserNameSecurityTokenParameters userNameParameters =
+                parameters.SignedEncrypted[0] as UserNameSecurityTokenParameters;
             if (userNameParameters == null)
                 return false;
 
@@ -1510,7 +1967,9 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsCertificateOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateCertificateOverTransportBindingElement(MessageSecurityVersion version)
+        static public TransportSecurityBindingElement CreateCertificateOverTransportBindingElement(
+            MessageSecurityVersion version
+        )
         {
             if (version == null)
             {
@@ -1529,12 +1988,11 @@ namespace System.ServiceModel.Channels
 
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
             X509SecurityTokenParameters x509Parameters = new X509SecurityTokenParameters(
-                    x509ReferenceType,
-                    SecurityTokenInclusionMode.AlwaysToRecipient,
-                    false);
-            result.EndpointSupportingTokenParameters.Endorsing.Add(
-                x509Parameters
-                );
+                x509ReferenceType,
+                SecurityTokenInclusionMode.AlwaysToRecipient,
+                false
+            );
+            result.EndpointSupportingTokenParameters.Endorsing.Add(x509Parameters);
             result.IncludeTimestamp = true;
             result.LocalClientSettings.DetectReplays = false;
             result.LocalServiceSettings.DetectReplays = false;
@@ -1554,26 +2012,33 @@ namespace System.ServiceModel.Channels
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 0 || parameters.Endorsing.Count != 1 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 0
+                || parameters.Endorsing.Count != 1
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
-            X509SecurityTokenParameters x509Parameters = parameters.Endorsing[0] as X509SecurityTokenParameters;
+            X509SecurityTokenParameters x509Parameters =
+                parameters.Endorsing[0] as X509SecurityTokenParameters;
             if (x509Parameters == null)
                 return false;
 
             if (x509Parameters.InclusionMode != SecurityTokenInclusionMode.AlwaysToRecipient)
                 return false;
 
-            return x509Parameters.X509ReferenceStyle == X509KeyIdentifierClauseType.Any || x509Parameters.X509ReferenceStyle == X509KeyIdentifierClauseType.Thumbprint;
+            return x509Parameters.X509ReferenceStyle == X509KeyIdentifierClauseType.Any
+                || x509Parameters.X509ReferenceStyle == X509KeyIdentifierClauseType.Thumbprint;
         }
 
-        static public TransportSecurityBindingElement CreateKerberosOverTransportBindingElement()
+        public static TransportSecurityBindingElement CreateKerberosOverTransportBindingElement()
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
-            KerberosSecurityTokenParameters kerberosParameters = new KerberosSecurityTokenParameters();
+            KerberosSecurityTokenParameters kerberosParameters =
+                new KerberosSecurityTokenParameters();
             kerberosParameters.RequireDerivedKeys = false;
-            result.EndpointSupportingTokenParameters.Endorsing.Add(
-                kerberosParameters);
+            result.EndpointSupportingTokenParameters.Endorsing.Add(kerberosParameters);
             result.IncludeTimestamp = true;
             result.LocalClientSettings.DetectReplays = false;
             result.LocalServiceSettings.DetectReplays = false;
@@ -1598,10 +2063,16 @@ namespace System.ServiceModel.Channels
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 0 || parameters.Endorsing.Count != 1 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 0
+                || parameters.Endorsing.Count != 1
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
 
-            KerberosSecurityTokenParameters kerberosParameters = parameters.Endorsing[0] as KerberosSecurityTokenParameters;
+            KerberosSecurityTokenParameters kerberosParameters =
+                parameters.Endorsing[0] as KerberosSecurityTokenParameters;
             if (kerberosParameters == null)
                 return false;
 
@@ -1611,6 +2082,7 @@ namespace System.ServiceModel.Channels
             return true;
         }
 #endif
+
         static public TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement()
         {
             return CreateSspiNegotiationOverTransportBindingElement(true);
@@ -1618,13 +2090,16 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSspiNegotiationOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement(bool requireCancellation)
+        static public TransportSecurityBindingElement CreateSspiNegotiationOverTransportBindingElement(
+            bool requireCancellation
+        )
         {
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
-            SspiSecurityTokenParameters sspiParameters = new SspiSecurityTokenParameters(requireCancellation);
+            SspiSecurityTokenParameters sspiParameters = new SspiSecurityTokenParameters(
+                requireCancellation
+            );
             sspiParameters.RequireDerivedKeys = false;
-            result.EndpointSupportingTokenParameters.Endorsing.Add(
-                sspiParameters);
+            result.EndpointSupportingTokenParameters.Endorsing.Add(sspiParameters);
             result.IncludeTimestamp = true;
             result.LocalClientSettings.DetectReplays = false;
             result.LocalServiceSettings.DetectReplays = false;
@@ -1634,7 +2109,10 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateSspiNegotiationOverTransportBindingElement() logic
-        internal static bool IsSspiNegotiationOverTransportBinding(SecurityBindingElement sbe, bool requireCancellation)
+        internal static bool IsSspiNegotiationOverTransportBinding(
+            SecurityBindingElement sbe,
+            bool requireCancellation
+        )
         {
             // do not check local settings: sbe.LocalServiceSettings and sbe.LocalClientSettings
 
@@ -1642,9 +2120,15 @@ namespace System.ServiceModel.Channels
                 return false;
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 0 || parameters.Endorsing.Count != 1 || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.Signed.Count != 0
+                || parameters.SignedEncrypted.Count != 0
+                || parameters.Endorsing.Count != 1
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
-            SspiSecurityTokenParameters sspiParameters = parameters.Endorsing[0] as SspiSecurityTokenParameters;
+            SspiSecurityTokenParameters sspiParameters =
+                parameters.Endorsing[0] as SspiSecurityTokenParameters;
             if (sspiParameters == null)
                 return false;
 
@@ -1662,10 +2146,14 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsIssuedTokenOverTransportBinding() method.
-        static public TransportSecurityBindingElement CreateIssuedTokenOverTransportBindingElement(IssuedSecurityTokenParameters issuedTokenParameters)
+        static public TransportSecurityBindingElement CreateIssuedTokenOverTransportBindingElement(
+            IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             if (issuedTokenParameters == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("issuedTokenParameters");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "issuedTokenParameters"
+                );
 
             issuedTokenParameters.RequireDerivedKeys = false;
             TransportSecurityBindingElement result = new TransportSecurityBindingElement();
@@ -1687,7 +2175,10 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateIssuedTokenOverTransportBindingElement() logic
-        internal static bool IsIssuedTokenOverTransportBinding(SecurityBindingElement sbe, out IssuedSecurityTokenParameters issuedTokenParameters)
+        internal static bool IsIssuedTokenOverTransportBinding(
+            SecurityBindingElement sbe,
+            out IssuedSecurityTokenParameters issuedTokenParameters
+        )
         {
             issuedTokenParameters = null;
             if (!(sbe is TransportSecurityBindingElement))
@@ -1699,18 +2190,31 @@ namespace System.ServiceModel.Channels
             // do not check local settings: sbe.LocalServiceSettings and sbe.LocalClientSettings
 
             SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-            if (parameters.SignedEncrypted.Count != 0 || (parameters.Signed.Count == 0 && parameters.Endorsing.Count == 0) || parameters.SignedEndorsing.Count != 0)
+            if (
+                parameters.SignedEncrypted.Count != 0
+                || (parameters.Signed.Count == 0 && parameters.Endorsing.Count == 0)
+                || parameters.SignedEndorsing.Count != 0
+            )
                 return false;
             if ((parameters.Signed.Count == 1) && (parameters.Endorsing.Count == 0))
             {
                 issuedTokenParameters = parameters.Signed[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey)
+                if (
+                    issuedTokenParameters != null
+                    && issuedTokenParameters.KeyType != SecurityKeyType.BearerKey
+                )
                     return false;
             }
             else if ((parameters.Endorsing.Count == 1) && (parameters.Signed.Count == 0))
             {
                 issuedTokenParameters = parameters.Endorsing[0] as IssuedSecurityTokenParameters;
-                if (issuedTokenParameters != null && (issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey))
+                if (
+                    issuedTokenParameters != null
+                    && (
+                        issuedTokenParameters.KeyType != SecurityKeyType.SymmetricKey
+                        && issuedTokenParameters.KeyType != SecurityKeyType.AsymmetricKey
+                    )
+                )
                     return false;
             }
             if (issuedTokenParameters == null)
@@ -1723,42 +2227,69 @@ namespace System.ServiceModel.Channels
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSecureConversationBinding() method.
-        static public SecurityBindingElement CreateSecureConversationBindingElement(SecurityBindingElement bootstrapSecurity)
+        static public SecurityBindingElement CreateSecureConversationBindingElement(
+            SecurityBindingElement bootstrapSecurity
+        )
         {
-            return CreateSecureConversationBindingElement(bootstrapSecurity, SecureConversationSecurityTokenParameters.defaultRequireCancellation, null);
+            return CreateSecureConversationBindingElement(
+                bootstrapSecurity,
+                SecureConversationSecurityTokenParameters.defaultRequireCancellation,
+                null
+            );
         }
 
         // this method reverses CreateSecureConversationBindingElement() logic
-        internal static bool IsSecureConversationBinding(SecurityBindingElement sbe, out SecurityBindingElement bootstrapSecurity)
+        internal static bool IsSecureConversationBinding(
+            SecurityBindingElement sbe,
+            out SecurityBindingElement bootstrapSecurity
+        )
         {
-            return IsSecureConversationBinding(sbe, SecureConversationSecurityTokenParameters.defaultRequireCancellation, out bootstrapSecurity);
+            return IsSecureConversationBinding(
+                sbe,
+                SecureConversationSecurityTokenParameters.defaultRequireCancellation,
+                out bootstrapSecurity
+            );
         }
 
-        static public SecurityBindingElement CreateSecureConversationBindingElement(SecurityBindingElement bootstrapSecurity, bool requireCancellation)
+        public static SecurityBindingElement CreateSecureConversationBindingElement(
+            SecurityBindingElement bootstrapSecurity,
+            bool requireCancellation
+        )
         {
-            return CreateSecureConversationBindingElement(bootstrapSecurity, requireCancellation, null);
+            return CreateSecureConversationBindingElement(
+                bootstrapSecurity,
+                requireCancellation,
+                null
+            );
         }
 
         // If any changes are made to this method, please make sure that they are
         // reflected in the corresponding IsSecureConversationBinding() method.
-        static public SecurityBindingElement CreateSecureConversationBindingElement(SecurityBindingElement bootstrapSecurity, bool requireCancellation, ChannelProtectionRequirements bootstrapProtectionRequirements)
+        static public SecurityBindingElement CreateSecureConversationBindingElement(
+            SecurityBindingElement bootstrapSecurity,
+            bool requireCancellation,
+            ChannelProtectionRequirements bootstrapProtectionRequirements
+        )
         {
             if (bootstrapSecurity == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bootstrapBinding");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "bootstrapBinding"
+                );
 
             SecurityBindingElement result;
 
             if (bootstrapSecurity is TransportSecurityBindingElement)
             {
                 // there is no need to do replay detection or key derivation for transport bindings
-                TransportSecurityBindingElement primary = new TransportSecurityBindingElement();                
-                SecureConversationSecurityTokenParameters scParameters = new SecureConversationSecurityTokenParameters(
+                TransportSecurityBindingElement primary = new TransportSecurityBindingElement();
+                SecureConversationSecurityTokenParameters scParameters =
+                    new SecureConversationSecurityTokenParameters(
                         bootstrapSecurity,
                         requireCancellation,
-                        bootstrapProtectionRequirements);
+                        bootstrapProtectionRequirements
+                    );
                 scParameters.RequireDerivedKeys = false;
-                primary.EndpointSupportingTokenParameters.Endorsing.Add(
-                    scParameters);                
+                primary.EndpointSupportingTokenParameters.Endorsing.Add(scParameters);
                 primary.LocalClientSettings.DetectReplays = false;
                 primary.LocalServiceSettings.DetectReplays = false;
                 primary.IncludeTimestamp = true;
@@ -1770,7 +2301,9 @@ namespace System.ServiceModel.Channels
                     new SecureConversationSecurityTokenParameters(
                         bootstrapSecurity,
                         requireCancellation,
-                        bootstrapProtectionRequirements));
+                        bootstrapProtectionRequirements
+                    )
+                );
                 // there is no need for signature confirmation on the steady state binding
                 primary.RequireSignatureConfirmation = false;
                 result = primary;
@@ -1780,7 +2313,11 @@ namespace System.ServiceModel.Channels
         }
 
         // this method reverses CreateSecureConversationBindingElement() logic
-        internal static bool IsSecureConversationBinding(SecurityBindingElement sbe, bool requireCancellation, out SecurityBindingElement bootstrapSecurity)
+        internal static bool IsSecureConversationBinding(
+            SecurityBindingElement sbe,
+            bool requireCancellation,
+            out SecurityBindingElement bootstrapSecurity
+        )
         {
             bootstrapSecurity = null;
             SymmetricSecurityBindingElement ssbe = sbe as SymmetricSecurityBindingElement;
@@ -1789,7 +2326,8 @@ namespace System.ServiceModel.Channels
                 if (ssbe.RequireSignatureConfirmation)
                     return false;
 
-                SecureConversationSecurityTokenParameters parameters = ssbe.ProtectionTokenParameters as SecureConversationSecurityTokenParameters;
+                SecureConversationSecurityTokenParameters parameters =
+                    ssbe.ProtectionTokenParameters as SecureConversationSecurityTokenParameters;
                 if (parameters == null)
                     return false;
                 if (parameters.RequireCancellation != requireCancellation)
@@ -1807,9 +2345,15 @@ namespace System.ServiceModel.Channels
                     return false;
 
                 SupportingTokenParameters parameters = sbe.EndpointSupportingTokenParameters;
-                if (parameters.Signed.Count != 0 || parameters.SignedEncrypted.Count != 0 || parameters.Endorsing.Count != 1 || parameters.SignedEndorsing.Count != 0)
+                if (
+                    parameters.Signed.Count != 0
+                    || parameters.SignedEncrypted.Count != 0
+                    || parameters.Endorsing.Count != 1
+                    || parameters.SignedEndorsing.Count != 0
+                )
                     return false;
-                SecureConversationSecurityTokenParameters scParameters = parameters.Endorsing[0] as SecureConversationSecurityTokenParameters;
+                SecureConversationSecurityTokenParameters scParameters =
+                    parameters.Endorsing[0] as SecureConversationSecurityTokenParameters;
                 if (scParameters == null)
                     return false;
 
@@ -1817,10 +2361,13 @@ namespace System.ServiceModel.Channels
                     return false;
 
                 bootstrapSecurity = scParameters.BootstrapSecurityBindingElement;
-
             }
 
-            if (bootstrapSecurity != null && bootstrapSecurity.SecurityHeaderLayout != SecurityProtocolFactory.defaultSecurityHeaderLayout)
+            if (
+                bootstrapSecurity != null
+                && bootstrapSecurity.SecurityHeaderLayout
+                    != SecurityProtocolFactory.defaultSecurityHeaderLayout
+            )
                 return false;
 
             return bootstrapSecurity != null;
@@ -1830,50 +2377,138 @@ namespace System.ServiceModel.Channels
         {
             StringBuilder sb = new StringBuilder();
 
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "{0}:", this.GetType().ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "DefaultAlgorithmSuite: {0}", this.defaultAlgorithmSuite.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "IncludeTimestamp: {0}", this.includeTimestamp.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "KeyEntropyMode: {0}", this.keyEntropyMode.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "MessageSecurityVersion: {0}", this.MessageSecurityVersion.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "SecurityHeaderLayout: {0}", this.securityHeaderLayout.ToString()));
-            sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "ProtectTokens: {0}", this.protectTokens.ToString()));
+            sb.AppendLine(
+                String.Format(CultureInfo.InvariantCulture, "{0}:", this.GetType().ToString())
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "DefaultAlgorithmSuite: {0}",
+                    this.defaultAlgorithmSuite.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "IncludeTimestamp: {0}",
+                    this.includeTimestamp.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "KeyEntropyMode: {0}",
+                    this.keyEntropyMode.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "MessageSecurityVersion: {0}",
+                    this.MessageSecurityVersion.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "SecurityHeaderLayout: {0}",
+                    this.securityHeaderLayout.ToString()
+                )
+            );
+            sb.AppendLine(
+                String.Format(
+                    CultureInfo.InvariantCulture,
+                    "ProtectTokens: {0}",
+                    this.protectTokens.ToString()
+                )
+            );
             sb.AppendLine("EndpointSupportingTokenParameters:");
-            sb.AppendLine("  " + this.EndpointSupportingTokenParameters.ToString().Trim().Replace("\n", "\n  "));
+            sb.AppendLine(
+                "  "
+                    + this.EndpointSupportingTokenParameters.ToString().Trim().Replace("\n", "\n  ")
+            );
             sb.AppendLine("OptionalEndpointSupportingTokenParameters:");
-            sb.AppendLine("  " + this.OptionalEndpointSupportingTokenParameters.ToString().Trim().Replace("\n", "\n  "));
+            sb.AppendLine(
+                "  "
+                    + this.OptionalEndpointSupportingTokenParameters.ToString()
+                        .Trim()
+                        .Replace("\n", "\n  ")
+            );
             if (this.operationSupportingTokenParameters.Count == 0)
             {
-                sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "OperationSupportingTokenParameters: none"));
+                sb.AppendLine(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "OperationSupportingTokenParameters: none"
+                    )
+                );
             }
             else
             {
                 foreach (string requestAction in this.OperationSupportingTokenParameters.Keys)
                 {
-                    sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "OperationSupportingTokenParameters[\"{0}\"]:", requestAction));
-                    sb.AppendLine("  " + this.OperationSupportingTokenParameters[requestAction].ToString().Trim().Replace("\n", "\n  "));
+                    sb.AppendLine(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "OperationSupportingTokenParameters[\"{0}\"]:",
+                            requestAction
+                        )
+                    );
+                    sb.AppendLine(
+                        "  "
+                            + this.OperationSupportingTokenParameters[requestAction]
+                                .ToString()
+                                .Trim()
+                                .Replace("\n", "\n  ")
+                    );
                 }
             }
             if (this.optionalOperationSupportingTokenParameters.Count == 0)
             {
-                sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "OptionalOperationSupportingTokenParameters: none"));
+                sb.AppendLine(
+                    String.Format(
+                        CultureInfo.InvariantCulture,
+                        "OptionalOperationSupportingTokenParameters: none"
+                    )
+                );
             }
             else
             {
-                foreach (string requestAction in this.OptionalOperationSupportingTokenParameters.Keys)
+                foreach (
+                    string requestAction in this.OptionalOperationSupportingTokenParameters.Keys
+                )
                 {
-                    sb.AppendLine(String.Format(CultureInfo.InvariantCulture, "OptionalOperationSupportingTokenParameters[\"{0}\"]:", requestAction));
-                    sb.AppendLine("  " + this.OptionalOperationSupportingTokenParameters[requestAction].ToString().Trim().Replace("\n", "\n  "));
+                    sb.AppendLine(
+                        String.Format(
+                            CultureInfo.InvariantCulture,
+                            "OptionalOperationSupportingTokenParameters[\"{0}\"]:",
+                            requestAction
+                        )
+                    );
+                    sb.AppendLine(
+                        "  "
+                            + this.OptionalOperationSupportingTokenParameters[requestAction]
+                                .ToString()
+                                .Trim()
+                                .Replace("\n", "\n  ")
+                    );
                 }
             }
 
             return sb.ToString().Trim();
         }
 
-
-        internal static ChannelProtectionRequirements ComputeProtectionRequirements(SecurityBindingElement security, BindingParameterCollection parameterCollection, BindingElementCollection bindingElements, bool isForService)
+        internal static ChannelProtectionRequirements ComputeProtectionRequirements(
+            SecurityBindingElement security,
+            BindingParameterCollection parameterCollection,
+            BindingElementCollection bindingElements,
+            bool isForService
+        )
         {
             if (parameterCollection == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("parameterCollection");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "parameterCollection"
+                );
             if (bindingElements == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("bindingElements");
             if (security == null)
@@ -1882,10 +2517,14 @@ namespace System.ServiceModel.Channels
             }
 
             ChannelProtectionRequirements result = null;
-            if ((security is SymmetricSecurityBindingElement) || (security is AsymmetricSecurityBindingElement))
+            if (
+                (security is SymmetricSecurityBindingElement)
+                || (security is AsymmetricSecurityBindingElement)
+            )
             {
                 result = new ChannelProtectionRequirements();
-                ChannelProtectionRequirements contractRequirements = parameterCollection.Find<ChannelProtectionRequirements>();
+                ChannelProtectionRequirements contractRequirements =
+                    parameterCollection.Find<ChannelProtectionRequirements>();
 
                 if (contractRequirements != null)
                     result.Add(contractRequirements);
@@ -1896,17 +2535,21 @@ namespace System.ServiceModel.Channels
             return result;
         }
 
-        static void AddBindingProtectionRequirements(ChannelProtectionRequirements requirements, BindingElementCollection bindingElements, bool isForChannel)
+        static void AddBindingProtectionRequirements(
+            ChannelProtectionRequirements requirements,
+            BindingElementCollection bindingElements,
+            bool isForChannel
+        )
         {
             // Gather custom requirements from bindingElements
             CustomBinding binding = new CustomBinding(bindingElements);
             BindingContext context = new BindingContext(binding, new BindingParameterCollection());
-            // In theory, we can just do 
+            // In theory, we can just do
             //     context.GetInnerProperty<ChannelProtectionRequirements>()
             // but that relies on each binding element to correctly union-up its own requirements with
-            // those of the rest of the stack.  So instead, we ask each BE individually, and we do the 
+            // those of the rest of the stack.  So instead, we ask each BE individually, and we do the
             // work of combining the results.  This protects us against this scenario: someone authors "FooBE"
-            // with a a GetProperty implementation that always returns null (oops), and puts FooBE on the 
+            // with a a GetProperty implementation that always returns null (oops), and puts FooBE on the
             // top of the stack, and so FooBE "hides" important protection requirements that inner BEs
             // require, resulting in an insecure binding.
             foreach (BindingElement bindingElement in bindingElements)
@@ -1916,7 +2559,8 @@ namespace System.ServiceModel.Channels
                     // ask each element individually for its requirements
                     context.RemainingBindingElements.Clear();
                     context.RemainingBindingElements.Add(bindingElement);
-                    ChannelProtectionRequirements s = context.GetInnerProperty<ChannelProtectionRequirements>();
+                    ChannelProtectionRequirements s =
+                        context.GetInnerProperty<ChannelProtectionRequirements>();
                     if (s != null)
                     {
                         //if (isForChannel)
@@ -1925,29 +2569,38 @@ namespace System.ServiceModel.Channels
                         //}
                         //else
                         //{
-                            requirements.Add(s);
+                        requirements.Add(s);
                         //}
                     }
                 }
             }
         }
 
-        internal void ApplyAuditBehaviorSettings(BindingContext context, SecurityProtocolFactory factory)
+        internal void ApplyAuditBehaviorSettings(
+            BindingContext context,
+            SecurityProtocolFactory factory
+        )
         {
-            ServiceSecurityAuditBehavior auditBehavior = context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
+            ServiceSecurityAuditBehavior auditBehavior =
+                context.BindingParameters.Find<ServiceSecurityAuditBehavior>();
             if (auditBehavior != null)
             {
                 factory.AuditLogLocation = auditBehavior.AuditLogLocation;
                 factory.SuppressAuditFailure = auditBehavior.SuppressAuditFailure;
-                factory.ServiceAuthorizationAuditLevel = auditBehavior.ServiceAuthorizationAuditLevel;
-                factory.MessageAuthenticationAuditLevel = auditBehavior.MessageAuthenticationAuditLevel;
+                factory.ServiceAuthorizationAuditLevel =
+                    auditBehavior.ServiceAuthorizationAuditLevel;
+                factory.MessageAuthenticationAuditLevel =
+                    auditBehavior.MessageAuthenticationAuditLevel;
             }
             else
             {
                 factory.AuditLogLocation = ServiceSecurityAuditBehavior.defaultAuditLogLocation;
-                factory.SuppressAuditFailure = ServiceSecurityAuditBehavior.defaultSuppressAuditFailure;
-                factory.ServiceAuthorizationAuditLevel = ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
-                factory.MessageAuthenticationAuditLevel = ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
+                factory.SuppressAuditFailure =
+                    ServiceSecurityAuditBehavior.defaultSuppressAuditFailure;
+                factory.ServiceAuthorizationAuditLevel =
+                    ServiceSecurityAuditBehavior.defaultServiceAuthorizationAuditLevel;
+                factory.MessageAuthenticationAuditLevel =
+                    ServiceSecurityAuditBehavior.defaultMessageAuthenticationAuditLevel;
             }
         }
 
@@ -1962,7 +2615,10 @@ namespace System.ServiceModel.Channels
             return SecurityElement.AreBindingsMatching(this, security);
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, XmlElement assertion)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            XmlElement assertion
+        )
         {
             if (policyContext != null && assertion != null)
             {
@@ -1970,7 +2626,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, Collection<XmlElement> assertions)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            Collection<XmlElement> assertions
+        )
         {
             if (policyContext != null && assertions != null)
             {
@@ -1980,7 +2639,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, OperationDescription operation, XmlElement assertion)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            OperationDescription operation,
+            XmlElement assertion
+        )
         {
             if (policyContext != null && assertion != null)
             {
@@ -1988,17 +2651,26 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, OperationDescription operation, Collection<XmlElement> assertions)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            OperationDescription operation,
+            Collection<XmlElement> assertions
+        )
         {
             if (policyContext != null && assertions != null)
             {
-                PolicyAssertionCollection existingAssertions = policyContext.GetOperationBindingAssertions(operation);
+                PolicyAssertionCollection existingAssertions =
+                    policyContext.GetOperationBindingAssertions(operation);
                 for (int i = 0; i < assertions.Count; ++i)
                     existingAssertions.Add(assertions[i]);
             }
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, MessageDescription message, XmlElement assertion)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            MessageDescription message,
+            XmlElement assertion
+        )
         {
             if (policyContext != null && assertion != null)
             {
@@ -2006,7 +2678,11 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static void AddAssertionIfNotNull(PolicyConversionContext policyContext, FaultDescription message, XmlElement assertion)
+        static void AddAssertionIfNotNull(
+            PolicyConversionContext policyContext,
+            FaultDescription message,
+            XmlElement assertion
+        )
         {
             if (policyContext != null && assertion != null)
             {
@@ -2014,7 +2690,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal static void ExportPolicy(MetadataExporter exporter, PolicyConversionContext context)
+        internal static void ExportPolicy(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -2041,7 +2720,11 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        if (binding != null || be is MessageEncodingBindingElement || be is ITransportTokenAssertionProvider)
+                        if (
+                            binding != null
+                            || be is MessageEncodingBindingElement
+                            || be is ITransportTokenAssertionProvider
+                        )
                         {
                             bindingElementsBelowSecurity.Add(be);
                         }
@@ -2054,20 +2737,30 @@ namespace System.ServiceModel.Channels
             }
 
             // this is used when exporting bootstrap policy for secure conversation in SecurityPolicy11.CreateWsspBootstrapPolicyAssertion
-            exporter.State[SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey] = bindingElementsBelowSecurity;
+            exporter.State[
+                SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
+            ] = bindingElementsBelowSecurity;
 
             bool hasCompletedSuccessfully = false;
             try
             {
                 if (binding is SymmetricSecurityBindingElement)
                 {
-                    ExportSymmetricSecurityBindingElement((SymmetricSecurityBindingElement)binding, exporter, context);
+                    ExportSymmetricSecurityBindingElement(
+                        (SymmetricSecurityBindingElement)binding,
+                        exporter,
+                        context
+                    );
                     ExportOperationScopeSupportingTokensPolicy(binding, exporter, context);
                     ExportMessageScopeProtectionPolicy(binding, exporter, context);
                 }
                 else if (binding is AsymmetricSecurityBindingElement)
                 {
-                    ExportAsymmetricSecurityBindingElement((AsymmetricSecurityBindingElement)binding, exporter, context);
+                    ExportAsymmetricSecurityBindingElement(
+                        (AsymmetricSecurityBindingElement)binding,
+                        exporter,
+                        context
+                    );
                     ExportOperationScopeSupportingTokensPolicy(binding, exporter, context);
                     ExportMessageScopeProtectionPolicy(binding, exporter, context);
                 }
@@ -2078,17 +2771,23 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    exporter.State.Remove(SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey);
+                    exporter.State.Remove(
+                        SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
+                    );
                 }
                 catch (Exception e)
                 {
                     // Always immediately rethrow fatal exceptions.
-                    if (hasCompletedSuccessfully || Fx.IsFatal(e)) throw;
+                    if (hasCompletedSuccessfully || Fx.IsFatal(e))
+                        throw;
                 }
             }
         }
 
-        internal static void ExportPolicyForTransportTokenAssertionProviders(MetadataExporter exporter, PolicyConversionContext context)
+        internal static void ExportPolicyForTransportTokenAssertionProviders(
+            MetadataExporter exporter,
+            PolicyConversionContext context
+        )
         {
             if (exporter == null)
             {
@@ -2115,7 +2814,11 @@ namespace System.ServiceModel.Channels
                     }
                     else
                     {
-                        if (binding != null || be is MessageEncodingBindingElement || be is ITransportTokenAssertionProvider)
+                        if (
+                            binding != null
+                            || be is MessageEncodingBindingElement
+                            || be is ITransportTokenAssertionProvider
+                        )
                         {
                             bindingElementsBelowSecurity.Add(be);
                         }
@@ -2128,7 +2831,9 @@ namespace System.ServiceModel.Channels
             }
 
             // this is used when exporting bootstrap policy for secure conversation in SecurityPolicy11.CreateWsspBootstrapPolicyAssertion
-            exporter.State[SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey] = bindingElementsBelowSecurity;
+            exporter.State[
+                SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
+            ] = bindingElementsBelowSecurity;
 
             bool hasCompletedSuccessfully = false;
             try
@@ -2137,15 +2842,27 @@ namespace System.ServiceModel.Channels
                 {
                     if (transportTokenAssertionProvider == null && !binding.AllowInsecureTransport)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.ExportOfBindingWithTransportSecurityBindingElementAndNoTransportSecurityNotSupported)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new InvalidOperationException(
+                                SR.GetString(
+                                    SR.ExportOfBindingWithTransportSecurityBindingElementAndNoTransportSecurityNotSupported
+                                )
+                            )
+                        );
                     }
 
-                    ExportTransportSecurityBindingElement((TransportSecurityBindingElement)binding, transportTokenAssertionProvider, exporter, context);
+                    ExportTransportSecurityBindingElement(
+                        (TransportSecurityBindingElement)binding,
+                        transportTokenAssertionProvider,
+                        exporter,
+                        context
+                    );
                     ExportOperationScopeSupportingTokensPolicy(binding, exporter, context);
                 }
                 else if (transportTokenAssertionProvider != null)
                 {
-                    TransportSecurityBindingElement dummyTransportBindingElement = new TransportSecurityBindingElement();
+                    TransportSecurityBindingElement dummyTransportBindingElement =
+                        new TransportSecurityBindingElement();
                     if (binding == null)
                     {
                         dummyTransportBindingElement.IncludeTimestamp = false;
@@ -2154,13 +2871,20 @@ namespace System.ServiceModel.Channels
                     // In order to generate the right sp assertion without SBE.
                     // scenario: WSxHttpBinding with SecurityMode.Transport.
                     // See CSD 3105 for detail
-                    HttpsTransportBindingElement httpsBinding = transportTokenAssertionProvider as HttpsTransportBindingElement;
+                    HttpsTransportBindingElement httpsBinding =
+                        transportTokenAssertionProvider as HttpsTransportBindingElement;
                     if (httpsBinding != null && httpsBinding.MessageSecurityVersion != null)
                     {
-                        dummyTransportBindingElement.MessageSecurityVersion = httpsBinding.MessageSecurityVersion;
+                        dummyTransportBindingElement.MessageSecurityVersion =
+                            httpsBinding.MessageSecurityVersion;
                     }
 
-                    ExportTransportSecurityBindingElement(dummyTransportBindingElement, transportTokenAssertionProvider, exporter, context);
+                    ExportTransportSecurityBindingElement(
+                        dummyTransportBindingElement,
+                        transportTokenAssertionProvider,
+                        exporter,
+                        context
+                    );
                 }
 
                 hasCompletedSuccessfully = true;
@@ -2169,19 +2893,22 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    exporter.State.Remove(SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey);
+                    exporter.State.Remove(
+                        SecurityPolicyStrings.SecureConversationBootstrapBindingElementsBelowSecurityKey
+                    );
                 }
                 catch (Exception e)
                 {
                     // Always immediately rethrow fatal exceptions.
-                    if (hasCompletedSuccessfully || Fx.IsFatal(e)) throw;
+                    if (hasCompletedSuccessfully || Fx.IsFatal(e))
+                        throw;
                 }
             }
         }
 
         //
         // We will emit the wssp trust 10 assertion for all the case except for the basic http binding
-        // created through the BasicHttpBinding class.  The reason for this exception is to allow better 
+        // created through the BasicHttpBinding class.  The reason for this exception is to allow better
         // interop with third party when the third party doesn't understand the trust ----erion
         //
         static bool RequiresWsspTrust(SecurityBindingElement sbe)
@@ -2192,34 +2919,57 @@ namespace System.ServiceModel.Channels
             return !(sbe.doNotEmitTrust);
         }
 
-        static void ExportAsymmetricSecurityBindingElement(AsymmetricSecurityBindingElement binding, MetadataExporter exporter, PolicyConversionContext policyContext)
+        static void ExportAsymmetricSecurityBindingElement(
+            AsymmetricSecurityBindingElement binding,
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
-            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(binding.MessageSecurityVersion);
+            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
+                binding.MessageSecurityVersion
+            );
 
-            AddAssertionIfNotNull(policyContext, sp.CreateWsspAsymmetricBindingAssertion(exporter, policyContext, binding));
+            AddAssertionIfNotNull(
+                policyContext,
+                sp.CreateWsspAsymmetricBindingAssertion(exporter, policyContext, binding)
+            );
 
-            AddAssertionIfNotNull(policyContext, sp.CreateWsspSupportingTokensAssertion(
-                exporter,
-                binding.EndpointSupportingTokenParameters.Signed,
-                binding.EndpointSupportingTokenParameters.SignedEncrypted,
-                binding.EndpointSupportingTokenParameters.Endorsing,
-                binding.EndpointSupportingTokenParameters.SignedEndorsing,
-                binding.OptionalEndpointSupportingTokenParameters.Signed,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
-                binding.OptionalEndpointSupportingTokenParameters.Endorsing,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing));
+            AddAssertionIfNotNull(
+                policyContext,
+                sp.CreateWsspSupportingTokensAssertion(
+                    exporter,
+                    binding.EndpointSupportingTokenParameters.Signed,
+                    binding.EndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.EndpointSupportingTokenParameters.Endorsing,
+                    binding.EndpointSupportingTokenParameters.SignedEndorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.Signed,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.OptionalEndpointSupportingTokenParameters.Endorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing
+                )
+            );
 
             AddAssertionIfNotNull(policyContext, sp.CreateWsspWssAssertion(exporter, binding));
 
             if (RequiresWsspTrust(binding))
             {
-                AddAssertionIfNotNull(policyContext, sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode));
+                AddAssertionIfNotNull(
+                    policyContext,
+                    sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode)
+                );
             }
         }
 
-        static void ExportTransportSecurityBindingElement(TransportSecurityBindingElement binding, ITransportTokenAssertionProvider transportTokenAssertionProvider, MetadataExporter exporter, PolicyConversionContext policyContext)
+        static void ExportTransportSecurityBindingElement(
+            TransportSecurityBindingElement binding,
+            ITransportTokenAssertionProvider transportTokenAssertionProvider,
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
-            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(binding.MessageSecurityVersion);
+            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
+                binding.MessageSecurityVersion
+            );
 
             if (transportTokenAssertionProvider == null && binding.AllowInsecureTransport)
             {
@@ -2232,7 +2982,7 @@ namespace System.ServiceModel.Channels
                             transportTokenAssertionProvider = new HttpsTransportBindingElement();
                             break;
                         }
-                        
+
                         if (be is TcpTransportBindingElement)
                         {
                             transportTokenAssertionProvider = new SslStreamSecurityBindingElement();
@@ -2242,56 +2992,80 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            XmlElement transportTokenAssertion = transportTokenAssertionProvider.GetTransportTokenAssertion();
+            XmlElement transportTokenAssertion =
+                transportTokenAssertionProvider.GetTransportTokenAssertion();
 
             if (transportTokenAssertion == null)
             {
                 if (transportTokenAssertionProvider is HttpsTransportBindingElement)
                 {
-                    transportTokenAssertion = sp.CreateWsspHttpsTokenAssertion(exporter, (HttpsTransportBindingElement)transportTokenAssertionProvider);
+                    transportTokenAssertion = sp.CreateWsspHttpsTokenAssertion(
+                        exporter,
+                        (HttpsTransportBindingElement)transportTokenAssertionProvider
+                    );
                 }
 
                 if (transportTokenAssertion == null)
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.NoTransportTokenAssertionProvided, transportTokenAssertionProvider.GetType().ToString())));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.NoTransportTokenAssertionProvided,
+                                transportTokenAssertionProvider.GetType().ToString()
+                            )
+                        )
+                    );
             }
 
             AddressingVersion addressingVersion = AddressingVersion.WSAddressing10;
-            MessageEncodingBindingElement messageEncoderBindingElement = policyContext.BindingElements.Find<MessageEncodingBindingElement>();
+            MessageEncodingBindingElement messageEncoderBindingElement =
+                policyContext.BindingElements.Find<MessageEncodingBindingElement>();
             if (messageEncoderBindingElement != null)
             {
                 addressingVersion = messageEncoderBindingElement.MessageVersion.Addressing;
             }
 
-            AddAssertionIfNotNull(policyContext, sp.CreateWsspTransportBindingAssertion(exporter, binding, transportTokenAssertion));
+            AddAssertionIfNotNull(
+                policyContext,
+                sp.CreateWsspTransportBindingAssertion(exporter, binding, transportTokenAssertion)
+            );
 
-            Collection<XmlElement> supportingTokenAssertions = sp.CreateWsspSupportingTokensAssertion(
-                exporter,
-                binding.EndpointSupportingTokenParameters.Signed,
-                binding.EndpointSupportingTokenParameters.SignedEncrypted,
-                binding.EndpointSupportingTokenParameters.Endorsing,
-                binding.EndpointSupportingTokenParameters.SignedEndorsing,
-                binding.OptionalEndpointSupportingTokenParameters.Signed,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
-                binding.OptionalEndpointSupportingTokenParameters.Endorsing,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing,
-                addressingVersion);
+            Collection<XmlElement> supportingTokenAssertions =
+                sp.CreateWsspSupportingTokensAssertion(
+                    exporter,
+                    binding.EndpointSupportingTokenParameters.Signed,
+                    binding.EndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.EndpointSupportingTokenParameters.Endorsing,
+                    binding.EndpointSupportingTokenParameters.SignedEndorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.Signed,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.OptionalEndpointSupportingTokenParameters.Endorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing,
+                    addressingVersion
+                );
 
             AddAssertionIfNotNull(policyContext, supportingTokenAssertions);
 
-            if (supportingTokenAssertions.Count > 0
-                || HasEndorsingSupportingTokensAtOperationScope(binding))
+            if (
+                supportingTokenAssertions.Count > 0
+                || HasEndorsingSupportingTokensAtOperationScope(binding)
+            )
             {
                 AddAssertionIfNotNull(policyContext, sp.CreateWsspWssAssertion(exporter, binding));
                 if (RequiresWsspTrust(binding))
                 {
-                    AddAssertionIfNotNull(policyContext, sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode));
+                    AddAssertionIfNotNull(
+                        policyContext,
+                        sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode)
+                    );
                 }
             }
         }
 
         static bool HasEndorsingSupportingTokensAtOperationScope(SecurityBindingElement binding)
         {
-            foreach (SupportingTokenParameters r in binding.OperationSupportingTokenParameters.Values)
+            foreach (
+                SupportingTokenParameters r in binding.OperationSupportingTokenParameters.Values
+            )
             {
                 if (r.Endorsing.Count > 0 || r.SignedEndorsing.Count > 0)
                 {
@@ -2302,39 +3076,75 @@ namespace System.ServiceModel.Channels
             return false;
         }
 
-        static void ExportSymmetricSecurityBindingElement(SymmetricSecurityBindingElement binding, MetadataExporter exporter, PolicyConversionContext policyContext)
+        static void ExportSymmetricSecurityBindingElement(
+            SymmetricSecurityBindingElement binding,
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
-            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(binding.MessageSecurityVersion);
+            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
+                binding.MessageSecurityVersion
+            );
 
-            AddAssertionIfNotNull(policyContext, sp.CreateWsspSymmetricBindingAssertion(exporter, policyContext, binding));
+            AddAssertionIfNotNull(
+                policyContext,
+                sp.CreateWsspSymmetricBindingAssertion(exporter, policyContext, binding)
+            );
 
-            AddAssertionIfNotNull(policyContext, sp.CreateWsspSupportingTokensAssertion(
-                exporter,
-                binding.EndpointSupportingTokenParameters.Signed,
-                binding.EndpointSupportingTokenParameters.SignedEncrypted,
-                binding.EndpointSupportingTokenParameters.Endorsing,
-                binding.EndpointSupportingTokenParameters.SignedEndorsing,
-                binding.OptionalEndpointSupportingTokenParameters.Signed,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
-                binding.OptionalEndpointSupportingTokenParameters.Endorsing,
-                binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing));
+            AddAssertionIfNotNull(
+                policyContext,
+                sp.CreateWsspSupportingTokensAssertion(
+                    exporter,
+                    binding.EndpointSupportingTokenParameters.Signed,
+                    binding.EndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.EndpointSupportingTokenParameters.Endorsing,
+                    binding.EndpointSupportingTokenParameters.SignedEndorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.Signed,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEncrypted,
+                    binding.OptionalEndpointSupportingTokenParameters.Endorsing,
+                    binding.OptionalEndpointSupportingTokenParameters.SignedEndorsing
+                )
+            );
 
             AddAssertionIfNotNull(policyContext, sp.CreateWsspWssAssertion(exporter, binding));
 
             if (RequiresWsspTrust(binding))
             {
-                AddAssertionIfNotNull(policyContext, sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode));
+                AddAssertionIfNotNull(
+                    policyContext,
+                    sp.CreateWsspTrustAssertion(exporter, binding.KeyEntropyMode)
+                );
             }
         }
 
-        static void ExportMessageScopeProtectionPolicy(SecurityBindingElement security, MetadataExporter exporter, PolicyConversionContext policyContext)
+        static void ExportMessageScopeProtectionPolicy(
+            SecurityBindingElement security,
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
             BindingParameterCollection bindingParameters = new BindingParameterCollection();
-            bindingParameters.Add(ChannelProtectionRequirements.CreateFromContract(policyContext.Contract, policyContext.BindingElements.Find<SecurityBindingElement>().GetIndividualProperty<ISecurityCapabilities>(), false));
-            ChannelProtectionRequirements protectionRequirements = SecurityBindingElement.ComputeProtectionRequirements(security, bindingParameters, policyContext.BindingElements, true);
+            bindingParameters.Add(
+                ChannelProtectionRequirements.CreateFromContract(
+                    policyContext.Contract,
+                    policyContext
+                        .BindingElements.Find<SecurityBindingElement>()
+                        .GetIndividualProperty<ISecurityCapabilities>(),
+                    false
+                )
+            );
+            ChannelProtectionRequirements protectionRequirements =
+                SecurityBindingElement.ComputeProtectionRequirements(
+                    security,
+                    bindingParameters,
+                    policyContext.BindingElements,
+                    true
+                );
             protectionRequirements.MakeReadOnly();
 
-            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(security.MessageSecurityVersion);
+            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
+                security.MessageSecurityVersion
+            );
 
             foreach (OperationDescription operation in policyContext.Contract.Operations)
             {
@@ -2356,7 +3166,11 @@ namespace System.ServiceModel.Channels
 
                     if (scopedParts.TryGetParts(message.Action, out parts))
                     {
-                        AddAssertionIfNotNull(policyContext, message, sp.CreateWsspSignedPartsAssertion(parts));
+                        AddAssertionIfNotNull(
+                            policyContext,
+                            message,
+                            sp.CreateWsspSignedPartsAssertion(parts)
+                        );
                     }
 
                     // confidentiality
@@ -2371,7 +3185,11 @@ namespace System.ServiceModel.Channels
 
                     if (scopedParts.TryGetParts(message.Action, out parts))
                     {
-                        AddAssertionIfNotNull(policyContext, message, sp.CreateWsspEncryptedPartsAssertion(parts));
+                        AddAssertionIfNotNull(
+                            policyContext,
+                            message,
+                            sp.CreateWsspEncryptedPartsAssertion(parts)
+                        );
                     }
                 }
 
@@ -2381,25 +3199,52 @@ namespace System.ServiceModel.Channels
                     MessagePartSpecification parts;
 
                     // integrity
-                    if (protectionRequirements.OutgoingSignatureParts.TryGetParts(fault.Action, out parts))
+                    if (
+                        protectionRequirements.OutgoingSignatureParts.TryGetParts(
+                            fault.Action,
+                            out parts
+                        )
+                    )
                     {
-                        AddAssertionIfNotNull(policyContext, fault, sp.CreateWsspSignedPartsAssertion(parts));
+                        AddAssertionIfNotNull(
+                            policyContext,
+                            fault,
+                            sp.CreateWsspSignedPartsAssertion(parts)
+                        );
                     }
 
                     // confidentiality
-                    if (protectionRequirements.OutgoingEncryptionParts.TryGetParts(fault.Action, out parts))
+                    if (
+                        protectionRequirements.OutgoingEncryptionParts.TryGetParts(
+                            fault.Action,
+                            out parts
+                        )
+                    )
                     {
-                        AddAssertionIfNotNull(policyContext, fault, sp.CreateWsspEncryptedPartsAssertion(parts));
+                        AddAssertionIfNotNull(
+                            policyContext,
+                            fault,
+                            sp.CreateWsspEncryptedPartsAssertion(parts)
+                        );
                     }
                 }
             }
         }
 
-        static void ExportOperationScopeSupportingTokensPolicy(SecurityBindingElement binding, MetadataExporter exporter, PolicyConversionContext policyContext)
+        static void ExportOperationScopeSupportingTokensPolicy(
+            SecurityBindingElement binding,
+            MetadataExporter exporter,
+            PolicyConversionContext policyContext
+        )
         {
-            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(binding.MessageSecurityVersion);
+            WSSecurityPolicy sp = WSSecurityPolicy.GetSecurityPolicyDriver(
+                binding.MessageSecurityVersion
+            );
 
-            if (binding.OperationSupportingTokenParameters.Count == 0 && binding.OptionalOperationSupportingTokenParameters.Count == 0)
+            if (
+                binding.OperationSupportingTokenParameters.Count == 0
+                && binding.OptionalOperationSupportingTokenParameters.Count == 0
+            )
             {
                 return;
             }
@@ -2408,7 +3253,6 @@ namespace System.ServiceModel.Channels
             {
                 foreach (MessageDescription message in operation.Messages)
                 {
-
                     if (message.Direction == MessageDirection.Input)
                     {
                         SupportingTokenParameters requirements = null;
@@ -2416,11 +3260,18 @@ namespace System.ServiceModel.Channels
 
                         if (binding.OperationSupportingTokenParameters.ContainsKey(message.Action))
                         {
-                            requirements = binding.OperationSupportingTokenParameters[message.Action];
+                            requirements = binding.OperationSupportingTokenParameters[
+                                message.Action
+                            ];
                         }
-                        if (binding.OptionalOperationSupportingTokenParameters.ContainsKey(message.Action))
+                        if (
+                            binding.OptionalOperationSupportingTokenParameters.ContainsKey(
+                                message.Action
+                            )
+                        )
                         {
-                            optionalRequirements = binding.OptionalOperationSupportingTokenParameters[message.Action];
+                            optionalRequirements =
+                                binding.OptionalOperationSupportingTokenParameters[message.Action];
                         }
 
                         if (requirements == null && optionalRequirements == null)
@@ -2428,16 +3279,27 @@ namespace System.ServiceModel.Channels
                             continue;
                         }
 
-                        AddAssertionIfNotNull(policyContext, operation, sp.CreateWsspSupportingTokensAssertion(
-                            exporter,
-                            requirements == null ? null : requirements.Signed,
-                            requirements == null ? null : requirements.SignedEncrypted,
-                            requirements == null ? null : requirements.Endorsing,
-                            requirements == null ? null : requirements.SignedEndorsing,
-                            optionalRequirements == null ? null : optionalRequirements.Signed,
-                            optionalRequirements == null ? null : optionalRequirements.SignedEncrypted,
-                            optionalRequirements == null ? null : optionalRequirements.Endorsing,
-                            optionalRequirements == null ? null : optionalRequirements.SignedEndorsing));
+                        AddAssertionIfNotNull(
+                            policyContext,
+                            operation,
+                            sp.CreateWsspSupportingTokensAssertion(
+                                exporter,
+                                requirements == null ? null : requirements.Signed,
+                                requirements == null ? null : requirements.SignedEncrypted,
+                                requirements == null ? null : requirements.Endorsing,
+                                requirements == null ? null : requirements.SignedEndorsing,
+                                optionalRequirements == null ? null : optionalRequirements.Signed,
+                                optionalRequirements == null
+                                    ? null
+                                    : optionalRequirements.SignedEncrypted,
+                                optionalRequirements == null
+                                    ? null
+                                    : optionalRequirements.Endorsing,
+                                optionalRequirements == null
+                                    ? null
+                                    : optionalRequirements.SignedEndorsing
+                            )
+                        );
                     }
                 }
             }

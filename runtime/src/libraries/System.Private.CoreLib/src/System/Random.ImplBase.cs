@@ -58,7 +58,11 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             internal static ulong NextUInt64(ulong maxValue, XoshiroImpl xoshiro)
             {
-                ulong randomProduct = Math.BigMul(maxValue, xoshiro.NextUInt64(), out ulong lowPart);
+                ulong randomProduct = Math.BigMul(
+                    maxValue,
+                    xoshiro.NextUInt64(),
+                    out ulong lowPart
+                );
 
                 if (lowPart < maxValue)
                 {

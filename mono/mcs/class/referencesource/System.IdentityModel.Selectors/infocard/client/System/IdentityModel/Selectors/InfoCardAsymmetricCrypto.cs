@@ -5,15 +5,14 @@
 namespace System.IdentityModel.Selectors
 {
     using System;
+    using System.IdentityModel.Tokens;
     using System.Security.Cryptography;
     using System.Security.Cryptography.Xml;
-    using System.IdentityModel.Tokens;
-    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
-
     //
     // For common & resources
     //
     using Microsoft.InfoCards;
+    using IDT = Microsoft.InfoCards.Diagnostics.InfoCardTrace;
 
     //
     // Summary:
@@ -29,7 +28,7 @@ namespace System.IdentityModel.Selectors
         //  Constructs a new InfoCardAsymmetricCrypto given an InfoCardRSACryptoProvider.
         //
         // Parameters:
-        //  cryptoHandle  - the handle to the asymmetric key to base this crypto object on.  
+        //  cryptoHandle  - the handle to the asymmetric key to base this crypto object on.
         public InfoCardAsymmetricCrypto(AsymmetricCryptoHandle cryptoHandle)
         {
             m_rsa = new InfoCardRSACryptoProvider(cryptoHandle);
@@ -63,7 +62,10 @@ namespace System.IdentityModel.Selectors
         //  algorithmUri  - The URI of the algorithm being requested.
         //  privateKey    - set to true if access to the private key is required.
         //
-        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(string algorithmUri, bool privateKey)
+        public override AsymmetricAlgorithm GetAsymmetricAlgorithm(
+            string algorithmUri,
+            bool privateKey
+        )
         {
             switch (algorithmUri)
             {
@@ -73,7 +75,11 @@ namespace System.IdentityModel.Selectors
                     return m_rsa;
 
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -91,7 +97,11 @@ namespace System.IdentityModel.Selectors
                 case SignedXml.XmlDsigRSASHA1Url:
                     return new SHA1Managed();
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -110,7 +120,11 @@ namespace System.IdentityModel.Selectors
                     return new InfoCardRSAPKCS1SignatureDeformatter(m_rsa);
 
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -129,7 +143,11 @@ namespace System.IdentityModel.Selectors
                     return new InfoCardRSAPKCS1SignatureFormatter(m_rsa);
 
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -158,7 +176,11 @@ namespace System.IdentityModel.Selectors
                     return deformatter.DecryptKeyExchange(keyData);
 
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 
@@ -187,7 +209,11 @@ namespace System.IdentityModel.Selectors
                     return formatter.CreateKeyExchange(keyData);
 
                 default:
-                    throw IDT.ThrowHelperError(new NotSupportedException(SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)));
+                    throw IDT.ThrowHelperError(
+                        new NotSupportedException(
+                            SR.GetString(SR.ClientUnsupportedCryptoAlgorithm, algorithmUri)
+                        )
+                    );
             }
         }
 

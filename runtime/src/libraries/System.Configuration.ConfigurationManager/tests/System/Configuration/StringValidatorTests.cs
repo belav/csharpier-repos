@@ -42,7 +42,10 @@ namespace System.ConfigurationTests
         public void Validate_StringTooBig()
         {
             StringValidator validator = new StringValidator(5, 10);
-            AssertExtensions.Throws<ArgumentException>(null, () => validator.Validate("This is more than ten"));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => validator.Validate("This is more than ten")
+            );
         }
 
         [Fact]
@@ -58,7 +61,10 @@ namespace System.ConfigurationTests
         public void Validate_UsinginvalidCharacters(string stringToValidate)
         {
             StringValidator validator = new StringValidator(1, 20, "_-");
-            AssertExtensions.Throws<ArgumentException>(null, () => validator.Validate(stringToValidate));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => validator.Validate(stringToValidate)
+            );
         }
 
         [Fact]
@@ -67,7 +73,6 @@ namespace System.ConfigurationTests
             StringValidator validator = new StringValidator(5);
             validator.Validate("Hello");
         }
-
 
         public static IEnumerable<object[]> GetInvalidStrings()
         {

@@ -13,24 +13,75 @@ namespace System.CodeDom.Compiler
         private const int ProcessTimeOut = 600000;
 
         private static FileStream CreateInheritedFile(string file) =>
-            new FileStream(file, FileMode.CreateNew, FileAccess.Write, FileShare.Read | FileShare.Inheritable);
+            new FileStream(
+                file,
+                FileMode.CreateNew,
+                FileAccess.Write,
+                FileShare.Read | FileShare.Inheritable
+            );
 
         public static void ExecWait(string cmd, TempFileCollection tempFiles)
         {
-            string outputName = null, errorName = null;
+            string outputName = null,
+                errorName = null;
             ExecWaitWithCapture(cmd, tempFiles, ref outputName, ref errorName);
         }
 
-        public static int ExecWaitWithCapture(IntPtr userToken, string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName) =>
-            ExecWaitWithCapture(userToken, cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName);
+        public static int ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        ) =>
+            ExecWaitWithCapture(
+                userToken,
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
 
-        public static int ExecWaitWithCapture(string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName) =>
-            ExecWaitWithCapture(IntPtr.Zero, cmd, currentDir, tempFiles, ref outputName, ref errorName);
+        public static int ExecWaitWithCapture(
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        ) =>
+            ExecWaitWithCapture(
+                IntPtr.Zero,
+                cmd,
+                currentDir,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
 
-        public static int ExecWaitWithCapture(string cmd, TempFileCollection tempFiles, ref string outputName, ref string errorName) =>
-            ExecWaitWithCapture(IntPtr.Zero, cmd, Environment.CurrentDirectory, tempFiles, ref outputName, ref errorName);
+        public static int ExecWaitWithCapture(
+            string cmd,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        ) =>
+            ExecWaitWithCapture(
+                IntPtr.Zero,
+                cmd,
+                Environment.CurrentDirectory,
+                tempFiles,
+                ref outputName,
+                ref errorName
+            );
 
-        public static int ExecWaitWithCapture(IntPtr userToken, string cmd, string currentDir, TempFileCollection tempFiles, ref string outputName, ref string errorName)
+        public static int ExecWaitWithCapture(
+            IntPtr userToken,
+            string cmd,
+            string currentDir,
+            TempFileCollection tempFiles,
+            ref string outputName,
+            ref string errorName
+        )
         {
             if (userToken != IntPtr.Zero)
             {
@@ -47,8 +98,12 @@ namespace System.CodeDom.Compiler
                 errorName = tempFiles.AddExtension("err");
             }
 
-            using (var outputWriter = new StreamWriter(CreateInheritedFile(outputName), Encoding.UTF8))
-            using (var errorWriter = new StreamWriter(CreateInheritedFile(errorName), Encoding.UTF8))
+            using (
+                var outputWriter = new StreamWriter(CreateInheritedFile(outputName), Encoding.UTF8)
+            )
+            using (
+                var errorWriter = new StreamWriter(CreateInheritedFile(errorName), Encoding.UTF8)
+            )
             {
                 // Output the command line...
                 outputWriter.Write(currentDir);
@@ -61,7 +116,7 @@ namespace System.CodeDom.Compiler
                 {
                     WorkingDirectory = currentDir,
                     RedirectStandardOutput = true,
-                    RedirectStandardError = true
+                    RedirectStandardError = true,
                 };
 
                 using (Process p = Process.Start(psi))

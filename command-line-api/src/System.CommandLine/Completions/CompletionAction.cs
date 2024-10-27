@@ -22,18 +22,21 @@ internal sealed class CompletionAction : SynchronousCliAction
         string? parsedValues = parseResult.GetResult(_directive)!.Values.SingleOrDefault();
         string? rawInput = parseResult.CommandLineText;
 
-        int position = !string.IsNullOrEmpty(parsedValues) ? int.Parse(parsedValues) : rawInput?.Length ?? 0;
+        int position = !string.IsNullOrEmpty(parsedValues)
+            ? int.Parse(parsedValues)
+            : rawInput?.Length ?? 0;
 
-        var commandLineToComplete = parseResult.Tokens.LastOrDefault(t => t.Type != CliTokenType.Directive)?.Value ?? "";
+        var commandLineToComplete =
+            parseResult.Tokens.LastOrDefault(t => t.Type != CliTokenType.Directive)?.Value ?? "";
 
-        var completionParseResult = parseResult.RootCommandResult.Command.Parse(commandLineToComplete, parseResult.Configuration);
+        var completionParseResult = parseResult.RootCommandResult.Command.Parse(
+            commandLineToComplete,
+            parseResult.Configuration
+        );
 
         var completions = completionParseResult.GetCompletions(position);
 
-        parseResult.Configuration.Output.WriteLine(
-            string.Join(
-                Environment.NewLine,
-                completions));
+        parseResult.Configuration.Output.WriteLine(string.Join(Environment.NewLine, completions));
 
         return 0;
     }

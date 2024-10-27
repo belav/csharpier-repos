@@ -10,9 +10,7 @@ namespace System.ServiceModel.Configuration
     [AttributeUsage(AttributeTargets.Property)]
     sealed class WebEncodingValidatorAttribute : ConfigurationValidatorAttribute
     {
-        public WebEncodingValidatorAttribute()
-        {
-        }
+        public WebEncodingValidatorAttribute() { }
 
         public override ConfigurationValidatorBase ValidatorInstance
         {

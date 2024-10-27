@@ -8,7 +8,6 @@ using System.ComponentModel.Composition.Hosting;
 using System.ComponentModel.Composition.Primitives;
 using System.Diagnostics;
 using System.Reflection;
-
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
 
@@ -30,8 +29,8 @@ namespace System.ComponentModel.Composition.Primitives
             get { return _exception.Element; }
         }
 
-        public Exception InnerException 
-        { 
+        public Exception InnerException
+        {
             get { return _exception.InnerException; }
         }
 

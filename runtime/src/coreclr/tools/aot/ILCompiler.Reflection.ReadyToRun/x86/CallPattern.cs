@@ -9,16 +9,21 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
 {
     class CallPattern
     {
-
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/inc/gcdecoder.cpp">src\inc\gcdecoder.cpp</a> decodeCallPattern
         /// </summary>
-        public static void DecodeCallPattern(uint pattern, out uint argCnt, out uint regMask, out uint argMask, out uint codeDelta)
+        public static void DecodeCallPattern(
+            uint pattern,
+            out uint argCnt,
+            out uint regMask,
+            out uint argMask,
+            out uint codeDelta
+        )
         {
             uint val = callPatternTable[pattern];
             byte[] fld = BitConverter.GetBytes(val);
             argCnt = fld[0];
-            regMask = fld[1];      // EBP,EBX,ESI,EDI
+            regMask = fld[1]; // EBP,EBX,ESI,EDI
             argMask = fld[2];
             codeDelta = fld[3];
         }

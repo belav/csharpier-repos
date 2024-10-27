@@ -5,6 +5,8 @@ namespace Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 internal static class HandleRequestResults
 {
-    internal static HandleRequestResult UnexpectedParams = HandleRequestResult.Fail("An OpenID Connect response cannot contain an identity token or an access token when using response_mode=query");
+    internal static HandleRequestResult UnexpectedParams = HandleRequestResult.Fail(
+        "An OpenID Connect response cannot contain an identity token or an access token when using response_mode=query"
+    );
     internal static HandleRequestResult NoMessage = HandleRequestResult.Fail("No message.");
 }

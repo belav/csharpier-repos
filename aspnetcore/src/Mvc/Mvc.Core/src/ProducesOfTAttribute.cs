@@ -14,5 +14,6 @@ public class ProducesAttribute<T> : ProducesAttribute
     /// <summary>
     /// Initializes an instance of <see cref="ProducesAttribute"/>.
     /// </summary>
-    public ProducesAttribute() : base(typeof(T)) { }
+    public ProducesAttribute()
+        : base(typeof(T)) { }
 }

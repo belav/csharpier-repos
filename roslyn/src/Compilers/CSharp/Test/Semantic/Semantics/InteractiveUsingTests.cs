@@ -9,9 +9,9 @@ using System.Linq;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.CSharp.Test.Utilities;
+using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
-using Microsoft.CodeAnalysis.Test.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
@@ -50,20 +50,23 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         {
             var sub1 = CreateSubmission(
                 "Combine(Environment.NewLine, Environment.NewLine)",
-                options: TestOptions.DebugDll.WithUsings("System", "System.IO.Path"));
+                options: TestOptions.DebugDll.WithUsings("System", "System.IO.Path")
+            );
             sub1.VerifyDiagnostics();
 
             // No global usings specified - expect to reuse previous.
             var sub2 = CreateSubmission(
                 "Combine(Environment.NewLine, Environment.NewLine)",
-                previous: sub1);
+                previous: sub1
+            );
             sub2.VerifyDiagnostics();
 
             // Global usings specified - expect to append to previous.
             var sub3 = CreateSubmission(
                 "new StringBuilder().Append(Combine(Environment.NewLine, Environment.NewLine))",
                 previous: sub2,
-                options: TestOptions.DebugDll.WithUsings("System.Text"));
+                options: TestOptions.DebugDll.WithUsings("System.Text")
+            );
             sub3.VerifyDiagnostics();
         }
 
@@ -71,7 +74,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void AliasCurrentSubmission()
         {
-            const string source = @"
+            const string source =
+                @"
 using T = Type;
 
 class Type { }
@@ -128,7 +132,8 @@ class Type { }
         [Fact]
         public void AliasUnqualified()
         {
-            const string source = @"
+            const string source =
+                @"
 using I = Int32;
 using System;
 ";
@@ -136,36 +141,48 @@ using System;
             {
                 // (2,11): error CS0246: The type or namespace name 'Int32' could not be found (are you missing a using directive or an assembly reference?)
                 // using I = Int32;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Int32").WithArguments("Int32").WithLocation(2, 11)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Int32")
+                    .WithArguments("Int32")
+                    .WithLocation(2, 11),
             };
 
-            CreateCompilation(source).GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Hidden).Verify(expectedDiagnostics);
+            CreateCompilation(source)
+                .GetDiagnostics()
+                .Where(d => d.Severity > DiagnosticSeverity.Hidden)
+                .Verify(expectedDiagnostics);
             CreateSubmission(source).GetDiagnostics().Verify(expectedDiagnostics);
         }
 
         [Fact]
         public void AliasUnqualified_GlobalUsing()
         {
-            const string source = @"
+            const string source =
+                @"
 using I = Int32;
 ";
             var expectedDiagnostics = new[]
             {
                 // (2,11): error CS0246: The type or namespace name 'Int32' could not be found (are you missing a using directive or an assembly reference?)
                 // using I = Int32;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Int32").WithArguments("Int32").WithLocation(2, 11)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Int32")
+                    .WithArguments("Int32")
+                    .WithLocation(2, 11),
             };
 
             var options = TestOptions.DebugDll.WithUsings("System");
 
-            CreateCompilation(source, options: options).GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Hidden).Verify(expectedDiagnostics);
+            CreateCompilation(source, options: options)
+                .GetDiagnostics()
+                .Where(d => d.Severity > DiagnosticSeverity.Hidden)
+                .Verify(expectedDiagnostics);
             CreateSubmission(source, options: options).GetDiagnostics().Verify(expectedDiagnostics);
         }
 
         [Fact]
         public void AliasOtherAlias()
         {
-            const string source = @"
+            const string source =
+                @"
 using I = System.Int32;
 using J = I;
 ";
@@ -173,10 +190,15 @@ using J = I;
             {
                 // (3,11): error CS0246: The type or namespace name 'I' could not be found (are you missing a using directive or an assembly reference?)
                 // using J = I;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "I").WithArguments("I").WithLocation(3, 11)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "I")
+                    .WithArguments("I")
+                    .WithLocation(3, 11),
             };
 
-            CreateCompilation(source).GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Hidden).Verify(expectedDiagnostics);
+            CreateCompilation(source)
+                .GetDiagnostics()
+                .Where(d => d.Severity > DiagnosticSeverity.Hidden)
+                .Verify(expectedDiagnostics);
             CreateSubmission(source).GetDiagnostics().Verify(expectedDiagnostics);
         }
 
@@ -190,7 +212,10 @@ using J = I;
             Assert.Equal(SpecialType.System_Int16, GetSpeculativeType(sub2, "A").SpecialType);
 
             var sub3 = CreateSubmission("class A { }", previous: sub2);
-            Assert.Equal(((Compilation)sub3).ScriptClass, GetSpeculativeType(sub3, "A").ContainingType);
+            Assert.Equal(
+                ((Compilation)sub3).ScriptClass,
+                GetSpeculativeType(sub3, "A").ContainingType
+            );
 
             var sub4 = CreateSubmission("using A = System.Int64; typeof(A)", previous: sub3);
             Assert.Equal(SpecialType.System_Int64, GetSpeculativeType(sub4, "A").SpecialType);
@@ -200,7 +225,8 @@ using J = I;
         [Fact]
         public void UsingStaticCurrentSubmission()
         {
-            const string source = @"
+            const string source =
+                @"
 using static Type;
 
 class Type
@@ -212,7 +238,10 @@ class Type
             var sub = (Compilation)CreateSubmission(source);
             sub.VerifyDiagnostics();
 
-            Assert.Equal(sub.ScriptClass.GetMember("Type"), GetSpeculativeSymbol(sub, "Field").ContainingType);
+            Assert.Equal(
+                sub.ScriptClass.GetMember("Type"),
+                GetSpeculativeSymbol(sub, "Field").ContainingType
+            );
         }
 
         [WorkItem(4811, "https://github.com/dotnet/roslyn/issues/4811")]
@@ -237,7 +266,8 @@ class Type
         [Fact]
         public void UsingStaticUnqualified()
         {
-            const string source = @"
+            const string source =
+                @"
 using static Path;
 using System.IO;
 ";
@@ -245,51 +275,71 @@ using System.IO;
             {
                 // (2,14): error CS0246: The type or namespace name 'Path' could not be found (are you missing a using directive or an assembly reference?)
                 // using static Path;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Path").WithArguments("Path").WithLocation(2, 14)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Path")
+                    .WithArguments("Path")
+                    .WithLocation(2, 14),
             };
 
-            CreateCompilation(source).GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Hidden).Verify(expectedDiagnostics);
+            CreateCompilation(source)
+                .GetDiagnostics()
+                .Where(d => d.Severity > DiagnosticSeverity.Hidden)
+                .Verify(expectedDiagnostics);
             CreateSubmission(source).GetDiagnostics().Verify(expectedDiagnostics);
         }
 
         [Fact]
         public void UsingStaticUnqualified_GlobalUsing()
         {
-            const string source = @"
+            const string source =
+                @"
 using static Path;
 ";
             var expectedDiagnostics = new[]
             {
                 // (2,14): error CS0246: The type or namespace name 'Path' could not be found (are you missing a using directive or an assembly reference?)
                 // using static Path;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Path").WithArguments("Path").WithLocation(2, 14)
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "Path")
+                    .WithArguments("Path")
+                    .WithLocation(2, 14),
             };
 
             var options = TestOptions.DebugDll.WithUsings("System");
 
-            CreateCompilation(source, options: options).GetDiagnostics().Where(d => d.Severity > DiagnosticSeverity.Hidden).Verify(expectedDiagnostics);
+            CreateCompilation(source, options: options)
+                .GetDiagnostics()
+                .Where(d => d.Severity > DiagnosticSeverity.Hidden)
+                .Verify(expectedDiagnostics);
             CreateSubmission(source, options: options).GetDiagnostics().Verify(expectedDiagnostics);
         }
 
         [Fact]
         public void DuplicateUsing_SameSubmission()
         {
-            CreateSubmission("using System; using System;").VerifyDiagnostics(
-                // (1,21): warning CS0105: The using directive for 'System' appeared previously in this namespace
-                // using System; using System;
-                Diagnostic(ErrorCode.WRN_DuplicateUsing, "System").WithArguments("System").WithLocation(1, 21));
+            CreateSubmission("using System; using System;")
+                .VerifyDiagnostics(
+                    // (1,21): warning CS0105: The using directive for 'System' appeared previously in this namespace
+                    // using System; using System;
+                    Diagnostic(ErrorCode.WRN_DuplicateUsing, "System")
+                        .WithArguments("System")
+                        .WithLocation(1, 21)
+                );
         }
 
         [Fact]
         public void DuplicateUsing_DifferentSubmissions()
         {
-            CreateSubmission("using System;", previous: CreateSubmission("using System;")).VerifyDiagnostics();
+            CreateSubmission("using System;", previous: CreateSubmission("using System;"))
+                .VerifyDiagnostics();
         }
 
         [Fact]
         public void DuplicateGlobalUsing_SameSubmission()
         {
-            CreateSubmission("typeof(String)", options: TestOptions.DebugDll.WithUsings("System", "System")).VerifyDiagnostics();
+            CreateSubmission(
+                    "typeof(String)",
+                    options: TestOptions.DebugDll.WithUsings("System", "System")
+                )
+                .VerifyDiagnostics();
         }
 
         [Fact]
@@ -307,7 +357,8 @@ using static Path;
         [Fact]
         public void UsingsRebound()
         {
-            const string libSourceTemplate = @"
+            const string libSourceTemplate =
+                @"
 namespace A
 {{
     public class A{0} {{ }}
@@ -319,15 +370,26 @@ namespace B
 }}
 ";
 
-            var lib1 = CreateCompilation(string.Format(libSourceTemplate, 1), assemblyName: "Lib1").EmitToImageReference();
-            var lib2 = CreateCompilation(string.Format(libSourceTemplate, 2), assemblyName: "Lib2").EmitToImageReference();
+            var lib1 = CreateCompilation(string.Format(libSourceTemplate, 1), assemblyName: "Lib1")
+                .EmitToImageReference();
+            var lib2 = CreateCompilation(string.Format(libSourceTemplate, 2), assemblyName: "Lib2")
+                .EmitToImageReference();
 
             var options = TestOptions.DebugDll.WithUsings("B");
 
-            var sub1 = CreateSubmission("using A; typeof(A1) == typeof(B1)", new[] { lib1 }, options);
+            var sub1 = CreateSubmission(
+                "using A; typeof(A1) == typeof(B1)",
+                new[] { lib1 },
+                options
+            );
             sub1.VerifyDiagnostics();
 
-            var sub2 = CreateSubmission("typeof(A1) == typeof(B1) && typeof(A2) == typeof(B2)", new[] { lib1, lib2 }, options: options, previous: sub1);
+            var sub2 = CreateSubmission(
+                "typeof(A1) == typeof(B1) && typeof(A2) == typeof(B2)",
+                new[] { lib1, lib2 },
+                options: options,
+                previous: sub1
+            );
             sub2.VerifyDiagnostics();
         }
 
@@ -335,7 +397,8 @@ namespace B
         [Fact]
         public void UsingsFromLoadedScript()
         {
-            const string scriptSource = @"
+            const string scriptSource =
+                @"
 using static System.IO.Path;
 using System.IO;
 using F = System.IO.File;
@@ -343,7 +406,8 @@ using F = System.IO.File;
 class C { }
 ";
 
-            const string submissionSource = @"
+            const string submissionSource =
+                @"
 #load ""a.csx""
 
 System.Type t;
@@ -355,32 +419,40 @@ t = typeof(F); // using alias not exposed
 t = typeof(C); // declaration exposed
 ";
 
-            var resolver = TestSourceReferenceResolver.Create(new Dictionary<string, string>
-            {
-                { "a.csx", scriptSource }
-            });
+            var resolver = TestSourceReferenceResolver.Create(
+                new Dictionary<string, string> { { "a.csx", scriptSource } }
+            );
 
             var compilation = CreateSubmission(
                 submissionSource,
-                options: TestOptions.DebugDll.WithSourceReferenceResolver(resolver));
+                options: TestOptions.DebugDll.WithSourceReferenceResolver(resolver)
+            );
 
             compilation.VerifyDiagnostics(
                 // (6,1): error CS0103: The name 'GetTempPath' does not exist in the current context
                 // GetTempPath(); // using static not exposed
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetTempPath").WithArguments("GetTempPath").WithLocation(6, 1),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetTempPath")
+                    .WithArguments("GetTempPath")
+                    .WithLocation(6, 1),
                 // (7,12): error CS0246: The type or namespace name 'File' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(File); // using not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "File").WithArguments("File").WithLocation(7, 12),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "File")
+                    .WithArguments("File")
+                    .WithLocation(7, 12),
                 // (8,12): error CS0246: The type or namespace name 'F' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(F); // using alias not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F").WithArguments("F").WithLocation(8, 12));
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F")
+                    .WithArguments("F")
+                    .WithLocation(8, 12)
+            );
         }
 
         [WorkItem(5423, "https://github.com/dotnet/roslyn/issues/5423")]
         [Fact]
         public void UsingsToLoadedScript()
         {
-            const string scriptSource = @"
+            const string scriptSource =
+                @"
 using System.Collections.Generic;
 using AL = System.Collections.ArrayList;
 using static System.Math;
@@ -408,7 +480,8 @@ t = typeof(AL);
 t = typeof(D);
 ";
 
-            const string previousSubmissionSource = @"
+            const string previousSubmissionSource =
+                @"
 using static System.Environment;
 using System.Text;
 using P = System.IO.Path;
@@ -416,7 +489,8 @@ using P = System.IO.Path;
 class B { }
 ";
 
-            const string submissionSource = @"
+            const string submissionSource =
+                @"
 #load ""a.csx""
 
 using static System.IO.Path;
@@ -426,64 +500,80 @@ using F = System.IO.File;
 class C { }
 ";
 
-            var resolver = TestSourceReferenceResolver.Create(new Dictionary<string, string>
-            {
-                { "a.csx", scriptSource }
-            });
+            var resolver = TestSourceReferenceResolver.Create(
+                new Dictionary<string, string> { { "a.csx", scriptSource } }
+            );
 
             var compilation = CreateSubmission(
                 submissionSource,
                 options: TestOptions.DebugDll.WithSourceReferenceResolver(resolver),
-                previous: CreateSubmission(previousSubmissionSource));
+                previous: CreateSubmission(previousSubmissionSource)
+            );
 
             compilation.VerifyDiagnostics(
                 // Previous submission
 
                 // a.csx(11,1): error CS0103: The name 'GetCommandLineArgs' does not exist in the current context
                 // GetCommandLineArgs(); // using static not exposed
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetCommandLineArgs").WithArguments("GetCommandLineArgs").WithLocation(11, 1),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetCommandLineArgs")
+                    .WithArguments("GetCommandLineArgs")
+                    .WithLocation(11, 1),
                 // a.csx(12,12): error CS0246: The type or namespace name 'StringBuilder' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(StringBuilder); // using not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "StringBuilder").WithArguments("StringBuilder").WithLocation(12, 12),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "StringBuilder")
+                    .WithArguments("StringBuilder")
+                    .WithLocation(12, 12),
                 // a.csx(13,12): error CS0246: The type or namespace name 'P' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(P); // using alias not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "P").WithArguments("P").WithLocation(13, 12),
-
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "P")
+                    .WithArguments("P")
+                    .WithLocation(13, 12),
                 // Current submission
 
                 // a.csx(17,1): error CS0103: The name 'GetTempPath' does not exist in the current context
                 // GetTempPath(); // using static not exposed
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetTempPath").WithArguments("GetTempPath").WithLocation(17, 1),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "GetTempPath")
+                    .WithArguments("GetTempPath")
+                    .WithLocation(17, 1),
                 // a.csx(18,12): error CS0246: The type or namespace name 'File' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(File); // using not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "File").WithArguments("File").WithLocation(18, 12),
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "File")
+                    .WithArguments("File")
+                    .WithLocation(18, 12),
                 // a.csx(19,12): error CS0246: The type or namespace name 'F' could not be found (are you missing a using directive or an assembly reference?)
                 // t = typeof(F); // using alias not exposed
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F").WithArguments("F").WithLocation(19, 12));
+                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "F")
+                    .WithArguments("F")
+                    .WithLocation(19, 12)
+            );
         }
 
         [Fact]
         public void GlobalUsingsToLoadedScript()
         {
-            const string scriptSource = @"
+            const string scriptSource =
+                @"
 System.Type t;
 
 GetTempPath(); // global using static exposed
 t = typeof(File); // global using exposed
 ";
 
-            const string submissionSource = @"
+            const string submissionSource =
+                @"
 #load ""a.csx""
 ";
 
-            var resolver = TestSourceReferenceResolver.Create(new Dictionary<string, string>
-            {
-                { "a.csx", scriptSource }
-            });
+            var resolver = TestSourceReferenceResolver.Create(
+                new Dictionary<string, string> { { "a.csx", scriptSource } }
+            );
 
             var compilation = CreateSubmission(
                 submissionSource,
-                options: TestOptions.DebugDll.WithSourceReferenceResolver(resolver).WithUsings("System.IO", "System.IO.Path"));
+                options: TestOptions
+                    .DebugDll.WithSourceReferenceResolver(resolver)
+                    .WithUsings("System.IO", "System.IO.Path")
+            );
 
             compilation.VerifyDiagnostics();
         }
@@ -492,7 +582,8 @@ t = typeof(File); // global using exposed
         [ConditionalFact(typeof(NoUsedAssembliesValidation))]
         public void ConsumePreviousSubmissionUsings_Valid()
         {
-            const string libSource = @"
+            const string libSource =
+                @"
 namespace NOuter
 {
     public class Test { }
@@ -539,7 +630,8 @@ namespace NOuter
         [ConditionalFact(typeof(NoUsedAssembliesValidation))]
         public void ConsumePreviousSubmissionUsings_Invalid()
         {
-            const string libSource = @"
+            const string libSource =
+                @"
 namespace NOuter
 {
     public class COuter { }
@@ -556,45 +648,83 @@ namespace NOuter
             var lib = CreateCompilation(libSource).EmitToImageReference();
             var refs = new[] { lib };
 
-            CreateSubmission("using NInner;", refs, previous: CreateSubmission("using NOuter;", refs)).VerifyDiagnostics(
-                // (1,7): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
-                // using NInner;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner").WithArguments("NInner").WithLocation(1, 7));
+            CreateSubmission(
+                    "using NInner;",
+                    refs,
+                    previous: CreateSubmission("using NOuter;", refs)
+                )
+                .VerifyDiagnostics(
+                    // (1,7): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
+                    // using NInner;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner")
+                        .WithArguments("NInner")
+                        .WithLocation(1, 7)
+                );
 
-            CreateSubmission("using NI = NInner;", refs, previous: CreateSubmission("using NOuter;", refs)).VerifyDiagnostics(
-                // (1,12): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
-                // using NI = NInner;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner").WithArguments("NInner").WithLocation(1, 12));
+            CreateSubmission(
+                    "using NI = NInner;",
+                    refs,
+                    previous: CreateSubmission("using NOuter;", refs)
+                )
+                .VerifyDiagnostics(
+                    // (1,12): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
+                    // using NI = NInner;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner")
+                        .WithArguments("NInner")
+                        .WithLocation(1, 12)
+                );
 
-            CreateSubmission("using static COuter;", refs, previous: CreateSubmission("using NOuter;", refs)).VerifyDiagnostics(
-                // (1,14): error CS0246: The type or namespace name 'COuter' could not be found (are you missing a using directive or an assembly reference?)
-                // using static COuter;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "COuter").WithArguments("COuter").WithLocation(1, 14));
+            CreateSubmission(
+                    "using static COuter;",
+                    refs,
+                    previous: CreateSubmission("using NOuter;", refs)
+                )
+                .VerifyDiagnostics(
+                    // (1,14): error CS0246: The type or namespace name 'COuter' could not be found (are you missing a using directive or an assembly reference?)
+                    // using static COuter;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "COuter")
+                        .WithArguments("COuter")
+                        .WithLocation(1, 14)
+                );
 
-            CreateSubmission("using static NInner.CInner;", refs, previous: CreateSubmission("using NOuter;", refs)).VerifyDiagnostics(
-                // (1,14): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
-                // using static NInner.CInner;
-                Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner").WithArguments("NInner").WithLocation(1, 14));
+            CreateSubmission(
+                    "using static NInner.CInner;",
+                    refs,
+                    previous: CreateSubmission("using NOuter;", refs)
+                )
+                .VerifyDiagnostics(
+                    // (1,14): error CS0246: The type or namespace name 'NInner' could not be found (are you missing a using directive or an assembly reference?)
+                    // using static NInner.CInner;
+                    Diagnostic(ErrorCode.ERR_SingleTypeNameNotFound, "NInner")
+                        .WithArguments("NInner")
+                        .WithLocation(1, 14)
+                );
         }
 
         private static ISymbol GetSpeculativeSymbol(Compilation comp, string name)
         {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            return model.GetSpeculativeSymbolInfo(
-                tree.Length,
-                SyntaxFactory.IdentifierName(name),
-                SpeculativeBindingOption.BindAsExpression).Symbol;
+            return model
+                .GetSpeculativeSymbolInfo(
+                    tree.Length,
+                    SyntaxFactory.IdentifierName(name),
+                    SpeculativeBindingOption.BindAsExpression
+                )
+                .Symbol;
         }
 
         private static ITypeSymbol GetSpeculativeType(Compilation comp, string name)
         {
             var tree = comp.SyntaxTrees.Single();
             var model = comp.GetSemanticModel(tree);
-            return model.GetSpeculativeTypeInfo(
-                tree.Length,
-                SyntaxFactory.IdentifierName(name),
-                SpeculativeBindingOption.BindAsTypeOrNamespace).Type;
+            return model
+                .GetSpeculativeTypeInfo(
+                    tree.Length,
+                    SyntaxFactory.IdentifierName(name),
+                    SpeculativeBindingOption.BindAsTypeOrNamespace
+                )
+                .Type;
         }
     }
 }

@@ -12,16 +12,21 @@ namespace ComInterfaceGenerator.Tests
 {
     public partial class RcwAroundCcwTests
     {
-        static TInterface CreateWrapper<TClass, TInterface>() where TClass : TInterface, new()
+        static TInterface CreateWrapper<TClass, TInterface>()
+            where TClass : TInterface, new()
         {
             var cw = new StrategyBasedComWrappers();
-            var comPtr = cw.GetOrCreateComInterfaceForObject(new TClass(), CreateComInterfaceFlags.None);
+            var comPtr = cw.GetOrCreateComInterfaceForObject(
+                new TClass(),
+                CreateComInterfaceFlags.None
+            );
             var comObject = cw.GetOrCreateObjectForComInstance(comPtr, CreateObjectFlags.None);
             var ifaceObject = (TInterface)comObject;
             return ifaceObject;
         }
 
-        static bool SystemFindsComCalleeException() => PlatformDetection.IsWindows && PlatformDetection.IsNotNativeAot;
+        static bool SystemFindsComCalleeException() =>
+            PlatformDetection.IsWindows && PlatformDetection.IsNotNativeAot;
 
         [Fact]
         public void IInt()
@@ -144,7 +149,12 @@ namespace ComInterfaceGenerator.Tests
         [Fact]
         public void IJaggedIntArray()
         {
-            int[][] data = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5 }, new int[] { 6, 7, 8, 9 } };
+            int[][] data = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 5 },
+                new int[] { 6, 7, 8, 9 },
+            };
             int[] widths = new int[] { 3, 2, 4 };
             int length = data.Length;
 
@@ -232,7 +242,10 @@ namespace ComInterfaceGenerator.Tests
         [Fact]
         public void StatelessCallerAllocatedBufferMarshalling()
         {
-            var obj = CreateWrapper<StatelessCallerAllocatedBufferMarshalling, IStatelessCallerAllocatedBufferMarshalling>();
+            var obj = CreateWrapper<
+                StatelessCallerAllocatedBufferMarshalling,
+                IStatelessCallerAllocatedBufferMarshalling
+            >();
             var data = new StatelessCallerAllocatedBufferType() { I = 42 };
 
             // ManagedToUnmanagedIn should use Caller Allocated Buffer and not allocate
@@ -301,49 +314,56 @@ namespace ComInterfaceGenerator.Tests
         [Fact]
         public void ICollectionMarshallingFails()
         {
-            Type hrExceptionType = SystemFindsComCalleeException() ? typeof(MarshallingFailureException) : typeof(Exception);
+            Type hrExceptionType = SystemFindsComCalleeException()
+                ? typeof(MarshallingFailureException)
+                : typeof(Exception);
 
             var obj = CreateWrapper<ICollectionMarshallingFailsImpl, ICollectionMarshallingFails>();
 
-            Assert.Throws<MarshallingFailureException>(() =>
-                obj.Set(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }, 10)
+            Assert.Throws<MarshallingFailureException>(
+                () => obj.Set(new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 }, 10)
             );
 
-            Assert.Throws(hrExceptionType, () =>
-                _ = obj.GetConstSize()
-            );
+            Assert.Throws(hrExceptionType, () => _ = obj.GetConstSize());
 
-            Assert.Throws(hrExceptionType, () =>
-                _ = obj.Get(out _)
-            );
+            Assert.Throws(hrExceptionType, () => _ = obj.Get(out _));
         }
 
         [Fact]
         public void IJaggedArrayMarshallingFails()
         {
-            Type hrExceptionType = SystemFindsComCalleeException() ? typeof(MarshallingFailureException) : typeof(Exception);
-            var obj = CreateWrapper<IJaggedIntArrayMarshallingFailsImpl, IJaggedIntArrayMarshallingFails>();
+            Type hrExceptionType = SystemFindsComCalleeException()
+                ? typeof(MarshallingFailureException)
+                : typeof(Exception);
+            var obj = CreateWrapper<
+                IJaggedIntArrayMarshallingFailsImpl,
+                IJaggedIntArrayMarshallingFails
+            >();
 
-            Assert.Throws(hrExceptionType, () =>
-                _ = obj.GetConstSize()
-            );
+            Assert.Throws(hrExceptionType, () => _ = obj.GetConstSize());
 
-            Assert.Throws(hrExceptionType, () =>
-                _ = obj.Get(out _, out _)
-            );
-            var array = new int[][] { new int[] { 1, 2, 3 }, new int[] { 4, 5, }, new int[] { 6, 7, 8, 9 } };
+            Assert.Throws(hrExceptionType, () => _ = obj.Get(out _, out _));
+            var array = new int[][]
+            {
+                new int[] { 1, 2, 3 },
+                new int[] { 4, 5 },
+                new int[] { 6, 7, 8, 9 },
+            };
             var widths = new int[] { 3, 2, 4 };
             var length = 3;
-            Assert.Throws<MarshallingFailureException>(() =>
-                obj.Set(array, widths, length)
-            );
+            Assert.Throws<MarshallingFailureException>(() => obj.Set(array, widths, length));
         }
 
         [Fact]
         public void IStringArrayMarshallingFails()
         {
-            var obj = CreateWrapper<IStringArrayMarshallingFailsImpl, IStringArrayMarshallingFails>();
-            var hrException = SystemFindsComCalleeException() ? typeof(MarshallingFailureException) : typeof(Exception);
+            var obj = CreateWrapper<
+                IStringArrayMarshallingFailsImpl,
+                IStringArrayMarshallingFails
+            >();
+            var hrException = SystemFindsComCalleeException()
+                ? typeof(MarshallingFailureException)
+                : typeof(Exception);
 
             var strings = IStringArrayMarshallingFailsImpl.StartingStrings;
 
@@ -364,21 +384,30 @@ namespace ComInterfaceGenerator.Tests
             {
                 obj.ByValueInOutParam(strings);
             });
-            Assert.Throws(hrException, () =>
-            {
-                obj.OutParam(out strings);
-            });
-            Assert.Throws(hrException, () =>
-            {
-                _ = obj.ReturnValue();
-            });
+            Assert.Throws(
+                hrException,
+                () =>
+                {
+                    obj.OutParam(out strings);
+                }
+            );
+            Assert.Throws(
+                hrException,
+                () =>
+                {
+                    _ = obj.ReturnValue();
+                }
+            );
         }
 
         [ActiveIssue("https://github.com/dotnet/runtime/issues/87845")]
         [Fact]
         public void IStringArrayMarshallingFails_Failing()
         {
-            var obj = CreateWrapper<IStringArrayMarshallingFailsImpl, IStringArrayMarshallingFails>();
+            var obj = CreateWrapper<
+                IStringArrayMarshallingFailsImpl,
+                IStringArrayMarshallingFails
+            >();
 
             var strings = IStringArrayMarshallingFailsImpl.StartingStrings;
             Assert.Throws<MarshallingFailureException>(() =>

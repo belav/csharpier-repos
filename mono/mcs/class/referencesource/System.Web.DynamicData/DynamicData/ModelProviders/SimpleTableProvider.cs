@@ -1,19 +1,22 @@
-﻿namespace System.Web.DynamicData.ModelProviders {
+﻿namespace System.Web.DynamicData.ModelProviders
+{
     using System;
     using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
     using System.Collections.ObjectModel;
     using System.ComponentModel;
+    using System.Linq;
+    using System.Text;
 
-    internal sealed class SimpleTableProvider : TableProvider {
+    internal sealed class SimpleTableProvider : TableProvider
+    {
         private List<ColumnProvider> _columns;
         private ICustomTypeDescriptor _descriptor;
 
         public SimpleTableProvider(DataModelProvider modelProvider, Type entityType)
-            : base(modelProvider) {
-
-            if (entityType == null) {
+            : base(modelProvider)
+        {
+            if (entityType == null)
+            {
                 throw new ArgumentNullException("entityType");
             }
 
@@ -23,10 +26,14 @@
             InitializeColumns(TypeDescriptor.GetProperties(entityType));
         }
 
-        public SimpleTableProvider(DataModelProvider modelProvider, ICustomTypeDescriptor descriptor)
-            : base(modelProvider) {
-
-            if (descriptor == null) {
+        public SimpleTableProvider(
+            DataModelProvider modelProvider,
+            ICustomTypeDescriptor descriptor
+        )
+            : base(modelProvider)
+        {
+            if (descriptor == null)
+            {
                 throw new ArgumentNullException("descriptor");
             }
 
@@ -36,22 +43,28 @@
             InitializeColumns(descriptor.GetProperties());
         }
 
-        public override ReadOnlyCollection<ColumnProvider> Columns {
-            get {
-                return _columns.AsReadOnly();
-            }
+        public override ReadOnlyCollection<ColumnProvider> Columns
+        {
+            get { return _columns.AsReadOnly(); }
         }
 
-        public override ICustomTypeDescriptor GetTypeDescriptor() {
+        public override ICustomTypeDescriptor GetTypeDescriptor()
+        {
             return _descriptor ?? base.GetTypeDescriptor();
         }
 
-        public override IQueryable GetQuery(object context) {
+        public override IQueryable GetQuery(object context)
+        {
             throw new NotSupportedException();
         }
 
-        private void InitializeColumns(PropertyDescriptorCollection columnDescriptors) {
-            _columns = columnDescriptors.OfType<PropertyDescriptor>().Select(p => new SimpleColumnProvider(this, p)).OfType<ColumnProvider>().ToList();
+        private void InitializeColumns(PropertyDescriptorCollection columnDescriptors)
+        {
+            _columns = columnDescriptors
+                .OfType<PropertyDescriptor>()
+                .Select(p => new SimpleColumnProvider(this, p))
+                .OfType<ColumnProvider>()
+                .ToList();
         }
     }
 }

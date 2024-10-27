@@ -18,10 +18,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,23 +33,25 @@
 
 using System.Security.Permissions;
 
-namespace System.Web.UI {
-
-// CAS - no InheritanceDemand here as the class is sealed
-[AspNetHostingPermission (SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-public sealed class CompiledTemplateBuilder : ITemplate
+namespace System.Web.UI
 {
-	BuildTemplateMethod templateMethod;
+    // CAS - no InheritanceDemand here as the class is sealed
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    public sealed class CompiledTemplateBuilder : ITemplate
+    {
+        BuildTemplateMethod templateMethod;
 
-	public CompiledTemplateBuilder (BuildTemplateMethod buildTemplateMethod)
-	{
-		this.templateMethod = buildTemplateMethod;
-	}
+        public CompiledTemplateBuilder(BuildTemplateMethod buildTemplateMethod)
+        {
+            this.templateMethod = buildTemplateMethod;
+        }
 
-	public void InstantiateIn (Control container)
-	{
-		templateMethod (container);
-	}
+        public void InstantiateIn(Control container)
+        {
+            templateMethod(container);
+        }
+    }
 }
-}
-

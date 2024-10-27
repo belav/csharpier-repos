@@ -31,7 +31,10 @@ namespace System.Web.Mvc.Test
             ParameterInfo pInfo = typeof(MyController).GetMethod("Foo").GetParameters()[0];
 
             // Act
-            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(pInfo, new Mock<ActionDescriptor>().Object);
+            ReflectedParameterDescriptor pd = new ReflectedParameterDescriptor(
+                pInfo,
+                new Mock<ActionDescriptor>().Object
+            );
 
             // Assert
             Assert.Same(pInfo, pd.ParameterInfo);
@@ -42,7 +45,12 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedParameterDescriptor(new Mock<ParameterInfo>().Object, null); }, "actionDescriptor");
+                delegate
+                {
+                    new ReflectedParameterDescriptor(new Mock<ParameterInfo>().Object, null);
+                },
+                "actionDescriptor"
+            );
         }
 
         [Fact]
@@ -50,14 +58,21 @@ namespace System.Web.Mvc.Test
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ReflectedParameterDescriptor(null, new Mock<ActionDescriptor>().Object); }, "parameterInfo");
+                delegate
+                {
+                    new ReflectedParameterDescriptor(null, new Mock<ActionDescriptor>().Object);
+                },
+                "parameterInfo"
+            );
         }
 
         [Fact]
         public void DefaultValuePropertyDefaultsToNull()
         {
             // Arrange
-            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[0]; // noDefaultValue
+            ParameterInfo pInfo = typeof(MyController).GetMethod("DefaultValues").GetParameters()[
+                0
+            ]; // noDefaultValue
 
             // Act
             ReflectedParameterDescriptor pd = GetParameterDescriptor(pInfo);
@@ -90,7 +105,9 @@ namespace System.Web.Mvc.Test
             object[] expected = new object[0];
             Mock<ParameterInfo> mockParameter = new Mock<ParameterInfo>();
             mockParameter.Setup(pi => pi.Member).Returns(new Mock<MemberInfo>().Object);
-            mockParameter.Setup(pi => pi.GetCustomAttributes(typeof(ObsoleteAttribute), true)).Returns(expected);
+            mockParameter
+                .Setup(pi => pi.GetCustomAttributes(typeof(ObsoleteAttribute), true))
+                .Returns(expected);
             ReflectedParameterDescriptor pd = GetParameterDescriptor(mockParameter.Object);
 
             // Act
@@ -142,20 +159,24 @@ namespace System.Web.Mvc.Test
             Assert.Equal(typeof(string), pd.ParameterType);
         }
 
-        private static ReflectedParameterDescriptor GetParameterDescriptor(ParameterInfo parameterInfo)
+        private static ReflectedParameterDescriptor GetParameterDescriptor(
+            ParameterInfo parameterInfo
+        )
         {
-            return new ReflectedParameterDescriptor(parameterInfo, new Mock<ActionDescriptor>().Object);
+            return new ReflectedParameterDescriptor(
+                parameterInfo,
+                new Mock<ActionDescriptor>().Object
+            );
         }
 
         private class MyController : Controller
         {
-            public void Foo(string s1)
-            {
-            }
+            public void Foo(string s1) { }
 
-            public void DefaultValues(string noDefaultValue, [DefaultValue("someValue")] string hasDefaultValue)
-            {
-            }
+            public void DefaultValues(
+                string noDefaultValue,
+                [DefaultValue("someValue")] string hasDefaultValue
+            ) { }
         }
     }
 }

@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using global::System;
 using global::Internal.Runtime.Augments;
 using global::Internal.Runtime.CompilerServices;
-using global::System;
 using global::System.Diagnostics;
 using global::System.Reflection;
 
@@ -14,24 +14,37 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed class VirtualMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public VirtualMethodInvoker(MethodInvokeInfo methodInvokeInfo, RuntimeTypeHandle declaringTypeHandle)
+        public VirtualMethodInvoker(
+            MethodInvokeInfo methodInvokeInfo,
+            RuntimeTypeHandle declaringTypeHandle
+        )
             : base(methodInvokeInfo)
         {
             _declaringTypeHandle = declaringTypeHandle;
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             if (!isOpen)
             {
                 // We're creating a delegate to a virtual override of this method, so resolve the virtual now.
-                IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, target);
+                IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                    MethodInvokeInfo.VirtualResolveData,
+                    target
+                );
                 return RuntimeAugments.CreateDelegate(
-                                delegateType,
-                                resolvedVirtual,
-                                target,
-                                isStatic: false,
-                                isOpen: isOpen);
+                    delegateType,
+                    resolvedVirtual,
+                    target,
+                    isStatic: false,
+                    isOpen: isOpen
+                );
             }
             else
             {
@@ -41,12 +54,18 @@ namespace Internal.Reflection.Execution.MethodInvokers
                     MethodInvokeInfo.VirtualResolveData,
                     target,
                     isStatic: false,
-                    isOpen: isOpen);
+                    isOpen: isOpen
+                );
             }
         }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? Invoke(object? thisObject, object?[]? arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object? Invoke(
+            object? thisObject,
+            object?[]? arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             IntPtr resolvedVirtual = IntPtr.Zero;
 
@@ -56,7 +75,10 @@ namespace Internal.Reflection.Execution.MethodInvokers
 
                 try
                 {
-                    resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, thisObject);
+                    resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                        MethodInvokeInfo.VirtualResolveData,
+                        thisObject
+                    );
                 }
                 catch (Exception ex) when (wrapInTargetInvocationException)
                 {
@@ -69,7 +91,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 resolvedVirtual,
                 arguments,
                 binderBundle,
-                wrapInTargetInvocationException);
+                wrapInTargetInvocationException
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -82,37 +105,48 @@ namespace Internal.Reflection.Execution.MethodInvokers
             if (MethodInvokeInfo.IsSupportedSignature) // Workaround to match expected argument validation order
             {
                 ValidateThis(thisObject, _declaringTypeHandle);
-                resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, thisObject);
+                resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                    MethodInvokeInfo.VirtualResolveData,
+                    thisObject
+                );
             }
 
-            object? result = MethodInvokeInfo.Invoke(
-                thisObject,
-                resolvedVirtual,
-                arguments);
+            object? result = MethodInvokeInfo.Invoke(thisObject, resolvedVirtual, arguments);
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
         [DebuggerGuidedStepThrough]
-        protected sealed override object? InvokeDirectWithFewArgs(object? thisObject, Span<object?> arguments)
+        protected sealed override object? InvokeDirectWithFewArgs(
+            object? thisObject,
+            Span<object?> arguments
+        )
         {
             IntPtr resolvedVirtual = IntPtr.Zero;
 
             if (MethodInvokeInfo.IsSupportedSignature) // Workaround to match expected argument validation order
             {
                 ValidateThis(thisObject, _declaringTypeHandle);
-                resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, thisObject);
+                resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                    MethodInvokeInfo.VirtualResolveData,
+                    thisObject
+                );
             }
 
             object? result = MethodInvokeInfo.InvokeDirectWithFewArgs(
                 thisObject,
                 resolvedVirtual,
-                arguments);
+                arguments
+            );
             DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
 
-        protected sealed override object CreateInstance(object[] arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object CreateInstance(
+            object[] arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             throw NotImplemented.ByDesign;
         }
@@ -142,7 +176,10 @@ namespace Internal.Reflection.Execution.MethodInvokers
                     throw new PlatformNotSupportedException();
 
                 // Must be an abstract method
-                if (MethodInvokeInfo.LdFtnResult == IntPtr.Zero && MethodInvokeInfo.VirtualResolveData != IntPtr.Zero)
+                if (
+                    MethodInvokeInfo.LdFtnResult == IntPtr.Zero
+                    && MethodInvokeInfo.VirtualResolveData != IntPtr.Zero
+                )
                     throw new PlatformNotSupportedException();
 
                 return MethodInvokeInfo.LdFtnResult;

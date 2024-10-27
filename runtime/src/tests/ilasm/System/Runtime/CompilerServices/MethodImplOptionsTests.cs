@@ -46,13 +46,13 @@ public static class MethodImplOptionsTests
         }
 
         bool allPassed = true;
-        allPassed &=
-            RunMethodImplOptionsTest(
-                ilasmFile,
-                ildasmFile,
-                "AggressiveOptimizationTest",
-                "MiAggressiveOptimization.il",
-                "aggressiveoptimization");
+        allPassed &= RunMethodImplOptionsTest(
+            ilasmFile,
+            ildasmFile,
+            "AggressiveOptimizationTest",
+            "MiAggressiveOptimization.il",
+            "aggressiveoptimization"
+        );
         return allPassed ? Pass : Fail;
     }
 
@@ -61,15 +61,24 @@ public static class MethodImplOptionsTests
         string ildasmFile,
         string testName,
         string ilFileName,
-        string ilDisasmAttributeKeyword)
+        string ilDisasmAttributeKeyword
+    )
     {
         Console.WriteLine(testName);
 
         try
         {
             string disasmIlFileName;
-            ProcessStartInfo ilasmPsi, ildasmPsi;
-            GetIlasmProcessStartInfos(ilasmFile, ildasmFile, ilFileName, out disasmIlFileName, out ilasmPsi, out ildasmPsi);
+            ProcessStartInfo ilasmPsi,
+                ildasmPsi;
+            GetIlasmProcessStartInfos(
+                ilasmFile,
+                ildasmFile,
+                ilFileName,
+                out disasmIlFileName,
+                out ilasmPsi,
+                out ildasmPsi
+            );
 
             Process ilasmProcess = Process.Start(ilasmPsi);
             ilasmProcess.WaitForExit();
@@ -88,13 +97,15 @@ public static class MethodImplOptionsTests
             }
 
             string disasmIl = File.ReadAllText(disasmIlFileName);
-            var findMainAttributeRegex =
-                new Regex(
-                    @"\bvoid\s+Main\s*\(\s*\).*?\b" + ilDisasmAttributeKeyword + @"\b",
-                    RegexOptions.Compiled | RegexOptions.Multiline);
+            var findMainAttributeRegex = new Regex(
+                @"\bvoid\s+Main\s*\(\s*\).*?\b" + ilDisasmAttributeKeyword + @"\b",
+                RegexOptions.Compiled | RegexOptions.Multiline
+            );
             if (!findMainAttributeRegex.IsMatch(disasmIl))
             {
-                Console.WriteLine($"Attribute '{ilDisasmAttributeKeyword}' did not round-trip through ilasm and ildasm");
+                Console.WriteLine(
+                    $"Attribute '{ilDisasmAttributeKeyword}' did not round-trip through ilasm and ildasm"
+                );
                 return false;
             }
         }
@@ -112,12 +123,14 @@ public static class MethodImplOptionsTests
         string ilFileName,
         out string disasmIlFileName,
         out ProcessStartInfo ilasmPsi,
-        out ProcessStartInfo ildasmPsi)
+        out ProcessStartInfo ildasmPsi
+    )
     {
         if (!File.Exists(ilFileName))
         {
             throw new FileNotFoundException(
-                $"Did not find '{ilFileName}' in working directory '{Environment.CurrentDirectory}'");
+                $"Did not find '{ilFileName}' in working directory '{Environment.CurrentDirectory}'"
+            );
         }
 
         string currentDirectory = Environment.CurrentDirectory;
@@ -127,14 +140,14 @@ public static class MethodImplOptionsTests
         ilasmPsi.WorkingDirectory = currentDirectory;
         ilasmPsi.FileName = ilasmFile;
         string asmDllFileName = $"{Path.GetFileNameWithoutExtension(ilFileName)}.dll";
-        ilasmPsi.Arguments =
-            $"-nologo -dll -optimize -output={asmDllFileName} {ilFileName}";
+        ilasmPsi.Arguments = $"-nologo -dll -optimize -output={asmDllFileName} {ilFileName}";
 
         ildasmPsi = new ProcessStartInfo();
         ildasmPsi.UseShellExecute = false;
         ildasmPsi.WorkingDirectory = currentDirectory;
         ildasmPsi.FileName = ildasmFile;
-        disasmIlFileName = $"{Path.GetFileNameWithoutExtension(ilFileName)}_dis{Path.GetExtension(ilFileName)}";
+        disasmIlFileName =
+            $"{Path.GetFileNameWithoutExtension(ilFileName)}_dis{Path.GetExtension(ilFileName)}";
         ildasmPsi.Arguments = $"-out={disasmIlFileName} {asmDllFileName}";
     }
 }

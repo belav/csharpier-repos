@@ -63,9 +63,14 @@ namespace System.Tests
         [InlineData(-1)]
         [InlineData(int.MaxValue)]
         [InlineData(int.MinValue)]
-        public static void ConvertFromUtf32_InvalidUtf32_ThrowsArgumentOutOfRangeException(int utf32)
+        public static void ConvertFromUtf32_InvalidUtf32_ThrowsArgumentOutOfRangeException(
+            int utf32
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("utf32", () => char.ConvertFromUtf32(utf32));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "utf32",
+                () => char.ConvertFromUtf32(utf32)
+            );
         }
 
         public static IEnumerable<object[]> ConvertToUtf32_String_Int_TestData()
@@ -100,20 +105,56 @@ namespace System.Tests
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.ConvertToUtf32(null, 0)); // String is null
 
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uD800\uD800", 0)); // High, high
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uD800\uD800", 1)); // High, high
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uD800\uD7FF", 0)); // High, non-surrogate
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uD800\u0000", 0)); // High, non-surrogate
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uD800\uD800", 0)
+            ); // High, high
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uD800\uD800", 1)
+            ); // High, high
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uD800\uD7FF", 0)
+            ); // High, non-surrogate
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uD800\u0000", 0)
+            ); // High, non-surrogate
 
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uDC01\uD940", 0)); // Low, high
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uDC01\uD940", 1)); // Low, high
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uDD00\uDE00", 0)); // Low, low
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uDD00\uDE00", 1)); // Low, hig
-            AssertExtensions.Throws<ArgumentException>("s", () => char.ConvertToUtf32("\uDF01\u0000", 0)); // Low, non-surrogateh
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uDC01\uD940", 0)
+            ); // Low, high
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uDC01\uD940", 1)
+            ); // Low, high
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uDD00\uDE00", 0)
+            ); // Low, low
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uDD00\uDE00", 1)
+            ); // Low, hig
+            AssertExtensions.Throws<ArgumentException>(
+                "s",
+                () => char.ConvertToUtf32("\uDF01\u0000", 0)
+            ); // Low, non-surrogateh
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.ConvertToUtf32("abcde", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.ConvertToUtf32("abcde", 5)); // Index >= string.Length
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.ConvertToUtf32("", 0)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.ConvertToUtf32("abcde", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.ConvertToUtf32("abcde", 5)
+            ); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.ConvertToUtf32("", 0)
+            ); // Index >= string.Length
         }
 
         public static IEnumerable<object[]> ConvertToUtf32_Char_Char_TestData()
@@ -127,7 +168,11 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ConvertToUtf32_Char_Char_TestData))]
-        public static void ConvertToUtf32_Char_Char(char highSurrogate, char lowSurrogate, int expected)
+        public static void ConvertToUtf32_Char_Char(
+            char highSurrogate,
+            char lowSurrogate,
+            int expected
+        )
         {
             Assert.Equal(expected, char.ConvertToUtf32(highSurrogate, lowSurrogate));
         }
@@ -135,16 +180,40 @@ namespace System.Tests
         [Fact]
         public static void ConvertToUtf32_Char_Char_Invalid()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () => char.ConvertToUtf32('\uD800', '\uD800')); // High, high
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () => char.ConvertToUtf32('\uD800', '\uD7FF')); // High, non-surrogate
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("lowSurrogate", () => char.ConvertToUtf32('\uD800', '\u0000')); // High, non-surrogate
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "lowSurrogate",
+                () => char.ConvertToUtf32('\uD800', '\uD800')
+            ); // High, high
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "lowSurrogate",
+                () => char.ConvertToUtf32('\uD800', '\uD7FF')
+            ); // High, non-surrogate
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "lowSurrogate",
+                () => char.ConvertToUtf32('\uD800', '\u0000')
+            ); // High, non-surrogate
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () => char.ConvertToUtf32('\uDD00', '\uDE00')); // Low, low
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () => char.ConvertToUtf32('\uDC01', '\uD940')); // Low, high
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () => char.ConvertToUtf32('\uDF01', '\u0000')); // Low, non-surrogate
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "highSurrogate",
+                () => char.ConvertToUtf32('\uDD00', '\uDE00')
+            ); // Low, low
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "highSurrogate",
+                () => char.ConvertToUtf32('\uDC01', '\uD940')
+            ); // Low, high
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "highSurrogate",
+                () => char.ConvertToUtf32('\uDF01', '\u0000')
+            ); // Low, non-surrogate
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () => char.ConvertToUtf32('\u0032', '\uD7FF')); // Non-surrogate, non-surrogate
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("highSurrogate", () => char.ConvertToUtf32('\u0000', '\u0000')); // Non-surrogate, non-surrogate
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "highSurrogate",
+                () => char.ConvertToUtf32('\u0032', '\uD7FF')
+            ); // Non-surrogate, non-surrogate
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "highSurrogate",
+                () => char.ConvertToUtf32('\u0000', '\u0000')
+            ); // Non-surrogate, non-surrogate
         }
 
         [Theory]
@@ -188,9 +257,18 @@ namespace System.Tests
         [Fact]
         public static void GetNumericValue_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => char.GetNumericValue(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.GetNumericValue("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.GetNumericValue("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => char.GetNumericValue(null, 0)
+            ); // String is null
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.GetNumericValue("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.GetNumericValue("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -207,30 +285,26 @@ namespace System.Tests
             Assert.False(char.IsAscii('\x0080'));
             Assert.False(char.IsAscii(char.MaxValue));
         }
+
         [Fact]
         public static void IsAsciiDigit_Char() =>
-            IsAsciiCategory(
-                char.IsAsciiDigit,
-                UnicodeCategory.DecimalDigitNumber);
+            IsAsciiCategory(char.IsAsciiDigit, UnicodeCategory.DecimalDigitNumber);
 
         [Fact]
         public static void IsAsciiLetter_Char() =>
             IsAsciiCategory(
                 char.IsAsciiLetter,
                 UnicodeCategory.UppercaseLetter,
-                UnicodeCategory.LowercaseLetter);
+                UnicodeCategory.LowercaseLetter
+            );
 
         [Fact]
         public static void IsAsciiLetterLower_Char() =>
-            IsAsciiCategory(
-                char.IsAsciiLetterLower,
-                UnicodeCategory.LowercaseLetter);
+            IsAsciiCategory(char.IsAsciiLetterLower, UnicodeCategory.LowercaseLetter);
 
         [Fact]
         public static void IsAsciiLetterUpper_Char() =>
-            IsAsciiCategory(
-                char.IsAsciiLetterUpper,
-                UnicodeCategory.UppercaseLetter);
+            IsAsciiCategory(char.IsAsciiLetterUpper, UnicodeCategory.UppercaseLetter);
 
         [Fact]
         public static void IsAsciiLetterOrDigit_Char() =>
@@ -238,9 +312,13 @@ namespace System.Tests
                 char.IsAsciiLetterOrDigit,
                 UnicodeCategory.UppercaseLetter,
                 UnicodeCategory.LowercaseLetter,
-                UnicodeCategory.DecimalDigitNumber);
+                UnicodeCategory.DecimalDigitNumber
+            );
 
-        private static void IsAsciiCategory(Func<char, bool> predicate, params UnicodeCategory[] categories)
+        private static void IsAsciiCategory(
+            Func<char, bool> predicate,
+            params UnicodeCategory[] categories
+        )
         {
             foreach (char c in GetTestChars(categories))
                 Assert.Equal(char.IsAscii(c), predicate(c));
@@ -273,8 +351,14 @@ namespace System.Tests
         public static void IsControl_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsControl(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsControl("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsControl("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsControl("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsControl("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -301,27 +385,96 @@ namespace System.Tests
         public static void IsDigit_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsDigit(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsDigit("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsDigit("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsDigit("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsDigit("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
         public static void IsAsciiHexDigit_Char() =>
             IsAsciiHexDigit(
-                new HashSet<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F', 'a', 'b', 'c', 'd', 'e', 'f' },
-                char.IsAsciiHexDigit);
+                new HashSet<char>()
+                {
+                    '0',
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7',
+                    '8',
+                    '9',
+                    'A',
+                    'B',
+                    'C',
+                    'D',
+                    'E',
+                    'F',
+                    'a',
+                    'b',
+                    'c',
+                    'd',
+                    'e',
+                    'f',
+                },
+                char.IsAsciiHexDigit
+            );
 
         [Fact]
         public static void IsAsciiHexDigitLower_Char() =>
             IsAsciiHexDigit(
-                new HashSet<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f' },
-                char.IsAsciiHexDigitLower);
+                new HashSet<char>()
+                {
+                    '0',
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7',
+                    '8',
+                    '9',
+                    'a',
+                    'b',
+                    'c',
+                    'd',
+                    'e',
+                    'f',
+                },
+                char.IsAsciiHexDigitLower
+            );
 
         [Fact]
         public static void IsAsciiHexDigitUpper_Char() =>
             IsAsciiHexDigit(
-                new HashSet<char>() { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' },
-                char.IsAsciiHexDigitUpper);
+                new HashSet<char>()
+                {
+                    '0',
+                    '1',
+                    '2',
+                    '3',
+                    '4',
+                    '5',
+                    '6',
+                    '7',
+                    '8',
+                    '9',
+                    'A',
+                    'B',
+                    'C',
+                    'D',
+                    'E',
+                    'F',
+                },
+                char.IsAsciiHexDigitUpper
+            );
 
         private static void IsAsciiHexDigit(HashSet<char> hexDigits, Func<char, bool> predicate)
         {
@@ -359,7 +512,12 @@ namespace System.Tests
         [InlineData('\u1234', '\u1235', '\u1231', false)]
         [InlineData('b', 'c', 'd', false)]
         [InlineData('b', 'd', 'c', true)]
-        public static void IsBetween_Char(char c, char minInclusive, char maxExclusive, bool expected)
+        public static void IsBetween_Char(
+            char c,
+            char minInclusive,
+            char maxExclusive,
+            bool expected
+        )
         {
             Assert.Equal(expected, char.IsBetween(c, minInclusive, maxExclusive));
         }
@@ -369,11 +527,11 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.UppercaseLetter,
-            UnicodeCategory.LowercaseLetter,
-            UnicodeCategory.TitlecaseLetter,
-            UnicodeCategory.ModifierLetter,
-            UnicodeCategory.OtherLetter
+                UnicodeCategory.UppercaseLetter,
+                UnicodeCategory.LowercaseLetter,
+                UnicodeCategory.TitlecaseLetter,
+                UnicodeCategory.ModifierLetter,
+                UnicodeCategory.OtherLetter,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetter(c));
@@ -391,7 +549,7 @@ namespace System.Tests
                 UnicodeCategory.LowercaseLetter,
                 UnicodeCategory.TitlecaseLetter,
                 UnicodeCategory.ModifierLetter,
-                UnicodeCategory.OtherLetter
+                UnicodeCategory.OtherLetter,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetter(c.ToString(), 0), $"'{c}':{(int)c:x4} Is Not Letter");
@@ -404,8 +562,14 @@ namespace System.Tests
         public static void IsLetter_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLetter(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLetter("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLetter("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLetter("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLetter("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -413,12 +577,12 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.UppercaseLetter,
-            UnicodeCategory.LowercaseLetter,
-            UnicodeCategory.TitlecaseLetter,
-            UnicodeCategory.ModifierLetter,
-            UnicodeCategory.OtherLetter,
-            UnicodeCategory.DecimalDigitNumber
+                UnicodeCategory.UppercaseLetter,
+                UnicodeCategory.LowercaseLetter,
+                UnicodeCategory.TitlecaseLetter,
+                UnicodeCategory.ModifierLetter,
+                UnicodeCategory.OtherLetter,
+                UnicodeCategory.DecimalDigitNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetterOrDigit(c));
@@ -432,12 +596,12 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.UppercaseLetter,
-            UnicodeCategory.LowercaseLetter,
-            UnicodeCategory.TitlecaseLetter,
-            UnicodeCategory.ModifierLetter,
-            UnicodeCategory.OtherLetter,
-            UnicodeCategory.DecimalDigitNumber
+                UnicodeCategory.UppercaseLetter,
+                UnicodeCategory.LowercaseLetter,
+                UnicodeCategory.TitlecaseLetter,
+                UnicodeCategory.ModifierLetter,
+                UnicodeCategory.OtherLetter,
+                UnicodeCategory.DecimalDigitNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsLetterOrDigit(c.ToString(), 0));
@@ -449,9 +613,18 @@ namespace System.Tests
         [Fact]
         public static void IsLetterOrDigit_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLetterOrDigit(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLetterOrDigit("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLetterOrDigit("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => char.IsLetterOrDigit(null, 0)
+            ); // String is null
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLetterOrDigit("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLetterOrDigit("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -478,8 +651,14 @@ namespace System.Tests
         public static void IsLower_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLower(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLower("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLower("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLower("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLower("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -487,9 +666,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.DecimalDigitNumber,
-            UnicodeCategory.LetterNumber,
-            UnicodeCategory.OtherNumber
+                UnicodeCategory.DecimalDigitNumber,
+                UnicodeCategory.LetterNumber,
+                UnicodeCategory.OtherNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsNumber(c));
@@ -503,9 +682,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.DecimalDigitNumber,
-            UnicodeCategory.LetterNumber,
-            UnicodeCategory.OtherNumber
+                UnicodeCategory.DecimalDigitNumber,
+                UnicodeCategory.LetterNumber,
+                UnicodeCategory.OtherNumber,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsNumber(c.ToString(), 0));
@@ -518,8 +697,14 @@ namespace System.Tests
         public static void IsNumber_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsNumber(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsNumber("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsNumber("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsNumber("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsNumber("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -527,13 +712,13 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.ConnectorPunctuation,
-            UnicodeCategory.DashPunctuation,
-            UnicodeCategory.OpenPunctuation,
-            UnicodeCategory.ClosePunctuation,
-            UnicodeCategory.InitialQuotePunctuation,
-            UnicodeCategory.FinalQuotePunctuation,
-            UnicodeCategory.OtherPunctuation
+                UnicodeCategory.ConnectorPunctuation,
+                UnicodeCategory.DashPunctuation,
+                UnicodeCategory.OpenPunctuation,
+                UnicodeCategory.ClosePunctuation,
+                UnicodeCategory.InitialQuotePunctuation,
+                UnicodeCategory.FinalQuotePunctuation,
+                UnicodeCategory.OtherPunctuation,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsPunctuation(c));
@@ -547,13 +732,13 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.ConnectorPunctuation,
-            UnicodeCategory.DashPunctuation,
-            UnicodeCategory.OpenPunctuation,
-            UnicodeCategory.ClosePunctuation,
-            UnicodeCategory.InitialQuotePunctuation,
-            UnicodeCategory.FinalQuotePunctuation,
-            UnicodeCategory.OtherPunctuation
+                UnicodeCategory.ConnectorPunctuation,
+                UnicodeCategory.DashPunctuation,
+                UnicodeCategory.OpenPunctuation,
+                UnicodeCategory.ClosePunctuation,
+                UnicodeCategory.InitialQuotePunctuation,
+                UnicodeCategory.FinalQuotePunctuation,
+                UnicodeCategory.OtherPunctuation,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsPunctuation(c.ToString(), 0));
@@ -566,8 +751,14 @@ namespace System.Tests
         public static void IsPunctuation_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsPunctuation(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsPunctuation("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsPunctuation("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsPunctuation("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsPunctuation("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -575,9 +766,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.SpaceSeparator,
-            UnicodeCategory.LineSeparator,
-            UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.LineSeparator,
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSeparator(c));
@@ -591,9 +782,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.SpaceSeparator,
-            UnicodeCategory.LineSeparator,
-            UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.LineSeparator,
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSeparator(c.ToString(), 0));
@@ -606,8 +797,14 @@ namespace System.Tests
         public static void IsSeparator_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSeparator(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSeparator("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSeparator("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSeparator("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSeparator("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -640,8 +837,14 @@ namespace System.Tests
         public static void IsLowSurrogate_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsLowSurrogate(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLowSurrogate("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsLowSurrogate("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLowSurrogate("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsLowSurrogate("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -673,9 +876,18 @@ namespace System.Tests
         [Fact]
         public static void IsHighSurrogate_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsHighSurrogate(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsHighSurrogate("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsHighSurrogate("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => char.IsHighSurrogate(null, 0)
+            ); // String is null
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsHighSurrogate("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsHighSurrogate("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -708,40 +920,46 @@ namespace System.Tests
         public static void IsSurrogate_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSurrogate(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSurrogate("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSurrogate("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSurrogate("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSurrogate("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
         public static void IsSurrogatePair_Char()
         {
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.True(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_lowSurrogates)
+                Assert.True(char.IsSurrogatePair(hs, ls));
 
             foreach (char hs in s_nonSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_lowSurrogates)
+                Assert.False(char.IsSurrogatePair(hs, ls));
 
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_nonSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs, ls));
+            foreach (char ls in s_nonSurrogates)
+                Assert.False(char.IsSurrogatePair(hs, ls));
         }
 
         [Fact]
         public static void IsSurrogatePair_String_Int()
         {
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.True(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_lowSurrogates)
+                Assert.True(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             foreach (char hs in s_nonSurrogates)
-                foreach (char ls in s_lowSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_lowSurrogates)
+                Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             foreach (char hs in s_highSurrogates)
-                foreach (char ls in s_nonSurrogates)
-                    Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
+            foreach (char ls in s_nonSurrogates)
+                Assert.False(char.IsSurrogatePair(hs.ToString() + ls, 0));
 
             Assert.False(char.IsSurrogatePair("\ud800\udc00", 1)); // Index + 1 >= s.Length
         }
@@ -749,9 +967,18 @@ namespace System.Tests
         [Fact]
         public static void IsSurrogatePair_String_Int_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSurrogatePair(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSurrogatePair("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSurrogatePair("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => char.IsSurrogatePair(null, 0)
+            ); // String is null
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSurrogatePair("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSurrogatePair("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -759,10 +986,10 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.MathSymbol,
-            UnicodeCategory.ModifierSymbol,
-            UnicodeCategory.CurrencySymbol,
-            UnicodeCategory.OtherSymbol
+                UnicodeCategory.MathSymbol,
+                UnicodeCategory.ModifierSymbol,
+                UnicodeCategory.CurrencySymbol,
+                UnicodeCategory.OtherSymbol,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSymbol(c));
@@ -779,7 +1006,7 @@ namespace System.Tests
                 UnicodeCategory.MathSymbol,
                 UnicodeCategory.ModifierSymbol,
                 UnicodeCategory.CurrencySymbol,
-                UnicodeCategory.OtherSymbol
+                UnicodeCategory.OtherSymbol,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsSymbol(c.ToString(), 0));
@@ -792,8 +1019,14 @@ namespace System.Tests
         public static void IsSymbol_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsSymbol(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSymbol("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsSymbol("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSymbol("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsSymbol("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -820,8 +1053,14 @@ namespace System.Tests
         public static void IsUpper_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsUpper(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsUpper("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsUpper("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsUpper("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsUpper("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -829,9 +1068,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.SpaceSeparator,
-            UnicodeCategory.LineSeparator,
-            UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.LineSeparator,
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsWhiteSpace(c));
@@ -839,7 +1078,8 @@ namespace System.Tests
             foreach (char c in GetTestCharsNotInCategory(categories))
             {
                 // Need to special case some control chars that are treated as whitespace
-                if ((c >= '\x0009' && c <= '\x000d') || c == '\x0085') continue;
+                if ((c >= '\x0009' && c <= '\x000d') || c == '\x0085')
+                    continue;
                 Assert.False(char.IsWhiteSpace(c));
             }
         }
@@ -849,9 +1089,9 @@ namespace System.Tests
         {
             var categories = new UnicodeCategory[]
             {
-            UnicodeCategory.SpaceSeparator,
-            UnicodeCategory.LineSeparator,
-            UnicodeCategory.ParagraphSeparator
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.LineSeparator,
+                UnicodeCategory.ParagraphSeparator,
             };
             foreach (char c in GetTestChars(categories))
                 Assert.True(char.IsWhiteSpace(c.ToString(), 0));
@@ -864,7 +1104,8 @@ namespace System.Tests
             foreach (char c in GetTestCharsNotInCategory(categories))
             {
                 // Need to special case some control chars that are treated as whitespace
-                if ((c >= '\x0009' && c <= '\x000d') || c == '\x0085') continue;
+                if ((c >= '\x0009' && c <= '\x000d') || c == '\x0085')
+                    continue;
                 Assert.False(char.IsWhiteSpace(c.ToString(), 0));
             }
         }
@@ -873,8 +1114,14 @@ namespace System.Tests
         public static void IsWhiteSpace_String_Int_Invalid()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => char.IsWhiteSpace(null, 0)); // String is null
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsWhiteSpace("abc", -1)); // Index < 0
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => char.IsWhiteSpace("abc", 3)); // Index >= string.Length
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsWhiteSpace("abc", -1)
+            ); // Index < 0
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => char.IsWhiteSpace("abc", 3)
+            ); // Index >= string.Length
         }
 
         [Fact]
@@ -904,7 +1151,13 @@ namespace System.Tests
 
             // TitlecaseLetter can have a lower case form (e.g. \u01C8 'Lj' letter which will be 'lj')
             // LetterNumber can have a lower case form (e.g. \u2162 'III' letter which will be 'iii')
-            foreach (char c in GetTestCharsNotInCategory(UnicodeCategory.UppercaseLetter, UnicodeCategory.TitlecaseLetter, UnicodeCategory.LetterNumber))
+            foreach (
+                char c in GetTestCharsNotInCategory(
+                    UnicodeCategory.UppercaseLetter,
+                    UnicodeCategory.TitlecaseLetter,
+                    UnicodeCategory.LetterNumber
+                )
+            )
             {
                 Assert.Equal(c, char.ToLower(c));
             }
@@ -925,7 +1178,13 @@ namespace System.Tests
 
             // TitlecaseLetter can have a lower case form (e.g. \u01C8 'Lj' letter which will be 'lj')
             // LetterNumber can have a lower case form (e.g. \u2162 'III' letter which will be 'iii')
-            foreach (char c in GetTestCharsNotInCategory(UnicodeCategory.UppercaseLetter, UnicodeCategory.TitlecaseLetter, UnicodeCategory.LetterNumber))
+            foreach (
+                char c in GetTestCharsNotInCategory(
+                    UnicodeCategory.UppercaseLetter,
+                    UnicodeCategory.TitlecaseLetter,
+                    UnicodeCategory.LetterNumber
+                )
+            )
             {
                 Assert.Equal(c, char.ToLowerInvariant(c));
             }
@@ -955,7 +1214,13 @@ namespace System.Tests
 
             // TitlecaseLetter can have a uppercase form (e.g. \u01C8 'Lj' letter which will be 'LJ')
             // LetterNumber can have a uppercase form (e.g. \u2172 'iii' letter which will be 'III')
-            foreach (char c in GetTestCharsNotInCategory(UnicodeCategory.LowercaseLetter, UnicodeCategory.TitlecaseLetter, UnicodeCategory.LetterNumber))
+            foreach (
+                char c in GetTestCharsNotInCategory(
+                    UnicodeCategory.LowercaseLetter,
+                    UnicodeCategory.TitlecaseLetter,
+                    UnicodeCategory.LetterNumber
+                )
+            )
             {
                 Assert.Equal(c, char.ToUpper(c));
             }
@@ -976,7 +1241,13 @@ namespace System.Tests
 
             // TitlecaseLetter can have a uppercase form (e.g. \u01C8 'Lj' letter which will be 'LJ')
             // LetterNumber can have a uppercase form (e.g. \u2172 'iii' letter which will be 'III')
-            foreach (char c in GetTestCharsNotInCategory(UnicodeCategory.LowercaseLetter, UnicodeCategory.TitlecaseLetter, UnicodeCategory.LetterNumber))
+            foreach (
+                char c in GetTestCharsNotInCategory(
+                    UnicodeCategory.LowercaseLetter,
+                    UnicodeCategory.TitlecaseLetter,
+                    UnicodeCategory.LetterNumber
+                )
+            )
             {
                 Assert.Equal(c, char.ToUpperInvariant(c));
             }
@@ -1028,7 +1299,9 @@ namespace System.Tests
             Assert.Throws(exceptionType, () => char.Parse(s));
         }
 
-        private static IEnumerable<char> GetTestCharsNotInCategory(params UnicodeCategory[] categories)
+        private static IEnumerable<char> GetTestCharsNotInCategory(
+            params UnicodeCategory[] categories
+        )
         {
             Assert.Equal(s_latinTestSet.Length, s_unicodeTestSet.Length);
 
@@ -1066,119 +1339,734 @@ namespace System.Tests
 
         private static bool ShouldTestCasingForChar(char ch, UnicodeCategory category)
         {
-            return PlatformDetection.IsNotInvariantGlobalization ||
-                    (category != UnicodeCategory.UppercaseLetter &&
-                    category != UnicodeCategory.LowercaseLetter) ||
-                    ch >= 'a' && ch <= 'z' ||
-                    ch >= 'A' && ch <= 'Z';
+            return PlatformDetection.IsNotInvariantGlobalization
+                || (
+                    category != UnicodeCategory.UppercaseLetter
+                    && category != UnicodeCategory.LowercaseLetter
+                )
+                || ch >= 'a' && ch <= 'z'
+                || ch >= 'A' && ch <= 'Z';
         }
 
         private static char[][] s_latinTestSet = new char[][]
         {
-        /* UppercaseLetter         */ new char[] {'\u0047','\u004c','\u0051','\u0056','\u00c0','\u00c5','\u00ca','\u00cf','\u00d4','\u00da'},
-        /* LowercaseLetter         */ new char[] {'\u0062','\u0068','\u006e','\u0074','\u007a','\u00e1','\u00e7','\u00ed','\u00f3','\u00fa'},
-        /* TitlecaseLetter         */ new char[] {},
-        /* ModifierLetter          */ new char[] {},
-        /* OtherLetter             */ new char[] {'\u00aa','\u00ba'},
-        /* NonSpacingMark          */ new char[] {},
-        /* SpacingCombiningMark    */ new char[] {},
-        /* EnclosingMark           */ new char[] {},
-        /* DecimalDigitNumber      */ new char[] {'\u0030','\u0031','\u0032','\u0033','\u0034','\u0035','\u0036','\u0037','\u0038','\u0039'},
-        /* LetterNumber            */ new char[] {},
-        /* OtherNumber             */ new char[] {'\u00b2','\u00b3','\u00b9','\u00bc','\u00bd','\u00be'},
-        /* SpaceSeparator          */ new char[] {'\u0020','\u00a0'},
-        /* LineSeparator           */ new char[] {},
-        /* ParagraphSeparator      */ new char[] {},
-        /* Control                 */ new char[] {'\u0005','\u000b','\u0011','\u0017','\u001d','\u0082','\u0085','\u008e','\u0094','\u009a'},
-        /* Format                  */ new char[] {'\u00ad'},
-        /* Surrogate               */ new char[] {},
-        /* PrivateUse              */ new char[] {},
-        /* ConnectorPunctuation    */ new char[] {'\u005f'},
-        /* DashPunctuation         */ new char[] {'\u002d'},
-        /* OpenPunctuation         */ new char[] {'\u0028','\u005b','\u007b'},
-        /* ClosePunctuation        */ new char[] {'\u0029','\u005d','\u007d'},
-        /* InitialQuotePunctuation */ new char[] {'\u00ab'},
-        /* FinalQuotePunctuation   */ new char[] {'\u00bb'},
-        /* OtherPunctuation        */ new char[] {'\u002e','\u002f','\u003a','\u003b','\u003f','\u0040','\u005c','\u00a1','\u00a7','\u00b6','\u00b7','\u00bf'},
-        /* MathSymbol              */ new char[] {'\u002b','\u003c','\u003d','\u003e','\u007c','\u007e','\u00ac','\u00b1','\u00d7','\u00f7'},
-        /* CurrencySymbol          */ new char[] {'\u0024','\u00a2','\u00a3','\u00a4','\u00a5'},
-        /* ModifierSymbol          */ new char[] {'\u005e','\u0060','\u00a8','\u00af','\u00b4','\u00b8'},
-        /* OtherSymbol             */ new char[] {'\u00a6','\u00a9','\u00ae','\u00b0'},
-        /* OtherNotAssigned        */ new char[] {},
+            /* UppercaseLetter         */new char[]
+            {
+                '\u0047',
+                '\u004c',
+                '\u0051',
+                '\u0056',
+                '\u00c0',
+                '\u00c5',
+                '\u00ca',
+                '\u00cf',
+                '\u00d4',
+                '\u00da',
+            },
+            /* LowercaseLetter         */new char[]
+            {
+                '\u0062',
+                '\u0068',
+                '\u006e',
+                '\u0074',
+                '\u007a',
+                '\u00e1',
+                '\u00e7',
+                '\u00ed',
+                '\u00f3',
+                '\u00fa',
+            },
+            /* TitlecaseLetter         */new char[] { },
+            /* ModifierLetter          */new char[] { },
+            /* OtherLetter             */new char[] { '\u00aa', '\u00ba' },
+            /* NonSpacingMark          */new char[] { },
+            /* SpacingCombiningMark    */new char[] { },
+            /* EnclosingMark           */new char[] { },
+            /* DecimalDigitNumber      */new char[]
+            {
+                '\u0030',
+                '\u0031',
+                '\u0032',
+                '\u0033',
+                '\u0034',
+                '\u0035',
+                '\u0036',
+                '\u0037',
+                '\u0038',
+                '\u0039',
+            },
+            /* LetterNumber            */new char[] { },
+            /* OtherNumber             */new char[] { '\u00b2', '\u00b3', '\u00b9', '\u00bc', '\u00bd', '\u00be' },
+            /* SpaceSeparator          */new char[] { '\u0020', '\u00a0' },
+            /* LineSeparator           */new char[] { },
+            /* ParagraphSeparator      */new char[] { },
+            /* Control                 */new char[]
+            {
+                '\u0005',
+                '\u000b',
+                '\u0011',
+                '\u0017',
+                '\u001d',
+                '\u0082',
+                '\u0085',
+                '\u008e',
+                '\u0094',
+                '\u009a',
+            },
+            /* Format                  */new char[] { '\u00ad' },
+            /* Surrogate               */new char[] { },
+            /* PrivateUse              */new char[] { },
+            /* ConnectorPunctuation    */new char[] { '\u005f' },
+            /* DashPunctuation         */new char[] { '\u002d' },
+            /* OpenPunctuation         */new char[] { '\u0028', '\u005b', '\u007b' },
+            /* ClosePunctuation        */new char[] { '\u0029', '\u005d', '\u007d' },
+            /* InitialQuotePunctuation */new char[] { '\u00ab' },
+            /* FinalQuotePunctuation   */new char[] { '\u00bb' },
+            /* OtherPunctuation        */new char[]
+            {
+                '\u002e',
+                '\u002f',
+                '\u003a',
+                '\u003b',
+                '\u003f',
+                '\u0040',
+                '\u005c',
+                '\u00a1',
+                '\u00a7',
+                '\u00b6',
+                '\u00b7',
+                '\u00bf',
+            },
+            /* MathSymbol              */new char[]
+            {
+                '\u002b',
+                '\u003c',
+                '\u003d',
+                '\u003e',
+                '\u007c',
+                '\u007e',
+                '\u00ac',
+                '\u00b1',
+                '\u00d7',
+                '\u00f7',
+            },
+            /* CurrencySymbol          */new char[] { '\u0024', '\u00a2', '\u00a3', '\u00a4', '\u00a5' },
+            /* ModifierSymbol          */new char[] { '\u005e', '\u0060', '\u00a8', '\u00af', '\u00b4', '\u00b8' },
+            /* OtherSymbol             */new char[] { '\u00a6', '\u00a9', '\u00ae', '\u00b0' },
+            /* OtherNotAssigned        */new char[] { },
         };
 
         private static char[][] s_unicodeTestSet = new char[][]
         {
-        new char[] {'\u0102','\u01ac','\u0392','\u0428','\u0508','\u10c4','\u1eb4','\u1fba','\u2c28','\ua668'}, // UnicodeCategory.UppercaseLetter
-        new char[] { '\u0107', '\u012D', '\u0140', '\u0151', '\u013A', '\u01A1', '\u01F9', '\u022D', '\u1E09','\uFF45' }, // UnicodeCategory.LowercaseLetter
-        new char[] {'\u01c8','\u1f88','\u1f8b','\u1f8e','\u1f99','\u1f9c','\u1f9f','\u1faa','\u1fad','\u1fbc'}, // UnicodeCategory.TitlecaseLetter
-        new char[] {'\u02b7','\u02cd','\u07f4','\u1d2f','\u1d41','\u1d53','\u1d9d','\u1daf','\u2091','\u30fe'}, // UnicodeCategory.ModifierLetter
-        new char[] {'\u01c0','\u37be','\u4970','\u5b6c','\u6d1e','\u7ed0','\u9082','\ua271','\ub985','\ucb37'}, // UnicodeCategory.OtherLetter
-        new char[] {'\u0303','\u034e','\u05b5','\u0738','\u0a4d','\u0e49','\u0fad','\u180b','\u1dd5','\u2dfd'}, // UnicodeCategory.NonSpacingMark
-        new char[] {'\u0982','\u0b03','\u0c41','\u0d40','\u0df3','\u1083','\u1925','\u1b44','\ua8b5'         }, // UnicodeCategory.SpacingCombiningMark
-        new char[] {'\u20dd','\u20de','\u20df','\u20e0','\u20e2','\u20e3','\u20e4','\ua670','\ua671','\ua672'}, // UnicodeCategory.EnclosingMark
-        new char[] {'\u0660','\u0966','\u0ae6','\u0c66','\u0e50','\u1040','\u1810','\u1b50','\u1c50','\ua900'}, // UnicodeCategory.DecimalDigitNumber
-        new char[] {'\u2162','\u2167','\u216c','\u2171','\u2176','\u217b','\u2180','\u2187','\u3023','\u3028'}, // UnicodeCategory.LetterNumber
-        new char[] {'\u0c78','\u136b','\u17f7','\u2158','\u2471','\u248a','\u24f1','\u2780','\u3220','\u3280'}, // UnicodeCategory.OtherNumber
-        new char[] {'\u2004','\u2005','\u2006','\u2007','\u2008','\u2009','\u200a','\u202f','\u205f','\u3000'}, // UnicodeCategory.SpaceSeparator
-        new char[] {'\u2028'}, // UnicodeCategory.LineSeparator
-        new char[] {'\u2029'}, // UnicodeCategory.ParagraphSeparator
-        new char[] {}, // UnicodeCategory.Control
-        new char[] {'\u0603','\u17b4','\u200c','\u200f','\u202c','\u2060','\u2063','\u206b','\u206e','\ufff9'}, // UnicodeCategory.Format
-        new char[] {'\ud808','\ud8d4','\ud9a0','\uda6c','\udb38','\udc04','\udcd0','\udd9c','\ude68','\udf34'}, // UnicodeCategory.Surrogate
-        new char[] {'\ue000','\ue280','\ue500','\ue780','\uea00','\uec80','\uef00','\uf180','\uf400','\uf680'}, // UnicodeCategory.PrivateUse
-        new char[] {'\u203f','\u2040','\u2054','\ufe33','\ufe34','\ufe4d','\ufe4e','\ufe4f','\uff3f'}, // UnicodeCategory.ConnectorPunctuation
-        new char[] {'\u2e17','\u2e1a','\u301c','\u3030','\u30a0','\ufe31','\ufe32','\ufe58','\ufe63','\uff0d'}, // UnicodeCategory.DashPunctuation
-        new char[] {'\u2768','\u2774','\u27ee','\u298d','\u29d8','\u2e28','\u3014','\ufe17','\ufe3f','\ufe5d'}, // UnicodeCategory.OpenPunctuation
-        new char[] {'\u276b','\u27c6','\u2984','\u2990','\u29db','\u3009','\u3017','\ufe18','\ufe40','\ufe5e'}, // UnicodeCategory.ClosePunctuation
-        new char[] {'\u201b','\u201c','\u201f','\u2039','\u2e02','\u2e04','\u2e09','\u2e0c','\u2e1c','\u2e20'}, // UnicodeCategory.InitialQuotePunctuation
-        new char[] {'\u2019','\u201d','\u203a','\u2e03','\u2e05','\u2e0a','\u2e0d','\u2e1d','\u2e21'}, // UnicodeCategory.FinalQuotePunctuation
-        new char[] {'\u0589','\u0709','\u0f10','\u16ec','\u1b5b','\u2034','\u2058','\u2e16','\ua8cf','\ufe55'}, // UnicodeCategory.OtherPunctuation
-        new char[] {'\u2052','\u2234','\u2290','\u22ec','\u27dd','\u2943','\u29b5','\u2a17','\u2a73','\u2acf'}, // UnicodeCategory.MathSymbol
-        new char[] {'\u17db','\u20a2','\u20a5','\u20a8','\u20ab','\u20ae','\u20b1','\u20b4','\ufe69','\uffe1'}, // UnicodeCategory.CurrencySymbol
-        new char[] {'\u02c5','\u02da','\u02e8','\u02f3','\u02fc','\u1fc0','\u1fee','\ua703','\ua70c','\ua715'}, // UnicodeCategory.ModifierSymbol
-        new char[] {'\u0bf3','\u2316','\u24ac','\u25b2','\u26af','\u285c','\u2e8f','\u2f8c','\u3292','\u3392'}, // UnicodeCategory.OtherSymbol
-        new char[] {'\u09c6','\u0dfa'}, // UnicodeCategory.OtherNotAssigned
+            new char[]
+            {
+                '\u0102',
+                '\u01ac',
+                '\u0392',
+                '\u0428',
+                '\u0508',
+                '\u10c4',
+                '\u1eb4',
+                '\u1fba',
+                '\u2c28',
+                '\ua668',
+            }, // UnicodeCategory.UppercaseLetter
+            new char[]
+            {
+                '\u0107',
+                '\u012D',
+                '\u0140',
+                '\u0151',
+                '\u013A',
+                '\u01A1',
+                '\u01F9',
+                '\u022D',
+                '\u1E09',
+                '\uFF45',
+            }, // UnicodeCategory.LowercaseLetter
+            new char[]
+            {
+                '\u01c8',
+                '\u1f88',
+                '\u1f8b',
+                '\u1f8e',
+                '\u1f99',
+                '\u1f9c',
+                '\u1f9f',
+                '\u1faa',
+                '\u1fad',
+                '\u1fbc',
+            }, // UnicodeCategory.TitlecaseLetter
+            new char[]
+            {
+                '\u02b7',
+                '\u02cd',
+                '\u07f4',
+                '\u1d2f',
+                '\u1d41',
+                '\u1d53',
+                '\u1d9d',
+                '\u1daf',
+                '\u2091',
+                '\u30fe',
+            }, // UnicodeCategory.ModifierLetter
+            new char[]
+            {
+                '\u01c0',
+                '\u37be',
+                '\u4970',
+                '\u5b6c',
+                '\u6d1e',
+                '\u7ed0',
+                '\u9082',
+                '\ua271',
+                '\ub985',
+                '\ucb37',
+            }, // UnicodeCategory.OtherLetter
+            new char[]
+            {
+                '\u0303',
+                '\u034e',
+                '\u05b5',
+                '\u0738',
+                '\u0a4d',
+                '\u0e49',
+                '\u0fad',
+                '\u180b',
+                '\u1dd5',
+                '\u2dfd',
+            }, // UnicodeCategory.NonSpacingMark
+            new char[]
+            {
+                '\u0982',
+                '\u0b03',
+                '\u0c41',
+                '\u0d40',
+                '\u0df3',
+                '\u1083',
+                '\u1925',
+                '\u1b44',
+                '\ua8b5',
+            }, // UnicodeCategory.SpacingCombiningMark
+            new char[]
+            {
+                '\u20dd',
+                '\u20de',
+                '\u20df',
+                '\u20e0',
+                '\u20e2',
+                '\u20e3',
+                '\u20e4',
+                '\ua670',
+                '\ua671',
+                '\ua672',
+            }, // UnicodeCategory.EnclosingMark
+            new char[]
+            {
+                '\u0660',
+                '\u0966',
+                '\u0ae6',
+                '\u0c66',
+                '\u0e50',
+                '\u1040',
+                '\u1810',
+                '\u1b50',
+                '\u1c50',
+                '\ua900',
+            }, // UnicodeCategory.DecimalDigitNumber
+            new char[]
+            {
+                '\u2162',
+                '\u2167',
+                '\u216c',
+                '\u2171',
+                '\u2176',
+                '\u217b',
+                '\u2180',
+                '\u2187',
+                '\u3023',
+                '\u3028',
+            }, // UnicodeCategory.LetterNumber
+            new char[]
+            {
+                '\u0c78',
+                '\u136b',
+                '\u17f7',
+                '\u2158',
+                '\u2471',
+                '\u248a',
+                '\u24f1',
+                '\u2780',
+                '\u3220',
+                '\u3280',
+            }, // UnicodeCategory.OtherNumber
+            new char[]
+            {
+                '\u2004',
+                '\u2005',
+                '\u2006',
+                '\u2007',
+                '\u2008',
+                '\u2009',
+                '\u200a',
+                '\u202f',
+                '\u205f',
+                '\u3000',
+            }, // UnicodeCategory.SpaceSeparator
+            new char[] { '\u2028' }, // UnicodeCategory.LineSeparator
+            new char[] { '\u2029' }, // UnicodeCategory.ParagraphSeparator
+            new char[] { }, // UnicodeCategory.Control
+            new char[]
+            {
+                '\u0603',
+                '\u17b4',
+                '\u200c',
+                '\u200f',
+                '\u202c',
+                '\u2060',
+                '\u2063',
+                '\u206b',
+                '\u206e',
+                '\ufff9',
+            }, // UnicodeCategory.Format
+            new char[]
+            {
+                '\ud808',
+                '\ud8d4',
+                '\ud9a0',
+                '\uda6c',
+                '\udb38',
+                '\udc04',
+                '\udcd0',
+                '\udd9c',
+                '\ude68',
+                '\udf34',
+            }, // UnicodeCategory.Surrogate
+            new char[]
+            {
+                '\ue000',
+                '\ue280',
+                '\ue500',
+                '\ue780',
+                '\uea00',
+                '\uec80',
+                '\uef00',
+                '\uf180',
+                '\uf400',
+                '\uf680',
+            }, // UnicodeCategory.PrivateUse
+            new char[]
+            {
+                '\u203f',
+                '\u2040',
+                '\u2054',
+                '\ufe33',
+                '\ufe34',
+                '\ufe4d',
+                '\ufe4e',
+                '\ufe4f',
+                '\uff3f',
+            }, // UnicodeCategory.ConnectorPunctuation
+            new char[]
+            {
+                '\u2e17',
+                '\u2e1a',
+                '\u301c',
+                '\u3030',
+                '\u30a0',
+                '\ufe31',
+                '\ufe32',
+                '\ufe58',
+                '\ufe63',
+                '\uff0d',
+            }, // UnicodeCategory.DashPunctuation
+            new char[]
+            {
+                '\u2768',
+                '\u2774',
+                '\u27ee',
+                '\u298d',
+                '\u29d8',
+                '\u2e28',
+                '\u3014',
+                '\ufe17',
+                '\ufe3f',
+                '\ufe5d',
+            }, // UnicodeCategory.OpenPunctuation
+            new char[]
+            {
+                '\u276b',
+                '\u27c6',
+                '\u2984',
+                '\u2990',
+                '\u29db',
+                '\u3009',
+                '\u3017',
+                '\ufe18',
+                '\ufe40',
+                '\ufe5e',
+            }, // UnicodeCategory.ClosePunctuation
+            new char[]
+            {
+                '\u201b',
+                '\u201c',
+                '\u201f',
+                '\u2039',
+                '\u2e02',
+                '\u2e04',
+                '\u2e09',
+                '\u2e0c',
+                '\u2e1c',
+                '\u2e20',
+            }, // UnicodeCategory.InitialQuotePunctuation
+            new char[]
+            {
+                '\u2019',
+                '\u201d',
+                '\u203a',
+                '\u2e03',
+                '\u2e05',
+                '\u2e0a',
+                '\u2e0d',
+                '\u2e1d',
+                '\u2e21',
+            }, // UnicodeCategory.FinalQuotePunctuation
+            new char[]
+            {
+                '\u0589',
+                '\u0709',
+                '\u0f10',
+                '\u16ec',
+                '\u1b5b',
+                '\u2034',
+                '\u2058',
+                '\u2e16',
+                '\ua8cf',
+                '\ufe55',
+            }, // UnicodeCategory.OtherPunctuation
+            new char[]
+            {
+                '\u2052',
+                '\u2234',
+                '\u2290',
+                '\u22ec',
+                '\u27dd',
+                '\u2943',
+                '\u29b5',
+                '\u2a17',
+                '\u2a73',
+                '\u2acf',
+            }, // UnicodeCategory.MathSymbol
+            new char[]
+            {
+                '\u17db',
+                '\u20a2',
+                '\u20a5',
+                '\u20a8',
+                '\u20ab',
+                '\u20ae',
+                '\u20b1',
+                '\u20b4',
+                '\ufe69',
+                '\uffe1',
+            }, // UnicodeCategory.CurrencySymbol
+            new char[]
+            {
+                '\u02c5',
+                '\u02da',
+                '\u02e8',
+                '\u02f3',
+                '\u02fc',
+                '\u1fc0',
+                '\u1fee',
+                '\ua703',
+                '\ua70c',
+                '\ua715',
+            }, // UnicodeCategory.ModifierSymbol
+            new char[]
+            {
+                '\u0bf3',
+                '\u2316',
+                '\u24ac',
+                '\u25b2',
+                '\u26af',
+                '\u285c',
+                '\u2e8f',
+                '\u2f8c',
+                '\u3292',
+                '\u3392',
+            }, // UnicodeCategory.OtherSymbol
+            new char[] { '\u09c6', '\u0dfa' }, // UnicodeCategory.OtherNotAssigned
         };
 
         private static char[] s_highSurrogates = new char[] { '\ud800', '\udaaa', '\udbff' }; // Range from '\ud800' to '\udbff'
         private static char[] s_lowSurrogates = new char[] { '\udc00', '\udeee', '\udfff' }; // Range from '\udc00' to '\udfff'
-        private static char[] s_nonSurrogates = new char[] { '\u0000', '\ud7ff', '\ue000', '\uffff' };
+        private static char[] s_nonSurrogates = new char[]
+        {
+            '\u0000',
+            '\ud7ff',
+            '\ue000',
+            '\uffff',
+        };
 
         private static readonly UnicodeCategory[] s_categoryForLatin1 =
         {
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0000 - 0007
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0008 - 000F
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0010 - 0017
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0018 - 001F
-            UnicodeCategory.SpaceSeparator, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.CurrencySymbol, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation,    // 0020 - 0027
-            UnicodeCategory.OpenPunctuation, UnicodeCategory.ClosePunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.MathSymbol, UnicodeCategory.OtherPunctuation, UnicodeCategory.DashPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation,    // 0028 - 002F
-            UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber,    // 0030 - 0037
-            UnicodeCategory.DecimalDigitNumber, UnicodeCategory.DecimalDigitNumber, UnicodeCategory.OtherPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.MathSymbol, UnicodeCategory.MathSymbol, UnicodeCategory.MathSymbol, UnicodeCategory.OtherPunctuation,    // 0038 - 003F
-            UnicodeCategory.OtherPunctuation, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter,    // 0040 - 0047
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter,    // 0048 - 004F
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter,    // 0050 - 0057
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.OpenPunctuation, UnicodeCategory.OtherPunctuation, UnicodeCategory.ClosePunctuation, UnicodeCategory.ModifierSymbol, UnicodeCategory.ConnectorPunctuation,    // 0058 - 005F
-            UnicodeCategory.ModifierSymbol, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 0060 - 0067
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 0068 - 006F
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 0070 - 0077
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.OpenPunctuation, UnicodeCategory.MathSymbol, UnicodeCategory.ClosePunctuation, UnicodeCategory.MathSymbol, UnicodeCategory.Control,    // 0078 - 007F
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0080 - 0087
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0088 - 008F
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0090 - 0097
-            UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control, UnicodeCategory.Control,    // 0098 - 009F
-            UnicodeCategory.SpaceSeparator, UnicodeCategory.OtherPunctuation, UnicodeCategory.CurrencySymbol, UnicodeCategory.CurrencySymbol, UnicodeCategory.CurrencySymbol, UnicodeCategory.CurrencySymbol, UnicodeCategory.OtherSymbol, UnicodeCategory.OtherSymbol,    // 00A0 - 00A7
-            UnicodeCategory.ModifierSymbol, UnicodeCategory.OtherSymbol, UnicodeCategory.LowercaseLetter, UnicodeCategory.InitialQuotePunctuation, UnicodeCategory.MathSymbol, UnicodeCategory.DashPunctuation, UnicodeCategory.OtherSymbol, UnicodeCategory.ModifierSymbol,    // 00A8 - 00AF
-            UnicodeCategory.OtherSymbol, UnicodeCategory.MathSymbol, UnicodeCategory.OtherNumber, UnicodeCategory.OtherNumber, UnicodeCategory.ModifierSymbol, UnicodeCategory.LowercaseLetter, UnicodeCategory.OtherSymbol, UnicodeCategory.OtherPunctuation,    // 00B0 - 00B7
-            UnicodeCategory.ModifierSymbol, UnicodeCategory.OtherNumber, UnicodeCategory.LowercaseLetter, UnicodeCategory.FinalQuotePunctuation, UnicodeCategory.OtherNumber, UnicodeCategory.OtherNumber, UnicodeCategory.OtherNumber, UnicodeCategory.OtherPunctuation,    // 00B8 - 00BF
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter,    // 00C0 - 00C7
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter,    // 00C8 - 00CF
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.MathSymbol,    // 00D0 - 00D7
-            UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.UppercaseLetter, UnicodeCategory.LowercaseLetter,    // 00D8 - 00DF
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 00E0 - 00E7
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 00E8 - 00EF
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.MathSymbol,    // 00F0 - 00F7
-            UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter, UnicodeCategory.LowercaseLetter,    // 00F8 - 00FF
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0000 - 0007
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0008 - 000F
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0010 - 0017
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0018 - 001F
+            UnicodeCategory.SpaceSeparator,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.CurrencySymbol,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation, // 0020 - 0027
+            UnicodeCategory.OpenPunctuation,
+            UnicodeCategory.ClosePunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.DashPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation, // 0028 - 002F
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber, // 0030 - 0037
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.DecimalDigitNumber,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.OtherPunctuation, // 0038 - 003F
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter, // 0040 - 0047
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter, // 0048 - 004F
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter, // 0050 - 0057
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.OpenPunctuation,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.ClosePunctuation,
+            UnicodeCategory.ModifierSymbol,
+            UnicodeCategory.ConnectorPunctuation, // 0058 - 005F
+            UnicodeCategory.ModifierSymbol,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 0060 - 0067
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 0068 - 006F
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 0070 - 0077
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.OpenPunctuation,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.ClosePunctuation,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.Control, // 0078 - 007F
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0080 - 0087
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0088 - 008F
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0090 - 0097
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control,
+            UnicodeCategory.Control, // 0098 - 009F
+            UnicodeCategory.SpaceSeparator,
+            UnicodeCategory.OtherPunctuation,
+            UnicodeCategory.CurrencySymbol,
+            UnicodeCategory.CurrencySymbol,
+            UnicodeCategory.CurrencySymbol,
+            UnicodeCategory.CurrencySymbol,
+            UnicodeCategory.OtherSymbol,
+            UnicodeCategory.OtherSymbol, // 00A0 - 00A7
+            UnicodeCategory.ModifierSymbol,
+            UnicodeCategory.OtherSymbol,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.InitialQuotePunctuation,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.DashPunctuation,
+            UnicodeCategory.OtherSymbol,
+            UnicodeCategory.ModifierSymbol, // 00A8 - 00AF
+            UnicodeCategory.OtherSymbol,
+            UnicodeCategory.MathSymbol,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.ModifierSymbol,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.OtherSymbol,
+            UnicodeCategory.OtherPunctuation, // 00B0 - 00B7
+            UnicodeCategory.ModifierSymbol,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.FinalQuotePunctuation,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.OtherNumber,
+            UnicodeCategory.OtherPunctuation, // 00B8 - 00BF
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter, // 00C0 - 00C7
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter, // 00C8 - 00CF
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.MathSymbol, // 00D0 - 00D7
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.UppercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 00D8 - 00DF
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 00E0 - 00E7
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 00E8 - 00EF
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.MathSymbol, // 00F0 - 00F7
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter,
+            UnicodeCategory.LowercaseLetter, // 00F8 - 00FF
         };
 
         public static IEnumerable<object[]> UpperLowerCasing_TestData()
@@ -1217,14 +2105,21 @@ namespace System.Tests
         {
             for (int i = 256; i <= 0xFFFF; i++)
             {
-                Assert.Equal(CharUnicodeInfo.GetUnicodeCategory((char)i), char.GetUnicodeCategory((char)i));
+                Assert.Equal(
+                    CharUnicodeInfo.GetUnicodeCategory((char)i),
+                    char.GetUnicodeCategory((char)i)
+                );
             }
 
-            string nonLatinString = "\u0100\u0200\u0300\u0400\u0500\u0600\u0700\u0800\u0900\u0A00\u0B00\u0C00\u0D00\u0E00\u0F00" +
-                                    "\u1000\u2000\u3000\u4000\u5000\u6000\u7000\u8000\u9000\uA000\uB000\uC000\uD000\uE000\uF000";
+            string nonLatinString =
+                "\u0100\u0200\u0300\u0400\u0500\u0600\u0700\u0800\u0900\u0A00\u0B00\u0C00\u0D00\u0E00\u0F00"
+                + "\u1000\u2000\u3000\u4000\u5000\u6000\u7000\u8000\u9000\uA000\uB000\uC000\uD000\uE000\uF000";
             for (int i = 0; i < nonLatinString.Length; i++)
             {
-                Assert.Equal(CharUnicodeInfo.GetUnicodeCategory(nonLatinString[i]), char.GetUnicodeCategory(nonLatinString, i));
+                Assert.Equal(
+                    CharUnicodeInfo.GetUnicodeCategory(nonLatinString[i]),
+                    char.GetUnicodeCategory(nonLatinString, i)
+                );
             }
         }
 
@@ -1253,7 +2148,10 @@ namespace System.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: expected,
                         actual: char.GetUnicodeCategory((char)i),
-                        banner: FormattableString.Invariant($@"char.GetUnicodeCategory('\u{i:X4}') returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"char.GetUnicodeCategory('\u{i:X4}') returned wrong value."
+                        )
+                    );
                 }
             }
         }
@@ -1273,7 +2171,10 @@ namespace System.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: UnicodeData.IsLetter((char)i),
                         actual: char.IsLetter((char)i),
-                        banner: FormattableString.Invariant($@"char.IsLetter('\u{i:X4}') returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"char.IsLetter('\u{i:X4}') returned wrong value."
+                        )
+                    );
                 }
             }
         }
@@ -1287,14 +2188,18 @@ namespace System.Tests
 
             for (uint i = 0; i <= char.MaxValue; i++)
             {
-                bool expected = UnicodeData.GetUnicodeCategory((char)i) == UnicodeCategory.LowercaseLetter;
+                bool expected =
+                    UnicodeData.GetUnicodeCategory((char)i) == UnicodeCategory.LowercaseLetter;
                 if (expected != char.IsLower((char)i))
                 {
                     // We'll build up the exception message ourselves so the dev knows what code point failed.
                     throw EqualException.ForMismatchedValues(
                         expected: expected,
                         actual: char.IsLower((char)i),
-                        banner: FormattableString.Invariant($@"char.IsLower('\u{i:X4}') returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"char.IsLower('\u{i:X4}') returned wrong value."
+                        )
+                    );
                 }
             }
         }
@@ -1308,7 +2213,8 @@ namespace System.Tests
 
             for (uint i = 0; i <= char.MaxValue; i++)
             {
-                bool expected = UnicodeData.GetUnicodeCategory((char)i) == UnicodeCategory.UppercaseLetter;
+                bool expected =
+                    UnicodeData.GetUnicodeCategory((char)i) == UnicodeCategory.UppercaseLetter;
 
                 if (expected != char.IsUpper((char)i))
                 {
@@ -1316,7 +2222,10 @@ namespace System.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: expected,
                         actual: char.IsUpper((char)i),
-                        banner: FormattableString.Invariant($@"char.IsUpper('\u{i:X4}') returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"char.IsUpper('\u{i:X4}') returned wrong value."
+                        )
+                    );
                 }
             }
         }
@@ -1336,7 +2245,10 @@ namespace System.Tests
                     throw EqualException.ForMismatchedValues(
                         expected: UnicodeData.IsWhiteSpace(i),
                         actual: char.IsWhiteSpace((char)i),
-                        banner: FormattableString.Invariant($@"char.IsWhiteSpace('\u{i:X4}') returned wrong value."));
+                        banner: FormattableString.Invariant(
+                            $@"char.IsWhiteSpace('\u{i:X4}') returned wrong value."
+                        )
+                    );
                 }
             }
         }

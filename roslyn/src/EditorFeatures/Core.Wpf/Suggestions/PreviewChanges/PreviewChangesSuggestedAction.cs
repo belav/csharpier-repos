@@ -26,15 +26,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Solution originalSolution,
                 ITextBuffer subjectBuffer,
                 object provider,
-                PreviewChangesCodeAction codeAction)
-                : base(threadingContext, sourceProvider, workspace, originalSolution, subjectBuffer, provider, codeAction)
-            {
-            }
+                PreviewChangesCodeAction codeAction
+            )
+                : base(
+                    threadingContext,
+                    sourceProvider,
+                    workspace,
+                    originalSolution,
+                    subjectBuffer,
+                    provider,
+                    codeAction
+                ) { }
 
             public static async Task<SuggestedAction> CreateAsync(
-                SuggestedActionWithNestedFlavors suggestedAction, CancellationToken cancellationToken)
+                SuggestedActionWithNestedFlavors suggestedAction,
+                CancellationToken cancellationToken
+            )
             {
-                var previewResult = await suggestedAction.GetPreviewResultAsync(cancellationToken).ConfigureAwait(true);
+                var previewResult = await suggestedAction
+                    .GetPreviewResultAsync(cancellationToken)
+                    .ConfigureAwait(true);
                 if (previewResult == null)
                 {
                     return null;
@@ -54,7 +65,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     suggestedAction.SubjectBuffer,
                     suggestedAction.Provider,
                     new PreviewChangesCodeAction(
-                        suggestedAction.Workspace, suggestedAction.CodeAction, changeSummary));
+                        suggestedAction.Workspace,
+                        suggestedAction.CodeAction,
+                        changeSummary
+                    )
+                );
             }
         }
     }

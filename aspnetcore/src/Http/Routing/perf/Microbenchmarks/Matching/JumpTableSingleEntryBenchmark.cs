@@ -19,25 +19,37 @@ public class JumpTableSingleEntryBenchmark
     public void Setup()
     {
         _default = new SingleEntryJumpTable(0, -1, "hello-world", 1);
-        _trie = new ILEmitTrieJumpTable(0, -1, new[] { ("hello-world", 1), }, vectorize: false, _default);
-        _vectorTrie = new ILEmitTrieJumpTable(0, -1, new[] { ("hello-world", 1), }, vectorize: true, _default);
+        _trie = new ILEmitTrieJumpTable(
+            0,
+            -1,
+            new[] { ("hello-world", 1) },
+            vectorize: false,
+            _default
+        );
+        _vectorTrie = new ILEmitTrieJumpTable(
+            0,
+            -1,
+            new[] { ("hello-world", 1) },
+            vectorize: true,
+            _default
+        );
         _ascii = new SingleEntryAsciiJumpTable(0, -1, "hello-world", 1);
 
         _strings = new string[]
         {
-                "index/foo/2",
-                "index/hello-world1/2",
-                "index/hello-world/2",
-                "index//2",
-                "index/hillo-goodbye/2",
+            "index/foo/2",
+            "index/hello-world1/2",
+            "index/hello-world/2",
+            "index//2",
+            "index/hillo-goodbye/2",
         };
         _segments = new PathSegment[]
         {
-                new PathSegment(6, 3),
-                new PathSegment(6, 12),
-                new PathSegment(6, 11),
-                new PathSegment(6, 0),
-                new PathSegment(6, 13),
+            new PathSegment(6, 3),
+            new PathSegment(6, 12),
+            new PathSegment(6, 11),
+            new PathSegment(6, 0),
+            new PathSegment(6, 13),
         };
     }
 
@@ -69,7 +81,8 @@ public class JumpTableSingleEntryBenchmark
                     "hello-world",
                     0,
                     segment.Length,
-                    StringComparison.OrdinalIgnoreCase);
+                    StringComparison.OrdinalIgnoreCase
+                );
             }
         }
 

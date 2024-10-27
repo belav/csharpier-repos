@@ -30,13 +30,15 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         {
             OptionValue,
             Severity,
-            BulkConfigure
+            BulkConfigure,
         }
 
         private const string DiagnosticOptionPrefix = "dotnet_diagnostic.";
         private const string SeveritySuffix = ".severity";
-        private const string BulkConfigureAllAnalyzerDiagnosticsOptionKey = "dotnet_analyzer_diagnostic.severity";
-        private const string BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix = "dotnet_analyzer_diagnostic.category-";
+        private const string BulkConfigureAllAnalyzerDiagnosticsOptionKey =
+            "dotnet_analyzer_diagnostic.severity";
+        private const string BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix =
+            "dotnet_analyzer_diagnostic.category-";
         private const string AllAnalyzerDiagnosticsCategory = "";
 
         // Regular expression for .editorconfig header.
@@ -44,7 +46,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         //              "[*.{vb,cs}]"
         //              "[*]    ; Optional comment"
         //              "[ConsoleApp/Program.cs]"
-        private static readonly Regex s_headerPattern = new(@"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?");
+        private static readonly Regex s_headerPattern = new(
+            @"\[(\*|[^ #;\[\]]+\.({[^ #;{}\.\[\]]+}|[^ #;{}\.\[\]]+))\]\s*([#;].*)?"
+        );
 
         // Regular expression for .editorconfig code style option entry.
         // For example:
@@ -59,7 +63,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         //  2. Option value
         //  3. Optional severity suffix in option value, i.e. ':severity' suffix
         //  4. Optional comment suffix
-        private static readonly Regex s_optionEntryPattern = new($@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?");
+        private static readonly Regex s_optionEntryPattern = new(
+            $@"(.*)=([\w, ]*)(:[\w]+)?([ ]*[;#].*)?"
+        );
 
         private readonly string? _optionNameOpt;
         private readonly string? _newOptionValueOpt;
@@ -83,12 +89,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             bool isPerLanguage,
             Project project,
             bool addNewEntryIfNoExistingEntryFound,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(configurationKind != ConfigurationKind.OptionValue || !string.IsNullOrEmpty(newOptionValueOpt));
+            Debug.Assert(
+                configurationKind != ConfigurationKind.OptionValue
+                    || !string.IsNullOrEmpty(newOptionValueOpt)
+            );
             Debug.Assert(!string.IsNullOrEmpty(newSeverity));
             Debug.Assert(diagnosticToConfigure != null ^ categoryToBulkConfigure != null);
-            Debug.Assert((categoryToBulkConfigure != null) == (configurationKind == ConfigurationKind.BulkConfigure));
+            Debug.Assert(
+                (categoryToBulkConfigure != null)
+                    == (configurationKind == ConfigurationKind.BulkConfigure)
+            );
 
             _optionNameOpt = optionNameOpt;
             _newOptionValueOpt = newOptionValueOpt;
@@ -112,14 +125,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             ReportDiagnostic severity,
             Diagnostic diagnostic,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (severity == ReportDiagnostic.Default)
             {
                 severity = diagnostic.DefaultSeverity.ToReportDiagnostic();
             }
 
-            return ConfigureSeverityAsync(severity.ToEditorConfigString(), diagnostic, project, cancellationToken);
+            return ConfigureSeverityAsync(
+                severity.ToEditorConfigString(),
+                diagnostic,
+                project,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -131,7 +150,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             string editorConfigSeverity,
             Diagnostic diagnostic,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // For option based code style diagnostic, try to find the .editorconfig key-value pair for the
             // option setting.
@@ -141,14 +161,30 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             if (!codeStyleOptionValues.IsEmpty)
             {
                 return ConfigureCodeStyleOptionsAsync(
-                    codeStyleOptionValues.Select(t => (t.optionName, t.currentOptionValue, t.isPerLanguage)),
-                    editorConfigSeverity, diagnostic, project, configurationKind: ConfigurationKind.Severity, cancellationToken);
+                    codeStyleOptionValues.Select(t =>
+                        (t.optionName, t.currentOptionValue, t.isPerLanguage)
+                    ),
+                    editorConfigSeverity,
+                    diagnostic,
+                    project,
+                    configurationKind: ConfigurationKind.Severity,
+                    cancellationToken
+                );
             }
             else
             {
-                updater = new ConfigurationUpdater(optionNameOpt: null, newOptionValueOpt: null, editorConfigSeverity,
-                    configurationKind: ConfigurationKind.Severity, diagnostic, categoryToBulkConfigure: null,
-                    isPerLanguage: false, project, addNewEntryIfNoExistingEntryFound: true, cancellationToken);
+                updater = new ConfigurationUpdater(
+                    optionNameOpt: null,
+                    newOptionValueOpt: null,
+                    editorConfigSeverity,
+                    configurationKind: ConfigurationKind.Severity,
+                    diagnostic,
+                    categoryToBulkConfigure: null,
+                    isPerLanguage: false,
+                    project,
+                    addNewEntryIfNoExistingEntryFound: true,
+                    cancellationToken
+                );
                 return updater.ConfigureAsync();
             }
         }
@@ -162,10 +198,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             string editorConfigSeverity,
             string category,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(!string.IsNullOrEmpty(category));
-            return BulkConfigureSeverityCoreAsync(editorConfigSeverity, category, project, cancellationToken);
+            return BulkConfigureSeverityCoreAsync(
+                editorConfigSeverity,
+                category,
+                project,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -176,21 +218,37 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         public static Task<Solution> BulkConfigureSeverityAsync(
             string editorConfigSeverity,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return BulkConfigureSeverityCoreAsync(editorConfigSeverity, category: AllAnalyzerDiagnosticsCategory, project, cancellationToken);
+            return BulkConfigureSeverityCoreAsync(
+                editorConfigSeverity,
+                category: AllAnalyzerDiagnosticsCategory,
+                project,
+                cancellationToken
+            );
         }
 
         private static Task<Solution> BulkConfigureSeverityCoreAsync(
             string editorConfigSeverity,
             string category,
             Project project,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(category);
-            var updater = new ConfigurationUpdater(optionNameOpt: null, newOptionValueOpt: null, editorConfigSeverity,
-                configurationKind: ConfigurationKind.BulkConfigure, diagnosticToConfigure: null, category,
-                isPerLanguage: false, project, addNewEntryIfNoExistingEntryFound: true, cancellationToken);
+            var updater = new ConfigurationUpdater(
+                optionNameOpt: null,
+                newOptionValueOpt: null,
+                editorConfigSeverity,
+                configurationKind: ConfigurationKind.BulkConfigure,
+                diagnosticToConfigure: null,
+                category,
+                isPerLanguage: false,
+                project,
+                addNewEntryIfNoExistingEntryFound: true,
+                cancellationToken
+            );
             return updater.ConfigureAsync();
         }
 
@@ -204,19 +262,31 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             Diagnostic diagnostic,
             bool isPerLanguage,
             Project project,
-            CancellationToken cancellationToken)
-        => ConfigureCodeStyleOptionsAsync(
-                SpecializedCollections.SingletonEnumerable((optionName, optionValue, isPerLanguage)),
+            CancellationToken cancellationToken
+        ) =>
+            ConfigureCodeStyleOptionsAsync(
+                SpecializedCollections.SingletonEnumerable(
+                    (optionName, optionValue, isPerLanguage)
+                ),
                 diagnostic.Severity.ToEditorConfigString(),
-                diagnostic, project, configurationKind: ConfigurationKind.OptionValue, cancellationToken);
+                diagnostic,
+                project,
+                configurationKind: ConfigurationKind.OptionValue,
+                cancellationToken
+            );
 
         private static async Task<Solution> ConfigureCodeStyleOptionsAsync(
-            IEnumerable<(string optionName, string optionValue, bool isPerLanguage)> codeStyleOptionValues,
+            IEnumerable<(
+                string optionName,
+                string optionValue,
+                bool isPerLanguage
+            )> codeStyleOptionValues,
             string editorConfigSeverity,
             Diagnostic diagnostic,
             Project project,
             ConfigurationKind configurationKind,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(!codeStyleOptionValues.IsEmpty());
 
@@ -240,9 +310,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 Debug.Assert(!string.IsNullOrEmpty(optionName));
                 Debug.Assert(optionValue != null);
 
-                var updater = new ConfigurationUpdater(optionName, optionValue, editorConfigSeverity, configurationKind,
-                    diagnostic, categoryToBulkConfigure: null, isPerLanguage, currentProject,
-                    addNewEntryIfNoExistingEntryFound, cancellationToken);
+                var updater = new ConfigurationUpdater(
+                    optionName,
+                    optionValue,
+                    editorConfigSeverity,
+                    configurationKind,
+                    diagnostic,
+                    categoryToBulkConfigure: null,
+                    isPerLanguage,
+                    currentProject,
+                    addNewEntryIfNoExistingEntryFound,
+                    cancellationToken
+                );
                 var solution = await updater.ConfigureAsync().ConfigureAwait(false);
                 currentProject = solution.GetProject(project.Id)!;
                 areAllOptionsPerLanguage = areAllOptionsPerLanguage && isPerLanguage;
@@ -252,9 +331,18 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             // We want to update existing entry + add new entry if no existing value is found.
             if (configurationKind == ConfigurationKind.Severity)
             {
-                var updater = new ConfigurationUpdater(optionNameOpt: null, newOptionValueOpt: null, editorConfigSeverity,
-                    configurationKind: ConfigurationKind.Severity, diagnostic, categoryToBulkConfigure: null,
-                    isPerLanguage: areAllOptionsPerLanguage, currentProject, addNewEntryIfNoExistingEntryFound: true, cancellationToken);
+                var updater = new ConfigurationUpdater(
+                    optionNameOpt: null,
+                    newOptionValueOpt: null,
+                    editorConfigSeverity,
+                    configurationKind: ConfigurationKind.Severity,
+                    diagnostic,
+                    categoryToBulkConfigure: null,
+                    isPerLanguage: areAllOptionsPerLanguage,
+                    currentProject,
+                    addNewEntryIfNoExistingEntryFound: true,
+                    cancellationToken
+                );
                 var solution = await updater.ConfigureAsync().ConfigureAwait(false);
                 currentProject = solution.GetProject(project.Id)!;
             }
@@ -272,7 +360,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             }
 
             var solution = editorConfigDocument.Project.Solution;
-            var originalText = await editorConfigDocument.GetValueTextAsync(_cancellationToken).ConfigureAwait(false);
+            var originalText = await editorConfigDocument
+                .GetValueTextAsync(_cancellationToken)
+                .ConfigureAwait(false);
 
             // Compute the updated text for analyzer config document.
             var newText = GetNewAnalyzerConfigDocumentText(originalText, editorConfigDocument);
@@ -293,9 +383,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
         private AnalyzerConfigDocument? FindOrGenerateEditorConfig()
         {
-            var analyzerConfigPath = _diagnostic != null
-                ? _project.TryGetAnalyzerConfigPathForDiagnosticConfiguration(_diagnostic)
-                : _project.TryGetAnalyzerConfigPathForProjectConfiguration();
+            var analyzerConfigPath =
+                _diagnostic != null
+                    ? _project.TryGetAnalyzerConfigPathForDiagnosticConfiguration(_diagnostic)
+                    : _project.TryGetAnalyzerConfigPathForProjectConfiguration();
             if (analyzerConfigPath == null)
             {
                 return null;
@@ -310,14 +401,19 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
             // Otherwise, add analyzer config document to all applicable projects for the current project's solution.
             AnalyzerConfigDocument? analyzerConfigDocument = null;
-            var analyzerConfigDirectory = PathUtilities.GetDirectoryName(analyzerConfigPath) ?? throw ExceptionUtilities.Unreachable();
+            var analyzerConfigDirectory =
+                PathUtilities.GetDirectoryName(analyzerConfigPath)
+                ?? throw ExceptionUtilities.Unreachable();
             var currentSolution = _project.Solution;
             foreach (var projectId in _project.Solution.ProjectIds)
             {
                 var project = currentSolution.GetProject(projectId);
                 if (project?.FilePath?.StartsWith(analyzerConfigDirectory) == true)
                 {
-                    var addedAnalyzerConfigDocument = GetOrCreateAnalyzerConfigDocument(project, analyzerConfigPath);
+                    var addedAnalyzerConfigDocument = GetOrCreateAnalyzerConfigDocument(
+                        project,
+                        analyzerConfigPath
+                    );
                     if (addedAnalyzerConfigDocument != null)
                     {
                         analyzerConfigDocument ??= addedAnalyzerConfigDocument;
@@ -329,9 +425,14 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             return analyzerConfigDocument;
         }
 
-        private static AnalyzerConfigDocument? GetOrCreateAnalyzerConfigDocument(Project project, string analyzerConfigPath)
+        private static AnalyzerConfigDocument? GetOrCreateAnalyzerConfigDocument(
+            Project project,
+            string analyzerConfigPath
+        )
         {
-            var existingAnalyzerConfigDocument = project.TryGetExistingAnalyzerConfigDocumentAtPath(analyzerConfigPath);
+            var existingAnalyzerConfigDocument = project.TryGetExistingAnalyzerConfigDocumentAtPath(
+                analyzerConfigPath
+            );
             if (existingAnalyzerConfigDocument != null)
             {
                 return existingAnalyzerConfigDocument;
@@ -341,15 +442,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             var documentInfo = DocumentInfo.Create(
                 id,
                 name: ".editorconfig",
-                filePath: analyzerConfigPath);
+                filePath: analyzerConfigPath
+            );
 
-            var newSolution = project.Solution.AddAnalyzerConfigDocuments(ImmutableArray.Create(documentInfo));
+            var newSolution = project.Solution.AddAnalyzerConfigDocuments(
+                ImmutableArray.Create(documentInfo)
+            );
             return newSolution.GetProject(project.Id)?.GetAnalyzerConfigDocument(id);
         }
 
-        private static ImmutableArray<(string optionName, string currentOptionValue, bool isPerLanguage)> GetCodeStyleOptionValuesForDiagnostic(
-            Diagnostic diagnostic,
-            Project project)
+        private static ImmutableArray<(
+            string optionName,
+            string currentOptionValue,
+            bool isPerLanguage
+        )> GetCodeStyleOptionValuesForDiagnostic(Diagnostic diagnostic, Project project)
         {
             // For option based code style diagnostic, try to find the .editorconfig key-value pair for the
             // option setting.
@@ -359,14 +465,22 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             var codeStyleOptions = GetCodeStyleOptionsForDiagnostic(diagnostic, project);
             if (!codeStyleOptions.IsEmpty)
             {
-                var builder = ArrayBuilder<(string optionName, string currentOptionValue, bool isPerLanguage)>.GetInstance();
+                var builder = ArrayBuilder<(
+                    string optionName,
+                    string currentOptionValue,
+                    bool isPerLanguage
+                )>.GetInstance();
 
                 try
                 {
                     foreach (var option in codeStyleOptions)
                     {
-                        var optionValue = option.Definition.Serializer.Serialize(option.DefaultValue);
-                        builder.Add((option.Definition.ConfigName, optionValue, option.IsPerLanguage));
+                        var optionValue = option.Definition.Serializer.Serialize(
+                            option.DefaultValue
+                        );
+                        builder.Add(
+                            (option.Definition.ConfigName, optionValue, option.IsPerLanguage)
+                        );
                     }
 
                     return builder.ToImmutable();
@@ -377,18 +491,27 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 }
             }
 
-            return ImmutableArray<(string optionName, string currentOptionValue, bool isPerLanguage)>.Empty;
+            return ImmutableArray<(
+                string optionName,
+                string currentOptionValue,
+                bool isPerLanguage
+            )>.Empty;
         }
 
-        internal static bool TryGetEditorConfigStringParts(string editorConfigString, out (string optionName, string optionValue) parts)
+        internal static bool TryGetEditorConfigStringParts(
+            string editorConfigString,
+            out (string optionName, string optionValue) parts
+        )
         {
             if (!string.IsNullOrEmpty(editorConfigString))
             {
                 var match = s_optionEntryPattern.Match(editorConfigString);
                 if (match.Success)
                 {
-                    parts = (optionName: match.Groups[1].Value.Trim(),
-                             optionValue: match.Groups[2].Value.Trim());
+                    parts = (
+                        optionName: match.Groups[1].Value.Trim(),
+                        optionValue: match.Groups[2].Value.Trim()
+                    );
                     return true;
                 }
             }
@@ -397,24 +520,39 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             return false;
         }
 
-        internal static ImmutableArray<IOption2> GetCodeStyleOptionsForDiagnostic(Diagnostic diagnostic, Project project)
+        internal static ImmutableArray<IOption2> GetCodeStyleOptionsForDiagnostic(
+            Diagnostic diagnostic,
+            Project project
+        )
         {
-            if (IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(diagnostic.Id, project.Language, out var options))
+            if (
+                IDEDiagnosticIdToOptionMappingHelper.TryGetMappedOptions(
+                    diagnostic.Id,
+                    project.Language,
+                    out var options
+                )
+            )
             {
-                return (from option in options
-                        where option.DefaultValue is ICodeStyleOption
-                        orderby option.Definition.ConfigName
-                        select option).ToImmutableArray();
+                return (
+                    from option in options
+                    where option.DefaultValue is ICodeStyleOption
+                    orderby option.Definition.ConfigName
+                    select option
+                ).ToImmutableArray();
             }
 
             return ImmutableArray<IOption2>.Empty;
         }
 
-        private SourceText? GetNewAnalyzerConfigDocumentText(SourceText originalText, AnalyzerConfigDocument editorConfigDocument)
+        private SourceText? GetNewAnalyzerConfigDocumentText(
+            SourceText originalText,
+            AnalyzerConfigDocument editorConfigDocument
+        )
         {
             // Check if an entry to configure the rule severity already exists in the .editorconfig file.
             // If it does, we update the existing entry with the new severity.
-            var (newText, lastValidHeaderSpanEnd, lastValidSpecificHeaderSpanEnd) = CheckIfRuleExistsAndReplaceInFile(originalText, editorConfigDocument);
+            var (newText, lastValidHeaderSpanEnd, lastValidSpecificHeaderSpanEnd) =
+                CheckIfRuleExistsAndReplaceInFile(originalText, editorConfigDocument);
             if (newText != null)
             {
                 return newText;
@@ -427,15 +565,26 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
             // We did not find any existing entry in the in the .editorconfig file to configure rule severity.
             // So we add a new configuration entry to the .editorconfig file.
-            return AddMissingRule(originalText, lastValidHeaderSpanEnd, lastValidSpecificHeaderSpanEnd);
+            return AddMissingRule(
+                originalText,
+                lastValidHeaderSpanEnd,
+                lastValidSpecificHeaderSpanEnd
+            );
         }
 
-        private (SourceText? newText, TextLine? lastValidHeaderSpanEnd, TextLine? lastValidSpecificHeaderSpanEnd) CheckIfRuleExistsAndReplaceInFile(
+        private (
+            SourceText? newText,
+            TextLine? lastValidHeaderSpanEnd,
+            TextLine? lastValidSpecificHeaderSpanEnd
+        ) CheckIfRuleExistsAndReplaceInFile(
             SourceText result,
-            AnalyzerConfigDocument editorConfigDocument)
+            AnalyzerConfigDocument editorConfigDocument
+        )
         {
             // If there's an error finding the editorconfig directory, bail out.
-            var editorConfigDirectory = PathUtilities.GetDirectoryName(editorConfigDocument.FilePath);
+            var editorConfigDirectory = PathUtilities.GetDirectoryName(
+                editorConfigDocument.FilePath
+            );
             if (editorConfigDirectory == null)
             {
                 return (null, null, null);
@@ -450,7 +599,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             {
                 // Finds the relative path between editorconfig directory and diagnostic filepath.
                 diagnosticFilePath = diagnosticSourceTree.FilePath.ToLowerInvariant();
-                relativePath = PathUtilities.GetRelativePath(editorConfigDirectory.ToLowerInvariant(), diagnosticFilePath);
+                relativePath = PathUtilities.GetRelativePath(
+                    editorConfigDirectory.ToLowerInvariant(),
+                    diagnosticFilePath
+                );
                 relativePath = PathUtilities.NormalizeWithForwardSlash(relativePath);
             }
 
@@ -484,11 +636,13 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     var commentValue = groups[4].Value.ToString();
 
                     // Check for global config header: "is_global = true"
-                    if (mostRecentHeader == null &&
-                        lastValidHeader == null &&
-                        key.Equals("is_global", StringComparison.OrdinalIgnoreCase) &&
-                        value.Trim().Equals("true", StringComparison.OrdinalIgnoreCase) &&
-                        severitySuffixInValue.Length == 0)
+                    if (
+                        mostRecentHeader == null
+                        && lastValidHeader == null
+                        && key.Equals("is_global", StringComparison.OrdinalIgnoreCase)
+                        && value.Trim().Equals("true", StringComparison.OrdinalIgnoreCase)
+                        && severitySuffixInValue.Length == 0
+                    )
                     {
                         isGlobalConfig = true;
                         mostRecentHeader = curLine;
@@ -498,9 +652,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     }
 
                     // Verify the most recent header is a valid header
-                    if (mostRecentHeader != null &&
-                        lastValidHeader != null &&
-                        mostRecentHeader.Equals(lastValidHeader))
+                    if (
+                        mostRecentHeader != null
+                        && lastValidHeader != null
+                        && mostRecentHeader.Equals(lastValidHeader)
+                    )
                     {
                         // We found the rule in the file -- replace it with updated option value/severity.
                         if (key.Equals(_optionNameOpt))
@@ -509,20 +665,30 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                             //      "%option_name% = %option_value%
                             //          OR
                             //      "%option_name% = %option_value%:%severity%
-                            var newOptionValue = _configurationKind == ConfigurationKind.OptionValue
-                                ? $"{value.GetLeadingWhitespace()}{_newOptionValueOpt}{value.GetTrailingWhitespace()}"
-                                : value;
-                            var newSeverityValue = _configurationKind == ConfigurationKind.Severity && severitySuffixInValue.Length > 0 ? $":{_newSeverity}" : severitySuffixInValue;
+                            var newOptionValue =
+                                _configurationKind == ConfigurationKind.OptionValue
+                                    ? $"{value.GetLeadingWhitespace()}{_newOptionValueOpt}{value.GetTrailingWhitespace()}"
+                                    : value;
+                            var newSeverityValue =
+                                _configurationKind == ConfigurationKind.Severity
+                                && severitySuffixInValue.Length > 0
+                                    ? $":{_newSeverity}"
+                                    : severitySuffixInValue;
 
-                            textChange = new TextChange(curLine.Span, $"{untrimmedKey}={newOptionValue}{newSeverityValue}{commentValue}");
+                            textChange = new TextChange(
+                                curLine.Span,
+                                $"{untrimmedKey}={newOptionValue}{newSeverityValue}{commentValue}"
+                            );
                         }
                         else
                         {
                             // We want to detect severity based entry only when we are configuring severity and have no option name specified.
-                            if (_configurationKind != ConfigurationKind.OptionValue &&
-                                _optionNameOpt == null &&
-                                severitySuffixInValue.Length == 0 &&
-                                key.EndsWith(SeveritySuffix))
+                            if (
+                                _configurationKind != ConfigurationKind.OptionValue
+                                && _optionNameOpt == null
+                                && severitySuffixInValue.Length == 0
+                                && key.EndsWith(SeveritySuffix)
+                            )
                             {
                                 // We found a rule configuration entry of severity based form:
                                 //      "dotnet_diagnostic.<%DiagnosticId%>.severity = %severity%
@@ -536,13 +702,30 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                                 {
                                     case ConfigurationKind.Severity:
                                         RoslynDebug.Assert(_diagnostic != null);
-                                        if (key.StartsWith(DiagnosticOptionPrefix, StringComparison.Ordinal))
+                                        if (
+                                            key.StartsWith(
+                                                DiagnosticOptionPrefix,
+                                                StringComparison.Ordinal
+                                            )
+                                        )
                                         {
-                                            var diagIdLength = key.Length - (DiagnosticOptionPrefix.Length + SeveritySuffix.Length);
+                                            var diagIdLength =
+                                                key.Length
+                                                - (
+                                                    DiagnosticOptionPrefix.Length
+                                                    + SeveritySuffix.Length
+                                                );
                                             if (diagIdLength > 0)
                                             {
-                                                var diagId = key.Substring(DiagnosticOptionPrefix.Length, diagIdLength);
-                                                foundMatch = string.Equals(diagId, _diagnostic.Id, StringComparison.OrdinalIgnoreCase);
+                                                var diagId = key.Substring(
+                                                    DiagnosticOptionPrefix.Length,
+                                                    diagIdLength
+                                                );
+                                                foundMatch = string.Equals(
+                                                    diagId,
+                                                    _diagnostic.Id,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                );
                                             }
                                         }
 
@@ -550,17 +733,38 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
                                     case ConfigurationKind.BulkConfigure:
                                         RoslynDebug.Assert(_categoryToBulkConfigure != null);
-                                        if (_categoryToBulkConfigure == AllAnalyzerDiagnosticsCategory)
+                                        if (
+                                            _categoryToBulkConfigure
+                                            == AllAnalyzerDiagnosticsCategory
+                                        )
                                         {
-                                            foundMatch = key == BulkConfigureAllAnalyzerDiagnosticsOptionKey;
+                                            foundMatch =
+                                                key == BulkConfigureAllAnalyzerDiagnosticsOptionKey;
                                         }
                                         else
                                         {
-                                            if (key.StartsWith(BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix, StringComparison.Ordinal))
+                                            if (
+                                                key.StartsWith(
+                                                    BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix,
+                                                    StringComparison.Ordinal
+                                                )
+                                            )
                                             {
-                                                var categoryLength = key.Length - (BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix.Length + SeveritySuffix.Length);
-                                                var category = key.Substring(BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix.Length, categoryLength);
-                                                foundMatch = string.Equals(category, _categoryToBulkConfigure, StringComparison.OrdinalIgnoreCase);
+                                                var categoryLength =
+                                                    key.Length
+                                                    - (
+                                                        BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix.Length
+                                                        + SeveritySuffix.Length
+                                                    );
+                                                var category = key.Substring(
+                                                    BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix.Length,
+                                                    categoryLength
+                                                );
+                                                foundMatch = string.Equals(
+                                                    category,
+                                                    _categoryToBulkConfigure,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                );
                                             }
                                         }
 
@@ -569,8 +773,12 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
                                 if (foundMatch)
                                 {
-                                    var newSeverityValue = $"{value.GetLeadingWhitespace()}{_newSeverity}{value.GetTrailingWhitespace()}";
-                                    textChange = new TextChange(curLine.Span, $"{untrimmedKey}={newSeverityValue}{commentValue}");
+                                    var newSeverityValue =
+                                        $"{value.GetLeadingWhitespace()}{_newSeverity}{value.GetTrailingWhitespace()}";
+                                    textChange = new TextChange(
+                                        curLine.Span,
+                                        $"{untrimmedKey}={newSeverityValue}{commentValue}"
+                                    );
                                 }
                             }
                         }
@@ -593,7 +801,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                         // We splice on the last occurrence of '.' to account for filenames containing periods.
                         var nameExtensionSplitIndex = mostRecentHeaderText.LastIndexOf('.');
                         var fileName = mostRecentHeaderText[..nameExtensionSplitIndex];
-                        var splicedFileExtensions = mostRecentHeaderText[(nameExtensionSplitIndex + 1)..].Split(',', ' ', '{', '}');
+                        var splicedFileExtensions = mostRecentHeaderText[
+                            (nameExtensionSplitIndex + 1)..
+                        ]
+                            .Split(',', ' ', '{', '}');
 
                         // Replacing characters in the header with the regex equivalent.
                         fileName = fileName.Replace(".", @"\.");
@@ -620,31 +831,51 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
 
                             // Edge case: The below statement checks that we correctly handle cases such as a header of [m.cs] and
                             // a file name of Program.cs.
-                            if (matchWithoutExtension.Contains(PathUtilities.GetFileName(diagnosticFilePath, false)))
+                            if (
+                                matchWithoutExtension.Contains(
+                                    PathUtilities.GetFileName(diagnosticFilePath, false)
+                                )
+                            )
                             {
                                 // If the diagnostic's isPerLanguage = true, the rule is valid for both C# and VB.
                                 // For the purpose of adding missing rules later, we want to keep track of whether there is a
-                                // valid header that contains both [*.cs] and [*.vb]. 
+                                // valid header that contains both [*.cs] and [*.vb].
                                 // If isPerLanguage = false or a compiler diagnostic, the rule is only valid for one of the languages.
                                 // Thus, we want to keep track of whether there is an existing header that only contains [*.cs] or only
                                 // [*.vb], depending on the language.
                                 // We also keep track of the last valid header for the language.
-                                var isLanguageAgnosticEntry = (_diagnostic == null || !SuppressionHelpers.IsCompilerDiagnostic(_diagnostic)) && _isPerLanguage;
+                                var isLanguageAgnosticEntry =
+                                    (
+                                        _diagnostic == null
+                                        || !SuppressionHelpers.IsCompilerDiagnostic(_diagnostic)
+                                    ) && _isPerLanguage;
                                 if (isLanguageAgnosticEntry)
                                 {
-                                    if ((_language.Equals(LanguageNames.CSharp) || _language.Equals(LanguageNames.VisualBasic)) &&
-                                        splicedFileExtensions.Contains("cs") && splicedFileExtensions.Contains("vb"))
+                                    if (
+                                        (
+                                            _language.Equals(LanguageNames.CSharp)
+                                            || _language.Equals(LanguageNames.VisualBasic)
+                                        )
+                                        && splicedFileExtensions.Contains("cs")
+                                        && splicedFileExtensions.Contains("vb")
+                                    )
                                     {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
                                 }
                                 else if (splicedFileExtensions.Length == 1)
                                 {
-                                    if (_language.Equals(LanguageNames.CSharp) && splicedFileExtensions.Contains("cs"))
+                                    if (
+                                        _language.Equals(LanguageNames.CSharp)
+                                        && splicedFileExtensions.Contains("cs")
+                                    )
                                     {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
-                                    else if (_language.Equals(LanguageNames.VisualBasic) && splicedFileExtensions.Contains("vb"))
+                                    else if (
+                                        _language.Equals(LanguageNames.VisualBasic)
+                                        && splicedFileExtensions.Contains("vb")
+                                    )
                                     {
                                         lastValidSpecificHeader = mostRecentHeader;
                                     }
@@ -654,10 +885,20 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                             }
                         }
                         // Location.None special case.
-                        else if (relativePath.IsEmpty() && new Regex(fileName).IsMatch(relativePath))
+                        else if (
+                            relativePath.IsEmpty() && new Regex(fileName).IsMatch(relativePath)
+                        )
                         {
-                            if ((_language.Equals(LanguageNames.CSharp) && splicedFileExtensions.Contains("cs")) ||
-                                    (_language.Equals(LanguageNames.VisualBasic) && splicedFileExtensions.Contains("vb")))
+                            if (
+                                (
+                                    _language.Equals(LanguageNames.CSharp)
+                                    && splicedFileExtensions.Contains("cs")
+                                )
+                                || (
+                                    _language.Equals(LanguageNames.VisualBasic)
+                                    && splicedFileExtensions.Contains("vb")
+                                )
+                            )
                             {
                                 lastValidHeader = mostRecentHeader;
                             }
@@ -666,12 +907,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                 }
 
                 // We want to keep track of how far this (valid) section spans.
-                if (mostRecentHeader != null &&
-                    lastValidHeader != null &&
-                    mostRecentHeader.Equals(lastValidHeader))
+                if (
+                    mostRecentHeader != null
+                    && lastValidHeader != null
+                    && mostRecentHeader.Equals(lastValidHeader)
+                )
                 {
                     lastValidHeaderSpanEnd = curLine;
-                    if (lastValidSpecificHeader != null && mostRecentHeader.Equals(lastValidSpecificHeader))
+                    if (
+                        lastValidSpecificHeader != null
+                        && mostRecentHeader.Equals(lastValidSpecificHeader)
+                    )
                     {
                         lastValidSpecificHeaderSpanEnd = curLine;
                     }
@@ -681,7 +927,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             // We return only the last text change in case of duplicate entries for the same rule.
             if (textChange != default)
             {
-                return (result.WithChanges(textChange), lastValidHeaderSpanEnd, lastValidSpecificHeaderSpanEnd);
+                return (
+                    result.WithChanges(textChange),
+                    lastValidHeaderSpanEnd,
+                    lastValidSpecificHeaderSpanEnd
+                );
             }
 
             // Rule not found.
@@ -691,7 +941,8 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
         private SourceText? AddMissingRule(
             SourceText result,
             TextLine? lastValidHeaderSpanEnd,
-            TextLine? lastValidSpecificHeaderSpanEnd)
+            TextLine? lastValidSpecificHeaderSpanEnd
+        )
         {
             // Create a new rule configuration entry for the given diagnostic ID or bulk configuration category.
             // If optionNameOpt and optionValueOpt are non-null, it indicates an option based diagnostic ID
@@ -703,20 +954,21 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             //  1. All analyzer diagnostics: "dotnet_analyzer_diagnostic.severity = %severity%
             //  2. Category configuration: "dotnet_analyzer_diagnostic.category-<%DiagnosticCategory%>.severity = %severity%
 
-            var newEntry = !string.IsNullOrEmpty(_optionNameOpt) && !string.IsNullOrEmpty(_newOptionValueOpt)
-                ? $"{_optionNameOpt} = {_newOptionValueOpt}"
+            var newEntry =
+                !string.IsNullOrEmpty(_optionNameOpt) && !string.IsNullOrEmpty(_newOptionValueOpt)
+                    ? $"{_optionNameOpt} = {_newOptionValueOpt}"
                 : _diagnostic != null
                     ? $"{DiagnosticOptionPrefix}{_diagnostic.Id}{SeveritySuffix} = {_newSeverity}"
-                    : _categoryToBulkConfigure == AllAnalyzerDiagnosticsCategory
-                        ? $"{BulkConfigureAllAnalyzerDiagnosticsOptionKey} = {_newSeverity}"
-                        : $"{BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix}{_categoryToBulkConfigure}{SeveritySuffix} = {_newSeverity}";
+                : _categoryToBulkConfigure == AllAnalyzerDiagnosticsCategory
+                    ? $"{BulkConfigureAllAnalyzerDiagnosticsOptionKey} = {_newSeverity}"
+                : $"{BulkConfigureAnalyzerDiagnosticsByCategoryOptionPrefix}{_categoryToBulkConfigure}{SeveritySuffix} = {_newSeverity}";
 
             // Insert a new line and comment text above the new entry
-            var commentPrefix = _diagnostic != null
-                ? $"{_diagnostic.Id}: {_diagnostic.Descriptor.Title}"
+            var commentPrefix =
+                _diagnostic != null ? $"{_diagnostic.Id}: {_diagnostic.Descriptor.Title}"
                 : _categoryToBulkConfigure == AllAnalyzerDiagnosticsCategory
                     ? "Default severity for all analyzer diagnostics"
-                    : $"Default severity for analyzer diagnostics with category '{_categoryToBulkConfigure}'";
+                : $"Default severity for analyzer diagnostics with category '{_categoryToBulkConfigure}'";
 
             newEntry = $"\r\n# {commentPrefix}\r\n{newEntry}\r\n";
 
@@ -725,7 +977,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
             //        Thus, if there is a valid existing header containing both [*.cs] and [*.vb], then we prioritize it.
             //      - If isPerLanguage = false, it means the rule is only valid for one of the languages. Thus, we
             //        prioritize headers that contain only the file extension for the given language.
-            //      - If neither of the above hold true, we choose the last existing valid header. 
+            //      - If neither of the above hold true, we choose the last existing valid header.
             //      - If no valid existing headers, we generate a new header.
             if (lastValidSpecificHeaderSpanEnd.HasValue)
             {
@@ -734,7 +986,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     newEntry = "\r\n" + newEntry;
                 }
 
-                var textChange = new TextChange(new TextSpan(lastValidSpecificHeaderSpanEnd.Value.Span.End, 0), newEntry);
+                var textChange = new TextChange(
+                    new TextSpan(lastValidSpecificHeaderSpanEnd.Value.Span.End, 0),
+                    newEntry
+                );
                 return result.WithChanges(textChange);
             }
             else if (lastValidHeaderSpanEnd.HasValue)
@@ -744,7 +999,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     newEntry = "\r\n" + newEntry;
                 }
 
-                var textChange = new TextChange(new TextSpan(lastValidHeaderSpanEnd.Value.Span.End, 0), newEntry);
+                var textChange = new TextChange(
+                    new TextSpan(lastValidHeaderSpanEnd.Value.Span.End, 0),
+                    newEntry
+                );
                 return result.WithChanges(textChange);
             }
 
@@ -768,7 +1026,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Configuration
                     prefix += "\r\n";
                 }
 
-                var compilerDiagOrNotPerLang = (_diagnostic != null && SuppressionHelpers.IsCompilerDiagnostic(_diagnostic)) || !_isPerLanguage;
+                var compilerDiagOrNotPerLang =
+                    (_diagnostic != null && SuppressionHelpers.IsCompilerDiagnostic(_diagnostic))
+                    || !_isPerLanguage;
                 if (_language.Equals(LanguageNames.CSharp) && compilerDiagOrNotPerLang)
                 {
                     prefix += "[*.cs]\r\n";

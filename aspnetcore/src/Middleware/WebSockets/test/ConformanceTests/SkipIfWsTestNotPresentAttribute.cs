@@ -13,7 +13,15 @@ public class SkipIfWsTestNotPresentAttribute : Attribute, ITestCondition
     public string SkipReason => "Autobahn Test Suite is not installed on the host machine.";
 
     private static bool IsOnCi =>
-        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION")) ||
-        string.Equals(Environment.GetEnvironmentVariable("TRAVIS"), "true", StringComparison.OrdinalIgnoreCase) ||
-        string.Equals(Environment.GetEnvironmentVariable("APPVEYOR"), "true", StringComparison.OrdinalIgnoreCase);
+        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("TEAMCITY_VERSION"))
+        || string.Equals(
+            Environment.GetEnvironmentVariable("TRAVIS"),
+            "true",
+            StringComparison.OrdinalIgnoreCase
+        )
+        || string.Equals(
+            Environment.GetEnvironmentVariable("APPVEYOR"),
+            "true",
+            StringComparison.OrdinalIgnoreCase
+        );
 }

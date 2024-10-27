@@ -14,17 +14,17 @@ namespace System.IdentityModel.Tokens
         DateTime effectiveTime;
 
         public UserNameSecurityToken(string userName, string password)
-            : this(userName, password, SecurityUniqueId.Create().Value)
-        {
-        }
+            : this(userName, password, SecurityUniqueId.Create().Value) { }
 
         public UserNameSecurityToken(string userName, string password, string id)
-        {   
+        {
             if (userName == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("userName");
             if (userName == string.Empty)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.UserNameCannotBeEmpty));
-            
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.UserNameCannotBeEmpty)
+                );
+
             this.userName = userName;
             this.password = password;
             this.id = id;

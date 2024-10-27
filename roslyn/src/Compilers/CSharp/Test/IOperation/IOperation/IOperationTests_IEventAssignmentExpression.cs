@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void AddEventHandler()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -38,7 +39,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void) (Syntax: 't.MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 't.MyEvent')
@@ -51,20 +53,28 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AddEventHandler_JustHandlerReturnsMethodReference()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -85,25 +95,34 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IMethodReferenceOperation: void C.Handler(System.Object sender, System.EventArgs e) (OperationKind.MethodReference, Type: null) (Syntax: 'Handler')
   Instance Receiver: 
     IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // CS0067: The event 'Test.MyEvent' is never used
                 //     public event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void RemoveEventHandler()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -120,7 +139,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventRemove) (OperationKind.EventAssignment, Type: System.Void) (Syntax: 't.MyEvent -= null')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 't.MyEvent')
@@ -132,20 +152,28 @@ IEventAssignmentOperation (EventRemove) (OperationKind.EventAssignment, Type: Sy
       Operand: 
         ILiteralOperation (OperationKind.Literal, Type: null, Constant: null) (Syntax: 'null')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AddEventHandler_StaticEvent()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -165,7 +193,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void) (Syntax: 'Test.MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (Static) (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 'Test.MyEvent')
@@ -178,20 +207,28 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,38): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public static event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void RemoveEventHandler_StaticEvent()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -211,7 +248,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventRemove) (OperationKind.EventAssignment, Type: System.Void) (Syntax: 'Test.MyEvent -= Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (Static) (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 'Test.MyEvent')
@@ -224,20 +262,28 @@ IEventAssignmentOperation (EventRemove) (OperationKind.EventAssignment, Type: Sy
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(6,38): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public static event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AddEventHandler_DelegateTypeMismatch()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -258,7 +304,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void, IsInvalid) (Syntax: 't.MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 't.MyEvent')
@@ -271,23 +318,33 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Children(1):
               IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsInvalid, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(18,19): error CS0123: No overload for 'Handler' matches delegate 'EventHandler'
                 //         /*<bind>*/t.MyEvent += Handler/*<bind>*/;
-                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "t.MyEvent += Handler").WithArguments("Handler", "System.EventHandler").WithLocation(18, 19),
+                Diagnostic(ErrorCode.ERR_MethDelegateMismatch, "t.MyEvent += Handler")
+                    .WithArguments("Handler", "System.EventHandler")
+                    .WithLocation(18, 19),
                 // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AddEventHandler_AssignToStaticEventOnInstance()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -308,7 +365,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void, IsInvalid) (Syntax: 't.MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (Static) (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 't.MyEvent')
@@ -321,16 +379,25 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(18,19): error CS0176: Member 'Test.MyEvent' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         /*<bind>*/t.MyEvent += Handler/*<bind>*/;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "t.MyEvent").WithArguments("Test.MyEvent").WithLocation(18, 19),
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "t.MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(18, 19),
                 // file.cs(6,38): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public static event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 38)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 38),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
@@ -338,7 +405,8 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
         [WorkItem(8909, "https://github.com/dotnet/roslyn/issues/8909")]
         public void AddEventHandler_AssignToNonStaticEventOnType()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -358,7 +426,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void, IsInvalid) (Syntax: 'Test.MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (OperationKind.EventReference, Type: System.EventHandler, IsInvalid) (Syntax: 'Test.MyEvent')
@@ -371,23 +440,33 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: C, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
+            var expectedDiagnostics = new[]
+            {
                 // file.cs(17,19): error CS0120: An object reference is required for the non-static field, method, or property 'Test.MyEvent'
                 //         /*<bind>*/Test.MyEvent += Handler/*<bind>*/;
-                Diagnostic(ErrorCode.ERR_ObjectRequired, "Test.MyEvent").WithArguments("Test.MyEvent").WithLocation(17, 19),
+                Diagnostic(ErrorCode.ERR_ObjectRequired, "Test.MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(17, 19),
                 // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
                 //     public event EventHandler MyEvent;
-                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void AddEventHandler_AssignToEventWithoutExplicitReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class Test
@@ -404,7 +483,8 @@ class Test
     }  
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: System.Void) (Syntax: 'MyEvent += Handler')
   Event Reference: 
     IEventReferenceOperation: event System.EventHandler Test.MyEvent (OperationKind.EventReference, Type: System.EventHandler) (Syntax: 'MyEvent')
@@ -417,20 +497,28 @@ IEventAssignmentOperation (EventAdd) (OperationKind.EventAssignment, Type: Syste
           Instance Receiver: 
             IInstanceReferenceOperation (ReferenceKind: ContainingTypeInstance) (OperationKind.InstanceReference, Type: Test, IsImplicit) (Syntax: 'Handler')
 ";
-            var expectedDiagnostics = new[] {
-                      // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
-                      //     public event EventHandler MyEvent;
-                      Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent").WithArguments("Test.MyEvent").WithLocation(6, 31)
+            var expectedDiagnostics = new[]
+            {
+                // file.cs(6,31): warning CS0067: The event 'Test.MyEvent' is never used
+                //     public event EventHandler MyEvent;
+                Diagnostic(ErrorCode.WRN_UnreferencedEvent, "MyEvent")
+                    .WithArguments("Test.MyEvent")
+                    .WithLocation(6, 31),
             };
 
-            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<AssignmentExpressionSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_NoControlFlow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -445,7 +533,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -479,14 +568,19 @@ Block[B2] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlowInEventReference()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -501,7 +595,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -569,14 +664,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlowInEventReference_StaticEvent()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -591,7 +691,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -613,20 +714,28 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {                
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(12,9): error CS0176: Member 'C.MyEvent' cannot be accessed with an instance reference; qualify it with a type name instead
                 //         (c1 ?? c2).MyEvent += handler;
-                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).MyEvent").WithArguments("C.MyEvent").WithLocation(12, 9)
+                Diagnostic(ErrorCode.ERR_ObjectProhibited, "(c1 ?? c2).MyEvent")
+                    .WithArguments("C.MyEvent")
+                    .WithLocation(12, 9),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlowInHandler_InstanceReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -641,7 +750,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -719,14 +829,19 @@ Block[B6] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlowInHandler_NullReceiver()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -741,7 +856,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -809,14 +925,19 @@ Block[B5] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlowInEventReferenceAndHandler()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -831,7 +952,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -938,14 +1060,19 @@ Block[B8] - Exit
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_NoControlFlow_NotAStatement()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -959,7 +1086,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -987,20 +1115,27 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {                
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(11,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (c.MyEvent += handler) = 0;
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "c.MyEvent += handler").WithLocation(11, 10)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "c.MyEvent += handler")
+                    .WithLocation(11, 10),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void EventAssignment_ControlFlow_NotAStatement()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 
 class C
@@ -1014,7 +1149,8 @@ class C
     }/*</bind>*/
 }
 ";
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -1099,13 +1235,19 @@ Block[B6] - Exit
     Predecessors: [B5]
     Statements (0)
 ";
-            var expectedDiagnostics = new DiagnosticDescription[] {
+            var expectedDiagnostics = new DiagnosticDescription[]
+            {
                 // file.cs(11,10): error CS0131: The left-hand side of an assignment must be a variable, property or indexer
                 //         (c.MyEvent += handler) = x1 ?? x2;
-                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "c.MyEvent += handler").WithLocation(11, 10)
+                Diagnostic(ErrorCode.ERR_AssgLvalueExpected, "c.MyEvent += handler")
+                    .WithLocation(11, 10),
             };
 
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics
+            );
         }
     }
 }

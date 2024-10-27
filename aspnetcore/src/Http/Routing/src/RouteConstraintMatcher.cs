@@ -39,11 +39,13 @@ internal static partial class RouteConstraintMatcher
         HttpContext httpContext,
         IRouter route,
         RouteDirection routeDirection,
-        ILogger logger)
+        ILogger logger
+    )
 #else
     public static bool Match(
         IDictionary<string, IRouteConstraint> constraints,
-        RouteValueDictionary routeValues)
+        RouteValueDictionary routeValues
+    )
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeValues);
@@ -86,14 +88,18 @@ internal static partial class RouteConstraintMatcher
 #if !COMPONENTS
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug,
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
             "Route value '{RouteValue}' with key '{RouteKey}' did not match the constraint '{RouteConstraint}'",
-            EventName = "ConstraintNotMatched")]
+            EventName = "ConstraintNotMatched"
+        )]
         public static partial void ConstraintNotMatched(
             ILogger logger,
             object routeValue,
             string routeKey,
-            IRouteConstraint routeConstraint);
+            IRouteConstraint routeConstraint
+        );
     }
 #endif
 }

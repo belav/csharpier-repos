@@ -11,7 +11,8 @@ namespace Microsoft.Extensions.Diagnostics.HealthChecks;
 /// </summary>
 public struct HealthCheckResult
 {
-    private static readonly IReadOnlyDictionary<string, object> _emptyReadOnlyDictionary = new Dictionary<string, object>();
+    private static readonly IReadOnlyDictionary<string, object> _emptyReadOnlyDictionary =
+        new Dictionary<string, object>();
 
     /// <summary>
     /// Creates a new <see cref="HealthCheckResult"/> with the specified values for <paramref name="status"/>,
@@ -21,7 +22,12 @@ public struct HealthCheckResult
     /// <param name="description">A human-readable description of the status of the component that was checked.</param>
     /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status (if any).</param>
     /// <param name="data">Additional key-value pairs describing the health of the component.</param>
-    public HealthCheckResult(HealthStatus status, string? description = null, Exception? exception = null, IReadOnlyDictionary<string, object>? data = null)
+    public HealthCheckResult(
+        HealthStatus status,
+        string? description = null,
+        Exception? exception = null,
+        IReadOnlyDictionary<string, object>? data = null
+    )
     {
         Status = status;
         Description = description;
@@ -55,9 +61,17 @@ public struct HealthCheckResult
     /// <param name="description">A human-readable description of the status of the component that was checked. Optional.</param>
     /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing a healthy component.</returns>
-    public static HealthCheckResult Healthy(string? description = null, IReadOnlyDictionary<string, object>? data = null)
+    public static HealthCheckResult Healthy(
+        string? description = null,
+        IReadOnlyDictionary<string, object>? data = null
+    )
     {
-        return new HealthCheckResult(status: HealthStatus.Healthy, description, exception: null, data);
+        return new HealthCheckResult(
+            status: HealthStatus.Healthy,
+            description,
+            exception: null,
+            data
+        );
     }
 
     /// <summary>
@@ -67,9 +81,18 @@ public struct HealthCheckResult
     /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status. Optional.</param>
     /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing a degraged component.</returns>
-    public static HealthCheckResult Degraded(string? description = null, Exception? exception = null, IReadOnlyDictionary<string, object>? data = null)
+    public static HealthCheckResult Degraded(
+        string? description = null,
+        Exception? exception = null,
+        IReadOnlyDictionary<string, object>? data = null
+    )
     {
-        return new HealthCheckResult(status: HealthStatus.Degraded, description, exception: exception, data);
+        return new HealthCheckResult(
+            status: HealthStatus.Degraded,
+            description,
+            exception: exception,
+            data
+        );
     }
 
     /// <summary>
@@ -79,7 +102,11 @@ public struct HealthCheckResult
     /// <param name="exception">An <see cref="Exception"/> representing the exception that was thrown when checking for status. Optional.</param>
     /// <param name="data">Additional key-value pairs describing the health of the component. Optional.</param>
     /// <returns>A <see cref="HealthCheckResult"/> representing an unhealthy component.</returns>
-    public static HealthCheckResult Unhealthy(string? description = null, Exception? exception = null, IReadOnlyDictionary<string, object>? data = null)
+    public static HealthCheckResult Unhealthy(
+        string? description = null,
+        Exception? exception = null,
+        IReadOnlyDictionary<string, object>? data = null
+    )
     {
         return new HealthCheckResult(status: HealthStatus.Unhealthy, description, exception, data);
     }

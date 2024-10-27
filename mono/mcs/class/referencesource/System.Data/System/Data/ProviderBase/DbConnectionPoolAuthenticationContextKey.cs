@@ -32,16 +32,14 @@ namespace System.Data.ProviderBase
         /// </summary>
         private readonly int _hashCode;
 
-        internal string StsAuthority {
-            get {
-                return _stsAuthority;
-            }
+        internal string StsAuthority
+        {
+            get { return _stsAuthority; }
         }
 
-        internal string ServicePrincipalName {
-            get {
-                return _servicePrincipalName;
-            }
+        internal string ServicePrincipalName
+        {
+            get { return _servicePrincipalName; }
         }
 
         /// <summary>
@@ -49,7 +47,11 @@ namespace System.Data.ProviderBase
         /// </summary>
         /// <param name="stsAuthority">Token Endpoint URL</param>
         /// <param name="servicePrincipalName">SPN representing the SQL service in an active directory.</param>
-        internal DbConnectionPoolAuthenticationContextKey(string stsAuthority, string servicePrincipalName) {
+        internal DbConnectionPoolAuthenticationContextKey(
+            string stsAuthority,
+            string servicePrincipalName
+        )
+        {
             Debug.Assert(!string.IsNullOrWhiteSpace(stsAuthority));
             Debug.Assert(!string.IsNullOrWhiteSpace(servicePrincipalName));
 
@@ -65,25 +67,40 @@ namespace System.Data.ProviderBase
         /// </summary>
         /// <param name="obj"></param>
         /// <returns></returns>
-        public override bool Equals(object obj) {
-            if (obj == null) {
+        public override bool Equals(object obj)
+        {
+            if (obj == null)
+            {
                 return false;
             }
 
-            DbConnectionPoolAuthenticationContextKey otherKey = obj as DbConnectionPoolAuthenticationContextKey;
-            if (otherKey == null) {
+            DbConnectionPoolAuthenticationContextKey otherKey =
+                obj as DbConnectionPoolAuthenticationContextKey;
+            if (otherKey == null)
+            {
                 return false;
             }
 
-            return (String.Equals(StsAuthority, otherKey.StsAuthority, StringComparison.InvariantCultureIgnoreCase)
-                && String.Equals(ServicePrincipalName, otherKey.ServicePrincipalName, StringComparison.InvariantCultureIgnoreCase));
+            return (
+                String.Equals(
+                    StsAuthority,
+                    otherKey.StsAuthority,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+                && String.Equals(
+                    ServicePrincipalName,
+                    otherKey.ServicePrincipalName,
+                    StringComparison.InvariantCultureIgnoreCase
+                )
+            );
         }
 
         /// <summary>
         /// Override the default GetHashCode implementation.
         /// </summary>
         /// <returns></returns>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return _hashCode;
         }
 
@@ -91,9 +108,9 @@ namespace System.Data.ProviderBase
         /// Compute the hash code for this object.
         /// </summary>
         /// <returns></returns>
-        private int ComputeHashCode() {
+        private int ComputeHashCode()
+        {
             int hashCode = 33;
-
             unchecked
             {
                 hashCode = (hashCode * 17) + StsAuthority.GetHashCode();

@@ -11,7 +11,12 @@ internal static partial class Interop
 {
     internal static partial class Winspool
     {
-        [LibraryImport(Libraries.Winspool, EntryPoint = "DocumentPropertiesW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Winspool,
+            EntryPoint = "DocumentPropertiesW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DocumentProperties(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
@@ -20,13 +25,24 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hPrinter, string pDeviceName, IntPtr /*DEVMODE*/ pDevModeOutput,
+            HandleRef hPrinter,
+            string pDeviceName,
+            IntPtr /*DEVMODE*/
+            pDevModeOutput,
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef /*DEVMODE*/ pDevModeInput, int fMode);
+            HandleRef /*DEVMODE*/
+            pDevModeInput,
+            int fMode
+        );
 
-        [LibraryImport(Libraries.Winspool, EntryPoint = "DocumentPropertiesW", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Winspool,
+            EntryPoint = "DocumentPropertiesW",
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static partial int DocumentProperties(
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
@@ -35,6 +51,13 @@ internal static partial class Interop
 #if NET7_0_OR_GREATER
             [MarshalUsing(typeof(HandleRefMarshaller))]
 #endif
-            HandleRef hPrinter, string pDeviceName, IntPtr /*DEVMODE*/ pDevModeOutput, IntPtr /*DEVMODE*/ pDevModeInput, int fMode);
+            HandleRef hPrinter,
+            string pDeviceName,
+            IntPtr /*DEVMODE*/
+            pDevModeOutput,
+            IntPtr /*DEVMODE*/
+            pDevModeInput,
+            int fMode
+        );
     }
 }

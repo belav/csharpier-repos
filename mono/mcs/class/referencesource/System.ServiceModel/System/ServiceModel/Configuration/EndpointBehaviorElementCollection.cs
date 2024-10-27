@@ -5,16 +5,19 @@
 namespace System.ServiceModel.Configuration
 {
     using System.Collections;
+    using System.Collections.Generic;
     using System.Configuration;
     using System.Globalization;
-    using System.Collections.Generic;
 
-    [ConfigurationCollection(typeof(EndpointBehaviorElement), AddItemName = ConfigurationStrings.Behavior)]
-    public sealed class EndpointBehaviorElementCollection : ServiceModelEnhancedConfigurationElementCollection<EndpointBehaviorElement>
+    [ConfigurationCollection(
+        typeof(EndpointBehaviorElement),
+        AddItemName = ConfigurationStrings.Behavior
+    )]
+    public sealed class EndpointBehaviorElementCollection
+        : ServiceModelEnhancedConfigurationElementCollection<EndpointBehaviorElement>
     {
         public EndpointBehaviorElementCollection()
-            : base(ConfigurationStrings.Behavior)
-        { }
+            : base(ConfigurationStrings.Behavior) { }
 
         protected override bool ThrowOnDuplicate
         {
@@ -39,13 +42,18 @@ namespace System.ServiceModel.Configuration
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("element");
             }
 
-            EndpointBehaviorElement childEndpointBehaviorElement = element as EndpointBehaviorElement;
+            EndpointBehaviorElement childEndpointBehaviorElement =
+                element as EndpointBehaviorElement;
             string endpointBehaviorElementName = childEndpointBehaviorElement.Name;
-            EndpointBehaviorElement parentEndpointBehaviorElement = this.BaseGet(endpointBehaviorElementName) as EndpointBehaviorElement;
-            List<BehaviorExtensionElement> parentExtensionElements = new List<BehaviorExtensionElement>();
+            EndpointBehaviorElement parentEndpointBehaviorElement =
+                this.BaseGet(endpointBehaviorElementName) as EndpointBehaviorElement;
+            List<BehaviorExtensionElement> parentExtensionElements =
+                new List<BehaviorExtensionElement>();
             if (parentEndpointBehaviorElement != null)
             {
-                foreach (BehaviorExtensionElement parentBehaviorElement in parentEndpointBehaviorElement)
+                foreach (
+                    BehaviorExtensionElement parentBehaviorElement in parentEndpointBehaviorElement
+                )
                 {
                     parentExtensionElements.Add(parentBehaviorElement);
                 }

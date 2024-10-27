@@ -13,23 +13,22 @@ namespace System
     /// The exception that is thrown when accessing an object that was disposed.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ObjectDisposedException : InvalidOperationException
     {
         private readonly string? _objectName;
 
         // This constructor should only be called by the EE (COMPlusThrow)
-        private ObjectDisposedException() :
-            this(null, SR.ObjectDisposed_Generic)
-        {
-        }
+        private ObjectDisposedException()
+            : this(null, SR.ObjectDisposed_Generic) { }
 
-        public ObjectDisposedException(string? objectName) :
-            this(objectName, SR.ObjectDisposed_Generic)
-        {
-        }
+        public ObjectDisposedException(string? objectName)
+            : this(objectName, SR.ObjectDisposed_Generic) { }
 
-        public ObjectDisposedException(string? objectName, string? message) : base(message)
+        public ObjectDisposedException(string? objectName, string? message)
+            : base(message)
         {
             HResult = HResults.COR_E_OBJECTDISPOSED;
             _objectName = objectName;
@@ -41,7 +40,11 @@ namespace System
             HResult = HResults.COR_E_OBJECTDISPOSED;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         protected ObjectDisposedException(SerializationInfo info, StreamingContext context)
             : base(info, context)
@@ -75,7 +78,11 @@ namespace System
             }
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override void GetObjectData(SerializationInfo info, StreamingContext context)
         {

@@ -6,15 +6,20 @@ using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
 {
-    public abstract class CoseSign1MessageTests_Sign_CustomHeaderMaps : CoseMessageTests_Sign_CustomHeaderMaps
+    public abstract class CoseSign1MessageTests_Sign_CustomHeaderMaps
+        : CoseMessageTests_Sign_CustomHeaderMaps
     {
         internal override CoseMessageKind MessageKind => CoseMessageKind.Sign1;
 
-        internal override void AddSignature(CoseMultiSignMessage msg, byte[] content, CoseSigner signer, byte[]? associatedData = null)
-            => throw new NotSupportedException();
+        internal override void AddSignature(
+            CoseMultiSignMessage msg,
+            byte[] content,
+            CoseSigner signer,
+            byte[]? associatedData = null
+        ) => throw new NotSupportedException();
 
-        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload)
-            => CoseMessage.DecodeSign1(cborPayload);
+        internal override CoseMessage Decode(ReadOnlySpan<byte> cborPayload) =>
+            CoseMessage.DecodeSign1(cborPayload);
 
         internal override CoseHeaderMap GetSigningHeaderMap(CoseMessage msg, bool getProtectedMap)
         {
@@ -22,8 +27,12 @@ namespace System.Security.Cryptography.Cose.Tests
             return getProtectedMap ? msg.ProtectedHeaders : msg.UnprotectedHeaders;
         }
 
-        internal override bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null)
-            => Sign1Verify(msg, key, content, associatedData);
+        internal override bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        ) => Sign1Verify(msg, key, content, associatedData);
     }
 
     public class CoseSign1MessageTests_Sign_ByteArray : CoseSign1MessageTests_Sign_CustomHeaderMaps
@@ -34,11 +43,12 @@ namespace System.Security.Cryptography.Cose.Tests
             CoseHeaderMap? protectedHeaders = null,
             CoseHeaderMap? unprotectedHeaders = null,
             byte[]? associatedData = null,
-            bool isDetached = false)
+            bool isDetached = false
+        )
         {
-            return isDetached ?
-                CoseSign1Message.SignDetached(content, signer, associatedData) :
-                CoseSign1Message.SignEmbedded(content, signer, associatedData);
+            return isDetached
+                ? CoseSign1Message.SignDetached(content, signer, associatedData)
+                : CoseSign1Message.SignEmbedded(content, signer, associatedData);
         }
     }
 
@@ -50,7 +60,8 @@ namespace System.Security.Cryptography.Cose.Tests
             CoseHeaderMap? protectedHeaders = null,
             CoseHeaderMap? unprotectedHeaders = null,
             byte[]? associatedData = null,
-            bool isDetached = false)
+            bool isDetached = false
+        )
         {
             Span<byte> destination;
             int bytesWritten;
@@ -60,32 +71,69 @@ namespace System.Security.Cryptography.Cose.Tests
             for (int i = 1; i < 10; i++)
             {
                 destination = expectedEncodedMsg.AsSpan(0, expectedEncodedMsg.Length - i);
-                Assert.False(TrySign(content, destination, signer, isDetached, out bytesWritten, associatedData));
+                Assert.False(
+                    TrySign(
+                        content,
+                        destination,
+                        signer,
+                        isDetached,
+                        out bytesWritten,
+                        associatedData
+                    )
+                );
                 Assert.Equal(0, bytesWritten);
             }
 
             // Assert TrySign returns true when destination is double the required size (or at least 2k).
             destination = new byte[Math.Max(expectedEncodedMsg.Length * 2, 2048)];
-            Assert.True(TrySign(content, destination, signer, isDetached, out bytesWritten, associatedData));
+            Assert.True(
+                TrySign(content, destination, signer, isDetached, out bytesWritten, associatedData)
+            );
             Assert.Equal(expectedEncodedMsg.Length, bytesWritten);
 
             // Assert TrySign returns true when destination is the exact size required.
             destination = destination.Slice(0, expectedEncodedMsg.Length);
             destination.Clear();
-            Assert.True(TrySign(content, destination, signer, isDetached, out bytesWritten, associatedData));
+            Assert.True(
+                TrySign(content, destination, signer, isDetached, out bytesWritten, associatedData)
+            );
             Assert.Equal(destination.Length, bytesWritten);
 
             return destination.ToArray();
         }
 
-        private byte[] Sign(byte[] content, CoseSigner signer, bool isDetached, byte[]? associatedData)
-            => isDetached ?
-            CoseSign1Message.SignDetached(content, signer, associatedData) :
-            CoseSign1Message.SignEmbedded(content, signer, associatedData);
+        private byte[] Sign(
+            byte[] content,
+            CoseSigner signer,
+            bool isDetached,
+            byte[]? associatedData
+        ) =>
+            isDetached
+                ? CoseSign1Message.SignDetached(content, signer, associatedData)
+                : CoseSign1Message.SignEmbedded(content, signer, associatedData);
 
-        private bool TrySign(ReadOnlySpan<byte> content, Span<byte> destination, CoseSigner signer, bool isDetached, out int bytesWritten, byte[]? associatedData)
-            => isDetached ?
-            CoseSign1Message.TrySignDetached(content, destination, signer, out bytesWritten, associatedData) :
-            CoseSign1Message.TrySignEmbedded(content, destination, signer, out bytesWritten, associatedData);
+        private bool TrySign(
+            ReadOnlySpan<byte> content,
+            Span<byte> destination,
+            CoseSigner signer,
+            bool isDetached,
+            out int bytesWritten,
+            byte[]? associatedData
+        ) =>
+            isDetached
+                ? CoseSign1Message.TrySignDetached(
+                    content,
+                    destination,
+                    signer,
+                    out bytesWritten,
+                    associatedData
+                )
+                : CoseSign1Message.TrySignEmbedded(
+                    content,
+                    destination,
+                    signer,
+                    out bytesWritten,
+                    associatedData
+                );
     }
 }

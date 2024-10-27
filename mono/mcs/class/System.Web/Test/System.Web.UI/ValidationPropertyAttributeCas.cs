@@ -1,5 +1,5 @@
 //
-// ValidationPropertyAttributeCas.cs 
+// ValidationPropertyAttributeCas.cs
 //	- CAS unit tests for System.Web.UI.ValidationPropertyAttribute
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,39 +27,42 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Reflection;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class ValidationPropertyAttributeCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            ValidationPropertyAttribute vpa = new ValidationPropertyAttribute(null);
+            Assert.IsNull(vpa.Name, "Name");
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class ValidationPropertyAttributeCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			ValidationPropertyAttribute vpa = new ValidationPropertyAttribute (null);
-			Assert.IsNull (vpa.Name, "Name");
-		}
+        public override object CreateControl(
+            SecurityAction action,
+            AspNetHostingPermissionLevel level
+        )
+        {
+            ConstructorInfo ci = this.Type.GetConstructor(new Type[1] { typeof(string) });
+            Assert.IsNotNull(ci, ".ctor(string)");
+            return ci.Invoke(new object[1] { String.Empty });
+        }
 
-		// LinkDemand
-
-		public override object CreateControl (SecurityAction action, AspNetHostingPermissionLevel level)
-		{
-			ConstructorInfo ci = this.Type.GetConstructor (new Type[1] { typeof (string) });
-			Assert.IsNotNull (ci, ".ctor(string)");
-			return ci.Invoke (new object[1] { String.Empty });
-		}
-
-		public override Type Type {
-			get { return typeof (ValidationPropertyAttribute); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(ValidationPropertyAttribute); }
+        }
+    }
 }

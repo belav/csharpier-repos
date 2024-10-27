@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.Wrapping
         protected SyntaxWrappingOptions(
             SyntaxFormattingOptions formattingOptions,
             int wrappingColumn,
-            OperatorPlacementWhenWrappingPreference operatorPlacement)
+            OperatorPlacementWhenWrappingPreference operatorPlacement
+        )
         {
             FormattingOptions = formattingOptions;
             WrappingColumn = wrappingColumn;

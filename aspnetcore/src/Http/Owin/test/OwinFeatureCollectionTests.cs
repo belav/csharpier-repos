@@ -23,12 +23,12 @@ public class OwinHttpEnvironmentTests
     public void OwinHttpEnvironmentCanBeCreated()
     {
         var env = new Dictionary<string, object>
-            {
-                { "owin.RequestMethod", HttpMethods.Post },
-                { "owin.RequestPath", "/path" },
-                { "owin.RequestPathBase", "/pathBase" },
-                { "owin.RequestQueryString", "name=value" },
-            };
+        {
+            { "owin.RequestMethod", HttpMethods.Post },
+            { "owin.RequestPath", "/path" },
+            { "owin.RequestPathBase", "/pathBase" },
+            { "owin.RequestQueryString", "name=value" },
+        };
         var features = new OwinFeatureCollection(env);
 
         var requestFeature = Get<IHttpRequestFeature>(features);
@@ -42,12 +42,12 @@ public class OwinHttpEnvironmentTests
     public void OwinHttpEnvironmentCanBeModified()
     {
         var env = new Dictionary<string, object>
-            {
-                { "owin.RequestMethod", HttpMethods.Post },
-                { "owin.RequestPath", "/path" },
-                { "owin.RequestPathBase", "/pathBase" },
-                { "owin.RequestQueryString", "name=value" },
-            };
+        {
+            { "owin.RequestMethod", HttpMethods.Post },
+            { "owin.RequestPath", "/path" },
+            { "owin.RequestPathBase", "/pathBase" },
+            { "owin.RequestQueryString", "name=value" },
+        };
         var features = new OwinFeatureCollection(env);
 
         var requestFeature = Get<IHttpRequestFeature>(features);
@@ -62,4 +62,3 @@ public class OwinHttpEnvironmentTests
         Assert.Equal("name=value2", Get<string>(env, "owin.RequestQueryString"));
     }
 }
-

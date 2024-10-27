@@ -17,7 +17,8 @@ internal sealed class RedirectAction : UrlAction
         Pattern pattern,
         bool queryStringAppend,
         bool queryStringDelete,
-        bool escapeBackReferences)
+        bool escapeBackReferences
+    )
     {
         StatusCode = statusCode;
         Url = pattern;
@@ -26,7 +27,11 @@ internal sealed class RedirectAction : UrlAction
         EscapeBackReferences = escapeBackReferences;
     }
 
-    public override void ApplyAction(RewriteContext context, BackReferenceCollection? ruleBackReferences, BackReferenceCollection? conditionBackReferences)
+    public override void ApplyAction(
+        RewriteContext context,
+        BackReferenceCollection? ruleBackReferences,
+        BackReferenceCollection? conditionBackReferences
+    )
     {
         var pattern = Url!.Evaluate(context, ruleBackReferences, conditionBackReferences);
         var response = context.HttpContext.Response;
@@ -57,8 +62,8 @@ internal sealed class RedirectAction : UrlAction
         if (split >= 0 && QueryStringAppend)
         {
             var query = context.HttpContext.Request.QueryString.Add(
-                QueryString.FromUriComponent(
-                    pattern.Substring(split)));
+                QueryString.FromUriComponent(pattern.Substring(split))
+            );
 
             // not using the response.redirect here because status codes may be 301, 302, 307, 308
             response.Headers.Location = pathBase + pattern.Substring(0, split) + query;
@@ -73,7 +78,8 @@ internal sealed class RedirectAction : UrlAction
             }
             else
             {
-                response.Headers.Location = pathBase + pattern + context.HttpContext.Request.QueryString;
+                response.Headers.Location =
+                    pathBase + pattern + context.HttpContext.Request.QueryString;
             }
         }
         context.Result = RuleResult.EndResponse;

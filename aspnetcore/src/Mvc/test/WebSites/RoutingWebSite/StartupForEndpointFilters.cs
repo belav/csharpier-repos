@@ -14,7 +14,9 @@ public class StartupForEndpointFilters
         services.AddMvc().AddNewtonsoftJson();
 
         // Used by some controllers defined in this project.
-        services.Configure<RouteOptions>(options => options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer));
+        services.Configure<RouteOptions>(options =>
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer)
+        );
         services.AddScoped<TestResponseGenerator>();
         // This is used by test response generator
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -25,33 +27,47 @@ public class StartupForEndpointFilters
         app.UseRouting();
         app.UseEndpoints(builder =>
         {
-            builder.MapControllers().AddEndpointFilterFactory((context, next) =>
-            {
-                return async ic =>
-                {
-                    ic.HttpContext.Items[nameof(IEndpointFilter)] = true;
-                    ic.HttpContext.Items[nameof(EndpointFilterFactoryContext.MethodInfo.Name)] = context.MethodInfo.Name;
-                    var result = await next(ic);
-                    if (context.MethodInfo.Name == "IndexWithSelectiveFilter")
+            builder
+                .MapControllers()
+                .AddEndpointFilterFactory(
+                    (context, next) =>
                     {
-                        return "Intercepted";
+                        return async ic =>
+                        {
+                            ic.HttpContext.Items[nameof(IEndpointFilter)] = true;
+                            ic.HttpContext.Items[
+                                nameof(EndpointFilterFactoryContext.MethodInfo.Name)
+                            ] = context.MethodInfo.Name;
+                            var result = await next(ic);
+                            if (context.MethodInfo.Name == "IndexWithSelectiveFilter")
+                            {
+                                return "Intercepted";
+                            }
+                            return result;
+                        };
                     }
-                    return result;
-                };
-            }).AddEndpointFilterFactory((context, next) =>
-            {
-                if (context.MethodInfo.GetParameters().Length >= 1 && context.MethodInfo.GetParameters()[0].ParameterType == typeof(string))
-                {
-                    return ic =>
+                )
+                .AddEndpointFilterFactory(
+                    (context, next) =>
                     {
-                        var firstArg = ic.GetArgument<string>(0);
-                        ic.HttpContext.Items[nameof(EndpointFilterInvocationContext.Arguments)] = firstArg;
-                        return next(ic);
-                    };
-                }
+                        if (
+                            context.MethodInfo.GetParameters().Length >= 1
+                            && context.MethodInfo.GetParameters()[0].ParameterType == typeof(string)
+                        )
+                        {
+                            return ic =>
+                            {
+                                var firstArg = ic.GetArgument<string>(0);
+                                ic.HttpContext.Items[
+                                    nameof(EndpointFilterInvocationContext.Arguments)
+                                ] = firstArg;
+                                return next(ic);
+                            };
+                        }
 
-                return ic => next(ic);
-            });
+                        return ic => next(ic);
+                    }
+                );
         });
     }
 }

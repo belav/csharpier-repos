@@ -32,11 +32,7 @@ namespace System.Activities.Statements
         }
 
         [DefaultValue(null)]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
         static Constraint Constraint
         {
@@ -69,11 +65,20 @@ namespace System.Activities.Statements
 
         static Constraint NoPersistInScope()
         {
-            DelegateInArgument<ValidationContext> validationContext = new DelegateInArgument<ValidationContext>("validationContext");
-            DelegateInArgument<NoPersistScope> noPersistScope = new DelegateInArgument<NoPersistScope>("noPersistScope");
-            Variable<bool> isConstraintSatisfied = new Variable<bool>("isConstraintSatisfied", true);
-            Variable<IEnumerable<Activity>> childActivities = new Variable<IEnumerable<Activity>>("childActivities");
-            Variable<string> constraintViolationMessage = new Variable<string>("constraintViolationMessage");
+            DelegateInArgument<ValidationContext> validationContext =
+                new DelegateInArgument<ValidationContext>("validationContext");
+            DelegateInArgument<NoPersistScope> noPersistScope =
+                new DelegateInArgument<NoPersistScope>("noPersistScope");
+            Variable<bool> isConstraintSatisfied = new Variable<bool>(
+                "isConstraintSatisfied",
+                true
+            );
+            Variable<IEnumerable<Activity>> childActivities = new Variable<IEnumerable<Activity>>(
+                "childActivities"
+            );
+            Variable<string> constraintViolationMessage = new Variable<string>(
+                "constraintViolationMessage"
+            );
 
             return new Constraint<NoPersistScope>
             {
@@ -114,9 +119,9 @@ namespace System.Activities.Statements
                                 Assertion = isConstraintSatisfied,
                                 Message = constraintViolationMessage,
                             },
-                        }
-                    }
-                }
+                        },
+                    },
+                },
             };
         }
 
@@ -135,19 +140,35 @@ namespace System.Activities.Statements
             {
                 Collection<RuntimeArgument> runtimeArguments = new Collection<RuntimeArgument>();
 
-                RuntimeArgument noPersistScopeArgument = new RuntimeArgument("NoPersistScope", typeof(NoPersistScope), ArgumentDirection.In);
+                RuntimeArgument noPersistScopeArgument = new RuntimeArgument(
+                    "NoPersistScope",
+                    typeof(NoPersistScope),
+                    ArgumentDirection.In
+                );
                 metadata.Bind(this.NoPersistScope, noPersistScopeArgument);
                 runtimeArguments.Add(noPersistScopeArgument);
 
-                RuntimeArgument descendantActivitiesArgument = new RuntimeArgument("DescendantActivities", typeof(IEnumerable<Activity>), ArgumentDirection.In);
+                RuntimeArgument descendantActivitiesArgument = new RuntimeArgument(
+                    "DescendantActivities",
+                    typeof(IEnumerable<Activity>),
+                    ArgumentDirection.In
+                );
                 metadata.Bind(this.DescendantActivities, descendantActivitiesArgument);
                 runtimeArguments.Add(descendantActivitiesArgument);
 
-                RuntimeArgument constraintViolationMessageArgument = new RuntimeArgument("ConstraintViolationMessage", typeof(string), ArgumentDirection.Out);
+                RuntimeArgument constraintViolationMessageArgument = new RuntimeArgument(
+                    "ConstraintViolationMessage",
+                    typeof(string),
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.ConstraintViolationMessage, constraintViolationMessageArgument);
                 runtimeArguments.Add(constraintViolationMessageArgument);
 
-                RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(bool), ArgumentDirection.Out);
+                RuntimeArgument resultArgument = new RuntimeArgument(
+                    "Result",
+                    typeof(bool),
+                    ArgumentDirection.Out
+                );
                 metadata.Bind(this.Result, resultArgument);
                 runtimeArguments.Add(resultArgument);
 
@@ -157,15 +178,24 @@ namespace System.Activities.Statements
             protected override bool Execute(CodeActivityContext context)
             {
                 IEnumerable<Activity> descendantActivities = this.DescendantActivities.Get(context);
-                Fx.Assert(descendantActivities != null, "this.DescendantActivities cannot evaluate to null.");
+                Fx.Assert(
+                    descendantActivities != null,
+                    "this.DescendantActivities cannot evaluate to null."
+                );
 
                 Persist firstPersist = descendantActivities.OfType<Persist>().FirstOrDefault();
                 if (firstPersist != null)
                 {
                     NoPersistScope noPersistScope = this.NoPersistScope.Get(context);
-                    Fx.Assert(noPersistScope != null, "this.NoPersistScope cannot evaluate to null.");
+                    Fx.Assert(
+                        noPersistScope != null,
+                        "this.NoPersistScope cannot evaluate to null."
+                    );
 
-                    string constraintViolationMessage = SR.NoPersistScopeCannotContainPersist(noPersistScope.DisplayName, firstPersist.DisplayName);
+                    string constraintViolationMessage = SR.NoPersistScopeCannotContainPersist(
+                        noPersistScope.DisplayName,
+                        firstPersist.DisplayName
+                    );
                     this.ConstraintViolationMessage.Set(context, constraintViolationMessage);
                     return false;
                 }

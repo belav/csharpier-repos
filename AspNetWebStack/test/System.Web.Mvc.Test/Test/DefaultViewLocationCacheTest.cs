@@ -34,8 +34,12 @@ namespace System.Web.Mvc.Test
         {
             // Assert
             Assert.Throws<InvalidOperationException>(
-                delegate { new DefaultViewLocationCache(new TimeSpan(-1, 0, 0)); },
-                "The number of ticks for the TimeSpan value must be greater than or equal to 0.");
+                delegate
+                {
+                    new DefaultViewLocationCache(new TimeSpan(-1, 0, 0));
+                },
+                "The number of ticks for the TimeSpan value must be greater than or equal to 0."
+            );
         }
 
         [Fact]
@@ -46,8 +50,16 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { string viewLocation = viewLocationCache.GetViewLocation(null /* httpContext */, "foo"); },
-                "httpContext");
+                delegate
+                {
+                    string viewLocation = viewLocationCache.GetViewLocation(
+                        null /* httpContext */
+                        ,
+                        "foo"
+                    );
+                },
+                "httpContext"
+            );
         }
 
         [Fact]
@@ -58,18 +70,38 @@ namespace System.Web.Mvc.Test
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
-                delegate { viewLocationCache.InsertViewLocation(null /* httpContext */, "foo", "fooPath"); },
-                "httpContext");
+                delegate
+                {
+                    viewLocationCache.InsertViewLocation(
+                        null /* httpContext */
+                        ,
+                        "foo",
+                        "fooPath"
+                    );
+                },
+                "httpContext"
+            );
         }
 
         [Fact]
         public void NullViewLocationCacheReturnsNullLocations()
         {
             // Act
-            DefaultViewLocationCache.Null.InsertViewLocation(null /* httpContext */, "foo", "fooPath");
+            DefaultViewLocationCache.Null.InsertViewLocation(
+                null /* httpContext */
+                ,
+                "foo",
+                "fooPath"
+            );
 
             // Assert
-            Assert.Null(DefaultViewLocationCache.Null.GetViewLocation(null /* httpContext */, "foo"));
+            Assert.Null(
+                DefaultViewLocationCache.Null.GetViewLocation(
+                    null /* httpContext */
+                    ,
+                    "foo"
+                )
+            );
         }
     }
 }

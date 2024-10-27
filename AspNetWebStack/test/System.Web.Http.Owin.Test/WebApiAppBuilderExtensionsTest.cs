@@ -23,8 +23,10 @@ namespace System.Web.Http.Owin
             using (HttpConfiguration configuration = CreateConfiguration())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => WebApiAppBuilderExtensions.UseWebApi(builder, configuration),
-                    "builder");
+                Assert.ThrowsArgumentNull(
+                    () => WebApiAppBuilderExtensions.UseWebApi(builder, configuration),
+                    "builder"
+                );
             }
         }
 
@@ -36,8 +38,10 @@ namespace System.Web.Http.Owin
             HttpConfiguration configuration = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => WebApiAppBuilderExtensions.UseWebApi(builder, configuration),
-                "configuration");
+            Assert.ThrowsArgumentNull(
+                () => WebApiAppBuilderExtensions.UseWebApi(builder, configuration),
+                "configuration"
+            );
         }
 
         [Fact]
@@ -49,7 +53,10 @@ namespace System.Web.Http.Owin
             using (HttpServer httpServer = CreateServer())
             {
                 // Act & Assert
-                Assert.ThrowsArgumentNull(() => WebApiAppBuilderExtensions.UseWebApi(builder, httpServer), "builder");
+                Assert.ThrowsArgumentNull(
+                    () => WebApiAppBuilderExtensions.UseWebApi(builder, httpServer),
+                    "builder"
+                );
             }
         }
 
@@ -61,7 +68,10 @@ namespace System.Web.Http.Owin
             HttpServer httpServer = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => WebApiAppBuilderExtensions.UseWebApi(builder, httpServer), "httpServer");
+            Assert.ThrowsArgumentNull(
+                () => WebApiAppBuilderExtensions.UseWebApi(builder, httpServer),
+                "httpServer"
+            );
         }
 
         [Fact]
@@ -70,9 +80,14 @@ namespace System.Web.Http.Owin
             var config = new HttpConfiguration();
             var appBuilder = new Mock<IAppBuilder>();
             appBuilder
-                .Setup(ab => ab.Use(
-                    typeof(HttpMessageHandlerAdapter),
-                    It.Is<HttpMessageHandlerOptions>((o) => ((HttpServer)o.MessageHandler).Configuration == config)))
+                .Setup(ab =>
+                    ab.Use(
+                        typeof(HttpMessageHandlerAdapter),
+                        It.Is<HttpMessageHandlerOptions>(
+                            (o) => ((HttpServer)o.MessageHandler).Configuration == config
+                        )
+                    )
+                )
                 .Returns(appBuilder.Object)
                 .Verifiable();
 
@@ -100,21 +115,29 @@ namespace System.Web.Http.Owin
                 CancellationToken expectedAppDisposing = tokenSource.Token;
                 IDictionary<string, object> properties = new Dictionary<string, object>
                 {
-                    { "host.OnAppDisposing", expectedAppDisposing }
+                    { "host.OnAppDisposing", expectedAppDisposing },
                 };
                 appBuilder.SetupGet(b => b.Properties).Returns(properties);
                 appBuilder
-                    .Setup(ab => ab.Use(
-                        typeof(HttpMessageHandlerAdapter),
-                        It.Is<HttpMessageHandlerOptions>((o) => ((HttpServer)o.MessageHandler).Configuration == config
-                            && o.BufferPolicySelector == bufferPolicySelector
-                            && o.AppDisposing == expectedAppDisposing)))
-                    .Callback<object, object[]>((i, args) =>
-                    {
-                        HttpMessageHandlerOptions options = (HttpMessageHandlerOptions)args[0];
-                        exceptionLogger = options.ExceptionLogger;
-                        exceptionHandler = options.ExceptionHandler;
-                    })
+                    .Setup(ab =>
+                        ab.Use(
+                            typeof(HttpMessageHandlerAdapter),
+                            It.Is<HttpMessageHandlerOptions>(
+                                (o) =>
+                                    ((HttpServer)o.MessageHandler).Configuration == config
+                                    && o.BufferPolicySelector == bufferPolicySelector
+                                    && o.AppDisposing == expectedAppDisposing
+                            )
+                        )
+                    )
+                    .Callback<object, object[]>(
+                        (i, args) =>
+                        {
+                            HttpMessageHandlerOptions options = (HttpMessageHandlerOptions)args[0];
+                            exceptionLogger = options.ExceptionLogger;
+                            exceptionHandler = options.ExceptionHandler;
+                        }
+                    )
                     .Returns(appBuilder.Object)
                     .Verifiable();
 
@@ -134,9 +157,12 @@ namespace System.Web.Http.Owin
             HttpServer httpServer = new Mock<HttpServer>().Object;
             Mock<IAppBuilder> appBuilderMock = new Mock<IAppBuilder>();
             appBuilderMock
-                .Setup(ab => ab.Use(
-                    typeof(HttpMessageHandlerAdapter),
-                    It.Is<HttpMessageHandlerOptions>((o) => o.MessageHandler == httpServer)))
+                .Setup(ab =>
+                    ab.Use(
+                        typeof(HttpMessageHandlerAdapter),
+                        It.Is<HttpMessageHandlerOptions>((o) => o.MessageHandler == httpServer)
+                    )
+                )
                 .Returns(appBuilderMock.Object)
                 .Verifiable();
 
@@ -155,7 +181,8 @@ namespace System.Web.Http.Owin
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
             {
                 HttpConfiguration config = new HttpConfiguration();
-                IHostBufferPolicySelector bufferPolicySelector = new Mock<IHostBufferPolicySelector>().Object;
+                IHostBufferPolicySelector bufferPolicySelector =
+                    new Mock<IHostBufferPolicySelector>().Object;
                 Mock<IExceptionLogger> loggerMock = new Mock<IExceptionLogger>();
                 Mock<IExceptionHandler> handlerMock = new Mock<IExceptionHandler>();
                 config.Services.Replace(typeof(IHostBufferPolicySelector), bufferPolicySelector);
@@ -168,21 +195,29 @@ namespace System.Web.Http.Owin
                 CancellationToken expectedAppDisposing = tokenSource.Token;
                 IDictionary<string, object> properties = new Dictionary<string, object>
                 {
-                    { "host.OnAppDisposing", expectedAppDisposing }
+                    { "host.OnAppDisposing", expectedAppDisposing },
                 };
                 appBuilderMock.SetupGet(b => b.Properties).Returns(properties);
                 appBuilderMock
-                    .Setup(ab => ab.Use(
-                        typeof(HttpMessageHandlerAdapter),
-                        It.Is<HttpMessageHandlerOptions>((o) => o.MessageHandler == httpServer
-                            && o.BufferPolicySelector == bufferPolicySelector
-                            && o.AppDisposing == expectedAppDisposing)))
-                    .Callback<object, object[]>((i, args) =>
-                    {
-                        HttpMessageHandlerOptions options = (HttpMessageHandlerOptions)args[0];
-                        exceptionLogger = options.ExceptionLogger;
-                        exceptionHandler = options.ExceptionHandler;
-                    })
+                    .Setup(ab =>
+                        ab.Use(
+                            typeof(HttpMessageHandlerAdapter),
+                            It.Is<HttpMessageHandlerOptions>(
+                                (o) =>
+                                    o.MessageHandler == httpServer
+                                    && o.BufferPolicySelector == bufferPolicySelector
+                                    && o.AppDisposing == expectedAppDisposing
+                            )
+                        )
+                    )
+                    .Callback<object, object[]>(
+                        (i, args) =>
+                        {
+                            HttpMessageHandlerOptions options = (HttpMessageHandlerOptions)args[0];
+                            exceptionLogger = options.ExceptionLogger;
+                            exceptionHandler = options.ExceptionHandler;
+                        }
+                    )
                     .Returns(appBuilderMock.Object)
                     .Verifiable();
 
@@ -204,7 +239,9 @@ namespace System.Web.Http.Owin
             using (CancellationTokenSource tokenSource = CreateCancellationTokenSource())
             {
                 CancellationToken expectedOnAppDisposing = tokenSource.Token;
-                IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(expectedOnAppDisposing);
+                IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(
+                    expectedOnAppDisposing
+                );
                 IAppBuilder builder = CreateStubAppBuilder(properties);
 
                 // Act
@@ -223,7 +260,9 @@ namespace System.Web.Http.Owin
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
+            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
+                builder
+            );
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);
@@ -233,11 +272,16 @@ namespace System.Web.Http.Owin
         public void GetOnAppDisposingProperty_IfPropertyIsAbsent_ReturnsCancellationTokenNone()
         {
             // Arrange
-            IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(onAppDisposing: null, hasOnAppDisposing: false);
+            IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(
+                onAppDisposing: null,
+                hasOnAppDisposing: false
+            );
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
+            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
+                builder
+            );
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);
@@ -248,44 +292,74 @@ namespace System.Web.Http.Owin
         {
             // Arrange
             object nonCancellationToken = new object();
-            IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(nonCancellationToken);
+            IDictionary<string, object> properties = CreateStubOnAppDisposingDictionary(
+                nonCancellationToken
+            );
             IAppBuilder builder = CreateStubAppBuilder(properties);
 
             // Act
-            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(builder);
+            CancellationToken onAppDisposing = WebApiAppBuilderExtensions.GetOnAppDisposingProperty(
+                builder
+            );
 
             // Assert
             Assert.Equal(CancellationToken.None, onAppDisposing);
         }
 
-        private static async Task AssertDelegatesToAsync(Mock<IExceptionHandler> expected, IExceptionHandler actual)
+        private static async Task AssertDelegatesToAsync(
+            Mock<IExceptionHandler> expected,
+            IExceptionHandler actual
+        )
         {
             Assert.NotNull(actual);
 
-            ExceptionHandlerContext context = new ExceptionHandlerContext(new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer));
+            ExceptionHandlerContext context = new ExceptionHandlerContext(
+                new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer)
+            );
             CancellationToken cancellationToken = CancellationToken.None;
 
             expected
-                .Setup((l) => l.HandleAsync(It.IsAny<ExceptionHandlerContext>(), It.IsAny<CancellationToken>()))
+                .Setup(
+                    (l) =>
+                        l.HandleAsync(
+                            It.IsAny<ExceptionHandlerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(CreateCanceledTask());
 
-            await Assert.ThrowsAsync<TaskCanceledException>(() => actual.HandleAsync(context, cancellationToken));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => actual.HandleAsync(context, cancellationToken)
+            );
 
             expected.Verify((l) => l.HandleAsync(context, cancellationToken), Times.Once());
         }
 
-        private static async Task AssertDelegatesToAsync(Mock<IExceptionLogger> expected, IExceptionLogger actual)
+        private static async Task AssertDelegatesToAsync(
+            Mock<IExceptionLogger> expected,
+            IExceptionLogger actual
+        )
         {
             Assert.NotNull(actual);
 
-            ExceptionLoggerContext context = new ExceptionLoggerContext(new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer));
+            ExceptionLoggerContext context = new ExceptionLoggerContext(
+                new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer)
+            );
             CancellationToken cancellationToken = CancellationToken.None;
 
             expected
-                .Setup((l) => l.LogAsync(It.IsAny<ExceptionLoggerContext>(), It.IsAny<CancellationToken>()))
+                .Setup(
+                    (l) =>
+                        l.LogAsync(
+                            It.IsAny<ExceptionLoggerContext>(),
+                            It.IsAny<CancellationToken>()
+                        )
+                )
                 .Returns(CreateCanceledTask());
 
-            await Assert.ThrowsAsync<TaskCanceledException>(() => actual.LogAsync(context, cancellationToken));
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => actual.LogAsync(context, cancellationToken)
+            );
 
             expected.Verify((l) => l.LogAsync(context, cancellationToken), Times.Once());
         }
@@ -324,15 +398,21 @@ namespace System.Web.Http.Owin
             return mock.Object;
         }
 
-        private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(object onAppDisposing)
+        private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(
+            object onAppDisposing
+        )
         {
             return CreateStubOnAppDisposingDictionary(onAppDisposing, hasOnAppDisposing: true);
         }
 
-        private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(object onAppDisposing, bool hasOnAppDisposing)
+        private static IDictionary<string, object> CreateStubOnAppDisposingDictionary(
+            object onAppDisposing,
+            bool hasOnAppDisposing
+        )
         {
             Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>();
-            mock.Setup(d => d.TryGetValue("host.OnAppDisposing", out onAppDisposing)).Returns(hasOnAppDisposing);
+            mock.Setup(d => d.TryGetValue("host.OnAppDisposing", out onAppDisposing))
+                .Returns(hasOnAppDisposing);
             return mock.Object;
         }
     }

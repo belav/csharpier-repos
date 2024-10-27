@@ -44,9 +44,7 @@ internal sealed class ProjectIdResolver
 
         _reporter.Verbose(SecretsHelpersResources.FormatMessage_Project_File_Path(projectFile));
 
-        configuration = !string.IsNullOrEmpty(configuration)
-            ? configuration
-            : DefaultConfig;
+        configuration = !string.IsNullOrEmpty(configuration) ? configuration : DefaultConfig;
 
         var outputFile = Path.Combine(Path.GetTempPath(), Path.GetRandomFileName());
         try
@@ -58,27 +56,24 @@ internal sealed class ProjectIdResolver
                 RedirectStandardError = true,
                 UseShellExecute = false,
                 ArgumentList =
-                    {
-                        "msbuild",
-                        projectFile,
-                        "/nologo",
-                        "/t:_ExtractUserSecretsMetadata", // defined in SecretManager.targets
-                        "/p:_UserSecretsMetadataFile=" + outputFile,
-                        "/p:Configuration=" + configuration,
-                        "/p:CustomAfterMicrosoftCommonTargets=" + _targetsFile,
-                        "/p:CustomAfterMicrosoftCommonCrossTargetingTargets=" + _targetsFile,
-                        "-verbosity:detailed",
-                    }
+                {
+                    "msbuild",
+                    projectFile,
+                    "/nologo",
+                    "/t:_ExtractUserSecretsMetadata", // defined in SecretManager.targets
+                    "/p:_UserSecretsMetadataFile=" + outputFile,
+                    "/p:Configuration=" + configuration,
+                    "/p:CustomAfterMicrosoftCommonTargets=" + _targetsFile,
+                    "/p:CustomAfterMicrosoftCommonCrossTargetingTargets=" + _targetsFile,
+                    "-verbosity:detailed",
+                },
             };
 
 #if DEBUG
             _reporter.Verbose($"Invoking '{psi.FileName} {psi.Arguments}'");
 #endif
 
-            using var process = new Process()
-            {
-                StartInfo = psi,
-            };
+            using var process = new Process() { StartInfo = psi };
 
             var outputBuilder = new StringBuilder();
             var errorBuilder = new StringBuilder();
@@ -106,7 +101,9 @@ internal sealed class ProjectIdResolver
                 _reporter.Verbose(outputBuilder.ToString());
                 _reporter.Verbose(errorBuilder.ToString());
                 _reporter.Error($"Exit code: {process.ExitCode}");
-                _reporter.Error(SecretsHelpersResources.FormatError_ProjectFailedToLoad(projectFile));
+                _reporter.Error(
+                    SecretsHelpersResources.FormatError_ProjectFailedToLoad(projectFile)
+                );
                 return null;
             }
 
@@ -122,7 +119,6 @@ internal sealed class ProjectIdResolver
                 _reporter.Error(SecretsHelpersResources.FormatError_ProjectMissingId(projectFile));
             }
             return id;
-
         }
         finally
         {
@@ -135,13 +131,15 @@ internal sealed class ProjectIdResolver
         var assemblyDir = Path.GetDirectoryName(typeof(ProjectIdResolver).Assembly.Location);
         var searchPaths = new[]
         {
-                Path.Combine(AppContext.BaseDirectory, "assets"),
-                Path.Combine(assemblyDir, "assets"),
-                AppContext.BaseDirectory,
-                assemblyDir,
-            };
+            Path.Combine(AppContext.BaseDirectory, "assets"),
+            Path.Combine(assemblyDir, "assets"),
+            AppContext.BaseDirectory,
+            assemblyDir,
+        };
 
-        var targetPath = searchPaths.Select(p => Path.Combine(p, "SecretManager.targets")).FirstOrDefault(File.Exists);
+        var targetPath = searchPaths
+            .Select(p => Path.Combine(p, "SecretManager.targets"))
+            .FirstOrDefault(File.Exists);
         if (targetPath == null)
         {
             _reporter.Error("Fatal error: could not find SecretManager.targets");

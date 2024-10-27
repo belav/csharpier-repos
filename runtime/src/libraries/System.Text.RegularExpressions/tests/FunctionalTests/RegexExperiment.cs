@@ -3,12 +3,12 @@
 
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Reflection;
+using System.Threading.Tasks;
 using Xunit;
 using Xunit.Abstractions;
-using System.Threading.Tasks;
-using System.Diagnostics.CodeAnalysis;
 
 namespace System.Text.RegularExpressions.Tests
 {
@@ -42,7 +42,10 @@ namespace System.Text.RegularExpressions.Tests
                 return;
             }
 
-            MethodInfo? genUnicode = typeof(Regex).GetMethod("GenerateUnicodeTables", BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo? genUnicode = typeof(Regex).GetMethod(
+                "GenerateUnicodeTables",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             // GenerateUnicodeTables is not available in Release build
             if (genUnicode is not null)
             {
@@ -97,9 +100,18 @@ namespace System.Text.RegularExpressions.Tests
                 ViewDGML(pattern, "NFA", nfa: true);
                 ViewDGML(pattern, "NFA_DotStar", nfa: true, addDotStar: true);
 
-                static void ViewDGML(string pattern, string name, bool nfa = false, bool addDotStar = false, int maxLabelLength = 20)
+                static void ViewDGML(
+                    string pattern,
+                    string name,
+                    bool nfa = false,
+                    bool addDotStar = false,
+                    int maxLabelLength = 20
+                )
                 {
-                    var regex = new Regex(pattern, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+                    var regex = new Regex(
+                        pattern,
+                        RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                    );
                     if (TryExplore(regex, nfa, addDotStar))
                     {
                         var sw = new StringWriter();
@@ -112,17 +124,22 @@ namespace System.Text.RegularExpressions.Tests
                     }
                 }
             }
-            catch (NotSupportedException e) when (e.Message.Contains("conditional"))
-            {
-            }
+            catch (NotSupportedException e) when (e.Message.Contains("conditional")) { }
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [InlineData(".*a+", new string[] { ".*a+" }, false)]
         [InlineData("ann", new string[] { "nna" }, true)]
-        public void TestDGMLGeneration(string pattern, string[] expectedDgmlFragments, bool exploreAsNFA)
+        public void TestDGMLGeneration(
+            string pattern,
+            string[] expectedDgmlFragments,
+            bool exploreAsNFA
+        )
         {
-            var re = new Regex(pattern, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+            var re = new Regex(
+                pattern,
+                RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+            );
             if (TryExplore(re, exploreAsNFA))
             {
                 StringWriter sw = new StringWriter();
@@ -139,12 +156,30 @@ namespace System.Text.RegularExpressions.Tests
             }
         }
 
-        private static bool TryExplore(Regex regex, bool exploreAsNFA, bool includeDotStarred = true, bool includeReverse = true, bool includeOriginal = true)
+        private static bool TryExplore(
+            Regex regex,
+            bool exploreAsNFA,
+            bool includeDotStarred = true,
+            bool includeReverse = true,
+            bool includeOriginal = true
+        )
         {
-            MethodInfo explore = regex.GetType().GetMethod("Explore", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo explore = regex
+                .GetType()
+                .GetMethod("Explore", BindingFlags.NonPublic | BindingFlags.Instance);
             if (explore is not null)
             {
-                explore.Invoke(regex, new object[] { includeDotStarred, includeReverse, includeOriginal, !exploreAsNFA, exploreAsNFA });
+                explore.Invoke(
+                    regex,
+                    new object[]
+                    {
+                        includeDotStarred,
+                        includeReverse,
+                        includeOriginal,
+                        !exploreAsNFA,
+                        exploreAsNFA,
+                    }
+                );
                 return true;
             }
 
@@ -153,7 +188,9 @@ namespace System.Text.RegularExpressions.Tests
 
         private static bool TrySaveDGML(Regex regex, TextWriter writer, int maxLabelLength)
         {
-            MethodInfo saveDgml = regex.GetType().GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo saveDgml = regex
+                .GetType()
+                .GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
             if (saveDgml is not null)
             {
                 saveDgml.Invoke(regex, new object[] { writer, maxLabelLength });
@@ -185,18 +222,29 @@ namespace System.Text.RegularExpressions.Tests
         /// <summary>Test random input generation correctness</summary>
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [MemberData(nameof(SampledMatchesMatchAsExpected_TestData))]
-        public async Task SampledMatchesMatchAsExpected(RegexEngine engine, string pattern, string input)
+        public async Task SampledMatchesMatchAsExpected(
+            RegexEngine engine,
+            string pattern,
+            string input
+        )
         {
             Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern);
             Assert.True(regex.IsMatch(input));
         }
 
-        private static IEnumerable<string> SampleMatchesViaReflection(Regex regex, int how_many_inputs, int randomseed)
+        private static IEnumerable<string> SampleMatchesViaReflection(
+            Regex regex,
+            int how_many_inputs,
+            int randomseed
+        )
         {
-            MethodInfo? gen = regex.GetType().GetMethod("SampleMatches", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo? gen = regex
+                .GetType()
+                .GetMethod("SampleMatches", BindingFlags.NonPublic | BindingFlags.Instance);
             if (gen is not null)
             {
-                return (IEnumerable<string>)gen.Invoke(regex, new object[] { how_many_inputs, randomseed });
+                return (IEnumerable<string>)
+                    gen.Invoke(regex, new object[] { how_many_inputs, randomseed });
             }
             else
             {

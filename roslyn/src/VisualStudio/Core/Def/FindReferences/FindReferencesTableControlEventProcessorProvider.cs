@@ -22,11 +22,14 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
     /// ourselves so that we can do things like navigate to MetadataAsSource.
     /// </summary>
     [Export(typeof(ITableControlEventProcessorProvider))]
-    [DataSourceType(StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier)]
+    [DataSourceType(
+        StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceSourceTypeIdentifier
+    )]
     [DataSource(StreamingFindUsagesPresenter.RoslynFindUsagesTableDataSourceIdentifier)]
     [Name(nameof(FindUsagesTableControlEventProcessorProvider))]
     [Order(Before = Priority.Default)]
-    internal class FindUsagesTableControlEventProcessorProvider : ITableControlEventProcessorProvider
+    internal class FindUsagesTableControlEventProcessorProvider
+        : ITableControlEventProcessorProvider
     {
         private readonly IUIThreadOperationExecutor _operationExecutor;
         private readonly IAsynchronousOperationListener _listener;
@@ -35,32 +38,44 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public FindUsagesTableControlEventProcessorProvider(
             IUIThreadOperationExecutor operationExecutor,
-            IAsynchronousOperationListenerProvider asyncProvider)
+            IAsynchronousOperationListenerProvider asyncProvider
+        )
         {
             _operationExecutor = operationExecutor;
             _listener = asyncProvider.GetListener(FeatureAttribute.FindReferences);
         }
 
-        public ITableControlEventProcessor GetAssociatedEventProcessor(IWpfTableControl tableControl)
-            => new TableControlEventProcessor(_operationExecutor, _listener);
+        public ITableControlEventProcessor GetAssociatedEventProcessor(
+            IWpfTableControl tableControl
+        ) => new TableControlEventProcessor(_operationExecutor, _listener);
 
         private class TableControlEventProcessor : TableControlEventProcessorBase
         {
             private readonly IUIThreadOperationExecutor _operationExecutor;
             private readonly IAsynchronousOperationListener _listener;
 
-            public TableControlEventProcessor(IUIThreadOperationExecutor operationExecutor, IAsynchronousOperationListener listener)
+            public TableControlEventProcessor(
+                IUIThreadOperationExecutor operationExecutor,
+                IAsynchronousOperationListener listener
+            )
             {
                 _operationExecutor = operationExecutor;
                 _listener = listener;
             }
 
-            public override void PreprocessNavigate(ITableEntryHandle entry, TableEntryNavigateEventArgs e)
+            public override void PreprocessNavigate(
+                ITableEntryHandle entry,
+                TableEntryNavigateEventArgs e
+            )
             {
-                var supportsNavigation = entry.Identity as ISupportsNavigation ??
-                    (entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item) ? item as ISupportsNavigation : null);
-                if (supportsNavigation != null &&
-                    supportsNavigation.CanNavigateTo())
+                var supportsNavigation =
+                    entry.Identity as ISupportsNavigation
+                    ?? (
+                        entry.TryGetValue(StreamingFindUsagesPresenter.SelfKeyName, out var item)
+                            ? item as ISupportsNavigation
+                            : null
+                    );
+                if (supportsNavigation != null && supportsNavigation.CanNavigateTo())
                 {
                     // Fire and forget
                     e.Handled = true;
@@ -70,20 +85,28 @@ namespace Microsoft.VisualStudio.LanguageServices.FindUsages
                 base.PreprocessNavigate(entry, e);
                 return;
 
-                async static Task ProcessNavigateAsync(
-                    ISupportsNavigation supportsNavigation, TableEntryNavigateEventArgs e,
+                static async Task ProcessNavigateAsync(
+                    ISupportsNavigation supportsNavigation,
+                    TableEntryNavigateEventArgs e,
                     IAsynchronousOperationListener listener,
-                    IUIThreadOperationExecutor operationExecutor)
+                    IUIThreadOperationExecutor operationExecutor
+                )
                 {
                     using var token = listener.BeginAsyncOperation(nameof(ProcessNavigateAsync));
                     using var context = operationExecutor.BeginExecute(
                         ServicesVSResources.IntelliSense,
                         EditorFeaturesResources.Navigating,
                         allowCancellation: true,
-                        showProgress: false);
+                        showProgress: false
+                    );
 
-                    var options = new NavigationOptions(PreferProvisionalTab: e.IsPreview, ActivateTab: e.ShouldActivate);
-                    await supportsNavigation.NavigateToAsync(options, context.UserCancellationToken).ConfigureAwait(false);
+                    var options = new NavigationOptions(
+                        PreferProvisionalTab: e.IsPreview,
+                        ActivateTab: e.ShouldActivate
+                    );
+                    await supportsNavigation
+                        .NavigateToAsync(options, context.UserCancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
         }

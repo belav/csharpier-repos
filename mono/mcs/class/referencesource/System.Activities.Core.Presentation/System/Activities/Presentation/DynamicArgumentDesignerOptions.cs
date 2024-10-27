@@ -14,11 +14,7 @@ namespace System.Activities.Presentation
         string argumentPrefix = DynamicArgumentDesigner.DefaultArgumentPrefix;
         string hintText;
 
-        public string Title
-        {
-            get;
-            set;
-        }
+        public string Title { get; set; }
 
         public string ArgumentPrefix
         {
@@ -26,11 +22,7 @@ namespace System.Activities.Presentation
             set { this.argumentPrefix = value; }
         }
 
-        internal bool HideDirection
-        {
-            get;
-            set;
-        }
+        internal bool HideDirection { get; set; }
 
         internal string HintText
         {

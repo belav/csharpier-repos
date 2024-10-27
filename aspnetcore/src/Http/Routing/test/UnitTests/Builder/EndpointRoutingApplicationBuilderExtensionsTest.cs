@@ -29,10 +29,11 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -46,10 +47,11 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "Unable to find the required services. " +
-            "Please add all the required services by calling 'IServiceCollection.AddRouting' " +
-            "inside the call to 'ConfigureServices(...)' in the application startup code.",
-            ex.Message);
+            "Unable to find the required services. "
+                + "Please add all the required services by calling 'IServiceCollection.AddRouting' "
+                + "inside the call to 'ConfigureServices(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -77,11 +79,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
     {
         // Arrange
         var endpoint = new RouteEndpoint(
-           TestConstants.EmptyRequestDelegate,
-           RoutePatternFactory.Parse("{*p}"),
-           0,
-           EndpointMetadataCollection.Empty,
-           "Test");
+            TestConstants.EmptyRequestDelegate,
+            RoutePatternFactory.Parse("{*p}"),
+            0,
+            EndpointMetadataCollection.Empty,
+            "Test"
+        );
 
         var services = CreateServices();
 
@@ -119,11 +122,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
 
         // Assert
         Assert.Equal(
-            "EndpointRoutingMiddleware matches endpoints setup by EndpointMiddleware and so must be added to the request " +
-            "execution pipeline before EndpointMiddleware. " +
-            "Please add EndpointRoutingMiddleware by calling 'IApplicationBuilder.UseRouting' " +
-            "inside the call to 'Configure(...)' in the application startup code.",
-            ex.Message);
+            "EndpointRoutingMiddleware matches endpoints setup by EndpointMiddleware and so must be added to the request "
+                + "execution pipeline before EndpointMiddleware. "
+                + "Please add EndpointRoutingMiddleware by calling 'IApplicationBuilder.UseRouting' "
+                + "inside the call to 'Configure(...)' in the application startup code.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -137,14 +141,17 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         app.UseRouting();
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(() => app.Map("/Test", b => b.UseEndpoints(endpoints => { })));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => app.Map("/Test", b => b.UseEndpoints(endpoints => { }))
+        );
 
         // Assert
         Assert.Equal(
-            "The EndpointRoutingMiddleware and EndpointMiddleware must be added to the same IApplicationBuilder instance. " +
-            "To use Endpoint Routing with 'Map(...)', make sure to call 'IApplicationBuilder.UseRouting' before " +
-            "'IApplicationBuilder.UseEndpoints' for each branch of the middleware pipeline.",
-            ex.Message);
+            "The EndpointRoutingMiddleware and EndpointMiddleware must be added to the same IApplicationBuilder instance. "
+                + "To use Endpoint Routing with 'Map(...)', make sure to call 'IApplicationBuilder.UseRouting' before "
+                + "'IApplicationBuilder.UseEndpoints' for each branch of the middleware pipeline.",
+            ex.Message
+        );
     }
 
     [Fact]
@@ -176,10 +183,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var matcherFactoryMock = new Mock<MatcherFactory>();
         matcherFactoryMock
             .Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>()))
-            .Callback((EndpointDataSource arg) =>
-            {
-                matcherEndpointDataSources.Add(arg);
-            })
+            .Callback(
+                (EndpointDataSource arg) =>
+                {
+                    matcherEndpointDataSources.Add(arg);
+                }
+            )
             .Returns(new TestMatcher(false));
 
         var services = CreateServices(matcherFactoryMock.Object);
@@ -210,22 +219,28 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         Assert.Equal(2, matcherEndpointDataSources.Count);
 
         // each UseRouter has its own data source collection
-        Assert.Collection(matcherEndpointDataSources[0].Endpoints,
+        Assert.Collection(
+            matcherEndpointDataSources[0].Endpoints,
             e => Assert.Equal("Test endpoint 1", e.DisplayName),
-            e => Assert.Equal("Test endpoint 2", e.DisplayName));
+            e => Assert.Equal("Test endpoint 2", e.DisplayName)
+        );
 
-        Assert.Collection(matcherEndpointDataSources[1].Endpoints,
+        Assert.Collection(
+            matcherEndpointDataSources[1].Endpoints,
             e => Assert.Equal("Test endpoint 3", e.DisplayName),
-            e => Assert.Equal("Test endpoint 4", e.DisplayName));
+            e => Assert.Equal("Test endpoint 4", e.DisplayName)
+        );
 
         var compositeEndpointBuilder = services.GetRequiredService<EndpointDataSource>();
 
         // Global collection has all endpoints
-        Assert.Collection(compositeEndpointBuilder.Endpoints,
+        Assert.Collection(
+            compositeEndpointBuilder.Endpoints,
             e => Assert.Equal("Test endpoint 1", e.DisplayName),
             e => Assert.Equal("Test endpoint 2", e.DisplayName),
             e => Assert.Equal("Test endpoint 3", e.DisplayName),
-            e => Assert.Equal("Test endpoint 4", e.DisplayName));
+            e => Assert.Equal("Test endpoint 4", e.DisplayName)
+        );
     }
 
     // Verifies that it's possible to use endpoints and map together.
@@ -237,10 +252,12 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var matcherFactoryMock = new Mock<MatcherFactory>();
         matcherFactoryMock
             .Setup(m => m.CreateMatcher(It.IsAny<EndpointDataSource>()))
-            .Callback((EndpointDataSource arg) =>
-            {
-                matcherEndpointDataSources.Add(arg);
-            })
+            .Callback(
+                (EndpointDataSource arg) =>
+                {
+                    matcherEndpointDataSources.Add(arg);
+                }
+            )
             .Returns(new TestMatcher(false));
 
         var services = CreateServices(matcherFactoryMock.Object);
@@ -250,15 +267,18 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         // Act
         app.UseRouting();
 
-        app.Map("/foo", b =>
-        {
-            b.UseRouting();
-            b.UseEndpoints(builder =>
+        app.Map(
+            "/foo",
+            b =>
             {
-                builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
-                builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
-            });
-        });
+                b.UseRouting();
+                b.UseEndpoints(builder =>
+                {
+                    builder.Map("/1", d => null).WithDisplayName("Test endpoint 1");
+                    builder.Map("/2", d => null).WithDisplayName("Test endpoint 2");
+                });
+            }
+        );
 
         app.UseEndpoints(builder =>
         {
@@ -270,28 +290,34 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         // with the datasource we want to test
         var requestDelegate = app.Build();
         requestDelegate(new DefaultHttpContext());
-        requestDelegate(new DefaultHttpContext() { Request = { Path = "/Foo", }, });
+        requestDelegate(new DefaultHttpContext() { Request = { Path = "/Foo" } });
 
         // Assert
         Assert.Equal(2, matcherEndpointDataSources.Count);
 
         // Each UseRouter has its own data source
-        Assert.Collection(matcherEndpointDataSources[1].Endpoints, // app.UseRouter
+        Assert.Collection(
+            matcherEndpointDataSources[1].Endpoints, // app.UseRouter
             e => Assert.Equal("Test endpoint 1", e.DisplayName),
-            e => Assert.Equal("Test endpoint 2", e.DisplayName));
+            e => Assert.Equal("Test endpoint 2", e.DisplayName)
+        );
 
-        Assert.Collection(matcherEndpointDataSources[0].Endpoints, // b.UseRouter
+        Assert.Collection(
+            matcherEndpointDataSources[0].Endpoints, // b.UseRouter
             e => Assert.Equal("Test endpoint 3", e.DisplayName),
-            e => Assert.Equal("Test endpoint 4", e.DisplayName));
+            e => Assert.Equal("Test endpoint 4", e.DisplayName)
+        );
 
         var compositeEndpointBuilder = services.GetRequiredService<EndpointDataSource>();
 
         // Global middleware has all endpoints
-        Assert.Collection(compositeEndpointBuilder.Endpoints,
+        Assert.Collection(
+            compositeEndpointBuilder.Endpoints,
             e => Assert.Equal("Test endpoint 1", e.DisplayName),
             e => Assert.Equal("Test endpoint 2", e.DisplayName),
             e => Assert.Equal("Test endpoint 3", e.DisplayName),
-            e => Assert.Equal("Test endpoint 4", e.DisplayName));
+            e => Assert.Equal("Test endpoint 4", e.DisplayName)
+        );
     }
 
     [Fact]
@@ -317,8 +343,10 @@ public class EndpointRoutingApplicationBuilderExtensionsTest
         var requestDelegate = app.Build();
 
         var endpointDataSource = Assert.Single(mockRouteBuilder.Object.DataSources);
-        Assert.Collection(endpointDataSource.Endpoints,
-            e => Assert.Equal("Test endpoint 1", e.DisplayName));
+        Assert.Collection(
+            endpointDataSource.Endpoints,
+            e => Assert.Equal("Test endpoint 1", e.DisplayName)
+        );
 
         var routeOptions = app.ApplicationServices.GetRequiredService<IOptions<RouteOptions>>();
         Assert.Equal(mockRouteBuilder.Object.DataSources, routeOptions.Value.EndpointDataSources);

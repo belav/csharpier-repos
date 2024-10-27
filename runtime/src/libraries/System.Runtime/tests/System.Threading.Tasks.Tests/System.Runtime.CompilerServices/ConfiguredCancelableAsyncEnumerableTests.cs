@@ -34,7 +34,9 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void Default_WithCancellation_ConfigureAwait_NoThrow()
         {
-            ConfiguredCancelableAsyncEnumerable<int> e = ((IAsyncEnumerable<int>)null).WithCancellation(default);
+            ConfiguredCancelableAsyncEnumerable<int> e = (
+                (IAsyncEnumerable<int>)null
+            ).WithCancellation(default);
             e = e.ConfigureAwait(false);
             e = e.WithCancellation(default);
             Assert.Throws<NullReferenceException>(() => e.GetAsyncEnumerator());
@@ -43,7 +45,9 @@ namespace System.Runtime.CompilerServices.Tests
         [Fact]
         public void Default_ConfigureAwait_WithCancellation_NoThrow()
         {
-            ConfiguredCancelableAsyncEnumerable<int> e = ((IAsyncEnumerable<int>)null).ConfigureAwait(false);
+            ConfiguredCancelableAsyncEnumerable<int> e = (
+                (IAsyncEnumerable<int>)null
+            ).ConfigureAwait(false);
             e = e.WithCancellation(default);
             e = e.ConfigureAwait(false);
             Assert.Throws<NullReferenceException>(() => e.GetAsyncEnumerator());
@@ -52,59 +56,112 @@ namespace System.Runtime.CompilerServices.Tests
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void ConfigureAwait_AwaitMoveNextAsync_FlagsSetAppropriately(bool continueOnCapturedContext)
+        public void ConfigureAwait_AwaitMoveNextAsync_FlagsSetAppropriately(
+            bool continueOnCapturedContext
+        )
         {
             TrackFlagsAsyncEnumerable enumerable;
             CancellationToken token = new CancellationTokenSource().Token;
 
             // Single ConfigureAwait call
             enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
-            enumerable.ConfigureAwait(continueOnCapturedContext).GetAsyncEnumerator().MoveNextAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            enumerable
+                .ConfigureAwait(continueOnCapturedContext)
+                .GetAsyncEnumerator()
+                .MoveNextAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                enumerable.Flags);
+                continueOnCapturedContext
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
+                enumerable.Flags
+            );
 
             // Unnecessary multiple calls; only last one is used
             enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
-            enumerable.ConfigureAwait(!continueOnCapturedContext).ConfigureAwait(continueOnCapturedContext).GetAsyncEnumerator().MoveNextAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            enumerable
+                .ConfigureAwait(!continueOnCapturedContext)
+                .ConfigureAwait(continueOnCapturedContext)
+                .GetAsyncEnumerator()
+                .MoveNextAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                enumerable.Flags);
+                continueOnCapturedContext
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
+                enumerable.Flags
+            );
 
             // After WithCancellation
             enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
-            enumerable.WithCancellation(token).ConfigureAwait(continueOnCapturedContext).GetAsyncEnumerator().MoveNextAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            enumerable
+                .WithCancellation(token)
+                .ConfigureAwait(continueOnCapturedContext)
+                .GetAsyncEnumerator()
+                .MoveNextAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                enumerable.Flags);
+                continueOnCapturedContext
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
+                enumerable.Flags
+            );
 
             // Before WithCancellation
             enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
-            enumerable.ConfigureAwait(continueOnCapturedContext).WithCancellation(token).GetAsyncEnumerator().MoveNextAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            enumerable
+                .ConfigureAwait(continueOnCapturedContext)
+                .WithCancellation(token)
+                .GetAsyncEnumerator()
+                .MoveNextAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                enumerable.Flags);
+                continueOnCapturedContext
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
+                enumerable.Flags
+            );
         }
 
         [Theory]
         [InlineData(false)]
         [InlineData(true)]
-        public void ConfigureAwait_AwaitDisposeAsync_FlagsSetAppropriately(bool continueOnCapturedContext)
+        public void ConfigureAwait_AwaitDisposeAsync_FlagsSetAppropriately(
+            bool continueOnCapturedContext
+        )
         {
             var enumerable = new TrackFlagsAsyncEnumerable() { Flags = 0 };
-            enumerable.ConfigureAwait(continueOnCapturedContext).GetAsyncEnumerator().DisposeAsync().GetAwaiter().UnsafeOnCompleted(() => { });
+            enumerable
+                .ConfigureAwait(continueOnCapturedContext)
+                .GetAsyncEnumerator()
+                .DisposeAsync()
+                .GetAwaiter()
+                .UnsafeOnCompleted(() => { });
             Assert.Equal(
-                continueOnCapturedContext ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext : ValueTaskSourceOnCompletedFlags.None,
-                enumerable.Flags);
+                continueOnCapturedContext
+                    ? ValueTaskSourceOnCompletedFlags.UseSchedulingContext
+                    : ValueTaskSourceOnCompletedFlags.None,
+                enumerable.Flags
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public async Task CanBeEnumeratedWithStandardPattern()
         {
-            IAsyncEnumerable<int> asyncEnumerable = new EnumerableWithDelayToAsyncEnumerable<int>(Enumerable.Range(1, 10), 1);
+            IAsyncEnumerable<int> asyncEnumerable = new EnumerableWithDelayToAsyncEnumerable<int>(
+                Enumerable.Range(1, 10),
+                1
+            );
             int sum = 0;
 
-            ConfiguredCancelableAsyncEnumerable<int>.Enumerator e = asyncEnumerable.ConfigureAwait(false).WithCancellation(new CancellationTokenSource().Token).GetAsyncEnumerator();
+            ConfiguredCancelableAsyncEnumerable<int>.Enumerator e = asyncEnumerable
+                .ConfigureAwait(false)
+                .WithCancellation(new CancellationTokenSource().Token)
+                .GetAsyncEnumerator();
             try
             {
                 while (await e.MoveNextAsync())
@@ -163,30 +220,48 @@ namespace System.Runtime.CompilerServices.Tests
             public ValueTaskSourceOnCompletedFlags Flags;
             public CancellationToken CancellationToken;
 
-            public IAsyncEnumerator<int> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+            public IAsyncEnumerator<int> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            )
             {
                 CancellationToken = cancellationToken;
                 return new Enumerator(this);
             }
 
-            private sealed class Enumerator : IAsyncEnumerator<int>, IValueTaskSource<bool>, IValueTaskSource
+            private sealed class Enumerator
+                : IAsyncEnumerator<int>,
+                    IValueTaskSource<bool>,
+                    IValueTaskSource
             {
                 private readonly TrackFlagsAsyncEnumerable _enumerable;
 
                 public Enumerator(TrackFlagsAsyncEnumerable enumerable) => _enumerable = enumerable;
 
                 public ValueTask<bool> MoveNextAsync() => new ValueTask<bool>(this, 0);
+
                 public int Current => throw new NotImplementedException();
+
                 public ValueTask DisposeAsync() => new ValueTask(this, 0);
 
-                public void OnCompleted(Action<object> continuation, object state, short token, ValueTaskSourceOnCompletedFlags flags) => _enumerable.Flags = flags;
-                public ValueTaskSourceStatus GetStatus(short token) => ValueTaskSourceStatus.Pending;
+                public void OnCompleted(
+                    Action<object> continuation,
+                    object state,
+                    short token,
+                    ValueTaskSourceOnCompletedFlags flags
+                ) => _enumerable.Flags = flags;
+
+                public ValueTaskSourceStatus GetStatus(short token) =>
+                    ValueTaskSourceStatus.Pending;
+
                 public bool GetResult(short token) => throw new NotImplementedException();
+
                 void IValueTaskSource.GetResult(short token) => throw new NotImplementedException();
             }
         }
 
-        private sealed class EnumerableWithDelayToAsyncEnumerable<T> : IAsyncEnumerable<T>, IAsyncEnumerator<T>
+        private sealed class EnumerableWithDelayToAsyncEnumerable<T>
+            : IAsyncEnumerable<T>,
+                IAsyncEnumerator<T>
         {
             private readonly int _delayMs;
             private readonly IEnumerable<T> _enumerable;
@@ -198,7 +273,9 @@ namespace System.Runtime.CompilerServices.Tests
                 _delayMs = delayMs;
             }
 
-            public IAsyncEnumerator<T> GetAsyncEnumerator(CancellationToken cancellationToken = default)
+            public IAsyncEnumerator<T> GetAsyncEnumerator(
+                CancellationToken cancellationToken = default
+            )
             {
                 _enumerator = _enumerable.GetEnumerator();
                 return this;

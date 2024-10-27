@@ -28,6 +28,7 @@ namespace System.Reflection.TypeLoading
         public abstract override string ToString();
 
         public sealed override Type DeclaringType => GetRoDeclaringType();
+
         internal RoInstantiationProviderType GetRoDeclaringType() => _declaringType;
 
         public sealed override Type ReflectedType => _reflectedType;
@@ -40,27 +41,51 @@ namespace System.Reflection.TypeLoading
         internal abstract RoModule GetRoModule();
 
         public abstract override int MetadataToken { get; }
-        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) => this.HasSameMetadataDefinitionAsCore(other);
 
-        public sealed override IList<CustomAttributeData> GetCustomAttributesData() => CustomAttributes.ToReadOnlyCollection();
+        public sealed override bool HasSameMetadataDefinitionAs(MemberInfo other) =>
+            this.HasSameMetadataDefinitionAsCore(other);
+
+        public sealed override IList<CustomAttributeData> GetCustomAttributesData() =>
+            CustomAttributes.ToReadOnlyCollection();
+
         public abstract override IEnumerable<CustomAttributeData> CustomAttributes { get; }
 
-        public sealed override EventAttributes Attributes => (_lazyEventAttributes == EventAttributesSentinel) ? (_lazyEventAttributes = ComputeAttributes()) : _lazyEventAttributes;
+        public sealed override EventAttributes Attributes =>
+            (_lazyEventAttributes == EventAttributesSentinel)
+                ? (_lazyEventAttributes = ComputeAttributes())
+                : _lazyEventAttributes;
         protected abstract EventAttributes ComputeAttributes();
         private const EventAttributes EventAttributesSentinel = (EventAttributes)(-1);
         private volatile EventAttributes _lazyEventAttributes = EventAttributesSentinel;
 
-        public sealed override Type EventHandlerType => _lazyEventType ??= ComputeEventHandlerType();
+        public sealed override Type EventHandlerType =>
+            _lazyEventType ??= ComputeEventHandlerType();
         protected abstract Type ComputeEventHandlerType();
         private volatile Type? _lazyEventType;
 
-        private RoMethod? GetRoAddMethod() => (_lazyAdder == Sentinels.RoMethod) ? (_lazyAdder = ComputeEventAddMethod()?.FilterInheritedAccessor()) : _lazyAdder;
-        private RoMethod? GetRoRemoveMethod() => (_lazyRemover == Sentinels.RoMethod) ? (_lazyRemover = ComputeEventRemoveMethod()?.FilterInheritedAccessor()) : _lazyRemover;
-        private RoMethod? GetRoRaiseMethod() => (_lazyRaiser == Sentinels.RoMethod) ? (_lazyRaiser = ComputeEventRaiseMethod()?.FilterInheritedAccessor()) : _lazyRaiser;
+        private RoMethod? GetRoAddMethod() =>
+            (_lazyAdder == Sentinels.RoMethod)
+                ? (_lazyAdder = ComputeEventAddMethod()?.FilterInheritedAccessor())
+                : _lazyAdder;
 
-        public sealed override MethodInfo? GetAddMethod(bool nonPublic) => GetRoAddMethod()?.FilterAccessor(nonPublic);
-        public sealed override MethodInfo? GetRemoveMethod(bool nonPublic) => GetRoRemoveMethod()?.FilterAccessor(nonPublic);
-        public sealed override MethodInfo? GetRaiseMethod(bool nonPublic) => GetRoRaiseMethod()?.FilterAccessor(nonPublic);
+        private RoMethod? GetRoRemoveMethod() =>
+            (_lazyRemover == Sentinels.RoMethod)
+                ? (_lazyRemover = ComputeEventRemoveMethod()?.FilterInheritedAccessor())
+                : _lazyRemover;
+
+        private RoMethod? GetRoRaiseMethod() =>
+            (_lazyRaiser == Sentinels.RoMethod)
+                ? (_lazyRaiser = ComputeEventRaiseMethod()?.FilterInheritedAccessor())
+                : _lazyRaiser;
+
+        public sealed override MethodInfo? GetAddMethod(bool nonPublic) =>
+            GetRoAddMethod()?.FilterAccessor(nonPublic);
+
+        public sealed override MethodInfo? GetRemoveMethod(bool nonPublic) =>
+            GetRoRemoveMethod()?.FilterAccessor(nonPublic);
+
+        public sealed override MethodInfo? GetRaiseMethod(bool nonPublic) =>
+            GetRoRaiseMethod()?.FilterAccessor(nonPublic);
 
         protected abstract RoMethod? ComputeEventAddMethod();
         protected abstract RoMethod? ComputeEventRemoveMethod();
@@ -72,14 +97,24 @@ namespace System.Reflection.TypeLoading
 
         public abstract override MethodInfo[] GetOtherMethods(bool nonPublic);
 
-        public sealed override bool IsMulticast => Loader.GetCoreType(CoreType.MulticastDelegate).IsAssignableFrom(EventHandlerType);
+        public sealed override bool IsMulticast =>
+            Loader.GetCoreType(CoreType.MulticastDelegate).IsAssignableFrom(EventHandlerType);
 
         // Operations that are not allowed for Reflection-only.
-        public sealed override object[] GetCustomAttributes(bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override bool IsDefined(Type attributeType, bool inherit) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override void AddEventHandler(object? target, Delegate? handler) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
-        public sealed override void RemoveEventHandler(object? target, Delegate? handler) => throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+        public sealed override object[] GetCustomAttributes(bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override object[] GetCustomAttributes(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override bool IsDefined(Type attributeType, bool inherit) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override void AddEventHandler(object? target, Delegate? handler) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
+
+        public sealed override void RemoveEventHandler(object? target, Delegate? handler) =>
+            throw new InvalidOperationException(SR.Arg_InvalidOperation_Reflection);
 
         private MetadataLoadContext Loader => GetRoModule().Loader;
         internal TypeContext TypeContext => _declaringType.Instantiation.ToTypeContext();

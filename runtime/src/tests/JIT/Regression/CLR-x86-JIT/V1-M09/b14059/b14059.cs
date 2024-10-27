@@ -8,6 +8,7 @@ using Xunit;
 public class test
 {
     static byte by = 13;
+
     [Fact]
     public static void TestEntryPoint()
     {

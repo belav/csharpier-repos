@@ -4,7 +4,5 @@
 
 namespace Microsoft.CodeAnalysis.Completion
 {
-    internal abstract class AbstractDefaultArgumentProvider : ArgumentProvider
-    {
-    }
+    internal abstract class AbstractDefaultArgumentProvider : ArgumentProvider { }
 }

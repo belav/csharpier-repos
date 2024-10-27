@@ -1,15 +1,15 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="UDPClient.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Net.Sockets
 {
+    using System.Diagnostics.CodeAnalysis;
+    using System.Security.Permissions;
     using System.Threading;
     using System.Threading.Tasks;
-    using System.Security.Permissions;
-    using System.Diagnostics.CodeAnalysis;
 
     public struct UdpReceiveResult : IEquatable<UdpReceiveResult>
     {
@@ -32,27 +32,26 @@ namespace System.Net.Sockets
             m_remoteEndPoint = remoteEndPoint;
         }
 
-        [SuppressMessage("Microsoft.Performance","CA1819:PropertiesShouldNotReturnArrays",
-            Justification="This is merely strongly type data aggregation")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1819:PropertiesShouldNotReturnArrays",
+            Justification = "This is merely strongly type data aggregation"
+        )]
         public byte[] Buffer
         {
-            get
-            {
-                return m_buffer;
-            }
+            get { return m_buffer; }
         }
 
         public IPEndPoint RemoteEndPoint
         {
-            get
-            {
-                return m_remoteEndPoint;
-            }
+            get { return m_remoteEndPoint; }
         }
 
         public override int GetHashCode()
         {
-            return (m_buffer != null) ? (m_buffer.GetHashCode() ^ m_remoteEndPoint.GetHashCode()) : 0;
+            return (m_buffer != null)
+                ? (m_buffer.GetHashCode() ^ m_remoteEndPoint.GetHashCode())
+                : 0;
         }
 
         public override bool Equals(object obj)
@@ -67,7 +66,8 @@ namespace System.Net.Sockets
 
         public bool Equals(UdpReceiveResult other)
         {
-            return object.Equals(this.m_buffer, other.m_buffer) && object.Equals(this.m_remoteEndPoint, other.m_remoteEndPoint);
+            return object.Equals(this.m_buffer, other.m_buffer)
+                && object.Equals(this.m_remoteEndPoint, other.m_remoteEndPoint);
         }
 
         public static bool operator ==(UdpReceiveResult left, UdpReceiveResult right)
@@ -80,6 +80,4 @@ namespace System.Net.Sockets
             return !left.Equals(right);
         }
     }
-
 }
-

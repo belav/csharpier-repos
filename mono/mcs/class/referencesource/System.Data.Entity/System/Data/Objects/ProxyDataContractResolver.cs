@@ -9,9 +9,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
-using System.Runtime.Serialization;
 
 namespace System.Data.Objects
 {
@@ -22,18 +22,29 @@ namespace System.Data.Objects
     public class ProxyDataContractResolver : DataContractResolver
     {
         private XsdDataContractExporter _exporter = new XsdDataContractExporter();
-        
-        public override Type ResolveName(string typeName, string typeNamespace, Type declaredType, DataContractResolver knownTypeResolver)
+
+        public override Type ResolveName(
+            string typeName,
+            string typeNamespace,
+            Type declaredType,
+            DataContractResolver knownTypeResolver
+        )
         {
             EntityUtil.CheckStringArgument(typeName, "typeName");
             EntityUtil.CheckStringArgument(typeNamespace, "typeNamespace");
             EntityUtil.CheckArgumentNull(declaredType, "declaredType");
             EntityUtil.CheckArgumentNull(knownTypeResolver, "knownTypeResolver");
 
-            return knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType ,null);
+            return knownTypeResolver.ResolveName(typeName, typeNamespace, declaredType, null);
         }
 
-        public override bool TryResolveType(Type dataContractType, Type declaredType, DataContractResolver knownTypeResolver, out System.Xml.XmlDictionaryString typeName, out System.Xml.XmlDictionaryString typeNamespace)
+        public override bool TryResolveType(
+            Type dataContractType,
+            Type declaredType,
+            DataContractResolver knownTypeResolver,
+            out System.Xml.XmlDictionaryString typeName,
+            out System.Xml.XmlDictionaryString typeNamespace
+        )
         {
             EntityUtil.CheckArgumentNull(dataContractType, "dataContractType");
             EntityUtil.CheckArgumentNull(declaredType, "declaredType");
@@ -49,11 +60,17 @@ namespace System.Data.Objects
                 typeNamespace = new XmlDictionaryString(dictionary, qualifiedName.Namespace, 1);
                 return true;
             }
-            else 
+            else
             {
                 // Type was not a proxy type, so do the default
-                return knownTypeResolver.TryResolveType(dataContractType, declaredType, null, out typeName, out typeNamespace);
-            } 
+                return knownTypeResolver.TryResolveType(
+                    dataContractType,
+                    declaredType,
+                    null,
+                    out typeName,
+                    out typeNamespace
+                );
+            }
         }
     }
 }

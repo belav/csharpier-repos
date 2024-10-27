@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// <summary>
 /// Skips a test when the value of an environment variable matches any of the supplied values.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = true
+)]
 public class EnvironmentVariableSkipConditionAttribute : Attribute, ITestCondition
 {
     private readonly string _variableName;
@@ -24,15 +27,14 @@ public class EnvironmentVariableSkipConditionAttribute : Attribute, ITestConditi
     /// <param name="variableName">Name of the environment variable.</param>
     /// <param name="values">Value(s) of the environment variable to match for the test to be skipped</param>
     public EnvironmentVariableSkipConditionAttribute(string variableName, params string[] values)
-        : this(new EnvironmentVariable(), variableName, values)
-    {
-    }
+        : this(new EnvironmentVariable(), variableName, values) { }
 
     // To enable unit testing
     internal EnvironmentVariableSkipConditionAttribute(
         IEnvironmentVariable environmentVariable,
         string variableName,
-        params string[] values)
+        params string[] values
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(environmentVariable);
         ArgumentNullThrowHelper.ThrowIfNull(variableName);
@@ -53,7 +55,9 @@ public class EnvironmentVariableSkipConditionAttribute : Attribute, ITestConditi
         get
         {
             _currentValue = _environmentVariable.Get(_variableName);
-            var hasMatched = _values.Any(value => string.Equals(value, _currentValue, StringComparison.OrdinalIgnoreCase));
+            var hasMatched = _values.Any(value =>
+                string.Equals(value, _currentValue, StringComparison.OrdinalIgnoreCase)
+            );
 
             if (RunOnMatch)
             {
@@ -71,8 +75,8 @@ public class EnvironmentVariableSkipConditionAttribute : Attribute, ITestConditi
         get
         {
             var value = _currentValue ?? "(null)";
-            return $"Test skipped on environment variable with name '{_variableName}' and value '{value}' " +
-                $"for the '{nameof(RunOnMatch)}' value of '{RunOnMatch}'.";
+            return $"Test skipped on environment variable with name '{_variableName}' and value '{value}' "
+                + $"for the '{nameof(RunOnMatch)}' value of '{RunOnMatch}'.";
         }
     }
 

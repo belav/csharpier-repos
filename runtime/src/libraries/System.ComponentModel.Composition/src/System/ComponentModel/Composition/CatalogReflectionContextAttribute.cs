@@ -32,15 +32,22 @@ namespace System.ComponentModel.Composition
             ReflectionContext reflectionContext;
             try
             {
-                reflectionContext = (ReflectionContext)Activator.CreateInstance(_reflectionContextType)!;
+                reflectionContext = (ReflectionContext)
+                    Activator.CreateInstance(_reflectionContextType)!;
             }
             catch (InvalidCastException invalidCastException)
             {
-                throw new InvalidOperationException(SR.ReflectionContext_Type_Required, invalidCastException);
+                throw new InvalidOperationException(
+                    SR.ReflectionContext_Type_Required,
+                    invalidCastException
+                );
             }
             catch (MissingMethodException missingMethodException)
             {
-                throw new MissingMethodException(SR.ReflectionContext_Requires_DefaultConstructor, missingMethodException);
+                throw new MissingMethodException(
+                    SR.ReflectionContext_Requires_DefaultConstructor,
+                    missingMethodException
+                );
             }
 
             return reflectionContext;

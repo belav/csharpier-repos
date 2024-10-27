@@ -10,12 +10,12 @@ using Microsoft.CodeAnalysis.Host.Mef;
 namespace Microsoft.CodeAnalysis.CSharp.AddAccessibilityModifiers
 {
     [ExportLanguageService(typeof(IAddAccessibilityModifiersService), LanguageNames.CSharp), Shared]
-    internal class CSharpAddAccessibilityModifiersService : CSharpAddAccessibilityModifiers, IAddAccessibilityModifiersService
+    internal class CSharpAddAccessibilityModifiersService
+        : CSharpAddAccessibilityModifiers,
+            IAddAccessibilityModifiersService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpAddAccessibilityModifiersService()
-        {
-        }
+        public CSharpAddAccessibilityModifiersService() { }
     }
 }

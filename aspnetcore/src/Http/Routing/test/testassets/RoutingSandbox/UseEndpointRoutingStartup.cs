@@ -32,13 +32,20 @@ public class UseEndpointRoutingStartup
                 "/",
                 (httpContext) =>
                 {
-                    var dataSource = httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                    var dataSource =
+                        httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
 
                     var sb = new StringBuilder();
                     sb.AppendLine("Endpoints:");
-                    foreach (var endpoint in dataSource.Endpoints.OfType<RouteEndpoint>().OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase))
+                    foreach (
+                        var endpoint in dataSource
+                            .Endpoints.OfType<RouteEndpoint>()
+                            .OrderBy(e => e.RoutePattern.RawText, StringComparer.OrdinalIgnoreCase)
+                    )
                     {
-                        sb.AppendLine(FormattableString.Invariant($"- {endpoint.RoutePattern.RawText}"));
+                        sb.AppendLine(
+                            FormattableString.Invariant($"- {endpoint.RoutePattern.RawText}")
+                        );
                         foreach (var metadata in endpoint.Metadata)
                         {
                             sb.AppendLine("    " + metadata);
@@ -49,7 +56,8 @@ public class UseEndpointRoutingStartup
                     response.StatusCode = 200;
                     response.ContentType = "text/plain";
                     return response.WriteAsync(sb.ToString());
-                });
+                }
+            );
             endpoints.MapGet(
                 "/plaintext",
                 (httpContext) =>
@@ -60,20 +68,33 @@ public class UseEndpointRoutingStartup
                     response.ContentType = "text/plain";
                     response.ContentLength = payloadLength;
                     return response.Body.WriteAsync(_plainTextPayload, 0, payloadLength);
-                });
-            endpoints.MapGet(
-                "/graph",
-                (httpContext) =>
-                {
-                    using (var writer = new StreamWriter(httpContext.Response.Body, Encoding.UTF8, 1024, leaveOpen: true))
+                }
+            );
+            endpoints
+                .MapGet(
+                    "/graph",
+                    (httpContext) =>
                     {
-                        var graphWriter = httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
-                        var dataSource = httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
-                        graphWriter.Write(dataSource, writer);
-                    }
+                        using (
+                            var writer = new StreamWriter(
+                                httpContext.Response.Body,
+                                Encoding.UTF8,
+                                1024,
+                                leaveOpen: true
+                            )
+                        )
+                        {
+                            var graphWriter =
+                                httpContext.RequestServices.GetRequiredService<DfaGraphWriter>();
+                            var dataSource =
+                                httpContext.RequestServices.GetRequiredService<EndpointDataSource>();
+                            graphWriter.Write(dataSource, writer);
+                        }
 
-                    return Task.CompletedTask;
-                }).WithDisplayName("DFA Graph");
+                        return Task.CompletedTask;
+                    }
+                )
+                .WithDisplayName("DFA Graph");
 
             endpoints.MapGet("/attributes", HandlerWithAttributes);
 
@@ -81,15 +102,28 @@ public class UseEndpointRoutingStartup
 
             endpoints.MapFramework(frameworkBuilder =>
             {
-                frameworkBuilder.AddPattern("/transform/{hub:slugify=TestHub}/{method:slugify=TestMethod}");
+                frameworkBuilder.AddPattern(
+                    "/transform/{hub:slugify=TestHub}/{method:slugify=TestMethod}"
+                );
                 frameworkBuilder.AddPattern("/{hub}/{method=TestMethod}");
 
-                frameworkBuilder.AddHubMethod("TestHub", "TestMethod", context => context.Response.WriteAsync("TestMethod!"));
-                frameworkBuilder.AddHubMethod("Login", "Authenticate", context => context.Response.WriteAsync("Authenticate!"));
-                frameworkBuilder.AddHubMethod("Login", "Logout", context => context.Response.WriteAsync("Logout!"));
+                frameworkBuilder.AddHubMethod(
+                    "TestHub",
+                    "TestMethod",
+                    context => context.Response.WriteAsync("TestMethod!")
+                );
+                frameworkBuilder.AddHubMethod(
+                    "Login",
+                    "Authenticate",
+                    context => context.Response.WriteAsync("Authenticate!")
+                );
+                frameworkBuilder.AddHubMethod(
+                    "Login",
+                    "Logout",
+                    context => context.Response.WriteAsync("Logout!")
+                );
             });
         });
-
     }
 
     [Authorize]
@@ -104,10 +138,7 @@ public class UseEndpointRoutingStartup
         return context.Response.WriteAsync("I have a method metadata attribute");
     }
 
-    private class AuthorizeAttribute : Attribute
-    {
-
-    }
+    private class AuthorizeAttribute : Attribute { }
 
     private class HttpGetAttribute : Attribute, IHttpMethodMetadata
     {

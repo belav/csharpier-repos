@@ -28,16 +28,16 @@
 //
 
 
-namespace System.Web.Caching {
-
-	public enum CacheItemPriority {
-		Low = 1,
-		BelowNormal,
-		Normal,
-		Default = Normal,
-		AboveNormal,
-		High,
-		NotRemovable
-	}
+namespace System.Web.Caching
+{
+    public enum CacheItemPriority
+    {
+        Low = 1,
+        BelowNormal,
+        Normal,
+        Default = Normal,
+        AboveNormal,
+        High,
+        NotRemovable,
+    }
 }
-

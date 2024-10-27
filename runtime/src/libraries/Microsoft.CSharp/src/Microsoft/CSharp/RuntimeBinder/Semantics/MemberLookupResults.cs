@@ -13,13 +13,11 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed partial class CMemberLookupResults
     {
-        private TypeArray ContainingTypes { get; }// Types that contain the member we're looking for.
+        private TypeArray ContainingTypes { get; } // Types that contain the member we're looking for.
 
         private readonly Name _pName; // The name that we're looking for.
 
-        public CMemberLookupResults(
-                TypeArray containingTypes,
-                Name name)
+        public CMemberLookupResults(TypeArray containingTypes, Name name)
         {
             Debug.Assert(containingTypes != null);
             Debug.Assert(containingTypes.Count != 0);
@@ -28,7 +26,22 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         }
 
         public CMethodIterator GetMethodIterator(
-            CType qualifyingType, AggregateSymbol context, int arity, EXPRFLAG flags, symbmask_t mask, ArgInfos nonTrailingNamedArguments) =>
-            new CMethodIterator(_pName, ContainingTypes, qualifyingType, context, arity, flags, mask, nonTrailingNamedArguments);
+            CType qualifyingType,
+            AggregateSymbol context,
+            int arity,
+            EXPRFLAG flags,
+            symbmask_t mask,
+            ArgInfos nonTrailingNamedArguments
+        ) =>
+            new CMethodIterator(
+                _pName,
+                ContainingTypes,
+                qualifyingType,
+                context,
+                arity,
+                flags,
+                mask,
+                nonTrailingNamedArguments
+            );
     }
 }

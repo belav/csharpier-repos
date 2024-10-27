@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             MetadataReader reader,
             ImmutableArray<string> allTypeParameters,
             int containingArity,
-            ImmutableArray<string> methodTypeParameters)
+            ImmutableArray<string> methodTypeParameters
+        )
         {
             _reader = reader;
             _allTypeParameters = allTypeParameters;
@@ -34,7 +35,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         {
             var signatureReader = _reader.GetBlobReader(methodDef.Signature);
             var signatureHeader = signatureReader.ReadSignatureHeader();
-            var typeParameterCount = signatureHeader.IsGeneric ? signatureReader.ReadCompressedInteger() : 0;
+            var typeParameterCount = signatureHeader.IsGeneric
+                ? signatureReader.ReadCompressedInteger()
+                : 0;
             var parameterCount = signatureReader.ReadCompressedInteger();
             var builder = ImmutableArray.CreateBuilder<ParameterSignature>(parameterCount);
             var returnType = DecodeParameter(ref signatureReader);
@@ -74,48 +77,60 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             switch (typeCode)
             {
                 case SignatureTypeCode.TypeHandle:
-                    {
-                        int typeArgumentOffset = 0;
-                        return DecodeType(signatureReader.ReadTypeHandle(), ImmutableArray<TypeSignature>.Empty, ref typeArgumentOffset);
-                    }
+                {
+                    int typeArgumentOffset = 0;
+                    return DecodeType(
+                        signatureReader.ReadTypeHandle(),
+                        ImmutableArray<TypeSignature>.Empty,
+                        ref typeArgumentOffset
+                    );
+                }
                 case SignatureTypeCode.Array:
+                {
+                    var elementType = DecodeModifiersAndType(ref signatureReader);
+                    int rank;
+                    int sizes;
+                    signatureReader.TryReadCompressedInteger(out rank);
+                    signatureReader.TryReadCompressedInteger(out sizes);
+                    if (sizes != 0)
                     {
-                        var elementType = DecodeModifiersAndType(ref signatureReader);
-                        int rank;
-                        int sizes;
-                        signatureReader.TryReadCompressedInteger(out rank);
-                        signatureReader.TryReadCompressedInteger(out sizes);
-                        if (sizes != 0)
-                        {
-                            throw UnhandledMetadata();
-                        }
-                        return new ArrayTypeSignature(elementType, rank);
+                        throw UnhandledMetadata();
                     }
+                    return new ArrayTypeSignature(elementType, rank);
+                }
                 case SignatureTypeCode.SZArray:
-                    {
-                        var elementType = DecodeModifiersAndType(ref signatureReader);
-                        return new ArrayTypeSignature(elementType, 1);
-                    }
+                {
+                    var elementType = DecodeModifiersAndType(ref signatureReader);
+                    return new ArrayTypeSignature(elementType, 1);
+                }
                 case SignatureTypeCode.GenericTypeInstance:
                     return DecodeGenericTypeInstance(ref signatureReader);
                 case SignatureTypeCode.Pointer:
-                    {
-                        var pointedAtType = DecodeModifiersAndType(ref signatureReader);
-                        return new PointerTypeSignature(pointedAtType);
-                    }
+                {
+                    var pointedAtType = DecodeModifiersAndType(ref signatureReader);
+                    return new PointerTypeSignature(pointedAtType);
+                }
                 case SignatureTypeCode.GenericTypeParameter:
-                    return DecodeGenericTypeParameter(ref signatureReader, _allTypeParameters, _containingArity);
+                    return DecodeGenericTypeParameter(
+                        ref signatureReader,
+                        _allTypeParameters,
+                        _containingArity
+                    );
                 case SignatureTypeCode.GenericMethodParameter:
-                    return DecodeGenericTypeParameter(ref signatureReader, _methodTypeParameters, 0);
+                    return DecodeGenericTypeParameter(
+                        ref signatureReader,
+                        _methodTypeParameters,
+                        0
+                    );
                 default:
+                {
+                    var signature = typeCode.ToSpecialType().GetTypeSignature();
+                    if (signature == null)
                     {
-                        var signature = typeCode.ToSpecialType().GetTypeSignature();
-                        if (signature == null)
-                        {
-                            throw UnhandledMetadata();
-                        }
-                        return signature;
+                        throw UnhandledMetadata();
                     }
+                    return signature;
+                }
             }
         }
 
@@ -140,7 +155,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private TypeSignature DecodeGenericTypeParameter(
             ref BlobReader signatureReader,
             ImmutableArray<string> typeParameters,
-            int containingArity)
+            int containingArity
+        )
         {
             int index = signatureReader.ReadCompressedInteger();
             if (index < containingArity)
@@ -169,7 +185,9 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             return type;
         }
 
-        private ImmutableArray<TypeSignature> DecodeGenericTypeArguments(ref BlobReader signatureReader)
+        private ImmutableArray<TypeSignature> DecodeGenericTypeArguments(
+            ref BlobReader signatureReader
+        )
         {
             int typeArgCount;
             signatureReader.TryReadCompressedInteger(out typeArgCount);
@@ -186,14 +204,23 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private TypeSignature DecodeType(
             EntityHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
-            ref int typeArgumentOffset)
+            ref int typeArgumentOffset
+        )
         {
             switch (handle.Kind)
             {
                 case HandleKind.TypeDefinition:
-                    return DecodeTypeDefinition((TypeDefinitionHandle)handle, typeArguments, ref typeArgumentOffset);
+                    return DecodeTypeDefinition(
+                        (TypeDefinitionHandle)handle,
+                        typeArguments,
+                        ref typeArgumentOffset
+                    );
                 case HandleKind.TypeReference:
-                    return DecodeTypeReference((TypeReferenceHandle)handle, typeArguments, ref typeArgumentOffset);
+                    return DecodeTypeReference(
+                        (TypeReferenceHandle)handle,
+                        typeArguments,
+                        ref typeArgumentOffset
+                    );
                 default:
                     throw new BadImageFormatException();
             }
@@ -203,7 +230,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         private TypeSignature DecodeTypeDefinition(
             TypeDefinitionHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
-            ref int typeArgumentOffset)
+            ref int typeArgumentOffset
+        )
         {
             var typeDef = _reader.GetTypeDefinition(handle);
             TypeSignature qualifier;
@@ -216,16 +244,26 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             else
             {
                 // Include declaring type.
-                qualifier = DecodeTypeDefinition(declaringTypeHandle, typeArguments, ref typeArgumentOffset);
+                qualifier = DecodeTypeDefinition(
+                    declaringTypeHandle,
+                    typeArguments,
+                    ref typeArgumentOffset
+                );
             }
-            return CreateTypeSignature(qualifier, _reader.GetString(typeDef.Name), typeArguments, ref typeArgumentOffset);
+            return CreateTypeSignature(
+                qualifier,
+                _reader.GetString(typeDef.Name),
+                typeArguments,
+                ref typeArgumentOffset
+            );
         }
 
         // cf. MetadataDecoder<>.GetTypeOfTypeRef.
         private TypeSignature DecodeTypeReference(
             TypeReferenceHandle handle,
             ImmutableArray<TypeSignature> typeArguments,
-            ref int typeArgumentOffset)
+            ref int typeArgumentOffset
+        )
         {
             var typeRef = _reader.GetTypeReference(handle);
             TypeSignature qualifier;
@@ -239,12 +277,21 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                     break;
                 case HandleKind.TypeReference:
                     // Include declaring type.
-                    qualifier = DecodeTypeReference((TypeReferenceHandle)scope, typeArguments, ref typeArgumentOffset);
+                    qualifier = DecodeTypeReference(
+                        (TypeReferenceHandle)scope,
+                        typeArguments,
+                        ref typeArgumentOffset
+                    );
                     break;
                 default:
                     throw new BadImageFormatException();
             }
-            return CreateTypeSignature(qualifier, _reader.GetString(typeRef.Name), typeArguments, ref typeArgumentOffset);
+            return CreateTypeSignature(
+                qualifier,
+                _reader.GetString(typeRef.Name),
+                typeArguments,
+                ref typeArgumentOffset
+            );
         }
 
         private QualifiedTypeSignature GetNamespace(StringHandle namespaceHandle)
@@ -267,7 +314,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             TypeSignature qualifier,
             string typeName,
             ImmutableArray<TypeSignature> typeArguments,
-            ref int typeArgumentOffset)
+            ref int typeArgumentOffset
+        )
         {
             int arity;
             typeName = RemoveAritySeparatorIfAny(typeName, out arity);

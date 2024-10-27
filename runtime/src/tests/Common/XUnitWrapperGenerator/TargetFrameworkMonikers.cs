@@ -10,6 +10,6 @@ namespace Xunit
     {
         Netcoreapp = 1,
         NetFramework = 2,
-        Any = ~0
+        Any = ~0,
     }
 }

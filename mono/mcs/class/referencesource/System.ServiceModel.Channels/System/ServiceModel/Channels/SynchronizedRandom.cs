@@ -8,7 +8,6 @@ namespace System.ServiceModel.Channels
 
     class SynchronizedRandom : Random
     {
-
         public SynchronizedRandom()
             : base()
         {
@@ -21,11 +20,7 @@ namespace System.ServiceModel.Channels
             this.ThisLock = new object();
         }
 
-        protected object ThisLock
-        {
-            get;
-            private set;
-        }
+        protected object ThisLock { get; private set; }
 
         public override int Next(int minValue, int maxValue)
         {

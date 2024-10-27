@@ -8,23 +8,31 @@ using Xunit;
 
 namespace Microsoft.Extensions.DependencyInjection.Tests
 {
-    public class KeyedServiceProviderDefaultContainerTests : KeyedDependencyInjectionSpecificationTests
+    public class KeyedServiceProviderDefaultContainerTests
+        : KeyedDependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) => collection.BuildServiceProvider(ServiceProviderMode.Default);
+        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) =>
+            collection.BuildServiceProvider(ServiceProviderMode.Default);
     }
 
-    public class KeyedServiceProviderDynamicContainerTests : KeyedDependencyInjectionSpecificationTests
+    public class KeyedServiceProviderDynamicContainerTests
+        : KeyedDependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) => collection.BuildServiceProvider();
+        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) =>
+            collection.BuildServiceProvider();
     }
 
-    public class KeyedServiceProviderExpressionContainerTests : KeyedDependencyInjectionSpecificationTests
+    public class KeyedServiceProviderExpressionContainerTests
+        : KeyedDependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) => collection.BuildServiceProvider(ServiceProviderMode.Expressions);
+        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) =>
+            collection.BuildServiceProvider(ServiceProviderMode.Expressions);
     }
 
-    public class KeyedServiceProviderILEmitContainerTests : KeyedDependencyInjectionSpecificationTests
+    public class KeyedServiceProviderILEmitContainerTests
+        : KeyedDependencyInjectionSpecificationTests
     {
-        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) => collection.BuildServiceProvider(ServiceProviderMode.ILEmit);
+        protected override IServiceProvider CreateServiceProvider(IServiceCollection collection) =>
+            collection.BuildServiceProvider(ServiceProviderMode.ILEmit);
     }
 }

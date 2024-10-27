@@ -13,7 +13,8 @@ namespace Microsoft.AspNetCore.Connections;
 /// </summary>
 public class ConnectionBuilder : IConnectionBuilder
 {
-    private readonly IList<Func<ConnectionDelegate, ConnectionDelegate>> _components = new List<Func<ConnectionDelegate, ConnectionDelegate>>();
+    private readonly IList<Func<ConnectionDelegate, ConnectionDelegate>> _components =
+        new List<Func<ConnectionDelegate, ConnectionDelegate>>();
 
     /// <inheritdoc />
     public IServiceProvider ApplicationServices { get; }

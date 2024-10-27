@@ -4,10 +4,10 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-
-    using System.ComponentModel;
+namespace System.Web.UI.WebControls
+{
     using System.Collections.Generic;
+    using System.ComponentModel;
     using System.Drawing;
     using System.Globalization;
     using System.Web;
@@ -19,9 +19,11 @@ namespace System.Web.UI.WebControls {
     ///       a page in a list, bulletted list, or single paragraph format. The errors can be displayed inline
     ///       and/or in a popup message box.</para>
     /// </devdoc>
-    [Designer("System.Web.UI.Design.WebControls.ValidationSummaryDesigner, " + AssemblyRef.SystemDesign)]
-    public class ValidationSummary : WebControl {
-
+    [Designer(
+        "System.Web.UI.Design.WebControls.ValidationSummaryDesigner, " + AssemblyRef.SystemDesign
+    )]
+    public class ValidationSummary : WebControl
+    {
         private const String breakTag = "b";
 
         private bool renderUplevel;
@@ -30,13 +32,19 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Web.UI.WebControls.ValidationSummary'/> class.</para>
         /// </devdoc>
-        public ValidationSummary() : base(HtmlTextWriterTag.Div) {
+        public ValidationSummary()
+            : base(HtmlTextWriterTag.Div)
+        {
             renderUplevel = false;
         }
 
-        private bool IsUnobtrusive {
-            get {
-                return (Page != null && Page.UnobtrusiveValidationMode != UnobtrusiveValidationMode.None);
+        private bool IsUnobtrusive
+        {
+            get
+            {
+                return (
+                    Page != null && Page.UnobtrusiveValidationMode != UnobtrusiveValidationMode.None
+                );
             }
         }
 
@@ -44,41 +52,51 @@ namespace System.Web.UI.WebControls {
         ///    <para>Gets or sets the display mode of the validation summary.</para>
         /// </devdoc>
         [
-        WebCategory("Appearance"),
-        DefaultValue(ValidationSummaryDisplayMode.BulletList),
-        WebSysDescription(SR.ValidationSummary_DisplayMode)
+            WebCategory("Appearance"),
+            DefaultValue(ValidationSummaryDisplayMode.BulletList),
+            WebSysDescription(SR.ValidationSummary_DisplayMode)
         ]
-        public ValidationSummaryDisplayMode DisplayMode {
-            get {
+        public ValidationSummaryDisplayMode DisplayMode
+        {
+            get
+            {
                 object o = ViewState["DisplayMode"];
-                return((o == null) ? ValidationSummaryDisplayMode.BulletList : (ValidationSummaryDisplayMode)o);
+                return (
+                    (o == null)
+                        ? ValidationSummaryDisplayMode.BulletList
+                        : (ValidationSummaryDisplayMode)o
+                );
             }
-            set {
-                if (value < ValidationSummaryDisplayMode.List || value > ValidationSummaryDisplayMode.SingleParagraph) {
+            set
+            {
+                if (
+                    value < ValidationSummaryDisplayMode.List
+                    || value > ValidationSummaryDisplayMode.SingleParagraph
+                )
+                {
                     throw new ArgumentOutOfRangeException("value");
                 }
                 ViewState["DisplayMode"] = value;
             }
         }
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        Themeable(false),
-        DefaultValue(true),
-        WebSysDescription(SR.ValidationSummary_EnableClientScript)
+            WebCategory("Behavior"),
+            Themeable(false),
+            DefaultValue(true),
+            WebSysDescription(SR.ValidationSummary_EnableClientScript)
         ]
-        public bool EnableClientScript {
-            get {
+        public bool EnableClientScript
+        {
+            get
+            {
                 object o = ViewState["EnableClientScript"];
-                return((o == null) ? true : (bool)o);
+                return ((o == null) ? true : (bool)o);
             }
-            set {
-                ViewState["EnableClientScript"] = value;
-            }
+            set { ViewState["EnableClientScript"] = value; }
         }
 
         /// <devdoc>
@@ -86,19 +104,19 @@ namespace System.Web.UI.WebControls {
         ///       summary from validators should be shown. Default value is true.</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        Themeable(false),
-        DefaultValue(true),
-        WebSysDescription(SR.ValidationSummary_ShowValidationErrors)
+            WebCategory("Behavior"),
+            Themeable(false),
+            DefaultValue(true),
+            WebSysDescription(SR.ValidationSummary_ShowValidationErrors)
         ]
-        public bool ShowValidationErrors {
-            get {
+        public bool ShowValidationErrors
+        {
+            get
+            {
                 object o = ViewState["ShowValidationErrors"];
                 return ((o == null) ? true : (bool)o);
             }
-            set {
-                ViewState["ShowValidationErrors"] = value;
-            }
+            set { ViewState["ShowValidationErrors"] = value; }
         }
 
         /// <devdoc>
@@ -106,63 +124,59 @@ namespace System.Web.UI.WebControls {
         ///       errors from a data operation should be shown. Default value is true.</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        Themeable(false),
-        DefaultValue(true),
-        WebSysDescription(SR.ValidationSummary_ShowModelStateErrors)
+            WebCategory("Behavior"),
+            Themeable(false),
+            DefaultValue(true),
+            WebSysDescription(SR.ValidationSummary_ShowModelStateErrors)
         ]
-        public bool ShowModelStateErrors {
-            get {
+        public bool ShowModelStateErrors
+        {
+            get
+            {
                 object o = ViewState["ShowModelStateErrors"];
                 return ((o == null) ? true : (bool)o);
             }
-            set {
-                ViewState["ShowModelStateErrors"] = value;
-            }
+            set { ViewState["ShowModelStateErrors"] = value; }
         }
 
         /// <devdoc>
         ///    <para>Gets or sets the foreground color
         ///       (typically the color of the text) of the control.</para>
         /// </devdoc>
-        [
-        DefaultValue(typeof(Color), "Red")
-        ]
-        public override Color ForeColor {
-            get {
-                return base.ForeColor;
-            }
-            set {
+        [DefaultValue(typeof(Color), "Red")]
+        public override Color ForeColor
+        {
+            get { return base.ForeColor; }
+            set
+            {
                 wasForeColorSet = true;
                 base.ForeColor = value;
             }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets the header text to be displayed at the top
         ///       of the summary.</para>
         /// </devdoc>
         [
-        Localizable(true),
-        WebCategory("Appearance"),
-        DefaultValue(""),
-        WebSysDescription(SR.ValidationSummary_HeaderText)
+            Localizable(true),
+            WebCategory("Appearance"),
+            DefaultValue(""),
+            WebSysDescription(SR.ValidationSummary_HeaderText)
         ]
-        public string HeaderText {
-            get {
+        public string HeaderText
+        {
+            get
+            {
                 object o = ViewState["HeaderText"];
-                return((o == null) ? String.Empty : (string)o);
+                return ((o == null) ? String.Empty : (string)o);
             }
-            set {
-                ViewState["HeaderText"] = value;
-            }
+            set { ViewState["HeaderText"] = value; }
         }
 
-        public override bool SupportsDisabledAttribute {
-            get {
-                return RenderingCompatibility < VersionUtil.Framework40;
-            }
+        public override bool SupportsDisabledAttribute
+        {
+            get { return RenderingCompatibility < VersionUtil.Framework40; }
         }
 
         /// <devdoc>
@@ -170,124 +184,179 @@ namespace System.Web.UI.WebControls {
         ///       summary is to be displayed in a pop-up message box.</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(false),
-        WebSysDescription(SR.ValidationSummary_ShowMessageBox)
+            WebCategory("Behavior"),
+            DefaultValue(false),
+            WebSysDescription(SR.ValidationSummary_ShowMessageBox)
         ]
-        public bool ShowMessageBox {
-            get {
+        public bool ShowMessageBox
+        {
+            get
+            {
                 object o = ViewState["ShowMessageBox"];
-                return((o == null) ? false : (bool)o);
+                return ((o == null) ? false : (bool)o);
             }
-            set {
-                ViewState["ShowMessageBox"] = value;
-            }
+            set { ViewState["ShowMessageBox"] = value; }
         }
-
 
         /// <devdoc>
         ///    <para>Gets or sets a value indicating whether the validation
         ///       summary is to be displayed inline.</para>
         /// </devdoc>
         [
-        WebCategory("Behavior"),
-        DefaultValue(true),
-        WebSysDescription(SR.ValidationSummary_ShowSummary)
+            WebCategory("Behavior"),
+            DefaultValue(true),
+            WebSysDescription(SR.ValidationSummary_ShowSummary)
         ]
-        public bool ShowSummary {
-            get {
+        public bool ShowSummary
+        {
+            get
+            {
                 object o = ViewState["ShowSummary"];
-                return((o == null) ? true : (bool)o);
+                return ((o == null) ? true : (bool)o);
             }
-            set {
-                ViewState["ShowSummary"] = value;
-            }
+            set { ViewState["ShowSummary"] = value; }
         }
-
 
         [
-        WebCategory("Behavior"),
-        Themeable(false),
-        DefaultValue(""),
-        WebSysDescription(SR.ValidationSummary_ValidationGroup)
+            WebCategory("Behavior"),
+            Themeable(false),
+            DefaultValue(""),
+            WebSysDescription(SR.ValidationSummary_ValidationGroup)
         ]
-        public virtual string ValidationGroup {
-            get {
+        public virtual string ValidationGroup
+        {
+            get
+            {
                 string s = (string)ViewState["ValidationGroup"];
-                return((s == null) ? string.Empty : s);
+                return ((s == null) ? string.Empty : s);
             }
-            set {
-                ViewState["ValidationGroup"] = value;
-            }
+            set { ViewState["ValidationGroup"] = value; }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         ///    AddAttributesToRender method.
         /// </devdoc>
-        protected override void AddAttributesToRender(HtmlTextWriter writer) {
-            if (renderUplevel) {
+        protected override void AddAttributesToRender(HtmlTextWriter writer)
+        {
+            if (renderUplevel)
+            {
                 // We always want validation cotnrols to have an id on the client
                 EnsureID();
                 string id = ClientID;
 
                 // DevDiv 33149: A backward compat. switch for Everett rendering
-                HtmlTextWriter expandoAttributeWriter = (EnableLegacyRendering || IsUnobtrusive) ? writer : null;
+                HtmlTextWriter expandoAttributeWriter =
+                    (EnableLegacyRendering || IsUnobtrusive) ? writer : null;
 
-                if (IsUnobtrusive) {
+                if (IsUnobtrusive)
+                {
                     Attributes["data-valsummary"] = "true";
                 }
 
-                if (HeaderText.Length > 0 ) {
-                    BaseValidator.AddExpandoAttribute(this, expandoAttributeWriter, id, "headertext", HeaderText, true);
+                if (HeaderText.Length > 0)
+                {
+                    BaseValidator.AddExpandoAttribute(
+                        this,
+                        expandoAttributeWriter,
+                        id,
+                        "headertext",
+                        HeaderText,
+                        true
+                    );
                 }
-                if (ShowMessageBox) {
-                    BaseValidator.AddExpandoAttribute(this, expandoAttributeWriter, id, "showmessagebox", "True", false);
+                if (ShowMessageBox)
+                {
+                    BaseValidator.AddExpandoAttribute(
+                        this,
+                        expandoAttributeWriter,
+                        id,
+                        "showmessagebox",
+                        "True",
+                        false
+                    );
                 }
-                if (!ShowSummary) {
-                    BaseValidator.AddExpandoAttribute(this, expandoAttributeWriter, id, "showsummary", "False", false);
+                if (!ShowSummary)
+                {
+                    BaseValidator.AddExpandoAttribute(
+                        this,
+                        expandoAttributeWriter,
+                        id,
+                        "showsummary",
+                        "False",
+                        false
+                    );
                 }
-                if (DisplayMode != ValidationSummaryDisplayMode.BulletList) {
-                    BaseValidator.AddExpandoAttribute(this, expandoAttributeWriter, id, "displaymode", PropertyConverter.EnumToString(typeof(ValidationSummaryDisplayMode), DisplayMode), false);
+                if (DisplayMode != ValidationSummaryDisplayMode.BulletList)
+                {
+                    BaseValidator.AddExpandoAttribute(
+                        this,
+                        expandoAttributeWriter,
+                        id,
+                        "displaymode",
+                        PropertyConverter.EnumToString(
+                            typeof(ValidationSummaryDisplayMode),
+                            DisplayMode
+                        ),
+                        false
+                    );
                 }
-                if (ValidationGroup.Length > 0) {
-                    BaseValidator.AddExpandoAttribute(this, expandoAttributeWriter, id, "validationGroup", ValidationGroup, true);
+                if (ValidationGroup.Length > 0)
+                {
+                    BaseValidator.AddExpandoAttribute(
+                        this,
+                        expandoAttributeWriter,
+                        id,
+                        "validationGroup",
+                        ValidationGroup,
+                        true
+                    );
                 }
             }
 
             base.AddAttributesToRender(writer);
         }
 
-        internal String[] GetErrorMessages(out bool inError) {
+        internal String[] GetErrorMessages(out bool inError)
+        {
             // Fetch errors from the Page
             List<string> errorDescriptions = new List<string>();
             inError = false;
 
-            if (ShowValidationErrors) {
+            if (ShowValidationErrors)
+            {
                 // see if we are in error and how many messages there are
                 ValidatorCollection validators = Page.GetValidators(ValidationGroup);
-                for (int i = 0; i < validators.Count; i++) {
+                for (int i = 0; i < validators.Count; i++)
+                {
                     IValidator val = validators[i];
-                    if (!val.IsValid) {
+                    if (!val.IsValid)
+                    {
                         inError = true;
-                        if (!String.IsNullOrEmpty(val.ErrorMessage)) {
+                        if (!String.IsNullOrEmpty(val.ErrorMessage))
+                        {
                             errorDescriptions.Add(String.Copy(val.ErrorMessage));
                         }
-                        else {
+                        else
+                        {
                             Debug.Assert(true, "Not all messages were found!");
                         }
                     }
                 }
             }
 
-            if (ShowModelStateErrors) {
+            if (ShowModelStateErrors)
+            {
                 ModelStateDictionary modelState = Page.ModelState;
-                if (!modelState.IsValid) {
+                if (!modelState.IsValid)
+                {
                     inError = true;
-                    foreach (KeyValuePair<string, ModelState> pair in modelState) {
-                        foreach (ModelError error in pair.Value.Errors) {
-                            if (!String.IsNullOrEmpty(error.ErrorMessage)) {
+                    foreach (KeyValuePair<string, ModelState> pair in modelState)
+                    {
+                        foreach (ModelError error in pair.Value.Errors)
+                        {
+                            if (!String.IsNullOrEmpty(error.ErrorMessage))
+                            {
                                 errorDescriptions.Add(error.ErrorMessage);
                             }
                         }
@@ -302,10 +371,12 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         ///    <para> Dynamically setting the Default ForeColor</para>
         /// </devdoc>
-        protected internal override void OnInit(EventArgs e) {
+        protected internal override void OnInit(EventArgs e)
+        {
             base.OnInit(e);
 
-            if (!wasForeColorSet && (RenderingCompatibility < VersionUtil.Framework40)) {
+            if (!wasForeColorSet && (RenderingCompatibility < VersionUtil.Framework40))
+            {
                 // If the ForeColor wasn't already set, try to set our dynamic default value
                 ForeColor = Color.Red;
             }
@@ -315,31 +386,40 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         ///    PreRender method.
         /// </devdoc>
-        protected internal override void OnPreRender(EventArgs e) {
+        protected internal override void OnPreRender(EventArgs e)
+        {
             base.OnPreRender(e);
 
             // Act like invisible if disabled
-            if (!Enabled) {
+            if (!Enabled)
+            {
                 return;
             }
 
             // work out uplevelness now
             Page page = Page;
-            if (page != null && page.RequestInternal != null) {
-                renderUplevel = (EnableClientScript && ShowValidationErrors
-                                 && page.Request.Browser.W3CDomVersion.Major >= 1
-                                 && page.Request.Browser.EcmaScriptVersion.CompareTo(new Version(1, 2)) >= 0);
+            if (page != null && page.RequestInternal != null)
+            {
+                renderUplevel = (
+                    EnableClientScript
+                    && ShowValidationErrors
+                    && page.Request.Browser.W3CDomVersion.Major >= 1
+                    && page.Request.Browser.EcmaScriptVersion.CompareTo(new Version(1, 2)) >= 0
+                );
             }
-            if (renderUplevel && !IsUnobtrusive) {
+            if (renderUplevel && !IsUnobtrusive)
+            {
                 const string arrayName = "Page_ValidationSummaries";
                 string element = "document.getElementById(\"" + ClientID + "\")";
-                
+
                 // Cannot use the overloads of Register* that take a Control, since these methods only work with AJAX 3.5,
                 // and we need to support Validators in AJAX 1.0 (Windows OS Bugs 2015831).
-                if (!Page.IsPartialRenderingSupported) {
+                if (!Page.IsPartialRenderingSupported)
+                {
                     Page.ClientScript.RegisterArrayDeclaration(arrayName, element);
                 }
-                else {
+                else
+                {
                     ValidatorCompatibilityHelper.RegisterArrayDeclaration(this, arrayName, element);
 
                     // Register a dispose script to make sure we clean up the page if we get destroyed
@@ -348,7 +428,10 @@ namespace System.Web.UI.WebControls {
                     // of Validators in AJAX 1.0 manually attached a dispose expando.  We added this code back in the product
                     // late in the Orcas cycle, and we didn't want to take the risk of using RegisterDispose() instead.
                     // (Windows OS Bugs 2015831)
-                    ValidatorCompatibilityHelper.RegisterStartupScript(this, typeof(ValidationSummary), ClientID + "_DisposeScript",
+                    ValidatorCompatibilityHelper.RegisterStartupScript(
+                        this,
+                        typeof(ValidationSummary),
+                        ClientID + "_DisposeScript",
                         String.Format(
                             CultureInfo.InvariantCulture,
                             @"
@@ -362,32 +445,40 @@ namespace System.Web.UI.WebControls {
     }}
 }})('{0}');
 ",
-                            ClientID, arrayName), true);
+                            ClientID,
+                            arrayName
+                        ),
+                        true
+                    );
                 }
             }
         }
-
 
         /// <internalonly/>
         /// <devdoc>
         ///    Render method.
         /// </devdoc>
-        protected internal override void Render(HtmlTextWriter writer) {
-            string [] errorDescriptions;
+        protected internal override void Render(HtmlTextWriter writer)
+        {
+            string[] errorDescriptions;
             bool displayContents;
 
-            if (DesignMode) {
+            if (DesignMode)
+            {
                 // Dummy Error state
-                errorDescriptions = new string [] {
+                errorDescriptions = new string[]
+                {
                     SR.GetString(SR.ValSummary_error_message_1),
                     SR.GetString(SR.ValSummary_error_message_2),
                 };
                 displayContents = true;
                 renderUplevel = false;
             }
-            else {
+            else
+            {
                 // Act like invisible if disabled
-                if (!Enabled) {
+                if (!Enabled)
+                {
                     return;
                 }
 
@@ -396,31 +487,35 @@ namespace System.Web.UI.WebControls {
                 displayContents = (ShowSummary && inError);
 
                 // Make sure tags are hidden if there are no contents
-                if (!displayContents && renderUplevel) {
+                if (!displayContents && renderUplevel)
+                {
                     Style["display"] = "none";
                 }
             }
 
             // Make sure we are in a form tag with runat=server.
-            if (Page != null) {
+            if (Page != null)
+            {
                 Page.VerifyRenderingInServerForm(this);
             }
 
             bool displayTags = renderUplevel ? true : displayContents;
 
-            if (displayTags) {
+            if (displayTags)
+            {
                 RenderBeginTag(writer);
             }
 
-            if (displayContents) {
-
+            if (displayContents)
+            {
                 string headerSep;
                 string first;
                 string pre;
                 string post;
                 string final;
 
-                switch (DisplayMode) {
+                switch (DisplayMode)
+                {
                     case ValidationSummaryDisplayMode.List:
                         headerSep = breakTag;
                         first = String.Empty;
@@ -447,17 +542,22 @@ namespace System.Web.UI.WebControls {
 
                     default:
                         Debug.Fail("Invalid DisplayMode!");
-                        goto
-                    case ValidationSummaryDisplayMode.BulletList;
+                        goto case ValidationSummaryDisplayMode.BulletList;
                 }
-                if (HeaderText.Length > 0) {
+                if (HeaderText.Length > 0)
+                {
                     writer.Write(HeaderText);
                     WriteBreakIfPresent(writer, headerSep);
                 }
-                if (errorDescriptions != null) {
+                if (errorDescriptions != null)
+                {
                     writer.Write(first);
-                    for (int i = 0; i < errorDescriptions.Length; i++) {
-                        Debug.Assert(errorDescriptions[i] != null && errorDescriptions[i].Length > 0, "Bad Error Messages");
+                    for (int i = 0; i < errorDescriptions.Length; i++)
+                    {
+                        Debug.Assert(
+                            errorDescriptions[i] != null && errorDescriptions[i].Length > 0,
+                            "Bad Error Messages"
+                        );
                         writer.Write(pre);
                         writer.Write(errorDescriptions[i]);
                         WriteBreakIfPresent(writer, post);
@@ -465,29 +565,36 @@ namespace System.Web.UI.WebControls {
                     WriteBreakIfPresent(writer, final);
                 }
             }
-            if (displayTags) {
+            if (displayTags)
+            {
                 RenderEndTag(writer);
             }
         }
 
-        internal bool ShouldSerializeForeColor() {
-            Color defaultForeColor = (RenderingCompatibility < VersionUtil.Framework40) ? Color.Red : Color.Empty;
+        internal bool ShouldSerializeForeColor()
+        {
+            Color defaultForeColor =
+                (RenderingCompatibility < VersionUtil.Framework40) ? Color.Red : Color.Empty;
             return defaultForeColor != ForeColor;
         }
 
-        private void WriteBreakIfPresent(HtmlTextWriter writer, String text) {
-            if (text == breakTag) {
-                if (EnableLegacyRendering) {
+        private void WriteBreakIfPresent(HtmlTextWriter writer, String text)
+        {
+            if (text == breakTag)
+            {
+                if (EnableLegacyRendering)
+                {
                     writer.WriteObsoleteBreak();
                 }
-                else {
+                else
+                {
                     writer.WriteBreak();
                 }
             }
-            else {
+            else
+            {
                 writer.Write(text);
             }
         }
     }
 }
-

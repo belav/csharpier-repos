@@ -19,7 +19,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <see cref="TypeFilterAttribute"/> instead if the filter is not itself a service.
 /// </para>
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 [DebuggerDisplay("Type = {ServiceType}, Order = {Order}")]
 public class ServiceFilterAttribute : Attribute, IFilterFactory, IOrderedFilter
 {

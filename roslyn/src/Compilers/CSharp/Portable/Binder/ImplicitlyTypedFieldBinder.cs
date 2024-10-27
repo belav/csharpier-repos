@@ -29,10 +29,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override ConsList<FieldSymbol> FieldsBeingBound
         {
-            get
-            {
-                return _fieldsBeingBound;
-            }
+            get { return _fieldsBeingBound; }
         }
     }
 }

@@ -5,9 +5,9 @@
 namespace Microsoft.VisualBasic.Activities
 {
     using System;
+    using System.Activities.Expressions;
     using System.Globalization;
     using System.Reflection;
-    using System.Activities.Expressions;
     using System.Xaml;
     using System.Xml.Linq;
 
@@ -19,14 +19,11 @@ namespace Microsoft.VisualBasic.Activities
         int hashCode;
         string import;
 
-        public VisualBasicImportReference()
-        {
-        }
+        public VisualBasicImportReference() { }
 
         public string Assembly
         {
             get { return this.assemblyNameString; }
-
             set
             {
                 if (value == null)
@@ -46,10 +43,7 @@ namespace Microsoft.VisualBasic.Activities
 
         public string Import
         {
-            get
-            {
-                return this.import;
-            }
+            get { return this.import; }
             set
             {
                 if (value != null)
@@ -71,35 +65,27 @@ namespace Microsoft.VisualBasic.Activities
             get { return this.assemblyName; }
         }
 
-        internal XNamespace Xmlns
-        {
-            get;
-            set;
-        }
-        
+        internal XNamespace Xmlns { get; set; }
+
         // for the short-cut assembly resolution
         // from VBImportReference.AssemblyName ==> System.Reflection.Assembly
         // this is an internal state that implies the context in which a VB assembly resolution is progressing
-        // once VB extracted this Assembly object to pass onto the compiler, 
+        // once VB extracted this Assembly object to pass onto the compiler,
         // it must explicitly set this property back to null.
-        // Clone() will also explicitly set this property of the new to null to prevent users from inadvertently 
+        // Clone() will also explicitly set this property of the new to null to prevent users from inadvertently
         // creating a copy of VBImportReference that might not resolve to the assembly of his or her intent.
-        internal Assembly EarlyBoundAssembly
-        {
-            get;
-            set;
-        }
+        internal Assembly EarlyBoundAssembly { get; set; }
 
         internal VisualBasicImportReference Clone()
         {
-            VisualBasicImportReference toReturn = (VisualBasicImportReference)this.MemberwiseClone();
+            VisualBasicImportReference toReturn = (VisualBasicImportReference)
+                this.MemberwiseClone();
             toReturn.EarlyBoundAssembly = null;
             // Also make a clone of the AssemblyName.
-            toReturn.assemblyName = (AssemblyName) this.assemblyName.Clone();
+            toReturn.assemblyName = (AssemblyName)this.assemblyName.Clone();
             return toReturn;
         }
 
-        
         public override int GetHashCode()
         {
             return this.hashCode;
@@ -142,7 +128,7 @@ namespace Microsoft.VisualBasic.Activities
                 return false;
             }
 
-            return equalityComparer.Equals(this.AssemblyName, other.AssemblyName);            
+            return equalityComparer.Equals(this.AssemblyName, other.AssemblyName);
         }
 
         internal void GenerateXamlNamespace(INamespacePrefixLookup namespaceLookup)
@@ -155,7 +141,12 @@ namespace Microsoft.VisualBasic.Activities
             }
             else
             {
-                xamlNamespace = string.Format(CultureInfo.InvariantCulture, "clr-namespace:{0};assembly={1}", this.Import, this.Assembly);
+                xamlNamespace = string.Format(
+                    CultureInfo.InvariantCulture,
+                    "clr-namespace:{0};assembly={1}",
+                    this.Import,
+                    this.Assembly
+                );
             }
             // we don't need the return value since we just want to register the namespace/assembly pair
             namespaceLookup.LookupPrefix(xamlNamespace);

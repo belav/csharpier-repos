@@ -12,26 +12,26 @@ namespace System.Reflection.Emit
         // Use packed bitfield for flags to avoid code bloat
         //
 
-        internal const int OperandTypeMask = 0x1F;              // 000000000000000000000000000XXXXX
+        internal const int OperandTypeMask = 0x1F; // 000000000000000000000000000XXXXX
 
-        internal const int FlowControlShift = 5;                // 00000000000000000000000XXXX00000
+        internal const int FlowControlShift = 5; // 00000000000000000000000XXXX00000
         internal const int FlowControlMask = 0x0F;
 
-        internal const int OpCodeTypeShift = 9;                 // 00000000000000000000XXX000000000
+        internal const int OpCodeTypeShift = 9; // 00000000000000000000XXX000000000
         internal const int OpCodeTypeMask = 0x07;
 
-        internal const int StackBehaviourPopShift = 12;         // 000000000000000XXXXX000000000000
-        internal const int StackBehaviourPushShift = 17;        // 0000000000XXXXX00000000000000000
+        internal const int StackBehaviourPopShift = 12; // 000000000000000XXXXX000000000000
+        internal const int StackBehaviourPushShift = 17; // 0000000000XXXXX00000000000000000
         internal const int StackBehaviourMask = 0x1F;
 
-        internal const int SizeShift = 22;                      // 00000000XX0000000000000000000000
+        internal const int SizeShift = 22; // 00000000XX0000000000000000000000
         internal const int SizeMask = 0x03;
 
-        internal const int EndsUncondJmpBlkFlag = 0x01000000;   // 0000000X000000000000000000000000
+        internal const int EndsUncondJmpBlkFlag = 0x01000000; // 0000000X000000000000000000000000
 
         // unused                                               // 0000XXX0000000000000000000000000
 
-        internal const int StackChangeShift = 28;               // XXXX0000000000000000000000000000
+        internal const int StackChangeShift = 28; // XXXX0000000000000000000000000000
 
         private readonly OpCodeValues m_value;
         private readonly int m_flags;
@@ -42,8 +42,7 @@ namespace System.Reflection.Emit
             m_flags = flags;
         }
 
-        internal bool EndsUncondJmpBlk() =>
-            (m_flags & EndsUncondJmpBlkFlag) != 0;
+        internal bool EndsUncondJmpBlk() => (m_flags & EndsUncondJmpBlkFlag) != 0;
 
         /// <summary>
         /// The value of how the IL instruction changes the evaluation stack.
@@ -56,18 +55,20 @@ namespace System.Reflection.Emit
         /// For example, in case the instruction is calling a method reference, need to evaluate the method signature,
         /// the push count depends on the returning value, the pop count depends on how many parameters passed.
         /// </remarks>
-        public int EvaluationStackDelta =>
-            m_flags >> StackChangeShift;
+        public int EvaluationStackDelta => m_flags >> StackChangeShift;
 
         public OperandType OperandType => (OperandType)(m_flags & OperandTypeMask);
 
-        public FlowControl FlowControl => (FlowControl)((m_flags >> FlowControlShift) & FlowControlMask);
+        public FlowControl FlowControl =>
+            (FlowControl)((m_flags >> FlowControlShift) & FlowControlMask);
 
         public OpCodeType OpCodeType => (OpCodeType)((m_flags >> OpCodeTypeShift) & OpCodeTypeMask);
 
-        public StackBehaviour StackBehaviourPop => (StackBehaviour)((m_flags >> StackBehaviourPopShift) & StackBehaviourMask);
+        public StackBehaviour StackBehaviourPop =>
+            (StackBehaviour)((m_flags >> StackBehaviourPopShift) & StackBehaviourMask);
 
-        public StackBehaviour StackBehaviourPush => (StackBehaviour)((m_flags >> StackBehaviourPushShift) & StackBehaviourMask);
+        public StackBehaviour StackBehaviourPush =>
+            (StackBehaviour)((m_flags >> StackBehaviourPushShift) & StackBehaviourMask);
 
         public int Size => (m_flags >> SizeShift) & SizeMask;
 

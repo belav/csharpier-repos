@@ -1,12 +1,12 @@
 //Copyright 2010 Microsoft Corporation
 //
-//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. 
-//You may obtain a copy of the License at 
+//Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License.
+//You may obtain a copy of the License at
 //
-//http://www.apache.org/licenses/LICENSE-2.0 
+//http://www.apache.org/licenses/LICENSE-2.0
 //
-//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an 
-//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. 
+//Unless required by applicable law or agreed to in writing, software distributed under the License is distributed on an
+//"AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 //See the License for the specific language governing permissions and limitations under the License.
 
 
@@ -14,10 +14,10 @@ namespace System.Data.Services.Client.Xml
 {
     #region Namespaces.
 
-    using System.Xml;
-    using System.Xml.Schema;
     using System.Collections.Generic;
     using System.Diagnostics;
+    using System.Xml;
+    using System.Xml.Schema;
 
     #endregion Namespaces.
 
@@ -44,10 +44,7 @@ namespace System.Data.Services.Client.Xml
 
         public override int AttributeCount
         {
-            get
-            {
-                return this.reader.AttributeCount;
-            }
+            get { return this.reader.AttributeCount; }
         }
 
         public override string BaseURI
@@ -69,59 +66,37 @@ namespace System.Data.Services.Client.Xml
 
         public override bool CanResolveEntity
         {
-            get
-            {
-                return this.reader.CanResolveEntity;
-            }
+            get { return this.reader.CanResolveEntity; }
         }
 
         public override int Depth
         {
-            get
-            {
-                return this.reader.Depth;
-            }
+            get { return this.reader.Depth; }
         }
-
 
         public override bool EOF
         {
-            get
-            {
-                return this.reader.EOF;
-            }
+            get { return this.reader.EOF; }
         }
 
         public override bool HasAttributes
         {
-            get
-            {
-                return this.reader.HasAttributes;
-            }
+            get { return this.reader.HasAttributes; }
         }
 
         public override bool HasValue
         {
-            get
-            {
-                return this.reader.HasValue;
-            }
+            get { return this.reader.HasValue; }
         }
 
         public override bool IsDefault
         {
-            get
-            {
-                return this.reader.IsDefault;
-            }
+            get { return this.reader.IsDefault; }
         }
 
         public override bool IsEmptyElement
         {
-            get
-            {
-                return this.reader.IsEmptyElement;
-            }
+            get { return this.reader.IsEmptyElement; }
         }
 
         public virtual int LineNumber
@@ -152,130 +127,83 @@ namespace System.Data.Services.Client.Xml
 
         public override string LocalName
         {
-            get
-            {
-                return this.reader.LocalName;
-            }
+            get { return this.reader.LocalName; }
         }
 
         public override string Name
         {
-            get
-            {
-                return this.reader.Name;
-            }
+            get { return this.reader.Name; }
         }
 
         public override string NamespaceURI
         {
-            get
-            {
-                return this.reader.NamespaceURI;
-            }
+            get { return this.reader.NamespaceURI; }
         }
 
         public override XmlNameTable NameTable
         {
-            get
-            {
-                return this.reader.NameTable;
-            }
+            get { return this.reader.NameTable; }
         }
 
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return this.reader.NodeType;
-            }
+            get { return this.reader.NodeType; }
         }
 
         public override string Prefix
         {
-            get
-            {
-                return this.reader.Prefix;
-            }
+            get { return this.reader.Prefix; }
         }
 
 #if !ASTORIA_LIGHT
 
         public override char QuoteChar
         {
-            get
-            {
-                return this.reader.QuoteChar;
-            }
+            get { return this.reader.QuoteChar; }
         }
-
 #endif
 
         public override ReadState ReadState
         {
-            get
-            {
-                return this.reader.ReadState;
-            }
+            get { return this.reader.ReadState; }
         }
 
 #if !ASTORIA_LIGHT
 
         public override IXmlSchemaInfo SchemaInfo
         {
-            get
-            {
-                return this.reader.SchemaInfo;
-            }
+            get { return this.reader.SchemaInfo; }
         }
 #endif
 
         public override XmlReaderSettings Settings
         {
-            get
-            {
-                return this.reader.Settings;
-            }
+            get { return this.reader.Settings; }
         }
 
         public override string Value
         {
-            get
-            {
-                return this.reader.Value;
-            }
+            get { return this.reader.Value; }
         }
 
         public override Type ValueType
         {
-            get
-            {
-                return this.reader.ValueType;
-            }
+            get { return this.reader.ValueType; }
         }
 
         public override string XmlLang
         {
-            get
-            {
-                return this.reader.XmlLang;
-            }
+            get { return this.reader.XmlLang; }
         }
 
         public override XmlSpace XmlSpace
         {
-            get
-            {
-                return this.reader.XmlSpace;
-            }
+            get { return this.reader.XmlSpace; }
         }
 
         protected XmlReader Reader
         {
-            get
-            {
-                return this.reader;
-            }
-
+            get { return this.reader; }
             set
             {
                 this.reader = value;
@@ -363,12 +291,13 @@ namespace System.Data.Services.Client.Xml
             }
 
             bool result = this.reader.Read();
-            if (result) 
+            if (result)
             {
-                if (this.reader.NodeType == XmlNodeType.Element &&
-                    this.reader.HasAttributes) 
+                if (this.reader.NodeType == XmlNodeType.Element && this.reader.HasAttributes)
                 {
-                    string baseAttribute = this.reader.GetAttribute(XmlConstants.XmlBaseAttributeNameWithPrefix);
+                    string baseAttribute = this.reader.GetAttribute(
+                        XmlConstants.XmlBaseAttributeNameWithPrefix
+                    );
                     if (String.IsNullOrEmpty(baseAttribute))
                     {
                         return result;
@@ -411,7 +340,10 @@ namespace System.Data.Services.Client.Xml
 
         internal static XmlWrappingReader CreateReader(string currentBaseUri, XmlReader newReader)
         {
-            Debug.Assert(!(newReader is XmlWrappingReader), "The new reader must not be a xmlWrappingReader");
+            Debug.Assert(
+                !(newReader is XmlWrappingReader),
+                "The new reader must not be a xmlWrappingReader"
+            );
             XmlWrappingReader reader = new XmlWrappingReader(newReader);
             reader.previousReaderBaseUri = currentBaseUri;
             return reader;
@@ -429,7 +361,11 @@ namespace System.Data.Services.Client.Xml
 
         private void PopXmlBase()
         {
-            if (this.xmlBaseStack != null && this.xmlBaseStack.Count > 0 && this.reader.Depth == this.xmlBaseStack.Peek().Depth)
+            if (
+                this.xmlBaseStack != null
+                && this.xmlBaseStack.Count > 0
+                && this.reader.Depth == this.xmlBaseStack.Peek().Depth
+            )
             {
                 this.xmlBaseStack.Pop();
             }
@@ -447,19 +383,11 @@ namespace System.Data.Services.Client.Xml
                 this.Depth = depth;
             }
 
-            public Uri BaseUri
-            {
-                get;
-                private set;
-            }
+            public Uri BaseUri { get; private set; }
 
-            public int Depth
-            {
-                get;
-                private set;
-            }
+            public int Depth { get; private set; }
         }
 
-        #endregion    
+        #endregion
     }
 }

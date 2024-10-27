@@ -8,8 +8,10 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account;
 
 public class ResetPasswordConfirmation : DefaultUIPage
 {
-    public ResetPasswordConfirmation(HttpClient client, IHtmlDocument resetPasswordConfirmation, DefaultUIContext context)
-        : base(client, resetPasswordConfirmation, context)
-    {
-    }
+    public ResetPasswordConfirmation(
+        HttpClient client,
+        IHtmlDocument resetPasswordConfirmation,
+        DefaultUIContext context
+    )
+        : base(client, resetPasswordConfirmation, context) { }
 }

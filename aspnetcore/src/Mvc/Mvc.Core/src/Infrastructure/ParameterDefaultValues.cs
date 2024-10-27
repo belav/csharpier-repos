@@ -35,14 +35,19 @@ internal static class ParameterDefaultValues
         return defaultValue;
     }
 
-    public static bool TryGetDeclaredParameterDefaultValue(ParameterInfo parameterInfo, out object? defaultValue)
+    public static bool TryGetDeclaredParameterDefaultValue(
+        ParameterInfo parameterInfo,
+        out object? defaultValue
+    )
     {
         if (ParameterDefaultValue.TryGetDefaultValue(parameterInfo, out defaultValue))
         {
             return true;
         }
 
-        var defaultValueAttribute = parameterInfo.GetCustomAttribute<DefaultValueAttribute>(inherit: false);
+        var defaultValueAttribute = parameterInfo.GetCustomAttribute<DefaultValueAttribute>(
+            inherit: false
+        );
         if (defaultValueAttribute != null)
         {
             defaultValue = defaultValueAttribute.Value;

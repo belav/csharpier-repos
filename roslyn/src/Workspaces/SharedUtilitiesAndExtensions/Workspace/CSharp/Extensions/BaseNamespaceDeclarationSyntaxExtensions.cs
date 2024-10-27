@@ -14,7 +14,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
             this TNamespaceDeclarationSyntax namespaceDeclaration,
             IList<UsingDirectiveSyntax> usingDirectives,
             bool placeSystemNamespaceFirst,
-            params SyntaxAnnotation[] annotations) where TNamespaceDeclarationSyntax : BaseNamespaceDeclarationSyntax
+            params SyntaxAnnotation[] annotations
+        )
+            where TNamespaceDeclarationSyntax : BaseNamespaceDeclarationSyntax
         {
             if (usingDirectives.Count == 0)
                 return namespaceDeclaration;

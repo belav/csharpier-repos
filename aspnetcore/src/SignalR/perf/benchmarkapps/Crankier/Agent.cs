@@ -42,7 +42,10 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             if (Path.GetFileNameWithoutExtension(mainModuleFile).Equals("dotnet"))
             {
                 // We're running in 'dotnet'
-                return Path.Combine(AppContext.BaseDirectory, $"{typeof(Program).Assembly.GetName().Name}.dll");
+                return Path.Combine(
+                    AppContext.BaseDirectory,
+                    $"{typeof(Program).Assembly.GetName().Name}.dll"
+                );
             }
             else
             {
@@ -67,15 +70,15 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 TargetAddress = TargetAddress,
                 TotalConnectionsRequested = TotalConnectionsRequested,
                 ApplyingLoad = ApplyingLoad,
-                Workers = _workers.Select(worker => worker.Value.GetHeartbeatInformation()).ToList()
+                Workers = _workers
+                    .Select(worker => worker.Value.GetHeartbeatInformation())
+                    .ToList(),
             };
         }
 
         public Dictionary<int, StatusInformation> GetWorkerStatus()
         {
-            return _workers.Values.ToDictionary(
-                k => k.Id,
-                v => v.StatusInformation);
+            return _workers.Values.ToDictionary(k => k.Id, v => v.StatusInformation);
         }
 
         private AgentWorker CreateWorker()
@@ -101,7 +104,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 UseShellExecute = false,
                 RedirectStandardInput = true,
                 RedirectStandardOutput = true,
-                RedirectStandardError = true
+                RedirectStandardError = true,
             };
 
             var worker = new AgentWorker(startInfo, this);
@@ -118,17 +121,32 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             return worker;
         }
 
-        private static string GetDotNetHost() => RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet.exe" : "dotnet";
+        private static string GetDotNetHost() =>
+            RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? "dotnet.exe" : "dotnet";
 
-        private async Task StartWorker(int id, string targetAddress, HttpTransportType transportType, int numberOfConnectionsPerWorker)
+        private async Task StartWorker(
+            int id,
+            string targetAddress,
+            HttpTransportType transportType,
+            int numberOfConnectionsPerWorker
+        )
         {
             if (_workers.TryGetValue(id, out var worker))
             {
-                await worker.Worker.ConnectAsync(targetAddress, transportType, numberOfConnectionsPerWorker);
+                await worker.Worker.ConnectAsync(
+                    targetAddress,
+                    transportType,
+                    numberOfConnectionsPerWorker
+                );
             }
         }
 
-        public async Task StartWorkersAsync(string targetAddress, int numberOfWorkers, HttpTransportType transportType, int numberOfConnections)
+        public async Task StartWorkersAsync(
+            string targetAddress,
+            int numberOfWorkers,
+            HttpTransportType transportType,
+            int numberOfConnections
+        )
         {
             TargetAddress = targetAddress;
             TotalConnectionsRequested = numberOfConnections;
@@ -140,14 +158,29 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             {
                 if (index == 0)
                 {
-                    await StartWorker(worker.Id, targetAddress, transportType, connectionsPerWorker + remainingConnections);
+                    await StartWorker(
+                        worker.Id,
+                        targetAddress,
+                        transportType,
+                        connectionsPerWorker + remainingConnections
+                    );
                 }
                 else
                 {
-                    await StartWorker(worker.Id, targetAddress, transportType, connectionsPerWorker);
+                    await StartWorker(
+                        worker.Id,
+                        targetAddress,
+                        transportType,
+                        connectionsPerWorker
+                    );
                 }
 
-                await Runner.LogAgentAsync("Agent started listening to worker {0} ({1} of {2}).", worker.Id, index + 1, numberOfWorkers);
+                await Runner.LogAgentAsync(
+                    "Agent started listening to worker {0} ({1} of {2}).",
+                    worker.Id,
+                    index + 1,
+                    numberOfWorkers
+                );
             }
 
             var workerTasks = new Task<AgentWorker>[numberOfWorkers];
@@ -209,11 +242,18 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             if (_workers.TryGetValue(workerId, out var worker))
             {
                 worker.Worker.PingAsync(value);
-                Runner.LogAgentAsync("Agent sent ping command to Worker {0} with value {1}.", workerId, value);
+                Runner.LogAgentAsync(
+                    "Agent sent ping command to Worker {0} with value {1}.",
+                    workerId,
+                    value
+                );
             }
             else
             {
-                Runner.LogAgentAsync("Agent failed to send ping command, Worker {0} not found.", workerId);
+                Runner.LogAgentAsync(
+                    "Agent failed to send ping command, Worker {0} not found.",
+                    workerId
+                );
             }
         }
 
@@ -262,7 +302,11 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         public async Task PongAsync(int id, int value)
         {
-            await Runner.LogAgentAsync("Agent received pong message from Worker {0} with value {1}.", id, value);
+            await Runner.LogAgentAsync(
+                "Agent received pong message from Worker {0} with value {1}.",
+                id,
+                value
+            );
             await Runner.PongWorkerAsync(id, value);
         }
 
@@ -271,9 +315,7 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             await Runner.LogWorkerAsync(id, text);
         }
 
-        public Task StatusAsync(
-            int id,
-            StatusInformation statusInformation)
+        public Task StatusAsync(int id, StatusInformation statusInformation)
         {
             if (_workers.TryGetValue(id, out var worker))
             {

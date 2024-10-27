@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,54 +30,56 @@
 //
 
 using System;
-using System.Runtime.Remoting.Messaging;
 using System.Runtime.Remoting.Contexts;
+using System.Runtime.Remoting.Messaging;
 
 namespace System.Runtime.Remoting.Activation
 {
-	[Serializable]
-	internal class ContextLevelActivator: IActivator
-	{
-		IActivator m_NextActivator;
+    [Serializable]
+    internal class ContextLevelActivator : IActivator
+    {
+        IActivator m_NextActivator;
 
-		public ContextLevelActivator (IActivator next)
-		{
-			m_NextActivator = next;
-		}
+        public ContextLevelActivator(IActivator next)
+        {
+            m_NextActivator = next;
+        }
 
-		public ActivatorLevel Level 
-		{
-			get { return ActivatorLevel.Context; }
-		}
+        public ActivatorLevel Level
+        {
+            get { return ActivatorLevel.Context; }
+        }
 
-		public IActivator NextActivator 
-		{
-			get { return m_NextActivator; }
-			set { m_NextActivator = value; }
-		}
+        public IActivator NextActivator
+        {
+            get { return m_NextActivator; }
+            set { m_NextActivator = value; }
+        }
 
-		public IConstructionReturnMessage Activate (IConstructionCallMessage ctorCall)
-		{
-			ServerIdentity identity = RemotingServices.CreateContextBoundObjectIdentity (ctorCall.ActivationType);
-			RemotingServices.SetMessageTargetIdentity (ctorCall, identity);
+        public IConstructionReturnMessage Activate(IConstructionCallMessage ctorCall)
+        {
+            ServerIdentity identity = RemotingServices.CreateContextBoundObjectIdentity(
+                ctorCall.ActivationType
+            );
+            RemotingServices.SetMessageTargetIdentity(ctorCall, identity);
 
-			ConstructionCall call = ctorCall as ConstructionCall;
-			if (call == null || !call.IsContextOk)
-			{
-				identity.Context = Context.CreateNewContext (ctorCall);
-				Context oldContext = Context.SwitchToContext (identity.Context);
+            ConstructionCall call = ctorCall as ConstructionCall;
+            if (call == null || !call.IsContextOk)
+            {
+                identity.Context = Context.CreateNewContext(ctorCall);
+                Context oldContext = Context.SwitchToContext(identity.Context);
 
-				try
-				{
-					return m_NextActivator.Activate (ctorCall);
-				}
-				finally
-				{
-					Context.SwitchToContext (oldContext);
-				}
-			}
-			else
-				return m_NextActivator.Activate (ctorCall);
-		}
-	}
+                try
+                {
+                    return m_NextActivator.Activate(ctorCall);
+                }
+                finally
+                {
+                    Context.SwitchToContext(oldContext);
+                }
+            }
+            else
+                return m_NextActivator.Activate(ctorCall);
+        }
+    }
 }

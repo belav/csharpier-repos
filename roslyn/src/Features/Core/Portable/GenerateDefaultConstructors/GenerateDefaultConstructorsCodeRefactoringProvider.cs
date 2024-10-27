@@ -17,21 +17,29 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
     /// type, the user will be offered to create a constructor in the derived type with the same
     /// signature if they don't already have one.  This way, a user can override a type and easily
     /// create all the forwarding constructors.
-    /// 
+    ///
     /// Importantly, this type is not responsible for generating constructors when the user types
     /// something like "new MyType(x, y, z)", nor is it responsible for generating constructors
-    /// for a type based on the fields/properties of that type. Both of those are handled by other 
+    /// for a type based on the fields/properties of that type. Both of those are handled by other
     /// services.
     /// </summary>
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, LanguageNames.VisualBasic,
-        Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            LanguageNames.VisualBasic,
+            Name = PredefinedCodeRefactoringProviderNames.GenerateDefaultConstructors
+        ),
+        Shared
+    ]
     internal class GenerateDefaultConstructorsCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateDefaultConstructorsCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateDefaultConstructorsCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -45,9 +53,17 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             if (document.Project.Solution.WorkspaceKind == WorkspaceKind.MiscellaneousFiles)
                 return;
 
-            var service = document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
-            var actions = await service.GenerateDefaultConstructorsAsync(
-                document, textSpan, context.Options, forRefactoring: true, cancellationToken).ConfigureAwait(false);
+            var service =
+                document.GetRequiredLanguageService<IGenerateDefaultConstructorsService>();
+            var actions = await service
+                .GenerateDefaultConstructorsAsync(
+                    document,
+                    textSpan,
+                    context.Options,
+                    forRefactoring: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             context.RegisterRefactorings(actions);
         }
     }

@@ -1,6 +1,6 @@
 //
 // DeleteTest.cs
-//  
+//
 // Author:
 //   Jonathan Chambers (joncham@gmail.com)
 //
@@ -34,91 +34,103 @@ using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
 using NUnit.Framework;
 
-namespace MonoTests.Microsoft.Build.Tasks {
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class DeleteTest
+    {
+        string path;
 
-	[TestFixture]
-	public class DeleteTest {
-		string path;
+        [SetUp]
+        public void CreateDir()
+        {
+            path = Path.Combine(Path.Combine("Test", "resources"), "Delete");
+            Directory.CreateDirectory(path);
+        }
 
-		[SetUp]
-		public void CreateDir ()
-		{
-			path = Path.Combine (Path.Combine ("Test", "resources"), "Delete");
-			Directory.CreateDirectory (path);
-		}
+        [TearDown]
+        public void RemoveDirectories()
+        {
+            Directory.Delete(path, true);
+        }
 
-		[TearDown]
-		public void RemoveDirectories ()
-		{
-			Directory.Delete (path, true);
-		}
+        [Test]
+        public void TestDelete1()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
 
-		[Test]
-		public void TestDelete1 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine(path, "delete.txt");
+            using (File.CreateText(file_path)) { }
 
-			using (File.CreateText (file_path)) { }
-
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Target Name='1'>
-						<Delete Files='" + file_path + @"'/>
+						<Delete Files='"
+                + file_path
+                + @"'/>
 					</Target>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+        }
 
-		[Test]
-		public void TestDelete2 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
-			string file_path2 = Path.Combine (path, "delete2.txt");
+        [Test]
+        public void TestDelete2()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
+            string file_path2 = Path.Combine(path, "delete2.txt");
 
-			using (File.CreateText (file_path)) { }
-			using (File.CreateText (file_path2)) { }
+            using (File.CreateText(file_path)) { }
+            using (File.CreateText(file_path2)) { }
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<Target Name='1'>
-						<Delete Files='" + file_path + ";" + file_path2 + @"'/>
+						<Delete Files='"
+                + file_path
+                + ";"
+                + file_path2
+                + @"'/>
 					</Target>
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-			Assert.IsTrue (!File.Exists (file_path), "A3");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+            Assert.IsTrue(!File.Exists(file_path), "A3");
+        }
 
-		[Test]
-		public void TestDelete3 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
+        [Test]
+        public void TestDelete3()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
 
-			using (File.CreateText (file_path)) { }
+            using (File.CreateText(file_path)) { }
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
-						<FileToDelete>" + file_path + @"</FileToDelete>
+						<FileToDelete>"
+                + file_path
+                + @"</FileToDelete>
 					</PropertyGroup>
 					<Target Name='1'>
 						<Delete Files='$(FileToDelete)'/>
@@ -126,30 +138,35 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+        }
 
-		[Test]
-		public void TestDelete4 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
-			string file_path2 = Path.Combine (path, "delete2.txt");
+        [Test]
+        public void TestDelete4()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
+            string file_path2 = Path.Combine(path, "delete2.txt");
 
-			using (File.CreateText (file_path)) { }
-			using (File.CreateText (file_path2)) { }
+            using (File.CreateText(file_path)) { }
+            using (File.CreateText(file_path2)) { }
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
-						<FileToDelete>" + file_path + @"</FileToDelete>
-						<FileToDelete2>" + file_path2 + @"</FileToDelete2>
+						<FileToDelete>"
+                + file_path
+                + @"</FileToDelete>
+						<FileToDelete2>"
+                + file_path2
+                + @"</FileToDelete2>
 					</PropertyGroup>
 					<Target Name='1'>
 						<Delete Files='$(FileToDelete);$(FileToDelete2)'/>
@@ -157,28 +174,31 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-			Assert.IsTrue (!File.Exists (file_path2), "A3");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+            Assert.IsTrue(!File.Exists(file_path2), "A3");
+        }
 
-		[Test]
-		public void TestDelete5 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
+        [Test]
+        public void TestDelete5()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
 
-			using (File.CreateText (file_path)) { }
+            using (File.CreateText(file_path)) { }
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
-						<File Include='" + file_path + @"' />
+						<File Include='"
+                + file_path
+                + @"' />
 					</ItemGroup>
 					<Target Name='1'>
 						<Delete Files='@(File)'/>
@@ -186,31 +206,35 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+        }
 
+        [Test]
+        public void TestDelete6()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
+            string file_path2 = Path.Combine(path, "delete2.txt");
 
-		[Test]
-		public void TestDelete6 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
-			string file_path2 = Path.Combine (path, "delete2.txt");
+            using (File.CreateText(file_path)) { }
+            using (File.CreateText(file_path2)) { }
 
-			using (File.CreateText (file_path)) { }
-			using (File.CreateText (file_path2)) { }
-
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
-						<File Include='" + file_path + @"' />
-						<File Include='" + file_path2 + @"' />
+						<File Include='"
+                + file_path
+                + @"' />
+						<File Include='"
+                + file_path2
+                + @"' />
 					</ItemGroup>
 					<Target Name='1'>
 						<Delete Files='@(File)'/>
@@ -218,29 +242,32 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-			Assert.IsTrue (!File.Exists (file_path2), "A3");
-		}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+            Assert.IsTrue(!File.Exists(file_path2), "A3");
+        }
 
-		[Test]
-		[Category ("NotWorking")]
-		public void TestDelete7 ()
-		{
-			Engine engine;
-			Project project;
-			string file_path = Path.Combine (path, "delete.txt");
+        [Test]
+        [Category("NotWorking")]
+        public void TestDelete7()
+        {
+            Engine engine;
+            Project project;
+            string file_path = Path.Combine(path, "delete.txt");
 
-			using (File.CreateText (file_path)) { }
+            using (File.CreateText(file_path)) { }
 
-			string documentString = @"
+            string documentString =
+                @"
 				<Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<PropertyGroup>
-						<FolderToDelete>" + path + @"</FolderToDelete>
+						<FolderToDelete>"
+                + path
+                + @"</FolderToDelete>
 						<FileToDelete>delete</FileToDelete>
 						<ExtToDelete>txt</ExtToDelete>
 					</PropertyGroup>
@@ -250,13 +277,12 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("1"), "A1");
-			Assert.IsTrue (!File.Exists (file_path), "A2");
-		}
-
-	}
+            Assert.IsTrue(project.Build("1"), "A1");
+            Assert.IsTrue(!File.Exists(file_path), "A2");
+        }
+    }
 }

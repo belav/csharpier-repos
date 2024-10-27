@@ -2,9 +2,9 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Security;
 // using System.Security.Permissions;
 using System.Collections.Generic;
+using System.Security;
 using Xunit;
 
 // [KeyContainerPermission(SecurityAction.Demand, Flags = KeyContainerPermissionFlags.Delete)]
@@ -12,7 +12,8 @@ public static class GenericSecurity
 {
     private static int s_result = 99;
 
-    private static void Gen<T>() where T : System.Exception, new()
+    private static void Gen<T>()
+        where T : System.Exception, new()
     {
         try
         {

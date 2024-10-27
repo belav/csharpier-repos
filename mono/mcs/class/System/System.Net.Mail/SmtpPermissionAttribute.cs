@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,53 +30,56 @@
 using System.Security;
 using System.Security.Permissions;
 
-namespace System.Net.Mail {
+namespace System.Net.Mail
+{
+    [AttributeUsage(
+        AttributeTargets.Assembly
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Constructor
+            | AttributeTargets.Method,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable]
+    public sealed class SmtpPermissionAttribute : CodeAccessSecurityAttribute
+    {
+        private string access;
 
-	[AttributeUsage (AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct 
-		| AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = true, Inherited = false)]
-	[Serializable]
-	public sealed class SmtpPermissionAttribute : CodeAccessSecurityAttribute {
+        public SmtpPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-		private string access;
+        public string Access
+        {
+            get { return access; }
+            set { access = value; }
+        }
 
-		
-		public SmtpPermissionAttribute (SecurityAction action)
-			: base (action)
-		{
-		}
+        private SmtpAccess GetSmtpAccess()
+        {
+            if (access == null)
+                return SmtpAccess.None;
 
+            switch (access.ToLowerInvariant())
+            {
+                case "connecttounrestrictedport":
+                    return SmtpAccess.ConnectToUnrestrictedPort;
+                case "connect":
+                    return SmtpAccess.Connect;
+                case "none":
+                    return SmtpAccess.None;
+                default:
+                    string s = Locale.GetText("Invalid Access='{0}' value.", access);
+                    throw new ArgumentException("Access", s);
+            }
+        }
 
-		public string Access {
-			get { return access; }
-			set { access = value; }
-		}
+        public override IPermission CreatePermission()
+        {
+            if (Unrestricted)
+                return new SmtpPermission(true);
 
-
-		private SmtpAccess GetSmtpAccess ()
-		{
-			if (access == null)
-				return SmtpAccess.None;
-
-			switch (access.ToLowerInvariant ()) {
-			case "connecttounrestrictedport":
-				return SmtpAccess.ConnectToUnrestrictedPort;
-			case "connect":
-				return SmtpAccess.Connect;
-			case "none":
-				return SmtpAccess.None;
-			default:
-				string s = Locale.GetText ("Invalid Access='{0}' value.", access);
-				throw new ArgumentException ("Access", s);
-			}
-		}
-
-		public override IPermission CreatePermission ()
-		{
-			if (Unrestricted)
-				return new SmtpPermission (true);
-
-			return new SmtpPermission (GetSmtpAccess ());
-		}
-	}
+            return new SmtpPermission(GetSmtpAccess());
+        }
+    }
 }
-

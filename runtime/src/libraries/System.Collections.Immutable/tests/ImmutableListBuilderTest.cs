@@ -85,7 +85,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void EnumerateBuilderWhileMutating()
         {
-            ImmutableList<int>.Builder builder = ImmutableList<int>.Empty.AddRange(Enumerable.Range(1, 10)).ToBuilder();
+            ImmutableList<int>.Builder builder = ImmutableList<int>
+                .Empty.AddRange(Enumerable.Range(1, 10))
+                .ToBuilder();
             Assert.Equal(Enumerable.Range(1, 10), builder);
 
             ImmutableList<int>.Enumerator enumerator = builder.GetEnumerator();
@@ -126,8 +128,14 @@ namespace System.Collections.Immutable.Tests
             mutable.Insert(2, 3);
             Assert.Equal(new[] { 0, 1, 3 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.Insert(-1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.Insert(4, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.Insert(-1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.Insert(4, 0)
+            );
         }
 
         [Fact]
@@ -144,7 +152,9 @@ namespace System.Collections.Immutable.Tests
             Assert.Equal(new[] { 1, 2, 3, 4, 5, 6 }, mutable);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(-1, new int[0]));
-            Assert.Throws<ArgumentOutOfRangeException>(() => mutable.InsertRange(mutable.Count + 1, new int[0]));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => mutable.InsertRange(mutable.Count + 1, new int[0])
+            );
         }
 
         [Fact]
@@ -184,13 +194,13 @@ namespace System.Collections.Immutable.Tests
         public void RemoveAllBugTest()
         {
             ImmutableList<int>.Builder builder = ImmutableList.CreateBuilder<int>();
-            var elemsToRemove = new[]{0, 1, 2, 3, 4, 5}.ToImmutableHashSet();
+            var elemsToRemove = new[] { 0, 1, 2, 3, 4, 5 }.ToImmutableHashSet();
             // NOTE: this uses Add instead of AddRange because AddRange doesn't exhibit the same issue due to a different order of tree building.
             // Don't change it without testing with the bug repro from https://github.com/dotnet/runtime/issues/22093.
-            foreach (int elem in new[]{0, 1, 2, 3, 4, 5, 6})
+            foreach (int elem in new[] { 0, 1, 2, 3, 4, 5, 6 })
                 builder.Add(elem);
             builder.RemoveAll(elemsToRemove.Contains);
-            Assert.Equal(new[]{ 6 }, builder);
+            Assert.Equal(new[] { 6 }, builder);
         }
 
         [Fact]
@@ -204,7 +214,9 @@ namespace System.Collections.Immutable.Tests
             Assert.True(mutable.Remove(2.4, null));
             Assert.Equal(new[] { 1.5, 3.6 }, mutable);
 
-            var absComparer = new DelegateEqualityComparer<double>(equals: (x, y) => Math.Abs(x) == Math.Abs(y));
+            var absComparer = new DelegateEqualityComparer<double>(
+                equals: (x, y) => Math.Abs(x) == Math.Abs(y)
+            );
             Assert.True(mutable.Remove(-1.5, absComparer));
             Assert.Equal(new[] { 3.6 }, mutable);
 
@@ -229,11 +241,16 @@ namespace System.Collections.Immutable.Tests
             mutable.RemoveRange(new double[] { 2.4, 3.6 });
             Assert.Equal(new[] { 1.5, 4.7 }, mutable);
 
-            var absComparer = new DelegateEqualityComparer<double>(equals: (x, y) => Math.Abs(x) == Math.Abs(y));
+            var absComparer = new DelegateEqualityComparer<double>(
+                equals: (x, y) => Math.Abs(x) == Math.Abs(y)
+            );
             mutable.RemoveRange(new double[] { -1.5 }, absComparer);
             Assert.Equal(new[] { 4.7 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.RemoveRange(2, 3));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.RemoveRange(2, 3)
+            );
         }
 
         [Fact]
@@ -248,14 +265,26 @@ namespace System.Collections.Immutable.Tests
             mutable.RemoveAt(0);
             Assert.Equal(new[] { 2 }, mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.RemoveAt(1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.RemoveAt(1)
+            );
 
             mutable.RemoveAt(0);
             Assert.Equal(new int[0], mutable);
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.RemoveAt(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.RemoveAt(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => mutable.RemoveAt(1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.RemoveAt(0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.RemoveAt(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => mutable.RemoveAt(1)
+            );
         }
 
         [Fact]
@@ -269,7 +298,9 @@ namespace System.Collections.Immutable.Tests
             mutable.Replace(3.6, 3.8);
             Assert.Equal(new[] { 1.5, 2.4, 3.8 }, mutable);
 
-            var absComparer = new DelegateEqualityComparer<double>(equals: (x, y) => Math.Abs(x) == Math.Abs(y));
+            var absComparer = new DelegateEqualityComparer<double>(
+                equals: (x, y) => Math.Abs(x) == Math.Abs(y)
+            );
             mutable.Replace(-1.5, 1.2, absComparer);
             Assert.Equal(new[] { 1.2, 2.4, 3.8 }, mutable);
         }
@@ -277,7 +308,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Reverse()
         {
-            ImmutableList<int>.Builder mutable = ImmutableList.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
+            ImmutableList<int>.Builder mutable = ImmutableList
+                .CreateRange(Enumerable.Range(1, 3))
+                .ToBuilder();
             mutable.Reverse();
             Assert.Equal(Enumerable.Range(1, 3).Reverse(), mutable);
         }
@@ -285,7 +318,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Clear()
         {
-            ImmutableList<int>.Builder mutable = ImmutableList.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
+            ImmutableList<int>.Builder mutable = ImmutableList
+                .CreateRange(Enumerable.Range(1, 3))
+                .ToBuilder();
             mutable.Clear();
             Assert.Equal(0, mutable.Count);
 
@@ -304,7 +339,9 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Indexer()
         {
-            ImmutableList<int>.Builder mutable = ImmutableList.CreateRange(Enumerable.Range(1, 3)).ToBuilder();
+            ImmutableList<int>.Builder mutable = ImmutableList
+                .CreateRange(Enumerable.Range(1, 3))
+                .ToBuilder();
             Assert.Equal(2, mutable[1]);
             mutable[1] = 5;
             Assert.Equal(5, mutable[1]);
@@ -326,7 +363,8 @@ namespace System.Collections.Immutable.Tests
                 (b, v) => b.IndexOf(v),
                 (b, v, i) => b.IndexOf(v, i),
                 (b, v, i, c) => b.IndexOf(v, i, c),
-                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.IndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -338,7 +376,8 @@ namespace System.Collections.Immutable.Tests
                 (b, v, eq) => b.LastIndexOf(v, b.Count > 0 ? b.Count - 1 : 0, b.Count, eq),
                 (b, v, i) => b.LastIndexOf(v, i),
                 (b, v, i, c) => b.LastIndexOf(v, i, c),
-                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq));
+                (b, v, i, c, eq) => b.LastIndexOf(v, i, c, eq)
+            );
         }
 
         [Fact]
@@ -403,24 +442,39 @@ namespace System.Collections.Immutable.Tests
             this.AssertIListBaseline(RemoveFunc, new ProgrammaticEquals(v => v is string), 3);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public void DebuggerAttributesValid()
         {
-            DebuggerAttributes.ValidateDebuggerDisplayReferences(ImmutableList.CreateBuilder<int>());
+            DebuggerAttributes.ValidateDebuggerDisplayReferences(
+                ImmutableList.CreateBuilder<int>()
+            );
             ImmutableList<string>.Builder builder = ImmutableList.CreateBuilder<string>();
             builder.Add("One");
             builder.Add("Two");
-            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(builder);
-            PropertyInfo itemProperty = info.Properties.Single(pr => pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State == DebuggerBrowsableState.RootHidden);
+            DebuggerAttributeInfo info = DebuggerAttributes.ValidateDebuggerTypeProxyProperties(
+                builder
+            );
+            PropertyInfo itemProperty = info.Properties.Single(pr =>
+                pr.GetCustomAttribute<DebuggerBrowsableAttribute>().State
+                == DebuggerBrowsableState.RootHidden
+            );
             string[] items = itemProperty.GetValue(info.Instance) as string[];
             Assert.Equal(builder, items);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsDebuggerTypeProxyAttributeSupported)
+        )]
         public static void TestDebuggerAttributes_Null()
         {
             Type proxyType = DebuggerAttributes.GetProxyType(ImmutableList.CreateBuilder<string>());
-            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(() => Activator.CreateInstance(proxyType, (object)null));
+            TargetInvocationException tie = Assert.Throws<TargetInvocationException>(
+                () => Activator.CreateInstance(proxyType, (object)null)
+            );
             Assert.IsType<ArgumentNullException>(tie.InnerException);
         }
 
@@ -471,7 +525,10 @@ namespace System.Collections.Immutable.Tests
             Assert.False(list.IsEmpty);
 
             ImmutableList<int>.Builder nullBuilder = null;
-            AssertExtensions.Throws<ArgumentNullException>("builder", () => nullBuilder.ToImmutableList());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "builder",
+                () => nullBuilder.ToImmutableList()
+            );
         }
 
         protected override IEnumerable<T> GetEnumerableOf<T>(params T[] contents)
@@ -511,7 +568,10 @@ namespace System.Collections.Immutable.Tests
             return builder.ToImmutable().ToList();
         }
 
-        protected override List<T> SortTestHelper<T>(ImmutableList<T> list, Comparison<T> comparison)
+        protected override List<T> SortTestHelper<T>(
+            ImmutableList<T> list,
+            Comparison<T> comparison
+        )
         {
             ImmutableList<T>.Builder builder = list.ToBuilder();
             builder.Sort(comparison);
@@ -525,7 +585,12 @@ namespace System.Collections.Immutable.Tests
             return builder.ToImmutable().ToList();
         }
 
-        protected override List<T> SortTestHelper<T>(ImmutableList<T> list, int index, int count, IComparer<T> comparer)
+        protected override List<T> SortTestHelper<T>(
+            ImmutableList<T> list,
+            int index,
+            int count,
+            IComparer<T> comparer
+        )
         {
             ImmutableList<T>.Builder builder = list.ToBuilder();
             builder.Sort(index, count, comparer);

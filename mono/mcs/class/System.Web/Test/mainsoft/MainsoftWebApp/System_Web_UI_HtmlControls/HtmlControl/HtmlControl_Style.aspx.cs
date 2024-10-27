@@ -31,83 +31,94 @@ using System;
 using System.Collections;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_HtmlControls
 {
-	public class HtmlControl_Style
-		: GHTBaseWeb 
-	{
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-		}
-		#endregion
+    public class HtmlControl_Style : GHTBaseWeb
+    {
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void TestStyleControl(Type HTMLCtlType, string TestName) 
-		{ 
-			System.Web.UI.HtmlControls.HtmlControl ctl; 
-			string styleStr = ""; 
-			GHTSubTestBegin(TestName); 
-			try
-			{ 
-				ctl = (HtmlControl)GHTElementClone(HTMLCtlType); 
-				GHTActiveSubTest.Controls.Add(ctl); 
-				ctl.Style.Add("background-color", "#eeeeee"); 
-				ctl.Style.Add("some-other-color", "#eeeeee"); 
-				ctl.Style.Add("unknown-without-value", ""); 
-				ctl.Style.Add("space space", "sp a ce"); 
-				IEnumerator keys = ctl.Style.Keys.GetEnumerator(); 
-				while (keys.MoveNext()) 
-				{ 
-					string key = ((string)(keys.Current)); 
-					if ((styleStr != "")) 
-					{ 
-						styleStr += ","; 
-					} 
-					styleStr += key + "=" + ctl.Style[key]; 
-				} 
-				GHTSubTestAddResult(styleStr); 
-			} 
-			catch (Exception ex) 
-			{ 
-				GHTSubTestUnexpectedExceptionCaught(ex); 
-				ctl = null; 
-			} 
-			GHTSubTestEnd(); 
-		}
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+        }
+        #endregion
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        private void TestStyleControl(Type HTMLCtlType, string TestName)
+        {
+            System.Web.UI.HtmlControls.HtmlControl ctl;
+            string styleStr = "";
+            GHTSubTestBegin(TestName);
+            try
+            {
+                ctl = (HtmlControl)GHTElementClone(HTMLCtlType);
+                GHTActiveSubTest.Controls.Add(ctl);
+                ctl.Style.Add("background-color", "#eeeeee");
+                ctl.Style.Add("some-other-color", "#eeeeee");
+                ctl.Style.Add("unknown-without-value", "");
+                ctl.Style.Add("space space", "sp a ce");
+                IEnumerator keys = ctl.Style.Keys.GetEnumerator();
+                while (keys.MoveNext())
+                {
+                    string key = ((string)(keys.Current));
+                    if ((styleStr != ""))
+                    {
+                        styleStr += ",";
+                    }
+                    styleStr += key + "=" + ctl.Style[key];
+                }
+                GHTSubTestAddResult(styleStr);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+                ctl = null;
+            }
+            GHTSubTestEnd();
+        }
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlInputButton), "HTMLInputButton_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlInputHidden), "HtmlInputHidden_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlInputImage), "HtmlInputImage_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_Style");
-			TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlGenericControl), "HtmlGenericControl_Style");
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-			GHTTestEnd();
-		}
-	}
+            TestStyleControl(
+                typeof(System.Web.UI.HtmlControls.HtmlInputButton),
+                "HTMLInputButton_Style"
+            );
+            TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlButton), "HTMLButton_Style");
+            TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlAnchor), "HTMLAnchor_Style");
+            TestStyleControl(
+                typeof(System.Web.UI.HtmlControls.HtmlInputHidden),
+                "HtmlInputHidden_Style"
+            );
+            TestStyleControl(
+                typeof(System.Web.UI.HtmlControls.HtmlInputImage),
+                "HtmlInputImage_Style"
+            );
+            TestStyleControl(typeof(System.Web.UI.HtmlControls.HtmlTextArea), "HtmlTextArea_Style");
+            TestStyleControl(
+                typeof(System.Web.UI.HtmlControls.HtmlGenericControl),
+                "HtmlGenericControl_Style"
+            );
+
+            GHTTestEnd();
+        }
+    }
 }

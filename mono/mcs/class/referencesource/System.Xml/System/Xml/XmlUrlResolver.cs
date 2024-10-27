@@ -5,26 +5,30 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-using System.Threading;
-using System.Security.Permissions;
 using System.Net;
 using System.Net.Cache;
 using System.Runtime.Versioning;
+using System.Security.Permissions;
+using System.Threading;
 
-namespace System.Xml {
-
+namespace System.Xml
+{
     // Resolves external XML resources named by a Uniform Resource Identifier (URI).
-    public partial class XmlUrlResolver : XmlResolver {
+    public partial class XmlUrlResolver : XmlResolver
+    {
         private static object s_DownloadManager;
         private ICredentials _credentials;
         private IWebProxy _proxy;
         private RequestCachePolicy _cachePolicy;
 
-        static XmlDownloadManager DownloadManager {
-            get {
-                if ( s_DownloadManager == null ) {
+        static XmlDownloadManager DownloadManager
+        {
+            get
+            {
+                if (s_DownloadManager == null)
+                {
                     object dm = new XmlDownloadManager();
-                    Interlocked.CompareExchange<object>( ref s_DownloadManager, dm, null );
+                    Interlocked.CompareExchange<object>(ref s_DownloadManager, dm, null);
                 }
                 return (XmlDownloadManager)s_DownloadManager;
             }
@@ -33,18 +37,20 @@ namespace System.Xml {
         // Construction
 
         // Creates a new instance of the XmlUrlResolver class.
-        public XmlUrlResolver() {
-        }
+        public XmlUrlResolver() { }
 
-        public override ICredentials Credentials {
+        public override ICredentials Credentials
+        {
             set { _credentials = value; }
         }
 
-        public IWebProxy Proxy {
+        public IWebProxy Proxy
+        {
             set { _proxy = value; }
         }
 
-        public RequestCachePolicy CachePolicy {
+        public RequestCachePolicy CachePolicy
+        {
             set { _cachePolicy = value; }
         }
 
@@ -53,11 +59,18 @@ namespace System.Xml {
         // Maps a URI to an Object containing the actual resource.
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public override Object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn) {
-            if (ofObjectToReturn == null || ofObjectToReturn == typeof(System.IO.Stream) || ofObjectToReturn == typeof(System.Object)) {
+        public override Object GetEntity(Uri absoluteUri, string role, Type ofObjectToReturn)
+        {
+            if (
+                ofObjectToReturn == null
+                || ofObjectToReturn == typeof(System.IO.Stream)
+                || ofObjectToReturn == typeof(System.Object)
+            )
+            {
                 return DownloadManager.GetStream(absoluteUri, _credentials, _proxy, _cachePolicy);
             }
-            else {
+            else
+            {
                 throw new XmlException(Res.Xml_UnsupportedClass, string.Empty);
             }
         }
@@ -65,7 +78,8 @@ namespace System.Xml {
         [PermissionSetAttribute(SecurityAction.InheritanceDemand, Name = "FullTrust")]
         [ResourceConsumption(ResourceScope.Machine)]
         [ResourceExposure(ResourceScope.Machine)]
-        public override Uri ResolveUri(Uri baseUri, string relativeUri){
+        public override Uri ResolveUri(Uri baseUri, string relativeUri)
+        {
             return base.ResolveUri(baseUri, relativeUri);
         }
     }

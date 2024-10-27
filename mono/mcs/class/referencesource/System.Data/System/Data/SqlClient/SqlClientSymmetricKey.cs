@@ -15,7 +15,8 @@ namespace System.Data.SqlClient
     /// Base class containing raw key bytes for symmetric key algorithms. Some encryption algorithms can use the key directly while others derive sub keys from this.
     /// If an algorithm needs to derive more keys, have a derived class from this and use it in the corresponding encryption algorithm.
     /// </summary>
-    internal class SqlClientSymmetricKey {
+    internal class SqlClientSymmetricKey
+    {
         /// <summary>
         /// The underlying key material
         /// </summary>
@@ -25,9 +26,11 @@ namespace System.Data.SqlClient
         /// Constructor that initializes the root key.
         /// </summary>
         /// <param name="rootKey">root key</param>
-        internal SqlClientSymmetricKey(byte[] rootKey) {
+        internal SqlClientSymmetricKey(byte[] rootKey)
+        {
             // Key validation
-            if (rootKey == null || rootKey.Length == 0) {
+            if (rootKey == null || rootKey.Length == 0)
+            {
                 throw SQL.NullColumnEncryptionKeySysErr();
             }
 
@@ -37,24 +40,23 @@ namespace System.Data.SqlClient
         /// <summary>
         /// Empty destructor for binary back compat.
         /// </summary>
-        ~SqlClientSymmetricKey() {
-        }
+        ~SqlClientSymmetricKey() { }
 
         /// <summary>
         /// Returns a copy of the plain text key
         /// This is needed for actual encryption/decryption.
         /// </summary>
-        internal virtual byte[] RootKey {
-            get {
-                return _rootKey; 
-            }
+        internal virtual byte[] RootKey
+        {
+            get { return _rootKey; }
         }
 
         /// <summary>
         /// Computes SHA256 value of the plain text key bytes
         /// </summary>
         /// <returns>A string containing SHA256 hash of the root key</returns>
-        internal virtual string GetKeyHash() {
+        internal virtual string GetKeyHash()
+        {
             return SqlSecurityUtility.GetSHA256Hash(RootKey);
         }
 
@@ -64,7 +66,8 @@ namespace System.Data.SqlClient
         /// <returns>
         /// Returns the length of the root key
         /// </returns>
-        internal virtual int Length() {
+        internal virtual int Length()
+        {
             return _rootKey.Length;
         }
     }

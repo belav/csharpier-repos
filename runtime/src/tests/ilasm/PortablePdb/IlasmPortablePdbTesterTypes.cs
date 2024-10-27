@@ -11,6 +11,7 @@ namespace IlasmPortablePdbTests
         public Guid HashAlgorithm { get; set; }
         public byte[] Hash { get; set; }
         public Guid Language { get; set; }
+
         public DocumentStub(string name)
         {
             Name = name;
@@ -27,13 +28,15 @@ namespace IlasmPortablePdbTests
         public int StartColumn { get; set; }
         public int StartLine { get; set; }
 
-        public SequencePointStub(DocumentStub document,
+        public SequencePointStub(
+            DocumentStub document,
             bool isHidden = true,
             int offset = 0,
             int startLine = SequencePoint.HiddenLine,
             int endLine = SequencePoint.HiddenLine,
             int startCol = 0,
-            int endCol = 0)
+            int endCol = 0
+        )
         {
             Document = document;
             StartLine = startLine;
@@ -50,7 +53,12 @@ namespace IlasmPortablePdbTests
         public string Name { get; set; }
         public DocumentStub Document { get; set; }
         public List<SequencePointStub> SequencePoints { get; set; }
-        public MethodDebugInformationStub(string name, DocumentStub document, List<SequencePointStub> sequencePoints = null)
+
+        public MethodDebugInformationStub(
+            string name,
+            DocumentStub document,
+            List<SequencePointStub> sequencePoints = null
+        )
         {
             Name = name;
             Document = document;
@@ -63,6 +71,7 @@ namespace IlasmPortablePdbTests
         public string Name { get; set; }
         public int Index { get; set; }
         public bool IsDebuggerHidden { get; set; }
+
         public VariableStub(string name, int index, bool isDebuggerHidden = false)
         {
             Name = name;
@@ -74,11 +83,18 @@ namespace IlasmPortablePdbTests
     public class LocalScopeStub
     {
         public string MethodName { get; set; }
-        public int StartOffset { get; set;  }
+        public int StartOffset { get; set; }
         public int EndOffset { get; set; }
         public int Length { get; set; }
         public List<VariableStub> Variables { get; set; }
-        public LocalScopeStub(string methodName, int startOffset, int endOffset, int length, List<VariableStub> variables = null)
+
+        public LocalScopeStub(
+            string methodName,
+            int startOffset,
+            int endOffset,
+            int length,
+            List<VariableStub> variables = null
+        )
         {
             MethodName = methodName;
             StartOffset = startOffset;

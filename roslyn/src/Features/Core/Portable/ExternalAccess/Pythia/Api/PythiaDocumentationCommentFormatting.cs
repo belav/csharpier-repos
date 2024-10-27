@@ -10,7 +10,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Pythia.Api
 {
     internal static class PythiaDocumentationCommentFormatting
     {
-        public static IEnumerable<TaggedText> GetDocumentationParts(ISymbol symbol, SemanticModel semanticModel, int position, IDocumentationCommentFormattingService formatter, CancellationToken cancellationToken)
-            => Shared.Extensions.ISymbolExtensions2.GetDocumentationParts(symbol, semanticModel, position, formatter, cancellationToken);
+        public static IEnumerable<TaggedText> GetDocumentationParts(
+            ISymbol symbol,
+            SemanticModel semanticModel,
+            int position,
+            IDocumentationCommentFormattingService formatter,
+            CancellationToken cancellationToken
+        ) =>
+            Shared.Extensions.ISymbolExtensions2.GetDocumentationParts(
+                symbol,
+                semanticModel,
+                position,
+                formatter,
+                cancellationToken
+            );
     }
 }

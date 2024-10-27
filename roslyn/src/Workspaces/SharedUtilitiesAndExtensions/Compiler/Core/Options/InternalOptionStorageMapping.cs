@@ -23,5 +23,8 @@ internal abstract class OptionStorageMapping(IOption2 internalOption)
     /// <summary>
     /// Returns a new internal value created by updating <paramref name="currentInternalValue"/> to <paramref name="newPublicValue"/>.
     /// </summary>
-    public abstract object? UpdateInternalOptionValue(object? currentInternalValue, object? newPublicValue);
+    public abstract object? UpdateInternalOptionValue(
+        object? currentInternalValue,
+        object? newPublicValue
+    );
 }

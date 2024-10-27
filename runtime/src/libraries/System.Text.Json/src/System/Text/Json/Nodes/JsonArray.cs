@@ -27,14 +27,16 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that is empty.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
-        public JsonArray(JsonNodeOptions? options = null) : base(options) { }
+        public JsonArray(JsonNodeOptions? options = null)
+            : base(options) { }
 
         /// <summary>
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that contains items from the specified params array.
         /// </summary>
         /// <param name="options">Options to control the behavior.</param>
         /// <param name="items">The items to add to the new <see cref="JsonArray"/>.</param>
-        public JsonArray(JsonNodeOptions options, params JsonNode?[] items) : base(options)
+        public JsonArray(JsonNodeOptions options, params JsonNode?[] items)
+            : base(options)
         {
             InitializeFromArray(items);
         }
@@ -43,7 +45,8 @@ namespace System.Text.Json.Nodes
         ///   Initializes a new instance of the <see cref="JsonArray"/> class that contains items from the specified array.
         /// </summary>
         /// <param name="items">The items to add to the new <see cref="JsonArray"/>.</param>
-        public JsonArray(params JsonNode?[] items) : base()
+        public JsonArray(params JsonNode?[] items)
+            : base()
         {
             InitializeFromArray(items);
         }
@@ -61,10 +64,7 @@ namespace System.Text.Json.Nodes
                     : new JsonArray(Options);
             }
 
-            var jsonArray = new JsonArray(Options)
-            {
-                _list = new List<JsonNode?>(list.Count)
-            };
+            var jsonArray = new JsonArray(Options) { _list = new List<JsonNode?>(list.Count) };
 
             for (int i = 0; i < list.Count; i++)
             {
@@ -78,7 +78,8 @@ namespace System.Text.Json.Nodes
         {
             switch (node)
             {
-                case null or JsonObject:
+                case null
+                or JsonObject:
                     return false;
                 case JsonValue value:
                     // JsonValue instances have special comparison semantics, dispatch to their implementation.
@@ -154,11 +155,14 @@ namespace System.Text.Json.Nodes
             {
                 JsonValueKind.Null => null,
                 JsonValueKind.Array => new JsonArray(element, options),
-                _ => throw new InvalidOperationException(SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Array))),
+                _ => throw new InvalidOperationException(
+                    SR.Format(SR.NodeElementWrongType, nameof(JsonValueKind.Array))
+                ),
             };
         }
 
-        internal JsonArray(JsonElement element, JsonNodeOptions? options = null) : base(options)
+        internal JsonArray(JsonElement element, JsonNodeOptions? options = null)
+            : base(options)
         {
             Debug.Assert(element.ValueKind == JsonValueKind.Array);
             _jsonElement = element;
@@ -290,7 +294,10 @@ namespace System.Text.Json.Nodes
         /// Provides a coherent view of the underlying representation of the current node.
         /// The jsonElement value should be consumed if and only if the list value is null.
         /// </summary>
-        private void GetUnderlyingRepresentation(out List<JsonNode?>? list, out JsonElement? jsonElement)
+        private void GetUnderlyingRepresentation(
+            out List<JsonNode?>? list,
+            out JsonElement? jsonElement
+        )
         {
             // Because JsonElement cannot be read atomically there might be torn reads,
             // however the order of read/write operations guarantees that that's only

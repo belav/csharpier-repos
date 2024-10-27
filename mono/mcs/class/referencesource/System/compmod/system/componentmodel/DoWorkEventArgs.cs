@@ -4,7 +4,7 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel 
+namespace System.ComponentModel
 {
     using System.Security.Permissions;
 
@@ -19,13 +19,13 @@ namespace System.ComponentModel
             this.argument = argument;
         }
 
-        [ SRDescription(SR.BackgroundWorker_DoWorkEventArgs_Argument) ]
+        [SRDescription(SR.BackgroundWorker_DoWorkEventArgs_Argument)]
         public object Argument
         {
             get { return argument; }
         }
 
-        [ SRDescription(SR.BackgroundWorker_DoWorkEventArgs_Result) ]
+        [SRDescription(SR.BackgroundWorker_DoWorkEventArgs_Result)]
         public object Result
         {
             get { return result; }
@@ -33,4 +33,3 @@ namespace System.ComponentModel
         }
     }
 }
-

@@ -5,14 +5,14 @@
 //------------------------------------------------------------------------------
 
 
-namespace System.Net {
-
+namespace System.Net
+{
     using System.Collections;
+    using System.Globalization;
+    using System.Runtime.Serialization;
     using System.Security;
     using System.Security.Permissions;
     using System.Text.RegularExpressions;
-    using System.Globalization;
-    using System.Runtime.Serialization;
 
     //NOTE: While WebPermissionAttribute resides in System.DLL,
     //      no classes from that DLL are able to make declarative usage of WebPermission.
@@ -28,49 +28,72 @@ namespace System.Net {
     // - 'ConnectPattern' and 'AcceptPattern' keywords allow you to specify a set of URI in escaped Regex form
     // -           They take '.*' as special "everything" indicators, which are fast-pathed.
 
-    [   AttributeUsage( AttributeTargets.Method | AttributeTargets.Constructor |
-                        AttributeTargets.Class  | AttributeTargets.Struct      |
-                        AttributeTargets.Assembly,
-                        AllowMultiple = true, Inherited = false )]
-
-    [Serializable()] sealed public class WebPermissionAttribute: CodeAccessSecurityAttribute
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
+    [Serializable()]
+    public sealed class WebPermissionAttribute : CodeAccessSecurityAttribute
     {
-        private object m_accept  = null;
+        private object m_accept = null;
         private object m_connect = null;
 
-        public WebPermissionAttribute( SecurityAction action ): base( action )
-        {
-        }
+        public WebPermissionAttribute(SecurityAction action)
+            : base(action) { }
 
-        public string Connect {
-            get { return m_connect as string;}
-            set {
-                if (m_connect != null) {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "Connect", value), "value");
+        public string Connect
+        {
+            get { return m_connect as string; }
+            set
+            {
+                if (m_connect != null)
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_perm_attrib_multi, "Connect", value),
+                        "value"
+                    );
                 }
                 m_connect = value;
             }
         }
 
-        public string Accept {
+        public string Accept
+        {
             get { return m_accept as string; }
-            set {
-                if (m_accept != null) {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "Accept", value), "value");
+            set
+            {
+                if (m_accept != null)
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_perm_attrib_multi, "Accept", value),
+                        "value"
+                    );
                 }
                 m_accept = value;
             }
         }
 
-        public string ConnectPattern {
+        public string ConnectPattern
+        {
             get
             {
-                return m_connect is DelayedRegex ? m_connect.ToString() : m_connect is bool && (bool) m_connect ? WebPermission.MatchAll : null;
+                return m_connect is DelayedRegex ? m_connect.ToString()
+                    : m_connect is bool && (bool)m_connect ? WebPermission.MatchAll
+                    : null;
             }
-
-            set {
-                if (m_connect != null) {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "ConnectPatern", value), "value");
+            set
+            {
+                if (m_connect != null)
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_perm_attrib_multi, "ConnectPatern", value),
+                        "value"
+                    );
                 }
                 if (value == WebPermission.MatchAll)
                 {
@@ -83,16 +106,22 @@ namespace System.Net {
             }
         }
 
-        public string AcceptPattern {
+        public string AcceptPattern
+        {
             get
             {
-                return m_accept is DelayedRegex ? m_accept.ToString() : m_accept is bool && (bool) m_accept ? WebPermission.MatchAll : null;
+                return m_accept is DelayedRegex ? m_accept.ToString()
+                    : m_accept is bool && (bool)m_accept ? WebPermission.MatchAll
+                    : null;
             }
-
             set
             {
-                if (m_accept != null) {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "AcceptPattern", value), "value");
+                if (m_accept != null)
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.net_perm_attrib_multi, "AcceptPattern", value),
+                        "value"
+                    );
                 }
                 if (value == WebPermission.MatchAll)
                 {
@@ -105,53 +134,55 @@ namespace System.Net {
             }
         }
 
-/*
-        public bool ConnectAll
-        {
-            get
-            {
-                return m_connect is bool ? (bool) m_connect : false;
-            }
-
-            set
-            {
-                if (m_connect != null)
+        /*
+                public bool ConnectAll
                 {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "ConnectAll", value), "value");
+                    get
+                    {
+                        return m_connect is bool ? (bool) m_connect : false;
+                    }
+        
+                    set
+                    {
+                        if (m_connect != null)
+                        {
+                            throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "ConnectAll", value), "value");
+                        }
+                        m_connect = value;
+                    }
                 }
-                m_connect = value;
-            }
-        }
-
-        public bool AcceptAll
-        {
-            get
-            {
-                return m_accept is bool ? (bool) m_accept : false;
-            }
-
-            set
-            {
-                if (m_accept != null)
+        
+                public bool AcceptAll
                 {
-                    throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "AcceptAll", value), "value");
+                    get
+                    {
+                        return m_accept is bool ? (bool) m_accept : false;
+                    }
+        
+                    set
+                    {
+                        if (m_accept != null)
+                        {
+                            throw new ArgumentException(SR.GetString(SR.net_perm_attrib_multi, "AcceptAll", value), "value");
+                        }
+                        m_accept = value;
+                    }
                 }
-                m_accept = value;
-            }
-        }
-*/
+        */
 
         public override IPermission CreatePermission()
         {
             WebPermission perm = null;
-            if (Unrestricted) {
-                perm = new WebPermission( PermissionState.Unrestricted);
+            if (Unrestricted)
+            {
+                perm = new WebPermission(PermissionState.Unrestricted);
             }
-            else {
-                NetworkAccess access = (NetworkAccess) 0;
+            else
+            {
+                NetworkAccess access = (NetworkAccess)0;
                 if (m_connect is bool)
                 {
-                    if ((bool) m_connect)
+                    if ((bool)m_connect)
                     {
                         access |= NetworkAccess.Connect;
                     }
@@ -159,40 +190,45 @@ namespace System.Net {
                 }
                 if (m_accept is bool)
                 {
-                    if ((bool) m_accept)
+                    if ((bool)m_accept)
                     {
                         access |= NetworkAccess.Accept;
                     }
                     m_accept = null;
                 }
                 perm = new WebPermission(access);
-                if (m_accept != null) {
-                    if (m_accept is DelayedRegex) {
+                if (m_accept != null)
+                {
+                    if (m_accept is DelayedRegex)
+                    {
                         perm.AddAsPattern(NetworkAccess.Accept, (DelayedRegex)m_accept);
                     }
-                    else {
+                    else
+                    {
                         perm.AddPermission(NetworkAccess.Accept, (string)m_accept);
                     }
                 }
-                if (m_connect != null) {
-                    if (m_connect is DelayedRegex) {
+                if (m_connect != null)
+                {
+                    if (m_connect is DelayedRegex)
+                    {
                         perm.AddAsPattern(NetworkAccess.Connect, (DelayedRegex)m_connect);
                     }
-                    else {
+                    else
+                    {
                         perm.AddPermission(NetworkAccess.Connect, (string)m_connect);
                     }
                 }
             }
             return perm;
         }
-
     }
 
     [Serializable]
     internal class DelayedRegex
     {
-        private Regex   _AsRegex;
-        private string  _AsString;
+        private Regex _AsRegex;
+        private string _AsString;
 
         internal DelayedRegex(string regexString)
         {
@@ -216,7 +252,13 @@ namespace System.Net {
             {
                 if (_AsRegex == null)
                 {
-                    _AsRegex = new Regex(_AsString + "[/]?", RegexOptions.IgnoreCase | RegexOptions.Compiled | RegexOptions.Singleline | RegexOptions.CultureInvariant);
+                    _AsRegex = new Regex(
+                        _AsString + "[/]?",
+                        RegexOptions.IgnoreCase
+                            | RegexOptions.Compiled
+                            | RegexOptions.Singleline
+                            | RegexOptions.CultureInvariant
+                    );
                 }
                 return _AsRegex;
             }
@@ -234,11 +276,15 @@ namespace System.Net {
     ///    </para>
     /// </devdoc>
     [Serializable]
-    public sealed class WebPermission : CodeAccessPermission, IUnrestrictedPermission {
-
+    public sealed class WebPermission : CodeAccessPermission, IUnrestrictedPermission
+    {
         private bool m_noRestriction;
-        [OptionalField] private bool m_UnrestrictedConnect;
-        [OptionalField] private bool m_UnrestrictedAccept;
+
+        [OptionalField]
+        private bool m_UnrestrictedConnect;
+
+        [OptionalField]
+        private bool m_UnrestrictedAccept;
         private ArrayList m_connectList = new ArrayList();
         private ArrayList m_acceptList = new ArrayList();
 
@@ -261,8 +307,10 @@ namespace System.Net {
         ///       Returns the enumeration of permissions to connect a remote URI.
         ///    </para>
         /// </devdoc>
-        public IEnumerator ConnectList {
-            get {
+        public IEnumerator ConnectList
+        {
+            get
+            {
                 if (m_UnrestrictedConnect)
                 {
                     return (new Regex[] { MatchAllRegex }).GetEnumerator();
@@ -271,9 +319,17 @@ namespace System.Net {
                 ArrayList cloned = new ArrayList(m_connectList.Count);
 
                 for (int i = 0; i < m_connectList.Count; ++i)
-                    cloned.Add(m_connectList[i] is DelayedRegex? (object)((DelayedRegex)m_connectList[i]).AsRegex :
-                    m_connectList[i] is Uri? (object)((Uri)m_connectList[i]).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped) :
-                    m_connectList[i]);
+                    cloned.Add(
+                        m_connectList[i] is DelayedRegex
+                            ? (object)((DelayedRegex)m_connectList[i]).AsRegex
+                        : m_connectList[i] is Uri
+                            ? (object)
+                                ((Uri)m_connectList[i]).GetComponents(
+                                    UriComponents.HttpRequestUrl,
+                                    UriFormat.UriEscaped
+                                )
+                        : m_connectList[i]
+                    );
 
                 return cloned.GetEnumerator();
             }
@@ -284,8 +340,10 @@ namespace System.Net {
         ///       Returns the enumeration of permissions to export a local URI.
         ///    </para>
         /// </devdoc>
-        public IEnumerator AcceptList {
-            get {
+        public IEnumerator AcceptList
+        {
+            get
+            {
                 if (m_UnrestrictedAccept)
                 {
                     return (new Regex[] { MatchAllRegex }).GetEnumerator();
@@ -294,9 +352,17 @@ namespace System.Net {
                 ArrayList cloned = new ArrayList(m_acceptList.Count);
 
                 for (int i = 0; i < m_acceptList.Count; ++i)
-                    cloned.Add(m_acceptList[i] is DelayedRegex? (object)((DelayedRegex)m_acceptList[i]).AsRegex :
-                    m_acceptList[i] is Uri? (object)((Uri)m_acceptList[i]).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped) :
-                    m_acceptList[i]);
+                    cloned.Add(
+                        m_acceptList[i] is DelayedRegex
+                            ? (object)((DelayedRegex)m_acceptList[i]).AsRegex
+                        : m_acceptList[i] is Uri
+                            ? (object)
+                                ((Uri)m_acceptList[i]).GetComponents(
+                                    UriComponents.HttpRequestUrl,
+                                    UriFormat.UriEscaped
+                                )
+                        : m_acceptList[i]
+                    );
 
                 return cloned.GetEnumerator();
             }
@@ -309,11 +375,13 @@ namespace System.Net {
         ///       that fails all demands.
         ///    </para>
         /// </devdoc>
-        public WebPermission(PermissionState state) {
+        public WebPermission(PermissionState state)
+        {
             m_noRestriction = (state == PermissionState.Unrestricted);
         }
 
-        internal WebPermission(bool unrestricted) {
+        internal WebPermission(bool unrestricted)
+        {
             m_noRestriction = unrestricted;
         }
 
@@ -322,8 +390,7 @@ namespace System.Net {
         ///       Creates a new instance of the <see cref='System.Net.WebPermission'/> class.
         ///    </para>
         /// </devdoc>
-        public WebPermission() {
-        }
+        public WebPermission() { }
 
         internal WebPermission(NetworkAccess access)
         {
@@ -339,7 +406,8 @@ namespace System.Net {
         ///       Suitable only for WebPermission policy object construction
         ///    </para>
         /// </devdoc>
-        public WebPermission(NetworkAccess access, Regex uriRegex) {
+        public WebPermission(NetworkAccess access, Regex uriRegex)
+        {
             AddPermission(access, uriRegex);
         }
 
@@ -352,12 +420,15 @@ namespace System.Net {
         ///    </para>
         /// </devdoc>
         // <
-        public WebPermission(NetworkAccess access, String uriString) {
+        public WebPermission(NetworkAccess access, String uriString)
+        {
             AddPermission(access, uriString);
         }
+
         //
         // <
-        internal WebPermission(NetworkAccess access, Uri uri) {
+        internal WebPermission(NetworkAccess access, Uri uri)
+        {
             AddPermission(access, uri);
         }
 
@@ -369,8 +440,10 @@ namespace System.Net {
         ///    </para>
         /// </devdoc>
         // <
-        public void AddPermission(NetworkAccess access, String  uriString) {
-            if (uriString == null) {
+        public void AddPermission(NetworkAccess access, String uriString)
+        {
+            if (uriString == null)
+            {
                 throw new ArgumentNullException("uriString");
             }
 
@@ -394,16 +467,22 @@ namespace System.Net {
                 {
                     // avoid duplicated uris in the list
                     bool found = false;
-                    foreach (object obj in list) {
+                    foreach (object obj in list)
+                    {
                         string str = obj as string;
-                        if (str != null && string.Compare(str, uriString, StringComparison.OrdinalIgnoreCase ) == 0)
+                        if (
+                            str != null
+                            && string.Compare(str, uriString, StringComparison.OrdinalIgnoreCase)
+                                == 0
+                        )
                         {
                             found = true;
                             break;
                         }
                     }
 
-                    if (!found) {
+                    if (!found)
+                    {
                         list.Add(uriString);
                     }
                 }
@@ -411,8 +490,10 @@ namespace System.Net {
         }
 
         // <
-        internal void AddPermission(NetworkAccess access, Uri uri) {
-            if (uri == null) {
+        internal void AddPermission(NetworkAccess access, Uri uri)
+        {
+            if (uri == null)
+            {
                 throw new ArgumentNullException("uri");
             }
 
@@ -431,14 +512,16 @@ namespace System.Net {
             {
                 // avoid duplicated uris in the list
                 bool found = false;
-                foreach (object permObj in list) {
+                foreach (object permObj in list)
+                {
                     if ((permObj is Uri) && uri.Equals(permObj))
                     {
                         found = true;
                         break;
                     }
                 }
-                if (!found) {
+                if (!found)
+                {
                     list.Add(uri);
                 }
             }
@@ -449,8 +532,10 @@ namespace System.Net {
         /// class with the specified access rights for the specified URI Pattern.
         /// Should be used during a policy object creation and not for particular URI permission check</para>
         /// </devdoc>
-        public void AddPermission(NetworkAccess access, Regex uriRegex) {
-            if (uriRegex == null) {
+        public void AddPermission(NetworkAccess access, Regex uriRegex)
+        {
+            if (uriRegex == null)
+            {
                 throw new ArgumentNullException("uriRegex");
             }
 
@@ -493,14 +578,26 @@ namespace System.Net {
             {
                 // avoid duplicated regexes in the list
                 bool found = false;
-                foreach (object obj in list) {
-                    if ((obj is DelayedRegex) && (string.Compare(uriRegexPattern.ToString(), obj.ToString(), StringComparison.OrdinalIgnoreCase ) == 0)) {
+                foreach (object obj in list)
+                {
+                    if (
+                        (obj is DelayedRegex)
+                        && (
+                            string.Compare(
+                                uriRegexPattern.ToString(),
+                                obj.ToString(),
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                    )
+                    {
                         found = true;
                         break;
                     }
                 }
 
-                if (!found) {
+                if (!found)
+                {
                     list.Add(uriRegexPattern);
                 }
             }
@@ -512,7 +609,8 @@ namespace System.Net {
         ///       Checks the overall permisison state of the object.
         ///    </para>
         /// </devdoc>
-        public bool IsUnrestricted() {
+        public bool IsUnrestricted()
+        {
             return m_noRestriction;
         }
 
@@ -522,14 +620,17 @@ namespace System.Net {
         ///       Creates a copy of a <see cref='System.Net.WebPermission'/> instance.
         ///    </para>
         /// </devdoc>
-        public override IPermission Copy() {
+        public override IPermission Copy()
+        {
             if (m_noRestriction)
             {
                 return new WebPermission(true);
             }
 
-            WebPermission wp = new WebPermission((m_UnrestrictedConnect ? NetworkAccess.Connect : (NetworkAccess) 0) |
-                (m_UnrestrictedAccept ? NetworkAccess.Accept : (NetworkAccess)0));
+            WebPermission wp = new WebPermission(
+                (m_UnrestrictedConnect ? NetworkAccess.Connect : (NetworkAccess)0)
+                    | (m_UnrestrictedAccept ? NetworkAccess.Accept : (NetworkAccess)0)
+            );
             wp.m_acceptList = (ArrayList)m_acceptList.Clone();
             wp.m_connectList = (ArrayList)m_connectList.Clone();
             return wp;
@@ -538,14 +639,21 @@ namespace System.Net {
         /// <devdoc>
         /// <para>Compares two <see cref='System.Net.WebPermission'/> instances.</para>
         /// </devdoc>
-        public override bool IsSubsetOf(IPermission target) {
+        public override bool IsSubsetOf(IPermission target)
+        {
             // Pattern suggested by security engine
-            if (target == null) {
-                return !m_noRestriction && !m_UnrestrictedConnect && !m_UnrestrictedAccept && m_connectList.Count == 0 && m_acceptList.Count == 0;
+            if (target == null)
+            {
+                return !m_noRestriction
+                    && !m_UnrestrictedConnect
+                    && !m_UnrestrictedAccept
+                    && m_connectList.Count == 0
+                    && m_acceptList.Count == 0;
             }
 
             WebPermission other = target as WebPermission;
-            if (other == null) {
+            if (other == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_perm_target), "target");
             }
 
@@ -577,14 +685,16 @@ namespace System.Net {
                     {
                         return false;
                     }
-                    foreach(object obj in this.m_acceptList) {
+                    foreach (object obj in this.m_acceptList)
+                    {
                         regex = obj as DelayedRegex;
-                        if(regex != null) {
-                            if(isSpecialSubsetCase(obj.ToString(), other.m_acceptList))
+                        if (regex != null)
+                        {
+                            if (isSpecialSubsetCase(obj.ToString(), other.m_acceptList))
                                 continue;
                             throw new NotSupportedException(SR.GetString(SR.net_perm_both_regex));
                         }
-                        if(!isMatchedURI(obj, other.m_acceptList))
+                        if (!isMatchedURI(obj, other.m_acceptList))
                             return false;
                     }
                 }
@@ -602,14 +712,16 @@ namespace System.Net {
                     {
                         return false;
                     }
-                    foreach(object obj in this.m_connectList) {
+                    foreach (object obj in this.m_connectList)
+                    {
                         regex = obj as DelayedRegex;
-                        if(regex != null) {
-                            if(isSpecialSubsetCase(obj.ToString(), other.m_connectList))
+                        if (regex != null)
+                        {
+                            if (isSpecialSubsetCase(obj.ToString(), other.m_connectList))
                                 continue;
                             throw new NotSupportedException(SR.GetString(SR.net_perm_both_regex));
                         }
-                        if(!isMatchedURI(obj, other.m_connectList))
+                        if (!isMatchedURI(obj, other.m_connectList))
                             return false;
                     }
                 }
@@ -620,30 +732,56 @@ namespace System.Net {
 
         //Checks special case when testing Regex to be a subset of other Regex
         //Support only the case when  both Regexes are identical as strings.
-        private static bool isSpecialSubsetCase(String regexToCheck, ArrayList permList) {
-
+        private static bool isSpecialSubsetCase(String regexToCheck, ArrayList permList)
+        {
             Uri uri;
-            foreach(object uriPattern in permList) {
+            foreach (object uriPattern in permList)
+            {
                 DelayedRegex regex = uriPattern as DelayedRegex;
-                if(regex != null) {
+                if (regex != null)
+                {
                     //regex parameter against regex permission
-                    if (String.Compare(regexToCheck, regex.ToString(), StringComparison.OrdinalIgnoreCase ) == 0)
+                    if (
+                        String.Compare(
+                            regexToCheck,
+                            regex.ToString(),
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                         return true;
                 }
-                else if ((uri = uriPattern as Uri) != null) {
+                else if ((uri = uriPattern as Uri) != null)
+                {
                     //regex parameter against Uri permission
-                    if (String.Compare(regexToCheck, Regex.Escape(uri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped)), StringComparison.OrdinalIgnoreCase ) == 0)
+                    if (
+                        String.Compare(
+                            regexToCheck,
+                            Regex.Escape(
+                                uri.GetComponents(
+                                    UriComponents.HttpRequestUrl,
+                                    UriFormat.UriEscaped
+                                )
+                            ),
+                            StringComparison.OrdinalIgnoreCase
+                        ) == 0
+                    )
                         return true;
                 }
-                else if (String.Compare(regexToCheck, Regex.Escape(uriPattern.ToString()), StringComparison.OrdinalIgnoreCase ) == 0) {
-                   //regex parameter against string permission
-                   return true;
+                else if (
+                    String.Compare(
+                        regexToCheck,
+                        Regex.Escape(uriPattern.ToString()),
+                        StringComparison.OrdinalIgnoreCase
+                    ) == 0
+                )
+                {
+                    //regex parameter against string permission
+                    return true;
                 }
-
             }
 
             return false;
-       }
+        }
 
         // The union of two web permissions is formed by concatenating
         // the list of allowed regular expressions. There is no check
@@ -651,13 +789,16 @@ namespace System.Net {
         /// <devdoc>
         /// <para>Returns the logical union between two <see cref='System.Net.WebPermission'/> instances.</para>
         /// </devdoc>
-        public override IPermission Union(IPermission target) {
+        public override IPermission Union(IPermission target)
+        {
             // Pattern suggested by Security engine
-            if (target==null) {
+            if (target == null)
+            {
                 return this.Copy();
             }
             WebPermission other = target as WebPermission;
-            if(other == null) {
+            if (other == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_perm_target), "target");
             }
 
@@ -674,11 +815,12 @@ namespace System.Net {
             }
             else
             {
-                result.m_connectList = (ArrayList) other.m_connectList.Clone();
+                result.m_connectList = (ArrayList)other.m_connectList.Clone();
 
-                for (int i = 0; i < m_connectList.Count; i++) {
+                for (int i = 0; i < m_connectList.Count; i++)
+                {
                     DelayedRegex uriPattern = m_connectList[i] as DelayedRegex;
-                    if(uriPattern == null)
+                    if (uriPattern == null)
                         if (m_connectList[i] is string)
                             result.AddPermission(NetworkAccess.Connect, (string)m_connectList[i]);
                         else
@@ -694,11 +836,12 @@ namespace System.Net {
             }
             else
             {
-                result.m_acceptList = (ArrayList) other.m_acceptList.Clone();
+                result.m_acceptList = (ArrayList)other.m_acceptList.Clone();
 
-                for (int i = 0; i < m_acceptList.Count; i++) {
+                for (int i = 0; i < m_acceptList.Count; i++)
+                {
                     DelayedRegex uriPattern = m_acceptList[i] as DelayedRegex;
-                    if(uriPattern == null)
+                    if (uriPattern == null)
                         if (m_acceptList[i] is string)
                             result.AddPermission(NetworkAccess.Accept, (string)m_acceptList[i]);
                         else
@@ -714,14 +857,17 @@ namespace System.Net {
         /// <devdoc>
         /// <para>Returns the logical intersection between two <see cref='System.Net.WebPermission'/> instances.</para>
         /// </devdoc>
-        public override IPermission Intersect(IPermission target) {
+        public override IPermission Intersect(IPermission target)
+        {
             // Pattern suggested by Security engine
-            if (target == null) {
+            if (target == null)
+            {
                 return null;
             }
 
             WebPermission other = target as WebPermission;
-            if(other == null) {
+            if (other == null)
+            {
                 throw new ArgumentException(SR.GetString(SR.net_perm_target), "target");
             }
 
@@ -742,7 +888,8 @@ namespace System.Net {
             }
             else if (m_UnrestrictedConnect || other.m_UnrestrictedConnect)
             {
-                result.m_connectList = (ArrayList) (m_UnrestrictedConnect ? other : this).m_connectList.Clone();
+                result.m_connectList = (ArrayList)
+                    (m_UnrestrictedConnect ? other : this).m_connectList.Clone();
             }
             else
             {
@@ -755,7 +902,8 @@ namespace System.Net {
             }
             else if (m_UnrestrictedAccept || other.m_UnrestrictedAccept)
             {
-                result.m_acceptList = (ArrayList) (m_UnrestrictedAccept ? other : this).m_acceptList.Clone();
+                result.m_acceptList = (ArrayList)
+                    (m_UnrestrictedAccept ? other : this).m_acceptList.Clone();
             }
             else
             {
@@ -763,8 +911,13 @@ namespace System.Net {
             }
 
             // return null if resulting permission is restricted and empty
-            if (!result.m_UnrestrictedConnect && !result.m_UnrestrictedAccept &&
-                result.m_connectList.Count == 0 && result.m_acceptList.Count == 0) {
+            if (
+                !result.m_UnrestrictedConnect
+                && !result.m_UnrestrictedAccept
+                && result.m_connectList.Count == 0
+                && result.m_acceptList.Count == 0
+            )
+            {
                 return null;
             }
             return result;
@@ -772,36 +925,40 @@ namespace System.Net {
 
         /// <devdoc>
         /// </devdoc>
-        public override void FromXml(SecurityElement securityElement) {
-            if (securityElement == null) {
-
+        public override void FromXml(SecurityElement securityElement)
+        {
+            if (securityElement == null)
+            {
                 //
                 // null SecurityElement
                 //
 
                 throw new ArgumentNullException("securityElement");
             }
-            if (!securityElement.Tag.Equals("IPermission")) {
-
+            if (!securityElement.Tag.Equals("IPermission"))
+            {
                 //
                 // SecurityElement must be a permission element
                 //
 
-                throw new ArgumentException(SR.GetString(SR.net_not_ipermission), "securityElement");
+                throw new ArgumentException(
+                    SR.GetString(SR.net_not_ipermission),
+                    "securityElement"
+                );
             }
 
             string className = securityElement.Attribute("class");
 
-            if (className == null) {
-
+            if (className == null)
+            {
                 //
                 // SecurityElement must be a permission element for this type
                 //
 
                 throw new ArgumentException(SR.GetString(SR.net_no_classname), "securityElement");
             }
-            if (className.IndexOf(this.GetType().FullName) < 0) {
-
+            if (className.IndexOf(this.GetType().FullName) < 0)
+            {
                 //
                 // SecurityElement must be a permission element for this type
                 //
@@ -815,7 +972,7 @@ namespace System.Net {
             m_acceptList = new ArrayList();
             m_UnrestrictedAccept = m_UnrestrictedConnect = false;
 
-            if (str != null && string.Compare(str, "true", StringComparison.OrdinalIgnoreCase ) == 0)
+            if (str != null && string.Compare(str, "true", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 m_noRestriction = true;
                 return;
@@ -826,19 +983,27 @@ namespace System.Net {
             SecurityElement et = securityElement.SearchForChildByTag("ConnectAccess");
             string uriPattern;
 
-            if (et != null) {
-
-                foreach(SecurityElement uriElem in et.Children) {
+            if (et != null)
+            {
+                foreach (SecurityElement uriElem in et.Children)
+                {
                     //NOTE: Any stuff coming from XML is treated as URI PATTERN!
-                    if (uriElem.Tag.Equals("URI")) {
-                        try {
+                    if (uriElem.Tag.Equals("URI"))
+                    {
+                        try
+                        {
                             uriPattern = uriElem.Attribute("uri");
                         }
-                        catch {
+                        catch
+                        {
                             uriPattern = null;
                         }
-                        if (uriPattern == null) {
-                            throw new ArgumentException(SR.GetString(SR.net_perm_invalid_val_in_element), "ConnectAccess");
+                        if (uriPattern == null)
+                        {
+                            throw new ArgumentException(
+                                SR.GetString(SR.net_perm_invalid_val_in_element),
+                                "ConnectAccess"
+                            );
                         }
                         if (uriPattern == MatchAll)
                         {
@@ -851,26 +1016,35 @@ namespace System.Net {
                             AddAsPattern(NetworkAccess.Connect, new DelayedRegex(uriPattern));
                         }
                     }
-                    else {
+                    else
+                    {
                         // improper tag found, just ignore
                     }
                 }
             }
 
             et = securityElement.SearchForChildByTag("AcceptAccess");
-            if (et != null) {
-
-                foreach(SecurityElement uriElem in et.Children) {
+            if (et != null)
+            {
+                foreach (SecurityElement uriElem in et.Children)
+                {
                     //NOTE: Any stuff coming from XML is treated as URI PATTERN!
-                    if (uriElem.Tag.Equals("URI")) {
-                        try {
+                    if (uriElem.Tag.Equals("URI"))
+                    {
+                        try
+                        {
                             uriPattern = uriElem.Attribute("uri");
                         }
-                        catch {
+                        catch
+                        {
                             uriPattern = null;
                         }
-                        if (uriPattern == null) {
-                            throw new ArgumentException(SR.GetString(SR.net_perm_invalid_val_in_element), "AcceptAccess");
+                        if (uriPattern == null)
+                        {
+                            throw new ArgumentException(
+                                SR.GetString(SR.net_perm_invalid_val_in_element),
+                                "AcceptAccess"
+                            );
                         }
                         if (uriPattern == MatchAll)
                         {
@@ -883,7 +1057,8 @@ namespace System.Net {
                             AddAsPattern(NetworkAccess.Accept, new DelayedRegex(uriPattern));
                         }
                     }
-                    else {
+                    else
+                    {
                         // improper tag found, just ignore
                     }
                 }
@@ -893,19 +1068,25 @@ namespace System.Net {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override SecurityElement ToXml() {
-
+        public override SecurityElement ToXml()
+        {
             SecurityElement securityElement = new SecurityElement("IPermission");
 
-            securityElement.AddAttribute( "class", this.GetType().FullName + ", " + this.GetType().Module.Assembly.FullName.Replace( '\"', '\'' ) );
-            securityElement.AddAttribute( "version", "1" );
+            securityElement.AddAttribute(
+                "class",
+                this.GetType().FullName
+                    + ", "
+                    + this.GetType().Module.Assembly.FullName.Replace('\"', '\'')
+            );
+            securityElement.AddAttribute("version", "1");
 
-            if (!IsUnrestricted()) {
-                String tempStr=null;
+            if (!IsUnrestricted())
+            {
+                String tempStr = null;
 
                 if (m_UnrestrictedConnect || m_connectList.Count > 0)
                 {
-                    SecurityElement connectElement = new SecurityElement( "ConnectAccess" );
+                    SecurityElement connectElement = new SecurityElement("ConnectAccess");
 
                     if (m_UnrestrictedConnect)
                     {
@@ -916,12 +1097,18 @@ namespace System.Net {
                     else
                     {
                         //NOTE All strings going to XML will become URI PATTERNS i.e. escaped to Regex
-                        foreach(object obj in m_connectList) {
+                        foreach (object obj in m_connectList)
+                        {
                             Uri uri = obj as Uri;
-                            if(uri != null)
-                                tempStr=Regex.Escape(uri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped));
+                            if (uri != null)
+                                tempStr = Regex.Escape(
+                                    uri.GetComponents(
+                                        UriComponents.HttpRequestUrl,
+                                        UriFormat.UriEscaped
+                                    )
+                                );
                             else
-                                tempStr=obj.ToString();
+                                tempStr = obj.ToString();
 
                             if (obj is string)
                                 tempStr = Regex.Escape(tempStr);
@@ -932,7 +1119,7 @@ namespace System.Net {
                         }
                     }
 
-                    securityElement.AddChild( connectElement );
+                    securityElement.AddChild(connectElement);
                 }
 
                 if (m_UnrestrictedAccept || m_acceptList.Count > 0)
@@ -948,12 +1135,18 @@ namespace System.Net {
                     else
                     {
                         //NOTE All strings going to XML will become URI PATTERNS i.e. escaped to Regex
-                        foreach(object obj in m_acceptList) {
-                            Uri  uri = obj as Uri;
-                            if(uri != null)
-                                tempStr=Regex.Escape(uri.GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped));
+                        foreach (object obj in m_acceptList)
+                        {
+                            Uri uri = obj as Uri;
+                            if (uri != null)
+                                tempStr = Regex.Escape(
+                                    uri.GetComponents(
+                                        UriComponents.HttpRequestUrl,
+                                        UriFormat.UriEscaped
+                                    )
+                                );
                             else
-                                tempStr=obj.ToString();
+                                tempStr = obj.ToString();
 
                             if (obj is string)
                                 tempStr = Regex.Escape(tempStr);
@@ -964,31 +1157,43 @@ namespace System.Net {
                         }
                     }
 
-                    securityElement.AddChild( acceptElement );
+                    securityElement.AddChild(acceptElement);
                 }
             }
-            else {
-                securityElement.AddAttribute( "Unrestricted", "true" );
+            else
+            {
+                securityElement.AddAttribute("Unrestricted", "true");
             }
             return securityElement;
         }
 
         // Verifies a single Uri against a set of regular expressions
-        private static bool isMatchedURI(object uriToCheck, ArrayList uriPatternList) {
-
+        private static bool isMatchedURI(object uriToCheck, ArrayList uriPatternList)
+        {
             string stringUri = uriToCheck as string;
 
-            foreach(object uriPattern in uriPatternList) {
+            foreach (object uriPattern in uriPatternList)
+            {
                 DelayedRegex R = uriPattern as DelayedRegex;
 
                 //perform case insensitive comparison of final URIs or strings, a Uri is never equal compares a string (strings are invalid Uris)
-                if(R == null) {
+                if (R == null)
+                {
                     if (uriToCheck.GetType() == uriPattern.GetType())
                     {
-                        if (stringUri != null && string.Compare(stringUri, (string)uriPattern, StringComparison.OrdinalIgnoreCase ) == 0) {
+                        if (
+                            stringUri != null
+                            && string.Compare(
+                                stringUri,
+                                (string)uriPattern,
+                                StringComparison.OrdinalIgnoreCase
+                            ) == 0
+                        )
+                        {
                             return true;
                         }
-                        else if(stringUri == null && uriToCheck.Equals(uriPattern)) {
+                        else if (stringUri == null && uriToCheck.Equals(uriPattern))
+                        {
                             return true;
                         }
                     }
@@ -996,11 +1201,20 @@ namespace System.Net {
                 }
 
                 //Otherwise trying match final URI against given Regex pattern
-                string s = stringUri != null? stringUri: ((Uri)uriToCheck).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped);
+                string s =
+                    stringUri != null
+                        ? stringUri
+                        : ((Uri)uriToCheck).GetComponents(
+                            UriComponents.HttpRequestUrl,
+                            UriFormat.UriEscaped
+                        );
                 Match M = R.AsRegex.Match(s);
-                if ((M != null)                             // Found match for the regular expression?
-                    && (M.Index == 0)                       // ... which starts at the begining
-                    && (M.Length == s.Length)) {            // ... and the whole string matched
+                if (
+                    (M != null) // Found match for the regular expression?
+                    && (M.Index == 0) // ... which starts at the begining
+                    && (M.Length == s.Length)
+                )
+                { // ... and the whole string matched
                     return true;
                 }
 
@@ -1009,11 +1223,17 @@ namespace System.Net {
                 //
                 // check if the URI was presented in non-canonical form
                 //
-                s = ((Uri)uriToCheck).GetComponents(UriComponents.HttpRequestUrl, UriFormat.SafeUnescaped);
+                s = ((Uri)uriToCheck).GetComponents(
+                    UriComponents.HttpRequestUrl,
+                    UriFormat.SafeUnescaped
+                );
                 M = R.AsRegex.Match(s);
-                if ((M != null)                             // Found match for the regular expression?
-                    && (M.Index == 0)                       // ... which starts at the begining
-                    && (M.Length == s.Length)) {   // ... and the whole string matched
+                if (
+                    (M != null) // Found match for the regular expression?
+                    && (M.Index == 0) // ... which starts at the begining
+                    && (M.Length == s.Length)
+                )
+                { // ... and the whole string matched
                     return true;
                 }
             }
@@ -1023,10 +1243,12 @@ namespace System.Net {
         // We should keep the result as compact as possible since otherwise even
         // simple scenarios in Policy Wizard won;t work due to repeated Union/Intersect calls
         // The issue comes from the "hard" Regex.IsSubsetOf(Regex) problem.
-        private static void intersectList(ArrayList A, ArrayList B, ArrayList result) {
-            bool[]  aDone = new bool[A.Count];
-            bool[]  bDone = new bool[B.Count];
-            int     ia=0, ib;
+        private static void intersectList(ArrayList A, ArrayList B, ArrayList result)
+        {
+            bool[] aDone = new bool[A.Count];
+            bool[] bDone = new bool[B.Count];
+            int ia = 0,
+                ib;
 
             // The optimization is done according to the following truth
             // (A|B|C) intersect (B|C|E|D)) == B|C|(A inter E)|(A inter D)
@@ -1035,13 +1257,14 @@ namespace System.Net {
 
             // Round 1st
             // Getting rid of same permissons in the input arrays (assuming X /\ X = X)
-            foreach (object a in  A) {
+            foreach (object a in A)
+            {
                 ib = 0;
-                foreach (object b in  B) {
-
+                foreach (object b in B)
+                {
                     // check to see if b is in the result already
-                    if (!bDone[ib]) {
-
+                    if (!bDone[ib])
+                    {
                         //if both are regexes or both are Uris or both are strings
                         if (a.GetType() == b.GetType())
                         {
@@ -1051,7 +1274,7 @@ namespace System.Net {
                                 if (a.Equals(b))
                                 {
                                     result.Add(a);
-                                    aDone[ia]=bDone[ib]=true;
+                                    aDone[ia] = bDone[ib] = true;
                                     //since permissions are ORed we can break and go to the next A
                                     break;
                                 }
@@ -1059,10 +1282,16 @@ namespace System.Net {
                             else
                             {
                                 // regexes and strings uses ToString() output
-                                if (string.Compare(a.ToString(), b.ToString(), StringComparison.OrdinalIgnoreCase ) == 0)
+                                if (
+                                    string.Compare(
+                                        a.ToString(),
+                                        b.ToString(),
+                                        StringComparison.OrdinalIgnoreCase
+                                    ) == 0
+                                )
                                 {
                                     result.Add(a);
-                                    aDone[ia]=bDone[ib]=true;
+                                    aDone[ia] = bDone[ib] = true;
                                     //since permissions are ORed we can break and go to the next A
                                     break;
                                 }
@@ -1077,25 +1306,35 @@ namespace System.Net {
             ia = 0;
             // Round second
             // Grab only intersections of objects not found in both A and B
-            foreach (object a in  A) {
-
-                if (!aDone[ia]) {
+            foreach (object a in A)
+            {
+                if (!aDone[ia])
+                {
                     ib = 0;
-                    foreach(object b in B) {
-
-                        if (!bDone[ib]) {
+                    foreach (object b in B)
+                    {
+                        if (!bDone[ib])
+                        {
                             bool resultUri;
                             object intesection = intersectPair(a, b, out resultUri);
 
-                            if (intesection != null) {
+                            if (intesection != null)
+                            {
                                 bool found = false;
                                 // check to see if we already have the same result
-                                foreach (object obj in result) {
+                                foreach (object obj in result)
+                                {
                                     if (resultUri == (obj is Uri))
                                     {
-                                        if(resultUri
-                                           ? intesection.Equals(obj)
-                                           : string.Compare(obj.ToString(), intesection.ToString(), StringComparison.OrdinalIgnoreCase ) == 0)
+                                        if (
+                                            resultUri
+                                                ? intesection.Equals(obj)
+                                                : string.Compare(
+                                                    obj.ToString(),
+                                                    intesection.ToString(),
+                                                    StringComparison.OrdinalIgnoreCase
+                                                ) == 0
+                                        )
                                         {
                                             found = true;
                                             break;
@@ -1103,7 +1342,8 @@ namespace System.Net {
                                     }
                                 }
 
-                                if (!found) {
+                                if (!found)
+                                {
                                     result.Add(intesection);
                                 }
                             }
@@ -1115,48 +1355,67 @@ namespace System.Net {
             }
         }
 
-        private static object intersectPair(object L, object R, out bool isUri) {
-
+        private static object intersectPair(object L, object R, out bool isUri)
+        {
             //VERY OLD OPTION:  return new Regex("(?=(" + ((Regex)X[i]).ToString()+ "))(" + ((Regex)Y[j]).ToString() + ")","i");
             //STILL OLD OPTION: return new Regex("(?=.*?(" + L.ToString() + "))" + "(?=.*?(" + R.ToString() + "))");
             // check RegexSpec.doc
             //CURRENT OPTION:   return new Regex("(?=(" + L.ToString() + "))(" + R.ToString() + ")", RegexOptions.IgnoreCase );
             isUri = false;
-            DelayedRegex L_Pattern =L as DelayedRegex;
-            DelayedRegex R_Pattern =R as DelayedRegex;
+            DelayedRegex L_Pattern = L as DelayedRegex;
+            DelayedRegex R_Pattern = R as DelayedRegex;
 
-            if(L_Pattern != null && R_Pattern != null)  {       //both are Regex
-                return new DelayedRegex("(?=(" + L_Pattern.ToString() + "))(" + R_Pattern.ToString() + ")");
+            if (L_Pattern != null && R_Pattern != null)
+            { //both are Regex
+                return new DelayedRegex(
+                    "(?=(" + L_Pattern.ToString() + "))(" + R_Pattern.ToString() + ")"
+                );
             }
-            else if(L_Pattern != null && R_Pattern == null) {   //only L is a Regex
-                    isUri = R is Uri;
-                    string uriString = isUri? ((Uri)R).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped): R.ToString();
+            else if (L_Pattern != null && R_Pattern == null)
+            { //only L is a Regex
+                isUri = R is Uri;
+                string uriString = isUri
+                    ? ((Uri)R).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped)
+                    : R.ToString();
 
-                    Match M = L_Pattern.AsRegex.Match(uriString);
-                    if ((M != null)                             // Found match for the regular expression?
-                        && (M.Index == 0)                       // ... which starts at the begining
-                        && (M.Length == uriString.Length)) { // ... and the whole string matched
-                        return R;
-                    }
-                    return null;
+                Match M = L_Pattern.AsRegex.Match(uriString);
+                if (
+                    (M != null) // Found match for the regular expression?
+                    && (M.Index == 0) // ... which starts at the begining
+                    && (M.Length == uriString.Length)
+                )
+                { // ... and the whole string matched
+                    return R;
+                }
+                return null;
             }
-            else if(L_Pattern == null && R_Pattern != null) {   //only R is a Regex
-                    isUri = L is Uri;
-                    string uriString = isUri? ((Uri)L).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped):  L.ToString();
-                    Match M = R_Pattern.AsRegex.Match(uriString);
-                    if ((M != null)                             // Found match for the regular expression?
-                        && (M.Index == 0)                       // ... which starts at the begining
-                        && (M.Length == uriString.Length)) { // ... and the whole string matched
-                        return L;
-                    }
-                    return null;
-           }
-           //both are Uris or strings
-           isUri = L is Uri;
-           if (isUri)
-               return L.Equals(R)? L : null;
-           else
-               return string.Compare(L.ToString(), R.ToString(), StringComparison.OrdinalIgnoreCase ) == 0? L : null;
+            else if (L_Pattern == null && R_Pattern != null)
+            { //only R is a Regex
+                isUri = L is Uri;
+                string uriString = isUri
+                    ? ((Uri)L).GetComponents(UriComponents.HttpRequestUrl, UriFormat.UriEscaped)
+                    : L.ToString();
+                Match M = R_Pattern.AsRegex.Match(uriString);
+                if (
+                    (M != null) // Found match for the regular expression?
+                    && (M.Index == 0) // ... which starts at the begining
+                    && (M.Length == uriString.Length)
+                )
+                { // ... and the whole string matched
+                    return L;
+                }
+                return null;
+            }
+            //both are Uris or strings
+            isUri = L is Uri;
+            if (isUri)
+                return L.Equals(R) ? L : null;
+            else
+                return
+                    string.Compare(L.ToString(), R.ToString(), StringComparison.OrdinalIgnoreCase)
+                    == 0
+                    ? L
+                    : null;
         }
     } // class WebPermission
 } // namespace System.Net

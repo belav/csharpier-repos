@@ -7,7 +7,6 @@ using System.Linq.Expressions;
 
 namespace Moq.Async
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class AwaitExpression : Expression
@@ -29,7 +28,6 @@ namespace Moq.Async
         sealed class AwaitExpression : Expression
     */
     sealed class AwaitExpression : Expression
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly IAwaitableFactory awaitableFactory;
@@ -79,8 +77,9 @@ namespace Moq.Async
 
         public override string ToString()
         {
-            return this.awaitableFactory.ResultType == typeof(void) ? $"await {this.operand}"
-                                                                    : $"(await {this.operand})";
+            return this.awaitableFactory.ResultType == typeof(void)
+                ? $"await {this.operand}"
+                : $"(await {this.operand})";
         }
 
         protected override Expression VisitChildren(ExpressionVisitor visitor) => this;

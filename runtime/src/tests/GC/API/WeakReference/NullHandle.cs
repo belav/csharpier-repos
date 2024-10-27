@@ -7,12 +7,13 @@
  */
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 public class WR : WeakReference
 {
-    public WR(Object o) : base(o, false) { }
+    public WR(Object o)
+        : base(o, false) { }
 
     ~WR()
     {
@@ -25,15 +26,21 @@ public class Test_NullHandle
 {
     // This weak reference gets resurrected by WR's destructor.
     public static WR w;
-    
+
     // This weak reference is destroyed to prompt WR's destructor to run.
     public static WR wr;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void CreateWR() { wr = new WR(new Object()); }
-    
+    public static void CreateWR()
+    {
+        wr = new WR(new Object());
+    }
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void DestroyWR() { wr = null; }
+    public static void DestroyWR()
+    {
+        wr = null;
+    }
 
     public static int Main()
     {
@@ -54,7 +61,6 @@ public class Test_NullHandle
             Console.WriteLine("Passed");
             numPassed++;
         }
-
         catch (Exception e)
         {
             Console.WriteLine(e);

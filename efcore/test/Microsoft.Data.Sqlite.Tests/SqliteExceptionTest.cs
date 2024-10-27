@@ -32,6 +32,6 @@ public class SqliteExceptionTest
     [InlineData(SQLITE_OK)]
     [InlineData(SQLITE_ROW)]
     [InlineData(SQLITE_DONE)]
-    public void ThrowExceptionForRC_does_nothing_when_non_error(int rc)
-        => SqliteException.ThrowExceptionForRC(rc, null);
+    public void ThrowExceptionForRC_does_nothing_when_non_error(int rc) =>
+        SqliteException.ThrowExceptionForRC(rc, null);
 }

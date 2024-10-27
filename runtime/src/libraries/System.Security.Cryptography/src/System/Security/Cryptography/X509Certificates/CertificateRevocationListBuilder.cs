@@ -63,7 +63,8 @@ namespace System.Security.Cryptography.X509Certificates
         public void AddEntry(
             X509Certificate2 certificate,
             DateTimeOffset? revocationTime = null,
-            X509RevocationReason? reason = null)
+            X509RevocationReason? reason = null
+        )
         {
             ArgumentNullException.ThrowIfNull(certificate);
 
@@ -99,7 +100,8 @@ namespace System.Security.Cryptography.X509Certificates
         public void AddEntry(
             byte[] serialNumber,
             DateTimeOffset? revocationTime = null,
-            X509RevocationReason? reason = null)
+            X509RevocationReason? reason = null
+        )
         {
             ArgumentNullException.ThrowIfNull(serialNumber);
 
@@ -132,19 +134,23 @@ namespace System.Security.Cryptography.X509Certificates
         public void AddEntry(
             ReadOnlySpan<byte> serialNumber,
             DateTimeOffset? revocationTime = null,
-            X509RevocationReason? reason = null)
+            X509RevocationReason? reason = null
+        )
         {
             if (serialNumber.IsEmpty)
                 throw new ArgumentException(SR.Arg_EmptyOrNullArray, nameof(serialNumber));
 
             if (serialNumber.Length > 1)
             {
-                if ((serialNumber[0] == 0x00 && serialNumber[1] < 0x80) ||
-                    (serialNumber[0] == 0xFF && serialNumber[1] > 0x7F))
+                if (
+                    (serialNumber[0] == 0x00 && serialNumber[1] < 0x80)
+                    || (serialNumber[0] == 0xFF && serialNumber[1] > 0x7F)
+                )
                 {
                     throw new ArgumentException(
                         SR.Argument_InvalidSerialNumberBytes,
-                        nameof(serialNumber));
+                        nameof(serialNumber)
+                    );
                 }
             }
 
@@ -172,7 +178,8 @@ namespace System.Security.Cryptography.X509Certificates
                         throw new ArgumentOutOfRangeException(
                             nameof(reason),
                             reasonValue,
-                            SR.Cryptography_CRLBuilder_ReasonNotSupported);
+                            SR.Cryptography_CRLBuilder_ReasonNotSupported
+                        );
                 }
 
                 AsnWriter writer = (_writer ??= new AsnWriter(AsnEncodingRules.DER));
@@ -202,7 +209,8 @@ namespace System.Security.Cryptography.X509Certificates
                     Serial = serialNumber.ToArray(),
                     RevocationTime = (revocationTime ?? DateTimeOffset.UtcNow).ToUniversalTime(),
                     Extensions = extensions,
-                });
+                }
+            );
         }
 
         /// <summary>

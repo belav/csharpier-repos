@@ -23,13 +23,20 @@ namespace System.Web.Http.Dispatcher
         {
             Assert.ThrowsArgumentNull(
                 () => new HttpRoutingDispatcher(configuration: null),
-                "configuration");
+                "configuration"
+            );
             Assert.ThrowsArgumentNull(
-                () => new HttpRoutingDispatcher(configuration: null, defaultHandler: new Mock<HttpMessageHandler>().Object),
-                "configuration");
+                () =>
+                    new HttpRoutingDispatcher(
+                        configuration: null,
+                        defaultHandler: new Mock<HttpMessageHandler>().Object
+                    ),
+                "configuration"
+            );
             Assert.ThrowsArgumentNull(
                 () => new HttpRoutingDispatcher(new HttpConfiguration(), defaultHandler: null),
-                "defaultHandler");
+                "defaultHandler"
+            );
         }
 
         [Fact]
@@ -81,13 +88,19 @@ namespace System.Web.Http.Dispatcher
         {
             var mockHandler = new Mock<HttpMessageHandler>();
             var config = new HttpConfiguration();
-            var request = CreateRequest(config, "http://localhost/api/controllerName", routeHandler: null);
+            var request = CreateRequest(
+                config,
+                "http://localhost/api/controllerName",
+                routeHandler: null
+            );
             var dispatcher = new HttpRoutingDispatcher(config, defaultHandler: mockHandler.Object);
             var invoker = new HttpMessageInvoker(dispatcher);
 
             invoker.SendAsync(request, CancellationToken.None);
 
-            mockHandler.Protected().Verify("SendAsync", Times.Once(), request, CancellationToken.None);
+            mockHandler
+                .Protected()
+                .Verify("SendAsync", Times.Once(), request, CancellationToken.None);
         }
 
         [Fact]
@@ -95,25 +108,38 @@ namespace System.Web.Http.Dispatcher
         {
             var mockHandler = new Mock<HttpMessageHandler>();
             var config = new HttpConfiguration();
-            var request = CreateRequest(config, "http://localhost/api/controllerName", routeHandler: mockHandler.Object);
+            var request = CreateRequest(
+                config,
+                "http://localhost/api/controllerName",
+                routeHandler: mockHandler.Object
+            );
             var dispatcher = new HttpRoutingDispatcher(config);
             var invoker = new HttpMessageInvoker(dispatcher);
 
             invoker.SendAsync(request, CancellationToken.None);
 
-            mockHandler.Protected().Verify("SendAsync", Times.Once(), request, CancellationToken.None);
+            mockHandler
+                .Protected()
+                .Verify("SendAsync", Times.Once(), request, CancellationToken.None);
         }
 
         [Fact]
         public async Task SendAsync_UsesRouteDataFromRequestContext()
         {
             // Arrange
-            Mock<HttpMessageHandler> doNotUseDefaultHandlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            Mock<HttpMessageHandler> doNotUseDefaultHandlerMock = new Mock<HttpMessageHandler>(
+                MockBehavior.Strict
+            );
             doNotUseDefaultHandlerMock.As<IDisposable>().Setup(c => c.Dispose());
 
             using (HttpConfiguration configuration = new HttpConfiguration())
             using (HttpMessageHandler doNoUseDefaultHandler = doNotUseDefaultHandlerMock.Object)
-            using (HttpRoutingDispatcher dispatcher = new HttpRoutingDispatcher(configuration, doNoUseDefaultHandler))
+            using (
+                HttpRoutingDispatcher dispatcher = new HttpRoutingDispatcher(
+                    configuration,
+                    doNoUseDefaultHandler
+                )
+            )
             using (HttpMessageInvoker invoker = new HttpMessageInvoker(dispatcher))
             using (HttpRequestMessage expectedRequest = new HttpRequestMessage())
             using (HttpResponseMessage expectedResponse = new HttpResponseMessage())
@@ -132,7 +158,10 @@ namespace System.Web.Http.Dispatcher
                 expectedRequest.SetRequestContext(context);
 
                 // Act
-                HttpResponseMessage response = await invoker.SendAsync(expectedRequest, CancellationToken.None);
+                HttpResponseMessage response = await invoker.SendAsync(
+                    expectedRequest,
+                    CancellationToken.None
+                );
 
                 // Assert
                 Assert.Same(expectedResponse, response);
@@ -144,12 +173,19 @@ namespace System.Web.Http.Dispatcher
         public async Task SendAsync_IgnoreRoute_UsesRouteDataWithStopRoutingHandlerFromRequestContext()
         {
             // Arrange
-            Mock<HttpMessageHandler> doNotUseDefaultHandlerMock = new Mock<HttpMessageHandler>(MockBehavior.Strict);
+            Mock<HttpMessageHandler> doNotUseDefaultHandlerMock = new Mock<HttpMessageHandler>(
+                MockBehavior.Strict
+            );
             doNotUseDefaultHandlerMock.As<IDisposable>().Setup(c => c.Dispose());
 
             using (HttpConfiguration configuration = new HttpConfiguration())
             using (HttpMessageHandler doNoUseDefaultHandler = doNotUseDefaultHandlerMock.Object)
-            using (HttpRoutingDispatcher dispatcher = new HttpRoutingDispatcher(configuration, doNoUseDefaultHandler))
+            using (
+                HttpRoutingDispatcher dispatcher = new HttpRoutingDispatcher(
+                    configuration,
+                    doNoUseDefaultHandler
+                )
+            )
             using (HttpMessageInvoker invoker = new HttpMessageInvoker(dispatcher))
             using (HttpRequestMessage expectedRequest = new HttpRequestMessage())
             using (HttpResponseMessage expectedResponse = new HttpResponseMessage())
@@ -168,11 +204,16 @@ namespace System.Web.Http.Dispatcher
                 expectedRequest.SetRequestContext(context);
 
                 // Act
-                HttpResponseMessage response = await invoker.SendAsync(expectedRequest, CancellationToken.None);
+                HttpResponseMessage response = await invoker.SendAsync(
+                    expectedRequest,
+                    CancellationToken.None
+                );
 
                 // Assert
                 Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
-                Assert.True(response.RequestMessage.Properties.ContainsKey(HttpPropertyKeys.NoRouteMatched));
+                Assert.True(
+                    response.RequestMessage.Properties.ContainsKey(HttpPropertyKeys.NoRouteMatched)
+                );
             }
         }
 
@@ -181,13 +222,19 @@ namespace System.Web.Http.Dispatcher
             return CreateRequest(config, requestUri, routeHandler: new EmptyResponseHandler());
         }
 
-        private static HttpRequestMessage CreateRequest(HttpConfiguration config, string requestUri, HttpMessageHandler routeHandler)
+        private static HttpRequestMessage CreateRequest(
+            HttpConfiguration config,
+            string requestUri,
+            HttpMessageHandler routeHandler
+        )
         {
-            var route = config.Routes.CreateRoute("api/{controller}/{id}",
-                                                  defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },
-                                                  constraints: null,
-                                                  dataTokens: null,
-                                                  handler: routeHandler);
+            var route = config.Routes.CreateRoute(
+                "api/{controller}/{id}",
+                defaults: new Dictionary<string, object> { { "id", RouteParameter.Optional } },
+                constraints: null,
+                dataTokens: null,
+                handler: routeHandler
+            );
             config.Routes.Add("default", route);
 
             var request = new HttpRequestMessage(HttpMethod.Get, requestUri);
@@ -197,7 +244,10 @@ namespace System.Web.Http.Dispatcher
 
         private class EmptyResponseHandler : HttpMessageHandler
         {
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 return Task.FromResult(request.CreateResponse(HttpStatusCode.OK));
             }
@@ -215,7 +265,10 @@ namespace System.Web.Http.Dispatcher
                 _response = response;
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 Request = request;
                 CancellationToken = cancellationToken;

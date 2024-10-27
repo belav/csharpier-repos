@@ -26,7 +26,9 @@ public class CookieRequestCultureProvider : RequestCultureProvider
     public string CookieName { get; set; } = DefaultCookieName;
 
     /// <inheritdoc />
-    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 
@@ -51,9 +53,11 @@ public class CookieRequestCultureProvider : RequestCultureProvider
     {
         ArgumentNullException.ThrowIfNull(requestCulture);
 
-        return string.Join(_cookieSeparator,
+        return string.Join(
+            _cookieSeparator,
             $"{_culturePrefix}{requestCulture.Culture.Name}",
-            $"{_uiCulturePrefix}{requestCulture.UICulture.Name}");
+            $"{_uiCulturePrefix}{requestCulture.UICulture.Name}"
+        );
     }
 
     /// <summary>
@@ -79,8 +83,10 @@ public class CookieRequestCultureProvider : RequestCultureProvider
         var potentialCultureName = valueSpan[parts[0]];
         var potentialUICultureName = valueSpan[parts[1]];
 
-        if (!potentialCultureName.StartsWith(_culturePrefix, StringComparison.Ordinal) || !
-            potentialUICultureName.StartsWith(_uiCulturePrefix, StringComparison.Ordinal))
+        if (
+            !potentialCultureName.StartsWith(_culturePrefix, StringComparison.Ordinal)
+            || !potentialUICultureName.StartsWith(_uiCulturePrefix, StringComparison.Ordinal)
+        )
         {
             return null;
         }

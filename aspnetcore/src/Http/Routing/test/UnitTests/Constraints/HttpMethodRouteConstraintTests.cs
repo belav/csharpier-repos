@@ -23,7 +23,13 @@ public class HttpMethodRouteConstraintTests
         var values = new RouteValueDictionary(new { });
 
         // Act
-        var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.IncomingRequest);
+        var result = constraint.Match(
+            httpContext,
+            route,
+            "httpMethod",
+            values,
+            RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.True(result);
@@ -44,7 +50,13 @@ public class HttpMethodRouteConstraintTests
         var values = new RouteValueDictionary(new { });
 
         // Act
-        var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.IncomingRequest);
+        var result = constraint.Match(
+            httpContext,
+            route,
+            "httpMethod",
+            values,
+            RouteDirection.IncomingRequest
+        );
 
         // Assert
         Assert.False(result);
@@ -64,7 +76,13 @@ public class HttpMethodRouteConstraintTests
         var values = new RouteValueDictionary(new { httpMethod = httpMethod });
 
         // Act
-        var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.UrlGeneration);
+        var result = constraint.Match(
+            httpContext,
+            route,
+            "httpMethod",
+            values,
+            RouteDirection.UrlGeneration
+        );
 
         // Assert
         Assert.True(result);
@@ -84,7 +102,13 @@ public class HttpMethodRouteConstraintTests
         var values = new RouteValueDictionary(new { httpMethod = httpMethod });
 
         // Act
-        var result = constraint.Match(httpContext, route, "httpMethod", values, RouteDirection.UrlGeneration);
+        var result = constraint.Match(
+            httpContext,
+            route,
+            "httpMethod",
+            values,
+            RouteDirection.UrlGeneration
+        );
 
         // Assert
         Assert.False(result);

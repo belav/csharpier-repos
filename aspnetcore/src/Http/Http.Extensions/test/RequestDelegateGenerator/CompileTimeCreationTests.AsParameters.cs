@@ -38,25 +38,50 @@ app.MapGet("/", TestAction);
     {
         get
         {
-            static string GetAbstractTypeError(Type type)
-                => $"The abstract type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}' is not supported. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
+            static string GetAbstractTypeError(Type type) =>
+                $"The abstract type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}' is not supported. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
 
-            static string GetMultipleContructorsError(Type type)
-                => $"Only a single public parameterized constructor is allowed for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
+            static string GetMultipleContructorsError(Type type) =>
+                $"Only a single public parameterized constructor is allowed for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
 
-            static string GetNoContructorsError(Type type)
-                => $"No public parameterless constructor found for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
+            static string GetNoContructorsError(Type type) =>
+                $"No public parameterless constructor found for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
 
-            static string GetInvalidConstructorError(Type type)
-                => $"The public parameterized constructor must contain only parameters that match the declared public properties for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
+            static string GetInvalidConstructorError(Type type) =>
+                $"The public parameterized constructor must contain only parameters that match the declared public properties for type '{TypeNameHelper.GetTypeDisplayName(type, fullName: false)}'. For more information, please see https://aka.ms/aspnet/rdg-known-issues";
 
-            return new []
+            return new[]
             {
-                    new object[] { "BadArgumentListRecord", DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id, GetMultipleContructorsError(typeof(BadArgumentListRecord)) },
-                    new object[] { "BadArgumentListClass", DiagnosticDescriptors.InvalidAsParametersSignature.Id, GetInvalidConstructorError(typeof(BadArgumentListClass)) },
-                    new object[] { "BadArgumentListClassMultipleCtors", DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id, GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors))  },
-                    new object[] { "BadAbstractArgumentListClass", DiagnosticDescriptors.InvalidAsParametersAbstractType.Id, GetAbstractTypeError(typeof(BadAbstractArgumentListClass)) },
-                    new object[] { "BadNoPublicConstructorArgumentListClass", DiagnosticDescriptors.InvalidAsParametersNoConstructorFound.Id, GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass)) },
+                new object[]
+                {
+                    "BadArgumentListRecord",
+                    DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id,
+                    GetMultipleContructorsError(typeof(BadArgumentListRecord)),
+                },
+                new object[]
+                {
+                    "BadArgumentListClass",
+                    DiagnosticDescriptors.InvalidAsParametersSignature.Id,
+                    GetInvalidConstructorError(typeof(BadArgumentListClass)),
+                },
+                new object[]
+                {
+                    "BadArgumentListClassMultipleCtors",
+                    DiagnosticDescriptors.InvalidAsParametersSingleConstructorOnly.Id,
+                    GetMultipleContructorsError(typeof(BadArgumentListClassMultipleCtors)),
+                },
+                new object[]
+                {
+                    "BadAbstractArgumentListClass",
+                    DiagnosticDescriptors.InvalidAsParametersAbstractType.Id,
+                    GetAbstractTypeError(typeof(BadAbstractArgumentListClass)),
+                },
+                new object[]
+                {
+                    "BadNoPublicConstructorArgumentListClass",
+                    DiagnosticDescriptors.InvalidAsParametersNoConstructorFound.Id,
+                    GetNoContructorsError(typeof(BadNoPublicConstructorArgumentListClass)),
+                },
             };
         }
     }
@@ -66,7 +91,8 @@ app.MapGet("/", TestAction);
     public async Task BuildRequestDelegateEmitsDiagnosticForInvalidParameterListConstructor(
         string parameterType,
         string diagnosticId,
-         string message)
+        string message
+    )
     {
         var source = $$"""
 void TestAction(HttpContext context, [AsParameters] {{parameterType}} args)
@@ -89,7 +115,9 @@ app.MapGet("/", TestAction);
     [Theory]
     [InlineData("NestedArgumentListRecord")]
     [InlineData("ClassWithParametersConstructor")]
-    public async Task BuildRequestDelegateThrowsNotSupportedExceptionForNestedParametersList(string parameterType)
+    public async Task BuildRequestDelegateThrowsNotSupportedExceptionForNestedParametersList(
+        string parameterType
+    )
     {
         var source = $$"""
 void TestAction([AsParameters] {{parameterType}} req) { }

@@ -20,12 +20,21 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeExpression_String_CodeExpression_TestData()
         {
             yield return new object[] { null, null, null };
-            yield return new object[] { new CodePrimitiveExpression("Value1"), "EventName", new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodePrimitiveExpression("Value1"),
+                "EventName",
+                new CodePrimitiveExpression("Value2"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_CodeExpression_String_CodeExpression_TestData))]
-        public void Ctor_CodeExpression_String_CodeExpression(CodeExpression targetObject, string eventName, CodeExpression listener)
+        public void Ctor_CodeExpression_String_CodeExpression(
+            CodeExpression targetObject,
+            string eventName,
+            CodeExpression listener
+        )
         {
             var attachEvent = new CodeAttachEventStatement(targetObject, eventName, listener);
             Assert.Equal(targetObject, attachEvent.Event.TargetObject);
@@ -37,28 +46,53 @@ namespace System.CodeDom.Tests
         {
             yield return new object[] { null, null };
             yield return new object[] { new CodeEventReferenceExpression(null, null), null };
-            yield return new object[] { new CodeEventReferenceExpression(new CodePrimitiveExpression("Value1"), "EventName"), new CodePrimitiveExpression("Value2") };
+            yield return new object[]
+            {
+                new CodeEventReferenceExpression(
+                    new CodePrimitiveExpression("Value1"),
+                    "EventName"
+                ),
+                new CodePrimitiveExpression("Value2"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(CodeEventReferenceExpression_CodeExpression_TestData))]
-        public void Ctor_CodeEventReferenceExpression_CodeExpression(CodeEventReferenceExpression eventExpression, CodeExpression listener)
+        public void Ctor_CodeEventReferenceExpression_CodeExpression(
+            CodeEventReferenceExpression eventExpression,
+            CodeExpression listener
+        )
         {
             var attachEvent = new CodeAttachEventStatement(eventExpression, listener);
-            Assert.Equal((eventExpression ?? new CodeEventReferenceExpression()).TargetObject, attachEvent.Event.TargetObject);
-            Assert.Equal((eventExpression ?? new CodeEventReferenceExpression()).EventName, attachEvent.Event.EventName);
+            Assert.Equal(
+                (eventExpression ?? new CodeEventReferenceExpression()).TargetObject,
+                attachEvent.Event.TargetObject
+            );
+            Assert.Equal(
+                (eventExpression ?? new CodeEventReferenceExpression()).EventName,
+                attachEvent.Event.EventName
+            );
             Assert.Equal(listener, attachEvent.Listener);
         }
 
         [Theory]
         [MemberData(nameof(CodeEventReferenceExpression_CodeExpression_TestData))]
-        public void Event_Set_Get_ReturnsExpected(CodeEventReferenceExpression value, CodeExpression listener)
+        public void Event_Set_Get_ReturnsExpected(
+            CodeEventReferenceExpression value,
+            CodeExpression listener
+        )
         {
             _ = listener;
             var attachEvent = new CodeAttachEventStatement();
             attachEvent.Event = value;
-            Assert.Equal((value ?? new CodeEventReferenceExpression()).TargetObject, attachEvent.Event.TargetObject);
-            Assert.Equal((value ?? new CodeEventReferenceExpression()).EventName, attachEvent.Event.EventName);
+            Assert.Equal(
+                (value ?? new CodeEventReferenceExpression()).TargetObject,
+                attachEvent.Event.TargetObject
+            );
+            Assert.Equal(
+                (value ?? new CodeEventReferenceExpression()).EventName,
+                attachEvent.Event.EventName
+            );
         }
 
         [Theory]

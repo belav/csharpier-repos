@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -36,37 +36,35 @@ using System.Drawing.Drawing2D;
 
 namespace System.Windows.Forms.Design.Behavior
 {
-	public class ComponentGlyph : Glyph
-	{
-		IComponent component;
+    public class ComponentGlyph : Glyph
+    {
+        IComponent component;
 
-		public ComponentGlyph (IComponent relatedComponent)
-			: this (relatedComponent, null)
-		{
-		}
+        public ComponentGlyph(IComponent relatedComponent)
+            : this(relatedComponent, null) { }
 
-		public ComponentGlyph (IComponent relatedComponent, Behavior behavior)
-			: base (behavior)
-		{
-			this.component = relatedComponent;
-		}
+        public ComponentGlyph(IComponent relatedComponent, Behavior behavior)
+            : base(behavior)
+        {
+            this.component = relatedComponent;
+        }
 
-		[MonoTODO]
-		public IComponent RelatedComponent {
-			get { return component; }
-		}
+        [MonoTODO]
+        public IComponent RelatedComponent
+        {
+            get { return component; }
+        }
 
-		[MonoTODO]
-		public override Cursor GetHitTest (Point p)
-		{
-			throw new NotImplementedException ();
-		}
+        [MonoTODO]
+        public override Cursor GetHitTest(Point p)
+        {
+            throw new NotImplementedException();
+        }
 
-		[MonoTODO]
-		public override void Paint (PaintEventArgs pe)
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        [MonoTODO]
+        public override void Paint(PaintEventArgs pe)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

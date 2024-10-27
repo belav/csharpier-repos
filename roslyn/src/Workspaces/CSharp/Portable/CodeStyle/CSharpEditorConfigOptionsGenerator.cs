@@ -6,28 +6,35 @@ using System;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Composition;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis.CSharp.Formatting;
 using Microsoft.CodeAnalysis.Host.Mef;
+using Microsoft.CodeAnalysis.Options;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeStyle
 {
     [EditorConfigGenerator(LanguageNames.CSharp), Shared]
-    internal sealed class CSharpEditorConfigFileGenerator
-        : IEditorConfigOptionsCollection
+    internal sealed class CSharpEditorConfigFileGenerator : IEditorConfigOptionsCollection
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpEditorConfigFileGenerator()
-        {
-        }
+        public CSharpEditorConfigFileGenerator() { }
 
         public IEnumerable<(string feature, ImmutableArray<IOption2> options)> GetOptions()
         {
             var builder = ArrayBuilder<(string, ImmutableArray<IOption2>)>.GetInstance();
-            builder.Add((CSharpWorkspaceResources.CSharp_Coding_Conventions, CSharpCodeStyleOptions.AllOptions));
-            builder.Add((CSharpWorkspaceResources.CSharp_Formatting_Rules, CSharpFormattingOptions2.AllOptions));
+            builder.Add(
+                (
+                    CSharpWorkspaceResources.CSharp_Coding_Conventions,
+                    CSharpCodeStyleOptions.AllOptions
+                )
+            );
+            builder.Add(
+                (
+                    CSharpWorkspaceResources.CSharp_Formatting_Rules,
+                    CSharpFormattingOptions2.AllOptions
+                )
+            );
             return builder.ToArrayAndFree();
         }
     }

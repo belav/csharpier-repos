@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
     /// <summary>
-    /// A provider that produces <see cref="QuickInfoItem"/>'s. 
+    /// A provider that produces <see cref="QuickInfoItem"/>'s.
     /// Providers are used with some <see cref="QuickInfoService"/> implementations.
     /// </summary>
     internal abstract class QuickInfoProvider

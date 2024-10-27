@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,39 +30,46 @@
 
 using System;
 
-namespace Mono.Math.Prime {
-	/// <summary>
-	/// A factor of confidence.
-	/// </summary>
+namespace Mono.Math.Prime
+{
+    /// <summary>
+    /// A factor of confidence.
+    /// </summary>
 #if INSIDE_CORLIB
-	internal
+    internal
 #else
-	public
+    public
 #endif
-	enum ConfidenceFactor {
-		/// <summary>
-		/// Only suitable for development use, probability of failure may be greater than 1/2^20.
-		/// </summary>
-		ExtraLow,
-		/// <summary>
-		/// Suitable only for transactions which do not require forward secrecy.  Probability of failure about 1/2^40
-		/// </summary>
-		Low,
-		/// <summary>
-		/// Designed for production use. Probability of failure about 1/2^80.
-		/// </summary>
-		Medium,
-		/// <summary>
-		/// Suitable for sensitive data. Probability of failure about 1/2^160.
-		/// </summary>
-		High,
-		/// <summary>
-		/// Use only if you have lots of time! Probability of failure about 1/2^320.
-		/// </summary>
-		ExtraHigh,
-		/// <summary>
-		/// Only use methods which generate provable primes. Not yet implemented.
-		/// </summary>
-		Provable
-	}
+    enum ConfidenceFactor
+    {
+        /// <summary>
+        /// Only suitable for development use, probability of failure may be greater than 1/2^20.
+        /// </summary>
+        ExtraLow,
+
+        /// <summary>
+        /// Suitable only for transactions which do not require forward secrecy.  Probability of failure about 1/2^40
+        /// </summary>
+        Low,
+
+        /// <summary>
+        /// Designed for production use. Probability of failure about 1/2^80.
+        /// </summary>
+        Medium,
+
+        /// <summary>
+        /// Suitable for sensitive data. Probability of failure about 1/2^160.
+        /// </summary>
+        High,
+
+        /// <summary>
+        /// Use only if you have lots of time! Probability of failure about 1/2^320.
+        /// </summary>
+        ExtraHigh,
+
+        /// <summary>
+        /// Only use methods which generate provable primes. Not yet implemented.
+        /// </summary>
+        Provable,
+    }
 }

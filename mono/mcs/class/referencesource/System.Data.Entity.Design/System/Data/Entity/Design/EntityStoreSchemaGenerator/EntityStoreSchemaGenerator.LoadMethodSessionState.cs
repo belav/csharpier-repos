@@ -6,38 +6,48 @@
 // @owner       Microsoft
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
-using System.Data.Entity.Design.Common;
 using System.Collections.Generic;
-using System.Data.Metadata.Edm;
+using System.Data.Entity.Design.Common;
 using System.Data.Entity.Design.SsdlGenerator;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
 
 namespace System.Data.Entity.Design
 {
     public sealed partial class EntityStoreSchemaGenerator
     {
-        // responsible for holding all the 
+        // responsible for holding all the
         // state for a single execution of the Load
         // method
         private class LoadMethodSessionState
         {
             public List<AssociationType> AssociationTypes = new List<AssociationType>();
-            public UniqueIdentifierService UsedTypeNames = new UniqueIdentifierService(false,s=>s.Replace(".", "_"));
+            public UniqueIdentifierService UsedTypeNames = new UniqueIdentifierService(
+                false,
+                s => s.Replace(".", "_")
+            );
             public IEnumerable<EntityStoreSchemaFilterEntry> Filters;
-            public Dictionary<EntityType, EntitySet> EntityTypeToSet = new Dictionary<EntityType, EntitySet>();
-            public Dictionary<RelationshipEndMember, EntityType> RelationshipEndTypeLookup = new Dictionary<RelationshipEndMember, EntityType>();
-            public Dictionary<string, EntityContainer> EntityContainerLookup = new Dictionary<string, EntityContainer>();
+            public Dictionary<EntityType, EntitySet> EntityTypeToSet =
+                new Dictionary<EntityType, EntitySet>();
+            public Dictionary<RelationshipEndMember, EntityType> RelationshipEndTypeLookup =
+                new Dictionary<RelationshipEndMember, EntityType>();
+            public Dictionary<string, EntityContainer> EntityContainerLookup =
+                new Dictionary<string, EntityContainer>();
             public HashSet<EntityType> ReadOnlyEntities = new HashSet<EntityType>();
             public HashSet<EdmType> InvalidTypes = new HashSet<EdmType>();
-            public MetadataItemSerializer.ErrorsLookup ItemToErrorsMap = new MetadataItemSerializer.ErrorsLookup();
+            public MetadataItemSerializer.ErrorsLookup ItemToErrorsMap =
+                new MetadataItemSerializer.ErrorsLookup();
             public StoreItemCollection ItemCollection;
             public List<EdmFunction> Functions = new List<EdmFunction>();
 
-            private Dictionary<DbObjectKey, EntityType> _entityLookup = new Dictionary<DbObjectKey, EntityType>();
-            private Dictionary<EntityType, DbObjectKey> _reverseEntityLookup = new Dictionary<EntityType, DbObjectKey>();
+            private Dictionary<DbObjectKey, EntityType> _entityLookup =
+                new Dictionary<DbObjectKey, EntityType>();
+            private Dictionary<EntityType, DbObjectKey> _reverseEntityLookup =
+                new Dictionary<EntityType, DbObjectKey>();
             private HashSet<DbObjectKey> _missingEntities = new HashSet<DbObjectKey>();
             private HashSet<DbObjectKey> _tablesWithoutKeys = new HashSet<DbObjectKey>();
-            private Dictionary<DbObjectKey, RowType> _tvfReturnTypeLookup = new Dictionary<DbObjectKey, RowType>();
+            private Dictionary<DbObjectKey, RowType> _tvfReturnTypeLookup =
+                new Dictionary<DbObjectKey, RowType>();
             private string _storeNamespace;
 
             private readonly Version _targetEntityFrameworkVersion;
@@ -103,11 +113,14 @@ namespace System.Data.Entity.Design
 
                 if (!_missingEntities.Contains(key))
                 {
-                    AddErrorsForType(null,
+                    AddErrorsForType(
+                        null,
                         new EdmSchemaError(
-                        Strings.TableReferencedByAssociationWasNotFound(key),
-                        (int)ModelBuilderErrorCode.MissingEntity,
-                        EdmSchemaErrorSeverity.Error));
+                            Strings.TableReferencedByAssociationWasNotFound(key),
+                            (int)ModelBuilderErrorCode.MissingEntity,
+                            EdmSchemaErrorSeverity.Error
+                        )
+                    );
                     _missingEntities.Add(key);
                 }
                 return false;
@@ -137,17 +150,30 @@ namespace System.Data.Entity.Design
             /// If a type is recognized but excluded because it is not supported by the target Framework then the excludedForTarget
             /// flag is set to true.
             /// </summary>
-            internal bool TryGetStorePrimitiveType(string typeName, out PrimitiveType primitiveType, out bool excludedForTarget)
+            internal bool TryGetStorePrimitiveType(
+                string typeName,
+                out PrimitiveType primitiveType,
+                out bool excludedForTarget
+            )
             {
                 excludedForTarget = false;
-                var success = ItemCollection.TryGetItem<PrimitiveType>(StoreNamespace + "." + typeName, false, out primitiveType);
+                var success = ItemCollection.TryGetItem<PrimitiveType>(
+                    StoreNamespace + "." + typeName,
+                    false,
+                    out primitiveType
+                );
 
                 // If targetting 4.0 using 4.5 then we need to ignore geometry and geography types just like we would have done when
                 // generating with 4.0. We can only get the base spatial types since we won't reverse engineer to derived spatial
                 // types. We don't need to do anything for enums because we will never reverse engineer to an enum.
-                if (success &&
-                    _targetEntityFrameworkVersion.CompareTo(EntityFrameworkVersions.Version3) < 0 &&
-                    (primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Geography || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Geometry))
+                if (
+                    success
+                    && _targetEntityFrameworkVersion.CompareTo(EntityFrameworkVersions.Version3) < 0
+                    && (
+                        primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Geography
+                        || primitiveType.PrimitiveTypeKind == PrimitiveTypeKind.Geometry
+                    )
+                )
                 {
                     excludedForTarget = true;
                     primitiveType = null;
@@ -175,7 +201,7 @@ namespace System.Data.Entity.Design
                 }
             }
 
-            internal void AddErrorsForType(EdmType type, params EdmSchemaError [] errors)
+            internal void AddErrorsForType(EdmType type, params EdmSchemaError[] errors)
             {
                 AddErrorsForType(type, (ICollection<EdmSchemaError>)errors);
             }
@@ -188,7 +214,7 @@ namespace System.Data.Entity.Design
                     {
                         type = MetadataItemSerializer.NoSpecificTypeSentinal;
                     }
-                    
+
                     if (ItemToErrorsMap.ContainsKey(type))
                     {
                         ItemToErrorsMap[type].AddRange(errors);

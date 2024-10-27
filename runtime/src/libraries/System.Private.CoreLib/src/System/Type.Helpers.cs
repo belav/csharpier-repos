@@ -10,7 +10,11 @@ namespace System
     // This file collects the longer methods of Type to make the main Type class more readable.
     public abstract partial class Type : MemberInfo, IReflect
     {
-        [Obsolete(Obsoletions.LegacyFormatterMessage, DiagnosticId = Obsoletions.LegacyFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         public virtual bool IsSerializable
         {
             get
@@ -31,8 +35,7 @@ namespace System
                             return true;
 
                         underlyingType = underlyingType.BaseType;
-                    }
-                    while (underlyingType != null);
+                    } while (underlyingType != null);
                 }
 
                 return false;
@@ -143,7 +146,12 @@ namespace System
         }
 
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)]
-        public virtual MemberInfo[] FindMembers(MemberTypes memberType, BindingFlags bindingAttr, MemberFilter? filter, object? filterCriteria)
+        public virtual MemberInfo[] FindMembers(
+            MemberTypes memberType,
+            BindingFlags bindingAttr,
+            MemberFilter? filter,
+            object? filterCriteria
+        )
         {
             // Define the work arrays
             MethodInfo?[]? m = null;
@@ -154,7 +162,7 @@ namespace System
             Type?[]? t = null;
 
             int i;
-            int cnt = 0;            // Total Matchs
+            int cnt = 0; // Total Matchs
 
             // Check the methods
             if ((memberType & MemberTypes.Method) != 0)
@@ -370,10 +378,13 @@ namespace System
         }
 
         // IL2085 is produced due to the "this" of the method not being annotated and used in effectively this.GetInterfaces()
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2085:UnrecognizedReflectionPattern",
-            Justification = "The GetInterfaces technically requires all interfaces to be preserved" +
-                "But this method only compares the result against the passed in ifaceType." +
-                "So if ifaceType exists, then trimming should have kept it implemented on any type.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2085:UnrecognizedReflectionPattern",
+            Justification = "The GetInterfaces technically requires all interfaces to be preserved"
+                + "But this method only compares the result against the passed in ifaceType."
+                + "So if ifaceType exists, then trimming should have kept it implemented on any type."
+        )]
         internal bool ImplementInterface(Type ifaceType)
         {
             Type? t = this;
@@ -393,8 +404,12 @@ namespace System
                     {
                         // Interfaces don't derive from other interfaces, they implement them.
                         // So instead of IsSubclassOf, we should use ImplementInterface instead.
-                        if (interfaces[i] == ifaceType ||
-                            (interfaces[i] != null && interfaces[i].ImplementInterface(ifaceType)))
+                        if (
+                            interfaces[i] == ifaceType
+                            || (
+                                interfaces[i] != null && interfaces[i].ImplementInterface(ifaceType)
+                            )
+                        )
                             return true;
                     }
                 }
@@ -418,69 +433,110 @@ namespace System
             {
                 case MemberTypes.Constructor:
                 case MemberTypes.Method:
+                {
+                    MethodAttributes criteria;
+                    try
                     {
-                        MethodAttributes criteria;
-                        try
-                        {
-                            int i = (int)filterCriteria;
-                            criteria = (MethodAttributes)i;
-                        }
-                        catch
-                        {
-                            throw new InvalidFilterCriteriaException(SR.InvalidFilterCriteriaException_CritInt);
-                        }
-
-
-                        MethodAttributes attr;
-                        if (m.MemberType == MemberTypes.Method)
-                            attr = ((MethodInfo)m).Attributes;
-                        else
-                            attr = ((ConstructorInfo)m).Attributes;
-
-                        if (((criteria & MethodAttributes.MemberAccessMask) != 0) && (attr & MethodAttributes.MemberAccessMask) != (criteria & MethodAttributes.MemberAccessMask))
-                            return false;
-                        if (((criteria & MethodAttributes.Static) != 0) && (attr & MethodAttributes.Static) == 0)
-                            return false;
-                        if (((criteria & MethodAttributes.Final) != 0) && (attr & MethodAttributes.Final) == 0)
-                            return false;
-                        if (((criteria & MethodAttributes.Virtual) != 0) && (attr & MethodAttributes.Virtual) == 0)
-                            return false;
-                        if (((criteria & MethodAttributes.Abstract) != 0) && (attr & MethodAttributes.Abstract) == 0)
-                            return false;
-                        if (((criteria & MethodAttributes.SpecialName) != 0) && (attr & MethodAttributes.SpecialName) == 0)
-                            return false;
-                        return true;
+                        int i = (int)filterCriteria;
+                        criteria = (MethodAttributes)i;
                     }
+                    catch
+                    {
+                        throw new InvalidFilterCriteriaException(
+                            SR.InvalidFilterCriteriaException_CritInt
+                        );
+                    }
+
+                    MethodAttributes attr;
+                    if (m.MemberType == MemberTypes.Method)
+                        attr = ((MethodInfo)m).Attributes;
+                    else
+                        attr = ((ConstructorInfo)m).Attributes;
+
+                    if (
+                        ((criteria & MethodAttributes.MemberAccessMask) != 0)
+                        && (attr & MethodAttributes.MemberAccessMask)
+                            != (criteria & MethodAttributes.MemberAccessMask)
+                    )
+                        return false;
+                    if (
+                        ((criteria & MethodAttributes.Static) != 0)
+                        && (attr & MethodAttributes.Static) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & MethodAttributes.Final) != 0)
+                        && (attr & MethodAttributes.Final) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & MethodAttributes.Virtual) != 0)
+                        && (attr & MethodAttributes.Virtual) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & MethodAttributes.Abstract) != 0)
+                        && (attr & MethodAttributes.Abstract) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & MethodAttributes.SpecialName) != 0)
+                        && (attr & MethodAttributes.SpecialName) == 0
+                    )
+                        return false;
+                    return true;
+                }
                 case MemberTypes.Field:
+                {
+                    FieldAttributes criteria;
+                    try
                     {
-                        FieldAttributes criteria;
-                        try
-                        {
-                            int i = (int)filterCriteria;
-                            criteria = (FieldAttributes)i;
-                        }
-                        catch
-                        {
-                            throw new InvalidFilterCriteriaException(SR.InvalidFilterCriteriaException_CritInt);
-                        }
-
-                        FieldAttributes attr = ((FieldInfo)m).Attributes;
-                        if (((criteria & FieldAttributes.FieldAccessMask) != 0) && (attr & FieldAttributes.FieldAccessMask) != (criteria & FieldAttributes.FieldAccessMask))
-                            return false;
-                        if (((criteria & FieldAttributes.Static) != 0) && (attr & FieldAttributes.Static) == 0)
-                            return false;
-                        if (((criteria & FieldAttributes.InitOnly) != 0) && (attr & FieldAttributes.InitOnly) == 0)
-                            return false;
-                        if (((criteria & FieldAttributes.Literal) != 0) && (attr & FieldAttributes.Literal) == 0)
-                            return false;
-#pragma warning disable SYSLIB0050 // Legacy serialization infrastructure is obsolete
-                        if (((criteria & FieldAttributes.NotSerialized) != 0) && (attr & FieldAttributes.NotSerialized) == 0)
-                            return false;
-#pragma warning restore SYSLIB0050
-                        if (((criteria & FieldAttributes.PinvokeImpl) != 0) && (attr & FieldAttributes.PinvokeImpl) == 0)
-                            return false;
-                        return true;
+                        int i = (int)filterCriteria;
+                        criteria = (FieldAttributes)i;
                     }
+                    catch
+                    {
+                        throw new InvalidFilterCriteriaException(
+                            SR.InvalidFilterCriteriaException_CritInt
+                        );
+                    }
+
+                    FieldAttributes attr = ((FieldInfo)m).Attributes;
+                    if (
+                        ((criteria & FieldAttributes.FieldAccessMask) != 0)
+                        && (attr & FieldAttributes.FieldAccessMask)
+                            != (criteria & FieldAttributes.FieldAccessMask)
+                    )
+                        return false;
+                    if (
+                        ((criteria & FieldAttributes.Static) != 0)
+                        && (attr & FieldAttributes.Static) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & FieldAttributes.InitOnly) != 0)
+                        && (attr & FieldAttributes.InitOnly) == 0
+                    )
+                        return false;
+                    if (
+                        ((criteria & FieldAttributes.Literal) != 0)
+                        && (attr & FieldAttributes.Literal) == 0
+                    )
+                        return false;
+#pragma warning disable SYSLIB0050 // Legacy serialization infrastructure is obsolete
+                    if (
+                        ((criteria & FieldAttributes.NotSerialized) != 0)
+                        && (attr & FieldAttributes.NotSerialized) == 0
+                    )
+                        return false;
+#pragma warning restore SYSLIB0050
+                    if (
+                        ((criteria & FieldAttributes.PinvokeImpl) != 0)
+                        && (attr & FieldAttributes.PinvokeImpl) == 0
+                    )
+                        return false;
+                    return true;
+                }
             }
 
             return false;
@@ -490,12 +546,18 @@ namespace System
         // This method will filter based upon the name.  A partial wildcard
         //  at the end of the string is supported.
         //  filterCriteria -- This is the string name
-        private static bool FilterNameImpl(MemberInfo m, object filterCriteria, StringComparison comparison)
+        private static bool FilterNameImpl(
+            MemberInfo m,
+            object filterCriteria,
+            StringComparison comparison
+        )
         {
             // Check that the criteria object is a String object
             if (!(filterCriteria is string filterCriteriaString))
             {
-                throw new InvalidFilterCriteriaException(SR.InvalidFilterCriteriaException_CritString);
+                throw new InvalidFilterCriteriaException(
+                    SR.InvalidFilterCriteriaException_CritString
+                );
             }
 
             ReadOnlySpan<char> str = filterCriteriaString.AsSpan().Trim();

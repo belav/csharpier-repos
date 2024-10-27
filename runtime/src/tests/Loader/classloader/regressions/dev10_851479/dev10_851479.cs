@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Xunit;
 
 /// <summary>
@@ -39,6 +38,4 @@ class A<T, U>
     where T : U
     where U : A<T, U> { }
 
-class B : A<B, B>
-{
-}
+class B : A<B, B> { }

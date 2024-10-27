@@ -11,10 +11,7 @@ namespace Microsoft.Extensions.SecretManager.Tools.Internal;
 /// </summary>
 public class CommandContext
 {
-    public CommandContext(
-        SecretsStore store,
-        IReporter reporter,
-        IConsole console)
+    public CommandContext(SecretsStore store, IReporter reporter, IConsole console)
     {
         SecretStore = store;
         Reporter = reporter;

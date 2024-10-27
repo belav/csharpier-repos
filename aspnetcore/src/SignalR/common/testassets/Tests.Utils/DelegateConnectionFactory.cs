@@ -16,7 +16,10 @@ public class DelegateConnectionFactory : IConnectionFactory
         _connectDelegate = connectDelegate;
     }
 
-    public ValueTask<ConnectionContext> ConnectAsync(EndPoint endPoint, CancellationToken cancellationToken)
+    public ValueTask<ConnectionContext> ConnectAsync(
+        EndPoint endPoint,
+        CancellationToken cancellationToken
+    )
     {
         return _connectDelegate(endPoint);
     }

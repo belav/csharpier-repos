@@ -26,36 +26,65 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 
     public DiagnosticAnalyzer Analyzer { get; }
 
-    public async Task<ClassifiedSpan[]> GetClassificationSpansAsync(TextSpan textSpan, params string[] sources)
+    public async Task<ClassifiedSpan[]> GetClassificationSpansAsync(
+        TextSpan textSpan,
+        params string[] sources
+    )
     {
         var project = CreateProjectWithReferencesInBinDir(GetType().Assembly, sources);
         var doc = project.Solution.GetDocument(project.Documents.First().Id);
 
-        var result = await Classifier.GetClassifiedSpansAsync(doc, textSpan, CancellationToken.None);
+        var result = await Classifier.GetClassifiedSpansAsync(
+            doc,
+            textSpan,
+            CancellationToken.None
+        );
 
         return result.ToArray();
     }
 
-    public Task<CompletionResult> GetCompletionsAndServiceAsync(int caretPosition, params string[] sources)
+    public Task<CompletionResult> GetCompletionsAndServiceAsync(
+        int caretPosition,
+        params string[] sources
+    )
     {
         var source = sources.First();
         var insertionChar = source[caretPosition - 1];
-        return GetCompletionsAndServiceAsync(caretPosition, CompletionTrigger.CreateInsertionTrigger(insertionChar), sources);
+        return GetCompletionsAndServiceAsync(
+            caretPosition,
+            CompletionTrigger.CreateInsertionTrigger(insertionChar),
+            sources
+        );
     }
 
-    public async Task<CompletionResult> GetCompletionsAndServiceAsync(int caretPosition, CompletionTrigger completionTrigger, params string[] sources)
+    public async Task<CompletionResult> GetCompletionsAndServiceAsync(
+        int caretPosition,
+        CompletionTrigger completionTrigger,
+        params string[] sources
+    )
     {
         var project = CreateProjectWithReferencesInBinDir(GetType().Assembly, sources);
         var doc = project.Solution.GetDocument(project.Documents.First().Id);
         var originalText = await doc.GetTextAsync().ConfigureAwait(false);
 
         var completionService = CompletionService.GetService(doc);
-        var shouldTriggerCompletion = completionService.ShouldTriggerCompletion(originalText, caretPosition, completionTrigger);
+        var shouldTriggerCompletion = completionService.ShouldTriggerCompletion(
+            originalText,
+            caretPosition,
+            completionTrigger
+        );
 
         if (shouldTriggerCompletion)
         {
-            var result = await completionService.GetCompletionsAsync(doc, caretPosition, completionTrigger);
-            var completionSpan = completionService.GetDefaultCompletionListSpan(originalText, caretPosition);
+            var result = await completionService.GetCompletionsAsync(
+                doc,
+                caretPosition,
+                completionTrigger
+            );
+            var completionSpan = completionService.GetDefaultCompletionListSpan(
+                originalText,
+                caretPosition
+            );
 
             return new(doc, completionService, result, completionSpan, shouldTriggerCompletion);
         }
@@ -65,12 +94,17 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         }
     }
 
-    private async Task<(SyntaxToken token, SemanticModel model)> TryGetStringSyntaxTokenAtPositionAsync(int caretPosition, params string[] sources)
+    private async Task<(
+        SyntaxToken token,
+        SemanticModel model
+    )> TryGetStringSyntaxTokenAtPositionAsync(int caretPosition, params string[] sources)
     {
         var project = CreateProjectWithReferencesInBinDir(GetType().Assembly, sources);
         var document = project.Solution.GetDocument(project.Documents.First().Id);
 
-        var semanticModel = await document.GetSemanticModelAsync(CancellationToken.None).ConfigureAwait(false);
+        var semanticModel = await document
+            .GetSemanticModelAsync(CancellationToken.None)
+            .ConfigureAwait(false);
         if (semanticModel == null)
         {
             return default;
@@ -87,7 +121,10 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         return (token: stringToken, model: semanticModel);
     }
 
-    public async Task<AspNetCoreBraceMatchingResult?> GetBraceMatchesAsync(int caretPosition, params string[] sources)
+    public async Task<AspNetCoreBraceMatchingResult?> GetBraceMatchesAsync(
+        int caretPosition,
+        params string[] sources
+    )
     {
         var (token, model) = await TryGetStringSyntaxTokenAtPositionAsync(caretPosition, sources);
         var braceMatcher = new RoutePatternBraceMatcher();
@@ -95,12 +132,20 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         return braceMatcher.FindBraces(model, token, caretPosition, CancellationToken.None);
     }
 
-    public async Task<List<AspNetCoreHighlightSpan>> GetHighlightingAsync(int caretPosition, params string[] sources)
+    public async Task<List<AspNetCoreHighlightSpan>> GetHighlightingAsync(
+        int caretPosition,
+        params string[] sources
+    )
     {
         var (token, model) = await TryGetStringSyntaxTokenAtPositionAsync(caretPosition, sources);
         var highlighter = new RoutePatternHighlighter();
 
-        var highlights = highlighter.GetDocumentHighlights(model, token, caretPosition, CancellationToken.None);
+        var highlights = highlighter.GetDocumentHighlights(
+            model,
+            token,
+            caretPosition,
+            CancellationToken.None
+        );
         return highlights.SelectMany(h => h.HighlightSpans).ToList();
     }
 
@@ -123,8 +168,13 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
                 var assemblies = MefHostServices.DefaultAssemblies.ToList();
                 assemblies.Add(RoutePatternClassifier.TestAccessor.ExternalAccessAssembly);
 
-                var discovery = new AttributedPartDiscovery(Resolver.DefaultInstance, isNonPublicSupported: true);
-                var parts = Task.Run(() => discovery.CreatePartsAsync(assemblies)).GetAwaiter().GetResult();
+                var discovery = new AttributedPartDiscovery(
+                    Resolver.DefaultInstance,
+                    isNonPublicSupported: true
+                );
+                var parts = Task.Run(() => discovery.CreatePartsAsync(assemblies))
+                    .GetAwaiter()
+                    .GetResult();
                 var catalog = ComposableCatalog.Create(Resolver.DefaultInstance).AddParts(parts); //.WithDocumentTextDifferencingService();
 
                 var configuration = CompositionConfiguration.Create(catalog);
@@ -133,7 +183,8 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 #pragma warning restore VSTHRD002 // Avoid problematic synchronous waits
 #pragma warning restore VSTHRD011 // Use AsyncLazy<T>
             },
-            LazyThreadSafetyMode.ExecutionAndPublication);
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
     }
 
     private static AdhocWorkspace CreateWorkspace()
@@ -143,7 +194,10 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
         return new AdhocWorkspace(host);
     }
 
-    public static Project CreateProjectWithReferencesInBinDir(Assembly testAssembly, params string[] source)
+    public static Project CreateProjectWithReferencesInBinDir(
+        Assembly testAssembly,
+        params string[] source
+    )
     {
         // The deps file in the project is incorrect and does not contain "compile" nodes for some references.
         // However these binaries are always present in the bin output. As a "temporary" workaround, we'll add
@@ -151,10 +205,23 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
 
         Func<Workspace> createWorkspace = CreateWorkspace;
 
-        var project = DiagnosticProject.Create(testAssembly, source, createWorkspace, typeof(RoutePatternClassifier));
+        var project = DiagnosticProject.Create(
+            testAssembly,
+            source,
+            createWorkspace,
+            typeof(RoutePatternClassifier)
+        );
         foreach (var assembly in Directory.EnumerateFiles(AppContext.BaseDirectory, "*.dll"))
         {
-            if (!project.MetadataReferences.Any(c => string.Equals(Path.GetFileNameWithoutExtension(c.Display), Path.GetFileNameWithoutExtension(assembly), StringComparison.OrdinalIgnoreCase)))
+            if (
+                !project.MetadataReferences.Any(c =>
+                    string.Equals(
+                        Path.GetFileNameWithoutExtension(c.Display),
+                        Path.GetFileNameWithoutExtension(assembly),
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
+            )
             {
                 project = project.AddMetadataReference(MetadataReference.CreateFromFile(assembly));
             }
@@ -174,4 +241,10 @@ internal class TestDiagnosticAnalyzerRunner : DiagnosticAnalyzerRunner
     }
 }
 
-public record CompletionResult(Document Document, CompletionService Service, CompletionList Completions, TextSpan CompletionListSpan, bool ShouldTriggerCompletion);
+public record CompletionResult(
+    Document Document,
+    CompletionService Service,
+    CompletionList Completions,
+    TextSpan CompletionListSpan,
+    bool ShouldTriggerCompletion
+);

@@ -12,7 +12,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class LambdaAttributeParsingTests : ParsingTests
     {
-        public LambdaAttributeParsingTests(ITestOutputHelper output) : base(output) { }
+        public LambdaAttributeParsingTests(ITestOutputHelper output)
+            : base(output) { }
 
         protected override SyntaxTree ParseTree(string text, CSharpParseOptions? options)
         {
@@ -228,10 +229,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void LambdaAttribute_05()
         {
             string source = "[A] (ref x) => x";
-            UsingExpression(source, TestOptions.RegularPreview,
+            UsingExpression(
+                source,
+                TestOptions.RegularPreview,
                 // (1,11): error CS1001: Identifier expected
                 // [A] (ref x) => x
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, ")").WithLocation(1, 11)
+            );
 
             N(SyntaxKind.ParenthesizedLambdaExpression);
             {
@@ -274,10 +278,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void LambdaAttribute_06()
         {
             string source = "[A] ref x => x";
-            UsingExpression(source, TestOptions.RegularPreview,
+            UsingExpression(
+                source,
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token 'ref'
                 // [A] ref x => x
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]").WithArguments("ref").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]")
+                    .WithArguments("ref")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.CollectionExpression);
             {
@@ -298,10 +307,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void LambdaAttribute_07()
         {
             string source = "[A] in x => x";
-            UsingExpression(source, TestOptions.RegularPreview,
+            UsingExpression(
+                source,
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token 'in'
                 // [A] in x => x
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]").WithArguments("in").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]")
+                    .WithArguments("in")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.CollectionExpression);
             {
@@ -876,28 +890,84 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public static IEnumerable<object[]> GetLambdaTestData()
         {
             yield return getData("[A] x => x", tests => tests.LambdaExpression_01());
-            yield return getData("[A] async x => x", tests => tests.LambdaExpression_01(SyntaxKind.AsyncKeyword));
-            yield return getData("[A] static x => x", tests => tests.LambdaExpression_01(SyntaxKind.StaticKeyword));
-            yield return getData("[A] async static x => x", tests => tests.LambdaExpression_01(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword));
-            yield return getData("[A] static async x => x", tests => tests.LambdaExpression_01(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword));
+            yield return getData(
+                "[A] async x => x",
+                tests => tests.LambdaExpression_01(SyntaxKind.AsyncKeyword)
+            );
+            yield return getData(
+                "[A] static x => x",
+                tests => tests.LambdaExpression_01(SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] async static x => x",
+                tests =>
+                    tests.LambdaExpression_01(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] static async x => x",
+                tests =>
+                    tests.LambdaExpression_01(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            );
 
             yield return getData("[A]() => { }", tests => tests.LambdaExpression_02());
-            yield return getData("[A]async () => { }", tests => tests.LambdaExpression_02(SyntaxKind.AsyncKeyword));
-            yield return getData("[A]static () => { }", tests => tests.LambdaExpression_02(SyntaxKind.StaticKeyword));
-            yield return getData("[A]async static () => { }", tests => tests.LambdaExpression_02(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword));
-            yield return getData("[A]static async () => { }", tests => tests.LambdaExpression_02(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword));
+            yield return getData(
+                "[A]async () => { }",
+                tests => tests.LambdaExpression_02(SyntaxKind.AsyncKeyword)
+            );
+            yield return getData(
+                "[A]static () => { }",
+                tests => tests.LambdaExpression_02(SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A]async static () => { }",
+                tests =>
+                    tests.LambdaExpression_02(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A]static async () => { }",
+                tests =>
+                    tests.LambdaExpression_02(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            );
 
             yield return getData("[A] (x) => { }", tests => tests.LambdaExpression_03());
-            yield return getData("[A] async (x) => { }", tests => tests.LambdaExpression_03(SyntaxKind.AsyncKeyword));
-            yield return getData("[A] static (x) => { }", tests => tests.LambdaExpression_03(SyntaxKind.StaticKeyword));
-            yield return getData("[A] async static (x) => { }", tests => tests.LambdaExpression_03(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword));
-            yield return getData("[A] static async (x) => { }", tests => tests.LambdaExpression_03(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword));
+            yield return getData(
+                "[A] async (x) => { }",
+                tests => tests.LambdaExpression_03(SyntaxKind.AsyncKeyword)
+            );
+            yield return getData(
+                "[A] static (x) => { }",
+                tests => tests.LambdaExpression_03(SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] async static (x) => { }",
+                tests =>
+                    tests.LambdaExpression_03(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] static async (x) => { }",
+                tests =>
+                    tests.LambdaExpression_03(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            );
 
             yield return getData("[A] (object x) => { }", tests => tests.LambdaExpression_04());
-            yield return getData("[A] async (object x) => { }", tests => tests.LambdaExpression_04(SyntaxKind.AsyncKeyword));
-            yield return getData("[A] static (object x) => { }", tests => tests.LambdaExpression_04(SyntaxKind.StaticKeyword));
-            yield return getData("[A] async static (object x) => { }", tests => tests.LambdaExpression_04(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword));
-            yield return getData("[A] static async (object x) => { }", tests => tests.LambdaExpression_04(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword));
+            yield return getData(
+                "[A] async (object x) => { }",
+                tests => tests.LambdaExpression_04(SyntaxKind.AsyncKeyword)
+            );
+            yield return getData(
+                "[A] static (object x) => { }",
+                tests => tests.LambdaExpression_04(SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] async static (object x) => { }",
+                tests =>
+                    tests.LambdaExpression_04(SyntaxKind.AsyncKeyword, SyntaxKind.StaticKeyword)
+            );
+            yield return getData(
+                "[A] static async (object x) => { }",
+                tests =>
+                    tests.LambdaExpression_04(SyntaxKind.StaticKeyword, SyntaxKind.AsyncKeyword)
+            );
 
             yield return getData("[A(B)]() => { }", tests => tests.LambdaExpression_05());
             yield return getData("[A, B]() => { }", tests => tests.LambdaExpression_06());
@@ -911,7 +981,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             yield return getData("([A] x) => x", tests => tests.LambdaExpression_13());
             yield return getData("(int x, [A] int y) => x", tests => tests.LambdaExpression_14());
 
-            static object[] getData(string expr, Action<LambdaAttributeParsingTests> action) => new object[] { expr, action };
+            static object[] getData(string expr, Action<LambdaAttributeParsingTests> action) =>
+                new object[] { expr, action };
         }
 
         [Theory]
@@ -1040,10 +1111,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void CollectionInitializer_01()
         {
-            UsingExpression("new B { [A] x => y }", TestOptions.RegularPreview,
+            UsingExpression(
+                "new B { [A] x => y }",
+                TestOptions.RegularPreview,
                 // (1,13): error CS1003: Syntax error, '=' expected
                 // new B { [A] x => y }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments("=").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments("=").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -1184,10 +1258,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void PrefixOperator()
         {
-            UsingExpression("-- [A] () => { }", TestOptions.RegularPreview,
+            UsingExpression(
+                "-- [A] () => { }",
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // -- [A] () => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "-- [A] ()").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "-- [A] ()")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.PreDecrementExpression);
             {
@@ -1219,10 +1298,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void UnaryOperator()
         {
-            UsingExpression("! [A] () => { }", TestOptions.RegularPreview,
+            UsingExpression(
+                "! [A] () => { }",
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // ! [A] () => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "! [A] ()").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "! [A] ()")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.LogicalNotExpression);
             {
@@ -1254,10 +1338,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Cast()
         {
-            UsingExpression("(F) [A] () => { }", TestOptions.RegularPreview,
+            UsingExpression(
+                "(F) [A] () => { }",
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // (F) [A] () => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(F) [A] ()").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "(F) [A] ()")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.InvocationExpression);
             {
@@ -1297,10 +1386,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void BinaryOperator_01()
         {
-            UsingExpression("[A] () => { } + y", TestOptions.RegularPreview,
+            UsingExpression(
+                "[A] () => { } + y",
+                TestOptions.RegularPreview,
                 // (1,15): warning CS8848: Operator '+' cannot be used here due to precedence. Use parentheses to disambiguate.
                 // [A] () => { } + y
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+").WithArguments("+").WithLocation(1, 15));
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "+")
+                    .WithArguments("+")
+                    .WithLocation(1, 15)
+            );
 
             N(SyntaxKind.AddExpression);
             {
@@ -1342,10 +1436,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void BinaryOperator_02()
         {
-            UsingExpression("x * [A] () => { }", TestOptions.RegularPreview,
+            UsingExpression(
+                "x * [A] () => { }",
+                TestOptions.RegularPreview,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // x * [A] () => { }
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x * [A] ()").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x * [A] ()")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.MultiplyExpression);
             {
@@ -1381,10 +1480,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Is()
         {
-            UsingExpression("[A] () => { } is E", TestOptions.RegularPreview,
+            UsingExpression(
+                "[A] () => { } is E",
+                TestOptions.RegularPreview,
                 // (1,15): warning CS8848: Operator 'is' cannot be used here due to precedence. Use parentheses to disambiguate.
                 // [A] () => { } is E
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "is").WithArguments("is").WithLocation(1, 15));
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "is")
+                    .WithArguments("is")
+                    .WithLocation(1, 15)
+            );
 
             N(SyntaxKind.IsExpression);
             {
@@ -1649,10 +1753,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SwitchExpression_01()
         {
-            UsingExpression("[A] () => { } switch { }", TestOptions.RegularPreview,
+            UsingExpression(
+                "[A] () => { } switch { }",
+                TestOptions.RegularPreview,
                 // (1,15): warning CS8848: Operator 'switch' cannot be used here due to precedence. Use parentheses to disambiguate.
                 // [A] () => { } switch { }
-                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch").WithArguments("switch").WithLocation(1, 15));
+                Diagnostic(ErrorCode.WRN_PrecedenceInversion, "switch")
+                    .WithArguments("switch")
+                    .WithLocation(1, 15)
+            );
 
             N(SyntaxKind.SwitchExpression);
             {
@@ -1692,7 +1801,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SwitchExpression_02()
         {
-            UsingExpression("x switch { y => [A] () => { }, _ => [A] () => z }", TestOptions.RegularPreview);
+            UsingExpression(
+                "x switch { y => [A] () => { }, _ => [A] () => z }",
+                TestOptions.RegularPreview
+            );
 
             N(SyntaxKind.SwitchExpression);
             {
@@ -1932,10 +2044,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void Range_02()
         {
-            UsingExpression("s[..[A] () => { }]", TestOptions.RegularPreview,
+            UsingExpression(
+                "s[..[A] () => { }]",
+                TestOptions.RegularPreview,
                 // (1,12): error CS1003: Syntax error, ',' expected
                 // s[..[A] () => { }]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments(",").WithLocation(1, 12)
+            );
 
             N(SyntaxKind.ElementAccessExpression);
             {
@@ -2245,10 +2360,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableType_Is_03()
         {
             string source = "_ = x is string ? [] y => y : z";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // _ = x is string ? [] y => y : z
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [] y").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [] y")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleAssignmentExpression);
             {
@@ -2300,10 +2419,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableType_Is_04()
         {
             string source = "_ = x is string ? [A] y => y : z";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // _ = x is string ? [A] y => y : z
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [A] y").WithArguments("=>").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [A] y")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.SimpleAssignmentExpression);
             {
@@ -2355,13 +2478,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableType_Is_05()
         {
             string source = "_ = x is string ? [return: A] y => y : z";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token '=>'
                 // _ = x is string ? [return: A] y => y : z
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [return: A] y").WithArguments("=>").WithLocation(1, 1),
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "_ = x is string ? [return: A] y")
+                    .WithArguments("=>")
+                    .WithLocation(1, 1),
                 // (1,20): error CS1003: Syntax error, ',' expected
                 // _ = x is string ? [return: A] y => y : z
-                Diagnostic(ErrorCode.ERR_SyntaxError, "return").WithArguments(",").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "return")
+                    .WithArguments(",")
+                    .WithLocation(1, 20)
+            );
 
             N(SyntaxKind.SimpleAssignmentExpression);
             {
@@ -2564,10 +2693,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void NullableType_As_03()
         {
             string source = "x as string ? [A] y => y : z";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,1): error CS1073: Unexpected token 'y'
                 // x as string ? [A] y => y : z
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x as string ? [A]").WithArguments("y").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "x as string ? [A]")
+                    .WithArguments("y")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.AsExpression);
             {
@@ -2663,13 +2796,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void CollectionInitializer_03()
         {
             string source = "new() { [A] x => x, [B] () => { } }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,13): error CS1003: Syntax error, '=' expected
                 // new() { [A] x => x, [B] () => { } }
                 Diagnostic(ErrorCode.ERR_SyntaxError, "x").WithArguments("=").WithLocation(1, 13),
                 // (1,25): error CS1003: Syntax error, '=' expected
                 // new() { [A] x => x, [B] () => { } }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("=").WithLocation(1, 25));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("=").WithLocation(1, 25)
+            );
 
             N(SyntaxKind.ImplicitObjectCreationExpression);
             {
@@ -2926,10 +3061,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void AnonymousType_02()
         {
             string source = "new { x [B] y => y }";
-            UsingExpression(source,
+            UsingExpression(
+                source,
                 // (1,13): error CS1003: Syntax error, ',' expected
                 // new { x [B] y => y }
-                Diagnostic(ErrorCode.ERR_SyntaxError, "y").WithArguments(",").WithLocation(1, 13));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "y").WithArguments(",").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.AnonymousObjectCreationExpression);
             {
@@ -3539,10 +3676,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, ParseOptions? parseOptions = null)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'delegate'
                     // [A] delegate () { }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]").WithArguments("delegate").WithLocation(1, 1));
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "[A]")
+                        .WithArguments("delegate")
+                        .WithLocation(1, 1)
+                );
 
                 N(SyntaxKind.CollectionExpression);
                 {
@@ -3569,13 +3711,20 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, ParseOptions? parseOptions = null)
             {
-                UsingExpression(source, parseOptions,
+                UsingExpression(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'delegate'
                     // [return: A] delegate () { return null; }
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "[return: A]").WithArguments("delegate").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "[return: A]")
+                        .WithArguments("delegate")
+                        .WithLocation(1, 1),
                     // (1,2): error CS1041: Identifier expected; 'return' is a keyword
                     // [return: A] delegate () { return null; }
-                    Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "return").WithArguments("", "return").WithLocation(1, 2));
+                    Diagnostic(ErrorCode.ERR_IdentifierExpectedKW, "return")
+                        .WithArguments("", "return")
+                        .WithLocation(1, 2)
+                );
 
                 N(SyntaxKind.CollectionExpression);
                 {
@@ -3602,13 +3751,18 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
             void verify(string source, ParseOptions? parseOptions = null)
             {
-                UsingStatement(source, parseOptions,
+                UsingStatement(
+                    source,
+                    parseOptions,
                     // (1,1): error CS1073: Unexpected token 'delegate'
                     // d = [A] delegate () { };
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "d = [A] ").WithArguments("delegate").WithLocation(1, 1),
+                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "d = [A] ")
+                        .WithArguments("delegate")
+                        .WithLocation(1, 1),
                     // (1,9): error CS1002: ; expected
                     // d = [A] delegate () { };
-                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "delegate").WithLocation(1, 9));
+                    Diagnostic(ErrorCode.ERR_SemicolonExpected, "delegate").WithLocation(1, 9)
+                );
 
                 N(SyntaxKind.ExpressionStatement);
                 {

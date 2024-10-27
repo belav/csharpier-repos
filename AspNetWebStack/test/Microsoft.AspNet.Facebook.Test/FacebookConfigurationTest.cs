@@ -66,14 +66,20 @@ namespace Microsoft.AspNet.Facebook.Test
         public void AuthorizationRedirectPath_ThrowsArgumentException()
         {
             FacebookConfiguration config = new FacebookConfiguration();
-            Assert.ThrowsArgument(() => config.AuthorizationRedirectPath = "Home/Permissions", "value");
+            Assert.ThrowsArgument(
+                () => config.AuthorizationRedirectPath = "Home/Permissions",
+                "value"
+            );
         }
 
         [Fact]
         public void CannotCreateCookieRedirectPath_ThrowsArgumentException()
         {
             FacebookConfiguration config = new FacebookConfiguration();
-            Assert.ThrowsArgument(() => config.CannotCreateCookieRedirectPath = "Home/Permissions", "value");
+            Assert.ThrowsArgument(
+                () => config.CannotCreateCookieRedirectPath = "Home/Permissions",
+                "value"
+            );
         }
     }
 }

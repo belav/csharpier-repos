@@ -18,5 +18,6 @@ public interface IForeignKeyAddedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessForeignKeyAdded(
         IConventionForeignKeyBuilder foreignKeyBuilder,
-        IConventionContext<IConventionForeignKeyBuilder> context);
+        IConventionContext<IConventionForeignKeyBuilder> context
+    );
 }

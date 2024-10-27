@@ -29,13 +29,15 @@ public class TargetingPackTests
             Environment.GetEnvironmentVariable("DOTNET_ROOT"),
             "packs",
             "Microsoft.AspNetCore.App.Ref",
-            TestData.GetSharedFxVersion());
+            TestData.GetSharedFxVersion()
+        );
     }
 
     [Fact]
     public void TargetingPackContainsListedAssemblies()
     {
-        var actualAssemblies = Directory.GetFiles(Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm), "*.dll")
+        var actualAssemblies = Directory
+            .GetFiles(Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm), "*.dll")
             .Select(Path.GetFileNameWithoutExtension)
             .ToHashSet();
         var listedTargetingPackAssemblies = TestData.ListedTargetingPackAssemblies.ToHashSet();
@@ -61,72 +63,101 @@ public class TargetingPackTests
     public void RefAssembliesHaveExpectedAssemblyVersions()
     {
         // Assemblies from this repo and dotnet/runtime don't always have identical assembly versions.
-        var repoAssemblies = TestData.GetAspNetCoreTargetingPackDependencies()
+        var repoAssemblies = TestData
+            .GetAspNetCoreTargetingPackDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
             .ToHashSet();
 
-        var versionStringWithoutPrereleaseTag = TestData.GetMicrosoftNETCoreAppPackageVersion().Split('-', 2)[0];
+        var versionStringWithoutPrereleaseTag = TestData
+            .GetMicrosoftNETCoreAppPackageVersion()
+            .Split('-', 2)[0];
         var version = Version.Parse(versionStringWithoutPrereleaseTag);
         var aspnetcoreVersionString = TestData.GetSharedFxVersion().Split('-', 2)[0];
         var aspnetcoreVersion = Version.Parse(aspnetcoreVersionString);
 
-        IEnumerable<string> dlls = Directory.GetFiles(Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm), "*.dll", SearchOption.AllDirectories);
+        IEnumerable<string> dlls = Directory.GetFiles(
+            Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm),
+            "*.dll",
+            SearchOption.AllDirectories
+        );
         Assert.NotEmpty(dlls);
 
-        Assert.All(dlls, path =>
-        {
-            var expectedVersion = repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)) ?
-                aspnetcoreVersion :
-                version;
-
-            var fileName = Path.GetFileNameWithoutExtension(path);
-            var assemblyName = AssemblyName.GetAssemblyName(path);
-            using var fileStream = File.OpenRead(path);
-            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-            var assemblyDefinition = reader.GetAssemblyDefinition();
-
-            // Assembly versions should all match Major.Minor.0.0
-            if (repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+        Assert.All(
+            dlls,
+            path =>
             {
-                // We always align major.minor in assemblies and packages.
-                Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
-            }
-            else
-            {
-                // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
-                Assert.True(expectedVersion.Major == assemblyDefinition.Version.Major ||
-                    expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
-                    $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither " +
-                        $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'.");
-            }
+                var expectedVersion = repoAssemblies.Contains(
+                    Path.GetFileNameWithoutExtension(path)
+                )
+                    ? aspnetcoreVersion
+                    : version;
 
-            Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
-            Assert.Equal(0, assemblyDefinition.Version.Build);
-            Assert.Equal(0, assemblyDefinition.Version.Revision);
-        });
+                var fileName = Path.GetFileNameWithoutExtension(path);
+                var assemblyName = AssemblyName.GetAssemblyName(path);
+                using var fileStream = File.OpenRead(path);
+                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+                var assemblyDefinition = reader.GetAssemblyDefinition();
+
+                // Assembly versions should all match Major.Minor.0.0
+                if (repoAssemblies.Contains(Path.GetFileNameWithoutExtension(path)))
+                {
+                    // We always align major.minor in assemblies and packages.
+                    Assert.Equal(expectedVersion.Major, assemblyDefinition.Version.Major);
+                }
+                else
+                {
+                    // ... but dotnet/runtime has a window between package version and (then) assembly version updates.
+                    Assert.True(
+                        expectedVersion.Major == assemblyDefinition.Version.Major
+                            || expectedVersion.Major - 1 == assemblyDefinition.Version.Major,
+                        $"Unexpected Major assembly version '{assemblyDefinition.Version.Major}' is neither "
+                            + $"{expectedVersion.Major - 1}' nor '{expectedVersion.Major}'."
+                    );
+                }
+
+                Assert.Equal(expectedVersion.Minor, assemblyDefinition.Version.Minor);
+                Assert.Equal(0, assemblyDefinition.Version.Build);
+                Assert.Equal(0, assemblyDefinition.Version.Revision);
+            }
+        );
     }
 
     [Fact]
     public void RefAssemblyReferencesHaveExpectedAssemblyVersions()
     {
-        IEnumerable<string> dlls = Directory.GetFiles(Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm), "*.dll", SearchOption.AllDirectories);
+        IEnumerable<string> dlls = Directory.GetFiles(
+            Path.Combine(_targetingPackRoot, "ref", _targetingPackTfm),
+            "*.dll",
+            SearchOption.AllDirectories
+        );
         Assert.NotEmpty(dlls);
 
-        Assert.All(dlls, path =>
-        {
-            using var fileStream = File.OpenRead(path);
-            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-
-            Assert.All(reader.AssemblyReferences, handle =>
+        Assert.All(
+            dlls,
+            path =>
             {
-                var reference = reader.GetAssemblyReference(handle);
-                var result = (0 == reference.Version.Revision && 0 == reference.Version.Build);
+                using var fileStream = File.OpenRead(path);
+                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
 
-                Assert.True(result, $"In {Path.GetFileName(path)}, {reference.GetAssemblyName()} has unexpected version {reference.Version}.");
-            });
-        });
+                Assert.All(
+                    reader.AssemblyReferences,
+                    handle =>
+                    {
+                        var reference = reader.GetAssemblyReference(handle);
+                        var result = (
+                            0 == reference.Version.Revision && 0 == reference.Version.Build
+                        );
+
+                        Assert.True(
+                            result,
+                            $"In {Path.GetFileName(path)}, {reference.GetAssemblyName()} has unexpected version {reference.Version}."
+                        );
+                    }
+                );
+            }
+        );
     }
 
     [Fact]
@@ -137,20 +168,26 @@ public class TargetingPackTests
         AssertEx.FileExists(packageOverridePath);
 
         var packageOverrideFileLines = File.ReadAllLines(packageOverridePath);
-        var runtimeDependencies = TestData.GetRuntimeTargetingPackDependencies()
+        var runtimeDependencies = TestData
+            .GetRuntimeTargetingPackDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
             .ToHashSet();
-        var aspnetcoreDependencies = TestData.GetAspNetCoreTargetingPackDependencies()
+        var aspnetcoreDependencies = TestData
+            .GetAspNetCoreTargetingPackDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
             .ToHashSet();
 
-        Assert.Equal(packageOverrideFileLines.Length, runtimeDependencies.Count + aspnetcoreDependencies.Count);
+        Assert.Equal(
+            packageOverrideFileLines.Length,
+            runtimeDependencies.Count + aspnetcoreDependencies.Count
+        );
 
         // PackageOverrides versions should remain at Major.Minor.0 while servicing.
         var netCoreAppPackageVersion = TestData.GetMicrosoftNETCoreAppPackageVersion();
         Assert.True(
             NuGetVersion.TryParse(netCoreAppPackageVersion, out var parsedVersion),
-            "MicrosoftNETCoreAppPackageVersion must be convertable to a NuGetVersion.");
+            "MicrosoftNETCoreAppPackageVersion must be convertable to a NuGetVersion."
+        );
         if (parsedVersion.Patch != 0 && !parsedVersion.IsPrerelease)
         {
             netCoreAppPackageVersion = $"{parsedVersion.Major}.{parsedVersion.Minor}.0";
@@ -159,72 +196,103 @@ public class TargetingPackTests
         var aspNetCoreAppPackageVersion = TestData.GetReferencePackSharedFxVersion();
         Assert.True(
             NuGetVersion.TryParse(aspNetCoreAppPackageVersion, out parsedVersion),
-            "ReferencePackSharedFxVersion must be convertable to a NuGetVersion.");
+            "ReferencePackSharedFxVersion must be convertable to a NuGetVersion."
+        );
         if (parsedVersion.Patch != 0 && !parsedVersion.IsPrerelease)
         {
             aspNetCoreAppPackageVersion = $"{parsedVersion.Major}.{parsedVersion.Minor}.0";
         }
 
-        Assert.All(packageOverrideFileLines, entry =>
-        {
-            var packageOverrideParts = entry.Split("|");
-            Assert.Equal(2, packageOverrideParts.Length);
+        Assert.All(
+            packageOverrideFileLines,
+            entry =>
+            {
+                var packageOverrideParts = entry.Split("|");
+                Assert.Equal(2, packageOverrideParts.Length);
 
-            var packageName = packageOverrideParts[0];
-            var packageVersion = packageOverrideParts[1];
+                var packageName = packageOverrideParts[0];
+                var packageVersion = packageOverrideParts[1];
 
-            if (runtimeDependencies.Contains(packageName))
-            {
-                Assert.Equal(netCoreAppPackageVersion, packageVersion);
+                if (runtimeDependencies.Contains(packageName))
+                {
+                    Assert.Equal(netCoreAppPackageVersion, packageVersion);
+                }
+                else if (aspnetcoreDependencies.Contains(packageName))
+                {
+                    Assert.Equal(aspNetCoreAppPackageVersion, packageVersion);
+                }
+                else
+                {
+                    Assert.True(
+                        false,
+                        $"{packageName} is not a recognized aspNetCore or runtime dependency"
+                    );
+                }
             }
-            else if (aspnetcoreDependencies.Contains(packageName))
-            {
-                Assert.Equal(aspNetCoreAppPackageVersion, packageVersion);
-            }
-            else
-            {
-                Assert.True(false, $"{packageName} is not a recognized aspNetCore or runtime dependency");
-            }
-        });
+        );
     }
 
     [Fact]
     public void AssembliesAreReferenceAssemblies()
     {
-        IEnumerable<string> dlls = Directory.GetFiles(Path.Combine(_targetingPackRoot, "ref"), "*.dll", SearchOption.AllDirectories);
+        IEnumerable<string> dlls = Directory.GetFiles(
+            Path.Combine(_targetingPackRoot, "ref"),
+            "*.dll",
+            SearchOption.AllDirectories
+        );
         Assert.NotEmpty(dlls);
 
-        Assert.All(dlls, path =>
-        {
-            var assemblyName = AssemblyName.GetAssemblyName(path);
-            using var fileStream = File.OpenRead(path);
-            using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
-            var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
-            var assemblyDefinition = reader.GetAssemblyDefinition();
-            var hasRefAssemblyAttribute = assemblyDefinition.GetCustomAttributes().Any(attr =>
+        Assert.All(
+            dlls,
+            path =>
             {
-                var attribute = reader.GetCustomAttribute(attr);
-                var attributeConstructor = reader.GetMemberReference((MemberReferenceHandle)attribute.Constructor);
-                var attributeType = reader.GetTypeReference((TypeReferenceHandle)attributeConstructor.Parent);
-                return reader.StringComparer.Equals(attributeType.Namespace, typeof(ReferenceAssemblyAttribute).Namespace)
-                    && reader.StringComparer.Equals(attributeType.Name, nameof(ReferenceAssemblyAttribute));
-            });
+                var assemblyName = AssemblyName.GetAssemblyName(path);
+                using var fileStream = File.OpenRead(path);
+                using var peReader = new PEReader(fileStream, PEStreamOptions.Default);
+                var reader = peReader.GetMetadataReader(MetadataReaderOptions.Default);
+                var assemblyDefinition = reader.GetAssemblyDefinition();
+                var hasRefAssemblyAttribute = assemblyDefinition
+                    .GetCustomAttributes()
+                    .Any(attr =>
+                    {
+                        var attribute = reader.GetCustomAttribute(attr);
+                        var attributeConstructor = reader.GetMemberReference(
+                            (MemberReferenceHandle)attribute.Constructor
+                        );
+                        var attributeType = reader.GetTypeReference(
+                            (TypeReferenceHandle)attributeConstructor.Parent
+                        );
+                        return reader.StringComparer.Equals(
+                                attributeType.Namespace,
+                                typeof(ReferenceAssemblyAttribute).Namespace
+                            )
+                            && reader.StringComparer.Equals(
+                                attributeType.Name,
+                                nameof(ReferenceAssemblyAttribute)
+                            );
+                    });
 
-            Assert.True(hasRefAssemblyAttribute, $"{path} should have {nameof(ReferenceAssemblyAttribute)}");
+                Assert.True(
+                    hasRefAssemblyAttribute,
+                    $"{path} should have {nameof(ReferenceAssemblyAttribute)}"
+                );
 #pragma warning disable SYSLIB0037 // AssemblyName.ProcessorArchitecture is obsolete
-            // MSIL and None represent platform neutral assemblies such that reference assemblies can always be loaded.
-            Assert.True(assemblyName.ProcessorArchitecture == ProcessorArchitecture.MSIL ||
-                assemblyName.ProcessorArchitecture == ProcessorArchitecture.None
+                // MSIL and None represent platform neutral assemblies such that reference assemblies can always be loaded.
+                Assert.True(
+                    assemblyName.ProcessorArchitecture == ProcessorArchitecture.MSIL
+                        || assemblyName.ProcessorArchitecture == ProcessorArchitecture.None
                 );
 #pragma warning restore SYSLIB0037
-        });
+            }
+        );
     }
 
     [Fact]
     public void PlatformManifestListsAllFiles()
     {
         var platformManifestPath = Path.Combine(_targetingPackRoot, "data", "PlatformManifest.txt");
-        var expectedAssemblies = TestData.GetSharedFxDependencies()
+        var expectedAssemblies = TestData
+            .GetSharedFxDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
             .Select(i =>
             {
@@ -272,24 +340,34 @@ public class TargetingPackTests
         Assert.Empty(missing);
         Assert.Empty(unexpected);
 
-        Assert.All(manifestFileLines, line =>
-        {
-            var parts = line.Split('|');
-            Assert.Equal(4, parts.Length);
-            Assert.Equal("Microsoft.AspNetCore.App.Ref", parts[1]);
-            if (parts[2].Length > 0)
+        Assert.All(
+            manifestFileLines,
+            line =>
             {
-                Assert.True(Version.TryParse(parts[2], out _), "Assembly version must be convertable to System.Version");
+                var parts = line.Split('|');
+                Assert.Equal(4, parts.Length);
+                Assert.Equal("Microsoft.AspNetCore.App.Ref", parts[1]);
+                if (parts[2].Length > 0)
+                {
+                    Assert.True(
+                        Version.TryParse(parts[2], out _),
+                        "Assembly version must be convertable to System.Version"
+                    );
+                }
+                Assert.True(
+                    Version.TryParse(parts[3], out _),
+                    "File version must be convertable to System.Version"
+                );
             }
-            Assert.True(Version.TryParse(parts[3], out _), "File version must be convertable to System.Version");
-        });
+        );
     }
 
     [Fact]
     public void FrameworkListContainsCorrectEntries()
     {
         var frameworkListPath = Path.Combine(_targetingPackRoot, "data", "FrameworkList.xml");
-        var expectedAssemblies = TestData.GetTargetingPackDependencies()
+        var expectedAssemblies = TestData
+            .GetTargetingPackDependencies()
             .Split(';', StringSplitOptions.RemoveEmptyEntries)
             .ToHashSet();
         expectedAssemblies.Remove("aspnetcorev2_inprocess");
@@ -298,36 +376,50 @@ public class TargetingPackTests
 
         var frameworkListDoc = XDocument.Load(frameworkListPath);
         var frameworkListEntries = frameworkListDoc.Root.Descendants();
-        var managedEntries = frameworkListEntries.Where(i => i.Attribute("Type").Value.Equals("Managed", StringComparison.Ordinal));
-        var analyzerEntries = frameworkListEntries.Where(i => i.Attribute("Type").Value.Equals("Analyzer", StringComparison.Ordinal));
+        var managedEntries = frameworkListEntries.Where(i =>
+            i.Attribute("Type").Value.Equals("Managed", StringComparison.Ordinal)
+        );
+        var analyzerEntries = frameworkListEntries.Where(i =>
+            i.Attribute("Type").Value.Equals("Analyzer", StringComparison.Ordinal)
+        );
 
         var analyzersDir = Path.Combine(_targetingPackRoot, "analyzers");
-        var expectedAnalyzers = Directory.Exists(analyzersDir) ?
-            Directory.GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
-            .Select(p => Path.GetFileNameWithoutExtension(p))
-            .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
-            .ToHashSet() :
-            new HashSet<string>();
+        var expectedAnalyzers = Directory.Exists(analyzersDir)
+            ? Directory
+                .GetFiles(analyzersDir, "*.dll", SearchOption.AllDirectories)
+                .Select(p => Path.GetFileNameWithoutExtension(p))
+                .Where(f => !f.EndsWith(".resources", StringComparison.OrdinalIgnoreCase))
+                .ToHashSet()
+            : new HashSet<string>();
 
         CompareFrameworkElements(expectedAssemblies, managedEntries, "managed");
         CompareFrameworkElements(expectedAnalyzers, analyzerEntries, "analyzer");
 
-        void CompareFrameworkElements(HashSet<string> expectedAssemblyNames, IEnumerable<XElement> actualElements, string type)
+        void CompareFrameworkElements(
+            HashSet<string> expectedAssemblyNames,
+            IEnumerable<XElement> actualElements,
+            string type
+        )
         {
             _output.WriteLine($"==== file contents ({type}) ====");
-            _output.WriteLine(string.Join('\n', actualElements.Select(i => i.Attribute("AssemblyName").Value).OrderBy(i => i)));
+            _output.WriteLine(
+                string.Join(
+                    '\n',
+                    actualElements.Select(i => i.Attribute("AssemblyName").Value).OrderBy(i => i)
+                )
+            );
             _output.WriteLine($"==== expected {type} assemblies ====");
             _output.WriteLine(string.Join('\n', expectedAssemblyNames.OrderBy(i => i)));
 
             var actualAssemblyNames = managedEntries
-               .Select(i =>
-               {
-                   var fileName = i.Attribute("AssemblyName").Value;
-                   return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                       ? fileName.Substring(0, fileName.Length - 4)
-                       : fileName;
-               })
-               .ToHashSet();
+                .Select(i =>
+                {
+                    var fileName = i.Attribute("AssemblyName").Value;
+                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                        ? fileName.Substring(0, fileName.Length - 4)
+                        : fileName;
+                })
+                .ToHashSet();
 
             var missing = actualAssemblyNames.Except(actualAssemblyNames);
             var unexpected = actualAssemblyNames.Except(expectedAssemblies);
@@ -341,15 +433,24 @@ public class TargetingPackTests
             Assert.Empty(unexpected);
         }
 
-        Assert.All(frameworkListEntries, i =>
-        {
-            var assemblyPath = i.Attribute("Path").Value;
-            var assemblyVersion = i.Attribute("AssemblyVersion").Value;
-            var fileVersion = i.Attribute("FileVersion").Value;
+        Assert.All(
+            frameworkListEntries,
+            i =>
+            {
+                var assemblyPath = i.Attribute("Path").Value;
+                var assemblyVersion = i.Attribute("AssemblyVersion").Value;
+                var fileVersion = i.Attribute("FileVersion").Value;
 
-            Assert.True(Version.TryParse(assemblyVersion, out _), $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version");
-            Assert.True(Version.TryParse(fileVersion, out _), $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version");
-        });
+                Assert.True(
+                    Version.TryParse(assemblyVersion, out _),
+                    $"{assemblyPath} has assembly version {assemblyVersion}. Assembly version must be convertable to System.Version"
+                );
+                Assert.True(
+                    Version.TryParse(fileVersion, out _),
+                    $"{assemblyPath} has file version {fileVersion}. File version must be convertable to System.Version"
+                );
+            }
+        );
     }
 
     [Fact]
@@ -362,18 +463,24 @@ public class TargetingPackTests
         var frameworkListDoc = XDocument.Load(frameworkListPath);
         var frameworkListEntries = frameworkListDoc.Root.Descendants();
 
-        var packageFolder = SkipOnHelixAttribute.OnHelix() ?
-            Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT") :
-            TestData.GetPackagesFolder();
+        var packageFolder = SkipOnHelixAttribute.OnHelix()
+            ? Environment.GetEnvironmentVariable("HELIX_WORKITEM_ROOT")
+            : TestData.GetPackagesFolder();
         var targetingPackPath = Path.Combine(
-            packageFolder, "Microsoft.AspNetCore.App.Ref." + TestData.GetSharedFxVersion() + ".nupkg");
+            packageFolder,
+            "Microsoft.AspNetCore.App.Ref." + TestData.GetSharedFxVersion() + ".nupkg"
+        );
         AssertEx.FileExists(targetingPackPath);
 
         ZipArchive archive = ZipFile.OpenRead(targetingPackPath);
 
-        var actualPaths = archive.Entries
-            .Where(i => i.FullName.EndsWith(".dll", StringComparison.Ordinal) && !i.FullName.EndsWith(".resources.dll", StringComparison.Ordinal))
-            .Select(i => i.FullName).ToHashSet();
+        var actualPaths = archive
+            .Entries.Where(i =>
+                i.FullName.EndsWith(".dll", StringComparison.Ordinal)
+                && !i.FullName.EndsWith(".resources.dll", StringComparison.Ordinal)
+            )
+            .Select(i => i.FullName)
+            .ToHashSet();
 
         var expectedPaths = frameworkListEntries.Select(i => i.Attribute("Path").Value).ToHashSet();
 
@@ -404,21 +511,26 @@ public class TargetingPackTests
         var frameworkListDoc = XDocument.Load(frameworkListPath);
         var frameworkListEntries = frameworkListDoc.Root.Descendants();
 
-        var analyzerEntries = frameworkListEntries.Where(i => i.Attribute("Type").Value.Equals("Analyzer", StringComparison.Ordinal));
+        var analyzerEntries = frameworkListEntries.Where(i =>
+            i.Attribute("Type").Value.Equals("Analyzer", StringComparison.Ordinal)
+        );
 
-        Assert.All(analyzerEntries, analyzerEntry =>
-        {
-            var actualLanguage = analyzerEntry.Attribute("Language")?.Value;
-            var assemblyPath = analyzerEntry.Attribute("Path").Value;
-
-            string expectedLanguage = Path.GetFileName(Path.GetDirectoryName(assemblyPath));
-
-            if (expectedLanguage.Equals("dotnet", StringComparison.OrdinalIgnoreCase))
+        Assert.All(
+            analyzerEntries,
+            analyzerEntry =>
             {
-                expectedLanguage = null;
-            }
+                var actualLanguage = analyzerEntry.Attribute("Language")?.Value;
+                var assemblyPath = analyzerEntry.Attribute("Path").Value;
 
-            Assert.Equal(expectedLanguage, actualLanguage);
-        });
+                string expectedLanguage = Path.GetFileName(Path.GetDirectoryName(assemblyPath));
+
+                if (expectedLanguage.Equals("dotnet", StringComparison.OrdinalIgnoreCase))
+                {
+                    expectedLanguage = null;
+                }
+
+                Assert.Equal(expectedLanguage, actualLanguage);
+            }
+        );
     }
 }

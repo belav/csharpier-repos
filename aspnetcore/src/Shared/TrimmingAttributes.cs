@@ -13,7 +13,10 @@ namespace System.Diagnostics.CodeAnalysis;
 /// This allows tools to understand which methods are unsafe to call when removing unreferenced
 /// code from an application.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class,
+    Inherited = false
+)]
 internal sealed class RequiresUnreferencedCodeAttribute : Attribute
 {
     /// <summary>
@@ -47,7 +50,10 @@ internal sealed class RequiresUnreferencedCodeAttribute : Attribute
 /// <remarks>
 /// This allows tools to understand which methods are unsafe to call when compiling ahead of time.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class,
+    Inherited = false
+)]
 internal sealed class RequiresDynamicCodeAttribute : Attribute
 {
     /// <summary>
@@ -163,7 +169,9 @@ internal sealed class UnconditionalSuppressMessageAttribute : Attribute
 /// </remarks>
 [AttributeUsage(
     AttributeTargets.Constructor | AttributeTargets.Field | AttributeTargets.Method,
-    AllowMultiple = true, Inherited = false)]
+    AllowMultiple = true,
+    Inherited = false
+)]
 internal sealed class DynamicDependencyAttribute : Attribute
 {
     /// <summary>
@@ -221,7 +229,11 @@ internal sealed class DynamicDependencyAttribute : Attribute
     /// <param name="memberTypes">The types of members depended on.</param>
     /// <param name="typeName">The full name of the type containing the specified members.</param>
     /// <param name="assemblyName">The assembly name of the type containing the specified members.</param>
-    public DynamicDependencyAttribute(DynamicallyAccessedMemberTypes memberTypes, string typeName, string assemblyName)
+    public DynamicDependencyAttribute(
+        DynamicallyAccessedMemberTypes memberTypes,
+        string typeName,
+        string assemblyName
+    )
     {
         MemberTypes = memberTypes;
         TypeName = typeName;
@@ -302,10 +314,17 @@ internal sealed class DynamicDependencyAttribute : Attribute
 /// will use it there).
 /// </remarks>
 [AttributeUsage(
-        AttributeTargets.Field | AttributeTargets.ReturnValue | AttributeTargets.GenericParameter |
-        AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Method |
-        AttributeTargets.Class | AttributeTargets.Interface | AttributeTargets.Struct,
-        Inherited = false)]
+    AttributeTargets.Field
+        | AttributeTargets.ReturnValue
+        | AttributeTargets.GenericParameter
+        | AttributeTargets.Parameter
+        | AttributeTargets.Property
+        | AttributeTargets.Method
+        | AttributeTargets.Class
+        | AttributeTargets.Interface
+        | AttributeTargets.Struct,
+    Inherited = false
+)]
 internal sealed class DynamicallyAccessedMembersAttribute : Attribute
 {
     /// <summary>
@@ -412,5 +431,5 @@ internal enum DynamicallyAccessedMemberTypes
     /// <summary>
     /// Specifies all members.
     /// </summary>
-    All = ~None
+    All = ~None,
 }

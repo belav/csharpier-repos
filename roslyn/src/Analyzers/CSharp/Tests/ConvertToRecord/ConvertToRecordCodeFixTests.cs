@@ -145,9 +145,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRecord
             await TestCodeFixAsync(initialMarkup, changedMarkup).ConfigureAwait(false);
         }
 
-        private class CodeFixTest : CSharpCodeFixVerifier<TestAnalyzer, CSharpConvertToRecordCodeFixProvider>.Test
-        {
-        }
+        private class CodeFixTest
+            : CSharpCodeFixVerifier<TestAnalyzer, CSharpConvertToRecordCodeFixProvider>.Test { }
 
         private static async Task TestCodeFixAsync(string initialMarkup, string fixedMarkup)
         {
@@ -165,18 +164,20 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToRecord
         {
             public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics
 #pragma warning disable RS0030 // Do not used banned APIs
-                => ImmutableArray.Create(new DiagnosticDescriptor(
-                    "CS8865",
-                    "Only records may inherit from records.",
-                    "Only records may inherit from records.",
-                    "Compiler error",
-                    DiagnosticSeverity.Error,
-                    isEnabledByDefault: true));
+                =>
+                ImmutableArray.Create(
+                    new DiagnosticDescriptor(
+                        "CS8865",
+                        "Only records may inherit from records.",
+                        "Only records may inherit from records.",
+                        "Compiler error",
+                        DiagnosticSeverity.Error,
+                        isEnabledByDefault: true
+                    )
+                );
 #pragma warning restore RS0030 // Do not used banned APIs
 
-            public override void Initialize(AnalysisContext context)
-            {
-            }
+            public override void Initialize(AnalysisContext context) { }
         }
     }
 }

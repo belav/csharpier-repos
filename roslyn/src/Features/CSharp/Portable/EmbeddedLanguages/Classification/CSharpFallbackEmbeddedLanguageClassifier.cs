@@ -7,13 +7,12 @@ using Microsoft.CodeAnalysis.CSharp.EmbeddedLanguages.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.CSharp.Classification
 {
-    internal class CSharpFallbackEmbeddedLanguageClassifier : AbstractFallbackEmbeddedLanguageClassifier
+    internal class CSharpFallbackEmbeddedLanguageClassifier
+        : AbstractFallbackEmbeddedLanguageClassifier
     {
         public static readonly CSharpFallbackEmbeddedLanguageClassifier Instance = new();
 
         private CSharpFallbackEmbeddedLanguageClassifier()
-            : base(CSharpEmbeddedLanguagesProvider.Info)
-        {
-        }
+            : base(CSharpEmbeddedLanguagesProvider.Info) { }
     }
 }

@@ -11,23 +11,15 @@ namespace System.ServiceModel.Security
     public class SecurityAccessDeniedException : CommunicationException
     {
         public SecurityAccessDeniedException()
-            : base()
-        {
-        }
+            : base() { }
 
         public SecurityAccessDeniedException(String message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public SecurityAccessDeniedException(String message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected SecurityAccessDeniedException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

@@ -16,7 +16,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
     /// features to create nested work with descriptions/progress that will update the all-up indicator tool-tip
     /// shown to the user.
     /// </summary>
-    private sealed class BackgroundWorkIndicatorScope : IUIThreadOperationScope, IProgress<ProgressInfo>
+    private sealed class BackgroundWorkIndicatorScope
+        : IUIThreadOperationScope,
+            IProgress<ProgressInfo>
     {
         private readonly BackgroundWorkIndicatorContext _context;
 
@@ -30,7 +32,9 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         public IProgress<ProgressInfo> Progress => this;
 
         public BackgroundWorkIndicatorScope(
-            BackgroundWorkIndicatorContext indicator, string description)
+            BackgroundWorkIndicatorContext indicator,
+            string description
+        )
         {
             _context = indicator;
             _description = description;
@@ -48,8 +52,7 @@ internal partial class WpfBackgroundWorkIndicatorFactory
         /// <summary>
         /// On disposal, just remove ourselves from our parent context.  It will update the UI accordingly.
         /// </summary>
-        void IDisposable.Dispose()
-            => _context.RemoveScope(this);
+        void IDisposable.Dispose() => _context.RemoveScope(this);
 
         bool IUIThreadOperationScope.AllowCancellation
         {

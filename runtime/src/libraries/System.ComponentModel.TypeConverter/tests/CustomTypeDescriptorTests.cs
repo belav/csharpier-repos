@@ -26,15 +26,15 @@ namespace System.ComponentModel.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetAttributes_TestData))]
         public void GetAttributes_InvokeWithParent_ReturnsExpected(AttributeCollection result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetAttributes())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetAttributes()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetAttributes());
             mockParentDescriptor.Verify(d => d.GetAttributes(), Times.Once());
@@ -55,16 +55,16 @@ namespace System.ComponentModel.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [InlineData(null)]
         [InlineData("name")]
         public void GetClassName_InvokeWithParent_ReturnsExpected(string result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetClassName())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetClassName()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetClassName());
             mockParentDescriptor.Verify(d => d.GetClassName(), Times.Once());
@@ -85,16 +85,16 @@ namespace System.ComponentModel.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [InlineData(null)]
         [InlineData("name")]
         public void GetComponentName_InvokeWithParent_ReturnsExpected(string result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetComponentName())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetComponentName()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetComponentName());
             mockParentDescriptor.Verify(d => d.GetComponentName(), Times.Once());
@@ -123,15 +123,15 @@ namespace System.ComponentModel.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetConverter_TestData))]
         public void GetConverter_InvokeWithParent_ReturnsExpected(TypeConverter result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetConverter())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetConverter()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetConverter());
             mockParentDescriptor.Verify(d => d.GetConverter(), Times.Once());
@@ -154,19 +154,22 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> GetDefaultEvent_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new Mock<EventDescriptor>(MockBehavior.Strict, "Event", new Attribute[0]).Object };
+            yield return new object[]
+            {
+                new Mock<EventDescriptor>(MockBehavior.Strict, "Event", new Attribute[0]).Object,
+            };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetDefaultEvent_TestData))]
         public void GetDefaultEvent_InvokeWithParent_ReturnsExpected(EventDescriptor result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetDefaultEvent())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetDefaultEvent()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetDefaultEvent());
             mockParentDescriptor.Verify(d => d.GetDefaultEvent(), Times.Once());
@@ -189,19 +192,26 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> GetDefaultProperty_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new Mock<PropertyDescriptor>(MockBehavior.Strict, "Property", new Attribute[0]).Object };
+            yield return new object[]
+            {
+                new Mock<PropertyDescriptor>(
+                    MockBehavior.Strict,
+                    "Property",
+                    new Attribute[0]
+                ).Object,
+            };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetDefaultProperty_TestData))]
         public void GetDefaultProperty_InvokeWithParent_ReturnsExpected(PropertyDescriptor result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetDefaultProperty())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetDefaultProperty()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetDefaultProperty());
             mockParentDescriptor.Verify(d => d.GetDefaultProperty(), Times.Once());
@@ -233,7 +243,10 @@ namespace System.ComponentModel.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetEditor_TestData))]
         public void GetEditor_InvokeWithParent_ReturnsExpected(Type editorBaseType, Type result)
         {
@@ -264,19 +277,22 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> GetEvents_WithParent_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new EventDescriptorCollection(new EventDescriptor[] { null }) };
+            yield return new object[]
+            {
+                new EventDescriptorCollection(new EventDescriptor[] { null }),
+            };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetEvents_WithParent_TestData))]
         public void GetEvents_InvokeWithParent_ReturnsExpected(EventDescriptorCollection result)
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetEvents())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetEvents()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetEvents());
             mockParentDescriptor.Verify(d => d.GetEvents(), Times.Once());
@@ -305,23 +321,36 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> GetEvents_AttributesWithParent_TestData()
         {
-            foreach (EventDescriptorCollection result in new EventDescriptorCollection[] { null, new EventDescriptorCollection(new EventDescriptor[] { null }) })
+            foreach (
+                EventDescriptorCollection result in new EventDescriptorCollection[]
+                {
+                    null,
+                    new EventDescriptorCollection(new EventDescriptor[] { null }),
+                }
+            )
             {
                 yield return new object[] { null, result };
-                yield return new object[] { new Attribute[] { new EditorBrowsableAttribute() }, result };
+                yield return new object[]
+                {
+                    new Attribute[] { new EditorBrowsableAttribute() },
+                    result,
+                };
             }
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetEvents_AttributesWithParent_TestData))]
-        public void GetEvents_InvokeAttributesWithParent_ReturnsExpected(Attribute[] attributes, EventDescriptorCollection result)
+        public void GetEvents_InvokeAttributesWithParent_ReturnsExpected(
+            Attribute[] attributes,
+            EventDescriptorCollection result
+        )
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetEvents(attributes))
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetEvents(attributes)).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetEvents(attributes));
             mockParentDescriptor.Verify(d => d.GetEvents(attributes), Times.Once());
@@ -344,19 +373,24 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> GetProperties_WithParent_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new PropertyDescriptorCollection(new PropertyDescriptor[] { null }) };
+            yield return new object[]
+            {
+                new PropertyDescriptorCollection(new PropertyDescriptor[] { null }),
+            };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetProperties_WithParent_TestData))]
-        public void GetProperties_InvokeWithParent_ReturnsExpected(PropertyDescriptorCollection result)
+        public void GetProperties_InvokeWithParent_ReturnsExpected(
+            PropertyDescriptorCollection result
+        )
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetProperties())
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetProperties()).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetProperties());
             mockParentDescriptor.Verify(d => d.GetProperties(), Times.Once());
@@ -385,17 +419,33 @@ namespace System.ComponentModel.Tests
 
         public static IEnumerable<object[]> GetProperties_AttributesWithParent_TestData()
         {
-            foreach (PropertyDescriptorCollection result in new PropertyDescriptorCollection[] { null, new PropertyDescriptorCollection(new PropertyDescriptor[] { null }) })
+            foreach (
+                PropertyDescriptorCollection result in new PropertyDescriptorCollection[]
+                {
+                    null,
+                    new PropertyDescriptorCollection(new PropertyDescriptor[] { null }),
+                }
+            )
             {
                 yield return new object[] { null, result };
-                yield return new object[] { new Attribute[] { new EditorBrowsableAttribute() }, result };
+                yield return new object[]
+                {
+                    new Attribute[] { new EditorBrowsableAttribute() },
+                    result,
+                };
             }
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetProperties_AttributesWithParent_TestData))]
-        public void GetProperties_InvokeAttributesWithParent_ReturnsExpected(Attribute[] attributes, PropertyDescriptorCollection result)
+        public void GetProperties_InvokeAttributesWithParent_ReturnsExpected(
+            Attribute[] attributes,
+            PropertyDescriptorCollection result
+        )
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
             mockParentDescriptor
@@ -414,11 +464,17 @@ namespace System.ComponentModel.Tests
         public static IEnumerable<object[]> GetPropertyOwner_WithoutParent_TestData()
         {
             yield return new object[] { null };
-            yield return new object[] { new Mock<PropertyDescriptor>(MockBehavior.Strict, "Name", new Attribute[0]).Object };
+            yield return new object[]
+            {
+                new Mock<PropertyDescriptor>(MockBehavior.Strict, "Name", new Attribute[0]).Object,
+            };
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetPropertyOwner_WithoutParent_TestData))]
         public void GetPropertyOwner_InvokeWithoutParent_ReturnsNull(PropertyDescriptor pd)
         {
@@ -434,20 +490,31 @@ namespace System.ComponentModel.Tests
             foreach (object result in new object[] { null, new object() })
             {
                 yield return new object[] { null, result };
-                yield return new object[] { new Mock<PropertyDescriptor>(MockBehavior.Strict, "Name", new Attribute[0]).Object, result };
+                yield return new object[]
+                {
+                    new Mock<PropertyDescriptor>(
+                        MockBehavior.Strict,
+                        "Name",
+                        new Attribute[0]
+                    ).Object,
+                    result,
+                };
             }
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [MemberData(nameof(GetPropertyOwner_WithParent_TestData))]
-        public void GetPropertyOwner_InvokeWithParent_ReturnsExpected(PropertyDescriptor pd, object result)
+        public void GetPropertyOwner_InvokeWithParent_ReturnsExpected(
+            PropertyDescriptor pd,
+            object result
+        )
         {
             var mockParentDescriptor = new Mock<ICustomTypeDescriptor>(MockBehavior.Strict);
-            mockParentDescriptor
-                .Setup(d => d.GetPropertyOwner(pd))
-                .Returns(result)
-                .Verifiable();
+            mockParentDescriptor.Setup(d => d.GetPropertyOwner(pd)).Returns(result).Verifiable();
             var descriptor = new SubCustomTypeDescriptor(mockParentDescriptor.Object);
             Assert.Same(result, descriptor.GetPropertyOwner(pd));
             mockParentDescriptor.Verify(d => d.GetPropertyOwner(pd), Times.Once());
@@ -459,13 +526,11 @@ namespace System.ComponentModel.Tests
 
         private class SubCustomTypeDescriptor : CustomTypeDescriptor
         {
-            public SubCustomTypeDescriptor() : base()
-            {
-            }
+            public SubCustomTypeDescriptor()
+                : base() { }
 
-            public SubCustomTypeDescriptor(ICustomTypeDescriptor parent) : base(parent)
-            {
-            }
+            public SubCustomTypeDescriptor(ICustomTypeDescriptor parent)
+                : base(parent) { }
         }
     }
 }

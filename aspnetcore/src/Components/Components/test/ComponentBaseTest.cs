@@ -11,7 +11,9 @@ public class ComponentBaseTest
 {
     // Nothing should exceed the timeout in a successful run of the the tests, this is just here to catch
     // failures.
-    private static readonly TimeSpan Timeout = Debugger.IsAttached ? System.Threading.Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(10);
+    private static readonly TimeSpan Timeout = Debugger.IsAttached
+        ? System.Threading.Timeout.InfiniteTimeSpan
+        : TimeSpan.FromSeconds(10);
 
     [Fact]
     public void RunsOnInitWhenRendered()
@@ -183,7 +185,10 @@ public class ComponentBaseTest
 
         var renderer = new TestRenderer()
         {
-            OnUpdateDisplayComplete = () => { @event.Set(); },
+            OnUpdateDisplayComplete = () =>
+            {
+                @event.Set();
+            },
         };
         var component = new TestComponent();
 
@@ -396,7 +401,6 @@ public class ComponentBaseTest
 
         // Component should not be rendered again
         Assert.Single(renderer.Batches);
-
     }
 
     [Fact]
@@ -409,7 +413,9 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => renderer.RenderRootComponentAsync(componentId));
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => renderer.RenderRootComponentAsync(componentId)
+        );
 
         // Assert
         Assert.Same(expected, actual);
@@ -425,7 +431,9 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => renderer.RenderRootComponentAsync(componentId));
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => renderer.RenderRootComponentAsync(componentId)
+        );
 
         // Assert
         Assert.Same(expected, actual);
@@ -441,7 +449,9 @@ public class ComponentBaseTest
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => renderer.RenderRootComponentAsync(componentId));
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => renderer.RenderRootComponentAsync(componentId)
+        );
 
         // Assert
         Assert.Same(expected, actual);
@@ -453,11 +463,16 @@ public class ComponentBaseTest
         // Arrange
         var expected = new TimeZoneNotFoundException();
         var renderer = new TestRenderer();
-        var component = new TestComponent { OnParametersSetAsyncLogic = _ => Task.FromException(expected) };
+        var component = new TestComponent
+        {
+            OnParametersSetAsyncLogic = _ => Task.FromException(expected),
+        };
 
         // Act & Assert
         var componentId = renderer.AssignRootComponentId(component);
-        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => renderer.RenderRootComponentAsync(componentId));
+        var actual = await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () => renderer.RenderRootComponentAsync(componentId)
+        );
 
         // Assert
         Assert.Same(expected, actual);

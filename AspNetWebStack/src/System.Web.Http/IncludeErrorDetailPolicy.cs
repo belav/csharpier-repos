@@ -27,6 +27,6 @@ namespace System.Web.Http
         /// <summary>
         /// Never include error details.
         /// </summary>
-        Never
+        Never,
     }
 }

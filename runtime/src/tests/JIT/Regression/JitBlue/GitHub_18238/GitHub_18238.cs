@@ -12,7 +12,8 @@ struct S0
     public byte F0;
     public sbyte F1;
     public sbyte F2;
-    public S0 (byte f0, sbyte f1, sbyte f2)
+
+    public S0(byte f0, sbyte f1, sbyte f2)
     {
         F0 = f0;
         F1 = f1;
@@ -24,7 +25,9 @@ struct S1
 {
     public bool F0;
     public short F1;
-    public S1 (short f1) : this ()
+
+    public S1(short f1)
+        : this()
     {
         F1 = f1;
         F0 = true;
@@ -43,29 +46,56 @@ public static class GitHub_18238
         if (result1 != expectedResult1)
         {
             passed = false;
-            Console.WriteLine(String.Format("Failed Test1: expected = {0}, actual = {1}", expectedResult1, result1));
+            Console.WriteLine(
+                String.Format(
+                    "Failed Test1: expected = {0}, actual = {1}",
+                    expectedResult1,
+                    result1
+                )
+            );
         }
 
         S0 vr45 = new S0(0, 0, 0);
         int result2 = Test2.Run(vr45);
         int expectedResult2 = 65487;
-        if (result2 != expectedResult2) {
+        if (result2 != expectedResult2)
+        {
             passed = false;
-            Console.WriteLine(String.Format("Failed Test2: expected = {0}, actual = {1}", expectedResult2, result2));
+            Console.WriteLine(
+                String.Format(
+                    "Failed Test2: expected = {0}, actual = {1}",
+                    expectedResult2,
+                    result2
+                )
+            );
         }
 
         int result3 = Test3.Run();
         int expectedResult3 = 65535;
-        if (result3 != expectedResult3) {
+        if (result3 != expectedResult3)
+        {
             passed = false;
-            Console.WriteLine(String.Format("Failed Test3: expected = {0}, actual = {1}", expectedResult3, result3));
+            Console.WriteLine(
+                String.Format(
+                    "Failed Test3: expected = {0}, actual = {1}",
+                    expectedResult3,
+                    result3
+                )
+            );
         }
 
-        uint result4 = Test4.Run ();
+        uint result4 = Test4.Run();
         uint expectedResult4 = 32779;
-        if (result4 != expectedResult4) {
+        if (result4 != expectedResult4)
+        {
             passed = false;
-            Console.WriteLine (String.Format ("Failed Test4: expected = {0}, actual = {1}", expectedResult4, result4));
+            Console.WriteLine(
+                String.Format(
+                    "Failed Test4: expected = {0}, actual = {1}",
+                    expectedResult4,
+                    result4
+                )
+            );
         }
 
         if (passed)
@@ -95,14 +125,14 @@ static class Test1
 
 static class Test2
 {
-    static bool [] [] s_9 = new bool [] [] { new bool [] { true } };
+    static bool[][] s_9 = new bool[][] { new bool[] { true } };
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Run(S0 arg1)
     {
-        arg1 = new S0 (0, -50, 0);
+        arg1 = new S0(0, -50, 0);
         char var0 = (char)(1U ^ arg1.F1);
-        return s_9 [0] [0] ? (int)var0 : 0;
+        return s_9[0][0] ? (int)var0 : 0;
     }
 }
 
@@ -110,7 +140,7 @@ static class Test3
 {
     static int s_1 = 0xff;
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static int Run()
     {
         int vr14 = (ushort)(sbyte)s_1;
@@ -122,7 +152,7 @@ static class Test4
 {
     static S1 s_1;
 
-    [MethodImpl (MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     public static uint Run()
     {
         char var0 = default(char);
@@ -132,11 +162,9 @@ static class Test4
         return result;
     }
 
-
-    [MethodImpl (MethodImplOptions.NoInlining)]
+    [MethodImpl(MethodImplOptions.NoInlining)]
     static uint Run1(char arg0, long arg1, uint arg2, bool arg3, short arg4)
     {
         return arg2;
     }
 }
-

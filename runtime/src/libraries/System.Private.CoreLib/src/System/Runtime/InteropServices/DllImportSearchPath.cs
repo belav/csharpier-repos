@@ -12,6 +12,6 @@ namespace System.Runtime.InteropServices
         System32 = 0x800,
         SafeDirectories = 0x1000,
         AssemblyDirectory = 0x2,
-        LegacyBehavior = 0x0
+        LegacyBehavior = 0x0,
     }
 }

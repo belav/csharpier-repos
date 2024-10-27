@@ -48,7 +48,11 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ChainedBeginHandler begin1 = DummyBeginClose;
             ChainedEndHandler end1 = DummyEndClose;
@@ -58,7 +62,15 @@ namespace System.ServiceModel.Channels
                 end1 = this.transportManagerContainer.EndClose;
             }
 
-            return new ChainedAsyncResult(timeout, callback, state, base.OnBeginClose, base.OnEndClose, begin1, end1);
+            return new ChainedAsyncResult(
+                timeout,
+                callback,
+                state,
+                base.OnBeginClose,
+                base.OnEndClose,
+                begin1,
+                end1
+            );
         }
 
         protected override void OnEndClose(IAsyncResult result)
@@ -79,7 +91,8 @@ namespace System.ServiceModel.Channels
         // used to decouple our channel and listener lifetimes
         bool TransferTransportManagers()
         {
-            TransportReplyChannel singletonChannel = (TransportReplyChannel)base.GetCurrentChannel();
+            TransportReplyChannel singletonChannel = (TransportReplyChannel)
+                base.GetCurrentChannel();
             if (singletonChannel == null)
             {
                 return false;
@@ -95,12 +108,15 @@ namespace System.ServiceModel.Channels
         {
             TransportManagerContainer transportManagerContainer;
 
-            public TransportReplyChannel(ChannelManagerBase channelManager, EndpointAddress localAddress)
-                : base(channelManager, localAddress)
-            {
-            }
+            public TransportReplyChannel(
+                ChannelManagerBase channelManager,
+                EndpointAddress localAddress
+            )
+                : base(channelManager, localAddress) { }
 
-            public bool TransferTransportManagers(TransportManagerContainer transportManagerContainer)
+            public bool TransferTransportManagers(
+                TransportManagerContainer transportManagerContainer
+            )
             {
                 lock (ThisLock)
                 {
@@ -143,7 +159,11 @@ namespace System.ServiceModel.Channels
                 CompletedAsyncResult.End(result);
             }
 
-            protected override IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginClose(
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 ChainedBeginHandler begin1 = DummyBeginClose;
                 ChainedEndHandler end1 = DummyEndClose;
@@ -153,8 +173,15 @@ namespace System.ServiceModel.Channels
                     end1 = this.transportManagerContainer.EndClose;
                 }
 
-                return new ChainedAsyncResult(timeout, callback, state, begin1, end1,
-                        base.OnBeginClose, base.OnEndClose);
+                return new ChainedAsyncResult(
+                    timeout,
+                    callback,
+                    state,
+                    begin1,
+                    end1,
+                    base.OnBeginClose,
+                    base.OnEndClose
+                );
             }
 
             protected override void OnEndClose(IAsyncResult result)

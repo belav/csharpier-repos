@@ -31,7 +31,8 @@ namespace Microsoft.CodeAnalysis.Classification.Classifiers
         protected static void TryClassifyStaticSymbol(
             ISymbol symbol,
             TextSpan span,
-            SegmentedList<ClassifiedSpan> result)
+            SegmentedList<ClassifiedSpan> result
+        )
         {
             if (IsStaticSymbol(symbol))
                 result.Add(new ClassifiedSpan(span, ClassificationTypeNames.StaticSymbol));

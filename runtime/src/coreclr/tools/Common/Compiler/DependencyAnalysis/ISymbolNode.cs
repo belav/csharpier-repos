@@ -42,10 +42,7 @@ namespace ILCompiler.DependencyAnalysis
         ISymbolNode NodeForLinkage(NodeFactory factory);
     }
 
-    public interface ISortableSymbolNode : ISymbolNode, ISortableNode
-    {
-    }
-
+    public interface ISortableSymbolNode : ISymbolNode, ISortableNode { }
 
     /// <summary>
     /// Represents a definition of a symbol within an <see cref="ObjectNode"/>. The symbol will be defined

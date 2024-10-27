@@ -9,7 +9,11 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue
 {
-    internal readonly struct UnmappedActiveStatement(TextSpan unmappedSpan, ActiveStatement statement, ActiveStatementExceptionRegions exceptionRegions)
+    internal readonly struct UnmappedActiveStatement(
+        TextSpan unmappedSpan,
+        ActiveStatement statement,
+        ActiveStatementExceptionRegions exceptionRegions
+    )
     {
         /// <summary>
         /// Unmapped span of the active statement
@@ -27,7 +31,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         /// </summary>
         public ActiveStatementExceptionRegions ExceptionRegions { get; } = exceptionRegions;
 
-        public void Deconstruct(out TextSpan unmappedSpan, out ActiveStatement statement, out ActiveStatementExceptionRegions exceptionRegions)
+        public void Deconstruct(
+            out TextSpan unmappedSpan,
+            out ActiveStatement statement,
+            out ActiveStatementExceptionRegions exceptionRegions
+        )
         {
             unmappedSpan = UnmappedSpan;
             statement = Statement;

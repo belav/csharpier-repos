@@ -30,14 +30,12 @@ public class TreeRouterMatcherConformanceTest : FullFeaturedMatcherConformanceTe
     {
         var endpoints = new RouteEndpoint[]
         {
-                EndpointFactory.CreateRouteEndpoint(
-                    "{firstName}/{lastName}",
-                    order: 0,
-                    defaults: new { controller = "TestRoute", action = "Index", }),
-
-                EndpointFactory.CreateRouteEndpoint(
-                    "middleware/{**_}",
-                    order: 0),
+            EndpointFactory.CreateRouteEndpoint(
+                "{firstName}/{lastName}",
+                order: 0,
+                defaults: new { controller = "TestRoute", action = "Index" }
+            ),
+            EndpointFactory.CreateRouteEndpoint("middleware/{**_}", order: 0),
         };
 
         var expected = endpoints[endpointIndex];

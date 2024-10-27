@@ -14,8 +14,16 @@ namespace Microsoft.AspNetCore.Mvc;
 /// Disabling the request body size limit can be a security concern in regards to uncontrolled
 /// resource consumption, particularly if the request body is being buffered.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
-public class DisableRequestSizeLimitAttribute : Attribute, IFilterFactory, IOrderedFilter, IRequestSizeLimitMetadata
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
+public class DisableRequestSizeLimitAttribute
+    : Attribute,
+        IFilterFactory,
+        IOrderedFilter,
+        IRequestSizeLimitMetadata
 {
     /// <summary>
     /// Gets the order value for determining the order of execution of filters. Filters execute in

@@ -27,14 +27,21 @@ namespace System.CodeDom.Tests
         protected override bool Enumerator_Current_UndefinedOperation_Throws => true;
         protected override bool ICollection_NonGeneric_HasNullSyncRoot => true;
 
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType => typeof(InvalidCastException);
-        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType => typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfEnumType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectValueType_ThrowType =>
+            typeof(InvalidCastException);
+        protected override Type ICollection_NonGeneric_CopyTo_ArrayOfIncorrectReferenceType_ThrowType =>
+            typeof(InvalidCastException);
 
         public override void ICollection_NonGeneric_CopyTo_NonZeroLowerBound(int count)
         {
             ICollection collection = NonGenericICollectionFactory(count);
-            Array arr = Array.CreateInstance(typeof(object), new int[1] { count }, new int[1] { 2 });
+            Array arr = Array.CreateInstance(
+                typeof(object),
+                new int[1] { count },
+                new int[1] { 2 }
+            );
 
             if (count == 0)
             {
@@ -120,8 +127,14 @@ namespace System.CodeDom.Tests
         {
             using (var collection = new TempFileCollection())
             {
-                AssertExtensions.Throws<ArgumentException>("fileExtension", () => collection.AddExtension(fileExtension));
-                AssertExtensions.Throws<ArgumentException>("fileExtension", () => collection.AddExtension(fileExtension, keepFile: false));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileExtension",
+                    () => collection.AddExtension(fileExtension)
+                );
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileExtension",
+                    () => collection.AddExtension(fileExtension, keepFile: false)
+                );
             }
         }
 
@@ -203,7 +216,10 @@ namespace System.CodeDom.Tests
         {
             using (var collection = new TempFileCollection())
             {
-                AssertExtensions.Throws<ArgumentException>("fileName", () => collection.AddFile(fileName, keepFile: false));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileName",
+                    () => collection.AddFile(fileName, keepFile: false)
+                );
             }
         }
 
@@ -214,10 +230,16 @@ namespace System.CodeDom.Tests
             {
                 const string FileName = "FileName";
                 collection.AddFile(FileName, keepFile: false);
-                AssertExtensions.Throws<ArgumentException>("fileName", () => collection.AddFile(FileName, keepFile: false));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileName",
+                    () => collection.AddFile(FileName, keepFile: false)
+                );
 
                 // Case insensitive
-                AssertExtensions.Throws<ArgumentException>("fileName", () => collection.AddFile(FileName.ToLowerInvariant(), keepFile: false));
+                AssertExtensions.Throws<ArgumentException>(
+                    "fileName",
+                    () => collection.AddFile(FileName.ToLowerInvariant(), keepFile: false)
+                );
             }
         }
 
@@ -273,6 +295,7 @@ namespace System.CodeDom.Tests
         }
 
         private static string s_tempDirectory = null;
+
         private static string TempDirectory()
         {
             if (s_tempDirectory == null)

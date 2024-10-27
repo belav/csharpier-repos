@@ -53,7 +53,8 @@ public class CorsPolicyTest
         // Assert
         Assert.Equal(
             $"PreflightMaxAge must be greater than or equal to 0. (Parameter 'value')",
-            exception.Message);
+            exception.Message
+        );
     }
 
     [Fact]
@@ -63,7 +64,7 @@ public class CorsPolicyTest
         var corsPolicy = new CorsPolicy
         {
             PreflightMaxAge = TimeSpan.FromSeconds(12),
-            SupportsCredentials = true
+            SupportsCredentials = true,
         };
         corsPolicy.Headers.Add("foo");
         corsPolicy.Headers.Add("bar");
@@ -76,9 +77,10 @@ public class CorsPolicyTest
 
         // Assert
         Assert.Equal(
-            @"AllowAnyHeader: False, AllowAnyMethod: False, AllowAnyOrigin: False, PreflightMaxAge: 12," +
-            " SupportsCredentials: True, Origins: {http://example.com,http://example.org}, Methods: {GET}," +
-            " Headers: {foo,bar}, ExposedHeaders: {}",
-            policyString);
+            @"AllowAnyHeader: False, AllowAnyMethod: False, AllowAnyOrigin: False, PreflightMaxAge: 12,"
+                + " SupportsCredentials: True, Origins: {http://example.com,http://example.org}, Methods: {GET},"
+                + " Headers: {foo,bar}, ExposedHeaders: {}",
+            policyString
+        );
     }
 }

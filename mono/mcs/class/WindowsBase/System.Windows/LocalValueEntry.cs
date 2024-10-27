@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,43 +26,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Windows {
-	public struct LocalValueEntry {
-		private DependencyProperty property;
-		private object value;
+namespace System.Windows
+{
+    public struct LocalValueEntry
+    {
+        private DependencyProperty property;
+        private object value;
 
-		internal LocalValueEntry(DependencyProperty property, object value)
-		{
-			this.property = property;
-			this.value = value;
-		}
-		
-		public DependencyProperty Property {
-			get { return property; }
-		}
+        internal LocalValueEntry(DependencyProperty property, object value)
+        {
+            this.property = property;
+            this.value = value;
+        }
 
-		public object Value {
-			get { return value; }
-		}
+        public DependencyProperty Property
+        {
+            get { return property; }
+        }
 
-		public static bool operator != (LocalValueEntry obj1, LocalValueEntry obj2)
-		{
-			throw new NotImplementedException ();
-		}
+        public object Value
+        {
+            get { return value; }
+        }
 
-		public static bool operator == (LocalValueEntry obj1, LocalValueEntry obj2)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool operator !=(LocalValueEntry obj1, LocalValueEntry obj2)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override bool Equals (object obj)
-		{
-			throw new NotImplementedException ();
-		}
+        public static bool operator ==(LocalValueEntry obj1, LocalValueEntry obj2)
+        {
+            throw new NotImplementedException();
+        }
 
-		public override int GetHashCode ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+        public override bool Equals(object obj)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override int GetHashCode()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

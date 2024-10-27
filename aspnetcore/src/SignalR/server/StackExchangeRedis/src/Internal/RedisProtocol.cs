@@ -32,8 +32,13 @@ internal sealed class RedisProtocol
     // * The "Length prefixed string" is the string format used by BinaryReader/BinaryWriter:
     //   * A 7-bit variable length integer encodes the length in bytes, followed by the encoded string in UTF-8.
 
-    public byte[] WriteInvocation(string methodName, object?[] args, string? invocationId = null,
-        IReadOnlyList<string>? excludedConnectionIds = null, string? returnChannel = null)
+    public byte[] WriteInvocation(
+        string methodName,
+        object?[] args,
+        string? invocationId = null,
+        IReadOnlyList<string>? excludedConnectionIds = null,
+        string? returnChannel = null
+    )
     {
         // Written as a MessagePack 'arr' containing at least these items:
         // * A MessagePack 'arr' of 'str's representing the excluded ids
@@ -272,7 +277,11 @@ internal sealed class RedisProtocol
         return new RedisCompletion(protocolName, ros ?? new ReadOnlySequence<byte>());
     }
 
-    private static int ValidateArraySize(ref MessagePackReader reader, int expectedLength, string messageType)
+    private static int ValidateArraySize(
+        ref MessagePackReader reader,
+        int expectedLength,
+        string messageType
+    )
     {
         var length = reader.ReadArrayHeader();
 

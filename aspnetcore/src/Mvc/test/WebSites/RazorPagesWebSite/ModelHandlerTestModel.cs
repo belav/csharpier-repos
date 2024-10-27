@@ -38,7 +38,8 @@ public class ModelHandlerTestModel : PageModel
         bool boolean,
         int id = 10,
         Guid guid = default(Guid),
-        DateTime dateTime = default(DateTime))
+        DateTime dateTime = default(DateTime)
+    )
     {
         return Content($"id: {id}, guid: {guid}, boolean: {boolean}, dateTime: {dateTime}");
     }

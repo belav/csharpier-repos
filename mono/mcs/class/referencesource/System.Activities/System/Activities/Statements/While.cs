@@ -13,7 +13,11 @@ namespace System.Activities.Statements
     using System.Runtime.Collections;
     using System.Windows.Markup;
 
-    [SuppressMessage(FxCop.Category.Naming, FxCop.Rule.IdentifiersShouldNotMatchKeywords, Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [While])")]
+    [SuppressMessage(
+        FxCop.Category.Naming,
+        FxCop.Rule.IdentifiersShouldNotMatchKeywords,
+        Justification = "Optimizing for XAML naming. VB imperative users will [] qualify (e.g. New [While])"
+    )]
     [ContentProperty("Body")]
     public sealed class While : NativeActivity
     {
@@ -23,9 +27,7 @@ namespace System.Activities.Statements
         Collection<Variable> variables;
 
         public While()
-            : base()
-        {
-        }
+            : base() { }
 
         public While(Expression<Func<ActivityContext, bool>> condition)
             : this()
@@ -64,7 +66,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -73,21 +75,16 @@ namespace System.Activities.Statements
 
         [DefaultValue(null)]
         [DependsOn("Variables")]
-        public Activity<bool> Condition
-        {
-            get;
-            set;
-        }
+        public Activity<bool> Condition { get; set; }
 
         [DefaultValue(null)]
         [DependsOn("Condition")]
-        public Activity Body
-        {
-            get;
-            set;
-        }
+        public Activity Body { get; set; }
 
-        protected override void OnCreateDynamicUpdateMap(DynamicUpdate.NativeActivityUpdateMapMetadata metadata, Activity originalActivity)
+        protected override void OnCreateDynamicUpdateMap(
+            DynamicUpdate.NativeActivityUpdateMapMetadata metadata,
+            Activity originalActivity
+        )
         {
             metadata.AllowUpdateInsideThisActivity();
         }
@@ -124,7 +121,11 @@ namespace System.Activities.Statements
             context.ScheduleActivity(this.Condition, this.onConditionComplete);
         }
 
-        void OnConditionComplete(NativeActivityContext context, ActivityInstance completedInstance, bool result)
+        void OnConditionComplete(
+            NativeActivityContext context,
+            ActivityInstance completedInstance,
+            bool result
+        )
         {
             if (result)
             {

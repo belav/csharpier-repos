@@ -14,7 +14,7 @@ namespace System.Tests
         [InlineData("000102FDfeFF")]
         public static void KnownByteSequence(string value)
         {
-            byte[] knownSequence = {0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF};
+            byte[] knownSequence = { 0x00, 0x01, 0x02, 0xFD, 0xFE, 0xFF };
             TestSequence(knownSequence, value);
         }
 
@@ -39,7 +39,10 @@ namespace System.Tests
             Assert.Equal(expected, fromResult);
 
             Span<byte> tryResult = new byte[actual.Length / 2];
-            Assert.Equal(OperationStatus.Done, Convert.FromHexString(actual, tryResult, out int consumed, out int written));
+            Assert.Equal(
+                OperationStatus.Done,
+                Convert.FromHexString(actual, tryResult, out int consumed, out int written)
+            );
             Assert.Equal(fromResult.Length, written);
             Assert.Equal(actual.Length, consumed);
             AssertExtensions.SequenceEqual(expected, tryResult);
@@ -49,7 +52,10 @@ namespace System.Tests
         public static void InvalidInputString_Null()
         {
             AssertExtensions.Throws<ArgumentNullException>("s", () => Convert.FromHexString(null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => Convert.FromHexString(null, default, out _, out _));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => Convert.FromHexString(null, default, out _, out _)
+            );
         }
 
         [Theory]
@@ -66,7 +72,10 @@ namespace System.Tests
             Assert.Throws<FormatException>(() => Convert.FromHexString(invalidInput));
 
             Span<byte> buffer = stackalloc byte[invalidInput.Length / 2];
-            Assert.Equal(OperationStatus.InvalidData, Convert.FromHexString(invalidInput.AsSpan(), buffer, out _, out _));
+            Assert.Equal(
+                OperationStatus.InvalidData,
+                Convert.FromHexString(invalidInput.AsSpan(), buffer, out _, out _)
+            );
         }
 
         [Fact]
@@ -74,7 +83,12 @@ namespace System.Tests
         {
             Assert.Same(Array.Empty<byte>(), Convert.FromHexString(string.Empty));
 
-            OperationStatus convertResult = Convert.FromHexString(string.Empty, Span<byte>.Empty, out int consumed, out int written);
+            OperationStatus convertResult = Convert.FromHexString(
+                string.Empty,
+                Span<byte>.Empty,
+                out int consumed,
+                out int written
+            );
 
             Assert.Equal(OperationStatus.Done, convertResult);
             Assert.Equal(0, written);
@@ -108,10 +122,12 @@ namespace System.Tests
                 TestSequence(data, hex.ToLowerInvariant());
                 TestSequence(data, hex.ToUpperInvariant());
 
-                string mixedCase1 = hex.Substring(0, hex.Length / 2).ToUpperInvariant() +
-                                    hex.Substring(hex.Length / 2).ToLowerInvariant();
-                string mixedCase2 = hex.Substring(0, hex.Length / 2).ToLowerInvariant() +
-                                    hex.Substring(hex.Length / 2).ToUpperInvariant();
+                string mixedCase1 =
+                    hex.Substring(0, hex.Length / 2).ToUpperInvariant()
+                    + hex.Substring(hex.Length / 2).ToLowerInvariant();
+                string mixedCase2 =
+                    hex.Substring(0, hex.Length / 2).ToLowerInvariant()
+                    + hex.Substring(hex.Length / 2).ToUpperInvariant();
 
                 TestSequence(data, mixedCase1);
                 TestSequence(data, mixedCase2);
@@ -126,10 +142,17 @@ namespace System.Tests
         {
             const int destinationSize = 10;
             Span<byte> destination = stackalloc byte[destinationSize];
-            byte[] data = Security.Cryptography.RandomNumberGenerator.GetBytes(destinationSize * 2 + 1);
+            byte[] data = Security.Cryptography.RandomNumberGenerator.GetBytes(
+                destinationSize * 2 + 1
+            );
             string hex = Convert.ToHexString(data);
 
-            OperationStatus result = Convert.FromHexString(hex, destination, out int charsConsumed, out int bytesWritten);
+            OperationStatus result = Convert.FromHexString(
+                hex,
+                destination,
+                out int charsConsumed,
+                out int bytesWritten
+            );
 
             Assert.Equal(OperationStatus.DestinationTooSmall, result);
             Assert.Equal(destinationSize * 2, charsConsumed);
@@ -145,7 +168,12 @@ namespace System.Tests
             var hex = Convert.ToHexString(data);
 
             var spanHex = hex.AsSpan(0, 1);
-            var singeResult = Convert.FromHexString(spanHex, destination, out int consumed, out int written);
+            var singeResult = Convert.FromHexString(
+                spanHex,
+                destination,
+                out int consumed,
+                out int written
+            );
 
             Assert.Throws<FormatException>(() => Convert.FromHexString(hex.Substring(0, 1)));
             Assert.Equal(OperationStatus.NeedMoreData, singeResult);
@@ -154,9 +182,16 @@ namespace System.Tests
 
             spanHex = hex.AsSpan(0, hex.Length - 1);
 
-            var oneOffResult = Convert.FromHexString(spanHex, destination, out consumed, out written);
+            var oneOffResult = Convert.FromHexString(
+                spanHex,
+                destination,
+                out consumed,
+                out written
+            );
 
-            Assert.Throws<FormatException>(() => Convert.FromHexString(hex.Substring(0, hex.Length - 1)));
+            Assert.Throws<FormatException>(
+                () => Convert.FromHexString(hex.Substring(0, hex.Length - 1))
+            );
             Assert.Equal(OperationStatus.NeedMoreData, oneOffResult);
             Assert.Equal(spanHex.Length - 1, consumed);
             Assert.Equal((spanHex.Length - 1) / 2, written);

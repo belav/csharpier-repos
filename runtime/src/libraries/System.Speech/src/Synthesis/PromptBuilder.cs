@@ -17,9 +17,8 @@ namespace System.Speech.Synthesis
     {
         #region Constructors
         public PromptBuilder()
-            : this(CultureInfo.CurrentUICulture)
-        {
-        }
+            : this(CultureInfo.CurrentUICulture) { }
+
         public PromptBuilder(CultureInfo culture)
         {
             Helpers.ThrowIfNull(culture, nameof(culture));
@@ -46,7 +45,17 @@ namespace System.Speech.Synthesis
         public void ClearContent()
         {
             _elements.Clear();
-            _elementStack.Push(new StackElement(SsmlElement.Lexicon | SsmlElement.Meta | SsmlElement.MetaData | SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle, SsmlState.Header, _culture));
+            _elementStack.Push(
+                new StackElement(
+                    SsmlElement.Lexicon
+                        | SsmlElement.Meta
+                        | SsmlElement.MetaData
+                        | SsmlElement.ParagraphOrSentence
+                        | SsmlElement.AudioMarkTextWithStyle,
+                    SsmlState.Header,
+                    _culture
+                )
+            );
         }
 
         /// <summary>
@@ -61,6 +70,7 @@ namespace System.Speech.Synthesis
 
             _elements.Add(new Element(ElementType.Text, textToSpeak));
         }
+
         public void AppendText(string textToSpeak, PromptRate rate)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -99,6 +109,7 @@ namespace System.Speech.Synthesis
                 prosodyElement._attributes.Add(new AttributeItem("rate", sPromptRate));
             }
         }
+
         public void AppendText(string textToSpeak, PromptVolume volume)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -139,6 +150,7 @@ namespace System.Speech.Synthesis
                 prosodyElement._attributes.Add(new AttributeItem("volume", sVolumeLevel));
             }
         }
+
         public void AppendText(string textToSpeak, PromptEmphasis emphasis)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -157,9 +169,12 @@ namespace System.Speech.Synthesis
             if (emphasis != PromptEmphasis.NotSet)
             {
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement._attributes.Add(new AttributeItem("level", emphasis.ToString().ToLowerInvariant()));
+                emphasisElement._attributes.Add(
+                    new AttributeItem("level", emphasis.ToString().ToLowerInvariant())
+                );
             }
         }
+
         public void StartStyle(PromptStyle style)
         {
             Helpers.ThrowIfNull(style, nameof(style));
@@ -180,7 +195,9 @@ namespace System.Speech.Synthesis
                 _elements.Add(emphasisElement);
 
                 emphasisElement._attributes = new Collection<AttributeItem>();
-                emphasisElement._attributes.Add(new AttributeItem("level", style.Emphasis.ToString().ToLowerInvariant()));
+                emphasisElement._attributes.Add(
+                    new AttributeItem("level", style.Emphasis.ToString().ToLowerInvariant())
+                );
 
                 // Set the expected children and mark the element used
                 possibleChildren = SsmlElement.AudioMarkTextWithStyle;
@@ -241,12 +258,16 @@ namespace System.Speech.Synthesis
                 }
 
                 // Set the expected children and mark the element used
-                possibleChildren = SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle;
+                possibleChildren =
+                    SsmlElement.ParagraphOrSentence | SsmlElement.AudioMarkTextWithStyle;
                 ssmlState |= SsmlState.StyleProsody;
             }
 
-            _elementStack.Push(new StackElement(possibleChildren, ssmlState, stackElement._culture));
+            _elementStack.Push(
+                new StackElement(possibleChildren, ssmlState, stackElement._culture)
+            );
         }
+
         public void EndStyle()
         {
             StackElement stackElement = _elementStack.Pop();
@@ -266,6 +287,7 @@ namespace System.Speech.Synthesis
                 }
             }
         }
+
         public void StartVoice(VoiceInfo voice)
         {
             Helpers.ThrowIfNull(voice, nameof(voice));
@@ -301,43 +323,67 @@ namespace System.Speech.Synthesis
 
             if (voice.Gender != VoiceGender.NotSet)
             {
-                startVoice._attributes.Add(new AttributeItem("gender", voice.Gender.ToString().ToLowerInvariant()));
+                startVoice._attributes.Add(
+                    new AttributeItem("gender", voice.Gender.ToString().ToLowerInvariant())
+                );
             }
 
             if (voice.Age != VoiceAge.NotSet)
             {
-                startVoice._attributes.Add(new AttributeItem("age", ((int)voice.Age).ToString(CultureInfo.InvariantCulture)));
+                startVoice._attributes.Add(
+                    new AttributeItem(
+                        "age",
+                        ((int)voice.Age).ToString(CultureInfo.InvariantCulture)
+                    )
+                );
             }
 
             if (voice.Variant >= 0)
             {
-                startVoice._attributes.Add(new AttributeItem("variant", voice.Variant.ToString(CultureInfo.InvariantCulture)));
+                startVoice._attributes.Add(
+                    new AttributeItem(
+                        "variant",
+                        voice.Variant.ToString(CultureInfo.InvariantCulture)
+                    )
+                );
             }
 
-            _elementStack.Push(new StackElement(SsmlElement.Sentence | SsmlElement.AudioMarkTextWithStyle, SsmlState.Voice, culture));
+            _elementStack.Push(
+                new StackElement(
+                    SsmlElement.Sentence | SsmlElement.AudioMarkTextWithStyle,
+                    SsmlState.Voice,
+                    culture
+                )
+            );
         }
+
         public void StartVoice(string name)
         {
             Helpers.ThrowIfEmptyOrNull(name, nameof(name));
 
             StartVoice(new VoiceInfo(name));
         }
+
         public void StartVoice(VoiceGender gender)
         {
             StartVoice(new VoiceInfo(gender));
         }
+
         public void StartVoice(VoiceGender gender, VoiceAge age)
         {
             StartVoice(new VoiceInfo(gender, age));
         }
+
         public void StartVoice(VoiceGender gender, VoiceAge age, int voiceAlternate)
         {
             StartVoice(new VoiceInfo(gender, age, voiceAlternate));
         }
+
         public void StartVoice(CultureInfo culture)
         {
             StartVoice(new VoiceInfo(culture));
         }
+
         public void EndVoice()
         {
             if (_elementStack.Pop()._state != SsmlState.Voice)
@@ -353,6 +399,7 @@ namespace System.Speech.Synthesis
         {
             StartParagraph(null);
         }
+
         public void StartParagraph(CultureInfo culture)
         {
             // check for well formed document
@@ -375,8 +422,15 @@ namespace System.Speech.Synthesis
             {
                 culture = stackElement._culture;
             }
-            _elementStack.Push(new StackElement(SsmlElement.AudioMarkTextWithStyle | SsmlElement.Sentence, SsmlState.Paragraph, culture));
+            _elementStack.Push(
+                new StackElement(
+                    SsmlElement.AudioMarkTextWithStyle | SsmlElement.Sentence,
+                    SsmlState.Paragraph,
+                    culture
+                )
+            );
         }
+
         public void EndParagraph()
         {
             if (_elementStack.Pop()._state != SsmlState.Paragraph)
@@ -385,10 +439,12 @@ namespace System.Speech.Synthesis
             }
             _elements.Add(new Element(ElementType.EndParagraph));
         }
+
         public void StartSentence()
         {
             StartSentence(null);
         }
+
         public void StartSentence(CultureInfo culture)
         {
             // check for well formed document
@@ -412,8 +468,11 @@ namespace System.Speech.Synthesis
             {
                 culture = stackElement._culture;
             }
-            _elementStack.Push(new StackElement(SsmlElement.AudioMarkTextWithStyle, SsmlState.Sentence, culture));
+            _elementStack.Push(
+                new StackElement(SsmlElement.AudioMarkTextWithStyle, SsmlState.Sentence, culture)
+            );
         }
+
         public void EndSentence()
         {
             if (_elementStack.Pop()._state != SsmlState.Sentence)
@@ -422,6 +481,7 @@ namespace System.Speech.Synthesis
             }
             _elements.Add(new Element(ElementType.EndSentence));
         }
+
         public void AppendTextWithHint(string textToSpeak, SayAs sayAs)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -541,6 +601,7 @@ namespace System.Speech.Synthesis
                 AppendText(textToSpeak);
             }
         }
+
         public void AppendTextWithHint(string textToSpeak, string sayAs)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -555,6 +616,7 @@ namespace System.Speech.Synthesis
             sayAsElement._attributes = new Collection<AttributeItem>();
             sayAsElement._attributes.Add(new AttributeItem("interpret-as", sayAs));
         }
+
         public void AppendTextWithPronunciation(string textToSpeak, string pronunciation)
         {
             Helpers.ThrowIfEmptyOrNull(textToSpeak, nameof(textToSpeak));
@@ -572,6 +634,7 @@ namespace System.Speech.Synthesis
             phoneElement._attributes = new Collection<AttributeItem>();
             phoneElement._attributes.Add(new AttributeItem("ph", pronunciation));
         }
+
         public void AppendTextWithAlias(string textToSpeak, string substitute)
         {
             Helpers.ThrowIfNull(textToSpeak, nameof(textToSpeak));
@@ -586,6 +649,7 @@ namespace System.Speech.Synthesis
             subElement._attributes = new Collection<AttributeItem>();
             subElement._attributes.Add(new AttributeItem("alias", substitute));
         }
+
         public void AppendBreak()
         {
             // check for well formed document
@@ -593,6 +657,7 @@ namespace System.Speech.Synthesis
 
             _elements.Add(new Element(ElementType.Break));
         }
+
         public void AppendBreak(PromptBreak strength)
         {
             // check for well formed document
@@ -636,6 +701,7 @@ namespace System.Speech.Synthesis
             breakElement._attributes = new Collection<AttributeItem>();
             breakElement._attributes.Add(new AttributeItem("strength", sBreak));
         }
+
         public void AppendBreak(TimeSpan duration)
         {
             // check for well formed document
@@ -650,7 +716,9 @@ namespace System.Speech.Synthesis
             _elements.Add(breakElement);
 
             breakElement._attributes = new Collection<AttributeItem>();
-            breakElement._attributes.Add(new AttributeItem("time", duration.TotalMilliseconds + "ms"));
+            breakElement._attributes.Add(
+                new AttributeItem("time", duration.TotalMilliseconds + "ms")
+            );
         }
 
         // <audio>
@@ -673,6 +741,7 @@ namespace System.Speech.Synthesis
 
             AppendAudio(uri);
         }
+
         public void AppendAudio(Uri audioFile)
         {
             Helpers.ThrowIfNull(audioFile, nameof(audioFile));
@@ -686,6 +755,7 @@ namespace System.Speech.Synthesis
             audioElement._attributes = new Collection<AttributeItem>();
             audioElement._attributes.Add(new AttributeItem("src", audioFile.ToString()));
         }
+
         public void AppendAudio(Uri audioFile, string alternateText)
         {
             Helpers.ThrowIfNull(audioFile, nameof(audioFile));
@@ -715,6 +785,7 @@ namespace System.Speech.Synthesis
             bookmarkElement._attributes = new Collection<AttributeItem>();
             bookmarkElement._attributes.Add(new AttributeItem("name", bookmarkName));
         }
+
         public void AppendPromptBuilder(PromptBuilder promptBuilder)
         {
             Helpers.ThrowIfNull(promptBuilder, nameof(promptBuilder));
@@ -725,19 +796,23 @@ namespace System.Speech.Synthesis
             reader.Close();
             sr.Close();
         }
+
         public void AppendSsml(string path)
         {
             Helpers.ThrowIfEmptyOrNull(path, nameof(path));
 
             AppendSsml(new Uri(path, UriKind.Relative));
         }
+
         public void AppendSsml(Uri ssmlFile)
         {
             Helpers.ThrowIfNull(ssmlFile, nameof(ssmlFile));
 
             string localFile;
             Uri redirectUri;
-            using (Stream stream = s_resourceLoader.LoadFile(ssmlFile, out localFile, out redirectUri))
+            using (
+                Stream stream = s_resourceLoader.LoadFile(ssmlFile, out localFile, out redirectUri)
+            )
             {
                 try
                 {
@@ -749,6 +824,7 @@ namespace System.Speech.Synthesis
                 }
             }
         }
+
         public void AppendSsml(XmlReader ssmlFile)
         {
             Helpers.ThrowIfNull(ssmlFile, nameof(ssmlFile));
@@ -819,17 +895,11 @@ namespace System.Speech.Synthesis
         #region public Properties
         public bool IsEmpty
         {
-            get
-            {
-                return _elements.Count == 0;
-            }
+            get { return _elements.Count == 0; }
         }
-        public            CultureInfo Culture
+        public CultureInfo Culture
         {
-            get
-            {
-                return _culture;
-            }
+            get { return _culture; }
             set
             {
                 if (value == null)
@@ -853,7 +923,7 @@ namespace System.Speech.Synthesis
             StyleEmphasis = 8,
             StyleProsody = 16,
             Voice = 32,
-            Ended = 64
+            Ended = 64,
         }
 
         #endregion
@@ -876,7 +946,12 @@ namespace System.Speech.Synthesis
 
             foreach (Element element in _elements)
             {
-                noEndElement = noEndElement || element._type == ElementType.StartSentence || element._type == ElementType.StartParagraph || element._type == ElementType.StartStyle || element._type == ElementType.StartVoice;
+                noEndElement =
+                    noEndElement
+                    || element._type == ElementType.StartSentence
+                    || element._type == ElementType.StartParagraph
+                    || element._type == ElementType.StartStyle
+                    || element._type == ElementType.StartVoice;
                 switch (element._type)
                 {
                     case ElementType.Text:
@@ -911,7 +986,12 @@ namespace System.Speech.Synthesis
                                 }
                                 else
                                 {
-                                    writer.WriteAttributeString(attribute._namespace, attribute._key, null, attribute._value);
+                                    writer.WriteAttributeString(
+                                        attribute._namespace,
+                                        attribute._key,
+                                        null,
+                                        attribute._value
+                                    );
                                 }
                             }
                         }
@@ -957,9 +1037,17 @@ namespace System.Speech.Synthesis
         {
             if ((stackElement._possibleChildren & currentElement) == 0)
             {
-                throw new InvalidOperationException(string.Format(CultureInfo.InvariantCulture, SR.Get(SRID.PromptBuilderInvalidElement), currentElement.ToString(), stackElement._state.ToString()));
+                throw new InvalidOperationException(
+                    string.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.Get(SRID.PromptBuilderInvalidElement),
+                        currentElement.ToString(),
+                        stackElement._state.ToString()
+                    )
+                );
             }
         }
+
         private void AppendSsmlInternal(XmlReader ssmlFile)
         {
             // check for well formed document
@@ -1006,7 +1094,11 @@ namespace System.Speech.Synthesis
             internal SsmlState _state;
             internal CultureInfo _culture;
 
-            internal StackElement(SsmlElement possibleChildren, SsmlState state, CultureInfo culture)
+            internal StackElement(
+                SsmlElement possibleChildren,
+                SsmlState state,
+                CultureInfo culture
+            )
             {
                 _possibleChildren = possibleChildren;
                 _state = state;
@@ -1033,7 +1125,7 @@ namespace System.Speech.Synthesis
             EndStyle,
             EndVoice,
             Text,
-            SsmlMarkup
+            SsmlMarkup,
         }
 
         private static readonly string[] s_promptBuilderElementName = new string[]
@@ -1048,7 +1140,7 @@ namespace System.Speech.Synthesis
             "mark",
             "voice",
             "p",
-            "s"
+            "s",
         };
 
         [Serializable]

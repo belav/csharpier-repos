@@ -1,13 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
 using System.Collections;
 using System.Diagnostics.Tracing;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace System.Diagnostics.TraceSourceTests
 {
@@ -34,13 +34,18 @@ namespace System.Diagnostics.TraceSourceTests
         [Fact]
         public void CorrelationManager_NullOperationId()
         {
-            AssertExtensions.Throws<ArgumentNullException>("operationId", () => Trace.CorrelationManager.StartLogicalOperation(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "operationId",
+                () => Trace.CorrelationManager.StartLogicalOperation(null)
+            );
         }
 
         [Fact]
         public void CorrelationManager_EmptyStack()
         {
-            Assert.Throws<InvalidOperationException>(() => Trace.CorrelationManager.StopLogicalOperation());
+            Assert.Throws<InvalidOperationException>(
+                () => Trace.CorrelationManager.StopLogicalOperation()
+            );
         }
 
         [Fact]
@@ -77,7 +82,7 @@ namespace System.Diagnostics.TraceSourceTests
 
             await Task.Yield();
 
-            Assert.Equal(1,Trace.CorrelationManager.LogicalOperationStack.Pop());
+            Assert.Equal(1, Trace.CorrelationManager.LogicalOperationStack.Pop());
 
             ValidateStack(Trace.CorrelationManager.LogicalOperationStack, Array.Empty<object>());
         }
@@ -99,7 +104,6 @@ namespace System.Diagnostics.TraceSourceTests
         {
             Guid g = Guid.NewGuid();
             Trace.CorrelationManager.ActivityId = g;
-
 
             Assert.Equal(g, Trace.CorrelationManager.ActivityId);
             Trace.CorrelationManager.StartLogicalOperation("one");

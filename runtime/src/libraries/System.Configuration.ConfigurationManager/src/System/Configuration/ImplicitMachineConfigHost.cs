@@ -18,12 +18,23 @@ namespace System.Configuration
             Host = host;
         }
 
-        public override void InitForConfiguration(ref string locationSubPath, out string configPath,
-            out string locationConfigPath, IInternalConfigRoot configRoot, params object[] hostInitConfigurationParams)
+        public override void InitForConfiguration(
+            ref string locationSubPath,
+            out string configPath,
+            out string locationConfigPath,
+            IInternalConfigRoot configRoot,
+            params object[] hostInitConfigurationParams
+        )
         {
             // Stash the filemap so we can see if the machine config was explicitly specified
             GetFileMap(hostInitConfigurationParams);
-            base.InitForConfiguration(ref locationSubPath, out configPath, out locationConfigPath, configRoot, hostInitConfigurationParams);
+            base.InitForConfiguration(
+                ref locationSubPath,
+                out configPath,
+                out locationConfigPath,
+                configRoot,
+                hostInitConfigurationParams
+            );
         }
 
         public override void Init(IInternalConfigRoot configRoot, params object[] hostInitParams)
@@ -47,8 +58,10 @@ namespace System.Configuration
         {
             string name = base.GetStreamName(configPath);
 
-            if (ConfigPathUtility.GetName(configPath) == ClientConfigurationHost.MachineConfigName
-                && (_fileMap?.IsMachinePathDefault ?? true))
+            if (
+                ConfigPathUtility.GetName(configPath) == ClientConfigurationHost.MachineConfigName
+                && (_fileMap?.IsMachinePathDefault ?? true)
+            )
             {
                 // The machine config was asked for and wasn't explicitly
                 // specified, stash the "default" machine.config path
@@ -72,7 +85,7 @@ namespace System.Configuration
         }
 
         private const string ImplicitMachineConfig =
-@"<configuration>
+            @"<configuration>
     <configSections>
         <section name='appSettings' type='System.Configuration.AppSettingsSection, System.Configuration.ConfigurationManager' restartOnExternalChanges='false' requirePermission='false' />
         <section name='connectionStrings' type='System.Configuration.ConnectionStringsSection, System.Configuration.ConfigurationManager' requirePermission='false' />
@@ -80,11 +93,13 @@ namespace System.Configuration
         <section name='runtime' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
         <section name='assemblyBinding' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
         <section name='satelliteassemblies' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
-        <section name='startup' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />" +
+        <section name='startup' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />"
+            +
 #if NET7_0_OR_GREATER
-@"        <section name='system.diagnostics' type='System.Diagnostics.SystemDiagnosticsSection, System.Configuration.ConfigurationManager' allowLocation='false' />" +
+            @"        <section name='system.diagnostics' type='System.Diagnostics.SystemDiagnosticsSection, System.Configuration.ConfigurationManager' allowLocation='false' />"
+            +
 #endif
-@"        <section name='system.runtime.remoting' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
+            @"        <section name='system.runtime.remoting' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
         <section name='windows' type='System.Configuration.IgnoreSection, System.Configuration.ConfigurationManager' allowLocation='false' />
     </configSections>
     <configProtectedData defaultProvider='RsaProtectedConfigurationProvider'>

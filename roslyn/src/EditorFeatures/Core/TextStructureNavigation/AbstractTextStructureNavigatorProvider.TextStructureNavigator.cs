@@ -29,7 +29,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                 ITextBuffer subjectBuffer,
                 ITextStructureNavigator naturalLanguageNavigator,
                 AbstractTextStructureNavigatorProvider provider,
-                IUIThreadOperationExecutor uIThreadOperationExecutor)
+                IUIThreadOperationExecutor uIThreadOperationExecutor
+            )
             {
                 Contract.ThrowIfNull(subjectBuffer);
                 Contract.ThrowIfNull(naturalLanguageNavigator);
@@ -45,7 +46,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
 
             public TextExtent GetExtentOfWord(SnapshotPoint currentPosition)
             {
-                using (Logger.LogBlock(FunctionId.TextStructureNavigator_GetExtentOfWord, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TextStructureNavigator_GetExtentOfWord,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var result = default(TextExtent);
                     _uiThreadOperationExecutor.Execute(
@@ -54,15 +60,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         allowCancellation: true,
                         showProgress: false,
                         action: context =>
-                    {
-                        result = GetExtentOfWordWorker(currentPosition, context.UserCancellationToken);
-                    });
+                        {
+                            result = GetExtentOfWordWorker(
+                                currentPosition,
+                                context.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result;
                 }
             }
 
-            private TextExtent GetExtentOfWordWorker(SnapshotPoint position, CancellationToken cancellationToken)
+            private TextExtent GetExtentOfWordWorker(
+                SnapshotPoint position,
+                CancellationToken cancellationToken
+            )
             {
                 var textLength = position.Snapshot.Length;
                 if (textLength == 0)
@@ -80,7 +93,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                 var line = position.Snapshot.GetLineFromPosition(position);
                 if (position >= line.End && position < line.EndIncludingLineBreak)
                 {
-                    return new TextExtent(new SnapshotSpan(line.End, line.EndIncludingLineBreak - line.End), isSignificant: false);
+                    return new TextExtent(
+                        new SnapshotSpan(line.End, line.EndIncludingLineBreak - line.End),
+                        isSignificant: false
+                    );
                 }
 
                 var document = GetDocument(position);
@@ -91,10 +107,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
 
                     if (trivia != default)
                     {
-                        if (trivia.Span.Start == position && _provider.ShouldSelectEntireTriviaFromStart(trivia))
+                        if (
+                            trivia.Span.Start == position
+                            && _provider.ShouldSelectEntireTriviaFromStart(trivia)
+                        )
                         {
                             // We want to select the entire comment
-                            return new TextExtent(trivia.Span.ToSnapshotSpan(position.Snapshot), isSignificant: true);
+                            return new TextExtent(
+                                trivia.Span.ToSnapshotSpan(position.Snapshot),
+                                isSignificant: true
+                            );
                         }
                     }
 
@@ -106,7 +128,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         token = token.GetPreviousToken();
                     }
 
-                    if (token.Span.Length > 0 && token.Span.Contains(position) && !_provider.IsWithinNaturalLanguage(token, position))
+                    if (
+                        token.Span.Length > 0
+                        && token.Span.Contains(position)
+                        && !_provider.IsWithinNaturalLanguage(token, position)
+                    )
                     {
                         // Cursor position is in our domain - handle it.
                         return _provider.GetExtentOfWordFromToken(token, position);
@@ -119,7 +145,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
 
             public SnapshotSpan GetSpanOfEnclosing(SnapshotSpan activeSpan)
             {
-                using (Logger.LogBlock(FunctionId.TextStructureNavigator_GetSpanOfEnclosing, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TextStructureNavigator_GetSpanOfEnclosing,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var span = default(SnapshotSpan);
                     var result = _uiThreadOperationExecutor.Execute(
@@ -128,15 +159,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         allowCancellation: true,
                         showProgress: false,
                         action: context =>
-                    {
-                        span = GetSpanOfEnclosingWorker(activeSpan, context.UserCancellationToken);
-                    });
+                        {
+                            span = GetSpanOfEnclosingWorker(
+                                activeSpan,
+                                context.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result == UIThreadOperationStatus.Completed ? span : activeSpan;
                 }
             }
 
-            private static SnapshotSpan GetSpanOfEnclosingWorker(SnapshotSpan activeSpan, CancellationToken cancellationToken)
+            private static SnapshotSpan GetSpanOfEnclosingWorker(
+                SnapshotSpan activeSpan,
+                CancellationToken cancellationToken
+            )
             {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
@@ -146,12 +184,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     node = GetEnclosingNode(node.Value);
                 }
 
-                return node == null ? activeSpan : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return node == null
+                    ? activeSpan
+                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfFirstChild(SnapshotSpan activeSpan)
             {
-                using (Logger.LogBlock(FunctionId.TextStructureNavigator_GetSpanOfFirstChild, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TextStructureNavigator_GetSpanOfFirstChild,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var span = default(SnapshotSpan);
                     var result = _uiThreadOperationExecutor.Execute(
@@ -160,15 +205,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         allowCancellation: true,
                         showProgress: false,
                         action: context =>
-                    {
-                        span = GetSpanOfFirstChildWorker(activeSpan, context.UserCancellationToken);
-                    });
+                        {
+                            span = GetSpanOfFirstChildWorker(
+                                activeSpan,
+                                context.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result == UIThreadOperationStatus.Completed ? span : activeSpan;
                 }
             }
 
-            private static SnapshotSpan GetSpanOfFirstChildWorker(SnapshotSpan activeSpan, CancellationToken cancellationToken)
+            private static SnapshotSpan GetSpanOfFirstChildWorker(
+                SnapshotSpan activeSpan,
+                CancellationToken cancellationToken
+            )
             {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
@@ -182,12 +234,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     }
                 }
 
-                return node == null ? activeSpan : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return node == null
+                    ? activeSpan
+                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfNextSibling(SnapshotSpan activeSpan)
             {
-                using (Logger.LogBlock(FunctionId.TextStructureNavigator_GetSpanOfNextSibling, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TextStructureNavigator_GetSpanOfNextSibling,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var span = default(SnapshotSpan);
                     var result = _uiThreadOperationExecutor.Execute(
@@ -196,15 +255,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         allowCancellation: true,
                         showProgress: false,
                         action: context =>
-                    {
-                        span = GetSpanOfNextSiblingWorker(activeSpan, context.UserCancellationToken);
-                    });
+                        {
+                            span = GetSpanOfNextSiblingWorker(
+                                activeSpan,
+                                context.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result == UIThreadOperationStatus.Completed ? span : activeSpan;
                 }
             }
 
-            private static SnapshotSpan GetSpanOfNextSiblingWorker(SnapshotSpan activeSpan, CancellationToken cancellationToken)
+            private static SnapshotSpan GetSpanOfNextSiblingWorker(
+                SnapshotSpan activeSpan,
+                CancellationToken cancellationToken
+            )
             {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
@@ -215,8 +281,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     if (parent != null)
                     {
                         // Find node immediately after the current in the children collection.
-                        var nodeOrToken = parent.Value
-                            .ChildNodesAndTokens()
+                        var nodeOrToken = parent
+                            .Value.ChildNodesAndTokens()
                             .SkipWhile(child => child != node)
                             .Skip(1)
                             .FirstOrNull();
@@ -227,19 +293,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         }
                         else
                         {
-                            // If this is the last node, move to the parent so that the user can continue 
+                            // If this is the last node, move to the parent so that the user can continue
                             // navigation at the higher level.
                             node = parent.Value;
                         }
                     }
                 }
 
-                return node == null ? activeSpan : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return node == null
+                    ? activeSpan
+                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             public SnapshotSpan GetSpanOfPreviousSibling(SnapshotSpan activeSpan)
             {
-                using (Logger.LogBlock(FunctionId.TextStructureNavigator_GetSpanOfPreviousSibling, CancellationToken.None))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.TextStructureNavigator_GetSpanOfPreviousSibling,
+                        CancellationToken.None
+                    )
+                )
                 {
                     var span = default(SnapshotSpan);
                     var result = _uiThreadOperationExecutor.Execute(
@@ -248,15 +321,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         allowCancellation: true,
                         showProgress: false,
                         action: context =>
-                    {
-                        span = GetSpanOfPreviousSiblingWorker(activeSpan, context.UserCancellationToken);
-                    });
+                        {
+                            span = GetSpanOfPreviousSiblingWorker(
+                                activeSpan,
+                                context.UserCancellationToken
+                            );
+                        }
+                    );
 
                     return result == UIThreadOperationStatus.Completed ? span : activeSpan;
                 }
             }
 
-            private static SnapshotSpan GetSpanOfPreviousSiblingWorker(SnapshotSpan activeSpan, CancellationToken cancellationToken)
+            private static SnapshotSpan GetSpanOfPreviousSiblingWorker(
+                SnapshotSpan activeSpan,
+                CancellationToken cancellationToken
+            )
             {
                 // Find node that covers the entire span.
                 var node = FindLeafNode(activeSpan, cancellationToken);
@@ -267,8 +347,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                     if (parent != null)
                     {
                         // Find node immediately before the current in the children collection.
-                        var nodeOrToken = parent.Value
-                            .ChildNodesAndTokens()
+                        var nodeOrToken = parent
+                            .Value.ChildNodesAndTokens()
                             .Reverse()
                             .SkipWhile(child => child != node)
                             .Skip(1)
@@ -280,14 +360,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
                         }
                         else
                         {
-                            // If this is the first node, move to the parent so that the user can continue 
+                            // If this is the first node, move to the parent so that the user can continue
                             // navigation at the higher level.
                             node = parent.Value;
                         }
                     }
                 }
 
-                return node == null ? activeSpan : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
+                return node == null
+                    ? activeSpan
+                    : node.Value.Span.ToSnapshotSpan(activeSpan.Snapshot);
             }
 
             private static Document GetDocument(SnapshotPoint point)
@@ -304,7 +386,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             /// <summary>
             /// Finds deepest node that covers given <see cref="SnapshotSpan"/>.
             /// </summary>
-            private static SyntaxNodeOrToken? FindLeafNode(SnapshotSpan span, CancellationToken cancellationToken)
+            private static SyntaxNodeOrToken? FindLeafNode(
+                SnapshotSpan span,
+                CancellationToken cancellationToken
+            )
             {
                 if (!TryFindLeafToken(span.Start, out var token, cancellationToken))
                 {
@@ -323,7 +408,11 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.TextStructureNavigation
             /// <summary>
             /// Given position in a text buffer returns the leaf syntax node it belongs to.
             /// </summary>
-            private static bool TryFindLeafToken(SnapshotPoint point, out SyntaxToken token, CancellationToken cancellationToken)
+            private static bool TryFindLeafToken(
+                SnapshotPoint point,
+                out SyntaxToken token,
+                CancellationToken cancellationToken
+            )
             {
                 var syntaxTree = GetDocument(point).GetSyntaxTreeSynchronously(cancellationToken);
                 if (syntaxTree != null)

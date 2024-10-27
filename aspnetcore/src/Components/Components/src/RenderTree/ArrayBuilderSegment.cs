@@ -48,14 +48,13 @@ public readonly struct ArrayBuilderSegment<T> : IEnumerable<T>
     /// </summary>
     /// <param name="index">The index into the segment.</param>
     /// <returns>The array entry at the specified index within the segment.</returns>
-    public T this[int index]
-        => Array[_offset + index];
+    public T this[int index] => Array[_offset + index];
 
-    IEnumerator<T> IEnumerable<T>.GetEnumerator()
-        => ((IEnumerable<T>)new ArraySegment<T>(Array, _offset, _count)).GetEnumerator();
+    IEnumerator<T> IEnumerable<T>.GetEnumerator() =>
+        ((IEnumerable<T>)new ArraySegment<T>(Array, _offset, _count)).GetEnumerator();
 
-    IEnumerator IEnumerable.GetEnumerator()
-        => ((IEnumerable)new ArraySegment<T>(Array, _offset, _count)).GetEnumerator();
+    IEnumerator IEnumerable.GetEnumerator() =>
+        ((IEnumerable)new ArraySegment<T>(Array, _offset, _count)).GetEnumerator();
 
     // TODO: If this assembly later moves to netstandard2.1, consider adding a public
     // GetEnumerator method that returns ArraySegment.Enumerator to avoid boxing.

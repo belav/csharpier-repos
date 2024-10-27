@@ -21,13 +21,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             IEnumerable<SyntaxToken>? tokens = null,
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
-            Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null)
+            Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
+        )
             where TNode : SyntaxNode
         {
             var replacer = new Replacer<TNode>(
-                nodes, computeReplacementNode,
-                tokens, computeReplacementToken,
-                trivia, computeReplacementTrivia);
+                nodes,
+                computeReplacementNode,
+                tokens,
+                computeReplacementToken,
+                trivia,
+                computeReplacementTrivia
+            );
 
             if (replacer.HasWork)
             {
@@ -46,12 +51,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             IEnumerable<SyntaxToken>? tokens = null,
             Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken = null,
             IEnumerable<SyntaxTrivia>? trivia = null,
-            Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null)
+            Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia = null
+        )
         {
             var replacer = new Replacer<SyntaxNode>(
-                nodes, computeReplacementNode,
-                tokens, computeReplacementToken,
-                trivia, computeReplacementTrivia);
+                nodes,
+                computeReplacementNode,
+                tokens,
+                computeReplacementToken,
+                trivia,
+                computeReplacementTrivia
+            );
 
             if (replacer.HasWork)
             {
@@ -63,11 +73,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        private class Replacer<TNode> : CSharpSyntaxRewriter where TNode : SyntaxNode
+        private class Replacer<TNode> : CSharpSyntaxRewriter
+            where TNode : SyntaxNode
         {
             private readonly Func<TNode, TNode, SyntaxNode>? _computeReplacementNode;
             private readonly Func<SyntaxToken, SyntaxToken, SyntaxToken>? _computeReplacementToken;
-            private readonly Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? _computeReplacementTrivia;
+            private readonly Func<
+                SyntaxTrivia,
+                SyntaxTrivia,
+                SyntaxTrivia
+            >? _computeReplacementTrivia;
 
             private readonly HashSet<SyntaxNode> _nodeSet;
             private readonly HashSet<SyntaxToken> _tokenSet;
@@ -84,7 +99,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 IEnumerable<SyntaxToken>? tokens,
                 Func<SyntaxToken, SyntaxToken, SyntaxToken>? computeReplacementToken,
                 IEnumerable<SyntaxTrivia>? trivia,
-                Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia)
+                Func<SyntaxTrivia, SyntaxTrivia, SyntaxTrivia>? computeReplacementTrivia
+            )
             {
                 _computeReplacementNode = computeReplacementNode;
                 _computeReplacementToken = computeReplacementToken;
@@ -95,16 +111,21 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 _triviaSet = trivia != null ? new HashSet<SyntaxTrivia>(trivia) : s_noTrivia;
 
                 _spanSet = new HashSet<TextSpan>(
-                    _nodeSet.Select(n => n.FullSpan).Concat(
-                    _tokenSet.Select(t => t.FullSpan).Concat(
-                    _triviaSet.Select(t => t.FullSpan))));
+                    _nodeSet
+                        .Select(n => n.FullSpan)
+                        .Concat(
+                            _tokenSet
+                                .Select(t => t.FullSpan)
+                                .Concat(_triviaSet.Select(t => t.FullSpan))
+                        )
+                );
 
                 _totalSpan = ComputeTotalSpan(_spanSet);
 
                 _visitIntoStructuredTrivia =
-                    _nodeSet.Any(n => n.IsPartOfStructuredTrivia()) ||
-                    _tokenSet.Any(t => t.IsPartOfStructuredTrivia()) ||
-                    _triviaSet.Any(t => t.IsPartOfStructuredTrivia());
+                    _nodeSet.Any(n => n.IsPartOfStructuredTrivia())
+                    || _tokenSet.Any(t => t.IsPartOfStructuredTrivia())
+                    || _triviaSet.Any(t => t.IsPartOfStructuredTrivia());
 
                 _shouldVisitTrivia = _triviaSet.Count > 0 || _visitIntoStructuredTrivia;
             }
@@ -115,18 +136,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
             public override bool VisitIntoStructuredTrivia
             {
-                get
-                {
-                    return _visitIntoStructuredTrivia;
-                }
+                get { return _visitIntoStructuredTrivia; }
             }
 
             public bool HasWork
             {
-                get
-                {
-                    return _nodeSet.Count + _tokenSet.Count + _triviaSet.Count > 0;
-                }
+                get { return _nodeSet.Count + _tokenSet.Count + _triviaSet.Count > 0; }
             }
 
             private static TextSpan ComputeTotalSpan(IEnumerable<TextSpan> spans)
@@ -218,7 +233,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             {
                 var rewritten = trivia;
 
-                if (this.VisitIntoStructuredTrivia && trivia.HasStructure && this.ShouldVisit(trivia.FullSpan))
+                if (
+                    this.VisitIntoStructuredTrivia
+                    && trivia.HasStructure
+                    && this.ShouldVisit(trivia.FullSpan)
+                )
                 {
                     rewritten = this.VisitTrivia(trivia);
                 }
@@ -232,51 +251,105 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             }
         }
 
-        internal static SyntaxNode ReplaceNodeInList(SyntaxNode root, SyntaxNode originalNode, IEnumerable<SyntaxNode> newNodes)
+        internal static SyntaxNode ReplaceNodeInList(
+            SyntaxNode root,
+            SyntaxNode originalNode,
+            IEnumerable<SyntaxNode> newNodes
+        )
         {
             return new NodeListEditor(originalNode, newNodes, ListEditKind.Replace).Visit(root);
         }
 
-        internal static SyntaxNode InsertNodeInList(SyntaxNode root, SyntaxNode nodeInList, IEnumerable<SyntaxNode> nodesToInsert, bool insertBefore)
+        internal static SyntaxNode InsertNodeInList(
+            SyntaxNode root,
+            SyntaxNode nodeInList,
+            IEnumerable<SyntaxNode> nodesToInsert,
+            bool insertBefore
+        )
         {
-            return new NodeListEditor(nodeInList, nodesToInsert, insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter).Visit(root);
+            return new NodeListEditor(
+                nodeInList,
+                nodesToInsert,
+                insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
+            ).Visit(root);
         }
 
-        public static SyntaxNode ReplaceTokenInList(SyntaxNode root, SyntaxToken tokenInList, IEnumerable<SyntaxToken> newTokens)
+        public static SyntaxNode ReplaceTokenInList(
+            SyntaxNode root,
+            SyntaxToken tokenInList,
+            IEnumerable<SyntaxToken> newTokens
+        )
         {
             return new TokenListEditor(tokenInList, newTokens, ListEditKind.Replace).Visit(root);
         }
 
-        public static SyntaxNode InsertTokenInList(SyntaxNode root, SyntaxToken tokenInList, IEnumerable<SyntaxToken> newTokens, bool insertBefore)
+        public static SyntaxNode InsertTokenInList(
+            SyntaxNode root,
+            SyntaxToken tokenInList,
+            IEnumerable<SyntaxToken> newTokens,
+            bool insertBefore
+        )
         {
-            return new TokenListEditor(tokenInList, newTokens, insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter).Visit(root);
+            return new TokenListEditor(
+                tokenInList,
+                newTokens,
+                insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
+            ).Visit(root);
         }
 
-        public static SyntaxNode ReplaceTriviaInList(SyntaxNode root, SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia)
+        public static SyntaxNode ReplaceTriviaInList(
+            SyntaxNode root,
+            SyntaxTrivia triviaInList,
+            IEnumerable<SyntaxTrivia> newTrivia
+        )
         {
             return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).Visit(root);
         }
 
-        public static SyntaxNode InsertTriviaInList(SyntaxNode root, SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia, bool insertBefore)
+        public static SyntaxNode InsertTriviaInList(
+            SyntaxNode root,
+            SyntaxTrivia triviaInList,
+            IEnumerable<SyntaxTrivia> newTrivia,
+            bool insertBefore
+        )
         {
-            return new TriviaListEditor(triviaInList, newTrivia, insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter).Visit(root);
+            return new TriviaListEditor(
+                triviaInList,
+                newTrivia,
+                insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
+            ).Visit(root);
         }
 
-        public static SyntaxToken ReplaceTriviaInList(SyntaxToken root, SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia)
+        public static SyntaxToken ReplaceTriviaInList(
+            SyntaxToken root,
+            SyntaxTrivia triviaInList,
+            IEnumerable<SyntaxTrivia> newTrivia
+        )
         {
-            return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).VisitToken(root);
+            return new TriviaListEditor(triviaInList, newTrivia, ListEditKind.Replace).VisitToken(
+                root
+            );
         }
 
-        public static SyntaxToken InsertTriviaInList(SyntaxToken root, SyntaxTrivia triviaInList, IEnumerable<SyntaxTrivia> newTrivia, bool insertBefore)
+        public static SyntaxToken InsertTriviaInList(
+            SyntaxToken root,
+            SyntaxTrivia triviaInList,
+            IEnumerable<SyntaxTrivia> newTrivia,
+            bool insertBefore
+        )
         {
-            return new TriviaListEditor(triviaInList, newTrivia, insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter).VisitToken(root);
+            return new TriviaListEditor(
+                triviaInList,
+                newTrivia,
+                insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
+            ).VisitToken(root);
         }
 
         private enum ListEditKind
         {
             InsertBefore,
             InsertAfter,
-            Replace
+            Replace,
         }
 
         private static InvalidOperationException GetItemNotListElementException()
@@ -296,7 +369,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 TextSpan elementSpan,
                 ListEditKind editKind,
                 bool visitTrivia,
-                bool visitIntoStructuredTrivia)
+                bool visitIntoStructuredTrivia
+            )
             {
                 _elementSpan = elementSpan;
                 this.editKind = editKind;
@@ -306,10 +380,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
             public override bool VisitIntoStructuredTrivia
             {
-                get
-                {
-                    return _visitIntoStructuredTrivia;
-                }
+                get { return _visitIntoStructuredTrivia; }
             }
 
             private bool ShouldVisit(TextSpan span)
@@ -356,7 +427,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             {
                 var rewritten = trivia;
 
-                if (this.VisitIntoStructuredTrivia && trivia.HasStructure && this.ShouldVisit(trivia.FullSpan))
+                if (
+                    this.VisitIntoStructuredTrivia
+                    && trivia.HasStructure
+                    && this.ShouldVisit(trivia.FullSpan)
+                )
                 {
                     rewritten = this.VisitTrivia(trivia);
                 }
@@ -373,7 +448,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             public NodeListEditor(
                 SyntaxNode originalNode,
                 IEnumerable<SyntaxNode> replacementNodes,
-                ListEditKind editKind)
+                ListEditKind editKind
+            )
                 : base(originalNode.Span, editKind, false, originalNode.IsPartOfStructuredTrivia())
             {
                 _originalNode = originalNode;
@@ -391,7 +467,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                 return base.Visit(node);
             }
 
-            public override SeparatedSyntaxList<TNode> VisitList<TNode>(SeparatedSyntaxList<TNode> list)
+            public override SeparatedSyntaxList<TNode> VisitList<TNode>(
+                SeparatedSyntaxList<TNode> list
+            )
             {
                 if (_originalNode is TNode)
                 {
@@ -401,7 +479,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         switch (this.editKind)
                         {
                             case ListEditKind.Replace:
-                                return list.ReplaceRange((TNode)_originalNode, _newNodes.Cast<TNode>());
+                                return list.ReplaceRange(
+                                    (TNode)_originalNode,
+                                    _newNodes.Cast<TNode>()
+                                );
 
                             case ListEditKind.InsertAfter:
                                 return list.InsertRange(index + 1, _newNodes.Cast<TNode>());
@@ -425,7 +506,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
                         switch (this.editKind)
                         {
                             case ListEditKind.Replace:
-                                return list.ReplaceRange((TNode)_originalNode, _newNodes.Cast<TNode>());
+                                return list.ReplaceRange(
+                                    (TNode)_originalNode,
+                                    _newNodes.Cast<TNode>()
+                                );
 
                             case ListEditKind.InsertAfter:
                                 return list.InsertRange(index + 1, _newNodes.Cast<TNode>());
@@ -448,8 +532,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             public TokenListEditor(
                 SyntaxToken originalToken,
                 IEnumerable<SyntaxToken> newTokens,
-                ListEditKind editKind)
-                : base(originalToken.Span, editKind, false, originalToken.IsPartOfStructuredTrivia())
+                ListEditKind editKind
+            )
+                : base(
+                    originalToken.Span,
+                    editKind,
+                    false,
+                    originalToken.IsPartOfStructuredTrivia()
+                )
             {
                 _originalToken = originalToken;
                 _newTokens = newTokens;
@@ -495,8 +585,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
             public TriviaListEditor(
                 SyntaxTrivia originalTrivia,
                 IEnumerable<SyntaxTrivia> newTrivia,
-                ListEditKind editKind)
-                : base(originalTrivia.Span, editKind, true, originalTrivia.IsPartOfStructuredTrivia())
+                ListEditKind editKind
+            )
+                : base(
+                    originalTrivia.Span,
+                    editKind,
+                    true,
+                    originalTrivia.IsPartOfStructuredTrivia()
+                )
             {
                 _originalTrivia = originalTrivia;
                 _newTrivia = newTrivia;

@@ -24,23 +24,18 @@ namespace System.Security.Cryptography.Pkcs.Asn1
         {
             writer.PushSequence(tag);
 
-
             if (CertificateSet != null)
             {
-
                 writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
                 for (int i = 0; i < CertificateSet.Length; i++)
                 {
                     CertificateSet[i].Encode(writer);
                 }
                 writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
-
             }
-
 
             if (RevocationInfoChoices != null)
             {
-
                 writer.PushSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
                 for (int i = 0; i < RevocationInfoChoices.Length; i++)
                 {
@@ -54,18 +49,24 @@ namespace System.Security.Cryptography.Pkcs.Asn1
                     }
                 }
                 writer.PopSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
-
             }
 
             writer.PopSequence(tag);
         }
 
-        internal static OriginatorInfoAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static OriginatorInfoAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             return Decode(Asn1Tag.Sequence, encoded, ruleSet);
         }
 
-        internal static OriginatorInfoAsn Decode(Asn1Tag expectedTag, ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static OriginatorInfoAsn Decode(
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -81,12 +82,21 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out OriginatorInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out OriginatorInfoAsn decoded
+        )
         {
             Decode(ref reader, Asn1Tag.Sequence, rebind, out decoded);
         }
 
-        internal static void Decode(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out OriginatorInfoAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out OriginatorInfoAsn decoded
+        )
         {
             try
             {
@@ -98,7 +108,12 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, Asn1Tag expectedTag, ReadOnlyMemory<byte> rebind, out OriginatorInfoAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            Asn1Tag expectedTag,
+            ReadOnlyMemory<byte> rebind,
+            out OriginatorInfoAsn decoded
+        )
         {
             decoded = default;
             AsnValueReader sequenceReader = reader.ReadSequence(expectedTag);
@@ -107,49 +122,63 @@ namespace System.Security.Cryptography.Pkcs.Asn1
             int offset;
             ReadOnlySpan<byte> tmpSpan;
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0))
+            )
             {
-
                 // Decode SEQUENCE OF for CertificateSet
                 {
-                    collectionReader = sequenceReader.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 0));
-                    var tmpList = new List<System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn>();
+                    collectionReader = sequenceReader.ReadSetOf(
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
+                    var tmpList =
+                        new List<System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn>();
                     System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn tmpItem;
 
                     while (collectionReader.HasData)
                     {
-                        System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn.Decode(ref collectionReader, rebind, out tmpItem);
+                        System.Security.Cryptography.Pkcs.Asn1.CertificateChoiceAsn.Decode(
+                            ref collectionReader,
+                            rebind,
+                            out tmpItem
+                        );
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.CertificateSet = tmpList.ToArray();
                 }
-
             }
 
-
-            if (sequenceReader.HasData && sequenceReader.PeekTag().HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
+            if (
+                sequenceReader.HasData
+                && sequenceReader
+                    .PeekTag()
+                    .HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1))
+            )
             {
-
                 // Decode SEQUENCE OF for RevocationInfoChoices
                 {
-                    collectionReader = sequenceReader.ReadSetOf(new Asn1Tag(TagClass.ContextSpecific, 1));
+                    collectionReader = sequenceReader.ReadSetOf(
+                        new Asn1Tag(TagClass.ContextSpecific, 1)
+                    );
                     var tmpList = new List<ReadOnlyMemory<byte>>();
                     ReadOnlyMemory<byte> tmpItem;
 
                     while (collectionReader.HasData)
                     {
                         tmpSpan = collectionReader.ReadEncodedValue();
-                        tmpItem = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                        tmpItem = rebindSpan.Overlaps(tmpSpan, out offset)
+                            ? rebind.Slice(offset, tmpSpan.Length)
+                            : tmpSpan.ToArray();
                         tmpList.Add(tmpItem);
                     }
 
                     decoded.RevocationInfoChoices = tmpList.ToArray();
                 }
-
             }
-
 
             sequenceReader.ThrowIfNotEmpty();
         }

@@ -60,10 +60,12 @@ namespace System.Diagnostics.Metrics
             /// Indicates diagnostics messages from MetricsEventSource should be included.
             /// </summary>
             public const EventKeywords Messages = (EventKeywords)0x1;
+
             /// <summary>
             /// Indicates that all the time series data points should be included
             /// </summary>
             public const EventKeywords TimeSeriesValues = (EventKeywords)0x2;
+
             /// <summary>
             /// Indicates that instrument published notifications should be included
             /// </summary>
@@ -97,52 +99,132 @@ namespace System.Diagnostics.Metrics
 
         [Event(2, Keywords = Keywords.TimeSeriesValues)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void CollectionStart(string sessionId, DateTime intervalStartTime, DateTime intervalEndTime)
+        public void CollectionStart(
+            string sessionId,
+            DateTime intervalStartTime,
+            DateTime intervalEndTime
+        )
         {
             WriteEvent(2, sessionId, intervalStartTime, intervalEndTime);
         }
 
         [Event(3, Keywords = Keywords.TimeSeriesValues)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void CollectionStop(string sessionId, DateTime intervalStartTime, DateTime intervalEndTime)
+        public void CollectionStop(
+            string sessionId,
+            DateTime intervalStartTime,
+            DateTime intervalEndTime
+        )
         {
             WriteEvent(3, sessionId, intervalStartTime, intervalEndTime);
         }
 
-        [Event(4, Keywords = Keywords.TimeSeriesValues, Version=1)]
+        [Event(4, Keywords = Keywords.TimeSeriesValues, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void CounterRateValuePublished(string sessionId, string meterName, string? meterVersion, string instrumentName, string? unit, string tags, string rate, string value)
+        public void CounterRateValuePublished(
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string? unit,
+            string tags,
+            string rate,
+            string value
+        )
         {
-            WriteEvent(4, sessionId, meterName, meterVersion ?? "", instrumentName, unit ?? "", tags, rate, value);
+            WriteEvent(
+                4,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                unit ?? "",
+                tags,
+                rate,
+                value
+            );
         }
 
         [Event(5, Keywords = Keywords.TimeSeriesValues)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void GaugeValuePublished(string sessionId, string meterName, string? meterVersion, string instrumentName, string? unit, string tags, string lastValue)
+        public void GaugeValuePublished(
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string? unit,
+            string tags,
+            string lastValue
+        )
         {
-            WriteEvent(5, sessionId, meterName, meterVersion ?? "", instrumentName, unit ?? "", tags, lastValue);
+            WriteEvent(
+                5,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                unit ?? "",
+                tags,
+                lastValue
+            );
         }
 
-        [Event(6, Keywords = Keywords.TimeSeriesValues, Version=1)]
+        [Event(6, Keywords = Keywords.TimeSeriesValues, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void HistogramValuePublished(string sessionId, string meterName, string? meterVersion, string instrumentName, string? unit, string tags, string quantiles, int count, double sum)
+        public void HistogramValuePublished(
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string? unit,
+            string tags,
+            string quantiles,
+            int count,
+            double sum
+        )
         {
-            WriteEvent(6, sessionId, meterName, meterVersion ?? "", instrumentName, unit ?? "", tags, quantiles, count, sum);
+            WriteEvent(
+                6,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                unit ?? "",
+                tags,
+                quantiles,
+                count,
+                sum
+            );
         }
 
         // Sent when we begin to monitor the value of a instrument, either because new session filter arguments changed subscriptions
@@ -150,49 +232,82 @@ namespace System.Diagnostics.Metrics
         // for the same named instrument.
         [Event(7, Keywords = Keywords.TimeSeriesValues, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
         public void BeginInstrumentReporting(
-                        string sessionId,
-                        string meterName,
-                        string? meterVersion,
-                        string instrumentName,
-                        string instrumentType,
-                        string? unit,
-                        string? description,
-                        string instrumentTags,
-                        string meterTags,
-                        string meterScopeHash)
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string instrumentType,
+            string? unit,
+            string? description,
+            string instrumentTags,
+            string meterTags,
+            string meterScopeHash
+        )
         {
-            WriteEvent(7, sessionId, meterName, meterVersion ?? "", instrumentName, instrumentType, unit ?? "", description ?? "",
-                    instrumentTags, meterTags, meterScopeHash);
+            WriteEvent(
+                7,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                instrumentType,
+                unit ?? "",
+                description ?? "",
+                instrumentTags,
+                meterTags,
+                meterScopeHash
+            );
         }
 
         // Sent when we stop monitoring the value of a instrument, either because new session filter arguments changed subscriptions
         // or because the Meter has been disposed.
         [Event(8, Keywords = Keywords.TimeSeriesValues, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
         public void EndInstrumentReporting(
-                        string sessionId,
-                        string meterName,
-                        string? meterVersion,
-                        string instrumentName,
-                        string instrumentType,
-                        string? unit,
-                        string? description,
-                        string instrumentTags,
-                        string meterTags,
-                        string meterScopeHash)
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string instrumentType,
+            string? unit,
+            string? description,
+            string instrumentTags,
+            string meterTags,
+            string meterScopeHash
+        )
         {
-            WriteEvent(8, sessionId, meterName, meterVersion ?? "", instrumentName, instrumentType, unit ?? "", description ?? "",
-                    instrumentTags, meterTags, meterScopeHash);
+            WriteEvent(
+                8,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                instrumentType,
+                unit ?? "",
+                description ?? "",
+                instrumentTags,
+                meterTags,
+                meterScopeHash
+            );
         }
 
-        [Event(9, Keywords = Keywords.TimeSeriesValues | Keywords.Messages | Keywords.InstrumentPublishing)]
+        [Event(
+            9,
+            Keywords = Keywords.TimeSeriesValues | Keywords.Messages | Keywords.InstrumentPublishing
+        )]
         public void Error(string sessionId, string errorMessage)
         {
             WriteEvent(9, sessionId, errorMessage);
@@ -206,23 +321,38 @@ namespace System.Diagnostics.Metrics
 
         [Event(11, Keywords = Keywords.InstrumentPublishing, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
         public void InstrumentPublished(
-                        string sessionId,
-                        string meterName,
-                        string? meterVersion,
-                        string instrumentName,
-                        string instrumentType,
-                        string? unit,
-                        string? description,
-                        string instrumentTags,
-                        string meterTags,
-                        string meterScopeHash)
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string instrumentType,
+            string? unit,
+            string? description,
+            string instrumentTags,
+            string meterTags,
+            string meterScopeHash
+        )
         {
-            WriteEvent(11, sessionId, meterName, meterVersion ?? "", instrumentName, instrumentType, unit ?? "", description ?? "",
-                    instrumentTags, meterTags, meterScopeHash);
+            WriteEvent(
+                11,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                instrumentType,
+                unit ?? "",
+                description ?? "",
+                instrumentTags,
+                meterTags,
+                meterScopeHash
+            );
         }
 
         [Event(12, Keywords = Keywords.TimeSeriesValues)]
@@ -243,30 +373,75 @@ namespace System.Diagnostics.Metrics
             WriteEvent(14, sessionId, errorMessage);
         }
 
-        [Event(15, Keywords = Keywords.TimeSeriesValues | Keywords.Messages | Keywords.InstrumentPublishing)]
+        [Event(
+            15,
+            Keywords = Keywords.TimeSeriesValues | Keywords.Messages | Keywords.InstrumentPublishing
+        )]
         public void MultipleSessionsNotSupportedError(string runningSessionId)
         {
             WriteEvent(15, runningSessionId);
         }
 
-        [Event(16, Keywords = Keywords.TimeSeriesValues, Version=1)]
+        [Event(16, Keywords = Keywords.TimeSeriesValues, Version = 1)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                                      Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void UpDownCounterRateValuePublished(string sessionId, string meterName, string? meterVersion, string instrumentName, string? unit, string tags, string rate, string value)
+        public void UpDownCounterRateValuePublished(
+            string sessionId,
+            string meterName,
+            string? meterVersion,
+            string instrumentName,
+            string? unit,
+            string tags,
+            string rate,
+            string value
+        )
         {
-            WriteEvent(16, sessionId, meterName, meterVersion ?? "", instrumentName, unit ?? "", tags, rate, value);
+            WriteEvent(
+                16,
+                sessionId,
+                meterName,
+                meterVersion ?? "",
+                instrumentName,
+                unit ?? "",
+                tags,
+                rate,
+                value
+            );
         }
 
         [Event(17, Keywords = Keywords.TimeSeriesValues)]
 #if !NET8_0_OR_GREATER
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-                            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "This calls WriteEvent with all primitive arguments which is safe. Primitives are always serialized properly."
+        )]
 #endif
-        public void MultipleSessionsConfiguredIncorrectlyError(string clientId, string expectedMaxHistograms, string actualMaxHistograms, string expectedMaxTimeSeries, string actualMaxTimeSeries, string expectedRefreshInterval, string actualRefreshInterval)
+        public void MultipleSessionsConfiguredIncorrectlyError(
+            string clientId,
+            string expectedMaxHistograms,
+            string actualMaxHistograms,
+            string expectedMaxTimeSeries,
+            string actualMaxTimeSeries,
+            string expectedRefreshInterval,
+            string actualRefreshInterval
+        )
         {
-            WriteEvent(17, clientId, expectedMaxHistograms, actualMaxHistograms, expectedMaxTimeSeries, actualMaxTimeSeries, expectedRefreshInterval, actualRefreshInterval);
+            WriteEvent(
+                17,
+                clientId,
+                expectedMaxHistograms,
+                actualMaxHistograms,
+                expectedMaxTimeSeries,
+                actualMaxTimeSeries,
+                expectedRefreshInterval,
+                actualRefreshInterval
+            );
         }
 
         /// <summary>
@@ -298,12 +473,16 @@ namespace System.Diagnostics.Metrics
                 Parent = parent;
             }
 
-            public MetricsEventSource Parent { get; private set;}
+            public MetricsEventSource Parent { get; private set; }
 
             public bool IsSharedSession(string commandSessionId)
             {
                 // commandSessionId may be null if it's the disable command
-                return _sessionId.Equals(SharedSessionId) && (string.IsNullOrEmpty(commandSessionId) || commandSessionId.Equals(SharedSessionId));
+                return _sessionId.Equals(SharedSessionId)
+                    && (
+                        string.IsNullOrEmpty(commandSessionId)
+                        || commandSessionId.Equals(SharedSessionId)
+                    );
             }
 
             public void OnEventCommand(EventCommandEventArgs command)
@@ -319,20 +498,29 @@ namespace System.Diagnostics.Metrics
                         // This limitation shouldn't really matter because browser also doesn't support out-of-proc EventSource communication
                         // which is the intended scenario for this EventSource. If it matters in the future AggregationManager can be
                         // modified to have some other fallback path that works for browser.
-                        Parent.Error("", "System.Diagnostics.Metrics EventSource not supported on browser");
+                        Parent.Error(
+                            "",
+                            "System.Diagnostics.Metrics EventSource not supported on browser"
+                        );
                         return;
                     }
 #endif
 
                     string commandSessionId = GetSessionId(command);
 
-                    if ((command.Command == EventCommand.Update
-                        || command.Command == EventCommand.Disable
-                        || command.Command == EventCommand.Enable)
-                        && _aggregationManager != null)
+                    if (
+                        (
+                            command.Command == EventCommand.Update
+                            || command.Command == EventCommand.Disable
+                            || command.Command == EventCommand.Enable
+                        )
+                        && _aggregationManager != null
+                    )
                     {
-                        if (command.Command == EventCommand.Update
-                            || command.Command == EventCommand.Enable)
+                        if (
+                            command.Command == EventCommand.Update
+                            || command.Command == EventCommand.Enable
+                        )
                         {
                             IncrementRefCount(commandSessionId, command);
                         }
@@ -354,11 +542,29 @@ namespace System.Diagnostics.Metrics
                             double refreshInterval;
                             lock (_aggregationManager)
                             {
-                                validShared = SetSharedRefreshIntervalSecs(command.Arguments!, _aggregationManager.CollectionPeriod.TotalSeconds, out refreshInterval) ? validShared : false;
+                                validShared = SetSharedRefreshIntervalSecs(
+                                    command.Arguments!,
+                                    _aggregationManager.CollectionPeriod.TotalSeconds,
+                                    out refreshInterval
+                                )
+                                    ? validShared
+                                    : false;
                             }
 
-                            validShared = SetSharedMaxHistograms(command.Arguments!, _aggregationManager.MaxHistograms, out int maxHistograms) ? validShared : false;
-                            validShared = SetSharedMaxTimeSeries(command.Arguments!, _aggregationManager.MaxTimeSeries, out int maxTimeSeries) ? validShared : false;
+                            validShared = SetSharedMaxHistograms(
+                                command.Arguments!,
+                                _aggregationManager.MaxHistograms,
+                                out int maxHistograms
+                            )
+                                ? validShared
+                                : false;
+                            validShared = SetSharedMaxTimeSeries(
+                                command.Arguments!,
+                                _aggregationManager.MaxTimeSeries,
+                                out int maxTimeSeries
+                            )
+                                ? validShared
+                                : false;
 
                             if (command.Command != EventCommand.Disable)
                             {
@@ -375,12 +581,25 @@ namespace System.Diagnostics.Metrics
                                 else
                                 {
                                     // If the clientId protocol is not followed, we can't tell which session is configured incorrectly
-                                    if (command.Arguments!.TryGetValue(ClientIdKey, out string? clientId))
+                                    if (
+                                        command.Arguments!.TryGetValue(
+                                            ClientIdKey,
+                                            out string? clientId
+                                        )
+                                    )
                                     {
                                         lock (_aggregationManager)
                                         {
                                             // Use ClientId to identify the session that is not configured correctly (since the sessionId is just SHARED)
-                                            Parent.MultipleSessionsConfiguredIncorrectlyError(clientId!, _aggregationManager.MaxHistograms.ToString(), maxHistograms.ToString(), _aggregationManager.MaxTimeSeries.ToString(), maxTimeSeries.ToString(), _aggregationManager.CollectionPeriod.TotalSeconds.ToString(), refreshInterval.ToString());
+                                            Parent.MultipleSessionsConfiguredIncorrectlyError(
+                                                clientId!,
+                                                _aggregationManager.MaxHistograms.ToString(),
+                                                maxHistograms.ToString(),
+                                                _aggregationManager.MaxTimeSeries.ToString(),
+                                                maxTimeSeries.ToString(),
+                                                _aggregationManager.CollectionPeriod.TotalSeconds.ToString(),
+                                                refreshInterval.ToString()
+                                            );
                                         }
                                     }
 
@@ -390,7 +609,10 @@ namespace System.Diagnostics.Metrics
                         }
                         else
                         {
-                            if (command.Command == EventCommand.Enable || command.Command == EventCommand.Update)
+                            if (
+                                command.Command == EventCommand.Enable
+                                || command.Command == EventCommand.Update
+                            )
                             {
                                 // trying to add more sessions is not supported for unshared sessions
                                 // EventSource doesn't provide an API that allows us to enumerate the listeners'
@@ -413,43 +635,109 @@ namespace System.Diagnostics.Metrics
                             }
                         }
                     }
-                    if ((command.Command == EventCommand.Update || command.Command == EventCommand.Enable) &&
-                        command.Arguments != null)
+                    if (
+                        (
+                            command.Command == EventCommand.Update
+                            || command.Command == EventCommand.Enable
+                        )
+                        && command.Arguments != null
+                    )
                     {
                         IncrementRefCount(commandSessionId, command);
 
                         _sessionId = commandSessionId;
 
                         double defaultIntervalSecs = 1;
-                        Debug.Assert(AggregationManager.MinCollectionTimeSecs <= defaultIntervalSecs);
-                        SetRefreshIntervalSecs(command.Arguments!, AggregationManager.MinCollectionTimeSecs, defaultIntervalSecs, out double refreshIntervalSecs);
+                        Debug.Assert(
+                            AggregationManager.MinCollectionTimeSecs <= defaultIntervalSecs
+                        );
+                        SetRefreshIntervalSecs(
+                            command.Arguments!,
+                            AggregationManager.MinCollectionTimeSecs,
+                            defaultIntervalSecs,
+                            out double refreshIntervalSecs
+                        );
 
                         const int defaultMaxTimeSeries = 1000;
-                        SetUniqueMaxTimeSeries(command.Arguments!, defaultMaxTimeSeries, out int maxTimeSeries);
+                        SetUniqueMaxTimeSeries(
+                            command.Arguments!,
+                            defaultMaxTimeSeries,
+                            out int maxTimeSeries
+                        );
 
                         const int defaultMaxHistograms = 20;
-                        SetUniqueMaxHistograms(command.Arguments!, defaultMaxHistograms, out int maxHistograms);
+                        SetUniqueMaxHistograms(
+                            command.Arguments!,
+                            defaultMaxHistograms,
+                            out int maxHistograms
+                        );
 
                         string sessionId = _sessionId;
                         _aggregationManager = new AggregationManager(
                             maxTimeSeries,
                             maxHistograms,
                             (i, s) => TransmitMetricValue(i, s, sessionId),
-                            (startIntervalTime, endIntervalTime) => Parent.CollectionStart(sessionId, startIntervalTime, endIntervalTime),
-                            (startIntervalTime, endIntervalTime) => Parent.CollectionStop(sessionId, startIntervalTime, endIntervalTime),
-                            i => Parent.BeginInstrumentReporting(sessionId, i.Meter.Name, i.Meter.Version, i.Name, i.GetType().Name, i.Unit, i.Description,
-                                    FormatTags(i.Tags), FormatTags(i.Meter.Tags), FormatScopeHash(i.Meter.Scope)),
-                            i => Parent.EndInstrumentReporting(sessionId, i.Meter.Name, i.Meter.Version, i.Name, i.GetType().Name, i.Unit, i.Description,
-                                    FormatTags(i.Tags), FormatTags(i.Meter.Tags), FormatScopeHash(i.Meter.Scope)),
-                            i => Parent.InstrumentPublished(sessionId, i.Meter.Name, i.Meter.Version, i.Name, i.GetType().Name, i.Unit, i.Description,
-                                    FormatTags(i.Tags), FormatTags(i.Meter.Tags), FormatScopeHash(i.Meter.Scope)),
+                            (startIntervalTime, endIntervalTime) =>
+                                Parent.CollectionStart(
+                                    sessionId,
+                                    startIntervalTime,
+                                    endIntervalTime
+                                ),
+                            (startIntervalTime, endIntervalTime) =>
+                                Parent.CollectionStop(
+                                    sessionId,
+                                    startIntervalTime,
+                                    endIntervalTime
+                                ),
+                            i =>
+                                Parent.BeginInstrumentReporting(
+                                    sessionId,
+                                    i.Meter.Name,
+                                    i.Meter.Version,
+                                    i.Name,
+                                    i.GetType().Name,
+                                    i.Unit,
+                                    i.Description,
+                                    FormatTags(i.Tags),
+                                    FormatTags(i.Meter.Tags),
+                                    FormatScopeHash(i.Meter.Scope)
+                                ),
+                            i =>
+                                Parent.EndInstrumentReporting(
+                                    sessionId,
+                                    i.Meter.Name,
+                                    i.Meter.Version,
+                                    i.Name,
+                                    i.GetType().Name,
+                                    i.Unit,
+                                    i.Description,
+                                    FormatTags(i.Tags),
+                                    FormatTags(i.Meter.Tags),
+                                    FormatScopeHash(i.Meter.Scope)
+                                ),
+                            i =>
+                                Parent.InstrumentPublished(
+                                    sessionId,
+                                    i.Meter.Name,
+                                    i.Meter.Version,
+                                    i.Name,
+                                    i.GetType().Name,
+                                    i.Unit,
+                                    i.Description,
+                                    FormatTags(i.Tags),
+                                    FormatTags(i.Meter.Tags),
+                                    FormatScopeHash(i.Meter.Scope)
+                                ),
                             () => Parent.InitialInstrumentEnumerationComplete(sessionId),
                             e => Parent.Error(sessionId, e.ToString()),
                             () => Parent.TimeSeriesLimitReached(sessionId),
                             () => Parent.HistogramLimitReached(sessionId),
-                            e => Parent.ObservableInstrumentCallbackError(sessionId, e.ToString()));
+                            e => Parent.ObservableInstrumentCallbackError(sessionId, e.ToString())
+                        );
 
-                        _aggregationManager.SetCollectionPeriod(TimeSpan.FromSeconds(refreshIntervalSecs));
+                        _aggregationManager.SetCollectionPeriod(
+                            TimeSpan.FromSeconds(refreshIntervalSecs)
+                        );
 
                         if (ParseMetrics(command.Arguments!, out string? metricsSpecs))
                         {
@@ -468,11 +756,18 @@ namespace System.Diagnostics.Metrics
             private bool ShouldDisable(EventCommand command)
             {
                 return command == EventCommand.Disable
-                    && ((!_disabledRefCount && Interlocked.Decrement(ref _sharedSessionRefCount) == 0)
-                    || !Parent.IsEnabled());
+                    && (
+                        (
+                            !_disabledRefCount
+                            && Interlocked.Decrement(ref _sharedSessionRefCount) == 0
+                        ) || !Parent.IsEnabled()
+                    );
             }
 
-            private bool ParseMetrics(IDictionary<string, string> arguments, out string? metricsSpecs)
+            private bool ParseMetrics(
+                IDictionary<string, string> arguments,
+                out string? metricsSpecs
+            )
             {
                 if (arguments.TryGetValue("Metrics", out metricsSpecs))
                 {
@@ -487,7 +782,9 @@ namespace System.Diagnostics.Metrics
             private void InvalidateRefCounting()
             {
                 _disabledRefCount = true;
-                Parent.Message($"{ClientIdKey} not provided; session will remain active indefinitely.");
+                Parent.Message(
+                    $"{ClientIdKey} not provided; session will remain active indefinitely."
+                );
             }
 
             private void IncrementRefCount(string clientId, EventCommandEventArgs command)
@@ -498,7 +795,10 @@ namespace System.Diagnostics.Metrics
                 // multiple Enables coming from the same client. This will cause the session to remain active indefinitely.
                 if (clientId.Equals(SharedSessionId))
                 {
-                    if (command.Arguments!.TryGetValue(ClientIdKey, out string? clientIdArg) && !string.IsNullOrEmpty(clientIdArg))
+                    if (
+                        command.Arguments!.TryGetValue(ClientIdKey, out string? clientIdArg)
+                        && !string.IsNullOrEmpty(clientIdArg)
+                    )
                     {
                         clientId = clientIdArg!;
                     }
@@ -515,34 +815,82 @@ namespace System.Diagnostics.Metrics
                 }
             }
 
-            private bool SetSharedMaxTimeSeries(IDictionary<string, string> arguments, int sharedValue, out int maxTimeSeries)
+            private bool SetSharedMaxTimeSeries(
+                IDictionary<string, string> arguments,
+                int sharedValue,
+                out int maxTimeSeries
+            )
             {
-                return SetMaxValue(arguments, MaxTimeSeriesKey, SharedValueDescription, sharedValue, out maxTimeSeries);
+                return SetMaxValue(
+                    arguments,
+                    MaxTimeSeriesKey,
+                    SharedValueDescription,
+                    sharedValue,
+                    out maxTimeSeries
+                );
             }
 
-            private void SetUniqueMaxTimeSeries(IDictionary<string, string> arguments, int defaultValue, out int maxTimeSeries)
+            private void SetUniqueMaxTimeSeries(
+                IDictionary<string, string> arguments,
+                int defaultValue,
+                out int maxTimeSeries
+            )
             {
-                _ = SetMaxValue(arguments, MaxTimeSeriesKey, DefaultValueDescription, defaultValue, out maxTimeSeries);
+                _ = SetMaxValue(
+                    arguments,
+                    MaxTimeSeriesKey,
+                    DefaultValueDescription,
+                    defaultValue,
+                    out maxTimeSeries
+                );
             }
 
-            private bool SetSharedMaxHistograms(IDictionary<string, string> arguments, int sharedValue, out int maxHistograms)
+            private bool SetSharedMaxHistograms(
+                IDictionary<string, string> arguments,
+                int sharedValue,
+                out int maxHistograms
+            )
             {
-                return SetMaxValue(arguments, MaxHistogramsKey, SharedValueDescription, sharedValue, out maxHistograms);
+                return SetMaxValue(
+                    arguments,
+                    MaxHistogramsKey,
+                    SharedValueDescription,
+                    sharedValue,
+                    out maxHistograms
+                );
             }
 
-            private void SetUniqueMaxHistograms(IDictionary<string, string> arguments, int defaultValue, out int maxHistograms)
+            private void SetUniqueMaxHistograms(
+                IDictionary<string, string> arguments,
+                int defaultValue,
+                out int maxHistograms
+            )
             {
-                _ = SetMaxValue(arguments, MaxHistogramsKey, DefaultValueDescription, defaultValue, out maxHistograms);
+                _ = SetMaxValue(
+                    arguments,
+                    MaxHistogramsKey,
+                    DefaultValueDescription,
+                    defaultValue,
+                    out maxHistograms
+                );
             }
 
-            private bool SetMaxValue(IDictionary<string, string> arguments, string argumentsKey, string valueDescriptor, int defaultValue, out int maxValue)
+            private bool SetMaxValue(
+                IDictionary<string, string> arguments,
+                string argumentsKey,
+                string valueDescriptor,
+                int defaultValue,
+                out int maxValue
+            )
             {
                 if (arguments.TryGetValue(argumentsKey, out string? maxString))
                 {
                     Parent.Message($"{argumentsKey} argument received: {maxString}");
                     if (!int.TryParse(maxString, out maxValue))
                     {
-                        Parent.Message($"Failed to parse {argumentsKey}. Using {valueDescriptor} {defaultValue}");
+                        Parent.Message(
+                            $"Failed to parse {argumentsKey}. Using {valueDescriptor} {defaultValue}"
+                        );
                         maxValue = defaultValue;
                     }
                     else if (maxValue != defaultValue)
@@ -554,27 +902,54 @@ namespace System.Diagnostics.Metrics
                 }
                 else
                 {
-                    Parent.Message($"No {argumentsKey} argument received. Using {valueDescriptor} {defaultValue}");
+                    Parent.Message(
+                        $"No {argumentsKey} argument received. Using {valueDescriptor} {defaultValue}"
+                    );
                     maxValue = defaultValue;
                 }
 
                 return true;
             }
 
-            private void SetRefreshIntervalSecs(IDictionary<string, string> arguments, double minValue, double defaultValue, out double refreshIntervalSeconds)
+            private void SetRefreshIntervalSecs(
+                IDictionary<string, string> arguments,
+                double minValue,
+                double defaultValue,
+                out double refreshIntervalSeconds
+            )
             {
-                if (GetRefreshIntervalSecs(arguments, DefaultValueDescription, defaultValue, out refreshIntervalSeconds)
-                    && refreshIntervalSeconds < minValue)
+                if (
+                    GetRefreshIntervalSecs(
+                        arguments,
+                        DefaultValueDescription,
+                        defaultValue,
+                        out refreshIntervalSeconds
+                    )
+                    && refreshIntervalSeconds < minValue
+                )
                 {
-                    Parent.Message($"{RefreshIntervalKey} too small. Using minimum interval {minValue} seconds.");
+                    Parent.Message(
+                        $"{RefreshIntervalKey} too small. Using minimum interval {minValue} seconds."
+                    );
                     refreshIntervalSeconds = minValue;
                 }
             }
 
-            private bool SetSharedRefreshIntervalSecs(IDictionary<string, string> arguments, double sharedValue, out double refreshIntervalSeconds)
+            private bool SetSharedRefreshIntervalSecs(
+                IDictionary<string, string> arguments,
+                double sharedValue,
+                out double refreshIntervalSeconds
+            )
             {
-                if (GetRefreshIntervalSecs(arguments, SharedValueDescription, sharedValue, out refreshIntervalSeconds)
-                    && refreshIntervalSeconds != sharedValue)
+                if (
+                    GetRefreshIntervalSecs(
+                        arguments,
+                        SharedValueDescription,
+                        sharedValue,
+                        out refreshIntervalSeconds
+                    )
+                    && refreshIntervalSeconds != sharedValue
+                )
                 {
                     return false;
                 }
@@ -582,21 +957,30 @@ namespace System.Diagnostics.Metrics
                 return true;
             }
 
-            private bool GetRefreshIntervalSecs(IDictionary<string, string> arguments, string valueDescriptor, double defaultValue, out double refreshIntervalSeconds)
+            private bool GetRefreshIntervalSecs(
+                IDictionary<string, string> arguments,
+                string valueDescriptor,
+                double defaultValue,
+                out double refreshIntervalSeconds
+            )
             {
                 if (arguments!.TryGetValue(RefreshIntervalKey, out string? refreshInterval))
                 {
                     Parent.Message($"{RefreshIntervalKey} argument received: {refreshInterval}");
                     if (!double.TryParse(refreshInterval, out refreshIntervalSeconds))
                     {
-                        Parent.Message($"Failed to parse {RefreshIntervalKey}. Using {valueDescriptor} {defaultValue}s.");
+                        Parent.Message(
+                            $"Failed to parse {RefreshIntervalKey}. Using {valueDescriptor} {defaultValue}s."
+                        );
                         refreshIntervalSeconds = defaultValue;
                         return false;
                     }
                 }
                 else
                 {
-                    Parent.Message($"No {RefreshIntervalKey} argument received. Using {valueDescriptor} {defaultValue}s.");
+                    Parent.Message(
+                        $"No {RefreshIntervalKey} argument received. Using {valueDescriptor} {defaultValue}s."
+                    );
                     refreshIntervalSeconds = defaultValue;
                     return false;
                 }
@@ -631,7 +1015,13 @@ namespace System.Diagnostics.Metrics
                 return false;
             }
 
-            private static readonly char[] s_instrumentSeparators = new char[] { '\r', '\n', ',', ';' };
+            private static readonly char[] s_instrumentSeparators = new char[]
+            {
+                '\r',
+                '\n',
+                ',',
+                ';',
+            };
 
             [UnsupportedOSPlatform("browser")]
             private void ParseSpecs(string? metricsSpecs)
@@ -641,7 +1031,10 @@ namespace System.Diagnostics.Metrics
                     return;
                 }
 
-                string[] specStrings = metricsSpecs.Split(s_instrumentSeparators, StringSplitOptions.RemoveEmptyEntries);
+                string[] specStrings = metricsSpecs.Split(
+                    s_instrumentSeparators,
+                    StringSplitOptions.RemoveEmptyEntries
+                );
                 foreach (string specString in specStrings)
                 {
                     MetricSpec spec = MetricSpec.Parse(specString);
@@ -657,36 +1050,79 @@ namespace System.Diagnostics.Metrics
                 }
             }
 
-            private static void TransmitMetricValue(Instrument instrument, LabeledAggregationStatistics stats, string sessionId)
+            private static void TransmitMetricValue(
+                Instrument instrument,
+                LabeledAggregationStatistics stats,
+                string sessionId
+            )
             {
                 if (stats.AggregationStatistics is CounterStatistics rateStats)
                 {
                     if (rateStats.IsMonotonic)
                     {
-                        Log.CounterRateValuePublished(sessionId, instrument.Meter.Name, instrument.Meter.Version, instrument.Name, instrument.Unit, FormatTags(stats.Labels),
-                            rateStats.Delta.HasValue ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture) : "",
-                            rateStats.Value.ToString(CultureInfo.InvariantCulture));
+                        Log.CounterRateValuePublished(
+                            sessionId,
+                            instrument.Meter.Name,
+                            instrument.Meter.Version,
+                            instrument.Name,
+                            instrument.Unit,
+                            FormatTags(stats.Labels),
+                            rateStats.Delta.HasValue
+                                ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture)
+                                : "",
+                            rateStats.Value.ToString(CultureInfo.InvariantCulture)
+                        );
                     }
                     else
                     {
-                        Log.UpDownCounterRateValuePublished(sessionId, instrument.Meter.Name, instrument.Meter.Version, instrument.Name, instrument.Unit, FormatTags(stats.Labels),
-                            rateStats.Delta.HasValue ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture) : "",
-                            rateStats.Value.ToString(CultureInfo.InvariantCulture));
+                        Log.UpDownCounterRateValuePublished(
+                            sessionId,
+                            instrument.Meter.Name,
+                            instrument.Meter.Version,
+                            instrument.Name,
+                            instrument.Unit,
+                            FormatTags(stats.Labels),
+                            rateStats.Delta.HasValue
+                                ? rateStats.Delta.Value.ToString(CultureInfo.InvariantCulture)
+                                : "",
+                            rateStats.Value.ToString(CultureInfo.InvariantCulture)
+                        );
                     }
                 }
                 else if (stats.AggregationStatistics is LastValueStatistics lastValueStats)
                 {
-                    Log.GaugeValuePublished(sessionId, instrument.Meter.Name, instrument.Meter.Version, instrument.Name, instrument.Unit, FormatTags(stats.Labels),
-                        lastValueStats.LastValue.HasValue ? lastValueStats.LastValue.Value.ToString(CultureInfo.InvariantCulture) : "");
+                    Log.GaugeValuePublished(
+                        sessionId,
+                        instrument.Meter.Name,
+                        instrument.Meter.Version,
+                        instrument.Name,
+                        instrument.Unit,
+                        FormatTags(stats.Labels),
+                        lastValueStats.LastValue.HasValue
+                            ? lastValueStats.LastValue.Value.ToString(CultureInfo.InvariantCulture)
+                            : ""
+                    );
                 }
                 else if (stats.AggregationStatistics is HistogramStatistics histogramStats)
                 {
-                    Log.HistogramValuePublished(sessionId, instrument.Meter.Name, instrument.Meter.Version, instrument.Name, instrument.Unit, FormatTags(stats.Labels), FormatQuantiles(histogramStats.Quantiles), histogramStats.Count, histogramStats.Sum);
+                    Log.HistogramValuePublished(
+                        sessionId,
+                        instrument.Meter.Name,
+                        instrument.Meter.Version,
+                        instrument.Name,
+                        instrument.Unit,
+                        FormatTags(stats.Labels),
+                        FormatQuantiles(histogramStats.Quantiles),
+                        histogramStats.Count,
+                        histogramStats.Sum
+                    );
                 }
             }
 
             private static string FormatScopeHash(object? scope) =>
-                scope is null ? string.Empty : RuntimeHelpers.GetHashCode(scope).ToString(CultureInfo.InvariantCulture);
+                scope is null
+                    ? string.Empty
+                    : RuntimeHelpers.GetHashCode(scope).ToString(CultureInfo.InvariantCulture);
 
             private static string FormatTags(IEnumerable<KeyValuePair<string, object?>>? tags)
             {
@@ -774,9 +1210,10 @@ namespace System.Diagnostics.Metrics
                 }
             }
 
-            public override string ToString() => InstrumentName != null ?
-                MeterName + MeterInstrumentSeparator + InstrumentName :
-                MeterName;
+            public override string ToString() =>
+                InstrumentName != null
+                    ? MeterName + MeterInstrumentSeparator + InstrumentName
+                    : MeterName;
         }
     }
 }

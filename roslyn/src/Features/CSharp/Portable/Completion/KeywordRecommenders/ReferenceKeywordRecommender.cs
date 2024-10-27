@@ -11,17 +11,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class ReferenceKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public ReferenceKeywordRecommender()
-            : base(SyntaxKind.ReferenceKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.ReferenceKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxTree = context.SyntaxTree;
-            return
-                context.IsPreProcessorKeywordContext &&
-                syntaxTree.IsScript() &&
-                syntaxTree.IsBeforeFirstToken(position, cancellationToken);
+            return context.IsPreProcessorKeywordContext
+                && syntaxTree.IsScript()
+                && syntaxTree.IsBeforeFirstToken(position, cancellationToken);
         }
     }
 }

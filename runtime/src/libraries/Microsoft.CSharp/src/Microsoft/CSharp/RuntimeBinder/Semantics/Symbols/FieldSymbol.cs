@@ -17,9 +17,9 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
     internal sealed class FieldSymbol : VariableSymbol
     {
-        public new bool isStatic;               // Static member?
-        public bool isReadOnly;            // Can only be changed from within constructor.
-        public bool isEvent;               // This field is the implementation for an event.
+        public new bool isStatic; // Static member?
+        public bool isReadOnly; // Can only be changed from within constructor.
+        public bool isEvent; // This field is the implementation for an event.
         public FieldInfo AssociatedFieldInfo;
 
         // If fixedAgg is non-null, the ant of the fixed buffer length
@@ -39,7 +39,8 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
         public EventSymbol getEvent()
         {
             Debug.Assert(isEvent);
-            return SymbolLoader.LookupAggMember(name, getClass(), symbmask_t.MASK_EventSymbol) as EventSymbol;
+            return SymbolLoader.LookupAggMember(name, getClass(), symbmask_t.MASK_EventSymbol)
+                as EventSymbol;
         }
     }
 }

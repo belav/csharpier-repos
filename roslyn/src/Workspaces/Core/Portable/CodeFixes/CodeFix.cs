@@ -31,9 +31,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// A given fix can fix one or more diagnostics. However, our light bulb UI (preview pane, grouping
         /// of fixes in the light bulb menu etc.) currently keeps things simple and pretends that
         /// each fix fixes a single <see cref="PrimaryDiagnostic"/>.
-        /// 
+        ///
         /// Implementation-wise the <see cref="PrimaryDiagnostic"/> is always the first diagnostic that
-        /// the <see cref="CodeFixProvider"/> supplied when registering the fix (<see 
+        /// the <see cref="CodeFixProvider"/> supplied when registering the fix (<see
         /// cref="CodeFixContext.RegisterCodeFix(CodeAction, IEnumerable{Diagnostic})"/>). This could change
         /// in the future, if we decide to change the UI to depict the true mapping between fixes and diagnostics
         /// or if we decide to use some other heuristic to determine the <see cref="PrimaryDiagnostic"/>.
@@ -69,7 +69,9 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             }
             else if (diagnostic.Location.Kind == LocationKind.ExternalFile)
             {
-                var document = Project.Documents.FirstOrDefault(d => d.FilePath == diagnostic.Location.GetLineSpan().Path);
+                var document = Project.Documents.FirstOrDefault(d =>
+                    d.FilePath == diagnostic.Location.GetLineSpan().Path
+                );
                 if (document != null)
                 {
                     return DiagnosticData.Create(diagnostic, document);

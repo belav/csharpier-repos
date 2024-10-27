@@ -1,10 +1,10 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //  SecurityZone.cs
-// 
+//
 // <OWNER>ShawnFa</OWNER>
 //
 //  Enumeration of the zones code can come from
@@ -21,12 +21,12 @@ namespace System.Security
     [Serializable]
     public enum SecurityZone
     {
-        MyComputer   = 0,
-        Intranet     = 1,
-        Trusted      = 2,
-        Internet     = 3,
-        Untrusted    = 4,
-    
-        NoZone       = -1,  // No Zone Information
+        MyComputer = 0,
+        Intranet = 1,
+        Trusted = 2,
+        Internet = 3,
+        Untrusted = 4,
+
+        NoZone = -1, // No Zone Information
     }
 }

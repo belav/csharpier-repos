@@ -24,8 +24,7 @@ namespace System.Configuration
 
         protected internal override bool IsModified()
         {
-            return SectionInformation.IsModifiedFlags() ||
-                base.IsModified();
+            return SectionInformation.IsModifiedFlags() || base.IsModified();
         }
 
         protected internal override void ResetModified()
@@ -37,17 +36,25 @@ namespace System.Configuration
         protected internal virtual void DeserializeSection(XmlReader reader)
         {
             if (!reader.Read() || (reader.NodeType != XmlNodeType.Element))
-                throw new ConfigurationErrorsException(SR.Config_base_expected_to_find_element, reader);
+                throw new ConfigurationErrorsException(
+                    SR.Config_base_expected_to_find_element,
+                    reader
+                );
 
             DeserializeElement(reader, false);
         }
 
-        protected internal virtual string SerializeSection(ConfigurationElement parentElement, string name,
-            ConfigurationSaveMode saveMode)
+        protected internal virtual string SerializeSection(
+            ConfigurationElement parentElement,
+            string name,
+            ConfigurationSaveMode saveMode
+        )
         {
-            if ((CurrentConfiguration != null) &&
-                (CurrentConfiguration.TargetFramework != null) &&
-                !ShouldSerializeSectionInTargetVersion(CurrentConfiguration.TargetFramework))
+            if (
+                (CurrentConfiguration != null)
+                && (CurrentConfiguration.TargetFramework != null)
+                && !ShouldSerializeSectionInTargetVersion(CurrentConfiguration.TargetFramework)
+            )
                 return string.Empty;
 
             ValidateElement(this, null, true);
@@ -60,7 +67,7 @@ namespace System.Configuration
             {
                 Formatting = Formatting.Indented,
                 Indentation = 4,
-                IndentChar = ' '
+                IndentChar = ' ',
             };
 
             tempElement.DataToWriteInternal = saveMode != ConfigurationSaveMode.Minimal;
@@ -77,19 +84,28 @@ namespace System.Configuration
             return strWriter.ToString();
         }
 
-        protected internal virtual bool ShouldSerializePropertyInTargetVersion(ConfigurationProperty property,
-            string propertyName, FrameworkName targetFramework, ConfigurationElement parentConfigurationElement)
+        protected internal virtual bool ShouldSerializePropertyInTargetVersion(
+            ConfigurationProperty property,
+            string propertyName,
+            FrameworkName targetFramework,
+            ConfigurationElement parentConfigurationElement
+        )
         {
             return true;
         }
 
-        protected internal virtual bool ShouldSerializeElementInTargetVersion(ConfigurationElement element,
-            string elementName, FrameworkName targetFramework)
+        protected internal virtual bool ShouldSerializeElementInTargetVersion(
+            ConfigurationElement element,
+            string elementName,
+            FrameworkName targetFramework
+        )
         {
             return true;
         }
 
-        protected internal virtual bool ShouldSerializeSectionInTargetVersion(FrameworkName targetFramework)
+        protected internal virtual bool ShouldSerializeSectionInTargetVersion(
+            FrameworkName targetFramework
+        )
         {
             return true;
         }

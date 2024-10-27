@@ -10,6 +10,6 @@ namespace Microsoft.CodeAnalysis.Formatting.Rules
     internal enum AlignTokensOption
     {
         AlignIndentationOfTokensToBaseToken,
-        AlignIndentationOfTokensToFirstTokenOfBaseTokenLine
+        AlignIndentationOfTokensToFirstTokenOfBaseTokenLine,
     }
 }

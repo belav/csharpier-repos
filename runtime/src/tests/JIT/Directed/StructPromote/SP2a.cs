@@ -2,13 +2,12 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 //
 
-using System.Runtime.CompilerServices;
 using System;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 public class SP2a
 {
-
     // Struct in reg (long, int)
     struct S
     {
@@ -28,7 +27,7 @@ public class SP2a
         S s;
         s.i1 = i1;
         s.l0 = l0;
-        return Foo(i2, s);  // r0 <= r3; r2/r3 <= r0/r1; outarg[0] <= r3
+        return Foo(i2, s); // r0 <= r3; r2/r3 <= r0/r1; outarg[0] <= r3
     }
 
     [Fact]

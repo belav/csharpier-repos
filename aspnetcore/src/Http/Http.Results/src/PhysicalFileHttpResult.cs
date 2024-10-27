@@ -11,7 +11,10 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// A <see cref="PhysicalFileHttpResult"/> on execution will write a file from disk to the response
 /// using mechanisms provided by the host.
 /// </summary>
-public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, IContentTypeHttpResult
+public sealed partial class PhysicalFileHttpResult
+    : IResult,
+        IFileHttpResult,
+        IContentTypeHttpResult
 {
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with
@@ -20,9 +23,7 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     internal PhysicalFileHttpResult(string fileName, string? contentType)
-        : this(fileName, contentType, fileDownloadName: null)
-    {
-    }
+        : this(fileName, contentType, fileDownloadName: null) { }
 
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with
@@ -32,13 +33,8 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
     /// <param name="fileName">The path to the file. The path must be an absolute path.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    internal PhysicalFileHttpResult(
-        string fileName,
-        string? contentType,
-        string? fileDownloadName)
-        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false)
-    {
-    }
+    internal PhysicalFileHttpResult(string fileName, string? contentType, string? fileDownloadName)
+        : this(fileName, contentType, fileDownloadName, enableRangeProcessing: false) { }
 
     /// <summary>
     /// Creates a new <see cref="PhysicalFileHttpResult"/> instance with the provided values.
@@ -55,7 +51,8 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
         string? fileDownloadName,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         FileName = fileName;
         ContentType = contentType ?? "application/octet-stream";
@@ -120,7 +117,9 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.PhysicalFileResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.PhysicalFileResult"
+        );
 
         var (range, rangeLength, completed) = HttpResultsHelper.WriteResultAsFileCore(
             httpContext,
@@ -130,14 +129,20 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
             ContentType,
             EnableRangeProcessing,
             LastModified,
-            EntityTag);
+            EntityTag
+        );
 
-        return completed ?
-            Task.CompletedTask :
-            ExecuteCoreAsync(httpContext, range, rangeLength, FileName);
+        return completed
+            ? Task.CompletedTask
+            : ExecuteCoreAsync(httpContext, range, rangeLength, FileName);
     }
 
-    private static Task ExecuteCoreAsync(HttpContext httpContext, RangeItemHeaderValue? range, long rangeLength, string fileName)
+    private static Task ExecuteCoreAsync(
+        HttpContext httpContext,
+        RangeItemHeaderValue? range,
+        long rangeLength,
+        string fileName
+    )
     {
         var response = httpContext.Response;
         if (!Path.IsPathRooted(fileName))
@@ -153,10 +158,7 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
             count = rangeLength;
         }
 
-        return response.SendFileAsync(
-            fileName,
-            offset: offset,
-            count: count);
+        return response.SendFileAsync(fileName, offset: offset, count: count);
     }
 
     internal readonly struct FileInfoWrapper
@@ -169,7 +171,8 @@ public sealed partial class PhysicalFileHttpResult : IResult, IFileHttpResult, I
             // from the target file instead.
             if (fileInfo.Exists && !string.IsNullOrEmpty(fileInfo.LinkTarget))
             {
-                fileInfo = (FileInfo?)fileInfo.ResolveLinkTarget(returnFinalTarget: true) ?? fileInfo;
+                fileInfo =
+                    (FileInfo?)fileInfo.ResolveLinkTarget(returnFinalTarget: true) ?? fileInfo;
             }
 
             Exists = fileInfo.Exists;

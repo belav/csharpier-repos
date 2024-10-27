@@ -4,17 +4,16 @@
 
 namespace System.IdentityModel
 {
-    using Microsoft.Win32.SafeHandles;
     using System.ComponentModel;
     using System.Diagnostics;
-    using System.Runtime.InteropServices;
     using System.Runtime.CompilerServices;
-    using System.Runtime.Versioning;
     using System.Runtime.ConstrainedExecution;
+    using System.Runtime.InteropServices;
+    using System.Runtime.Versioning;
     using System.Security;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
-
+    using Microsoft.Win32.SafeHandles;
     using FILETIME = System.Runtime.InteropServices.ComTypes.FILETIME;
 
     [SuppressUnmanagedCodeSecurity]
@@ -38,6 +37,7 @@ namespace System.IdentityModel
         //internal const uint CERT_STORE_SHARE_CONTEXT_FLAG = 0x00000080;
         //internal const uint CERT_STORE_MANIFOLD_FLAG = 0x00000100;
         internal const uint CERT_STORE_ENUM_ARCHIVED_FLAG = 0x00000200;
+
         //internal const uint CERT_STORE_UPDATE_KEYID_FLAG = 0x00000400;
         //internal const uint CERT_STORE_BACKUP_RESTORE_FLAG = 0x00000800;
         internal const uint CERT_STORE_READONLY_FLAG = 0x00008000;
@@ -57,16 +57,22 @@ namespace System.IdentityModel
         internal const uint CERT_SYSTEM_STORE_LOCAL_MACHINE_ID = 2;
         internal const uint CERT_SYSTEM_STORE_LOCATION_SHIFT = 16;
 
-        internal const uint CERT_SYSTEM_STORE_CURRENT_USER = ((int)CERT_SYSTEM_STORE_CURRENT_USER_ID << (int)CERT_SYSTEM_STORE_LOCATION_SHIFT);
-        internal const uint CERT_SYSTEM_STORE_LOCAL_MACHINE = ((int)CERT_SYSTEM_STORE_LOCAL_MACHINE_ID << (int)CERT_SYSTEM_STORE_LOCATION_SHIFT);
+        internal const uint CERT_SYSTEM_STORE_CURRENT_USER = (
+            (int)CERT_SYSTEM_STORE_CURRENT_USER_ID << (int)CERT_SYSTEM_STORE_LOCATION_SHIFT
+        );
+        internal const uint CERT_SYSTEM_STORE_LOCAL_MACHINE = (
+            (int)CERT_SYSTEM_STORE_LOCAL_MACHINE_ID << (int)CERT_SYSTEM_STORE_LOCATION_SHIFT
+        );
 
         //internal const uint CERT_INFO_VERSION_FLAG = 1;
         //internal const uint CERT_INFO_SERIAL_NUMBER_FLAG = 2;
         //internal const uint CERT_INFO_SIGNATURE_ALGORITHM_FLAG = 3;
         internal const uint CERT_INFO_ISSUER_FLAG = 4;
+
         //internal const uint CERT_INFO_NOT_BEFORE_FLAG = 5;
         //internal const uint CERT_INFO_NOT_AFTER_FLAG = 6;
         internal const uint CERT_INFO_SUBJECT_FLAG = 7;
+
         //internal const uint CERT_INFO_SUBJECT_PUBLIC_KEY_INFO_FLAG = 8;
         //internal const uint CERT_INFO_ISSUER_UNIQUE_ID_FLAG = 9;
         //internal const uint CERT_INFO_SUBJECT_UNIQUE_ID_FLAG = 10;
@@ -76,6 +82,7 @@ namespace System.IdentityModel
         internal const uint CERT_COMPARE_SHIFT = 16;
         internal const uint CERT_COMPARE_ANY = 0;
         internal const uint CERT_COMPARE_SHA1_HASH = 1;
+
         //internal const uint CERT_COMPARE_NAME = 2;
         //internal const uint CERT_COMPARE_ATTR = 3;
         //internal const uint CERT_COMPARE_MD5_HASH = 4;
@@ -84,6 +91,7 @@ namespace System.IdentityModel
         //internal const uint CERT_COMPARE_HASH = CERT_COMPARE_SHA1_HASH;
         internal const uint CERT_COMPARE_NAME_STR_A = 7;
         internal const uint CERT_COMPARE_NAME_STR_W = 8;
+
         //internal const uint CERT_COMPARE_KEY_SPEC = 9;
         //internal const uint CERT_COMPARE_ENHKEY_USAGE = 10;
         //internal const uint CERT_COMPARE_CTL_USAGE = CERT_COMPARE_ENHKEY_USAGE;
@@ -97,23 +105,36 @@ namespace System.IdentityModel
         //internal const uint CERT_COMPARE_PUBKEY_MD5_HASH = 18;
 
         internal const uint CERT_FIND_ANY = ((int)CERT_COMPARE_ANY << (int)CERT_COMPARE_SHIFT);
-        internal const uint CERT_FIND_SHA1_HASH = ((int)CERT_COMPARE_SHA1_HASH << (int)CERT_COMPARE_SHIFT);
+        internal const uint CERT_FIND_SHA1_HASH = (
+            (int)CERT_COMPARE_SHA1_HASH << (int)CERT_COMPARE_SHIFT
+        );
+
         //internal const uint CERT_FIND_MD5_HASH = ((int)CERT_COMPARE_MD5_HASH << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_SIGNATURE_HASH = ((int)CERT_COMPARE_SIGNATURE_HASH << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_KEY_IDENTIFIER = ((int)CERT_COMPARE_KEY_IDENTIFIER << (int)CERT_COMPARE_SHIFT);
         internal const uint CERT_FIND_HASH = CERT_FIND_SHA1_HASH;
+
         //internal const uint CERT_FIND_PROPERTY = ((int)CERT_COMPARE_PROPERTY << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_PUBLIC_KEY = ((int)CERT_COMPARE_PUBLIC_KEY << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_SUBJECT_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
         //internal const uint CERT_FIND_SUBJECT_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
         //internal const uint CERT_FIND_ISSUER_NAME = ((int)CERT_COMPARE_NAME << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
         //internal const uint CERT_FIND_ISSUER_ATTR = ((int)CERT_COMPARE_ATTR << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
-        internal const uint CERT_FIND_SUBJECT_STR_A = ((int)CERT_COMPARE_NAME_STR_A << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
-        internal const uint CERT_FIND_SUBJECT_STR_W = ((int)CERT_COMPARE_NAME_STR_W << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG);
+        internal const uint CERT_FIND_SUBJECT_STR_A = (
+            (int)CERT_COMPARE_NAME_STR_A << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG
+        );
+        internal const uint CERT_FIND_SUBJECT_STR_W = (
+            (int)CERT_COMPARE_NAME_STR_W << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_SUBJECT_FLAG
+        );
         internal const uint CERT_FIND_SUBJECT_STR = CERT_FIND_SUBJECT_STR_W;
-        internal const uint CERT_FIND_ISSUER_STR_A = ((int)CERT_COMPARE_NAME_STR_A << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
-        internal const uint CERT_FIND_ISSUER_STR_W = ((int)CERT_COMPARE_NAME_STR_W << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG);
+        internal const uint CERT_FIND_ISSUER_STR_A = (
+            (int)CERT_COMPARE_NAME_STR_A << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG
+        );
+        internal const uint CERT_FIND_ISSUER_STR_W = (
+            (int)CERT_COMPARE_NAME_STR_W << (int)CERT_COMPARE_SHIFT | (int)CERT_INFO_ISSUER_FLAG
+        );
         internal const uint CERT_FIND_ISSUER_STR = CERT_FIND_ISSUER_STR_W;
+
         //internal const uint CERT_FIND_KEY_SPEC = ((int)CERT_COMPARE_KEY_SPEC << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_ENHKEY_USAGE = ((int)CERT_COMPARE_ENHKEY_USAGE << (int)CERT_COMPARE_SHIFT);
         //internal const uint CERT_FIND_CTL_USAGE = CERT_FIND_ENHKEY_USAGE;
@@ -133,7 +154,6 @@ namespace System.IdentityModel
 
         // Chain verification flag (not available in X509VerificationFlags).
         internal const uint CERT_CHAIN_POLICY_IGNORE_PEER_TRUST_FLAG = 0x00001000;
-
 
         // Default usage match type is AND with value zero
         internal const uint USAGE_MATCH_TYPE_AND = 0x00000000;
@@ -156,14 +176,13 @@ namespace System.IdentityModel
             internal IntPtr hCertStore;
         };
 
-
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
         internal struct CRYPTOAPI_BLOB
         {
             internal uint cbData;
             internal IntPtr pbData;
 
-            static internal int Size = Marshal.SizeOf(typeof(CRYPTOAPI_BLOB));
+            internal static int Size = Marshal.SizeOf(typeof(CRYPTOAPI_BLOB));
         }
 
         [StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode)]
@@ -200,6 +219,7 @@ namespace System.IdentityModel
                 dwFlags = 0;
                 pvExtraPolicyPara = IntPtr.Zero;
             }
+
             internal uint cbSize;
             internal uint dwFlags;
             internal IntPtr pvExtraPolicyPara;
@@ -216,6 +236,7 @@ namespace System.IdentityModel
                 lElementIndex = IntPtr.Zero;
                 pvExtraPolicyStatus = IntPtr.Zero;
             }
+
             internal uint cbSize;
             internal uint dwError;
             internal IntPtr lChainIndex;
@@ -238,16 +259,18 @@ namespace System.IdentityModel
                 fHasRevocationFreshnessTime = 0;
                 dwRevocationFreshnessTime = 0;
             }
+
             internal uint cbSize;
-            internal uint dwErrorStatus;   // serialized CERT_TRUST_STATUS
-            internal uint dwInfoStatus;    // serialized CERT_TRUST_STATUS
+            internal uint dwErrorStatus; // serialized CERT_TRUST_STATUS
+            internal uint dwInfoStatus; // serialized CERT_TRUST_STATUS
             internal uint cChain;
-            internal IntPtr rgpChain;                    // PCERT_SIMPLE_CHAIN*
+            internal IntPtr rgpChain; // PCERT_SIMPLE_CHAIN*
             internal uint cLowerQualityChainContext;
             internal IntPtr rgpLowerQualityChainContext; // PCCERT_CHAIN_CONTEXT*
-            internal uint fHasRevocationFreshnessTime; // Note that we declare the field as a uint here since we are manipulating 
+            internal uint fHasRevocationFreshnessTime; // Note that we declare the field as a uint here since we are manipulating
+
             // the structure manually and a bool is only 1 byte in the managed world.
-            internal uint dwRevocationFreshnessTime;   // seconds
+            internal uint dwRevocationFreshnessTime; // seconds
         }
 
         [DllImport(CAPI.CRYPT32, CharSet = CharSet.Unicode, SetLastError = true)]
@@ -255,10 +278,10 @@ namespace System.IdentityModel
             [In] uint dwCertEncodingType,
             [In] IntPtr pbCertEncoded,
             [In] uint cbCertEncoded
-            );
+        );
 
         // A new store is created if one did not exist. The function fails if the store already exists if dwFlags is set to CERT_STORE_CREATE_NEW_FLAG .
-        
+
         [DllImport(CAPI.CRYPT32, CharSet = CharSet.Unicode, SetLastError = true)]
         [ResourceExposure(ResourceScope.None)]
         internal static extern SafeCertStoreHandle CertOpenStore(
@@ -267,25 +290,20 @@ namespace System.IdentityModel
             [In] IntPtr hCryptProv,
             [In] uint dwFlags,
             [In] string pvPara // we want this always as a Unicode string.
-            );
+        );
 
         [DllImport(CAPI.CRYPT32, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         [ResourceExposure(ResourceScope.None)]
-        internal static extern bool CertCloseStore(
-            [In] IntPtr hCertStore,
-            [In] uint dwFlags
-            );
+        internal static extern bool CertCloseStore([In] IntPtr hCertStore, [In] uint dwFlags);
 
         [DllImport(CAPI.CRYPT32, SetLastError = true)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        [ResourceExposure( ResourceScope.None )]
-        internal static extern bool CertFreeCertificateContext(
-            [In] IntPtr pCertContext
-            );
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern bool CertFreeCertificateContext([In] IntPtr pCertContext);
 
         [DllImport(CAPI.CRYPT32, SetLastError = true)]
-        [ResourceExposure( ResourceScope.None )]
+        [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
         internal static extern SafeCertContextHandle CertFindCertificateInStore(
             [In] SafeCertStoreHandle hCertStore,
@@ -294,21 +312,21 @@ namespace System.IdentityModel
             [In] uint dwFindType,
             [In] SafeHGlobalHandle pvFindPara,
             [In] SafeCertContextHandle pPrevCertContext
-            );
+        );
 
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceConsumption( ResourceScope.Machine, ResourceScope.Machine)]
-        [ResourceExposure( ResourceScope.None )]
-        internal extern static bool CertAddCertificateLinkToStore(
+        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern bool CertAddCertificateLinkToStore(
             [In] SafeCertStoreHandle hCertStore,
             [In] IntPtr pCertContext,
             [In] uint dwAddDisposition,
             [In, Out] SafeCertContextHandle ppStoreContext
-            );
+        );
 
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure( ResourceScope.None )]
-        [ResourceConsumption( ResourceScope.Machine, ResourceScope.Machine )]
+        [ResourceExposure(ResourceScope.None)]
+        [ResourceConsumption(ResourceScope.Machine, ResourceScope.Machine)]
         internal static extern bool CertGetCertificateChain(
             [In] IntPtr hChainEngine,
             [In] IntPtr pCertContext,
@@ -318,28 +336,28 @@ namespace System.IdentityModel
             [In] uint dwFlags,
             [In] IntPtr pvReserved,
             [Out] out SafeCertChainHandle ppChainContext
-            );
+        );
 
         [DllImport(CRYPT32, CharSet = CharSet.Auto, SetLastError = true)]
-        [ResourceExposure( ResourceScope.None )]
-        internal extern static bool CertVerifyCertificateChainPolicy(
+        [ResourceExposure(ResourceScope.None)]
+        internal static extern bool CertVerifyCertificateChainPolicy(
             [In] IntPtr pszPolicyOID,
             [In] SafeCertChainHandle pChainContext,
             [In] ref CERT_CHAIN_POLICY_PARA pPolicyPara,
-            [In, Out] ref CERT_CHAIN_POLICY_STATUS pPolicyStatus);
+            [In, Out] ref CERT_CHAIN_POLICY_STATUS pPolicyStatus
+        );
 
         [DllImport(CRYPT32, SetLastError = true)]
-        [ResourceExposure( ResourceScope.None )]
+        [ResourceExposure(ResourceScope.None)]
         [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
-        internal extern static void CertFreeCertificateChain(IntPtr handle);
+        internal static extern void CertFreeCertificateChain(IntPtr handle);
 
         // On Vista and higher, check the value of the machine FIPS policy
         [DllImport(BCRYPT, SetLastError = true)]
-        [ResourceExposure( ResourceScope.None )]
+        [ResourceExposure(ResourceScope.None)]
         internal static extern int BCryptGetFipsAlgorithmMode(
             [MarshalAs(UnmanagedType.U1), Out] out bool pfEnabled
-            );
-
+        );
     }
 
 #pragma warning disable 618 // have not moved to the v4 security model yet
@@ -347,7 +365,8 @@ namespace System.IdentityModel
 #pragma warning restore 618
     class SafeCertStoreHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeCertStoreHandle() : base(true) { }
+        SafeCertStoreHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeCertStoreHandle(IntPtr handle)
@@ -363,7 +382,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             return CAPI.CertCloseStore(handle, 0);
         }
@@ -374,7 +393,8 @@ namespace System.IdentityModel
 #pragma warning restore 618
     class SafeCertContextHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeCertContextHandle() : base(true) { }
+        SafeCertContextHandle()
+            : base(true) { }
 
         // 0 is an Invalid Handle
         SafeCertContextHandle(IntPtr handle)
@@ -390,7 +410,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             return CAPI.CertFreeCertificateContext(handle);
         }
@@ -401,7 +421,8 @@ namespace System.IdentityModel
 #pragma warning restore 618
     class SafeCertChainHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        SafeCertChainHandle() : base(true) { }
+        SafeCertChainHandle()
+            : base(true) { }
 
         SafeCertChainHandle(IntPtr handle)
             : base(true)
@@ -416,7 +437,7 @@ namespace System.IdentityModel
 
         protected override bool ReleaseHandle()
         {
-            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call. 
+            // PreSharp Bug: Call 'Marshal.GetLastWin32Error' or 'Marshal.GetHRForLastWin32Error' before any other interop call.
 #pragma warning suppress 56523 // We are not interested in throwing an exception here if CloseHandle fails.
             CAPI.CertFreeCertificateChain(handle);
             return true;

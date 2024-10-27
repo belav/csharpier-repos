@@ -36,30 +36,96 @@ CREATE TYPE doubleAlias FROM float(26);
 CREATE TYPE floatAlias FROM real;
 CREATE TYPE binaryAlias FROM varbinary(50);
 CREATE TYPE stringAlias FROM nvarchar(50);
-""");
+"""
+            );
 
             var model = context.Model;
 
             var aliasEntityType = model.FindEntityType(typeof(TypeAliasEntity));
-            Assert.Equal("datetimeAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DateTimeAlias)));
-            Assert.Equal("datetimeoffsetAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DateTimeOffsetAlias)));
-            Assert.Equal("timeAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.TimeAlias)));
-            Assert.Equal("decimalAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DecimalAlias)));
-            Assert.Equal("doubleAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DoubleAlias)));
-            Assert.Equal("floatAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.FloatAlias)));
-            Assert.Equal("binaryAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.BinaryAlias)));
-            Assert.Equal("stringAlias", GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.StringAlias)));
+            Assert.Equal(
+                "datetimeAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DateTimeAlias))
+            );
+            Assert.Equal(
+                "datetimeoffsetAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DateTimeOffsetAlias))
+            );
+            Assert.Equal(
+                "timeAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.TimeAlias))
+            );
+            Assert.Equal(
+                "decimalAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DecimalAlias))
+            );
+            Assert.Equal(
+                "doubleAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.DoubleAlias))
+            );
+            Assert.Equal(
+                "floatAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.FloatAlias))
+            );
+            Assert.Equal(
+                "binaryAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.BinaryAlias))
+            );
+            Assert.Equal(
+                "stringAlias",
+                GetColumnType(aliasEntityType!, nameof(TypeAliasEntity.StringAlias))
+            );
 
             var facetedAliasEntityType = model.FindEntityType(typeof(TypeAliasEntityWithFacets));
-            Assert.Equal("datetimeAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.DateTimeAlias)));
             Assert.Equal(
-                "datetimeoffsetAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.DateTimeOffsetAlias)));
-            Assert.Equal("timeAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.TimeAlias)));
-            Assert.Equal("decimalAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.DecimalAlias)));
-            Assert.Equal("doubleAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.DoubleAlias)));
-            Assert.Equal("floatAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.FloatAlias)));
-            Assert.Equal("binaryAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.BinaryAlias)));
-            Assert.Equal("stringAlias", GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.StringAlias)));
+                "datetimeAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.DateTimeAlias)
+                )
+            );
+            Assert.Equal(
+                "datetimeoffsetAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.DateTimeOffsetAlias)
+                )
+            );
+            Assert.Equal(
+                "timeAlias",
+                GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.TimeAlias))
+            );
+            Assert.Equal(
+                "decimalAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.DecimalAlias)
+                )
+            );
+            Assert.Equal(
+                "doubleAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.DoubleAlias)
+                )
+            );
+            Assert.Equal(
+                "floatAlias",
+                GetColumnType(facetedAliasEntityType!, nameof(TypeAliasEntityWithFacets.FloatAlias))
+            );
+            Assert.Equal(
+                "binaryAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.BinaryAlias)
+                )
+            );
+            Assert.Equal(
+                "stringAlias",
+                GetColumnType(
+                    facetedAliasEntityType!,
+                    nameof(TypeAliasEntityWithFacets.StringAlias)
+                )
+            );
 
             context.Database.EnsureCreatedResiliently();
 
@@ -73,7 +139,7 @@ CREATE TYPE stringAlias FROM nvarchar(50);
                     DoubleAlias = 3.14159,
                     FloatAlias = 3.14159f,
                     BinaryAlias = new byte[] { 0, 1, 2, 3 },
-                    StringAlias = "Rodrigo y Gabriela"
+                    StringAlias = "Rodrigo y Gabriela",
                 },
                 new TypeAliasEntityWithFacets
                 {
@@ -84,8 +150,9 @@ CREATE TYPE stringAlias FROM nvarchar(50);
                     DoubleAlias = 3.14159,
                     FloatAlias = 3.14159f,
                     BinaryAlias = new byte[] { 0, 1, 2, 3 },
-                    StringAlias = "Mettavolution"
-                });
+                    StringAlias = "Mettavolution",
+                }
+            );
 
             context.SaveChanges();
         }
@@ -103,7 +170,10 @@ CREATE TYPE stringAlias FROM nvarchar(50);
             Assert.Equal(new byte[] { 0, 1, 2, 3 }, entity.BinaryAlias);
             Assert.Equal("Rodrigo y Gabriela", entity.StringAlias);
 
-            var entityWithFacets = context.Set<TypeAliasEntityWithFacets>().OrderByDescending(e => e.Id).First();
+            var entityWithFacets = context
+                .Set<TypeAliasEntityWithFacets>()
+                .OrderByDescending(e => e.Id)
+                .First();
 
             Assert.Equal(new DateTime(), entityWithFacets.DateTimeAlias);
             Assert.Equal(new DateTimeOffset(), entityWithFacets.DateTimeOffsetAlias);
@@ -115,31 +185,28 @@ CREATE TYPE stringAlias FROM nvarchar(50);
             Assert.Equal("Mettavolution", entityWithFacets.StringAlias);
         }
 
-        string GetColumnType(IEntityType entityType, string propertyName)
-            => entityType.FindProperty(propertyName)!.GetColumnType(new StoreObjectIdentifier());
+        string GetColumnType(IEntityType entityType, string propertyName) =>
+            entityType.FindProperty(propertyName)!.GetColumnType(new StoreObjectIdentifier());
     }
 
     private class TypeAliasContext : DbContext
     {
         public TypeAliasContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+            : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<TypeAliasEntity>();
-            modelBuilder.Entity<TypeAliasEntityWithFacets>(
-                b =>
-                {
-                    b.Property(e => e.DateTimeAlias).HasPrecision(6);
-                    b.Property(e => e.DateTimeOffsetAlias).HasPrecision(6);
-                    b.Property(e => e.TimeAlias).HasPrecision(6);
-                    b.Property(e => e.DecimalAlias).HasPrecision(10, 6);
-                    b.Property(e => e.DoubleAlias).HasPrecision(26);
-                    b.Property(e => e.BinaryAlias).HasMaxLength(50);
-                    b.Property(e => e.StringAlias).HasMaxLength(50);
-                });
+            modelBuilder.Entity<TypeAliasEntityWithFacets>(b =>
+            {
+                b.Property(e => e.DateTimeAlias).HasPrecision(6);
+                b.Property(e => e.DateTimeOffsetAlias).HasPrecision(6);
+                b.Property(e => e.TimeAlias).HasPrecision(6);
+                b.Property(e => e.DecimalAlias).HasPrecision(10, 6);
+                b.Property(e => e.DoubleAlias).HasPrecision(26);
+                b.Property(e => e.BinaryAlias).HasMaxLength(50);
+                b.Property(e => e.StringAlias).HasMaxLength(50);
+            });
         }
     }
 

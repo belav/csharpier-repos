@@ -7,17 +7,15 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
-
 using Moq.Language;
 using Moq.Language.Flow;
 using Moq.Properties;
-
 using TypeNameFormatter;
 
 namespace Moq.Protected
 {
     class ProtectedMock<T> : IProtectedMock<T>
-            where T : class
+        where T : class
     {
         Mock<T> mock;
 
@@ -44,14 +42,24 @@ namespace Moq.Protected
             return this.InternalSetup(methodName, null, exactParameterMatch, args);
         }
 
-        public ISetup<T> Setup(string methodName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        public ISetup<T> Setup(
+            string methodName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
 
             return this.InternalSetup(methodName, genericTypeArguments, exactParameterMatch, args);
         }
 
-        ISetup<T> InternalSetup(string methodName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        ISetup<T> InternalSetup(
+            string methodName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(methodName, nameof(methodName));
 
@@ -68,20 +76,38 @@ namespace Moq.Protected
             return this.InternalSetup<TResult>(methodName, null, false, args);
         }
 
-        public ISetup<T, TResult> Setup<TResult>(string methodName, bool exactParameterMatch, params object[] args)
+        public ISetup<T, TResult> Setup<TResult>(
+            string methodName,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             return this.InternalSetup<TResult>(methodName, null, exactParameterMatch, args);
         }
 
-        public ISetup<T, TResult> Setup<TResult>(string methodName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        public ISetup<T, TResult> Setup<TResult>(
+            string methodName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
 
-            return this.InternalSetup<TResult>(methodName, genericTypeArguments, exactParameterMatch, args);
+            return this.InternalSetup<TResult>(
+                methodName,
+                genericTypeArguments,
+                exactParameterMatch,
+                args
+            );
         }
 
-        ISetup<T, TResult> InternalSetup<TResult>(string methodName, Type[] genericTypeArguments,
-            bool exactParameterMatch, params object[] args)
+        ISetup<T, TResult> InternalSetup<TResult>(
+            string methodName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
@@ -125,33 +151,68 @@ namespace Moq.Protected
             ThrowIfPublicSetter(property, typeof(T).Name);
             Guard.CanWrite(property);
 
-            var expression = GetSetterExpression(property, ToExpressionArg(property.PropertyType, value));
+            var expression = GetSetterExpression(
+                property,
+                ToExpressionArg(property.PropertyType, value)
+            );
 
             var setup = Mock.SetupSet(mock, expression, condition: null);
             return new SetterSetupPhrase<T, TProperty>(setup);
         }
 
-        public ISetupSequentialAction SetupSequence(string methodOrPropertyName, params object[] args)
+        public ISetupSequentialAction SetupSequence(
+            string methodOrPropertyName,
+            params object[] args
+        )
         {
             return this.InternalSetupSequence(methodOrPropertyName, null, false, args);
         }
 
-        public ISetupSequentialAction SetupSequence(string methodOrPropertyName, bool exactParameterMatch, params object[] args)
+        public ISetupSequentialAction SetupSequence(
+            string methodOrPropertyName,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
-            return this.InternalSetupSequence(methodOrPropertyName, null, exactParameterMatch, args);
+            return this.InternalSetupSequence(
+                methodOrPropertyName,
+                null,
+                exactParameterMatch,
+                args
+            );
         }
 
-        public ISetupSequentialAction SetupSequence(string methodOrPropertyName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        public ISetupSequentialAction SetupSequence(
+            string methodOrPropertyName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
-            return this.InternalSetupSequence(methodOrPropertyName, genericTypeArguments, exactParameterMatch, args);
+            return this.InternalSetupSequence(
+                methodOrPropertyName,
+                genericTypeArguments,
+                exactParameterMatch,
+                args
+            );
         }
 
-        ISetupSequentialAction InternalSetupSequence(string methodOrPropertyName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        ISetupSequentialAction InternalSetupSequence(
+            string methodOrPropertyName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNullOrEmpty(methodOrPropertyName, nameof(methodOrPropertyName));
 
-            var method = GetMethod(methodOrPropertyName, genericTypeArguments, exactParameterMatch, args);
+            var method = GetMethod(
+                methodOrPropertyName,
+                genericTypeArguments,
+                exactParameterMatch,
+                args
+            );
             ThrowIfMemberMissing(methodOrPropertyName, method);
             ThrowIfPublicMethod(method, typeof(T).Name);
 
@@ -159,23 +220,50 @@ namespace Moq.Protected
             return new SetupSequencePhrase(setup);
         }
 
-        public ISetupSequentialResult<TResult> SetupSequence<TResult>(string methodOrPropertyName, params object[] args)
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            string methodOrPropertyName,
+            params object[] args
+        )
         {
             return this.InternalSetupSequence<TResult>(methodOrPropertyName, null, false, args);
         }
 
-        public ISetupSequentialResult<TResult> SetupSequence<TResult>(string methodOrPropertyName, bool exactParameterMatch, params object[] args)
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            string methodOrPropertyName,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
-            return this.InternalSetupSequence<TResult>(methodOrPropertyName, null, exactParameterMatch, args);
+            return this.InternalSetupSequence<TResult>(
+                methodOrPropertyName,
+                null,
+                exactParameterMatch,
+                args
+            );
         }
 
-        public ISetupSequentialResult<TResult> SetupSequence<TResult>(string methodOrPropertyName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        public ISetupSequentialResult<TResult> SetupSequence<TResult>(
+            string methodOrPropertyName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
-            return this.InternalSetupSequence<TResult>(methodOrPropertyName, genericTypeArguments, exactParameterMatch, args);
+            return this.InternalSetupSequence<TResult>(
+                methodOrPropertyName,
+                genericTypeArguments,
+                exactParameterMatch,
+                args
+            );
         }
 
-        ISetupSequentialResult<TResult> InternalSetupSequence<TResult>(string methodOrPropertyName, Type[] genericTypeArguments, bool exactParameterMatch, params object[] args)
+        ISetupSequentialResult<TResult> InternalSetupSequence<TResult>(
+            string methodOrPropertyName,
+            Type[] genericTypeArguments,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNullOrEmpty(methodOrPropertyName, nameof(methodOrPropertyName));
 
@@ -188,7 +276,12 @@ namespace Moq.Protected
                 return new SetupSequencePhrase<TResult>(getterSetup);
             }
 
-            var method = GetMethod(methodOrPropertyName, genericTypeArguments, exactParameterMatch, args);
+            var method = GetMethod(
+                methodOrPropertyName,
+                genericTypeArguments,
+                exactParameterMatch,
+                args
+            );
             ThrowIfMemberMissing(methodOrPropertyName, method);
             ThrowIfVoidMethod(method);
             ThrowIfPublicMethod(method, typeof(T).Name);
@@ -206,7 +299,12 @@ namespace Moq.Protected
             this.InternalVerify(methodName, null, times, false, args);
         }
 
-        public void Verify(string methodName, Type[] genericTypeArguments, Times times, params object[] args)
+        public void Verify(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify(methodName, genericTypeArguments, times, false, args);
@@ -217,13 +315,25 @@ namespace Moq.Protected
             this.InternalVerify(methodName, null, times, exactParameterMatch, args);
         }
 
-        public void Verify(string methodName, Type[] genericTypeArguments, Times times, bool exactParameterMatch, params object[] args)
+        public void Verify(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify(methodName, genericTypeArguments, times, exactParameterMatch, args);
         }
 
-        void InternalVerify(string methodName, Type[] genericTypeArguments, Times times, bool exactParameterMatch, params object[] args)
+        void InternalVerify(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
@@ -239,24 +349,52 @@ namespace Moq.Protected
             this.InternalVerify<TResult>(methodName, null, times, false, args);
         }
 
-        public void Verify<TResult>(string methodName, Type[] genericTypeArguments, Times times, params object[] args)
+        public void Verify<TResult>(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
             this.InternalVerify<TResult>(methodName, genericTypeArguments, times, false, args);
         }
 
-        public void Verify<TResult>(string methodName, Times times, bool exactParameterMatch, object[] args)
+        public void Verify<TResult>(
+            string methodName,
+            Times times,
+            bool exactParameterMatch,
+            object[] args
+        )
         {
             this.InternalVerify<TResult>(methodName, null, times, exactParameterMatch, args);
         }
 
-        public void Verify<TResult>(string methodName, Type[] genericTypeArguments, Times times, bool exactParameterMatch, params object[] args)
+        public void Verify<TResult>(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNull(genericTypeArguments, nameof(genericTypeArguments));
-            this.InternalVerify<TResult>(methodName, genericTypeArguments, times, exactParameterMatch, args);
+            this.InternalVerify<TResult>(
+                methodName,
+                genericTypeArguments,
+                times,
+                exactParameterMatch,
+                args
+            );
         }
 
-        void InternalVerify<TResult>(string methodName, Type[] genericTypeArguments, Times times, bool exactParameterMatch, params object[] args)
+        void InternalVerify<TResult>(
+            string methodName,
+            Type[] genericTypeArguments,
+            Times times,
+            bool exactParameterMatch,
+            params object[] args
+        )
         {
             Guard.NotNullOrEmpty(methodName, nameof(methodName));
 
@@ -300,7 +438,10 @@ namespace Moq.Protected
             ThrowIfPublicSetter(property, typeof(T).Name);
             Guard.CanWrite(property);
 
-            var expression = GetSetterExpression(property, ToExpressionArg(property.PropertyType, value));
+            var expression = GetSetterExpression(
+                property,
+                ToExpressionArg(property.PropertyType, value)
+            );
             // TODO should consider property indexers
             // TODO should receive the parameter here
             Mock.VerifySet(mock, expression, times, null);
@@ -311,35 +452,54 @@ namespace Moq.Protected
         static Expression<Func<T, TResult>> GetMemberAccess<TResult>(PropertyInfo property)
         {
             var param = Expression.Parameter(typeof(T), "mock");
-            return Expression.Lambda<Func<T, TResult>>(Expression.MakeMemberAccess(param, property), param);
+            return Expression.Lambda<Func<T, TResult>>(
+                Expression.MakeMemberAccess(param, property),
+                param
+            );
         }
 
-        static MethodInfo GetMethod(string methodName, Type[] genericTypeArguments, bool exact, params object[] args)
+        static MethodInfo GetMethod(
+            string methodName,
+            Type[] genericTypeArguments,
+            bool exact,
+            params object[] args
+        )
         {
             var argTypes = ToArgTypes(args);
-            var methods = typeof(T).GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
+            var methods = typeof(T)
+                .GetMethods(BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public)
                 .Where(m => m.Name == methodName);
             if (genericTypeArguments != null && genericTypeArguments.Length > 0)
             {
                 methods = methods
-                    .Where(m => m.IsGenericMethod && m.GetGenericArguments().Length == genericTypeArguments.Length)
+                    .Where(m =>
+                        m.IsGenericMethod
+                        && m.GetGenericArguments().Length == genericTypeArguments.Length
+                    )
                     .Select(m => m.MakeGenericMethod(genericTypeArguments));
             }
 
-            return methods
-                .SingleOrDefault(m => m.GetParameterTypes().CompareTo(argTypes, exact, considerTypeMatchers: false));
+            return methods.SingleOrDefault(m =>
+                m.GetParameterTypes().CompareTo(argTypes, exact, considerTypeMatchers: false)
+            );
         }
 
         static Expression<Func<T, TResult>> GetMethodCall<TResult>(MethodInfo method, object[] args)
         {
             var param = Expression.Parameter(typeof(T), "mock");
-            return Expression.Lambda<Func<T, TResult>>(Expression.Call(param, method, ToExpressionArgs(method, args)), param);
+            return Expression.Lambda<Func<T, TResult>>(
+                Expression.Call(param, method, ToExpressionArgs(method, args)),
+                param
+            );
         }
 
         static Expression<Action<T>> GetMethodCall(MethodInfo method, object[] args)
         {
             var param = Expression.Parameter(typeof(T), "mock");
-            return Expression.Lambda<Action<T>>(Expression.Call(param, method, ToExpressionArgs(method, args)), param);
+            return Expression.Lambda<Action<T>>(
+                Expression.Call(param, method, ToExpressionArgs(method, args)),
+                param
+            );
         }
 
         // TODO should support arguments for property indexers
@@ -347,7 +507,8 @@ namespace Moq.Protected
         {
             return typeof(T).GetProperty(
                 propertyName,
-                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public);
+                BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public
+            );
         }
 
         static Expression<Action<T>> GetSetterExpression(PropertyInfo property, Expression value)
@@ -356,18 +517,22 @@ namespace Moq.Protected
 
             return Expression.Lambda<Action<T>>(
                 Expression.Call(param, property.GetSetMethod(true), value),
-                param);
+                param
+            );
         }
 
         static void ThrowIfMemberMissing(string memberName, MemberInfo member)
         {
             if (member == null)
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MemberMissing,
-                    typeof(T).Name,
-                    memberName));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MemberMissing,
+                        typeof(T).Name,
+                        memberName
+                    )
+                );
             }
         }
 
@@ -388,14 +553,15 @@ namespace Moq.Protected
                     }
                 }
 
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MethodMissing,
-                    typeof(T).Name,
-                    methodName,
-                    string.Join(
-                        ", ",
-                        extractedTypeNames.ToArray())));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MethodMissing,
+                        typeof(T).Name,
+                        methodName,
+                        string.Join(", ", extractedTypeNames.ToArray())
+                    )
+                );
             }
         }
 
@@ -403,11 +569,14 @@ namespace Moq.Protected
         {
             if (method.IsPublic)
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.MethodIsPublic,
-                    reflectedTypeName,
-                    method.Name));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.MethodIsPublic,
+                        reflectedTypeName,
+                        method.Name
+                    )
+                );
             }
         }
 
@@ -415,11 +584,14 @@ namespace Moq.Protected
         {
             if (property.CanRead(out var getter) && getter.IsPublic)
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.UnexpectedPublicProperty,
-                    reflectedTypeName,
-                    property.Name));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.UnexpectedPublicProperty,
+                        reflectedTypeName,
+                        property.Name
+                    )
+                );
             }
         }
 
@@ -427,11 +599,14 @@ namespace Moq.Protected
         {
             if (property.CanWrite(out var setter) && setter.IsPublic)
             {
-                throw new ArgumentException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.UnexpectedPublicProperty,
-                    reflectedTypeName,
-                    property.Name));
+                throw new ArgumentException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.UnexpectedPublicProperty,
+                        reflectedTypeName,
+                        property.Name
+                    )
+                );
             }
         }
 
@@ -455,7 +630,9 @@ namespace Moq.Protected
             {
                 if (args[index] == null)
                 {
-                    throw new ArgumentException(Resources.UseItExprIsNullRatherThanNullArgumentValue);
+                    throw new ArgumentException(
+                        Resources.UseItExprIsNullRatherThanNullArgumentValue
+                    );
                 }
 
                 if (args[index] is not Expression expr)
@@ -483,10 +660,13 @@ namespace Moq.Protected
                     }
                     else
                     {
-                        throw new NotSupportedException(string.Format(
-                            Resources.Culture,
-                            Resources.UnsupportedMember,
-                            member.Member.Name));
+                        throw new NotSupportedException(
+                            string.Format(
+                                Resources.Culture,
+                                Resources.UnsupportedMember,
+                                member.Member.Name
+                            )
+                        );
                     }
                 }
                 else
@@ -517,7 +697,8 @@ namespace Moq.Protected
                         var fieldDeclaringType = field.DeclaringType;
                         if (fieldDeclaringType.IsGenericType)
                         {
-                            var fieldDeclaringTypeDefinition = fieldDeclaringType.GetGenericTypeDefinition();
+                            var fieldDeclaringTypeDefinition =
+                                fieldDeclaringType.GetGenericTypeDefinition();
                             if (fieldDeclaringTypeDefinition == typeof(It.Ref<>))
                             {
                                 itRefAnyField = field;
@@ -552,7 +733,6 @@ namespace Moq.Protected
                 {
                     return expression;
                 }
-
             }
 
             return Expression.Constant(arg, type);

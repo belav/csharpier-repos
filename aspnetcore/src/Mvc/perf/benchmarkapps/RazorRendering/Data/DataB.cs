@@ -5,7 +5,14 @@ namespace Data
 {
     public class DataB
     {
-        public DataB(int id, HtmlString icon, string name, int value, DateTimeOffset startDate, DateTimeOffset completeDate)
+        public DataB(
+            int id,
+            HtmlString icon,
+            string name,
+            int value,
+            DateTimeOffset startDate,
+            DateTimeOffset completeDate
+        )
         {
             Id = id;
             Icon = icon;

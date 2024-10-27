@@ -19,10 +19,7 @@ public class SimpleTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(string));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
         var binder = new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance);
 
@@ -37,14 +34,13 @@ public class SimpleTypeModelBinderTest
     [Theory]
     [InlineData("")]
     [InlineData(" \t \r\n ")]
-    public async Task BindModel_ReturnsProvidedWhitespaceString_WhenNotConvertEmptyStringToNull(string value)
+    public async Task BindModel_ReturnsProvidedWhitespaceString_WhenNotConvertEmptyStringToNull(
+        string value
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(string));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
@@ -67,15 +63,15 @@ public class SimpleTypeModelBinderTest
         get
         {
             var data = new TheoryData<Type>
-                {
-                    typeof(byte),
-                    typeof(short),
-                    typeof(int),
-                    typeof(long),
-                    typeof(Guid),
-                    typeof(double),
-                    typeof(DayOfWeek),
-                };
+            {
+                typeof(byte),
+                typeof(short),
+                typeof(int),
+                typeof(long),
+                typeof(Guid),
+                typeof(double),
+                typeof(DayOfWeek),
+            };
 
             // DateTimeOffset doesn't have a TypeConverter in Mono.
             if (!TestPlatformHelper.IsMono)
@@ -89,14 +85,13 @@ public class SimpleTypeModelBinderTest
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(Type destinationType)
+    public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "some-value" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "some-value" } };
 
         var binder = new SimpleTypeModelBinder(destinationType, NullLoggerFactory.Instance);
 
@@ -113,10 +108,7 @@ public class SimpleTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", string.Empty }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", string.Empty } };
         var binder = new SimpleTypeModelBinder(destinationType, NullLoggerFactory.Instance);
 
         // Act
@@ -138,9 +130,9 @@ public class SimpleTypeModelBinderTest
         var message = "The value 'not an integer' is not valid.";
         var bindingContext = GetBindingContext(typeof(int));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "not an integer" }
-            };
+        {
+            { "theModelName", "not an integer" },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(int), NullLoggerFactory.Instance);
 
@@ -164,17 +156,22 @@ public class SimpleTypeModelBinderTest
             var parameter = method.GetParameters()[0]; // IsLovely(int parameter)
 
             return new TheoryData<ModelMetadata>
-                {
-                    metadataProvider.GetMetadataForParameter(parameter),
-                    metadataProvider.GetMetadataForProperty(typeof(MetadataClass), nameof(MetadataClass.Property)),
-                    metadataProvider.GetMetadataForType(typeof(int)),
-                };
+            {
+                metadataProvider.GetMetadataForParameter(parameter),
+                metadataProvider.GetMetadataForProperty(
+                    typeof(MetadataClass),
+                    nameof(MetadataClass.Property)
+                ),
+                metadataProvider.GetMetadataForType(typeof(int)),
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(IntegerModelMetadataDataSet))]
-    public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(ModelMetadata metadata)
+    public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(
+        ModelMetadata metadata
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int));
@@ -200,10 +197,7 @@ public class SimpleTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(string));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
         var binder = new SimpleTypeModelBinder(typeof(string), NullLoggerFactory.Instance);
 
@@ -220,10 +214,7 @@ public class SimpleTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12" } };
 
         var binder = new SimpleTypeModelBinder(typeof(int?), NullLoggerFactory.Instance);
 
@@ -241,10 +232,7 @@ public class SimpleTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(double?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12.5" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12.5" } };
 
         var binder = new SimpleTypeModelBinder(typeof(double?), NullLoggerFactory.Instance);
 
@@ -259,15 +247,14 @@ public class SimpleTypeModelBinderTest
 
     [Theory]
     [MemberData(nameof(IntegerModelMetadataDataSet))]
-    public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(ModelMetadata metadata)
+    public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(
+        ModelMetadata metadata
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int));
         bindingContext.ModelMetadata = metadata;
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "42" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "42" } };
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
@@ -289,17 +276,17 @@ public class SimpleTypeModelBinderTest
         {
             // Data set does not include bool, byte, sbyte, or char because they do not need thousands separators.
             return new TheoryData<Type>
-                {
-                    typeof(decimal),
-                    typeof(double),
-                    typeof(float),
-                    typeof(int),
-                    typeof(long),
-                    typeof(short),
-                    typeof(uint),
-                    typeof(ulong),
-                    typeof(ushort),
-                };
+            {
+                typeof(decimal),
+                typeof(double),
+                typeof(float),
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+            };
         }
     }
 
@@ -310,9 +297,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(type);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "32,000" }
-            };
+        {
+            { "theModelName", "32,000" },
+        };
 
         var binder = new SimpleTypeModelBinder(type, NullLoggerFactory.Instance);
 
@@ -338,9 +325,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(decimal));
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "12,5" }
-            };
+        {
+            { "theModelName", "12,5" },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(decimal), NullLoggerFactory.Instance);
 
@@ -359,9 +346,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(decimal));
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "12,5" }
-            };
+        {
+            { "theModelName", "12,5" },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(decimal), NullLoggerFactory.Instance);
 
@@ -383,9 +370,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", new object[] { "Value1" } }
-            };
+        {
+            { "theModelName", new object[] { "Value1" } },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(IntEnum), NullLoggerFactory.Instance);
 
@@ -404,9 +391,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", new object[] { "1" } }
-            };
+        {
+            { "theModelName", new object[] { "1" } },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(IntEnum), NullLoggerFactory.Instance);
 
@@ -424,17 +411,17 @@ public class SimpleTypeModelBinderTest
         get
         {
             return new TheoryData<string, int>
-                {
-                    { "0", 0 },
-                    { "1", 1 },
-                    { "13", 13 },
-                    { "Value1", 1 },
-                    { "Value1, Value2", 3 },
-                    // These two values look like big integers but are treated as two separate enum values that are
-                    // or'd together.
-                    { "32,015", 47 },
-                    { "32,128", 160 },
-                };
+            {
+                { "0", 0 },
+                { "1", 1 },
+                { "13", 13 },
+                { "Value1", 1 },
+                { "Value1, Value2", 3 },
+                // These two values look like big integers but are treated as two separate enum values that are
+                // or'd together.
+                { "32,015", 47 },
+                { "32,128", 160 },
+            };
         }
     }
 
@@ -445,9 +432,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", flagsEnumValue }
-            };
+        {
+            { "theModelName", flagsEnumValue },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(IntEnum), NullLoggerFactory.Instance);
 
@@ -468,9 +455,9 @@ public class SimpleTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(FlagsEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", flagsEnumValue }
-            };
+        {
+            { "theModelName", flagsEnumValue },
+        };
 
         var binder = new SimpleTypeModelBinder(typeof(FlagsEnum), NullLoggerFactory.Instance);
 
@@ -490,13 +477,13 @@ public class SimpleTypeModelBinderTest
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "theModelName",
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() // empty
+            ValueProvider =
+                new SimpleValueProvider() // empty
+            ,
         };
     }
 
-    private sealed class TestClass
-    {
-    }
+    private sealed class TestClass { }
 
     [Flags]
     private enum FlagsEnum
@@ -512,7 +499,7 @@ public class SimpleTypeModelBinderTest
         Value0 = 0,
         Value1 = 1,
         Value2 = 2,
-        MaxValue = int.MaxValue
+        MaxValue = int.MaxValue,
     }
 
     private class MetadataClass

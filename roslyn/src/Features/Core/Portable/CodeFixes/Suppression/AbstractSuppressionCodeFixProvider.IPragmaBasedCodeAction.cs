@@ -16,7 +16,11 @@ namespace Microsoft.CodeAnalysis.CodeFixes.Suppression
         /// </summary>
         internal interface IPragmaBasedCodeAction
         {
-            Task<Document> GetChangedDocumentAsync(bool includeStartTokenChange, bool includeEndTokenChange, CancellationToken cancellationToken);
+            Task<Document> GetChangedDocumentAsync(
+                bool includeStartTokenChange,
+                bool includeEndTokenChange,
+                CancellationToken cancellationToken
+            );
         }
     }
 }

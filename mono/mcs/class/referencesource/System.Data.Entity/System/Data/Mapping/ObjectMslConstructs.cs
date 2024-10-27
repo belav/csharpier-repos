@@ -16,7 +16,8 @@ namespace System.Data.Mapping
     /// <summary>
     /// Defines all the string constrcuts defined in OC MSL specification
     /// </summary>
-    internal static class ObjectMslConstructs {
+    internal static class ObjectMslConstructs
+    {
         #region Fields
         internal const string MappingElement = "Mapping";
         internal const string AliasElement = "Alias";

@@ -18,8 +18,16 @@ internal sealed class AddProjectCommand : BaseCommand
     public AddProjectCommand(BaseCommand parent, IHttpClientWrapper httpClient)
         : base(parent, CommandName, httpClient)
     {
-        _codeGeneratorOption = Option("-c|--code-generator", "The code generator to use. Defaults to 'NSwagCSharp'.", CommandOptionType.SingleValue);
-        _sourceProjectArg = Argument(SourceProjectArgName, "The OpenAPI project to add. This must be the path to project file(s) containing OpenAPI endpoints", multipleValues: true);
+        _codeGeneratorOption = Option(
+            "-c|--code-generator",
+            "The code generator to use. Defaults to 'NSwagCSharp'.",
+            CommandOptionType.SingleValue
+        );
+        _sourceProjectArg = Argument(
+            SourceProjectArgName,
+            "The OpenAPI project to add. This must be the path to project file(s) containing OpenAPI endpoints",
+            multipleValues: true
+        );
     }
 
     internal readonly CommandArgument _sourceProjectArg;
@@ -33,7 +41,12 @@ internal sealed class AddProjectCommand : BaseCommand
 
         foreach (var sourceFile in _sourceProjectArg.Values)
         {
-            await AddOpenAPIReference(OpenApiProjectReference, projectFilePath, sourceFile, codeGenerator);
+            await AddOpenAPIReference(
+                OpenApiProjectReference,
+                projectFilePath,
+                sourceFile,
+                codeGenerator
+            );
         }
 
         return 0;
@@ -46,7 +59,9 @@ internal sealed class AddProjectCommand : BaseCommand
         {
             if (!IsProjectFile(sourceFile))
             {
-                throw new ArgumentException($"{SourceProjectArgName} of '{sourceFile}' was not valid. Valid values must be project file(s)");
+                throw new ArgumentException(
+                    $"{SourceProjectArgName} of '{sourceFile}' was not valid. Valid values must be project file(s)"
+                );
             }
         }
 

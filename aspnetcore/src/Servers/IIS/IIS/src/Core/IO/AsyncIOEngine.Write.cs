@@ -16,10 +16,19 @@ internal partial class AsyncIOEngine
             _engine = engine;
         }
 
-        protected override unsafe int WriteChunks(NativeSafeHandle requestHandler, int chunkCount, HTTP_DATA_CHUNK* dataChunks,
-            out bool completionExpected)
+        protected override unsafe int WriteChunks(
+            NativeSafeHandle requestHandler,
+            int chunkCount,
+            HTTP_DATA_CHUNK* dataChunks,
+            out bool completionExpected
+        )
         {
-            return NativeMethods.HttpWriteResponseBytes(requestHandler, dataChunks, chunkCount, out completionExpected);
+            return NativeMethods.HttpWriteResponseBytes(
+                requestHandler,
+                dataChunks,
+                chunkCount,
+                out completionExpected
+            );
         }
 
         protected override void ResetOperation()

@@ -58,50 +58,64 @@ using RabbitMQ.Client;
 using RabbitMQ.Client.Impl;
 using RabbitMQ.Util;
 
-namespace RabbitMQ.Client.Framing.Impl.v0_8qpid {
-    public abstract class ProtocolBase: AbstractProtocolBase {
-
-        public override IFrameHandler CreateFrameHandler(AmqpTcpEndpoint endpoint) {
+namespace RabbitMQ.Client.Framing.Impl.v0_8qpid
+{
+    public abstract class ProtocolBase : AbstractProtocolBase
+    {
+        public override IFrameHandler CreateFrameHandler(AmqpTcpEndpoint endpoint)
+        {
             return new SocketFrameHandler_0_9(endpoint);
         }
 
-        public override IModel CreateModel(ISession session) {
+        public override IModel CreateModel(ISession session)
+        {
             return new Model(session);
         }
 
-        public override IConnection CreateConnection(ConnectionFactory factory,
-                                                     bool insist,
-                                                     IFrameHandler frameHandler)
+        public override IConnection CreateConnection(
+            ConnectionFactory factory,
+            bool insist,
+            IFrameHandler frameHandler
+        )
         {
             return new Connection(factory, insist, frameHandler);
         }
 
-        public override void CreateConnectionClose(ushort reasonCode,
-                                                   string reasonText,
-                                                   out Command request,
-                                                   out int replyClassId,
-                                                   out int replyMethodId)
+        public override void CreateConnectionClose(
+            ushort reasonCode,
+            string reasonText,
+            out Command request,
+            out int replyClassId,
+            out int replyMethodId
+        )
         {
-            request = new Command(new RabbitMQ.Client.Framing.Impl.v0_8qpid.ConnectionClose(reasonCode,
-                                                                                        reasonText,
-                                                                                        0, 0));
+            request = new Command(
+                new RabbitMQ.Client.Framing.Impl.v0_8qpid.ConnectionClose(
+                    reasonCode,
+                    reasonText,
+                    0,
+                    0
+                )
+            );
             replyClassId = RabbitMQ.Client.Framing.Impl.v0_8qpid.ConnectionCloseOk.ClassId;
             replyMethodId = RabbitMQ.Client.Framing.Impl.v0_8qpid.ConnectionCloseOk.MethodId;
         }
 
-        public override void CreateChannelClose(ushort reasonCode,
-                                                string reasonText,
-                                                out Command request,
-                                                out int replyClassId,
-                                                out int replyMethodId)
+        public override void CreateChannelClose(
+            ushort reasonCode,
+            string reasonText,
+            out Command request,
+            out int replyClassId,
+            out int replyMethodId
+        )
         {
-            request = new Command(new RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelClose(reasonCode,
-                                                                                     reasonText,
-                                                                                     0, 0)); 
+            request = new Command(
+                new RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelClose(reasonCode, reasonText, 0, 0)
+            );
             replyClassId = RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelCloseOk.ClassId;
-            replyMethodId = RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelCloseOk.MethodId;                                                                                     
+            replyMethodId = RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelCloseOk.MethodId;
         }
-        
+
         public override bool CanSendWhileClosed(Command cmd)
         {
             return cmd.m_method is RabbitMQ.Client.Framing.Impl.v0_8qpid.ChannelCloseOk;

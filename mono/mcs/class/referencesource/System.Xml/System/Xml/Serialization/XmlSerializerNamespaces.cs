@@ -2,38 +2,38 @@
 // <copyright file="XmlSerializerNamespaces.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
-// <owner current="true" primary="true">Microsoft</owner>                                                                
+// <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Serialization {
-
-    using System.Reflection;
+namespace System.Xml.Serialization
+{
+    using System;
     using System.Collections;
     using System.IO;
+    using System.Reflection;
     using System.Xml.Schema;
-    using System;
 
     /// <include file='doc\XmlSerializerNamespaces.uex' path='docs/doc[@for="XmlSerializerNamespaces"]/*' />
     /// <devdoc>
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
-    public class XmlSerializerNamespaces {
+    public class XmlSerializerNamespaces
+    {
         Hashtable namespaces = null;
 
         /// <include file='doc\XmlSerializerNamespaces.uex' path='docs/doc[@for="XmlSerializerNamespaces.XmlSerializerNamespaces"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces() {
-        }
-
+        public XmlSerializerNamespaces() { }
 
         /// <include file='doc\XmlSerializerNamespaces.uex' path='docs/doc[@for="XmlSerializerNamespaces.XmlSerializerNamespaces1"]/*' />
         /// <internalonly/>
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces(XmlSerializerNamespaces namespaces) {
+        public XmlSerializerNamespaces(XmlSerializerNamespaces namespaces)
+        {
             this.namespaces = (Hashtable)namespaces.Namespaces.Clone();
         }
 
@@ -41,18 +41,21 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlSerializerNamespaces(XmlQualifiedName[] namespaces) {
-            for (int i = 0; i < namespaces.Length; i++) {
+        public XmlSerializerNamespaces(XmlQualifiedName[] namespaces)
+        {
+            for (int i = 0; i < namespaces.Length; i++)
+            {
                 XmlQualifiedName qname = namespaces[i];
                 Add(qname.Name, qname.Namespace);
             }
         }
-        
+
         /// <include file='doc\XmlSerializerNamespaces.uex' path='docs/doc[@for="XmlSerializerNamespaces.Add"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public void Add(string prefix, string ns) {
+        public void Add(string prefix, string ns)
+        {
             // parameter value check
             if (prefix != null && prefix.Length > 0)
                 XmlConvert.VerifyNCName(prefix);
@@ -62,7 +65,8 @@ namespace System.Xml.Serialization {
             AddInternal(prefix, ns);
         }
 
-        internal void AddInternal(string prefix, string ns) {
+        internal void AddInternal(string prefix, string ns)
+        {
             Namespaces[prefix] = ns;
         }
 
@@ -70,7 +74,8 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName[] ToArray() {
+        public XmlQualifiedName[] ToArray()
+        {
             if (NamespaceList == null)
                 return new XmlQualifiedName[0];
             return (XmlQualifiedName[])NamespaceList.ToArray(typeof(XmlQualifiedName));
@@ -80,24 +85,30 @@ namespace System.Xml.Serialization {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public int Count {
+        public int Count
+        {
             get { return Namespaces.Count; }
         }
 
-        internal ArrayList NamespaceList {
-            get {
+        internal ArrayList NamespaceList
+        {
+            get
+            {
                 if (namespaces == null || namespaces.Count == 0)
                     return null;
                 ArrayList namespaceList = new ArrayList();
-                foreach(string key in Namespaces.Keys) {
+                foreach (string key in Namespaces.Keys)
+                {
                     namespaceList.Add(new XmlQualifiedName(key, (string)Namespaces[key]));
                 }
                 return namespaceList;
             }
         }
 
-        internal Hashtable Namespaces {
-            get {
+        internal Hashtable Namespaces
+        {
+            get
+            {
                 if (namespaces == null)
                     namespaces = new Hashtable();
                 return namespaces;
@@ -105,14 +116,17 @@ namespace System.Xml.Serialization {
             set { namespaces = value; }
         }
 
-        internal string LookupPrefix(string ns) {
+        internal string LookupPrefix(string ns)
+        {
             if (string.IsNullOrEmpty(ns))
                 return null;
             if (namespaces == null || namespaces.Count == 0)
                 return null;
 
-            foreach(string prefix in namespaces.Keys) {
-                if (!string.IsNullOrEmpty(prefix) && (string)namespaces[prefix] == ns) {
+            foreach (string prefix in namespaces.Keys)
+            {
+                if (!string.IsNullOrEmpty(prefix) && (string)namespaces[prefix] == ns)
+                {
                     return prefix;
                 }
             }
@@ -120,4 +134,3 @@ namespace System.Xml.Serialization {
         }
     }
 }
-

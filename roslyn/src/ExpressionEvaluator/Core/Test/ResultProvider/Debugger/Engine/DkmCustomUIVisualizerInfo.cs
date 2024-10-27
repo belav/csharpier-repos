@@ -21,26 +21,12 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         public string DebuggeeSideVisualizerAssemblyName;
         public Guid ExtensionPartId;
 
-        public static DkmCustomUIVisualizerInfo Create(uint Id, string MenuName, string Description, string Metric)
-        {
-            return new DkmCustomUIVisualizerInfo
-            {
-                Id = Id,
-                MenuName = MenuName,
-                Description = Description,
-                Metric = Metric
-            };
-        }
-
-        public static DkmCustomUIVisualizerInfo Create(uint Id,
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
             string MenuName,
             string Description,
-            string Metric,
-            string UISideVisualizerTypeName,
-            string UISideVisualizerAssemblyName,
-            DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
-            string DebuggeeSideVisualizerTypeName,
-            string DebuggeeSideVisualizerAssemblyName)
+            string Metric
+        )
         {
             return new DkmCustomUIVisualizerInfo
             {
@@ -48,15 +34,11 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 MenuName = MenuName,
                 Description = Description,
                 Metric = Metric,
-                UISideVisualizerTypeName = UISideVisualizerTypeName,
-                UISideVisualizerAssemblyName = UISideVisualizerAssemblyName,
-                UISideVisualizerAssemblyLocation = UISideVisualizerAssemblyLocation,
-                DebuggeeSideVisualizerTypeName = DebuggeeSideVisualizerTypeName,
-                DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName
             };
         }
 
-        public static DkmCustomUIVisualizerInfo Create(uint Id,
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
             string MenuName,
             string Description,
             string Metric,
@@ -64,8 +46,8 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             string UISideVisualizerAssemblyName,
             DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
             string DebuggeeSideVisualizerTypeName,
-            string DebuggeeSideVisualizerAssemblyName,
-            Guid ExtensionPartId)
+            string DebuggeeSideVisualizerAssemblyName
+        )
         {
             return new DkmCustomUIVisualizerInfo
             {
@@ -78,7 +60,34 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
                 UISideVisualizerAssemblyLocation = UISideVisualizerAssemblyLocation,
                 DebuggeeSideVisualizerTypeName = DebuggeeSideVisualizerTypeName,
                 DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName,
-                ExtensionPartId = ExtensionPartId
+            };
+        }
+
+        public static DkmCustomUIVisualizerInfo Create(
+            uint Id,
+            string MenuName,
+            string Description,
+            string Metric,
+            string UISideVisualizerTypeName,
+            string UISideVisualizerAssemblyName,
+            DkmClrCustomVisualizerAssemblyLocation UISideVisualizerAssemblyLocation,
+            string DebuggeeSideVisualizerTypeName,
+            string DebuggeeSideVisualizerAssemblyName,
+            Guid ExtensionPartId
+        )
+        {
+            return new DkmCustomUIVisualizerInfo
+            {
+                Id = Id,
+                MenuName = MenuName,
+                Description = Description,
+                Metric = Metric,
+                UISideVisualizerTypeName = UISideVisualizerTypeName,
+                UISideVisualizerAssemblyName = UISideVisualizerAssemblyName,
+                UISideVisualizerAssemblyLocation = UISideVisualizerAssemblyLocation,
+                DebuggeeSideVisualizerTypeName = DebuggeeSideVisualizerTypeName,
+                DebuggeeSideVisualizerAssemblyName = DebuggeeSideVisualizerAssemblyName,
+                ExtensionPartId = ExtensionPartId,
             };
         }
     }

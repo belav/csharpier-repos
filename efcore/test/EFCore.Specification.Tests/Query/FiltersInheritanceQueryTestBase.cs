@@ -13,9 +13,7 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
     where TFixture : InheritanceQueryFixtureBase, new()
 {
     protected FiltersInheritanceQueryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -24,16 +22,15 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
         return AssertFilteredQuery(
             async,
             ss => ss.Set<Animal>().OfType<Animal>().OrderBy(a => a.Species),
-            assertOrder: true);
+            assertOrder: true
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_is_kiwi(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Animal>().Where(a => a is Kiwi));
+        return AssertFilteredQuery(async, ss => ss.Set<Animal>().Where(a => a is Kiwi));
     }
 
     [ConditionalTheory]
@@ -42,16 +39,15 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
     {
         return AssertFilteredQuery(
             async,
-            ss => ss.Set<Animal>().Where(a => a is Kiwi && a.CountryId == 1));
+            ss => ss.Set<Animal>().Where(a => a is Kiwi && a.CountryId == 1)
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_is_kiwi_in_projection(bool async)
     {
-        return AssertFilteredQueryScalar(
-            async,
-            ss => ss.Set<Animal>().Select(a => a is Kiwi));
+        return AssertFilteredQueryScalar(async, ss => ss.Set<Animal>().Select(a => a is Kiwi));
     }
 
     [ConditionalTheory]
@@ -61,7 +57,8 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
         return AssertFilteredQuery(
             async,
             ss => ss.Set<Animal>().OfType<Bird>().OrderBy(a => a.Species),
-            assertOrder: true);
+            assertOrder: true
+        );
     }
 
     [ConditionalTheory]
@@ -70,11 +67,13 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
     {
         return AssertFilteredQuery(
             async,
-            ss => ss.Set<Animal>()
-                .Where(a => a.CountryId == 1)
-                .OfType<Bird>()
-                .OrderBy(a => a.Species),
-            assertOrder: true);
+            ss =>
+                ss.Set<Animal>()
+                    .Where(a => a.CountryId == 1)
+                    .OfType<Bird>()
+                    .OrderBy(a => a.Species),
+            assertOrder: true
+        );
     }
 
     [ConditionalTheory]
@@ -83,38 +82,30 @@ public abstract class FiltersInheritanceQueryTestBase<TFixture> : FilteredQueryT
     {
         return AssertFilteredQuery(
             async,
-            ss => ss.Set<Animal>()
-                .OfType<Bird>()
-                .Select(b => new { b.Name }),
-            elementSorter: e => e.Name);
+            ss => ss.Set<Animal>().OfType<Bird>().Select(b => new { b.Name }),
+            elementSorter: e => e.Name
+        );
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_of_type_bird_first(bool async)
     {
-        return AssertFirst(
-            async,
-            ss => ss.Set<Animal>().OfType<Bird>().OrderBy(a => a.Species));
+        return AssertFirst(async, ss => ss.Set<Animal>().OfType<Bird>().OrderBy(a => a.Species));
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_of_type_kiwi(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Animal>().OfType<Kiwi>());
+        return AssertFilteredQuery(async, ss => ss.Set<Animal>().OfType<Kiwi>());
     }
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
     public virtual Task Can_use_derived_set(bool async)
     {
-        return AssertFilteredQuery(
-            async,
-            ss => ss.Set<Eagle>(),
-            assertEmpty: true);
+        return AssertFilteredQuery(async, ss => ss.Set<Eagle>(), assertEmpty: true);
     }
 
     [ConditionalTheory]

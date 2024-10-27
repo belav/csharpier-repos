@@ -23,14 +23,18 @@ namespace System.Threading.Tests
         [Fact]
         public static void RunTest_SkipOnDesktopFramework()
         {
-            Assert.Throws<ArgumentNullException>(() => CompressedStack.Run(null, state => { }, null));
+            Assert.Throws<ArgumentNullException>(
+                () => CompressedStack.Run(null, state => { }, null)
+            );
         }
 
         [Fact]
         public static void RunTest()
         {
             CompressedStack compressedStack = CompressedStack.Capture();
-            Assert.Throws<NullReferenceException>(() => CompressedStack.Run(compressedStack, null, null));
+            Assert.Throws<NullReferenceException>(
+                () => CompressedStack.Run(compressedStack, null, null)
+            );
 
             var obj = new object();
             Thread mainThread = Thread.CurrentThread;
@@ -43,7 +47,8 @@ namespace System.Threading.Tests
                     Assert.Same(mainThread, Thread.CurrentThread);
                     callbackRan = true;
                 },
-                obj);
+                obj
+            );
             Assert.True(callbackRan);
         }
     }

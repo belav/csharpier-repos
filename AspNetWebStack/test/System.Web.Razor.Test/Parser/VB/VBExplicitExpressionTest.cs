@@ -12,12 +12,15 @@ namespace System.Web.Razor.Test.Parser.VB
         [Fact]
         public void VB_Simple_ExplicitExpression()
         {
-            ParseBlockTest("@(foo)",
+            ParseBlockTest(
+                "@(foo)",
                 new ExpressionBlock(
                     Factory.CodeTransition(),
                     Factory.MetaCode("(").Accepts(AcceptedCharacters.None),
                     Factory.Code("foo").AsExpression(),
-                    Factory.MetaCode(")").Accepts(AcceptedCharacters.None)));
+                    Factory.MetaCode(")").Accepts(AcceptedCharacters.None)
+                )
+            );
         }
     }
 }

@@ -19,22 +19,29 @@ namespace Microsoft.VSDesigner.WCFModel
 {
     /// <summary>
     /// Wsdl import extension to remove the soap1.2 endpoint for ASMX services.
-    /// By default, ASMX services expose two endpoints, soap & soap1.2. In order 
+    /// By default, ASMX services expose two endpoints, soap & soap1.2. In order
     /// to have easy-of-use-parity with VS2005 ASMX web service consumption
     /// we remove one of the endpoints for this special case.
     /// </summary>
     [SecurityCritical]
     [PermissionSet(SecurityAction.InheritanceDemand, Name = "FullTrust")]
-    internal class AsmxEndpointPickerExtension : System.ServiceModel.Description.IWsdlImportExtension
+    internal class AsmxEndpointPickerExtension
+        : System.ServiceModel.Description.IWsdlImportExtension
     {
         [SecuritySafeCritical]
-        void System.ServiceModel.Description.IWsdlImportExtension.ImportContract(System.ServiceModel.Description.WsdlImporter importer, System.ServiceModel.Description.WsdlContractConversionContext context)
+        void System.ServiceModel.Description.IWsdlImportExtension.ImportContract(
+            System.ServiceModel.Description.WsdlImporter importer,
+            System.ServiceModel.Description.WsdlContractConversionContext context
+        )
         {
             // We don't really care...
         }
 
         [SecuritySafeCritical]
-        void System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(System.ServiceModel.Description.WsdlImporter importer, System.ServiceModel.Description.WsdlEndpointConversionContext context)
+        void System.ServiceModel.Description.IWsdlImportExtension.ImportEndpoint(
+            System.ServiceModel.Description.WsdlImporter importer,
+            System.ServiceModel.Description.WsdlEndpointConversionContext context
+        )
         {
             // We don't really care...
         }
@@ -47,7 +54,11 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <param name="xmlSchemas">Ignored</param>
         /// <param name="policy">Ignored</param>
         [SecuritySafeCritical]
-        void System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(System.Web.Services.Description.ServiceDescriptionCollection wsdlDocuments, System.Xml.Schema.XmlSchemaSet xmlSchemas, System.Collections.Generic.ICollection<System.Xml.XmlElement> policy)
+        void System.ServiceModel.Description.IWsdlImportExtension.BeforeImport(
+            System.Web.Services.Description.ServiceDescriptionCollection wsdlDocuments,
+            System.Xml.Schema.XmlSchemaSet xmlSchemas,
+            System.Collections.Generic.ICollection<System.Xml.XmlElement> policy
+        )
         {
             if (wsdlDocuments == null)
             {
@@ -60,16 +71,23 @@ namespace Microsoft.VSDesigner.WCFModel
                 {
                     // We only touch services that have exactly two endpoints
                     // (soap & soap 1.2)
-                    if (service.Ports.Count != 2) continue;
+                    if (service.Ports.Count != 2)
+                        continue;
 
                     Port portToDelete = null;
 
                     // Check both ports to see if they are a soap & soap 1.2 pair
-                    if (IsSoapAsmxPort(typeof(SoapAddressBinding), service.Ports[0]) && IsSoapAsmxPort(typeof(Soap12AddressBinding), service.Ports[1]))
+                    if (
+                        IsSoapAsmxPort(typeof(SoapAddressBinding), service.Ports[0])
+                        && IsSoapAsmxPort(typeof(Soap12AddressBinding), service.Ports[1])
+                    )
                     {
                         portToDelete = service.Ports[1];
                     }
-                    else if (IsSoapAsmxPort(typeof(SoapAddressBinding), service.Ports[1]) && IsSoapAsmxPort(typeof(Soap12AddressBinding), service.Ports[0]))
+                    else if (
+                        IsSoapAsmxPort(typeof(SoapAddressBinding), service.Ports[1])
+                        && IsSoapAsmxPort(typeof(Soap12AddressBinding), service.Ports[0])
+                    )
                     {
                         portToDelete = service.Ports[0];
                     }
@@ -86,7 +104,13 @@ namespace Microsoft.VSDesigner.WCFModel
 
                             foreach (Binding binding in document.Bindings)
                             {
-                                if (String.Equals(binding.Name, portToDelete.Binding.Name, StringComparison.Ordinal))
+                                if (
+                                    String.Equals(
+                                        binding.Name,
+                                        portToDelete.Binding.Name,
+                                        StringComparison.Ordinal
+                                    )
+                                )
                                 {
                                     bindingsToDelete.Add(binding);
                                 }
@@ -110,8 +134,13 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <returns></returns>
         private bool IsSoapAsmxPort(System.Type addressType, Port port)
         {
-            SoapAddressBinding addressBinding = port.Extensions.Find(addressType) as SoapAddressBinding;
-            if (addressBinding != null && addressBinding.GetType() == addressType && IsAsmxUri(addressBinding.Location))
+            SoapAddressBinding addressBinding =
+                port.Extensions.Find(addressType) as SoapAddressBinding;
+            if (
+                addressBinding != null
+                && addressBinding.GetType() == addressType
+                && IsAsmxUri(addressBinding.Location)
+            )
             {
                 return true;
             }
@@ -144,14 +173,20 @@ namespace Microsoft.VSDesigner.WCFModel
                 try
                 {
                     string fileName = segments[segments.Length - 1];
-                    if (String.Equals(System.IO.Path.GetExtension(fileName), ".asmx", StringComparison.OrdinalIgnoreCase))
+                    if (
+                        String.Equals(
+                            System.IO.Path.GetExtension(fileName),
+                            ".asmx",
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
                     {
                         return true;
                     }
                 }
                 catch (System.ArgumentException)
                 {
-                    // This was most likely an invalid path... well, let's just treat this as if 
+                    // This was most likely an invalid path... well, let's just treat this as if
                     // this is not an ASMX endpoint...
                 }
             }

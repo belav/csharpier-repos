@@ -8,6 +8,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         DerivedClasses,
         DerivedInterfaces,
-        ImplementingTypes
+        ImplementingTypes,
     }
 }

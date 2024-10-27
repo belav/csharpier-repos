@@ -20,7 +20,9 @@ internal sealed class CircuitJSComponentInterop : JSComponentInterop
     {
         if (_jsRootComponentCount >= _circuitOptions.RootComponents.MaxJSRootComponents)
         {
-            throw new InvalidOperationException($"Cannot add further JS root components because the configured limit of {_circuitOptions.RootComponents.MaxJSRootComponents} has been reached.");
+            throw new InvalidOperationException(
+                $"Cannot add further JS root components because the configured limit of {_circuitOptions.RootComponents.MaxJSRootComponents} has been reached."
+            );
         }
 
         var id = base.AddRootComponent(identifier, domElementSelector);

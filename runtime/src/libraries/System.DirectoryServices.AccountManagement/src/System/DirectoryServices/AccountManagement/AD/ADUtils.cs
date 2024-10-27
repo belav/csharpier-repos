@@ -32,8 +32,12 @@ namespace System.DirectoryServices.AccountManagement
         // Retrieves the name of the actual server that the DirectoryEntry is connected to
         internal static string GetServerName(DirectoryEntry de)
         {
-            UnsafeNativeMethods.IAdsObjectOptions objOptions = (UnsafeNativeMethods.IAdsObjectOptions)de.NativeObject;
-            return (string)objOptions.GetOption(0 /* == ADS_OPTION_SERVERNAME */);
+            UnsafeNativeMethods.IAdsObjectOptions objOptions =
+                (UnsafeNativeMethods.IAdsObjectOptions)de.NativeObject;
+            return (string)
+                objOptions.GetOption(
+                    0 /* == ADS_OPTION_SERVERNAME */
+                );
         }
 
         // This routine escapes values used in DNs, per RFC 2253 and ADSI escaping rules.
@@ -96,7 +100,7 @@ namespace System.DirectoryServices.AccountManagement
                         break;
 
                     case '\"':
-                        sb.Append("\\\"");  // that's the literal sequence "backslash followed by a quotation mark"
+                        sb.Append("\\\""); // that's the literal sequence "backslash followed by a quotation mark"
                         break;
 
                     case '\\':
@@ -133,11 +137,12 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "ADUtils",
-                            "EscapeDNComponent: mapped '{0}' to '{1}'",
-                            dnComponent,
-                            sb.ToString());
+                GlobalDebug.Info,
+                "ADUtils",
+                "EscapeDNComponent: mapped '{0}' to '{1}'",
+                dnComponent,
+                sb.ToString()
+            );
 
             return sb.ToString();
         }
@@ -176,11 +181,12 @@ namespace System.DirectoryServices.AccountManagement
             }
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "ADUtils",
-                            "EscapeRFC2254SpecialChars: mapped '{0}' to '{1}'",
-                            s,
-                            sb.ToString());
+                GlobalDebug.Info,
+                "ADUtils",
+                "EscapeRFC2254SpecialChars: mapped '{0}' to '{1}'",
+                s,
+                sb.ToString()
+            );
 
             return sb.ToString();
         }
@@ -218,11 +224,11 @@ namespace System.DirectoryServices.AccountManagement
                     switch (c)
                     {
                         case '(':
-                            sb.Append(@"\28");          //   (  --> \28
+                            sb.Append(@"\28"); //   (  --> \28
                             break;
 
                         case ')':
-                            sb.Append(@"\29");          //   )  --> \29
+                            sb.Append(@"\29"); //   )  --> \29
                             break;
 
                         case '\\':
@@ -231,7 +237,7 @@ namespace System.DirectoryServices.AccountManagement
 
                         default:
                             // including the '*' wildcard
-                            sb.Append(c);    //   *  --> *   and   x  --> x
+                            sb.Append(c); //   *  --> *   and   x  --> x
                             break;
                     }
                 }
@@ -242,34 +248,35 @@ namespace System.DirectoryServices.AccountManagement
                     switch (c)
                     {
                         case '(':
-                            sb.Append(@"\28");          //      \( --> \28
+                            sb.Append(@"\28"); //      \( --> \28
                             break;
 
                         case ')':
-                            sb.Append(@"\29");          //      \) --> \29
+                            sb.Append(@"\29"); //      \) --> \29
                             break;
 
                         case '*':
-                            sb.Append(@"\2a");          //      \* --> \2a
+                            sb.Append(@"\2a"); //      \* --> \2a
                             break;
 
                         case '\\':
-                            sb.Append(@"\5c");          //      \\ --> \5c
+                            sb.Append(@"\5c"); //      \\ --> \5c
                             break;
 
                         default:
-                            sb.Append(c);    //      \x --> x
+                            sb.Append(c); //      \x --> x
                             break;
                     }
                 }
             }
 
             GlobalDebug.WriteLineIf(
-                            GlobalDebug.Info,
-                            "ADUtils",
-                            "PAPIQueryToLdapQueryString: mapped '{0}' to '{1}'",
-                            papiString,
-                            sb.ToString());
+                GlobalDebug.Info,
+                "ADUtils",
+                "PAPIQueryToLdapQueryString: mapped '{0}' to '{1}'",
+                papiString,
+                sb.ToString()
+            );
 
             return sb.ToString();
         }
@@ -325,7 +332,11 @@ namespace System.DirectoryServices.AccountManagement
 
             if (s.Length % 2 != 0)
             {
-                GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADUtils", "HexStringToLdapHexString: string has bad length " + s.Length);
+                GlobalDebug.WriteLineIf(
+                    GlobalDebug.Warn,
+                    "ADUtils",
+                    "HexStringToLdapHexString: string has bad length " + s.Length
+                );
                 return null;
             }
 
@@ -336,8 +347,18 @@ namespace System.DirectoryServices.AccountManagement
                 char firstChar = s[i * 2];
                 char secondChar = s[(i * 2) + 1];
 
-                if (((firstChar >= '0' && firstChar <= '9') || (firstChar >= 'A' && firstChar <= 'F') || (firstChar >= 'a' && firstChar <= 'f')) &&
-                     ((secondChar >= '0' && secondChar <= '9') || (secondChar >= 'A' && secondChar <= 'F') || (secondChar >= 'a' && secondChar <= 'f')))
+                if (
+                    (
+                        (firstChar >= '0' && firstChar <= '9')
+                        || (firstChar >= 'A' && firstChar <= 'F')
+                        || (firstChar >= 'a' && firstChar <= 'f')
+                    )
+                    && (
+                        (secondChar >= '0' && secondChar <= '9')
+                        || (secondChar >= 'A' && secondChar <= 'F')
+                        || (secondChar >= 'a' && secondChar <= 'f')
+                    )
+                )
                 {
                     sb.Append('\\');
                     sb.Append(firstChar);
@@ -346,7 +367,11 @@ namespace System.DirectoryServices.AccountManagement
                 else
                 {
                     // not a hex character
-                    GlobalDebug.WriteLineIf(GlobalDebug.Warn, "ADUtils", "HexStringToLdapHexString: invalid string " + s);
+                    GlobalDebug.WriteLineIf(
+                        GlobalDebug.Warn,
+                        "ADUtils",
+                        "HexStringToLdapHexString: invalid string " + s
+                    );
                     return null;
                 }
             }
@@ -359,7 +384,9 @@ namespace System.DirectoryServices.AccountManagement
             string p1DnsForestName = ((ADStoreCtx)p1.GetStoreCtxToUse()).DnsForestName;
             string p2DnsForestName = ((ADStoreCtx)p2.GetStoreCtxToUse()).DnsForestName;
 
-            return (string.Equals(p1DnsForestName, p2DnsForestName, StringComparison.OrdinalIgnoreCase));
+            return (
+                string.Equals(p1DnsForestName, p2DnsForestName, StringComparison.OrdinalIgnoreCase)
+            );
         }
 
         ///
@@ -387,9 +414,11 @@ namespace System.DirectoryServices.AccountManagement
 
         internal static Principal DirectoryEntryAsPrincipal(DirectoryEntry de, ADStoreCtx storeCtx)
         {
-            if (ADUtils.IsOfObjectClass(de, "computer") ||
-               ADUtils.IsOfObjectClass(de, "user") ||
-               ADUtils.IsOfObjectClass(de, "group"))
+            if (
+                ADUtils.IsOfObjectClass(de, "computer")
+                || ADUtils.IsOfObjectClass(de, "user")
+                || ADUtils.IsOfObjectClass(de, "group")
+            )
             {
                 return storeCtx.GetAsPrincipal(de, null);
             }
@@ -403,11 +432,17 @@ namespace System.DirectoryServices.AccountManagement
             }
         }
 
-        internal static Principal SearchResultAsPrincipal(SearchResult sr, ADStoreCtx storeCtx, object discriminant)
+        internal static Principal SearchResultAsPrincipal(
+            SearchResult sr,
+            ADStoreCtx storeCtx,
+            object discriminant
+        )
         {
-            if (ADUtils.IsOfObjectClass(sr, "computer") ||
-               ADUtils.IsOfObjectClass(sr, "user") ||
-               ADUtils.IsOfObjectClass(sr, "group"))
+            if (
+                ADUtils.IsOfObjectClass(sr, "computer")
+                || ADUtils.IsOfObjectClass(sr, "user")
+                || ADUtils.IsOfObjectClass(sr, "group")
+            )
             {
                 return storeCtx.GetAsPrincipal(sr, discriminant);
             }
@@ -427,7 +462,11 @@ namespace System.DirectoryServices.AccountManagement
         // domain or the current forest and the target domain's forest.
         // target domain must be the full DNS domain name of the target domain to make the string
         // compare below work properly.
-        internal static bool VerifyOutboundTrust(string targetDomain, string username, string password)
+        internal static bool VerifyOutboundTrust(
+            string targetDomain,
+            string username,
+            string password
+        )
         {
             Domain currentDom = null;
 
@@ -458,37 +497,48 @@ namespace System.DirectoryServices.AccountManagement
             {
                 TrustRelationshipInformation TRI = currentDom.GetTrustRelationship(targetDomain);
 
-                if (TrustDirection.Outbound == TRI.TrustDirection || TrustDirection.Bidirectional == TRI.TrustDirection)
+                if (
+                    TrustDirection.Outbound == TRI.TrustDirection
+                    || TrustDirection.Bidirectional == TRI.TrustDirection
+                )
                 {
                     return true;
                 }
             }
-            catch (ActiveDirectoryObjectNotFoundException)
-            {
-            }
+            catch (ActiveDirectoryObjectNotFoundException) { }
 
             // Since we were able to retrieve the computer domain above we should be able to access the current forest here.
             Forest currentForest = Forest.GetCurrentForest();
 
-            Domain targetdom = Domain.GetDomain(new DirectoryContext(DirectoryContextType.Domain, targetDomain, username, password));
+            Domain targetdom = Domain.GetDomain(
+                new DirectoryContext(DirectoryContextType.Domain, targetDomain, username, password)
+            );
 
             try
             {
-                ForestTrustRelationshipInformation FTC = currentForest.GetTrustRelationship(targetdom.Forest.Name);
+                ForestTrustRelationshipInformation FTC = currentForest.GetTrustRelationship(
+                    targetdom.Forest.Name
+                );
 
-                if (TrustDirection.Outbound == FTC.TrustDirection || TrustDirection.Bidirectional == FTC.TrustDirection)
+                if (
+                    TrustDirection.Outbound == FTC.TrustDirection
+                    || TrustDirection.Bidirectional == FTC.TrustDirection
+                )
                 {
                     return true;
                 }
             }
-            catch (ActiveDirectoryObjectNotFoundException)
-            {
-            }
+            catch (ActiveDirectoryObjectNotFoundException) { }
 
             return false;
         }
 
-        internal static string RetrieveWkDn(DirectoryEntry deBase, string defaultNamingContext, string serverName, byte[] wellKnownContainerGuid)
+        internal static string RetrieveWkDn(
+            DirectoryEntry deBase,
+            string defaultNamingContext,
+            string serverName,
+            byte[] wellKnownContainerGuid
+        )
         {
             /*
                             bool w2k3Supported  = false;

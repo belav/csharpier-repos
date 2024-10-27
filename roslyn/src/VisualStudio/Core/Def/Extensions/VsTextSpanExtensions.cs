@@ -20,7 +20,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             this VsTextSpan spanInSecondaryBuffer,
             IThreadingContext threadingContext,
             DocumentId documentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var containedDocument = ContainedDocument.TryGetContainedDocument(documentId);
             if (containedDocument == null)
@@ -30,7 +31,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Extensions
             var bufferCoordinator = containedDocument.BufferCoordinator;
 
             var primary = new VsTextSpan[1];
-            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(spanInSecondaryBuffer, primary);
+            var hresult = bufferCoordinator.MapSecondaryToPrimarySpan(
+                spanInSecondaryBuffer,
+                primary
+            );
 
             var result = primary[0];
 

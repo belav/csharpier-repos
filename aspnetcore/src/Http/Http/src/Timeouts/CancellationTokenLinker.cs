@@ -9,12 +9,22 @@ internal sealed class CancellationTokenLinker : ICancellationTokenLinker
 {
     private readonly CancellationTokenSourcePool _ctsPool = new();
 
-    public (CancellationTokenSource linkedCts, CancellationTokenSource timeoutCts) GetLinkedCancellationTokenSource(HttpContext httpContext, CancellationToken originalToken, TimeSpan timeSpan)
+    public (
+        CancellationTokenSource linkedCts,
+        CancellationTokenSource timeoutCts
+    ) GetLinkedCancellationTokenSource(
+        HttpContext httpContext,
+        CancellationToken originalToken,
+        TimeSpan timeSpan
+    )
     {
         var timeoutCts = _ctsPool.Rent();
         timeoutCts.CancelAfter(timeSpan);
         httpContext.Response.RegisterForDispose(timeoutCts);
-        var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(originalToken, timeoutCts.Token);
+        var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(
+            originalToken,
+            timeoutCts.Token
+        );
         return (linkedCts, timeoutCts);
     }
 }

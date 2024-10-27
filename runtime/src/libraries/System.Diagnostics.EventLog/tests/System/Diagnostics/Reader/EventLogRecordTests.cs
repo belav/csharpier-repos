@@ -4,8 +4,8 @@
 using System.Collections.Generic;
 using System.Diagnostics.Eventing.Reader;
 using System.Security.Principal;
-using Xunit;
 using Microsoft.DotNet.XUnitExtensions;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -16,14 +16,22 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
-            var eventLog = new EventLogReader(query, Helpers.GetBookmark("Application", PathType.LogName));
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            var eventLog = new EventLogReader(
+                query,
+                Helpers.GetBookmark("Application", PathType.LogName)
+            );
             using (eventLog)
             {
                 using (var record = (EventLogRecord)eventLog.ReadEvent())
                 {
                     Assert.Throws<ArgumentNullException>(() => record.GetPropertyValues(null));
-                    Assert.NotNull(record.GetPropertyValues(new EventLogPropertySelector(new [] {"dummy"})));
+                    Assert.NotNull(
+                        record.GetPropertyValues(new EventLogPropertySelector(new[] { "dummy" }))
+                    );
                 }
             }
         }
@@ -38,8 +46,13 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery(log, PathType.LogName, "*[System]") { ReverseDirection = true };
-            using (var eventLog = new EventLogReader(query, Helpers.GetBookmark(log, PathType.LogName)))
+            var query = new EventLogQuery(log, PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            using (
+                var eventLog = new EventLogReader(query, Helpers.GetBookmark(log, PathType.LogName))
+            )
             {
                 using (EventRecord record = eventLog.ReadEvent())
                 {
@@ -56,8 +69,14 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
-            var eventLog = new EventLogReader(query, Helpers.GetBookmark("Application", PathType.LogName));
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            var eventLog = new EventLogReader(
+                query,
+                Helpers.GetBookmark("Application", PathType.LogName)
+            );
             using (eventLog)
             {
                 using (var record = (EventLogRecord)eventLog.ReadEvent())
@@ -76,8 +95,14 @@ namespace System.Diagnostics.Tests
         {
             if (PlatformDetection.IsWindows7) // Null events in PowerShell log
                 return;
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
-            var eventLog = new EventLogReader(query, Helpers.GetBookmark("Application", PathType.LogName));
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            var eventLog = new EventLogReader(
+                query,
+                Helpers.GetBookmark("Application", PathType.LogName)
+            );
             using (eventLog)
             {
                 using (var record = (EventLogRecord)eventLog.ReadEvent())
@@ -90,20 +115,38 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(Helpers), nameof(Helpers.SupportsEventLogs))]
         public void ExceptionOnce()
         {
-            if (PlatformDetection.IsWindows7 ||  // Null events in PowerShell log
-                PlatformDetection.IsWindows10Version22000OrGreater ||  // Windows 11 and Windows Server 2022:
-                PlatformDetection.IsWindows10Version20348OrGreater)    // ActiveIssue("https://github.com/dotnet/runtime/issues/58829")
+            if (
+                PlatformDetection.IsWindows7
+                || // Null events in PowerShell log
+                PlatformDetection.IsWindows10Version22000OrGreater
+                || // Windows 11 and Windows Server 2022:
+                PlatformDetection.IsWindows10Version20348OrGreater
+            ) // ActiveIssue("https://github.com/dotnet/runtime/issues/58829")
                 return;
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
-            var eventLog = new EventLogReader(query, Helpers.GetBookmark("Application", PathType.LogName));
-            string levelDisplayName = null, opcodeDisplayName = null, taskDisplayName = null;
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
+            var eventLog = new EventLogReader(
+                query,
+                Helpers.GetBookmark("Application", PathType.LogName)
+            );
+            string levelDisplayName = null,
+                opcodeDisplayName = null,
+                taskDisplayName = null;
             using (eventLog)
             {
                 using (var record = (EventLogRecord)eventLog.ReadEvent())
                 {
-                    ThrowsMaxOnce<EventLogNotFoundException>(() => levelDisplayName = record.LevelDisplayName);
-                    ThrowsMaxOnce<EventLogNotFoundException>(() => opcodeDisplayName = record.OpcodeDisplayName);
-                    ThrowsMaxOnce<EventLogNotFoundException>(() => taskDisplayName = record.TaskDisplayName);
+                    ThrowsMaxOnce<EventLogNotFoundException>(
+                        () => levelDisplayName = record.LevelDisplayName
+                    );
+                    ThrowsMaxOnce<EventLogNotFoundException>(
+                        () => opcodeDisplayName = record.OpcodeDisplayName
+                    );
+                    ThrowsMaxOnce<EventLogNotFoundException>(
+                        () => taskDisplayName = record.TaskDisplayName
+                    );
                     Assert.Equal(levelDisplayName, record.LevelDisplayName);
                     Assert.Equal(opcodeDisplayName, record.OpcodeDisplayName);
                     Assert.Equal(taskDisplayName, record.TaskDisplayName);
@@ -111,7 +154,8 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        private void ThrowsMaxOnce<T>(Action action) where T : Exception
+        private void ThrowsMaxOnce<T>(Action action)
+            where T : Exception
         {
             try
             {
@@ -130,17 +174,30 @@ namespace System.Diagnostics.Tests
                 return;
 
             SecurityIdentifier userId;
-            byte? version, level;
+            byte? version,
+                level;
             short? opcode;
-            Guid? providerId, activityId, relatedActivityId;
-            int? processId, threadId, qualifiers, task;
-            long? keywords, recordId;
-            string providerName, machineName, containerLog;
+            Guid? providerId,
+                activityId,
+                relatedActivityId;
+            int? processId,
+                threadId,
+                qualifiers,
+                task;
+            long? keywords,
+                recordId;
+            string providerName,
+                machineName,
+                containerLog;
             DateTime? timeCreated;
             IEnumerable<int> matchedQueryIds;
-            EventBookmark bookmark, bookmarkArg = Helpers.GetBookmark("Application", PathType.LogName);
+            EventBookmark bookmark,
+                bookmarkArg = Helpers.GetBookmark("Application", PathType.LogName);
 
-            var query = new EventLogQuery("Application", PathType.LogName, "*[System]") { ReverseDirection = true };
+            var query = new EventLogQuery("Application", PathType.LogName, "*[System]")
+            {
+                ReverseDirection = true,
+            };
             var eventLog = new EventLogReader(query, bookmarkArg);
             using (eventLog)
             {

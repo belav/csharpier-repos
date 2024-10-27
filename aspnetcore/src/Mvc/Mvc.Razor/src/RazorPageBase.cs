@@ -25,7 +25,10 @@ namespace Microsoft.AspNetCore.Mvc.Razor;
 public abstract class RazorPageBase : IRazorPage
 {
     private readonly Stack<TextWriter> _textWriterStack = new Stack<TextWriter>();
-    private readonly IDictionary<string, RenderAsyncDelegate> _sectionWriters = new Dictionary<string, RenderAsyncDelegate>(StringComparer.OrdinalIgnoreCase);
+    private readonly IDictionary<string, RenderAsyncDelegate> _sectionWriters = new Dictionary<
+        string,
+        RenderAsyncDelegate
+    >(StringComparer.OrdinalIgnoreCase);
     private StringWriter? _valueBuffer;
     private ITagHelperFactory? _tagHelperFactory;
     private IViewBufferScope? _bufferScope;
@@ -62,7 +65,9 @@ public abstract class RazorPageBase : IRazorPage
             var viewContext = ViewContext;
             if (viewContext == null)
             {
-                throw new InvalidOperationException(Resources.FormatViewContextMustBeSet(nameof(ViewContext), nameof(Output)));
+                throw new InvalidOperationException(
+                    Resources.FormatViewContextMustBeSet(nameof(ViewContext), nameof(Output))
+                );
             }
 
             return viewContext.Writer;
@@ -183,12 +188,14 @@ public abstract class RazorPageBase : IRazorPage
     public string InvalidTagHelperIndexerAssignment(
         string attributeName,
         string tagHelperTypeName,
-        string propertyName)
+        string propertyName
+    )
     {
         return Resources.FormatRazorPage_InvalidTagHelperIndexerAssignment(
             attributeName,
             tagHelperTypeName,
-            propertyName);
+            propertyName
+        );
     }
 
     /// <summary>
@@ -199,7 +206,8 @@ public abstract class RazorPageBase : IRazorPage
     /// <remarks>
     /// <typeparamref name="TTagHelper"/> must have a parameterless constructor.
     /// </remarks>
-    public TTagHelper CreateTagHelper<TTagHelper>() where TTagHelper : ITagHelper
+    public TTagHelper CreateTagHelper<TTagHelper>()
+        where TTagHelper : ITagHelper
     {
         return TagHelperFactory.CreateTagHelper<TTagHelper>(ViewContext);
     }
@@ -240,7 +248,9 @@ public abstract class RazorPageBase : IRazorPage
     {
         if (TagHelperScopes.Count == 0)
         {
-            throw new InvalidOperationException(Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd);
+            throw new InvalidOperationException(
+                Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd
+            );
         }
 
         var scopeInfo = TagHelperScopes.Pop();
@@ -270,7 +280,9 @@ public abstract class RazorPageBase : IRazorPage
     {
         if (_pageWriter != null)
         {
-            throw new InvalidOperationException(Resources.RazorPage_NestingAttributeWritingScopesNotSupported);
+            throw new InvalidOperationException(
+                Resources.RazorPage_NestingAttributeWritingScopesNotSupported
+            );
         }
 
         var viewContext = ViewContext;
@@ -298,7 +310,9 @@ public abstract class RazorPageBase : IRazorPage
     {
         if (_pageWriter == null)
         {
-            throw new InvalidOperationException(Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd);
+            throw new InvalidOperationException(
+                Resources.RazorPage_ThereIsNoActiveWritingScopeToEnd
+            );
         }
 
         Debug.Assert(_valueBuffer is not null);
@@ -368,8 +382,14 @@ public abstract class RazorPageBase : IRazorPage
     /// <param name="section">The delegate to execute when rendering the section.</param>
     /// <remarks>This is a temporary placeholder method to support ASP.NET Core 2.0.0 editor code generation.</remarks>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    protected void DefineSection(string name, Func<object?, Task> section)
-        => DefineSection(name, () => section(null /* writer */));
+    protected void DefineSection(string name, Func<object?, Task> section) =>
+        DefineSection(
+            name,
+            () =>
+                section(
+                    null /* writer */
+                )
+        );
 
     /// <summary>
     /// Creates a named content section in the page that can be invoked in a Layout page using
@@ -487,12 +507,20 @@ public abstract class RazorPageBase : IRazorPage
         int prefixOffset,
         string suffix,
         int suffixOffset,
-        int attributeValuesCount)
+        int attributeValuesCount
+    )
     {
         ArgumentNullException.ThrowIfNull(prefix);
         ArgumentNullException.ThrowIfNull(suffix);
 
-        _attributeInfo = new AttributeInfo(name, prefix, prefixOffset, suffix, suffixOffset, attributeValuesCount);
+        _attributeInfo = new AttributeInfo(
+            name,
+            prefix,
+            prefixOffset,
+            suffix,
+            suffixOffset,
+            attributeValuesCount
+        );
 
         // Single valued attributes might be omitted in entirety if it the attribute value strictly evaluates to
         // null  or false. Consequently defer the prefix generation until we encounter the attribute value.
@@ -517,7 +545,8 @@ public abstract class RazorPageBase : IRazorPage
         object? value,
         int valueOffset,
         int valueLength,
-        bool isLiteral)
+        bool isLiteral
+    )
     {
         if (_attributeInfo.AttributeValuesCount == 1)
         {
@@ -578,13 +607,15 @@ public abstract class RazorPageBase : IRazorPage
         TagHelperExecutionContext executionContext,
         string attributeName,
         int attributeValuesCount,
-        HtmlAttributeValueStyle attributeValueStyle)
+        HtmlAttributeValueStyle attributeValueStyle
+    )
     {
         _tagHelperAttributeInfo = new TagHelperAttributeInfo(
             executionContext,
             attributeName,
             attributeValuesCount,
-            attributeValueStyle);
+            attributeValueStyle
+        );
     }
 
     /// <summary>
@@ -602,7 +633,8 @@ public abstract class RazorPageBase : IRazorPage
         object? value,
         int valueOffset,
         int valueLength,
-        bool isLiteral)
+        bool isLiteral
+    )
     {
         Debug.Assert(_tagHelperAttributeInfo.ExecutionContext != null);
         if (_tagHelperAttributeInfo.AttributeValuesCount == 1)
@@ -616,7 +648,8 @@ public abstract class RazorPageBase : IRazorPage
                 _tagHelperAttributeInfo.ExecutionContext.AddTagHelperAttribute(
                     _tagHelperAttributeInfo.Name,
                     value?.ToString() ?? string.Empty,
-                    _tagHelperAttributeInfo.AttributeValueStyle);
+                    _tagHelperAttributeInfo.AttributeValueStyle
+                );
                 _tagHelperAttributeInfo.Suppressed = true;
                 return;
             }
@@ -625,7 +658,8 @@ public abstract class RazorPageBase : IRazorPage
                 _tagHelperAttributeInfo.ExecutionContext.AddHtmlAttribute(
                     _tagHelperAttributeInfo.Name,
                     _tagHelperAttributeInfo.Name,
-                    _tagHelperAttributeInfo.AttributeValueStyle);
+                    _tagHelperAttributeInfo.AttributeValueStyle
+                );
                 _tagHelperAttributeInfo.Suppressed = true;
                 return;
             }
@@ -661,10 +695,15 @@ public abstract class RazorPageBase : IRazorPage
         {
             // Perf: _valueBuffer might be null if nothing was written. If it is set, clear it so
             // it is reset for the next value.
-            var content = _valueBuffer == null ? HtmlString.Empty : new HtmlString(_valueBuffer.ToString());
+            var content =
+                _valueBuffer == null ? HtmlString.Empty : new HtmlString(_valueBuffer.ToString());
             _valueBuffer?.GetStringBuilder().Clear();
 
-            executionContext.AddHtmlAttribute(_tagHelperAttributeInfo.Name, content, _tagHelperAttributeInfo.AttributeValueStyle);
+            executionContext.AddHtmlAttribute(
+                _tagHelperAttributeInfo.Name,
+                content,
+                _tagHelperAttributeInfo.AttributeValueStyle
+            );
         }
     }
 
@@ -686,7 +725,8 @@ public abstract class RazorPageBase : IRazorPage
         if (TagHelperScopes.Count > 0)
         {
             throw new InvalidOperationException(
-                Resources.FormatRazorPage_CannotFlushWhileInAWritingScope(nameof(FlushAsync), Path));
+                Resources.FormatRazorPage_CannotFlushWhileInAWritingScope(nameof(FlushAsync), Path)
+            );
         }
 
         // Calls to Flush are allowed if the page does not specify a Layout or if it is executing a section in the
@@ -713,7 +753,8 @@ public abstract class RazorPageBase : IRazorPage
         var viewContext = ViewContext;
         if (viewContext != null)
         {
-            var antiforgery = viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
+            var antiforgery =
+                viewContext.HttpContext.RequestServices.GetRequiredService<IAntiforgery>();
             antiforgery.SetCookieTokenAndHeader(viewContext.HttpContext);
         }
         return HtmlString.Empty;
@@ -758,16 +799,14 @@ public abstract class RazorPageBase : IRazorPage
 
     private static bool IsBoolFalseOrNullValue(string? prefix, object? value)
     {
-        return string.IsNullOrEmpty(prefix) &&
-            (value is null ||
-            (value is bool boolValue && !boolValue));
+        return string.IsNullOrEmpty(prefix)
+            && (value is null || (value is bool boolValue && !boolValue));
     }
 
     private static bool IsBoolTrueWithEmptyPrefixValue(string? prefix, object? value)
     {
         // If the value is just the bool 'true', use the attribute name as the value.
-        return string.IsNullOrEmpty(prefix) &&
-            (value is bool boolValue && boolValue);
+        return string.IsNullOrEmpty(prefix) && (value is bool boolValue && boolValue);
     }
 
     /// <inheritdoc />
@@ -781,7 +820,8 @@ public abstract class RazorPageBase : IRazorPage
             int prefixOffset,
             string suffix,
             int suffixOffset,
-            int attributeValuesCount)
+            int attributeValuesCount
+        )
         {
             Name = name;
             Prefix = prefix;
@@ -814,7 +854,8 @@ public abstract class RazorPageBase : IRazorPage
             TagHelperExecutionContext tagHelperExecutionContext,
             string name,
             int attributeValuesCount,
-            HtmlAttributeValueStyle attributeValueStyle)
+            HtmlAttributeValueStyle attributeValueStyle
+        )
         {
             ExecutionContext = tagHelperExecutionContext;
             Name = name;

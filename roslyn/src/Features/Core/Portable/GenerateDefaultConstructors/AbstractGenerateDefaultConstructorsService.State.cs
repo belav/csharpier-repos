@@ -20,19 +20,26 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
 
             public ImmutableArray<IMethodSymbol> UnimplementedConstructors { get; private set; }
 
-            private State()
-            {
-            }
+            private State() { }
 
             public static State? Generate(
                 TService service,
                 SemanticDocument document,
                 TextSpan textSpan,
                 bool forRefactoring,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
                 var state = new State();
-                if (!state.TryInitialize(service, document, textSpan, forRefactoring, cancellationToken))
+                if (
+                    !state.TryInitialize(
+                        service,
+                        document,
+                        textSpan,
+                        forRefactoring,
+                        cancellationToken
+                    )
+                )
                 {
                     return null;
                 }
@@ -45,17 +52,23 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 SemanticDocument semanticDocument,
                 TextSpan textSpan,
                 bool forRefactoring,
-                CancellationToken cancellationToken)
+                CancellationToken cancellationToken
+            )
             {
-                if (!service.TryInitializeState(semanticDocument, textSpan, cancellationToken, out var classType))
+                if (
+                    !service.TryInitializeState(
+                        semanticDocument,
+                        textSpan,
+                        cancellationToken,
+                        out var classType
+                    )
+                )
                     return false;
 
                 ClassType = classType;
 
                 var baseType = ClassType.BaseType;
-                if (ClassType.IsStatic ||
-                    baseType == null ||
-                    baseType.TypeKind == TypeKind.Error)
+                if (ClassType.IsStatic || baseType == null || baseType.TypeKind == TypeKind.Error)
                 {
                     return false;
                 }
@@ -64,25 +77,38 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // error here.  We'll let the code fix take care of that.
                 //
                 // Similarly if this is for the codefix only offer if we do see that there's an error.
-                var syntaxFacts = semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
-                var headerFacts = semanticDocument.Document.GetRequiredLanguageService<IHeaderFactsService>();
-                if (headerFacts.IsOnTypeHeader(semanticDocument.Root, textSpan.Start, fullHeader: true, out _))
+                var syntaxFacts =
+                    semanticDocument.Document.GetRequiredLanguageService<ISyntaxFactsService>();
+                var headerFacts =
+                    semanticDocument.Document.GetRequiredLanguageService<IHeaderFactsService>();
+                if (
+                    headerFacts.IsOnTypeHeader(
+                        semanticDocument.Root,
+                        textSpan.Start,
+                        fullHeader: true,
+                        out _
+                    )
+                )
                 {
                     var fixesError = FixesError(classType, baseType);
                     if (forRefactoring == fixesError)
                         return false;
                 }
 
-                var semanticFacts = semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
+                var semanticFacts =
+                    semanticDocument.Document.GetLanguageService<ISemanticFactsService>();
                 var classConstructors = ClassType.InstanceConstructors;
 
-                var destinationProvider = semanticDocument.Project.Solution.Services.GetLanguageServices(ClassType.Language);
+                var destinationProvider =
+                    semanticDocument.Project.Solution.Services.GetLanguageServices(
+                        ClassType.Language
+                    );
                 var isCaseSensitive = syntaxFacts.IsCaseSensitive;
 
-                UnimplementedConstructors =
-                    baseType.InstanceConstructors
-                            .WhereAsArray(c => c.IsAccessibleWithin(ClassType) &&
-                                               IsMissing(c, classConstructors, isCaseSensitive));
+                UnimplementedConstructors = baseType.InstanceConstructors.WhereAsArray(c =>
+                    c.IsAccessibleWithin(ClassType)
+                    && IsMissing(c, classConstructors, isCaseSensitive)
+                );
 
                 return UnimplementedConstructors.Length > 0;
             }
@@ -92,11 +118,19 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 // See if the user didn't supply a constructor, and thus the compiler automatically generated
                 // one for them.   If so, also see if there's an accessible no-arg contructor in the base.
                 // If not, then the compiler will error and we want the code-fix to take over solving this problem.
-                if (classType.Constructors.Any(static c => c.Parameters.Length == 0 && c.IsImplicitlyDeclared))
+                if (
+                    classType.Constructors.Any(static c =>
+                        c.Parameters.Length == 0 && c.IsImplicitlyDeclared
+                    )
+                )
                 {
-                    var baseNoArgConstructor = baseType.Constructors.FirstOrDefault(c => c.Parameters.Length == 0);
-                    if (baseNoArgConstructor == null ||
-                        !baseNoArgConstructor.IsAccessibleWithin(classType))
+                    var baseNoArgConstructor = baseType.Constructors.FirstOrDefault(c =>
+                        c.Parameters.Length == 0
+                    );
+                    if (
+                        baseNoArgConstructor == null
+                        || !baseNoArgConstructor.IsAccessibleWithin(classType)
+                    )
                     {
                         // this code is in error, but we're the refactoring codepath.  Offer nothing
                         // and let the code fix provider handle it instead.
@@ -118,11 +152,17 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
             private static bool IsMissing(
                 IMethodSymbol constructor,
                 ImmutableArray<IMethodSymbol> classConstructors,
-                bool isCaseSensitive)
+                bool isCaseSensitive
+            )
             {
-                var matchingConstructor = classConstructors.FirstOrDefault(
-                    c => SignatureComparer.Instance.HaveSameSignature(
-                        constructor.Parameters, c.Parameters, compareParameterName: true, isCaseSensitive: isCaseSensitive));
+                var matchingConstructor = classConstructors.FirstOrDefault(c =>
+                    SignatureComparer.Instance.HaveSameSignature(
+                        constructor.Parameters,
+                        c.Parameters,
+                        compareParameterName: true,
+                        isCaseSensitive: isCaseSensitive
+                    )
+                );
 
                 if (matchingConstructor == null)
                 {
@@ -130,7 +170,7 @@ namespace Microsoft.CodeAnalysis.GenerateDefaultConstructors
                 }
 
                 // We have a matching constructor in this type.  But we'll still offer to create the
-                // constructor if the constructor that we have is implicit. 
+                // constructor if the constructor that we have is implicit.
                 return matchingConstructor.IsImplicitlyDeclared;
             }
         }

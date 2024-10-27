@@ -1,21 +1,21 @@
 //------------------------------------------------------------------------------
 // <copyright file="ErrorEventArgs.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.IO {
-
-    using System.Diagnostics;
-
+namespace System.IO
+{
     using System;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>Provides
     ///       data for the <see cref='E:System.IO.FileSystemWatcher.Error'/> event.</para>
     /// </devdoc>
-    public class ErrorEventArgs : EventArgs {
+    public class ErrorEventArgs : EventArgs
+    {
         private Exception exception;
 
         /// <devdoc>
@@ -23,7 +23,8 @@ namespace System.IO {
         ///       Initializes a new instance of the class.
         ///    </para>
         /// </devdoc>
-        public ErrorEventArgs(Exception exception) {
+        public ErrorEventArgs(Exception exception)
+        {
             this.exception = exception;
         }
 
@@ -32,9 +33,9 @@ namespace System.IO {
         ///       Gets the <see cref='System.Exception'/> that represents the error that occurred.
         ///    </para>
         /// </devdoc>
-        public virtual Exception GetException() {
+        public virtual Exception GetException()
+        {
             return this.exception;
         }
-
     }
 }

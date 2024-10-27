@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,52 +34,60 @@
 
 using System.Configuration;
 
-namespace System.Net.Configuration 
+namespace System.Net.Configuration
 {
-	public sealed class AuthenticationModuleElement : ConfigurationElement
-	{
-		#region Fields
+    public sealed class AuthenticationModuleElement : ConfigurationElement
+    {
+        #region Fields
 
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty typeProp;
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty typeProp;
 
-		#endregion // Fields
+        #endregion // Fields
 
-		#region Constructors
+        #region Constructors
 
-		static AuthenticationModuleElement ()
-		{
-			typeProp = new ConfigurationProperty ("type", typeof (string), null, ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey);
-			properties = new ConfigurationPropertyCollection ();
+        static AuthenticationModuleElement()
+        {
+            typeProp = new ConfigurationProperty(
+                "type",
+                typeof(string),
+                null,
+                ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+            );
+            properties = new ConfigurationPropertyCollection();
 
-			properties.Add (typeProp);
-		}
+            properties.Add(typeProp);
+        }
 
-		public AuthenticationModuleElement ()
-		{
-		}
+        public AuthenticationModuleElement() { }
 
-		public AuthenticationModuleElement (string typeName)
-		{
-			Type = typeName;
-		}
+        public AuthenticationModuleElement(string typeName)
+        {
+            Type = typeName;
+        }
 
-		#endregion // Constructors
+        #endregion // Constructors
 
-		#region Properties
+        #region Properties
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
 
-		[ConfigurationProperty ("type", Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey)]
-		public string Type {
-			get { return (string) base [typeProp]; }
-			set { base [typeProp] = value; }
-		}
+        [ConfigurationProperty(
+            "type",
+            Options = ConfigurationPropertyOptions.IsRequired | ConfigurationPropertyOptions.IsKey
+        )]
+        public string Type
+        {
+            get { return (string)base[typeProp]; }
+            set { base[typeProp] = value; }
+        }
 
-		#endregion // Properties
-	}
+        #endregion // Properties
+    }
 }
 
 #endif

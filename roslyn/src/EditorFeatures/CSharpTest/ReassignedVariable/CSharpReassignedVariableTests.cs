@@ -12,8 +12,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 {
     public class CSharpReassignedVariableTests : AbstractReassignedVariableTests
     {
-        protected override TestWorkspace CreateWorkspace(string markup)
-            => TestWorkspace.CreateCSharp(markup);
+        protected override TestWorkspace CreateWorkspace(string markup) =>
+            TestWorkspace.CreateCSharp(markup);
 
         [Fact]
         public async Task TestNoParameterReassignment()
@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -41,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -58,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -75,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -92,7 +96,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -105,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     void M(int [|p|]) => Console.WriteLine([|p|]++);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -121,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         void Local(int [|p|])
                             => Console.WriteLine([|p|]++);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -134,7 +141,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int this[int [|p|]] => [|p|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -147,7 +155,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int this[int [|p|]] { get => [|p|]++; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -160,7 +169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int this[int [|p|]] { get { [|p|]++; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -173,7 +183,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int this[int [|p|]] { set => [|p|]++; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -186,7 +197,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int this[int [|p|]] { set { [|p|]++; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -199,7 +211,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Goo { set => [|value|] = [|value|] + 1; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -212,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Goo { set { [|value|] = [|value|] + 1; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -225,7 +239,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     event Action Goo { add { [|value|] = null; } remove { } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -238,7 +253,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     event Action Goo { add { } remove { [|value|] = null; } }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -254,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Action<int> a = x => Console.WriteLine(x);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +287,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Action<int> a = [|x|] => Console.WriteLine([|x|]++);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -286,7 +304,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Action<int> a = (int [|x|]) => Console.WriteLine([|x|]++);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -308,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -331,7 +351,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -348,7 +369,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -372,7 +394,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -389,7 +412,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -409,7 +433,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void M2(out int p) => p = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -429,7 +454,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void M2(out int p) => p = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -449,7 +475,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void M2(out int p) => p = 0;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -467,7 +494,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -484,7 +512,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -502,7 +531,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -519,7 +549,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -538,7 +569,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|local|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -557,7 +589,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|local|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -577,7 +610,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|local|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -594,7 +628,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine((IntPtr)p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -611,7 +646,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine((IntPtr)[|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -631,7 +667,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void M2(ref int p) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -652,7 +689,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -672,7 +710,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void M2(ref int p) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -690,7 +729,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -708,7 +748,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -726,7 +767,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -744,7 +786,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -762,7 +805,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -780,7 +824,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|p|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -800,7 +845,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     static void M2(this ref int p) { }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -821,7 +867,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     void MutatingMethod() => this = default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -841,7 +888,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     (int x, int y) Goo() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -861,7 +909,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
 
                     (int x, int y) Goo() => default;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -872,7 +921,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 int p;
                 p = 0;
                 Console.WriteLine(p);
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -883,7 +933,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 int [|p|] = 1;
                 [|p|] = 0;
                 Console.WriteLine([|p|]);
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -892,7 +943,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
             await TestAsync(
                 """
                 Console.WriteLine(args);
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -904,7 +956,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 [|args|] = null
                 Console.WriteLine([|args|]);
 
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -923,7 +976,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -942,7 +996,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                     {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -957,7 +1012,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 record Y(int x)
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -969,7 +1025,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y = [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -981,7 +1038,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y = [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -996,7 +1054,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 class Y(int x)
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1008,7 +1067,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y = [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1020,7 +1080,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y() => [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1032,7 +1093,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y = [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1044,7 +1106,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 {
                     int Y() => [|x|]++;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1066,7 +1129,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1085,7 +1149,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         catch (Exception ex) when (([|ex|] = null) == null) { }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1104,7 +1169,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1122,7 +1188,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine([|b|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1139,7 +1206,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                             Console.WriteLine([|i|]);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1156,7 +1224,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                             Console.WriteLine(arg);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1177,7 +1246,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         Console.WriteLine(p);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1197,7 +1267,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1212,7 +1283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         p = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/58161")]
@@ -1230,7 +1302,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                     public static T EnsureInitialized<T>([NotNull] ref T? [|target|]) where T : class
                         => Volatile.Read(ref [|target|]!);
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1245,7 +1318,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1260,7 +1334,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         var v = new C(p: 1);
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1279,7 +1354,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         [|p|] = 1;
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1294,7 +1370,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                 partial class C(int [|p|]) : B([|p|] = 1)
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -1320,7 +1397,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ReassignedVariable
                         </Document>
                     </Project>
                 </Workspace>
-                """);
+                """
+            );
         }
     }
 }

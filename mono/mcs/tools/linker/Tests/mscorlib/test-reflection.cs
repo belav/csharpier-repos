@@ -1,35 +1,40 @@
 using System;
 using System.Collections;
+using System.IO;
 using System.Reflection;
 using System.Reflection.Emit;
 using System.Threading;
-using System.IO;
 
 public class C
 {
-	public static int Main ()
-	{
-		const string ASSEMBLY_NAME = "TypeBuilderTest";
-			
-		AssemblyName assemblyName = new AssemblyName ();
-		assemblyName.Name = ASSEMBLY_NAME;
+    public static int Main()
+    {
+        const string ASSEMBLY_NAME = "TypeBuilderTest";
 
-		var assembly = Thread.GetDomain ().DefineDynamicAssembly (
-				assemblyName, AssemblyBuilderAccess.RunAndSave, Path.GetTempPath ());
+        AssemblyName assemblyName = new AssemblyName();
+        assemblyName.Name = ASSEMBLY_NAME;
 
-		var module = assembly.DefineDynamicModule ("module1");
+        var assembly = Thread
+            .GetDomain()
+            .DefineDynamicAssembly(
+                assemblyName,
+                AssemblyBuilderAccess.RunAndSave,
+                Path.GetTempPath()
+            );
 
-		TypeBuilder tb = module.DefineType ("bla", TypeAttributes.Public);
-		GenericTypeParameterBuilder [] typeParams = tb.DefineGenericParameters ("T");
+        var module = assembly.DefineDynamicModule("module1");
 
-		ConstructorBuilder cb = tb.DefineDefaultConstructor (MethodAttributes.Public);
+        TypeBuilder tb = module.DefineType("bla", TypeAttributes.Public);
+        GenericTypeParameterBuilder[] typeParams = tb.DefineGenericParameters("T");
 
-		Type t = tb.MakeGenericType (typeof (int));
-		t.MakeArrayType ();
+        ConstructorBuilder cb = tb.DefineDefaultConstructor(MethodAttributes.Public);
 
-		Type created = tb.CreateType ();
+        Type t = tb.MakeGenericType(typeof(int));
+        t.MakeArrayType();
 
-		Type inst = created.MakeGenericType (typeof (object));		
-		return 0;
-	}
+        Type created = tb.CreateType();
+
+        Type inst = created.MakeGenericType(typeof(object));
+        return 0;
+    }
 }

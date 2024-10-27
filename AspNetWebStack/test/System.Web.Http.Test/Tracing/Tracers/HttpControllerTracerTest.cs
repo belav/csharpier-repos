@@ -23,9 +23,15 @@ namespace System.Web.Http.Tracing.Tracers
         {
             _mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
             _mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
-            _mockActionDescriptor.Setup(a => a.GetParameters()).Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
+            _mockActionDescriptor
+                .Setup(a => a.GetParameters())
+                .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
 
-            _controllerDescriptor = new HttpControllerDescriptor(new HttpConfiguration(), "controller", typeof(ApiController));
+            _controllerDescriptor = new HttpControllerDescriptor(
+                new HttpConfiguration(),
+                "controller",
+                typeof(ApiController)
+            );
         }
 
         [Fact]
@@ -39,8 +45,16 @@ namespace System.Web.Http.Tracing.Tracers
             var tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
             var expectedTraces = new[]
             {
-                new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "Dispose" },
-                new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.End, Operation = "Dispose" }
+                new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "Dispose",
+                },
+                new TraceRecord(request, TraceCategories.ControllersCategory, TraceLevel.Info)
+                {
+                    Kind = TraceKind.End,
+                    Operation = "Dispose",
+                },
             };
 
             // Act
@@ -75,10 +89,13 @@ namespace System.Web.Http.Tracing.Tracers
             var context = ContextUtil.CreateControllerContext(request: request);
             var mockController = new Mock<IHttpController>();
             var mockDisposable = mockController.As<IDisposable>();
-            mockController.Setup(c => c.ExecuteAsync(context, CancellationToken.None))
-                          .Callback<HttpControllerContext, CancellationToken>((cc, ct) => cc.Request.RegisterForDispose(mockDisposable.Object))
-                          .Returns(() => Task.FromResult(new HttpResponseMessage()))
-                          .Verifiable();
+            mockController
+                .Setup(c => c.ExecuteAsync(context, CancellationToken.None))
+                .Callback<HttpControllerContext, CancellationToken>(
+                    (cc, ct) => cc.Request.RegisterForDispose(mockDisposable.Object)
+                )
+                .Returns(() => Task.FromResult(new HttpResponseMessage()))
+                .Verifiable();
             context.ControllerDescriptor = _controllerDescriptor;
             context.Controller = mockController.Object;
             var traceWriter = new TestTraceWriter();
@@ -89,7 +106,9 @@ namespace System.Web.Http.Tracing.Tracers
             await controller.ExecuteAsync(context, CancellationToken.None);
 
             // Assert
-            IEnumerable<IDisposable> disposables = (IEnumerable<IDisposable>)request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey];
+            IEnumerable<IDisposable> disposables =
+                (IEnumerable<IDisposable>)
+                    request.Properties[HttpPropertyKeys.DisposableRequestResourcesKey];
             Assert.Contains(tracer, disposables);
             Assert.DoesNotContain(mockDisposable.Object, disposables);
         }
@@ -100,30 +119,64 @@ namespace System.Web.Http.Tracing.Tracers
             // Arrange
             HttpResponseMessage response = new HttpResponseMessage();
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
-            mockController.Setup(b => b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())).Returns(Task.FromResult<HttpResponseMessage>(response));
+            mockController
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+                )
+                .Returns(Task.FromResult<HttpResponseMessage>(response));
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(request: request);
+            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
+                request: request
+            );
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(controllerContext, actionDescriptor: _mockActionDescriptor.Object);
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                controllerContext,
+                actionDescriptor: _mockActionDescriptor.Object
+            );
 
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpControllerTracer tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
+            HttpControllerTracer tracer = new HttpControllerTracer(
+                request,
+                mockController.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.End }
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            var task = ((IHttpController)tracer).ExecuteAsync(controllerContext, CancellationToken.None);
+            var task = ((IHttpController)tracer).ExecuteAsync(
+                controllerContext,
+                CancellationToken.None
+            );
             HttpResponseMessage actualResponse = await task;
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(response, actualResponse);
         }
 
@@ -132,32 +185,70 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             InvalidOperationException exception = new InvalidOperationException();
-            TaskCompletionSource<HttpResponseMessage> tcs = new TaskCompletionSource<HttpResponseMessage>();
+            TaskCompletionSource<HttpResponseMessage> tcs =
+                new TaskCompletionSource<HttpResponseMessage>();
             tcs.TrySetException(exception);
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
-            mockController.Setup(b => b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())).Returns(tcs.Task);
+            mockController
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+                )
+                .Returns(tcs.Task);
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(request: request);
+            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
+                request: request
+            );
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(controllerContext, actionDescriptor: _mockActionDescriptor.Object);
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                controllerContext,
+                actionDescriptor: _mockActionDescriptor.Object
+            );
 
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpControllerTracer tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
+            HttpControllerTracer tracer = new HttpControllerTracer(
+                request,
+                mockController.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Error) { Kind = TraceKind.End }
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Error
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(() => ((IHttpController)tracer).ExecuteAsync(controllerContext, CancellationToken.None));
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    ((IHttpController)tracer).ExecuteAsync(
+                        controllerContext,
+                        CancellationToken.None
+                    )
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
             Assert.Same(exception, thrown);
             Assert.Same(exception, traceWriter.Traces[1].Exception);
         }
@@ -167,30 +258,64 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             Mock<ApiController> mockController = new Mock<ApiController>() { CallBase = true };
-            mockController.Setup(b => b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())).Returns(TaskHelpers.Canceled<HttpResponseMessage>());
+            mockController
+                .Setup(b =>
+                    b.ExecuteAsync(It.IsAny<HttpControllerContext>(), It.IsAny<CancellationToken>())
+                )
+                .Returns(TaskHelpers.Canceled<HttpResponseMessage>());
 
             HttpRequestMessage request = new HttpRequestMessage();
-            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(request: request);
+            HttpControllerContext controllerContext = ContextUtil.CreateControllerContext(
+                request: request
+            );
             controllerContext.ControllerDescriptor = _controllerDescriptor;
             controllerContext.Controller = mockController.Object;
 
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(controllerContext, actionDescriptor: _mockActionDescriptor.Object);
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                controllerContext,
+                actionDescriptor: _mockActionDescriptor.Object
+            );
 
             TestTraceWriter traceWriter = new TestTraceWriter();
-            HttpControllerTracer tracer = new HttpControllerTracer(request, mockController.Object, traceWriter);
+            HttpControllerTracer tracer = new HttpControllerTracer(
+                request,
+                mockController.Object,
+                traceWriter
+            );
 
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Info) { Kind = TraceKind.Begin },
-                new TraceRecord(actionContext.Request, TraceCategories.ControllersCategory, TraceLevel.Warn) { Kind = TraceKind.End }
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.ControllersCategory,
+                    TraceLevel.Warn
+                )
+                {
+                    Kind = TraceKind.End,
+                },
             };
 
             // Act
-            Task task = ((IHttpController)tracer).ExecuteAsync(controllerContext, CancellationToken.None);
+            Task task = ((IHttpController)tracer).ExecuteAsync(
+                controllerContext,
+                CancellationToken.None
+            );
             Exception thrown = await Assert.ThrowsAsync<TaskCanceledException>(() => task);
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
@@ -198,7 +323,11 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IHttpController expectedInner = new Mock<IHttpController>().Object;
-            HttpControllerTracer productUnderTest = new HttpControllerTracer(new HttpRequestMessage(), expectedInner, new TestTraceWriter());
+            HttpControllerTracer productUnderTest = new HttpControllerTracer(
+                new HttpRequestMessage(),
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             IHttpController actualInner = productUnderTest.Inner;
@@ -212,7 +341,11 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             IHttpController expectedInner = new Mock<IHttpController>().Object;
-            HttpControllerTracer productUnderTest = new HttpControllerTracer(new HttpRequestMessage(), expectedInner, new TestTraceWriter());
+            HttpControllerTracer productUnderTest = new HttpControllerTracer(
+                new HttpRequestMessage(),
+                expectedInner,
+                new TestTraceWriter()
+            );
 
             // Act
             IHttpController actualInner = Decorator.GetInner(productUnderTest as IHttpController);

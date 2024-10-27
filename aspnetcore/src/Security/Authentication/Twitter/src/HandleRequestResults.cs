@@ -5,5 +5,7 @@ namespace Microsoft.AspNetCore.Authentication.Twitter;
 
 internal static class HandleRequestResults
 {
-    internal static HandleRequestResult InvalidStateCookie = HandleRequestResult.Fail("Invalid state cookie.");
+    internal static HandleRequestResult InvalidStateCookie = HandleRequestResult.Fail(
+        "Invalid state cookie."
+    );
 }

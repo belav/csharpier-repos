@@ -1,26 +1,30 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // <OWNER>Microsoft</OWNER>
-// 
+//
 
 //
 // KeyedHashAlgorithm.cs
 //
 
-namespace System.Security.Cryptography {
+namespace System.Security.Cryptography
+{
     [System.Runtime.InteropServices.ComVisible(true)]
-    public abstract class KeyedHashAlgorithm : HashAlgorithm {
+    public abstract class KeyedHashAlgorithm : HashAlgorithm
+    {
         protected byte[] KeyValue;
 
-        protected KeyedHashAlgorithm() {}
+        protected KeyedHashAlgorithm() { }
 
         // IDisposable methods
-        protected override void Dispose(bool disposing) {
+        protected override void Dispose(bool disposing)
+        {
             // For keyed hash algorithms, we always want to zero out the key value
-            if (disposing) {
+            if (disposing)
+            {
                 if (KeyValue != null)
                     Array.Clear(KeyValue, 0, KeyValue.Length);
                 KeyValue = null;
@@ -32,12 +36,16 @@ namespace System.Security.Cryptography {
         // public properties
         //
 
-        public virtual byte[] Key {
-            get { return (byte[]) KeyValue.Clone(); }
-            set {
+        public virtual byte[] Key
+        {
+            get { return (byte[])KeyValue.Clone(); }
+            set
+            {
                 if (State != 0)
-                    throw new CryptographicException(Environment.GetResourceString("Cryptography_HashKeySet"));
-                KeyValue = (byte[]) value.Clone();
+                    throw new CryptographicException(
+                        Environment.GetResourceString("Cryptography_HashKeySet")
+                    );
+                KeyValue = (byte[])value.Clone();
             }
         }
 
@@ -45,16 +53,18 @@ namespace System.Security.Cryptography {
         // public methods
         //
 
-        new static public KeyedHashAlgorithm Create() {
+        new static public KeyedHashAlgorithm Create()
+        {
 #if FULL_AOT_RUNTIME
-            return new System.Security.Cryptography.HMACSHA1 ();
+            return new System.Security.Cryptography.HMACSHA1();
 #else
             return Create("System.Security.Cryptography.KeyedHashAlgorithm");
 #endif
         }
 
-        new static public KeyedHashAlgorithm Create(String algName) {
-            return (KeyedHashAlgorithm) CryptoConfig.CreateFromName(algName);    
+        public static new KeyedHashAlgorithm Create(String algName)
+        {
+            return (KeyedHashAlgorithm)CryptoConfig.CreateFromName(algName);
         }
     }
 }

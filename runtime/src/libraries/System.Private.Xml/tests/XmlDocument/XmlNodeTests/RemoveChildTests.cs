@@ -7,13 +7,26 @@ namespace System.Xml.XmlDocumentTests
 {
     public class RemoveChildTests
     {
-        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.SignificantWhitespace, XmlNodeType.CDATA, XmlNodeType.Text, XmlNodeType.Comment };
-        private enum InsertType { InsertBefore, InsertAfter }
+        private static readonly XmlNodeType[] s_XmlNodeTypes = new XmlNodeType[]
+        {
+            XmlNodeType.Whitespace,
+            XmlNodeType.SignificantWhitespace,
+            XmlNodeType.CDATA,
+            XmlNodeType.Text,
+            XmlNodeType.Comment,
+        };
+
+        private enum InsertType
+        {
+            InsertBefore,
+            InsertAfter,
+        }
 
         [Fact]
         public static void IterativelyRemoveAllChildNodes()
         {
-            var xml = @"<root>
+            var xml =
+                @"<root>
   text node one
   <elem1 child1="""" child2=""duu"" child3=""e1;e2;"" child4=""a1"" child5=""goody"">
      text node two e1; text node three
@@ -70,7 +83,9 @@ namespace System.Xml.XmlDocumentTests
             var xmlDocument = new XmlDocument();
             xmlDocument.LoadXml("<root><child/></root>");
 
-            Assert.Throws<NullReferenceException>(() => xmlDocument.DocumentElement.RemoveChild(null));
+            Assert.Throws<NullReferenceException>(
+                () => xmlDocument.DocumentElement.RemoveChild(null)
+            );
         }
 
         [Fact]
@@ -144,7 +159,9 @@ namespace System.Xml.XmlDocumentTests
         public static void FromNodesThatCannotContainChildren()
         {
             var xmlDocument = new XmlDocument();
-            xmlDocument.LoadXml("<root><?PI pi node?>some test<!--comment--><![CDATA[some data]]></root>");
+            xmlDocument.LoadXml(
+                "<root><?PI pi node?>some test<!--comment--><![CDATA[some data]]></root>"
+            );
 
             var piNode = xmlDocument.DocumentElement.ChildNodes[0];
             var textNode = xmlDocument.DocumentElement.ChildNodes[1];
@@ -173,31 +190,58 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace_Whitespace_Whitespace()
         {
-            RemoveChildTestBase(new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Whitespace, XmlNodeType.Whitespace });
+            RemoveChildTestBase(
+                new XmlNodeType[]
+                {
+                    XmlNodeType.Whitespace,
+                    XmlNodeType.Whitespace,
+                    XmlNodeType.Whitespace,
+                }
+            );
         }
 
         [Fact]
         public static void SignificantWhitespace_SignificantWhitespace_SignificantWhitespace()
         {
-            RemoveChildTestBase(new XmlNodeType[] { XmlNodeType.SignificantWhitespace, XmlNodeType.SignificantWhitespace, XmlNodeType.SignificantWhitespace });
+            RemoveChildTestBase(
+                new XmlNodeType[]
+                {
+                    XmlNodeType.SignificantWhitespace,
+                    XmlNodeType.SignificantWhitespace,
+                    XmlNodeType.SignificantWhitespace,
+                }
+            );
         }
 
         [Fact]
         public static void CDATA_CDATA_CDATA()
         {
-            RemoveChildTestBase(new XmlNodeType[] { XmlNodeType.CDATA, XmlNodeType.CDATA, XmlNodeType.CDATA });
+            RemoveChildTestBase(
+                new XmlNodeType[] { XmlNodeType.CDATA, XmlNodeType.CDATA, XmlNodeType.CDATA }
+            );
         }
 
         [Fact]
         public static void Whitespace_Text_Text_CDATA_SignificantWhitespace_SignificantWhitespace()
         {
-            RemoveChildTestBase(new XmlNodeType[] { XmlNodeType.Whitespace, XmlNodeType.Text, XmlNodeType.Text, XmlNodeType.CDATA, XmlNodeType.SignificantWhitespace, XmlNodeType.SignificantWhitespace });
+            RemoveChildTestBase(
+                new XmlNodeType[]
+                {
+                    XmlNodeType.Whitespace,
+                    XmlNodeType.Text,
+                    XmlNodeType.Text,
+                    XmlNodeType.CDATA,
+                    XmlNodeType.SignificantWhitespace,
+                    XmlNodeType.SignificantWhitespace,
+                }
+            );
         }
 
         [Fact]
         public static void Text_Comment_CDATA()
         {
-            var xml = @"<TMC>text<!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></TMC>";
+            var xml =
+                @"<TMC>text<!-- comments --><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></TMC>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertBefore, nodeType);
@@ -215,7 +259,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace_Comment_Text()
         {
-            var xml = @"<WMT>
+            var xml =
+                @"<WMT>
             <!-- comments -->text</WMT>";
 
             foreach (var nodeType in s_XmlNodeTypes)
@@ -225,7 +270,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void Whitespace_Element_Whitespace()
         {
-            var xml = @"<WEW>
+            var xml =
+                @"<WEW>
             <E/>
         </WEW>";
 
@@ -254,7 +300,8 @@ namespace System.Xml.XmlDocumentTests
         [Fact]
         public static void CDATA_Element_CDATA()
         {
-            var xml = @"<CEC><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]><E/><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></CEC>";
+            var xml =
+                @"<CEC><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]><E/><![CDATA[ &lt; &amp; <tag> < ! > & </tag> 	 ]]></CEC>";
 
             foreach (var nodeType in s_XmlNodeTypes)
                 DeleteNonTextNodeBase(xml, InsertType.InsertAfter, nodeType);
@@ -266,7 +313,11 @@ namespace System.Xml.XmlDocumentTests
                 RemoveChildTestBase(nodeTypes, i);
         }
 
-        private static void DeleteNonTextNodeBase(string xml, InsertType insertType, XmlNodeType nodeType)
+        private static void DeleteNonTextNodeBase(
+            string xml,
+            InsertType insertType,
+            XmlNodeType nodeType
+        )
         {
             string[] expected = new string[3];
 
@@ -372,7 +423,11 @@ namespace System.Xml.XmlDocumentTests
             Assert.Equal(refChild, newChild.PreviousSibling);
         }
 
-        private static void VerifySiblings(XmlNode refChild, XmlNode newChild, InsertType insertType)
+        private static void VerifySiblings(
+            XmlNode refChild,
+            XmlNode newChild,
+            InsertType insertType
+        )
         {
             switch (insertType)
             {
@@ -430,7 +485,9 @@ namespace System.Xml.XmlDocumentTests
             return parent.InsertAfter(newChild, refChild);
         }
 
-        private static Func<XmlNode, XmlNode, XmlNode, XmlNode> CreateInsertBeforeOrAfter(InsertType insertType)
+        private static Func<XmlNode, XmlNode, XmlNode, XmlNode> CreateInsertBeforeOrAfter(
+            InsertType insertType
+        )
         {
             switch (insertType)
             {

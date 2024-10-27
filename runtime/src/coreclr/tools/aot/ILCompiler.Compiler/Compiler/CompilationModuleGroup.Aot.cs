@@ -16,29 +16,35 @@ namespace ILCompiler
         /// If true, the generic dictionary of "method" is in the set of input assemblies being compiled
         /// </summary>
         public abstract bool ContainsMethodDictionary(MethodDesc method);
+
         /// <summary>
         /// If true, "method" is imported from the set of reference assemblies
         /// </summary>
         public abstract bool ImportsMethod(MethodDesc method, bool unboxingStub);
+
         /// <summary>
         /// If true, all code is compiled into a single module
         /// </summary>
         public abstract bool IsSingleFileCompilation { get; }
+
         /// <summary>
         /// If true, the full type should be generated. This occurs in situations where the type is
         /// shared between modules (generics, parameterized types), or the type lives in a different module
         /// and therefore needs a full VTable
         /// </summary>
         public abstract bool ShouldProduceFullVTable(TypeDesc type);
+
         /// <summary>
         /// If true, the necessary type should be promoted to a full type should be generated.
         /// </summary>
         public abstract bool ShouldPromoteToFullType(TypeDesc type);
+
         /// <summary>
         /// If true, if a type is in the dependency graph, its non-generic methods that can be transformed
         /// into code must be.
         /// </summary>
         public abstract bool PresenceOfEETypeImpliesAllMethodsOnType(TypeDesc type);
+
         /// <summary>
         /// If true, the type will not be linked into the same module as the current compilation and therefore
         /// accessed through the target platform's import mechanism (ie, Import Address Table on Windows)

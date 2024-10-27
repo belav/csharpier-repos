@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,64 +26,61 @@
 
 // COMPLETE
 
-using System.Runtime.InteropServices;
 using System.Drawing;
+using System.Runtime.InteropServices;
 
-namespace System.Windows.Forms {
-	[ComVisible(true)]
-	public class MouseEventArgs : EventArgs {
-		private MouseButtons	buttons;
-		private int		clicks;
-		private int		delta;
-		private int		x;
-		private int		y;
+namespace System.Windows.Forms
+{
+    [ComVisible(true)]
+    public class MouseEventArgs : EventArgs
+    {
+        private MouseButtons buttons;
+        private int clicks;
+        private int delta;
+        private int x;
+        private int y;
 
-		#region Public Constructors
-		public MouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta) {
-			this.buttons=button;
-			this.clicks=clicks;
-			this.delta=delta;
-			this.x=x;
-			this.y=y;
-		}
-		#endregion	// Public Constructors
+        #region Public Constructors
+        public MouseEventArgs(MouseButtons button, int clicks, int x, int y, int delta)
+        {
+            this.buttons = button;
+            this.clicks = clicks;
+            this.delta = delta;
+            this.x = x;
+            this.y = y;
+        }
+        #endregion	// Public Constructors
 
-		#region Public Instance Properties
-		public MouseButtons Button {
-			get {
-				return this.buttons;
-			}
-		}
+        #region Public Instance Properties
+        public MouseButtons Button
+        {
+            get { return this.buttons; }
+        }
 
-		public int Clicks {
-			get {
-				return this.clicks;
-			}
-		}
+        public int Clicks
+        {
+            get { return this.clicks; }
+        }
 
-		public int Delta {
-			get {
-				return this.delta;
-			}
-		}
+        public int Delta
+        {
+            get { return this.delta; }
+        }
 
-		public int X {
-			get {
-				return this.x;
-			}
-		}
+        public int X
+        {
+            get { return this.x; }
+        }
 
-		public int Y {
-			get {
-				return this.y;
-			}
-		}
+        public int Y
+        {
+            get { return this.y; }
+        }
 
-		public Point Location {
-			get {
-				return new Point (this.x, this.y);
-			}
-		}
-		#endregion	// Public Instance Properties
-	}
+        public Point Location
+        {
+            get { return new Point(this.x, this.y); }
+        }
+        #endregion	// Public Instance Properties
+    }
 }

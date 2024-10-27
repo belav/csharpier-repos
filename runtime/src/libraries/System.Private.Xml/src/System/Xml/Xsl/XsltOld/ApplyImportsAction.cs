@@ -13,6 +13,7 @@ namespace System.Xml.Xsl.XsltOld
         private XmlQualifiedName? _mode;
         private Stylesheet? _stylesheet;
         private const int TemplateProcessed = 2;
+
         internal override void Compile(Compiler compiler)
         {
             CheckEmpty(compiler);
@@ -30,7 +31,11 @@ namespace System.Xml.Xsl.XsltOld
             switch (frame.State)
             {
                 case Initialized:
-                    processor.PushTemplateLookup(frame.NodeSet, _mode, /*importsOf:*/_stylesheet);
+                    processor.PushTemplateLookup(
+                        frame.NodeSet,
+                        _mode, /*importsOf:*/
+                        _stylesheet
+                    );
                     frame.State = TemplateProcessed;
                     break;
                 case TemplateProcessed:

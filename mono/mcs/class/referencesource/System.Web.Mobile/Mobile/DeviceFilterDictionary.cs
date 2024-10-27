@@ -1,18 +1,20 @@
 //------------------------------------------------------------------------------
 // <copyright file="DeviceFilterDictionary.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.Mobile
 {
-    using System.Web;
     using System.Collections;
-    using System.Reflection;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
+    using System.Reflection;
+    using System.Web;
 
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal class DeviceFilterDictionary
     {
         internal class ComparisonEvaluator
@@ -32,13 +34,11 @@ namespace System.Web.Mobile
         private Hashtable _comparisonEvaluators = null;
         private Hashtable _delegateEvaluators = null;
 
-
         internal DeviceFilterDictionary()
         {
             _comparisonEvaluators = new Hashtable();
             _delegateEvaluators = new Hashtable();
         }
-
 
         internal DeviceFilterDictionary(DeviceFilterDictionary original)
         {
@@ -46,33 +46,35 @@ namespace System.Web.Mobile
             _delegateEvaluators = (Hashtable)original._delegateEvaluators.Clone();
         }
 
-
-        internal void AddCapabilityDelegate(String delegateName,
-            MobileCapabilities.EvaluateCapabilitiesDelegate evaluator)
+        internal void AddCapabilityDelegate(
+            String delegateName,
+            MobileCapabilities.EvaluateCapabilitiesDelegate evaluator
+        )
         {
             _delegateEvaluators[delegateName] = evaluator;
         }
-
 
         private void CheckForComparisonDelegateLoops(String delegateName)
         {
             String nextDelegateName = delegateName;
             Hashtable alreadyReferencedDelegates = new Hashtable();
 
-            while(true)
+            while (true)
             {
-                ComparisonEvaluator nextComparisonEvaluator =
-                    (ComparisonEvaluator)_comparisonEvaluators[nextDelegateName];
-                if(nextComparisonEvaluator == null)
+                ComparisonEvaluator nextComparisonEvaluator = (ComparisonEvaluator)
+                    _comparisonEvaluators[nextDelegateName];
+                if (nextComparisonEvaluator == null)
                 {
                     break;
                 }
 
-                if(alreadyReferencedDelegates.Contains(nextDelegateName))
+                if (alreadyReferencedDelegates.Contains(nextDelegateName))
                 {
-                    String msg = SR.GetString(SR.DevFiltDict_FoundLoop,
-                                              nextComparisonEvaluator.capabilityName,
-                                              delegateName);
+                    String msg = SR.GetString(
+                        SR.DevFiltDict_FoundLoop,
+                        nextComparisonEvaluator.capabilityName,
+                        delegateName
+                    );
                     throw new Exception(msg);
                 }
 
@@ -81,25 +83,29 @@ namespace System.Web.Mobile
             }
         }
 
-
-        internal void AddComparisonDelegate(String delegateName, String comparisonName,
-            String argument)
+        internal void AddComparisonDelegate(
+            String delegateName,
+            String comparisonName,
+            String argument
+        )
         {
-            _comparisonEvaluators[delegateName] = new ComparisonEvaluator(comparisonName,
-                argument);
+            _comparisonEvaluators[delegateName] = new ComparisonEvaluator(comparisonName, argument);
 
             CheckForComparisonDelegateLoops(delegateName);
         }
 
-
-        internal bool FindComparisonEvaluator(String evaluatorName, out String capabilityName,
-            out String capabilityArgument)
+        internal bool FindComparisonEvaluator(
+            String evaluatorName,
+            out String capabilityName,
+            out String capabilityArgument
+        )
         {
             capabilityName = null;
             capabilityArgument = null;
 
-            ComparisonEvaluator evaluator = (ComparisonEvaluator)_comparisonEvaluators[evaluatorName];
-            if(evaluator == null)
+            ComparisonEvaluator evaluator = (ComparisonEvaluator)
+                _comparisonEvaluators[evaluatorName];
+            if (evaluator == null)
             {
                 return false;
             }
@@ -110,16 +116,17 @@ namespace System.Web.Mobile
             return true;
         }
 
-
-        internal bool FindDelegateEvaluator(String evaluatorName,
-            out MobileCapabilities.EvaluateCapabilitiesDelegate evaluatorDelegate)
+        internal bool FindDelegateEvaluator(
+            String evaluatorName,
+            out MobileCapabilities.EvaluateCapabilitiesDelegate evaluatorDelegate
+        )
         {
             evaluatorDelegate = null;
 
             MobileCapabilities.EvaluateCapabilitiesDelegate evaluator;
             evaluator = (MobileCapabilities.EvaluateCapabilitiesDelegate)
-                            _delegateEvaluators[evaluatorName];
-            if(evaluator == null)
+                _delegateEvaluators[evaluatorName];
+            if (evaluator == null)
             {
                 return false;
             }
@@ -128,7 +135,6 @@ namespace System.Web.Mobile
 
             return true;
         }
-
 
         internal bool IsComparisonEvaluator(String evaluatorName)
         {
@@ -141,4 +147,3 @@ namespace System.Web.Mobile
         }
     }
 }
-

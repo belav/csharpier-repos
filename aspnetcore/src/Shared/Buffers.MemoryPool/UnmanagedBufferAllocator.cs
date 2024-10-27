@@ -47,7 +47,8 @@ internal unsafe struct UnmanagedBufferAllocator : IDisposable
     /// <remarks>
     /// The allocated memory is uninitialized.
     /// </remarks>
-    public T* AllocAsPointer<T>(int count) where T : unmanaged
+    public T* AllocAsPointer<T>(int count)
+        where T : unmanaged
     {
         int toAlloc = checked(count * sizeof(T));
         Span<byte> alloc = GetSpan(toAlloc, out bool mustCommit);
@@ -68,7 +69,8 @@ internal unsafe struct UnmanagedBufferAllocator : IDisposable
     /// <remarks>
     /// The allocated memory is uninitialized.
     /// </remarks>
-    public Span<T> AllocAsSpan<T>(int count) where T : unmanaged
+    public Span<T> AllocAsSpan<T>(int count)
+        where T : unmanaged
     {
         return new Span<T>(AllocAsPointer<T>(count), count);
     }

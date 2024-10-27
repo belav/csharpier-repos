@@ -28,12 +28,30 @@ public class RedisProtocolBenchmark
     [GlobalSetup]
     public void GlobalSetup()
     {
-        var resolver = new DefaultHubProtocolResolver(new List<IHubProtocol> { new DummyProtocol("protocol1"),
-                new DummyProtocol("protocol2") }, NullLogger<DefaultHubProtocolResolver>.Instance);
+        var resolver = new DefaultHubProtocolResolver(
+            new List<IHubProtocol>
+            {
+                new DummyProtocol("protocol1"),
+                new DummyProtocol("protocol2"),
+            },
+            NullLogger<DefaultHubProtocolResolver>.Instance
+        );
 
-        _protocol = new RedisProtocol(new DefaultHubMessageSerializer(resolver, new List<string>() { "protocol1", "protocol2" }, hubSupportedProtocols: null));
+        _protocol = new RedisProtocol(
+            new DefaultHubMessageSerializer(
+                resolver,
+                new List<string>() { "protocol1", "protocol2" },
+                hubSupportedProtocols: null
+            )
+        );
 
-        _groupCommand = new RedisGroupCommand(id: 42, serverName: "Server", GroupAction.Add, groupName: "group", connectionId: "connection");
+        _groupCommand = new RedisGroupCommand(
+            id: 42,
+            serverName: "Server",
+            GroupAction.Add,
+            groupName: "group",
+            connectionId: "connection"
+        );
 
         // Because of the DummyProtocol, the args don't really matter
         _args = Array.Empty<object>();
@@ -45,8 +63,16 @@ public class RedisProtocolBenchmark
         _writtenAck = RedisProtocol.WriteAck(42);
         _writtenGroupCommand = RedisProtocol.WriteGroupCommand(_groupCommand);
         _writtenInvocationNoExclusions = _protocol.WriteInvocation(_methodName, _args, null);
-        _writtenInvocationSmallExclusions = _protocol.WriteInvocation(_methodName, _args, excludedConnectionIds: _excludedConnectionIdsSmall);
-        _writtenInvocationLargeExclusions = _protocol.WriteInvocation(_methodName, _args, excludedConnectionIds: _excludedConnectionIdsLarge);
+        _writtenInvocationSmallExclusions = _protocol.WriteInvocation(
+            _methodName,
+            _args,
+            excludedConnectionIds: _excludedConnectionIdsSmall
+        );
+        _writtenInvocationLargeExclusions = _protocol.WriteInvocation(
+            _methodName,
+            _args,
+            excludedConnectionIds: _excludedConnectionIdsLarge
+        );
     }
 
     [Benchmark]
@@ -70,13 +96,21 @@ public class RedisProtocolBenchmark
     [Benchmark]
     public void WriteInvocationSmallExclusions()
     {
-        _protocol.WriteInvocation(_methodName, _args, excludedConnectionIds: _excludedConnectionIdsSmall);
+        _protocol.WriteInvocation(
+            _methodName,
+            _args,
+            excludedConnectionIds: _excludedConnectionIdsSmall
+        );
     }
 
     [Benchmark]
     public void WriteInvocationLargeExclusions()
     {
-        _protocol.WriteInvocation(_methodName, _args, excludedConnectionIds: _excludedConnectionIdsLarge);
+        _protocol.WriteInvocation(
+            _methodName,
+            _args,
+            excludedConnectionIds: _excludedConnectionIdsLarge
+        );
     }
 
     [Benchmark]
@@ -137,7 +171,11 @@ public class RedisProtocolBenchmark
 
         public bool IsVersionSupported(int version) => true;
 
-        public bool TryParseMessage(ref ReadOnlySequence<byte> input, IInvocationBinder binder, out HubMessage message)
+        public bool TryParseMessage(
+            ref ReadOnlySequence<byte> input,
+            IInvocationBinder binder,
+            out HubMessage message
+        )
         {
             throw new NotSupportedException();
         }

@@ -4,7 +4,6 @@
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Threading;
-
 using Internal.Runtime.CompilerServices;
 
 namespace System.Runtime.InteropServices
@@ -54,7 +53,6 @@ namespace System.Runtime.InteropServices
                 Debug.Assert(IsAllocated, "Handle is not initialized");
                 return RuntimeImports.RhHandleGet(_handle);
             }
-
             set
             {
                 Debug.Assert(IsAllocated, "Handle is not initialized");
@@ -80,10 +78,7 @@ namespace System.Runtime.InteropServices
         // Determine whether this handle has been allocated or not.
         public bool IsAllocated
         {
-            get
-            {
-                return _handle != default(IntPtr);
-            }
+            get { return _handle != default(IntPtr); }
         }
     }
 }

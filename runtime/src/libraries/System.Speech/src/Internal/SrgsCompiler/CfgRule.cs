@@ -35,10 +35,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal bool TopLevel
         {
-            get
-            {
-                return ((_flag & 0x0001) != 0);
-            }
+            get { return ((_flag & 0x0001) != 0); }
             set
             {
                 if (value)
@@ -84,10 +81,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal bool Import
         {
-            get
-            {
-                return ((_flag & 0x0008) != 0);
-            }
+            get { return ((_flag & 0x0008) != 0); }
             set
             {
                 if (value)
@@ -103,10 +97,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal bool Export
         {
-            get
-            {
-                return ((_flag & 0x0010) != 0);
-            }
+            get { return ((_flag & 0x0010) != 0); }
             set
             {
                 if (value)
@@ -122,18 +113,12 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal bool HasResources
         {
-            get
-            {
-                return ((_flag & 0x0020) != 0);
-            }
+            get { return ((_flag & 0x0020) != 0); }
         }
 
         internal bool Dynamic
         {
-            get
-            {
-                return ((_flag & 0x0040) != 0);
-            }
+            get { return ((_flag & 0x0040) != 0); }
             set
             {
                 if (value)
@@ -149,10 +134,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal bool HasDynamicRef
         {
-            get
-            {
-                return ((_flag & 0x0080) != 0);
-            }
+            get { return ((_flag & 0x0080) != 0); }
             set
             {
                 if (value)
@@ -168,10 +150,7 @@ namespace System.Speech.Internal.SrgsCompiler
 
         internal uint FirstArcIndex
         {
-            get
-            {
-                return (_flag >> 8) & 0x3FFFFF;
-            }
+            get { return (_flag >> 8) & 0x3FFFFF; }
             set
             {
                 if (value > 0x3FFFFF)
@@ -226,7 +205,7 @@ namespace System.Speech.Internal.SrgsCompiler
         SPRAF_Dynamic = (1 << 5),
         SPRAF_Root = (1 << 6),
         SPRAF_AutoPause = (1 << 16),
-        SPRAF_UserDelimited = (1 << 17)
+        SPRAF_UserDelimited = (1 << 17),
     }
 
     #endregion

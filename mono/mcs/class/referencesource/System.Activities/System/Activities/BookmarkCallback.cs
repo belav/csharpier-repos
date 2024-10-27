@@ -6,5 +6,9 @@ namespace System.Activities
 {
     using System;
 
-    public delegate void BookmarkCallback(NativeActivityContext context, Bookmark bookmark, object value);
+    public delegate void BookmarkCallback(
+        NativeActivityContext context,
+        Bookmark bookmark,
+        object value
+    );
 }

@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="IDesignerHost.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel.Design {
+namespace System.ComponentModel.Design
+{
     using System;
 
     /// <devdoc>
@@ -14,8 +15,8 @@ namespace System.ComponentModel.Design {
     ///       Methods for the Designer host to report on the state of transactions.
     ///    </para>
     /// </devdoc>
-    public interface IDesignerHostTransactionState {
+    public interface IDesignerHostTransactionState
+    {
         bool IsClosingTransaction { get; }
     }
 }
-

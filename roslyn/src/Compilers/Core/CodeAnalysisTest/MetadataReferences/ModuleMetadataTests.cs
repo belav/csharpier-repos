@@ -5,12 +5,12 @@
 #nullable disable
 
 using System;
+using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.IO;
+using System.Reflection.PortableExecutable;
 using Roslyn.Test.Utilities;
 using Xunit;
-using System.Collections.Generic;
-using System.Reflection.PortableExecutable;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
@@ -19,9 +19,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public unsafe void CreateFromMetadata_Errors()
         {
-            Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromMetadata(IntPtr.Zero, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { fixed (byte* ptr = new byte[] { 1, 2, 3 }) ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { fixed (byte* ptr = new byte[] { 1, 2, 3 }) ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1); });
+            Assert.Throws<ArgumentNullException>(
+                () => ModuleMetadata.CreateFromMetadata(IntPtr.Zero, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromMetadata((IntPtr)ptr, -1);
+            });
 
             fixed (byte* ptr = new byte[] { 1, 2, 3 })
             {
@@ -39,7 +49,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             fixed (byte* ptr = &assembly[h.MetadataStartOffset])
             {
                 var metadata = ModuleMetadata.CreateFromMetadata((IntPtr)ptr, h.MetadataSize);
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
             }
         }
 
@@ -64,8 +77,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
             fixed (byte* ptr = &assembly[h.MetadataStartOffset])
             {
                 var stream = new UnmanagedMemoryStream(ptr, h.MetadataSize);
-                var metadata = ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length, stream.Dispose);
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                var metadata = ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)stream.PositionPointer,
+                    (int)stream.Length,
+                    stream.Dispose
+                );
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
             }
         }
 
@@ -78,21 +98,39 @@ namespace Microsoft.CodeAnalysis.UnitTests
             fixed (byte* ptr = &netModule[h.MetadataStartOffset])
             {
                 var stream = new UnmanagedMemoryStream(ptr, h.MetadataSize);
-                ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length, stream.Dispose);
+                ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)stream.PositionPointer,
+                    (int)stream.Length,
+                    stream.Dispose
+                );
             }
         }
 
         [Fact]
         public unsafe void CreateFromImage()
         {
-            Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(IntPtr.Zero, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { fixed (byte* ptr = new byte[] { 1, 2, 3 }) ModuleMetadata.CreateFromImage((IntPtr)ptr, 0); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { fixed (byte* ptr = new byte[] { 1, 2, 3 }) ModuleMetadata.CreateFromImage((IntPtr)ptr, -1); });
+            Assert.Throws<ArgumentNullException>(
+                () => ModuleMetadata.CreateFromImage(IntPtr.Zero, 0)
+            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromImage((IntPtr)ptr, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* ptr = new byte[] { 1, 2, 3 })
+                    ModuleMetadata.CreateFromImage((IntPtr)ptr, -1);
+            });
 
-            Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(default(ImmutableArray<byte>)));
+            Assert.Throws<ArgumentNullException>(
+                () => ModuleMetadata.CreateFromImage(default(ImmutableArray<byte>))
+            );
 
             IEnumerable<byte> enumerableImage = null;
-            Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(enumerableImage));
+            Assert.Throws<ArgumentNullException>(
+                () => ModuleMetadata.CreateFromImage(enumerableImage)
+            );
 
             byte[] arrayImage = null;
             Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromImage(arrayImage));
@@ -105,12 +143,21 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact]
         public void CreateFromImageStream()
         {
-            Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromStream(peStream: null));
-            Assert.Throws<ArgumentException>(() => ModuleMetadata.CreateFromStream(new TestStream(canRead: false, canSeek: true)));
-            Assert.Throws<ArgumentException>(() => ModuleMetadata.CreateFromStream(new TestStream(canRead: true, canSeek: false)));
+            Assert.Throws<ArgumentNullException>(
+                () => ModuleMetadata.CreateFromStream(peStream: null)
+            );
+            Assert.Throws<ArgumentException>(
+                () => ModuleMetadata.CreateFromStream(new TestStream(canRead: false, canSeek: true))
+            );
+            Assert.Throws<ArgumentException>(
+                () => ModuleMetadata.CreateFromStream(new TestStream(canRead: true, canSeek: false))
+            );
         }
 
-        [ConditionalFact(typeof(WindowsDesktopOnly), Reason = "https://github.com/dotnet/roslyn/issues/30289")]
+        [ConditionalFact(
+            typeof(WindowsDesktopOnly),
+            Reason = "https://github.com/dotnet/roslyn/issues/30289"
+        )]
         public void CreateFromFile()
         {
             Assert.Throws<ArgumentNullException>(() => ModuleMetadata.CreateFromFile((string)null));
@@ -119,10 +166,26 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             char systemDrive = Environment.GetFolderPath(Environment.SpecialFolder.Windows)[0];
             Assert.Throws<IOException>(() => ModuleMetadata.CreateFromFile(@"http://goo.bar"));
-            Assert.Throws<FileNotFoundException>(() => ModuleMetadata.CreateFromFile(systemDrive + @":\file_that_does_not_exists.dll"));
-            Assert.Throws<FileNotFoundException>(() => ModuleMetadata.CreateFromFile(systemDrive + @":\directory_that_does_not_exists\file_that_does_not_exists.dll"));
-            Assert.Throws<PathTooLongException>(() => ModuleMetadata.CreateFromFile(systemDrive + @":\" + new string('x', 1000)));
-            Assert.Throws<IOException>(() => ModuleMetadata.CreateFromFile(Environment.GetFolderPath(Environment.SpecialFolder.Windows)));
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    ModuleMetadata.CreateFromFile(systemDrive + @":\file_that_does_not_exists.dll")
+            );
+            Assert.Throws<FileNotFoundException>(
+                () =>
+                    ModuleMetadata.CreateFromFile(
+                        systemDrive
+                            + @":\directory_that_does_not_exists\file_that_does_not_exists.dll"
+                    )
+            );
+            Assert.Throws<PathTooLongException>(
+                () => ModuleMetadata.CreateFromFile(systemDrive + @":\" + new string('x', 1000))
+            );
+            Assert.Throws<IOException>(
+                () =>
+                    ModuleMetadata.CreateFromFile(
+                        Environment.GetFolderPath(Environment.SpecialFolder.Windows)
+                    )
+            );
         }
 
         [Fact]
@@ -167,8 +230,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void EmptyStream()
         {
             ModuleMetadata.CreateFromStream(new MemoryStream(), PEStreamOptions.Default);
-            Assert.Throws<BadImageFormatException>(() => ModuleMetadata.CreateFromStream(new MemoryStream(), PEStreamOptions.PrefetchMetadata));
-            Assert.Throws<BadImageFormatException>(() => ModuleMetadata.CreateFromStream(new MemoryStream(), PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage));
+            Assert.Throws<BadImageFormatException>(
+                () =>
+                    ModuleMetadata.CreateFromStream(
+                        new MemoryStream(),
+                        PEStreamOptions.PrefetchMetadata
+                    )
+            );
+            Assert.Throws<BadImageFormatException>(
+                () =>
+                    ModuleMetadata.CreateFromStream(
+                        new MemoryStream(),
+                        PEStreamOptions.PrefetchMetadata | PEStreamOptions.PrefetchEntireImage
+                    )
+            );
         }
 
         [Fact]
@@ -187,7 +262,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 var metadata = ModuleMetadata.CreateFromStream(stream, leaveOpen: false);
 
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should dispose the stream.
                 metadata.Dispose();
@@ -214,8 +292,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     OnSeek = (_, _) => seeked = true,
                 };
 
-                var metadata = ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length, stream.Dispose);
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                var metadata = ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)stream.PositionPointer,
+                    (int)stream.Length,
+                    stream.Dispose
+                );
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should dispose the stream.
                 metadata.Dispose();
@@ -242,7 +327,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 var metadata = ModuleMetadata.CreateFromStream(stream, leaveOpen: true);
 
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should not dispose the stream.
                 metadata.Dispose();
@@ -272,8 +360,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     OnSeek = (_, _) => seeked = true,
                 };
 
-                var metadata = ModuleMetadata.CreateFromMetadata((IntPtr)stream.PositionPointer, (int)stream.Length);
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                var metadata = ModuleMetadata.CreateFromMetadata(
+                    (IntPtr)stream.PositionPointer,
+                    (int)stream.Length
+                );
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should not dispose the stream.
                 metadata.Dispose();
@@ -291,7 +385,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData(PEStreamOptions.PrefetchEntireImage)]
         [InlineData(PEStreamOptions.PrefetchMetadata)]
         [InlineData(PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata)]
-        public unsafe void CreateFromUnmanagedMemoryStream_Prefetch_LeaveOpenFalse(PEStreamOptions options)
+        public unsafe void CreateFromUnmanagedMemoryStream_Prefetch_LeaveOpenFalse(
+            PEStreamOptions options
+        )
         {
             var assembly = TestResources.Basic.Members;
             fixed (byte* assemblyPtr = assembly)
@@ -306,7 +402,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 var metadata = ModuleMetadata.CreateFromStream(stream, options);
 
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should dispose the stream.
                 metadata.Dispose();
@@ -322,7 +421,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [InlineData(PEStreamOptions.PrefetchEntireImage)]
         [InlineData(PEStreamOptions.PrefetchMetadata)]
         [InlineData(PEStreamOptions.PrefetchEntireImage | PEStreamOptions.PrefetchMetadata)]
-        public unsafe void CreateFromUnmanagedMemoryStream_Prefetcha_LeaveOpenTrue(PEStreamOptions options)
+        public unsafe void CreateFromUnmanagedMemoryStream_Prefetcha_LeaveOpenTrue(
+            PEStreamOptions options
+        )
         {
             var assembly = TestResources.Basic.Members;
             fixed (byte* assemblyPtr = assembly)
@@ -335,9 +436,15 @@ namespace Microsoft.CodeAnalysis.UnitTests
                     OnSeek = (_, _) => seeked = true,
                 };
 
-                var metadata = ModuleMetadata.CreateFromStream(stream, options | PEStreamOptions.LeaveOpen);
+                var metadata = ModuleMetadata.CreateFromStream(
+                    stream,
+                    options | PEStreamOptions.LeaveOpen
+                );
 
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should not dispose the stream.
                 metadata.Dispose();
@@ -373,7 +480,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
                 var metadata = ModuleMetadata.CreateFromStream(stream, leaveOpen: false);
 
-                Assert.Equal(new AssemblyIdentity("Members"), metadata.Module.ReadAssemblyIdentityOrThrow());
+                Assert.Equal(
+                    new AssemblyIdentity("Members"),
+                    metadata.Module.ReadAssemblyIdentityOrThrow()
+                );
 
                 // Disposing the metadata should dispose the stream.
                 metadata.Dispose();
@@ -386,9 +496,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
         private class MockUnmanagedMemoryStream : UnmanagedMemoryStream
         {
-            public unsafe MockUnmanagedMemoryStream(byte* pointer, long length) : base(pointer, length)
-            {
-            }
+            public unsafe MockUnmanagedMemoryStream(byte* pointer, long length)
+                : base(pointer, length) { }
 
             public Action<bool> OnDispose;
             public Action<long, SeekOrigin> OnSeek;

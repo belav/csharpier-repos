@@ -15,26 +15,25 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding;
 public class CompiledModelCosmosTest : CompiledModelTestBase
 {
     [ConditionalFact]
-    public virtual void Basic_cosmos_model()
-        => Test(
+    public virtual void Basic_cosmos_model() =>
+        Test(
             modelBuilder =>
             {
                 modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
 
                 modelBuilder.HasDefaultContainer("Default");
 
-                modelBuilder.Entity<Data>(
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.Property<long?>("PartitionId").HasConversion<string>();
-                        eb.HasPartitionKey("PartitionId");
-                        eb.HasKey("Id", "PartitionId");
-                        eb.ToContainer("DataContainer");
-                        eb.UseETagConcurrency();
-                        eb.HasNoDiscriminator();
-                        eb.Property(d => d.Blob).ToJsonProperty("JsonBlob");
-                    });
+                modelBuilder.Entity<Data>(eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.Property<long?>("PartitionId").HasConversion<string>();
+                    eb.HasPartitionKey("PartitionId");
+                    eb.HasKey("Id", "PartitionId");
+                    eb.ToContainer("DataContainer");
+                    eb.UseETagConcurrency();
+                    eb.HasNoDiscriminator();
+                    eb.Property(d => d.Blob).ToJsonProperty("JsonBlob");
+                });
             },
             model =>
             {
@@ -46,7 +45,10 @@ public class CompiledModelCosmosTest : CompiledModelTestBase
                 Assert.False(dataEntity.IsOwned());
                 Assert.IsType<ConstructorBinding>(dataEntity.ConstructorBinding);
                 Assert.Null(dataEntity.FindIndexerPropertyInfo());
-                Assert.Equal(ChangeTrackingStrategy.Snapshot, dataEntity.GetChangeTrackingStrategy());
+                Assert.Equal(
+                    ChangeTrackingStrategy.Snapshot,
+                    dataEntity.GetChangeTrackingStrategy()
+                );
                 Assert.Equal("DataContainer", dataEntity.GetContainer());
                 Assert.Null(dataEntity.FindDiscriminatorProperty());
 
@@ -75,7 +77,9 @@ public class CompiledModelCosmosTest : CompiledModelTestBase
                 Assert.Equal(PropertySaveBehavior.Throw, storeId.GetAfterSaveBehavior());
                 Assert.Equal(PropertySaveBehavior.Save, storeId.GetBeforeSaveBehavior());
                 Assert.Equal("id", CosmosPropertyExtensions.GetJsonPropertyName(storeId));
-                Assert.IsType<IdValueGenerator>(storeId.GetValueGeneratorFactory()!(storeId, dataEntity));
+                Assert.IsType<IdValueGenerator>(
+                    storeId.GetValueGeneratorFactory()!(storeId, dataEntity)
+                );
                 Assert.Null(storeId.GetValueConverter());
                 Assert.NotNull(storeId.GetValueComparer());
                 Assert.NotNull(storeId.GetKeyValueComparer());
@@ -89,7 +93,10 @@ public class CompiledModelCosmosTest : CompiledModelTestBase
                 Assert.Equal(ValueGenerated.Never, partitionId.ValueGenerated);
                 Assert.Equal(PropertySaveBehavior.Throw, partitionId.GetAfterSaveBehavior());
                 Assert.Equal(PropertySaveBehavior.Save, partitionId.GetBeforeSaveBehavior());
-                Assert.Equal("PartitionId", CosmosPropertyExtensions.GetJsonPropertyName(partitionId));
+                Assert.Equal(
+                    "PartitionId",
+                    CosmosPropertyExtensions.GetJsonPropertyName(partitionId)
+                );
                 Assert.Null(partitionId.GetValueGeneratorFactory());
                 Assert.Null(partitionId.GetValueConverter());
                 Assert.Equal("1", partitionId.FindTypeMapping()!.Converter!.ConvertToProvider(1));
@@ -145,23 +152,26 @@ public class CompiledModelCosmosTest : CompiledModelTestBase
 
                 Assert.Equal(2, dataEntity.GetKeys().Count());
 
-                Assert.Equal(new[] { id, partitionId, blob, storeId, jObject, eTag }, dataEntity.GetProperties());
-            });
+                Assert.Equal(
+                    new[] { id, partitionId, blob, storeId, jObject, eTag },
+                    dataEntity.GetProperties()
+                );
+            }
+        );
 
     // Primitive collections not supported yet
-    public override void BigModel()
-    {
-    }
+    public override void BigModel() { }
 
     // Primitive collections not supported yet
-    public override void ComplexTypes()
-    {
-    }
+    public override void ComplexTypes() { }
 
     protected override TestHelpers TestHelpers => CosmosTestHelpers.Instance;
     protected override ITestStoreFactory TestStoreFactory => CosmosTestStoreFactory.Instance;
 
-    protected override BuildSource AddReferences(BuildSource build, [CallerFilePath] string filePath = "")
+    protected override BuildSource AddReferences(
+        BuildSource build,
+        [CallerFilePath] string filePath = ""
+    )
     {
         base.AddReferences(build);
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Cosmos"));

@@ -6,7 +6,6 @@ using System.Linq;
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ReturnBaseOrDefaultValue : Behavior
@@ -28,7 +27,6 @@ namespace Moq.Behaviors
         sealed class ReturnBaseOrDefaultValue : Behavior
     */
     sealed class ReturnBaseOrDefaultValue : Behavior
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private readonly Mock mock;
@@ -68,9 +66,8 @@ namespace Moq.Behaviors
 
             if (this.mock.CallBase)
             {
-
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
-				var tryCallDefaultInterfaceImplementation = false;
+                var tryCallDefaultInterfaceImplementation = false;
 #endif
 
                 var declaringType = method.DeclaringType;
@@ -81,8 +78,8 @@ namespace Moq.Behaviors
                         // Case 1: Interface method of an interface proxy.
 
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
-						// Fall through to invoke default implementation (if one exists).
-						tryCallDefaultInterfaceImplementation = true;
+                        // Fall through to invoke default implementation (if one exists).
+                        tryCallDefaultInterfaceImplementation = true;
 #else
                         // There is no base method to call, so fall through.
 #endif
@@ -111,8 +108,8 @@ namespace Moq.Behaviors
                             // Case 2b: Additional interface.
 
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
-							// Fall through to invoke default implementation (if one exists).
-							tryCallDefaultInterfaceImplementation = true;
+                            // Fall through to invoke default implementation (if one exists).
+                            tryCallDefaultInterfaceImplementation = true;
 #else
                             // There is no base method to call, so fall through.
 #endif
@@ -133,14 +130,13 @@ namespace Moq.Behaviors
                 }
 
 #if FEATURE_DEFAULT_INTERFACE_IMPLEMENTATIONS
-				if (tryCallDefaultInterfaceImplementation && !method.IsAbstract)
-				{
-					// Invoke default implementation.
-					invocation.ReturnValue = invocation.CallBase();
-					return;
-				}
+                if (tryCallDefaultInterfaceImplementation && !method.IsAbstract)
+                {
+                    // Invoke default implementation.
+                    invocation.ReturnValue = invocation.CallBase();
+                    return;
+                }
 #endif
-
             }
 
             if (method.ReturnType != typeof(void))
@@ -148,7 +144,12 @@ namespace Moq.Behaviors
                 var returnValue = this.mock.GetDefaultValue(method, out var innerMock);
                 if (innerMock != null && invocation.MatchingSetup == null)
                 {
-                    var setup = new InnerMockSetup(originalExpression: null, this.mock, expectation: MethodExpectation.CreateFrom(invocation), returnValue);
+                    var setup = new InnerMockSetup(
+                        originalExpression: null,
+                        this.mock,
+                        expectation: MethodExpectation.CreateFrom(invocation),
+                        returnValue
+                    );
                     this.mock.MutableSetups.Add(setup);
                     setup.Execute(invocation);
                 }

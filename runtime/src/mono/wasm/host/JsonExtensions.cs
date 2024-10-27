@@ -10,11 +10,18 @@ namespace Microsoft.WebAssembly.AppHost;
 
 internal static class JsonExtensions
 {
-    public static bool TryGetPropertyByPath(this JsonElement element, string path, out JsonElement outElement)
+    public static bool TryGetPropertyByPath(
+        this JsonElement element,
+        string path,
+        out JsonElement outElement
+    )
     {
         outElement = default;
         JsonElement cur = element;
-        string[] parts = path.Split('/', StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries);
+        string[] parts = path.Split(
+            '/',
+            StringSplitOptions.RemoveEmptyEntries | StringSplitOptions.TrimEntries
+        );
 
         foreach (string part in parts)
         {

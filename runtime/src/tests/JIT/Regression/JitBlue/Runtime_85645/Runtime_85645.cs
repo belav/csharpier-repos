@@ -35,7 +35,5 @@ public class Runtime_85645
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static void Consume(int a, int b)
-    {
-    }
+    private static void Consume(int a, int b) { }
 }

@@ -4,10 +4,11 @@ namespace DebuggerTests
 {
     public class ClassWithoutDebugSymbols
     {
-        private int propA {get;}
-        public int propB {get;}
-        protected int propC {get;}
+        private int propA { get; }
+        public int propB { get; }
+        protected int propC { get; }
         public int d;
+
         public ClassWithoutDebugSymbols()
         {
             propA = 10;

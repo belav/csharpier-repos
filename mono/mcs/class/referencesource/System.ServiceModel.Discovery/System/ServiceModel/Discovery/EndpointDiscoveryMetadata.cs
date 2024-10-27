@@ -12,17 +12,17 @@ namespace System.ServiceModel.Discovery
     using System.Xml;
     using System.Xml.Linq;
     using SR2 = System.ServiceModel.Discovery.SR;
-    
+
     [Fx.Tag.XamlVisible(false)]
     public class EndpointDiscoveryMetadata
-    {        
+    {
         static XmlQualifiedName metadataContractName;
 
         EndpointAddress endpointAddress;
         OpenableContractTypeNameCollection contractTypeNames;
         OpenableScopeCollection scopes;
         OpenableCollection<Uri> listenUris;
-        OpenableCollection<XElement> extensions;        
+        OpenableCollection<XElement> extensions;
         int metadataVersion;
         string[] compiledScopes;
         bool isOpen;
@@ -47,11 +47,7 @@ namespace System.ServiceModel.Discovery
 
         public EndpointAddress Address
         {
-            get
-            {
-                return this.endpointAddress;
-            }
-
+            get { return this.endpointAddress; }
             set
             {
                 ThrowIfOpen();
@@ -105,16 +101,17 @@ namespace System.ServiceModel.Discovery
 
         public int Version
         {
-            get
-            {
-                return this.metadataVersion;
-            }
+            get { return this.metadataVersion; }
             set
             {
                 ThrowIfOpen();
                 if (value < 0)
                 {
-                    throw FxTrace.Exception.ArgumentOutOfRange("value", value, SR2.DiscoveryMetadataVersionLessThanZero);
+                    throw FxTrace.Exception.ArgumentOutOfRange(
+                        "value",
+                        value,
+                        SR2.DiscoveryMetadataVersionLessThanZero
+                    );
                 }
 
                 this.metadataVersion = value;
@@ -127,8 +124,13 @@ namespace System.ServiceModel.Discovery
             {
                 if (metadataContractName == null)
                 {
-                    ContractDescription metadataContract = ContractDescription.GetContract(typeof(IMetadataExchange));
-                    metadataContractName = new XmlQualifiedName(metadataContract.Name, metadataContract.Namespace);
+                    ContractDescription metadataContract = ContractDescription.GetContract(
+                        typeof(IMetadataExchange)
+                    );
+                    metadataContractName = new XmlQualifiedName(
+                        metadataContract.Name,
+                        metadataContract.Namespace
+                    );
                 }
 
                 return metadataContractName;
@@ -137,27 +139,24 @@ namespace System.ServiceModel.Discovery
 
         internal Collection<XmlQualifiedName> InternalContractTypeNames
         {
-            get
-            {
-                return this.contractTypeNames;
-            }
+            get { return this.contractTypeNames; }
         }
 
         internal string[] CompiledScopes
         {
             get
             {
-                Fx.Assert(IsOpen, "The CompiledScopes property is valid only if this EndpointDiscoveryMetadata instance is open.");
+                Fx.Assert(
+                    IsOpen,
+                    "The CompiledScopes property is valid only if this EndpointDiscoveryMetadata instance is open."
+                );
                 return this.compiledScopes;
             }
         }
 
         internal bool IsOpen
         {
-            get
-            {
-                return this.isOpen;
-            }
+            get { return this.isOpen; }
         }
 
         public static EndpointDiscoveryMetadata FromServiceEndpoint(ServiceEndpoint endpoint)
@@ -170,7 +169,10 @@ namespace System.ServiceModel.Discovery
             return GetEndpointDiscoveryMetadata(endpoint, endpoint.ListenUri);
         }
 
-        public static EndpointDiscoveryMetadata FromServiceEndpoint(ServiceEndpoint endpoint, EndpointDispatcher endpointDispatcher)
+        public static EndpointDiscoveryMetadata FromServiceEndpoint(
+            ServiceEndpoint endpoint,
+            EndpointDispatcher endpointDispatcher
+        )
         {
             if (endpoint == null)
             {
@@ -182,57 +184,81 @@ namespace System.ServiceModel.Discovery
             }
 
             EndpointDiscoveryMetadata endpointDiscoveryMetadata;
-            if ((endpointDispatcher.ChannelDispatcher != null) &&
-                (endpointDispatcher.ChannelDispatcher.Listener != null))
+            if (
+                (endpointDispatcher.ChannelDispatcher != null)
+                && (endpointDispatcher.ChannelDispatcher.Listener != null)
+            )
             {
-                endpointDiscoveryMetadata = GetEndpointDiscoveryMetadata(endpoint, endpointDispatcher.ChannelDispatcher.Listener.Uri);
+                endpointDiscoveryMetadata = GetEndpointDiscoveryMetadata(
+                    endpoint,
+                    endpointDispatcher.ChannelDispatcher.Listener.Uri
+                );
             }
             else
             {
-                endpointDiscoveryMetadata = GetEndpointDiscoveryMetadata(endpoint, endpoint.ListenUri);
+                endpointDiscoveryMetadata = GetEndpointDiscoveryMetadata(
+                    endpoint,
+                    endpoint.ListenUri
+                );
             }
 
-            if ((endpointDiscoveryMetadata != null) &&
-                IsMetadataEndpoint(endpoint) &&
-                CanHaveMetadataEndpoints(endpointDispatcher))
+            if (
+                (endpointDiscoveryMetadata != null)
+                && IsMetadataEndpoint(endpoint)
+                && CanHaveMetadataEndpoints(endpointDispatcher)
+            )
             {
-                AddContractTypeScopes(endpointDiscoveryMetadata, endpointDispatcher.ChannelDispatcher.Host.Description);
+                AddContractTypeScopes(
+                    endpointDiscoveryMetadata,
+                    endpointDispatcher.ChannelDispatcher.Host.Description
+                );
             }
 
             return endpointDiscoveryMetadata;
         }
 
-        static EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(ServiceEndpoint endpoint, Uri listenUri)
+        static EndpointDiscoveryMetadata GetEndpointDiscoveryMetadata(
+            ServiceEndpoint endpoint,
+            Uri listenUri
+        )
         {
             EndpointDiscoveryMetadata endpointDiscoveryMetadata = new EndpointDiscoveryMetadata();
-            endpointDiscoveryMetadata.Address = endpoint.Address;            
-            endpointDiscoveryMetadata.ListenUris.Add(listenUri);            
+            endpointDiscoveryMetadata.Address = endpoint.Address;
+            endpointDiscoveryMetadata.ListenUris.Add(listenUri);
 
-            EndpointDiscoveryBehavior endpointDiscoveryBehavior = endpoint.Behaviors.Find<EndpointDiscoveryBehavior>();
+            EndpointDiscoveryBehavior endpointDiscoveryBehavior =
+                endpoint.Behaviors.Find<EndpointDiscoveryBehavior>();
             if (endpointDiscoveryBehavior != null)
             {
-
                 if (!endpointDiscoveryBehavior.Enabled)
                 {
                     if (TD.EndpointDiscoverabilityDisabledIsEnabled())
                     {
-                        TD.EndpointDiscoverabilityDisabled(endpoint.Address.ToString(), listenUri.ToString());
+                        TD.EndpointDiscoverabilityDisabled(
+                            endpoint.Address.ToString(),
+                            listenUri.ToString()
+                        );
                     }
                     return null;
                 }
 
                 if (TD.EndpointDiscoverabilityEnabledIsEnabled())
                 {
-                    TD.EndpointDiscoverabilityEnabled(endpoint.Address.ToString(), listenUri.ToString());
+                    TD.EndpointDiscoverabilityEnabled(
+                        endpoint.Address.ToString(),
+                        listenUri.ToString()
+                    );
                 }
 
                 if (endpointDiscoveryBehavior.InternalContractTypeNames != null)
                 {
-                    foreach (XmlQualifiedName contractTypeName in endpointDiscoveryBehavior.InternalContractTypeNames)
+                    foreach (
+                        XmlQualifiedName contractTypeName in endpointDiscoveryBehavior.InternalContractTypeNames
+                    )
                     {
                         endpointDiscoveryMetadata.ContractTypeNames.Add(contractTypeName);
                     }
-                }                
+                }
 
                 if (endpointDiscoveryBehavior.InternalScopes != null)
                 {
@@ -250,7 +276,10 @@ namespace System.ServiceModel.Discovery
                 }
             }
 
-            XmlQualifiedName defaultContractTypeName = new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace);
+            XmlQualifiedName defaultContractTypeName = new XmlQualifiedName(
+                endpoint.Contract.Name,
+                endpoint.Contract.Namespace
+            );
 
             if (!endpointDiscoveryMetadata.ContractTypeNames.Contains(defaultContractTypeName))
             {
@@ -260,7 +289,10 @@ namespace System.ServiceModel.Discovery
             return endpointDiscoveryMetadata;
         }
 
-        static void AddContractTypeScopes(EndpointDiscoveryMetadata endpointDiscoveryMetadata, ServiceDescription serviceDescription)
+        static void AddContractTypeScopes(
+            EndpointDiscoveryMetadata endpointDiscoveryMetadata,
+            ServiceDescription serviceDescription
+        )
         {
             foreach (ServiceEndpoint endpoint in serviceDescription.Endpoints)
             {
@@ -269,25 +301,37 @@ namespace System.ServiceModel.Discovery
                     continue;
                 }
 
-                endpointDiscoveryMetadata.Scopes.Add(FindCriteria.GetContractTypeNameScope(
-                    new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace)));
+                endpointDiscoveryMetadata.Scopes.Add(
+                    FindCriteria.GetContractTypeNameScope(
+                        new XmlQualifiedName(endpoint.Contract.Name, endpoint.Contract.Namespace)
+                    )
+                );
             }
         }
 
         static bool CanHaveMetadataEndpoints(EndpointDispatcher endpointDispatcher)
         {
-            if ((endpointDispatcher.ChannelDispatcher == null) || (endpointDispatcher.ChannelDispatcher.Host == null))
+            if (
+                (endpointDispatcher.ChannelDispatcher == null)
+                || (endpointDispatcher.ChannelDispatcher.Host == null)
+            )
             {
                 return false;
             }
 
             ServiceDescription description = endpointDispatcher.ChannelDispatcher.Host.Description;
-            if (description.Behaviors != null && description.Behaviors.Find<ServiceMetadataBehavior>() == null)
+            if (
+                description.Behaviors != null
+                && description.Behaviors.Find<ServiceMetadataBehavior>() == null
+            )
             {
                 return false;
             }
 
-            if (description.ServiceType != null && description.ServiceType.GetInterface(typeof(IMetadataExchange).Name) != null)
+            if (
+                description.ServiceType != null
+                && description.ServiceType.GetInterface(typeof(IMetadataExchange).Name) != null
+            )
             {
                 return false;
             }
@@ -297,38 +341,80 @@ namespace System.ServiceModel.Discovery
 
         internal static bool IsDiscoverySystemEndpoint(EndpointDispatcher endpointDispatcher)
         {
-            return (endpointDispatcher.IsSystemEndpoint && 
-                IsDiscoveryContract(endpointDispatcher.ContractName, endpointDispatcher.ContractNamespace));
+            return (
+                endpointDispatcher.IsSystemEndpoint
+                && IsDiscoveryContract(
+                    endpointDispatcher.ContractName,
+                    endpointDispatcher.ContractNamespace
+                )
+            );
         }
 
         internal static bool IsDiscoverySystemEndpoint(ServiceEndpoint endpoint)
         {
-            return (endpoint.IsSystemEndpoint && 
-                IsDiscoveryContract(endpoint.Contract.Name, endpoint.Contract.Namespace));
+            return (
+                endpoint.IsSystemEndpoint
+                && IsDiscoveryContract(endpoint.Contract.Name, endpoint.Contract.Namespace)
+            );
         }
 
         static bool IsDiscoveryContract(string contractName, string contractNamespace)
         {
-            return (IsDiscoveryContractName(contractName) && IsDiscoveryContractNamespace(contractNamespace));
+            return (
+                IsDiscoveryContractName(contractName)
+                && IsDiscoveryContractNamespace(contractNamespace)
+            );
         }
 
         static bool IsDiscoveryContractName(string contractName)
         {
-            return ((string.CompareOrdinal(contractName, ProtocolStrings.ContractNames.DiscoveryAdhocContractName) == 0) ||
-                (string.CompareOrdinal(contractName, ProtocolStrings.ContractNames.DiscoveryManagedContractName) == 0));
+            return (
+                (
+                    string.CompareOrdinal(
+                        contractName,
+                        ProtocolStrings.ContractNames.DiscoveryAdhocContractName
+                    ) == 0
+                )
+                || (
+                    string.CompareOrdinal(
+                        contractName,
+                        ProtocolStrings.ContractNames.DiscoveryManagedContractName
+                    ) == 0
+                )
+            );
         }
 
         static bool IsDiscoveryContractNamespace(string contractNamespace)
         {
-            return ((string.CompareOrdinal(contractNamespace, ProtocolStrings.VersionApril2005.Namespace) == 0) ||
-                (string.CompareOrdinal(contractNamespace, ProtocolStrings.Version11.Namespace) == 0) ||
-                (string.CompareOrdinal(contractNamespace, ProtocolStrings.VersionCD1.Namespace) == 0));
+            return (
+                (
+                    string.CompareOrdinal(
+                        contractNamespace,
+                        ProtocolStrings.VersionApril2005.Namespace
+                    ) == 0
+                )
+                || (
+                    string.CompareOrdinal(contractNamespace, ProtocolStrings.Version11.Namespace)
+                    == 0
+                )
+                || (
+                    string.CompareOrdinal(contractNamespace, ProtocolStrings.VersionCD1.Namespace)
+                    == 0
+                )
+            );
         }
 
         internal static bool IsMetadataEndpoint(ServiceEndpoint endpoint)
         {
-            return ((string.CompareOrdinal(endpoint.Contract.Name, MetadataContractName.Name) == 0) &&
-                (string.CompareOrdinal(endpoint.Contract.Namespace, MetadataContractName.Namespace) == 0));
+            return (
+                (string.CompareOrdinal(endpoint.Contract.Name, MetadataContractName.Name) == 0)
+                && (
+                    string.CompareOrdinal(
+                        endpoint.Contract.Namespace,
+                        MetadataContractName.Namespace
+                    ) == 0
+                )
+            );
         }
 
         [Fx.Tag.Throws(typeof(XmlException), "throws on incorrect xml data")]
@@ -362,27 +448,50 @@ namespace System.ServiceModel.Discovery
             int startDepth = reader.Depth;
             reader.ReadStartElement();
 
-            this.endpointAddress = SerializationUtility.ReadEndpointAddress(discoveryVersion, reader);            
+            this.endpointAddress = SerializationUtility.ReadEndpointAddress(
+                discoveryVersion,
+                reader
+            );
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.TypesElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.TypesElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.contractTypeNames = new OpenableContractTypeNameCollection(false);
                 SerializationUtility.ReadContractTypeNames(this.contractTypeNames, reader);
             }
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.ScopesElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.ScopesElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.scopes = new OpenableScopeCollection(false);
                 SerializationUtility.ReadScopes(this.scopes, reader);
             }
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.XAddrsElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.XAddrsElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.listenUris = new OpenableCollection<Uri>(false);
                 SerializationUtility.ReadListenUris(listenUris, reader);
             }
 
-            if (reader.IsStartElement(ProtocolStrings.SchemaNames.MetadataVersionElement, discoveryVersion.Namespace))
+            if (
+                reader.IsStartElement(
+                    ProtocolStrings.SchemaNames.MetadataVersionElement,
+                    discoveryVersion.Namespace
+                )
+            )
             {
                 this.metadataVersion = SerializationUtility.ReadMetadataVersion(reader);
             }
@@ -405,7 +514,7 @@ namespace System.ServiceModel.Discovery
                 }
             }
 
-            reader.ReadEndElement();            
+            reader.ReadEndElement();
         }
 
         internal void WriteTo(DiscoveryVersion discoveryVersion, XmlWriter writer)
@@ -419,16 +528,27 @@ namespace System.ServiceModel.Discovery
                 throw FxTrace.Exception.ArgumentNull("writer");
             }
 
-            SerializationUtility.WriteEndPointAddress(discoveryVersion, this.endpointAddress, writer);
+            SerializationUtility.WriteEndPointAddress(
+                discoveryVersion,
+                this.endpointAddress,
+                writer
+            );
 
-            SerializationUtility.WriteContractTypeNames(discoveryVersion, this.contractTypeNames, writer);
-
+            SerializationUtility.WriteContractTypeNames(
+                discoveryVersion,
+                this.contractTypeNames,
+                writer
+            );
 
             SerializationUtility.WriteScopes(discoveryVersion, this.scopes, null, writer);
 
             SerializationUtility.WriteListenUris(discoveryVersion, this.listenUris, writer);
 
-            SerializationUtility.WriteMetadataVersion(discoveryVersion, this.metadataVersion, writer);
+            SerializationUtility.WriteMetadataVersion(
+                discoveryVersion,
+                this.metadataVersion,
+                writer
+            );
 
             if (this.extensions != null)
             {
@@ -466,7 +586,9 @@ namespace System.ServiceModel.Discovery
         {
             if (this.isOpen)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoveryMetadataAlreadyOpen));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR2.DiscoveryMetadataAlreadyOpen)
+                );
             }
         }
 
@@ -483,7 +605,11 @@ namespace System.ServiceModel.Discovery
             {
                 if (this.isOpen)
                 {
-                    throw FxTrace.Exception.AsError(new InvalidOperationException(SR2.DiscoverySdmCollectionIsOpen(typeof(T).Name)));
+                    throw FxTrace.Exception.AsError(
+                        new InvalidOperationException(
+                            SR2.DiscoverySdmCollectionIsOpen(typeof(T).Name)
+                        )
+                    );
                 }
             }
 
@@ -519,17 +645,16 @@ namespace System.ServiceModel.Discovery
 
         class OpenableContractTypeNameCollection : OpenableCollection<XmlQualifiedName>
         {
-
             public OpenableContractTypeNameCollection(bool opened)
-                : base(opened)
-            {
-            }
+                : base(opened) { }
 
             protected override void InsertItem(int index, XmlQualifiedName item)
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName)
+                    );
                 }
                 base.InsertItem(index, item);
             }
@@ -538,7 +663,9 @@ namespace System.ServiceModel.Discovery
             {
                 if ((item != null) && (item.Name == string.Empty))
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(SR2.DiscoveryArgumentEmptyContractTypeName)
+                    );
                 }
                 base.SetItem(index, item);
             }
@@ -546,16 +673,16 @@ namespace System.ServiceModel.Discovery
 
         class OpenableScopeCollection : OpenableCollection<Uri>
         {
-
-            public OpenableScopeCollection(bool opened) : base(opened)
-            {
-            }
+            public OpenableScopeCollection(bool opened)
+                : base(opened) { }
 
             protected override void InsertItem(int index, Uri item)
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item))
+                    );
                 }
                 base.InsertItem(index, item);
             }
@@ -564,7 +691,9 @@ namespace System.ServiceModel.Discovery
             {
                 if (item != null && !item.IsAbsoluteUri)
                 {
-                    throw FxTrace.Exception.AsError(new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item)));
+                    throw FxTrace.Exception.AsError(
+                        new ArgumentException(SR2.DiscoveryArgumentInvalidScopeUri(item))
+                    );
                 }
                 base.SetItem(index, item);
             }

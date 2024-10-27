@@ -1,18 +1,18 @@
-
-    /// <summary><para>
-    ///    Provides support for ip configuation information and statistics.
-    ///</para></summary>
-    ///
-namespace System.Net.NetworkInformation {
-    using System.Net;
-    using System.Net.Sockets;
+/// <summary><para>
+///    Provides support for ip configuation information and statistics.
+///</para></summary>
+///
+namespace System.Net.NetworkInformation
+{
     using System;
-    using System.Runtime.InteropServices;
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
-    
-    internal class SystemNetworkInterface:NetworkInterface {
+    using System.Net;
+    using System.Net.Sockets;
+    using System.Runtime.InteropServices;
 
+    internal class SystemNetworkInterface : NetworkInterface
+    {
         //common properties
         private string name;
         private string id;
@@ -22,6 +22,7 @@ namespace System.Net.NetworkInformation {
         private NetworkInterfaceType type;
         private OperationalStatus operStatus;
         private long speed;
+
         //Unfortunately, any interface can
         //have two completely different valid indexes for ipv4 and ipv6
         private uint index = 0;
@@ -29,51 +30,69 @@ namespace System.Net.NetworkInformation {
         private AdapterFlags adapterFlags;
         private SystemIPInterfaceProperties interfaceProperties = null;
 
-        internal static int InternalLoopbackInterfaceIndex {
-            get {
-                return GetBestInterfaceForAddress(IPAddress.Loopback);
-            }
+        internal static int InternalLoopbackInterfaceIndex
+        {
+            get { return GetBestInterfaceForAddress(IPAddress.Loopback); }
         }
 
-        internal static int InternalIPv6LoopbackInterfaceIndex {
-            get {
-                return GetBestInterfaceForAddress(IPAddress.IPv6Loopback);
-            }
+        internal static int InternalIPv6LoopbackInterfaceIndex
+        {
+            get { return GetBestInterfaceForAddress(IPAddress.IPv6Loopback); }
         }
 
-        private static int GetBestInterfaceForAddress(IPAddress addr) {
+        private static int GetBestInterfaceForAddress(IPAddress addr)
+        {
             int index;
             SocketAddress address = new SocketAddress(addr);
-            int error = (int)UnsafeNetInfoNativeMethods.GetBestInterfaceEx(address.m_Buffer, out index);
-            if (error != 0) {
+            int error = (int)
+                UnsafeNetInfoNativeMethods.GetBestInterfaceEx(address.m_Buffer, out index);
+            if (error != 0)
+            {
                 throw new NetworkInformationException(error);
             }
 
             return index;
         }
 
-        internal static bool InternalGetIsNetworkAvailable(){
-
-            try {
+        internal static bool InternalGetIsNetworkAvailable()
+        {
+            try
+            {
                 NetworkInterface[] networkInterfaces = GetNetworkInterfaces();
-                foreach (NetworkInterface netInterface in networkInterfaces) {
-                    if (netInterface.OperationalStatus == OperationalStatus.Up && netInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
-                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback){
+                foreach (NetworkInterface netInterface in networkInterfaces)
+                {
+                    if (
+                        netInterface.OperationalStatus == OperationalStatus.Up
+                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Tunnel
+                        && netInterface.NetworkInterfaceType != NetworkInterfaceType.Loopback
+                    )
+                    {
                         return true;
                     }
                 }
             }
-            catch (NetworkInformationException nie) {
-                if (Logging.On) Logging.Exception(Logging.Web, "SystemNetworkInterface", "InternalGetIsNetworkAvailable", nie);
+            catch (NetworkInformationException nie)
+            {
+                if (Logging.On)
+                    Logging.Exception(
+                        Logging.Web,
+                        "SystemNetworkInterface",
+                        "InternalGetIsNetworkAvailable",
+                        nie
+                    );
             }
 
             return false;
         }
 
         // Vista+
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Reliability", "CA2001:AvoidCallingProblematicMethods",
-            Justification = "DangerousGetHandle is required for marshaling")]
-        internal static NetworkInterface[] GetNetworkInterfaces() {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2001:AvoidCallingProblematicMethods",
+            Justification = "DangerousGetHandle is required for marshaling"
+        )]
+        internal static NetworkInterface[] GetNetworkInterfaces()
+        {
             Contract.Ensures(Contract.Result<NetworkInterface[]>() != null);
             AddressFamily family = AddressFamily.Unspecified;
             uint bufferSize = 0;
@@ -81,37 +100,54 @@ namespace System.Net.NetworkInformation {
             FixedInfo fixedInfo = SystemIPGlobalProperties.GetFixedInfo();
             List<SystemNetworkInterface> interfaceList = new List<SystemNetworkInterface>();
 
-            GetAdaptersAddressesFlags flags = 
-                GetAdaptersAddressesFlags.IncludeGateways
-                | GetAdaptersAddressesFlags.IncludeWins;
+            GetAdaptersAddressesFlags flags =
+                GetAdaptersAddressesFlags.IncludeGateways | GetAdaptersAddressesFlags.IncludeWins;
 
             // Figure out the right buffer size for the adapter information
             uint result = UnsafeNetInfoNativeMethods.GetAdaptersAddresses(
-                family, (uint)flags, IntPtr.Zero, SafeLocalFree.Zero, ref bufferSize);
+                family,
+                (uint)flags,
+                IntPtr.Zero,
+                SafeLocalFree.Zero,
+                ref bufferSize
+            );
 
-            while (result == IpHelperErrors.ErrorBufferOverflow) {
-                try {
+            while (result == IpHelperErrors.ErrorBufferOverflow)
+            {
+                try
+                {
                     // Allocate the buffer and get the adapter info
                     buffer = SafeLocalFree.LocalAlloc((int)bufferSize);
                     result = UnsafeNetInfoNativeMethods.GetAdaptersAddresses(
-                        family, (uint)flags, IntPtr.Zero, buffer, ref bufferSize);
+                        family,
+                        (uint)flags,
+                        IntPtr.Zero,
+                        buffer,
+                        ref bufferSize
+                    );
 
                     // If succeeded, we're going to add each new interface
-                    if (result == IpHelperErrors.Success) {
+                    if (result == IpHelperErrors.Success)
+                    {
                         // Linked list of interfaces
                         IntPtr ptr = buffer.DangerousGetHandle();
-                        while (ptr != IntPtr.Zero) {
+                        while (ptr != IntPtr.Zero)
+                        {
                             // Traverse the list, marshal in the native structures, and create new NetworkInterfaces
-                            IpAdapterAddresses adapterAddresses = 
-                                (IpAdapterAddresses)Marshal.PtrToStructure(ptr, typeof(IpAdapterAddresses));
-                            interfaceList.Add(new SystemNetworkInterface(fixedInfo, adapterAddresses));
+                            IpAdapterAddresses adapterAddresses = (IpAdapterAddresses)
+                                Marshal.PtrToStructure(ptr, typeof(IpAdapterAddresses));
+                            interfaceList.Add(
+                                new SystemNetworkInterface(fixedInfo, adapterAddresses)
+                            );
 
                             ptr = adapterAddresses.next;
                         }
                     }
                 }
-                finally {
-                    if (buffer != null) {
+                finally
+                {
+                    if (buffer != null)
+                    {
                         buffer.Close();
                     }
                     buffer = null;
@@ -119,12 +155,17 @@ namespace System.Net.NetworkInformation {
             }
 
             // if we don't have any interfaces detected, return empty.
-            if (result == IpHelperErrors.ErrorNoData || result == IpHelperErrors.ErrorInvalidParameter) {
+            if (
+                result == IpHelperErrors.ErrorNoData
+                || result == IpHelperErrors.ErrorInvalidParameter
+            )
+            {
                 return new SystemNetworkInterface[0];
             }
 
             // Otherwise we throw on an error
-            if (result != IpHelperErrors.Success) {
+            if (result != IpHelperErrors.Success)
+            {
                 throw new NetworkInformationException((int)result);
             }
 
@@ -132,7 +173,8 @@ namespace System.Net.NetworkInformation {
         }
 
         // Vista+
-        internal SystemNetworkInterface(FixedInfo fixedInfo, IpAdapterAddresses ipAdapterAddresses) {
+        internal SystemNetworkInterface(FixedInfo fixedInfo, IpAdapterAddresses ipAdapterAddresses)
+        {
             //store the common api information
             id = ipAdapterAddresses.AdapterName;
             name = ipAdapterAddresses.friendlyName;
@@ -152,73 +194,91 @@ namespace System.Net.NetworkInformation {
             adapterFlags = ipAdapterAddresses.flags;
             interfaceProperties = new SystemIPInterfaceProperties(fixedInfo, ipAdapterAddresses);
         }
-        
+
         /// Basic Properties
-        
-        public override string Id{get {return id;}}
-        public override string Name{get {return name;}}
-        public override string Description{get {return description;}}
-             
-        public override PhysicalAddress GetPhysicalAddress(){
+
+        public override string Id
+        {
+            get { return id; }
+        }
+        public override string Name
+        {
+            get { return name; }
+        }
+        public override string Description
+        {
+            get { return description; }
+        }
+
+        public override PhysicalAddress GetPhysicalAddress()
+        {
             byte[] newAddr = new byte[addressLength];
-            Array.Copy(physicalAddress,newAddr,addressLength);
+            Array.Copy(physicalAddress, newAddr, addressLength);
             return new PhysicalAddress(newAddr);
         }
-        public override NetworkInterfaceType NetworkInterfaceType{get {return type;}}
 
-        public override IPInterfaceProperties GetIPProperties(){
+        public override NetworkInterfaceType NetworkInterfaceType
+        {
+            get { return type; }
+        }
+
+        public override IPInterfaceProperties GetIPProperties()
+        {
             return interfaceProperties;
         }
-        
+
         /// Despite the naming, the results are not IPv4 specific.
         /// Do not use this method, use GetIPStatistics instead.
         /// <include file='doc\NetworkInterface.uex' path='docs/doc[@for="NetworkInterface.GetInterfaceStatistics"]/*' />
-        public override IPv4InterfaceStatistics GetIPv4Statistics(){
+        public override IPv4InterfaceStatistics GetIPv4Statistics()
+        {
             return new SystemIPv4InterfaceStatistics(index);
         }
-        
-        public override IPInterfaceStatistics GetIPStatistics() {
+
+        public override IPInterfaceStatistics GetIPStatistics()
+        {
             return new SystemIPInterfaceStatistics(index);
         }
 
-        public override bool Supports(NetworkInterfaceComponent networkInterfaceComponent){
-            if (networkInterfaceComponent ==  NetworkInterfaceComponent.IPv6 
-                && ((adapterFlags & AdapterFlags.IPv6Enabled) != 0)) {
+        public override bool Supports(NetworkInterfaceComponent networkInterfaceComponent)
+        {
+            if (
+                networkInterfaceComponent == NetworkInterfaceComponent.IPv6
+                && ((adapterFlags & AdapterFlags.IPv6Enabled) != 0)
+            )
+            {
                 return true;
             }
-            if (networkInterfaceComponent == NetworkInterfaceComponent.IPv4
-                && ((adapterFlags & AdapterFlags.IPv4Enabled) != 0)) {
+            if (
+                networkInterfaceComponent == NetworkInterfaceComponent.IPv4
+                && ((adapterFlags & AdapterFlags.IPv4Enabled) != 0)
+            )
+            {
                 return true;
             }
             return false;
         }
 
         //We cache this to be consistent across all platforms
-        public override OperationalStatus OperationalStatus{
-            get {
-                return operStatus;
-            }
+        public override OperationalStatus OperationalStatus
+        {
+            get { return operStatus; }
         }
 
-        public override long Speed{
-            get {
-                return speed;
-            }
-        }  
-
-        public override bool IsReceiveOnly {
-            get {
-                return ((adapterFlags & AdapterFlags.ReceiveOnly) > 0);
-            }
+        public override long Speed
+        {
+            get { return speed; }
         }
+
+        public override bool IsReceiveOnly
+        {
+            get { return ((adapterFlags & AdapterFlags.ReceiveOnly) > 0); }
+        }
+
         /// <summary>The interface doesn't allow multicast.</summary>
-        public override bool SupportsMulticast {
-            get {
-                return ((adapterFlags & AdapterFlags.NoMulticast) == 0);
-            }
+        public override bool SupportsMulticast
+        {
+            get { return ((adapterFlags & AdapterFlags.NoMulticast) == 0); }
         }
     }
 }
-
-
-

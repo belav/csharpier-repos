@@ -21,5 +21,5 @@ public enum ClientCertificateMethod
     /// <summary>
     /// The TLS session can be renegotiated to request a client certificate.
     /// </summary>
-    AllowRenegotation
+    AllowRenegotation,
 }

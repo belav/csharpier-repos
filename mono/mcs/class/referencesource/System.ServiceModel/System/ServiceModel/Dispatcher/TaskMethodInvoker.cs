@@ -15,7 +15,7 @@ namespace System.ServiceModel.Dispatcher
     using Threading;
 
     /// <summary>
-    /// An invoker used when some operation contract has a return value of Task or its generic counterpart (Task of T) 
+    /// An invoker used when some operation contract has a return value of Task or its generic counterpart (Task of T)
     /// </summary>
     internal class TaskMethodInvoker : IOperationInvoker
     {
@@ -31,14 +31,18 @@ namespace System.ServiceModel.Dispatcher
         {
             if (taskMethod == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("taskMethod"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("taskMethod")
+                );
             }
 
             this.taskMethod = taskMethod;
 
             if (taskType != ServiceReflector.VoidType)
             {
-                this.taskTResultGetMethod = ((PropertyInfo)taskMethod.ReturnType.GetMember(ResultMethodName)[0]).GetGetMethod();
+                this.taskTResultGetMethod = (
+                    (PropertyInfo)taskMethod.ReturnType.GetMember(ResultMethodName)[0]
+                ).GetGetMethod();
                 this.isGenericTask = true;
             }
         }
@@ -62,10 +66,17 @@ namespace System.ServiceModel.Dispatcher
 
         public object Invoke(object instance, object[] inputs, out object[] outputs)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException());
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException()
+            );
         }
 
-        public IAsyncResult InvokeBegin(object instance, object[] inputs, AsyncCallback callback, object state)
+        public IAsyncResult InvokeBegin(
+            object instance,
+            object[] inputs,
+            AsyncCallback callback,
+            object state
+        )
         {
             return ToApm(InvokeAsync(instance, inputs), callback, state);
         }
@@ -74,7 +85,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (instance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                );
             }
 
             object returnVal = null;
@@ -91,7 +104,9 @@ namespace System.ServiceModel.Dispatcher
 
                 if (invokeTask == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.SFxInvalidCallbackIAsyncResult));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.SFxInvalidCallbackIAsyncResult)
+                    );
                 }
 
                 AggregateException ae = null;
@@ -100,7 +115,10 @@ namespace System.ServiceModel.Dispatcher
 
                 if (invokeTask.IsFaulted)
                 {
-                    Fx.Assert(invokeTask.Exception != null, "Task.IsFaulted guarantees non-null exception.");
+                    Fx.Assert(
+                        invokeTask.Exception != null,
+                        "Task.IsFaulted guarantees non-null exception."
+                    );
                     ae = invokeTask.Exception;
                 }
                 else
@@ -118,7 +136,10 @@ namespace System.ServiceModel.Dispatcher
 
                     if (task.IsFaulted)
                     {
-                        Fx.Assert(task.Exception != null, "Task.IsFaulted guarantees non-null exception.");
+                        Fx.Assert(
+                            task.Exception != null,
+                            "Task.IsFaulted guarantees non-null exception."
+                        );
                         ae = task.Exception;
                     }
                 }
@@ -135,8 +156,13 @@ namespace System.ServiceModel.Dispatcher
 
                     if (ae.InnerException is SecurityException)
                     {
-                        DiagnosticUtility.TraceHandledException(ae.InnerException, TraceEventType.Warning);
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
+                        DiagnosticUtility.TraceHandledException(
+                            ae.InnerException,
+                            TraceEventType.Warning
+                        );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            AuthorizationBehavior.CreateAccessDeniedFaultException()
+                        );
                     }
 
                     invokeTask.GetAwaiter().GetResult();
@@ -148,12 +174,16 @@ namespace System.ServiceModel.Dispatcher
                 // we detect and throw here.
                 if (task.IsCanceled)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TaskCanceledException(task));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TaskCanceledException(task)
+                    );
                 }
 
                 outputs = tuple.Item2;
 
-                returnVal = this.isGenericTask ? this.taskTResultGetMethod.Invoke(task, Type.EmptyTypes) : null;
+                returnVal = this.isGenericTask
+                    ? this.taskTResultGetMethod.Invoke(task, Type.EmptyTypes)
+                    : null;
                 callFailed = false;
 
                 return returnVal;
@@ -166,8 +196,16 @@ namespace System.ServiceModel.Dispatcher
                 }
 
                 ServiceModelActivity.Stop(activity);
-                AsyncMethodInvoker.StopOperationInvokeTrace(callFailed, callFaulted, this.TaskMethod.Name);
-                AsyncMethodInvoker.StopOperationInvokePerformanceCounters(callFailed, callFaulted, this.TaskMethod.Name);
+                AsyncMethodInvoker.StopOperationInvokeTrace(
+                    callFailed,
+                    callFaulted,
+                    this.TaskMethod.Name
+                );
+                AsyncMethodInvoker.StopOperationInvokePerformanceCounters(
+                    callFailed,
+                    callFaulted,
+                    this.TaskMethod.Name
+                );
             }
         }
 
@@ -177,19 +215,36 @@ namespace System.ServiceModel.Dispatcher
 
             if (instance == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(SR.GetString(SR.SFxNoServiceObject))
+                );
             }
 
             if (inputs == null)
             {
                 if (this.inputParameterCount > 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInputParametersToServiceNull, this.inputParameterCount)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(
+                            SR.GetString(
+                                SR.SFxInputParametersToServiceNull,
+                                this.inputParameterCount
+                            )
+                        )
+                    );
                 }
             }
             else if (inputs.Length != this.inputParameterCount)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxInputParametersToServiceInvalid, this.inputParameterCount, inputs.Length)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxInputParametersToServiceInvalid,
+                            this.inputParameterCount,
+                            inputs.Length
+                        )
+                    )
+                );
             }
 
             object[] outputs = EmptyArray.Allocate(this.outputParameterCount);
@@ -207,8 +262,16 @@ namespace System.ServiceModel.Dispatcher
 
                 if (DiagnosticUtility.ShouldUseActivity)
                 {
-                    string activityName = SR.GetString(SR.ActivityExecuteMethod, this.taskMethod.DeclaringType.FullName, this.taskMethod.Name);
-                    ServiceModelActivity.Start(activity, activityName, ActivityType.ExecuteUserCode);
+                    string activityName = SR.GetString(
+                        SR.ActivityExecuteMethod,
+                        this.taskMethod.DeclaringType.FullName,
+                        this.taskMethod.Name
+                    );
+                    ServiceModelActivity.Start(
+                        activity,
+                        activityName,
+                        ActivityType.ExecuteUserCode
+                    );
                 }
 
                 OperationContext.EnableAsyncFlow();
@@ -224,7 +287,7 @@ namespace System.ServiceModel.Dispatcher
 
                 if (returnValueTask != null)
                 {
-                    // Only return once the task has completed                        
+                    // Only return once the task has completed
                     await returnValueTask;
                 }
 
@@ -233,7 +296,9 @@ namespace System.ServiceModel.Dispatcher
             catch (SecurityException e)
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Warning);
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(AuthorizationBehavior.CreateAccessDeniedFaultException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    AuthorizationBehavior.CreateAccessDeniedFaultException()
+                );
             }
             catch (Exception e)
             {
@@ -253,13 +318,17 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        // Helper method when implementing an APM wrapper around a Task based async method which returns a result. 
+        // Helper method when implementing an APM wrapper around a Task based async method which returns a result.
         // In the BeginMethod method, you would call use ToApm to wrap a call to MethodAsync:
         //     return MethodAsync(params).ToApm(callback, state);
         // In the EndMethod, you would use ToApmEnd<TResult> to ensure the correct exception handling
         // This will handle throwing exceptions in the correct place and ensure the IAsyncResult contains the provided
         // state object
-        private static Task<TResult> ToApm<TResult>(Task<TResult> task, AsyncCallback callback, object state)
+        private static Task<TResult> ToApm<TResult>(
+            Task<TResult> task,
+            AsyncCallback callback,
+            object state
+        )
         {
             // When using APM, the returned IAsyncResult must have the passed in state object stored in AsyncState. This
             // is so the callback can regain state. If the incoming task already holds the state object, there's no need
@@ -269,11 +338,17 @@ namespace System.ServiceModel.Dispatcher
             {
                 if (callback != null)
                 {
-                    task.ContinueWith((antecedent, obj) =>
-                    {
-                        AsyncCallback callbackObj = (AsyncCallback)obj;
-                        callbackObj(antecedent);
-                    }, callback, CancellationToken.None, TaskContinuationOptions.HideScheduler, TaskScheduler.Default);
+                    task.ContinueWith(
+                        (antecedent, obj) =>
+                        {
+                            AsyncCallback callbackObj = (AsyncCallback)obj;
+                            callbackObj(antecedent);
+                        },
+                        callback,
+                        CancellationToken.None,
+                        TaskContinuationOptions.HideScheduler,
+                        TaskScheduler.Default
+                    );
                 }
 
                 return task;
@@ -283,30 +358,37 @@ namespace System.ServiceModel.Dispatcher
             var tcs = new TaskCompletionSource<TResult>(state);
             var continuationState = Tuple.Create(tcs, callback);
 
-            task.ContinueWith((antecedent, obj) =>
-            {
-                Tuple<TaskCompletionSource<TResult>, AsyncCallback> tuple = (Tuple<TaskCompletionSource<TResult>, AsyncCallback>)obj;
-                TaskCompletionSource<TResult> tcsObj = tuple.Item1;
-                AsyncCallback callbackObj = tuple.Item2;
+            task.ContinueWith(
+                (antecedent, obj) =>
+                {
+                    Tuple<TaskCompletionSource<TResult>, AsyncCallback> tuple =
+                        (Tuple<TaskCompletionSource<TResult>, AsyncCallback>)obj;
+                    TaskCompletionSource<TResult> tcsObj = tuple.Item1;
+                    AsyncCallback callbackObj = tuple.Item2;
 
-                if (antecedent.IsFaulted)
-                {
-                    tcsObj.TrySetException(antecedent.Exception.InnerException);
-                }
-                else if (antecedent.IsCanceled)
-                {
-                    tcsObj.TrySetCanceled();
-                }
-                else
-                {
-                    tcsObj.TrySetResult(antecedent.Result);
-                }
+                    if (antecedent.IsFaulted)
+                    {
+                        tcsObj.TrySetException(antecedent.Exception.InnerException);
+                    }
+                    else if (antecedent.IsCanceled)
+                    {
+                        tcsObj.TrySetCanceled();
+                    }
+                    else
+                    {
+                        tcsObj.TrySetResult(antecedent.Result);
+                    }
 
-                if (callbackObj != null)
-                {
-                    callbackObj(tcsObj.Task);
-                }
-            }, continuationState, CancellationToken.None, TaskContinuationOptions.HideScheduler, TaskScheduler.Default);
+                    if (callbackObj != null)
+                    {
+                        callbackObj(tcsObj.Task);
+                    }
+                },
+                continuationState,
+                CancellationToken.None,
+                TaskContinuationOptions.HideScheduler,
+                TaskScheduler.Default
+            );
 
             return tcs.Task;
         }
@@ -319,10 +401,14 @@ namespace System.ServiceModel.Dispatcher
                 // If two threads both reference this.count, temporary results may interact.
                 int inputParameterCount;
                 int outputParameterCount;
-                InvokeDelegate invokeDelegate = new InvokerUtil().GenerateInvokeDelegate(this.taskMethod, out inputParameterCount, out outputParameterCount);
+                InvokeDelegate invokeDelegate = new InvokerUtil().GenerateInvokeDelegate(
+                    this.taskMethod,
+                    out inputParameterCount,
+                    out outputParameterCount
+                );
                 this.inputParameterCount = inputParameterCount;
                 this.outputParameterCount = outputParameterCount;
-                this.invokeDelegate = invokeDelegate;  // must set this last due to ----
+                this.invokeDelegate = invokeDelegate; // must set this last due to ----
             }
         }
     }

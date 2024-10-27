@@ -18,16 +18,20 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
     internal partial class DebuggerInProcess
     {
         /// <summary>
-        /// HResult for "Operation Not Supported" when raising commands. 
+        /// HResult for "Operation Not Supported" when raising commands.
         /// </summary>
         private const uint OperationNotSupportedHResult = 0x8971003c;
 
         /// <summary>
         /// Time to wait before re-polling a delegate.
         /// </summary>
-        private static readonly TimeSpan DefaultPollingInterCallSleep = TimeSpan.FromMilliseconds(250);
+        private static readonly TimeSpan DefaultPollingInterCallSleep = TimeSpan.FromMilliseconds(
+            250
+        );
 
-        private async Task<EnvDTE100.Debugger5> GetDebuggerAsync(CancellationToken cancellationToken)
+        private async Task<EnvDTE100.Debugger5> GetDebuggerAsync(
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -35,10 +39,18 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             return (EnvDTE100.Debugger5)dte.Debugger;
         }
 
-        public Task SetBreakpointAsync(string fileName, string text, CancellationToken cancellationToken)
-            => SetBreakpointAsync(fileName, text, charsOffset: 0, cancellationToken);
+        public Task SetBreakpointAsync(
+            string fileName,
+            string text,
+            CancellationToken cancellationToken
+        ) => SetBreakpointAsync(fileName, text, charsOffset: 0, cancellationToken);
 
-        public async Task SetBreakpointAsync(string fileName, string text, int charsOffset, CancellationToken cancellationToken)
+        public async Task SetBreakpointAsync(
+            string fileName,
+            string text,
+            int charsOffset,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -46,11 +58,24 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             await TestServices.Editor.SelectTextInCurrentDocumentAsync(text, cancellationToken);
 
             var caretPosition = await TestServices.Editor.GetCaretPositionAsync(cancellationToken);
-            caretPosition.BufferPosition.GetLineAndCharacter(out var lineNumber, out var characterIndex);
-            await SetBreakpointAsync(fileName, lineNumber, characterIndex + charsOffset, cancellationToken);
+            caretPosition.BufferPosition.GetLineAndCharacter(
+                out var lineNumber,
+                out var characterIndex
+            );
+            await SetBreakpointAsync(
+                fileName,
+                lineNumber,
+                characterIndex + charsOffset,
+                cancellationToken
+            );
         }
 
-        public async Task SetBreakpointAsync(string fileName, int lineNumber, int characterIndex, CancellationToken cancellationToken)
+        public async Task SetBreakpointAsync(
+            string fileName,
+            int lineNumber,
+            int characterIndex,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -75,7 +100,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
                     var debugger = await GetDebuggerAsync(cancellationToken);
                     debugger.StepOver(waitForBreakOrEnd);
                 },
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public async Task StopAsync(bool waitForDesignMode, CancellationToken cancellationToken)
@@ -94,7 +120,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             debugger.SetNextStatement();
         }
 
-        public async Task ExecuteStatementAsync(string statement, CancellationToken cancellationToken)
+        public async Task ExecuteStatementAsync(
+            string statement,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -102,7 +131,12 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             debugger.ExecuteStatement(statement);
         }
 
-        public async Task CheckExpressionAsync(string expressionText, string expectedType, string expectedValue, CancellationToken cancellationToken)
+        public async Task CheckExpressionAsync(
+            string expressionText,
+            string expectedType,
+            string expectedValue,
+            CancellationToken cancellationToken
+        )
         {
             await JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
 
@@ -111,21 +145,26 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
             Assert.Equal((expectedType, expectedValue), (entry.Type, entry.Value));
         }
 
-        private static async Task WaitForRaiseDebuggerDteCommandAsync(Func<CancellationToken, Task> action, CancellationToken cancellationToken)
+        private static async Task WaitForRaiseDebuggerDteCommandAsync(
+            Func<CancellationToken, Task> action,
+            CancellationToken cancellationToken
+        )
         {
-            Func<CancellationToken, Task<bool>> predicate =
-                async (cancellationToken) =>
+            Func<CancellationToken, Task<bool>> predicate = async (cancellationToken) =>
+            {
+                try
                 {
-                    try
-                    {
-                        await action(cancellationToken);
-                        return true;
-                    }
-                    catch (COMException ex) when ((uint)ex.ErrorCode != OperationNotSupportedHResult && !cancellationToken.IsCancellationRequested)
-                    {
-                        return false;
-                    }
-                };
+                    await action(cancellationToken);
+                    return true;
+                }
+                catch (COMException ex)
+                    when ((uint)ex.ErrorCode != OperationNotSupportedHResult
+                        && !cancellationToken.IsCancellationRequested
+                    )
+                {
+                    return false;
+                }
+            };
 
             // Repeat the command if "Operation Not Supported" is thrown.
             await TryWaitForAsync(predicate, cancellationToken);
@@ -135,7 +174,10 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         /// Polls for the specified delegate to return true for the given timeout.
         /// </summary>
         /// <param name="predicate">Delegate to invoke.</param>
-        public static async Task TryWaitForAsync(Func<CancellationToken, Task<bool>> predicate, CancellationToken cancellationToken)
+        public static async Task TryWaitForAsync(
+            Func<CancellationToken, Task<bool>> predicate,
+            CancellationToken cancellationToken
+        )
         {
             await TryWaitForAsync(DefaultPollingInterCallSleep, predicate, cancellationToken);
         }
@@ -145,7 +187,11 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.InProcess
         /// </summary>
         /// <param name="interval">Time to wait between polling.</param>
         /// <param name="predicate">Delegate to invoke.</param>
-        private static async Task TryWaitForAsync(TimeSpan interval, Func<CancellationToken, Task<bool>> predicate, CancellationToken cancellationToken)
+        private static async Task TryWaitForAsync(
+            TimeSpan interval,
+            Func<CancellationToken, Task<bool>> predicate,
+            CancellationToken cancellationToken
+        )
         {
             while (!await predicate(cancellationToken))
             {

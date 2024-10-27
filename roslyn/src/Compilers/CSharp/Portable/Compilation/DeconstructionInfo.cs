@@ -70,7 +70,9 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 return deconstructConversionInfo.IsDefault
                     ? ImmutableArray<DeconstructionInfo>.Empty
-                    : deconstructConversionInfo.SelectAsArray(c => new DeconstructionInfo(BoundNode.GetConversion(c.conversion, c.placeholder)));
+                    : deconstructConversionInfo.SelectAsArray(c => new DeconstructionInfo(
+                        BoundNode.GetConversion(c.conversion, c.placeholder)
+                    ));
             }
         }
 

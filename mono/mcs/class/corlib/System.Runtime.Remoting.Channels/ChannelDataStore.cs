@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,52 +34,51 @@ using System.Collections;
 
 namespace System.Runtime.Remoting.Channels
 {
-	[Serializable]
-	[System.Runtime.InteropServices.ComVisible (true)]
-	public class ChannelDataStore : IChannelDataStore
-	{
-		string[] _channelURIs;
-		DictionaryEntry[] _extraData;
-		
-		public ChannelDataStore (string[] channelURIs)
-		{
-			_channelURIs = channelURIs;
-		}
+    [Serializable]
+    [System.Runtime.InteropServices.ComVisible(true)]
+    public class ChannelDataStore : IChannelDataStore
+    {
+        string[] _channelURIs;
+        DictionaryEntry[] _extraData;
 
-		public string[] ChannelUris
-		{
-			get {
-				return _channelURIs;
-			}
-			set {
-				_channelURIs = value;
-			}
-		}
+        public ChannelDataStore(string[] channelURIs)
+        {
+            _channelURIs = channelURIs;
+        }
 
-		public object this[object key]
-		{
-			get {
-				if (_extraData == null) return null;
+        public string[] ChannelUris
+        {
+            get { return _channelURIs; }
+            set { _channelURIs = value; }
+        }
 
-				foreach (DictionaryEntry entry in _extraData)
-					if (entry.Key.Equals (key)) return entry.Value;
+        public object this[object key]
+        {
+            get
+            {
+                if (_extraData == null)
+                    return null;
 
-				return null;
-			}
+                foreach (DictionaryEntry entry in _extraData)
+                    if (entry.Key.Equals(key))
+                        return entry.Value;
 
-			set {
-				if (_extraData == null)
-				{
-					_extraData = new DictionaryEntry [] { new DictionaryEntry (key, value) };
-				}
-				else
-				{
-					DictionaryEntry[] tmpData = new DictionaryEntry [_extraData.Length + 1];
-					_extraData.CopyTo (tmpData, 0);
-					tmpData [_extraData.Length] = new DictionaryEntry (key, value);
-					_extraData = tmpData;
-				}
-			}
-		}
-	}
+                return null;
+            }
+            set
+            {
+                if (_extraData == null)
+                {
+                    _extraData = new DictionaryEntry[] { new DictionaryEntry(key, value) };
+                }
+                else
+                {
+                    DictionaryEntry[] tmpData = new DictionaryEntry[_extraData.Length + 1];
+                    _extraData.CopyTo(tmpData, 0);
+                    tmpData[_extraData.Length] = new DictionaryEntry(key, value);
+                    _extraData = tmpData;
+                }
+            }
+        }
+    }
 }

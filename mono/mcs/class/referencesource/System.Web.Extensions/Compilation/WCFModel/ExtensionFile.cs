@@ -62,10 +62,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlIgnore()]
         public byte[] ContentBuffer
         {
-            get
-            {
-                return m_ContentBuffer;
-            }
+            get { return m_ContentBuffer; }
             set
             {
                 m_ContentBuffer = value;
@@ -80,10 +77,7 @@ namespace Microsoft.VSDesigner.WCFModel
         /// <remarks></remarks>
         internal bool IsBufferValid
         {
-            get
-            {
-                return (m_ContentBuffer != null);
-            }
+            get { return (m_ContentBuffer != null); }
         }
 
         /// <summary>
@@ -94,10 +88,7 @@ namespace Microsoft.VSDesigner.WCFModel
         [XmlSerialization.XmlAttribute()]
         public string Name
         {
-            get
-            {
-                return m_Name;
-            }
+            get { return m_Name; }
             set
             {
                 if (value == null)
@@ -117,7 +108,5 @@ namespace Microsoft.VSDesigner.WCFModel
             ErrorInLoading = null;
             m_ContentBuffer = null;
         }
-
     }
 }
-

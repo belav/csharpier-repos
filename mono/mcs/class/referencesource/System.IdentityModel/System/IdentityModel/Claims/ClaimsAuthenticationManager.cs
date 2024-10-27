@@ -17,10 +17,13 @@ namespace System.Security.Claims
         /// The method echoes back the incoming ClaimsIdentities.
         /// </summary>
         /// <param name="resourceName">The address to which the request was sent.</param>
-        /// <param name="incomingPrincipal"><see cref="ClaimsPrincipal"/> presented by the client (in the form of a 
+        /// <param name="incomingPrincipal"><see cref="ClaimsPrincipal"/> presented by the client (in the form of a
         /// SecurityToken) to access the resource.</param>
         /// <returns>The ClaimsPrincipal given to the method.</returns>
-        public virtual ClaimsPrincipal Authenticate(string resourceName, ClaimsPrincipal incomingPrincipal)
+        public virtual ClaimsPrincipal Authenticate(
+            string resourceName,
+            ClaimsPrincipal incomingPrincipal
+        )
         {
             return incomingPrincipal;
         }
@@ -31,7 +34,11 @@ namespace System.Security.Claims
         /// <param name="nodelist">Custom configuration elements</param>
         public virtual void LoadCustomConfiguration(XmlNodeList nodelist)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotImplementedException(SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new NotImplementedException(
+                    SR.GetString(SR.ID0023, this.GetType().AssemblyQualifiedName)
+                )
+            );
         }
     }
 }

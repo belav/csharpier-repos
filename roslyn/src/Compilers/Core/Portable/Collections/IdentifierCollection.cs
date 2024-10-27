@@ -4,9 +4,9 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Diagnostics;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -19,17 +19,16 @@ namespace Microsoft.CodeAnalysis
     internal partial class IdentifierCollection
     {
         // Maps an identifier to all spellings of that identifier in this module.  The value type is
-        // typed as object so that it can store either an individual element (the common case), or a 
+        // typed as object so that it can store either an individual element (the common case), or a
         // collection.
         //
         // Note: we use a case insensitive comparer so that we can quickly lookup if we know a name
         // regardless of its case.
         private readonly Dictionary<string, object> _map = new Dictionary<string, object>(
-            StringComparer.OrdinalIgnoreCase);
+            StringComparer.OrdinalIgnoreCase
+        );
 
-        public IdentifierCollection()
-        {
-        }
+        public IdentifierCollection() { }
 
         public IdentifierCollection(IEnumerable<string> identifiers)
         {
@@ -61,7 +60,7 @@ namespace Microsoft.CodeAnalysis
 
         private void AddAdditionalSpelling(string identifier, object value)
         {
-            // Had a mapping for it.  It will either map to a single 
+            // Had a mapping for it.  It will either map to a single
             // spelling, or to a set of spellings.
             var strValue = value as string;
             if (strValue != null)
@@ -106,7 +105,7 @@ namespace Microsoft.CodeAnalysis
 
         private bool CaseInsensitiveContains(string identifier)
         {
-            // Simple case.  Just check if we've mapped this word to 
+            // Simple case.  Just check if we've mapped this word to
             // anything.  The map will take care of the case insensitive
             // lookup for us.
             return _map.ContainsKey(identifier);

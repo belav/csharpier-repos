@@ -23,7 +23,11 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.DocumentationComments
         /// </summary>
         public int CaretOffset { get; }
 
-        internal OmniSharpDocumentationCommentSnippet(TextSpan spanToReplace, string snippetText, int caretOffset)
+        internal OmniSharpDocumentationCommentSnippet(
+            TextSpan spanToReplace,
+            string snippetText,
+            int caretOffset
+        )
         {
             SpanToReplace = spanToReplace;
             SnippetText = snippetText;

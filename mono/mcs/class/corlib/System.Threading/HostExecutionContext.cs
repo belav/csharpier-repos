@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,41 +26,40 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Threading {
+namespace System.Threading
+{
+    [MonoTODO("Useless until the runtime supports it")]
+    public class HostExecutionContext : IDisposable
+    {
+        private object _state;
 
-	[MonoTODO ("Useless until the runtime supports it")]
-	public class HostExecutionContext : IDisposable {
+        public HostExecutionContext()
+        {
+            _state = null;
+        }
 
-		private object _state;
+        public HostExecutionContext(object state)
+        {
+            _state = state;
+        }
 
-		public HostExecutionContext ()
-		{
-			_state = null;
-		}
+        public virtual HostExecutionContext CreateCopy()
+        {
+            return new HostExecutionContext(_state);
+        }
 
-		public HostExecutionContext (object state)
-		{
-			_state = state;
-		}
+        protected internal object State
+        {
+            get { return _state; }
+            set { _state = value; }
+        }
 
-		public virtual HostExecutionContext CreateCopy ()
-		{
-			return new HostExecutionContext (_state);
-		}
+        public void Dispose()
+        {
+            Dispose(true);
+            GC.SuppressFinalize(this);
+        }
 
-		protected internal object State {
-			get { return _state; }
-			set { _state = value; }
-		}
-
-		public void Dispose ()
-		{
-			Dispose (true);
-			GC.SuppressFinalize (this);
-		}
-
-		public virtual void Dispose (bool disposing)
-		{
-		}
-	}
+        public virtual void Dispose(bool disposing) { }
+    }
 }

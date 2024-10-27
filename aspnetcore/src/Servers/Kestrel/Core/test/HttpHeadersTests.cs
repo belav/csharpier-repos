@@ -25,11 +25,26 @@ public class HttpHeadersTests
     [InlineData(" , , ", (int)(ConnectionOptions.None))]
     [InlineData("KEEP-ALIVE", (int)(ConnectionOptions.KeepAlive))]
     [InlineData("keep-alive", (int)(ConnectionOptions.KeepAlive))]
-    [InlineData("keep-alive, upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("keep-alive,upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("upgrade, keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("upgrade,keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("upgrade,,keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+    [InlineData(
+        "keep-alive, upgrade",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "keep-alive,upgrade",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "upgrade, keep-alive",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "upgrade,keep-alive",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "upgrade,,keep-alive",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
     [InlineData("keep-alive,", (int)(ConnectionOptions.KeepAlive))]
     [InlineData("keep-alive,,", (int)(ConnectionOptions.KeepAlive))]
     [InlineData("keep-alive, ", (int)(ConnectionOptions.KeepAlive))]
@@ -143,22 +158,50 @@ public class HttpHeadersTests
     }
 
     [Theory]
-    [InlineData("keep-alive", "upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("upgrade", "keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+    [InlineData(
+        "keep-alive",
+        "upgrade",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "upgrade",
+        "keep-alive",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
     [InlineData("keep-alive", "", (int)(ConnectionOptions.KeepAlive))]
     [InlineData("", "keep-alive", (int)(ConnectionOptions.KeepAlive))]
     [InlineData("upgrade", "", (int)(ConnectionOptions.Upgrade))]
     [InlineData("", "upgrade", (int)(ConnectionOptions.Upgrade))]
-    [InlineData("keep-alive, upgrade", "", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("upgrade, keep-alive", "", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("", "keep-alive, upgrade", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
-    [InlineData("", "upgrade, keep-alive", (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade))]
+    [InlineData(
+        "keep-alive, upgrade",
+        "",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "upgrade, keep-alive",
+        "",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "",
+        "keep-alive, upgrade",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
+    [InlineData(
+        "",
+        "upgrade, keep-alive",
+        (int)(ConnectionOptions.KeepAlive | ConnectionOptions.Upgrade)
+    )]
     [InlineData("", "", (int)(ConnectionOptions.None))]
     [InlineData("close", "", (int)(ConnectionOptions.Close))]
     [InlineData("", "close", (int)(ConnectionOptions.Close))]
     [InlineData("close", "upgrade", (int)(ConnectionOptions.Close | ConnectionOptions.Upgrade))]
     [InlineData("upgrade", "close", (int)(ConnectionOptions.Close | ConnectionOptions.Upgrade))]
-    public void TestParseConnectionMultipleValues(string value1, string value2, int intExpectedConnectionOptions)
+    public void TestParseConnectionMultipleValues(
+        string value1,
+        string value2,
+        int intExpectedConnectionOptions
+    )
     {
         var expectedConnectionOptions = (ConnectionOptions)intExpectedConnectionOptions;
         var connection = new StringValues(new[] { value1, value2 });
@@ -213,7 +256,10 @@ public class HttpHeadersTests
     [InlineData("chunked2, gzip", (int)(TransferCoding.Other))]
     [InlineData("gzip, chunked 2", (int)(TransferCoding.Other))]
     [InlineData("gzip, chunked2", (int)(TransferCoding.Other))]
-    public void TestParseTransferEncoding(string transferEncoding, int intExpectedTransferEncodingOptions)
+    public void TestParseTransferEncoding(
+        string transferEncoding,
+        int intExpectedTransferEncodingOptions
+    )
     {
         var expectedTransferEncodingOptions = (TransferCoding)intExpectedTransferEncodingOptions;
 
@@ -233,7 +279,11 @@ public class HttpHeadersTests
     [InlineData("", "", (int)(TransferCoding.None))]
     [InlineData("deflate", "", (int)(TransferCoding.Other))]
     [InlineData("", "gzip", (int)(TransferCoding.Other))]
-    public void TestParseTransferEncodingMultipleValues(string value1, string value2, int intExpectedTransferEncodingOptions)
+    public void TestParseTransferEncodingMultipleValues(
+        string value1,
+        string value2,
+        int intExpectedTransferEncodingOptions
+    )
     {
         var expectedTransferEncodingOptions = (TransferCoding)intExpectedTransferEncodingOptions;
 

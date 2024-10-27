@@ -23,13 +23,20 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
     internal partial class DiagnosticIncrementalAnalyzer
     {
         public async ValueTask SynchronizeWithBuildAsync(
-            ImmutableDictionary<ProjectId,
-            ImmutableArray<DiagnosticData>> buildDiagnostics,
+            ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> buildDiagnostics,
             TaskQueue postBuildAndErrorListRefreshTaskQueue,
             bool onBuildCompleted,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            using (Logger.LogBlock(FunctionId.DiagnosticIncrementalAnalyzer_SynchronizeWithBuildAsync, LogSynchronizeWithBuild, buildDiagnostics, cancellationToken))
+            using (
+                Logger.LogBlock(
+                    FunctionId.DiagnosticIncrementalAnalyzer_SynchronizeWithBuildAsync,
+                    LogSynchronizeWithBuild,
+                    buildDiagnostics,
+                    cancellationToken
+                )
+            )
             {
                 DebugVerifyBuildDiagnostics(buildDiagnostics);
 
@@ -56,9 +63,16 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                         cancellationToken.ThrowIfCancellationRequested();
 
                         var state = stateSet.GetOrCreateProjectState(project.Id);
-                        var result = GetResultOrEmpty(newResult, stateSet.Analyzer, project.Id, VersionStamp.Default);
+                        var result = GetResultOrEmpty(
+                            newResult,
+                            stateSet.Analyzer,
+                            project.Id,
+                            VersionStamp.Default
+                        );
 
-                        await state.SaveToInMemoryStorageAsync(project, result).ConfigureAwait(false);
+                        await state
+                            .SaveToInMemoryStorageAsync(project, result)
+                            .ConfigureAwait(false);
                     }
 
                     // Raise diagnostic updated events after the new diagnostics have been stored into the in-memory cache.
@@ -78,31 +92,58 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                     // Enqueue re-analysis of active document with high-priority right away.
                     if (_documentTrackingService.GetActiveDocument(solution) is { } activeDocument)
                     {
-                        AnalyzerService.Reanalyze(Workspace, projectIds: null, documentIds: ImmutableArray.Create(activeDocument.Id), highPriority: true);
+                        AnalyzerService.Reanalyze(
+                            Workspace,
+                            projectIds: null,
+                            documentIds: ImmutableArray.Create(activeDocument.Id),
+                            highPriority: true
+                        );
                     }
 
                     // Enqueue remaining re-analysis with normal priority on a separate task queue
                     // that will execute at the end of all the post build and error list refresh tasks.
-                    _ = postBuildAndErrorListRefreshTaskQueue.ScheduleTask(nameof(SynchronizeWithBuildAsync), () =>
-                    {
-                        // Enqueue re-analysis of open documents.
-                        AnalyzerService.Reanalyze(Workspace, projectIds: null, documentIds: Workspace.GetOpenDocumentIds(), highPriority: false);
-
-                        // Enqueue re-analysis of projects, if required.
-                        foreach (var projectsByLanguage in solution.Projects.GroupBy(p => p.Language))
+                    _ = postBuildAndErrorListRefreshTaskQueue.ScheduleTask(
+                        nameof(SynchronizeWithBuildAsync),
+                        () =>
                         {
-                            if (GlobalOptions.IsFullSolutionAnalysisEnabled(projectsByLanguage.Key))
+                            // Enqueue re-analysis of open documents.
+                            AnalyzerService.Reanalyze(
+                                Workspace,
+                                projectIds: null,
+                                documentIds: Workspace.GetOpenDocumentIds(),
+                                highPriority: false
+                            );
+
+                            // Enqueue re-analysis of projects, if required.
+                            foreach (
+                                var projectsByLanguage in solution.Projects.GroupBy(p => p.Language)
+                            )
                             {
-                                AnalyzerService.Reanalyze(Workspace, projectsByLanguage.Select(p => p.Id), documentIds: null, highPriority: false);
+                                if (
+                                    GlobalOptions.IsFullSolutionAnalysisEnabled(
+                                        projectsByLanguage.Key
+                                    )
+                                )
+                                {
+                                    AnalyzerService.Reanalyze(
+                                        Workspace,
+                                        projectsByLanguage.Select(p => p.Id),
+                                        documentIds: null,
+                                        highPriority: false
+                                    );
+                                }
                             }
-                        }
-                    }, cancellationToken);
+                        },
+                        cancellationToken
+                    );
                 }
             }
         }
 
         [Conditional("DEBUG")]
-        private static void DebugVerifyBuildDiagnostics(ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> buildDiagnostics)
+        private static void DebugVerifyBuildDiagnostics(
+            ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> buildDiagnostics
+        )
         {
             foreach (var diagnostic in buildDiagnostics.Values.SelectMany(v => v))
             {
@@ -110,32 +151,59 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             }
         }
 
-        private ImmutableDictionary<DiagnosticAnalyzer, DiagnosticAnalysisResult> CreateAnalysisResults(
-            Project project, ImmutableArray<StateSet> stateSets, ImmutableArray<DiagnosticData> diagnostics)
+        private ImmutableDictionary<
+            DiagnosticAnalyzer,
+            DiagnosticAnalysisResult
+        > CreateAnalysisResults(
+            Project project,
+            ImmutableArray<StateSet> stateSets,
+            ImmutableArray<DiagnosticData> diagnostics
+        )
         {
             using var poolObject = SharedPools.Default<HashSet<string>>().GetPooledObject();
 
             var lookup = diagnostics.ToLookup(d => d.Id);
 
-            var builder = ImmutableDictionary.CreateBuilder<DiagnosticAnalyzer, DiagnosticAnalysisResult>();
-            using var _ = PooledHashSet<DocumentId>.GetInstance(out var existingDocumentsInStateSet);
+            var builder = ImmutableDictionary.CreateBuilder<
+                DiagnosticAnalyzer,
+                DiagnosticAnalysisResult
+            >();
+            using var _ = PooledHashSet<DocumentId>.GetInstance(
+                out var existingDocumentsInStateSet
+            );
             foreach (var stateSet in stateSets)
             {
-                var descriptors = DiagnosticAnalyzerInfoCache.GetDiagnosticDescriptors(stateSet.Analyzer);
-                var liveDiagnostics = ConvertToLiveDiagnostics(lookup, descriptors, poolObject.Object);
+                var descriptors = DiagnosticAnalyzerInfoCache.GetDiagnosticDescriptors(
+                    stateSet.Analyzer
+                );
+                var liveDiagnostics = ConvertToLiveDiagnostics(
+                    lookup,
+                    descriptors,
+                    poolObject.Object
+                );
 
                 // Ensure that all documents with diagnostics in the previous state set are added to the result.
                 existingDocumentsInStateSet.Clear();
                 stateSet.CollectDocumentsWithDiagnostics(project.Id, existingDocumentsInStateSet);
 
-                builder.Add(stateSet.Analyzer, DiagnosticAnalysisResult.CreateFromBuild(project, liveDiagnostics, existingDocumentsInStateSet));
+                builder.Add(
+                    stateSet.Analyzer,
+                    DiagnosticAnalysisResult.CreateFromBuild(
+                        project,
+                        liveDiagnostics,
+                        existingDocumentsInStateSet
+                    )
+                );
             }
 
             return builder.ToImmutable();
         }
 
         private static ImmutableArray<DiagnosticData> ConvertToLiveDiagnostics(
-            ILookup<string, DiagnosticData> lookup, ImmutableArray<DiagnosticDescriptor> descriptors, HashSet<string> seen)
+            ILookup<string, DiagnosticData> lookup,
+            ImmutableArray<DiagnosticDescriptor> descriptors,
+            HashSet<string> seen
+        )
         {
             if (lookup == null)
             {
@@ -165,7 +233,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
             return builder == null ? ImmutableArray<DiagnosticData>.Empty : builder.ToImmutable();
         }
 
-        private static DiagnosticData CreateLiveDiagnostic(DiagnosticDescriptor descriptor, DiagnosticData diagnostic)
+        private static DiagnosticData CreateLiveDiagnostic(
+            DiagnosticDescriptor descriptor,
+            DiagnosticData diagnostic
+        )
         {
             return new DiagnosticData(
                 descriptor.Id,
@@ -184,10 +255,13 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 descriptor.Title.ToString(CultureInfo.CurrentUICulture),
                 descriptor.Description.ToString(CultureInfo.CurrentUICulture),
                 descriptor.HelpLinkUri,
-                isSuppressed: diagnostic.IsSuppressed);
+                isSuppressed: diagnostic.IsSuppressed
+            );
         }
 
-        private static string LogSynchronizeWithBuild(ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> map)
+        private static string LogSynchronizeWithBuild(
+            ImmutableDictionary<ProjectId, ImmutableArray<DiagnosticData>> map
+        )
         {
             using var pooledObject = SharedPools.Default<StringBuilder>().GetPooledObject();
             var sb = pooledObject.Object;

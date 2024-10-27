@@ -48,13 +48,17 @@ namespace Microsoft.CodeAnalysis.Scripting.Hosting
 
                 public bool HasKeyName()
                 {
-                    return Index >= 0 && Name != null && Name.Length >= 2 && Name[0] == '[' && Name[Name.Length - 1] == ']';
+                    return Index >= 0
+                        && Name != null
+                        && Name.Length >= 2
+                        && Name[0] == '['
+                        && Name[Name.Length - 1] == ']';
                 }
 
                 public bool AppendAsCollectionEntry(Builder result)
                 {
                     // Some BCL collections use [{key.ToString()}]: {value.ToString()} pattern to display collection entries.
-                    // We want them to be printed initializer-style, i.e. { <key>, <value> } 
+                    // We want them to be printed initializer-style, i.e. { <key>, <value> }
                     if (HasKeyName())
                     {
                         result.AppendGroupOpening();

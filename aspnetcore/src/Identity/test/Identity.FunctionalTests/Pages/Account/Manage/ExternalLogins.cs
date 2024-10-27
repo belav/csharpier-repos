@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.Identity.FunctionalTests.Account.Manage;
 
 public class ExternalLogins : DefaultUIPage
 {
-    public ExternalLogins(HttpClient client, IHtmlDocument externalLoginDocument, DefaultUIContext context)
+    public ExternalLogins(
+        HttpClient client,
+        IHtmlDocument externalLoginDocument,
+        DefaultUIContext context
+    )
         : base(client, externalLoginDocument, context)
     {
         if (context.SocialLoginProvider != null && context.PasswordLoginEnabled)

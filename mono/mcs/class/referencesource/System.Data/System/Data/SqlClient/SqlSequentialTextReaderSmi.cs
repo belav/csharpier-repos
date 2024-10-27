@@ -5,16 +5,21 @@ using Microsoft.SqlServer.Server;
 
 namespace System.Data.SqlClient
 {
-    sealed internal class SqlSequentialTextReaderSmi : System.IO.TextReader
+    internal sealed class SqlSequentialTextReaderSmi : System.IO.TextReader
     {
         private SmiEventSink_Default _sink;
         private ITypedGettersV3 _getters;
-        private int _columnIndex;       // The index of out column in the table
-        private long _position;         // Current position in the stream
-        private long _length;           // Total length of the stream
-        private int _peekedChar;        // Current peeked character (if any)
+        private int _columnIndex; // The index of out column in the table
+        private long _position; // Current position in the stream
+        private long _length; // Total length of the stream
+        private int _peekedChar; // Current peeked character (if any)
 
-        internal SqlSequentialTextReaderSmi(SmiEventSink_Default sink, ITypedGettersV3 getters, int columnIndex, long length)
+        internal SqlSequentialTextReaderSmi(
+            SmiEventSink_Default sink,
+            ITypedGettersV3 getters,
+            int columnIndex,
+            long length
+        )
         {
             _sink = sink;
             _getters = getters;
@@ -36,7 +41,11 @@ namespace System.Data.SqlClient
                 _peekedChar = Read();
             }
 
-            Debug.Assert(_peekedChar == -1 || ((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue)), string.Format("Bad peeked character: {0}", _peekedChar));
+            Debug.Assert(
+                _peekedChar == -1
+                    || ((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue)),
+                string.Format("Bad peeked character: {0}", _peekedChar)
+            );
             return _peekedChar;
         }
 
@@ -59,7 +68,15 @@ namespace System.Data.SqlClient
             else if (_position < _length)
             {
                 char[] tempBuffer = new char[1];
-                int charsRead = ValueUtilsSmi.GetChars_Unchecked(_sink, _getters, _columnIndex, _position, tempBuffer, 0, 1);
+                int charsRead = ValueUtilsSmi.GetChars_Unchecked(
+                    _sink,
+                    _getters,
+                    _columnIndex,
+                    _position,
+                    tempBuffer,
+                    0,
+                    1
+                );
                 if (charsRead == 1)
                 {
                     readChar = tempBuffer[0];
@@ -67,7 +84,10 @@ namespace System.Data.SqlClient
                 }
             }
 
-            Debug.Assert(readChar == -1 || ((readChar >= char.MinValue) && (readChar <= char.MaxValue)), string.Format("Bad read character: {0}", readChar));
+            Debug.Assert(
+                readChar == -1 || ((readChar >= char.MinValue) && (readChar <= char.MaxValue)),
+                string.Format("Bad read character: {0}", readChar)
+            );
             return readChar;
         }
 
@@ -83,7 +103,10 @@ namespace System.Data.SqlClient
             // Load in peeked char
             if ((count > 0) && (HasPeekedChar))
             {
-                Debug.Assert((_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue), string.Format("Bad peeked character: {0}", _peekedChar));
+                Debug.Assert(
+                    (_peekedChar >= char.MinValue) && (_peekedChar <= char.MaxValue),
+                    string.Format("Bad peeked character: {0}", _peekedChar)
+                );
                 buffer[index + charsRead] = (char)_peekedChar;
                 charsRead++;
                 _peekedChar = -1;
@@ -95,14 +118,22 @@ namespace System.Data.SqlClient
             // If we need more data and there is data avaiable, read
             if (charsNeeded > 0)
             {
-                int newCharsRead = ValueUtilsSmi.GetChars_Unchecked(_sink, _getters, _columnIndex, _position, buffer, index + charsRead, charsNeeded);
+                int newCharsRead = ValueUtilsSmi.GetChars_Unchecked(
+                    _sink,
+                    _getters,
+                    _columnIndex,
+                    _position,
+                    buffer,
+                    index + charsRead,
+                    charsNeeded
+                );
                 _position += newCharsRead;
                 charsRead += newCharsRead;
             }
 
             return charsRead;
         }
-        
+
         /// <summary>
         /// Forces the TextReader to act as if it was closed
         /// This does not actually close the stream, read off the rest of the data or dispose this
@@ -119,7 +150,7 @@ namespace System.Data.SqlClient
         /// </summary>
         private bool IsClosed
         {
-            get { return ((_sink == null) || (_getters == null)); } 
+            get { return ((_sink == null) || (_getters == null)); }
         }
 
         /// <summary>

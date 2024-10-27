@@ -24,7 +24,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             expected.Position = 0;
-            using var stream = await SerializableBytes.CreateReadableStreamAsync(expected, CancellationToken.None);
+            using var stream = await SerializableBytes.CreateReadableStreamAsync(
+                expected,
+                CancellationToken.None
+            );
             Assert.Equal(expected.Length, stream.Length);
 
             expected.Position = 0;
@@ -45,7 +48,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             expected.Position = 0;
-            using var stream = await SerializableBytes.CreateReadableStreamAsync(expected, CancellationToken.None);
+            using var stream = await SerializableBytes.CreateReadableStreamAsync(
+                expected,
+                CancellationToken.None
+            );
             Assert.Equal(expected.Length, stream.Length);
 
             stream.Position = 0;
@@ -76,7 +82,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             }
 
             expected.Position = 0;
-            using var stream = await SerializableBytes.CreateReadableStreamAsync(expected, CancellationToken.None);
+            using var stream = await SerializableBytes.CreateReadableStreamAsync(
+                expected,
+                CancellationToken.None
+            );
             Assert.Equal(expected.Length, stream.Length);
 
             var random = new Random(0);

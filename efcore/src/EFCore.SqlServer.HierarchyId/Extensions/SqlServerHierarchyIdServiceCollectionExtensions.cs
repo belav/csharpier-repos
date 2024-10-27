@@ -20,11 +20,15 @@ public static class SqlServerHierarchyIdServiceCollectionExtensions
     /// <param name="serviceCollection">The <see cref="IServiceCollection" /> to add services to.</param>
     /// <returns>The same service collection so that multiple calls can be chained.</returns>
     public static IServiceCollection AddEntityFrameworkSqlServerHierarchyId(
-        this IServiceCollection serviceCollection)
+        this IServiceCollection serviceCollection
+    )
     {
         new EntityFrameworkRelationalServicesBuilder(serviceCollection)
             .TryAdd<IMethodCallTranslatorPlugin, SqlServerHierarchyIdMethodCallTranslatorPlugin>()
-            .TryAdd<IRelationalTypeMappingSourcePlugin, SqlServerHierarchyIdTypeMappingSourcePlugin>();
+            .TryAdd<
+                IRelationalTypeMappingSourcePlugin,
+                SqlServerHierarchyIdTypeMappingSourcePlugin
+            >();
 
         return serviceCollection;
     }

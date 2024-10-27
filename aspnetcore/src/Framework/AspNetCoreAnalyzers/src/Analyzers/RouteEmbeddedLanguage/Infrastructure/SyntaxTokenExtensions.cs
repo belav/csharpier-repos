@@ -12,7 +12,7 @@ internal static class SyntaxTokenExtensions
     {
         var node = token.GetRequiredParent().WalkUpParentheses();
 
-        // if we're inside some collection-like initializer, find the instance actually being created. 
+        // if we're inside some collection-like initializer, find the instance actually being created.
         if (node.Parent.IsAnyInitializerExpression(out var instance))
         {
             node = instance.WalkUpParentheses();
@@ -21,6 +21,6 @@ internal static class SyntaxTokenExtensions
         return node;
     }
 
-    public static SyntaxNode GetRequiredParent(this SyntaxToken token)
-        => token.Parent ?? throw new InvalidOperationException("Token's parent was null");
+    public static SyntaxNode GetRequiredParent(this SyntaxToken token) =>
+        token.Parent ?? throw new InvalidOperationException("Token's parent was null");
 }

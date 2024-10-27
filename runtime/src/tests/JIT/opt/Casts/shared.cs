@@ -12,7 +12,10 @@ interface I<T>
 
 sealed class J<T> : I<T>
 {
-    public int E(T t) { return 3; }
+    public int E(T t)
+    {
+        return 3;
+    }
 }
 
 public class Z
@@ -40,10 +43,14 @@ public class Z
         bool b11 = F1(j1);
 
         int a = 0;
-        if (b00) a += 1;
-        if (b01) a += 2;
-        if (b10) a += 4;
-        if (b11) a += 8;
+        if (b00)
+            a += 1;
+        if (b01)
+            a += 2;
+        if (b10)
+            a += 4;
+        if (b11)
+            a += 8;
 
         Console.WriteLine($"a = {a}");
 

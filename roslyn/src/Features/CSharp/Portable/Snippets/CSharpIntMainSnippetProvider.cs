@@ -30,20 +30,24 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpIntMainSnippetProvider()
-        {
-        }
+        public CSharpIntMainSnippetProvider() { }
 
-        protected override SyntaxNode GenerateReturnType(SyntaxGenerator generator)
-            => generator.TypeExpression(SpecialType.System_Int32);
+        protected override SyntaxNode GenerateReturnType(SyntaxGenerator generator) =>
+            generator.TypeExpression(SpecialType.System_Int32);
 
-        protected override IEnumerable<SyntaxNode> GenerateInnerStatements(SyntaxGenerator generator)
+        protected override IEnumerable<SyntaxNode> GenerateInnerStatements(
+            SyntaxGenerator generator
+        )
         {
             var returnStatement = generator.ReturnStatement(generator.LiteralExpression(0));
             return SpecializedCollections.SingletonEnumerable(returnStatement);
         }
 
-        protected override int GetTargetCaretPosition(ISyntaxFactsService syntaxFacts, SyntaxNode caretTarget, SourceText sourceText)
+        protected override int GetTargetCaretPosition(
+            ISyntaxFactsService syntaxFacts,
+            SyntaxNode caretTarget,
+            SourceText sourceText
+        )
         {
             var methodDeclaration = (MethodDeclarationSyntax)caretTarget;
             var body = methodDeclaration.Body!;
@@ -55,9 +59,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             return line.Span.End;
         }
 
-        protected override async Task<Document> AddIndentationToDocumentAsync(Document document, CancellationToken cancellationToken)
+        protected override async Task<Document> AddIndentationToDocumentAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var snippetNode = root.GetAnnotatedNodes(FindSnippetAnnotation).FirstOrDefault();
 
             if (snippetNode is not MethodDeclarationSyntax methodDeclaration)
@@ -66,10 +75,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
             var body = methodDeclaration.Body!;
             var returnStatement = body.Statements.First();
 
-            var syntaxFormattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken).ConfigureAwait(false);
-            var indentationString = CSharpSnippetHelpers.GetBlockLikeIndentationString(document, body.OpenBraceToken.SpanStart, syntaxFormattingOptions, cancellationToken);
+            var syntaxFormattingOptions = await document
+                .GetSyntaxFormattingOptionsAsync(fallbackOptions: null, cancellationToken)
+                .ConfigureAwait(false);
+            var indentationString = CSharpSnippetHelpers.GetBlockLikeIndentationString(
+                document,
+                body.OpenBraceToken.SpanStart,
+                syntaxFormattingOptions,
+                cancellationToken
+            );
 
-            var updatedReturnStatement = returnStatement.WithPrependedLeadingTrivia(SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString));
+            var updatedReturnStatement = returnStatement.WithPrependedLeadingTrivia(
+                SyntaxFactory.SyntaxTrivia(SyntaxKind.WhitespaceTrivia, indentationString)
+            );
             var updatedRoot = root.ReplaceNode(returnStatement, updatedReturnStatement);
 
             return document.WithSyntaxRoot(updatedRoot);

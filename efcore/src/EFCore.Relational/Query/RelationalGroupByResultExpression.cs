@@ -26,7 +26,8 @@ public class RelationalGroupByResultExpression : Expression, IPrintableExpressio
         Expression keyIdentifier,
         IReadOnlyList<ValueComparer> keyIdentifierValueComparers,
         Expression keyShaper,
-        Expression elementShaper)
+        Expression elementShaper
+    )
     {
         KeyIdentifier = keyIdentifier;
         KeyIdentifierValueComparers = keyIdentifierValueComparers;
@@ -59,8 +60,7 @@ public class RelationalGroupByResultExpression : Expression, IPrintableExpressio
     public override Type Type { get; }
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -83,12 +83,16 @@ public class RelationalGroupByResultExpression : Expression, IPrintableExpressio
     public virtual RelationalGroupByResultExpression Update(
         Expression keyIdentifier,
         Expression keyShaper,
-        Expression elementShaper)
-        => keyIdentifier != KeyIdentifier
-            || keyShaper != KeyShaper
-            || elementShaper != ElementShaper
-                ? new RelationalGroupByResultExpression(keyIdentifier, KeyIdentifierValueComparers, keyShaper, elementShaper)
-                : this;
+        Expression elementShaper
+    ) =>
+        keyIdentifier != KeyIdentifier || keyShaper != KeyShaper || elementShaper != ElementShaper
+            ? new RelationalGroupByResultExpression(
+                keyIdentifier,
+                KeyIdentifierValueComparers,
+                keyShaper,
+                elementShaper
+            )
+            : this;
 
     /// <inheritdoc />
     void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)

@@ -30,7 +30,10 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// </summary>
         /// <param name="optionsAccessor">The options of the cache.</param>
         /// <param name="loggerFactory">The logger factory to create <see cref="ILogger"/> used to log messages.</param>
-        public MemoryDistributedCache(IOptions<MemoryDistributedCacheOptions> optionsAccessor, ILoggerFactory loggerFactory)
+        public MemoryDistributedCache(
+            IOptions<MemoryDistributedCacheOptions> optionsAccessor,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(optionsAccessor);
             ThrowHelper.ThrowIfNull(loggerFactory);
@@ -56,7 +59,10 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="key">The key of the item to get.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>
         /// <returns>The task for getting the byte array value associated with the specified key from the cache.</returns>
-        public Task<byte[]?> GetAsync(string key, CancellationToken token = default(CancellationToken))
+        public Task<byte[]?> GetAsync(
+            string key,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             ThrowHelper.ThrowIfNull(key);
 
@@ -77,7 +83,8 @@ namespace Microsoft.Extensions.Caching.Distributed
 
             var memoryCacheEntryOptions = new MemoryCacheEntryOptions();
             memoryCacheEntryOptions.AbsoluteExpiration = options.AbsoluteExpiration;
-            memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow = options.AbsoluteExpirationRelativeToNow;
+            memoryCacheEntryOptions.AbsoluteExpirationRelativeToNow =
+                options.AbsoluteExpirationRelativeToNow;
             memoryCacheEntryOptions.SlidingExpiration = options.SlidingExpiration;
             memoryCacheEntryOptions.Size = value.Length;
 
@@ -92,7 +99,12 @@ namespace Microsoft.Extensions.Caching.Distributed
         /// <param name="options">The cache options for the item to set.</param>
         /// <param name="token">The <see cref="CancellationToken"/> to use to cancel operation.</param>
         /// <returns>The task for setting the byte array value associated with the specified key in the cache.</returns>
-        public Task SetAsync(string key, byte[] value, DistributedCacheEntryOptions options, CancellationToken token = default(CancellationToken))
+        public Task SetAsync(
+            string key,
+            byte[] value,
+            DistributedCacheEntryOptions options,
+            CancellationToken token = default(CancellationToken)
+        )
         {
             ThrowHelper.ThrowIfNull(key);
             ThrowHelper.ThrowIfNull(value);

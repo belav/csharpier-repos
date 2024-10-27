@@ -23,15 +23,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EditAndContinue
 
             foreach (var oldNode in oldRoot.DescendantNodes().Where(n => n.FullSpan.Length > 0))
             {
-                var newNode = AbstractEditAndContinueAnalyzer.FindPartner(newRoot, oldRoot, oldNode);
-                Assert.True(SyntaxFactory.AreEquivalent(oldNode, newNode), $"Node '{oldNode}' not equivalent to '{newNode}'.");
+                var newNode = AbstractEditAndContinueAnalyzer.FindPartner(
+                    newRoot,
+                    oldRoot,
+                    oldNode
+                );
+                Assert.True(
+                    SyntaxFactory.AreEquivalent(oldNode, newNode),
+                    $"Node '{oldNode}' not equivalent to '{newNode}'."
+                );
             }
         }
 
         [Fact]
         public void FindPartner1()
         {
-            var source1 = @"
+            var source1 =
+                @"
 using System;
 
 class C
@@ -49,7 +57,8 @@ class C
 }
 ";
 
-            var source2 = @"
+            var source2 =
+                @"
 using System;
 
 class C
@@ -70,7 +79,9 @@ class C
         [Fact]
         public void FindLeafNodeAndPartner1()
         {
-            var leftRoot = SyntaxFactory.ParseSyntaxTree(@"
+            var leftRoot = SyntaxFactory
+                .ParseSyntaxTree(
+                    @"
 using System;
 
 class C
@@ -83,9 +94,17 @@ class C
         }
     }
 }
-").GetRoot();
-            var leftPosition = leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(2).SpanStart; // 0 within Console.WriteLine(0)
-            var rightRoot = SyntaxFactory.ParseSyntaxTree(@"
+"
+                )
+                .GetRoot();
+            var leftPosition = leftRoot
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .ElementAt(2)
+                .SpanStart; // 0 within Console.WriteLine(0)
+            var rightRoot = SyntaxFactory
+                .ParseSyntaxTree(
+                    @"
 using System;
 
 class C
@@ -101,9 +120,17 @@ class C
         }
     }
 }
-").GetRoot();
+"
+                )
+                .GetRoot();
 
-            AbstractEditAndContinueAnalyzer.FindLeafNodeAndPartner(leftRoot, leftPosition, rightRoot, out var leftNode, out var rightNodeOpt);
+            AbstractEditAndContinueAnalyzer.FindLeafNodeAndPartner(
+                leftRoot,
+                leftPosition,
+                rightRoot,
+                out var leftNode,
+                out var rightNodeOpt
+            );
             Assert.Equal("0", leftNode.ToString());
             Assert.Null(rightNodeOpt);
         }
@@ -111,9 +138,11 @@ class C
         [Fact]
         public void FindLeafNodeAndPartner2()
         {
-            // Check that the method does not fail even if the index of the child (4) 
+            // Check that the method does not fail even if the index of the child (4)
             // is greater than the count of children on the corresponding (from the upper side) node (3).
-            var leftRoot = SyntaxFactory.ParseSyntaxTree(@"
+            var leftRoot = SyntaxFactory
+                .ParseSyntaxTree(
+                    @"
 using System;
 
 class C
@@ -129,10 +158,18 @@ class C
         }
     }
 }
-").GetRoot();
+"
+                )
+                .GetRoot();
 
-            var leftPosition = leftRoot.DescendantNodes().OfType<LiteralExpressionSyntax>().ElementAt(5).SpanStart; // 3 within Console.WriteLine(3)
-            var rightRoot = SyntaxFactory.ParseSyntaxTree(@"
+            var leftPosition = leftRoot
+                .DescendantNodes()
+                .OfType<LiteralExpressionSyntax>()
+                .ElementAt(5)
+                .SpanStart; // 3 within Console.WriteLine(3)
+            var rightRoot = SyntaxFactory
+                .ParseSyntaxTree(
+                    @"
 using System;
 
 class C
@@ -151,9 +188,17 @@ class C
         }
     }
 }
-").GetRoot();
+"
+                )
+                .GetRoot();
 
-            AbstractEditAndContinueAnalyzer.FindLeafNodeAndPartner(leftRoot, leftPosition, rightRoot, out var leftNode, out var rightNodeOpt);
+            AbstractEditAndContinueAnalyzer.FindLeafNodeAndPartner(
+                leftRoot,
+                leftPosition,
+                rightRoot,
+                out var leftNode,
+                out var rightNodeOpt
+            );
             Assert.Equal("3", leftNode.ToString());
             Assert.Null(rightNodeOpt);
         }
@@ -161,7 +206,8 @@ class C
         [Fact]
         public void IsAsyncDeclaration()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     async Task<int> M0() => 1;
@@ -179,24 +225,55 @@ class C
         var l3 = new Func<Task<int>>(async delegate () { return await Task.FromResult(1); });
     }
 }
-");
+"
+            );
 
-            var m0 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M0");
-            var m1 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M1");
-            var m2 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M2");
-            var m3 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M3");
+            var m0 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M0");
+            var m1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M1");
+            var m2 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M2");
+            var m3 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M3");
 
-            var f1 = tree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single(m => m.Identifier.ValueText == "f1");
-            var f2 = tree.GetRoot().DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single(m => m.Identifier.ValueText == "f2");
+            var f1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single(m => m.Identifier.ValueText == "f1");
+            var f2 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single(m => m.Identifier.ValueText == "f2");
 
-            var l1 = m3.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(m => m.Identifier.ValueText == "l1").Initializer.
-                DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var l1 = m3.DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single(m => m.Identifier.ValueText == "l1")
+                .Initializer.DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
 
-            var l2 = m3.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(m => m.Identifier.ValueText == "l2").Initializer.
-                DescendantNodes().OfType<LambdaExpressionSyntax>().Single();
+            var l2 = m3.DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single(m => m.Identifier.ValueText == "l2")
+                .Initializer.DescendantNodes()
+                .OfType<LambdaExpressionSyntax>()
+                .Single();
 
-            var l3 = m3.DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(m => m.Identifier.ValueText == "l3").Initializer.
-                DescendantNodes().OfType<AnonymousFunctionExpressionSyntax>().Single();
+            var l3 = m3.DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single(m => m.Identifier.ValueText == "l3")
+                .Initializer.DescendantNodes()
+                .OfType<AnonymousFunctionExpressionSyntax>()
+                .Single();
 
             Assert.True(SyntaxUtilities.IsAsyncDeclaration(m0.ExpressionBody));
             Assert.True(SyntaxUtilities.IsAsyncDeclaration(m1.ExpressionBody));
@@ -222,7 +299,8 @@ class C
         [Fact]
         public void GetSuspensionPoints()
         {
-            var tree = SyntaxFactory.ParseSyntaxTree(@"
+            var tree = SyntaxFactory.ParseSyntaxTree(
+                @"
 class C
 {
     IEnumerable<int> X = new[] { 1, 2, 3 };
@@ -247,27 +325,45 @@ class C
         }
     }
 }
-");
+"
+            );
 
-            var x = tree.GetRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>().Single(m => m.Identifier.ValueText == "X");
-            var m1 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M1");
-            var m2 = tree.GetRoot().DescendantNodes().OfType<MethodDeclarationSyntax>().Single(m => m.Identifier.ValueText == "M2");
-            var f = m2.DescendantNodes().OfType<LocalFunctionStatementSyntax>().Single(m => m.Identifier.ValueText == "f");
+            var x = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Single(m => m.Identifier.ValueText == "X");
+            var m1 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M1");
+            var m2 = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<MethodDeclarationSyntax>()
+                .Single(m => m.Identifier.ValueText == "M2");
+            var f = m2.DescendantNodes()
+                .OfType<LocalFunctionStatementSyntax>()
+                .Single(m => m.Identifier.ValueText == "f");
 
             AssertEx.Empty(SyntaxUtilities.GetSuspensionPoints(x.Initializer));
-            AssertEx.Equal(new[] { "yield return 1;" }, SyntaxUtilities.GetSuspensionPoints(m1.Body).Select(n => n.ToString()));
+            AssertEx.Equal(
+                new[] { "yield return 1;" },
+                SyntaxUtilities.GetSuspensionPoints(m1.Body).Select(n => n.ToString())
+            );
             AssertEx.Empty(SyntaxUtilities.GetSuspensionPoints(m2.Body));
 
-            AssertEx.Equal(new[]
-            {
-                "yield return 1;",
-                "await Task.FromResult(1)",
-                "await foreach (var x in F()) { }",
-                "await foreach (var (x, y) in F()) { }",
-                "x1 = F1()",
-                "x2 = F2()",
-                "x3 = F3()",
-            }, SyntaxUtilities.GetSuspensionPoints(f.Body).Select(n => n.ToString()));
+            AssertEx.Equal(
+                new[]
+                {
+                    "yield return 1;",
+                    "await Task.FromResult(1)",
+                    "await foreach (var x in F()) { }",
+                    "await foreach (var (x, y) in F()) { }",
+                    "x1 = F1()",
+                    "x2 = F2()",
+                    "x3 = F3()",
+                },
+                SyntaxUtilities.GetSuspensionPoints(f.Body).Select(n => n.ToString())
+            );
         }
     }
 }

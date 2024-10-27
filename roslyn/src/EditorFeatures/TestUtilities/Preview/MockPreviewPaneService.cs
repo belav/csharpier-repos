@@ -16,16 +16,21 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.Preview
 {
-    [ExportWorkspaceService(typeof(IPreviewPaneService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IPreviewPaneService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class MockPreviewPaneService : IPreviewPaneService
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MockPreviewPaneService()
-        {
-        }
+        public MockPreviewPaneService() { }
 
-        public object GetPreviewPane(DiagnosticData diagnostic, IReadOnlyList<object> previewContents)
+        public object GetPreviewPane(
+            DiagnosticData diagnostic,
+            IReadOnlyList<object> previewContents
+        )
         {
             var contents = previewContents ?? SpecializedCollections.EmptyEnumerable<object>();
 

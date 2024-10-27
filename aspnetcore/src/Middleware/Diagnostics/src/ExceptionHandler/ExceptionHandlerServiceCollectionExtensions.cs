@@ -18,7 +18,10 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddExceptionHandler(this IServiceCollection services, Action<ExceptionHandlerOptions> configureOptions)
+    public static IServiceCollection AddExceptionHandler(
+        this IServiceCollection services,
+        Action<ExceptionHandlerOptions> configureOptions
+    )
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);
@@ -32,7 +35,11 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddExceptionHandler<TService>(this IServiceCollection services, Action<ExceptionHandlerOptions, TService> configureOptions) where TService : class
+    public static IServiceCollection AddExceptionHandler<TService>(
+        this IServiceCollection services,
+        Action<ExceptionHandlerOptions, TService> configureOptions
+    )
+        where TService : class
     {
         ArgumentNullException.ThrowIfNull(services);
         ArgumentNullException.ThrowIfNull(configureOptions);
@@ -48,7 +55,10 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// <typeparam name="T">The type of the exception handler implementation.</typeparam>
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <returns>The modified <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection AddExceptionHandler<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T>(this IServiceCollection services) where T : class, IExceptionHandler
+    public static IServiceCollection AddExceptionHandler<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] T
+    >(this IServiceCollection services)
+        where T : class, IExceptionHandler
     {
         return services.AddSingleton<IExceptionHandler, T>();
     }

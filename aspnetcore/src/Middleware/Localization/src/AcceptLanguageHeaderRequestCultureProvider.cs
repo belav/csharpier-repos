@@ -20,7 +20,9 @@ public class AcceptLanguageHeaderRequestCultureProvider : RequestCultureProvider
     public int MaximumAcceptLanguageHeaderValuesToTry { get; set; } = 3;
 
     /// <inheritdoc />
-    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(HttpContext httpContext)
+    public override Task<ProviderCultureResult?> DetermineProviderCultureResult(
+        HttpContext httpContext
+    )
     {
         ArgumentNullException.ThrowIfNull(httpContext);
 
@@ -40,12 +42,16 @@ public class AcceptLanguageHeaderRequestCultureProvider : RequestCultureProvider
             languages = languages.Take(MaximumAcceptLanguageHeaderValuesToTry);
         }
 
-        var orderedLanguages = languages.OrderByDescending(h => h, StringWithQualityHeaderValueComparer.QualityComparer)
-            .Select(x => x.Value).ToList();
+        var orderedLanguages = languages
+            .OrderByDescending(h => h, StringWithQualityHeaderValueComparer.QualityComparer)
+            .Select(x => x.Value)
+            .ToList();
 
         if (orderedLanguages.Count > 0)
         {
-            return Task.FromResult<ProviderCultureResult?>(new ProviderCultureResult(orderedLanguages));
+            return Task.FromResult<ProviderCultureResult?>(
+                new ProviderCultureResult(orderedLanguages)
+            );
         }
 
         return NullProviderCultureResult;

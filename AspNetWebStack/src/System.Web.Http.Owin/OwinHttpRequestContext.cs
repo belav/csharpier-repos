@@ -60,7 +60,9 @@ namespace System.Web.Http.Owin
             {
                 if (!_clientCertificateSet)
                 {
-                    _clientCertificate = _context.Get<X509Certificate2>(OwinConstants.ClientCertifiateKey);
+                    _clientCertificate = _context.Get<X509Certificate2>(
+                        OwinConstants.ClientCertifiateKey
+                    );
                     _clientCertificateSet = true;
                 }
 
@@ -144,10 +146,7 @@ namespace System.Web.Http.Owin
 
         public override IPrincipal Principal
         {
-            get
-            {
-                return _context.Request.User;
-            }
+            get { return _context.Request.User; }
             set
             {
                 _context.Request.User = value;
@@ -183,7 +182,9 @@ namespace System.Web.Http.Owin
                     // Set the virtual path root for link resolution and link generation to work
                     // OWIN spec requires request path base to be either the empty string or start with "/"
                     string requestPathBase = _context.Request.PathBase.Value;
-                    _virtualPathRoot = String.IsNullOrEmpty(requestPathBase) ? "/" : requestPathBase;
+                    _virtualPathRoot = String.IsNullOrEmpty(requestPathBase)
+                        ? "/"
+                        : requestPathBase;
                     _virtualPathRootSet = true;
                 }
 

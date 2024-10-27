@@ -28,10 +28,19 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 {
     protected override string DefaultScheme => JwtBearerDefaults.AuthenticationScheme;
     protected override Type HandlerType => typeof(JwtBearerHandler);
-    protected override bool SupportsSignIn { get => false; }
-    protected override bool SupportsSignOut { get => false; }
+    protected override bool SupportsSignIn
+    {
+        get => false;
+    }
+    protected override bool SupportsSignOut
+    {
+        get => false;
+    }
 
-    protected override void RegisterAuth(AuthenticationBuilder services, Action<JwtBearerOptions> configure)
+    protected override void RegisterAuth(
+        AuthenticationBuilder services,
+        Action<JwtBearerOptions> configure
+    )
     {
         services.AddJwtBearer(o =>
         {
@@ -40,9 +49,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
     }
 
-    private void ConfigureDefaults(JwtBearerOptions o)
-    {
-    }
+    private void ConfigureDefaults(JwtBearerOptions o) { }
 
     [Fact]
     public async Task BearerTokenValidation()
@@ -50,17 +57,15 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
-                new Claim(ClaimTypes.NameIdentifier, "Bob")
-            };
+        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "Bob") };
 
         var token = new JwtSecurityToken(
             issuer: "issuer.contoso.com",
             audience: "audience.contoso.com",
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
 
         var tokenText = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -87,17 +92,15 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
-                new Claim(ClaimTypes.NameIdentifier, "Bob")
-            };
+        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "Bob") };
 
         var token = new JwtSecurityToken(
             issuer: "issuer.contoso.com",
             audience: "audience.contoso.com",
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
 
         var tokenText = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -175,40 +178,42 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     [Fact]
     public async Task ThrowAtAuthenticationFailedEvent()
     {
-        using var host = await CreateHost(o =>
-        {
-            o.Events = new JwtBearerEvents
+        using var host = await CreateHost(
+            o =>
             {
-                OnAuthenticationFailed = context =>
+                o.Events = new JwtBearerEvents
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        context.Response.StatusCode = 401;
+                        throw new Exception();
+                    },
+                    OnMessageReceived = context =>
+                    {
+                        context.Token = "something";
+                        return Task.FromResult(0);
+                    },
+                };
+                o.UseSecurityTokenValidators = true;
+#pragma warning disable CS0618 // Type or member is obsolete
+                o.SecurityTokenValidators.Clear();
+                o.SecurityTokenValidators.Insert(0, new InvalidTokenValidator());
+#pragma warning restore CS0618 // Type or member is obsolete
+            },
+            async (context, next) =>
+            {
+                try
+                {
+                    await next();
+                    Assert.False(true, "Expected exception is not thrown");
+                }
+                catch (Exception)
                 {
                     context.Response.StatusCode = 401;
-                    throw new Exception();
-                },
-                OnMessageReceived = context =>
-                {
-                    context.Token = "something";
-                    return Task.FromResult(0);
+                    await context.Response.WriteAsync("i got this");
                 }
-            };
-            o.UseSecurityTokenValidators = true;
-#pragma warning disable CS0618 // Type or member is obsolete
-            o.SecurityTokenValidators.Clear();
-            o.SecurityTokenValidators.Insert(0, new InvalidTokenValidator());
-#pragma warning restore CS0618 // Type or member is obsolete
-        },
-        async (context, next) =>
-        {
-            try
-            {
-                await next();
-                Assert.False(true, "Expected exception is not thrown");
             }
-            catch (Exception)
-            {
-                context.Response.StatusCode = 401;
-                await context.Response.WriteAsync("i got this");
-            }
-        });
+        );
 
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signIn");
@@ -227,16 +232,18 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 {
                     var claims = new[]
                     {
-                            new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
-                            new Claim(ClaimTypes.Email, "bob@contoso.com"),
-                            new Claim(ClaimsIdentity.DefaultNameClaimType, "bob")
+                        new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"),
+                        new Claim(ClaimTypes.Email, "bob@contoso.com"),
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, "bob"),
                     };
 
-                    context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, context.Scheme.Name));
+                    context.Principal = new ClaimsPrincipal(
+                        new ClaimsIdentity(claims, context.Scheme.Name)
+                    );
                     context.Success();
 
                     return Task.FromResult<object>(null);
-                }
+                },
             };
             o.UseSecurityTokenValidators = true;
         });
@@ -290,7 +297,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         using var server = host.GetTestServer();
         var response = await SendAsync(server, "http://example.com/oauth", "Bearer someblob");
         Assert.Equal(HttpStatusCode.Unauthorized, response.Response.StatusCode);
-        Assert.Equal("Bearer error=\"invalid_token\"", response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            "Bearer error=\"invalid_token\"",
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
         Assert.Equal("", response.ResponseText);
     }
 
@@ -298,12 +308,27 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     [InlineData(typeof(SecurityTokenInvalidAudienceException), "The audience '(null)' is invalid")]
     [InlineData(typeof(SecurityTokenInvalidIssuerException), "The issuer '(null)' is invalid")]
     [InlineData(typeof(SecurityTokenNoExpirationException), "The token has no expiration")]
-    [InlineData(typeof(SecurityTokenInvalidLifetimeException), "The token lifetime is invalid; NotBefore: '(null)', Expires: '(null)'")]
-    [InlineData(typeof(SecurityTokenNotYetValidException), "The token is not valid before '01/01/0001 00:00:00'")]
-    [InlineData(typeof(SecurityTokenExpiredException), "The token expired at '01/01/0001 00:00:00'")]
+    [InlineData(
+        typeof(SecurityTokenInvalidLifetimeException),
+        "The token lifetime is invalid; NotBefore: '(null)', Expires: '(null)'"
+    )]
+    [InlineData(
+        typeof(SecurityTokenNotYetValidException),
+        "The token is not valid before '01/01/0001 00:00:00'"
+    )]
+    [InlineData(
+        typeof(SecurityTokenExpiredException),
+        "The token expired at '01/01/0001 00:00:00'"
+    )]
     [InlineData(typeof(SecurityTokenInvalidSignatureException), "The signature is invalid")]
-    [InlineData(typeof(SecurityTokenSignatureKeyNotFoundException), "The signature key was not found")]
-    public async Task ExceptionReportedInHeaderForAuthenticationFailures(Type errorType, string message)
+    [InlineData(
+        typeof(SecurityTokenSignatureKeyNotFoundException),
+        "The signature key was not found"
+    )]
+    public async Task ExceptionReportedInHeaderForAuthenticationFailures(
+        Type errorType,
+        string message
+    )
     {
         using var host = await CreateHost(options =>
         {
@@ -317,17 +342,35 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         using var server = host.GetTestServer();
         var response = await SendAsync(server, "http://example.com/oauth", "Bearer someblob");
         Assert.Equal(HttpStatusCode.Unauthorized, response.Response.StatusCode);
-        Assert.Equal($"Bearer error=\"invalid_token\", error_description=\"{message}\"", response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            $"Bearer error=\"invalid_token\", error_description=\"{message}\"",
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
         Assert.Equal("", response.ResponseText);
     }
 
     [Theory]
-    [InlineData(typeof(SecurityTokenInvalidAudienceException), "The audience 'Bad Audience' is invalid")]
+    [InlineData(
+        typeof(SecurityTokenInvalidAudienceException),
+        "The audience 'Bad Audience' is invalid"
+    )]
     [InlineData(typeof(SecurityTokenInvalidIssuerException), "The issuer 'Bad Issuer' is invalid")]
-    [InlineData(typeof(SecurityTokenInvalidLifetimeException), "The token lifetime is invalid; NotBefore: '01/15/2001 00:00:00', Expires: '02/20/2000 00:00:00'")]
-    [InlineData(typeof(SecurityTokenNotYetValidException), "The token is not valid before '01/15/2045 00:00:00'")]
-    [InlineData(typeof(SecurityTokenExpiredException), "The token expired at '02/20/2000 00:00:00'")]
-    public async Task ExceptionReportedInHeaderWithDetailsForAuthenticationFailures(Type errorType, string message)
+    [InlineData(
+        typeof(SecurityTokenInvalidLifetimeException),
+        "The token lifetime is invalid; NotBefore: '01/15/2001 00:00:00', Expires: '02/20/2000 00:00:00'"
+    )]
+    [InlineData(
+        typeof(SecurityTokenNotYetValidException),
+        "The token is not valid before '01/15/2045 00:00:00'"
+    )]
+    [InlineData(
+        typeof(SecurityTokenExpiredException),
+        "The token expired at '02/20/2000 00:00:00'"
+    )]
+    public async Task ExceptionReportedInHeaderWithDetailsForAuthenticationFailures(
+        Type errorType,
+        string message
+    )
     {
         using var host = await CreateHost(options =>
         {
@@ -341,7 +384,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         using var server = host.GetTestServer();
         var response = await SendAsync(server, "http://example.com/oauth", "Bearer someblob");
         Assert.Equal(HttpStatusCode.Unauthorized, response.Response.StatusCode);
-        Assert.Equal($"Bearer error=\"invalid_token\", error_description=\"{message}\"", response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            $"Bearer error=\"invalid_token\", error_description=\"{message}\"",
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
         Assert.Equal("", response.ResponseText);
     }
 
@@ -361,7 +407,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         using var server = host.GetTestServer();
         var response = await SendAsync(server, "http://example.com/oauth", "Bearer someblob");
         Assert.Equal(HttpStatusCode.Unauthorized, response.Response.StatusCode);
-        Assert.Equal("Bearer error=\"invalid_token\"", response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            "Bearer error=\"invalid_token\"",
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
         Assert.Equal("", response.ResponseText);
     }
 
@@ -373,16 +422,22 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException)));
-            options.SecurityTokenValidators.Add(new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException)));
+            options.SecurityTokenValidators.Add(
+                new InvalidTokenValidator(typeof(SecurityTokenInvalidAudienceException))
+            );
+            options.SecurityTokenValidators.Add(
+                new InvalidTokenValidator(typeof(SecurityTokenSignatureKeyNotFoundException))
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
         });
 
         using var server = host.GetTestServer();
         var response = await SendAsync(server, "http://example.com/oauth", "Bearer someblob");
         Assert.Equal(HttpStatusCode.Unauthorized, response.Response.StatusCode);
-        Assert.Equal("Bearer error=\"invalid_token\", error_description=\"The audience '(null)' is invalid; The signature key was not found\"",
-            response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            "Bearer error=\"invalid_token\", error_description=\"The audience '(null)' is invalid; The signature key was not found\"",
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
         Assert.Equal("", response.ResponseText);
     }
 
@@ -393,7 +448,11 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     [InlineData(null, "custom_description", "custom_uri")]
     [InlineData(null, "custom_description", null)]
     [InlineData(null, null, "custom_uri")]
-    public async Task ExceptionsReportedInHeaderExposesUserDefinedError(string error, string description, string uri)
+    public async Task ExceptionsReportedInHeaderExposesUserDefinedError(
+        string error,
+        string description,
+        string uri
+    )
     {
         using var host = await CreateHost(options =>
         {
@@ -406,7 +465,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     context.ErrorUri = uri;
 
                     return Task.FromResult(0);
-                }
+                },
             };
             options.UseSecurityTokenValidators = true;
         });
@@ -437,8 +496,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         }
         if (!string.IsNullOrEmpty(uri))
         {
-            if (!string.IsNullOrEmpty(error) ||
-                !string.IsNullOrEmpty(description))
+            if (!string.IsNullOrEmpty(error) || !string.IsNullOrEmpty(description))
             {
                 builder.Append(",");
             }
@@ -448,7 +506,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             builder.Append('\"');
         }
 
-        Assert.Equal(builder.ToString(), response.Response.Headers.WwwAuthenticate.First().ToString());
+        Assert.Equal(
+            builder.ToString(),
+            response.Response.Headers.WwwAuthenticate.First().ToString()
+        );
     }
 
     [Fact]
@@ -503,12 +564,14 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     identity.AddClaim(new Claim(ClaimTypes.NameIdentifier, "Bob le Magnifique"));
 
                     return Task.FromResult<object>(null);
-                }
+                },
             };
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme));
+            options.SecurityTokenValidators.Add(
+                new BlobTokenValidator(JwtBearerDefaults.AuthenticationScheme)
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
         });
 
@@ -529,15 +592,20 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 {
                     context.Token = "CustomToken";
                     return Task.FromResult<object>(null);
-                }
+                },
             };
             options.UseSecurityTokenValidators = true;
 #pragma warning disable CS0618 // Type or member is obsolete
             options.SecurityTokenValidators.Clear();
-            options.SecurityTokenValidators.Add(new BlobTokenValidator("JWT", token =>
-            {
-                Assert.Equal("CustomToken", token);
-            }));
+            options.SecurityTokenValidators.Add(
+                new BlobTokenValidator(
+                    "JWT",
+                    token =>
+                    {
+                        Assert.Equal("CustomToken", token);
+                    }
+                )
+            );
 #pragma warning restore CS0618 // Type or member is obsolete
         });
 
@@ -611,12 +679,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
 
         using var server = host.GetTestServer();
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
     }
 
     [Fact]
@@ -683,12 +756,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
 
         using var server = host.GetTestServer();
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
     }
 
     [Fact]
@@ -755,12 +833,17 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         });
 
         using var server = host.GetTestServer();
-        var exception = await Assert.ThrowsAsync<Exception>(delegate
-        {
-            return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
-        });
+        var exception = await Assert.ThrowsAsync<Exception>(
+            delegate
+            {
+                return SendAsync(server, "http://example.com/checkforerrors", "Bearer Token");
+            }
+        );
 
-        Assert.Equal("Authentication was aborted from user code.", exception.InnerException.Message);
+        Assert.Equal(
+            "Authentication was aborted from user code.",
+            exception.InnerException.Message
+        );
     }
 
     [Fact]
@@ -824,7 +907,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 OnForbidden = context =>
                 {
                     return Task.FromResult(0);
-                }
+                },
             };
             o.UseSecurityTokenValidators = true;
         });
@@ -852,7 +935,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                 {
                     context.Response.StatusCode = 418;
                     return context.Response.WriteAsync("You Shall Not Pass");
-                }
+                },
             };
             o.UseSecurityTokenValidators = true;
         });
@@ -879,34 +962,55 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                     return context.Response.WriteAsync("You Shall Not Pass");
                 }
                 return Task.CompletedTask;
-            }
+            },
         };
 
         using var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(app =>
                     {
                         app.UseAuthentication();
-                        app.Run(async (context) =>
-                        {
-                            // Simulate Forbidden By Multiple Authentication Schemas
-                            await context.ForbidAsync("JwtAuthSchemaOne");
-                            await context.ForbidAsync("JwtAuthSchemaTwo");
-                        });
+                        app.Run(
+                            async (context) =>
+                            {
+                                // Simulate Forbidden By Multiple Authentication Schemas
+                                await context.ForbidAsync("JwtAuthSchemaOne");
+                                await context.ForbidAsync("JwtAuthSchemaTwo");
+                            }
+                        );
                     })
                     .ConfigureServices(services =>
                     {
-                        services.AddAuthentication()
-                                .AddJwtBearer("JwtAuthSchemaOne", o => { o.Events = jwtBearerEvents; o.UseSecurityTokenValidators = true; })
-                                .AddJwtBearer("JwtAuthSchemaTwo", o => { o.Events = jwtBearerEvents; o.UseSecurityTokenValidators = true; });
-                    }))
+                        services
+                            .AddAuthentication()
+                            .AddJwtBearer(
+                                "JwtAuthSchemaOne",
+                                o =>
+                                {
+                                    o.Events = jwtBearerEvents;
+                                    o.UseSecurityTokenValidators = true;
+                                }
+                            )
+                            .AddJwtBearer(
+                                "JwtAuthSchemaTwo",
+                                o =>
+                                {
+                                    o.Events = jwtBearerEvents;
+                                    o.UseSecurityTokenValidators = true;
+                                }
+                            );
+                    })
+            )
             .Build();
 
         await host.StartAsync();
 
         using var server = host.GetTestServer();
-        var response = await server.CreateClient().SendAsync(new HttpRequestMessage(HttpMethod.Get, string.Empty));
+        var response = await server
+            .CreateClient()
+            .SendAsync(new HttpRequestMessage(HttpMethod.Get, string.Empty));
 
         Assert.Equal(418, (int)response.StatusCode);
         Assert.Equal("You Shall Not Pass", await response.Content.ReadAsStringAsync());
@@ -919,10 +1023,7 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
-                new Claim(ClaimTypes.NameIdentifier, "Bob")
-            };
+        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "Bob") };
 
         var token = new JwtSecurityToken(
             issuer: "issuer.contoso.com",
@@ -930,7 +1031,8 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
             claims: claims,
             notBefore: DateTime.Now.AddMinutes(-10),
             expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
 
         var tokenText = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -964,17 +1066,15 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
-            new Claim(ClaimTypes.NameIdentifier, "Bob")
-        };
+        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "Bob") };
 
         var token = new JwtSecurityToken(
             issuer: "issuer.contoso.com",
             audience: "audience.contoso.com",
             claims: claims,
             expires: DateTime.MaxValue,
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
 
         var tokenText = new JwtSecurityTokenHandler().WriteToken(token);
 
@@ -1005,7 +1105,10 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var elementValueUtc = elementValue.ToUniversalTime();
         // roundtrip DateTime.MaxValue through parsing because it is lossy and we
         // need equivalent values to compare against.
-        var max = DateTime.Parse(DateTime.MaxValue.ToString(CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
+        var max = DateTime.Parse(
+            DateTime.MaxValue.ToString(CultureInfo.InvariantCulture),
+            CultureInfo.InvariantCulture
+        );
 
         Assert.Equal(max, elementValueUtc);
     }
@@ -1014,15 +1117,37 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     public void CanReadJwtBearerOptionsFromConfig()
     {
         var services = new ServiceCollection().AddLogging();
-        var config = new ConfigurationBuilder().AddInMemoryCollection(new[]
-        {
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidIssuer", "dotnet-user-jwts"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidAudiences:0", "http://localhost:5000"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidAudiences:1", "https://localhost:5001"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:BackchannelTimeout", "00:01:00"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:RequireHttpsMetadata", "false"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SaveToken", "True"),
-        }).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new[]
+                {
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:ValidIssuer",
+                        "dotnet-user-jwts"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:ValidAudiences:0",
+                        "http://localhost:5000"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:ValidAudiences:1",
+                        "https://localhost:5001"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:BackchannelTimeout",
+                        "00:01:00"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:RequireHttpsMetadata",
+                        "false"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SaveToken",
+                        "True"
+                    ),
+                }
+            )
+            .Build();
         services.AddSingleton<IConfiguration>(config);
 
         // Act
@@ -1035,9 +1160,16 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var sp = services.BuildServiceProvider();
 
         // Assert
-        var jwtBearerOptions = sp.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>().Get(JwtBearerDefaults.AuthenticationScheme);
-        Assert.Equal(jwtBearerOptions.TokenValidationParameters.ValidIssuers, new[] { "dotnet-user-jwts" });
-        Assert.Equal(jwtBearerOptions.TokenValidationParameters.ValidAudiences, new[] { "http://localhost:5000", "https://localhost:5001" });
+        var jwtBearerOptions = sp.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>()
+            .Get(JwtBearerDefaults.AuthenticationScheme);
+        Assert.Equal(
+            jwtBearerOptions.TokenValidationParameters.ValidIssuers,
+            new[] { "dotnet-user-jwts" }
+        );
+        Assert.Equal(
+            jwtBearerOptions.TokenValidationParameters.ValidAudiences,
+            new[] { "http://localhost:5000", "https://localhost:5001" }
+        );
         Assert.Equal(jwtBearerOptions.BackchannelTimeout, TimeSpan.FromSeconds(60));
         Assert.False(jwtBearerOptions.RequireHttpsMetadata);
         Assert.True(jwtBearerOptions.SaveToken);
@@ -1050,17 +1182,45 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var services = new ServiceCollection().AddLogging();
         var firstKey = "qPG6tDtfxFYZifHW3sEueQ==";
         var secondKey = "6JPzXj6aOPdojlZdeLshaA==";
-        var config = new ConfigurationBuilder().AddInMemoryCollection(new[]
-        {
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidIssuers:0", "dotnet-user-jwts"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:ValidIssuers:1", "dotnet-user-jwts-2"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:0:Issuer", "dotnet-user-jwts"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:0:Value", firstKey),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:0:Length", "32"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:1:Issuer", "dotnet-user-jwts-2"),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:1:Value", secondKey),
-            new KeyValuePair<string, string>("Authentication:Schemes:Bearer:SigningKeys:1:Length", "32"),
-        }).Build();
+        var config = new ConfigurationBuilder()
+            .AddInMemoryCollection(
+                new[]
+                {
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:ValidIssuers:0",
+                        "dotnet-user-jwts"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:ValidIssuers:1",
+                        "dotnet-user-jwts-2"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:0:Issuer",
+                        "dotnet-user-jwts"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:0:Value",
+                        firstKey
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:0:Length",
+                        "32"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:1:Issuer",
+                        "dotnet-user-jwts-2"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:1:Value",
+                        secondKey
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Authentication:Schemes:Bearer:SigningKeys:1:Length",
+                        "32"
+                    ),
+                }
+            )
+            .Build();
         services.AddSingleton<IConfiguration>(config);
 
         // Act
@@ -1073,10 +1233,27 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var sp = services.BuildServiceProvider();
 
         // Assert
-        var jwtBearerOptions = sp.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>().Get(JwtBearerDefaults.AuthenticationScheme);
+        var jwtBearerOptions = sp.GetRequiredService<IOptionsMonitor<JwtBearerOptions>>()
+            .Get(JwtBearerDefaults.AuthenticationScheme);
         Assert.Equal(2, jwtBearerOptions.TokenValidationParameters.IssuerSigningKeys.Count());
-        Assert.Equal(firstKey, Convert.ToBase64String(jwtBearerOptions.TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>().FirstOrDefault()?.Key));
-        Assert.Equal(secondKey, Convert.ToBase64String(jwtBearerOptions.TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>().LastOrDefault()?.Key));
+        Assert.Equal(
+            firstKey,
+            Convert.ToBase64String(
+                jwtBearerOptions
+                    .TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>()
+                    .FirstOrDefault()
+                    ?.Key
+            )
+        );
+        Assert.Equal(
+            secondKey,
+            Convert.ToBase64String(
+                jwtBearerOptions
+                    .TokenValidationParameters.IssuerSigningKeys.OfType<SymmetricSecurityKey>()
+                    .LastOrDefault()
+                    ?.Key
+            )
+        );
     }
 
     class InvalidTokenValidator : ISecurityTokenValidator
@@ -1103,7 +1280,11 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 
         public bool CanReadToken(string securityToken) => true;
 
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public ClaimsPrincipal ValidateToken(
+            string securityToken,
+            TokenValidationParameters validationParameters,
+            out SecurityToken validatedToken
+        )
         {
             var constructor = ExceptionType.GetTypeInfo().GetConstructor(new[] { typeof(string) });
             var exception = (Exception)constructor.Invoke(new[] { ExceptionType.Name });
@@ -1135,19 +1316,33 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 
         public bool CanReadToken(string securityToken) => true;
 
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public ClaimsPrincipal ValidateToken(
+            string securityToken,
+            TokenValidationParameters validationParameters,
+            out SecurityToken validatedToken
+        )
         {
             if (ExceptionType == typeof(SecurityTokenInvalidAudienceException))
             {
-                throw new SecurityTokenInvalidAudienceException("SecurityTokenInvalidAudienceException") { InvalidAudience = "Bad Audience" };
+                throw new SecurityTokenInvalidAudienceException(
+                    "SecurityTokenInvalidAudienceException"
+                )
+                {
+                    InvalidAudience = "Bad Audience",
+                };
             }
             if (ExceptionType == typeof(SecurityTokenInvalidIssuerException))
             {
-                throw new SecurityTokenInvalidIssuerException("SecurityTokenInvalidIssuerException") { InvalidIssuer = "Bad Issuer" };
+                throw new SecurityTokenInvalidIssuerException("SecurityTokenInvalidIssuerException")
+                {
+                    InvalidIssuer = "Bad Issuer",
+                };
             }
             if (ExceptionType == typeof(SecurityTokenInvalidLifetimeException))
             {
-                throw new SecurityTokenInvalidLifetimeException("SecurityTokenInvalidLifetimeException")
+                throw new SecurityTokenInvalidLifetimeException(
+                    "SecurityTokenInvalidLifetimeException"
+                )
                 {
                     NotBefore = new DateTime(2001, 1, 15),
                     Expires = new DateTime(2000, 2, 20),
@@ -1181,8 +1376,8 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         public BlobTokenValidator(string authenticationScheme)
         {
             AuthenticationScheme = authenticationScheme;
-
         }
+
         public BlobTokenValidator(string authenticationScheme, Action<string> tokenValidator)
         {
             AuthenticationScheme = authenticationScheme;
@@ -1195,41 +1390,43 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 
         public int MaximumTokenSizeInBytes
         {
-            get
-            {
-                throw new NotImplementedException();
-            }
-            set
-            {
-                throw new NotImplementedException();
-            }
+            get { throw new NotImplementedException(); }
+            set { throw new NotImplementedException(); }
         }
 
         public bool CanReadToken(string securityToken) => true;
 
-        public ClaimsPrincipal ValidateToken(string securityToken, TokenValidationParameters validationParameters, out SecurityToken validatedToken)
+        public ClaimsPrincipal ValidateToken(
+            string securityToken,
+            TokenValidationParameters validationParameters,
+            out SecurityToken validatedToken
+        )
         {
             validatedToken = new TestSecurityToken();
             _tokenValidator?.Invoke(securityToken);
 
             var claims = new[]
             {
-                    // Make sure to use a different name identifier
-                    // than the one defined by CustomTokenValidated.
-                    new Claim(ClaimTypes.NameIdentifier, "Bob le Tout Puissant"),
-                    new Claim(ClaimTypes.Email, "bob@contoso.com"),
-                    new Claim(ClaimsIdentity.DefaultNameClaimType, "bob"),
-                };
+                // Make sure to use a different name identifier
+                // than the one defined by CustomTokenValidated.
+                new Claim(ClaimTypes.NameIdentifier, "Bob le Tout Puissant"),
+                new Claim(ClaimTypes.Email, "bob@contoso.com"),
+                new Claim(ClaimsIdentity.DefaultNameClaimType, "bob"),
+            };
 
             return new ClaimsPrincipal(new ClaimsIdentity(claims, AuthenticationScheme));
         }
     }
 
-    private static async Task<IHost> CreateHost(Action<JwtBearerOptions> options = null, Func<HttpContext, Func<Task>, Task> handlerBeforeAuth = null)
+    private static async Task<IHost> CreateHost(
+        Action<JwtBearerOptions> options = null,
+        Func<HttpContext, Func<Task>, Task> handlerBeforeAuth = null
+    )
     {
         var host = new HostBuilder()
             .ConfigureWebHost(builder =>
-                builder.UseTestServer()
+                builder
+                    .UseTestServer()
                     .Configure(app =>
                     {
                         if (handlerBeforeAuth != null)
@@ -1238,75 +1435,117 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
                         }
 
                         app.UseAuthentication();
-                        app.Use(async (context, next) =>
-                        {
-                            if (context.Request.Path == new PathString("/checkforerrors"))
+                        app.Use(
+                            async (context, next) =>
                             {
-                                var result = await context.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme); // this used to be "Automatic"
-                                if (result.Failure != null)
+                                if (context.Request.Path == new PathString("/checkforerrors"))
                                 {
-                                    throw new Exception("Failed to authenticate", result.Failure);
-                                }
-                                return;
-                            }
-                            else if (context.Request.Path == new PathString("/oauth"))
-                            {
-                                if (context.User == null ||
-                                    context.User.Identity == null ||
-                                    !context.User.Identity.IsAuthenticated)
-                                {
-                                    context.Response.StatusCode = 401;
-                                    // REVIEW: no more automatic challenge
-                                    await context.ChallengeAsync(JwtBearerDefaults.AuthenticationScheme);
+                                    var result = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    ); // this used to be "Automatic"
+                                    if (result.Failure != null)
+                                    {
+                                        throw new Exception(
+                                            "Failed to authenticate",
+                                            result.Failure
+                                        );
+                                    }
                                     return;
                                 }
-
-                                var identifier = context.User.FindFirst(ClaimTypes.NameIdentifier);
-                                if (identifier == null)
+                                else if (context.Request.Path == new PathString("/oauth"))
                                 {
-                                    context.Response.StatusCode = 500;
-                                    return;
-                                }
+                                    if (
+                                        context.User == null
+                                        || context.User.Identity == null
+                                        || !context.User.Identity.IsAuthenticated
+                                    )
+                                    {
+                                        context.Response.StatusCode = 401;
+                                        // REVIEW: no more automatic challenge
+                                        await context.ChallengeAsync(
+                                            JwtBearerDefaults.AuthenticationScheme
+                                        );
+                                        return;
+                                    }
 
-                                await context.Response.WriteAsync(identifier.Value);
+                                    var identifier = context.User.FindFirst(
+                                        ClaimTypes.NameIdentifier
+                                    );
+                                    if (identifier == null)
+                                    {
+                                        context.Response.StatusCode = 500;
+                                        return;
+                                    }
+
+                                    await context.Response.WriteAsync(identifier.Value);
+                                }
+                                else if (context.Request.Path == new PathString("/token"))
+                                {
+                                    var token = await context.GetTokenAsync("access_token");
+                                    await context.Response.WriteAsync(token);
+                                }
+                                else if (context.Request.Path == new PathString("/unauthorized"))
+                                {
+                                    // Simulate Authorization failure
+                                    var result = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                    await context.ChallengeAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/forbidden"))
+                                {
+                                    // Simulate Forbidden
+                                    await context.ForbidAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/signIn"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () =>
+                                            context.SignInAsync(
+                                                JwtBearerDefaults.AuthenticationScheme,
+                                                new ClaimsPrincipal()
+                                            )
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/signOut"))
+                                {
+                                    await Assert.ThrowsAsync<InvalidOperationException>(
+                                        () =>
+                                            context.SignOutAsync(
+                                                JwtBearerDefaults.AuthenticationScheme
+                                            )
+                                    );
+                                }
+                                else if (context.Request.Path == new PathString("/expiration"))
+                                {
+                                    var authenticationResult = await context.AuthenticateAsync(
+                                        JwtBearerDefaults.AuthenticationScheme
+                                    );
+                                    await context.Response.WriteAsJsonAsync(
+                                        new
+                                        {
+                                            Expires = authenticationResult.Properties?.ExpiresUtc,
+                                            Issued = authenticationResult.Properties?.IssuedUtc,
+                                        }
+                                    );
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
                             }
-                            else if (context.Request.Path == new PathString("/token"))
-                            {
-                                var token = await context.GetTokenAsync("access_token");
-                                await context.Response.WriteAsync(token);
-                            }
-                            else if (context.Request.Path == new PathString("/unauthorized"))
-                            {
-                                // Simulate Authorization failure
-                                var result = await context.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
-                                await context.ChallengeAsync(JwtBearerDefaults.AuthenticationScheme);
-                            }
-                            else if (context.Request.Path == new PathString("/forbidden"))
-                            {
-                                // Simulate Forbidden
-                                await context.ForbidAsync(JwtBearerDefaults.AuthenticationScheme);
-                            }
-                            else if (context.Request.Path == new PathString("/signIn"))
-                            {
-                                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignInAsync(JwtBearerDefaults.AuthenticationScheme, new ClaimsPrincipal()));
-                            }
-                            else if (context.Request.Path == new PathString("/signOut"))
-                            {
-                                await Assert.ThrowsAsync<InvalidOperationException>(() => context.SignOutAsync(JwtBearerDefaults.AuthenticationScheme));
-                            }
-                            else if (context.Request.Path == new PathString("/expiration"))
-                            {
-                                var authenticationResult = await context.AuthenticateAsync(JwtBearerDefaults.AuthenticationScheme);
-                                await context.Response.WriteAsJsonAsync(
-                                    new { Expires = authenticationResult.Properties?.ExpiresUtc, Issued = authenticationResult.Properties?.IssuedUtc });
-                            }
-                            else
-                            {
-                                await next(context);
-                            }
-                        });
+                        );
                     })
-                    .ConfigureServices(services => services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options)))
+                    .ConfigureServices(services =>
+                        services
+                            .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                            .AddJwtBearer(options)
+                    )
+            )
             .Build();
 
         await host.StartAsync();
@@ -1314,7 +1553,11 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
     }
 
     // TODO: see if we can share the TestExtensions SendAsync method (only diff is auth header)
-    private static async Task<Transaction> SendAsync(TestServer server, string uri, string authorizationHeader = null)
+    private static async Task<Transaction> SendAsync(
+        TestServer server,
+        string uri,
+        string authorizationHeader = null
+    )
     {
         var request = new HttpRequestMessage(HttpMethod.Get, uri);
         if (!string.IsNullOrEmpty(authorizationHeader))
@@ -1330,9 +1573,11 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
 
         transaction.ResponseText = await transaction.Response.Content.ReadAsStringAsync();
 
-        if (transaction.Response.Content != null &&
-            transaction.Response.Content.Headers.ContentType != null &&
-            transaction.Response.Content.Headers.ContentType.MediaType == "text/xml")
+        if (
+            transaction.Response.Content != null
+            && transaction.Response.Content.Headers.ContentType != null
+            && transaction.Response.Content.Headers.ContentType.MediaType == "text/xml"
+        )
         {
             transaction.ResponseElement = XElement.Parse(transaction.ResponseText);
         }
@@ -1345,17 +1590,15 @@ public class JwtBearerTests : SharedAuthenticationTests<JwtBearerOptions>
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(new string('a', 128)));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
-        var claims = new[]
-        {
-                new Claim(ClaimTypes.NameIdentifier, "Bob")
-            };
+        var claims = new[] { new Claim(ClaimTypes.NameIdentifier, "Bob") };
 
         var token = new JwtSecurityToken(
             issuer: "issuer.contoso.com",
             audience: "audience.contoso.com",
             claims: claims,
             expires: DateTime.Now.AddMinutes(30),
-            signingCredentials: creds);
+            signingCredentials: creds
+        );
 
         var tokenText = new JwtSecurityTokenHandler().WriteToken(token);
         return (tokenText, key);

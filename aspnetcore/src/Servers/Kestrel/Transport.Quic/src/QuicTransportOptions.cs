@@ -75,7 +75,11 @@ public sealed class QuicTransportOptions
 
         if (errorCode < MinErrorCode || errorCode > MaxErrorCode)
         {
-            throw new ArgumentOutOfRangeException(nameof(errorCode), errorCode, $"A value between {MinErrorCode} and {MaxErrorCode} is required.");
+            throw new ArgumentOutOfRangeException(
+                nameof(errorCode),
+                errorCode,
+                $"A value between {MinErrorCode} and {MaxErrorCode} is required."
+            );
         }
     }
 

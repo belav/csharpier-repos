@@ -25,9 +25,14 @@ namespace System.Threading.RateLimiting
         /// <returns></returns>
         public static PartitionedRateLimiter<TResource> Create<TResource, TPartitionKey>(
             Func<TResource, RateLimitPartition<TPartitionKey>> partitioner,
-            IEqualityComparer<TPartitionKey>? equalityComparer = null) where TPartitionKey : notnull
+            IEqualityComparer<TPartitionKey>? equalityComparer = null
+        )
+            where TPartitionKey : notnull
         {
-            return new DefaultPartitionedRateLimiter<TResource, TPartitionKey>(partitioner, equalityComparer);
+            return new DefaultPartitionedRateLimiter<TResource, TPartitionKey>(
+                partitioner,
+                equalityComparer
+            );
         }
 
         /// <summary>
@@ -52,7 +57,8 @@ namespace System.Threading.RateLimiting
         /// <exception cref="ArgumentNullException"><paramref name="limiters"/> is a null parameter.</exception>
         /// <exception cref="ArgumentException"><paramref name="limiters"/> is an empty array.</exception>
         public static PartitionedRateLimiter<TResource> CreateChained<TResource>(
-            params PartitionedRateLimiter<TResource>[] limiters)
+            params PartitionedRateLimiter<TResource>[] limiters
+        )
         {
             if (limiters is null)
             {

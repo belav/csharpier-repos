@@ -14,22 +14,27 @@ namespace Internal.TypeSystem.Ecma
 
         public AssemblyDefinition AssemblyDefinition
         {
-            get
-            {
-                return _assemblyDefinition;
-            }
+            get { return _assemblyDefinition; }
         }
 
         public override IAssemblyDesc Assembly
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
-        public EcmaAssembly(TypeSystemContext context, PEReader peReader, MetadataReader metadataReader, IModuleResolver customModuleResolver)
-            : base(context, peReader, metadataReader, containingAssembly: null, customModuleResolver: customModuleResolver)
+        public EcmaAssembly(
+            TypeSystemContext context,
+            PEReader peReader,
+            MetadataReader metadataReader,
+            IModuleResolver customModuleResolver
+        )
+            : base(
+                context,
+                peReader,
+                metadataReader,
+                containingAssembly: null,
+                customModuleResolver: customModuleResolver
+            )
         {
             if (!metadataReader.IsAssembly)
             {
@@ -67,8 +72,13 @@ namespace Internal.TypeSystem.Ecma
 
         public bool HasAssemblyCustomAttribute(string attributeNamespace, string attributeName)
         {
-            return !_metadataReader.GetCustomAttributeHandle(_assemblyDefinition.GetCustomAttributes(),
-                attributeNamespace, attributeName).IsNil;
+            return !_metadataReader
+                .GetCustomAttributeHandle(
+                    _assemblyDefinition.GetCustomAttributes(),
+                    attributeNamespace,
+                    attributeName
+                )
+                .IsNil;
         }
     }
 }

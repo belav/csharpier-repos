@@ -12,9 +12,7 @@ namespace System.ServiceModel.Configuration
 
     public sealed partial class ServiceHostingEnvironmentSection : ConfigurationSection
     {
-        public ServiceHostingEnvironmentSection()
-        {
-        }
+        public ServiceHostingEnvironmentSection() { }
 
         protected override void PostDeserialize()
         {
@@ -25,8 +23,12 @@ namespace System.ServiceModel.Configuration
                 return;
             }
 
-            if (PropertyValueOrigin.SetHere ==
-                ElementInformation.Properties[ConfigurationStrings.MinFreeMemoryPercentageToActivateService].ValueOrigin)
+            if (
+                PropertyValueOrigin.SetHere
+                == ElementInformation
+                    .Properties[ConfigurationStrings.MinFreeMemoryPercentageToActivateService]
+                    .ValueOrigin
+            )
             {
                 try
                 {
@@ -34,46 +36,78 @@ namespace System.ServiceModel.Configuration
                 }
                 catch (SecurityException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ConfigurationErrorsException(
-                        SR.GetString(SR.Hosting_MemoryGatesCheckFailedUnderPartialTrust)));
-
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ConfigurationErrorsException(
+                            SR.GetString(SR.Hosting_MemoryGatesCheckFailedUnderPartialTrust)
+                        )
+                    );
                 }
             }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.DefaultCollectionName, Options = ConfigurationPropertyOptions.IsDefaultCollection)]
+        [ConfigurationProperty(
+            ConfigurationStrings.DefaultCollectionName,
+            Options = ConfigurationPropertyOptions.IsDefaultCollection
+        )]
         public TransportConfigurationTypeElementCollection TransportConfigurationTypes
         {
-            get { return (TransportConfigurationTypeElementCollection)base[ConfigurationStrings.DefaultCollectionName]; }
+            get
+            {
+                return (TransportConfigurationTypeElementCollection)
+                    base[ConfigurationStrings.DefaultCollectionName];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.BaseAddressPrefixFilters, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.BaseAddressPrefixFilters,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public BaseAddressPrefixFilterElementCollection BaseAddressPrefixFilters
         {
-            get { return (BaseAddressPrefixFilterElementCollection)base[ConfigurationStrings.BaseAddressPrefixFilters]; }
+            get
+            {
+                return (BaseAddressPrefixFilterElementCollection)
+                    base[ConfigurationStrings.BaseAddressPrefixFilters];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ServiceActivations, Options = ConfigurationPropertyOptions.None)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ServiceActivations,
+            Options = ConfigurationPropertyOptions.None
+        )]
         public ServiceActivationElementCollection ServiceActivations
         {
-            get { return (ServiceActivationElementCollection)base[ConfigurationStrings.ServiceActivations]; }
+            get
+            {
+                return (ServiceActivationElementCollection)
+                    base[ConfigurationStrings.ServiceActivations];
+            }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.AspNetCompatibilityEnabled, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.AspNetCompatibilityEnabled,
+            DefaultValue = false
+        )]
         public bool AspNetCompatibilityEnabled
         {
             get { return (bool)base[ConfigurationStrings.AspNetCompatibilityEnabled]; }
             set { base[ConfigurationStrings.AspNetCompatibilityEnabled] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.CloseIdleServicesAtLowMemory, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.CloseIdleServicesAtLowMemory,
+            DefaultValue = false
+        )]
         public bool CloseIdleServicesAtLowMemory
         {
             get { return (bool)base[ConfigurationStrings.CloseIdleServicesAtLowMemory]; }
             set { base[ConfigurationStrings.CloseIdleServicesAtLowMemory] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MinFreeMemoryPercentageToActivateService, DefaultValue = 5)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MinFreeMemoryPercentageToActivateService,
+            DefaultValue = 5
+        )]
         [IntegerValidator(MinValue = 0, MaxValue = 99)]
         public int MinFreeMemoryPercentageToActivateService
         {
@@ -81,7 +115,10 @@ namespace System.ServiceModel.Configuration
             set { base[ConfigurationStrings.MinFreeMemoryPercentageToActivateService] = value; }
         }
 
-        [ConfigurationProperty(ConfigurationStrings.MultipleSiteBindingsEnabled, DefaultValue = false)]
+        [ConfigurationProperty(
+            ConfigurationStrings.MultipleSiteBindingsEnabled,
+            DefaultValue = false
+        )]
         public bool MultipleSiteBindingsEnabled
         {
             get { return (bool)base[ConfigurationStrings.MultipleSiteBindingsEnabled]; }
@@ -90,18 +127,23 @@ namespace System.ServiceModel.Configuration
 
         internal static ServiceHostingEnvironmentSection GetSection()
         {
-            return (ServiceHostingEnvironmentSection)ConfigurationHelpers.GetSection(ConfigurationStrings.ServiceHostingEnvironmentSectionPath);
+            return (ServiceHostingEnvironmentSection)
+                ConfigurationHelpers.GetSection(
+                    ConfigurationStrings.ServiceHostingEnvironmentSectionPath
+                );
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Calls Critical method UnsafeGetSection which elevates in order to fetch config."
-            + "Caller must guard access to resultant config section.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Calls Critical method UnsafeGetSection which elevates in order to fetch config."
+                + "Caller must guard access to resultant config section."
+        )]
         [SecurityCritical]
         internal static ServiceHostingEnvironmentSection UnsafeGetSection()
         {
-            return (ServiceHostingEnvironmentSection)ConfigurationHelpers.UnsafeGetSection(ConfigurationStrings.ServiceHostingEnvironmentSectionPath);
+            return (ServiceHostingEnvironmentSection)
+                ConfigurationHelpers.UnsafeGetSection(
+                    ConfigurationStrings.ServiceHostingEnvironmentSectionPath
+                );
         }
     }
 }
-
-
-

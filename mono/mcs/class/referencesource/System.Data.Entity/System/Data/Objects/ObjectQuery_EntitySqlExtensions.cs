@@ -54,7 +54,7 @@ namespace System.Data.Objects
         #endregion
 
         #region Private Instance Members
-        
+
         // -------------------
         // Private Fields
         // -------------------
@@ -92,7 +92,7 @@ namespace System.Data.Objects
         /// <returns>
         ///   A new ObjectQuery instance.
         /// </returns>
-        public ObjectQuery (string commandText, ObjectContext context)
+        public ObjectQuery(string commandText, ObjectContext context)
             : this(new EntitySqlQueryState(typeof(T), commandText, false, context, null, null))
         {
             // SQLBUDT 447285: Ensure the assembly containing the entity's CLR type
@@ -103,7 +103,10 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(typeof(T), System.Reflection.Assembly.GetCallingAssembly());
+            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
+                typeof(T),
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
         }
 
         #endregion
@@ -130,7 +133,7 @@ namespace System.Data.Objects
         /// <returns>
         ///   A new ObjectQuery instance.
         /// </returns>
-        public ObjectQuery (string commandText, ObjectContext context, MergeOption mergeOption)
+        public ObjectQuery(string commandText, ObjectContext context, MergeOption mergeOption)
             : this(new EntitySqlQueryState(typeof(T), commandText, false, context, null, null))
         {
             EntityUtil.CheckArgumentMergeOption(mergeOption);
@@ -144,7 +147,10 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(typeof(T), System.Reflection.Assembly.GetCallingAssembly());
+            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
+                typeof(T),
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
         }
 
         #endregion
@@ -155,7 +161,7 @@ namespace System.Data.Objects
 
         /// <summary>
         ///   This method creates a new ObjectQuery instance that represents a scan over
-        ///   the specified <paramref name="entitySet"/>. This ObjectQuery carries the scan as <see cref="DbExpression"/> 
+        ///   the specified <paramref name="entitySet"/>. This ObjectQuery carries the scan as <see cref="DbExpression"/>
         ///   and as Entity SQL. This is needed to allow case-sensitive metadata access (provided by the <see cref="DbExpression"/> by default).
         ///   The context specifies the connection on which to execute the query as well as the metadata and result cache.
         ///   The merge option specifies how the cache should be populated/updated.
@@ -174,8 +180,22 @@ namespace System.Data.Objects
         /// <returns>
         ///   A new ObjectQuery instance.
         /// </returns>
-        internal ObjectQuery (EntitySetBase entitySet, ObjectContext context, MergeOption mergeOption)
-            : this(new EntitySqlQueryState(typeof(T), BuildScanEntitySetEsql(entitySet), entitySet.Scan(), false, context, null, null))
+        internal ObjectQuery(
+            EntitySetBase entitySet,
+            ObjectContext context,
+            MergeOption mergeOption
+        )
+            : this(
+                new EntitySqlQueryState(
+                    typeof(T),
+                    BuildScanEntitySetEsql(entitySet),
+                    entitySet.Scan(),
+                    false,
+                    context,
+                    null,
+                    null
+                )
+            )
         {
             EntityUtil.CheckArgumentMergeOption(mergeOption);
             this.QueryState.UserSpecifiedMergeOption = mergeOption;
@@ -188,23 +208,27 @@ namespace System.Data.Objects
             // If the entities in the user's result spans multiple assemblies, the
             // user must manually call LoadFromAssembly. *GetCallingAssembly returns
             // the assembly of the method that invoked the currently executing method.
-            context.MetadataWorkspace.ImplicitLoadAssemblyForType(typeof(T), System.Reflection.Assembly.GetCallingAssembly());
+            context.MetadataWorkspace.ImplicitLoadAssemblyForType(
+                typeof(T),
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
         }
 
         private static string BuildScanEntitySetEsql(EntitySetBase entitySet)
         {
             EntityUtil.CheckArgumentNull(entitySet, "entitySet");
             return String.Format(
-                    CultureInfo.InvariantCulture,
-                    "{0}.{1}",
-                    EntityUtil.QuoteIdentifier(entitySet.EntityContainer.Name),
-                    EntityUtil.QuoteIdentifier(entitySet.Name));
+                CultureInfo.InvariantCulture,
+                "{0}.{1}",
+                EntityUtil.QuoteIdentifier(entitySet.EntityContainer.Name),
+                EntityUtil.QuoteIdentifier(entitySet.Name)
+            );
         }
 
         #endregion
 
         #region Public Properties
-        
+
         /// <summary>
         ///   The name of the query, which can be used to identify the current sequence
         ///   by name in query-builder methods. By default, the value is "it".
@@ -214,17 +238,17 @@ namespace System.Data.Objects
         /// </exception>
         public string Name
         {
-            get
-            {
-                return this._name;
-            }
+            get { return this._name; }
             set
             {
                 EntityUtil.CheckArgumentNull(value, "value");
 
                 if (!ObjectParameter.ValidateParameterName(value))
                 {
-                    throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_InvalidQueryName(value), "value");
+                    throw EntityUtil.Argument(
+                        System.Data.Entity.Strings.ObjectQuery_InvalidQueryName(value),
+                        "value"
+                    );
                 }
 
                 this._name = value;
@@ -246,7 +270,7 @@ namespace System.Data.Objects
         /// <returns>
         ///   a new ObjectQuery instance.
         /// </returns>
-        public ObjectQuery<T> Distinct ()
+        public ObjectQuery<T> Distinct()
         {
             if (IsLinqQuery(this))
             {
@@ -277,9 +301,11 @@ namespace System.Data.Objects
             {
                 return (ObjectQuery<T>)Queryable.Except(this, query);
             }
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Except(this.QueryState, query.QueryState));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Except(this.QueryState, query.QueryState)
+            );
         }
-                
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are the results
         ///   of this query, grouped by some criteria.
@@ -296,23 +322,41 @@ namespace System.Data.Objects
         /// <returns>
         ///   a new ObjectQuery instance.
         /// </returns>
-        public ObjectQuery<DbDataRecord> GroupBy(string keys, string projection, params ObjectParameter[] parameters)
+        public ObjectQuery<DbDataRecord> GroupBy(
+            string keys,
+            string projection,
+            params ObjectParameter[] parameters
+        )
         {
             EntityUtil.CheckArgumentNull(keys, "keys");
             EntityUtil.CheckArgumentNull(projection, "projection");
             EntityUtil.CheckArgumentNull(parameters, "parameters");
-            
+
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(keys))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidGroupKeyList, "keys");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidGroupKeyList,
+                    "keys"
+                );
             }
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(projection))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList, "projection");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList,
+                    "projection"
+                );
             }
 
-            return new ObjectQuery<DbDataRecord>(EntitySqlQueryBuilder.GroupBy(this.QueryState, this.Name, keys, projection, parameters));
+            return new ObjectQuery<DbDataRecord>(
+                EntitySqlQueryBuilder.GroupBy(
+                    this.QueryState,
+                    this.Name,
+                    keys,
+                    projection,
+                    parameters
+                )
+            );
         }
 
         /// <summary>
@@ -328,7 +372,7 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentNullException">
         ///   If the query parameter is null.
         /// </exception>
-        public ObjectQuery<T> Intersect (ObjectQuery<T> query)
+        public ObjectQuery<T> Intersect(ObjectQuery<T> query)
         {
             EntityUtil.CheckArgumentNull(query, "query");
 
@@ -336,9 +380,11 @@ namespace System.Data.Objects
             {
                 return (ObjectQuery<T>)Queryable.Intersect(this, query);
             }
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Intersect(this.QueryState, query.QueryState));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Intersect(this.QueryState, query.QueryState)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are filtered
         ///   to include only those of the specified type.
@@ -357,7 +403,10 @@ namespace System.Data.Objects
             }
 
             // SQLPUDT 484477: Make sure TResultType is loaded.
-            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(typeof(TResultType), System.Reflection.Assembly.GetCallingAssembly());
+            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(
+                typeof(TResultType),
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
 
             // Retrieve the O-Space type metadata for the result type specified. If no
             // metadata can be found for the specified type, fail. Otherwise, if the
@@ -366,15 +415,25 @@ namespace System.Data.Objects
             // enumerations, collections, etc.
             Type clrOfType = typeof(TResultType);
             EdmType ofType = null;
-            if (!this.QueryState.ObjectContext.MetadataWorkspace.GetItemCollection(DataSpace.OSpace).TryGetType(clrOfType.Name, clrOfType.Namespace ?? string.Empty, out ofType) ||
-                !(Helper.IsEntityType(ofType) || Helper.IsComplexType(ofType)))
+            if (
+                !this
+                    .QueryState.ObjectContext.MetadataWorkspace.GetItemCollection(DataSpace.OSpace)
+                    .TryGetType(clrOfType.Name, clrOfType.Namespace ?? string.Empty, out ofType)
+                || !(Helper.IsEntityType(ofType) || Helper.IsComplexType(ofType))
+            )
             {
-                throw EntityUtil.EntitySqlError(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidResultType(typeof(TResultType).FullName));
+                throw EntityUtil.EntitySqlError(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidResultType(
+                        typeof(TResultType).FullName
+                    )
+                );
             }
 
-            return new ObjectQuery<TResultType>(EntitySqlQueryBuilder.OfType(this.QueryState, ofType, clrOfType));
+            return new ObjectQuery<TResultType>(
+                EntitySqlQueryBuilder.OfType(this.QueryState, ofType, clrOfType)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are the
         ///   results of this query, ordered by some criteria. Note that any relational
@@ -397,19 +456,24 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the sort key command text is empty.
         /// </exception>
-        public ObjectQuery<T> OrderBy (string keys, params ObjectParameter[] parameters)
+        public ObjectQuery<T> OrderBy(string keys, params ObjectParameter[] parameters)
         {
             EntityUtil.CheckArgumentNull(keys, "keys");
             EntityUtil.CheckArgumentNull(parameters, "parameters");
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(keys))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSortKeyList, "keys");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSortKeyList,
+                    "keys"
+                );
             }
 
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.OrderBy(this.QueryState, this.Name, keys, parameters));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.OrderBy(this.QueryState, this.Name, keys, parameters)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are data
         ///   records containing selected fields of the results of this query.
@@ -429,19 +493,27 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the projection list command text is empty.
         /// </exception>
-        public ObjectQuery<DbDataRecord> Select (string projection, params ObjectParameter[] parameters)
+        public ObjectQuery<DbDataRecord> Select(
+            string projection,
+            params ObjectParameter[] parameters
+        )
         {
             EntityUtil.CheckArgumentNull(projection, "projection");
             EntityUtil.CheckArgumentNull(parameters, "parameters");
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(projection))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList, "projection");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList,
+                    "projection"
+                );
             }
 
-            return new ObjectQuery<DbDataRecord>(EntitySqlQueryBuilder.Select(this.QueryState, this.Name, projection, parameters));
+            return new ObjectQuery<DbDataRecord>(
+                EntitySqlQueryBuilder.Select(this.QueryState, this.Name, projection, parameters)
+            );
         }
-         
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are a sequence
         ///   of values projected from the results of this query.
@@ -461,20 +533,37 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the projection list command text is empty.
         /// </exception>
-        public ObjectQuery<TResultType> SelectValue<TResultType> (string projection, params ObjectParameter[] parameters)
+        public ObjectQuery<TResultType> SelectValue<TResultType>(
+            string projection,
+            params ObjectParameter[] parameters
+        )
         {
             EntityUtil.CheckArgumentNull(projection, "projection");
             EntityUtil.CheckArgumentNull(parameters, "parameters");
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(projection))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList, "projection");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidProjectionList,
+                    "projection"
+                );
             }
 
             // SQLPUDT 484974: Make sure TResultType is loaded.
-            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(typeof(TResultType), System.Reflection.Assembly.GetCallingAssembly());
+            this.QueryState.ObjectContext.MetadataWorkspace.ImplicitLoadAssemblyForType(
+                typeof(TResultType),
+                System.Reflection.Assembly.GetCallingAssembly()
+            );
 
-            return new ObjectQuery<TResultType>(EntitySqlQueryBuilder.SelectValue(this.QueryState, this.Name, projection, parameters, typeof(TResultType)));
+            return new ObjectQuery<TResultType>(
+                EntitySqlQueryBuilder.SelectValue(
+                    this.QueryState,
+                    this.Name,
+                    projection,
+                    parameters,
+                    typeof(TResultType)
+                )
+            );
         }
 
         /// <summary>
@@ -501,7 +590,7 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the sort key or skip count command text is empty.
         /// </exception>
-        public ObjectQuery<T> Skip (string keys, string count, params ObjectParameter[] parameters)
+        public ObjectQuery<T> Skip(string keys, string count, params ObjectParameter[] parameters)
         {
             EntityUtil.CheckArgumentNull(keys, "keys");
             EntityUtil.CheckArgumentNull(count, "count");
@@ -509,17 +598,25 @@ namespace System.Data.Objects
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(keys))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSortKeyList, "keys");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSortKeyList,
+                    "keys"
+                );
             }
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(count))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSkipCount, "count");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidSkipCount,
+                    "count"
+                );
             }
 
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Skip(this.QueryState, this.Name, keys, count, parameters));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Skip(this.QueryState, this.Name, keys, count, parameters)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are the
         ///   first 'count' results of this query.
@@ -540,16 +637,21 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the top count command text is empty.
         /// </exception>
-        public ObjectQuery<T> Top (string count, params ObjectParameter[] parameters)
+        public ObjectQuery<T> Top(string count, params ObjectParameter[] parameters)
         {
             EntityUtil.CheckArgumentNull(count, "count");
 
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(count))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidTopCount, "count");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidTopCount,
+                    "count"
+                );
             }
 
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Top(this.QueryState, this.Name, count, parameters));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Top(this.QueryState, this.Name, count, parameters)
+            );
         }
 
         /// <summary>
@@ -566,7 +668,7 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentNullException">
         ///   If the query parameter is null.
         /// </exception>
-        public ObjectQuery<T> Union (ObjectQuery<T> query)
+        public ObjectQuery<T> Union(ObjectQuery<T> query)
         {
             EntityUtil.CheckArgumentNull(query, "query");
 
@@ -574,9 +676,11 @@ namespace System.Data.Objects
             {
                 return (ObjectQuery<T>)Queryable.Union(this, query);
             }
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Union(this.QueryState, query.QueryState));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Union(this.QueryState, query.QueryState)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are all of
         ///   the results of this query, plus all of the results of the other query,
@@ -591,13 +695,15 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentNullException">
         ///   If the query parameter is null.
         /// </exception>
-        public ObjectQuery<T> UnionAll (ObjectQuery<T> query)
+        public ObjectQuery<T> UnionAll(ObjectQuery<T> query)
         {
             EntityUtil.CheckArgumentNull(query, "query");
-            
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.UnionAll(this.QueryState, query.QueryState));
+
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.UnionAll(this.QueryState, query.QueryState)
+            );
         }
-        
+
         /// <summary>
         ///   This query-builder method creates a new query whose results are the
         ///   results of this query filtered by some criteria.
@@ -617,19 +723,24 @@ namespace System.Data.Objects
         /// <exception cref="ArgumentException">
         ///   If the filter predicate command text is empty.
         /// </exception>
-        public ObjectQuery<T> Where (string predicate, params ObjectParameter[] parameters)
+        public ObjectQuery<T> Where(string predicate, params ObjectParameter[] parameters)
         {
             EntityUtil.CheckArgumentNull(predicate, "predicate");
             EntityUtil.CheckArgumentNull(parameters, "parameters");
-            
+
             if (StringUtil.IsNullOrEmptyOrWhiteSpace(predicate))
             {
-                throw EntityUtil.Argument(System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidFilterPredicate, "predicate");
+                throw EntityUtil.Argument(
+                    System.Data.Entity.Strings.ObjectQuery_QueryBuilder_InvalidFilterPredicate,
+                    "predicate"
+                );
             }
 
-            return new ObjectQuery<T>(EntitySqlQueryBuilder.Where(this.QueryState, this.Name, predicate, parameters));
+            return new ObjectQuery<T>(
+                EntitySqlQueryBuilder.Where(this.QueryState, this.Name, predicate, parameters)
+            );
         }
 
-        #endregion        
+        #endregion
     }
 }

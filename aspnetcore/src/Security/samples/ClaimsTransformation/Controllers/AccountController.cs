@@ -26,7 +26,11 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(string userName, string password, string returnUrl = null)
+    public async Task<IActionResult> Login(
+        string userName,
+        string password,
+        string returnUrl = null
+    )
     {
         ViewData["ReturnUrl"] = returnUrl;
 
@@ -34,12 +38,21 @@ public class AccountController : Controller
         if (ValidateLogin(userName, password))
         {
             var claims = new List<Claim>
-                {
-                    new Claim("user", userName),
-                    new Claim("role", "Member")
-                };
+            {
+                new Claim("user", userName),
+                new Claim("role", "Member"),
+            };
 
-            await HttpContext.SignInAsync(new ClaimsPrincipal(new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme, "user", "role")));
+            await HttpContext.SignInAsync(
+                new ClaimsPrincipal(
+                    new ClaimsIdentity(
+                        claims,
+                        CookieAuthenticationDefaults.AuthenticationScheme,
+                        "user",
+                        "role"
+                    )
+                )
+            );
 
             if (Url.IsLocalUrl(returnUrl))
             {

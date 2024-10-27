@@ -20,18 +20,27 @@ namespace System.Resources.Tests
         public static void VerifyMethodsCalledWithMakeGenericMethod()
         {
             Type type = typeof(ResourceReader);
-            MethodInfo mi = type.GetMethod("CreateUntypedDelegate", BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo mi = type.GetMethod(
+                "CreateUntypedDelegate",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
 
             Type[] genericTypes = mi.GetGenericArguments();
             if (genericTypes != null)
             {
-                foreach(Type genericType in genericTypes)
+                foreach (Type genericType in genericTypes)
                 {
                     // The generic type should not have DynamicallyAccessedMembersAttribute on it.
-                    Assert.Null(genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>());
+                    Assert.Null(
+                        genericType.GetCustomAttribute<DynamicallyAccessedMembersAttribute>()
+                    );
 
                     // The generic type should not have a 'where new()' constraint since that will tell the trimmer to keep the ctor
-                    Assert.False(genericType.GenericParameterAttributes.HasFlag(GenericParameterAttributes.DefaultConstructorConstraint));
+                    Assert.False(
+                        genericType.GenericParameterAttributes.HasFlag(
+                            GenericParameterAttributes.DefaultConstructorConstraint
+                        )
+                    );
                 }
             }
         }
@@ -40,13 +49,22 @@ namespace System.Resources.Tests
         public static void VerifyFeatureSwitchGeneratesTheRightException()
         {
             var remoteInvokeOptions = new RemoteInvokeOptions();
-            remoteInvokeOptions.RuntimeConfigurationOptions.Add("System.Resources.ResourceManager.AllowCustomResourceTypes", false);
+            remoteInvokeOptions.RuntimeConfigurationOptions.Add(
+                "System.Resources.ResourceManager.AllowCustomResourceTypes",
+                false
+            );
 
-            using var handle = RemoteExecutor.Invoke(() =>
-            {
-                ResourceManager rm = new ResourceManager("System.Resources.Tests.Resources.CustomReader", typeof(TrimCompatibilityTests).Assembly);
-                Assert.Throws<NotSupportedException>(() => rm.GetObject("myGuid"));
-            }, remoteInvokeOptions);
+            using var handle = RemoteExecutor.Invoke(
+                () =>
+                {
+                    ResourceManager rm = new ResourceManager(
+                        "System.Resources.Tests.Resources.CustomReader",
+                        typeof(TrimCompatibilityTests).Assembly
+                    );
+                    Assert.Throws<NotSupportedException>(() => rm.GetObject("myGuid"));
+                },
+                remoteInvokeOptions
+            );
         }
     }
 }

@@ -13,21 +13,23 @@ public class ResultFilterAttributeTest
     public async Task ResultFilterAttribute_ResultFilter_Calls_OnResultExecuted()
     {
         await CommonFilterTest.ResultFilter_Calls_OnResultExecuted(
-            new Mock<ResultFilterAttribute>());
+            new Mock<ResultFilterAttribute>()
+        );
     }
 
     [Fact]
     public async Task ResultFilterAttribute_ResultFilter_SettingResult_DoesNotShortCircuit()
     {
         await CommonFilterTest.ResultFilter_SettingResult_DoesNotShortCircuit(
-            new Mock<ResultFilterAttribute>());
+            new Mock<ResultFilterAttribute>()
+        );
     }
 
     [Fact]
     public async Task ResultFilterAttribute_ResultFilter_SettingCancel_ShortCircuits()
     {
         await CommonFilterTest.ResultFilter_SettingCancel_ShortCircuits(
-            new Mock<ResultFilterAttribute>());
+            new Mock<ResultFilterAttribute>()
+        );
     }
 }
-

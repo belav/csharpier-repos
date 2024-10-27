@@ -9,13 +9,15 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp
     internal readonly record struct OmniSharpRenameOptions(
         bool RenameInComments,
         bool RenameInStrings,
-        bool RenameOverloads)
+        bool RenameOverloads
+    )
     {
-        internal SymbolRenameOptions ToRenameOptions()
-            => new(
+        internal SymbolRenameOptions ToRenameOptions() =>
+            new(
                 RenameOverloads: RenameOverloads,
                 RenameInStrings: RenameInStrings,
                 RenameInComments: RenameInComments,
-                RenameFile: false);
+                RenameFile: false
+            );
     }
 }

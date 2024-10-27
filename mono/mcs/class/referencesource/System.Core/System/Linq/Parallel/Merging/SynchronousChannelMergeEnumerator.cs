@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -37,11 +37,15 @@ namespace System.Linq.Parallel
         //
 
         internal SynchronousChannelMergeEnumerator(
-            QueryTaskGroupState taskGroupState, SynchronousChannel<T>[] channels) : base(taskGroupState)
+            QueryTaskGroupState taskGroupState,
+            SynchronousChannel<T>[] channels
+        )
+            : base(taskGroupState)
         {
             Contract.Assert(channels != null);
 #if DEBUG
-            foreach (SynchronousChannel<T> c in channels) Contract.Assert(c != null);
+            foreach (SynchronousChannel<T> c in channels)
+                Contract.Assert(c != null);
 #endif
 
             m_channels = channels;
@@ -64,7 +68,9 @@ namespace System.Linq.Parallel
                 // retrieving the current element. We throw.
                 if (m_channelIndex == -1 || m_channelIndex == m_channels.Length)
                 {
-                    throw new InvalidOperationException(SR.GetString(SR.PLINQ_CommonEnumerator_Current_NotStarted));
+                    throw new InvalidOperationException(
+                        SR.GetString(SR.PLINQ_CommonEnumerator_Current_NotStarted)
+                    );
                 }
 
                 return m_currentElement;

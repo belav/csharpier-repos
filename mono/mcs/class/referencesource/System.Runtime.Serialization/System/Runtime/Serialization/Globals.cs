@@ -14,14 +14,22 @@ namespace System.Runtime.Serialization
     using System.Xml.Schema;
     using System.Xml.Serialization;
 
-    [Fx.Tag.SecurityNote(Critical = "Class holds static instances used in serializer. "
-        + "Static fields are marked SecurityCritical or readonly to prevent "
-        + "data from being modified or leaked to other components in appdomain.",
-        Safe = "All get-only properties marked safe since they only need to be protected for write.")]
+    [Fx.Tag.SecurityNote(
+        Critical = "Class holds static instances used in serializer. "
+            + "Static fields are marked SecurityCritical or readonly to prevent "
+            + "data from being modified or leaked to other components in appdomain.",
+        Safe = "All get-only properties marked safe since they only need to be protected for write."
+    )]
     static class Globals
     {
-        [Fx.Tag.SecurityNote(Miscellaneous = "RequiresReview - Changes to const could affect code generation logic; any changes should be reviewed.")]
-        internal const BindingFlags ScanAllMembers = BindingFlags.Static | BindingFlags.Instance | BindingFlags.NonPublic | BindingFlags.Public;
+        [Fx.Tag.SecurityNote(
+            Miscellaneous = "RequiresReview - Changes to const could affect code generation logic; any changes should be reviewed."
+        )]
+        internal const BindingFlags ScanAllMembers =
+            BindingFlags.Static
+            | BindingFlags.Instance
+            | BindingFlags.NonPublic
+            | BindingFlags.Public;
 
         [SecurityCritical]
         static XmlQualifiedName idQualifiedName;
@@ -31,7 +39,10 @@ namespace System.Runtime.Serialization
             get
             {
                 if (idQualifiedName == null)
-                    idQualifiedName = new XmlQualifiedName(Globals.IdLocalName, Globals.SerializationNamespace);
+                    idQualifiedName = new XmlQualifiedName(
+                        Globals.IdLocalName,
+                        Globals.SerializationNamespace
+                    );
                 return idQualifiedName;
             }
         }
@@ -44,7 +55,10 @@ namespace System.Runtime.Serialization
             get
             {
                 if (refQualifiedName == null)
-                    refQualifiedName = new XmlQualifiedName(Globals.RefLocalName, Globals.SerializationNamespace);
+                    refQualifiedName = new XmlQualifiedName(
+                        Globals.RefLocalName,
+                        Globals.SerializationNamespace
+                    );
                 return refQualifiedName;
             }
         }
@@ -304,7 +318,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (typeOfXmlFormatCollectionWriterDelegate == null)
-                    typeOfXmlFormatCollectionWriterDelegate = typeof(XmlFormatCollectionWriterDelegate);
+                    typeOfXmlFormatCollectionWriterDelegate =
+                        typeof(XmlFormatCollectionWriterDelegate);
                 return typeOfXmlFormatCollectionWriterDelegate;
             }
         }
@@ -330,7 +345,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (typeOfXmlFormatCollectionReaderDelegate == null)
-                    typeOfXmlFormatCollectionReaderDelegate = typeof(XmlFormatCollectionReaderDelegate);
+                    typeOfXmlFormatCollectionReaderDelegate =
+                        typeof(XmlFormatCollectionReaderDelegate);
                 return typeOfXmlFormatCollectionReaderDelegate;
             }
         }
@@ -343,7 +359,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (typeOfXmlFormatGetOnlyCollectionReaderDelegate == null)
-                    typeOfXmlFormatGetOnlyCollectionReaderDelegate = typeof(XmlFormatGetOnlyCollectionReaderDelegate);
+                    typeOfXmlFormatGetOnlyCollectionReaderDelegate =
+                        typeof(XmlFormatGetOnlyCollectionReaderDelegate);
                 return typeOfXmlFormatGetOnlyCollectionReaderDelegate;
             }
         }
@@ -366,8 +383,10 @@ namespace System.Runtime.Serialization
         static Type typeOfDataContractAttribute;
         internal static Type TypeOfDataContractAttribute
         {
-            [Fx.Tag.SecurityNote(Critical = "Accesses critical field for attribute type.",
-                Safe = "Controls inputs and logic.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Accesses critical field for attribute type.",
+                Safe = "Controls inputs and logic."
+            )]
             [SecuritySafeCritical]
             get
             {
@@ -1009,7 +1028,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (typeOfDictionaryEnumerator == null)
-                    typeOfDictionaryEnumerator = typeof(CollectionDataContract.DictionaryEnumerator);
+                    typeOfDictionaryEnumerator =
+                        typeof(CollectionDataContract.DictionaryEnumerator);
                 return typeOfDictionaryEnumerator;
             }
         }
@@ -1022,7 +1042,8 @@ namespace System.Runtime.Serialization
             get
             {
                 if (typeOfGenericDictionaryEnumerator == null)
-                    typeOfGenericDictionaryEnumerator = typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
+                    typeOfGenericDictionaryEnumerator =
+                        typeof(CollectionDataContract.GenericDictionaryEnumerator<,>);
                 return typeOfGenericDictionaryEnumerator;
             }
         }
@@ -1106,34 +1127,46 @@ namespace System.Runtime.Serialization
         }
 
 #if MONO_FEATURE_CAS
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of SecurityPermission that we will Demand for SerializationFormatter."
-            + " Should not be modified to something else.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of SecurityPermission that we will Demand for SerializationFormatter."
+                + " Should not be modified to something else."
+        )]
         [SecurityCritical]
         static SecurityPermission serializationFormatterPermission;
         public static SecurityPermission SerializationFormatterPermission
         {
-            [Fx.Tag.SecurityNote(Critical = "Sets and accesses instance of SecurityPermission that we will Demand for SerializationFormatter.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Sets and accesses instance of SecurityPermission that we will Demand for SerializationFormatter."
+            )]
             [SecurityCritical]
             get
             {
                 if (serializationFormatterPermission == null)
-                    serializationFormatterPermission = new SecurityPermission(SecurityPermissionFlag.SerializationFormatter);
+                    serializationFormatterPermission = new SecurityPermission(
+                        SecurityPermissionFlag.SerializationFormatter
+                    );
                 return serializationFormatterPermission;
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Holds instance of ReflectionPermission that we will Demand for MemberAccess."
-            + " Should not be modified to something else.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Holds instance of ReflectionPermission that we will Demand for MemberAccess."
+                + " Should not be modified to something else."
+        )]
         [SecurityCritical]
         static ReflectionPermission memberAccessPermission;
         public static ReflectionPermission MemberAccessPermission
         {
-            [Fx.Tag.SecurityNote(Critical = "Sets and accesses instance of ReflectionPermission that we will Demand for MemberAccess.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Sets and accesses instance of ReflectionPermission that we will Demand for MemberAccess."
+            )]
             [SecurityCritical]
             get
             {
                 if (memberAccessPermission == null)
-                    memberAccessPermission = new ReflectionPermission(ReflectionPermissionFlag.MemberAccess);
+                    memberAccessPermission = new ReflectionPermission(
+                        ReflectionPermissionFlag.MemberAccess
+                    );
                 return memberAccessPermission;
             }
         }
@@ -1143,11 +1176,14 @@ namespace System.Runtime.Serialization
         public const bool DefaultEmitDefaultValue = true;
         public const int DefaultOrder = 0;
         public const bool DefaultIsReference = false;
+
         // The value string.Empty aids comparisons (can do simple length checks
         //     instead of string comparison method calls in IL.)
         public readonly static string NewObjectId = string.Empty;
-        public const string SimpleSRSInternalsVisiblePattern = @"^[\s]*System\.Runtime\.Serialization[\s]*$";
-        public const string FullSRSInternalsVisiblePattern = @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00000000000000000400000000000000)[\s]*$";
+        public const string SimpleSRSInternalsVisiblePattern =
+            @"^[\s]*System\.Runtime\.Serialization[\s]*$";
+        public const string FullSRSInternalsVisiblePattern =
+            @"^[\s]*System\.Runtime\.Serialization[\s]*,[\s]*PublicKey[\s]*=[\s]*(?i:00000000000000000400000000000000)[\s]*$";
         public const string NullObjectId = null;
         public const string Space = " ";
         public const string OpenBracket = "[";
@@ -1158,7 +1194,8 @@ namespace System.Runtime.Serialization
         public const string SerPrefix = "z";
         public const string SerPrefixForSchema = "ser";
         public const string ElementPrefix = "q";
-        public const string DataContractXsdBaseNamespace = "http://schemas.datacontract.org/2004/07/";
+        public const string DataContractXsdBaseNamespace =
+            "http://schemas.datacontract.org/2004/07/";
         public const string DataContractXmlNamespace = DataContractXsdBaseNamespace + "System.Xml";
         public const string SchemaInstanceNamespace = XmlSchema.InstanceNamespace;
         public const string SchemaNamespace = XmlSchema.Namespace;
@@ -1175,7 +1212,8 @@ namespace System.Runtime.Serialization
         public const string XmlnsNamespace = "http://www.w3.org/2000/xmlns/";
         public const string XmlnsPrefix = "xmlns";
         public const string SchemaLocalName = "schema";
-        public const string CollectionsNamespace = "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
+        public const string CollectionsNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/Arrays";
         public const string DefaultClrNamespace = "GeneratedNamespace";
         public const string DefaultTypeName = "GeneratedType";
         public const string DefaultGeneratedMember = "GeneratedMember";
@@ -1208,14 +1246,17 @@ namespace System.Runtime.Serialization
         public const string EnumeratorFieldName = "enumerator";
         public const string SerializationEntryFieldName = "entry";
         public const string ExtensionDataSetMethod = "set_ExtensionData";
-        public const string ExtensionDataSetExplicitMethod = "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
+        public const string ExtensionDataSetExplicitMethod =
+            "System.Runtime.Serialization.IExtensibleDataObject.set_ExtensionData";
         public const string ExtensionDataObjectPropertyName = "ExtensionData";
         public const string ExtensionDataObjectFieldName = "extensionDataField";
         public const string AddMethodName = "Add";
         public const string ParseMethodName = "Parse";
         public const string GetCurrentMethodName = "get_Current";
+
         // NOTE: These values are used in schema below. If you modify any value, please make the same change in the schema.
-        public const string SerializationNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        public const string SerializationNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         public const string ClrTypeLocalName = "Type";
         public const string ClrAssemblyLocalName = "Assembly";
         public const string IsValueTypeLocalName = "IsValueType";
@@ -1241,7 +1282,8 @@ namespace System.Runtime.Serialization
         public const string MscorlibAssemblyName = "0";
         public const string MscorlibAssemblySimpleName = "mscorlib";
         public const string MscorlibFileName = MscorlibAssemblySimpleName + ".dll";
-        public const string SerializationSchema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string SerializationSchema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema elementFormDefault='qualified' attributeFormDefault='qualified' xmlns:tns='http://schemas.microsoft.com/2003/10/Serialization/' targetNamespace='http://schemas.microsoft.com/2003/10/Serialization/' xmlns:xs='http://www.w3.org/2001/XMLSchema'>
   <xs:element name='anyType' nillable='true' type='xs:anyType' />
   <xs:element name='anyURI' nillable='true' type='xs:anyURI' />
@@ -1286,4 +1328,3 @@ namespace System.Runtime.Serialization
 ";
     }
 }
-

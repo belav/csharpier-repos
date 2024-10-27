@@ -11,31 +11,29 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         /// <summary>
         /// Matcher equivalent to (m*)
         /// </summary>
-        public static Matcher<T> Repeat<T>(Matcher<T> matcher)
-            => Matcher<T>.Repeat(matcher);
+        public static Matcher<T> Repeat<T>(Matcher<T> matcher) => Matcher<T>.Repeat(matcher);
 
         /// <summary>
         /// Matcher equivalent to (m+)
         /// </summary>
-        public static Matcher<T> OneOrMore<T>(Matcher<T> matcher)
-            => Matcher<T>.OneOrMore(matcher);
+        public static Matcher<T> OneOrMore<T>(Matcher<T> matcher) => Matcher<T>.OneOrMore(matcher);
 
         /// <summary>
         /// Matcher equivalent to (m_1|m_2|...|m_n)
         /// </summary>
-        public static Matcher<T> Choice<T>(params Matcher<T>[] matchers)
-            => Matcher<T>.Choice(matchers);
+        public static Matcher<T> Choice<T>(params Matcher<T>[] matchers) =>
+            Matcher<T>.Choice(matchers);
 
         /// <summary>
         /// Matcher equivalent to (m_1 ... m_n)
         /// </summary>
-        public static Matcher<T> Sequence<T>(params Matcher<T>[] matchers)
-            => Matcher<T>.Sequence(matchers);
+        public static Matcher<T> Sequence<T>(params Matcher<T>[] matchers) =>
+            Matcher<T>.Sequence(matchers);
 
         /// <summary>
         /// Matcher that matches an element if the provide predicate returns true.
         /// </summary>
-        public static Matcher<T> Single<T>(Func<T, bool> predicate, string description)
-            => Matcher<T>.Single(predicate, description);
+        public static Matcher<T> Single<T>(Func<T, bool> predicate, string description) =>
+            Matcher<T>.Single(predicate, description);
     }
 }

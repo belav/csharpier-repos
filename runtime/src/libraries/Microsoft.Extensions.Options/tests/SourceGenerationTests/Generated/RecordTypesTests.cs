@@ -14,15 +14,9 @@ public class RecordTypesTests
     [Fact]
     public void Invalid()
     {
-        var thirdModel = new ThirdModel
-        {
-            P6 = "1234",
-        };
+        var thirdModel = new ThirdModel { P6 = "1234" };
 
-        var secondModel = new SecondModel
-        {
-            P5 = "1234",
-        };
+        var secondModel = new SecondModel { P5 = "1234" };
 
         var firstModel = new FirstModel
         {
@@ -41,15 +35,9 @@ public class RecordTypesTests
     [Fact]
     public void Valid()
     {
-        var thirdModel = new ThirdModel
-        {
-            P6 = "12345",
-        };
+        var thirdModel = new ThirdModel { P6 = "12345" };
 
-        var secondModel = new SecondModel
-        {
-            P5 = "12345",
-        };
+        var secondModel = new SecondModel { P5 = "12345" };
 
         var firstModel = new FirstModel
         {

@@ -24,11 +24,15 @@ namespace System.Web.Http.Owin
     public class PassiveAuthenticationMessageHandler : DelegatingHandler
     {
         private static readonly Lazy<IPrincipal> _anonymousPrincipal = new Lazy<IPrincipal>(
-            () => new ClaimsPrincipal(new ClaimsIdentity()), isThreadSafe: true);
+            () => new ClaimsPrincipal(new ClaimsIdentity()),
+            isThreadSafe: true
+        );
 
         /// <inheritdoc />
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request,
-            CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -51,14 +55,20 @@ namespace System.Web.Http.Owin
             return response;
         }
 
-        private static IPrincipal SetCurrentPrincipal(HttpRequestMessage request, IPrincipal principal)
+        private static IPrincipal SetCurrentPrincipal(
+            HttpRequestMessage request,
+            IPrincipal principal
+        )
         {
             Contract.Assert(request != null);
 
             HttpRequestContext requestContext = request.GetRequestContext();
             if (requestContext == null)
             {
-                throw new ArgumentException(OwinResources.Request_RequestContextMustNotBeNull, "request");
+                throw new ArgumentException(
+                    OwinResources.Request_RequestContextMustNotBeNull,
+                    "request"
+                );
             }
 
             var previousPrincipal = requestContext.Principal;
@@ -75,10 +85,13 @@ namespace System.Web.Http.Owin
 
             if (authenticationManager == null)
             {
-                throw new InvalidOperationException(OwinResources.IAuthenticationManagerNotAvailable);
+                throw new InvalidOperationException(
+                    OwinResources.IAuthenticationManagerNotAvailable
+                );
             }
 
-            AuthenticationResponseChallenge currentChallenge = authenticationManager.AuthenticationResponseChallenge;
+            AuthenticationResponseChallenge currentChallenge =
+                authenticationManager.AuthenticationResponseChallenge;
 
             // A null challenge or challenge.AuthenticationTypes == null or empty represents the the default behavior
             // of running all active authentication middleware challenges.
@@ -87,13 +100,22 @@ namespace System.Web.Http.Owin
 
             if (currentChallenge == null)
             {
-                authenticationManager.AuthenticationResponseChallenge = new AuthenticationResponseChallenge(
-                    suppressAuthenticationTypes, new AuthenticationProperties());
+                authenticationManager.AuthenticationResponseChallenge =
+                    new AuthenticationResponseChallenge(
+                        suppressAuthenticationTypes,
+                        new AuthenticationProperties()
+                    );
             }
-            else if (currentChallenge.AuthenticationTypes == null || currentChallenge.AuthenticationTypes.Length == 0)
+            else if (
+                currentChallenge.AuthenticationTypes == null
+                || currentChallenge.AuthenticationTypes.Length == 0
+            )
             {
-                authenticationManager.AuthenticationResponseChallenge = new AuthenticationResponseChallenge(
-                    suppressAuthenticationTypes, currentChallenge.Properties);
+                authenticationManager.AuthenticationResponseChallenge =
+                    new AuthenticationResponseChallenge(
+                        suppressAuthenticationTypes,
+                        currentChallenge.Properties
+                    );
             }
         }
     }

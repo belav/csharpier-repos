@@ -16,7 +16,11 @@ namespace System.Net.Tests
         public static IEnumerable<object[]> HtmlDecode_TestData()
         {
             // Needs decoding
-            yield return new object[] { "Hello! &apos;&quot;&lt;&amp;&gt;\u2665&hearts;\u00E7&#xe7;&#231;", "Hello! '\"<&>\u2665\u2665\u00E7\u00E7\u00E7" };
+            yield return new object[]
+            {
+                "Hello! &apos;&quot;&lt;&amp;&gt;\u2665&hearts;\u00E7&#xe7;&#231;",
+                "Hello! '\"<&>\u2665\u2665\u00E7\u00E7\u00E7",
+            };
             yield return new object[] { "&#xD7FF;&#xd7ff;", "\uD7FF\uD7FF" };
             yield return new object[] { "&#xE000;&#xe000;", "\uE000\uE000" };
             yield return new object[] { "&#97;&#98;&#99;", "abc" };
@@ -49,7 +53,11 @@ namespace System.Net.Tests
 
             // Basic
             yield return new object[] { "Hello, world!", "Hello, world!" };
-            yield return new object[] { "Hello, world! \"<>\u2665\u00E7", "Hello, world! \"<>\u2665\u00E7" };
+            yield return new object[]
+            {
+                "Hello, world! \"<>\u2665\u00E7",
+                "Hello, world! \"<>\u2665\u00E7",
+            };
             yield return new object[] { "    ", "    " };
 
             // Empty
@@ -75,7 +83,11 @@ namespace System.Net.Tests
             // For more info: http://fishbowl.pastiche.org/2003/07/01/the_curse_of_apos/
             yield return new object[] { "'", "&#39;" };
 
-            yield return new object[] { "Hello! '\"<&>\u2665\u00E7 World", "Hello! &#39;&quot;&lt;&amp;&gt;\u2665&#231; World" };
+            yield return new object[]
+            {
+                "Hello! '\"<&>\u2665\u00E7 World",
+                "Hello! &#39;&quot;&lt;&amp;&gt;\u2665&#231; World",
+            };
             yield return new object[] { "<>\"\\&", "&lt;&gt;&quot;\\&amp;" };
             yield return new object[] { "\u00A0", "&#160;" };
             yield return new object[] { "\u00FF", "&#255;" };
@@ -86,8 +98,16 @@ namespace System.Net.Tests
             yield return new object[] { char.ConvertFromUtf32(144308), "&#144308;" };
             yield return new object[] { "\uD800\uDC00", "&#65536;" };
             yield return new object[] { "a\uD800\uDC00b", "a&#65536;b" };
-            yield return new object[] { "\uD83D\uDE01\uD83D\uDE02\uD83D\uDE03", "&#128513;&#128514;&#128515;" };
-            yield return new object[] { "a\uD83D\uDE01\uD83D\uDE02\uD83D\uDE03b", "a&#128513;&#128514;&#128515;b" };
+            yield return new object[]
+            {
+                "\uD83D\uDE01\uD83D\uDE02\uD83D\uDE03",
+                "&#128513;&#128514;&#128515;",
+            };
+            yield return new object[]
+            {
+                "a\uD83D\uDE01\uD83D\uDE02\uD83D\uDE03b",
+                "a&#128513;&#128514;&#128515;b",
+            };
 
             // High BMP non-chars
             yield return new object[] { "\uFFFD", "\uFFFD" };
@@ -128,8 +148,14 @@ namespace System.Net.Tests
         public static IEnumerable<Tuple<string, string>> UrlDecode_SharedTestData()
         {
             // Escaping needed - case insensitive hex
-            yield return Tuple.Create("%2F%5C%22%09Hello!+%E2%99%A5%3F%2F%5C%22%09World!+%E2%99%A5%3F%E2%99%A5", "/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665");
-            yield return Tuple.Create("%2f%5c%22%09Hello!+%e2%99%a5%3f%2f%5c%22%09World!+%e2%99%a5%3F%e2%99%a5", "/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665");
+            yield return Tuple.Create(
+                "%2F%5C%22%09Hello!+%E2%99%A5%3F%2F%5C%22%09World!+%E2%99%A5%3F%E2%99%A5",
+                "/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665"
+            );
+            yield return Tuple.Create(
+                "%2f%5c%22%09Hello!+%e2%99%a5%3f%2f%5c%22%09World!+%e2%99%a5%3F%e2%99%a5",
+                "/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665"
+            );
 
             // Unnecessary escaping
             yield return Tuple.Create("%61%62%63", "abc");
@@ -162,7 +188,10 @@ namespace System.Net.Tests
             yield return Tuple.Create("%1G", "%1G");
 
             // The "Baz" portion of "http://example.net/Baz" has been double-encoded - one iteration of UrlDecode() should produce a once-encoded string.
-            yield return Tuple.Create("http://example.net/%2542%2561%257A", "http://example.net/%42%61%7A");
+            yield return Tuple.Create(
+                "http://example.net/%2542%2561%257A",
+                "http://example.net/%42%61%7A"
+            );
             // The second iteration should return the original string
             yield return Tuple.Create("http://example.net/%42%61%7A", "http://example.net/Baz");
         }
@@ -170,7 +199,10 @@ namespace System.Net.Tests
         public static IEnumerable<Tuple<string, string>> UrlEncode_SharedTestData()
         {
             // RFC 3986 requires returned hex-encoded chars to be uppercase
-            yield return Tuple.Create("/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665", "%2F%5C%22%09Hello!+%E2%99%A5%3F%2F%5C%22%09World!+%E2%99%A5%3F%E2%99%A5");
+            yield return Tuple.Create(
+                "/\\\"\tHello! \u2665?/\\\"\tWorld! \u2665?\u2665",
+                "%2F%5C%22%09Hello!+%E2%99%A5%3F%2F%5C%22%09World!+%E2%99%A5%3F%E2%99%A5"
+            );
             yield return Tuple.Create("'", "%27");
             yield return Tuple.Create("\uD800\uDFFF", "%F0%90%8F%BF"); // Surrogate pairs should be encoded as 4 bytes together
 
@@ -309,15 +341,23 @@ namespace System.Net.Tests
         [Fact]
         public static void UrlDecodeToBytes_NullBytes_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bytes", () => WebUtility.UrlDecodeToBytes(null, 0, 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bytes",
+                () => WebUtility.UrlDecodeToBytes(null, 0, 1)
+            );
         }
 
         [Theory]
         [InlineData(-1)]
         [InlineData(2)]
-        public static void UrlDecodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(int offset)
+        public static void UrlDecodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(
+            int offset
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => WebUtility.UrlDecodeToBytes(new byte[1], offset, 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => WebUtility.UrlDecodeToBytes(new byte[1], offset, 1)
+            );
         }
 
         [Theory]
@@ -325,9 +365,16 @@ namespace System.Net.Tests
         [InlineData(1, 0, 2)]
         [InlineData(1, 1, 1)]
         [InlineData(3, 2, 2)]
-        public static void UrlDecodeToBytes_InvalidCount_ThrowsArgumentOutOfRangeException(int byteCount, int offset, int count)
+        public static void UrlDecodeToBytes_InvalidCount_ThrowsArgumentOutOfRangeException(
+            int byteCount,
+            int offset,
+            int count
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => WebUtility.UrlDecodeToBytes(new byte[byteCount], offset, count));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => WebUtility.UrlDecodeToBytes(new byte[byteCount], offset, count)
+            );
         }
 
         public static IEnumerable<object[]> UrlEncodeToBytes_TestData()
@@ -342,15 +389,45 @@ namespace System.Net.Tests
             // Nothing to encode
             yield return new object[] { new byte[] { 97 }, 0, 1, new byte[] { 97 } };
             yield return new object[] { new byte[] { 97 }, 1, 0, new byte[0] };
-            yield return new object[] { new byte[] { 97, 98, 99 }, 0, 3, new byte[] { 97, 98, 99 } };
+            yield return new object[]
+            {
+                new byte[] { 97, 98, 99 },
+                0,
+                3,
+                new byte[] { 97, 98, 99 },
+            };
             yield return new object[] { new byte[] { 97, 98, 99 }, 1, 2, new byte[] { 98, 99 } };
             yield return new object[] { new byte[] { 97, 98, 99 }, 1, 1, new byte[] { 98 } };
-            yield return new object[] { new byte[] { 97, 98, 99, 100 }, 1, 2, new byte[] { 98, 99 } };
-            yield return new object[] { new byte[] { 97, 98, 99, 100 }, 2, 2, new byte[] { 99, 100 } };
+            yield return new object[]
+            {
+                new byte[] { 97, 98, 99, 100 },
+                1,
+                2,
+                new byte[] { 98, 99 },
+            };
+            yield return new object[]
+            {
+                new byte[] { 97, 98, 99, 100 },
+                2,
+                2,
+                new byte[] { 99, 100 },
+            };
 
             // Mixture of ASCII and non-URL safe chars (full and in a range)
-            yield return new object[] { new byte[] { 97, 225, 136, 180, 98 }, 0, 5, new byte[] { 97, 37, 69, 49, 37, 56, 56, 37, 66, 52, 98 } };
-            yield return new object[] { new byte[] { 97, 225, 136, 180, 98 }, 1, 3, new byte[] { 37, 69, 49, 37, 56, 56, 37, 66, 52 } };
+            yield return new object[]
+            {
+                new byte[] { 97, 225, 136, 180, 98 },
+                0,
+                5,
+                new byte[] { 97, 37, 69, 49, 37, 56, 56, 37, 66, 52, 98 },
+            };
+            yield return new object[]
+            {
+                new byte[] { 97, 225, 136, 180, 98 },
+                1,
+                3,
+                new byte[] { 37, 69, 49, 37, 56, 56, 37, 66, 52 },
+            };
 
             // Empty
             yield return new object[] { new byte[0], 0, 0, new byte[0] };
@@ -372,15 +449,23 @@ namespace System.Net.Tests
         [Fact]
         public static void UrlEncodeToBytes_NullBytes_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("bytes", () => WebUtility.UrlEncodeToBytes(null, 0, 1));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "bytes",
+                () => WebUtility.UrlEncodeToBytes(null, 0, 1)
+            );
         }
 
         [Theory]
         [InlineData(-1)]
         [InlineData(2)]
-        public static void UrlEncodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(int offset)
+        public static void UrlEncodeToBytes_InvalidOffset_ThrowsArgumentOutOfRangeException(
+            int offset
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("offset", () => WebUtility.UrlEncodeToBytes(new byte[1], offset, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "offset",
+                () => WebUtility.UrlEncodeToBytes(new byte[1], offset, 0)
+            );
         }
 
         [Theory]
@@ -388,9 +473,16 @@ namespace System.Net.Tests
         [InlineData(1, 0, 2)]
         [InlineData(1, 1, 1)]
         [InlineData(3, 2, 2)]
-        public static void UrlEncodeToBytes_InvalidCount_ThrowsArgumentOutOfRangeExceptioh(int byteCount, int offset, int count)
+        public static void UrlEncodeToBytes_InvalidCount_ThrowsArgumentOutOfRangeExceptioh(
+            int byteCount,
+            int offset,
+            int count
+        )
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => WebUtility.UrlEncodeToBytes(new byte[byteCount], offset, count));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => WebUtility.UrlEncodeToBytes(new byte[byteCount], offset, count)
+            );
         }
 
         [Theory]
@@ -422,7 +514,12 @@ namespace System.Net.Tests
 
         [Theory]
         [InlineData("FooBarQuux", 3, 7, "BarQuux")]
-        public static void UrlEncodeToBytes_ExcludeIrrelevantData(string value, int offset, int count, string expected)
+        public static void UrlEncodeToBytes_ExcludeIrrelevantData(
+            string value,
+            int offset,
+            int count,
+            string expected
+        )
         {
             byte[] input = Encoding.UTF8.GetBytes(value);
             byte[] encoded = WebUtility.UrlEncodeToBytes(input, offset, count);

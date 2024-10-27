@@ -20,7 +20,5 @@ class StartupCaseInsensitive
         return services.BuildServiceProvider();
     }
 
-    public void ConfigureCaseInsensitive(IApplicationBuilder app)
-    {
-    }
+    public void ConfigureCaseInsensitive(IApplicationBuilder app) { }
 }

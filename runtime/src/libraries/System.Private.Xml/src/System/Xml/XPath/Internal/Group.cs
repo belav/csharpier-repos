@@ -13,9 +13,19 @@ namespace MS.Internal.Xml.XPath
         {
             _groupNode = groupNode;
         }
-        public override AstType Type { get { return AstType.Group; } }
-        public override XPathResultType ReturnType { get { return XPathResultType.NodeSet; } }
 
-        public AstNode GroupNode { get { return _groupNode; } }
+        public override AstType Type
+        {
+            get { return AstType.Group; }
+        }
+        public override XPathResultType ReturnType
+        {
+            get { return XPathResultType.NodeSet; }
+        }
+
+        public AstNode GroupNode
+        {
+            get { return _groupNode; }
+        }
     }
 }

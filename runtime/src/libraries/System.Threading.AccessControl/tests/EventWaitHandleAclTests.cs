@@ -16,11 +16,13 @@ namespace System.Threading.Tests
         public void EventWaitHandle_Create_NullSecurity()
         {
             CreateAndVerifyEventWaitHandle(
-                initialState: true,
-                mode: EventResetMode.AutoReset,
-                name: GetRandomName(),
-                expectedSecurity: null,
-                expectedCreatedNew: true).Dispose();
+                    initialState: true,
+                    mode: EventResetMode.AutoReset,
+                    name: GetRandomName(),
+                    expectedSecurity: null,
+                    expectedCreatedNew: true
+                )
+                .Dispose();
         }
 
         [Theory]
@@ -35,14 +37,16 @@ namespace System.Threading.Tests
                 mode: EventResetMode.AutoReset,
                 name,
                 security,
-                expectedCreatedNew: true);
+                expectedCreatedNew: true
+            );
 
             using EventWaitHandle handle2 = CreateAndVerifyEventWaitHandle(
                 initialState: true,
                 mode: EventResetMode.AutoReset,
                 name,
                 security,
-                expectedCreatedNew: true);
+                expectedCreatedNew: true
+            );
         }
 
         [Fact]
@@ -56,14 +60,16 @@ namespace System.Threading.Tests
                 mode: EventResetMode.AutoReset,
                 name,
                 security,
-                expectedCreatedNew: true);
+                expectedCreatedNew: true
+            );
 
             using EventWaitHandle handle2 = CreateAndVerifyEventWaitHandle(
                 initialState: true,
                 mode: EventResetMode.AutoReset,
                 name,
                 security,
-                expectedCreatedNew: false);
+                expectedCreatedNew: false
+            );
         }
 
         [Fact]
@@ -74,11 +80,13 @@ namespace System.Threading.Tests
             Assert.Throws<DirectoryNotFoundException>(() =>
             {
                 CreateEventWaitHandle(
-                    initialState: true,
-                    mode: EventResetMode.AutoReset,
-                    prefixedName,
-                    expectedSecurity: GetBasicEventWaitHandleSecurity(),
-                    expectedCreatedNew: true).Dispose();
+                        initialState: true,
+                        mode: EventResetMode.AutoReset,
+                        prefixedName,
+                        expectedSecurity: GetBasicEventWaitHandleSecurity(),
+                        expectedCreatedNew: true
+                    )
+                    .Dispose();
             });
         }
 
@@ -102,21 +110,24 @@ namespace System.Threading.Tests
                 Assert.Throws<ArgumentException>(() =>
                 {
                     CreateEventWaitHandle(
-                        initialState: true,
-                        mode,
-                        name,
-                        security,
-                        expectedCreatedNew: true).Dispose();
+                            initialState: true,
+                            mode,
+                            name,
+                            security,
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
                 });
             }
             else
             {
                 using EventWaitHandle created = CreateAndVerifyEventWaitHandle(
-                        initialState: true,
-                        mode,
-                        name,
-                        security,
-                        expectedCreatedNew: true);
+                    initialState: true,
+                    mode,
+                    name,
+                    security,
+                    expectedCreatedNew: true
+                );
 
                 using EventWaitHandle openedByName = EventWaitHandle.OpenExisting(name);
                 Assert.NotNull(openedByName);
@@ -135,56 +146,92 @@ namespace System.Threading.Tests
                 Assert.Throws<ArgumentException>(() =>
                 {
                     CreateEventWaitHandle(
-                        initialState: true,
-                        mode,
-                        GetRandomName(),
-                        GetBasicEventWaitHandleSecurity(),
-                        expectedCreatedNew: true).Dispose();
+                            initialState: true,
+                            mode,
+                            GetRandomName(),
+                            GetBasicEventWaitHandleSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
                 });
             }
             else
             {
-                Assert.Throws<ArgumentOutOfRangeException>("mode", () =>
-                {
-                    CreateEventWaitHandle(
-                        initialState: true,
-                        mode,
-                        GetRandomName(),
-                        GetBasicEventWaitHandleSecurity(),
-                        expectedCreatedNew: true).Dispose();
-                });
+                Assert.Throws<ArgumentOutOfRangeException>(
+                    "mode",
+                    () =>
+                    {
+                        CreateEventWaitHandle(
+                                initialState: true,
+                                mode,
+                                GetRandomName(),
+                                GetBasicEventWaitHandleSecurity(),
+                                expectedCreatedNew: true
+                            )
+                            .Dispose();
+                    }
+                );
             }
         }
 
         public static IEnumerable<object[]> EventWaitHandle_Create_SpecificParameters_MemberData() =>
             from initialState in new[] { true, false }
             from mode in new[] { EventResetMode.AutoReset, EventResetMode.ManualReset }
-            from rights in new[] { EventWaitHandleRights.FullControl, EventWaitHandleRights.Synchronize, EventWaitHandleRights.Modify, EventWaitHandleRights.Modify | EventWaitHandleRights.Synchronize }
+            from rights in new[]
+            {
+                EventWaitHandleRights.FullControl,
+                EventWaitHandleRights.Synchronize,
+                EventWaitHandleRights.Modify,
+                EventWaitHandleRights.Modify | EventWaitHandleRights.Synchronize,
+            }
             from accessControl in new[] { AccessControlType.Allow, AccessControlType.Deny }
             select new object[] { initialState, mode, rights, accessControl };
 
         [Theory]
         [MemberData(nameof(EventWaitHandle_Create_SpecificParameters_MemberData))]
-        public void EventWaitHandle_Create_SpecificParameters(bool initialState, EventResetMode mode, EventWaitHandleRights rights, AccessControlType accessControl)
+        public void EventWaitHandle_Create_SpecificParameters(
+            bool initialState,
+            EventResetMode mode,
+            EventWaitHandleRights rights,
+            AccessControlType accessControl
+        )
         {
-            EventWaitHandleSecurity security = GetEventWaitHandleSecurity(WellKnownSidType.BuiltinUsersSid, rights, accessControl);
+            EventWaitHandleSecurity security = GetEventWaitHandleSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                rights,
+                accessControl
+            );
             CreateAndVerifyEventWaitHandle(
-                initialState,
-                mode,
-                GetRandomName(),
-                security,
-                expectedCreatedNew: true).Dispose();
-
+                    initialState,
+                    mode,
+                    GetRandomName(),
+                    security,
+                    expectedCreatedNew: true
+                )
+                .Dispose();
         }
 
         [Fact]
         public void EventWaitHandle_OpenExisting()
         {
             string name = GetRandomName();
-            EventWaitHandleSecurity expectedSecurity = GetEventWaitHandleSecurity(WellKnownSidType.BuiltinUsersSid, EventWaitHandleRights.FullControl, AccessControlType.Allow);
-            using EventWaitHandle EventWaitHandleNew = CreateAndVerifyEventWaitHandle(initialState: true, EventResetMode.AutoReset, name, expectedSecurity, expectedCreatedNew: true);
+            EventWaitHandleSecurity expectedSecurity = GetEventWaitHandleSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                EventWaitHandleRights.FullControl,
+                AccessControlType.Allow
+            );
+            using EventWaitHandle EventWaitHandleNew = CreateAndVerifyEventWaitHandle(
+                initialState: true,
+                EventResetMode.AutoReset,
+                name,
+                expectedSecurity,
+                expectedCreatedNew: true
+            );
 
-            using EventWaitHandle EventWaitHandleExisting = EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl);
+            using EventWaitHandle EventWaitHandleExisting = EventWaitHandleAcl.OpenExisting(
+                name,
+                EventWaitHandleRights.FullControl
+            );
 
             VerifyHandles(EventWaitHandleNew, EventWaitHandleExisting);
             EventWaitHandleSecurity actualSecurity = EventWaitHandleExisting.GetAccessControl();
@@ -195,10 +242,26 @@ namespace System.Threading.Tests
         public void EventWaitHandle_TryOpenExisting()
         {
             string name = GetRandomName();
-            EventWaitHandleSecurity expectedSecurity = GetEventWaitHandleSecurity(WellKnownSidType.BuiltinUsersSid, EventWaitHandleRights.FullControl, AccessControlType.Allow);
-            using EventWaitHandle EventWaitHandleNew = CreateAndVerifyEventWaitHandle(initialState: true, EventResetMode.AutoReset, name, expectedSecurity, expectedCreatedNew: true);
+            EventWaitHandleSecurity expectedSecurity = GetEventWaitHandleSecurity(
+                WellKnownSidType.BuiltinUsersSid,
+                EventWaitHandleRights.FullControl,
+                AccessControlType.Allow
+            );
+            using EventWaitHandle EventWaitHandleNew = CreateAndVerifyEventWaitHandle(
+                initialState: true,
+                EventResetMode.AutoReset,
+                name,
+                expectedSecurity,
+                expectedCreatedNew: true
+            );
 
-            Assert.True(EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out EventWaitHandle EventWaitHandleExisting));
+            Assert.True(
+                EventWaitHandleAcl.TryOpenExisting(
+                    name,
+                    EventWaitHandleRights.FullControl,
+                    out EventWaitHandle EventWaitHandleExisting
+                )
+            );
             Assert.NotNull(EventWaitHandleExisting);
 
             VerifyHandles(EventWaitHandleNew, EventWaitHandleExisting);
@@ -217,7 +280,9 @@ namespace System.Threading.Tests
                 EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
             });
 
-            Assert.False(EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _));
+            Assert.False(
+                EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
+            );
         }
 
         [Fact]
@@ -229,7 +294,9 @@ namespace System.Threading.Tests
                 EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
             });
 
-            Assert.False(EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _));
+            Assert.False(
+                EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
+            );
         }
 
         [Fact]
@@ -241,7 +308,9 @@ namespace System.Threading.Tests
                 EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
             });
 
-            Assert.False(EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _));
+            Assert.False(
+                EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
+            );
         }
 
         [Fact]
@@ -278,12 +347,18 @@ namespace System.Threading.Tests
         {
             Assert.Throws<ArgumentException>(() =>
             {
-                EventWaitHandleAcl.OpenExisting(string.Empty, EventWaitHandleRights.FullControl).Dispose();
+                EventWaitHandleAcl
+                    .OpenExisting(string.Empty, EventWaitHandleRights.FullControl)
+                    .Dispose();
             });
 
             Assert.Throws<ArgumentException>(() =>
             {
-                EventWaitHandleAcl.TryOpenExisting(string.Empty, EventWaitHandleRights.FullControl, out _);
+                EventWaitHandleAcl.TryOpenExisting(
+                    string.Empty,
+                    EventWaitHandleRights.FullControl,
+                    out _
+                );
             });
         }
 
@@ -292,29 +367,62 @@ namespace System.Threading.Tests
             return GetEventWaitHandleSecurity(
                 WellKnownSidType.BuiltinUsersSid,
                 EventWaitHandleRights.FullControl,
-                AccessControlType.Allow);
+                AccessControlType.Allow
+            );
         }
 
-        private EventWaitHandleSecurity GetEventWaitHandleSecurity(WellKnownSidType sid, EventWaitHandleRights rights, AccessControlType accessControl)
+        private EventWaitHandleSecurity GetEventWaitHandleSecurity(
+            WellKnownSidType sid,
+            EventWaitHandleRights rights,
+            AccessControlType accessControl
+        )
         {
             EventWaitHandleSecurity security = new EventWaitHandleSecurity();
             SecurityIdentifier identity = new SecurityIdentifier(sid, null);
-            EventWaitHandleAccessRule accessRule = new EventWaitHandleAccessRule(identity, rights, accessControl);
+            EventWaitHandleAccessRule accessRule = new EventWaitHandleAccessRule(
+                identity,
+                rights,
+                accessControl
+            );
             security.AddAccessRule(accessRule);
             return security;
         }
 
-        private EventWaitHandle CreateEventWaitHandle(bool initialState, EventResetMode mode, string name, EventWaitHandleSecurity expectedSecurity, bool expectedCreatedNew)
+        private EventWaitHandle CreateEventWaitHandle(
+            bool initialState,
+            EventResetMode mode,
+            string name,
+            EventWaitHandleSecurity expectedSecurity,
+            bool expectedCreatedNew
+        )
         {
-            EventWaitHandle handle = EventWaitHandleAcl.Create(initialState, mode, name, out bool createdNew, expectedSecurity);
+            EventWaitHandle handle = EventWaitHandleAcl.Create(
+                initialState,
+                mode,
+                name,
+                out bool createdNew,
+                expectedSecurity
+            );
             Assert.NotNull(handle);
             Assert.Equal(expectedCreatedNew, createdNew);
             return handle;
         }
 
-        private EventWaitHandle CreateAndVerifyEventWaitHandle(bool initialState, EventResetMode mode, string name, EventWaitHandleSecurity expectedSecurity, bool expectedCreatedNew)
+        private EventWaitHandle CreateAndVerifyEventWaitHandle(
+            bool initialState,
+            EventResetMode mode,
+            string name,
+            EventWaitHandleSecurity expectedSecurity,
+            bool expectedCreatedNew
+        )
         {
-            EventWaitHandle eventHandle = CreateEventWaitHandle(initialState, mode, name, expectedSecurity, expectedCreatedNew);
+            EventWaitHandle eventHandle = CreateEventWaitHandle(
+                initialState,
+                mode,
+                name,
+                expectedSecurity,
+                expectedCreatedNew
+            );
 
             if (expectedSecurity != null)
             {
@@ -337,35 +445,57 @@ namespace System.Threading.Tests
             Assert.False(actual.SafeWaitHandle.IsInvalid);
         }
 
-        private void VerifyEventWaitHandleSecurity(EventWaitHandleSecurity expectedSecurity, EventWaitHandleSecurity actualSecurity)
+        private void VerifyEventWaitHandleSecurity(
+            EventWaitHandleSecurity expectedSecurity,
+            EventWaitHandleSecurity actualSecurity
+        )
         {
             Assert.Equal(typeof(EventWaitHandleRights), expectedSecurity.AccessRightType);
             Assert.Equal(typeof(EventWaitHandleRights), actualSecurity.AccessRightType);
 
-            List<EventWaitHandleAccessRule> expectedAccessRules = expectedSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<EventWaitHandleAccessRule>().ToList();
+            List<EventWaitHandleAccessRule> expectedAccessRules = expectedSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<EventWaitHandleAccessRule>()
+                .ToList();
 
-            List<EventWaitHandleAccessRule> actualAccessRules = actualSecurity.GetAccessRules(includeExplicit: true, includeInherited: false, typeof(SecurityIdentifier))
-                .Cast<EventWaitHandleAccessRule>().ToList();
+            List<EventWaitHandleAccessRule> actualAccessRules = actualSecurity
+                .GetAccessRules(
+                    includeExplicit: true,
+                    includeInherited: false,
+                    typeof(SecurityIdentifier)
+                )
+                .Cast<EventWaitHandleAccessRule>()
+                .ToList();
 
             Assert.Equal(expectedAccessRules.Count, actualAccessRules.Count);
             if (expectedAccessRules.Count > 0)
             {
-                Assert.All(expectedAccessRules, actualAccessRule =>
-                {
-                    int count = expectedAccessRules.Count(expectedAccessRule => AreAccessRulesEqual(expectedAccessRule, actualAccessRule));
-                    Assert.True(count > 0);
-                });
+                Assert.All(
+                    expectedAccessRules,
+                    actualAccessRule =>
+                    {
+                        int count = expectedAccessRules.Count(expectedAccessRule =>
+                            AreAccessRulesEqual(expectedAccessRule, actualAccessRule)
+                        );
+                        Assert.True(count > 0);
+                    }
+                );
             }
         }
 
-        private bool AreAccessRulesEqual(EventWaitHandleAccessRule expectedRule, EventWaitHandleAccessRule actualRule)
+        private bool AreAccessRulesEqual(
+            EventWaitHandleAccessRule expectedRule,
+            EventWaitHandleAccessRule actualRule
+        )
         {
-            return
-                expectedRule.AccessControlType     == actualRule.AccessControlType &&
-                expectedRule.EventWaitHandleRights == actualRule.EventWaitHandleRights &&
-                expectedRule.InheritanceFlags      == actualRule.InheritanceFlags &&
-                expectedRule.PropagationFlags      == actualRule.PropagationFlags;
+            return expectedRule.AccessControlType == actualRule.AccessControlType
+                && expectedRule.EventWaitHandleRights == actualRule.EventWaitHandleRights
+                && expectedRule.InheritanceFlags == actualRule.InheritanceFlags
+                && expectedRule.PropagationFlags == actualRule.PropagationFlags;
         }
     }
 }

@@ -8,7 +8,13 @@ namespace System.Buffers.Text
 {
     internal static partial class FormattingHelpers
     {
-        public static bool TryFormat<T>(T value, Span<byte> utf8Destination, out int bytesWritten, StandardFormat format) where T : IUtf8SpanFormattable
+        public static bool TryFormat<T>(
+            T value,
+            Span<byte> utf8Destination,
+            out int bytesWritten,
+            StandardFormat format
+        )
+            where T : IUtf8SpanFormattable
         {
             scoped Span<char> formatText = default;
             if (!format.IsDefault)
@@ -16,7 +22,12 @@ namespace System.Buffers.Text
                 formatText = format.Format(stackalloc char[StandardFormat.FormatStringLength]);
             }
 
-            return value.TryFormat(utf8Destination, out bytesWritten, formatText, CultureInfo.InvariantCulture);
+            return value.TryFormat(
+                utf8Destination,
+                out bytesWritten,
+                formatText,
+                CultureInfo.InvariantCulture
+            );
         }
 
         /// <summary>

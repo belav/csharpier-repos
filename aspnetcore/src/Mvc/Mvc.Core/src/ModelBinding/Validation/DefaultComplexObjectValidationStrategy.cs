@@ -16,17 +16,17 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
     /// <summary>
     /// Gets an instance of <see cref="DefaultComplexObjectValidationStrategy"/>.
     /// </summary>
-    public static readonly IValidationStrategy Instance = new DefaultComplexObjectValidationStrategy();
+    public static readonly IValidationStrategy Instance =
+        new DefaultComplexObjectValidationStrategy();
 
-    private DefaultComplexObjectValidationStrategy()
-    {
-    }
+    private DefaultComplexObjectValidationStrategy() { }
 
     /// <inheritdoc />
     public IEnumerator<ValidationEntry> GetChildren(
         ModelMetadata metadata,
         string key,
-        object model)
+        object model
+    )
     {
         return new Enumerator(metadata, key, model);
     }
@@ -43,10 +43,7 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
         private ValidationEntry _entry;
         private int _index;
 
-        public Enumerator(
-            ModelMetadata modelMetadata,
-            string key,
-            object model)
+        public Enumerator(ModelMetadata modelMetadata, string key, object model)
         {
             _modelMetadata = modelMetadata;
             _key = key;
@@ -93,10 +90,19 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
                 }
                 else
                 {
-                    if (!_modelMetadata.BoundConstructorParameterMapping.TryGetValue(parameter, out var property))
+                    if (
+                        !_modelMetadata.BoundConstructorParameterMapping.TryGetValue(
+                            parameter,
+                            out var property
+                        )
+                    )
                     {
                         throw new InvalidOperationException(
-                            Resources.FormatValidationStrategy_MappedPropertyNotFound(parameterName, _modelMetadata.ModelType));
+                            Resources.FormatValidationStrategy_MappedPropertyNotFound(
+                                parameterName,
+                                _modelMetadata.ModelType
+                            )
+                        );
                     }
 
                     _entry = new ValidationEntry(parameter, key, () => GetModel(_model, property));
@@ -105,7 +111,10 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
             else
             {
                 var property = _properties[_index - _parameters.Count];
-                var propertyName = property.ValidationModelName ?? property.BinderModelName ?? property.PropertyName;
+                var propertyName =
+                    property.ValidationModelName
+                    ?? property.BinderModelName
+                    ?? property.PropertyName;
                 var key = ModelNames.CreatePropertyModelName(_key, propertyName);
 
                 if (_model == null)
@@ -122,9 +131,7 @@ internal sealed class DefaultComplexObjectValidationStrategy : IValidationStrate
             return true;
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public void Reset()
         {

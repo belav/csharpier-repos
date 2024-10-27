@@ -171,7 +171,7 @@ namespace System.Xml
                     i++;
                 }
                 else if (('I' != ch && 'i' != ch) && ('X' != ch && 'x' != ch))
-                {  //IANA or custom Code
+                { //IANA or custom Code
                     return false;
                 }
 

@@ -16,6 +16,7 @@ namespace System.Xml.Tests
         public static int MaxThreads = 20;
 
         private ITestOutputHelper _output;
+
         public CThreads(ITestOutputHelper output)
         {
             _output = output;

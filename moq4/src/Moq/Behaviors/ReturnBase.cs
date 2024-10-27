@@ -3,7 +3,6 @@
 
 namespace Moq.Behaviors
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ReturnBase : Behavior
@@ -28,7 +27,6 @@ namespace Moq.Behaviors
     {
         public static readonly ReturnBase Instance = new ReturnBase();
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private ReturnBase()
@@ -49,9 +47,7 @@ namespace Moq.Behaviors
         After:
                 ReturnBase()
         */
-        ReturnBase()
-        {
-        }
+        ReturnBase() { }
 
         public override void Execute(Invocation invocation)
         {

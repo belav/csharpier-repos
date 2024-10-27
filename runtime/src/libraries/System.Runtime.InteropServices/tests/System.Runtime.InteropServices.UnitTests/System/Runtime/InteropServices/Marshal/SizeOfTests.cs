@@ -16,7 +16,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             var s = new TestStructWithEnumArray
             {
-                ArrayOfEnum = new TestEnum[] { TestEnum.Red, TestEnum.Green, TestEnum.Blue }
+                ArrayOfEnum = new TestEnum[] { TestEnum.Red, TestEnum.Green, TestEnum.Blue },
             };
 
             Assert.Equal(12, Marshal.SizeOf((object)s));
@@ -46,8 +46,14 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SizeOf_NullStructure_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.SizeOf((object)null));
-            AssertExtensions.Throws<ArgumentNullException>("structure", () => Marshal.SizeOf<string>(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.SizeOf((object)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "structure",
+                () => Marshal.SizeOf<string>(null)
+            );
         }
 
         [Fact]
@@ -75,11 +81,18 @@ namespace System.Runtime.InteropServices.Tests
             yield return new object[] { typeof(IGenericInterface<>), "t" };
             yield return new object[] { typeof(IGenericInterface<string>), "t" };
 
-            yield return new object[] { typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0], null };
+            yield return new object[]
+            {
+                typeof(GenericClass<>).GetTypeInfo().GenericTypeParameters[0],
+                null,
+            };
 
             if (PlatformDetection.IsReflectionEmitSupported)
             {
-                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(new AssemblyName("Assembly"), AssemblyBuilderAccess.Run);
+                AssemblyBuilder assemblyBuilder = AssemblyBuilder.DefineDynamicAssembly(
+                    new AssemblyName("Assembly"),
+                    AssemblyBuilderAccess.Run
+                );
                 ModuleBuilder moduleBuilder = assemblyBuilder.DefineDynamicModule("Module");
                 TypeBuilder typeBuilder = moduleBuilder.DefineType("Type");
                 yield return new object[] { typeBuilder, "t" };
@@ -90,7 +103,11 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [Theory]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/75666", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/75666",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         [ActiveIssue("https://github.com/mono/mono/issues/15087", TestRuntimes.Mono)]
         [MemberData(nameof(SizeOf_InvalidType_TestData))]
         public void SizeOf_InvalidType_ThrowsArgumentException(Type type, string paramName)
@@ -136,7 +153,7 @@ namespace System.Runtime.InteropServices.Tests
         {
             Red,
             Green,
-            Blue
+            Blue,
         }
 
         [StructLayout(LayoutKind.Sequential)]
@@ -175,9 +192,7 @@ namespace System.Runtime.InteropServices.Tests
         }
 
         [StructLayout(LayoutKind.Sequential)]
-        public class EmptyClass
-        {
-        }
+        public class EmptyClass { }
 
         [StructLayout(LayoutKind.Sequential)]
         public class DerivedClass : EmptyClass

@@ -1,5 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
+using System;
+using System.CodeDom.Compiler;
 using System.Globalization;
 using System.Linq;
 using System.Net;
@@ -11,12 +13,10 @@ using System.Text.Encodings.Web;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Http.Metadata;
 using Microsoft.AspNetCore.Http.RequestDelegateGenerator.StaticRouteHandlerModel;
-using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.AspNetCore.Routing;
+using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Primitives;
-using System;
-using System.CodeDom.Compiler;
 
 namespace Microsoft.AspNetCore.Http.Generators.Tests;
 
@@ -25,9 +25,11 @@ public abstract partial class RequestDelegateCreationTests
     [Fact]
     public async Task MapAction_ReturnsString_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => "Hello, world!");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -41,9 +43,11 @@ app.MapGet("/", () => "Hello, world!");
     [Fact]
     public async Task MapAction_ReturnsTodo_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => new Todo());
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -57,9 +61,11 @@ app.MapGet("/", () => new Todo());
     [Fact]
     public async Task MapAction_ReturnsVoid_Has_No_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => {});
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>();
@@ -71,9 +77,11 @@ app.MapGet("/", () => {});
     [Fact]
     public async Task MapAction_ReturnsTaskOfString_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", Task<string> () => Task.FromResult("Hello, world!"));
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -85,9 +93,11 @@ app.MapGet("/", Task<string> () => Task.FromResult("Hello, world!"));
     [Fact]
     public async Task MapAction_ReturnsTask_Has_No_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", Task () => Task.CompletedTask);
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>();
@@ -97,9 +107,11 @@ app.MapGet("/", Task () => Task.CompletedTask);
     [Fact]
     public async Task MapAction_ReturnsValueTaskOfString_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", ValueTask<string> () => ValueTask.FromResult("Hello, world!"));
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -111,9 +123,11 @@ app.MapGet("/", ValueTask<string> () => ValueTask.FromResult("Hello, world!"));
     [Fact]
     public async Task MapAction_ReturnsValueTask_Has_No_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", ValueTask () => ValueTask.CompletedTask);
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var metadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>();
@@ -123,9 +137,11 @@ app.MapGet("/", ValueTask () => ValueTask.CompletedTask);
     [Fact]
     public async Task MapAction_ReturnsValidationProblemResult_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => TypedResults.ValidationProblem(new Dictionary<string, string[]>()));
-""");
+"""
+        );
 
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -139,9 +155,11 @@ app.MapGet("/", () => TypedResults.ValidationProblem(new Dictionary<string, stri
     [Fact]
     public async Task MapAction_TakesCustomMetadataEmitter_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (CustomMetadataEmitter x) => {});
-""");
+"""
+        );
 
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -154,9 +172,11 @@ app.MapPost("/", (CustomMetadataEmitter x) => {});
     [Fact]
     public async Task MapAction_ReturnsCustomMetadataEmitter_Has_Metadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => new CustomMetadataEmitter());
-""");
+"""
+        );
 
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -167,9 +187,11 @@ app.MapPost("/", () => new CustomMetadataEmitter());
     [Fact]
     public async Task Create_AddJsonResponseType_AsMetadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => new object());
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var responseMetadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -181,9 +203,11 @@ app.MapGet("/", () => new object());
     [Fact]
     public async Task Create_AddPlaintextResponseType_AsMetadata()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapGet("/", () => "Hello");
-""");
+"""
+        );
         var endpoint = GetEndpointFromCompilation(compilation);
 
         var responseMetadata = endpoint.Metadata.OfType<IProducesResponseTypeMetadata>().Single();
@@ -196,9 +220,11 @@ app.MapGet("/", () => "Hello");
     public async Task Create_DiscoversMetadata_FromParametersImplementingIEndpointParameterMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AddsCustomParameterMetadataBindable param1, AddsCustomParameterMetadata param2) => { });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -212,60 +238,80 @@ app.MapPost("/", (AddsCustomParameterMetadataBindable param1, AddsCustomParamete
     public async Task Create_DiscoversMetadata_FromParametersImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AddsCustomParameterMetadata param1) => { });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
     public async Task Create_DiscoversEndpointMetadata_FromReturnTypeImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => new AddsCustomEndpointMetadataResult());
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
     public async Task Create_DiscoversEndpointMetadata_FromTaskWrappedReturnTypeImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => Task.FromResult(new AddsCustomEndpointMetadataResult()));
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
     public async Task Create_DiscoversEndpointMetadata_FromValueTaskWrappedReturnTypeImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => ValueTask.FromResult(new AddsCustomEndpointMetadataResult()));
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.ReturnType }
+        );
     }
 
     [Fact]
@@ -273,9 +319,11 @@ app.MapPost("/", () => ValueTask.FromResult(new AddsCustomEndpointMetadataResult
     {
         // Arrange
         var @delegate = (Todo todo) => new RemovesAcceptsMetadataResult();
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (Todo todo) => new RemovesAcceptsMetadataResult());
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -288,9 +336,11 @@ app.MapPost("/", (Todo todo) => new RemovesAcceptsMetadataResult());
     public async Task Create_AllowsRemovalOfDefaultMetadata_ByTaskWrappedReturnTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (Todo todo) => Task.FromResult(new RemovesAcceptsMetadataResult()));
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -303,9 +353,11 @@ app.MapPost("/", (Todo todo) => Task.FromResult(new RemovesAcceptsMetadataResult
     public async Task Create_AllowsRemovalOfDefaultMetadata_ByValueTaskWrappedReturnTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (Todo todo) => ValueTask.FromResult(new RemovesAcceptsMetadataResult()));
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -318,9 +370,11 @@ app.MapPost("/", (Todo todo) => ValueTask.FromResult(new RemovesAcceptsMetadataR
     public async Task Create_AllowsRemovalOfDefaultMetadata_ByParameterTypesImplementingIEndpointParameterMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (RemovesAcceptsParameterMetadata param1) => "Hello");
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -333,9 +387,11 @@ app.MapPost("/", (RemovesAcceptsParameterMetadata param1) => "Hello");
     public async Task Create_AllowsRemovalOfDefaultMetadata_ByParameterTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (RemovesAcceptsParameterMetadata param1) => "Hello");
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
@@ -348,14 +404,18 @@ app.MapPost("/", (RemovesAcceptsParameterMetadata param1) => "Hello");
     public async Task Create_SetsApplicationServices_OnEndpointMetadataContext()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (Todo todo) => new AccessesServicesMetadataResult());
-""");
-        var serviceProvider = CreateServiceProvider((services) =>
-        {
-            var metadataService = new MetadataService();
-            services.AddSingleton(metadataService).BuildServiceProvider();
-        });
+"""
+        );
+        var serviceProvider = CreateServiceProvider(
+            (services) =>
+            {
+                var metadataService = new MetadataService();
+                services.AddSingleton(metadataService).BuildServiceProvider();
+            }
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -368,14 +428,18 @@ app.MapPost("/", (Todo todo) => new AccessesServicesMetadataResult());
     public async Task Create_SetsApplicationServices_OnEndpointParameterMetadataContext()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AccessesServicesMetadataBinder parameter1) => "Test");
-""");
-        var serviceProvider = CreateServiceProvider((services) =>
-        {
-            var metadataService = new MetadataService();
-            services.AddSingleton(metadataService).BuildServiceProvider();
-        });
+"""
+        );
+        var serviceProvider = CreateServiceProvider(
+            (services) =>
+            {
+                var metadataService = new MetadataService();
+                services.AddSingleton(metadataService).BuildServiceProvider();
+            }
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
@@ -387,15 +451,20 @@ app.MapPost("/", (AccessesServicesMetadataBinder parameter1) => "Test");
     [Fact]
     public async Task Create_CombinesDefaultMetadata_AndMetadataFromReturnTypesImplementingIEndpointMetadataProvider()
     {
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => new CountsDefaultEndpointMetadataResult()).WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
     }
@@ -404,15 +473,20 @@ app.MapPost("/", () => new CountsDefaultEndpointMetadataResult()).WithMetadata(n
     public async Task Create_CombinesDefaultMetadata_AndMetadataFromTaskWrappedReturnTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => Task.FromResult(new CountsDefaultEndpointMetadataResult())).WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
     }
@@ -421,15 +495,20 @@ app.MapPost("/", () => Task.FromResult(new CountsDefaultEndpointMetadataResult()
     public async Task AndMetadataFromValueTaskWrappedReturnTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", () => ValueTask.FromResult(new CountsDefaultEndpointMetadataResult())).WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         // Differs from RDF test because we end up with more metadata in RDG.
         Assert.Contains(endpoint.Metadata, m => m is MetadataCountMetadata { Count: > 1 });
     }
@@ -438,15 +517,20 @@ app.MapPost("/", () => ValueTask.FromResult(new CountsDefaultEndpointMetadataRes
     public async Task Create_CombinesDefaultMetadata_AndMetadataFromParameterTypesImplementingIEndpointParameterMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AddsCustomParameterMetadata param1) => "Hello").WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
         Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" });
     }
 
@@ -454,57 +538,80 @@ app.MapPost("/", (AddsCustomParameterMetadata param1) => "Hello").WithMetadata(n
     public async Task Create_CombinesDefaultMetadata_AndMetadataFromParameterTypesImplementingIEndpointMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AddsCustomParameterMetadata param1) => "Hello").WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
     public async Task Create_CombinesDefaultMetadata_AndMetadataFromParameterTypesImplementingIEndpointMetadataProvider_AndNonMetadataProviderParameter()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/", (AddsCustomParameterMetadata param1, HttpContext context) => "Hello").WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Caller });
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Caller }
+        );
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
     }
 
     [Fact]
     public async Task Create_FlowsRoutePattern_ToMetadataProvider()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/test/pattern", (AddsRoutePatternMetadata param1) => {});
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is RoutePatternMetadata { RoutePattern: "/test/pattern" }
+        );
     }
 
     [Fact]
     public async Task InferMetadata_ThenCreate_CombinesAllMetadata_InCorrectOrder()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/test/pattern", [Attribute1, Attribute2] (AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco())
    .WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
@@ -514,20 +621,30 @@ app.MapPost("/test/pattern", [Attribute1, Attribute2] (AddsCustomParameterMetada
         //       is generated by Roslyn depending on the context, and SourceKey which is RDF specific. So we filter
         //       them out so that the collection-based assertion below remains consistent with the original version
         //       of this test from RDF.
-        var filteredMetadata = endpoint.Metadata.Where(
-            m => m.GetType().Name != "NullableContextAttribute" &&
-            m is not GeneratedCodeAttribute &&
-            m is not MethodInfo &&
-            m is not HttpMethodMetadata &&
-            m is not Attribute1 &&
-            m is not Attribute2 &&
-            m is not IRouteDiagnosticsMetadata);
+        var filteredMetadata = endpoint.Metadata.Where(m =>
+            m.GetType().Name != "NullableContextAttribute"
+            && m is not GeneratedCodeAttribute
+            && m is not MethodInfo
+            && m is not HttpMethodMetadata
+            && m is not Attribute1
+            && m is not Attribute2
+            && m is not IRouteDiagnosticsMetadata
+        );
 
-        Assert.Collection(filteredMetadata,
+        Assert.Collection(
+            filteredMetadata,
             // Inferred AcceptsMetadata from RDF for complex type
-            m => Assert.True(m is IAcceptsMetadata am && am.RequestType == typeof(AddsCustomParameterMetadata)),
+            m =>
+                Assert.True(
+                    m is IAcceptsMetadata am
+                        && am.RequestType == typeof(AddsCustomParameterMetadata)
+                ),
             // Inferred ProducesResopnseTypeMetadata from RDF for complex type
-            m => Assert.Equal(typeof(CountsDefaultEndpointMetadataPoco), ((IProducesResponseTypeMetadata)m).Type),
+            m =>
+                Assert.Equal(
+                    typeof(CountsDefaultEndpointMetadataPoco),
+                    ((IProducesResponseTypeMetadata)m).Type
+                ),
             // Metadata provided by parameters implementing IEndpointParameterMetadataProvider
             m => Assert.True(m is ParameterNameMetadata { Name: "param1" }),
             // Metadata provided by parameters implementing IEndpointMetadataProvider
@@ -535,25 +652,37 @@ app.MapPost("/test/pattern", [Attribute1, Attribute2] (AddsCustomParameterMetada
             // Metadata provided by return type implementing IEndpointMetadataProvider
             m => Assert.True(m is MetadataCountMetadata),
             // Entry-specific metadata added after a call to InferMetadata
-            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller }));
+            m => Assert.True(m is CustomEndpointMetadata { Source: MetadataSource.Caller })
+        );
     }
 
     [Fact]
     public async Task Create_CombinesPropertiesAsParameterMetadata_AndTopLevelParameter()
     {
         // Arrange
-        var (_, compilation) = await RunGeneratorAsync("""
+        var (_, compilation) = await RunGeneratorAsync(
+            """
 app.MapPost("/test/pattern", ([AsParameters] AddsCustomParameterMetadata param1) => new CountsDefaultEndpointMetadataPoco())
    .WithMetadata(new CustomEndpointMetadata { Source = MetadataSource.Caller });
-""");
+"""
+        );
 
         // Act
         var endpoint = GetEndpointFromCompilation(compilation);
 
         // Assert
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Parameter }
+        );
         Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: "param1" });
-        Assert.Contains(endpoint.Metadata, m => m is CustomEndpointMetadata { Source: MetadataSource.Property });
-        Assert.Contains(endpoint.Metadata, m => m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) });
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is CustomEndpointMetadata { Source: MetadataSource.Property }
+        );
+        Assert.Contains(
+            endpoint.Metadata,
+            m => m is ParameterNameMetadata { Name: nameof(AddsCustomParameterMetadata.Data) }
+        );
     }
 }

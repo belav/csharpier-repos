@@ -16,7 +16,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 {
-    internal abstract partial class EditAndContinueTest<TSelf>(Verification? verification = null) : IDisposable
+    internal abstract partial class EditAndContinueTest<TSelf>(Verification? verification = null)
+        : IDisposable
         where TSelf : EditAndContinueTest<TSelf>
     {
         private readonly Verification _verification = verification ?? Verification.Passes;
@@ -28,7 +29,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
         protected abstract Compilation CreateCompilation(SyntaxTree tree);
         protected abstract SourceWithMarkedNodes CreateSourceWithMarkedNodes(string source);
-        protected abstract Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(ISymbol left, ISymbol right);
+        protected abstract Func<SyntaxNode, SyntaxNode> GetEquivalentNodesMap(
+            ISymbol left,
+            ISymbol right
+        );
 
         private TSelf This => (TSelf)this;
 
@@ -52,23 +56,44 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 manifestResources: null,
                 emitOptions: EmitOptions.Default,
                 peVerify: _verification,
-                expectedSignatures: null);
+                expectedSignatures: null
+            );
 
             var md = ModuleMetadata.CreateFromImage(verifier.EmittedAssemblyData);
             _disposables.Add(md);
 
-            var baseline = EditAndContinueTestUtilities.CreateInitialBaseline(compilation, md, verifier.CreateSymReader().GetEncMethodDebugInfo);
+            var baseline = EditAndContinueTestUtilities.CreateInitialBaseline(
+                compilation,
+                md,
+                verifier.CreateSymReader().GetEncMethodDebugInfo
+            );
 
-            _generations.Add(new GenerationInfo(compilation, md.MetadataReader, diff: null, verifier, baseline, validator ?? new(x => { })));
+            _generations.Add(
+                new GenerationInfo(
+                    compilation,
+                    md.MetadataReader,
+                    diff: null,
+                    verifier,
+                    baseline,
+                    validator ?? new(x => { })
+                )
+            );
             _sources.Add(markedSource);
 
             return This;
         }
 
-        internal TSelf AddGeneration(string source, SemanticEditDescription[] edits, Action<GenerationVerifier> validator)
-            => AddGeneration(source, _ => edits, validator);
+        internal TSelf AddGeneration(
+            string source,
+            SemanticEditDescription[] edits,
+            Action<GenerationVerifier> validator
+        ) => AddGeneration(source, _ => edits, validator);
 
-        internal TSelf AddGeneration(string source, Func<SourceWithMarkedNodes, SemanticEditDescription[]> edits, Action<GenerationVerifier> validator)
+        internal TSelf AddGeneration(
+            string source,
+            Func<SourceWithMarkedNodes, SemanticEditDescription[]> edits,
+            Action<GenerationVerifier> validator
+        )
         {
             _hasVerified = false;
 
@@ -79,19 +104,42 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var previousGeneration = _generations[^1];
             var previousSource = _sources[^1];
 
-            var compilation = previousGeneration.Compilation.RemoveAllSyntaxTrees().AddSyntaxTrees(markedSource.Tree);
+            var compilation = previousGeneration
+                .Compilation.RemoveAllSyntaxTrees()
+                .AddSyntaxTrees(markedSource.Tree);
             var unmappedNodes = new List<SyntaxNode>();
 
-            var semanticEdits = GetSemanticEdits(edits(markedSource), previousGeneration.Compilation, previousSource, compilation, markedSource, unmappedNodes);
+            var semanticEdits = GetSemanticEdits(
+                edits(markedSource),
+                previousGeneration.Compilation,
+                previousSource,
+                compilation,
+                markedSource,
+                unmappedNodes
+            );
 
-            CompilationDifference diff = compilation.EmitDifference(previousGeneration.Baseline, semanticEdits);
+            CompilationDifference diff = compilation.EmitDifference(
+                previousGeneration.Baseline,
+                semanticEdits
+            );
 
-            Assert.Empty(diff.EmitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error));
+            Assert.Empty(
+                diff.EmitResult.Diagnostics.Where(d => d.Severity == DiagnosticSeverity.Error)
+            );
 
             var md = diff.GetMetadata();
             _disposables.Add(md);
 
-            _generations.Add(new GenerationInfo(compilation, md.Reader, diff, compilationVerifier: null, diff.NextGeneration, validator));
+            _generations.Add(
+                new GenerationInfo(
+                    compilation,
+                    md.Reader,
+                    diff,
+                    compilationVerifier: null,
+                    diff.NextGeneration,
+                    validator
+                )
+            );
             _sources.Add(markedSource);
 
             return This;
@@ -113,7 +161,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 }
 
                 readers.Add(generation.MetadataReader);
-                var verifier = new GenerationVerifier(index, generation, readers.ToImmutableArray());
+                var verifier = new GenerationVerifier(
+                    index,
+                    generation,
+                    readers.ToImmutableArray()
+                );
                 generation.Verifier(verifier);
 
                 index++;
@@ -128,33 +180,41 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             SourceWithMarkedNodes oldSource,
             Compilation newCompilation,
             SourceWithMarkedNodes newSource,
-            List<SyntaxNode> unmappedNodes)
+            List<SyntaxNode> unmappedNodes
+        )
         {
-            var syntaxMapFromMarkers = oldSource.MarkedSpans.IsEmpty ? null : SourceWithMarkedNodes.GetSyntaxMap(oldSource, newSource, unmappedNodes);
+            var syntaxMapFromMarkers = oldSource.MarkedSpans.IsEmpty
+                ? null
+                : SourceWithMarkedNodes.GetSyntaxMap(oldSource, newSource, unmappedNodes);
 
-            return ImmutableArray.CreateRange(edits.Select(e =>
-            {
-                var oldSymbol = e.Kind is SemanticEditKind.Update or SemanticEditKind.Delete ? e.SymbolProvider(oldCompilation) : null;
-
-                // for delete the new symbol is the new containing type
-                var newSymbol = e.NewSymbolProvider(newCompilation);
-
-                Func<SyntaxNode, SyntaxNode?>? syntaxMap;
-                if (e.PreserveLocalVariables)
+            return ImmutableArray.CreateRange(
+                edits.Select(e =>
                 {
-                    Assert.Equal(SemanticEditKind.Update, e.Kind);
-                    Debug.Assert(oldSymbol != null);
-                    Debug.Assert(newSymbol != null);
+                    var oldSymbol = e.Kind is SemanticEditKind.Update or SemanticEditKind.Delete
+                        ? e.SymbolProvider(oldCompilation)
+                        : null;
 
-                    syntaxMap = syntaxMapFromMarkers ?? GetEquivalentNodesMap(newSymbol, oldSymbol);
-                }
-                else
-                {
-                    syntaxMap = null;
-                }
+                    // for delete the new symbol is the new containing type
+                    var newSymbol = e.NewSymbolProvider(newCompilation);
 
-                return new SemanticEdit(e.Kind, oldSymbol, newSymbol, syntaxMap);
-            }));
+                    Func<SyntaxNode, SyntaxNode?>? syntaxMap;
+                    if (e.PreserveLocalVariables)
+                    {
+                        Assert.Equal(SemanticEditKind.Update, e.Kind);
+                        Debug.Assert(oldSymbol != null);
+                        Debug.Assert(newSymbol != null);
+
+                        syntaxMap =
+                            syntaxMapFromMarkers ?? GetEquivalentNodesMap(newSymbol, oldSymbol);
+                    }
+                    else
+                    {
+                        syntaxMap = null;
+                    }
+
+                    return new SemanticEdit(e.Kind, oldSymbol, newSymbol, syntaxMap);
+                })
+            );
         }
 
         public void Dispose()
@@ -163,7 +223,10 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             // or we'll hide it, so we need to do this dodgy looking thing.
             var isInException = Marshal.GetExceptionPointers() != IntPtr.Zero;
 
-            Assert.True(isInException || _hasVerified, "No Verify call since the last AddGeneration call.");
+            Assert.True(
+                isInException || _hasVerified,
+                "No Verify call since the last AddGeneration call."
+            );
             foreach (var disposable in _disposables)
             {
                 disposable.Dispose();

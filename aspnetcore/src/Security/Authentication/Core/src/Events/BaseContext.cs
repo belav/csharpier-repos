@@ -8,7 +8,8 @@ namespace Microsoft.AspNetCore.Authentication;
 /// <summary>
 /// Base class used by other context classes.
 /// </summary>
-public abstract class BaseContext<TOptions> where TOptions : AuthenticationSchemeOptions
+public abstract class BaseContext<TOptions>
+    where TOptions : AuthenticationSchemeOptions
 {
     /// <summary>
     /// Constructor.

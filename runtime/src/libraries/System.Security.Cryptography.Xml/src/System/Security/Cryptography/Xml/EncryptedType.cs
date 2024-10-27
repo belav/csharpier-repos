@@ -21,10 +21,7 @@ namespace System.Security.Cryptography.Xml
         [MemberNotNullWhen(true, nameof(_cachedXml))]
         internal bool CacheValid
         {
-            get
-            {
-                return (_cachedXml != null);
-            }
+            get { return (_cachedXml != null); }
         }
 
         public virtual string? Id
@@ -84,7 +81,8 @@ namespace System.Security.Cryptography.Xml
             }
         }
 
-        public virtual EncryptionPropertyCollection EncryptionProperties => _props ??= new EncryptionPropertyCollection();
+        public virtual EncryptionPropertyCollection EncryptionProperties =>
+            _props ??= new EncryptionPropertyCollection();
 
         public void AddProperty(EncryptionProperty ep)
         {

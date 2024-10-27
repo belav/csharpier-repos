@@ -34,7 +34,10 @@ namespace System.Drawing.PrimitivesTests
         public void SingleIntConstructorTest(int x)
         {
             Point p1 = new Point(x);
-            Point p2 = new Point(unchecked((short)(x & 0xFFFF)), unchecked((short)((x >> 16) & 0xFFFF)));
+            Point p2 = new Point(
+                unchecked((short)(x & 0xFFFF)),
+                unchecked((short)((x >> 16) & 0xFFFF))
+            );
 
             Assert.Equal(p1, p2);
         }
@@ -97,9 +100,10 @@ namespace System.Drawing.PrimitivesTests
         [InlineData(0, 0)]
         public void ArithmeticTest(int x, int y)
         {
-            Point addExpected, subExpected, p = new Point(x, y);
+            Point addExpected,
+                subExpected,
+                p = new Point(x, y);
             Size s = new Size(y, x);
-
             unchecked
             {
                 addExpected = new Point(x + y, y + x);
@@ -120,8 +124,9 @@ namespace System.Drawing.PrimitivesTests
         public void PointFMathematicalTest(float x, float y)
         {
             PointF pf = new PointF(x, y);
-            Point pCeiling, pTruncate, pRound;
-
+            Point pCeiling,
+                pTruncate,
+                pRound;
             unchecked
             {
                 pCeiling = new Point((int)Math.Ceiling(x), (int)Math.Ceiling(y));
@@ -216,7 +221,10 @@ namespace System.Drawing.PrimitivesTests
         public void ToStringTest(int x, int y)
         {
             Point p = new Point(x, y);
-            Assert.Equal(string.Format(CultureInfo.CurrentCulture, "{{X={0},Y={1}}}", p.X, p.Y), p.ToString());
+            Assert.Equal(
+                string.Format(CultureInfo.CurrentCulture, "{{X={0},Y={1}}}", p.X, p.Y),
+                p.ToString()
+            );
         }
     }
 }

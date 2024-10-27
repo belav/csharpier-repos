@@ -14,7 +14,8 @@ public class MultipleHostedAppTest : ServerTestBase<AspNetSiteServerFixture>
     public MultipleHostedAppTest(
         BrowserFixture browserFixture,
         AspNetSiteServerFixture serverFixture,
-        ITestOutputHelper output)
+        ITestOutputHelper output
+    )
         : base(browserFixture, serverFixture, output)
     {
         serverFixture.AdditionalArguments.AddRange(new[] { "--MapAllApps", "true" });
@@ -47,8 +48,9 @@ public class MultipleHostedAppTest : ServerTestBase<AspNetSiteServerFixture>
     public void ServesStaticAssetsFromClientAppWebRoot()
     {
         var javascriptExecutor = (IJavaScriptExecutor)Browser;
-        var bootstrapTooltipType = javascriptExecutor
-            .ExecuteScript("return window.customJsWasLoaded;");
+        var bootstrapTooltipType = javascriptExecutor.ExecuteScript(
+            "return window.customJsWasLoaded;"
+        );
         Assert.True((bool)bootstrapTooltipType);
     }
 

@@ -14,9 +14,7 @@ public class TimeSpanConvertersTest
     {
         var converter = _timeSpanToString.ConvertToProviderExpression.Compile();
 
-        Assert.Equal(
-            "10.07:30:18.3330000",
-            converter(new TimeSpan(10, 7, 30, 15, 3333)));
+        Assert.Equal("10.07:30:18.3330000", converter(new TimeSpan(10, 7, 30, 15, 3333)));
 
         Assert.Equal("00:00:00", converter(new TimeSpan()));
     }
@@ -26,9 +24,7 @@ public class TimeSpanConvertersTest
     {
         var converter = _timeSpanToString.ConvertFromProviderExpression.Compile();
 
-        Assert.Equal(
-            new TimeSpan(10, 7, 30, 15, 3333),
-            converter("10.07:30:18.3330000"));
+        Assert.Equal(new TimeSpan(10, 7, 30, 15, 3333), converter("10.07:30:18.3330000"));
 
         Assert.Equal(new TimeSpan(), converter("00:00:00"));
 
@@ -41,9 +37,7 @@ public class TimeSpanConvertersTest
     {
         var converter = _timeSpanToString.ConvertToProvider;
 
-        Assert.Equal(
-            "10.07:30:18.3330000",
-            converter(new TimeSpan(10, 7, 30, 15, 3333)));
+        Assert.Equal("10.07:30:18.3330000", converter(new TimeSpan(10, 7, 30, 15, 3333)));
 
         Assert.Equal("00:00:00", converter(new TimeSpan()));
 
@@ -55,9 +49,7 @@ public class TimeSpanConvertersTest
     {
         var converter = _timeSpanToString.ConvertFromProvider;
 
-        Assert.Equal(
-            new TimeSpan(10, 7, 30, 15, 3333),
-            converter("10.07:30:18.3330000"));
+        Assert.Equal(new TimeSpan(10, 7, 30, 15, 3333), converter("10.07:30:18.3330000"));
 
         Assert.Equal(new TimeSpan(), converter("00:00:00"));
 
@@ -105,9 +97,9 @@ public class TimeSpanConvertersTest
         Assert.Null(converter(null));
     }
 
-    private static readonly CompositeValueConverter<TimeSpan, long, uint> _timeSpanToIntTicks
-        = (CompositeValueConverter<TimeSpan, long, uint>)new TimeSpanToTicksConverter().ComposeWith(
-            new CastingConverter<long, uint>());
+    private static readonly CompositeValueConverter<TimeSpan, long, uint> _timeSpanToIntTicks =
+        (CompositeValueConverter<TimeSpan, long, uint>)
+            new TimeSpanToTicksConverter().ComposeWith(new CastingConverter<long, uint>());
 
     [ConditionalFact]
     public void Can_convert_TimeSpan_to_int_ticks()

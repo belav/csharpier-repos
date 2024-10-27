@@ -17,9 +17,8 @@ public sealed class NamedPipeEndPoint : EndPoint
     /// Initializes a new instance of the <see cref="NamedPipeEndPoint"/> class.
     /// </summary>
     /// <param name="pipeName">The name of the pipe.</param>
-    public NamedPipeEndPoint(string pipeName) : this(pipeName, LocalComputerServerName)
-    {
-    }
+    public NamedPipeEndPoint(string pipeName)
+        : this(pipeName, LocalComputerServerName) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="NamedPipeEndPoint"/> class.
@@ -54,7 +53,9 @@ public sealed class NamedPipeEndPoint : EndPoint
     /// <inheritdoc/>
     public override bool Equals([NotNullWhen(true)] object? obj)
     {
-        return obj is NamedPipeEndPoint other && other.ServerName == ServerName && other.PipeName == PipeName;
+        return obj is NamedPipeEndPoint other
+            && other.ServerName == ServerName
+            && other.PipeName == PipeName;
     }
 
     /// <inheritdoc/>

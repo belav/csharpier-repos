@@ -16,7 +16,11 @@ namespace System.Activities.XamlIntegration
             return sourceType == typeof(string);
         }
 
-        public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+        public override object ConvertFrom(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value
+        )
         {
             Version deserializedVersion = null;
             string stringValue = value as string;
@@ -34,7 +38,12 @@ namespace System.Activities.XamlIntegration
             return destinationType == typeof(string);
         }
 
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             Version implementationVersion = value as Version;
             if (destinationType == typeof(string) && implementationVersion != null)

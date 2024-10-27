@@ -10,7 +10,10 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// Skips a test if the OS is the given type (Windows) and the OS version is less than specified.
 /// E.g. Specifying Window 10.0 skips on Win 8, but not on Linux. Combine with OSSkipConditionAttribute as needed.
 /// </summary>
-[AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly, AllowMultiple = true)]
+[AttributeUsage(
+    AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly,
+    AllowMultiple = true
+)]
 public class MinimumOSVersionAttribute : Attribute, ITestCondition
 {
     private readonly OperatingSystems _targetOS;
@@ -19,17 +22,23 @@ public class MinimumOSVersionAttribute : Attribute, ITestCondition
     private readonly Version _currentVersion;
     private readonly bool _skip;
 
-    public MinimumOSVersionAttribute(OperatingSystems operatingSystem, string minVersion) :
-        this(operatingSystem, Version.Parse(minVersion), GetCurrentOS(), GetCurrentOSVersion())
-    {
-    }
+    public MinimumOSVersionAttribute(OperatingSystems operatingSystem, string minVersion)
+        : this(operatingSystem, Version.Parse(minVersion), GetCurrentOS(), GetCurrentOSVersion())
+    { }
 
     // to enable unit testing
-    internal MinimumOSVersionAttribute(OperatingSystems targetOS, Version minVersion, OperatingSystems currentOS, Version currentVersion)
+    internal MinimumOSVersionAttribute(
+        OperatingSystems targetOS,
+        Version minVersion,
+        OperatingSystems currentOS,
+        Version currentVersion
+    )
     {
         if (targetOS != OperatingSystems.Windows)
         {
-            throw new NotImplementedException("Min version support is only implemented for Windows.");
+            throw new NotImplementedException(
+                "Min version support is only implemented for Windows."
+            );
         }
         _targetOS = targetOS;
         _minVersion = minVersion;

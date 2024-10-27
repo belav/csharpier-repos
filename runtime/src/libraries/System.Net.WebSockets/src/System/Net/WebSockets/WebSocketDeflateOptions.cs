@@ -25,10 +25,20 @@ namespace System.Net.WebSockets
             get => _clientMaxWindowBits;
             set
             {
-                if (value < WebSocketValidate.MinDeflateWindowBits || value > WebSocketValidate.MaxDeflateWindowBits)
+                if (
+                    value < WebSocketValidate.MinDeflateWindowBits
+                    || value > WebSocketValidate.MaxDeflateWindowBits
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(ClientMaxWindowBits), value,
-                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange, WebSocketValidate.MinDeflateWindowBits, WebSocketValidate.MaxDeflateWindowBits));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ClientMaxWindowBits),
+                        value,
+                        SR.Format(
+                            SR.net_WebSockets_ArgumentOutOfRange,
+                            WebSocketValidate.MinDeflateWindowBits,
+                            WebSocketValidate.MaxDeflateWindowBits
+                        )
+                    );
                 }
                 _clientMaxWindowBits = value;
             }
@@ -52,10 +62,20 @@ namespace System.Net.WebSockets
             get => _serverMaxWindowBits;
             set
             {
-                if (value < WebSocketValidate.MinDeflateWindowBits || value > WebSocketValidate.MaxDeflateWindowBits)
+                if (
+                    value < WebSocketValidate.MinDeflateWindowBits
+                    || value > WebSocketValidate.MaxDeflateWindowBits
+                )
                 {
-                    throw new ArgumentOutOfRangeException(nameof(ServerMaxWindowBits), value,
-                        SR.Format(SR.net_WebSockets_ArgumentOutOfRange, WebSocketValidate.MinDeflateWindowBits, WebSocketValidate.MaxDeflateWindowBits));
+                    throw new ArgumentOutOfRangeException(
+                        nameof(ServerMaxWindowBits),
+                        value,
+                        SR.Format(
+                            SR.net_WebSockets_ArgumentOutOfRange,
+                            WebSocketValidate.MinDeflateWindowBits,
+                            WebSocketValidate.MaxDeflateWindowBits
+                        )
+                    );
                 }
                 _serverMaxWindowBits = value;
             }

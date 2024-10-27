@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -30,38 +30,44 @@ using System.Text;
 
 namespace System.ServiceModel.Description
 {
-	public static class MetadataExchangeBindings
-	{
-		public static Binding CreateMexHttpBinding ()
-		{
-			var b = new WSHttpBinding (SecurityMode.None) {
-				Name = "MetadataExchangeHttpBinding",
-				Namespace = "http://schemas.microsoft.com/ws/2005/02/mex/bindings"};
-			return b;
-		}
+    public static class MetadataExchangeBindings
+    {
+        public static Binding CreateMexHttpBinding()
+        {
+            var b = new WSHttpBinding(SecurityMode.None)
+            {
+                Name = "MetadataExchangeHttpBinding",
+                Namespace = "http://schemas.microsoft.com/ws/2005/02/mex/bindings",
+            };
+            return b;
+        }
 
-		public static Binding CreateMexHttpsBinding ()
-		{
-			var b = new WSHttpBinding(SecurityMode.Transport) {
-				Name = "MetadataExchangeHttpsBinding",
-				Namespace = "http://schemas.microsoft.com/ws/2005/02/mex/bindings"};
-			return b;
-		}
+        public static Binding CreateMexHttpsBinding()
+        {
+            var b = new WSHttpBinding(SecurityMode.Transport)
+            {
+                Name = "MetadataExchangeHttpsBinding",
+                Namespace = "http://schemas.microsoft.com/ws/2005/02/mex/bindings",
+            };
+            return b;
+        }
 
-		public static Binding CreateMexNamedPipeBinding ()
-		{
-			return new CustomBinding (
-				"MetadataExchangeNamedPipeBinding",
-				"http://schemas.microsoft.com/ws/2005/02/mex/bindings",
-				new NamedPipeTransportBindingElement ());
-		}
+        public static Binding CreateMexNamedPipeBinding()
+        {
+            return new CustomBinding(
+                "MetadataExchangeNamedPipeBinding",
+                "http://schemas.microsoft.com/ws/2005/02/mex/bindings",
+                new NamedPipeTransportBindingElement()
+            );
+        }
 
-		public static Binding CreateMexTcpBinding ()
-		{
-			return new CustomBinding (
-				"MetadataExchangeTcpBinding",
-				"http://schemas.microsoft.com/ws/2005/02/mex/bindings",
-				new TcpTransportBindingElement ());
-		}
-	}
+        public static Binding CreateMexTcpBinding()
+        {
+            return new CustomBinding(
+                "MetadataExchangeTcpBinding",
+                "http://schemas.microsoft.com/ws/2005/02/mex/bindings",
+                new TcpTransportBindingElement()
+            );
+        }
+    }
 }

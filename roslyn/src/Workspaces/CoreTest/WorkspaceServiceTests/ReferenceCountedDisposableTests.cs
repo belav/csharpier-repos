@@ -16,8 +16,11 @@ namespace Microsoft.CodeAnalysis.UnitTests
     public class ReferenceCountedDisposableTests
     {
         [Fact]
-        public void TestArgumentValidation()
-            => Assert.Throws<ArgumentNullException>("instance", () => new ReferenceCountedDisposable<IDisposable>(null));
+        public void TestArgumentValidation() =>
+            Assert.Throws<ArgumentNullException>(
+                "instance",
+                () => new ReferenceCountedDisposable<IDisposable>(null)
+            );
 
         [Theory]
         [InlineData(1)]
@@ -97,7 +100,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var target = new DisposableObject();
 
             var reference = new ReferenceCountedDisposable<DisposableObject>(target);
-            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
+            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(
+                reference
+            );
 
             var reference2 = reference.TryAddReference();
             Assert.NotNull(reference2);
@@ -121,12 +126,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
         }
 
         [Fact]
-        public void TestWeakReferenceArgumentValidation()
-            => Assert.Throws<ArgumentNullException>("reference", () => new ReferenceCountedDisposable<IDisposable>.WeakReference(null));
+        public void TestWeakReferenceArgumentValidation() =>
+            Assert.Throws<ArgumentNullException>(
+                "reference",
+                () => new ReferenceCountedDisposable<IDisposable>.WeakReference(null)
+            );
 
         [Fact]
-        public void TestDefaultWeakReference()
-            => Assert.Null(default(ReferenceCountedDisposable<IDisposable>.WeakReference).TryAddReference());
+        public void TestDefaultWeakReference() =>
+            Assert.Null(
+                default(ReferenceCountedDisposable<IDisposable>.WeakReference).TryAddReference()
+            );
 
         /// <summary>
         /// This test verifies that a weak reference cannot be created from a disposed reference, even if another strong
@@ -144,7 +154,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             reference.Dispose();
 
-            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
+            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(
+                reference
+            );
             Assert.Null(weakReference.TryAddReference());
         }
 
@@ -161,7 +173,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             // Create an initial weak reference at a point where the reference is alive. This ensures the internal
             // shared WeakReference<T> is initialized.
-            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
+            var weakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(
+                reference
+            );
             Assert.NotNull(weakReference.TryAddReference());
 
             var secondReference = reference.TryAddReference();
@@ -169,7 +183,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             reference.Dispose();
 
-            var secondWeakReference = new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
+            var secondWeakReference =
+                new ReferenceCountedDisposable<DisposableObject>.WeakReference(reference);
             Assert.Null(secondWeakReference.TryAddReference());
         }
 
@@ -177,25 +192,20 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void TestWeakReferenceCannotTear()
         {
             // WeakReference contains a single field which is a reference type, so reads/writes cannot tear
-            var field = Assert.Single(typeof(ReferenceCountedDisposable<>.WeakReference)
-                .GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic));
+            var field = Assert.Single(
+                typeof(ReferenceCountedDisposable<>.WeakReference).GetFields(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                )
+            );
 
             Assert.True(field.FieldType.IsClass);
         }
 
         private sealed class DisposableObject : IDisposable
         {
-            public bool IsDisposed
-            {
-                get;
-                private set;
-            }
+            public bool IsDisposed { get; private set; }
 
-            public int DisposeCount
-            {
-                get;
-                private set;
-            }
+            public int DisposeCount { get; private set; }
 
             public void Dispose()
             {

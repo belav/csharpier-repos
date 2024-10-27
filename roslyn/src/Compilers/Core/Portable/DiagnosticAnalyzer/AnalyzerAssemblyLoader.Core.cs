@@ -28,30 +28,36 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <remarks>
         /// While Windows supports this option it comes with a significant performance penalty due
-        /// to anti virus scans. It can have a load time of 300-500ms while loading from disk 
+        /// to anti virus scans. It can have a load time of 300-500ms while loading from disk
         /// is generally 1-2ms. Use this with caution on Windows.
         /// </remarks>
-        LoadFromStream
+        LoadFromStream,
     }
 
     internal partial class AnalyzerAssemblyLoader
     {
         private readonly AssemblyLoadContext _compilerLoadContext;
-        private readonly Dictionary<string, DirectoryLoadContext> _loadContextByDirectory = new Dictionary<string, DirectoryLoadContext>(StringComparer.Ordinal);
+        private readonly Dictionary<string, DirectoryLoadContext> _loadContextByDirectory =
+            new Dictionary<string, DirectoryLoadContext>(StringComparer.Ordinal);
         private readonly AnalyzerLoadOption _loadOption;
 
         internal AssemblyLoadContext CompilerLoadContext => _compilerLoadContext;
         internal AnalyzerLoadOption AnalyzerLoadOption => _loadOption;
 
         internal AnalyzerAssemblyLoader()
-            : this(null, AnalyzerLoadOption.LoadFromDisk)
-        {
-        }
+            : this(null, AnalyzerLoadOption.LoadFromDisk) { }
 
-        internal AnalyzerAssemblyLoader(AssemblyLoadContext? compilerLoadContext, AnalyzerLoadOption loadOption)
+        internal AnalyzerAssemblyLoader(
+            AssemblyLoadContext? compilerLoadContext,
+            AnalyzerLoadOption loadOption
+        )
         {
             _loadOption = loadOption;
-            _compilerLoadContext = compilerLoadContext ?? AssemblyLoadContext.GetLoadContext(typeof(AnalyzerAssemblyLoader).GetTypeInfo().Assembly)!;
+            _compilerLoadContext =
+                compilerLoadContext
+                ?? AssemblyLoadContext.GetLoadContext(
+                    typeof(AnalyzerAssemblyLoader).GetTypeInfo().Assembly
+                )!;
         }
 
         public bool IsHostAssembly(Assembly assembly)
@@ -64,12 +70,21 @@ namespace Microsoft.CodeAnalysis
         {
             DirectoryLoadContext? loadContext;
 
-            var fullDirectoryPath = Path.GetDirectoryName(assemblyOriginalPath) ?? throw new ArgumentException(message: null, paramName: nameof(assemblyOriginalPath));
+            var fullDirectoryPath =
+                Path.GetDirectoryName(assemblyOriginalPath)
+                ?? throw new ArgumentException(
+                    message: null,
+                    paramName: nameof(assemblyOriginalPath)
+                );
             lock (_guard)
             {
                 if (!_loadContextByDirectory.TryGetValue(fullDirectoryPath, out loadContext))
                 {
-                    loadContext = new DirectoryLoadContext(fullDirectoryPath, this, _compilerLoadContext);
+                    loadContext = new DirectoryLoadContext(
+                        fullDirectoryPath,
+                        this,
+                        _compilerLoadContext
+                    );
                     _loadContextByDirectory[fullDirectoryPath] = loadContext;
                 }
             }
@@ -109,7 +124,11 @@ namespace Microsoft.CodeAnalysis
             private readonly AnalyzerAssemblyLoader _loader;
             private readonly AssemblyLoadContext _compilerLoadContext;
 
-            public DirectoryLoadContext(string directory, AnalyzerAssemblyLoader loader, AssemblyLoadContext compilerLoadContext)
+            public DirectoryLoadContext(
+                string directory,
+                AnalyzerAssemblyLoader loader,
+                AssemblyLoadContext compilerLoadContext
+            )
                 : base(isCollectible: true)
             {
                 Directory = directory;
@@ -122,7 +141,10 @@ namespace Microsoft.CodeAnalysis
                 var simpleName = assemblyName.Name!;
                 try
                 {
-                    if (_compilerLoadContext.LoadFromAssemblyName(assemblyName) is { } compilerAssembly)
+                    if (
+                        _compilerLoadContext.LoadFromAssemblyName(assemblyName) is
+                        { } compilerAssembly
+                    )
                     {
                         return compilerAssembly;
                     }
@@ -141,7 +163,7 @@ namespace Microsoft.CodeAnalysis
                     return loadCore(loadPath);
                 }
 
-                // Next if this is a resource assembly for a known assembly then load it from the 
+                // Next if this is a resource assembly for a known assembly then load it from the
                 // appropriate sub directory if it exists
                 //
                 // Note: when loading from disk the .NET runtime has a fallback step that will handle
@@ -149,11 +171,17 @@ namespace Microsoft.CodeAnalysis
                 // loader has a mode where it loads from Stream though and the runtime will not handle
                 // that automatically. Rather than bifurate our loading behavior between Disk and
                 // Stream both modes just handle satellite loading directly
-                if (!string.IsNullOrEmpty(assemblyName.CultureName) && simpleName.EndsWith(".resources", StringComparison.Ordinal))
+                if (
+                    !string.IsNullOrEmpty(assemblyName.CultureName)
+                    && simpleName.EndsWith(".resources", StringComparison.Ordinal)
+                )
                 {
                     var analyzerFileName = Path.ChangeExtension(simpleName, ".dll");
                     var analyzerFilePath = Path.Combine(Directory, analyzerFileName);
-                    var satelliteLoadPath = _loader.GetSatelliteInfoForPath(analyzerFilePath, assemblyName.CultureName);
+                    var satelliteLoadPath = _loader.GetSatelliteInfoForPath(
+                        analyzerFilePath,
+                        assemblyName.CultureName
+                    );
                     if (satelliteLoadPath is not null)
                     {
                         return loadCore(satelliteLoadPath);
@@ -163,7 +191,7 @@ namespace Microsoft.CodeAnalysis
                 }
 
                 // Next prefer registered dependencies from other directories. Ideally this would not
-                // be necessary but msbuild target defaults have caused a number of customers to 
+                // be necessary but msbuild target defaults have caused a number of customers to
                 // fall into this path. See discussion here for where it comes up
                 // https://github.com/dotnet/roslyn/issues/56442
                 if (_loader.GetBestPath(assemblyName) is string bestRealPath)
@@ -182,7 +210,12 @@ namespace Microsoft.CodeAnalysis
                     }
                     else
                     {
-                        using var stream = File.Open(assemblyPath, FileMode.Open, FileAccess.Read, FileShare.Read);
+                        using var stream = File.Open(
+                            assemblyPath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        );
                         return LoadFromStream(stream);
                     }
                 }

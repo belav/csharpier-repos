@@ -22,7 +22,8 @@ public class HealthCheckMiddleware
     public HealthCheckMiddleware(
         RequestDelegate next,
         IOptions<HealthCheckOptions> healthCheckOptions,
-        HealthCheckService healthCheckService)
+        HealthCheckService healthCheckService
+    )
     {
         ArgumentNullException.ThrowIfNull(next);
         ArgumentNullException.ThrowIfNull(healthCheckOptions);
@@ -43,15 +44,18 @@ public class HealthCheckMiddleware
         ArgumentNullException.ThrowIfNull(httpContext);
 
         // Get results
-        var result = await _healthCheckService.CheckHealthAsync(_healthCheckOptions.Predicate, httpContext.RequestAborted);
+        var result = await _healthCheckService.CheckHealthAsync(
+            _healthCheckOptions.Predicate,
+            httpContext.RequestAborted
+        );
 
         // Map status to response code - this is customizable via options.
         if (!_healthCheckOptions.ResultStatusCodes.TryGetValue(result.Status, out var statusCode))
         {
             var message =
-                $"No status code mapping found for {nameof(HealthStatus)} value: {result.Status}." +
-                $"{nameof(HealthCheckOptions)}.{nameof(HealthCheckOptions.ResultStatusCodes)} must contain" +
-                $"an entry for {result.Status}.";
+                $"No status code mapping found for {nameof(HealthStatus)} value: {result.Status}."
+                + $"{nameof(HealthCheckOptions)}.{nameof(HealthCheckOptions.ResultStatusCodes)} must contain"
+                + $"an entry for {result.Status}.";
 
             throw new InvalidOperationException(message);
         }

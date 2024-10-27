@@ -8,8 +8,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class SpecialTypeExtensions
     {
-        public static PredefinedType ToPredefinedType(this SpecialType specialType)
-            => specialType switch
+        public static PredefinedType ToPredefinedType(this SpecialType specialType) =>
+            specialType switch
             {
                 SpecialType.System_Object => PredefinedType.Object,
                 SpecialType.System_Void => PredefinedType.Void,

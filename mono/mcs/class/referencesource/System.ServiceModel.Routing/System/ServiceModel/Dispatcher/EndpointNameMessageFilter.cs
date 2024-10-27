@@ -5,17 +5,20 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System;
+    using System.Collections.Generic;
+    using System.Configuration;
     using System.Diagnostics.CodeAnalysis;
     using System.Runtime;
     using System.ServiceModel.Channels;
-    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Description;
-    using System.Collections.Generic;
-    using System.Configuration;
+    using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Routing;
 
     [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.TypesMustHaveXamlCallableConstructors)]
-    [SuppressMessage(FxCop.Category.Xaml, FxCop.Rule.TypesShouldHavePublicParameterlessConstructors)]
+    [SuppressMessage(
+        FxCop.Category.Xaml,
+        FxCop.Rule.TypesShouldHavePublicParameterlessConstructors
+    )]
     public class EndpointNameMessageFilter : MessageFilter
     {
         const string EndpointNameKey = "System.ServiceModel.Routing.EndpointNameMessageFilter.Name";
@@ -67,7 +70,10 @@ namespace System.ServiceModel.Dispatcher
             properties[EndpointNameKey] = endpointName;
         }
 
-        internal static void Validate(ICollection<MessageFilter> messageFilters, HashSet<string> endpoints)
+        internal static void Validate(
+            ICollection<MessageFilter> messageFilters,
+            HashSet<string> endpoints
+        )
         {
             foreach (MessageFilter filter in messageFilters)
             {
@@ -83,7 +89,9 @@ namespace System.ServiceModel.Dispatcher
         {
             if (!endpoints.Contains(this.endpointName))
             {
-                throw FxTrace.Exception.AsError(new ConfigurationErrorsException(SR.EndpointNameNotFound(this.endpointName)));
+                throw FxTrace.Exception.AsError(
+                    new ConfigurationErrorsException(SR.EndpointNameNotFound(this.endpointName))
+                );
             }
         }
     }

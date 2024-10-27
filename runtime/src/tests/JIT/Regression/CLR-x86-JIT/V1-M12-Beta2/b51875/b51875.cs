@@ -6,7 +6,6 @@ using System;
 using System.Collections;
 using Xunit;
 
-
 namespace Test
 {
     public struct AA
@@ -22,11 +21,12 @@ namespace Test
             {
                 throw new Exception();
             }
-        EOM:
+            EOM:
             if (((Array)new Object()).Clone() == null)
                 return 1;
             return 0;
         }
+
         [Fact]
         public static int TestEntryPoint()
         {

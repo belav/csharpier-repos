@@ -55,7 +55,8 @@ public class FiltersTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWith
     [InlineData("ab-cd", "en-US")]
     public async Task MiddlewareFilter_LocalizationMiddlewareRegistration_UsesRouteDataToFindCulture(
         string culture,
-        string expected)
+        string expected
+    )
     {
         // Arrange & Act
         var response = await Client.GetAsync($"{culture}/Filters/MiddlewareFilterTest");
@@ -64,7 +65,8 @@ public class FiltersTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWith
         Assert.Equal(HttpStatusCode.OK, response.StatusCode);
         Assert.Equal(
             $"CurrentCulture:{expected},CurrentUICulture:{expected}",
-            await response.Content.ReadAsStringAsync());
+            await response.Content.ReadAsStringAsync()
+        );
     }
 
     [Fact]

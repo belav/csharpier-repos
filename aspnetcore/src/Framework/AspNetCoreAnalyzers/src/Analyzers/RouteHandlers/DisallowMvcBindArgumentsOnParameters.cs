@@ -17,29 +17,46 @@ public partial class RouteHandlerAnalyzer : DiagnosticAnalyzer
         in OperationAnalysisContext context,
         WellKnownTypes wellKnownTypes,
         IInvocationOperation invocation,
-        IMethodSymbol methodSymbol)
+        IMethodSymbol methodSymbol
+    )
     {
         foreach (var parameter in methodSymbol.Parameters)
         {
-            var modelBindingAttribute = parameter.GetAttributes(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_ModelBinding_IBinderTypeProviderMetadata)).FirstOrDefault() ??
-                parameter.GetAttributes(wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_BindAttribute)).FirstOrDefault();
+            var modelBindingAttribute =
+                parameter
+                    .GetAttributes(
+                        wellKnownTypes.Get(
+                            WellKnownType.Microsoft_AspNetCore_Mvc_ModelBinding_IBinderTypeProviderMetadata
+                        )
+                    )
+                    .FirstOrDefault()
+                ?? parameter
+                    .GetAttributes(
+                        wellKnownTypes.Get(WellKnownType.Microsoft_AspNetCore_Mvc_BindAttribute)
+                    )
+                    .FirstOrDefault();
 
             if (modelBindingAttribute?.AttributeClass is not null)
             {
                 var location = Location.None;
                 if (!parameter.DeclaringSyntaxReferences.IsEmpty)
                 {
-                    var syntax = parameter.DeclaringSyntaxReferences[0].GetSyntax(context.CancellationToken);
+                    var syntax = parameter
+                        .DeclaringSyntaxReferences[0]
+                        .GetSyntax(context.CancellationToken);
                     location = syntax.GetLocation();
                 }
 
                 var methodName = invocation.TargetMethod.Name;
 
-                context.ReportDiagnostic(Diagnostic.Create(
-                    DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters,
-                    location,
-                    modelBindingAttribute.AttributeClass.Name,
-                    methodName));
+                context.ReportDiagnostic(
+                    Diagnostic.Create(
+                        DiagnosticDescriptors.DoNotUseModelBindingAttributesOnRouteHandlerParameters,
+                        location,
+                        modelBindingAttribute.AttributeClass.Name,
+                        methodName
+                    )
+                );
             }
         }
     }

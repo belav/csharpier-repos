@@ -11,16 +11,13 @@ using static Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Common
 
 namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Analyzers.View.ColumnDefinitions
 {
-
     [Export(typeof(ITableColumnDefinition))]
     [Name(Title)]
     internal class AnalyzerTitleColumnDefinition : TableColumnDefinitionBase
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AnalyzerTitleColumnDefinition()
-        {
-        }
+        public AnalyzerTitleColumnDefinition() { }
 
         public override string Name => Title;
         public override string DisplayName => ServicesVSResources.Title;

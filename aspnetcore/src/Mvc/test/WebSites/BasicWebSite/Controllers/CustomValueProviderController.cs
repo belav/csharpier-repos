@@ -9,18 +9,19 @@ namespace BasicWebSite.Controllers;
 public class CustomValueProviderController : Controller
 {
     [HttpGet]
-    public string CustomValueProviderDisplayName(string customValueProviderDisplayName)
-        => customValueProviderDisplayName;
+    public string CustomValueProviderDisplayName(string customValueProviderDisplayName) =>
+        customValueProviderDisplayName;
 
     [HttpGet]
-    public int[] CustomValueProviderIntValues(int[] customValueProviderIntValues)
-        => customValueProviderIntValues;
+    public int[] CustomValueProviderIntValues(int[] customValueProviderIntValues) =>
+        customValueProviderIntValues;
 
     [HttpGet]
-    public int?[] CustomValueProviderNullableIntValues(int?[] customValueProviderNullableIntValues)
-        => customValueProviderNullableIntValues;
+    public int?[] CustomValueProviderNullableIntValues(
+        int?[] customValueProviderNullableIntValues
+    ) => customValueProviderNullableIntValues;
 
     [HttpGet]
-    public string[] CustomValueProviderStringValues(string[] customValueProviderStringValues)
-        => customValueProviderStringValues;
+    public string[] CustomValueProviderStringValues(string[] customValueProviderStringValues) =>
+        customValueProviderStringValues;
 }

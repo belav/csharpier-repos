@@ -20,6 +20,7 @@ namespace System.ServiceModel.Dispatcher
     public class QueryStringConverter
     {
         Hashtable defaultSupportedQueryStringTypes;
+
         // the cache does not have a quota since it is per endpoint and is
         // bounded by the number of types in the contract at the endpoint
         Hashtable typeConverterCache;
@@ -81,16 +82,16 @@ namespace System.ServiceModel.Dispatcher
                 case TypeCode.Int16:
                     return parameter == null ? default(Int16) : XmlConvert.ToInt16(parameter);
                 case TypeCode.Int32:
+                {
+                    if (typeof(Enum).IsAssignableFrom(parameterType))
                     {
-                        if (typeof(Enum).IsAssignableFrom(parameterType))
-                        {
-                            return Enum.Parse(parameterType, parameter, true);
-                        }
-                        else
-                        {
-                            return parameter == null ? default(Int32) : XmlConvert.ToInt32(parameter);
-                        }
+                        return Enum.Parse(parameterType, parameter, true);
                     }
+                    else
+                    {
+                        return parameter == null ? default(Int32) : XmlConvert.ToInt32(parameter);
+                    }
+                }
                 case TypeCode.Int64:
                     return parameter == null ? default(Int64) : XmlConvert.ToInt64(parameter);
                 case TypeCode.UInt16:
@@ -108,56 +109,82 @@ namespace System.ServiceModel.Dispatcher
                 case TypeCode.Decimal:
                     return parameter == null ? default(Decimal) : XmlConvert.ToDecimal(parameter);
                 case TypeCode.Boolean:
-                    return parameter == null ? default(Boolean) : Convert.ToBoolean(parameter, CultureInfo.InvariantCulture);
+                    return parameter == null
+                        ? default(Boolean)
+                        : Convert.ToBoolean(parameter, CultureInfo.InvariantCulture);
                 case TypeCode.String:
                     return parameter;
                 case TypeCode.DateTime:
-                    return parameter == null ? default(DateTime) : DateTime.Parse(parameter, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind);
+                    return parameter == null
+                        ? default(DateTime)
+                        : DateTime.Parse(
+                            parameter,
+                            CultureInfo.InvariantCulture,
+                            DateTimeStyles.RoundtripKind
+                        );
                 default:
+                {
+                    if (parameterType == typeof(TimeSpan))
                     {
-                        if (parameterType == typeof(TimeSpan))
+                        // support the XML as well as default way of representing timespans
+                        TimeSpan result;
+                        if (!TimeSpan.TryParse(parameter, out result))
                         {
-                            // support the XML as well as default way of representing timespans
-                            TimeSpan result;
-                            if (!TimeSpan.TryParse(parameter, out result))
-                            {
-                                result = parameter == null ? default(TimeSpan) : XmlConvert.ToTimeSpan(parameter);
-                            }
-                            return result;
+                            result =
+                                parameter == null
+                                    ? default(TimeSpan)
+                                    : XmlConvert.ToTimeSpan(parameter);
                         }
-                        else if (parameterType == typeof(Guid))
-                        {
-                            return parameter == null ? default(Guid) : XmlConvert.ToGuid(parameter);
-                        }
-                        else if (parameterType == typeof(DateTimeOffset))
-                        {
-                            return (parameter == null) ? default(DateTimeOffset) : DateTimeOffset.Parse(parameter, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind | DateTimeStyles.AllowWhiteSpaces);
-                        }
-                        else if (parameterType == typeof(byte[]))
-                        {
-                            return (!string.IsNullOrEmpty(parameter)) ? Convert.FromBase64String(parameter) : new byte[] { };
-                        }
-                        else if (parameterType == typeof(Uri))
-                        {
-                            return (!string.IsNullOrEmpty(parameter)) ? new Uri(parameter, UriKind.RelativeOrAbsolute) : null;
-                        }
-                        else if (parameterType == typeof(object))
-                        {
-                            return parameter;
-                        }
-                        else
-                        {
-                            TypeConverter stringConverter = GetStringConverter(parameterType);
-                            if (stringConverter == null)
-                            {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                                    SR2.GetString(
-                                    SR2.TypeNotSupportedByQueryStringConverter,
-                                    parameterType.ToString(), this.GetType().Name)));
-                            }
-                            return stringConverter.ConvertFromInvariantString(parameter);
-                        }
+                        return result;
                     }
+                    else if (parameterType == typeof(Guid))
+                    {
+                        return parameter == null ? default(Guid) : XmlConvert.ToGuid(parameter);
+                    }
+                    else if (parameterType == typeof(DateTimeOffset))
+                    {
+                        return (parameter == null)
+                            ? default(DateTimeOffset)
+                            : DateTimeOffset.Parse(
+                                parameter,
+                                CultureInfo.InvariantCulture,
+                                DateTimeStyles.RoundtripKind | DateTimeStyles.AllowWhiteSpaces
+                            );
+                    }
+                    else if (parameterType == typeof(byte[]))
+                    {
+                        return (!string.IsNullOrEmpty(parameter))
+                            ? Convert.FromBase64String(parameter)
+                            : new byte[] { };
+                    }
+                    else if (parameterType == typeof(Uri))
+                    {
+                        return (!string.IsNullOrEmpty(parameter))
+                            ? new Uri(parameter, UriKind.RelativeOrAbsolute)
+                            : null;
+                    }
+                    else if (parameterType == typeof(object))
+                    {
+                        return parameter;
+                    }
+                    else
+                    {
+                        TypeConverter stringConverter = GetStringConverter(parameterType);
+                        if (stringConverter == null)
+                        {
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new NotSupportedException(
+                                    SR2.GetString(
+                                        SR2.TypeNotSupportedByQueryStringConverter,
+                                        parameterType.ToString(),
+                                        this.GetType().Name
+                                    )
+                                )
+                            );
+                        }
+                        return stringConverter.ConvertFromInvariantString(parameter);
+                    }
+                }
             }
         }
 
@@ -174,95 +201,116 @@ namespace System.ServiceModel.Dispatcher
             switch (Type.GetTypeCode(parameterType))
             {
                 case TypeCode.Byte:
-                    return XmlConvert.ToString((Byte) parameter);
+                    return XmlConvert.ToString((Byte)parameter);
                 case TypeCode.SByte:
-                    return XmlConvert.ToString((SByte) parameter);
+                    return XmlConvert.ToString((SByte)parameter);
                 case TypeCode.Int16:
-                    return XmlConvert.ToString((Int16) parameter);
+                    return XmlConvert.ToString((Int16)parameter);
                 case TypeCode.Int32:
+                {
+                    if (typeof(Enum).IsAssignableFrom(parameterType))
                     {
-                        if (typeof(Enum).IsAssignableFrom(parameterType))
-                        {
-                            return Enum.Format(parameterType, parameter, "G");
-                        }
-                        else
-                        {
-                            return XmlConvert.ToString((int) parameter);
-                        }
+                        return Enum.Format(parameterType, parameter, "G");
                     }
+                    else
+                    {
+                        return XmlConvert.ToString((int)parameter);
+                    }
+                }
                 case TypeCode.Int64:
-                    return XmlConvert.ToString((Int64) parameter);
+                    return XmlConvert.ToString((Int64)parameter);
                 case TypeCode.UInt16:
-                    return XmlConvert.ToString((UInt16) parameter);
+                    return XmlConvert.ToString((UInt16)parameter);
                 case TypeCode.UInt32:
-                    return XmlConvert.ToString((uint) parameter);
+                    return XmlConvert.ToString((uint)parameter);
                 case TypeCode.UInt64:
-                    return XmlConvert.ToString((UInt64) parameter);
+                    return XmlConvert.ToString((UInt64)parameter);
                 case TypeCode.Single:
-                    return XmlConvert.ToString((Single) parameter);
+                    return XmlConvert.ToString((Single)parameter);
                 case TypeCode.Double:
-                    return XmlConvert.ToString((double) parameter);
+                    return XmlConvert.ToString((double)parameter);
                 case TypeCode.Char:
-                    return XmlConvert.ToString((char) parameter);
+                    return XmlConvert.ToString((char)parameter);
                 case TypeCode.Decimal:
-                    return XmlConvert.ToString((decimal) parameter);
+                    return XmlConvert.ToString((decimal)parameter);
                 case TypeCode.Boolean:
-                    return XmlConvert.ToString((bool) parameter);
+                    return XmlConvert.ToString((bool)parameter);
                 case TypeCode.String:
-                    return (string) parameter;
+                    return (string)parameter;
                 case TypeCode.DateTime:
-                    return XmlConvert.ToString((DateTime) parameter, XmlDateTimeSerializationMode.RoundtripKind);
+                    return XmlConvert.ToString(
+                        (DateTime)parameter,
+                        XmlDateTimeSerializationMode.RoundtripKind
+                    );
                 default:
+                {
+                    if (parameterType == typeof(TimeSpan))
                     {
-                        if (parameterType == typeof(TimeSpan))
+                        return XmlConvert.ToString((TimeSpan)parameter);
+                    }
+                    else if (parameterType == typeof(Guid))
+                    {
+                        return XmlConvert.ToString((Guid)parameter);
+                    }
+                    else if (parameterType == typeof(DateTimeOffset))
+                    {
+                        return XmlConvert.ToString((DateTimeOffset)parameter);
+                    }
+                    else if (parameterType == typeof(byte[]))
+                    {
+                        return (parameter != null)
+                            ? Convert.ToBase64String(
+                                (byte[])parameter,
+                                Base64FormattingOptions.None
+                            )
+                            : null;
+                    }
+                    else if (parameterType == typeof(Uri) || parameterType == typeof(object))
+                    {
+                        // URI or object
+                        return (parameter != null)
+                            ? Convert.ToString(parameter, CultureInfo.InvariantCulture)
+                            : null;
+                    }
+                    else
+                    {
+                        TypeConverter stringConverter = GetStringConverter(parameterType);
+                        if (stringConverter == null)
                         {
-                            return XmlConvert.ToString((TimeSpan) parameter);
-                        }
-                        else if (parameterType == typeof(Guid))
-                        {
-                            return XmlConvert.ToString((Guid) parameter);
-                        }
-                        else if (parameterType == typeof(DateTimeOffset))
-                        {
-                            return XmlConvert.ToString((DateTimeOffset) parameter);
-                        }
-                        else if (parameterType == typeof(byte[]))
-                        {
-                            return (parameter != null) ? Convert.ToBase64String((byte[]) parameter, Base64FormattingOptions.None) : null;
-                        }
-                        else if (parameterType == typeof(Uri) || parameterType == typeof(object))
-                        {
-                            // URI or object
-                            return (parameter != null) ? Convert.ToString(parameter, CultureInfo.InvariantCulture) : null;
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new NotSupportedException(
+                                    SR2.GetString(
+                                        SR2.TypeNotSupportedByQueryStringConverter,
+                                        parameterType.ToString(),
+                                        this.GetType().Name
+                                    )
+                                )
+                            );
                         }
                         else
                         {
-                            TypeConverter stringConverter = GetStringConverter(parameterType);
-                            if (stringConverter == null)
-                            {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException(
-                                    SR2.GetString(
-                                    SR2.TypeNotSupportedByQueryStringConverter,
-                                    parameterType.ToString(), this.GetType().Name)));
-                            }
-                            else
-                            {
-                                return stringConverter.ConvertToInvariantString(parameter);
-                            }
+                            return stringConverter.ConvertToInvariantString(parameter);
                         }
                     }
+                }
             }
         }
 
         // hash table is safe for multiple readers single writer
-        [SuppressMessage("Reliability", "Reliability104:CaughtAndHandledExceptionsRule", Justification = "The exception is traced in the finally clause")]
+        [SuppressMessage(
+            "Reliability",
+            "Reliability104:CaughtAndHandledExceptionsRule",
+            Justification = "The exception is traced in the finally clause"
+        )]
         TypeConverter GetStringConverter(Type parameterType)
         {
             if (this.typeConverterCache.ContainsKey(parameterType))
             {
-                return (TypeConverter) this.typeConverterCache[parameterType];
+                return (TypeConverter)this.typeConverterCache[parameterType];
             }
-            TypeConverterAttribute[] typeConverterAttrs = parameterType.GetCustomAttributes(typeof(TypeConverterAttribute), true) as TypeConverterAttribute[];
+            TypeConverterAttribute[] typeConverterAttrs =
+                parameterType.GetCustomAttributes(typeof(TypeConverterAttribute), true)
+                as TypeConverterAttribute[];
             if (typeConverterAttrs != null)
             {
                 foreach (TypeConverterAttribute converterAttr in typeConverterAttrs)
@@ -274,7 +322,7 @@ namespace System.ServiceModel.Dispatcher
                         Exception handledException = null;
                         try
                         {
-                            converter = (TypeConverter) Activator.CreateInstance(converterType);
+                            converter = (TypeConverter)Activator.CreateInstance(converterType);
                         }
                         catch (TargetInvocationException e)
                         {
@@ -302,16 +350,24 @@ namespace System.ServiceModel.Dispatcher
                             {
                                 if (Fx.IsFatal(handledException))
                                 {
-                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(handledException);
+                                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                        handledException
+                                    );
                                 }
-                                DiagnosticUtility.TraceHandledException(handledException, TraceEventType.Warning);
+                                DiagnosticUtility.TraceHandledException(
+                                    handledException,
+                                    TraceEventType.Warning
+                                );
                             }
                         }
                         if (converter == null)
                         {
                             continue;
                         }
-                        if (converter.CanConvertTo(typeof(string)) && converter.CanConvertFrom(typeof(string)))
+                        if (
+                            converter.CanConvertTo(typeof(string))
+                            && converter.CanConvertFrom(typeof(string))
+                        )
                         {
                             this.typeConverterCache.Add(parameterType, converter);
                             return converter;

@@ -17,6 +17,6 @@ public class PageParameterController : Controller
     [HttpGet("/PageParameter/LinkToPageParameter")]
     public ActionResult LinkToPageParameter()
     {
-        return Content(Url.Action(nameof(PageParameter), new { page = "17", }));
+        return Content(Url.Action(nameof(PageParameter), new { page = "17" }));
     }
 }

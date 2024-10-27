@@ -1,4 +1,4 @@
-// 
+//
 // System.Web.Services.Protocols.DiscoveryDocumentLinksPattern.cs
 //
 // Author:
@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,41 +29,41 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-namespace System.Web.Services.Discovery {
-	public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern {
-		
-		#region Fields
-		
-		private string pattern = "*.disco";
+namespace System.Web.Services.Discovery
+{
+    public class DiscoveryDocumentLinksPattern : DiscoverySearchPattern
+    {
+        #region Fields
 
-		#endregion // Fields
+        private string pattern = "*.disco";
 
-		#region Constructors
+        #endregion // Fields
 
-		public DiscoveryDocumentLinksPattern () 
-		{
-		}
-		
-		#endregion // Constructors
+        #region Constructors
 
-		#region Properties
+        public DiscoveryDocumentLinksPattern() { }
 
-		public override string Pattern {
-			get { return pattern; }
-		}
+        #endregion // Constructors
 
-		#endregion // Properties
+        #region Properties
 
-		#region Methods
+        public override string Pattern
+        {
+            get { return pattern; }
+        }
 
-		public override DiscoveryReference GetDiscoveryReference (string filename)
-		{
-			DiscoveryDocumentReference refe = new DiscoveryDocumentReference ();
-			refe.Url = filename;
-			refe.Ref = filename;
-			return refe;
-		}
+        #endregion // Properties
 
-		#endregion // Methods
-	}
+        #region Methods
+
+        public override DiscoveryReference GetDiscoveryReference(string filename)
+        {
+            DiscoveryDocumentReference refe = new DiscoveryDocumentReference();
+            refe.Url = filename;
+            refe.Ref = filename;
+            return refe;
+        }
+
+        #endregion // Methods
+    }
 }

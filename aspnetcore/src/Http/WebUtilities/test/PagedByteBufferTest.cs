@@ -167,11 +167,10 @@ public class PagedByteBufferTest
     public void MoveTo_WithClear_ReturnsBuffers()
     {
         // Arrange
-        var input = new byte[] { 1, };
+        var input = new byte[] { 1 };
         var arrayPool = new Mock<ArrayPool<byte>>();
         var byteArray = new byte[PagedByteBuffer.PageSize];
-        arrayPool.Setup(p => p.Rent(PagedByteBuffer.PageSize))
-            .Returns(byteArray);
+        arrayPool.Setup(p => p.Rent(PagedByteBuffer.PageSize)).Returns(byteArray);
         arrayPool.Setup(p => p.Return(byteArray, false)).Verifiable();
         var memoryStream = new MemoryStream();
 
@@ -193,11 +192,10 @@ public class PagedByteBufferTest
     public async Task MoveToAsync_ReturnsBuffers()
     {
         // Arrange
-        var input = new byte[] { 1, };
+        var input = new byte[] { 1 };
         var arrayPool = new Mock<ArrayPool<byte>>();
         var byteArray = new byte[PagedByteBuffer.PageSize];
-        arrayPool.Setup(p => p.Rent(PagedByteBuffer.PageSize))
-            .Returns(byteArray);
+        arrayPool.Setup(p => p.Rent(PagedByteBuffer.PageSize)).Returns(byteArray);
         var memoryStream = new MemoryStream();
 
         using (var buffer = new PagedByteBuffer(arrayPool.Object))
@@ -220,7 +218,8 @@ public class PagedByteBufferTest
         // Arrange
         var input = Enumerable.Repeat((byte)0xba, PagedByteBuffer.PageSize * 3 + 10).ToArray();
         var arrayPool = new Mock<ArrayPool<byte>>();
-        arrayPool.Setup(p => p.Rent(PagedByteBuffer.PageSize))
+        arrayPool
+            .Setup(p => p.Rent(PagedByteBuffer.PageSize))
             .Returns(new byte[PagedByteBuffer.PageSize]);
 
         var buffer = new PagedByteBuffer(arrayPool.Object);

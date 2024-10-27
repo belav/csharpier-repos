@@ -51,7 +51,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void SecureStringToGlobalAllocUnicode_NullString_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("s", () => Marshal.SecureStringToGlobalAllocUnicode(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "s",
+                () => Marshal.SecureStringToGlobalAllocUnicode(null)
+            );
         }
 
         [Fact]
@@ -60,7 +63,9 @@ namespace System.Runtime.InteropServices.Tests
             var secureString = new SecureString();
             secureString.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(() => Marshal.SecureStringToGlobalAllocUnicode(secureString));
+            Assert.Throws<ObjectDisposedException>(
+                () => Marshal.SecureStringToGlobalAllocUnicode(secureString)
+            );
         }
 
         private static SecureString ToSecureString(string data)

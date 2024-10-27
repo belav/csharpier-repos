@@ -14,19 +14,25 @@ namespace System.ServiceModel.Channels
     [DataContract]
     public class CorrelationMessageProperty
     {
-        static readonly ReadOnlyCollection<InstanceKey> emptyInstanceKeyList = new ReadOnlyCollection<InstanceKey>(new List<InstanceKey>(0));
+        static readonly ReadOnlyCollection<InstanceKey> emptyInstanceKeyList =
+            new ReadOnlyCollection<InstanceKey>(new List<InstanceKey>(0));
 
         const string PropertyName = "CorrelationMessageProperty";
         ReadOnlyCollection<InstanceKey> additionalKeys;
         InstanceKey correlationKey;
         ReadOnlyCollection<InstanceKey> transientCorrelations;
 
-        public CorrelationMessageProperty(InstanceKey correlationKey, IEnumerable<InstanceKey> additionalKeys)
-            : this(correlationKey, additionalKeys, null)
-        {
-        }
+        public CorrelationMessageProperty(
+            InstanceKey correlationKey,
+            IEnumerable<InstanceKey> additionalKeys
+        )
+            : this(correlationKey, additionalKeys, null) { }
 
-        public CorrelationMessageProperty(InstanceKey correlationKey, IEnumerable<InstanceKey> additionalKeys, IEnumerable<InstanceKey> transientCorrelations)
+        public CorrelationMessageProperty(
+            InstanceKey correlationKey,
+            IEnumerable<InstanceKey> additionalKeys,
+            IEnumerable<InstanceKey> transientCorrelations
+        )
         {
             if (correlationKey == null)
             {
@@ -40,7 +46,8 @@ namespace System.ServiceModel.Channels
 
             this.correlationKey = correlationKey;
 
-            ICollection<InstanceKey> additionalKeysCollection = additionalKeys as ICollection<InstanceKey>;
+            ICollection<InstanceKey> additionalKeysCollection =
+                additionalKeys as ICollection<InstanceKey>;
             if (additionalKeysCollection != null && additionalKeysCollection.Count == 0)
             {
                 this.additionalKeys = emptyInstanceKeyList;
@@ -59,22 +66,33 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            ICollection<InstanceKey> transientCorrelationsCollection = transientCorrelations as ICollection<InstanceKey>;
-            if (transientCorrelations == null || (transientCorrelationsCollection != null && transientCorrelationsCollection.Count == 0))
+            ICollection<InstanceKey> transientCorrelationsCollection =
+                transientCorrelations as ICollection<InstanceKey>;
+            if (
+                transientCorrelations == null
+                || (
+                    transientCorrelationsCollection != null
+                    && transientCorrelationsCollection.Count == 0
+                )
+            )
             {
                 this.transientCorrelations = emptyInstanceKeyList;
             }
             else
             {
-                this.transientCorrelations = transientCorrelations as ReadOnlyCollection<InstanceKey>;
+                this.transientCorrelations =
+                    transientCorrelations as ReadOnlyCollection<InstanceKey>;
                 if (this.transientCorrelations == null)
                 {
-                    IList<InstanceKey> transientCorrelationsList = transientCorrelations as IList<InstanceKey>;
+                    IList<InstanceKey> transientCorrelationsList =
+                        transientCorrelations as IList<InstanceKey>;
                     if (transientCorrelationsList == null)
                     {
                         transientCorrelationsList = new List<InstanceKey>(transientCorrelations);
                     }
-                    this.transientCorrelations = new ReadOnlyCollection<InstanceKey>(transientCorrelationsList);
+                    this.transientCorrelations = new ReadOnlyCollection<InstanceKey>(
+                        transientCorrelationsList
+                    );
                 }
             }
         }
@@ -91,27 +109,27 @@ namespace System.ServiceModel.Channels
 
         public ReadOnlyCollection<InstanceKey> AdditionalKeys
         {
-            get 
-            { 
+            get
+            {
                 // This can be true if the object was deserialized.
                 if (this.additionalKeys == null)
                 {
                     this.additionalKeys = emptyInstanceKeyList;
                 }
-                return this.additionalKeys; 
+                return this.additionalKeys;
             }
         }
 
         public ReadOnlyCollection<InstanceKey> TransientCorrelations
         {
-            get 
-            { 
+            get
+            {
                 // This can be true if the object was deserialized.
                 if (this.transientCorrelations == null)
                 {
                     this.transientCorrelations = emptyInstanceKeyList;
                 }
-                return this.transientCorrelations; 
+                return this.transientCorrelations;
             }
         }
 
@@ -124,7 +142,10 @@ namespace System.ServiceModel.Channels
             return TryGet(message.Properties, out property);
         }
 
-        public static bool TryGet(MessageProperties properties, out CorrelationMessageProperty property)
+        public static bool TryGet(
+            MessageProperties properties,
+            out CorrelationMessageProperty property
+        )
         {
             if (properties == null)
             {
@@ -144,23 +165,24 @@ namespace System.ServiceModel.Channels
         }
 
         // Surrogate for serialization purposes
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used by serialization")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Used by serialization"
+        )]
         [DataMember(Name = "CorrelationKey", EmitDefaultValue = false)]
         internal InstanceKey SerializedCorrelationKey
         {
-            get
-            {
-                return this.correlationKey;
-            }
-
-            set
-            {
-                this.correlationKey = value;
-            }
+            get { return this.correlationKey; }
+            set { this.correlationKey = value; }
         }
 
         // Surrogate for serialization purposes
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used by serialization")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Used by serialization"
+        )]
         [DataMember(Name = "AdditionalCorrelations", EmitDefaultValue = false)]
         internal List<InstanceKey> SerializedAdditionalKeys
         {
@@ -172,16 +194,22 @@ namespace System.ServiceModel.Channels
                 }
                 return new List<InstanceKey>(this.AdditionalKeys);
             }
-
             set
             {
-                Fx.Assert(value != null, "A null value should not have been serialized because EmitDefaultValue is false");
+                Fx.Assert(
+                    value != null,
+                    "A null value should not have been serialized because EmitDefaultValue is false"
+                );
                 this.additionalKeys = new ReadOnlyCollection<InstanceKey>(value);
             }
         }
 
         // Surrogate for serialization purposes
-        [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode", Justification = "Used by serialization")]
+        [SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode",
+            Justification = "Used by serialization"
+        )]
         [DataMember(Name = "TransientCorrelations", EmitDefaultValue = false)]
         internal List<InstanceKey> SerializedTransientCorrelations
         {
@@ -193,10 +221,12 @@ namespace System.ServiceModel.Channels
                 }
                 return new List<InstanceKey>(this.TransientCorrelations);
             }
-
             set
             {
-                Fx.Assert(value != null, "A null value should not have been serialized because EmitDefaultValue is false");
+                Fx.Assert(
+                    value != null,
+                    "A null value should not have been serialized because EmitDefaultValue is false"
+                );
                 this.transientCorrelations = new ReadOnlyCollection<InstanceKey>(value);
             }
         }

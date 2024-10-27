@@ -16,8 +16,10 @@ namespace System.Activities
 
         // First element when items is not empty
         int head;
+
         // Next vacancy when items are not full
         int tail;
+
         // Number of elements.
         int count;
 

@@ -5,11 +5,27 @@
 // ------------------------------------------------------------------------------
 
 [assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.Component))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.DesignerAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.Design.Serialization.DesignerSerializerAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.EditorAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.InvalidAsynchronousStateException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.InvalidEnumArgumentException))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.ISupportInitialize))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.TypeConverterAttribute))]
-[assembly: System.Runtime.CompilerServices.TypeForwardedTo(typeof(System.ComponentModel.TypeDescriptionProviderAttribute))]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.DesignerAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.Design.Serialization.DesignerSerializerAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.EditorAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.InvalidAsynchronousStateException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.InvalidEnumArgumentException)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.ISupportInitialize)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.TypeConverterAttribute)
+)]
+[assembly: System.Runtime.CompilerServices.TypeForwardedTo(
+    typeof(System.ComponentModel.TypeDescriptionProviderAttribute)
+)]

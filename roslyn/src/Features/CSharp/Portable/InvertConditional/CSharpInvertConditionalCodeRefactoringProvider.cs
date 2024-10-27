@@ -13,18 +13,26 @@ using Microsoft.CodeAnalysis.InvertConditional;
 namespace Microsoft.CodeAnalysis.CSharp.InvertConditional
 {
     [ExtensionOrder(Before = PredefinedCodeRefactoringProviderNames.IntroduceVariable)]
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.InvertConditional), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.InvertConditional
+        ),
+        Shared
+    ]
     internal class CSharpInvertConditionalCodeRefactoringProvider
         : AbstractInvertConditionalCodeRefactoringProvider<ConditionalExpressionSyntax>
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpInvertConditionalCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpInvertConditionalCodeRefactoringProvider() { }
 
         // Don't offer if the conditional is missing the colon and the conditional is too incomplete.
-        protected override bool ShouldOffer(ConditionalExpressionSyntax conditional)
-            => !conditional.ColonToken.IsMissing;
+        protected override bool ShouldOffer(ConditionalExpressionSyntax conditional) =>
+            !conditional.ColonToken.IsMissing;
     }
 }

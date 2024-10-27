@@ -8,9 +8,13 @@
 
             public NestedExpressionMapFromTests()
             {
-                _config = new MapperConfiguration(cfg => 
+                _config = new MapperConfiguration(cfg =>
                     cfg.CreateProjection<Parent, ParentDto>()
-                        .ForMember(dest => dest.TotalSum, opt => opt.MapFrom(p => p.Children.Sum(child => child.Value))));
+                        .ForMember(
+                            dest => dest.TotalSum,
+                            opt => opt.MapFrom(p => p.Children.Sum(child => child.Value))
+                        )
+                );
             }
 
             [Fact]
@@ -24,8 +28,8 @@
                         {
                             new Child() { Value = 4 },
                             new Child() { Value = 5 },
-                        }
-                    }
+                        },
+                    },
                 };
 
                 var projected = items.AsQueryable().ProjectTo<ParentDto>(_config).ToList();
@@ -38,7 +42,6 @@
         {
             public int TotalSum { get; set; }
         }
-
 
         public class Parent
         {

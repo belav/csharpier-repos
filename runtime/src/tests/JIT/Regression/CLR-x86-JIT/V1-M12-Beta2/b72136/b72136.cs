@@ -3,6 +3,7 @@
 //
 
 using Xunit;
+
 namespace Test
 {
     using System;
@@ -10,6 +11,7 @@ namespace Test
     public class AA
     {
         public static object m_xStatic1 = null;
+
         public void Method1(ref byte param1) { }
     }
 
@@ -25,15 +27,12 @@ namespace Test
         {
             try
             {
-                new AA().Method1(
-                    ref new byte[] { 73 }[(new byte[16])[0] & 1]);
+                new AA().Method1(ref new byte[] { 73 }[(new byte[16])[0] & 1]);
             }
             catch (Exception X) { }
             try
             {
-                new BB().Method1(
-                    new float[] { ((float[])AA.m_xStatic1)[0] }
-                );
+                new BB().Method1(new float[] { ((float[])AA.m_xStatic1)[0] });
             }
             catch (Exception X) { }
         }

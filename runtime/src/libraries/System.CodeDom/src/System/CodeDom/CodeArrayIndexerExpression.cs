@@ -9,7 +9,10 @@ namespace System.CodeDom
 
         public CodeArrayIndexerExpression() { }
 
-        public CodeArrayIndexerExpression(CodeExpression targetObject, params CodeExpression[] indices)
+        public CodeArrayIndexerExpression(
+            CodeExpression targetObject,
+            params CodeExpression[] indices
+        )
         {
             TargetObject = targetObject;
             Indices.AddRange(indices);

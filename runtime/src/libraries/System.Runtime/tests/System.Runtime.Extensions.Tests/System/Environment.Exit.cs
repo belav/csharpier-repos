@@ -24,7 +24,13 @@ namespace System.Tests
         [MemberData(nameof(ExitCodeValues))]
         public static void CheckExitCode(int expectedExitCode)
         {
-            RemoteExecutor.Invoke(s => int.Parse(s), expectedExitCode.ToString(), new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    s => int.Parse(s),
+                    expectedExitCode.ToString(),
+                    new RemoteInvokeOptions { ExpectedExitCode = expectedExitCode }
+                )
+                .Dispose();
         }
 
         [Theory]
@@ -46,7 +52,12 @@ namespace System.Tests
             int expectedExitCode = 123;
             const string AppName = "VoidMainWithExitCodeApp.exe";
 
-            using (Process p = Process.Start(RemoteExecutor.HostRunner, new[] { AppName, expectedExitCode.ToString(), mode.ToString() }))
+            using (
+                Process p = Process.Start(
+                    RemoteExecutor.HostRunner,
+                    new[] { AppName, expectedExitCode.ToString(), mode.ToString() }
+                )
+            )
             {
                 p.WaitForExit();
                 Assert.Equal(expectedExitCode, p.ExitCode);

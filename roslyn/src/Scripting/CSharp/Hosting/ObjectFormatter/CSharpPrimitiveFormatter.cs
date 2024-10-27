@@ -21,56 +21,140 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting
             return ObjectDisplay.FormatLiteral(value);
         }
 
-        protected override string FormatLiteral(string value, bool useQuotes, bool escapeNonPrintable, int numberRadix = NumberRadixDecimal)
+        protected override string FormatLiteral(
+            string value,
+            bool useQuotes,
+            bool escapeNonPrintable,
+            int numberRadix = NumberRadixDecimal
+        )
         {
-            var options = GetObjectDisplayOptions(useQuotes: useQuotes, escapeNonPrintable: escapeNonPrintable, numberRadix: numberRadix);
+            var options = GetObjectDisplayOptions(
+                useQuotes: useQuotes,
+                escapeNonPrintable: escapeNonPrintable,
+                numberRadix: numberRadix
+            );
             return ObjectDisplay.FormatLiteral(value, options);
         }
 
-        protected override string FormatLiteral(char c, bool useQuotes, bool escapeNonPrintable, bool includeCodePoints = false, int numberRadix = NumberRadixDecimal)
+        protected override string FormatLiteral(
+            char c,
+            bool useQuotes,
+            bool escapeNonPrintable,
+            bool includeCodePoints = false,
+            int numberRadix = NumberRadixDecimal
+        )
         {
-            var options = GetObjectDisplayOptions(useQuotes: useQuotes, escapeNonPrintable: escapeNonPrintable, includeCodePoints: includeCodePoints, numberRadix: numberRadix);
+            var options = GetObjectDisplayOptions(
+                useQuotes: useQuotes,
+                escapeNonPrintable: escapeNonPrintable,
+                includeCodePoints: includeCodePoints,
+                numberRadix: numberRadix
+            );
             return ObjectDisplay.FormatLiteral(c, options);
         }
 
-        protected override string FormatLiteral(sbyte value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            sbyte value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(byte value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            byte value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(short value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            short value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(ushort value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            ushort value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(int value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            int value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(uint value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            uint value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(long value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            long value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
-        protected override string FormatLiteral(ulong value, int numberRadix = NumberRadixDecimal, CultureInfo cultureInfo = null)
+        protected override string FormatLiteral(
+            ulong value,
+            int numberRadix = NumberRadixDecimal,
+            CultureInfo cultureInfo = null
+        )
         {
-            return ObjectDisplay.FormatLiteral(value, GetObjectDisplayOptions(numberRadix: numberRadix), cultureInfo);
+            return ObjectDisplay.FormatLiteral(
+                value,
+                GetObjectDisplayOptions(numberRadix: numberRadix),
+                cultureInfo
+            );
         }
 
         protected override string FormatLiteral(double value, CultureInfo cultureInfo = null)

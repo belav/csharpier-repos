@@ -14,7 +14,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData(0x10000, 16)]
         public void Ctor_FailureCase_FirstCodePoint(int firstCodePoint, int rangeSize)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("firstCodePoint", () => new UnicodeRange(firstCodePoint, rangeSize));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "firstCodePoint",
+                () => new UnicodeRange(firstCodePoint, rangeSize)
+            );
         }
 
         [Theory]
@@ -22,7 +25,10 @@ namespace System.Text.Encodings.Web.Tests
         [InlineData(0x0100, 0x10000)]
         public void Ctor_FailureCase_RangeSize(int firstCodePoint, int rangeSize)
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("length", () => new UnicodeRange(firstCodePoint, rangeSize));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "length",
+                () => new UnicodeRange(firstCodePoint, rangeSize)
+            );
         }
 
         [Fact]
@@ -39,7 +45,10 @@ namespace System.Text.Encodings.Web.Tests
         [Fact]
         public void FromSpan_FailureCase()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("lastCharacter", () => UnicodeRange.Create('\u0020', '\u0010'));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "lastCharacter",
+                () => UnicodeRange.Create('\u0020', '\u0010')
+            );
         }
 
         [Fact]

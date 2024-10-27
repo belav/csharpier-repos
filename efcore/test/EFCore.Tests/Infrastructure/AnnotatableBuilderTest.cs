@@ -53,6 +53,6 @@ public class AnnotatableBuilderTest
         Assert.Null(metadata.GetAnnotations().Single().Value);
     }
 
-    private AnnotatableBuilder<Model, InternalModelBuilder> CreateAnnotatableBuilder()
-        => new InternalModelBuilder(new Model());
+    private AnnotatableBuilder<Model, InternalModelBuilder> CreateAnnotatableBuilder() =>
+        new InternalModelBuilder(new Model());
 }

@@ -30,10 +30,7 @@ public static partial class H2SpecCommands
     const int S_IROTH = 0x4;
     const int S_IXOTH = 0x1;
 
-    const int _0755 =
-        S_IRUSR | S_IXUSR | S_IWUSR
-        | S_IRGRP | S_IXGRP
-        | S_IROTH | S_IXOTH;
+    const int _0755 = S_IRUSR | S_IXUSR | S_IWUSR | S_IRGRP | S_IXGRP | S_IROTH | S_IXOTH;
 
     [LibraryImport("libc", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
     private static partial int chmod(string pathname, int mode);
@@ -129,7 +126,12 @@ public static partial class H2SpecCommands
 
                 if (IsTestLine(line, out var testNumber, out var description))
                 {
-                    testCases.Add(new Tuple<string, string>($"{groupName}/{sectionId}/{testNumber}", description));
+                    testCases.Add(
+                        new Tuple<string, string>(
+                            $"{groupName}/{sectionId}/{testNumber}",
+                            description
+                        )
+                    );
                     continue;
                 }
 
@@ -220,7 +222,8 @@ public static partial class H2SpecCommands
             process.StartInfo.FileName = GetToolLocation();
             process.StartInfo.RedirectStandardOutput = true;
             process.StartInfo.RedirectStandardError = true;
-            process.StartInfo.Arguments = $"{testId} -p {port.ToString(CultureInfo.InvariantCulture)} --strict -v -j {tempFile} --timeout {TimeoutSeconds}"
+            process.StartInfo.Arguments =
+                $"{testId} -p {port.ToString(CultureInfo.InvariantCulture)} --strict -v -j {tempFile} --timeout {TimeoutSeconds}"
                 + (https ? " --tls --insecure" : "");
             process.StartInfo.WindowStyle = ProcessWindowStyle.Hidden;
             process.StartInfo.CreateNoWindow = true;
@@ -239,7 +242,9 @@ public static partial class H2SpecCommands
                     logger.LogError(args.Data);
                 }
             };
-            var exitedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+            var exitedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
             process.EnableRaisingEvents = true; // Enables Exited
             process.Exited += (_, args) =>
             {
@@ -251,7 +256,12 @@ public static partial class H2SpecCommands
             process.BeginOutputReadLine(); // Starts OutputDataReceived
             process.BeginErrorReadLine(); // Starts ErrorDataReceived
 
-            if (await Task.WhenAny(exitedTcs.Task, Task.Delay(TimeSpan.FromSeconds(TimeoutSeconds * 2))) != exitedTcs.Task)
+            if (
+                await Task.WhenAny(
+                    exitedTcs.Task,
+                    Task.Delay(TimeSpan.FromSeconds(TimeoutSeconds * 2))
+                ) != exitedTcs.Task
+            )
             {
                 try
                 {
@@ -259,9 +269,14 @@ public static partial class H2SpecCommands
                 }
                 catch (Exception ex)
                 {
-                    throw new TimeoutException($"h2spec didn't exit within {TimeoutSeconds * 2} seconds.", ex);
+                    throw new TimeoutException(
+                        $"h2spec didn't exit within {TimeoutSeconds * 2} seconds.",
+                        ex
+                    );
                 }
-                throw new TimeoutException($"h2spec didn't exit within {TimeoutSeconds * 2} seconds.");
+                throw new TimeoutException(
+                    $"h2spec didn't exit within {TimeoutSeconds * 2} seconds."
+                );
             }
 
             var results = File.ReadAllText(tempFile);
@@ -278,7 +293,12 @@ public static partial class H2SpecCommands
                 if (node.Attributes["errors"].Value != "0")
                 {
                     // This does not list the individual sub-tests in each section
-                    failures.Add("Test failed: " + node.Attributes["package"].Value + "; " + node.Attributes["name"].Value);
+                    failures.Add(
+                        "Test failed: "
+                            + node.Attributes["package"].Value
+                            + "; "
+                            + node.Attributes["name"].Value
+                    );
                 }
                 if (node.Attributes["tests"].Value != "0")
                 {

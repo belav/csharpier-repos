@@ -14,59 +14,42 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
     {
         private ImmutableArray<ITypeSymbol> _lazyTypeArguments;
 
-        public NamedTypeSymbol(CodeAnalysis.NullableAnnotation nullableAnnotation = CodeAnalysis.NullableAnnotation.None)
-            : base(nullableAnnotation)
-        {
-        }
+        public NamedTypeSymbol(
+            CodeAnalysis.NullableAnnotation nullableAnnotation =
+                CodeAnalysis.NullableAnnotation.None
+        )
+            : base(nullableAnnotation) { }
 
         internal abstract Symbols.NamedTypeSymbol UnderlyingNamedTypeSymbol { get; }
 
         int INamedTypeSymbol.Arity
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.Arity;
-            }
+            get { return UnderlyingNamedTypeSymbol.Arity; }
         }
 
         ImmutableArray<IMethodSymbol> INamedTypeSymbol.InstanceConstructors
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.InstanceConstructors.GetPublicSymbols();
-            }
+            get { return UnderlyingNamedTypeSymbol.InstanceConstructors.GetPublicSymbols(); }
         }
 
         ImmutableArray<IMethodSymbol> INamedTypeSymbol.StaticConstructors
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.StaticConstructors.GetPublicSymbols();
-            }
+            get { return UnderlyingNamedTypeSymbol.StaticConstructors.GetPublicSymbols(); }
         }
 
         ImmutableArray<IMethodSymbol> INamedTypeSymbol.Constructors
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.Constructors.GetPublicSymbols();
-            }
+            get { return UnderlyingNamedTypeSymbol.Constructors.GetPublicSymbols(); }
         }
 
         IEnumerable<string> INamedTypeSymbol.MemberNames
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.MemberNames;
-            }
+            get { return UnderlyingNamedTypeSymbol.MemberNames; }
         }
 
         ImmutableArray<ITypeParameterSymbol> INamedTypeSymbol.TypeParameters
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.TypeParameters.GetPublicSymbols();
-            }
+            get { return UnderlyingNamedTypeSymbol.TypeParameters.GetPublicSymbols(); }
         }
 
         ImmutableArray<ITypeSymbol> INamedTypeSymbol.TypeArguments
@@ -75,8 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 if (_lazyTypeArguments.IsDefault)
                 {
-
-                    ImmutableInterlocked.InterlockedCompareExchange(ref _lazyTypeArguments, UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.GetPublicSymbols(), default);
+                    ImmutableInterlocked.InterlockedCompareExchange(
+                        ref _lazyTypeArguments,
+                        UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics.GetPublicSymbols(),
+                        default
+                    );
                 }
 
                 return _lazyTypeArguments;
@@ -93,49 +79,49 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ImmutableArray<CustomModifier> INamedTypeSymbol.GetTypeArgumentCustomModifiers(int ordinal)
         {
-            return UnderlyingNamedTypeSymbol.TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[ordinal].CustomModifiers;
+            return UnderlyingNamedTypeSymbol
+                .TypeArgumentsWithAnnotationsNoUseSiteDiagnostics[ordinal]
+                .CustomModifiers;
         }
 
         INamedTypeSymbol INamedTypeSymbol.OriginalDefinition
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.OriginalDefinition.GetPublicSymbol();
-            }
+            get { return UnderlyingNamedTypeSymbol.OriginalDefinition.GetPublicSymbol(); }
         }
 
         IMethodSymbol INamedTypeSymbol.DelegateInvokeMethod
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.DelegateInvokeMethod.GetPublicSymbol();
-            }
+            get { return UnderlyingNamedTypeSymbol.DelegateInvokeMethod.GetPublicSymbol(); }
         }
 
         INamedTypeSymbol INamedTypeSymbol.EnumUnderlyingType
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.EnumUnderlyingType.GetPublicSymbol();
-            }
+            get { return UnderlyingNamedTypeSymbol.EnumUnderlyingType.GetPublicSymbol(); }
         }
 
         INamedTypeSymbol INamedTypeSymbol.ConstructedFrom
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.ConstructedFrom.GetPublicSymbol();
-            }
+            get { return UnderlyingNamedTypeSymbol.ConstructedFrom.GetPublicSymbol(); }
         }
 
         INamedTypeSymbol INamedTypeSymbol.Construct(params ITypeSymbol[] typeArguments)
         {
-            return UnderlyingNamedTypeSymbol.Construct(ConstructTypeArguments(typeArguments), unbound: false).GetPublicSymbol();
+            return UnderlyingNamedTypeSymbol
+                .Construct(ConstructTypeArguments(typeArguments), unbound: false)
+                .GetPublicSymbol();
         }
 
-        INamedTypeSymbol INamedTypeSymbol.Construct(ImmutableArray<ITypeSymbol> typeArguments, ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations)
+        INamedTypeSymbol INamedTypeSymbol.Construct(
+            ImmutableArray<ITypeSymbol> typeArguments,
+            ImmutableArray<CodeAnalysis.NullableAnnotation> typeArgumentNullableAnnotations
+        )
         {
-            return UnderlyingNamedTypeSymbol.Construct(ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations), unbound: false).GetPublicSymbol();
+            return UnderlyingNamedTypeSymbol
+                .Construct(
+                    ConstructTypeArguments(typeArguments, typeArgumentNullableAnnotations),
+                    unbound: false
+                )
+                .GetPublicSymbol();
         }
 
         INamedTypeSymbol INamedTypeSymbol.ConstructUnboundGenericType()
@@ -145,10 +131,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         ISymbol INamedTypeSymbol.AssociatedSymbol
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -158,10 +141,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
         /// </summary>
         ImmutableArray<IFieldSymbol> INamedTypeSymbol.TupleElements
         {
-            get
-            {
-                return UnderlyingNamedTypeSymbol.TupleElements.GetPublicSymbols();
-            }
+            get { return UnderlyingNamedTypeSymbol.TupleElements.GetPublicSymbols(); }
         }
 
         /// <summary>
@@ -174,9 +154,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             {
                 var type = UnderlyingNamedTypeSymbol;
                 var tupleUnderlyingType = type.TupleUnderlyingType;
-                return type.Equals(tupleUnderlyingType, TypeCompareKind.ConsiderEverything) ?
-                    null :
-                    tupleUnderlyingType.GetPublicSymbol();
+                return type.Equals(tupleUnderlyingType, TypeCompareKind.ConsiderEverything)
+                    ? null
+                    : tupleUnderlyingType.GetPublicSymbol();
             }
         }
 
@@ -184,13 +164,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
 
         bool INamedTypeSymbol.IsGenericType => UnderlyingNamedTypeSymbol.IsGenericType;
 
-        bool INamedTypeSymbol.IsUnboundGenericType => UnderlyingNamedTypeSymbol.IsUnboundGenericType;
+        bool INamedTypeSymbol.IsUnboundGenericType =>
+            UnderlyingNamedTypeSymbol.IsUnboundGenericType;
 
         bool INamedTypeSymbol.IsScriptClass => UnderlyingNamedTypeSymbol.IsScriptClass;
 
         bool INamedTypeSymbol.IsImplicitClass => UnderlyingNamedTypeSymbol.IsImplicitClass;
 
-        bool INamedTypeSymbol.MightContainExtensionMethods => UnderlyingNamedTypeSymbol.MightContainExtensionMethods;
+        bool INamedTypeSymbol.MightContainExtensionMethods =>
+            UnderlyingNamedTypeSymbol.MightContainExtensionMethods;
 
         bool INamedTypeSymbol.IsSerializable => UnderlyingNamedTypeSymbol.IsSerializable;
 
@@ -198,9 +180,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             // Internally we can treat a metadata type as being a file-local type for EE.
             // For public API, only source types are considered file-local types.
             UnderlyingNamedTypeSymbol.OriginalDefinition is SourceMemberContainerTypeSymbol
-                && UnderlyingNamedTypeSymbol.IsFileLocal;
+            && UnderlyingNamedTypeSymbol.IsFileLocal;
 
-        INamedTypeSymbol INamedTypeSymbol.NativeIntegerUnderlyingType => UnderlyingNamedTypeSymbol.NativeIntegerUnderlyingType.GetPublicSymbol();
+        INamedTypeSymbol INamedTypeSymbol.NativeIntegerUnderlyingType =>
+            UnderlyingNamedTypeSymbol.NativeIntegerUnderlyingType.GetPublicSymbol();
 
         #region ISymbol Members
 
@@ -214,7 +197,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols.PublicModel
             return visitor.VisitNamedType(this);
         }
 
-        protected sealed override TResult Accept<TArgument, TResult>(SymbolVisitor<TArgument, TResult> visitor, TArgument argument)
+        protected sealed override TResult Accept<TArgument, TResult>(
+            SymbolVisitor<TArgument, TResult> visitor,
+            TArgument argument
+        )
         {
             return visitor.VisitNamedType(this, argument);
         }

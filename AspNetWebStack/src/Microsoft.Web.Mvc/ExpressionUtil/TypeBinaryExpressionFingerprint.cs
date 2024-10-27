@@ -12,7 +12,11 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
     // TypeBinary fingerprint class
     // Expression of form "obj is T"
 
-    [SuppressMessage("Microsoft.Usage", "CA2218:OverrideGetHashCodeOnOverridingEquals", Justification = "Overrides AddToHashCodeCombiner() instead.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2218:OverrideGetHashCodeOnOverridingEquals",
+        Justification = "Overrides AddToHashCodeCombiner() instead."
+    )]
     internal sealed class TypeBinaryExpressionFingerprint : ExpressionFingerprint
     {
         public TypeBinaryExpressionFingerprint(ExpressionType nodeType, Type type, Type typeOperand)
@@ -28,8 +32,8 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         {
             TypeBinaryExpressionFingerprint other = obj as TypeBinaryExpressionFingerprint;
             return (other != null)
-                   && Equals(this.TypeOperand, other.TypeOperand)
-                   && this.Equals(other);
+                && Equals(this.TypeOperand, other.TypeOperand)
+                && this.Equals(other);
         }
 
         internal override void AddToHashCodeCombiner(HashCodeCombiner combiner)

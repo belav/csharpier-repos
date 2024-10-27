@@ -8,17 +8,23 @@ namespace System.ServiceModel.Channels
 
     public abstract class StreamUpgradeInitiator
     {
-        protected StreamUpgradeInitiator()
-        {
-        }
+        protected StreamUpgradeInitiator() { }
 
         public abstract string GetNextUpgrade();
 
         public abstract Stream InitiateUpgrade(Stream stream);
-        public abstract IAsyncResult BeginInitiateUpgrade(Stream stream, AsyncCallback callback, object state);
+        public abstract IAsyncResult BeginInitiateUpgrade(
+            Stream stream,
+            AsyncCallback callback,
+            object state
+        );
         public abstract Stream EndInitiateUpgrade(IAsyncResult result);
 
-        internal virtual IAsyncResult BeginOpen(TimeSpan timeout, AsyncCallback callback, object state)
+        internal virtual IAsyncResult BeginOpen(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -28,7 +34,11 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        internal virtual IAsyncResult BeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        internal virtual IAsyncResult BeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             return new CompletedAsyncResult(callback, state);
         }
@@ -38,12 +48,8 @@ namespace System.ServiceModel.Channels
             CompletedAsyncResult.End(result);
         }
 
-        internal virtual void Open(TimeSpan timeout)
-        {
-        }
+        internal virtual void Open(TimeSpan timeout) { }
 
-        internal virtual void Close(TimeSpan timeout)
-        {
-        }
+        internal virtual void Close(TimeSpan timeout) { }
     }
 }

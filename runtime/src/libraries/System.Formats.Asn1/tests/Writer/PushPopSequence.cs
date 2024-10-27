@@ -16,8 +16,7 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void PopNewWriter(AsnEncodingRules ruleSet)
         {
             AsnWriter writer = new AsnWriter(ruleSet);
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSequence());
         }
 
         [Theory]
@@ -28,7 +27,8 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter writer = new AsnWriter(ruleSet);
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -41,8 +41,7 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushSequence();
             writer.PopSequence();
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSequence());
         }
 
         [Theory]
@@ -56,7 +55,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PopSequence();
 
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -68,8 +68,7 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             writer.PushSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true));
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence());
+            Assert.Throws<InvalidOperationException>(() => writer.PopSequence());
         }
 
         [Theory]
@@ -82,7 +81,8 @@ namespace System.Formats.Asn1.Tests.Writer
             writer.PushSequence();
 
             Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true)));
+                () => writer.PopSequence(new Asn1Tag(TagClass.ContextSpecific, (int)ruleSet, true))
+            );
         }
 
         [Theory]
@@ -303,12 +303,12 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void SimpleContentShift(AsnEncodingRules ruleSet)
         {
             const string ExpectedHex =
-                "308180" +
-                    "047E" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D";
+                "308180"
+                + "047E"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D";
 
             AsnWriter writer = new AsnWriter(ruleSet);
             SimpleContentShiftCore(writer, ExpectedHex);
@@ -318,13 +318,13 @@ namespace System.Formats.Asn1.Tests.Writer
         public static void SimpleContentShift_CER()
         {
             const string ExpectedHex =
-                "3080" +
-                    "047E" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                        "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D" +
-                    "0000";
+                "3080"
+                + "047E"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "F00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00DF00D"
+                + "0000";
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.CER);
             SimpleContentShiftCore(writer, ExpectedHex);
@@ -334,15 +334,16 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             AsnWriter innerWriter = new AsnWriter(ruleSet);
             byte[] paddedBigEndianN = (
-                "00" +
-                "AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED369731156" +
-                "20968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925BCE" +
-                "624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8CBB" +
-                "5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF18" +
-                "7B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C94" +
-                "AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF2B" +
-                "82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6D9" +
-                "FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD8847").HexToByteArray();
+                "00"
+                + "AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED369731156"
+                + "20968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925BCE"
+                + "624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8CBB"
+                + "5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF18"
+                + "7B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C94"
+                + "AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF2B"
+                + "82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6D9"
+                + "FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD8847"
+            ).HexToByteArray();
 
             // Now it's padded little-endian.
             Array.Reverse(paddedBigEndianN);
@@ -377,33 +378,41 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             const string ExpectedHex =
                 // CONSTRUCTED SEQUENCE
-                "30820124" +
-                    // CONSTRUCTED SEQUENCE
-                    "300D" +
-                        // OBJECT IDENTIFIER (1.2.840.113549.1.1.1, rsaEncryption)
-                        "06092A864886F70D010101" +
-                        // NULL
-                        "0500" +
-                    // BIT STRING
-                    "03820111" +
-                        // 0 unused bits
-                        "00" +
-                        // sneaky inspection of the payload bytes
-                        // CONSTRUCTED SEQUENCE
-                        "3082010C" +
-                            // INTEGER (n)
-                            "02820101" +
-                                "00AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED3697311" +
-                                "5620968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925B" +
-                                "CE624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8C" +
-                                "BB5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF" +
-                                "187B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C" +
-                                "94AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF" +
-                                "2B82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6" +
-                                "D9FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD88" +
-                                "47" +
-                            // INTEGER (e)
-                            "02050200000441";
+                "30820124"
+                +
+                // CONSTRUCTED SEQUENCE
+                "300D"
+                +
+                // OBJECT IDENTIFIER (1.2.840.113549.1.1.1, rsaEncryption)
+                "06092A864886F70D010101"
+                +
+                // NULL
+                "0500"
+                +
+                // BIT STRING
+                "03820111"
+                +
+                // 0 unused bits
+                "00"
+                +
+                // sneaky inspection of the payload bytes
+                // CONSTRUCTED SEQUENCE
+                "3082010C"
+                +
+                // INTEGER (n)
+                "02820101"
+                + "00AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED3697311"
+                + "5620968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925B"
+                + "CE624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8C"
+                + "BB5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF"
+                + "187B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C"
+                + "94AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF"
+                + "2B82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6"
+                + "D9FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD88"
+                + "47"
+                +
+                // INTEGER (e)
+                "02050200000441";
 
             WriteRSAPublicKeyCore(ruleSet, ExpectedHex);
         }
@@ -413,40 +422,51 @@ namespace System.Formats.Asn1.Tests.Writer
         {
             const string ExpectedHex =
                 // CONSTRUCTED SEQUENCE
-                "3080" +
-                    // CONSTRUCTED SEQUENCE
-                    "3080" +
-                        // OBJECT IDENTIFIER (1.2.840.113549.1.1.1, rsaEncryption)
-                        "06092A864886F70D010101" +
-                        // NULL
-                        "0500" +
-                        // End-of-Contents
-                        "0000" +
-                    // BIT STRING
-                    "03820111" +
-                        // 0 unused bits
-                        "00" +
-                        // sneaky inspection of the payload bytes
-                        // CONSTRUCTED SEQUENCE
-                        "3080" +
-                            // INTEGER (n)
-                            "02820101" +
-                                "00AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED3697311" +
-                                "5620968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925B" +
-                                "CE624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8C" +
-                                "BB5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF" +
-                                "187B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C" +
-                                "94AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF" +
-                                "2B82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6" +
-                                "D9FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD88" +
-                                "47" +
-                            // INTEGER (e)
-                            "02050200000441" +
-                            // End-of-Contents
-                            "0000" +
-                        // (no EoC for the BIT STRING)
-                    // End-of-Contents
-                    "0000";
+                "3080"
+                +
+                // CONSTRUCTED SEQUENCE
+                "3080"
+                +
+                // OBJECT IDENTIFIER (1.2.840.113549.1.1.1, rsaEncryption)
+                "06092A864886F70D010101"
+                +
+                // NULL
+                "0500"
+                +
+                // End-of-Contents
+                "0000"
+                +
+                // BIT STRING
+                "03820111"
+                +
+                // 0 unused bits
+                "00"
+                +
+                // sneaky inspection of the payload bytes
+                // CONSTRUCTED SEQUENCE
+                "3080"
+                +
+                // INTEGER (n)
+                "02820101"
+                + "00AF81C1CBD8203F624A539ED6608175372393A2837D4890E48A19DED3697311"
+                + "5620968D6BE0D3DAA38AA777BE02EE0B6B93B724E8DCC12B632B4FA80BBC925B"
+                + "CE624F4CA7CC606306B39403E28C932D24DD546FFE4EF6A37F10770B2215EA8C"
+                + "BB5BF427E8C4D89B79EB338375100C5F83E55DE9B4466DDFBEEE42539AEF33EF"
+                + "187B7760C3B1A1B2103C2D8144564A0C1039A09C85CF6B5974EB516FC8D6623C"
+                + "94AE3A5A0BB3B4C792957D432391566CF3E2A52AFB0C142B9E0681B8972671AF"
+                + "2B82DD390A39B939CF719568687E4990A63050CA7768DCD6B378842F18FDB1F6"
+                + "D9FF096BAF7BEB98DCF930D66FCFD503F58D41BFF46212E24E3AFC45EA42BD88"
+                + "47"
+                +
+                // INTEGER (e)
+                "02050200000441"
+                +
+                // End-of-Contents
+                "0000"
+                +
+                // (no EoC for the BIT STRING)
+                // End-of-Contents
+                "0000";
 
             WriteRSAPublicKeyCore(AsnEncodingRules.CER, ExpectedHex);
         }
@@ -475,7 +495,9 @@ namespace System.Formats.Asn1.Tests.Writer
 
             Assert.Throws<InvalidOperationException>(() => writer.GetEncodedLength());
             Assert.Throws<InvalidOperationException>(() => writer.Encode());
-            Assert.Throws<InvalidOperationException>(() => writer.TryEncode(Span<byte>.Empty, out written));
+            Assert.Throws<InvalidOperationException>(
+                () => writer.TryEncode(Span<byte>.Empty, out written)
+            );
             Assert.Equal(-5, written);
 
             byte[] buf = new byte[10];
@@ -493,7 +515,8 @@ namespace System.Formats.Asn1.Tests.Writer
             AsnWriter writer = new AsnWriter(ruleSet);
             AssertExtensions.Throws<ArgumentException>(
                 "tag",
-                () => writer.PushSequence(Asn1Tag.Null));
+                () => writer.PushSequence(Asn1Tag.Null)
+            );
         }
 
         [Theory]
@@ -507,8 +530,7 @@ namespace System.Formats.Asn1.Tests.Writer
 
             writer.PushSetOf(tag);
 
-            Assert.Throws<InvalidOperationException>(
-                () => writer.PopSequence(tag));
+            Assert.Throws<InvalidOperationException>(() => writer.PopSequence(tag));
         }
 
         [Theory]

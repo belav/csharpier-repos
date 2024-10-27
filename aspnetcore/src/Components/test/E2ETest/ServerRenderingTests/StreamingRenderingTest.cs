@@ -16,18 +16,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
-public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class StreamingRenderingTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public StreamingRenderingTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     public void CanRenderNonstreamingPageWithoutInjectingStreamingMarkers()
@@ -75,12 +74,19 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         {
             // Each time we click, there's another streaming render batch and the UI is updated
             Browser.FindElement(By.Id("add-item-link")).Click();
-            Browser.Collection(getDisplayedItems, Enumerable.Range(1, i).Select<int, Action<IWebElement>>(index =>
-            {
-                return useLargeItems
-                    ? actualItem => Assert.StartsWith($"Large Item {index}", actualItem.Text)
-                    : actualItem => Assert.Equal($"Item {index}", actualItem.Text);
-            }).ToArray());
+            Browser.Collection(
+                getDisplayedItems,
+                Enumerable
+                    .Range(1, i)
+                    .Select<int, Action<IWebElement>>(index =>
+                    {
+                        return useLargeItems
+                            ? actualItem =>
+                                Assert.StartsWith($"Large Item {index}", actualItem.Text)
+                            : actualItem => Assert.Equal($"Item {index}", actualItem.Text);
+                    })
+                    .ToArray()
+            );
             Assert.Equal("Waiting for more...", getStatusText().Text);
 
             // These are insta-removed so they don't pollute anything
@@ -97,7 +103,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public void RetainsDomNodesDuringStreamingRenderingUpdates(bool useLargeItems, bool duringEnhancedNavigation)
+    public void RetainsDomNodesDuringStreamingRenderingUpdates(
+        bool useLargeItems,
+        bool duringEnhancedNavigation
+    )
     {
         IWebElement originalH1Elem;
         var linkText = useLargeItems ? "Large Streaming" : "Streaming";
@@ -144,7 +153,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         await Task.Delay(3000); // Doesn't matter if this duration is too short or too long. It's just so the assertions don't start unnecessarily early.
 
         // Note that the tests always run with detailed errors off, so we only see this generic message
-        Browser.Contains("There was an unhandled exception on the current request.", () => Browser.Exists(By.TagName("html")).Text);
+        Browser.Contains(
+            "There was an unhandled exception on the current request.",
+            () => Browser.Exists(By.TagName("html")).Text
+        );
 
         // See that 'back' still works
         Browser.Navigate().Back();
@@ -160,8 +172,14 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         EnhancedNavigationTestUtil.SuppressEnhancedNavigation(this, suppressEnhancedNavigation);
         Navigate($"{ServerPathBase}/streaming-scripts");
 
-        Browser.Equal("This was set by JS via src", () => Browser.FindElement(By.Id("dynamic-script-output-src")).Text);
-        Browser.Equal("This was set by JS via inline script asynchronously (special chars: ' \" </script>)", () => Browser.FindElement(By.Id("dynamic-script-output-inline")).Text);
+        Browser.Equal(
+            "This was set by JS via src",
+            () => Browser.FindElement(By.Id("dynamic-script-output-src")).Text
+        );
+        Browser.Equal(
+            "This was set by JS via inline script asynchronously (special chars: ' \" </script>)",
+            () => Browser.FindElement(By.Id("dynamic-script-output-inline")).Text
+        );
         Browser.Exists(By.Id("dynamic-p-before"));
         Browser.Exists(By.Id("dynamic-p-between"));
         Browser.Exists(By.Id("dynamic-p-after"));
@@ -177,7 +195,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         // Perform a bandwidth-limited get request. It's difficult to pick parameters that surface the
         // problem reported in #50198 but these ones did so (until the implementation was fixed).
         var itemCount = 100000;
-        var url = new Uri(new Uri(Browser.Url), $"{ServerPathBase}/overlapping-streaming?count={itemCount}");
+        var url = new Uri(
+            new Uri(Browser.Url),
+            $"{ServerPathBase}/overlapping-streaming?count={itemCount}"
+        );
         var response = await BandwidthThrottledGet(url.ToString(), 1024 * 10, 1);
         response = response.Replace("&#xD;", "");
 
@@ -189,7 +210,11 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         var ssrBlockCount = response.Split("<blazor-ssr>").Length - 1;
         Assert.Equal(1, ssrBlockCount);
         var streamingBlock = ExtractContent(response, "<blazor-ssr>", "</blazor-ssr>");
-        var streamingContent = ExtractContent(streamingBlock, "<div id=\"content-to-verify\">", "</div>");
+        var streamingContent = ExtractContent(
+            streamingBlock,
+            "<div id=\"content-to-verify\">",
+            "</div>"
+        );
         Assert.Equal(ExpectedContent("Modified", itemCount), streamingContent);
 
         static string ExtractContent(string html, string startMarker, string endMarker)
@@ -197,15 +222,25 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
             var startPos = html.IndexOf(startMarker, StringComparison.Ordinal);
             Assert.True(startPos > 0);
             var endPos = html.IndexOf(endMarker, startPos, StringComparison.Ordinal);
-            var content = html.Substring(startPos + startMarker.Length, endPos - startPos - startMarker.Length);
+            var content = html.Substring(
+                startPos + startMarker.Length,
+                endPos - startPos - startMarker.Length
+            );
             Assert.True(content.Length > 0);
             return content;
         }
 
-        static string ExpectedContent(string message, int itemCount)
-            => string.Join("", Enumerable.Range(0, itemCount).Select(i => $"<span>{i}: {message}</span>&#xA;"));
+        static string ExpectedContent(string message, int itemCount) =>
+            string.Join(
+                "",
+                Enumerable.Range(0, itemCount).Select(i => $"<span>{i}: {message}</span>&#xA;")
+            );
 
-        static async Task<string> BandwidthThrottledGet(string url, int chunkLength, int delayPerChunkMs)
+        static async Task<string> BandwidthThrottledGet(
+            string url,
+            int chunkLength,
+            int delayPerChunkMs
+        )
         {
             var httpClient = new HttpClient { MaxResponseContentBufferSize = chunkLength };
             var responseStream = await httpClient.GetStreamAsync(url);
@@ -214,7 +249,11 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
             var resultBuilder = new StringBuilder();
             while (true)
             {
-                var bytesRead = await responseStream.ReadAsync(receiveBuffer, 0, receiveBuffer.Length);
+                var bytesRead = await responseStream.ReadAsync(
+                    receiveBuffer,
+                    0,
+                    receiveBuffer.Length
+                );
                 if (bytesRead == 0)
                 {
                     return resultBuilder.ToString();
@@ -229,7 +268,9 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
     [Theory]
     [InlineData(false)]
     [InlineData(true)]
-    public async void StopsProcessingStreamingOutputFromPreviousRequestAfterEnhancedNav(bool duringEnhancedNavigation)
+    public async void StopsProcessingStreamingOutputFromPreviousRequestAfterEnhancedNav(
+        bool duringEnhancedNavigation
+    )
     {
         IWebElement originalH1Elem;
 
@@ -257,7 +298,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
         Assert.StartsWith("http", addItemsUrl);
 
         // Navigate away using enhanced nav, before the response is completed
-        Browser.Exists(By.TagName("nav")).FindElement(By.LinkText("Streaming with interactivity")).Click();
+        Browser
+            .Exists(By.TagName("nav"))
+            .FindElement(By.LinkText("Streaming with interactivity"))
+            .Click();
         Browser.Equal("Streaming Rendering with Interactivity", () => originalH1Elem.Text);
         var statusElem = Browser.FindElement(By.Id("status"));
         Assert.Equal("Not streaming", statusElem.Text);
@@ -276,7 +320,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
     public void CanStreamDirectlyIntoSectionContentConnectedToNonStreamingOutlet()
     {
         Navigate($"{ServerPathBase}/streaming-with-sections");
-        Browser.Equal("This is some streaming content", () => Browser.Exists(By.Id("streaming-message")).Text);
+        Browser.Equal(
+            "This is some streaming content",
+            () => Browser.Exists(By.Id("streaming-message")).Text
+        );
     }
 
     [Fact]
@@ -294,7 +341,10 @@ public class StreamingRenderingTest : ServerTestBase<BasicTestAppServerSiteFixtu
 
             Browser.True(() =>
             {
-                var loadCount = int.Parse(Browser.FindElement(By.Id("load-count")).Text, CultureInfo.InvariantCulture);
+                var loadCount = int.Parse(
+                    Browser.FindElement(By.Id("load-count")).Text,
+                    CultureInfo.InvariantCulture
+                );
                 return loadCount >= i;
             });
         }

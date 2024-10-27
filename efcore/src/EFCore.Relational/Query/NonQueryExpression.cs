@@ -35,18 +35,14 @@ public class NonQueryExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="deleteExpression">The delete expression to delete rows on the server.</param>
     public NonQueryExpression(DeleteExpression deleteExpression)
-        : this(deleteExpression, CommandSource.ExecuteDelete)
-    {
-    }
+        : this(deleteExpression, CommandSource.ExecuteDelete) { }
 
     /// <summary>
     ///     Creates a new instance of the <see cref="NonQueryExpression" /> class with associated update expression.
     /// </summary>
     /// <param name="updateExpression">The update expression to update rows on the server.</param>
     public NonQueryExpression(UpdateExpression updateExpression)
-        : this(updateExpression, CommandSource.ExecuteUpdate)
-    {
-    }
+        : this(updateExpression, CommandSource.ExecuteUpdate) { }
 
     /// <summary>
     ///     An expression representing the non-query operation to be run against server.
@@ -59,12 +55,10 @@ public class NonQueryExpression : Expression, IPrintableExpression
     public virtual CommandSource CommandSource { get; }
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(int);
+    public override Type Type => typeof(int);
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <inheritdoc />
     protected override Expression VisitChildren(ExpressionVisitor visitor)
@@ -80,10 +74,8 @@ public class NonQueryExpression : Expression, IPrintableExpression
     /// </summary>
     /// <param name="expression">The <see cref="Expression" /> property of the result.</param>
     /// <returns>This expression if no children changed, or an expression with the updated children.</returns>
-    public virtual NonQueryExpression Update(Expression expression)
-        => expression != Expression
-            ? new NonQueryExpression(expression, CommandSource)
-            : this;
+    public virtual NonQueryExpression Update(Expression expression) =>
+        expression != Expression ? new NonQueryExpression(expression, CommandSource) : this;
 
     /// <inheritdoc />
     public virtual void Print(ExpressionPrinter expressionPrinter)
@@ -93,16 +85,16 @@ public class NonQueryExpression : Expression, IPrintableExpression
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is NonQueryExpression nonQueryExpression
-                && Equals(nonQueryExpression));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is NonQueryExpression nonQueryExpression && Equals(nonQueryExpression)
+        );
 
-    private bool Equals(NonQueryExpression nonQueryExpression)
-        => Expression == nonQueryExpression.Expression;
+    private bool Equals(NonQueryExpression nonQueryExpression) =>
+        Expression == nonQueryExpression.Expression;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => Expression.GetHashCode();
+    public override int GetHashCode() => Expression.GetHashCode();
 }

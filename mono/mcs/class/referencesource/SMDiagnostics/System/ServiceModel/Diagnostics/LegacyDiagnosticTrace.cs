@@ -8,6 +8,7 @@ namespace System.ServiceModel.Diagnostics
     using System.ComponentModel;
     using System.Configuration;
     using System.Diagnostics;
+    using System.Diagnostics.CodeAnalysis;
     using System.Globalization;
     using System.Runtime;
     using System.Runtime.Diagnostics;
@@ -15,7 +16,6 @@ namespace System.ServiceModel.Diagnostics
     using System.Security.Permissions;
     using System.Text;
     using System.Xml;
-    using System.Diagnostics.CodeAnalysis;
 
     class LegacyDiagnosticTrace : DiagnosticTraceBase
     {
@@ -32,8 +32,7 @@ namespace System.ServiceModel.Diagnostics
         {
             if (this.TraceSource != null)
             {
-                if (this.TraceSource.Switch.Level != SourceLevels.Off &&
-                    level == SourceLevels.Off)
+                if (this.TraceSource.Switch.Level != SourceLevels.Off && level == SourceLevels.Off)
                 {
                     TraceSource temp = this.TraceSource;
                     this.CreateTraceSource();
@@ -43,19 +42,30 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        [Obsolete("For SMDiagnostics.dll use only. Call DiagnosticUtility.ShouldUseActivity instead")]
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Call DiagnosticUtility.ShouldUseActivity instead"
+        )]
         internal bool ShouldUseActivity
         {
             get { return this.shouldUseActivity; }
         }
 
 #pragma warning disable 56500
-        [Obsolete("For SMDiagnostics.dll use only. Never 'new' this type up unless you are DiagnosticUtility.")]
+        [Obsolete(
+            "For SMDiagnostics.dll use only. Never 'new' this type up unless you are DiagnosticUtility."
+        )]
         [Fx.Tag.SecurityNote(Critical = "Sets eventSourceName.")]
         [SecurityCritical]
-        [SuppressMessage(FxCop.Category.Usage, FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
-                Justification = "LegacyDiagnosticTrace is an internal class without derived classes")]
-        internal LegacyDiagnosticTrace(TraceSourceKind sourceType, string traceSourceName, string eventSourceName)
+        [SuppressMessage(
+            FxCop.Category.Usage,
+            FxCop.Rule.DoNotCallOverridableMethodsInConstructors,
+            Justification = "LegacyDiagnosticTrace is an internal class without derived classes"
+        )]
+        internal LegacyDiagnosticTrace(
+            TraceSourceKind sourceType,
+            string traceSourceName,
+            string eventSourceName
+        )
             : base(traceSourceName)
         {
             this.traceSourceType = sourceType;
@@ -78,35 +88,63 @@ namespace System.ServiceModel.Diagnostics
                 {
                     throw;
                 }
-                System.Runtime.Diagnostics.EventLogger logger = new System.Runtime.Diagnostics.EventLogger(this.EventSourceName, null);
-                logger.LogEvent(TraceEventType.Error, (ushort)System.Runtime.Diagnostics.EventLogCategory.Tracing, (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing, false,
-                    e.ToString());
+                System.Runtime.Diagnostics.EventLogger logger =
+                    new System.Runtime.Diagnostics.EventLogger(this.EventSourceName, null);
+                logger.LogEvent(
+                    TraceEventType.Error,
+                    (ushort)System.Runtime.Diagnostics.EventLogCategory.Tracing,
+                    (uint)System.Runtime.Diagnostics.EventLogEventId.FailedToSetupTracing,
+                    false,
+                    e.ToString()
+                );
             }
         }
 #pragma warning restore 56500
-        
+
         [SecuritySafeCritical]
         void CreateTraceSource()
         {
             PiiTraceSource tempSource = null;
             if (this.traceSourceType == TraceSourceKind.PiiTraceSource)
             {
-                tempSource = new PiiTraceSource(this.TraceSourceName, this.EventSourceName, LegacyDiagnosticTrace.DefaultLevel);
+                tempSource = new PiiTraceSource(
+                    this.TraceSourceName,
+                    this.EventSourceName,
+                    LegacyDiagnosticTrace.DefaultLevel
+                );
             }
             else
             {
-                tempSource = new DiagnosticTraceSource(this.TraceSourceName, this.EventSourceName, LegacyDiagnosticTrace.DefaultLevel);
+                tempSource = new DiagnosticTraceSource(
+                    this.TraceSourceName,
+                    this.EventSourceName,
+                    LegacyDiagnosticTrace.DefaultLevel
+                );
             }
 
             SetTraceSource(tempSource);
         }
 
 #pragma warning disable 56500
-        internal void TraceEvent(TraceEventType type, int code, string msdnTraceCode, string description, TraceRecord trace, Exception exception, object source)
+        internal void TraceEvent(
+            TraceEventType type,
+            int code,
+            string msdnTraceCode,
+            string description,
+            TraceRecord trace,
+            Exception exception,
+            object source
+        )
         {
 #pragma warning disable 618
-            Fx.Assert(exception == null || type <= TraceEventType.Information, "Exceptions should be traced at Information or higher");
-            Fx.Assert(!string.IsNullOrEmpty(description), "All TraceCodes should have a description");
+            Fx.Assert(
+                exception == null || type <= TraceEventType.Information,
+                "Exceptions should be traced at Information or higher"
+            );
+            Fx.Assert(
+                !string.IsNullOrEmpty(description),
+                "All TraceCodes should have a description"
+            );
 #pragma warning restore 618
             TraceXPathNavigator navigator = null;
             try
@@ -117,12 +155,34 @@ namespace System.ServiceModel.Diagnostics
                 {
                     try
                     {
-                        BuildTrace(type, msdnTraceCode, description, trace, exception, source, out navigator);
+                        BuildTrace(
+                            type,
+                            msdnTraceCode,
+                            description,
+                            trace,
+                            exception,
+                            source,
+                            out navigator
+                        );
                     }
                     catch (PlainXmlWriter.MaxSizeExceededException)
                     {
-                        StringTraceRecord codeTraceRecord = new StringTraceRecord("TruncatedTraceId", msdnTraceCode);
-                        this.TraceEvent(type, DiagnosticsTraceCode.TraceTruncatedQuotaExceeded, LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.ServiceModel.Diagnostics", "TraceTruncatedQuotaExceeded"), TraceSR.GetString(TraceSR.TraceCodeTraceTruncatedQuotaExceeded), codeTraceRecord, null, null);
+                        StringTraceRecord codeTraceRecord = new StringTraceRecord(
+                            "TruncatedTraceId",
+                            msdnTraceCode
+                        );
+                        this.TraceEvent(
+                            type,
+                            DiagnosticsTraceCode.TraceTruncatedQuotaExceeded,
+                            LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                                "System.ServiceModel.Diagnostics",
+                                "TraceTruncatedQuotaExceeded"
+                            ),
+                            TraceSR.GetString(TraceSR.TraceCodeTraceTruncatedQuotaExceeded),
+                            codeTraceRecord,
+                            null,
+                            null
+                        );
                     }
                     this.TraceSource.TraceData(type, code, navigator);
                     if (this.CalledShutdown)
@@ -144,10 +204,23 @@ namespace System.ServiceModel.Diagnostics
         }
 #pragma warning restore 56500
 
-        internal void TraceEvent(TraceEventType type, int code, string msdnTraceCode, string description, TraceRecord trace, Exception exception, Guid activityId, object source)
+        internal void TraceEvent(
+            TraceEventType type,
+            int code,
+            string msdnTraceCode,
+            string description,
+            TraceRecord trace,
+            Exception exception,
+            Guid activityId,
+            object source
+        )
         {
 #pragma warning disable 618
-            using ((this.ShouldUseActivity && Guid.Empty != activityId) ? Activity.CreateActivity(activityId) : null)
+            using (
+                (this.ShouldUseActivity && Guid.Empty != activityId)
+                    ? Activity.CreateActivity(activityId)
+                    : null
+            )
 #pragma warning restore 618
             {
                 this.TraceEvent(type, code, msdnTraceCode, description, trace, exception, source);
@@ -157,10 +230,13 @@ namespace System.ServiceModel.Diagnostics
         // helper for standardized trace code generation
         static internal string GenerateMsdnTraceCode(string traceSource, string traceCodeString)
         {
-            return string.Format(CultureInfo.InvariantCulture,
+            return string.Format(
+                CultureInfo.InvariantCulture,
                 "http://msdn.microsoft.com/{0}/library/{1}.{2}.aspx",
                 CultureInfo.CurrentCulture.Name,
-                traceSource, traceCodeString);
+                traceSource,
+                traceCodeString
+            );
         }
 
 #pragma warning disable 56500
@@ -207,9 +283,21 @@ namespace System.ServiceModel.Diagnostics
                         Dictionary<string, string> values = new Dictionary<string, string>(3);
                         values["AppDomain.FriendlyName"] = AppDomain.CurrentDomain.FriendlyName;
                         values["ProcessName"] = DiagnosticTraceBase.ProcessName;
-                        values["ProcessId"] = DiagnosticTraceBase.ProcessId.ToString(CultureInfo.CurrentCulture);
-                        this.TraceEvent(TraceEventType.Information, DiagnosticsTraceCode.AppDomainUnload, LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.ServiceModel.Diagnostics", "AppDomainUnload"), TraceSR.GetString(TraceSR.TraceCodeAppDomainUnload),
-                            new DictionaryTraceRecord(values), null, null);
+                        values["ProcessId"] = DiagnosticTraceBase.ProcessId.ToString(
+                            CultureInfo.CurrentCulture
+                        );
+                        this.TraceEvent(
+                            TraceEventType.Information,
+                            DiagnosticsTraceCode.AppDomainUnload,
+                            LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                                "System.ServiceModel.Diagnostics",
+                                "AppDomainUnload"
+                            ),
+                            TraceSR.GetString(TraceSR.TraceCodeAppDomainUnload),
+                            new DictionaryTraceRecord(values),
+                            null,
+                            null
+                        );
                     }
                     this.TraceSource.Flush();
                 }
@@ -218,7 +306,15 @@ namespace System.ServiceModel.Diagnostics
 
         protected override void OnUnhandledException(Exception exception)
         {
-            TraceEvent(TraceEventType.Critical, DiagnosticsTraceCode.UnhandledException, "UnhandledException", TraceSR.GetString(TraceSR.UnhandledException), null, exception, null);
+            TraceEvent(
+                TraceEventType.Critical,
+                DiagnosticsTraceCode.UnhandledException,
+                "UnhandledException",
+                TraceSR.GetString(TraceSR.UnhandledException),
+                null,
+                exception,
+                null
+            );
         }
 
         public bool ShouldLogPii
@@ -233,7 +329,6 @@ namespace System.ServiceModel.Diagnostics
 
                 return false;
             }
-
             set
             {
                 PiiTraceSource traceSource = this.TraceSource as PiiTraceSource;
@@ -244,8 +339,15 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        void BuildTrace(TraceEventType type, string msdnTraceCode, string description, TraceRecord trace,
-            Exception exception, object source, out TraceXPathNavigator navigator)
+        void BuildTrace(
+            TraceEventType type,
+            string msdnTraceCode,
+            string description,
+            TraceRecord trace,
+            Exception exception,
+            object source,
+            out TraceXPathNavigator navigator
+        )
         {
             PlainXmlWriter xmlWriter = new PlainXmlWriter(LegacyDiagnosticTrace.MaxTraceSize);
             navigator = xmlWriter.Navigator;
@@ -258,16 +360,32 @@ namespace System.ServiceModel.Diagnostics
             }
         }
 
-        void BuildTrace(PlainXmlWriter xml, TraceEventType type, string msdnTraceCode, string description,
-            TraceRecord trace, Exception exception, object source)
+        void BuildTrace(
+            PlainXmlWriter xml,
+            TraceEventType type,
+            string msdnTraceCode,
+            string description,
+            TraceRecord trace,
+            Exception exception,
+            object source
+        )
         {
             xml.WriteStartElement(DiagnosticStrings.TraceRecordTag);
-            xml.WriteAttributeString(DiagnosticStrings.NamespaceTag, LegacyDiagnosticTrace.TraceRecordVersion);
-            xml.WriteAttributeString(DiagnosticStrings.SeverityTag, DiagnosticTraceBase.LookupSeverity(type));
+            xml.WriteAttributeString(
+                DiagnosticStrings.NamespaceTag,
+                LegacyDiagnosticTrace.TraceRecordVersion
+            );
+            xml.WriteAttributeString(
+                DiagnosticStrings.SeverityTag,
+                DiagnosticTraceBase.LookupSeverity(type)
+            );
 
             xml.WriteElementString(DiagnosticStrings.TraceCodeTag, msdnTraceCode);
             xml.WriteElementString(DiagnosticStrings.DescriptionTag, description);
-            xml.WriteElementString(DiagnosticStrings.AppDomain, DiagnosticTraceBase.AppDomainFriendlyName);
+            xml.WriteElementString(
+                DiagnosticStrings.AppDomain,
+                DiagnosticTraceBase.AppDomainFriendlyName
+            );
 
             if (source != null)
             {
@@ -301,10 +419,18 @@ namespace System.ServiceModel.Diagnostics
 
         public override void TraceEventLogEvent(TraceEventType type, TraceRecord traceRecord)
         {
-            TraceEvent(type,
-                DiagnosticsTraceCode.EventLog, LegacyDiagnosticTrace.GenerateMsdnTraceCode("System.ServiceModel.Diagnostics", "EventLog"),
+            TraceEvent(
+                type,
+                DiagnosticsTraceCode.EventLog,
+                LegacyDiagnosticTrace.GenerateMsdnTraceCode(
+                    "System.ServiceModel.Diagnostics",
+                    "EventLog"
+                ),
                 TraceSR.GetString(TraceSR.TraceCodeEventLog),
-                traceRecord, null, null);
+                traceRecord,
+                null,
+                null
+            );
         }
     }
 }

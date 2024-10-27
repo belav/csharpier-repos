@@ -52,14 +52,13 @@ public class UnmappedCustomer
     [MaxLength(24)]
     public string? Fax { get; set; }
 
-    public bool IsLondon
-        => City == "London";
+    public bool IsLondon => City == "London";
 
     [NotMapped]
     public virtual List<UnmappedOrder>? Orders { get; set; }
 
-    public static UnmappedCustomer FromCustomer(Customer customer)
-        => new(customer.CustomerID)
+    public static UnmappedCustomer FromCustomer(Customer customer) =>
+        new(customer.CustomerID)
         {
             CompanyName = customer.CompanyName,
             ContactName = customer.ContactName,
@@ -70,6 +69,6 @@ public class UnmappedCustomer
             Zip = customer.PostalCode,
             Country = customer.Country,
             Phone = customer.Phone,
-            Fax = customer.Fax
+            Fax = customer.Fax,
         };
 }

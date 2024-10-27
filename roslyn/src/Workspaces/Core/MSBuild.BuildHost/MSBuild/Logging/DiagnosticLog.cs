@@ -17,17 +17,13 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
         public DiagnosticLogItem this[int index] => _items[index];
         public bool IsEmpty => _items.Count == 0;
 
-        public bool HasFailure
-            => _items.Any(i => i.Kind == WorkspaceDiagnosticKind.Failure);
+        public bool HasFailure => _items.Any(i => i.Kind == WorkspaceDiagnosticKind.Failure);
 
-        public DiagnosticLog()
-            => _items = new List<DiagnosticLogItem>();
+        public DiagnosticLog() => _items = new List<DiagnosticLogItem>();
 
-        public IEnumerator<DiagnosticLogItem> GetEnumerator()
-            => _items.GetEnumerator();
+        public IEnumerator<DiagnosticLogItem> GetEnumerator() => _items.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
         public void Add(DiagnosticLogItem item)
         {
@@ -39,10 +35,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.Logging
             _items.Add(item);
         }
 
-        public void Add(string message, string projectFilePath, WorkspaceDiagnosticKind kind = WorkspaceDiagnosticKind.Failure)
-            => _items.Add(new DiagnosticLogItem(kind, message, projectFilePath));
+        public void Add(
+            string message,
+            string projectFilePath,
+            WorkspaceDiagnosticKind kind = WorkspaceDiagnosticKind.Failure
+        ) => _items.Add(new DiagnosticLogItem(kind, message, projectFilePath));
 
-        public void Add(Exception exception, string projectFilePath, WorkspaceDiagnosticKind kind = WorkspaceDiagnosticKind.Failure)
-            => _items.Add(new DiagnosticLogItem(kind, exception.Message, projectFilePath));
+        public void Add(
+            Exception exception,
+            string projectFilePath,
+            WorkspaceDiagnosticKind kind = WorkspaceDiagnosticKind.Failure
+        ) => _items.Add(new DiagnosticLogItem(kind, exception.Message, projectFilePath));
     }
 }

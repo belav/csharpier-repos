@@ -7,12 +7,10 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-
 using Moq.Properties;
 
 namespace Moq.Linq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal class MockSetupsBuilder : ExpressionVisitor
@@ -34,7 +32,6 @@ namespace Moq.Linq
         class MockSetupsBuilder : ExpressionVisitor
     */
     class MockSetupsBuilder : ExpressionVisitor
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
@@ -63,8 +60,15 @@ namespace Moq.Linq
     */
     {
         static readonly string[] queryableMethods = new[] { "First", "Where", "FirstOrDefault" };
-        static readonly string[] unsupportedMethods = new[] { "All", "Any", "Last", "LastOrDefault", "Single", "SingleOrDefault" };
-
+        static readonly string[] unsupportedMethods = new[]
+        {
+            "All",
+            "Any",
+            "Last",
+            "LastOrDefault",
+            "Single",
+            "SingleOrDefault",
+        };
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -95,16 +99,23 @@ namespace Moq.Linq
         int stackIndex;
         int quoteDepth;
 
-        public MockSetupsBuilder()
-        {
-        }
+        public MockSetupsBuilder() { }
 
         protected override Expression VisitBinary(BinaryExpression node)
         {
             if (this.stackIndex > 0)
             {
-                if (node.NodeType != ExpressionType.Equal && node.NodeType != ExpressionType.AndAlso)
-                    throw new NotSupportedException(string.Format(CultureInfo.CurrentCulture, Resources.LinqBinaryOperatorNotSupported, node.ToStringFixed()));
+                if (
+                    node.NodeType != ExpressionType.Equal
+                    && node.NodeType != ExpressionType.AndAlso
+                )
+                    throw new NotSupportedException(
+                        string.Format(
+                            CultureInfo.CurrentCulture,
+                            Resources.LinqBinaryOperatorNotSupported,
+                            node.ToStringFixed()
+                        )
+                    );
 
                 if (node.NodeType == ExpressionType.Equal)
                 {
@@ -136,7 +147,10 @@ namespace Moq.Linq
 
         protected override Expression VisitMethodCall(MethodCallExpression node)
         {
-            if (node.Method.DeclaringType == typeof(Queryable) && queryableMethods.Contains(node.Method.Name))
+            if (
+                node.Method.DeclaringType == typeof(Queryable)
+                && queryableMethods.Contains(node.Method.Name)
+            )
             {
                 this.stackIndex++;
                 var result = base.VisitMethodCall(node);
@@ -146,10 +160,13 @@ namespace Moq.Linq
 
             if (unsupportedMethods.Contains(node.Method.Name))
             {
-                throw new NotSupportedException(string.Format(
-                    CultureInfo.CurrentCulture,
-                    Resources.LinqMethodNotSupported,
-                    node.Method.Name));
+                throw new NotSupportedException(
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Resources.LinqMethodNotSupported,
+                        node.Method.Name
+                    )
+                );
             }
 
             if (this.stackIndex > 0 && node.Type == typeof(bool))
@@ -164,7 +181,8 @@ namespace Moq.Linq
         {
             if (this.stackIndex > 0 && node.NodeType == ExpressionType.Not)
             {
-                return ConvertToSetup(node.Operand, Expression.Constant(false)) ?? base.VisitUnary(node);
+                return ConvertToSetup(node.Operand, Expression.Constant(false))
+                    ?? base.VisitUnary(node);
             }
 
             if (node.NodeType == ExpressionType.Quote)
@@ -210,7 +228,10 @@ namespace Moq.Linq
 
                 case ExpressionType.Convert:
                     var left1 = (UnaryExpression)left;
-                    return ConvertToSetup(left1.Operand, Expression.Convert(right, left1.Operand.Type));
+                    return ConvertToSetup(
+                        left1.Operand,
+                        Expression.Convert(right, left1.Operand.Type)
+                    );
             }
 
             return null;
@@ -251,15 +272,12 @@ namespace Moq.Linq
             return Expression.Call(
                 Mock.SetupReturnsMethod,
                 // mock:
-                Expression.Call(
-                    Mock.GetMethod.MakeGenericMethod(v.MockObject.Type),
-                    v.MockObject),
+                Expression.Call(Mock.GetMethod.MakeGenericMethod(v.MockObject.Type), v.MockObject),
                 // expression:
-                Expression.Lambda(
-                    rewrittenLeft,
-                    v.MockObjectParameter),
+                Expression.Lambda(rewrittenLeft, v.MockObjectParameter),
                 // value:
-                Expression.Convert(right, typeof(object)));  // explicit boxing operation required for value types
+                Expression.Convert(right, typeof(object))
+            ); // explicit boxing operation required for value types
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -288,7 +306,6 @@ namespace Moq.Linq
         ///   stores a reference to it, and finally replaces it with a new <see cref="ParameterExpression"/>.
         /// </summary>
         sealed class ReplaceMockObjectWithParameter : ExpressionVisitor
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                     private Expression mockObject;
@@ -325,7 +342,11 @@ namespace Moq.Linq
 
             protected override Expression VisitMember(MemberExpression node)
             {
-                if (node.Expression is ParameterExpression pe && pe.Type.IsDefined(typeof(CompilerGeneratedAttribute)) && pe.Type.Name.Contains("f__AnonymousType"))
+                if (
+                    node.Expression is ParameterExpression pe
+                    && pe.Type.IsDefined(typeof(CompilerGeneratedAttribute))
+                    && pe.Type.Name.Contains("f__AnonymousType")
+                )
                 {
                     // In LINQ query expressions with more than one `from` clause such as:
                     //

@@ -45,8 +45,8 @@ public interface IReadOnlyCheckConstraint : IReadOnlyAnnotatable
     /// </summary>
     /// <param name="storeObject">The identifier of the store object.</param>
     /// <returns>The default name that would be used for this check constraint.</returns>
-    string? GetDefaultName(in StoreObjectIdentifier storeObject)
-        => storeObject.StoreObjectType == StoreObjectType.Table
+    string? GetDefaultName(in StoreObjectIdentifier storeObject) =>
+        storeObject.StoreObjectType == StoreObjectType.Table
             ? Uniquifier.Truncate(ModelName, EntityType.Model.GetMaxIdentifierLength())
             : null;
 
@@ -72,14 +72,15 @@ public interface IReadOnlyCheckConstraint : IReadOnlyAnnotatable
     /// <param name="options">Options for generating the string.</param>
     /// <param name="indent">The number of indent spaces to use before each new line.</param>
     /// <returns>A human-readable representation.</returns>
-    string ToDebugString(MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault, int indent = 0)
+    string ToDebugString(
+        MetadataDebugStringOptions options = MetadataDebugStringOptions.ShortDefault,
+        int indent = 0
+    )
     {
         var builder = new StringBuilder();
         var indentString = new string(' ', indent);
 
-        builder
-            .Append(indentString)
-            .Append("Check: ");
+        builder.Append(indentString).Append("Check: ");
 
         builder.Append(ModelName);
         if (Name != ModelName)
@@ -87,10 +88,7 @@ public interface IReadOnlyCheckConstraint : IReadOnlyAnnotatable
             builder.Append('*');
         }
 
-        builder
-            .Append(" \"")
-            .Append(Sql)
-            .Append('"');
+        builder.Append(" \"").Append(Sql).Append('"');
 
         if ((options & MetadataDebugStringOptions.SingleLine) == 0)
         {

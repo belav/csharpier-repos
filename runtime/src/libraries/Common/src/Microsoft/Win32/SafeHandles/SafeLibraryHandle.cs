@@ -7,9 +7,11 @@ namespace Microsoft.Win32.SafeHandles
 {
     internal sealed class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInvalid
     {
-        public SafeLibraryHandle() : base(true) { }
+        public SafeLibraryHandle()
+            : base(true) { }
 
-        internal SafeLibraryHandle(IntPtr value) : base(true)
+        internal SafeLibraryHandle(IntPtr value)
+            : base(true)
         {
             SetHandle(value);
         }

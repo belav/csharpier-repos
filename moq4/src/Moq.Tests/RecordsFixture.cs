@@ -19,12 +19,8 @@ namespace Moq.Tests
             _ = new Mock<DerivedEmptyRecord>().Object;
         }
 
-        public record EmptyRecord
-        {
-        }
+        public record EmptyRecord { }
 
-        public record DerivedEmptyRecord : EmptyRecord
-        {
-        }
+        public record DerivedEmptyRecord : EmptyRecord { }
     }
 }

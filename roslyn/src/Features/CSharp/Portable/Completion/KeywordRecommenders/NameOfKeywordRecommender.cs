@@ -13,16 +13,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class NameOfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public NameOfKeywordRecommender()
-            : base(SyntaxKind.NameOfKeyword)
-        {
-        }
+            : base(SyntaxKind.NameOfKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsAnyExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext;
+            return context.IsAnyExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext;
         }
     }
 }

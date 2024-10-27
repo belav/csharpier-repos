@@ -17,15 +17,23 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
     {
         private class FormattingRule : AbstractMetadataFormattingRule
         {
-            protected override AdjustNewLinesOperation GetAdjustNewLinesOperationBetweenMembersAndUsings(SyntaxToken token1, SyntaxToken token2)
+            protected override AdjustNewLinesOperation GetAdjustNewLinesOperationBetweenMembersAndUsings(
+                SyntaxToken token1,
+                SyntaxToken token2
+            )
             {
                 var previousToken = token1;
                 var currentToken = token2;
 
                 // We are not between members or usings if the last token wasn't the end of a statement or if the current token
                 // is the end of a scope.
-                if ((previousToken.Kind() != SyntaxKind.SemicolonToken && previousToken.Kind() != SyntaxKind.CloseBraceToken) ||
-                    currentToken.Kind() == SyntaxKind.CloseBraceToken)
+                if (
+                    (
+                        previousToken.Kind() != SyntaxKind.SemicolonToken
+                        && previousToken.Kind() != SyntaxKind.CloseBraceToken
+                    )
+                    || currentToken.Kind() == SyntaxKind.CloseBraceToken
+                )
                 {
                     return null;
                 }
@@ -35,7 +43,10 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
 
                 // Is the previous statement an using directive? If so, treat it like a member to add
                 // the right number of lines.
-                if (previousToken.Kind() == SyntaxKind.SemicolonToken && previousToken.Parent.Kind() == SyntaxKind.UsingDirective)
+                if (
+                    previousToken.Kind() == SyntaxKind.SemicolonToken
+                    && previousToken.Parent.Kind() == SyntaxKind.UsingDirective
+                )
                 {
                     previousMember = previousToken.Parent;
                 }
@@ -45,25 +56,34 @@ namespace Microsoft.CodeAnalysis.CSharp.MetadataAsSource
                     return null;
                 }
 
-                // If we have two members of the same kind, we won't insert a blank line 
+                // If we have two members of the same kind, we won't insert a blank line
                 if (previousMember.Kind() == nextMember.Kind())
                 {
-                    return FormattingOperations.CreateAdjustNewLinesOperation(1, AdjustNewLinesOption.ForceLines);
+                    return FormattingOperations.CreateAdjustNewLinesOperation(
+                        1,
+                        AdjustNewLinesOption.ForceLines
+                    );
                 }
 
                 // Force a blank line between the two nodes by counting the number of lines of
                 // trivia and adding one to it.
                 var triviaList = token1.TrailingTrivia.Concat(token2.LeadingTrivia);
-                return FormattingOperations.CreateAdjustNewLinesOperation(GetNumberOfLines(triviaList) + 1, AdjustNewLinesOption.ForceLines);
+                return FormattingOperations.CreateAdjustNewLinesOperation(
+                    GetNumberOfLines(triviaList) + 1,
+                    AdjustNewLinesOption.ForceLines
+                );
             }
 
-            public override void AddAnchorIndentationOperations(List<AnchorIndentationOperation> list, SyntaxNode node, in NextAnchorIndentationOperationAction nextOperation)
+            public override void AddAnchorIndentationOperations(
+                List<AnchorIndentationOperation> list,
+                SyntaxNode node,
+                in NextAnchorIndentationOperationAction nextOperation
+            )
             {
                 return;
             }
 
-            protected override bool IsNewLine(char c)
-                => SyntaxFacts.IsNewLine(c);
+            protected override bool IsNewLine(char c) => SyntaxFacts.IsNewLine(c);
         }
     }
 }

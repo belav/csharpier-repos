@@ -12,12 +12,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 {
     public class IOperationTests_IUtf8StringOperation : SemanticModelTestBase
     {
-
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void Utf8String_01()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static System.ReadOnlySpan<byte> Test()
@@ -26,21 +26,28 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return ""Abc""u8;')
   ReturnedValue:
     IUtf8StringOperation (Abc) (OperationKind.Utf8String, Type: System.ReadOnlySpan<System.Byte>) (Syntax: '""Abc""u8')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void Utf8StringFlow_01()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(System.ReadOnlySpan<byte> b)
@@ -51,7 +58,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -71,14 +79,20 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation)]
         [Fact]
         public void Utf8String_02()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static System.ReadOnlySpan<byte> Test()
@@ -87,7 +101,8 @@ class Program
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return ""Ab""u8 + ""c""u8;')
   ReturnedValue:
     IBinaryOperation (BinaryOperatorKind.Add) (OperationKind.Binary, Type: System.ReadOnlySpan<System.Byte>) (Syntax: '""Ab""u8 + ""c""u8')
@@ -98,14 +113,20 @@ IReturnOperation (OperationKind.Return, Type: null) (Syntax: 'return ""Ab""u8 + 
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(source, expectedOperationTree, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyOperationTreeAndDiagnosticsForTest<ReturnStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
 
         [CompilerTrait(CompilerFeature.IOperation, CompilerFeature.Dataflow)]
         [Fact]
         public void Utf8StringFlow_02()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     void M(System.ReadOnlySpan<byte> b)
@@ -116,7 +137,8 @@ class C
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            string expectedFlowGraph = @"
+            string expectedFlowGraph =
+                @"
 Block[B0] - Entry
     Statements (0)
     Next (Regular) Block[B1]
@@ -139,7 +161,12 @@ Block[B2] - Exit
     Predecessors: [B1]
     Statements (0)
 ";
-            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(source, expectedFlowGraph, expectedDiagnostics, targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp);
+            VerifyFlowGraphAndDiagnosticsForTest<BlockSyntax>(
+                source,
+                expectedFlowGraph,
+                expectedDiagnostics,
+                targetFramework: Roslyn.Test.Utilities.TargetFramework.NetCoreApp
+            );
         }
     }
 }

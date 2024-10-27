@@ -30,6 +30,7 @@ namespace structinreg
         public Test2 t2;
         public long l1;
     }
+
     struct Test9
     {
         public float f3;
@@ -68,6 +69,7 @@ namespace structinreg
         public Foo2 o3;
         public Foo2 o4;
     }
+
     struct Test4
     {
         public int i1;
@@ -100,6 +102,7 @@ namespace structinreg
     {
         public int iFoo;
     }
+
     struct Test12
     {
         public Foo2 foo;
@@ -141,7 +144,10 @@ namespace structinreg
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test1(Test1 t1)
         {
-            Console.WriteLine("test1: {0}", t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8);
+            Console.WriteLine(
+                "test1: {0}",
+                t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8
+            );
             return t1.i1 + t1.i2 + t1.i3 + t1.i4 + t1.i5 + t1.i6 + t1.i7 + t1.i8;
         }
 
@@ -155,7 +161,14 @@ namespace structinreg
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test3(Test3 t3)
         {
-            Console.WriteLine("test3: {0} {1} {2} {3}", t3.o1, t3.o2, t3.o3, t3.o4, t3.o1.iFoo + t3.o2.iFoo + t3.o3.iFoo + t3.o4.iFoo);
+            Console.WriteLine(
+                "test3: {0} {1} {2} {3}",
+                t3.o1,
+                t3.o2,
+                t3.o3,
+                t3.o4,
+                t3.o1.iFoo + t3.o2.iFoo + t3.o3.iFoo + t3.o4.iFoo
+            );
 
             return t3.o1.iFoo + t3.o2.iFoo + t3.o3.iFoo + t3.o4.iFoo;
         }
@@ -163,12 +176,57 @@ namespace structinreg
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test4(Test4 t4)
         {
-            Console.WriteLine("test4 Res: {0}", t4.i1 + t4.i2 + t4.i3 + t4.i4 + t4.i5 + t4.i6 + t4.i7 +
-                t4.i8 + t4.i9 + t4.i10 + t4.i11 + t4.i12 + t4.i13 + t4.i14 +
-                t4.i15 + t4.i16 + t4.i17 + t4.i18 + t4.i19 + t4.i20 + t4.i21 + t4.i22 + t4.i23 + t4.i24);
-            return t4.i1 + t4.i2 + t4.i3 + t4.i4 + t4.i5 + t4.i6 + t4.i7 +
-                t4.i8 + t4.i9 + t4.i10 + t4.i11 + t4.i12 + t4.i13 + t4.i14 +
-                t4.i15 + t4.i16 + t4.i17 + t4.i18 + t4.i19 + t4.i20 + t4.i21 + t4.i22 + t4.i23 + t4.i24;
+            Console.WriteLine(
+                "test4 Res: {0}",
+                t4.i1
+                    + t4.i2
+                    + t4.i3
+                    + t4.i4
+                    + t4.i5
+                    + t4.i6
+                    + t4.i7
+                    + t4.i8
+                    + t4.i9
+                    + t4.i10
+                    + t4.i11
+                    + t4.i12
+                    + t4.i13
+                    + t4.i14
+                    + t4.i15
+                    + t4.i16
+                    + t4.i17
+                    + t4.i18
+                    + t4.i19
+                    + t4.i20
+                    + t4.i21
+                    + t4.i22
+                    + t4.i23
+                    + t4.i24
+            );
+            return t4.i1
+                + t4.i2
+                + t4.i3
+                + t4.i4
+                + t4.i5
+                + t4.i6
+                + t4.i7
+                + t4.i8
+                + t4.i9
+                + t4.i10
+                + t4.i11
+                + t4.i12
+                + t4.i13
+                + t4.i14
+                + t4.i15
+                + t4.i16
+                + t4.i17
+                + t4.i18
+                + t4.i19
+                + t4.i20
+                + t4.i21
+                + t4.i22
+                + t4.i23
+                + t4.i24;
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -225,12 +283,43 @@ namespace structinreg
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         static int test15(Test15 t15)
         {
-            Console.WriteLine("t15 Res: {0}", t15.b0 + t15.b1 + t15.b2 + t15.b3 +
-                t15.b4 + t15.b5 + t15.b6 + t15.b7 + t15.b8 + t15.b9 + t15.b10 + 
-                t15.b11 + t15.b12 + t15.b13 + t15.b14 + t15.b15);
-            return (t15.b0 + t15.b1 + t15.b2 + t15.b3 +
-                t15.b4 + t15.b5 + t15.b6 + t15.b7 + t15.b8 + t15.b9 + t15.b10 +
-                t15.b11 + t15.b12 + t15.b13 + t15.b14 + t15.b15);
+            Console.WriteLine(
+                "t15 Res: {0}",
+                t15.b0
+                    + t15.b1
+                    + t15.b2
+                    + t15.b3
+                    + t15.b4
+                    + t15.b5
+                    + t15.b6
+                    + t15.b7
+                    + t15.b8
+                    + t15.b9
+                    + t15.b10
+                    + t15.b11
+                    + t15.b12
+                    + t15.b13
+                    + t15.b14
+                    + t15.b15
+            );
+            return (
+                t15.b0
+                + t15.b1
+                + t15.b2
+                + t15.b3
+                + t15.b4
+                + t15.b5
+                + t15.b6
+                + t15.b7
+                + t15.b8
+                + t15.b9
+                + t15.b10
+                + t15.b11
+                + t15.b12
+                + t15.b13
+                + t15.b14
+                + t15.b15
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -419,7 +508,8 @@ namespace structinreg
 
             int t15Res = test15(t15);
             Console.WriteLine("test15 Result: {0}", t15Res);
-            if (t15Res != 136) {
+            if (t15Res != 136)
+            {
                 throw new Exception("Failed test15 test!");
             }
 

@@ -27,7 +27,15 @@ public class DownloadFilesController : Controller
     public IActionResult DownloadFromDisk_WithLastModifiedAndEtag()
     {
         var path = Path.Combine(_hostingEnvironment.ContentRootPath, "sample.txt");
-        var lastModified = new DateTimeOffset(year: 1999, month: 11, day: 04, hour: 3, minute: 0, second: 0, offset: new TimeSpan(0));
+        var lastModified = new DateTimeOffset(
+            year: 1999,
+            month: 11,
+            day: 04,
+            hour: 3,
+            minute: 0,
+            second: 0,
+            offset: new TimeSpan(0)
+        );
         var entityTag = new EntityTagHeaderValue("\"Etag\"");
         return PhysicalFile(path, "text/plain", lastModified, entityTag, true);
     }
@@ -41,7 +49,15 @@ public class DownloadFilesController : Controller
     public IActionResult DownloadFromDiskWithFileName_WithLastModifiedAndEtag()
     {
         var path = Path.Combine(_hostingEnvironment.ContentRootPath, "sample.txt");
-        var lastModified = new DateTimeOffset(year: 1999, month: 11, day: 04, hour: 3, minute: 0, second: 0, offset: new TimeSpan(0));
+        var lastModified = new DateTimeOffset(
+            year: 1999,
+            month: 11,
+            day: 04,
+            hour: 3,
+            minute: 0,
+            second: 0,
+            offset: new TimeSpan(0)
+        );
         var entityTag = new EntityTagHeaderValue("\"Etag\"");
         return PhysicalFile(path, "text/plain", "downloadName.txt", lastModified, entityTag, true);
     }
@@ -91,7 +107,14 @@ public class DownloadFilesController : Controller
         writer.Flush();
         stream.Seek(0, SeekOrigin.Begin);
         var entityTag = new EntityTagHeaderValue("\"Etag\"");
-        return File(stream, "text/plain", "downloadName.txt", lastModified: null, entityTag: entityTag, enableRangeProcessing: true);
+        return File(
+            stream,
+            "text/plain",
+            "downloadName.txt",
+            lastModified: null,
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
     }
 
     public IActionResult DownloadFromBinaryData()
@@ -110,7 +133,14 @@ public class DownloadFilesController : Controller
     {
         var data = Encoding.UTF8.GetBytes("This is a sample text from a binary array");
         var entityTag = new EntityTagHeaderValue("\"Etag\"");
-        return File(data, "text/plain", "downloadName.txt", lastModified: null, entityTag: entityTag, enableRangeProcessing: true);
+        return File(
+            data,
+            "text/plain",
+            "downloadName.txt",
+            lastModified: null,
+            entityTag: entityTag,
+            enableRangeProcessing: true
+        );
     }
 
     protected override void Dispose(bool disposing)

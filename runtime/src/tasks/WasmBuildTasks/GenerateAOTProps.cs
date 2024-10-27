@@ -43,7 +43,7 @@ namespace Microsoft.WebAssembly.Build.Tasks
             "DefiningProjectName",
             "DefiningProjectExtension",
             s_originalItemNameMetadata,
-            s_conditionToUseMetadata
+            s_conditionToUseMetadata,
         };
 
         public override bool Execute()
@@ -79,7 +79,9 @@ namespace Microsoft.WebAssembly.Build.Tasks
 
                 if (string.IsNullOrEmpty(name))
                 {
-                    Log.LogError($"Item {value} is missing {s_originalItemNameMetadata} metadata, for the item name");
+                    Log.LogError(
+                        $"Item {value} is missing {s_originalItemNameMetadata} metadata, for the item name"
+                    );
                     return false;
                 }
 
@@ -104,6 +106,5 @@ namespace Microsoft.WebAssembly.Build.Tasks
             File.WriteAllText(OutputFile, sb.ToString());
             return !Log.HasLoggedErrors;
         }
-
     }
 }

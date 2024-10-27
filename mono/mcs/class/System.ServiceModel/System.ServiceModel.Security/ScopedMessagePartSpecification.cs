@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,82 +33,87 @@ using System.Xml;
 
 namespace System.ServiceModel.Security
 {
-	public class ScopedMessagePartSpecification
-	{
-		public ScopedMessagePartSpecification ()
-		{
-			table = new Dictionary<string,MessagePartSpecification> ();
-			parts = new MessagePartSpecification ();
-		}
+    public class ScopedMessagePartSpecification
+    {
+        public ScopedMessagePartSpecification()
+        {
+            table = new Dictionary<string, MessagePartSpecification>();
+            parts = new MessagePartSpecification();
+        }
 
-		public ScopedMessagePartSpecification (
-			ScopedMessagePartSpecification other)
-		{
-			XmlQualifiedName [] array = new XmlQualifiedName [other.parts.HeaderTypes.Count];
-			other.parts.HeaderTypes.CopyTo (array, 0);
-			parts = new MessagePartSpecification (
-				other.parts.IsBodyIncluded, array);
-			table = new Dictionary<string,MessagePartSpecification> (other.table);
-		}
+        public ScopedMessagePartSpecification(ScopedMessagePartSpecification other)
+        {
+            XmlQualifiedName[] array = new XmlQualifiedName[other.parts.HeaderTypes.Count];
+            other.parts.HeaderTypes.CopyTo(array, 0);
+            parts = new MessagePartSpecification(other.parts.IsBodyIncluded, array);
+            table = new Dictionary<string, MessagePartSpecification>(other.table);
+        }
 
-		Dictionary<string,MessagePartSpecification> table;
-		MessagePartSpecification parts;
-		bool is_readonly;
+        Dictionary<string, MessagePartSpecification> table;
+        MessagePartSpecification parts;
+        bool is_readonly;
 
-		public ICollection<string> Actions {
-			get { return table.Keys; }
-		}
+        public ICollection<string> Actions
+        {
+            get { return table.Keys; }
+        }
 
-		public MessagePartSpecification ChannelParts {
-			get { return parts; }
-		}
+        public MessagePartSpecification ChannelParts
+        {
+            get { return parts; }
+        }
 
-		public bool IsReadOnly {
-			get { return is_readonly; }
-		}
+        public bool IsReadOnly
+        {
+            get { return is_readonly; }
+        }
 
-		public void AddParts (MessagePartSpecification parts)
-		{
-			if (parts == null)
-				throw new ArgumentNullException ("parts");
-			if (IsReadOnly)
-				throw new InvalidOperationException ("This ScopedMessagePartSpecification is read-only.");
-			ChannelParts.Union (parts);
-		}
+        public void AddParts(MessagePartSpecification parts)
+        {
+            if (parts == null)
+                throw new ArgumentNullException("parts");
+            if (IsReadOnly)
+                throw new InvalidOperationException(
+                    "This ScopedMessagePartSpecification is read-only."
+                );
+            ChannelParts.Union(parts);
+        }
 
-		public void AddParts (MessagePartSpecification parts,
-			string action)
-		{
-			if (parts == null)
-				throw new ArgumentNullException ("parts");
-			if (action == null)
-				throw new ArgumentNullException ("action");
-			if (IsReadOnly)
-				throw new InvalidOperationException ("This ScopedMessagePartSpecification is read-only.");
+        public void AddParts(MessagePartSpecification parts, string action)
+        {
+            if (parts == null)
+                throw new ArgumentNullException("parts");
+            if (action == null)
+                throw new ArgumentNullException("action");
+            if (IsReadOnly)
+                throw new InvalidOperationException(
+                    "This ScopedMessagePartSpecification is read-only."
+                );
 
-			MessagePartSpecification existing;
-			if (table.TryGetValue (action, out existing))
-				existing.Union (parts);
-			else
-				table.Add (action, parts);
-		}
+            MessagePartSpecification existing;
+            if (table.TryGetValue(action, out existing))
+                existing.Union(parts);
+            else
+                table.Add(action, parts);
+        }
 
-		public void MakeReadOnly ()
-		{
-			is_readonly = true;
-		}
+        public void MakeReadOnly()
+        {
+            is_readonly = true;
+        }
 
-		public bool TryGetParts (
-			string action, out MessagePartSpecification parts)
-		{
-			return TryGetParts (action, false, out parts);
-		}
+        public bool TryGetParts(string action, out MessagePartSpecification parts)
+        {
+            return TryGetParts(action, false, out parts);
+        }
 
-		public bool TryGetParts (
-			string action, bool excludeChannelScope,
-			out MessagePartSpecification parts)
-		{
-			return table.TryGetValue (action, out parts);
-		}
-	}
+        public bool TryGetParts(
+            string action,
+            bool excludeChannelScope,
+            out MessagePartSpecification parts
+        )
+        {
+            return table.TryGetValue(action, out parts);
+        }
+    }
 }

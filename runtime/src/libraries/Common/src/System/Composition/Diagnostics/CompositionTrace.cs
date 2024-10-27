@@ -14,9 +14,11 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteInformation)
             {
-                CompositionTraceSource.WriteInformation(CompositionTraceId.Registration_ConstructorConventionOverridden,
+                CompositionTraceSource.WriteInformation(
+                    CompositionTraceId.Registration_ConstructorConventionOverridden,
                     SR.Registration_ConstructorConventionOverridden,
-                    type.FullName);
+                    type.FullName
+                );
             }
         }
 
@@ -27,13 +29,18 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_TypeExportConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_TypeExportConventionOverridden,
                     SR.Registration_TypeExportConventionOverridden,
-                    type.FullName);
+                    type.FullName
+                );
             }
         }
 
-        public static void Registration_MemberExportConventionOverridden(Type type, MemberInfo member)
+        public static void Registration_MemberExportConventionOverridden(
+            Type type,
+            MemberInfo member
+        )
         {
             if (type is null)
             {
@@ -46,13 +53,19 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_MemberExportConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_MemberExportConventionOverridden,
                     SR.Registration_MemberExportConventionOverridden,
-                    member.Name, type.FullName);
+                    member.Name,
+                    type.FullName
+                );
             }
         }
 
-        public static void Registration_MemberImportConventionOverridden(Type type, MemberInfo member)
+        public static void Registration_MemberImportConventionOverridden(
+            Type type,
+            MemberInfo member
+        )
         {
             if (type is null)
             {
@@ -65,13 +78,19 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_MemberImportConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_MemberImportConventionOverridden,
                     SR.Registration_MemberImportConventionOverridden,
-                    member.Name, type.FullName);
+                    member.Name,
+                    type.FullName
+                );
             }
         }
 
-        public static void Registration_OnSatisfiedImportNotificationOverridden(Type type, MemberInfo member)
+        public static void Registration_OnSatisfiedImportNotificationOverridden(
+            Type type,
+            MemberInfo member
+        )
         {
             if (type is null)
             {
@@ -84,9 +103,12 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_OnSatisfiedImportNotificationOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_OnSatisfiedImportNotificationOverridden,
                     SR.Registration_OnSatisfiedImportNotificationOverridden,
-                    member.Name, type.FullName);
+                    member.Name,
+                    type.FullName
+                );
             }
         }
 
@@ -99,13 +121,18 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_PartCreationConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_PartCreationConventionOverridden,
                     SR.Registration_PartCreationConventionOverridden,
-                    type.FullName);
+                    type.FullName
+                );
             }
         }
 
-        public static void Registration_MemberImportConventionMatchedTwice(Type type, MemberInfo member)
+        public static void Registration_MemberImportConventionMatchedTwice(
+            Type type,
+            MemberInfo member
+        )
         {
             if (type is null)
             {
@@ -118,9 +145,12 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_MemberImportConventionMatchedTwice,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_MemberImportConventionMatchedTwice,
                     SR.Registration_MemberImportConventionMatchedTwice,
-                    member.Name, type.FullName);
+                    member.Name,
+                    type.FullName
+                );
             }
         }
 
@@ -133,13 +163,18 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_PartMetadataConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_PartMetadataConventionOverridden,
                     SR.Registration_PartMetadataConventionOverridden,
-                    type.FullName);
+                    type.FullName
+                );
             }
         }
 
-        public static void Registration_ParameterImportConventionOverridden(ParameterInfo parameter, ConstructorInfo constructor)
+        public static void Registration_ParameterImportConventionOverridden(
+            ParameterInfo parameter,
+            ConstructorInfo constructor
+        )
         {
             if (parameter is null)
             {
@@ -152,9 +187,12 @@ namespace System.Composition.Diagnostics
 
             if (CompositionTraceSource.CanWriteWarning)
             {
-                CompositionTraceSource.WriteWarning(CompositionTraceId.Registration_ParameterImportConventionOverridden,
+                CompositionTraceSource.WriteWarning(
+                    CompositionTraceId.Registration_ParameterImportConventionOverridden,
                     SR.Registration_ParameterImportConventionOverridden,
-                    parameter.Name, constructor.Name);
+                    parameter.Name,
+                    constructor.Name
+                );
             }
         }
     }

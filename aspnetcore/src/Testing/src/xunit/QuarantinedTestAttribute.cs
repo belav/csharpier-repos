@@ -35,7 +35,10 @@ namespace Microsoft.AspNetCore.InternalTesting;
 /// </item>
 /// </list>
 /// </example>
-[TraitDiscoverer("Microsoft.AspNetCore.InternalTesting." + nameof(QuarantinedTestTraitDiscoverer), "Microsoft.AspNetCore.InternalTesting")]
+[TraitDiscoverer(
+    "Microsoft.AspNetCore.InternalTesting." + nameof(QuarantinedTestTraitDiscoverer),
+    "Microsoft.AspNetCore.InternalTesting"
+)]
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Class | AttributeTargets.Assembly)]
 public sealed class QuarantinedTestAttribute : Attribute, ITraitAttribute
 {

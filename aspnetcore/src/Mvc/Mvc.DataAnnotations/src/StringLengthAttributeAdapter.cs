@@ -13,7 +13,10 @@ internal sealed class StringLengthAttributeAdapter : AttributeAdapterBase<String
     private readonly string _max;
     private readonly string _min;
 
-    public StringLengthAttributeAdapter(StringLengthAttribute attribute, IStringLocalizer? stringLocalizer)
+    public StringLengthAttributeAdapter(
+        StringLengthAttribute attribute,
+        IStringLocalizer? stringLocalizer
+    )
         : base(attribute, stringLocalizer)
     {
         _max = Attribute.MaximumLength.ToString(CultureInfo.InvariantCulture);
@@ -48,6 +51,7 @@ internal sealed class StringLengthAttributeAdapter : AttributeAdapterBase<String
             validationContext.ModelMetadata,
             validationContext.ModelMetadata.GetDisplayName(),
             Attribute.MaximumLength,
-            Attribute.MinimumLength);
+            Attribute.MinimumLength
+        );
     }
 }

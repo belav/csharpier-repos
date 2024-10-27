@@ -1,22 +1,22 @@
 //------------------------------------------------------------------------------
 // <copyright file="ValidationSummary.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
+using System.Diagnostics;
 using System.Drawing;
 using System.Globalization;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
-using System.Diagnostics;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
@@ -31,13 +31,23 @@ namespace System.Web.UI.MobileControls
     [
         DefaultProperty("FormToValidate"),
         Designer(typeof(System.Web.UI.Design.MobileControls.ValidationSummaryDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerValidationSummaryAdapter)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerValidationSummaryAdapter)
+        ),
         ToolboxData("<{0}:ValidationSummary runat=\"server\"></{0}:ValidationSummary>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class ValidationSummary : MobileControl
     {
         private bool _callValidate = true;
@@ -63,13 +73,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["HeaderText"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["HeaderText"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["HeaderText"] = value;
-            }
+            set { ViewState["HeaderText"] = value; }
         }
 
         /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.FormToValidate"]/*' />
@@ -84,13 +91,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["FormToValidate"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["FormToValidate"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["FormToValidate"] = value;
-            }
+            set { ViewState["FormToValidate"] = value; }
         }
 
         /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.BackLabel"]/*' />
@@ -102,31 +106,17 @@ namespace System.Web.UI.MobileControls
         ]
         public String BackLabel
         {
-            get
-            {
-                return ToString(ViewState["BackLabel"]);
-            }
-            set
-            {
-                ViewState["BackLabel"] = value;
-            }
+            get { return ToString(ViewState["BackLabel"]); }
+            set { ViewState["BackLabel"] = value; }
         }
 
         // Designer needs to know the correct default value in order to persist it correctly.
         /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.StyleReference"]/*' />
-        [
-            DefaultValue(Constants.ErrorStyle)
-        ]
+        [DefaultValue(Constants.ErrorStyle)]
         public override String StyleReference
         {
-            get
-            {
-                return base.StyleReference;
-            }
-            set
-            {
-                base.StyleReference = value;
-            }
+            get { return base.StyleReference; }
+            set { base.StyleReference = value; }
         }
 
         /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.OnLoad"]/*' />
@@ -143,8 +133,11 @@ namespace System.Web.UI.MobileControls
             // the same form.  In this case, the validators' validate()
             // method should have been called by MobilePage if needed.
 
-            if (!MobilePage.IsPostBack ||
-                String.Compare(Form.UniqueID, FormToValidate, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                !MobilePage.IsPostBack
+                || String.Compare(Form.UniqueID, FormToValidate, StringComparison.OrdinalIgnoreCase)
+                    == 0
+            )
             {
                 _callValidate = false;
             }
@@ -152,7 +145,7 @@ namespace System.Web.UI.MobileControls
 
         private void GetErrorValidators_Helper(Control parent, ArrayList errorValidators)
         {
-            foreach(Control control in parent.Controls)
+            foreach (Control control in parent.Controls)
             {
                 BaseValidator baseVal = control as BaseValidator;
                 if (baseVal != null && baseVal.ErrorMessage.Length != 0)
@@ -170,7 +163,7 @@ namespace System.Web.UI.MobileControls
                 GetErrorValidators_Helper(control, errorValidators);
             }
         }
-        
+
         /// <include file='doc\ValidationSummary.uex' path='docs/doc[@for="ValidationSummary.GetErrorMessages"]/*' />
         public String[] GetErrorMessages()
         {
@@ -182,15 +175,14 @@ namespace System.Web.UI.MobileControls
             if (targetForm == null)
             {
                 throw new ArgumentException(
-                    SR.GetString(SR.ValidationSummary_InvalidFormToValidate,
-                                 FormToValidate,
-                                 ID));
+                    SR.GetString(SR.ValidationSummary_InvalidFormToValidate, FormToValidate, ID)
+                );
             }
             // Recursively find all validators with error messages to display.
             GetErrorValidators_Helper(targetForm, errorValidators);
 
             int count = errorValidators.Count;
-            
+
             if (count > 0)
             {
                 // get the messages;
@@ -199,7 +191,10 @@ namespace System.Web.UI.MobileControls
                 foreach (BaseValidator val in errorValidators)
                 {
                     Debug.Assert(val != null, "Null reference unexpected!");
-                    Debug.Assert(val.ErrorMessage.Length != 0, "Programmatic error: error message here shouldn't be empty!");
+                    Debug.Assert(
+                        val.ErrorMessage.Length != 0,
+                        "Programmatic error: error message here shouldn't be empty!"
+                    );
                     errorDescriptions[iMessage] = String.Copy(val.ErrorMessage);
                     iMessage++;
                 }

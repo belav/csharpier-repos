@@ -1,5 +1,5 @@
 //
-// DataBindingCollectionCas.cs 
+// DataBindingCollectionCas.cs
 //	- CAS unit tests for System.Web.UI.DataBindingCollection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,62 +27,61 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI {
+namespace MonoCasTests.System.Web.UI
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class DataBindingCollectionCas : AspNetHostingMinimal
+    {
+        private DataBinding db;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class DataBindingCollectionCas : AspNetHostingMinimal {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            db = new DataBinding("property", typeof(string), "");
+        }
 
-		private DataBinding db;
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            DataBindingCollection dbc = new DataBindingCollection();
+            Assert.AreEqual(0, dbc.Count, "Count");
+            Assert.IsFalse(dbc.IsReadOnly, "IsReadOnly");
+            Assert.IsFalse(dbc.IsSynchronized, "IsSynchronized");
+            dbc.Add(db);
+            Assert.AreSame(db, dbc["property"], "this[string]");
+            Assert.IsNotNull(dbc.RemovedBindings, "RemovedBindings");
+            Assert.IsNotNull(dbc.SyncRoot, "SyncRoot");
+            Assert.IsNotNull(dbc.GetEnumerator(), "GetEnumerator");
+            dbc.CopyTo(new DataBinding[1], 0);
+            dbc.Clear();
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			db = new DataBinding ("property", typeof (string), "");
-		}
+            dbc.Add(db);
+            dbc.Remove(db);
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			DataBindingCollection dbc = new DataBindingCollection ();
-			Assert.AreEqual (0, dbc.Count, "Count");
-			Assert.IsFalse (dbc.IsReadOnly, "IsReadOnly");
-			Assert.IsFalse (dbc.IsSynchronized, "IsSynchronized");
-			dbc.Add (db);
-			Assert.AreSame (db, dbc["property"], "this[string]");
-			Assert.IsNotNull (dbc.RemovedBindings, "RemovedBindings");
-			Assert.IsNotNull (dbc.SyncRoot, "SyncRoot");
-			Assert.IsNotNull (dbc.GetEnumerator (), "GetEnumerator");
-			dbc.CopyTo (new DataBinding[1], 0);
-			dbc.Clear ();
+            dbc.Add(db);
+            dbc.Remove("property");
+            dbc.Remove("property", true);
+            dbc.Changed += new EventHandler(Handler);
+            Assert.IsFalse(dbc.Contains("property"), "Contains");
+            dbc.Changed -= new EventHandler(Handler);
+        }
 
-			dbc.Add (db);
-			dbc.Remove (db);
+        private void Handler(object sender, EventArgs e) { }
 
-			dbc.Add (db);
-			dbc.Remove ("property");
-			dbc.Remove ("property", true);
-			dbc.Changed += new EventHandler (Handler);
-			Assert.IsFalse (dbc.Contains ("property"), "Contains");
-			dbc.Changed -= new EventHandler (Handler);
-		}
+        // LinkDemand
 
-		private void Handler (object sender, EventArgs e)
-		{
-		}
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (DataBindingCollection); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(DataBindingCollection); }
+        }
+    }
 }

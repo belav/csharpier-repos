@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         protected AbstractLanguageDetector(
             EmbeddedLanguageInfo info,
             ImmutableArray<string> languageIdentifiers,
-            EmbeddedLanguageCommentDetector commentDetector)
+            EmbeddedLanguageCommentDetector commentDetector
+        )
         {
             Info = info;
             _detector = new EmbeddedLanguageDetector(info, languageIdentifiers, commentDetector);
@@ -34,51 +35,83 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         /// We light up support if we detect these, even if these APIs don't have the StringSyntaxAttribute attribute on
         /// them.  That way users can get a decent experience even on downlevel frameworks.
         /// </summary>
-        protected abstract bool IsArgumentToWellKnownAPI(SyntaxToken token, SyntaxNode argumentNode, SemanticModel semanticModel, CancellationToken cancellationToken, out TOptions options);
+        protected abstract bool IsArgumentToWellKnownAPI(
+            SyntaxToken token,
+            SyntaxNode argumentNode,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out TOptions options
+        );
 
         /// <summary>
         /// Giving a sibling argument expression to the string literal, attempts to determine if they correspond to
-        /// options for that language.  For example with <c>new Regex("[a-z]", RegexOptions.CaseInsensitive)</c> the 
+        /// options for that language.  For example with <c>new Regex("[a-z]", RegexOptions.CaseInsensitive)</c> the
         /// second argument's expression defines options that control how the literal is parsed.
         /// </summary>
-        protected abstract bool TryGetOptions(SemanticModel semanticModel, ITypeSymbol exprType, SyntaxNode expr, CancellationToken cancellationToken, out TOptions options);
+        protected abstract bool TryGetOptions(
+            SemanticModel semanticModel,
+            ITypeSymbol exprType,
+            SyntaxNode expr,
+            CancellationToken cancellationToken,
+            out TOptions options
+        );
 
         // Most embedded languages don't support being in an interpolated string text token.
-        protected virtual bool IsEmbeddedLanguageInterpolatedStringTextToken(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
-            => false;
+        protected virtual bool IsEmbeddedLanguageInterpolatedStringTextToken(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) => false;
 
         /// <summary>
         /// What options we should assume by default if we're matched up against a symbol that has a [StringSyntax]
         /// attribute on it.
         /// </summary>
-        protected virtual TOptions GetStringSyntaxDefaultOptions()
-            => default;
+        protected virtual TOptions GetStringSyntaxDefaultOptions() => default;
 
         public bool IsEmbeddedLanguageToken(
             SyntaxToken token,
             SemanticModel semanticModel,
             CancellationToken cancellationToken,
-            out TOptions options)
+            out TOptions options
+        )
         {
             options = default;
 
             // First check for the standard pattern of either a `// lang=...` comment or an API annotated with the
             // [StringSyntax] attribute.
-            if (_detector.IsEmbeddedLanguageToken(token, semanticModel, cancellationToken, out _, out var stringOptions))
+            if (
+                _detector.IsEmbeddedLanguageToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out _,
+                    out var stringOptions
+                )
+            )
             {
                 // If we got string-options back, then we were on a comment string (e.g. `// lang=regex,option1,option2`).
                 // Attempt to convert the string options to actual options requested.
                 if (stringOptions != null)
-                    return EmbeddedLanguageCommentOptions<TOptions>.TryGetOptions(stringOptions, out options);
+                    return EmbeddedLanguageCommentOptions<TOptions>.TryGetOptions(
+                        stringOptions,
+                        out options
+                    );
 
                 // If we weren't on a comment, then we were on an API with StringSyntaxAttribute on it.  Attempt to grab
                 // API specific options for the client to use.
                 var syntaxFacts = Info.SyntaxFacts;
-                if (syntaxFacts.IsLiteralExpression(token.Parent) &&
-                    syntaxFacts.IsArgument(token.Parent.Parent))
+                if (
+                    syntaxFacts.IsLiteralExpression(token.Parent)
+                    && syntaxFacts.IsArgument(token.Parent.Parent)
+                )
                 {
-                    options = GetOptionsFromSiblingArgument(token.Parent.Parent, semanticModel, cancellationToken) ??
-                              GetStringSyntaxDefaultOptions();
+                    options =
+                        GetOptionsFromSiblingArgument(
+                            token.Parent.Parent,
+                            semanticModel,
+                            cancellationToken
+                        ) ?? GetStringSyntaxDefaultOptions();
                 }
 
                 return true;
@@ -89,32 +122,53 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                 // (e.g. Regex/Json prior to .net core).
 
                 if (Info.IsAnyStringLiteral(token.RawKind))
-                    return IsEmbeddedLanguageStringLiteralToken(token, semanticModel, cancellationToken, out options);
+                    return IsEmbeddedLanguageStringLiteralToken(
+                        token,
+                        semanticModel,
+                        cancellationToken,
+                        out options
+                    );
 
                 if (token.RawKind == Info.SyntaxKinds.InterpolatedStringTextToken)
                 {
                     options = default;
-                    return IsEmbeddedLanguageInterpolatedStringTextToken(token, semanticModel, cancellationToken);
+                    return IsEmbeddedLanguageInterpolatedStringTextToken(
+                        token,
+                        semanticModel,
+                        cancellationToken
+                    );
                 }
 
                 return false;
             }
         }
 
-        private bool IsEmbeddedLanguageStringLiteralToken(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken, out TOptions options)
+        private bool IsEmbeddedLanguageStringLiteralToken(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out TOptions options
+        )
         {
             options = default;
             var syntaxFacts = Info.SyntaxFacts;
 
-            return syntaxFacts.IsLiteralExpression(token.Parent) &&
-                   syntaxFacts.IsArgument(token.Parent.Parent) &&
-                   IsArgumentToWellKnownAPI(token, token.Parent.Parent, semanticModel, cancellationToken, out options);
+            return syntaxFacts.IsLiteralExpression(token.Parent)
+                && syntaxFacts.IsArgument(token.Parent.Parent)
+                && IsArgumentToWellKnownAPI(
+                    token,
+                    token.Parent.Parent,
+                    semanticModel,
+                    cancellationToken,
+                    out options
+                );
         }
 
         protected TOptions? GetOptionsFromSiblingArgument(
             SyntaxNode argument,
             SemanticModel semanticModel,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = Info.SyntaxFacts;
             var argumentList = argument.GetRequiredParent();
@@ -131,8 +185,16 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                     if (expr != null)
                     {
                         var exprType = semanticModel.GetTypeInfo(expr, cancellationToken);
-                        if (exprType.Type != null &&
-                            TryGetOptions(semanticModel, exprType.Type, expr, cancellationToken, out var options))
+                        if (
+                            exprType.Type != null
+                            && TryGetOptions(
+                                semanticModel,
+                                exprType.Type,
+                                expr,
+                                cancellationToken,
+                                out var options
+                            )
+                        )
                         {
                             return options;
                         }
@@ -162,7 +224,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
             var syntaxFacts = Info.SyntaxFacts;
             if (syntaxFacts.IsSimpleMemberAccessExpression(invokedExpression))
             {
-                return syntaxFacts.GetIdentifierOfSimpleName(syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)).ValueText;
+                return syntaxFacts
+                    .GetIdentifierOfSimpleName(
+                        syntaxFacts.GetNameOfMemberAccessExpression(invokedExpression)
+                    )
+                    .ValueText;
             }
             else if (syntaxFacts.IsIdentifierName(invokedExpression))
             {
@@ -179,33 +245,37 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         TDetector Create(Compilation compilation, EmbeddedLanguageInfo info);
     }
 
-    internal abstract class AbstractLanguageDetector<TOptions, TTree, TDetector, TDetectorInfo> :
-        AbstractLanguageDetector<TOptions>
+    internal abstract class AbstractLanguageDetector<TOptions, TTree, TDetector, TDetectorInfo>
+        : AbstractLanguageDetector<TOptions>
         where TOptions : struct, Enum
         where TTree : class
         where TDetector : AbstractLanguageDetector<TOptions, TTree, TDetector, TDetectorInfo>
         where TDetectorInfo : struct, ILanguageDetectorInfo<TDetector>
     {
-        public static readonly ImmutableArray<string> LanguageIdentifiers = default(TDetectorInfo).LanguageIdentifiers;
-        public static readonly EmbeddedLanguageCommentDetector CommentDetector = new(LanguageIdentifiers);
+        public static readonly ImmutableArray<string> LanguageIdentifiers =
+            default(TDetectorInfo).LanguageIdentifiers;
+        public static readonly EmbeddedLanguageCommentDetector CommentDetector = new(
+            LanguageIdentifiers
+        );
 
         /// <summary>
         /// Cache so that we can reuse the same TDetector when analyzing a particular compilation model. This saves the
         /// time from having to recreate this for every string literal that features examine for a particular
         /// compilation.
         /// </summary>
-        private static readonly ConditionalWeakTable<Compilation, TDetector> s_compilationToDetector = new();
+        private static readonly ConditionalWeakTable<
+            Compilation,
+            TDetector
+        > s_compilationToDetector = new();
 
         protected AbstractLanguageDetector(
             EmbeddedLanguageInfo info,
             ImmutableArray<string> languageIdentifiers,
-            EmbeddedLanguageCommentDetector commentDetector)
-            : base(info, languageIdentifiers, commentDetector)
-        {
-        }
+            EmbeddedLanguageCommentDetector commentDetector
+        )
+            : base(info, languageIdentifiers, commentDetector) { }
 
-        public static TDetector GetOrCreate(
-            Compilation compilation, EmbeddedLanguageInfo info)
+        public static TDetector GetOrCreate(Compilation compilation, EmbeddedLanguageInfo info)
         {
             // Do a quick non-allocating check first.  If not already created, go the path that will have to allocate
             // the lambda closure.
@@ -213,8 +283,11 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
                 ? detector
                 : Create(compilation, info);
 
-            static TDetector Create(Compilation compilation, EmbeddedLanguageInfo info)
-                => s_compilationToDetector.GetValue(compilation, _ => default(TDetectorInfo).Create(compilation, info));
+            static TDetector Create(Compilation compilation, EmbeddedLanguageInfo info) =>
+                s_compilationToDetector.GetValue(
+                    compilation,
+                    _ => default(TDetectorInfo).Create(compilation, info)
+                );
         }
 
         /// <summary>
@@ -227,9 +300,20 @@ namespace Microsoft.CodeAnalysis.Features.EmbeddedLanguages
         /// token must either be in a location semantically known to accept this language, or it must have an
         /// appropriate comment on it stating that it should be interpreted as this language.
         /// </summary>
-        public TTree? TryParseString(SyntaxToken token, SemanticModel semanticModel, CancellationToken cancellationToken)
+        public TTree? TryParseString(
+            SyntaxToken token,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
-            if (!this.IsEmbeddedLanguageToken(token, semanticModel, cancellationToken, out var options))
+            if (
+                !this.IsEmbeddedLanguageToken(
+                    token,
+                    semanticModel,
+                    cancellationToken,
+                    out var options
+                )
+            )
                 return null;
 
             var chars = Info.VirtualCharService.TryConvertToVirtualChars(token);

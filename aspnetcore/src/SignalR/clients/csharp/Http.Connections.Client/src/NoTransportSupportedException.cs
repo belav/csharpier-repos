@@ -15,7 +15,5 @@ public class NoTransportSupportedException : Exception
     /// </summary>
     /// <param name="message">Message of the exception.</param>
     public NoTransportSupportedException(string message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 }

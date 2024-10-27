@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Semantics
         public void CS1525ERR_InvalidExprTerm_ConditionExpression()
         {
             var text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -27,8 +27,8 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(
+            CreateCompilation(text)
+                .VerifyDiagnostics(
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, ","),
                     Diagnostic(ErrorCode.ERR_InvalidExprTerm, ",").WithArguments(","),
                     Diagnostic(ErrorCode.ERR_CloseParenExpected, ";"),
@@ -44,7 +44,7 @@ class C
         public void CS0029ERR_NoImplicitConv_ConditionExpressionMustbeBool()
         {
             var text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -55,8 +55,10 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(Diagnostic(ErrorCode.ERR_NoImplicitConv, "i").WithArguments("int", "bool"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "i").WithArguments("int", "bool")
+                );
         }
 
         // Condition expression could not be nullable bool type
@@ -64,7 +66,7 @@ class C
         public void CS0266ERR_NoImplicitConvCast_ConditionExpressionMustbeBool()
         {
             var text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -76,8 +78,10 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("bool?", "bool"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_NoImplicitConvCast, "b").WithArguments("bool?", "bool")
+                );
         }
 
         // Content within For
@@ -85,7 +89,7 @@ class C
         public void CS1026ERR_CloseParenExpected_ContentOfFor()
         {
             var text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -94,14 +98,14 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(
+            CreateCompilation(text)
+                .VerifyDiagnostics(
                     Diagnostic(ErrorCode.ERR_CloseParenExpected, ";"),
                     Diagnostic(ErrorCode.ERR_RbraceExpected, ")")
                 );
 
             text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -110,8 +114,8 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(
+            CreateCompilation(text)
+                .VerifyDiagnostics(
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, ")"),
                     Diagnostic(ErrorCode.ERR_InvalidExprTerm, ")").WithArguments(")"),
                     Diagnostic(ErrorCode.ERR_SemicolonExpected, ")")
@@ -124,7 +128,7 @@ class C
         public void CS0159ERR_LabelNotFound_GotoForNestedLoop_4()
         {
             var text =
-@"
+                @"
 class C
 {
     static void Main(string[] args)
@@ -141,10 +145,12 @@ class C
     }
 }
 ";
-            CreateCompilation(text).
-                VerifyDiagnostics(Diagnostic(ErrorCode.ERR_LabelNotFound, "outerLoop").WithArguments("outerLoop"),
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "j"),
-                Diagnostic(ErrorCode.WRN_UnreferencedLabel, "outerLoop"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    Diagnostic(ErrorCode.ERR_LabelNotFound, "outerLoop").WithArguments("outerLoop"),
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "j"),
+                    Diagnostic(ErrorCode.WRN_UnreferencedLabel, "outerLoop")
+                );
         }
 
         // 'QueryExpression' is not yet implemented in Roslyn.
@@ -153,7 +159,7 @@ class C
         public void CS0029ERR_NoImplicitConv_QueryInCondition()
         {
             var text =
-@"
+                @"
 using System.Linq;
 class C
 {
@@ -166,13 +172,17 @@ class C
     }
 }
 ";
-            CreateCompilationWithMscorlib40AndSystemCore(text).
-                VerifyDiagnostics(
-                    Diagnostic(ErrorCode.ERR_NoImplicitConv,
-@"from x in new[] { 1, 2, 3 }
+            CreateCompilationWithMscorlib40AndSystemCore(text)
+                .VerifyDiagnostics(
+                    Diagnostic(
+                            ErrorCode.ERR_NoImplicitConv,
+                            @"from x in new[] { 1, 2, 3 }
              let z = x.ToString()
              select z into w
-             select w").WithArguments("System.Collections.Generic.IEnumerable<string>", "bool"));
+             select w"
+                        )
+                        .WithArguments("System.Collections.Generic.IEnumerable<string>", "bool")
+                );
         }
 
         // Query expression in iterator expressions
@@ -180,7 +190,7 @@ class C
         public void CS0201ERR_IllegalStatement_QueryInIterator()
         {
             var text =
-@"
+                @"
 using System.Linq;
 class C
 {
@@ -195,8 +205,10 @@ class C
 ";
 
             var comp = CreateCompilation(text);
-            DiagnosticsUtils.VerifyErrorCodesNoLineColumn(comp.GetDiagnostics(),
-                new ErrorDescription { Code = (int)ErrorCode.ERR_IllegalStatement });
+            DiagnosticsUtils.VerifyErrorCodesNoLineColumn(
+                comp.GetDiagnostics(),
+                new ErrorDescription { Code = (int)ErrorCode.ERR_IllegalStatement }
+            );
         }
     }
 }

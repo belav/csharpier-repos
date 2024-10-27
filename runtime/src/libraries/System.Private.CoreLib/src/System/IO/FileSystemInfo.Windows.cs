@@ -19,17 +19,27 @@ namespace System.IO
         // throw an appropriate error when attempting to access the cached info.
         private int _dataInitialized = -1;
 
-        protected FileSystemInfo()
-        {
-        }
+        protected FileSystemInfo() { }
 
         internal static unsafe FileSystemInfo Create(string fullPath, ref FileSystemEntry findData)
         {
             FileSystemInfo info = findData.IsDirectory
-                ? (FileSystemInfo)new DirectoryInfo(fullPath, fileName: findData.FileName.ToString(), isNormalized: true)
-                : new FileInfo(fullPath, fileName: findData.FileName.ToString(), isNormalized: true);
+                ? (FileSystemInfo)
+                    new DirectoryInfo(
+                        fullPath,
+                        fileName: findData.FileName.ToString(),
+                        isNormalized: true
+                    )
+                : new FileInfo(
+                    fullPath,
+                    fileName: findData.FileName.ToString(),
+                    isNormalized: true
+                );
 
-            Debug.Assert(!PathInternal.IsPartiallyQualified(fullPath.AsSpan()), $"'{fullPath}' should be fully qualified when constructed from directory enumeration");
+            Debug.Assert(
+                !PathInternal.IsPartiallyQualified(fullPath.AsSpan()),
+                $"'{fullPath}' should be fully qualified when constructed from directory enumeration"
+            );
 
             info.Init(findData._info);
             return info;
@@ -75,7 +85,16 @@ namespace System.IO
                     // but Exists is supposed to return true or false.
                     return false;
                 }
-                return (_data.dwFileAttributes != -1) && ((this is DirectoryInfo) == ((_data.dwFileAttributes & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY) == Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY));
+                return (_data.dwFileAttributes != -1)
+                    && (
+                        (this is DirectoryInfo)
+                        == (
+                            (
+                                _data.dwFileAttributes
+                                & Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                            ) == Interop.Kernel32.FileAttributes.FILE_ATTRIBUTE_DIRECTORY
+                        )
+                    );
             }
         }
 
@@ -160,12 +179,18 @@ namespace System.IO
         {
             // This should not throw, instead we store the result so that we can throw it
             // when someone actually accesses a property
-            _dataInitialized = FileSystem.FillAttributeInfo(FullPath, ref _data, returnErrorOnNotFound: false);
+            _dataInitialized = FileSystem.FillAttributeInfo(
+                FullPath,
+                ref _data,
+                returnErrorOnNotFound: false
+            );
         }
 
         // If we're opened around a enumerated path that ends in a period or space we need to be able to
         // act on the path normally (open streams/writers/etc.)
-        internal string NormalizedPath
-            => PathInternal.EndsWithPeriodOrSpace(FullPath) ? PathInternal.EnsureExtendedPrefix(FullPath) : FullPath;
+        internal string NormalizedPath =>
+            PathInternal.EndsWithPeriodOrSpace(FullPath)
+                ? PathInternal.EnsureExtendedPrefix(FullPath)
+                : FullPath;
     }
 }

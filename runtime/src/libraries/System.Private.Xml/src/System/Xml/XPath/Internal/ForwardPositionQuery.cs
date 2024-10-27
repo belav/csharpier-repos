@@ -8,11 +8,14 @@ namespace MS.Internal.Xml.XPath
 {
     internal class ForwardPositionQuery : CacheOutputQuery
     {
-        public ForwardPositionQuery(Query input) : base(input)
+        public ForwardPositionQuery(Query input)
+            : base(input)
         {
             Debug.Assert(input != null);
         }
-        protected ForwardPositionQuery(ForwardPositionQuery other) : base(other) { }
+
+        protected ForwardPositionQuery(ForwardPositionQuery other)
+            : base(other) { }
 
         public override object Evaluate(XPathNodeIterator context)
         {
@@ -32,6 +35,9 @@ namespace MS.Internal.Xml.XPath
             return input.MatchNode(context);
         }
 
-        public override XPathNodeIterator Clone() { return new ForwardPositionQuery(this); }
+        public override XPathNodeIterator Clone()
+        {
+            return new ForwardPositionQuery(this);
+        }
     }
 }

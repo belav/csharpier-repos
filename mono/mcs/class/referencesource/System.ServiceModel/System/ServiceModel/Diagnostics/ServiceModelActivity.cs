@@ -5,14 +5,13 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System;
-    using System.Diagnostics;
-    using System.Runtime.Remoting.Messaging;
-    using System.Threading;
-    using System.Globalization;
     using System.Collections.Generic;
-    using System.ServiceModel.Diagnostics.Application;
+    using System.Diagnostics;
+    using System.Globalization;
     using System.Runtime.Diagnostics;
-
+    using System.Runtime.Remoting.Messaging;
+    using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class ServiceModelActivity : IDisposable
     {
@@ -65,7 +64,9 @@ namespace System.ServiceModel.Diagnostics
             {
                 if (ServiceModelActivity.activityBoundaryDescription == null)
                 {
-                    ServiceModelActivity.activityBoundaryDescription = TraceSR.GetString(TraceSR.ActivityBoundary);
+                    ServiceModelActivity.activityBoundaryDescription = TraceSR.GetString(
+                        TraceSR.ActivityBoundary
+                    );
                 }
                 return ServiceModelActivity.activityBoundaryDescription;
             }
@@ -81,7 +82,7 @@ namespace System.ServiceModel.Diagnostics
             get { return this.previousActivity; }
         }
 
-        static internal Activity BoundOperation(ServiceModelActivity activity)
+        internal static Activity BoundOperation(ServiceModelActivity activity)
         {
             if (!DiagnosticUtility.ShouldUseActivity)
             {
@@ -90,9 +91,11 @@ namespace System.ServiceModel.Diagnostics
             return ServiceModelActivity.BoundOperation(activity, false);
         }
 
-        static internal Activity BoundOperation(ServiceModelActivity activity, bool addTransfer)
+        internal static Activity BoundOperation(ServiceModelActivity activity, bool addTransfer)
         {
-            return activity == null ? null : ServiceModelActivity.BoundOperationCore(activity, addTransfer);
+            return activity == null
+                ? null
+                : ServiceModelActivity.BoundOperationCore(activity, addTransfer);
         }
 
         static Activity BoundOperationCore(ServiceModelActivity activity, bool addTransfer)
@@ -129,7 +132,10 @@ namespace System.ServiceModel.Diagnostics
             {
                 return null;
             }
-            ServiceModelActivity activity = ServiceModelActivity.CreateActivity(Guid.NewGuid(), true);
+            ServiceModelActivity activity = ServiceModelActivity.CreateActivity(
+                Guid.NewGuid(),
+                true
+            );
             if (activity != null)
             {
                 activity.autoStop = autoStop;
@@ -137,7 +143,11 @@ namespace System.ServiceModel.Diagnostics
             return activity;
         }
 
-        internal static ServiceModelActivity CreateActivity(bool autoStop, string activityName, ActivityType activityType)
+        internal static ServiceModelActivity CreateActivity(
+            bool autoStop,
+            string activityName,
+            ActivityType activityType
+        )
         {
             if (!DiagnosticUtility.ShouldUseActivity)
             {
@@ -177,7 +187,8 @@ namespace System.ServiceModel.Diagnostics
             ServiceModelActivity retval = ServiceModelActivity.CreateActivity(true);
             if (retval != null)
             {
-                retval.activity = (TransferActivity)ServiceModelActivity.BoundOperation(retval, true);
+                retval.activity = (TransferActivity)
+                    ServiceModelActivity.BoundOperation(retval, true);
                 retval.activity.SetPreviousServiceModelActivity(activityToSuspend);
                 if (suspendCurrent)
                 {
@@ -200,12 +211,15 @@ namespace System.ServiceModel.Diagnostics
             ServiceModelActivity retval = ServiceModelActivity.CreateActivity(activityId, true);
             if (retval != null)
             {
-                retval.activity = (TransferActivity)ServiceModelActivity.BoundOperation(retval, true);
+                retval.activity = (TransferActivity)
+                    ServiceModelActivity.BoundOperation(retval, true);
             }
             return retval;
         }
 
-        internal static ServiceModelActivity CreateBoundedActivityWithTransferInOnly(Guid activityId)
+        internal static ServiceModelActivity CreateBoundedActivityWithTransferInOnly(
+            Guid activityId
+        )
         {
             if (!DiagnosticUtility.ShouldUseActivity)
             {
@@ -281,8 +295,7 @@ namespace System.ServiceModel.Diagnostics
                     {
                         this.Stop();
                     }
-                    if (this.autoResume &&
-                        ServiceModelActivity.Current != null)
+                    if (this.autoResume && ServiceModelActivity.Current != null)
                     {
                         ServiceModelActivity.Current.Resume();
                     }
@@ -330,7 +343,11 @@ namespace System.ServiceModel.Diagnostics
             this.Resume();
         }
 
-        static internal void Start(ServiceModelActivity activity, string activityName, ActivityType activityType)
+        internal static void Start(
+            ServiceModelActivity activity,
+            string activityName,
+            ActivityType activityType
+        )
         {
             if (activity != null && activity.LastState == ActivityState.Unknown)
             {
@@ -348,15 +365,20 @@ namespace System.ServiceModel.Diagnostics
             {
                 newStopCount = Interlocked.Increment(ref this.stopCount);
             }
-            if (this.LastState != ActivityState.Stop &&
-                (!this.isAsync || (this.isAsync && newStopCount >= ServiceModelActivity.AsyncStopCount)))
+            if (
+                this.LastState != ActivityState.Stop
+                && (
+                    !this.isAsync
+                    || (this.isAsync && newStopCount >= ServiceModelActivity.AsyncStopCount)
+                )
+            )
             {
                 this.LastState = ActivityState.Stop;
                 this.TraceMilestone(TraceEventType.Stop);
             }
         }
 
-        static internal void Stop(ServiceModelActivity activity)
+        internal static void Stop(ServiceModelActivity activity)
         {
             if (activity != null)
             {
@@ -388,7 +410,14 @@ namespace System.ServiceModel.Diagnostics
                 }
                 if (null != DiagnosticUtility.DiagnosticTrace)
                 {
-                    TraceUtility.TraceEventNoCheck(type, TraceCode.ActivityBoundary, ServiceModelActivity.ActivityBoundaryDescription, null, ServiceModelActivity.ActivityBoundaryDescription, (Exception)null);
+                    TraceUtility.TraceEventNoCheck(
+                        type,
+                        TraceCode.ActivityBoundary,
+                        ServiceModelActivity.ActivityBoundaryDescription,
+                        null,
+                        ServiceModelActivity.ActivityBoundaryDescription,
+                        (Exception)null
+                    );
                 }
             }
             else
@@ -397,8 +426,14 @@ namespace System.ServiceModel.Diagnostics
                 {
                     Dictionary<string, string> values = new Dictionary<string, string>(2);
                     values["ActivityName"] = this.Name;
-                    values["ActivityType"] = ServiceModelActivity.ActivityTypeNames[(int)this.activityType];
-                    using (DiagnosticUtility.ShouldUseActivity && Guid.Empty == activityId ? null : Activity.CreateActivity(this.Id))
+                    values["ActivityType"] = ServiceModelActivity.ActivityTypeNames[
+                        (int)this.activityType
+                    ];
+                    using (
+                        DiagnosticUtility.ShouldUseActivity && Guid.Empty == activityId
+                            ? null
+                            : Activity.CreateActivity(this.Id)
+                    )
                     {
                         CallEtwMileStoneEvent(type, new DictionaryTraceRecord(values));
                     }
@@ -407,8 +442,18 @@ namespace System.ServiceModel.Diagnostics
                 {
                     Dictionary<string, string> values = new Dictionary<string, string>(2);
                     values["ActivityName"] = this.Name;
-                    values["ActivityType"] = ServiceModelActivity.ActivityTypeNames[(int)this.activityType];
-                    TraceUtility.TraceEventNoCheck(type, TraceCode.ActivityBoundary, ServiceModelActivity.ActivityBoundaryDescription, new DictionaryTraceRecord(values), null, null, this.Id);
+                    values["ActivityType"] = ServiceModelActivity.ActivityTypeNames[
+                        (int)this.activityType
+                    ];
+                    TraceUtility.TraceEventNoCheck(
+                        type,
+                        TraceCode.ActivityBoundary,
+                        ServiceModelActivity.ActivityBoundaryDescription,
+                        new DictionaryTraceRecord(values),
+                        null,
+                        null,
+                        this.Id
+                    );
                 }
             }
         }
@@ -461,9 +506,7 @@ namespace System.ServiceModel.Diagnostics
             ServiceModelActivity previousActivity = null;
 
             TransferActivity(Guid activityId, Guid parentId)
-                : base(activityId, parentId)
-            {
-            }
+                : base(activityId, parentId) { }
 
             internal static TransferActivity CreateActivity(Guid activityId, bool addTransfer)
             {
@@ -484,7 +527,10 @@ namespace System.ServiceModel.Diagnostics
                                 FxTrace.Trace.TraceTransfer(activityId);
                             }
                         }
-                        TransferActivity activity = new TransferActivity(activityId, currentActivityId);
+                        TransferActivity activity = new TransferActivity(
+                            activityId,
+                            currentActivityId
+                        );
                         activity.addTransfer = addTransfer;
                         retval = activity;
                     }
@@ -504,7 +550,7 @@ namespace System.ServiceModel.Diagnostics
                 {
                     if (addTransfer)
                     {
-                        // Make sure that we are transferring from our AID to the 
+                        // Make sure that we are transferring from our AID to the
                         // parent. It is possible for someone else to change the ambient
                         // in user code (MB 49318).
                         using (Activity.CreateActivity(this.Id))

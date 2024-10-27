@@ -1,7 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-namespace Dynamo {
+namespace Dynamo
+{
     using System;
 
     public class StaticNode : BaseNode
@@ -11,10 +12,9 @@ namespace Dynamo {
         protected DynamoNode smallNode;
         protected DynamoNode largeNode;
 
-        public StaticNode( int LowNum, int HighNum )
+        public StaticNode(int LowNum, int HighNum)
         {
-
-            if (HighNum<LowNum)
+            if (HighNum < LowNum)
                 throw new FormatException("HighNum must be <= LowNum");
 
             Value = siValue++;
@@ -22,19 +22,20 @@ namespace Dynamo {
 
             int Half = (HighNum - LowNum) / 2;
 
-            SmallNode = new DynamoNode( LowNum, (LowNum + Half), (siValue + 100000) );
-            LargeNode = new DynamoNode( ( LowNum + Half ), HighNum, (siValue + 100001) );
+            SmallNode = new DynamoNode(LowNum, (LowNum + Half), (siValue + 100000));
+            LargeNode = new DynamoNode((LowNum + Half), HighNum, (siValue + 100001));
         }
 
-        public DynamoNode SmallNode {
+        public DynamoNode SmallNode
+        {
             get { return smallNode; }
             set { smallNode = value; }
         }
 
-        public DynamoNode LargeNode {
+        public DynamoNode LargeNode
+        {
             get { return largeNode; }
             set { largeNode = value; }
         }
-
     }
 }

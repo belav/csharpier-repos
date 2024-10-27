@@ -34,7 +34,9 @@ namespace Moq.Tests.Matchers
                 Assert.True(mock.Object.Equals(mock.Object));
             }
 
-            [Fact(Skip = "Supporting this very specific corner case would probably be more work than it is worth.")]
+            [Fact(
+                Skip = "Supporting this very specific corner case would probably be more work than it is worth."
+            )]
             public void Can_match_mock_object_against_another_mock_object_if_other_mock_has_setup_for_Equals_its_object()
             {
                 // This unit test would currently trigger a `StackOverflowException`. Fixing it would
@@ -79,8 +81,16 @@ namespace Moq.Tests.Matchers
 
                 var mockA = new Mock<object>();
                 var mockB = new Mock<object>();
-                mockA.Setup(m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockA.Object)))).Returns(true);
-                mockB.Setup(m => m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockB.Object)))).Returns(true);
+                mockA
+                    .Setup(m =>
+                        m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockA.Object)))
+                    )
+                    .Returns(true);
+                mockB
+                    .Setup(m =>
+                        m.Equals(It.Is<object>(x => object.ReferenceEquals(x, mockB.Object)))
+                    )
+                    .Returns(true);
                 Assert.True(mockA.Object.Equals(mockA.Object));
                 Assert.False(mockA.Object.Equals(mockB.Object));
                 Assert.False(mockB.Object.Equals(mockA.Object));

@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,55 +34,57 @@ using Cairo;
 
 public class X11Test
 {
-        static readonly double  M_PI = 3.14159265358979323846;
-	
-        static void draw (Cairo.Context gr, int width, int height)
-	{
-		double xc = 0.5;
-		double yc = 0.5;
-		double radius = 0.4;
-		double angle1 = 45.0  * (M_PI/180.0);  /* angles are specified */
-		double angle2 = 180.0 * (M_PI/180.0);  /* in radians           */
-		
-		gr.Scale (width, height);
-		gr.LineWidth = 0.04;
-		
-		gr.ArcNegative (xc, yc, radius, angle1, angle2);
-		gr.Stroke ();
-		
-		/* draw helping lines */
-		gr.Color = new Color(1, 0.2, 0.2, 0.6);
-		gr.Arc (xc, yc, 0.05, 0, 2*M_PI);
-		gr.Fill ();
-		gr.LineWidth = 0.03;
-		gr.Arc (xc, yc, radius, angle1, angle1);
-		gr.LineTo (new PointD(xc, yc));
-		gr.Arc (xc, yc, radius, angle2, angle2);
-		gr.LineTo (new PointD(xc, yc));
-		gr.Stroke ();
-	}
-	
-	
-	static void Main (string [] args)
-	{
-		Window win = new Window (500, 500);
-		
-		win.Show ();
-		
-		Cairo.XlibSurface s = new Cairo.XlibSurface (win.Display,
-			       win.XWindow,
-			       X11.XDefaultVisual (win.Display, win.Screen),
-			       (int)win.Width, (int)win.Height);
+    static readonly double M_PI = 3.14159265358979323846;
 
-		
-		Cairo.Context g = new Cairo.Context (s);
-		
-		draw (g, 500, 500);
-		
-		IntPtr xev = new IntPtr ();
-		
-		while (true) {			
-			X11.XNextEvent (win.Display, xev);
-		}		
-	}
+    static void draw(Cairo.Context gr, int width, int height)
+    {
+        double xc = 0.5;
+        double yc = 0.5;
+        double radius = 0.4;
+        double angle1 = 45.0 * (M_PI / 180.0); /* angles are specified */
+        double angle2 = 180.0 * (M_PI / 180.0); /* in radians           */
+
+        gr.Scale(width, height);
+        gr.LineWidth = 0.04;
+
+        gr.ArcNegative(xc, yc, radius, angle1, angle2);
+        gr.Stroke();
+
+        /* draw helping lines */
+        gr.Color = new Color(1, 0.2, 0.2, 0.6);
+        gr.Arc(xc, yc, 0.05, 0, 2 * M_PI);
+        gr.Fill();
+        gr.LineWidth = 0.03;
+        gr.Arc(xc, yc, radius, angle1, angle1);
+        gr.LineTo(new PointD(xc, yc));
+        gr.Arc(xc, yc, radius, angle2, angle2);
+        gr.LineTo(new PointD(xc, yc));
+        gr.Stroke();
+    }
+
+    static void Main(string[] args)
+    {
+        Window win = new Window(500, 500);
+
+        win.Show();
+
+        Cairo.XlibSurface s = new Cairo.XlibSurface(
+            win.Display,
+            win.XWindow,
+            X11.XDefaultVisual(win.Display, win.Screen),
+            (int)win.Width,
+            (int)win.Height
+        );
+
+        Cairo.Context g = new Cairo.Context(s);
+
+        draw(g, 500, 500);
+
+        IntPtr xev = new IntPtr();
+
+        while (true)
+        {
+            X11.XNextEvent(win.Display, xev);
+        }
+    }
 }

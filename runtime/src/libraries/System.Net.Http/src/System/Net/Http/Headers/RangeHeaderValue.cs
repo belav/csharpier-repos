@@ -24,7 +24,8 @@ namespace System.Net.Http.Headers
             }
         }
 
-        public ICollection<RangeItemHeaderValue> Ranges => _ranges ??= new UnvalidatedObjectCollection<RangeItemHeaderValue>();
+        public ICollection<RangeItemHeaderValue> Ranges =>
+            _ranges ??= new UnvalidatedObjectCollection<RangeItemHeaderValue>();
 
         public RangeHeaderValue()
         {
@@ -72,9 +73,11 @@ namespace System.Net.Http.Headers
                         sb.Append(", ");
                     }
 
-                    if (range.From.HasValue) sb.AppendSpanFormattable(range.From.GetValueOrDefault());
+                    if (range.From.HasValue)
+                        sb.AppendSpanFormattable(range.From.GetValueOrDefault());
                     sb.Append('-');
-                    if (range.To.HasValue) sb.AppendSpanFormattable(range.To.GetValueOrDefault());
+                    if (range.To.HasValue)
+                        sb.AppendSpanFormattable(range.To.GetValueOrDefault());
                 }
             }
 
@@ -90,8 +93,8 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return string.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase) &&
-                HeaderUtilities.AreEqualCollections(_ranges, other._ranges);
+            return string.Equals(_unit, other._unit, StringComparison.OrdinalIgnoreCase)
+                && HeaderUtilities.AreEqualCollections(_ranges, other._ranges);
         }
 
         public override int GetHashCode()
@@ -112,15 +115,26 @@ namespace System.Net.Http.Headers
         public static RangeHeaderValue Parse(string input)
         {
             int index = 0;
-            return (RangeHeaderValue)GenericHeaderParser.RangeParser.ParseValue(input, null, ref index);
+            return (RangeHeaderValue)
+                GenericHeaderParser.RangeParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out RangeHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out RangeHeaderValue? parsedValue
+        )
         {
             int index = 0;
-             parsedValue = null;
+            parsedValue = null;
 
-            if (GenericHeaderParser.RangeParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.RangeParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (RangeHeaderValue)output!;
                 return true;
@@ -160,7 +174,11 @@ namespace System.Net.Http.Headers
             current++; // skip '=' separator
             current += HttpRuleParser.GetWhitespaceLength(input, current);
 
-            int rangesLength = RangeItemHeaderValue.GetRangeItemListLength(input, current, result.Ranges);
+            int rangesLength = RangeItemHeaderValue.GetRangeItemListLength(
+                input,
+                current,
+                result.Ranges
+            );
 
             if (rangesLength == 0)
             {
@@ -168,7 +186,10 @@ namespace System.Net.Http.Headers
             }
 
             current += rangesLength;
-            Debug.Assert(current == input.Length, "GetRangeItemListLength() should consume the whole string or fail.");
+            Debug.Assert(
+                current == input.Length,
+                "GetRangeItemListLength() should consume the whole string or fail."
+            );
 
             parsedValue = result;
             return current - startIndex;

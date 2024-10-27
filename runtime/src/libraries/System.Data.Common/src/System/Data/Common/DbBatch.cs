@@ -30,30 +30,36 @@ namespace System.Data.Common
 
         protected abstract DbTransaction? DbTransaction { get; set; }
 
-        public DbDataReader ExecuteReader(CommandBehavior behavior = CommandBehavior.Default)
-            => ExecuteDbDataReader(behavior);
+        public DbDataReader ExecuteReader(CommandBehavior behavior = CommandBehavior.Default) =>
+            ExecuteDbDataReader(behavior);
 
         protected abstract DbDataReader ExecuteDbDataReader(CommandBehavior behavior);
 
-        public Task<DbDataReader> ExecuteReaderAsync(CancellationToken cancellationToken = default)
-            => ExecuteDbDataReaderAsync(CommandBehavior.Default, cancellationToken);
+        public Task<DbDataReader> ExecuteReaderAsync(
+            CancellationToken cancellationToken = default
+        ) => ExecuteDbDataReaderAsync(CommandBehavior.Default, cancellationToken);
 
         public Task<DbDataReader> ExecuteReaderAsync(
             CommandBehavior behavior,
-            CancellationToken cancellationToken = default)
-            => ExecuteDbDataReaderAsync(behavior, cancellationToken);
+            CancellationToken cancellationToken = default
+        ) => ExecuteDbDataReaderAsync(behavior, cancellationToken);
 
         protected abstract Task<DbDataReader> ExecuteDbDataReaderAsync(
             CommandBehavior behavior,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         public abstract int ExecuteNonQuery();
 
-        public abstract Task<int> ExecuteNonQueryAsync(CancellationToken cancellationToken = default);
+        public abstract Task<int> ExecuteNonQueryAsync(
+            CancellationToken cancellationToken = default
+        );
 
         public abstract object? ExecuteScalar();
 
-        public abstract Task<object?> ExecuteScalarAsync(CancellationToken cancellationToken = default);
+        public abstract Task<object?> ExecuteScalarAsync(
+            CancellationToken cancellationToken = default
+        );
 
         public abstract void Prepare();
 
@@ -65,7 +71,7 @@ namespace System.Data.Common
 
         protected abstract DbBatchCommand CreateDbBatchCommand();
 
-        public virtual void Dispose() {}
+        public virtual void Dispose() { }
 
         public virtual ValueTask DisposeAsync()
         {

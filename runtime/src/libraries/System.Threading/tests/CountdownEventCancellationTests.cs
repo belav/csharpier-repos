@@ -39,13 +39,19 @@ namespace System.Threading.Tests
             });
 
             //Now wait.. the wait should abort and an exception should be thrown
-            EnsureOperationCanceledExceptionThrown(() => countdownEvent.Wait(cancellationToken), cancellationToken);
+            EnsureOperationCanceledExceptionThrown(
+                () => countdownEvent.Wait(cancellationToken),
+                cancellationToken
+            );
 
             // the token should not have any listeners.
             // currently we don't expose this.. but it was verified manually
         }
 
-        private static void EnsureOperationCanceledExceptionThrown(Action action, CancellationToken token)
+        private static void EnsureOperationCanceledExceptionThrown(
+            Action action,
+            CancellationToken token
+        )
         {
             OperationCanceledException operationCanceledEx =
                 Assert.Throws<OperationCanceledException>(action);

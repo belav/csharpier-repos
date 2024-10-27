@@ -10,10 +10,16 @@ namespace System.Threading
         private static int WaitOneCore(IntPtr handle, int millisecondsTimeout) =>
             WaitSubsystem.Wait(handle, millisecondsTimeout, true);
 
-        internal static int WaitMultipleIgnoringSyncContext(Span<IntPtr> handles, bool waitAll, int millisecondsTimeout) =>
-            WaitSubsystem.Wait(handles, waitAll, millisecondsTimeout);
+        internal static int WaitMultipleIgnoringSyncContext(
+            Span<IntPtr> handles,
+            bool waitAll,
+            int millisecondsTimeout
+        ) => WaitSubsystem.Wait(handles, waitAll, millisecondsTimeout);
 
-        private static int SignalAndWaitCore(IntPtr handleToSignal, IntPtr handleToWaitOn, int millisecondsTimeout) =>
-            WaitSubsystem.SignalAndWait(handleToSignal, handleToWaitOn, millisecondsTimeout);
+        private static int SignalAndWaitCore(
+            IntPtr handleToSignal,
+            IntPtr handleToWaitOn,
+            int millisecondsTimeout
+        ) => WaitSubsystem.SignalAndWait(handleToSignal, handleToWaitOn, millisecondsTimeout);
     }
 }

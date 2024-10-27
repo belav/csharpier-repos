@@ -25,7 +25,12 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
+using Newtonsoft.Json.Linq;
+using Newtonsoft.Json.Serialization;
+using Newtonsoft.Json.Tests.Serialization;
+using Staff = Newtonsoft.Json.Tests.TestObjects.Organization.Employee;
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -33,11 +38,6 @@ using Assert = Newtonsoft.Json.Tests.XUnitAssert;
 #else
 using NUnit.Framework;
 #endif
-using System.Runtime.Serialization;
-using Newtonsoft.Json.Linq;
-using Newtonsoft.Json.Serialization;
-using Newtonsoft.Json.Tests.Serialization;
-using Staff = Newtonsoft.Json.Tests.TestObjects.Organization.Employee;
 
 namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
 {
@@ -53,11 +53,12 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
             {
                 #region Usage
                 // settings will automatically be used by JsonConvert.SerializeObject/DeserializeObject
-                JsonConvert.DefaultSettings = () => new JsonSerializerSettings
-                {
-                    Formatting = Formatting.Indented,
-                    ContractResolver = new CamelCasePropertyNamesContractResolver()
-                };
+                JsonConvert.DefaultSettings = () =>
+                    new JsonSerializerSettings
+                    {
+                        Formatting = Formatting.Indented,
+                        ContractResolver = new CamelCasePropertyNamesContractResolver(),
+                    };
 
                 Staff s = new Staff
                 {
@@ -65,7 +66,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                     LastName = "Example",
                     BirthDate = new DateTime(1980, 4, 20, 0, 0, 0, DateTimeKind.Utc),
                     Department = "IT",
-                    JobTitle = "Web Dude"
+                    JobTitle = "Web Dude",
                 };
 
                 json = JsonConvert.SerializeObject(s);
@@ -83,13 +84,16 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Serializer
                 JsonConvert.DefaultSettings = null;
             }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""firstName"": ""Eric"",
   ""lastName"": ""Example"",
   ""birthDate"": ""1980-04-20T00:00:00Z"",
   ""department"": ""IT"",
   ""jobTitle"": ""Web Dude""
-}", json);
+}",
+                json
+            );
         }
     }
 }

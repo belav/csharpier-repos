@@ -68,13 +68,15 @@ namespace System.Data.Common.QueryCache
         /// <param name="mergeOption">The merge option in effect. Required for result assembly.</param>
         /// <param name="useCSharpNullComparisonBehavior">Flag indicating if the C# behavior should be used for null comparisons</param>
         /// <param name="resultType">The type of each result item - for a given query as a CLR type instance</param>
-        internal LinqQueryCacheKey(string expressionKey,
-                                   int parameterCount,
-                                   string parametersToken,
-                                   string includePathsToken,
-                                   MergeOption mergeOption,
-                                   bool useCSharpNullComparisonBehavior,
-                                   Type resultType)
+        internal LinqQueryCacheKey(
+            string expressionKey,
+            int parameterCount,
+            string parametersToken,
+            string includePathsToken,
+            MergeOption mergeOption,
+            bool useCSharpNullComparisonBehavior,
+            Type resultType
+        )
             : base()
         {
             Debug.Assert(null != expressionKey, "expressionKey must not be null");
@@ -87,8 +89,7 @@ namespace System.Data.Common.QueryCache
             _resultType = resultType;
             _useCSharpNullComparisonBehavior = useCSharpNullComparisonBehavior;
 
-            int combinedHash = _expressionKey.GetHashCode() ^
-                               _mergeOption.GetHashCode();
+            int combinedHash = _expressionKey.GetHashCode() ^ _mergeOption.GetHashCode();
 
             if (_parametersToken != null)
             {
@@ -119,13 +120,16 @@ namespace System.Data.Common.QueryCache
             LinqQueryCacheKey otherObjectQueryCacheKey = (LinqQueryCacheKey)otherObject;
 
             // also use result type...
-            return (_parameterCount == otherObjectQueryCacheKey._parameterCount) &&
-                   (_mergeOption == otherObjectQueryCacheKey._mergeOption) &&
-                    Equals(otherObjectQueryCacheKey._expressionKey, _expressionKey) &&
-                    Equals(otherObjectQueryCacheKey._includePathsToken, _includePathsToken) &&
-                    Equals(otherObjectQueryCacheKey._parametersToken, _parametersToken) &&
-                    Equals(otherObjectQueryCacheKey._resultType, _resultType) &&
-                    Equals(otherObjectQueryCacheKey._useCSharpNullComparisonBehavior, _useCSharpNullComparisonBehavior);
+            return (_parameterCount == otherObjectQueryCacheKey._parameterCount)
+                && (_mergeOption == otherObjectQueryCacheKey._mergeOption)
+                && Equals(otherObjectQueryCacheKey._expressionKey, _expressionKey)
+                && Equals(otherObjectQueryCacheKey._includePathsToken, _includePathsToken)
+                && Equals(otherObjectQueryCacheKey._parametersToken, _parametersToken)
+                && Equals(otherObjectQueryCacheKey._resultType, _resultType)
+                && Equals(
+                    otherObjectQueryCacheKey._useCSharpNullComparisonBehavior,
+                    _useCSharpNullComparisonBehavior
+                );
         }
 
         /// <summary>
@@ -141,7 +145,17 @@ namespace System.Data.Common.QueryCache
         /// </summary>
         public override string ToString()
         {
-            return String.Join("|", new string[] { _expressionKey, _parametersToken, _includePathsToken, Enum.GetName(typeof(MergeOption), _mergeOption), _useCSharpNullComparisonBehavior.ToString() });
+            return String.Join(
+                "|",
+                new string[]
+                {
+                    _expressionKey,
+                    _parametersToken,
+                    _includePathsToken,
+                    Enum.GetName(typeof(MergeOption), _mergeOption),
+                    _useCSharpNullComparisonBehavior.ToString(),
+                }
+            );
         }
     }
 }

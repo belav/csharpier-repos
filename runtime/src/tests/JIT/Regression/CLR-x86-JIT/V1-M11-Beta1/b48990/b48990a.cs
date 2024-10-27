@@ -5,14 +5,14 @@
 // <StdHeader/>
 // <Description>
 // Section 4.1
-// If the result of a floating-point operation is too small for 
+// If the result of a floating-point operation is too small for
 // the destination format, the result of the operation becomes
 // positive zero or negative zero.
 // </Description>
 
 // <Expects Status=success></Expects>
 
-// <Code> 
+// <Code>
 using System;
 using Xunit;
 
@@ -21,7 +21,6 @@ public class MyClass
     [Fact]
     public static int TestEntryPoint()
     {
-
         float f1 = float.Epsilon;
         double d1 = double.Epsilon;
 

@@ -19,19 +19,21 @@ internal sealed class PassThroughConsoleFormatter : ConsoleFormatter, IDisposabl
 
     public PassThroughConsoleFormatter(IOptionsMonitor<PassThroughConsoleFormatterOptions> options)
         : base("PassThroughConsoleFormatter") =>
-        (_optionsReloadToken, _formatterOptions) =
-            (options.OnChange((options, _) => ReloadLoggerOptions(options)), options.CurrentValue);
+        (_optionsReloadToken, _formatterOptions) = (
+            options.OnChange((options, _) => ReloadLoggerOptions(options)),
+            options.CurrentValue
+        );
 
-    private void ReloadLoggerOptions(PassThroughConsoleFormatterOptions options) => _formatterOptions = options;
+    private void ReloadLoggerOptions(PassThroughConsoleFormatterOptions options) =>
+        _formatterOptions = options;
 
     public override void Write<TState>(
         in LogEntry<TState> logEntry,
         IExternalScopeProvider? scopeProvider,
-        TextWriter textWriter)
+        TextWriter textWriter
+    )
     {
-        string? message =
-            logEntry.Formatter?.Invoke(
-                logEntry.State, logEntry.Exception);
+        string? message = logEntry.Formatter?.Invoke(logEntry.State, logEntry.Exception);
 
         if (message is null)
         {

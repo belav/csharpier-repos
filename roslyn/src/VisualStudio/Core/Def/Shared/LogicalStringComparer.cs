@@ -21,11 +21,8 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 
         public static readonly IComparer<string> Instance = new LogicalStringComparer();
 
-        private LogicalStringComparer()
-        {
-        }
+        private LogicalStringComparer() { }
 
-        public int Compare(string x, string y)
-            => StrCmpLogicalW(x, y);
+        public int Compare(string x, string y) => StrCmpLogicalW(x, y);
     }
 }

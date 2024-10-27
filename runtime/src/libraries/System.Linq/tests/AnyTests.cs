@@ -11,9 +11,10 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
-                    where x > int.MinValue
-                    select x;
+            var q =
+                from x in new[] { 9999, 0, 888, -1, 66, -777, 1, 2, -12345 }
+                where x > int.MinValue
+                select x;
 
             Func<int, bool> predicate = IsEven;
             Assert.Equal(q.Any(predicate), q.Any(predicate));
@@ -22,8 +23,9 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
-                    select x;
+            var q =
+                from x in new[] { "!@#$%^", "C", "AAA", "", "Calling Twice", "SoS", string.Empty }
+                select x;
 
             Func<string, bool> predicate = string.IsNullOrEmpty;
             Assert.Equal(q.Any(predicate), q.Any(predicate));
@@ -67,7 +69,11 @@ namespace System.Linq.Tests
         {
             yield return new object[] { Array.Empty<int>().GroupBy(num => num), false };
             yield return new object[] { new int[2] { 1, 2 }.GroupBy(num => num), true };
-            yield return new object[] { new int[5] { 1, 2, 1, 3, 2 }.GroupBy(n => n, (k, v) => v), true };
+            yield return new object[]
+            {
+                new int[5] { 1, 2, 1, 3, 2 }.GroupBy(n => n, (k, v) => v),
+                true,
+            };
         }
 
         [Theory, MemberData(nameof(TestDataForGroupBy))]
@@ -135,15 +141,24 @@ namespace System.Linq.Tests
         [Fact]
         public void NullSource_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Any());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((IEnumerable<int>)null).Any(i => i != 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Any()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((IEnumerable<int>)null).Any(i => i != 0)
+            );
         }
 
         [Fact]
         public void NullPredicate_ThrowsArgumentNullException()
         {
             Func<int, bool> predicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => Enumerable.Range(0, 3).Any(predicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => Enumerable.Range(0, 3).Any(predicate)
+            );
         }
     }
 }

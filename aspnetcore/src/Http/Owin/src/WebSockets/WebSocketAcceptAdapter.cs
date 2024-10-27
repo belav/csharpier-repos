@@ -7,22 +7,18 @@ using Microsoft.AspNetCore.Http;
 namespace Microsoft.AspNetCore.Owin;
 
 using AppFunc = Func<IDictionary<string, object>, Task>;
-using WebSocketAccept =
-    Action
+using WebSocketAccept = Action<
+    IDictionary<string, object>, // WebSocket Accept parameters
+    Func // WebSocketFunc callback
     <
-        IDictionary<string, object>, // WebSocket Accept parameters
-        Func // WebSocketFunc callback
-        <
-            IDictionary<string, object>, // WebSocket environment
-            Task // Complete
-        >
-    >;
-using WebSocketAcceptAlt =
-    Func
-    <
-        WebSocketAcceptContext, // WebSocket Accept parameters
-        Task<WebSocket>
-    >;
+        IDictionary<string, object>, // WebSocket environment
+        Task // Complete
+    >
+>;
+using WebSocketAcceptAlt = Func<
+    WebSocketAcceptContext, // WebSocket Accept parameters
+    Task<WebSocket>
+>;
 
 /// <summary>
 /// This adapts the ASP.NET Core WebSocket Accept flow to match the OWIN WebSocket accept flow.
@@ -63,17 +59,31 @@ public class WebSocketAcceptAdapter
         return async environment =>
         {
             object accept;
-            if (environment.TryGetValue(OwinConstants.WebSocket.AcceptAlt, out accept) && accept is WebSocketAcceptAlt)
+            if (
+                environment.TryGetValue(OwinConstants.WebSocket.AcceptAlt, out accept)
+                && accept is WebSocketAcceptAlt
+            )
             {
                 var adapter = new WebSocketAcceptAdapter(environment, (WebSocketAcceptAlt)accept);
 
-                environment[OwinConstants.WebSocket.Accept] = new WebSocketAccept(adapter.AcceptWebSocket);
+                environment[OwinConstants.WebSocket.Accept] = new WebSocketAccept(
+                    adapter.AcceptWebSocket
+                );
                 await next(environment);
-                if ((int)environment[OwinConstants.ResponseStatusCode] == 101 && adapter._callback != null)
+                if (
+                    (int)environment[OwinConstants.ResponseStatusCode] == 101
+                    && adapter._callback != null
+                )
                 {
                     WebSocketAcceptContext acceptContext = null;
                     object obj;
-                    if (adapter._options != null && adapter._options.TryGetValue(typeof(WebSocketAcceptContext).FullName, out obj))
+                    if (
+                        adapter._options != null
+                        && adapter._options.TryGetValue(
+                            typeof(WebSocketAcceptContext).FullName,
+                            out obj
+                        )
+                    )
                     {
                         acceptContext = obj as WebSocketAcceptContext;
                     }
@@ -83,7 +93,10 @@ public class WebSocketAcceptAdapter
                     }
 
                     var webSocket = await adapter._accept(acceptContext);
-                    var webSocketAdapter = new WebSocketAdapter(webSocket, (CancellationToken)environment[OwinConstants.CallCancelled]);
+                    var webSocketAdapter = new WebSocketAdapter(
+                        webSocket,
+                        (CancellationToken)environment[OwinConstants.CallCancelled]
+                    );
                     await adapter._callback(webSocketAdapter.Environment);
                     await webSocketAdapter.CleanupAsync();
                 }

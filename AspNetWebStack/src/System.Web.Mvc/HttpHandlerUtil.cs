@@ -9,16 +9,24 @@ namespace System.Web.Mvc
 {
     internal static class HttpHandlerUtil
     {
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "The Dispose on Page doesn't do anything by default, and we control both of these internal types.")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "The Dispose on Page doesn't do anything by default, and we control both of these internal types."
+        )]
         public static IHttpHandler WrapForServerExecute(IHttpHandler httpHandler)
         {
             // Since Server.Execute() doesn't propagate HttpExceptions where the status code is
             // anything other than 500, we need to wrap these exceptions ourselves.
             IHttpAsyncHandler asyncHandler = httpHandler as IHttpAsyncHandler;
-            return (asyncHandler != null) ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler) : new ServerExecuteHttpHandlerWrapper(httpHandler);
+            return (asyncHandler != null)
+                ? new ServerExecuteHttpHandlerAsyncWrapper(asyncHandler)
+                : new ServerExecuteHttpHandlerWrapper(httpHandler);
         }
 
-        private sealed class ServerExecuteHttpHandlerAsyncWrapper : ServerExecuteHttpHandlerWrapper, IHttpAsyncHandler
+        private sealed class ServerExecuteHttpHandlerAsyncWrapper
+            : ServerExecuteHttpHandlerWrapper,
+                IHttpAsyncHandler
         {
             private readonly IHttpAsyncHandler _httpHandler;
 
@@ -28,7 +36,11 @@ namespace System.Web.Mvc
                 _httpHandler = httpHandler;
             }
 
-            public IAsyncResult BeginProcessRequest(HttpContext context, AsyncCallback cb, object extraData)
+            public IAsyncResult BeginProcessRequest(
+                HttpContext context,
+                AsyncCallback cb,
+                object extraData
+            )
             {
                 return Wrap(() => _httpHandler.BeginProcessRequest(context, cb, extraData));
             }
@@ -63,11 +75,13 @@ namespace System.Web.Mvc
 
             protected static void Wrap(Action action)
             {
-                Wrap(delegate
-                {
-                    action();
-                    return (object)null;
-                });
+                Wrap(
+                    delegate
+                    {
+                        action();
+                        return (object)null;
+                    }
+                );
             }
 
             protected static TResult Wrap<TResult>(Func<TResult> func)
@@ -84,7 +98,11 @@ namespace System.Web.Mvc
                     }
                     else
                     {
-                        HttpException newHe = new HttpException(500, MvcResources.ViewPageHttpHandlerWrapper_ExceptionOccurred, he);
+                        HttpException newHe = new HttpException(
+                            500,
+                            MvcResources.ViewPageHttpHandlerWrapper_ExceptionOccurred,
+                            he
+                        );
                         throw newHe;
                     }
                 }

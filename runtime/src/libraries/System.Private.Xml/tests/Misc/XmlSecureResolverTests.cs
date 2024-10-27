@@ -21,7 +21,9 @@ namespace System.Xml.Tests
             Uri absoluteUri = new Uri("https://dot.net/");
             Type typeToReturn = typeof(Stream);
 
-            Assert.Throws<XmlException>(() => outerResolver.GetEntity(absoluteUri, "role", typeToReturn));
+            Assert.Throws<XmlException>(
+                () => outerResolver.GetEntity(absoluteUri, "role", typeToReturn)
+            );
             Assert.False(innerResolver.WasAnyApiInvoked);
         }
 
@@ -33,7 +35,9 @@ namespace System.Xml.Tests
             Uri absoluteUri = new Uri("https://dot.net/");
             Type typeToReturn = typeof(Stream);
 
-            Assert.Throws<XmlException>(() => (object)outerResolver.GetEntityAsync(absoluteUri, "role", typeToReturn));
+            Assert.Throws<XmlException>(
+                () => (object)outerResolver.GetEntityAsync(absoluteUri, "role", typeToReturn)
+            );
             Assert.False(innerResolver.WasAnyApiInvoked);
         }
 
@@ -43,7 +47,12 @@ namespace System.Xml.Tests
             // This is a safety check to ensure we're not keeping the inner resolver in an instance field,
             // since we don't want to risk invoking it.
 
-            FieldInfo[] allDeclaredInstanceFields = typeof(XmlSecureResolver).GetFields(BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+            FieldInfo[] allDeclaredInstanceFields = typeof(XmlSecureResolver).GetFields(
+                BindingFlags.DeclaredOnly
+                    | BindingFlags.Instance
+                    | BindingFlags.Public
+                    | BindingFlags.NonPublic
+            );
             Assert.Empty(allDeclaredInstanceFields);
         }
 
@@ -66,7 +75,11 @@ namespace System.Xml.Tests
                 throw new NotImplementedException();
             }
 
-            public override Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn)
+            public override Task<object> GetEntityAsync(
+                Uri absoluteUri,
+                string? role,
+                Type? ofObjectToReturn
+            )
             {
                 WasAnyApiInvoked = true;
                 throw new NotImplementedException();

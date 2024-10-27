@@ -5,18 +5,20 @@ namespace System.Workflow.ComponentModel
     #region Imports
 
     using System;
-    using System.Collections.Generic;
-    using System.Text;
     using System.Collections;
+    using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Diagnostics;
+    using System.Text;
     using System.Workflow.ComponentModel.Design;
 
     #endregion
 
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class QueueEventArgs : EventArgs
     {
         IComparable queueName;
@@ -28,34 +30,75 @@ namespace System.Workflow.ComponentModel
 
         public IComparable QueueName
         {
-            get
-            {
-                return this.queueName;
-            }
+            get { return this.queueName; }
         }
     }
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ActivityExecutionContext : IServiceProvider, IDisposable
     {
         #region Data members
 
         // dependency props
-        public static readonly DependencyProperty CurrentExceptionProperty = DependencyProperty.RegisterAttached("CurrentException", typeof(Exception), typeof(ActivityExecutionContext), new PropertyMetadata(null, DependencyPropertyOptions.Default, null, EnforceExceptionSemantics, true));
-        internal static readonly DependencyProperty GrantedLocksProperty = DependencyProperty.RegisterAttached("GrantedLocks", typeof(Dictionary<string, GrantedLock>), typeof(ActivityExecutionContext));
-        internal static readonly DependencyProperty CachedGrantedLocksProperty = DependencyProperty.RegisterAttached("CachedGrantedLocks", typeof(Dictionary<string, GrantedLock>), typeof(ActivityExecutionContext), new PropertyMetadata(DependencyPropertyOptions.NonSerialized));
-        internal static readonly DependencyProperty LockAcquiredCallbackProperty = DependencyProperty.RegisterAttached("LockAcquiredCallback", typeof(ActivityExecutorDelegateInfo<EventArgs>), typeof(ActivityExecutionContext));
+        public static readonly DependencyProperty CurrentExceptionProperty =
+            DependencyProperty.RegisterAttached(
+                "CurrentException",
+                typeof(Exception),
+                typeof(ActivityExecutionContext),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Default,
+                    null,
+                    EnforceExceptionSemantics,
+                    true
+                )
+            );
+        internal static readonly DependencyProperty GrantedLocksProperty =
+            DependencyProperty.RegisterAttached(
+                "GrantedLocks",
+                typeof(Dictionary<string, GrantedLock>),
+                typeof(ActivityExecutionContext)
+            );
+        internal static readonly DependencyProperty CachedGrantedLocksProperty =
+            DependencyProperty.RegisterAttached(
+                "CachedGrantedLocks",
+                typeof(Dictionary<string, GrantedLock>),
+                typeof(ActivityExecutionContext),
+                new PropertyMetadata(DependencyPropertyOptions.NonSerialized)
+            );
+        internal static readonly DependencyProperty LockAcquiredCallbackProperty =
+            DependencyProperty.RegisterAttached(
+                "LockAcquiredCallback",
+                typeof(ActivityExecutorDelegateInfo<EventArgs>),
+                typeof(ActivityExecutionContext)
+            );
 
         private Activity currentActivity = null;
         private ActivityExecutionContextManager contextManager = null;
         private IStartWorkflow startWorkflowService = null;
         private bool allowSignalsOnCurrentActivity = false;
 
-        private static Type schedulerServiceType = Type.GetType("System.Workflow.Runtime.Hosting.WorkflowSchedulerService, " + AssemblyRef.RuntimeAssemblyRef);
-        private static Type persistenceServiceType = Type.GetType("System.Workflow.Runtime.Hosting.WorkflowPersistenceService, " + AssemblyRef.RuntimeAssemblyRef);
-        private static Type trackingServiceType = Type.GetType("System.Workflow.Runtime.Tracking.TrackingService, " + AssemblyRef.RuntimeAssemblyRef);
-        private static Type transactionServiceType = Type.GetType("System.Workflow.Runtime.Hosting.WorkflowCommitWorkBatchService, " + AssemblyRef.RuntimeAssemblyRef);
-        private static Type loaderServiceType = Type.GetType("System.Workflow.Runtime.Hosting.WorkflowLoaderService, " + AssemblyRef.RuntimeAssemblyRef);
+        private static Type schedulerServiceType = Type.GetType(
+            "System.Workflow.Runtime.Hosting.WorkflowSchedulerService, "
+                + AssemblyRef.RuntimeAssemblyRef
+        );
+        private static Type persistenceServiceType = Type.GetType(
+            "System.Workflow.Runtime.Hosting.WorkflowPersistenceService, "
+                + AssemblyRef.RuntimeAssemblyRef
+        );
+        private static Type trackingServiceType = Type.GetType(
+            "System.Workflow.Runtime.Tracking.TrackingService, " + AssemblyRef.RuntimeAssemblyRef
+        );
+        private static Type transactionServiceType = Type.GetType(
+            "System.Workflow.Runtime.Hosting.WorkflowCommitWorkBatchService, "
+                + AssemblyRef.RuntimeAssemblyRef
+        );
+        private static Type loaderServiceType = Type.GetType(
+            "System.Workflow.Runtime.Hosting.WorkflowLoaderService, "
+                + AssemblyRef.RuntimeAssemblyRef
+        );
 
         #endregion
 
@@ -65,6 +108,7 @@ namespace System.Workflow.ComponentModel
         {
             this.currentActivity = activity;
         }
+
         internal ActivityExecutionContext(Activity activity, bool allowSignalsOnCurrentActivity)
             : this(activity)
         {
@@ -106,13 +150,21 @@ namespace System.Workflow.ComponentModel
         internal sealed class StartWorkflow : IStartWorkflow
         {
             private ActivityExecutionContext executionContext = null;
+
             internal StartWorkflow(ActivityExecutionContext executionContext)
             {
                 this.executionContext = executionContext;
             }
-            Guid IStartWorkflow.StartWorkflow(Type workflowType, Dictionary<string, object> namedArgumentValues)
+
+            Guid IStartWorkflow.StartWorkflow(
+                Type workflowType,
+                Dictionary<string, object> namedArgumentValues
+            )
             {
-                return this.executionContext.WorkflowCoreRuntime.StartWorkflow(workflowType, namedArgumentValues);
+                return this.executionContext.WorkflowCoreRuntime.StartWorkflow(
+                    workflowType,
+                    namedArgumentValues
+                );
             }
         }
         #endregion
@@ -138,23 +190,38 @@ namespace System.Workflow.ComponentModel
             }
             else
             {
-                if (schedulerServiceType != null && schedulerServiceType.IsAssignableFrom(serviceType))
+                if (
+                    schedulerServiceType != null
+                    && schedulerServiceType.IsAssignableFrom(serviceType)
+                )
                     return null;
 
-                if (persistenceServiceType != null && persistenceServiceType.IsAssignableFrom(serviceType))
+                if (
+                    persistenceServiceType != null
+                    && persistenceServiceType.IsAssignableFrom(serviceType)
+                )
                     return null;
 
-                if (trackingServiceType != null && trackingServiceType.IsAssignableFrom(serviceType))
+                if (
+                    trackingServiceType != null
+                    && trackingServiceType.IsAssignableFrom(serviceType)
+                )
                     return null;
 
-                if (transactionServiceType != null && transactionServiceType.IsAssignableFrom(serviceType))
+                if (
+                    transactionServiceType != null
+                    && transactionServiceType.IsAssignableFrom(serviceType)
+                )
                     return null;
 
                 if (loaderServiceType != null && loaderServiceType.IsAssignableFrom(serviceType))
                     return null;
             }
 
-            return this.currentActivity.WorkflowCoreRuntime.GetService(this.currentActivity, serviceType);
+            return this.currentActivity.WorkflowCoreRuntime.GetService(
+                this.currentActivity,
+                serviceType
+            );
         }
 
         #endregion
@@ -200,14 +267,19 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentException(SR.GetString(SR.AEC_InvalidActivity), "activity");
 
             if (activity.ExecutionStatus != ActivityExecutionStatus.Initialized)
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidInitializingState));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidInitializingState)
+                );
 
-            using (ActivityExecutionContext executionContext = new ActivityExecutionContext(activity))
+            using (
+                ActivityExecutionContext executionContext = new ActivityExecutionContext(activity)
+            )
             {
                 using (this.currentActivity.WorkflowCoreRuntime.SetCurrentActivity(activity))
                     activity.Initialize(executionContext);
             }
         }
+
         public void ExecuteActivity(Activity activity)
         {
             if (this.currentActivity == null)
@@ -218,13 +290,18 @@ namespace System.Workflow.ComponentModel
 
             // if this activity is not executing, canceling, faulting OR compensating
             // then it can not execute a child.
-            if (!this.allowSignalsOnCurrentActivity &&
-                    (
-                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus == ActivityExecutionStatus.Initialized ||
-                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus == ActivityExecutionStatus.Closed
-                    )
+            if (
+                !this.allowSignalsOnCurrentActivity
+                && (
+                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus
+                        == ActivityExecutionStatus.Initialized
+                    || this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus
+                        == ActivityExecutionStatus.Closed
                 )
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidStateToExecuteChild));
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidStateToExecuteChild)
+                );
 
             if (!IsValidChild(activity, false))
                 throw new ArgumentException(SR.GetString(SR.AEC_InvalidActivity), "activity");
@@ -239,9 +316,19 @@ namespace System.Workflow.ComponentModel
             finally
             {
                 Debug.Assert(activity.ExecutionStatus == ActivityExecutionStatus.Executing);
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(new ActivityExecutorOperation(activity, ActivityOperationType.Execute, this.ContextId), IsInAtomicTransaction(activity), false, false);
+                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
+                    new ActivityExecutorOperation(
+                        activity,
+                        ActivityOperationType.Execute,
+                        this.ContextId
+                    ),
+                    IsInAtomicTransaction(activity),
+                    false,
+                    false
+                );
             }
         }
+
         public void CancelActivity(Activity activity)
         {
             if (this.currentActivity == null)
@@ -252,13 +339,18 @@ namespace System.Workflow.ComponentModel
 
             // if this activity is not executing, canceling, faulting OR compensating
             // then it can not cancel a child.
-            if (!this.allowSignalsOnCurrentActivity &&
-                    (
-                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus == ActivityExecutionStatus.Initialized ||
-                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus == ActivityExecutionStatus.Closed
-                    )
+            if (
+                !this.allowSignalsOnCurrentActivity
+                && (
+                    this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus
+                        == ActivityExecutionStatus.Initialized
+                    || this.currentActivity.WorkflowCoreRuntime.CurrentActivity.ExecutionStatus
+                        == ActivityExecutionStatus.Closed
                 )
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidStateToExecuteChild));
+            )
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidStateToExecuteChild)
+                );
 
             if (!IsValidChild(activity, false))
                 throw new ArgumentException(SR.GetString(SR.AEC_InvalidActivity), "activity");
@@ -272,9 +364,19 @@ namespace System.Workflow.ComponentModel
             }
             finally
             {
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(new ActivityExecutorOperation(activity, ActivityOperationType.Cancel, this.ContextId), IsInAtomicTransaction(activity), false, false);
+                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
+                    new ActivityExecutorOperation(
+                        activity,
+                        ActivityOperationType.Cancel,
+                        this.ContextId
+                    ),
+                    IsInAtomicTransaction(activity),
+                    false,
+                    false
+                );
             }
         }
+
         internal void CompensateActivity(Activity activity)
         {
             if (this.currentActivity == null)
@@ -287,7 +389,9 @@ namespace System.Workflow.ComponentModel
                 throw new ArgumentException(SR.GetString(SR.AEC_InvalidNestedActivity), "activity");
 
             if (activity.ExecutionStatus != ActivityExecutionStatus.Closed)
-                throw new InvalidOperationException(SR.GetString(SR.Error_InvalidCompensatingState));
+                throw new InvalidOperationException(
+                    SR.GetString(SR.Error_InvalidCompensatingState)
+                );
 
             try
             {
@@ -295,9 +399,19 @@ namespace System.Workflow.ComponentModel
             }
             finally
             {
-                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(new ActivityExecutorOperation(activity, ActivityOperationType.Compensate, this.ContextId), IsInAtomicTransaction(activity), false, false);
+                this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
+                    new ActivityExecutorOperation(
+                        activity,
+                        ActivityOperationType.Compensate,
+                        this.ContextId
+                    ),
+                    IsInAtomicTransaction(activity),
+                    false,
+                    false
+                );
             }
         }
+
         internal void FaultActivity(Exception e)
         {
             if (this.currentActivity == null)
@@ -308,25 +422,44 @@ namespace System.Workflow.ComponentModel
             {
                 if (this.currentActivity.Parent == null)
                 {
-                    // this could have happened if the root activity closed, but 
+                    // this could have happened if the root activity closed, but
                     // then it threw an exception
                     this.currentActivity.WorkflowCoreRuntime.TerminateInstance(e);
                 }
                 else
                 {
-                    this.currentActivity.WorkflowCoreRuntime.RaiseException(e, this.currentActivity.Parent, string.Empty);
+                    this.currentActivity.WorkflowCoreRuntime.RaiseException(
+                        e,
+                        this.currentActivity.Parent,
+                        string.Empty
+                    );
                 }
             }
             else
             {
                 try
                 {
-                    this.currentActivity.SetValueCommon(CurrentExceptionProperty, e, CurrentExceptionProperty.DefaultMetadata, false);
+                    this.currentActivity.SetValueCommon(
+                        CurrentExceptionProperty,
+                        e,
+                        CurrentExceptionProperty.DefaultMetadata,
+                        false
+                    );
                     this.currentActivity.SetStatus(ActivityExecutionStatus.Faulting, false);
                 }
                 finally
                 {
-                    this.currentActivity.WorkflowCoreRuntime.ScheduleItem(new ActivityExecutorOperation(this.currentActivity, ActivityOperationType.HandleFault, this.ContextId, e), IsInAtomicTransaction(this.currentActivity), false, false);
+                    this.currentActivity.WorkflowCoreRuntime.ScheduleItem(
+                        new ActivityExecutorOperation(
+                            this.currentActivity,
+                            ActivityOperationType.HandleFault,
+                            this.ContextId,
+                            e
+                        ),
+                        IsInAtomicTransaction(this.currentActivity),
+                        false,
+                        false
+                    );
                 }
             }
         }
@@ -357,7 +490,8 @@ namespace System.Workflow.ComponentModel
             }
         }
 
-        internal void Invoke<T>(EventHandler<T> handler, T e) where T : EventArgs
+        internal void Invoke<T>(EventHandler<T> handler, T e)
+            where T : EventArgs
         {
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
@@ -403,7 +537,14 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            this.Activity.SetValue(LockAcquiredCallbackProperty, new ActivityExecutorDelegateInfo<EventArgs>(true, locksAcquiredCallback, this.Activity.ContextActivity));
+            this.Activity.SetValue(
+                LockAcquiredCallbackProperty,
+                new ActivityExecutorDelegateInfo<EventArgs>(
+                    true,
+                    locksAcquiredCallback,
+                    this.Activity.ContextActivity
+                )
+            );
             return AcquireLocks(this.Activity);
         }
 
@@ -419,7 +560,8 @@ namespace System.Workflow.ComponentModel
             {
                 if (parent.SupportsSynchronization || parent.Parent == null)
                 {
-                    Dictionary<string, GrantedLock> grantedLocks = (Dictionary<string, GrantedLock>)parent.GetValue(GrantedLocksProperty);
+                    Dictionary<string, GrantedLock> grantedLocks =
+                        (Dictionary<string, GrantedLock>)parent.GetValue(GrantedLocksProperty);
                     if (grantedLocks == null)
                     {
                         grantedLocks = new Dictionary<string, GrantedLock>();
@@ -444,11 +586,15 @@ namespace System.Workflow.ComponentModel
 
                 // If we reach a parent which has at least one handle, then we do not need to
                 // go any further as the parent would already have acquired all our locks for
-                // itself. Note that we still need to acquire our locks in the same parent if 
+                // itself. Note that we still need to acquire our locks in the same parent if
                 // the parent ProvidesSychronization, hence, this if check is *not* after
                 // "parent = parent.Parent"!
-                ICollection<string> synchronizationHandlesOnParent = (ICollection<string>)parent.GetValue(Activity.SynchronizationHandlesProperty);
-                if (synchronizationHandlesOnParent != null && synchronizationHandlesOnParent.Count != 0)
+                ICollection<string> synchronizationHandlesOnParent =
+                    (ICollection<string>)parent.GetValue(Activity.SynchronizationHandlesProperty);
+                if (
+                    synchronizationHandlesOnParent != null
+                    && synchronizationHandlesOnParent.Count != 0
+                )
                     break;
 
                 parent = parent.Parent;
@@ -461,12 +607,11 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-
             // remove the callback.
             this.Activity.RemoveProperty(LockAcquiredCallbackProperty);
 
             // The assumption is that lock contentions will be few. Hence, we optimize serialization
-            // size over performance, for ex. do not persist the list of locks that have already been 
+            // size over performance, for ex. do not persist the list of locks that have already been
             // granted.
             ICollection<string> handles = GetAllSynchronizationHandles(this.Activity);
             if (handles == null || handles.Count == 0)
@@ -478,17 +623,24 @@ namespace System.Workflow.ComponentModel
             {
                 if (parent.SupportsSynchronization || parent.Parent == null)
                 {
-                    Dictionary<string, GrantedLock> grantedLocks = (Dictionary<string, GrantedLock>)parent.GetValue(GrantedLocksProperty);
+                    Dictionary<string, GrantedLock> grantedLocks =
+                        (Dictionary<string, GrantedLock>)parent.GetValue(GrantedLocksProperty);
 
                     // if its an transactional release of locks, then release it and then keep it
                     // cached, so that in case of rollback, we can reacuire locks
                     if (transactional)
                     {
-                        Dictionary<string, GrantedLock> cachedGrantedLocks = new Dictionary<string, GrantedLock>();
+                        Dictionary<string, GrantedLock> cachedGrantedLocks =
+                            new Dictionary<string, GrantedLock>();
 
                         if (grantedLocks != null)
-                            foreach (KeyValuePair<string, GrantedLock> grantedLockEntry in grantedLocks)
-                                cachedGrantedLocks.Add(grantedLockEntry.Key, (GrantedLock)grantedLockEntry.Value.Clone());
+                            foreach (
+                                KeyValuePair<string, GrantedLock> grantedLockEntry in grantedLocks
+                            )
+                                cachedGrantedLocks.Add(
+                                    grantedLockEntry.Key,
+                                    (GrantedLock)grantedLockEntry.Value.Clone()
+                                );
 
                         parent.SetValue(CachedGrantedLocksProperty, cachedGrantedLocks);
                     }
@@ -526,11 +678,15 @@ namespace System.Workflow.ComponentModel
 
                 // If we reach a parent which has at least one handle, then we do not need to
                 // go any further as the parent would already have acquired all our locks for
-                // itself. Note that we still need to acquire our locks in the same parent if 
+                // itself. Note that we still need to acquire our locks in the same parent if
                 // the parent ProvidesSychronization, hence, this if check is *not* after
                 // "parent = parent.Parent"!
-                ICollection<string> synchronizationHandlesOnParent = (ICollection<string>)parent.GetValue(Activity.SynchronizationHandlesProperty);
-                if (synchronizationHandlesOnParent != null && synchronizationHandlesOnParent.Count != 0)
+                ICollection<string> synchronizationHandlesOnParent =
+                    (ICollection<string>)parent.GetValue(Activity.SynchronizationHandlesProperty);
+                if (
+                    synchronizationHandlesOnParent != null
+                    && synchronizationHandlesOnParent.Count != 0
+                )
                     break;
 
                 parent = parent.Parent;
@@ -541,8 +697,15 @@ namespace System.Workflow.ComponentModel
             {
                 if (AcquireLocks(waitingActivity))
                 {
-                    ActivityExecutorDelegateInfo<EventArgs> waitingActivityCallback = (ActivityExecutorDelegateInfo<EventArgs>)waitingActivity.GetValue(LockAcquiredCallbackProperty);
-                    waitingActivityCallback.InvokeDelegate(this.Activity.ContextActivity, EventArgs.Empty, false, transactional);
+                    ActivityExecutorDelegateInfo<EventArgs> waitingActivityCallback =
+                        (ActivityExecutorDelegateInfo<EventArgs>)
+                            waitingActivity.GetValue(LockAcquiredCallbackProperty);
+                    waitingActivityCallback.InvokeDelegate(
+                        this.Activity.ContextActivity,
+                        EventArgs.Empty,
+                        false,
+                        transactional
+                    );
                 }
             }
         }
@@ -550,7 +713,8 @@ namespace System.Workflow.ComponentModel
         private ICollection<string> GetAllSynchronizationHandles(Activity activity)
         {
             // If the activity doesn't have any handles, do not look at child activities.
-            ICollection<string> handleCollection = (ICollection<string>)activity.GetValue(Activity.SynchronizationHandlesProperty);
+            ICollection<string> handleCollection =
+                (ICollection<string>)activity.GetValue(Activity.SynchronizationHandlesProperty);
             if (handleCollection == null || handleCollection.Count == 0)
                 return handleCollection;
 
@@ -564,7 +728,9 @@ namespace System.Workflow.ComponentModel
                     if (e.CurrentActivity == activity)
                         return;
 
-                    ICollection<string> handlesOnChild = (ICollection<string>)e.CurrentActivity.GetValue(Activity.SynchronizationHandlesProperty);
+                    ICollection<string> handlesOnChild =
+                        (ICollection<string>)
+                            e.CurrentActivity.GetValue(Activity.SynchronizationHandlesProperty);
                     if (handlesOnChild != null)
                         handles.AddRange(handlesOnChild);
                 };
@@ -595,6 +761,7 @@ namespace System.Workflow.ComponentModel
 
             this.currentActivity.WorkflowCoreRuntime.SuspendInstance(suspendDescription);
         }
+
         internal void TerminateWorkflowInstance(Exception e)
         {
             if (this.currentActivity == null)
@@ -605,6 +772,7 @@ namespace System.Workflow.ComponentModel
 
             this.currentActivity.WorkflowCoreRuntime.TerminateInstance(e);
         }
+
         internal void CheckpointInstanceState()
         {
             if (this.currentActivity == null)
@@ -612,13 +780,26 @@ namespace System.Workflow.ComponentModel
 
             this.currentActivity.WorkflowCoreRuntime.CheckpointInstanceState(this.currentActivity);
         }
-        internal void RequestRevertToCheckpointState(EventHandler<EventArgs> handler, EventArgs data, bool suspendOnRevert, string suspendOnRevertInfo)
+
+        internal void RequestRevertToCheckpointState(
+            EventHandler<EventArgs> handler,
+            EventArgs data,
+            bool suspendOnRevert,
+            string suspendOnRevertInfo
+        )
         {
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            this.currentActivity.WorkflowCoreRuntime.RequestRevertToCheckpointState(this.currentActivity, handler, data, suspendOnRevert, suspendOnRevertInfo);
+            this.currentActivity.WorkflowCoreRuntime.RequestRevertToCheckpointState(
+                this.currentActivity,
+                handler,
+                data,
+                suspendOnRevert,
+                suspendOnRevertInfo
+            );
         }
+
         internal void DisposeCheckpointState()
         {
             if (this.currentActivity == null)
@@ -635,14 +816,27 @@ namespace System.Workflow.ComponentModel
             if (this.currentActivity == null)
                 throw new ObjectDisposedException("ActivityExecutionContext");
 
-            if (activity == this.currentActivity.WorkflowCoreRuntime.CurrentActivity && this.allowSignalsOnCurrentActivity)
+            if (
+                activity == this.currentActivity.WorkflowCoreRuntime.CurrentActivity
+                && this.allowSignalsOnCurrentActivity
+            )
                 return true;
 
-            if (activity.Enabled && activity.Parent == this.currentActivity.WorkflowCoreRuntime.CurrentActivity && (allowContextVariance || activity.Equals(this.Activity.GetActivityByName(activity.QualifiedName, true))))
+            if (
+                activity.Enabled
+                && activity.Parent == this.currentActivity.WorkflowCoreRuntime.CurrentActivity
+                && (
+                    allowContextVariance
+                    || activity.Equals(
+                        this.Activity.GetActivityByName(activity.QualifiedName, true)
+                    )
+                )
+            )
                 return true;
 
             return false;
         }
+
         internal bool IsValidNestedChild(Activity activity)
         {
             if (this.currentActivity == null)
@@ -652,11 +846,16 @@ namespace System.Workflow.ComponentModel
                 return true;
 
             Activity parentActivity = activity;
-            while (parentActivity != null && parentActivity.Enabled && parentActivity.Parent != this.currentActivity.ContextActivity)
+            while (
+                parentActivity != null
+                && parentActivity.Enabled
+                && parentActivity.Parent != this.currentActivity.ContextActivity
+            )
                 parentActivity = parentActivity.Parent;
 
             return (parentActivity != null && parentActivity.Enabled);
         }
+
         internal IWorkflowCoreRuntime WorkflowCoreRuntime
         {
             get
@@ -668,6 +867,7 @@ namespace System.Workflow.ComponentModel
                 return this.GetService<IWorkflowCoreRuntime>();
             }
         }
+
         internal static bool IsInAtomicTransaction(Activity activity)
         {
             bool isInAtomicTransaction = false;
@@ -690,12 +890,27 @@ namespace System.Workflow.ComponentModel
             Activity activity = d as Activity;
 
             if (activity == null)
-                throw new ArgumentException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_DOIsNotAnActivity));
+                throw new ArgumentException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_DOIsNotAnActivity
+                    )
+                );
 
             if (value != null)
-                throw new InvalidOperationException(SR.GetString(System.Globalization.CultureInfo.CurrentCulture, SR.Error_PropertyCanBeOnlyCleared));
+                throw new InvalidOperationException(
+                    SR.GetString(
+                        System.Globalization.CultureInfo.CurrentCulture,
+                        SR.Error_PropertyCanBeOnlyCleared
+                    )
+                );
 
-            d.SetValueCommon(CurrentExceptionProperty, null, CurrentExceptionProperty.DefaultMetadata, false);
+            d.SetValueCommon(
+                CurrentExceptionProperty,
+                null,
+                CurrentExceptionProperty.DefaultMetadata,
+                false
+            );
         }
         #endregion
 
@@ -730,23 +945,15 @@ namespace System.Workflow.ComponentModel
             this.holder = holder;
             this.waitList = new List<Activity>();
         }
+
         public Activity Holder
         {
-            get
-            {
-                return this.holder;
-            }
-            set
-            {
-                this.holder = value;
-            }
+            get { return this.holder; }
+            set { this.holder = value; }
         }
         public IList<Activity> WaitList
         {
-            get
-            {
-                return this.waitList;
-            }
+            get { return this.waitList; }
         }
 
         #region ICloneable Members

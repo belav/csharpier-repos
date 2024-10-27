@@ -15,7 +15,9 @@ namespace Microsoft.CodeAnalysis.SourceGeneration;
 /// </summary>
 internal sealed class GlobalAliases : IEquatable<GlobalAliases>
 {
-    public static readonly GlobalAliases Empty = new(ImmutableArray<(string aliasName, string symbolName)>.Empty);
+    public static readonly GlobalAliases Empty = new(
+        ImmutableArray<(string aliasName, string symbolName)>.Empty
+    );
 
     public readonly ImmutableArray<(string aliasName, string symbolName)> AliasAndSymbolNames;
 
@@ -26,7 +28,9 @@ internal sealed class GlobalAliases : IEquatable<GlobalAliases>
         AliasAndSymbolNames = aliasAndSymbolNames;
     }
 
-    public static GlobalAliases Create(ImmutableArray<(string aliasName, string symbolName)> aliasAndSymbolNames)
+    public static GlobalAliases Create(
+        ImmutableArray<(string aliasName, string symbolName)> aliasAndSymbolNames
+    )
     {
         return aliasAndSymbolNames.IsEmpty ? Empty : new GlobalAliases(aliasAndSymbolNames);
     }
@@ -39,7 +43,9 @@ internal sealed class GlobalAliases : IEquatable<GlobalAliases>
         if (aliasesArray.Length == 1)
             return aliasesArray[0];
 
-        var total = ArrayBuilder<(string aliasName, string symbolName)>.GetInstance(aliasesArray.Sum(a => a.AliasAndSymbolNames.Length));
+        var total = ArrayBuilder<(string aliasName, string symbolName)>.GetInstance(
+            aliasesArray.Sum(a => a.AliasAndSymbolNames.Length)
+        );
 
         foreach (var array in aliasesArray)
             total.AddRange(array.AliasAndSymbolNames);
@@ -72,8 +78,7 @@ internal sealed class GlobalAliases : IEquatable<GlobalAliases>
         return _hashCode;
     }
 
-    public override bool Equals(object? obj)
-        => this.Equals(obj as GlobalAliases);
+    public override bool Equals(object? obj) => this.Equals(obj as GlobalAliases);
 
     public bool Equals(GlobalAliases? aliases)
     {
@@ -86,6 +91,8 @@ internal sealed class GlobalAliases : IEquatable<GlobalAliases>
         if (this.AliasAndSymbolNames == aliases.AliasAndSymbolNames)
             return true;
 
-        return this.AliasAndSymbolNames.AsSpan().SequenceEqual(aliases.AliasAndSymbolNames.AsSpan());
+        return this
+            .AliasAndSymbolNames.AsSpan()
+            .SequenceEqual(aliases.AliasAndSymbolNames.AsSpan());
     }
 }

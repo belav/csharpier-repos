@@ -12,21 +12,18 @@ public class UpdateableFileProvider : IFileProvider
 {
     public CancellationTokenSource _pagesTokenSource = new CancellationTokenSource();
 
-    private readonly Dictionary<string, TestFileInfo> _content = new Dictionary<string, TestFileInfo>()
+    private readonly Dictionary<string, TestFileInfo> _content = new Dictionary<
+        string,
+        TestFileInfo
+    >()
+    {
+        { "/Views/UpdateableViews/_ViewImports.cshtml", new TestFileInfo(string.Empty) },
+        { "/Views/UpdateableViews/Index.cshtml", new TestFileInfo("Original content") },
         {
-            {
-                "/Views/UpdateableViews/_ViewImports.cshtml",
-                new TestFileInfo(string.Empty)
-            },
-            {
-                "/Views/UpdateableViews/Index.cshtml",
-                new TestFileInfo("Original content")
-            },
-            {
-                "/Pages/UpdateablePage.cshtml",
-                new TestFileInfo("@page" + Environment.NewLine + "Original content")
-            },
-        };
+            "/Pages/UpdateablePage.cshtml",
+            new TestFileInfo("@page" + Environment.NewLine + "Original content")
+        },
+    };
 
     public IDirectoryContents GetDirectoryContents(string subpath)
     {
@@ -111,7 +108,7 @@ public class UpdateableFileProvider : IFileProvider
         {
             var file = new TestFileInfo("@page" + Environment.NewLine + "Original content")
             {
-                Name = "UpdateablePage.cshtml"
+                Name = "UpdateablePage.cshtml",
             };
 
             var files = new List<IFileInfo> { file };

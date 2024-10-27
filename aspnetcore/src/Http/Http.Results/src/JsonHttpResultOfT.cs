@@ -13,7 +13,12 @@ namespace Microsoft.AspNetCore.Http.HttpResults;
 /// <summary>
 /// An action result which formats the given object as JSON.
 /// </summary>
-public sealed partial class JsonHttpResult<TValue> : IResult, IStatusCodeHttpResult, IValueHttpResult, IValueHttpResult<TValue>, IContentTypeHttpResult
+public sealed partial class JsonHttpResult<TValue>
+    : IResult,
+        IStatusCodeHttpResult,
+        IValueHttpResult,
+        IValueHttpResult<TValue>,
+        IContentTypeHttpResult
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="Json"/> class with the values.
@@ -24,7 +29,12 @@ public sealed partial class JsonHttpResult<TValue> : IResult, IStatusCodeHttpRes
     /// <param name="contentType">The value for the <c>Content-Type</c> header</param>
     [RequiresDynamicCode(JsonHttpResultTrimmerWarning.SerializationRequiresDynamicCodeMessage)]
     [RequiresUnreferencedCode(JsonHttpResultTrimmerWarning.SerializationUnreferencedCodeMessage)]
-    internal JsonHttpResult(TValue? value, JsonSerializerOptions? jsonSerializerOptions, int? statusCode = null, string? contentType = null)
+    internal JsonHttpResult(
+        TValue? value,
+        JsonSerializerOptions? jsonSerializerOptions,
+        int? statusCode = null,
+        string? contentType = null
+    )
     {
         Value = value;
         ContentType = contentType;
@@ -115,13 +125,15 @@ public sealed partial class JsonHttpResult<TValue> : IResult, IStatusCodeHttpRes
                 return httpContext.Response.WriteAsJsonAsync(
                     Value,
                     typedJsonTypeInfo,
-                    contentType: ContentType);
+                    contentType: ContentType
+                );
             }
-            
+
             return httpContext.Response.WriteAsJsonAsync(
                 Value,
                 JsonTypeInfo,
-                contentType: ContentType);
+                contentType: ContentType
+            );
         }
 
         return HttpResultsHelper.WriteResultAsJsonAsync(
@@ -129,6 +141,7 @@ public sealed partial class JsonHttpResult<TValue> : IResult, IStatusCodeHttpRes
             logger,
             Value,
             ContentType,
-            JsonSerializerOptions);
+            JsonSerializerOptions
+        );
     }
 }

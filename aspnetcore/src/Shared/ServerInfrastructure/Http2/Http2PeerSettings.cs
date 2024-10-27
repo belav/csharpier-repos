@@ -45,9 +45,11 @@ internal sealed class Http2PeerSettings
                 case Http2SettingsParameter.SETTINGS_ENABLE_PUSH:
                     if (value != 0 && value != 1)
                     {
-                        throw new Http2SettingsParameterOutOfRangeException(Http2SettingsParameter.SETTINGS_ENABLE_PUSH,
+                        throw new Http2SettingsParameterOutOfRangeException(
+                            Http2SettingsParameter.SETTINGS_ENABLE_PUSH,
                             lowerBound: 0,
-                            upperBound: 1);
+                            upperBound: 1
+                        );
                     }
 
                     EnablePush = value == 1;
@@ -58,9 +60,11 @@ internal sealed class Http2PeerSettings
                 case Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE:
                     if (value > MaxWindowSize)
                     {
-                        throw new Http2SettingsParameterOutOfRangeException(Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE,
+                        throw new Http2SettingsParameterOutOfRangeException(
+                            Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE,
                             lowerBound: 0,
-                            upperBound: MaxWindowSize);
+                            upperBound: MaxWindowSize
+                        );
                     }
 
                     InitialWindowSize = value;
@@ -68,9 +72,11 @@ internal sealed class Http2PeerSettings
                 case Http2SettingsParameter.SETTINGS_MAX_FRAME_SIZE:
                     if (value < MinAllowedMaxFrameSize || value > MaxAllowedMaxFrameSize)
                     {
-                        throw new Http2SettingsParameterOutOfRangeException(Http2SettingsParameter.SETTINGS_MAX_FRAME_SIZE,
+                        throw new Http2SettingsParameterOutOfRangeException(
+                            Http2SettingsParameter.SETTINGS_MAX_FRAME_SIZE,
                             lowerBound: MinAllowedMaxFrameSize,
-                            upperBound: MaxAllowedMaxFrameSize);
+                            upperBound: MaxAllowedMaxFrameSize
+                        );
                     }
 
                     MaxFrameSize = value;
@@ -96,32 +102,59 @@ internal sealed class Http2PeerSettings
 
         if (HeaderTableSize != DefaultHeaderTableSize)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_HEADER_TABLE_SIZE, HeaderTableSize));
+            list.Add(
+                new Http2PeerSetting(
+                    Http2SettingsParameter.SETTINGS_HEADER_TABLE_SIZE,
+                    HeaderTableSize
+                )
+            );
         }
 
         if (EnablePush != DefaultEnablePush)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_ENABLE_PUSH, EnablePush ? 1u : 0));
+            list.Add(
+                new Http2PeerSetting(
+                    Http2SettingsParameter.SETTINGS_ENABLE_PUSH,
+                    EnablePush ? 1u : 0
+                )
+            );
         }
 
         if (MaxConcurrentStreams != DefaultMaxConcurrentStreams)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_MAX_CONCURRENT_STREAMS, MaxConcurrentStreams));
+            list.Add(
+                new Http2PeerSetting(
+                    Http2SettingsParameter.SETTINGS_MAX_CONCURRENT_STREAMS,
+                    MaxConcurrentStreams
+                )
+            );
         }
 
         if (InitialWindowSize != DefaultInitialWindowSize)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE, InitialWindowSize));
+            list.Add(
+                new Http2PeerSetting(
+                    Http2SettingsParameter.SETTINGS_INITIAL_WINDOW_SIZE,
+                    InitialWindowSize
+                )
+            );
         }
 
         if (MaxFrameSize != DefaultMaxFrameSize)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_MAX_FRAME_SIZE, MaxFrameSize));
+            list.Add(
+                new Http2PeerSetting(Http2SettingsParameter.SETTINGS_MAX_FRAME_SIZE, MaxFrameSize)
+            );
         }
 
         if (MaxHeaderListSize != DefaultMaxHeaderListSize)
         {
-            list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_MAX_HEADER_LIST_SIZE, MaxHeaderListSize));
+            list.Add(
+                new Http2PeerSetting(
+                    Http2SettingsParameter.SETTINGS_MAX_HEADER_LIST_SIZE,
+                    MaxHeaderListSize
+                )
+            );
         }
 
         list.Add(new Http2PeerSetting(Http2SettingsParameter.SETTINGS_ENABLE_CONNECT_PROTOCOL, 1u));

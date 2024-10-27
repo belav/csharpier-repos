@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -24,30 +24,28 @@
 //
 
 
-namespace System.Windows.Forms {
+namespace System.Windows.Forms
+{
+    public interface IDataGridViewEditingControl
+    {
+        DataGridView EditingControlDataGridView { get; set; }
 
-	public interface IDataGridViewEditingControl {
+        object EditingControlFormattedValue { get; set; }
 
-		DataGridView EditingControlDataGridView {get; set;}
+        int EditingControlRowIndex { get; set; }
 
-		object EditingControlFormattedValue {get; set;}
+        bool EditingControlValueChanged { get; set; }
 
-		int EditingControlRowIndex {get; set;}
+        Cursor EditingPanelCursor { get; }
 
-		bool EditingControlValueChanged {get; set;}
+        bool RepositionEditingControlOnValueChange { get; }
 
-		Cursor EditingPanelCursor {get;}
+        void ApplyCellStyleToEditingControl(DataGridViewCellStyle dataGridViewCellStyle);
 
-		bool RepositionEditingControlOnValueChange {get;}
+        bool EditingControlWantsInputKey(Keys keyData, bool dataGridViewWantsInputKey);
 
-		void ApplyCellStyleToEditingControl (DataGridViewCellStyle dataGridViewCellStyle);
+        object GetEditingControlFormattedValue(DataGridViewDataErrorContexts context);
 
-		bool EditingControlWantsInputKey (Keys keyData, bool dataGridViewWantsInputKey);
-
-		object GetEditingControlFormattedValue (DataGridViewDataErrorContexts context);
-
-		void PrepareEditingControlForEdit (bool selectAll);
-
-	}
-
+        void PrepareEditingControlForEdit(bool selectAll);
+    }
 }

@@ -5,8 +5,8 @@
 using System;
 using System.Composition;
 using System.Threading.Tasks;
-using Microsoft.CodeAnalysis.Host.Mef;
 using Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient;
+using Microsoft.CodeAnalysis.Host.Mef;
 using Newtonsoft.Json.Linq;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
@@ -19,18 +19,36 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public RazorCSharpInterceptionMiddleLayerWrapper(IRazorCSharpInterceptionMiddleLayer razorCSharpInterceptionMiddleLayer)
+        public RazorCSharpInterceptionMiddleLayerWrapper(
+            IRazorCSharpInterceptionMiddleLayer razorCSharpInterceptionMiddleLayer
+        )
         {
             _razorCSharpInterceptionMiddleLayer = razorCSharpInterceptionMiddleLayer;
         }
 
-        public override bool CanHandle(string methodName)
-            => _razorCSharpInterceptionMiddleLayer.CanHandle(methodName);
+        public override bool CanHandle(string methodName) =>
+            _razorCSharpInterceptionMiddleLayer.CanHandle(methodName);
 
-        public override Task HandleNotificationAsync(string methodName, JToken methodParam, Func<JToken, Task> sendNotification)
-            => _razorCSharpInterceptionMiddleLayer.HandleNotificationAsync(methodName, methodParam, sendNotification);
+        public override Task HandleNotificationAsync(
+            string methodName,
+            JToken methodParam,
+            Func<JToken, Task> sendNotification
+        ) =>
+            _razorCSharpInterceptionMiddleLayer.HandleNotificationAsync(
+                methodName,
+                methodParam,
+                sendNotification
+            );
 
-        public override Task<JToken?> HandleRequestAsync(string methodName, JToken methodParam, Func<JToken, Task<JToken?>> sendRequest)
-            => _razorCSharpInterceptionMiddleLayer.HandleRequestAsync(methodName, methodParam, sendRequest);
+        public override Task<JToken?> HandleRequestAsync(
+            string methodName,
+            JToken methodParam,
+            Func<JToken, Task<JToken?>> sendRequest
+        ) =>
+            _razorCSharpInterceptionMiddleLayer.HandleRequestAsync(
+                methodName,
+                methodParam,
+                sendRequest
+            );
     }
 }

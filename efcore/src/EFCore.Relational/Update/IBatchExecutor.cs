@@ -31,7 +31,10 @@ public interface IBatchExecutor
     /// <param name="commandBatches">The batches to execute.</param>
     /// <param name="connection">The database connection to use.</param>
     /// <returns>The total number of rows affected.</returns>
-    int Execute(IEnumerable<ModificationCommandBatch> commandBatches, IRelationalConnection connection);
+    int Execute(
+        IEnumerable<ModificationCommandBatch> commandBatches,
+        IRelationalConnection connection
+    );
 
     /// <summary>
     ///     Executes the commands in the batches against the given database connection.
@@ -47,5 +50,6 @@ public interface IBatchExecutor
     Task<int> ExecuteAsync(
         IEnumerable<ModificationCommandBatch> commandBatches,
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

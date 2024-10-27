@@ -19,7 +19,8 @@ internal sealed class StreamInputFlowControl
         Http2FrameWriter frameWriter,
         InputFlowControl connectionLevelFlowControl,
         uint initialWindowSize,
-        uint minWindowSizeIncrement)
+        uint minWindowSizeIncrement
+    )
     {
         _connectionLevelFlowControl = connectionLevelFlowControl;
         _streamLevelFlowControl = new InputFlowControl(initialWindowSize, minWindowSizeIncrement);
@@ -36,7 +37,10 @@ internal sealed class StreamInputFlowControl
     {
         var connectionSuccess = _connectionLevelFlowControl.TryAdvance(bytes);
 
-        Debug.Assert(connectionSuccess, "Connection-level input flow control should never be aborted.");
+        Debug.Assert(
+            connectionSuccess,
+            "Connection-level input flow control should never be aborted."
+        );
 
         if (!_streamLevelFlowControl.TryAdvance(bytes))
         {
@@ -83,9 +87,15 @@ internal sealed class StreamInputFlowControl
 
     private void UpdateConnectionWindow(int bytes)
     {
-        var connectionSuccess = _connectionLevelFlowControl.TryUpdateWindow(bytes, out var connectionWindowUpdateSize);
+        var connectionSuccess = _connectionLevelFlowControl.TryUpdateWindow(
+            bytes,
+            out var connectionWindowUpdateSize
+        );
 
-        Debug.Assert(connectionSuccess, "Connection-level input flow control should never be aborted.");
+        Debug.Assert(
+            connectionSuccess,
+            "Connection-level input flow control should never be aborted."
+        );
 
         if (connectionWindowUpdateSize > 0)
         {

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,14 +32,15 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Configuration;
-using System.Net;
-using System.Net.Security;
-using System.Reflection;
-using System.Security.Cryptography.X509Certificates;
-using System.Security.Principal;
 using System.IdentityModel.Claims;
 using System.IdentityModel.Policy;
 using System.IdentityModel.Tokens;
+using System.Net;
+using System.Net.Security;
+using System.Reflection;
+using System.Runtime.Serialization;
+using System.Security.Cryptography.X509Certificates;
+using System.Security.Principal;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
@@ -48,72 +49,76 @@ using System.ServiceModel.Dispatcher;
 using System.ServiceModel.MsmqIntegration;
 using System.ServiceModel.PeerResolvers;
 using System.ServiceModel.Security;
-using System.Runtime.Serialization;
 using System.Text;
 using System.Xml;
 
 namespace System.ServiceModel.Configuration
 {
-	public sealed class ClientSection
-		 : ConfigurationSection
-	{
-		static Type [] _defaultPolicyImporters = new Type [] {
-				typeof(CompositeDuplexBindingElementImporter),
-				typeof(MessageEncodingBindingElementImporter),
-				typeof(OneWayBindingElementImporter),
-				typeof(PrivacyNoticeBindingElementImporter),
-				typeof(ReliableSessionBindingElementImporter),
-				typeof(SecurityBindingElementImporter),
-				typeof(TransactionFlowBindingElementImporter),
-				typeof(TransportBindingElementImporter),
-				typeof(UseManagedPresentationBindingElementImporter)
-			};
+    public sealed class ClientSection : ConfigurationSection
+    {
+        static Type[] _defaultPolicyImporters = new Type[]
+        {
+            typeof(CompositeDuplexBindingElementImporter),
+            typeof(MessageEncodingBindingElementImporter),
+            typeof(OneWayBindingElementImporter),
+            typeof(PrivacyNoticeBindingElementImporter),
+            typeof(ReliableSessionBindingElementImporter),
+            typeof(SecurityBindingElementImporter),
+            typeof(TransactionFlowBindingElementImporter),
+            typeof(TransportBindingElementImporter),
+            typeof(UseManagedPresentationBindingElementImporter),
+        };
 
-		static Type [] _defaultWsdlImporters = new Type [] { 
-				typeof(MessageEncodingBindingElementImporter),
-				typeof(StandardBindingImporter),
-				typeof(TransportBindingElementImporter),
-				typeof(DataContractSerializerMessageContractImporter),
-				typeof(XmlSerializerMessageContractImporter)
-			};
+        static Type[] _defaultWsdlImporters = new Type[]
+        {
+            typeof(MessageEncodingBindingElementImporter),
+            typeof(StandardBindingImporter),
+            typeof(TransportBindingElementImporter),
+            typeof(DataContractSerializerMessageContractImporter),
+            typeof(XmlSerializerMessageContractImporter),
+        };
 
-		public ClientSection () {
-		}
+        public ClientSection() { }
 
-		// Properties
+        // Properties
 
-		[ConfigurationProperty ("",
-			 Options = ConfigurationPropertyOptions.IsDefaultCollection,
-			IsDefaultCollection = true)]
-		public ChannelEndpointElementCollection Endpoints {
-			get { return (ChannelEndpointElementCollection) this [String.Empty]; }
-		}
+        [ConfigurationProperty(
+            "",
+            Options = ConfigurationPropertyOptions.IsDefaultCollection,
+            IsDefaultCollection = true
+        )]
+        public ChannelEndpointElementCollection Endpoints
+        {
+            get { return (ChannelEndpointElementCollection)this[String.Empty]; }
+        }
 
-		[ConfigurationProperty ("metadata",
-			 Options = ConfigurationPropertyOptions.None)]
-		public MetadataElement Metadata {
-			get { return (MetadataElement) this ["metadata"]; }
-		}
+        [ConfigurationProperty("metadata", Options = ConfigurationPropertyOptions.None)]
+        public MetadataElement Metadata
+        {
+            get { return (MetadataElement)this["metadata"]; }
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return base.Properties; }
-		}
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return base.Properties; }
+        }
 
-		protected override void InitializeDefault () {
-			base.InitializeDefault ();
+        protected override void InitializeDefault()
+        {
+            base.InitializeDefault();
 
-			PolicyImporterElementCollection policyImporters = Metadata.PolicyImporters;
-			for (int i = 0; i < _defaultPolicyImporters.Length; i++)
-				policyImporters.Add (new PolicyImporterElement (_defaultPolicyImporters [i]));
+            PolicyImporterElementCollection policyImporters = Metadata.PolicyImporters;
+            for (int i = 0; i < _defaultPolicyImporters.Length; i++)
+                policyImporters.Add(new PolicyImporterElement(_defaultPolicyImporters[i]));
 
-			WsdlImporterElementCollection wsdlImporters = Metadata.WsdlImporters;
-			for (int i = 0; i < _defaultWsdlImporters.Length; i++)
-				wsdlImporters.Add (new WsdlImporterElement (_defaultWsdlImporters [i]));
-		}
+            WsdlImporterElementCollection wsdlImporters = Metadata.WsdlImporters;
+            for (int i = 0; i < _defaultWsdlImporters.Length; i++)
+                wsdlImporters.Add(new WsdlImporterElement(_defaultWsdlImporters[i]));
+        }
 
-		protected override void PostDeserialize () {
-			base.PostDeserialize ();
-		}
-	}
-
+        protected override void PostDeserialize()
+        {
+            base.PostDeserialize();
+        }
+    }
 }

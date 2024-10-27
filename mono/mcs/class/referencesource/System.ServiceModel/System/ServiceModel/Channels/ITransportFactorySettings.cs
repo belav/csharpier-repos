@@ -5,9 +5,9 @@
 namespace System.ServiceModel.Channels
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.ServiceModel;
     using System.ServiceModel.Description;
-    using System.Diagnostics;
 
     interface IConnectionOrientedConnectionSettings
     {
@@ -33,16 +33,20 @@ namespace System.ServiceModel.Channels
         MessageVersion MessageVersion { get; }
     }
 
-    interface IConnectionOrientedTransportFactorySettings : ITransportFactorySettings, IConnectionOrientedConnectionSettings
+    interface IConnectionOrientedTransportFactorySettings
+        : ITransportFactorySettings,
+            IConnectionOrientedConnectionSettings
     {
         int MaxBufferSize { get; }
         StreamUpgradeProvider Upgrade { get; }
         TransferMode TransferMode { get; }
+
         // Audit
         ServiceSecurityAuditBehavior AuditBehavior { get; }
     }
 
-    interface IConnectionOrientedTransportChannelFactorySettings : IConnectionOrientedTransportFactorySettings
+    interface IConnectionOrientedTransportChannelFactorySettings
+        : IConnectionOrientedTransportFactorySettings
     {
         string ConnectionPoolGroupName { get; }
         int MaxOutboundConnectionsPerEndpoint { get; }

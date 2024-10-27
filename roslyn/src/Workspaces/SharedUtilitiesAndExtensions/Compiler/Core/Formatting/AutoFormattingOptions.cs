@@ -12,14 +12,19 @@ namespace Microsoft.CodeAnalysis.Formatting;
 [DataContract]
 internal readonly record struct AutoFormattingOptions
 {
-    [DataMember] public bool FormatOnReturn { get; init; } = true;
-    [DataMember] public bool FormatOnTyping { get; init; } = true;
-    [DataMember] public bool FormatOnSemicolon { get; init; } = true;
-    [DataMember] public bool FormatOnCloseBrace { get; init; } = true;
+    [DataMember]
+    public bool FormatOnReturn { get; init; } = true;
 
-    public AutoFormattingOptions()
-    {
-    }
+    [DataMember]
+    public bool FormatOnTyping { get; init; } = true;
+
+    [DataMember]
+    public bool FormatOnSemicolon { get; init; } = true;
+
+    [DataMember]
+    public bool FormatOnCloseBrace { get; init; } = true;
+
+    public AutoFormattingOptions() { }
 
     public static readonly AutoFormattingOptions Default = new();
 }

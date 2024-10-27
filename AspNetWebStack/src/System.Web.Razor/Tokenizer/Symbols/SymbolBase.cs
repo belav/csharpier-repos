@@ -12,7 +12,12 @@ namespace System.Web.Razor.Tokenizer.Symbols
 {
     public abstract class SymbolBase<TType> : ISymbol
     {
-        protected SymbolBase(SourceLocation start, string content, TType type, IEnumerable<RazorError> errors)
+        protected SymbolBase(
+            SourceLocation start,
+            string content,
+            TType type,
+            IEnumerable<RazorError> errors
+        )
         {
             if (content == null)
             {
@@ -33,30 +38,36 @@ namespace System.Web.Razor.Tokenizer.Symbols
         public string Content { get; private set; }
         public IEnumerable<RazorError> Errors { get; private set; }
 
-        [SuppressMessage("Microsoft.Naming", "CA1721:PropertyNamesShouldNotMatchGetMethods", Justification = "This is the most appropriate name for this property and conflicts are unlikely")]
+        [SuppressMessage(
+            "Microsoft.Naming",
+            "CA1721:PropertyNamesShouldNotMatchGetMethods",
+            Justification = "This is the most appropriate name for this property and conflicts are unlikely"
+        )]
         public TType Type { get; private set; }
 
         public override bool Equals(object obj)
         {
             SymbolBase<TType> other = obj as SymbolBase<TType>;
-            return other != null &&
-                   Start.Equals(other.Start) &&
-                   String.Equals(Content, other.Content, StringComparison.Ordinal) &&
-                   Type.Equals(other.Type);
+            return other != null
+                && Start.Equals(other.Start)
+                && String.Equals(Content, other.Content, StringComparison.Ordinal)
+                && Type.Equals(other.Type);
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
-                .Add(Start)
-                .Add(Content)
-                .Add(Type)
-                .CombinedHash;
+            return HashCodeCombiner.Start().Add(Start).Add(Content).Add(Type).CombinedHash;
         }
 
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture, "{0} {1} - [{2}]", Start, Type, Content);
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "{0} {1} - [{2}]",
+                Start,
+                Type,
+                Content
+            );
         }
 
         public void OffsetStart(SourceLocation documentStart)

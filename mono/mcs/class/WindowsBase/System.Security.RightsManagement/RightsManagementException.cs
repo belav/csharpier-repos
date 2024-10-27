@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,60 +27,67 @@ using System;
 using System.Runtime.Serialization;
 using System.Security;
 
-namespace System.Security.RightsManagement {
+namespace System.Security.RightsManagement
+{
+    [Serializable]
+    public class RightsManagementException : Exception
+    {
+        public RightsManagementException()
+        {
+            throw new NotImplementedException();
+        }
 
-	[Serializable]
-	public class RightsManagementException : Exception
-	{
-		public RightsManagementException ()
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(RightsManagementFailureCode failureCode)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (RightsManagementFailureCode failureCode)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(string message)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (string message)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(
+            RightsManagementFailureCode failureCode,
+            Exception innerException
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (RightsManagementFailureCode failureCode, Exception innerException)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(RightsManagementFailureCode failureCode, string message)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (RightsManagementFailureCode failureCode, string message)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(string message, Exception innerException)
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (string message, Exception innerException)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementException(
+            RightsManagementFailureCode failureCode,
+            string message,
+            Exception innerException
+        )
+        {
+            throw new NotImplementedException();
+        }
 
-		public RightsManagementException (RightsManagementFailureCode failureCode, string message, Exception innerException)
-		{
-			throw new NotImplementedException ();
-		}
+        protected RightsManagementException(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
 
-		protected RightsManagementException (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
+        public RightsManagementFailureCode FailureCode
+        {
+            get { throw new NotImplementedException(); }
+        }
 
-		public RightsManagementFailureCode FailureCode {
-			get { throw new NotImplementedException (); }
-		}
-
-		[SecurityCritical]
-		public override void GetObjectData (SerializationInfo info, StreamingContext context)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        [SecurityCritical]
+        public override void GetObjectData(SerializationInfo info, StreamingContext context)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="Link.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -9,15 +9,14 @@ using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile Link class.
      *
@@ -25,16 +24,26 @@ namespace System.Web.UI.MobileControls
      */
     /// <include file='doc\Link.uex' path='docs/doc[@for="Link"]/*' />
     [
-        DataBindingHandler("System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign),
+        DataBindingHandler(
+            "System.Web.UI.Design.TextDataBindingHandler, " + AssemblyRef.SystemDesign
+        ),
         DefaultProperty("Text"),
         Designer(typeof(System.Web.UI.Design.MobileControls.LinkDesigner)),
         DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerLinkAdapter)),
         ToolboxData("<{0}:Link runat=server>Link</{0}:Link>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class Link : TextControl, IPostBackEventHandler
     {
         /// <include file='doc\Link.uex' path='docs/doc[@for="Link.NavigateUrl"]/*' />
@@ -43,19 +52,18 @@ namespace System.Web.UI.MobileControls
             DefaultValue(""),
             MobileCategory(SR.Category_Navigation),
             MobileSysDescription(SR.Link_NavigateUrl),
-            TypeConverter(typeof(System.Web.UI.Design.MobileControls.Converters.NavigateUrlConverter))
+            TypeConverter(
+                typeof(System.Web.UI.Design.MobileControls.Converters.NavigateUrlConverter)
+            )
         ]
         public String NavigateUrl
         {
             get
             {
-                String s = (String) ViewState["NavigateUrl"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["NavigateUrl"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["NavigateUrl"] = value;
-            }
+            set { ViewState["NavigateUrl"] = value; }
         }
 
         /// <include file='doc\Link.uex' path='docs/doc[@for="Link.SoftkeyLabel"]/*' />
@@ -69,13 +77,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["SoftkeyLabel"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["SoftkeyLabel"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["SoftkeyLabel"] = value;
-            }
+            set { ViewState["SoftkeyLabel"] = value; }
         }
 
         // used for linking between panels
@@ -102,9 +107,10 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
 }

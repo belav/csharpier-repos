@@ -127,7 +127,13 @@ namespace System.Runtime.Serialization.Schema.Tests
 
         [Theory]
         [MemberData(nameof(ReferencedTypes_MemberData))]
-        public void ReferencedTypes(XmlSchemaSet schemas, XmlQualifiedName qname, Type[] referencedTypes, Type expectedExceptionType = null, string msg = null)
+        public void ReferencedTypes(
+            XmlSchemaSet schemas,
+            XmlQualifiedName qname,
+            Type[] referencedTypes,
+            Type expectedExceptionType = null,
+            string msg = null
+        )
         {
             XsdDataContractImporter importer = SchemaUtils.CreateImporterWithDefaultOptions();
             for (int i = 0; i < referencedTypes.Length; i++)
@@ -140,21 +146,51 @@ namespace System.Runtime.Serialization.Schema.Tests
             }
             else
             {
-                var ex = Assert.Throws(expectedExceptionType, () => importer.Import(schemas, qname));
+                var ex = Assert.Throws(
+                    expectedExceptionType,
+                    () => importer.Import(schemas, qname)
+                );
 
                 if (!string.IsNullOrEmpty(msg))
                     Assert.StartsWith(msg, ex.Message);
             }
         }
+
         public static IEnumerable<object[]> ReferencedTypes_MemberData()
         {
-            yield return new object[] { SchemaUtils.PositiveSchemas, SchemaUtils.ValidTypeNames[1], new Type[] { typeof(AnotherValidType) } };
-            yield return new object[] { SchemaUtils.PositiveSchemas, SchemaUtils.ValidTypeNames[2], new Type[] { typeof(NonAttributedSquare) } };
-            yield return new object[] { SchemaUtils.PositiveSchemas, SchemaUtils.ValidTypeNames[1], new Type[] { typeof(AnotherValidType), typeof(ConflictingAnotherValidType) },
-                    typeof(InvalidOperationException), @"List of referenced types contains more than one type with data contract name 'AnotherValidType' in namespace 'http://schemas.datacontract.org/2004/07/barNs'. Need to exclude all but one of the following types. Only matching types can be valid references:"};
+            yield return new object[]
+            {
+                SchemaUtils.PositiveSchemas,
+                SchemaUtils.ValidTypeNames[1],
+                new Type[] { typeof(AnotherValidType) },
+            };
+            yield return new object[]
+            {
+                SchemaUtils.PositiveSchemas,
+                SchemaUtils.ValidTypeNames[2],
+                new Type[] { typeof(NonAttributedSquare) },
+            };
+            yield return new object[]
+            {
+                SchemaUtils.PositiveSchemas,
+                SchemaUtils.ValidTypeNames[1],
+                new Type[] { typeof(AnotherValidType), typeof(ConflictingAnotherValidType) },
+                typeof(InvalidOperationException),
+                @"List of referenced types contains more than one type with data contract name 'AnotherValidType' in namespace 'http://schemas.datacontract.org/2004/07/barNs'. Need to exclude all but one of the following types. Only matching types can be valid references:",
+            };
             // These last two are described as "negative" in the original NetFx XsdDCImporterApi test code... but they don't fail here or there.
-            yield return new object[] { SchemaUtils.IsReferenceSchemas, SchemaUtils.ValidTypeNames[3], new Type[] { typeof(NonRefType) } };
-            yield return new object[] { SchemaUtils.IsReferenceSchemas, SchemaUtils.ValidTypeNames[4], new Type[] { typeof(RefType1) } };
+            yield return new object[]
+            {
+                SchemaUtils.IsReferenceSchemas,
+                SchemaUtils.ValidTypeNames[3],
+                new Type[] { typeof(NonRefType) },
+            };
+            yield return new object[]
+            {
+                SchemaUtils.IsReferenceSchemas,
+                SchemaUtils.ValidTypeNames[4],
+                new Type[] { typeof(RefType1) },
+            };
         }
     }
 }

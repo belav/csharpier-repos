@@ -1,30 +1,27 @@
 //------------------------------------------------------------------------------
 // <copyright file="CodeNamespaceImport.cs" company="Microsoft">
-// 
+//
 // <OWNER>Microsoft</OWNER>
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.CodeDom {
-
-    using System.Diagnostics;
+namespace System.CodeDom
+{
     using System;
-    using Microsoft.Win32;
     using System.Collections;
+    using System.Diagnostics;
     using System.Runtime.InteropServices;
+    using Microsoft.Win32;
 
     /// <devdoc>
     ///    <para>
     ///       Represents a namespace import into the current namespace.
     ///    </para>
     /// </devdoc>
-    [
-        ClassInterface(ClassInterfaceType.AutoDispatch),
-        ComVisible(true),
-        Serializable,
-    ]
-    public class CodeNamespaceImport : CodeObject {
+    [ClassInterface(ClassInterfaceType.AutoDispatch), ComVisible(true), Serializable]
+    public class CodeNamespaceImport : CodeObject
+    {
         private string nameSpace;
         private CodeLinePragma linePragma;
 
@@ -33,8 +30,7 @@ namespace System.CodeDom {
         ///       Initializes a new instance of <see cref='System.CodeDom.CodeNamespaceImport'/>.
         ///    </para>
         /// </devdoc>
-        public CodeNamespaceImport() {
-        }
+        public CodeNamespaceImport() { }
 
         /// <devdoc>
         ///    <para>
@@ -42,7 +38,8 @@ namespace System.CodeDom {
         ///       to import.
         ///    </para>
         /// </devdoc>
-        public CodeNamespaceImport(string nameSpace) {
+        public CodeNamespaceImport(string nameSpace)
+        {
             Namespace = nameSpace;
         }
 
@@ -51,13 +48,10 @@ namespace System.CodeDom {
         ///       The line the statement occurs on.
         ///    </para>
         /// </devdoc>
-        public CodeLinePragma LinePragma {
-            get {
-                return linePragma;
-            }
-            set {
-                linePragma = value;
-            }
+        public CodeLinePragma LinePragma
+        {
+            get { return linePragma; }
+            set { linePragma = value; }
         }
 
         /// <devdoc>
@@ -66,13 +60,10 @@ namespace System.CodeDom {
         ///       the namespace to import.
         ///    </para>
         /// </devdoc>
-        public string Namespace {
-            get {
-                return (nameSpace == null) ? string.Empty : nameSpace;
-            }
-            set {
-                nameSpace = value;
-            }
+        public string Namespace
+        {
+            get { return (nameSpace == null) ? string.Empty : nameSpace; }
+            set { nameSpace = value; }
         }
     }
 }

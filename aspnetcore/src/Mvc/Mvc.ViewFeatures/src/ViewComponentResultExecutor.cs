@@ -47,7 +47,8 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
         HtmlEncoder htmlEncoder,
         IModelMetadataProvider modelMetadataProvider,
         ITempDataDictionaryFactory tempDataDictionaryFactory,
-        IHttpResponseStreamWriterFactory writerFactory)
+        IHttpResponseStreamWriterFactory writerFactory
+    )
     {
         ArgumentNullException.ThrowIfNull(mvcHelperOptions);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -89,7 +90,8 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
             (ViewExecutor.DefaultContentType, Encoding.UTF8),
             MediaType.GetEncoding,
             out var resolvedContentType,
-            out var resolvedContentTypeEncoding);
+            out var resolvedContentTypeEncoding
+        );
 
         response.ContentType = resolvedContentType;
 
@@ -98,21 +100,30 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
             response.StatusCode = result.StatusCode.Value;
         }
 
-        await using var writer = _writerFactory.CreateWriter(response.Body, resolvedContentTypeEncoding);
+        await using var writer = _writerFactory.CreateWriter(
+            response.Body,
+            resolvedContentTypeEncoding
+        );
         var viewContext = new ViewContext(
             context,
             NullView.Instance,
             viewData,
             tempData,
             writer,
-            _htmlHelperOptions);
+            _htmlHelperOptions
+        );
 
         OnExecuting(viewContext);
 
         // IViewComponentHelper is stateful, we want to make sure to retrieve it every time we need it.
-        var viewComponentHelper = context.HttpContext.RequestServices.GetRequiredService<IViewComponentHelper>();
+        var viewComponentHelper =
+            context.HttpContext.RequestServices.GetRequiredService<IViewComponentHelper>();
         (viewComponentHelper as IViewContextAware)?.Contextualize(viewContext);
-        var viewComponentResult = await GetViewComponentResult(viewComponentHelper, _logger, result);
+        var viewComponentResult = await GetViewComponentResult(
+            viewComponentHelper,
+            _logger,
+            result
+        );
 
         if (viewComponentResult is ViewBuffer viewBuffer)
         {
@@ -124,7 +135,12 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
         else
         {
             await using var bufferingStream = new FileBufferingWriteStream();
-            await using (var intermediateWriter = _writerFactory.CreateWriter(bufferingStream, resolvedContentTypeEncoding))
+            await using (
+                var intermediateWriter = _writerFactory.CreateWriter(
+                    bufferingStream,
+                    resolvedContentTypeEncoding
+                )
+            )
             {
                 viewComponentResult.WriteTo(intermediateWriter, _htmlEncoder);
             }
@@ -135,17 +151,25 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
 
     private static void OnExecuting(ViewContext viewContext)
     {
-        var viewDataValuesProvider = viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
+        var viewDataValuesProvider =
+            viewContext.HttpContext.Features.Get<IViewDataValuesProviderFeature>();
         viewDataValuesProvider?.ProvideViewDataValues(viewContext.ViewData);
     }
 
-    private static Task<IHtmlContent> GetViewComponentResult(IViewComponentHelper viewComponentHelper, ILogger logger, ViewComponentResult result)
+    private static Task<IHtmlContent> GetViewComponentResult(
+        IViewComponentHelper viewComponentHelper,
+        ILogger logger,
+        ViewComponentResult result
+    )
     {
         if (result.ViewComponentType == null && result.ViewComponentName == null)
         {
-            throw new InvalidOperationException(Resources.FormatViewComponentResult_NameOrTypeMustBeSet(
-                nameof(ViewComponentResult.ViewComponentName),
-                nameof(ViewComponentResult.ViewComponentType)));
+            throw new InvalidOperationException(
+                Resources.FormatViewComponentResult_NameOrTypeMustBeSet(
+                    nameof(ViewComponentResult.ViewComponentName),
+                    nameof(ViewComponentResult.ViewComponentType)
+                )
+            );
         }
         else if (result.ViewComponentType == null)
         {
@@ -161,8 +185,16 @@ public partial class ViewComponentResultExecutor : IActionResultExecutor<ViewCom
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Information, "Executing ViewComponentResult, running {ViewComponentName}.", EventName = "ViewComponentResultExecuting")]
-        public static partial void ViewComponentResultExecuting(ILogger logger, string? viewComponentName);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing ViewComponentResult, running {ViewComponentName}.",
+            EventName = "ViewComponentResultExecuting"
+        )]
+        public static partial void ViewComponentResultExecuting(
+            ILogger logger,
+            string? viewComponentName
+        );
 
         public static void ViewComponentResultExecuting(ILogger logger, Type viewComponentType)
         {

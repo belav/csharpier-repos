@@ -6,6 +6,4 @@ namespace Microsoft.AspNetCore.Mvc.ViewFeatures;
 /// <summary>
 /// A marker interface for <see cref="IActionResult"/> types which need to have temp data saved.
 /// </summary>
-public interface IKeepTempDataResult : IActionResult
-{
-}
+public interface IKeepTempDataResult : IActionResult { }

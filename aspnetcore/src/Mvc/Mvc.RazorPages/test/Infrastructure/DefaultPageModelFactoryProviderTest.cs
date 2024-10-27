@@ -85,13 +85,12 @@ public class DefaultPageModelFactoryProviderTest
         // Arrange
         var descriptor = new CompiledPageActionDescriptor
         {
-            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo()
+            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo(),
         };
         var pageContext = new PageContext();
         var modelActivatorProvider = new Mock<IPageModelActivatorProvider>();
         Action<PageContext, object> disposer = (_, __) => { };
-        modelActivatorProvider.Setup(p => p.CreateReleaser(descriptor))
-            .Returns(disposer);
+        modelActivatorProvider.Setup(p => p.CreateReleaser(descriptor)).Returns(disposer);
         var factoryProvider = CreateModelFactoryProvider(modelActivatorProvider.Object);
 
         // Act
@@ -107,13 +106,12 @@ public class DefaultPageModelFactoryProviderTest
         // Arrange
         var descriptor = new CompiledPageActionDescriptor
         {
-            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo()
+            ModelTypeInfo = typeof(SimpleModel).GetTypeInfo(),
         };
         var pageContext = new PageContext();
         var modelActivatorProvider = new Mock<IPageModelActivatorProvider>();
         Func<PageContext, object, ValueTask> disposer = (_, __) => default;
-        modelActivatorProvider.Setup(p => p.CreateAsyncReleaser(descriptor))
-            .Returns(disposer);
+        modelActivatorProvider.Setup(p => p.CreateAsyncReleaser(descriptor)).Returns(disposer);
         var factoryProvider = CreateModelFactoryProvider(modelActivatorProvider.Object);
 
         // Act
@@ -124,16 +122,21 @@ public class DefaultPageModelFactoryProviderTest
     }
 
     private static DefaultPageModelFactoryProvider CreateModelFactoryProvider(
-        IPageModelActivatorProvider modelActivator = null)
+        IPageModelActivatorProvider modelActivator = null
+    )
     {
         if (modelActivator == null)
         {
             var mockActivator = new Mock<IPageModelActivatorProvider>();
-            mockActivator.Setup(a => a.CreateActivator(It.IsAny<CompiledPageActionDescriptor>()))
-                .Returns((CompiledPageActionDescriptor descriptor) =>
-                {
-                    return (context) => Activator.CreateInstance(descriptor.ModelTypeInfo.AsType());
-                });
+            mockActivator
+                .Setup(a => a.CreateActivator(It.IsAny<CompiledPageActionDescriptor>()))
+                .Returns(
+                    (CompiledPageActionDescriptor descriptor) =>
+                    {
+                        return (context) =>
+                            Activator.CreateInstance(descriptor.ModelTypeInfo.AsType());
+                    }
+                );
 
             modelActivator = mockActivator.Object;
         }
@@ -141,9 +144,7 @@ public class DefaultPageModelFactoryProviderTest
         return new DefaultPageModelFactoryProvider(modelActivator);
     }
 
-    private class SimpleModel
-    {
-    }
+    private class SimpleModel { }
 
     private class ModelWithPageContext
     {

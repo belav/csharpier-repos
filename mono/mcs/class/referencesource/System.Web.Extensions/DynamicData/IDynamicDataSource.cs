@@ -1,9 +1,10 @@
-namespace System.Web.DynamicData {
+namespace System.Web.DynamicData
+{
     using System.Web.UI;
     using System.Web.UI.WebControls;
 
-    public interface IDynamicDataSource : IDataSource {
-
+    public interface IDynamicDataSource : IDataSource
+    {
         bool AutoGenerateWhereClause { get; set; }
 
         Type ContextType { get; set; }
@@ -21,7 +22,5 @@ namespace System.Web.DynamicData {
         ParameterCollection WhereParameters { get; }
 
         event EventHandler<DynamicValidatorEventArgs> Exception;
-
     }
-
 }

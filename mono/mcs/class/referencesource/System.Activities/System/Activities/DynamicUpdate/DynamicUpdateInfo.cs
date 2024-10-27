@@ -9,9 +9,14 @@ namespace System.Activities.DynamicUpdate
 
     public static class DynamicUpdateInfo
     {
-        private static AttachableMemberIdentifier mapItemProperty = new AttachableMemberIdentifier(typeof(DynamicUpdateInfo), "MapItem");
-        private static AttachableMemberIdentifier originalDefinitionProperty = new AttachableMemberIdentifier(typeof(DynamicUpdateInfo), "OriginalDefinition");
-        private static AttachableMemberIdentifier originalActivityBuilderProperty = new AttachableMemberIdentifier(typeof(DynamicUpdateInfo), "OriginalActivityBuilder");
+        private static AttachableMemberIdentifier mapItemProperty = new AttachableMemberIdentifier(
+            typeof(DynamicUpdateInfo),
+            "MapItem"
+        );
+        private static AttachableMemberIdentifier originalDefinitionProperty =
+            new AttachableMemberIdentifier(typeof(DynamicUpdateInfo), "OriginalDefinition");
+        private static AttachableMemberIdentifier originalActivityBuilderProperty =
+            new AttachableMemberIdentifier(typeof(DynamicUpdateInfo), "OriginalActivityBuilder");
 
         public static void SetMapItem(object instance, DynamicUpdateMapItem mapItem)
         {
@@ -42,7 +47,11 @@ namespace System.Activities.DynamicUpdate
         {
             if (originalDefinition != null)
             {
-                AttachablePropertyServices.SetProperty(instance, originalDefinitionProperty, originalDefinition);
+                AttachablePropertyServices.SetProperty(
+                    instance,
+                    originalDefinitionProperty,
+                    originalDefinition
+                );
             }
             else
             {
@@ -53,7 +62,13 @@ namespace System.Activities.DynamicUpdate
         public static Activity GetOriginalDefinition(object instance)
         {
             Activity result;
-            if (AttachablePropertyServices.TryGetProperty(instance, originalDefinitionProperty, out result))
+            if (
+                AttachablePropertyServices.TryGetProperty(
+                    instance,
+                    originalDefinitionProperty,
+                    out result
+                )
+            )
             {
                 return result;
             }
@@ -63,22 +78,38 @@ namespace System.Activities.DynamicUpdate
             }
         }
 
-        public static void SetOriginalActivityBuilder(object instance, ActivityBuilder originalActivityBuilder)
+        public static void SetOriginalActivityBuilder(
+            object instance,
+            ActivityBuilder originalActivityBuilder
+        )
         {
             if (originalActivityBuilder != null)
             {
-                AttachablePropertyServices.SetProperty(instance, originalActivityBuilderProperty, originalActivityBuilder);
+                AttachablePropertyServices.SetProperty(
+                    instance,
+                    originalActivityBuilderProperty,
+                    originalActivityBuilder
+                );
             }
             else
             {
-                AttachablePropertyServices.RemoveProperty(instance, originalActivityBuilderProperty);
+                AttachablePropertyServices.RemoveProperty(
+                    instance,
+                    originalActivityBuilderProperty
+                );
             }
         }
 
         public static ActivityBuilder GetOriginalActivityBuilder(object instance)
         {
             ActivityBuilder result;
-            if (AttachablePropertyServices.TryGetProperty(instance, originalActivityBuilderProperty, out result))
+            if (
+                AttachablePropertyServices.TryGetProperty(
+                    instance,
+                    originalActivityBuilderProperty,
+                    out result
+                )
+            )
             {
                 return result;
             }
@@ -86,6 +117,6 @@ namespace System.Activities.DynamicUpdate
             {
                 return null;
             }
-        }       
+        }
     }
 }

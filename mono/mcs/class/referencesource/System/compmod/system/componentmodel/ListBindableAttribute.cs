@@ -1,12 +1,13 @@
 //------------------------------------------------------------------------------
 // <copyright file="ListBindableAttribute.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 /*
  */
-namespace System.ComponentModel {
+namespace System.ComponentModel
+{
     using System;
     using System.ComponentModel;
     using System.Diagnostics;
@@ -16,7 +17,8 @@ namespace System.ComponentModel {
     ///    <para>[To be supplied.]</para>
     /// </devdoc>
     [AttributeUsage(AttributeTargets.All)]
-    public sealed class ListBindableAttribute : Attribute {
+    public sealed class ListBindableAttribute : Attribute
+    {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
@@ -32,20 +34,22 @@ namespace System.ComponentModel {
         /// </devdoc>
         public static readonly ListBindableAttribute Default = Yes;
 
-        private bool listBindable   = false;
-        private bool isDefault  = false;
+        private bool listBindable = false;
+        private bool isDefault = false;
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ListBindableAttribute(bool listBindable) {
+        public ListBindableAttribute(bool listBindable)
+        {
             this.listBindable = listBindable;
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public ListBindableAttribute(BindableSupport flags) {
+        public ListBindableAttribute(BindableSupport flags)
+        {
             this.listBindable = (flags != BindableSupport.No);
             this.isDefault = (flags == BindableSupport.Default);
         }
@@ -53,38 +57,40 @@ namespace System.ComponentModel {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool ListBindable {
-            get {
-                return listBindable;
-            }
+        public bool ListBindable
+        {
+            get { return listBindable; }
         }
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(object obj) {
-            if (obj == this) {
+        public override bool Equals(object obj)
+        {
+            if (obj == this)
+            {
                 return true;
             }
-            
+
             ListBindableAttribute other = obj as ListBindableAttribute;
             return other != null && other.ListBindable == listBindable;
         }
-        
+
         /// <devdoc>
         ///    <para>
         ///       Returns the hashcode for this object.
         ///    </para>
         /// </devdoc>
-        public override int GetHashCode() {
+        public override int GetHashCode()
+        {
             return base.GetHashCode();
         }
-
 
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool IsDefaultAttribute() {
+        public override bool IsDefaultAttribute()
+        {
             return (this.Equals(Default) || isDefault);
         }
     }

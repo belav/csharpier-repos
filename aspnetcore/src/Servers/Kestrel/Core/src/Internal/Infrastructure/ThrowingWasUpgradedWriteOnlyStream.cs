@@ -15,18 +15,20 @@ internal sealed class ThrowingWasUpgradedWriteOnlyStream : WriteOnlyStream
         set => throw new NotSupportedException();
     }
 
-    public override void Write(byte[] buffer, int offset, int count)
-        => throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
+    public override void Write(byte[] buffer, int offset, int count) =>
+        throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
 
-    public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
+    public override Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
 
-    public override void Flush()
-        => throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
+    public override void Flush() =>
+        throw new InvalidOperationException(CoreStrings.ResponseStreamWasUpgraded);
 
-    public override long Seek(long offset, SeekOrigin origin)
-        => throw new NotSupportedException();
+    public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
 
-    public override void SetLength(long value)
-        => throw new NotSupportedException();
+    public override void SetLength(long value) => throw new NotSupportedException();
 }

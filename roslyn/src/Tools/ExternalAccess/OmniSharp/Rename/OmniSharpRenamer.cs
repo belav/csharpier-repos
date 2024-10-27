@@ -23,10 +23,23 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp
             string newName,
             OmniSharpRenameOptions options,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var nonConflictSymbolsKeys = nonConflictSymbols is null ? default : nonConflictSymbols.SelectAsArray(s => s.GetSymbolKey(cancellationToken));
-            var resolution = await Renamer.RenameSymbolAsync(solution, symbol, newName, options.ToRenameOptions(), CodeActionOptions.DefaultProvider, nonConflictSymbolsKeys, cancellationToken).ConfigureAwait(false);
+            var nonConflictSymbolsKeys = nonConflictSymbols is null
+                ? default
+                : nonConflictSymbols.SelectAsArray(s => s.GetSymbolKey(cancellationToken));
+            var resolution = await Renamer
+                .RenameSymbolAsync(
+                    solution,
+                    symbol,
+                    newName,
+                    options.ToRenameOptions(),
+                    CodeActionOptions.DefaultProvider,
+                    nonConflictSymbolsKeys,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return new RenameResult(resolution.NewSolution, resolution.ErrorMessage);
         }
     }

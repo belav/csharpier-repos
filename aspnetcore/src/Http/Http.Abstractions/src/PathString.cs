@@ -19,8 +19,9 @@ namespace Microsoft.AspNetCore.Http;
 [DebuggerDisplay("{Value}")]
 public readonly struct PathString : IEquatable<PathString>
 {
-    private static readonly SearchValues<char> s_validPathChars =
-        SearchValues.Create("!$&'()*+,-./0123456789:;=@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~");
+    private static readonly SearchValues<char> s_validPathChars = SearchValues.Create(
+        "!$&'()*+,-./0123456789:;=@ABCDEFGHIJKLMNOPQRSTUVWXYZ_abcdefghijklmnopqrstuvwxyz~"
+    );
 
     internal const int StackAllocThreshold = 128;
 
@@ -38,7 +39,10 @@ public readonly struct PathString : IEquatable<PathString>
     {
         if (!string.IsNullOrEmpty(value) && value[0] != '/')
         {
-            throw new ArgumentException(Resources.FormatException_PathMustStartWithSlash(nameof(value)), nameof(value));
+            throw new ArgumentException(
+                Resources.FormatException_PathMustStartWithSlash(nameof(value)),
+                nameof(value)
+            );
         }
         Value = value;
     }
@@ -81,9 +85,7 @@ public readonly struct PathString : IEquatable<PathString>
 
         var indexOfInvalidChar = value.AsSpan().IndexOfAnyExcept(s_validPathChars);
 
-        return indexOfInvalidChar < 0
-            ? value
-            : ToEscapedUriComponent(value, indexOfInvalidChar);
+        return indexOfInvalidChar < 0 ? value : ToEscapedUriComponent(value, indexOfInvalidChar);
     }
 
     private static string ToEscapedUriComponent(string value, int i)
@@ -97,7 +99,10 @@ public readonly struct PathString : IEquatable<PathString>
         while ((uint)i < (uint)value.Length)
         {
             var isPercentEncodedChar = false;
-            if (s_validPathChars.Contains(value[i]) || (isPercentEncodedChar = Uri.IsHexEncoding(value, i)))
+            if (
+                s_validPathChars.Contains(value[i])
+                || (isPercentEncodedChar = Uri.IsHexEncoding(value, i))
+            )
             {
                 if (requiresEscaping)
                 {
@@ -184,9 +189,14 @@ public readonly struct PathString : IEquatable<PathString>
         {
             return new PathString(uriComponent);
         }
-        Span<char> pathBuffer = uriComponent.Length <= StackAllocThreshold ? stackalloc char[StackAllocThreshold] : new char[uriComponent.Length];
+        Span<char> pathBuffer =
+            uriComponent.Length <= StackAllocThreshold
+                ? stackalloc char[StackAllocThreshold]
+                : new char[uriComponent.Length];
         uriComponent.CopyTo(pathBuffer);
-        var length = UrlDecoder.DecodeInPlace(pathBuffer.Slice(position, uriComponent.Length - position));
+        var length = UrlDecoder.DecodeInPlace(
+            pathBuffer.Slice(position, uriComponent.Length - position)
+        );
         pathBuffer = pathBuffer.Slice(0, position + length);
         return new PathString(pathBuffer.ToString());
     }
@@ -200,7 +210,10 @@ public readonly struct PathString : IEquatable<PathString>
     {
         ArgumentNullException.ThrowIfNull(uri);
         var uriComponent = uri.GetComponents(UriComponents.Path, UriFormat.UriEscaped);
-        Span<char> pathBuffer = uriComponent.Length < StackAllocThreshold ? stackalloc char[StackAllocThreshold] : new char[uriComponent.Length + 1];
+        Span<char> pathBuffer =
+            uriComponent.Length < StackAllocThreshold
+                ? stackalloc char[StackAllocThreshold]
+                : new char[uriComponent.Length + 1];
         pathBuffer[0] = '/';
         var length = UrlDecoder.DecodeRequestLine(uriComponent.AsSpan(), pathBuffer.Slice(1));
         pathBuffer = pathBuffer.Slice(0, length + 1);
@@ -255,7 +268,11 @@ public readonly struct PathString : IEquatable<PathString>
     /// <param name="comparisonType">One of the enumeration values that determines how this <see cref="PathString"/> and value are compared.</param>
     /// <param name="remaining">The remaining segments after the match.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
-    public bool StartsWithSegments(PathString other, StringComparison comparisonType, out PathString remaining)
+    public bool StartsWithSegments(
+        PathString other,
+        StringComparison comparisonType,
+        out PathString remaining
+    )
     {
         var value1 = Value ?? string.Empty;
         var value2 = other.Value ?? string.Empty;
@@ -279,9 +296,18 @@ public readonly struct PathString : IEquatable<PathString>
     /// <param name="matched">The matched segments with the original casing in the source value.</param>
     /// <param name="remaining">The remaining segments after the match.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
-    public bool StartsWithSegments(PathString other, out PathString matched, out PathString remaining)
+    public bool StartsWithSegments(
+        PathString other,
+        out PathString matched,
+        out PathString remaining
+    )
     {
-        return StartsWithSegments(other, StringComparison.OrdinalIgnoreCase, out matched, out remaining);
+        return StartsWithSegments(
+            other,
+            StringComparison.OrdinalIgnoreCase,
+            out matched,
+            out remaining
+        );
     }
 
     /// <summary>
@@ -293,7 +319,12 @@ public readonly struct PathString : IEquatable<PathString>
     /// <param name="matched">The matched segments with the original casing in the source value.</param>
     /// <param name="remaining">The remaining segments after the match.</param>
     /// <returns>true if value matches the beginning of this string; otherwise, false.</returns>
-    public bool StartsWithSegments(PathString other, StringComparison comparisonType, out PathString matched, out PathString remaining)
+    public bool StartsWithSegments(
+        PathString other,
+        StringComparison comparisonType,
+        out PathString matched,
+        out PathString remaining
+    )
     {
         var value1 = Value ?? string.Empty;
         var value2 = other.Value ?? string.Empty;
@@ -317,9 +348,7 @@ public readonly struct PathString : IEquatable<PathString>
     /// <returns>The combined PathString value</returns>
     public PathString Add(PathString other)
     {
-        if (HasValue &&
-            other.HasValue &&
-            Value[^1] == '/')
+        if (HasValue && other.HasValue && Value[^1] == '/')
         {
             // If the path string has a trailing slash and the other string has a leading slash, we need
             // to trim one of them.
@@ -459,32 +488,38 @@ public readonly struct PathString : IEquatable<PathString>
     /// Implicitly creates a new PathString from the given string.
     /// </summary>
     /// <param name="s"></param>
-    public static implicit operator PathString(string? s)
-        => ConvertFromString(s);
+    public static implicit operator PathString(string? s) => ConvertFromString(s);
 
     /// <summary>
     /// Implicitly calls ToString().
     /// </summary>
     /// <param name="path"></param>
-    public static implicit operator string(PathString path)
-        => path.ToString();
+    public static implicit operator string(PathString path) => path.ToString();
 
-    internal static PathString ConvertFromString(string? s)
-        => string.IsNullOrEmpty(s) ? new PathString(s) : FromUriComponent(s);
+    internal static PathString ConvertFromString(string? s) =>
+        string.IsNullOrEmpty(s) ? new PathString(s) : FromUriComponent(s);
 }
 
 internal sealed class PathStringConverter : TypeConverter
 {
-    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType)
-        => sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
+    public override bool CanConvertFrom(ITypeDescriptorContext? context, Type sourceType) =>
+        sourceType == typeof(string) || base.CanConvertFrom(context, sourceType);
 
-    public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
-        => value is string @string
-        ? PathString.ConvertFromString(@string)
-        : base.ConvertFrom(context, culture, value);
+    public override object? ConvertFrom(
+        ITypeDescriptorContext? context,
+        CultureInfo? culture,
+        object value
+    ) =>
+        value is string @string
+            ? PathString.ConvertFromString(@string)
+            : base.ConvertFrom(context, culture, value);
 
-    public override object? ConvertTo(ITypeDescriptorContext? context,
-       CultureInfo? culture, object? value, Type destinationType)
+    public override object? ConvertTo(
+        ITypeDescriptorContext? context,
+        CultureInfo? culture,
+        object? value,
+        Type destinationType
+    )
     {
         ArgumentNullException.ThrowIfNull(destinationType);
 

@@ -17,17 +17,24 @@ public class AntiforgeryExtensionsTest
     {
         // Arrange
         var antiforgery = new Mock<IAntiforgery>(MockBehavior.Strict);
-        var tokenSet = new AntiforgeryTokenSet("request-token", "cookie-token", "form-field", "header");
-        antiforgery
-            .Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>()))
-            .Returns(tokenSet);
+        var tokenSet = new AntiforgeryTokenSet(
+            "request-token",
+            "cookie-token",
+            "form-field",
+            "header"
+        );
+        antiforgery.Setup(a => a.GetAndStoreTokens(It.IsAny<HttpContext>())).Returns(tokenSet);
 
         // Act
-        var inputElement = AntiforgeryExtensions.GetHtml(antiforgery.Object, new DefaultHttpContext());
+        var inputElement = AntiforgeryExtensions.GetHtml(
+            antiforgery.Object,
+            new DefaultHttpContext()
+        );
 
         // Assert
         Assert.Equal(
             @"<input name=""HtmlEncode[[form-field]]"" type=""hidden"" value=""HtmlEncode[[request-token]]"" />",
-            HtmlContentUtilities.HtmlContentToString(inputElement));
+            HtmlContentUtilities.HtmlContentToString(inputElement)
+        );
     }
 }

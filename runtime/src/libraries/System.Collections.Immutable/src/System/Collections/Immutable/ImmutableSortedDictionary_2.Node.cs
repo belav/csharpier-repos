@@ -14,7 +14,9 @@ namespace System.Collections.Immutable
         /// A node in the AVL tree storing this map.
         /// </summary>
         [DebuggerDisplay("{_key} = {_value}")]
-        internal sealed class Node : IBinaryTree<KeyValuePair<TKey, TValue>>, IEnumerable<KeyValuePair<TKey, TValue>>
+        internal sealed class Node
+            : IBinaryTree<KeyValuePair<TKey, TValue>>,
+                IEnumerable<KeyValuePair<TKey, TValue>>
         {
             /// <summary>
             /// The default empty node.
@@ -99,10 +101,7 @@ namespace System.Collections.Immutable
             /// </value>
             public bool IsEmpty
             {
-                get
-                {
-                    return _left == null;
-                }
+                get { return _left == null; }
             }
 
             /// <summary>
@@ -124,12 +123,18 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Gets the height of the tree beneath this node.
             /// </summary>
-            public int Height { get { return _height; } }
+            public int Height
+            {
+                get { return _height; }
+            }
 
             /// <summary>
             /// Gets the left branch of this node.
             /// </summary>
-            public Node? Left { get { return _left; } }
+            public Node? Left
+            {
+                get { return _left; }
+            }
 
             /// <summary>
             /// Gets the left branch of this node.
@@ -142,7 +147,10 @@ namespace System.Collections.Immutable
             /// <summary>
             /// Gets the right branch of this node.
             /// </summary>
-            public Node? Right { get { return _right; } }
+            public Node? Right
+            {
+                get { return _right; }
+            }
 
             /// <summary>
             /// Gets the right branch of this node.
@@ -203,7 +211,9 @@ namespace System.Collections.Immutable
             /// <returns>
             /// A <see cref="IEnumerator{T}"/> that can be used to iterate through the collection.
             /// </returns>
-            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<KeyValuePair<TKey, TValue>>.GetEnumerator()
+            IEnumerator<KeyValuePair<TKey, TValue>> IEnumerable<
+                KeyValuePair<TKey, TValue>
+            >.GetEnumerator()
             {
                 return this.GetEnumerator();
             }
@@ -236,7 +246,11 @@ namespace System.Collections.Immutable
             /// <summary>
             /// See <see cref="IDictionary{TKey, TValue}"/>
             /// </summary>
-            internal void CopyTo(KeyValuePair<TKey, TValue>[] array, int arrayIndex, int dictionarySize)
+            internal void CopyTo(
+                KeyValuePair<TKey, TValue>[] array,
+                int arrayIndex,
+                int dictionarySize
+            )
             {
                 Requires.NotNull(array, nameof(array));
                 Requires.Range(arrayIndex >= 0, nameof(arrayIndex));
@@ -268,11 +282,14 @@ namespace System.Collections.Immutable
             /// </summary>
             /// <param name="dictionary">The collection.</param>
             /// <returns>The root of the node tree.</returns>
-            internal static Node NodeTreeFromSortedDictionary(SortedDictionary<TKey, TValue> dictionary)
+            internal static Node NodeTreeFromSortedDictionary(
+                SortedDictionary<TKey, TValue> dictionary
+            )
             {
                 Requires.NotNull(dictionary, nameof(dictionary));
 
-                IOrderedCollection<KeyValuePair<TKey, TValue>> list = dictionary.AsOrderedCollection();
+                IOrderedCollection<KeyValuePair<TKey, TValue>> list =
+                    dictionary.AsOrderedCollection();
                 return NodeTreeFromList(list, 0, list.Count);
             }
 
@@ -284,13 +301,27 @@ namespace System.Collections.Immutable
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="valueComparer">The value comparer.</param>
             /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
-            internal Node Add(TKey key, TValue value, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer, out bool mutated)
+            internal Node Add(
+                TKey key,
+                TValue value,
+                IComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer,
+                out bool mutated
+            )
             {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
-                return this.SetOrAdd(key, value, keyComparer, valueComparer, false, out _, out mutated);
+                return this.SetOrAdd(
+                    key,
+                    value,
+                    keyComparer,
+                    valueComparer,
+                    false,
+                    out _,
+                    out mutated
+                );
             }
 
             /// <summary>
@@ -302,13 +333,28 @@ namespace System.Collections.Immutable
             /// <param name="valueComparer">The value comparer.</param>
             /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
             /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
-            internal Node SetItem(TKey key, TValue value, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer, out bool replacedExistingValue, out bool mutated)
+            internal Node SetItem(
+                TKey key,
+                TValue value,
+                IComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer,
+                out bool replacedExistingValue,
+                out bool mutated
+            )
             {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
-                return this.SetOrAdd(key, value, keyComparer, valueComparer, true, out replacedExistingValue, out mutated);
+                return this.SetOrAdd(
+                    key,
+                    value,
+                    keyComparer,
+                    valueComparer,
+                    true,
+                    out replacedExistingValue,
+                    out mutated
+                );
             }
 
             /// <summary>
@@ -338,7 +384,9 @@ namespace System.Collections.Immutable
                 ImmutableSortedDictionary<TKey, TValue>.Node match = this.Search(key, keyComparer);
                 if (match.IsEmpty)
                 {
-                    throw new KeyNotFoundException(SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString()));
+                    throw new KeyNotFoundException(
+                        SR.Format(SR.Arg_KeyNotFoundWithKey, key.ToString())
+                    );
                 }
 
                 return ref match._value;
@@ -351,7 +399,11 @@ namespace System.Collections.Immutable
             /// <param name="keyComparer">The key comparer.</param>
             /// <param name="value">The value.</param>
             /// <returns>True if the key was found.</returns>
-            internal bool TryGetValue(TKey key, IComparer<TKey> keyComparer, [MaybeNullWhen(false)] out TValue value)
+            internal bool TryGetValue(
+                TKey key,
+                IComparer<TKey> keyComparer,
+                [MaybeNullWhen(false)] out TValue value
+            )
             {
                 Requires.NotNullAllowStructs(key, nameof(key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
@@ -387,7 +439,10 @@ namespace System.Collections.Immutable
                 Requires.NotNullAllowStructs(equalKey, nameof(equalKey));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
 
-                ImmutableSortedDictionary<TKey, TValue>.Node match = this.Search(equalKey, keyComparer);
+                ImmutableSortedDictionary<TKey, TValue>.Node match = this.Search(
+                    equalKey,
+                    keyComparer
+                );
                 if (match.IsEmpty)
                 {
                     actualKey = equalKey;
@@ -450,13 +505,20 @@ namespace System.Collections.Immutable
             /// <returns>
             /// <c>true</c> if [contains] [the specified pair]; otherwise, <c>false</c>.
             /// </returns>
-            internal bool Contains(KeyValuePair<TKey, TValue> pair, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer)
+            internal bool Contains(
+                KeyValuePair<TKey, TValue> pair,
+                IComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer
+            )
             {
                 Requires.NotNullAllowStructs(pair.Key, nameof(pair.Key));
                 Requires.NotNull(keyComparer, nameof(keyComparer));
                 Requires.NotNull(valueComparer, nameof(valueComparer));
 
-                ImmutableSortedDictionary<TKey, TValue>.Node matchingNode = this.Search(pair.Key, keyComparer);
+                ImmutableSortedDictionary<TKey, TValue>.Node matchingNode = this.Search(
+                    pair.Key,
+                    keyComparer
+                );
                 if (matchingNode.IsEmpty)
                 {
                     return false;
@@ -626,7 +688,11 @@ namespace System.Collections.Immutable
             /// <param name="start">The starting index within <paramref name="items"/> that should be captured by the node tree.</param>
             /// <param name="length">The number of elements from <paramref name="items"/> that should be captured by the node tree.</param>
             /// <returns>The root of the created node tree.</returns>
-            private static Node NodeTreeFromList(IOrderedCollection<KeyValuePair<TKey, TValue>> items, int start, int length)
+            private static Node NodeTreeFromList(
+                IOrderedCollection<KeyValuePair<TKey, TValue>> items,
+                int start,
+                int length
+            )
             {
                 Requires.NotNull(items, nameof(items));
                 Requires.Range(start >= 0, nameof(start));
@@ -656,7 +722,15 @@ namespace System.Collections.Immutable
             /// <param name="replacedExistingValue">Receives a value indicating whether an existing value was replaced.</param>
             /// <param name="mutated">Receives a value indicating whether this node tree has mutated because of this operation.</param>
             /// <returns>The new AVL tree.</returns>
-            private Node SetOrAdd(TKey key, TValue value, IComparer<TKey> keyComparer, IEqualityComparer<TValue> valueComparer, bool overwriteExistingValue, out bool replacedExistingValue, out bool mutated)
+            private Node SetOrAdd(
+                TKey key,
+                TValue value,
+                IComparer<TKey> keyComparer,
+                IEqualityComparer<TValue> valueComparer,
+                bool overwriteExistingValue,
+                out bool replacedExistingValue,
+                out bool mutated
+            )
             {
                 // Arg validation skipped in this private method because it's recursive and the tax
                 // of revalidating arguments on each recursive call is significant.
@@ -673,7 +747,15 @@ namespace System.Collections.Immutable
                     int compareResult = keyComparer.Compare(key, _key);
                     if (compareResult > 0)
                     {
-                        ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right!.SetOrAdd(key, value, keyComparer, valueComparer, overwriteExistingValue, out replacedExistingValue, out mutated);
+                        ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right!.SetOrAdd(
+                            key,
+                            value,
+                            keyComparer,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(right: newRight);
@@ -681,7 +763,15 @@ namespace System.Collections.Immutable
                     }
                     else if (compareResult < 0)
                     {
-                        ImmutableSortedDictionary<TKey, TValue>.Node newLeft = _left!.SetOrAdd(key, value, keyComparer, valueComparer, overwriteExistingValue, out replacedExistingValue, out mutated);
+                        ImmutableSortedDictionary<TKey, TValue>.Node newLeft = _left!.SetOrAdd(
+                            key,
+                            value,
+                            keyComparer,
+                            valueComparer,
+                            overwriteExistingValue,
+                            out replacedExistingValue,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(left: newLeft);
@@ -760,13 +850,21 @@ namespace System.Collections.Immutable
                                 successor = successor._left;
                             }
 
-                            ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right.Remove(successor._key, keyComparer, out _);
+                            ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right.Remove(
+                                successor._key,
+                                keyComparer,
+                                out _
+                            );
                             result = successor.Mutate(left: _left, right: newRight);
                         }
                     }
                     else if (compare < 0)
                     {
-                        ImmutableSortedDictionary<TKey, TValue>.Node newLeft = _left.Remove(key, keyComparer, out mutated);
+                        ImmutableSortedDictionary<TKey, TValue>.Node newLeft = _left.Remove(
+                            key,
+                            keyComparer,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(left: newLeft);
@@ -774,7 +872,11 @@ namespace System.Collections.Immutable
                     }
                     else
                     {
-                        ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right.Remove(key, keyComparer, out mutated);
+                        ImmutableSortedDictionary<TKey, TValue>.Node newRight = _right.Remove(
+                            key,
+                            keyComparer,
+                            out mutated
+                        );
                         if (mutated)
                         {
                             result = this.Mutate(right: newRight);

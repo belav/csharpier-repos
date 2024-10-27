@@ -16,10 +16,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,36 +32,36 @@
 using System;
 using System.Runtime.Remoting.Messaging;
 
-namespace System.Messaging 
+namespace System.Messaging
 {
-	public class PeekCompletedEventArgs : EventArgs 
-	{
-		private MessageQueue _sender;
-		private IAsyncResult _result;
-		private Message _message;
+    public class PeekCompletedEventArgs : EventArgs
+    {
+        private MessageQueue _sender;
+        private IAsyncResult _result;
+        private Message _message;
 
-		internal PeekCompletedEventArgs(MessageQueue sender, IAsyncResult result)
-		{
-			_sender = sender;
-			_result = result;
-		}
+        internal PeekCompletedEventArgs(MessageQueue sender, IAsyncResult result)
+        {
+            _sender = sender;
+            _result = result;
+        }
 
-		public IAsyncResult AsyncResult
-		{
-			get { return _result; }
-			set { _result = value; }
-		}
+        public IAsyncResult AsyncResult
+        {
+            get { return _result; }
+            set { _result = value; }
+        }
 
-		public Message Message
-		{
-			get
-			{
-				if (_message == null)
-				{
-					_message = _sender.EndPeek (_result);
-				}
-				return _message;
-			}
-		}
-	}
+        public Message Message
+        {
+            get
+            {
+                if (_message == null)
+                {
+                    _message = _sender.EndPeek(_result);
+                }
+                return _message;
+            }
+        }
+    }
 }

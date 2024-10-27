@@ -20,8 +20,9 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 {
     internal sealed class GlobalAssemblyCacheCompletionHelper
     {
-        private static readonly Lazy<List<string>> s_lazyAssemblySimpleNames =
-            new(() => GlobalAssemblyCache.Instance.GetAssemblySimpleNames().ToList());
+        private static readonly Lazy<List<string>> s_lazyAssemblySimpleNames = new(
+            () => GlobalAssemblyCache.Instance.GetAssemblySimpleNames().ToList()
+        );
 
         private readonly CompletionItemRules _itemRules;
 
@@ -31,11 +32,16 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             _itemRules = itemRules;
         }
 
-        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(string directoryPath, CancellationToken cancellationToken)
-            => Task.Run(() => GetItems(directoryPath, cancellationToken));
+        public Task<ImmutableArray<CompletionItem>> GetItemsAsync(
+            string directoryPath,
+            CancellationToken cancellationToken
+        ) => Task.Run(() => GetItems(directoryPath, cancellationToken));
 
         // internal for testing
-        internal ImmutableArray<CompletionItem> GetItems(string directoryPath, CancellationToken cancellationToken)
+        internal ImmutableArray<CompletionItem> GetItems(
+            string directoryPath,
+            CancellationToken cancellationToken
+        )
         {
             using var resultDisposer = ArrayBuilder<CompletionItem>.GetInstance(out var result);
 
@@ -45,8 +51,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 var partialName = directoryPath[..comma];
                 foreach (var identity in GetAssemblyIdentities(partialName))
                 {
-                    result.Add(CommonCompletionItem.Create(
-                        identity.GetDisplayName(), displayTextSuffix: "", glyph: Glyph.Assembly, rules: _itemRules));
+                    result.Add(
+                        CommonCompletionItem.Create(
+                            identity.GetDisplayName(),
+                            displayTextSuffix: "",
+                            glyph: Glyph.Assembly,
+                            rules: _itemRules
+                        )
+                    );
                 }
             }
             else
@@ -54,8 +66,14 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
                 foreach (var displayName in s_lazyAssemblySimpleNames.Value)
                 {
                     cancellationToken.ThrowIfCancellationRequested();
-                    result.Add(CommonCompletionItem.Create(
-                        displayName, displayTextSuffix: "", glyph: Glyph.Assembly, rules: _itemRules));
+                    result.Add(
+                        CommonCompletionItem.Create(
+                            displayName,
+                            displayTextSuffix: "",
+                            glyph: Glyph.Assembly,
+                            rules: _itemRules
+                        )
+                    );
                 }
             }
 
@@ -64,8 +82,10 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
 
         private static IEnumerable<AssemblyIdentity> GetAssemblyIdentities(string partialName)
         {
-            return IOUtilities.PerformIO(() => GlobalAssemblyCache.Instance.GetAssemblyIdentities(partialName),
-                SpecializedCollections.EmptyEnumerable<AssemblyIdentity>());
+            return IOUtilities.PerformIO(
+                () => GlobalAssemblyCache.Instance.GetAssemblyIdentities(partialName),
+                SpecializedCollections.EmptyEnumerable<AssemblyIdentity>()
+            );
         }
     }
 }

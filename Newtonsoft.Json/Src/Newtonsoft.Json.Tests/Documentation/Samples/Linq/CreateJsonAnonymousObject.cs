@@ -25,13 +25,14 @@
 
 using System;
 using System.Collections.Generic;
+using System.Text;
+using Newtonsoft.Json.Linq;
 #if NET20
 using Newtonsoft.Json.Utilities.LinqBridge;
 #else
 using System.Linq;
 #endif
-using System.Text;
-using Newtonsoft.Json.Linq;
+
 #if DNXCORE50
 using Xunit;
 using Test = Xunit.FactAttribute;
@@ -66,34 +67,31 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
                 {
                     Title = "Episode VII",
                     Description = "Episode VII production",
-                    Categories = new List<string>
-                    {
-                        "episode-vii",
-                        "movie"
-                    },
-                    Link = "episode-vii-production.aspx"
-                }
+                    Categories = new List<string> { "episode-vii", "movie" },
+                    Link = "episode-vii-production.aspx",
+                },
             };
 
-            JObject o = JObject.FromObject(new
-            {
-                channel = new
+            JObject o = JObject.FromObject(
+                new
                 {
-                    title = "Star Wars",
-                    link = "http://www.starwars.com",
-                    description = "Star Wars blog.",
-                    item =
-                        from p in posts
+                    channel = new
+                    {
+                        title = "Star Wars",
+                        link = "http://www.starwars.com",
+                        description = "Star Wars blog.",
+                        item = from p in posts
                         orderby p.Title
                         select new
                         {
                             title = p.Title,
                             description = p.Description,
                             link = p.Link,
-                            category = p.Categories
-                        }
+                            category = p.Categories,
+                        },
+                    },
                 }
-            });
+            );
 
             Console.WriteLine(o.ToString());
             // {
@@ -116,7 +114,8 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // }
             #endregion
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
   ""channel"": {
     ""title"": ""Star Wars"",
     ""link"": ""http://www.starwars.com"",
@@ -133,7 +132,9 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
       }
     ]
   }
-}", o.ToString());
+}",
+                o.ToString()
+            );
         }
     }
 }

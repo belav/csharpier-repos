@@ -3,7 +3,6 @@
 
 using System;
 using System.ComponentModel;
-
 using Moq.Language.Flow;
 
 namespace Moq.Language
@@ -23,7 +22,7 @@ namespace Moq.Language
         /// </summary>
         /// <param name="action">Callback method to invoke.</param>
         /// <example>
-        /// Invokes the given callback with the property value being set. 
+        /// Invokes the given callback with the property value being set.
         /// <code>
         /// mock.SetupGet(x => x.Suspended)
         ///     .Callback(() => called = true)

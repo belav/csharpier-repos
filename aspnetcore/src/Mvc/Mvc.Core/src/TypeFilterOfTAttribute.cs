@@ -7,10 +7,12 @@ namespace Microsoft.AspNetCore.Mvc;
 
 /// <inheritdoc />
 /// <typeparam name="TFilter">The <see cref="Type"/> of filter to create.</typeparam>
-public class TypeFilterAttribute<TFilter> : TypeFilterAttribute where TFilter : IFilterMetadata
+public class TypeFilterAttribute<TFilter> : TypeFilterAttribute
+    where TFilter : IFilterMetadata
 {
     /// <summary>
     /// Instantiates a new <see cref="TypeFilterAttribute"/> instance.
     /// </summary>
-    public TypeFilterAttribute() : base(typeof(TFilter)) { }
+    public TypeFilterAttribute()
+        : base(typeof(TFilter)) { }
 }

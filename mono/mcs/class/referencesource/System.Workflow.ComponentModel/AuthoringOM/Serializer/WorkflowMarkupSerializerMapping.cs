@@ -1,25 +1,25 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
     using System.CodeDom;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.ObjectModel;
     using System.ComponentModel;
     using System.ComponentModel.Design;
     using System.ComponentModel.Design.Serialization;
-    using System.Collections;
-    using System.Xml;
-    using System.Xml.Serialization;
-    using System.Reflection;
-    using System.Collections.Generic;
     using System.Diagnostics;
-    using System.Text;
+    using System.Drawing;
     using System.Globalization;
-    using System.Workflow.ComponentModel.Compiler;
-    using System.Workflow.ComponentModel.Design;
+    using System.IO;
+    using System.Reflection;
     using System.Runtime.Serialization;
     using System.Security.Permissions;
-    using System.Collections.ObjectModel;
-    using System.Drawing;
+    using System.Text;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
+    using System.Xml.Serialization;
 
     #region Mapping Support
 
@@ -44,58 +44,204 @@ namespace System.Workflow.ComponentModel.Serialization
         static WorkflowMarkupSerializerMapping()
         {
             WorkflowMarkupSerializerMapping.wellKnownTypes = new Dictionary<string, Type>();
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(ThrowActivity).Name, typeof(ThrowActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(ThrowDesigner).Name, typeof(ThrowDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(SuspendActivity).Name, typeof(SuspendActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(SuspendDesigner).Name, typeof(SuspendDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CancellationHandlerActivity).Name, typeof(CancellationHandlerActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CancellationHandlerActivityDesigner).Name, typeof(CancellationHandlerActivityDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CompensateActivity).Name, typeof(CompensateActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CompensateDesigner).Name, typeof(CompensateDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CompensationHandlerActivity).Name, typeof(CompensationHandlerActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CompensationHandlerActivityDesigner).Name, typeof(CompensationHandlerActivityDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(FaultHandlerActivity).Name, typeof(FaultHandlerActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(FaultHandlerActivityDesigner).Name, typeof(FaultHandlerActivityDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(FaultHandlersActivity).Name, typeof(FaultHandlersActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(FaultHandlersActivityDesigner).Name, typeof(FaultHandlersActivityDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(SynchronizationScopeActivity).Name, typeof(SynchronizationScopeActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(SequenceDesigner).Name, typeof(SequenceDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(TransactionScopeActivity).Name, typeof(TransactionScopeActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(TransactionScopeActivityDesigner).Name, typeof(TransactionScopeActivityDesigner));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(PropertySegment).Name, typeof(PropertySegment));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(CompensatableTransactionScopeActivity).Name, typeof(CompensatableTransactionScopeActivity));
-            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(typeof(ActivityDesigner).Name, typeof(ActivityDesigner));
-
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(ThrowActivity).Name,
+                typeof(ThrowActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(ThrowDesigner).Name,
+                typeof(ThrowDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(SuspendActivity).Name,
+                typeof(SuspendActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(SuspendDesigner).Name,
+                typeof(SuspendDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CancellationHandlerActivity).Name,
+                typeof(CancellationHandlerActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CancellationHandlerActivityDesigner).Name,
+                typeof(CancellationHandlerActivityDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CompensateActivity).Name,
+                typeof(CompensateActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CompensateDesigner).Name,
+                typeof(CompensateDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CompensationHandlerActivity).Name,
+                typeof(CompensationHandlerActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CompensationHandlerActivityDesigner).Name,
+                typeof(CompensationHandlerActivityDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(FaultHandlerActivity).Name,
+                typeof(FaultHandlerActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(FaultHandlerActivityDesigner).Name,
+                typeof(FaultHandlerActivityDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(FaultHandlersActivity).Name,
+                typeof(FaultHandlersActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(FaultHandlersActivityDesigner).Name,
+                typeof(FaultHandlersActivityDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(SynchronizationScopeActivity).Name,
+                typeof(SynchronizationScopeActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(SequenceDesigner).Name,
+                typeof(SequenceDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(TransactionScopeActivity).Name,
+                typeof(TransactionScopeActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(TransactionScopeActivityDesigner).Name,
+                typeof(TransactionScopeActivityDesigner)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(PropertySegment).Name,
+                typeof(PropertySegment)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(CompensatableTransactionScopeActivity).Name,
+                typeof(CompensatableTransactionScopeActivity)
+            );
+            WorkflowMarkupSerializerMapping.wellKnownTypes.Add(
+                typeof(ActivityDesigner).Name,
+                typeof(ActivityDesigner)
+            );
 
             //I am hard coding the well known mappings here instead of going through the assemblies as we want the mappings to be in
             //a specific order for performance optimization when searching for type
-            WorkflowMarkupSerializerMapping.wellKnownMappings = new List<WorkflowMarkupSerializerMapping>();
+            WorkflowMarkupSerializerMapping.wellKnownMappings =
+                new List<WorkflowMarkupSerializerMapping>();
 
-            WorkflowMarkupSerializerMapping.Activities = new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Activities", AssemblyRef.ActivitiesAssemblyRef);
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(WorkflowMarkupSerializerMapping.Activities);
+            WorkflowMarkupSerializerMapping.Activities = new WorkflowMarkupSerializerMapping(
+                StandardXomlKeys.WorkflowPrefix,
+                StandardXomlKeys.WorkflowXmlNs,
+                "System.Workflow.Activities",
+                AssemblyRef.ActivitiesAssemblyRef
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                WorkflowMarkupSerializerMapping.Activities
+            );
 
-            WorkflowMarkupSerializerMapping.ComponentModel = new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.ComponentModel", Assembly.GetExecutingAssembly().FullName);
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(WorkflowMarkupSerializerMapping.ComponentModel);
+            WorkflowMarkupSerializerMapping.ComponentModel = new WorkflowMarkupSerializerMapping(
+                StandardXomlKeys.WorkflowPrefix,
+                StandardXomlKeys.WorkflowXmlNs,
+                "System.Workflow.ComponentModel",
+                Assembly.GetExecutingAssembly().FullName
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                WorkflowMarkupSerializerMapping.ComponentModel
+            );
 
-            WorkflowMarkupSerializerMapping.Serialization = new WorkflowMarkupSerializerMapping(StandardXomlKeys.Definitions_XmlNs_Prefix, StandardXomlKeys.Definitions_XmlNs, "System.Workflow.ComponentModel.Serialization", Assembly.GetExecutingAssembly().FullName);
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(WorkflowMarkupSerializerMapping.Serialization);
+            WorkflowMarkupSerializerMapping.Serialization = new WorkflowMarkupSerializerMapping(
+                StandardXomlKeys.Definitions_XmlNs_Prefix,
+                StandardXomlKeys.Definitions_XmlNs,
+                "System.Workflow.ComponentModel.Serialization",
+                Assembly.GetExecutingAssembly().FullName
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                WorkflowMarkupSerializerMapping.Serialization
+            );
 
-            WorkflowMarkupSerializerMapping.Rules = new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Activities.Rules", AssemblyRef.ActivitiesAssemblyRef);
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(WorkflowMarkupSerializerMapping.Rules);
+            WorkflowMarkupSerializerMapping.Rules = new WorkflowMarkupSerializerMapping(
+                StandardXomlKeys.WorkflowPrefix,
+                StandardXomlKeys.WorkflowXmlNs,
+                "System.Workflow.Activities.Rules",
+                AssemblyRef.ActivitiesAssemblyRef
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                WorkflowMarkupSerializerMapping.Rules
+            );
 
-            WorkflowMarkupSerializerMapping.ComponentModelDesign = new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.ComponentModel.Design", Assembly.GetExecutingAssembly().FullName);
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(WorkflowMarkupSerializerMapping.ComponentModelDesign);
+            WorkflowMarkupSerializerMapping.ComponentModelDesign =
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.ComponentModel.Design",
+                    Assembly.GetExecutingAssembly().FullName
+                );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                WorkflowMarkupSerializerMapping.ComponentModelDesign
+            );
 
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Runtime", AssemblyRef.RuntimeAssemblyRef));
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.ComponentModel.Compiler", Assembly.GetExecutingAssembly().FullName));
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.Runtime",
+                    AssemblyRef.RuntimeAssemblyRef
+                )
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.ComponentModel.Compiler",
+                    Assembly.GetExecutingAssembly().FullName
+                )
+            );
 
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Activities.Rules.Design", AssemblyRef.ActivitiesAssemblyRef));
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Runtime.Configuration", AssemblyRef.RuntimeAssemblyRef));
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Runtime.Hosting", AssemblyRef.RuntimeAssemblyRef));
-            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(new WorkflowMarkupSerializerMapping(StandardXomlKeys.WorkflowPrefix, StandardXomlKeys.WorkflowXmlNs, "System.Workflow.Runtime.Tracking", AssemblyRef.RuntimeAssemblyRef));
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.Activities.Rules.Design",
+                    AssemblyRef.ActivitiesAssemblyRef
+                )
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.Runtime.Configuration",
+                    AssemblyRef.RuntimeAssemblyRef
+                )
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.Runtime.Hosting",
+                    AssemblyRef.RuntimeAssemblyRef
+                )
+            );
+            WorkflowMarkupSerializerMapping.wellKnownMappings.Add(
+                new WorkflowMarkupSerializerMapping(
+                    StandardXomlKeys.WorkflowPrefix,
+                    StandardXomlKeys.WorkflowXmlNs,
+                    "System.Workflow.Runtime.Tracking",
+                    AssemblyRef.RuntimeAssemblyRef
+                )
+            );
         }
 
-        public WorkflowMarkupSerializerMapping(string prefix, string xmlNamespace, string clrNamespace, string assemblyName)
+        public WorkflowMarkupSerializerMapping(
+            string prefix,
+            string xmlNamespace,
+            string clrNamespace,
+            string assemblyName
+        )
         {
             if (prefix == null)
                 throw new ArgumentNullException("prefix");
@@ -113,7 +259,13 @@ namespace System.Workflow.ComponentModel.Serialization
             this.unifiedAssemblyName = assemblyName;
         }
 
-        public WorkflowMarkupSerializerMapping(string prefix, string xmlNamespace, string clrNamespace, string targetAssemblyName, string unifiedAssemblyName)
+        public WorkflowMarkupSerializerMapping(
+            string prefix,
+            string xmlNamespace,
+            string clrNamespace,
+            string targetAssemblyName,
+            string unifiedAssemblyName
+        )
         {
             if (prefix == null)
                 throw new ArgumentNullException("prefix");
@@ -144,9 +296,11 @@ namespace System.Workflow.ComponentModel.Serialization
             // This class is intended to make MT scenarios easier by holding both the target and the unified (current)
             // assembly names.  They both represent the same type in this container and thus the both need to match to be equal.
             // This makes it easier to make this classes default (static constructor) work better with MT in the rest of the codebase.
-            if (this.clrns == mapping.clrns &&
-                this.targetAssemblyName == mapping.targetAssemblyName &&
-                this.unifiedAssemblyName == mapping.unifiedAssemblyName)
+            if (
+                this.clrns == mapping.clrns
+                && this.targetAssemblyName == mapping.targetAssemblyName
+                && this.unifiedAssemblyName == mapping.unifiedAssemblyName
+            )
             {
                 return true;
             }
@@ -161,53 +315,48 @@ namespace System.Workflow.ComponentModel.Serialization
 
         public string ClrNamespace
         {
-            get
-            {
-                return this.clrns;
-            }
+            get { return this.clrns; }
         }
 
         public string XmlNamespace
         {
-            get
-            {
-                return this.xmlns;
-            }
+            get { return this.xmlns; }
         }
 
         public string AssemblyName
         {
-            get
-            {
-                return this.targetAssemblyName;
-            }
+            get { return this.targetAssemblyName; }
         }
 
         public string Prefix
         {
-            get
-            {
-                return this.prefix;
-            }
+            get { return this.prefix; }
         }
 
         #region Namespace Helpers
         internal static IList<WorkflowMarkupSerializerMapping> WellKnownMappings
         {
-            get
-            {
-                return WorkflowMarkupSerializerMapping.wellKnownMappings;
-            }
+            get { return WorkflowMarkupSerializerMapping.wellKnownMappings; }
         }
 
-        internal static Type ResolveWellKnownTypes(WorkflowMarkupSerializationManager manager, string xmlns, string typeName)
+        internal static Type ResolveWellKnownTypes(
+            WorkflowMarkupSerializationManager manager,
+            string xmlns,
+            string typeName
+        )
         {
             Type resolvedType = null;
 
-            List<WorkflowMarkupSerializerMapping> knownMappings = new List<WorkflowMarkupSerializerMapping>();
+            List<WorkflowMarkupSerializerMapping> knownMappings =
+                new List<WorkflowMarkupSerializerMapping>();
             if (xmlns.Equals(StandardXomlKeys.WorkflowXmlNs, StringComparison.Ordinal))
             {
-                if (!WorkflowMarkupSerializerMapping.wellKnownTypes.TryGetValue(typeName, out resolvedType))
+                if (
+                    !WorkflowMarkupSerializerMapping.wellKnownTypes.TryGetValue(
+                        typeName,
+                        out resolvedType
+                    )
+                )
                 {
                     if (typeName.EndsWith("Activity", StringComparison.OrdinalIgnoreCase))
                     {
@@ -225,8 +374,10 @@ namespace System.Workflow.ComponentModel.Serialization
                         knownMappings.Add(WorkflowMarkupSerializerMapping.ComponentModelDesign);
                         knownMappings.Add(WorkflowMarkupSerializerMapping.Activities);
                     }
-                    else if (typeName.StartsWith("Rule", StringComparison.OrdinalIgnoreCase) ||
-                        typeName.EndsWith("Action", StringComparison.OrdinalIgnoreCase))
+                    else if (
+                        typeName.StartsWith("Rule", StringComparison.OrdinalIgnoreCase)
+                        || typeName.EndsWith("Action", StringComparison.OrdinalIgnoreCase)
+                    )
                     {
                         knownMappings.Add(WorkflowMarkupSerializerMapping.Rules);
                     }
@@ -241,7 +392,8 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 foreach (WorkflowMarkupSerializerMapping mapping in knownMappings)
                 {
-                    string fullyQualifiedTypeName = mapping.ClrNamespace + "." + typeName + ", " + mapping.AssemblyName;
+                    string fullyQualifiedTypeName =
+                        mapping.ClrNamespace + "." + typeName + ", " + mapping.AssemblyName;
                     resolvedType = manager.GetType(fullyQualifiedTypeName);
                     if (resolvedType != null)
                         break;
@@ -251,37 +403,72 @@ namespace System.Workflow.ComponentModel.Serialization
             return resolvedType;
         }
 
-        internal static void GetMappingsFromXmlNamespace(WorkflowMarkupSerializationManager serializationManager, string xmlNamespace, out IList<WorkflowMarkupSerializerMapping> matchingMappings, out IList<WorkflowMarkupSerializerMapping> collectedMappings)
+        internal static void GetMappingsFromXmlNamespace(
+            WorkflowMarkupSerializationManager serializationManager,
+            string xmlNamespace,
+            out IList<WorkflowMarkupSerializerMapping> matchingMappings,
+            out IList<WorkflowMarkupSerializerMapping> collectedMappings
+        )
         {
             matchingMappings = new List<WorkflowMarkupSerializerMapping>();
             collectedMappings = new List<WorkflowMarkupSerializerMapping>();
 
-            XmlReader reader = serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
+            XmlReader reader =
+                serializationManager.WorkflowMarkupStack[typeof(XmlReader)] as XmlReader;
             if (reader != null)
             {
-                if (xmlNamespace.StartsWith(StandardXomlKeys.CLRNamespaceQualifier, StringComparison.OrdinalIgnoreCase))
+                if (
+                    xmlNamespace.StartsWith(
+                        StandardXomlKeys.CLRNamespaceQualifier,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     //Format for the xmlnamespace: clr-namespace:[Namespace][;Assembly=[AssemblyName]]
                     bool invalidXmlnsFormat = false;
-                    string clrNamespace = xmlNamespace.Substring(StandardXomlKeys.CLRNamespaceQualifier.Length).Trim();
+                    string clrNamespace = xmlNamespace
+                        .Substring(StandardXomlKeys.CLRNamespaceQualifier.Length)
+                        .Trim();
                     string assemblyName = String.Empty;
                     int index = clrNamespace.IndexOf(';');
                     if (index != -1)
                     {
-                        assemblyName = (index + 1 < clrNamespace.Length) ? clrNamespace.Substring(index + 1).Trim() : String.Empty;
+                        assemblyName =
+                            (index + 1 < clrNamespace.Length)
+                                ? clrNamespace.Substring(index + 1).Trim()
+                                : String.Empty;
                         clrNamespace = clrNamespace.Substring(0, index).Trim();
 
-                        if (!assemblyName.StartsWith(StandardXomlKeys.AssemblyNameQualifier, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            !assemblyName.StartsWith(
+                                StandardXomlKeys.AssemblyNameQualifier,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                             invalidXmlnsFormat = true;
 
-                        assemblyName = assemblyName.Substring(StandardXomlKeys.AssemblyNameQualifier.Length);
+                        assemblyName = assemblyName.Substring(
+                            StandardXomlKeys.AssemblyNameQualifier.Length
+                        );
                     }
 
                     if (!invalidXmlnsFormat)
                     {
-                        if (clrNamespace.Equals(StandardXomlKeys.GlobalNamespace, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            clrNamespace.Equals(
+                                StandardXomlKeys.GlobalNamespace,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                             clrNamespace = String.Empty;
-                        matchingMappings.Add(new WorkflowMarkupSerializerMapping(reader.Prefix, xmlNamespace, clrNamespace, assemblyName));
+                        matchingMappings.Add(
+                            new WorkflowMarkupSerializerMapping(
+                                reader.Prefix,
+                                xmlNamespace,
+                                clrNamespace,
+                                assemblyName
+                            )
+                        );
                     }
                 }
                 else
@@ -290,13 +477,17 @@ namespace System.Workflow.ComponentModel.Serialization
                     if (serializationManager.LocalAssembly != null)
                         referencedAssemblies.Add(serializationManager.LocalAssembly);
 
-                    ITypeProvider typeProvider = serializationManager.GetService(typeof(ITypeProvider)) as ITypeProvider;
+                    ITypeProvider typeProvider =
+                        serializationManager.GetService(typeof(ITypeProvider)) as ITypeProvider;
                     if (typeProvider != null)
                         referencedAssemblies.AddRange(typeProvider.ReferencedAssemblies);
 
                     foreach (Assembly assembly in referencedAssemblies)
                     {
-                        object[] xmlnsDefinitions = assembly.GetCustomAttributes(typeof(XmlnsDefinitionAttribute), true);
+                        object[] xmlnsDefinitions = assembly.GetCustomAttributes(
+                            typeof(XmlnsDefinitionAttribute),
+                            true
+                        );
                         if (xmlnsDefinitions != null)
                         {
                             foreach (XmlnsDefinitionAttribute xmlnsDefinition in xmlnsDefinitions)
@@ -304,16 +495,38 @@ namespace System.Workflow.ComponentModel.Serialization
                                 string assemblyName = String.Empty;
                                 if (serializationManager.LocalAssembly != assembly)
                                 {
-                                    if (xmlnsDefinition.AssemblyName != null && xmlnsDefinition.AssemblyName.Trim().Length > 0)
+                                    if (
+                                        xmlnsDefinition.AssemblyName != null
+                                        && xmlnsDefinition.AssemblyName.Trim().Length > 0
+                                    )
                                         assemblyName = xmlnsDefinition.AssemblyName;
                                     else
                                         assemblyName = assembly.FullName;
                                 }
 
-                                if (xmlnsDefinition.XmlNamespace.Equals(xmlNamespace, StringComparison.Ordinal))
-                                    matchingMappings.Add(new WorkflowMarkupSerializerMapping(reader.Prefix, xmlNamespace, xmlnsDefinition.ClrNamespace, assemblyName));
+                                if (
+                                    xmlnsDefinition.XmlNamespace.Equals(
+                                        xmlNamespace,
+                                        StringComparison.Ordinal
+                                    )
+                                )
+                                    matchingMappings.Add(
+                                        new WorkflowMarkupSerializerMapping(
+                                            reader.Prefix,
+                                            xmlNamespace,
+                                            xmlnsDefinition.ClrNamespace,
+                                            assemblyName
+                                        )
+                                    );
                                 else
-                                    collectedMappings.Add(new WorkflowMarkupSerializerMapping(reader.Prefix, xmlNamespace, xmlnsDefinition.ClrNamespace, assemblyName));
+                                    collectedMappings.Add(
+                                        new WorkflowMarkupSerializerMapping(
+                                            reader.Prefix,
+                                            xmlNamespace,
+                                            xmlnsDefinition.ClrNamespace,
+                                            assemblyName
+                                        )
+                                    );
                             }
                         }
                     }
@@ -321,7 +534,12 @@ namespace System.Workflow.ComponentModel.Serialization
             }
         }
 
-        internal static void GetMappingFromType(WorkflowMarkupSerializationManager manager, Type type, out WorkflowMarkupSerializerMapping matchingMapping, out IList<WorkflowMarkupSerializerMapping> collectedMappings)
+        internal static void GetMappingFromType(
+            WorkflowMarkupSerializationManager manager,
+            Type type,
+            out WorkflowMarkupSerializerMapping matchingMapping,
+            out IList<WorkflowMarkupSerializerMapping> collectedMappings
+        )
         {
             matchingMapping = null;
             collectedMappings = new List<WorkflowMarkupSerializerMapping>();
@@ -333,12 +551,22 @@ namespace System.Workflow.ComponentModel.Serialization
 
             assemblyName = GetAssemblyName(type, manager);
 
-            if (type.Assembly.FullName.Equals(AssemblyRef.RuntimeAssemblyRef, StringComparison.Ordinal))
+            if (
+                type.Assembly.FullName.Equals(
+                    AssemblyRef.RuntimeAssemblyRef,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 xmlNamespace = StandardXomlKeys.WorkflowXmlNs;
                 prefix = StandardXomlKeys.WorkflowPrefix;
             }
-            if (type.Assembly.FullName.Equals(AssemblyRef.ActivitiesAssemblyRef, StringComparison.Ordinal))
+            if (
+                type.Assembly.FullName.Equals(
+                    AssemblyRef.ActivitiesAssemblyRef,
+                    StringComparison.Ordinal
+                )
+            )
             {
                 xmlNamespace = StandardXomlKeys.WorkflowXmlNs;
                 prefix = StandardXomlKeys.WorkflowPrefix;
@@ -352,7 +580,10 @@ namespace System.Workflow.ComponentModel.Serialization
             if (xmlNamespace.Length == 0)
             {
                 //First lookup the type's assembly for XmlNsDefinitionAttribute
-                object[] xmlnsDefinitions = type.Assembly.GetCustomAttributes(typeof(XmlnsDefinitionAttribute), true);
+                object[] xmlnsDefinitions = type.Assembly.GetCustomAttributes(
+                    typeof(XmlnsDefinitionAttribute),
+                    true
+                );
                 foreach (XmlnsDefinitionAttribute xmlnsDefinition in xmlnsDefinitions)
                 {
                     xmlNamespace = xmlnsDefinition.XmlNamespace;
@@ -367,8 +598,17 @@ namespace System.Workflow.ComponentModel.Serialization
                         xmlNamespace = GetFormatedXmlNamespace(clrNamespace, assemblyName);
                     prefix = GetPrefix(manager, type.Assembly, xmlNamespace);
 
-                    WorkflowMarkupSerializerMapping mapping = new WorkflowMarkupSerializerMapping(prefix, xmlNamespace, clrNamespace, assemblyName, type.Assembly.FullName);
-                    if (xmlnsDefinition.ClrNamespace.Equals(clrNamespace, StringComparison.Ordinal) && matchingMapping == null)
+                    WorkflowMarkupSerializerMapping mapping = new WorkflowMarkupSerializerMapping(
+                        prefix,
+                        xmlNamespace,
+                        clrNamespace,
+                        assemblyName,
+                        type.Assembly.FullName
+                    );
+                    if (
+                        xmlnsDefinition.ClrNamespace.Equals(clrNamespace, StringComparison.Ordinal)
+                        && matchingMapping == null
+                    )
                         matchingMapping = mapping;
                     else
                         collectedMappings.Add(mapping);
@@ -387,13 +627,18 @@ namespace System.Workflow.ComponentModel.Serialization
                 if (String.IsNullOrEmpty(prefix))
                     prefix = GetPrefix(manager, type.Assembly, xmlNamespace);
 
-                matchingMapping = new WorkflowMarkupSerializerMapping(prefix, xmlNamespace, clrNamespace, assemblyName, type.Assembly.FullName);
+                matchingMapping = new WorkflowMarkupSerializerMapping(
+                    prefix,
+                    xmlNamespace,
+                    clrNamespace,
+                    assemblyName,
+                    type.Assembly.FullName
+                );
             }
         }
 
         private static string GetAssemblyName(Type type, WorkflowMarkupSerializationManager manager)
         {
-
             TypeProvider typeProvider = manager.GetService(typeof(ITypeProvider)) as TypeProvider;
 
             if (typeProvider != null)
@@ -416,17 +661,27 @@ namespace System.Workflow.ComponentModel.Serialization
         private static string GetFormatedXmlNamespace(string clrNamespace, string assemblyName)
         {
             string xmlNamespace = StandardXomlKeys.CLRNamespaceQualifier;
-            xmlNamespace += (String.IsNullOrEmpty(clrNamespace)) ? StandardXomlKeys.GlobalNamespace : clrNamespace;
+            xmlNamespace +=
+                (String.IsNullOrEmpty(clrNamespace))
+                    ? StandardXomlKeys.GlobalNamespace
+                    : clrNamespace;
             if (!String.IsNullOrEmpty(assemblyName))
                 xmlNamespace += ";" + StandardXomlKeys.AssemblyNameQualifier + assemblyName;
             return xmlNamespace;
         }
 
-        private static string GetPrefix(WorkflowMarkupSerializationManager manager, Assembly assembly, string xmlNamespace)
+        private static string GetPrefix(
+            WorkflowMarkupSerializationManager manager,
+            Assembly assembly,
+            string xmlNamespace
+        )
         {
             string prefix = String.Empty;
 
-            object[] xmlnsPrefixes = assembly.GetCustomAttributes(typeof(XmlnsPrefixAttribute), true);
+            object[] xmlnsPrefixes = assembly.GetCustomAttributes(
+                typeof(XmlnsPrefixAttribute),
+                true
+            );
             if (xmlnsPrefixes != null)
             {
                 foreach (XmlnsPrefixAttribute xmlnsPrefix in xmlnsPrefixes)
@@ -439,14 +694,18 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
             }
 
-            if (String.IsNullOrEmpty(prefix) || !IsNamespacePrefixUnique(prefix, manager.PrefixBasedMappings.Keys))
+            if (
+                String.IsNullOrEmpty(prefix)
+                || !IsNamespacePrefixUnique(prefix, manager.PrefixBasedMappings.Keys)
+            )
             {
                 string basePrefix = (String.IsNullOrEmpty(prefix)) ? "ns" : prefix;
 
                 int index = 0;
                 prefix = basePrefix + string.Format(CultureInfo.InvariantCulture, "{0}", index++);
                 while (!IsNamespacePrefixUnique(prefix, manager.PrefixBasedMappings.Keys))
-                    prefix = basePrefix + string.Format(CultureInfo.InvariantCulture, "{0}", index++);
+                    prefix =
+                        basePrefix + string.Format(CultureInfo.InvariantCulture, "{0}", index++);
             }
 
             return prefix;
@@ -470,6 +729,4 @@ namespace System.Workflow.ComponentModel.Serialization
     #endregion
 
     #endregion
-
 }
-

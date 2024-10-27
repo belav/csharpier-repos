@@ -11,11 +11,11 @@ public class Foo
 
     public void AddHandler<T>(string target)
     {
-	    Action<object, EventArgs> fn = (sender, e) => Console.WriteLine(target);
-	    EventHandler handler = Delegate.CreateDelegate(typeof(EventHandler),
-			    fn.Target, fn.Method) as EventHandler;
+        Action<object, EventArgs> fn = (sender, e) => Console.WriteLine(target);
+        EventHandler handler =
+            Delegate.CreateDelegate(typeof(EventHandler), fn.Target, fn.Method) as EventHandler;
 
-	    Event += handler;
+        Event += handler;
     }
 }
 

@@ -22,9 +22,15 @@ namespace System.Diagnostics.Tests
         [Theory]
         [InlineData(null, null)]
         [InlineData("VisualizerTypeName", "VisualizerObjectSourceTypeName")]
-        public void Ctor_VisualizerTypeName_VisualizerObjectSourceTypeName(string visualizerTypeName, string visualizerObjectSourceTypeName)
+        public void Ctor_VisualizerTypeName_VisualizerObjectSourceTypeName(
+            string visualizerTypeName,
+            string visualizerObjectSourceTypeName
+        )
         {
-            var attribute = new DebuggerVisualizerAttribute(visualizerTypeName, visualizerObjectSourceTypeName);
+            var attribute = new DebuggerVisualizerAttribute(
+                visualizerTypeName,
+                visualizerObjectSourceTypeName
+            );
             Assert.Equal(visualizerTypeName, attribute.VisualizerTypeName);
             Assert.Equal(visualizerObjectSourceTypeName, attribute.VisualizerObjectSourceTypeName);
             Assert.Null(attribute.Description);
@@ -34,11 +40,20 @@ namespace System.Diagnostics.Tests
         [Theory]
         [InlineData(null, typeof(int))]
         [InlineData("VisualizerTypeName", typeof(DebuggerVisualizerAttributeTests))]
-        public void Ctor_VisualizerTypeName_VisualizerObjectSourceType(string visualizerTypeName, Type visualizerObjectSourceType)
+        public void Ctor_VisualizerTypeName_VisualizerObjectSourceType(
+            string visualizerTypeName,
+            Type visualizerObjectSourceType
+        )
         {
-            var attribute = new DebuggerVisualizerAttribute(visualizerTypeName, visualizerObjectSourceType);
+            var attribute = new DebuggerVisualizerAttribute(
+                visualizerTypeName,
+                visualizerObjectSourceType
+            );
             Assert.Equal(visualizerTypeName, attribute.VisualizerTypeName);
-            Assert.Equal(visualizerObjectSourceType.AssemblyQualifiedName, attribute.VisualizerObjectSourceTypeName);
+            Assert.Equal(
+                visualizerObjectSourceType.AssemblyQualifiedName,
+                attribute.VisualizerObjectSourceTypeName
+            );
             Assert.Null(attribute.Description);
             Assert.Null(attribute.Target);
         }
@@ -57,12 +72,24 @@ namespace System.Diagnostics.Tests
 
         [Theory]
         [InlineData(typeof(string), typeof(int))]
-        [InlineData(typeof(DebuggerVisualizerAttributeTests), typeof(DebuggerVisualizerAttributeTests))]
-        public void Ctor_VisualizerType_VisualizerObjectSourceType(Type visualizerType, Type visualizerObjectSourceType)
+        [InlineData(
+            typeof(DebuggerVisualizerAttributeTests),
+            typeof(DebuggerVisualizerAttributeTests)
+        )]
+        public void Ctor_VisualizerType_VisualizerObjectSourceType(
+            Type visualizerType,
+            Type visualizerObjectSourceType
+        )
         {
-            var attribute = new DebuggerVisualizerAttribute(visualizerType, visualizerObjectSourceType);
+            var attribute = new DebuggerVisualizerAttribute(
+                visualizerType,
+                visualizerObjectSourceType
+            );
             Assert.Equal(visualizerType.AssemblyQualifiedName, attribute.VisualizerTypeName);
-            Assert.Equal(visualizerObjectSourceType.AssemblyQualifiedName, attribute.VisualizerObjectSourceTypeName);
+            Assert.Equal(
+                visualizerObjectSourceType.AssemblyQualifiedName,
+                attribute.VisualizerObjectSourceTypeName
+            );
             Assert.Null(attribute.Description);
             Assert.Null(attribute.Target);
         }
@@ -70,9 +97,15 @@ namespace System.Diagnostics.Tests
         [Theory]
         [InlineData(typeof(string), null)]
         [InlineData(typeof(DebuggerVisualizerAttributeTests), "VisualizerObjectSourceTypeName")]
-        public void Ctor_VisualizerType_VisualizerObjectSourceTypeName(Type visualizerType, string visualizerObjectSourceTypeName)
+        public void Ctor_VisualizerType_VisualizerObjectSourceTypeName(
+            Type visualizerType,
+            string visualizerObjectSourceTypeName
+        )
         {
-            var attribute = new DebuggerVisualizerAttribute(visualizerType, visualizerObjectSourceTypeName);
+            var attribute = new DebuggerVisualizerAttribute(
+                visualizerType,
+                visualizerObjectSourceTypeName
+            );
             Assert.Equal(visualizerType.AssemblyQualifiedName, attribute.VisualizerTypeName);
             Assert.Equal(visualizerObjectSourceTypeName, attribute.VisualizerObjectSourceTypeName);
             Assert.Null(attribute.Description);
@@ -82,16 +115,31 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void Ctor_NullVisualizerType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("visualizer", () => new DebuggerVisualizerAttribute((Type)null));
-            AssertExtensions.Throws<ArgumentNullException>("visualizer", () => new DebuggerVisualizerAttribute((Type)null, "VisualizerObjectSourceTypeName"));
-            AssertExtensions.Throws<ArgumentNullException>("visualizer", () => new DebuggerVisualizerAttribute((Type)null, typeof(int)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "visualizer",
+                () => new DebuggerVisualizerAttribute((Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "visualizer",
+                () => new DebuggerVisualizerAttribute((Type)null, "VisualizerObjectSourceTypeName")
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "visualizer",
+                () => new DebuggerVisualizerAttribute((Type)null, typeof(int))
+            );
         }
 
         [Fact]
         public void Ctor_NullVisualizerObjectSourceType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("visualizerObjectSource", () => new DebuggerVisualizerAttribute("VisualizerTypeName", (Type)null));
-            AssertExtensions.Throws<ArgumentNullException>("visualizerObjectSource", () => new DebuggerVisualizerAttribute(typeof(string), (Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "visualizerObjectSource",
+                () => new DebuggerVisualizerAttribute("VisualizerTypeName", (Type)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "visualizerObjectSource",
+                () => new DebuggerVisualizerAttribute(typeof(string), (Type)null)
+            );
         }
 
         [Theory]
@@ -99,7 +147,10 @@ namespace System.Diagnostics.Tests
         [InlineData(typeof(DebuggerVisualizerAttributeTests))]
         public void Target_SetValid_GetReturnsExpected(Type target)
         {
-            var attribute = new DebuggerVisualizerAttribute("VisualizerTypeName") { Target = target };
+            var attribute = new DebuggerVisualizerAttribute("VisualizerTypeName")
+            {
+                Target = target,
+            };
             Assert.Equal(target, attribute.Target);
             Assert.Equal(target.AssemblyQualifiedName, attribute.TargetTypeName);
         }

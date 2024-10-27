@@ -30,7 +30,11 @@ namespace System.Tests
             {
                 foreach (var rule in TimeZoneInfo.Local.GetAdjustmentRules())
                 {
-                    if (rule.DateStart.Year <= year && rule.DateEnd.Year >= year && rule.DaylightDelta != TimeSpan.Zero)
+                    if (
+                        rule.DateStart.Year <= year
+                        && rule.DateEnd.Year >= year
+                        && rule.DaylightDelta != TimeSpan.Zero
+                    )
                     {
                         currentRule = rule;
                         break;
@@ -40,8 +44,14 @@ namespace System.Tests
 
             if (currentRule != null)
             {
-                DateTime startTransition = TransitionTimeToDateTime(year, currentRule.DaylightTransitionStart);
-                DateTime endTransition = TransitionTimeToDateTime(year, currentRule.DaylightTransitionEnd);
+                DateTime startTransition = TransitionTimeToDateTime(
+                    year,
+                    currentRule.DaylightTransitionStart
+                );
+                DateTime endTransition = TransitionTimeToDateTime(
+                    year,
+                    currentRule.DaylightTransitionEnd
+                );
 
                 Assert.Equal(startTransition, dt.Start);
                 Assert.Equal(endTransition, dt.End);
@@ -64,9 +74,15 @@ namespace System.Tests
             DateTime now = DateTime.Now;
 
             Assert.Equal(TimeZoneInfo.Local.GetUtcOffset(now), currentZone.GetUtcOffset(now));
-            Assert.Equal(TimeZoneInfo.Local.IsDaylightSavingTime(now), currentZone.IsDaylightSavingTime(now));
+            Assert.Equal(
+                TimeZoneInfo.Local.IsDaylightSavingTime(now),
+                currentZone.IsDaylightSavingTime(now)
+            );
 #pragma warning disable 0618
-            Assert.Equal(TimeZoneInfo.Local.IsDaylightSavingTime(now), TimeZone.IsDaylightSavingTime(now, currentZone.GetDaylightChanges(now.Year)));
+            Assert.Equal(
+                TimeZoneInfo.Local.IsDaylightSavingTime(now),
+                TimeZone.IsDaylightSavingTime(now, currentZone.GetDaylightChanges(now.Year))
+            );
 #pragma warning restore 0618
         }
 
@@ -86,7 +102,10 @@ namespace System.Tests
             }
         }
 
-        private static DateTime TransitionTimeToDateTime(int year, TimeZoneInfo.TransitionTime transitionTime)
+        private static DateTime TransitionTimeToDateTime(
+            int year,
+            TimeZoneInfo.TransitionTime transitionTime
+        )
         {
             DateTime value;
             DateTime timeOfDay = transitionTime.TimeOfDay;
@@ -94,14 +113,29 @@ namespace System.Tests
             if (transitionTime.IsFixedDateRule)
             {
                 int day = DateTime.DaysInMonth(year, transitionTime.Month);
-                value = new DateTime(year, transitionTime.Month, (day < transitionTime.Day) ? day : transitionTime.Day,
-                            timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second, timeOfDay.Millisecond);
+                value = new DateTime(
+                    year,
+                    transitionTime.Month,
+                    (day < transitionTime.Day) ? day : transitionTime.Day,
+                    timeOfDay.Hour,
+                    timeOfDay.Minute,
+                    timeOfDay.Second,
+                    timeOfDay.Millisecond
+                );
             }
             else
             {
                 if (transitionTime.Week <= 4)
                 {
-                    value = new DateTime(year, transitionTime.Month, 1, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second, timeOfDay.Millisecond);
+                    value = new DateTime(
+                        year,
+                        transitionTime.Month,
+                        1,
+                        timeOfDay.Hour,
+                        timeOfDay.Minute,
+                        timeOfDay.Second,
+                        timeOfDay.Millisecond
+                    );
 
                     int dayOfWeek = (int)value.DayOfWeek;
                     int delta = (int)transitionTime.DayOfWeek - dayOfWeek;
@@ -119,16 +153,25 @@ namespace System.Tests
                 else
                 {
                     int daysInMonth = DateTime.DaysInMonth(year, transitionTime.Month);
-                    value = new DateTime(year, transitionTime.Month, daysInMonth, timeOfDay.Hour, timeOfDay.Minute, timeOfDay.Second, timeOfDay.Millisecond);
+                    value = new DateTime(
+                        year,
+                        transitionTime.Month,
+                        daysInMonth,
+                        timeOfDay.Hour,
+                        timeOfDay.Minute,
+                        timeOfDay.Second,
+                        timeOfDay.Millisecond
+                    );
 
-                    int dayOfWeek = (int) value.DayOfWeek;
+                    int dayOfWeek = (int)value.DayOfWeek;
                     int delta = dayOfWeek - (int)transitionTime.DayOfWeek;
                     if (delta < 0)
                     {
                         delta += 7;
                     }
 
-                    if (delta > 0) {
+                    if (delta > 0)
+                    {
                         value = value.AddDays(-delta);
                     }
                 }

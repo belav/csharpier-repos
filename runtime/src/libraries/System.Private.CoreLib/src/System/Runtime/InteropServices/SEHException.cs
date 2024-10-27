@@ -11,7 +11,9 @@ namespace System.Runtime.InteropServices
     /// Exception for Structured Exception Handler exceptions.
     /// </summary>
     [Serializable]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class SEHException : ExternalException
     {
         public SEHException()
@@ -31,11 +33,14 @@ namespace System.Runtime.InteropServices
             HResult = HResults.E_FAIL;
         }
 
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
-        protected SEHException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected SEHException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
 
         // Exceptions can be resumable, meaning a filtered exception
         // handler can correct the problem that caused the exception,

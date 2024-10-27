@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,56 +31,58 @@ using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Web;
 using NUnit.Framework;
-
 using CategoryAttribute = NUnit.Framework.CategoryAttribute;
 
 namespace MonoTests.System.ServiceModel.Description
 {
-	[TestFixture]
-	public class WebInvokeAttributeTest
-	{
-		[Test]
-		public void IOperationBehaviorMethods ()
-		{
-			IOperationBehavior oper = new WebInvokeAttribute ();
-			var pl = new BindingParameterCollection ();
-			var od = ContractDescription.GetContract (typeof (TestService)).Operations [0];
-			oper.AddBindingParameters (od, pl);
-			Assert.AreEqual (0, pl.Count, "#1");
+    [TestFixture]
+    public class WebInvokeAttributeTest
+    {
+        [Test]
+        public void IOperationBehaviorMethods()
+        {
+            IOperationBehavior oper = new WebInvokeAttribute();
+            var pl = new BindingParameterCollection();
+            var od = ContractDescription.GetContract(typeof(TestService)).Operations[0];
+            oper.AddBindingParameters(od, pl);
+            Assert.AreEqual(0, pl.Count, "#1");
 
-			// yeah it really does nothing.
-			oper.AddBindingParameters (null, null);
+            // yeah it really does nothing.
+            oper.AddBindingParameters(null, null);
 
-			oper.ApplyClientBehavior (od, null);
-			oper.ApplyDispatchBehavior (od, null);
-			oper.Validate (od);
-		}
+            oper.ApplyClientBehavior(od, null);
+            oper.ApplyDispatchBehavior(od, null);
+            oper.Validate(od);
+        }
 
-		[Test]
-		public void RejectTwoParametersWhenNotWrapped ()
-		{
-			var factory = new WebChannelFactory<IBogusService1> (new WebHttpBinding (), new Uri ("http://localhost:37564"));
+        [Test]
+        public void RejectTwoParametersWhenNotWrapped()
+        {
+            var factory = new WebChannelFactory<IBogusService1>(
+                new WebHttpBinding(),
+                new Uri("http://localhost:37564")
+            );
 
 #if MOBILE
-			factory.Endpoint.Behaviors.Add (new WebHttpBehavior ());
+            factory.Endpoint.Behaviors.Add(new WebHttpBehavior());
 #endif
 
-			Assert.Throws<InvalidOperationException> (() => factory.CreateChannel ());
-		}
+            Assert.Throws<InvalidOperationException>(() => factory.CreateChannel());
+        }
 
-		[ServiceContract]
-		public interface TestService
-		{
-			[OperationContract]
-			string TestMethod (string input);
-		}
+        [ServiceContract]
+        public interface TestService
+        {
+            [OperationContract]
+            string TestMethod(string input);
+        }
 
-		[ServiceContract]
-		public interface IBogusService1
-		{
-			[OperationContract]
-			[WebInvoke]
-			string Join (string s1, string s2);
-		}
-	}
+        [ServiceContract]
+        public interface IBogusService1
+        {
+            [OperationContract]
+            [WebInvoke]
+            string Join(string s1, string s2);
+        }
+    }
 }

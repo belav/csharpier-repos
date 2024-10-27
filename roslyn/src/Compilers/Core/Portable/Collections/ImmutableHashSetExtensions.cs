@@ -15,7 +15,10 @@ internal static class ImmutableHashSetExtensions
     /// <see cref="HashSet{T}"/>.
     /// </summary>
     /// <seealso href="https://github.com/dotnet/runtime/issues/90986"/>
-    public static bool SetEqualsWithoutIntermediateHashSet<T>(this ImmutableHashSet<T> set, ImmutableHashSet<T> other)
+    public static bool SetEqualsWithoutIntermediateHashSet<T>(
+        this ImmutableHashSet<T> set,
+        ImmutableHashSet<T> other
+    )
     {
         if (set is null)
             throw new ArgumentNullException(nameof(set));

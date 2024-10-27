@@ -23,7 +23,8 @@ public class GenerateGuid : Microsoft.Build.Utilities.Task
     {
         try
         {
-            var value = string.Join(",", Values.Select(o => o.ItemSpec).ToArray()).ToLowerInvariant();
+            var value = string.Join(",", Values.Select(o => o.ItemSpec).ToArray())
+                .ToLowerInvariant();
 
             Guid = Uuid.Create(new Guid(NamespaceGuid), value).ToString();
         }

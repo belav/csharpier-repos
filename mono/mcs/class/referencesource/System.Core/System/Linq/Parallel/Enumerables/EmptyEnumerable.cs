@@ -1,7 +1,7 @@
 // ==++==
 //
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // =+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+
 //
@@ -25,9 +25,7 @@ namespace System.Linq.Parallel
     internal class EmptyEnumerable<T> : ParallelQuery<T>
     {
         private EmptyEnumerable()
-            : base(QuerySettings.Empty)
-        {
-        }
+            : base(QuerySettings.Empty) { }
 
         // A singleton cached and shared among callers.
         private static volatile EmptyEnumerable<T> s_instance;
@@ -67,9 +65,20 @@ namespace System.Linq.Parallel
         }
 
         // IEnumerator<T> methods.
-        public T Current { get { return default(T); } }
-        object IEnumerator.Current { get { return null; } }
-        public bool MoveNext() { return false; }
+        public T Current
+        {
+            get { return default(T); }
+        }
+        object IEnumerator.Current
+        {
+            get { return null; }
+        }
+
+        public bool MoveNext()
+        {
+            return false;
+        }
+
         void Collections.IEnumerator.Reset() { }
     }
 }

@@ -32,7 +32,9 @@ namespace System.Xml
 
             public override ICredentials Credentials
             {
-                set { /* Do nothing */ }
+                set
+                { /* Do nothing */
+                }
             }
 
             public override object GetEntity(Uri absoluteUri, string? role, Type? ofObjectToReturn)
@@ -40,7 +42,11 @@ namespace System.Xml
                 throw new XmlException(SR.Format(SR.Xml_NullResolver, absoluteUri));
             }
 
-            public override Task<object> GetEntityAsync(Uri absoluteUri, string? role, Type? ofObjectToReturn)
+            public override Task<object> GetEntityAsync(
+                Uri absoluteUri,
+                string? role,
+                Type? ofObjectToReturn
+            )
             {
                 throw new XmlException(SR.Format(SR.Xml_NullResolver, absoluteUri));
             }

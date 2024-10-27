@@ -20,7 +20,7 @@ namespace System.IdentityModel
         private const int RandomSaltSize = 16;
 
         // We use UUIDs as the basis for our unique identifiers. UUIDs
-        // cannot be used in xml:id-typed fields, because xml:id 
+        // cannot be used in xml:id-typed fields, because xml:id
         // is made from the NCNAME production in XML Schema.
         //
         // An NCNAME looks like this: (simlified out complex unicode)
@@ -29,23 +29,23 @@ namespace System.IdentityModel
         // A UUID looks like this:
         //     [0-9A-Fa-f]{8}-(?:[0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}
         //
-        // The problem arises when the UUID begins with [0-9], which 
+        // The problem arises when the UUID begins with [0-9], which
         // violates the NCNAME production.
         //
         // This is fixed trivially by prepending an underscore.
         private const string NcNamePrefix = "_";
 
         // In some cases we need UniqueId to be a valid URI. In this
-        // case we use the urn:uuid: namespace established by 
-        // RFC4122. Note that in this case it is not appropriate to 
+        // case we use the urn:uuid: namespace established by
+        // RFC4122. Note that in this case it is not appropriate to
         // use the auto-incrementing optimization, as the resulting
-        // value is no longer properly a UUID. 
+        // value is no longer properly a UUID.
         private const string UuidUriPrefix = "urn:uuid:";
 
-        // For non-random identifiers, we optimize the generation of 
+        // For non-random identifiers, we optimize the generation of
         // unique ids by calculating only one UUID per program invocation
         // and adding a 64-bit auto-incrementing value for each id
-        // that is needed. 
+        // that is needed.
         private static readonly string reusableUuid = GetRandomUuid();
 
         // The format of the optimized NCNAMEs produced is:
@@ -55,7 +55,7 @@ namespace System.IdentityModel
         private static readonly string optimizedNcNamePrefix = NcNamePrefix + reusableUuid + "-";
 
         /// <summary>
-        /// Creates a unique ID suitable for use in an xml:id field. The value is 
+        /// Creates a unique ID suitable for use in an xml:id field. The value is
         /// not hard to guess but is unique.
         /// </summary>
         /// <returns>The unique ID.</returns>
@@ -65,7 +65,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Creates a unique ID similar to that created by CreateNonRandomId, 
+        /// Creates a unique ID similar to that created by CreateNonRandomId,
         /// but instead of an underscore, the supplied prefix is used.
         /// </summary>
         /// <param name="prefix">The prefix to use.</param>
@@ -81,7 +81,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Creates a unique, random ID suitable for use in an xml:id field. The 
+        /// Creates a unique, random ID suitable for use in an xml:id field. The
         /// value is hard to guess and unique.
         /// </summary>
         /// <returns>The unique ID.</returns>
@@ -107,7 +107,7 @@ namespace System.IdentityModel
         }
 
         /// <summary>
-        /// Creates a unique, random ID suitable for use as a URI. The value is 
+        /// Creates a unique, random ID suitable for use as a URI. The value is
         /// hard to guess and unique. The URI is in the urn:uuid: namespace.
         /// </summary>
         /// <returns>The random URI.</returns>

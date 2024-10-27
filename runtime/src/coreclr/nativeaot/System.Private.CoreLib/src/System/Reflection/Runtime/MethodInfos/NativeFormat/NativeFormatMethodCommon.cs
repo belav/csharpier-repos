@@ -9,7 +9,6 @@ using System.Reflection.Runtime.ParameterInfos;
 using System.Reflection.Runtime.ParameterInfos.NativeFormat;
 using System.Reflection.Runtime.TypeInfos;
 using System.Reflection.Runtime.TypeInfos.NativeFormat;
-
 using Internal.Metadata.NativeFormat;
 using Internal.Reflection.Core.Execution;
 using Internal.Runtime;
@@ -21,13 +20,25 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
     //
     // Implements methods and properties common to RuntimeMethodInfo and RuntimeConstructorInfo.
     //
-    internal struct NativeFormatMethodCommon : IRuntimeMethodCommon<NativeFormatMethodCommon>, IEquatable<NativeFormatMethodCommon>
+    internal struct NativeFormatMethodCommon
+        : IRuntimeMethodCommon<NativeFormatMethodCommon>,
+            IEquatable<NativeFormatMethodCommon>
     {
         public bool IsGenericMethodDefinition => GenericParameterCount != 0;
 
-        public MethodBaseInvoker GetUncachedMethodInvoker(RuntimeTypeInfo[] methodArguments, MemberInfo exceptionPertainant, out Exception exception)
+        public MethodBaseInvoker GetUncachedMethodInvoker(
+            RuntimeTypeInfo[] methodArguments,
+            MemberInfo exceptionPertainant,
+            out Exception exception
+        )
         {
-            return ReflectionCoreExecution.ExecutionEnvironment.GetMethodInvoker(DeclaringType, new QMethodDefinition(Reader, MethodHandle), methodArguments, exceptionPertainant, out exception);
+            return ReflectionCoreExecution.ExecutionEnvironment.GetMethodInvoker(
+                DeclaringType,
+                new QMethodDefinition(Reader, MethodHandle),
+                methodArguments,
+                exceptionPertainant,
+                out exception
+            );
         }
 
         public QSignatureTypeHandle[] QualifiedMethodSignature
@@ -36,12 +47,22 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             {
                 MethodSignature methodSignature = this.MethodSignature;
 
-                QSignatureTypeHandle[] typeSignatures = new QSignatureTypeHandle[methodSignature.Parameters.Count + 1];
-                typeSignatures[0] = new QSignatureTypeHandle(_reader, methodSignature.ReturnType, true);
+                QSignatureTypeHandle[] typeSignatures = new QSignatureTypeHandle[
+                    methodSignature.Parameters.Count + 1
+                ];
+                typeSignatures[0] = new QSignatureTypeHandle(
+                    _reader,
+                    methodSignature.ReturnType,
+                    true
+                );
                 int paramIndex = 1;
                 foreach (Handle parameterTypeSignatureHandle in methodSignature.Parameters)
                 {
-                    typeSignatures[paramIndex++] = new QSignatureTypeHandle(_reader, parameterTypeSignatureHandle, true);
+                    typeSignatures[paramIndex++] = new QSignatureTypeHandle(
+                        _reader,
+                        parameterTypeSignatureHandle,
+                        true
+                    );
                 }
 
                 return typeSignatures;
@@ -52,30 +73,41 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
         {
             get
             {
-                return new NativeFormatMethodCommon(MethodHandle, _definingTypeInfo, _definingTypeInfo);
+                return new NativeFormatMethodCommon(
+                    MethodHandle,
+                    _definingTypeInfo,
+                    _definingTypeInfo
+                );
             }
         }
 
-        public void FillInMetadataDescribedParameters(ref VirtualRuntimeParameterInfoArray result, QSignatureTypeHandle[] typeSignatures, MethodBase contextMethod, TypeContext typeContext)
+        public void FillInMetadataDescribedParameters(
+            ref VirtualRuntimeParameterInfoArray result,
+            QSignatureTypeHandle[] typeSignatures,
+            MethodBase contextMethod,
+            TypeContext typeContext
+        )
         {
             foreach (ParameterHandle parameterHandle in _method.Parameters)
             {
                 Parameter parameterRecord = parameterHandle.GetParameter(_reader);
                 int index = parameterRecord.Sequence;
-                result[index] =
-                    NativeFormatMethodParameterInfo.GetNativeFormatMethodParameterInfo(
-                        contextMethod,
-                        _methodHandle,
-                        index - 1,
-                        parameterHandle,
-                        typeSignatures[index],
-                        typeContext);
+                result[index] = NativeFormatMethodParameterInfo.GetNativeFormatMethodParameterInfo(
+                    contextMethod,
+                    _methodHandle,
+                    index - 1,
+                    parameterHandle,
+                    typeSignatures[index],
+                    typeContext
+                );
             }
         }
 
         public int GenericParameterCount => MethodHandle.GetMethod(Reader).GenericParameters.Count;
 
-        public RuntimeTypeInfo[] GetGenericTypeParametersWithSpecifiedOwningMethod(RuntimeNamedMethodInfo<NativeFormatMethodCommon> owningMethod)
+        public RuntimeTypeInfo[] GetGenericTypeParametersWithSpecifiedOwningMethod(
+            RuntimeNamedMethodInfo<NativeFormatMethodCommon> owningMethod
+        )
         {
             Method method = MethodHandle.GetMethod(Reader);
             int genericParametersCount = method.GenericParameters.Count;
@@ -86,7 +118,12 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             int i = 0;
             foreach (GenericParameterHandle genericParameterHandle in method.GenericParameters)
             {
-                RuntimeTypeInfo genericParameterType = NativeFormatRuntimeGenericParameterTypeInfoForMethods.GetRuntimeGenericParameterTypeInfoForMethods(owningMethod, Reader, genericParameterHandle);
+                RuntimeTypeInfo genericParameterType =
+                    NativeFormatRuntimeGenericParameterTypeInfoForMethods.GetRuntimeGenericParameterTypeInfoForMethods(
+                        owningMethod,
+                        Reader,
+                        genericParameterHandle
+                    );
                 genericTypeParameters[i++] = genericParameterType;
             }
             return genericTypeParameters;
@@ -111,7 +148,11 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
         //
         //  We don't report any DeclaredMembers for arrays or generic parameters so those don't apply.
         //
-        public NativeFormatMethodCommon(MethodHandle methodHandle, NativeFormatRuntimeNamedTypeInfo definingTypeInfo, RuntimeTypeInfo contextTypeInfo)
+        public NativeFormatMethodCommon(
+            MethodHandle methodHandle,
+            NativeFormatRuntimeNamedTypeInfo definingTypeInfo,
+            RuntimeTypeInfo contextTypeInfo
+        )
         {
             _definingTypeInfo = definingTypeInfo;
             _methodHandle = methodHandle;
@@ -122,10 +163,7 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
 
         public MethodAttributes Attributes
         {
-            get
-            {
-                return _method.Flags;
-            }
+            get { return _method.Flags; }
         }
 
         public CallingConventions CallingConvention
@@ -133,57 +171,44 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             get
             {
                 var sigCallingConvention = MethodSignature.CallingConvention;
-                return (sigCallingConvention & Internal.Metadata.NativeFormat.SignatureCallingConvention.HasThis) != 0
-                    ? CallingConventions.HasThis : 0;
+                return
+                    (
+                        sigCallingConvention
+                        & Internal.Metadata.NativeFormat.SignatureCallingConvention.HasThis
+                    ) != 0
+                    ? CallingConventions.HasThis
+                    : 0;
             }
         }
 
         public RuntimeTypeInfo ContextTypeInfo
         {
-            get
-            {
-                return _contextTypeInfo;
-            }
+            get { return _contextTypeInfo; }
         }
 
         public RuntimeTypeInfo DeclaringType
         {
-            get
-            {
-                return _contextTypeInfo;
-            }
+            get { return _contextTypeInfo; }
         }
 
         public RuntimeNamedTypeInfo DefiningTypeInfo
         {
-            get
-            {
-                return _definingTypeInfo;
-            }
+            get { return _definingTypeInfo; }
         }
 
         public MethodImplAttributes MethodImplementationFlags
         {
-            get
-            {
-                return _method.ImplFlags;
-            }
+            get { return _method.ImplFlags; }
         }
 
         public Module Module
         {
-            get
-            {
-                return _definingTypeInfo.Module;
-            }
+            get { return _definingTypeInfo.Module; }
         }
 
         public int MetadataToken
         {
-            get
-            {
-                throw new InvalidOperationException(SR.NoMetadataTokenAvailable);
-            }
+            get { throw new InvalidOperationException(SR.NoMetadataTokenAvailable); }
         }
 
         public RuntimeMethodHandle GetRuntimeMethodHandle(Type[] genericArgs)
@@ -202,13 +227,15 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
                 genericArgHandles = null;
             }
 
-            TypeManagerHandle typeManager = RuntimeAugments.TypeLoaderCallbacks.GetModuleForMetadataReader(Reader);
+            TypeManagerHandle typeManager =
+                RuntimeAugments.TypeLoaderCallbacks.GetModuleForMetadataReader(Reader);
 
             return RuntimeAugments.TypeLoaderCallbacks.GetRuntimeMethodHandleForComponents(
                 DeclaringType.TypeHandle,
                 Name,
                 RuntimeSignature.CreateFromMethodHandle(typeManager, MethodHandle.AsInt()),
-                genericArgHandles);
+                genericArgHandles
+            );
         }
 
         //
@@ -221,7 +248,11 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
         //
         // Does not array-copy.
         //
-        public RuntimeParameterInfo[] GetRuntimeParameters(MethodBase contextMethod, RuntimeTypeInfo[] methodTypeArguments, out RuntimeParameterInfo returnParameter)
+        public RuntimeParameterInfo[] GetRuntimeParameters(
+            MethodBase contextMethod,
+            RuntimeTypeInfo[] methodTypeArguments,
+            out RuntimeParameterInfo returnParameter
+        )
         {
             MetadataReader reader = _reader;
             TypeContext typeContext = contextMethod.DeclaringType.ToRuntimeTypeInfo().TypeContext;
@@ -241,25 +272,25 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             {
                 Parameter parameterRecord = parameterHandle.GetParameter(_reader);
                 int index = parameterRecord.Sequence;
-                result[index] =
-                    NativeFormatMethodParameterInfo.GetNativeFormatMethodParameterInfo(
-                        contextMethod,
-                        _methodHandle,
-                        index - 1,
-                        parameterHandle,
-                        new QSignatureTypeHandle(reader, typeSignatures[index]),
-                        typeContext);
+                result[index] = NativeFormatMethodParameterInfo.GetNativeFormatMethodParameterInfo(
+                    contextMethod,
+                    _methodHandle,
+                    index - 1,
+                    parameterHandle,
+                    new QSignatureTypeHandle(reader, typeSignatures[index]),
+                    typeContext
+                );
             }
             for (int i = 0; i < count; i++)
             {
                 if (result[i] == null)
                 {
-                    result[i] =
-                        RuntimeThinMethodParameterInfo.GetRuntimeThinMethodParameterInfo(
-                            contextMethod,
-                            i - 1,
-                            new QSignatureTypeHandle(reader, typeSignatures[i]),
-                            typeContext);
+                    result[i] = RuntimeThinMethodParameterInfo.GetRuntimeThinMethodParameterInfo(
+                        contextMethod,
+                        i - 1,
+                        new QSignatureTypeHandle(reader, typeSignatures[i]),
+                        typeContext
+                    );
                 }
             }
 
@@ -269,26 +300,17 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
 
         public string Name
         {
-            get
-            {
-                return _method.Name.GetString(_reader);
-            }
+            get { return _method.Name.GetString(_reader); }
         }
 
         public MetadataReader Reader
         {
-            get
-            {
-                return _reader;
-            }
+            get { return _reader; }
         }
 
         public MethodHandle MethodHandle
         {
-            get
-            {
-                return _methodHandle;
-            }
+            get { return _methodHandle; }
         }
 
         public bool HasSameMetadataDefinitionAs(NativeFormatMethodCommon other)
@@ -302,7 +324,8 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
             return true;
         }
 
-        public IEnumerable<CustomAttributeData> TrueCustomAttributes => RuntimeCustomAttributeData.GetCustomAttributes(_reader, _method.CustomAttributes);
+        public IEnumerable<CustomAttributeData> TrueCustomAttributes =>
+            RuntimeCustomAttributeData.GetCustomAttributes(_reader, _method.CustomAttributes);
 
         public override bool Equals(object obj)
         {
@@ -329,10 +352,7 @@ namespace System.Reflection.Runtime.MethodInfos.NativeFormat
 
         private MethodSignature MethodSignature
         {
-            get
-            {
-                return _method.Signature.GetMethodSignature(_reader);
-            }
+            get { return _method.Signature.GetMethodSignature(_reader); }
         }
 
         private readonly NativeFormatRuntimeNamedTypeInfo _definingTypeInfo;

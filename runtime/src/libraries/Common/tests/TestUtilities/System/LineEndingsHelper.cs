@@ -5,11 +5,15 @@ namespace System
 {
     public static class LineEndingsHelper
     {
-        public const string CompiledNewline = @"
+        public const string CompiledNewline =
+            @"
 ";
-        public static readonly bool s_consistentNewlines = StringComparer.Ordinal.Equals(CompiledNewline, Environment.NewLine);
+        public static readonly bool s_consistentNewlines = StringComparer.Ordinal.Equals(
+            CompiledNewline,
+            Environment.NewLine
+        );
 
-        static public bool IsNewLineConsistent
+        public static bool IsNewLineConsistent
         {
             get { return s_consistentNewlines; }
         }

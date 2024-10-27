@@ -12,7 +12,11 @@ namespace System.Web.WebPages.Test
 
         public HashVirtualPathFactory(params WebPageExecutingBase[] pages)
         {
-            _pages = pages.ToDictionary(p => p.VirtualPath, p => (object)p, StringComparer.OrdinalIgnoreCase);
+            _pages = pages.ToDictionary(
+                p => p.VirtualPath,
+                p => (object)p,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public bool Exists(string virtualPath)

@@ -22,9 +22,18 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                 public string FullName { get; private init; }
                 public MethodsToGen BindingOverload { get; private init; }
                 public BinderInvocation BinderInvocation { get; private init; }
-                public ContainingTypeDiagnosticInfo? ContainingTypeDiagnosticInfo { get; private init; }
+                public ContainingTypeDiagnosticInfo? ContainingTypeDiagnosticInfo
+                {
+                    get;
+                    private init;
+                }
 
-                public static TypeParseInfo Create(ITypeSymbol typeSymbol, MethodsToGen overload, BinderInvocation invocation, ContainingTypeDiagnosticInfo? containingTypeDiagInfo = null) =>
+                public static TypeParseInfo Create(
+                    ITypeSymbol typeSymbol,
+                    MethodsToGen overload,
+                    BinderInvocation invocation,
+                    ContainingTypeDiagnosticInfo? containingTypeDiagInfo = null
+                ) =>
                     new TypeParseInfo
                     {
                         TypeSymbol = typeSymbol,
@@ -34,7 +43,11 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
                         ContainingTypeDiagnosticInfo = containingTypeDiagInfo,
                     };
 
-                public TypeParseInfo ToTransitiveTypeParseInfo(ITypeSymbol memberType, DiagnosticDescriptor? diagDescriptor = null, string? memberName = null)
+                public TypeParseInfo ToTransitiveTypeParseInfo(
+                    ITypeSymbol memberType,
+                    DiagnosticDescriptor? diagDescriptor = null,
+                    string? memberName = null
+                )
                 {
                     ContainingTypeDiagnosticInfo? diagnosticInfo = diagDescriptor is null
                         ? null
@@ -65,19 +78,27 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
     internal static class ParserExtensions
     {
-        private static readonly SymbolDisplayFormat s_identifierCompatibleFormat = new SymbolDisplayFormat(
-            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-            genericsOptions: SymbolDisplayGenericsOptions.None,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_identifierCompatibleFormat =
+            new SymbolDisplayFormat(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+                genericsOptions: SymbolDisplayGenericsOptions.None,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
-        private static readonly SymbolDisplayFormat s_minimalDisplayFormat = new SymbolDisplayFormat(
-            globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
-            typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
-            genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
-            miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes);
+        private static readonly SymbolDisplayFormat s_minimalDisplayFormat =
+            new SymbolDisplayFormat(
+                globalNamespaceStyle: SymbolDisplayGlobalNamespaceStyle.Omitted,
+                typeQualificationStyle: SymbolDisplayTypeQualificationStyle.NameAndContainingTypes,
+                genericsOptions: SymbolDisplayGenericsOptions.IncludeTypeParameters,
+                miscellaneousOptions: SymbolDisplayMiscellaneousOptions.UseSpecialTypes
+            );
 
-        public static void RegisterCacheEntry<TKey, TValue, TEntry>(this Dictionary<TKey, TValue> cache, TKey key, TEntry entry)
+        public static void RegisterCacheEntry<TKey, TValue, TEntry>(
+            this Dictionary<TKey, TValue> cache,
+            TKey key,
+            TEntry entry
+        )
             where TKey : notnull
             where TValue : ICollection<TEntry>, new()
         {
@@ -122,9 +143,14 @@ namespace Microsoft.Extensions.Configuration.Binder.SourceGeneration
 
         public static (string DisplayString, string FullName) GetTypeNames(this ITypeSymbol type)
         {
-            string? @namespace = type.ContainingNamespace is { IsGlobalNamespace: false } containingNamespace ? containingNamespace.ToDisplayString() : null;
+            string? @namespace = type.ContainingNamespace
+                is { IsGlobalNamespace: false } containingNamespace
+                ? containingNamespace.ToDisplayString()
+                : null;
             string displayString = type.ToDisplayString(s_minimalDisplayFormat);
-            string fullname = (@namespace is null ? string.Empty : @namespace + ".") + displayString.Replace(".", "+");
+            string fullname =
+                (@namespace is null ? string.Empty : @namespace + ".")
+                + displayString.Replace(".", "+");
             return (displayString, fullname);
         }
 

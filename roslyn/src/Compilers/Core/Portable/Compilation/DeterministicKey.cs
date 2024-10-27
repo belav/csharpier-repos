@@ -16,14 +16,11 @@ namespace Microsoft.CodeAnalysis
         public abstract string FilePath { get; }
         public abstract ParseOptions Options { get; }
 
-        protected SyntaxTreeKey()
-        {
-        }
+        protected SyntaxTreeKey() { }
 
         public abstract SourceText GetText(CancellationToken cancellationToken = default);
 
-        public static SyntaxTreeKey Create(SyntaxTree tree)
-            => new DefaultSyntaxTreeKey(tree);
+        public static SyntaxTreeKey Create(SyntaxTree tree) => new DefaultSyntaxTreeKey(tree);
 
         private sealed class DefaultSyntaxTreeKey : SyntaxTreeKey
         {
@@ -34,14 +31,12 @@ namespace Microsoft.CodeAnalysis
                 _tree = tree;
             }
 
-            public override string FilePath
-                => _tree.FilePath;
+            public override string FilePath => _tree.FilePath;
 
-            public override ParseOptions Options
-                => _tree.Options;
+            public override ParseOptions Options => _tree.Options;
 
-            public override SourceText GetText(CancellationToken cancellationToken = default)
-                => _tree.GetText(cancellationToken);
+            public override SourceText GetText(CancellationToken cancellationToken = default) =>
+                _tree.GetText(cancellationToken);
         }
     }
 
@@ -58,7 +53,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<KeyValuePair<string, string>> pathMap = default,
             EmitOptions? emitOptions = null,
             DeterministicKeyOptions options = DeterministicKeyOptions.Default,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             return GetDeterministicKey(
                 compilationOptions,
@@ -71,7 +67,8 @@ namespace Microsoft.CodeAnalysis
                 pathMap,
                 emitOptions,
                 options,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public static string GetDeterministicKey(
@@ -85,7 +82,8 @@ namespace Microsoft.CodeAnalysis
             ImmutableArray<KeyValuePair<string, string>> pathMap = default,
             EmitOptions? emitOptions = null,
             DeterministicKeyOptions options = DeterministicKeyOptions.Default,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             var keyBuilder = compilationOptions.CreateDeterministicKeyBuilder();
             return keyBuilder.GetKey(
@@ -99,7 +97,8 @@ namespace Microsoft.CodeAnalysis
                 pathMap.NullToEmpty(),
                 emitOptions,
                 options,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

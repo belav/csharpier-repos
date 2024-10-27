@@ -22,9 +22,7 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="fileStream">The stream with the file.</param>
     /// <param name="contentType">The Content-Type of the file.</param>
     internal FileStreamHttpResult(Stream fileStream, string? contentType)
-        : this(fileStream, contentType, fileDownloadName: null)
-    {
-    }
+        : this(fileStream, contentType, fileDownloadName: null) { }
 
     /// <summary>
     /// Creates a new <see cref="FileStreamHttpResult"/> instance with
@@ -34,13 +32,8 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
     /// <param name="fileStream">The stream with the file.</param>
     /// <param name="contentType">The Content-Type header of the response.</param>
     /// <param name="fileDownloadName">The suggested file name.</param>
-    internal FileStreamHttpResult(
-        Stream fileStream,
-        string? contentType,
-        string? fileDownloadName)
-        : this(fileStream, contentType, fileDownloadName, enableRangeProcessing: false)
-    {
-    }
+    internal FileStreamHttpResult(Stream fileStream, string? contentType, string? fileDownloadName)
+        : this(fileStream, contentType, fileDownloadName, enableRangeProcessing: false) { }
 
     /// <summary>
     /// Creates a new <see cref="FileStreamHttpResult"/> instance with the provided values.
@@ -57,7 +50,8 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
         string? fileDownloadName,
         bool enableRangeProcessing,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         ArgumentNullException.ThrowIfNull(fileStream);
 
@@ -116,7 +110,9 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.FileStreamResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.FileStreamResult"
+        );
 
         await using (FileStream)
         {
@@ -128,7 +124,8 @@ public sealed class FileStreamHttpResult : IResult, IFileHttpResult, IContentTyp
                 ContentType,
                 EnableRangeProcessing,
                 LastModified,
-                EntityTag);
+                EntityTag
+            );
 
             if (!completed)
             {

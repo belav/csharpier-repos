@@ -10,15 +10,9 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Geometry)
-            .HasSrid(1);
+        modelBuilder.Entity<Customer>().Property(e => e.Geometry).HasSrid(1);
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property(e => e.Geometry)
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property(e => e.Geometry).Metadata;
 
         Assert.Equal(1, property.GetSrid());
     }
@@ -28,15 +22,9 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .Property<string>("Geometry")
-            .HasSrid(1);
+        modelBuilder.Entity<Customer>().Property<string>("Geometry").HasSrid(1);
 
-        var property = modelBuilder
-            .Entity<Customer>()
-            .Property<string>("Geometry")
-            .Metadata;
+        var property = modelBuilder.Entity<Customer>().Property<string>("Geometry").Metadata;
 
         Assert.Equal(1, property.GetSrid());
     }
@@ -46,10 +34,7 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = ((IConventionModel)CreateConventionModelBuilder().Model).Builder;
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .Property(typeof(string), "Geometry")
-            .HasSrid(1);
+        modelBuilder.Entity(typeof(Customer)).Property(typeof(string), "Geometry").HasSrid(1);
 
         var property = modelBuilder
             .Entity(typeof(Customer))
@@ -71,15 +56,11 @@ public class SqliteBuilderExtensionsTest
 
         Assert.True(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable(tb => tb.UseSqlReturningClause(false));
+        modelBuilder.Entity<Customer>().ToTable(tb => tb.UseSqlReturningClause(false));
 
         Assert.False(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable(tb => tb.UseSqlReturningClause());
+        modelBuilder.Entity<Customer>().ToTable(tb => tb.UseSqlReturningClause());
 
         Assert.True(entityType.IsSqlReturningClauseUsed());
     }
@@ -89,25 +70,19 @@ public class SqliteBuilderExtensionsTest
     {
         var modelBuilder = CreateConventionModelBuilder();
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("foo");
+        modelBuilder.Entity<Customer>().ToTable("foo");
         var entityType = modelBuilder.Model.FindEntityType(typeof(Customer))!;
         var tableIdentifier = StoreObjectIdentifier.Table("foo");
 
         Assert.True(entityType.IsSqlReturningClauseUsed(tableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("foo", tb => tb.UseSqlReturningClause(false));
+        modelBuilder.Entity<Customer>().ToTable("foo", tb => tb.UseSqlReturningClause(false));
 
         Assert.False(entityType.IsSqlReturningClauseUsed(tableIdentifier));
         Assert.False(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .ToTable("foo", tb => tb.UseSqlReturningClause());
+        modelBuilder.Entity<Customer>().ToTable("foo", tb => tb.UseSqlReturningClause());
 
         Assert.True(entityType.IsSqlReturningClauseUsed(tableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed());
@@ -131,17 +106,13 @@ public class SqliteBuilderExtensionsTest
         Assert.True(entityType.IsSqlReturningClauseUsed(barTableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .SplitToTable("bar", tb => tb.UseSqlReturningClause(false));
+        modelBuilder.Entity<Customer>().SplitToTable("bar", tb => tb.UseSqlReturningClause(false));
 
         Assert.False(entityType.IsSqlReturningClauseUsed(barTableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed(fooTableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity<Customer>()
-            .SplitToTable("bar", tb => tb.UseSqlReturningClause());
+        modelBuilder.Entity<Customer>().SplitToTable("bar", tb => tb.UseSqlReturningClause());
 
         Assert.True(entityType.IsSqlReturningClauseUsed(barTableIdentifier));
         Assert.True(entityType.IsSqlReturningClauseUsed(fooTableIdentifier));
@@ -158,23 +129,19 @@ public class SqliteBuilderExtensionsTest
 
         Assert.True(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .ToTable(tb => tb.UseSqlReturningClause(false));
+        modelBuilder.Entity(typeof(Customer)).ToTable(tb => tb.UseSqlReturningClause(false));
 
         Assert.False(entityType.IsSqlReturningClauseUsed());
 
-        modelBuilder
-            .Entity(typeof(Customer))
-            .ToTable(tb => tb.UseSqlReturningClause());
+        modelBuilder.Entity(typeof(Customer)).ToTable(tb => tb.UseSqlReturningClause());
 
         Assert.True(entityType.IsSqlReturningClauseUsed());
     }
 
     #endregion UseSqlReturningClause
 
-    protected virtual ModelBuilder CreateConventionModelBuilder()
-        => SqliteTestHelpers.Instance.CreateConventionBuilder();
+    protected virtual ModelBuilder CreateConventionModelBuilder() =>
+        SqliteTestHelpers.Instance.CreateConventionBuilder();
 
     private class Customer
     {

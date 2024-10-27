@@ -25,7 +25,12 @@ public class NormalController : Controller
 
     public NormalController(ArrayPool<char> charPool)
     {
-        _indentingFormatter = new NewtonsoftJsonOutputFormatter(_indentedSettings, charPool, new MvcOptions(), new MvcNewtonsoftJsonOptions());
+        _indentingFormatter = new NewtonsoftJsonOutputFormatter(
+            _indentedSettings,
+            charPool,
+            new MvcOptions(),
+            new MvcNewtonsoftJsonOptions()
+        );
     }
 
     public override void OnActionExecuted(ActionExecutedContext context)
@@ -72,11 +77,7 @@ public class NormalController : Controller
     [NonAction]
     public User CreateUser()
     {
-        User user = new User()
-        {
-            Name = "My name",
-            Address = "My address",
-        };
+        User user = new User() { Name = "My name", Address = "My address" };
 
         return user;
     }

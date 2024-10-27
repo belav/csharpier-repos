@@ -12,7 +12,8 @@ namespace System.Security.Cryptography
         public PbeParameters(
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithm,
-            int iterationCount)
+            int iterationCount
+        )
         {
             ArgumentOutOfRangeException.ThrowIfNegativeOrZero(iterationCount);
 

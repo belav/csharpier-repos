@@ -12,7 +12,5 @@ public class StartupStaticCtorThrows
         throw new Exception("Exception from static constructor");
     }
 
-    public void Configure(IApplicationBuilder app)
-    {
-    }
+    public void Configure(IApplicationBuilder app) { }
 }

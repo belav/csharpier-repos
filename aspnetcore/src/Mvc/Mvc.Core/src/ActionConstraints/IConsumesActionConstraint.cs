@@ -7,6 +7,4 @@ namespace Microsoft.AspNetCore.Mvc.ActionConstraints;
 /// An <see cref="IActionConstraint"/> constraint that identifies a type which can be used to select an action
 /// based on incoming request.
 /// </summary>
-internal interface IConsumesActionConstraint : IActionConstraint
-{
-}
+internal interface IConsumesActionConstraint : IActionConstraint { }

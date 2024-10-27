@@ -11,9 +11,7 @@ public class ApiExplorerModel
     /// <summary>
     /// Creates a new <see cref="ApiExplorerModel"/>.
     /// </summary>
-    public ApiExplorerModel()
-    {
-    }
+    public ApiExplorerModel() { }
 
     /// <summary>
     /// Creates a new <see cref="ApiExplorerModel"/> with properties copied from <paramref name="other"/>.

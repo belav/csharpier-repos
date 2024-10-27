@@ -67,12 +67,14 @@ namespace System.SpanTests
                 Span<TInt> firstSpan = new Span<TInt>(first);
                 ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                Assert.True(mode switch
-                {
-                    0 => firstSpan.SequenceEqual(secondSpan),
-                    1 => firstSpan.SequenceEqual(secondSpan, null),
-                    _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                });
+                Assert.True(
+                    mode switch
+                    {
+                        0 => firstSpan.SequenceEqual(secondSpan),
+                        1 => firstSpan.SequenceEqual(secondSpan, null),
+                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default),
+                    }
+                );
 
                 // Make sure each element of the array was compared once. (Strictly speaking, it would not be illegal for
                 // SequenceEqual to compare an element more than once but that would be a non-optimal implementation and
@@ -81,7 +83,10 @@ namespace System.SpanTests
                 foreach (TInt elem in first)
                 {
                     int numCompares = log.CountCompares(elem.Value, elem.Value);
-                    Assert.True(numCompares == 1, $"Expected {numCompares} == 1 for element {elem.Value}.");
+                    Assert.True(
+                        numCompares == 1,
+                        $"Expected {numCompares} == 1 for element {elem.Value}."
+                    );
                 }
             }
         }
@@ -110,14 +115,22 @@ namespace System.SpanTests
                     Span<TInt> firstSpan = new Span<TInt>(first);
                     ReadOnlySpan<TInt> secondSpan = new ReadOnlySpan<TInt>(second);
 
-                    Assert.False(mode switch
-                    {
-                        0 => firstSpan.SequenceEqual(secondSpan),
-                        1 => firstSpan.SequenceEqual(secondSpan, null),
-                        _ => firstSpan.SequenceEqual(secondSpan, EqualityComparer<TInt>.Default)
-                    });
+                    Assert.False(
+                        mode switch
+                        {
+                            0 => firstSpan.SequenceEqual(secondSpan),
+                            1 => firstSpan.SequenceEqual(secondSpan, null),
+                            _ => firstSpan.SequenceEqual(
+                                secondSpan,
+                                EqualityComparer<TInt>.Default
+                            ),
+                        }
+                    );
 
-                    Assert.Equal(1, log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value));
+                    Assert.Equal(
+                        1,
+                        log.CountCompares(first[mismatchIndex].Value, second[mismatchIndex].Value)
+                    );
                 }
             }
         }
@@ -128,12 +141,11 @@ namespace System.SpanTests
             const int GuardValue = 77777;
             const int GuardLength = 50;
 
-            Action<int, int> checkForOutOfRangeAccess =
-                delegate (int x, int y)
-                {
-                    if (x == GuardValue || y == GuardValue)
-                        throw new Exception("Detected out of range access in IndexOf()");
-                };
+            Action<int, int> checkForOutOfRangeAccess = delegate(int x, int y)
+            {
+                if (x == GuardValue || y == GuardValue)
+                    throw new Exception("Detected out of range access in IndexOf()");
+            };
 
             for (int length = 0; length < 100; length++)
             {
@@ -146,7 +158,10 @@ namespace System.SpanTests
 
                 for (int i = 0; i < length; i++)
                 {
-                    first[GuardLength + i] = second[GuardLength + i] = new TInt(10 * (i + 1), checkForOutOfRangeAccess);
+                    first[GuardLength + i] = second[GuardLength + i] = new TInt(
+                        10 * (i + 1),
+                        checkForOutOfRangeAccess
+                    );
                 }
 
                 Span<TInt> firstSpan = new Span<TInt>(first, GuardLength, length);
@@ -160,7 +175,11 @@ namespace System.SpanTests
 
         [Theory]
         [MemberData(nameof(TestHelpers.SequenceEqualsNullData), MemberType = typeof(TestHelpers))]
-        public static void SequenceEqualsNullData_String(string[] firstInput, string[] secondInput, bool expected)
+        public static void SequenceEqualsNullData_String(
+            string[] firstInput,
+            string[] secondInput,
+            bool expected
+        )
         {
             Span<string> theStrings = firstInput;
 
@@ -168,30 +187,50 @@ namespace System.SpanTests
             Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput));
 
             Assert.Equal(expected, theStrings.SequenceEqual(secondInput, null));
-            Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, null));
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, null)
+            );
 
-            Assert.Equal(expected, theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default));
-            Assert.Equal(expected, theStrings.SequenceEqual((ReadOnlySpan<string>)secondInput, EqualityComparer<string>.Default));
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual(secondInput, EqualityComparer<string>.Default)
+            );
+            Assert.Equal(
+                expected,
+                theStrings.SequenceEqual(
+                    (ReadOnlySpan<string>)secondInput,
+                    EqualityComparer<string>.Default
+                )
+            );
         }
 
         [Theory]
         [InlineData(100)]
         public static void SequenceEquals_OverriddenEqualsReturnsFalse_EqualsFalse(int length)
         {
-            Span<StructOverridingEqualsToAlwaysReturnFalse> span1 = Enumerable.Range(0, length).Select(i => new StructOverridingEqualsToAlwaysReturnFalse()).ToArray();
+            Span<StructOverridingEqualsToAlwaysReturnFalse> span1 = Enumerable
+                .Range(0, length)
+                .Select(i => new StructOverridingEqualsToAlwaysReturnFalse())
+                .ToArray();
             Assert.False(span1.SequenceEqual(span1.ToArray()));
 
-            Span<StructImplementingIEquatableToAlwaysReturnFalse> span2 = Enumerable.Range(0, length).Select(i => new StructImplementingIEquatableToAlwaysReturnFalse()).ToArray();
+            Span<StructImplementingIEquatableToAlwaysReturnFalse> span2 = Enumerable
+                .Range(0, length)
+                .Select(i => new StructImplementingIEquatableToAlwaysReturnFalse())
+                .ToArray();
             Assert.False(span2.SequenceEqual(span2.ToArray()));
         }
 
         private struct StructOverridingEqualsToAlwaysReturnFalse
         {
             public override bool Equals([NotNullWhen(true)] object? obj) => false;
+
             public override int GetHashCode() => 0;
         }
 
-        private struct StructImplementingIEquatableToAlwaysReturnFalse : IEquatable<StructImplementingIEquatableToAlwaysReturnFalse>
+        private struct StructImplementingIEquatableToAlwaysReturnFalse
+            : IEquatable<StructImplementingIEquatableToAlwaysReturnFalse>
         {
             public bool Equals(StructImplementingIEquatableToAlwaysReturnFalse other) => false;
         }
@@ -224,15 +263,21 @@ namespace System.SpanTests
 
         private struct StructWithOddFieldSize
         {
-            public byte Value1, Value2, Value3;
+            public byte Value1,
+                Value2,
+                Value3;
         }
 
         [Theory]
         [InlineData(100)]
-        public static void SequenceEquals_StructWithOddFieldSizeAndIEquatable_EqualsAsExpected(int length)
+        public static void SequenceEquals_StructWithOddFieldSizeAndIEquatable_EqualsAsExpected(
+            int length
+        )
         {
-            Span<StructWithOddFieldSizeAndIEquatable> span1 = new StructWithOddFieldSizeAndIEquatable[length];
-            Span<StructWithOddFieldSizeAndIEquatable> span2 = new StructWithOddFieldSizeAndIEquatable[length];
+            Span<StructWithOddFieldSizeAndIEquatable> span1 =
+                new StructWithOddFieldSizeAndIEquatable[length];
+            Span<StructWithOddFieldSizeAndIEquatable> span2 =
+                new StructWithOddFieldSizeAndIEquatable[length];
 
             MemoryMarshal.AsBytes(span1).Fill(0);
             MemoryMarshal.AsBytes(span2).Fill(0xFF);
@@ -253,31 +298,32 @@ namespace System.SpanTests
             Assert.False(span2.SequenceEqual(span1));
         }
 
-        private struct StructWithOddFieldSizeAndIEquatable : IEquatable<StructWithOddFieldSizeAndIEquatable>
+        private struct StructWithOddFieldSizeAndIEquatable
+            : IEquatable<StructWithOddFieldSizeAndIEquatable>
         {
             public int Value1;
             public short Value2;
             public byte Value3;
 
             public bool Equals(StructWithOddFieldSizeAndIEquatable other) =>
-                Value1 == other.Value1 &&
-                Value2 == other.Value2 &&
-                Value3 == other.Value3;
+                Value1 == other.Value1 && Value2 == other.Value2 && Value3 == other.Value3;
 
             public override bool Equals([NotNullWhen(true)] object? obj) =>
-                obj is StructWithOddFieldSizeAndIEquatable other &&
-                Equals(other);
+                obj is StructWithOddFieldSizeAndIEquatable other && Equals(other);
 
-            public override int GetHashCode() =>
-                HashCode.Combine(Value1, Value2, Value3);
+            public override int GetHashCode() => HashCode.Combine(Value1, Value2, Value3);
         }
 
         [Theory]
         [InlineData(100)]
-        public static void SequenceEquals_StructWithExplicitFieldSizeAndNoFields_EqualsAsExpected(int length)
+        public static void SequenceEquals_StructWithExplicitFieldSizeAndNoFields_EqualsAsExpected(
+            int length
+        )
         {
-            Span<StructWithExplicitFieldSizeAndNoFields> span1 = new StructWithExplicitFieldSizeAndNoFields[length];
-            Span<StructWithExplicitFieldSizeAndNoFields> span2 = new StructWithExplicitFieldSizeAndNoFields[length];
+            Span<StructWithExplicitFieldSizeAndNoFields> span1 =
+                new StructWithExplicitFieldSizeAndNoFields[length];
+            Span<StructWithExplicitFieldSizeAndNoFields> span2 =
+                new StructWithExplicitFieldSizeAndNoFields[length];
 
             MemoryMarshal.AsBytes(span1).Fill(0);
             MemoryMarshal.AsBytes(span2).Fill(0xFF);
@@ -287,16 +333,18 @@ namespace System.SpanTests
         }
 
         [StructLayout(LayoutKind.Sequential, Size = 64)]
-        private struct StructWithExplicitFieldSizeAndNoFields
-        {
-        }
+        private struct StructWithExplicitFieldSizeAndNoFields { }
 
         [Theory]
         [InlineData(100)]
-        public static void SequenceEquals_StructWithExplicitFieldSizeAndFields_EqualsAsExpected(int length)
+        public static void SequenceEquals_StructWithExplicitFieldSizeAndFields_EqualsAsExpected(
+            int length
+        )
         {
-            Span<StructWithExplicitFieldSizeAndFields> span1 = new StructWithExplicitFieldSizeAndFields[length];
-            Span<StructWithExplicitFieldSizeAndFields> span2 = new StructWithExplicitFieldSizeAndFields[length];
+            Span<StructWithExplicitFieldSizeAndFields> span1 =
+                new StructWithExplicitFieldSizeAndFields[length];
+            Span<StructWithExplicitFieldSizeAndFields> span2 =
+                new StructWithExplicitFieldSizeAndFields[length];
 
             MemoryMarshal.AsBytes(span1).Fill(0);
             MemoryMarshal.AsBytes(span2).Fill(0xFF);

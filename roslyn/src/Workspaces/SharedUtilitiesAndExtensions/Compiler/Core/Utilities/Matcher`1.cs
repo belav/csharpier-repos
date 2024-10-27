@@ -19,8 +19,7 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
         // matcher does not need to consume to the end of the sequence to succeed.
         public abstract bool TryMatch(IList<T> sequence, ref int index);
 
-        internal static Matcher<T> Repeat(Matcher<T> matcher)
-            => new RepeatMatcher(matcher);
+        internal static Matcher<T> Repeat(Matcher<T> matcher) => new RepeatMatcher(matcher);
 
         internal static Matcher<T> OneOrMore(Matcher<T> matcher)
         {
@@ -28,13 +27,13 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return Sequence(matcher, Repeat(matcher));
         }
 
-        internal static Matcher<T> Choice(params Matcher<T>[] matchers)
-            => new ChoiceMatcher(matchers);
+        internal static Matcher<T> Choice(params Matcher<T>[] matchers) =>
+            new ChoiceMatcher(matchers);
 
-        internal static Matcher<T> Sequence(params Matcher<T>[] matchers)
-            => new SequenceMatcher(matchers);
+        internal static Matcher<T> Sequence(params Matcher<T>[] matchers) =>
+            new SequenceMatcher(matchers);
 
-        internal static Matcher<T> Single(Func<T, bool> predicate, string description)
-            => new SingleMatcher(predicate, description);
+        internal static Matcher<T> Single(Func<T, bool> predicate, string description) =>
+            new SingleMatcher(predicate, description);
     }
 }

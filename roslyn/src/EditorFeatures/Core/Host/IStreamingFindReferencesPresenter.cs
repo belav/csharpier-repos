@@ -23,7 +23,7 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// Tells the presenter that a search is starting.  The returned <see cref="FindUsagesContext"/>
         /// is used to push information about the search into.  i.e. when a reference is found
         /// <see cref="FindUsagesContext.OnReferenceFoundAsync"/> should be called.  When the
-        /// search completes <see cref="FindUsagesContext.OnCompletedAsync"/> should be called. 
+        /// search completes <see cref="FindUsagesContext.OnCompletedAsync"/> should be called.
         /// etc. etc.
         /// </summary>
         /// <param name="title">A title to display to the user in the presentation of the results.</param>
@@ -38,12 +38,23 @@ namespace Microsoft.CodeAnalysis.Editor.Host
         /// asynchronously and thus relinquish their own control over cancellation from their own
         /// surrounding context.  If the caller intends to populate the presenter synchronously,
         /// then this cancellation token can be ignored.</returns>
-        (FindUsagesContext context, CancellationToken cancellationToken) StartSearch(string title, bool supportsReferences);
+        (FindUsagesContext context, CancellationToken cancellationToken) StartSearch(
+            string title,
+            bool supportsReferences
+        );
 
         /// <summary>
         /// Call this method to display the Containing Type, Containing Member, or Kind columns
         /// </summary>
-        (FindUsagesContext context, CancellationToken cancellationToken) StartSearchWithCustomColumns(string title, bool supportsReferences, bool includeContainingTypeAndMemberColumns, bool includeKindColumn);
+        (
+            FindUsagesContext context,
+            CancellationToken cancellationToken
+        ) StartSearchWithCustomColumns(
+            string title,
+            bool supportsReferences,
+            bool includeContainingTypeAndMemberColumns,
+            bool includeKindColumn
+        );
 
         /// <summary>
         /// Clears all the items from the presenter.
@@ -59,12 +70,25 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             Workspace workspace,
             string title,
             ImmutableArray<DefinitionItem> items,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var location = await presenter.GetStreamingLocationAsync(
-                threadingContext, workspace, title, items, cancellationToken).ConfigureAwait(false);
-            return await location.TryNavigateToAsync(
-                threadingContext, new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true), cancellationToken).ConfigureAwait(false);
+            var location = await presenter
+                .GetStreamingLocationAsync(
+                    threadingContext,
+                    workspace,
+                    title,
+                    items,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            return await location
+                .TryNavigateToAsync(
+                    threadingContext,
+                    new NavigationOptions(PreferProvisionalTab: true, ActivateTab: true),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
@@ -77,16 +101,24 @@ namespace Microsoft.CodeAnalysis.Editor.Host
             Workspace workspace,
             string title,
             ImmutableArray<DefinitionItem> items,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (items.IsDefaultOrEmpty)
                 return null;
 
-            using var _ = ArrayBuilder<(DefinitionItem item, INavigableLocation location)>.GetInstance(out var builder);
+            using var _ = ArrayBuilder<(
+                DefinitionItem item,
+                INavigableLocation location
+            )>.GetInstance(out var builder);
             foreach (var item in items)
             {
                 // Ignore any definitions that we can't navigate to.
-                var navigableItem = await item.GetNavigableLocationAsync(workspace, cancellationToken).ConfigureAwait(false);
+                var navigableItem = await item.GetNavigableLocationAsync(
+                        workspace,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (navigableItem != null)
                 {
                     // If there's a third party external item we can navigate to.  Defer to that item and finish.
@@ -111,29 +143,35 @@ namespace Microsoft.CodeAnalysis.Editor.Host
                 return null;
 
             var navigableItems = builder.SelectAsArray(t => t.item);
-            return new NavigableLocation(async (options, cancellationToken) =>
-            {
-                // Can only navigate or present items on UI thread.
-                await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(cancellationToken);
-
-                // We have multiple definitions, or we have definitions with multiple locations. Present this to the
-                // user so they can decide where they want to go to.
-                //
-                // We ignore the cancellation token returned by StartSearch as we're in a context where
-                // we've computed all the results and we're synchronously populating the UI with it.
-                var (context, _) = presenter.StartSearch(title, supportsReferences: false);
-                try
+            return new NavigableLocation(
+                async (options, cancellationToken) =>
                 {
-                    foreach (var item in navigableItems)
-                        await context.OnDefinitionFoundAsync(item, cancellationToken).ConfigureAwait(false);
-                }
-                finally
-                {
-                    await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
-                }
+                    // Can only navigate or present items on UI thread.
+                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationToken
+                    );
 
-                return true;
-            });
+                    // We have multiple definitions, or we have definitions with multiple locations. Present this to the
+                    // user so they can decide where they want to go to.
+                    //
+                    // We ignore the cancellation token returned by StartSearch as we're in a context where
+                    // we've computed all the results and we're synchronously populating the UI with it.
+                    var (context, _) = presenter.StartSearch(title, supportsReferences: false);
+                    try
+                    {
+                        foreach (var item in navigableItems)
+                            await context
+                                .OnDefinitionFoundAsync(item, cancellationToken)
+                                .ConfigureAwait(false);
+                    }
+                    finally
+                    {
+                        await context.OnCompletedAsync(cancellationToken).ConfigureAwait(false);
+                    }
+
+                    return true;
+                }
+            );
         }
     }
 }

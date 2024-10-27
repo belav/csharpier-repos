@@ -17,7 +17,9 @@ public class ClientValidationOptionsTests : IClassFixture<MvcTestFixture<RazorPa
     {
         // Arrange
         var client = Fixture
-            .WithWebHostBuilder(whb => whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>())
+            .WithWebHostBuilder(whb =>
+                whb.UseStartup<RazorPagesWebSite.StartupWithClientValidationDisabled>()
+            )
             .CreateClient();
 
         // Act

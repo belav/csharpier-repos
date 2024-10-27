@@ -5,11 +5,11 @@
 namespace System.ServiceModel.Diagnostics
 {
     using System.Diagnostics;
+    using System.Diagnostics.PerformanceData;
     using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Activation;
     using System.ServiceModel.Administration;
-    using System.Diagnostics.PerformanceData;
 
     abstract class ServicePerformanceCountersBase : PerformanceCountersBase
     {
@@ -56,10 +56,10 @@ namespace System.ServiceModel.Diagnostics
             InstancesPercentMaxInstancesBase,
             SessionsPercentMaxSessions,
             SessionsPercentMaxSessionsBase,
-            TotalCounters = SessionsPercentMaxSessionsBase + 1
+            TotalCounters = SessionsPercentMaxSessionsBase + 1,
         }
 
-        protected static readonly string[] perfCounterNames = 
+        protected static readonly string[] perfCounterNames =
         {
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCalls,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCallsPerSecond,
@@ -71,7 +71,9 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCallDuration,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SCallDurationBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityValidationAuthenticationFailures,
-            PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityValidationAuthenticationFailuresPerSecond,
+            PerformanceCounterStrings
+                .SERVICEMODELSERVICE
+                .SSecurityValidationAuthenticationFailuresPerSecond,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityCallsNotAuthorized,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SSecurityCallsNotAuthorizedPerSecond,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SInstances,
@@ -97,19 +99,22 @@ namespace System.ServiceModel.Diagnostics
             PerformanceCounterStrings.SERVICEMODELSERVICE.CallsPercentMaxConcurrentCalls,
             PerformanceCounterStrings.SERVICEMODELSERVICE.CallsPercentMaxConcurrentCallsBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.InstancesPercentMaxConcurrentInstances,
-            PerformanceCounterStrings.SERVICEMODELSERVICE.InstancesPercentMaxConcurrentInstancesBase,
+            PerformanceCounterStrings
+                .SERVICEMODELSERVICE
+                .InstancesPercentMaxConcurrentInstancesBase,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SessionsPercentMaxConcurrentSessions,
             PerformanceCounterStrings.SERVICEMODELSERVICE.SessionsPercentMaxConcurrentSessionsBase,
         };
 
         const int maxCounterLength = 64;
         const int hashLength = 2;
+
         [Flags]
         enum truncOptions : uint
         {
             NoBits = 0,
             service32 = 0x01,
-            uri31 = 0x04
+            uri31 = 0x04,
         }
 
         internal ServicePerformanceCountersBase(ServiceHostBase serviceHost)
@@ -119,18 +124,12 @@ namespace System.ServiceModel.Diagnostics
 
         internal override string InstanceName
         {
-            get
-            {
-                return this.instanceName;
-            }
+            get { return this.instanceName; }
         }
 
         internal override string[] CounterNames
         {
-            get
-            {
-                return perfCounterNames;
-            }
+            get { return perfCounterNames; }
         }
 
         internal override int PerfCounterStart
@@ -175,13 +174,21 @@ namespace System.ServiceModel.Diagnostics
                 int count = 0;
 
                 truncOptions tasks = ServicePerformanceCountersBase.GetCompressionTasks(
-                    length, serviceName.Length, uri.Length);
+                    length,
+                    serviceName.Length,
+                    uri.Length
+                );
 
                 //if necessary, compress service name to 8 chars with a 2 char hash code
                 if ((tasks & truncOptions.service32) > 0)
                 {
                     count = 32;
-                    serviceName = GetHashedString(serviceName, count - hashLength, serviceName.Length - count + hashLength, true);
+                    serviceName = GetHashedString(
+                        serviceName,
+                        count - hashLength,
+                        serviceName.Length - count + hashLength,
+                        true
+                    );
                 }
 
                 //if necessary,  compress uri to 36 chars with a 2 char hash code
@@ -206,7 +213,11 @@ namespace System.ServiceModel.Diagnostics
 
             string fullInstanceName = GetFullInstanceName(serviceHost);
 
-            return EnsureUniqueInstanceName(PerformanceCounterStrings.SERVICEMODELSERVICE.ServicePerfCounters, shortInstanceName, fullInstanceName);
+            return EnsureUniqueInstanceName(
+                PerformanceCounterStrings.SERVICEMODELSERVICE.ServicePerfCounters,
+                shortInstanceName,
+                fullInstanceName
+            );
         }
 
         internal static string GetFriendlyInstanceName(ServiceHostBase serviceHost)
@@ -219,18 +230,25 @@ namespace System.ServiceModel.Diagnostics
 
             string fullInstanceName = GetFullInstanceName(serviceHost);
 
-            return GetUniqueInstanceName(PerformanceCounterStrings.SERVICEMODELSERVICE.ServicePerfCounters, shortInstanceName, fullInstanceName);
+            return GetUniqueInstanceName(
+                PerformanceCounterStrings.SERVICEMODELSERVICE.ServicePerfCounters,
+                shortInstanceName,
+                fullInstanceName
+            );
         }
 
         static bool TryGetFullVirtualPath(ServiceHostBase serviceHost, out string uri)
         {
-            VirtualPathExtension pathExtension = serviceHost.Extensions.Find<VirtualPathExtension>();
+            VirtualPathExtension pathExtension =
+                serviceHost.Extensions.Find<VirtualPathExtension>();
             if (pathExtension == null)
             {
                 uri = null;
                 return false;
             }
-            uri = pathExtension.ApplicationVirtualPath + pathExtension.VirtualPath.ToString().Replace("~", "");
+            uri =
+                pathExtension.ApplicationVirtualPath
+                + pathExtension.VirtualPath.ToString().Replace("~", "");
             return uri != null;
         }
 

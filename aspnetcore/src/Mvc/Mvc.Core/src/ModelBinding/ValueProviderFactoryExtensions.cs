@@ -15,7 +15,8 @@ public static class ValueProviderFactoryExtensions
     /// </summary>
     /// <param name="list">The list of <see cref="IValueProviderFactory"/>.</param>
     /// <typeparam name="TValueProviderFactory">The type to remove.</typeparam>
-    public static void RemoveType<TValueProviderFactory>(this IList<IValueProviderFactory> list) where TValueProviderFactory : IValueProviderFactory
+    public static void RemoveType<TValueProviderFactory>(this IList<IValueProviderFactory> list)
+        where TValueProviderFactory : IValueProviderFactory
     {
         ArgumentNullException.ThrowIfNull(list);
 

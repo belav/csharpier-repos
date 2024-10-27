@@ -16,12 +16,16 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
             var userSecretsId = "abcxyz123";
             var actualSecretPath = PathHelper.GetSecretsPathFromSecretsId(userSecretsId);
 
-            var root = Environment.GetEnvironmentVariable("APPDATA") ??         // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
-                        Environment.GetEnvironmentVariable("HOME");             // On Mac/Linux it goes to ~/.microsoft/usersecrets/
+            var root =
+                Environment.GetEnvironmentVariable("APPDATA")
+                ?? // On Windows it goes to %APPDATA%\Microsoft\UserSecrets\
+                Environment.GetEnvironmentVariable("HOME"); // On Mac/Linux it goes to ~/.microsoft/usersecrets/
 
-            var expectedSecretPath = !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("APPDATA")) ?
-                Path.Combine(root, "Microsoft", "UserSecrets", userSecretsId, "secrets.json") :
-                Path.Combine(root, ".microsoft", "usersecrets", userSecretsId, "secrets.json");
+            var expectedSecretPath = !string.IsNullOrEmpty(
+                Environment.GetEnvironmentVariable("APPDATA")
+            )
+                ? Path.Combine(root, "Microsoft", "UserSecrets", userSecretsId, "secrets.json")
+                : Path.Combine(root, ".microsoft", "usersecrets", userSecretsId, "secrets.json");
 
             Assert.Equal(expectedSecretPath, actualSecretPath);
         }
@@ -29,10 +33,14 @@ namespace Microsoft.Extensions.Configuration.UserSecrets.Test
         [Fact]
         public void Throws_If_UserSecretId_Contains_Invalid_Characters()
         {
-            foreach (var character in Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars()))
+            foreach (
+                var character in Path.GetInvalidPathChars().Concat(Path.GetInvalidFileNameChars())
+            )
             {
                 var id = "Test" + character;
-                Assert.Throws<InvalidOperationException>(() => PathHelper.GetSecretsPathFromSecretsId(id));
+                Assert.Throws<InvalidOperationException>(
+                    () => PathHelper.GetSecretsPathFromSecretsId(id)
+                );
             }
         }
     }

@@ -4,7 +4,6 @@
 using System;
 using System.Linq.Expressions;
 using System.Text;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -16,16 +15,20 @@ namespace Moq.Tests
         {
             // foo => foo.set_Item("index", "value")
             var foo = Expression.Parameter(typeof(IFoo), "foo");
-            var expression =
-                Expression.Lambda<Action<IFoo>>(
-                    Expression.Call(
-                        foo,
-                        typeof(IFoo).GetProperty("Item").SetMethod,
-                        Expression.Constant("index"),
-                        Expression.Constant("value")),
-                    foo);
+            var expression = Expression.Lambda<Action<IFoo>>(
+                Expression.Call(
+                    foo,
+                    typeof(IFoo).GetProperty("Item").SetMethod,
+                    Expression.Constant("index"),
+                    Expression.Constant("value")
+                ),
+                foo
+            );
 
-            Assert.Equal(@"foo => foo[""index""] = ""value""", GetAppendExpressionResult(expression));
+            Assert.Equal(
+                @"foo => foo[""index""] = ""value""",
+                GetAppendExpressionResult(expression)
+            );
         }
 
         [Fact]
@@ -35,7 +38,8 @@ namespace Moq.Tests
             var expression = Expression.Condition(
                 Expression.Equal(Expression.Constant(1), Expression.Constant(2)),
                 Expression.Constant(3),
-                Expression.Constant(4));
+                Expression.Constant(4)
+            );
 
             Assert.Equal(@"1 == 2 ? 3 : 4", GetAppendExpressionResult(expression));
         }

@@ -15,8 +15,7 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 /// </summary>
 public sealed class TimeoutManager
 {
-    private static readonly int TimeoutLimitSize =
-        Marshal.SizeOf<HTTP_TIMEOUT_LIMIT_INFO>();
+    private static readonly int TimeoutLimitSize = Marshal.SizeOf<HTTP_TIMEOUT_LIMIT_INFO>();
 
     private UrlGroup? _urlGroup;
     private readonly int[] _timeouts;
@@ -46,14 +45,8 @@ public sealed class TimeoutManager
     /// </summary>
     public TimeSpan EntityBody
     {
-        get
-        {
-            return GetTimeSpanTimeout(TimeoutType.EntityBody);
-        }
-        set
-        {
-            SetTimeSpanTimeout(TimeoutType.EntityBody, value);
-        }
+        get { return GetTimeSpanTimeout(TimeoutType.EntityBody); }
+        set { SetTimeSpanTimeout(TimeoutType.EntityBody, value); }
     }
 
     /// <summary>
@@ -69,14 +62,8 @@ public sealed class TimeoutManager
     /// </summary>
     public TimeSpan DrainEntityBody
     {
-        get
-        {
-            return GetTimeSpanTimeout(TimeoutType.DrainEntityBody);
-        }
-        set
-        {
-            SetTimeSpanTimeout(TimeoutType.DrainEntityBody, value);
-        }
+        get { return GetTimeSpanTimeout(TimeoutType.DrainEntityBody); }
+        set { SetTimeSpanTimeout(TimeoutType.DrainEntityBody, value); }
     }
 
     /// <summary>
@@ -87,14 +74,8 @@ public sealed class TimeoutManager
     /// </summary>
     public TimeSpan RequestQueue
     {
-        get
-        {
-            return GetTimeSpanTimeout(TimeoutType.RequestQueue);
-        }
-        set
-        {
-            SetTimeSpanTimeout(TimeoutType.RequestQueue, value);
-        }
+        get { return GetTimeSpanTimeout(TimeoutType.RequestQueue); }
+        set { SetTimeSpanTimeout(TimeoutType.RequestQueue, value); }
     }
 
     /// <summary>
@@ -106,14 +87,8 @@ public sealed class TimeoutManager
     /// </summary>
     public TimeSpan IdleConnection
     {
-        get
-        {
-            return GetTimeSpanTimeout(TimeoutType.IdleConnection);
-        }
-        set
-        {
-            SetTimeSpanTimeout(TimeoutType.IdleConnection, value);
-        }
+        get { return GetTimeSpanTimeout(TimeoutType.IdleConnection); }
+        set { SetTimeSpanTimeout(TimeoutType.IdleConnection, value); }
     }
 
     /// <summary>
@@ -126,14 +101,8 @@ public sealed class TimeoutManager
     /// </summary>
     public TimeSpan HeaderWait
     {
-        get
-        {
-            return GetTimeSpanTimeout(TimeoutType.HeaderWait);
-        }
-        set
-        {
-            SetTimeSpanTimeout(TimeoutType.HeaderWait, value);
-        }
+        get { return GetTimeSpanTimeout(TimeoutType.HeaderWait); }
+        set { SetTimeSpanTimeout(TimeoutType.HeaderWait, value); }
     }
 
     /// <summary>
@@ -216,14 +185,16 @@ public sealed class TimeoutManager
             RequestQueue = (ushort)timeouts[(int)TimeoutType.RequestQueue],
             IdleConnection = (ushort)timeouts[(int)TimeoutType.IdleConnection],
             HeaderWait = (ushort)timeouts[(int)TimeoutType.HeaderWait],
-            MinSendRate = minSendBytesPerSecond
+            MinSendRate = minSendBytesPerSecond,
         };
 
         var infoptr = new IntPtr(&timeoutinfo);
 
         _urlGroup.SetProperty(
             HTTP_SERVER_PROPERTY.HttpServerTimeoutsProperty,
-            infoptr, (uint)TimeoutLimitSize);
+            infoptr,
+            (uint)TimeoutLimitSize
+        );
     }
 
     private enum TimeoutType : int

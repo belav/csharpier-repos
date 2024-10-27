@@ -36,11 +36,15 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     else
                     {
                         // If it comes from somewhere else we walk through the ComposablePartDefinition
-                        var factoryPartDefinition = ExportServices.GetCastedExportedValue<ComposablePartDefinition>(export);
+                        var factoryPartDefinition =
+                            ExportServices.GetCastedExportedValue<ComposablePartDefinition>(export);
                         var part = factoryPartDefinition.CreatePart();
                         var exportDef = factoryPartDefinition.ExportDefinitions.Single();
 
-                        exportedValue = ExportServices.CastExportedValue<T>(part.ToElement(), part.GetExportedValue(exportDef));
+                        exportedValue = ExportServices.CastExportedValue<T>(
+                            part.ToElement(),
+                            part.GetExportedValue(exportDef)
+                        );
                         disposable = part as IDisposable;
                     }
                 }

@@ -17,10 +17,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -35,194 +35,220 @@ using System.Web.Util;
 
 namespace System.Web
 {
-	public abstract class StaticSiteMapProvider : SiteMapProvider
-	{
-		Dictionary<string, SiteMapNode> keyToNode;
-		Dictionary<SiteMapNode, SiteMapNode> nodeToParent;
-		Dictionary<SiteMapNode, SiteMapNodeCollection> nodeToChildren;
-		Dictionary<string, SiteMapNode> urlToNode;
-		
-		protected StaticSiteMapProvider ()
-		{
-			keyToNode = new Dictionary<string, SiteMapNode> ();
-			nodeToParent = new Dictionary<SiteMapNode, SiteMapNode> ();
-			nodeToChildren = new Dictionary<SiteMapNode, SiteMapNodeCollection> ();
-			urlToNode = new Dictionary<string, SiteMapNode> (StringComparer.InvariantCultureIgnoreCase);
-		}
+    public abstract class StaticSiteMapProvider : SiteMapProvider
+    {
+        Dictionary<string, SiteMapNode> keyToNode;
+        Dictionary<SiteMapNode, SiteMapNode> nodeToParent;
+        Dictionary<SiteMapNode, SiteMapNodeCollection> nodeToChildren;
+        Dictionary<string, SiteMapNode> urlToNode;
 
-		internal protected override void AddNode (SiteMapNode node, SiteMapNode parentNode)
-		{
-			if (node == null)
-				throw new ArgumentNullException ("node");
+        protected StaticSiteMapProvider()
+        {
+            keyToNode = new Dictionary<string, SiteMapNode>();
+            nodeToParent = new Dictionary<SiteMapNode, SiteMapNode>();
+            nodeToChildren = new Dictionary<SiteMapNode, SiteMapNodeCollection>();
+            urlToNode = new Dictionary<string, SiteMapNode>(
+                StringComparer.InvariantCultureIgnoreCase
+            );
+        }
 
-			lock (this_lock) {
-				string nodeKey = node.Key;
-				if (FindSiteMapNodeFromKey (nodeKey) != null && node.Provider == this)
-					throw new InvalidOperationException (string.Format ("A node with key '{0}' already exists.",nodeKey));
+        protected internal override void AddNode(SiteMapNode node, SiteMapNode parentNode)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-				string nodeUrl = node.Url;
-				if (!String.IsNullOrEmpty (nodeUrl)) {
-					string url = MapUrl (nodeUrl);
-					SiteMapNode foundNode = FindSiteMapNode (url);
-					if (foundNode != null && String.Compare (foundNode.Url, url, RuntimeHelpers.StringComparison) == 0)
-						throw new InvalidOperationException (String.Format (
-							"Multiple nodes with the same URL '{0}' were found. " + 
-							"StaticSiteMapProvider requires that sitemap nodes have unique URLs.",
-							node.Url
-						));
+            lock (this_lock)
+            {
+                string nodeKey = node.Key;
+                if (FindSiteMapNodeFromKey(nodeKey) != null && node.Provider == this)
+                    throw new InvalidOperationException(
+                        string.Format("A node with key '{0}' already exists.", nodeKey)
+                    );
 
-					urlToNode.Add (url, node);
-				}
-				keyToNode.Add (nodeKey, node);
+                string nodeUrl = node.Url;
+                if (!String.IsNullOrEmpty(nodeUrl))
+                {
+                    string url = MapUrl(nodeUrl);
+                    SiteMapNode foundNode = FindSiteMapNode(url);
+                    if (
+                        foundNode != null
+                        && String.Compare(foundNode.Url, url, RuntimeHelpers.StringComparison) == 0
+                    )
+                        throw new InvalidOperationException(
+                            String.Format(
+                                "Multiple nodes with the same URL '{0}' were found. "
+                                    + "StaticSiteMapProvider requires that sitemap nodes have unique URLs.",
+                                node.Url
+                            )
+                        );
 
-				if (node == RootNode)
-					return;
+                    urlToNode.Add(url, node);
+                }
+                keyToNode.Add(nodeKey, node);
 
-				if (parentNode == null)
-					parentNode = RootNode;
+                if (node == RootNode)
+                    return;
 
-				nodeToParent.Add (node, parentNode);
+                if (parentNode == null)
+                    parentNode = RootNode;
 
-				SiteMapNodeCollection children;
-				if (!nodeToChildren.TryGetValue (parentNode, out children)) 
-					nodeToChildren.Add (parentNode, children = new SiteMapNodeCollection ());
+                nodeToParent.Add(node, parentNode);
 
-				children.Add (node);
-			}
-		}
-		
-		protected virtual void Clear ()
-		{
-			lock (this_lock) {
-				urlToNode.Clear ();
-				nodeToChildren.Clear ();
-				nodeToParent.Clear ();
-				keyToNode.Clear ();
-			}
-		}
+                SiteMapNodeCollection children;
+                if (!nodeToChildren.TryGetValue(parentNode, out children))
+                    nodeToChildren.Add(parentNode, children = new SiteMapNodeCollection());
 
-		public override SiteMapNode FindSiteMapNode (string rawUrl)
-		{
-			if (rawUrl == null)
-				throw new ArgumentNullException ("rawUrl");
-			
-			if (rawUrl == String.Empty)
-				return null;			
-			
-			BuildSiteMap();
-			SiteMapNode node;
-			if (VirtualPathUtility.IsAppRelative (rawUrl))
-				rawUrl = VirtualPathUtility.ToAbsolute (rawUrl, HttpRuntime.AppDomainAppVirtualPath, false);
+                children.Add(node);
+            }
+        }
 
-			if (!urlToNode.TryGetValue (rawUrl, out node))
-				return null;
+        protected virtual void Clear()
+        {
+            lock (this_lock)
+            {
+                urlToNode.Clear();
+                nodeToChildren.Clear();
+                nodeToParent.Clear();
+                keyToNode.Clear();
+            }
+        }
 
-			return CheckAccessibility (node);
-		}
+        public override SiteMapNode FindSiteMapNode(string rawUrl)
+        {
+            if (rawUrl == null)
+                throw new ArgumentNullException("rawUrl");
 
-		public override SiteMapNodeCollection GetChildNodes (SiteMapNode node)
-		{
-			if (node == null)
-				throw new ArgumentNullException ("node");
-			
-			BuildSiteMap();
-			SiteMapNodeCollection col;
-			if (!nodeToChildren.TryGetValue (node, out col))
-				return SiteMapNodeCollection.EmptyCollection;
-			
-			SiteMapNodeCollection ret = null;
-			for (int n=0; n<col.Count; n++) {
-				if (!IsAccessibleToUser (HttpContext.Current, col[n])) {
-					if (ret == null) {
-						ret = new SiteMapNodeCollection ();
-						for (int m=0; m<n; m++)
-							ret.Add (col[m]);
-					}
-				} else if (ret != null)
-					ret.Add (col[n]);
-			}
+            if (rawUrl == String.Empty)
+                return null;
 
-			if (ret == null)
-				return SiteMapNodeCollection.ReadOnly (col);
-			else if (ret.Count > 0)
-				return SiteMapNodeCollection.ReadOnly (ret);
-			else
-				return SiteMapNodeCollection.EmptyCollection;
-		}
-		
-		public override SiteMapNode GetParentNode (SiteMapNode node)
-		{
-			if (node == null)
-				throw new ArgumentNullException ("node");
+            BuildSiteMap();
+            SiteMapNode node;
+            if (VirtualPathUtility.IsAppRelative(rawUrl))
+                rawUrl = VirtualPathUtility.ToAbsolute(
+                    rawUrl,
+                    HttpRuntime.AppDomainAppVirtualPath,
+                    false
+                );
 
-			BuildSiteMap();
-			SiteMapNode parent;
-			nodeToParent.TryGetValue (node, out parent);
-			return CheckAccessibility (parent);
-		}
-		
-		protected override void RemoveNode (SiteMapNode node)
-		{
-			if (node == null)
-				throw new ArgumentNullException("node");
+            if (!urlToNode.TryGetValue(rawUrl, out node))
+                return null;
 
-			string key = node.Key;
-			string url;
-			
-			lock (this_lock) {
-				if (keyToNode.ContainsKey (key))
-					keyToNode.Remove (key);
-				url = node.Url;
-				if (!String.IsNullOrEmpty (url)) {
-					url = MapUrl (url);
-					if (urlToNode.ContainsKey (url))
-						urlToNode.Remove (url);
-				}
-				
-				if (node == RootNode)
-					return;
+            return CheckAccessibility(node);
+        }
 
-				SiteMapNode parent;
-				if (nodeToParent.TryGetValue (node, out parent)) {
-					nodeToParent.Remove (node);
+        public override SiteMapNodeCollection GetChildNodes(SiteMapNode node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
 
-					if (nodeToChildren.ContainsKey (parent))
-						nodeToChildren [parent].Remove (node);
-				}
-			}
-		}
-		
-		public override SiteMapNode FindSiteMapNodeFromKey (string key)
-		{
-			if (key == null)
-				throw new ArgumentNullException ("key");
-			
-			SiteMapNode ret;
-			keyToNode.TryGetValue (key, out ret);
-			return CheckAccessibility (ret);
-		}
+            BuildSiteMap();
+            SiteMapNodeCollection col;
+            if (!nodeToChildren.TryGetValue(node, out col))
+                return SiteMapNodeCollection.EmptyCollection;
 
-		public abstract SiteMapNode BuildSiteMap ();
-		
-		SiteMapNode CheckAccessibility (SiteMapNode node) {
-			return (node != null && IsAccessibleToUser (HttpContext.Current, node)) ? node : null;
-		}
+            SiteMapNodeCollection ret = null;
+            for (int n = 0; n < col.Count; n++)
+            {
+                if (!IsAccessibleToUser(HttpContext.Current, col[n]))
+                {
+                    if (ret == null)
+                    {
+                        ret = new SiteMapNodeCollection();
+                        for (int m = 0; m < n; m++)
+                            ret.Add(col[m]);
+                    }
+                }
+                else if (ret != null)
+                    ret.Add(col[n]);
+            }
 
-		internal string MapUrl (string url)
-		{
-			if (String.IsNullOrEmpty (url))
-				return url;
+            if (ret == null)
+                return SiteMapNodeCollection.ReadOnly(col);
+            else if (ret.Count > 0)
+                return SiteMapNodeCollection.ReadOnly(ret);
+            else
+                return SiteMapNodeCollection.EmptyCollection;
+        }
 
-			string appVPath = HttpRuntime.AppDomainAppVirtualPath;
-			if (String.IsNullOrEmpty (appVPath))
-				appVPath = "/";
-			
-			if (VirtualPathUtility.IsAppRelative (url))
-				return VirtualPathUtility.ToAbsolute (url, appVPath, true);
-			else
-				return VirtualPathUtility.ToAbsolute (UrlUtils.Combine (appVPath, url), appVPath, true);
-		}
-	}
+        public override SiteMapNode GetParentNode(SiteMapNode node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            BuildSiteMap();
+            SiteMapNode parent;
+            nodeToParent.TryGetValue(node, out parent);
+            return CheckAccessibility(parent);
+        }
+
+        protected override void RemoveNode(SiteMapNode node)
+        {
+            if (node == null)
+                throw new ArgumentNullException("node");
+
+            string key = node.Key;
+            string url;
+
+            lock (this_lock)
+            {
+                if (keyToNode.ContainsKey(key))
+                    keyToNode.Remove(key);
+                url = node.Url;
+                if (!String.IsNullOrEmpty(url))
+                {
+                    url = MapUrl(url);
+                    if (urlToNode.ContainsKey(url))
+                        urlToNode.Remove(url);
+                }
+
+                if (node == RootNode)
+                    return;
+
+                SiteMapNode parent;
+                if (nodeToParent.TryGetValue(node, out parent))
+                {
+                    nodeToParent.Remove(node);
+
+                    if (nodeToChildren.ContainsKey(parent))
+                        nodeToChildren[parent].Remove(node);
+                }
+            }
+        }
+
+        public override SiteMapNode FindSiteMapNodeFromKey(string key)
+        {
+            if (key == null)
+                throw new ArgumentNullException("key");
+
+            SiteMapNode ret;
+            keyToNode.TryGetValue(key, out ret);
+            return CheckAccessibility(ret);
+        }
+
+        public abstract SiteMapNode BuildSiteMap();
+
+        SiteMapNode CheckAccessibility(SiteMapNode node)
+        {
+            return (node != null && IsAccessibleToUser(HttpContext.Current, node)) ? node : null;
+        }
+
+        internal string MapUrl(string url)
+        {
+            if (String.IsNullOrEmpty(url))
+                return url;
+
+            string appVPath = HttpRuntime.AppDomainAppVirtualPath;
+            if (String.IsNullOrEmpty(appVPath))
+                appVPath = "/";
+
+            if (VirtualPathUtility.IsAppRelative(url))
+                return VirtualPathUtility.ToAbsolute(url, appVPath, true);
+            else
+                return VirtualPathUtility.ToAbsolute(
+                    UrlUtils.Combine(appVPath, url),
+                    appVPath,
+                    true
+                );
+        }
+    }
 }
-
-

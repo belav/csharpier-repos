@@ -14,7 +14,10 @@ internal static partial class Interop
         internal static partial void BigNumDestroy(IntPtr a);
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BigNumFromBinary")]
-        private static unsafe partial SafeBignumHandle BigNumFromBinary(ReadOnlySpan<byte> bigEndianValue, int len);
+        private static unsafe partial SafeBignumHandle BigNumFromBinary(
+            ReadOnlySpan<byte> bigEndianValue,
+            int len
+        );
 
         [LibraryImport(Libraries.CryptoNative, EntryPoint = "CryptoNative_BigNumToBinary")]
         private static unsafe partial int BigNumToBinary(SafeBignumHandle a, byte* to);

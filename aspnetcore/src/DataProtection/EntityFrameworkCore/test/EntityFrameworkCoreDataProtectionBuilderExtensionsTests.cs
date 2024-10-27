@@ -18,7 +18,11 @@ public class EntityFrameworkCoreDataProtectionBuilderExtensionsTests
             .AddDataProtection()
             .PersistKeysToDbContext<DataProtectionKeyContext>();
         var serviceProvider = serviceCollection.BuildServiceProvider(validateScopes: true);
-        var keyManagementOptions = serviceProvider.GetRequiredService<IOptions<KeyManagementOptions>>();
-        Assert.IsType<EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>>(keyManagementOptions.Value.XmlRepository);
+        var keyManagementOptions = serviceProvider.GetRequiredService<
+            IOptions<KeyManagementOptions>
+        >();
+        Assert.IsType<EntityFrameworkCoreXmlRepository<DataProtectionKeyContext>>(
+            keyManagementOptions.Value.XmlRepository
+        );
     }
 }

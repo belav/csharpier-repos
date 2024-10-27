@@ -20,18 +20,16 @@ public class CrossMachineTests
     private const string ClientAddress =
         // "http://chrross-udesk:5004";
         "https://localhost:5005";
-    private const string ServerName =
-        "chrross-dc";
+    private const string ServerName = "chrross-dc";
+
     // "chrross-udesk";
-    private static readonly string ServerPersistAddress = $"http://{ServerName}.CRKerberos.com:5000";
-    private static readonly string ServerNonPersistAddress = $"http://{ServerName}.CRKerberos.com:5002";
+    private static readonly string ServerPersistAddress =
+        $"http://{ServerName}.CRKerberos.com:5000";
+    private static readonly string ServerNonPersistAddress =
+        $"http://{ServerName}.CRKerberos.com:5002";
 
     public static IEnumerable<object[]> Http11And2 =>
-        new List<object[]>
-        {
-                new object[] { Http11Version },
-                new object[] { Http2Version },
-        };
+        new List<object[]> { new object[] { Http11Version }, new object[] { Http2Version } };
 
     [ConditionalTheory(Skip = "Manual testing only")]
     [MemberData(nameof(Http11And2))]
@@ -57,31 +55,55 @@ public class CrossMachineTests
     public static IEnumerable<object[]> HttpOrders =>
         new List<object[]>
         {
-                new object[] { Http11Version, Http11Version },
-                new object[] { Http11Version, Http2Version },
-                new object[] { Http2Version, Http11Version },
+            new object[] { Http11Version, Http11Version },
+            new object[] { Http11Version, Http2Version },
+            new object[] { Http2Version, Http11Version },
         };
 
     [ConditionalTheory(Skip = "Manual testing only")]
     [MemberData(nameof(HttpOrders))]
     // AuthorizedRequestAfterAuth_ReUses1WithPersistence would give the same results
-    public Task UrestrictedRequestAfterAuth_ReUses1WithPersistence(string protocol1, string protocol2)
+    public Task UrestrictedRequestAfterAuth_ReUses1WithPersistence(
+        string protocol1,
+        string protocol2
+    )
     {
-        return RunTest(ServerPersistAddress, protocol1, protocol2, "/AfterAuth/Unrestricted/Persist");
+        return RunTest(
+            ServerPersistAddress,
+            protocol1,
+            protocol2,
+            "/AfterAuth/Unrestricted/Persist"
+        );
     }
 
     [ConditionalTheory(Skip = "Manual testing only")]
     [MemberData(nameof(HttpOrders))]
-    public Task UrestrictedRequestAfterAuth_AnonymousWhenNotPersisted(string protocol1, string protocol2)
+    public Task UrestrictedRequestAfterAuth_AnonymousWhenNotPersisted(
+        string protocol1,
+        string protocol2
+    )
     {
-        return RunTest(ServerNonPersistAddress, protocol1, protocol2, "/AfterAuth/Unrestricted/NonPersist");
+        return RunTest(
+            ServerNonPersistAddress,
+            protocol1,
+            protocol2,
+            "/AfterAuth/Unrestricted/NonPersist"
+        );
     }
 
     [ConditionalTheory(Skip = "Manual testing only")]
     [MemberData(nameof(HttpOrders))]
-    public Task AuthorizedRequestAfterAuth_ReauthenticatesWhenNotPersisted(string protocol1, string protocol2)
+    public Task AuthorizedRequestAfterAuth_ReauthenticatesWhenNotPersisted(
+        string protocol1,
+        string protocol2
+    )
     {
-        return RunTest(ServerNonPersistAddress, protocol1, protocol2, "/AfterAuth/Authorized/NonPersist");
+        return RunTest(
+            ServerNonPersistAddress,
+            protocol1,
+            protocol2,
+            "/AfterAuth/Authorized/NonPersist"
+        );
     }
 
     [ConditionalTheory(Skip = "Manual testing only")]
@@ -101,10 +123,10 @@ public class CrossMachineTests
     private Task RunTest(string protocol, string path, bool persist = false)
     {
         var queryBuilder = new QueryBuilder
-            {
-                { "server", persist ? ServerPersistAddress : ServerNonPersistAddress },
-                { "protocol", protocol }
-            };
+        {
+            { "server", persist ? ServerPersistAddress : ServerNonPersistAddress },
+            { "protocol", protocol },
+        };
 
         return RunTest(path, queryBuilder);
     }
@@ -112,11 +134,11 @@ public class CrossMachineTests
     private Task RunTest(string server, string protocol1, string protocol2, string path)
     {
         var queryBuilder = new QueryBuilder
-            {
-                { "server", server },
-                { "protocol1", protocol1 },
-                { "protocol2", protocol2 }
-            };
+        {
+            { "server", server },
+            { "protocol1", protocol1 },
+            { "protocol2", protocol2 },
+        };
 
         return RunTest(path, queryBuilder);
     }
@@ -133,10 +155,13 @@ public class CrossMachineTests
 
     private static HttpClient CreateClient(string address)
     {
-        return new HttpClient(new HttpClientHandler()
-        {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
-        })
+        return new HttpClient(
+            new HttpClientHandler()
+            {
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator,
+            }
+        )
         {
             BaseAddress = new Uri(address),
             DefaultRequestVersion = new Version(2, 0),

@@ -16,7 +16,9 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         // relying on cache lookups and other techniques to save time if appropriate.
         // If the provided expression is particularly obscure and the system doesn't know
         // how to handle it, we'll just compile the expression as normal.
-        public static Func<TModel, TValue> Process<TModel, TValue>(Expression<Func<TModel, TValue>> lambdaExpression)
+        public static Func<TModel, TValue> Process<TModel, TValue>(
+            Expression<Func<TModel, TValue>> lambdaExpression
+        )
         {
             return Compiler<TModel, TValue>.Compile(lambdaExpression);
         }
@@ -25,22 +27,29 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
         {
             private static Func<TIn, TOut> _identityFunc;
 
-            private static readonly ConcurrentDictionary<MemberInfo, Func<TIn, TOut>> _simpleMemberAccessDict =
-                new ConcurrentDictionary<MemberInfo, Func<TIn, TOut>>();
+            private static readonly ConcurrentDictionary<
+                MemberInfo,
+                Func<TIn, TOut>
+            > _simpleMemberAccessDict = new ConcurrentDictionary<MemberInfo, Func<TIn, TOut>>();
 
-            private static readonly ConcurrentDictionary<MemberInfo, Func<object, TOut>> _constMemberAccessDict =
-                new ConcurrentDictionary<MemberInfo, Func<object, TOut>>();
+            private static readonly ConcurrentDictionary<
+                MemberInfo,
+                Func<object, TOut>
+            > _constMemberAccessDict = new ConcurrentDictionary<MemberInfo, Func<object, TOut>>();
 
-            private static readonly ConcurrentDictionary<ExpressionFingerprintChain, Hoisted<TIn, TOut>> _fingerprintedCache =
+            private static readonly ConcurrentDictionary<
+                ExpressionFingerprintChain,
+                Hoisted<TIn, TOut>
+            > _fingerprintedCache =
                 new ConcurrentDictionary<ExpressionFingerprintChain, Hoisted<TIn, TOut>>();
 
             public static Func<TIn, TOut> Compile(Expression<Func<TIn, TOut>> expr)
             {
                 return CompileFromIdentityFunc(expr)
-                       ?? CompileFromConstLookup(expr)
-                       ?? CompileFromMemberAccess(expr)
-                       ?? CompileFromFingerprint(expr)
-                       ?? CompileSlow(expr);
+                    ?? CompileFromConstLookup(expr)
+                    ?? CompileFromMemberAccess(expr)
+                    ?? CompileFromFingerprint(expr)
+                    ?? CompileSlow(expr);
             }
 
             private static Func<TIn, TOut> CompileFromConstLookup(Expression<Func<TIn, TOut>> expr)
@@ -78,18 +87,25 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
             private static Func<TIn, TOut> CompileFromFingerprint(Expression<Func<TIn, TOut>> expr)
             {
                 List<object> capturedConstants;
-                ExpressionFingerprintChain fingerprint = FingerprintingExpressionVisitor.GetFingerprintChain(expr, out capturedConstants);
+                ExpressionFingerprintChain fingerprint =
+                    FingerprintingExpressionVisitor.GetFingerprintChain(
+                        expr,
+                        out capturedConstants
+                    );
 
                 if (fingerprint != null)
                 {
-                    var del = _fingerprintedCache.GetOrAdd(fingerprint, _ =>
-                    {
-                        // Fingerprinting succeeded, but there was a cache miss. Rewrite the expression
-                        // and add the rewritten expression to the cache.
+                    var del = _fingerprintedCache.GetOrAdd(
+                        fingerprint,
+                        _ =>
+                        {
+                            // Fingerprinting succeeded, but there was a cache miss. Rewrite the expression
+                            // and add the rewritten expression to the cache.
 
-                        var hoistedExpr = HoistingExpressionVisitor<TIn, TOut>.Hoist(expr);
-                        return hoistedExpr.Compile();
-                    });
+                            var hoistedExpr = HoistingExpressionVisitor<TIn, TOut>.Hoist(expr);
+                            return hoistedExpr.Compile();
+                        }
+                    );
                     return model => del(model, capturedConstants);
                 }
 
@@ -108,25 +124,43 @@ namespace Microsoft.Web.Mvc.ExpressionUtil
                 MemberExpression memberExpr = expr.Body as MemberExpression;
                 if (memberExpr != null)
                 {
-                    if (memberExpr.Expression == expr.Parameters[0] || memberExpr.Expression == null)
+                    if (
+                        memberExpr.Expression == expr.Parameters[0]
+                        || memberExpr.Expression == null
+                    )
                     {
                         // model => model.Member or model => StaticMember
-                        return _simpleMemberAccessDict.GetOrAdd(memberExpr.Member, _ => expr.Compile());
+                        return _simpleMemberAccessDict.GetOrAdd(
+                            memberExpr.Member,
+                            _ => expr.Compile()
+                        );
                     }
 
                     ConstantExpression constExpr = memberExpr.Expression as ConstantExpression;
                     if (constExpr != null)
                     {
                         // model => {const}.Member (captured local variable)
-                        var del = _constMemberAccessDict.GetOrAdd(memberExpr.Member, _ =>
-                        {
-                            // rewrite as capturedLocal => ((TDeclaringType)capturedLocal).Member
-                            var constParamExpr = Expression.Parameter(typeof(object), "capturedLocal");
-                            var constCastExpr = Expression.Convert(constParamExpr, memberExpr.Member.DeclaringType);
-                            var newMemberAccessExpr = memberExpr.Update(constCastExpr);
-                            var newLambdaExpr = Expression.Lambda<Func<object, TOut>>(newMemberAccessExpr, constParamExpr);
-                            return newLambdaExpr.Compile();
-                        });
+                        var del = _constMemberAccessDict.GetOrAdd(
+                            memberExpr.Member,
+                            _ =>
+                            {
+                                // rewrite as capturedLocal => ((TDeclaringType)capturedLocal).Member
+                                var constParamExpr = Expression.Parameter(
+                                    typeof(object),
+                                    "capturedLocal"
+                                );
+                                var constCastExpr = Expression.Convert(
+                                    constParamExpr,
+                                    memberExpr.Member.DeclaringType
+                                );
+                                var newMemberAccessExpr = memberExpr.Update(constCastExpr);
+                                var newLambdaExpr = Expression.Lambda<Func<object, TOut>>(
+                                    newMemberAccessExpr,
+                                    constParamExpr
+                                );
+                                return newLambdaExpr.Compile();
+                            }
+                        );
 
                         object capturedLocal = constExpr.Value;
                         return _ => del(capturedLocal);

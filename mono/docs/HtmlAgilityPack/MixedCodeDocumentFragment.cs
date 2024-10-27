@@ -20,7 +20,10 @@ namespace HtmlAgilityPack
 
         #region Constructors
 
-        internal MixedCodeDocumentFragment(MixedCodeDocument doc, MixedCodeDocumentFragmentType type)
+        internal MixedCodeDocumentFragment(
+            MixedCodeDocument doc,
+            MixedCodeDocumentFragmentType type
+        )
         {
             Doc = doc;
             _type = type;

@@ -10,9 +10,9 @@ using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading;
+using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.Collections;
 using Microsoft.CodeAnalysis.PooledObjects;
-using Microsoft.CodeAnalysis;
 using EncodingExtensions = Microsoft.CodeAnalysis.EncodingExtensions;
 
 namespace Roslyn.Utilities
@@ -65,7 +65,8 @@ namespace Roslyn.Utilities
         public ObjectWriter(
             Stream stream,
             bool leaveOpen = false,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             // String serialization assumes both reader and writer to be of the same endianness.
             // It can be adjusted for BigEndian if needed.
@@ -91,19 +92,32 @@ namespace Roslyn.Utilities
         }
 
         public void WriteBoolean(bool value) => _writer.Write(value);
+
         public void WriteByte(byte value) => _writer.Write(value);
+
         // written as ushort because BinaryWriter fails on chars that are unicode surrogates
         public void WriteChar(char ch) => _writer.Write((ushort)ch);
+
         public void WriteDecimal(decimal value) => _writer.Write(value);
+
         public void WriteDouble(double value) => _writer.Write(value);
+
         public void WriteSingle(float value) => _writer.Write(value);
+
         public void WriteInt32(int value) => _writer.Write(value);
+
         public void WriteInt64(long value) => _writer.Write(value);
+
         public void WriteSByte(sbyte value) => _writer.Write(value);
+
         public void WriteInt16(short value) => _writer.Write(value);
+
         public void WriteUInt32(uint value) => _writer.Write(value);
+
         public void WriteUInt64(ulong value) => _writer.Write(value);
+
         public void WriteUInt16(ushort value) => _writer.Write(value);
+
         public void WriteString(string? value) => WriteStringValue(value);
 
         /// <summary>
@@ -117,6 +131,7 @@ namespace Roslyn.Utilities
 
             [FieldOffset(0)]
             public long Low64;
+
             [FieldOffset(8)]
             public long High64;
         }
@@ -130,7 +145,10 @@ namespace Roslyn.Utilities
 
         public void WriteValue(object? value)
         {
-            Debug.Assert(value == null || !value.GetType().GetTypeInfo().IsEnum, "Enum should not be written with WriteValue.  Write them as ints instead.");
+            Debug.Assert(
+                value == null || !value.GetType().GetTypeInfo().IsEnum,
+                "Enum should not be written with WriteValue.  Write them as ints instead."
+            );
 
             if (value == null)
             {
@@ -140,7 +158,10 @@ namespace Roslyn.Utilities
 
             var type = value.GetType();
             var typeInfo = type.GetTypeInfo();
-            Debug.Assert(!typeInfo.IsEnum, "Enums should not be written with WriteObject.  Write them out as integers instead.");
+            Debug.Assert(
+                !typeInfo.IsEnum,
+                "Enums should not be written with WriteObject.  Write them out as integers instead."
+            );
 
             // Perf: Note that JIT optimizes each expression value.GetType() == typeof(T) to a single register comparison.
             // Also the checks are sorted by commonality of the checked types.
@@ -164,12 +185,14 @@ namespace Roslyn.Utilities
                 }
                 else if (value.GetType() == typeof(bool))
                 {
-                    _writer.Write((byte)((bool)value ? TypeCode.Boolean_True : TypeCode.Boolean_False));
+                    _writer.Write(
+                        (byte)((bool)value ? TypeCode.Boolean_True : TypeCode.Boolean_False)
+                    );
                 }
                 else if (value.GetType() == typeof(char))
                 {
                     _writer.Write((byte)TypeCode.Char);
-                    _writer.Write((ushort)(char)value);  // written as ushort because BinaryWriter fails on chars that are unicode surrogates
+                    _writer.Write((ushort)(char)value); // written as ushort because BinaryWriter fails on chars that are unicode surrogates
                 }
                 else if (value.GetType() == typeof(byte))
                 {
@@ -235,7 +258,9 @@ namespace Roslyn.Utilities
 
                 if (instance.Rank > 1)
                 {
-                    throw new InvalidOperationException(Resources.Arrays_with_more_than_one_dimension_cannot_be_serialized);
+                    throw new InvalidOperationException(
+                        Resources.Arrays_with_more_than_one_dimension_cannot_be_serialized
+                    );
                 }
 
                 WriteArray(instance);
@@ -355,8 +380,9 @@ namespace Roslyn.Utilities
             private readonly SegmentedDictionary<object, int> _valueToIdMap;
             private int _nextId;
 
-            private static readonly ObjectPool<SegmentedDictionary<object, int>> s_valueDictionaryPool =
-                new(() => new SegmentedDictionary<object, int>(128));
+            private static readonly ObjectPool<
+                SegmentedDictionary<object, int>
+            > s_valueDictionaryPool = new(() => new SegmentedDictionary<object, int>(128));
 
             public WriterReferenceMap()
             {
@@ -379,8 +405,8 @@ namespace Roslyn.Utilities
                 }
             }
 
-            public bool TryGetReferenceId(object value, out int referenceId)
-                => _valueToIdMap.TryGetValue(value, out referenceId);
+            public bool TryGetReferenceId(object value, out int referenceId) =>
+                _valueToIdMap.TryGetValue(value, out referenceId);
 
             public void Add(object value, bool isReusable)
             {
@@ -423,7 +449,9 @@ namespace Roslyn.Utilities
             }
             else
             {
-                throw new ArgumentException(Resources.Value_too_large_to_be_represented_as_a_30_bit_unsigned_integer);
+                throw new ArgumentException(
+                    Resources.Value_too_large_to_be_represented_as_a_30_bit_unsigned_integer
+                );
             }
         }
 
@@ -517,7 +545,9 @@ namespace Roslyn.Utilities
             }
             else
             {
-                throw new InvalidOperationException($"Unsupported array element type: {elementType}");
+                throw new InvalidOperationException(
+                    $"Unsupported array element type: {elementType}"
+                );
             }
         }
 
@@ -1078,7 +1108,10 @@ namespace Roslyn.Utilities
             /// Encoding serialized as <see cref="TextEncodingKind"/>.
             /// </summary>
             FirstWellKnownTextEncoding,
-            LastWellKnownTextEncoding = FirstWellKnownTextEncoding + EncodingExtensions.LastTextEncodingKind - EncodingExtensions.FirstTextEncodingKind,
+            LastWellKnownTextEncoding =
+                FirstWellKnownTextEncoding
+                + EncodingExtensions.LastTextEncodingKind
+                - EncodingExtensions.FirstTextEncodingKind,
 
             /// <summary>
             /// Encoding serialized as <see cref="Encoding.CodePage"/>.
@@ -1090,14 +1123,24 @@ namespace Roslyn.Utilities
 
         internal static TypeCode ToTypeCode(TextEncodingKind kind)
         {
-            Debug.Assert(kind is >= EncodingExtensions.FirstTextEncodingKind and <= EncodingExtensions.LastTextEncodingKind);
-            return TypeCode.FirstWellKnownTextEncoding + (byte)(kind - EncodingExtensions.FirstTextEncodingKind);
+            Debug.Assert(
+                kind
+                    is >= EncodingExtensions.FirstTextEncodingKind
+                        and <= EncodingExtensions.LastTextEncodingKind
+            );
+            return TypeCode.FirstWellKnownTextEncoding
+                + (byte)(kind - EncodingExtensions.FirstTextEncodingKind);
         }
 
         internal static TextEncodingKind ToEncodingKind(TypeCode code)
         {
-            Debug.Assert(code is >= TypeCode.FirstWellKnownTextEncoding and <= TypeCode.LastWellKnownTextEncoding);
-            return EncodingExtensions.FirstTextEncodingKind + (byte)(code - TypeCode.FirstWellKnownTextEncoding);
+            Debug.Assert(
+                code
+                    is >= TypeCode.FirstWellKnownTextEncoding
+                        and <= TypeCode.LastWellKnownTextEncoding
+            );
+            return EncodingExtensions.FirstTextEncodingKind
+                + (byte)(code - TypeCode.FirstWellKnownTextEncoding);
         }
     }
 }

@@ -14,21 +14,25 @@ namespace System.ServiceModel.Activation
 
     static class AspNetCompatibilityRequirementsModeHelper
     {
-        static public bool IsDefined(AspNetCompatibilityRequirementsMode x)
+        public static bool IsDefined(AspNetCompatibilityRequirementsMode x)
         {
-            return
-                x == AspNetCompatibilityRequirementsMode.NotAllowed ||
-                x == AspNetCompatibilityRequirementsMode.Allowed ||
-                x == AspNetCompatibilityRequirementsMode.Required ||
-                false;
+            return x == AspNetCompatibilityRequirementsMode.NotAllowed
+                || x == AspNetCompatibilityRequirementsMode.Allowed
+                || x == AspNetCompatibilityRequirementsMode.Required
+                || false;
         }
 
         public static void Validate(AspNetCompatibilityRequirementsMode value)
         {
             if (!IsDefined(value))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidEnumArgumentException("value", (int)value,
-                    typeof(AspNetCompatibilityRequirementsMode)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidEnumArgumentException(
+                        "value",
+                        (int)value,
+                        typeof(AspNetCompatibilityRequirementsMode)
+                    )
+                );
             }
         }
     }

@@ -13,12 +13,11 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics
 {
-    public abstract partial class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest : AbstractDiagnosticProviderBasedUserDiagnosticTest
+    public abstract partial class AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+        : AbstractDiagnosticProviderBasedUserDiagnosticTest
     {
         protected AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+            : base(logger) { }
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
@@ -148,11 +147,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics
             }
             """;
 
-        internal OptionsCollection RequireArithmeticBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireArithmeticBinaryParenthesesForClarity;
-        internal OptionsCollection RequireRelationalBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireRelationalBinaryParenthesesForClarity;
-        internal OptionsCollection RequireOtherBinaryParenthesesForClarity => ParenthesesOptionsProvider.RequireOtherBinaryParenthesesForClarity;
-        internal OptionsCollection IgnoreAllParentheses => ParenthesesOptionsProvider.IgnoreAllParentheses;
-        internal OptionsCollection RemoveAllUnnecessaryParentheses => ParenthesesOptionsProvider.RemoveAllUnnecessaryParentheses;
-        internal OptionsCollection RequireAllParenthesesForClarity => ParenthesesOptionsProvider.RequireAllParenthesesForClarity;
+        internal OptionsCollection RequireArithmeticBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireArithmeticBinaryParenthesesForClarity;
+        internal OptionsCollection RequireRelationalBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireRelationalBinaryParenthesesForClarity;
+        internal OptionsCollection RequireOtherBinaryParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireOtherBinaryParenthesesForClarity;
+        internal OptionsCollection IgnoreAllParentheses =>
+            ParenthesesOptionsProvider.IgnoreAllParentheses;
+        internal OptionsCollection RemoveAllUnnecessaryParentheses =>
+            ParenthesesOptionsProvider.RemoveAllUnnecessaryParentheses;
+        internal OptionsCollection RequireAllParenthesesForClarity =>
+            ParenthesesOptionsProvider.RequireAllParenthesesForClarity;
     }
 }

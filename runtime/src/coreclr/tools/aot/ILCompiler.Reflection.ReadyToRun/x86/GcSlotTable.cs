@@ -35,7 +35,15 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 EndOffset = -1;
             }
 
-            public GcSlot(int index, string reg, int beginOffs, int endOffs, int varOffs, int lowBits, GcSlotFlags flags)
+            public GcSlot(
+                int index,
+                string reg,
+                int beginOffs,
+                int endOffs,
+                int varOffs,
+                int lowBits,
+                GcSlotFlags flags
+            )
             {
                 Index = index;
                 Register = $"E{reg}P";
@@ -81,8 +89,10 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 sb.Append($"            LowBits: ");
                 if ((Flags & GcSlotFlags.GC_SLOT_UNTRACKED) != 0)
                 {
-                    if((LowBits & pinned_OFFSET_FLAG) != 0) sb.Append("pinned ");
-                    if ((LowBits & byref_OFFSET_FLAG) != 0) sb.Append("byref ");
+                    if ((LowBits & pinned_OFFSET_FLAG) != 0)
+                        sb.Append("pinned ");
+                    if ((LowBits & byref_OFFSET_FLAG) != 0)
+                        sb.Append("byref ");
                 }
                 sb.AppendLine();
 
@@ -91,8 +101,8 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
         }
 
         private const uint OFFSET_MASK = 0x3;
-        private const uint byref_OFFSET_FLAG = 0x1;  // the offset is an interior ptr
-        private const uint pinned_OFFSET_FLAG = 0x2;  // the offset is a pinned ptr
+        private const uint byref_OFFSET_FLAG = 0x1; // the offset is an interior ptr
+        private const uint pinned_OFFSET_FLAG = 0x2; // the offset is a pinned ptr
 
         public List<GcSlot> GcSlots { get; set; }
 
@@ -130,9 +140,12 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
             if (header.DoubleAlign)
             {
                 calleeSavedRegs = 0;
-                if (header.EdiSaved) calleeSavedRegs++;
-                if (header.EsiSaved) calleeSavedRegs++;
-                if (header.EbxSaved) calleeSavedRegs++;
+                if (header.EdiSaved)
+                    calleeSavedRegs++;
+                if (header.EsiSaved)
+                    calleeSavedRegs++;
+                if (header.EbxSaved)
+                    calleeSavedRegs++;
             }
 
             uint count = header.UntrackedCnt;
@@ -151,21 +164,35 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 lowBits = (int)OFFSET_MASK & stkOffs;
                 stkOffs = (int)((uint)stkOffs & ~OFFSET_MASK);
 
-                if (header.DoubleAlign &&
-                     (uint)stkOffs >= sizeof(int) * (header.FrameSize + calleeSavedRegs))
+                if (
+                    header.DoubleAlign
+                    && (uint)stkOffs >= sizeof(int) * (header.FrameSize + calleeSavedRegs)
+                )
                 {
                     reg = 'B';
                     stkOffs -= sizeof(int) * (int)(header.FrameSize + calleeSavedRegs);
                 }
 
-                GcSlots.Add(new GcSlot(GcSlots.Count, $"E{reg}P", stkOffs, lowBits, GcSlotFlags.GC_SLOT_UNTRACKED));
+                GcSlots.Add(
+                    new GcSlot(
+                        GcSlots.Count,
+                        $"E{reg}P",
+                        stkOffs,
+                        lowBits,
+                        GcSlotFlags.GC_SLOT_UNTRACKED
+                    )
+                );
             }
         }
 
         /// <summary>
         /// based on <a href="https://github.com/dotnet/runtime/blob/main/src/coreclr/gcdump/i386/gcdumpx86.cpp">GCDump::DumpGCTable</a>
         /// </summary>
-        private void DecodeFrameVariableLifetimeTable(byte[] image, InfoHdrSmall header, ref int offset)
+        private void DecodeFrameVariableLifetimeTable(
+            byte[] image,
+            InfoHdrSmall header,
+            ref int offset
+        )
         {
             uint count = header.VarPtrTableSize;
             uint curOffs = 0;
@@ -175,14 +202,23 @@ namespace ILCompiler.Reflection.ReadyToRun.x86
                 uint begOffs = NativeReader.DecodeUDelta(image, ref offset, curOffs);
                 uint endOffs = NativeReader.DecodeUDelta(image, ref offset, begOffs);
 
-
                 uint lowBits = varOffs & 0x3;
                 varOffs &= ~OFFSET_MASK;
 
                 curOffs = begOffs;
 
                 string reg = header.EbpFrame ? "BP" : "SP";
-                GcSlots.Add(new GcSlot(GcSlots.Count, reg, (int)begOffs, (int)endOffs, (int)varOffs, (int)lowBits, GcSlotFlags.GC_SLOT_BASE));
+                GcSlots.Add(
+                    new GcSlot(
+                        GcSlots.Count,
+                        reg,
+                        (int)begOffs,
+                        (int)endOffs,
+                        (int)varOffs,
+                        (int)lowBits,
+                        GcSlotFlags.GC_SLOT_BASE
+                    )
+                );
             }
         }
     }

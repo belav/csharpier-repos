@@ -17,19 +17,24 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesDisplayName()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(PropertyDisplayNameModel), "MyProperty");
+            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(PropertyDisplayNameModel),
+                "MyProperty"
+            );
             var context = new ControllerContext();
             var attribute = new AnnotationsCompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(metadata, context, attribute);
 
             // Act
-            var rules = adapter.GetClientValidationRules()
-                .OrderBy(r => r.ValidationType)
-                .ToArray();
+            var rules = adapter.GetClientValidationRules().OrderBy(r => r.ValidationType).ToArray();
 
             // Assert
             ModelClientValidationRule rule = Assert.Single(rules);
-            Assert.Equal("'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.", rule.ErrorMessage);
+            Assert.Equal(
+                "'MyPropertyDisplayName' and 'OtherPropertyDisplayName' do not match.",
+                rule.ErrorMessage
+            );
         }
 
         [Fact]
@@ -37,15 +42,17 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesPropertyName()
         {
             // Arrange
-            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
+            var metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
             var context = new ControllerContext();
             var attribute = new AnnotationsCompareAttribute("OtherProperty");
             var adapter = new CompareAttributeAdapter(metadata, context, attribute);
 
             // Act
-            var rules = adapter.GetClientValidationRules()
-                .OrderBy(r => r.ValidationType)
-                .ToArray();
+            var rules = adapter.GetClientValidationRules().OrderBy(r => r.ValidationType).ToArray();
 
             // Assert
             ModelClientValidationRule rule = Assert.Single(rules);
@@ -56,7 +63,11 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesOverride()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
             ControllerContext context = new ControllerContext();
             AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute("OtherProperty")
             {
@@ -65,7 +76,8 @@ namespace System.Web.Mvc.Test
             ModelValidator adapter = new CompareAttributeAdapter(metadata, context, attribute);
 
             // Act
-            ModelClientValidationRule[] rules = adapter.GetClientValidationRules()
+            ModelClientValidationRule[] rules = adapter
+                .GetClientValidationRules()
                 .OrderBy(r => r.ValidationType)
                 .ToArray();
 
@@ -78,7 +90,11 @@ namespace System.Web.Mvc.Test
         public void ClientRulesWithCompareAttribute_ErrorMessageUsesResourceOverride()
         {
             // Arrange
-            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(() => null, typeof(PropertyNameModel), "MyProperty");
+            ModelMetadata metadata = ModelMetadataProviders.Current.GetMetadataForProperty(
+                () => null,
+                typeof(PropertyNameModel),
+                "MyProperty"
+            );
             ControllerContext context = new ControllerContext();
             AnnotationsCompareAttribute attribute = new AnnotationsCompareAttribute("OtherProperty")
             {
@@ -88,7 +104,8 @@ namespace System.Web.Mvc.Test
             ModelValidator adapter = new CompareAttributeAdapter(metadata, context, attribute);
 
             // Act
-            ModelClientValidationRule[] rules = adapter.GetClientValidationRules()
+            ModelClientValidationRule[] rules = adapter
+                .GetClientValidationRules()
                 .OrderBy(r => r.ValidationType)
                 .ToArray();
 

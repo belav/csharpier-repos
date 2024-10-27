@@ -34,7 +34,10 @@ namespace System.Web.Http.WebHost
             get { return _innerHandler; }
         }
 
-        public Task HandleAsync(ExceptionHandlerContext context, CancellationToken cancellationToken)
+        public Task HandleAsync(
+            ExceptionHandlerContext context,
+            CancellationToken cancellationToken
+        )
         {
             if (context == null)
             {
@@ -44,8 +47,10 @@ namespace System.Web.Http.WebHost
             ExceptionContext exceptionContext = context.ExceptionContext;
             Contract.Assert(exceptionContext != null);
 
-            if (exceptionContext.CatchBlock ==
-                WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent)
+            if (
+                exceptionContext.CatchBlock
+                == WebHostExceptionCatchBlocks.HttpControllerHandlerBufferContent
+            )
             {
                 HandleWebHostBufferedContentException(context);
                 return TaskHelpers.Completed();
@@ -54,10 +59,16 @@ namespace System.Web.Http.WebHost
             return _innerHandler.HandleAsync(context, cancellationToken);
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope",
-            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling.")]
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "All exceptions caught here become error responses")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "We already shipped this code; avoiding even minor breaking changes in error handling."
+        )]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "All exceptions caught here become error responses"
+        )]
         private static void HandleWebHostBufferedContentException(ExceptionHandlerContext context)
         {
             Contract.Assert(context != null);
@@ -72,24 +83,42 @@ namespace System.Web.Http.WebHost
 
             if (request == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(ExceptionContext).Name, "Request"), "context");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(ExceptionContext).Name,
+                        "Request"
+                    ),
+                    "context"
+                );
             }
 
             HttpResponseMessage response = exceptionContext.Response;
 
             if (response == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(ExceptionContext).Name, "Response"), "context");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(ExceptionContext).Name,
+                        "Response"
+                    ),
+                    "context"
+                );
             }
 
             HttpContent responseContent = response.Content;
 
             if (responseContent == null)
             {
-                throw new ArgumentException(Error.Format(SRResources.TypePropertyMustNotBeNull,
-                    typeof(HttpResponseMessage).Name, "Content"), "context");
+                throw new ArgumentException(
+                    Error.Format(
+                        SRResources.TypePropertyMustNotBeNull,
+                        typeof(HttpResponseMessage).Name,
+                        "Content"
+                    ),
+                    "context"
+                );
             }
 
             HttpResponseMessage errorResponse;
@@ -99,18 +128,22 @@ namespace System.Web.Http.WebHost
             try
             {
                 MediaTypeHeaderValue mediaType = responseContent.Headers.ContentType;
-                string messageDetails = (mediaType != null)
-                                            ? Error.Format(
-                                                SRResources.Serialize_Response_Failed_MediaType,
-                                                responseContent.GetType().Name,
-                                                mediaType)
-                                            : Error.Format(
-                                                SRResources.Serialize_Response_Failed,
-                                                responseContent.GetType().Name);
+                string messageDetails =
+                    (mediaType != null)
+                        ? Error.Format(
+                            SRResources.Serialize_Response_Failed_MediaType,
+                            responseContent.GetType().Name,
+                            mediaType
+                        )
+                        : Error.Format(
+                            SRResources.Serialize_Response_Failed,
+                            responseContent.GetType().Name
+                        );
 
                 errorResponse = request.CreateErrorResponse(
-                                            HttpStatusCode.InternalServerError,
-                                            new InvalidOperationException(messageDetails, exception));
+                    HttpStatusCode.InternalServerError,
+                    new InvalidOperationException(messageDetails, exception)
+                );
 
                 // CreateErrorResponse will choose 406 if it cannot find a formatter,
                 // but we want our default error response to be 500 always

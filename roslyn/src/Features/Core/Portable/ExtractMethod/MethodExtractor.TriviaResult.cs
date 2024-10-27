@@ -13,21 +13,36 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExtractMethod
 {
-    internal abstract partial class MethodExtractor<TSelectionResult, TStatementSyntax, TExpressionSyntax>
+    internal abstract partial class MethodExtractor<
+        TSelectionResult,
+        TStatementSyntax,
+        TExpressionSyntax
+    >
     {
-        protected abstract class TriviaResult(SemanticDocument document, ITriviaSavedResult result, int endOfLineKind, int whitespaceKind)
+        protected abstract class TriviaResult(
+            SemanticDocument document,
+            ITriviaSavedResult result,
+            int endOfLineKind,
+            int whitespaceKind
+        )
         {
             private readonly int _endOfLineKind = endOfLineKind;
             private readonly int _whitespaceKind = whitespaceKind;
 
             private readonly ITriviaSavedResult _result = result;
 
-            protected abstract AnnotationResolver GetAnnotationResolver(SyntaxNode callsite, SyntaxNode methodDefinition);
+            protected abstract AnnotationResolver GetAnnotationResolver(
+                SyntaxNode callsite,
+                SyntaxNode methodDefinition
+            );
             protected abstract TriviaResolver GetTriviaResolver(SyntaxNode methodDefinition);
 
             public SemanticDocument SemanticDocument { get; } = document;
 
-            public async Task<SemanticDocument> ApplyAsync(GeneratedCode generatedCode, CancellationToken cancellationToken)
+            public async Task<SemanticDocument> ApplyAsync(
+                GeneratedCode generatedCode,
+                CancellationToken cancellationToken
+            )
             {
                 var document = generatedCode.SemanticDocument;
                 var root = document.Root;
@@ -35,8 +50,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 var callsiteAnnotation = generatedCode.CallSiteAnnotation;
                 var methodDefinitionAnnotation = generatedCode.MethodDefinitionAnnotation;
 
-                var callsite = root.GetAnnotatedNodesAndTokens(callsiteAnnotation).SingleOrDefault().AsNode();
-                var method = root.GetAnnotatedNodesAndTokens(methodDefinitionAnnotation).SingleOrDefault().AsNode();
+                var callsite = root.GetAnnotatedNodesAndTokens(callsiteAnnotation)
+                    .SingleOrDefault()
+                    .AsNode();
+                var method = root.GetAnnotatedNodesAndTokens(methodDefinitionAnnotation)
+                    .SingleOrDefault()
+                    .AsNode();
 
                 var annotationResolver = GetAnnotationResolver(callsite, method);
                 var triviaResolver = GetTriviaResolver(method);
@@ -45,8 +64,12 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 if (annotationResolver == null || triviaResolver == null)
                     return document;
 
-                return await document.WithSyntaxRootAsync(
-                    _result.RestoreTrivia(root, annotationResolver, triviaResolver), cancellationToken).ConfigureAwait(false);
+                return await document
+                    .WithSyntaxRootAsync(
+                        _result.RestoreTrivia(root, annotationResolver, triviaResolver),
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
             protected IEnumerable<SyntaxTrivia> FilterTriviaList(IEnumerable<SyntaxTrivia> list)
@@ -79,7 +102,11 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                         if (seenFirstEndOfLine)
                         {
                             // empty line. remove it
-                            if (currentLine.All(t => t.RawKind == _endOfLineKind || t.RawKind == _whitespaceKind))
+                            if (
+                                currentLine.All(t =>
+                                    t.RawKind == _endOfLineKind || t.RawKind == _whitespaceKind
+                                )
+                            )
                             {
                                 continue;
                             }
@@ -106,7 +133,9 @@ namespace Microsoft.CodeAnalysis.ExtractMethod
                 return result.Concat(currentLine);
             }
 
-            protected IEnumerable<SyntaxTrivia> RemoveLeadingElasticBeforeEndOfLine(IEnumerable<SyntaxTrivia> list)
+            protected IEnumerable<SyntaxTrivia> RemoveLeadingElasticBeforeEndOfLine(
+                IEnumerable<SyntaxTrivia> list
+            )
             {
                 var trivia = list.FirstOrDefault();
                 if (!trivia.IsElastic())

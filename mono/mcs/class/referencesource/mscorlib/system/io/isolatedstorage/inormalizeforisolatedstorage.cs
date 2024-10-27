@@ -1,12 +1,12 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
  *
  * Class:  INormalizeForIsolatedStorage
-// 
+//
 // <OWNER>kimhamil</OWNER>
  *
  * <EMAIL>Author: Shajan Dasan</EMAIL>
@@ -19,15 +19,15 @@
  * Date:  Oct 17, 2000
  *
  ===========================================================*/
-namespace System.IO.IsolatedStorage {
-
+namespace System.IO.IsolatedStorage
+{
     using System;
 
-[System.Runtime.InteropServices.ComVisible(true)]
+    [System.Runtime.InteropServices.ComVisible(true)]
     public interface INormalizeForIsolatedStorage
     {
         // Return a copy of the normalized version of this instance,
-        // so that a the serialized version of this object can be 
+        // so that a the serialized version of this object can be
         // mem-compared to another serialized object
         //
         // 1. Eg.  (pseudo code to illustrate usage)
@@ -35,16 +35,16 @@ namespace System.IO.IsolatedStorage {
         // obj1 = MySite(WWW.MSN.COM)
         // obj2 = MySite(www.msn.com)
         //
-        // obj1Norm = obj1.Normalize() 
-        // obj2Norm = obj1.Normalize() 
+        // obj1Norm = obj1.Normalize()
+        // obj2Norm = obj1.Normalize()
         //
         // stream1 = Serialize(obj1Norm)
         // stream2 = Serialize(obj2Norm)
         //
         // AreStreamsEqual(stream1, stream2) returns true
         //
-        // If the Object returned is a stream, the stream will be used without 
-        // serialization. If the Object returned is a string, the string will 
+        // If the Object returned is a stream, the stream will be used without
+        // serialization. If the Object returned is a string, the string will
         // be used in naming the Store. If the string is too long or if the
         // string contains chars that are illegal to use in naming the store,
         // the string will be serialized.
@@ -54,8 +54,8 @@ namespace System.IO.IsolatedStorage {
         // obj1 = MySite(WWW.MSN.COM)
         // obj2 = MySite(www.msn.com)
         //
-        // string1 = obj1.Normalize() 
-        // string2 = obj1.Normalize() 
+        // string1 = obj1.Normalize()
+        // string2 = obj1.Normalize()
         //
         // AreStringsEqual(string1, string2) returns true
         //
@@ -64,12 +64,11 @@ namespace System.IO.IsolatedStorage {
         // obj1 = MySite(WWW.MSN.COM)
         // obj2 = MySite(www.msn.com)
         //
-        // stream1 = obj1.Normalize() 
-        // stream2 = obj1.Normalize() 
+        // stream1 = obj1.Normalize()
+        // stream2 = obj1.Normalize()
         //
         // AreStreamsEqual(stream1, stream2) returns true
 
         Object Normalize();
     }
 }
-

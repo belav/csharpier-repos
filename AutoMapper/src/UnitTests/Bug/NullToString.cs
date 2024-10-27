@@ -8,18 +8,19 @@ public class NullToString : AutoMapperSpecBase
     {
         public InnerSource Inner { get; set; }
     }
-    class InnerSource
-    {
-    }
+
+    class InnerSource { }
+
     class Destination
     {
         public string Inner { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {

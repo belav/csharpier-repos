@@ -8,7 +8,9 @@ namespace JitTest_s_ldfld_mulovf_signed_cs
 {
     public class Test
     {
-        private long _op1,_op2;
+        private long _op1,
+            _op2;
+
         private bool check(long product, bool overflow)
         {
             Console.Write("Multiplying {0} and {1}...", _op1, _op2);
@@ -69,7 +71,7 @@ namespace JitTest_s_ldfld_mulovf_signed_cs
 
             Console.WriteLine("Test passed");
             return 100;
-        fail:
+            fail:
             Console.WriteLine("Test failed");
             return 1;
         }

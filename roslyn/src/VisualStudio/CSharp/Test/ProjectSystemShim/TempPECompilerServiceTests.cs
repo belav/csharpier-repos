@@ -35,14 +35,18 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim
                 fileContents: Array.Empty<string>(),
                 optionCount: 1,
                 optionNames: ["r"],
-                optionValues: new[] { Path.Combine(directory.Path, "MissingReference.dll") });
+                optionValues: new[] { Path.Combine(directory.Path, "MissingReference.dll") }
+            );
 
             Assert.Equal(VSConstants.S_FALSE, hr);
         }
 
         private class TrivialMetadataService : IMetadataService
         {
-            public PortableExecutableReference GetReference(string resolvedPath, MetadataReferenceProperties properties)
+            public PortableExecutableReference GetReference(
+                string resolvedPath,
+                MetadataReferenceProperties properties
+            )
             {
                 return MetadataReference.CreateFromFile(resolvedPath, properties);
             }

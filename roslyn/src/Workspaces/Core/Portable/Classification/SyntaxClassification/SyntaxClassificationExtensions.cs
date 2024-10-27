@@ -19,9 +19,15 @@ namespace Microsoft.CodeAnalysis.Classification
             SyntaxNode root,
             TextSpan textSpan,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            classificationService.AddSyntacticClassifications(root, ImmutableArray.Create(textSpan), result, cancellationToken);
+            classificationService.AddSyntacticClassifications(
+                root,
+                ImmutableArray.Create(textSpan),
+                result,
+                cancellationToken
+            );
         }
 
         public static Task AddSemanticClassificationsAsync(
@@ -32,7 +38,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxNode, ImmutableArray<ISyntaxClassifier>> getNodeClassifiers,
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             return classificationService.AddSemanticClassificationsAsync(
                 document,
@@ -41,7 +48,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 getNodeClassifiers,
                 getTokenClassifiers,
                 result,
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         public static void AddSemanticClassifications(
@@ -52,7 +60,8 @@ namespace Microsoft.CodeAnalysis.Classification
             Func<SyntaxToken, ImmutableArray<ISyntaxClassifier>> getTokenClassifiers,
             SegmentedList<ClassifiedSpan> result,
             ClassificationOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             classificationService.AddSemanticClassifications(
                 semanticModel,
@@ -61,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Classification
                 getTokenClassifiers,
                 result,
                 options,
-                cancellationToken);
+                cancellationToken
+            );
         }
     }
 }

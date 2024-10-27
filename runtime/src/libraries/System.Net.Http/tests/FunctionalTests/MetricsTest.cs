@@ -31,11 +31,14 @@ namespace System.Net.Http.Functional.Tests
             public const string TimeInQueue = "http.client.request.time_in_queue";
         }
 
-        protected HttpMetricsTestBase(ITestOutputHelper output) : base(output)
-        {
-        }
+        protected HttpMetricsTestBase(ITestOutputHelper output)
+            : base(output) { }
 
-        protected static void VerifyTag<T>(KeyValuePair<string, object?>[] tags, string name, T value)
+        protected static void VerifyTag<T>(
+            KeyValuePair<string, object?>[] tags,
+            string name,
+            T value
+        )
         {
             if (value is null)
             {
@@ -51,9 +54,11 @@ namespace System.Net.Http.Functional.Tests
         {
             string ipString = (string)tags.Single(t => t.Key == "network.peer.address").Value;
             IPAddress ip = IPAddress.Parse(ipString);
-            Assert.True(ip.Equals(IPAddress.Loopback.MapToIPv6()) ||
-                    ip.Equals(IPAddress.Loopback) ||
-                    ip.Equals(IPAddress.IPv6Loopback));
+            Assert.True(
+                ip.Equals(IPAddress.Loopback.MapToIPv6())
+                    || ip.Equals(IPAddress.Loopback)
+                    || ip.Equals(IPAddress.IPv6Loopback)
+            );
         }
 
         private static void VerifySchemeHostPortTags(KeyValuePair<string, object?>[] tags, Uri uri)
@@ -63,29 +68,45 @@ namespace System.Net.Http.Functional.Tests
             VerifyTag(tags, "server.port", uri.Port);
         }
 
-        private static string? GetVersionString(Version? version) => version == null ? null : version.Major switch
-        {
-            1 => "1.1",
-            2 => "2",
-            _ => "3"
-        };
+        private static string? GetVersionString(Version? version) =>
+            version == null
+                ? null
+                : version.Major switch
+                {
+                    1 => "1.1",
+                    2 => "2",
+                    _ => "3",
+                };
 
-        protected static void VerifyRequestDuration(Measurement<double> measurement,
+        protected static void VerifyRequestDuration(
+            Measurement<double> measurement,
             Uri uri,
             Version? protocolVersion = null,
             int? statusCode = null,
             string method = "GET",
-            string[] acceptedErrorTypes = null) =>
-            VerifyRequestDuration(InstrumentNames.RequestDuration, measurement.Value, measurement.Tags.ToArray(), uri, protocolVersion, statusCode, method, acceptedErrorTypes);
+            string[] acceptedErrorTypes = null
+        ) =>
+            VerifyRequestDuration(
+                InstrumentNames.RequestDuration,
+                measurement.Value,
+                measurement.Tags.ToArray(),
+                uri,
+                protocolVersion,
+                statusCode,
+                method,
+                acceptedErrorTypes
+            );
 
-        protected static void VerifyRequestDuration(string instrumentName,
+        protected static void VerifyRequestDuration(
+            string instrumentName,
             double measurement,
             KeyValuePair<string, object?>[] tags,
             Uri uri,
             Version? protocolVersion,
             int? statusCode,
             string method = "GET",
-            string[] acceptedErrorTypes = null)
+            string[] acceptedErrorTypes = null
+        )
         {
             Assert.Equal(InstrumentNames.RequestDuration, instrumentName);
             Assert.InRange(measurement, double.Epsilon, 60);
@@ -104,10 +125,29 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        protected static void VerifyActiveRequests(Measurement<long> measurement, long expectedValue, Uri uri, string method = "GET") =>
-            VerifyActiveRequests(InstrumentNames.ActiveRequests, measurement.Value, measurement.Tags.ToArray(), expectedValue, uri, method);
+        protected static void VerifyActiveRequests(
+            Measurement<long> measurement,
+            long expectedValue,
+            Uri uri,
+            string method = "GET"
+        ) =>
+            VerifyActiveRequests(
+                InstrumentNames.ActiveRequests,
+                measurement.Value,
+                measurement.Tags.ToArray(),
+                expectedValue,
+                uri,
+                method
+            );
 
-        protected static void VerifyActiveRequests(string instrumentName, long measurement, KeyValuePair<string, object?>[] tags, long expectedValue, Uri uri, string method = "GET")
+        protected static void VerifyActiveRequests(
+            string instrumentName,
+            long measurement,
+            KeyValuePair<string, object?>[] tags,
+            long expectedValue,
+            Uri uri,
+            string method = "GET"
+        )
         {
             Assert.Equal(InstrumentNames.ActiveRequests, instrumentName);
             Assert.Equal(expectedValue, measurement);
@@ -115,7 +155,15 @@ namespace System.Net.Http.Functional.Tests
             Assert.Equal(method, tags.Single(t => t.Key == "http.request.method").Value);
         }
 
-        protected static void VerifyOpenConnections(string actualName, object measurement, KeyValuePair<string, object?>[] tags, long expectedValue, Uri uri, Version? protocolVersion, string state)
+        protected static void VerifyOpenConnections(
+            string actualName,
+            object measurement,
+            KeyValuePair<string, object?>[] tags,
+            long expectedValue,
+            Uri uri,
+            Version? protocolVersion,
+            string state
+        )
         {
             Assert.Equal(InstrumentNames.OpenConnections, actualName);
             Assert.Equal(expectedValue, Assert.IsType<long>(measurement));
@@ -125,7 +173,13 @@ namespace System.Net.Http.Functional.Tests
             VerifyPeerAddress(tags);
         }
 
-        protected static void VerifyConnectionDuration(string instrumentName, object measurement, KeyValuePair<string, object?>[] tags, Uri uri, Version? protocolVersion)
+        protected static void VerifyConnectionDuration(
+            string instrumentName,
+            object measurement,
+            KeyValuePair<string, object?>[] tags,
+            Uri uri,
+            Version? protocolVersion
+        )
         {
             Assert.Equal(InstrumentNames.ConnectionDuration, instrumentName);
             double value = Assert.IsType<double>(measurement);
@@ -135,7 +189,14 @@ namespace System.Net.Http.Functional.Tests
             VerifyPeerAddress(tags);
         }
 
-        protected static void VerifyTimeInQueue(string instrumentName, object measurement, KeyValuePair<string, object?>[] tags, Uri uri, Version? protocolVersion, string method = "GET")
+        protected static void VerifyTimeInQueue(
+            string instrumentName,
+            object measurement,
+            KeyValuePair<string, object?>[] tags,
+            Uri uri,
+            Version? protocolVersion,
+            string method = "GET"
+        )
         {
             Assert.Equal(InstrumentNames.TimeInQueue, instrumentName);
             double value = Assert.IsType<double>(measurement);
@@ -154,7 +215,8 @@ namespace System.Net.Http.Functional.Tests
             }
         }
 
-        protected sealed class InstrumentRecorder<T> : IDisposable where T : struct
+        protected sealed class InstrumentRecorder<T> : IDisposable
+            where T : struct
         {
             private readonly MeterListener _meterListener = new();
             private readonly ConcurrentQueue<Measurement<T>> _values = new();
@@ -164,7 +226,10 @@ namespace System.Net.Http.Functional.Tests
             {
                 _meterListener.InstrumentPublished = (instrument, listener) =>
                 {
-                    if (instrument.Meter.Name == "System.Net.Http" && instrument.Name == instrumentName)
+                    if (
+                        instrument.Meter.Name == "System.Net.Http"
+                        && instrument.Name == instrumentName
+                    )
                     {
                         listener.EnableMeasurementEvents(instrument);
                     }
@@ -187,12 +252,23 @@ namespace System.Net.Http.Functional.Tests
                 _meterListener.Start();
             }
 
-            private void OnMeasurementRecorded(Instrument instrument, T measurement, ReadOnlySpan<KeyValuePair<string, object?>> tags, object? state) => _values.Enqueue(new Measurement<T>(measurement, tags));
+            private void OnMeasurementRecorded(
+                Instrument instrument,
+                T measurement,
+                ReadOnlySpan<KeyValuePair<string, object?>> tags,
+                object? state
+            ) => _values.Enqueue(new Measurement<T>(measurement, tags));
+
             public IReadOnlyList<Measurement<T>> GetMeasurements() => _values.ToArray();
+
             public void Dispose() => _meterListener.Dispose();
         }
 
-        protected record RecordedCounter(string InstrumentName, object Value, KeyValuePair<string, object?>[] Tags)
+        protected record RecordedCounter(
+            string InstrumentName,
+            object Value,
+            KeyValuePair<string, object?>[] Tags
+        )
         {
             public override string ToString()
             {
@@ -213,44 +289,57 @@ namespace System.Net.Http.Functional.Tests
             private readonly ConcurrentQueue<RecordedCounter> _values = new();
 
             public MultiInstrumentRecorder()
-                : this(meter: null)
-            { }
+                : this(meter: null) { }
 
             public MultiInstrumentRecorder(IMeterFactory meterFactory)
-                : this(meterFactory.Create("System.Net.Http"))
-            { }
+                : this(meterFactory.Create("System.Net.Http")) { }
 
             private MultiInstrumentRecorder(Meter? meter)
             {
                 _meterListener.InstrumentPublished = (instrument, listener) =>
                 {
-                    if (instrument.Meter == meter || (meter is null && instrument.Meter.Name == "System.Net.Http"))
+                    if (
+                        instrument.Meter == meter
+                        || (meter is null && instrument.Meter.Name == "System.Net.Http")
+                    )
                     {
                         listener.EnableMeasurementEvents(instrument);
                     }
                 };
 
-                _meterListener.SetMeasurementEventCallback<long>((instrument, measurement, tags, _) =>
-                    _values.Enqueue(new RecordedCounter(instrument.Name, measurement, tags.ToArray())));
+                _meterListener.SetMeasurementEventCallback<long>(
+                    (instrument, measurement, tags, _) =>
+                        _values.Enqueue(
+                            new RecordedCounter(instrument.Name, measurement, tags.ToArray())
+                        )
+                );
 
-                _meterListener.SetMeasurementEventCallback<double>((instrument, measurement, tags, _) =>
-                    _values.Enqueue(new RecordedCounter(instrument.Name, measurement, tags.ToArray())));
+                _meterListener.SetMeasurementEventCallback<double>(
+                    (instrument, measurement, tags, _) =>
+                        _values.Enqueue(
+                            new RecordedCounter(instrument.Name, measurement, tags.ToArray())
+                        )
+                );
 
                 _meterListener.Start();
             }
 
             public IReadOnlyList<RecordedCounter> GetMeasurements() => _values.ToArray();
+
             public void Dispose() => _meterListener.Dispose();
         }
     }
 
     public abstract class HttpMetricsTest : HttpMetricsTestBase
     {
-        public static readonly bool SupportsSeparateHttpSpansForRedirects = PlatformDetection.IsNotMobile && PlatformDetection.IsNotBrowser;
+        public static readonly bool SupportsSeparateHttpSpansForRedirects =
+            PlatformDetection.IsNotMobile && PlatformDetection.IsNotBrowser;
         private IMeterFactory _meterFactory = new TestMeterFactory();
         protected HttpClientHandler Handler { get; }
         protected virtual bool TestHttpMessageInvoker => false;
-        public HttpMetricsTest(ITestOutputHelper output) : base(output)
+
+        public HttpMetricsTest(ITestOutputHelper output)
+            : base(output)
         {
             Handler = CreateHttpClientHandler();
         }
@@ -258,22 +347,32 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public Task ActiveRequests_Success_Recorded()
         {
-            return LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(InstrumentNames.ActiveRequests);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
+            return LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(
+                        InstrumentNames.ActiveRequests
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                HttpResponseMessage response = await SendAsync(client, request);
-                response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
+                    HttpResponseMessage response = await SendAsync(client, request);
+                    response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
 
-                Assert.Collection(recorder.GetMeasurements(),
-                    m => VerifyActiveRequests(m, 1, uri),
-                    m => VerifyActiveRequests(m, -1, uri));
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync();
-            });
+                    Assert.Collection(
+                        recorder.GetMeasurements(),
+                        m => VerifyActiveRequests(m, 1, uri),
+                        m => VerifyActiveRequests(m, -1, uri)
+                    );
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync();
+                }
+            );
         }
 
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
@@ -286,30 +385,45 @@ namespace System.Net.Http.Functional.Tests
 
             TaskCompletionSource connectionStarted = new TaskCompletionSource();
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                GetUnderlyingSocketsHttpHandler(Handler).ConnectCallback = async (ctx, cancellationToken) =>
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    connectionStarted.SetResult();
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    GetUnderlyingSocketsHttpHandler(Handler).ConnectCallback = async (
+                        ctx,
+                        cancellationToken
+                    ) =>
+                    {
+                        connectionStarted.SetResult();
 
-                    return await DefaultConnectCallback(ctx.DnsEndPoint, cancellationToken);
-                };
+                        return await DefaultConnectCallback(ctx.DnsEndPoint, cancellationToken);
+                    };
 
-                // Enable recording request-duration to test the path with metrics enabled.
-                using InstrumentRecorder<double> unrelatedRecorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
+                    // Enable recording request-duration to test the path with metrics enabled.
+                    using InstrumentRecorder<double> unrelatedRecorder =
+                        SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
 
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-                Task<HttpResponseMessage> clientTask = Task.Run(() => SendAsync(client, request));
-                await connectionStarted.Task;
-                using InstrumentRecorder<long> recorder = new(Handler.MeterFactory, InstrumentNames.ActiveRequests);
-                using HttpResponseMessage response = await clientTask;
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
+                    Task<HttpResponseMessage> clientTask = Task.Run(
+                        () => SendAsync(client, request)
+                    );
+                    await connectionStarted.Task;
+                    using InstrumentRecorder<long> recorder = new(
+                        Handler.MeterFactory,
+                        InstrumentNames.ActiveRequests
+                    );
+                    using HttpResponseMessage response = await clientTask;
 
-                Assert.Empty(recorder.GetMeasurements());
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync();
-            });
+                    Assert.Empty(recorder.GetMeasurements());
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync();
+                }
+            );
         }
 
         [Theory]
@@ -317,47 +431,64 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("PUT", HttpStatusCode.Created)]
         public Task RequestDuration_Success_Recorded(string method, HttpStatusCode statusCode)
         {
-            return LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Parse(method), uri) { Version = UseVersion };
+            return LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Parse(method), uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                using HttpResponseMessage response = await SendAsync(client, request);
+                    using HttpResponseMessage response = await SendAsync(client, request);
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, (int)statusCode, method);
-
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync(statusCode);
-            });
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, UseVersion, (int)statusCode, method);
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync(statusCode);
+                }
+            );
         }
 
         [Fact]
         public Task RequestDuration_CustomTags_Recorded()
         {
-            return LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-
-                HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
+            return LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    ctx.AddCustomTag("route", "/test");
-                });
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                using HttpResponseMessage response = await SendAsync(client, request);
+                    HttpMetricsEnrichmentContext.AddCallback(
+                        request,
+                        static ctx =>
+                        {
+                            ctx.AddCustomTag("route", "/test");
+                        }
+                    );
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, 200);
-                Assert.Equal("/test", m.Tags.ToArray().Single(t => t.Key == "route").Value);
+                    using HttpResponseMessage response = await SendAsync(client, request);
 
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync();
-            });
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, UseVersion, 200);
+                    Assert.Equal("/test", m.Tags.ToArray().Single(t => t.Key == "route").Value);
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync();
+                }
+            );
         }
 
         [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -366,52 +497,87 @@ namespace System.Net.Http.Functional.Tests
         [InlineData("System.Net.Http.HttpRequestOut.Stop")]
         public void RequestDuration_CustomTags_DiagnosticListener_Recorded(string eventName)
         {
-            RemoteExecutor.Invoke(static async (testClassName, eventNameInner) =>
-            {
-                using HttpMetricsTest test = (HttpMetricsTest)Activator.CreateInstance(Type.GetType(testClassName), (ITestOutputHelper)null);
-                await test.RequestDuration_CustomTags_DiagnosticListener_Recorded_Core(eventNameInner);
-            }, GetType().FullName, eventName).Dispose();
+            RemoteExecutor
+                .Invoke(
+                    static async (testClassName, eventNameInner) =>
+                    {
+                        using HttpMetricsTest test = (HttpMetricsTest)
+                            Activator.CreateInstance(
+                                Type.GetType(testClassName),
+                                (ITestOutputHelper)null
+                            );
+                        await test.RequestDuration_CustomTags_DiagnosticListener_Recorded_Core(
+                            eventNameInner
+                        );
+                    },
+                    GetType().FullName,
+                    eventName
+                )
+                .Dispose();
         }
 
-        private async Task RequestDuration_CustomTags_DiagnosticListener_Recorded_Core(string eventName)
+        private async Task RequestDuration_CustomTags_DiagnosticListener_Recorded_Core(
+            string eventName
+        )
         {
             FakeDiagnosticListenerObserver diagnosticListenerObserver = new(kv =>
             {
                 if (kv.Key == eventName)
                 {
-                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(kv.Value, "Request");
-                    HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
-                    {
-                        ctx.AddCustomTag("observed?", "observed!");
-                        Assert.NotNull(ctx.Response);
-                    });
+                    HttpRequestMessage request = GetProperty<HttpRequestMessage>(
+                        kv.Value,
+                        "Request"
+                    );
+                    HttpMetricsEnrichmentContext.AddCallback(
+                        request,
+                        static ctx =>
+                        {
+                            ctx.AddCustomTag("observed?", "observed!");
+                            Assert.NotNull(ctx.Response);
+                        }
+                    );
                 }
             });
 
-            using IDisposable subscription = DiagnosticListener.AllListeners.Subscribe(diagnosticListenerObserver);
+            using IDisposable subscription = DiagnosticListener.AllListeners.Subscribe(
+                diagnosticListenerObserver
+            );
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                diagnosticListenerObserver.Enable();
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-                HttpMetricsEnrichmentContext.AddCallback(request, static ctx =>
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    ctx.AddCustomTag("route", "/test");
-                });
+                    diagnosticListenerObserver.Enable();
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
+                    HttpMetricsEnrichmentContext.AddCallback(
+                        request,
+                        static ctx =>
+                        {
+                            ctx.AddCustomTag("route", "/test");
+                        }
+                    );
 
-                using HttpResponseMessage response = await SendAsync(client, request);
+                    using HttpResponseMessage response = await SendAsync(client, request);
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, 200);
-                Assert.Equal("/test", m.Tags.ToArray().Single(t => t.Key == "route").Value);
-                Assert.Equal("observed!", m.Tags.ToArray().Single(t => t.Key == "observed?").Value);
-
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync();
-            });
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, UseVersion, 200);
+                    Assert.Equal("/test", m.Tags.ToArray().Single(t => t.Key == "route").Value);
+                    Assert.Equal(
+                        "observed!",
+                        m.Tags.ToArray().Single(t => t.Key == "observed?").Value
+                    );
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync();
+                }
+            );
 
             static T GetProperty<T>(object obj, string propertyName)
             {
@@ -431,17 +597,26 @@ namespace System.Net.Http.Functional.Tests
         {
             Empty,
             ContentLength,
-            TransferEncodingChunked
+            TransferEncodingChunked,
         }
 
         [Theory]
         [InlineData(HttpCompletionOption.ResponseContentRead, ResponseContentType.Empty)]
         [InlineData(HttpCompletionOption.ResponseContentRead, ResponseContentType.ContentLength)]
-        [InlineData(HttpCompletionOption.ResponseContentRead, ResponseContentType.TransferEncodingChunked)]
+        [InlineData(
+            HttpCompletionOption.ResponseContentRead,
+            ResponseContentType.TransferEncodingChunked
+        )]
         [InlineData(HttpCompletionOption.ResponseHeadersRead, ResponseContentType.Empty)]
         [InlineData(HttpCompletionOption.ResponseHeadersRead, ResponseContentType.ContentLength)]
-        [InlineData(HttpCompletionOption.ResponseHeadersRead, ResponseContentType.TransferEncodingChunked)]
-        public async Task RequestDuration_EnrichmentHandler_Success_Recorded(HttpCompletionOption completionOption, ResponseContentType responseContentType)
+        [InlineData(
+            HttpCompletionOption.ResponseHeadersRead,
+            ResponseContentType.TransferEncodingChunked
+        )]
+        public async Task RequestDuration_EnrichmentHandler_Success_Recorded(
+            HttpCompletionOption completionOption,
+            ResponseContentType responseContentType
+        )
         {
             if (TestHttpMessageInvoker)
             {
@@ -449,81 +624,123 @@ namespace System.Net.Http.Functional.Tests
                 return;
             }
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClient client = CreateHttpClient(new EnrichmentHandler(Handler));
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-                using HttpResponseMessage response = await client.SendAsync(TestAsync, request, completionOption);
-                string responseContent = await response.Content.ReadAsStringAsync();
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClient client = CreateHttpClient(new EnrichmentHandler(Handler));
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
+                    using HttpResponseMessage response = await client.SendAsync(
+                        TestAsync,
+                        request,
+                        completionOption
+                    );
+                    string responseContent = await response.Content.ReadAsStringAsync();
 
-                if (responseContentType == ResponseContentType.ContentLength)
-                {
-                    Assert.NotNull(response.Content.Headers.ContentLength);
-                }
-                else if (responseContentType == ResponseContentType.TransferEncodingChunked)
-                {
-                    Assert.NotNull(response.Headers.TransferEncodingChunked);
-                }
-                else
-                {
-                    // Empty
-                    Assert.Empty(responseContent);
-                }
+                    if (responseContentType == ResponseContentType.ContentLength)
+                    {
+                        Assert.NotNull(response.Content.Headers.ContentLength);
+                    }
+                    else if (responseContentType == ResponseContentType.TransferEncodingChunked)
+                    {
+                        Assert.NotNull(response.Headers.TransferEncodingChunked);
+                    }
+                    else
+                    {
+                        // Empty
+                        Assert.Empty(responseContent);
+                    }
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, 200); ;
-                Assert.Equal("before!", m.Tags.ToArray().Single(t => t.Key == "before").Value);
-            }, async server =>
-            {
-                if (responseContentType == ResponseContentType.ContentLength)
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, UseVersion, 200);
+                    ;
+                    Assert.Equal("before!", m.Tags.ToArray().Single(t => t.Key == "before").Value);
+                },
+                async server =>
                 {
-                    string content = string.Join(' ', Enumerable.Range(0, 100));
-                    int contentLength = Encoding.ASCII.GetByteCount(content);
-                    await server.AcceptConnectionSendResponseAndCloseAsync(content: content, additionalHeaders: new[] { new HttpHeaderData("Content-Length", $"{contentLength}") });
+                    if (responseContentType == ResponseContentType.ContentLength)
+                    {
+                        string content = string.Join(' ', Enumerable.Range(0, 100));
+                        int contentLength = Encoding.ASCII.GetByteCount(content);
+                        await server.AcceptConnectionSendResponseAndCloseAsync(
+                            content: content,
+                            additionalHeaders: new[]
+                            {
+                                new HttpHeaderData("Content-Length", $"{contentLength}"),
+                            }
+                        );
+                    }
+                    else if (responseContentType == ResponseContentType.TransferEncodingChunked)
+                    {
+                        string content = "3\r\nfoo\r\n3\r\nbar\r\n0\r\n\r\n";
+                        await server.AcceptConnectionSendResponseAndCloseAsync(
+                            content: content,
+                            additionalHeaders: new[]
+                            {
+                                new HttpHeaderData("Transfer-Encoding", "chunked"),
+                            }
+                        );
+                    }
+                    else
+                    {
+                        // Empty
+                        await server.AcceptConnectionSendResponseAndCloseAsync();
+                    }
                 }
-                else if (responseContentType == ResponseContentType.TransferEncodingChunked)
-                {
-                    string content = "3\r\nfoo\r\n3\r\nbar\r\n0\r\n\r\n";
-                    await server.AcceptConnectionSendResponseAndCloseAsync(content: content, additionalHeaders: new[] { new HttpHeaderData("Transfer-Encoding", "chunked") });
-                }
-                else
-                {
-                    // Empty
-                    await server.AcceptConnectionSendResponseAndCloseAsync();
-                }
-            });
+            );
         }
 
         [ConditionalFact(nameof(SupportsSeparateHttpSpansForRedirects))]
         public Task ActiveRequests_Redirect_RecordedForEachHttpSpan()
         {
-            return LoopbackServerFactory.CreateServerAsync((originalServer, originalUri) =>
-            {
-                return LoopbackServerFactory.CreateServerAsync(async (redirectServer, redirectUri) =>
+            return LoopbackServerFactory.CreateServerAsync(
+                (originalServer, originalUri) =>
                 {
-                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                    using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(InstrumentNames.ActiveRequests);
-                    using HttpRequestMessage request = new(HttpMethod.Get, originalUri) { Version = UseVersion };
+                    return LoopbackServerFactory.CreateServerAsync(
+                        async (redirectServer, redirectUri) =>
+                        {
+                            using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                            using InstrumentRecorder<long> recorder = SetupInstrumentRecorder<long>(
+                                InstrumentNames.ActiveRequests
+                            );
+                            using HttpRequestMessage request = new(HttpMethod.Get, originalUri)
+                            {
+                                Version = UseVersion,
+                            };
 
-                    Task clientTask = SendAsync(client, request);
-                    Task serverTask = originalServer.HandleRequestAsync(HttpStatusCode.Redirect, new[] { new HttpHeaderData("Location", redirectUri.AbsoluteUri) });
+                            Task clientTask = SendAsync(client, request);
+                            Task serverTask = originalServer.HandleRequestAsync(
+                                HttpStatusCode.Redirect,
+                                new[] { new HttpHeaderData("Location", redirectUri.AbsoluteUri) }
+                            );
 
-                    await Task.WhenAny(clientTask, serverTask);
-                    Assert.False(clientTask.IsCompleted, $"{clientTask.Status}: {clientTask.Exception}");
-                    await serverTask;
+                            await Task.WhenAny(clientTask, serverTask);
+                            Assert.False(
+                                clientTask.IsCompleted,
+                                $"{clientTask.Status}: {clientTask.Exception}"
+                            );
+                            await serverTask;
 
-                    serverTask = redirectServer.HandleRequestAsync();
-                    await TestHelper.WhenAllCompletedOrAnyFailed(clientTask, serverTask);
-                    await clientTask;
+                            serverTask = redirectServer.HandleRequestAsync();
+                            await TestHelper.WhenAllCompletedOrAnyFailed(clientTask, serverTask);
+                            await clientTask;
 
-                    Assert.Collection(recorder.GetMeasurements(),
-                        m => VerifyActiveRequests(m, 1, originalUri),
-                        m => VerifyActiveRequests(m, -1, originalUri),
-                        m => VerifyActiveRequests(m, 1, redirectUri),
-                        m => VerifyActiveRequests(m, -1, redirectUri));
-                });
-            });
+                            Assert.Collection(
+                                recorder.GetMeasurements(),
+                                m => VerifyActiveRequests(m, 1, originalUri),
+                                m => VerifyActiveRequests(m, -1, originalUri),
+                                m => VerifyActiveRequests(m, 1, redirectUri),
+                                m => VerifyActiveRequests(m, -1, redirectUri)
+                            );
+                        }
+                    );
+                }
+            );
         }
 
         public static TheoryData<string, string> MethodData = new TheoryData<string, string>()
@@ -546,154 +763,271 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [PlatformSpecific(~TestPlatforms.Browser)] // BrowserHttpHandler supports only a limited set of methods.
         [MemberData(nameof(MethodData))]
-        public async Task RequestMetrics_EmitNormalizedMethodTags(string method, string expectedMethodTag)
+        public async Task RequestMetrics_EmitNormalizedMethodTags(
+            string method,
+            string expectedMethodTag
+        )
         {
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> requestDuration = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using InstrumentRecorder<long> activeRequests = SetupInstrumentRecorder<long>(InstrumentNames.ActiveRequests);
-                using InstrumentRecorder<double> timeInQueue = SetupInstrumentRecorder<double>(InstrumentNames.TimeInQueue);
-
-                using HttpRequestMessage request = new(new HttpMethod(method), uri) { Version = UseVersion };
-                if (expectedMethodTag == "CONNECT")
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    request.Headers.Host = "localhost";
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> requestDuration =
+                        SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
+                    using InstrumentRecorder<long> activeRequests = SetupInstrumentRecorder<long>(
+                        InstrumentNames.ActiveRequests
+                    );
+                    using InstrumentRecorder<double> timeInQueue = SetupInstrumentRecorder<double>(
+                        InstrumentNames.TimeInQueue
+                    );
+
+                    using HttpRequestMessage request = new(new HttpMethod(method), uri)
+                    {
+                        Version = UseVersion,
+                    };
+                    if (expectedMethodTag == "CONNECT")
+                    {
+                        request.Headers.Host = "localhost";
+                    }
+
+                    using HttpResponseMessage response = await client.SendAsync(TestAsync, request);
+
+                    Assert.All(
+                        requestDuration.GetMeasurements(),
+                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    );
+                    Assert.All(
+                        activeRequests.GetMeasurements(),
+                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    );
+                    Assert.All(
+                        timeInQueue.GetMeasurements(),
+                        m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag)
+                    );
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync();
                 }
-
-                using HttpResponseMessage response = await client.SendAsync(TestAsync, request);
-
-                Assert.All(requestDuration.GetMeasurements(), m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag));
-                Assert.All(activeRequests.GetMeasurements(), m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag));
-                Assert.All(timeInQueue.GetMeasurements(), m => VerifyTag(m.Tags.ToArray(), "http.request.method", expectedMethodTag));
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync();
-            });
+            );
         }
 
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
         public async Task AllSocketsHttpHandlerCounters_Success_Recorded()
         {
-            TaskCompletionSource clientWaitingTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource clientDisposedTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientWaitingTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource clientDisposedTcs = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using MultiInstrumentRecorder recorder = new(_meterFactory);
-
-                using (HttpMessageInvoker invoker = CreateHttpMessageInvoker())
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    Handler.MeterFactory = _meterFactory;
+                    using MultiInstrumentRecorder recorder = new(_meterFactory);
 
-                    using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-                    Task<HttpResponseMessage> sendAsyncTask = SendAsync(invoker, request);
-                    clientWaitingTcs.SetResult();
-                    using HttpResponseMessage response = await sendAsyncTask;
+                    using (HttpMessageInvoker invoker = CreateHttpMessageInvoker())
+                    {
+                        Handler.MeterFactory = _meterFactory;
 
-                    await WaitForEnvironmentTicksToAdvance();
+                        using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                        {
+                            Version = UseVersion,
+                        };
+                        Task<HttpResponseMessage> sendAsyncTask = SendAsync(invoker, request);
+                        clientWaitingTcs.SetResult();
+                        using HttpResponseMessage response = await sendAsyncTask;
+
+                        await WaitForEnvironmentTicksToAdvance();
+                    }
+
+                    clientDisposedTcs.SetResult();
+
+                    Action<RecordedCounter> requestsQueueDuration = m =>
+                        VerifyTimeInQueue(m.InstrumentName, m.Value, m.Tags, uri, UseVersion);
+                    Action<RecordedCounter> connectionNoLongerIdle = m =>
+                        VerifyOpenConnections(
+                            m.InstrumentName,
+                            m.Value,
+                            m.Tags,
+                            -1,
+                            uri,
+                            UseVersion,
+                            "idle"
+                        );
+                    Action<RecordedCounter> connectionIsActive = m =>
+                        VerifyOpenConnections(
+                            m.InstrumentName,
+                            m.Value,
+                            m.Tags,
+                            1,
+                            uri,
+                            UseVersion,
+                            "active"
+                        );
+
+                    Action<RecordedCounter> check1 = requestsQueueDuration;
+                    Action<RecordedCounter> check2 = connectionNoLongerIdle;
+                    Action<RecordedCounter> check3 = connectionIsActive;
+
+                    if (UseVersion.Major > 1)
+                    {
+                        // With HTTP/2 and HTTP/3, the idle state change is emitted before RequestsQueueDuration.
+                        check1 = connectionNoLongerIdle;
+                        check2 = connectionIsActive;
+                        check3 = requestsQueueDuration;
+                    }
+
+                    IReadOnlyList<RecordedCounter> measurements = recorder.GetMeasurements();
+                    foreach (RecordedCounter m in measurements)
+                    {
+                        _output.WriteLine(m.ToString());
+                    }
+
+                    Assert.Collection(
+                        measurements,
+                        m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, 1, uri),
+                        m =>
+                            VerifyOpenConnections(
+                                m.InstrumentName,
+                                m.Value,
+                                m.Tags,
+                                1,
+                                uri,
+                                UseVersion,
+                                "idle"
+                            ),
+                        check1, // requestsQueueDuration, connectionNoLongerIdle, connectionIsActive in the appropriate order.
+                        check2,
+                        check3,
+                        m =>
+                            VerifyOpenConnections(
+                                m.InstrumentName,
+                                m.Value,
+                                m.Tags,
+                                -1,
+                                uri,
+                                UseVersion,
+                                "active"
+                            ),
+                        m =>
+                            VerifyOpenConnections(
+                                m.InstrumentName,
+                                m.Value,
+                                m.Tags,
+                                1,
+                                uri,
+                                UseVersion,
+                                "idle"
+                            ),
+                        m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, -1, uri),
+                        m =>
+                            VerifyRequestDuration(
+                                m.InstrumentName,
+                                (double)m.Value,
+                                m.Tags,
+                                uri,
+                                UseVersion,
+                                200
+                            ),
+                        m =>
+                            VerifyConnectionDuration(
+                                m.InstrumentName,
+                                m.Value,
+                                m.Tags,
+                                uri,
+                                UseVersion
+                            ),
+                        m =>
+                            VerifyOpenConnections(
+                                m.InstrumentName,
+                                m.Value,
+                                m.Tags,
+                                -1,
+                                uri,
+                                UseVersion,
+                                "idle"
+                            )
+                    );
+                },
+                async server =>
+                {
+                    await clientWaitingTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
+
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync();
+                        await connection.SendResponseAsync();
+                        await clientDisposedTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
+                    });
                 }
-
-                clientDisposedTcs.SetResult();
-
-                Action<RecordedCounter> requestsQueueDuration = m =>
-                    VerifyTimeInQueue(m.InstrumentName, m.Value, m.Tags, uri, UseVersion);
-                Action<RecordedCounter> connectionNoLongerIdle = m =>
-                    VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, UseVersion, "idle");
-                Action<RecordedCounter> connectionIsActive = m =>
-                    VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, UseVersion, "active");
-
-                Action<RecordedCounter> check1 = requestsQueueDuration;
-                Action<RecordedCounter> check2 = connectionNoLongerIdle;
-                Action<RecordedCounter> check3 = connectionIsActive;
-
-                if (UseVersion.Major > 1)
-                {
-                    // With HTTP/2 and HTTP/3, the idle state change is emitted before RequestsQueueDuration.
-                    check1 = connectionNoLongerIdle;
-                    check2 = connectionIsActive;
-                    check3 = requestsQueueDuration;
-                }
-
-                IReadOnlyList<RecordedCounter> measurements = recorder.GetMeasurements();
-                foreach (RecordedCounter m in measurements)
-                {
-                    _output.WriteLine(m.ToString());
-                }
-
-                Assert.Collection(measurements,
-                    m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, 1, uri),
-                    m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, UseVersion, "idle"),
-                    check1, // requestsQueueDuration, connectionNoLongerIdle, connectionIsActive in the appropriate order.
-                    check2,
-                    check3,
-                    m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, UseVersion, "active"),
-                    m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, UseVersion, "idle"),
-
-                    m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, -1, uri),
-                    m => VerifyRequestDuration(m.InstrumentName, (double)m.Value, m.Tags, uri, UseVersion, 200),
-                    m => VerifyConnectionDuration(m.InstrumentName, m.Value, m.Tags, uri, UseVersion),
-                    m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, UseVersion, "idle"));
-            },
-            async server =>
-            {
-                await clientWaitingTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
-
-                await server.AcceptConnectionAsync(async connection =>
-                {
-                    await connection.ReadRequestDataAsync();
-                    await connection.SendResponseAsync();
-                    await clientDisposedTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
-                });
-            });
+            );
         }
 
         [Fact]
         public async Task RequestDuration_RequestCancelled_ErrorReasonIsExceptionType()
         {
-            TaskCompletionSource clientCompleted = new(TaskCreationOptions.RunContinuationsAsynchronously);
-            TaskCompletionSource requestReceived = new(TaskCreationOptions.RunContinuationsAsynchronously);
+            TaskCompletionSource clientCompleted = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            TaskCompletionSource requestReceived = new(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
 
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
-                using CancellationTokenSource requestCts = new();
-
-                Task clientTask = SendAsync(client, request, requestCts.Token);
-
-                await requestReceived.Task.WaitAsync(TestHelper.PassingTestTimeout);
-                requestCts.Cancel();
-
-                Exception clientException = await Assert.ThrowsAnyAsync<Exception>(() => clientTask);
-                _output.WriteLine($"Client exception: {clientException}");
-
-                string[] expectedExceptionTypes = TestAsync
-                    ? [typeof(TaskCanceledException).FullName]
-                    : [typeof(TaskCanceledException).FullName, typeof(OperationCanceledException).FullName];
-
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, acceptedErrorTypes: expectedExceptionTypes);
-
-                clientCompleted.SetResult();
-            },
-            async server =>
-            {
-                try
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
                 {
-                    await server.AcceptConnectionAsync(async connection =>
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
                     {
-                        await connection.ReadRequestDataAsync();
-                        requestReceived.SetResult();
-                        await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
-                    });
-                }
-                catch (Exception ex)
+                        Version = UseVersion,
+                    };
+                    using CancellationTokenSource requestCts = new();
+
+                    Task clientTask = SendAsync(client, request, requestCts.Token);
+
+                    await requestReceived.Task.WaitAsync(TestHelper.PassingTestTimeout);
+                    requestCts.Cancel();
+
+                    Exception clientException = await Assert.ThrowsAnyAsync<Exception>(
+                        () => clientTask
+                    );
+                    _output.WriteLine($"Client exception: {clientException}");
+
+                    string[] expectedExceptionTypes = TestAsync
+                        ? [typeof(TaskCanceledException).FullName]
+                        :
+                        [
+                            typeof(TaskCanceledException).FullName,
+                            typeof(OperationCanceledException).FullName,
+                        ];
+
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, acceptedErrorTypes: expectedExceptionTypes);
+
+                    clientCompleted.SetResult();
+                },
+                async server =>
                 {
-                    _output.WriteLine($"Ignored exception: {ex}");
+                    try
+                    {
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestDataAsync();
+                            requestReceived.SetResult();
+                            await clientCompleted.Task.WaitAsync(TestHelper.PassingTestTimeout);
+                        });
+                    }
+                    catch (Exception ex)
+                    {
+                        _output.WriteLine($"Ignored exception: {ex}");
+                    }
                 }
-            });
+            );
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotBrowser))]
@@ -708,13 +1042,18 @@ namespace System.Net.Http.Functional.Tests
             Uri uri = new("https://dummy:8080");
 
             using HttpMessageInvoker client = CreateHttpMessageInvoker();
-            using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
+            using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                InstrumentNames.RequestDuration
+            );
             using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
             using CancellationTokenSource requestCts = new();
 
-            GetUnderlyingSocketsHttpHandler(Handler).ConnectCallback = (_, _) => throw new Exception();
+            GetUnderlyingSocketsHttpHandler(Handler).ConnectCallback = (_, _) =>
+                throw new Exception();
 
-            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(() => SendAsync(client, request));
+            Exception ex = await Assert.ThrowsAsync<HttpRequestException>(
+                () => SendAsync(client, request)
+            );
             _output.WriteLine($"Client exception: {ex}");
 
             Measurement<double> m = Assert.Single(recorder.GetMeasurements());
@@ -732,7 +1071,11 @@ namespace System.Net.Http.Functional.Tests
             base.Dispose(disposing);
         }
 
-        protected Task<HttpResponseMessage> SendAsync(HttpMessageInvoker invoker, HttpRequestMessage request, CancellationToken cancellationToken = default)
+        protected Task<HttpResponseMessage> SendAsync(
+            HttpMessageInvoker invoker,
+            HttpRequestMessage request,
+            CancellationToken cancellationToken = default
+        )
         {
             if (TestHttpMessageInvoker)
             {
@@ -745,9 +1088,9 @@ namespace System.Net.Http.Functional.Tests
         }
 
         protected HttpMessageInvoker CreateHttpMessageInvoker(HttpMessageHandler? handler = null) =>
-            TestHttpMessageInvoker ?
-            new HttpMessageInvoker(handler ?? Handler) :
-            CreateHttpClient(handler ?? Handler);
+            TestHttpMessageInvoker
+                ? new HttpMessageInvoker(handler ?? Handler)
+                : CreateHttpClient(handler ?? Handler);
 
         protected InstrumentRecorder<T> SetupInstrumentRecorder<T>(string instrumentName)
             where T : struct
@@ -758,61 +1101,78 @@ namespace System.Net.Http.Functional.Tests
 
         protected sealed class EnrichmentHandler : DelegatingHandler
         {
-            public EnrichmentHandler(HttpMessageHandler innerHandler) : base(innerHandler)
-            {
-            }
+            public EnrichmentHandler(HttpMessageHandler innerHandler)
+                : base(innerHandler) { }
 
-            protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override HttpResponseMessage Send(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 HttpMetricsEnrichmentContext.AddCallback(request, Enrich);
                 return base.Send(request, cancellationToken);
             }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 HttpMetricsEnrichmentContext.AddCallback(request, Enrich);
                 return base.SendAsync(request, cancellationToken);
             }
 
-            private static void Enrich(HttpMetricsEnrichmentContext context) => context.AddCustomTag("before", "before!");
+            private static void Enrich(HttpMetricsEnrichmentContext context) =>
+                context.AddCustomTag("before", "before!");
         }
     }
 
     public abstract class HttpMetricsTest_Http11 : HttpMetricsTest
     {
         protected override Version UseVersion => HttpVersion.Version11;
-        public HttpMetricsTest_Http11(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http11(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotNodeJS))]
         public async Task RequestDuration_EnrichmentHandler_ContentLengthError_Recorded()
         {
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker(new EnrichmentHandler(Handler));
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker(
+                        new EnrichmentHandler(Handler)
+                    );
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                if (TestHttpMessageInvoker)
-                {
-                    using HttpResponseMessage response = await SendAsync(client, request);
-                }
-                else
-                {
-                    await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                    if (TestHttpMessageInvoker)
                     {
                         using HttpResponseMessage response = await SendAsync(client, request);
-                    });
-                }
+                    }
+                    else
+                    {
+                        await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                        {
+                            using HttpResponseMessage response = await SendAsync(client, request);
+                        });
+                    }
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, 200);
-                Assert.Equal("before!", m.Tags.ToArray().Single(t => t.Key == "before").Value);
-
-            }, server => server.HandleRequestAsync(headers: new[] {
-                new HttpHeaderData("Content-Length", "1000")
-            }, content: "x"));
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(m, uri, UseVersion, 200);
+                    Assert.Equal("before!", m.Tags.ToArray().Single(t => t.Key == "before").Value);
+                },
+                server =>
+                    server.HandleRequestAsync(
+                        headers: new[] { new HttpHeaderData("Content-Length", "1000") },
+                        content: "x"
+                    )
+            );
         }
 
         [Theory]
@@ -821,21 +1181,37 @@ namespace System.Net.Http.Functional.Tests
         [InlineData(599)]
         public Task RequestDuration_ErrorStatus_ErrorTypeRecorded(int statusCode)
         {
-            return LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
+            return LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                using HttpResponseMessage response = await SendAsync(client, request);
+                    using HttpResponseMessage response = await SendAsync(client, request);
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, UseVersion, statusCode, "GET", acceptedErrorTypes: new[] { $"{statusCode}" });
-
-            }, async server =>
-            {
-                await server.AcceptConnectionSendResponseAndCloseAsync(statusCode: (HttpStatusCode)statusCode);
-            });
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(
+                        m,
+                        uri,
+                        UseVersion,
+                        statusCode,
+                        "GET",
+                        acceptedErrorTypes: new[] { $"{statusCode}" }
+                    );
+                },
+                async server =>
+                {
+                    await server.AcceptConnectionSendResponseAndCloseAsync(
+                        statusCode: (HttpStatusCode)statusCode
+                    );
+                }
+            );
         }
 
         [Fact]
@@ -843,89 +1219,123 @@ namespace System.Net.Http.Functional.Tests
         public async Task RequestDuration_ConnectionClosedWhileReceivingHeaders_Recorded()
         {
             using CancellationTokenSource cancelServerCts = new CancellationTokenSource();
-            await LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = UseVersion };
+            await LoopbackServerFactory.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                    {
+                        Version = UseVersion,
+                    };
 
-                Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
-                {
-                    // Getting a cancellation is also good if we are unable to detect the peer shutdown.
-                    using CancellationTokenSource cts = new CancellationTokenSource(10_000);
-                    using HttpResponseMessage response = await SendAsync(client, request, cts.Token);
-                });
-                cancelServerCts.Cancel();
-                Assert.True(ex is HttpRequestException or TaskCanceledException);
+                    Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
+                    {
+                        // Getting a cancellation is also good if we are unable to detect the peer shutdown.
+                        using CancellationTokenSource cts = new CancellationTokenSource(10_000);
+                        using HttpResponseMessage response = await SendAsync(
+                            client,
+                            request,
+                            cts.Token
+                        );
+                    });
+                    cancelServerCts.Cancel();
+                    Assert.True(ex is HttpRequestException or TaskCanceledException);
 
-                Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                VerifyRequestDuration(m, uri, acceptedErrorTypes: [typeof(TaskCanceledException).FullName, "response_ended"]);
-            }, async server =>
-            {
-                try
+                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                    VerifyRequestDuration(
+                        m,
+                        uri,
+                        acceptedErrorTypes:
+                        [
+                            typeof(TaskCanceledException).FullName,
+                            "response_ended",
+                        ]
+                    );
+                },
+                async server =>
                 {
-                    var connection = (LoopbackServer.Connection)await server.EstablishGenericConnectionAsync().WaitAsync(cancelServerCts.Token);
-                    connection.Socket.Shutdown(SocketShutdown.Send);
+                    try
+                    {
+                        var connection = (LoopbackServer.Connection)
+                            await server
+                                .EstablishGenericConnectionAsync()
+                                .WaitAsync(cancelServerCts.Token);
+                        connection.Socket.Shutdown(SocketShutdown.Send);
+                    }
+                    catch (Exception ex)
+                    {
+                        _output.WriteLine($"Ignored exception: {ex}");
+                    }
                 }
-                catch (Exception ex)
-                {
-                    _output.WriteLine($"Ignored exception: {ex}");
-                }
-            });
+            );
         }
     }
 
     [ActiveIssue("https://github.com/dotnet/runtime/issues/93754", TestPlatforms.Browser)]
     public class HttpMetricsTest_Http11_Async : HttpMetricsTest_Http11
     {
-        public HttpMetricsTest_Http11_Async(ITestOutputHelper output) : base(output)
-        {
-        }
+        public HttpMetricsTest_Http11_Async(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
         [InlineData(false)]
         [InlineData(true)]
-        public async Task RequestDuration_HttpVersionDowngrade_LogsActualProtocol(bool malformedResponse)
+        public async Task RequestDuration_HttpVersionDowngrade_LogsActualProtocol(
+            bool malformedResponse
+        )
         {
-            await LoopbackServer.CreateServerAsync(async server =>
-            {
-                using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                using HttpRequestMessage request = new(HttpMethod.Get, server.Address)
+            await LoopbackServer.CreateServerAsync(
+                async server =>
                 {
-                    Version = HttpVersion.Version20,
-                    VersionPolicy = HttpVersionPolicy.RequestVersionOrLower
-                };
+                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                        InstrumentNames.RequestDuration
+                    );
+                    using HttpRequestMessage request = new(HttpMethod.Get, server.Address)
+                    {
+                        Version = HttpVersion.Version20,
+                        VersionPolicy = HttpVersionPolicy.RequestVersionOrLower,
+                    };
 
-                Task<HttpResponseMessage> clientTask = SendAsync(client, request);
+                    Task<HttpResponseMessage> clientTask = SendAsync(client, request);
 
-                await server.AcceptConnectionAsync(async connection =>
-                {
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        if (malformedResponse)
+                        {
+                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                "!malformed!"
+                            );
+                        }
+                        else
+                        {
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        }
+                    });
+
                     if (malformedResponse)
                     {
-                        await connection.ReadRequestHeaderAndSendCustomResponseAsync("!malformed!");
+                        await Assert.ThrowsAsync<HttpRequestException>(() => clientTask);
+                        Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                        VerifyRequestDuration(
+                            m,
+                            server.Address,
+                            acceptedErrorTypes: ["response_ended"]
+                        );
                     }
                     else
                     {
-                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                        using HttpResponseMessage response = await clientTask;
+
+                        Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                        VerifyRequestDuration(m, server.Address, HttpVersion.Version11, 200);
                     }
-                });
-
-                if (malformedResponse)
-                {
-                    await Assert.ThrowsAsync<HttpRequestException>(() => clientTask);
-                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                    VerifyRequestDuration(m, server.Address, acceptedErrorTypes: ["response_ended"]);
-                }
-                else
-                {
-                    using HttpResponseMessage response = await clientTask;
-
-                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                    VerifyRequestDuration(m, server.Address, HttpVersion.Version11, 200);
-                }
-
-            }, new LoopbackServer.Options() { UseSsl = true });
+                },
+                new LoopbackServer.Options() { UseSsl = true }
+            );
         }
     }
 
@@ -933,61 +1343,104 @@ namespace System.Net.Http.Functional.Tests
     public class HttpMetricsTest_Http11_Async_HttpMessageInvoker : HttpMetricsTest_Http11_Async
     {
         protected override bool TestHttpMessageInvoker => true;
-        public HttpMetricsTest_Http11_Async_HttpMessageInvoker(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http11_Async_HttpMessageInvoker(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsNotMobile))]
     public class HttpMetricsTest_Http11_Sync : HttpMetricsTest_Http11
     {
         protected override bool TestAsync => false;
-        public HttpMetricsTest_Http11_Sync(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http11_Sync(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [ConditionalClass(typeof(HttpMetricsTest_Http20), nameof(IsEnabled))]
     public class HttpMetricsTest_Http20 : HttpMetricsTest
     {
-        public static bool IsEnabled = PlatformDetection.IsNotMobile && PlatformDetection.SupportsAlpn;
+        public static bool IsEnabled =
+            PlatformDetection.IsNotMobile && PlatformDetection.SupportsAlpn;
         protected override Version UseVersion => HttpVersion.Version20;
-        public HttpMetricsTest_Http20(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http20(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(nameof(SupportsSeparateHttpSpansForRedirects))]
         public Task RequestDuration_Redirect_RecordedForEachHttpSpan()
         {
-            return GetFactoryForVersion(HttpVersion.Version11).CreateServerAsync((originalServer, originalUri) =>
-            {
-                return GetFactoryForVersion(HttpVersion.Version20).CreateServerAsync(async (redirectServer, redirectUri) =>
-                {
-                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
-                    using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                    using HttpRequestMessage request = new(HttpMethod.Get, originalUri) { Version = HttpVersion.Version20 };
-
-                    Task clientTask = SendAsync(client, request);
-                    Task serverTask = originalServer.HandleRequestAsync(HttpStatusCode.Redirect, new[] { new HttpHeaderData("Location", redirectUri.AbsoluteUri) });
-
-                    await Task.WhenAny(clientTask, serverTask);
-                    Assert.False(clientTask.IsCompleted, $"{clientTask.Status}: {clientTask.Exception}");
-                    await serverTask;
-
-                    serverTask = redirectServer.HandleRequestAsync();
-                    await TestHelper.WhenAllCompletedOrAnyFailed(clientTask, serverTask);
-                    await clientTask;
-
-                    Assert.Collection(recorder.GetMeasurements(), m0 =>
+            return GetFactoryForVersion(HttpVersion.Version11)
+                .CreateServerAsync(
+                    (originalServer, originalUri) =>
                     {
-                        VerifyRequestDuration(m0, originalUri, HttpVersion.Version11, (int)HttpStatusCode.Redirect);
-                    }, m1 =>
-                    {
-                        VerifyRequestDuration(m1, redirectUri, HttpVersion.Version20, (int)HttpStatusCode.OK);
-                    });
+                        return GetFactoryForVersion(HttpVersion.Version20)
+                            .CreateServerAsync(
+                                async (redirectServer, redirectUri) =>
+                                {
+                                    using HttpMessageInvoker client = CreateHttpMessageInvoker();
+                                    using InstrumentRecorder<double> recorder =
+                                        SetupInstrumentRecorder<double>(
+                                            InstrumentNames.RequestDuration
+                                        );
+                                    using HttpRequestMessage request = new(
+                                        HttpMethod.Get,
+                                        originalUri
+                                    )
+                                    {
+                                        Version = HttpVersion.Version20,
+                                    };
 
-                }, options: new GenericLoopbackOptions() { UseSsl = true });
-            }, options: new GenericLoopbackOptions() { UseSsl = false});
+                                    Task clientTask = SendAsync(client, request);
+                                    Task serverTask = originalServer.HandleRequestAsync(
+                                        HttpStatusCode.Redirect,
+                                        new[]
+                                        {
+                                            new HttpHeaderData("Location", redirectUri.AbsoluteUri),
+                                        }
+                                    );
+
+                                    await Task.WhenAny(clientTask, serverTask);
+                                    Assert.False(
+                                        clientTask.IsCompleted,
+                                        $"{clientTask.Status}: {clientTask.Exception}"
+                                    );
+                                    await serverTask;
+
+                                    serverTask = redirectServer.HandleRequestAsync();
+                                    await TestHelper.WhenAllCompletedOrAnyFailed(
+                                        clientTask,
+                                        serverTask
+                                    );
+                                    await clientTask;
+
+                                    Assert.Collection(
+                                        recorder.GetMeasurements(),
+                                        m0 =>
+                                        {
+                                            VerifyRequestDuration(
+                                                m0,
+                                                originalUri,
+                                                HttpVersion.Version11,
+                                                (int)HttpStatusCode.Redirect
+                                            );
+                                        },
+                                        m1 =>
+                                        {
+                                            VerifyRequestDuration(
+                                                m1,
+                                                redirectUri,
+                                                HttpVersion.Version20,
+                                                (int)HttpStatusCode.OK
+                                            );
+                                        }
+                                    );
+                                },
+                                options: new GenericLoopbackOptions() { UseSsl = true }
+                            );
+                    },
+                    options: new GenericLoopbackOptions() { UseSsl = false }
+                );
         }
 
         [Fact]
@@ -995,16 +1448,25 @@ namespace System.Net.Http.Functional.Tests
         {
             using Http2LoopbackServer server = Http2LoopbackServer.CreateServer();
             using HttpMessageInvoker client = CreateHttpMessageInvoker();
-            using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(InstrumentNames.RequestDuration);
+            using InstrumentRecorder<double> recorder = SetupInstrumentRecorder<double>(
+                InstrumentNames.RequestDuration
+            );
 
-            using HttpRequestMessage request = new(HttpMethod.Get, server.Address) { Version = HttpVersion.Version20 };
+            using HttpRequestMessage request = new(HttpMethod.Get, server.Address)
+            {
+                Version = HttpVersion.Version20,
+            };
             Task<HttpResponseMessage> sendTask = SendAsync(client, request);
 
             Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
             int streamId = await connection.ReadRequestHeaderAsync();
 
             // Send a reset stream frame so that the stream moves to a terminal state.
-            RstStreamFrame resetStream = new RstStreamFrame(FrameFlags.None, (int)ProtocolErrors.INTERNAL_ERROR, streamId);
+            RstStreamFrame resetStream = new RstStreamFrame(
+                FrameFlags.None,
+                (int)ProtocolErrors.INTERNAL_ERROR,
+                streamId
+            );
             await connection.WriteFrameAsync(resetStream);
 
             await Assert.ThrowsAsync<HttpRequestException>(async () =>
@@ -1020,9 +1482,9 @@ namespace System.Net.Http.Functional.Tests
     public class HttpMetricsTest_Http20_HttpMessageInvoker : HttpMetricsTest_Http20
     {
         protected override bool TestHttpMessageInvoker => true;
-        public HttpMetricsTest_Http20_HttpMessageInvoker(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http20_HttpMessageInvoker(ITestOutputHelper output)
+            : base(output) { }
     }
 
     [Collection(nameof(DisableParallelization))]
@@ -1030,125 +1492,253 @@ namespace System.Net.Http.Functional.Tests
     public class HttpMetricsTest_Http30 : HttpMetricsTest
     {
         protected override Version UseVersion => HttpVersion.Version30;
-        public HttpMetricsTest_Http30(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http30(ITestOutputHelper output)
+            : base(output) { }
     }
 
     public class HttpMetricsTest_Http30_HttpMessageInvoker : HttpMetricsTest_Http30
     {
         protected override bool TestHttpMessageInvoker => true;
-        public HttpMetricsTest_Http30_HttpMessageInvoker(ITestOutputHelper output) : base(output)
-        {
-        }
+
+        public HttpMetricsTest_Http30_HttpMessageInvoker(ITestOutputHelper output)
+            : base(output) { }
     }
 
     // Make sure the instruments are working with the default Meter.
     public class HttpMetricsTest_DefaultMeter : HttpMetricsTestBase
     {
-        public HttpMetricsTest_DefaultMeter(ITestOutputHelper output) : base(output)
-        {
-        }
+        public HttpMetricsTest_DefaultMeter(ITestOutputHelper output)
+            : base(output) { }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void ActiveRequests_Success_Recorded()
         {
-            RemoteExecutor.Invoke(static async Task () =>
-            {
-                using HttpMetricsTest_DefaultMeter test = new(null);
-                await test.LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
+            RemoteExecutor
+                .Invoke(static async Task () =>
                 {
-                    using HttpClient client = test.CreateHttpClient();
-                    using InstrumentRecorder<long> recorder = new InstrumentRecorder<long>(InstrumentNames.ActiveRequests);
-                    using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = test.UseVersion };
+                    using HttpMetricsTest_DefaultMeter test = new(null);
+                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
+                        async uri =>
+                        {
+                            using HttpClient client = test.CreateHttpClient();
+                            using InstrumentRecorder<long> recorder = new InstrumentRecorder<long>(
+                                InstrumentNames.ActiveRequests
+                            );
+                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                            {
+                                Version = test.UseVersion,
+                            };
 
-                    HttpResponseMessage response = await client.SendAsync(request);
-                    response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
+                            HttpResponseMessage response = await client.SendAsync(request);
+                            response.Dispose(); // Make sure disposal doesn't interfere with recording by enforcing early disposal.
 
-                    Assert.Collection(recorder.GetMeasurements(),
-                        m => VerifyActiveRequests(m, 1, uri),
-                        m => VerifyActiveRequests(m, -1, uri));
-                }, async server =>
-                {
-                    await server.AcceptConnectionSendResponseAndCloseAsync();
-                });
-            }).Dispose();
+                            Assert.Collection(
+                                recorder.GetMeasurements(),
+                                m => VerifyActiveRequests(m, 1, uri),
+                                m => VerifyActiveRequests(m, -1, uri)
+                            );
+                        },
+                        async server =>
+                        {
+                            await server.AcceptConnectionSendResponseAndCloseAsync();
+                        }
+                    );
+                })
+                .Dispose();
         }
 
-        public static bool RemoteExecutorAndSocketsHttpHandlerSupported => RemoteExecutor.IsSupported && SocketsHttpHandler.IsSupported;
+        public static bool RemoteExecutorAndSocketsHttpHandlerSupported =>
+            RemoteExecutor.IsSupported && SocketsHttpHandler.IsSupported;
 
         [ConditionalFact(nameof(RemoteExecutorAndSocketsHttpHandlerSupported))]
         public void AllSocketsHttpHandlerCounters_Success_Recorded()
         {
-            RemoteExecutor.Invoke(static async Task () =>
-            {
-                TaskCompletionSource clientWaitingTcs = new(TaskCreationOptions.RunContinuationsAsynchronously);
-
-                using HttpMetricsTest_DefaultMeter test = new(null);
-                await test.LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
+            RemoteExecutor
+                .Invoke(static async Task () =>
                 {
-                    using MultiInstrumentRecorder recorder = new();
+                    TaskCompletionSource clientWaitingTcs = new(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
 
-                    using (HttpClient client = test.CreateHttpClient())
-                    {
-                        using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = test.UseVersion };
-                        Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(request);
-                        clientWaitingTcs.SetResult();
-                        using HttpResponseMessage response = await sendAsyncTask;
+                    using HttpMetricsTest_DefaultMeter test = new(null);
+                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
+                        async uri =>
+                        {
+                            using MultiInstrumentRecorder recorder = new();
 
-                        await WaitForEnvironmentTicksToAdvance();
-                    }
+                            using (HttpClient client = test.CreateHttpClient())
+                            {
+                                using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                                {
+                                    Version = test.UseVersion,
+                                };
+                                Task<HttpResponseMessage> sendAsyncTask = client.SendAsync(request);
+                                clientWaitingTcs.SetResult();
+                                using HttpResponseMessage response = await sendAsyncTask;
 
-                    Version version = HttpVersion.Version11;
-                    Assert.Collection(recorder.GetMeasurements(),
-                        m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, 1, uri),
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, version, "idle"),
-                        m => VerifyTimeInQueue(m.InstrumentName, m.Value, m.Tags, uri, version),
+                                await WaitForEnvironmentTicksToAdvance();
+                            }
 
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, version, "idle"),
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, version, "active"),
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, version, "active"),
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, 1, uri, version, "idle"),
+                            Version version = HttpVersion.Version11;
+                            Assert.Collection(
+                                recorder.GetMeasurements(),
+                                m =>
+                                    VerifyActiveRequests(
+                                        m.InstrumentName,
+                                        (long)m.Value,
+                                        m.Tags,
+                                        1,
+                                        uri
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        1,
+                                        uri,
+                                        version,
+                                        "idle"
+                                    ),
+                                m =>
+                                    VerifyTimeInQueue(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        uri,
+                                        version
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        -1,
+                                        uri,
+                                        version,
+                                        "idle"
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        1,
+                                        uri,
+                                        version,
+                                        "active"
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        -1,
+                                        uri,
+                                        version,
+                                        "active"
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        1,
+                                        uri,
+                                        version,
+                                        "idle"
+                                    ),
+                                m =>
+                                    VerifyActiveRequests(
+                                        m.InstrumentName,
+                                        (long)m.Value,
+                                        m.Tags,
+                                        -1,
+                                        uri
+                                    ),
+                                m =>
+                                    VerifyRequestDuration(
+                                        m.InstrumentName,
+                                        (double)m.Value,
+                                        m.Tags,
+                                        uri,
+                                        version,
+                                        200
+                                    ),
+                                m =>
+                                    VerifyConnectionDuration(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        uri,
+                                        version
+                                    ),
+                                m =>
+                                    VerifyOpenConnections(
+                                        m.InstrumentName,
+                                        m.Value,
+                                        m.Tags,
+                                        -1,
+                                        uri,
+                                        version,
+                                        "idle"
+                                    )
+                            );
+                        },
+                        async server =>
+                        {
+                            await clientWaitingTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
 
-                        m => VerifyActiveRequests(m.InstrumentName, (long)m.Value, m.Tags, -1, uri),
-                        m => VerifyRequestDuration(m.InstrumentName, (double)m.Value, m.Tags, uri, version, 200),
-                        m => VerifyConnectionDuration(m.InstrumentName, m.Value, m.Tags, uri, version),
-                        m => VerifyOpenConnections(m.InstrumentName, m.Value, m.Tags, -1, uri, version, "idle"));
-                },
-                async server =>
-                {
-                    await clientWaitingTcs.Task.WaitAsync(TestHelper.PassingTestTimeout);
-
-                    await server.AcceptConnectionAsync(async connection =>
-                    {
-                        await connection.ReadRequestDataAsync();
-                        await connection.SendResponseAsync(isFinal: false);
-                        await connection.WaitForCloseAsync(CancellationToken.None);
-                    });
-                });
-            }).Dispose();
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                await connection.ReadRequestDataAsync();
+                                await connection.SendResponseAsync(isFinal: false);
+                                await connection.WaitForCloseAsync(CancellationToken.None);
+                            });
+                        }
+                    );
+                })
+                .Dispose();
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void RequestDuration_Success_Recorded()
         {
-            RemoteExecutor.Invoke(static async Task () =>
-            {
-                using HttpMetricsTest_DefaultMeter test = new(null);
-                await test.LoopbackServerFactory.CreateClientAndServerAsync(async uri =>
+            RemoteExecutor
+                .Invoke(static async Task () =>
                 {
-                    using HttpClient client = test.CreateHttpClient();
-                    using InstrumentRecorder<double> recorder = new InstrumentRecorder<double>(InstrumentNames.RequestDuration);
-                    using HttpRequestMessage request = new(HttpMethod.Get, uri) { Version = test.UseVersion };
+                    using HttpMetricsTest_DefaultMeter test = new(null);
+                    await test.LoopbackServerFactory.CreateClientAndServerAsync(
+                        async uri =>
+                        {
+                            using HttpClient client = test.CreateHttpClient();
+                            using InstrumentRecorder<double> recorder =
+                                new InstrumentRecorder<double>(InstrumentNames.RequestDuration);
+                            using HttpRequestMessage request = new(HttpMethod.Get, uri)
+                            {
+                                Version = test.UseVersion,
+                            };
 
-                    using HttpResponseMessage response = await client.SendAsync(request);
-                    Measurement<double> m = Assert.Single(recorder.GetMeasurements());
-                    VerifyRequestDuration(m, uri, HttpVersion.Version11, (int)HttpStatusCode.OK, "GET");
-                }, async server =>
-                {
-                    await server.AcceptConnectionSendResponseAndCloseAsync(HttpStatusCode.OK);
-                });
-            }).Dispose();
+                            using HttpResponseMessage response = await client.SendAsync(request);
+                            Measurement<double> m = Assert.Single(recorder.GetMeasurements());
+                            VerifyRequestDuration(
+                                m,
+                                uri,
+                                HttpVersion.Version11,
+                                (int)HttpStatusCode.OK,
+                                "GET"
+                            );
+                        },
+                        async server =>
+                        {
+                            await server.AcceptConnectionSendResponseAndCloseAsync(
+                                HttpStatusCode.OK
+                            );
+                        }
+                    );
+                })
+                .Dispose();
         }
     }
 
@@ -1158,10 +1748,7 @@ namespace System.Net.Http.Functional.Tests
         public void SocketsHttpHandler_Dispose_DoesNotDisposeMeterFactory()
         {
             using TestMeterFactory factory = new();
-            SocketsHttpHandler handler = new()
-            {
-                MeterFactory = factory
-            };
+            SocketsHttpHandler handler = new() { MeterFactory = factory };
             handler.Dispose();
             Assert.False(factory.IsDisposed);
         }
@@ -1170,10 +1757,7 @@ namespace System.Net.Http.Functional.Tests
         public void HttpClientHandler_Dispose_DoesNotDisposeMeter()
         {
             using TestMeterFactory factory = new();
-            HttpClientHandler handler = new()
-            {
-                MeterFactory = factory
-            };
+            HttpClientHandler handler = new() { MeterFactory = factory };
             handler.Dispose();
             Assert.False(factory.IsDisposed);
         }
@@ -1183,7 +1767,9 @@ namespace System.Net.Http.Functional.Tests
         {
             HttpClientHandler handler = new();
             handler.Dispose();
-            Assert.ThrowsAny<ObjectDisposedException>(() => handler.MeterFactory = new TestMeterFactory());
+            Assert.ThrowsAny<ObjectDisposedException>(
+                () => handler.MeterFactory = new TestMeterFactory()
+            );
         }
 
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
@@ -1191,33 +1777,45 @@ namespace System.Net.Http.Functional.Tests
         {
             SocketsHttpHandler handler = new();
             handler.Dispose();
-            Assert.ThrowsAny<ObjectDisposedException>(() => handler.MeterFactory = new TestMeterFactory());
+            Assert.ThrowsAny<ObjectDisposedException>(
+                () => handler.MeterFactory = new TestMeterFactory()
+            );
         }
 
         [Fact]
         public void HttpClientHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(async uri =>
-            {
-                using HttpClientHandler handler = new();
-                using HttpClient client = new HttpClient(handler);
-                await client.GetAsync(uri);
+            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using HttpClientHandler handler = new();
+                    using HttpClient client = new HttpClient(handler);
+                    await client.GetAsync(uri);
 
-                Assert.Throws<InvalidOperationException>(() => handler.MeterFactory = new TestMeterFactory());
-            }, server => server.AcceptConnectionSendResponseAndCloseAsync());
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MeterFactory = new TestMeterFactory()
+                    );
+                },
+                server => server.AcceptConnectionSendResponseAndCloseAsync()
+            );
         }
 
         [ConditionalFact(typeof(SocketsHttpHandler), nameof(SocketsHttpHandler.IsSupported))]
         public void SocketsHttpHandler_SetMeterFactoryAfterStart_ThrowsInvalidOperationException()
         {
-            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(async uri =>
-            {
-                using SocketsHttpHandler handler = new();
-                using HttpClient client = new HttpClient(handler);
-                await client.GetAsync(uri);
+            Http11LoopbackServerFactory.Singleton.CreateClientAndServerAsync(
+                async uri =>
+                {
+                    using SocketsHttpHandler handler = new();
+                    using HttpClient client = new HttpClient(handler);
+                    await client.GetAsync(uri);
 
-                Assert.Throws<InvalidOperationException>(() => handler.MeterFactory = new TestMeterFactory());
-            }, server => server.AcceptConnectionSendResponseAndCloseAsync());
+                    Assert.Throws<InvalidOperationException>(
+                        () => handler.MeterFactory = new TestMeterFactory()
+                    );
+                },
+                server => server.AcceptConnectionSendResponseAndCloseAsync()
+            );
         }
     }
 
@@ -1227,6 +1825,7 @@ namespace System.Net.Http.Functional.Tests
         public bool IsDisposed => _meter is null;
 
         public TestMeterFactory() => _meter = new Meter("System.Net.Http", null, null, this);
+
         public Meter Create(MeterOptions options)
         {
             Assert.Equal("System.Net.Http", options.Name);
@@ -1235,11 +1834,11 @@ namespace System.Net.Http.Functional.Tests
 
             return _meter;
         }
+
         public void Dispose()
         {
             _meter?.Dispose();
             _meter = null;
         }
     }
-
 }

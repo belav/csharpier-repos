@@ -22,8 +22,7 @@ public class AuthenticationProperties
     /// Initializes a new instance of the <see cref="AuthenticationProperties"/> class.
     /// </summary>
     public AuthenticationProperties()
-        : this(items: null, parameters: null)
-    { }
+        : this(items: null, parameters: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationProperties"/> class.
@@ -31,15 +30,17 @@ public class AuthenticationProperties
     /// <param name="items">State values dictionary to use.</param>
     [JsonConstructor]
     public AuthenticationProperties(IDictionary<string, string?> items)
-        : this(items, parameters: null)
-    { }
+        : this(items, parameters: null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AuthenticationProperties"/> class.
     /// </summary>
     /// <param name="items">State values dictionary to use.</param>
     /// <param name="parameters">Parameters dictionary to use.</param>
-    public AuthenticationProperties(IDictionary<string, string?>? items, IDictionary<string, object?>? parameters)
+    public AuthenticationProperties(
+        IDictionary<string, string?>? items,
+        IDictionary<string, object?>? parameters
+    )
     {
         Items = items ?? new Dictionary<string, string?>(StringComparer.Ordinal);
         Parameters = parameters ?? new Dictionary<string, object?>(StringComparer.Ordinal);
@@ -49,10 +50,11 @@ public class AuthenticationProperties
     /// Return a copy.
     /// </summary>
     /// <returns>A copy.</returns>
-    public AuthenticationProperties Clone()
-        => new AuthenticationProperties(
+    public AuthenticationProperties Clone() =>
+        new AuthenticationProperties(
             new Dictionary<string, string?>(Items, StringComparer.Ordinal),
-            new Dictionary<string, object?>(Parameters, StringComparer.Ordinal));
+            new Dictionary<string, object?>(Parameters, StringComparer.Ordinal)
+        );
 
     /// <summary>
     /// State values about the authentication session.
@@ -149,8 +151,8 @@ public class AuthenticationProperties
     /// <typeparam name="T">Parameter type.</typeparam>
     /// <param name="key">Parameter key.</param>
     /// <returns>Retrieved value or the default value if the property is not set.</returns>
-    public T? GetParameter<T>(string key)
-        => Parameters.TryGetValue(key, out var obj) && obj is T value ? value : default;
+    public T? GetParameter<T>(string key) =>
+        Parameters.TryGetValue(key, out var obj) && obj is T value ? value : default;
 
     /// <summary>
     /// Set a parameter value in the <see cref="Parameters"/> collection.
@@ -158,8 +160,7 @@ public class AuthenticationProperties
     /// <typeparam name="T">Parameter type.</typeparam>
     /// <param name="key">Parameter key.</param>
     /// <param name="value">Value to set.</param>
-    public void SetParameter<T>(string key, T value)
-        => Parameters[key] = value;
+    public void SetParameter<T>(string key, T value) => Parameters[key] = value;
 
     /// <summary>
     /// Get a nullable <see cref="bool"/> from the <see cref="Items"/> collection.
@@ -199,8 +200,16 @@ public class AuthenticationProperties
     /// <returns>Retrieved value or <see langword="null" /> if the property is not set.</returns>
     protected DateTimeOffset? GetDateTimeOffset(string key)
     {
-        if (Items.TryGetValue(key, out var value)
-            && DateTimeOffset.TryParseExact(value, UtcDateTimeFormat, CultureInfo.InvariantCulture, DateTimeStyles.RoundtripKind, out var dateTimeOffset))
+        if (
+            Items.TryGetValue(key, out var value)
+            && DateTimeOffset.TryParseExact(
+                value,
+                UtcDateTimeFormat,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.RoundtripKind,
+                out var dateTimeOffset
+            )
+        )
         {
             return dateTimeOffset;
         }
@@ -216,7 +225,9 @@ public class AuthenticationProperties
     {
         if (value.HasValue)
         {
-            Items[key] = value.GetValueOrDefault().ToString(UtcDateTimeFormat, CultureInfo.InvariantCulture);
+            Items[key] = value
+                .GetValueOrDefault()
+                .ToString(UtcDateTimeFormat, CultureInfo.InvariantCulture);
         }
         else
         {

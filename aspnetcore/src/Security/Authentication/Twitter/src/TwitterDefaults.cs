@@ -22,7 +22,8 @@ public static class TwitterDefaults
     internal const string RequestTokenEndpoint = "https://api.twitter.com/oauth/request_token";
 
     // https://developer.twitter.com/en/docs/basics/authentication/api-reference/authenticate
-    internal const string AuthenticationEndpoint = "https://api.twitter.com/oauth/authenticate?oauth_token=";
+    internal const string AuthenticationEndpoint =
+        "https://api.twitter.com/oauth/authenticate?oauth_token=";
 
     // https://developer.twitter.com/en/docs/basics/authentication/api-reference/access_token
     internal const string AccessTokenEndpoint = "https://api.twitter.com/oauth/access_token";

@@ -1,15 +1,16 @@
 //------------------------------------------------------------------------------
 // <copyright file="IRegisteredObject.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Hosting {
+namespace System.Web.Hosting
+{
     using System;
     using System.Security.Permissions;
-   
-    public interface IRegisteredObject {
 
+    public interface IRegisteredObject
+    {
         void Stop(bool immediate);
     }
 }

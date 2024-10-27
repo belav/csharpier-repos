@@ -31,7 +31,13 @@ namespace Microsoft.Extensions.Logging.Test.Console
             _parser.Parse(message);
         }
 
-        public void OnParseWrite(string message, int startIndex, int length, ConsoleColor? background, ConsoleColor? foreground)
+        public void OnParseWrite(
+            string message,
+            int startIndex,
+            int length,
+            ConsoleColor? background,
+            ConsoleColor? foreground
+        )
         {
             var consoleContext = new ConsoleContext();
             consoleContext.Message = message.AsSpan(startIndex, length).ToString();

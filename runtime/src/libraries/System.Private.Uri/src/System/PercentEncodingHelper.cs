@@ -9,7 +9,13 @@ namespace System
 {
     internal static class PercentEncodingHelper
     {
-        public static unsafe int UnescapePercentEncodedUTF8Sequence(char* input, int length, ref ValueStringBuilder dest, bool isQuery, bool iriParsing)
+        public static unsafe int UnescapePercentEncodedUTF8Sequence(
+            char* input,
+            int length,
+            ref ValueStringBuilder dest,
+            bool isQuery,
+            bool iriParsing
+        )
         {
             // The following assertions rely on the input not mutating mid-operation, as is the case currently since callers are working with strings
             // If we start accepting input such as spans, this method must be audited to ensure no buffer overruns/infinite loops could occur
@@ -27,10 +33,10 @@ namespace System
             int charsToCopy = 0;
             int bytesConsumed = 0;
 
-        RefillBuffer:
+            RefillBuffer:
             int i = totalCharsConsumed + (bytesLeftInBuffer * 3);
 
-        ReadByteFromInput:
+            ReadByteFromInput:
             if ((uint)(length - i) <= 2 || input[i] != '%')
                 goto NoMoreOrInvalidInput;
 
@@ -43,7 +49,8 @@ namespace System
             {
                 value -= '0';
             }
-            else goto NoMoreOrInvalidInput; // First character wasn't hex or was <= 7F (Ascii)
+            else
+                goto NoMoreOrInvalidInput; // First character wasn't hex or was <= 7F (Ascii)
 
             uint second = (uint)input[i + 2] - '0';
             if (second <= 9)
@@ -54,7 +61,8 @@ namespace System
             {
                 second = ((second + '0') | 0x20) - 'a' + 10;
             }
-            else goto NoMoreOrInvalidInput; // Second character wasn't Hex
+            else
+                goto NoMoreOrInvalidInput; // Second character wasn't Hex
 
             value = (value << 4) | second;
 
@@ -76,18 +84,41 @@ namespace System
                 goto ReadByteFromInput;
             }
 
-        DecodeRune:
+            DecodeRune:
             Debug.Assert(totalCharsConsumed % 3 == 0);
-            Debug.Assert(bytesLeftInBuffer == 2 || bytesLeftInBuffer == 3 || bytesLeftInBuffer == 4);
-            Debug.Assert((fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00000080 : 0x80000000)) != 0);
-            Debug.Assert((fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00008000 : 0x00800000)) != 0);
-            Debug.Assert(bytesLeftInBuffer < 3 || (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00800000 : 0x00008000)) != 0);
-            Debug.Assert(bytesLeftInBuffer < 4 || (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x80000000 : 0x00000080)) != 0);
+            Debug.Assert(
+                bytesLeftInBuffer == 2 || bytesLeftInBuffer == 3 || bytesLeftInBuffer == 4
+            );
+            Debug.Assert(
+                (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00000080 : 0x80000000)) != 0
+            );
+            Debug.Assert(
+                (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00008000 : 0x00800000)) != 0
+            );
+            Debug.Assert(
+                bytesLeftInBuffer < 3
+                    || (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x00800000 : 0x00008000))
+                        != 0
+            );
+            Debug.Assert(
+                bytesLeftInBuffer < 4
+                    || (fourByteBuffer & (BitConverter.IsLittleEndian ? 0x80000000 : 0x00000080))
+                        != 0
+            );
 
             uint temp = fourByteBuffer; // make a copy so that the *copy* (not the original) is marked address-taken
-            if (Rune.DecodeFromUtf8(new ReadOnlySpan<byte>(&temp, bytesLeftInBuffer), out Rune rune, out bytesConsumed) == OperationStatus.Done)
+            if (
+                Rune.DecodeFromUtf8(
+                    new ReadOnlySpan<byte>(&temp, bytesLeftInBuffer),
+                    out Rune rune,
+                    out bytesConsumed
+                ) == OperationStatus.Done
+            )
             {
-                Debug.Assert(bytesConsumed >= 2, $"Rune.DecodeFromUtf8 consumed {bytesConsumed} bytes, likely indicating input was modified concurrently during UnescapePercentEncodedUTF8Sequence's execution");
+                Debug.Assert(
+                    bytesConsumed >= 2,
+                    $"Rune.DecodeFromUtf8 consumed {bytesConsumed} bytes, likely indicating input was modified concurrently during UnescapePercentEncodedUTF8Sequence's execution"
+                );
 
                 if (!iriParsing || IriHelper.CheckIriUnicodeRange((uint)rune.Value, isQuery))
                 {
@@ -103,16 +134,19 @@ namespace System
             }
             else
             {
-                Debug.Assert(bytesConsumed > 0, $"Rune.DecodeFromUtf8 consumed {bytesConsumed} bytes when decoding {bytesLeftInBuffer} bytes");
+                Debug.Assert(
+                    bytesConsumed > 0,
+                    $"Rune.DecodeFromUtf8 consumed {bytesConsumed} bytes when decoding {bytesLeftInBuffer} bytes"
+                );
             }
             charsToCopy += bytesConsumed * 3;
 
-        AfterDecodeRune:
+            AfterDecodeRune:
             bytesLeftInBuffer -= bytesConsumed;
             totalCharsConsumed += bytesConsumed * 3;
             goto RefillBuffer;
 
-        NoMoreOrInvalidInput:
+            NoMoreOrInvalidInput:
             Debug.Assert(bytesLeftInBuffer < 4);
 
             // If we have more than 1 byte left, we try to decode it

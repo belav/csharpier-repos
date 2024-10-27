@@ -8,8 +8,12 @@ namespace Microsoft.AspNetCore.Internal;
 
 public class SyncPoint
 {
-    private readonly TaskCompletionSource _atSyncPoint = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-    private readonly TaskCompletionSource _continueFromSyncPoint = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _atSyncPoint = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
+    private readonly TaskCompletionSource _continueFromSyncPoint = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     /// <summary>
     /// Waits for the code-under-test to reach <see cref="WaitToContinue"/>.

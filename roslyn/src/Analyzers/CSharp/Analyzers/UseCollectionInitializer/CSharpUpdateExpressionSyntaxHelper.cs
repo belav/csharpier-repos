@@ -9,7 +9,8 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer;
 
-internal sealed class CSharpUpdateExpressionSyntaxHelper : IUpdateExpressionSyntaxHelper<ExpressionSyntax, StatementSyntax>
+internal sealed class CSharpUpdateExpressionSyntaxHelper
+    : IUpdateExpressionSyntaxHelper<ExpressionSyntax, StatementSyntax>
 {
     public static readonly CSharpUpdateExpressionSyntaxHelper Instance = new();
 
@@ -18,7 +19,8 @@ internal sealed class CSharpUpdateExpressionSyntaxHelper : IUpdateExpressionSynt
         out SyntaxToken awaitKeyword,
         out SyntaxToken identifier,
         out ExpressionSyntax expression,
-        out IEnumerable<StatementSyntax> statements)
+        out IEnumerable<StatementSyntax> statements
+    )
     {
         var foreachStatement = (ForEachStatementSyntax)statement;
         awaitKeyword = foreachStatement.AwaitKeyword;
@@ -31,14 +33,20 @@ internal sealed class CSharpUpdateExpressionSyntaxHelper : IUpdateExpressionSynt
         StatementSyntax statement,
         out ExpressionSyntax condition,
         out IEnumerable<StatementSyntax> whenTrueStatements,
-        out IEnumerable<StatementSyntax>? whenFalseStatements)
+        out IEnumerable<StatementSyntax>? whenFalseStatements
+    )
     {
         var ifStatement = (IfStatementSyntax)statement;
         condition = ifStatement.Condition;
         whenTrueStatements = ExtractEmbeddedStatements(ifStatement.Statement);
-        whenFalseStatements = ifStatement.Else != null ? ExtractEmbeddedStatements(ifStatement.Else.Statement) : null;
+        whenFalseStatements =
+            ifStatement.Else != null ? ExtractEmbeddedStatements(ifStatement.Else.Statement) : null;
     }
 
-    private static IEnumerable<StatementSyntax> ExtractEmbeddedStatements(StatementSyntax embeddedStatement)
-        => embeddedStatement is BlockSyntax block ? block.Statements : SpecializedCollections.SingletonEnumerable(embeddedStatement);
+    private static IEnumerable<StatementSyntax> ExtractEmbeddedStatements(
+        StatementSyntax embeddedStatement
+    ) =>
+        embeddedStatement is BlockSyntax block
+            ? block.Statements
+            : SpecializedCollections.SingletonEnumerable(embeddedStatement);
 }

@@ -2,16 +2,17 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Internal.NativeFormat;
 using Internal.Text;
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace ILCompiler.DependencyAnalysis
 {
-    internal sealed class ClassConstructorContextMap : ObjectNode, ISymbolDefinitionNode, INodeWithSize
+    internal sealed class ClassConstructorContextMap
+        : ObjectNode,
+            ISymbolDefinitionNode,
+            INodeWithSize
     {
         private int? _size;
         private ExternalReferencesTableNode _externalReferences;
@@ -27,20 +28,29 @@ namespace ILCompiler.DependencyAnalysis
         {
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__type_to_cctorContext_map");
         }
+
         public int Offset => 0;
 
-        public override ObjectNodeSection GetSection(NodeFactory factory) => _externalReferences.GetSection(factory);
+        public override ObjectNodeSection GetSection(NodeFactory factory) =>
+            _externalReferences.GetSection(factory);
+
         public override bool IsShareable => false;
 
         public override bool StaticDependenciesAreComputed => true;
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             var writer = new NativeWriter();
             var typeMapHashTable = new VertexHashtable();
@@ -63,9 +73,11 @@ namespace ILCompiler.DependencyAnalysis
                 // Each entry has: the MethodTable of the type, followed by the non-GC static base.
                 // The non-GC static base is prefixed by the class constructor context.
                 Vertex vertex = writer.GetTuple(
-                    writer.GetUnsignedConstant(_externalReferences.GetIndex(factory.NecessaryTypeSymbol(type))),
+                    writer.GetUnsignedConstant(
+                        _externalReferences.GetIndex(factory.NecessaryTypeSymbol(type))
+                    ),
                     writer.GetUnsignedConstant(_externalReferences.GetIndex(node))
-                    );
+                );
 
                 int hashCode = type.GetHashCode();
                 typeMapHashTable.Append((uint)hashCode, hashTableSection.Place(vertex));
@@ -75,7 +87,12 @@ namespace ILCompiler.DependencyAnalysis
 
             _size = hashTableBytes.Length;
 
-            return new ObjectData(hashTableBytes, Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+            return new ObjectData(
+                hashTableBytes,
+                Array.Empty<Relocation>(),
+                1,
+                new ISymbolDefinitionNode[] { this }
+            );
         }
 
         protected internal override int Phase => (int)ObjectNodePhase.Ordered;

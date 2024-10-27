@@ -11,16 +11,23 @@ namespace Microsoft.CodeAnalysis.MSBuild
 
         public DiagnosticReportingOptions(
             DiagnosticReportingMode onPathFailure,
-            DiagnosticReportingMode onLoaderFailure)
+            DiagnosticReportingMode onLoaderFailure
+        )
         {
             OnPathFailure = onPathFailure;
             OnLoaderFailure = onLoaderFailure;
         }
 
-        public static DiagnosticReportingOptions IgnoreAll { get; }
-            = new DiagnosticReportingOptions(DiagnosticReportingMode.Ignore, DiagnosticReportingMode.Ignore);
+        public static DiagnosticReportingOptions IgnoreAll { get; } =
+            new DiagnosticReportingOptions(
+                DiagnosticReportingMode.Ignore,
+                DiagnosticReportingMode.Ignore
+            );
 
-        public static DiagnosticReportingOptions ThrowForAll { get; }
-            = new DiagnosticReportingOptions(DiagnosticReportingMode.Throw, DiagnosticReportingMode.Throw);
+        public static DiagnosticReportingOptions ThrowForAll { get; } =
+            new DiagnosticReportingOptions(
+                DiagnosticReportingMode.Throw,
+                DiagnosticReportingMode.Throw
+            );
     }
 }

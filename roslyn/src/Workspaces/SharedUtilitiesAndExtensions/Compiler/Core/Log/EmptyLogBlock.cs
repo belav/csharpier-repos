@@ -13,8 +13,6 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     {
         public static readonly EmptyLogBlock Instance = new();
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

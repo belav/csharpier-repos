@@ -10,9 +10,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Microbenchmarks;
 public class DotSegmentRemovalBenchmark
 {
     // Immutable
-    private const string _noDotSegments = "/long/request/target/for/benchmarking/what/else/can/we/put/here";
-    private const string _singleDotSegments = "/long/./request/./target/./for/./benchmarking/./what/./else/./can/./we/./put/./here";
-    private const string _doubleDotSegments = "/long/../request/../target/../for/../benchmarking/../what/../else/../can/../we/../put/../here";
+    private const string _noDotSegments =
+        "/long/request/target/for/benchmarking/what/else/can/we/put/here";
+    private const string _singleDotSegments =
+        "/long/./request/./target/./for/./benchmarking/./what/./else/./can/./we/./put/./here";
+    private const string _doubleDotSegments =
+        "/long/../request/../target/../for/../benchmarking/../what/../else/../can/../we/../put/../here";
 
     private readonly byte[] _noDotSegmentsAscii = Encoding.ASCII.GetBytes(_noDotSegments);
     private readonly byte[] _singleDotSegmentsAscii = Encoding.ASCII.GetBytes(_singleDotSegments);

@@ -5,20 +5,20 @@
 namespace System.ServiceModel
 {
     using System;
-    using System.Net;
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.DirectoryServices;
     using System.DirectoryServices.ActiveDirectory;
-    using System.Security.Principal;
-    using System.ServiceModel.Security;
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel.Diagnostics;
+    using System.Net;
     using System.Security.Cryptography;
     using System.Security.Cryptography.X509Certificates;
+    using System.Security.Principal;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Security;
     using System.Xml;
     using System.Xml.Serialization;
 
@@ -26,14 +26,13 @@ namespace System.ServiceModel
     {
         internal const StoreLocation defaultStoreLocation = StoreLocation.LocalMachine;
         internal const StoreName defaultStoreName = StoreName.My;
-        internal const X509FindType defaultX509FindType = X509FindType.FindBySubjectDistinguishedName;
+        internal const X509FindType defaultX509FindType =
+            X509FindType.FindBySubjectDistinguishedName;
 
         Claim identityClaim;
         IEqualityComparer<Claim> claimComparer;
 
-        protected EndpointIdentity()
-        {
-        }
+        protected EndpointIdentity() { }
 
         protected void Initialize(Claim identityClaim)
         {
@@ -123,7 +122,10 @@ namespace System.ServiceModel
             return new X509CertificateEndpointIdentity(certificate);
         }
 
-        public static EndpointIdentity CreateX509CertificateIdentity(X509Certificate2 primaryCertificate, X509Certificate2Collection supportingCertificates)
+        public static EndpointIdentity CreateX509CertificateIdentity(
+            X509Certificate2 primaryCertificate,
+            X509Certificate2Collection supportingCertificates
+        )
         {
             return new X509CertificateEndpointIdentity(primaryCertificate, supportingCertificates);
         }
@@ -131,12 +133,16 @@ namespace System.ServiceModel
         internal static EndpointIdentity CreateX509CertificateIdentity(X509Chain certificateChain)
         {
             if (certificateChain == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("certificateChain");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "certificateChain"
+                );
 
             if (certificateChain.ChainElements.Count == 0)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.X509ChainIsEmpty));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.X509ChainIsEmpty)
+                );
 
-            // The first element in the cert chain is the leaf certificate 
+            // The first element in the cert chain is the leaf certificate
             // we want.
             X509Certificate2 primaryCertificate = certificateChain.ChainElements[0].Certificate;
             X509Certificate2Collection certificateCollection = new X509Certificate2Collection();
@@ -148,9 +154,7 @@ namespace System.ServiceModel
             return new X509CertificateEndpointIdentity(primaryCertificate, certificateCollection);
         }
 
-        internal virtual void EnsureIdentityClaim()
-        {
-        }
+        internal virtual void EnsureIdentityClaim() { }
 
         public override bool Equals(object obj)
         {
@@ -200,30 +204,79 @@ namespace System.ServiceModel
 
             reader.MoveToContent();
             if (reader.IsEmptyElement)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnexpectedEmptyElementExpectingClaim, XD.AddressingDictionary.Identity.Value, XD.AddressingDictionary.IdentityExtensionNamespace.Value)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(
+                            SR.UnexpectedEmptyElementExpectingClaim,
+                            XD.AddressingDictionary.Identity.Value,
+                            XD.AddressingDictionary.IdentityExtensionNamespace.Value
+                        )
+                    )
+                );
 
-            reader.ReadStartElement(XD.AddressingDictionary.Identity, XD.AddressingDictionary.IdentityExtensionNamespace);
+            reader.ReadStartElement(
+                XD.AddressingDictionary.Identity,
+                XD.AddressingDictionary.IdentityExtensionNamespace
+            );
 
-            if (reader.IsStartElement(XD.AddressingDictionary.Spn, XD.AddressingDictionary.IdentityExtensionNamespace))
+            if (
+                reader.IsStartElement(
+                    XD.AddressingDictionary.Spn,
+                    XD.AddressingDictionary.IdentityExtensionNamespace
+                )
+            )
                 readIdentity = new SpnEndpointIdentity(reader.ReadElementString());
-            else if (reader.IsStartElement(XD.AddressingDictionary.Upn, XD.AddressingDictionary.IdentityExtensionNamespace))
+            else if (
+                reader.IsStartElement(
+                    XD.AddressingDictionary.Upn,
+                    XD.AddressingDictionary.IdentityExtensionNamespace
+                )
+            )
                 readIdentity = new UpnEndpointIdentity(reader.ReadElementString());
-            else if (reader.IsStartElement(XD.AddressingDictionary.Dns, XD.AddressingDictionary.IdentityExtensionNamespace))
+            else if (
+                reader.IsStartElement(
+                    XD.AddressingDictionary.Dns,
+                    XD.AddressingDictionary.IdentityExtensionNamespace
+                )
+            )
                 readIdentity = new DnsEndpointIdentity(reader.ReadElementString());
-            else if (reader.IsStartElement(XD.XmlSignatureDictionary.KeyInfo, XD.XmlSignatureDictionary.Namespace))
+            else if (
+                reader.IsStartElement(
+                    XD.XmlSignatureDictionary.KeyInfo,
+                    XD.XmlSignatureDictionary.Namespace
+                )
+            )
             {
                 reader.ReadStartElement();
-                if (reader.IsStartElement(XD.XmlSignatureDictionary.X509Data, XD.XmlSignatureDictionary.Namespace))
+                if (
+                    reader.IsStartElement(
+                        XD.XmlSignatureDictionary.X509Data,
+                        XD.XmlSignatureDictionary.Namespace
+                    )
+                )
                 {
                     readIdentity = new X509CertificateEndpointIdentity(reader);
                 }
-                else if (reader.IsStartElement(XD.XmlSignatureDictionary.RsaKeyValue, XD.XmlSignatureDictionary.Namespace))
+                else if (
+                    reader.IsStartElement(
+                        XD.XmlSignatureDictionary.RsaKeyValue,
+                        XD.XmlSignatureDictionary.Namespace
+                    )
+                )
                 {
                     readIdentity = new RsaEndpointIdentity(reader);
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnrecognizedIdentityType, reader.Name, reader.NamespaceURI)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new XmlException(
+                            SR.GetString(
+                                SR.UnrecognizedIdentityType,
+                                reader.Name,
+                                reader.NamespaceURI
+                            )
+                        )
+                    );
                 }
                 reader.ReadEndElement();
             }
@@ -231,15 +284,21 @@ namespace System.ServiceModel
             {
                 //
                 // Something unknown
-                // 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.UnrecognizedIdentityType, reader.Name, reader.NamespaceURI)));
+                //
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(
+                        SR.GetString(SR.UnrecognizedIdentityType, reader.Name, reader.NamespaceURI)
+                    )
+                );
             }
             else
             {
                 //
                 // EndpointIdentity element is empty or some other invalid xml
                 //
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new XmlException(SR.GetString(SR.InvalidIdentityElement)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new XmlException(SR.GetString(SR.InvalidIdentityElement))
+                );
             }
 
             reader.ReadEndElement();
@@ -252,7 +311,10 @@ namespace System.ServiceModel
             if (writer == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("writer");
 
-            writer.WriteStartElement(XD.AddressingDictionary.Identity, XD.AddressingDictionary.IdentityExtensionNamespace);
+            writer.WriteStartElement(
+                XD.AddressingDictionary.Identity,
+                XD.AddressingDictionary.IdentityExtensionNamespace
+            );
 
             WriteContentsTo(writer);
 
@@ -261,9 +323,14 @@ namespace System.ServiceModel
 
         internal virtual void WriteContentsTo(XmlDictionaryWriter writer)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.UnrecognizedIdentityPropertyType, this.IdentityClaim.GetType().ToString())));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(
+                    SR.GetString(
+                        SR.UnrecognizedIdentityPropertyType,
+                        this.IdentityClaim.GetType().ToString()
+                    )
+                )
+            );
         }
-
     }
-
 }

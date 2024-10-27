@@ -33,6 +33,9 @@ public sealed class DataTokensMetadata : IDataTokensMetadata
     /// <inheritdoc/>
     public override string ToString()
     {
-        return DebuggerHelpers.GetDebugText(nameof(DataTokens), DataTokens.Select(t => $"{t.Key}={t.Value ?? "(null)"}"));
+        return DebuggerHelpers.GetDebugText(
+            nameof(DataTokens),
+            DataTokens.Select(t => $"{t.Key}={t.Value ?? "(null)"}")
+        );
     }
 }

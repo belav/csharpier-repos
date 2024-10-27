@@ -4,7 +4,7 @@ using System;
 using System.Threading;
 
 delegate void MonitorDelegate(object monitor);
-delegate void MonitorDelegateTS(object monitor,int timeout);
+delegate void MonitorDelegateTS(object monitor, int timeout);
 
 class TestHelper
 {
@@ -15,17 +15,17 @@ class TestHelper
     private Random m_rng = new Random(0);
 
     public bool Error
-    {        
+    {
         set
         {
-            lock(typeof(TestHelper))
+            lock (typeof(TestHelper))
             {
                 m_bError = value;
             }
         }
         get
         {
-            lock(typeof(TestHelper))
+            lock (typeof(TestHelper))
             {
                 return m_bError;
             }
@@ -39,28 +39,28 @@ class TestHelper
         m_iRequestedEntries = num;
         m_bError = false;
     }
-    
+
     public void DoWork()
     {
         int snapshot = m_iSharedData;
         Delayer.Delay(Delayer.RandomShortDelay(m_rng));
         m_iSharedData++;
         Delayer.Delay(Delayer.RandomShortDelay(m_rng));
-        if(m_iSharedData != snapshot + 1)
+        if (m_iSharedData != snapshot + 1)
         {
             Error = true;
             Console.WriteLine("Failure!!!");
         }
-        if(m_iSharedData == m_iRequestedEntries)
+        if (m_iSharedData == m_iRequestedEntries)
             m_Event.Set();
     }
 
     public void Consumer(object monitor)
     {
-        lock(monitor)
+        lock (monitor)
         {
             DoWork();
-        }    
+        }
     }
 
     public void ConsumerTryEnter(object monitor, int timeout)
@@ -90,7 +90,9 @@ class TestHelper
         private static uint[] s_delayValues = new uint[32];
 
         public static uint RandomShortDelay(Random rng) => (uint)rng.Next(4, 10);
+
         public static uint RandomMediumDelay(Random rng) => (uint)rng.Next(10, 15);
+
         public static uint RandomLongDelay(Random rng) => (uint)rng.Next(15, 20);
 
         public static void Delay(uint n)

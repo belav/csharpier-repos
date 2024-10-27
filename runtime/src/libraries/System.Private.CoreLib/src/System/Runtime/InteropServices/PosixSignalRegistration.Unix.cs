@@ -23,7 +23,10 @@ namespace System.Runtime.InteropServices
             return new Dictionary<int, HashSet<Token>>();
         }
 
-        private static PosixSignalRegistration Register(PosixSignal signal, Action<PosixSignalContext> handler)
+        private static PosixSignalRegistration Register(
+            PosixSignal signal,
+            Action<PosixSignalContext> handler
+        )
         {
             int signo = Interop.Sys.GetPlatformSignalNumber(signal);
             if (signo == 0)
@@ -41,8 +44,7 @@ namespace System.Runtime.InteropServices
                     s_registrations[signo] = tokens = new HashSet<Token>();
                 }
 
-                if (tokens.Count == 0 &&
-                    !Interop.Sys.EnablePosixSignalHandling(signo))
+                if (tokens.Count == 0 && !Interop.Sys.EnablePosixSignalHandling(signo))
                 {
                     Interop.ThrowIOExceptionForLastError();
                 }
@@ -107,7 +109,7 @@ namespace System.Runtime.InteropServices
                     new Thread(HandleSignal)
                     {
                         IsBackground = true,
-                        Name = ".NET Signal Handler"
+                        Name = ".NET Signal Handler",
                     }.UnsafeStart((signo, tokens));
                     break;
 

@@ -42,9 +42,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             }
 
             pceltFetched = (uint)i;
-            return i < celt
-                ? VSConstants.S_FALSE
-                : VSConstants.S_OK;
+            return i < celt ? VSConstants.S_FALSE : VSConstants.S_OK;
         }
 
         public int Reset()
@@ -56,9 +54,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         public int Skip(uint celt)
         {
             _currentIndex += (int)celt;
-            return _currentIndex < _values.Count
-                ? VSConstants.S_OK
-                : VSConstants.S_FALSE;
+            return _currentIndex < _values.Count ? VSConstants.S_OK : VSConstants.S_FALSE;
         }
     }
 }

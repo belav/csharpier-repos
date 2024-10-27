@@ -5,7 +5,6 @@ namespace Microsoft.AspNetCore.WebUtilities;
 
 public class WebEncodersTests
 {
-
     [Theory]
     [InlineData("", 1, 0)]
     [InlineData("", 0, 1)]

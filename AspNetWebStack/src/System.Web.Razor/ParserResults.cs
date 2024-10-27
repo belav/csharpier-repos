@@ -12,9 +12,7 @@ namespace System.Web.Razor
     public class ParserResults
     {
         public ParserResults(Block document, IList<RazorError> parserErrors)
-            : this(parserErrors == null || parserErrors.Count == 0, document, parserErrors)
-        {
-        }
+            : this(parserErrors == null || parserErrors.Count == 0, document, parserErrors) { }
 
         protected ParserResults(bool success, Block document, IList<RazorError> errors)
         {

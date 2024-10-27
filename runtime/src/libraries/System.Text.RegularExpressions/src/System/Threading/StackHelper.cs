@@ -37,8 +37,14 @@ namespace System.Threading
         /// <param name="arg1">The first argument to pass to the action.</param>
         public static void CallOnEmptyStack<TArg1>(Action<TArg1> action, TArg1 arg1) =>
             Task.Run(() => action(arg1))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided action on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -46,10 +52,20 @@ namespace System.Threading
         /// <param name="action">The action to invoke.</param>
         /// <param name="arg1">The first argument to pass to the action.</param>
         /// <param name="arg2">The second argument to pass to the action.</param>
-        public static void CallOnEmptyStack<TArg1, TArg2>(Action<TArg1, TArg2> action, TArg1 arg1, TArg2 arg2) =>
+        public static void CallOnEmptyStack<TArg1, TArg2>(
+            Action<TArg1, TArg2> action,
+            TArg1 arg1,
+            TArg2 arg2
+        ) =>
             Task.Run(() => action(arg1, arg2))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided action on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -59,10 +75,21 @@ namespace System.Threading
         /// <param name="arg1">The first argument to pass to the action.</param>
         /// <param name="arg2">The second argument to pass to the action.</param>
         /// <param name="arg3">The third argument to pass to the action.</param>
-        public static void CallOnEmptyStack<TArg1, TArg2, TArg3>(Action<TArg1, TArg2, TArg3> action, TArg1 arg1, TArg2 arg2, TArg3 arg3) =>
+        public static void CallOnEmptyStack<TArg1, TArg2, TArg3>(
+            Action<TArg1, TArg2, TArg3> action,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3
+        ) =>
             Task.Run(() => action(arg1, arg2, arg3))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -74,10 +101,22 @@ namespace System.Threading
         /// <param name="arg2">The second argument to pass to the action.</param>
         /// <param name="arg3">The third argument to pass to the action.</param>
         /// <param name="arg4">The fourth argument to pass to the action.</param>
-        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4>(Action<TArg1, TArg2, TArg3, TArg4> action, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4) =>
+        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4>(
+            Action<TArg1, TArg2, TArg3, TArg4> action,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            TArg4 arg4
+        ) =>
             Task.Run(() => action(arg1, arg2, arg3, arg4))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -91,10 +130,23 @@ namespace System.Threading
         /// <param name="arg3">The third argument to pass to the action.</param>
         /// <param name="arg4">The fourth argument to pass to the action.</param>
         /// <param name="arg5">The fifth argument to pass to the action.</param>
-        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TArg5>(Action<TArg1, TArg2, TArg3, TArg4, TArg5> action, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, TArg5 arg5) =>
+        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TArg5>(
+            Action<TArg1, TArg2, TArg3, TArg4, TArg5> action,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            TArg4 arg4,
+            TArg5 arg5
+        ) =>
             Task.Run(() => action(arg1, arg2, arg3, arg4, arg5))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -110,28 +162,57 @@ namespace System.Threading
         /// <param name="arg4">The fourth argument to pass to the action.</param>
         /// <param name="arg5">The fifth argument to pass to the action.</param>
         /// <param name="arg6">The sixth argument to pass to the action.</param>
-        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(Action<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6> action, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4, TArg5 arg5, TArg6 arg6) =>
+        public static void CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6>(
+            Action<TArg1, TArg2, TArg3, TArg4, TArg5, TArg6> action,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            TArg4 arg4,
+            TArg5 arg5,
+            TArg6 arg6
+        ) =>
             Task.Run(() => action(arg1, arg2, arg3, arg4, arg5, arg6))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TResult">The return type of the function.</typeparam>
         /// <param name="func">The function to invoke.</param>
         public static TResult CallOnEmptyStack<TResult>(Func<TResult> func) =>
             Task.Run(() => func())
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
         /// <typeparam name="TResult">The return type of the function.</typeparam>
         /// <param name="func">The function to invoke.</param>
         /// <param name="arg1">The first argument to pass to the function.</param>
-        public static TResult CallOnEmptyStack<TArg1, TResult>(Func<TArg1, TResult> func, TArg1 arg1) =>
+        public static TResult CallOnEmptyStack<TArg1, TResult>(
+            Func<TArg1, TResult> func,
+            TArg1 arg1
+        ) =>
             Task.Run(() => func(arg1))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -140,10 +221,20 @@ namespace System.Threading
         /// <param name="func">The function to invoke.</param>
         /// <param name="arg1">The first argument to pass to the function.</param>
         /// <param name="arg2">The second argument to pass to the function.</param>
-        public static TResult CallOnEmptyStack<TArg1, TArg2, TResult>(Func<TArg1, TArg2, TResult> func, TArg1 arg1, TArg2 arg2) =>
+        public static TResult CallOnEmptyStack<TArg1, TArg2, TResult>(
+            Func<TArg1, TArg2, TResult> func,
+            TArg1 arg1,
+            TArg2 arg2
+        ) =>
             Task.Run(() => func(arg1, arg2))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -154,10 +245,21 @@ namespace System.Threading
         /// <param name="arg1">The first argument to pass to the function.</param>
         /// <param name="arg2">The second argument to pass to the function.</param>
         /// <param name="arg3">The third argument to pass to the function.</param>
-        public static TResult CallOnEmptyStack<TArg1, TArg2, TArg3, TResult>(Func<TArg1, TArg2, TArg3, TResult> func, TArg1 arg1, TArg2 arg2, TArg3 arg3) =>
+        public static TResult CallOnEmptyStack<TArg1, TArg2, TArg3, TResult>(
+            Func<TArg1, TArg2, TArg3, TResult> func,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3
+        ) =>
             Task.Run(() => func(arg1, arg2, arg3))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
 
         /// <summary>Calls the provided function on the stack of a different thread pool thread.</summary>
         /// <typeparam name="TArg1">The type of the first argument to pass to the function.</typeparam>
@@ -170,9 +272,21 @@ namespace System.Threading
         /// <param name="arg2">The second argument to pass to the function.</param>
         /// <param name="arg3">The third argument to pass to the function.</param>
         /// <param name="arg4">The fourth argument to pass to the function.</param>
-        public static TResult CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TResult>(Func<TArg1, TArg2, TArg3, TArg4, TResult> func, TArg1 arg1, TArg2 arg2, TArg3 arg3, TArg4 arg4) =>
+        public static TResult CallOnEmptyStack<TArg1, TArg2, TArg3, TArg4, TResult>(
+            Func<TArg1, TArg2, TArg3, TArg4, TResult> func,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3,
+            TArg4 arg4
+        ) =>
             Task.Run(() => func(arg1, arg2, arg3, arg4))
-                .ContinueWith(t => t.GetAwaiter().GetResult(), CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default)
-                .GetAwaiter().GetResult();
+                .ContinueWith(
+                    t => t.GetAwaiter().GetResult(),
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                )
+                .GetAwaiter()
+                .GetResult();
     }
 }

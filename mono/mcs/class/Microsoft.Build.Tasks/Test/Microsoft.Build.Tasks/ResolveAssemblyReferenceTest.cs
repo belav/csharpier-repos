@@ -33,176 +33,259 @@ using Microsoft.Build.BuildEngine;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Tasks;
 using Microsoft.Build.Utilities;
+using MonoTests.Helpers;
 using NUnit.Framework;
 
-using MonoTests.Helpers;
+namespace MonoTests.Microsoft.Build.Tasks
+{
+    [TestFixture]
+    public class ResolveAssemblyReferenceTest
+    {
+        Engine engine;
+        Project project;
+        BuildItemGroup big;
 
-namespace MonoTests.Microsoft.Build.Tasks {
-	
-	[TestFixture]
-	public class ResolveAssemblyReferenceTest {
-		
-		Engine engine;
-		Project project;
-		BuildItemGroup big;
+        [Test]
+        public void TestGac1()
+        {
+            var gacDir = GetGacDir();
 
-		[Test]
-		public void TestGac1 ()
-		{
-			var gacDir = GetGacDir ();
+            if (gacDir == null || !System.IO.Directory.Exists(gacDir))
+                Assert.Ignore("GAC not found.");
 
-			if (gacDir == null || !System.IO.Directory.Exists (gacDir))
-				Assert.Ignore ("GAC not found.");
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(ResolveAssembly("System", null));
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly ("System", null));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big [0].Include.EndsWith (".dll"), "A3");
-		}
-		
-		[Test]
-		public void TestHintPath1 ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/test.dll")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big [0].Include.EndsWith (".dll"), "A3");
-		}
-		
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_FancyStuff ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/FancyStuff.dll")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("FancyStuff.dll"), "A3");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (1, big.Count, "A4");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("SimpleWrite.dll")), "A5");
-		}
-		
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_SimpleWrite ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/SimpleWrite.dll")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("SimpleWrite.dll"), "A3");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (0, big.Count, "A4");
-		}
-		
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_Testing ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/Testing.dll")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("Testing.dll"), "A3");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (0, big.Count, "A4");
-		}
-		
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_XbuildReferenceBugTest ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/XbuildReferenceBugTest.exe")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("XbuildReferenceBugTest.exe"), "A3");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (3, big.Count, "A4");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("SimpleWrite.dll")), "A5");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("FancyStuff.dll")), "A6");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("Testing.dll")), "A7");
-		}
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith(".dll"), "A3");
+        }
 
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_FancyStuffAndXbuild ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/FancyStuff.dll"), TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/XbuildReferenceBugTest.exe")));
-			
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (2, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("FancyStuff.dll"), "A3");
-			Assert.IsTrue (big[1].Include.EndsWith ("XbuildReferenceBugTest.exe"), "A3");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (2, big.Count, "A4");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("SimpleWrite.dll")), "A5");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("Testing.dll")), "A6");
-		}
+        [Test]
+        public void TestHintPath1()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource("Test/resources/test.dll")
+                )
+            );
 
-		[Test, Category("NotWorking")]
-		public void ResolveBinary_SameAssemblyTwice ()
-		{
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (ResolveAssembly (null, TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/XbuildReferenceBugTest.exe"), TestResourceHelper.GetFullPathOfResource ("Test/resources/binary/XbuildReferenceBugTest2.exe")));
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith(".dll"), "A3");
+        }
 
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (2, big.Count, "A2");
-			Assert.IsTrue (big[0].Include.EndsWith ("XbuildReferenceBugTest.exe"), "A3");
-			Assert.IsTrue (big[1].Include.EndsWith ("XbuildReferenceBugTest2.exe"), "A3b");
-			
-			big = project.GetEvaluatedItemsByName ("ResolvedDependencyFiles");
-			Assert.AreEqual (3, big.Count, "A4");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("SimpleWrite.dll")), "A5");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("FancyStuff.dll")), "A6");
-			Assert.IsTrue (big.Cast<BuildItem> ().Any (item => item.Include.EndsWith ("Testing.dll")), "A7");
-		}
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_FancyStuff()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource("Test/resources/binary/FancyStuff.dll")
+                )
+            );
 
-		string ResolveAssembly (string gacAssembly, params string[] hintPaths)
-		{
-			string reference = "";
-			if (string.IsNullOrEmpty (gacAssembly)) {
-				foreach (var hintPath in hintPaths) {
-					reference += string.Format (
-						@"<Reference Include='{0}'>
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("FancyStuff.dll"), "A3");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(1, big.Count, "A4");
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("SimpleWrite.dll")),
+                "A5"
+            );
+        }
+
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_SimpleWrite()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/SimpleWrite.dll"
+                    )
+                )
+            );
+
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("SimpleWrite.dll"), "A3");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(0, big.Count, "A4");
+        }
+
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_Testing()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource("Test/resources/binary/Testing.dll")
+                )
+            );
+
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("Testing.dll"), "A3");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(0, big.Count, "A4");
+        }
+
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_XbuildReferenceBugTest()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/XbuildReferenceBugTest.exe"
+                    )
+                )
+            );
+
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("XbuildReferenceBugTest.exe"), "A3");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(3, big.Count, "A4");
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("SimpleWrite.dll")),
+                "A5"
+            );
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("FancyStuff.dll")),
+                "A6"
+            );
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("Testing.dll")),
+                "A7"
+            );
+        }
+
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_FancyStuffAndXbuild()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/FancyStuff.dll"
+                    ),
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/XbuildReferenceBugTest.exe"
+                    )
+                )
+            );
+
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(2, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("FancyStuff.dll"), "A3");
+            Assert.IsTrue(big[1].Include.EndsWith("XbuildReferenceBugTest.exe"), "A3");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(2, big.Count, "A4");
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("SimpleWrite.dll")),
+                "A5"
+            );
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("Testing.dll")),
+                "A6"
+            );
+        }
+
+        [Test, Category("NotWorking")]
+        public void ResolveBinary_SameAssemblyTwice()
+        {
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(
+                ResolveAssembly(
+                    null,
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/XbuildReferenceBugTest.exe"
+                    ),
+                    TestResourceHelper.GetFullPathOfResource(
+                        "Test/resources/binary/XbuildReferenceBugTest2.exe"
+                    )
+                )
+            );
+
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(2, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith("XbuildReferenceBugTest.exe"), "A3");
+            Assert.IsTrue(big[1].Include.EndsWith("XbuildReferenceBugTest2.exe"), "A3b");
+
+            big = project.GetEvaluatedItemsByName("ResolvedDependencyFiles");
+            Assert.AreEqual(3, big.Count, "A4");
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("SimpleWrite.dll")),
+                "A5"
+            );
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("FancyStuff.dll")),
+                "A6"
+            );
+            Assert.IsTrue(
+                big.Cast<BuildItem>().Any(item => item.Include.EndsWith("Testing.dll")),
+                "A7"
+            );
+        }
+
+        string ResolveAssembly(string gacAssembly, params string[] hintPaths)
+        {
+            string reference = "";
+            if (string.IsNullOrEmpty(gacAssembly))
+            {
+                foreach (var hintPath in hintPaths)
+                {
+                    reference += string.Format(
+                        @"<Reference Include='{0}'>
 								<HintPath>{1}</HintPath>
-							</Reference>", System.IO.Path.GetFileNameWithoutExtension (hintPath), hintPath);
-				}
-			} else {
-				reference += string.Format (
-					@"<Reference Include='{0}'/>", gacAssembly);
-			}
-			
-			return @"
+							</Reference>",
+                        System.IO.Path.GetFileNameWithoutExtension(hintPath),
+                        hintPath
+                    );
+                }
+            }
+            else
+            {
+                reference += string.Format(@"<Reference Include='{0}'/>", gacAssembly);
+            }
+
+            return @"
                   <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
-					" + reference + @"	
+					"
+                + reference
+                + @"	
 					</ItemGroup>
 					<PropertyGroup>
 						<SearchPaths>
@@ -227,17 +310,18 @@ namespace MonoTests.Microsoft.Build.Tasks {
 					</Target>
 				</Project>
 			";
-		}
+        }
 
-		[Test]
-		public void TestSystemDll ()
-		{
-			var gacDir = GetGacDir ();
+        [Test]
+        public void TestSystemDll()
+        {
+            var gacDir = GetGacDir();
 
-			if (gacDir == null || !System.IO.Directory.Exists (gacDir))
-				Assert.Ignore ("GAC not found.");
+            if (gacDir == null || !System.IO.Directory.Exists(gacDir))
+                Assert.Ignore("GAC not found.");
 
-			string documentString = @"
+            string documentString =
+                @"
                                 <Project xmlns=""http://schemas.microsoft.com/developer/msbuild/2003"">
 					<ItemGroup>
 						<Reference Include='System.dll' />
@@ -265,26 +349,29 @@ namespace MonoTests.Microsoft.Build.Tasks {
 				</Project>
 			";
 
-			engine = new Engine (Consts.BinPath);
-			project = engine.CreateNewProject ();
-			project.LoadXml (documentString);
+            engine = new Engine(Consts.BinPath);
+            project = engine.CreateNewProject();
+            project.LoadXml(documentString);
 
-			Assert.IsTrue (project.Build ("A"), "A1");
-			big = project.GetEvaluatedItemsByName ("ResolvedFiles");
-			Assert.AreEqual (1, big.Count, "A2");
-			Assert.IsTrue (big [0].Include.EndsWith (".dll"), "A3");
-		}
+            Assert.IsTrue(project.Build("A"), "A1");
+            big = project.GetEvaluatedItemsByName("ResolvedFiles");
+            Assert.AreEqual(1, big.Count, "A2");
+            Assert.IsTrue(big[0].Include.EndsWith(".dll"), "A3");
+        }
 
-		string GetGacDir ()
-		{
-			// copied from mcs/tools/gacutil/driver.cs
-			PropertyInfo gac = typeof (System.Environment).GetProperty ("GacPath", BindingFlags.Static|BindingFlags.NonPublic);
+        string GetGacDir()
+        {
+            // copied from mcs/tools/gacutil/driver.cs
+            PropertyInfo gac = typeof(System.Environment).GetProperty(
+                "GacPath",
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
 
-			if (gac == null)
-				return null;
+            if (gac == null)
+                return null;
 
-			MethodInfo get_gac = gac.GetGetMethod (true);
-			return (string) get_gac.Invoke (null, null);
-		}
-	}
-} 
+            MethodInfo get_gac = gac.GetGetMethod(true);
+            return (string)get_gac.Invoke(null, null);
+        }
+    }
+}

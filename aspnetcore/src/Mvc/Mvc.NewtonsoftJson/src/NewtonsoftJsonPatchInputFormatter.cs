@@ -35,7 +35,8 @@ public class NewtonsoftJsonPatchInputFormatter : NewtonsoftJsonInputFormatter
         ArrayPool<char> charPool,
         ObjectPoolProvider objectPoolProvider,
         MvcOptions options,
-        MvcNewtonsoftJsonOptions jsonOptions)
+        MvcNewtonsoftJsonOptions jsonOptions
+    )
         : base(logger, serializerSettings, charPool, objectPoolProvider, options, jsonOptions)
     {
         // Clear all values and only include json-patch+json value.
@@ -60,7 +61,8 @@ public class NewtonsoftJsonPatchInputFormatter : NewtonsoftJsonInputFormatter
     /// <inheritdoc />
     public override async Task<InputFormatterResult> ReadRequestBodyAsync(
         InputFormatterContext context,
-        Encoding encoding)
+        Encoding encoding
+    )
     {
         ArgumentNullException.ThrowIfNull(context);
         ArgumentNullException.ThrowIfNull(encoding);
@@ -68,7 +70,10 @@ public class NewtonsoftJsonPatchInputFormatter : NewtonsoftJsonInputFormatter
         var result = await base.ReadRequestBodyAsync(context, encoding);
         if (!result.HasError)
         {
-            if (result.Model is IJsonPatchDocument jsonPatchDocument && SerializerSettings.ContractResolver is not null)
+            if (
+                result.Model is IJsonPatchDocument jsonPatchDocument
+                && SerializerSettings.ContractResolver is not null
+            )
             {
                 jsonPatchDocument.ContractResolver = SerializerSettings.ContractResolver;
             }
@@ -83,8 +88,7 @@ public class NewtonsoftJsonPatchInputFormatter : NewtonsoftJsonInputFormatter
         ArgumentNullException.ThrowIfNull(context);
 
         var modelType = context.ModelType;
-        if (!typeof(IJsonPatchDocument).IsAssignableFrom(modelType) ||
-            !modelType.IsGenericType)
+        if (!typeof(IJsonPatchDocument).IsAssignableFrom(modelType) || !modelType.IsGenericType)
         {
             return false;
         }

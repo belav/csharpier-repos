@@ -17,7 +17,10 @@ namespace Internal.Runtime.CompilerHelpers
         public static void Assert([DoesNotReturnIf(false)] bool condition)
         {
             if (!condition)
-                unsafe { *(int*)0 = 0; }
+                unsafe
+                {
+                    *(int*)0 = 0;
+                }
         }
     }
 }

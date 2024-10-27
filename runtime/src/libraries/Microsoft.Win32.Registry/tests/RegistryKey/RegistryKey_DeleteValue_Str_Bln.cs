@@ -14,13 +14,19 @@ namespace Microsoft.Win32.RegistryTests
         {
             const string valueName = "TestValue";
 
-            AssertExtensions.Throws<ArgumentException>(null, () => TestRegistryKey.DeleteValue(null, true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TestRegistryKey.DeleteValue(null, true)
+            );
 
             // Should NOT throw because value doesn't exists
             TestRegistryKey.DeleteValue(valueName, throwOnMissingValue: false);
 
             // Should throw because value doesn't exists
-            AssertExtensions.Throws<ArgumentException>(null, () => TestRegistryKey.DeleteValue(valueName, throwOnMissingValue: true));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => TestRegistryKey.DeleteValue(valueName, throwOnMissingValue: true)
+            );
 
             TestRegistryKey.SetValue(valueName, 42);
 

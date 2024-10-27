@@ -24,23 +24,30 @@ namespace ns1
     {
         public static void Run()
         {
-            c1 a = new c1(); a.test();
+            c1 a = new c1();
+            a.test();
 
-            c2<string> b = new c2<string>(); b.TEST();
+            c2<string> b = new c2<string>();
+            b.TEST();
 
             c3<string, string>.test();
 
             c4.Test();
 
-            c4.c5 d = new c4.c5(); d.Test();
+            c4.c5 d = new c4.c5();
+            d.Test();
 
-            c6<int, long> e = new c6<int, long>(1, new List<Func<long>>()); e.Test();
+            c6<int, long> e = new c6<int, long>(1, new List<Func<long>>());
+            e.Test();
 
-            c7<int, int> f = new c7<int, int>(1, new List<Func<int>>()); f.Test();
+            c7<int, int> f = new c7<int, int>(1, new List<Func<int>>());
+            f.Test();
 
-            c9 h = new c9(); h.test();
+            c9 h = new c9();
+            h.test();
 
-            s0<int> i = new s0<int>(); i.Test();
+            s0<int> i = new s0<int>();
+            i.Test();
 
             s1.Test();
 
@@ -68,17 +75,22 @@ namespace ns1
         // Overloaded Constructors
         public c1()
         {
-            i = 2; this.ui = 3;
+            i = 2;
+            this.ui = 3;
         }
 
         public c1(int x)
         {
-            i = x; this.ui = 3; this.a = new c1(this.i, this.ui, this.a);
+            i = x;
+            this.ui = 3;
+            this.a = new c1(this.i, this.ui, this.a);
         }
 
         public c1(int x, uint y, c1 c)
         {
-            this.i = x; ui = y; a = new c1();
+            this.i = x;
+            ui = y;
+            a = new c1();
         }
 
         public void test()
@@ -96,7 +108,10 @@ namespace ns1
                     string s = "c1.test()";
                     {
                         Console.WriteLine(s);
-                        this.goo(o); goo(i); this.goo(b); this.goo(b1); // Overload Resolution, Implicit Conversions
+                        this.goo(o);
+                        goo(i);
+                        this.goo(b);
+                        this.goo(b1); // Overload Resolution, Implicit Conversions
                     }
                 }
             }
@@ -111,7 +126,10 @@ namespace ns1
                     string s = "c1.test()";
                     {
                         Console.WriteLine(s);
-                        bar2(o); this.bar2(i); this.bar2(b1); bar1(s); // Non-Overloaded Methods, Implicit Conversions
+                        bar2(o);
+                        this.bar2(i);
+                        this.bar2(b1);
+                        bar1(s); // Non-Overloaded Methods, Implicit Conversions
                     }
                 }
             }
@@ -125,7 +143,10 @@ namespace ns1
                     string s = "c1.test()";
                     {
                         Console.WriteLine(s);
-                        this.bar4(o); this.bar4(i); this.bar4(b1); this.bar3(b); // Non-Overloaded Methods, Implicit Conversions
+                        this.bar4(o);
+                        this.bar4(i);
+                        this.bar4(b1);
+                        this.bar3(b); // Non-Overloaded Methods, Implicit Conversions
                     }
                 }
             }
@@ -141,7 +162,8 @@ namespace ns1
 
                         // Method Calls - Ref, Paramarrays
                         // Overloaded Abstract Methods
-                        c1 c = new c1(); long l = 1;
+                        c1 c = new c1();
+                        long l = 1;
                         this.abst(ref s, 1, i);
                         c.abst(ref s, new int[] { 1, i, i });
                         c.abst(ref s, this.abst(ref s, l, l), l, l, l);
@@ -166,14 +188,16 @@ namespace ns1
         public override int abst(ref string x, params int[] y)
         {
             Console.WriteLine("    c1.abst(ref string, params int[])");
-            x = x.ToString(); y = new int[] { y[0] }; // Read, Write Ref + Paramarrays
+            x = x.ToString();
+            y = new int[] { y[0] }; // Read, Write Ref + Paramarrays
             return 0;
         }
 
         public override int abst(ref string x, params long[] y)
         {
             Console.WriteLine("    c1.abst(ref string, params long[])");
-            x = y[0].ToString(); y = null; // Read, Write Ref + Paramarrays
+            x = y[0].ToString();
+            y = null; // Read, Write Ref + Paramarrays
             return 1;
         }
 
@@ -188,7 +212,8 @@ namespace ns1
         public virtual int virt(ref int x, c1 y, params c2<string>[] z)
         {
             Console.WriteLine("    c1.virt(ref int, c1, params c2<string>[])");
-            x = x + x * 2; z = null; // Read, Write Ref + Paramarrays
+            x = x + x * 2;
+            z = null; // Read, Write Ref + Paramarrays
             return 0;
         }
 
@@ -222,25 +247,31 @@ namespace ns1
             this.ui = 0u + this.ui;
             i = i - 1 * 2 + 3 / 1;
             this.i = 1;
-            this.a = null; a = new c1(x);
+            this.a = null;
+            a = new c1(x);
 
             // Read, Write Locals
-            bool b = true; string s = null;
+            bool b = true;
+            string s = null;
             s = string.Empty;
             b = this.i != 1 + (2 - 3);
             s = "";
             c1 c = new c1(i, ui, new c1(this.i, this.ui, new c1(i)));
             c = this.a;
-            b = b == true; s = s.ToString();
+            b = b == true;
+            s = s.ToString();
 
             // Read, Write Params
             x = (i - this.i) * i + (x / i);
-            x = x.GetHashCode(); this.i = x;
+            x = x.GetHashCode();
+            this.i = x;
 
             // Read, Write Array Element
             int[] a1 = new int[] { 1, 2, 3 };
-            a1[1] = i; a1[2] = x;
-            a1[1] = 1; a1[2] = 2;
+            a1[1] = i;
+            a1[2] = x;
+            a1[1] = 1;
+            a1[2] = 2;
             int i1 = a1[1] - a1[2];
             i1 = (a1[1] - (a1[2] + a1[1]));
             object o = i1;
@@ -257,24 +288,34 @@ namespace ns1
             ui = 0u;
             this.i = this.i - 1;
             a = null;
-            uint ui1 = ui; int i1 = i;
+            uint ui1 = ui;
+            int i1 = i;
 
             // Read, Write Locals
-            bool b = true; string s = string.Empty;
-            s = null; b = this.i != 1;
-            ui = ui1; i = i1;
-            bar4(b); this.goo(i1); bar4(b == (true != b));
+            bool b = true;
+            string s = string.Empty;
+            s = null;
+            b = this.i != 1;
+            ui = ui1;
+            i = i1;
+            bar4(b);
+            this.goo(i1);
+            bar4(b == (true != b));
 
             // Read, Write Params
-            x = null; x = new c1(this.i, this.ui, a);
-            this.bar4(x); this.bar4(x.GetHashCode() != (x.GetHashCode()));
+            x = null;
+            x = new c1(this.i, this.ui, a);
+            this.bar4(x);
+            this.bar4(x.GetHashCode() != (x.GetHashCode()));
 
             // Read, Write Array Element
             object[] a1 = new c1[3] { null, null, null };
             this.i = 1;
-            a1[1] = null; a1[2] = new c1((i * i) / i, ui + (ui - ui), null);
+            a1[1] = null;
+            a1[2] = new c1((i * i) / i, ui + (ui - ui), null);
             object o = null;
-            o = a1[1]; this.bar4(a1[2]);
+            o = a1[1];
+            this.bar4(a1[2]);
 
             if (b)
             {
@@ -294,11 +335,13 @@ namespace ns1
             this.ui = 0u - 0u;
             i = this.i * 1;
             this.a = new c1();
-            this.goo(i.GetHashCode()); this.a = this;
+            this.goo(i.GetHashCode());
+            this.a = this;
 
             // Read, Write Locals
             c1 c = new c1(1, 0u, (null));
-            c = null; i = 1;
+            c = null;
+            i = 1;
             c = new c1(i / i);
             c = this.a;
             this.ui = 1;
@@ -307,24 +350,26 @@ namespace ns1
             c.a = c;
             c.a = c = this.a = c.a = null;
             c = new c1(i.GetHashCode());
-            this.goo(c.i); bar3(c != null);
+            this.goo(c.i);
+            bar3(c != null);
 
             if (this.i == 10321)
             {
                 return;
             }
-            else
-            {
-            }
+            else { }
 
             // Read, Write Params
-            x = null; this.bar4(x);
+            x = null;
+            this.bar4(x);
 
             // Read, Write Array Element
             string[] a1 = new string[] { "", null, null };
-            a1[1] = null; a1[2] = "";
+            a1[1] = null;
+            a1[2] = "";
             string s = null;
-            s = a1[1]; goo(a1[2]);
+            s = a1[1];
+            goo(a1[2]);
         }
 
         protected string bar2(object x)
@@ -340,24 +385,31 @@ namespace ns1
             // Read, Write Locals
             c1 c;
             object o;
-            c = null; c = new c1(i / 2, ui * (2u), new c1(i / 2, ui * (2u), c));
+            c = null;
+            c = new c1(i / 2, ui * (2u), new c1(i / 2, ui * (2u), c));
             this.a = new c1(((1 + i) - 1));
             c = this.a;
             o = c;
             c.ui = this.ui;
             c.i = this.i * this.i;
-            c.a = c; this.a = c.a;
-            c.a = c = this.a = c.a = new c1(i, ui, new c1()); o = c.a = c;
-            bar4(o.ToString()); this.bar4(c.a.a);
+            c.a = c;
+            this.a = c.a;
+            c.a = c = this.a = c.a = new c1(i, ui, new c1());
+            o = c.a = c;
+            bar4(o.ToString());
+            this.bar4(c.a.a);
 
             // Read, Write Params
-            x = c; x = o;
+            x = c;
+            x = o;
             o = x;
 
             // Read, Write Array Element
             object[] a1 = new c1[] { null, this.a, c };
-            a1[1] = null; a1[2] = c;
-            o = a1[1]; bar3(a1[2] != a1[1]);
+            a1[1] = null;
+            a1[2] = c;
+            o = a1[1];
+            bar3(a1[2] != a1[1]);
 
             if (o == null)
             {
@@ -388,8 +440,10 @@ namespace ns1
 
             // Read, Write Array Element
             bool[] a1 = new bool[] { true, false, x };
-            a1[1] = x == (this.i != i - 1 + 1); a1[2] = x == (i >= this.i + 1 - 1);
-            b = (a1[1]); b = a1[2];
+            a1[1] = x == (this.i != i - 1 + 1);
+            a1[2] = x == (i >= this.i + 1 - 1);
+            b = (a1[1]);
+            b = a1[2];
             object o = b != a1[2];
             o = (a1[1].ToString()) == (a1[2].ToString());
             goo(a1[1].GetHashCode());
@@ -425,18 +479,26 @@ namespace ns1
             o = x = c;
             c.i = 1;
             c.i = this.i * (this.i / c.i + c.i);
-            c.a = c = this.a = c.a = new c1(); c.a = c;
-            goo(c.GetHashCode()); bar3(c.a.GetHashCode() != i);
+            c.a = c = this.a = c.a = new c1();
+            c.a = c;
+            goo(c.GetHashCode());
+            bar3(c.a.GetHashCode() != i);
 
             // Read, Write Params
             x = (o.ToString());
-            x = x.ToString(); goo(x.GetHashCode()); goo(x.ToString().GetHashCode());
+            x = x.ToString();
+            goo(x.GetHashCode());
+            goo(x.ToString().GetHashCode());
 
             // Read, Write Array Element
             object[] a1 = new object[] { (null), (this.a), c };
-            a1[1] = ((this.a)); a1[2] = (c); a1[1] = (i);
+            a1[1] = ((this.a));
+            a1[2] = (c);
+            a1[1] = (i);
             Array.Reverse(a1);
-            o = a1[1]; goo(a1.GetHashCode()); bar3(a1[2] == null);
+            o = a1[1];
+            goo(a1.GetHashCode());
+            bar3(a1[2] == null);
 
             if (b)
             {
@@ -504,7 +566,9 @@ namespace ns1
                 {
                     // Method Calls - Ref, Paramarrays
                     // Overloaded Abstract Methods
-                    int i = 1; long l = i; string s = "";
+                    int i = 1;
+                    long l = i;
+                    string s = "";
                     this.abst(ref s, 1, i);
                     c.abst(ref s, new int[] { 1, i, i });
                     c.abst(ref s, this.abst(ref s, l, l), l, l, l);
@@ -529,14 +593,16 @@ namespace ns1
         public override int abst(ref string x, params int[] y)
         {
             Console.WriteLine("    c2<T>.abst(ref string, params int[])");
-            x = y[0].ToString(); y = null; // Read, Write Ref + Paramarrays
+            x = y[0].ToString();
+            y = null; // Read, Write Ref + Paramarrays
             return 0;
         }
 
         public override int abst(ref string x, params long[] y)
         {
             Console.WriteLine("    c2<T>.abst(ref string, params long[])");
-            x = y[0].ToString(); y = null; // Read, Write Ref + Paramarrays
+            x = y[0].ToString();
+            y = null; // Read, Write Ref + Paramarrays
             return 1;
         }
 
@@ -544,21 +610,25 @@ namespace ns1
         public override int virt(ref int x, c1 y, params c2<string>[] z)
         {
             Console.WriteLine("    c2<T>.virt(ref int, c1, params c2<string>[])");
-            x = 0; x = y.GetHashCode(); z = null; // Read, Write Ref + Paramarrays
+            x = 0;
+            x = y.GetHashCode();
+            z = null; // Read, Write Ref + Paramarrays
             return 0;
         }
 
         public override c2<string> virt(int x, ref c1 y)
         {
             Console.WriteLine("    c2<T>.virt(int, ref c1)");
-            x.ToString(); y = new c1(x, (uint)x, y); // Read, Write Ref
+            x.ToString();
+            y = new c1(x, (uint)x, y); // Read, Write Ref
             return new c2<string>();
         }
 
         public override int virt(params object[] x)
         {
             Console.WriteLine("    c2<T>.virt(params object[])");
-            x.ToString(); x = null; // Read, Write Paramarrays
+            x.ToString();
+            x = null; // Read, Write Paramarrays
             return new int();
         }
 
@@ -578,7 +648,9 @@ namespace ns1
                 const c1 const3 = null;
                 if (true)
                 {
-                    this.bar4(const1); c.goo(const2 != 1); this.a = const3;
+                    this.bar4(const1);
+                    c.goo(const2 != 1);
+                    this.a = const3;
                 }
             }
         }
@@ -591,7 +663,8 @@ namespace ns1
 
             // Read, Write Params
             T y = x;
-            x = y; bar(x);
+            x = y;
+            bar(x);
 
             // Read Consts
             const long const1 = 1;
@@ -603,7 +676,8 @@ namespace ns1
 
             while (const2 == const1 - aa + aa)
             {
-                this.bar4(const1); c.goo(const2 != 1U);
+                this.bar4(const1);
+                c.goo(const2 != 1U);
                 return x;
             }
             return x;
@@ -616,7 +690,9 @@ namespace ns1
             int aa = 1;
 
             // Read, Write Params
-            x = x.ToString() == x.ToString(); a = c; a = this;
+            x = x.ToString() == x.ToString();
+            a = c;
+            a = this;
 
             // Read Consts
             const long const1 = 1;
@@ -638,9 +714,11 @@ namespace ns1
             Console.WriteLine("    c2<T>.goo(byte, object)");
 
             // Read, Write Params
-            y = x; x = 1;
+            y = x;
+            x = 1;
             c1 c = new c1();
-            c.bar4(y); c.goo(x);
+            c.bar4(y);
+            c.goo(x);
 
             // Read Consts
             const string const1 = "";
@@ -655,7 +733,9 @@ namespace ns1
                     byte bb = 1;
                     if (bb == x)
                     {
-                        this.bar4(const1); this.goo(const2 != 1); this.a = const3;
+                        this.bar4(const1);
+                        this.goo(const2 != 1);
+                        this.a = const3;
                         break;
                     }
                     else
@@ -673,18 +753,22 @@ namespace ns1
             Console.WriteLine("    c2<T>.bar1(byte, object)");
 
             // Read, Write Params
-            y = x; x = 1;
+            y = x;
+            x = 1;
             c1 c = new c1();
-            c.bar4(y); c.goo(x);
+            c.bar4(y);
+            c.goo(x);
 
             // Read Consts
             const long const1 = 1;
             const uint const2 = 1;
-            while (const1 != x) continue;
+            while (const1 != x)
+                continue;
 
             while (const2 == 1U)
             {
-                this.bar4(const1); this.goo(const2 != 1);
+                this.bar4(const1);
+                this.goo(const2 != 1);
                 break;
             }
         }
@@ -694,9 +778,11 @@ namespace ns1
             Console.WriteLine("    c2<T>.bar2(byte, object)");
 
             // Read, Write Params
-            y = x; x = 1;
+            y = x;
+            x = 1;
             c1 c = new c1();
-            c.bar4(y); this.goo(x);
+            c.bar4(y);
+            this.goo(x);
 
             // Read Consts
             const long const1 = 1;
@@ -706,7 +792,9 @@ namespace ns1
                 const c1 const3 = null;
                 if (c != const3)
                 {
-                    c.bar4(const1); this.goo(const2 != 1); this.a = const3;
+                    c.bar4(const1);
+                    this.goo(const2 != 1);
+                    this.a = const3;
                 }
             }
             return (int)const1;
@@ -717,10 +805,12 @@ namespace ns1
             Console.WriteLine("    c2<T>.bar3(byte, object)");
 
             // Read, Write Params
-            y = x; x = 1;
+            y = x;
+            x = 1;
             double d = 1.1;
             c1 c = new c1();
-            this.bar4(y); c.goo(x);
+            this.bar4(y);
+            c.goo(x);
 
             // Read Consts
             const string const1 = "hi";
@@ -731,7 +821,9 @@ namespace ns1
                 const c1 const3 = null;
                 if (const3 != c)
                 {
-                    this.bar4(const1); c.goo(const2 != 1); c.a = const3;
+                    this.bar4(const1);
+                    c.goo(const2 != 1);
+                    c.a = const3;
                     return (float)d;
                 }
                 return (float)(1.1f + (float)1.1);
@@ -747,7 +839,10 @@ namespace ns1
             string s = "c3<T>.test()";
             {
                 Console.WriteLine(s);
-                goo(); goo(1); goo("1"); goo(1.1); // Overload Resolution, Implicit Conversions
+                goo();
+                goo(1);
+                goo("1");
+                goo(1.1); // Overload Resolution, Implicit Conversions
             }
             // Nested Scopes
             {
@@ -760,8 +855,10 @@ namespace ns1
                         c2<string> a = new c2<string>();
                         a.bar1(b, sb1);
                         sb1 = 1;
-                        if (sb1 == 1) break;
-                        else continue;
+                        if (sb1 == 1)
+                            break;
+                        else
+                            continue;
                     }
                 }
                 while (sb1 != 0)
@@ -770,8 +867,10 @@ namespace ns1
                     c2<string> a = new c2<string>();
                     a.bar1(b, sb1);
                     sb1 = 0;
-                    if (sb1 == 1) break;
-                    else continue;
+                    if (sb1 == 1)
+                        break;
+                    else
+                        continue;
                 }
             }
             // Nested Scopes
@@ -808,14 +907,16 @@ namespace ns1
                         c2<bool> a = new c2<bool>();
                         a.bar3(b, sb3);
                     }
-                    if (s != null) break;
+                    if (s != null)
+                        break;
                 }
                 while (s == null)
                 {
                     byte b = 0;
                     if (s != null)
                     {
-                        b = 1; continue;
+                        b = 1;
+                        continue;
                     }
                     c2<bool> a = new c2<bool>();
                     a.bar3(b, sb3);
@@ -829,14 +930,16 @@ namespace ns1
         protected static int goo(T x, U y)
         {
             Console.WriteLine("    c3<T, U>.goo(T, U)");
-            int[] a = new int[3] { 1, 2, 3 }; a[1] = a[2];
+            int[] a = new int[3] { 1, 2, 3 };
+            a[1] = a[2];
             return (int)((long)x.GetHashCode() + (long)(int)(long)y.GetHashCode());
         }
 
         internal static c1 goo(object x)
         {
             Console.WriteLine("    c3<T, U>.goo(object)");
-            c1[] a = new c1[3] { null, new c1(), new c1(1) }; a[1] = a[2];
+            c1[] a = new c1[3] { null, new c1(), new c1(1) };
+            a[1] = a[2];
             x = "hi";
             return new c1((int)1.1f, (uint)1, new c1(x.GetHashCode()));
         }
@@ -844,21 +947,27 @@ namespace ns1
         private static float goo(string x)
         {
             Console.WriteLine("    c3<T, U>.goo(string)");
-            string[] a = new string[] { x, x, "", null }; a[1] = a[2]; a[2] = a[1];
+            string[] a = new string[] { x, x, "", null };
+            a[1] = a[2];
+            a[2] = a[1];
             return (float)goo(x.GetHashCode());
         }
 
         public static int goo(int x)
         {
             Console.WriteLine("    c3<T, U>.goo(int)");
-            int[] a = new int[] { x, x, 1, 0 }; a[1] = a[2]; a[2] = a[1];
+            int[] a = new int[] { x, x, 1, 0 };
+            a[1] = a[2];
+            a[2] = a[1];
             return (int)x.GetHashCode() + x;
         }
 
         public static string goo()
         {
             Console.WriteLine("    c3<T, U>.goo()");
-            string[] a = new string[] { "", null }; a[0] = a[1]; a[1] = a[0];
+            string[] a = new string[] { "", null };
+            a[0] = a[1];
+            a[1] = a[0];
             return (string)null;
         }
 
@@ -866,21 +975,25 @@ namespace ns1
         protected int bar(T x, U y)
         {
             Console.WriteLine("    c3<T, U>.bar(T, U)");
-            int[] a = new int[3] { 1, 2, 3 }; a[1] = a[2];
+            int[] a = new int[3] { 1, 2, 3 };
+            a[1] = a[2];
             return (int)((long)1 + (long)(int)(long)2);
         }
 
         public c1 bar(object x)
         {
             Console.WriteLine("    c3<T, U>.bar(object)");
-            c1[] a = new c1[3] { null, new c1(), new c1(1) }; a[1] = a[2];
+            c1[] a = new c1[3] { null, new c1(), new c1(1) };
+            a[1] = a[2];
             return new c1((int)1.1f, (uint)1, new c1(x.GetHashCode()));
         }
 
         public float bar(string x)
         {
             Console.WriteLine("    c3<T, U>.bar(string)");
-            string[] a = new string[] { x, x, "", null }; a[1] = a[2]; a[2] = a[1];
+            string[] a = new string[] { x, x, "", null };
+            a[1] = a[2];
+            a[2] = a[1];
             x = a[2];
             return (float)goo(x.GetHashCode());
         }
@@ -888,14 +1001,18 @@ namespace ns1
         public int bar(int x)
         {
             Console.WriteLine("    c3<T, U>.bar(int)");
-            int[] a = new int[] { x, x, 1, 0 }; a[1] = a[2]; a[2] = a[1];
+            int[] a = new int[] { x, x, 1, 0 };
+            a[1] = a[2];
+            a[2] = a[1];
             return (int)x.GetHashCode() + x;
         }
 
         public string bar()
         {
             Console.WriteLine("    c3<T, U>.bar()");
-            string[] a = new string[] { "", null }; a[0] = a[1]; a[1] = a[0];
+            string[] a = new string[] { "", null };
+            a[0] = a[1];
+            a[1] = a[0];
             return (string)null;
         }
     }
@@ -918,7 +1035,8 @@ namespace ns1
                 int i = 2;
                 Console.WriteLine(str);
                 {
-                    c1 a = new c1(i); a.goo(i);
+                    c1 a = new c1(i);
+                    a.goo(i);
                 }
                 double d = 1.1;
                 {
@@ -940,16 +1058,19 @@ namespace ns1
                         string s_ = "    This is a test";
                         while (!b)
                         {
-                            if (true) b = true;
+                            if (true)
+                                b = true;
                             Console.WriteLine(s_);
                             while (b)
                             {
-                                if (true) b = false;
+                                if (true)
+                                    b = false;
                                 object oo = i;
                                 bool bb = b;
                                 if (!bb)
                                 {
-                                    if (!false) bb = true;
+                                    if (!false)
+                                        bb = true;
                                     byte b11 = b1;
                                     string ss = s_;
                                     if (bb)
@@ -979,50 +1100,63 @@ namespace ns1
                                                     // Method Calls - Ref, Paramarrays
                                                     // Overloaded Virtual Methods
                                                     c1 a = new c4();
-                                                    c.virt(i, c, new c2<string>[] { c.virt(i, ref a), new c4() });
-                                                    c.virt(c.virt(i, ref a), c.virt(ref i, c, c.virt(i, ref a)));
-                                                    c.
-                                                      virt(
-                                                           c.
-                                                             abst(ref s_,
-                                                                 l,
-                                                                 l),
-                                                           c.
-                                                             abst(ref s_,
-                                                                  new long[] {1, 
-                                                                              i, 
-                                                                              l})
-                                                           );
+                                                    c.virt(
+                                                        i,
+                                                        c,
+                                                        new c2<string>[]
+                                                        {
+                                                            c.virt(i, ref a),
+                                                            new c4(),
+                                                        }
+                                                    );
+                                                    c.virt(
+                                                        c.virt(i, ref a),
+                                                        c.virt(ref i, c, c.virt(i, ref a))
+                                                    );
+                                                    c.virt(
+                                                        c.abst(ref s_, l, l),
+                                                        c.abst(ref s_, new long[] { 1, i, l })
+                                                    );
                                                     c.virt(i, ref a);
-                                                    c.virt(ref i,
-                                                           new c4(),
-                                                           new c4(),
-                                                           new c2<string>()
-                                                           );
+                                                    c.virt(
+                                                        ref i,
+                                                        new c4(),
+                                                        new c4(),
+                                                        new c2<string>()
+                                                    );
                                                     c.virt(new int[] { 1, 2, 3 });
                                                     c.virt(new Exception[] { });
                                                     c.virt(new c1[] { new c4(), new c2<string>() });
                                                     s = (short)us;
-                                                    if (true) continue;
+                                                    if (true)
+                                                        continue;
                                                 }
                                             }
                                             else if (bbb != true)
                                             {
-                                                Console.WriteLine("Error - Should not have reached here");
-                                                o = i; o = us;
+                                                Console.WriteLine(
+                                                    "Error - Should not have reached here"
+                                                );
+                                                o = i;
+                                                o = us;
                                                 return (bool)o;
                                             }
                                             else if (bbb == false)
                                             {
-                                                Console.WriteLine("Error - Should not have reached here");
-                                                o = i; o = l;
+                                                Console.WriteLine(
+                                                    "Error - Should not have reached here"
+                                                );
+                                                o = i;
+                                                o = l;
                                                 return (bool)o;
-
                                             }
                                             else
                                             {
-                                                Console.WriteLine("Error - Should not have reached here");
-                                                o = b; o = ul;
+                                                Console.WriteLine(
+                                                    "Error - Should not have reached here"
+                                                );
+                                                o = b;
+                                                o = ul;
                                                 return (bool)o;
                                             }
                                         }
@@ -1054,13 +1188,15 @@ namespace ns1
                                 }
                                 while (b != false)
                                 {
-                                    b = false; break;
+                                    b = false;
+                                    break;
                                 }
                                 break;
                             }
                             while (b != true)
                             {
-                                b = true; continue;
+                                b = true;
+                                continue;
                             }
                         }
                     }
@@ -1102,31 +1238,49 @@ namespace ns1
 
             static c5()
             {
-                o = s1; s1 = (string)o; o = f; o = null;
+                o = s1;
+                s1 = (string)o;
+                o = f;
+                o = null;
             }
 
             public int Test()
             {
-                int i = 1; string s = "1"; bool b = true;
-                short sh = 1; ushort us = 1; object o = i;
+                int i = 1;
+                string s = "1";
+                bool b = true;
+                short sh = 1;
+                ushort us = 1;
+                object o = i;
                 c5 cc = new c5();
                 Console.WriteLine("c5.test");
                 {
-                    uint ui = 1; o = ui;
-                    i = sh; b = false; us = 1;
+                    uint ui = 1;
+                    o = ui;
+                    i = sh;
+                    b = false;
+                    us = 1;
                     // Nested Scopes
                     if (true)
                     {
-                        byte b1 = 1; long l = i; string s1 = s;
-                        float f = 1.2f; o = f; l = ui;
+                        byte b1 = 1;
+                        long l = i;
+                        string s1 = s;
+                        float f = 1.2f;
+                        o = f;
+                        l = ui;
                         c4.goo(sh, s, b, b1, i, s1); // Implicit Conversions
                         c4 c = new c4();
-                        c.goo(sh); this.bar(sh);
+                        c.goo(sh);
+                        this.bar(sh);
                         cc.bar(c5.goo(cc.bar()));
                         c5.goo(cc.bar(c5.goo()));
                         if (b == false)
                         {
-                            double d = f; ulong ul = 1; sbyte sb = 1; s1 = s;
+                            double d = f;
+                            ulong ul = 1;
+                            sbyte sb = 1;
+                            s1 = s;
                             c4.bar(sh, us, sb, f, d, ui, ul); // Implicit Conversions
                             c.bar4(us);
                             this.bar(cc.bar(), c);
@@ -1134,55 +1288,74 @@ namespace ns1
                         }
                         if (b1 >= l)
                         {
-                            uint ui1 = 1; o = ui1;
-                            i = sh; b = false; us = 1;
+                            uint ui1 = 1;
+                            o = ui1;
+                            i = sh;
+                            b = false;
+                            us = 1;
                             while (i != 1000)
                             {
-                                byte b11 = 1; long l1 = i; string s11 = s1;
-                                float f1 = 1.2f; o = f1; l1 = ui1;
+                                byte b11 = 1;
+                                long l1 = i;
+                                string s11 = s1;
+                                float f1 = 1.2f;
+                                o = f1;
+                                l1 = ui1;
                                 c4.goo(sh, s1, b, b11, i, s11); // Implicit Conversions
                                 c.goo(b);
-                                this.bar(b); if (c5.goo() != null) c5.goo().ToString().GetHashCode();
+                                this.bar(b);
+                                if (c5.goo() != null)
+                                    c5.goo().ToString().GetHashCode();
                                 cc.bar(this.bar(c5.goo()));
 
                                 if (!false)
                                 {
-                                    double d1 = f1; ulong ul1 = 1; sbyte sb1 = 1; s1 = s;
+                                    double d1 = f1;
+                                    ulong ul1 = 1;
+                                    sbyte sb1 = 1;
+                                    s1 = s;
                                     c4.bar(sh, us, sb1, f1, d1, ui1, ul1); // Implicit Conversions
                                     c.goo(b1, sb1);
                                     this.bar(o).bar4(c);
                                     cc.bar(c5.goo(o)).bar4(c).ToString();
                                     d1 = d;
-                                    if (d != d1) return i;
+                                    if (d != d1)
+                                        return i;
                                 }
                                 if (i != 1000)
                                 {
-                                    uint ui2 = 1; o = ui2;
-                                    i = sh; b = false; us = 1;
+                                    uint ui2 = 1;
+                                    o = ui2;
+                                    i = sh;
+                                    b = false;
+                                    us = 1;
                                     {
-                                        byte b12 = 1; long l2 = i; string s12 = s11;
-                                        float f2 = 1.2f; o = f1; l2 = ui1;
+                                        byte b12 = 1;
+                                        long l2 = i;
+                                        string s12 = s11;
+                                        float f2 = 1.2f;
+                                        o = f1;
+                                        l2 = ui1;
                                         c4.goo(sh, s1, b, b12, i, s12); // Implicit Conversions
                                         c.bar4(b.ToString() == b.ToString());
                                         this.bar(c5.goo(cc.bar(i)));
                                         {
-                                            double d2 = f2; ulong ul2 = 1; sbyte sb2 = 1; s1 = s;
+                                            double d2 = f2;
+                                            ulong ul2 = 1;
+                                            sbyte sb2 = 1;
+                                            s1 = s;
                                             c4.bar(sh, us, sb2, f2, d2, ui2, ul2); // Implicit Conversions
                                             c.goo(false == true != false == b);
                                             c.bar4(sh > us == sh <= us);
                                             this.bar((object)c5.goo((object)cc.bar((object)i)));
-                                            if (i != i +
-                                                1 -
-                                                1)
-                                                return i -
-                                                (int)b12;
+                                            if (i != i + 1 - 1)
+                                                return i - (int)b12;
                                         }
-                                        if (i <=
-                                              1000) break;
+                                        if (i <= 1000)
+                                            break;
                                     }
                                 }
-                                if (i <=
-                                      1000)
+                                if (i <= 1000)
                                     i = 1000;
                                 return sh;
                             }
@@ -1209,12 +1382,14 @@ namespace ns1
         {
             Console.WriteLine("    c6<T, U>.ctor");
         }
+
         // Constructor
         public c6(int i)
             : this()
         {
             Console.WriteLine("    c6<T, U>.ctor(int i)");
         }
+
         // Constructor
         public c6(T i, List<Func<U>> j)
             : this(1)
@@ -1229,7 +1404,9 @@ namespace ns1
         // Enums
         protected enum E1 : long
         {
-            A = L1, B = L2, C = L3
+            A = L1,
+            B = L2,
+            C = L3,
         }
 
         // Const Fields, Field Initializers
@@ -1239,17 +1416,50 @@ namespace ns1
         // Enums
         public enum E2 : long
         {
-            Member1 = L1, Member2, Member3, Member4, Member5,
-            Member6, Member7, Member8 = L2, Member9 = L1 + L1, Member10,
-            Member11, Member12 = L3 * L2, Member13, Member14, Member15 = L2 + L3,
-            Member16, Member17, Member18 = L3, Member19, Member20
+            Member1 = L1,
+            Member2,
+            Member3,
+            Member4,
+            Member5,
+            Member6,
+            Member7,
+            Member8 = L2,
+            Member9 = L1 + L1,
+            Member10,
+            Member11,
+            Member12 = L3 * L2,
+            Member13,
+            Member14,
+            Member15 = L2 + L3,
+            Member16,
+            Member17,
+            Member18 = L3,
+            Member19,
+            Member20,
         }
+
         public enum E3 : short
         {
-            Member1 = 1, Member2 = 10, Member3 = 100, Member4 = 1000, Member5 = 10000,
-            Member6 = 10, Member7 = 20, Member8 = 30, Member9 = 40, Member10 = 50,
-            Member11 = 11, Member12 = 22, Member13 = 33, Member14 = 44, Member15 = 55,
-            Member16, Member17, Member18, Member19, Member20
+            Member1 = 1,
+            Member2 = 10,
+            Member3 = 100,
+            Member4 = 1000,
+            Member5 = 10000,
+            Member6 = 10,
+            Member7 = 20,
+            Member8 = 30,
+            Member9 = 40,
+            Member10 = 50,
+            Member11 = 11,
+            Member12 = 22,
+            Member13 = 33,
+            Member14 = 44,
+            Member15 = 55,
+            Member16,
+            Member17,
+            Member18,
+            Member19,
+            Member20,
         }
 
         // Const Fields, Field Initializers
@@ -1283,6 +1493,7 @@ namespace ns1
 
         #region IEnumerable Implementation
         protected static IList<T> collection = new List<T>();
+
         // Implement Interface Implicitly
         public IEnumerator<T> GetEnumerator()
         {
@@ -1307,6 +1518,7 @@ namespace ns1
         #region IDisposable Implementation
         // Implement Interface Explicitly
         private System.Threading.Tasks.Task proc = default(System.Threading.Tasks.Task);
+
         void IDisposable.Dispose()
         {
             proc.Dispose();
@@ -1315,17 +1527,13 @@ namespace ns1
 
         #region IEnumerator Implementation
         private IEnumerator<T> enumerator = collection.GetEnumerator();
+
         // Implement Interface Implicitly
         public T Current
         {
             get { return enumerator.Current; }
             // Additional Accessor
-            set
-            {
-                if (enumerator.Current.Equals(value))
-                {
-                }
-            }
+            set { if (enumerator.Current.Equals(value)) { } }
         }
 
         // Implement Interface Explicitly
@@ -1339,6 +1547,7 @@ namespace ns1
         {
             return MoveNext();
         }
+
         public bool MoveNext()
         {
             return enumerator.MoveNext();
@@ -1353,20 +1562,32 @@ namespace ns1
 
         internal void Test()
         {
-            bool b1 = true, b2 = true;
+            bool b1 = true,
+                b2 = true;
             int x = 0;
             if (b1 && b2)
             {
                 Console.WriteLine("c6<T, U>.Test()");
                 // Generic Virtual Methods, Enums
-                E1 enum1 = E1.A; E2 enum2 = E2.Member17; E3 enum3 = E3.Member19;
+                E1 enum1 = E1.A;
+                E2 enum2 = E2.Member17;
+                E3 enum3 = E3.Member19;
                 virt(enum1, E2.Member10, new List<E3>());
-                enum1 = E1.A; enum3 = E3.Member3;
+                enum1 = E1.A;
+                enum3 = E3.Member3;
                 c6<U, T> c = new c7<T, U>(1);
-                c.virt<E1[], E2[], E3>(new E1[] { E1.A, E1.B }, new E2[] { enum2, E2.Member16 }, enum3);
+                c.virt<E1[], E2[], E3>(
+                    new E1[] { E1.A, E1.B },
+                    new E2[] { enum2, E2.Member16 },
+                    enum3
+                );
                 enum2 = E2.Member18;
 
-                x = (int)enum1; x = x++; x = x--; ++x; --x;
+                x = (int)enum1;
+                x = x++;
+                x = x--;
+                ++x;
+                --x;
             }
             else if (b1 || b2 || x++ >= --x)
             {
@@ -1391,6 +1612,7 @@ namespace ns1
         {
             Console.WriteLine("    c7<T, U>.ctor()");
         }
+
         // Constructor
         public c7(int i)
             : base(i)
@@ -1399,6 +1621,7 @@ namespace ns1
             Console.WriteLine("    c7<T, U>.ctor(int i)");
             --i;
         }
+
         // Constructor
         public c7(T i, List<Func<U>> j)
             : base(default(U), new List<Func<T>>())
@@ -1409,7 +1632,9 @@ namespace ns1
         // Hide Enum
         public new enum E1
         {
-            A = I1, B = I1 + I2, C = I2 / I3
+            A = I1,
+            B = I1 + I2,
+            C = I2 / I3,
         }
 
         // Const Fields
@@ -1419,10 +1644,26 @@ namespace ns1
         // Hide Enum
         public new enum E2 : long
         {
-            Member1 = L1, Member2 = enum2, Member3, Member4 = I2 + (I1 - I3), Member5 = ((I1 - I2)),
-            Member6, Member7 = I1, Member8 = L2, Member9 = (L1 + L1) - (I3), Member10,
-            Member11 = enum1, Member12 = L3 * (L2 + I1) / I3, Member13, Member14 = enum3, Member15 = L2 + L3 + I2,
-            Member16, Member17, Member18 = L3, Member19, Member20 = enum2
+            Member1 = L1,
+            Member2 = enum2,
+            Member3,
+            Member4 = I2 + (I1 - I3),
+            Member5 = ((I1 - I2)),
+            Member6,
+            Member7 = I1,
+            Member8 = L2,
+            Member9 = (L1 + L1) - (I3),
+            Member10,
+            Member11 = enum1,
+            Member12 = L3 * (L2 + I1) / I3,
+            Member13,
+            Member14 = enum3,
+            Member15 = L2 + L3 + I2,
+            Member16,
+            Member17,
+            Member18 = L3,
+            Member19,
+            Member20 = enum2,
         }
 
         // Read-Write Property
@@ -1436,6 +1677,7 @@ namespace ns1
             // Private Accessor
             private set { Console.WriteLine("    c7<T, U>.prop3.set()"); }
         }
+
         // Hide Read-Only Property
         public new U prop2
         {
@@ -1445,10 +1687,15 @@ namespace ns1
                 return default(U);
             }
         }
+
         // Hide Read-Write Property
         public new IDictionary<T, U> prop1
         {
-            get { Console.WriteLine("    c7<T, U>.prop1.get()"); return new Dictionary<T, U>(); }
+            get
+            {
+                Console.WriteLine("    c7<T, U>.prop1.get()");
+                return new Dictionary<T, U>();
+            }
             protected internal set { Console.WriteLine("    c7<T, U>.prop1.set()"); }
         }
 
@@ -1460,9 +1707,12 @@ namespace ns1
         {
             Console.WriteLine("    c7<T, U>.virt<TT, UU, VV>(TT x, UU y, VV z)");
             // Enums
-            const E1 enum1 = E1.A; E2 enum2 = E2.Member17; const E3 enum3 = E3.Member19;
+            const E1 enum1 = E1.A;
+            E2 enum2 = E2.Member17;
+            const E3 enum3 = E3.Member19;
             bool b = (E1.B == enum1) || (enum2 < E2.Member19) && (enum3 >= E3.Member9);
-            long e = (long)enum1; b = e++ == e-- || --e == ++e;
+            long e = (long)enum1;
+            b = e++ == e-- || --e == ++e;
         }
 
         // Hide Generic Virtual Method
@@ -1478,6 +1728,7 @@ namespace ns1
         {
             return collection.GetEnumerator();
         }
+
         // Re-Implement Interface Explicitly
         System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
@@ -1488,6 +1739,7 @@ namespace ns1
         #region ICollection Implementation
         // Implement Interface Implicitly
         private new List<U> collection = new List<U>();
+
         public void Add(U item)
         {
             collection.Add(item);
@@ -1529,17 +1781,24 @@ namespace ns1
             Console.WriteLine("c7<T, U>.Test()");
             c6<T, U> b = new c6<T, U>();
             // Read, Write Properties
-            U uu = default(U); T tt = default(T);
-            b.prop1 = uu; uu = b.prop1;
-            b.prop2.Add(tt); b.prop2.Count.ToString();
+            U uu = default(U);
+            T tt = default(T);
+            b.prop1 = uu;
+            uu = b.prop1;
+            b.prop2.Add(tt);
+            b.prop2.Count.ToString();
 
             c7<T, U> d = this;
             IDictionary<T, U> dict = new Dictionary<T, U>();
             // Read, Write Properties
-            d.prop1 = dict; dict = d.prop1; d.prop1.Add(tt, uu);
-            uu = d.prop2; d.prop2.ToString();
+            d.prop1 = dict;
+            dict = d.prop1;
+            d.prop1.Add(tt, uu);
+            uu = d.prop2;
+            d.prop2.ToString();
             List<T> l = new List<T>();
-            d.prop3 = l; l = d.prop3;
+            d.prop3 = l;
+            l = d.prop3;
         }
     }
 
@@ -1551,9 +1810,10 @@ namespace ns1
         new int method2();
     }
 
-    abstract public class c8 : i0<int>, i1<long, long>
+    public abstract class c8 : i0<int>, i1<long, long>
     {
         internal int _prop1 = 0;
+
         // Implement Read-Write Property
         // Virtual Property
         virtual public int prop1
@@ -1588,6 +1848,7 @@ namespace ns1
         }
 
         List<long> __prop2 = new List<long>();
+
         // Explicitly Implement Write-Only Property
         List<long> i1<long, long>.prop2
         {
@@ -1613,19 +1874,23 @@ namespace ns1
         {
             get
             {
-                Console.WriteLine("    c8.i0<long>.prop1.get()"); return _prop1;
+                Console.WriteLine("    c8.i0<long>.prop1.get()");
+                return _prop1;
             }
             set
             {
-                _prop1 = Convert.ToInt32(value--); --_prop1;
+                _prop1 = Convert.ToInt32(value--);
+                --_prop1;
                 Console.WriteLine("    c8.i0<long>.prop1.set()");
             }
         }
 
         // Abstract Properties, Protected Accessor
         public abstract IList<int> prop3 { get; protected set; }
+
         // Virtual Auto-Property, Internal Accessor
         public virtual IDictionary<string, IList<int>> prop4 { internal get; set; }
+
         // Virtual Auto-Property, Protected Internal Accessor
         public virtual i2 prop5 { get; protected internal set; }
 
@@ -1635,10 +1900,12 @@ namespace ns1
         {
             Console.WriteLine("    c8.method1()");
         }
+
         public virtual void method1<TT>(long x, TT y)
         {
             Console.WriteLine("    c8.i0<int>.method1<TT>(long x, TT y)");
         }
+
         public virtual void method2()
         {
             Console.WriteLine("    c8.method2()");
@@ -1653,10 +1920,12 @@ namespace ns1
         {
             Console.WriteLine("    c8.i0<int>.method1<TT>(int x, TT y)");
         }
+
         void i0<long>.method1()
         {
             Console.WriteLine("    c8.i0<long>.method1()");
         }
+
         void i1<long, long>.method1()
         {
             Console.WriteLine("    c8.i1<long, long>.method1()");
@@ -1682,7 +1951,8 @@ namespace ns1
             a.method1(1, true);
             a.method1<Exception>(1, new ArgumentException());
             // Invoke Interface Properties
-            int x = a.prop1--; a.prop1 = x;
+            int x = a.prop1--;
+            a.prop1 = x;
             List<int> y = a.prop2;
 
             i1<long, long> b = this;
@@ -1693,7 +1963,8 @@ namespace ns1
             b.method1(1, e, 1, new ArgumentException(), ref e);
             b.method2();
             // Invoke Interface Properties
-            b.prop1 = x; x = Convert.ToInt32(++b.prop1);
+            b.prop1 = x;
+            x = Convert.ToInt32(++b.prop1);
             b.prop2 = new List<long>();
         }
     }
@@ -1782,6 +2053,7 @@ namespace ns1
         {
             Console.WriteLine("    c9.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT z)");
         }
+
         // Override Abstract Method
         public override void method1<TT, UU>(long x, TT y, long xx, UU yy, ref TT z)
         {
@@ -1793,10 +2065,12 @@ namespace ns1
         {
             return _prop1.ToString();
         }
+
         public sealed override bool Equals(object obj)
         {
             return _prop1.Equals(obj);
         }
+
         public sealed override int GetHashCode()
         {
             return _prop1.GetHashCode();
@@ -1822,7 +2096,8 @@ namespace ns1
             // Invoke Interface Properties
             c.prop2 = new List<int>(c.prop1 + 100);
 
-            c9 dd = this; c8 bb = dd;
+            c9 dd = this;
+            c8 bb = dd;
             // Invoke Virtual / Abstract Methods
             bb.method1();
             bb.method1(1, 1);
@@ -1832,18 +2107,23 @@ namespace ns1
 
             int x = 0;
             // Invoke Virtual / Abstract Properties
-            bb.prop1 = x; x = --bb.prop1 + ++bb.prop1;
+            bb.prop1 = x;
+            x = --bb.prop1 + ++bb.prop1;
             List<int> y = bb.prop2;
-            bb.prop3.ToString(); dd.prop3 = bb.prop2;
-            bb.prop4 = new Dictionary<string, IList<int>>(); bb.prop4.ToString();
-            bb.prop5 = this; c = bb.prop5;
+            bb.prop3.ToString();
+            dd.prop3 = bb.prop2;
+            bb.prop4 = new Dictionary<string, IList<int>>();
+            bb.prop4.ToString();
+            bb.prop5 = this;
+            c = bb.prop5;
         }
     }
 
     [System.Runtime.InteropServices.ComVisible(true)]
-    struct s0<[nested.FirstAttribute]T> : i1<int, int>, i2
+    struct s0<[nested.FirstAttribute] T> : i1<int, int>, i2
     {
-        int i, j;
+        int i,
+            j;
         private List<int> _prop2;
 
         // Static Constructor
@@ -1852,9 +2132,15 @@ namespace ns1
             // Extension Methods
             var collection = new int[] { 1, 2, (byte)3, (short)4, (int)5L };
             collection.AsParallel<int>();
-            collection.Aggregate((a, b) => { return a; });
-            var bl = collection.AsQueryable().Any() ||
-                collection.AsQueryable<int>().Count() > collection.Sum();
+            collection.Aggregate(
+                (a, b) =>
+                {
+                    return a;
+                }
+            );
+            var bl =
+                collection.AsQueryable().Any()
+                || collection.AsQueryable<int>().Count() > collection.Sum();
             Console.WriteLine("    s0.cctor()");
         }
 
@@ -1869,6 +2155,7 @@ namespace ns1
             }
         }
         Exception k;
+
         public void method1()
         {
             k = (Exception)new ArgumentException();
@@ -1877,7 +2164,14 @@ namespace ns1
         }
 
         ArgumentException e;
-        public void method1<TT, UU>(int x, TT y, [nested.FirstAttribute.Second(Value = 0, Value2 = 1)] int xx, UU yy, ref TT zz)
+
+        public void method1<TT, UU>(
+            int x,
+            TT y,
+            [nested.FirstAttribute.Second(Value = 0, Value2 = 1)] int xx,
+            UU yy,
+            ref TT zz
+        )
         {
             e = new ArgumentNullException();
             Console.WriteLine("    s0.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT zz)");
@@ -1885,6 +2179,7 @@ namespace ns1
         }
 
         FieldAccessException f;
+
         public void method2()
         {
             f = new FieldAccessException();
@@ -1933,7 +2228,7 @@ namespace ns1
             }
         }
 
-        public void method1<[nested.First(1)]TT>(int x, TT y)
+        public void method1<[nested.First(1)] TT>(int x, TT y)
         {
             Console.WriteLine("    s0.method1<TT>(int x, TT y)");
             throw new MemberAccessException();
@@ -1948,7 +2243,10 @@ namespace ns1
             }
         }
 
-        void i2.method1([nested.First(Value = Value)]int x, [nested.FirstAttribute.SecondAttribute.Third(1, 1, Value3 = 0)] int y)
+        void i2.method1(
+            [nested.First(Value = Value)] int x,
+            [nested.FirstAttribute.SecondAttribute.Third(1, 1, Value3 = 0)] int y
+        )
         {
             KeyNotFoundException ex = null;
             ex = ex ?? new KeyNotFoundException();
@@ -1965,6 +2263,7 @@ namespace ns1
 
         [ContextStatic]
         public static string s = string.Empty;
+
         int i2.method2()
         {
             Console.WriteLine("    s0.i2.method2()");
@@ -1990,7 +2289,9 @@ namespace ns1
 
         void i1<int, int>.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT zz)
         {
-            Console.WriteLine("    s0.i1<int, int>.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT zz)");
+            Console.WriteLine(
+                "    s0.i1<int, int>.method1<TT, UU>(int x, TT y, int xx, UU yy, ref TT zz)"
+            );
             throw new NotImplementedException();
         }
 
@@ -2007,7 +2308,9 @@ namespace ns1
         [Flags]
         enum Flags
         {
-            A, B, C
+            A,
+            B,
+            C,
         }
 
         int i0<int>.prop1
@@ -2044,12 +2347,16 @@ namespace ns1
         }
 
         [Obsolete]
-        void i0<int>.method1<TT>(int x, [nested.FirstAttribute.Second(Value, Value, Value = Value, Value2 = Value)] TT y)
+        void i0<int>.method1<TT>(
+            int x,
+            [nested.FirstAttribute.Second(Value, Value, Value = Value, Value2 = Value)] TT y
+        )
         {
             Console.WriteLine("    s0.i0<int>.method1<TT>(int x, TT y)");
         }
 
         const int Value = 0;
+
         [nested.First(Value, Value = (short)Value)]
         [LoaderOptimization(LoaderOptimization.NotSpecified)]
         public void Test()
@@ -2094,7 +2401,8 @@ namespace ns1
                     try
                     {
                         // Invoke Interface Properties
-                        var x = aa.prop1--; aa.prop1 = x;
+                        var x = aa.prop1--;
+                        aa.prop1 = x;
                         List<int> y = a.prop2;
                     }
                     catch (NotImplementedException ex3)
@@ -2109,8 +2417,9 @@ namespace ns1
                     finally
                     {
                         // Extension Methods
-                        var q = "string".Where((s) => s.ToString() != "string").
-                            SelectMany((s) => new char[] { s });
+                        var q = "string"
+                            .Where((s) => s.ToString() != "string")
+                            .SelectMany((s) => new char[] { s });
                         foreach (var i in q)
                         {
                             Console.WriteLine("    Item: " + i);
@@ -2167,15 +2476,20 @@ namespace ns1
                 bb.method2();
                 // Invoke Interface Properties
                 var x = 0;
-                bb.prop1 = x; x = Convert.ToInt32(++bb.prop1);
+                bb.prop1 = x;
+                x = Convert.ToInt32(++bb.prop1);
                 bb.prop2 = new List<int>();
             }
             catch (Exception ex)
             {
                 int j = 2;
                 // Extension Methods
-                foreach (var i in aa.ToString().Where((e) => e.ToString() != j.ToString()).
-                    OrderBy((e) => e).Distinct())
+                foreach (
+                    var i in aa.ToString()
+                        .Where((e) => e.ToString() != j.ToString())
+                        .OrderBy((e) => e)
+                        .Distinct()
+                )
                     Console.WriteLine("    Item: " + i);
                 Console.WriteLine("    " + ex.Message);
                 Console.WriteLine("    Fourth");
@@ -2192,15 +2506,18 @@ namespace ns1
                 cc.method2();
                 // Invoke Interface Properties
                 cc.prop2 = new List<int>(cc.prop1 + 100);
-                object o = null; o.ToString();
+                object o = null;
+                o.ToString();
             }
             catch (Exception ex)
             {
                 char j = (char)0;
                 // Extension Methods
-                foreach (char i in ex.Message.
-                    Where((e) => j.ToString() != ex.Message + e.ToString()).
-                    OrderBy((e) => e))
+                foreach (
+                    char i in ex
+                        .Message.Where((e) => j.ToString() != ex.Message + e.ToString())
+                        .OrderBy((e) => e)
+                )
                     Console.WriteLine("    Item: " + i);
                 Console.WriteLine("    " + ex.Message);
             }
@@ -2218,6 +2535,7 @@ namespace ns1
     {
         [NonSerialized]
         internal int _i;
+
         [NonSerialized()]
         [nested.First]
         internal int _j;
@@ -2225,18 +2543,22 @@ namespace ns1
         // Overloaded Constructors
         private s1(int i, long l)
         {
-            _i = i; _j = (int)l;
+            _i = i;
+            _j = (int)l;
             Console.WriteLine("    s1.ctor(int i, long l)");
         }
 
         private s1(int i)
         {
-            _i = i; _j = (short)i;
+            _i = i;
+            _j = (short)i;
             Console.WriteLine("    s1.ctor(int i)");
         }
 
         [nested.First()]
-        public override bool Equals([nested.FirstAttribute.SecondAttribute.Third(0, 1, Value2 = 1)]object obj)
+        public override bool Equals(
+            [nested.FirstAttribute.SecondAttribute.Third(0, 1, Value2 = 1)] object obj
+        )
         {
             if (this.ToString() == ((s1)obj).ToString())
             {
@@ -2265,14 +2587,19 @@ namespace ns1
         {
             // Extension Methods
             var collection = new double[] { 1, (double)2, (float)3 };
-            var bl = collection.AsEnumerable().Count() ==
-                    collection.AsQueryable().DefaultIfEmpty().Distinct().
-                    ElementAt((short)collection.FirstOrDefault());
+            var bl =
+                collection.AsEnumerable().Count()
+                == collection
+                    .AsQueryable()
+                    .DefaultIfEmpty()
+                    .Distinct()
+                    .ElementAt((short)collection.FirstOrDefault());
             var s = new nested.FirstAttribute.SecondAttribute.ThirdAttribute(0, l, (short)l);
             Console.WriteLine("    s2.cctor()");
         }
 
         const long l = 2;
+
         [nested.First]
         public static void Test()
         {
@@ -2307,8 +2634,10 @@ namespace ns1
                         // Boxing
                         object o = s;
                         // Ternary
-                        var str = o != null ? new s1(o.GetHashCode()) : o == null ? default(s1) :
-                            new s1(o.GetHashCode(), s.Equals(o).GetHashCode());
+                        var str =
+                            o != null ? new s1(o.GetHashCode())
+                            : o == null ? default(s1)
+                            : new s1(o.GetHashCode(), s.Equals(o).GetHashCode());
                         Console.WriteLine(str);
 
                         // Unboxing
@@ -2329,7 +2658,10 @@ namespace ns1
                             object o = s;
 
                             // Ternary Operator
-                            var str = o != null ? o.ToString() : o == null ? null : o.ToString();
+                            var str =
+                                o != null ? o.ToString()
+                                : o == null ? null
+                                : o.ToString();
 
                             // Unboxing
                             s = (s1)o;
@@ -2343,8 +2675,10 @@ namespace ns1
                                 object o = s;
 
                                 // Ternary Operator
-                                var str = o != null ? o.ToString() == (i + j).ToString() :
-                                    o == null ? false : o.ToString() != j.ToString();
+                                var str =
+                                    o != null ? o.ToString() == (i + j).ToString()
+                                    : o == null ? false
+                                    : o.ToString() != j.ToString();
 
                                 // Unboxing
                                 s = (s1)o;
@@ -2360,7 +2694,8 @@ namespace ns1
                     var iii = 1;
                     object ooo = "";
                     goto L1;
-                L1: Console.WriteLine("    iii = " + iii);
+                    L1:
+                    Console.WriteLine("    iii = " + iii);
                     ooo = "";
                     iii++;
                     if (iii >= 5 && ooo is string)
@@ -2380,7 +2715,8 @@ namespace ns1
                         if (ooo is s1)
                             goto L1;
                     }
-                L2: Console.WriteLine("    iii = " + iii);
+                    L2:
+                    Console.WriteLine("    iii = " + iii);
                     if (ooo.GetType() == typeof(string))
                         Console.WriteLine("    ooo is string");
                     else if (ooo.GetType() == typeof(Exception))
@@ -2396,13 +2732,15 @@ namespace ns1
                 Console.WriteLine("    First");
                 var iii = 1;
                 goto L1;
-            L1: Console.WriteLine("    iii = " + iii);
+                L1:
+                Console.WriteLine("    iii = " + iii);
                 iii++;
                 if (iii >= 5)
                     goto L2;
                 else
                     goto L1;
-            L2: Console.WriteLine("    iii = " + iii);
+                L2:
+                Console.WriteLine("    iii = " + iii);
             }
         }
     }
@@ -2416,6 +2754,7 @@ namespace ns1
     namespace nested
     {
         using nested;
+
         [Serializable]
         struct s2 : i3<string>
         {
@@ -2426,8 +2765,9 @@ namespace ns1
                 // Extension Methods
                 var collection = new long[] { 1, 2, (byte)3, (short)4, (int)5L };
                 var bl = collection.Any((a) => a != 0) || collection.All((a) => a > 1);
-                bl = collection.AsEnumerable<long>().Average() >
-                    collection.AsParallel().Average<long>((long a) => a + bl.GetHashCode());
+                bl =
+                    collection.AsEnumerable<long>().Average()
+                    > collection.AsParallel().Average<long>((long a) => a + bl.GetHashCode());
                 Console.WriteLine("    s2.cctor()");
             }
 
@@ -2452,8 +2792,17 @@ namespace ns1
 
             [nested.FirstAttribute.SecondAttribute.ThirdAttribute.Second]
             public void Test<
-                [nested.FirstAttribute.SecondAttribute.Third(0, 1, 2, Value3 = 2, Value = 0, Value2 = 1)]T,
-                [nested.FirstAttribute]U>(T t, U u)
+                [nested.FirstAttribute.SecondAttribute.Third(
+                    0,
+                    1,
+                    2,
+                    Value3 = 2,
+                    Value = 0,
+                    Value2 = 1
+                )]
+                    T,
+                [nested.FirstAttribute] U
+            >(T t, U u)
             {
                 Console.WriteLine("s2.Test()");
                 try
@@ -2472,7 +2821,8 @@ namespace ns1
                 {
                     {
                         i3<string> i = this;
-                        string s = string.Empty; List<int> l = new List<int>();
+                        string s = string.Empty;
+                        List<int> l = new List<int>();
                         i.method(out s, ref l, out ex, out this);
                     }
                     {
@@ -2489,21 +2839,33 @@ namespace ns1
             // Implicit Implementation
             public void method<U>(out string x, ref List<U> y, out Exception e, out s2 s)
             {
-                Console.WriteLine("    s2.method<U>(out string x, ref List<U> y, out Exception e, out s2 s)");
+                Console.WriteLine(
+                    "    s2.method<U>(out string x, ref List<U> y, out Exception e, out s2 s)"
+                );
                 e = new ArgumentException();
                 var ee = (ArgumentException)e;
                 var l = new List<string>();
                 ((i3<string>)this).method(ref l, out x, out ee, out s);
             }
+
             // Explicit Implementation
-            void i3<string>.method<U>(ref List<string> x, out U y, out ArgumentException e, out s2 s)
+            void i3<string>.method<U>(
+                ref List<string> x,
+                out U y,
+                out ArgumentException e,
+                out s2 s
+            )
             {
-                Console.WriteLine("    s2.i3<string>.method<U>(ref List<string> x, out U y, out ArgumentException e, out s2 s)");
+                Console.WriteLine(
+                    "    s2.i3<string>.method<U>(ref List<string> x, out U y, out ArgumentException e, out s2 s)"
+                );
                 bool b = false;
-                y = default(U); e = new ArgumentException();
+                y = default(U);
+                e = new ArgumentException();
                 if (b)
                 {
-                    var l = new List<U>(); l.Add(y);
+                    var l = new List<U>();
+                    l.Add(y);
                     var a = x.FirstOrDefault();
                     var ee = (Exception)e;
                     method(out a, ref l, out ee, out s);
@@ -2511,25 +2873,43 @@ namespace ns1
             }
         }
 
-        [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Method |
-            AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Struct |
-            AttributeTargets.Parameter | AttributeTargets.Assembly | AttributeTargets.Module |
-            AttributeTargets.GenericParameter)]
+        [AttributeUsage(
+            AttributeTargets.Class
+                | AttributeTargets.Field
+                | AttributeTargets.Method
+                | AttributeTargets.Property
+                | AttributeTargets.ReturnValue
+                | AttributeTargets.Struct
+                | AttributeTargets.Parameter
+                | AttributeTargets.Assembly
+                | AttributeTargets.Module
+                | AttributeTargets.GenericParameter
+        )]
         [First]
         [FirstAttribute.SecondAttribute.Third(1, 2, 3, Value2 = 1)]
         public class FirstAttribute : Attribute
         {
             public int Value = (int)default(long);
+
             [First(Value = default(int))]
             [Second(value: default(short), Value = default(short))]
-            [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Method |
-            AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Struct |
-            AttributeTargets.Parameter | AttributeTargets.Assembly | AttributeTargets.Module |
-            AttributeTargets.Constructor)]
+            [AttributeUsage(
+                AttributeTargets.Class
+                    | AttributeTargets.Field
+                    | AttributeTargets.Method
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue
+                    | AttributeTargets.Struct
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Assembly
+                    | AttributeTargets.Module
+                    | AttributeTargets.Constructor
+            )]
             internal class SecondAttribute : FirstAttribute
             {
-                new public long Value = default(int);
+                public new long Value = default(int);
                 public short Value2 = (short)default(int);
+
                 // Static Constructor
                 [Second]
                 static SecondAttribute()
@@ -2541,17 +2921,20 @@ namespace ns1
                     collection.Intersect(collection.AsEnumerable());
                     Console.WriteLine("    SecondAttribute.cctor()");
                 }
+
                 [Third]
                 internal SecondAttribute()
                 {
                     Console.WriteLine("    SecondAttribute.ctor()");
                 }
+
                 [ThirdAttribute.Second]
                 internal SecondAttribute(int value)
                 {
                     Value = value;
                     Console.WriteLine("    SecondAttribute.ctor(int value)");
                 }
+
                 [ThirdAttribute.Third]
                 public SecondAttribute(int value, long value2)
                 {
@@ -2562,14 +2945,23 @@ namespace ns1
             }
 
             [Second(00, 11)]
-            [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field | AttributeTargets.Method |
-            AttributeTargets.Property | AttributeTargets.ReturnValue | AttributeTargets.Struct |
-            AttributeTargets.Parameter | AttributeTargets.Assembly | AttributeTargets.Module |
-            AttributeTargets.Constructor | AttributeTargets.GenericParameter)]
+            [AttributeUsage(
+                AttributeTargets.Class
+                    | AttributeTargets.Field
+                    | AttributeTargets.Method
+                    | AttributeTargets.Property
+                    | AttributeTargets.ReturnValue
+                    | AttributeTargets.Struct
+                    | AttributeTargets.Parameter
+                    | AttributeTargets.Assembly
+                    | AttributeTargets.Module
+                    | AttributeTargets.Constructor
+                    | AttributeTargets.GenericParameter
+            )]
             internal class ThirdAttribute : SecondAttribute
             {
-                new public short Value = default(byte);
-                new public long Value2 = (int)default(short);
+                public new short Value = default(byte);
+                public new long Value2 = (int)default(short);
                 public long Value3 = default(int);
 
                 // Static Constructor
@@ -2583,17 +2975,20 @@ namespace ns1
                     collection.Take(2).TakeWhile((a) => a > 0).ToArray().ToList();
                     Console.WriteLine("    ThirdAttribute.cctor()");
                 }
+
                 [ThirdAttribute.Second]
                 public ThirdAttribute()
                 {
                     Console.WriteLine("    ThirdAttribute.ctor()");
                 }
+
                 [ThirdAttribute.Third]
                 public ThirdAttribute(int value)
                 {
                     Value = (short)value;
                     Console.WriteLine("    ThirdAttribute.ctor(int value)");
                 }
+
                 [Second]
                 internal ThirdAttribute(int value, long value2)
                 {
@@ -2601,12 +2996,15 @@ namespace ns1
                     Value2 = value2;
                     Console.WriteLine("    ThirdAttribute.ctor(int value, long value2)");
                 }
+
                 public ThirdAttribute(int value, long value2, short value3)
                 {
                     Value = (byte)value;
                     Value2 = value2;
                     Value3 = value3;
-                    Console.WriteLine("    ThirdAttribute.ctor(int value, long value2, short value3)");
+                    Console.WriteLine(
+                        "    ThirdAttribute.ctor(int value, long value2, short value3)"
+                    );
                 }
             }
 
@@ -2616,17 +3014,22 @@ namespace ns1
             {
                 // Extension Methods
                 var collection = new float[] { 1, 2, 3 };
-                var bl = collection.AsParallel().AsOrdered().Cast<float>().
-                    Concat(collection.AsParallel<float>().AsOrdered<float>().Cast<float>()).
-                    Contains((long)collection[0]);
+                var bl = collection
+                    .AsParallel()
+                    .AsOrdered()
+                    .Cast<float>()
+                    .Concat(collection.AsParallel<float>().AsOrdered<float>().Cast<float>())
+                    .Contains((long)collection[0]);
                 collection.CopyTo(collection, 0);
                 Console.WriteLine("    FirstAttribute.cctor()");
             }
+
             [SecondAttribute.Second]
             public FirstAttribute()
             {
                 Console.WriteLine("    FirstAttribute.ctor()");
             }
+
             [FirstAttribute.SecondAttribute.ThirdAttribute.Second(default(byte))]
             internal FirstAttribute(int value)
             {
@@ -2645,21 +3048,25 @@ namespace ns1
             {
                 // Extension Methods
                 var collection = new long[] { 1, 2, 3 };
-                var i = collection.Max() == collection.Min() ?
-                    collection.Max<long>((a) => (float)a) : collection.Min<long>((a) => (double)a);
+                var i =
+                    collection.Max() == collection.Min()
+                        ? collection.Max<long>((a) => (float)a)
+                        : collection.Min<long>((a) => (double)a);
                 collection.OfType<short>().OrderBy((a) => a).OrderByDescending((a) => a);
                 collection.SequenceEqual(collection);
 
                 Console.WriteLine("    ExtensionMethods.cctor()");
             }
+
             [First]
-            internal static string Stringize([FirstAttribute.SecondAttribute.Third]this s2.s1 s)
+            internal static string Stringize([FirstAttribute.SecondAttribute.Third] this s2.s1 s)
             {
                 Console.WriteLine("    s2.ExtensionMethods.Stringize(this s2.s1 s)");
                 var ss = s.ToString() ?? string.Empty;
                 return (s.ToString() == s.ToString(out ss)).ToString();
             }
         }
+
         [FirstAttribute.Second]
         static class ExtensionMethods2
         {
@@ -2672,14 +3079,16 @@ namespace ns1
                 collection.Intersect(collection).Reverse().Skip(4).Single();
                 Console.WriteLine("    ExtensionMethods2.cctor()");
             }
+
             [FirstAttribute.Second]
-            public static string ToString([FirstAttribute.SecondAttribute]this s2.s1 s)
+            public static string ToString([FirstAttribute.SecondAttribute] this s2.s1 s)
             {
                 Console.WriteLine("    s2.ExtensionMethods.ToString(this s2.s1 s)");
                 var ss = s.ToString() ?? string.Empty;
                 return s.ToString(out ss);
             }
         }
+
         [FirstAttribute.SecondAttribute.Third]
         static class ExtensionMethods3
         {
@@ -2688,8 +3097,12 @@ namespace ns1
             {
                 Console.WriteLine("    ExtensionMethods3.cctor()");
             }
+
             [FirstAttribute.SecondAttribute.Third]
-            public static string ToString([FirstAttribute.SecondAttribute]this s2.s1 s, [First(default(char), Value = (int)default(double))] out string ss)
+            public static string ToString(
+                [FirstAttribute.SecondAttribute] this s2.s1 s,
+                [First(default(char), Value = (int)default(double))] out string ss
+            )
             {
                 Console.WriteLine("    s2.ExtensionMethods.ToString(this s2.s1 s, string s2)");
                 ss = s.ToString() ?? string.Empty;
@@ -2701,13 +3114,18 @@ namespace ns1
         static class c1<T, U>
         {
             static s1 field = new s1();
+
             // Static Constructor
             static c1()
             {
                 Console.WriteLine("    c1<T, U>.cctor()");
-                field._i = 0; field._i = field._i + 1; field = default(s1);
+                field._i = 0;
+                field._i = field._i + 1;
+                field = default(s1);
                 i3<T> i = new c2<int>();
-                var t = default(T); var l = new List<int>(); var s = default(s2);
+                var t = default(T);
+                var l = new List<int>();
+                var s = default(s2);
                 var ex = (Exception)new ArgumentException();
                 i.method(out t, ref l, out ex, out s);
             }
@@ -2717,37 +3135,55 @@ namespace ns1
                 // Explicit Implementation
                 void i3<T>.method<UU>(out T x, ref List<UU> y, out Exception e, out s2 s)
                 {
-                    Console.WriteLine("    c1<V>.i4<T>.method<UU>(out T x, ref List<UU> y, out Exception e, out s2 s)");
-                    field = default(s1); s = default(s2); e = (Exception)default(ArgumentException); x = default(T);
+                    Console.WriteLine(
+                        "    c1<V>.i4<T>.method<UU>(out T x, ref List<UU> y, out Exception e, out s2 s)"
+                    );
+                    field = default(s1);
+                    s = default(s2);
+                    e = (Exception)default(ArgumentException);
+                    x = default(T);
                 }
+
                 // Implicit Implementation
                 public void method<UU>(ref List<T> x, out UU y, out ArgumentException e, out s2 s)
                 {
-                    Console.WriteLine("    c1<V>.method<UU>(ref List<T> x, out UU y, out ArgumentException e, out s2 s)");
-                    field = default(s1); y = default(UU); e = default(ArgumentException); s = default(s2);
+                    Console.WriteLine(
+                        "    c1<V>.method<UU>(ref List<T> x, out UU y, out ArgumentException e, out s2 s)"
+                    );
+                    field = default(s1);
+                    y = default(UU);
+                    e = default(ArgumentException);
+                    s = default(s2);
                 }
 
                 public void method()
                 {
                     Console.WriteLine("    c1<V>.method()");
-                    var i = ((i3<T>)this); var t = default(T); var s = default(s2);
+                    var i = ((i3<T>)this);
+                    var t = default(T);
+                    var s = default(s2);
                     var ex = (Exception)new ArgumentException();
-                    var ee = (ArgumentException)ex; var l = new List<T>(); l.Add(t);
+                    var ee = (ArgumentException)ex;
+                    var l = new List<T>();
+                    l.Add(t);
                     i.method(ref l, out l, out ee, out s);
                 }
             }
         }
     }
 }
+
 namespace ns1
 {
     public class LowFrequencyTest
     {
         public static void Run()
         {
-            lowfrequency.c1<int, long> a = new lowfrequency.c1<int, long>(); a.Test();
+            lowfrequency.c1<int, long> a = new lowfrequency.c1<int, long>();
+            a.Test();
 
-            lowfrequency.c2<int, int> b = new lowfrequency.c2<int, int>(); b.Test();
+            lowfrequency.c2<int, int> b = new lowfrequency.c2<int, int>();
+            b.Test();
         }
     }
 
@@ -2769,17 +3205,24 @@ namespace ns1
             // Lambda
             Del<T, U> del1 = (x, y, z) =>
             {
-                if (y != l) return u;
+                if (y != l)
+                    return u;
                 else
                 {
                     Dictionary<List<T>, U> d1 = d;
                     if (x.Equals(t))
                     {
                         // Nested Lambdas
-                        Func<Func<T, List<T>, U, Dictionary<List<T>, U>>,
-                             Func<T, List<T>, U, Dictionary<List<T>, U>>> func = (a) => ((T xx, List<T> yy, U zz) => a(xx, yy, zz));
+                        Func<
+                            Func<T, List<T>, U, Dictionary<List<T>, U>>,
+                            Func<T, List<T>, U, Dictionary<List<T>, U>>
+                        > func = (a) => ((T xx, List<T> yy, U zz) => a(xx, yy, zz));
                         // Invoke Lambdas
-                        func((T xx, List<T> yy, U zz) => func((aa, bb, cc) => null)(t, l, u))(t, l, u);
+                        func((T xx, List<T> yy, U zz) => func((aa, bb, cc) => null)(t, l, u))(
+                            t,
+                            l,
+                            u
+                        );
                         Console.WriteLine("    c1<T, U>.del1");
                     }
                     return default(U);
@@ -2788,38 +3231,54 @@ namespace ns1
 
             // Lambda
             public Func<T, List<T>, U, Dictionary<List<T>, U>> func = (x, y, z) => d;
+
             // Anonymous Method
             public Del<U, T> del2 = delegate(U x, List<U> y, Dictionary<List<U>, T> z)
             {
-                if (!u.Equals(x)) return t;
+                if (!u.Equals(x))
+                    return t;
                 else
                 {
                     Dictionary<List<T>, U> d1 = d;
                     if (!l.Equals(y))
                     {
                         // Nested Lambda
-                        Func<Func<T, List<T>, U, Dictionary<List<T>, U>>,
-                             Func<T, List<T>, U, Dictionary<List<T>, U>>> func = (Func<T, List<T>, U, Dictionary<List<T>, U>> a) =>
-                             {
-                                 // Nested Anonymous Method
-                                 return delegate(T xx, List<T> yy, U zz)
-                                 {
-                                     Console.WriteLine("    c1<T, U>.del2");
-                                     return d1;
-                                 };
-                             };
+                        Func<
+                            Func<T, List<T>, U, Dictionary<List<T>, U>>,
+                            Func<T, List<T>, U, Dictionary<List<T>, U>>
+                        > func = (Func<T, List<T>, U, Dictionary<List<T>, U>> a) =>
+                        {
+                            // Nested Anonymous Method
+                            return delegate(T xx, List<T> yy, U zz)
+                            {
+                                Console.WriteLine("    c1<T, U>.del2");
+                                return d1;
+                            };
+                        };
                         // Invoke Lambdas
-                        func((xx, yy, zz) => func((T aa, List<T> bb, U cc) => null)(t, l, u))(t, l, u);
+                        func((xx, yy, zz) => func((T aa, List<T> bb, U cc) => null)(t, l, u))(
+                            t,
+                            l,
+                            u
+                        );
                     }
                     return default(T);
                 }
             };
 
             // Generic Method
-            protected void goo<TT, UU, VV>(Func<TT, UU, VV> x, Func<UU, VV, TT> y, Func<VV, TT, UU> z)
+            protected void goo<TT, UU, VV>(
+                Func<TT, UU, VV> x,
+                Func<UU, VV, TT> y,
+                Func<VV, TT, UU> z
+            )
             {
-                Console.WriteLine("    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU, VV> x, Func<UU, VV, TT> y, Func<VV, TT, UU> z)");
-                TT t = default(TT); UU u = default(UU); VV v = default(VV);
+                Console.WriteLine(
+                    "    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU, VV> x, Func<UU, VV, TT> y, Func<VV, TT, UU> z)"
+                );
+                TT t = default(TT);
+                UU u = default(UU);
+                VV v = default(VV);
 
                 // Invoke Lambdas
                 z(v, y(u, x(t, u)));
@@ -2832,10 +3291,18 @@ namespace ns1
             }
 
             // Generic Method
-            protected void goo<TT, UU, VV>(Func<TT, List<TT>, UU, Dictionary<List<TT>, UU>> x, Del<UU, VV> y, Action<VV, List<VV>, Dictionary<List<VV>, TT>> z)
+            protected void goo<TT, UU, VV>(
+                Func<TT, List<TT>, UU, Dictionary<List<TT>, UU>> x,
+                Del<UU, VV> y,
+                Action<VV, List<VV>, Dictionary<List<VV>, TT>> z
+            )
             {
-                Console.WriteLine("    c1<T, U>.goo<TT, UU, VV>(Func<TT, List<TT>, Dictionary<List<TT>, UU>> x, Del<UU, VV> y, Action<VV, List<VV>, Dictionary<List<VV>, TT>> z)");
-                TT t = default(TT); UU u = default(UU); VV v = default(VV);
+                Console.WriteLine(
+                    "    c1<T, U>.goo<TT, UU, VV>(Func<TT, List<TT>, Dictionary<List<TT>, UU>> x, Del<UU, VV> y, Action<VV, List<VV>, Dictionary<List<VV>, TT>> z)"
+                );
+                TT t = default(TT);
+                UU u = default(UU);
+                VV v = default(VV);
 
                 // Invoke Lambdas
                 x(t, new List<TT>(), u);
@@ -2847,98 +3314,122 @@ namespace ns1
             private void bar<TT, UU, VV>()
             {
                 Console.WriteLine("    c1<T, U>.bar<TT, UU, VV>()");
-                TT tt = default(TT); UU uu = default(UU); VV vv = default(VV);
-                T t = default(T); U u = default(U); List<TT> ltt = new List<TT>();
+                TT tt = default(TT);
+                UU uu = default(UU);
+                VV vv = default(VV);
+                T t = default(T);
+                U u = default(U);
+                List<TT> ltt = new List<TT>();
 
                 // 5 Levels Deep Nested Lambda, Closures
-                Func<TT, UU, Func<UU, VV, Func<VV, TT, Func<T, U, Func<U, T>>>>> func =
-                    (a, b) =>
+                Func<TT, UU, Func<UU, VV, Func<VV, TT, Func<T, U, Func<U, T>>>>> func = (a, b) =>
+                {
+                    Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level1()");
+                    bool v1 = tt.Equals(a);
+                    return (aa, bb) =>
                     {
-                        Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level1()");
-                        bool v1 = tt.Equals(a);
-                        return (aa, bb) =>
+                        Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level2()");
+                        bool v2 = v1;
+                        if (ltt.Count >= 0)
                         {
-                            Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level2()");
-                            bool v2 = v1;
-                            if (ltt.Count >= 0)
+                            Dictionary<T, List<U>> dtu = new Dictionary<T, List<U>>();
+                            v2 = aa.Equals(b);
+                            aa.Equals(uu);
+                            return (aaa, bbb) =>
                             {
-                                Dictionary<T, List<U>> dtu = new Dictionary<T, List<U>>();
-                                v2 = aa.Equals(b); aa.Equals(uu);
-                                return (aaa, bbb) =>
+                                Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level3()");
+                                bool v3 = v1;
+                                if (dtu.Count == 0)
                                 {
-                                    Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level3()");
-                                    bool v3 = v1;
-                                    if (dtu.Count == 0)
+                                    v3 = v2;
+                                    Dictionary<List<UU>, List<VV>> duuvv =
+                                        new Dictionary<List<UU>, List<VV>>();
+                                    if (ltt.Count >= 0)
                                     {
-                                        v3 = v2;
-                                        Dictionary<List<UU>, List<VV>> duuvv = new Dictionary<List<UU>, List<VV>>();
-                                        if (ltt.Count >= 0)
+                                        v3 = aaa.Equals(bb);
+                                        v2 = aa.Equals(b);
+                                        aaa.Equals(vv);
+                                        return (aaaa, bbbb) =>
                                         {
-                                            v3 = aaa.Equals(bb);
-                                            v2 = aa.Equals(b);
-                                            aaa.Equals(vv);
-                                            return (aaaa, bbbb) =>
+                                            Console.WriteLine(
+                                                "        c1<T, U>.bar<TT, UU, VV>.func.level4()"
+                                            );
+                                            List<U> lu = new List<U>();
+                                            bool v4 = v3;
+                                            v4 = v2;
+                                            v4 = v1;
+                                            if (duuvv.Count > 0)
                                             {
-                                                Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level4()");
-                                                List<U> lu = new List<U>();
-                                                bool v4 = v3; v4 = v2; v4 = v1;
-                                                if (duuvv.Count > 0)
+                                                Console.WriteLine(
+                                                    "Error - Should not have reached here"
+                                                );
+                                                return null;
+                                            }
+                                            else
+                                            {
+                                                v4 = aaaa.Equals(t);
+                                                v3 = aaa.Equals(bb);
+                                                v2 = aa.Equals(b);
+                                                return (aaaaa) =>
                                                 {
-                                                    Console.WriteLine("Error - Should not have reached here");
-                                                    return null;
-                                                }
-                                                else
-                                                {
-                                                    v4 = aaaa.Equals(t);
-                                                    v3 = aaa.Equals(bb);
-                                                    v2 = aa.Equals(b);
-                                                    return (aaaaa) =>
+                                                    Console.WriteLine(
+                                                        "        c1<T, U>.bar<TT, UU, VV>.func.level5()"
+                                                    );
+                                                    if (lu.Count < 0)
                                                     {
-                                                        Console.WriteLine("        c1<T, U>.bar<TT, UU, VV>.func.level5()");
-                                                        if (lu.Count < 0)
-                                                        {
-                                                            Console.WriteLine("Error - Should not have reached here");
-                                                            return t;
-                                                        }
-                                                        else
-                                                        {
-                                                            v4 = v3 = v2 = v1;
-                                                            u.Equals(bbbb);
-                                                            aa.Equals(b);
-                                                            aaa.Equals(bb);
-                                                            aaaa.Equals(t);
-                                                            return aaaa;
-                                                        }
-                                                    };
-                                                }
-                                            };
-                                        }
-                                        else
-                                        {
-                                            Console.WriteLine("Error - Should not have reached here");
-                                            return null;
-                                        }
+                                                        Console.WriteLine(
+                                                            "Error - Should not have reached here"
+                                                        );
+                                                        return t;
+                                                    }
+                                                    else
+                                                    {
+                                                        v4 = v3 = v2 = v1;
+                                                        u.Equals(bbbb);
+                                                        aa.Equals(b);
+                                                        aaa.Equals(bb);
+                                                        aaaa.Equals(t);
+                                                        return aaaa;
+                                                    }
+                                                };
+                                            }
+                                        };
                                     }
                                     else
                                     {
                                         Console.WriteLine("Error - Should not have reached here");
                                         return null;
                                     }
-                                };
-                            }
-                            else
-                            {
-                                Console.WriteLine("Error - Should not have reached here");
-                                return null;
-                            }
-                        };
+                                }
+                                else
+                                {
+                                    Console.WriteLine("Error - Should not have reached here");
+                                    return null;
+                                }
+                            };
+                        }
+                        else
+                        {
+                            Console.WriteLine("Error - Should not have reached here");
+                            return null;
+                        }
                     };
+                };
                 func(tt, uu)(uu, vv)(vv, tt)(t, u)(u);
             }
 
-            public void goo<TT, UU, VV>(Func<TT, UU> x, Func<TT, VV> y, Func<UU, VV> z, Func<UU, TT> a, Func<VV, TT> b, Func<VV, UU> c)
+            public void goo<TT, UU, VV>(
+                Func<TT, UU> x,
+                Func<TT, VV> y,
+                Func<UU, VV> z,
+                Func<UU, TT> a,
+                Func<VV, TT> b,
+                Func<VV, UU> c
+            )
             {
-                Console.WriteLine("    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU> x, Func<TT, VV> y, Func<UU, VV> z, Func<UU, TT> a, Func<VV, TT> b, Func<VV, UU> c)");
+                Console.WriteLine(
+                    "    c1<T, U>.goo<TT, UU, VV>(Func<TT, UU> x, Func<TT, VV> y, Func<UU, VV> z, Func<UU, TT> a, Func<VV, TT> b, Func<VV, UU> c)"
+                );
             }
 
             public void Test()
@@ -2948,69 +3439,94 @@ namespace ns1
                 del1(t, l, d);
                 del2(u, null, null);
 
-                int x = 0; int y = x;
+                int x = 0;
+                int y = x;
                 Del del = (a, b, c) => a;
 
                 // Generic Methods, Simple Closures
                 goo<int, string, Del<T, U>>(y, x.ToString(), (a, b, c) => u);
                 goo<string, Del<T>, int>(x.ToString(), (a, b, c) => x, y);
-                goo<Del, int, string>((c, a) => a.ToString(),
+                goo<Del, int, string>(
+                    (c, a) => a.ToString(),
                     (int a, string b) => del,
-                    (b, c) => y - c(x, y, null));
+                    (b, c) => y - c(x, y, null)
+                );
 
                 // Generic Type Inference, Nested Lambdas
                 goo(x, "", del1);
-                goo(func, del2,
+                goo(
+                    func,
+                    del2,
                     (T a, List<T> b, Dictionary<List<T>, T> c) =>
                     {
                         int z = x;
                         {
-                            goo(new Action(() => x = 2),
-                                new Func<ArgumentException, int>((aa) =>
-                                {
-                                    return y + x + +z + b.Count;
-                                }),
-                                new Func<Exception, long>(delegate(Exception aa)
-                                {
-                                    return y * z * x - c.Count;
-                                }));
+                            goo(
+                                new Action(() => x = 2),
+                                new Func<ArgumentException, int>(
+                                    (aa) =>
+                                    {
+                                        return y + x + +z + b.Count;
+                                    }
+                                ),
+                                new Func<Exception, long>(
+                                    delegate(Exception aa)
+                                    {
+                                        return y * z * x - c.Count;
+                                    }
+                                )
+                            );
                         }
                         x = z;
                         {
-                            goo((aa, bb) => a.ToString(),
+                            goo(
+                                (aa, bb) => a.ToString(),
                                 (long bb, string cc) => y - (int)bb + b.Count - z,
-                                (string cc, int aa) => x + y + aa + c.Values.Count);
+                                (string cc, int aa) => x + y + aa + c.Values.Count
+                            );
                         }
-                    });
+                    }
+                );
 
                 // Generic Type Inference, Dominant Type
-                goo((Exception a, Exception b) => new ArgumentException(),
+                goo(
                     (Exception a, Exception b) => new ArgumentException(),
-                    (Exception a, Exception b) => new ArgumentException());
-                goo((a, b) => new ArgumentException(),
+                    (Exception a, Exception b) => new ArgumentException(),
+                    (Exception a, Exception b) => new ArgumentException()
+                );
+                goo(
                     (a, b) => new ArgumentException(),
-                    (ArgumentException a, Exception b) => new Exception());
+                    (a, b) => new ArgumentException(),
+                    (ArgumentException a, Exception b) => new Exception()
+                );
                 Func<Exception, ArgumentException> func2 = (Exception a) => new ArgumentException();
-                Func<ArgumentException, Exception> func3 = (ArgumentException a) => new ArgumentException();
+                Func<ArgumentException, Exception> func3 = (ArgumentException a) =>
+                    new ArgumentException();
                 goo(func2, func2, func2, func2, func3, func3);
-                goo((a) => new ArgumentException(),
+                goo(
+                    (a) => new ArgumentException(),
                     (Exception a) => new InvalidCastException(),
                     (a) => new InvalidCastException(),
                     (ArgumentException a) => new Exception(),
                     (a) => new ArgumentException(),
-                    (InvalidCastException a) => new ArgumentException());
-                goo((Exception a) => new Exception(),
+                    (InvalidCastException a) => new ArgumentException()
+                );
+                goo(
+                    (Exception a) => new Exception(),
                     (Exception a) => new ArgumentException(),
                     (Exception a) => new ArgumentException(),
                     (Exception a) => new Exception(),
                     (Exception a) => new ArgumentException(),
-                    (Exception a) => new Exception());
-                goo((a) => new Exception(),
+                    (Exception a) => new Exception()
+                );
+                goo(
+                    (a) => new Exception(),
                     (Exception a) => new ArgumentException(),
                     (a) => new ArgumentException(),
                     (a) => new Exception(),
                     (a) => new ArgumentException(),
-                    (a) => new Exception());
+                    (a) => new Exception()
+                );
 
                 bar<int, long, double>();
             }
@@ -3020,54 +3536,110 @@ namespace ns1
         {
             // Delegates
             public delegate Exception Del1(T x, U y, InvalidCastException z, ArgumentException w);
-            public delegate void Del2<TT, UU, VV>(Func<TT, UU, VV> x, Func<UU, VV, TT> y, Func<VV, TT, UU> z);
+            public delegate void Del2<TT, UU, VV>(
+                Func<TT, UU, VV> x,
+                Func<UU, VV, TT> y,
+                Func<VV, TT, UU> z
+            );
             protected delegate void Del3<TT, UU, VV>(TT xx, UU yy, VV zz);
             protected delegate WW Del3<TT, UU, VV, WW>(TT xx, UU yy, VV zz);
-            protected delegate void Del4<TT, UU, VV>(Func<TT, List<TT>, UU, Dictionary<List<TT>, UU>> x, Del<UU, VV> y, Action<VV, List<VV>, Dictionary<List<VV>, TT>> z);
+            protected delegate void Del4<TT, UU, VV>(
+                Func<TT, List<TT>, UU, Dictionary<List<TT>, UU>> x,
+                Del<UU, VV> y,
+                Action<VV, List<VV>, Dictionary<List<VV>, TT>> z
+            );
 
             private void bar<TT, UU, VV>()
             {
                 Console.WriteLine("    c2<T, U>.bar<TT, UU, VV>()");
-                TT tt = default(TT); UU uu = default(UU); VV vv = default(VV);
-                T t = default(T); U u = default(U);
+                TT tt = default(TT);
+                UU uu = default(UU);
+                VV vv = default(VV);
+                T t = default(T);
+                U u = default(U);
 
                 // Delegate Binding, Compound Assignment
-                Del2<TT, UU, VV> d2 = goo; d2 += goo<TT, UU, VV>; d2 -= goo;
-                Del3<TT, VV, UU> d3 = goo; d3 += goo<TT, VV, UU>; d3 -= goo;
-                Del4<UU, TT, VV> d4 = goo; d4 += goo<UU, TT, VV>; d4 -= goo;
+                Del2<TT, UU, VV> d2 = goo;
+                d2 += goo<TT, UU, VV>;
+                d2 -= goo;
+                Del3<TT, VV, UU> d3 = goo;
+                d3 += goo<TT, VV, UU>;
+                d3 -= goo;
+                Del4<UU, TT, VV> d4 = goo;
+                d4 += goo<UU, TT, VV>;
+                d4 -= goo;
                 // Invoke Delegates
                 d2((a, b) => vv, (b, c) => tt, (c, a) => uu);
                 d3(tt, vv, uu);
-                d4((a, b, c) => null, (a, b, c) => vv, (a, b, c) => { uu.Equals(vv); });
+                d4(
+                    (a, b, c) => null,
+                    (a, b, c) => vv,
+                    (a, b, c) =>
+                    {
+                        uu.Equals(vv);
+                    }
+                );
 
                 // Delegate Binding, Compound Assignment
-                Del2<int, Del, VV> d22 = goo; d22 += (goo); d22 -= goo<int, Del, VV>;
-                Del3<long, int, Exception> d32 = goo; d32 += goo<long, int, Exception>; d32 -= ((goo));
-                Del4<T, U, Dictionary<List<TT>, Dictionary<List<UU>, VV>>> d42 = goo; d42 += goo; d42 -= goo;
+                Del2<int, Del, VV> d22 = goo;
+                d22 += (goo);
+                d22 -= goo<int, Del, VV>;
+                Del3<long, int, Exception> d32 = goo;
+                d32 += goo<long, int, Exception>;
+                d32 -= ((goo));
+                Del4<T, U, Dictionary<List<TT>, Dictionary<List<UU>, VV>>> d42 = goo;
+                d42 += goo;
+                d42 -= goo;
                 // Invoke Delegates
                 d22((a, b) => vv, (b, c) => 1, (c, a) => null);
                 d32(1, 0, null);
-                d42((a, b, c) => null, (a, b, c) => null, (a, b, c) => { uu.Equals(vv); });
+                d42(
+                    (a, b, c) => null,
+                    (a, b, c) => null,
+                    (a, b, c) =>
+                    {
+                        uu.Equals(vv);
+                    }
+                );
 
                 // Delegate Relaxation, Compound Assignment
-                Del1 d1 = goo; d1 += goo<T, U>;
-                Del3<InvalidCastException, ArgumentNullException, NullReferenceException, Exception> d33 = goo<int, long>;
-                d33 -= goo<int, long>; d33 += goo<int, double>;
+                Del1 d1 = goo;
+                d1 += goo<T, U>;
+                Del3<
+                    InvalidCastException,
+                    ArgumentNullException,
+                    NullReferenceException,
+                    Exception
+                > d33 = goo<int, long>;
+                d33 -= goo<int, long>;
+                d33 += goo<int, double>;
                 // Invoke Delegates
                 d1(t, u, null, null);
-                d33(new InvalidCastException(), new ArgumentNullException(), new NullReferenceException());
+                d33(
+                    new InvalidCastException(),
+                    new ArgumentNullException(),
+                    new NullReferenceException()
+                );
 
                 // Delegate Relaxation, Generic Methods
-                goo<ArgumentException, ArgumentException, Exception>(goo<int>, goo<long>, goo<double>);
-                goo<ArgumentException, ArgumentException, Exception>(goo<Exception, ArgumentException>,
-                                                                     goo<Exception, ArgumentException>,
-                                                                     goo<Exception, ArgumentException>);
+                goo<ArgumentException, ArgumentException, Exception>(
+                    goo<int>,
+                    goo<long>,
+                    goo<double>
+                );
+                goo<ArgumentException, ArgumentException, Exception>(
+                    goo<Exception, ArgumentException>,
+                    goo<Exception, ArgumentException>,
+                    goo<Exception, ArgumentException>
+                );
                 goo<ArgumentException, ArgumentException, Exception>(bar, bar, bar);
             }
 
             private ArgumentException goo<TT, UU>(Exception x, Exception y, Exception z)
             {
-                Console.WriteLine("    c2<T, U>.goo<TT, UU>(Exception x, Exception y, Exception z)");
+                Console.WriteLine(
+                    "    c2<T, U>.goo<TT, UU>(Exception x, Exception y, Exception z)"
+                );
                 return null;
             }
 
@@ -3103,4 +3675,3 @@ namespace ns1
         }
     }
 }
-

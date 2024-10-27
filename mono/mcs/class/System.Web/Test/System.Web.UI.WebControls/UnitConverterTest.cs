@@ -1,5 +1,5 @@
 //
-// Tests for System.Web.UI.WebControls.UnitConverter.cs 
+// Tests for System.Web.UI.WebControls.UnitConverter.cs
 //
 // Author:
 //	Ben Maurer <bmaurer@novell.com>
@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,47 +26,51 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Globalization;
 using System.Web;
 using System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    public class UnitConverterTest
+    {
+        [Test]
+        public void ConvertTo()
+        {
+            UnitConverter c = new UnitConverter();
+            Assert.IsTrue(c.CanConvertTo(typeof(string)), "string");
+            Assert.AreEqual(
+                c.ConvertTo(new Unit(1), typeof(string)),
+                new Unit(1).ToString(),
+                "ConvertTo(string)"
+            );
+            Assert.IsFalse(c.CanConvertTo(typeof(Unit)), "Unit");
+        }
 
-	[TestFixture]
-	public class UnitConverterTest {
-		
-		[Test]
-		public void ConvertTo ()
-		{
-			UnitConverter c = new UnitConverter ();
-			Assert.IsTrue (c.CanConvertTo (typeof (string)), "string");
-			Assert.AreEqual (c.ConvertTo (new Unit (1), typeof (string)), new Unit (1).ToString (), "ConvertTo(string)");
-			Assert.IsFalse (c.CanConvertTo (typeof (Unit)), "Unit");
-		}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertToUnit()
+        {
+            new UnitConverter().ConvertTo("1 px", typeof(Unit));
+        }
 
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertToUnit ()
-		{
-			new UnitConverter ().ConvertTo ("1 px", typeof (Unit));
-		}
+        [Test]
+        public void ConvertFrom()
+        {
+            UnitConverter c = new UnitConverter();
+            Assert.IsTrue(c.CanConvertFrom(typeof(string)), "string");
+            Assert.AreEqual(c.ConvertFrom("1 px"), new Unit(1), "ConvertFrom(string)");
+            Assert.IsFalse(c.CanConvertFrom(typeof(Unit)), "Unit");
+        }
 
-		[Test]
-		public void ConvertFrom ()
-		{
-			UnitConverter c = new UnitConverter ();
-			Assert.IsTrue (c.CanConvertFrom (typeof (string)), "string");
-			Assert.AreEqual (c.ConvertFrom ("1 px"), new Unit (1), "ConvertFrom(string)");
-			Assert.IsFalse (c.CanConvertFrom (typeof (Unit)), "Unit");
-		}
-
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void ConvertFromUnit ()
-		{
-			new UnitConverter ().ConvertFrom (new Unit (1));
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void ConvertFromUnit()
+        {
+            new UnitConverter().ConvertFrom(new Unit(1));
+        }
+    }
 }

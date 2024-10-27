@@ -45,7 +45,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             {
                 if (IsZombied)
                 {
-                    Debug.Fail("Cannot access " + this.GetType().FullName + " after it has been ShutDown!");
+                    Debug.Fail(
+                        "Cannot access " + this.GetType().FullName + " after it has been ShutDown!"
+                    );
                     throw Exceptions.ThrowEUnexpected();
                 }
 
@@ -97,7 +99,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         protected EnvDTE.CodeElements GetCollection<T>(object parentObject)
         {
             var parentInstance = ComAggregate.GetManagedObject<object>(parentObject);
-            Debug.Assert(!Marshal.IsComObject(parentInstance), "We should have a pure managed object!");
+            Debug.Assert(
+                !Marshal.IsComObject(parentInstance),
+                "We should have a pure managed object!"
+            );
 
             if (parentInstance is ICodeElementContainer<T> container)
             {

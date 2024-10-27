@@ -1,19 +1,18 @@
 //------------------------------------------------------------------------------
 // <copyright file="FirstDayOfWeek.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls {
-    
-
+namespace System.Web.UI.WebControls
+{
     /// <devdoc>
     ///    <para>
     ///       Specifies the first day of the week.
     ///    </para>
     /// </devdoc>
-    public enum FirstDayOfWeek {
-
+    public enum FirstDayOfWeek
+    {
         /// <devdoc>
         ///    <para>
         ///       The first day if the week is Sunday.
@@ -68,7 +67,6 @@ namespace System.Web.UI.WebControls {
         ///       The first day if the week is the system specified day.
         ///    </para>
         /// </devdoc>
-        Default = 7
+        Default = 7,
     }
-
 }

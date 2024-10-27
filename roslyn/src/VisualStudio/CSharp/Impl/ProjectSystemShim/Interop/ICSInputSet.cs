@@ -20,8 +20,18 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.ProjectSystemShim.Inter
 
         void RemoveAllSourceFiles();
 
-        void AddResourceFile([MarshalAs(UnmanagedType.LPWStr)] string filename, [MarshalAs(UnmanagedType.LPWStr)] string ident, bool embed, bool vis);
-        void RemoveResourceFile([MarshalAs(UnmanagedType.LPWStr)] string filename, [MarshalAs(UnmanagedType.LPWStr)] string ident, bool embed, bool vis);
+        void AddResourceFile(
+            [MarshalAs(UnmanagedType.LPWStr)] string filename,
+            [MarshalAs(UnmanagedType.LPWStr)] string ident,
+            bool embed,
+            bool vis
+        );
+        void RemoveResourceFile(
+            [MarshalAs(UnmanagedType.LPWStr)] string filename,
+            [MarshalAs(UnmanagedType.LPWStr)] string ident,
+            bool embed,
+            bool vis
+        );
 
         void SetWin32Resource([MarshalAs(UnmanagedType.LPWStr)] string filename);
 

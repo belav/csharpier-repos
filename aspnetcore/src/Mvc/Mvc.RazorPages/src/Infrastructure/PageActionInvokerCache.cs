@@ -27,7 +27,8 @@ internal sealed class PageActionInvokerCache
         IEnumerable<IFilterProvider> filterProviders,
         ParameterBinder parameterBinder,
         IModelMetadataProvider modelMetadataProvider,
-        IModelBinderFactory modelBinderFactory)
+        IModelBinderFactory modelBinderFactory
+    )
     {
         _pageFactoryProvider = pageFactoryProvider;
         _modelFactoryProvider = modelFactoryProvider;
@@ -38,7 +39,9 @@ internal sealed class PageActionInvokerCache
         _modelMetadataProvider = modelMetadataProvider;
     }
 
-    public (PageActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(ActionContext actionContext)
+    public (PageActionInvokerCacheEntry cacheEntry, IFilterMetadata[] filters) GetCachedResult(
+        ActionContext actionContext
+    )
     {
         var actionDescriptor = (PageActionDescriptor)actionContext.ActionDescriptor;
 
@@ -54,7 +57,10 @@ internal sealed class PageActionInvokerCache
             actionContext.ActionDescriptor = compiledPageActionDescriptor;
             var filterFactoryResult = FilterFactory.GetAllFilters(_filterProviders, actionContext);
             filters = filterFactoryResult.Filters;
-            cacheEntry = CreateCacheEntry(compiledPageActionDescriptor, filterFactoryResult.CacheableFilters);
+            cacheEntry = CreateCacheEntry(
+                compiledPageActionDescriptor,
+                filterFactoryResult.CacheableFilters
+            );
             compiledPageActionDescriptor.CacheEntry = cacheEntry;
         }
         else
@@ -62,7 +68,8 @@ internal sealed class PageActionInvokerCache
             filters = FilterFactory.CreateUncachedFilters(
                 _filterProviders,
                 actionContext,
-                cacheEntry.CacheableFilters);
+                cacheEntry.CacheableFilters
+            );
         }
 
         return (cacheEntry, filters);
@@ -70,9 +77,12 @@ internal sealed class PageActionInvokerCache
 
     private PageActionInvokerCacheEntry CreateCacheEntry(
         CompiledPageActionDescriptor compiledActionDescriptor,
-        FilterItem[] cachedFilters)
+        FilterItem[] cachedFilters
+    )
     {
-        var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(compiledActionDescriptor.DeclaredModelTypeInfo);
+        var viewDataFactory = ViewDataDictionaryFactory.CreateFactory(
+            compiledActionDescriptor.DeclaredModelTypeInfo
+        );
 
         var pageFactory = _pageFactoryProvider.CreatePageFactory(compiledActionDescriptor);
         var pageDisposer = _pageFactoryProvider.CreateAsyncPageDisposer(compiledActionDescriptor);
@@ -80,14 +90,17 @@ internal sealed class PageActionInvokerCache
             _parameterBinder,
             _modelMetadataProvider,
             _modelBinderFactory,
-            compiledActionDescriptor);
+            compiledActionDescriptor
+        );
 
         Func<PageContext, object>? modelFactory = null;
         Func<PageContext, object, ValueTask>? modelReleaser = null;
         if (compiledActionDescriptor.ModelTypeInfo != compiledActionDescriptor.PageTypeInfo)
         {
             modelFactory = _modelFactoryProvider.CreateModelFactory(compiledActionDescriptor);
-            modelReleaser = _modelFactoryProvider.CreateAsyncModelDisposer(compiledActionDescriptor);
+            modelReleaser = _modelFactoryProvider.CreateAsyncModelDisposer(
+                compiledActionDescriptor
+            );
         }
 
         var viewStartFactories = GetViewStartFactories(compiledActionDescriptor);
@@ -106,7 +119,8 @@ internal sealed class PageActionInvokerCache
             handlerExecutors,
             handlerBinders,
             viewStartFactories,
-            cachedFilters);
+            cachedFilters
+        );
     }
 
     // Internal for testing.
@@ -126,7 +140,9 @@ internal sealed class PageActionInvokerCache
         return viewStartFactories;
     }
 
-    private static PageHandlerExecutorDelegate[] GetHandlerExecutors(CompiledPageActionDescriptor actionDescriptor)
+    private static PageHandlerExecutorDelegate[] GetHandlerExecutors(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         if (actionDescriptor.HandlerMethods == null || actionDescriptor.HandlerMethods.Count == 0)
         {
@@ -143,7 +159,9 @@ internal sealed class PageActionInvokerCache
         return results;
     }
 
-    private PageHandlerBinderDelegate[] GetHandlerBinders(CompiledPageActionDescriptor actionDescriptor)
+    private PageHandlerBinderDelegate[] GetHandlerBinders(
+        CompiledPageActionDescriptor actionDescriptor
+    )
     {
         if (actionDescriptor.HandlerMethods == null || actionDescriptor.HandlerMethods.Count == 0)
         {
@@ -159,7 +177,8 @@ internal sealed class PageActionInvokerCache
                 _modelMetadataProvider,
                 _modelBinderFactory,
                 actionDescriptor,
-                actionDescriptor.HandlerMethods[i]);
+                actionDescriptor.HandlerMethods[i]
+            );
         }
 
         return results;

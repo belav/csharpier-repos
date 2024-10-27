@@ -5,9 +5,9 @@ using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IdentityModel.Tokens.Jwt;
 using Microsoft.AspNetCore.Http;
+using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Protocols;
 using Microsoft.IdentityModel.Protocols.WsFederation;
-using Microsoft.IdentityModel.JsonWebTokens;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.IdentityModel.Tokens.Saml;
 using Microsoft.IdentityModel.Tokens.Saml2;
@@ -19,11 +19,12 @@ namespace Microsoft.AspNetCore.Authentication.WsFederation;
 /// </summary>
 public class WsFederationOptions : RemoteAuthenticationOptions
 {
-    private ICollection<ISecurityTokenValidator> _securityTokenHandlers = new Collection<ISecurityTokenValidator>()
+    private ICollection<ISecurityTokenValidator> _securityTokenHandlers =
+        new Collection<ISecurityTokenValidator>()
         {
             new Saml2SecurityTokenHandler(),
             new SamlSecurityTokenHandler(),
-            new JwtSecurityTokenHandler()
+            new JwtSecurityTokenHandler(),
         };
 
     private TokenValidationParameters _tokenValidationParameters = new TokenValidationParameters();
@@ -44,7 +45,10 @@ public class WsFederationOptions : RemoteAuthenticationOptions
         {
             new Saml2SecurityTokenHandler(),
             new SamlSecurityTokenHandler(),
-            new JsonWebTokenHandler{ MapInboundClaims = JwtSecurityTokenHandler.DefaultMapInboundClaims }
+            new JsonWebTokenHandler
+            {
+                MapInboundClaims = JwtSecurityTokenHandler.DefaultMapInboundClaims,
+            },
         };
     }
 
@@ -57,8 +61,10 @@ public class WsFederationOptions : RemoteAuthenticationOptions
 
         if (ConfigurationManager == null)
         {
-            throw new InvalidOperationException($"Provide {nameof(MetadataAddress)}, "
-            + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(WsFederationOptions)}");
+            throw new InvalidOperationException(
+                $"Provide {nameof(MetadataAddress)}, "
+                    + $"{nameof(Configuration)}, or {nameof(ConfigurationManager)} to {nameof(WsFederationOptions)}"
+            );
         }
     }
 
@@ -77,7 +83,8 @@ public class WsFederationOptions : RemoteAuthenticationOptions
     /// Responsible for retrieving, caching, and refreshing the configuration from metadata.
     /// If not provided, then one will be created using the MetadataAddress and Backchannel properties.
     /// </summary>
-    public IConfigurationManager<WsFederationConfiguration> ConfigurationManager { get; set; } = default!;
+    public IConfigurationManager<WsFederationConfiguration> ConfigurationManager { get; set; } =
+        default!;
 
     /// <summary>
     /// Gets or sets if a metadata refresh should be attempted after a SecurityTokenSignatureKeyNotFoundException. This allows for automatic
@@ -105,26 +112,23 @@ public class WsFederationOptions : RemoteAuthenticationOptions
     /// <summary>
     /// Gets or sets the collection of <see cref="ISecurityTokenValidator"/> used to read and validate the <see cref="SecurityToken"/>s.
     /// </summary>
-    [Obsolete("SecurityTokenHandlers is no longer used by default. Use TokenHandlers instead. To continue using SecurityTokenHandlers, set UseSecurityTokenHandlers to true. See https://aka.ms/aspnetcore8/security-token-changes")]
+    [Obsolete(
+        "SecurityTokenHandlers is no longer used by default. Use TokenHandlers instead. To continue using SecurityTokenHandlers, set UseSecurityTokenHandlers to true. See https://aka.ms/aspnetcore8/security-token-changes"
+    )]
     public ICollection<ISecurityTokenValidator> SecurityTokenHandlers
     {
-        get
-        {
-            return _securityTokenHandlers;
-        }
+        get { return _securityTokenHandlers; }
         set
         {
-            _securityTokenHandlers = value ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
+            _securityTokenHandlers =
+                value ?? throw new ArgumentNullException(nameof(SecurityTokenHandlers));
         }
     }
 
     /// <summary>
     /// Gets the collection of <see cref="ISecurityTokenValidator"/> used to read and validate the <see cref="SecurityToken"/>s.
     /// </summary>
-    public ICollection<TokenHandler> TokenHandlers
-    {
-        get; private set;
-    }
+    public ICollection<TokenHandler> TokenHandlers { get; private set; }
 
     /// <summary>
     /// Gets or sets the type used to secure data handled by the middleware.
@@ -137,13 +141,11 @@ public class WsFederationOptions : RemoteAuthenticationOptions
     /// <exception cref="ArgumentNullException"> if 'TokenValidationParameters' is null.</exception>
     public TokenValidationParameters TokenValidationParameters
     {
-        get
-        {
-            return _tokenValidationParameters;
-        }
+        get { return _tokenValidationParameters; }
         set
         {
-            _tokenValidationParameters = value ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
+            _tokenValidationParameters =
+                value ?? throw new ArgumentNullException(nameof(TokenValidationParameters));
         }
     }
 

@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -42,31 +42,33 @@ using System.Xml;
 
 namespace System.Security.Authentication.ExtendedProtection.Configuration
 {
-	public sealed class ServiceNameElement : ConfigurationElement
-	{
-		static ConfigurationPropertyCollection properties;
-		static ConfigurationProperty name;
+    public sealed class ServiceNameElement : ConfigurationElement
+    {
+        static ConfigurationPropertyCollection properties;
+        static ConfigurationProperty name;
 
-		static ServiceNameElement ()
-		{
-			properties = new ConfigurationPropertyCollection ();
+        static ServiceNameElement()
+        {
+            properties = new ConfigurationPropertyCollection();
 
-			var t = typeof (ServiceNameElement);
-			name = ConfigUtil.BuildProperty (t, "Name");
+            var t = typeof(ServiceNameElement);
+            name = ConfigUtil.BuildProperty(t, "Name");
 
-			properties.Add (name);
-		}
-		
-		[ConfigurationProperty ("name")]
-		public string Name {
-			get { return (string) this [name]; }
-			set { this [name] = value; }
-		}
+            properties.Add(name);
+        }
 
-		protected override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
-	}
+        [ConfigurationProperty("name")]
+        public string Name
+        {
+            get { return (string)this[name]; }
+            set { this[name] = value; }
+        }
+
+        protected override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+    }
 }
 
 #endif

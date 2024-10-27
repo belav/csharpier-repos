@@ -24,7 +24,7 @@ internal static class HttpExtensions
             return false;
         }
 
-        return contentType.Equals(UrlEncodedFormContentType, StringComparison.OrdinalIgnoreCase) ||
-            contentType.StartsWith(MultipartFormContentType, StringComparison.OrdinalIgnoreCase);
+        return contentType.Equals(UrlEncodedFormContentType, StringComparison.OrdinalIgnoreCase)
+            || contentType.StartsWith(MultipartFormContentType, StringComparison.OrdinalIgnoreCase);
     }
 }

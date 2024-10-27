@@ -34,7 +34,11 @@ namespace System.Web.Http.Tracing.Tracers
             get { return _innerNegotiator; }
         }
 
-        public ContentNegotiationResult Negotiate(Type type, HttpRequestMessage request, IEnumerable<MediaTypeFormatter> formatters)
+        public ContentNegotiationResult Negotiate(
+            Type type,
+            HttpRequestMessage request,
+            IEnumerable<MediaTypeFormatter> formatters
+        )
         {
             ContentNegotiationResult result = null;
 
@@ -44,37 +48,43 @@ namespace System.Web.Http.Tracing.Tracers
                 TraceLevel.Info,
                 _innerNegotiator.GetType().Name,
                 NegotiateMethodName,
-
                 beginTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
                         SRResources.TraceNegotiateFormatter,
                         type.Name,
-                        FormattingUtilities.FormattersToString(formatters));
+                        FormattingUtilities.FormattersToString(formatters)
+                    );
                 },
-
                 execute: () =>
                 {
                     result = _innerNegotiator.Negotiate(type, request, formatters);
                 },
-
                 endTrace: (tr) =>
                 {
                     tr.Message = Error.Format(
                         SRResources.TraceSelectedFormatter,
                         result == null
                             ? SRResources.TraceNoneObjectMessage
-                            : MediaTypeFormatterTracer.ActualMediaTypeFormatter(result.Formatter).GetType().Name,
+                            : MediaTypeFormatterTracer
+                                .ActualMediaTypeFormatter(result.Formatter)
+                                .GetType()
+                                .Name,
                         result == null || result.MediaType == null
                             ? SRResources.TraceNoneObjectMessage
-                            : result.MediaType.ToString());
+                            : result.MediaType.ToString()
+                    );
                 },
-
-                errorTrace: null);
+                errorTrace: null
+            );
 
             if (result != null)
             {
-                result.Formatter = MediaTypeFormatterTracer.CreateTracer(result.Formatter, _traceWriter, request);
+                result.Formatter = MediaTypeFormatterTracer.CreateTracer(
+                    result.Formatter,
+                    _traceWriter,
+                    request
+                );
             }
 
             return result;

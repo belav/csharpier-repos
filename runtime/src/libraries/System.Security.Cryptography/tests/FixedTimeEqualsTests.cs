@@ -81,8 +81,14 @@ namespace System.Security.Cryptography.Tests
 
             testSpan.CopyTo(testSpan2);
 
-            bool isEqualA = CryptographicOperations.FixedTimeEquals(testSpan, testSpan2.Slice(0, byteLength - 1));
-            bool isEqualB = CryptographicOperations.FixedTimeEquals(testSpan.Slice(0, byteLength - 1), testSpan2);
+            bool isEqualA = CryptographicOperations.FixedTimeEquals(
+                testSpan,
+                testSpan2.Slice(0, byteLength - 1)
+            );
+            bool isEqualB = CryptographicOperations.FixedTimeEquals(
+                testSpan.Slice(0, byteLength - 1),
+                testSpan2
+            );
 
             ArrayPool<byte>.Shared.Return(rented);
             ArrayPool<byte>.Shared.Return(rented2);
@@ -101,7 +107,8 @@ namespace System.Security.Cryptography.Tests
             // It cannot be inlined, or it loses its no-optimization guarantee.
             Assert.Equal(
                 MethodImplAttributes.NoInlining | MethodImplAttributes.NoOptimization,
-                mi.MethodImplementationFlags);
+                mi.MethodImplementationFlags
+            );
         }
     }
 }

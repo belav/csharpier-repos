@@ -49,7 +49,12 @@ namespace Microsoft.CodeAnalysis.Text
         /// Return startLineBreak = index,   lengthLineBreak = 1   if there is a 1-char newline at index
         /// Return startLineBreak = index+1, lengthLineBreak = 0   if there is no newline at index.
         /// </summary>
-        public static void GetStartAndLengthOfLineBreakEndingAt(SourceText text, int index, out int startLinebreak, out int lengthLinebreak)
+        public static void GetStartAndLengthOfLineBreakEndingAt(
+            SourceText text,
+            int index,
+            out int startLinebreak,
+            out int lengthLinebreak
+        )
         {
             char c = text[index];
             if (c == '\n')

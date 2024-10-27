@@ -11,10 +11,10 @@ namespace Microsoft.CodeAnalysis
     {
         protected abstract TResult DefaultResult { get; }
 
-        public override ValueTask<TResult> Visit(ISymbol? symbol)
-            => symbol?.Accept(this) ?? ValueTaskFactory.FromResult(DefaultResult);
+        public override ValueTask<TResult> Visit(ISymbol? symbol) =>
+            symbol?.Accept(this) ?? ValueTaskFactory.FromResult(DefaultResult);
 
-        public override ValueTask<TResult> DefaultVisit(ISymbol symbol)
-            => ValueTaskFactory.FromResult(DefaultResult);
+        public override ValueTask<TResult> DefaultVisit(ISymbol symbol) =>
+            ValueTaskFactory.FromResult(DefaultResult);
     }
 }

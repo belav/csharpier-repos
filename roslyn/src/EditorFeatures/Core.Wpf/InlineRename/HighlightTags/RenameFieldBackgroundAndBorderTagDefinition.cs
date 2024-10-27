@@ -24,11 +24,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename.HighlightTag
         {
             // The Border color should match the BackgroundColor from the
             // InlineRenameFieldFormatDefinition.
-            this.Border = new Pen(new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF)), thickness: 2.0);
+            this.Border = new Pen(
+                new SolidColorBrush(Color.FromRgb(0xFF, 0xFF, 0xFF)),
+                thickness: 2.0
+            );
             this.BackgroundColor = Color.FromRgb(0xd3, 0xf8, 0xd3);
             this.DisplayName = EditorFeaturesResources.Inline_Rename_Field_Background_and_Border;
 
-            // Needs to show above highlight references, but below the resolved/unresolved rename 
+            // Needs to show above highlight references, but below the resolved/unresolved rename
             // conflict tags.
             this.ZOrder = 1;
         }

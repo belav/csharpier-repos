@@ -10,26 +10,37 @@ namespace System.Web.Http.ValueProviders.Providers
 {
     public class NameValuePairsValueProviderTest
     {
-        private static readonly IEnumerable<KeyValuePair<string, string>> _backingStore = new KeyValuePair<string, string>[]
-        {
-            new KeyValuePair<string, string>("foo", "fooValue1"),
-            new KeyValuePair<string, string>("foo", "fooValue2"),
-            new KeyValuePair<string, string>("bar.baz", "someOtherValue"),
-            new KeyValuePair<string, string>("null_value", null),
-            new KeyValuePair<string, string>("prefix.null_value", null)
-        };
+        private static readonly IEnumerable<KeyValuePair<string, string>> _backingStore =
+            new KeyValuePair<string, string>[]
+            {
+                new KeyValuePair<string, string>("foo", "fooValue1"),
+                new KeyValuePair<string, string>("foo", "fooValue2"),
+                new KeyValuePair<string, string>("bar.baz", "someOtherValue"),
+                new KeyValuePair<string, string>("null_value", null),
+                new KeyValuePair<string, string>("prefix.null_value", null),
+            };
 
         [Fact]
         public void Constructor_GuardClauses()
         {
             // Act & assert
             Assert.ThrowsArgumentNull(
-                () => new NameValuePairsValueProvider(values: (IEnumerable<KeyValuePair<string, string>>)null, culture: CultureInfo.InvariantCulture),
-                "values");
+                () =>
+                    new NameValuePairsValueProvider(
+                        values: (IEnumerable<KeyValuePair<string, string>>)null,
+                        culture: CultureInfo.InvariantCulture
+                    ),
+                "values"
+            );
 
             Assert.ThrowsArgumentNull(
-                () => new NameValuePairsValueProvider(valuesFactory: null, culture: CultureInfo.InvariantCulture),
-                "valuesFactory");
+                () =>
+                    new NameValuePairsValueProvider(
+                        valuesFactory: null,
+                        culture: CultureInfo.InvariantCulture
+                    ),
+                "valuesFactory"
+            );
         }
 
         [Fact]
@@ -39,16 +50,17 @@ namespace System.Web.Http.ValueProviders.Providers
             var valueProvider = new NameValuePairsValueProvider(_backingStore, null);
 
             // Act & assert
-            Assert.ThrowsArgumentNull(
-                () => valueProvider.ContainsPrefix(null),
-                "prefix");
+            Assert.ThrowsArgumentNull(() => valueProvider.ContainsPrefix(null), "prefix");
         }
 
         [Fact]
         public void ContainsPrefix_WithEmptyCollection_ReturnsFalseForEmptyPrefix()
         {
             // Arrange
-            var valueProvider = new NameValuePairsValueProvider(Enumerable.Empty<KeyValuePair<string, string>>(), null);
+            var valueProvider = new NameValuePairsValueProvider(
+                Enumerable.Empty<KeyValuePair<string, string>>(),
+                null
+            );
 
             // Act
             bool result = valueProvider.ContainsPrefix("");
@@ -102,9 +114,7 @@ namespace System.Web.Http.ValueProviders.Providers
             var valueProvider = new NameValuePairsValueProvider(_backingStore, null);
 
             // Act & assert
-            Assert.ThrowsArgumentNull(
-                () => valueProvider.GetKeysFromPrefix(null),
-                "prefix");
+            Assert.ThrowsArgumentNull(() => valueProvider.GetKeysFromPrefix(null), "prefix");
         }
 
         [Fact]
@@ -119,7 +129,14 @@ namespace System.Web.Http.ValueProviders.Providers
             // Assert
             Assert.Equal<KeyValuePair<string, string>>(
                 result.OrderBy(kvp => kvp.Key),
-                new Dictionary<string, string> { { "bar", "bar" }, { "foo", "foo" }, { "null_value", "null_value" }, { "prefix", "prefix" } });
+                new Dictionary<string, string>
+                {
+                    { "bar", "bar" },
+                    { "foo", "foo" },
+                    { "null_value", "null_value" },
+                    { "prefix", "prefix" },
+                }
+            );
         }
 
         [Fact]
@@ -157,9 +174,7 @@ namespace System.Web.Http.ValueProviders.Providers
             var valueProvider = new NameValuePairsValueProvider(_backingStore, null);
 
             // Act & assert
-            Assert.ThrowsArgumentNull(
-                () => valueProvider.GetValue(null),
-                "key");
+            Assert.ThrowsArgumentNull(() => valueProvider.GetValue(null), "key");
         }
 
         [Fact]
@@ -191,7 +206,10 @@ namespace System.Web.Http.ValueProviders.Providers
 
             // Assert
             Assert.NotNull(vpResult);
-            Assert.Equal(new List<string>() { "fooValue1", "fooValue2" }, (List<string>)vpResult.RawValue);
+            Assert.Equal(
+                new List<string>() { "fooValue1", "fooValue2" },
+                (List<string>)vpResult.RawValue
+            );
             Assert.Equal("fooValue1,fooValue2", vpResult.AttemptedValue);
             Assert.Equal(culture, vpResult.Culture);
         }
@@ -223,7 +241,7 @@ namespace System.Web.Http.ValueProviders.Providers
             {
                 new KeyValuePair<string, string>("key", null),
                 new KeyValuePair<string, string>("key", null),
-                new KeyValuePair<string, string>("key", "value")
+                new KeyValuePair<string, string>("key", "value"),
             };
             var culture = CultureInfo.GetCultureInfo("fr-FR");
             var valueProvider = new NameValuePairsValueProvider(backingStore, culture);

@@ -17,9 +17,7 @@ public class PageParameterModel : ParameterModelBase, ICommonModel, IBindingMode
     /// </summary>
     /// <param name="parameterInfo">The parameter info.</param>
     /// <param name="attributes">The attributes.</param>
-    public PageParameterModel(
-        ParameterInfo parameterInfo,
-        IReadOnlyList<object> attributes)
+    public PageParameterModel(ParameterInfo parameterInfo, IReadOnlyList<object> attributes)
         : base(parameterInfo.ParameterType, attributes)
     {
         ArgumentNullException.ThrowIfNull(parameterInfo);

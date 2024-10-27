@@ -147,11 +147,15 @@ public class ContentRangeHeaderValueTest
         CheckValidParse(" bytes 1-2/3 ", new ContentRangeHeaderValue(1, 2, 3));
         CheckValidParse("bytes  *  /  3", new ContentRangeHeaderValue(3));
 
-        CheckValidParse(" custom 1234567890123456789-1234567890123456799/*",
-            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799) { Unit = "custom" });
+        CheckValidParse(
+            " custom 1234567890123456789-1234567890123456799/*",
+            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799)
+            {
+                Unit = "custom",
+            }
+        );
 
-        CheckValidParse(" custom * / 123 ",
-            new ContentRangeHeaderValue(123) { Unit = "custom" });
+        CheckValidParse(" custom * / 123 ", new ContentRangeHeaderValue(123) { Unit = "custom" });
 
         // Note that we don't have a public constructor for value 'bytes */*' since the RFC doesn't mention a
         // scenario for it. However, if a server returns this value, we're flexible and accept it.
@@ -178,11 +182,18 @@ public class ContentRangeHeaderValueTest
         CheckValidTryParse(" bytes 1-2/3 ", new ContentRangeHeaderValue(1, 2, 3));
         CheckValidTryParse("bytes  *  /  3", new ContentRangeHeaderValue(3));
 
-        CheckValidTryParse(" custom 1234567890123456789-1234567890123456799/*",
-            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799) { Unit = "custom" });
+        CheckValidTryParse(
+            " custom 1234567890123456789-1234567890123456799/*",
+            new ContentRangeHeaderValue(1234567890123456789, 1234567890123456799)
+            {
+                Unit = "custom",
+            }
+        );
 
-        CheckValidTryParse(" custom * / 123 ",
-            new ContentRangeHeaderValue(123) { Unit = "custom" });
+        CheckValidTryParse(
+            " custom * / 123 ",
+            new ContentRangeHeaderValue(123) { Unit = "custom" }
+        );
 
         // Note that we don't have a public constructor for value 'bytes */*' since the RFC doesn't mention a
         // scenario for it. However, if a server returns this value, we're flexible and accept it.
@@ -219,31 +230,31 @@ public class ContentRangeHeaderValueTest
     public static TheoryData<string> InvalidContentRangeValueStrings =>
         new TheoryData<string>
         {
-            {"bytes 1-2/3,"}, // no character after 'length' allowed
-            {"x bytes 1-2/3"},
-            {"bytes 1-2/3.4"},
-            {""},
-            {"bytes 3-2/5"},
-            {"bytes 6-6/5"},
-            {"bytes 1-6/5"},
-            {"bytes 1-2/"},
-            {"bytes 1-2"},
-            {"bytes 1-/"},
-            {"bytes 1-"},
-            {"bytes 1"},
-            {"bytes "},
-            {"bytes a-2/3"},
-            {"bytes 1-b/3"},
-            {"bytes 1-2/c"},
-            {"bytes1-2/3"},
-            {"bytes 0-0/0"},
+            { "bytes 1-2/3," }, // no character after 'length' allowed
+            { "x bytes 1-2/3" },
+            { "bytes 1-2/3.4" },
+            { "" },
+            { "bytes 3-2/5" },
+            { "bytes 6-6/5" },
+            { "bytes 1-6/5" },
+            { "bytes 1-2/" },
+            { "bytes 1-2" },
+            { "bytes 1-/" },
+            { "bytes 1-" },
+            { "bytes 1" },
+            { "bytes " },
+            { "bytes a-2/3" },
+            { "bytes 1-b/3" },
+            { "bytes 1-2/c" },
+            { "bytes1-2/3" },
+            { "bytes 0-0/0" },
             // More than 19 digits >>Int64.MaxValue
-            {"bytes 1-12345678901234567890/3"},
-            {"bytes 12345678901234567890-3/3"},
-            {"bytes 1-2/12345678901234567890"},
+            { "bytes 1-12345678901234567890/3" },
+            { "bytes 12345678901234567890-3/3" },
+            { "bytes 1-2/12345678901234567890" },
             // Exceed Int64.MaxValue, but use 19 digits
-            {"bytes 1-9999999999999999999/3"},
-            {"bytes 9999999999999999999-3/3"},
-            {"bytes 1-2/9999999999999999999"}
+            { "bytes 1-9999999999999999999/3" },
+            { "bytes 9999999999999999999-3/3" },
+            { "bytes 1-2/9999999999999999999" },
         };
 }

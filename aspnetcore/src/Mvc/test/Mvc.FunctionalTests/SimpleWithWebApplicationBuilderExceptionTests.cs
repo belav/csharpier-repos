@@ -3,11 +3,14 @@
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class SimpleWithWebApplicationBuilderExceptionTests : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program>>
+public class SimpleWithWebApplicationBuilderExceptionTests
+    : IClassFixture<MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program>>
 {
     private readonly MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program> _fixture;
 
-    public SimpleWithWebApplicationBuilderExceptionTests(MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program> fixture)
+    public SimpleWithWebApplicationBuilderExceptionTests(
+        MvcTestFixture<SimpleWebSiteWithWebApplicationBuilderException.Program> fixture
+    )
     {
         _fixture = fixture;
     }

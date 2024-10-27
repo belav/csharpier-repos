@@ -18,6 +18,7 @@ namespace Microsoft.CodeAnalysis
     public class RuleSet
     {
         private readonly string _filePath;
+
         /// <summary>
         /// The file path of the ruleset file.
         /// </summary>
@@ -27,6 +28,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ReportDiagnostic _generalDiagnosticOption;
+
         /// <summary>
         /// The global option specified by the IncludeAll tag.
         /// </summary>
@@ -36,6 +38,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ImmutableDictionary<string, ReportDiagnostic> _specificDiagnosticOptions;
+
         /// <summary>
         /// Individual rule ids and their associated actions.
         /// </summary>
@@ -45,6 +48,7 @@ namespace Microsoft.CodeAnalysis
         }
 
         private readonly ImmutableArray<RuleSetInclude> _includes;
+
         /// <summary>
         /// List of rulesets included by this ruleset.
         /// </summary>
@@ -56,11 +60,19 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Create a RuleSet.
         /// </summary>
-        public RuleSet(string filePath, ReportDiagnostic generalOption, ImmutableDictionary<string, ReportDiagnostic> specificOptions, ImmutableArray<RuleSetInclude> includes)
+        public RuleSet(
+            string filePath,
+            ReportDiagnostic generalOption,
+            ImmutableDictionary<string, ReportDiagnostic> specificOptions,
+            ImmutableArray<RuleSetInclude> includes
+        )
         {
             _filePath = filePath;
             _generalDiagnosticOption = generalOption;
-            _specificDiagnosticOptions = specificOptions == null ? ImmutableDictionary<string, ReportDiagnostic>.Empty : specificOptions;
+            _specificDiagnosticOptions =
+                specificOptions == null
+                    ? ImmutableDictionary<string, ReportDiagnostic>.Empty
+                    : specificOptions;
             _includes = includes.NullToEmpty();
         }
 
@@ -71,7 +83,9 @@ namespace Microsoft.CodeAnalysis
         {
             if (!_includes.IsEmpty)
             {
-                throw new ArgumentException("Effective action cannot be applied to rulesets with Includes");
+                throw new ArgumentException(
+                    "Effective action cannot be applied to rulesets with Includes"
+                );
             }
 
             switch (action)
@@ -84,16 +98,27 @@ namespace Microsoft.CodeAnalysis
                 case ReportDiagnostic.Warn:
                 case ReportDiagnostic.Info:
                 case ReportDiagnostic.Hidden:
-                    var generalOption = _generalDiagnosticOption == ReportDiagnostic.Default ? ReportDiagnostic.Default : action;
+                    var generalOption =
+                        _generalDiagnosticOption == ReportDiagnostic.Default
+                            ? ReportDiagnostic.Default
+                            : action;
                     var specificOptions = _specificDiagnosticOptions.ToBuilder();
                     foreach (var item in _specificDiagnosticOptions)
                     {
-                        if (item.Value != ReportDiagnostic.Suppress && item.Value != ReportDiagnostic.Default)
+                        if (
+                            item.Value != ReportDiagnostic.Suppress
+                            && item.Value != ReportDiagnostic.Default
+                        )
                         {
                             specificOptions[item.Key] = action;
                         }
                     }
-                    return new RuleSet(FilePath, generalOption, specificOptions.ToImmutable(), _includes);
+                    return new RuleSet(
+                        FilePath,
+                        generalOption,
+                        specificOptions.ToImmutable(),
+                        _includes
+                    );
                 default:
                     return null;
             }
@@ -146,7 +171,9 @@ namespace Microsoft.CodeAnalysis
                 Debug.Assert(effectiveRuleset is object);
 
                 // If the included ruleset's global option is stricter, then make that the effective option.
-                if (IsStricterThan(effectiveRuleset.GeneralDiagnosticOption, effectiveGeneralOption))
+                if (
+                    IsStricterThan(effectiveRuleset.GeneralDiagnosticOption, effectiveGeneralOption)
+                )
                 {
                     effectiveGeneralOption = effectiveRuleset.GeneralDiagnosticOption;
                 }
@@ -182,7 +209,12 @@ namespace Microsoft.CodeAnalysis
                 }
             }
 
-            return new RuleSet(_filePath, effectiveGeneralOption, effectiveSpecificOptions.ToImmutableDictionary(), ImmutableArray<RuleSetInclude>.Empty);
+            return new RuleSet(
+                _filePath,
+                effectiveGeneralOption,
+                effectiveSpecificOptions.ToImmutableDictionary(),
+                ImmutableArray<RuleSetInclude>.Empty
+            );
         }
 
         /// <summary>
@@ -229,9 +261,14 @@ namespace Microsoft.CodeAnalysis
                 case ReportDiagnostic.Suppress:
                     return true;
                 case ReportDiagnostic.Default:
-                    return action1 == ReportDiagnostic.Warn || action1 == ReportDiagnostic.Error || action1 == ReportDiagnostic.Info || action1 == ReportDiagnostic.Hidden;
+                    return action1 == ReportDiagnostic.Warn
+                        || action1 == ReportDiagnostic.Error
+                        || action1 == ReportDiagnostic.Info
+                        || action1 == ReportDiagnostic.Hidden;
                 case ReportDiagnostic.Hidden:
-                    return action1 == ReportDiagnostic.Warn || action1 == ReportDiagnostic.Error || action1 == ReportDiagnostic.Info;
+                    return action1 == ReportDiagnostic.Warn
+                        || action1 == ReportDiagnostic.Error
+                        || action1 == ReportDiagnostic.Info;
                 case ReportDiagnostic.Info:
                     return action1 == ReportDiagnostic.Warn || action1 == ReportDiagnostic.Error;
                 case ReportDiagnostic.Warn:
@@ -281,12 +318,25 @@ namespace Microsoft.CodeAnalysis
         /// 1) A map of <paramref name="specificDiagnosticOptions"/> from rule ID to <see cref="ReportDiagnostic"/> option.
         /// 2) A global <see cref="ReportDiagnostic"/> option for all rules in the ruleset file.
         /// </summary>
-        public static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(string? rulesetFileFullPath, out Dictionary<string, ReportDiagnostic> specificDiagnosticOptions)
+        public static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(
+            string? rulesetFileFullPath,
+            out Dictionary<string, ReportDiagnostic> specificDiagnosticOptions
+        )
         {
-            return GetDiagnosticOptionsFromRulesetFile(rulesetFileFullPath, out specificDiagnosticOptions, null, null);
+            return GetDiagnosticOptionsFromRulesetFile(
+                rulesetFileFullPath,
+                out specificDiagnosticOptions,
+                null,
+                null
+            );
         }
 
-        internal static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(string? rulesetFileFullPath, out Dictionary<string, ReportDiagnostic> diagnosticOptions, IList<Diagnostic>? diagnosticsOpt, CommonMessageProvider? messageProviderOpt)
+        internal static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(
+            string? rulesetFileFullPath,
+            out Dictionary<string, ReportDiagnostic> diagnosticOptions,
+            IList<Diagnostic>? diagnosticsOpt,
+            CommonMessageProvider? messageProviderOpt
+        )
         {
             diagnosticOptions = new Dictionary<string, ReportDiagnostic>();
             if (rulesetFileFullPath == null)
@@ -294,10 +344,20 @@ namespace Microsoft.CodeAnalysis
                 return ReportDiagnostic.Default;
             }
 
-            return GetDiagnosticOptionsFromRulesetFile(diagnosticOptions, rulesetFileFullPath, diagnosticsOpt, messageProviderOpt);
+            return GetDiagnosticOptionsFromRulesetFile(
+                diagnosticOptions,
+                rulesetFileFullPath,
+                diagnosticsOpt,
+                messageProviderOpt
+            );
         }
 
-        private static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(Dictionary<string, ReportDiagnostic> diagnosticOptions, string resolvedPath, IList<Diagnostic>? diagnosticsOpt, CommonMessageProvider? messageProviderOpt)
+        private static ReportDiagnostic GetDiagnosticOptionsFromRulesetFile(
+            Dictionary<string, ReportDiagnostic> diagnosticOptions,
+            string resolvedPath,
+            IList<Diagnostic>? diagnosticsOpt,
+            CommonMessageProvider? messageProviderOpt
+        )
         {
             Debug.Assert(resolvedPath != null);
 
@@ -315,7 +375,14 @@ namespace Microsoft.CodeAnalysis
             {
                 if (diagnosticsOpt != null && messageProviderOpt != null)
                 {
-                    diagnosticsOpt.Add(Diagnostic.Create(messageProviderOpt, messageProviderOpt.ERR_CantReadRulesetFile, resolvedPath, e.Message));
+                    diagnosticsOpt.Add(
+                        Diagnostic.Create(
+                            messageProviderOpt,
+                            messageProviderOpt.ERR_CantReadRulesetFile,
+                            resolvedPath,
+                            e.Message
+                        )
+                    );
                 }
             }
             catch (IOException e)
@@ -324,14 +391,30 @@ namespace Microsoft.CodeAnalysis
                 {
                     if (diagnosticsOpt != null && messageProviderOpt != null)
                     {
-                        diagnosticsOpt.Add(Diagnostic.Create(messageProviderOpt, messageProviderOpt.ERR_CantReadRulesetFile, resolvedPath, new CodeAnalysisResourcesLocalizableErrorArgument(nameof(CodeAnalysisResources.FileNotFound))));
+                        diagnosticsOpt.Add(
+                            Diagnostic.Create(
+                                messageProviderOpt,
+                                messageProviderOpt.ERR_CantReadRulesetFile,
+                                resolvedPath,
+                                new CodeAnalysisResourcesLocalizableErrorArgument(
+                                    nameof(CodeAnalysisResources.FileNotFound)
+                                )
+                            )
+                        );
                     }
                 }
                 else
                 {
                     if (diagnosticsOpt != null && messageProviderOpt != null)
                     {
-                        diagnosticsOpt.Add(Diagnostic.Create(messageProviderOpt, messageProviderOpt.ERR_CantReadRulesetFile, resolvedPath, e.Message));
+                        diagnosticsOpt.Add(
+                            Diagnostic.Create(
+                                messageProviderOpt,
+                                messageProviderOpt.ERR_CantReadRulesetFile,
+                                resolvedPath,
+                                e.Message
+                            )
+                        );
                     }
                 }
             }

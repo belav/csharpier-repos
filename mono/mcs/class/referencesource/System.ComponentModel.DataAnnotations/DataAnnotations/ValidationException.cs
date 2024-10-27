@@ -5,17 +5,26 @@ using System.Security;
 using System.Security.Permissions;
 #endif
 
-namespace System.ComponentModel.DataAnnotations {
+namespace System.ComponentModel.DataAnnotations
+{
     /// <summary>
     /// Exception used for validation using <see cref="ValidationAttribute"/>.
     /// </summary>
 #if !SILVERLIGHT
     [Serializable]
 #endif
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1032:ImplementStandardExceptionConstructors", Justification = "SerializationInfo is internal in Silverlight")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2240:ImplementISerializableCorrectly",
-        Justification = "SecurityTransparent types cannot override GetObjectData, and this type does not serialize its instance fields anyway.")]
-    public class ValidationException : Exception {
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Design",
+        "CA1032:ImplementStandardExceptionConstructors",
+        Justification = "SerializationInfo is internal in Silverlight"
+    )]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(
+        "Microsoft.Usage",
+        "CA2240:ImplementISerializableCorrectly",
+        Justification = "SecurityTransparent types cannot override GetObjectData, and this type does not serialize its instance fields anyway."
+    )]
+    public class ValidationException : Exception
+    {
         private ValidationResult _validationResult;
 
         /// <summary>
@@ -29,9 +38,12 @@ namespace System.ComponentModel.DataAnnotations {
         /// <value>
         /// This property will never be null.
         /// </value>
-        public ValidationResult ValidationResult {
-            get {
-                if (this._validationResult == null) {
+        public ValidationResult ValidationResult
+        {
+            get
+            {
+                if (this._validationResult == null)
+                {
                     this._validationResult = new ValidationResult(this.Message);
                 }
                 return this._validationResult;
@@ -49,8 +61,13 @@ namespace System.ComponentModel.DataAnnotations {
         /// <param name="validationResult">The value describing the validation error</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
         /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
-        public ValidationException(ValidationResult validationResult, ValidationAttribute validatingAttribute, object value)
-            : this(validationResult.ErrorMessage, validatingAttribute, value) {
+        public ValidationException(
+            ValidationResult validationResult,
+            ValidationAttribute validatingAttribute,
+            object value
+        )
+            : this(validationResult.ErrorMessage, validatingAttribute, value)
+        {
             this._validationResult = validationResult;
         }
 
@@ -60,22 +77,25 @@ namespace System.ComponentModel.DataAnnotations {
         /// <param name="errorMessage">The localized error message</param>
         /// <param name="validatingAttribute">The attribute that triggered this exception</param>
         /// <param name="value">The value that caused the validating attribute to trigger the exception</param>
-        public ValidationException(string errorMessage, ValidationAttribute validatingAttribute, object value)
-            : base(errorMessage) {
+        public ValidationException(
+            string errorMessage,
+            ValidationAttribute validatingAttribute,
+            object value
+        )
+            : base(errorMessage)
+        {
             this.Value = value;
             this.ValidationAttribute = validatingAttribute;
         }
 
-
-        // 
+        //
 
         /// <summary>
         /// Default constructor.
         /// </summary>
         /// <remarks>The long form of this constructor is preferred because it gives better error reporting.</remarks>
         public ValidationException()
-            : base() {
-        }
+            : base() { }
 
         /// <summary>
         /// Constructor that accepts only a localized message

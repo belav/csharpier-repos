@@ -8,9 +8,7 @@ namespace System.ServiceModel.Dispatcher
     class OrdinalOpcode : Opcode
     {
         internal OrdinalOpcode()
-            : base(OpcodeID.Ordinal)
-        {
-        }
+            : base(OpcodeID.Ordinal) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -18,12 +16,18 @@ namespace System.ServiceModel.Dispatcher
             StackFrame ordinals = context.TopArg;
             Value[] sequenceBuffer = context.Sequences;
 
-            for (int seqIndex = sequences.basePtr, ordinalIndex = ordinals.basePtr; seqIndex <= sequences.endPtr; ++seqIndex)
+            for (
+                int seqIndex = sequences.basePtr, ordinalIndex = ordinals.basePtr;
+                seqIndex <= sequences.endPtr;
+                ++seqIndex
+            )
             {
                 NodeSequence sequence = sequenceBuffer[seqIndex].Sequence;
                 for (int item = 0; item < sequence.Count; ++item)
                 {
-                    context.Values[ordinalIndex].Boolean = (sequence[item].Position == context.Values[ordinalIndex].Double);
+                    context.Values[ordinalIndex].Boolean = (
+                        sequence[item].Position == context.Values[ordinalIndex].Double
+                    );
                     ordinalIndex++;
                 }
             }
@@ -46,14 +50,15 @@ namespace System.ServiceModel.Dispatcher
         // Never used for inverse query, so don't need this
         internal override bool Equals(Opcode op)
         {
-            if (base.Equals (op))
+            if (base.Equals(op))
             {
-                return (this.ordinal == ((LiteralOrdinalOpcode) op).ordinal);
+                return (this.ordinal == ((LiteralOrdinalOpcode)op).ordinal);
             }
 
             return false;
         }
 #endif
+
         internal override Opcode Eval(ProcessingContext context)
         {
             StackFrame sequences = context.TopSequenceArg;
@@ -84,9 +89,7 @@ namespace System.ServiceModel.Dispatcher
     internal class ApplyFilterOpcode : Opcode
     {
         internal ApplyFilterOpcode()
-            : base(OpcodeID.Filter)
-        {
-        }
+            : base(OpcodeID.Filter) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -95,7 +98,11 @@ namespace System.ServiceModel.Dispatcher
             NodeSequenceBuilder sequenceBuilder = new NodeSequenceBuilder(context);
             Value[] sequenceBuffer = context.Sequences;
 
-            for (int seqIndex = sequences.basePtr, resultIndex = results.basePtr; seqIndex <= sequences.endPtr; ++seqIndex)
+            for (
+                int seqIndex = sequences.basePtr, resultIndex = results.basePtr;
+                seqIndex <= sequences.endPtr;
+                ++seqIndex
+            )
             {
                 NodeSequence sourceSequence = sequenceBuffer[seqIndex].Sequence;
                 if (sourceSequence.Count > 0)
@@ -106,10 +113,15 @@ namespace System.ServiceModel.Dispatcher
                         sequenceBuilder.StartNodeset();
                         while (nodesetIterator.NextItem())
                         {
-                            Fx.Assert(context.Values[resultIndex].IsType(ValueDataType.Boolean), "");
+                            Fx.Assert(
+                                context.Values[resultIndex].IsType(ValueDataType.Boolean),
+                                ""
+                            );
                             if (context.Values[resultIndex].Boolean)
                             {
-                                sequenceBuilder.Add(ref sourceSequence.Items[nodesetIterator.Index]);
+                                sequenceBuilder.Add(
+                                    ref sourceSequence.Items[nodesetIterator.Index]
+                                );
                             }
                             ++resultIndex;
                         }
@@ -128,14 +140,12 @@ namespace System.ServiceModel.Dispatcher
 
     /// <summary>
     /// Union the sequences found in the top two frames of the value stack
-    /// The unionized sequence 
+    /// The unionized sequence
     /// </summary>
     internal class UnionOpcode : Opcode
     {
         internal UnionOpcode()
-            : base(OpcodeID.Union)
-        {
-        }
+            : base(OpcodeID.Union) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -160,9 +170,7 @@ namespace System.ServiceModel.Dispatcher
     internal class MergeOpcode : Opcode
     {
         internal MergeOpcode()
-            : base(OpcodeID.Merge)
-        {
-        }
+            : base(OpcodeID.Merge) { }
 
         internal override Opcode Eval(ProcessingContext context)
         {
@@ -187,6 +195,5 @@ namespace System.ServiceModel.Dispatcher
 
             return this.next;
         }
-
     }
 }

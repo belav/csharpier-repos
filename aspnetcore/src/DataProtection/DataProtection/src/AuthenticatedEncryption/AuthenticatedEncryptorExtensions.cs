@@ -8,13 +8,24 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption;
 
 internal static class AuthenticatedEncryptorExtensions
 {
-    public static byte[] Encrypt(this IAuthenticatedEncryptor encryptor, ArraySegment<byte> plaintext, ArraySegment<byte> additionalAuthenticatedData, uint preBufferSize, uint postBufferSize)
+    public static byte[] Encrypt(
+        this IAuthenticatedEncryptor encryptor,
+        ArraySegment<byte> plaintext,
+        ArraySegment<byte> additionalAuthenticatedData,
+        uint preBufferSize,
+        uint postBufferSize
+    )
     {
         // Can we call the optimized version?
         var optimizedEncryptor = encryptor as IOptimizedAuthenticatedEncryptor;
         if (optimizedEncryptor != null)
         {
-            return optimizedEncryptor.Encrypt(plaintext, additionalAuthenticatedData, preBufferSize, postBufferSize);
+            return optimizedEncryptor.Encrypt(
+                plaintext,
+                additionalAuthenticatedData,
+                preBufferSize,
+                postBufferSize
+            );
         }
 
         // Fall back to the unoptimized version
@@ -44,11 +55,21 @@ internal static class AuthenticatedEncryptorExtensions
         var aad = Guid.NewGuid().ToByteArray();
 
         // Act
-        var protectedData = encryptor.Encrypt(new ArraySegment<byte>(plaintextAsBytes), new ArraySegment<byte>(aad));
-        var roundTrippedData = encryptor.Decrypt(new ArraySegment<byte>(protectedData), new ArraySegment<byte>(aad));
+        var protectedData = encryptor.Encrypt(
+            new ArraySegment<byte>(plaintextAsBytes),
+            new ArraySegment<byte>(aad)
+        );
+        var roundTrippedData = encryptor.Decrypt(
+            new ArraySegment<byte>(protectedData),
+            new ArraySegment<byte>(aad)
+        );
 
         // Assert
-        CryptoUtil.Assert(roundTrippedData != null && roundTrippedData.Length == plaintextAsBytes.Length && plaintextAsGuid == new Guid(roundTrippedData),
-            "Plaintext did not round-trip properly through the authenticated encryptor.");
+        CryptoUtil.Assert(
+            roundTrippedData != null
+                && roundTrippedData.Length == plaintextAsBytes.Length
+                && plaintextAsGuid == new Guid(roundTrippedData),
+            "Plaintext did not round-trip properly through the authenticated encryptor."
+        );
     }
 }

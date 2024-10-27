@@ -8,7 +8,6 @@ using System.Diagnostics;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class InvocationCollection : IInvocationList
@@ -30,7 +29,6 @@ namespace Moq
         sealed class InvocationCollection : IInvocationList
     */
     sealed class InvocationCollection : IInvocationList
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
             private Invocation[] invocations;
@@ -53,7 +51,6 @@ namespace Moq
     */
     {
         Invocation[] invocations;
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
@@ -83,7 +80,6 @@ namespace Moq
         */
         int capacity = 0;
         int count = 0;
-
 
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:

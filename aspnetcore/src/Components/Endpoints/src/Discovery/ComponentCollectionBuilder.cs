@@ -38,7 +38,10 @@ internal class ComponentCollectionBuilder
         _components.Remove(name);
     }
 
-    internal void AddFromLibraryInfo(string assemblyName, IReadOnlyList<ComponentBuilder> components)
+    internal void AddFromLibraryInfo(
+        string assemblyName,
+        IReadOnlyList<ComponentBuilder> components
+    )
     {
         _components.Add(assemblyName, components);
     }

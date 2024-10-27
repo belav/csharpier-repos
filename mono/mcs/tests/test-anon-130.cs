@@ -1,31 +1,30 @@
 using System;
-public delegate void Simple ();
 
-public delegate Simple Foo ();
+public delegate void Simple();
+
+public delegate Simple Foo();
 
 class X
 {
-	public void Hello<U> (U u)
-	{
-	}
+    public void Hello<U>(U u) { }
 
-	public void Test<T> (T t)
-	{
-		{
-			T u = t;
-			Hello (u);
-			Foo foo = delegate {
-				T v = u;
-				Hello (u);
-				return delegate {
-					Hello (u);
-					Hello (v);
-				};
-			};
-		}
-	}
+    public void Test<T>(T t)
+    {
+        {
+            T u = t;
+            Hello(u);
+            Foo foo = delegate
+            {
+                T v = u;
+                Hello(u);
+                return delegate
+                {
+                    Hello(u);
+                    Hello(v);
+                };
+            };
+        }
+    }
 
-	public static void Main ()
-	{
-	}
-} 
+    public static void Main() { }
+}

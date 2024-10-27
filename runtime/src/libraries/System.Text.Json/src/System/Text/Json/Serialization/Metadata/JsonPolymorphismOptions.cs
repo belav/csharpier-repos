@@ -20,9 +20,7 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Creates an empty <see cref="JsonPolymorphismOptions"/> instance.
         /// </summary>
-        public JsonPolymorphismOptions()
-        {
-        }
+        public JsonPolymorphismOptions() { }
 
         /// <summary>
         /// Gets the list of derived types supported in the current polymorphic type configuration.
@@ -95,26 +93,39 @@ namespace System.Text.Json.Serialization.Metadata
             }
 
             public override bool IsReadOnly => _parent.DeclaringTypeInfo?.IsReadOnly == true;
-            protected override void OnCollectionModifying() => _parent.DeclaringTypeInfo?.VerifyMutable();
+
+            protected override void OnCollectionModifying() =>
+                _parent.DeclaringTypeInfo?.VerifyMutable();
         }
 
         internal static JsonPolymorphismOptions? CreateFromAttributeDeclarations(Type baseType)
         {
             JsonPolymorphismOptions? options = null;
 
-            if (baseType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false) is JsonPolymorphicAttribute polymorphicAttribute)
+            if (
+                baseType.GetCustomAttribute<JsonPolymorphicAttribute>(inherit: false)
+                is JsonPolymorphicAttribute polymorphicAttribute
+            )
             {
                 options = new()
                 {
-                    IgnoreUnrecognizedTypeDiscriminators = polymorphicAttribute.IgnoreUnrecognizedTypeDiscriminators,
+                    IgnoreUnrecognizedTypeDiscriminators =
+                        polymorphicAttribute.IgnoreUnrecognizedTypeDiscriminators,
                     UnknownDerivedTypeHandling = polymorphicAttribute.UnknownDerivedTypeHandling,
-                    TypeDiscriminatorPropertyName = polymorphicAttribute.TypeDiscriminatorPropertyName,
+                    TypeDiscriminatorPropertyName =
+                        polymorphicAttribute.TypeDiscriminatorPropertyName,
                 };
             }
 
-            foreach (JsonDerivedTypeAttribute attr in baseType.GetCustomAttributes<JsonDerivedTypeAttribute>(inherit: false))
+            foreach (
+                JsonDerivedTypeAttribute attr in baseType.GetCustomAttributes<JsonDerivedTypeAttribute>(
+                    inherit: false
+                )
+            )
             {
-                (options ??= new()).DerivedTypes.Add(new JsonDerivedType(attr.DerivedType, attr.TypeDiscriminator));
+                (options ??= new()).DerivedTypes.Add(
+                    new JsonDerivedType(attr.DerivedType, attr.TypeDiscriminator)
+                );
             }
 
             return options;

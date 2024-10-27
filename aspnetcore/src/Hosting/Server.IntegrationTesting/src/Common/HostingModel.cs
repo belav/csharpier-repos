@@ -10,5 +10,5 @@ public enum HostingModel
 {
     None,
     OutOfProcess,
-    InProcess
+    InProcess,
 }

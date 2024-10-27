@@ -35,7 +35,7 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.NamingSty
         public static string TypeToolTip { get; } = ServicesVSResources.Type;
         public static string TypeAutomationName { get; } = ServicesVSResources.Type;
 
-        private void OnSettingChanged(object sender, System.EventArgs e)
-            => TypeValue = _setting.TypeName;
+        private void OnSettingChanged(object sender, System.EventArgs e) =>
+            TypeValue = _setting.TypeName;
     }
 }

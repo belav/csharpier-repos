@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="BaseTemplatedMobileComponentEditor.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 namespace System.Web.UI.Design.MobileControls
@@ -19,11 +19,13 @@ namespace System.Web.UI.Design.MobileControls
     ///       base component editor for Mobile Templated controls.
     ///    </para>
     /// </summary>
-    [
-        System.Security.Permissions.SecurityPermission(System.Security.Permissions.SecurityAction.Demand,
-        Flags=System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode)
-    ]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [System.Security.Permissions.SecurityPermission(
+        System.Security.Permissions.SecurityAction.Demand,
+        Flags = System.Security.Permissions.SecurityPermissionFlag.UnmanagedCode
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     internal abstract class BaseTemplatedMobileComponentEditor : WindowsFormsComponentEditor
     {
         private int _initialPage;
@@ -54,7 +56,11 @@ namespace System.Web.UI.Design.MobileControls
         /// <param name=' obj'>
         ///    The component to edit.
         /// </param>
-        public override bool EditComponent(ITypeDescriptorContext context, Object obj, IWin32Window parent)
+        public override bool EditComponent(
+            ITypeDescriptorContext context,
+            Object obj,
+            IWin32Window parent
+        )
         {
             bool result = false;
             bool inTemplateMode = false;
@@ -65,25 +71,31 @@ namespace System.Web.UI.Design.MobileControls
 
             if (compSite != null)
             {
-                IDesignerHost designerHost = (IDesignerHost)compSite.GetService(typeof(IDesignerHost));
+                IDesignerHost designerHost = (IDesignerHost)
+                    compSite.GetService(typeof(IDesignerHost));
 
                 IDesigner compDesigner = designerHost.GetDesigner(comp);
-                Debug.Assert(compDesigner is TemplatedControlDesigner,
-                             "Expected component to have a TemplatedControlDesigner");
+                Debug.Assert(
+                    compDesigner is TemplatedControlDesigner,
+                    "Expected component to have a TemplatedControlDesigner"
+                );
 
-                TemplatedControlDesigner tplDesigner = (TemplatedControlDesigner) compDesigner;
+                TemplatedControlDesigner tplDesigner = (TemplatedControlDesigner)compDesigner;
                 inTemplateMode = tplDesigner.InTemplateMode;
             }
-            
+
             if (inTemplateMode == false)
             {
                 result = base.EditComponent(context, obj, parent);
             }
             else
             {
-                MessageBox.Show(SR.GetString(SR.BaseTemplatedMobileComponentEditor_TemplateModeErrorMessage), 
-                                SR.GetString(SR.BaseTemplatedMobileComponentEditor_TemplateModeErrorTitle),
-                                MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show(
+                    SR.GetString(SR.BaseTemplatedMobileComponentEditor_TemplateModeErrorMessage),
+                    SR.GetString(SR.BaseTemplatedMobileComponentEditor_TemplateModeErrorTitle),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information
+                );
             }
             return result;
         }
@@ -104,4 +116,3 @@ namespace System.Web.UI.Design.MobileControls
         }
     }
 }
-

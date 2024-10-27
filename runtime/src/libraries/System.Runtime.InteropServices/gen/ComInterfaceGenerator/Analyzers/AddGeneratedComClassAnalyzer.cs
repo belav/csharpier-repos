@@ -13,7 +13,8 @@ namespace Microsoft.Interop.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class AddGeneratedComClassAnalyzer : DiagnosticAnalyzer
     {
-        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(AddGeneratedComClassAttribute);
+        public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+            ImmutableArray.Create(AddGeneratedComClassAttribute);
 
         public override void Initialize(AnalysisContext context)
         {
@@ -22,37 +23,67 @@ namespace Microsoft.Interop.Analyzers
 
             context.RegisterCompilationStartAction(context =>
             {
-                var generatedComClassAttributeType = context.Compilation.GetBestTypeByMetadataName(TypeNames.GeneratedComClassAttribute);
-                var generatedComInterfaceAttributeType = context.Compilation.GetBestTypeByMetadataName(TypeNames.GeneratedComInterfaceAttribute);
+                var generatedComClassAttributeType = context.Compilation.GetBestTypeByMetadataName(
+                    TypeNames.GeneratedComClassAttribute
+                );
+                var generatedComInterfaceAttributeType =
+                    context.Compilation.GetBestTypeByMetadataName(
+                        TypeNames.GeneratedComInterfaceAttribute
+                    );
 
-                if (generatedComClassAttributeType is null || generatedComInterfaceAttributeType is null)
+                if (
+                    generatedComClassAttributeType is null
+                    || generatedComInterfaceAttributeType is null
+                )
                 {
                     return;
                 }
 
-                context.RegisterSymbolAction(context =>
-                {
-                    INamedTypeSymbol type = (INamedTypeSymbol)context.Symbol;
-                    if (type.GetAttributes().Any(attr => generatedComClassAttributeType.Equals(attr.AttributeClass, SymbolEqualityComparer.Default)))
+                context.RegisterSymbolAction(
+                    context =>
                     {
-                        return;
-                    }
-
-                    // Only direct people to put the GeneratedComClassAttribute on classes.
-                    if (type.TypeKind != TypeKind.Class)
-                    {
-                        return;
-                    }
-
-                    foreach (var iface in type.AllInterfaces)
-                    {
-                        if (iface.GetAttributes().Any(attr => generatedComInterfaceAttributeType.Equals(attr.AttributeClass, SymbolEqualityComparer.Default)))
+                        INamedTypeSymbol type = (INamedTypeSymbol)context.Symbol;
+                        if (
+                            type.GetAttributes()
+                                .Any(attr =>
+                                    generatedComClassAttributeType.Equals(
+                                        attr.AttributeClass,
+                                        SymbolEqualityComparer.Default
+                                    )
+                                )
+                        )
                         {
-                            context.ReportDiagnostic(type.CreateDiagnostic(AddGeneratedComClassAttribute, type.Name));
                             return;
                         }
-                    }
-                }, SymbolKind.NamedType);
+
+                        // Only direct people to put the GeneratedComClassAttribute on classes.
+                        if (type.TypeKind != TypeKind.Class)
+                        {
+                            return;
+                        }
+
+                        foreach (var iface in type.AllInterfaces)
+                        {
+                            if (
+                                iface
+                                    .GetAttributes()
+                                    .Any(attr =>
+                                        generatedComInterfaceAttributeType.Equals(
+                                            attr.AttributeClass,
+                                            SymbolEqualityComparer.Default
+                                        )
+                                    )
+                            )
+                            {
+                                context.ReportDiagnostic(
+                                    type.CreateDiagnostic(AddGeneratedComClassAttribute, type.Name)
+                                );
+                                return;
+                            }
+                        }
+                    },
+                    SymbolKind.NamedType
+                );
             });
         }
     }

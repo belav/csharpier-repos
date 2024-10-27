@@ -17,7 +17,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         {
             if (id < 0)
             {
-                return /*MM*/BadRequest();
+                return /*MM*/
+                BadRequest();
             }
 
             try
@@ -39,9 +40,7 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status409Conflict)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public static void Update(int id, Product product)
-        {
-        }
+        public static void Update(int id, Product product) { }
     }
 
     public class Product

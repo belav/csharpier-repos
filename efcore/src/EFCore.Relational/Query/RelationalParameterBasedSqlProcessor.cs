@@ -24,7 +24,8 @@ public class RelationalParameterBasedSqlProcessor
     /// <param name="useRelationalNulls">A bool value indicating if relational nulls should be used.</param>
     public RelationalParameterBasedSqlProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
+        bool useRelationalNulls
+    )
     {
         Dependencies = dependencies;
         UseRelationalNulls = useRelationalNulls;
@@ -50,13 +51,22 @@ public class RelationalParameterBasedSqlProcessor
     public virtual Expression Optimize(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
+        out bool canCache
+    )
     {
         canCache = true;
-        queryExpression = ProcessSqlNullability(queryExpression, parametersValues, out var sqlNullabilityCanCache);
+        queryExpression = ProcessSqlNullability(
+            queryExpression,
+            parametersValues,
+            out var sqlNullabilityCanCache
+        );
         canCache &= sqlNullabilityCanCache;
 
-        queryExpression = ExpandFromSqlParameter(queryExpression, parametersValues, out var fromSqlParameterCanCache);
+        queryExpression = ExpandFromSqlParameter(
+            queryExpression,
+            parametersValues,
+            out var fromSqlParameterCanCache
+        );
         canCache &= fromSqlParameterCanCache;
 
         return queryExpression;
@@ -73,8 +83,13 @@ public class RelationalParameterBasedSqlProcessor
     protected virtual Expression ProcessSqlNullability(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
-        => new SqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(queryExpression, parametersValues, out canCache);
+        out bool canCache
+    ) =>
+        new SqlNullabilityProcessor(Dependencies, UseRelationalNulls).Process(
+            queryExpression,
+            parametersValues,
+            out canCache
+        );
 
     /// <summary>
     ///     Expands the parameters to <see cref="FromSqlExpression" /> inside the query expression for given parameter values.
@@ -86,6 +101,11 @@ public class RelationalParameterBasedSqlProcessor
     protected virtual Expression ExpandFromSqlParameter(
         Expression queryExpression,
         IReadOnlyDictionary<string, object?> parametersValues,
-        out bool canCache)
-        => new FromSqlParameterExpandingExpressionVisitor(Dependencies).Expand(queryExpression, parametersValues, out canCache);
+        out bool canCache
+    ) =>
+        new FromSqlParameterExpandingExpressionVisitor(Dependencies).Expand(
+            queryExpression,
+            parametersValues,
+            out canCache
+        );
 }

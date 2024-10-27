@@ -16,7 +16,7 @@ public class ProgressEventArgsReaderTest
             LengthComputable = true,
             Loaded = 8,
             Total = 91,
-            Type = "progress1,"
+            Type = "progress1,",
         };
         var jsonElement = GetJsonElement(args);
 

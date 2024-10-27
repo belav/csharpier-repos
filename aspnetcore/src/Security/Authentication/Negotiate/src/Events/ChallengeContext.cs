@@ -18,7 +18,8 @@ public class ChallengeContext : PropertiesContext<NegotiateOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         NegotiateOptions options,
-        AuthenticationProperties properties)
+        AuthenticationProperties properties
+    )
         : base(context, scheme, options, properties) { }
 
     /// <summary>

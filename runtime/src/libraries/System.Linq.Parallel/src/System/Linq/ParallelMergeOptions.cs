@@ -54,6 +54,6 @@ namespace System.Linq
         /// Use a merge with full output buffers. The system will accumulate all of the
         /// results before making any of them available to the consumer of the query.
         /// </summary>
-        FullyBuffered = 3
+        FullyBuffered = 3,
     }
 }

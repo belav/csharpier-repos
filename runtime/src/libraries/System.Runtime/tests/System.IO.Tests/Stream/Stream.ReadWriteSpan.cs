@@ -22,17 +22,21 @@ namespace System.IO.Tests
                     Assert.Equal(0, offset);
                     Assert.Equal(20, count);
 
-                    for (int i = 0; i < 10; i++) array[offset + i] = (byte)i;
+                    for (int i = 0; i < 10; i++)
+                        array[offset + i] = (byte)i;
                     return 10;
-                });
+                }
+            );
 
             Span<byte> totalSpan = new byte[30];
             Span<byte> targetSpan = totalSpan.Slice(5, 20);
 
             Assert.Equal(10, s.Read(targetSpan));
             Assert.True(readInvoked);
-            for (int i = 0; i < 10; i++) Assert.Equal(i, targetSpan[i]);
-            for (int i = 10; i < 20; i++) Assert.Equal(0, targetSpan[i]);
+            for (int i = 0; i < 10; i++)
+                Assert.Equal(i, targetSpan[i]);
+            for (int i = 10; i < 20; i++)
+                Assert.Equal(0, targetSpan[i]);
             readInvoked = false;
         }
 
@@ -49,8 +53,10 @@ namespace System.IO.Tests
                     Assert.Equal(0, offset);
                     Assert.Equal(3, count);
 
-                    for (int i = 0; i < count; i++) Assert.Equal(i, array[offset + i]);
-                });
+                    for (int i = 0; i < count; i++)
+                        Assert.Equal(i, array[offset + i]);
+                }
+            );
 
             Span<byte> span = new byte[10];
             span[3] = 1;
@@ -78,7 +84,8 @@ namespace System.IO.Tests
                         array[offset + i] = (byte)i;
                     }
                     return Task.FromResult(10);
-                });
+                }
+            );
 
             Memory<byte> totalMemory = new byte[30];
             Memory<byte> targetMemory = totalMemory.Slice(5, 20);
@@ -110,7 +117,8 @@ namespace System.IO.Tests
                         array[offset + i] = (byte)i;
                     }
                     return Task.FromResult(10);
-                });
+                }
+            );
 
             using (var totalNativeMemory = new NativeMemoryManager(30))
             {
@@ -142,7 +150,8 @@ namespace System.IO.Tests
                         Assert.Equal(i, array[offset + i]);
 
                     return Task.CompletedTask;
-                });
+                }
+            );
 
             Memory<byte> memory = new byte[10];
             memory.Span[3] = 1;
@@ -169,7 +178,8 @@ namespace System.IO.Tests
                         Assert.Equal(i, array[i]);
 
                     return Task.CompletedTask;
-                });
+                }
+            );
 
             using (var nativeMemory = new NativeMemoryManager(10))
             {

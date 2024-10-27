@@ -2,20 +2,26 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 
-using System.Runtime.InteropServices;
 using System;
+using System.Runtime.InteropServices;
 using Xunit;
 
 public class NullableTest
 {
     private static bool BoxUnboxToNQ(object o)
     {
-        return Helper.Compare((MarshalAsStruct)(ValueType)o, Helper.Create(default(MarshalAsStruct)));
+        return Helper.Compare(
+            (MarshalAsStruct)(ValueType)o,
+            Helper.Create(default(MarshalAsStruct))
+        );
     }
 
     private static bool BoxUnboxToQ(object o)
     {
-        return Helper.Compare((MarshalAsStruct?)(ValueType)o, Helper.Create(default(MarshalAsStruct)));
+        return Helper.Compare(
+            (MarshalAsStruct?)(ValueType)o,
+            Helper.Create(default(MarshalAsStruct))
+        );
     }
 
     [Fact]
@@ -29,5 +35,3 @@ public class NullableTest
             return ExitCode.Failed;
     }
 }
-
-

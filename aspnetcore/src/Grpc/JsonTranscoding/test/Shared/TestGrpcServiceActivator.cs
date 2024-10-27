@@ -5,7 +5,8 @@ using Grpc.AspNetCore.Server;
 
 namespace Grpc.Tests.Shared;
 
-internal class TestGrpcServiceActivator<TGrpcService> : IGrpcServiceActivator<TGrpcService> where TGrpcService : class, new()
+internal class TestGrpcServiceActivator<TGrpcService> : IGrpcServiceActivator<TGrpcService>
+    where TGrpcService : class, new()
 {
     public GrpcActivatorHandle<TGrpcService> Create(IServiceProvider serviceProvider)
     {

@@ -8,8 +8,12 @@ namespace System.Formats.Cbor
 {
     public partial class CborReader
     {
-        public System.Half ReadHalf() { throw null; }
+        public System.Half ReadHalf()
+        {
+            throw null;
+        }
     }
+
     public partial class CborWriter
     {
         public void WriteHalf(System.Half value) { }

@@ -22,7 +22,11 @@ namespace Microsoft.Extensions.DependencyModel
             // Since the JSON is only written to a file that is read by the SDK (and not transmitted over the wire),
             // it is safe to skip escaping certain characters in this scenario
             // (that would otherwise be escaped, by default, as part of defense-in-depth, such as +).
-            var options = new JsonWriterOptions { Indented = true, Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping };
+            var options = new JsonWriterOptions
+            {
+                Indented = true,
+                Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
+            };
             using (var jsonWriter = new Utf8JsonWriter(stream, options))
             {
                 jsonWriter.WriteStartObject();
@@ -38,21 +42,32 @@ namespace Microsoft.Extensions.DependencyModel
             }
         }
 
-        private static void WriteRuntimeTargetInfo(DependencyContext context, Utf8JsonWriter jsonWriter)
+        private static void WriteRuntimeTargetInfo(
+            DependencyContext context,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(DependencyContextStrings.RuntimeTargetPropertyName);
             if (context.Target.IsPortable)
             {
-                jsonWriter.WriteString(DependencyContextStrings.RuntimeTargetNamePropertyName,
-                    context.Target.Framework);
+                jsonWriter.WriteString(
+                    DependencyContextStrings.RuntimeTargetNamePropertyName,
+                    context.Target.Framework
+                );
             }
             else
             {
-                jsonWriter.WriteString(DependencyContextStrings.RuntimeTargetNamePropertyName,
-                    context.Target.Framework + DependencyContextStrings.VersionSeparator + context.Target.Runtime);
+                jsonWriter.WriteString(
+                    DependencyContextStrings.RuntimeTargetNamePropertyName,
+                    context.Target.Framework
+                        + DependencyContextStrings.VersionSeparator
+                        + context.Target.Runtime
+                );
             }
-            jsonWriter.WriteString(DependencyContextStrings.RuntimeTargetSignaturePropertyName,
-                context.Target.RuntimeSignature);
+            jsonWriter.WriteString(
+                DependencyContextStrings.RuntimeTargetSignaturePropertyName,
+                context.Target.RuntimeSignature
+            );
             jsonWriter.WriteEndObject();
         }
 
@@ -71,7 +86,10 @@ namespace Microsoft.Extensions.DependencyModel
             jsonWriter.WriteEndObject();
         }
 
-        private static void WriteCompilationOptions(CompilationOptions compilationOptions, Utf8JsonWriter jsonWriter)
+        private static void WriteCompilationOptions(
+            CompilationOptions compilationOptions,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(DependencyContextStrings.CompilationOptionsPropertyName);
             if (compilationOptions.Defines?.Any() == true)
@@ -83,21 +101,69 @@ namespace Microsoft.Extensions.DependencyModel
                 }
                 jsonWriter.WriteEndArray();
             }
-            AddStringPropertyIfNotNull(DependencyContextStrings.LanguageVersionPropertyName, compilationOptions.LanguageVersion, jsonWriter);
-            AddStringPropertyIfNotNull(DependencyContextStrings.PlatformPropertyName, compilationOptions.Platform, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.AllowUnsafePropertyName, compilationOptions.AllowUnsafe, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.WarningsAsErrorsPropertyName, compilationOptions.WarningsAsErrors, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.OptimizePropertyName, compilationOptions.Optimize, jsonWriter);
-            AddStringPropertyIfNotNull(DependencyContextStrings.KeyFilePropertyName, compilationOptions.KeyFile, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.DelaySignPropertyName, compilationOptions.DelaySign, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.PublicSignPropertyName, compilationOptions.PublicSign, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.EmitEntryPointPropertyName, compilationOptions.EmitEntryPoint, jsonWriter);
-            AddBooleanPropertyIfNotNull(DependencyContextStrings.GenerateXmlDocumentationPropertyName, compilationOptions.GenerateXmlDocumentation, jsonWriter);
-            AddStringPropertyIfNotNull(DependencyContextStrings.DebugTypePropertyName, compilationOptions.DebugType, jsonWriter);
+            AddStringPropertyIfNotNull(
+                DependencyContextStrings.LanguageVersionPropertyName,
+                compilationOptions.LanguageVersion,
+                jsonWriter
+            );
+            AddStringPropertyIfNotNull(
+                DependencyContextStrings.PlatformPropertyName,
+                compilationOptions.Platform,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.AllowUnsafePropertyName,
+                compilationOptions.AllowUnsafe,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.WarningsAsErrorsPropertyName,
+                compilationOptions.WarningsAsErrors,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.OptimizePropertyName,
+                compilationOptions.Optimize,
+                jsonWriter
+            );
+            AddStringPropertyIfNotNull(
+                DependencyContextStrings.KeyFilePropertyName,
+                compilationOptions.KeyFile,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.DelaySignPropertyName,
+                compilationOptions.DelaySign,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.PublicSignPropertyName,
+                compilationOptions.PublicSign,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.EmitEntryPointPropertyName,
+                compilationOptions.EmitEntryPoint,
+                jsonWriter
+            );
+            AddBooleanPropertyIfNotNull(
+                DependencyContextStrings.GenerateXmlDocumentationPropertyName,
+                compilationOptions.GenerateXmlDocumentation,
+                jsonWriter
+            );
+            AddStringPropertyIfNotNull(
+                DependencyContextStrings.DebugTypePropertyName,
+                compilationOptions.DebugType,
+                jsonWriter
+            );
             jsonWriter.WriteEndObject();
         }
 
-        private static void AddStringPropertyIfNotNull(string name, string? value, Utf8JsonWriter jsonWriter)
+        private static void AddStringPropertyIfNotNull(
+            string name,
+            string? value,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (value != null)
             {
@@ -105,7 +171,11 @@ namespace Microsoft.Extensions.DependencyModel
             }
         }
 
-        private static void AddBooleanPropertyIfNotNull(string name, bool? value, Utf8JsonWriter jsonWriter)
+        private static void AddBooleanPropertyIfNotNull(
+            string name,
+            bool? value,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (value.HasValue)
             {
@@ -118,33 +188,58 @@ namespace Microsoft.Extensions.DependencyModel
             jsonWriter.WriteStartObject(DependencyContextStrings.TargetsPropertyName);
             if (context.Target.IsPortable)
             {
-                WritePortableTarget(context.Target.Framework, context.RuntimeLibraries, context.CompileLibraries, jsonWriter);
+                WritePortableTarget(
+                    context.Target.Framework,
+                    context.RuntimeLibraries,
+                    context.CompileLibraries,
+                    jsonWriter
+                );
             }
             else
             {
                 WriteTarget(context.Target.Framework, context.CompileLibraries, jsonWriter);
-                WriteTarget(context.Target.Framework + DependencyContextStrings.VersionSeparator + context.Target.Runtime,
-                    context.RuntimeLibraries, jsonWriter);
+                WriteTarget(
+                    context.Target.Framework
+                        + DependencyContextStrings.VersionSeparator
+                        + context.Target.Runtime,
+                    context.RuntimeLibraries,
+                    jsonWriter
+                );
             }
             jsonWriter.WriteEndObject();
         }
 
-        private static void WriteTarget(string key, IReadOnlyList<Library> libraries, Utf8JsonWriter jsonWriter)
+        private static void WriteTarget(
+            string key,
+            IReadOnlyList<Library> libraries,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(key);
             int count = libraries.Count;
             for (int i = 0; i < count; i++)
             {
                 Library library = libraries[i];
-                WriteTargetLibrary(library.Name + DependencyContextStrings.VersionSeparator + library.Version, library, jsonWriter);
+                WriteTargetLibrary(
+                    library.Name + DependencyContextStrings.VersionSeparator + library.Version,
+                    library,
+                    jsonWriter
+                );
             }
             jsonWriter.WriteEndObject();
         }
 
-        private static void WritePortableTarget(string key, IReadOnlyList<RuntimeLibrary> runtimeLibraries, IReadOnlyList<CompilationLibrary> compilationLibraries, Utf8JsonWriter jsonWriter)
+        private static void WritePortableTarget(
+            string key,
+            IReadOnlyList<RuntimeLibrary> runtimeLibraries,
+            IReadOnlyList<CompilationLibrary> compilationLibraries,
+            Utf8JsonWriter jsonWriter
+        )
         {
-            Dictionary<string, RuntimeLibrary> runtimeLookup = runtimeLibraries.LibraryCollectionToDictionary();
-            Dictionary<string, CompilationLibrary> compileLookup = compilationLibraries.LibraryCollectionToDictionary();
+            Dictionary<string, RuntimeLibrary> runtimeLookup =
+                runtimeLibraries.LibraryCollectionToDictionary();
+            Dictionary<string, CompilationLibrary> compileLookup =
+                compilationLibraries.LibraryCollectionToDictionary();
 
             jsonWriter.WriteStartObject(key);
 
@@ -167,23 +262,38 @@ namespace Microsoft.Extensions.DependencyModel
 
                 Library library = (Library?)compilationLibrary ?? (Library)runtimeLibrary!;
 
-                WritePortableTargetLibrary(library.Name + DependencyContextStrings.VersionSeparator + library.Version,
-                    runtimeLibrary, compilationLibrary, jsonWriter);
+                WritePortableTargetLibrary(
+                    library.Name + DependencyContextStrings.VersionSeparator + library.Version,
+                    runtimeLibrary,
+                    compilationLibrary,
+                    jsonWriter
+                );
             }
             jsonWriter.WriteEndObject();
         }
 
-        private static void AddCompilationAssemblies(IEnumerable<string> compilationAssemblies, Utf8JsonWriter jsonWriter)
+        private static void AddCompilationAssemblies(
+            IEnumerable<string> compilationAssemblies,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (!compilationAssemblies.Any())
             {
                 return;
             }
 
-            WriteAssetList(DependencyContextStrings.CompileTimeAssembliesKey, compilationAssemblies, jsonWriter);
+            WriteAssetList(
+                DependencyContextStrings.CompileTimeAssembliesKey,
+                compilationAssemblies,
+                jsonWriter
+            );
         }
 
-        private static void AddAssets(string key, RuntimeAssetGroup? group, Utf8JsonWriter jsonWriter)
+        private static void AddAssets(
+            string key,
+            RuntimeAssetGroup? group,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (group == null || !group.RuntimeFiles.Any())
             {
@@ -193,7 +303,10 @@ namespace Microsoft.Extensions.DependencyModel
             WriteAssetList(key, group.RuntimeFiles, jsonWriter);
         }
 
-        private static void AddDependencies(IReadOnlyCollection<Dependency> dependencies, Utf8JsonWriter jsonWriter)
+        private static void AddDependencies(
+            IReadOnlyCollection<Dependency> dependencies,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (dependencies.Count == 0)
             {
@@ -208,7 +321,10 @@ namespace Microsoft.Extensions.DependencyModel
             jsonWriter.WriteEndObject();
         }
 
-        private static void AddResourceAssemblies(IReadOnlyList<ResourceAssembly> resourceAssemblies, Utf8JsonWriter jsonWriter)
+        private static void AddResourceAssemblies(
+            IReadOnlyList<ResourceAssembly> resourceAssemblies,
+            Utf8JsonWriter jsonWriter
+        )
         {
             int count = resourceAssemblies.Count;
             if (count == 0)
@@ -221,13 +337,20 @@ namespace Microsoft.Extensions.DependencyModel
             {
                 ResourceAssembly resourceAssembly = resourceAssemblies[i];
                 jsonWriter.WriteStartObject(NormalizePath(resourceAssembly.Path));
-                jsonWriter.WriteString(DependencyContextStrings.LocalePropertyName, resourceAssembly.Locale);
+                jsonWriter.WriteString(
+                    DependencyContextStrings.LocalePropertyName,
+                    resourceAssembly.Locale
+                );
                 jsonWriter.WriteEndObject();
             }
             jsonWriter.WriteEndObject();
         }
 
-        private static void WriteTargetLibrary(string key, Library library, Utf8JsonWriter jsonWriter)
+        private static void WriteTargetLibrary(
+            string key,
+            Library library,
+            Utf8JsonWriter jsonWriter
+        )
         {
             if (library is RuntimeLibrary runtimeLibrary)
             {
@@ -236,8 +359,16 @@ namespace Microsoft.Extensions.DependencyModel
                 AddDependencies(runtimeLibrary.Dependencies, jsonWriter);
 
                 // Add runtime-agnostic assets
-                AddAssets(DependencyContextStrings.RuntimeAssembliesKey, runtimeLibrary.RuntimeAssemblyGroups.GetDefaultGroup(), jsonWriter);
-                AddAssets(DependencyContextStrings.NativeLibrariesKey, runtimeLibrary.NativeLibraryGroups.GetDefaultGroup(), jsonWriter);
+                AddAssets(
+                    DependencyContextStrings.RuntimeAssembliesKey,
+                    runtimeLibrary.RuntimeAssemblyGroups.GetDefaultGroup(),
+                    jsonWriter
+                );
+                AddAssets(
+                    DependencyContextStrings.NativeLibrariesKey,
+                    runtimeLibrary.NativeLibraryGroups.GetDefaultGroup(),
+                    jsonWriter
+                );
                 AddResourceAssemblies(runtimeLibrary.ResourceAssemblies, jsonWriter);
 
                 jsonWriter.WriteEndObject();
@@ -255,7 +386,12 @@ namespace Microsoft.Extensions.DependencyModel
             }
         }
 
-        private static void WritePortableTargetLibrary(string key, RuntimeLibrary? runtimeLibrary, CompilationLibrary? compilationLibrary, Utf8JsonWriter jsonWriter)
+        private static void WritePortableTargetLibrary(
+            string key,
+            RuntimeLibrary? runtimeLibrary,
+            CompilationLibrary? compilationLibrary,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(key);
 
@@ -271,18 +407,35 @@ namespace Microsoft.Extensions.DependencyModel
             }
             AddDependencies(dependencies, jsonWriter);
 
-
             if (runtimeLibrary != null)
             {
                 // Add runtime-agnostic assets
-                AddAssets(DependencyContextStrings.RuntimeAssembliesKey, runtimeLibrary.RuntimeAssemblyGroups.GetDefaultGroup(), jsonWriter);
-                AddAssets(DependencyContextStrings.NativeLibrariesKey, runtimeLibrary.NativeLibraryGroups.GetDefaultGroup(), jsonWriter);
+                AddAssets(
+                    DependencyContextStrings.RuntimeAssembliesKey,
+                    runtimeLibrary.RuntimeAssemblyGroups.GetDefaultGroup(),
+                    jsonWriter
+                );
+                AddAssets(
+                    DependencyContextStrings.NativeLibrariesKey,
+                    runtimeLibrary.NativeLibraryGroups.GetDefaultGroup(),
+                    jsonWriter
+                );
                 AddResourceAssemblies(runtimeLibrary.ResourceAssemblies, jsonWriter);
 
                 // Add runtime-specific assets
                 bool wroteObjectStart = false;
-                wroteObjectStart = AddRuntimeSpecificAssetGroups(DependencyContextStrings.RuntimeAssetType, runtimeLibrary.RuntimeAssemblyGroups, wroteObjectStart, jsonWriter);
-                wroteObjectStart = AddRuntimeSpecificAssetGroups(DependencyContextStrings.NativeAssetType, runtimeLibrary.NativeLibraryGroups, wroteObjectStart, jsonWriter);
+                wroteObjectStart = AddRuntimeSpecificAssetGroups(
+                    DependencyContextStrings.RuntimeAssetType,
+                    runtimeLibrary.RuntimeAssemblyGroups,
+                    wroteObjectStart,
+                    jsonWriter
+                );
+                wroteObjectStart = AddRuntimeSpecificAssetGroups(
+                    DependencyContextStrings.NativeAssetType,
+                    runtimeLibrary.NativeLibraryGroups,
+                    wroteObjectStart,
+                    jsonWriter
+                );
 
                 if (wroteObjectStart)
                 {
@@ -303,15 +456,24 @@ namespace Microsoft.Extensions.DependencyModel
             jsonWriter.WriteEndObject();
         }
 
-        private static bool AddRuntimeSpecificAssetGroups(string assetType, IEnumerable<RuntimeAssetGroup> assetGroups, bool wroteObjectStart, Utf8JsonWriter jsonWriter)
+        private static bool AddRuntimeSpecificAssetGroups(
+            string assetType,
+            IEnumerable<RuntimeAssetGroup> assetGroups,
+            bool wroteObjectStart,
+            Utf8JsonWriter jsonWriter
+        )
         {
-            using IEnumerator<RuntimeAssetGroup> groups = assetGroups.Where(g => !string.IsNullOrEmpty(g.Runtime)).GetEnumerator();
+            using IEnumerator<RuntimeAssetGroup> groups = assetGroups
+                .Where(g => !string.IsNullOrEmpty(g.Runtime))
+                .GetEnumerator();
 
             if (groups.MoveNext())
             {
                 if (!wroteObjectStart)
                 {
-                    jsonWriter.WriteStartObject(DependencyContextStrings.RuntimeTargetsPropertyName);
+                    jsonWriter.WriteStartObject(
+                        DependencyContextStrings.RuntimeTargetsPropertyName
+                    );
                     wroteObjectStart = true;
                 }
 
@@ -321,30 +483,48 @@ namespace Microsoft.Extensions.DependencyModel
 
                     if (group.RuntimeFiles.Count != 0)
                     {
-                        AddRuntimeSpecificAssets(group.RuntimeFiles, group.Runtime, assetType, jsonWriter);
+                        AddRuntimeSpecificAssets(
+                            group.RuntimeFiles,
+                            group.Runtime,
+                            assetType,
+                            jsonWriter
+                        );
                     }
                     else
                     {
                         // Add a placeholder item
                         // We need to generate a pseudo-path because there could be multiple different asset groups with placeholders
                         // Only the last path segment matters, the rest is basically just a GUID.
-                        string pseudoPathFolder = assetType == DependencyContextStrings.RuntimeAssetType ?
-                            "lib" :
-                            "native";
+                        string pseudoPathFolder =
+                            assetType == DependencyContextStrings.RuntimeAssetType
+                                ? "lib"
+                                : "native";
 
-                        jsonWriter.WriteStartObject($"runtime/{group.Runtime}/{pseudoPathFolder}/_._");
-                        jsonWriter.WriteString(DependencyContextStrings.RidPropertyName, group.Runtime);
-                        jsonWriter.WriteString(DependencyContextStrings.AssetTypePropertyName, assetType);
+                        jsonWriter.WriteStartObject(
+                            $"runtime/{group.Runtime}/{pseudoPathFolder}/_._"
+                        );
+                        jsonWriter.WriteString(
+                            DependencyContextStrings.RidPropertyName,
+                            group.Runtime
+                        );
+                        jsonWriter.WriteString(
+                            DependencyContextStrings.AssetTypePropertyName,
+                            assetType
+                        );
                         jsonWriter.WriteEndObject();
                     }
-                }
-                while (groups.MoveNext());
+                } while (groups.MoveNext());
             }
 
             return wroteObjectStart;
         }
 
-        private static void AddRuntimeSpecificAssets(IEnumerable<RuntimeFile> assets, string? runtime, string? assetType, Utf8JsonWriter jsonWriter)
+        private static void AddRuntimeSpecificAssets(
+            IEnumerable<RuntimeFile> assets,
+            string? runtime,
+            string? assetType,
+            Utf8JsonWriter jsonWriter
+        )
         {
             foreach (RuntimeFile asset in assets)
             {
@@ -355,19 +535,29 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (asset.AssemblyVersion != null)
                 {
-                    jsonWriter.WriteString(DependencyContextStrings.AssemblyVersionPropertyName, asset.AssemblyVersion);
+                    jsonWriter.WriteString(
+                        DependencyContextStrings.AssemblyVersionPropertyName,
+                        asset.AssemblyVersion
+                    );
                 }
 
                 if (asset.FileVersion != null)
                 {
-                    jsonWriter.WriteString(DependencyContextStrings.FileVersionPropertyName, asset.FileVersion);
+                    jsonWriter.WriteString(
+                        DependencyContextStrings.FileVersionPropertyName,
+                        asset.FileVersion
+                    );
                 }
 
                 jsonWriter.WriteEndObject();
             }
         }
 
-        private static void WriteAssetList(string key, IEnumerable<string> assetPaths, Utf8JsonWriter jsonWriter)
+        private static void WriteAssetList(
+            string key,
+            IEnumerable<string> assetPaths,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(key);
             foreach (string assembly in assetPaths)
@@ -378,7 +568,11 @@ namespace Microsoft.Extensions.DependencyModel
             jsonWriter.WriteEndObject();
         }
 
-        private static void WriteAssetList(string key, IEnumerable<RuntimeFile> runtimeFiles, Utf8JsonWriter jsonWriter)
+        private static void WriteAssetList(
+            string key,
+            IEnumerable<RuntimeFile> runtimeFiles,
+            Utf8JsonWriter jsonWriter
+        )
         {
             jsonWriter.WriteStartObject(key);
 
@@ -388,12 +582,18 @@ namespace Microsoft.Extensions.DependencyModel
 
                 if (runtimeFile.AssemblyVersion != null)
                 {
-                    jsonWriter.WriteString(DependencyContextStrings.AssemblyVersionPropertyName, runtimeFile.AssemblyVersion);
+                    jsonWriter.WriteString(
+                        DependencyContextStrings.AssemblyVersionPropertyName,
+                        runtimeFile.AssemblyVersion
+                    );
                 }
 
                 if (runtimeFile.FileVersion != null)
                 {
-                    jsonWriter.WriteString(DependencyContextStrings.FileVersionPropertyName, runtimeFile.FileVersion);
+                    jsonWriter.WriteString(
+                        DependencyContextStrings.FileVersionPropertyName,
+                        runtimeFile.FileVersion
+                    );
                 }
 
                 jsonWriter.WriteEndObject();
@@ -404,9 +604,12 @@ namespace Microsoft.Extensions.DependencyModel
 
         private static void WriteLibraries(DependencyContext context, Utf8JsonWriter jsonWriter)
         {
-            IEnumerable<IGrouping<string, Library>> allLibraries =
-                context.RuntimeLibraries.Cast<Library>().Concat(context.CompileLibraries)
-                    .GroupBy(library => library.Name + DependencyContextStrings.VersionSeparator + library.Version);
+            IEnumerable<IGrouping<string, Library>> allLibraries = context
+                .RuntimeLibraries.Cast<Library>()
+                .Concat(context.CompileLibraries)
+                .GroupBy(library =>
+                    library.Name + DependencyContextStrings.VersionSeparator + library.Version
+                );
 
             jsonWriter.WriteStartObject(DependencyContextStrings.LibrariesPropertyName);
             foreach (IGrouping<string, Library> libraryGroup in allLibraries)
@@ -420,7 +623,10 @@ namespace Microsoft.Extensions.DependencyModel
         {
             jsonWriter.WriteStartObject(key);
             jsonWriter.WriteString(DependencyContextStrings.TypePropertyName, library.Type);
-            jsonWriter.WriteBoolean(DependencyContextStrings.ServiceablePropertyName, library.Serviceable);
+            jsonWriter.WriteBoolean(
+                DependencyContextStrings.ServiceablePropertyName,
+                library.Serviceable
+            );
             jsonWriter.WriteString(DependencyContextStrings.Sha512PropertyName, library.Hash);
 
             if (library.Path != null)
@@ -430,12 +636,18 @@ namespace Microsoft.Extensions.DependencyModel
 
             if (library.HashPath != null)
             {
-                jsonWriter.WriteString(DependencyContextStrings.HashPathPropertyName, library.HashPath);
+                jsonWriter.WriteString(
+                    DependencyContextStrings.HashPathPropertyName,
+                    library.HashPath
+                );
             }
 
             if (library.RuntimeStoreManifestName != null)
             {
-                jsonWriter.WriteString(DependencyContextStrings.RuntimeStoreManifestPropertyName, library.RuntimeStoreManifestName);
+                jsonWriter.WriteString(
+                    DependencyContextStrings.RuntimeStoreManifestPropertyName,
+                    library.RuntimeStoreManifestName
+                );
             }
 
             jsonWriter.WriteEndObject();

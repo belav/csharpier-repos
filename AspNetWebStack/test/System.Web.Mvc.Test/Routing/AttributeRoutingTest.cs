@@ -18,41 +18,181 @@ namespace System.Web.Routing
 
         [Theory]
         [InlineData(typeof(DerivedController), "~/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedController), "~/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedController), "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedController), "~/DerivedMethodWithRoute", "DerivedMethodWithRoute")]
-        [InlineData(typeof(DerivedController), "~/BaseVirtualMethodToBeOverridenWithRoute_Derived", "BaseVirtualMethodToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedController), "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived", "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedController), "~/BaseMethodWithRouteWithName", "BaseMethodWithRouteWithName")]
-        [InlineData(typeof(DerivedPrefixController), "~/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedPrefixController), "~/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedPrefixController), "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedPrefixController), "~/derived/DerivedMethodWithRoute", "DerivedMethodWithRoute")]
-        [InlineData(typeof(DerivedPrefixController), "~/derived/BaseVirtualMethodToBeOverridenWithRoute_Derived", "BaseVirtualMethodToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedPrefixController), "~/derived/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived", "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/base/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/base/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/base/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/DerivedMethodWithRoute", "DerivedMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/BaseVirtualMethodToBeOverridenWithRoute_Derived", "BaseVirtualMethodToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedFromBasePrefixController), "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived", "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/base/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/base/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/base/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/derived/DerivedMethodWithRoute", "DerivedMethodWithRoute")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/derived/BaseVirtualMethodToBeOverridenWithRoute_Derived", "BaseVirtualMethodToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/derived/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived", "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/base/BaseVirtualMethodToBeOverridenWithRoute", "BaseVirtualMethodToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/DerivedMethodWithRoute", "DerivedMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteController), "~/BaseVirtualMethodToBeOverridenWithRoute_Derived", "BaseVirtualMethodToBeOverridenWithRoute_Derived")]
-        [InlineData(typeof(DerivedFromBaseRouteWithRouteController), "~/derivedwithroute/BaseMethodWithRoute", "BaseMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteWithRouteController), "~/derivedwithroute/BaseVirtualMethodToBeOverridenWithRoute", "BaseVirtualMethodToBeOverridenWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteWithRouteController), "~/derivedwithroute/BaseVirtualMethodWithRoute", "BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedFromBaseRouteWithRouteController), "~/derivedwithroute/BaseVirtualMethodWithRouteToBeOverridenWithRoute", "BaseVirtualMethodWithRouteToBeOverridenWithRoute")]
-        public void AttributeRouting_WithInheritance_MethodOverrides(Type derivedController, string path, string expectedAction)
+        [InlineData(
+            typeof(DerivedController),
+            "~/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedController),
+            "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedController),
+            "~/DerivedMethodWithRoute",
+            "DerivedMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedController),
+            "~/BaseVirtualMethodToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedController),
+            "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedController),
+            "~/BaseMethodWithRouteWithName",
+            "BaseMethodWithRouteWithName"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/BaseMethodWithRoute",
+            "BaseMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/derived/DerivedMethodWithRoute",
+            "DerivedMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/derived/BaseVirtualMethodToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedPrefixController),
+            "~/derived/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/base/BaseMethodWithRoute",
+            "BaseMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/base/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/base/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/DerivedMethodWithRoute",
+            "DerivedMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/BaseVirtualMethodToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedFromBasePrefixController),
+            "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/base/BaseMethodWithRoute",
+            "BaseMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/base/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/base/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/derived/DerivedMethodWithRoute",
+            "DerivedMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/derived/BaseVirtualMethodToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/derived/BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/BaseMethodWithRoute",
+            "BaseMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/base/BaseVirtualMethodToBeOverridenWithRoute",
+            "BaseVirtualMethodToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/DerivedMethodWithRoute",
+            "DerivedMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteController),
+            "~/BaseVirtualMethodToBeOverridenWithRoute_Derived",
+            "BaseVirtualMethodToBeOverridenWithRoute_Derived"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteWithRouteController),
+            "~/derivedwithroute/BaseMethodWithRoute",
+            "BaseMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteWithRouteController),
+            "~/derivedwithroute/BaseVirtualMethodToBeOverridenWithRoute",
+            "BaseVirtualMethodToBeOverridenWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteWithRouteController),
+            "~/derivedwithroute/BaseVirtualMethodWithRoute",
+            "BaseVirtualMethodWithRoute"
+        )]
+        [InlineData(
+            typeof(DerivedFromBaseRouteWithRouteController),
+            "~/derivedwithroute/BaseVirtualMethodWithRouteToBeOverridenWithRoute",
+            "BaseVirtualMethodWithRouteToBeOverridenWithRoute"
+        )]
+        public void AttributeRouting_WithInheritance_MethodOverrides(
+            Type derivedController,
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[] { derivedController, derivedController.BaseType };
@@ -77,8 +217,14 @@ namespace System.Web.Routing
         [InlineData(typeof(DerivedController), "~/BaseMethodWithRouteTypo")]
         [InlineData(typeof(DerivedController), "~/derived/BaseMethodWithRoute")]
         [InlineData(typeof(DerivedPrefixController), "~/derived/BaseVirtualMethodWithRoute")]
-        [InlineData(typeof(DerivedWithPrefixFromBasePrefixController), "~/derived/BaseVirtualMethodWithRoute")]
-        public void AttributeRouting_WithInheritance_InvalidPaths(Type derivedController, string path)
+        [InlineData(
+            typeof(DerivedWithPrefixFromBasePrefixController),
+            "~/derived/BaseVirtualMethodWithRoute"
+        )]
+        public void AttributeRouting_WithInheritance_InvalidPaths(
+            Type derivedController,
+            string path
+        )
         {
             // Arrange
             var controllerTypes = new[] { derivedController, derivedController.BaseType };
@@ -96,7 +242,11 @@ namespace System.Web.Routing
         [Theory]
         [InlineData(typeof(MethodOverloadsController), "~/Get1", "Get1")]
         [InlineData(typeof(MethodOverloadsController), "~/Get2?id=42", "Get2_42")]
-        public void AttributeRouting_MethodOverloads_WithDifferentActionNames(Type controllerType, string path, string expectedAction)
+        public void AttributeRouting_MethodOverloads_WithDifferentActionNames(
+            Type controllerType,
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[] { controllerType };
@@ -119,7 +269,10 @@ namespace System.Web.Routing
 
         [Theory]
         [InlineData(typeof(MethodOverloadsController), "~/GetAmbiguous?id=42")]
-        public void AttributeRouting_AmbiguousActions_ThrowsAmbiguousException(Type controllerType, string path)
+        public void AttributeRouting_AmbiguousActions_ThrowsAmbiguousException(
+            Type controllerType,
+            string path
+        )
         {
             // Arrange
             var controllerTypes = new[] { controllerType };
@@ -137,21 +290,44 @@ namespace System.Web.Routing
 
         [Theory]
         [InlineData(typeof(MixedRoutingController), "~/GetWithRoute", "GetWithRoute")]
-        [InlineData(typeof(MixedRoutingController), "~/standard/GetWithoutRoute", "GetWithoutRoute")]
+        [InlineData(
+            typeof(MixedRoutingController),
+            "~/standard/GetWithoutRoute",
+            "GetWithoutRoute"
+        )]
         [InlineData(typeof(MixedRoutingController), "~/standard/GetWithRoute", null)]
-        [InlineData(typeof(MixedRoutingWithPrefixController), "~/prefix/GetWithRoute", "GetWithRoute")]
-        [InlineData(typeof(MixedRoutingWithPrefixController), "~/standard/GetWithoutRoute", "GetWithoutRoute")]
+        [InlineData(
+            typeof(MixedRoutingWithPrefixController),
+            "~/prefix/GetWithRoute",
+            "GetWithRoute"
+        )]
+        [InlineData(
+            typeof(MixedRoutingWithPrefixController),
+            "~/standard/GetWithoutRoute",
+            "GetWithoutRoute"
+        )]
         [InlineData(typeof(MixedRoutingWithPrefixController), "~/standard/GetWithRoute", null)]
         [InlineData(typeof(MixedRoutingWithRouteonController), "~/GetWithRoute", "GetWithRoute")]
-        [InlineData(typeof(MixedRoutingWithRouteonController), "~/GetWithoutRoute", "GetWithoutRoute")]
+        [InlineData(
+            typeof(MixedRoutingWithRouteonController),
+            "~/GetWithoutRoute",
+            "GetWithoutRoute"
+        )]
         [InlineData(typeof(MixedRoutingWithRouteonController), "~/standard/GetWithoutRoute", null)]
         [InlineData(typeof(MixedRoutingWithRouteonController), "~/standard/GetWithRoute", null)]
-        public void AttributeRouting_MixedWithGeneralRouting(Type controllerType, string path, string expectedAction)
+        public void AttributeRouting_MixedWithGeneralRouting(
+            Type controllerType,
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[] { controllerType };
             var routes = new RouteCollection();
-            object defaults = new { controller = controllerType.Name.Substring(0, controllerType.Name.Length - 10) };
+            object defaults = new
+            {
+                controller = controllerType.Name.Substring(0, controllerType.Name.Length - 10),
+            };
             routes.Add(new Route("standard/{action}", new RouteValueDictionary(defaults), null));
             AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes);
 
@@ -180,7 +356,11 @@ namespace System.Web.Routing
         [Theory]
         [InlineData(typeof(ActionMethodSelectorsController), "~/Action1", "Action1(int)")]
         [InlineData(typeof(ActionMethodSelectorsController), "~/DoesntRun", null)]
-        public void AttributeRouting_WithActionMethodSelectors(Type controllerType, string path, string expectedAction)
+        public void AttributeRouting_WithActionMethodSelectors(
+            Type controllerType,
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[] { controllerType };
@@ -212,7 +392,11 @@ namespace System.Web.Routing
         [Theory]
         [InlineData(typeof(ActionNameSelectorsController), "~/SpecialName", "Action2()")]
         [InlineData(typeof(ActionNameSelectorsController), "~/AnotherSpecialName", "Action3()")]
-        public void AttributeRouting_WithActionNameSelectors(Type controllerType, string path, string expectedAction)
+        public void AttributeRouting_WithActionNameSelectors(
+            Type controllerType,
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[] { controllerType };
@@ -300,7 +484,10 @@ namespace System.Web.Routing
         [InlineData("~/NS1Home/Introduction", "Home.Index()")]
         [InlineData("~/NS2Account/PeopleList", "Account.Index()")]
         [InlineData("~/Default/Unknown", "Default.Index()")]
-        public void AttributeRouting_WithCustomizedRoutePrefixAttribute(string path, string expectedAction)
+        public void AttributeRouting_WithCustomizedRoutePrefixAttribute(
+            string path,
+            string expectedAction
+        )
         {
             // Arrange
             var controllerTypes = new[]
@@ -333,14 +520,16 @@ namespace System.Web.Routing
             // Arrange
             var controllerTypes = new[]
             {
-                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController)
+                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController),
             };
 
             var routes = new RouteCollection();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes),
-                "Only one route prefix attribute is supported. Remove extra attributes from the controller of type 'System.Web.Routing.ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController'.");
+            Assert.Throws<InvalidOperationException>(
+                () => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes),
+                "Only one route prefix attribute is supported. Remove extra attributes from the controller of type 'System.Web.Routing.ControllersWithCustomizedRoutePrefixAttribute.Invalid.HomeController'."
+            );
         }
 
         [Fact]
@@ -349,14 +538,16 @@ namespace System.Web.Routing
             // Arrange
             var controllerTypes = new[]
             {
-                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController)
+                typeof(ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController),
             };
 
             var routes = new RouteCollection();
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes),
-                "The property 'prefix' from route prefix attribute on controller of type 'System.Web.Routing.ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController' cannot be null.");
+            Assert.Throws<InvalidOperationException>(
+                () => AttributeRoutingMapper.MapAttributeRoutes(routes, controllerTypes),
+                "The property 'prefix' from route prefix attribute on controller of type 'System.Web.Routing.ControllersWithCustomizedRoutePrefixAttribute.Invalid.AccountController' cannot be null."
+            );
         }
 
         private IControllerFactory GetControllerFactory(Type[] controllerTypes)
@@ -364,7 +555,7 @@ namespace System.Web.Routing
             return new DefaultControllerFactory
             {
                 BuildManager = new MockBuildManager(controllerTypes),
-                ControllerTypeCache = new ControllerTypeCache()
+                ControllerTypeCache = new ControllerTypeCache(),
             };
         }
 
@@ -374,7 +565,8 @@ namespace System.Web.Routing
 
             NameValueCollection queryString = HttpUtility.ParseQueryString(uri.Query);
 
-            Mock<UnvalidatedRequestValuesBase> unvalidatedRequest = new Mock<UnvalidatedRequestValuesBase>();
+            Mock<UnvalidatedRequestValuesBase> unvalidatedRequest =
+                new Mock<UnvalidatedRequestValuesBase>();
             unvalidatedRequest.Setup(u => u.Form).Returns(new NameValueCollection());
             unvalidatedRequest.Setup(u => u.QueryString).Returns(queryString);
 
@@ -383,12 +575,18 @@ namespace System.Web.Routing
             requestMock.Setup(request => request.Url).Returns(uri);
             requestMock.Setup(request => request.HttpMethod).Returns("GET");
             requestMock.Setup(request => request.Form).Returns(new NameValueCollection());
-            requestMock.Setup(request => request.ServerVariables).Returns(new NameValueCollection());
-            requestMock.Setup(request => request.AppRelativeCurrentExecutionFilePath).Returns("~" + uri.AbsolutePath);
+            requestMock
+                .Setup(request => request.ServerVariables)
+                .Returns(new NameValueCollection());
+            requestMock
+                .Setup(request => request.AppRelativeCurrentExecutionFilePath)
+                .Returns("~" + uri.AbsolutePath);
             requestMock.Setup(request => request.Unvalidated).Returns(unvalidatedRequest.Object);
             requestMock.Setup(request => request.ContentType).Returns("");
             requestMock.Setup(request => request.QueryString).Returns(queryString);
-            requestMock.Setup(request => request.Files).Returns(new Mock<HttpFileCollectionBase>().Object);
+            requestMock
+                .Setup(request => request.Files)
+                .Returns(new Mock<HttpFileCollectionBase>().Object);
 
             // mock HttpResponse
             Mock<HttpResponseBase> responseBase = new Mock<HttpResponseBase>();
@@ -465,7 +663,8 @@ namespace System.Web.Routing
 
         protected override void OnActionExecuted(ActionExecutedContext filterContext)
         {
-            filterContext.RequestContext.HttpContext.Items[AttributeRoutingTest.ResultKey] = filterContext.Result;
+            filterContext.RequestContext.HttpContext.Items[AttributeRoutingTest.ResultKey] =
+                filterContext.Result;
         }
     }
 
@@ -690,9 +889,7 @@ namespace System.Web.Routing
     }
 
     [Route("derivedwithroute/{action}")]
-    public class DerivedFromBaseRouteWithRouteController : BaseRouteController
-    {
-    }
+    public class DerivedFromBaseRouteWithRouteController : BaseRouteController { }
 
     #endregion
 
@@ -799,13 +996,12 @@ namespace System.Web.Routing
             Value = value;
         }
 
-        private bool Value
-        {
-            get;
-            set;
-        }
+        private bool Value { get; set; }
 
-        public override bool IsValidForRequest(ControllerContext controllerContext, MethodInfo methodInfo)
+        public override bool IsValidForRequest(
+            ControllerContext controllerContext,
+            MethodInfo methodInfo
+        )
         {
             return Value;
         }
@@ -846,13 +1042,13 @@ namespace System.Web.Routing
             ActionName = actionName;
         }
 
-        private string ActionName
-        {
-            get;
-            set;
-        }
+        private string ActionName { get; set; }
 
-        public override bool IsValidName(ControllerContext controllerContext, string actionName, MethodInfo methodInfo)
+        public override bool IsValidName(
+            ControllerContext controllerContext,
+            string actionName,
+            MethodInfo methodInfo
+        )
         {
             return String.Equals(actionName, ActionName, StringComparison.OrdinalIgnoreCase);
         }
@@ -904,11 +1100,19 @@ namespace System.Web.Routing
                 throw Error.ArgumentNull("prefix");
             }
 
-            if (controller.Equals(typeof(ControllersWithCustomizedRoutePrefixAttribute.NS1.HomeController)))
+            if (
+                controller.Equals(
+                    typeof(ControllersWithCustomizedRoutePrefixAttribute.NS1.HomeController)
+                )
+            )
             {
                 Prefix = "NS1Home";
             }
-            else if (controller.Equals(typeof(ControllersWithCustomizedRoutePrefixAttribute.NS2.AccountController)))
+            else if (
+                controller.Equals(
+                    typeof(ControllersWithCustomizedRoutePrefixAttribute.NS2.AccountController)
+                )
+            )
             {
                 Prefix = "NS2Account";
             }
@@ -921,9 +1125,7 @@ namespace System.Web.Routing
         public string Prefix { get; private set; }
     }
 
-    public class ExtendedRoutePrefixAttribute : RoutePrefixAttribute
-    {
-    }
+    public class ExtendedRoutePrefixAttribute : RoutePrefixAttribute { }
 
     namespace ControllersWithCustomizedRoutePrefixAttribute
     {

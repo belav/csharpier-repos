@@ -39,22 +39,24 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
             return false;
         }
 
-        foreach (var navigation in entityType
-                     .GetNavigations()
-                     .Concat<INavigationBase>(entityType.GetSkipNavigations())
-                     .Where(n => n.IsCollection))
+        foreach (
+            var navigation in entityType
+                .GetNavigations()
+                .Concat<INavigationBase>(entityType.GetSkipNavigations())
+                .Where(n => n.IsCollection)
+        )
         {
             SubscribeCollectionChanged(entry, navigation);
         }
 
         if (changeTrackingStrategy != ChangeTrackingStrategy.ChangedNotifications)
         {
-            AsINotifyPropertyChanging(entry, entityType, changeTrackingStrategy).PropertyChanging
-                += entry.HandleINotifyPropertyChanging;
+            AsINotifyPropertyChanging(entry, entityType, changeTrackingStrategy).PropertyChanging +=
+                entry.HandleINotifyPropertyChanging;
         }
 
-        AsINotifyPropertyChanged(entry, entityType, changeTrackingStrategy).PropertyChanged
-            += entry.HandleINotifyPropertyChanged;
+        AsINotifyPropertyChanged(entry, entityType, changeTrackingStrategy).PropertyChanged +=
+            entry.HandleINotifyPropertyChanged;
 
         return true;
     }
@@ -65,9 +67,16 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void SubscribeCollectionChanged(InternalEntityEntry entry, INavigationBase navigation)
-        => AsINotifyCollectionChanged(entry, navigation, entry.EntityType, entry.EntityType.GetChangeTrackingStrategy()).CollectionChanged
-            += entry.HandleINotifyCollectionChanged;
+    public virtual void SubscribeCollectionChanged(
+        InternalEntityEntry entry,
+        INavigationBase navigation
+    ) =>
+        AsINotifyCollectionChanged(
+            entry,
+            navigation,
+            entry.EntityType,
+            entry.EntityType.GetChangeTrackingStrategy()
+        ).CollectionChanged += entry.HandleINotifyCollectionChanged;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -82,21 +91,27 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
 
         if (changeTrackingStrategy != ChangeTrackingStrategy.Snapshot)
         {
-            foreach (var navigation in entityType.GetNavigations()
-                         .Concat<INavigationBase>(entityType.GetSkipNavigations())
-                         .Where(n => n.IsCollection))
+            foreach (
+                var navigation in entityType
+                    .GetNavigations()
+                    .Concat<INavigationBase>(entityType.GetSkipNavigations())
+                    .Where(n => n.IsCollection)
+            )
             {
                 UnsubscribeCollectionChanged(entry, navigation);
             }
 
             if (changeTrackingStrategy != ChangeTrackingStrategy.ChangedNotifications)
             {
-                AsINotifyPropertyChanging(entry, entityType, changeTrackingStrategy).PropertyChanging
-                    -= entry.HandleINotifyPropertyChanging;
+                AsINotifyPropertyChanging(
+                    entry,
+                    entityType,
+                    changeTrackingStrategy
+                ).PropertyChanging -= entry.HandleINotifyPropertyChanging;
             }
 
-            AsINotifyPropertyChanged(entry, entityType, changeTrackingStrategy).PropertyChanged
-                -= entry.HandleINotifyPropertyChanged;
+            AsINotifyPropertyChanged(entry, entityType, changeTrackingStrategy).PropertyChanged -=
+                entry.HandleINotifyPropertyChanged;
         }
     }
 
@@ -108,22 +123,34 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
     /// </summary>
     public virtual void UnsubscribeCollectionChanged(
         InternalEntityEntry entry,
-        INavigationBase navigation)
-        => AsINotifyCollectionChanged(entry, navigation, entry.EntityType, entry.EntityType.GetChangeTrackingStrategy()).CollectionChanged
-            -= entry.HandleINotifyCollectionChanged;
+        INavigationBase navigation
+    ) =>
+        AsINotifyCollectionChanged(
+            entry,
+            navigation,
+            entry.EntityType,
+            entry.EntityType.GetChangeTrackingStrategy()
+        ).CollectionChanged -= entry.HandleINotifyCollectionChanged;
 
     private static INotifyCollectionChanged AsINotifyCollectionChanged(
         InternalEntityEntry entry,
         INavigationBase navigation,
         IEntityType entityType,
-        ChangeTrackingStrategy changeTrackingStrategy)
+        ChangeTrackingStrategy changeTrackingStrategy
+    )
     {
         var collection = entry.GetOrCreateCollection(navigation, forMaterialization: false);
         if (collection is not INotifyCollectionChanged notifyingCollection)
         {
             var collectionType = collection.GetType().DisplayName(fullName: false);
             throw new InvalidOperationException(
-                CoreStrings.NonNotifyingCollection(navigation.Name, entityType.DisplayName(), collectionType, changeTrackingStrategy));
+                CoreStrings.NonNotifyingCollection(
+                    navigation.Name,
+                    entityType.DisplayName(),
+                    collectionType,
+                    changeTrackingStrategy
+                )
+            );
         }
 
         return notifyingCollection;
@@ -132,13 +159,18 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
     private static INotifyPropertyChanged AsINotifyPropertyChanged(
         InternalEntityEntry entry,
         IEntityType entityType,
-        ChangeTrackingStrategy changeTrackingStrategy)
+        ChangeTrackingStrategy changeTrackingStrategy
+    )
     {
         if (entry.Entity is not INotifyPropertyChanged changed)
         {
             throw new InvalidOperationException(
                 CoreStrings.ChangeTrackingInterfaceMissing(
-                    entityType.DisplayName(), changeTrackingStrategy, nameof(INotifyPropertyChanged)));
+                    entityType.DisplayName(),
+                    changeTrackingStrategy,
+                    nameof(INotifyPropertyChanged)
+                )
+            );
         }
 
         return changed;
@@ -147,13 +179,18 @@ public class InternalEntityEntrySubscriber : IInternalEntityEntrySubscriber
     private static INotifyPropertyChanging AsINotifyPropertyChanging(
         InternalEntityEntry entry,
         IEntityType entityType,
-        ChangeTrackingStrategy changeTrackingStrategy)
+        ChangeTrackingStrategy changeTrackingStrategy
+    )
     {
         if (entry.Entity is not INotifyPropertyChanging changing)
         {
             throw new InvalidOperationException(
                 CoreStrings.ChangeTrackingInterfaceMissing(
-                    entityType.DisplayName(), changeTrackingStrategy, nameof(INotifyPropertyChanging)));
+                    entityType.DisplayName(),
+                    changeTrackingStrategy,
+                    nameof(INotifyPropertyChanging)
+                )
+            );
         }
 
         return changing;

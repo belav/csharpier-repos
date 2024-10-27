@@ -17,17 +17,19 @@ namespace System.ServiceModel.Activities.Description
             this.WorkflowDefinitionProvider = workflowDefinitionProvider;
         }
 
-        public WorkflowDefinitionProvider WorkflowDefinitionProvider
-        {
-            get;
-            private set;
-        }
+        public WorkflowDefinitionProvider WorkflowDefinitionProvider { get; private set; }
 
-        public void AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints, System.ServiceModel.Channels.BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            System.Collections.ObjectModel.Collection<ServiceEndpoint> endpoints,
+            System.ServiceModel.Channels.BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
+        public void ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        )
         {
             if (serviceDescription == null)
             {
@@ -39,16 +41,21 @@ namespace System.ServiceModel.Activities.Description
                 throw FxTrace.Exception.ArgumentNull("serviceHostBase");
             }
 
-            DurableInstanceContextProvider instanceContextProvider = new DurableInstanceContextProvider(serviceHostBase);
+            DurableInstanceContextProvider instanceContextProvider =
+                new DurableInstanceContextProvider(serviceHostBase);
             DurableInstanceProvider instanceProvider = new DurableInstanceProvider(serviceHostBase);
 
-            ServiceDebugBehavior serviceDebugBehavior = serviceDescription.Behaviors.Find<ServiceDebugBehavior>();
+            ServiceDebugBehavior serviceDebugBehavior =
+                serviceDescription.Behaviors.Find<ServiceDebugBehavior>();
 
-            bool includeExceptionDetailInFaults = serviceDebugBehavior != null ?
-                serviceDebugBehavior.IncludeExceptionDetailInFaults
-                : false;
+            bool includeExceptionDetailInFaults =
+                serviceDebugBehavior != null
+                    ? serviceDebugBehavior.IncludeExceptionDetailInFaults
+                    : false;
 
-            foreach (ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers)
+            foreach (
+                ChannelDispatcherBase channelDispatcherBase in serviceHostBase.ChannelDispatchers
+            )
             {
                 ChannelDispatcher channelDispatcher = channelDispatcherBase as ChannelDispatcher;
 
@@ -68,7 +75,9 @@ namespace System.ServiceModel.Activities.Description
 
                             if (includeExceptionDetailInFaults)
                             {
-                                dispatchRuntime.SetDebugFlagInDispatchOperations(includeExceptionDetailInFaults);
+                                dispatchRuntime.SetDebugFlagInDispatchOperations(
+                                    includeExceptionDetailInFaults
+                                );
                             }
                         }
                     }
@@ -86,7 +95,7 @@ namespace System.ServiceModel.Activities.Description
             if (serviceHostBase == null)
             {
                 throw FxTrace.Exception.ArgumentNull("serviceHostBase");
-            }            
+            }
         }
 
         internal static bool IsWorkflowEndpoint(EndpointDispatcher endpointDispatcher)
@@ -109,7 +118,10 @@ namespace System.ServiceModel.Activities.Description
                 if (serviceEndpoint != null)
                 {
                     //User defined Std Endpoint with WorkflowContractBehaviorAttribute.
-                    return serviceEndpoint is WorkflowHostingEndpoint || serviceEndpoint.Contract.Behaviors.Contains(typeof(WorkflowContractBehaviorAttribute));
+                    return serviceEndpoint is WorkflowHostingEndpoint
+                        || serviceEndpoint.Contract.Behaviors.Contains(
+                            typeof(WorkflowContractBehaviorAttribute)
+                        );
                 }
                 return false; //Some Einstein scenario where EndpointDispatcher is added explicitly without associated ServiceEndpoint.
             }

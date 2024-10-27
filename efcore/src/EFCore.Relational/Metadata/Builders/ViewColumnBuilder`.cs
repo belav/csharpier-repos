@@ -7,7 +7,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Builders;
 ///     Instances of this class are returned from methods when using the <see cref="ModelBuilder" /> API
 ///     and it is not designed to be directly constructed in your application code.
 /// </summary>
-public class ViewColumnBuilder<TProperty> : ViewColumnBuilder, IInfrastructure<PropertyBuilder<TProperty>>
+public class ViewColumnBuilder<TProperty>
+    : ViewColumnBuilder,
+        IInfrastructure<PropertyBuilder<TProperty>>
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -16,13 +18,14 @@ public class ViewColumnBuilder<TProperty> : ViewColumnBuilder, IInfrastructure<P
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public ViewColumnBuilder(in StoreObjectIdentifier storeObject, PropertyBuilder<TProperty> propertyBuilder)
-        : base(storeObject, propertyBuilder)
-    {
-    }
+    public ViewColumnBuilder(
+        in StoreObjectIdentifier storeObject,
+        PropertyBuilder<TProperty> propertyBuilder
+    )
+        : base(storeObject, propertyBuilder) { }
 
-    private PropertyBuilder<TProperty> PropertyBuilder
-        => (PropertyBuilder<TProperty>)((IInfrastructure<PropertyBuilder>)this).Instance;
+    private PropertyBuilder<TProperty> PropertyBuilder =>
+        (PropertyBuilder<TProperty>)((IInfrastructure<PropertyBuilder>)this).Instance;
 
     /// <summary>
     ///     Configures the column that the property maps to when targeting a relational database.
@@ -32,8 +35,8 @@ public class ViewColumnBuilder<TProperty> : ViewColumnBuilder, IInfrastructure<P
     /// </remarks>
     /// <param name="name">The name of the column.</param>
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
-    public new virtual ViewColumnBuilder<TProperty> HasColumnName(string? name)
-        => (ViewColumnBuilder<TProperty>)base.HasColumnName(name);
+    public new virtual ViewColumnBuilder<TProperty> HasColumnName(string? name) =>
+        (ViewColumnBuilder<TProperty>)base.HasColumnName(name);
 
     /// <summary>
     ///     Adds or updates an annotation on the property for a specific view.
@@ -43,9 +46,11 @@ public class ViewColumnBuilder<TProperty> : ViewColumnBuilder, IInfrastructure<P
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual ViewColumnBuilder<TProperty> HasAnnotation(string annotation, object? value)
-        => (ViewColumnBuilder<TProperty>)base.HasAnnotation(annotation, value);
+    public new virtual ViewColumnBuilder<TProperty> HasAnnotation(
+        string annotation,
+        object? value
+    ) => (ViewColumnBuilder<TProperty>)base.HasAnnotation(annotation, value);
 
-    PropertyBuilder<TProperty> IInfrastructure<PropertyBuilder<TProperty>>.Instance
-        => PropertyBuilder;
+    PropertyBuilder<TProperty> IInfrastructure<PropertyBuilder<TProperty>>.Instance =>
+        PropertyBuilder;
 }

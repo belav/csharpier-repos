@@ -6,27 +6,45 @@ namespace System.Activities.Expressions
 {
     using System.Activities.Validation;
     using System.Collections.Generic;
-    using System.Linq.Expressions;
-    using System.Runtime;
     using System.Collections.ObjectModel;
+    using System.Linq.Expressions;
     using System.Reflection;
+    using System.Runtime;
 
     static class IndexerHelper
     {
-        public static void OnGetArguments<TItem>(Collection<InArgument> indices, OutArgument<Location<TItem>> result, CodeActivityMetadata metadata)
+        public static void OnGetArguments<TItem>(
+            Collection<InArgument> indices,
+            OutArgument<Location<TItem>> result,
+            CodeActivityMetadata metadata
+        )
         {
             for (int i = 0; i < indices.Count; i++)
             {
-                RuntimeArgument indexArgument = new RuntimeArgument("Index" + i, indices[i].ArgumentType, ArgumentDirection.In, true);
+                RuntimeArgument indexArgument = new RuntimeArgument(
+                    "Index" + i,
+                    indices[i].ArgumentType,
+                    ArgumentDirection.In,
+                    true
+                );
                 metadata.Bind(indices[i], indexArgument);
                 metadata.AddArgument(indexArgument);
             }
 
-            RuntimeArgument resultArgument = new RuntimeArgument("Result", typeof(Location<TItem>), ArgumentDirection.Out);
+            RuntimeArgument resultArgument = new RuntimeArgument(
+                "Result",
+                typeof(Location<TItem>),
+                ArgumentDirection.Out
+            );
             metadata.Bind(result, resultArgument);
             metadata.AddArgument(resultArgument);
         }
-        public static void CacheMethod<TOperand, TItem>(Collection<InArgument> indices, ref MethodInfo getMethod, ref MethodInfo setMethod)
+
+        public static void CacheMethod<TOperand, TItem>(
+            Collection<InArgument> indices,
+            ref MethodInfo getMethod,
+            ref MethodInfo setMethod
+        )
         {
             Type[] getTypes = new Type[indices.Count];
             for (int i = 0; i < indices.Count; i++)
@@ -52,7 +70,5 @@ namespace System.Activities.Expressions
                 setMethod = null;
             }
         }
-
     }
-
 }

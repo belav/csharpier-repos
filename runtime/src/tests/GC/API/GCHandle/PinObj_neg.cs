@@ -32,7 +32,6 @@ public class Test_PinObj_neg
             return 2;
         }
 
-
         Console.WriteLine("Test failed!");
         return 1;
     }

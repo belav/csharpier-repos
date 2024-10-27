@@ -17,7 +17,7 @@ namespace System.Net.Http.Functional.Tests
             _content = Encoding.UTF8.GetBytes(content);
         }
 
-        public ChannelBinding ChannelBinding { get ; private set; }
+        public ChannelBinding ChannelBinding { get; private set; }
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
@@ -33,7 +33,9 @@ namespace System.Net.Http.Functional.Tests
 
         protected override Task<Stream> CreateContentReadStreamAsync()
         {
-            return Task.FromResult<Stream>(new MemoryStream(_content, 0, _content.Length, writable: false));
+            return Task.FromResult<Stream>(
+                new MemoryStream(_content, 0, _content.Length, writable: false)
+            );
         }
     }
 }

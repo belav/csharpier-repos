@@ -8,6 +8,9 @@ internal static partial class Interop
     internal static partial class Crypt32
     {
         [LibraryImport(Libraries.Crypt32, SetLastError = true)]
-        internal static partial int CertGetPublicKeyLength(MsgEncodingType dwCertEncodingType, ref CERT_PUBLIC_KEY_INFO pPublicKey);
+        internal static partial int CertGetPublicKeyLength(
+            MsgEncodingType dwCertEncodingType,
+            ref CERT_PUBLIC_KEY_INFO pPublicKey
+        );
     }
 }

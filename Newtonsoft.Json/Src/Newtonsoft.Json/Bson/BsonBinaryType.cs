@@ -41,6 +41,6 @@ namespace Newtonsoft.Json.Bson
         UuidOld = 0x03,
         Uuid = 0x04,
         Md5 = 0x05,
-        UserDefined = 0x80
+        UserDefined = 0x80,
     }
 }

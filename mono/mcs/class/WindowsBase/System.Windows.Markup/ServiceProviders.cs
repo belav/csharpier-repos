@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,26 +26,25 @@
 using System;
 using System.ComponentModel;
 
-namespace System.Windows.Markup {
+namespace System.Windows.Markup
+{
+    [EditorBrowsable(EditorBrowsableState.Never)]
+    [Browsable(false)]
+    public class ServiceProviders : IServiceProvider
+    {
+        public ServiceProviders()
+        {
+            throw new NotImplementedException();
+        }
 
-	[EditorBrowsable (EditorBrowsableState.Never)]
-	[Browsable (false)]
-	public class ServiceProviders : IServiceProvider
-	{
-		public ServiceProviders ()
-		{
-			throw new NotImplementedException ();
-		}
+        public void AddService(Type serviceType, object service)
+        {
+            throw new NotImplementedException();
+        }
 
-		public void AddService (Type serviceType, object service)
-		{
-			throw new NotImplementedException ();
-		}
-
-		public object GetService (Type serviceType)
-		{
-			throw new NotImplementedException ();
-		}
-	}
-
+        public object GetService(Type serviceType)
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

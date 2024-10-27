@@ -4,16 +4,16 @@
 
 #nullable disable
 
+using System;
+using Microsoft.CodeAnalysis.Editor.UnitTests.Formating;
+using Microsoft.CodeAnalysis.Formatting;
 using Microsoft.CodeAnalysis.Host;
+using Microsoft.CodeAnalysis.Indentation;
+using Microsoft.CodeAnalysis.Options;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Microsoft.CodeAnalysis.Text;
-using Xunit;
-using System;
-using Microsoft.CodeAnalysis.Options;
-using Microsoft.CodeAnalysis.Formatting;
-using Microsoft.CodeAnalysis.Indentation;
-using Microsoft.CodeAnalysis.Editor.UnitTests.Formating;
 using Roslyn.Test.Utilities;
+using Xunit;
 
 namespace Microsoft.CodeAnalysis.UnitTests
 {
@@ -29,8 +29,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var changedDoc = originalDoc.WithText(SourceText.From("new"));
 
-            Assert.Equal(WorkspacesResources.Changing_documents_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(changedDoc.Project.Solution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_documents_is_not_supported,
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
@@ -45,8 +51,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changedDoc = originalDoc.WithName(newName);
             Assert.Equal(newName, changedDoc.Name);
 
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(changedDoc.Project.Solution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
@@ -63,8 +75,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             Assert.Equal("A", changedDoc.Folders[0]);
             Assert.Equal("B", changedDoc.Folders[1]);
 
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(changedDoc.Project.Solution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
@@ -80,8 +98,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changedDoc = originalDoc.WithFilePath(newPath);
             Assert.Equal(newPath, changedDoc.FilePath);
 
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(changedDoc.Project.Solution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
@@ -96,8 +120,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var changedDoc = originalDoc.WithSourceCodeKind(SourceCodeKind.Script);
             Assert.Equal(SourceCodeKind.Script, changedDoc.SourceCodeKind);
 
-            Assert.Equal(WorkspacesResources.Changing_document_property_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(changedDoc.Project.Solution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Changing_document_property_is_not_supported,
+                Assert
+                    .Throws<NotSupportedException>(
+                        () => ws.TryApplyChanges(changedDoc.Project.Solution)
+                    )
+                    .Message
+            );
         }
 
         [Fact]
@@ -106,30 +136,35 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var ws = new NoChangesAllowedWorkspace();
             var projectId = ws.AddProject("TestProject", LanguageNames.CSharp).Id;
 
-            var newSolution = ws.CurrentSolution.WithAnalyzerReferences(new[] { new TestAnalyzerReference() });
+            var newSolution = ws.CurrentSolution.WithAnalyzerReferences(
+                new[] { new TestAnalyzerReference() }
+            );
 
-            Assert.Equal(WorkspacesResources.Adding_analyzer_references_is_not_supported,
-                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(newSolution)).Message);
+            Assert.Equal(
+                WorkspacesResources.Adding_analyzer_references_is_not_supported,
+                Assert.Throws<NotSupportedException>(() => ws.TryApplyChanges(newSolution)).Message
+            );
         }
 
         private class NoChangesAllowedWorkspace : Workspace
         {
             public NoChangesAllowedWorkspace(HostServices services, string workspaceKind = "Custom")
-                : base(services, workspaceKind)
-            {
-            }
+                : base(services, workspaceKind) { }
 
             public NoChangesAllowedWorkspace()
-                : this(Host.Mef.MefHostServices.DefaultHost)
-            {
-            }
+                : this(Host.Mef.MefHostServices.DefaultHost) { }
 
-            public override bool CanApplyChange(ApplyChangesKind feature)
-                => false;
+            public override bool CanApplyChange(ApplyChangesKind feature) => false;
 
             public Project AddProject(string name, string language)
             {
-                var info = ProjectInfo.Create(ProjectId.CreateNewId(), VersionStamp.Create(), name, name, language);
+                var info = ProjectInfo.Create(
+                    ProjectId.CreateNewId(),
+                    VersionStamp.Create(),
+                    name,
+                    name,
+                    language
+                );
                 return this.AddProject(info);
             }
 
@@ -192,7 +227,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             using var workspace1 = new AdhocWorkspace();
             var solution = workspace1.CurrentSolution;
 
-            var newOptions = OptionsTestHelpers.GetOptionSetWithChangedOptions(solution.Options, OptionsTestHelpers.AllPublicOptionsWithNonDefaultValues);
+            var newOptions = OptionsTestHelpers.GetOptionSetWithChangedOptions(
+                solution.Options,
+                OptionsTestHelpers.AllPublicOptionsWithNonDefaultValues
+            );
 
             // Sets options to global options that are shared among all workspaces:
             workspace1.Options = newOptions;
@@ -202,7 +240,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
             {
                 foreach (var language in OptionsTestHelpers.GetApplicableLanguages(option))
                 {
-                    Assert.Equal(value, workspace2.Options.GetOption(new OptionKey(option, language)));
+                    Assert.Equal(
+                        value,
+                        workspace2.Options.GetOption(new OptionKey(option, language))
+                    );
                 }
             }
         }

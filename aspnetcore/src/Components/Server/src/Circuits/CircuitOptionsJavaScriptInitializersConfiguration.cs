@@ -7,7 +7,8 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Components.Server.Circuits;
 
-internal sealed class CircuitOptionsJavaScriptInitializersConfiguration : IConfigureOptions<CircuitOptions>
+internal sealed class CircuitOptionsJavaScriptInitializersConfiguration
+    : IConfigureOptions<CircuitOptions>
 {
     private readonly IWebHostEnvironment _environment;
 
@@ -18,7 +19,9 @@ internal sealed class CircuitOptionsJavaScriptInitializersConfiguration : IConfi
 
     public void Configure(CircuitOptions options)
     {
-        var file = _environment.WebRootFileProvider.GetFileInfo($"{_environment.ApplicationName}.modules.json");
+        var file = _environment.WebRootFileProvider.GetFileInfo(
+            $"{_environment.ApplicationName}.modules.json"
+        );
         if (file.Exists)
         {
             var initializers = JsonSerializer.Deserialize<string[]>(file.CreateReadStream());

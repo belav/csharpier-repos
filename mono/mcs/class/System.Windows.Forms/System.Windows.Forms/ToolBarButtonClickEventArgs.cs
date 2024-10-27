@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,24 +34,25 @@ using System;
 
 namespace System.Windows.Forms
 {
-	public class ToolBarButtonClickEventArgs : EventArgs
-	{
-		#region Local Variables
-		private ToolBarButton button;
-		#endregion
+    public class ToolBarButtonClickEventArgs : EventArgs
+    {
+        #region Local Variables
+        private ToolBarButton button;
+        #endregion
 
-		#region Public Constructors
-		public ToolBarButtonClickEventArgs (ToolBarButton button)
-		{
-			this.button = button;
-		}
-		#endregion Public Constructors
+        #region Public Constructors
+        public ToolBarButtonClickEventArgs(ToolBarButton button)
+        {
+            this.button = button;
+        }
+        #endregion Public Constructors
 
-		#region Public Instance Properties
-		public ToolBarButton Button {
-			get { return button; }
-			set { button = value; }
-		}
-		#endregion Instance Properties
-	}
+        #region Public Instance Properties
+        public ToolBarButton Button
+        {
+            get { return button; }
+            set { button = value; }
+        }
+        #endregion Instance Properties
+    }
 }

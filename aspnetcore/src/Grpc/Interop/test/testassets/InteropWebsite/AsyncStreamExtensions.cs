@@ -26,7 +26,10 @@ internal static class AsyncStreamExtensions
     /// <summary>
     /// Reads the entire stream and executes an async action for each element.
     /// </summary>
-    public static async Task ForEachAsync<T>(this IAsyncStreamReader<T> streamReader, Func<T, Task> asyncAction)
+    public static async Task ForEachAsync<T>(
+        this IAsyncStreamReader<T> streamReader,
+        Func<T, Task> asyncAction
+    )
         where T : class
     {
         while (await streamReader.MoveNext().ConfigureAwait(false))

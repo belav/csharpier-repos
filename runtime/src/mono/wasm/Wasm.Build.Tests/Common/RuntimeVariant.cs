@@ -5,4 +5,9 @@
 #nullable enable
 
 namespace Wasm.Build.Tests;
-public enum RuntimeVariant { SingleThreaded, MultiThreaded };
+
+public enum RuntimeVariant
+{
+    SingleThreaded,
+    MultiThreaded,
+};

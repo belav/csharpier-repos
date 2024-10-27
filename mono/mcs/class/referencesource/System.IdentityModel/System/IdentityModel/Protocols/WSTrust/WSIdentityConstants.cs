@@ -7,7 +7,7 @@
 namespace System.IdentityModel.Protocols.WSTrust
 {
     using System;
-  
+
     /// <summary>
     /// Defines the Identity Constants.
     /// </summary>
@@ -16,7 +16,7 @@ namespace System.IdentityModel.Protocols.WSTrust
 #pragma warning disable 1591
         public const string Namespace = "http://schemas.xmlsoap.org/ws/2005/05/identity";
         public const string Prefix = "i";
-        public const string Dialect   = Namespace;
+        public const string Dialect = Namespace;
 
         public static class Attributes
         {
@@ -30,4 +30,4 @@ namespace System.IdentityModel.Protocols.WSTrust
         }
 #pragma warning restore 1591
     }
-} 
+}

@@ -45,10 +45,11 @@ public class Email : DefaultUIPage
 
     internal async Task<Email> SendUpdateEmailAsync(string newEmail)
     {
-        var response = await Client.SendAsync(_changeEmailForm, _changeEmailButton, new Dictionary<string, string>
-        {
-            ["Input_NewEmail"] = newEmail
-        });
+        var response = await Client.SendAsync(
+            _changeEmailForm,
+            _changeEmailButton,
+            new Dictionary<string, string> { ["Input_NewEmail"] = newEmail }
+        );
         var goToManage = ResponseAssert.IsRedirect(response);
         var manageResponse = await Client.GetAsync(goToManage);
         var manage = await ResponseAssert.IsHtmlDocumentAsync(manageResponse);

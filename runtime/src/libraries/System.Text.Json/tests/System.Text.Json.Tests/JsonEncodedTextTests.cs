@@ -17,7 +17,10 @@ namespace System.Text.Json.Tests
             for (int i = 0; i <= 127; i++)
             {
                 JsonEncodedText textBuiltin = JsonEncodedText.Encode(((char)i).ToString());
-                JsonEncodedText textEncoder = JsonEncodedText.Encode(((char)i).ToString(), JavaScriptEncoder.Default);
+                JsonEncodedText textEncoder = JsonEncodedText.Encode(
+                    ((char)i).ToString(),
+                    JavaScriptEncoder.Default
+                );
 
                 Assert.Equal(textEncoder, textBuiltin);
             }
@@ -68,7 +71,10 @@ namespace System.Text.Json.Tests
         {
             JsonEncodedText text = JsonEncodedText.Encode(message, null);
             JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan(), null);
-            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message), null);
+            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                Encoding.UTF8.GetBytes(message),
+                null
+            );
 
             Assert.Equal(expectedMessage, text.Value);
             Assert.Equal(expectedMessage, textSpan.Value);
@@ -85,10 +91,15 @@ namespace System.Text.Json.Tests
         public static void CustomEncoder(string message, string expectedMessage)
         {
             // Latin-1 Supplement block starts from U+0080 and ends at U+00FF
-            JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRange.Create((char)0x0080, (char)0x00FF));
+            JavaScriptEncoder encoder = JavaScriptEncoder.Create(
+                UnicodeRange.Create((char)0x0080, (char)0x00FF)
+            );
             JsonEncodedText text = JsonEncodedText.Encode(message, encoder);
             JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan(), encoder);
-            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message), encoder);
+            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                Encoding.UTF8.GetBytes(message),
+                encoder
+            );
 
             Assert.Equal(expectedMessage, text.Value);
             Assert.Equal(expectedMessage, textSpan.Value);
@@ -107,7 +118,10 @@ namespace System.Text.Json.Tests
             JavaScriptEncoder encoder = JavaScriptEncoder.Create(UnicodeRange.Create(' ', '}'));
             JsonEncodedText text = JsonEncodedText.Encode(message, encoder);
             JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan(), encoder);
-            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message), encoder);
+            JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                Encoding.UTF8.GetBytes(message),
+                encoder
+            );
 
             Assert.Equal(expectedMessage, text.Value);
             Assert.Equal(expectedMessage, textSpan.Value);
@@ -127,7 +141,9 @@ namespace System.Text.Json.Tests
             JsonEncodedText text = JsonEncodedText.Encode(message);
             JsonEncodedText textCopy = text;
             JsonEncodedText textDuplicate = JsonEncodedText.Encode(message);
-            JsonEncodedText textDuplicateDiffStringRef = JsonEncodedText.Encode(string.Concat("mess", "age"));
+            JsonEncodedText textDuplicateDiffStringRef = JsonEncodedText.Encode(
+                string.Concat("mess", "age")
+            );
             JsonEncodedText differentText = JsonEncodedText.Encode("message1");
 
             Assert.True(text.Equals(text));
@@ -153,7 +169,9 @@ namespace System.Text.Json.Tests
             JsonEncodedText text = JsonEncodedText.Encode(message);
             object textCopy = text;
             object textDuplicate = JsonEncodedText.Encode(message);
-            object textDuplicateDiffStringRef = JsonEncodedText.Encode(string.Concat("mess", "age"));
+            object textDuplicateDiffStringRef = JsonEncodedText.Encode(
+                string.Concat("mess", "age")
+            );
             object differentText = JsonEncodedText.Encode("message1");
 
             Assert.True(text.Equals(text));
@@ -181,7 +199,9 @@ namespace System.Text.Json.Tests
             JsonEncodedText text = JsonEncodedText.Encode(message);
             JsonEncodedText textCopy = text;
             JsonEncodedText textDuplicate = JsonEncodedText.Encode(message);
-            JsonEncodedText textDuplicateDiffStringRef = JsonEncodedText.Encode(string.Concat("mess", "age"));
+            JsonEncodedText textDuplicateDiffStringRef = JsonEncodedText.Encode(
+                string.Concat("mess", "age")
+            );
             JsonEncodedText differentText = JsonEncodedText.Encode("message1");
 
             int expectedHashCode = text.GetHashCode();
@@ -223,7 +243,9 @@ namespace System.Text.Json.Tests
 
                 JsonEncodedText text = JsonEncodedText.Encode(message);
                 JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan());
-                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message));
+                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                    Encoding.UTF8.GetBytes(message)
+                );
 
                 Assert.Equal(expectedMessage, text.ToString());
                 Assert.Equal(expectedMessage, textSpan.ToString());
@@ -245,7 +267,9 @@ namespace System.Text.Json.Tests
 
                 JsonEncodedText text = JsonEncodedText.Encode(message);
                 JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan());
-                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message));
+                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                    Encoding.UTF8.GetBytes(message)
+                );
 
                 Assert.Equal(expectedMessage, text.ToString());
                 Assert.Equal(expectedMessage, textSpan.ToString());
@@ -290,7 +314,9 @@ namespace System.Text.Json.Tests
 
                 JsonEncodedText text = JsonEncodedText.Encode(message);
                 JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan());
-                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message));
+                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                    Encoding.UTF8.GetBytes(message)
+                );
 
                 Assert.True(text.EncodedUtf8Bytes.SequenceEqual(expectedBytes));
                 Assert.True(textSpan.EncodedUtf8Bytes.SequenceEqual(expectedBytes));
@@ -312,7 +338,9 @@ namespace System.Text.Json.Tests
 
                 JsonEncodedText text = JsonEncodedText.Encode(message);
                 JsonEncodedText textSpan = JsonEncodedText.Encode(message.AsSpan());
-                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(Encoding.UTF8.GetBytes(message));
+                JsonEncodedText textUtf8Span = JsonEncodedText.Encode(
+                    Encoding.UTF8.GetBytes(message)
+                );
 
                 Assert.True(text.EncodedUtf8Bytes.SequenceEqual(expectedBytes));
                 Assert.True(textSpan.EncodedUtf8Bytes.SequenceEqual(expectedBytes));
@@ -394,7 +422,9 @@ namespace System.Text.Json.Tests
             var valid = new char[5] { 'a', 'b', 'c', (char)0xD800, (char)0xDC00 };
             JsonEncodedText _ = JsonEncodedText.Encode(valid);
 
-            Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(new string(valid).Substring(0, 4)));
+            Assert.Throws<ArgumentException>(
+                () => JsonEncodedText.Encode(new string(valid).Substring(0, 4))
+            );
         }
 
         [Theory]
@@ -422,7 +452,9 @@ namespace System.Text.Json.Tests
                 utf8Value.AsSpan().Fill((byte)'a');
 
                 Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(largeValueString));
-                Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(largeValueString.AsSpan()));
+                Assert.Throws<ArgumentException>(
+                    () => JsonEncodedText.Encode(largeValueString.AsSpan())
+                );
                 Assert.Throws<ArgumentException>(() => JsonEncodedText.Encode(utf8Value));
             }
             catch (OutOfMemoryException)
@@ -437,13 +469,41 @@ namespace System.Text.Json.Tests
             {
                 return new List<object[]>
                 {
-                    new object[] { new byte[] { 34, 97, 0xc3, 0x28, 98, 34 }, "\\u0022a\\uFFFD(b\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xa0, 0xa1, 98, 34 }, "\\u0022a\\uFFFD\\uFFFDb\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xe2, 0x28, 0xa1, 98, 34 }, "\\u0022a\\uFFFD(\\uFFFDb\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xe2, 0x82, 0x28, 98, 34 }, "\\u0022a\\uFFFD(b\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xf0, 0x28, 0x8c, 0xbc, 98, 34 }, "\\u0022a\\uFFFD(\\uFFFD\\uFFFDb\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xf0, 0x90, 0x28, 0xbc, 98, 34 }, "\\u0022a\\uFFFD(\\uFFFDb\\u0022" },
-                    new object[] { new byte[] { 34, 97, 0xf0, 0x28, 0x8c, 0x28, 98, 34 }, "\\u0022a\\uFFFD(\\uFFFD(b\\u0022" },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xc3, 0x28, 98, 34 },
+                        "\\u0022a\\uFFFD(b\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xa0, 0xa1, 98, 34 },
+                        "\\u0022a\\uFFFD\\uFFFDb\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xe2, 0x28, 0xa1, 98, 34 },
+                        "\\u0022a\\uFFFD(\\uFFFDb\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xe2, 0x82, 0x28, 98, 34 },
+                        "\\u0022a\\uFFFD(b\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xf0, 0x28, 0x8c, 0xbc, 98, 34 },
+                        "\\u0022a\\uFFFD(\\uFFFD\\uFFFDb\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xf0, 0x90, 0x28, 0xbc, 98, 34 },
+                        "\\u0022a\\uFFFD(\\uFFFDb\\u0022",
+                    },
+                    new object[]
+                    {
+                        new byte[] { 34, 97, 0xf0, 0x28, 0x8c, 0x28, 98, 34 },
+                        "\\u0022a\\uFFFD(\\uFFFD(b\\u0022",
+                    },
                 };
             }
         }
@@ -454,13 +514,21 @@ namespace System.Text.Json.Tests
             {
                 return new List<object[]>
                 {
-                    new object[] {"", "" },
+                    new object[] { "", "" },
                     new object[] { "message", "message" },
                     new object[] { "mess\"age", "mess\\u0022age" },
                     new object[] { "mess\\u0022age", "mess\\\\u0022age" },
                     new object[] { ">>>>>", "\\u003E\\u003E\\u003E\\u003E\\u003E" },
-                    new object[] { "\\u003e\\u003e\\u003e\\u003e\\u003e", "\\\\u003e\\\\u003e\\\\u003e\\\\u003e\\\\u003e" },
-                    new object[] { "\\u003E\\u003E\\u003E\\u003E\\u003E", "\\\\u003E\\\\u003E\\\\u003E\\\\u003E\\\\u003E" },
+                    new object[]
+                    {
+                        "\\u003e\\u003e\\u003e\\u003e\\u003e",
+                        "\\\\u003e\\\\u003e\\\\u003e\\\\u003e\\\\u003e",
+                    },
+                    new object[]
+                    {
+                        "\\u003E\\u003E\\u003E\\u003E\\u003E",
+                        "\\\\u003E\\\\u003E\\\\u003E\\\\u003E\\\\u003E",
+                    },
                 };
             }
         }
@@ -471,14 +539,38 @@ namespace System.Text.Json.Tests
             {
                 return new List<object[]>
                 {
-                    new object[] {"", "" },
+                    new object[] { "", "" },
                     new object[] { "age", "\\u0061\\u0067\\u0065" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9\"\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0032\\u0032\u00EA\u00EA\u00EA\u00EA\u00EA" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9>>>>>\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\\u003E\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003e\\u003e\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\u00EA\u00EA\u00EA\u00EA\u00EA" },
-                    new object[] { "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA", "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\u00EA\u00EA\u00EA\u00EA\u00EA" },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\"\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u0022\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0032\\u0032\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9>>>>>\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\\u003E\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003e\\u003e\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\\\\\\u0075\\u0030\\u0030\\u0033\\u0065\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
+                    new object[]
+                    {
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\u003E\\u003E\u00EA\u00EA\u00EA\u00EA\u00EA",
+                        "\u00E9\u00E9\u00E9\u00E9\u00E9\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\\\\\\u0075\\u0030\\u0030\\u0033\\u0045\u00EA\u00EA\u00EA\u00EA\u00EA",
+                    },
                 };
             }
         }
@@ -500,23 +592,29 @@ namespace System.Text.Json.Tests
                 return Default.WillEncode(unicodeScalar);
             }
 
-            public unsafe override int FindFirstCharacterToEncode(char* text, int textLength)
+            public override unsafe int FindFirstCharacterToEncode(char* text, int textLength)
             {
                 return Default.FindFirstCharacterToEncode(text, textLength);
             }
 
-
             public override int MaxOutputCharactersPerInputCharacter
             {
-                get
-                {
-                    return Default.MaxOutputCharactersPerInputCharacter;
-                }
+                get { return Default.MaxOutputCharactersPerInputCharacter; }
             }
 
-            public unsafe override bool TryEncodeUnicodeScalar(int unicodeScalar, char* buffer, int bufferLength, out int numberOfCharactersWritten)
+            public override unsafe bool TryEncodeUnicodeScalar(
+                int unicodeScalar,
+                char* buffer,
+                int bufferLength,
+                out int numberOfCharactersWritten
+            )
             {
-                return Default.TryEncodeUnicodeScalar(unicodeScalar, buffer, bufferLength, out numberOfCharactersWritten);
+                return Default.TryEncodeUnicodeScalar(
+                    unicodeScalar,
+                    buffer,
+                    bufferLength,
+                    out numberOfCharactersWritten
+                );
             }
         }
 

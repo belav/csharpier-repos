@@ -3,11 +3,11 @@
 // See the LICENSE file in the project root for more information.
 
 using System;
-using System.Linq;
 using System.Collections.Immutable;
 using System.Diagnostics;
-using Microsoft.CodeAnalysis.PooledObjects;
+using System.Linq;
 using System.Runtime.CompilerServices;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.CodeAnalysis
 {
@@ -52,9 +52,14 @@ namespace Microsoft.CodeAnalysis
             }
 
             protected sealed override SymbolKeyResolution Resolve(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
-                contextualSymbol = contextualSymbol is { IsTupleType: true } ? contextualSymbol : null;
+                contextualSymbol = contextualSymbol is { IsTupleType: true }
+                    ? contextualSymbol
+                    : null;
                 var isError = reader.ReadBoolean();
 
                 return isError
@@ -63,17 +68,25 @@ namespace Microsoft.CodeAnalysis
             }
 
             private static SymbolKeyResolution ResolveNormalTuple(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualSymbol, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualSymbol,
+                out string? failureReason
+            )
             {
                 using var elementNames = reader.ReadStringArray();
-                var elementLocations = ReadElementLocations(reader, out var elementLocationsFailureReason);
+                var elementLocations = ReadElementLocations(
+                    reader,
+                    out var elementLocationsFailureReason
+                );
                 var underlyingTypeResolution = reader.ReadSymbolKey(
                     contextualSymbol?.TupleUnderlyingType,
-                    out var underlyingTypeFailureReason);
+                    out var underlyingTypeFailureReason
+                );
 
                 if (underlyingTypeFailureReason != null)
                 {
-                    failureReason = $"({nameof(TupleTypeSymbolKey)} {nameof(underlyingTypeResolution)} failed -> {underlyingTypeFailureReason})";
+                    failureReason =
+                        $"({nameof(TupleTypeSymbolKey)} {nameof(underlyingTypeResolution)} failed -> {underlyingTypeFailureReason})";
                     return default;
                 }
 
@@ -83,32 +96,50 @@ namespace Microsoft.CodeAnalysis
                 foreach (var namedType in underlyingTypeResolution.OfType<INamedTypeSymbol>())
                 {
                     // Suppression on elementLocations due to https://github.com/dotnet/roslyn/issues/46527
-                    result.AddIfNotNull(reader.Compilation.CreateTupleTypeSymbol(
-                        namedType, elementNamesArray, elementLocations!));
+                    result.AddIfNotNull(
+                        reader.Compilation.CreateTupleTypeSymbol(
+                            namedType,
+                            elementNamesArray,
+                            elementLocations!
+                        )
+                    );
                 }
 
-                return CreateResolution(result, $"({nameof(TupleTypeSymbolKey)} failed)", out failureReason);
+                return CreateResolution(
+                    result,
+                    $"({nameof(TupleTypeSymbolKey)} failed)",
+                    out failureReason
+                );
             }
 
             private static SymbolKeyResolution ResolveErrorTuple(
-                SymbolKeyReader reader, INamedTypeSymbol? contextualType, out string? failureReason)
+                SymbolKeyReader reader,
+                INamedTypeSymbol? contextualType,
+                out string? failureReason
+            )
             {
                 using var elementNames = reader.ReadStringArray();
-                var elementLocations = ReadElementLocations(reader, out var elementLocationsFailureReason);
+                var elementLocations = ReadElementLocations(
+                    reader,
+                    out var elementLocationsFailureReason
+                );
                 using var elementTypes = reader.ReadSymbolKeyArray<INamedTypeSymbol, ITypeSymbol>(
                     contextualType,
                     static (contextualType, i) => SafeGet(contextualType.TupleElements, i)?.Type,
-                    out var elementTypesFailureReason);
+                    out var elementTypesFailureReason
+                );
 
                 if (elementLocationsFailureReason != null)
                 {
-                    failureReason = $"({nameof(TupleTypeSymbolKey)} {nameof(elementLocations)} failed -> {elementLocationsFailureReason})";
+                    failureReason =
+                        $"({nameof(TupleTypeSymbolKey)} {nameof(elementLocations)} failed -> {elementLocationsFailureReason})";
                     return default;
                 }
 
                 if (elementTypesFailureReason != null)
                 {
-                    failureReason = $"({nameof(TupleTypeSymbolKey)} {nameof(elementTypes)} failed -> {elementTypesFailureReason})";
+                    failureReason =
+                        $"({nameof(TupleTypeSymbolKey)} {nameof(elementTypes)} failed -> {elementTypesFailureReason})";
                     return default;
                 }
 
@@ -120,12 +151,18 @@ namespace Microsoft.CodeAnalysis
 
                 // Suppression on elementLocations due to https://github.com/dotnet/roslyn/issues/46527
                 var result = reader.Compilation.CreateTupleTypeSymbol(
-                    elementTypes.ToImmutable(), elementNames.ToImmutable(), elementLocations!);
+                    elementTypes.ToImmutable(),
+                    elementNames.ToImmutable(),
+                    elementLocations!
+                );
                 failureReason = null;
                 return new SymbolKeyResolution(result);
             }
 
-            private static ImmutableArray<Location> ReadElementLocations(SymbolKeyReader reader, out string? failureReason)
+            private static ImmutableArray<Location> ReadElementLocations(
+                SymbolKeyReader reader,
+                out string? failureReason
+            )
             {
                 using var elementLocations = reader.ReadLocationArray(out failureReason);
                 if (failureReason != null)

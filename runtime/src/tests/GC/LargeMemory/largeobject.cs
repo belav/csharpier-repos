@@ -4,46 +4,48 @@
 using System;
 
 //[Serializable()]
-public sealed class LargeObject {
-
+public sealed class LargeObject
+{
     private byte[][] data;
     private uint sizeInMB;
     private LargeObject next;
     public static int FinalizedCount = 0;
 
-    public const long MB = 1024*1024;
+    public const long MB = 1024 * 1024;
 
-    public LargeObject(uint sizeInMB):this(sizeInMB, false)
+    public LargeObject(uint sizeInMB)
+        : this(sizeInMB, false) { }
+
+    public LargeObject(uint sizeInMB, bool finalize)
     {
-    }
-
-    public LargeObject(uint sizeInMB, bool finalize) {
         this.sizeInMB = sizeInMB;
 
-        if (!finalize) {
+        if (!finalize)
+        {
             GC.SuppressFinalize(this);
         }
 
         data = new byte[sizeInMB][];
-        for (int i=0; i<sizeInMB; i++) {
+        for (int i = 0; i < sizeInMB; i++)
+        {
             data[i] = new byte[MB];
         }
     }
 
-    ~LargeObject() {
+    ~LargeObject()
+    {
         Console.WriteLine("Finalized");
         FinalizedCount++;
     }
 
-    public long Size {
-        get {
-            return sizeInMB*MB;
-        }
+    public long Size
+    {
+        get { return sizeInMB * MB; }
     }
 
-    public LargeObject Next {
+    public LargeObject Next
+    {
         get { return next; }
         set { next = value; }
     }
-
 }

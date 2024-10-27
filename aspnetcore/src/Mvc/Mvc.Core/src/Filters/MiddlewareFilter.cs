@@ -19,7 +19,10 @@ internal sealed class MiddlewareFilter : IAsyncResourceFilter
         _middlewarePipeline = middlewarePipeline;
     }
 
-    public Task OnResourceExecutionAsync(ResourceExecutingContext context, ResourceExecutionDelegate next)
+    public Task OnResourceExecutionAsync(
+        ResourceExecutingContext context,
+        ResourceExecutionDelegate next
+    )
     {
         var httpContext = context.HttpContext;
 
@@ -30,7 +33,7 @@ internal sealed class MiddlewareFilter : IAsyncResourceFilter
         var feature = new MiddlewareFilterFeature()
         {
             ResourceExecutionDelegate = next,
-            ResourceExecutingContext = context
+            ResourceExecutingContext = context,
         };
         httpContext.Features.Set<IMiddlewareFilterFeature>(feature);
 

@@ -33,7 +33,7 @@ public static class CosmosEventId
         ExecutedReadItem,
         ExecutedCreateItem,
         ExecutedReplaceItem,
-        ExecutedDeleteItem
+        ExecutedDeleteItem,
     }
 
     private static readonly string CommandPrefix = DbLoggerCategory.Database.Command.Name + ".";
@@ -49,8 +49,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosQueryEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutingSqlQuery
-        = new((int)Id.ExecutingSqlQuery, CommandPrefix + Id.ExecutingSqlQuery);
+    public static readonly EventId ExecutingSqlQuery = new(
+        (int)Id.ExecutingSqlQuery,
+        CommandPrefix + Id.ExecutingSqlQuery
+    );
 
     /// <summary>
     ///     ReadItem is going to be executed.
@@ -63,8 +65,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosReadItemEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutingReadItem
-        = new((int)Id.ExecutingReadItem, CommandPrefix + Id.ExecutingReadItem);
+    public static readonly EventId ExecutingReadItem = new(
+        (int)Id.ExecutingReadItem,
+        CommandPrefix + Id.ExecutingReadItem
+    );
 
     /// <summary>
     ///     ReadNext was executed.
@@ -77,8 +81,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosQueryExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutedReadNext
-        = new((int)Id.ExecutedReadNext, CommandPrefix + Id.ExecutedReadNext);
+    public static readonly EventId ExecutedReadNext = new(
+        (int)Id.ExecutedReadNext,
+        CommandPrefix + Id.ExecutedReadNext
+    );
 
     /// <summary>
     ///     ReadItem was executed.
@@ -91,8 +97,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutedReadItem
-        = new((int)Id.ExecutedReadItem, CommandPrefix + Id.ExecutedReadItem);
+    public static readonly EventId ExecutedReadItem = new(
+        (int)Id.ExecutedReadItem,
+        CommandPrefix + Id.ExecutedReadItem
+    );
 
     /// <summary>
     ///     CreateItem was executed.
@@ -105,8 +113,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutedCreateItem
-        = new((int)Id.ExecutedCreateItem, CommandPrefix + Id.ExecutedCreateItem);
+    public static readonly EventId ExecutedCreateItem = new(
+        (int)Id.ExecutedCreateItem,
+        CommandPrefix + Id.ExecutedCreateItem
+    );
 
     /// <summary>
     ///     ReplaceItem was executed.
@@ -119,8 +129,10 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutedReplaceItem
-        = new((int)Id.ExecutedReplaceItem, CommandPrefix + Id.ExecutedReplaceItem);
+    public static readonly EventId ExecutedReplaceItem = new(
+        (int)Id.ExecutedReplaceItem,
+        CommandPrefix + Id.ExecutedReplaceItem
+    );
 
     /// <summary>
     ///     DeleteItem was executed.
@@ -133,6 +145,8 @@ public static class CosmosEventId
     ///         This event uses the <see cref="CosmosItemCommandExecutedEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId ExecutedDeleteItem
-        = new((int)Id.ExecutedDeleteItem, CommandPrefix + Id.ExecutedDeleteItem);
+    public static readonly EventId ExecutedDeleteItem = new(
+        (int)Id.ExecutedDeleteItem,
+        CommandPrefix + Id.ExecutedDeleteItem
+    );
 }

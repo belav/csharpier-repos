@@ -34,8 +34,7 @@ internal sealed class HttpServerSessionHandle : CriticalHandleZeroOrMinusOneIsIn
             if (Interlocked.Increment(ref disposed) == 1)
             {
                 // Closing server session also closes all open url groups under that server session.
-                return PInvoke.HttpCloseServerSession(serverSessionId) ==
-                    ErrorCodes.ERROR_SUCCESS;
+                return PInvoke.HttpCloseServerSession(serverSessionId) == ErrorCodes.ERROR_SUCCESS;
             }
         }
         return true;

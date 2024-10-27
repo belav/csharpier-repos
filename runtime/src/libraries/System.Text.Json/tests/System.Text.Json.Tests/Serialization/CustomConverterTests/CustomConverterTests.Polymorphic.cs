@@ -14,7 +14,7 @@ namespace System.Text.Json.Serialization.Tests
             enum TypeDiscriminator
             {
                 Customer = 1,
-                Employee = 2
+                Employee = 2,
             }
 
             public override bool CanConvert(Type typeToConvert)
@@ -22,7 +22,11 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(Person).IsAssignableFrom(typeToConvert);
             }
 
-            public override Person Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Person Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType != JsonTokenType.StartObject)
                 {
@@ -95,7 +99,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Person value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Person value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
 
@@ -119,8 +127,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void PersonConverterPolymorphicTypeDiscriminator()
         {
-            const string customerJson = @"{""TypeDiscriminator"":1,""CreditLimit"":100.00,""Name"":""C""}";
-            const string employeeJson = @"{""TypeDiscriminator"":2,""OfficeNumber"":""77a"",""Name"":""E""}";
+            const string customerJson =
+                @"{""TypeDiscriminator"":1,""CreditLimit"":100.00,""Name"":""C""}";
+            const string employeeJson =
+                @"{""TypeDiscriminator"":2,""OfficeNumber"":""77a"",""Name"":""E""}";
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new PersonConverterWithTypeDiscriminator());
@@ -159,12 +169,22 @@ namespace System.Text.Json.Serialization.Tests
         // A converter that can serialize an abstract Person type.
         private class PersonPolymorphicSerializerConverter : JsonConverter<Person>
         {
-            public override Person Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Person Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
-                throw new NotSupportedException($"Deserializing not supported. Type={typeToConvert}.");
+                throw new NotSupportedException(
+                    $"Deserializing not supported. Type={typeToConvert}."
+                );
             }
 
-            public override void Write(Utf8JsonWriter writer, Person value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Person value,
+                JsonSerializerOptions options
+            )
             {
                 JsonSerializer.Serialize(writer, value, value.GetType(), options);
             }
@@ -176,11 +196,7 @@ namespace System.Text.Json.Serialization.Tests
             var options = new JsonSerializerOptions();
             options.Converters.Add(new PersonPolymorphicSerializerConverter());
 
-            Customer customer = new Customer
-            {
-                Name = "C",
-                CreditLimit = 100
-            };
+            Customer customer = new Customer { Name = "C", CreditLimit = 100 };
 
             {
                 // Verify the polymorphic case.
@@ -189,12 +205,16 @@ namespace System.Text.Json.Serialization.Tests
                 string json = JsonSerializer.Serialize(person, options);
                 Assert.Contains(@"""CreditLimit"":100", json);
                 Assert.Contains(@"""Name"":""C""", json);
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<Person>(json, options));
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<Person>(json, options)
+                );
 
                 string arrayJson = JsonSerializer.Serialize(new Person[] { person }, options);
                 Assert.Contains(@"""CreditLimit"":100", arrayJson);
                 Assert.Contains(@"""Name"":""C""", arrayJson);
-                Assert.Throws<NotSupportedException>(() => JsonSerializer.Deserialize<Person[]>(arrayJson, options));
+                Assert.Throws<NotSupportedException>(
+                    () => JsonSerializer.Deserialize<Person[]>(arrayJson, options)
+                );
             }
 
             {
@@ -219,7 +239,10 @@ namespace System.Text.Json.Serialization.Tests
 
         [Theory]
         [MemberData(nameof(PolymorphicConverter_ShouldRoundtripInAllContexts_GetTestData))]
-        public static void PolymorphicConverter_ShouldRoundtripInAllContexts<T>(T value, string expectedJson)
+        public static void PolymorphicConverter_ShouldRoundtripInAllContexts<T>(
+            T value,
+            string expectedJson
+        )
         {
             // Regression test for https://github.com/dotnet/runtime/issues/46522
             string json = JsonSerializer.Serialize(value);
@@ -238,9 +261,13 @@ namespace System.Text.Json.Serialization.Tests
             yield return WrapArgs(value, expectedJson);
             yield return WrapArgs(new { Value = value }, $@"{{""Value"":{expectedJson}}}");
             yield return WrapArgs(new[] { value }, $"[{expectedJson}]");
-            yield return WrapArgs(new Dictionary<string, SampleRepro> { ["key"] = value }, $@"{{""key"":{expectedJson}}}");
+            yield return WrapArgs(
+                new Dictionary<string, SampleRepro> { ["key"] = value },
+                $@"{{""key"":{expectedJson}}}"
+            );
 
-            static object[] WrapArgs<T>(T value, string expectedJson) => new object[] { value, expectedJson };
+            static object[] WrapArgs<T>(T value, string expectedJson) =>
+                new object[] { value, expectedJson };
         }
 
         public interface IRepro<T>
@@ -261,12 +288,23 @@ namespace System.Text.Json.Serialization.Tests
                 return typeof(IRepro<object>).IsAssignableFrom(typeToConvert);
             }
 
-            public override IRepro<object> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override IRepro<object> Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
-                return new SampleRepro { Value = JsonSerializer.Deserialize<object>(ref reader, options) };
+                return new SampleRepro
+                {
+                    Value = JsonSerializer.Deserialize<object>(ref reader, options),
+                };
             }
 
-            public override void Write(Utf8JsonWriter writer, IRepro<object> value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                IRepro<object> value,
+                JsonSerializerOptions options
+            )
             {
                 if (value is null)
                 {
@@ -283,7 +321,10 @@ namespace System.Text.Json.Serialization.Tests
         public static void PolymorphicBaseClassConverter_IsPassedCorrectTypeToConvertParameter()
         {
             // Regression test for https://github.com/dotnet/runtime/issues/77173
-            var options = new JsonSerializerOptions { Converters = { new PolymorphicBaseClassConverter() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new PolymorphicBaseClassConverter() },
+            };
 
             // Sanity check -- returns converter for the base class.
             JsonConverter converter = options.GetConverter(typeof(DerivedClass));
@@ -300,21 +341,28 @@ namespace System.Text.Json.Serialization.Tests
             object objResult = JsonSerializer.Deserialize("{}", typeof(DerivedClass), options);
             Assert.IsType<DerivedClass>(objResult);
 
-            PocoWithDerivedClassProperty pocoResult = JsonSerializer.Deserialize<PocoWithDerivedClassProperty>("""{"Value":{}}""", options);
+            PocoWithDerivedClassProperty pocoResult =
+                JsonSerializer.Deserialize<PocoWithDerivedClassProperty>(
+                    """{"Value":{}}""",
+                    options
+                );
             Assert.IsType<DerivedClass>(pocoResult.Value);
 
-            DerivedClass[] arrayResult = JsonSerializer.Deserialize<DerivedClass[]>("[{}]", options);
+            DerivedClass[] arrayResult = JsonSerializer.Deserialize<DerivedClass[]>(
+                "[{}]",
+                options
+            );
             Assert.IsType<DerivedClass>(arrayResult[0]);
 
-            Dictionary<string, DerivedClass> dictResult = JsonSerializer.Deserialize<Dictionary<string, DerivedClass>>("""{"Value":{}}""", options);
+            Dictionary<string, DerivedClass> dictResult = JsonSerializer.Deserialize<
+                Dictionary<string, DerivedClass>
+            >("""{"Value":{}}""", options);
             Assert.IsType<DerivedClass>(dictResult["Value"]);
         }
 
-        public class BaseClass
-        { }
+        public class BaseClass { }
 
-        public class DerivedClass : BaseClass
-        { }
+        public class DerivedClass : BaseClass { }
 
         public class PocoWithDerivedClassProperty
         {
@@ -323,16 +371,25 @@ namespace System.Text.Json.Serialization.Tests
 
         public class PolymorphicBaseClassConverter : JsonConverter<BaseClass>
         {
-            public override bool CanConvert(Type typeToConvert) => typeof(BaseClass).IsAssignableFrom(typeToConvert);
+            public override bool CanConvert(Type typeToConvert) =>
+                typeof(BaseClass).IsAssignableFrom(typeToConvert);
 
-            public override BaseClass? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override BaseClass? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Assert.Equal(typeof(DerivedClass), typeToConvert);
                 reader.Skip();
                 return (BaseClass)Activator.CreateInstance(typeToConvert);
             }
 
-            public override void Write(Utf8JsonWriter writer, BaseClass value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                BaseClass value,
+                JsonSerializerOptions options
+            )
             {
                 throw new NotImplementedException();
             }

@@ -10,8 +10,10 @@ namespace System.Net.Http.Formatting
     public class HostNameComparisonModeHelperTest : EnumHelperTestBase<HostNameComparisonMode>
     {
         public HostNameComparisonModeHelperTest()
-            : base(HostNameComparisonModeHelper.IsDefined, HostNameComparisonModeHelper.Validate, (HostNameComparisonMode)999)
-        {
-        }
+            : base(
+                HostNameComparisonModeHelper.IsDefined,
+                HostNameComparisonModeHelper.Validate,
+                (HostNameComparisonMode)999
+            ) { }
     }
 }

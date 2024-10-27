@@ -32,7 +32,7 @@ namespace System.ServiceModel.Channels
         TimeSpan asyncReceiveTimeout;
 
         // Socket.SendTimeout/Socket.ReceiveTimeout only work with the synchronous API calls and therefore they
-        // do not get updated when asynchronous Send/Read operations are performed.  In order to make sure we 
+        // do not get updated when asynchronous Send/Read operations are performed.  In order to make sure we
         // Set the proper timeouts on the Socket itself we need to keep these two additional fields.
         TimeSpan socketSyncSendTimeout;
         TimeSpan socketSyncReceiveTimeout;
@@ -74,7 +74,11 @@ namespace System.ServiceModel.Channels
         ConnectionBufferPool connectionBufferPool;
         string remoteEndpointAddress;
 
-        public SocketConnection(Socket socket, ConnectionBufferPool connectionBufferPool, bool autoBindToCompletionPort)
+        public SocketConnection(
+            Socket socket,
+            ConnectionBufferPool connectionBufferPool,
+            bool autoBindToCompletionPort
+        )
         {
             if (socket == null)
             {
@@ -113,8 +117,14 @@ namespace System.ServiceModel.Channels
                 }
             }
 
-            this.TraceSocketInfo(socket, TraceCode.SocketConnectionCreate, SR.TraceCodeSocketConnectionCreate, null);
+            this.TraceSocketInfo(
+                socket,
+                TraceCode.SocketConnectionCreate,
+                SR.TraceCodeSocketConnectionCreate,
+                null
+            );
         }
+
         public int AsyncReadBufferSize
         {
             get { return asyncReadBufferSize; }
@@ -122,10 +132,7 @@ namespace System.ServiceModel.Channels
 
         public byte[] AsyncReadBuffer
         {
-            get
-            {
-                return readBuffer;
-            }
+            get { return readBuffer; }
         }
 
         object ThisLock
@@ -155,11 +162,16 @@ namespace System.ServiceModel.Channels
                         // will never be a timeout error, so TimeSpan.Zero is ok
 #pragma warning suppress 56503 // Called from Receive path, SocketConnection cannot allow a SocketException to escape.
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            ConvertReceiveException(socketException, TimeSpan.Zero, TimeSpan.Zero), ExceptionEventType);
+                            ConvertReceiveException(socketException, TimeSpan.Zero, TimeSpan.Zero),
+                            ExceptionEventType
+                        );
                     }
                     catch (ObjectDisposedException objectDisposedException)
                     {
-                        Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Undefined);
+                        Exception exceptionToThrow = ConvertObjectDisposedException(
+                            objectDisposedException,
+                            TransferOperation.Undefined
+                        );
                         if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                         {
 #pragma warning suppress 56503 // rethrow
@@ -168,7 +180,10 @@ namespace System.ServiceModel.Channels
                         else
                         {
 #pragma warning suppress 56503 // Called from Receive path, SocketConnection must convert ObjectDisposedException properly.
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                                exceptionToThrow,
+                                ExceptionEventType
+                            );
                         }
                     }
                 }
@@ -213,7 +228,6 @@ namespace System.ServiceModel.Channels
             }
         }
 
-
         string RemoteEndpointAddress
         {
             get
@@ -222,10 +236,13 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        IPEndPoint local, remote;
+                        IPEndPoint local,
+                            remote;
                         if (TryGetEndpoints(out local, out remote))
                         {
-                            this.remoteEndpointAddress = TraceUtility.GetRemoteEndpointAddressPort(remote);
+                            this.remoteEndpointAddress = TraceUtility.GetRemoteEndpointAddressPort(
+                                remote
+                            );
                         }
                         else
                         {
@@ -239,7 +256,6 @@ namespace System.ServiceModel.Channels
                         {
                             throw;
                         }
-
                     }
                 }
                 return remoteEndpointAddress;
@@ -249,14 +265,20 @@ namespace System.ServiceModel.Channels
         static void OnReceiveTimeout(object state)
         {
             SocketConnection thisPtr = (SocketConnection)state;
-            thisPtr.Abort(SR.GetString(SR.SocketAbortedReceiveTimedOut, thisPtr.asyncReceiveTimeout), TransferOperation.Read);
+            thisPtr.Abort(
+                SR.GetString(SR.SocketAbortedReceiveTimedOut, thisPtr.asyncReceiveTimeout),
+                TransferOperation.Read
+            );
         }
 
         static void OnSendTimeout(object state)
         {
             SocketConnection thisPtr = (SocketConnection)state;
-            thisPtr.Abort(TraceEventType.Warning,
-                SR.GetString(SR.SocketAbortedSendTimedOut, thisPtr.asyncSendTimeout), TransferOperation.Write);
+            thisPtr.Abort(
+                TraceEventType.Warning,
+                SR.GetString(SR.SocketAbortedSendTimedOut, thisPtr.asyncSendTimeout),
+                TransferOperation.Write
+            );
         }
 
         static void OnReceiveCompleted(IAsyncResult result)
@@ -297,7 +319,11 @@ namespace System.ServiceModel.Channels
             Abort(traceEventType, null, TransferOperation.Undefined);
         }
 
-        void Abort(TraceEventType traceEventType, string timeoutErrorString, TransferOperation transferOperation)
+        void Abort(
+            TraceEventType traceEventType,
+            string timeoutErrorString,
+            TransferOperation transferOperation
+        )
         {
             if (TD.SocketConnectionAbortIsEnabled())
             {
@@ -336,8 +362,12 @@ namespace System.ServiceModel.Channels
 
             if (DiagnosticUtility.ShouldTrace(traceEventType))
             {
-                TraceUtility.TraceEvent(traceEventType, TraceCode.SocketConnectionAbort,
-                    SR.GetString(SR.TraceCodeSocketConnectionAbort), this);
+                TraceUtility.TraceEvent(
+                    traceEventType,
+                    TraceCode.SocketConnectionAbort,
+                    SR.GetString(SR.TraceCodeSocketConnectionAbort),
+                    this
+                );
             }
 
             socket.Close(0);
@@ -394,7 +424,10 @@ namespace System.ServiceModel.Channels
 
             try
             {
-                if (BeginReadCore(0, 1, readFinTimeout, onWaitForFinComplete, this) == AsyncCompletionResult.Queued)
+                if (
+                    BeginReadCore(0, 1, readFinTimeout, onWaitForFinComplete, this)
+                    == AsyncCompletionResult.Queued
+                )
                 {
                     return;
                 }
@@ -404,15 +437,26 @@ namespace System.ServiceModel.Channels
                 if (bytesRead > 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        new CommunicationException(SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)),
-                        ExceptionEventType);
+                        new CommunicationException(
+                            SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)
+                        ),
+                        ExceptionEventType
+                    );
                 }
             }
             catch (TimeoutException timeoutException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new TimeoutException(
-                    SR.GetString(SR.SocketCloseReadTimeout, socket.RemoteEndPoint, readFinTimeout), timeoutException),
-                    ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new TimeoutException(
+                        SR.GetString(
+                            SR.SocketCloseReadTimeout,
+                            socket.RemoteEndPoint,
+                            readFinTimeout
+                        ),
+                        timeoutException
+                    ),
+                    ExceptionEventType
+                );
             }
 
             ContinueClose(closeTimeoutHelper.RemainingTime());
@@ -433,15 +477,29 @@ namespace System.ServiceModel.Channels
                     if (bytesRead > 0)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                            new CommunicationException(SR.GetString(SR.SocketCloseReadReceivedData, thisPtr.socket.RemoteEndPoint)),
-                            thisPtr.ExceptionEventType);
+                            new CommunicationException(
+                                SR.GetString(
+                                    SR.SocketCloseReadReceivedData,
+                                    thisPtr.socket.RemoteEndPoint
+                                )
+                            ),
+                            thisPtr.ExceptionEventType
+                        );
                     }
                 }
                 catch (TimeoutException timeoutException)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new TimeoutException(
-                        SR.GetString(SR.SocketCloseReadTimeout, thisPtr.socket.RemoteEndPoint, thisPtr.readFinTimeout),
-                        timeoutException), thisPtr.ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        new TimeoutException(
+                            SR.GetString(
+                                SR.SocketCloseReadTimeout,
+                                thisPtr.socket.RemoteEndPoint,
+                                thisPtr.readFinTimeout
+                            ),
+                            timeoutException
+                        ),
+                        thisPtr.ExceptionEventType
+                    );
                 }
 
                 thisPtr.ContinueClose(thisPtr.closeTimeoutHelper.RemainingTime());
@@ -470,7 +528,12 @@ namespace System.ServiceModel.Channels
                     // already closing or closed, so just return
                     return;
                 }
-                this.TraceSocketInfo(this.socket, TraceCode.SocketConnectionClose, SR.TraceCodeSocketConnectionClose, timeout.ToString());
+                this.TraceSocketInfo(
+                    this.socket,
+                    TraceCode.SocketConnectionClose,
+                    SR.TraceCodeSocketConnectionClose,
+                    timeout.ToString()
+                );
                 closeState = CloseState.Closing;
             }
 
@@ -503,13 +566,26 @@ namespace System.ServiceModel.Channels
                 if (bytesRead > 0)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        new CommunicationException(SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)), ExceptionEventType);
+                        new CommunicationException(
+                            SR.GetString(SR.SocketCloseReadReceivedData, socket.RemoteEndPoint)
+                        ),
+                        ExceptionEventType
+                    );
                 }
             }
             catch (TimeoutException timeoutException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(new TimeoutException(
-                    SR.GetString(SR.SocketCloseReadTimeout, socket.RemoteEndPoint, readFinTimeout), timeoutException), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    new TimeoutException(
+                        SR.GetString(
+                            SR.SocketCloseReadTimeout,
+                            socket.RemoteEndPoint,
+                            readFinTimeout
+                        ),
+                        timeoutException
+                    ),
+                    ExceptionEventType
+                );
             }
 
             // finally we call Close with whatever time is remaining
@@ -521,15 +597,19 @@ namespace System.ServiceModel.Channels
             // trace if we're effectively aborting
             if (timeout <= TimeSpan.Zero && DiagnosticUtility.ShouldTraceWarning)
             {
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.SocketConnectionAbortClose,
-                    SR.GetString(SR.TraceCodeSocketConnectionAbortClose), this);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.SocketConnectionAbortClose,
+                    SR.GetString(SR.TraceCodeSocketConnectionAbortClose),
+                    this
+                );
             }
 
             socket.Close(TimeoutHelper.ToMilliseconds(timeout));
 
             lock (ThisLock)
             {
-                // Abort could have been called on a separate thread and cleaned up 
+                // Abort could have been called on a separate thread and cleaned up
                 // our buffers/completion here
                 if (this.closeState != CloseState.Closed)
                 {
@@ -567,18 +647,30 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertSendException(socketException, TimeSpan.MaxValue, this.socketSyncSendTimeout), ExceptionEventType);
+                    ConvertSendException(
+                        socketException,
+                        TimeSpan.MaxValue,
+                        this.socketSyncSendTimeout
+                    ),
+                    ExceptionEventType
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Undefined);
+                Exception exceptionToThrow = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Undefined
+                );
                 if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                 {
                     throw;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        exceptionToThrow,
+                        ExceptionEventType
+                    );
                 }
             }
         }
@@ -588,8 +680,15 @@ namespace System.ServiceModel.Channels
             if (closeState == CloseState.Closing || closeState == CloseState.Closed)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertObjectDisposedException(new ObjectDisposedException(
-                    this.GetType().ToString(), SR.GetString(SR.SocketConnectionDisposed)), TransferOperation.Undefined), ExceptionEventType);
+                    ConvertObjectDisposedException(
+                        new ObjectDisposedException(
+                            this.GetType().ToString(),
+                            SR.GetString(SR.SocketConnectionDisposed)
+                        ),
+                        TransferOperation.Undefined
+                    ),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -598,8 +697,15 @@ namespace System.ServiceModel.Channels
             if (closeState == CloseState.Closed)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertObjectDisposedException(new ObjectDisposedException(
-                    this.GetType().ToString(), SR.GetString(SR.SocketConnectionDisposed)), TransferOperation.Undefined), ExceptionEventType);
+                    ConvertObjectDisposedException(
+                        new ObjectDisposedException(
+                            this.GetType().ToString(),
+                            SR.GetString(SR.SocketConnectionDisposed)
+                        ),
+                        TransferOperation.Undefined
+                    ),
+                    ExceptionEventType
+                );
             }
         }
 
@@ -626,7 +732,14 @@ namespace System.ServiceModel.Channels
                         values["RemoteEndPoint"] = socket.RemoteEndPoint.ToString();
                     }
                 }
-                TraceUtility.TraceEvent(TraceEventType.Information, traceCode, SR.GetString(srString), new DictionaryTraceRecord(values), this, null);
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    traceCode,
+                    SR.GetString(srString),
+                    new DictionaryTraceRecord(values),
+                    this,
+                    null
+                );
             }
         }
 
@@ -639,7 +752,8 @@ namespace System.ServiceModel.Channels
             {
                 try
                 {
-                    remoteIPEndpoint = this.remoteEndpoint ?? (IPEndPoint)this.socket.RemoteEndPoint;
+                    remoteIPEndpoint =
+                        this.remoteEndpoint ?? (IPEndPoint)this.socket.RemoteEndPoint;
                     localIPEndpoint = (IPEndPoint)this.socket.LocalEndPoint;
                 }
                 catch (Exception exception)
@@ -678,33 +792,83 @@ namespace System.ServiceModel.Channels
             return CompletedAsyncResult<bool>.End(result);
         }
 
-        Exception ConvertSendException(SocketException socketException, TimeSpan remainingTime, TimeSpan timeout)
+        Exception ConvertSendException(
+            SocketException socketException,
+            TimeSpan remainingTime,
+            TimeSpan timeout
+        )
         {
-            return ConvertTransferException(socketException, timeout, socketException,
-                TransferOperation.Write, this.aborted, this.timeoutErrorString, this.timeoutErrorTransferOperation, this, remainingTime);
+            return ConvertTransferException(
+                socketException,
+                timeout,
+                socketException,
+                TransferOperation.Write,
+                this.aborted,
+                this.timeoutErrorString,
+                this.timeoutErrorTransferOperation,
+                this,
+                remainingTime
+            );
         }
 
-        Exception ConvertReceiveException(SocketException socketException, TimeSpan remainingTime, TimeSpan timeout)
+        Exception ConvertReceiveException(
+            SocketException socketException,
+            TimeSpan remainingTime,
+            TimeSpan timeout
+        )
         {
-            return ConvertTransferException(socketException, timeout, socketException,
-                TransferOperation.Read, this.aborted, this.timeoutErrorString, this.timeoutErrorTransferOperation, this, remainingTime);
+            return ConvertTransferException(
+                socketException,
+                timeout,
+                socketException,
+                TransferOperation.Read,
+                this.aborted,
+                this.timeoutErrorString,
+                this.timeoutErrorTransferOperation,
+                this,
+                remainingTime
+            );
         }
 
-        internal static Exception ConvertTransferException(SocketException socketException, TimeSpan timeout, Exception originalException)
+        internal static Exception ConvertTransferException(
+            SocketException socketException,
+            TimeSpan timeout,
+            Exception originalException
+        )
         {
-            return ConvertTransferException(socketException, timeout, originalException,
-                TransferOperation.Undefined, false, null, TransferOperation.Undefined, null, TimeSpan.MaxValue);
+            return ConvertTransferException(
+                socketException,
+                timeout,
+                originalException,
+                TransferOperation.Undefined,
+                false,
+                null,
+                TransferOperation.Undefined,
+                null,
+                TimeSpan.MaxValue
+            );
         }
 
-        Exception ConvertObjectDisposedException(ObjectDisposedException originalException, TransferOperation transferOperation)
+        Exception ConvertObjectDisposedException(
+            ObjectDisposedException originalException,
+            TransferOperation transferOperation
+        )
         {
             if (this.timeoutErrorString != null)
             {
-                return ConvertTimeoutErrorException(originalException, transferOperation, this.timeoutErrorString, this.timeoutErrorTransferOperation);
+                return ConvertTimeoutErrorException(
+                    originalException,
+                    transferOperation,
+                    this.timeoutErrorString,
+                    this.timeoutErrorTransferOperation
+                );
             }
             else if (this.aborted)
             {
-                return new CommunicationObjectAbortedException(SR.GetString(SR.SocketConnectionDisposed), originalException);
+                return new CommunicationObjectAbortedException(
+                    SR.GetString(SR.SocketConnectionDisposed),
+                    originalException
+                );
             }
             else
             {
@@ -712,74 +876,151 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static Exception ConvertTransferException(SocketException socketException, TimeSpan timeout, Exception originalException,
-            TransferOperation transferOperation, bool aborted, string timeoutErrorString, TransferOperation timeoutErrorTransferOperation,
-            SocketConnection socketConnection, TimeSpan remainingTime)
+        static Exception ConvertTransferException(
+            SocketException socketException,
+            TimeSpan timeout,
+            Exception originalException,
+            TransferOperation transferOperation,
+            bool aborted,
+            string timeoutErrorString,
+            TransferOperation timeoutErrorTransferOperation,
+            SocketConnection socketConnection,
+            TimeSpan remainingTime
+        )
         {
             if (socketException.ErrorCode == UnsafeNativeMethods.ERROR_INVALID_HANDLE)
             {
-                return new CommunicationObjectAbortedException(socketException.Message, socketException);
+                return new CommunicationObjectAbortedException(
+                    socketException.Message,
+                    socketException
+                );
             }
 
             if (timeoutErrorString != null)
             {
-                return ConvertTimeoutErrorException(originalException, transferOperation, timeoutErrorString, timeoutErrorTransferOperation);
+                return ConvertTimeoutErrorException(
+                    originalException,
+                    transferOperation,
+                    timeoutErrorString,
+                    timeoutErrorTransferOperation
+                );
             }
 
-            TraceEventType exceptionEventType = socketConnection == null ? TraceEventType.Error : socketConnection.ExceptionEventType;
+            TraceEventType exceptionEventType =
+                socketConnection == null
+                    ? TraceEventType.Error
+                    : socketConnection.ExceptionEventType;
 
             // 10053 can occur due to our timeout sockopt firing, so map to TimeoutException in that case
-            if (socketException.ErrorCode == UnsafeNativeMethods.WSAECONNABORTED &&
-                remainingTime <= TimeSpan.Zero)
+            if (
+                socketException.ErrorCode == UnsafeNativeMethods.WSAECONNABORTED
+                && remainingTime <= TimeSpan.Zero
+            )
             {
-                TimeoutException timeoutException = new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout), originalException);
+                TimeoutException timeoutException = new TimeoutException(
+                    SR.GetString(SR.TcpConnectionTimedOut, timeout),
+                    originalException
+                );
                 if (TD.TcpConnectionTimedOutIsEnabled())
                 {
                     if (socketConnection != null)
                     {
-                        int socketid = (socketConnection != null && socketConnection.socket != null) ? socketConnection.socket.GetHashCode() : -1;
+                        int socketid =
+                            (socketConnection != null && socketConnection.socket != null)
+                                ? socketConnection.socket.GetHashCode()
+                                : -1;
                         TD.TcpConnectionTimedOut(socketid, socketConnection.RemoteEndpointAddress);
                     }
                 }
                 if (DiagnosticUtility.ShouldTrace(exceptionEventType))
                 {
-                    TraceUtility.TraceEvent(exceptionEventType, TraceCode.TcpConnectionTimedOut, GetEndpointString(SR.TcpConnectionTimedOut, timeout, null, socketConnection), timeoutException, null);
+                    TraceUtility.TraceEvent(
+                        exceptionEventType,
+                        TraceCode.TcpConnectionTimedOut,
+                        GetEndpointString(
+                            SR.TcpConnectionTimedOut,
+                            timeout,
+                            null,
+                            socketConnection
+                        ),
+                        timeoutException,
+                        null
+                    );
                 }
                 return timeoutException;
             }
 
-            if (socketException.ErrorCode == UnsafeNativeMethods.WSAENETRESET ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAECONNABORTED ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAECONNRESET)
+            if (
+                socketException.ErrorCode == UnsafeNativeMethods.WSAENETRESET
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAECONNABORTED
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAECONNRESET
+            )
             {
                 if (aborted)
                 {
-                    return new CommunicationObjectAbortedException(SR.GetString(SR.TcpLocalConnectionAborted), originalException);
+                    return new CommunicationObjectAbortedException(
+                        SR.GetString(SR.TcpLocalConnectionAborted),
+                        originalException
+                    );
                 }
                 else
                 {
-                    CommunicationException communicationException = new CommunicationException(SR.GetString(SR.TcpConnectionResetError, timeout), originalException);
+                    CommunicationException communicationException = new CommunicationException(
+                        SR.GetString(SR.TcpConnectionResetError, timeout),
+                        originalException
+                    );
                     if (TD.TcpConnectionResetErrorIsEnabled())
                     {
                         if (socketConnection != null)
                         {
-                            int socketId = (socketConnection.socket != null) ? socketConnection.socket.GetHashCode() : -1;
-                            TD.TcpConnectionResetError(socketId, socketConnection.RemoteEndpointAddress);
+                            int socketId =
+                                (socketConnection.socket != null)
+                                    ? socketConnection.socket.GetHashCode()
+                                    : -1;
+                            TD.TcpConnectionResetError(
+                                socketId,
+                                socketConnection.RemoteEndpointAddress
+                            );
                         }
                     }
                     if (DiagnosticUtility.ShouldTrace(exceptionEventType))
                     {
-                        TraceUtility.TraceEvent(exceptionEventType, TraceCode.TcpConnectionResetError, GetEndpointString(SR.TcpConnectionResetError, timeout, null, socketConnection), communicationException, null);
+                        TraceUtility.TraceEvent(
+                            exceptionEventType,
+                            TraceCode.TcpConnectionResetError,
+                            GetEndpointString(
+                                SR.TcpConnectionResetError,
+                                timeout,
+                                null,
+                                socketConnection
+                            ),
+                            communicationException,
+                            null
+                        );
                     }
                     return communicationException;
                 }
             }
             else if (socketException.ErrorCode == UnsafeNativeMethods.WSAETIMEDOUT)
             {
-                TimeoutException timeoutException = new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout), originalException);
+                TimeoutException timeoutException = new TimeoutException(
+                    SR.GetString(SR.TcpConnectionTimedOut, timeout),
+                    originalException
+                );
                 if (DiagnosticUtility.ShouldTrace(exceptionEventType))
                 {
-                    TraceUtility.TraceEvent(exceptionEventType, TraceCode.TcpConnectionTimedOut, GetEndpointString(SR.TcpConnectionTimedOut, timeout, null, socketConnection), timeoutException, null);
+                    TraceUtility.TraceEvent(
+                        exceptionEventType,
+                        TraceCode.TcpConnectionTimedOut,
+                        GetEndpointString(
+                            SR.TcpConnectionTimedOut,
+                            timeout,
+                            null,
+                            socketConnection
+                        ),
+                        timeoutException,
+                        null
+                    );
                 }
                 return timeoutException;
             }
@@ -787,22 +1028,51 @@ namespace System.ServiceModel.Channels
             {
                 if (aborted)
                 {
-                    return new CommunicationObjectAbortedException(SR.GetString(SR.TcpTransferError, socketException.ErrorCode, socketException.Message), originalException);
+                    return new CommunicationObjectAbortedException(
+                        SR.GetString(
+                            SR.TcpTransferError,
+                            socketException.ErrorCode,
+                            socketException.Message
+                        ),
+                        originalException
+                    );
                 }
                 else
                 {
-                    CommunicationException communicationException = new CommunicationException(SR.GetString(SR.TcpTransferError, socketException.ErrorCode, socketException.Message), originalException);
+                    CommunicationException communicationException = new CommunicationException(
+                        SR.GetString(
+                            SR.TcpTransferError,
+                            socketException.ErrorCode,
+                            socketException.Message
+                        ),
+                        originalException
+                    );
                     if (DiagnosticUtility.ShouldTrace(exceptionEventType))
                     {
-                        TraceUtility.TraceEvent(exceptionEventType, TraceCode.TcpTransferError, GetEndpointString(SR.TcpTransferError, TimeSpan.MinValue, socketException, socketConnection), communicationException, null);
+                        TraceUtility.TraceEvent(
+                            exceptionEventType,
+                            TraceCode.TcpTransferError,
+                            GetEndpointString(
+                                SR.TcpTransferError,
+                                TimeSpan.MinValue,
+                                socketException,
+                                socketConnection
+                            ),
+                            communicationException,
+                            null
+                        );
                     }
                     return communicationException;
                 }
             }
         }
 
-        static Exception ConvertTimeoutErrorException(Exception originalException,
-            TransferOperation transferOperation, string timeoutErrorString, TransferOperation timeoutErrorTransferOperation)
+        static Exception ConvertTimeoutErrorException(
+            Exception originalException,
+            TransferOperation transferOperation,
+            string timeoutErrorString,
+            TransferOperation timeoutErrorTransferOperation
+        )
         {
             if (timeoutErrorString == null)
             {
@@ -819,35 +1089,75 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        static string GetEndpointString(string sr, TimeSpan timeout, SocketException socketException, SocketConnection socketConnection)
+        static string GetEndpointString(
+            string sr,
+            TimeSpan timeout,
+            SocketException socketException,
+            SocketConnection socketConnection
+        )
         {
             IPEndPoint remoteEndpoint = null;
             IPEndPoint localEndpoint = null;
-            bool haveEndpoints = socketConnection != null && socketConnection.TryGetEndpoints(out localEndpoint, out remoteEndpoint);
+            bool haveEndpoints =
+                socketConnection != null
+                && socketConnection.TryGetEndpoints(out localEndpoint, out remoteEndpoint);
 
-            if (string.Compare(sr, SR.TcpConnectionTimedOut, StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                string.Compare(sr, SR.TcpConnectionTimedOut, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 return haveEndpoints
-                    ? SR.GetString(SR.TcpConnectionTimedOutWithIP, timeout, localEndpoint, remoteEndpoint)
+                    ? SR.GetString(
+                        SR.TcpConnectionTimedOutWithIP,
+                        timeout,
+                        localEndpoint,
+                        remoteEndpoint
+                    )
                     : SR.GetString(SR.TcpConnectionTimedOut, timeout);
             }
-            else if (string.Compare(sr, SR.TcpConnectionResetError, StringComparison.OrdinalIgnoreCase) == 0)
+            else if (
+                string.Compare(sr, SR.TcpConnectionResetError, StringComparison.OrdinalIgnoreCase)
+                == 0
+            )
             {
                 return haveEndpoints
-                    ? SR.GetString(SR.TcpConnectionResetErrorWithIP, timeout, localEndpoint, remoteEndpoint)
+                    ? SR.GetString(
+                        SR.TcpConnectionResetErrorWithIP,
+                        timeout,
+                        localEndpoint,
+                        remoteEndpoint
+                    )
                     : SR.GetString(SR.TcpConnectionResetError, timeout);
             }
             else
             {
                 // sr == SR.TcpTransferError
                 return haveEndpoints
-                    ? SR.GetString(SR.TcpTransferErrorWithIP, socketException.ErrorCode, socketException.Message, localEndpoint, remoteEndpoint)
-                    : SR.GetString(SR.TcpTransferError, socketException.ErrorCode, socketException.Message);
+                    ? SR.GetString(
+                        SR.TcpTransferErrorWithIP,
+                        socketException.ErrorCode,
+                        socketException.Message,
+                        localEndpoint,
+                        remoteEndpoint
+                    )
+                    : SR.GetString(
+                        SR.TcpTransferError,
+                        socketException.ErrorCode,
+                        socketException.Message
+                    );
             }
         }
 
-        public AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             ConnectionUtilities.ValidateBufferBounds(buffer, offset, size);
             bool abortWrite = true;
@@ -887,18 +1197,26 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertSendException(socketException, TimeSpan.MaxValue, this.asyncSendTimeout), ExceptionEventType);
+                    ConvertSendException(socketException, TimeSpan.MaxValue, this.asyncSendTimeout),
+                    ExceptionEventType
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Write);
+                Exception exceptionToThrow = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Write
+                );
                 if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                 {
                     throw;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        exceptionToThrow,
+                        ExceptionEventType
+                    );
                 }
             }
             finally
@@ -915,18 +1233,23 @@ namespace System.ServiceModel.Channels
             if (this.asyncWriteException != null)
             {
                 this.AbortWrite();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(this.asyncWriteException, ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    this.asyncWriteException,
+                    ExceptionEventType
+                );
             }
 
             lock (ThisLock)
             {
                 if (!this.asyncWritePending)
                 {
-                    throw Fx.AssertAndThrow("SocketConnection.EndWrite called with no write pending.");
+                    throw Fx.AssertAndThrow(
+                        "SocketConnection.EndWrite called with no write pending."
+                    );
                 }
 
                 this.SetUserToken(this.asyncWriteEventArgs, null);
-                this.asyncWritePending = false;                
+                this.asyncWritePending = false;
 
                 if (this.closeState == CloseState.Closed)
                 {
@@ -943,11 +1266,18 @@ namespace System.ServiceModel.Channels
             try
             {
                 this.HandleSendAsyncCompleted();
-                Fx.Assert(eventArgs.BytesTransferred == this.asyncWriteEventArgs.Count, "The socket SendAsync did not send all the bytes.");
+                Fx.Assert(
+                    eventArgs.BytesTransferred == this.asyncWriteEventArgs.Count,
+                    "The socket SendAsync did not send all the bytes."
+                );
             }
             catch (SocketException socketException)
             {
-                this.asyncWriteException = ConvertSendException(socketException, TimeSpan.MaxValue, this.asyncSendTimeout);
+                this.asyncWriteException = ConvertSendException(
+                    socketException,
+                    TimeSpan.MaxValue,
+                    this.asyncSendTimeout
+                );
             }
 #pragma warning suppress 56500 // Microsoft, transferring exception to caller
             catch (Exception exception)
@@ -970,7 +1300,9 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SocketException((int)this.asyncWriteEventArgs.SocketError));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SocketException((int)this.asyncWriteEventArgs.SocketError)
+            );
         }
 
         // This method should be called inside ThisLock
@@ -1046,18 +1378,30 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertSendException(socketException, timeoutHelper.RemainingTime(), this.socketSyncSendTimeout), ExceptionEventType);
+                    ConvertSendException(
+                        socketException,
+                        timeoutHelper.RemainingTime(),
+                        this.socketSyncSendTimeout
+                    ),
+                    ExceptionEventType
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Write);
+                Exception exceptionToThrow = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Write
+                );
                 if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                 {
                     throw;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        exceptionToThrow,
+                        ExceptionEventType
+                    );
                 }
             }
         }
@@ -1070,11 +1414,22 @@ namespace System.ServiceModel.Channels
             }
             else
             {
-                TD.SocketAsyncWriteStart(this.socket.GetHashCode(), size, this.RemoteEndpointAddress);
+                TD.SocketAsyncWriteStart(
+                    this.socket.GetHashCode(),
+                    size,
+                    this.RemoteEndpointAddress
+                );
             }
         }
 
-        public void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+        public void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        )
         {
             try
             {
@@ -1110,18 +1465,30 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                    ConvertReceiveException(socketException, timeoutHelper.RemainingTime(), this.socketSyncReceiveTimeout), ExceptionEventType);
+                    ConvertReceiveException(
+                        socketException,
+                        timeoutHelper.RemainingTime(),
+                        this.socketSyncReceiveTimeout
+                    ),
+                    ExceptionEventType
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Read);
+                Exception exceptionToThrow = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Read
+                );
                 if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                 {
                     throw;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        exceptionToThrow,
+                        ExceptionEventType
+                    );
                 }
             }
 
@@ -1132,24 +1499,42 @@ namespace System.ServiceModel.Channels
         {
             if (!async)
             {
-                TD.SocketReadStop((this.socket != null) ? this.socket.GetHashCode() : -1, bytesRead, this.RemoteEndpointAddress);
+                TD.SocketReadStop(
+                    (this.socket != null) ? this.socket.GetHashCode() : -1,
+                    bytesRead,
+                    this.RemoteEndpointAddress
+                );
             }
             else
             {
-                TD.SocketAsyncReadStop((this.socket != null) ? this.socket.GetHashCode() : -1, bytesRead, this.RemoteEndpointAddress);
+                TD.SocketAsyncReadStop(
+                    (this.socket != null) ? this.socket.GetHashCode() : -1,
+                    bytesRead,
+                    this.RemoteEndpointAddress
+                );
             }
         }
 
-        public virtual AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout,
-            WaitCallback callback, object state)
+        public virtual AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             ConnectionUtilities.ValidateBufferBounds(AsyncReadBufferSize, offset, size);
             this.ThrowIfNotOpen();
             return this.BeginReadCore(offset, size, timeout, callback, state);
         }
 
-        AsyncCompletionResult BeginReadCore(int offset, int size, TimeSpan timeout,
-            WaitCallback callback, object state)
+        AsyncCompletionResult BeginReadCore(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             bool abortRead = true;
 
@@ -1169,7 +1554,14 @@ namespace System.ServiceModel.Channels
                 if (socket.UseOnlyOverlappedIO)
                 {
                     // ReceiveAsync does not respect UseOnlyOverlappedIO but BeginReceive does.
-                    IAsyncResult result = socket.BeginReceive(AsyncReadBuffer, offset, size, SocketFlags.None, onReceiveCompleted, this);
+                    IAsyncResult result = socket.BeginReceive(
+                        AsyncReadBuffer,
+                        offset,
+                        size,
+                        SocketFlags.None,
+                        onReceiveCompleted,
+                        this
+                    );
 
                     if (!result.CompletedSynchronously)
                     {
@@ -1181,8 +1573,10 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    if (offset != this.asyncReadEventArgs.Offset ||
-                        size != this.asyncReadEventArgs.Count)
+                    if (
+                        offset != this.asyncReadEventArgs.Offset
+                        || size != this.asyncReadEventArgs.Count
+                    )
                     {
                         this.asyncReadEventArgs.SetBuffer(offset, size);
                     }
@@ -1207,18 +1601,31 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(ConvertReceiveException(socketException, TimeSpan.MaxValue, this.asyncReceiveTimeout), ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    ConvertReceiveException(
+                        socketException,
+                        TimeSpan.MaxValue,
+                        this.asyncReceiveTimeout
+                    ),
+                    ExceptionEventType
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                Exception exceptionToThrow = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Read);
+                Exception exceptionToThrow = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Read
+                );
                 if (object.ReferenceEquals(exceptionToThrow, objectDisposedException))
                 {
                     throw;
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(exceptionToThrow, ExceptionEventType);
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                        exceptionToThrow,
+                        ExceptionEventType
+                    );
                 }
             }
             finally
@@ -1230,8 +1637,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Uses a SecurityCritical method to suppress ExecutionContext flow when running in fullTrust.",
-            Safe = "Safe because we're only suppressing the ExecutionContext if we're already in full trust.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Uses a SecurityCritical method to suppress ExecutionContext flow when running in fullTrust.",
+            Safe = "Safe because we're only suppressing the ExecutionContext if we're already in full trust."
+        )]
         [SecuritySafeCritical]
         bool ReceiveAsync()
         {
@@ -1246,8 +1655,10 @@ namespace System.ServiceModel.Channels
             return this.socket.ReceiveAsync(this.asyncReadEventArgs);
         }
 
-        [Fx.Tag.SecurityNote(Critical = "Suppresses execution context flow and restores it after invocation. Fulltrust async callbacks " +
-            "will not have an ExecutionContext, LogicalCallcontext or SecurityContext and should not take dependency on them.")]
+        [Fx.Tag.SecurityNote(
+            Critical = "Suppresses execution context flow and restores it after invocation. Fulltrust async callbacks "
+                + "will not have an ExecutionContext, LogicalCallcontext or SecurityContext and should not take dependency on them."
+        )]
         [SecurityCritical]
         bool ReceiveAsyncNoFlow()
         {
@@ -1276,11 +1687,18 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                this.asyncReadException = ConvertReceiveException(socketException, TimeSpan.MaxValue, this.asyncReceiveTimeout);
+                this.asyncReadException = ConvertReceiveException(
+                    socketException,
+                    TimeSpan.MaxValue,
+                    this.asyncReceiveTimeout
+                );
             }
             catch (ObjectDisposedException objectDisposedException)
             {
-                this.asyncReadException = ConvertObjectDisposedException(objectDisposedException, TransferOperation.Read);
+                this.asyncReadException = ConvertObjectDisposedException(
+                    objectDisposedException,
+                    TransferOperation.Read
+                );
             }
 #pragma warning suppress 56500 // Microsoft, transferring exception to caller
             catch (Exception exception)
@@ -1312,7 +1730,11 @@ namespace System.ServiceModel.Channels
             }
             catch (SocketException socketException)
             {
-                asyncReadException = ConvertReceiveException(socketException, TimeSpan.MaxValue, this.asyncReceiveTimeout);
+                asyncReadException = ConvertReceiveException(
+                    socketException,
+                    TimeSpan.MaxValue,
+                    this.asyncReceiveTimeout
+                );
             }
 #pragma warning suppress 56500 // Microsoft, transferring exception to caller
             catch (Exception exception)
@@ -1334,7 +1756,9 @@ namespace System.ServiceModel.Channels
                 return;
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SocketException((int)this.asyncReadEventArgs.SocketError));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new SocketException((int)this.asyncReadEventArgs.SocketError)
+            );
         }
 
         void FinishRead()
@@ -1354,19 +1778,24 @@ namespace System.ServiceModel.Channels
             if (this.asyncReadException != null)
             {
                 AbortRead();
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(this.asyncReadException, ExceptionEventType);
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
+                    this.asyncReadException,
+                    ExceptionEventType
+                );
             }
 
             lock (ThisLock)
             {
                 if (!this.asyncReadPending)
                 {
-                    throw Fx.AssertAndThrow("SocketConnection.EndRead called with no read pending.");
+                    throw Fx.AssertAndThrow(
+                        "SocketConnection.EndRead called with no read pending."
+                    );
                 }
 
                 this.SetUserToken(this.asyncReadEventArgs, null);
                 this.asyncReadPending = false;
-                
+
                 if (closeState == CloseState.Closed)
                 {
                     this.DisposeReadEventArgs();
@@ -1434,7 +1863,9 @@ namespace System.ServiceModel.Channels
                 if (timeout <= TimeSpan.Zero)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)), ExceptionEventType);
+                        new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)),
+                        ExceptionEventType
+                    );
                 }
 
                 if (ShouldUpdateTimeout(this.socketSyncReceiveTimeout, timeout))
@@ -1474,7 +1905,9 @@ namespace System.ServiceModel.Channels
                 if (timeout <= TimeSpan.Zero)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelper(
-                        new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)), ExceptionEventType);
+                        new TimeoutException(SR.GetString(SR.TcpConnectionTimedOut, timeout)),
+                        ExceptionEventType
+                    );
                 }
 
                 if (ShouldUpdateTimeout(this.socketSyncSendTimeout, timeout))
@@ -1509,7 +1942,9 @@ namespace System.ServiceModel.Channels
             }
 
             long threshold = oldTimeout.Ticks / 10;
-            long delta = Math.Max(oldTimeout.Ticks, newTimeout.Ticks) - Math.Min(oldTimeout.Ticks, newTimeout.Ticks);
+            long delta =
+                Math.Max(oldTimeout.Ticks, newTimeout.Ticks)
+                - Math.Min(oldTimeout.Ticks, newTimeout.Ticks);
 
             return delta > threshold;
         }
@@ -1522,7 +1957,9 @@ namespace System.ServiceModel.Channels
                 // Init ReadAsync state
                 if (onReceiveAsyncCompleted == null)
                 {
-                    onReceiveAsyncCompleted = new EventHandler<SocketAsyncEventArgs>(OnReceiveAsyncCompleted);
+                    onReceiveAsyncCompleted = new EventHandler<SocketAsyncEventArgs>(
+                        OnReceiveAsyncCompleted
+                    );
                 }
 
                 this.asyncReadEventArgs = new SocketAsyncEventArgs();
@@ -1539,7 +1976,9 @@ namespace System.ServiceModel.Channels
                 // Init SendAsync state
                 if (onSocketSendCompleted == null)
                 {
-                    onSocketSendCompleted = new EventHandler<SocketAsyncEventArgs>(OnSendAsyncCompleted);
+                    onSocketSendCompleted = new EventHandler<SocketAsyncEventArgs>(
+                        OnSendAsyncCompleted
+                    );
                 }
 
                 this.asyncWriteEventArgs = new SocketAsyncEventArgs();
@@ -1578,57 +2017,111 @@ namespace System.ServiceModel.Channels
             return new SocketConnection(socket, this.connectionBufferPool, false);
         }
 
-        public static Exception ConvertConnectException(SocketException socketException, Uri remoteUri, TimeSpan timeSpent, Exception innerException)
+        public static Exception ConvertConnectException(
+            SocketException socketException,
+            Uri remoteUri,
+            TimeSpan timeSpent,
+            Exception innerException
+        )
         {
             if (socketException.ErrorCode == UnsafeNativeMethods.ERROR_INVALID_HANDLE)
             {
-                return new CommunicationObjectAbortedException(socketException.Message, socketException);
+                return new CommunicationObjectAbortedException(
+                    socketException.Message,
+                    socketException
+                );
             }
 
-            if (socketException.ErrorCode == UnsafeNativeMethods.WSAEADDRNOTAVAIL ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAECONNREFUSED ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAENETDOWN ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAENETUNREACH ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAEHOSTDOWN ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAEHOSTUNREACH ||
-                socketException.ErrorCode == UnsafeNativeMethods.WSAETIMEDOUT)
+            if (
+                socketException.ErrorCode == UnsafeNativeMethods.WSAEADDRNOTAVAIL
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAECONNREFUSED
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAENETDOWN
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAENETUNREACH
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAEHOSTDOWN
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAEHOSTUNREACH
+                || socketException.ErrorCode == UnsafeNativeMethods.WSAETIMEDOUT
+            )
             {
                 if (timeSpent == TimeSpan.MaxValue)
                 {
-                    return new EndpointNotFoundException(SR.GetString(SR.TcpConnectError, remoteUri.AbsoluteUri, socketException.ErrorCode, socketException.Message), innerException);
+                    return new EndpointNotFoundException(
+                        SR.GetString(
+                            SR.TcpConnectError,
+                            remoteUri.AbsoluteUri,
+                            socketException.ErrorCode,
+                            socketException.Message
+                        ),
+                        innerException
+                    );
                 }
                 else
                 {
-                    return new EndpointNotFoundException(SR.GetString(SR.TcpConnectErrorWithTimeSpan, remoteUri.AbsoluteUri, socketException.ErrorCode, socketException.Message, timeSpent), innerException);
+                    return new EndpointNotFoundException(
+                        SR.GetString(
+                            SR.TcpConnectErrorWithTimeSpan,
+                            remoteUri.AbsoluteUri,
+                            socketException.ErrorCode,
+                            socketException.Message,
+                            timeSpent
+                        ),
+                        innerException
+                    );
                 }
             }
             else if (socketException.ErrorCode == UnsafeNativeMethods.WSAENOBUFS)
             {
-                return new InsufficientMemoryException(SR.GetString(SR.TcpConnectNoBufs), innerException);
+                return new InsufficientMemoryException(
+                    SR.GetString(SR.TcpConnectNoBufs),
+                    innerException
+                );
             }
-            else if (socketException.ErrorCode == UnsafeNativeMethods.ERROR_NOT_ENOUGH_MEMORY ||
-                socketException.ErrorCode == UnsafeNativeMethods.ERROR_NO_SYSTEM_RESOURCES ||
-                socketException.ErrorCode == UnsafeNativeMethods.ERROR_OUTOFMEMORY)
+            else if (
+                socketException.ErrorCode == UnsafeNativeMethods.ERROR_NOT_ENOUGH_MEMORY
+                || socketException.ErrorCode == UnsafeNativeMethods.ERROR_NO_SYSTEM_RESOURCES
+                || socketException.ErrorCode == UnsafeNativeMethods.ERROR_OUTOFMEMORY
+            )
             {
-                return new InsufficientMemoryException(SR.GetString(SR.InsufficentMemory), socketException);
+                return new InsufficientMemoryException(
+                    SR.GetString(SR.InsufficentMemory),
+                    socketException
+                );
             }
             else
             {
                 if (timeSpent == TimeSpan.MaxValue)
                 {
-                    return new CommunicationException(SR.GetString(SR.TcpConnectError, remoteUri.AbsoluteUri, socketException.ErrorCode, socketException.Message), innerException);
+                    return new CommunicationException(
+                        SR.GetString(
+                            SR.TcpConnectError,
+                            remoteUri.AbsoluteUri,
+                            socketException.ErrorCode,
+                            socketException.Message
+                        ),
+                        innerException
+                    );
                 }
                 else
                 {
-                    return new CommunicationException(SR.GetString(SR.TcpConnectErrorWithTimeSpan, remoteUri.AbsoluteUri, socketException.ErrorCode, socketException.Message, timeSpent), innerException);
+                    return new CommunicationException(
+                        SR.GetString(
+                            SR.TcpConnectErrorWithTimeSpan,
+                            remoteUri.AbsoluteUri,
+                            socketException.ErrorCode,
+                            socketException.Message,
+                            timeSpent
+                        ),
+                        innerException
+                    );
                 }
             }
         }
 
         static IPAddress[] GetIPAddresses(Uri uri)
         {
-            if (uri.HostNameType == UriHostNameType.IPv4 ||
-                uri.HostNameType == UriHostNameType.IPv6)
+            if (
+                uri.HostNameType == UriHostNameType.IPv4
+                || uri.HostNameType == UriHostNameType.IPv6
+            )
             {
                 IPAddress ipAddress = IPAddress.Parse(uri.DnsSafeHost);
                 return new IPAddress[] { ipAddress };
@@ -1643,20 +2136,30 @@ namespace System.ServiceModel.Channels
             catch (SocketException socketException)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(SR.GetString(SR.UnableToResolveHost, uri.Host), socketException));
+                    new EndpointNotFoundException(
+                        SR.GetString(SR.UnableToResolveHost, uri.Host),
+                        socketException
+                    )
+                );
             }
 
             if (hostEntry.AddressList.Length == 0)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(SR.GetString(SR.UnableToResolveHost, uri.Host)));
+                    new EndpointNotFoundException(SR.GetString(SR.UnableToResolveHost, uri.Host))
+                );
             }
 
             return hostEntry.AddressList;
         }
 
-        static TimeoutException CreateTimeoutException(Uri uri, TimeSpan timeout, IPAddress[] addresses, int invalidAddressCount,
-            SocketException innerException)
+        static TimeoutException CreateTimeoutException(
+            Uri uri,
+            TimeSpan timeout,
+            IPAddress[] addresses,
+            int invalidAddressCount,
+            SocketException innerException
+        )
         {
             StringBuilder addressStringBuilder = new StringBuilder();
             for (int i = 0; i < invalidAddressCount; i++)
@@ -1673,18 +2176,33 @@ namespace System.ServiceModel.Channels
                 addressStringBuilder.Append(addresses[i].ToString());
             }
 
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException(
-                SR.GetString(SR.TcpConnectingToViaTimedOut, uri.AbsoluteUri, timeout.ToString(),
-                invalidAddressCount, addresses.Length, addressStringBuilder.ToString()), innerException));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new TimeoutException(
+                    SR.GetString(
+                        SR.TcpConnectingToViaTimedOut,
+                        uri.AbsoluteUri,
+                        timeout.ToString(),
+                        invalidAddressCount,
+                        addresses.Length,
+                        addressStringBuilder.ToString()
+                    ),
+                    innerException
+                )
+            );
         }
 
         public IConnection Connect(Uri uri, TimeSpan timeout)
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.InitiatingTcpConnection,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.InitiatingTcpConnection,
                     SR.GetString(SR.TraceCodeInitiatingTcpConnection),
-                    new StringTraceRecord("Uri", uri.ToString()), this, null);
+                    new StringTraceRecord("Uri", uri.ToString()),
+                    this,
+                    null
+                );
             }
 
             int port = uri.Port;
@@ -1704,7 +2222,14 @@ namespace System.ServiceModel.Channels
                 if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        CreateTimeoutException(uri, timeoutHelper.OriginalTimeout, addresses, invalidAddressCount, lastException));
+                        CreateTimeoutException(
+                            uri,
+                            timeoutHelper.OriginalTimeout,
+                            addresses,
+                            invalidAddressCount,
+                            lastException
+                        )
+                    );
                 }
 
                 AddressFamily addressFamily = addresses[i].AddressFamily;
@@ -1726,7 +2251,12 @@ namespace System.ServiceModel.Channels
                 catch (SocketException socketException)
                 {
                     invalidAddressCount++;
-                    SocketConnectionInitiator.TraceConnectFailure(socket, socketException, uri, DateTime.UtcNow - connectStartTime);
+                    SocketConnectionInitiator.TraceConnectFailure(
+                        socket,
+                        socketException,
+                        uri,
+                        DateTime.UtcNow - connectStartTime
+                    );
                     lastException = socketException;
                     socket.Close();
                 }
@@ -1735,26 +2265,44 @@ namespace System.ServiceModel.Channels
             if (socket == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new EndpointNotFoundException(SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)));
+                    new EndpointNotFoundException(
+                        SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)
+                    )
+                );
             }
 
             if (lastException != null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    SocketConnectionInitiator.ConvertConnectException(lastException, uri,
-                    timeoutHelper.ElapsedTime(), lastException));
+                    SocketConnectionInitiator.ConvertConnectException(
+                        lastException,
+                        uri,
+                        timeoutHelper.ElapsedTime(),
+                        lastException
+                    )
+                );
             }
 
             return CreateConnection(socket);
         }
 
-        public IAsyncResult BeginConnect(Uri uri, TimeSpan timeout, AsyncCallback callback, object state)
+        public IAsyncResult BeginConnect(
+            Uri uri,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             if (DiagnosticUtility.ShouldTraceInformation)
             {
-                TraceUtility.TraceEvent(TraceEventType.Information, TraceCode.InitiatingTcpConnection,
+                TraceUtility.TraceEvent(
+                    TraceEventType.Information,
+                    TraceCode.InitiatingTcpConnection,
                     SR.GetString(SR.TraceCodeInitiatingTcpConnection),
-                    new StringTraceRecord("Uri", uri.ToString()), this, null);
+                    new StringTraceRecord("Uri", uri.ToString()),
+                    this,
+                    null
+                );
             }
             return new ConnectAsyncResult(uri, timeout, callback, state);
         }
@@ -1765,14 +2313,28 @@ namespace System.ServiceModel.Channels
             return CreateConnection(socket);
         }
 
-        public static void TraceConnectFailure(Socket socket, SocketException socketException, Uri remoteUri,
-            TimeSpan timeSpentInConnect)
+        public static void TraceConnectFailure(
+            Socket socket,
+            SocketException socketException,
+            Uri remoteUri,
+            TimeSpan timeSpentInConnect
+        )
         {
             if (DiagnosticUtility.ShouldTraceWarning)
             {
-                Exception traceException = ConvertConnectException(socketException, remoteUri, timeSpentInConnect, socketException);
-                TraceUtility.TraceEvent(TraceEventType.Warning, TraceCode.TcpConnectError,
-                    SR.GetString(SR.TraceCodeTcpConnectError), socket, traceException);
+                Exception traceException = ConvertConnectException(
+                    socketException,
+                    remoteUri,
+                    timeSpentInConnect,
+                    socketException
+                );
+                TraceUtility.TraceEvent(
+                    TraceEventType.Warning,
+                    TraceCode.TcpConnectError,
+                    SR.GetString(SR.TraceCodeTcpConnectError),
+                    socket,
+                    traceException
+                );
             }
         }
 
@@ -1791,7 +2353,12 @@ namespace System.ServiceModel.Channels
             static Action<object> startConnectCallback;
             static AsyncCallback onConnect = Fx.ThunkCallback(new AsyncCallback(OnConnect));
 
-            public ConnectAsyncResult(Uri uri, TimeSpan timeout, AsyncCallback callback, object state)
+            public ConnectAsyncResult(
+                Uri uri,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.uri = uri;
@@ -1859,7 +2426,14 @@ namespace System.ServiceModel.Channels
                     if (timeoutHelper.RemainingTime() == TimeSpan.Zero)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            CreateTimeoutException(uri, timeoutHelper.OriginalTimeout, addresses, invalidAddressCount, lastException));
+                            CreateTimeoutException(
+                                uri,
+                                timeoutHelper.OriginalTimeout,
+                                addresses,
+                                invalidAddressCount,
+                                lastException
+                            )
+                        );
                     }
 
                     AddressFamily addressFamily = addresses[currentIndex].AddressFamily;
@@ -1874,7 +2448,11 @@ namespace System.ServiceModel.Channels
                     try
                     {
                         IPEndPoint ipEndPoint = new IPEndPoint(addresses[currentIndex], port);
-                        this.socket = new Socket(addressFamily, SocketType.Stream, ProtocolType.Tcp);
+                        this.socket = new Socket(
+                            addressFamily,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        );
                         IAsyncResult result = socket.BeginConnect(ipEndPoint, onConnect, this);
                         if (!result.CompletedSynchronously)
                         {
@@ -1896,18 +2474,34 @@ namespace System.ServiceModel.Channels
                 if (socket == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new EndpointNotFoundException(SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)));
+                        new EndpointNotFoundException(
+                            SR.GetString(SR.NoIPEndpointsFoundForHost, uri.Host)
+                        )
+                    );
                 }
 
-                Fx.Assert(lastException != null, "StartConnect: Can't get here without an exception.");
+                Fx.Assert(
+                    lastException != null,
+                    "StartConnect: Can't get here without an exception."
+                );
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    SocketConnectionInitiator.ConvertConnectException(lastException, uri,
-                    timeoutHelper.ElapsedTime(), lastException));
+                    SocketConnectionInitiator.ConvertConnectException(
+                        lastException,
+                        uri,
+                        timeoutHelper.ElapsedTime(),
+                        lastException
+                    )
+                );
             }
 
             void TraceConnectFailure(SocketException exception)
             {
-                SocketConnectionInitiator.TraceConnectFailure(this.socket, exception, uri, DateTime.UtcNow - connectStartTime);
+                SocketConnectionInitiator.TraceConnectFailure(
+                    this.socket,
+                    exception,
+                    uri,
+                    DateTime.UtcNow - connectStartTime
+                );
                 this.socket.Close();
             }
 
@@ -1979,13 +2573,21 @@ namespace System.ServiceModel.Channels
         ConnectionBufferPool connectionBufferPool;
         SocketAsyncEventArgsPool socketAsyncEventArgsPool;
 
-        public SocketConnectionListener(Socket listenSocket, ISocketListenerSettings settings, bool useOnlyOverlappedIO)
+        public SocketConnectionListener(
+            Socket listenSocket,
+            ISocketListenerSettings settings,
+            bool useOnlyOverlappedIO
+        )
             : this(settings, useOnlyOverlappedIO)
         {
             this.listenSocket = listenSocket;
         }
 
-        public SocketConnectionListener(IPEndPoint localEndpoint, ISocketListenerSettings settings, bool useOnlyOverlappedIO)
+        public SocketConnectionListener(
+            IPEndPoint localEndpoint,
+            ISocketListenerSettings settings,
+            bool useOnlyOverlappedIO
+        )
             : this(settings, useOnlyOverlappedIO)
         {
             this.localEndpoint = localEndpoint;
@@ -2016,7 +2618,10 @@ namespace System.ServiceModel.Channels
 
         void ReturnSocketAsyncEventArgs(SocketAsyncEventArgs socketAsyncEventArgs)
         {
-            Fx.Assert(socketAsyncEventArgsPool != null, "The socketAsyncEventArgsPool should not be null");
+            Fx.Assert(
+                socketAsyncEventArgsPool != null,
+                "The socketAsyncEventArgsPool should not be null"
+            );
             this.socketAsyncEventArgsPool.Return(socketAsyncEventArgs);
         }
 
@@ -2032,12 +2637,19 @@ namespace System.ServiceModel.Channels
             {
                 if (isDisposed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString(), SR.GetString(SR.SocketListenerDisposed)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(
+                            this.GetType().ToString(),
+                            SR.GetString(SR.SocketListenerDisposed)
+                        )
+                    );
                 }
 
                 if (!isListening)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SocketListenerNotListening)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new InvalidOperationException(SR.GetString(SR.SocketListenerNotListening))
+                    );
                 }
 
                 return acceptAsyncFunc(listenSocket);
@@ -2079,13 +2691,12 @@ namespace System.ServiceModel.Channels
             }
         }
 
-
         public void Listen()
         {
-            // If you call listen() on a port, then kill the process, then immediately start a new process and 
-            // try to listen() on the same port, you sometimes get WSAEADDRINUSE.  Even if nothing was accepted.  
-            // Ports don't immediately free themselves on process shutdown.  We call listen() in a loop on a delay 
-            // for a few iterations for this reason. 
+            // If you call listen() on a port, then kill the process, then immediately start a new process and
+            // try to listen() on the same port, you sometimes get WSAEADDRINUSE.  Even if nothing was accepted.
+            // Ports don't immediately free themselves on process shutdown.  We call listen() in a loop on a delay
+            // for a few iterations for this reason.
             //
             TimeSpan listenTimeout = TimeSpan.FromSeconds(1);
             BackoffTimeoutHelper backoffHelper = new BackoffTimeoutHelper(listenTimeout);
@@ -2102,11 +2713,22 @@ namespace System.ServiceModel.Channels
                 {
                     try
                     {
-                        this.listenSocket = new Socket(localEndpoint.AddressFamily, SocketType.Stream, ProtocolType.Tcp);
+                        this.listenSocket = new Socket(
+                            localEndpoint.AddressFamily,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        );
 
-                        if (localEndpoint.AddressFamily == AddressFamily.InterNetworkV6 && settings.TeredoEnabled)
+                        if (
+                            localEndpoint.AddressFamily == AddressFamily.InterNetworkV6
+                            && settings.TeredoEnabled
+                        )
                         {
-                            this.listenSocket.SetSocketOption(SocketOptionLevel.IPv6, (SocketOptionName)23, 10);
+                            this.listenSocket.SetSocketOption(
+                                SocketOptionLevel.IPv6,
+                                (SocketOptionName)23,
+                                10
+                            );
                         }
 
                         this.listenSocket.Bind(localEndpoint);
@@ -2129,30 +2751,51 @@ namespace System.ServiceModel.Channels
                         if (!retry)
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                SocketConnectionListener.ConvertListenException(socketException, this.localEndpoint));
+                                SocketConnectionListener.ConvertListenException(
+                                    socketException,
+                                    this.localEndpoint
+                                )
+                            );
                         }
                     }
                 }
 
-                this.socketAsyncEventArgsPool = new SocketAsyncEventArgsPool(GetAcceptBufferSize(this.listenSocket));
+                this.socketAsyncEventArgsPool = new SocketAsyncEventArgsPool(
+                    GetAcceptBufferSize(this.listenSocket)
+                );
             }
         }
 
-        public static Exception ConvertListenException(SocketException socketException, IPEndPoint localEndpoint)
+        public static Exception ConvertListenException(
+            SocketException socketException,
+            IPEndPoint localEndpoint
+        )
         {
             if (socketException.ErrorCode == UnsafeNativeMethods.ERROR_INVALID_HANDLE)
             {
-                return new CommunicationObjectAbortedException(socketException.Message, socketException);
+                return new CommunicationObjectAbortedException(
+                    socketException.Message,
+                    socketException
+                );
             }
             if (socketException.ErrorCode == UnsafeNativeMethods.WSAEADDRINUSE)
             {
-                return new AddressAlreadyInUseException(SR.GetString(SR.TcpAddressInUse, localEndpoint.ToString()), socketException);
+                return new AddressAlreadyInUseException(
+                    SR.GetString(SR.TcpAddressInUse, localEndpoint.ToString()),
+                    socketException
+                );
             }
             else
             {
                 return new CommunicationException(
-                    SR.GetString(SR.TcpListenError, socketException.ErrorCode, socketException.Message, localEndpoint.ToString()),
-                    socketException);
+                    SR.GetString(
+                        SR.TcpListenError,
+                        socketException.ErrorCode,
+                        socketException.Message,
+                        localEndpoint.ToString()
+                    ),
+                    socketException
+                );
             }
         }
 
@@ -2164,14 +2807,20 @@ namespace System.ServiceModel.Channels
             static Action<object> startAccept;
             EventTraceActivity eventTraceActivity;
 
-            // 
-            static EventHandler<SocketAsyncEventArgs> acceptAsyncCompleted = new EventHandler<SocketAsyncEventArgs>(AcceptAsyncCompleted);
-            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(OnInternalCompleting);
+            //
+            static EventHandler<SocketAsyncEventArgs> acceptAsyncCompleted =
+                new EventHandler<SocketAsyncEventArgs>(AcceptAsyncCompleted);
+            static Action<AsyncResult, Exception> onCompleting = new Action<AsyncResult, Exception>(
+                OnInternalCompleting
+            );
 
-            public AcceptAsyncResult(SocketConnectionListener listener, AsyncCallback callback, object state)
+            public AcceptAsyncResult(
+                SocketConnectionListener listener,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
-
                 if (TD.SocketAcceptEnqueuedIsEnabled())
                 {
                     TD.SocketAcceptEnqueued(this.EventTraceActivity);
@@ -2283,10 +2932,10 @@ namespace System.ServiceModel.Channels
             static bool ShouldAcceptRecover(SocketException exception)
             {
                 return (
-                    (exception.ErrorCode == UnsafeNativeMethods.WSAECONNRESET) ||
-                    (exception.ErrorCode == UnsafeNativeMethods.WSAEMFILE) ||
-                    (exception.ErrorCode == UnsafeNativeMethods.WSAENOBUFS) ||
-                    (exception.ErrorCode == UnsafeNativeMethods.WSAETIMEDOUT)
+                    (exception.ErrorCode == UnsafeNativeMethods.WSAECONNRESET)
+                    || (exception.ErrorCode == UnsafeNativeMethods.WSAEMFILE)
+                    || (exception.ErrorCode == UnsafeNativeMethods.WSAENOBUFS)
+                    || (exception.ErrorCode == UnsafeNativeMethods.WSAETIMEDOUT)
                 );
             }
 
@@ -2315,9 +2964,15 @@ namespace System.ServiceModel.Channels
                 AcceptAsyncResult thisPtr = (AcceptAsyncResult)e.UserToken;
                 Fx.Assert(thisPtr.socketAsyncEventArgs == e, "Got wrong socketAsyncEventArgs");
                 Exception completionException = thisPtr.HandleAcceptAsyncCompleted();
-                if (completionException != null && ShouldAcceptRecover((SocketException)completionException))
+                if (
+                    completionException != null
+                    && ShouldAcceptRecover((SocketException)completionException)
+                )
                 {
-                    DiagnosticUtility.TraceHandledException(completionException, TraceEventType.Warning);
+                    DiagnosticUtility.TraceHandledException(
+                        completionException,
+                        TraceEventType.Warning
+                    );
 
                     StartAccept(thisPtr);
                     return;
@@ -2338,7 +2993,8 @@ namespace System.ServiceModel.Channels
                         TD.SocketAccepted(
                             thisPtr.EventTraceActivity,
                             thisPtr.listener != null ? thisPtr.listener.GetHashCode() : -1,
-                            hashCode);
+                            hashCode
+                        );
                     }
                     else
                     {
@@ -2346,7 +3002,10 @@ namespace System.ServiceModel.Channels
                     }
                 }
 
-                Fx.Assert(result != null, "Wrong async result has been passed in to OnInternalCompleting");
+                Fx.Assert(
+                    result != null,
+                    "Wrong async result has been passed in to OnInternalCompleting"
+                );
                 thisPtr.ReturnSocketAsyncEventArgs();
             }
 
@@ -2371,7 +3030,9 @@ namespace System.ServiceModel.Channels
                 }
                 else
                 {
-                    completionException = new SocketException((int)this.socketAsyncEventArgs.SocketError);
+                    completionException = new SocketException(
+                        (int)this.socketAsyncEventArgs.SocketError
+                    );
                 }
 
                 return completionException;

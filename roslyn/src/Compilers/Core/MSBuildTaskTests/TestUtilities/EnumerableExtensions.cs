@@ -9,7 +9,10 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
 {
     public static class EnumerableExtensions
     {
-        public static IEnumerable<S> SelectWithIndex<T, S>(this IEnumerable<T> items, Func<T, int, S> selector)
+        public static IEnumerable<S> SelectWithIndex<T, S>(
+            this IEnumerable<T> items,
+            Func<T, int, S> selector
+        )
         {
             int i = 0;
             foreach (var item in items)

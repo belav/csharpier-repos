@@ -23,7 +23,11 @@ namespace Microsoft.Extensions.Hosting.Internal
 
         private void HandlePosixSignal(PosixSignalContext context)
         {
-            Debug.Assert(context.Signal == PosixSignal.SIGINT || context.Signal == PosixSignal.SIGQUIT || context.Signal == PosixSignal.SIGTERM);
+            Debug.Assert(
+                context.Signal == PosixSignal.SIGINT
+                    || context.Signal == PosixSignal.SIGQUIT
+                    || context.Signal == PosixSignal.SIGTERM
+            );
 
             context.Cancel = true;
             ApplicationLifetime.StopApplication();

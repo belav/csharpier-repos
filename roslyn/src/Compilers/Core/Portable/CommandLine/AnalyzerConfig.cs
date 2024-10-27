@@ -19,9 +19,16 @@ namespace Microsoft.CodeAnalysis
     public sealed partial class AnalyzerConfig
     {
         // Matches EditorConfig section header such as "[*.{js,py}]", see https://editorconfig.org for details
-        private static readonly Regex s_sectionMatcher = new Regex(@"^\s*\[(([^#;]|\\#|\\;)+)\]\s*([#;].*)?$", RegexOptions.Compiled);
+        private static readonly Regex s_sectionMatcher = new Regex(
+            @"^\s*\[(([^#;]|\\#|\\;)+)\]\s*([#;].*)?$",
+            RegexOptions.Compiled
+        );
+
         // Matches EditorConfig property such as "indent_style = space", see https://editorconfig.org for details
-        private static readonly Regex s_propertyMatcher = new Regex(@"^\s*([\w\.\-_]+)\s*[=:]\s*(.*?)\s*([#;].*)?$", RegexOptions.Compiled);
+        private static readonly Regex s_propertyMatcher = new Regex(
+            @"^\s*([\w\.\-_]+)\s*[=:]\s*(.*?)\s*([#;].*)?$",
+            RegexOptions.Compiled
+        );
 
         /// <summary>
         /// Key that indicates if this config is a global config
@@ -48,24 +55,28 @@ namespace Microsoft.CodeAnalysis
         /// at 2018-04-21 19:37:05Z. New keys may be added to this list in newer versions, but old ones will
         /// not be removed.
         /// </remarks>
-        internal static ImmutableHashSet<string> ReservedKeys { get; }
-            = ImmutableHashSet.CreateRange(Section.PropertiesKeyComparer, new[] {
-                "root",
-                "indent_style",
-                "indent_size",
-                "tab_width",
-                "end_of_line",
-                "charset",
-                "trim_trailing_whitespace",
-                "insert_final_newline",
-            });
+        internal static ImmutableHashSet<string> ReservedKeys { get; } =
+            ImmutableHashSet.CreateRange(
+                Section.PropertiesKeyComparer,
+                new[]
+                {
+                    "root",
+                    "indent_style",
+                    "indent_size",
+                    "tab_width",
+                    "end_of_line",
+                    "charset",
+                    "trim_trailing_whitespace",
+                    "insert_final_newline",
+                }
+            );
 
         /// <summary>
         /// A set of values that are reserved for special use for the editorconfig specification
         /// and will always be lower-cased by the parser.
         /// </summary>
-        internal static ImmutableHashSet<string> ReservedValues { get; }
-            = ImmutableHashSet.CreateRange(CaseInsensitiveComparison.Comparer, new[] { "unset" });
+        internal static ImmutableHashSet<string> ReservedValues { get; } =
+            ImmutableHashSet.CreateRange(CaseInsensitiveComparison.Comparer, new[] { "unset" });
 
         internal Section GlobalSection { get; }
 
@@ -83,20 +94,24 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Comparer for sorting <see cref="AnalyzerConfig"/> files by <see cref="NormalizedDirectory"/> path length.
         /// </summary>
-        internal static Comparer<AnalyzerConfig> DirectoryLengthComparer { get; } = Comparer<AnalyzerConfig>.Create(
-            (e1, e2) => e1.NormalizedDirectory.Length.CompareTo(e2.NormalizedDirectory.Length));
+        internal static Comparer<AnalyzerConfig> DirectoryLengthComparer { get; } =
+            Comparer<AnalyzerConfig>.Create(
+                (e1, e2) => e1.NormalizedDirectory.Length.CompareTo(e2.NormalizedDirectory.Length)
+            );
 
         internal ImmutableArray<Section> NamedSections { get; }
 
         /// <summary>
         /// Gets whether this editorconfig is a topmost editorconfig.
         /// </summary>
-        internal bool IsRoot => GlobalSection.Properties.TryGetValue("root", out string? val) && val == "true";
+        internal bool IsRoot =>
+            GlobalSection.Properties.TryGetValue("root", out string? val) && val == "true";
 
         /// <summary>
         /// Gets whether this editorconfig is a global editorconfig.
         /// </summary>
-        internal bool IsGlobal => _hasGlobalFileName || GlobalSection.Properties.ContainsKey(GlobalKey);
+        internal bool IsGlobal =>
+            _hasGlobalFileName || GlobalSection.Properties.ContainsKey(GlobalKey);
 
         /// <summary>
         /// Get the global level of this config, used to resolve conflicting keys
@@ -112,14 +127,17 @@ namespace Microsoft.CodeAnalysis
         ///     Any other file gets a default level of 0
         ///     </description></item>
         ///  </list>
-        ///  
+        ///
         /// This value is unused when <see cref="IsGlobal"/> is <c>false</c>.
         /// </remarks>
         internal int GlobalLevel
         {
             get
             {
-                if (GlobalSection.Properties.TryGetValue(GlobalLevelKey, out string? val) && int.TryParse(val, out int level))
+                if (
+                    GlobalSection.Properties.TryGetValue(GlobalLevelKey, out string? val)
+                    && int.TryParse(val, out int level)
+                )
                 {
                     return level;
                 }
@@ -139,12 +157,14 @@ namespace Microsoft.CodeAnalysis
         private AnalyzerConfig(
             Section globalSection,
             ImmutableArray<Section> namedSections,
-            string pathToFile)
+            string pathToFile
+        )
         {
             GlobalSection = globalSection;
             NamedSections = namedSections;
             PathToFile = pathToFile;
-            _hasGlobalFileName = Path.GetFileName(pathToFile).Equals(UserGlobalConfigName, StringComparison.OrdinalIgnoreCase);
+            _hasGlobalFileName = Path.GetFileName(pathToFile)
+                .Equals(UserGlobalConfigName, StringComparison.OrdinalIgnoreCase);
 
             // Find the containing directory and normalize the path separators
             string directory = Path.GetDirectoryName(pathToFile) ?? pathToFile;
@@ -166,9 +186,16 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public static AnalyzerConfig Parse(SourceText text, string? pathToFile)
         {
-            if (pathToFile is null || !Path.IsPathRooted(pathToFile) || string.IsNullOrEmpty(Path.GetFileName(pathToFile)))
+            if (
+                pathToFile is null
+                || !Path.IsPathRooted(pathToFile)
+                || string.IsNullOrEmpty(Path.GetFileName(pathToFile))
+            )
             {
-                throw new ArgumentException("Must be an absolute path to an editorconfig file", nameof(pathToFile));
+                throw new ArgumentException(
+                    "Must be an absolute path to an editorconfig file",
+                    nameof(pathToFile)
+                );
             }
 
             Section? globalSection = null;
@@ -181,7 +208,8 @@ namespace Microsoft.CodeAnalysis
             // To accommodate this, we use a lower case Unicode mapping when adding to the
             // dictionary, but we also use a case-insensitive key comparer when doing lookups
             var activeSectionProperties = ImmutableDictionary.CreateBuilder<string, string>(
-                Section.PropertiesKeyComparer);
+                Section.PropertiesKeyComparer
+            );
             string activeSectionName = "";
 
             foreach (var textLine in text.Lines)
@@ -208,7 +236,8 @@ namespace Microsoft.CodeAnalysis
 
                     activeSectionName = sectionName;
                     activeSectionProperties = ImmutableDictionary.CreateBuilder<string, string>(
-                        Section.PropertiesKeyComparer);
+                        Section.PropertiesKeyComparer
+                    );
                     continue;
                 }
 
@@ -236,12 +265,19 @@ namespace Microsoft.CodeAnalysis
             // Add the last section
             addNewSection();
 
-            return new AnalyzerConfig(globalSection!, namedSectionBuilder.ToImmutable(), pathToFile);
+            return new AnalyzerConfig(
+                globalSection!,
+                namedSectionBuilder.ToImmutable(),
+                pathToFile
+            );
 
             void addNewSection()
             {
                 // Close out the previous section
-                var previousSection = new Section(activeSectionName, activeSectionProperties.ToImmutable());
+                var previousSection = new Section(
+                    activeSectionName,
+                    activeSectionProperties.ToImmutable()
+                );
                 if (activeSectionName == "")
                 {
                     // This is the global section
@@ -283,13 +319,15 @@ namespace Microsoft.CodeAnalysis
             /// Used to compare <see cref="Name"/>s of sections. Specified by editorconfig to
             /// be a case-sensitive comparison.
             /// </summary>
-            public static IEqualityComparer<string> NameEqualityComparer { get; } = StringComparer.Ordinal;
+            public static IEqualityComparer<string> NameEqualityComparer { get; } =
+                StringComparer.Ordinal;
 
             /// <summary>
             /// Used to compare keys in <see cref="Properties"/>. The editorconfig spec defines property
             /// keys as being compared case-insensitively according to Unicode lower-case rules.
             /// </summary>
-            public static StringComparer PropertiesKeyComparer { get; } = CaseInsensitiveComparison.Comparer;
+            public static StringComparer PropertiesKeyComparer { get; } =
+                CaseInsensitiveComparison.Comparer;
 
             public Section(string name, ImmutableDictionary<string, string> properties)
             {

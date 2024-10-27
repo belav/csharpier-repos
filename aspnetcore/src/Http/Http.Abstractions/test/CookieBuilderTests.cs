@@ -14,10 +14,7 @@ public class CookieBuilderTests
     [InlineData(CookieSecurePolicy.None, false, false)]
     public void ConfiguresSecurePolicy(CookieSecurePolicy policy, bool requestIsHttps, bool secure)
     {
-        var builder = new CookieBuilder
-        {
-            SecurePolicy = policy
-        };
+        var builder = new CookieBuilder { SecurePolicy = policy };
         var context = new DefaultHttpContext();
         context.Request.IsHttps = requestIsHttps;
         var options = builder.Build(context);
@@ -31,7 +28,10 @@ public class CookieBuilderTests
         Assert.Null(new CookieBuilder().Build(new DefaultHttpContext()).Expires);
 
         var now = DateTimeOffset.Now;
-        var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(new DefaultHttpContext(), now);
+        var options = new CookieBuilder { Expiration = TimeSpan.FromHours(1) }.Build(
+            new DefaultHttpContext(),
+            now
+        );
         Assert.Equal(now.AddHours(1), options.Expires);
     }
 
@@ -48,7 +48,10 @@ public class CookieBuilderTests
     [Fact]
     public void CookieBuilderPreservesDefaultPath()
     {
-        Assert.Equal(new CookieOptions().Path, new CookieBuilder().Build(new DefaultHttpContext()).Path);
+        Assert.Equal(
+            new CookieOptions().Path,
+            new CookieBuilder().Build(new DefaultHttpContext()).Path
+        );
     }
 
     [Fact]

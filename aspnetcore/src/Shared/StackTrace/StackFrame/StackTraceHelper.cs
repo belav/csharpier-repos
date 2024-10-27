@@ -17,8 +17,15 @@ namespace Microsoft.Extensions.StackTrace.Sources;
 
 internal sealed class StackTraceHelper
 {
-    [UnconditionalSuppressMessage("Trimmer", "IL2026", Justification = "MethodInfo for a stack frame might be incomplete or removed. GetFrames does the best it can to provide frame details.")]
-    public static IList<StackFrameInfo> GetFrames(Exception exception, out AggregateException? error)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2026",
+        Justification = "MethodInfo for a stack frame might be incomplete or removed. GetFrames does the best it can to provide frame details."
+    )]
+    public static IList<StackFrameInfo> GetFrames(
+        Exception exception,
+        out AggregateException? error
+    )
     {
         if (exception == null)
         {
@@ -58,7 +65,12 @@ internal sealed class StackTraceHelper
                 continue;
             }
 
-            var stackFrame = new StackFrameInfo(frame.GetFileLineNumber(), frame.GetFileName(), frame, GetMethodDisplayString(method));
+            var stackFrame = new StackFrameInfo(
+                frame.GetFileLineNumber(),
+                frame.GetFileName(),
+                frame,
+                GetMethodDisplayString(method)
+            );
             frames.Add(stackFrame);
         }
 
@@ -86,8 +98,14 @@ internal sealed class StackTraceHelper
         var methodName = method.Name;
 
         string? subMethod = null;
-        if (type != null && type.IsDefined(typeof(CompilerGeneratedAttribute)) &&
-            (typeof(IAsyncStateMachine).IsAssignableFrom(type) || typeof(IEnumerator).IsAssignableFrom(type)))
+        if (
+            type != null
+            && type.IsDefined(typeof(CompilerGeneratedAttribute))
+            && (
+                typeof(IAsyncStateMachine).IsAssignableFrom(type)
+                || typeof(IEnumerator).IsAssignableFrom(type)
+            )
+        )
         {
             // Convert StateMachine methods to correct overload +MoveNext()
             if (TryResolveStateMachineMethod(ref method, out type))
@@ -100,51 +118,79 @@ internal sealed class StackTraceHelper
         // ResolveStateMachineMethod may have set declaringType to null
         if (type != null)
         {
-            declaringTypeName = TypeNameHelper.GetTypeDisplayName(type, includeGenericParameterNames: true);
+            declaringTypeName = TypeNameHelper.GetTypeDisplayName(
+                type,
+                includeGenericParameterNames: true
+            );
         }
 
         string? genericArguments = null;
         if (method.IsGenericMethod)
         {
-            genericArguments = "<" + string.Join(", ", method.GetGenericArguments()
-                .Select(arg => TypeNameHelper.GetTypeDisplayName(arg, fullName: false, includeGenericParameterNames: true))) + ">";
+            genericArguments =
+                "<"
+                + string.Join(
+                    ", ",
+                    method
+                        .GetGenericArguments()
+                        .Select(arg =>
+                            TypeNameHelper.GetTypeDisplayName(
+                                arg,
+                                fullName: false,
+                                includeGenericParameterNames: true
+                            )
+                        )
+                )
+                + ">";
         }
 
         // Method parameters
-        var parameters = method.GetParameters().Select(parameter =>
-        {
-            var parameterType = parameter.ParameterType;
+        var parameters = method
+            .GetParameters()
+            .Select(parameter =>
+            {
+                var parameterType = parameter.ParameterType;
 
-            var prefix = string.Empty;
-            if (parameter.IsOut)
-            {
-                prefix = "out";
-            }
-            else if (parameterType != null && parameterType.IsByRef)
-            {
-                prefix = "ref";
-            }
-
-            var parameterTypeString = "?";
-            if (parameterType != null)
-            {
-                if (parameterType.IsByRef)
+                var prefix = string.Empty;
+                if (parameter.IsOut)
                 {
-                    parameterType = parameterType.GetElementType();
+                    prefix = "out";
+                }
+                else if (parameterType != null && parameterType.IsByRef)
+                {
+                    prefix = "ref";
                 }
 
-                parameterTypeString = TypeNameHelper.GetTypeDisplayName(parameterType!, fullName: false, includeGenericParameterNames: true);
-            }
+                var parameterTypeString = "?";
+                if (parameterType != null)
+                {
+                    if (parameterType.IsByRef)
+                    {
+                        parameterType = parameterType.GetElementType();
+                    }
 
-            return new ParameterDisplayInfo
-            {
-                Prefix = prefix,
-                Name = parameter.Name,
-                Type = parameterTypeString,
-            };
-        });
+                    parameterTypeString = TypeNameHelper.GetTypeDisplayName(
+                        parameterType!,
+                        fullName: false,
+                        includeGenericParameterNames: true
+                    );
+                }
 
-        var methodDisplayInfo = new MethodDisplayInfo(declaringTypeName, method.Name, genericArguments, subMethod, parameters);
+                return new ParameterDisplayInfo
+                {
+                    Prefix = prefix,
+                    Name = parameter.Name,
+                    Type = parameterTypeString,
+                };
+            });
+
+        var methodDisplayInfo = new MethodDisplayInfo(
+            declaringTypeName,
+            method.Name,
+            genericArguments,
+            subMethod,
+            parameters
+        );
 
         return methodDisplayInfo;
     }
@@ -174,10 +220,12 @@ internal sealed class StackTraceHelper
         {
             return false;
         }
-        else if (type == typeof(TaskAwaiter) ||
-            type == typeof(TaskAwaiter<>) ||
-            type == typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter) ||
-            type == typeof(ConfiguredTaskAwaitable<>.ConfiguredTaskAwaiter))
+        else if (
+            type == typeof(TaskAwaiter)
+            || type == typeof(TaskAwaiter<>)
+            || type == typeof(ConfiguredTaskAwaitable.ConfiguredTaskAwaiter)
+            || type == typeof(ConfiguredTaskAwaitable<>.ConfiguredTaskAwaiter)
+        )
         {
             switch (method.Name)
             {
@@ -192,7 +240,11 @@ internal sealed class StackTraceHelper
         return true;
     }
 
-    [UnconditionalSuppressMessage("Trimmer", "IL2075", Justification = "Unable to require a method has all information on it to resolve state machine.")]
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2075",
+        Justification = "Unable to require a method has all information on it to resolve state machine."
+    )]
     private static bool TryResolveStateMachineMethod(ref MethodBase method, out Type? declaringType)
     {
         Debug.Assert(method != null);
@@ -206,7 +258,13 @@ internal sealed class StackTraceHelper
             return false;
         }
 
-        var methods = parentType.GetMethods(BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance | BindingFlags.DeclaredOnly);
+        var methods = parentType.GetMethods(
+            BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Static
+                | BindingFlags.Instance
+                | BindingFlags.DeclaredOnly
+        );
         if (methods == null)
         {
             return false;

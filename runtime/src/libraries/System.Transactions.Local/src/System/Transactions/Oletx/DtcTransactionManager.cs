@@ -41,7 +41,8 @@ internal sealed class DtcTransactionManager
                 internalRM,
                 out nodeNameMatches,
                 out _whereabouts,
-                out ResourceManagerShim resourceManagerShim);
+                out ResourceManagerShim resourceManagerShim
+            );
 
             // If the node name does not match, throw.
             if (!nodeNameMatches)
@@ -64,7 +65,10 @@ internal sealed class DtcTransactionManager
 
             // Unfortunately MSDTCPRX may return unknown error codes when attempting to connect to MSDTC
             // that error should be propagated back as a TransactionManagerCommunicationException.
-            throw TransactionManagerCommunicationException.Create(SR.TransactionManagerCommunicationException, ex);
+            throw TransactionManagerCommunicationException.Create(
+                SR.TransactionManagerCommunicationException,
+                ex
+            );
         }
     }
 

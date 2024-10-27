@@ -16,7 +16,11 @@ namespace System.Text.Json.Serialization.Converters
             IsInternalConverterForNumberType = true;
         }
 
-        public override Half Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Half Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.Number)
             {
@@ -38,9 +42,10 @@ namespace System.Text.Json.Serialization.Converters
             byte[]? rentedByteBuffer = null;
             int bufferLength = reader.ValueLength;
 
-            Span<byte> byteBuffer = bufferLength <= JsonConstants.StackallocByteThreshold
-                ? stackalloc byte[JsonConstants.StackallocByteThreshold]
-                : (rentedByteBuffer = ArrayPool<byte>.Shared.Rent(bufferLength));
+            Span<byte> byteBuffer =
+                bufferLength <= JsonConstants.StackallocByteThreshold
+                    ? stackalloc byte[JsonConstants.StackallocByteThreshold]
+                    : (rentedByteBuffer = ArrayPool<byte>.Shared.Rent(bufferLength));
 
             int written = reader.CopyValue(byteBuffer);
             byteBuffer = byteBuffer.Slice(0, written);
@@ -71,13 +76,22 @@ namespace System.Text.Json.Serialization.Converters
             writer.WriteRawValue(buffer.Slice(0, written));
         }
 
-        internal override Half ReadAsPropertyNameCore(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        internal override Half ReadAsPropertyNameCore(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(reader.TokenType == JsonTokenType.PropertyName);
             return ReadCore(ref reader);
         }
 
-        internal override void WriteAsPropertyNameCore(Utf8JsonWriter writer, Half value, JsonSerializerOptions options, bool isWritingExtensionDataProperty)
+        internal override void WriteAsPropertyNameCore(
+            Utf8JsonWriter writer,
+            Half value,
+            JsonSerializerOptions options,
+            bool isWritingExtensionDataProperty
+        )
         {
 #if NET8_0_OR_GREATER
             Span<byte> buffer = stackalloc byte[MaxFormatLength];
@@ -88,7 +102,11 @@ namespace System.Text.Json.Serialization.Converters
             writer.WritePropertyName(buffer.Slice(0, written));
         }
 
-        internal override Half ReadNumberWithCustomHandling(ref Utf8JsonReader reader, JsonNumberHandling handling, JsonSerializerOptions options)
+        internal override Half ReadNumberWithCustomHandling(
+            ref Utf8JsonReader reader,
+            JsonNumberHandling handling,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType == JsonTokenType.String)
             {
@@ -115,7 +133,11 @@ namespace System.Text.Json.Serialization.Converters
             return Read(ref reader, Type, options);
         }
 
-        internal override void WriteNumberWithCustomHandling(Utf8JsonWriter writer, Half value, JsonNumberHandling handling)
+        internal override void WriteNumberWithCustomHandling(
+            Utf8JsonWriter writer,
+            Half value,
+            JsonNumberHandling handling
+        )
         {
             if ((JsonNumberHandling.WriteAsString & handling) != 0)
             {
@@ -148,7 +170,10 @@ namespace System.Text.Json.Serialization.Converters
             Span<byte> buffer = stackalloc byte[MaxFormatLength];
             int written = reader.CopyValue(buffer);
 
-            return JsonReaderHelper.TryGetFloatingPointConstant(buffer.Slice(0, written), out value);
+            return JsonReaderHelper.TryGetFloatingPointConstant(
+                buffer.Slice(0, written),
+                out value
+            );
         }
 
         private static void WriteFloatingPointConstant(Utf8JsonWriter writer, Half value)
@@ -174,19 +199,30 @@ namespace System.Text.Json.Serialization.Converters
         private static bool TryParse(ReadOnlySpan<byte> buffer, out Half result)
         {
 #if NET8_0_OR_GREATER
-            bool success = Half.TryParse(buffer, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result);
+            bool success = Half.TryParse(
+                buffer,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                CultureInfo.InvariantCulture,
+                out result
+            );
 #else
             // Half.TryFormat/TryParse(ROS<byte>) are not available on .NET 7
             // we need to use Half.TryFormat/TryParse(ROS<char>) in that case.
             char[]? rentedCharBuffer = null;
 
-            Span<char> charBuffer = buffer.Length <= JsonConstants.StackallocCharThreshold
-                ? stackalloc char[JsonConstants.StackallocCharThreshold]
-                : (rentedCharBuffer = ArrayPool<char>.Shared.Rent(buffer.Length));
+            Span<char> charBuffer =
+                buffer.Length <= JsonConstants.StackallocCharThreshold
+                    ? stackalloc char[JsonConstants.StackallocCharThreshold]
+                    : (rentedCharBuffer = ArrayPool<char>.Shared.Rent(buffer.Length));
 
             int written = JsonReaderHelper.TranscodeHelper(buffer, charBuffer);
 
-            bool success = Half.TryParse(charBuffer, NumberStyles.Float | NumberStyles.AllowThousands, CultureInfo.InvariantCulture, out result);
+            bool success = Half.TryParse(
+                charBuffer,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                CultureInfo.InvariantCulture,
+                out result
+            );
 
             if (rentedCharBuffer != null)
             {
@@ -196,10 +232,16 @@ namespace System.Text.Json.Serialization.Converters
 
             // Half.TryParse is more lax with floating-point literals than other S.T.Json floating-point types
             // e.g: it parses "naN" successfully. Only succeed with the exact match.
-            return success &&
-                (!Half.IsNaN(result) || buffer.SequenceEqual(JsonConstants.NaNValue)) &&
-                (!Half.IsPositiveInfinity(result) || buffer.SequenceEqual(JsonConstants.PositiveInfinityValue)) &&
-                (!Half.IsNegativeInfinity(result) || buffer.SequenceEqual(JsonConstants.NegativeInfinityValue));
+            return success
+                && (!Half.IsNaN(result) || buffer.SequenceEqual(JsonConstants.NaNValue))
+                && (
+                    !Half.IsPositiveInfinity(result)
+                    || buffer.SequenceEqual(JsonConstants.PositiveInfinityValue)
+                )
+                && (
+                    !Half.IsNegativeInfinity(result)
+                    || buffer.SequenceEqual(JsonConstants.NegativeInfinityValue)
+                );
         }
 
         private static void Format(
@@ -210,7 +252,11 @@ namespace System.Text.Json.Serialization.Converters
 #endif
             Half value, out int written)
         {
-            bool formattedSuccessfully = value.TryFormat(destination, out written, provider: CultureInfo.InvariantCulture);
+            bool formattedSuccessfully = value.TryFormat(
+                destination,
+                out written,
+                provider: CultureInfo.InvariantCulture
+            );
             Debug.Assert(formattedSuccessfully);
         }
     }

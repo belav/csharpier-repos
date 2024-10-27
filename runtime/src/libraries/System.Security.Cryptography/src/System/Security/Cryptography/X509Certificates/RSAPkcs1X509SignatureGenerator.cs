@@ -41,7 +41,8 @@ namespace System.Security.Cryptography.X509Certificates
                 // This is due to one version of the ASN.1 not including OPTIONAL, and that was
                 // the version that got predominately implemented for RSA. Now it's convention.
                 new AsnEncodedData(oid, asnNull),
-                new AsnEncodedData(oid, rsa.ExportRSAPublicKey(), skipCopy: true));
+                new AsnEncodedData(oid, rsa.ExportRSAPublicKey(), skipCopy: true)
+            );
         }
 
         public override byte[] GetSignatureAlgorithmIdentifier(HashAlgorithmName hashAlgorithm)
@@ -77,7 +78,8 @@ namespace System.Security.Cryptography.X509Certificates
                 throw new ArgumentOutOfRangeException(
                     nameof(hashAlgorithm),
                     hashAlgorithm,
-                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name));
+                    SR.Format(SR.Cryptography_UnknownHashAlgorithm, hashAlgorithm.Name)
+                );
             }
 
             AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);

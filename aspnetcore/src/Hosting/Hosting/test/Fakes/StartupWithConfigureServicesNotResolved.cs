@@ -7,11 +7,7 @@ namespace Microsoft.AspNetCore.Hosting.Fakes;
 
 public class StartupWithConfigureServicesNotResolved
 {
-    public StartupWithConfigureServicesNotResolved()
-    {
-    }
+    public StartupWithConfigureServicesNotResolved() { }
 
-    public void Configure(IApplicationBuilder builder, int notAService)
-    {
-    }
+    public void Configure(IApplicationBuilder builder, int notAService) { }
 }

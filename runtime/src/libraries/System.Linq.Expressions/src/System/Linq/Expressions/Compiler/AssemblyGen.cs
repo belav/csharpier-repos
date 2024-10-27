@@ -35,11 +35,18 @@ namespace System.Linq.Expressions.Compiler
         {
             var name = new AssemblyName("Snippets");
 
-            AssemblyBuilder myAssembly = AssemblyBuilder.DefineDynamicAssembly(name, AssemblyBuilderAccess.Run);
+            AssemblyBuilder myAssembly = AssemblyBuilder.DefineDynamicAssembly(
+                name,
+                AssemblyBuilderAccess.Run
+            );
             _myModule = myAssembly.DefineDynamicModule(name.Name!);
         }
 
-        private TypeBuilder DefineType(string name, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent, TypeAttributes attr)
+        private TypeBuilder DefineType(
+            string name,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent,
+            TypeAttributes attr
+        )
         {
             ArgumentNullException.ThrowIfNull(name);
             ArgumentNullException.ThrowIfNull(parent);
@@ -52,24 +59,40 @@ namespace System.Linq.Expressions.Compiler
 
             // An unhandled Exception: System.Runtime.InteropServices.COMException (0x80131130): Record not found on lookup.
             // is thrown if there is any of the characters []*&+,\ in the type name and a method defined on the type is called.
-            sb.Replace('+', '_').Replace('[', '_').Replace(']', '_').Replace('*', '_').Replace('&', '_').Replace(',', '_').Replace('\\', '_');
+            sb.Replace('+', '_')
+                .Replace('[', '_')
+                .Replace(']', '_')
+                .Replace('*', '_')
+                .Replace('&', '_')
+                .Replace(',', '_')
+                .Replace('\\', '_');
 
             name = sb.ToString();
 
             return _myModule.DefineType(name, attr, parent);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "MulticastDelegate has a ctor with RequiresUnreferencedCode, but the generated derived type doesn't reference this ctor, so this is trim compatible.")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2111:ReflectionToDynamicallyAccessedMembers",
-            Justification = "MulticastDelegate and Delegate have multiple methods with DynamicallyAccessedMembers annotations. But the generated code" +
-            "in this case will not call any of them (it only defines a .ctor and Invoke method both of which are runtime implemented.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "MulticastDelegate has a ctor with RequiresUnreferencedCode, but the generated derived type doesn't reference this ctor, so this is trim compatible."
+        )]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2111:ReflectionToDynamicallyAccessedMembers",
+            Justification = "MulticastDelegate and Delegate have multiple methods with DynamicallyAccessedMembers annotations. But the generated code"
+                + "in this case will not call any of them (it only defines a .ctor and Invoke method both of which are runtime implemented."
+        )]
         internal static TypeBuilder DefineDelegateType(string name)
         {
             return Assembly.DefineType(
                 name,
                 typeof(MulticastDelegate),
-                TypeAttributes.Class | TypeAttributes.Public | TypeAttributes.Sealed | TypeAttributes.AnsiClass | TypeAttributes.AutoClass
+                TypeAttributes.Class
+                    | TypeAttributes.Public
+                    | TypeAttributes.Sealed
+                    | TypeAttributes.AnsiClass
+                    | TypeAttributes.AutoClass
             );
         }
     }

@@ -31,7 +31,8 @@ internal interface IHttpsConfigurationService
     void Initialize(
         IHostEnvironment hostEnvironment,
         ILogger<KestrelServer> serverLogger,
-        ILogger<HttpsConnectionMiddleware> httpsLogger);
+        ILogger<HttpsConnectionMiddleware> httpsLogger
+    );
 
     /// <summary>
     /// Applies various configuration settings to <paramref name="httpsOptions"/> and <paramref name="endpoint"/>.
@@ -44,7 +45,8 @@ internal interface IHttpsConfigurationService
         EndpointConfig endpoint,
         KestrelServerOptions serverOptions,
         CertificateConfig? defaultCertificateConfig,
-        ConfigurationReader configurationReader);
+        ConfigurationReader configurationReader
+    );
 
     /// <summary>
     /// Calls an appropriate overload of <see cref="Microsoft.AspNetCore.Hosting.ListenOptionsHttpsExtensions.UseHttps(ListenOptions)"/>
@@ -54,7 +56,11 @@ internal interface IHttpsConfigurationService
     /// <remarks>
     /// For use during configuration loading (esp in <see cref="KestrelConfigurationLoader"/>).
     /// </remarks>
-    ListenOptions UseHttpsWithSni(ListenOptions listenOptions, HttpsConnectionAdapterOptions httpsOptions, EndpointConfig endpoint);
+    ListenOptions UseHttpsWithSni(
+        ListenOptions listenOptions,
+        HttpsConnectionAdapterOptions httpsOptions,
+        EndpointConfig endpoint
+    );
 
     /// <summary>
     /// Retrieves the default or, failing that, developer certificate from <paramref name="configurationReader"/>.
@@ -71,7 +77,10 @@ internal interface IHttpsConfigurationService
     /// <remarks>
     /// For use during endpoint binding (esp in <see cref="Internal.Infrastructure.TransportManager"/>).
     /// </remarks>
-    void PopulateMultiplexedTransportFeatures(FeatureCollection features, ListenOptions listenOptions);
+    void PopulateMultiplexedTransportFeatures(
+        FeatureCollection features,
+        ListenOptions listenOptions
+    );
 
     /// <summary>
     /// Calls <see cref="Microsoft.AspNetCore.Hosting.ListenOptionsHttpsExtensions.UseHttps(ListenOptions)"/>

@@ -21,7 +21,10 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         public ImmutableArray<char> Characters { get; }
 
-        private CharacterSetModificationRule(CharacterSetModificationKind kind, ImmutableArray<char> characters)
+        private CharacterSetModificationRule(
+            CharacterSetModificationKind kind,
+            ImmutableArray<char> characters
+        )
         {
             Kind = kind;
             Characters = characters;
@@ -33,8 +36,10 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="kind">The kind of rule.</param>
         /// <param name="characters">One or more characters. These are typically punctuation characters.</param>
         /// <returns></returns>
-        public static CharacterSetModificationRule Create(CharacterSetModificationKind kind, ImmutableArray<char> characters)
-            => new(kind, characters);
+        public static CharacterSetModificationRule Create(
+            CharacterSetModificationKind kind,
+            ImmutableArray<char> characters
+        ) => new(kind, characters);
 
         /// <summary>
         /// Creates a new <see cref="CharacterSetModificationRule"/> instance.
@@ -42,7 +47,9 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="kind">The kind of rule.</param>
         /// <param name="characters">One or more characters. These are typically punctuation characters.</param>
         /// <returns></returns>
-        public static CharacterSetModificationRule Create(CharacterSetModificationKind kind, params char[] characters)
-            => new(kind, characters.ToImmutableArray());
+        public static CharacterSetModificationRule Create(
+            CharacterSetModificationKind kind,
+            params char[] characters
+        ) => new(kind, characters.ToImmutableArray());
     }
 }

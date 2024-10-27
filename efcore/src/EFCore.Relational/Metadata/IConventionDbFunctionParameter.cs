@@ -9,7 +9,9 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-database-functions">Database functions</see> for more information and examples.
 /// </remarks>
-public interface IConventionDbFunctionParameter : IReadOnlyDbFunctionParameter, IConventionAnnotatable
+public interface IConventionDbFunctionParameter
+    : IReadOnlyDbFunctionParameter,
+        IConventionAnnotatable
 {
     /// <summary>
     ///     The function to which this parameter belongs.
@@ -46,7 +48,10 @@ public interface IConventionDbFunctionParameter : IReadOnlyDbFunctionParameter, 
     /// </summary>
     /// <param name="typeMapping">The type mapping of the parameter in the database.</param>
     /// <param name="fromDataAnnotation">Indicates whether the configuration was specified using a data annotation.</param>
-    RelationalTypeMapping? SetTypeMapping(RelationalTypeMapping? typeMapping, bool fromDataAnnotation = false);
+    RelationalTypeMapping? SetTypeMapping(
+        RelationalTypeMapping? typeMapping,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns the configuration source for <see cref="IReadOnlyDbFunctionParameter.TypeMapping" />.

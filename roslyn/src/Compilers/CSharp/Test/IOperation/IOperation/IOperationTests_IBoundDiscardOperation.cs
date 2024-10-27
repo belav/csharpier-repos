@@ -16,7 +16,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void DiscardExpression_AsAssignment()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int P { get; }
@@ -27,18 +28,24 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IDiscardOperation (Symbol: System.Int32 _) (OperationKind.Discard, Type: System.Int32) (Syntax: '_')
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<IdentifierNameSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
 
         [Fact]
         public void DiscardExpression_AsAssignment_EntireStatement()
         {
-            string source = @"
+            string source =
+                @"
 class C
 {
     int P { get; }
@@ -49,7 +56,8 @@ class C
     }
 }
 ";
-            string expectedOperationTree = @"
+            string expectedOperationTree =
+                @"
 IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (Syntax: '_ = P;')
   Expression: 
     ISimpleAssignmentOperation (OperationKind.SimpleAssignment, Type: System.Int32) (Syntax: '_ = P')
@@ -62,7 +70,11 @@ IExpressionStatementOperation (OperationKind.ExpressionStatement, Type: null) (S
 ";
             var expectedDiagnostics = DiagnosticDescription.None;
 
-            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(source, expectedOperationTree, expectedDiagnostics);
+            VerifyOperationTreeAndDiagnosticsForTest<ExpressionStatementSyntax>(
+                source,
+                expectedOperationTree,
+                expectedDiagnostics
+            );
         }
     }
 }

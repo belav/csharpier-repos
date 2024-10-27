@@ -22,15 +22,14 @@
 //        System.Private.CoreLib.dll, via a callback (see Internal.System.Runtime.Augment)
 //
 
+using global::System;
 using global::Internal.Metadata.NativeFormat;
 using global::Internal.Reflection.Core;
 using global::Internal.Reflection.Core.Execution;
 using global::Internal.Runtime.Augments;
-using global::System;
 using global::System.Collections.Generic;
 using global::System.Reflection;
 using global::System.Reflection.Runtime.General;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Reflection.Execution
@@ -51,7 +50,12 @@ namespace Internal.Reflection.Execution
             ExecutionEnvironment = executionEnvironment;
         }
 
-        public static bool TryGetMethodMetadataFromStartAddress(IntPtr methodStartAddress, out MetadataReader reader, out TypeDefinitionHandle typeHandle, out MethodHandle methodHandle)
+        public static bool TryGetMethodMetadataFromStartAddress(
+            IntPtr methodStartAddress,
+            out MetadataReader reader,
+            out TypeDefinitionHandle typeHandle,
+            out MethodHandle methodHandle
+        )
         {
             reader = null;
             typeHandle = default(TypeDefinitionHandle);
@@ -62,17 +66,26 @@ namespace Internal.Reflection.Execution
                 return false;
 
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
-            if (!ExecutionEnvironment.TryGetMethodForStartAddress(methodStartAddress,
-                ref declaringTypeHandle, out QMethodDefinition qMethodDefinition))
+            if (
+                !ExecutionEnvironment.TryGetMethodForStartAddress(
+                    methodStartAddress,
+                    ref declaringTypeHandle,
+                    out QMethodDefinition qMethodDefinition
+                )
+            )
                 return false;
 
             if (!qMethodDefinition.IsNativeFormatMetadataBased)
                 return false;
 
-            QTypeDefinition qTypeDefinition = ExecutionEnvironment.GetMetadataForNamedType(declaringTypeHandle);
+            QTypeDefinition qTypeDefinition = ExecutionEnvironment.GetMetadataForNamedType(
+                declaringTypeHandle
+            );
 
             Debug.Assert(qTypeDefinition.IsNativeFormatMetadataBased);
-            Debug.Assert(qTypeDefinition.NativeFormatReader == qMethodDefinition.NativeFormatReader);
+            Debug.Assert(
+                qTypeDefinition.NativeFormatReader == qMethodDefinition.NativeFormatReader
+            );
 
             reader = qTypeDefinition.NativeFormatReader;
             typeHandle = qTypeDefinition.NativeFormatHandle;
@@ -84,16 +97,29 @@ namespace Internal.Reflection.Execution
         public static MethodBase GetMethodBaseFromStartAddressIfAvailable(IntPtr methodStartAddress)
         {
             RuntimeTypeHandle declaringTypeHandle = default(RuntimeTypeHandle);
-            if (!ExecutionEnvironment.TryGetMethodForStartAddress(methodStartAddress,
-                ref declaringTypeHandle, out QMethodDefinition qMethodDefinition))
+            if (
+                !ExecutionEnvironment.TryGetMethodForStartAddress(
+                    methodStartAddress,
+                    ref declaringTypeHandle,
+                    out QMethodDefinition qMethodDefinition
+                )
+            )
             {
                 return null;
             }
 
             // We don't use the type argument handles as we want the uninstantiated method info
-            return ExecutionDomain.GetMethod(declaringTypeHandle, qMethodDefinition, genericMethodTypeArgumentHandles: null);
+            return ExecutionDomain.GetMethod(
+                declaringTypeHandle,
+                qMethodDefinition,
+                genericMethodTypeArgumentHandles: null
+            );
         }
 
-        internal static ExecutionEnvironmentImplementation ExecutionEnvironment { get; private set; }
+        internal static ExecutionEnvironmentImplementation ExecutionEnvironment
+        {
+            get;
+            private set;
+        }
     }
 }

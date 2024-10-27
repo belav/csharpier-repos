@@ -9,7 +9,6 @@ using System.Reflection.PortableExecutable;
 using System.Runtime.InteropServices;
 using System.Runtime.InteropServices.Marshalling;
 using System.Text;
-
 using Internal.TypeSystem;
 using Microsoft.DiaSymReader;
 
@@ -21,14 +20,15 @@ namespace ILCompiler.Diagnostics
     public enum PDBExtraData
     {
         None = 0,
+
         // Add string table subsection, files checksum subsection, and lines subsection to
         // allow tools to map IP ranges to source lines.
-        kPDBLines  = 0x00000001,
+        kPDBLines = 0x00000001,
     };
 
     public enum SymChecksumType : byte
     {
-        None = 0,        // indicates no checksum is available
+        None = 0, // indicates no checksum is available
         MD5,
         SHA1,
         SHA_256,
@@ -39,7 +39,6 @@ namespace ILCompiler.Diagnostics
         public string Name;
         public SymChecksumType ChecksumType;
         public byte[] Checksum;
-
 
         public override int GetHashCode()
         {
@@ -86,8 +85,8 @@ namespace ILCompiler.Diagnostics
         string _tempSourceDllName;
 
         List<SymDocument> _symDocuments = new List<SymDocument>();
-        Dictionary<string,int> _stringTableToOffsetMapping;
-        Dictionary<SymDocument,int> _documentToChecksumOffsetMapping;
+        Dictionary<string, int> _stringTableToOffsetMapping;
+        Dictionary<SymDocument, int> _documentToChecksumOffsetMapping;
 
         UIntPtr _pdbMod;
         ISymNGenWriter2 _ngenWriter;
@@ -97,27 +96,40 @@ namespace ILCompiler.Diagnostics
             NativeLibrary.SetDllImportResolver(typeof(PdbWriter).Assembly, DllImportResolver);
         }
 
-        private static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        private static IntPtr DllImportResolver(
+            string libraryName,
+            Assembly assembly,
+            DllImportSearchPath? searchPath
+        )
         {
             IntPtr libraryHandle = IntPtr.Zero;
             if (libraryName == DiaSymReaderLibrary)
             {
-                string archSuffix = RuntimeInformation.ProcessArchitecture.ToString().ToLowerInvariant();
+                string archSuffix = RuntimeInformation
+                    .ProcessArchitecture.ToString()
+                    .ToLowerInvariant();
                 if (archSuffix == "x64")
                 {
                     archSuffix = "amd64";
                 }
-                libraryHandle = NativeLibrary.Load(DiaSymReaderLibrary + "." + archSuffix + ".dll", assembly, searchPath);
+                libraryHandle = NativeLibrary.Load(
+                    DiaSymReaderLibrary + "." + archSuffix + ".dll",
+                    assembly,
+                    searchPath
+                );
             }
             return libraryHandle;
         }
 
-        [DefaultDllImportSearchPaths(DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.SafeDirectories)]
+        [DefaultDllImportSearchPaths(
+            DllImportSearchPath.AssemblyDirectory | DllImportSearchPath.SafeDirectories
+        )]
         [LibraryImport(DiaSymReaderLibrary, StringMarshalling = StringMarshalling.Utf16)]
         private static partial void CreateNGenPdbWriter(
             string ngenImagePath,
             string pdbPath,
-            out IntPtr ngenPdbWriterPtr);
+            out IntPtr ngenPdbWriterPtr
+        );
 
         public PdbWriter(string pdbPath, PDBExtraData pdbExtraData, TargetDetails target)
         {
@@ -159,7 +171,7 @@ namespace ILCompiler.Diagnostics
                     {
                         File.Delete(_tempSourceDllName);
                     }
-                    catch {}
+                    catch { }
                 }
 
                 if (failed && (_pdbFilePath != null))
@@ -169,7 +181,7 @@ namespace ILCompiler.Diagnostics
                         // If anything fails, do not create a partial pdb file
                         File.Delete(_pdbFilePath);
                     }
-                    catch {}
+                    catch { }
                 }
             }
         }
@@ -197,9 +209,15 @@ namespace ILCompiler.Diagnostics
             // this (without changing diasymreader.dll which ships indepdendently of .NET Core)
             // we copy the file to something with this convention before generating the PDB
             // and delete it when we are done.
-            if (!dllPath.EndsWith(".ni.dll", StringComparison.OrdinalIgnoreCase) && !dllPath.EndsWith(".ni.exe", StringComparison.OrdinalIgnoreCase))
+            if (
+                !dllPath.EndsWith(".ni.dll", StringComparison.OrdinalIgnoreCase)
+                && !dllPath.EndsWith(".ni.exe", StringComparison.OrdinalIgnoreCase)
+            )
             {
-                _tempSourceDllName = Path.Combine(Path.GetDirectoryName(dllPath), dllNameWithoutExtension + ".ni" + Path.GetExtension(dllPath));
+                _tempSourceDllName = Path.Combine(
+                    Path.GetDirectoryName(dllPath),
+                    dllNameWithoutExtension + ".ni" + Path.GetExtension(dllPath)
+                );
                 File.Copy(dllPath, _tempSourceDllName, overwrite: true);
                 dllPath = _tempSourceDllName;
                 _pdbFilePath = Path.Combine(_pdbPath, dllNameWithoutExtension + ".ni.pdb");
@@ -210,14 +228,21 @@ namespace ILCompiler.Diagnostics
 
             var comWrapper = new StrategyBasedComWrappers();
             CreateNGenPdbWriter(dllPath, _pdbFilePath, out var pdbWriterInst);
-            _ngenWriter = (ISymNGenWriter2)comWrapper.GetOrCreateObjectForComInstance(pdbWriterInst, CreateObjectFlags.UniqueInstance);
+            _ngenWriter = (ISymNGenWriter2)
+                comWrapper.GetOrCreateObjectForComInstance(
+                    pdbWriterInst,
+                    CreateObjectFlags.UniqueInstance
+                );
 
             {
                 // PDB file is now created. Get its path and update _pdbFilePath so the PDB file
                 // can be deleted if we don't make it successfully to the end.
                 const int capacity = 1024;
                 var pdbFilePathBuilder = new char[capacity];
-                _ngenWriter.QueryPDBNameExW(pdbFilePathBuilder, new IntPtr(capacity - 1) /* remove 1 byte for null */);
+                _ngenWriter.QueryPDBNameExW(
+                    pdbFilePathBuilder,
+                    new IntPtr(capacity - 1) /* remove 1 byte for null */
+                );
                 int length = 0;
                 while (length < pdbFilePathBuilder.Length && pdbFilePathBuilder[length] != '\0')
                 {
@@ -234,40 +259,73 @@ namespace ILCompiler.Diagnostics
 
             ushort? iCodeSection = null;
             uint rvaOfTextSection = 0;
-            using (var peReader = new PEReader(new FileStream(dllPath, FileMode.Open), PEStreamOptions.Default))
+            using (
+                var peReader = new PEReader(
+                    new FileStream(dllPath, FileMode.Open),
+                    PEStreamOptions.Default
+                )
+            )
             {
                 var sections = peReader.PEHeaders.SectionHeaders;
 
                 for (int i = 0; i < sections.Length; i++)
                 {
-                    ushort pdbSectionNumber = checked((ushort)(i+1));
+                    ushort pdbSectionNumber = checked((ushort)(i + 1));
 
-                    _ngenWriter.AddSection(pdbSectionNumber, OMF.StandardText, 0, sections[i].SizeOfRawData);
+                    _ngenWriter.AddSection(
+                        pdbSectionNumber,
+                        OMF.StandardText,
+                        0,
+                        sections[i].SizeOfRawData
+                    );
                     if (sections[i].Name == ".text")
                     {
                         iCodeSection = pdbSectionNumber;
                         rvaOfTextSection = (uint)sections[i].VirtualAddress;
                     }
-                    _ngenWriter.ModAddSecContribEx(_pdbMod, pdbSectionNumber, 0, sections[i].SizeOfRawData, (uint)sections[i].SectionCharacteristics, 0, 0);
+                    _ngenWriter.ModAddSecContribEx(
+                        _pdbMod,
+                        pdbSectionNumber,
+                        0,
+                        sections[i].SizeOfRawData,
+                        (uint)sections[i].SectionCharacteristics,
+                        0,
+                        0
+                    );
                 }
             }
 
             // To support lines info, we need a "dummy" section, indexed as 0, for use as a
             // sentinel when MSPDB sets up its section contribution table
-            _ngenWriter.AddSection(0,           // Dummy section 0
+            _ngenWriter.AddSection(
+                0, // Dummy section 0
                 OMF.SentinelType,
                 0,
-                unchecked((int)0xFFFFFFFF));
+                unchecked((int)0xFFFFFFFF)
+            );
 
             foreach (var method in methods)
             {
-                WriteMethodPDBData(iCodeSection.Value, method, Path.GetFileNameWithoutExtension(originalDllPath), rvaOfTextSection, isILPDBProvided);
+                WriteMethodPDBData(
+                    iCodeSection.Value,
+                    method,
+                    Path.GetFileNameWithoutExtension(originalDllPath),
+                    rvaOfTextSection,
+                    isILPDBProvided
+                );
             }
         }
 
-        void WriteMethodPDBData(ushort iCodeSection, MethodInfo method, string assemblyName, uint textSectionOffset, bool isILPDBProvided)
+        void WriteMethodPDBData(
+            ushort iCodeSection,
+            MethodInfo method,
+            string assemblyName,
+            uint textSectionOffset,
+            bool isILPDBProvided
+        )
         {
-            string nameSuffix = $"{method.Name}$#{(assemblyName != method.AssemblyName ? method.AssemblyName : String.Empty)}#{method.MethodToken.ToString("X")}";
+            string nameSuffix =
+                $"{method.Name}$#{(assemblyName != method.AssemblyName ? method.AssemblyName : String.Empty)}#{method.MethodToken.ToString("X")}";
 
             _ngenWriter.AddSymbol(nameSuffix, iCodeSection, method.HotRVA - textSectionOffset);
             if (method.ColdRVA != 0)
@@ -283,8 +341,10 @@ namespace ILCompiler.Diagnostics
         }
 
         private const int CV_SIGNATURE_C13 = 4;
-        private enum DEBUG_S_SUBSECTION_TYPE {
-            DEBUG_S_IGNORE = unchecked((int)0x80000000),    // if this bit is set in a subsection type then ignore the subsection contents
+
+        private enum DEBUG_S_SUBSECTION_TYPE
+        {
+            DEBUG_S_IGNORE = unchecked((int)0x80000000), // if this bit is set in a subsection type then ignore the subsection contents
 
             DEBUG_S_SYMBOLS = 0xf1,
             DEBUG_S_LINES,
@@ -305,25 +365,25 @@ namespace ILCompiler.Diagnostics
 
         private enum SYM_ENUM : ushort
         {
-            S_COMPILE3      =  0x113c,  // Replacement for S_COMPILE2
+            S_COMPILE3 = 0x113c, // Replacement for S_COMPILE2
         }
 
         private enum CV_CPU_TYPE
         {
-            CV_CFL_PENTIUMIII   = 0x07,
-            CV_CFL_X64          = 0xD0,
-            CV_CFL_ARMNT        = 0xF4,
-            CV_CFL_ARM64        = 0xF6,
+            CV_CFL_PENTIUMIII = 0x07,
+            CV_CFL_X64 = 0xD0,
+            CV_CFL_ARMNT = 0xF4,
+            CV_CFL_ARM64 = 0xF6,
         }
 
         private enum CV_CFL_LANG
         {
-            CV_CFL_MSIL     = 0x0F,  // Unknown MSIL (LTCG of .NETMODULE)
+            CV_CFL_MSIL = 0x0F, // Unknown MSIL (LTCG of .NETMODULE)
         }
 
         private void WriteStringTable()
         {
-            _stringTableToOffsetMapping = new Dictionary<string,int>();
+            _stringTableToOffsetMapping = new Dictionary<string, int>();
 
             MemoryStream stringTableStream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(stringTableStream, Encoding.UTF8);
@@ -339,7 +399,10 @@ namespace ILCompiler.Diagnostics
                     continue;
 
                 long offset = writer.BaseStream.Position;
-                _stringTableToOffsetMapping.Add(str, checked((int)(offset - startOfStringTableOffset)));
+                _stringTableToOffsetMapping.Add(
+                    str,
+                    checked((int)(offset - startOfStringTableOffset))
+                );
                 writer.Write(str.AsSpan());
                 writer.Write((byte)0); // Null terminate all strings
             }
@@ -357,7 +420,7 @@ namespace ILCompiler.Diagnostics
 
         private void WriteFileChecksums()
         {
-            _documentToChecksumOffsetMapping = new Dictionary<SymDocument,int>();
+            _documentToChecksumOffsetMapping = new Dictionary<SymDocument, int>();
 
             MemoryStream checksumStream = new MemoryStream();
             BinaryWriter writer = new BinaryWriter(checksumStream, Encoding.UTF8);
@@ -370,7 +433,10 @@ namespace ILCompiler.Diagnostics
             foreach (var document in _symDocuments)
             {
                 long offset = writer.BaseStream.Position;
-                _documentToChecksumOffsetMapping.Add(document, checked((int)(offset - startOfChecksumTableOffset)));
+                _documentToChecksumOffsetMapping.Add(
+                    document,
+                    checked((int)(offset - startOfChecksumTableOffset))
+                );
 
                 SymChecksumType checksumType = document.ChecksumType;
                 byte[] checksum = document.Checksum;
@@ -454,7 +520,12 @@ namespace ILCompiler.Diagnostics
                 writer.Write((ushort)0); // Front end QFE Version
 
                 Version compilerVersion = null;
-                foreach (AssemblyFileVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(typeof(AssemblyFileVersionAttribute), true))
+                foreach (
+                    AssemblyFileVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(
+                        typeof(AssemblyFileVersionAttribute),
+                        true
+                    )
+                )
                 {
                     string versionString = versionAttribute.Version;
                     compilerVersion = new Version(versionString);
@@ -471,7 +542,12 @@ namespace ILCompiler.Diagnostics
 
                 // compiler version string
                 string informationalVersion = null;
-                foreach (AssemblyInformationalVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(typeof(AssemblyInformationalVersionAttribute), true))
+                foreach (
+                    AssemblyInformationalVersionAttribute versionAttribute in typeof(PdbWriter).Assembly.GetCustomAttributes(
+                        typeof(AssemblyInformationalVersionAttribute),
+                        true
+                    )
+                )
                 {
                     informationalVersion = versionAttribute.InformationalVersion;
                 }

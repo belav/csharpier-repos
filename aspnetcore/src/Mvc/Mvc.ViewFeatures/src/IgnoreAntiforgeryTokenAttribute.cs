@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// A filter that skips antiforgery token validation.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class IgnoreAntiforgeryTokenAttribute : Attribute, IAntiforgeryPolicy, IOrderedFilter
 {
     /// <summary>

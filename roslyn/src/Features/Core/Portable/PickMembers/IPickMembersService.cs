@@ -12,9 +12,11 @@ namespace Microsoft.CodeAnalysis.PickMembers
     internal interface IPickMembersService : IWorkspaceService
     {
         PickMembersResult PickMembers(
-            string title, ImmutableArray<ISymbol> members,
+            string title,
+            ImmutableArray<ISymbol> members,
             ImmutableArray<PickMembersOption> options = default,
-            bool selectAll = true);
+            bool selectAll = true
+        );
     }
 
     internal class PickMembersOption(string id, string title, bool value)

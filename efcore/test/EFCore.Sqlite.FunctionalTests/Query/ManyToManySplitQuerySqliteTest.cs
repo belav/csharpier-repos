@@ -5,16 +5,19 @@ using Microsoft.EntityFrameworkCore.Sqlite.Internal;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class ManyToManySplitQuerySqliteTest : ManyToManyQueryRelationalTestBase<ManyToManySplitQuerySqliteFixture>
+public class ManyToManySplitQuerySqliteTest
+    : ManyToManyQueryRelationalTestBase<ManyToManySplitQuerySqliteFixture>
 {
     public ManyToManySplitQuerySqliteTest(ManyToManySplitQuerySqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
-    public override async Task Skip_navigation_order_by_single_or_default(bool async)
-        => Assert.Equal(
+    public override async Task Skip_navigation_order_by_single_or_default(bool async) =>
+        Assert.Equal(
             SqliteStrings.ApplyNotSupported,
-            (await Assert.ThrowsAsync<InvalidOperationException>(
-                () => base.Skip_navigation_order_by_single_or_default(async))).Message);
+            (
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => base.Skip_navigation_order_by_single_or_default(async)
+                )
+            ).Message
+        );
 }

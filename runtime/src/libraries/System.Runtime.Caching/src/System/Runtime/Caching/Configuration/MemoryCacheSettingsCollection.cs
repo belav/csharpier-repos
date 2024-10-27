@@ -10,23 +10,21 @@ namespace System.Runtime.Caching.Configuration
 #if NETCOREAPP
     [UnsupportedOSPlatform("browser")]
 #endif
-    [ConfigurationCollection(typeof(MemoryCacheElement),
-    CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
+    [ConfigurationCollection(
+        typeof(MemoryCacheElement),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
     internal sealed class MemoryCacheSettingsCollection : ConfigurationElementCollection
     {
-        private static readonly ConfigurationPropertyCollection s_properties = new ConfigurationPropertyCollection();
+        private static readonly ConfigurationPropertyCollection s_properties =
+            new ConfigurationPropertyCollection();
 
         protected override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return s_properties;
-            }
+            get { return s_properties; }
         }
 
-        public MemoryCacheSettingsCollection()
-        {
-        }
+        public MemoryCacheSettingsCollection() { }
 
         public MemoryCacheElement this[int index]
         {
@@ -43,18 +41,12 @@ namespace System.Runtime.Caching.Configuration
 
         public new MemoryCacheElement this[string key]
         {
-            get
-            {
-                return (MemoryCacheElement)BaseGet(key);
-            }
+            get { return (MemoryCacheElement)BaseGet(key); }
         }
 
         public override ConfigurationElementCollectionType CollectionType
         {
-            get
-            {
-                return ConfigurationElementCollectionType.AddRemoveClearMapAlternate;
-            }
+            get { return ConfigurationElementCollectionType.AddRemoveClearMapAlternate; }
         }
 
         public int IndexOf(MemoryCacheElement cache)

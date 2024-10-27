@@ -4,7 +4,7 @@
 //
 // Author:
 //   Marek Sieradzki (marek.sieradzki@gmail.com)
-// 
+//
 // (C) 2005 Marek Sieradzki
 //
 // Permission is hereby granted, free of charge, to any person obtaining
@@ -32,43 +32,36 @@ using System.Collections;
 
 namespace Microsoft.Build.Framework
 {
-	public interface IBuildEngine
-	{
-		// Initiates a build of a project file. If the build is
-		// successful, the outputs (if any) of the specified targets
-		// are returned.
-		bool BuildProjectFile (string projectFileName,
-				       string[] targetNames,
-				       IDictionary globalProperties,
-				       IDictionary targetOutputs);
+    public interface IBuildEngine
+    {
+        // Initiates a build of a project file. If the build is
+        // successful, the outputs (if any) of the specified targets
+        // are returned.
+        bool BuildProjectFile(
+            string projectFileName,
+            string[] targetNames,
+            IDictionary globalProperties,
+            IDictionary targetOutputs
+        );
 
-		// Raises a custom event to all registered loggers.
-		void LogCustomEvent (CustomBuildEventArgs e);
+        // Raises a custom event to all registered loggers.
+        void LogCustomEvent(CustomBuildEventArgs e);
 
-		// Raises an error to all registered loggers.
-		void LogErrorEvent (BuildErrorEventArgs e);
+        // Raises an error to all registered loggers.
+        void LogErrorEvent(BuildErrorEventArgs e);
 
-		// Raises a message event to all registered loggers.
-		void LogMessageEvent (BuildMessageEventArgs e);
+        // Raises a message event to all registered loggers.
+        void LogMessageEvent(BuildMessageEventArgs e);
 
-		// Raises a warning to all registered loggers.
-		void LogWarningEvent (BuildWarningEventArgs e);
+        // Raises a warning to all registered loggers.
+        void LogWarningEvent(BuildWarningEventArgs e);
 
-		int ColumnNumberOfTaskNode {
-			get;
-		}
+        int ColumnNumberOfTaskNode { get; }
 
-		bool ContinueOnError {
-			get;
-		}
+        bool ContinueOnError { get; }
 
-		int LineNumberOfTaskNode {
-			get;
-		}
+        int LineNumberOfTaskNode { get; }
 
-		string ProjectFileOfTaskNode {
-			get;
-		}
-	}
+        string ProjectFileOfTaskNode { get; }
+    }
 }
-

@@ -1,11 +1,11 @@
 ﻿/* ****************************************************************************
  *
- * Copyright (c) Microsoft Corporation. 
+ * Copyright (c) Microsoft Corporation.
  *
- * This source code is subject to terms and conditions of the Apache License, Version 2.0. A 
- * copy of the license can be found in the License.html file at the root of this distribution. If 
- * you cannot locate the  Apache License, Version 2.0, please send an email to 
- * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound 
+ * This source code is subject to terms and conditions of the Apache License, Version 2.0. A
+ * copy of the license can be found in the License.html file at the root of this distribution. If
+ * you cannot locate the  Apache License, Version 2.0, please send an email to
+ * dlr@microsoft.com. By using this source code in any fashion, you are agreeing to be bound
  * by the terms of the Apache License, Version 2.0.
  *
  * You must not remove this notice, or any other, from this software.
@@ -13,13 +13,13 @@
  *
  * ***************************************************************************/
 
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Dynamic;
-using System.Collections.Generic;
 
-namespace System.Runtime.CompilerServices {
-
+namespace System.Runtime.CompilerServices
+{
     // Conceptually these are instance methods on CallSite<T> but
     // we don't want users to see them
 
@@ -27,15 +27,17 @@ namespace System.Runtime.CompilerServices {
     /// This API supports the .NET Framework infrastructure and is not intended to be used directly from your code.
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never), DebuggerStepThrough]
-    public static class CallSiteOps {
-
+    public static class CallSiteOps
+    {
         /// <summary>
         /// Creates an instance of a dynamic call site used for cache lookup.
         /// </summary>
         /// <typeparam name="T">The type of the delegate of the <see cref="CallSite"/>.</typeparam>
         /// <returns>The new call site.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static CallSite<T> CreateMatchmaker<T>(CallSite<T> site) where T : class {
+        public static CallSite<T> CreateMatchmaker<T>(CallSite<T> site)
+            where T : class
+        {
             var mm = site.CreateMatchMaker();
             CallSiteOps.ClearMatch(mm);
             return mm;
@@ -47,9 +49,10 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">An instance of the dynamic call site.</param>
         /// <returns>true if rule does not need updating, false otherwise.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static bool SetNotMatched(CallSite site) {
+        public static bool SetNotMatched(CallSite site)
+        {
             var res = site._match;
-            site._match = false;  //avoid branch here to make sure the method is inlined
+            site._match = false; //avoid branch here to make sure the method is inlined
             return res;
         }
 
@@ -59,7 +62,8 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">An instance of the dynamic call site.</param>
         /// <returns>true if rule matched, false otherwise.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static bool GetMatch(CallSite site) {
+        public static bool GetMatch(CallSite site)
+        {
             return site._match;
         }
 
@@ -68,7 +72,8 @@ namespace System.Runtime.CompilerServices {
         /// </summary>
         /// <param name="site">An instance of the dynamic call site.</param>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static void ClearMatch(CallSite site) {
+        public static void ClearMatch(CallSite site)
+        {
             site._match = true;
         }
 
@@ -79,7 +84,9 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">An instance of the dynamic call site.</param>
         /// <param name="rule">An instance of the call site rule.</param>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static void AddRule<T>(CallSite<T> site, T rule) where T : class {
+        public static void AddRule<T>(CallSite<T> site, T rule)
+            where T : class
+        {
             site.AddRule(rule);
         }
 
@@ -90,8 +97,11 @@ namespace System.Runtime.CompilerServices {
         /// <param name="this">An instance of the dynamic call site.</param>
         /// <param name="matched">The matched rule index.</param>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static void UpdateRules<T>(CallSite<T> @this, int matched) where T : class {
-            if (matched > 1) {
+        public static void UpdateRules<T>(CallSite<T> @this, int matched)
+            where T : class
+        {
+            if (matched > 1)
+            {
                 @this.MoveRule(matched);
             }
         }
@@ -103,10 +113,11 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">An instance of the dynamic call site.</param>
         /// <returns>An array of dynamic binding rules.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static T[] GetRules<T>(CallSite<T> site) where T : class {
+        public static T[] GetRules<T>(CallSite<T> site)
+            where T : class
+        {
             return site.Rules;
         }
-
 
         /// <summary>
         /// Retrieves binding rule cache.
@@ -115,10 +126,11 @@ namespace System.Runtime.CompilerServices {
         /// <param name="site">An instance of the dynamic call site.</param>
         /// <returns>The cache.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static RuleCache<T> GetRuleCache<T>(CallSite<T> site) where T : class {
+        public static RuleCache<T> GetRuleCache<T>(CallSite<T> site)
+            where T : class
+        {
             return site.Binder.GetRuleCache<T>();
         }
-
 
         /// <summary>
         /// Moves the binding rule within the cache.
@@ -128,8 +140,11 @@ namespace System.Runtime.CompilerServices {
         /// <param name="rule">An instance of the call site rule.</param>
         /// <param name="i">An index of the call site rule.</param>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static void MoveRule<T>(RuleCache<T> cache, T rule, int i) where T : class {
-            if (i > 1) {
+        public static void MoveRule<T>(RuleCache<T> cache, T rule, int i)
+            where T : class
+        {
+            if (i > 1)
+            {
                 cache.MoveRule(rule, i);
             }
         }
@@ -141,7 +156,9 @@ namespace System.Runtime.CompilerServices {
         /// <param name="cache">The cache.</param>
         /// <returns>The collection of applicable rules.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static T[] GetCachedRules<T>(RuleCache<T> cache) where T : class {
+        public static T[] GetCachedRules<T>(RuleCache<T> cache)
+            where T : class
+        {
             return cache.GetRules();
         }
 
@@ -154,7 +171,9 @@ namespace System.Runtime.CompilerServices {
         /// <param name="args">Arguments to the call site.</param>
         /// <returns>The new call site target.</returns>
         [Obsolete("do not use this method", true), EditorBrowsable(EditorBrowsableState.Never)]
-        public static T Bind<T>(CallSiteBinder binder, CallSite<T> site, object[] args) where T : class {
+        public static T Bind<T>(CallSiteBinder binder, CallSite<T> site, object[] args)
+            where T : class
+        {
             return binder.BindCore(site, args);
         }
     }

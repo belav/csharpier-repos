@@ -10,7 +10,8 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Grpc.JsonTranscoding.Internal.CallHandlers;
 
-internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse> : ServerCallHandlerBase<TService, TRequest, TResponse>
+internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse>
+    : ServerCallHandlerBase<TService, TRequest, TResponse>
     where TService : class
     where TRequest : class
     where TResponse : class
@@ -21,14 +22,22 @@ internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse> : Se
         UnaryServerMethodInvoker<TService, TRequest, TResponse> unaryMethodInvoker,
         ILoggerFactory loggerFactory,
         CallHandlerDescriptorInfo descriptorInfo,
-        JsonSerializerOptions options) : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
+        JsonSerializerOptions options
+    )
+        : base(unaryMethodInvoker, loggerFactory, descriptorInfo, options)
     {
         _invoker = unaryMethodInvoker;
     }
 
-    protected override async Task HandleCallAsyncCore(HttpContext httpContext, JsonTranscodingServerCallContext serverCallContext)
+    protected override async Task HandleCallAsyncCore(
+        HttpContext httpContext,
+        JsonTranscodingServerCallContext serverCallContext
+    )
     {
-        var request = await JsonRequestHelpers.ReadMessage<TRequest>(serverCallContext, SerializerOptions);
+        var request = await JsonRequestHelpers.ReadMessage<TRequest>(
+            serverCallContext,
+            SerializerOptions
+        );
 
         var response = await _invoker.Invoke(httpContext, serverCallContext, request);
 
@@ -40,7 +49,9 @@ internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse> : Se
         if (response == null)
         {
             // This is consistent with Grpc.Core when a null value is returned
-            throw new RpcException(new Status(StatusCode.Cancelled, "No message returned from method."));
+            throw new RpcException(
+                new Status(StatusCode.Cancelled, "No message returned from method.")
+            );
         }
 
         if (response is HttpBody httpBody)
@@ -51,7 +62,12 @@ internal sealed class UnaryServerCallHandler<TService, TRequest, TResponse> : Se
         else
         {
             serverCallContext.EnsureResponseHeaders();
-            await JsonRequestHelpers.SendMessage(serverCallContext, SerializerOptions, response, CancellationToken.None);
+            await JsonRequestHelpers.SendMessage(
+                serverCallContext,
+                SerializerOptions,
+                response,
+                CancellationToken.None
+            );
         }
     }
 }

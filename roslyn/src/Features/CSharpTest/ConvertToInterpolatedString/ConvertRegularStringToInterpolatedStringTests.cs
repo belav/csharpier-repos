@@ -16,8 +16,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
     [Trait(Traits.Feature, Traits.Features.CodeActionsConvertToInterpolatedString)]
     public class ConvertRegularStringToInterpolatedStringTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new ConvertRegularStringToInterpolatedStringRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new ConvertRegularStringToInterpolatedStringRefactoringProvider();
 
         [Fact]
         public async Task TestMissingOnRegularStringWithNoBraces()
@@ -31,7 +33,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v = [||]"string";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -55,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v = $"string {{";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -79,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v = $"string {{ \r\n \t";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -95,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v = $[||]"string {i}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -121,7 +127,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                 }}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -147,7 +154,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                 }}";
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -162,7 +170,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         const string v = [||]"string {";
                     }
                 }
-                """, new(new CSharpParseOptions(LanguageVersion.CSharp9)));
+                """,
+                new(new CSharpParseOptions(LanguageVersion.CSharp9))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -186,7 +196,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         const string v = $"string {{";
                     }
                 }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
@@ -201,7 +213,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v = [||]"string {
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -215,7 +228,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                     public string FirstName { get; set; }
                     public string LastName { get; set; }
                 }
-                """, new(new CSharpParseOptions(LanguageVersion.CSharp9)));
+                """,
+                new(new CSharpParseOptions(LanguageVersion.CSharp9))
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/52243")]
@@ -237,7 +252,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                     public string FirstName { get; set; }
                     public string LastName { get; set; }
                 }
-                """, parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10));
+                """,
+                parseOptions: new CSharpParseOptions(LanguageVersion.CSharp10)
+            );
         }
 
         [Fact]
@@ -252,7 +269,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ConvertToInterpolatedSt
                         var v [||]= "string {";
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

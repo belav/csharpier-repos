@@ -6,11 +6,11 @@ using System.IO;
 using System.Net.Http;
 using System.Net.Sockets;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests.Utilities;
 using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.Server.IntegrationTesting.IIS;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
@@ -18,10 +18,8 @@ namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
 [Collection(PublishedSitesCollection.Name)]
 public class IISExpressShutdownTests : IISFunctionalTestBase
 {
-
-    public IISExpressShutdownTests(PublishedSitesFixture fixture) : base(fixture)
-    {
-    }
+    public IISExpressShutdownTests(PublishedSitesFixture fixture)
+        : base(fixture) { }
 
     [ConditionalFact]
     public async Task ServerShutsDownWhenMainExits()
@@ -51,18 +49,26 @@ public class IISExpressShutdownTests : IISFunctionalTestBase
         var parameters = Fixture.GetBaseDeploymentParameters();
         var deploymentResult = await StartAsync(parameters);
 
-        var load = Helpers.StressLoad(deploymentResult.HttpClient, "/HelloWorld", response =>
-        {
-            var statusCode = (int)response.StatusCode;
-            Assert.True(statusCode == 200 || statusCode == 503, "Status code was " + statusCode);
-        });
+        var load = Helpers.StressLoad(
+            deploymentResult.HttpClient,
+            "/HelloWorld",
+            response =>
+            {
+                var statusCode = (int)response.StatusCode;
+                Assert.True(
+                    statusCode == 200 || statusCode == 503,
+                    "Status code was " + statusCode
+                );
+            }
+        );
 
         try
         {
             await deploymentResult.HttpClient.GetAsync("/Shutdown");
             await load;
         }
-        catch (HttpRequestException ex) when (ex.InnerException is IOException | ex.InnerException is SocketException)
+        catch (HttpRequestException ex)
+            when (ex.InnerException is IOException | ex.InnerException is SocketException)
         {
             // Server might close a connection before request completes
         }

@@ -64,7 +64,8 @@ public sealed record StateManagerDependencies
         IDiagnosticsLogger<DbLoggerCategory.Update> updateLogger,
         IDiagnosticsLogger<DbLoggerCategory.ChangeTracking> changeTrackingLogger,
         INavigationFixer navigationFixer,
-        IInterceptors interceptors)
+        IInterceptors interceptors
+    )
     {
         InternalEntityEntrySubscriber = internalEntityEntrySubscriber;
         InternalEntityEntryNotifier = internalEntityEntryNotifier;

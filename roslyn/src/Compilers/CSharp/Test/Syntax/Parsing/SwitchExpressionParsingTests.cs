@@ -10,14 +10,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests;
 
 public class SwitchExpressionParsingTests : ParsingTests
 {
-    public SwitchExpressionParsingTests(ITestOutputHelper output) : base(output)
-    {
-    }
+    public SwitchExpressionParsingTests(ITestOutputHelper output)
+        : base(output) { }
 
     [Fact]
     public void TestErrantCaseInSwitchExpression1()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 case 0 => 1,
@@ -29,7 +29,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(3, 5),
             // (4,5): error CS9134: A switch expression arm does not begin with a 'case' keyword.
             //     case 1 => 2,
-            Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(4, 5));
+            Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(4, 5)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -78,7 +79,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantCaseInSwitchExpression1_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 case 0 => 1;
@@ -96,7 +98,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(4, 5),
             // (4,16): error CS1003: Syntax error, ',' expected
             //     case 1 => 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 16));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 16)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -145,7 +148,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantCaseInSwitchExpression2()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 case 0: 1,
@@ -163,7 +167,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_BadCaseInSwitchArm, "case").WithLocation(4, 5),
             // (4,11): error CS1003: Syntax error, '=>' expected
             //     case 1: 2,
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 11));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 11)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -212,7 +217,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantCaseInSwitchExpression2_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 case 0: 1;
@@ -236,7 +242,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 11),
             // (4,14): error CS1003: Syntax error, ',' expected
             //     case 1: 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 14));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 14)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -285,7 +292,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantCaseInSwitchExpression3()
     {
-        UsingStatement("""
+        UsingStatement(
+            """
             {
                 var y = x switch
                 {
@@ -317,7 +325,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SemicolonExpected, "").WithLocation(5, 19),
             // (6,24): error CS1003: Syntax error, 'switch' expected
             //             return Bar;
-            Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("switch").WithLocation(6, 24));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments("switch").WithLocation(6, 24)
+        );
         N(SyntaxKind.Block);
         {
             N(SyntaxKind.OpenBraceToken);
@@ -458,7 +467,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantColonsInSwitchExpression1()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0: 1,
@@ -470,7 +480,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(3, 6),
             // (4,6): error CS1003: Syntax error, '=>' expected
             //     1: 2,
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 6));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 6)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -519,7 +530,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantColonsInSwitchExpression1_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0: 1;
@@ -537,7 +549,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 6),
             // (4,9): error CS1003: Syntax error, ',' expected
             //     1: 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 9));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 9)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -586,7 +599,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantDefaultInSwitchExpression1()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1,
@@ -595,7 +609,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             """,
             // (4,12): error CS1003: Syntax error, '=>' expected
             //     default: 2,
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 12));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 12)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -644,7 +659,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantDefaultInSwitchExpression1_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1;
@@ -659,7 +675,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 12),
             // (4,15): error CS1003: Syntax error, ',' expected
             //     default: 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 15));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 15)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -708,7 +725,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantDefaultInSwitchExpression2()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1,
@@ -717,7 +735,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             """,
             // (4,17): error CS1003: Syntax error, '=>' expected
             //     default(int): 2,
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 17));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 17)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -772,7 +791,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestErrantDefaultInSwitchExpression2_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1;
@@ -787,7 +807,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 17),
             // (4,20): error CS1003: Syntax error, ',' expected
             //     default(int): 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 20));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 20)
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -850,10 +871,12 @@ public class SwitchExpressionParsingTests : ParsingTests
                 default => 2,
             };
             """;
-        CreateCompilation(code).VerifyDiagnostics(
-            // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
-            //     default => 2,
-            Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5));
+        CreateCompilation(code)
+            .VerifyDiagnostics(
+                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                //     default => 2,
+                Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5)
+            );
 
         UsingStatement(code);
         N(SyntaxKind.LocalDeclarationStatement);
@@ -931,24 +954,28 @@ public class SwitchExpressionParsingTests : ParsingTests
                 default => 2;
             };
             """;
-        CreateCompilation(code).VerifyDiagnostics(
-            // (3,11): error CS1003: Syntax error, ',' expected
-            //     0 => 1;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
-            // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
-            //     default => 2;
-            Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5),
-            // (4,17): error CS1003: Syntax error, ',' expected
-            //     default => 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 17));
+        CreateCompilation(code)
+            .VerifyDiagnostics(
+                // (3,11): error CS1003: Syntax error, ',' expected
+                //     0 => 1;
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
+                // (4,5): error CS8505: A default literal 'default' is not valid as a pattern. Use another literal (e.g. '0' or 'null') as appropriate. To match everything, use a discard pattern '_'.
+                //     default => 2;
+                Diagnostic(ErrorCode.ERR_DefaultPattern, "default").WithLocation(4, 5),
+                // (4,17): error CS1003: Syntax error, ',' expected
+                //     default => 2;
+                Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 17)
+            );
 
-        UsingStatement(code,
+        UsingStatement(
+            code,
             // (3,11): error CS1003: Syntax error, ',' expected
             //     0 => 1;
             Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
             // (4,17): error CS1003: Syntax error, ',' expected
             //     default => 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 17));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 17)
+        );
         N(SyntaxKind.LocalDeclarationStatement);
         {
             N(SyntaxKind.VariableDeclaration);
@@ -1016,13 +1043,15 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestNormalDefaultInSwitchExpression2()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1,
                 default(int) => 2,
             }
-            """);
+            """
+        );
         N(SyntaxKind.SwitchExpression);
         {
             N(SyntaxKind.IdentifierName);
@@ -1077,7 +1106,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestNormalDefaultInSwitchExpression2_Semicolons()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             x switch
             {
                 0 => 1;
@@ -1089,7 +1119,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(3, 11),
             // (4,22): error CS1003: Syntax error, ',' expected
             //     default(int) => 2;
-            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 22));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ";").WithArguments(",").WithLocation(4, 22)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1145,7 +1176,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern1()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: Type { } => 1,
@@ -1157,7 +1189,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(3, 27),
             // (4,27): error CS1513: } expected
             //     Type { Prop: Type { } => 2
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 27));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 27)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1262,7 +1295,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern1_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: Type { } : 1,
@@ -1280,7 +1314,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(4, 27),
             // (4,27): error CS1003: Syntax error, '=>' expected
             //     Type { Prop: Type { } : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 27));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 27)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1385,7 +1420,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern2()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: Type { => 1,
@@ -1403,7 +1439,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 25),
             // (4,25): error CS1513: } expected
             //     Type { Prop: Type { => 2
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 25));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 25)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1508,7 +1545,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern2_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: Type { : 1,
@@ -1532,7 +1570,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(4, 25),
             // (4,25): error CS1003: Syntax error, '=>' expected
             //     Type { Prop: Type { : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 25));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 25)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1637,7 +1676,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern3()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: { Prop: { => 1,
@@ -1661,7 +1701,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 28),
             // (4,28): error CS1513: } expected
             //     Type { Prop: { Prop: { => 2
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 28));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "=>").WithLocation(4, 28)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1796,7 +1837,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedRecursivePattern3_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 Type { Prop: { Prop: { : 1,
@@ -1826,7 +1868,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_RbraceExpected, ":").WithLocation(4, 28),
             // (4,28): error CS1003: Syntax error, '=>' expected
             //     Type { Prop: { Prop: { : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 28));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 28)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -1961,7 +2004,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern1()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [ => 1,
@@ -1973,7 +2017,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(3, 7),
             // (4,7): error CS1003: Syntax error, ']' expected
             //     [ => 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 7));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 7)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2018,7 +2063,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern1_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [ : 1,
@@ -2036,7 +2082,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(4, 7),
             // (4,7): error CS1003: Syntax error, '=>' expected
             //     [ : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 7));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 7)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2081,7 +2128,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern2()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [[ => 1,
@@ -2099,7 +2147,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 8),
             // (4,8): error CS1003: Syntax error, ']' expected
             //     [[ => 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 8));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 8)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2154,7 +2203,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern2_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [[ : 1,
@@ -2178,7 +2228,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(4, 8),
             // (4,8): error CS1003: Syntax error, '=>' expected
             //     [[ : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 8));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 8)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2233,7 +2284,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern3()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [[[ => 1,
@@ -2257,7 +2309,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 9),
             // (4,9): error CS1003: Syntax error, ']' expected
             //     [[[ => 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 9));
+            Diagnostic(ErrorCode.ERR_SyntaxError, "=>").WithArguments("]").WithLocation(4, 9)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2322,7 +2375,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/67876")]
     public void TestUnclosedListPattern3_Colon()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 [[[ : 1,
@@ -2352,7 +2406,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("]").WithLocation(4, 9),
             // (4,9): error CS1003: Syntax error, '=>' expected
             //     [[ : 2
-            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 9));
+            Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments("=>").WithLocation(4, 9)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {
@@ -2417,7 +2472,8 @@ public class SwitchExpressionParsingTests : ParsingTests
     [Fact]
     public void TestIncompleteSwitchExpression()
     {
-        UsingExpression("""
+        UsingExpression(
+            """
             obj switch
             {
                 { Prop: 1, { Prop: 2 }
@@ -2436,7 +2492,8 @@ public class SwitchExpressionParsingTests : ParsingTests
             Diagnostic(ErrorCode.ERR_SyntaxError, "").WithArguments(",").WithLocation(3, 27),
             // (3,27): error CS1513: } expected
             //     { Prop: 1, { Prop: 2 }
-            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 27));
+            Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(3, 27)
+        );
 
         N(SyntaxKind.SwitchExpression);
         {

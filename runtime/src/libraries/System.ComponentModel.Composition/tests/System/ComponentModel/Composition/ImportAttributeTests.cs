@@ -9,9 +9,7 @@ using Xunit;
 namespace System.ComponentModel.Composition
 {
     [Export]
-    public class WorkingType
-    {
-    }
+    public class WorkingType { }
 
     [Export]
     public class Constants
@@ -176,11 +174,14 @@ namespace System.ComponentModel.Composition
 
             var v1 = con.GetExportedValue<WorkingType>();
 
-            ExceptionAssert.Throws<CompositionException>(RetryMode.DoNotRetry, () =>
-            {
-                var v2 = con.GetExportedValue<ExportWithIndexer>();
-                Console.WriteLine(v2.ToString());
-            });
+            ExceptionAssert.Throws<CompositionException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var v2 = con.GetExportedValue<ExportWithIndexer>();
+                    Console.WriteLine(v2.ToString());
+                }
+            );
         }
     }
 }

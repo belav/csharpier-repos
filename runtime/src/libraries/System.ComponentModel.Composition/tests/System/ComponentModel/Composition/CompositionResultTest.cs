@@ -338,10 +338,13 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult(errorId);
 
-                CompositionAssert.ThrowsError((ErrorId)errorId, () =>
-                {
-                    result.ThrowOnErrors();
-                });
+                CompositionAssert.ThrowsError(
+                    (ErrorId)errorId,
+                    () =>
+                    {
+                        result.ThrowOnErrors();
+                    }
+                );
             }
         }
 
@@ -354,10 +357,14 @@ namespace System.ComponentModel.Composition
             {
                 var result = CreateCompositionResult(errorId, errorId);
 
-                CompositionAssert.ThrowsErrors((ErrorId)errorId, (ErrorId)errorId, () =>
-                {
-                    result.ThrowOnErrors();
-                });
+                CompositionAssert.ThrowsErrors(
+                    (ErrorId)errorId,
+                    (ErrorId)errorId,
+                    () =>
+                    {
+                        result.ThrowOnErrors();
+                    }
+                );
             }
         }
 
@@ -374,10 +381,14 @@ namespace System.ComponentModel.Composition
 
                 var result = CreateCompositionResult(errorId1, errorId2);
 
-                CompositionAssert.ThrowsErrors((ErrorId)errorId1, (ErrorId)errorId2, () =>
-                {
-                    result.ThrowOnErrors();
-                });
+                CompositionAssert.ThrowsErrors(
+                    (ErrorId)errorId1,
+                    (ErrorId)errorId2,
+                    () =>
+                    {
+                        result.ThrowOnErrors();
+                    }
+                );
             }
         }
 
@@ -464,10 +475,12 @@ namespace System.ComponentModel.Composition
 
         private CompositionResult CreateCompositionResult(params CompositionErrorId[] errorIds)
         {
-            return new CompositionResult(errorIds.Select(id =>
-            {
-                return ErrorFactory.Create(id);
-            }));
+            return new CompositionResult(
+                errorIds.Select(id =>
+                {
+                    return ErrorFactory.Create(id);
+                })
+            );
         }
 
         private CompositionResult CreateCompositionResult(int count)

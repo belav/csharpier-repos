@@ -25,7 +25,7 @@ public class SqlServerDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffzzz}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.fffffzzz}'",
         "'{0:yyyy-MM-ddTHH:mm:ss.ffffffzzz}'",
-        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffzzz}'"
+        "'{0:yyyy-MM-ddTHH:mm:ss.fffffffzzz}'",
     };
 
     /// <summary>
@@ -45,15 +45,19 @@ public class SqlServerDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
     public SqlServerDateTimeOffsetTypeMapping(
         string storeType,
         DbType? dbType = System.Data.DbType.DateTimeOffset,
-        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision)
+        StoreTypePostfix storeTypePostfix = StoreTypePostfix.Precision
+    )
         : base(
             new RelationalTypeMappingParameters(
-                new CoreTypeMappingParameters(typeof(DateTimeOffset), jsonValueReaderWriter: JsonDateTimeOffsetReaderWriter.Instance),
+                new CoreTypeMappingParameters(
+                    typeof(DateTimeOffset),
+                    jsonValueReaderWriter: JsonDateTimeOffsetReaderWriter.Instance
+                ),
                 storeType,
                 storeTypePostfix,
-                dbType))
-    {
-    }
+                dbType
+            )
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -62,17 +66,15 @@ public class SqlServerDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerDateTimeOffsetTypeMapping(RelationalTypeMappingParameters parameters)
-        : base(parameters)
-    {
-    }
+        : base(parameters) { }
 
     /// <summary>
     ///     Creates a copy of this mapping.
     /// </summary>
     /// <param name="parameters">The parameters for this mapping.</param>
     /// <returns>The newly created mapping.</returns>
-    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters)
-        => new SqlServerDateTimeOffsetTypeMapping(parameters);
+    protected override RelationalTypeMapping Clone(RelationalTypeMappingParameters parameters) =>
+        new SqlServerDateTimeOffsetTypeMapping(parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -107,8 +109,7 @@ public class SqlServerDateTimeOffsetTypeMapping : DateTimeOffsetTypeMapping
     {
         base.ConfigureParameter(parameter);
 
-        if (Size.HasValue
-            && Size.Value != -1)
+        if (Size.HasValue && Size.Value != -1)
         {
             parameter.Size = Size.Value;
         }

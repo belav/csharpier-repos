@@ -20,7 +20,7 @@ namespace System.CommandLine.Parsing
             Symbol = symbol;
             Position = ImplicitPosition;
         }
-       
+
         internal CliToken(string? value, CliTokenType type, CliSymbol? symbol, int position)
         {
             Value = value ?? "";
@@ -52,7 +52,11 @@ namespace System.CommandLine.Parsing
         public override bool Equals(object? obj) => Equals(obj as CliToken);
 
         /// <inheritdoc />
-        public bool Equals(CliToken? other) => other is not null && Value == other.Value && Type == other.Type && ReferenceEquals(Symbol, other.Symbol);
+        public bool Equals(CliToken? other) =>
+            other is not null
+            && Value == other.Value
+            && Type == other.Type
+            && ReferenceEquals(Symbol, other.Symbol);
 
         /// <inheritdoc />
         public override int GetHashCode() => Value.GetHashCode() ^ (int)Type;
@@ -66,7 +70,8 @@ namespace System.CommandLine.Parsing
         /// <param name="left">The first <see cref="CliToken"/>.</param>
         /// <param name="right">The second <see cref="CliToken"/>.</param>
         /// <returns><see langword="true" /> if the objects are equal.</returns>
-        public static bool operator ==(CliToken? left, CliToken? right) => left is null ? right is null : left.Equals(right);
+        public static bool operator ==(CliToken? left, CliToken? right) =>
+            left is null ? right is null : left.Equals(right);
 
         /// <summary>
         /// Checks if two specified <see cref="CliToken"/> instances have different values.
@@ -74,6 +79,7 @@ namespace System.CommandLine.Parsing
         /// <param name="left">The first <see cref="CliToken"/>.</param>
         /// <param name="right">The second <see cref="CliToken"/>.</param>
         /// <returns><see langword="true" /> if the objects are not equal.</returns>
-        public static bool operator !=(CliToken? left, CliToken? right) => left is null ? right is not null : !left.Equals(right);
+        public static bool operator !=(CliToken? left, CliToken? right) =>
+            left is null ? right is not null : !left.Equals(right);
     }
 }

@@ -15,7 +15,8 @@ public class RewriteMapParserTests
         const string expectedMapName = "apiMap";
         const string expectedKey = "api.test.com";
         const string expectedValue = "test.com/api";
-        var xml = $@"<rewrite>
+        var xml =
+            $@"<rewrite>
                                 <rewriteMaps>
                                     <rewriteMap name=""{expectedMapName}"">
                                         <add key=""{expectedKey}"" value=""{expectedValue}"" />

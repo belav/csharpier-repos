@@ -4,9 +4,9 @@
 
 #nullable disable
 
-using Microsoft.CodeAnalysis.CSharp.Symbols;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Microsoft.CodeAnalysis.CSharp.Symbols;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -17,11 +17,10 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// </summary>
     internal class LexicalOrderSymbolComparer : IComparer<Symbol>
     {
-        public static readonly LexicalOrderSymbolComparer Instance = new LexicalOrderSymbolComparer();
+        public static readonly LexicalOrderSymbolComparer Instance =
+            new LexicalOrderSymbolComparer();
 
-        private LexicalOrderSymbolComparer()
-        {
-        }
+        private LexicalOrderSymbolComparer() { }
 
         public int Compare(Symbol x, Symbol y)
         {

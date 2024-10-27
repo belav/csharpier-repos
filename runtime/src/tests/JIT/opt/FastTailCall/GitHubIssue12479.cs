@@ -6,21 +6,24 @@ using Xunit;
 
 public class GitHubIssue12479
 {
-    public static int callee(int one,
-                             int two,
-                             int three,
-                             int four,
-                             int five,
-                             int six,
-                             int seven,
-                             int eight)
+    public static int callee(
+        int one,
+        int two,
+        int three,
+        int four,
+        int five,
+        int six,
+        int seven,
+        int eight
+    )
     {
         int count = 0;
 
         // Make sure this is not inlined.
         for (int i = 0; i < one; ++i)
         {
-            if (i % 4 == 0) ++count;
+            if (i % 4 == 0)
+                ++count;
         }
 
         return count;
@@ -29,14 +32,16 @@ public class GitHubIssue12479
     // Linux (x64): Eight incoming arguments, all passed in registers
     //
     // nCallerArgs: 8, stackSize: 0 bytes
-    public static int caller(float one, 
-                             float two, 
-                             float three, 
-                             float four, 
-                             float five,
-                             float six,
-                             float seven,
-                             float eight)
+    public static int caller(
+        float one,
+        float two,
+        float three,
+        float four,
+        float five,
+        float six,
+        float seven,
+        float eight
+    )
     {
         if (one % 2 == 0)
         {
@@ -46,14 +51,16 @@ public class GitHubIssue12479
             //
             // This is a fast tail call candidate that should not be fast tail called
             // because the callee's stack size will be larger than the caller's
-            return callee((int) two,
-                          (int) one,
-                          (int) eight,
-                          (int) five,
-                          (int) four,
-                          (int) seven,
-                          (int) six,
-                          (int) three);
+            return callee(
+                (int)two,
+                (int)one,
+                (int)eight,
+                (int)five,
+                (int)four,
+                (int)seven,
+                (int)six,
+                (int)three
+            );
         }
         else
         {
@@ -63,17 +70,17 @@ public class GitHubIssue12479
             //
             // This is a fast tail call candidate that should not be fast tail called
             // because the callee's stack size will be larger than the caller's
-            return callee((int) one,
-                          (int) two,
-                          (int) three,
-                          (int) four,
-                          (int) five,
-                          (int) six,
-                          (int) seven,
-                          (int) eight);
+            return callee(
+                (int)one,
+                (int)two,
+                (int)three,
+                (int)four,
+                (int)five,
+                (int)six,
+                (int)seven,
+                (int)eight
+            );
         }
-
-        
     }
 
     [Fact]
@@ -86,7 +93,6 @@ public class GitHubIssue12479
         {
             return 100;
         }
-
         else
         {
             return 101;

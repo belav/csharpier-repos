@@ -7,9 +7,9 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 {
-    public class RollForwardAndRollForwardOnNoCandidateFxSettings :
-        FrameworkResolutionBase,
-        IClassFixture<RollForwardAndRollForwardOnNoCandidateFxSettings.SharedTestState>
+    public class RollForwardAndRollForwardOnNoCandidateFxSettings
+        : FrameworkResolutionBase,
+            IClassFixture<RollForwardAndRollForwardOnNoCandidateFxSettings.SharedTestState>
     {
         private SharedTestState SharedState { get; }
 
@@ -20,33 +20,108 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
 
         // Verifies that rollForward can't be used together with rollForwrdOnNoCandidateFx or applyPatches in the same runtime config
         [Theory] // rollForwardLocation                 rollForwardOnNoCandidateFxLocation  applyPatchesLocation                passes
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.None,               SettingLocation.None,               true)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.RuntimeOptions,     SettingLocation.None,               false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.FrameworkReference, SettingLocation.None,               false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.None,               SettingLocation.RuntimeOptions,     false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.None,               SettingLocation.FrameworkReference, false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.RuntimeOptions,     SettingLocation.RuntimeOptions,     false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.FrameworkReference, SettingLocation.FrameworkReference, false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.None,               SettingLocation.None,               true)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.RuntimeOptions,     SettingLocation.None,               false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.FrameworkReference, SettingLocation.None,               false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.None,               SettingLocation.RuntimeOptions,     false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.None,               SettingLocation.FrameworkReference, false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.RuntimeOptions,     SettingLocation.RuntimeOptions,     false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.FrameworkReference, SettingLocation.FrameworkReference, false)]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.None,
+            SettingLocation.None,
+            true
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.RuntimeOptions,
+            SettingLocation.None,
+            false
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.FrameworkReference,
+            SettingLocation.None,
+            false
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.None,
+            SettingLocation.RuntimeOptions,
+            false
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.None,
+            SettingLocation.FrameworkReference,
+            false
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.RuntimeOptions,
+            SettingLocation.RuntimeOptions,
+            false
+        )]
+        [InlineData(
+            SettingLocation.RuntimeOptions,
+            SettingLocation.FrameworkReference,
+            SettingLocation.FrameworkReference,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.None,
+            SettingLocation.None,
+            true
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.RuntimeOptions,
+            SettingLocation.None,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.FrameworkReference,
+            SettingLocation.None,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.None,
+            SettingLocation.RuntimeOptions,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.None,
+            SettingLocation.FrameworkReference,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.RuntimeOptions,
+            SettingLocation.RuntimeOptions,
+            false
+        )]
+        [InlineData(
+            SettingLocation.FrameworkReference,
+            SettingLocation.FrameworkReference,
+            SettingLocation.FrameworkReference,
+            false
+        )]
         public void CollisionsInRuntimeConfig(
             SettingLocation rollForwardLocation,
             SettingLocation rollForwardOnNoCandidateFxLocation,
             SettingLocation applyPatchesLocation,
-            bool passes)
+            bool passes
+        )
         {
             CommandResult result = RunTest(
                 new TestSettings()
-                    .WithRuntimeConfigCustomizer(runtimeConfig => runtimeConfig
-                        .WithFramework(MicrosoftNETCoreApp, "5.0.0"))
-                    .With(RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Minor))
+                    .WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, "5.0.0")
+                    )
+                    .With(
+                        RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Minor)
+                    )
                     .With(RollForwardOnNoCandidateFxSetting(rollForwardOnNoCandidateFxLocation, 1))
-                    .With(ApplyPatchesSetting(applyPatchesLocation, false)));
+                    .With(ApplyPatchesSetting(applyPatchesLocation, false))
+            );
 
             if (passes)
             {
@@ -54,11 +129,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             }
             else
             {
-                result.Should().Fail()
-                      .And.HaveStdErrContaining(
-                        $"It's invalid to use both `{Constants.RollForwardSetting.RuntimeConfigPropertyName}` and one of " +
-                        $"`{Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName}` or " +
-                        $"`{Constants.ApplyPatchesSetting.RuntimeConfigPropertyName}` in the same runtime config.");
+                result
+                    .Should()
+                    .Fail()
+                    .And.HaveStdErrContaining(
+                        $"It's invalid to use both `{Constants.RollForwardSetting.RuntimeConfigPropertyName}` and one of "
+                            + $"`{Constants.RollForwardOnNoCandidateFxSetting.RuntimeConfigPropertyName}` or "
+                            + $"`{Constants.ApplyPatchesSetting.RuntimeConfigPropertyName}` in the same runtime config."
+                    );
             }
         }
 
@@ -67,15 +145,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         public void CollisionsOnCommandLine_RollForwardOnNoCandidateFx()
         {
             RunTest(
-                new TestSettings()
-                    .WithRuntimeConfigCustomizer(runtimeConfig => runtimeConfig
-                        .WithFramework(MicrosoftNETCoreApp, "4.0.0"))
-                    .WithCommandLine(Constants.RollForwardSetting.CommandLineArgument, Constants.RollForwardSetting.LatestPatch)
-                    .WithCommandLine(Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument, "2"))
-                .Should().Fail()
+                    new TestSettings()
+                        .WithRuntimeConfigCustomizer(runtimeConfig =>
+                            runtimeConfig.WithFramework(MicrosoftNETCoreApp, "4.0.0")
+                        )
+                        .WithCommandLine(
+                            Constants.RollForwardSetting.CommandLineArgument,
+                            Constants.RollForwardSetting.LatestPatch
+                        )
+                        .WithCommandLine(
+                            Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument,
+                            "2"
+                        )
+                )
+                .Should()
+                .Fail()
                 .And.HaveStdErrContaining(
-                    $"It's invalid to use both '{Constants.RollForwardSetting.CommandLineArgument}' and " +
-                    $"'{Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument}' command line options.");
+                    $"It's invalid to use both '{Constants.RollForwardSetting.CommandLineArgument}' and "
+                        + $"'{Constants.RollForwardOnNoCandidateFxSetting.CommandLineArgument}' command line options."
+                );
         }
 
         // Verifies the precedence of rollForward and rollForwardOnNoCandidateFx from various sources
@@ -85,29 +173,34 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
         //   3. .runtimeconfig.json  (only one allowed, both is invalid)
         //   4. DOTNET_ROLL_FORWARD_ON_NO_CANDIDATE_FX env. variable
         [Theory] // rollForwardLocation Major           rollForwardOnNoCandidateFxLocation 0   passes
-        [InlineData(SettingLocation.CommandLine,        SettingLocation.FrameworkReference,    true)]
-        [InlineData(SettingLocation.CommandLine,        SettingLocation.RuntimeOptions,        true)]
-        [InlineData(SettingLocation.CommandLine,        SettingLocation.Environment,           true)]
-        [InlineData(SettingLocation.Environment,        SettingLocation.CommandLine,           false)]
-        [InlineData(SettingLocation.Environment,        SettingLocation.FrameworkReference,    true)]
-        [InlineData(SettingLocation.Environment,        SettingLocation.RuntimeOptions,        true)]
-        [InlineData(SettingLocation.Environment,        SettingLocation.Environment,           true)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.CommandLine,           false)]
-        [InlineData(SettingLocation.FrameworkReference, SettingLocation.Environment,           true)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.CommandLine,           false)]
-        [InlineData(SettingLocation.RuntimeOptions,     SettingLocation.Environment,           true)]
+        [InlineData(SettingLocation.CommandLine, SettingLocation.FrameworkReference, true)]
+        [InlineData(SettingLocation.CommandLine, SettingLocation.RuntimeOptions, true)]
+        [InlineData(SettingLocation.CommandLine, SettingLocation.Environment, true)]
+        [InlineData(SettingLocation.Environment, SettingLocation.CommandLine, false)]
+        [InlineData(SettingLocation.Environment, SettingLocation.FrameworkReference, true)]
+        [InlineData(SettingLocation.Environment, SettingLocation.RuntimeOptions, true)]
+        [InlineData(SettingLocation.Environment, SettingLocation.Environment, true)]
+        [InlineData(SettingLocation.FrameworkReference, SettingLocation.CommandLine, false)]
+        [InlineData(SettingLocation.FrameworkReference, SettingLocation.Environment, true)]
+        [InlineData(SettingLocation.RuntimeOptions, SettingLocation.CommandLine, false)]
+        [InlineData(SettingLocation.RuntimeOptions, SettingLocation.Environment, true)]
         public void Precedence(
             SettingLocation rollForwardLocation,
             SettingLocation rollForwardOnNoCandidateFxLocation,
-            bool passes)
+            bool passes
+        )
         {
             string requestedVersion = "5.0.0";
             CommandResult result = RunTest(
                 new TestSettings()
-                    .WithRuntimeConfigCustomizer(runtimeConfig => runtimeConfig
-                        .WithFramework(MicrosoftNETCoreApp, requestedVersion))
-                    .With(RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Major))
-                    .With(RollForwardOnNoCandidateFxSetting(rollForwardOnNoCandidateFxLocation, 0)));
+                    .WithRuntimeConfigCustomizer(runtimeConfig =>
+                        runtimeConfig.WithFramework(MicrosoftNETCoreApp, requestedVersion)
+                    )
+                    .With(
+                        RollForwardSetting(rollForwardLocation, Constants.RollForwardSetting.Major)
+                    )
+                    .With(RollForwardOnNoCandidateFxSetting(rollForwardOnNoCandidateFxLocation, 0))
+            );
 
             if (passes)
             {
@@ -115,12 +208,19 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
             }
             else
             {
-                result.ShouldFailToFindCompatibleFrameworkVersion(MicrosoftNETCoreApp, requestedVersion);
+                result.ShouldFailToFindCompatibleFrameworkVersion(
+                    MicrosoftNETCoreApp,
+                    requestedVersion
+                );
             }
         }
 
         private CommandResult RunTest(TestSettings testSettings) =>
-            RunTest(SharedState.DotNetWithFrameworks, SharedState.FrameworkReferenceApp, testSettings);
+            RunTest(
+                SharedState.DotNetWithFrameworks,
+                SharedState.FrameworkReferenceApp,
+                testSettings
+            );
 
         public class SharedTestState : SharedTestStateBase
         {

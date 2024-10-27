@@ -14,8 +14,13 @@ namespace System.ComponentModel.Composition.Hosting
             private readonly ScopeManager _scopeManager;
             private readonly CompositionScopeDefinition _catalog;
 
-            internal ScopeFactoryExport(ScopeManager scopeManager, CompositionScopeDefinition catalog, ComposablePartDefinition partDefinition, ExportDefinition exportDefinition) :
-                base(partDefinition, exportDefinition)
+            internal ScopeFactoryExport(
+                ScopeManager scopeManager,
+                CompositionScopeDefinition catalog,
+                ComposablePartDefinition partDefinition,
+                ExportDefinition exportDefinition
+            )
+                : base(partDefinition, exportDefinition)
             {
                 _scopeManager = scopeManager;
                 _catalog = catalog;
@@ -40,20 +45,25 @@ namespace System.ComponentModel.Composition.Hosting
 
                 public override ExportDefinition Definition
                 {
-                    get
-                    {
-                        return _scopeFactoryExport.UnderlyingExportDefinition;
-                    }
+                    get { return _scopeFactoryExport.UnderlyingExportDefinition; }
                 }
 
                 protected override object? GetExportedValueCore()
                 {
                     if (_export == null)
                     {
-                        CompositionContainer? childContainer = _scopeFactoryExport._scopeManager.CreateChildContainer(_scopeFactoryExport._catalog);
+                        CompositionContainer? childContainer =
+                            _scopeFactoryExport._scopeManager.CreateChildContainer(
+                                _scopeFactoryExport._catalog
+                            );
 
                         Debug.Assert(childContainer.CatalogExportProvider != null);
-                        Export? export = childContainer.CatalogExportProvider.CreateExport(_scopeFactoryExport.UnderlyingPartDefinition, _scopeFactoryExport.UnderlyingExportDefinition, false, CreationPolicy.Any);
+                        Export? export = childContainer.CatalogExportProvider.CreateExport(
+                            _scopeFactoryExport.UnderlyingPartDefinition,
+                            _scopeFactoryExport.UnderlyingExportDefinition,
+                            false,
+                            CreationPolicy.Any
+                        );
                         lock (_lock)
                         {
                             if (_export == null)

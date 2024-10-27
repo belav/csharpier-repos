@@ -13,6 +13,6 @@ namespace System.Xml
         Default = 1,
 
         // The xml:space scope is "preserve".
-        Preserve = 2
+        Preserve = 2,
     }
 }

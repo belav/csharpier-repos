@@ -47,7 +47,12 @@ public interface IAuthenticationService
     /// <param name="principal">The <see cref="ClaimsPrincipal"/> to sign in.</param>
     /// <param name="properties">The <see cref="AuthenticationProperties"/>.</param>
     /// <returns>A task.</returns>
-    Task SignInAsync(HttpContext context, string? scheme, ClaimsPrincipal principal, AuthenticationProperties? properties);
+    Task SignInAsync(
+        HttpContext context,
+        string? scheme,
+        ClaimsPrincipal principal,
+        AuthenticationProperties? properties
+    );
 
     /// <summary>
     /// Sign out the specified authentication scheme.

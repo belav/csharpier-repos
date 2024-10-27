@@ -34,12 +34,23 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
             DkmRawReturnValue ReturnValue,
             DkmCompiledVisualizationData AdditionalVisualizationData,
             DkmCompiledVisualizationDataPriority AdditionalVisualizationDataPriority,
-            ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues)
+            ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues
+        )
         {
-            return new DkmInspectionContext(InspectionSession, EvaluationFlags, Radix, RuntimeInstance);
+            return new DkmInspectionContext(
+                InspectionSession,
+                EvaluationFlags,
+                Radix,
+                RuntimeInstance
+            );
         }
 
-        internal DkmInspectionContext(DkmInspectionSession inspectionSession, DkmEvaluationFlags evaluationFlags, uint radix, DkmRuntimeInstance runtimeInstance)
+        internal DkmInspectionContext(
+            DkmInspectionSession inspectionSession,
+            DkmEvaluationFlags evaluationFlags,
+            uint radix,
+            DkmRuntimeInstance runtimeInstance
+        )
         {
             this.InspectionSession = inspectionSession;
             this.EvaluationFlags = evaluationFlags;
@@ -60,38 +71,42 @@ namespace Microsoft.VisualStudio.Debugger.Evaluation
         public readonly DkmCompiledVisualizationDataPriority AdditionalVisualizationDataPriority;
         public readonly ReadOnlyCollection<DkmRawReturnValueContainer> ReturnValues;
 
-        public string GetTypeName(DkmClrType ClrType, DkmClrCustomTypeInfo CustomTypeInfo, ReadOnlyCollection<string> FormatSpecifiers)
+        public string GetTypeName(
+            DkmClrType ClrType,
+            DkmClrCustomTypeInfo CustomTypeInfo,
+            ReadOnlyCollection<string> FormatSpecifiers
+        )
         {
-            return InspectionSession.InvokeFormatter(this, MethodId.GetTypeName, f => f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers));
+            return InspectionSession.InvokeFormatter(
+                this,
+                MethodId.GetTypeName,
+                f => f.GetTypeName(this, ClrType, CustomTypeInfo, FormatSpecifiers)
+            );
         }
 
-        public DkmInspectionContext WithProperties(uint Timeout, DkmEvaluationFlags EvaluationFlags, DkmFuncEvalFlags FuncEvalFlags, uint Radix)
+        public DkmInspectionContext WithProperties(
+            uint Timeout,
+            DkmEvaluationFlags EvaluationFlags,
+            DkmFuncEvalFlags FuncEvalFlags,
+            uint Radix
+        )
         {
             return new DkmInspectionContext(
                 this.InspectionSession,
                 EvaluationFlags,
                 Radix,
-                this.RuntimeInstance);
+                this.RuntimeInstance
+            );
         }
     }
 
-    public enum DkmFuncEvalFlags
-    {
-    }
+    public enum DkmFuncEvalFlags { }
 
-    public class DkmRawReturnValue
-    {
-    }
+    public class DkmRawReturnValue { }
 
-    public class DkmCompiledVisualizationData
-    {
-    }
+    public class DkmCompiledVisualizationData { }
 
-    public class DkmCompiledVisualizationDataPriority
-    {
-    }
+    public class DkmCompiledVisualizationDataPriority { }
 
-    public class DkmRawReturnValueContainer
-    {
-    }
+    public class DkmRawReturnValueContainer { }
 }

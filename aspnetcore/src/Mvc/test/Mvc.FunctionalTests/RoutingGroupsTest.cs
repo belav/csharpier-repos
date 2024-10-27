@@ -16,10 +16,13 @@ public class RoutingGroupsTests : IClassFixture<MvcTestFixture<StartupForGroups>
 {
     public RoutingGroupsTests(MvcTestFixture<StartupForGroups> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<StartupForGroups>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<StartupForGroups>();
 
     public WebApplicationFactory<StartupForGroups> Factory { get; }
 
@@ -51,5 +54,9 @@ public class RoutingGroupsTests : IClassFixture<MvcTestFixture<StartupForGroups>
         Assert.Equal("/controllers/contoso/Home/Contact", contactLink.GetAttribute("href"));
     }
 
-    private record RouteInfo(string RouteName, IDictionary<string, string> RouteValues, string Link);
+    private record RouteInfo(
+        string RouteName,
+        IDictionary<string, string> RouteValues,
+        string Link
+    );
 }

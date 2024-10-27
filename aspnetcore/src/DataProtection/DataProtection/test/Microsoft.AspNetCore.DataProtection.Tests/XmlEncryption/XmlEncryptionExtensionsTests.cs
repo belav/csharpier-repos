@@ -29,13 +29,19 @@ public class XmlEncryptionExtensionsTests
     public void DecryptElement_RootNodeRequiresDecryption_Success()
     {
         // Arrange
-        var original = XElement.Parse(@"
+        var original = XElement.Parse(
+            @"
                 <x:encryptedSecret decryptorType='theDecryptor' xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <node />
-                </x:encryptedSecret>");
+                </x:encryptedSecret>"
+        );
 
         var mockActivator = new Mock<IActivator>();
-        mockActivator.ReturnDecryptedElementGivenDecryptorTypeNameAndInput("theDecryptor", "<node />", "<newNode />");
+        mockActivator.ReturnDecryptedElementGivenDecryptorTypeNameAndInput(
+            "theDecryptor",
+            "<node />",
+            "<newNode />"
+        );
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IActivator>(mockActivator.Object);
@@ -53,7 +59,8 @@ public class XmlEncryptionExtensionsTests
     public void DecryptElement_MultipleNodesRequireDecryption_AvoidsRecursion_Success()
     {
         // Arrange
-        var original = XElement.Parse(@"
+        var original = XElement.Parse(
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <x:encryptedSecret decryptorType='myDecryptor'>
                     <node1 />
@@ -64,9 +71,11 @@ public class XmlEncryptionExtensionsTests
                       <node3 />
                     </x:encryptedSecret>
                   </node2>
-                </rootNode>");
+                </rootNode>"
+        );
 
-        var expected = @"
+        var expected =
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <node1_decrypted>
                     <x:encryptedSecret>nested</x:encryptedSecret>
@@ -82,10 +91,15 @@ public class XmlEncryptionExtensionsTests
         var mockDecryptor = new Mock<IXmlDecryptor>();
         mockDecryptor
             .Setup(o => o.Decrypt(It.IsAny<XElement>()))
-            .Returns<XElement>(el => new XElement(el.Name.LocalName + "_decrypted", new XElement(XmlConstants.EncryptedSecretElementName, "nested")));
+            .Returns<XElement>(el => new XElement(
+                el.Name.LocalName + "_decrypted",
+                new XElement(XmlConstants.EncryptedSecretElementName, "nested")
+            ));
 
         var mockActivator = new Mock<IActivator>();
-        mockActivator.Setup(o => o.CreateInstance(typeof(IXmlDecryptor), "myDecryptor")).Returns(mockDecryptor.Object);
+        mockActivator
+            .Setup(o => o.CreateInstance(typeof(IXmlDecryptor), "myDecryptor"))
+            .Returns(mockDecryptor.Object);
 
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddSingleton<IActivator>(mockActivator.Object);
@@ -118,17 +132,27 @@ public class XmlEncryptionExtensionsTests
     public void EncryptIfNecessary_RootNodeRequiresEncryption_Success()
     {
         // Arrange
-        var original = XElement.Parse(@"<rootNode x:requiresEncryption='true' xmlns:x='http://schemas.asp.net/2015/03/dataProtection' />");
+        var original = XElement.Parse(
+            @"<rootNode x:requiresEncryption='true' xmlns:x='http://schemas.asp.net/2015/03/dataProtection' />"
+        );
         var mockXmlEncryptor = new Mock<IXmlEncryptor>();
-        mockXmlEncryptor.Setup(o => o.Encrypt(It.IsAny<XElement>())).Returns(new EncryptedXmlInfo(new XElement("theElement"), typeof(MyXmlDecryptor)));
+        mockXmlEncryptor
+            .Setup(o => o.Encrypt(It.IsAny<XElement>()))
+            .Returns(new EncryptedXmlInfo(new XElement("theElement"), typeof(MyXmlDecryptor)));
 
         // Act
         var retVal = mockXmlEncryptor.Object.EncryptIfNecessary(original);
 
         // Assert
-        XmlAssert.Equal(@"<rootNode x:requiresEncryption='true' xmlns:x='http://schemas.asp.net/2015/03/dataProtection' />", original); // unmutated
+        XmlAssert.Equal(
+            @"<rootNode x:requiresEncryption='true' xmlns:x='http://schemas.asp.net/2015/03/dataProtection' />",
+            original
+        ); // unmutated
         Assert.Equal(XmlConstants.EncryptedSecretElementName, retVal.Name);
-        Assert.Equal(typeof(MyXmlDecryptor).AssemblyQualifiedName, (string)retVal.Attribute(XmlConstants.DecryptorTypeAttributeName));
+        Assert.Equal(
+            typeof(MyXmlDecryptor).AssemblyQualifiedName,
+            (string)retVal.Attribute(XmlConstants.DecryptorTypeAttributeName)
+        );
         XmlAssert.Equal("<theElement />", retVal.Descendants().Single());
     }
 
@@ -136,7 +160,8 @@ public class XmlEncryptionExtensionsTests
     public void EncryptIfNecessary_MultipleNodesRequireEncryption_Success()
     {
         // Arrange
-        var original = XElement.Parse(@"
+        var original = XElement.Parse(
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <node1 x:requiresEncryption='true'>
                     <![CDATA[This data should be encrypted.]]>
@@ -147,11 +172,12 @@ public class XmlEncryptionExtensionsTests
                       <node4 x:requiresEncryption='true' />
                     </node3>
                   </node2>
-                </rootNode>");
+                </rootNode>"
+        );
 
         var expected = string.Format(
-          CultureInfo.InvariantCulture,
-          @"
+            CultureInfo.InvariantCulture,
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <x:encryptedSecret decryptorType='{0}'>
                     <node1_encrypted />
@@ -163,12 +189,16 @@ public class XmlEncryptionExtensionsTests
                     </x:encryptedSecret>
                   </node2>
                 </rootNode>",
-            typeof(MyXmlDecryptor).AssemblyQualifiedName);
+            typeof(MyXmlDecryptor).AssemblyQualifiedName
+        );
 
         var mockXmlEncryptor = new Mock<IXmlEncryptor>();
         mockXmlEncryptor
             .Setup(o => o.Encrypt(It.IsAny<XElement>()))
-            .Returns<XElement>(element => new EncryptedXmlInfo(new XElement(element.Name.LocalName + "_encrypted"), typeof(MyXmlDecryptor)));
+            .Returns<XElement>(element => new EncryptedXmlInfo(
+                new XElement(element.Name.LocalName + "_encrypted"),
+                typeof(MyXmlDecryptor)
+            ));
 
         // Act
         var retVal = mockXmlEncryptor.Object.EncryptIfNecessary(original);
@@ -181,7 +211,8 @@ public class XmlEncryptionExtensionsTests
     public void EncryptIfNecessary_NullEncryptorWithRecursion_NoStackDive_Success()
     {
         // Arrange
-        var original = XElement.Parse(@"
+        var original = XElement.Parse(
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <node1 x:requiresEncryption='true'>
                     <![CDATA[This data should be encrypted.]]>
@@ -192,11 +223,12 @@ public class XmlEncryptionExtensionsTests
                       <node4 x:requiresEncryption='true' />
                     </node3>
                   </node2>
-                </rootNode>");
+                </rootNode>"
+        );
 
         var expected = string.Format(
-          CultureInfo.InvariantCulture,
-          @"
+            CultureInfo.InvariantCulture,
+            @"
                 <rootNode xmlns:x='http://schemas.asp.net/2015/03/dataProtection'>
                   <x:encryptedSecret decryptorType='{0}'>
                     <node1 x:requiresEncryption='true'>
@@ -212,12 +244,16 @@ public class XmlEncryptionExtensionsTests
                     </x:encryptedSecret>
                   </node2>
                 </rootNode>",
-            typeof(MyXmlDecryptor).AssemblyQualifiedName);
+            typeof(MyXmlDecryptor).AssemblyQualifiedName
+        );
 
         var mockXmlEncryptor = new Mock<IXmlEncryptor>();
         mockXmlEncryptor
             .Setup(o => o.Encrypt(It.IsAny<XElement>()))
-            .Returns<XElement>(element => new EncryptedXmlInfo(new XElement(element), typeof(MyXmlDecryptor)));
+            .Returns<XElement>(element => new EncryptedXmlInfo(
+                new XElement(element),
+                typeof(MyXmlDecryptor)
+            ));
 
         // Act
         var retVal = mockXmlEncryptor.Object.EncryptIfNecessary(original);

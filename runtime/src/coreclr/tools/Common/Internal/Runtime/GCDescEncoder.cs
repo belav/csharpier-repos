@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime
@@ -108,16 +107,27 @@ namespace Internal.Runtime
                     int offs = defType.IsValueType ? builder.TargetPointerSize : 0;
 
                     // Include syncblock
-                    int objectSize = defType.InstanceByteCount.AsInt + offs + builder.TargetPointerSize;
+                    int objectSize =
+                        defType.InstanceByteCount.AsInt + offs + builder.TargetPointerSize;
 
-                    EncodeStandardGCDesc(ref builder, GCPointerMap.FromInstanceLayout(defType), objectSize, offs);
+                    EncodeStandardGCDesc(
+                        ref builder,
+                        GCPointerMap.FromInstanceLayout(defType),
+                        objectSize,
+                        offs
+                    );
                 }
             }
 
             Debug.Assert(initialBuilderPosition + GetGCDescSize(type) == builder.CountBytes);
         }
 
-        public static void EncodeStandardGCDesc<T>(ref T builder, GCPointerMap map, int size, int delta)
+        public static void EncodeStandardGCDesc<T>(
+            ref T builder,
+            GCPointerMap map,
+            int size,
+            int delta
+        )
             where T : struct, ITargetBinaryWriter
         {
             Debug.Assert(size >= map.Size);

@@ -17,10 +17,7 @@ namespace System.Configuration
 
         public SettingsProvider Provider
         {
-            get
-            {
-                return _provider;
-            }
+            get { return _provider; }
         }
     }
 }

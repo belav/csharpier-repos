@@ -18,5 +18,6 @@ public interface IModelFinalizingConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context);
+        IConventionContext<IConventionModelBuilder> context
+    );
 }

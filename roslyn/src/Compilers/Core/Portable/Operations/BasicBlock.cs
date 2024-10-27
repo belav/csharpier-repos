@@ -32,7 +32,8 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
             ControlFlowConditionKind conditionKind,
             int ordinal,
             bool isReachable,
-            ControlFlowRegion region)
+            ControlFlowRegion region
+        )
         {
             Kind = kind;
             Operations = operations;
@@ -131,7 +132,10 @@ namespace Microsoft.CodeAnalysis.FlowAnalysis
         /// </summary>
         public ControlFlowRegion EnclosingRegion { get; }
 
-        internal void SetSuccessors(ControlFlowBranch? successor, ControlFlowBranch? conditionalSuccessor)
+        internal void SetSuccessors(
+            ControlFlowBranch? successor,
+            ControlFlowBranch? conditionalSuccessor
+        )
         {
 #if DEBUG
             Debug.Assert(!_successorsAreSealed);

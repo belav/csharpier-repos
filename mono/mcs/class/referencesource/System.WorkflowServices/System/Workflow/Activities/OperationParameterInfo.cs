@@ -7,8 +7,8 @@ namespace System.Workflow.Activities
     using System;
     using System.ComponentModel;
     using System.ComponentModel.Design.Serialization;
-    using System.Drawing.Design;
     using System.Diagnostics.CodeAnalysis;
+    using System.Drawing.Design;
     using System.Net.Security;
     using System.Reflection;
     using System.ServiceModel;
@@ -18,36 +18,45 @@ namespace System.Workflow.Activities
 
     [Browsable(true)]
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class OperationParameterInfo : DependencyObject
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty AttributesProperty =
-            DependencyProperty.Register("Attributes",
-            typeof(ParameterAttributes), typeof(OperationParameterInfo),
-            new PropertyMetadata(DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty AttributesProperty = DependencyProperty.Register(
+            "Attributes",
+            typeof(ParameterAttributes),
+            typeof(OperationParameterInfo),
+            new PropertyMetadata(DependencyPropertyOptions.Metadata)
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name",
-            typeof(string), typeof(OperationParameterInfo),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name",
+            typeof(string),
+            typeof(OperationParameterInfo),
+            new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty ParameterTypeProperty =
-            DependencyProperty.Register("ParameterType",
-            typeof(Type), typeof(OperationParameterInfo),
-            new PropertyMetadata(typeof(void), DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ParameterType",
+                typeof(Type),
+                typeof(OperationParameterInfo),
+                new PropertyMetadata(typeof(void), DependencyPropertyOptions.Metadata)
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty PositionProperty =
-            DependencyProperty.Register("Position",
-            typeof(int), typeof(OperationParameterInfo),
-            new PropertyMetadata(-1, DependencyPropertyOptions.Metadata));
+        public static readonly DependencyProperty PositionProperty = DependencyProperty.Register(
+            "Position",
+            typeof(int),
+            typeof(OperationParameterInfo),
+            new PropertyMetadata(-1, DependencyPropertyOptions.Metadata)
+        );
 
-        public OperationParameterInfo()
-        {
-        }
+        public OperationParameterInfo() { }
 
         public OperationParameterInfo(string parameterName)
         {
@@ -69,92 +78,53 @@ namespace System.Workflow.Activities
 
         public ParameterAttributes Attributes
         {
-            get
-            {
-                return (ParameterAttributes) GetValue(AttributesProperty);
-            }
-            set
-            {
-                SetValue(AttributesProperty, value);
-            }
+            get { return (ParameterAttributes)GetValue(AttributesProperty); }
+            set { SetValue(AttributesProperty, value); }
         }
 
         public bool IsIn
         {
-            get
-            {
-                return ((this.Attributes & ParameterAttributes.In) != 0);
-            }
+            get { return ((this.Attributes & ParameterAttributes.In) != 0); }
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public bool IsLcid
         {
-            get
-            {
-                return ((this.Attributes & ParameterAttributes.Lcid) != 0);
-            }
+            get { return ((this.Attributes & ParameterAttributes.Lcid) != 0); }
         }
 
         public bool IsOptional
         {
-            get
-            {
-                return ((this.Attributes & ParameterAttributes.Optional) != 0);
-            }
+            get { return ((this.Attributes & ParameterAttributes.Optional) != 0); }
         }
 
         public bool IsOut
         {
-            get
-            {
-                return ((this.Attributes & ParameterAttributes.Out) != 0);
-            }
+            get { return ((this.Attributes & ParameterAttributes.Out) != 0); }
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly")]
         public bool IsRetval
         {
-            get
-            {
-                return ((this.Attributes & ParameterAttributes.Retval) != 0);
-            }
+            get { return ((this.Attributes & ParameterAttributes.Retval) != 0); }
         }
 
         public string Name
         {
-            get
-            {
-                return (string) GetValue(NameProperty);
-            }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         public Type ParameterType
         {
-            get
-            {
-                return (Type) GetValue(ParameterTypeProperty);
-            }
-            set
-            {
-                SetValue(ParameterTypeProperty, value);
-            }
+            get { return (Type)GetValue(ParameterTypeProperty); }
+            set { SetValue(ParameterTypeProperty, value); }
         }
 
         public int Position
         {
-            get
-            {
-                return (int) GetValue(PositionProperty);
-            }
-            set
-            {
-                SetValue(PositionProperty, value);
-            }
+            get { return (int)GetValue(PositionProperty); }
+            set { SetValue(PositionProperty, value); }
         }
 
         public OperationParameterInfo Clone()

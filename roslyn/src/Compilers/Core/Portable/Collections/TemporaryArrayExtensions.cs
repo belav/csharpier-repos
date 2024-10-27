@@ -34,8 +34,8 @@ namespace Microsoft.CodeAnalysis.Shared.Collections
         /// <typeparam name="T">The type of element stored in the temporary array.</typeparam>
         /// <param name="array">A read-only reference to a temporary array which is part of a <c>using</c> statement.</param>
         /// <returns>A mutable reference to the temporary array.</returns>
-        public static ref TemporaryArray<T> AsRef<T>(this in TemporaryArray<T> array)
-            => ref Unsafe.AsRef(in array);
+        public static ref TemporaryArray<T> AsRef<T>(this in TemporaryArray<T> array) =>
+            ref Unsafe.AsRef(in array);
 
         public static bool Any<T>(this in TemporaryArray<T> array, Func<T, bool> predicate)
         {

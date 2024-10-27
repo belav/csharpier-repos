@@ -11,7 +11,10 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
-[SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/38542", Queues = "OSX.1015.Amd64.Open;OSX.1015.Amd64")] //slow
+[SkipOnHelix(
+    "https://github.com/dotnet/aspnetcore/issues/38542",
+    Queues = "OSX.1015.Amd64.Open;OSX.1015.Amd64"
+)] //slow
 public class IdentityUIScriptsTest : IDisposable
 {
     private readonly ITestOutputHelper _output;
@@ -20,7 +23,9 @@ public class IdentityUIScriptsTest : IDisposable
     public IdentityUIScriptsTest(ITestOutputHelper output)
     {
         _output = output;
-        _httpClient = new HttpClient(new RetryHandler(new HttpClientHandler() { }, output, TimeSpan.FromSeconds(1), 5));
+        _httpClient = new HttpClient(
+            new RetryHandler(new HttpClientHandler() { }, output, TimeSpan.FromSeconds(1), 5)
+        );
     }
 
     public static IEnumerable<object[]> ScriptWithIntegrityData
@@ -74,12 +79,18 @@ public class IdentityUIScriptsTest : IDisposable
 
     [Theory]
     [MemberData(nameof(ScriptWithFallbackSrcData))]
-    public async Task IdentityUI_ScriptTags_FallbackSourceContent_Matches_CDNContent(ScriptTag scriptTag)
+    public async Task IdentityUI_ScriptTags_FallbackSourceContent_Matches_CDNContent(
+        ScriptTag scriptTag
+    )
     {
         var wwwrootDir = Path.Combine(GetProjectBasePath(), "assets", scriptTag.Version);
         var cdnContent = await _httpClient.GetStringAsync(scriptTag.Src);
         var fallbackSrcContent = File.ReadAllText(
-            Path.Combine(wwwrootDir, scriptTag.FallbackSrc.Replace("Identity", "").TrimStart('~').TrimStart('/')));
+            Path.Combine(
+                wwwrootDir,
+                scriptTag.FallbackSrc.Replace("Identity", "").TrimStart('~').TrimStart('/')
+            )
+        );
 
         Assert.Equal(RemoveLineEndings(cdnContent), RemoveLineEndings(fallbackSrcContent));
     }
@@ -114,7 +125,8 @@ public class IdentityUIScriptsTest : IDisposable
 
         return scriptTags;
 
-        IEnumerable<string> GetRazorFiles(string dir) => Directory.GetFiles(dir, "*.cshtml", SearchOption.AllDirectories);
+        IEnumerable<string> GetRazorFiles(string dir) =>
+            Directory.GetFiles(dir, "*.cshtml", SearchOption.AllDirectories);
     }
 
     private static List<ScriptTag> GetScriptTags(string cshtmlFile)
@@ -129,17 +141,20 @@ public class IdentityUIScriptsTest : IDisposable
         var scriptTags = new List<ScriptTag>();
         foreach (var scriptElement in htmlDocument.Scripts)
         {
-            var fallbackSrcAttribute = scriptElement.Attributes
-                .FirstOrDefault(attr => string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase));
+            var fallbackSrcAttribute = scriptElement.Attributes.FirstOrDefault(attr =>
+                string.Equals("asp-fallback-src", attr.Name, StringComparison.OrdinalIgnoreCase)
+            );
 
-            scriptTags.Add(new ScriptTag
-            {
-                Version = cshtmlFile.Contains("V4") ? "V4" : "V5",
-                Src = scriptElement.Source,
-                Integrity = scriptElement.Integrity,
-                FallbackSrc = fallbackSrcAttribute?.Value,
-                File = cshtmlFile
-            });
+            scriptTags.Add(
+                new ScriptTag
+                {
+                    Version = cshtmlFile.Contains("V4") ? "V4" : "V5",
+                    Src = scriptElement.Source,
+                    Integrity = scriptElement.Integrity,
+                    FallbackSrc = fallbackSrcAttribute?.Value,
+                    File = cshtmlFile,
+                }
+            );
         }
         return scriptTags;
     }
@@ -156,27 +171,36 @@ public class IdentityUIScriptsTest : IDisposable
 
     private static string GetProjectBasePath()
     {
-        var projectPath = typeof(IdentityUIScriptsTest).Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
-            .Single(a => a.Key == "Microsoft.AspNetCore.InternalTesting.DefaultUIProjectPath").Value;
-        return Directory.Exists(projectPath) ? projectPath : Path.Combine(FindHelixSlnFileDirectory(), "UI");
+        var projectPath = typeof(IdentityUIScriptsTest)
+            .Assembly.GetCustomAttributes<AssemblyMetadataAttribute>()
+            .Single(a => a.Key == "Microsoft.AspNetCore.InternalTesting.DefaultUIProjectPath")
+            .Value;
+        return Directory.Exists(projectPath)
+            ? projectPath
+            : Path.Combine(FindHelixSlnFileDirectory(), "UI");
     }
 
     private static string FindHelixSlnFileDirectory()
     {
-        var applicationPath = Path.GetDirectoryName(typeof(IdentityUIScriptsTest).Assembly.Location);
+        var applicationPath = Path.GetDirectoryName(
+            typeof(IdentityUIScriptsTest).Assembly.Location
+        );
         var directoryInfo = new DirectoryInfo(applicationPath);
         do
         {
-            var solutionPath = Directory.EnumerateFiles(directoryInfo.FullName, "*.sln").FirstOrDefault();
+            var solutionPath = Directory
+                .EnumerateFiles(directoryInfo.FullName, "*.sln")
+                .FirstOrDefault();
             if (solutionPath != null)
             {
                 return directoryInfo.FullName;
             }
 
             directoryInfo = directoryInfo.Parent;
-        }
-        while (directoryInfo.Parent != null);
+        } while (directoryInfo.Parent != null);
 
-        throw new InvalidOperationException($"Solution root could not be located using application root {applicationPath}.");
+        throw new InvalidOperationException(
+            $"Solution root could not be located using application root {applicationPath}."
+        );
     }
 }

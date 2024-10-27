@@ -50,8 +50,8 @@ namespace Microsoft.Extensions.FileSystemGlobbing
         /// <returns>True if <see cref="Path" /> and <see cref="Stem" /> are equal using case-insensitive comparison</returns>
         public bool Equals(FilePatternMatch other)
         {
-            return string.Equals(other.Path, Path, StringComparison.OrdinalIgnoreCase) &&
-                   string.Equals(other.Stem, Stem, StringComparison.OrdinalIgnoreCase);
+            return string.Equals(other.Path, Path, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(other.Stem, Stem, StringComparison.OrdinalIgnoreCase);
         }
 
         /// <summary>

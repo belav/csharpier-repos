@@ -10,40 +10,151 @@ namespace System.Reflection.Emit.Tests
     {
         public static IEnumerable<object[]> TestData()
         {
-            yield return new object[] { MethodAttributes.Public, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Assembly, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Private, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.PrivateScope, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.FamORAssem, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.FamANDAssem, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Final | MethodAttributes.Public, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Final | MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.SpecialName | MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.UnmanagedExport | MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.RTSpecialName | MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.HideBySig | MethodAttributes.Family, new Type[] { typeof(int), typeof(int) }, CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Static, new Type[0], CallingConventions.Standard };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Assembly,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Private,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.PrivateScope,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.FamORAssem,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.FamANDAssem,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Final | MethodAttributes.Public,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Final | MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.SpecialName | MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.UnmanagedExport | MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.RTSpecialName | MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.HideBySig | MethodAttributes.Family,
+                new Type[] { typeof(int), typeof(int) },
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Static,
+                new Type[0],
+                CallingConventions.Standard,
+            };
 
             // Ignores any CallingConventions, sets to CallingConventions.Standard
-            yield return new object[] { MethodAttributes.Public, new Type[0], CallingConventions.Any };
-            yield return new object[] { MethodAttributes.Public, new Type[0], CallingConventions.ExplicitThis };
-            yield return new object[] { MethodAttributes.Public, new Type[0], CallingConventions.HasThis };
-            yield return new object[] { MethodAttributes.Public, new Type[0], CallingConventions.Standard };
-            yield return new object[] { MethodAttributes.Public, new Type[0], CallingConventions.VarArgs };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[0],
+                CallingConventions.Any,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[0],
+                CallingConventions.ExplicitThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[0],
+                CallingConventions.HasThis,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[0],
+                CallingConventions.Standard,
+            };
+            yield return new object[]
+            {
+                MethodAttributes.Public,
+                new Type[0],
+                CallingConventions.VarArgs,
+            };
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(TestData))]
-        public void DefineConstructor(MethodAttributes attributes, Type[] parameterTypes, CallingConventions callingConvention)
+        public void DefineConstructor(
+            MethodAttributes attributes,
+            Type[] parameterTypes,
+            CallingConventions callingConvention
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
 
-            FieldBuilder fieldBuilderA = type.DefineField("TestField", typeof(int), FieldAttributes.Private);
-            FieldBuilder fieldBuilderB = type.DefineField("TestField", typeof(int), FieldAttributes.Private);
+            FieldBuilder fieldBuilderA = type.DefineField(
+                "TestField",
+                typeof(int),
+                FieldAttributes.Private
+            );
+            FieldBuilder fieldBuilderB = type.DefineField(
+                "TestField",
+                typeof(int),
+                FieldAttributes.Private
+            );
 
-            ConstructorBuilder constructor = type.DefineConstructor(attributes, callingConvention, parameterTypes);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                attributes,
+                callingConvention,
+                parameterTypes
+            );
             ILGenerator ctorIlGenerator = constructor.GetILGenerator();
             if (parameterTypes.Length != 0)
             {
@@ -60,30 +171,59 @@ namespace System.Reflection.Emit.Tests
                 ctorIlGenerator.Emit(OpCodes.Stfld, fieldBuilderB);
             }
             ctorIlGenerator.Emit(OpCodes.Ret);
-            Helpers.VerifyConstructor(constructor, type, attributes, callingConvention, parameterTypes);
+            Helpers.VerifyConstructor(
+                constructor,
+                type,
+                attributes,
+                callingConvention,
+                parameterTypes
+            );
         }
 
         [Theory]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/2389", TestRuntimes.Mono)]
         [MemberData(nameof(TestData))]
-        public void DefineConstructor_NullRequiredAndOptionalCustomModifiers(MethodAttributes attributes, Type[] parameterTypes, CallingConventions callingConvention)
+        public void DefineConstructor_NullRequiredAndOptionalCustomModifiers(
+            MethodAttributes attributes,
+            Type[] parameterTypes,
+            CallingConventions callingConvention
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Class | TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(attributes, callingConvention, parameterTypes);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                attributes,
+                callingConvention,
+                parameterTypes
+            );
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
-            Helpers.VerifyConstructor(constructor, type, attributes, callingConvention, parameterTypes);
+            Helpers.VerifyConstructor(
+                constructor,
+                type,
+                attributes,
+                callingConvention,
+                parameterTypes
+            );
         }
 
         [Fact]
         public void DefineConstructor_StaticConstructorOnInterface()
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Static, CallingConventions.Standard, new Type[0]);
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Static,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
             Type createdType = type.CreateType();
-            Assert.Equal(1, createdType.GetConstructors(BindingFlags.Static | BindingFlags.NonPublic).Length);
+            Assert.Equal(
+                1,
+                createdType.GetConstructors(BindingFlags.Static | BindingFlags.NonPublic).Length
+            );
         }
 
         [Fact]
@@ -91,8 +231,20 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
 
-            type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]).GetILGenerator().Emit(OpCodes.Ret);
-            type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]).GetILGenerator().Emit(OpCodes.Ret);
+            type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    new Type[0]
+                )
+                .GetILGenerator()
+                .Emit(OpCodes.Ret);
+            type.DefineConstructor(
+                    MethodAttributes.Public,
+                    CallingConventions.Standard,
+                    new Type[0]
+                )
+                .GetILGenerator()
+                .Emit(OpCodes.Ret);
 
             Type createdType = type.CreateType();
             ConstructorInfo[] constructors = createdType.GetConstructors();
@@ -105,21 +257,41 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
             type.CreateType();
-            Assert.Throws<InvalidOperationException>(() => type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    type.DefineConstructor(
+                        MethodAttributes.Public,
+                        CallingConventions.Standard,
+                        new Type[0]
+                    )
+            );
         }
 
         [Fact]
         public void DefineConstructor_InstanceOnInterface_ThrowsInvalidOperationException()
         {
-            TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract);
-            Assert.Throws<InvalidOperationException>(() => type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]));
+            TypeBuilder type = Helpers.DynamicType(
+                TypeAttributes.Public | TypeAttributes.Interface | TypeAttributes.Abstract
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    type.DefineConstructor(
+                        MethodAttributes.Public,
+                        CallingConventions.Standard,
+                        new Type[0]
+                    )
+            );
         }
 
         [Fact]
         public void DefineConstructor_ConstructorNotCreated_ThrowsInvalidOperationExceptionOnCreation()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            type.DefineConstructor(MethodAttributes.Public, CallingConventions.Standard, new Type[0]);
+            type.DefineConstructor(
+                MethodAttributes.Public,
+                CallingConventions.Standard,
+                new Type[0]
+            );
             Assert.Throws<InvalidOperationException>(() => type.CreateTypeInfo());
         }
 
@@ -128,10 +300,16 @@ namespace System.Reflection.Emit.Tests
         [InlineData(CallingConventions.VarArgs)]
         [InlineData(CallingConventions.HasThis)]
         [InlineData(CallingConventions.ExplicitThis | CallingConventions.HasThis)]
-        public void DefineConstructor_HasThisCallingConventionsForStaticMethod_ThrowsTypeLoadExceptionOnCreation(CallingConventions conventions)
+        public void DefineConstructor_HasThisCallingConventionsForStaticMethod_ThrowsTypeLoadExceptionOnCreation(
+            CallingConventions conventions
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Public);
-            ConstructorBuilder constructor = type.DefineConstructor(MethodAttributes.Static, conventions, new Type[0]);
+            ConstructorBuilder constructor = type.DefineConstructor(
+                MethodAttributes.Static,
+                conventions,
+                new Type[0]
+            );
             constructor.GetILGenerator().Emit(OpCodes.Ret);
 
             Assert.Throws<TypeLoadException>(() => type.CreateTypeInfo());

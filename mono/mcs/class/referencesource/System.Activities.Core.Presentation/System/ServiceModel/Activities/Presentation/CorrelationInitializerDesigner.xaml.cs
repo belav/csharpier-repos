@@ -8,25 +8,26 @@ namespace System.ServiceModel.Activities.Presentation
     using System.Activities.Presentation.Model;
     using System.Activities.Presentation.View;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
+    using System.Globalization;
     using System.Runtime;
     using System.Windows;
     using System.Windows.Input;
-    using System.Globalization;
-    using System.Collections.Generic;
 
-    internal partial class CorrelationInitializerDesigner 
+    internal partial class CorrelationInitializerDesigner
     {
         DataGridHelper correlationInitializerDGHelper;
 
         const string CorrelationInitializersKey = "CorrelationInitializers";
 
         public static readonly DependencyProperty ActivityProperty = DependencyProperty.Register(
-            "Activity", 
-            typeof(ModelItem), 
-            typeof(CorrelationInitializerDesigner), 
-            new UIPropertyMetadata(OnActivityChanged));
+            "Activity",
+            typeof(ModelItem),
+            typeof(CorrelationInitializerDesigner),
+            new UIPropertyMetadata(OnActivityChanged)
+        );
 
         static readonly ICommand AddNewInitializerCommand = new RoutedCommand();
 
@@ -50,19 +51,29 @@ namespace System.ServiceModel.Activities.Presentation
         {
             base.OnInitialized(args);
 
-            this.CommandBindings.Add(new CommandBinding(AddNewInitializerCommand, this.OnAddNewInitializerExecuted));
+            this.CommandBindings.Add(
+                new CommandBinding(AddNewInitializerCommand, this.OnAddNewInitializerExecuted)
+            );
 
             //create data grid helper
-            this.correlationInitializerDGHelper = new DataGridHelper(this.correlationInitializers, this);
+            this.correlationInitializerDGHelper = new DataGridHelper(
+                this.correlationInitializers,
+                this
+            );
             this.correlationInitializerDGHelper.ShowValidationErrorAsToolTip = true;
-            this.correlationInitializerDGHelper.AddNewRowContent = (string)this.FindResource("addNewInitializer");
-            this.correlationInitializerDGHelper.AddNewRowCommand = CorrelationInitializerDesigner.AddNewInitializerCommand;            
+            this.correlationInitializerDGHelper.AddNewRowContent = (string)
+                this.FindResource("addNewInitializer");
+            this.correlationInitializerDGHelper.AddNewRowCommand =
+                CorrelationInitializerDesigner.AddNewInitializerCommand;
         }
 
         void OnAddNewInitializerExecuted(object sender, ExecutedRoutedEventArgs e)
         {
-            var initializer = (CanUseQueryCorrelationInitializer(this.Activity) ? 
-                (CorrelationInitializer)new QueryCorrelationInitializer() : (CorrelationInitializer)new ContextCorrelationInitializer());
+            var initializer = (
+                CanUseQueryCorrelationInitializer(this.Activity)
+                    ? (CorrelationInitializer)new QueryCorrelationInitializer()
+                    : (CorrelationInitializer)new ContextCorrelationInitializer()
+            );
             var result = this.CorrelationInitializers.Add(initializer);
             var wrapper = new CorrelationInitializerEntry(result);
             this.correlationInitializerDGHelper.Source<IList>().Add(wrapper);
@@ -78,9 +89,14 @@ namespace System.ServiceModel.Activities.Presentation
                 {
                     ModelItem serializationOption;
                     activity.TryGetPropertyValue(out serializationOption, "SerializerOption");
-                    result = SerializerOption.XmlSerializer != (SerializerOption)serializationOption.GetCurrentValue();
+                    result =
+                        SerializerOption.XmlSerializer
+                        != (SerializerOption)serializationOption.GetCurrentValue();
                 }
-                else if (activity.IsAssignableFrom<SendReply>() || activity.IsAssignableFrom<ReceiveReply>())
+                else if (
+                    activity.IsAssignableFrom<SendReply>()
+                    || activity.IsAssignableFrom<ReceiveReply>()
+                )
                 {
                     ModelItem request;
                     activity.TryGetPropertyValue(out request, "Request");
@@ -104,10 +120,7 @@ namespace System.ServiceModel.Activities.Presentation
             }
         }
 
-
-        internal void CleanupObjectMap()
-        {
-        }
+        internal void CleanupObjectMap() { }
 
         void OnActivityChanged()
         {
@@ -131,7 +144,9 @@ namespace System.ServiceModel.Activities.Presentation
             var activity = e.NewValue as ModelItem;
             if (null != activity && !activity.IsMessagingActivity())
             {
-                throw FxTrace.Exception.AsError(new NotSupportedException(activity.ItemType.FullName));
+                throw FxTrace.Exception.AsError(
+                    new NotSupportedException(activity.ItemType.FullName)
+                );
             }
             ((CorrelationInitializerDesigner)sender).OnActivityChanged();
         }
@@ -150,9 +165,15 @@ namespace System.ServiceModel.Activities.Presentation
         {
             internal static readonly string HandleProperty = "CorrelationHandle";
             internal static readonly string CorrelationTypeProperty = "CorrelationType";
-            internal static readonly string MessageQuerySetModelPropertyProperty = "MessageQuerySet";
+            internal static readonly string MessageQuerySetModelPropertyProperty =
+                "MessageQuerySet";
 
-            static readonly string[] Properties = new string[] { HandleProperty, CorrelationTypeProperty, MessageQuerySetModelPropertyProperty };
+            static readonly string[] Properties = new string[]
+            {
+                HandleProperty,
+                CorrelationTypeProperty,
+                MessageQuerySetModelPropertyProperty,
+            };
 
             #region Initialize type properties code
             public static PropertyDescriptorData[] InitializeTypeProperties()
@@ -164,27 +185,40 @@ namespace System.ServiceModel.Activities.Presentation
                         PropertyName = HandleProperty,
                         PropertyType = typeof(InArgument),
                         PropertySetter = (instance, newValue) =>
-                            {
-                                ((CorrelationInitializerEntry)instance).SetHandle(newValue);
-                            },
-                        PropertyGetter = (instance) => (((CorrelationInitializerEntry)instance).GetHandle()),
+                        {
+                            ((CorrelationInitializerEntry)instance).SetHandle(newValue);
+                        },
+                        PropertyGetter = (instance) =>
+                            (((CorrelationInitializerEntry)instance).GetHandle()),
                     },
                     new PropertyDescriptorData()
                     {
                         PropertyName = CorrelationTypeProperty,
                         PropertyType = typeof(Type),
-                        PropertyValidator = (instance, newValue, errors) => (((CorrelationInitializerEntry)instance).ValidateCorrelationType(newValue, errors)),
+                        PropertyValidator = (instance, newValue, errors) =>
+                            (
+                                ((CorrelationInitializerEntry)instance).ValidateCorrelationType(
+                                    newValue,
+                                    errors
+                                )
+                            ),
                         PropertySetter = (instance, newValue) =>
-                            {
-                                ((CorrelationInitializerEntry)instance).SetCorrelationType(newValue);                                
-                            },
-                        PropertyGetter = (instance) => (((CorrelationInitializerEntry)instance).GetCorrelationType()),
+                        {
+                            ((CorrelationInitializerEntry)instance).SetCorrelationType(newValue);
+                        },
+                        PropertyGetter = (instance) =>
+                            (((CorrelationInitializerEntry)instance).GetCorrelationType()),
                     },
                     new PropertyDescriptorData()
                     {
                         PropertyName = MessageQuerySetModelPropertyProperty,
                         PropertyType = typeof(ModelProperty),
-                        PropertyGetter = (instance) => (((CorrelationInitializerEntry)instance).GetMessageQuerySetModelProperty()),
+                        PropertyGetter = (instance) =>
+                            (
+                                (
+                                    (CorrelationInitializerEntry)instance
+                                ).GetMessageQuerySetModelProperty()
+                            ),
                     },
                 };
             }
@@ -196,13 +230,17 @@ namespace System.ServiceModel.Activities.Presentation
                 throw FxTrace.Exception.AsError(new NotSupportedException());
             }
 
-            public CorrelationInitializerEntry(ModelItem initializer) : base(initializer)
-            {
-            }
+            public CorrelationInitializerEntry(ModelItem initializer)
+                : base(initializer) { }
 
             protected override string AutomationId
             {
-                get { return ((ModelItemCollection)this.ReflectedObject.Parent).IndexOf(this.ReflectedObject).ToString(CultureInfo.InvariantCulture); }
+                get
+                {
+                    return ((ModelItemCollection)this.ReflectedObject.Parent)
+                        .IndexOf(this.ReflectedObject)
+                        .ToString(CultureInfo.InvariantCulture);
+                }
             }
 
             internal object GetHandle()
@@ -212,7 +250,9 @@ namespace System.ServiceModel.Activities.Presentation
 
             void SetHandle(object value)
             {
-                InArgument handle = (InArgument)(value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value);
+                InArgument handle = (InArgument)(
+                    value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value
+                );
                 this.ReflectedObject.Properties[HandleProperty].SetValue(handle);
             }
 
@@ -223,7 +263,9 @@ namespace System.ServiceModel.Activities.Presentation
 
             void SetCorrelationType(object value)
             {
-                Type type = (Type)(value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value);
+                Type type = (Type)(
+                    value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value
+                );
                 var source = (ModelItemCollection)this.ReflectedObject.Parent;
                 int index = source.IndexOf(this.ReflectedObject);
                 var oldInitalizer = (CorrelationInitializer)this.ReflectedObject.GetCurrentValue();
@@ -237,11 +279,18 @@ namespace System.ServiceModel.Activities.Presentation
 
             bool ValidateCorrelationType(object value, List<string> errors)
             {
-                Type type = (Type)(value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value);
+                Type type = (Type)(
+                    value is ModelItem ? ((ModelItem)value).GetCurrentValue() : value
+                );
                 var activity = this.ReflectedObject.Parent.Parent;
-                if (typeof(QueryCorrelationInitializer).IsAssignableFrom(type) && !CorrelationInitializerDesigner.CanUseQueryCorrelationInitializer(activity))
+                if (
+                    typeof(QueryCorrelationInitializer).IsAssignableFrom(type)
+                    && !CorrelationInitializerDesigner.CanUseQueryCorrelationInitializer(activity)
+                )
                 {
-                    errors.Add(System.Activities.Core.Presentation.SR.CorrelationInitializerNotSupported);
+                    errors.Add(
+                        System.Activities.Core.Presentation.SR.CorrelationInitializerNotSupported
+                    );
                 }
                 return 0 == errors.Count;
             }

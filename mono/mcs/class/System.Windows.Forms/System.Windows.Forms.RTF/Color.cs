@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,108 +26,103 @@
 
 // COMPLETE
 
-namespace System.Windows.Forms.RTF {
-
+namespace System.Windows.Forms.RTF
+{
 #if RTF_LIB
-	public
+    public
 #else
-	internal
+    internal
 #endif
-	class Color {
-		#region	Local Variables
-		private int		red;
-		private int		green;
-		private int		blue;
-		private int		num;
-		private Color		next;
-		#endregion	// Local Variables
+    class Color
+    {
+        #region	Local Variables
+        private int red;
+        private int green;
+        private int blue;
+        private int num;
+        private Color next;
+        #endregion	// Local Variables
 
-		#region Constructors
-		public Color(RTF rtf) {
-			red = -1;
-			green = -1;
-			blue = -1;
-			num = -1;
+        #region Constructors
+        public Color(RTF rtf)
+        {
+            red = -1;
+            green = -1;
+            blue = -1;
+            num = -1;
 
-			lock (rtf) {
-				if (rtf.Colors == null) {
-					rtf.Colors = this;
-				} else {
-					Color c = rtf.Colors;
-					while (c.next != null)
-						c = c.next;
-					c.next = this;
-				}
-			}
-		}
-		#endregion	// Constructors
+            lock (rtf)
+            {
+                if (rtf.Colors == null)
+                {
+                    rtf.Colors = this;
+                }
+                else
+                {
+                    Color c = rtf.Colors;
+                    while (c.next != null)
+                        c = c.next;
+                    c.next = this;
+                }
+            }
+        }
+        #endregion	// Constructors
 
-		#region Properties
-		public int Red {
-			get {
-				return red;
-			}
+        #region Properties
+        public int Red
+        {
+            get { return red; }
+            set { red = value; }
+        }
 
-			set {
-				red = value;
-			}
-		}
+        public int Green
+        {
+            get { return green; }
+            set { green = value; }
+        }
 
-		public int Green {
-			get {
-				return green;
-			}
+        public int Blue
+        {
+            get { return blue; }
+            set { blue = value; }
+        }
 
-			set {
-				green = value;
-			}
-		}
+        public int Num
+        {
+            get { return num; }
+            set { num = value; }
+        }
+        #endregion	// Properties
 
-		public int Blue {
-			get {
-				return blue;
-			}
+        #region Methods
+        static public Color GetColor(RTF rtf, int color_number)
+        {
+            Color c;
 
-			set {
-				blue = value;
-			}
-		}
+            lock (rtf)
+            {
+                c = GetColor(rtf.Colors, color_number);
+            }
+            return c;
+        }
 
-		public int Num {
-			get {
-				return num;
-			}
+        private static Color GetColor(Color start, int color_number)
+        {
+            Color c;
 
-			set {
-				num = value;
-			}
-		}
-		#endregion	// Properties
+            if (color_number == -1)
+            {
+                return start;
+            }
 
-		#region Methods
-		static public Color GetColor(RTF rtf, int color_number) {
-			Color	c;
+            c = start;
 
-			lock (rtf) {
-				c = GetColor(rtf.Colors, color_number);
-			}
-			return c;
-		}
-
-		static private Color GetColor(Color start, int color_number) {
-			Color	c;
-
-			if (color_number == -1) {
-				return start;
-			}
-
-			c = start;
-
-			while ((c != null) && (c.num != color_number)) {
-				c = c.next;
-			}
-			return c;
-		}
-		#endregion	// Methods
-	}
+            while ((c != null) && (c.num != color_number))
+            {
+                c = c.next;
+            }
+            return c;
+        }
+        #endregion	// Methods
+    }
 }

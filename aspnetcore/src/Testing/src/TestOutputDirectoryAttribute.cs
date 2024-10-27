@@ -8,7 +8,11 @@ namespace Microsoft.AspNetCore.InternalTesting;
 [AttributeUsage(AttributeTargets.Assembly, AllowMultiple = false, Inherited = true)]
 public class TestOutputDirectoryAttribute : Attribute
 {
-    public TestOutputDirectoryAttribute(string preserveExistingLogsInOutput, string targetFramework, string baseDirectory = null)
+    public TestOutputDirectoryAttribute(
+        string preserveExistingLogsInOutput,
+        string targetFramework,
+        string baseDirectory = null
+    )
     {
         TargetFramework = targetFramework;
         BaseDirectory = baseDirectory;

@@ -36,10 +36,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -62,10 +68,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -87,10 +99,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -113,10 +131,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -138,10 +162,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -164,10 +194,16 @@ public class PageBinderFactoryTest
             modelBinderFactory,
             Mock.Of<IObjectModelValidator>(),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         // Act
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
         // Assert
         Assert.Same(PageBinderFactory.NullPropertyBinder, factory);
@@ -183,25 +219,25 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageWithProperty.Id),
-                        ParameterType = typeof(int),
-                        Property = type.GetProperty(nameof(PageWithProperty.Id)),
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageWithProperty.RouteDifferentValue),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageWithProperty.RouteDifferentValue)),
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageWithProperty.PropertyWithNoValue),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageWithProperty.PropertyWithNoValue)),
-                    }
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageWithProperty.Id),
+                    ParameterType = typeof(int),
+                    Property = type.GetProperty(nameof(PageWithProperty.Id)),
                 },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageWithProperty.RouteDifferentValue),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageWithProperty.RouteDifferentValue)),
+                },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageWithProperty.PropertyWithNoValue),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageWithProperty.PropertyWithNoValue)),
+                },
+            },
             HandlerTypeInfo = type,
             PageTypeInfo = type,
         };
@@ -209,18 +245,22 @@ public class PageBinderFactoryTest
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var binder = new TestParameterBinder(new Dictionary<string, object>
+        var binder = new TestParameterBinder(
+            new Dictionary<string, object>
             {
                 { nameof(PageWithProperty.Id), 10 },
-                { nameof(PageWithProperty.RouteDifferentValue), "route-value" }
-            });
+                { nameof(PageWithProperty.RouteDifferentValue), "route-value" },
+            }
+        );
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext(),
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         // Act
         await factory(page.PageContext, page);
@@ -241,46 +281,50 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithProperty.Id),
-                        ParameterType = typeof(int),
-                        Property = type.GetProperty(nameof(PageModelWithProperty.Id)),
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithProperty.RouteDifferentValue),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithProperty.RouteDifferentValue)),
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithProperty.PropertyWithNoValue),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithProperty.PropertyWithNoValue)),
-                    }
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithProperty.Id),
+                    ParameterType = typeof(int),
+                    Property = type.GetProperty(nameof(PageModelWithProperty.Id)),
                 },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithProperty.RouteDifferentValue),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageModelWithProperty.RouteDifferentValue)),
+                },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithProperty.PropertyWithNoValue),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageModelWithProperty.PropertyWithNoValue)),
+                },
+            },
 
             HandlerTypeInfo = typeof(PageModelWithProperty).GetTypeInfo(),
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
             ModelTypeInfo = typeof(PageModelWithProperty).GetTypeInfo(),
         };
 
-        var binder = new TestParameterBinder(new Dictionary<string, object>
+        var binder = new TestParameterBinder(
+            new Dictionary<string, object>
             {
                 { nameof(PageModelWithProperty.Id), 10 },
-                { nameof(PageModelWithProperty.RouteDifferentValue), "route-value" }
-            });
+                { nameof(PageModelWithProperty.RouteDifferentValue), "route-value" },
+            }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithProperty();
 
@@ -307,13 +351,15 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithDefaultValue.PropertyWithDefaultValue),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithDefaultValue.PropertyWithDefaultValue)),
-                    },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithDefaultValue.PropertyWithDefaultValue),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(
+                        nameof(PageModelWithDefaultValue.PropertyWithDefaultValue)
+                    ),
                 },
+            },
 
             HandlerTypeInfo = type,
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
@@ -325,12 +371,14 @@ public class PageBinderFactoryTest
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithDefaultValue();
         var defaultValue = model.PropertyWithDefaultValue;
@@ -346,7 +394,9 @@ public class PageBinderFactoryTest
     [InlineData("Get")]
     [InlineData("GET")]
     [InlineData("gET")]
-    public async Task ModelBinderFactory_BindsPropertyWithoutSupportsGet_WhenRequestIsGet(string method)
+    public async Task ModelBinderFactory_BindsPropertyWithoutSupportsGet_WhenRequestIsGet(
+        string method
+    )
     {
         // Arrange
         var type = typeof(PageModelWithSupportsGetProperty).GetTypeInfo();
@@ -355,45 +405,50 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithSupportsGetProperty.SupportsGet),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(
+                        nameof(PageModelWithSupportsGetProperty.SupportsGet)
+                    ),
+                    BindingInfo = new BindingInfo()
                     {
-                        Name = nameof(PageModelWithSupportsGetProperty.SupportsGet),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.SupportsGet)),
-                        BindingInfo = new BindingInfo()
-                        {
-                            // Simulates placing a [BindProperty] on the property
-                            RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute() { SupportsGet = true }).RequestPredicate,
-                        }
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithSupportsGetProperty.Default),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.Default)),
+                        // Simulates placing a [BindProperty] on the property
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)
+                                new BindPropertyAttribute() { SupportsGet = true }
+                        ).RequestPredicate,
                     },
                 },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithSupportsGetProperty.Default),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.Default)),
+                },
+            },
 
             HandlerTypeInfo = type,
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
             ModelTypeInfo = type,
         };
 
-        var binder = new TestParameterBinder(new Dictionary<string, object>()
-            {
-                { "SupportsGet", "value" },
-                { "Default", "set" },
-            });
+        var binder = new TestParameterBinder(
+            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "set" } }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext(method)
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext(method) };
 
         var model = new PageModelWithSupportsGetProperty();
 
@@ -415,44 +470,49 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithSupportsGetProperty.SupportsGet),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(
+                        nameof(PageModelWithSupportsGetProperty.SupportsGet)
+                    ),
+                    BindingInfo = new BindingInfo()
                     {
-                        Name = nameof(PageModelWithSupportsGetProperty.SupportsGet),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.SupportsGet)),
-                        BindingInfo = new BindingInfo()
-                        {
-                            RequestPredicate = ((IRequestPredicateProvider)new BindPropertyAttribute() { SupportsGet = true }).RequestPredicate,
-                        }
-                    },
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithSupportsGetProperty.Default),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.Default)),
+                        RequestPredicate = (
+                            (IRequestPredicateProvider)
+                                new BindPropertyAttribute() { SupportsGet = true }
+                        ).RequestPredicate,
                     },
                 },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithSupportsGetProperty.Default),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageModelWithSupportsGetProperty.Default)),
+                },
+            },
 
             HandlerTypeInfo = type,
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
             ModelTypeInfo = type,
         };
 
-        var binder = new TestParameterBinder(new Dictionary<string, object>()
-            {
-                { "SupportsGet", "value" },
-                { "Default", "value" },
-            });
+        var binder = new TestParameterBinder(
+            new Dictionary<string, object>() { { "SupportsGet", "value" }, { "Default", "value" } }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         page.HttpContext.Request.Method = "Post";
 
@@ -476,33 +536,39 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithBindNeverProperty.BindNeverProperty),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithBindNeverProperty.BindNeverProperty)),
-                    },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithBindNeverProperty.BindNeverProperty),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(
+                        nameof(PageModelWithBindNeverProperty.BindNeverProperty)
+                    ),
                 },
+            },
 
             HandlerTypeInfo = type,
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
             ModelTypeInfo = type,
         };
 
-        var binder = new TestParameterBinder(new Dictionary<string, object>
+        var binder = new TestParameterBinder(
+            new Dictionary<string, object>
             {
                 { nameof(PageModelWithBindNeverProperty.BindNeverProperty), "value" },
-            });
+            }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithBindNeverProperty();
 
@@ -523,13 +589,13 @@ public class PageBinderFactoryTest
         {
             BoundProperties = new[]
             {
-                    new PageBoundPropertyDescriptor()
-                    {
-                        Name = nameof(PageModelWithValidation.Validated),
-                        ParameterType = typeof(string),
-                        Property = type.GetProperty(nameof(PageModelWithValidation.Validated)),
-                    },
+                new PageBoundPropertyDescriptor()
+                {
+                    Name = nameof(PageModelWithValidation.Validated),
+                    ParameterType = typeof(string),
+                    Property = type.GetProperty(nameof(PageModelWithValidation.Validated)),
                 },
+            },
 
             HandlerTypeInfo = type,
             PageTypeInfo = typeof(PageWithProperty).GetTypeInfo(),
@@ -545,16 +611,20 @@ public class PageBinderFactoryTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
-        var factory = PageBinderFactory.CreatePropertyBinder(binder, modelMetadataProvider, modelBinderFactory, actionDescriptor);
+        var factory = PageBinderFactory.CreatePropertyBinder(
+            binder,
+            modelMetadataProvider,
+            modelBinderFactory,
+            actionDescriptor
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithValidation();
 
@@ -569,7 +639,8 @@ public class PageBinderFactoryTest
             kvp =>
             {
                 Assert.Equal(nameof(PageModelWithValidation.Validated), kvp.Key);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -577,13 +648,15 @@ public class PageBinderFactoryTest
     {
         // Arrange
         var type = typeof(PageModelWithExecutors);
-        var actionDescriptor = GetActionDescriptorWithHandlerMethod(type, nameof(PageModelWithExecutors.OnGet));
+        var actionDescriptor = GetActionDescriptorWithHandlerMethod(
+            type,
+            nameof(PageModelWithExecutors.OnGet)
+        );
 
         // Act
-        var parameterBinder = new TestParameterBinder(new Dictionary<string, object>()
-            {
-                { "id", "value" },
-            });
+        var parameterBinder = new TestParameterBinder(
+            new Dictionary<string, object>() { { "id", "value" } }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
@@ -592,12 +665,10 @@ public class PageBinderFactoryTest
             modelMetadataProvider,
             modelBinderFactory,
             actionDescriptor,
-            actionDescriptor.HandlerMethods[0]);
+            actionDescriptor.HandlerMethods[0]
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithExecutors();
         var arguments = new Dictionary<string, object>();
@@ -612,7 +683,8 @@ public class PageBinderFactoryTest
             {
                 Assert.Equal("id", kvp.Key);
                 Assert.Equal("value", kvp.Value);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -620,13 +692,15 @@ public class PageBinderFactoryTest
     {
         // Arrange
         var type = typeof(PageModelWithExecutors);
-        var actionDescriptor = GetActionDescriptorWithHandlerMethod(type, nameof(PageModelWithExecutors.OnGetWithBindNever));
+        var actionDescriptor = GetActionDescriptorWithHandlerMethod(
+            type,
+            nameof(PageModelWithExecutors.OnGetWithBindNever)
+        );
 
         // Act
-        var parameterBinder = new TestParameterBinder(new Dictionary<string, object>()
-            {
-                { "id", "value" },
-            });
+        var parameterBinder = new TestParameterBinder(
+            new Dictionary<string, object>() { { "id", "value" } }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
@@ -635,12 +709,10 @@ public class PageBinderFactoryTest
             modelMetadataProvider,
             modelBinderFactory,
             actionDescriptor,
-            actionDescriptor.HandlerMethods[0]);
+            actionDescriptor.HandlerMethods[0]
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithExecutors();
         var arguments = new Dictionary<string, object>();
@@ -657,7 +729,10 @@ public class PageBinderFactoryTest
     {
         // Arrange
         var type = typeof(PageModelWithExecutors);
-        var actionDescriptor = GetActionDescriptorWithHandlerMethod(type, nameof(PageModelWithExecutors.OnPostWithValidation));
+        var actionDescriptor = GetActionDescriptorWithHandlerMethod(
+            type,
+            nameof(PageModelWithExecutors.OnPostWithValidation)
+        );
 
         // Act
 
@@ -669,21 +744,21 @@ public class PageBinderFactoryTest
             new DefaultObjectValidator(
                 modelMetadataProvider,
                 new[] { TestModelValidatorProvider.CreateDefaultProvider() },
-                new MvcOptions()),
+                new MvcOptions()
+            ),
             _optionsAccessor,
-            NullLoggerFactory.Instance);
+            NullLoggerFactory.Instance
+        );
 
         var factory = PageBinderFactory.CreateHandlerBinder(
             parameterBinder,
             modelMetadataProvider,
             modelBinderFactory,
             actionDescriptor,
-            actionDescriptor.HandlerMethods[0]);
+            actionDescriptor.HandlerMethods[0]
+        );
 
-        var page = new PageWithProperty
-        {
-            PageContext = GetPageContext()
-        };
+        var page = new PageWithProperty { PageContext = GetPageContext() };
 
         var model = new PageModelWithExecutors();
         var arguments = new Dictionary<string, object>();
@@ -699,7 +774,8 @@ public class PageBinderFactoryTest
             kvp =>
             {
                 Assert.Equal("name", kvp.Key);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -707,13 +783,15 @@ public class PageBinderFactoryTest
     {
         // Arrange
         var type = typeof(PageModelWithExecutors);
-        var actionDescriptor = GetActionDescriptorWithHandlerMethod(type, nameof(PageModelWithExecutors.OnGet));
+        var actionDescriptor = GetActionDescriptorWithHandlerMethod(
+            type,
+            nameof(PageModelWithExecutors.OnGet)
+        );
 
         // Act
-        var parameterBinder = new TestParameterBinder(new Dictionary<string, object>()
-            {
-                { "id", "value" },
-            });
+        var parameterBinder = new TestParameterBinder(
+            new Dictionary<string, object>() { { "id", "value" } }
+        );
 
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
         var modelBinderFactory = TestModelBinderFactory.CreateDefault();
@@ -722,16 +800,15 @@ public class PageBinderFactoryTest
             modelMetadataProvider,
             modelBinderFactory,
             actionDescriptor,
-            actionDescriptor.HandlerMethods[0]);
+            actionDescriptor.HandlerMethods[0]
+        );
 
         var pageContext = GetPageContext();
-        var page = new PageWithProperty
-        {
-            PageContext = pageContext,
-        };
+        var page = new PageWithProperty { PageContext = pageContext };
 
         var valueProviderFactory = new Mock<IValueProviderFactory>();
-        valueProviderFactory.Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
+        valueProviderFactory
+            .Setup(f => f.CreateValueProviderAsync(It.IsAny<ValueProviderFactoryContext>()))
             .Throws(new ValueProviderException("Some error"));
 
         pageContext.ValueProviderFactories.Add(valueProviderFactory.Object);
@@ -751,7 +828,10 @@ public class PageBinderFactoryTest
         Assert.Equal("Some error", error.ErrorMessage);
     }
 
-    private static CompiledPageActionDescriptor GetActionDescriptorWithHandlerMethod(Type type, string method)
+    private static CompiledPageActionDescriptor GetActionDescriptorWithHandlerMethod(
+        Type type,
+        string method
+    )
     {
         var handlerMethodInfo = type.GetMethod(method);
         var parameterInfo = handlerMethodInfo.GetParameters()[0];
@@ -761,21 +841,21 @@ public class PageBinderFactoryTest
             HandlerTypeInfo = type.GetTypeInfo(),
             HandlerMethods = new[]
             {
-                    new HandlerMethodDescriptor
+                new HandlerMethodDescriptor
+                {
+                    HttpMethod = "Post",
+                    MethodInfo = handlerMethodInfo,
+                    Parameters = new[]
                     {
-                        HttpMethod = "Post",
-                        MethodInfo = handlerMethodInfo,
-                        Parameters = new[]
+                        new HandlerParameterDescriptor
                         {
-                            new HandlerParameterDescriptor
-                            {
-                                ParameterInfo = parameterInfo,
-                                ParameterType = parameterInfo.ParameterType,
-                                Name = parameterInfo.Name
-                            },
+                            ParameterInfo = parameterInfo,
+                            ParameterType = parameterInfo.ParameterType,
+                            Name = parameterInfo.Name,
                         },
                     },
                 },
+            },
         };
         return actionDescriptor;
     }
@@ -787,7 +867,7 @@ public class PageBinderFactoryTest
 
         var httpContext = new DefaultHttpContext()
         {
-            RequestServices = services.BuildServiceProvider()
+            RequestServices = services.BuildServiceProvider(),
         };
 
         if (httpMethod != null)
@@ -795,10 +875,7 @@ public class PageBinderFactoryTest
             httpContext.Request.Method = httpMethod;
         }
 
-        return new PageContext()
-        {
-            HttpContext = httpContext
-        };
+        return new PageContext() { HttpContext = httpContext };
     }
 
     private class TestParameterBinder : ParameterBinder
@@ -811,7 +888,8 @@ public class PageBinderFactoryTest
                 TestModelBinderFactory.CreateDefault(),
                 Mock.Of<IObjectModelValidator>(),
                 _optionsAccessor,
-                NullLoggerFactory.Instance)
+                NullLoggerFactory.Instance
+            )
         {
             _args = args;
         }
@@ -825,7 +903,8 @@ public class PageBinderFactoryTest
             ParameterDescriptor parameter,
             ModelMetadata metadata,
             object value,
-            object container)
+            object container
+        )
         {
             Descriptors.Add(parameter);
 
@@ -838,12 +917,9 @@ public class PageBinderFactoryTest
         }
     }
 
-    private interface ITestService
-    { }
+    private interface ITestService { }
 
-    private class PageModelWithNoBoundProperties : PageModel
-    {
-    }
+    private class PageModelWithNoBoundProperties : PageModel { }
 
     private class PageWithNoBoundProperties : Page
     {
@@ -926,7 +1002,6 @@ public class PageBinderFactoryTest
 
         [FromServices]
         public ITestService FromService { get; set; }
-
     }
 
     private class PageModelWithDefaultValue
@@ -957,16 +1032,10 @@ public class PageBinderFactoryTest
 
     private class PageModelWithExecutors
     {
-        public void OnGetWithBindNever([BindNever] string id)
-        {
-        }
+        public void OnGetWithBindNever([BindNever] string id) { }
 
-        public void OnGet(string id)
-        {
-        }
+        public void OnGet(string id) { }
 
-        public void OnPostWithValidation([Required] string name)
-        {
-        }
+        public void OnPostWithValidation([Required] string name) { }
     }
 }

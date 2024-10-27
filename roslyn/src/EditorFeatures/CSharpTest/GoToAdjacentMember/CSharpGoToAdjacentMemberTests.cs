@@ -219,6 +219,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.GoToAdjacentMember
                 """;
             await AssertNavigatedAsync(code, next: true);
         }
+
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4311")]
         public async Task StopsAtField()
         {

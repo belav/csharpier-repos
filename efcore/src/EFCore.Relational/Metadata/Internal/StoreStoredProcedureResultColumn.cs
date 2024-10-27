@@ -10,7 +10,8 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class StoreStoredProcedureResultColumn
-    : ColumnBase<StoredProcedureResultColumnMapping>, IStoreStoredProcedureResultColumn
+    : ColumnBase<StoredProcedureResultColumnMapping>,
+        IStoreStoredProcedureResultColumn
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,7 +24,8 @@ public class StoreStoredProcedureResultColumn
         string type,
         int position,
         StoreStoredProcedure storedProcedure,
-        RelationalTypeMapping? storeTypeMapping = null)
+        RelationalTypeMapping? storeTypeMapping = null
+    )
         : base(name, type, storedProcedure, storeTypeMapping)
     {
         Position = position;
@@ -35,8 +37,7 @@ public class StoreStoredProcedureResultColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual StoreStoredProcedure StoredProcedure
-        => (StoreStoredProcedure)Table;
+    public virtual StoreStoredProcedure StoredProcedure => (StoreStoredProcedure)Table;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,10 +53,13 @@ public class StoreStoredProcedureResultColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override RelationalTypeMapping GetDefaultStoreTypeMapping()
-        => PropertyMappings.Count != 0
+    protected override RelationalTypeMapping GetDefaultStoreTypeMapping() =>
+        PropertyMappings.Count != 0
             ? PropertyMappings[0].TypeMapping
-            : (RelationalTypeMapping)Table.Model.Model.GetModelDependencies().TypeMappingSource.FindMapping(typeof(int))!;
+            : (RelationalTypeMapping)
+                Table
+                    .Model.Model.GetModelDependencies()
+                    .TypeMappingSource.FindMapping(typeof(int))!;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -63,8 +67,10 @@ public class StoreStoredProcedureResultColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => ((IStoreStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IStoreStoredProcedureResultColumn)this).ToDebugString(
+            MetadataDebugStringOptions.SingleLineDefault
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,10 +78,14 @@ public class StoreStoredProcedureResultColumn
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IStoreStoredProcedureResultColumn)this).ToDebugString(),
-            () => ((IStoreStoredProcedureResultColumn)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () =>
+                ((IStoreStoredProcedureResultColumn)this).ToDebugString(
+                    MetadataDebugStringOptions.LongDefault
+                )
+        );
 
     /// <inheritdoc />
     IStoreStoredProcedure IStoreStoredProcedureResultColumn.StoredProcedure

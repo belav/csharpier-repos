@@ -15,11 +15,13 @@ public class DesignTimeFlagTest
         var handler = new OperationResultHandler();
 
         new MockOperation<string>(
-            handler, () =>
+            handler,
+            () =>
             {
                 Assert.True(EF.IsDesignTime);
                 return "Twilight Sparkle";
-            });
+            }
+        );
 
         Assert.False(EF.IsDesignTime);
         Assert.Equal("Twilight Sparkle", handler.Result);
@@ -41,11 +43,8 @@ public class DesignTimeFlagTest
         EF.IsDesignTime = false;
 
         Assert.IsType<TestContext>(
-            DbContextActivator.CreateInstance(
-                typeof(TestContext),
-                null,
-                null,
-                new[] { "A", "B" }));
+            DbContextActivator.CreateInstance(typeof(TestContext), null, null, new[] { "A", "B" })
+        );
 
         Assert.True(EF.IsDesignTime);
     }
@@ -73,6 +72,4 @@ public class DesignTimeFlagTest
 }
 
 [CollectionDefinition("DesignTimeFlagTest", DisableParallelization = true)]
-public class DesignTimeFlagTestCollection
-{
-}
+public class DesignTimeFlagTestCollection { }

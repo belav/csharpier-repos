@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Text;
 
 namespace System.Net
 {
@@ -10,7 +10,9 @@ namespace System.Net
     {
         protected override void BuildInternal()
         {
-            GlobalLog.Enter("WinHttpWebProxyBuilder#" + ValidationHelper.HashString(this) + "::BuildInternal()");
+            GlobalLog.Enter(
+                "WinHttpWebProxyBuilder#" + ValidationHelper.HashString(this) + "::BuildInternal()"
+            );
 
             UnsafeNclNativeMethods.WinHttp.WINHTTP_CURRENT_USER_IE_PROXY_CONFIG ieProxyConfig =
                 new UnsafeNclNativeMethods.WinHttp.WINHTTP_CURRENT_USER_IE_PROXY_CONFIG();
@@ -19,7 +21,11 @@ namespace System.Net
             RuntimeHelpers.PrepareConstrainedRegions();
             try
             {
-                if (UnsafeNclNativeMethods.WinHttp.WinHttpGetIEProxyConfigForCurrentUser(ref ieProxyConfig))
+                if (
+                    UnsafeNclNativeMethods.WinHttp.WinHttpGetIEProxyConfigForCurrentUser(
+                        ref ieProxyConfig
+                    )
+                )
                 {
                     string proxy = null;
                     string proxyByPass = null;
@@ -31,7 +37,7 @@ namespace System.Net
 
                     // note that ieProxyConfig.Proxy will be null if "use a proxy server" flag is turned off, even if
                     // the user specified a proxy address. When we read directly from the Registry we need to check
-                    // for ProxyTypeFlags.PROXY_TYPE_PROXY. WinHttp does this for us and if the flag is not set, 
+                    // for ProxyTypeFlags.PROXY_TYPE_PROXY. WinHttp does this for us and if the flag is not set,
                     // ieProxyConfig.Proxy will be null.
                     SetProxyAndBypassList(proxy, proxyByPass);
 
@@ -63,7 +69,9 @@ namespace System.Net
                 Marshal.FreeHGlobal(ieProxyConfig.AutoConfigUrl);
             }
 
-            GlobalLog.Leave("WinHttpWebProxyBuilder#" + ValidationHelper.HashString(this) + "::BuildInternal()");
+            GlobalLog.Leave(
+                "WinHttpWebProxyBuilder#" + ValidationHelper.HashString(this) + "::BuildInternal()"
+            );
         }
     }
 }

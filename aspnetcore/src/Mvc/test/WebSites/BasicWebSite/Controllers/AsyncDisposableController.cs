@@ -9,7 +9,10 @@ public class AsyncDisposableController : Controller, IAsyncDisposable
 {
     private readonly ControllerTestDisposeAsync _testDisposeAsync;
 
-    public AsyncDisposableController(ILogger<AsyncDisposableController> logger, ControllerTestDisposeAsync testDisposeAsync)
+    public AsyncDisposableController(
+        ILogger<AsyncDisposableController> logger,
+        ControllerTestDisposeAsync testDisposeAsync
+    )
     {
         Logger = logger;
         _testDisposeAsync = testDisposeAsync;

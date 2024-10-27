@@ -8,6 +8,4 @@ namespace Microsoft.AspNetCore.Mvc;
 /// is not considered a view component by the default view component discovery mechanism.
 /// </summary>
 [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = true)]
-public class NonViewComponentAttribute : Attribute
-{
-}
+public class NonViewComponentAttribute : Attribute { }

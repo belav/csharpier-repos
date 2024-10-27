@@ -21,10 +21,10 @@ public class ConstraintMatcherTest
 
         var routeValueDictionary = new RouteValueDictionary(new { a = "value", b = "value" });
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint()},
-                {"b", new FailConstraint()}
-            };
+        {
+            { "a", new PassConstraint() },
+            { "b", new FailConstraint() },
+        };
 
         // Act
         RouteConstraintMatcher.Match(
@@ -33,7 +33,8 @@ public class ConstraintMatcherTest
             httpContext: new Mock<HttpContext>().Object,
             route: new Mock<IRouter>().Object,
             routeDirection: RouteDirection.UrlGeneration,
-            logger: logger);
+            logger: logger
+        );
 
         // Assert
         // There are no BeginScopes called.
@@ -48,13 +49,14 @@ public class ConstraintMatcherTest
     {
         // Arrange & Act
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint()},
-                {"b", new FailConstraint()}
-            };
+        {
+            { "a", new PassConstraint() },
+            { "b", new FailConstraint() },
+        };
         var sink = SetUpMatch(constraints, loggerEnabled: true);
-        var expectedMessage = "Route value 'value' with key 'b' did not match the constraint " +
-            $"'{typeof(FailConstraint).FullName}'";
+        var expectedMessage =
+            "Route value 'value' with key 'b' did not match the constraint "
+            + $"'{typeof(FailConstraint).FullName}'";
 
         // Assert
         Assert.Empty(sink.Scopes);
@@ -67,10 +69,10 @@ public class ConstraintMatcherTest
     {
         // Arrange & Act
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint()},
-                {"b", new PassConstraint()}
-            };
+        {
+            { "a", new PassConstraint() },
+            { "b", new PassConstraint() },
+        };
         var sink = SetUpMatch(constraints, false);
 
         // Assert
@@ -82,115 +84,136 @@ public class ConstraintMatcherTest
     public void ReturnsTrueOnValidConstraints()
     {
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint()},
-                {"b", new PassConstraint()}
-            };
+        {
+            { "a", new PassConstraint() },
+            { "b", new PassConstraint() },
+        };
 
         var routeValueDictionary = new RouteValueDictionary(new { a = "value", b = "value" });
 
-        Assert.True(RouteConstraintMatcher.Match(
-            constraints: constraints,
-            routeValues: routeValueDictionary,
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.True(
+            RouteConstraintMatcher.Match(
+                constraints: constraints,
+                routeValues: routeValueDictionary,
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
     [Fact]
     public void ConstraintsGetTheRightKey()
     {
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint("a")},
-                {"b", new PassConstraint("b")}
-            };
+        {
+            { "a", new PassConstraint("a") },
+            { "b", new PassConstraint("b") },
+        };
 
         var routeValueDictionary = new RouteValueDictionary(new { a = "value", b = "value" });
 
-        Assert.True(RouteConstraintMatcher.Match(
-            constraints: constraints,
-            routeValues: routeValueDictionary,
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.True(
+            RouteConstraintMatcher.Match(
+                constraints: constraints,
+                routeValues: routeValueDictionary,
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
     [Fact]
     public void ReturnsFalseOnInvalidConstraintsThatDontMatch()
     {
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new FailConstraint()},
-                {"b", new FailConstraint()}
-            };
+        {
+            { "a", new FailConstraint() },
+            { "b", new FailConstraint() },
+        };
 
         var routeValueDictionary = new RouteValueDictionary(new { c = "value", d = "value" });
 
-        Assert.False(RouteConstraintMatcher.Match(
-            constraints: constraints,
-            routeValues: routeValueDictionary,
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.False(
+            RouteConstraintMatcher.Match(
+                constraints: constraints,
+                routeValues: routeValueDictionary,
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
     [Fact]
     public void ReturnsFalseOnInvalidConstraintsThatMatch()
     {
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new FailConstraint()},
-                {"b", new FailConstraint()}
-            };
+        {
+            { "a", new FailConstraint() },
+            { "b", new FailConstraint() },
+        };
 
         var routeValueDictionary = new RouteValueDictionary(new { a = "value", b = "value" });
 
-        Assert.False(RouteConstraintMatcher.Match(
-            constraints: constraints,
-            routeValues: routeValueDictionary,
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.False(
+            RouteConstraintMatcher.Match(
+                constraints: constraints,
+                routeValues: routeValueDictionary,
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
     [Fact]
     public void ReturnsFalseOnValidAndInvalidConstraintsMixThatMatch()
     {
         var constraints = new Dictionary<string, IRouteConstraint>
-            {
-                {"a", new PassConstraint()},
-                {"b", new FailConstraint()}
-            };
+        {
+            { "a", new PassConstraint() },
+            { "b", new FailConstraint() },
+        };
 
         var routeValueDictionary = new RouteValueDictionary(new { a = "value", b = "value" });
 
-        Assert.False(RouteConstraintMatcher.Match(
-            constraints: constraints,
-            routeValues: routeValueDictionary,
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.False(
+            RouteConstraintMatcher.Match(
+                constraints: constraints,
+                routeValues: routeValueDictionary,
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
     [Fact]
     public void ReturnsTrueOnNullInput()
     {
-        Assert.True(RouteConstraintMatcher.Match(
-            constraints: null,
-            routeValues: new RouteValueDictionary(),
-            httpContext: new Mock<HttpContext>().Object,
-            route: new Mock<IRouter>().Object,
-            routeDirection: RouteDirection.IncomingRequest,
-            logger: NullLogger.Instance));
+        Assert.True(
+            RouteConstraintMatcher.Match(
+                constraints: null,
+                routeValues: new RouteValueDictionary(),
+                httpContext: new Mock<HttpContext>().Object,
+                route: new Mock<IRouter>().Object,
+                routeDirection: RouteDirection.IncomingRequest,
+                logger: NullLogger.Instance
+            )
+        );
     }
 
-    private TestSink SetUpMatch(Dictionary<string, IRouteConstraint> constraints, bool loggerEnabled)
+    private TestSink SetUpMatch(
+        Dictionary<string, IRouteConstraint> constraints,
+        bool loggerEnabled
+    )
     {
         // Arrange
         var sink = new TestSink();
@@ -205,7 +228,8 @@ public class ConstraintMatcherTest
             httpContext: new Mock<HttpContext>().Object,
             route: new Mock<IRouter>().Object,
             routeDirection: RouteDirection.IncomingRequest,
-            logger: logger);
+            logger: logger
+        );
         return sink;
     }
 
@@ -223,7 +247,8 @@ public class ConstraintMatcherTest
             IRouter route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             if (_expectedKey != null)
             {
@@ -241,7 +266,8 @@ public class ConstraintMatcherTest
             IRouter route,
             string routeKey,
             RouteValueDictionary values,
-            RouteDirection routeDirection)
+            RouteDirection routeDirection
+        )
         {
             return false;
         }

@@ -9,9 +9,7 @@ public class AutoMapperMappingException : Exception
 {
     private readonly string _message;
 
-    public AutoMapperMappingException()
-    {
-    }
+    public AutoMapperMappingException() { }
 
     public AutoMapperMappingException(string message)
         : base(message) => _message = message;
@@ -38,17 +36,27 @@ public class AutoMapperMappingException : Exception
         {
             var message = _message;
             var newLine = Environment.NewLine;
-            if (Types.HasValue && Types.Value.SourceType != null && Types.Value.DestinationType != null)
+            if (
+                Types.HasValue
+                && Types.Value.SourceType != null
+                && Types.Value.DestinationType != null
+            )
             {
                 message = message + newLine + newLine + "Mapping types:";
-                message += newLine + $"{Types.Value.SourceType.Name} -> {Types.Value.DestinationType.Name}";
-                message += newLine + $"{Types.Value.SourceType.FullName} -> {Types.Value.DestinationType.FullName}";
+                message +=
+                    newLine
+                    + $"{Types.Value.SourceType.Name} -> {Types.Value.DestinationType.Name}";
+                message +=
+                    newLine
+                    + $"{Types.Value.SourceType.FullName} -> {Types.Value.DestinationType.FullName}";
             }
             if (TypeMap != null)
             {
                 message = message + newLine + newLine + "Type Map configuration:";
                 message += newLine + $"{TypeMap.SourceType.Name} -> {TypeMap.DestinationType.Name}";
-                message += newLine + $"{TypeMap.SourceType.FullName} -> {TypeMap.DestinationType.FullName}";
+                message +=
+                    newLine
+                    + $"{TypeMap.SourceType.FullName} -> {TypeMap.DestinationType.FullName}";
             }
             if (MemberMap != null)
             {
@@ -65,14 +73,16 @@ public class AutoMapperMappingException : Exception
     {
         get
         {
-            return string.Join(Environment.NewLine,
-                base.StackTrace
-                    .Split(new[] {Environment.NewLine}, StringSplitOptions.None)
-                    .Where(str => !str.TrimStart().StartsWith("at AutoMapper.")));
+            return string.Join(
+                Environment.NewLine,
+                base.StackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                    .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
+            );
         }
     }
 #endif
 }
+
 public class DuplicateTypeMapConfigurationException : Exception
 {
     public TypeMapConfigErrors[] Errors { get; }
@@ -84,10 +94,14 @@ public class DuplicateTypeMapConfigurationException : Exception
         builder.AppendLine("Duplicate CreateMap calls:");
         foreach (var error in Errors)
         {
-            builder.AppendLine($"{error.Types.SourceType.FullName} to {error.Types.DestinationType.FullName} defined in profiles:");
+            builder.AppendLine(
+                $"{error.Types.SourceType.FullName} to {error.Types.DestinationType.FullName} defined in profiles:"
+            );
             builder.AppendLine(string.Join(Environment.NewLine, error.ProfileNames));
         }
-        builder.AppendLine("This can cause configuration collisions and inconsistent mappings. Use a single CreateMap call per type pair.");
+        builder.AppendLine(
+            "This can cause configuration collisions and inconsistent mappings. Use a single CreateMap call per type pair."
+        );
         Message = builder.ToString();
     }
 
@@ -105,6 +119,7 @@ public class DuplicateTypeMapConfigurationException : Exception
 
     public override string Message { get; }
 }
+
 public class AutoMapperConfigurationException : Exception
 {
     public TypeMapConfigErrors[] Errors { get; }
@@ -117,7 +132,11 @@ public class AutoMapperConfigurationException : Exception
         public string[] UnmappedPropertyNames { get; }
         public bool CanConstruct { get; }
 
-        public TypeMapConfigErrors(TypeMap typeMap, string[] unmappedPropertyNames, bool canConstruct)
+        public TypeMapConfigErrors(
+            TypeMap typeMap,
+            string[] unmappedPropertyNames,
+            bool canConstruct
+        )
         {
             TypeMap = typeMap;
             UnmappedPropertyNames = unmappedPropertyNames;
@@ -126,14 +145,10 @@ public class AutoMapperConfigurationException : Exception
     }
 
     public AutoMapperConfigurationException(string message)
-        : base(message)
-    {
-    }
+        : base(message) { }
 
     public AutoMapperConfigurationException(string message, Exception inner)
-        : base(message, inner)
-    {
-    }
+        : base(message, inner) { }
 
     public AutoMapperConfigurationException(TypeMapConfigErrors[] errors) => Errors = errors;
 
@@ -145,11 +160,12 @@ public class AutoMapperConfigurationException : Exception
         {
             if (Types.HasValue)
             {
-                var message =
-                    string.Format(
-                        "The following member on {0} cannot be mapped: \n\t{2} \nAdd a custom mapping expression, ignore, add a custom resolver, or modify the destination type {1}.",
-                        Types.Value.DestinationType.FullName, Types.Value.DestinationType.FullName,
-                        MemberMap);
+                var message = string.Format(
+                    "The following member on {0} cannot be mapped: \n\t{2} \nAdd a custom mapping expression, ignore, add a custom resolver, or modify the destination type {1}.",
+                    Types.Value.DestinationType.FullName,
+                    Types.Value.DestinationType.FullName,
+                    MemberMap
+                );
 
                 message += "\nContext:";
 
@@ -158,9 +174,10 @@ public class AutoMapperConfigurationException : Exception
                 {
                     if (exToUse is AutoMapperConfigurationException configExc)
                     {
-                        message += configExc.MemberMap == null
-                          ? $"\n\tMapping from type {configExc.Types.Value.SourceType.FullName} to {configExc.Types.Value.DestinationType.FullName}"
-                          : $"\n\tMapping to member {configExc.MemberMap} from {configExc.Types.Value.SourceType.FullName} to {configExc.Types.Value.DestinationType.FullName}";
+                        message +=
+                            configExc.MemberMap == null
+                                ? $"\n\tMapping from type {configExc.Types.Value.SourceType.FullName} to {configExc.Types.Value.DestinationType.FullName}"
+                                : $"\n\tMapping to member {configExc.MemberMap} from {configExc.Types.Value.SourceType.FullName} to {configExc.Types.Value.DestinationType.FullName}";
                     }
 
                     exToUse = exToUse.InnerException;
@@ -170,22 +187,34 @@ public class AutoMapperConfigurationException : Exception
             }
             if (Errors != null)
             {
-                var message =
-                    new StringBuilder(
-                        "\nUnmapped members were found. Review the types and members below.\nAdd a custom mapping expression, ignore, add a custom resolver, or modify the source/destination type\nFor no matching constructor, add a no-arg ctor, add optional arguments, or map all of the constructor parameters\n");
+                var message = new StringBuilder(
+                    "\nUnmapped members were found. Review the types and members below.\nAdd a custom mapping expression, ignore, add a custom resolver, or modify the source/destination type\nFor no matching constructor, add a no-arg ctor, add optional arguments, or map all of the constructor parameters\n"
+                );
 
                 foreach (var error in Errors)
                 {
-                    var len = error.TypeMap.SourceType.FullName.Length +
-                              error.TypeMap.DestinationType.FullName.Length + 5;
+                    var len =
+                        error.TypeMap.SourceType.FullName.Length
+                        + error.TypeMap.DestinationType.FullName.Length
+                        + 5;
 
                     message.AppendLine(new string('=', len));
-                    message.AppendLine(error.TypeMap.SourceType.Name + " -> " + error.TypeMap.DestinationType.Name +
-                                       " (" +
-                                       error.TypeMap.ConfiguredMemberList + " member list)");
-                    message.AppendLine(error.TypeMap.SourceType.FullName + " -> " +
-                                       error.TypeMap.DestinationType.FullName + " (" +
-                                       error.TypeMap.ConfiguredMemberList + " member list)");
+                    message.AppendLine(
+                        error.TypeMap.SourceType.Name
+                            + " -> "
+                            + error.TypeMap.DestinationType.Name
+                            + " ("
+                            + error.TypeMap.ConfiguredMemberList
+                            + " member list)"
+                    );
+                    message.AppendLine(
+                        error.TypeMap.SourceType.FullName
+                            + " -> "
+                            + error.TypeMap.DestinationType.FullName
+                            + " ("
+                            + error.TypeMap.ConfiguredMemberList
+                            + " member list)"
+                    );
                     message.AppendLine();
 
                     if (error.UnmappedPropertyNames.Any())
@@ -198,7 +227,9 @@ public class AutoMapperConfigurationException : Exception
                     }
                     if (!error.CanConstruct)
                     {
-                        message.AppendLine($"No available constructor.{error.TypeMap.CheckRecord()}");
+                        message.AppendLine(
+                            $"No available constructor.{error.TypeMap.CheckRecord()}"
+                        );
                     }
                 }
                 return message.ToString();
@@ -212,11 +243,12 @@ public class AutoMapperConfigurationException : Exception
         get
         {
             if (Errors != null)
-                return string.Join(Environment.NewLine,
-                    base.StackTrace
-                        .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
+                return string.Join(
+                    Environment.NewLine,
+                    base.StackTrace.Split(new[] { Environment.NewLine }, StringSplitOptions.None)
                         .Where(str => !str.TrimStart().StartsWith("at AutoMapper."))
-                        .ToArray());
+                        .ToArray()
+                );
 
             return base.StackTrace;
         }

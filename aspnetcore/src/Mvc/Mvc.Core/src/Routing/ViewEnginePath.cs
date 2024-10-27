@@ -60,9 +60,11 @@ internal static class ViewEnginePath
         {
             // Determine if we need to do any path resolution.
             // We need to resolve paths with multiple path separators (e.g "//" or "\\") or, directory traversals e.g. ("../" or "./").
-            if (segment.Length == 0 ||
-                segment.Equals(ParentDirectoryToken, StringComparison.Ordinal) ||
-                segment.Equals(CurrentDirectoryToken, StringComparison.Ordinal))
+            if (
+                segment.Length == 0
+                || segment.Equals(ParentDirectoryToken, StringComparison.Ordinal)
+                || segment.Equals(CurrentDirectoryToken, StringComparison.Ordinal)
+            )
             {
                 requiresResolution = true;
                 break;

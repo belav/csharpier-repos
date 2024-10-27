@@ -44,9 +44,7 @@ namespace System.Net.Http.Functional.Tests
             get { return false; }
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override long Length
         {
@@ -55,14 +53,8 @@ namespace System.Net.Http.Functional.Tests
 
         public override long Position
         {
-            get
-            {
-                return _position;
-            }
-            set
-            {
-                throw new NotSupportedException();
-            }
+            get { return _position; }
+            set { throw new NotSupportedException(); }
         }
 
         public override int Read(byte[] buffer, int offset, int count)
@@ -92,9 +84,7 @@ namespace System.Net.Http.Functional.Tests
             throw new NotSupportedException();
         }
 
-        void IDisposable.Dispose()
-        {
-        }
+        void IDisposable.Dispose() { }
 
         byte[] ReadInternal(int count)
         {
@@ -115,17 +105,22 @@ namespace System.Net.Http.Functional.Tests
             return dataBytes;
         }
 
-        IAsyncOperationWithProgress<IBuffer, uint> IInputStream.ReadAsync(IBuffer buffer, uint count, InputStreamOptions options)
+        IAsyncOperationWithProgress<IBuffer, uint> IInputStream.ReadAsync(
+            IBuffer buffer,
+            uint count,
+            InputStreamOptions options
+        )
         {
             byte[] dataBytes = ReadInternal((int)count);
 
             var ibuffer = dataBytes.AsBuffer();
 
             return AsyncInfo.Run(
-                delegate (CancellationToken cancellationToken, IProgress<uint> progress)
+                delegate(CancellationToken cancellationToken, IProgress<uint> progress)
                 {
                     return Task.FromResult<IBuffer>(ibuffer);
-                });
+                }
+            );
         }
     }
 }

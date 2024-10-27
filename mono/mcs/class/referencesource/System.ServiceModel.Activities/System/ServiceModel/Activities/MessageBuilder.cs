@@ -53,42 +53,96 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public static MessageDescription CreateMessageDescription(OperationDescription operation, bool isResponse,
-            MessageDirection direction, string overridingAction, Type type, SerializerOption serializerOption)
+        public static MessageDescription CreateMessageDescription(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDirection direction,
+            string overridingAction,
+            Type type,
+            SerializerOption serializerOption
+        )
         {
             MessageDescription result;
             if (type != null && IsMessageContract(type))
             {
-                result = CreateFromMessageContract(operation, isResponse, direction, overridingAction, type);
+                result = CreateFromMessageContract(
+                    operation,
+                    isResponse,
+                    direction,
+                    overridingAction,
+                    type
+                );
             }
             else
             {
                 // For Send/Receive, we do not wrap message
-                result = CreateEmptyMessageDescription(operation, isResponse, direction, overridingAction);
+                result = CreateEmptyMessageDescription(
+                    operation,
+                    isResponse,
+                    direction,
+                    overridingAction
+                );
                 AddMessagePartDescription(operation, isResponse, result, type, serializerOption);
             }
 
             return result;
         }
 
-        public static MessageDescription CreateMessageDescription(OperationDescription operation, bool isResponse,
-            MessageDirection direction, string overridingAction, string[] argumentNames, Type[] argumentTypes)
+        public static MessageDescription CreateMessageDescription(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDirection direction,
+            string overridingAction,
+            string[] argumentNames,
+            Type[] argumentTypes
+        )
         {
             MessageDescription result;
-            if (argumentTypes.Length == 1 && argumentTypes[0] == MessageDescription.TypeOfUntypedMessage)
+            if (
+                argumentTypes.Length == 1
+                && argumentTypes[0] == MessageDescription.TypeOfUntypedMessage
+            )
             {
-                result = CreateEmptyMessageDescription(operation, isResponse, direction, overridingAction);
-                AddMessagePartDescription(operation, isResponse, result, argumentNames, argumentTypes);
+                result = CreateEmptyMessageDescription(
+                    operation,
+                    isResponse,
+                    direction,
+                    overridingAction
+                );
+                AddMessagePartDescription(
+                    operation,
+                    isResponse,
+                    result,
+                    argumentNames,
+                    argumentTypes
+                );
             }
             else if (argumentTypes.Length == 1 && IsMessageContract(argumentTypes[0]))
             {
-                result = CreateFromMessageContract(operation, isResponse, direction, overridingAction, argumentTypes[0]);
+                result = CreateFromMessageContract(
+                    operation,
+                    isResponse,
+                    direction,
+                    overridingAction,
+                    argumentTypes[0]
+                );
             }
             else
             {
                 // For SendParameters/ReceiveParameters, we wrap for non-Message cases
-                result = CreateEmptyMessageDescription(operation, isResponse, direction, overridingAction);
-                AddMessagePartDescription(operation, isResponse, result, argumentNames, argumentTypes);
+                result = CreateEmptyMessageDescription(
+                    operation,
+                    isResponse,
+                    direction,
+                    overridingAction
+                );
+                AddMessagePartDescription(
+                    operation,
+                    isResponse,
+                    result,
+                    argumentNames,
+                    argumentTypes
+                );
                 SetWrapperName(operation, isResponse, result);
             }
 
@@ -107,22 +161,39 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public static MessageDescription CreateFromMessageContract(OperationDescription operation, bool isResponse,
-            MessageDirection direction, string overridingAction, Type messageContractType)
+        public static MessageDescription CreateFromMessageContract(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDirection direction,
+            string overridingAction,
+            Type messageContractType
+        )
         {
-            string action = overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
+            string action =
+                overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
 
-            // 
+            //
 
             TypeLoader typeLoader = new TypeLoader();
-            return typeLoader.CreateTypedMessageDescription(messageContractType, null, null,
-                operation.DeclaringContract.Namespace, action, direction);
+            return typeLoader.CreateTypedMessageDescription(
+                messageContractType,
+                null,
+                null,
+                operation.DeclaringContract.Namespace,
+                action,
+                direction
+            );
         }
 
-        public static MessageDescription CreateEmptyMessageDescription(OperationDescription operation, bool isResponse,
-            MessageDirection direction, string overridingAction)
+        public static MessageDescription CreateEmptyMessageDescription(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDirection direction,
+            string overridingAction
+        )
         {
-            string action = overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
+            string action =
+                overridingAction ?? NamingHelper.GetMessageAction(operation, isResponse);
             MessageDescription result = new MessageDescription(action, direction);
 
             // Clear message wrapper
@@ -132,8 +203,13 @@ namespace System.ServiceModel.Activities
             return result;
         }
 
-        public static void AddMessagePartDescription(OperationDescription operation, bool isResponse,
-            MessageDescription message, Type type, SerializerOption serializerOption)
+        public static void AddMessagePartDescription(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDescription message,
+            Type type,
+            SerializerOption serializerOption
+        )
         {
             if (type != null)
             {
@@ -142,7 +218,9 @@ namespace System.ServiceModel.Activities
 
                 if (serializerOption == SerializerOption.DataContractSerializer)
                 {
-                    XmlQualifiedName xmlQualifiedName = XsdDataContractExporter.GetRootElementName(type);
+                    XmlQualifiedName xmlQualifiedName = XsdDataContractExporter.GetRootElementName(
+                        type
+                    );
                     if (xmlQualifiedName == null)
                     {
                         xmlQualifiedName = XsdDataContractExporter.GetSchemaTypeName(type);
@@ -167,25 +245,33 @@ namespace System.ServiceModel.Activities
                     partNamespace = xmlTypeMapping.Namespace;
                 }
 
-                MessagePartDescription messagePart = new MessagePartDescription(NamingHelper.XmlName(partName), partNamespace)
+                MessagePartDescription messagePart = new MessagePartDescription(
+                    NamingHelper.XmlName(partName),
+                    partNamespace
+                )
                 {
                     Index = 0,
-                    Type = type
+                    Type = type,
 
                     // We do not infer MessagePartDescription.ProtectionLevel
                 };
 
                 message.Body.Parts.Add(messagePart);
             }
-            
+
             if (isResponse)
             {
                 SetReturnValue(message, operation);
             }
         }
 
-        public static void AddMessagePartDescription(OperationDescription operation, bool isResponse,
-            MessageDescription message, string[] argumentNames, Type[] argumentTypes)
+        public static void AddMessagePartDescription(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDescription message,
+            string[] argumentNames,
+            Type[] argumentTypes
+        )
         {
             Fx.Assert(argumentNames != null && argumentTypes != null, "Argument cannot be null!");
             Fx.Assert(argumentNames.Length == argumentTypes.Length, "Name and Type do not match!");
@@ -198,10 +284,13 @@ namespace System.ServiceModel.Activities
                 // Infer MessagePartDescription.Name from parameter name
                 string partName = argumentNames[index];
 
-                MessagePartDescription messagePart = new MessagePartDescription(NamingHelper.XmlName(partName), partNamespace)
+                MessagePartDescription messagePart = new MessagePartDescription(
+                    NamingHelper.XmlName(partName),
+                    partNamespace
+                )
                 {
                     Index = index,
-                    Type = argumentTypes[index]
+                    Type = argumentTypes[index],
 
                     // We do not infer MessagePartDescription.ProtectionLevel
                 };
@@ -224,15 +313,22 @@ namespace System.ServiceModel.Activities
             }
             else if (!message.IsTypedMessage)
             {
-                message.Body.ReturnValue = new MessagePartDescription(operation.Name + TypeLoader.ReturnSuffix,
-                    operation.DeclaringContract.Namespace);
+                message.Body.ReturnValue = new MessagePartDescription(
+                    operation.Name + TypeLoader.ReturnSuffix,
+                    operation.DeclaringContract.Namespace
+                );
                 message.Body.ReturnValue.Type = TypeHelper.VoidType;
             }
         }
 
-        public static void SetWrapperName(OperationDescription operation, bool isResponse, MessageDescription message)
+        public static void SetWrapperName(
+            OperationDescription operation,
+            bool isResponse,
+            MessageDescription message
+        )
         {
-            message.Body.WrapperName = operation.Name + (isResponse ? TypeLoader.ResponseSuffix : string.Empty);
+            message.Body.WrapperName =
+                operation.Name + (isResponse ? TypeLoader.ResponseSuffix : string.Empty);
             message.Body.WrapperNamespace = operation.DeclaringContract.Namespace;
         }
 
@@ -243,14 +339,18 @@ namespace System.ServiceModel.Activities
             {
                 MessageDescription requestMessage = operation.Messages[0];
                 MessageDescription responseMessage = operation.Messages[1];
-                if (responseMessage.IsVoid &&
-                    (requestMessage.IsUntypedMessage || requestMessage.IsTypedMessage))
+                if (
+                    responseMessage.IsVoid
+                    && (requestMessage.IsUntypedMessage || requestMessage.IsTypedMessage)
+                )
                 {
                     responseMessage.Body.WrapperName = null;
                     responseMessage.Body.WrapperNamespace = null;
                 }
-                else if (requestMessage.IsVoid &&
-                    (responseMessage.IsUntypedMessage || responseMessage.IsTypedMessage))
+                else if (
+                    requestMessage.IsVoid
+                    && (responseMessage.IsUntypedMessage || responseMessage.IsTypedMessage)
+                )
                 {
                     requestMessage.Body.WrapperName = null;
                     requestMessage.Body.WrapperNamespace = null;
@@ -258,14 +358,19 @@ namespace System.ServiceModel.Activities
             }
         }
 
-        public static FaultDescription CreateFaultDescription(OperationDescription operation, Type faultType, string overridingAction)
+        public static FaultDescription CreateFaultDescription(
+            OperationDescription operation,
+            Type faultType,
+            string overridingAction
+        )
         {
             string name = NamingHelper.TypeName(faultType) + TypeLoader.FaultSuffix;
-            string action = overridingAction ?? NamingHelper.GetMessageAction(operation, false) + name;
+            string action =
+                overridingAction ?? NamingHelper.GetMessageAction(operation, false) + name;
             FaultDescription result = new FaultDescription(action)
             {
                 Namespace = operation.DeclaringContract.Namespace,
-                DetailType = faultType
+                DetailType = faultType,
             };
             result.SetNameOnly(new XmlName(name));
             return result;

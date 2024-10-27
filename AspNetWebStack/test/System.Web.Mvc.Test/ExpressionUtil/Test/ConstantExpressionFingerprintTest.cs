@@ -16,7 +16,10 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type expectedType = typeof(object);
 
             // Act
-            ConstantExpressionFingerprint fingerprint = new ConstantExpressionFingerprint(expectedNodeType, expectedType);
+            ConstantExpressionFingerprint fingerprint = new ConstantExpressionFingerprint(
+                expectedNodeType,
+                expectedType
+            );
 
             // Assert
             Assert.Equal(expectedNodeType, fingerprint.NodeType);
@@ -31,8 +34,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(nodeType, type);
-            ConstantExpressionFingerprint fingerprint2 = new ConstantExpressionFingerprint(nodeType, type);
+            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(
+                nodeType,
+                type
+            );
+            ConstantExpressionFingerprint fingerprint2 = new ConstantExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.Equal(fingerprint1, fingerprint2);
@@ -47,8 +56,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(nodeType, type);
-            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(nodeType, type);
+            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(
+                nodeType,
+                type
+            );
+            DummyExpressionFingerprint fingerprint2 = new DummyExpressionFingerprint(
+                nodeType,
+                type
+            );
 
             // Assert
             Assert.NotEqual<ExpressionFingerprint>(fingerprint1, fingerprint2);
@@ -62,8 +77,14 @@ namespace System.Web.Mvc.ExpressionUtil.Test
             Type type = typeof(object);
 
             // Act
-            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(nodeType, type);
-            ConstantExpressionFingerprint fingerprint2 = new ConstantExpressionFingerprint(nodeType, typeof(string));
+            ConstantExpressionFingerprint fingerprint1 = new ConstantExpressionFingerprint(
+                nodeType,
+                type
+            );
+            ConstantExpressionFingerprint fingerprint2 = new ConstantExpressionFingerprint(
+                nodeType,
+                typeof(string)
+            );
 
             // Assert
             Assert.NotEqual(fingerprint1, fingerprint2);

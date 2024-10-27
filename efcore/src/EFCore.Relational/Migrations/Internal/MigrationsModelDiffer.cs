@@ -22,24 +22,34 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         typeof(DropIndexOperation),
         typeof(DropPrimaryKeyOperation),
         typeof(DropUniqueConstraintOperation),
-        typeof(DropCheckConstraintOperation)
+        typeof(DropCheckConstraintOperation),
     };
 
     private static readonly Type[] AlterOperationTypes =
     {
-        typeof(AddPrimaryKeyOperation), typeof(AddUniqueConstraintOperation), typeof(AlterSequenceOperation)
+        typeof(AddPrimaryKeyOperation),
+        typeof(AddUniqueConstraintOperation),
+        typeof(AlterSequenceOperation),
     };
 
     private static readonly Type[] RenameOperationTypes =
     {
-        typeof(RenameColumnOperation), typeof(RenameIndexOperation), typeof(RenameSequenceOperation)
+        typeof(RenameColumnOperation),
+        typeof(RenameIndexOperation),
+        typeof(RenameSequenceOperation),
     };
 
-    private static readonly Type[] ColumnOperationTypes = { typeof(AddColumnOperation), typeof(AlterColumnOperation) };
+    private static readonly Type[] ColumnOperationTypes =
+    {
+        typeof(AddColumnOperation),
+        typeof(AlterColumnOperation),
+    };
 
     private static readonly Type[] ConstraintOperationTypes =
     {
-        typeof(AddForeignKeyOperation), typeof(CreateIndexOperation), typeof(AddCheckConstraintOperation)
+        typeof(AddForeignKeyOperation),
+        typeof(CreateIndexOperation),
+        typeof(AddCheckConstraintOperation),
     };
 
     private Dictionary<ITable, IRowIdentityMap>? _sourceIdentityMaps;
@@ -56,7 +66,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         IMigrationsAnnotationProvider migrationsAnnotationProvider,
         IRelationalAnnotationProvider relationalAnnotationProvider,
         IRowIdentityMapFactory rowIdentityMapFactory,
-        CommandBatchPreparerDependencies commandBatchPreparerDependencies)
+        CommandBatchPreparerDependencies commandBatchPreparerDependencies
+    )
     {
         TypeMappingSource = typeMappingSource;
         MigrationsAnnotationProvider = migrationsAnnotationProvider;
@@ -111,8 +122,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool HasDifferences(IRelationalModel? source, IRelationalModel? target)
-        => Diff(source, target, new DiffContext()).Any();
+    public virtual bool HasDifferences(IRelationalModel? source, IRelationalModel? target) =>
+        Diff(source, target, new DiffContext()).Any();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -120,7 +131,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IReadOnlyList<MigrationOperation> GetDifferences(IRelationalModel? source, IRelationalModel? target)
+    public virtual IReadOnlyList<MigrationOperation> GetDifferences(
+        IRelationalModel? source,
+        IRelationalModel? target
+    )
     {
         var diffContext = new DiffContext();
         return Sort(Diff(source, target, diffContext), diffContext);
@@ -134,7 +148,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     /// </summary>
     protected virtual IReadOnlyList<MigrationOperation> Sort(
         IEnumerable<MigrationOperation> operations,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var dropForeignKeyOperations = new List<MigrationOperation>();
         var dropOperations = new List<MigrationOperation>();
@@ -171,7 +186,11 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             }
             else if (type == typeof(DropColumnOperation))
             {
-                if (string.IsNullOrWhiteSpace(diffContext.FindColumn((DropColumnOperation)operation)!.ComputedColumnSql))
+                if (
+                    string.IsNullOrWhiteSpace(
+                        diffContext.FindColumn((DropColumnOperation)operation)!.ComputedColumnSql
+                    )
+                )
                 {
                     dropColumnOperations.Add(operation);
                 }
@@ -243,8 +262,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 sourceDataOperations.Add(operation);
             }
-            else if (type == typeof(InsertDataOperation)
-                     || type == typeof(UpdateDataOperation))
+            else if (type == typeof(InsertDataOperation) || type == typeof(UpdateDataOperation))
             {
                 targetDataOperations.Add(operation);
             }
@@ -261,40 +279,54 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             foreach (var addForeignKeyOperation in createTableOperation.ForeignKeys)
             {
-                if (addForeignKeyOperation.Table == addForeignKeyOperation.PrincipalTable
-                    && addForeignKeyOperation.Schema == addForeignKeyOperation.PrincipalSchema)
+                if (
+                    addForeignKeyOperation.Table == addForeignKeyOperation.PrincipalTable
+                    && addForeignKeyOperation.Schema == addForeignKeyOperation.PrincipalSchema
+                )
                 {
                     continue;
                 }
 
-                var principalCreateTableOperation = createTableOperations.FirstOrDefault(
-                    o => o.Name == addForeignKeyOperation.PrincipalTable
-                        && o.Schema == addForeignKeyOperation.PrincipalSchema);
+                var principalCreateTableOperation = createTableOperations.FirstOrDefault(o =>
+                    o.Name == addForeignKeyOperation.PrincipalTable
+                    && o.Schema == addForeignKeyOperation.PrincipalSchema
+                );
                 if (principalCreateTableOperation != null)
                 {
-                    createTableGraph.AddEdge(principalCreateTableOperation, createTableOperation, addForeignKeyOperation);
+                    createTableGraph.AddEdge(
+                        principalCreateTableOperation,
+                        createTableOperation,
+                        addForeignKeyOperation
+                    );
                 }
             }
         }
 
-        createTableOperations = (List<CreateTableOperation>)createTableGraph.TopologicalSort(
-            (_, createTableOperation, cyclicAddForeignKeyOperations) =>
-            {
-                foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
-                {
-                    var removed = createTableOperation.ForeignKeys.Remove(cyclicAddForeignKeyOperation);
-                    if (removed)
+        createTableOperations =
+            (List<CreateTableOperation>)
+                createTableGraph.TopologicalSort(
+                    (_, createTableOperation, cyclicAddForeignKeyOperations) =>
                     {
-                        constraintOperations.Add(cyclicAddForeignKeyOperation);
-                    }
-                    else
-                    {
-                        Check.DebugFail("Operation removed twice: " + cyclicAddForeignKeyOperation);
-                    }
-                }
+                        foreach (var cyclicAddForeignKeyOperation in cyclicAddForeignKeyOperations)
+                        {
+                            var removed = createTableOperation.ForeignKeys.Remove(
+                                cyclicAddForeignKeyOperation
+                            );
+                            if (removed)
+                            {
+                                constraintOperations.Add(cyclicAddForeignKeyOperation);
+                            }
+                            else
+                            {
+                                Check.DebugFail(
+                                    "Operation removed twice: " + cyclicAddForeignKeyOperation
+                                );
+                            }
+                        }
 
-                return true;
-            });
+                        return true;
+                    }
+                );
 
         var dropTableGraph = new Multigraph<DropTableOperation, IForeignKeyConstraint>();
         dropTableGraph.AddVertices(dropTableOperations);
@@ -304,22 +336,33 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             foreach (var foreignKey in table.ForeignKeyConstraints)
             {
                 var principalDropTableOperation = diffContext.FindDrop(foreignKey.PrincipalTable);
-                if (principalDropTableOperation != null
-                    && principalDropTableOperation != dropTableOperation)
+                if (
+                    principalDropTableOperation != null
+                    && principalDropTableOperation != dropTableOperation
+                )
                 {
-                    dropTableGraph.AddEdge(dropTableOperation, principalDropTableOperation, foreignKey);
+                    dropTableGraph.AddEdge(
+                        dropTableOperation,
+                        principalDropTableOperation,
+                        foreignKey
+                    );
                 }
             }
         }
 
         var newDiffContext = new DiffContext();
-        dropTableOperations = (List<DropTableOperation>)dropTableGraph.TopologicalSort(
-            (_, _, foreignKeys) =>
-            {
-                dropForeignKeyOperations.AddRange(foreignKeys.SelectMany(c => Remove(c, newDiffContext)));
+        dropTableOperations =
+            (List<DropTableOperation>)
+                dropTableGraph.TopologicalSort(
+                    (_, _, foreignKeys) =>
+                    {
+                        dropForeignKeyOperations.AddRange(
+                            foreignKeys.SelectMany(c => Remove(c, newDiffContext))
+                        );
 
-                return true;
-            });
+                        return true;
+                    }
+                );
 
         return dropForeignKeyOperations
             .Concat(dropTableOperations)
@@ -356,7 +399,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IRelationalModel? source,
         IRelationalModel? target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var operations = Enumerable.Empty<MigrationOperation>();
         if (source != null && target != null)
@@ -364,12 +408,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             var sourceMigrationsAnnotations = source.GetAnnotations();
             var targetMigrationsAnnotations = target.GetAnnotations();
 
-            if (source.Collation != target.Collation
-                || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations))
+            if (
+                source.Collation != target.Collation
+                || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations)
+            )
             {
                 var alterDatabaseOperation = new AlterDatabaseOperation
                 {
-                    Collation = target.Collation, OldDatabase = { Collation = source.Collation }
+                    Collation = target.Collation,
+                    OldDatabase = { Collation = source.Collation },
                 };
 
                 alterDatabaseOperation.AddAnnotations(targetMigrationsAnnotations);
@@ -386,15 +433,16 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     Diff(
                         source.Tables.SelectMany(s => s.ForeignKeyConstraints),
                         target.Tables.SelectMany(t => t.ForeignKeyConstraints),
-                        diffContext));
+                        diffContext
+                    )
+                );
         }
         else
         {
-            operations = target != null
-                ? Add(target, diffContext)
-                : source != null
-                    ? Remove(source, diffContext)
-                    : Enumerable.Empty<MigrationOperation>();
+            operations =
+                target != null ? Add(target, diffContext)
+                : source != null ? Remove(source, diffContext)
+                : Enumerable.Empty<MigrationOperation>();
         }
 
         return operations.Concat(GetDataOperations(source, target, diffContext));
@@ -402,7 +450,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
     private IEnumerable<MigrationOperation> DiffAnnotations(
         IRelationalModel? source,
-        IRelationalModel? target)
+        IRelationalModel? target
+    )
     {
         var targetMigrationsAnnotations = target?.GetAnnotations().ToList();
         if (source == null)
@@ -419,11 +468,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         if (target == null)
         {
-            var sourceMigrationsAnnotationsForRemoved = MigrationsAnnotationProvider.ForRemove(source).ToList();
+            var sourceMigrationsAnnotationsForRemoved = MigrationsAnnotationProvider
+                .ForRemove(source)
+                .ToList();
             if (sourceMigrationsAnnotationsForRemoved.Count > 0)
             {
                 var alterDatabaseOperation = new AlterDatabaseOperation();
-                alterDatabaseOperation.OldDatabase.AddAnnotations(sourceMigrationsAnnotationsForRemoved);
+                alterDatabaseOperation.OldDatabase.AddAnnotations(
+                    sourceMigrationsAnnotationsForRemoved
+                );
                 yield return alterDatabaseOperation;
             }
 
@@ -446,12 +499,19 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Add(IRelationalModel target, DiffContext diffContext)
-        => DiffAnnotations(null, target)
+    protected virtual IEnumerable<MigrationOperation> Add(
+        IRelationalModel target,
+        DiffContext diffContext
+    ) =>
+        DiffAnnotations(null, target)
             .Concat(GetSchemas(target).SelectMany(t => Add(t, diffContext)))
             .Concat(target.Tables.SelectMany(t => Add(t, diffContext)))
             .Concat(target.Sequences.SelectMany(t => Add(t, diffContext)))
-            .Concat(target.Tables.SelectMany(t => t.ForeignKeyConstraints).SelectMany(k => Add(k, diffContext)));
+            .Concat(
+                target
+                    .Tables.SelectMany(t => t.ForeignKeyConstraints)
+                    .SelectMany(k => Add(k, diffContext))
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -459,8 +519,11 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(IRelationalModel source, DiffContext diffContext)
-        => DiffAnnotations(source, null)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        IRelationalModel source,
+        DiffContext diffContext
+    ) =>
+        DiffAnnotations(source, null)
             .Concat(source.Tables.SelectMany(t => Remove(t, diffContext)))
             .Concat(source.Sequences.SelectMany(t => Remove(t, diffContext)));
 
@@ -477,15 +540,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<string> source,
         IEnumerable<string> target,
-        DiffContext diffContext)
-        => DiffCollection(
-            source,
-            target,
-            diffContext,
-            Diff,
-            Add,
-            Remove,
-            (s, t, _) => s == t);
+        DiffContext diffContext
+    ) => DiffCollection(source, target, diffContext, Diff, Add, Remove, (s, t, _) => s == t);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -496,8 +552,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         string source,
         string target,
-        DiffContext diffContext)
-        => Enumerable.Empty<MigrationOperation>();
+        DiffContext diffContext
+    ) => Enumerable.Empty<MigrationOperation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -516,8 +572,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(string source, DiffContext diffContext)
-        => Enumerable.Empty<MigrationOperation>();
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        string source,
+        DiffContext diffContext
+    ) => Enumerable.Empty<MigrationOperation>();
 
     #endregion
 
@@ -532,30 +590,36 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<ITable> source,
         IEnumerable<ITable> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, _) => string.Equals(
-                    s.Schema,
-                    t.Schema,
-                    StringComparison.OrdinalIgnoreCase)
-                && string.Equals(
-                    s.Name,
-                    t.Name,
-                    StringComparison.OrdinalIgnoreCase),
-            (s, t, _) => string.Equals(
-                s.Name,
-                t.Name,
-                StringComparison.OrdinalIgnoreCase),
-            (s, t, _) => string.Equals(GetMainType(s).Name, GetMainType(t).Name, StringComparison.OrdinalIgnoreCase),
-            (s, t, _) => s.EntityTypeMappings.Any(
-                se => t.EntityTypeMappings.Any(
-                    te => string.Equals(se.TypeBase.Name, te.TypeBase.Name, StringComparison.OrdinalIgnoreCase))));
+            (s, t, _) =>
+                string.Equals(s.Schema, t.Schema, StringComparison.OrdinalIgnoreCase)
+                && string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase),
+            (s, t, _) => string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase),
+            (s, t, _) =>
+                string.Equals(
+                    GetMainType(s).Name,
+                    GetMainType(t).Name,
+                    StringComparison.OrdinalIgnoreCase
+                ),
+            (s, t, _) =>
+                s.EntityTypeMappings.Any(se =>
+                    t.EntityTypeMappings.Any(te =>
+                        string.Equals(
+                            se.TypeBase.Name,
+                            te.TypeBase.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                )
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -566,28 +630,25 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         ITable source,
         ITable target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
-        if (source.IsExcludedFromMigrations
-            || target.IsExcludedFromMigrations)
+        if (source.IsExcludedFromMigrations || target.IsExcludedFromMigrations)
         {
             // Populate column mapping
-            foreach (var _ in Diff(source.Columns, target.Columns, diffContext))
-            {
-            }
+            foreach (var _ in Diff(source.Columns, target.Columns, diffContext)) { }
 
             yield break;
         }
 
-        if (source.Schema != target.Schema
-            || source.Name != target.Name)
+        if (source.Schema != target.Schema || source.Name != target.Name)
         {
             var renameTableOperation = new RenameTableOperation
             {
                 Schema = source.Schema,
                 Name = source.Name,
                 NewSchema = target.Schema,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameTableOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -598,15 +659,17 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         var sourceMigrationsAnnotations = source.GetAnnotations();
         var targetMigrationsAnnotations = target.GetAnnotations();
 
-        if (source.Comment != target.Comment
-            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations))
+        if (
+            source.Comment != target.Comment
+            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations)
+        )
         {
             var alterTableOperation = new AlterTableOperation
             {
                 Name = target.Name,
                 Schema = target.Schema,
                 Comment = target.Comment,
-                OldTable = { Comment = source.Comment }
+                OldTable = { Comment = source.Comment },
             };
 
             alterTableOperation.AddAnnotations(targetMigrationsAnnotations);
@@ -632,9 +695,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Add(
-        ITable target,
-        DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Add(ITable target, DiffContext diffContext)
     {
         if (target.IsExcludedFromMigrations)
         {
@@ -645,25 +706,35 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = target.Schema,
             Name = target.Name,
-            Comment = target.Comment
+            Comment = target.Comment,
         };
         createTableOperation.AddAnnotations(target.GetAnnotations());
 
         createTableOperation.Columns.AddRange(
-            GetSortedColumns(target).SelectMany(p => Add(p, diffContext, inline: true)).Cast<AddColumnOperation>());
+            GetSortedColumns(target)
+                .SelectMany(p => Add(p, diffContext, inline: true))
+                .Cast<AddColumnOperation>()
+        );
 
         var primaryKey = target.PrimaryKey;
         if (primaryKey != null)
         {
-            createTableOperation.PrimaryKey = Add(primaryKey, diffContext).Cast<AddPrimaryKeyOperation>().Single();
+            createTableOperation.PrimaryKey = Add(primaryKey, diffContext)
+                .Cast<AddPrimaryKeyOperation>()
+                .Single();
         }
 
         createTableOperation.UniqueConstraints.AddRange(
-            target.UniqueConstraints.Where(c => !c.GetIsPrimaryKey()).SelectMany(c => Add(c, diffContext))
-                .Cast<AddUniqueConstraintOperation>());
+            target
+                .UniqueConstraints.Where(c => !c.GetIsPrimaryKey())
+                .SelectMany(c => Add(c, diffContext))
+                .Cast<AddUniqueConstraintOperation>()
+        );
         createTableOperation.CheckConstraints.AddRange(
-            target.CheckConstraints.SelectMany(c => Add(c, diffContext))
-                .Cast<AddCheckConstraintOperation>());
+            target
+                .CheckConstraints.SelectMany(c => Add(c, diffContext))
+                .Cast<AddCheckConstraintOperation>()
+        );
 
         diffContext.AddCreate(target, createTableOperation);
 
@@ -681,9 +752,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(
-        ITable source,
-        DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(ITable source, DiffContext diffContext)
     {
         if (source.IsExcludedFromMigrations)
         {
@@ -717,7 +786,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         // ideally we should inject JSON column in the place corresponding to the navigation that maps to it in the clr type
         var jsonColumns = table.Columns.Where(x => x is JsonColumn).OrderBy(x => x.Name);
 
-        return sortedColumns.Where(c => c.Order.HasValue).OrderBy(c => c.Order)
+        return sortedColumns
+            .Where(c => c.Order.HasValue)
+            .OrderBy(c => c.Order)
             .Concat(sortedColumns.Where(c => !c.Order.HasValue))
             .Concat(columns)
             .Concat(jsonColumns);
@@ -729,14 +800,14 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         var leastPriorityPrimaryKeyProperties = new List<IProperty>();
         var primaryKeyPropertyGroups = new Dictionary<PropertyInfo, IProperty>();
         var groups = new Dictionary<PropertyInfo, List<IProperty>>();
-        var unorderedGroups = new Dictionary<PropertyInfo, SortedDictionary<(int, string), IProperty>>();
+        var unorderedGroups =
+            new Dictionary<PropertyInfo, SortedDictionary<(int, string), IProperty>>();
         var types = new Dictionary<Type, SortedDictionary<int, PropertyInfo>>();
 
         foreach (var property in entityType.GetDeclaredProperties())
         {
             var clrProperty = property.PropertyInfo;
-            if (clrProperty == null
-                || clrProperty.IsIndexerProperty())
+            if (clrProperty == null || clrProperty.IsIndexerProperty())
             {
                 if (property.IsPrimaryKey())
                 {
@@ -745,7 +816,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     continue;
                 }
 
-                var foreignKey = property.GetContainingForeignKeys()
+                var foreignKey = property
+                    .GetContainingForeignKeys()
                     .FirstOrDefault(fk => fk.DependentToPrincipal?.PropertyInfo != null);
                 if (foreignKey == null)
                 {
@@ -766,13 +838,13 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     primaryKeyPropertyGroups.Add(clrProperty, property);
                 }
 
-                groups.Add(
-                    clrProperty, new List<IProperty> { property });
+                groups.Add(clrProperty, new List<IProperty> { property });
             }
 
             var clrType = clrProperty.DeclaringType!;
-            var index = clrType.GetTypeInfo().DeclaredProperties
-                .IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
+            var index = clrType
+                .GetTypeInfo()
+                .DeclaredProperties.IndexOf(clrProperty, PropertyInfoEqualityComparer.Instance);
 
             Check.DebugAssert(clrType != null, "clrType is null");
             types.GetOrAddNew(clrType)[index] = clrProperty;
@@ -787,7 +859,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         if (table.EntityTypeMappings.Any(m => m.TypeBase == entityType))
         {
-            foreach (var linkingForeignKey in table.GetReferencingRowInternalForeignKeys(entityType))
+            foreach (
+                var linkingForeignKey in table.GetReferencingRowInternalForeignKeys(entityType)
+            )
             {
                 // skip JSON entities, their properties are not mapped to anything
                 if (linkingForeignKey.DeclaringEntityType.IsMappedToJson())
@@ -795,10 +869,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     continue;
                 }
 
-                var linkingNavigationProperty = linkingForeignKey.PrincipalToDependent?.PropertyInfo;
-                var properties = GetSortedProperties(linkingForeignKey.DeclaringEntityType, table).ToList();
-                if (linkingNavigationProperty == null
-                    || (linkingForeignKey.PrincipalToDependent!.IsIndexerProperty()))
+                var linkingNavigationProperty = linkingForeignKey
+                    .PrincipalToDependent
+                    ?.PropertyInfo;
+                var properties = GetSortedProperties(linkingForeignKey.DeclaringEntityType, table)
+                    .ToList();
+                if (
+                    linkingNavigationProperty == null
+                    || (linkingForeignKey.PrincipalToDependent!.IsIndexerProperty())
+                )
                 {
                     leastPriorityProperties.AddRange(properties);
 
@@ -808,8 +887,12 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 groups.Add(linkingNavigationProperty, properties);
 
                 var clrType = linkingNavigationProperty.DeclaringType!;
-                var index = clrType.GetTypeInfo().DeclaredProperties
-                    .IndexOf(linkingNavigationProperty, PropertyInfoEqualityComparer.Instance);
+                var index = clrType
+                    .GetTypeInfo()
+                    .DeclaredProperties.IndexOf(
+                        linkingNavigationProperty,
+                        PropertyInfoEqualityComparer.Instance
+                    );
 
                 Check.DebugAssert(clrType != null, "clrType is null");
                 types.GetOrAddNew(clrType)[index] = linkingNavigationProperty;
@@ -845,23 +928,41 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         var sortedPropertyInfos = graph.TopologicalSort().SelectMany(e => types[e].Values).ToList();
 
         return sortedPropertyInfos
-            .Select(pi => primaryKeyPropertyGroups.ContainsKey(pi) ? primaryKeyPropertyGroups[pi] : null)
+            .Select(pi =>
+                primaryKeyPropertyGroups.ContainsKey(pi) ? primaryKeyPropertyGroups[pi] : null
+            )
             // ReSharper disable once RedundantEnumerableCastCall
-            .Where(e => e != null).Cast<IProperty>()
+            .Where(e => e != null)
+            .Cast<IProperty>()
             .Concat(leastPriorityPrimaryKeyProperties)
             .Concat(
                 sortedPropertyInfos
-                    .Where(pi => !primaryKeyPropertyGroups.ContainsKey(pi) && entityType.ClrType.IsAssignableFrom(pi.DeclaringType))
-                    .SelectMany(p => groups[p]))
+                    .Where(pi =>
+                        !primaryKeyPropertyGroups.ContainsKey(pi)
+                        && entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
+                    )
+                    .SelectMany(p => groups[p])
+            )
             .Concat(leastPriorityProperties)
-            .Concat(entityType.GetDirectlyDerivedTypes().SelectMany(et => GetSortedProperties(et, table)))
+            .Concat(
+                entityType
+                    .GetDirectlyDerivedTypes()
+                    .SelectMany(et => GetSortedProperties(et, table))
+            )
             .Concat(
                 sortedPropertyInfos
-                    .Where(pi => !primaryKeyPropertyGroups.ContainsKey(pi) && !entityType.ClrType.IsAssignableFrom(pi.DeclaringType))
-                    .SelectMany(p => groups[p]));
+                    .Where(pi =>
+                        !primaryKeyPropertyGroups.ContainsKey(pi)
+                        && !entityType.ClrType.IsAssignableFrom(pi.DeclaringType)
+                    )
+                    .SelectMany(p => groups[p])
+            );
     }
 
-    private static void AddNestedComplexProperties(ITypeBase typeBase, List<IProperty> leastPriorityProperties)
+    private static void AddNestedComplexProperties(
+        ITypeBase typeBase,
+        List<IProperty> leastPriorityProperties
+    )
     {
         foreach (var complexProperty in typeBase.GetDeclaredComplexProperties())
         {
@@ -876,17 +977,13 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
     private sealed class PropertyInfoEqualityComparer : IEqualityComparer<PropertyInfo>
     {
-        private PropertyInfoEqualityComparer()
-        {
-        }
+        private PropertyInfoEqualityComparer() { }
 
         public static readonly PropertyInfoEqualityComparer Instance = new();
 
-        public bool Equals(PropertyInfo? x, PropertyInfo? y)
-            => x.IsSameAs(y);
+        public bool Equals(PropertyInfo? x, PropertyInfo? y) => x.IsSameAs(y);
 
-        public int GetHashCode(PropertyInfo obj)
-            => throw new NotSupportedException();
+        public int GetHashCode(PropertyInfo obj) => throw new NotSupportedException();
     }
 
     #endregion
@@ -902,8 +999,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<IColumn> source,
         IEnumerable<IColumn> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
@@ -911,27 +1009,53 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             (t, c) => Add(t, c),
             Remove,
             (s, t, _) => string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase),
-            (s, t, c) => s.PropertyMappings.Any(
-                sm =>
-                    t.PropertyMappings.Any(
-                        tm =>
-                            string.Equals(sm.Property.Name, tm.Property.Name, StringComparison.OrdinalIgnoreCase)
-                            && EntityTypePathEquals(sm.Property.DeclaringType, tm.Property.DeclaringType, c))),
-            (s, t, _) => s.PropertyMappings.Any(
-                sm =>
-                    t.PropertyMappings.Any(
-                        tm =>
-                            string.Equals(sm.Property.Name, tm.Property.Name, StringComparison.OrdinalIgnoreCase))),
-            (s, t, c) => ColumnStructureEquals(s, t)
-                && s.PropertyMappings.Any(
-                    sm =>
-                        t.PropertyMappings.Any(
-                            tm =>
-                                string.Equals(sm.Property.Name, tm.Property.Name, StringComparison.OrdinalIgnoreCase)
-                                && EntityTypePathEquals(sm.Property.DeclaringType, tm.Property.DeclaringType, c))),
-            (s, t, _) => ColumnStructureEquals(s, t) && ColumnAnnotationsEqual(s, t, matchValues: true),
-            (s, t, _) => ColumnStructureEquals(s, t) && ColumnAnnotationsEqual(s, t, matchValues: false),
-            (s, t, _) => ColumnStructureEquals(s, t));
+            (s, t, c) =>
+                s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        && EntityTypePathEquals(
+                            sm.Property.DeclaringType,
+                            tm.Property.DeclaringType,
+                            c
+                        )
+                    )
+                ),
+            (s, t, _) =>
+                s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                    )
+                ),
+            (s, t, c) =>
+                ColumnStructureEquals(s, t)
+                && s.PropertyMappings.Any(sm =>
+                    t.PropertyMappings.Any(tm =>
+                        string.Equals(
+                            sm.Property.Name,
+                            tm.Property.Name,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        && EntityTypePathEquals(
+                            sm.Property.DeclaringType,
+                            tm.Property.DeclaringType,
+                            c
+                        )
+                    )
+                ),
+            (s, t, _) =>
+                ColumnStructureEquals(s, t) && ColumnAnnotationsEqual(s, t, matchValues: true),
+            (s, t, _) =>
+                ColumnStructureEquals(s, t) && ColumnAnnotationsEqual(s, t, matchValues: false),
+            (s, t, _) => ColumnStructureEquals(s, t)
+        );
 
     private static bool ColumnAnnotationsEqual(IColumn source, IColumn target, bool matchValues)
     {
@@ -1003,15 +1127,22 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             && source.DefaultValueSql == target.DefaultValueSql;
     }
 
-    private static bool EntityTypePathEquals(ITypeBase source, ITypeBase target, DiffContext diffContext)
+    private static bool EntityTypePathEquals(
+        ITypeBase source,
+        ITypeBase target,
+        DiffContext diffContext
+    )
     {
         var sourceTable = diffContext.FindTable(source);
         var targetTable = diffContext.FindTable(target);
 
-        if ((sourceTable == null
-                && targetTable == null)
-            || (sourceTable?.EntityTypeMappings.Count() == 1
-                && targetTable?.EntityTypeMappings.Count() == 1))
+        if (
+            (sourceTable == null && targetTable == null)
+            || (
+                sourceTable?.EntityTypeMappings.Count() == 1
+                && targetTable?.EntityTypeMappings.Count() == 1
+            )
+        )
         {
             return true;
         }
@@ -1021,26 +1152,34 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             return false;
         }
 
-        if (source is IEntityType sourceEntityType
-            && target is IEntityType targetEntityType)
+        if (source is IEntityType sourceEntityType && target is IEntityType targetEntityType)
         {
-            var nextSource = sourceTable?.GetRowInternalForeignKeys(sourceEntityType).FirstOrDefault()?.PrincipalEntityType;
-            var nextTarget = targetTable?.GetRowInternalForeignKeys(targetEntityType).FirstOrDefault()?.PrincipalEntityType;
+            var nextSource = sourceTable
+                ?.GetRowInternalForeignKeys(sourceEntityType)
+                .FirstOrDefault()
+                ?.PrincipalEntityType;
+            var nextTarget = targetTable
+                ?.GetRowInternalForeignKeys(targetEntityType)
+                .FirstOrDefault()
+                ?.PrincipalEntityType;
             return (nextSource == null && nextTarget == null)
-                || (nextSource != null
+                || (
+                    nextSource != null
                     && nextTarget != null
-                    && EntityTypePathEquals(nextSource, nextTarget, diffContext));
+                    && EntityTypePathEquals(nextSource, nextTarget, diffContext)
+                );
         }
 
-        if (source is IComplexType sourceComplexType
-            && target is IComplexType targetComplexType)
+        if (source is IComplexType sourceComplexType && target is IComplexType targetComplexType)
         {
             var nextSource = sourceComplexType.ComplexProperty.DeclaringType;
             var nextTarget = targetComplexType.ComplexProperty.DeclaringType;
             return (nextSource == null && nextTarget == null)
-                || (nextSource != null
+                || (
+                    nextSource != null
                     && nextTarget != null
-                    && EntityTypePathEquals(nextSource, nextTarget, diffContext));
+                    && EntityTypePathEquals(nextSource, nextTarget, diffContext)
+                );
         }
 
         return false;
@@ -1055,7 +1194,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IColumn source,
         IColumn target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var table = target.Table;
 
@@ -1066,7 +1206,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = table.Schema,
                 Table = table.Name,
                 Name = source.Name,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameColumnOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1090,19 +1230,25 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             targetDefault = null;
         }
 
-        if (isNullableChanged
+        if (
+            isNullableChanged
             || columnTypeChanged
             || source.DefaultValueSql != target.DefaultValueSql
             || source.ComputedColumnSql != target.ComputedColumnSql
             || source.IsStored != target.IsStored
             || sourceDefault?.GetType() != targetDefault?.GetType()
-            || (sourceDefault != DBNull.Value && !target.ProviderValueComparer.Equals(sourceDefault, targetDefault))
+            || (
+                sourceDefault != DBNull.Value
+                && !target.ProviderValueComparer.Equals(sourceDefault, targetDefault)
+            )
             || source.Comment != target.Comment
             || source.Collation != target.Collation
             || source.Order != target.Order
-            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations))
+            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations)
+        )
         {
-            var isDestructiveChange = isNullableChanged && source.IsNullable
+            var isDestructiveChange =
+                isNullableChanged && source.IsNullable
                 // TODO: Detect type narrowing
                 || columnTypeChanged;
 
@@ -1111,7 +1257,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = table.Schema,
                 Table = table.Name,
                 Name = target.Name,
-                IsDestructiveChange = isDestructiveChange
+                IsDestructiveChange = isDestructiveChange,
             };
 
             InitializeColumnHelper(alterColumnOperation, target, inline: !source.IsNullable);
@@ -1121,12 +1267,18 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 if (source is not JsonColumn && source.Order.HasValue)
                 {
-                    alterColumnOperation.OldColumn.AddAnnotation(RelationalAnnotationNames.ColumnOrder, source.Order.Value);
+                    alterColumnOperation.OldColumn.AddAnnotation(
+                        RelationalAnnotationNames.ColumnOrder,
+                        source.Order.Value
+                    );
                 }
 
                 if (target is not JsonColumn && target.Order.HasValue)
                 {
-                    alterColumnOperation.AddAnnotation(RelationalAnnotationNames.ColumnOrder, target.Order.Value);
+                    alterColumnOperation.AddAnnotation(
+                        RelationalAnnotationNames.ColumnOrder,
+                        target.Order.Value
+                    );
                 }
             }
 
@@ -1134,19 +1286,34 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         }
     }
 
-    private void InitializeColumnHelper(ColumnOperation columnOperation, IColumn column, bool inline)
+    private void InitializeColumnHelper(
+        ColumnOperation columnOperation,
+        IColumn column,
+        bool inline
+    )
     {
         if (column is JsonColumn jsonColumn)
         {
-            InitializeJsonColumn(columnOperation, jsonColumn, jsonColumn.IsNullable, column.GetAnnotations(), inline);
+            InitializeJsonColumn(
+                columnOperation,
+                jsonColumn,
+                jsonColumn.IsNullable,
+                column.GetAnnotations(),
+                inline
+            );
         }
         else
         {
             var columnTypeMapping = column.StoreTypeMapping;
 
             Initialize(
-                columnOperation, column, columnTypeMapping, column.IsNullable,
-                column.GetAnnotations(), inline);
+                columnOperation,
+                column,
+                columnTypeMapping,
+                column.IsNullable,
+                column.GetAnnotations(),
+                inline
+            );
         }
     }
 
@@ -1159,7 +1326,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Add(
         IColumn target,
         DiffContext diffContext,
-        bool inline = false)
+        bool inline = false
+    )
     {
         var table = target.Table;
 
@@ -1167,7 +1335,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = table.Schema,
             Table = table.Name,
-            Name = target.Name
+            Name = target.Name,
         };
 
         InitializeColumnHelper(operation, target, inline);
@@ -1188,7 +1356,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(IColumn source, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        IColumn source,
+        DiffContext diffContext
+    )
     {
         var table = source.Table;
 
@@ -1196,7 +1367,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Schema = table.Schema,
             Table = table.Name,
-            Name = source.Name
+            Name = source.Name,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1211,14 +1382,17 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         RelationalTypeMapping typeMapping,
         bool isNullable,
         IEnumerable<IAnnotation> migrationsAnnotations,
-        bool inline = false)
+        bool inline = false
+    )
     {
         if (column.DefaultValue == DBNull.Value)
         {
             throw new InvalidOperationException(
                 RelationalStrings.DefaultValueUnspecified(
                     column.Table.SchemaQualifiedName,
-                    column.Name));
+                    column.Name
+                )
+            );
         }
 
         if (column.DefaultValueSql?.Length == 0)
@@ -1226,7 +1400,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             throw new InvalidOperationException(
                 RelationalStrings.DefaultValueSqlUnspecified(
                     column.Table.SchemaQualifiedName,
-                    column.Name));
+                    column.Name
+                )
+            );
         }
 
         if (column.ComputedColumnSql?.Length == 0)
@@ -1234,14 +1410,16 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             throw new InvalidOperationException(
                 RelationalStrings.ComputedColumnSqlUnspecified(
                     column.Name,
-                    column.Table.SchemaQualifiedName));
+                    column.Table.SchemaQualifiedName
+                )
+            );
         }
 
         var property = column.PropertyMappings.First().Property;
         var valueConverter = GetValueConverter(property, typeMapping);
-        columnOperation.ClrType
-            = (valueConverter?.ProviderClrType
-                ?? typeMapping.ClrType).UnwrapNullableType();
+        columnOperation.ClrType = (
+            valueConverter?.ProviderClrType ?? typeMapping.ClrType
+        ).UnwrapNullableType();
 
         if (!column.TryGetDefaultValue(out var defaultValue))
         {
@@ -1256,10 +1434,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         columnOperation.IsFixedLength = column.IsFixedLength;
         columnOperation.IsRowVersion = column.IsRowVersion;
         columnOperation.IsNullable = isNullable;
-        columnOperation.DefaultValue = defaultValue
-            ?? (inline || isNullable
-                ? null
-                : GetDefaultValue(columnOperation.ClrType));
+        columnOperation.DefaultValue =
+            defaultValue
+            ?? (inline || isNullable ? null : GetDefaultValue(columnOperation.ClrType));
         columnOperation.DefaultValueSql = column.DefaultValueSql;
         columnOperation.ComputedColumnSql = column.ComputedColumnSql;
         columnOperation.IsStored = column.IsStored;
@@ -1273,7 +1450,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         JsonColumn jsonColumn,
         bool isNullable,
         IEnumerable<IAnnotation> migrationsAnnotations,
-        bool inline = false)
+        bool inline = false
+    )
     {
         columnOperation.ColumnType = jsonColumn.StoreType;
         columnOperation.IsNullable = isNullable;
@@ -1281,9 +1459,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         // TODO: flow this from type mapping
         // issue #28596
         columnOperation.ClrType = typeof(string);
-        columnOperation.DefaultValue = inline || isNullable
-            ? null
-            : "{}";
+        columnOperation.DefaultValue = inline || isNullable ? null : "{}";
 
         columnOperation.AddAnnotations(migrationsAnnotations);
     }
@@ -1301,19 +1477,22 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<IUniqueConstraint> source,
         IEnumerable<IUniqueConstraint> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, c) => s.Name == t.Name
-                && s.Columns.Select(p => p.Name).SequenceEqual(
-                    t.Columns.Select(p => c.FindSource(p)?.Name))
+            (s, t, c) =>
+                s.Name == t.Name
+                && s.Columns.Select(p => p.Name)
+                    .SequenceEqual(t.Columns.Select(p => c.FindSource(p)?.Name))
                 && s.GetIsPrimaryKey() == t.GetIsPrimaryKey()
-                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations()));
+                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1324,8 +1503,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IUniqueConstraint source,
         IUniqueConstraint target,
-        DiffContext diffContext)
-        => Enumerable.Empty<MigrationOperation>();
+        DiffContext diffContext
+    ) => Enumerable.Empty<MigrationOperation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1333,7 +1512,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Add(IUniqueConstraint target, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Add(
+        IUniqueConstraint target,
+        DiffContext diffContext
+    )
     {
         if (target.GetIsPrimaryKey())
         {
@@ -1353,7 +1535,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     /// </summary>
     protected virtual IEnumerable<MigrationOperation> Remove(
         IUniqueConstraint source,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var table = source.Table;
 
@@ -1364,7 +1547,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = table.Schema,
                 Table = table.Name,
-                Name = source.Name
+                Name = source.Name,
             };
         }
         else
@@ -1373,7 +1556,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = table.Schema,
                 Table = table.Name,
-                Name = source.Name
+                Name = source.Name,
             };
         }
 
@@ -1395,22 +1578,25 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<IForeignKeyConstraint> source,
         IEnumerable<IForeignKeyConstraint> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, context) => s.Name == t.Name
-                && s.Columns.Select(c => c.Name).SequenceEqual(
-                    t.Columns.Select(c => context.FindSource(c)?.Name))
+            (s, t, context) =>
+                s.Name == t.Name
+                && s.Columns.Select(c => c.Name)
+                    .SequenceEqual(t.Columns.Select(c => context.FindSource(c)?.Name))
                 && s.PrincipalTable == context.FindSource(t.PrincipalTable)
-                && s.PrincipalColumns.Select(c => c.Name).SequenceEqual(
-                    t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
+                && s.PrincipalColumns.Select(c => c.Name)
+                    .SequenceEqual(t.PrincipalColumns.Select(c => context.FindSource(c)?.Name))
                 && s.OnDeleteAction == t.OnDeleteAction
-                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations()));
+                && !HasDifferences(s.GetAnnotations(), t.GetAnnotations())
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1421,8 +1607,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IForeignKeyConstraint source,
         IForeignKeyConstraint target,
-        DiffContext diffContext)
-        => Enumerable.Empty<MigrationOperation>();
+        DiffContext diffContext
+    ) => Enumerable.Empty<MigrationOperation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1430,7 +1616,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Add(IForeignKeyConstraint target, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Add(
+        IForeignKeyConstraint target,
+        DiffContext diffContext
+    )
     {
         var targetTable = target.Table;
         if (targetTable.IsExcludedFromMigrations)
@@ -1457,7 +1646,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(IForeignKeyConstraint source, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        IForeignKeyConstraint source,
+        DiffContext diffContext
+    )
     {
         var sourceTable = source.Table;
         if (sourceTable.IsExcludedFromMigrations)
@@ -1472,7 +1664,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = sourceTable.Schema,
                 Table = sourceTable.Name,
-                Name = source.Name
+                Name = source.Name,
             };
             operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1493,28 +1685,40 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<ITableIndex> source,
         IEnumerable<ITableIndex> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, c) => string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
+            (s, t, c) =>
+                string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
                 && IndexStructureEquals(s, t, c),
-            (s, t, c) => IndexStructureEquals(s, t, c));
+            (s, t, c) => IndexStructureEquals(s, t, c)
+        );
 
-    private bool IndexStructureEquals(ITableIndex source, ITableIndex target, DiffContext diffContext)
-        => source.IsUnique == target.IsUnique
-            && ((source.IsDescending is null && target.IsDescending is null)
-                || (source.IsDescending is not null
-                    && target.IsDescending is not null
-                    && source.IsDescending.SequenceEqual(target.IsDescending)))
-            && source.Filter == target.Filter
-            && !HasDifferences(source.GetAnnotations(), target.GetAnnotations())
-            && source.Columns.Select(p => p.Name).SequenceEqual(
-                target.Columns.Select(p => diffContext.FindSource(p)?.Name));
+    private bool IndexStructureEquals(
+        ITableIndex source,
+        ITableIndex target,
+        DiffContext diffContext
+    ) =>
+        source.IsUnique == target.IsUnique
+        && (
+            (source.IsDescending is null && target.IsDescending is null)
+            || (
+                source.IsDescending is not null
+                && target.IsDescending is not null
+                && source.IsDescending.SequenceEqual(target.IsDescending)
+            )
+        )
+        && source.Filter == target.Filter
+        && !HasDifferences(source.GetAnnotations(), target.GetAnnotations())
+        && source
+            .Columns.Select(p => p.Name)
+            .SequenceEqual(target.Columns.Select(p => diffContext.FindSource(p)?.Name));
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1525,7 +1729,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         ITableIndex source,
         ITableIndex target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var targetTable = target.Table;
         var sourceName = source.Name;
@@ -1538,7 +1743,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 Schema = targetTable.Schema,
                 Table = targetTable.Name,
                 Name = sourceName,
-                NewName = targetName
+                NewName = targetName,
             };
 
             renameIndexOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1555,7 +1760,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     /// </summary>
     protected virtual IEnumerable<MigrationOperation> Add(
         ITableIndex target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         yield return CreateIndexOperation.CreateFrom(target);
     }
@@ -1566,7 +1772,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(ITableIndex source, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        ITableIndex source,
+        DiffContext diffContext
+    )
     {
         var sourceTable = source.Table;
 
@@ -1574,7 +1783,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Name = source.Name,
             Schema = sourceTable.Schema,
-            Table = sourceTable.Name
+            Table = sourceTable.Name,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1594,17 +1803,20 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<ICheckConstraint> source,
         IEnumerable<ICheckConstraint> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, c) => c.FindTable(s.EntityType) == c.FindSource(c.FindTable(t.EntityType))
+            (s, t, c) =>
+                c.FindTable(s.EntityType) == c.FindSource(c.FindTable(t.EntityType))
                 && string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
-                && string.Equals(s.Sql, t.Sql, StringComparison.OrdinalIgnoreCase));
+                && string.Equals(s.Sql, t.Sql, StringComparison.OrdinalIgnoreCase)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1615,8 +1827,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         ICheckConstraint source,
         ICheckConstraint target,
-        DiffContext diffContext)
-        => Enumerable.Empty<MigrationOperation>();
+        DiffContext diffContext
+    ) => Enumerable.Empty<MigrationOperation>();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1624,7 +1836,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Add(ICheckConstraint target, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Add(
+        ICheckConstraint target,
+        DiffContext diffContext
+    )
     {
         var operation = AddCheckConstraintOperation.CreateFrom(target);
         operation.AddAnnotations(RelationalAnnotationProvider.For(target, designTime: true));
@@ -1637,7 +1852,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(ICheckConstraint source, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        ICheckConstraint source,
+        DiffContext diffContext
+    )
     {
         var sourceEntityType = source.EntityType;
 
@@ -1645,7 +1863,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         {
             Name = source.Name!,
             Schema = sourceEntityType.GetSchema(),
-            Table = sourceEntityType.GetTableName()!
+            Table = sourceEntityType.GetTableName()!,
         };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
 
@@ -1665,19 +1883,23 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         IEnumerable<ISequence> source,
         IEnumerable<ISequence> target,
-        DiffContext diffContext)
-        => DiffCollection(
+        DiffContext diffContext
+    ) =>
+        DiffCollection(
             source,
             target,
             diffContext,
             Diff,
             Add,
             Remove,
-            (s, t, _) => string.Equals(s.Schema, t.Schema, StringComparison.OrdinalIgnoreCase)
+            (s, t, _) =>
+                string.Equals(s.Schema, t.Schema, StringComparison.OrdinalIgnoreCase)
                 && string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
                 && s.Type == t.Type,
-            (s, t, _) => string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
-                && s.Type == t.Type);
+            (s, t, _) =>
+                string.Equals(s.Name, t.Name, StringComparison.OrdinalIgnoreCase)
+                && s.Type == t.Type
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1688,17 +1910,17 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> Diff(
         ISequence source,
         ISequence target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
-        if (source.Schema != target.Schema
-            || source.Name != target.Name)
+        if (source.Schema != target.Schema || source.Name != target.Name)
         {
             var renameSequenceOperation = new RenameSequenceOperation
             {
                 Schema = source.Schema,
                 Name = source.Name,
                 NewSchema = target.Schema,
-                NewName = target.Name
+                NewName = target.Name,
             };
 
             renameSequenceOperation.AddAnnotations(MigrationsAnnotationProvider.ForRename(source));
@@ -1712,20 +1934,32 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 Schema = target.Schema,
                 Name = target.Name,
-                StartValue = target.StartValue
+                StartValue = target.StartValue,
             };
         }
 
-        var sourceMigrationsAnnotations = RelationalAnnotationProvider.For(source, designTime: true);        
-        var targetMigrationsAnnotations = RelationalAnnotationProvider.For(target, designTime: true);
+        var sourceMigrationsAnnotations = RelationalAnnotationProvider.For(
+            source,
+            designTime: true
+        );
+        var targetMigrationsAnnotations = RelationalAnnotationProvider.For(
+            target,
+            designTime: true
+        );
 
-        if (source.IncrementBy != target.IncrementBy
+        if (
+            source.IncrementBy != target.IncrementBy
             || source.MaxValue != target.MaxValue
             || source.MinValue != target.MinValue
             || source.IsCyclic != target.IsCyclic
-            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations))
+            || HasDifferences(sourceMigrationsAnnotations, targetMigrationsAnnotations)
+        )
         {
-            var alterSequenceOperation = new AlterSequenceOperation { Schema = target.Schema, Name = target.Name };
+            var alterSequenceOperation = new AlterSequenceOperation
+            {
+                Schema = target.Schema,
+                Name = target.Name,
+            };
             Initialize(alterSequenceOperation, target, targetMigrationsAnnotations);
 
             Initialize(alterSequenceOperation.OldSequence, source, sourceMigrationsAnnotations);
@@ -1747,10 +1981,14 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             Schema = target.Schema,
             Name = target.Name,
             ClrType = target.Type,
-            StartValue = target.StartValue
+            StartValue = target.StartValue,
         };
 
-        yield return Initialize(operation, target, RelationalAnnotationProvider.For(target, designTime: true));
+        yield return Initialize(
+            operation,
+            target,
+            RelationalAnnotationProvider.For(target, designTime: true)
+        );
     }
 
     /// <summary>
@@ -1759,7 +1997,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<MigrationOperation> Remove(ISequence source, DiffContext diffContext)
+    protected virtual IEnumerable<MigrationOperation> Remove(
+        ISequence source,
+        DiffContext diffContext
+    )
     {
         var operation = new DropSequenceOperation { Schema = source.Schema, Name = source.Name };
         operation.AddAnnotations(MigrationsAnnotationProvider.ForRemove(source));
@@ -1770,7 +2011,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     private static SequenceOperation Initialize(
         SequenceOperation sequenceOperation,
         ISequence sequence,
-        IEnumerable<IAnnotation> migrationsAnnotations)
+        IEnumerable<IAnnotation> migrationsAnnotations
+    )
     {
         sequenceOperation.IncrementBy = sequence.IncrementBy;
         sequenceOperation.MinValue = sequence.MinValue;
@@ -1794,7 +2036,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual void TrackData(
         IRelationalModel? source,
         IRelationalModel? target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         if (target == null)
         {
@@ -1804,7 +2047,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         if (_targetIdentityMaps == null)
         {
-            _targetIdentityMaps = new Dictionary<ITable, IRowIdentityMap>(TableBaseIdentityComparer.Instance);
+            _targetIdentityMaps = new Dictionary<ITable, IRowIdentityMap>(
+                TableBaseIdentityComparer.Instance
+            );
         }
         else
         {
@@ -1824,7 +2069,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
         if (_sourceIdentityMaps == null)
         {
-            _sourceIdentityMaps = new Dictionary<ITable, IRowIdentityMap>(TableBaseIdentityComparer.Instance);
+            _sourceIdentityMaps = new Dictionary<ITable, IRowIdentityMap>(
+                TableBaseIdentityComparer.Instance
+            );
         }
         else
         {
@@ -1837,9 +2084,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         }
     }
 
-    private void AddSeedData(IEntityType entityType, Dictionary<ITable, IRowIdentityMap> identityMaps, EntityState initialState)
+    private void AddSeedData(
+        IEntityType entityType,
+        Dictionary<ITable, IRowIdentityMap> identityMaps,
+        EntityState initialState
+    )
     {
-        var sensitiveLoggingEnabled = CommandBatchPreparerDependencies.LoggingOptions.IsSensitiveDataLoggingEnabled;
+        var sensitiveLoggingEnabled = CommandBatchPreparerDependencies
+            .LoggingOptions
+            .IsSensitiveDataLoggingEnabled;
 
 #pragma warning disable EF1001 // Internal EF Core API usage.
         foreach (var rawSeed in ((EntityType)entityType).GetRawSeedData())
@@ -1889,9 +2142,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     }
 
                     var valueConverter = columnMapping.TypeMapping.Converter;
-                    key[i] = valueConverter == null
-                        ? value
-                        : valueConverter.ConvertToProvider(value);
+                    key[i] =
+                        valueConverter == null ? value : valueConverter.ConvertToProvider(value);
                 }
 
                 if (!keyFound)
@@ -1909,21 +2161,30 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                 RelationalStrings.DuplicateSeedDataSensitive(
                                     entityType.DisplayName(),
                                     BuildValuesString(key),
-                                    table.SchemaQualifiedName));
+                                    table.SchemaQualifiedName
+                                )
+                            );
                         }
 
                         throw new InvalidOperationException(
                             RelationalStrings.DuplicateSeedData(
                                 entityType.DisplayName(),
-                                table.SchemaQualifiedName));
+                                table.SchemaQualifiedName
+                            )
+                        );
                     }
 
                     command = existingCommand;
                 }
                 else
                 {
-                    command = CommandBatchPreparerDependencies.ModificationCommandFactory.CreateNonTrackedModificationCommand(
-                        new NonTrackedModificationCommandParameters(table, sensitiveLoggingEnabled));
+                    command =
+                        CommandBatchPreparerDependencies.ModificationCommandFactory.CreateNonTrackedModificationCommand(
+                            new NonTrackedModificationCommandParameters(
+                                table,
+                                sensitiveLoggingEnabled
+                            )
+                        );
                     command.EntityState = initialState;
 
                     identityMap.Add(key, command);
@@ -1934,8 +2195,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     var property = columnMapping.Property;
                     var column = columnMapping.Column;
 
-                    if ((column.ComputedColumnSql != null)
-                        || property.ValueGenerated.HasFlag(ValueGenerated.OnUpdate))
+                    if (
+                        (column.ComputedColumnSql != null)
+                        || property.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
+                    )
                     {
                         continue;
                     }
@@ -1947,11 +2210,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         value = property.ClrType.GetDefaultValue();
                     }
 
-                    if (!hasValue
-                        || Equals(value, property.ClrType.GetDefaultValue()))
+                    if (!hasValue || Equals(value, property.ClrType.GetDefaultValue()))
                     {
-                        if (property.GetValueGeneratorFactory() != null
-                            && property == (property.DeclaringType as IEntityType)?.FindDiscriminatorProperty())
+                        if (
+                            property.GetValueGeneratorFactory() != null
+                            && property
+                                == (
+                                    property.DeclaringType as IEntityType
+                                )?.FindDiscriminatorProperty()
+                        )
                         {
                             value = entityType.GetDiscriminatorValue()!;
                         }
@@ -1962,9 +2229,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     }
 
                     var valueConverter = columnMapping.TypeMapping.Converter;
-                    value = valueConverter == null
-                        ? value
-                        : valueConverter.ConvertToProvider(value);
+                    value =
+                        valueConverter == null ? value : valueConverter.ConvertToProvider(value);
 
                     if (!writeValue)
                     {
@@ -1972,14 +2238,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         {
                             value = column.DefaultValue;
                         }
-                        else if (value == null
-                                 && !column.IsNullable)
+                        else if (value == null && !column.IsNullable)
                         {
                             value = column.ProviderClrType.GetDefaultValue();
                         }
                     }
 
-                    var existingColumnModification = command.ColumnModifications.FirstOrDefault(c => c.ColumnName == column.Name);
+                    var existingColumnModification = command.ColumnModifications.FirstOrDefault(c =>
+                        c.ColumnName == column.Name
+                    );
                     if (existingColumnModification != null)
                     {
                         if (!Equals(existingColumnModification.Value, value))
@@ -1992,30 +2259,47 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                                         BuildValuesString(key),
                                         table.SchemaQualifiedName,
                                         existingColumnModification.ColumnName,
-                                        Convert.ToString(existingColumnModification.Value, CultureInfo.InvariantCulture),
-                                        Convert.ToString(value, CultureInfo.InvariantCulture)));
+                                        Convert.ToString(
+                                            existingColumnModification.Value,
+                                            CultureInfo.InvariantCulture
+                                        ),
+                                        Convert.ToString(value, CultureInfo.InvariantCulture)
+                                    )
+                                );
                             }
 
                             throw new InvalidOperationException(
                                 RelationalStrings.ConflictingSeedValues(
                                     entityType.DisplayName(),
                                     table.SchemaQualifiedName,
-                                    existingColumnModification.ColumnName));
+                                    existingColumnModification.ColumnName
+                                )
+                            );
                         }
 
                         continue;
                     }
 
-                    writeValue = writeValue
+                    writeValue =
+                        writeValue
                         && initialState != EntityState.Deleted
                         && property.GetBeforeSaveBehavior() == PropertySaveBehavior.Save;
 
                     command.AddColumnModification(
                         new ColumnModificationParameters(
-                            column, originalValue: value, value, property, columnMapping.TypeMapping,
-                            read: false, write: writeValue,
-                            key: property.IsPrimaryKey(), condition: false,
-                            sensitiveLoggingEnabled, column.IsNullable));
+                            column,
+                            originalValue: value,
+                            value,
+                            property,
+                            columnMapping.TypeMapping,
+                            read: false,
+                            write: writeValue,
+                            key: property.IsPrimaryKey(),
+                            condition: false,
+                            sensitiveLoggingEnabled,
+                            column.IsNullable
+                        )
+                    );
                 }
             }
         }
@@ -2023,7 +2307,14 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         static (object?, bool) GetClrValue(IProperty property, object seed)
         {
 #pragma warning disable EF1001 // Internal EF Core API usage.
-            if (!property.TryGetMemberInfo(forMaterialization: false, forSet: false, out var memberInfo, out var _))
+            if (
+                !property.TryGetMemberInfo(
+                    forMaterialization: false,
+                    forSet: false,
+                    out var memberInfo,
+                    out var _
+                )
+            )
             {
                 return (null, false);
             }
@@ -2068,12 +2359,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual void DiffData(
         IRelationalModel? source,
         IRelationalModel? target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
-        if (source == null
+        if (
+            source == null
             || target == null
             || _sourceIdentityMaps == null
-            || _targetIdentityMaps == null)
+            || _targetIdentityMaps == null
+        )
         {
             return;
         }
@@ -2089,8 +2383,13 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 var targetKey = targetTable.PrimaryKey!;
                 var foundSourceTable = diffContext.FindSource(targetTable);
                 var sourceKey = foundSourceTable?.PrimaryKey;
-                if (sourceKey == null
-                    || !_sourceIdentityMaps.TryGetValue(foundSourceTable!, out var foundSourceIdentityMap))
+                if (
+                    sourceKey == null
+                    || !_sourceIdentityMaps.TryGetValue(
+                        foundSourceTable!,
+                        out var foundSourceIdentityMap
+                    )
+                )
                 {
                     tableMapping.Add(targetTable, null);
                     continue;
@@ -2101,17 +2400,18 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 {
                     var keyColumn = targetKey.Columns[i];
                     var sourceColumn = diffContext.FindSource(keyColumn);
-                    if (sourceColumn == null
+                    if (
+                        sourceColumn == null
                         || sourceKey.Columns[i] != sourceColumn
-                        || keyColumn.ProviderClrType != sourceColumn.ProviderClrType)
+                        || keyColumn.ProviderClrType != sourceColumn.ProviderClrType
+                    )
                     {
                         mappingFound = false;
                         break;
                     }
                 }
 
-                if (!mappingFound
-                    || targetKey.Columns.Count != sourceKey.Columns.Count)
+                if (!mappingFound || targetKey.Columns.Count != sourceKey.Columns.Count)
                 {
                     tableMapping.Add(targetTable, null);
                     continue;
@@ -2132,15 +2432,18 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             {
                 for (var i = 0; i < keyValues.Length; i++)
                 {
-                    var modification = targetRow.ColumnModifications.First(m => m.ColumnName == key.Columns[i].Name);
+                    var modification = targetRow.ColumnModifications.First(m =>
+                        m.ColumnName == key.Columns[i].Name
+                    );
                     keyValues[i] = modification.Value;
                 }
 
                 var sourceRow = sourceIdentityMap.FindCommand(keyValues);
                 if (sourceRow == null)
                 {
-                    if (sourceTable.IsExcludedFromMigrations
-                        || targetTable.IsExcludedFromMigrations)
+                    if (
+                        sourceTable.IsExcludedFromMigrations || targetTable.IsExcludedFromMigrations
+                    )
                     {
                         targetRow.EntityState = EntityState.Unchanged;
                     }
@@ -2148,8 +2451,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     continue;
                 }
 
-                if (sourceTable.IsExcludedFromMigrations
-                    || targetTable.IsExcludedFromMigrations)
+                if (sourceTable.IsExcludedFromMigrations || targetTable.IsExcludedFromMigrations)
                 {
                     targetRow.EntityState = EntityState.Unchanged;
                     sourceRow.EntityState = EntityState.Unchanged;
@@ -2169,7 +2471,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                 foreach (var targetColumnModification in targetRow.ColumnModifications)
                 {
                     var targetColumnBase = targetColumnModification.Column!;
-                    Check.DebugAssert(targetColumnBase is IColumn, "Non-IColumn columns not allowed");
+                    Check.DebugAssert(
+                        targetColumnBase is IColumn,
+                        "Non-IColumn columns not allowed"
+                    );
                     var targetColumn = (IColumn)targetColumnBase;
                     var targetMapping = targetColumn.PropertyMappings.First();
                     var targetProperty = targetMapping.Property;
@@ -2177,8 +2482,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     var sourceColumn = diffContext.FindSource(targetColumn);
                     if (sourceColumn == null)
                     {
-                        if (targetProperty.GetAfterSaveBehavior() != PropertySaveBehavior.Save
-                            && !targetProperty.ValueGenerated.HasFlag(ValueGenerated.OnUpdate))
+                        if (
+                            targetProperty.GetAfterSaveBehavior() != PropertySaveBehavior.Save
+                            && !targetProperty.ValueGenerated.HasFlag(ValueGenerated.OnUpdate)
+                        )
                         {
                             recreateRow = true;
                             break;
@@ -2188,7 +2495,9 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         continue;
                     }
 
-                    var sourceColumnModification = sourceRow.ColumnModifications.FirstOrDefault(m => m.ColumnName == sourceColumn.Name);
+                    var sourceColumnModification = sourceRow.ColumnModifications.FirstOrDefault(m =>
+                        m.ColumnName == sourceColumn.Name
+                    );
                     if (sourceColumnModification == null)
                     {
                         if (targetColumnModification.IsWrite)
@@ -2202,8 +2511,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     var sourceValue = sourceColumnModification.OriginalValue;
                     var targetValue = targetColumnModification.Value;
                     var comparer = targetColumn.ProviderValueComparer;
-                    if (sourceColumn.ProviderClrType == targetColumn.ProviderClrType
-                        && comparer.Equals(sourceValue, targetValue))
+                    if (
+                        sourceColumn.ProviderClrType == targetColumn.ProviderClrType
+                        && comparer.Equals(sourceValue, targetValue)
+                    )
                     {
                         unchangedColumns.Add(targetColumnModification);
                         continue;
@@ -2256,7 +2567,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     protected virtual IEnumerable<MigrationOperation> GetDataOperations(
         IRelationalModel? source,
         IRelationalModel? target,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         TrackData(source, target, diffContext);
 
@@ -2274,7 +2586,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
 
     private IEnumerable<MigrationOperation> GetDataOperations(
         bool forSource,
-        DiffContext diffContext)
+        DiffContext diffContext
+    )
     {
         var identityMaps = forSource ? _sourceIdentityMaps : _targetIdentityMaps;
         if (identityMaps == null)
@@ -2287,14 +2600,16 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
             yield break;
         }
 
-        var commands = identityMaps.Values
-            .SelectMany(m => m.Rows)
-            .Where(
-                r => r.EntityState is EntityState.Added or EntityState.Modified
-                    || (r.EntityState is EntityState.Deleted && diffContext.FindDrop(r.Table!) == null));
+        var commands = identityMaps
+            .Values.SelectMany(m => m.Rows)
+            .Where(r =>
+                r.EntityState is EntityState.Added or EntityState.Modified
+                || (r.EntityState is EntityState.Deleted && diffContext.FindDrop(r.Table!) == null)
+            );
 
-        var commandSets = new CommandBatchPreparer(CommandBatchPreparerDependencies)
-            .TopologicalSort(commands);
+        var commandSets = new CommandBatchPreparer(
+            CommandBatchPreparerDependencies
+        ).TopologicalSort(commands);
 
         foreach (var commandSet in commandSets)
         {
@@ -2306,16 +2621,23 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                     case EntityState.Added:
                         if (batchInsertOperation != null)
                         {
-                            if (batchInsertOperation.Table == command.TableName
+                            if (
+                                batchInsertOperation.Table == command.TableName
                                 && batchInsertOperation.Schema == command.Schema
                                 && batchInsertOperation.Columns.SequenceEqual(
-                                    command.ColumnModifications.Where(col => col.IsKey || col.IsWrite).Select(col => col.ColumnName)))
+                                    command
+                                        .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
+                                        .Select(col => col.ColumnName)
+                                )
+                            )
                             {
-                                batchInsertOperation.Values =
-                                    AddToMultidimensionalArray(
-                                        command.ColumnModifications.Where(col => col.IsKey || col.IsWrite).Select(col => col.Value)
-                                            .ToList(),
-                                        batchInsertOperation.Values);
+                                batchInsertOperation.Values = AddToMultidimensionalArray(
+                                    command
+                                        .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
+                                        .Select(col => col.Value)
+                                        .ToList(),
+                                    batchInsertOperation.Values
+                                );
                                 continue;
                             }
 
@@ -2332,10 +2654,16 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         {
                             Schema = command.Schema,
                             Table = command.TableName,
-                            Columns = command.ColumnModifications.Where(col => col.IsKey || col.IsWrite).Select(col => col.ColumnName)
+                            Columns = command
+                                .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
+                                .Select(col => col.ColumnName)
                                 .ToArray(),
                             Values = ToMultidimensionalArray(
-                                command.ColumnModifications.Where(col => col.IsKey || col.IsWrite).Select(col => col.Value).ToList())
+                                command
+                                    .ColumnModifications.Where(col => col.IsKey || col.IsWrite)
+                                    .Select(col => col.Value)
+                                    .ToList()
+                            ),
                         };
                         break;
                     case EntityState.Modified:
@@ -2355,13 +2683,27 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         {
                             Schema = command.Schema,
                             Table = command.TableName,
-                            KeyColumns = command.ColumnModifications.Where(col => col.IsKey).Select(col => col.ColumnName).ToArray(),
+                            KeyColumns = command
+                                .ColumnModifications.Where(col => col.IsKey)
+                                .Select(col => col.ColumnName)
+                                .ToArray(),
                             KeyValues = ToMultidimensionalArray(
-                                command.ColumnModifications.Where(col => col.IsKey).Select(col => col.Value).ToList()),
-                            Columns = command.ColumnModifications.Where(col => col.IsWrite).Select(col => col.ColumnName).ToArray(),
+                                command
+                                    .ColumnModifications.Where(col => col.IsKey)
+                                    .Select(col => col.Value)
+                                    .ToList()
+                            ),
+                            Columns = command
+                                .ColumnModifications.Where(col => col.IsWrite)
+                                .Select(col => col.ColumnName)
+                                .ToArray(),
                             Values = ToMultidimensionalArray(
-                                command.ColumnModifications.Where(col => col.IsWrite).Select(col => col.Value).ToList()),
-                            IsDestructiveChange = true
+                                command
+                                    .ColumnModifications.Where(col => col.IsWrite)
+                                    .Select(col => col.Value)
+                                    .ToList()
+                            ),
+                            IsDestructiveChange = true,
                         };
                         break;
                     case EntityState.Deleted:
@@ -2374,21 +2716,31 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
                         // There shouldn't be any deletes using the target model
                         Check.DebugAssert(forSource, "Delete using the target model");
 
-                        var keyColumns = command.ColumnModifications.Where(col => col.IsKey)
+                        var keyColumns = command
+                            .ColumnModifications.Where(col => col.IsKey)
                             .Select(c => (IColumn)c.Column!);
-                        var anyKeyColumnDropped = keyColumns.Any(c => diffContext.FindDrop(c) != null);
+                        var anyKeyColumnDropped = keyColumns.Any(c =>
+                            diffContext.FindDrop(c) != null
+                        );
 
                         yield return new DeleteDataOperation
                         {
                             Schema = command.Schema,
                             Table = command.TableName,
-                            KeyColumns = command.ColumnModifications.Where(col => col.IsKey).Select(col => col.ColumnName).ToArray(),
+                            KeyColumns = command
+                                .ColumnModifications.Where(col => col.IsKey)
+                                .Select(col => col.ColumnName)
+                                .ToArray(),
                             KeyColumnTypes = anyKeyColumnDropped
                                 ? keyColumns.Select(col => col.StoreType).ToArray()
                                 : null,
                             KeyValues = ToMultidimensionalArray(
-                                command.ColumnModifications.Where(col => col.IsKey).Select(col => col.Value).ToArray()),
-                            IsDestructiveChange = true
+                                command
+                                    .ColumnModifications.Where(col => col.IsKey)
+                                    .Select(col => col.Value)
+                                    .ToArray()
+                            ),
+                            IsDestructiveChange = true,
                         };
 
                         break;
@@ -2419,7 +2771,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         Func<T, T, DiffContext, IEnumerable<MigrationOperation>> diff,
         Func<T, DiffContext, IEnumerable<MigrationOperation>> add,
         Func<T, DiffContext, IEnumerable<MigrationOperation>> remove,
-        params Func<T, T, DiffContext, bool>[] predicates)
+        params Func<T, T, DiffContext, bool>[] predicates
+    )
         where T : notnull
     {
         var sourceList = sources.ToList();
@@ -2480,13 +2833,21 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual bool HasDifferences(IEnumerable<IAnnotation> source, IEnumerable<IAnnotation> target)
+    protected virtual bool HasDifferences(
+        IEnumerable<IAnnotation> source,
+        IEnumerable<IAnnotation> target
+    )
     {
         var unmatched = new List<IAnnotation>(target);
         foreach (var annotation in source)
         {
-            var index = unmatched.FindIndex(
-                a => a.Name == annotation.Name && StructuralComparisons.StructuralEqualityComparer.Equals(a.Value, annotation.Value));
+            var index = unmatched.FindIndex(a =>
+                a.Name == annotation.Name
+                && StructuralComparisons.StructuralEqualityComparer.Equals(
+                    a.Value,
+                    annotation.Value
+                )
+            );
             if (index == -1)
             {
                 return true;
@@ -2504,8 +2865,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual IEnumerable<string> GetSchemas(IRelationalModel model)
-        => model.Tables.Where(t => !t.IsExcludedFromMigrations).Select(t => t.Schema)
+    protected virtual IEnumerable<string> GetSchemas(IRelationalModel model) =>
+        model
+            .Tables.Where(t => !t.IsExcludedFromMigrations)
+            .Select(t => t.Schema)
             .Concat(model.Views.Where(t => t.ViewDefinitionSql != null).Select(s => s.Schema))
             .Concat(model.Sequences.Select(s => s.Schema))
             .Where(s => !string.IsNullOrEmpty(s))
@@ -2519,18 +2882,18 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual object? GetDefaultValue(Type type)
-        => type == typeof(string)
-            ? string.Empty
-            : type.IsArray
-                ? Array.CreateInstance(type.GetElementType()!, 0)
-                : type.UnwrapNullableType().GetDefaultValue();
+    protected virtual object? GetDefaultValue(Type type) =>
+        type == typeof(string) ? string.Empty
+        : type.IsArray ? Array.CreateInstance(type.GetElementType()!, 0)
+        : type.UnwrapNullableType().GetDefaultValue();
 
-    private static ValueConverter? GetValueConverter(IProperty property, RelationalTypeMapping? typeMapping = null)
-        => (property.FindRelationalTypeMapping() ?? typeMapping)?.Converter;
+    private static ValueConverter? GetValueConverter(
+        IProperty property,
+        RelationalTypeMapping? typeMapping = null
+    ) => (property.FindRelationalTypeMapping() ?? typeMapping)?.Converter;
 
-    private static IEntityType GetMainType(ITable table)
-        => (IEntityType)table.EntityTypeMappings.First(t => t.IsSharedTablePrincipal ?? true).TypeBase;
+    private static IEntityType GetMainType(ITable table) =>
+        (IEntityType)table.EntityTypeMappings.First(t => t.IsSharedTablePrincipal ?? true).TypeBase;
 
     private static object?[,] ToMultidimensionalArray(IReadOnlyList<object?> values)
     {
@@ -2543,12 +2906,18 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         return result;
     }
 
-    private static object?[,] AddToMultidimensionalArray(IReadOnlyList<object?> values, object?[,] array)
+    private static object?[,] AddToMultidimensionalArray(
+        IReadOnlyList<object?> values,
+        object?[,] array
+    )
     {
         var width = array.GetLength(0);
         var height = array.GetLength(1);
 
-        Check.DebugAssert(height == values.Count, $"height of {height} != values.Count of {values.Count}");
+        Check.DebugAssert(
+            height == values.Count,
+            $"height of {height} != values.Count of {values.Count}"
+        );
 
         var result = new object?[width + 1, height];
         for (var i = 0; i < width; i++)
@@ -2564,14 +2933,15 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         return result;
     }
 
-    private static string BuildValuesString(object?[] values)
-        => "{"
-            + string.Join(
-                ", ", values.Select(
-                    p => p == null
-                        ? "<null>"
-                        : Convert.ToString(p, CultureInfo.InvariantCulture)))
-            + "}";
+    private static string BuildValuesString(object?[] values) =>
+        "{"
+        + string.Join(
+            ", ",
+            values.Select(p =>
+                p == null ? "<null>" : Convert.ToString(p, CultureInfo.InvariantCulture)
+            )
+        )
+        + "}";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2581,23 +2951,25 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
     /// </summary>
     protected class DiffContext
     {
-        private readonly IDictionary<object, object> _targetToSource = new Dictionary<object, object>();
-        private readonly IDictionary<object, object> _sourceToTarget = new Dictionary<object, object>();
+        private readonly IDictionary<object, object> _targetToSource =
+            new Dictionary<object, object>();
+        private readonly IDictionary<object, object> _sourceToTarget =
+            new Dictionary<object, object>();
 
-        private readonly IDictionary<ITable, CreateTableOperation> _createTableOperations
-            = new Dictionary<ITable, CreateTableOperation>();
+        private readonly IDictionary<ITable, CreateTableOperation> _createTableOperations =
+            new Dictionary<ITable, CreateTableOperation>();
 
-        private readonly IDictionary<ITable, DropTableOperation> _dropTableOperations
-            = new Dictionary<ITable, DropTableOperation>();
+        private readonly IDictionary<ITable, DropTableOperation> _dropTableOperations =
+            new Dictionary<ITable, DropTableOperation>();
 
-        private readonly IDictionary<IColumn, DropColumnOperation> _dropColumnOperations
-            = new Dictionary<IColumn, DropColumnOperation>();
+        private readonly IDictionary<IColumn, DropColumnOperation> _dropColumnOperations =
+            new Dictionary<IColumn, DropColumnOperation>();
 
-        private readonly IDictionary<DropTableOperation, ITable> _removedTables
-            = new Dictionary<DropTableOperation, ITable>();
+        private readonly IDictionary<DropTableOperation, ITable> _removedTables =
+            new Dictionary<DropTableOperation, ITable>();
 
-        private readonly IDictionary<DropColumnOperation, IColumn> _removedColumns
-            = new Dictionary<DropColumnOperation, IColumn>();
+        private readonly IDictionary<DropColumnOperation, IColumn> _removedColumns =
+            new Dictionary<DropColumnOperation, IColumn>();
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2618,8 +2990,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual void AddCreate(ITable target, CreateTableOperation operation)
-            => _createTableOperations.Add(target, operation);
+        public virtual void AddCreate(ITable target, CreateTableOperation operation) =>
+            _createTableOperations.Add(target, operation);
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2651,8 +3023,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ITable? FindTable(ITypeBase typeBase)
-            => typeBase.GetTableMappings().FirstOrDefault()?.Table;
+        public virtual ITable? FindTable(ITypeBase typeBase) =>
+            typeBase.GetTableMappings().FirstOrDefault()?.Table;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2661,12 +3033,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual T? FindSource<T>(T? target)
-            where T : class
-            => target == null
-                ? null
-                : _targetToSource.TryGetValue(target, out var source)
-                    ? (T)source
-                    : null;
+            where T : class =>
+            target == null ? null
+            : _targetToSource.TryGetValue(target, out var source) ? (T)source
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2675,12 +3045,10 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
         public virtual T? FindTarget<T>(T? source)
-            where T : class
-            => source == null
-                ? null
-                : _sourceToTarget.TryGetValue(source, out var target)
-                    ? (T)target
-                    : null;
+            where T : class =>
+            source == null ? null
+            : _sourceToTarget.TryGetValue(source, out var target) ? (T)target
+            : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2688,10 +3056,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual CreateTableOperation? FindCreate(ITable target)
-            => _createTableOperations.TryGetValue(target, out var operation)
-                ? operation
-                : null;
+        public virtual CreateTableOperation? FindCreate(ITable target) =>
+            _createTableOperations.TryGetValue(target, out var operation) ? operation : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2699,10 +3065,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DropTableOperation? FindDrop(ITable source)
-            => _dropTableOperations.TryGetValue(source, out var operation)
-                ? operation
-                : null;
+        public virtual DropTableOperation? FindDrop(ITable source) =>
+            _dropTableOperations.TryGetValue(source, out var operation) ? operation : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2710,10 +3074,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual DropColumnOperation? FindDrop(IColumn source)
-            => _dropColumnOperations.TryGetValue(source, out var operation)
-                ? operation
-                : null;
+        public virtual DropColumnOperation? FindDrop(IColumn source) =>
+            _dropColumnOperations.TryGetValue(source, out var operation) ? operation : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2721,10 +3083,8 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual ITable? FindTable(DropTableOperation operation)
-            => _removedTables.TryGetValue(operation, out var source)
-                ? source
-                : null;
+        public virtual ITable? FindTable(DropTableOperation operation) =>
+            _removedTables.TryGetValue(operation, out var source) ? source : null;
 
         /// <summary>
         ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -2732,9 +3092,7 @@ public class MigrationsModelDiffer : IMigrationsModelDiffer
         ///     any release. You should only use it directly in your code with extreme caution and knowing that
         ///     doing so can result in application failures when updating to a new Entity Framework Core release.
         /// </summary>
-        public virtual IColumn? FindColumn(DropColumnOperation operation)
-            => _removedColumns.TryGetValue(operation, out var source)
-                ? source
-                : null;
+        public virtual IColumn? FindColumn(DropColumnOperation operation) =>
+            _removedColumns.TryGetValue(operation, out var source) ? source : null;
     }
 }

@@ -10,7 +10,7 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.AspNetCore.Analyzers.Infrastructure.EmbeddedSyntax;
 
 /// <summary>
-/// Root of the embedded language syntax hierarchy.  EmbeddedSyntaxNodes are very similar to 
+/// Root of the embedded language syntax hierarchy.  EmbeddedSyntaxNodes are very similar to
 /// Roslyn Red-Nodes in concept, though there are differences for ease of implementation.
 /// </summary>
 internal abstract class EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
@@ -41,8 +41,7 @@ internal abstract class EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
         return TextSpan.FromBounds(start, end);
     }
 
-    public TextSpan? GetFullSpan()
-        => _fullSpan ??= ComputeFullSpan();
+    public TextSpan? GetFullSpan() => _fullSpan ??= ComputeFullSpan();
 
     private TextSpan? ComputeFullSpan()
     {
@@ -175,8 +174,7 @@ internal abstract class EmbeddedSyntaxNode<TSyntaxKind, TSyntaxNode>
         }
     }
 
-    public Enumerator GetEnumerator()
-        => new(this);
+    public Enumerator GetEnumerator() => new(this);
 
     public struct Enumerator
     {

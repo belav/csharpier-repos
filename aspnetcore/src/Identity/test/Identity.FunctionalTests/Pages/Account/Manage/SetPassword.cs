@@ -18,11 +18,14 @@ public class SetPassword : DefaultUIPage
 
     public async Task<SetPassword> SetPasswordAsync(string newPassword)
     {
-        await Client.SendAsync(_setPasswordForm, new Dictionary<string, string>
-        {
-            ["Input_NewPassword"] = newPassword,
-            ["Input_ConfirmPassword"] = newPassword
-        });
+        await Client.SendAsync(
+            _setPasswordForm,
+            new Dictionary<string, string>
+            {
+                ["Input_NewPassword"] = newPassword,
+                ["Input_ConfirmPassword"] = newPassword,
+            }
+        );
 
         return this;
     }

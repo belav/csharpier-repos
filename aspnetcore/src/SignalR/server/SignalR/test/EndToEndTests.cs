@@ -13,8 +13,8 @@ using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Connections;
 using Microsoft.AspNetCore.Http.Connections.Client;
 using Microsoft.AspNetCore.Http.Connections.Client.Internal;
-using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
@@ -52,8 +52,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorStartingTransport";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorStartingTransport";
         }
 
         await using (var server = await StartServer<Startup>(expectedErrorsFilter: ExpectedErrors))
@@ -63,7 +63,15 @@ public class EndToEndTests : FunctionalTestBase
             // On Windows 7/2008R2 it should use ServerSentEvents transport to connect to the server.
 
             // The test logic lives in the TestTransportFactory and FakeTransport.
-            var connection = new HttpConnection(new HttpConnectionOptions { Url = new Uri(url), DefaultTransferFormat = TransferFormat.Text }, LoggerFactory, new TestTransportFactory());
+            var connection = new HttpConnection(
+                new HttpConnectionOptions
+                {
+                    Url = new Uri(url),
+                    DefaultTransferFormat = TransferFormat.Text,
+                },
+                LoggerFactory,
+                new TestTransportFactory()
+            );
             await connection.StartAsync().DefaultTimeout();
             await connection.DisposeAsync().DefaultTimeout();
         }
@@ -77,7 +85,15 @@ public class EndToEndTests : FunctionalTestBase
         await using (var server = await StartServer<Startup>())
         {
             var url = server.Url + "/echo";
-            var connection = new HttpConnection(new HttpConnectionOptions { Url = new Uri(url), Transports = transportType, DefaultTransferFormat = TransferFormat.Text }, LoggerFactory);
+            var connection = new HttpConnection(
+                new HttpConnectionOptions
+                {
+                    Url = new Uri(url),
+                    Transports = transportType,
+                    DefaultTransferFormat = TransferFormat.Text,
+                },
+                LoggerFactory
+            );
             await connection.StartAsync().DefaultTimeout();
             await connection.DisposeAsync().DefaultTimeout();
         }
@@ -101,7 +117,13 @@ public class EndToEndTests : FunctionalTestBase
 
                 var bytes = Encoding.UTF8.GetBytes(message);
                 logger.LogInformation("Sending {length} byte frame", bytes.Length);
-                await ws.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Binary, endOfMessage: true, CancellationToken.None).DefaultTimeout();
+                await ws.SendAsync(
+                        new ArraySegment<byte>(bytes),
+                        WebSocketMessageType.Binary,
+                        endOfMessage: true,
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
 
                 logger.LogInformation("Receiving frame");
                 var buffer = new ArraySegment<byte>(new byte[1024]);
@@ -111,7 +133,12 @@ public class EndToEndTests : FunctionalTestBase
                 Assert.Equal(bytes, buffer.Array.AsSpan(0, result.Count).ToArray());
 
                 logger.LogInformation("Closing socket");
-                await ws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None).DefaultTimeout();
+                await ws.CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "",
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
                 logger.LogInformation("Waiting for close");
                 result = await ws.ReceiveAsync(buffer, CancellationToken.None).DefaultTimeout();
                 Assert.Equal(WebSocketMessageType.Close, result.MessageType);
@@ -140,7 +167,13 @@ public class EndToEndTests : FunctionalTestBase
                 var bytes = Encoding.UTF8.GetBytes(message);
                 logger.LogInformation("Sending {length} byte frame", bytes.Length);
                 // We're sending a partial frame, we should still get the data
-                await ws.SendAsync(new ArraySegment<byte>(bytes), WebSocketMessageType.Binary, endOfMessage: false, CancellationToken.None).DefaultTimeout();
+                await ws.SendAsync(
+                        new ArraySegment<byte>(bytes),
+                        WebSocketMessageType.Binary,
+                        endOfMessage: false,
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
 
                 logger.LogInformation("Receiving frame");
                 var buffer = new ArraySegment<byte>(new byte[1024]);
@@ -150,7 +183,12 @@ public class EndToEndTests : FunctionalTestBase
                 Assert.Equal(bytes, buffer.Array.AsSpan(0, result.Count).ToArray());
 
                 logger.LogInformation("Closing socket");
-                await ws.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "", CancellationToken.None).DefaultTimeout();
+                await ws.CloseOutputAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "",
+                        CancellationToken.None
+                    )
+                    .DefaultTimeout();
                 logger.LogInformation("Waiting for close");
                 result = await ws.ReceiveAsync(buffer, CancellationToken.None).DefaultTimeout();
                 Assert.Equal(WebSocketMessageType.Close, result.MessageType);
@@ -170,17 +208,26 @@ public class EndToEndTests : FunctionalTestBase
             var url = server.Url + "/echo";
 
             var mockHttpHandler = new Mock<HttpMessageHandler>();
-            mockHttpHandler.Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+            mockHttpHandler
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>()
+                )
                 .Returns<HttpRequestMessage, CancellationToken>(
-                    (request, cancellationToken) => Task.FromException<HttpResponseMessage>(new InvalidOperationException("HTTP requests should not be sent.")));
+                    (request, cancellationToken) =>
+                        Task.FromException<HttpResponseMessage>(
+                            new InvalidOperationException("HTTP requests should not be sent.")
+                        )
+                );
 
             var httpOptions = new HttpConnectionOptions
             {
                 Url = new Uri(url),
                 Transports = HttpTransportType.WebSockets,
                 SkipNegotiation = true,
-                HttpMessageHandlerFactory = (httpMessageHandler) => mockHttpHandler.Object
+                HttpMessageHandlerFactory = (httpMessageHandler) => mockHttpHandler.Object,
             };
 
             var connection = new HttpConnection(httpOptions, LoggerFactory);
@@ -212,7 +259,9 @@ public class EndToEndTests : FunctionalTestBase
     [Theory]
     [InlineData(HttpTransportType.LongPolling)]
     [InlineData(HttpTransportType.ServerSentEvents)]
-    public async Task HttpConnectionThrowsIfSkipNegotiationSetAndTransportIsNotWebSockets(HttpTransportType transportType)
+    public async Task HttpConnectionThrowsIfSkipNegotiationSetAndTransportIsNotWebSockets(
+        HttpTransportType transportType
+    )
     {
         await using (var server = await StartServer<Startup>())
         {
@@ -220,25 +269,39 @@ public class EndToEndTests : FunctionalTestBase
             var url = server.Url + "/echo";
 
             var mockHttpHandler = new Mock<HttpMessageHandler>();
-            mockHttpHandler.Protected()
-                .Setup<Task<HttpResponseMessage>>("SendAsync", ItExpr.IsAny<HttpRequestMessage>(), ItExpr.IsAny<CancellationToken>())
+            mockHttpHandler
+                .Protected()
+                .Setup<Task<HttpResponseMessage>>(
+                    "SendAsync",
+                    ItExpr.IsAny<HttpRequestMessage>(),
+                    ItExpr.IsAny<CancellationToken>()
+                )
                 .Returns<HttpRequestMessage, CancellationToken>(
-                    (request, cancellationToken) => Task.FromException<HttpResponseMessage>(new InvalidOperationException("HTTP requests should not be sent.")));
+                    (request, cancellationToken) =>
+                        Task.FromException<HttpResponseMessage>(
+                            new InvalidOperationException("HTTP requests should not be sent.")
+                        )
+                );
 
             var httpOptions = new HttpConnectionOptions
             {
                 Url = new Uri(url),
                 Transports = transportType,
                 SkipNegotiation = true,
-                HttpMessageHandlerFactory = (httpMessageHandler) => mockHttpHandler.Object
+                HttpMessageHandlerFactory = (httpMessageHandler) => mockHttpHandler.Object,
             };
 
             var connection = new HttpConnection(httpOptions, LoggerFactory);
 
             try
             {
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => connection.StartAsync().DefaultTimeout());
-                Assert.Equal("Negotiation can only be skipped when using the WebSocket transport directly.", exception.Message);
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+                    () => connection.StartAsync().DefaultTimeout()
+                );
+                Assert.Equal(
+                    "Negotiation can only be skipped when using the WebSocket transport directly.",
+                    exception.Message
+                );
             }
             catch (Exception ex)
             {
@@ -255,7 +318,10 @@ public class EndToEndTests : FunctionalTestBase
     [Theory]
     [MemberData(nameof(TransportTypesAndTransferFormats))]
     [LogLevel(LogLevel.Trace)]
-    public async Task ConnectionCanSendAndReceiveMessages(HttpTransportType transportType, TransferFormat requestedTransferFormat)
+    public async Task ConnectionCanSendAndReceiveMessages(
+        HttpTransportType transportType,
+        TransferFormat requestedTransferFormat
+    )
     {
         await using (var server = await StartServer<Startup>())
         {
@@ -264,7 +330,15 @@ public class EndToEndTests : FunctionalTestBase
             const string message = "Major Key";
 
             var url = server.Url + "/echo";
-            var connection = new HttpConnection(new HttpConnectionOptions { Url = new Uri(url), Transports = transportType, DefaultTransferFormat = requestedTransferFormat }, LoggerFactory);
+            var connection = new HttpConnection(
+                new HttpConnectionOptions
+                {
+                    Url = new Uri(url),
+                    Transports = transportType,
+                    DefaultTransferFormat = requestedTransferFormat,
+                },
+                LoggerFactory
+            );
             try
             {
                 logger.LogInformation("Starting connection to {url}", url);
@@ -290,7 +364,12 @@ public class EndToEndTests : FunctionalTestBase
                 logger.LogInformation("Sent message");
 
                 logger.LogInformation("Receiving message");
-                Assert.Equal(message, Encoding.UTF8.GetString(await connection.Transport.Input.ReadAsync(bytes.Length).DefaultTimeout()));
+                Assert.Equal(
+                    message,
+                    Encoding.UTF8.GetString(
+                        await connection.Transport.Input.ReadAsync(bytes.Length).DefaultTimeout()
+                    )
+                );
                 logger.LogInformation("Completed receive");
             }
             catch (Exception ex)
@@ -312,7 +391,9 @@ public class EndToEndTests : FunctionalTestBase
     [InlineData(5 * 4096)]
     [InlineData(1000 * 4096 + 32)]
     [LogLevel(LogLevel.Trace)]
-    public async Task ConnectionCanSendAndReceiveDifferentMessageSizesWebSocketsTransport(int length)
+    public async Task ConnectionCanSendAndReceiveDifferentMessageSizesWebSocketsTransport(
+        int length
+    )
     {
         var message = new string('A', length);
         await using (var server = await StartServer<Startup>())
@@ -320,7 +401,11 @@ public class EndToEndTests : FunctionalTestBase
             var logger = LoggerFactory.CreateLogger<EndToEndTests>();
 
             var url = server.Url + "/echo";
-            var connection = new HttpConnection(new Uri(url), HttpTransportType.WebSockets, LoggerFactory);
+            var connection = new HttpConnection(
+                new Uri(url),
+                HttpTransportType.WebSockets,
+                LoggerFactory
+            );
 
             try
             {
@@ -341,7 +426,9 @@ public class EndToEndTests : FunctionalTestBase
                 {
                     logger.LogInformation("Receiving message");
                     // Big timeout here because it can take a while to receive all the bytes
-                    var receivedData = await connection.Transport.Input.ReadAsync(bytes.Length).DefaultTimeout();
+                    var receivedData = await connection
+                        .Transport.Input.ReadAsync(bytes.Length)
+                        .DefaultTimeout();
                     Assert.Equal(message, Encoding.UTF8.GetString(receivedData));
                     logger.LogInformation("Completed receive");
                 }
@@ -375,8 +462,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorWithNegotiation";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorWithNegotiation";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -384,9 +471,15 @@ public class EndToEndTests : FunctionalTestBase
             var logger = LoggerFactory.CreateLogger<EndToEndTests>();
 
             var url = server.Url + "/auth";
-            var connection = new HttpConnection(new Uri(url), HttpTransportType.WebSockets, LoggerFactory);
+            var connection = new HttpConnection(
+                new Uri(url),
+                HttpTransportType.WebSockets,
+                LoggerFactory
+            );
 
-            var exception = await Assert.ThrowsAsync<HttpRequestException>(() => connection.StartAsync().DefaultTimeout());
+            var exception = await Assert.ThrowsAsync<HttpRequestException>(
+                () => connection.StartAsync().DefaultTimeout()
+            );
 
             Assert.Contains("401", exception.Message);
         }
@@ -399,8 +492,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorStartingTransport";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorStartingTransport";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -412,12 +505,14 @@ public class EndToEndTests : FunctionalTestBase
             {
                 Url = new Uri(url),
                 Transports = HttpTransportType.WebSockets,
-                SkipNegotiation = true
+                SkipNegotiation = true,
             };
 
             var connection = new HttpConnection(options, LoggerFactory);
 
-            await Assert.ThrowsAsync<WebSocketException>(() => connection.StartAsync().DefaultTimeout());
+            await Assert.ThrowsAsync<WebSocketException>(
+                () => connection.StartAsync().DefaultTimeout()
+            );
         }
     }
 
@@ -429,8 +524,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorWithNegotiation";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorWithNegotiation";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -448,7 +543,10 @@ public class EndToEndTests : FunctionalTestBase
             }
             catch (Exception ex)
             {
-                Assert.Equal("Response status code does not indicate success: 401 (Unauthorized).", ex.Message);
+                Assert.Equal(
+                    "Response status code does not indicate success: 401 (Unauthorized).",
+                    ex.Message
+                );
             }
             finally
             {
@@ -465,8 +563,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorWithNegotiation";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorWithNegotiation";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -491,7 +589,8 @@ public class EndToEndTests : FunctionalTestBase
                     Transports = HttpTransportType.ServerSentEvents,
                     DefaultTransferFormat = TransferFormat.Text,
                 },
-                LoggerFactory);
+                LoggerFactory
+            );
 
             try
             {
@@ -528,7 +627,9 @@ public class EndToEndTests : FunctionalTestBase
     {
         try
         {
-            await ServerClosesConnectionWithErrorIfHubCannotBeCreated(HttpTransportType.LongPolling);
+            await ServerClosesConnectionWithErrorIfHubCannotBeCreated(
+                HttpTransportType.LongPolling
+            );
             Assert.True(false, "Expected error was not thrown.");
         }
         catch
@@ -537,7 +638,9 @@ public class EndToEndTests : FunctionalTestBase
         }
     }
 
-    private async Task ServerClosesConnectionWithErrorIfHubCannotBeCreated(HttpTransportType transportType)
+    private async Task ServerClosesConnectionWithErrorIfHubCannotBeCreated(
+        HttpTransportType transportType
+    )
     {
         await using (var server = await StartServer<Startup>())
         {
@@ -545,9 +648,9 @@ public class EndToEndTests : FunctionalTestBase
 
             var url = server.Url + "/uncreatable";
             var connection = new HubConnectionBuilder()
-                    .WithLoggerFactory(LoggerFactory)
-                    .WithUrl(url, transportType)
-                    .Build();
+                .WithLoggerFactory(LoggerFactory)
+                .WithUrl(url, transportType)
+                .Build();
             try
             {
                 var closeTcs = new TaskCompletionSource();
@@ -582,7 +685,12 @@ public class EndToEndTests : FunctionalTestBase
             }
             catch (Exception ex)
             {
-                logger.LogError(ex, "Test threw {exceptionType}: {message}", ex.GetType(), ex.Message);
+                logger.LogError(
+                    ex,
+                    "Test threw {exceptionType}: {message}",
+                    ex.GetType(),
+                    ex.Message
+                );
                 throw;
             }
             finally
@@ -600,8 +708,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorWithNegotiation";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorWithNegotiation";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -610,9 +718,9 @@ public class EndToEndTests : FunctionalTestBase
 
             var url = server.Url + "/authHub";
             var connection = new HubConnectionBuilder()
-                    .WithLoggerFactory(LoggerFactory)
-                    .WithUrl(url, HttpTransportType.LongPolling)
-                    .Build();
+                .WithLoggerFactory(LoggerFactory)
+                .WithUrl(url, HttpTransportType.LongPolling)
+                .Build();
 
             try
             {
@@ -622,7 +730,10 @@ public class EndToEndTests : FunctionalTestBase
             }
             catch (Exception ex)
             {
-                Assert.Equal("Response status code does not indicate success: 401 (Unauthorized).", ex.Message);
+                Assert.Equal(
+                    "Response status code does not indicate success: 401 (Unauthorized).",
+                    ex.Message
+                );
             }
             finally
             {
@@ -639,8 +750,8 @@ public class EndToEndTests : FunctionalTestBase
     {
         bool ExpectedErrors(WriteContext writeContext)
         {
-            return writeContext.LoggerName == typeof(HttpConnection).FullName &&
-                   writeContext.EventId.Name == "ErrorWithNegotiation";
+            return writeContext.LoggerName == typeof(HttpConnection).FullName
+                && writeContext.EventId.Name == "ErrorWithNegotiation";
         }
 
         await using (var server = await StartServer<Startup>(ExpectedErrors))
@@ -658,12 +769,16 @@ public class EndToEndTests : FunctionalTestBase
 
             var url = server.Url + "/authHub";
             var connection = new HubConnectionBuilder()
-                    .WithLoggerFactory(LoggerFactory)
-                    .WithUrl(url, HttpTransportType.LongPolling, o =>
+                .WithLoggerFactory(LoggerFactory)
+                .WithUrl(
+                    url,
+                    HttpTransportType.LongPolling,
+                    o =>
                     {
                         o.AccessTokenProvider = () => Task.FromResult(token);
-                    })
-                    .Build();
+                    }
+                )
+                .Build();
 
             try
             {
@@ -685,7 +800,10 @@ public class EndToEndTests : FunctionalTestBase
     {
         private ITransport _transport;
 
-        public ITransport CreateTransport(HttpTransportType availableServerTransports, bool useStatefulReconnect)
+        public ITransport CreateTransport(
+            HttpTransportType availableServerTransports,
+            bool useStatefulReconnect
+        )
         {
             if (_transport == null)
             {
@@ -716,7 +834,11 @@ public class EndToEndTests : FunctionalTestBase
             }
         }
 
-        public Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+        public Task StartAsync(
+            Uri url,
+            TransferFormat transferFormat,
+            CancellationToken cancellationToken = default
+        )
         {
             var options = ClientPipeOptions.DefaultOptions;
             var pair = DuplexPipe.CreateConnectionPair(options, options);

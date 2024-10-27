@@ -22,15 +22,26 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(true);
-            await TestServices.SolutionExplorer.CreateSolutionAsync(nameof(CSharpBuild), HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.AddProjectAsync("TestProj", WellKnownProjectTemplates.ConsoleApplication, LanguageNames.CSharp, HangMitigatingCancellationToken);
-            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(HangMitigatingCancellationToken);
+            await TestServices.SolutionExplorer.CreateSolutionAsync(
+                nameof(CSharpBuild),
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.AddProjectAsync(
+                "TestProj",
+                WellKnownProjectTemplates.ConsoleApplication,
+                LanguageNames.CSharp,
+                HangMitigatingCancellationToken
+            );
+            await TestServices.SolutionExplorer.RestoreNuGetPackagesAsync(
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public async Task BuildProject()
         {
-            var editorText = @"using System;
+            var editorText =
+                @"using System;
 
 class Program
 {
@@ -42,12 +53,19 @@ class Program
 
             await TestServices.Editor.SetTextAsync(editorText, HangMitigatingCancellationToken);
 
-            var buildSummary = await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(HangMitigatingCancellationToken);
-            Assert.Equal("========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========", buildSummary);
+            var buildSummary = await TestServices.SolutionExplorer.BuildSolutionAndWaitAsync(
+                HangMitigatingCancellationToken
+            );
+            Assert.Equal(
+                "========== Build: 1 succeeded, 0 failed, 0 up-to-date, 0 skipped ==========",
+                buildSummary
+            );
 
             await TestServices.ErrorList.ShowBuildErrorsAsync(HangMitigatingCancellationToken);
 
-            var errors = await TestServices.ErrorList.GetBuildErrorsAsync(HangMitigatingCancellationToken);
+            var errors = await TestServices.ErrorList.GetBuildErrorsAsync(
+                HangMitigatingCancellationToken
+            );
             AssertEx.EqualOrDiff(string.Empty, string.Join(Environment.NewLine, errors));
         }
 
@@ -58,17 +76,23 @@ class Program
 
             var pathToDevenv = Process.GetCurrentProcess().MainModule.FileName;
             Assert.Equal("devenv.exe", Path.GetFileName(pathToDevenv));
-            var (_, pathToSolution, _) = await TestServices.SolutionExplorer.GetSolutionInfoAsync(HangMitigatingCancellationToken);
+            var (_, pathToSolution, _) = await TestServices.SolutionExplorer.GetSolutionInfoAsync(
+                HangMitigatingCancellationToken
+            );
             var logFileName = pathToSolution + ".log";
 
             File.Delete(logFileName);
 
-            var commandLine = $"\"{pathToSolution}\" /Rebuild Debug /Out \"{logFileName}\" /rootsuffix RoslynDev /log";
+            var commandLine =
+                $"\"{pathToSolution}\" /Rebuild Debug /Out \"{logFileName}\" /rootsuffix RoslynDev /log";
 
             var process = Process.Start(pathToDevenv, commandLine);
             Assert.Equal(0, await process.WaitForExitAsync(HangMitigatingCancellationToken));
 
-            Assert.Contains("Rebuild All: 1 succeeded, 0 failed, 0 skipped", File.ReadAllText(logFileName));
+            Assert.Contains(
+                "Rebuild All: 1 succeeded, 0 failed, 0 skipped",
+                File.ReadAllText(logFileName)
+            );
 
             Assert.Equal(0, process.ExitCode);
         }

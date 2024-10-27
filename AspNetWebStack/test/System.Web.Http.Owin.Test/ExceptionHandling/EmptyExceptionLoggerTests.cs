@@ -28,7 +28,9 @@ namespace System.Web.Http.Owin.ExceptionHandling
 
         private static ExceptionLoggerContext CreateContext()
         {
-            return new ExceptionLoggerContext(new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer));
+            return new ExceptionLoggerContext(
+                new ExceptionContext(new Exception(), ExceptionCatchBlocks.HttpServer)
+            );
         }
 
         private static EmptyExceptionLogger CreateProductUnderTest()

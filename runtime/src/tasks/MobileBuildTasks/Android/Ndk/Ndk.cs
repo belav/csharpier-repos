@@ -8,7 +8,6 @@ using System.Linq;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
-
 namespace Microsoft.Android.Build.Ndk
 {
     public sealed class Ndk
@@ -48,7 +47,7 @@ namespace Microsoft.Android.Build.Ndk
         {
             string ret = "";
 
-            foreach(string path in probingPaths)
+            foreach (string path in probingPaths)
             {
                 if (Directory.Exists(path))
                 {
@@ -66,23 +65,62 @@ namespace Microsoft.Android.Build.Ndk
 
             string? ndkEnvPath = Environment.GetEnvironmentVariable("ANDROID_NDK_ROOT");
 
-            string[] fixedNdkPaths = (Utils.IsWindows()) ?
-                new string[]
-                {
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), "Android", "android-sdk", "ndk-bundle"),
-                    Path.Combine(Environment.GetFolderPath (Environment.SpecialFolder.ProgramFilesX86), "Android", "android-sdk-windows", "ndk-bundle"),
-                    !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ProgramW6432"))
-                        ? Path.Combine(Environment.GetEnvironmentVariable("ProgramW6432") ?? "", "Android", "android-sdk", "ndk-bundle")
-                        : Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "Android", "android-sdk", "ndk-bundle"),
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Android", "android-sdk", "ndk-bundle"),
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.CommonApplicationData), "Android", "android-sdk", "ndk-bundle"),
-                    @"C:\android-sdk-windows"
-                }
-                :
-                new string[]
-                {
-                    Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.UserProfile), "Library", "Android", "sdk")
-                };
+            string[] fixedNdkPaths =
+                (Utils.IsWindows())
+                    ? new string[]
+                    {
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                            "Android",
+                            "android-sdk",
+                            "ndk-bundle"
+                        ),
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86),
+                            "Android",
+                            "android-sdk-windows",
+                            "ndk-bundle"
+                        ),
+                        !string.IsNullOrEmpty(Environment.GetEnvironmentVariable("ProgramW6432"))
+                            ? Path.Combine(
+                                Environment.GetEnvironmentVariable("ProgramW6432") ?? "",
+                                "Android",
+                                "android-sdk",
+                                "ndk-bundle"
+                            )
+                            : Path.Combine(
+                                Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles),
+                                "Android",
+                                "android-sdk",
+                                "ndk-bundle"
+                            ),
+                        Path.Combine(
+                            Environment.GetFolderPath(
+                                Environment.SpecialFolder.LocalApplicationData
+                            ),
+                            "Android",
+                            "android-sdk",
+                            "ndk-bundle"
+                        ),
+                        Path.Combine(
+                            Environment.GetFolderPath(
+                                Environment.SpecialFolder.CommonApplicationData
+                            ),
+                            "Android",
+                            "android-sdk",
+                            "ndk-bundle"
+                        ),
+                        @"C:\android-sdk-windows",
+                    }
+                    : new string[]
+                    {
+                        Path.Combine(
+                            Environment.GetFolderPath(Environment.SpecialFolder.UserProfile),
+                            "Library",
+                            "Android",
+                            "sdk"
+                        ),
+                    };
 
             if (!string.IsNullOrEmpty(ndkEnvPath))
             {
@@ -102,11 +140,11 @@ namespace Microsoft.Android.Build.Ndk
                 throw new Exception("Could not find NDK version information");
             }
 
-            var splitChars = new char[] {'='};
+            var splitChars = new char[] { '=' };
             string? ver = null;
-            foreach(string l in File.ReadAllLines(sourcePropertiesPath))
+            foreach (string l in File.ReadAllLines(sourcePropertiesPath))
             {
-                string line = l.Trim ();
+                string line = l.Trim();
                 if (!line.StartsWith("Pkg.Revision", StringComparison.Ordinal))
                 {
                     continue;
@@ -118,7 +156,7 @@ namespace Microsoft.Android.Build.Ndk
                     throw new Exception($"Invalid NDK version format in '{sourcePropertiesPath}'");
                 }
 
-                ver = parts [1].Trim();
+                ver = parts[1].Trim();
             }
 
             return new NdkVersion(ver);

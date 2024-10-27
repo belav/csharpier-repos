@@ -5,12 +5,11 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class SpatialQueryRelationalFixture : SpatialQueryFixtureBase
 {
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
-    public TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
+    public TestSqlLoggerFactory TestSqlLoggerFactory =>
+        (TestSqlLoggerFactory)ServiceProvider.GetRequiredService<ILoggerFactory>();
 
-    protected override bool ShouldLogCategory(string logCategory)
-        => logCategory == DbLoggerCategory.Query.Name;
+    protected override bool ShouldLogCategory(string logCategory) =>
+        logCategory == DbLoggerCategory.Query.Name;
 }

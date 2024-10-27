@@ -23,14 +23,16 @@ public sealed class RouteGroupContext
     /// via <see cref="IEndpointConventionBuilder.Add(Action{EndpointBuilder})"/>. These should be applied in order when building every <see cref="RouteEndpoint"/>
     /// returned from <see cref="EndpointDataSource.GetGroupedEndpoints(RouteGroupContext)"/>.
     /// </summary>
-    public IReadOnlyList<Action<EndpointBuilder>> Conventions { get; init; } = Array.Empty<Action<EndpointBuilder>>();
+    public IReadOnlyList<Action<EndpointBuilder>> Conventions { get; init; } =
+        Array.Empty<Action<EndpointBuilder>>();
 
     /// <summary>
     /// Gets all conventions added to ancestor <see cref="RouteGroupBuilder"/> instances returned from <see cref="EndpointRouteBuilderExtensions.MapGroup(IEndpointRouteBuilder, RoutePattern)"/>
     /// via <see cref="IEndpointConventionBuilder.Add(Action{EndpointBuilder})"/>. These should be applied in LIFO order when building every <see cref="RouteEndpoint"/>
     /// returned from <see cref="EndpointDataSource.GetGroupedEndpoints(RouteGroupContext)"/>.
     /// </summary>
-    public IReadOnlyList<Action<EndpointBuilder>> FinallyConventions { get; init; } = Array.Empty<Action<EndpointBuilder>>();
+    public IReadOnlyList<Action<EndpointBuilder>> FinallyConventions { get; init; } =
+        Array.Empty<Action<EndpointBuilder>>();
 
     /// <summary>
     /// Gets the <see cref="IServiceProvider"/> instance used to access application services.
@@ -40,6 +42,7 @@ public sealed class RouteGroupContext
     private sealed class EmptyServiceProvider : IServiceProvider
     {
         public static EmptyServiceProvider Instance { get; } = new EmptyServiceProvider();
+
         public object? GetService(Type serviceType) => null;
     }
 }

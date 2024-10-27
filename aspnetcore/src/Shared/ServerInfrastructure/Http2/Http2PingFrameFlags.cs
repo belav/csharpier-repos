@@ -9,5 +9,5 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 internal enum Http2PingFrameFlags : byte
 {
     NONE = 0x0,
-    ACK = 0x1
+    ACK = 0x1,
 }

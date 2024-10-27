@@ -1,46 +1,59 @@
 //------------------------------------------------------------------------------
 // <copyright file="NamespaceDecl.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml.Xsl.XsltOld {
-    using Res = System.Xml.Utils.Res;
+namespace System.Xml.Xsl.XsltOld
+{
     using System;
     using System.Xml;
+    using Res = System.Xml.Utils.Res;
 
-    internal class NamespaceDecl {
-        private string        prefix;
-        private string        nsUri;
-        private string        prevDefaultNsUri;
+    internal class NamespaceDecl
+    {
+        private string prefix;
+        private string nsUri;
+        private string prevDefaultNsUri;
         private NamespaceDecl next;
 
-        internal string Prefix {
+        internal string Prefix
+        {
             get { return this.prefix; }
         }
 
-        internal string Uri {
+        internal string Uri
+        {
             get { return this.nsUri; }
         }
 
-        internal string PrevDefaultNsUri {
+        internal string PrevDefaultNsUri
+        {
             get { return this.prevDefaultNsUri; }
         }
 
-        internal NamespaceDecl Next {
+        internal NamespaceDecl Next
+        {
             get { return this.next; }
         }
 
-        internal NamespaceDecl(string prefix, string nsUri, string prevDefaultNsUri, NamespaceDecl next) {
+        internal NamespaceDecl(
+            string prefix,
+            string nsUri,
+            string prevDefaultNsUri,
+            NamespaceDecl next
+        )
+        {
             Init(prefix, nsUri, prevDefaultNsUri, next);
         }
 
-        internal void Init(string prefix, string nsUri, string prevDefaultNsUri, NamespaceDecl next) {
-            this.prefix           = prefix;
-            this.nsUri            = nsUri;
+        internal void Init(string prefix, string nsUri, string prevDefaultNsUri, NamespaceDecl next)
+        {
+            this.prefix = prefix;
+            this.nsUri = nsUri;
             this.prevDefaultNsUri = prevDefaultNsUri;
-            this.next             = next;
+            this.next = next;
         }
     }
 }

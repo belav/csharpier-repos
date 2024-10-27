@@ -18,10 +18,13 @@ namespace System.ComponentModel.Composition
             catalog.Dispose();
             var definition = ImportDefinitionFactory.Create();
 
-            ExceptionAssert.ThrowsDisposed(catalog, () =>
-            {
-                catalog.GetExports(definition);
-            });
+            ExceptionAssert.ThrowsDisposed(
+                catalog,
+                () =>
+                {
+                    catalog.GetExports(definition);
+                }
+            );
         }
 
         [Fact]
@@ -29,10 +32,13 @@ namespace System.ComponentModel.Composition
         {
             var catalog = CatalogFactory.Create();
 
-            Assert.Throws<ArgumentNullException>("definition", () =>
-            {
-                catalog.GetExports((ImportDefinition)null);
-            });
+            Assert.Throws<ArgumentNullException>(
+                "definition",
+                () =>
+                {
+                    catalog.GetExports((ImportDefinition)null);
+                }
+            );
         }
 
         [Fact]
@@ -62,7 +68,6 @@ namespace System.ComponentModel.Composition
                 {
                     finalizerCalled = true;
                 }
-
             });
 
             catalog.Dispose();
@@ -101,7 +106,12 @@ namespace System.ComponentModel.Composition
 
         private IQueryable<ComposablePartDefinition> GetPartDefinitions(ExportDefinition definition)
         {
-            var partDefinition = PartDefinitionFactory.Create(null, () => null, Enumerable.Empty<ImportDefinition>(), new ExportDefinition[] { definition });
+            var partDefinition = PartDefinitionFactory.Create(
+                null,
+                () => null,
+                Enumerable.Empty<ImportDefinition>(),
+                new ExportDefinition[] { definition }
+            );
 
             return new ComposablePartDefinition[] { partDefinition }.AsQueryable();
         }

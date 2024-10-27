@@ -14,6 +14,7 @@ namespace System.Security.Cryptography.X509Certificates
     {
         OtherName = 0,
         Rfc822Name = 1,
+
         // RFC 822: Standard for the format of ARPA Internet Text Messages.
         // That means "email", and an RFC 822 Name: "Email address"
         Email = Rfc822Name,
@@ -53,69 +54,80 @@ namespace System.Security.Cryptography.X509Certificates
 
         internal byte[] SerialNumber => certificate.TbsCertificate.SerialNumber.ToArray();
 
-        internal DateTime NotBefore => certificate.TbsCertificate.Validity.NotBefore.GetValue().UtcDateTime;
+        internal DateTime NotBefore =>
+            certificate.TbsCertificate.Validity.NotBefore.GetValue().UtcDateTime;
 
-        internal DateTime NotAfter => certificate.TbsCertificate.Validity.NotAfter.GetValue().UtcDateTime;
+        internal DateTime NotAfter =>
+            certificate.TbsCertificate.Validity.NotAfter.GetValue().UtcDateTime;
 
-        internal AlgorithmIdentifier PublicKeyAlgorithm => new AlgorithmIdentifier(certificate.TbsCertificate.SubjectPublicKeyInfo.Algorithm);
+        internal AlgorithmIdentifier PublicKeyAlgorithm =>
+            new AlgorithmIdentifier(certificate.TbsCertificate.SubjectPublicKeyInfo.Algorithm);
 
-        internal byte[] PublicKey => certificate.TbsCertificate.SubjectPublicKeyInfo.SubjectPublicKey.ToArray();
+        internal byte[] PublicKey =>
+            certificate.TbsCertificate.SubjectPublicKeyInfo.SubjectPublicKey.ToArray();
 
         internal byte[]? IssuerUniqueId => certificate.TbsCertificate.IssuerUniqueId?.ToArray();
 
         internal byte[]? SubjectUniqueId => certificate.TbsCertificate.SubjectUniqueId?.ToArray();
 
-        internal AlgorithmIdentifier SignatureAlgorithm => new AlgorithmIdentifier(certificate.SignatureAlgorithm);
+        internal AlgorithmIdentifier SignatureAlgorithm =>
+            new AlgorithmIdentifier(certificate.SignatureAlgorithm);
 
         internal byte[] SignatureValue => certificate.SignatureValue.ToArray();
 
         internal CertificateData(byte[] rawData)
         {
 #if DEBUG
-        try
-        {
-#endif
-            // Windows and Unix permit trailing data after the DER contents of the certificate, so we will allow
-            // it here, too.
-            AsnValueReader reader = new AsnValueReader(rawData, AsnEncodingRules.DER);
-            ReadOnlySpan<byte> encodedValue = reader.PeekEncodedValue();
-
-            CertificateAsn.Decode(ref reader, rawData, out certificate);
-            certificate.TbsCertificate.ValidateVersion();
-
-            // Use of == on Span is intentional. If the encodedValue is identical to the rawData, then we can use
-            // raw data as-is, meaning it had no trailing data. Otherwise, use the encodedValue.
-            RawData = encodedValue == rawData ? rawData : encodedValue.ToArray();
-
-            Issuer = new X500DistinguishedName(certificate.TbsCertificate.Issuer.Span);
-            Subject = new X500DistinguishedName(certificate.TbsCertificate.Subject.Span);
-            IssuerName = Issuer.Name;
-            SubjectName = Subject.Name;
-
-            AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
-            certificate.TbsCertificate.SubjectPublicKeyInfo.Encode(writer);
-            SubjectPublicKeyInfo = writer.Encode();
-
-            Extensions = new List<X509Extension>((certificate.TbsCertificate.Extensions?.Length).GetValueOrDefault());
-            if (certificate.TbsCertificate.Extensions != null)
+            try
             {
-                foreach (X509ExtensionAsn rawExtension in certificate.TbsCertificate.Extensions)
-                {
-                    X509Extension extension = new X509Extension(
-                        rawExtension.ExtnId,
-                        rawExtension.ExtnValue.Span,
-                        rawExtension.Critical);
+#endif
+                // Windows and Unix permit trailing data after the DER contents of the certificate, so we will allow
+                // it here, too.
+                AsnValueReader reader = new AsnValueReader(rawData, AsnEncodingRules.DER);
+                ReadOnlySpan<byte> encodedValue = reader.PeekEncodedValue();
 
-                    Extensions.Add(extension);
+                CertificateAsn.Decode(ref reader, rawData, out certificate);
+                certificate.TbsCertificate.ValidateVersion();
+
+                // Use of == on Span is intentional. If the encodedValue is identical to the rawData, then we can use
+                // raw data as-is, meaning it had no trailing data. Otherwise, use the encodedValue.
+                RawData = encodedValue == rawData ? rawData : encodedValue.ToArray();
+
+                Issuer = new X500DistinguishedName(certificate.TbsCertificate.Issuer.Span);
+                Subject = new X500DistinguishedName(certificate.TbsCertificate.Subject.Span);
+                IssuerName = Issuer.Name;
+                SubjectName = Subject.Name;
+
+                AsnWriter writer = new AsnWriter(AsnEncodingRules.DER);
+                certificate.TbsCertificate.SubjectPublicKeyInfo.Encode(writer);
+                SubjectPublicKeyInfo = writer.Encode();
+
+                Extensions = new List<X509Extension>(
+                    (certificate.TbsCertificate.Extensions?.Length).GetValueOrDefault()
+                );
+                if (certificate.TbsCertificate.Extensions != null)
+                {
+                    foreach (X509ExtensionAsn rawExtension in certificate.TbsCertificate.Extensions)
+                    {
+                        X509Extension extension = new X509Extension(
+                            rawExtension.ExtnId,
+                            rawExtension.ExtnValue.Span,
+                            rawExtension.Critical
+                        );
+
+                        Extensions.Add(extension);
+                    }
                 }
-            }
 #if DEBUG
-        }
-        catch (Exception e)
-        {
-            string pem = PemEncoding.WriteString(PemLabels.X509Certificate, rawData);
-            throw new CryptographicException($"Error in reading certificate:{Environment.NewLine}{pem}", e);
-        }
+            }
+            catch (Exception e)
+            {
+                string pem = PemEncoding.WriteString(PemLabels.X509Certificate, rawData);
+                throw new CryptographicException(
+                    $"Error in reading certificate:{Environment.NewLine}{pem}",
+                    e
+                );
+            }
 #endif
         }
 
@@ -176,7 +188,11 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         if (extension.Oid!.Value == extensionId)
                         {
-                            string? candidate = FindAltNameMatch(extension.RawData, matchType.Value, otherOid);
+                            string? candidate = FindAltNameMatch(
+                                extension.RawData,
+                                matchType.Value,
+                                otherOid
+                            );
 
                             if (candidate != null)
                             {
@@ -260,23 +276,30 @@ namespace System.Security.Cryptography.X509Certificates
             return ou ?? o ?? e ?? firstRdn;
         }
 
-        private static string? FindAltNameMatch(byte[] extensionBytes, GeneralNameType matchType, string? otherOid)
+        private static string? FindAltNameMatch(
+            byte[] extensionBytes,
+            GeneralNameType matchType,
+            string? otherOid
+        )
         {
             // If Other, have OID, else, no OID.
             Debug.Assert(
                 (otherOid == null) == (matchType != GeneralNameType.OtherName),
-                $"otherOid has incorrect nullarity for matchType {matchType}");
+                $"otherOid has incorrect nullarity for matchType {matchType}"
+            );
 
             Debug.Assert(
-                matchType == GeneralNameType.UniformResourceIdentifier ||
-                matchType == GeneralNameType.DnsName ||
-                matchType == GeneralNameType.Email ||
-                matchType == GeneralNameType.OtherName,
-                $"matchType ({matchType}) is not currently supported");
+                matchType == GeneralNameType.UniformResourceIdentifier
+                    || matchType == GeneralNameType.DnsName
+                    || matchType == GeneralNameType.Email
+                    || matchType == GeneralNameType.OtherName,
+                $"matchType ({matchType}) is not currently supported"
+            );
 
             Debug.Assert(
                 otherOid == null || otherOid == Oids.UserPrincipalName,
-                $"otherOid ({otherOid}) is not supported");
+                $"otherOid ({otherOid}) is not supported"
+            );
 
             try
             {
@@ -286,21 +309,31 @@ namespace System.Security.Cryptography.X509Certificates
 
                 while (sequenceReader.HasData)
                 {
-                    GeneralNameAsn.Decode(ref sequenceReader, extensionBytes, out GeneralNameAsn generalName);
+                    GeneralNameAsn.Decode(
+                        ref sequenceReader,
+                        extensionBytes,
+                        out GeneralNameAsn generalName
+                    );
 
                     switch (matchType)
                     {
                         case GeneralNameType.OtherName:
                             // If the OtherName OID didn't match, move to the next entry.
-                            if (generalName.OtherName.HasValue && generalName.OtherName.Value.TypeId == otherOid)
+                            if (
+                                generalName.OtherName.HasValue
+                                && generalName.OtherName.Value.TypeId == otherOid
+                            )
                             {
                                 // Currently only UPN is supported, which is a UTF8 string per
                                 // https://msdn.microsoft.com/en-us/library/ff842518.aspx
                                 AsnValueReader nameReader = new AsnValueReader(
                                     generalName.OtherName.Value.Value.Span,
-                                    AsnEncodingRules.DER);
+                                    AsnEncodingRules.DER
+                                );
 
-                                string udnName = nameReader.ReadCharacterString(UniversalTagNumber.UTF8String);
+                                string udnName = nameReader.ReadCharacterString(
+                                    UniversalTagNumber.UTF8String
+                                );
                                 nameReader.ThrowIfNotEmpty();
                                 return udnName;
                             }
@@ -338,7 +371,9 @@ namespace System.Security.Cryptography.X509Certificates
             return null;
         }
 
-        private static IEnumerable<KeyValuePair<string, string>> ReadReverseRdns(X500DistinguishedName name)
+        private static IEnumerable<KeyValuePair<string, string>> ReadReverseRdns(
+            X500DistinguishedName name
+        )
         {
             Stack<AsnReader> rdnReaders;
 

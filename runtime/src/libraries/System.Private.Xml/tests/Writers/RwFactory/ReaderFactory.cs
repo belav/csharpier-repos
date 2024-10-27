@@ -18,14 +18,14 @@ namespace System.Xml.RwFactoryWriterTests
             FileStream,
             MemoryStream,
             CoreReader,
-            CustomReader
+            CustomReader,
         };
 
         public enum ReadThru
         {
             XmlReader,
             TextReader,
-            Stream
+            Stream,
         };
 
         //The required objects that will be used during the variation processing.
@@ -90,7 +90,9 @@ namespace System.Xml.RwFactoryWriterTests
                     break;
 
                 case ReaderOverload.StringReader:
-                    StreamReader sr = new StreamReader(FilePathUtil.getStream(GetFile(TestFileName)));
+                    StreamReader sr = new StreamReader(
+                        FilePathUtil.getStream(GetFile(TestFileName))
+                    );
                     tempStr = sr.ReadToEnd();
                     sr.Dispose();
                     _textReader = new StringReader(tempStr);
@@ -103,7 +105,9 @@ namespace System.Xml.RwFactoryWriterTests
                     break;
 
                 case ReaderOverload.MemoryStream:
-                    StreamReader sr1 = new StreamReader(FilePathUtil.getStream(GetFile(TestFileName)));
+                    StreamReader sr1 = new StreamReader(
+                        FilePathUtil.getStream(GetFile(TestFileName))
+                    );
                     tempStr = sr1.ReadToEnd();
                     sr1.Dispose();
                     byte[] bits = _enc.GetBytes(tempStr);
@@ -113,13 +117,17 @@ namespace System.Xml.RwFactoryWriterTests
                 case ReaderOverload.CoreReader:
                     _underlyingSettings.DtdProcessing = DtdProcessing.Ignore;
                     _underlyingSettings.ConformanceLevel = _settings.ConformanceLevel;
-                    StringReader strr = new StringReader(new StreamReader(FilePathUtil.getStream(GetFile(TestFileName))).ReadToEnd());
-                    _underlyingReader = ReaderHelper.CreateReader(_overload.ToString(),
-                                                                strr,
-                                                                false,
-                                                                null,
-                                                                _underlyingSettings,
-                                                                (_settings.ConformanceLevel == ConformanceLevel.Fragment)); //should this be settings or underlyingSettings?
+                    StringReader strr = new StringReader(
+                        new StreamReader(FilePathUtil.getStream(GetFile(TestFileName))).ReadToEnd()
+                    );
+                    _underlyingReader = ReaderHelper.CreateReader(
+                        _overload.ToString(),
+                        strr,
+                        false,
+                        null,
+                        _underlyingSettings,
+                        (_settings.ConformanceLevel == ConformanceLevel.Fragment)
+                    ); //should this be settings or underlyingSettings?
                     CError.Compare(_underlyingReader != null, "ReaderHelper returned null Reader");
                     CreateReader(ReadThru.XmlReader);
                     break;
@@ -130,9 +138,15 @@ namespace System.Xml.RwFactoryWriterTests
                         return;
                     }
                     if (_settings.ConformanceLevel != ConformanceLevel.Fragment)
-                        _underlyingReader = new CustomReader(FilePathUtil.getStream(GetFile(TestFileName)), false);
+                        _underlyingReader = new CustomReader(
+                            FilePathUtil.getStream(GetFile(TestFileName)),
+                            false
+                        );
                     else
-                        _underlyingReader = new CustomReader(FilePathUtil.getStream(GetFile(TestFileName)), true);
+                        _underlyingReader = new CustomReader(
+                            FilePathUtil.getStream(GetFile(TestFileName)),
+                            true
+                        );
 
                     CError.Compare(_underlyingReader != null, "ReaderHelper returned null Reader");
                     CreateReader(ReadThru.XmlReader);
@@ -145,17 +159,29 @@ namespace System.Xml.RwFactoryWriterTests
             if (_underlyingReader != null)
                 CError.WriteLineIgnore("Type of Reader : " + _underlyingReader.GetType());
 
-            if (pstate == TestState.Pass) return;
-            CError.Compare(pstate, TestState.CreateSuccess, "Invalid State after Create: " + pstate);
+            if (pstate == TestState.Pass)
+                return;
+            CError.Compare(
+                pstate,
+                TestState.CreateSuccess,
+                "Invalid State after Create: " + pstate
+            );
 
             //By this time the factory Reader is already set up correctly. So we must go Consume it now.
-            CError.Compare(pstate != TestState.Pass && pstate == TestState.CreateSuccess, "Invalid state before Consuming Reader: " + pstate);
+            CError.Compare(
+                pstate != TestState.Pass && pstate == TestState.CreateSuccess,
+                "Invalid state before Consuming Reader: " + pstate
+            );
 
             //Call TestReader to Consume Reader;
             TestReader();
 
-            if (pstate == TestState.Pass) return;
-            CError.Compare(pstate != TestState.Pass && pstate == TestState.Consume, "Invalid state after Consuming Reader: " + pstate);
+            if (pstate == TestState.Pass)
+                return;
+            CError.Compare(
+                pstate != TestState.Pass && pstate == TestState.Consume,
+                "Invalid state after Consuming Reader: " + pstate
+            );
         }
 
         protected void TestReader()
@@ -197,10 +223,18 @@ namespace System.Xml.RwFactoryWriterTests
 
             CError.Compare(actual.CheckCharacters, _settings.CheckCharacters, "CheckCharacters");
             CError.Compare(actual.IgnoreComments, _settings.IgnoreComments, "IgnoreComments");
-            CError.Compare(actual.IgnoreProcessingInstructions, _settings.IgnoreProcessingInstructions, "IgnorePI");
+            CError.Compare(
+                actual.IgnoreProcessingInstructions,
+                _settings.IgnoreProcessingInstructions,
+                "IgnorePI"
+            );
             CError.Compare(actual.IgnoreWhitespace, _settings.IgnoreWhitespace, "IgnoreWhitespace");
             CError.Compare(actual.LineNumberOffset, _settings.LineNumberOffset, "LinenumberOffset");
-            CError.Compare(actual.LinePositionOffset, _settings.LinePositionOffset, "LinePositionOffset");
+            CError.Compare(
+                actual.LinePositionOffset,
+                _settings.LinePositionOffset,
+                "LinePositionOffset"
+            );
         }
 
         protected void ConsumeReader(XmlReader reader)
@@ -238,7 +272,6 @@ namespace System.Xml.RwFactoryWriterTests
                 }
             }
         }
-
 
         /// <summary>
         /// This method calls the Create Method on the XmlReader and puts the state in CreateSuccess or TestPass.
@@ -283,7 +316,8 @@ namespace System.Xml.RwFactoryWriterTests
                         pstate = TestState.Error;
                         DumpVariationInfo();
                         throw new CTestFailedException(
-                                "Argument Null Exception Thrown in CreateMethod, is your variation data correct?");
+                            "Argument Null Exception Thrown in CreateMethod, is your variation data correct?"
+                        );
                     }
                     else
                     {
@@ -296,7 +330,8 @@ namespace System.Xml.RwFactoryWriterTests
                     pstate = TestState.Error;
                     DumpVariationInfo();
                     throw new CTestFailedException(
-                            "Argument Null Exception Thrown in CreateMethod, is your variation data correct?");
+                        "Argument Null Exception Thrown in CreateMethod, is your variation data correct?"
+                    );
                 }
             }
         }
@@ -329,7 +364,8 @@ namespace System.Xml.RwFactoryWriterTests
             _callbackErrorCount2 = 0;
 
             //Conformance Level
-            _settings.ConformanceLevel = (ConformanceLevel)Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
+            _settings.ConformanceLevel = (ConformanceLevel)
+                Enum.Parse(typeof(ConformanceLevel), ReadFilterCriteria("ConformanceLevel", true));
 
             //CheckCharacters
             _settings.CheckCharacters = bool.Parse(ReadFilterCriteria("CheckCharacters", true));
@@ -368,12 +404,16 @@ namespace System.Xml.RwFactoryWriterTests
             //Line number
             _settings.LineNumberOffset = int.Parse(ReadFilterCriteria("LineNumberOffset", true));
             //Line position
-            _settings.LinePositionOffset = int.Parse(ReadFilterCriteria("LinePositionOffset", true));
+            _settings.LinePositionOffset = int.Parse(
+                ReadFilterCriteria("LinePositionOffset", true)
+            );
 
-            _settings.IgnoreProcessingInstructions = bool.Parse(ReadFilterCriteria("IgnorePI", true));
+            _settings.IgnoreProcessingInstructions = bool.Parse(
+                ReadFilterCriteria("IgnorePI", true)
+            );
             _settings.IgnoreComments = bool.Parse(ReadFilterCriteria("IgnoreComments", true));
             _settings.IgnoreWhitespace = bool.Parse(ReadFilterCriteria("IgnoreWhiteSpace", true));
-        }//End of SetupSettings
+        } //End of SetupSettings
 
         //Validation Event Handlers and their Counts for Reader to verify
         private int _callbackWarningCount1 = 0;
@@ -407,9 +447,19 @@ namespace System.Xml.RwFactoryWriterTests
         public void SetupReadOverload()
         {
             string ol = ReadFilterCriteria("Load", true);
-            if (ol == "HTTPStream" || ol == "FileName" || ol == "XmlTextReader" || ol == "XmlValidatingReader" || ol == "CoreValidatingReader"
-                || ol == "CoreXsdReader" || ol == "XmlBinaryReader" || ol == "XPathNavigatorReader" || ol == "XmlNodeReader" || ol == "XmlNodeReaderDD"
-                || ol == "XsltReader")
+            if (
+                ol == "HTTPStream"
+                || ol == "FileName"
+                || ol == "XmlTextReader"
+                || ol == "XmlValidatingReader"
+                || ol == "CoreValidatingReader"
+                || ol == "CoreXsdReader"
+                || ol == "XmlBinaryReader"
+                || ol == "XPathNavigatorReader"
+                || ol == "XmlNodeReader"
+                || ol == "XmlNodeReaderDD"
+                || ol == "XsltReader"
+            )
             {
                 throw new CTestSkippedException("Skipped: OverLoad " + ol);
             }
@@ -444,6 +494,7 @@ namespace System.Xml.RwFactoryWriterTests
         public class MyNameTable : XmlNameTable
         {
             private NameTable _nt = new NameTable();
+
             public override string Get(string array)
             {
                 return _nt.Get(array);

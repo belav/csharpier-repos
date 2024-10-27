@@ -22,7 +22,11 @@ namespace System.Tests
 
         [Theory]
         [InlineData("##.#", double.Epsilon, "")]
-        [InlineData("##.#", double.MaxValue, "179769313486232000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000")]
+        [InlineData(
+            "##.#",
+            double.MaxValue,
+            "179769313486232000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+        )]
         [InlineData("##.#", Math.E, "2.7")]
         [InlineData("##.#", Math.PI, "3.1")]
         [InlineData("##.#", 0.0, "")]
@@ -44,7 +48,11 @@ namespace System.Tests
         [InlineData("##.#", 65747.125, "65747.1")]
         [InlineData("##.#", 1844674407370955.25, "1844674407370960")]
         [InlineData("#,###.00", double.Epsilon, ".00")]
-        [InlineData("#,###.00", double.MaxValue, "179,769,313,486,232,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000.00")]
+        [InlineData(
+            "#,###.00",
+            double.MaxValue,
+            "179,769,313,486,232,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000,000.00"
+        )]
         [InlineData("#,###.00", Math.E, "2.72")]
         [InlineData("#,###.00", Math.PI, "3.14")]
         [InlineData("#,###.00", 0.0, ".00")]
@@ -65,7 +73,11 @@ namespace System.Tests
         [InlineData("#,###.00", 46500.0f, "46,500.00")]
         [InlineData("#,###.00", 65747.125, "65,747.13")]
         [InlineData("#,###.00", 1844674407370955.25, "1,844,674,407,370,960.00")]
-        public void TestFormatterDouble_Custom(string format, double value, string expectedResult) => TestFormatterDouble_Standard(value, format, expectedResult);
+        public void TestFormatterDouble_Custom(
+            string format,
+            double value,
+            string expectedResult
+        ) => TestFormatterDouble_Standard(value, format, expectedResult);
 
         [Theory]
         [InlineData("##.#", float.Epsilon, "")]
@@ -91,7 +103,11 @@ namespace System.Tests
         [InlineData("##.#", 65747.125f, "65747.1")]
         [InlineData("##.#", 429496.72f, "429496.7")]
         [InlineData("#,###.00", float.Epsilon, ".00")]
-        [InlineData("#,###.00", float.MaxValue, "340,282,300,000,000,000,000,000,000,000,000,000,000.00")]
+        [InlineData(
+            "#,###.00",
+            float.MaxValue,
+            "340,282,300,000,000,000,000,000,000,000,000,000,000.00"
+        )]
         [InlineData("#,###.00", MathF.E, "2.72")]
         [InlineData("#,###.00", MathF.PI, "3.14")]
         [InlineData("#,###.00", 0.0f, ".00")]
@@ -112,6 +128,7 @@ namespace System.Tests
         [InlineData("#,###.00", 46500.0f, "46,500.00")]
         [InlineData("#,###.00", 65747.125f, "65,747.12")]
         [InlineData("#,###.00", 429496.72f, "429,496.70")]
-        public void TestFormatteSingle_Custom(string format, float value, string expectedResult) => TestFormatterSingle_Standard(value, format, expectedResult);
+        public void TestFormatteSingle_Custom(string format, float value, string expectedResult) =>
+            TestFormatterSingle_Standard(value, format, expectedResult);
     }
 }

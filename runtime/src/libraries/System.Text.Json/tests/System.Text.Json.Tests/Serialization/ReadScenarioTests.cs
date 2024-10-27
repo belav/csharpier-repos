@@ -20,20 +20,16 @@ namespace System.Text.Json.Serialization.Tests
             // a custom built-in parser (JsonStringEnumConverter). Uri is handled implicitly.
 
             string json =
-                @"{" +
-                    @"""picture"": ""http://placehold.it/32x32""," +
-                    @"""eyeColor"": ""Brown""," +
-                    @"""registered"": ""2015-05-30T01:50:21 -01:00""" +
-                @"}";
+                @"{"
+                + @"""picture"": ""http://placehold.it/32x32"","
+                + @"""eyeColor"": ""Brown"","
+                + @"""registered"": ""2015-05-30T01:50:21 -01:00"""
+                + @"}";
 
             JsonSerializerOptions options = new JsonSerializerOptions
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
-                Converters =
-                {
-                    new JsonStringEnumConverter(),
-                    new MyDateTimeConverter()
-                }
+                Converters = { new JsonStringEnumConverter(), new MyDateTimeConverter() },
             };
 
             Model model = JsonSerializer.Deserialize<Model>(json, options);
@@ -45,11 +41,17 @@ namespace System.Text.Json.Serialization.Tests
         // The built-in DateTime parser is stricter than DateTime.Parse.
         public class MyDateTimeConverter : JsonConverter<DateTime>
         {
-            public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
-                => DateTime.Parse(reader.GetString());
+            public override DateTime Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => DateTime.Parse(reader.GetString());
 
-            public override void Write(Utf8JsonWriter writer, DateTime value, JsonSerializerOptions options)
-                => writer.WriteStringValue(value.ToString("O"));
+            public override void Write(
+                Utf8JsonWriter writer,
+                DateTime value,
+                JsonSerializerOptions options
+            ) => writer.WriteStringValue(value.ToString("O"));
         }
 
         public sealed class Model
@@ -63,7 +65,7 @@ namespace System.Text.Json.Serialization.Tests
         {
             Blue,
             Green,
-            Brown
+            Brown,
         }
     }
 }

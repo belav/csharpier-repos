@@ -12,7 +12,8 @@ namespace System.Data.Odbc
 
         internal static OdbcEnvironmentHandle GetGlobalEnvironmentHandle()
         {
-            OdbcEnvironmentHandle? globalEnvironmentHandle = s_globalEnvironmentHandle as OdbcEnvironmentHandle;
+            OdbcEnvironmentHandle? globalEnvironmentHandle =
+                s_globalEnvironmentHandle as OdbcEnvironmentHandle;
             if (null == globalEnvironmentHandle)
             {
                 lock (s_globalEnvironmentHandleLock)
@@ -30,7 +31,10 @@ namespace System.Data.Odbc
 
         internal static void ReleaseObjectPool()
         {
-            object? globalEnvironmentHandle = Interlocked.Exchange(ref s_globalEnvironmentHandle, null);
+            object? globalEnvironmentHandle = Interlocked.Exchange(
+                ref s_globalEnvironmentHandle,
+                null
+            );
             if (null != globalEnvironmentHandle)
             {
                 ((OdbcEnvironmentHandle)globalEnvironmentHandle).Dispose(); // internally refcounted so will happen correctly

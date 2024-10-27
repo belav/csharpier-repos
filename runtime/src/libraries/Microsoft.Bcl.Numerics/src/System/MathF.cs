@@ -270,7 +270,8 @@ namespace System
         /// <param name="digits">How many fractional digits to keep.</param>
         /// <param name="mode">The rounding convention to use.</param>
         /// <returns>The rounded representation of <paramref name="x"/> with <paramref name="digits"/> fractional digits using <paramref name="mode"/> rounding convention</returns>
-        public static float Round(float x, int digits, MidpointRounding mode) => (float)Math.Round(x, digits, mode);
+        public static float Round(float x, int digits, MidpointRounding mode) =>
+            (float)Math.Round(x, digits, mode);
 
         /// <summary>
         /// Rounds a single-precision floating-point value to an integer using the specified rounding convention.

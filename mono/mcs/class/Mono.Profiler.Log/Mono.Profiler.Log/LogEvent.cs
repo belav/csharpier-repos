@@ -8,68 +8,88 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace Mono.Profiler.Log {
+namespace Mono.Profiler.Log
+{
+    public abstract class LogEvent
+    {
+        const BindingFlags PropertyFlags =
+            BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public;
 
-	public abstract class LogEvent {
+        const string Indent = "  ";
 
-		const BindingFlags PropertyFlags = BindingFlags.DeclaredOnly | BindingFlags.Instance | BindingFlags.Public;
+        internal LogEvent() { }
 
-		const string Indent = "  ";
+        public LogBufferHeader Buffer { get; internal set; }
 
-		internal LogEvent ()
-		{
-		}
+        public ulong Timestamp { get; internal set; }
 
-		public LogBufferHeader Buffer { get; internal set; }
+        public override string ToString()
+        {
+            var sb = new StringBuilder();
 
-		public ulong Timestamp { get; internal set; }
+            ToString(this, sb, string.Empty, GetType().Name, 0);
 
-		public override string ToString ()
-		{
-			var sb = new StringBuilder ();
+            return sb.ToString();
+        }
 
-			ToString (this, sb, string.Empty, GetType ().Name, 0);
+        static void ToString(
+            object source,
+            StringBuilder result,
+            string indent,
+            string header,
+            int level
+        )
+        {
+            result.AppendLine($"{indent}{header} {{");
 
-			return sb.ToString ();
-		}
+            foreach (
+                var prop in source
+                    .GetType()
+                    .GetProperties(PropertyFlags)
+                    .OrderBy(p => p.MetadataToken)
+            )
+            {
+                var name = prop.Name;
+                var propIndent = indent + Indent;
+                var value = prop.GetValue(source);
 
-		static void ToString (object source, StringBuilder result, string indent, string header, int level)
-		{
-			result.AppendLine ($"{indent}{header} {{");
+                if (value is IList list)
+                {
+                    result.AppendLine($"{propIndent}{name} = [{list.Count}] {{");
 
-			foreach (var prop in source.GetType ().GetProperties (PropertyFlags).OrderBy (p => p.MetadataToken)) {
-				var name = prop.Name;
-				var propIndent = indent + Indent;
-				var value = prop.GetValue (source);
+                    for (var i = 0; i < list.Count; i++)
+                    {
+                        var elem = list[i];
+                        var type = elem.GetType();
+                        var elemIndent = propIndent + Indent;
+                        var elemHeader = $"[{i}] = ";
 
-				if (value is IList list) {
-					result.AppendLine ($"{propIndent}{name} = [{list.Count}] {{");
+                        if (type.IsClass && type != typeof(string))
+                            ToString(
+                                elem,
+                                result,
+                                elemIndent,
+                                $"{elemHeader}{type.Name}",
+                                level + 1
+                            );
+                        else
+                            result.AppendLine($"{elemIndent}{elemHeader}{elem}");
+                    }
 
-					for (var i = 0; i < list.Count; i++) {
-						var elem = list [i];
-						var type = elem.GetType ();
-						var elemIndent = propIndent + Indent;
-						var elemHeader = $"[{i}] = ";
+                    result.AppendLine($"{propIndent}}}");
+                }
+                else
+                    result.AppendLine($"{propIndent}{name} = {value}");
+            }
 
-						if (type.IsClass && type != typeof (string))
-							ToString (elem, result, elemIndent, $"{elemHeader}{type.Name}", level + 1);
-						else
-							result.AppendLine ($"{elemIndent}{elemHeader}{elem}");
-					}
+            var end = $"{indent}}}";
 
-					result.AppendLine ($"{propIndent}}}");
-				} else
-					result.AppendLine ($"{propIndent}{name} = {value}");
-			}
+            if (level == 0)
+                result.Append(end);
+            else
+                result.AppendLine(end);
+        }
 
-			var end = $"{indent}}}";
-
-			if (level == 0)
-				result.Append (end);
-			else
-				result.AppendLine (end);
-		}
-
-		internal abstract void Accept (LogEventVisitor visitor);
-	}
+        internal abstract void Accept(LogEventVisitor visitor);
+    }
 }

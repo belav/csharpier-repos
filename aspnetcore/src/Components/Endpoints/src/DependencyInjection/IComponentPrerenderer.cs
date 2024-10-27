@@ -25,7 +25,8 @@ public interface IComponentPrerenderer
         HttpContext httpContext,
         [DynamicallyAccessedMembers(Component)] Type componentType,
         IComponentRenderMode renderMode,
-        ParameterView parameters);
+        ParameterView parameters
+    );
 
     /// <summary>
     /// Prepares a serialized representation of any component state that is persistible within the current request.
@@ -35,7 +36,8 @@ public interface IComponentPrerenderer
     /// <returns>A task that completes with the prerendered state content.</returns>
     ValueTask<IHtmlContent> PrerenderPersistedStateAsync(
         HttpContext httpContext,
-        PersistedStateSerializationMode serializationMode);
+        PersistedStateSerializationMode serializationMode
+    );
 
     /// <summary>
     /// Gets a <see cref="Dispatcher"/> that should be used for calls to <see cref="PrerenderComponentAsync(HttpContext, Type, IComponentRenderMode, ParameterView)"/>.

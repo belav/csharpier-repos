@@ -14,21 +14,23 @@ public class MsalProviderOptions
     /// Gets or sets the <see cref="MsalAuthenticationOptions"/> to use for authentication operations.
     /// </summary>
     [JsonPropertyName("auth")]
-    public MsalAuthenticationOptions Authentication { get; set; } = new MsalAuthenticationOptions
-    {
-        RedirectUri = "authentication/login-callback",
-        PostLogoutRedirectUri = "authentication/logout-callback"
-    };
+    public MsalAuthenticationOptions Authentication { get; set; } =
+        new MsalAuthenticationOptions
+        {
+            RedirectUri = "authentication/login-callback",
+            PostLogoutRedirectUri = "authentication/logout-callback",
+        };
 
     /// <summary>
     /// Gets or sets the msal.js cache options.
     /// </summary>
-    public MsalCacheOptions Cache { get; set; } = new MsalCacheOptions
-    {
-        // This matches the defaults in msal.js
-        CacheLocation = "sessionStorage",
-        StoreAuthStateInCookie = false
-    };
+    public MsalCacheOptions Cache { get; set; } =
+        new MsalCacheOptions
+        {
+            // This matches the defaults in msal.js
+            CacheLocation = "sessionStorage",
+            StoreAuthStateInCookie = false,
+        };
 
     /// <summary>
     /// Gets or set the list of default access tokens scopes to provision during the sign-in flow.

@@ -31,10 +31,9 @@ public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<
     public StringNumberConverter(
         Expression<Func<TModel, TProvider>> convertToProviderExpression,
         Expression<Func<TProvider, TModel>> convertFromProviderExpression,
-        ConverterMappingHints? mappingHints = null)
-        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints)
-    {
-    }
+        ConverterMappingHints? mappingHints = null
+    )
+        : base(convertToProviderExpression, convertFromProviderExpression, mappingHints) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,13 +48,23 @@ public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<
         CheckTypeSupported(
             type,
             typeof(StringNumberConverter<TModel, TProvider, TNumber>),
-            typeof(int), typeof(long), typeof(short), typeof(byte),
-            typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-            typeof(decimal), typeof(float), typeof(double));
+            typeof(int),
+            typeof(long),
+            typeof(short),
+            typeof(byte),
+            typeof(uint),
+            typeof(ulong),
+            typeof(ushort),
+            typeof(sbyte),
+            typeof(decimal),
+            typeof(float),
+            typeof(double)
+        );
 
         var parseMethod = type.GetMethod(
             nameof(double.Parse),
-            new[] { typeof(string), typeof(NumberStyles), typeof(IFormatProvider) })!;
+            new[] { typeof(string), typeof(NumberStyles), typeof(IFormatProvider) }
+        )!;
 
         var param = Expression.Parameter(typeof(string), "v");
 
@@ -63,14 +72,16 @@ public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<
             parseMethod,
             param,
             Expression.Constant(NumberStyles.Any),
-            Expression.Constant(CultureInfo.InvariantCulture, typeof(IFormatProvider)));
+            Expression.Constant(CultureInfo.InvariantCulture, typeof(IFormatProvider))
+        );
 
         if (typeof(TNumber).IsNullableType())
         {
             expression = Expression.Condition(
                 Expression.ReferenceEqual(param, Expression.Constant(null, typeof(string))),
                 Expression.Constant(null, typeof(TNumber)),
-                Expression.Convert(expression, typeof(TNumber)));
+                Expression.Convert(expression, typeof(TNumber))
+            );
         }
 
         return Expression.Lambda<Func<string, TNumber>>(expression, param);
@@ -89,13 +100,23 @@ public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<
         CheckTypeSupported(
             type,
             typeof(StringNumberConverter<TModel, TProvider, TNumber>),
-            typeof(int), typeof(long), typeof(short), typeof(byte),
-            typeof(uint), typeof(ulong), typeof(ushort), typeof(sbyte),
-            typeof(decimal), typeof(float), typeof(double));
+            typeof(int),
+            typeof(long),
+            typeof(short),
+            typeof(byte),
+            typeof(uint),
+            typeof(ulong),
+            typeof(ushort),
+            typeof(sbyte),
+            typeof(decimal),
+            typeof(float),
+            typeof(double)
+        );
 
         var formatMethod = typeof(string).GetMethod(
             nameof(string.Format),
-            new[] { typeof(IFormatProvider), typeof(string), typeof(object) })!;
+            new[] { typeof(IFormatProvider), typeof(string), typeof(object) }
+        )!;
 
         var param = Expression.Parameter(typeof(TNumber), "v");
 
@@ -103,14 +124,16 @@ public class StringNumberConverter<TModel, TProvider, TNumber> : ValueConverter<
             formatMethod,
             Expression.Constant(CultureInfo.InvariantCulture),
             Expression.Constant(type == typeof(float) || type == typeof(double) ? "{0:R}" : "{0}"),
-            Expression.Convert(param, typeof(object)));
+            Expression.Convert(param, typeof(object))
+        );
 
         if (typeof(TNumber).IsNullableType())
         {
             expression = Expression.Condition(
                 Expression.MakeMemberAccess(param, typeof(TNumber).GetProperty("HasValue")!),
                 expression,
-                Expression.Constant(null, typeof(string)));
+                Expression.Constant(null, typeof(string))
+            );
         }
 
         return Expression.Lambda<Func<TNumber, string>>(expression, param);

@@ -54,14 +54,19 @@ namespace Microsoft.VisualBasic.Tests
         [InlineData("\u00A4123", 123)]
         public void Parse(string value, double expected)
         {
-            Assert.Equal(expected, DoubleType.Parse(value, CultureInfo.InvariantCulture.NumberFormat));
+            Assert.Equal(
+                expected,
+                DoubleType.Parse(value, CultureInfo.InvariantCulture.NumberFormat)
+            );
         }
 
         [Fact]
         public void Parse_Invalid()
         {
             Assert.Throws<ArgumentNullException>(() => DoubleType.Parse(null, null));
-            Assert.Throws<FormatException>(() => DoubleType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat));
+            Assert.Throws<FormatException>(
+                () => DoubleType.Parse("abc", CultureInfo.InvariantCulture.NumberFormat)
+            );
         }
     }
 }

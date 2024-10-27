@@ -11,7 +11,8 @@ internal sealed class AddressBindContext
         ServerAddressesFeature serverAddressesFeature,
         KestrelServerOptions serverOptions,
         ILogger logger,
-        Func<ListenOptions, CancellationToken, Task> createBinding)
+        Func<ListenOptions, CancellationToken, Task> createBinding
+    )
     {
         ServerAddressesFeature = serverAddressesFeature;
         ServerOptions = serverOptions;

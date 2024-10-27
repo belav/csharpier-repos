@@ -26,24 +26,23 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string subFilePath = subdir + @"\" + fileName;
             string dotted = subdir + @"\" + ".x.dll";
 
-            var fs = new HashSet<string>
-            {
-                filePath,
-                subFilePath,
-                dotted
-            };
+            var fs = new HashSet<string> { filePath, subFilePath, dotted };
 
             var resolver = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,
                 searchPaths: ImmutableArray.Create<string>(),
-                baseDirectory: subdir);
+                baseDirectory: subdir
+            );
 
             // unqualified file name:
             var path = resolver.ResolvePath(fileName, baseFilePath: null);
             Assert.Equal(subFilePath, path);
 
             // prefer the base file over base directory:
-            path = resolver.ResolvePath(fileName, baseFilePath: PathUtilities.CombineAbsoluteAndRelativePaths(dir, "goo.csx"));
+            path = resolver.ResolvePath(
+                fileName,
+                baseFilePath: PathUtilities.CombineAbsoluteAndRelativePaths(dir, "goo.csx")
+            );
             Assert.Equal(filePath, path);
 
             path = resolver.ResolvePath(@"\" + fileName, baseFilePath: null);
@@ -101,19 +100,19 @@ namespace Microsoft.CodeAnalysis.UnitTests
             string filePath = dir + @"\" + fileName;
             string subFilePath = subdir + @"\" + fileName;
 
-            var fs = new HashSet<string>
-            {
-                filePath,
-                subFilePath
-            };
+            var fs = new HashSet<string> { filePath, subFilePath };
 
             // with no search paths
             var resolver = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,
-                baseDirectory: subdir);
+                baseDirectory: subdir
+            );
 
             // using base path
-            var path = resolver.ResolvePath(fileName, baseFilePath: PathUtilities.CombineAbsoluteAndRelativePaths(dir, "goo.csx"));
+            var path = resolver.ResolvePath(
+                fileName,
+                baseFilePath: PathUtilities.CombineAbsoluteAndRelativePaths(dir, "goo.csx")
+            );
             Assert.Equal(filePath, path);
 
             // using base dir
@@ -124,7 +123,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var resolverSP = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,
                 searchPaths: new[] { dir, subdir }.AsImmutableOrNull(),
-                baseDirectory: @"C:\goo");
+                baseDirectory: @"C:\goo"
+            );
 
             path = resolverSP.ResolvePath(fileName, baseFilePath: null);
             Assert.Equal(filePath, path);
@@ -132,7 +132,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // null base dir, no search paths
             var resolverNullBase = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,
-                baseDirectory: null);
+                baseDirectory: null
+            );
 
             // relative path
             path = resolverNullBase.ResolvePath(fileName, baseFilePath: null);
@@ -146,7 +147,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
             var resolverNullBaseSP = new VirtualizedRelativePathResolver(
                 existingFullPaths: fs,
                 searchPaths: new[] { dir, subdir }.AsImmutableOrNull(),
-                baseDirectory: null);
+                baseDirectory: null
+            );
 
             // relative path
             path = resolverNullBaseSP.ResolvePath(fileName, baseFilePath: null);
@@ -169,7 +171,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
 
             var resolver = new RelativePathResolver(
                 ImmutableArray.Create(dir1.Path, dir2.Path),
-                baseDirectory: null);
+                baseDirectory: null
+            );
 
             var path = resolver.ResolvePath("f.dll", null);
             Assert.Equal(f1, path);

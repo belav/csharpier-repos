@@ -31,19 +31,19 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator.UnitTests
             switch (x.Kind)
             {
                 case NameKind.QualifiedName:
-                    {
-                        var xQualified = (QualifiedName)x;
-                        var yQualified = (QualifiedName)y;
-                        return Equals(xQualified.Qualifier, yQualified.Qualifier) &&
-                            Equals(xQualified.Name, yQualified.Name);
-                    }
+                {
+                    var xQualified = (QualifiedName)x;
+                    var yQualified = (QualifiedName)y;
+                    return Equals(xQualified.Qualifier, yQualified.Qualifier)
+                        && Equals(xQualified.Name, yQualified.Name);
+                }
                 case NameKind.GenericName:
-                    {
-                        var xGeneric = (GenericName)x;
-                        var yGeneric = (GenericName)y;
-                        return Equals(xGeneric.QualifiedName, yGeneric.QualifiedName) &&
-                            xGeneric.TypeParameters.SequenceEqual(yGeneric.TypeParameters);
-                    }
+                {
+                    var xGeneric = (GenericName)x;
+                    var yGeneric = (GenericName)y;
+                    return Equals(xGeneric.QualifiedName, yGeneric.QualifiedName)
+                        && xGeneric.TypeParameters.SequenceEqual(yGeneric.TypeParameters);
+                }
                 default:
                     throw new NotImplementedException();
             }

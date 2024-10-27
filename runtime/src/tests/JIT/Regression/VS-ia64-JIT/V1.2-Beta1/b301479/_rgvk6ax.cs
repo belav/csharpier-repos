@@ -17,18 +17,28 @@ public enum TestEnum
 public struct AA
 {
     public String[][][] m_axField1;
+
     public static double[,][] Static1(TypedReference param1)
     {
-        object[,,][,,,][][,,,] local2 = (new object[((uint)(30.0f)), 99u, 71u]
-            [,,,][][,,,]);
+        object[,,][,,,][][,,,] local2 = (new object[((uint)(30.0f)), 99u, 71u][,,,][][,,,]);
         return (new double[((uint)(90.0f)), ((uint)(((byte)((0.0f)))))][]);
     }
+
     public static void Static2(int param1, ref uint[,] param2, ref short param3)
     {
         uint local12 = 55u;
 
-        AA.Static1(((/*2 REFS*/((byte)(local12)) != /*2 REFS*/((byte)(local12))) ?
-            __refvalue(__makeref(param1), TypedReference) : __makeref(param3)));
+        AA.Static1(
+            (
+                ( /*2 REFS*/
+                    ((byte)(local12))
+                    != /*2 REFS*/
+                    ((byte)(local12))
+                )
+                    ? __refvalue(__makeref(param1), TypedReference)
+                    : __makeref(param3)
+            )
+        );
         ;
     }
 }
@@ -41,15 +51,11 @@ public class App
     {
         try
         {
-            AA.Static2(
-                8,
-                ref App.m_auFwd8,
-                ref App.m_shFwd1);
+            AA.Static2(8, ref App.m_auFwd8, ref App.m_shFwd1);
         }
-        catch (Exception)
-        {
-        }
+        catch (Exception) { }
     }
+
     public static short m_shFwd1;
     public static uint[,] m_auFwd8;
 }

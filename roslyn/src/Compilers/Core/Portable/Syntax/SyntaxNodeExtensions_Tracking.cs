@@ -15,17 +15,19 @@ namespace Microsoft.CodeAnalysis
 {
     public static partial class SyntaxNodeExtensions
     {
-        private static readonly ConditionalWeakTable<SyntaxNode, SyntaxAnnotation> s_nodeToIdMap
-            = new ConditionalWeakTable<SyntaxNode, SyntaxAnnotation>();
+        private static readonly ConditionalWeakTable<SyntaxNode, SyntaxAnnotation> s_nodeToIdMap =
+            new ConditionalWeakTable<SyntaxNode, SyntaxAnnotation>();
 
-        private static readonly ConditionalWeakTable<SyntaxNode, CurrentNodes> s_rootToCurrentNodesMap
-            = new ConditionalWeakTable<SyntaxNode, CurrentNodes>();
+        private static readonly ConditionalWeakTable<
+            SyntaxNode,
+            CurrentNodes
+        > s_rootToCurrentNodesMap = new ConditionalWeakTable<SyntaxNode, CurrentNodes>();
 
         internal const string IdAnnotationKind = "Id";
 
         /// <summary>
         /// Creates a new tree of nodes with the specified nodes being tracked.
-        /// 
+        ///
         /// Use GetCurrentNode on the subtree resulting from this operation, or any transformation of it,
         /// to get the current node corresponding to the original tracked node.
         /// </summary>
@@ -50,12 +52,15 @@ namespace Microsoft.CodeAnalysis
                 s_nodeToIdMap.GetValue(node, n => new SyntaxAnnotation(IdAnnotationKind));
             }
 
-            return root.ReplaceNodes(nodes, (n, r) => n.HasAnnotation(GetId(n)!) ? r : r.WithAdditionalAnnotations(GetId(n)!));
+            return root.ReplaceNodes(
+                nodes,
+                (n, r) => n.HasAnnotation(GetId(n)!) ? r : r.WithAdditionalAnnotations(GetId(n)!)
+            );
         }
 
         /// <summary>
         /// Creates a new tree of nodes with the specified nodes being tracked.
-        /// 
+        ///
         /// Use GetCurrentNode on the subtree resulting from this operation, or any transformation of it,
         /// to get the current node corresponding to the original tracked node.
         /// </summary>
@@ -102,7 +107,10 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="root">The root of the subtree containing the current nodes corresponding to the original tracked nodes.</param>
         /// <param name="nodes">One or more node instances originally tracked.</param>
-        public static IEnumerable<TNode> GetCurrentNodes<TNode>(this SyntaxNode root, IEnumerable<TNode> nodes)
+        public static IEnumerable<TNode> GetCurrentNodes<TNode>(
+            this SyntaxNode root,
+            IEnumerable<TNode> nodes
+        )
             where TNode : SyntaxNode
         {
             if (nodes == null)
@@ -121,12 +129,18 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private static IReadOnlyList<SyntaxNode> GetCurrentNodeFromTrueRoots(SyntaxNode trueRoot, SyntaxNode node)
+        private static IReadOnlyList<SyntaxNode> GetCurrentNodeFromTrueRoots(
+            SyntaxNode trueRoot,
+            SyntaxNode node
+        )
         {
             var id = GetId(node);
             if (id is object)
             {
-                CurrentNodes tracked = s_rootToCurrentNodesMap.GetValue(trueRoot, r => new CurrentNodes(r));
+                CurrentNodes tracked = s_rootToCurrentNodesMap.GetValue(
+                    trueRoot,
+                    r => new CurrentNodes(r)
+                );
                 return tracked.GetNodes(id);
             }
             else
@@ -192,8 +206,14 @@ namespace Microsoft.CodeAnalysis
 
         private class CurrentNodes
         {
-            [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1320760", Constraint = "Avoid large object heap allocations")]
-            private readonly ImmutableSegmentedDictionary<SyntaxAnnotation, IReadOnlyList<SyntaxNode>> _idToNodeMap;
+            [PerformanceSensitive(
+                "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1320760",
+                Constraint = "Avoid large object heap allocations"
+            )]
+            private readonly ImmutableSegmentedDictionary<
+                SyntaxAnnotation,
+                IReadOnlyList<SyntaxNode>
+            > _idToNodeMap;
 
             public CurrentNodes(SyntaxNode root)
             {
@@ -201,7 +221,10 @@ namespace Microsoft.CodeAnalysis
                 // same node injected multiple times.
                 var map = new SegmentedDictionary<SyntaxAnnotation, List<SyntaxNode>>();
 
-                foreach (var node in root.GetAnnotatedNodesAndTokens(IdAnnotationKind).Select(n => n.AsNode()!))
+                foreach (
+                    var node in root.GetAnnotatedNodesAndTokens(IdAnnotationKind)
+                        .Select(n => n.AsNode()!)
+                )
                 {
                     Debug.Assert(node is object);
                     foreach (var id in node.GetAnnotations(IdAnnotationKind))
@@ -217,7 +240,10 @@ namespace Microsoft.CodeAnalysis
                     }
                 }
 
-                _idToNodeMap = map.ToImmutableSegmentedDictionary(kv => kv.Key, kv => (IReadOnlyList<SyntaxNode>)ImmutableArray.CreateRange(kv.Value));
+                _idToNodeMap = map.ToImmutableSegmentedDictionary(
+                    kv => kv.Key,
+                    kv => (IReadOnlyList<SyntaxNode>)ImmutableArray.CreateRange(kv.Value)
+                );
             }
 
             public IReadOnlyList<SyntaxNode> GetNodes(SyntaxAnnotation id)

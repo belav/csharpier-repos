@@ -11,13 +11,13 @@ namespace System.Net.Mail
     using System.IO;
     using System.Net;
 
-internal static class SmtpAuthenticationManager
+    internal static class SmtpAuthenticationManager
     {
         static ArrayList modules = new ArrayList();
 
         static SmtpAuthenticationManager()
         {
-            // 
+            //
 
 #if !FEATURE_PAL
             Register(new SmtpNegotiateAuthenticationModule());

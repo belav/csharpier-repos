@@ -29,7 +29,10 @@ public class CollectionModelBinderProvider : IModelBinderProvider
         }
 
         // If the model type is ICollection<> then we can call its Add method, so we can always support it.
-        var collectionType = ClosedGenericMatcher.ExtractGenericInterface(modelType, typeof(ICollection<>));
+        var collectionType = ClosedGenericMatcher.ExtractGenericInterface(
+            modelType,
+            typeof(ICollection<>)
+        );
         if (collectionType != null)
         {
             return CreateInstance(context, collectionType);
@@ -38,7 +41,10 @@ public class CollectionModelBinderProvider : IModelBinderProvider
         // If the model type is IEnumerable<> then we need to know if we can assign a List<> to it, since
         // that's what we would create. (The cases handled here are IEnumerable<>, IReadOnlyCollection<> and
         // IReadOnlyList<>).
-        var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(modelType, typeof(IEnumerable<>));
+        var enumerableType = ClosedGenericMatcher.ExtractGenericInterface(
+            modelType,
+            typeof(IEnumerable<>)
+        );
         if (enumerableType != null)
         {
             var listType = typeof(List<>).MakeGenericType(enumerableType.GenericTypeArguments);
@@ -51,20 +57,30 @@ public class CollectionModelBinderProvider : IModelBinderProvider
         return null;
     }
 
-    private static IModelBinder CreateInstance(ModelBinderProviderContext context, Type collectionType)
+    private static IModelBinder CreateInstance(
+        ModelBinderProviderContext context,
+        Type collectionType
+    )
     {
-        var binderType = typeof(CollectionModelBinder<>).MakeGenericType(collectionType.GenericTypeArguments);
+        var binderType = typeof(CollectionModelBinder<>).MakeGenericType(
+            collectionType.GenericTypeArguments
+        );
         var elementType = collectionType.GenericTypeArguments[0];
-        var elementBinder = context.CreateBinder(context.MetadataProvider.GetMetadataForType(elementType));
+        var elementBinder = context.CreateBinder(
+            context.MetadataProvider.GetMetadataForType(elementType)
+        );
 
         var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
         var mvcOptions = context.Services.GetRequiredService<IOptions<MvcOptions>>().Value;
-        var binder = (IModelBinder)Activator.CreateInstance(
-            binderType,
-            elementBinder,
-            loggerFactory,
-            true /* allowValidatingTopLevelNodes */,
-            mvcOptions)!;
+        var binder = (IModelBinder)
+            Activator.CreateInstance(
+                binderType,
+                elementBinder,
+                loggerFactory,
+                true /* allowValidatingTopLevelNodes */
+                ,
+                mvcOptions
+            )!;
 
         return binder;
     }

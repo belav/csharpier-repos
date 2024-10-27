@@ -32,7 +32,8 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// Create a new lookup internal class from the specified WhitespaceRules.
         /// </summary>
-        public WhitespaceRuleLookup(IList<WhitespaceRule> rules) : this()
+        public WhitespaceRuleLookup(IList<WhitespaceRule> rules)
+            : this()
         {
             WhitespaceRule rule;
             InternalWhitespaceRule ruleInternal;
@@ -42,7 +43,12 @@ namespace System.Xml.Xsl.Runtime
             {
                 // Make a copy of each rule
                 rule = rules[i];
-                ruleInternal = new InternalWhitespaceRule(rule.LocalName, rule.NamespaceName, rule.PreserveSpace, -i);
+                ruleInternal = new InternalWhitespaceRule(
+                    rule.LocalName,
+                    rule.NamespaceName,
+                    rule.PreserveSpace,
+                    -i
+                );
 
                 if (rule.LocalName == null || rule.NamespaceName == null)
                 {
@@ -85,10 +91,16 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public bool ShouldStripSpace(string localName, string namespaceName)
         {
-            InternalWhitespaceRule? qnameRule, wildcardRule;
+            InternalWhitespaceRule? qnameRule,
+                wildcardRule;
             Debug.Assert(_nameTable != null && _ruleTemp != null);
-            Debug.Assert(localName != null && (object?)_nameTable.Get(localName) == (object)localName);
-            Debug.Assert(namespaceName != null && (object?)_nameTable.Get(namespaceName) == (object)namespaceName);
+            Debug.Assert(
+                localName != null && (object?)_nameTable.Get(localName) == (object)localName
+            );
+            Debug.Assert(
+                namespaceName != null
+                    && (object?)_nameTable.Get(namespaceName) == (object)namespaceName
+            );
 
             _ruleTemp.Init(localName, namespaceName, false, 0);
 
@@ -96,7 +108,7 @@ namespace System.Xml.Xsl.Runtime
             // If found, the name will be stripped unless there is a preserve wildcard with higher priority
             qnameRule = _qnames[_ruleTemp] as InternalWhitespaceRule;
 
-            for (int pos = _wildcards.Count; pos-- != 0;)
+            for (int pos = _wildcards.Count; pos-- != 0; )
             {
                 wildcardRule = _wildcards[pos] as InternalWhitespaceRule;
 
@@ -111,9 +123,15 @@ namespace System.Xml.Xsl.Runtime
                         continue;
                 }
 
-                if (wildcardRule!.LocalName == null || (object)wildcardRule.LocalName == (object)localName)
+                if (
+                    wildcardRule!.LocalName == null
+                    || (object)wildcardRule.LocalName == (object)localName
+                )
                 {
-                    if (wildcardRule.NamespaceName == null || (object)wildcardRule.NamespaceName == (object)namespaceName)
+                    if (
+                        wildcardRule.NamespaceName == null
+                        || (object)wildcardRule.NamespaceName == (object)namespaceName
+                    )
                     {
                         // Found wildcard match, so we're done (since wildcards are in priority order)
                         return !wildcardRule.PreserveSpace;
@@ -126,19 +144,27 @@ namespace System.Xml.Xsl.Runtime
 
         private sealed class InternalWhitespaceRule : WhitespaceRule
         {
-            private int _priority;       // Relative priority of this test
-            private int _hashCode;       // Cached hashcode
+            private int _priority; // Relative priority of this test
+            private int _hashCode; // Cached hashcode
 
-            public InternalWhitespaceRule()
-            {
-            }
+            public InternalWhitespaceRule() { }
 
-            public InternalWhitespaceRule(string? localName, string? namespaceName, bool preserveSpace, int priority)
+            public InternalWhitespaceRule(
+                string? localName,
+                string? namespaceName,
+                bool preserveSpace,
+                int priority
+            )
             {
                 Init(localName, namespaceName, preserveSpace, priority);
             }
 
-            public void Init(string? localName, string? namespaceName, bool preserveSpace, int priority)
+            public void Init(
+                string? localName,
+                string? namespaceName,
+                bool preserveSpace,
+                int priority
+            )
             {
                 base.Init(localName, namespaceName, preserveSpace);
                 _priority = priority;

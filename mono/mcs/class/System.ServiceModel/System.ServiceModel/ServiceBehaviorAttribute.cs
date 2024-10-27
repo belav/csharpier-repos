@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -29,150 +29,168 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Runtime.Serialization;
-using System.Transactions;
 using System.ServiceModel.Channels;
 using System.ServiceModel.Description;
 using System.ServiceModel.Dispatcher;
+using System.Transactions;
 
 namespace System.ServiceModel
 {
-	[AttributeUsage (AttributeTargets.Class)]
-	public sealed class ServiceBehaviorAttribute
-		: Attribute, IServiceBehavior
-	{
-		public ServiceBehaviorAttribute ()
-		{
-			AutomaticSessionShutdown = true;
-			ConcurrencyMode = ConcurrencyMode.Single;
-			InstanceContextMode = InstanceContextMode.PerSession;
-			MaxItemsInObjectGraph = 0x10000;
-			ReleaseServiceInstanceOnTransactionComplete = true;
-			TransactionIsolationLevel = IsolationLevel.Unspecified;
-			UseSynchronizationContext = true;
-			ValidateMustUnderstand = true;
-		}
+    [AttributeUsage(AttributeTargets.Class)]
+    public sealed class ServiceBehaviorAttribute : Attribute, IServiceBehavior
+    {
+        public ServiceBehaviorAttribute()
+        {
+            AutomaticSessionShutdown = true;
+            ConcurrencyMode = ConcurrencyMode.Single;
+            InstanceContextMode = InstanceContextMode.PerSession;
+            MaxItemsInObjectGraph = 0x10000;
+            ReleaseServiceInstanceOnTransactionComplete = true;
+            TransactionIsolationLevel = IsolationLevel.Unspecified;
+            UseSynchronizationContext = true;
+            ValidateMustUnderstand = true;
+        }
 
-		string tx_timeout;
-		object singleton;
+        string tx_timeout;
+        object singleton;
 
-		[MonoTODO]
-		public string Name { get; set; }
-		[MonoTODO]
-		public string Namespace { get; set; }
-		[MonoTODO]
-		public string ConfigurationName { get; set; }
+        [MonoTODO]
+        public string Name { get; set; }
 
-		[MonoTODO]
-		public AddressFilterMode AddressFilterMode { get; set; }
+        [MonoTODO]
+        public string Namespace { get; set; }
 
-		[MonoTODO]
-		public bool AutomaticSessionShutdown { get; set; }
+        [MonoTODO]
+        public string ConfigurationName { get; set; }
 
-		[MonoTODO]
-		public ConcurrencyMode ConcurrencyMode { get; set; }
+        [MonoTODO]
+        public AddressFilterMode AddressFilterMode { get; set; }
 
-		[MonoTODO]
-		public bool IgnoreExtensionDataObject { get; set; }
+        [MonoTODO]
+        public bool AutomaticSessionShutdown { get; set; }
 
-		public InstanceContextMode InstanceContextMode { get; set; }
+        [MonoTODO]
+        public ConcurrencyMode ConcurrencyMode { get; set; }
 
-		public bool IncludeExceptionDetailInFaults { get; set; }
+        [MonoTODO]
+        public bool IgnoreExtensionDataObject { get; set; }
 
-		[MonoTODO]
-		public int MaxItemsInObjectGraph { get; set; }
+        public InstanceContextMode InstanceContextMode { get; set; }
 
-		[MonoTODO]
-		public bool ReleaseServiceInstanceOnTransactionComplete { get; set; }
+        public bool IncludeExceptionDetailInFaults { get; set; }
 
-		public bool UseSynchronizationContext { get; set; }
+        [MonoTODO]
+        public int MaxItemsInObjectGraph { get; set; }
 
-		[MonoTODO]
-		public IsolationLevel TransactionIsolationLevel { get; set; }
+        [MonoTODO]
+        public bool ReleaseServiceInstanceOnTransactionComplete { get; set; }
 
-		[MonoTODO]
-		public bool TransactionAutoCompleteOnSessionClose { get; set; }
+        public bool UseSynchronizationContext { get; set; }
 
-		[MonoTODO]
-		public string TransactionTimeout {
-			get { return tx_timeout; }
-			set {
-				if (value != null)
-					TimeSpan.Parse (value);
-				tx_timeout = value;
-			}
-		}
+        [MonoTODO]
+        public IsolationLevel TransactionIsolationLevel { get; set; }
 
-		[MonoTODO]
-		public bool ValidateMustUnderstand { get; set; }
+        [MonoTODO]
+        public bool TransactionAutoCompleteOnSessionClose { get; set; }
 
-		public object GetWellKnownSingleton ()
-		{
-			return singleton;
-		}
+        [MonoTODO]
+        public string TransactionTimeout
+        {
+            get { return tx_timeout; }
+            set
+            {
+                if (value != null)
+                    TimeSpan.Parse(value);
+                tx_timeout = value;
+            }
+        }
 
-		public void SetWellKnownSingleton (object value)
-		{
-			if (value == null)
-				throw new ArgumentNullException ("value");
-			singleton = value;
-		}
+        [MonoTODO]
+        public bool ValidateMustUnderstand { get; set; }
 
-		[MonoTODO]
-		void IServiceBehavior.AddBindingParameters (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase,
-			Collection<ServiceEndpoint> endpoints,
-			BindingParameterCollection parameters)
-		{
-		}
+        public object GetWellKnownSingleton()
+        {
+            return singleton;
+        }
 
-		[MonoTODO]
-		void IServiceBehavior.ApplyDispatchBehavior (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{
-			if (singleton != null && InstanceContextMode != InstanceContextMode.Single)
-				throw new InvalidOperationException ("When creating a Service host with a service instance, use InstanceContextMode.Single in the ServiceBehaviorAttribute.");
+        public void SetWellKnownSingleton(object value)
+        {
+            if (value == null)
+                throw new ArgumentNullException("value");
+            singleton = value;
+        }
 
-			foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers) {
-				ChannelDispatcher cd = cdb as ChannelDispatcher;
-				if (cd == null)
-					continue;
-				if (IncludeExceptionDetailInFaults) // may be set also in ServiceDebugBehaviorAttribute
-					cd.IncludeExceptionDetailInFaults = true;
-				foreach (EndpointDispatcher ed in cd.Endpoints) {
-					var dr = ed.DispatchRuntime;
-					if (dr.SingletonInstanceContext == null && InstanceContextMode == InstanceContextMode.Single)
-						dr.SingletonInstanceContext = CreateSingletonInstanceContext (serviceHostBase);
-					if (dr.InstanceContextProvider == null)
-						dr.InstanceContextProvider = CreateInstanceContextProvider (serviceHostBase, dr);
-				}
-			}
-		}
+        [MonoTODO]
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection parameters
+        ) { }
 
-		InstanceContext CreateSingletonInstanceContext (ServiceHostBase host)
-		{
-			return new InstanceContext (host, GetWellKnownSingleton ());
-		}
+        [MonoTODO]
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        )
+        {
+            if (singleton != null && InstanceContextMode != InstanceContextMode.Single)
+                throw new InvalidOperationException(
+                    "When creating a Service host with a service instance, use InstanceContextMode.Single in the ServiceBehaviorAttribute."
+                );
 
-		IInstanceContextProvider CreateInstanceContextProvider (ServiceHostBase host, DispatchRuntime runtime)
-		{
-			switch (InstanceContextMode) {
-			case InstanceContextMode.Single:
-				return new SingletonInstanceContextProvider (runtime.SingletonInstanceContext);
-			case InstanceContextMode.PerSession:
-				return new SessionInstanceContextProvider (host);
-			//case InstanceContextMode.PerCall:
-			default:
-				return null; // default
-			}
-		}
+            foreach (ChannelDispatcherBase cdb in serviceHostBase.ChannelDispatchers)
+            {
+                ChannelDispatcher cd = cdb as ChannelDispatcher;
+                if (cd == null)
+                    continue;
+                if (IncludeExceptionDetailInFaults) // may be set also in ServiceDebugBehaviorAttribute
+                    cd.IncludeExceptionDetailInFaults = true;
+                foreach (EndpointDispatcher ed in cd.Endpoints)
+                {
+                    var dr = ed.DispatchRuntime;
+                    if (
+                        dr.SingletonInstanceContext == null
+                        && InstanceContextMode == InstanceContextMode.Single
+                    )
+                        dr.SingletonInstanceContext = CreateSingletonInstanceContext(
+                            serviceHostBase
+                        );
+                    if (dr.InstanceContextProvider == null)
+                        dr.InstanceContextProvider = CreateInstanceContextProvider(
+                            serviceHostBase,
+                            dr
+                        );
+                }
+            }
+        }
 
-		[MonoTODO]
-		void IServiceBehavior.Validate (
-			ServiceDescription description,
-			ServiceHostBase serviceHostBase)
-		{			
-		}
-	}
+        InstanceContext CreateSingletonInstanceContext(ServiceHostBase host)
+        {
+            return new InstanceContext(host, GetWellKnownSingleton());
+        }
+
+        IInstanceContextProvider CreateInstanceContextProvider(
+            ServiceHostBase host,
+            DispatchRuntime runtime
+        )
+        {
+            switch (InstanceContextMode)
+            {
+                case InstanceContextMode.Single:
+                    return new SingletonInstanceContextProvider(runtime.SingletonInstanceContext);
+                case InstanceContextMode.PerSession:
+                    return new SessionInstanceContextProvider(host);
+                //case InstanceContextMode.PerCall:
+                default:
+                    return null; // default
+            }
+        }
+
+        [MonoTODO]
+        void IServiceBehavior.Validate(
+            ServiceDescription description,
+            ServiceHostBase serviceHostBase
+        ) { }
+    }
 }

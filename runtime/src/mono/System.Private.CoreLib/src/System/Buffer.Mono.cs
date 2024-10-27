@@ -14,7 +14,12 @@ namespace System
         private static extern unsafe void __Memmove(byte* dest, byte* src, nuint len);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern void BulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint len, IntPtr type_handle);
+        private static extern void BulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            nuint len,
+            IntPtr type_handle
+        );
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe void Memmove<T>(ref T destination, ref T source, nuint elementCount)
@@ -26,7 +31,8 @@ namespace System
                 Memmove(
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
-                    elementCount * (nuint)sizeof(T));
+                    elementCount * (nuint)sizeof(T)
+                );
 #pragma warning restore 8500
             }
             else if (elementCount > 0)
@@ -36,7 +42,8 @@ namespace System
                     ref Unsafe.As<T, byte>(ref destination),
                     ref Unsafe.As<T, byte>(ref source),
                     elementCount,
-                    typeof(T).TypeHandle.Value);
+                    typeof(T).TypeHandle.Value
+                );
             }
         }
     }

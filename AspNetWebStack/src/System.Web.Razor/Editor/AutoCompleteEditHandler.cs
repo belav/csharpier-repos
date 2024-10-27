@@ -12,27 +12,42 @@ namespace System.Web.Razor.Parser.SyntaxTree
 {
     public class AutoCompleteEditHandler : SpanEditHandler
     {
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
         public AutoCompleteEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer)
-            : base(tokenizer)
-        {
-        }
+            : base(tokenizer) { }
 
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "Func<T> is the recommended delegate type and requires this level of nesting.")]
-        public AutoCompleteEditHandler(Func<string, IEnumerable<ISymbol>> tokenizer, AcceptedCharacters accepted)
-            : base(tokenizer, accepted)
-        {
-        }
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "Func<T> is the recommended delegate type and requires this level of nesting."
+        )]
+        public AutoCompleteEditHandler(
+            Func<string, IEnumerable<ISymbol>> tokenizer,
+            AcceptedCharacters accepted
+        )
+            : base(tokenizer, accepted) { }
 
         public bool AutoCompleteAtEndOfSpan { get; set; }
         public string AutoCompleteString { get; set; }
 
-        protected override PartialParseResult CanAcceptChange(Span target, TextChange normalizedChange)
+        protected override PartialParseResult CanAcceptChange(
+            Span target,
+            TextChange normalizedChange
+        )
         {
-            if (((AutoCompleteAtEndOfSpan && IsAtEndOfSpan(target, normalizedChange)) || IsAtEndOfFirstLine(target, normalizedChange)) &&
-                normalizedChange.IsInsert &&
-                ParserHelpers.IsNewLine(normalizedChange.NewText) &&
-                AutoCompleteString != null)
+            if (
+                (
+                    (AutoCompleteAtEndOfSpan && IsAtEndOfSpan(target, normalizedChange))
+                    || IsAtEndOfFirstLine(target, normalizedChange)
+                )
+                && normalizedChange.IsInsert
+                && ParserHelpers.IsNewLine(normalizedChange.NewText)
+                && AutoCompleteString != null
+            )
             {
                 return PartialParseResult.Rejected | PartialParseResult.AutoCompleteBlock;
             }
@@ -41,21 +56,30 @@ namespace System.Web.Razor.Parser.SyntaxTree
 
         public override string ToString()
         {
-            return base.ToString() + ",AutoComplete:[" + (AutoCompleteString ?? "<null>") + "]" + (AutoCompleteAtEndOfSpan ? ";AtEnd" : ";AtEOL");
+            return base.ToString()
+                + ",AutoComplete:["
+                + (AutoCompleteString ?? "<null>")
+                + "]"
+                + (AutoCompleteAtEndOfSpan ? ";AtEnd" : ";AtEOL");
         }
 
         public override bool Equals(object obj)
         {
             AutoCompleteEditHandler other = obj as AutoCompleteEditHandler;
-            return base.Equals(obj) &&
-                   other != null &&
-                   String.Equals(other.AutoCompleteString, AutoCompleteString, StringComparison.Ordinal) &&
-                   AutoCompleteAtEndOfSpan == other.AutoCompleteAtEndOfSpan;
+            return base.Equals(obj)
+                && other != null
+                && String.Equals(
+                    other.AutoCompleteString,
+                    AutoCompleteString,
+                    StringComparison.Ordinal
+                )
+                && AutoCompleteAtEndOfSpan == other.AutoCompleteAtEndOfSpan;
         }
 
         public override int GetHashCode()
         {
-            return HashCodeCombiner.Start()
+            return HashCodeCombiner
+                .Start()
                 .Add(base.GetHashCode())
                 .Add(AutoCompleteString)
                 .CombinedHash;

@@ -10,28 +10,28 @@ namespace Tests.System.IO
     [PlatformSpecific(TestPlatforms.AnyUnix)]
     public class PathInternalTests_Unix
     {
-        [Theory,
-           InlineData(@"", @""),
-           InlineData(null, null),
-           InlineData(@"/", @"/"),
-           InlineData(@"//", @"/"),
-           InlineData(@"///", @"/"),
-           InlineData(@"\", @"\"),
-           InlineData(@"\\", @"\\"),
-           InlineData(@"\\\", @"\\\"),
-           InlineData(@"\/", @"\/"),
-           InlineData(@"\/\", @"\/\"),
-
-           InlineData(@"a/a", @"a/a"),
-           InlineData(@"a//a", @"a/a"),
-           InlineData(@"a\\a", @"a\\a"),
-           InlineData(@"/a", @"/a"),
-           InlineData(@"//a", @"/a"),
-           InlineData(@"\\a", @"\\a"),
-           InlineData(@"a/", @"a/"),
-           InlineData(@"a//", @"a/"),
-           InlineData(@"a\\", @"a\\"),
-           ]
+        [
+            Theory,
+            InlineData(@"", @""),
+            InlineData(null, null),
+            InlineData(@"/", @"/"),
+            InlineData(@"//", @"/"),
+            InlineData(@"///", @"/"),
+            InlineData(@"\", @"\"),
+            InlineData(@"\\", @"\\"),
+            InlineData(@"\\\", @"\\\"),
+            InlineData(@"\/", @"\/"),
+            InlineData(@"\/\", @"\/\"),
+            InlineData(@"a/a", @"a/a"),
+            InlineData(@"a//a", @"a/a"),
+            InlineData(@"a\\a", @"a\\a"),
+            InlineData(@"/a", @"/a"),
+            InlineData(@"//a", @"/a"),
+            InlineData(@"\\a", @"\\a"),
+            InlineData(@"a/", @"a/"),
+            InlineData(@"a//", @"a/"),
+            InlineData(@"a\\", @"a\\"),
+        ]
         [PlatformSpecific(TestPlatforms.AnyUnix)]
         public void NormalizeDirectorySeparatorTests(string path, string expected)
         {

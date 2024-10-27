@@ -9,7 +9,8 @@ namespace System.Runtime
     [Fx.Tag.XamlVisible(false)]
     static class PersistenceMetadataNamespace
     {
-        const string baseNamespace = "urn:schemas-microsoft-com:System.Runtime.DurableInstancing/4.0/metadata";
+        const string baseNamespace =
+            "urn:schemas-microsoft-com:System.Runtime.DurableInstancing/4.0/metadata";
         static readonly XNamespace persistenceMetadataNamespace = XNamespace.Get(baseNamespace);
 
         static XName instanceType;

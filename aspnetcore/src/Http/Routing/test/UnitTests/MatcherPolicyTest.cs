@@ -14,9 +14,9 @@ public class MatcherPolicyTest
         // Arrange
         var endpoints = new Endpoint[]
         {
-                CreateEndpoint("1"),
-                CreateEndpoint("2"),
-                CreateEndpoint("3", new DynamicEndpointMetadata(isDynamic: true)),
+            CreateEndpoint("1"),
+            CreateEndpoint("2"),
+            CreateEndpoint("3", new DynamicEndpointMetadata(isDynamic: true)),
         };
 
         // Act
@@ -32,9 +32,9 @@ public class MatcherPolicyTest
         // Arrange
         var endpoints = new Endpoint[]
         {
-                CreateEndpoint("1"),
-                CreateEndpoint("2"),
-                CreateEndpoint("3", new DynamicEndpointMetadata(isDynamic: false)),
+            CreateEndpoint("1"),
+            CreateEndpoint("2"),
+            CreateEndpoint("3", new DynamicEndpointMetadata(isDynamic: false)),
         };
 
         // Act
@@ -64,7 +64,8 @@ public class MatcherPolicyTest
             RoutePatternFactory.Parse(template),
             0,
             new EndpointMetadataCollection(metadata),
-            "test");
+            "test"
+        );
     }
 
     private class DynamicEndpointMetadata : IDynamicEndpointMetadata

@@ -14,24 +14,29 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Host;
 
-[ExportWorkspaceService(typeof(IWorkspaceTestLogger), ServiceLayer.Host), Shared, PartNotDiscoverable]
+[
+    ExportWorkspaceService(typeof(IWorkspaceTestLogger), ServiceLayer.Host),
+    Shared,
+    PartNotDiscoverable
+]
 internal sealed class WorkspaceTestLogger : IWorkspaceTestLogger
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public WorkspaceTestLogger()
-    {
-    }
+    public WorkspaceTestLogger() { }
 
     public ITestOutputHelper? OutputHelper { get; set; }
 
-    public void Log(string message)
-        => OutputHelper?.WriteLine(message);
+    public void Log(string message) => OutputHelper?.WriteLine(message);
 }
 
 internal static class WorkspaceTestLoggerExtensions
 {
-    public static void SetWorkspaceTestOutput(this SolutionServices services, ITestOutputHelper outputHelper)
-        => Assert.IsType<WorkspaceTestLogger>(services.GetRequiredService<IWorkspaceTestLogger>()).OutputHelper = outputHelper;
+    public static void SetWorkspaceTestOutput(
+        this SolutionServices services,
+        ITestOutputHelper outputHelper
+    ) =>
+        Assert
+            .IsType<WorkspaceTestLogger>(services.GetRequiredService<IWorkspaceTestLogger>())
+            .OutputHelper = outputHelper;
 }
-

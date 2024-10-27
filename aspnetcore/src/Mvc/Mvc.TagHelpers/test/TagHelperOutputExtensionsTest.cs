@@ -2,10 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Microsoft.AspNetCore.Html;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.AspNetCore.Razor.TagHelpers;
 using Microsoft.AspNetCore.Razor.TagHelpers.Testing;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.WebEncoders.Testing;
 
 namespace Microsoft.AspNetCore.Mvc.TagHelpers;
@@ -21,304 +21,267 @@ public class TagHelperOutputExtensionsTest
                 string,
                 TagHelperAttributeList,
                 TagHelperAttributeList,
-                IEnumerable<TagHelperAttribute>>
+                IEnumerable<TagHelperAttribute>
+            >
+            {
                 {
+                    "first",
+                    new TagHelperAttributeList { { "second", "B" } },
+                    new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
+                    new[]
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("second", "B"),
-                        }
-                    },
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("second", "B"),
+                    }
+                },
+                {
+                    "second",
+                    new TagHelperAttributeList { { "first", "A" } },
+                    new TagHelperAttributeList
                     {
-                        "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" },
-                            { "second", "Duplicate B" },
-                            { "first", "A" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("second", "B"),
-                            new TagHelperAttribute("second", "Duplicate B"),
-                            new TagHelperAttribute("first", "A"),
-                        }
+                        { "second", "B" },
+                        { "second", "Duplicate B" },
+                        { "first", "A" },
                     },
+                    new[]
                     {
-                        "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" },
-                            { "first", "A" },
-                            { "second", "Duplicate B" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("second", "B"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("second", "Duplicate B"),
-                        }
-                    },
+                        new TagHelperAttribute("second", "B"),
+                        new TagHelperAttribute("second", "Duplicate B"),
+                        new TagHelperAttribute("first", "A"),
+                    }
+                },
+                {
+                    "second",
+                    new TagHelperAttributeList { { "first", "A" } },
+                    new TagHelperAttributeList
                     {
-                        "dynamic",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "dynamic", "value" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("second", "B"),
-                            new TagHelperAttribute("dynamic", "value"),
-                        }
+                        { "second", "B" },
+                        { "first", "A" },
+                        { "second", "Duplicate B" },
                     },
+                    new[]
                     {
-                        "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "second", "B" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                            new TagHelperAttribute("second", "B"),
-                        }
-                    },
+                        new TagHelperAttribute("second", "B"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("second", "Duplicate B"),
+                    }
+                },
+                {
+                    "dynamic",
+                    new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
+                    new TagHelperAttributeList { { "dynamic", "value" } },
+                    new[]
                     {
-                        "second",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("second", "B"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                        }
-                    },
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("second", "B"),
+                        new TagHelperAttribute("dynamic", "value"),
+                    }
+                },
+                {
+                    "second",
+                    new TagHelperAttributeList
                     {
-                        "third",
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" },
-                            { "third", "C" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                        }
+                        { "first", "A" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
                     },
+                    new TagHelperAttributeList { { "second", "B" } },
+                    new[]
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "second", "B" },
-                            { "third", "C" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                        }
-                    },
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                        new TagHelperAttribute("second", "B"),
+                    }
+                },
+                {
+                    "second",
+                    new TagHelperAttributeList
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "secondDynamic", "another value"},
-                            { "second", "B" },
-                            { "third", "C" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                        }
+                        { "first", "A" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
                     },
+                    new TagHelperAttributeList { { "first", "A" }, { "second", "B" } },
+                    new[]
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "dynamic", "value" },
-                            { "secondDynamic", "another value"}
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "secondDynamic", "another value"},
-                            { "first", "Second first" },
-                            { "second", "B" },
-                            { "third", "C" },
-                            { "first", "third first" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("first", "third first"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("secondDynamic", "another value"),
-                            new TagHelperAttribute("first", "Second first"),
-                        }
-                    },
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("second", "B"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                    }
+                },
+                {
+                    "third",
+                    new TagHelperAttributeList
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "third", "Duplicate Third" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "first", "A" },
-                            { "third", "Duplicate Third" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("third", "Duplicate Third"),
-                        }
+                        { "first", "A" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
                     },
+                    new TagHelperAttributeList
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "third", "Duplicate Third" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "third", "C" },
-                            { "third", "Duplicate Third" },
-                            { "first", "A" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("third", "C"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("third", "Duplicate Third"),
-                        }
+                        { "first", "A" },
+                        { "second", "B" },
+                        { "third", "C" },
                     },
+                    new[]
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "D" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "first", "A" },
-                            { "first", "B" },
-                            { "first", "C" },
-                            { "third", "D" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("first", "C"),
-                            new TagHelperAttribute("first", "B"),
-                            new TagHelperAttribute("third", "D"),
-                        }
-                    },
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList
                     {
-                        "first",
-                        new TagHelperAttributeList
-                        {
-                            { "third", "D" },
-                            { "dynamic", "value" },
-                            { "third", "Duplicate Third" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "third", "D" },
-                            { "first", "A" },
-                            { "third", "Duplicate Third" },
-                            { "first", "B" },
-                            { "first", "C" },
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("third", "D"),
-                            new TagHelperAttribute("first", "A"),
-                            new TagHelperAttribute("first", "B"),
-                            new TagHelperAttribute("first", "C"),
-                            new TagHelperAttribute("dynamic", "value"),
-                            new TagHelperAttribute("third", "Duplicate Third"),
-                        }
+                        { "third", "C" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
                     },
-                };
+                    new TagHelperAttributeList
+                    {
+                        { "first", "A" },
+                        { "second", "B" },
+                        { "third", "C" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList
+                    {
+                        { "third", "C" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "first", "A" },
+                        { "secondDynamic", "another value" },
+                        { "second", "B" },
+                        { "third", "C" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList
+                    {
+                        { "third", "C" },
+                        { "dynamic", "value" },
+                        { "secondDynamic", "another value" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "first", "A" },
+                        { "secondDynamic", "another value" },
+                        { "first", "Second first" },
+                        { "second", "B" },
+                        { "third", "C" },
+                        { "first", "third first" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("first", "third first"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("secondDynamic", "another value"),
+                        new TagHelperAttribute("first", "Second first"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList { { "third", "C" }, { "third", "Duplicate Third" } },
+                    new TagHelperAttributeList
+                    {
+                        { "third", "C" },
+                        { "first", "A" },
+                        { "third", "Duplicate Third" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("third", "Duplicate Third"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList { { "third", "C" }, { "third", "Duplicate Third" } },
+                    new TagHelperAttributeList
+                    {
+                        { "third", "C" },
+                        { "third", "Duplicate Third" },
+                        { "first", "A" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("third", "C"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("third", "Duplicate Third"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList { { "third", "D" } },
+                    new TagHelperAttributeList
+                    {
+                        { "first", "A" },
+                        { "first", "B" },
+                        { "first", "C" },
+                        { "third", "D" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("first", "C"),
+                        new TagHelperAttribute("first", "B"),
+                        new TagHelperAttribute("third", "D"),
+                    }
+                },
+                {
+                    "first",
+                    new TagHelperAttributeList
+                    {
+                        { "third", "D" },
+                        { "dynamic", "value" },
+                        { "third", "Duplicate Third" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "third", "D" },
+                        { "first", "A" },
+                        { "third", "Duplicate Third" },
+                        { "first", "B" },
+                        { "first", "C" },
+                    },
+                    new[]
+                    {
+                        new TagHelperAttribute("third", "D"),
+                        new TagHelperAttribute("first", "A"),
+                        new TagHelperAttribute("first", "B"),
+                        new TagHelperAttribute("first", "C"),
+                        new TagHelperAttribute("dynamic", "value"),
+                        new TagHelperAttribute("third", "Duplicate Third"),
+                    }
+                },
+            };
         }
     }
 
@@ -328,25 +291,32 @@ public class TagHelperOutputExtensionsTest
         string attributeNameToCopy,
         TagHelperAttributeList outputAttributes,
         TagHelperAttributeList allAttributes,
-        IEnumerable<TagHelperAttribute> expectedAttributes)
+        IEnumerable<TagHelperAttribute> expectedAttributes
+    )
     {
         // Arrange
         var output = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(outputAttributes),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var context = new TagHelperContext(
             tagName: "p",
             allAttributes: allAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         output.CopyHtmlAttribute(attributeNameToCopy, context);
 
         // Assert
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
     }
 
     public static TheoryData CopyHtmlAttributeData_MultipleAttributesSameName
@@ -355,73 +325,53 @@ public class TagHelperOutputExtensionsTest
         {
             // attributeNameToCopy, allAttributes, expectedAttributes
             return new TheoryData<string, TagHelperAttributeList, IEnumerable<TagHelperAttribute>>
+            {
                 {
+                    "hello",
+                    new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } },
+                    new[]
                     {
-                        "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("hello", "world"),
-                            new TagHelperAttribute("hello", "world2"),
-                        }
-                    },
+                        new TagHelperAttribute("hello", "world"),
+                        new TagHelperAttribute("hello", "world2"),
+                    }
+                },
+                {
+                    "HELLO",
+                    new TagHelperAttributeList { { "hello", "world" }, { "hello", "world2" } },
+                    new[]
                     {
-                        "HELLO",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "hello", "world2" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("hello", "world"),
-                            new TagHelperAttribute("hello", "world2"),
-                        }
-                    },
+                        new TagHelperAttribute("hello", "world"),
+                        new TagHelperAttribute("hello", "world2"),
+                    }
+                },
+                {
+                    "hello",
+                    new TagHelperAttributeList { { "HelLO", "world" }, { "HELLO", "world2" } },
+                    new[]
                     {
-                        "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "HelLO", "world" },
-                            { "HELLO", "world2" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("HelLO", "world"),
-                            new TagHelperAttribute("HELLO", "world2"),
-                        }
-                    },
+                        new TagHelperAttribute("HelLO", "world"),
+                        new TagHelperAttribute("HELLO", "world2"),
+                    }
+                },
+                {
+                    "hello",
+                    new TagHelperAttributeList { { "hello", "world" }, { "HELLO", "world2" } },
+                    new[]
                     {
-                        "hello",
-                        new TagHelperAttributeList
-                        {
-                            { "hello", "world" },
-                            { "HELLO", "world2" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("hello", "world"),
-                            new TagHelperAttribute("HELLO", "world2"),
-                        }
-                    },
+                        new TagHelperAttribute("hello", "world"),
+                        new TagHelperAttribute("HELLO", "world2"),
+                    }
+                },
+                {
+                    "HELLO",
+                    new TagHelperAttributeList { { "HeLlO", "world" }, { "heLLo", "world2" } },
+                    new[]
                     {
-                        "HELLO",
-                        new TagHelperAttributeList
-                        {
-                            { "HeLlO", "world" },
-                            { "heLLo", "world2" }
-                        },
-                        new[]
-                        {
-                            new TagHelperAttribute("HeLlO", "world"),
-                            new TagHelperAttribute("heLLo", "world2"),
-                        }
-                    },
-                };
+                        new TagHelperAttribute("HeLlO", "world"),
+                        new TagHelperAttribute("heLLo", "world2"),
+                    }
+                },
+            };
         }
     }
 
@@ -430,31 +380,41 @@ public class TagHelperOutputExtensionsTest
     public void CopyHtmlAttribute_CopiesAllOriginalAttributes(
         string attributeNameToCopy,
         TagHelperAttributeList allAttributes,
-        IEnumerable<TagHelperAttribute> expectedAttributes)
+        IEnumerable<TagHelperAttribute> expectedAttributes
+    )
     {
         // Arrange
         var output = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var context = new TagHelperContext(
             tagName: "p",
             allAttributes: allAttributes,
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         output.CopyHtmlAttribute(attributeNameToCopy, context);
 
         // Assert
-        Assert.Equal(expectedAttributes, output.Attributes, CaseSensitiveTagHelperAttributeComparer.Default);
+        Assert.Equal(
+            expectedAttributes,
+            output.Attributes,
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
     }
 
     [Theory]
     [InlineData("hello", "world")]
     [InlineData("HeLlO", "wOrLd")]
-    public void CopyHtmlAttribute_CopiesOriginalAttributes(string attributeName, string attributeValue)
+    public void CopyHtmlAttribute_CopiesOriginalAttributes(
+        string attributeName,
+        string attributeValue
+    )
     {
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
@@ -465,15 +425,14 @@ public class TagHelperOutputExtensionsTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.Append("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            });
+            }
+        );
         var tagHelperContext = new TagHelperContext(
             tagName: "p",
-            allAttributes: new TagHelperAttributeList
-            {
-                    { attributeName, attributeValue }
-            },
+            allAttributes: new TagHelperAttributeList { { attributeName, attributeValue } },
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
         var expectedAttribute = new TagHelperAttribute(attributeName, attributeValue);
 
         // Act
@@ -491,25 +450,21 @@ public class TagHelperOutputExtensionsTest
         var attributeName = "hello";
         var tagHelperOutput = new TagHelperOutput(
             "p",
-            attributes: new TagHelperAttributeList()
-            {
-                    { attributeName, "world2" }
-            },
+            attributes: new TagHelperAttributeList() { { attributeName, "world2" } },
             getChildContentAsync: (useCachedResult, encoder) =>
             {
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.Append("Something Else");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            });
+            }
+        );
         var expectedAttribute = new TagHelperAttribute(attributeName, "world2");
         var tagHelperContext = new TagHelperContext(
             tagName: "p",
-            allAttributes: new TagHelperAttributeList
-            {
-                    { attributeName, "world" }
-            },
+            allAttributes: new TagHelperAttributeList { { attributeName, "world" } },
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act
         tagHelperOutput.CopyHtmlAttribute(attributeName, tagHelperContext);
@@ -532,21 +487,21 @@ public class TagHelperOutputExtensionsTest
                 var tagHelperContent = new DefaultTagHelperContent();
                 tagHelperContent.Append("Something");
                 return Task.FromResult<TagHelperContent>(tagHelperContent);
-            });
+            }
+        );
         var tagHelperContext = new TagHelperContext(
             tagName: "p",
-            allAttributes: new TagHelperAttributeList
-            {
-                    { "hello", "world" }
-            },
+            allAttributes: new TagHelperAttributeList { { "hello", "world" } },
             items: new Dictionary<object, object>(),
-            uniqueId: "test");
+            uniqueId: "test"
+        );
 
         // Act & Assert
         ExceptionAssert.ThrowsArgument(
             () => tagHelperOutput.CopyHtmlAttribute(invalidAttributeName, tagHelperContext),
             "attributeName",
-            "The attribute 'hello2' does not exist in the TagHelperContext.");
+            "The attribute 'hello2' does not exist in the TagHelperContext."
+        );
     }
 
     [Fact]
@@ -557,16 +512,19 @@ public class TagHelperOutputExtensionsTest
             tagName: "p",
             attributes: new TagHelperAttributeList()
             {
-                    { "route-Hello", "World" },
-                    { "Route-I", "Am" }
+                { "route-Hello", "World" },
+                { "Route-I", "Am" },
             },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput.Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase))
+        var attributes = tagHelperOutput
+            .Attributes.Where(item =>
+                item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+            )
             .ToList();
 
         // Act
@@ -585,15 +543,17 @@ public class TagHelperOutputExtensionsTest
             tagName: "p",
             attributes: new TagHelperAttributeList()
             {
-                    { "route-Hello", "World" },
-                    { "Route-I", "Am" }
+                { "route-Hello", "World" },
+                { "Route-I", "Am" },
             },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
-        var attributes = tagHelperOutput.Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+        var attributes = tagHelperOutput.Attributes.Where(item =>
+            item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        );
 
         // Act
         tagHelperOutput.RemoveRange(attributes);
@@ -611,16 +571,18 @@ public class TagHelperOutputExtensionsTest
             tagName: "p",
             attributes: new TagHelperAttributeList()
             {
-                    { "route-Hello", "World" },
-                    { "Route-I", "Am" }
+                { "route-Hello", "World" },
+                { "Route-I", "Am" },
             },
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
-        var attributes = tagHelperOutput.Attributes
-            .Where(item => item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase));
+        var attributes = tagHelperOutput.Attributes.Where(item =>
+            item.Name.StartsWith("route-", StringComparison.OrdinalIgnoreCase)
+        );
 
         // Act
         tagHelperOutput.RemoveRange(attributes);
@@ -635,130 +597,99 @@ public class TagHelperOutputExtensionsTest
         get
         {
             // tagBuilderAttributes, outputAttributes, expectedAttributes
-            return new TheoryData<Dictionary<string, string>, TagHelperAttributeList, TagHelperAttributeList>
+            return new TheoryData<
+                Dictionary<string, string>,
+                TagHelperAttributeList,
+                TagHelperAttributeList
+            >
+            {
                 {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "class", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2 btn" }
-                        }
+                        { "class", "btn" },
                     },
+                    new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
+                    new TagHelperAttributeList { { "class", "btn2 btn" } }
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "ClAsS", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "class", "btn2 btn" }
-                        }
+                        { "ClAsS", "btn" },
                     },
+                    new TagHelperAttributeList { { "class", "btn2" }, { "class", "btn3" } },
+                    new TagHelperAttributeList { { "class", "btn2 btn" } }
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "class", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "class", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        { "class", "btn" },
                     },
+                    new TagHelperAttributeList { { "clASS", "btn2" }, { "class", "btn3" } },
+                    new TagHelperAttributeList { { "clASS", "btn2 btn" } }
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "class", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "CLass", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        { "class", "btn" },
                     },
+                    new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
+                    new TagHelperAttributeList { { "clASS", "btn2 btn" } }
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "CLASS", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2" },
-                            { "CLass", "btn3" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "clASS", "btn2 btn" }
-                        }
+                        { "CLASS", "btn" },
                     },
+                    new TagHelperAttributeList { { "clASS", "btn2" }, { "CLass", "btn3" } },
+                    new TagHelperAttributeList { { "clASS", "btn2 btn" } }
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "CLASS", "btn" }
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "before", "before value" },
-                            { "clASS", "btn2" },
-                            { "mid", "mid value" },
-                            { "CLass", "btn3" },
-                            { "after", "after value" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "before", "before value" },
-                            { "clASS", "btn2 btn" },
-                            { "mid", "mid value" },
-                            { "after", "after value" },
-                        }
+                        { "CLASS", "btn" },
                     },
+                    new TagHelperAttributeList
                     {
-                        new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
-                        {
-                            { "A", "A Value" },
-                            { "CLASS", "btn" },
-                            { "B", "B Value" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "before", "before value" },
-                            { "clASS", "btn2" },
-                            { "mid", "mid value" },
-                            { "CLass", "btn3" },
-                            { "after", "after value" },
-                        },
-                        new TagHelperAttributeList
-                        {
-                            { "before", "before value" },
-                            { "clASS", "btn2 btn" },
-                            { "mid", "mid value" },
-                            { "after", "after value" },
-                            { "A", "A Value" },
-                            { "B", "B Value" },
-                        }
+                        { "before", "before value" },
+                        { "clASS", "btn2" },
+                        { "mid", "mid value" },
+                        { "CLass", "btn3" },
+                        { "after", "after value" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "before", "before value" },
+                        { "clASS", "btn2 btn" },
+                        { "mid", "mid value" },
+                        { "after", "after value" },
                     }
-                };
+                },
+                {
+                    new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase)
+                    {
+                        { "A", "A Value" },
+                        { "CLASS", "btn" },
+                        { "B", "B Value" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "before", "before value" },
+                        { "clASS", "btn2" },
+                        { "mid", "mid value" },
+                        { "CLass", "btn3" },
+                        { "after", "after value" },
+                    },
+                    new TagHelperAttributeList
+                    {
+                        { "before", "before value" },
+                        { "clASS", "btn2 btn" },
+                        { "mid", "mid value" },
+                        { "after", "after value" },
+                        { "A", "A Value" },
+                        { "B", "B Value" },
+                    }
+                },
+            };
         }
     }
 
@@ -767,14 +698,16 @@ public class TagHelperOutputExtensionsTest
     public void MergeAttributes_ClearsDuplicateClassNameAttributes(
         Dictionary<string, string> tagBuilderAttributes,
         TagHelperAttributeList outputAttributes,
-        TagHelperAttributeList expectedAttributes)
+        TagHelperAttributeList expectedAttributes
+    )
     {
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             "p",
             outputAttributes,
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         var tagBuilder = new TagBuilder("p");
         foreach (var attr in tagBuilderAttributes)
@@ -789,7 +722,8 @@ public class TagHelperOutputExtensionsTest
         Assert.Equal(
             expectedAttributes,
             tagHelperOutput.Attributes,
-            CaseSensitiveTagHelperAttributeComparer.Default);
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
     }
 
     [Fact]
@@ -799,8 +733,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedAttribute = new TagHelperAttribute("type", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
@@ -822,8 +757,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         tagHelperOutput.Attributes.Add("class", "Hello");
 
         var tagBuilder = new TagBuilder("p");
@@ -844,14 +780,17 @@ public class TagHelperOutputExtensionsTest
     [InlineData("ClaSS", "class")]
     [InlineData("ClaSS", "cLaSs")]
     public void MergeAttributes_AppendsClass_TagHelperOutputAttributeValues_IgnoresCase(
-        string originalName, string updateName)
+        string originalName,
+        string updateName
+    )
     {
         // Arrange
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         tagHelperOutput.Attributes.Add(originalName, "Hello");
 
         var tagBuilder = new TagBuilder("p");
@@ -865,7 +804,8 @@ public class TagHelperOutputExtensionsTest
         Assert.Equal(
             new TagHelperAttribute(originalName, "Hello btn"),
             attribute,
-            CaseSensitiveTagHelperAttributeComparer.Default);
+            CaseSensitiveTagHelperAttributeComparer.Default
+        );
     }
 
     [Fact]
@@ -875,8 +815,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         var tagBuilder = new TagBuilder("p");
         var expectedAttribute = new TagHelperAttribute("visible", "val < 3");
@@ -897,8 +838,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         var tagBuilder = new TagBuilder("p");
         var expectedAttribute1 = new TagHelperAttribute("class", "btn");
@@ -911,7 +853,10 @@ public class TagHelperOutputExtensionsTest
 
         // Assert
         Assert.Equal(2, tagHelperOutput.Attributes.Count);
-        var attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var attribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedAttribute1.Value, attribute.Value);
         attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class2"));
         Assert.Equal(expectedAttribute2.Value, attribute.Value);
@@ -924,8 +869,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedAttribute = new TagHelperAttribute("class", "btn");
         tagHelperOutput.Attributes.Add(expectedAttribute);
 
@@ -946,8 +892,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
         var expectedOutputAttribute = new TagHelperAttribute("class", "btn");
         tagHelperOutput.Attributes.Add(expectedOutputAttribute);
 
@@ -960,7 +907,10 @@ public class TagHelperOutputExtensionsTest
 
         // Assert
         Assert.Equal(2, tagHelperOutput.Attributes.Count);
-        var attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var attribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedOutputAttribute.Value, attribute.Value);
         attribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("for"));
         Assert.Equal(expectedBuilderAttribute.Value, attribute.Value);
@@ -976,14 +926,18 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         // Act
         tagHelperOutput.AddClass("btn", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var classAttribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
 
@@ -997,15 +951,19 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         // Act
         tagHelperOutput.AddClass("btn", htmlEncoder);
         tagHelperOutput.AddClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var classAttribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
 
@@ -1019,8 +977,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         tagHelperOutput.AddClass("btn", htmlEncoder);
         tagHelperOutput.AddClass("btn-success", htmlEncoder);
@@ -1031,7 +990,10 @@ public class TagHelperOutputExtensionsTest
         tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var classAttribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
 
@@ -1040,18 +1002,26 @@ public class TagHelperOutputExtensionsTest
     {
         // Arrange
         var classValue = "btn btn-success";
-        var expected = new ArgumentException(Resources.ArgumentCannotContainHtmlSpace, nameof(classValue)).Message;
+        var expected = new ArgumentException(
+            Resources.ArgumentCannotContainHtmlSpace,
+            nameof(classValue)
+        ).Message;
         var htmlEncoder = new HtmlTestEncoder();
 
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         // Act and Assert
-        var exceptionAdd = Assert.Throws<ArgumentException>(() => tagHelperOutput.AddClass(classValue, htmlEncoder));
-        var exceptionRemove = Assert.Throws<ArgumentException>(() => tagHelperOutput.RemoveClass(classValue, htmlEncoder));
+        var exceptionAdd = Assert.Throws<ArgumentException>(
+            () => tagHelperOutput.AddClass(classValue, htmlEncoder)
+        );
+        var exceptionRemove = Assert.Throws<ArgumentException>(
+            () => tagHelperOutput.RemoveClass(classValue, htmlEncoder)
+        );
         Assert.Equal(expected, exceptionAdd.Message);
         Assert.Equal(expected, exceptionRemove.Message);
     }
@@ -1065,10 +1035,14 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
-        tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]"));
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn", htmlEncoder);
@@ -1088,16 +1062,23 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
-        tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]"));
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]] HtmlEncode[[btn]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var classAttribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
 
@@ -1109,8 +1090,9 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
         tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]]"));
 
@@ -1132,16 +1114,23 @@ public class TagHelperOutputExtensionsTest
         var tagHelperOutput = new TagHelperOutput(
             tagName: "p",
             attributes: new TagHelperAttributeList(),
-            getChildContentAsync: (useCachedResult, encoder) => Task.FromResult<TagHelperContent>(
-                new DefaultTagHelperContent()));
+            getChildContentAsync: (useCachedResult, encoder) =>
+                Task.FromResult<TagHelperContent>(new DefaultTagHelperContent())
+        );
 
-        tagHelperOutput.Attributes.SetAttribute("class", new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]"));
+        tagHelperOutput.Attributes.SetAttribute(
+            "class",
+            new HtmlString("HtmlEncode[[btn]] HtmlEncode[[btn-primary]]")
+        );
 
         // Act
         tagHelperOutput.RemoveClass("btn-primary", htmlEncoder);
 
         // Assert
-        var classAttribute = Assert.Single(tagHelperOutput.Attributes, attr => attr.Name.Equals("class"));
+        var classAttribute = Assert.Single(
+            tagHelperOutput.Attributes,
+            attr => attr.Name.Equals("class")
+        );
         Assert.Equal(expectedValue, HtmlContentUtilities.HtmlContentToString(classAttribute));
     }
 }

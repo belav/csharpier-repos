@@ -11,15 +11,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class GetKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public GetKeywordRecommender()
-            : base(SyntaxKind.GetKeyword)
-        {
-        }
+            : base(SyntaxKind.GetKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(position, SyntaxKind.GetKeyword) ||
-                context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(position, SyntaxKind.GetKeyword);
+            return context.TargetToken.IsAccessorDeclarationContext<PropertyDeclarationSyntax>(
+                    position,
+                    SyntaxKind.GetKeyword
+                )
+                || context.TargetToken.IsAccessorDeclarationContext<IndexerDeclarationSyntax>(
+                    position,
+                    SyntaxKind.GetKeyword
+                );
         }
     }
 }

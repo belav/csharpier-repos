@@ -10,23 +10,26 @@ using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Xunit;
-
 #if !IIS_FUNCTIONALS
 using Microsoft.AspNetCore.Server.IIS.FunctionalTests;
 
 #if IISEXPRESS_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.IISExpress.FunctionalTests;
+
 #elif NEWHANDLER_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewHandler.FunctionalTests;
+
 #elif NEWSHIM_FUNCTIONALS
 namespace Microsoft.AspNetCore.Server.IIS.NewShim.FunctionalTests;
+
 #endif
 
 #else
 namespace Microsoft.AspNetCore.Server.IIS.FunctionalTests;
+
 #endif
 
 [Collection(IISTestSiteCollection.Name)]
@@ -59,7 +62,10 @@ public class RequestResponseTests
         var response = await SendSocketRequestAsync(rawPath);
         Assert.Equal(200, response.Status);
         // '/' %2F is an exception, un-escaping it would change the structure of the path
-        Assert.Equal("/ !\"#$%&'()*,-.%2F0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~", response.Body);
+        Assert.Equal(
+            "/ !\"#$%&'()*,-.%2F0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`abcdefghijklmnopqrstuvwxyz{|}~",
+            response.Body
+        );
     }
 
     [ConditionalFact]
@@ -105,7 +111,10 @@ public class RequestResponseTests
                 continue; // \t and \r are allowed by Http.Sys.
             }
             var response = await SendSocketRequestAsync("/" + (char)i);
-            Assert.True(string.Equals(400, response.Status), i.ToString("X2", CultureInfo.InvariantCulture) + ";" + response);
+            Assert.True(
+                string.Equals(400, response.Status),
+                i.ToString("X2", CultureInfo.InvariantCulture) + ";" + response
+            );
         }
     }
 
@@ -115,8 +124,13 @@ public class RequestResponseTests
     {
         for (var i = 0; i < 32; i++)
         {
-            var response = await SendSocketRequestAsync("/%" + i.ToString("X2", CultureInfo.InvariantCulture));
-            Assert.True(string.Equals(400, response.Status), i.ToString("X2", CultureInfo.InvariantCulture) + ";" + response);
+            var response = await SendSocketRequestAsync(
+                "/%" + i.ToString("X2", CultureInfo.InvariantCulture)
+            );
+            Assert.True(
+                string.Equals(400, response.Status),
+                i.ToString("X2", CultureInfo.InvariantCulture) + ";" + response
+            );
         }
     }
 
@@ -131,11 +145,35 @@ public class RequestResponseTests
         var response = await _fixture.Client.SendAsync(request);
         Assert.Equal("gzip", response.Content.Headers.ContentEncoding.Single());
         Assert.Equal(
-            new byte[] {
-                0x1F, 0x8B, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x04, 0x0A, 0x63, 0x60, 0xA0, 0x3D, 0x00, 0x00,
-                0xCA, 0xC6, 0x88, 0x99, 0x64, 0x00, 0x00, 0x00 },
-            await response.Content.ReadAsByteArrayAsync());
+            new byte[]
+            {
+                0x1F,
+                0x8B,
+                0x08,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x04,
+                0x0A,
+                0x63,
+                0x60,
+                0xA0,
+                0x3D,
+                0x00,
+                0x00,
+                0xCA,
+                0xC6,
+                0x88,
+                0x99,
+                0x64,
+                0x00,
+                0x00,
+                0x00,
+            },
+            await response.Content.ReadAsByteArrayAsync()
+        );
     }
 
     [ConditionalFact]
@@ -149,11 +187,35 @@ public class RequestResponseTests
         var response = await _fixture.Client.SendAsync(request);
         Assert.Equal("gzip", response.Content.Headers.ContentEncoding.Single());
         Assert.Equal(
-            new byte[] {
-                0x1F, 0x8B, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00,
-                0x04, 0x0A, 0x63, 0x60, 0xA0, 0x3D, 0x00, 0x00,
-                0xCA, 0xC6, 0x88, 0x99, 0x64, 0x00, 0x00, 0x00 },
-            await response.Content.ReadAsByteArrayAsync());
+            new byte[]
+            {
+                0x1F,
+                0x8B,
+                0x08,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x00,
+                0x04,
+                0x0A,
+                0x63,
+                0x60,
+                0xA0,
+                0x3D,
+                0x00,
+                0x00,
+                0xCA,
+                0xC6,
+                0x88,
+                0x99,
+                0x64,
+                0x00,
+                0x00,
+                0x00,
+            },
+            await response.Content.ReadAsByteArrayAsync()
+        );
     }
 
     [ConditionalFact]
@@ -220,10 +282,13 @@ public class RequestResponseTests
         using (var connection = _fixture.CreateTestConnection())
         {
             var testString = "hello world";
-            var request = $"POST /ReadAndWriteSlowConnection HTTP/1.0\r\n" +
-                $"Content-Length: {testString.Length}\r\n" +
-                "Host: " + "localhost\r\n" +
-                "\r\n" + testString;
+            var request =
+                $"POST /ReadAndWriteSlowConnection HTTP/1.0\r\n"
+                + $"Content-Length: {testString.Length}\r\n"
+                + "Host: "
+                + "localhost\r\n"
+                + "\r\n"
+                + testString;
 
             foreach (var c in request)
             {
@@ -231,9 +296,7 @@ public class RequestResponseTests
                 await Task.Delay(10);
             }
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
             await connection.ReceiveHeaders();
 
             for (int i = 0; i < 100; i++)
@@ -267,11 +330,10 @@ public class RequestResponseTests
                 $"Content-Length: {requestLength}",
                 "Host: localhost",
                 "",
-                "");
+                ""
+            );
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
             await connection.ReceiveHeaders();
 
             foreach (var message in messages)
@@ -297,13 +359,12 @@ public class RequestResponseTests
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
             await connection.Send(message);
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
 
             // This test can return both content length or chunked response
             // depending on if appfunc managed to complete before write was
@@ -315,14 +376,8 @@ public class RequestResponseTests
             }
             else
             {
-                await connection.Receive(
-                    "5",
-                    message,
-                    "");
-                await connection.Receive(
-                    "0",
-                    "",
-                    "");
+                await connection.Receive("5", message, "");
+                await connection.Receive("0", "", "");
             }
 
             await connection.WaitForConnectionClose();
@@ -345,20 +400,14 @@ public class RequestResponseTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
+                    ""
+                );
 
-                await connection.Send("5",
-                    "Hello",
-                    "");
+                await connection.Send("5", "Hello", "");
 
-                await connection.Send(
-                    "0",
-                    "",
-                    "");
+                await connection.Send("0", "", "");
 
-                await connection.Receive(
-                    "HTTP/1.1 200 OK",
-                    "");
+                await connection.Receive("HTTP/1.1 200 OK", "");
 
                 await connection.ReceiveHeaders();
                 await connection.Receive("Completed");
@@ -372,22 +421,34 @@ public class RequestResponseTests
     [RequiresNewHandler]
     public async Task ResponseBodyTest_UnflushedPipe_AutoFlushed()
     {
-        Assert.Equal(10, (await _fixture.Client.GetByteArrayAsync($"/UnflushedResponsePipe")).Length);
+        Assert.Equal(
+            10,
+            (await _fixture.Client.GetByteArrayAsync($"/UnflushedResponsePipe")).Length
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     public async Task ResponseBodyTest_FlushedPipeAndThenUnflushedPipe_AutoFlushed()
     {
-        Assert.Equal(20, (await _fixture.Client.GetByteArrayAsync($"/FlushedPipeAndThenUnflushedPipe")).Length);
+        Assert.Equal(
+            20,
+            (await _fixture.Client.GetByteArrayAsync($"/FlushedPipeAndThenUnflushedPipe")).Length
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     public async Task ResponseBodyTest_GettingHttpContextFieldsWork()
     {
-        Assert.Equal("SlowOnCompleted", await _fixture.Client.GetStringAsync($"/OnCompletedHttpContext"));
-        Assert.Equal("", await _fixture.Client.GetStringAsync($"/OnCompletedHttpContext_Completed"));
+        Assert.Equal(
+            "SlowOnCompleted",
+            await _fixture.Client.GetStringAsync($"/OnCompletedHttpContext")
+        );
+        Assert.Equal(
+            "",
+            await _fixture.Client.GetStringAsync($"/OnCompletedHttpContext_Completed")
+        );
     }
 
     [ConditionalFact]
@@ -407,20 +468,32 @@ public class RequestResponseTests
     public async Task ProvidesAccessToServerVariables()
     {
         var port = _fixture.Client.BaseAddress.Port;
-        Assert.Equal("SERVER_PORT: " + port, await _fixture.Client.GetStringAsync("/ServerVariable?q=SERVER_PORT"));
-        Assert.Equal("QUERY_STRING: q=QUERY_STRING", await _fixture.Client.GetStringAsync("/ServerVariable?q=QUERY_STRING"));
+        Assert.Equal(
+            "SERVER_PORT: " + port,
+            await _fixture.Client.GetStringAsync("/ServerVariable?q=SERVER_PORT")
+        );
+        Assert.Equal(
+            "QUERY_STRING: q=QUERY_STRING",
+            await _fixture.Client.GetStringAsync("/ServerVariable?q=QUERY_STRING")
+        );
     }
 
     [ConditionalFact]
     public async Task ReturnsNullForUndefinedServerVariable()
     {
-        Assert.Equal("THIS_VAR_IS_UNDEFINED: (null)", await _fixture.Client.GetStringAsync("/ServerVariable?q=THIS_VAR_IS_UNDEFINED"));
+        Assert.Equal(
+            "THIS_VAR_IS_UNDEFINED: (null)",
+            await _fixture.Client.GetStringAsync("/ServerVariable?q=THIS_VAR_IS_UNDEFINED")
+        );
     }
 
     [ConditionalFact]
     public async Task CanSetAndReadVariable()
     {
-        Assert.Equal("ROUNDTRIP: 1", await _fixture.Client.GetStringAsync("/ServerVariable?v=1&q=ROUNDTRIP"));
+        Assert.Equal(
+            "ROUNDTRIP: 1",
+            await _fixture.Client.GetStringAsync("/ServerVariable?v=1&q=ROUNDTRIP")
+        );
     }
 
     [ConditionalFact]
@@ -432,12 +505,16 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task GetServerVariableDoesNotCrash()
     {
-        await Helpers.StressLoad(_fixture.Client, "/GetServerVariableStress", response =>
-        {
-            var text = response.Content.ReadAsStringAsync().Result;
-            Assert.StartsWith("Response Begin", text);
-            Assert.EndsWith("Response End", text);
-        });
+        await Helpers.StressLoad(
+            _fixture.Client,
+            "/GetServerVariableStress",
+            response =>
+            {
+                var text = response.Content.ReadAsStringAsync().Result;
+                Assert.StartsWith("Response Begin", text);
+                Assert.EndsWith("Response End", text);
+            }
+        );
     }
 
     [ConditionalFact]
@@ -450,7 +527,10 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task TestReadOffsetWorks()
     {
-        var result = await _fixture.Client.PostAsync($"/TestReadOffsetWorks", new StringContent("Hello World"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestReadOffsetWorks",
+            new StringContent("Hello World")
+        );
         Assert.Equal("Hello World", await result.Content.ReadAsStringAsync());
     }
 
@@ -480,7 +560,10 @@ public class RequestResponseTests
     [InlineData("/InvalidCountZeroReadPost")]
     public async Task TestValidReadOperationsPost(string operation)
     {
-        var result = await _fixture.Client.PostAsync($"/TestValidReadOperations{operation}", new StringContent("hello"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestValidReadOperations{operation}",
+            new StringContent("hello")
+        );
         Assert.Equal("Success", await result.Content.ReadAsStringAsync());
     }
 
@@ -492,7 +575,9 @@ public class RequestResponseTests
     [InlineData("/InvalidCountWithOffset")]
     public async Task TestInvalidWriteOperations(string operation)
     {
-        var result = await _fixture.Client.GetStringAsync($"/TestInvalidWriteOperations{operation}");
+        var result = await _fixture.Client.GetStringAsync(
+            $"/TestInvalidWriteOperations{operation}"
+        );
         Assert.Equal("Success", result);
     }
 
@@ -506,7 +591,10 @@ public class RequestResponseTests
     [ConditionalFact]
     public async Task TestValidWriteOperationsPost()
     {
-        var result = await _fixture.Client.PostAsync($"/TestValidWriteOperations/NullBufferPost", new StringContent("hello"));
+        var result = await _fixture.Client.PostAsync(
+            $"/TestValidWriteOperations/NullBufferPost",
+            new StringContent("hello")
+        );
         Assert.Equal("Success", await result.Content.ReadAsStringAsync());
     }
 
@@ -530,7 +618,12 @@ public class RequestResponseTests
         Assert.True(response.Headers.TryGetValues("UnknownHeader", out var headerValues));
         Assert.Equal("test123=foo", headerValues.First());
 
-        Assert.True(response.Content.Headers.TryGetValues(Net.Http.Headers.HeaderNames.ContentType, out headerValues));
+        Assert.True(
+            response.Content.Headers.TryGetValues(
+                Net.Http.Headers.HeaderNames.ContentType,
+                out headerValues
+            )
+        );
         Assert.Equal("text/plain", headerValues.First());
 
         Assert.True(response.Headers.TryGetValues("MultiHeader", out headerValues));
@@ -551,21 +644,25 @@ public class RequestResponseTests
     [InlineData(200, "custom", "custom", null)]
     [InlineData(200, "custom", "custom", "Custom body")]
     [InlineData(200, "custom", "custom", "")]
-
     [InlineData(500, "", "Internal Server Error", null)]
     [InlineData(500, "", "Internal Server Error", "Custom body")]
     [InlineData(500, "", "Internal Server Error", "")]
-
     [InlineData(400, "custom", "custom", null)]
     [InlineData(400, "", "Bad Request", "Custom body")]
     [InlineData(400, "", "Bad Request", "")]
-
     [InlineData(999, "", "", null)]
     [InlineData(999, "", "", "Custom body")]
     [InlineData(999, "", "", "")]
-    public async Task CustomErrorCodeWorks(int code, string reason, string expectedReason, string body)
+    public async Task CustomErrorCodeWorks(
+        int code,
+        string reason,
+        string expectedReason,
+        string body
+    )
     {
-        var response = await _fixture.Client.GetAsync($"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}");
+        var response = await _fixture.Client.GetAsync(
+            $"SetCustomErorCode?code={code}&reason={reason}&writeBody={body != null}&body={body}"
+        );
         Assert.Equal((HttpStatusCode)code, response.StatusCode);
         Assert.Equal(expectedReason, response.ReasonPhrase);
 
@@ -579,10 +676,16 @@ public class RequestResponseTests
     [InlineData(304, "GET")]
     public async Task TransferEncodingNotSetForStatusCodes(int code, string method)
     {
-        var request = new HttpRequestMessage(new HttpMethod(method), _fixture.Client.BaseAddress + $"SetCustomErorCode?code={code}");
+        var request = new HttpRequestMessage(
+            new HttpMethod(method),
+            _fixture.Client.BaseAddress + $"SetCustomErorCode?code={code}"
+        );
         var response = await _fixture.Client.SendAsync(request);
         Assert.Equal((HttpStatusCode)code, response.StatusCode);
-        Assert.DoesNotContain(response.Headers, h => h.Key.Equals("transfer-encoding", StringComparison.InvariantCultureIgnoreCase));
+        Assert.DoesNotContain(
+            response.Headers,
+            h => h.Key.Equals("transfer-encoding", StringComparison.InvariantCultureIgnoreCase)
+        );
     }
 
     [ConditionalFact]
@@ -597,18 +700,36 @@ public class RequestResponseTests
     [InlineData("SetHeaderAfterWrite")]
     public async Task ResponseInvalidOrderingTests_ExpectFailure(string path)
     {
-        Assert.Equal($"Started_{path}Threw_Finished", await _fixture.Client.GetStringAsync("/ResponseInvalidOrdering/" + path));
+        Assert.Equal(
+            $"Started_{path}Threw_Finished",
+            await _fixture.Client.GetStringAsync("/ResponseInvalidOrdering/" + path)
+        );
     }
 
     [ConditionalFact]
     [RequiresNewHandler]
     public async Task HostingEnvironmentIsCorrect()
     {
-        Assert.Equal(_fixture.DeploymentResult.ContentRoot, await _fixture.Client.GetStringAsync("/ContentRootPath"));
-        Assert.Equal(_fixture.DeploymentResult.ContentRoot + "\\wwwroot", await _fixture.Client.GetStringAsync("/WebRootPath"));
-        Assert.Equal(_fixture.DeploymentResult.ContentRoot, await _fixture.DeploymentResult.HttpClient.GetStringAsync("/CurrentDirectory"));
-        Assert.Equal(_fixture.DeploymentResult.ContentRoot + "\\", await _fixture.Client.GetStringAsync("/BaseDirectory"));
-        Assert.Equal(_fixture.DeploymentResult.ContentRoot + "\\", await _fixture.Client.GetStringAsync("/ASPNETCORE_IIS_PHYSICAL_PATH"));
+        Assert.Equal(
+            _fixture.DeploymentResult.ContentRoot,
+            await _fixture.Client.GetStringAsync("/ContentRootPath")
+        );
+        Assert.Equal(
+            _fixture.DeploymentResult.ContentRoot + "\\wwwroot",
+            await _fixture.Client.GetStringAsync("/WebRootPath")
+        );
+        Assert.Equal(
+            _fixture.DeploymentResult.ContentRoot,
+            await _fixture.DeploymentResult.HttpClient.GetStringAsync("/CurrentDirectory")
+        );
+        Assert.Equal(
+            _fixture.DeploymentResult.ContentRoot + "\\",
+            await _fixture.Client.GetStringAsync("/BaseDirectory")
+        );
+        Assert.Equal(
+            _fixture.DeploymentResult.ContentRoot + "\\",
+            await _fixture.Client.GetStringAsync("/ASPNETCORE_IIS_PHYSICAL_PATH")
+        );
     }
 
     [ConditionalTheory]
@@ -617,7 +738,7 @@ public class RequestResponseTests
     public async Task IISEnvironmentFeatureIsAvailable(string endpoint)
     {
         var siteName = _fixture.DeploymentResult.DeploymentParameters.SiteName.ToUpperInvariant();
-    
+
         var expected = $"""
             IIS Version: 10.0
             ApplicationId: /LM/W3SVC/1/ROOT
@@ -625,7 +746,10 @@ public class RequestResponseTests
             Application Virtual Path: /
             Application Config Path: MACHINE/WEBROOT/APPHOST/{siteName}
             AppPool ID: {_fixture.DeploymentResult.AppPoolName}
-            AppPool Config File: {_fixture.DeploymentResult.DeploymentParameters.ServerConfigLocation}
+            AppPool Config File: {_fixture
+                .DeploymentResult
+                .DeploymentParameters
+                .ServerConfigLocation}
             Site ID: 1
             Site Name: {siteName}
             """;
@@ -640,13 +764,19 @@ public class RequestResponseTests
     [InlineData(100000000)]
     public async Task LargeResponseBodyTest_CheckAllResponseBodyBytesWritten(int query)
     {
-        Assert.Equal(new string('a', query), await _fixture.Client.GetStringAsync($"/LargeResponseBody?length={query}"));
+        Assert.Equal(
+            new string('a', query),
+            await _fixture.Client.GetStringAsync($"/LargeResponseBody?length={query}")
+        );
     }
 
     [ConditionalFact]
     public async Task LargeResponseBodyFromFile_CheckAllResponseBodyBytesWritten()
     {
-        Assert.Equal(200000000, (await _fixture.Client.GetStringAsync($"/LargeResponseFile")).Length);
+        Assert.Equal(
+            200000000,
+            (await _fixture.Client.GetStringAsync($"/LargeResponseFile")).Length
+        );
     }
 
     [ConditionalTheory]
@@ -663,7 +793,10 @@ public class RequestResponseTests
     [RequiresNewShim]
     public async Task ExposesIServerAddressesFeature()
     {
-        Assert.Equal(_fixture.Client.BaseAddress.ToString(), await _fixture.Client.GetStringAsync("/ServerAddresses"));
+        Assert.Equal(
+            _fixture.Client.BaseAddress.ToString(),
+            await _fixture.Client.GetStringAsync("/ServerAddresses")
+        );
     }
 
     [ConditionalFact]
@@ -678,13 +811,12 @@ public class RequestResponseTests
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
             await connection.Send(message);
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
         }
 
         var response = await _fixture.Client.GetAsync("HelloWorld");
@@ -703,17 +835,32 @@ public class RequestResponseTests
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
-            await _fixture.Client.RetryRequestAsync("/WaitingRequestCount", async message => await message.Content.ReadAsStringAsync() == "1");
+            await _fixture.Client.RetryRequestAsync(
+                "/WaitingRequestCount",
+                async message => await message.Content.ReadAsStringAsync() == "1"
+            );
         }
 
-        await _fixture.Client.RetryRequestAsync("/WaitingRequestCount", async message => await message.Content.ReadAsStringAsync() == "0");
+        await _fixture.Client.RetryRequestAsync(
+            "/WaitingRequestCount",
+            async message => await message.Content.ReadAsStringAsync() == "0"
+        );
     }
 
     [ConditionalFact]
-    [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2, SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107")]
-    [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win81, SkipReason = "NullReferenceException https://github.com/dotnet/aspnetcore/issues/26839")]
+    [MaximumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10_20H2,
+        SkipReason = "Shutdown hangs https://github.com/dotnet/aspnetcore/issues/25107"
+    )]
+    [MinimumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win81,
+        SkipReason = "NullReferenceException https://github.com/dotnet/aspnetcore/issues/26839"
+    )]
     public async Task ClientDisconnectStress()
     {
         var maxRequestSize = 1000;
@@ -728,7 +875,8 @@ public class RequestResponseTests
                     "Host: localhost",
                     "Connection: close",
                     "",
-                    "");
+                    ""
+                );
 
                 var disconnectAfter = Random.Shared.Next(maxRequestSize);
                 var data = new byte[blockSize];
@@ -760,11 +908,10 @@ public class RequestResponseTests
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
         }
     }
 
@@ -781,11 +928,10 @@ public class RequestResponseTests
                 "Host: localhost",
                 "Connection: close",
                 "",
-                "");
+                ""
+            );
 
-            await connection.Receive(
-                "HTTP/1.1 200 OK",
-                "");
+            await connection.Receive("HTTP/1.1 200 OK", "");
         }
     }
 
@@ -797,7 +943,8 @@ public class RequestResponseTests
                 "GET " + path + " HTTP/1.1",
                 "Host: " + _fixture.Client.BaseAddress.Authority,
                 "",
-                "");
+                ""
+            );
             var headers = await connection.ReceiveHeaders();
             var status = int.Parse(headers[0].Substring(9, 3), CultureInfo.InvariantCulture);
             if (headers.Contains("Transfer-Encoding: chunked"))
@@ -806,7 +953,12 @@ public class RequestResponseTests
                 Assert.False(bytes0.IsEmpty);
                 return (status, Encoding.UTF8.GetString(bytes0.Span));
             }
-            var length = int.Parse(headers.Single(h => h.StartsWith("Content-Length: ", StringComparison.Ordinal)).Substring("Content-Length: ".Length), CultureInfo.InvariantCulture);
+            var length = int.Parse(
+                headers
+                    .Single(h => h.StartsWith("Content-Length: ", StringComparison.Ordinal))
+                    .Substring("Content-Length: ".Length),
+                CultureInfo.InvariantCulture
+            );
             var bytes1 = await connection.Receive(length);
             return (status, Encoding.ASCII.GetString(bytes1.Span));
         }

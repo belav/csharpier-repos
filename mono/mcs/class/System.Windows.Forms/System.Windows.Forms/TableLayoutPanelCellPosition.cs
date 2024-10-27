@@ -8,10 +8,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,68 +31,66 @@ using System.ComponentModel;
 
 namespace System.Windows.Forms
 {
-	[TypeConverter (typeof (TableLayoutPanelCellPositionTypeConverter))]
-	public struct TableLayoutPanelCellPosition {
-		int column, row;
+    [TypeConverter(typeof(TableLayoutPanelCellPositionTypeConverter))]
+    public struct TableLayoutPanelCellPosition
+    {
+        int column,
+            row;
 
-		public TableLayoutPanelCellPosition (int column, int row)
-		{
-			this.column = column;
-			this.row = row;
-		}
-		
-		public int Column {
-			get {
-				return column;
-			}
+        public TableLayoutPanelCellPosition(int column, int row)
+        {
+            this.column = column;
+            this.row = row;
+        }
 
-			set {
-				column = value;
-			}
-		}
+        public int Column
+        {
+            get { return column; }
+            set { column = value; }
+        }
 
-		public int Row {
-			get {
-				return row;
-			}
+        public int Row
+        {
+            get { return row; }
+            set { row = value; }
+        }
 
-			set {
-				row = value;
-			}
-		}
+        public override string ToString()
+        {
+            return String.Concat(column.ToString(), ",", row.ToString());
+        }
 
-		public override string ToString ()
-		{
-			return String.Concat (column.ToString (), ",", row.ToString ());
-		}
+        public override int GetHashCode()
+        {
+            return column.GetHashCode() ^ row.GetHashCode();
+        }
 
-		public override int GetHashCode ()
-		{
-			return column.GetHashCode () ^ row.GetHashCode ();
-		}
+        public static bool operator ==(
+            TableLayoutPanelCellPosition p1,
+            TableLayoutPanelCellPosition p2
+        )
+        {
+            return p1.column == p2.column && p1.row == p2.row;
+        }
 
-		public static bool operator == (TableLayoutPanelCellPosition p1, TableLayoutPanelCellPosition p2)
-		{
-			return p1.column == p2.column && p1.row == p2.row;
-		}
+        public static bool operator !=(
+            TableLayoutPanelCellPosition p1,
+            TableLayoutPanelCellPosition p2
+        )
+        {
+            return !(p1.column == p2.column && p1.row == p2.row);
+        }
 
-		public static bool operator != (TableLayoutPanelCellPosition p1, TableLayoutPanelCellPosition p2)
-		{
-			return !(p1.column == p2.column && p1.row == p2.row);
-		}
+        public override bool Equals(object other)
+        {
+            if (other == null)
+                return false;
+            if (!(other is TableLayoutPanelCellPosition))
+                return false;
+            TableLayoutPanelCellPosition o = (TableLayoutPanelCellPosition)other;
+            return o.column == column && o.row == row;
+        }
+    }
 
-		public override bool Equals (object other)
-		{
-			if (other == null)
-				return false;
-			if (!(other is TableLayoutPanelCellPosition))
-				return false;
-			TableLayoutPanelCellPosition o = (TableLayoutPanelCellPosition) other;
-			return o.column == column && o.row == row;
-		}
-	}
-	
-	internal class TableLayoutPanelCellPositionTypeConverter : TypeConverter
-	{
-	}
+    internal class TableLayoutPanelCellPositionTypeConverter : TypeConverter { }
 }

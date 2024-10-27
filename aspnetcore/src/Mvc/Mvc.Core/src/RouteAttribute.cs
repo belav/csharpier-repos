@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Specifies an attribute route on a controller.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = true,
+    Inherited = true
+)]
 public class RouteAttribute : Attribute, IRouteTemplateProvider
 {
     private int? _order;

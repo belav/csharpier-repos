@@ -27,7 +27,8 @@ public abstract class ProblemDetailsFactory
         string? title = null,
         string? type = null,
         string? detail = null,
-        string? instance = null);
+        string? instance = null
+    );
 
     /// <summary>
     /// Creates a <see cref="ValidationProblemDetails" /> instance that configures defaults based on values specified in <see cref="ApiBehaviorOptions" />.
@@ -47,5 +48,6 @@ public abstract class ProblemDetailsFactory
         string? title = null,
         string? type = null,
         string? detail = null,
-        string? instance = null);
+        string? instance = null
+    );
 }

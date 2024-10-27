@@ -17,20 +17,31 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal static class SourceDocumentationCommentUtils
     {
-        internal static string GetAndCacheDocumentationComment(Symbol symbol, bool expandIncludes, ref string lazyXmlText)
+        internal static string GetAndCacheDocumentationComment(
+            Symbol symbol,
+            bool expandIncludes,
+            ref string lazyXmlText
+        )
         {
             // NOTE: For xml doc comments from source, the culture is ignored (we just return the
             // doc comment as it appears in source), so it won't affect what we cache.
             if (lazyXmlText == null)
             {
-                string xmlText = DocumentationCommentCompiler.GetDocumentationCommentXml(symbol, expandIncludes, default(CancellationToken));
+                string xmlText = DocumentationCommentCompiler.GetDocumentationCommentXml(
+                    symbol,
+                    expandIncludes,
+                    default(CancellationToken)
+                );
                 Interlocked.CompareExchange(ref lazyXmlText, xmlText, null);
             }
 
             return lazyXmlText;
         }
 
-        internal static ImmutableArray<DocumentationCommentTriviaSyntax> GetDocumentationCommentTriviaFromSyntaxNode(CSharpSyntaxNode syntaxNode, DiagnosticBag diagnostics)
+        internal static ImmutableArray<DocumentationCommentTriviaSyntax> GetDocumentationCommentTriviaFromSyntaxNode(
+            CSharpSyntaxNode syntaxNode,
+            DiagnosticBag diagnostics
+        )
         {
             if (syntaxNode.SyntaxTree.Options.DocumentationMode < DocumentationMode.Parse)
             {
@@ -45,7 +56,10 @@ namespace Microsoft.CodeAnalysis.CSharp
                 while ((object)curr != null)
                 {
                     SyntaxKind kind = curr.Kind();
-                    if (kind == SyntaxKind.FieldDeclaration || kind == SyntaxKind.EventFieldDeclaration)
+                    if (
+                        kind == SyntaxKind.FieldDeclaration
+                        || kind == SyntaxKind.EventFieldDeclaration
+                    )
                     {
                         break;
                     }
@@ -67,31 +81,35 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case SyntaxKind.SingleLineDocumentationCommentTrivia:
                     case SyntaxKind.MultiLineDocumentationCommentTrivia:
+                    {
+                        if (seenOtherTrivia)
                         {
-                            if (seenOtherTrivia)
+                            // In most cases, unprocessed doc comments are reported by UnprocessedDocumentationCommentFinder.
+                            // However, in places where doc comments *are* allowed, it's easier to determine which will
+                            // be unprocessed here.
+                            var tree = trivia.SyntaxTree;
+                            if (tree.ReportDocumentationCommentDiagnostics())
                             {
-                                // In most cases, unprocessed doc comments are reported by UnprocessedDocumentationCommentFinder.
-                                // However, in places where doc comments *are* allowed, it's easier to determine which will
-                                // be unprocessed here.
-                                var tree = trivia.SyntaxTree;
-                                if (tree.ReportDocumentationCommentDiagnostics())
-                                {
-                                    int start = trivia.Position; // FullSpan start to include /** or ///
-                                    const int length = 1; //Match dev11: span is just one character
-                                    diagnostics.Add(ErrorCode.WRN_UnprocessedXMLComment, new SourceLocation(tree, new TextSpan(start, length)));
-                                }
+                                int start = trivia.Position; // FullSpan start to include /** or ///
+                                const int length = 1; //Match dev11: span is just one character
+                                diagnostics.Add(
+                                    ErrorCode.WRN_UnprocessedXMLComment,
+                                    new SourceLocation(tree, new TextSpan(start, length))
+                                );
                             }
-                            else
-                            {
-                                if (builder == null)
-                                {
-                                    builder = ArrayBuilder<DocumentationCommentTriviaSyntax>.GetInstance();
-                                }
-
-                                builder.Add((DocumentationCommentTriviaSyntax)trivia.GetStructure());
-                            }
-                            break;
                         }
+                        else
+                        {
+                            if (builder == null)
+                            {
+                                builder =
+                                    ArrayBuilder<DocumentationCommentTriviaSyntax>.GetInstance();
+                            }
+
+                            builder.Add((DocumentationCommentTriviaSyntax)trivia.GetStructure());
+                        }
+                        break;
+                    }
                     case SyntaxKind.WhitespaceTrivia:
                     case SyntaxKind.EndOfLineTrivia:
                         // These can legally appear between doc comments.

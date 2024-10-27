@@ -9,14 +9,15 @@
  */
 
 
-namespace DefaultNamespace {
-    using System.Threading;
+namespace DefaultNamespace
+{
     using System;
     using System.IO;
+    using System.Threading;
 
-    public class ThdTreeLivingObj {
-
-        public static int Main (System.String[] Args)
+    public class ThdTreeLivingObj
+    {
+        public static int Main(System.String[] Args)
         {
             Console.Out.WriteLine("Test should return with ExitCode 100 ...");
             // console out sync Console.SetOut(TextWriter.Synchronized(Console.Out));
@@ -25,7 +26,7 @@ namespace DefaultNamespace {
 
             if (Args.Length == 1)
             {
-                if (!Int32.TryParse( Args[0], out iNofThread ))
+                if (!Int32.TryParse(Args[0], out iNofThread))
                 {
                     iNofThread = 2;
                 }
@@ -35,7 +36,7 @@ namespace DefaultNamespace {
                 iNofThread = 2;
             }
 
-            int[] count = {1000, 1000, 1000, -900, 0, 700, 100};
+            int[] count = { 1000, 1000, 1000, -900, 0, 700, 100 };
             TreeThread Mv_TreeThread;
             for (int i = 0; i < iNofThread; i++)
             {
@@ -43,6 +44,5 @@ namespace DefaultNamespace {
             }
             return 100;
         }
-
     }
 }

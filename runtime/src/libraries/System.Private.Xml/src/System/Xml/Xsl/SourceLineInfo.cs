@@ -10,8 +10,14 @@ namespace System.Xml.Xsl
     {
         private readonly ulong _value;
 
-        public int Line { get { return (int)(_value >> 32); } }
-        public int Pos { get { return unchecked((int)(_value)); } }
+        public int Line
+        {
+            get { return (int)(_value >> 32); }
+        }
+        public int Pos
+        {
+            get { return unchecked((int)(_value)); }
+        }
 
         public Location(int line, int pos)
         {
@@ -31,9 +37,14 @@ namespace System.Xml.Xsl
         private readonly Location start;
         private readonly Location end;
 
-        public SourceLineInfo(string? uriString, int startLine, int startPos, int endLine, int endPos)
-            : this(uriString, new Location(startLine, startPos), new Location(endLine, endPos))
-        { }
+        public SourceLineInfo(
+            string? uriString,
+            int startLine,
+            int startPos,
+            int endLine,
+            int endPos
+        )
+            : this(uriString, new Location(startLine, startPos), new Location(endLine, endPos)) { }
 
         public SourceLineInfo(string? uriString, Location start, Location end)
         {
@@ -43,10 +54,22 @@ namespace System.Xml.Xsl
             Validate(this);
         }
 
-        public string? Uri { get { return this.uriString; } }
-        public int StartLine { get { return this.start.Line; } }
-        public Location End { get { return this.end; } }
-        public Location Start { get { return this.start; } }
+        public string? Uri
+        {
+            get { return this.uriString; }
+        }
+        public int StartLine
+        {
+            get { return this.start.Line; }
+        }
+        public Location End
+        {
+            get { return this.end; }
+        }
+        public Location Start
+        {
+            get { return this.start; }
+        }
 
         /// <summary>
         /// Magic number 0xfeefee is used in PDB to denote a section of IL that does not map to any user code.
@@ -55,7 +78,13 @@ namespace System.Xml.Xsl
         /// </summary>
         private const int NoSourceMagicNumber = 0xfeefee;
 
-        public static SourceLineInfo NoSource = new SourceLineInfo(string.Empty, NoSourceMagicNumber, 0, NoSourceMagicNumber, 0);
+        public static SourceLineInfo NoSource = new SourceLineInfo(
+            string.Empty,
+            NoSourceMagicNumber,
+            0,
+            NoSourceMagicNumber,
+            0
+        );
 
         public bool IsNoSource
         {
@@ -84,9 +113,10 @@ namespace System.Xml.Xsl
             Debug.Assert(uriString != null);
             Uri? uri;
 
-            if (uriString.Length != 0 &&
-                System.Uri.TryCreate(uriString, UriKind.Absolute, out uri) &&
-                uri.IsFile
+            if (
+                uriString.Length != 0
+                && System.Uri.TryCreate(uriString, UriKind.Absolute, out uri)
+                && uri.IsFile
             )
             {
                 return uri.LocalPath;

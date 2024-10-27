@@ -17,7 +17,8 @@ public sealed class RequestTimeoutOptions
     /// Dictionary of policies that would be applied per endpoint.
     /// Policy names are case-insensitive.
     /// </summary>
-    public IDictionary<string, RequestTimeoutPolicy> Policies { get; } = new Dictionary<string, RequestTimeoutPolicy>(StringComparer.OrdinalIgnoreCase);
+    public IDictionary<string, RequestTimeoutPolicy> Policies { get; } =
+        new Dictionary<string, RequestTimeoutPolicy>(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Adds a new policy.
@@ -26,10 +27,7 @@ public sealed class RequestTimeoutOptions
     /// <param name="timeout">The timeout to apply for this policy.</param>
     public RequestTimeoutOptions AddPolicy(string policyName, TimeSpan timeout)
     {
-        return AddPolicy(policyName, new RequestTimeoutPolicy
-        {
-            Timeout = timeout
-        });
+        return AddPolicy(policyName, new RequestTimeoutPolicy { Timeout = timeout });
     }
 
     /// <summary>

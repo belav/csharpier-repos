@@ -8,23 +8,35 @@ namespace System.Security.Cryptography.Xml
 {
     public class XmlDsigExcC14NTransform : Transform
     {
-        private readonly Type[] _inputTypes = { typeof(Stream), typeof(XmlDocument), typeof(XmlNodeList) };
+        private readonly Type[] _inputTypes =
+        {
+            typeof(Stream),
+            typeof(XmlDocument),
+            typeof(XmlNodeList),
+        };
         private readonly Type[] _outputTypes = { typeof(Stream) };
         private readonly bool _includeComments;
         private string? _inclusiveNamespacesPrefixList;
         private ExcCanonicalXml? _excCanonicalXml;
 
-        public XmlDsigExcC14NTransform() : this(false, null) { }
+        public XmlDsigExcC14NTransform()
+            : this(false, null) { }
 
-        public XmlDsigExcC14NTransform(bool includeComments) : this(includeComments, null) { }
+        public XmlDsigExcC14NTransform(bool includeComments)
+            : this(includeComments, null) { }
 
-        public XmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList) : this(false, inclusiveNamespacesPrefixList) { }
+        public XmlDsigExcC14NTransform(string inclusiveNamespacesPrefixList)
+            : this(false, inclusiveNamespacesPrefixList) { }
 
         public XmlDsigExcC14NTransform(bool includeComments, string? inclusiveNamespacesPrefixList)
         {
             _includeComments = includeComments;
             _inclusiveNamespacesPrefixList = inclusiveNamespacesPrefixList;
-            Algorithm = (includeComments ? SignedXml.XmlDsigExcC14NWithCommentsTransformUrl : SignedXml.XmlDsigExcC14NTransformUrl);
+            Algorithm = (
+                includeComments
+                    ? SignedXml.XmlDsigExcC14NWithCommentsTransformUrl
+                    : SignedXml.XmlDsigExcC14NTransformUrl
+            );
         }
 
         public string? InclusiveNamespacesPrefixList
@@ -52,15 +64,23 @@ namespace System.Security.Cryptography.Xml
                     XmlElement? e = n as XmlElement;
                     if (e != null)
                     {
-                        if (e.LocalName.Equals("InclusiveNamespaces")
-                        && e.NamespaceURI.Equals(SignedXml.XmlDsigExcC14NTransformUrl) &&
-                        Utils.HasAttribute(e, "PrefixList", SignedXml.XmlDsigNamespaceUrl))
+                        if (
+                            e.LocalName.Equals("InclusiveNamespaces")
+                            && e.NamespaceURI.Equals(SignedXml.XmlDsigExcC14NTransformUrl)
+                            && Utils.HasAttribute(e, "PrefixList", SignedXml.XmlDsigNamespaceUrl)
+                        )
                         {
                             if (!Utils.VerifyAttributes(e, "PrefixList"))
                             {
-                                throw new CryptographicException(SR.Cryptography_Xml_UnknownTransform);
+                                throw new CryptographicException(
+                                    SR.Cryptography_Xml_UnknownTransform
+                                );
                             }
-                            this.InclusiveNamespacesPrefixList = Utils.GetAttribute(e, "PrefixList", SignedXml.XmlDsigNamespaceUrl);
+                            this.InclusiveNamespacesPrefixList = Utils.GetAttribute(
+                                e,
+                                "PrefixList",
+                                SignedXml.XmlDsigNamespaceUrl
+                            );
                             return;
                         }
                         else
@@ -74,18 +94,36 @@ namespace System.Security.Cryptography.Xml
 
         public override void LoadInput(object obj)
         {
-            XmlResolver resolver = (ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver());
+            XmlResolver resolver = (
+                ResolverSet ? _xmlResolver : XmlResolverHelper.GetThrowingResolver()
+            );
             if (obj is Stream)
             {
-                _excCanonicalXml = new ExcCanonicalXml((Stream)obj, _includeComments, _inclusiveNamespacesPrefixList!, resolver, BaseURI!);
+                _excCanonicalXml = new ExcCanonicalXml(
+                    (Stream)obj,
+                    _includeComments,
+                    _inclusiveNamespacesPrefixList!,
+                    resolver,
+                    BaseURI!
+                );
             }
             else if (obj is XmlDocument)
             {
-                _excCanonicalXml = new ExcCanonicalXml((XmlDocument)obj, _includeComments, _inclusiveNamespacesPrefixList!, resolver);
+                _excCanonicalXml = new ExcCanonicalXml(
+                    (XmlDocument)obj,
+                    _includeComments,
+                    _inclusiveNamespacesPrefixList!,
+                    resolver
+                );
             }
             else if (obj is XmlNodeList)
             {
-                _excCanonicalXml = new ExcCanonicalXml((XmlNodeList)obj, _includeComments, _inclusiveNamespacesPrefixList!, resolver);
+                _excCanonicalXml = new ExcCanonicalXml(
+                    (XmlNodeList)obj,
+                    _includeComments,
+                    _inclusiveNamespacesPrefixList!,
+                    resolver
+                );
             }
             else
                 throw new ArgumentException(SR.Cryptography_Xml_IncorrectObjectType, nameof(obj));
@@ -99,7 +137,10 @@ namespace System.Security.Cryptography.Xml
             XmlElement element = document.CreateElement("Transform", SignedXml.XmlDsigNamespaceUrl);
             if (!string.IsNullOrEmpty(Algorithm))
                 element.SetAttribute("Algorithm", Algorithm);
-            XmlElement prefixListElement = document.CreateElement("InclusiveNamespaces", SignedXml.XmlDsigExcC14NTransformUrl);
+            XmlElement prefixListElement = document.CreateElement(
+                "InclusiveNamespaces",
+                SignedXml.XmlDsigExcC14NTransformUrl
+            );
             prefixListElement.SetAttribute("PrefixList", InclusiveNamespacesPrefixList);
             element.AppendChild(prefixListElement);
             return element.ChildNodes;
@@ -113,7 +154,10 @@ namespace System.Security.Cryptography.Xml
         public override object GetOutput(Type type)
         {
             if (type != typeof(Stream) && !type.IsSubclassOf(typeof(Stream)))
-                throw new ArgumentException(SR.Cryptography_Xml_TransformIncorrectInputType, nameof(type));
+                throw new ArgumentException(
+                    SR.Cryptography_Xml_TransformIncorrectInputType,
+                    nameof(type)
+                );
             return new MemoryStream(_excCanonicalXml!.GetBytes());
         }
 

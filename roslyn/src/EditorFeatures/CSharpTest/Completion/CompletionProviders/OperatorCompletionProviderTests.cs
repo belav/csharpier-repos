@@ -18,8 +18,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class OperatorCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(UnnamedSymbolCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(UnnamedSymbolCompletionProvider);
 
         // The suggestion is e.g. "+". If the user actually types "+" the completion list is closed. Operators therefore do not support partially written items.
         protected override string? ItemPartiallyWritten(string? expectedItemOrNull) => "";
@@ -63,17 +63,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             yield return new[] { "+" };
         }
 
-        public static IEnumerable<object[]> BinaryOperators()
-            => BinaryArithmeticAndLogicalOperators().Union(BinaryEqualityAndRelationalOperators());
+        public static IEnumerable<object[]> BinaryOperators() =>
+            BinaryArithmeticAndLogicalOperators().Union(BinaryEqualityAndRelationalOperators());
 
-        public static IEnumerable<object[]> UnaryOperators()
-            => PostfixOperators().Union(PrefixOperators());
+        public static IEnumerable<object[]> UnaryOperators() =>
+            PostfixOperators().Union(PrefixOperators());
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorIsNotOfferedAfterNumberLiteral()
         {
             // User may want to type a floating point literal.
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static C operator +(C a, C b) => default;
@@ -86,13 +87,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         1.$$
                     }
                 }
-                """, SourceCodeKind.Regular);
+                """,
+                SourceCodeKind.Regular
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorIsSuggestedAfterDot()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class C
                 {
                     public static C operator +(C a, C b) => default;
@@ -106,7 +110,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         c.$$;
                     }
                 }
-                """, "+", inlineDescription: "x + y", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "+",
+                inlineDescription: "x + y",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -120,12 +129,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
         [InlineData("c.$$a", true)]
         [InlineData("c.$$ a", true)]
         [InlineData("c?.$$", true)]
-        public async Task OperatorSuggestionOnPartiallyWrittenMember(string expression, bool isOffered)
+        public async Task OperatorSuggestionOnPartiallyWrittenMember(
+            string expression,
+            bool isOffered
+        )
         {
             var verifyAction = isOffered
-                ? new Func<string, Task>(markup => VerifyItemExistsAsync(markup, "+", inlineDescription: "x + y"))
+                ? new Func<string, Task>(markup =>
+                    VerifyItemExistsAsync(markup, "+", inlineDescription: "x + y")
+                )
                 : new Func<string, Task>(markup => VerifyNoItemsExistAsync(markup));
-            await verifyAction(@$"
+            await verifyAction(
+                @$"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -139,13 +154,15 @@ public class Program
         {expression}
     }}
 }}
-");
+"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorIsNotSuggestedOnStaticAccess()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static C operator +(C a, C b) => default;
@@ -158,13 +175,15 @@ public class Program
                         C.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorIsNotSuggestedInNameoOfContext()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static C operator +(C a, C b) => default;
@@ -178,13 +197,15 @@ public class Program
                         var name = nameof(c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorsAreSortedByImporttanceAndGroupedByTopic()
         {
-            var items = await GetCompletionItemsAsync("""
+            var items = await GetCompletionItemsAsync(
+                """
                 public class C
                 {
                     public static C operator +(C a, C b) => null;
@@ -222,9 +243,12 @@ public class Program
                         c.$$;
                     }
                 }
-                """, SourceCodeKind.Regular);
+                """,
+                SourceCodeKind.Regular
+            );
             // true and false operators are not listed
-            Assert.Collection(items,
+            Assert.Collection(
+                items,
                 i => Assert.Equal("==", i.DisplayText),
                 i => Assert.Equal("!=", i.DisplayText),
                 i => Assert.Equal(">", i.DisplayText),
@@ -288,9 +312,13 @@ public class Program
         [InlineData("System.TimeSpan", 10)]
         [InlineData("System.DateTimeOffset", 8)]
         [InlineData("System.Guid", 2)]
-        public async Task OperatorSuggestionForSpecialTypes(string specialType, int numberOfSuggestions)
+        public async Task OperatorSuggestionForSpecialTypes(
+            string specialType,
+            int numberOfSuggestions
+        )
         {
-            var completionItems = await GetCompletionItemsAsync(@$"
+            var completionItems = await GetCompletionItemsAsync(
+                @$"
 public class Program
 {{
     public static void Main()
@@ -299,16 +327,23 @@ public class Program
         i.$$
     }}
 }}
-", SourceCodeKind.Regular);
+",
+                SourceCodeKind.Regular
+            );
             Assert.Equal(
                 numberOfSuggestions,
-                completionItems.Count(c => c.GetProperty(UnnamedSymbolCompletionProvider.KindName) == UnnamedSymbolCompletionProvider.OperatorKindName));
+                completionItems.Count(c =>
+                    c.GetProperty(UnnamedSymbolCompletionProvider.KindName)
+                    == UnnamedSymbolCompletionProvider.OperatorKindName
+                )
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorNoSuggestionForTrueAndFalse()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 public class C
                 {
                     public static bool operator true(C _) => true;
@@ -323,14 +358,16 @@ public class Program
                         c.$$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         [MemberData(nameof(BinaryOperators))]
         public async Task OperatorBinaryIsCompleted(string binaryOperator)
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public static C operator {binaryOperator}(C a, C b) => default;
@@ -344,7 +381,9 @@ public class Program
         c.$$
     }}
 }}
-", binaryOperator, @$"
+",
+                binaryOperator,
+                @$"
 public class C
 {{
     public static C operator {binaryOperator}(C a, C b) => default;
@@ -358,14 +397,16 @@ public class Program
         c {binaryOperator} $$
     }}
 }}
-");
+"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         [MemberData(nameof(PostfixOperators))]
         public async Task OperatorPostfixIsCompleted(string postfixOperator)
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public static C operator {postfixOperator}(C _) => default;
@@ -379,7 +420,9 @@ public class Program
         c.$$
     }}
 }}
-", postfixOperator, @$"
+",
+                postfixOperator,
+                @$"
 public class C
 {{
     public static C operator {postfixOperator}(C _) => default;
@@ -393,14 +436,16 @@ public class Program
         c{postfixOperator} $$
     }}
 }}
-");
+"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         [MemberData(nameof(PrefixOperators))]
         public async Task OperatorPrefixIsCompleted(string prefixOperator)
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public static C operator {prefixOperator}(C _) => default;
@@ -414,7 +459,9 @@ public class Program
         c.$$
     }}
 }}
-", prefixOperator, @$"
+",
+                prefixOperator,
+                @$"
 public class C
 {{
     public static C operator {prefixOperator}(C _) => default;
@@ -428,13 +475,15 @@ public class Program
         {prefixOperator}c$$
     }}
 }}
-");
+"
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorDuplicateOperatorsAreListedBoth()
         {
-            var items = await GetCompletionItemsAsync($@"
+            var items = await GetCompletionItemsAsync(
+                $@"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -449,8 +498,11 @@ public class Program
         c.$$
     }}
 }}
-", SourceCodeKind.Regular);
-            Assert.Collection(items,
+",
+                SourceCodeKind.Regular
+            );
+            Assert.Collection(
+                items,
                 i =>
                 {
                     Assert.Equal("+", i.DisplayText);
@@ -460,13 +512,15 @@ public class Program
                 {
                     Assert.Equal("+", i.DisplayText);
                     Assert.EndsWith("002_014", i.SortText); // unary plus
-                });
+                }
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorDuplicateOperatorsAreCompleted()
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -481,7 +535,9 @@ public class Program
         c.$$
     }}
 }}
-", "+", @$"
+",
+                "+",
+                @$"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -496,55 +552,36 @@ public class Program
         c + $$
     }}
 }}
-");
+"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
-        [InlineData("c.$$",
-                    "c + $$")]
-        [InlineData("c. $$",
-                    "c + $$ ")]
-        [InlineData("c .$$",
-                    "c  + $$")]
-        [InlineData("c.$$;",
-                    "c + $$;")]
-        [InlineData("c.abc$$",
-                    "c + $$")]
-        [InlineData("c.a$$bc",
-                    "c + $$")]
-        [InlineData("c.$$abc",
-                    "c + $$abc")]
-        [InlineData("c.$$ abc",
-                    "c + $$ abc")]
-        [InlineData("(true ? c : c).$$",
-                    "(true ? c : c) + $$")]
-        [InlineData("c?.$$",
-                    "c + $$")]
-        [InlineData("(true ? c : c)?.$$",
-                    "(true ? c : c) + $$")]
-        [InlineData("c? .$$",
-                    "c + $$")]
-        [InlineData("c ? .$$",
-                    "c  + $$")]
-        [InlineData("c?.CProp.$$",
-                    "c?.CProp + $$")]
-        [InlineData("c?.CProp?.$$",
-                    "c?.CProp + $$")]
-        [InlineData("c.CProp.CProp?.$$",
-                    "c.CProp.CProp + $$")]
-        [InlineData("c?.CProp.CProp.$$",
-                    "c?.CProp.CProp + $$")]
-        [InlineData("c[0].$$",
-                    "c[0] + $$")]
-        [InlineData("c[0]?.$$",
-                    "c[0] + $$")]
-        [InlineData("c?.CProp[0].$$",
-                    "c?.CProp[0] + $$")]
-        [InlineData("c.CProp[0].CProp?.$$",
-                    "c.CProp[0].CProp + $$")]
+        [InlineData("c.$$", "c + $$")]
+        [InlineData("c. $$", "c + $$ ")]
+        [InlineData("c .$$", "c  + $$")]
+        [InlineData("c.$$;", "c + $$;")]
+        [InlineData("c.abc$$", "c + $$")]
+        [InlineData("c.a$$bc", "c + $$")]
+        [InlineData("c.$$abc", "c + $$abc")]
+        [InlineData("c.$$ abc", "c + $$ abc")]
+        [InlineData("(true ? c : c).$$", "(true ? c : c) + $$")]
+        [InlineData("c?.$$", "c + $$")]
+        [InlineData("(true ? c : c)?.$$", "(true ? c : c) + $$")]
+        [InlineData("c? .$$", "c + $$")]
+        [InlineData("c ? .$$", "c  + $$")]
+        [InlineData("c?.CProp.$$", "c?.CProp + $$")]
+        [InlineData("c?.CProp?.$$", "c?.CProp + $$")]
+        [InlineData("c.CProp.CProp?.$$", "c.CProp.CProp + $$")]
+        [InlineData("c?.CProp.CProp.$$", "c?.CProp.CProp + $$")]
+        [InlineData("c[0].$$", "c[0] + $$")]
+        [InlineData("c[0]?.$$", "c[0] + $$")]
+        [InlineData("c?.CProp[0].$$", "c?.CProp[0] + $$")]
+        [InlineData("c.CProp[0].CProp?.$$", "c.CProp[0].CProp + $$")]
         public async Task OperatorInfixOfferingsAndCompletions(string expression, string completion)
         {
-            await VerifyCustomCommitProviderAsync($@"
+            await VerifyCustomCommitProviderAsync(
+                $@"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -560,7 +597,9 @@ public class Program
         {expression}
     }}
 }}
-", "+", @$"
+",
+                "+",
+                @$"
 public class C
 {{
     public static C operator +(C a, C b) => default;
@@ -576,7 +615,8 @@ public class Program
         {completion}
     }}
 }}
-");
+"
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -598,13 +638,24 @@ public class Program
                     }}
                 }}
                 """;
-            var inlineDescription = operatorSign.Length == 1
-                ? $"{operatorSign}x"
-                : $"x{operatorSign}";
-            await VerifyItemExistsAsync(string.Format(template, $"public static S operator {operatorSign}(S _)"), operatorSign, inlineDescription: inlineDescription);
-            await VerifyItemExistsAsync(string.Format(template, $"public static bool operator {operatorSign}(S _)"), operatorSign, inlineDescription: inlineDescription);
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static object operator {operatorSign}(S _)"));
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static S operator {operatorSign}(S a, S b, S c)"));
+            var inlineDescription =
+                operatorSign.Length == 1 ? $"{operatorSign}x" : $"x{operatorSign}";
+            await VerifyItemExistsAsync(
+                string.Format(template, $"public static S operator {operatorSign}(S _)"),
+                operatorSign,
+                inlineDescription: inlineDescription
+            );
+            await VerifyItemExistsAsync(
+                string.Format(template, $"public static bool operator {operatorSign}(S _)"),
+                operatorSign,
+                inlineDescription: inlineDescription
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static object operator {operatorSign}(S _)")
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static S operator {operatorSign}(S a, S b, S c)")
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -627,11 +678,25 @@ public class Program
                 }}
                 """;
             var inlineDescription = $"x {operatorSign} y";
-            await VerifyItemExistsAsync(string.Format(template, $"public static S operator {operatorSign}(S a, S b)"), operatorSign, inlineDescription: inlineDescription);
-            await VerifyItemExistsAsync(string.Format(template, $"public static int operator {operatorSign}(S a, S b)"), operatorSign, inlineDescription: inlineDescription);
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static object operator {operatorSign}(S a, S b)"));
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static S operator {operatorSign}(S a, object b)"));
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static S operator {operatorSign}(S a, S b, S c)"));
+            await VerifyItemExistsAsync(
+                string.Format(template, $"public static S operator {operatorSign}(S a, S b)"),
+                operatorSign,
+                inlineDescription: inlineDescription
+            );
+            await VerifyItemExistsAsync(
+                string.Format(template, $"public static int operator {operatorSign}(S a, S b)"),
+                operatorSign,
+                inlineDescription: inlineDescription
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static object operator {operatorSign}(S a, S b)")
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static S operator {operatorSign}(S a, object b)")
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static S operator {operatorSign}(S a, S b, S c)")
+            );
         }
 
         [WpfTheory, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -653,16 +718,33 @@ public class Program
                     }}
                 }}
                 """;
-            await VerifyItemExistsAsync(string.Format(template, $"public static bool operator {operatorSign}(S a, S b)"), operatorSign, inlineDescription: $"x {operatorSign} y");
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static int operator {operatorSign}(S a, S b)"));
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static bool operator {operatorSign}(S a, S b, S c)"));
-            await VerifyNoItemsExistAsync(string.Format(template, $"public static bool operator {operatorSign}(S a, object b)"));
+            await VerifyItemExistsAsync(
+                string.Format(template, $"public static bool operator {operatorSign}(S a, S b)"),
+                operatorSign,
+                inlineDescription: $"x {operatorSign} y"
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(template, $"public static int operator {operatorSign}(S a, S b)")
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(
+                    template,
+                    $"public static bool operator {operatorSign}(S a, S b, S c)"
+                )
+            );
+            await VerifyNoItemsExistAsync(
+                string.Format(
+                    template,
+                    $"public static bool operator {operatorSign}(S a, object b)"
+                )
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorLiftingIsApplied()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 public struct S
                 {
                     public static bool operator ==(S a, S b) => default;
@@ -676,7 +758,9 @@ public class Program
                         s.$$
                     }
                 }
-                """, "==", """
+                """,
+                "==",
+                """
                 public struct S
                 {
                     public static bool operator ==(S a, S b) => default;
@@ -690,13 +774,15 @@ public class Program
                         s == $$
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorOfBaseTypeIsSuggested()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public class Base {
                     public static int operator +(Base b, int a)=>0;
                 }
@@ -712,13 +798,19 @@ public class Program
                         d.$$
                     }
                 }
-                """, "+", inlineDescription: "x + y", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "+",
+                inlineDescription: "x + y",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorForRecordsAreSuggested()
         {
-            await VerifyItemExistsAsync("""
+            await VerifyItemExistsAsync(
+                """
                 public record R {
                 }
 
@@ -730,7 +822,12 @@ public class Program
                         r.$$
                     }
                 }
-                """, "==", inlineDescription: "x == y", glyph: (int)Glyph.Operator, matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter });
+                """,
+                "==",
+                inlineDescription: "x == y",
+                glyph: (int)Glyph.Operator,
+                matchingFilters: new List<CompletionFilter> { FilterSet.OperatorFilter }
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -769,7 +866,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
@@ -810,7 +908,8 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = true;
 
@@ -821,13 +920,15 @@ public class Program
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/47511")]
         public async Task OperatorBinaryNullForgivingHandling()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 #nullable enable
 
                 public class C
@@ -843,7 +944,9 @@ public class Program
                         var _ = c!.$$
                     }
                 }
-                """, "+", """
+                """,
+                "+",
+                """
                 #nullable enable
 
                 public class C
@@ -859,7 +962,8 @@ public class Program
                         var _ = c! + $$
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

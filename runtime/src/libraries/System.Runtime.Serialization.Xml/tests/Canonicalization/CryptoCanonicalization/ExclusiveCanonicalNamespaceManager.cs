@@ -87,8 +87,8 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     return ne.NamespaceUri != namespaceUri;
                 }
             }
-            return !C14nUtil.IsEmptyDefaultNamespaceDeclaration(prefix, namespaceUri) &&
-                !C14nUtil.IsXmlPrefixDeclaration(prefix, namespaceUri);
+            return !C14nUtil.IsEmptyDefaultNamespaceDeclaration(prefix, namespaceUri)
+                && !C14nUtil.IsXmlPrefixDeclaration(prefix, namespaceUri);
         }
 
         public string LookupNamespace(string prefix)
@@ -127,21 +127,36 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             return null;
         }
 
-        public void MarkToRenderForInclusivePrefix(string prefix, bool searchOuterContext, IAncestralNamespaceContextProvider context)
+        public void MarkToRenderForInclusivePrefix(
+            string prefix,
+            bool searchOuterContext,
+            IAncestralNamespaceContextProvider context
+        )
         {
             MarkToRender(prefix, searchOuterContext, context, true);
         }
 
-        public void MarkToRenderForVisiblyUsedPrefix(string prefix, bool searchOuterContext, IAncestralNamespaceContextProvider context)
+        public void MarkToRenderForVisiblyUsedPrefix(
+            string prefix,
+            bool searchOuterContext,
+            IAncestralNamespaceContextProvider context
+        )
         {
             if (!MarkToRender(prefix, searchOuterContext, context, false))
             {
                 string nodeName = context != null ? context.CurrentNodeName : null;
-                throw new XmlException(string.Format("Unable to find prefix: {0}, {1}", prefix, nodeName));
+                throw new XmlException(
+                    string.Format("Unable to find prefix: {0}, {1}", prefix, nodeName)
+                );
             }
         }
 
-        private bool MarkToRender(string prefix, bool searchOuterContext, IAncestralNamespaceContextProvider context, bool isInclusivePrefix)
+        private bool MarkToRender(
+            string prefix,
+            bool searchOuterContext,
+            IAncestralNamespaceContextProvider context,
+            bool isInclusivePrefix
+        )
         {
             if (prefix == "xml")
             {
@@ -252,7 +267,10 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
                     encoder.Encode(ne.Prefix);
                 }
                 encoder.Encode("=\"");
-                encoder.EncodeWithTranslation(ne.NamespaceUri, CanonicalEncoder.XmlStringType.AttributeValue);
+                encoder.EncodeWithTranslation(
+                    ne.NamespaceUri,
+                    CanonicalEncoder.XmlStringType.AttributeValue
+                );
                 encoder.Encode('\"');
             }
             _localNamespacesToRender.Clear();
@@ -281,9 +299,7 @@ namespace System.Runtime.Serialization.Xml.Canonicalization.Tests
             private string _namespaceUri;
             private bool _rendered;
 
-            public NamespaceEntry()
-            {
-            }
+            public NamespaceEntry() { }
 
             public string Prefix
             {

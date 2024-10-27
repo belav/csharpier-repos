@@ -13,10 +13,18 @@ namespace System.ServiceModel.Channels
 
         public static void AddIncomingContextCorrelationData(Message message)
         {
-            CorrelationDataMessageProperty.AddData(message, CorrelationName, () => GetContextCorrelationData(message));
+            CorrelationDataMessageProperty.AddData(
+                message,
+                CorrelationName,
+                () => GetContextCorrelationData(message)
+            );
         }
 
-        public static void AddOutgoingCorrelationCallbackData(CorrelationCallbackMessageProperty callback, Message message, bool client)
+        public static void AddOutgoingCorrelationCallbackData(
+            CorrelationCallbackMessageProperty callback,
+            Message message,
+            bool client
+        )
         {
             if (client)
             {
@@ -35,7 +43,10 @@ namespace System.ServiceModel.Channels
 
             if (ContextMessageProperty.TryGet(message, out contextProperties))
             {
-                contextProperties.Context.TryGetValue(ContextMessageProperty.InstanceIdKey, out instanceId);
+                contextProperties.Context.TryGetValue(
+                    ContextMessageProperty.InstanceIdKey,
+                    out instanceId
+                );
             }
 
             return instanceId ?? string.Empty;
@@ -46,9 +57,17 @@ namespace System.ServiceModel.Channels
             ContextMessageProperty contextProperties = null;
             string instanceId = null;
 
-            if (ContextMessageProperty.TryGet(operationContext.OutgoingMessageProperties, out contextProperties))
+            if (
+                ContextMessageProperty.TryGet(
+                    operationContext.OutgoingMessageProperties,
+                    out contextProperties
+                )
+            )
             {
-                contextProperties.Context.TryGetValue(ContextMessageProperty.InstanceIdKey, out instanceId);
+                contextProperties.Context.TryGetValue(
+                    ContextMessageProperty.InstanceIdKey,
+                    out instanceId
+                );
             }
 
             return instanceId ?? string.Empty;

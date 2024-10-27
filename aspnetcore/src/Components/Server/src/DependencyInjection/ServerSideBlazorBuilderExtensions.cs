@@ -17,7 +17,10 @@ public static class ServerSideBlazorBuilderExtensions
     /// <param name="builder">The <see cref="IServerSideBlazorBuilder"/>.</param>
     /// <param name="configure">A callback to configure <see cref="CircuitOptions"/>.</param>
     /// <returns>The <see cref="IServerSideBlazorBuilder"/>.</returns>
-    public static IServerSideBlazorBuilder AddCircuitOptions(this IServerSideBlazorBuilder builder, Action<CircuitOptions> configure)
+    public static IServerSideBlazorBuilder AddCircuitOptions(
+        this IServerSideBlazorBuilder builder,
+        Action<CircuitOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(configure);
@@ -33,7 +36,10 @@ public static class ServerSideBlazorBuilderExtensions
     /// <param name="builder">The <see cref="IServerSideBlazorBuilder"/>.</param>
     /// <param name="configure">A callback to configure the hub options.</param>
     /// <returns>The <see cref="IServerSideBlazorBuilder"/>.</returns>
-    public static IServerSideBlazorBuilder AddHubOptions(this IServerSideBlazorBuilder builder, Action<HubOptions> configure)
+    public static IServerSideBlazorBuilder AddHubOptions(
+        this IServerSideBlazorBuilder builder,
+        Action<HubOptions> configure
+    )
     {
         ArgumentNullException.ThrowIfNull(builder);
         ArgumentNullException.ThrowIfNull(configure);

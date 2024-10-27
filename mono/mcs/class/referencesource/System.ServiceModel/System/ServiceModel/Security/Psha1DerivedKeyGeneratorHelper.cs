@@ -8,8 +8,14 @@ namespace System.ServiceModel.Security
 
     static class Psha1DerivedKeyGeneratorHelper
     {
-        internal static byte[] GenerateDerivedKey(byte[] key, byte[] label, byte[] nonce, int derivedKeySize, int position)
-        { 
+        internal static byte[] GenerateDerivedKey(
+            byte[] key,
+            byte[] label,
+            byte[] nonce,
+            int derivedKeySize,
+            int position
+        )
+        {
             Psha1DerivedKeyGenerator psha1 = new Psha1DerivedKeyGenerator(key);
             return psha1.GenerateDerivedKey(label, nonce, derivedKeySize, position);
         }

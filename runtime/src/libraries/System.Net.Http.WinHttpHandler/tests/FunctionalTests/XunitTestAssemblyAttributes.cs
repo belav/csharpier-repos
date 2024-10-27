@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
 using Xunit;
 
 // The WinHttpHandler unit tests need to have parallelism turned off between test classes since they rely on

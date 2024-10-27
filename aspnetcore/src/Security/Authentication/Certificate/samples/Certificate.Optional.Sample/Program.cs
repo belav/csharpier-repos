@@ -24,38 +24,62 @@ public class Program
                 // load the self-signed certificate issued for 127.0.0.1 and 127.0.0.2 domains
                 // https://learn.microsoft.com/en-us/dotnet/core/additional-tools/self-signed-certificates-guide
                 var serverCertificate = CertificateLoader.LoadFromStoreCert(
-                    "localhost", "My", StoreLocation.CurrentUser,
-                    allowInvalid: true);
+                    "localhost",
+                    "My",
+                    StoreLocation.CurrentUser,
+                    allowInvalid: true
+                );
 
                 webBuilder.UseStartup<Startup>();
-                webBuilder.ConfigureKestrel((context, options) =>
-                {
-                    options.ListenAnyIP(5001, listenOptions =>
+                webBuilder.ConfigureKestrel(
+                    (context, options) =>
                     {
-                        listenOptions.UseHttps(new TlsHandshakeCallbackOptions()
-                        {
-                            OnConnection = connectionContext =>
+                        options.ListenAnyIP(
+                            5001,
+                            listenOptions =>
                             {
-                                // allow the tls connection without a client certificate
-                                if (connectionContext.ClientHelloInfo.ServerName.Equals(HostWithoutCert, StringComparison.OrdinalIgnoreCase))
-                                {
-                                    return new ValueTask<SslServerAuthenticationOptions>(new SslServerAuthenticationOptions()
+                                listenOptions.UseHttps(
+                                    new TlsHandshakeCallbackOptions()
                                     {
-                                        ServerCertificate = serverCertificate,
-                                        ClientCertificateRequired = false
-                                    });
-                                }
+                                        OnConnection = connectionContext =>
+                                        {
+                                            // allow the tls connection without a client certificate
+                                            if (
+                                                connectionContext.ClientHelloInfo.ServerName.Equals(
+                                                    HostWithoutCert,
+                                                    StringComparison.OrdinalIgnoreCase
+                                                )
+                                            )
+                                            {
+                                                return new ValueTask<SslServerAuthenticationOptions>(
+                                                    new SslServerAuthenticationOptions()
+                                                    {
+                                                        ServerCertificate = serverCertificate,
+                                                        ClientCertificateRequired = false,
+                                                    }
+                                                );
+                                            }
 
-                                // require a client certificate to access 127.0.0.2
-                                return new ValueTask<SslServerAuthenticationOptions>(new SslServerAuthenticationOptions()
-                                {
-                                    ClientCertificateRequired = true,
-                                    ServerCertificate = serverCertificate,
-                                    RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => certificate is not null
-                                });
+                                            // require a client certificate to access 127.0.0.2
+                                            return new ValueTask<SslServerAuthenticationOptions>(
+                                                new SslServerAuthenticationOptions()
+                                                {
+                                                    ClientCertificateRequired = true,
+                                                    ServerCertificate = serverCertificate,
+                                                    RemoteCertificateValidationCallback = (
+                                                        sender,
+                                                        certificate,
+                                                        chain,
+                                                        sslPolicyErrors
+                                                    ) => certificate is not null,
+                                                }
+                                            );
+                                        },
+                                    }
+                                );
                             }
-                        });
-                    });
-                });
+                        );
+                    }
+                );
             });
 }

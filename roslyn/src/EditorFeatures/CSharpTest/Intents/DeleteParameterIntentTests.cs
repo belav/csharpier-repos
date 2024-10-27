@@ -17,8 +17,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
     [Fact]
     public async Task TestDeleteParameterIntentAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             class C
             {
                 void M()
@@ -31,8 +30,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -45,8 +43,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -60,14 +57,19 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnDefinitionIntentAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             class C
             {
                 void M()
@@ -80,8 +82,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -94,8 +95,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -109,7 +109,13 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
@@ -128,8 +134,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -142,8 +147,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -157,7 +161,13 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
@@ -176,8 +186,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -190,8 +199,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -205,7 +213,13 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
@@ -229,8 +243,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             public class Foo
             {
                 static void Bar()
@@ -249,7 +262,8 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyIntentMissingAsync(WellKnownIntents.DeleteParameter, initialText, currentText).ConfigureAwait(false);
+        await VerifyIntentMissingAsync(WellKnownIntents.DeleteParameter, initialText, currentText)
+            .ConfigureAwait(false);
     }
 
     [Fact]
@@ -273,8 +287,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             public class Foo
             {
                 static void Bar()
@@ -292,8 +305,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             public class Foo
             {
                 static void Bar()
@@ -312,7 +324,13 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
@@ -336,8 +354,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             public class Foo
             {
                 static void Bar()
@@ -355,8 +372,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             public class Foo
             {
                 static void Bar()
@@ -375,14 +391,19 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParamsParameterAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             class C
             {
                 void M()
@@ -395,8 +416,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -409,8 +429,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -424,14 +443,19 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterBeforeParamsAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             class C
             {
                 void M()
@@ -444,8 +468,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             class C
             {
                 void M()
@@ -458,8 +481,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             class C
             {
                 void M()
@@ -473,14 +495,19 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnStaticExtensionInvocationAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             public static class AExtension
             {
                 public static void Method(this A c, int i)
@@ -497,8 +524,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             public static class AExtension
             {
                 public static void Method(this A c, int i)
@@ -515,8 +541,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             public static class AExtension
             {
                 public static void Method(this A c)
@@ -534,14 +559,19 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestDeleteParameterOnConstructorInvocationAsync()
     {
-        var initialText =
-            """
+        var initialText = """
             public class A
             {
                 public A(int i, string s)
@@ -555,8 +585,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var currentText =
-            """
+        var currentText = """
             public class A
             {
                 public A(int i, string s)
@@ -570,8 +599,7 @@ public class DeleteParameterIntentTests : IntentTestsBase
                 }
             }
             """;
-        var expectedText =
-            """
+        var expectedText = """
             public class A
             {
                 public A(int i)
@@ -586,6 +614,12 @@ public class DeleteParameterIntentTests : IntentTestsBase
             }
             """;
 
-        await VerifyExpectedTextAsync(WellKnownIntents.DeleteParameter, initialText, currentText, expectedText).ConfigureAwait(false);
+        await VerifyExpectedTextAsync(
+                WellKnownIntents.DeleteParameter,
+                initialText,
+                currentText,
+                expectedText
+            )
+            .ConfigureAwait(false);
     }
 }

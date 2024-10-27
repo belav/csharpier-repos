@@ -34,7 +34,8 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
     public TextTemplatingModelGenerator(
         ModelCodeGeneratorDependencies dependencies,
         IOperationReporter reporter,
-        IServiceProvider serviceProvider)
+        IServiceProvider serviceProvider
+    )
         : base(dependencies)
     {
         _reporter = reporter;
@@ -47,8 +48,7 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual TemplatingEngine Engine
-        => _engine ??= new TemplatingEngine();
+    protected virtual TemplatingEngine Engine => _engine ??= new TemplatingEngine();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -58,9 +58,15 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
     /// </summary>
     public override bool HasTemplates(string projectDir)
     {
-        var hasContextTemplate = File.Exists(Path.Combine(projectDir, TemplatesDirectory, DbContextTemplate));
-        var hasEntityTypeTemplate = File.Exists(Path.Combine(projectDir, TemplatesDirectory, EntityTypeTemplate));
-        var hasConfigurationTemplate = File.Exists(Path.Combine(projectDir, TemplatesDirectory, EntityTypeConfigurationTemplate));
+        var hasContextTemplate = File.Exists(
+            Path.Combine(projectDir, TemplatesDirectory, DbContextTemplate)
+        );
+        var hasEntityTypeTemplate = File.Exists(
+            Path.Combine(projectDir, TemplatesDirectory, EntityTypeTemplate)
+        );
+        var hasConfigurationTemplate = File.Exists(
+            Path.Combine(projectDir, TemplatesDirectory, EntityTypeConfigurationTemplate)
+        );
 
         if (hasConfigurationTemplate && !hasContextTemplate)
         {
@@ -81,13 +87,17 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
         if (options.ContextName == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)),
+                nameof(options)
+            );
         }
 
         if (options.ConnectionString == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)),
+                nameof(options)
+            );
         }
 
         var host = new TextTemplatingEngineHost(_serviceProvider)
@@ -97,10 +107,14 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                 { "Model", model },
                 { "Options", options },
                 { "NamespaceHint", options.ContextNamespace ?? options.ModelNamespace },
-                { "ProjectDefaultNamespace", options.RootNamespace }
-            }
+                { "ProjectDefaultNamespace", options.RootNamespace },
+            },
         };
-        var contextTemplate = Path.Combine(options.ProjectDir!, TemplatesDirectory, DbContextTemplate);
+        var contextTemplate = Path.Combine(
+            options.ProjectDir!,
+            TemplatesDirectory,
+            DbContextTemplate
+        );
 
         string generatedCode;
         if (File.Exists(contextTemplate))
@@ -118,7 +132,11 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                 throw new OperationException(DesignStrings.NoContextTemplate);
             }
 
-            var defaultContextTemplate = new CSharpDbContextGenerator { Host = host, Session = host.Session };
+            var defaultContextTemplate = new CSharpDbContextGenerator
+            {
+                Host = host,
+                Session = host.Session,
+            };
             defaultContextTemplate.Initialize();
 
             generatedCode = defaultContextTemplate.TransformText();
@@ -130,7 +148,9 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
 
             if (defaultContextTemplate.Errors.HasErrors)
             {
-                throw new OperationException(DesignStrings.ErrorGeneratingOutput(defaultContextTemplate.GetType().Name));
+                throw new OperationException(
+                    DesignStrings.ErrorGeneratingOutput(defaultContextTemplate.GetType().Name)
+                );
             }
         }
 
@@ -139,14 +159,19 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
         {
             ContextFile = new ScaffoldedFile
             {
-                Path = options.ContextDir != null
-                    ? Path.Combine(options.ContextDir, dbContextFileName)
-                    : dbContextFileName,
-                Code = generatedCode
-            }
+                Path =
+                    options.ContextDir != null
+                        ? Path.Combine(options.ContextDir, dbContextFileName)
+                        : dbContextFileName,
+                Code = generatedCode,
+            },
         };
 
-        var entityTypeTemplate = Path.Combine(options.ProjectDir!, TemplatesDirectory, EntityTypeTemplate);
+        var entityTypeTemplate = Path.Combine(
+            options.ProjectDir!,
+            TemplatesDirectory,
+            EntityTypeTemplate
+        );
         if (File.Exists(entityTypeTemplate))
         {
             host.TemplateFile = entityTypeTemplate;
@@ -165,7 +190,10 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
 
                     if (compiledEntityTypeTemplate is null)
                     {
-                        compiledEntityTypeTemplate = Engine.CompileTemplate(File.ReadAllText(entityTypeTemplate), host);
+                        compiledEntityTypeTemplate = Engine.CompileTemplate(
+                            File.ReadAllText(entityTypeTemplate),
+                            host
+                        );
                         entityTypeExtension = host.Extension;
                         CheckEncoding(host.OutputEncoding);
                     }
@@ -180,7 +208,8 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
 
                     var entityTypeFileName = entityType.Name + entityTypeExtension;
                     resultingFiles.AdditionalFiles.Add(
-                        new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
+                        new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
+                    );
                 }
             }
             finally
@@ -189,7 +218,11 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
             }
         }
 
-        var configurationTemplate = Path.Combine(options.ProjectDir!, TemplatesDirectory, EntityTypeConfigurationTemplate);
+        var configurationTemplate = Path.Combine(
+            options.ProjectDir!,
+            TemplatesDirectory,
+            EntityTypeConfigurationTemplate
+        );
         if (File.Exists(configurationTemplate))
         {
             host.TemplateFile = configurationTemplate;
@@ -203,12 +236,18 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                     host.Initialize();
                     host.Session.Add("EntityType", entityType);
                     host.Session.Add("Options", options);
-                    host.Session.Add("NamespaceHint", options.ContextNamespace ?? options.ModelNamespace);
+                    host.Session.Add(
+                        "NamespaceHint",
+                        options.ContextNamespace ?? options.ModelNamespace
+                    );
                     host.Session.Add("ProjectDefaultNamespace", options.RootNamespace);
 
                     if (compiledConfigurationTemplate is null)
                     {
-                        compiledConfigurationTemplate = Engine.CompileTemplate(File.ReadAllText(configurationTemplate), host);
+                        compiledConfigurationTemplate = Engine.CompileTemplate(
+                            File.ReadAllText(configurationTemplate),
+                            host
+                        );
                         configurationExtension = host.Extension;
                         CheckEncoding(host.OutputEncoding);
                     }
@@ -221,15 +260,18 @@ public class TextTemplatingModelGenerator : TemplatedModelGenerator
                         continue;
                     }
 
-                    var configurationFileName = entityType.Name + "Configuration" + configurationExtension;
+                    var configurationFileName =
+                        entityType.Name + "Configuration" + configurationExtension;
                     resultingFiles.AdditionalFiles.Add(
                         new ScaffoldedFile
                         {
-                            Path = options.ContextDir != null
-                                ? Path.Combine(options.ContextDir, configurationFileName)
-                                : configurationFileName,
-                            Code = generatedCode
-                        });
+                            Path =
+                                options.ContextDir != null
+                                    ? Path.Combine(options.ContextDir, configurationFileName)
+                                    : configurationFileName,
+                            Code = generatedCode,
+                        }
+                    );
                 }
             }
             finally

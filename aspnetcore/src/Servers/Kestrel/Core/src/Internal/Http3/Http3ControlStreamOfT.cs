@@ -6,11 +6,19 @@ using Microsoft.AspNetCore.Hosting.Server.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-internal sealed class Http3ControlStream<TContext> : Http3ControlStream, IHostContextContainer<TContext> where TContext : notnull
+internal sealed class Http3ControlStream<TContext>
+    : Http3ControlStream,
+        IHostContextContainer<TContext>
+    where TContext : notnull
 {
     private readonly IHttpApplication<TContext> _application;
 
-    public Http3ControlStream(IHttpApplication<TContext> application, Http3StreamContext context, long? headerType) : base(context, headerType)
+    public Http3ControlStream(
+        IHttpApplication<TContext> application,
+        Http3StreamContext context,
+        long? headerType
+    )
+        : base(context, headerType)
     {
         _application = application;
     }

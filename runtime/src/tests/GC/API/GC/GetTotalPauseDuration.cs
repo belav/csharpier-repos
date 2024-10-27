@@ -17,13 +17,15 @@ public class Test_Collect
         GCMemoryInfo memoryInfo = GC.GetGCMemoryInfo();
         TimeSpan lastGcDuration = memoryInfo.PauseDurations[0];
 
-        // These conditions assume the only GC in the process 
-        // is the one we just triggered. This makes the test incompatible 
+        // These conditions assume the only GC in the process
+        // is the one we just triggered. This makes the test incompatible
         // with any changes that might introduce extra GCs.
 
-        if (TimeSpan.Zero < totalPauseDuration &&
-            totalPauseDuration <= elapsed &&
-            lastGcDuration == totalPauseDuration)
+        if (
+            TimeSpan.Zero < totalPauseDuration
+            && totalPauseDuration <= elapsed
+            && lastGcDuration == totalPauseDuration
+        )
         {
             return 100;
         }

@@ -7,6 +7,6 @@ namespace System.Net.Http
     {
         None,
         Manual,
-        Automatic
+        Automatic,
     }
 }

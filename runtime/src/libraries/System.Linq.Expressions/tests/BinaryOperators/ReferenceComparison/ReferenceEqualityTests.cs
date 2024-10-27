@@ -15,10 +15,14 @@ namespace System.Linq.Expressions.Tests
         protected static IEnumerable<object[]> DifferentObjects()
         {
             return from x in ReferenceObjects()
-                   from y in ReferenceObjects()
-                   where !ReferenceEquals(x, y)
-                   && (x.GetType().IsAssignableFrom(y.GetType()) || y.GetType().IsAssignableFrom(x.GetType()))
-                   select new[] { x, y };
+                from y in ReferenceObjects()
+                where
+                    !ReferenceEquals(x, y)
+                    && (
+                        x.GetType().IsAssignableFrom(y.GetType())
+                        || y.GetType().IsAssignableFrom(x.GetType())
+                    )
+                select new[] { x, y };
         }
 
         protected static IEnumerable<object[]> ComparableValuesData()
@@ -29,9 +33,9 @@ namespace System.Linq.Expressions.Tests
         protected static IEnumerable<object[]> DifferentComparableValues()
         {
             return from x in ComparableValues()
-                   from y in ComparableValues()
-                   where !(ReferenceEquals(x, y))
-                   select new[] { x, y };
+                from y in ComparableValues()
+                where !(ReferenceEquals(x, y))
+                select new[] { x, y };
         }
 
         public static IEnumerable<object[]> ComparableReferenceTypesData()
@@ -41,31 +45,27 @@ namespace System.Linq.Expressions.Tests
 
         public static IEnumerable<object[]> LeftValueType()
         {
-            return from x in ReferenceObjects()
-                   from y in ValueTypeObjects()
-                   select new[] { y, x };
+            return from x in ReferenceObjects() from y in ValueTypeObjects() select new[] { y, x };
         }
 
         public static IEnumerable<object[]> RightValueType()
         {
-            return from x in ReferenceObjects()
-                   from y in ValueTypeObjects()
-                   select new[] { x, y };
+            return from x in ReferenceObjects() from y in ValueTypeObjects() select new[] { x, y };
         }
 
         public static IEnumerable<object[]> BothValueType()
         {
-            return from x in ValueTypeObjects()
-                   from y in ValueTypeObjects()
-                   select new[] { x, y };
+            return from x in ValueTypeObjects() from y in ValueTypeObjects() select new[] { x, y };
         }
 
         public static IEnumerable<object[]> UnassignablePairs()
         {
             return from x in ReferenceObjects()
-                   from y in ReferenceObjects()
-                   where !x.GetType().IsAssignableFrom(y.GetType()) && !y.GetType().IsAssignableFrom(x.GetType())
-                   select new[] { x, y };
+                from y in ReferenceObjects()
+                where
+                    !x.GetType().IsAssignableFrom(y.GetType())
+                    && !y.GetType().IsAssignableFrom(x.GetType())
+                select new[] { x, y };
         }
 
         public static IEnumerable<object> ReferenceObjects()

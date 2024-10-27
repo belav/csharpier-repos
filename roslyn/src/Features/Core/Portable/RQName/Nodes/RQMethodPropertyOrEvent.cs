@@ -7,7 +7,10 @@ using Microsoft.CodeAnalysis.Features.RQName.SimpleTree;
 
 namespace Microsoft.CodeAnalysis.Features.RQName.Nodes
 {
-    internal abstract class RQMethodPropertyOrEvent(RQUnconstructedType containingType, RQMethodPropertyOrEventName memberName) : RQMember(containingType)
+    internal abstract class RQMethodPropertyOrEvent(
+        RQUnconstructedType containingType,
+        RQMethodPropertyOrEventName memberName
+    ) : RQMember(containingType)
     {
         public readonly RQMethodPropertyOrEventName RqMemberName = memberName;
 

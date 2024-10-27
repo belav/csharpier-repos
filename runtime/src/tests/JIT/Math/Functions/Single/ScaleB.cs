@@ -15,22 +15,26 @@ namespace System.MathBenchmarks
 
         public void ScaleB() => ScaleBTest();
 
-         public static void ScaleBTest()
+        public static void ScaleBTest()
         {
-            float result = 0.0f, valueX = -1.0f;
+            float result = 0.0f,
+                valueX = -1.0f;
             int valueY = 0;
 
             for (int iteration = 0; iteration < MathTests.Iterations; iteration++)
             {
                 result += MathF.ScaleB(valueX, valueY);
-                valueX += scaleBDeltaX; valueY += scaleBDeltaY;
+                valueX += scaleBDeltaX;
+                valueY += scaleBDeltaY;
             }
 
             float diff = MathF.Abs(scaleBExpectedResult - result);
 
             if (float.IsNaN(result) || (diff > MathTests.SingleEpsilon))
             {
-                throw new Exception($"Expected Result {scaleBExpectedResult,10:g9}; Actual Result {result,10:g9}");
+                throw new Exception(
+                    $"Expected Result {scaleBExpectedResult, 10:g9}; Actual Result {result, 10:g9}"
+                );
             }
         }
     }

@@ -12,7 +12,8 @@ namespace System.Reflection.Context
             return Array.Empty<T>();
         }
 
-        public static bool CompareArrays<T>(T[] left, T[] right) where T : notnull
+        public static bool CompareArrays<T>(T[] left, T[] right)
+            where T : notnull
         {
             if (left.Length != right.Length)
                 return false;
@@ -26,7 +27,8 @@ namespace System.Reflection.Context
             return true;
         }
 
-        public static int GetArrayHashCode<T>(T[] array) where T : notnull
+        public static int GetArrayHashCode<T>(T[] array)
+            where T : notnull
         {
             int hashcode = 0;
             foreach (T t in array)
@@ -38,7 +40,11 @@ namespace System.Reflection.Context
         public static object[] ConvertListToArray(List<object> list, Type arrayType)
         {
             // Mimic the behavior of GetCustomAttributes in runtime reflection.
-            if (arrayType.HasElementType || arrayType.IsValueType || arrayType.ContainsGenericParameters)
+            if (
+                arrayType.HasElementType
+                || arrayType.IsValueType
+                || arrayType.ContainsGenericParameters
+            )
                 return list.ToArray();
 
             // Converts results to typed array.

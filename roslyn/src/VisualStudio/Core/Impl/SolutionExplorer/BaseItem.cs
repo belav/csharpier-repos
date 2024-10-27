@@ -17,23 +17,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
 {
     /// <summary>
     /// Abstract base class for a custom node in Solution Explorer. This utilizes the core
-    /// SolutionExplorer extensibility similar to 
+    /// SolutionExplorer extensibility similar to
     /// Microsoft.VisualStudio.Shell.TreeNavigation.HierarchyProvider.dll and
     /// Microsoft.VisualStudio.Shell.TreeNavigation.GraphProvider.dll.
     /// </summary>
-    internal abstract class BaseItem :
-        LocalizableProperties,
-        ITreeDisplayItem,
-        IInteractionPatternProvider,
-        IInvocationPattern,
-        IContextMenuPattern,
-        INotifyPropertyChanged,
-        IDragDropSourcePattern,
-        IBrowsablePattern,
-        ISupportDisposalNotification,
-        IPrioritizedComparable
+    internal abstract class BaseItem
+        : LocalizableProperties,
+            ITreeDisplayItem,
+            IInteractionPatternProvider,
+            IInvocationPattern,
+            IContextMenuPattern,
+            INotifyPropertyChanged,
+            IDragDropSourcePattern,
+            IBrowsablePattern,
+            ISupportDisposalNotification,
+            IPrioritizedComparable
     {
-        public virtual event PropertyChangedEventHandler PropertyChanged { add { } remove { } }
+        public virtual event PropertyChangedEventHandler PropertyChanged
+        {
+            add { }
+            remove { }
+        }
 
         private readonly string _name;
 
@@ -62,7 +66,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
         public ImageSource? StateIcon => null;
         public virtual ImageMoniker StateIconMoniker => default;
         public string? StateToolTipText => null;
+
         public override string ToString() => Text;
+
         public string Text => _name;
         public object? ToolTipContent => null;
         public string ToolTipText => _name;
@@ -77,10 +83,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             typeof(IDragDropTargetPattern),
             typeof(IBrowsablePattern),
             typeof(ITreeDisplayItem),
-            typeof(ISupportDisposalNotification)
+            typeof(ISupportDisposalNotification),
         };
 
-        public TPattern? GetPattern<TPattern>() where TPattern : class
+        public TPattern? GetPattern<TPattern>()
+            where TPattern : class
         {
             if (!IsDisposed)
             {

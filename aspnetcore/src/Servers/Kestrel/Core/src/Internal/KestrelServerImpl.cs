@@ -29,7 +29,9 @@ internal sealed class KestrelServerImpl : IServer
     private bool _hasStarted;
     private int _stopping;
     private readonly CancellationTokenSource _stopCts = new CancellationTokenSource();
-    private readonly TaskCompletionSource _stoppedTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _stoppedTcs = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     private IDisposable? _configChangedRegistration;
 
@@ -39,10 +41,14 @@ internal sealed class KestrelServerImpl : IServer
         IEnumerable<IMultiplexedConnectionListenerFactory> multiplexedFactories,
         IHttpsConfigurationService httpsConfigurationService,
         ILoggerFactory loggerFactory,
-        KestrelMetrics metrics)
-        : this(transportFactories, multiplexedFactories, httpsConfigurationService, CreateServiceContext(options, loggerFactory, diagnosticSource: null, metrics))
-    {
-    }
+        KestrelMetrics metrics
+    )
+        : this(
+            transportFactories,
+            multiplexedFactories,
+            httpsConfigurationService,
+            CreateServiceContext(options, loggerFactory, diagnosticSource: null, metrics)
+        ) { }
 
     // For testing
 
@@ -50,7 +56,8 @@ internal sealed class KestrelServerImpl : IServer
         IEnumerable<IConnectionListenerFactory> transportFactories,
         IEnumerable<IMultiplexedConnectionListenerFactory> multiplexedFactories,
         IHttpsConfigurationService httpsConfigurationService,
-        ServiceContext serviceContext)
+        ServiceContext serviceContext
+    )
     {
         ArgumentNullException.ThrowIfNull(transportFactories);
 
@@ -69,10 +76,20 @@ internal sealed class KestrelServerImpl : IServer
         _serverAddresses = new ServerAddressesFeature();
         Features.Set<IServerAddressesFeature>(_serverAddresses);
 
-        _transportManager = new TransportManager(_transportFactories, _multiplexedTransportFactories, _httpsConfigurationService, ServiceContext);
+        _transportManager = new TransportManager(
+            _transportFactories,
+            _multiplexedTransportFactories,
+            _httpsConfigurationService,
+            ServiceContext
+        );
     }
 
-    private static ServiceContext CreateServiceContext(IOptions<KestrelServerOptions> options, ILoggerFactory loggerFactory, DiagnosticSource? diagnosticSource, KestrelMetrics metrics)
+    private static ServiceContext CreateServiceContext(
+        IOptions<KestrelServerOptions> options,
+        ILoggerFactory loggerFactory,
+        DiagnosticSource? diagnosticSource,
+        KestrelMetrics metrics
+    )
     {
         ArgumentNullException.ThrowIfNull(options);
         ArgumentNullException.ThrowIfNull(loggerFactory);
@@ -81,7 +98,8 @@ internal sealed class KestrelServerImpl : IServer
         var trace = new KestrelTrace(loggerFactory);
         var connectionManager = new ConnectionManager(
             trace,
-            serverOptions.Limits.MaxConcurrentUpgradedConnections);
+            serverOptions.Limits.MaxConcurrentUpgradedConnections
+        );
 
         var dateHeaderValueManager = new DateHeaderValueManager(TimeProvider.System);
 
@@ -90,20 +108,24 @@ internal sealed class KestrelServerImpl : IServer
             TimeProvider.System,
             DebuggerWrapper.Singleton,
             trace,
-            Heartbeat.Interval);
+            Heartbeat.Interval
+        );
 
         return new ServiceContext
         {
             Log = trace,
             Scheduler = PipeScheduler.ThreadPool,
-            HttpParser = new HttpParser<Http1ParsingHandler>(trace.IsEnabled(LogLevel.Information), serverOptions.DisableHttp1LineFeedTerminators),
+            HttpParser = new HttpParser<Http1ParsingHandler>(
+                trace.IsEnabled(LogLevel.Information),
+                serverOptions.DisableHttp1LineFeedTerminators
+            ),
             TimeProvider = TimeProvider.System,
             DateHeaderValueManager = dateHeaderValueManager,
             ConnectionManager = connectionManager,
             Heartbeat = heartbeat,
             ServerOptions = serverOptions,
             DiagnosticSource = diagnosticSource,
-            Metrics = metrics
+            Metrics = metrics,
         };
     }
 
@@ -117,7 +139,11 @@ internal sealed class KestrelServerImpl : IServer
 
     private AddressBindContext? AddressBindContext { get; set; }
 
-    public async Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+    public async Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    )
+        where TContext : notnull
     {
         try
         {
@@ -169,34 +195,59 @@ internal sealed class KestrelServerImpl : IServer
                 }
 
                 // Quic isn't registered if it's not supported, throw if we can't fall back to 1 or 2
-                if (hasHttp3 && _multiplexedTransportFactories.Count == 0 && !(hasHttp1 || hasHttp2))
+                if (
+                    hasHttp3
+                    && _multiplexedTransportFactories.Count == 0
+                    && !(hasHttp1 || hasHttp2)
+                )
                 {
-                    throw new InvalidOperationException("Unable to bind an HTTP/3 endpoint. This could be because QUIC has not been configured using UseQuic, or the platform doesn't support QUIC or HTTP/3.");
+                    throw new InvalidOperationException(
+                        "Unable to bind an HTTP/3 endpoint. This could be because QUIC has not been configured using UseQuic, or the platform doesn't support QUIC or HTTP/3."
+                    );
                 }
 
                 // Disable adding alt-svc header if endpoint has configured not to or there is no
                 // multiplexed transport factory, which happens if QUIC isn't supported.
-                var addAltSvcHeader = !options.DisableAltSvcHeader && _multiplexedTransportFactories.Count > 0;
+                var addAltSvcHeader =
+                    !options.DisableAltSvcHeader && _multiplexedTransportFactories.Count > 0;
 
                 var configuredEndpoint = options.EndPoint;
 
                 // Add the HTTP middleware as the terminal connection middleware
-                if (hasHttp1 || hasHttp2
-                    || options.Protocols == HttpProtocols.None) // TODO a test fails because it doesn't throw an exception in the right place
-                                                                // when there is no HttpProtocols in KestrelServer, can we remove/change the test?
+                if (hasHttp1 || hasHttp2 || options.Protocols == HttpProtocols.None) // TODO a test fails because it doesn't throw an exception in the right place
+                // when there is no HttpProtocols in KestrelServer, can we remove/change the test?
                 {
                     if (_transportFactories.Count == 0)
                     {
-                        throw new InvalidOperationException($"Cannot start HTTP/1.x or HTTP/2 server if no {nameof(IConnectionListenerFactory)} is registered.");
+                        throw new InvalidOperationException(
+                            $"Cannot start HTTP/1.x or HTTP/2 server if no {nameof(IConnectionListenerFactory)} is registered."
+                        );
                     }
 
-                    options.UseHttpServer(ServiceContext, application, options.Protocols, addAltSvcHeader);
+                    options.UseHttpServer(
+                        ServiceContext,
+                        application,
+                        options.Protocols,
+                        addAltSvcHeader
+                    );
                     var connectionDelegate = options.Build();
 
                     // Add the connection limit middleware
-                    connectionDelegate = EnforceConnectionLimit(connectionDelegate, Options.Limits.MaxConcurrentConnections, Trace, ServiceContext.Metrics);
+                    connectionDelegate = EnforceConnectionLimit(
+                        connectionDelegate,
+                        Options.Limits.MaxConcurrentConnections,
+                        Trace,
+                        ServiceContext.Metrics
+                    );
 
-                    options.EndPoint = await _transportManager.BindAsync(configuredEndpoint, connectionDelegate, options.EndpointConfig, onBindCancellationToken).ConfigureAwait(false);
+                    options.EndPoint = await _transportManager
+                        .BindAsync(
+                            configuredEndpoint,
+                            connectionDelegate,
+                            options.EndpointConfig,
+                            onBindCancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
 
                 if (hasHttp3 && _multiplexedTransportFactories.Count > 0)
@@ -209,13 +260,32 @@ internal sealed class KestrelServerImpl : IServer
                     }
                     else
                     {
-                        options.UseHttp3Server(ServiceContext, application, options.Protocols, addAltSvcHeader);
-                        var multiplexedConnectionDelegate = ((IMultiplexedConnectionBuilder)options).Build();
+                        options.UseHttp3Server(
+                            ServiceContext,
+                            application,
+                            options.Protocols,
+                            addAltSvcHeader
+                        );
+                        var multiplexedConnectionDelegate = (
+                            (IMultiplexedConnectionBuilder)options
+                        ).Build();
 
                         // Add the connection limit middleware
-                        multiplexedConnectionDelegate = EnforceConnectionLimit(multiplexedConnectionDelegate, Options.Limits.MaxConcurrentConnections, Trace, ServiceContext.Metrics);
+                        multiplexedConnectionDelegate = EnforceConnectionLimit(
+                            multiplexedConnectionDelegate,
+                            Options.Limits.MaxConcurrentConnections,
+                            Trace,
+                            ServiceContext.Metrics
+                        );
 
-                        options.EndPoint = await _transportManager.BindAsync(configuredEndpoint, multiplexedConnectionDelegate, options, onBindCancellationToken).ConfigureAwait(false);
+                        options.EndPoint = await _transportManager
+                            .BindAsync(
+                                configuredEndpoint,
+                                multiplexedConnectionDelegate,
+                                options,
+                                onBindCancellationToken
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
             }
@@ -298,7 +368,13 @@ internal sealed class KestrelServerImpl : IServer
 
             _serverAddresses.InternalCollection.PreventPublicMutation();
 
-            if (Options.ConfigurationLoader?.ReloadOnChange == true && (!_serverAddresses.PreferHostingUrls || _serverAddresses.InternalCollection.Count == 0))
+            if (
+                Options.ConfigurationLoader?.ReloadOnChange == true
+                && (
+                    !_serverAddresses.PreferHostingUrls
+                    || _serverAddresses.InternalCollection.Count == 0
+                )
+            )
             {
                 reloadToken = Options.ConfigurationLoader.GetReloadToken();
             }
@@ -306,7 +382,14 @@ internal sealed class KestrelServerImpl : IServer
             Options.ConfigurationLoader?.LoadInternal();
             Options.ConfigurationLoader?.ProcessEndpointsToAdd();
 
-            await AddressBinder.BindAsync(Options.GetListenOptions(), AddressBindContext!, _httpsConfigurationService.UseHttpsWithDefaults, cancellationToken).ConfigureAwait(false);
+            await AddressBinder
+                .BindAsync(
+                    Options.GetListenOptions(),
+                    AddressBindContext!,
+                    _httpsConfigurationService.UseHttpsWithDefaults,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             _configChangedRegistration = reloadToken?.RegisterChangeCallback(TriggerRebind, this);
         }
         finally
@@ -338,7 +421,10 @@ internal sealed class KestrelServerImpl : IServer
                 return;
             }
 
-            Debug.Assert(Options.ConfigurationLoader != null, "Rebind can only happen when there is a ConfigurationLoader.");
+            Debug.Assert(
+                Options.ConfigurationLoader != null,
+                "Rebind can only happen when there is a ConfigurationLoader."
+            );
 
             reloadToken = Options.ConfigurationLoader.GetReloadToken();
             var (endpointsToStop, endpointsToStart) = Options.ConfigurationLoader.Reload();
@@ -350,7 +436,10 @@ internal sealed class KestrelServerImpl : IServer
                 var urlsToStop = endpointsToStop.Select(lo => lo.EndpointConfig!.Url);
                 if (Trace.IsEnabled(LogLevel.Information))
                 {
-                    Trace.LogInformation("Config changed. Stopping the following endpoints: '{endpoints}'", string.Join("', '", urlsToStop));
+                    Trace.LogInformation(
+                        "Config changed. Stopping the following endpoints: '{endpoints}'",
+                        string.Join("', '", urlsToStop)
+                    );
                 }
 
                 // 5 is the default value for WebHost's "shutdownTimeoutSeconds", so use that.
@@ -364,7 +453,9 @@ internal sealed class KestrelServerImpl : IServer
                 {
                     configsToStop.Add(lo.EndpointConfig!);
                 }
-                await _transportManager.StopEndpointsAsync(configsToStop, cts.Token).ConfigureAwait(false);
+                await _transportManager
+                    .StopEndpointsAsync(configsToStop, cts.Token)
+                    .ConfigureAwait(false);
 
                 foreach (var listenOption in endpointsToStop)
                 {
@@ -378,20 +469,30 @@ internal sealed class KestrelServerImpl : IServer
                 var urlsToStart = endpointsToStart.Select(lo => lo.EndpointConfig!.Url);
                 if (Trace.IsEnabled(LogLevel.Information))
                 {
-                    Trace.LogInformation("Config changed. Starting the following endpoints: '{endpoints}'", string.Join("', '", urlsToStart));
+                    Trace.LogInformation(
+                        "Config changed. Starting the following endpoints: '{endpoints}'",
+                        string.Join("', '", urlsToStart)
+                    );
                 }
 
                 foreach (var listenOption in endpointsToStart)
                 {
                     try
                     {
-                        await listenOption.BindAsync(AddressBindContext!, _stopCts.Token).ConfigureAwait(false);
+                        await listenOption
+                            .BindAsync(AddressBindContext!, _stopCts.Token)
+                            .ConfigureAwait(false);
                     }
                     catch (Exception ex)
                     {
                         if (Trace.IsEnabled(LogLevel.Critical))
                         {
-                            Trace.LogCritical(0, ex, "Unable to bind to '{url}' on config reload.", listenOption.EndpointConfig!.Url);
+                            Trace.LogCritical(
+                                0,
+                                ex,
+                                "Unable to bind to '{url}' on config reload.",
+                                listenOption.EndpointConfig!.Url
+                            );
                         }
                     }
                 }
@@ -410,38 +511,70 @@ internal sealed class KestrelServerImpl : IServer
 
     private void ValidateOptions()
     {
-        if (Options.Limits.MaxRequestBufferSize.HasValue &&
-            Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestLineSize)
+        if (
+            Options.Limits.MaxRequestBufferSize.HasValue
+            && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestLineSize
+        )
         {
             throw new InvalidOperationException(
-                CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(Options.Limits.MaxRequestBufferSize.Value, Options.Limits.MaxRequestLineSize));
+                CoreStrings.FormatMaxRequestBufferSmallerThanRequestLineBuffer(
+                    Options.Limits.MaxRequestBufferSize.Value,
+                    Options.Limits.MaxRequestLineSize
+                )
+            );
         }
 
-        if (Options.Limits.MaxRequestBufferSize.HasValue &&
-            Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestHeadersTotalSize)
+        if (
+            Options.Limits.MaxRequestBufferSize.HasValue
+            && Options.Limits.MaxRequestBufferSize < Options.Limits.MaxRequestHeadersTotalSize
+        )
         {
             throw new InvalidOperationException(
-                CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(Options.Limits.MaxRequestBufferSize.Value, Options.Limits.MaxRequestHeadersTotalSize));
+                CoreStrings.FormatMaxRequestBufferSmallerThanRequestHeaderBuffer(
+                    Options.Limits.MaxRequestBufferSize.Value,
+                    Options.Limits.MaxRequestHeadersTotalSize
+                )
+            );
         }
     }
 
-    private static ConnectionDelegate EnforceConnectionLimit(ConnectionDelegate innerDelegate, long? connectionLimit, KestrelTrace trace, KestrelMetrics metrics)
+    private static ConnectionDelegate EnforceConnectionLimit(
+        ConnectionDelegate innerDelegate,
+        long? connectionLimit,
+        KestrelTrace trace,
+        KestrelMetrics metrics
+    )
     {
         if (!connectionLimit.HasValue)
         {
             return innerDelegate;
         }
 
-        return new ConnectionLimitMiddleware<ConnectionContext>(c => innerDelegate(c), connectionLimit.Value, trace, metrics).OnConnectionAsync;
+        return new ConnectionLimitMiddleware<ConnectionContext>(
+            c => innerDelegate(c),
+            connectionLimit.Value,
+            trace,
+            metrics
+        ).OnConnectionAsync;
     }
 
-    private static MultiplexedConnectionDelegate EnforceConnectionLimit(MultiplexedConnectionDelegate innerDelegate, long? connectionLimit, KestrelTrace trace, KestrelMetrics metrics)
+    private static MultiplexedConnectionDelegate EnforceConnectionLimit(
+        MultiplexedConnectionDelegate innerDelegate,
+        long? connectionLimit,
+        KestrelTrace trace,
+        KestrelMetrics metrics
+    )
     {
         if (!connectionLimit.HasValue)
         {
             return innerDelegate;
         }
 
-        return new ConnectionLimitMiddleware<MultiplexedConnectionContext>(c => innerDelegate(c), connectionLimit.Value, trace, metrics).OnConnectionAsync;
+        return new ConnectionLimitMiddleware<MultiplexedConnectionContext>(
+            c => innerDelegate(c),
+            connectionLimit.Value,
+            trace,
+            metrics
+        ).OnConnectionAsync;
     }
 }

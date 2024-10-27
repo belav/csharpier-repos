@@ -10,9 +10,9 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Data.Metadata.Edm;
 using System.Globalization;
 using System.Text;
-using System.Data.Metadata.Edm;
 
 namespace System.Data.Objects.DataClasses
 {
@@ -41,12 +41,18 @@ namespace System.Data.Objects.DataClasses
         /// <param name="to">Name of the role which is the destination of the navigation.</param>
         /// <param name="fromAccessor">The navigation property which is the source of the navigation.</param>
         /// <param name="toAccessor">The navigation property which is the destination of the navigation.</param>
-        internal RelationshipNavigation(string relationshipName, string from, string to, NavigationPropertyAccessor fromAccessor, NavigationPropertyAccessor toAccessor)
+        internal RelationshipNavigation(
+            string relationshipName,
+            string from,
+            string to,
+            NavigationPropertyAccessor fromAccessor,
+            NavigationPropertyAccessor toAccessor
+        )
         {
             EntityUtil.CheckStringArgument(relationshipName, "relationshipName");
             EntityUtil.CheckStringArgument(from, "from");
             EntityUtil.CheckStringArgument(to, "to");
-            
+
             _relationshipName = relationshipName;
             _from = from;
             _to = to;
@@ -54,7 +60,7 @@ namespace System.Data.Objects.DataClasses
             _fromAccessor = fromAccessor;
             _toAccessor = toAccessor;
         }
-    
+
         // ------
         // Fields
         // ------
@@ -82,42 +88,33 @@ namespace System.Data.Objects.DataClasses
 
         /// <summary>
         /// Canonical-space relationship name.
-        /// </summary>        
+        /// </summary>
         internal string RelationshipName
         {
-            get
-            {
-                return _relationshipName;
-            }
+            get { return _relationshipName; }
         }
 
         /// <summary>
         /// Role name for the source of this navigation.
-        /// </summary>        
+        /// </summary>
         internal string From
         {
-            get
-            {
-                return _from;
-            }
+            get { return _from; }
         }
 
         /// <summary>
         /// Role name for the destination of this navigation.
-        /// </summary>        
+        /// </summary>
         internal string To
         {
-            get
-            {
-                return _to;
-            }
+            get { return _to; }
         }
 
         /// <summary>
         /// Navigation property name for the destination of this navigation.
         /// NOTE: There is not a FromPropertyAccessor property on RelationshipNavigation because it is not currently accessed anywhere
         ///       It is only used to calculate the "reverse" RelationshipNavigation.
-        /// </summary>        
+        /// </summary>
         internal NavigationPropertyAccessor ToPropertyAccessor
         {
             get { return _toAccessor; }
@@ -128,15 +125,18 @@ namespace System.Data.Objects.DataClasses
             get { return _toAccessor != null && _fromAccessor != null; }
         }
 
-        internal void InitializeAccessors(NavigationPropertyAccessor fromAccessor, NavigationPropertyAccessor toAccessor)
+        internal void InitializeAccessors(
+            NavigationPropertyAccessor fromAccessor,
+            NavigationPropertyAccessor toAccessor
+        )
         {
             _fromAccessor = fromAccessor;
             _toAccessor = toAccessor;
         }
-        
+
         /// <summary>
         /// The "reverse" version of this navigation.
-        /// </summary>        
+        /// </summary>
         internal RelationshipNavigation Reverse
         {
             get
@@ -145,35 +145,46 @@ namespace System.Data.Objects.DataClasses
                 {
                     // the reverse relationship is exactly like this
                     // one but from & to are switched
-                    _reverse = new RelationshipNavigation(_relationshipName, _to, _from, _toAccessor, _fromAccessor);
+                    _reverse = new RelationshipNavigation(
+                        _relationshipName,
+                        _to,
+                        _from,
+                        _toAccessor,
+                        _fromAccessor
+                    );
                 }
-                
+
                 return _reverse;
             }
         }
 
         /// <summary>
         /// Compares this instance to a given Navigation by their values.
-        /// </summary>        
+        /// </summary>
         public override bool Equals(object obj)
         {
-                RelationshipNavigation compareTo = obj as RelationshipNavigation;
-                return ((this == compareTo)
-                        || ((null != this) && (null != compareTo)
-                            && (this.RelationshipName == compareTo.RelationshipName)
-                            && (this.From == compareTo.From)
-                            && (this.To == compareTo.To)));
+            RelationshipNavigation compareTo = obj as RelationshipNavigation;
+            return (
+                (this == compareTo)
+                || (
+                    (null != this)
+                    && (null != compareTo)
+                    && (this.RelationshipName == compareTo.RelationshipName)
+                    && (this.From == compareTo.From)
+                    && (this.To == compareTo.To)
+                )
+            );
         }
-        
+
         /// <summary>
         /// Returns a value-based hash code.
         /// </summary>
         /// <returns>the hash value of this Navigation</returns>
         public override int GetHashCode()
         {
-                return this.RelationshipName.GetHashCode();
+            return this.RelationshipName.GetHashCode();
         }
-        
+
         // -------
         // Methods
         // -------
@@ -183,11 +194,13 @@ namespace System.Data.Objects.DataClasses
         /// </summary>
         public override string ToString()
         {
-            return String.Format(CultureInfo.InvariantCulture,
-                                 "RelationshipNavigation: ({0},{1},{2})",
-                                 _relationshipName,
-                                 _from,
-                                 _to);
-        }        
+            return String.Format(
+                CultureInfo.InvariantCulture,
+                "RelationshipNavigation: ({0},{1},{2})",
+                _relationshipName,
+                _from,
+                _to
+            );
+        }
     }
 }

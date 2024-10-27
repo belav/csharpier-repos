@@ -11,24 +11,15 @@ namespace System.ServiceModel
     public class QuotaExceededException : SystemException
     {
         public QuotaExceededException()
-            : base()
-        {
-        }
+            : base() { }
 
         public QuotaExceededException(string message)
-            : base(message)
-        {
-        }
+            : base(message) { }
 
         public QuotaExceededException(string message, Exception innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
         protected QuotaExceededException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }
-

@@ -8,7 +8,8 @@ namespace System.Xml
     {
         internal XmlLinkedNode? next;
 
-        internal XmlLinkedNode(XmlDocument doc) : base(doc)
+        internal XmlLinkedNode(XmlDocument doc)
+            : base(doc)
         {
             next = null;
         }

@@ -16,11 +16,15 @@ public static class ParameterBinderExtensions
     public static Task<ModelBindingResult> BindModelAsync(
         this ParameterBinder parameterBinder,
         ParameterDescriptor parameter,
-        ControllerContext context)
+        ControllerContext context
+    )
     {
-        var optionsAccessor = context.HttpContext.RequestServices.GetService<IOptions<MvcOptions>>();
+        var optionsAccessor = context.HttpContext.RequestServices.GetService<
+            IOptions<MvcOptions>
+        >();
         Assert.NotNull(optionsAccessor?.Value); // Guard
-        var modelMetadataProvider = context.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
+        var modelMetadataProvider =
+            context.HttpContext.RequestServices.GetService<IModelMetadataProvider>();
         Assert.NotNull(modelMetadataProvider); // Guard
 
         // Imitate a bit of ControllerBinderDelegateProvider and PageBinderFactory
@@ -39,8 +43,10 @@ public static class ParameterBinderExtensions
         }
 
         ModelMetadata metadata;
-        if (modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase &&
-            parameterInfo != null)
+        if (
+            modelMetadataProvider is ModelMetadataProvider modelMetadataProviderBase
+            && parameterInfo != null
+        )
         {
             metadata = modelMetadataProviderBase.GetMetadataForParameter(parameterInfo);
         }
@@ -57,19 +63,23 @@ public static class ParameterBinderExtensions
         ParameterDescriptor parameter,
         ControllerContext context,
         IModelMetadataProvider modelMetadataProvider,
-        ModelMetadata modelMetadata)
+        ModelMetadata modelMetadata
+    )
     {
         var valueProvider = await CompositeValueProvider.CreateAsync(context);
         var modelBinderFactory = ModelBindingTestHelper.GetModelBinderFactory(
             modelMetadataProvider,
-            context.HttpContext.RequestServices);
+            context.HttpContext.RequestServices
+        );
 
-        var modelBinder = modelBinderFactory.CreateBinder(new ModelBinderFactoryContext
-        {
-            BindingInfo = parameter.BindingInfo,
-            Metadata = modelMetadata,
-            CacheToken = parameter,
-        });
+        var modelBinder = modelBinderFactory.CreateBinder(
+            new ModelBinderFactoryContext
+            {
+                BindingInfo = parameter.BindingInfo,
+                Metadata = modelMetadata,
+                CacheToken = parameter,
+            }
+        );
 
         return await parameterBinder.BindModelAsync(
             context,
@@ -77,6 +87,7 @@ public static class ParameterBinderExtensions
             valueProvider,
             parameter,
             modelMetadata,
-            value: null);
+            value: null
+        );
     }
 }

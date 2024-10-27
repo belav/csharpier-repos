@@ -1,8 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
+using Xunit;
 
 namespace System.Globalization.Tests
 {
@@ -179,8 +179,16 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("ru-RU").DateTimeFormat, gregorianName }; // григорианский календарь
             yield return new object[] { new CultureInfo("sk-SK").DateTimeFormat, gregorianName }; // gregoriánsky kalendár
             yield return new object[] { new CultureInfo("sl-SI").DateTimeFormat, gregorianName }; // gregorijanski koledar
-            yield return new object[] { new CultureInfo("sr-Cyrl-RS").DateTimeFormat, gregorianName }; // грегоријански календар
-            yield return new object[] { new CultureInfo("sr-Latn-RS").DateTimeFormat, gregorianName }; // gregorijanski kalendar
+            yield return new object[]
+            {
+                new CultureInfo("sr-Cyrl-RS").DateTimeFormat,
+                gregorianName,
+            }; // грегоријански календар
+            yield return new object[]
+            {
+                new CultureInfo("sr-Latn-RS").DateTimeFormat,
+                gregorianName,
+            }; // gregorijanski kalendar
             yield return new object[] { new CultureInfo("sv-AX").DateTimeFormat, gregorianName }; // gregoriansk kalender
             yield return new object[] { new CultureInfo("sv-SE").DateTimeFormat, gregorianName };
             yield return new object[] { new CultureInfo("sw-CD").DateTimeFormat, gregorianName }; // Kalenda ya Kigregori
@@ -191,22 +199,32 @@ namespace System.Globalization.Tests
             yield return new object[] { new CultureInfo("ta-LK").DateTimeFormat, gregorianName };
             yield return new object[] { new CultureInfo("ta-MY").DateTimeFormat, gregorianName };
             yield return new object[] { new CultureInfo("ta-SG").DateTimeFormat, gregorianName };
-            yield return new object[] { new CultureInfo("te-IN").DateTimeFormat, gregorianName };// గ్రేగోరియన్ క్యాలెండర్
+            yield return new object[] { new CultureInfo("te-IN").DateTimeFormat, gregorianName }; // గ్రేగోరియన్ క్యాలెండర్
             yield return new object[] { new CultureInfo("th-TH").DateTimeFormat, bhuddistName }; // ปฏิทินพุทธ
             yield return new object[] { new CultureInfo("tr-CY").DateTimeFormat, gregorianName }; // Miladi Takvim
             yield return new object[] { new CultureInfo("tr-TR").DateTimeFormat, gregorianName };
             yield return new object[] { new CultureInfo("uk-UA").DateTimeFormat, gregorianName }; // григоріанський календар
             yield return new object[] { new CultureInfo("vi-VN").DateTimeFormat, gregorianName }; // Lịch Gregory
             yield return new object[] { new CultureInfo("zh-CN").DateTimeFormat, gregorianName }; // 公历
-            yield return new object[] { new CultureInfo("zh-Hans-HK").DateTimeFormat, gregorianName };
+            yield return new object[]
+            {
+                new CultureInfo("zh-Hans-HK").DateTimeFormat,
+                gregorianName,
+            };
             yield return new object[] { new CultureInfo("zh-SG").DateTimeFormat, gregorianName };
             yield return new object[] { new CultureInfo("zh-HK").DateTimeFormat, gregorianName }; // 公曆
             yield return new object[] { new CultureInfo("zh-TW").DateTimeFormat, gregorianName };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(NativeCalendarName_Get_TestData_HybridGlobalization))]
-        public void NativeCalendarName_Get_ReturnsExpected_HybridGlobalization(DateTimeFormatInfo format, string expected)
+        public void NativeCalendarName_Get_ReturnsExpected_HybridGlobalization(
+            DateTimeFormatInfo format,
+            string expected
+        )
         {
             Assert.Equal(expected, format.NativeCalendarName);
         }

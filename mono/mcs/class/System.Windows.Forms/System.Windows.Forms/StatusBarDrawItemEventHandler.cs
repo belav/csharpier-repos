@@ -26,11 +26,10 @@
 using System;
 using System.Drawing;
 
-namespace System.Windows.Forms {
-
-	public delegate void StatusBarDrawItemEventHandler (object sender,
-			StatusBarDrawItemEventArgs sbdevent);
-
+namespace System.Windows.Forms
+{
+    public delegate void StatusBarDrawItemEventHandler(
+        object sender,
+        StatusBarDrawItemEventArgs sbdevent
+    );
 }
-
-

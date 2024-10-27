@@ -33,10 +33,7 @@ namespace System.Reflection.Metadata
         /// </summary>
         public EntityHandle Method
         {
-            get
-            {
-                return _reader.MethodSpecTable.GetMethod(Handle);
-            }
+            get { return _reader.MethodSpecTable.GetMethod(Handle); }
         }
 
         /// <summary>
@@ -44,15 +41,19 @@ namespace System.Reflection.Metadata
         /// </summary>
         public BlobHandle Signature
         {
-            get
-            {
-                return _reader.MethodSpecTable.GetInstantiation(Handle);
-            }
+            get { return _reader.MethodSpecTable.GetInstantiation(Handle); }
         }
 
-        public ImmutableArray<TType> DecodeSignature<TType, TGenericContext>(ISignatureTypeProvider<TType, TGenericContext> provider, TGenericContext genericContext)
+        public ImmutableArray<TType> DecodeSignature<TType, TGenericContext>(
+            ISignatureTypeProvider<TType, TGenericContext> provider,
+            TGenericContext genericContext
+        )
         {
-            var decoder = new Ecma335.SignatureDecoder<TType, TGenericContext>(provider, _reader, genericContext);
+            var decoder = new Ecma335.SignatureDecoder<TType, TGenericContext>(
+                provider,
+                _reader,
+                genericContext
+            );
             var blobReader = _reader.GetBlobReader(Signature);
             return decoder.DecodeMethodSpecificationSignature(ref blobReader);
         }

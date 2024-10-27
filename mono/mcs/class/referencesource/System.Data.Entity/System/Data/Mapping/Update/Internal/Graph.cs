@@ -7,12 +7,13 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Common.Utils;
 using System.Collections.Generic;
+using System.Data.Common.Utils;
 using System.Diagnostics;
-using System.Text;
 using System.Globalization;
 using System.Linq;
+using System.Text;
+
 namespace System.Data.Mapping.Update.Internal
 {
     /// <summary>
@@ -20,7 +21,7 @@ namespace System.Data.Mapping.Update.Internal
     /// </summary>
     /// <remarks>
     /// Notes on language (in case you're familiar with one or the other convention):
-    /// 
+    ///
     /// node == vertex
     /// arc == edge
     /// predecessor == incoming
@@ -33,7 +34,7 @@ namespace System.Data.Mapping.Update.Internal
         /// <summary>
         /// Initialize a new graph
         /// </summary>
-        /// <param name="comparer">Comparer used to determine if two node references are 
+        /// <param name="comparer">Comparer used to determine if two node references are
         /// equivalent</param>
         internal Graph(IEqualityComparer<TVertex> comparer)
         {
@@ -71,7 +72,6 @@ namespace System.Data.Mapping.Update.Internal
         internal IEnumerable<TVertex> Vertices
         {
             get { return m_vertices; }
-                
         }
 
         /// <summary>
@@ -89,7 +89,6 @@ namespace System.Data.Mapping.Update.Internal
                     }
                 }
             }
-                
         }
         #endregion
 
@@ -142,7 +141,10 @@ namespace System.Data.Mapping.Update.Internal
         /// in sort order (assumes elements implement IComparable(Of TVertex))
         /// </summary>
         /// <returns>true if the sort succeeds; false if it fails and there is a remainder</returns>
-        internal bool TryTopologicalSort(out IEnumerable<TVertex> orderedVertices, out IEnumerable<TVertex> remainder)
+        internal bool TryTopologicalSort(
+            out IEnumerable<TVertex> orderedVertices,
+            out IEnumerable<TVertex> remainder
+        )
         {
             // populate all predecessor-less nodes to root queue
             var rootsPriorityQueue = new SortedSet<TVertex>(Comparer<TVertex>.Default);
@@ -150,7 +152,10 @@ namespace System.Data.Mapping.Update.Internal
             foreach (TVertex vertex in m_vertices)
             {
                 int predecessorCount;
-                if (!m_predecessorCounts.TryGetValue(vertex, out predecessorCount) || 0 == predecessorCount)
+                if (
+                    !m_predecessorCounts.TryGetValue(vertex, out predecessorCount)
+                    || 0 == predecessorCount
+                )
                 {
                     rootsPriorityQueue.Add(vertex);
                 }
@@ -219,17 +224,23 @@ namespace System.Data.Mapping.Update.Internal
                 bool first = true;
 
                 sb.AppendFormat(CultureInfo.InvariantCulture, "[{0}] --> ", outgoingEdge.Key);
-            
+
                 foreach (TVertex vertex in outgoingEdge.Value)
                 {
-                    if (first) { first = false; }
-                    else { sb.Append(", "); }
+                    if (first)
+                    {
+                        first = false;
+                    }
+                    else
+                    {
+                        sb.Append(", ");
+                    }
                     sb.AppendFormat(CultureInfo.InvariantCulture, "[{0}]", vertex);
                 }
 
                 sb.Append("; ");
             }
-            
+
             return sb.ToString();
         }
         #endregion

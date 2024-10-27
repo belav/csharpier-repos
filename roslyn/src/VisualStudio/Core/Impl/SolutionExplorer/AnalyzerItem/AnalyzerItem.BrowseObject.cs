@@ -23,19 +23,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.SolutionExplore
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Name))]
             public string Name
             {
-                get
-                {
-                    return _analyzerItem.AnalyzerReference.Display;
-                }
+                get { return _analyzerItem.AnalyzerReference.Display; }
             }
 
             [BrowseObjectDisplayName(nameof(SolutionExplorerShim.Path))]
             public string Path
             {
-                get
-                {
-                    return _analyzerItem.AnalyzerReference.FullPath;
-                }
+                get { return _analyzerItem.AnalyzerReference.FullPath; }
             }
 
             public override string GetClassName()

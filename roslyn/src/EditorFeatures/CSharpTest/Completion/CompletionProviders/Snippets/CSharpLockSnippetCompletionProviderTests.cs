@@ -10,14 +10,16 @@ using Xunit;
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders.Snippets
 {
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class CSharpLockSnippetCompletionProviderTests : AbstractCSharpSnippetCompletionProviderTests
+    public class CSharpLockSnippetCompletionProviderTests
+        : AbstractCSharpSnippetCompletionProviderTests
     {
         protected override string ItemToCommit => "lock";
 
         [WpfFact]
         public async Task InsertLockSnippetInMethodTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -25,7 +27,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -36,46 +40,58 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertLockSnippetInGlobalContextTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 $$
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 lock (this)
                 {
                     $$
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task NoLockSnippetInBlockNamespaceTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 namespace Namespace
                 {
                     $$
                 }
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfFact]
         public async Task NoLockSnippetInFileScopedNamespaceTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 namespace Namespace;
                 $$
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertLockSnippetInConstructorTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public Program()
@@ -83,7 +99,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         $$
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public Program()
@@ -94,24 +112,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task NoLockSnippetInTypeBodyTest()
         {
-            await VerifyItemIsAbsentAsync("""
+            await VerifyItemIsAbsentAsync(
+                """
                 class Program
                 {
                     $$
                 }
-                """, ItemToCommit);
+                """,
+                ItemToCommit
+            );
         }
 
         [WpfFact]
         public async Task InsertLockSnippetInLocalFunctionTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -122,7 +145,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -136,13 +161,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertLockSnippetInAnonymousFunctionTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -153,7 +180,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -167,13 +196,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """);
+                """
+            );
         }
 
         [WpfFact]
         public async Task InsertLockSnippetInParenthesizedLambdaExpressionTest()
         {
-            await VerifyCustomCommitProviderAsync("""
+            await VerifyCustomCommitProviderAsync(
+                """
                 class Program
                 {
                     public void Method()
@@ -184,7 +215,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """, ItemToCommit, """
+                """,
+                ItemToCommit,
+                """
                 class Program
                 {
                     public void Method()
@@ -198,7 +231,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                         };
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

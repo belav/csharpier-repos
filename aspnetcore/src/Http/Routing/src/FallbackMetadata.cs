@@ -7,7 +7,5 @@ internal sealed class FallbackMetadata
 {
     public static readonly FallbackMetadata Instance = new FallbackMetadata();
 
-    private FallbackMetadata()
-    {
-    }
+    private FallbackMetadata() { }
 }

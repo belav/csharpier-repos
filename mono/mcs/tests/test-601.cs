@@ -4,7 +4,7 @@ using System;
 
 class C
 {
-	delegate void MarkerUpdatedVMDelegate (IntPtr buffer, IntPtr where);
-	
-	public static void Main () {}
+    delegate void MarkerUpdatedVMDelegate(IntPtr buffer, IntPtr where);
+
+    public static void Main() { }
 }

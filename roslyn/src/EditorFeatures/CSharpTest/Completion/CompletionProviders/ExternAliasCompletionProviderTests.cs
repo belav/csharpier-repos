@@ -16,18 +16,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class ExternAliasCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExternAliasCompletionProvider);
+        internal override Type GetCompletionProviderType() => typeof(ExternAliasCompletionProvider);
 
         [Fact]
         public async Task NoAliases()
         {
-            await VerifyNoItemsExistAsync("""
+            await VerifyNoItemsExistAsync(
+                """
                 extern alias $$
                 class C
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/44423")]
@@ -54,7 +55,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var markup = """
                 extern alias $$
                 """;
-            await VerifyItemWithAliasedMetadataReferencesAsync(markup, "goo", "global", 0, "C#", "C#");
+            await VerifyItemWithAliasedMetadataReferencesAsync(
+                markup,
+                "goo",
+                "global",
+                0,
+                "C#",
+                "C#"
+            );
         }
 
         [Fact]

@@ -20,8 +20,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
     [Trait(Traits.Feature, Traits.Features.Completion)]
     public class ObjectInitializerCompletionProviderTests : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ObjectAndWithInitializerCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ObjectAndWithInitializerCompletionProvider);
 
         [Fact]
         public async Task NothingToInitialize()
@@ -541,7 +541,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")]
@@ -570,7 +571,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/545678")]
@@ -601,7 +603,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
 
             HideAdvancedMembers = false;
 
@@ -612,7 +615,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 1,
                 expectedSymbolsMetadataReference: 1,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.CSharp);
+                referencedLanguage: LanguageNames.CSharp
+            );
         }
 
         [Fact]
@@ -655,15 +659,26 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var triggerInfo = CompletionTrigger.CreateInsertionTrigger('a');
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
             var item = completionList.ItemsList.First();
 
-            Assert.False(CommitManager.SendEnterThroughToEditor(service.GetRules(CompletionOptions.Default), item, string.Empty), "Expected false from SendEnterThroughToEditor()");
+            Assert.False(
+                CommitManager.SendEnterThroughToEditor(
+                    service.GetRules(CompletionOptions.Default),
+                    item,
+                    string.Empty
+                ),
+                "Expected false from SendEnterThroughToEditor()"
+            );
         }
 
         [Fact]
-        public void TestTrigger()
-            => TestCommonIsTextualTriggerCharacter();
+        public void TestTrigger() => TestCommonIsTextualTriggerCharacter();
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/530828")]
         public async Task DoNotIncludeIndexedPropertyWithNonOptionalParameter()
@@ -690,7 +705,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 expectedSymbolsSameSolution: 0,
                 expectedSymbolsMetadataReference: 0,
                 sourceLanguage: LanguageNames.CSharp,
-                referencedLanguage: LanguageNames.VisualBasic);
+                referencedLanguage: LanguageNames.VisualBasic
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/4754")]
@@ -1035,8 +1051,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
                 }
                 """;
 
-            await VerifyItemExistsAsync(markup, "RequiredField", inlineDescription: FeaturesResources.Required, matchPriority: MatchPriority.Preselect);
-            await VerifyItemExistsAsync(markup, "RequiredProperty", inlineDescription: FeaturesResources.Required);
+            await VerifyItemExistsAsync(
+                markup,
+                "RequiredField",
+                inlineDescription: FeaturesResources.Required,
+                matchPriority: MatchPriority.Preselect
+            );
+            await VerifyItemExistsAsync(
+                markup,
+                "RequiredProperty",
+                inlineDescription: FeaturesResources.Required
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/15205")]
@@ -1247,11 +1272,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             var triggerInfo = CompletionTrigger.CreateInsertionTrigger('a');
 
             var service = GetCompletionService(document.Project);
-            var completionList = await GetCompletionListAsync(service, document, position, triggerInfo);
+            var completionList = await GetCompletionListAsync(
+                service,
+                document,
+                position,
+                triggerInfo
+            );
 
             if (!completionList.IsEmpty)
             {
-                Assert.True(exclusive == completionList.IsExclusive, "group.IsExclusive == " + completionList.IsExclusive);
+                Assert.True(
+                    exclusive == completionList.IsExclusive,
+                    "group.IsExclusive == " + completionList.IsExclusive
+                );
             }
         }
     }

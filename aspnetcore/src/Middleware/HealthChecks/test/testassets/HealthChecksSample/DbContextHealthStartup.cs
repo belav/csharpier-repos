@@ -18,8 +18,8 @@ public class DbContextHealthStartup
     public void ConfigureServices(IServiceCollection services)
     {
         // Registers required services for health checks
-        services.AddHealthChecks()
-
+        services
+            .AddHealthChecks()
             // Registers a health check for the MyContext type. By default the name of the health check will be the
             // name of the DbContext type. There are other options available through AddDbContextCheck to configure
             // failure status, tags, and custom test query.
@@ -29,8 +29,9 @@ public class DbContextHealthStartup
         //
         // The health check added by AddDbContextCheck will create instances of MyContext from the service provider,
         // and so will reuse the configuration provided here.
-        services.AddDbContext<MyContext>(
-            options => options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"]));
+        services.AddDbContext<MyContext>(options =>
+            options.UseSqlite(Configuration["ConnectionStrings:DefaultConnection"])
+        );
     }
 
     public void Configure(IApplicationBuilder app)
@@ -45,35 +46,53 @@ public class DbContextHealthStartup
         //
         app.UseHealthChecks("/health");
 
-        app.Map("/createdatabase", b => b.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Creating the database...\n");
-            await context.Response.Body.FlushAsync();
+        app.Map(
+            "/createdatabase",
+            b =>
+                b.Run(
+                    async (context) =>
+                    {
+                        await context.Response.WriteAsync("Creating the database...\n");
+                        await context.Response.Body.FlushAsync();
 
-            var myContext = context.RequestServices.GetRequiredService<MyContext>();
-            await myContext.Database.EnsureCreatedAsync();
+                        var myContext = context.RequestServices.GetRequiredService<MyContext>();
+                        await myContext.Database.EnsureCreatedAsync();
 
-            await context.Response.WriteAsync("Done\n");
-            await context.Response.WriteAsync("Go to /health to see the health status\n");
-        }));
+                        await context.Response.WriteAsync("Done\n");
+                        await context.Response.WriteAsync(
+                            "Go to /health to see the health status\n"
+                        );
+                    }
+                )
+        );
 
-        app.Map("/deletedatabase", b => b.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Deleting the database...\n");
-            await context.Response.Body.FlushAsync();
+        app.Map(
+            "/deletedatabase",
+            b =>
+                b.Run(
+                    async (context) =>
+                    {
+                        await context.Response.WriteAsync("Deleting the database...\n");
+                        await context.Response.Body.FlushAsync();
 
-            var myContext = context.RequestServices.GetRequiredService<MyContext>();
-            await myContext.Database.EnsureDeletedAsync();
+                        var myContext = context.RequestServices.GetRequiredService<MyContext>();
+                        await myContext.Database.EnsureDeletedAsync();
 
-            await context.Response.WriteAsync("Done\n");
-            await context.Response.WriteAsync("Go to /health to see the health status\n");
-        }));
+                        await context.Response.WriteAsync("Done\n");
+                        await context.Response.WriteAsync(
+                            "Go to /health to see the health status\n"
+                        );
+                    }
+                )
+        );
 
-        app.Run(async (context) =>
-        {
-            await context.Response.WriteAsync("Go to /health to see the health status\n");
-            await context.Response.WriteAsync("Go to /createdatabase to create the database\n");
-            await context.Response.WriteAsync("Go to /deletedatabase to delete the database\n");
-        });
+        app.Run(
+            async (context) =>
+            {
+                await context.Response.WriteAsync("Go to /health to see the health status\n");
+                await context.Response.WriteAsync("Go to /createdatabase to create the database\n");
+                await context.Response.WriteAsync("Go to /deletedatabase to delete the database\n");
+            }
+        );
     }
 }

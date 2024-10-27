@@ -19,7 +19,9 @@ public class CosmosQueryMetadataExtractingExpressionVisitor : ExpressionVisitor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public CosmosQueryMetadataExtractingExpressionVisitor(CosmosQueryCompilationContext cosmosQueryCompilationContext)
+    public CosmosQueryMetadataExtractingExpressionVisitor(
+        CosmosQueryCompilationContext cosmosQueryCompilationContext
+    )
     {
         _cosmosQueryCompilationContext = cosmosQueryCompilationContext;
     }
@@ -32,12 +34,17 @@ public class CosmosQueryMetadataExtractingExpressionVisitor : ExpressionVisitor
     /// </summary>
     protected override Expression VisitMethodCall(MethodCallExpression methodCallExpression)
     {
-        if (methodCallExpression.Method.IsGenericMethod
-            && methodCallExpression.Method.GetGenericMethodDefinition() == CosmosQueryableExtensions.WithPartitionKeyMethodInfo)
+        if (
+            methodCallExpression.Method.IsGenericMethod
+            && methodCallExpression.Method.GetGenericMethodDefinition()
+                == CosmosQueryableExtensions.WithPartitionKeyMethodInfo
+        )
         {
             var innerQueryable = Visit(methodCallExpression.Arguments[0]);
 
-            _cosmosQueryCompilationContext.PartitionKeyFromExtension = methodCallExpression.Arguments[1].GetConstantValue<string>();
+            _cosmosQueryCompilationContext.PartitionKeyFromExtension = methodCallExpression
+                .Arguments[1]
+                .GetConstantValue<string>();
 
             return innerQueryable;
         }

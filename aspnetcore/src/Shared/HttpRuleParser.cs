@@ -13,8 +13,9 @@ internal static class HttpRuleParser
 {
     // token = 1*<any CHAR except CTLs or separators>
     // CTL = <any US-ASCII control character (octets 0 - 31) and DEL (127)>
-    private static readonly SearchValues<char> TokenChars =
-        SearchValues.Create("!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~");
+    private static readonly SearchValues<char> TokenChars = SearchValues.Create(
+        "!#$%&'*+-.0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZ^_`abcdefghijklmnopqrstuvwxyz|~"
+    );
 
     private const int MaxNestedCount = 5;
     private static readonly string[] DateFormats = new string[]
@@ -28,12 +29,10 @@ internal static class HttpRuleParser
         "ddd, d MMM yy H:m:s", // RFC 1123, short year, no zone
         "d MMM yy H:m:s 'GMT'", // RFC 1123, no day-of-week, short year
         "d MMM yy H:m:s", // RFC 1123, no day-of-week, short year, no zone
-
         "dddd, d'-'MMM'-'yy H:m:s 'GMT'", // RFC 850, short year
         "dddd, d'-'MMM'-'yy H:m:s", // RFC 850 no zone
         "ddd, d'-'MMM'-'yyyy H:m:s 'GMT'", // RFC 850, long year
         "ddd MMM d H:m:s yyyy", // ANSI C's asctime() format
-
         "ddd, d MMM yyyy H:m:s zzz", // RFC 5322
         "ddd, d MMM yyyy H:m:s", // RFC 5322 no zone
         "d MMM yyyy H:m:s zzz", // RFC 5322 no day-of-week
@@ -53,7 +52,9 @@ internal static class HttpRuleParser
     [Pure]
     internal static int GetTokenLength(StringSegment input, int startIndex)
     {
-        Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+        Contract.Ensures(
+            (Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex))
+        );
 
         if (startIndex >= input.Length)
         {
@@ -67,7 +68,9 @@ internal static class HttpRuleParser
 
     internal static int GetWhitespaceLength(StringSegment input, int startIndex)
     {
-        Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+        Contract.Ensures(
+            (Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex))
+        );
 
         if (startIndex >= input.Length)
         {
@@ -111,7 +114,9 @@ internal static class HttpRuleParser
     internal static int GetNumberLength(StringSegment input, int startIndex, bool allowDecimal)
     {
         Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
-        Contract.Ensures((Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex)));
+        Contract.Ensures(
+            (Contract.Result<int>() >= 0) && (Contract.Result<int>() <= (input.Length - startIndex))
+        );
 
         var current = startIndex;
         char c;
@@ -152,7 +157,11 @@ internal static class HttpRuleParser
         return current - startIndex;
     }
 
-    internal static HttpParseResult GetQuotedStringLength(StringSegment input, int startIndex, out int length)
+    internal static HttpParseResult GetQuotedStringLength(
+        StringSegment input,
+        int startIndex,
+        out int length
+    )
     {
         var nestedCount = 0;
         return GetExpressionLength(input, startIndex, '"', '"', false, ref nestedCount, out length);
@@ -160,7 +169,11 @@ internal static class HttpRuleParser
 
     // quoted-pair = "\" CHAR
     // CHAR = <any US-ASCII character (octets 0 - 127)>
-    internal static HttpParseResult GetQuotedPairLength(StringSegment input, int startIndex, out int length)
+    internal static HttpParseResult GetQuotedPairLength(
+        StringSegment input,
+        int startIndex,
+        out int length
+    )
     {
         Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
         length = 0;
@@ -191,9 +204,20 @@ internal static class HttpRuleParser
 
         // RFC 1123 is most common and has a fast path in TryParseExact.  Try it first, and only if that
         // fails fall back to trying the rest of the formats.
-        return
-            DateTimeOffset.TryParseExact(inputSpan, "r", invariant, DateTimeStyles.None, out result) ||
-            DateTimeOffset.TryParseExact(inputSpan, DateFormats, invariant, DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal, out result);
+        return DateTimeOffset.TryParseExact(
+                inputSpan,
+                "r",
+                invariant,
+                DateTimeStyles.None,
+                out result
+            )
+            || DateTimeOffset.TryParseExact(
+                inputSpan,
+                DateFormats,
+                invariant,
+                DateTimeStyles.AllowWhiteSpaces | DateTimeStyles.AssumeUniversal,
+                out result
+            );
     }
 
     // TEXT = <any OCTET except CTLs, but including LWS>
@@ -214,7 +238,8 @@ internal static class HttpRuleParser
         char closeChar,
         bool supportsNesting,
         ref int nestedCount,
-        out int length)
+        out int length
+    )
     {
         Contract.Requires(input != null);
         Contract.Requires((startIndex >= 0) && (startIndex < input.Length));
@@ -231,8 +256,13 @@ internal static class HttpRuleParser
         {
             // Only check whether we have a quoted char, if we have at least 3 characters left to read (i.e.
             // quoted char + closing char). Otherwise the closing char may be considered part of the quoted char.
-            if ((current + 2 < input.Length) &&
-                (GetQuotedPairLength(input, current, out var quotedPairLength) == HttpParseResult.Parsed))
+            if (
+                (current + 2 < input.Length)
+                && (
+                    GetQuotedPairLength(input, current, out var quotedPairLength)
+                    == HttpParseResult.Parsed
+                )
+            )
             {
                 // We ignore invalid quoted-pairs. Invalid quoted-pairs may mean that it looked like a quoted pair,
                 // but we actually have a quoted-string: e.g. "\ü" ('\' followed by a char >127 - quoted-pair only
@@ -254,8 +284,15 @@ internal static class HttpRuleParser
                     }
 
                     var nestedLength = 0;
-                    var nestedResult = GetExpressionLength(input, current, openChar, closeChar,
-                        supportsNesting, ref nestedCount, out nestedLength);
+                    var nestedResult = GetExpressionLength(
+                        input,
+                        current,
+                        openChar,
+                        closeChar,
+                        supportsNesting,
+                        ref nestedCount,
+                        out nestedLength
+                    );
 
                     switch (nestedResult)
                     {
@@ -264,9 +301,12 @@ internal static class HttpRuleParser
                             break;
 
                         case HttpParseResult.NotParsed:
-                            Contract.Assert(false, "'NotParsed' is unexpected: We started nested expression " +
-                                "parsing, because we found the open-char. So either it's a valid nested " +
-                                "expression or it has invalid format.");
+                            Contract.Assert(
+                                false,
+                                "'NotParsed' is unexpected: We started nested expression "
+                                    + "parsing, because we found the open-char. So either it's a valid nested "
+                                    + "expression or it has invalid format."
+                            );
                             break;
 
                         case HttpParseResult.InvalidFormat:

@@ -8,16 +8,18 @@ using System;
 using System.Collections.Specialized;
 using System.ComponentModel;
 
-namespace System.Web.UI.WebControls {
-
-    public class ListViewDeletedEventArgs : EventArgs {
+namespace System.Web.UI.WebControls
+{
+    public class ListViewDeletedEventArgs : EventArgs
+    {
         private int _affectedRows;
         private Exception _exception;
         private bool _exceptionHandled;
         private IOrderedDictionary _keys;
         private IOrderedDictionary _values;
 
-        public ListViewDeletedEventArgs(int affectedRows, Exception exception) {
+        public ListViewDeletedEventArgs(int affectedRows, Exception exception)
+        {
             _affectedRows = affectedRows;
             _exceptionHandled = false;
             _exception = exception;
@@ -26,39 +28,37 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         ///    <para>Gets the source of the command. This property is read-only.</para>
         /// </devdoc>
-        public int AffectedRows {
-            get {
-                return _affectedRows;
-            }
+        public int AffectedRows
+        {
+            get { return _affectedRows; }
         }
 
         /// <devdoc>
         ///    <para>Gets the exception (if any) that occurred during the operation. This property is read-only.</para>
         /// </devdoc>
-        public Exception Exception {
-            get {
-                return _exception;
-            }
+        public Exception Exception
+        {
+            get { return _exception; }
         }
 
         /// <devdoc>
         ///    <para>Gets a flag telling whether the exception was handled.</para>
         /// </devdoc>
-        public bool ExceptionHandled {
-            get {
-                return _exceptionHandled;
-            }
-            set {
-                _exceptionHandled = value;
-            }
+        public bool ExceptionHandled
+        {
+            get { return _exceptionHandled; }
+            set { _exceptionHandled = value; }
         }
 
         /// <devdoc>
         /// <para>Gets a keyed list to populate with parameters that identify the row to delete.  This property is read-only.</para>
         /// </devdoc>
-        public IOrderedDictionary Keys {
-            get {
-                if (_keys == null) {
+        public IOrderedDictionary Keys
+        {
+            get
+            {
+                if (_keys == null)
+                {
                     _keys = new OrderedDictionary();
                 }
                 return _keys;
@@ -68,20 +68,25 @@ namespace System.Web.UI.WebControls {
         /// <devdoc>
         /// <para>Gets a keyed list to populate with old row values.  This property is read-only.</para>
         /// </devdoc>
-        public IOrderedDictionary Values {
-            get {
-                if (_values == null) {
+        public IOrderedDictionary Values
+        {
+            get
+            {
+                if (_values == null)
+                {
                     _values = new OrderedDictionary();
                 }
                 return _values;
             }
         }
 
-        internal void SetKeys(IOrderedDictionary keys) {
+        internal void SetKeys(IOrderedDictionary keys)
+        {
             _keys = keys;
         }
 
-        internal void SetValues(IOrderedDictionary values) {
+        internal void SetValues(IOrderedDictionary values)
+        {
             _values = values;
         }
     }

@@ -20,7 +20,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(typeof(Customer), metadata.Type);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Id", property.Property.Name);
@@ -38,7 +39,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
                 Assert.Null(property.PropertyMetadata.Constructor);
                 Assert.Empty(property.PropertyMetadata.Properties);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -55,7 +57,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.False(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("BillingAddress", property.Property.Name);
@@ -64,35 +67,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(FormDataTypeKind.Object, property.PropertyMetadata.Kind);
                 Assert.Null(property.PropertyMetadata.Constructor);
                 Assert.False(property.PropertyMetadata.IsRecursive);
-                Assert.Collection(property.PropertyMetadata.Properties,
-                   property =>
-                   {
-                       Assert.Equal("Street", property.Property.Name);
-                       Assert.NotNull(property.PropertyMetadata);
-                       Assert.Equal(typeof(string), property.PropertyMetadata.Type);
-                       Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
-                       Assert.Null(property.PropertyMetadata.Constructor);
-                       Assert.Empty(property.PropertyMetadata.Properties);
-                   },
-                   property =>
-                   {
-                       Assert.Equal("City", property.Property.Name);
-                       Assert.NotNull(property.PropertyMetadata);
-                       Assert.Equal(typeof(string), property.PropertyMetadata.Type);
-                       Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
-                       Assert.Null(property.PropertyMetadata.Constructor);
-                       Assert.Empty(property.PropertyMetadata.Properties);
-                   });
-            },
-            property =>
-            {
-                Assert.Equal("ShippingAddress", property.Property.Name);
-                Assert.NotNull(property.PropertyMetadata);
-                Assert.Equal(typeof(Address), property.PropertyMetadata.Type);
-                Assert.Equal(FormDataTypeKind.Object, property.PropertyMetadata.Kind);
-                Assert.Null(property.PropertyMetadata.Constructor);
-                Assert.False(property.PropertyMetadata.IsRecursive);
-                Assert.Collection(property.PropertyMetadata.Properties,
+                Assert.Collection(
+                    property.PropertyMetadata.Properties,
                     property =>
                     {
                         Assert.Equal("Street", property.Property.Name);
@@ -110,8 +86,40 @@ public class FormDataMetadataFactoryTests
                         Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
                         Assert.Null(property.PropertyMetadata.Constructor);
                         Assert.Empty(property.PropertyMetadata.Properties);
-                    });
-            });
+                    }
+                );
+            },
+            property =>
+            {
+                Assert.Equal("ShippingAddress", property.Property.Name);
+                Assert.NotNull(property.PropertyMetadata);
+                Assert.Equal(typeof(Address), property.PropertyMetadata.Type);
+                Assert.Equal(FormDataTypeKind.Object, property.PropertyMetadata.Kind);
+                Assert.Null(property.PropertyMetadata.Constructor);
+                Assert.False(property.PropertyMetadata.IsRecursive);
+                Assert.Collection(
+                    property.PropertyMetadata.Properties,
+                    property =>
+                    {
+                        Assert.Equal("Street", property.Property.Name);
+                        Assert.NotNull(property.PropertyMetadata);
+                        Assert.Equal(typeof(string), property.PropertyMetadata.Type);
+                        Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
+                        Assert.Null(property.PropertyMetadata.Constructor);
+                        Assert.Empty(property.PropertyMetadata.Properties);
+                    },
+                    property =>
+                    {
+                        Assert.Equal("City", property.Property.Name);
+                        Assert.NotNull(property.PropertyMetadata);
+                        Assert.Equal(typeof(string), property.PropertyMetadata.Type);
+                        Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
+                        Assert.Null(property.PropertyMetadata.Constructor);
+                        Assert.Empty(property.PropertyMetadata.Properties);
+                    }
+                );
+            }
+        );
     }
 
     [Fact]
@@ -127,7 +135,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(typeof(Address), metadata.Type);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.Null(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Street", property.Property.Name);
@@ -145,7 +154,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(FormDataTypeKind.Primitive, property.PropertyMetadata.Kind);
                 Assert.Null(property.PropertyMetadata.Constructor);
                 Assert.Empty(property.PropertyMetadata.Properties);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -161,7 +171,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(typeof(KeyValuePair<int, string>), metadata.Type);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.ConstructorParameters,
+        Assert.Collection(
+            metadata.ConstructorParameters,
             parameter =>
             {
                 Assert.Equal("key", parameter.Name);
@@ -179,7 +190,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(FormDataTypeKind.Primitive, parameter.ParameterMetadata.Kind);
                 Assert.Null(parameter.ParameterMetadata.Constructor);
                 Assert.Empty(parameter.ParameterMetadata.Properties);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -195,7 +207,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(typeof(CustomerWithOrders), metadata.Type);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Id", property.Property.Name);
@@ -218,7 +231,10 @@ public class FormDataMetadataFactoryTests
             {
                 Assert.Equal("Orders", property.Property.Name);
                 Assert.NotNull(property.PropertyMetadata);
-                Assert.Equal(typeof(List<CustomerWithOrders.Order>), property.PropertyMetadata.Type);
+                Assert.Equal(
+                    typeof(List<CustomerWithOrders.Order>),
+                    property.PropertyMetadata.Type
+                );
                 Assert.Equal(FormDataTypeKind.Collection, property.PropertyMetadata.Kind);
                 Assert.NotNull(property.PropertyMetadata.ElementType);
                 Assert.Null(property.PropertyMetadata.Constructor);
@@ -241,8 +257,10 @@ public class FormDataMetadataFactoryTests
                         Assert.Equal(FormDataTypeKind.Primitive, subProperty.PropertyMetadata.Kind);
                         Assert.Null(subProperty.PropertyMetadata.Constructor);
                         Assert.Empty(subProperty.PropertyMetadata.Properties);
-                    });
-            });
+                    }
+                );
+            }
+        );
     }
 
     [Fact]
@@ -251,14 +269,18 @@ public class FormDataMetadataFactoryTests
         // Arrange
         var (factory, options, logs) = ResolveFactory();
         // Act
-        var metadata = factory.GetOrCreateMetadataFor(typeof(CompanyWithWarehousesByLocation), options);
+        var metadata = factory.GetOrCreateMetadataFor(
+            typeof(CompanyWithWarehousesByLocation),
+            options
+        );
 
         // Assert
         Assert.NotNull(metadata);
         Assert.Equal(typeof(CompanyWithWarehousesByLocation), metadata.Type);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Name", property.Property.Name);
@@ -302,7 +324,10 @@ public class FormDataMetadataFactoryTests
                                 Assert.Equal("Street", subSubProperty.Property.Name);
                                 Assert.NotNull(subSubProperty.PropertyMetadata);
                                 Assert.Equal(typeof(string), subSubProperty.PropertyMetadata.Type);
-                                Assert.Equal(FormDataTypeKind.Primitive, subSubProperty.PropertyMetadata.Kind);
+                                Assert.Equal(
+                                    FormDataTypeKind.Primitive,
+                                    subSubProperty.PropertyMetadata.Kind
+                                );
                                 Assert.Null(subSubProperty.PropertyMetadata.Constructor);
                                 Assert.Empty(subSubProperty.PropertyMetadata.Properties);
                             },
@@ -311,12 +336,18 @@ public class FormDataMetadataFactoryTests
                                 Assert.Equal("City", subSubProperty.Property.Name);
                                 Assert.NotNull(subSubProperty.PropertyMetadata);
                                 Assert.Equal(typeof(string), subSubProperty.PropertyMetadata.Type);
-                                Assert.Equal(FormDataTypeKind.Primitive, subSubProperty.PropertyMetadata.Kind);
+                                Assert.Equal(
+                                    FormDataTypeKind.Primitive,
+                                    subSubProperty.PropertyMetadata.Kind
+                                );
                                 Assert.Null(subSubProperty.PropertyMetadata.Constructor);
                                 Assert.Empty(subSubProperty.PropertyMetadata.Properties);
-                            });
-                    });
-            });
+                            }
+                        );
+                    }
+                );
+            }
+        );
     }
 
     [Fact]
@@ -333,7 +364,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.True(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Head", property.Property.Name);
@@ -350,7 +382,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(typeof(RecursiveList<string>), property.PropertyMetadata.Type);
                 Assert.Equal(FormDataTypeKind.Object, property.PropertyMetadata.Kind);
                 Assert.Same(metadata, property.PropertyMetadata);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -367,7 +400,8 @@ public class FormDataMetadataFactoryTests
         Assert.True(metadata.IsRecursive);
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Head", property.Property.Name);
@@ -385,7 +419,8 @@ public class FormDataMetadataFactoryTests
                 Assert.True(property.PropertyMetadata.IsRecursive);
                 Assert.Equal(FormDataTypeKind.Object, property.PropertyMetadata.Kind);
                 Assert.NotSame(metadata, property.PropertyMetadata);
-                Assert.Collection(property.PropertyMetadata.Properties,
+                Assert.Collection(
+                    property.PropertyMetadata.Properties,
                     subProperty =>
                     {
                         Assert.Equal("Head", subProperty.Property.Name);
@@ -399,11 +434,16 @@ public class FormDataMetadataFactoryTests
                     {
                         Assert.Equal("Tail", subProperty.Property.Name);
                         Assert.NotNull(subProperty.PropertyMetadata);
-                        Assert.Equal(typeof(DerivedList<string>), subProperty.PropertyMetadata.Type);
+                        Assert.Equal(
+                            typeof(DerivedList<string>),
+                            subProperty.PropertyMetadata.Type
+                        );
                         Assert.Equal(FormDataTypeKind.Object, subProperty.PropertyMetadata.Kind);
                         Assert.Same(property.PropertyMetadata, subProperty.PropertyMetadata);
-                    });
-            });
+                    }
+                );
+            }
+        );
     }
 
     [Fact]
@@ -420,7 +460,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.True(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Value", property.Property.Name);
@@ -440,7 +481,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Null(property.PropertyMetadata.Constructor);
                 Assert.Empty(property.PropertyMetadata.Properties);
                 Assert.Same(metadata, property.PropertyMetadata.ElementType);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -457,7 +499,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.True(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.Properties,
+        Assert.Collection(
+            metadata.Properties,
             property =>
             {
                 Assert.Equal("Value", property.Property.Name);
@@ -471,13 +514,17 @@ public class FormDataMetadataFactoryTests
             {
                 Assert.Equal("Children", property.Property.Name);
                 Assert.NotNull(property.PropertyMetadata);
-                Assert.Equal(typeof(Dictionary<string, DictionaryTree<string>>), property.PropertyMetadata.Type);
+                Assert.Equal(
+                    typeof(Dictionary<string, DictionaryTree<string>>),
+                    property.PropertyMetadata.Type
+                );
                 Assert.Equal(FormDataTypeKind.Dictionary, property.PropertyMetadata.Kind);
                 Assert.False(property.PropertyMetadata.IsRecursive);
                 Assert.Null(property.PropertyMetadata.Constructor);
                 Assert.Empty(property.PropertyMetadata.Properties);
                 Assert.Same(metadata, property.PropertyMetadata.ValueType);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -487,7 +534,10 @@ public class FormDataMetadataFactoryTests
         var (factory, options, logs) = ResolveFactory();
 
         // Act
-        var metadata = factory.GetOrCreateMetadataFor(typeof(TypeWithNonPublicConstructors), options);
+        var metadata = factory.GetOrCreateMetadataFor(
+            typeof(TypeWithNonPublicConstructors),
+            options
+        );
 
         // Assert
         Assert.NotNull(metadata);
@@ -495,7 +545,8 @@ public class FormDataMetadataFactoryTests
         Assert.Equal(FormDataTypeKind.Object, metadata.Kind);
         Assert.False(metadata.IsRecursive);
         Assert.NotNull(metadata.Constructor);
-        Assert.Collection(metadata.ConstructorParameters,
+        Assert.Collection(
+            metadata.ConstructorParameters,
             parameter =>
             {
                 Assert.Equal("id", parameter.Name);
@@ -504,7 +555,8 @@ public class FormDataMetadataFactoryTests
                 Assert.Equal(FormDataTypeKind.Primitive, parameter.ParameterMetadata.Kind);
                 Assert.Null(parameter.ParameterMetadata.Constructor);
                 Assert.Empty(parameter.ParameterMetadata.Properties);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -537,7 +589,10 @@ public class FormDataMetadataFactoryTests
         // Arrange
         var (factory, options, logs) = ResolveFactory();
         // Act
-        var metadata = factory.GetOrCreateMetadataFor(typeof(TypeWithMultipleConstructors), options);
+        var metadata = factory.GetOrCreateMetadataFor(
+            typeof(TypeWithMultipleConstructors),
+            options
+        );
 
         // Assert
         Assert.Null(metadata);
@@ -574,7 +629,10 @@ public class FormDataMetadataFactoryTests
         var (factory, options, logs) = ResolveFactory();
 
         // Act
-        var metadata = factory.GetOrCreateMetadataFor(typeof(UnsupportedConstructorParameterType), options);
+        var metadata = factory.GetOrCreateMetadataFor(
+            typeof(UnsupportedConstructorParameterType),
+            options
+        );
 
         // Assert
         Assert.Null(metadata);
@@ -598,7 +656,10 @@ public class FormDataMetadataFactoryTests
         var logMessages = new List<LogMessage>();
         var sink = new TestSink();
         var options = new FormDataMapperOptions(new TestLoggerFactory(sink, enabled: true));
-        var factory = options.Factories.OfType<ComplexTypeConverterFactory>().Single().MetadataFactory;
+        var factory = options
+            .Factories.OfType<ComplexTypeConverterFactory>()
+            .Single()
+            .MetadataFactory;
         return (factory, options, sink);
     }
 }
@@ -610,36 +671,26 @@ public interface ICustomer
 
 public class TypeWithMultipleConstructors
 {
-    public TypeWithMultipleConstructors()
-    {
-    }
+    public TypeWithMultipleConstructors() { }
 
-    public TypeWithMultipleConstructors(int id)
-    {
-    }
+    public TypeWithMultipleConstructors(int id) { }
 
     public int Id { get; set; }
 }
 
 public abstract class AbstracType
 {
-    public AbstracType()
-    {
-    }
+    public AbstracType() { }
 }
 
 public class NoPublicConstructor
 {
-    private NoPublicConstructor()
-    {
-    }
+    private NoPublicConstructor() { }
 }
 
 public class UnsupportedConstructorParameterType
 {
-    public UnsupportedConstructorParameterType(NoPublicConstructor noPublicConstructor)
-    {
-    }
+    public UnsupportedConstructorParameterType(NoPublicConstructor noPublicConstructor) { }
 }
 
 public class UnsupportedPropertyType
@@ -649,13 +700,9 @@ public class UnsupportedPropertyType
 
 public class TypeWithNonPublicConstructors
 {
-    internal TypeWithNonPublicConstructors()
-    {
-    }
+    internal TypeWithNonPublicConstructors() { }
 
-    public TypeWithNonPublicConstructors(int id)
-    {
-    }
+    public TypeWithNonPublicConstructors(int id) { }
 
     public int Id { get; set; }
 }
@@ -698,9 +745,7 @@ public class BaseList<T>
     public DerivedList<T> Tail { get; set; }
 }
 
-public class DerivedList<T> : BaseList<T>
-{
-}
+public class DerivedList<T> : BaseList<T> { }
 
 public class Tree<T>
 {

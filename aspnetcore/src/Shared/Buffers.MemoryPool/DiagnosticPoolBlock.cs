@@ -47,12 +47,16 @@ internal sealed class DiagnosticPoolBlock : MemoryManager<byte>
                 {
                     if (_isDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                        MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                            MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                        );
                     }
 
                     if (_pool.IsDisposed)
                     {
-                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                        MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                            this
+                        );
                     }
 
                     return CreateMemory(_memory.Length);
@@ -104,12 +108,16 @@ internal sealed class DiagnosticPoolBlock : MemoryManager<byte>
             {
                 if (_isDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                    MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                        MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                    );
                 }
 
                 if (_pool.IsDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                        this
+                    );
                 }
 
                 return _memory.Span;
@@ -130,17 +138,24 @@ internal sealed class DiagnosticPoolBlock : MemoryManager<byte>
             {
                 if (_isDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                    MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                        MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                    );
                 }
 
                 if (_pool.IsDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                        this
+                    );
                 }
 
                 if (byteOffset < 0 || byteOffset > _memory.Length)
                 {
-                    MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException(_memory.Length, byteOffset);
+                    MemoryPoolThrowHelper.ThrowArgumentOutOfRangeException(
+                        _memory.Length,
+                        byteOffset
+                    );
                 }
 
                 _pinCount++;
@@ -149,7 +164,11 @@ internal sealed class DiagnosticPoolBlock : MemoryManager<byte>
 
                 unsafe
                 {
-                    return new MemoryHandle(((IntPtr)_memoryHandle.Value.Pointer + byteOffset).ToPointer(), default, this);
+                    return new MemoryHandle(
+                        ((IntPtr)_memoryHandle.Value.Pointer + byteOffset).ToPointer(),
+                        default,
+                        this
+                    );
                 }
             }
         }
@@ -168,12 +187,16 @@ internal sealed class DiagnosticPoolBlock : MemoryManager<byte>
             {
                 if (_isDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowObjectDisposedException(MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock);
+                    MemoryPoolThrowHelper.ThrowObjectDisposedException(
+                        MemoryPoolThrowHelper.ExceptionArgument.MemoryPoolBlock
+                    );
                 }
 
                 if (_pool.IsDisposed)
                 {
-                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(this);
+                    MemoryPoolThrowHelper.ThrowInvalidOperationException_BlockIsBackedByDisposedSlab(
+                        this
+                    );
                 }
 
                 return MemoryMarshal.TryGetArray(_memory, out segment);

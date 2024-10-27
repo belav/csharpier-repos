@@ -18,42 +18,58 @@ public class RequestTimeoutsMiddlewareBenchmark
     public void GlobalSetup()
     {
         _middlewareWithNoTimeout = new RequestTimeoutsMiddleware(
-            async context => { await Task.Yield(); },
+            async context =>
+            {
+                await Task.Yield();
+            },
             new CancellationTokenLinker(),
             NullLogger<RequestTimeoutsMiddleware>.Instance,
-            Options.Create(new RequestTimeoutOptions()));
+            Options.Create(new RequestTimeoutOptions())
+        );
 
         _middleware = new RequestTimeoutsMiddleware(
-          async context => { await Task.Yield(); },
-          new CancellationTokenLinker(),
-          NullLogger<RequestTimeoutsMiddleware>.Instance,
-          Options.Create(new RequestTimeoutOptions
-          {
-              DefaultPolicy = new RequestTimeoutPolicy
-              {
-                  Timeout = TimeSpan.FromMilliseconds(200)
-              },
-              Policies =
-              {
-                  ["policy1"] = new RequestTimeoutPolicy { Timeout = TimeSpan.FromMilliseconds(200)}
-              }
-          }));
+            async context =>
+            {
+                await Task.Yield();
+            },
+            new CancellationTokenLinker(),
+            NullLogger<RequestTimeoutsMiddleware>.Instance,
+            Options.Create(
+                new RequestTimeoutOptions
+                {
+                    DefaultPolicy = new RequestTimeoutPolicy
+                    {
+                        Timeout = TimeSpan.FromMilliseconds(200),
+                    },
+                    Policies =
+                    {
+                        ["policy1"] = new RequestTimeoutPolicy
+                        {
+                            Timeout = TimeSpan.FromMilliseconds(200),
+                        },
+                    },
+                }
+            )
+        );
 
         _middlewareWithThrow = new RequestTimeoutsMiddleware(
-          async context =>
-          {
-              await Task.Delay(TimeSpan.FromMicroseconds(2));
-              context.RequestAborted.ThrowIfCancellationRequested();
-          },
-          new CancellationTokenLinker(),
-          NullLogger<RequestTimeoutsMiddleware>.Instance,
-          Options.Create(new RequestTimeoutOptions
-          {
-              DefaultPolicy = new RequestTimeoutPolicy
-              {
-                  Timeout = TimeSpan.FromMicroseconds(1)
-              }
-          }));
+            async context =>
+            {
+                await Task.Delay(TimeSpan.FromMicroseconds(2));
+                context.RequestAborted.ThrowIfCancellationRequested();
+            },
+            new CancellationTokenLinker(),
+            NullLogger<RequestTimeoutsMiddleware>.Instance,
+            Options.Create(
+                new RequestTimeoutOptions
+                {
+                    DefaultPolicy = new RequestTimeoutPolicy
+                    {
+                        Timeout = TimeSpan.FromMicroseconds(1),
+                    },
+                }
+            )
+        );
     }
 
     [Benchmark]
@@ -74,10 +90,13 @@ public class RequestTimeoutsMiddlewareBenchmark
     [Benchmark]
     public async Task DefaultTimeoutOverriddenByDisable()
     {
-        var context = CreateHttpContext(new Endpoint(
-            null,
-            new EndpointMetadataCollection(new DisableRequestTimeoutAttribute()),
-            null));
+        var context = CreateHttpContext(
+            new Endpoint(
+                null,
+                new EndpointMetadataCollection(new DisableRequestTimeoutAttribute()),
+                null
+            )
+        );
 
         await _middleware.Invoke(context);
     }
@@ -85,10 +104,13 @@ public class RequestTimeoutsMiddlewareBenchmark
     [Benchmark]
     public async Task TimeoutMetadata()
     {
-        var context = CreateHttpContext(new Endpoint(
-            null,
-            new EndpointMetadataCollection(new RequestTimeoutAttribute(200)),
-            null));
+        var context = CreateHttpContext(
+            new Endpoint(
+                null,
+                new EndpointMetadataCollection(new RequestTimeoutAttribute(200)),
+                null
+            )
+        );
 
         await _middleware.Invoke(context);
     }
@@ -96,10 +118,13 @@ public class RequestTimeoutsMiddlewareBenchmark
     [Benchmark]
     public async Task NamedPolicyMetadata()
     {
-        var context = CreateHttpContext(new Endpoint(
-            null,
-            new EndpointMetadataCollection(new RequestTimeoutAttribute("policy1")),
-            null));
+        var context = CreateHttpContext(
+            new Endpoint(
+                null,
+                new EndpointMetadataCollection(new RequestTimeoutAttribute("policy1")),
+                null
+            )
+        );
 
         await _middleware.Invoke(context);
     }

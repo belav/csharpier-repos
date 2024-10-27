@@ -6,8 +6,8 @@ using Xunit;
 namespace ClrIssueRepro
 {
     // If you remove '[StructLayout(LayoutKind.Sequential)]', you get:
-    // Unhandled exception. System.TypeLoadException: 
-    // Could not load type 'ClrIssueRepro.GenInt' from assembly '...' 
+    // Unhandled exception. System.TypeLoadException:
+    // Could not load type 'ClrIssueRepro.GenInt' from assembly '...'
     //    because the format is invalid.
     //  at ClrIssueRepro.Program.Main(String[] args)
     [StructLayout(LayoutKind.Sequential)]
@@ -21,8 +21,11 @@ namespace ClrIssueRepro
     public class GenInt : GenBase<int>
     {
         // Commenting out either one of these fields fixes things!?
-        [FieldOffset(0)] public string _sstring0 = "string0";
-        [FieldOffset(16)] public string _sstring1 = "string1";
+        [FieldOffset(0)]
+        public string _sstring0 = "string0";
+
+        [FieldOffset(16)]
+        public string _sstring1 = "string1";
     }
 
     // This works! (it's GenInt with [StructLayout(LayoutKind.Explicit)] and [FieldOffset(..)] removed)
@@ -38,7 +41,7 @@ namespace ClrIssueRepro
         public static int TestEntryPoint()
         {
             // If you comment this line out, you get
-            //    Unhandled exception. System.TypeLoadException: 
+            //    Unhandled exception. System.TypeLoadException:
             //    Could not load type 'ClrIssueRepro.GenInt' from assembly '...'
             //    at ClrIssueRepro.Program.Main(String[] args)
             // in Debug and Release builds?!

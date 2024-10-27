@@ -12,20 +12,38 @@ namespace System.ServiceModel.Description
 
     static class SchemaHelper
     {
-        static internal void AddElementForm(XmlSchemaElement element, XmlSchema schema)
+        internal static void AddElementForm(XmlSchemaElement element, XmlSchema schema)
         {
             if (schema.ElementFormDefault != XmlSchemaForm.Qualified)
                 element.Form = XmlSchemaForm.Qualified;
         }
 
-        static internal void AddElementToSchema(XmlSchemaElement element, XmlSchema schema, XmlSchemaSet schemaSet)
+        internal static void AddElementToSchema(
+            XmlSchemaElement element,
+            XmlSchema schema,
+            XmlSchemaSet schemaSet
+        )
         {
-            XmlSchemaElement existingElement = (XmlSchemaElement)schema.Elements[new XmlQualifiedName(element.Name, schema.TargetNamespace)];
+            XmlSchemaElement existingElement = (XmlSchemaElement)
+                schema.Elements[new XmlQualifiedName(element.Name, schema.TargetNamespace)];
             if (existingElement != null)
             {
-                if (element.SchemaType == existingElement.SchemaType && element.SchemaTypeName == existingElement.SchemaTypeName)
+                if (
+                    element.SchemaType == existingElement.SchemaType
+                    && element.SchemaTypeName == existingElement.SchemaTypeName
+                )
                     return;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConflictingGlobalElement, element.Name, schema.TargetNamespace, GetTypeName(element), GetTypeName(existingElement))));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(
+                            SR.SFxConflictingGlobalElement,
+                            element.Name,
+                            schema.TargetNamespace,
+                            GetTypeName(element),
+                            GetTypeName(existingElement)
+                        )
+                    )
+                );
             }
 
             schema.Items.Add(element);
@@ -35,16 +53,21 @@ namespace System.ServiceModel.Description
             schemaSet.Reprocess(schema);
         }
 
-        static internal void AddImportToSchema(string ns, XmlSchema schema)
+        internal static void AddImportToSchema(string ns, XmlSchema schema)
         {
-            if (NamespacesEqual(ns, schema.TargetNamespace)
+            if (
+                NamespacesEqual(ns, schema.TargetNamespace)
                 || NamespacesEqual(ns, XmlSchema.Namespace)
-                || NamespacesEqual(ns, XmlSchema.InstanceNamespace))
+                || NamespacesEqual(ns, XmlSchema.InstanceNamespace)
+            )
                 return;
 
             foreach (object item in schema.Includes)
             {
-                if (item is XmlSchemaImport && NamespacesEqual(ns, ((XmlSchemaImport)item).Namespace))
+                if (
+                    item is XmlSchemaImport
+                    && NamespacesEqual(ns, ((XmlSchemaImport)item).Namespace)
+                )
                     return;
             }
 
@@ -54,15 +77,24 @@ namespace System.ServiceModel.Description
             schema.Includes.Add(import);
         }
 
-        static internal void AddTypeToSchema(XmlSchemaType type, XmlSchema schema, XmlSchemaSet schemaSet)
+        internal static void AddTypeToSchema(
+            XmlSchemaType type,
+            XmlSchema schema,
+            XmlSchemaSet schemaSet
+        )
         {
-            XmlSchemaType existingType = (XmlSchemaType)schema.SchemaTypes[new XmlQualifiedName(type.Name, schema.TargetNamespace)];
+            XmlSchemaType existingType = (XmlSchemaType)
+                schema.SchemaTypes[new XmlQualifiedName(type.Name, schema.TargetNamespace)];
             if (existingType != null)
             {
                 if (existingType == type)
                     return;
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxConflictingGlobalType, type.Name, schema.TargetNamespace)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SFxConflictingGlobalType, type.Name, schema.TargetNamespace)
+                    )
+                );
             }
 
             schema.Items.Add(type);
@@ -70,14 +102,20 @@ namespace System.ServiceModel.Description
             schemaSet.Reprocess(schema);
         }
 
-        static internal XmlSchema GetSchema(string ns, XmlSchemaSet schemaSet)
+        internal static XmlSchema GetSchema(string ns, XmlSchemaSet schemaSet)
         {
-            if (ns == null) { ns = String.Empty; }
+            if (ns == null)
+            {
+                ns = String.Empty;
+            }
 
             ICollection schemas = schemaSet.Schemas();
             foreach (XmlSchema existingSchema in schemas)
             {
-                if ((existingSchema.TargetNamespace == null && ns.Length == 0) || ns.Equals(existingSchema.TargetNamespace))
+                if (
+                    (existingSchema.TargetNamespace == null && ns.Length == 0)
+                    || ns.Equals(existingSchema.TargetNamespace)
+                )
                     return existingSchema;
             }
 
@@ -98,7 +136,7 @@ namespace System.ServiceModel.Description
             return String.Empty;
         }
 
-        // Compare XmlSchemaElement properties set by WsdlExporter: do not check element QName, 
+        // Compare XmlSchemaElement properties set by WsdlExporter: do not check element QName,
         // this code only called for elements with matching name and namespace
         internal static bool IsMatch(XmlSchemaElement e1, XmlSchemaElement e2)
         {
@@ -117,7 +155,7 @@ namespace System.ServiceModel.Description
             return true;
         }
 
-        static internal bool NamespacesEqual(string ns1, string ns2)
+        internal static bool NamespacesEqual(string ns1, string ns2)
         {
             if (ns1 == null || ns1.Length == 0)
                 return (ns2 == null || ns2.Length == 0);
@@ -125,30 +163,48 @@ namespace System.ServiceModel.Description
                 return ns1 == ns2;
         }
 
-        static internal void Compile(XmlSchemaSet schemaSet, Collection<MetadataConversionError> errors)
+        internal static void Compile(
+            XmlSchemaSet schemaSet,
+            Collection<MetadataConversionError> errors
+        )
         {
-            ValidationEventHandler validationEventHandler = new ValidationEventHandler(delegate(object sender, ValidationEventArgs args)
-            {
-                HandleSchemaValidationError(sender, args, errors);
-            }
+            ValidationEventHandler validationEventHandler = new ValidationEventHandler(
+                delegate(object sender, ValidationEventArgs args)
+                {
+                    HandleSchemaValidationError(sender, args, errors);
+                }
             );
             schemaSet.ValidationEventHandler += validationEventHandler;
             schemaSet.Compile();
             schemaSet.ValidationEventHandler -= validationEventHandler;
         }
 
-        static internal void HandleSchemaValidationError(object sender, ValidationEventArgs args, Collection<MetadataConversionError> errors)
+        internal static void HandleSchemaValidationError(
+            object sender,
+            ValidationEventArgs args,
+            Collection<MetadataConversionError> errors
+        )
         {
             MetadataConversionError warning = null;
 
             if (args.Exception != null && args.Exception.SourceUri != null)
             {
                 XmlSchemaException ex = args.Exception;
-                warning = new MetadataConversionError(SR.GetString(SR.SchemaValidationError, ex.SourceUri, ex.LineNumber, ex.LinePosition, ex.Message));
+                warning = new MetadataConversionError(
+                    SR.GetString(
+                        SR.SchemaValidationError,
+                        ex.SourceUri,
+                        ex.LineNumber,
+                        ex.LinePosition,
+                        ex.Message
+                    )
+                );
             }
             else
             {
-                warning = new MetadataConversionError(SR.GetString(SR.GeneralSchemaValidationError, args.Message));
+                warning = new MetadataConversionError(
+                    SR.GetString(SR.GeneralSchemaValidationError, args.Message)
+                );
             }
 
             if (!errors.Contains(warning))
@@ -157,21 +213,32 @@ namespace System.ServiceModel.Description
 
         static IList<string> xsdValueTypePrimitives = new string[]
         {
-            "boolean", "float", "double", "decimal", "long", "unsignedLong", "int", "unsignedInt", "short", "unsignedShort", "byte", "unsignedByte", 
-            "duration", "dateTime", "integer", "positiveInteger", "negativeInteger", "nonPositiveInteger"
+            "boolean",
+            "float",
+            "double",
+            "decimal",
+            "long",
+            "unsignedLong",
+            "int",
+            "unsignedInt",
+            "short",
+            "unsignedShort",
+            "byte",
+            "unsignedByte",
+            "duration",
+            "dateTime",
+            "integer",
+            "positiveInteger",
+            "negativeInteger",
+            "nonPositiveInteger",
         };
 
-        static IList<string> dataContractPrimitives = new string[]
-        {
-            "char", "guid"
-        };
+        static IList<string> dataContractPrimitives = new string[] { "char", "guid" };
 
-        static IList<string> xmlSerializerPrimitives = new string[]
-        {
-            "char", "guid"
-        };
+        static IList<string> xmlSerializerPrimitives = new string[] { "char", "guid" };
 
-        static string dataContractSerializerNamespace = "http://schemas.microsoft.com/2003/10/Serialization/";
+        static string dataContractSerializerNamespace =
+            "http://schemas.microsoft.com/2003/10/Serialization/";
         static string xmlSerializerNamespace = "http://microsoft.com/wsdl/types/";
 
         internal static bool IsElementValueType(XmlSchemaElement element)

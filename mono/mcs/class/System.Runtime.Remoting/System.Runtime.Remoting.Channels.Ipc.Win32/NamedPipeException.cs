@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -40,25 +40,15 @@ namespace System.Runtime.Remoting.Channels.Ipc.Win32
     internal class NamedPipeException : Win32Exception
     {
         public NamedPipeException()
-            : base()
-        {
-        }
-        
+            : base() { }
+
         public NamedPipeException(int error)
-            : base(error)
-        {
-        }
+            : base(error) { }
 
         public NamedPipeException(int error, string message)
-            : base(error, message)
-        {
-        }
+            : base(error, message) { }
 
         protected NamedPipeException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
-
+            : base(info, context) { }
     }
 }
-

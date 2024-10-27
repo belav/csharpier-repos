@@ -21,5 +21,6 @@ public interface ICSharpMigrationOperationGenerator
     void Generate(
         string builderName,
         IReadOnlyList<MigrationOperation> operations,
-        IndentedStringBuilder builder);
+        IndentedStringBuilder builder
+    );
 }

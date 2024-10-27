@@ -11,7 +11,7 @@ namespace System.ServiceModel.Channels
     {
         Opened,
         Closing,
-        Closed
+        Closed,
     }
 
     class LifetimeManager
@@ -71,9 +71,17 @@ namespace System.ServiceModel.Channels
             {
 #if DEBUG_EXPENSIVE
                 String originalStack = closeStack.ToString().Replace("\r\n", "\r\n    ");
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString() + ", Object already closed:\r\n    " + originalStack));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(
+                        this.GetType().ToString()
+                            + ", Object already closed:\r\n    "
+                            + originalStack
+                    )
+                );
 #else
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ObjectDisposedException(this.GetType().ToString())
+                );
 #endif
             }
         }
@@ -155,7 +163,9 @@ namespace System.ServiceModel.Channels
             {
                 if (this.busyCount <= 0)
                 {
-                    throw Fx.AssertAndThrow("LifetimeManager.DecrementBusyCount: (this.busyCount > 0)");
+                    throw Fx.AssertAndThrow(
+                        "LifetimeManager.DecrementBusyCount: (this.busyCount > 0)"
+                    );
                 }
                 if (--this.busyCount == 0)
                 {
@@ -192,14 +202,20 @@ namespace System.ServiceModel.Channels
         {
             lock (this.ThisLock)
             {
-                Fx.Assert(this.State == LifetimeState.Opened, "LifetimeManager.IncrementBusyCount: (this.State == LifetimeState.Opened)");
+                Fx.Assert(
+                    this.State == LifetimeState.Opened,
+                    "LifetimeManager.IncrementBusyCount: (this.State == LifetimeState.Opened)"
+                );
                 this.busyCount++;
             }
         }
 
         protected virtual void IncrementBusyCountWithoutLock()
         {
-            Fx.Assert(this.State == LifetimeState.Opened, "LifetimeManager.IncrementBusyCountWithoutLock: (this.State == LifetimeState.Opened)");
+            Fx.Assert(
+                this.State == LifetimeState.Opened,
+                "LifetimeManager.IncrementBusyCountWithoutLock: (this.State == LifetimeState.Opened)"
+            );
             this.busyCount++;
         }
 
@@ -209,7 +225,11 @@ namespace System.ServiceModel.Channels
             CloseCore(TimeSpan.FromSeconds(1), true);
         }
 
-        protected virtual IAsyncResult OnBeginClose(TimeSpan timeout, AsyncCallback callback, object state)
+        protected virtual IAsyncResult OnBeginClose(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             CloseCommunicationAsyncResult closeResult = null;
 
@@ -219,13 +239,26 @@ namespace System.ServiceModel.Channels
                 {
                     if (this.busyWaiter != null)
                     {
-                        Fx.Assert(this.aborted, "LifetimeManager.OnBeginClose: (this.aborted == true)");
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                        Fx.Assert(
+                            this.aborted,
+                            "LifetimeManager.OnBeginClose: (this.aborted == true)"
+                        );
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ObjectDisposedException(this.GetType().ToString())
+                        );
                     }
                     else
                     {
-                        closeResult = new CloseCommunicationAsyncResult(timeout, callback, state, this.ThisLock);
-                        Fx.Assert(this.busyWaiter == null, "LifetimeManager.OnBeginClose: (this.busyWaiter == null)");
+                        closeResult = new CloseCommunicationAsyncResult(
+                            timeout,
+                            callback,
+                            state,
+                            this.ThisLock
+                        );
+                        Fx.Assert(
+                            this.busyWaiter == null,
+                            "LifetimeManager.OnBeginClose: (this.busyWaiter == null)"
+                        );
                         this.busyWaiter = closeResult;
                         Interlocked.Increment(ref this.busyWaiterCount);
                     }
@@ -247,15 +280,17 @@ namespace System.ServiceModel.Channels
             switch (CloseCore(timeout, false))
             {
                 case CommunicationWaitResult.Expired:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout))
+                    );
                 case CommunicationWaitResult.Aborted:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(this.GetType().ToString()));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(this.GetType().ToString())
+                    );
             }
         }
 
-        protected virtual void OnEmpty()
-        {
-        }
+        protected virtual void OnEmpty() { }
 
         protected virtual void OnEndClose(IAsyncResult result)
         {
@@ -278,7 +313,7 @@ namespace System.ServiceModel.Channels
         Waiting,
         Succeeded,
         Expired,
-        Aborted
+        Aborted,
     }
 
     interface ICommunicationWaiter : IDisposable
@@ -295,7 +330,12 @@ namespace System.ServiceModel.Channels
         TimeoutHelper timeoutHelper;
         TimeSpan timeout;
 
-        public CloseCommunicationAsyncResult(TimeSpan timeout, AsyncCallback callback, object state, object mutex)
+        public CloseCommunicationAsyncResult(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state,
+            object mutex
+        )
             : base(callback, state)
         {
             this.timeout = timeout;
@@ -303,7 +343,9 @@ namespace System.ServiceModel.Channels
             this.mutex = mutex;
 
             if (timeout < TimeSpan.Zero)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, timeout))
+                );
 
             this.timer = new IOThreadTimer(new Action<object>(TimeoutCallback), this, true);
             this.timer.Set(timeout);
@@ -314,9 +356,7 @@ namespace System.ServiceModel.Channels
             get { return mutex; }
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
 
         public static void End(IAsyncResult result)
         {
@@ -343,7 +383,10 @@ namespace System.ServiceModel.Channels
                     return;
                 this.result = CommunicationWaitResult.Expired;
             }
-            this.Complete(false, new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, this.timeout)));
+            this.Complete(
+                false,
+                new TimeoutException(SR.GetString(SR.SFxCloseTimedOut1, this.timeout))
+            );
         }
 
         static void TimeoutCallback(object state)
@@ -440,14 +483,18 @@ namespace System.ServiceModel.Channels
             {
                 if (this.result == CommunicationWaitResult.Waiting)
                 {
-                    this.result = (expired ? CommunicationWaitResult.Expired : CommunicationWaitResult.Succeeded);
+                    this.result = (
+                        expired
+                            ? CommunicationWaitResult.Expired
+                            : CommunicationWaitResult.Succeeded
+                    );
                 }
             }
 
             lock (this.ThisLock)
             {
                 if (!this.closed)
-                    this.waitHandle.Set();  // unblock other waiters if there are any
+                    this.waitHandle.Set(); // unblock other waiters if there are any
             }
 
             return this.result;

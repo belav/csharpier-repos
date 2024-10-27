@@ -7,8 +7,7 @@ public interface IQueryFixtureBase
 {
     Func<DbContext> GetContextCreator();
 
-    Func<DbContext, ISetSource> GetSetSourceCreator()
-        => context => new DefaultSetSource(context);
+    Func<DbContext, ISetSource> GetSetSourceCreator() => context => new DefaultSetSource(context);
 
     ISetSource GetExpectedData();
 
@@ -26,7 +25,6 @@ public interface IQueryFixtureBase
         }
 
         public IQueryable<TEntity> Set<TEntity>()
-            where TEntity : class
-            => _context.Set<TEntity>();
+            where TEntity : class => _context.Set<TEntity>();
     }
 }

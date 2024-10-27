@@ -48,9 +48,12 @@ namespace System.Net.Tests
         public static bool IsWindowsImplementation { get; } =
             (TypeExists("Interop+HttpApi") || TypeExists("System.Net.UnsafeNclNativeMethods")); // types only in Windows netcoreapp/netfx builds, respectively
 
-        public static bool IsManagedImplementation => TypeExists("System.Net.WebSockets.ManagedWebSocket"); // type only in managed build
+        public static bool IsManagedImplementation =>
+            TypeExists("System.Net.WebSockets.ManagedWebSocket"); // type only in managed build
 
-        private static bool TypeExists(string name) => typeof(HttpListener).Assembly.GetType(name, throwOnError: false, ignoreCase: false) != null;
+        private static bool TypeExists(string name) =>
+            typeof(HttpListener).Assembly.GetType(name, throwOnError: false, ignoreCase: false)
+            != null;
 
         public static void WaitForSocketShutdown(Socket socket)
         {

@@ -16,8 +16,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
     [Trait(Traits.Feature, Traits.Features.KeywordHighlighting)]
     public class AwaitHighlighterTests : AbstractCSharpKeywordHighlighterTests
     {
-        internal override Type GetHighlighterType()
-            => typeof(AsyncAwaitHighlighter);
+        internal override Type GetHighlighterType() => typeof(AsyncAwaitHighlighter);
 
         [Fact]
         public async Task TestExample2_2()
@@ -47,7 +46,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = [|await|] lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -78,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = [|await|] lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -109,7 +110,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = {|Cursor:[|await|]|} lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -140,7 +142,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = await lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/573625")]
@@ -176,7 +179,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = await lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/573625")]
@@ -212,7 +216,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         result = [|await|] lambda();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -229,7 +234,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|await|] using (var x = new object());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -246,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         {|Cursor:[|await|]|} using (var x = new object());
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -263,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         [|await|] using var x = new object();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -280,7 +288,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         {|Cursor:[|await|]|} using var x = new object();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -297,7 +306,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         foreach [|await|] (var n in new int[] { });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -314,7 +324,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         foreach {|Cursor:[|await|]|} (var n in new int[] { });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -331,7 +342,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         foreach [|await|] (var (a, b) in new (int, int)[] { });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -348,7 +360,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                         foreach {|Cursor:[|await|]|} (var (a, b) in new (int, int)[] { });
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/60400")]
@@ -358,7 +371,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.KeywordHighlighting
                 """
                 [|await|] Task.Delay(1000);
                 {|Cursor:[|await|]|} Task.Run(() => { })
-                """);
+                """
+            );
         }
     }
 }

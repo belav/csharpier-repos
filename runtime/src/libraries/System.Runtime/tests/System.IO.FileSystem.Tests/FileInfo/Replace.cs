@@ -11,7 +11,10 @@ namespace System.IO.Tests
         public void Null_FileName()
         {
             string testFile = GetTestFilePath();
-            AssertExtensions.Throws<ArgumentNullException>("destinationFileName", () => Replace(testFile, null, ""));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "destinationFileName",
+                () => Replace(testFile, null, "")
+            );
         }
 
         [Fact]

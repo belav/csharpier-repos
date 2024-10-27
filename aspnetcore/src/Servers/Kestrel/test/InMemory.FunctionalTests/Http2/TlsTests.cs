@@ -11,11 +11,11 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 using Xunit;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.Http2;
@@ -26,54 +26,94 @@ public class TlsTests : LoggedTest
 
     [ConditionalFact]
     [TlsAlpnSupported]
-    [OSSkipCondition(OperatingSystems.Linux, SkipReason = "TLS 1.1 ciphers are now disabled by default: https://github.com/dotnet/docs/issues/20842")]
-    [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10,
-        SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support or incompatible ciphers on Windows 8.1")]
-    [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2,
-        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761")]
+    [OSSkipCondition(
+        OperatingSystems.Linux,
+        SkipReason = "TLS 1.1 ciphers are now disabled by default: https://github.com/dotnet/docs/issues/20842"
+    )]
+    [MinimumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10,
+        SkipReason = "Missing Windows ALPN support: https://en.wikipedia.org/wiki/Application-Layer_Protocol_Negotiation#Support or incompatible ciphers on Windows 8.1"
+    )]
+    [MaximumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10_20H2,
+        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761"
+    )]
     public async Task TlsHandshakeRejectsTlsLessThan12()
     {
-        await using (var server = new TestServer(context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.Equal(tlsFeature.ApplicationProtocol, SslApplicationProtocol.Http2.Protocol);
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.Equal(
+                        tlsFeature.ApplicationProtocol,
+                        SslApplicationProtocol.Http2.Protocol
+                    );
 
-            return context.Response.WriteAsync("hello world " + context.Request.Protocol);
-        },
-        new TestServiceContext(LoggerFactory),
-        listenOptions =>
-        {
-            listenOptions.Protocols = HttpProtocols.Http2;
-            listenOptions.UseHttps(_x509Certificate2, httpsOptions =>
-            {
+                    return context.Response.WriteAsync("hello world " + context.Request.Protocol);
+                },
+                new TestServiceContext(LoggerFactory),
+                listenOptions =>
+                {
+                    listenOptions.Protocols = HttpProtocols.Http2;
+                    listenOptions.UseHttps(
+                        _x509Certificate2,
+                        httpsOptions =>
+                        {
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                httpsOptions.SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
+                            httpsOptions.SslProtocols = SslProtocols.Tls11 | SslProtocols.Tls12;
 #pragma warning restore SYSLIB0039
-            });
-        }))
+                        }
+                    );
+                }
+            )
+        )
         {
             using (var connection = server.CreateConnection())
             {
                 var sslStream = new SslStream(connection.Stream);
-                await sslStream.AuthenticateAsClientAsync(new SslClientAuthenticationOptions
-                {
-                    TargetHost = "localhost",
-                    RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
-                    ApplicationProtocols = new List<SslApplicationProtocol> { SslApplicationProtocol.Http2, SslApplicationProtocol.Http11 },
+                await sslStream.AuthenticateAsClientAsync(
+                    new SslClientAuthenticationOptions
+                    {
+                        TargetHost = "localhost",
+                        RemoteCertificateValidationCallback = (_, __, ___, ____) => true,
+                        ApplicationProtocols = new List<SslApplicationProtocol>
+                        {
+                            SslApplicationProtocol.Http2,
+                            SslApplicationProtocol.Http11,
+                        },
 #pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
-                    EnabledSslProtocols = SslProtocols.Tls11, // Intentionally less than the required 1.2
+                        EnabledSslProtocols = SslProtocols.Tls11, // Intentionally less than the required 1.2
 #pragma warning restore SYSLIB0039
-                }, CancellationToken.None);
+                    },
+                    CancellationToken.None
+                );
 
-                var reader = PipeReaderFactory.CreateFromStream(PipeOptions.Default, sslStream, CancellationToken.None);
-                await WaitForConnectionErrorAsync(reader, ignoreNonGoAwayFrames: false, expectedLastStreamId: 0, expectedErrorCode: Http2ErrorCode.INADEQUATE_SECURITY);
+                var reader = PipeReaderFactory.CreateFromStream(
+                    PipeOptions.Default,
+                    sslStream,
+                    CancellationToken.None
+                );
+                await WaitForConnectionErrorAsync(
+                    reader,
+                    ignoreNonGoAwayFrames: false,
+                    expectedLastStreamId: 0,
+                    expectedErrorCode: Http2ErrorCode.INADEQUATE_SECURITY
+                );
                 reader.Complete();
             }
         }
     }
 
-    private async Task WaitForConnectionErrorAsync(PipeReader reader, bool ignoreNonGoAwayFrames, int expectedLastStreamId, Http2ErrorCode expectedErrorCode)
+    private async Task WaitForConnectionErrorAsync(
+        PipeReader reader,
+        bool ignoreNonGoAwayFrames,
+        int expectedLastStreamId,
+        Http2ErrorCode expectedErrorCode
+    )
     {
         var frame = await ReceiveFrameAsync(reader);
 

@@ -22,9 +22,13 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
     /// <param name="defaultErrorResponseType">The error type to be used. Use <see cref="void" />
     /// when no default error type is to be inferred.
     /// </param>
-    public ApiConventionApplicationModelConvention(ProducesErrorResponseTypeAttribute defaultErrorResponseType)
+    public ApiConventionApplicationModelConvention(
+        ProducesErrorResponseTypeAttribute defaultErrorResponseType
+    )
     {
-        DefaultErrorResponseType = defaultErrorResponseType ?? throw new ArgumentNullException(nameof(defaultErrorResponseType));
+        DefaultErrorResponseType =
+            defaultErrorResponseType
+            ?? throw new ArgumentNullException(nameof(defaultErrorResponseType));
     }
 
     /// <summary>
@@ -60,14 +64,24 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
     private static void DiscoverApiConvention(ActionModel action)
     {
         var controller = action.Controller;
-        var apiConventionAttributes = controller.Attributes.OfType<ApiConventionTypeAttribute>().ToArray();
+        var apiConventionAttributes = controller
+            .Attributes.OfType<ApiConventionTypeAttribute>()
+            .ToArray();
         if (apiConventionAttributes.Length == 0)
         {
             var controllerAssembly = controller.ControllerType.Assembly;
-            apiConventionAttributes = controllerAssembly.GetCustomAttributes<ApiConventionTypeAttribute>().ToArray();
+            apiConventionAttributes = controllerAssembly
+                .GetCustomAttributes<ApiConventionTypeAttribute>()
+                .ToArray();
         }
 
-        if (ApiConventionResult.TryGetApiConvention(action.ActionMethod, apiConventionAttributes, out var result))
+        if (
+            ApiConventionResult.TryGetApiConvention(
+                action.ActionMethod,
+                apiConventionAttributes,
+                out var result
+            )
+        )
         {
             action.Properties[typeof(ApiConventionResult)] = result;
         }
@@ -76,10 +90,12 @@ public class ApiConventionApplicationModelConvention : IActionModelConvention
     private void DiscoverErrorResponseType(ActionModel action)
     {
         var errorTypeAttribute =
-            action.Attributes.OfType<ProducesErrorResponseTypeAttribute>().FirstOrDefault() ??
-            action.Controller.Attributes.OfType<ProducesErrorResponseTypeAttribute>().FirstOrDefault() ??
-            action.Controller.ControllerType.Assembly.GetCustomAttribute<ProducesErrorResponseTypeAttribute>() ??
-            DefaultErrorResponseType;
+            action.Attributes.OfType<ProducesErrorResponseTypeAttribute>().FirstOrDefault()
+            ?? action
+                .Controller.Attributes.OfType<ProducesErrorResponseTypeAttribute>()
+                .FirstOrDefault()
+            ?? action.Controller.ControllerType.Assembly.GetCustomAttribute<ProducesErrorResponseTypeAttribute>()
+            ?? DefaultErrorResponseType;
 
         action.Properties[typeof(ProducesErrorResponseTypeAttribute)] = errorTypeAttribute;
     }

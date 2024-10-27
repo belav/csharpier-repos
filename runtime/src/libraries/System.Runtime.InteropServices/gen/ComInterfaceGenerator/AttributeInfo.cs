@@ -12,16 +12,26 @@ namespace Microsoft.Interop
     /// <summary>
     /// Provides the info necessary for copying an attribute from user code to generated code.
     /// </summary>
-    internal sealed record AttributeInfo(ManagedTypeInfo Type, SequenceEqualImmutableArray<string> Arguments)
+    internal sealed record AttributeInfo(
+        ManagedTypeInfo Type,
+        SequenceEqualImmutableArray<string> Arguments
+    )
     {
         internal AttributeSyntax GenerateSyntax()
         {
-            return Attribute((NameSyntax)Type.Syntax, AttributeArgumentList(SeparatedList(Arguments.Select(arg => AttributeArgument(ParseExpression(arg))))));
+            return Attribute(
+                (NameSyntax)Type.Syntax,
+                AttributeArgumentList(
+                    SeparatedList(Arguments.Select(arg => AttributeArgument(ParseExpression(arg))))
+                )
+            );
         }
+
         internal AttributeListSyntax GenerateAttributeList()
         {
             return AttributeList(SingletonSeparatedList(GenerateSyntax()));
         }
+
         internal static AttributeInfo From(AttributeData attribute)
         {
             var type = ManagedTypeInfo.CreateTypeInfoForTypeSymbol(attribute.AttributeClass);

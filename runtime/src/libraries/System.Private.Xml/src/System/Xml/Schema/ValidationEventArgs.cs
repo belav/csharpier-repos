@@ -12,13 +12,15 @@ namespace System.Xml.Schema
         private readonly XmlSchemaException _ex;
         private readonly XmlSeverityType _severity;
 
-        internal ValidationEventArgs(XmlSchemaException ex) : base()
+        internal ValidationEventArgs(XmlSchemaException ex)
+            : base()
         {
             _ex = ex;
             _severity = XmlSeverityType.Error;
         }
 
-        internal ValidationEventArgs(XmlSchemaException ex, XmlSeverityType severity) : base()
+        internal ValidationEventArgs(XmlSchemaException ex, XmlSeverityType severity)
+            : base()
         {
             _ex = ex;
             _severity = severity;

@@ -19,14 +19,16 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
     internal sealed class OperationCanceledIgnoringCallerTokenException : OperationCanceledException
     {
         public OperationCanceledIgnoringCallerTokenException(Exception innerException)
-            : base(innerException.Message, innerException)
-        {
-        }
+            : base(innerException.Message, innerException) { }
     }
 
     internal static class FatalError
     {
-        public delegate void ErrorReporterHandler(Exception exception, ErrorSeverity severity, bool forceDump);
+        public delegate void ErrorReporterHandler(
+            Exception exception,
+            ErrorSeverity severity,
+            bool forceDump
+        );
 
         private static ErrorReporterHandler? s_handler;
         private static ErrorReporterHandler? s_nonFatalHandler;
@@ -41,7 +43,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <param name="nonFatalHandler">A handler that will not crash the process when called.  Used when calling <see
         /// cref="ReportNonFatalError(Exception, ErrorSeverity, bool)"/></param>
-        public static void SetHandlers(ErrorReporterHandler handler, ErrorReporterHandler? nonFatalHandler)
+        public static void SetHandlers(
+            ErrorReporterHandler handler,
+            ErrorReporterHandler? nonFatalHandler
+        )
         {
             if (s_handler != handler)
             {
@@ -73,14 +78,28 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
             copyHandlerTo(assembly, s_handler, nameof(s_handler));
             copyHandlerTo(assembly, s_nonFatalHandler, nameof(s_nonFatalHandler));
 
-            static void copyHandlerTo(Assembly assembly, ErrorReporterHandler? handler, string handlerName)
+            static void copyHandlerTo(
+                Assembly assembly,
+                ErrorReporterHandler? handler,
+                string handlerName
+            )
             {
-                var targetType = assembly.GetType(typeof(FatalError).FullName!, throwOnError: true)!;
-                var targetHandlerProperty = targetType.GetField(handlerName, BindingFlags.Static | BindingFlags.NonPublic)!;
+                var targetType = assembly.GetType(
+                    typeof(FatalError).FullName!,
+                    throwOnError: true
+                )!;
+                var targetHandlerProperty = targetType.GetField(
+                    handlerName,
+                    BindingFlags.Static | BindingFlags.NonPublic
+                )!;
                 if (handler is not null)
                 {
                     // We need to convert the delegate type to the type in the linked copy since they won't have identity.
-                    var convertedDelegate = Delegate.CreateDelegate(targetHandlerProperty.FieldType, handler.Target, handler.Method);
+                    var convertedDelegate = Delegate.CreateDelegate(
+                        targetHandlerProperty.FieldType,
+                        handler.Target,
+                        handler.Method
+                    );
                     targetHandlerProperty.SetValue(obj: null, value: convertedDelegate);
                 }
                 else
@@ -96,7 +115,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagate(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagate(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity);
             return false;
@@ -108,7 +130,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagateUnlessCanceled(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagateUnlessCanceled(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             if (exception is OperationCanceledException)
             {
@@ -137,9 +162,19 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <see cref="CancellationToken.IsCancellationRequested"/> set if cancellation is expected.</param>
         /// <returns><see langword="false"/> to avoid catching the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndPropagateUnlessCanceled(Exception exception, CancellationToken contextCancellationToken, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndPropagateUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
-            if (ExceptionUtilities.IsCurrentOperationBeingCancelled(exception, contextCancellationToken) || exception is OperationCanceledIgnoringCallerTokenException)
+            if (
+                ExceptionUtilities.IsCurrentOperationBeingCancelled(
+                    exception,
+                    contextCancellationToken
+                )
+                || exception is OperationCanceledIgnoringCallerTokenException
+            )
             {
                 return false;
             }
@@ -163,14 +198,20 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// </summary>
         /// <returns>True to catch the exception.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatch(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatch(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity);
             return true;
         }
 
         [DebuggerHidden]
-        public static bool ReportWithDumpAndCatch(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportWithDumpAndCatch(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             Report(exception, severity, forceDump: true);
             return true;
@@ -183,7 +224,10 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <returns><see langword="true"/> to catch the exception if the error was reported; otherwise,
         /// <see langword="false"/> to propagate the exception if the operation was cancelled.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatchUnlessCanceled(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatchUnlessCanceled(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
             if (exception is OperationCanceledException)
             {
@@ -213,16 +257,25 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// <returns><see langword="true"/> to catch the exception if the error was reported; otherwise,
         /// <see langword="false"/> to propagate the exception if the operation was cancelled.</returns>
         [DebuggerHidden]
-        public static bool ReportAndCatchUnlessCanceled(Exception exception, CancellationToken contextCancellationToken, ErrorSeverity severity = ErrorSeverity.Uncategorized)
+        public static bool ReportAndCatchUnlessCanceled(
+            Exception exception,
+            CancellationToken contextCancellationToken,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized
+        )
         {
-            if (ExceptionUtilities.IsCurrentOperationBeingCancelled(exception, contextCancellationToken) || exception is OperationCanceledIgnoringCallerTokenException)
+            if (
+                ExceptionUtilities.IsCurrentOperationBeingCancelled(
+                    exception,
+                    contextCancellationToken
+                )
+                || exception is OperationCanceledIgnoringCallerTokenException
+            )
             {
                 return false;
             }
 
             return ReportAndCatch(exception, severity);
         }
-
 #endif
 
         private static readonly object s_reportedMarker = new();
@@ -231,7 +284,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         // can examine things like s_reportedExceptionMessage.  Without this, it's a lot tricker as FatalError is linked
         // into many assemblies and finding the right type can be much harder.
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static void Report(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized, bool forceDump = false)
+        private static void Report(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized,
+            bool forceDump = false
+        )
         {
             ReportException(exception, severity, forceDump, s_handler);
         }
@@ -242,12 +299,21 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// cref="SetHandlers(ErrorReporterHandler, ErrorReporterHandler?)"/>.
         /// </summary>
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public static void ReportNonFatalError(Exception exception, ErrorSeverity severity = ErrorSeverity.Uncategorized, bool forceDump = false)
+        public static void ReportNonFatalError(
+            Exception exception,
+            ErrorSeverity severity = ErrorSeverity.Uncategorized,
+            bool forceDump = false
+        )
         {
             ReportException(exception, severity, forceDump, s_nonFatalHandler);
         }
 
-        private static void ReportException(Exception exception, ErrorSeverity severity, bool forceDump, ErrorReporterHandler? handler)
+        private static void ReportException(
+            Exception exception,
+            ErrorSeverity severity,
+            bool forceDump,
+            ErrorReporterHandler? handler
+        )
         {
             // hold onto last exception to make investigation easier
             s_reportedException = exception;
@@ -264,7 +330,11 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
                 return;
             }
 
-            if (exception is AggregateException aggregate && aggregate.InnerExceptions.Count == 1 && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null)
+            if (
+                exception is AggregateException aggregate
+                && aggregate.InnerExceptions.Count == 1
+                && aggregate.InnerExceptions[0].Data[s_reportedMarker] != null
+            )
             {
                 return;
             }
@@ -308,6 +378,6 @@ namespace Microsoft.CodeAnalysis.ErrorReporting
         /// for back-end systems where a failure is going to result in a highly broken experience, for example if parsing a file
         /// catastrophically failed.
         /// </summary>
-        Critical
+        Critical,
     }
 }

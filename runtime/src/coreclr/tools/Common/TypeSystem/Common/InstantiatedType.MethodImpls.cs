@@ -22,17 +22,27 @@ namespace Internal.TypeSystem
             {
                 MethodDesc decl;
 
-                var implTypeInstantiated = uninstMethodImpls[i].Decl.OwningType.InstantiateSignature(this.Instantiation, default(Instantiation));
+                var implTypeInstantiated = uninstMethodImpls[i]
+                    .Decl.OwningType.InstantiateSignature(
+                        this.Instantiation,
+                        default(Instantiation)
+                    );
                 if (implTypeInstantiated is InstantiatedType)
                 {
-                    decl = _typeDef.Context.GetMethodForInstantiatedType(uninstMethodImpls[i].Decl.GetTypicalMethodDefinition(), (InstantiatedType)implTypeInstantiated);
+                    decl = _typeDef.Context.GetMethodForInstantiatedType(
+                        uninstMethodImpls[i].Decl.GetTypicalMethodDefinition(),
+                        (InstantiatedType)implTypeInstantiated
+                    );
                 }
                 else
                 {
                     decl = uninstMethodImpls[i].Decl;
                 }
 
-                MethodDesc body = _typeDef.Context.GetMethodForInstantiatedType(uninstMethodImpls[i].Body, this);
+                MethodDesc body = _typeDef.Context.GetMethodForInstantiatedType(
+                    uninstMethodImpls[i].Body,
+                    this
+                );
                 instMethodImpls[i] = new MethodImplRecord(decl, body);
             }
 
@@ -47,7 +57,9 @@ namespace Internal.TypeSystem
 
         public override MethodImplRecord[] FindMethodsImplWithMatchingDeclName(string name)
         {
-            MethodImplRecord[] uninstMethodImpls = _typeDef.FindMethodsImplWithMatchingDeclName(name);
+            MethodImplRecord[] uninstMethodImpls = _typeDef.FindMethodsImplWithMatchingDeclName(
+                name
+            );
             return InstantiateMethodImpls(uninstMethodImpls);
         }
     }

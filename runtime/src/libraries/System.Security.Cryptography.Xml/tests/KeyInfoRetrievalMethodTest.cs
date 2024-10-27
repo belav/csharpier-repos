@@ -14,15 +14,16 @@ using Xunit;
 
 namespace System.Security.Cryptography.Xml.Tests
 {
-
     public class KeyInfoRetrievalMethodTest
     {
-
         [Fact]
         public void TestNewEmptyKeyNode()
         {
             KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
-            Assert.Equal("<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />", (uri1.GetXml().OuterXml));
+            Assert.Equal(
+                "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />",
+                (uri1.GetXml().OuterXml)
+            );
         }
 
         [Fact]
@@ -43,7 +44,8 @@ namespace System.Security.Cryptography.Xml.Tests
         [Fact]
         public void TestImportKeyNode()
         {
-            string value = "<RetrievalMethod URI=\"http://www.go-mono.com/\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />";
+            string value =
+                "<RetrievalMethod URI=\"http://www.go-mono.com/\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />";
             XmlDocument doc = new XmlDocument();
             doc.LoadXml(value);
 
@@ -75,7 +77,11 @@ namespace System.Security.Cryptography.Xml.Tests
             KeyInfoRetrievalMethod uri1 = new KeyInfoRetrievalMethod();
             // no exception is thrown
             uri1.LoadXml(doc.DocumentElement);
-            AssertCrypto.AssertXmlEquals("invalid", "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />", (uri1.GetXml().OuterXml));
+            AssertCrypto.AssertXmlEquals(
+                "invalid",
+                "<RetrievalMethod xmlns=\"http://www.w3.org/2000/09/xmldsig#\" />",
+                (uri1.GetXml().OuterXml)
+            );
         }
     }
 }

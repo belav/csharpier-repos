@@ -33,7 +33,12 @@ namespace System.Threading.Tasks
             Describe(box, sb, seen, 0);
             return sb.ToString();
 
-            static void Describe(object box, StringBuilder sb, HashSet<object> seen, int indentLevel)
+            static void Describe(
+                object box,
+                StringBuilder sb,
+                HashSet<object> seen,
+                int indentLevel
+            )
             {
                 string indent = string.Concat(Enumerable.Repeat("    ", indentLevel));
 
@@ -54,7 +59,11 @@ namespace System.Threading.Tasks
 
                 // Try to get the StateMachine field from the AsyncStateMachineBox<>.  If we can't,
                 // just print out the details we can and bail.
-                FieldInfo stateMachineField = box.GetType().GetField("StateMachine", BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                FieldInfo stateMachineField = box.GetType()
+                    .GetField(
+                        "StateMachine",
+                        BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                    );
                 if (stateMachineField is null)
                 {
                     sb.Append(indent).AppendLine($"(Couldn't get state machine field from {box}.)");
@@ -63,7 +72,8 @@ namespace System.Threading.Tasks
                 }
 
                 // Get the state machine from the StateMachine field.
-                IAsyncStateMachine stateMachine = stateMachineField.GetValue(box) as IAsyncStateMachine;
+                IAsyncStateMachine stateMachine =
+                    stateMachineField.GetValue(box) as IAsyncStateMachine;
                 if (stateMachine is null)
                 {
                     sb.Append(indent).AppendLine($"(Null state machine from {box}.)");
@@ -75,7 +85,9 @@ namespace System.Threading.Tasks
                 sb.Append(indent).AppendLine(stateMachineType.FullName);
 
                 // Get all of the fields on the state machine, and print them all out.
-                FieldInfo[] fields = stateMachineType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+                FieldInfo[] fields = stateMachineType.GetFields(
+                    BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic
+                );
                 foreach (FieldInfo fi in fields)
                 {
                     // Print out the field name and its value.
@@ -85,7 +97,15 @@ namespace System.Threading.Tasks
                     // If the field is an awaiter, recursively examine any tasks it directly references.
                     if (fiValue is ICriticalNotifyCompletion)
                     {
-                        foreach (FieldInfo possibleTask in fiValue.GetType().GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic))
+                        foreach (
+                            FieldInfo possibleTask in fiValue
+                                .GetType()
+                                .GetFields(
+                                    BindingFlags.Instance
+                                        | BindingFlags.Public
+                                        | BindingFlags.NonPublic
+                                )
+                        )
                         {
                             if (possibleTask.GetValue(fiValue) is Task awaitedTask)
                             {
@@ -97,20 +117,25 @@ namespace System.Threading.Tasks
             }
 
             static string ToString(object value) =>
-                value is null ? "(null)" :
-                value is Task t ? $"Status: {t.Status}, Exception: {t.Exception?.InnerException}" :
-                value.ToString();
+                value is null ? "(null)"
+                : value is Task t ? $"Status: {t.Status}, Exception: {t.Exception?.InnerException}"
+                : value.ToString();
         }
 
         private GetStateMachineData() { }
+
         public GetStateMachineData GetAwaiter() => this;
+
         public bool IsCompleted => false;
+
         public void OnCompleted(Action continuation) => UnsafeOnCompleted(continuation);
+
         public void UnsafeOnCompleted(Action continuation)
         {
             _box = continuation.Target;
             Task.Run(continuation);
         }
+
         public object GetResult() => _box;
     }
 }

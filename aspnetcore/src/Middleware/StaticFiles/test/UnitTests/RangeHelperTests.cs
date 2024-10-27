@@ -12,7 +12,10 @@ public class RangeHelperTests
     [Theory]
     [InlineData(1, 2)]
     [InlineData(2, 3)]
-    public void NormalizeRange_ReturnsNullWhenRangeStartEqualsOrGreaterThanLength(long start, long end)
+    public void NormalizeRange_ReturnsNullWhenRangeStartEqualsOrGreaterThanLength(
+        long start,
+        long end
+    )
     {
         // Arrange & Act
         var normalizedRange = RangeHelper.NormalizeRange(new RangeItemHeaderValue(start, end), 1);
@@ -34,7 +37,12 @@ public class RangeHelperTests
     [Theory]
     [InlineData(0L, null, 0L, 2L)]
     [InlineData(0L, 0L, 0L, 0L)]
-    public void NormalizeRange_ReturnsNormalizedRange(long? start, long? end, long? normalizedStart, long? normalizedEnd)
+    public void NormalizeRange_ReturnsNormalizedRange(
+        long? start,
+        long? end,
+        long? normalizedStart,
+        long? normalizedEnd
+    )
     {
         // Arrange & Act
         var normalizedRange = RangeHelper.NormalizeRange(new RangeItemHeaderValue(start, end), 3);
@@ -65,7 +73,12 @@ public class RangeHelperTests
         httpContext.Request.Headers.Range = range;
 
         // Act
-        var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 10, NullLogger.Instance);
+        var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(
+            httpContext,
+            httpContext.Request.GetTypedHeaders(),
+            10,
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.False(isRangeRequest);
@@ -82,7 +95,12 @@ public class RangeHelperTests
         httpContext.Request.Headers.Range = range;
 
         // Act
-        var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 10, NullLogger.Instance);
+        var (isRangeRequest, parsedRangeResult) = RangeHelper.ParseRange(
+            httpContext,
+            httpContext.Request.GetTypedHeaders(),
+            10,
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.False(isRangeRequest);
@@ -98,7 +116,12 @@ public class RangeHelperTests
         httpContext.Request.Headers.Range = range.ToString();
 
         // Act
-        var (isRangeRequest, parsedRange) = RangeHelper.ParseRange(httpContext, httpContext.Request.GetTypedHeaders(), 4, NullLogger.Instance);
+        var (isRangeRequest, parsedRange) = RangeHelper.ParseRange(
+            httpContext,
+            httpContext.Request.GetTypedHeaders(),
+            4,
+            NullLogger.Instance
+        );
 
         // Assert
         Assert.True(isRangeRequest);

@@ -26,7 +26,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "7d7dc5f71eb29ddaf80d6214632eeae03d9058af1fb6d22ed80badb62bc1a534",
                 "ead218590119e8876b29146ff89ca61770c4edbbf97d38ce385ed281d8a6b230",
                 "28af61281fd35e2fa7002523acc85a429cb06ee6648325389f59edfce1405141",
-                "46fc62106420ff012e54a434fbdd2d25ccc5852060561e68040dd7778997bd7b");
+                "46fc62106420ff012e54a434fbdd2d25ccc5852060561e68040dd7778997bd7b"
+            );
         }
 
         [Fact]
@@ -40,7 +41,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "38f65d6dce47676044d58ce5139582d568f64bb16098d179dbab07741dd5caf5",
                 "119f2f047902782ab0c9e27a54aff5eb9b964829ca99c06b02ddba95b0a3f6d0",
                 "8f52b726664cac366fc98ac7a012b2682cbd962e5acb544671d41b9445704d1d",
-                "057d636096cb80b67a8c038c890e887d1adfa4195e9b3ce241c8a778c59cda67");
+                "057d636096cb80b67a8c038c890e887d1adfa4195e9b3ce241c8a778c59cda67"
+            );
         }
 
         [Fact]
@@ -54,7 +56,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "3cc3122a68f0d95027ad38c067916ba0eb8c38894d22e1b15618b6818a661774ad463b205da88cf699ab4d43c9cf98a1",
                 "9803807f2f6d2fd966cdd0290bd410c0190352fbec7ff6247de1302df86f25d34fe4a97bef60cff548355c015dbb3e5f",
                 "ba26ca69ec2f5b5d9dad20cc9da711383a9dbe34ea3fa5a2af75b46502629ad54dd8b7d73a8abb06a3a3be47d650cc99",
-                "5f9d29dc5e31a163060356213669c8ce132e22f57c9a04f40ba7fcead493b457e5621e766c40a2e3d4d6a04b25e533f1");
+                "5f9d29dc5e31a163060356213669c8ce132e22f57c9a04f40ba7fcead493b457e5621e766c40a2e3d4d6a04b25e533f1"
+            );
         }
 
         [Fact]
@@ -68,7 +71,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "92860c21bde06165f8e900c687f8ef0a05d14f290b3f07d8b3a8cc6404366e5d5119cd6d03fb12dc58e89f13df9cd783",
                 "ea4018f5a307c379180bf6a62fd2ceceebeeb7d4df063a66fb838aa35243419791f7e2c9d4803c9319aa0eb03c416b66",
                 "68835a91484f05ef028284df6436fb88ffebabcdd69ab0133e6735a1bcfb37203d10d340a8328a7b68770ca75878a1a6",
-                "a23742a2c267d7425fda94b93f93bbcc24791ac51cd8fd501a238d40812f4cbfc59aac9520d758cf789c76300c69d2ff");
+                "a23742a2c267d7425fda94b93f93bbcc24791ac51cd8fd501a238d40812f4cbfc59aac9520d758cf789c76300c69d2ff"
+            );
         }
 
         [Fact]
@@ -82,7 +86,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "017eecc07ab4b329068fba65e56a1f8890aa935e57134ae0ffcce802735151f4eac6564f6ee9974c5e6887a1fefee5743ae2241bfeb95d5ce31ddcb6f9edb4d6fc47",
                 "00602f9d0cf9e526b29e22381c203c48a886c2b0673033366314f1ffbcba240ba42f4ef38a76174635f91e6b4ed34275eb01c8467d05ca80315bf1a7bbd945f550a5",
                 "01b7c85f26f5d4b2d7355cf6b02117659943762b6d1db5ab4f1dbc44ce7b2946eb6c7de342962893fd387d1b73d7a8672d1f236961170b7eb3579953ee5cdc88cd2d",
-                "005fc70477c3e63bc3954bd0df3ea0d1f41ee21746ed95fc5e1fdf90930d5e136672d72cc770742d1711c3c3a4c334a0ad9759436a4d3c5bf6e74b9578fac148c831");
+                "005fc70477c3e63bc3954bd0df3ea0d1f41ee21746ed95fc5e1fdf90930d5e136672d72cc770742d1711c3c3a4c334a0ad9759436a4d3c5bf6e74b9578fac148c831"
+            );
         }
 
         [Fact]
@@ -96,7 +101,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
                 "00816f19c1fb10ef94d4a1d81c156ec3d1de08b66761f03f06ee4bb9dcebbbfe1eaa1ed49a6a990838d8ed318c14d74cc872f95d05d07ad50f621ceb620cd905cfb8",
                 "00d45615ed5d37fde699610a62cd43ba76bedd8f85ed31005fe00d6450fbbd101291abd96d4945a8b57bc73b3fe9f4671105309ec9b6879d0551d930dac8ba45d255",
                 "01425332844e592b440c0027972ad1526431c06732df19cd46a242172d4dd67c2c8c99dfc22e49949a56cf90c6473635ce82f25b33682fb19bc33bd910ed8ce3a7fa",
-                "000b3920ac830ade812c8f96805da2236e002acbbf13596a9ab254d44d0e91b6255ebf1229f366fb5a05c5884ef46032c26d42189273ca4efa4c3db6bd12a6853759");
+                "000b3920ac830ade812c8f96805da2236e002acbbf13596a9ab254d44d0e91b6255ebf1229f366fb5a05c5884ef46032c26d42189273ca4efa4c3db6bd12a6853759"
+            );
         }
 
         private static void Verify(
@@ -107,7 +113,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             string iutD,
             string iutQx,
             string iutQy,
-            string iutZ)
+            string iutZ
+        )
         {
             Assert.True(namedCurve.IsNamed, "namedCurve.IsNamed");
             Assert.True(explicitCurve.IsExplicit, "explicitCurve.IsExplicit");
@@ -115,22 +122,14 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECParameters iutParameters = new ECParameters
             {
                 Curve = namedCurve,
-                Q =
-                {
-                    X = iutQx.HexToByteArray(),
-                    Y = iutQy.HexToByteArray(),
-                },
+                Q = { X = iutQx.HexToByteArray(), Y = iutQy.HexToByteArray() },
                 D = iutD.HexToByteArray(),
             };
 
             ECParameters cavsParameters = new ECParameters
             {
                 Curve = namedCurve,
-                Q =
-                {
-                    X = cavsQx.HexToByteArray(),
-                    Y = cavsQy.HexToByteArray(),
-                },
+                Q = { X = cavsQx.HexToByteArray(), Y = cavsQy.HexToByteArray() },
             };
 
             Verify(ref iutParameters, ref cavsParameters, explicitCurve, iutZ.HexToByteArray());
@@ -140,7 +139,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ref ECParameters iutParameters,
             ref ECParameters cavsParameters,
             ECCurve explicitCurve,
-            byte[] iutZ)
+            byte[] iutZ
+        )
         {
             using (ECDiffieHellman iut = ECDiffieHellmanFactory.Create())
             using (ECDiffieHellman cavs = ECDiffieHellmanFactory.Create())
@@ -221,7 +221,8 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             ECDiffieHellmanPublicKey cavsPublic,
             HashAlgorithm zHasher,
             HashAlgorithmName zHashAlgorithm,
-            byte[] iutZ)
+            byte[] iutZ
+        )
         {
             byte[] deriveHash = iut.DeriveKeyFromHash(cavsPublic, zHashAlgorithm);
             byte[] hashedZ = zHasher.ComputeHash(iutZ);
@@ -234,7 +235,9 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             }
             else
             {
-                Assert.Throws<PlatformNotSupportedException>(() => iut.DeriveRawSecretAgreement(cavsPublic));
+                Assert.Throws<PlatformNotSupportedException>(
+                    () => iut.DeriveRawSecretAgreement(cavsPublic)
+                );
             }
         }
     }

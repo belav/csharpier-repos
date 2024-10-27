@@ -32,9 +32,12 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
-                new DiagnosticResult(GeneratorDiagnostics.InvalidAttributedClassMissingPartialModifier)
+                new DiagnosticResult(
+                    GeneratorDiagnostics.InvalidAttributedClassMissingPartialModifier
+                )
                     .WithLocation(0)
-                    .WithArguments("C"));
+                    .WithArguments("C")
+            );
         }
 
         [Fact]
@@ -59,16 +62,24 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
-                new DiagnosticResult(GeneratorDiagnostics.InvalidAttributedClassMissingPartialModifier)
+                new DiagnosticResult(
+                    GeneratorDiagnostics.InvalidAttributedClassMissingPartialModifier
+                )
                     .WithLocation(0)
-                    .WithArguments("Test.C"));
+                    .WithArguments("Test.C")
+            );
         }
 
         internal class UnsafeBlocksNotAllowedTest : VerifyCS.Test
         {
-            internal UnsafeBlocksNotAllowedTest(bool referenceAncillaryInterop) : base(referenceAncillaryInterop) { }
-            protected override CompilationOptions CreateCompilationOptions()
-                => new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary, allowUnsafe: false);
+            internal UnsafeBlocksNotAllowedTest(bool referenceAncillaryInterop)
+                : base(referenceAncillaryInterop) { }
+
+            protected override CompilationOptions CreateCompilationOptions() =>
+                new CSharpCompilationOptions(
+                    OutputKind.DynamicallyLinkedLibrary,
+                    allowUnsafe: false
+                );
         }
 
         [Fact]
@@ -96,7 +107,8 @@ namespace ComInterfaceGenerator.Unit.Tests
             test.ExpectedDiagnostics.Add(
                 new DiagnosticResult(GeneratorDiagnostics.RequiresAllowUnsafeBlocks)
                     .WithLocation(0)
-                    .WithArguments("Test.C"));
+                    .WithArguments("Test.C")
+            );
 
             await test.RunAsync();
         }
@@ -121,9 +133,12 @@ namespace ComInterfaceGenerator.Unit.Tests
 
             await VerifyCS.VerifySourceGeneratorAsync(
                 source,
-                new DiagnosticResult(GeneratorDiagnostics.ClassDoesNotImplementAnyGeneratedComInterface)
+                new DiagnosticResult(
+                    GeneratorDiagnostics.ClassDoesNotImplementAnyGeneratedComInterface
+                )
                     .WithLocation(0)
-                    .WithArguments("Test.C"));
+                    .WithArguments("Test.C")
+            );
         }
     }
 }

@@ -20,7 +20,9 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
@@ -45,7 +47,9 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
@@ -78,7 +82,9 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
@@ -86,10 +92,12 @@ public class MiddlewareFilterBuilderTest
         var httpContext = new DefaultHttpContext();
         Pipeline1.ConfigurePipeline = ab =>
         {
-            ab.Use((ctx, next) =>
-            {
-                return next(ctx);
-            });
+            ab.Use(
+                (ctx, next) =>
+                {
+                    return next(ctx);
+                }
+            );
         };
 
         // Act
@@ -97,8 +105,13 @@ public class MiddlewareFilterBuilderTest
 
         // Assert
         Assert.NotNull(pipeline);
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => pipeline(httpContext));
-        Assert.Equal($"Feature '{typeof(IMiddlewareFilterFeature)}' is not present.", exception.Message);
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
+        Assert.Equal(
+            $"Feature '{typeof(IMiddlewareFilterFeature)}' is not present.",
+            exception.Message
+        );
     }
 
     [Fact]
@@ -107,17 +120,21 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
 
         Pipeline1.ConfigurePipeline = ab =>
         {
-            ab.Use((ctx, next) =>
-            {
-                return next(ctx);
-            });
+            ab.Use(
+                (ctx, next) =>
+                {
+                    return next(ctx);
+                }
+            );
         };
 
         var middlewareFilterFeature = new MiddlewareFilterFeature
@@ -128,8 +145,12 @@ public class MiddlewareFilterBuilderTest
                     new DefaultHttpContext(),
                     new RouteData(),
                     new ActionDescriptor(),
-                    new ModelStateDictionary());
-                var context = new ResourceExecutedContext(actionContext, new List<IFilterMetadata>())
+                    new ModelStateDictionary()
+                );
+                var context = new ResourceExecutedContext(
+                    actionContext,
+                    new List<IFilterMetadata>()
+                )
                 {
                     Exception = new InvalidOperationException("Error!!!"),
                     ExceptionHandled = true,
@@ -159,17 +180,21 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
 
         Pipeline1.ConfigurePipeline = ab =>
         {
-            ab.Use((ctx, next) =>
-            {
-                return next(ctx);
-            });
+            ab.Use(
+                (ctx, next) =>
+                {
+                    return next(ctx);
+                }
+            );
         };
 
         var middlewareFilterFeature = new MiddlewareFilterFeature
@@ -191,8 +216,12 @@ public class MiddlewareFilterBuilderTest
                     new DefaultHttpContext(),
                     new RouteData(),
                     new ActionDescriptor(),
-                    new ModelStateDictionary());
-                var context = new ResourceExecutedContext(actionContext, new List<IFilterMetadata>())
+                    new ModelStateDictionary()
+                );
+                var context = new ResourceExecutedContext(
+                    actionContext,
+                    new List<IFilterMetadata>()
+                )
                 {
                     Exception = thrownException,
                 };
@@ -211,14 +240,19 @@ public class MiddlewareFilterBuilderTest
         // Assert
         Assert.NotNull(pipeline);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => pipeline(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
         Assert.Null(exception.InnerException);
         Assert.Equal("Error!!!", exception.Message);
 
         var stack = exception.StackTrace;
         Assert.Contains(typeof(MiddlewareFilterBuilder).FullName, stack);
         Assert.DoesNotContain(typeof(MiddlewareFilterBuilderTest).FullName, stack);
-        Assert.DoesNotContain(nameof(EndMiddleware_PropagatesBackException_ToEarlierMiddleware), stack);
+        Assert.DoesNotContain(
+            nameof(EndMiddleware_PropagatesBackException_ToEarlierMiddleware),
+            stack
+        );
     }
 
     [Fact]
@@ -227,17 +261,21 @@ public class MiddlewareFilterBuilderTest
         // Arrange
         var services = new ServiceCollection();
         var appBuilder = new ApplicationBuilder(services.BuildServiceProvider());
-        var pipelineBuilderService = new MiddlewareFilterBuilder(new MiddlewareFilterConfigurationProvider())
+        var pipelineBuilderService = new MiddlewareFilterBuilder(
+            new MiddlewareFilterConfigurationProvider()
+        )
         {
             ApplicationBuilder = appBuilder,
         };
 
         Pipeline1.ConfigurePipeline = ab =>
         {
-            ab.Use((ctx, next) =>
-            {
-                return next(ctx);
-            });
+            ab.Use(
+                (ctx, next) =>
+                {
+                    return next(ctx);
+                }
+            );
         };
 
         var middlewareFilterFeature = new MiddlewareFilterFeature
@@ -259,8 +297,12 @@ public class MiddlewareFilterBuilderTest
                     new DefaultHttpContext(),
                     new RouteData(),
                     new ActionDescriptor(),
-                    new ModelStateDictionary());
-                var context = new ResourceExecutedContext(actionContext, new List<IFilterMetadata>())
+                    new ModelStateDictionary()
+                );
+                var context = new ResourceExecutedContext(
+                    actionContext,
+                    new List<IFilterMetadata>()
+                )
                 {
                     ExceptionDispatchInfo = exceptionInfo,
                 };
@@ -279,14 +321,19 @@ public class MiddlewareFilterBuilderTest
         // Assert
         Assert.NotNull(pipeline);
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() => pipeline(httpContext));
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
+            () => pipeline(httpContext)
+        );
         Assert.Null(exception.InnerException);
         Assert.Equal("Error!!!", exception.Message);
 
         var stack = exception.StackTrace;
         Assert.Contains(typeof(MiddlewareFilterBuilder).FullName, stack);
         Assert.Contains(typeof(MiddlewareFilterBuilderTest).FullName, stack);
-        Assert.Contains(nameof(EndMiddleware_PropagatesFullExceptionInfo_ToEarlierMiddleware), stack);
+        Assert.Contains(
+            nameof(EndMiddleware_PropagatesFullExceptionInfo_ToEarlierMiddleware),
+            stack
+        );
     }
 
     private class Pipeline1

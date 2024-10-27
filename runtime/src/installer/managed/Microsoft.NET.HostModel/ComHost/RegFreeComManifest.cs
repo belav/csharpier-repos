@@ -23,15 +23,29 @@ namespace Microsoft.NET.HostModel.ComHost
         /// <param name="clsidMapPath">The path to the clsidmap file.</param>
         /// <param name="comManifestPath">The path to which to write the manifest.</param>
         /// <param name="typeLibraries">The type libraries to include in the manifest.</param>
-        public static void CreateManifestFromClsidmap(string assemblyName, string comHostName, string assemblyVersion, string clsidMapPath, string comManifestPath, IReadOnlyDictionary<int, string> typeLibraries = null)
+        public static void CreateManifestFromClsidmap(
+            string assemblyName,
+            string comHostName,
+            string assemblyVersion,
+            string clsidMapPath,
+            string comManifestPath,
+            IReadOnlyDictionary<int, string> typeLibraries = null
+        )
         {
             XNamespace ns = "urn:schemas-microsoft-com:asm.v1";
 
-            XElement manifest = new XElement(ns + "assembly", new XAttribute("manifestVersion", "1.0"));
-            manifest.Add(new XElement(ns + "assemblyIdentity",
-                new XAttribute("type", "win32"),
-                new XAttribute("name", $"{assemblyName}.X"),
-                new XAttribute("version", assemblyVersion)));
+            XElement manifest = new XElement(
+                ns + "assembly",
+                new XAttribute("manifestVersion", "1.0")
+            );
+            manifest.Add(
+                new XElement(
+                    ns + "assemblyIdentity",
+                    new XAttribute("type", "win32"),
+                    new XAttribute("name", $"{assemblyName}.X"),
+                    new XAttribute("version", assemblyVersion)
+                )
+            );
 
             var fileElement = CreateComHostFileElement(clsidMapPath, comHostName, ns);
             if (typeLibraries is not null)
@@ -40,10 +54,13 @@ namespace Microsoft.NET.HostModel.ComHost
             }
             manifest.Add(fileElement);
 
-            XDocument manifestDocument = new XDocument(new XDeclaration("1.0", "UTF-8", "yes"), manifest);
+            XDocument manifestDocument = new XDocument(
+                new XDeclaration("1.0", "UTF-8", "yes"),
+                manifest
+            );
             XmlWriterSettings settings = new XmlWriterSettings()
             {
-                Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false)
+                Encoding = new UTF8Encoding(encoderShouldEmitUTF8Identifier: false),
             };
             using (XmlWriter manifestWriter = XmlWriter.Create(comManifestPath, settings))
             {
@@ -51,7 +68,11 @@ namespace Microsoft.NET.HostModel.ComHost
             }
         }
 
-        private static XElement CreateComHostFileElement(string clsidMapPath, string comHostName, XNamespace ns)
+        private static XElement CreateComHostFileElement(
+            string clsidMapPath,
+            string comHostName,
+            XNamespace ns
+        )
         {
             XElement fileElement = new XElement(ns + "file", new XAttribute("name", comHostName));
             JsonElement clsidMap;
@@ -64,7 +85,11 @@ namespace Microsoft.NET.HostModel.ComHost
             {
                 string guidMaybe = property.Name;
                 Guid guid = Guid.Parse(guidMaybe);
-                XElement comClassElement = new XElement(ns + "comClass", new XAttribute("clsid", guid.ToString("B")), new XAttribute("threadingModel", "Both"));
+                XElement comClassElement = new XElement(
+                    ns + "comClass",
+                    new XAttribute("clsid", guid.ToString("B")),
+                    new XAttribute("threadingModel", "Both")
+                );
                 if (property.Value.TryGetProperty("progid", out JsonElement progIdValue))
                 {
                     comClassElement.Add(new XAttribute("progid", progIdValue.GetString()));
@@ -75,7 +100,11 @@ namespace Microsoft.NET.HostModel.ComHost
             return fileElement;
         }
 
-        private static void AddTypeLibElementsToFileElement(IReadOnlyDictionary<int, string> typeLibraries, XNamespace ns, XElement fileElement)
+        private static void AddTypeLibElementsToFileElement(
+            IReadOnlyDictionary<int, string> typeLibraries,
+            XNamespace ns,
+            XElement fileElement
+        )
         {
             foreach (var typeLibrary in typeLibraries)
             {
@@ -87,11 +116,13 @@ namespace Microsoft.NET.HostModel.ComHost
                     {
                         throw new InvalidTypeLibraryException(typeLibrary.Value);
                     }
-                    XElement typeLibElement = new XElement(ns + "typelib",
+                    XElement typeLibElement = new XElement(
+                        ns + "typelib",
                         new XAttribute("tlbid", name.ToString("B")),
                         new XAttribute("resourceid", typeLibrary.Key),
                         new XAttribute("version", version),
-                        new XAttribute("helpdir", ""));
+                        new XAttribute("helpdir", "")
+                    );
                     fileElement.Add(typeLibElement);
                 }
                 catch (FileNotFoundException ex)

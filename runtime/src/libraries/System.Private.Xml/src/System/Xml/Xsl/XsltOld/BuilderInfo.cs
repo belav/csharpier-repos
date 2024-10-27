@@ -82,7 +82,9 @@ namespace System.Xml.Xsl.XsltOld
         {
             BuilderInfo info = new BuilderInfo();
             info.Initialize(this);
-            Debug.Assert(info.NodeType != XmlNodeType.Text || XmlCharType.IsOnlyWhitespace(info.Value));
+            Debug.Assert(
+                info.NodeType != XmlNodeType.Text || XmlCharType.IsOnlyWhitespace(info.Value)
+            );
             return info;
         }
 
@@ -140,21 +142,25 @@ namespace System.Xml.Xsl.XsltOld
             {
                 switch (this.TextInfoCount)
                 {
-                    case 0: return string.Empty;
-                    case 1: return this.TextInfo[0]!;
+                    case 0:
+                        return string.Empty;
+                    case 1:
+                        return this.TextInfo[0]!;
                     default:
                         int size = 0;
                         for (int i = 0; i < this.TextInfoCount; i++)
                         {
                             string? ti = this.TextInfo[i];
-                            if (ti == null) continue; // ignore disableEscaping
+                            if (ti == null)
+                                continue; // ignore disableEscaping
                             size += ti.Length;
                         }
                         StringBuilder sb = new StringBuilder(size);
                         for (int i = 0; i < this.TextInfoCount; i++)
                         {
                             string? ti = this.TextInfo[i];
-                            if (ti == null) continue; // ignore disableEscaping
+                            if (ti == null)
+                                continue; // ignore disableEscaping
                             sb.Append(ti);
                         }
                         return sb.ToString();
@@ -163,7 +169,10 @@ namespace System.Xml.Xsl.XsltOld
             set
             {
                 this.TextInfoCount = 0;
-                ValueAppend(value, /*disableEscaping:*/false);
+                ValueAppend(
+                    value, /*disableEscaping:*/
+                    false
+                );
             }
         }
 

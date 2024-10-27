@@ -29,9 +29,7 @@ class Constructed : IGeneric<int>
     int IGeneric<int>.Property { get; set; }
 }
 
-interface IGenericInterface<T> : Interface
-{
-}
+interface IGenericInterface<T> : Interface { }
 
 //we'll see a type def for this class, a type ref for IGenericInterface<int>,
 //and then a type def for Interface (i.e. back and forth)

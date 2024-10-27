@@ -31,13 +31,18 @@ namespace Microsoft.Extensions.Hosting.Unit.Tests
             if (innerException)
             {
                 Assert.NotNull(exception.InnerException);
-            } 
-            
-            HostAbortedException thrownException = Assert.Throws<HostAbortedException>(new Action(() => throw exception));
+            }
+
+            HostAbortedException thrownException = Assert.Throws<HostAbortedException>(
+                new Action(() => throw exception)
+            );
             Assert.Equal(message, thrownException.Message);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [InlineData("Test Message")]
         [InlineData(null)]
         public void TestSerialization(string? message)
@@ -49,13 +54,17 @@ namespace Microsoft.Extensions.Hosting.Unit.Tests
             formatter.Serialize(serializationStream, exception);
 
             using var deserializationStream = new MemoryStream(serializationStream.ToArray());
-            HostAbortedException deserializedException = (HostAbortedException) formatter.Deserialize(deserializationStream);
+            HostAbortedException deserializedException = (HostAbortedException)
+                formatter.Deserialize(deserializationStream);
 
             Assert.Equal(exception.Message, deserializedException.Message);
             Assert.Null(deserializedException.InnerException);
         }
 
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         public void TestSerializationDefaultConstructor()
         {
             var exception = new HostAbortedException();
@@ -65,10 +74,11 @@ namespace Microsoft.Extensions.Hosting.Unit.Tests
             formatter.Serialize(serializationStream, exception);
 
             using var deserializationStream = new MemoryStream(serializationStream.ToArray());
-            HostAbortedException deserializedException = (HostAbortedException)formatter.Deserialize(deserializationStream);
+            HostAbortedException deserializedException = (HostAbortedException)
+                formatter.Deserialize(deserializationStream);
 
             Assert.Equal(exception.Message, deserializedException.Message);
-            Assert.Null(deserializedException.InnerException);            
+            Assert.Null(deserializedException.InnerException);
         }
     }
 }

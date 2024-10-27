@@ -5,10 +5,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,29 +27,30 @@ using System;
 using System.Security;
 using System.Windows.Input;
 
-namespace System.Windows.Interop {
+namespace System.Windows.Interop
+{
+    public interface IKeyboardInputSink
+    {
+        IKeyboardInputSite KeyboardInputSite
+        {
+            get;
+            [SecurityCritical]
+            set;
+        }
 
-	public interface IKeyboardInputSink
-	{
-		IKeyboardInputSite KeyboardInputSite {
-			get;
-			[SecurityCritical]
-			set;
-		}
+        bool TabInto(TraversalRequest request);
+        bool HasFocusWithin();
 
-		bool TabInto (TraversalRequest request);
-		bool HasFocusWithin ();
+        [SecurityCritical]
+        bool OnMnemonic(ref MSG msg, ModifierKeys modifiers);
 
-		[SecurityCritical]
-		bool OnMnemonic (ref MSG msg, ModifierKeys modifiers);
+        [SecurityCritical]
+        IKeyboardInputSite RegisterKeyboardInputSink(IKeyboardInputSink sink);
 
-		[SecurityCritical]
-		IKeyboardInputSite RegisterKeyboardInputSink (IKeyboardInputSink sink);
+        [SecurityCritical]
+        bool TranslateAccelerator(ref MSG msg, ModifierKeys modifiers);
 
-		[SecurityCritical]
-		bool TranslateAccelerator (ref MSG msg, ModifierKeys modifiers);
-
-		[SecurityCritical]
-		bool TranslateChar (ref MSG msg, ModifierKeys modifiers);
-	}
+        [SecurityCritical]
+        bool TranslateChar(ref MSG msg, ModifierKeys modifiers);
+    }
 }

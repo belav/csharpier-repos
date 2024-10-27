@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Internal.TypeSystem;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.IL.Stubs
@@ -28,9 +27,13 @@ namespace Internal.IL.Stubs
         // MethodSignature does not track information about the type of the this pointer. We will steal
         // one of the unused upper bits to track whether the this pointer is a byref or an object. This makes
         // the information passed around seamlesly, including name mangling.
-        private static MethodSignatureFlags MethodSignatureFlags_ValueTypeInstanceMethod => (MethodSignatureFlags)0x8000;
+        private static MethodSignatureFlags MethodSignatureFlags_ValueTypeInstanceMethod =>
+            (MethodSignatureFlags)0x8000;
 
-        public static MethodSignature NormalizeSignature(MethodSignature sig, bool valueTypeInstanceMethod)
+        public static MethodSignature NormalizeSignature(
+            MethodSignature sig,
+            bool valueTypeInstanceMethod
+        )
         {
             MethodSignatureFlags flags = 0;
             if (sig.IsStatic)
@@ -52,7 +55,11 @@ namespace Internal.IL.Stubs
 
             static TypeDesc NormalizeType(TypeDesc type)
             {
-                Debug.Assert(!type.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true));
+                Debug.Assert(
+                    !type.ContainsSignatureVariables(
+                        treatGenericParameterLikeSignatureVariable: true
+                    )
+                );
 
                 if (type.IsByRef)
                     return type.Context.GetWellKnownType(WellKnownType.Byte).MakeByRefType();
@@ -72,18 +79,12 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override MethodSignature Signature
@@ -101,11 +102,13 @@ namespace Internal.IL.Stubs
                         byref,
                         new TypeDesc[]
                         {
-                            ptr,    // fptr
-                            byref,  // thisptr
-                            byref,  // refbuf
-                            ptr     // arguments
-                        });
+                            ptr, // fptr
+                            byref, // thisptr
+                            byref, // refbuf
+                            ptr // arguments
+                            ,
+                        }
+                    );
                 }
 
                 return _signature;
@@ -135,7 +138,10 @@ namespace Internal.IL.Stubs
             if (_targetSignature.Length != 0)
             {
                 var fieldByReferenceValueToken = emitter.NewToken(
-                    Context.SystemModule.GetKnownType("System", "ByReference").GetKnownField("Value"));
+                    Context
+                        .SystemModule.GetKnownType("System", "ByReference")
+                        .GetKnownField("Value")
+                );
                 for (int i = 0; i < _targetSignature.Length; i++)
                 {
                     codeStream.EmitLdArg(3);

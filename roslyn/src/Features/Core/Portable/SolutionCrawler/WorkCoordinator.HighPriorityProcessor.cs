@@ -36,21 +36,23 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         IncrementalAnalyzerProcessor processor,
                         Lazy<ImmutableArray<IIncrementalAnalyzer>> lazyAnalyzers,
                         TimeSpan backOffTimeSpan,
-                        CancellationToken shutdownToken)
+                        CancellationToken shutdownToken
+                    )
                         : base(listener, backOffTimeSpan, shutdownToken)
                     {
                         _processor = processor;
                         _lazyAnalyzers = lazyAnalyzers;
 
                         _running = Task.CompletedTask;
-                        _workItemQueue = new AsyncDocumentWorkItemQueue(processor._registration.ProgressReporter, processor._registration.Workspace);
+                        _workItemQueue = new AsyncDocumentWorkItemQueue(
+                            processor._registration.ProgressReporter,
+                            processor._registration.Workspace
+                        );
 
                         Start();
                     }
 
-                    protected override void OnPaused()
-                    {
-                    }
+                    protected override void OnPaused() { }
 
                     public ImmutableArray<IIncrementalAnalyzer> Analyzers
                     {
@@ -73,13 +75,18 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         lock (_gate)
                         {
                             var analyzers = _lazyAnalyzers.Value;
-                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(() => analyzers.Add(analyzer));
+                            _lazyAnalyzers = new Lazy<ImmutableArray<IIncrementalAnalyzer>>(
+                                () => analyzers.Add(analyzer)
+                            );
                         }
                     }
 
                     public void Enqueue(WorkItem item)
                     {
-                        Contract.ThrowIfFalse(item.DocumentId != null, "can only enqueue a document work item");
+                        Contract.ThrowIfFalse(
+                            item.DocumentId != null,
+                            "can only enqueue a document work item"
+                        );
 
                         // Don't enqueue item if we don't have any high priority analyzers
                         if (Analyzers.IsEmpty)
@@ -90,15 +97,24 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         // we only put workitem in high priority queue if there is a text change.
                         // this is to prevent things like opening a file, changing in other files keep enqueuing
                         // expensive high priority work.
-                        if (!item.InvocationReasons.Contains(PredefinedInvocationReasons.SyntaxChanged))
+                        if (
+                            !item.InvocationReasons.Contains(
+                                PredefinedInvocationReasons.SyntaxChanged
+                            )
+                        )
                         {
                             return;
                         }
 
-                        if (!_processor._documentTracker.SupportsDocumentTracking
-                            && _processor._registration.Workspace.Kind is WorkspaceKind.RemoteWorkspace)
+                        if (
+                            !_processor._documentTracker.SupportsDocumentTracking
+                            && _processor._registration.Workspace.Kind
+                                is WorkspaceKind.RemoteWorkspace
+                        )
                         {
-                            Debug.Fail($"Unexpected use of '{nameof(ExportIncrementalAnalyzerProviderAttribute.HighPriorityForActiveFile)}' in workspace kind '{_processor._registration.Workspace.Kind}' that cannot support active file tracking.");
+                            Debug.Fail(
+                                $"Unexpected use of '{nameof(ExportIncrementalAnalyzerProviderAttribute.HighPriorityForActiveFile)}' in workspace kind '{_processor._registration.Workspace.Kind}' that cannot support active file tracking."
+                            );
                         }
 
                         // check whether given item is for active document, otherwise, nothing to do here
@@ -108,7 +124,9 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
 
                         // we need to clone due to waiter
-                        EnqueueActiveFileItem(item.WithAsyncToken(Listener.BeginAsyncOperation("ActiveFile")));
+                        EnqueueActiveFileItem(
+                            item.WithAsyncToken(Listener.BeginAsyncOperation("ActiveFile"))
+                        );
                     }
 
                     private void EnqueueActiveFileItem(WorkItem item)
@@ -118,12 +136,18 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         UpdateLastAccessTime();
                         var added = _workItemQueue.AddOrReplace(item);
 
-                        Logger.Log(FunctionId.WorkCoordinator_ActiveFileEnqueue, s_enqueueLogger, Environment.TickCount, item.DocumentId, !added);
+                        Logger.Log(
+                            FunctionId.WorkCoordinator_ActiveFileEnqueue,
+                            s_enqueueLogger,
+                            Environment.TickCount,
+                            item.DocumentId,
+                            !added
+                        );
                         SolutionCrawlerLogger.LogActiveFileEnqueue(_processor._logAggregator);
                     }
 
-                    protected override Task WaitAsync(CancellationToken cancellationToken)
-                        => _workItemQueue.WaitAsync(cancellationToken);
+                    protected override Task WaitAsync(CancellationToken cancellationToken) =>
+                        _workItemQueue.WaitAsync(cancellationToken);
 
                     protected override async Task ExecuteAsync()
                     {
@@ -141,12 +165,20 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             _running = source.Task;
                             // okay, there must be at least one item in the map
                             // see whether we have work item for the document
-                            Contract.ThrowIfFalse(GetNextWorkItem(out var workItem, out var documentCancellation));
+                            Contract.ThrowIfFalse(
+                                GetNextWorkItem(out var workItem, out var documentCancellation)
+                            );
 
                             var solution = _processor._registration.GetSolutionToAnalyze();
 
                             // okay now we have work to do
-                            await ProcessDocumentAsync(solution, Analyzers, workItem, documentCancellation).ConfigureAwait(false);
+                            await ProcessDocumentAsync(
+                                    solution,
+                                    Analyzers,
+                                    workItem,
+                                    documentCancellation
+                                )
+                                .ConfigureAwait(false);
                         }
                         catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e))
                         {
@@ -159,13 +191,22 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                         }
                     }
 
-                    private bool GetNextWorkItem(out WorkItem workItem, out CancellationToken cancellationToken)
+                    private bool GetNextWorkItem(
+                        out WorkItem workItem,
+                        out CancellationToken cancellationToken
+                    )
                     {
                         // GetNextWorkItem since it can't fail. we still return bool to confirm that this never fail.
                         var documentId = _processor._documentTracker.TryGetActiveDocument();
                         if (documentId != null)
                         {
-                            if (_workItemQueue.TryTake(documentId, out workItem, out cancellationToken))
+                            if (
+                                _workItemQueue.TryTake(
+                                    documentId,
+                                    out workItem,
+                                    out cancellationToken
+                                )
+                            )
                             {
                                 return true;
                             }
@@ -175,10 +216,16 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             preferableProjectId: null,
                             dependencyGraph: _processor.DependencyGraph,
                             workItem: out workItem,
-                            cancellationToken: out cancellationToken);
+                            cancellationToken: out cancellationToken
+                        );
                     }
 
-                    private async Task ProcessDocumentAsync(Solution solution, ImmutableArray<IIncrementalAnalyzer> analyzers, WorkItem workItem, CancellationToken cancellationToken)
+                    private async Task ProcessDocumentAsync(
+                        Solution solution,
+                        ImmutableArray<IIncrementalAnalyzer> analyzers,
+                        WorkItem workItem,
+                        CancellationToken cancellationToken
+                    )
                     {
                         Contract.ThrowIfNull(workItem.DocumentId);
 
@@ -192,12 +239,26 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
 
                         try
                         {
-                            using (Logger.LogBlock(FunctionId.WorkCoordinator_ProcessDocumentAsync, w => w.ToString(), workItem, cancellationToken))
+                            using (
+                                Logger.LogBlock(
+                                    FunctionId.WorkCoordinator_ProcessDocumentAsync,
+                                    w => w.ToString(),
+                                    workItem,
+                                    cancellationToken
+                                )
+                            )
                             {
                                 var document = solution.GetDocument(documentId);
                                 if (document != null)
                                 {
-                                    await _processor.ProcessDocumentAnalyzersAsync(document, analyzers, workItem, cancellationToken).ConfigureAwait(false);
+                                    await _processor
+                                        .ProcessDocumentAnalyzersAsync(
+                                            document,
+                                            analyzers,
+                                            workItem,
+                                            cancellationToken
+                                        )
+                                        .ConfigureAwait(false);
                                 }
 
                                 if (!cancellationToken.IsCancellationRequested)
@@ -206,7 +267,8 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                                 }
                             }
                         }
-                        catch (Exception e) when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
+                        catch (Exception e)
+                            when (FatalError.ReportAndPropagateUnlessCanceled(e, cancellationToken))
                         {
                             throw ExceptionUtilities.Unreachable();
                         }
@@ -218,18 +280,25 @@ namespace Microsoft.CodeAnalysis.SolutionCrawler
                             // after that point.
                             if (!processedEverything && !CancellationToken.IsCancellationRequested)
                             {
-                                _workItemQueue.AddOrReplace(workItem.WithAsyncToken(Listener.BeginAsyncOperation("ReenqueueWorkItem")));
+                                _workItemQueue.AddOrReplace(
+                                    workItem.WithAsyncToken(
+                                        Listener.BeginAsyncOperation("ReenqueueWorkItem")
+                                    )
+                                );
                             }
 
-                            SolutionCrawlerLogger.LogProcessActiveFileDocument(_processor._logAggregator, documentId.Id, processedEverything);
+                            SolutionCrawlerLogger.LogProcessActiveFileDocument(
+                                _processor._logAggregator,
+                                documentId.Id,
+                                processedEverything
+                            );
 
                             // remove one that is finished running
                             _workItemQueue.MarkWorkItemDoneFor(workItem.DocumentId);
                         }
                     }
 
-                    public void Shutdown()
-                        => _workItemQueue.Dispose();
+                    public void Shutdown() => _workItemQueue.Dispose();
                 }
             }
         }

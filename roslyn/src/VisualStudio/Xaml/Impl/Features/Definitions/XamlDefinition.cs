@@ -4,6 +4,5 @@
 
 namespace Microsoft.VisualStudio.LanguageServices.Xaml.Features.Definitions
 {
-    public abstract class XamlDefinition
-    { }
+    public abstract class XamlDefinition { }
 }

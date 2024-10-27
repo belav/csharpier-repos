@@ -15,9 +15,14 @@ namespace Microsoft.AspNetCore.Mvc.Razor.TagHelpers;
 /// </summary>
 internal sealed class TagHelperComponentPropertyActivator : ITagHelperComponentPropertyActivator
 {
-    private readonly ConcurrentDictionary<Type, PropertyActivator<ViewContext>[]> _propertiesToActivate = new();
-    private readonly Func<Type, PropertyActivator<ViewContext>[]> _getPropertiesToActivate = GetPropertiesToActivate;
-    private static readonly Func<PropertyInfo, PropertyActivator<ViewContext>> _createActivateInfo = CreateActivateInfo;
+    private readonly ConcurrentDictionary<
+        Type,
+        PropertyActivator<ViewContext>[]
+    > _propertiesToActivate = new();
+    private readonly Func<Type, PropertyActivator<ViewContext>[]> _getPropertiesToActivate =
+        GetPropertiesToActivate;
+    private static readonly Func<PropertyInfo, PropertyActivator<ViewContext>> _createActivateInfo =
+        CreateActivateInfo;
 
     internal void ClearCache()
     {
@@ -31,7 +36,8 @@ internal sealed class TagHelperComponentPropertyActivator : ITagHelperComponentP
 
         var propertiesToActivate = _propertiesToActivate.GetOrAdd(
             tagHelperComponent.GetType(),
-            _getPropertiesToActivate);
+            _getPropertiesToActivate
+        );
 
         for (var i = 0; i < propertiesToActivate.Length; i++)
         {
@@ -50,6 +56,7 @@ internal sealed class TagHelperComponentPropertyActivator : ITagHelperComponentP
         return PropertyActivator<ViewContext>.GetPropertiesToActivate(
             type,
             typeof(ViewContextAttribute),
-            _createActivateInfo);
+            _createActivateInfo
+        );
     }
 }

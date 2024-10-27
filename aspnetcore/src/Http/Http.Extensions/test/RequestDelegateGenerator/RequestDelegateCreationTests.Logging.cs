@@ -48,32 +48,52 @@ app.MapGet("/{baz}", (
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""StringValues headerValues"" was not provided from header.", logs[0].Message);
-        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[0].State);
+        Assert.Equal(
+            @"Required parameter ""StringValues headerValues"" was not provided from header.",
+            logs[0].Message
+        );
+        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[0].State
+        );
         Assert.Equal("StringValues", log1Values[0].Value);
         Assert.Equal("headerValues", log1Values[1].Value);
         Assert.Equal("header", log1Values[2].Value);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""StringValues queryValues"" was not provided from query string.", logs[1].Message);
-        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[1].State);
+        Assert.Equal(
+            @"Required parameter ""StringValues queryValues"" was not provided from query string.",
+            logs[1].Message
+        );
+        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[1].State
+        );
         Assert.Equal("StringValues", log2Values[0].Value);
         Assert.Equal("queryValues", log2Values[1].Value);
         Assert.Equal("query string", log2Values[2].Value);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[2].EventId);
         Assert.Equal(LogLevel.Debug, logs[2].LogLevel);
-        Assert.Equal(@"Required parameter ""StringValues formValues"" was not provided from form.", logs[2].Message);
-        var log3Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[2].State);
+        Assert.Equal(
+            @"Required parameter ""StringValues formValues"" was not provided from form.",
+            logs[2].Message
+        );
+        var log3Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[2].State
+        );
         Assert.Equal("StringValues", log3Values[0].Value);
         Assert.Equal("formValues", log3Values[1].Value);
         Assert.Equal("form", log3Values[2].Value);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[3].EventId);
         Assert.Equal(LogLevel.Debug, logs[3].LogLevel);
-        Assert.Equal(@"Required parameter ""string routeValues"" was not provided from route.", logs[3].Message);
-        var log4Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[3].State);
+        Assert.Equal(
+            @"Required parameter ""string routeValues"" was not provided from route.",
+            logs[3].Message
+        );
+        var log4Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[3].State
+        );
         Assert.Equal("string", log4Values[0].Value);
         Assert.Equal("routeValues", log4Values[1].Value);
         Assert.Equal("route", log4Values[2].Value);
@@ -111,20 +131,29 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
 
         Assert.Equal(new EventId(3, "ParameterBindingFailed"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable"" from ""invalid!"".", logs[0].Message);
-        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[0].State);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable"" from ""invalid!"".",
+            logs[0].Message
+        );
+        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[0].State
+        );
         Assert.Equal("int", log1Values[0].Value);
         Assert.Equal("tryParsable", log1Values[1].Value);
         Assert.Equal("invalid!", log1Values[2].Value);
 
         Assert.Equal(new EventId(3, "ParameterBindingFailed"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable2"" from ""invalid again!"".", logs[1].Message);
-        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[1].State);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable2"" from ""invalid again!"".",
+            logs[1].Message
+        );
+        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[1].State
+        );
         Assert.Equal("int", log2Values[0].Value);
         Assert.Equal("tryParsable2", log2Values[1].Value);
         Assert.Equal("invalid again!", log2Values[2].Value);
-
     }
 
     [Fact]
@@ -141,7 +170,9 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -149,7 +180,9 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
         httpContext.Request.RouteValues["tryParsable"] = "invalid!";
         httpContext.Request.RouteValues["tryParsable2"] = "invalid again!";
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -161,7 +194,10 @@ app.MapGet("/{tryParsable}/{tryParsable2}", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to bind parameter ""int tryParsable"" from ""invalid!"".", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int tryParsable"" from ""invalid!"".",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -178,17 +214,20 @@ app.MapGet("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext();
-        httpContext.Request.Query = new QueryCollection(new Dictionary<string, StringValues>()
-        {
-            ["values"] = new(new[] { "1", "NAN", "3" })
-        });
+        httpContext.Request.Query = new QueryCollection(
+            new Dictionary<string, StringValues>() { ["values"] = new(new[] { "1", "NAN", "3" }) }
+        );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         // The httpContext should be untouched.
         Assert.False(httpContext.RequestAborted.IsCancellationRequested);
@@ -198,7 +237,10 @@ app.MapGet("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to bind parameter ""int[] values"" from ""NAN"".", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to bind parameter ""int[] values"" from ""NAN"".",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -231,19 +273,35 @@ app.MapGet("/", TestAction);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncParam1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", logs[0].Message);
-        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[0].State);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncParam1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            logs[0].Message
+        );
+        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[0].State
+        );
         Assert.Equal("MyBindAsyncRecord", log1Values[0].Value);
         Assert.Equal("myBindAsyncParam1", log1Values[1].Value);
-        Assert.Equal("MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo)", log1Values[2].Value);
+        Assert.Equal(
+            "MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo)",
+            log1Values[2].Value
+        );
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncParam2"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", logs[1].Message);
-        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[1].State);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncParam2"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            logs[1].Message
+        );
+        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[1].State
+        );
         Assert.Equal("MyBindAsyncRecord", log2Values[0].Value);
         Assert.Equal("myBindAsyncParam2", log2Values[1].Value);
-        Assert.Equal("MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo)", log2Values[2].Value);
+        Assert.Equal(
+            "MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo)",
+            log2Values[2].Value
+        );
     }
 
     [Fact]
@@ -259,14 +317,18 @@ app.MapGet("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         // Not supplying any headers will cause the HttpContext BindAsync overload to return null.
         var httpContext = CreateHttpContext();
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -278,7 +340,10 @@ app.MapGet("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Required parameter ""MyBindAsyncRecord myBindAsyncParam1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Required parameter ""MyBindAsyncRecord myBindAsyncParam1"" was not provided from MyBindAsyncRecord.BindAsync(HttpContext, ParameterInfo).",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -311,16 +376,26 @@ app.MapGet("/", TestAction);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[0].EventId);
         Assert.Equal(LogLevel.Debug, logs[0].LogLevel);
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", logs[0].Message);
-        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[0].State);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            logs[0].Message
+        );
+        var log1Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[0].State
+        );
         Assert.Equal("MySimpleBindAsyncRecord", log1Values[0].Value);
         Assert.Equal("mySimpleBindAsyncRecord1", log1Values[1].Value);
         Assert.Equal("MySimpleBindAsyncRecord.BindAsync(HttpContext)", log1Values[2].Value);
 
         Assert.Equal(new EventId(4, "RequiredParameterNotProvided"), logs[1].EventId);
         Assert.Equal(LogLevel.Debug, logs[1].LogLevel);
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord2"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", logs[1].Message);
-        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logs[1].State);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord2"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            logs[1].Message
+        );
+        var log2Values = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logs[1].State
+        );
         Assert.Equal("MySimpleBindAsyncRecord", log2Values[0].Value);
         Assert.Equal("mySimpleBindAsyncRecord2", log2Values[1].Value);
         Assert.Equal("MySimpleBindAsyncRecord.BindAsync(HttpContext)", log2Values[2].Value);
@@ -339,13 +414,17 @@ app.MapGet("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         // Not supplying any headers will cause the HttpContext BindAsync overload to return null.
         var httpContext = CreateHttpContext();
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
 
@@ -357,7 +436,10 @@ app.MapGet("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Required parameter ""MySimpleBindAsyncRecord mySimpleBindAsyncRecord1"" was not provided from MySimpleBindAsyncRecord.BindAsync(HttpContext).",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
     }
 
@@ -376,21 +458,28 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = shouldThrow);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = shouldThrow
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
         var httpContext = CreateHttpContext();
         httpContext.Request.Headers["Content-Type"] = "application/xml";
         httpContext.Request.Headers["Content-Length"] = "1";
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         var request = endpoint.RequestDelegate(httpContext);
 
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -401,8 +490,13 @@ app.MapPost("/", TestAction);
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(6, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", logMessage.Message);
-            var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logMessage.State);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                logMessage.Message
+            );
+            var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+                logMessage.State
+            );
             Assert.Equal("application/xml", logValues[0].Value);
         }
     }
@@ -422,14 +516,13 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = shouldThrow);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = shouldThrow
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
-        Todo originalTodo = new()
-        {
-            Name = "Write more tests!"
-        };
+        Todo originalTodo = new() { Name = "Write more tests!" };
 
         var httpContext = CreateHttpContextWithBody(originalTodo);
         httpContext.Request.Headers["Content-Type"] = "application/xml";
@@ -439,7 +532,10 @@ app.MapPost("/", TestAction);
         if (shouldThrow)
         {
             var ex = await Assert.ThrowsAsync<BadHttpRequestException>(() => request);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", ex.Message);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                ex.Message
+            );
             Assert.Equal(StatusCodes.Status415UnsupportedMediaType, ex.StatusCode);
         }
         else
@@ -450,8 +546,13 @@ app.MapPost("/", TestAction);
             var logMessage = Assert.Single(TestSink.Writes);
             Assert.Equal(new EventId(6, "UnexpectedContentType"), logMessage.EventId);
             Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-            Assert.Equal("Expected a supported JSON media type but got \"application/xml\".", logMessage.Message);
-            var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logMessage.State);
+            Assert.Equal(
+                "Expected a supported JSON media type but got \"application/xml\".",
+                logMessage.Message
+            );
+            var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+                logMessage.State
+            );
             Assert.Equal("application/xml", logValues[0].Value);
         }
     }
@@ -459,7 +560,9 @@ app.MapPost("/", TestAction);
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task RequestDelegateLogsIOExceptionsAsDebugDoesNotAbortAndNeverThrows(bool throwOnBadRequests)
+    public async Task RequestDelegateLogsIOExceptionsAsDebugDoesNotAbortAndNeverThrows(
+        bool throwOnBadRequests
+    )
     {
         var source = """
 void TestAction(HttpContext httpContext, [FromBody] Todo todo)
@@ -471,7 +574,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = throwOnBadRequests);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = throwOnBadRequests
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -481,7 +586,9 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(ioException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -508,7 +615,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = false);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = false
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
         var jsonException = new JsonException();
@@ -517,7 +626,9 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -529,9 +640,14 @@ app.MapPost("/", TestAction);
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(2, "InvalidJsonRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            logMessage.Message
+        );
         Assert.Same(jsonException, logMessage.Exception);
-        var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logMessage.State);
+        var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logMessage.State
+        );
         Assert.Equal("Todo", logValues[0].Value);
         Assert.Equal("todo", logValues[1].Value);
     }
@@ -549,7 +665,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
         var jsonException = new JsonException();
@@ -558,9 +676,13 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new ExceptionThrowingRequestBodyStream(jsonException);
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
         // The httpContext should be untouched.
@@ -571,7 +693,10 @@ app.MapPost("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.Same(jsonException, badHttpRequestException.InnerException);
     }
@@ -589,7 +714,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = false);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = false
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -597,7 +724,9 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
         await endpoint.RequestDelegate(httpContext);
 
@@ -609,9 +738,14 @@ app.MapPost("/", TestAction);
         var logMessage = Assert.Single(TestSink.Writes);
         Assert.Equal(new EventId(2, "InvalidJsonRequestBody"), logMessage.EventId);
         Assert.Equal(LogLevel.Debug, logMessage.LogLevel);
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", logMessage.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            logMessage.Message
+        );
         Assert.IsType<JsonException>(logMessage.Exception);
-        var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(logMessage.State);
+        var logValues = Assert.IsAssignableFrom<IReadOnlyList<KeyValuePair<string, object>>>(
+            logMessage.State
+        );
         Assert.Equal("Todo", logValues[0].Value);
         Assert.Equal("todo", logValues[1].Value);
     }
@@ -629,7 +763,9 @@ app.MapPost("/", TestAction);
         var (_, compilation) = await RunGeneratorAsync(source);
         var serviceProvider = CreateServiceProvider(serviceCollection =>
         {
-            serviceCollection.Configure<RouteHandlerOptions>(options => options.ThrowOnBadRequest = true);
+            serviceCollection.Configure<RouteHandlerOptions>(options =>
+                options.ThrowOnBadRequest = true
+            );
         });
         var endpoint = GetEndpointFromCompilation(compilation, serviceProvider: serviceProvider);
 
@@ -637,9 +773,13 @@ app.MapPost("/", TestAction);
         httpContext.Request.Headers["Content-Type"] = "application/json";
         httpContext.Request.Headers["Content-Length"] = "1";
         httpContext.Request.Body = new MemoryStream(Encoding.UTF8.GetBytes("{"));
-        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(new RequestBodyDetectionFeature(true));
+        httpContext.Features.Set<IHttpRequestBodyDetectionFeature>(
+            new RequestBodyDetectionFeature(true)
+        );
 
-        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(() => endpoint.RequestDelegate(httpContext));
+        var badHttpRequestException = await Assert.ThrowsAsync<BadHttpRequestException>(
+            () => endpoint.RequestDelegate(httpContext)
+        );
 
         Assert.Null(httpContext.Items["invoked"]);
         // The httpContext should be untouched.
@@ -650,7 +790,10 @@ app.MapPost("/", TestAction);
         // We don't log bad requests when we throw.
         Assert.Empty(TestSink.Writes);
 
-        Assert.Equal(@"Failed to read parameter ""Todo todo"" from the request body as JSON.", badHttpRequestException.Message);
+        Assert.Equal(
+            @"Failed to read parameter ""Todo todo"" from the request body as JSON.",
+            badHttpRequestException.Message
+        );
         Assert.Equal(400, badHttpRequestException.StatusCode);
         Assert.IsType<JsonException>(badHttpRequestException.InnerException);
     }

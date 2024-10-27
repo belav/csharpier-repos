@@ -9,7 +9,8 @@ namespace System.Web.WebPages.Instrumentation
     public class InstrumentationService
     {
         private static readonly bool _isAvailable = HttpContextAdapter.IsInstrumentationAvailable;
-        private bool _localIsAvailable = _isAvailable && PageInstrumentationServiceAdapter.IsEnabled;
+        private bool _localIsAvailable =
+            _isAvailable && PageInstrumentationServiceAdapter.IsEnabled;
 
         private PageInstrumentationServiceAdapter _instrumentationServiceAdapter;
         private bool _isInstrumentationServiceAdapterInitialized;
@@ -26,18 +27,47 @@ namespace System.Web.WebPages.Instrumentation
             internal set { _localIsAvailable = value; }
         }
 
-        internal Func<HttpContextBase, PageInstrumentationServiceAdapter> ExtractInstrumentationService { get; set; }
-        internal Func<string, TextWriter, int, int, bool, PageExecutionContextAdapter> CreateContext { get; set; }
+        internal Func<
+            HttpContextBase,
+            PageInstrumentationServiceAdapter
+        > ExtractInstrumentationService { get; set; }
+        internal Func<
+            string,
+            TextWriter,
+            int,
+            int,
+            bool,
+            PageExecutionContextAdapter
+        > CreateContext { get; set; }
 
-        public void BeginContext(HttpContextBase context, string virtualPath, TextWriter writer, int startPosition, int length, bool isLiteral)
+        public void BeginContext(
+            HttpContextBase context,
+            string virtualPath,
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             if (IsAvailable)
             {
-                PageInstrumentationServiceAdapter instrumentationService = GetInstrumentationService(context);
-                if (instrumentationService != null && instrumentationService.ExecutionListeners.Count > 0)
+                PageInstrumentationServiceAdapter instrumentationService =
+                    GetInstrumentationService(context);
+                if (
+                    instrumentationService != null
+                    && instrumentationService.ExecutionListeners.Count > 0
+                )
                 {
-                    var instrumentationContext = CreateContext(virtualPath, writer, startPosition, length, isLiteral);
-                    foreach (PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners)
+                    var instrumentationContext = CreateContext(
+                        virtualPath,
+                        writer,
+                        startPosition,
+                        length,
+                        isLiteral
+                    );
+                    foreach (
+                        PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners
+                    )
                     {
                         listener.BeginContext(instrumentationContext);
                     }
@@ -45,15 +75,34 @@ namespace System.Web.WebPages.Instrumentation
             }
         }
 
-        public void EndContext(HttpContextBase context, string virtualPath, TextWriter writer, int startPosition, int length, bool isLiteral)
+        public void EndContext(
+            HttpContextBase context,
+            string virtualPath,
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             if (IsAvailable)
             {
-                PageInstrumentationServiceAdapter instrumentationService = GetInstrumentationService(context);
-                if (instrumentationService != null && instrumentationService.ExecutionListeners.Count > 0)
+                PageInstrumentationServiceAdapter instrumentationService =
+                    GetInstrumentationService(context);
+                if (
+                    instrumentationService != null
+                    && instrumentationService.ExecutionListeners.Count > 0
+                )
                 {
-                    var instrumentationContext = CreateContext(virtualPath, writer, startPosition, length, isLiteral);
-                    foreach (PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners)
+                    var instrumentationContext = CreateContext(
+                        virtualPath,
+                        writer,
+                        startPosition,
+                        length,
+                        isLiteral
+                    );
+                    foreach (
+                        PageExecutionListenerAdapter listener in instrumentationService.ExecutionListeners
+                    )
                     {
                         listener.EndContext(instrumentationContext);
                     }
@@ -61,7 +110,13 @@ namespace System.Web.WebPages.Instrumentation
             }
         }
 
-        private static PageExecutionContextAdapter CreateSystemWebContext(string virtualPath, TextWriter writer, int startPosition, int length, bool isLiteral)
+        private static PageExecutionContextAdapter CreateSystemWebContext(
+            string virtualPath,
+            TextWriter writer,
+            int startPosition,
+            int length,
+            bool isLiteral
+        )
         {
             return new PageExecutionContextAdapter()
             {
@@ -69,7 +124,7 @@ namespace System.Web.WebPages.Instrumentation
                 TextWriter = writer,
                 StartPosition = startPosition,
                 Length = length,
-                IsLiteral = isLiteral
+                IsLiteral = isLiteral,
             };
         }
 
@@ -86,7 +141,9 @@ namespace System.Web.WebPages.Instrumentation
             return _instrumentationServiceAdapter;
         }
 
-        private PageInstrumentationServiceAdapter GetInstrumentationServiceUncached(HttpContextBase context)
+        private PageInstrumentationServiceAdapter GetInstrumentationServiceUncached(
+            HttpContextBase context
+        )
         {
             HttpContextAdapter ctx = new HttpContextAdapter(context);
             return ctx.PageInstrumentation;

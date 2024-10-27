@@ -35,11 +35,7 @@ public class ThirdModelNoNamespace
 }
 
 [OptionsValidator]
-public partial class FirstValidatorNoNamespace : IValidateOptions<FirstModelNoNamespace>
-{
-}
+public partial class FirstValidatorNoNamespace : IValidateOptions<FirstModelNoNamespace> { }
 
 [OptionsValidator]
-public partial class SecondValidatorNoNamespace : IValidateOptions<SecondModelNoNamespace>
-{
-}
+public partial class SecondValidatorNoNamespace : IValidateOptions<SecondModelNoNamespace> { }

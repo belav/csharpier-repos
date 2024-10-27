@@ -1,19 +1,19 @@
 ﻿// ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 //
 // <OWNER>GPaperin</OWNER>
 // <OWNER>Microsoft</OWNER>
 
 using System;
-using System.Security;
 using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics.Contracts;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
+using System.Security;
 
 namespace System.Runtime.InteropServices.WindowsRuntime
 {
@@ -49,19 +49,29 @@ namespace System.Runtime.InteropServices.WindowsRuntime
 
                 if (((uint)Int32.MaxValue) < size)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingDictionaryTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingDictionaryTooLarge"
+                        )
+                    );
                 }
 
                 return (int)size;
             }
             else
             {
-                IVectorView<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<IVectorView<KeyValuePair<K, V>>>(this);
+                IVectorView<KeyValuePair<K, V>> _this_vector = JitHelpers.UnsafeCast<
+                    IVectorView<KeyValuePair<K, V>>
+                >(this);
                 uint size = _this_vector.Size;
 
                 if (((uint)Int32.MaxValue) < size)
                 {
-                    throw new InvalidOperationException(Environment.GetResourceString("InvalidOperation_CollectionBackingListTooLarge"));
+                    throw new InvalidOperationException(
+                        Environment.GetResourceString(
+                            "InvalidOperation_CollectionBackingListTooLarge"
+                        )
+                    );
                 }
 
                 return (int)size;

@@ -20,7 +20,11 @@ public class LocalizationServiceCollectionExtensionsTest
         LocalizationServiceCollectionExtensions.AddLocalizationServices(collection);
 
         // Assert
-        AssertContainsSingle(collection, typeof(IStringLocalizerFactory), typeof(ResourceManagerStringLocalizerFactory));
+        AssertContainsSingle(
+            collection,
+            typeof(IStringLocalizerFactory),
+            typeof(ResourceManagerStringLocalizerFactory)
+        );
         AssertContainsSingle(collection, typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
     }
 
@@ -33,34 +37,42 @@ public class LocalizationServiceCollectionExtensionsTest
         // Act
         LocalizationServiceCollectionExtensions.AddLocalizationServices(
             collection,
-            options => options.ResourcesPath = "Resources");
+            options => options.ResourcesPath = "Resources"
+        );
 
-        AssertContainsSingle(collection, typeof(IStringLocalizerFactory), typeof(ResourceManagerStringLocalizerFactory));
+        AssertContainsSingle(
+            collection,
+            typeof(IStringLocalizerFactory),
+            typeof(ResourceManagerStringLocalizerFactory)
+        );
         AssertContainsSingle(collection, typeof(IStringLocalizer<>), typeof(StringLocalizer<>));
     }
 
     private void AssertContainsSingle(
         IServiceCollection services,
         Type serviceType,
-        Type implementationType)
+        Type implementationType
+    )
     {
         var matches = services
             .Where(sd =>
-                sd.ServiceType == serviceType &&
-                sd.ImplementationType == implementationType)
+                sd.ServiceType == serviceType && sd.ImplementationType == implementationType
+            )
             .ToArray();
 
         if (matches.Length == 0)
         {
             Assert.True(
                 false,
-                $"Could not find an instance of {implementationType} registered as {serviceType}");
+                $"Could not find an instance of {implementationType} registered as {serviceType}"
+            );
         }
         else if (matches.Length > 1)
         {
             Assert.True(
                 false,
-                $"Found multiple instances of {implementationType} registered as {serviceType}");
+                $"Found multiple instances of {implementationType} registered as {serviceType}"
+            );
         }
     }
 }

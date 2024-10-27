@@ -7,9 +7,7 @@ namespace Microsoft.AspNetCore.Antiforgery;
 
 public class TestOptionsManager : IOptions<AntiforgeryOptions>
 {
-    public TestOptionsManager()
-    {
-    }
+    public TestOptionsManager() { }
 
     public TestOptionsManager(AntiforgeryOptions options)
     {

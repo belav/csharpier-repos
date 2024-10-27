@@ -15,7 +15,10 @@ namespace Microsoft.AspNetCore.Routing.Constraints;
 /// <summary>
 /// Constrains a route parameter to represent only 64-bit integer values.
 /// </summary>
-public class LongRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatchingPolicy, ICachableParameterPolicy
+public class LongRouteConstraint
+    : IRouteConstraint,
+        IParameterLiteralNodeMatchingPolicy,
+        ICachableParameterPolicy
 #else
 internal class LongRouteConstraint : IRouteConstraint
 #endif
@@ -27,10 +30,10 @@ internal class LongRouteConstraint : IRouteConstraint
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
 #else
-        string routeKey,
-        RouteValueDictionary values)
+        string routeKey, RouteValueDictionary values)
 #endif
     {
         ArgumentNullException.ThrowIfNull(routeKey);
@@ -52,7 +55,12 @@ internal class LongRouteConstraint : IRouteConstraint
 
     private static bool CheckConstraintCore(string? valueString)
     {
-        return long.TryParse(valueString, NumberStyles.Integer, CultureInfo.InvariantCulture, out _);
+        return long.TryParse(
+            valueString,
+            NumberStyles.Integer,
+            CultureInfo.InvariantCulture,
+            out _
+        );
     }
 
 #if !COMPONENTS

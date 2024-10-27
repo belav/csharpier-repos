@@ -28,11 +28,14 @@ public class Startup
         app.UseRouting();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.Map("/", async context =>
-            {
-                context.Response.ContentType = "text/plain";
-                await context.Response.WriteAsync("Hello World!");
-            });
+            endpoints.Map(
+                "/",
+                async context =>
+                {
+                    context.Response.ContentType = "text/plain";
+                    await context.Response.WriteAsync("Hello World!");
+                }
+            );
         });
     }
 }

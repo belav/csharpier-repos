@@ -16,9 +16,7 @@ namespace System.Web.Mvc
         private CultureInfo _instanceCulture;
 
         // default constructor so that subclassed types can set the properties themselves
-        protected ValueProviderResult()
-        {
-        }
+        protected ValueProviderResult() { }
 
         public ValueProviderResult(object rawValue, string attemptedValue, CultureInfo culture)
         {
@@ -44,8 +42,16 @@ namespace System.Web.Mvc
 
         public object RawValue { get; protected set; }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Conversion failure is not fatal")]
-        private static object ConvertSimpleType(CultureInfo culture, object value, Type destinationType)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Conversion failure is not fatal"
+        )]
+        private static object ConvertSimpleType(
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
@@ -78,9 +84,7 @@ namespace System.Web.Mvc
                     {
                         return convertible.ToType(destinationType, culture);
                     }
-                    catch
-                    {
-                    }
+                    catch { }
                 }
             }
 
@@ -99,29 +103,52 @@ namespace System.Web.Mvc
                     return Enum.ToObject(destinationType, (int)value);
                 }
 
-                string message = String.Format(CultureInfo.CurrentCulture, MvcResources.ValueProviderResult_NoConverterExists,
-                                               value.GetType().FullName, destinationType.FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ValueProviderResult_NoConverterExists,
+                    value.GetType().FullName,
+                    destinationType.FullName
+                );
                 throw new InvalidOperationException(message);
             }
 
             try
             {
-                object convertedValue = (canConvertFrom)
-                                            ? converter.ConvertFrom(null /* context */, culture, value)
-                                            : converter.ConvertTo(null /* context */, culture, value, destinationType);
+                object convertedValue =
+                    (canConvertFrom)
+                        ? converter.ConvertFrom(
+                            null /* context */
+                            ,
+                            culture,
+                            value
+                        )
+                        : converter.ConvertTo(
+                            null /* context */
+                            ,
+                            culture,
+                            value,
+                            destinationType
+                        );
                 return convertedValue;
             }
             catch (Exception ex)
             {
-                string message = String.Format(CultureInfo.CurrentCulture, MvcResources.ValueProviderResult_ConversionThrew,
-                                               value.GetType().FullName, destinationType.FullName);
+                string message = String.Format(
+                    CultureInfo.CurrentCulture,
+                    MvcResources.ValueProviderResult_ConversionThrew,
+                    value.GetType().FullName,
+                    destinationType.FullName
+                );
                 throw new InvalidOperationException(message, ex);
             }
         }
 
         public object ConvertTo(Type type)
         {
-            return ConvertTo(type, null /* culture */);
+            return ConvertTo(
+                type,
+                null /* culture */
+            );
         }
 
         public virtual object ConvertTo(Type type, CultureInfo culture)
@@ -135,7 +162,11 @@ namespace System.Web.Mvc
             return UnwrapPossibleArrayType(cultureToUse, RawValue, type);
         }
 
-        private static object UnwrapPossibleArrayType(CultureInfo culture, object value, Type destinationType)
+        private static object UnwrapPossibleArrayType(
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
@@ -150,10 +181,17 @@ namespace System.Web.Mvc
                 if (valueAsArray != null)
                 {
                     // case 1: both destination + source type are arrays, so convert each element
-                    IList converted = Array.CreateInstance(destinationElementType, valueAsArray.Length);
+                    IList converted = Array.CreateInstance(
+                        destinationElementType,
+                        valueAsArray.Length
+                    );
                     for (int i = 0; i < valueAsArray.Length; i++)
                     {
-                        converted[i] = ConvertSimpleType(culture, valueAsArray.GetValue(i), destinationElementType);
+                        converted[i] = ConvertSimpleType(
+                            culture,
+                            valueAsArray.GetValue(i),
+                            destinationElementType
+                        );
                     }
                     return converted;
                 }

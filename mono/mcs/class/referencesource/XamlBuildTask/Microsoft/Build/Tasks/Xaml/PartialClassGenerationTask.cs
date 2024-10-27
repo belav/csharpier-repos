@@ -38,8 +38,7 @@ namespace Microsoft.Build.Tasks.Xaml
         [Output]
         public ITaskItem[] ApplicationMarkup { get; set; }
 
-        public string AssemblyName
-        { get; set; }
+        public string AssemblyName { get; set; }
 
         public string[] KnownReferencePaths { get; set; }
 
@@ -47,51 +46,30 @@ namespace Microsoft.Build.Tasks.Xaml
         [Output]
         public ITaskItem[] GeneratedResources
         {
-            get
-            {
-                return generatedResources.ToArray();
-            }
-
-            set
-            {
-                generatedResources = new List<ITaskItem>(value);
-            }
+            get { return generatedResources.ToArray(); }
+            set { generatedResources = new List<ITaskItem>(value); }
         }
-        
+
         [Fx.Tag.KnownXamlExternal]
         [Output]
         public ITaskItem[] GeneratedCodeFiles
         {
-            get
-            {
-                return generatedCodeFiles.ToArray();
-            }
+            get { return generatedCodeFiles.ToArray(); }
+            set { generatedCodeFiles = new List<ITaskItem>(value); }
+        }
 
-            set
-            {
-                generatedCodeFiles = new List<ITaskItem>(value);
-            }
-        }       
-
-        public string GeneratedSourceExtension
-        { get; set; }
+        public string GeneratedSourceExtension { get; set; }
 
         [Required]
-        public string Language
-        { get; set; }
+        public string Language { get; set; }
 
         [Required]
-        public string OutputPath
-        { get; set; }
+        public string OutputPath { get; set; }
 
         // This is Required for Dev11, but to allow things to work with a Dev10 targets file, we are not marking it required.
         public string MSBuildProjectDirectory
         {
-            get
-            {
-                return this.msBuildProjectDirectory;
-            }
-
+            get { return this.msBuildProjectDirectory; }
             set
             {
                 this.msBuildProjectDirectory = value;
@@ -102,31 +80,23 @@ namespace Microsoft.Build.Tasks.Xaml
         }
 
         [Fx.Tag.KnownXamlExternal]
-        public ITaskItem[] References
-        { get; set; }
+        public ITaskItem[] References { get; set; }
 
-        public string RootNamespace
-        { get; set; }
+        public string RootNamespace { get; set; }
 
         [Fx.Tag.KnownXamlExternal]
-        public ITaskItem[] SourceCodeFiles
-        { get; set; }
+        public ITaskItem[] SourceCodeFiles { get; set; }
 
         [Output]
-        public bool RequiresCompilationPass2
-        { get; set; }
+        public bool RequiresCompilationPass2 { get; set; }
 
-        public string BuildTaskPath
-        { get; set; }
+        public string BuildTaskPath { get; set; }
 
-        public bool IsInProcessXamlMarkupCompile
-        { get; set; }
+        public bool IsInProcessXamlMarkupCompile { get; set; }
 
-        public ITaskItem[] XamlBuildTypeGenerationExtensionNames
-        { get; set; }
+        public ITaskItem[] XamlBuildTypeGenerationExtensionNames { get; set; }
 
-        public ITaskItem[] XamlBuildTypeInspectionExtensionNames
-        { get; set; }
+        public ITaskItem[] XamlBuildTypeInspectionExtensionNames { get; set; }
 
         private static AppDomain inProcessAppDomain;
         private static Dictionary<string, DateTime> referencesTimeStampCache;
@@ -172,7 +142,7 @@ namespace Microsoft.Build.Tasks.Xaml
                 perfEventProvider.WriteEvent(VSDesignerPerfEvents.XamlBuildTaskExecuteEnd);
             }
         }
-            
+
         bool ReuseAppDomainAndExecute()
         {
             AppDomain appDomain = null;
@@ -246,9 +216,11 @@ namespace Microsoft.Build.Tasks.Xaml
 
         bool ExecuteInternal(AppDomain appDomain)
         {
-            PartialClassGenerationTaskInternal wrapper = (PartialClassGenerationTaskInternal)appDomain.CreateInstanceAndUnwrap(
-                                                        Assembly.GetExecutingAssembly().FullName,
-                                                        typeof(PartialClassGenerationTaskInternal).FullName);
+            PartialClassGenerationTaskInternal wrapper = (PartialClassGenerationTaskInternal)
+                appDomain.CreateInstanceAndUnwrap(
+                    Assembly.GetExecutingAssembly().FullName,
+                    typeof(PartialClassGenerationTaskInternal).FullName
+                );
 
             PopulateBuildArtifacts(wrapper);
 
@@ -263,12 +235,15 @@ namespace Microsoft.Build.Tasks.Xaml
 
         AppDomain CreateNewAppDomain()
         {
-            return XamlBuildTaskServices.CreateAppDomain("PartialClassAppDomain_" + Guid.NewGuid(), BuildTaskPath);
+            return XamlBuildTaskServices.CreateAppDomain(
+                "PartialClassAppDomain_" + Guid.NewGuid(),
+                BuildTaskPath
+            );
         }
-        
-        // For Intellisense builds, we re-use the AppDomain for successive builds instead of creating a new one every time, 
+
+        // For Intellisense builds, we re-use the AppDomain for successive builds instead of creating a new one every time,
         // if the references have not changed (there are no new references and they have not been updated since the last build)
-        // This method accesses the static referencesTimeStampCache (indirectly). 
+        // This method accesses the static referencesTimeStampCache (indirectly).
         // To ensure thread safety, this method should be called inside a lock/monitor
         AppDomain GetInProcessAppDomain(out bool newAppDomain)
         {
@@ -294,7 +269,10 @@ namespace Microsoft.Build.Tasks.Xaml
         bool AreReferencesChanged()
         {
             bool refsChanged = false;
-            if (referencesTimeStampCache == null || referencesTimeStampCache.Count != References.Length)
+            if (
+                referencesTimeStampCache == null
+                || referencesTimeStampCache.Count != References.Length
+            )
             {
                 refsChanged = true;
             }
@@ -304,9 +282,11 @@ namespace Microsoft.Build.Tasks.Xaml
                 {
                     string fullPath = Path.GetFullPath(reference.ItemSpec);
                     DateTime timeStamp = File.GetLastWriteTimeUtc(fullPath);
-                    if (!referencesTimeStampCache.ContainsKey(fullPath)
+                    if (
+                        !referencesTimeStampCache.ContainsKey(fullPath)
                         || timeStamp > referencesTimeStampCache[fullPath]
-                        || timeStamp == DateTime.MinValue)
+                        || timeStamp == DateTime.MinValue
+                    )
                     {
                         refsChanged = true;
                         break;
@@ -334,15 +314,17 @@ namespace Microsoft.Build.Tasks.Xaml
             IList<ITaskItem> applicationMarkup = null;
             if (this.ApplicationMarkup != null)
             {
-                applicationMarkup = this.ApplicationMarkup
-                    .Select(i => new DelegatingTaskItem(i) as ITaskItem).ToList();
+                applicationMarkup = this
+                    .ApplicationMarkup.Select(i => new DelegatingTaskItem(i) as ITaskItem)
+                    .ToList();
             }
             wrapper.ApplicationMarkup = applicationMarkup;
 
             wrapper.BuildLogger = this.Log;
 
-            wrapper.References = this.References
-                .Select(i => new DelegatingTaskItem(i) as ITaskItem).ToList();
+            wrapper.References = this
+                .References.Select(i => new DelegatingTaskItem(i) as ITaskItem)
+                .ToList();
 
             IList<string> sourceCodeFiles = null;
             if (this.SourceCodeFiles != null)
@@ -362,14 +344,20 @@ namespace Microsoft.Build.Tasks.Xaml
             wrapper.GeneratedSourceExtension = this.GeneratedSourceExtension;
             wrapper.IsInProcessXamlMarkupCompile = this.IsInProcessXamlMarkupCompile;
             wrapper.MSBuildProjectDirectory = this.MSBuildProjectDirectory;
-            wrapper.XamlBuildTaskTypeGenerationExtensionNames = XamlBuildTaskServices.GetXamlBuildTaskExtensionNames(this.XamlBuildTypeGenerationExtensionNames);
-            if (this.XamlBuildTypeInspectionExtensionNames != null && this.XamlBuildTypeInspectionExtensionNames.Length > 0)
+            wrapper.XamlBuildTaskTypeGenerationExtensionNames =
+                XamlBuildTaskServices.GetXamlBuildTaskExtensionNames(
+                    this.XamlBuildTypeGenerationExtensionNames
+                );
+            if (
+                this.XamlBuildTypeInspectionExtensionNames != null
+                && this.XamlBuildTypeInspectionExtensionNames.Length > 0
+            )
             {
                 wrapper.MarkupCompilePass2ExtensionsPresent = true;
             }
 
             wrapper.SupportExtensions = this.supportExtensions;
-        }        
+        }
 
         void ExtractBuiltArtifacts(PartialClassGenerationTaskInternal wrapper)
         {
@@ -383,8 +371,12 @@ namespace Microsoft.Build.Tasks.Xaml
                 this.generatedCodeFiles.Add(new TaskItem(code));
             }
 
-            this.RequiresCompilationPass2 = wrapper.RequiresCompilationPass2 ||
-                (this.XamlBuildTypeInspectionExtensionNames != null && this.XamlBuildTypeInspectionExtensionNames.Length > 0);
+            this.RequiresCompilationPass2 =
+                wrapper.RequiresCompilationPass2
+                || (
+                    this.XamlBuildTypeInspectionExtensionNames != null
+                    && this.XamlBuildTypeInspectionExtensionNames.Length > 0
+                );
         }
     }
 }

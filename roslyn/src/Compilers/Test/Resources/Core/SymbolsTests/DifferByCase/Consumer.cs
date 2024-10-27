@@ -5,45 +5,18 @@
 
 // csc /target:library Consumer.cs /r:TypeAndNamespaceDifferByCase.dll
 
-public class TC1
-    : SomeName.Dummy
-{ 
-}
+public class TC1 : SomeName.Dummy { }
 
+public class TC2 : somEnamE { }
 
-public class TC2
-    : somEnamE
-{
-}
+public class TC3 : somEnamE1 { }
 
+public class TC4 : SomeName1 { }
 
-public class TC3
-    : somEnamE1
-{
-}
+public class TC5 : somEnamE2.OtherName { }
 
-public class TC4
-    : SomeName1
-{
-}
+public class TC6 : SomeName2.OtherName { }
 
-public class TC5
-    : somEnamE2.OtherName
-{
-}
+public class TC7 : NestingClass.somEnamE3 { }
 
-public class TC6
-    : SomeName2.OtherName
-{
-}
-
-
-public class TC7
-    : NestingClass.somEnamE3
-{
-}
-
-public class TC8
-    : NestingClass.SomeName3
-{
-}
+public class TC8 : NestingClass.SomeName3 { }

@@ -7,13 +7,28 @@ using System.Security.Permissions;
 namespace System.Net.NetworkInformation
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
-    [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor | AttributeTargets.Class | AttributeTargets.Struct | AttributeTargets.Assembly, AllowMultiple = true, Inherited = false)]
+    [AttributeUsage(
+        AttributeTargets.Method
+            | AttributeTargets.Constructor
+            | AttributeTargets.Class
+            | AttributeTargets.Struct
+            | AttributeTargets.Assembly,
+        AllowMultiple = true,
+        Inherited = false
+    )]
     public sealed class NetworkInformationPermissionAttribute : CodeAccessSecurityAttribute
     {
-        public NetworkInformationPermissionAttribute(SecurityAction action) : base(action) { }
+        public NetworkInformationPermissionAttribute(SecurityAction action)
+            : base(action) { }
+
         public string Access { get; set; }
+
         public override IPermission CreatePermission() => null;
     }
 }

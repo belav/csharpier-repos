@@ -2,13 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Security;
+using System.Collections;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Diagnostics;
 using System.Runtime.InteropServices;
-using System.Collections;
+using System.Security;
+using System.Threading;
 using Xunit;
 
 public delegate void MyDelegate();
@@ -27,9 +27,7 @@ public class GenType<T>
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public virtual void baz()
-    {
-    }
+    public virtual void baz() { }
 }
 
 public class cs1
@@ -37,14 +35,10 @@ public class cs1
     internal static int s_Zero = 0;
     internal static int s_i = 0;
 
-    public cs1()
-    {
-    }
+    public cs1() { }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static void foo()
-    {
-    }
+    public static void foo() { }
 
     [Fact]
     public static int TestEntryPoint()
@@ -64,4 +58,3 @@ public class cs1
         }
     }
 }
-

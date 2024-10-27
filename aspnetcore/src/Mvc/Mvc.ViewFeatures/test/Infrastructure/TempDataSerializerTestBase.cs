@@ -27,10 +27,7 @@ public abstract class TempDataSerializerTestBase
         // Arrange
         var key = "NullKey";
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, null }
-            };
+        var input = new Dictionary<string, object> { { key, null } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -51,10 +48,7 @@ public abstract class TempDataSerializerTestBase
         // Arrange
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -73,10 +67,7 @@ public abstract class TempDataSerializerTestBase
         // Arrange
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -94,10 +85,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var value = "test-value";
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -115,10 +103,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var value = DayOfWeek.Friday;
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -136,10 +121,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var value = new DateTime(2009, 1, 1, 12, 37, 43);
         var testProvider = GetTempDataSerializer();
-        var input = new Dictionary<string, object>
-            {
-                { key, value },
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -157,10 +139,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = Guid.NewGuid();
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -180,9 +159,9 @@ public abstract class TempDataSerializerTestBase
         var testProvider = GetTempDataSerializer();
         var value = new DateTime(2009, 1, 1, 12, 37, 43);
         var input = new Dictionary<string, object>
-            {
-                { key, value.ToString(CultureInfo.InvariantCulture) }
-            };
+        {
+            { key, value.ToString(CultureInfo.InvariantCulture) },
+        };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -201,10 +180,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = Guid.NewGuid();
-        var input = new Dictionary<string, object>
-            {
-                { key, value.ToString("N") }
-            };
+        var input = new Dictionary<string, object> { { key, value.ToString("N") } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -223,10 +199,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = Guid.NewGuid();
-        var input = new Dictionary<string, object>
-            {
-                { key, value.ToString() }
-            };
+        var input = new Dictionary<string, object> { { key, value.ToString() } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -244,10 +217,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = new[] { 1, 2, 4, 3 };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -265,10 +235,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = new[] { "Hello", "world" };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -286,10 +253,7 @@ public abstract class TempDataSerializerTestBase
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
         var value = new List<string> { "Hello", "world" };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -306,15 +270,8 @@ public abstract class TempDataSerializerTestBase
         // Arrange
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
-        var value = new Dictionary<string, string>
-            {
-                { "Key1", "Value1" },
-                { "Key2", "Value2" },
-            };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var value = new Dictionary<string, string> { { "Key1", "Value1" }, { "Key2", "Value2" } };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -331,15 +288,8 @@ public abstract class TempDataSerializerTestBase
         // Arrange
         var key = "test-key";
         var testProvider = GetTempDataSerializer();
-        var value = new Dictionary<string, int>
-            {
-                { "Key1", 7 },
-                { "Key2", 24 },
-            };
-        var input = new Dictionary<string, object>
-            {
-                { key, value }
-            };
+        var value = new Dictionary<string, int> { { "Key1", 7 }, { "Key2", 24 } };
+        var input = new Dictionary<string, object> { { key, value } };
 
         // Act
         var bytes = testProvider.Serialize(input);
@@ -352,4 +302,3 @@ public abstract class TempDataSerializerTestBase
 
     protected abstract TempDataSerializer GetTempDataSerializer();
 }
-

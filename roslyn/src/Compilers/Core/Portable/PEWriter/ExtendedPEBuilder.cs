@@ -9,16 +9,15 @@ using System.Diagnostics;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Reflection.PortableExecutable;
-using Microsoft.CodeAnalysis.PooledObjects;
 using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.PooledObjects;
 
 namespace Microsoft.Cci
 {
     /// <summary>
     /// This PEBuilder adds an .mvid section.
     /// </summary>
-    internal sealed class ExtendedPEBuilder
-        : ManagedPEBuilder
+    internal sealed class ExtendedPEBuilder : ManagedPEBuilder
     {
         private const string MvidSectionName = ".mvid";
         public const int SizeOfGuid = 16;
@@ -41,9 +40,21 @@ namespace Microsoft.Cci
             MethodDefinitionHandle entryPoint,
             CorFlags flags,
             Func<IEnumerable<Blob>, BlobContentId> deterministicIdProvider,
-            bool withMvidSection)
-            : base(header, metadataRootBuilder, ilStream, mappedFieldData, managedResources, nativeResources,
-                  debugDirectoryBuilder, strongNameSignatureSize, entryPoint, flags, deterministicIdProvider)
+            bool withMvidSection
+        )
+            : base(
+                header,
+                metadataRootBuilder,
+                ilStream,
+                mappedFieldData,
+                managedResources,
+                nativeResources,
+                debugDirectoryBuilder,
+                strongNameSignatureSize,
+                entryPoint,
+                flags,
+                deterministicIdProvider
+            )
         {
             _withMvidSection = withMvidSection;
         }
@@ -56,9 +67,14 @@ namespace Microsoft.Cci
             {
                 var builder = ArrayBuilder<Section>.GetInstance(baseSections.Length + 1);
 
-                builder.Add(new Section(MvidSectionName, SectionCharacteristics.MemRead |
-                    SectionCharacteristics.ContainsInitializedData |
-                    SectionCharacteristics.MemDiscardable));
+                builder.Add(
+                    new Section(
+                        MvidSectionName,
+                        SectionCharacteristics.MemRead
+                            | SectionCharacteristics.ContainsInitializedData
+                            | SectionCharacteristics.MemDiscardable
+                    )
+                );
 
                 builder.AddRange(baseSections);
                 return builder.ToImmutableAndFree();

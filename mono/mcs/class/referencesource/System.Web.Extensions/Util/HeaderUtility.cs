@@ -3,17 +3,25 @@
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
 // </copyright>
 //------------------------------------------------------------------------------
- 
-namespace System.Web.Util {
+
+namespace System.Web.Util
+{
     using System;
 
-    internal static class HeaderUtility {
-        public static bool IsEncodingInAcceptList(string acceptEncodingHeader, string expectedEncoding) {
-            if (String.IsNullOrEmpty(acceptEncodingHeader)) {
+    internal static class HeaderUtility
+    {
+        public static bool IsEncodingInAcceptList(
+            string acceptEncodingHeader,
+            string expectedEncoding
+        )
+        {
+            if (String.IsNullOrEmpty(acceptEncodingHeader))
+            {
                 return false;
             }
 
-            foreach (string encoding in acceptEncodingHeader.Split(',')) {
+            foreach (string encoding in acceptEncodingHeader.Split(','))
+            {
                 string e = encoding.Trim();
 
                 // This code will typically handle all existing browsers, which
@@ -24,7 +32,8 @@ namespace System.Web.Util {
                 // on specific encodings ("encoding1;q=0.8, encoding2 ;q=0.2") which we don't handle here.
                 // For those situations, the browser would get the uncompressed version.
                 // See RFC 2068 for details.
-                if (String.Equals(e, expectedEncoding, StringComparison.Ordinal)) {
+                if (String.Equals(e, expectedEncoding, StringComparison.Ordinal))
+                {
                     return true;
                 }
             }
@@ -32,6 +41,5 @@ namespace System.Web.Util {
             // no match found
             return false;
         }
-
     }
 }

@@ -14,12 +14,21 @@ namespace Microsoft.Web.Mvc
     // The unit tests for the ExpressionUtil.* types are in the System.Web.Mvc.Test project.
     public static class CachedExpressionCompiler
     {
-        private static readonly ParameterExpression _unusedParameterExpr = Expression.Parameter(typeof(object), "_unused");
+        private static readonly ParameterExpression _unusedParameterExpr = Expression.Parameter(
+            typeof(object),
+            "_unused"
+        );
 
         // Implements caching around LambdaExpression.Compile() so that equivalent expression trees only have to be
         // compiled once.
-        [SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an appropriate nesting of generic types")]
-        public static Func<TModel, TValue> Compile<TModel, TValue>(this Expression<Func<TModel, TValue>> lambdaExpression)
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1006:DoNotNestGenericTypesInMemberSignatures",
+            Justification = "This is an appropriate nesting of generic types"
+        )]
+        public static Func<TModel, TValue> Compile<TModel, TValue>(
+            this Expression<Func<TModel, TValue>> lambdaExpression
+        )
         {
             if (lambdaExpression == null)
             {
@@ -43,7 +52,10 @@ namespace Microsoft.Web.Mvc
 
         private static Func<object, object> Wrap(Expression arg)
         {
-            Expression<Func<object, object>> lambdaExpr = Expression.Lambda<Func<object, object>>(Expression.Convert(arg, typeof(object)), _unusedParameterExpr);
+            Expression<Func<object, object>> lambdaExpr = Expression.Lambda<Func<object, object>>(
+                Expression.Convert(arg, typeof(object)),
+                _unusedParameterExpr
+            );
             return ExpressionUtil.CachedExpressionCompiler.Process(lambdaExpr);
         }
     }

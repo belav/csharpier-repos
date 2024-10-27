@@ -22,23 +22,63 @@ namespace System.Data.Common.Internal.Materialization
     internal abstract class ShaperFactory
     {
         [MethodImpl(MethodImplOptions.NoInlining | MethodImplOptions.NoOptimization)]
-        internal static ShaperFactory Create(Type elementType, QueryCacheManager cacheManager, ColumnMap columnMap, MetadataWorkspace metadata, SpanIndex spanInfo, MergeOption mergeOption, bool valueLayer)
+        internal static ShaperFactory Create(
+            Type elementType,
+            QueryCacheManager cacheManager,
+            ColumnMap columnMap,
+            MetadataWorkspace metadata,
+            SpanIndex spanInfo,
+            MergeOption mergeOption,
+            bool valueLayer
+        )
         {
-            ShaperFactoryCreator creator = (ShaperFactoryCreator)Activator.CreateInstance(typeof(TypedShaperFactoryCreator<>).MakeGenericType(elementType));
-            return creator.TypedCreate(cacheManager, columnMap, metadata, spanInfo, mergeOption, valueLayer);
+            ShaperFactoryCreator creator = (ShaperFactoryCreator)
+                Activator.CreateInstance(
+                    typeof(TypedShaperFactoryCreator<>).MakeGenericType(elementType)
+                );
+            return creator.TypedCreate(
+                cacheManager,
+                columnMap,
+                metadata,
+                spanInfo,
+                mergeOption,
+                valueLayer
+            );
         }
 
         private abstract class ShaperFactoryCreator
         {
-            internal abstract ShaperFactory TypedCreate(QueryCacheManager cacheManager, ColumnMap columnMap, MetadataWorkspace metadata, SpanIndex spanInfo, MergeOption mergeOption, bool valueLayer);
+            internal abstract ShaperFactory TypedCreate(
+                QueryCacheManager cacheManager,
+                ColumnMap columnMap,
+                MetadataWorkspace metadata,
+                SpanIndex spanInfo,
+                MergeOption mergeOption,
+                bool valueLayer
+            );
         }
 
         private sealed class TypedShaperFactoryCreator<T> : ShaperFactoryCreator
         {
-            public TypedShaperFactoryCreator() {}
-            internal override ShaperFactory TypedCreate(QueryCacheManager cacheManager, ColumnMap columnMap, MetadataWorkspace metadata, SpanIndex spanInfo, MergeOption mergeOption, bool valueLayer)
+            public TypedShaperFactoryCreator() { }
+
+            internal override ShaperFactory TypedCreate(
+                QueryCacheManager cacheManager,
+                ColumnMap columnMap,
+                MetadataWorkspace metadata,
+                SpanIndex spanInfo,
+                MergeOption mergeOption,
+                bool valueLayer
+            )
             {
-                return Translator.TranslateColumnMap<T>(cacheManager, columnMap, metadata, spanInfo, mergeOption, valueLayer);
+                return Translator.TranslateColumnMap<T>(
+                    cacheManager,
+                    columnMap,
+                    metadata,
+                    spanInfo,
+                    mergeOption,
+                    valueLayer
+                );
             }
         }
     }
@@ -53,7 +93,12 @@ namespace System.Data.Common.Internal.Materialization
         private readonly Action _checkPermissions;
         private readonly MergeOption _mergeOption;
 
-        internal ShaperFactory(int stateCount, CoordinatorFactory<T> rootCoordinatorFactory, Action checkPermissions, MergeOption mergeOption)
+        internal ShaperFactory(
+            int stateCount,
+            CoordinatorFactory<T> rootCoordinatorFactory,
+            Action checkPermissions,
+            MergeOption mergeOption
+        )
         {
             _stateCount = stateCount;
             _rootCoordinatorFactory = rootCoordinatorFactory;
@@ -64,10 +109,28 @@ namespace System.Data.Common.Internal.Materialization
         /// <summary>
         /// Factory method to create the Shaper for Object Layer queries.
         /// </summary>
-        internal Shaper<T> Create(DbDataReader reader, ObjectContext context, MetadataWorkspace workspace, MergeOption mergeOption, bool readerOwned)
+        internal Shaper<T> Create(
+            DbDataReader reader,
+            ObjectContext context,
+            MetadataWorkspace workspace,
+            MergeOption mergeOption,
+            bool readerOwned
+        )
         {
-            Debug.Assert(mergeOption == _mergeOption, "executing a query with a different mergeOption than was used to compile the delegate");
-            return new Shaper<T>(reader, context, workspace, mergeOption, _stateCount, _rootCoordinatorFactory, _checkPermissions, readerOwned);
+            Debug.Assert(
+                mergeOption == _mergeOption,
+                "executing a query with a different mergeOption than was used to compile the delegate"
+            );
+            return new Shaper<T>(
+                reader,
+                context,
+                workspace,
+                mergeOption,
+                _stateCount,
+                _rootCoordinatorFactory,
+                _checkPermissions,
+                readerOwned
+            );
         }
     }
 }

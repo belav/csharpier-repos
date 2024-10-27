@@ -13,9 +13,7 @@ namespace System
             // Note, in Browser, assemblies are loaded from memory and in that case, Assembly.Location will return an empty
             // string.  For these tests, the assemblies will also be available in the VFS, so just specify the assembly name
             // plus extension.
-            return (PlatformDetection.IsNotBrowser) ?
-                a.Location
-                : "/" + a.GetName().Name + ".dll";
+            return (PlatformDetection.IsNotBrowser) ? a.Location : "/" + a.GetName().Name + ".dll";
         }
     }
 }

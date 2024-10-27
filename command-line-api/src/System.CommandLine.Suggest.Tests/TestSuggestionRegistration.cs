@@ -19,11 +19,15 @@ namespace System.CommandLine.Suggest.Tests
             }
         }
 
-        public Registration FindRegistration(FileInfo soughtExecutable)
-            => _suggestionRegistrations.FirstOrDefault(x => x.ExecutablePath.StartsWith(soughtExecutable.FullName, StringComparison.OrdinalIgnoreCase));
+        public Registration FindRegistration(FileInfo soughtExecutable) =>
+            _suggestionRegistrations.FirstOrDefault(x =>
+                x.ExecutablePath.StartsWith(
+                    soughtExecutable.FullName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            );
 
-        public IEnumerable<Registration> FindAllRegistrations()
-            => _suggestionRegistrations;
+        public IEnumerable<Registration> FindAllRegistrations() => _suggestionRegistrations;
 
         public void AddSuggestionRegistration(Registration registration)
         {

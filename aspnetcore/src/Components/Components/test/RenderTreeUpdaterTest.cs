@@ -28,10 +28,12 @@ public class RenderTreeUpdaterTest
         RenderTreeUpdater.UpdateToMatchClientState(builder, 456, "new value");
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 3, 0),
             frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1),
-            frame => AssertFrame.Attribute(frame, valuePropName, "initial value", 2));
+            frame => AssertFrame.Attribute(frame, valuePropName, "initial value", 2)
+        );
     }
 
     [Fact]
@@ -56,10 +58,12 @@ public class RenderTreeUpdaterTest
         RenderTreeUpdater.UpdateToMatchClientState(builder, 123, new object());
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 3, 0),
             frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1),
-            frame => AssertFrame.Attribute(frame, valuePropName, "initial value", 2));
+            frame => AssertFrame.Attribute(frame, valuePropName, "initial value", 2)
+        );
     }
 
     [Fact]
@@ -89,7 +93,8 @@ public class RenderTreeUpdaterTest
         RenderTreeUpdater.UpdateToMatchClientState(builder, 456, "new value");
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 3, 0),
             frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1),
             frame => AssertFrame.Attribute(frame, valuePropName, "unchanged 1", 2),
@@ -97,7 +102,8 @@ public class RenderTreeUpdaterTest
             frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 4),
             frame => AssertFrame.Attribute(frame, "unrelated prop before", "unchanged 2", 5),
             frame => AssertFrame.Attribute(frame, valuePropName, "new value", 6),
-            frame => AssertFrame.Attribute(frame, "unrelated prop after", "unchanged 3", 7));
+            frame => AssertFrame.Attribute(frame, "unrelated prop after", "unchanged 3", 7)
+        );
     }
 
     [Fact]
@@ -119,10 +125,18 @@ public class RenderTreeUpdaterTest
         frames = builder.GetFrames();
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 3, 0),
-            frame => AssertFrame.Attribute(frame, valuePropName, "new value", RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber),
-            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    valuePropName,
+                    "new value",
+                    RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber
+                ),
+            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1)
+        );
     }
 
     [Fact]
@@ -144,9 +158,11 @@ public class RenderTreeUpdaterTest
         frames = builder.GetFrames();
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "elem", 2, 0),
-            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1));
+            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 1)
+        );
     }
 
     [Fact]
@@ -174,15 +190,23 @@ public class RenderTreeUpdaterTest
         frames = builder.GetFrames();
 
         // Assert
-        Assert.Collection(frames.AsEnumerable(),
+        Assert.Collection(
+            frames.AsEnumerable(),
             frame => AssertFrame.Element(frame, "grandparent", 6, 0),
             frame => AssertFrame.Region(frame, 5, 1),
             frame => AssertFrame.Element(frame, "sibling before", 1, 2),
             frame => AssertFrame.Element(frame, "elem with handler", 3, 3),
-            frame => AssertFrame.Attribute(frame, valuePropName, "new value", RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber),
-            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 4));
+            frame =>
+                AssertFrame.Attribute(
+                    frame,
+                    valuePropName,
+                    "new value",
+                    RenderTreeDiffBuilder.SystemAddedAttributeSequenceNumber
+                ),
+            frame => AssertFrame.Attribute(frame, "eventname", v => Assert.IsType<Action>(v), 4)
+        );
     }
 
-    private static ArrayRange<RenderTreeFrame> BuildFrames(params RenderTreeFrame[] frames)
-        => new ArrayRange<RenderTreeFrame>(frames, frames.Length);
+    private static ArrayRange<RenderTreeFrame> BuildFrames(params RenderTreeFrame[] frames) =>
+        new ArrayRange<RenderTreeFrame>(frames, frames.Length);
 }

@@ -22,11 +22,12 @@ internal class BufferedTextWriter : TextWriter
 
     public override Encoding Encoding => Encoding.UTF8;
 
-    public override void Write(char value)
-        => _currentOutput.Add(new TextChunk(value));
+    public override void Write(char value) => _currentOutput.Add(new TextChunk(value));
 
-    public override void Write(char[] buffer, int index, int count)
-        => _currentOutput.Add(new TextChunk(new ArraySegment<char>(buffer, index, count), _charArraySegmentBuilder));
+    public override void Write(char[] buffer, int index, int count) =>
+        _currentOutput.Add(
+            new TextChunk(new ArraySegment<char>(buffer, index, count), _charArraySegmentBuilder)
+        );
 
     public override void Write(string? value)
     {
@@ -36,11 +37,9 @@ internal class BufferedTextWriter : TextWriter
         }
     }
 
-    public override void Write(int value)
-        => _currentOutput.Add(new TextChunk(value));
+    public override void Write(int value) => _currentOutput.Add(new TextChunk(value));
 
-    public override void Flush()
-        => throw new NotSupportedException();
+    public override void Flush() => throw new NotSupportedException();
 
     public override Task FlushAsync()
     {

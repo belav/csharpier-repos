@@ -10,14 +10,10 @@ namespace System.Security.Cryptography.X509Certificates
         private sealed class AndroidExportProvider : UnixExportProvider
         {
             public AndroidExportProvider(ICertificatePalCore cert)
-                : base(cert)
-            {
-            }
+                : base(cert) { }
 
             public AndroidExportProvider(X509Certificate2Collection certs)
-                : base(certs)
-            {
-            }
+                : base(certs) { }
 
             protected override byte[] ExportPkcs7()
             {
@@ -39,10 +35,15 @@ namespace System.Security.Cryptography.X509Certificates
                 return Interop.AndroidCrypto.X509ExportPkcs7(certHandles);
             }
 
-            protected override byte[] ExportPkcs8(ICertificatePalCore certificatePal, ReadOnlySpan<char> password)
+            protected override byte[] ExportPkcs8(
+                ICertificatePalCore certificatePal,
+                ReadOnlySpan<char> password
+            )
             {
                 Debug.Assert(certificatePal.HasPrivateKey);
-                SafeKeyHandle? privateKey = ((AndroidCertificatePal)certificatePal).PrivateKeyHandle;
+                SafeKeyHandle? privateKey = (
+                    (AndroidCertificatePal)certificatePal
+                ).PrivateKeyHandle;
 
                 AsymmetricAlgorithm algorithm;
                 switch (privateKey)

@@ -4,9 +4,9 @@
 
 namespace System.ServiceModel.Activities.Description
 {
+    using System.Activities;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Activities;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.Runtime.DurableInstancing;
@@ -21,7 +21,6 @@ namespace System.ServiceModel.Activities.Description
     {
         Bookmark bookmark;
 
-
         public WorkflowOperationBehavior(Bookmark bookmark, bool canCreateInstance)
             : this(canCreateInstance)
         {
@@ -34,21 +33,22 @@ namespace System.ServiceModel.Activities.Description
             this.CanCreateInstance = canCreateInstance;
         }
 
-        internal bool CanCreateInstance
-        {
-            get;
-            set;
-        }
+        internal bool CanCreateInstance { get; set; }
 
-        public void AddBindingParameters(OperationDescription operationDescription, BindingParameterCollection bindingParameters)
-        {
-        }
+        public void AddBindingParameters(
+            OperationDescription operationDescription,
+            BindingParameterCollection bindingParameters
+        ) { }
 
-        public void ApplyClientBehavior(OperationDescription operationDescription, ClientOperation clientOperation)
-        {
-        }
+        public void ApplyClientBehavior(
+            OperationDescription operationDescription,
+            ClientOperation clientOperation
+        ) { }
 
-        public void ApplyDispatchBehavior(OperationDescription operationDescription, DispatchOperation dispatchOperation)
+        public void ApplyDispatchBehavior(
+            OperationDescription operationDescription,
+            DispatchOperation dispatchOperation
+        )
         {
             if (operationDescription == null)
             {
@@ -58,20 +58,29 @@ namespace System.ServiceModel.Activities.Description
             {
                 throw FxTrace.Exception.ArgumentNull("dispatchOperation");
             }
-            if (dispatchOperation.Parent == null
+            if (
+                dispatchOperation.Parent == null
                 || dispatchOperation.Parent.ChannelDispatcher == null
                 || dispatchOperation.Parent.ChannelDispatcher.Host == null
                 || dispatchOperation.Parent.ChannelDispatcher.Host.Description == null
-                || dispatchOperation.Parent.ChannelDispatcher.Host.Description.Behaviors == null)
+                || dispatchOperation.Parent.ChannelDispatcher.Host.Description.Behaviors == null
+            )
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.DispatchOperationInInvalidState));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.DispatchOperationInInvalidState)
+                );
             }
 
             ServiceHostBase serviceHost = dispatchOperation.Parent.ChannelDispatcher.Host;
             if (!(serviceHost is WorkflowServiceHost))
             {
                 throw FxTrace.Exception.AsError(
-                   new InvalidOperationException(SR.WorkflowBehaviorWithNonWorkflowHost(typeof(WorkflowOperationBehavior).Name)));
+                    new InvalidOperationException(
+                        SR.WorkflowBehaviorWithNonWorkflowHost(
+                            typeof(WorkflowOperationBehavior).Name
+                        )
+                    )
+                );
             }
 
             CorrelationKeyCalculator correlationKeyCalculator = null;
@@ -88,7 +97,8 @@ namespace System.ServiceModel.Activities.Description
 
             if (endpoint != null)
             {
-                CorrelationQueryBehavior queryBehavior = endpoint.Behaviors.Find<CorrelationQueryBehavior>();
+                CorrelationQueryBehavior queryBehavior =
+                    endpoint.Behaviors.Find<CorrelationQueryBehavior>();
 
                 if (queryBehavior != null)
                 {
@@ -96,20 +106,33 @@ namespace System.ServiceModel.Activities.Description
                 }
             }
 
-            dispatchOperation.Invoker = new WorkflowOperationInvoker(operationDescription,
-                endpoint, correlationKeyCalculator, this, serviceHost, dispatchOperation.Invoker);
+            dispatchOperation.Invoker = new WorkflowOperationInvoker(
+                operationDescription,
+                endpoint,
+                correlationKeyCalculator,
+                this,
+                serviceHost,
+                dispatchOperation.Invoker
+            );
         }
 
-        public void Validate(OperationDescription operationDescription)
-        {
-        }
+        public void Validate(OperationDescription operationDescription) { }
 
-        protected internal virtual Bookmark OnResolveBookmark(WorkflowOperationContext context, out BookmarkScope bookmarkScope, out object value)
+        protected internal virtual Bookmark OnResolveBookmark(
+            WorkflowOperationContext context,
+            out BookmarkScope bookmarkScope,
+            out object value
+        )
         {
             Fx.Assert(this.bookmark != null, "bookmark must not be null!");
 
             CorrelationMessageProperty correlationMessageProperty;
-            if (CorrelationMessageProperty.TryGet(context.OperationContext.IncomingMessageProperties, out correlationMessageProperty))
+            if (
+                CorrelationMessageProperty.TryGet(
+                    context.OperationContext.IncomingMessageProperties,
+                    out correlationMessageProperty
+                )
+            )
             {
                 bookmarkScope = new BookmarkScope(correlationMessageProperty.CorrelationKey.Value);
             }
@@ -121,7 +144,7 @@ namespace System.ServiceModel.Activities.Description
             return this.bookmark;
         }
 
-        //Invoker for workflowbased application endpoint operation 
+        //Invoker for workflowbased application endpoint operation
         class WorkflowOperationInvoker : ControlOperationInvoker, IInstanceTransaction
         {
             bool performanceCountersEnabled;
@@ -130,9 +153,15 @@ namespace System.ServiceModel.Activities.Description
             IOperationInvoker innerInvoker;
             WorkflowOperationBehavior behavior;
             bool isFirstReceiveOfTransactedReceiveScopeTree;
-            
-            public WorkflowOperationInvoker(OperationDescription operationDescription, ServiceEndpoint endpoint,
-                CorrelationKeyCalculator keyCalculator, WorkflowOperationBehavior behavior, ServiceHostBase host, IOperationInvoker innerInvoker)
+
+            public WorkflowOperationInvoker(
+                OperationDescription operationDescription,
+                ServiceEndpoint endpoint,
+                CorrelationKeyCalculator keyCalculator,
+                WorkflowOperationBehavior behavior,
+                ServiceHostBase host,
+                IOperationInvoker innerInvoker
+            )
                 : base(operationDescription, endpoint, keyCalculator, host)
             {
                 Fx.Assert(operationDescription != null, "Null OperationDescription");
@@ -144,7 +173,8 @@ namespace System.ServiceModel.Activities.Description
                 this.propagateActivity = TraceUtility.ShouldPropagateActivity;
                 this.isHostingEndpoint = endpoint is WorkflowHostingEndpoint;
                 this.innerInvoker = innerInvoker;
-                this.isFirstReceiveOfTransactedReceiveScopeTree = operationDescription.IsFirstReceiveOfTransactedReceiveScopeTree;
+                this.isFirstReceiveOfTransactedReceiveScopeTree =
+                    operationDescription.IsFirstReceiveOfTransactedReceiveScopeTree;
             }
 
             public override object[] AllocateInputs()
@@ -159,24 +189,55 @@ namespace System.ServiceModel.Activities.Description
                 return new object[1];
             }
 
-            protected override IAsyncResult OnBeginServiceOperation(WorkflowServiceInstance workflowInstance, OperationContext operationContext,
-                object[] inputs, Transaction currentTransaction, IInvokeReceivedNotification notification, TimeSpan timeout, AsyncCallback callback, object state)
+            protected override IAsyncResult OnBeginServiceOperation(
+                WorkflowServiceInstance workflowInstance,
+                OperationContext operationContext,
+                object[] inputs,
+                Transaction currentTransaction,
+                IInvokeReceivedNotification notification,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
             {
                 Fx.Assert(workflowInstance != null, "caller must verify");
                 Fx.Assert(inputs != null, "caller must verify");
 
-                return WorkflowOperationContext.BeginProcessRequest(workflowInstance, operationContext, this.OperationName, inputs,
-                    this.performanceCountersEnabled, this.propagateActivity, currentTransaction, notification, this.behavior, this.endpoint, timeout, callback, state);
+                return WorkflowOperationContext.BeginProcessRequest(
+                    workflowInstance,
+                    operationContext,
+                    this.OperationName,
+                    inputs,
+                    this.performanceCountersEnabled,
+                    this.propagateActivity,
+                    currentTransaction,
+                    notification,
+                    this.behavior,
+                    this.endpoint,
+                    timeout,
+                    callback,
+                    state
+                );
             }
 
-            protected override object OnEndServiceOperation(WorkflowServiceInstance durableInstance, out object[] outputs, IAsyncResult result)
+            protected override object OnEndServiceOperation(
+                WorkflowServiceInstance durableInstance,
+                out object[] outputs,
+                IAsyncResult result
+            )
             {
                 // InternalSendMessage always redirects the replyMessage into the returnValue
-                object returnValue = WorkflowOperationContext.EndProcessRequest(result, out outputs);
+                object returnValue = WorkflowOperationContext.EndProcessRequest(
+                    result,
+                    out outputs
+                );
 
                 //we will just assert that outputs is always an empty array
-                Fx.Assert(this.isHostingEndpoint || outputs == null || outputs.Length == 0, "Workflow returned a non-empty out-arg");
-                
+                Fx.Assert(
+                    this.isHostingEndpoint || outputs == null || outputs.Length == 0,
+                    "Workflow returned a non-empty out-arg"
+                );
+
                 return returnValue;
             }
 
@@ -192,9 +253,15 @@ namespace System.ServiceModel.Activities.Description
                     InstanceKey instanceKey;
                     ICollection<InstanceKey> additionalKeys;
                     this.GetInstanceKeys(operationContext, out instanceKey, out additionalKeys);
-                    Fx.Assert((instanceKey != null) && (instanceKey.IsValid), "InstanceKey is null or invalid in GetInstanceTransaction");
+                    Fx.Assert(
+                        (instanceKey != null) && (instanceKey.IsValid),
+                        "InstanceKey is null or invalid in GetInstanceTransaction"
+                    );
 
-                    tx = this.InstanceManager.PersistenceProviderDirectory.GetTransactionForInstance(instanceKey);
+                    tx =
+                        this.InstanceManager.PersistenceProviderDirectory.GetTransactionForInstance(
+                            instanceKey
+                        );
                 }
 
                 return tx;

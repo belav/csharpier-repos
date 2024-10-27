@@ -17,7 +17,12 @@ namespace System.Linq.Parallel.Tests
 
             foreach (int count in counts)
             {
-                yield return new object[] { Labeled.Label("Default", UnorderedSources.Default(0, count)), count, Max(count) };
+                yield return new object[]
+                {
+                    Labeled.Label("Default", UnorderedSources.Default(0, count)),
+                    count,
+                    Max(count),
+                };
             }
 
             // A source with data explicitly created out of order
@@ -30,7 +35,12 @@ namespace System.Linq.Parallel.Tests
                     data[i] = data[count - i - 1];
                     data[count - i - 1] = tmp;
                 }
-                yield return new object[] { Labeled.Label("Out-of-order input", data.AsParallel()), count, Max(count) };
+                yield return new object[]
+                {
+                    Labeled.Label("Out-of-order input", data.AsParallel()),
+                    count,
+                    Max(count),
+                };
             }
         }
 
@@ -52,8 +62,17 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Int_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Int_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int max
+        )
         {
             Max_Int(labeled, count, max);
         }
@@ -92,15 +111,28 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Long_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, long max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Long_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            long max
+        )
         {
             Max_Long(labeled, count, max);
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Long_SomeNull(Labeled<ParallelQuery<int>> labeled, int count, long max)
+        public static void Max_Long_SomeNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            long max
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (long?)x : null).Max());
@@ -109,7 +141,11 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Long_AllNull(Labeled<ParallelQuery<int>> labeled, int count, long max)
+        public static void Max_Long_AllNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            long max
+        )
         {
             _ = count;
             _ = max;
@@ -127,21 +163,40 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(max, query.Select(x => (float?)x).Max());
             Assert.Equal(0, query.Max(x => -(float)x));
             Assert.Equal(0, query.Max(x => -(float?)x));
-            Assert.Equal(float.PositiveInfinity, query.Select(x => x == count / 2 ? float.PositiveInfinity : x).Max());
-            Assert.Equal(float.PositiveInfinity, query.Select(x => x == count / 2 ? (float?)float.PositiveInfinity : x).Max());
+            Assert.Equal(
+                float.PositiveInfinity,
+                query.Select(x => x == count / 2 ? float.PositiveInfinity : x).Max()
+            );
+            Assert.Equal(
+                float.PositiveInfinity,
+                query.Select(x => x == count / 2 ? (float?)float.PositiveInfinity : x).Max()
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Float_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, float max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Float_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            float max
+        )
         {
             Max_Float(labeled, count, max);
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Float_SomeNull(Labeled<ParallelQuery<int>> labeled, int count, float max)
+        public static void Max_Float_SomeNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            float max
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (float?)x : null).Max());
@@ -150,7 +205,11 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Float_AllNull(Labeled<ParallelQuery<int>> labeled, int count, float max)
+        public static void Max_Float_AllNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            float max
+        )
         {
             _ = count;
             _ = max;
@@ -168,21 +227,40 @@ namespace System.Linq.Parallel.Tests
             Assert.Equal(max, query.Select(x => (double?)x).Max());
             Assert.Equal(0, query.Max(x => -(double)x));
             Assert.Equal(0, query.Max(x => -(double?)x));
-            Assert.Equal(double.PositiveInfinity, query.Select(x => x == count / 2 ? double.PositiveInfinity : x).Max());
-            Assert.Equal(double.PositiveInfinity, query.Select(x => x == count / 2 ? (double?)double.PositiveInfinity : x).Max());
+            Assert.Equal(
+                double.PositiveInfinity,
+                query.Select(x => x == count / 2 ? double.PositiveInfinity : x).Max()
+            );
+            Assert.Equal(
+                double.PositiveInfinity,
+                query.Select(x => x == count / 2 ? (double?)double.PositiveInfinity : x).Max()
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Double_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, double max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Double_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            double max
+        )
         {
             Max_Double(labeled, count, max);
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Double_SomeNull(Labeled<ParallelQuery<int>> labeled, int count, double max)
+        public static void Max_Double_SomeNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            double max
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (double?)x : null).Max());
@@ -191,7 +269,11 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Double_AllNull(Labeled<ParallelQuery<int>> labeled, int count, double max)
+        public static void Max_Double_AllNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            double max
+        )
         {
             _ = count;
             _ = max;
@@ -214,15 +296,28 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Decimal_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, decimal max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Decimal_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            decimal max
+        )
         {
             Max_Decimal(labeled, count, max);
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Decimal_SomeNull(Labeled<ParallelQuery<int>> labeled, int count, decimal max)
+        public static void Max_Decimal_SomeNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            decimal max
+        )
         {
             ParallelQuery<int> query = labeled.Item;
             Assert.Equal(max, query.Select(x => x >= count / 2 ? (decimal?)x : null).Max());
@@ -231,7 +326,11 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Decimal_AllNull(Labeled<ParallelQuery<int>> labeled, int count, decimal max)
+        public static void Max_Decimal_AllNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            decimal max
+        )
         {
             _ = count;
             _ = max;
@@ -246,21 +345,46 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item;
-            Assert.Equal(max, query.Select(x => DelegatedComparable.Delegate(x, Comparer<int>.Default)).Max().Value);
-            Assert.Equal(0, query.Select(x => DelegatedComparable.Delegate(x, ReverseComparer.Instance)).Max().Value);
+            Assert.Equal(
+                max,
+                query
+                    .Select(x => DelegatedComparable.Delegate(x, Comparer<int>.Default))
+                    .Max()
+                    .Value
+            );
+            Assert.Equal(
+                0,
+                query
+                    .Select(x => DelegatedComparable.Delegate(x, ReverseComparer.Instance))
+                    .Max()
+                    .Value
+            );
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(MaxData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Max_Other_Longrunning(Labeled<ParallelQuery<int>> labeled, int count, int max)
+        [MemberData(
+            nameof(MaxData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Max_Other_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int max
+        )
         {
             Max_Other(labeled, count, max);
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1 })]
-        public static void Max_NotComparable(Labeled<ParallelQuery<int>> labeled, int count, int max)
+        public static void Max_NotComparable(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int max
+        )
         {
             _ = count;
             _ = max;
@@ -270,16 +394,42 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Other_SomeNull(Labeled<ParallelQuery<int>> labeled, int count, int max)
+        public static void Max_Other_SomeNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int max
+        )
         {
             ParallelQuery<int> query = labeled.Item;
-            Assert.Equal(max, query.Max(x => x >= count / 2 ? DelegatedComparable.Delegate(x, Comparer<int>.Default) : null).Value);
-            Assert.Equal(count / 2, query.Max(x => x >= count / 2 ? DelegatedComparable.Delegate(x, ReverseComparer.Instance) : null).Value);
+            Assert.Equal(
+                max,
+                query
+                    .Max(x =>
+                        x >= count / 2
+                            ? DelegatedComparable.Delegate(x, Comparer<int>.Default)
+                            : null
+                    )
+                    .Value
+            );
+            Assert.Equal(
+                count / 2,
+                query
+                    .Max(x =>
+                        x >= count / 2
+                            ? DelegatedComparable.Delegate(x, ReverseComparer.Instance)
+                            : null
+                    )
+                    .Value
+            );
         }
 
         [Theory]
         [MemberData(nameof(MaxData), new[] { 1, 2, 16 })]
-        public static void Max_Other_AllNull(Labeled<ParallelQuery<int>> labeled, int count, int max)
+        public static void Max_Other_AllNull(
+            Labeled<ParallelQuery<int>> labeled,
+            int count,
+            int max
+        )
         {
             _ = count;
             _ = max;
@@ -312,69 +462,297 @@ namespace System.Linq.Parallel.Tests
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<long>().Max());
             Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<float>().Max());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<double>().Max());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<decimal>().Max());
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<NotComparable>().Max());
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<double>().Max()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<decimal>().Max()
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<NotComparable>().Max()
+            );
 
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => (int)x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => (long)x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => (float)x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => (double)x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => (decimal)x));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Empty<int>().Max(x => new NotComparable(x)));
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => (int)x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => (long)x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => (float)x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => (double)x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => (decimal)x)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => ParallelEnumerable.Empty<int>().Max(x => new NotComparable(x))
+            );
         }
 
         [Fact]
         public static void Max_OperationCanceledException()
         {
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (int?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (long)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (long?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (float)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (float?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (double)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (double?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal)x; }));
-            AssertThrows.EventuallyCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.EventuallyCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
         }
 
         [Fact]
         public static void Max_AggregateException_Wraps_OperationCanceledException()
         {
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (int?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (long)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (long?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (float)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (float?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (double)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (double?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal)x; }));
-            AssertThrows.OtherTokenCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.OtherTokenCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (int?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (int?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (long)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (long?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (long?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (float)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (float?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (float?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (double)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (double?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (double?)x;
+                    })
+            );
 
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal)x; }));
-            AssertThrows.SameTokenNotCanceled((source, canceler) => source.Max(x => { canceler(); return (decimal?)x; }));
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal)x;
+                    })
+            );
+            AssertThrows.SameTokenNotCanceled(
+                (source, canceler) =>
+                    source.Max(x =>
+                    {
+                        canceler();
+                        return (decimal?)x;
+                    })
+            );
         }
 
         [Fact]
@@ -401,66 +779,274 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Max_AggregateException()
         {
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, int>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, int?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, int>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, int?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, long>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, long?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, long>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, long?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, float>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, float?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, float>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, float?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, double>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, double?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, double>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, double?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, decimal>)(x => { throw new DeliberateTestException(); })));
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, decimal?>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, decimal>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, decimal?>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
 
-            AssertThrows.Wrapped<DeliberateTestException>(() => ParallelEnumerable.Range(0, 1).Max((Func<int, NotComparable>)(x => { throw new DeliberateTestException(); })));
+            AssertThrows.Wrapped<DeliberateTestException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .Max(
+                            (Func<int, NotComparable>)(
+                                x =>
+                                {
+                                    throw new DeliberateTestException();
+                                }
+                            )
+                        )
+            );
         }
 
         [Fact]
         public static void Max_AggregateException_NotComparable()
         {
-            ArgumentException e = AssertThrows.Wrapped<ArgumentException>(() => ParallelEnumerable.Repeat(new NotComparable(0), 2).Max());
+            ArgumentException e = AssertThrows.Wrapped<ArgumentException>(
+                () => ParallelEnumerable.Repeat(new NotComparable(0), 2).Max()
+            );
             Assert.Null(e.ParamName);
 
-            e = AssertThrows.Wrapped<ArgumentException>(() => ParallelEnumerable.Range(0, 2).Max(x => new NotComparable(x)));
+            e = AssertThrows.Wrapped<ArgumentException>(
+                () => ParallelEnumerable.Range(0, 2).Max(x => new NotComparable(x))
+            );
             Assert.Null(e.ParamName);
         }
 
         [Fact]
         public static void Max_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Range(0, 1).Max((Func<int, int>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<int?>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((int?)0, 1).Max((Func<int?, int?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Range(0, 1).Max((Func<int, int>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<int?>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((int?)0, 1).Max((Func<int?, int?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<long>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((long)0, 1).Max((Func<long, long>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<long?>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((long?)0, 1).Max((Func<long?, long?>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<long>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((long)0, 1).Max((Func<long, long>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<long?>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((long?)0, 1).Max((Func<long?, long?>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<float>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((float)0, 1).Max((Func<float, float>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<float?>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((float?)0, 1).Max((Func<float?, float>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<float>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((float)0, 1).Max((Func<float, float>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<float?>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((float?)0, 1).Max((Func<float?, float>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<double>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((double)0, 1).Max((Func<double, double>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<double?>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((double?)0, 1).Max((Func<double?, double>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<double>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((double)0, 1).Max((Func<double, double>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<double?>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((double?)0, 1).Max((Func<double?, double>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<decimal>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((decimal)0, 1).Max((Func<decimal, decimal>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<decimal?>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat((decimal?)0, 1).Max((Func<decimal?, decimal>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<decimal>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((decimal)0, 1).Max((Func<decimal, decimal>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<decimal?>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat((decimal?)0, 1).Max((Func<decimal?, decimal>)null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<NotComparable>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat(0, 1).Max((Func<int, NotComparable>)null));
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<object>)null).Max());
-            AssertExtensions.Throws<ArgumentNullException>("selector", () => ParallelEnumerable.Repeat(new object(), 1).Max((Func<object, object>)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<NotComparable>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat(0, 1).Max((Func<int, NotComparable>)null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<object>)null).Max()
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "selector",
+                () => ParallelEnumerable.Repeat(new object(), 1).Max((Func<object, object>)null)
+            );
         }
     }
 }

@@ -12,7 +12,11 @@ namespace Microsoft.AspNetCore.Mvc.ApiExplorer;
 /// <see cref="ApiConventionNameMatchBehavior.Exact"/> is used if no value for this
 /// attribute is specified on a convention method or parameter.
 /// </remarks>
-[AttributeUsage(AttributeTargets.Parameter | AttributeTargets.Method, AllowMultiple = false, Inherited = false)]
+[AttributeUsage(
+    AttributeTargets.Parameter | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = false
+)]
 public sealed class ApiConventionNameMatchAttribute : Attribute
 {
     /// <summary>

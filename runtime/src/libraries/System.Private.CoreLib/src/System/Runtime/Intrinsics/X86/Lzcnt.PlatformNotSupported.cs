@@ -14,26 +14,40 @@ namespace System.Runtime.Intrinsics.X86
     {
         internal Lzcnt() { }
 
-        public static new bool IsSupported { [Intrinsic] get { return false; } }
+        public static new bool IsSupported
+        {
+            [Intrinsic]
+            get { return false; }
+        }
 
         public new abstract class X64 : X86Base.X64
         {
             internal X64() { }
 
-            public static new bool IsSupported { [Intrinsic] get { return false; } }
+            public static new bool IsSupported
+            {
+                [Intrinsic]
+                get { return false; }
+            }
 
             /// <summary>
             /// unsigned __int64 _lzcnt_u64 (unsigned __int64 a)
             ///   LZCNT r64, r/m64
             /// This intrinsic is only available on 64-bit processes
             /// </summary>
-            public static ulong LeadingZeroCount(ulong value) { throw new PlatformNotSupportedException(); }
+            public static ulong LeadingZeroCount(ulong value)
+            {
+                throw new PlatformNotSupportedException();
+            }
         }
 
         /// <summary>
         /// unsigned int _lzcnt_u32 (unsigned int a)
         ///   LZCNT r32, r/m32
         /// </summary>
-        public static uint LeadingZeroCount(uint value) { throw new PlatformNotSupportedException(); }
+        public static uint LeadingZeroCount(uint value)
+        {
+            throw new PlatformNotSupportedException();
+        }
     }
 }

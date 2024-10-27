@@ -20,8 +20,8 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding;
 public abstract class CompiledModelTestBase : NonSharedModelTestBase
 {
     [ConditionalFact]
-    public virtual void BigModel()
-        => Test(
+    public virtual void BigModel() =>
+        Test(
             modelBuilder => BuildBigModel(modelBuilder, jsonColumns: false),
             model => AssertBigModel(model, jsonColumns: false),
             c =>
@@ -30,7 +30,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
                 {
                     AlternateId = new Guid(),
                     Dependent = new DependentBase<byte?>(1),
-                    Owned = new OwnedType(c)
+                    Owned = new OwnedType(c),
                 };
 
                 var principalBase = c.Model.FindEntityType(typeof(PrincipalBase))!;
@@ -44,187 +44,241 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
                 c.SaveChanges();
             },
-            options: new CompiledModelCodeGenerationOptions { UseNullableReferenceTypes = true });
+            options: new CompiledModelCodeGenerationOptions { UseNullableReferenceTypes = true }
+        );
 
     protected virtual void BuildBigModel(ModelBuilder modelBuilder, bool jsonColumns)
     {
-        modelBuilder.Entity<PrincipalBase>(
-            eb =>
-            {
-                eb.Property(e => e.FlagsEnum2)
-                    .HasSentinel(AFlagsEnum.C | AFlagsEnum.B);
+        modelBuilder.Entity<PrincipalBase>(eb =>
+        {
+            eb.Property(e => e.FlagsEnum2).HasSentinel(AFlagsEnum.C | AFlagsEnum.B);
 
-                eb.Property(e => e.AlternateId)
-                    .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
+            eb.Property(e => e.AlternateId)
+                .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction);
 
-                eb.HasIndex(e => new { e.AlternateId, e.Id });
+            eb.HasIndex(e => new { e.AlternateId, e.Id });
 
-                eb.HasKey(e => new { e.Id, e.AlternateId });
+            eb.HasKey(e => new { e.Id, e.AlternateId });
 
-                eb.Property(e => e.Id).ValueGeneratedNever();
-                eb.HasAlternateKey(e => e.Id);
+            eb.Property(e => e.Id).ValueGeneratedNever();
+            eb.HasAlternateKey(e => e.Id);
 
-                eb.Property(e => e.AlternateId).Metadata.SetJsonValueReaderWriterType(
-                    jsonColumns
-                        ? typeof(MyJsonGuidReaderWriter)
-                        : typeof(JsonGuidReaderWriter));
+            eb.Property(e => e.AlternateId)
+                .Metadata.SetJsonValueReaderWriterType(
+                    jsonColumns ? typeof(MyJsonGuidReaderWriter) : typeof(JsonGuidReaderWriter)
+                );
 
-                eb.OwnsOne(
-                    e => e.Owned, ob =>
-                    {
-                        ob.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues);
-                        ob.UsePropertyAccessMode(PropertyAccessMode.Field);
-
-                        if (!jsonColumns)
-                        {
-                            ob.HasData(
-                                new
-                                {
-                                    Number = 10,
-                                    PrincipalBaseId = 1L,
-                                    PrincipalBaseAlternateId = new Guid()
-                                });
-                        }
-                    });
-
-                eb.Navigation(e => e.Owned).IsRequired().HasField("_ownedField")
-                    .UsePropertyAccessMode(PropertyAccessMode.Field);
-
-                if (!jsonColumns)
+            eb.OwnsOne(
+                e => e.Owned,
+                ob =>
                 {
-                    eb.HasData(new PrincipalBase { Id = 1, AlternateId = new Guid() });
+                    ob.HasChangeTrackingStrategy(
+                        ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                    );
+                    ob.UsePropertyAccessMode(PropertyAccessMode.Field);
+
+                    if (!jsonColumns)
+                    {
+                        ob.HasData(
+                            new
+                            {
+                                Number = 10,
+                                PrincipalBaseId = 1L,
+                                PrincipalBaseAlternateId = new Guid(),
+                            }
+                        );
+                    }
                 }
-            });
+            );
 
-        modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(
-            eb =>
+            eb.Navigation(e => e.Owned)
+                .IsRequired()
+                .HasField("_ownedField")
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
+
+            if (!jsonColumns)
             {
-                eb.HasOne(e => e.Dependent).WithOne(e => e.Principal)
-                    .HasForeignKey<DependentBase<byte?>>()
-                    .OnDelete(DeleteBehavior.ClientNoAction);
+                eb.HasData(new PrincipalBase { Id = 1, AlternateId = new Guid() });
+            }
+        });
 
-                eb.Navigation(e => e.Dependent).AutoInclude().EnableLazyLoading(false);
+        modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(eb =>
+        {
+            eb.HasOne(e => e.Dependent)
+                .WithOne(e => e.Principal)
+                .HasForeignKey<DependentBase<byte?>>()
+                .OnDelete(DeleteBehavior.ClientNoAction);
 
-                eb.OwnsMany(typeof(OwnedType).FullName!, "ManyOwned");
+            eb.Navigation(e => e.Dependent).AutoInclude().EnableLazyLoading(false);
 
-                eb.HasMany(e => e.Principals).WithMany(e => (ICollection<PrincipalDerived<DependentBase<byte?>>>)e.Deriveds)
-                    .UsingEntity(
-                        jb =>
-                        {
-                            jb.Property<byte[]>("rowid")
-                                .IsRowVersion();
-                        });
+            eb.OwnsMany(typeof(OwnedType).FullName!, "ManyOwned");
 
-                eb.Navigation(e => e.Principals).AutoInclude().EnableLazyLoading(false);
-            });
+            eb.HasMany(e => e.Principals)
+                .WithMany(e => (ICollection<PrincipalDerived<DependentBase<byte?>>>)e.Deriveds)
+                .UsingEntity(jb =>
+                {
+                    jb.Property<byte[]>("rowid").IsRowVersion();
+                });
 
-        modelBuilder.Entity<DependentBase<byte?>>(
-            eb =>
-            {
-                eb.Property<byte?>("Id");
+            eb.Navigation(e => e.Principals).AutoInclude().EnableLazyLoading(false);
+        });
 
-                eb.HasKey("PrincipalId", "PrincipalAlternateId");
+        modelBuilder.Entity<DependentBase<byte?>>(eb =>
+        {
+            eb.Property<byte?>("Id");
 
-                eb.HasOne<PrincipalBase>().WithOne()
-                    .HasForeignKey<DependentBase<byte?>>("PrincipalId")
-                    .HasPrincipalKey<PrincipalBase>(e => e.Id);
+            eb.HasKey("PrincipalId", "PrincipalAlternateId");
 
-                eb.HasDiscriminator<Enum1>("EnumDiscriminator")
-                    .HasValue(Enum1.One)
-                    .HasValue<DependentDerived<byte?>>(Enum1.Two)
-                    .IsComplete(false);
-            });
+            eb.HasOne<PrincipalBase>()
+                .WithOne()
+                .HasForeignKey<DependentBase<byte?>>("PrincipalId")
+                .HasPrincipalKey<PrincipalBase>(e => e.Id);
 
-        modelBuilder.Entity<DependentDerived<byte?>>(
-            eb =>
-            {
-                eb.Property<string>("Data")
-                    .HasMaxLength(20)
-                    .IsUnicode(false);
+            eb.HasDiscriminator<Enum1>("EnumDiscriminator")
+                .HasValue(Enum1.One)
+                .HasValue<DependentDerived<byte?>>(Enum1.Two)
+                .IsComplete(false);
+        });
 
-                eb.Property<decimal>("Money")
-                    .HasPrecision(9, 3);
-            });
+        modelBuilder.Entity<DependentDerived<byte?>>(eb =>
+        {
+            eb.Property<string>("Data").HasMaxLength(20).IsUnicode(false);
 
-        modelBuilder.Entity<ManyTypes>(
-            b =>
-            {
-                b.Property(e => e.Id).HasConversion<ManyTypesIdConverter>().ValueGeneratedOnAdd();
-                b.HasKey(e => e.Id);
+            eb.Property<decimal>("Money").HasPrecision(9, 3);
+        });
 
-                b.Property(e => e.Enum8AsString).HasConversion<string>();
-                b.Property(e => e.Enum16AsString).HasConversion<string>();
-                b.Property(e => e.Enum32AsString).HasConversion<string>();
-                b.Property(e => e.Enum64AsString).HasConversion<string>();
-                b.Property(e => e.EnumU8AsString).HasConversion<string>();
-                b.Property(e => e.EnumU16AsString).HasConversion<string>();
-                b.Property(e => e.EnumU32AsString).HasConversion<string>();
-                b.Property(e => e.EnumU64AsString).HasConversion<string>();
+        modelBuilder.Entity<ManyTypes>(b =>
+        {
+            b.Property(e => e.Id).HasConversion<ManyTypesIdConverter>().ValueGeneratedOnAdd();
+            b.HasKey(e => e.Id);
 
-                b.PrimitiveCollection(e => e.Enum8AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum16AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum32AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum64AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU8AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU16AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU32AsStringCollection).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU64AsStringCollection).ElementType(b => b.HasConversion<string>());
+            b.Property(e => e.Enum8AsString).HasConversion<string>();
+            b.Property(e => e.Enum16AsString).HasConversion<string>();
+            b.Property(e => e.Enum32AsString).HasConversion<string>();
+            b.Property(e => e.Enum64AsString).HasConversion<string>();
+            b.Property(e => e.EnumU8AsString).HasConversion<string>();
+            b.Property(e => e.EnumU16AsString).HasConversion<string>();
+            b.Property(e => e.EnumU32AsString).HasConversion<string>();
+            b.Property(e => e.EnumU64AsString).HasConversion<string>();
 
-                b.PrimitiveCollection(e => e.Enum8AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum16AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum32AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.Enum64AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU8AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU16AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU32AsStringArray).ElementType(b => b.HasConversion<string>());
-                b.PrimitiveCollection(e => e.EnumU64AsStringArray).ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum8AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum16AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum32AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum64AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU8AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU16AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU32AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU64AsStringCollection)
+                .ElementType(b => b.HasConversion<string>());
 
-                b.Property(e => e.BoolToStringConverterProperty).HasConversion(new BoolToStringConverter("A", "B"));
-                b.Property(e => e.BoolToTwoValuesConverterProperty).HasConversion(new BoolToTwoValuesConverter<byte>(0, 1));
-                b.Property(e => e.BoolToZeroOneConverterProperty).HasConversion<BoolToZeroOneConverter<short>>();
-                b.Property(e => e.BytesToStringConverterProperty).HasConversion<BytesToStringConverter, ArrayStructuralComparer<byte>>();
-                b.Property(e => e.CastingConverterProperty).HasConversion<CastingConverter<int, decimal>>();
-                b.Property(e => e.CharToStringConverterProperty).HasConversion<CharToStringConverter>();
-                b.Property(e => e.DateOnlyToStringConverterProperty).HasConversion<DateOnlyToStringConverter>();
-                b.Property(e => e.DateTimeOffsetToBinaryConverterProperty).HasConversion<DateTimeOffsetToBinaryConverter>();
-                b.Property(e => e.DateTimeOffsetToBytesConverterProperty).HasConversion<DateTimeOffsetToBytesConverter>();
-                b.Property(e => e.DateTimeOffsetToStringConverterProperty).HasConversion<DateTimeOffsetToStringConverter>();
-                b.Property(e => e.DateTimeToBinaryConverterProperty).HasConversion<DateTimeToBinaryConverter>();
-                b.Property(e => e.DateTimeToStringConverterProperty).HasConversion<DateTimeToStringConverter>();
-                b.Property(e => e.EnumToNumberConverterProperty).HasConversion<EnumToNumberConverter<Enum32, int>>();
-                b.Property(e => e.EnumToStringConverterProperty).HasConversion<EnumToStringConverter<Enum32>>();
-                b.Property(e => e.GuidToBytesConverterProperty).HasConversion<GuidToBytesConverter>();
-                b.Property(e => e.GuidToStringConverterProperty).HasConversion<GuidToStringConverter>();
-                b.Property(e => e.IPAddressToBytesConverterProperty).HasConversion<IPAddressToBytesConverter>();
-                b.Property(e => e.IPAddressToStringConverterProperty).HasConversion<IPAddressToStringConverter>();
-                b.Property(e => e.IntNumberToBytesConverterProperty).HasConversion<NumberToBytesConverter<int>>();
-                b.Property(e => e.DecimalNumberToBytesConverterProperty).HasConversion<NumberToBytesConverter<decimal>>();
-                b.Property(e => e.DoubleNumberToBytesConverterProperty).HasConversion<NumberToBytesConverter<double>>();
-                b.Property(e => e.IntNumberToStringConverterProperty).HasConversion<NumberToStringConverter<int>>();
-                b.Property(e => e.DecimalNumberToStringConverterProperty).HasConversion<NumberToStringConverter<decimal>>();
-                b.Property(e => e.DoubleNumberToStringConverterProperty).HasConversion<NumberToStringConverter<double>>();
-                b.Property(e => e.PhysicalAddressToBytesConverterProperty).HasConversion<PhysicalAddressToBytesConverter>();
-                b.Property(e => e.PhysicalAddressToStringConverterProperty).HasConversion<PhysicalAddressToStringConverter>();
-                b.Property(e => e.StringToBoolConverterProperty).HasConversion<StringToBoolConverter>();
-                b.Property(e => e.StringToBytesConverterProperty).HasConversion(new StringToBytesConverter(Encoding.UTF32));
-                b.Property(e => e.StringToCharConverterProperty).HasConversion<StringToCharConverter>();
-                b.Property(e => e.StringToDateOnlyConverterProperty).HasConversion<StringToDateOnlyConverter>();
-                b.Property(e => e.StringToDateTimeConverterProperty).HasConversion<StringToDateTimeConverter>();
-                b.Property(e => e.StringToDateTimeOffsetConverterProperty).HasConversion<StringToDateTimeOffsetConverter>();
-                b.Property(e => e.StringToEnumConverterProperty).HasConversion<StringToEnumConverter<EnumU32>>();
-                b.Property(e => e.StringToIntNumberConverterProperty).HasConversion<StringToNumberConverter<int>>();
-                b.Property(e => e.StringToDecimalNumberConverterProperty).HasConversion<StringToNumberConverter<decimal>>();
-                b.Property(e => e.StringToDoubleNumberConverterProperty).HasConversion<StringToNumberConverter<double>>();
-                b.Property(e => e.StringToTimeOnlyConverterProperty).HasConversion<StringToTimeOnlyConverter>();
-                b.Property(e => e.StringToTimeSpanConverterProperty).HasConversion<StringToTimeSpanConverter>();
-                b.Property(e => e.StringToUriConverterProperty).HasConversion<StringToUriConverter>();
-                b.Property(e => e.TimeOnlyToStringConverterProperty).HasConversion<TimeOnlyToStringConverter>();
-                b.Property(e => e.TimeOnlyToTicksConverterProperty).HasConversion<TimeOnlyToTicksConverter>();
-                b.Property(e => e.TimeSpanToStringConverterProperty).HasConversion<TimeSpanToStringConverter>();
-                b.Property(e => e.TimeSpanToTicksConverterProperty).HasConversion<TimeSpanToTicksConverter>();
-                b.Property(e => e.UriToStringConverterProperty).HasConversion<UriToStringConverter>();
-                b.Property(e => e.NullIntToNullStringConverterProperty).HasConversion<NullIntToNullStringConverter>();
-            });
+            b.PrimitiveCollection(e => e.Enum8AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum16AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum32AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.Enum64AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU8AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU16AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU32AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+            b.PrimitiveCollection(e => e.EnumU64AsStringArray)
+                .ElementType(b => b.HasConversion<string>());
+
+            b.Property(e => e.BoolToStringConverterProperty)
+                .HasConversion(new BoolToStringConverter("A", "B"));
+            b.Property(e => e.BoolToTwoValuesConverterProperty)
+                .HasConversion(new BoolToTwoValuesConverter<byte>(0, 1));
+            b.Property(e => e.BoolToZeroOneConverterProperty)
+                .HasConversion<BoolToZeroOneConverter<short>>();
+            b.Property(e => e.BytesToStringConverterProperty)
+                .HasConversion<BytesToStringConverter, ArrayStructuralComparer<byte>>();
+            b.Property(e => e.CastingConverterProperty)
+                .HasConversion<CastingConverter<int, decimal>>();
+            b.Property(e => e.CharToStringConverterProperty).HasConversion<CharToStringConverter>();
+            b.Property(e => e.DateOnlyToStringConverterProperty)
+                .HasConversion<DateOnlyToStringConverter>();
+            b.Property(e => e.DateTimeOffsetToBinaryConverterProperty)
+                .HasConversion<DateTimeOffsetToBinaryConverter>();
+            b.Property(e => e.DateTimeOffsetToBytesConverterProperty)
+                .HasConversion<DateTimeOffsetToBytesConverter>();
+            b.Property(e => e.DateTimeOffsetToStringConverterProperty)
+                .HasConversion<DateTimeOffsetToStringConverter>();
+            b.Property(e => e.DateTimeToBinaryConverterProperty)
+                .HasConversion<DateTimeToBinaryConverter>();
+            b.Property(e => e.DateTimeToStringConverterProperty)
+                .HasConversion<DateTimeToStringConverter>();
+            b.Property(e => e.EnumToNumberConverterProperty)
+                .HasConversion<EnumToNumberConverter<Enum32, int>>();
+            b.Property(e => e.EnumToStringConverterProperty)
+                .HasConversion<EnumToStringConverter<Enum32>>();
+            b.Property(e => e.GuidToBytesConverterProperty).HasConversion<GuidToBytesConverter>();
+            b.Property(e => e.GuidToStringConverterProperty).HasConversion<GuidToStringConverter>();
+            b.Property(e => e.IPAddressToBytesConverterProperty)
+                .HasConversion<IPAddressToBytesConverter>();
+            b.Property(e => e.IPAddressToStringConverterProperty)
+                .HasConversion<IPAddressToStringConverter>();
+            b.Property(e => e.IntNumberToBytesConverterProperty)
+                .HasConversion<NumberToBytesConverter<int>>();
+            b.Property(e => e.DecimalNumberToBytesConverterProperty)
+                .HasConversion<NumberToBytesConverter<decimal>>();
+            b.Property(e => e.DoubleNumberToBytesConverterProperty)
+                .HasConversion<NumberToBytesConverter<double>>();
+            b.Property(e => e.IntNumberToStringConverterProperty)
+                .HasConversion<NumberToStringConverter<int>>();
+            b.Property(e => e.DecimalNumberToStringConverterProperty)
+                .HasConversion<NumberToStringConverter<decimal>>();
+            b.Property(e => e.DoubleNumberToStringConverterProperty)
+                .HasConversion<NumberToStringConverter<double>>();
+            b.Property(e => e.PhysicalAddressToBytesConverterProperty)
+                .HasConversion<PhysicalAddressToBytesConverter>();
+            b.Property(e => e.PhysicalAddressToStringConverterProperty)
+                .HasConversion<PhysicalAddressToStringConverter>();
+            b.Property(e => e.StringToBoolConverterProperty).HasConversion<StringToBoolConverter>();
+            b.Property(e => e.StringToBytesConverterProperty)
+                .HasConversion(new StringToBytesConverter(Encoding.UTF32));
+            b.Property(e => e.StringToCharConverterProperty).HasConversion<StringToCharConverter>();
+            b.Property(e => e.StringToDateOnlyConverterProperty)
+                .HasConversion<StringToDateOnlyConverter>();
+            b.Property(e => e.StringToDateTimeConverterProperty)
+                .HasConversion<StringToDateTimeConverter>();
+            b.Property(e => e.StringToDateTimeOffsetConverterProperty)
+                .HasConversion<StringToDateTimeOffsetConverter>();
+            b.Property(e => e.StringToEnumConverterProperty)
+                .HasConversion<StringToEnumConverter<EnumU32>>();
+            b.Property(e => e.StringToIntNumberConverterProperty)
+                .HasConversion<StringToNumberConverter<int>>();
+            b.Property(e => e.StringToDecimalNumberConverterProperty)
+                .HasConversion<StringToNumberConverter<decimal>>();
+            b.Property(e => e.StringToDoubleNumberConverterProperty)
+                .HasConversion<StringToNumberConverter<double>>();
+            b.Property(e => e.StringToTimeOnlyConverterProperty)
+                .HasConversion<StringToTimeOnlyConverter>();
+            b.Property(e => e.StringToTimeSpanConverterProperty)
+                .HasConversion<StringToTimeSpanConverter>();
+            b.Property(e => e.StringToUriConverterProperty).HasConversion<StringToUriConverter>();
+            b.Property(e => e.TimeOnlyToStringConverterProperty)
+                .HasConversion<TimeOnlyToStringConverter>();
+            b.Property(e => e.TimeOnlyToTicksConverterProperty)
+                .HasConversion<TimeOnlyToTicksConverter>();
+            b.Property(e => e.TimeSpanToStringConverterProperty)
+                .HasConversion<TimeSpanToStringConverter>();
+            b.Property(e => e.TimeSpanToTicksConverterProperty)
+                .HasConversion<TimeSpanToTicksConverter>();
+            b.Property(e => e.UriToStringConverterProperty).HasConversion<UriToStringConverter>();
+            b.Property(e => e.NullIntToNullStringConverterProperty)
+                .HasConversion<NullIntToNullStringConverter>();
+        });
     }
 
     protected virtual void AssertBigModel(IModel model, bool jsonColumns)
@@ -252,7 +306,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Null(principalBase.GetQueryFilter());
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
-            Assert.Throws<InvalidOperationException>(() => principalBase.GetSeedData()).Message);
+            Assert.Throws<InvalidOperationException>(() => principalBase.GetSeedData()).Message
+        );
 
         var principalId = principalBase.FindProperty(nameof(PrincipalBase.Id))!;
         Assert.Equal(typeof(long?), principalId.ClrType);
@@ -269,7 +324,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
         var principalAlternateId = principalBase.FindProperty(nameof(PrincipalBase.AlternateId))!;
         var compositeIndex = principalBase.GetIndexes().Single();
-        Assert.Equal(PropertyAccessMode.FieldDuringConstruction, principalAlternateId.GetPropertyAccessMode());
+        Assert.Equal(
+            PropertyAccessMode.FieldDuringConstruction,
+            principalAlternateId.GetPropertyAccessMode()
+        );
         Assert.Empty(compositeIndex.GetAnnotations());
         Assert.Equal(new[] { principalAlternateId, principalId }, compositeIndex.Properties);
         Assert.False(compositeIndex.IsUnique);
@@ -287,12 +345,16 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Equal(new[] { principalId, principalAlternateId }, principalKey.Properties);
         Assert.True(principalKey.IsPrimaryKey());
 
-        Assert.Equal(new[] { principalAlternateKey, principalKey }, principalId.GetContainingKeys());
+        Assert.Equal(
+            new[] { principalAlternateKey, principalKey },
+            principalId.GetContainingKeys()
+        );
 
         var referenceOwnedNavigation = principalBase.GetNavigations().Single();
         Assert.Equal(
             new[] { CoreAnnotationNames.EagerLoaded },
-            referenceOwnedNavigation.GetAnnotations().Select(a => a.Name));
+            referenceOwnedNavigation.GetAnnotations().Select(a => a.Name)
+        );
         Assert.Equal(nameof(PrincipalBase.Owned), referenceOwnedNavigation.Name);
         Assert.False(referenceOwnedNavigation.IsCollection);
         Assert.True(referenceOwnedNavigation.IsEagerLoaded);
@@ -316,16 +378,25 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Null(referenceOwnedType.FindIndexerPropertyInfo());
         Assert.Equal(
             ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues,
-            referenceOwnedType.GetChangeTrackingStrategy());
+            referenceOwnedType.GetChangeTrackingStrategy()
+        );
         Assert.Null(referenceOwnedType.GetQueryFilter());
         Assert.Null(referenceOwnedType[CoreAnnotationNames.PropertyAccessMode]);
         Assert.Null(referenceOwnedType[CoreAnnotationNames.NavigationAccessMode]);
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
-            Assert.Throws<InvalidOperationException>(() => referenceOwnedType.GetPropertyAccessMode()).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => referenceOwnedType.GetPropertyAccessMode())
+                .Message
+        );
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
-            Assert.Throws<InvalidOperationException>(() => referenceOwnedType.GetNavigationAccessMode()).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => referenceOwnedType.GetNavigationAccessMode()
+                )
+                .Message
+        );
 
         var ownedId = referenceOwnedType.FindProperty("PrincipalBaseId")!;
         Assert.True(ownedId.IsPrimaryKey());
@@ -356,16 +427,22 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Equal(PropertyAccessMode.PreferField, ownedServiceProperty.GetPropertyAccessMode());
         Assert.Null(ownedServiceProperty[CoreAnnotationNames.PropertyAccessMode]);
 
-        var principalDerived = model.FindEntityType(typeof(PrincipalDerived<DependentBase<byte?>>))!;
+        var principalDerived = model.FindEntityType(
+            typeof(PrincipalDerived<DependentBase<byte?>>)
+        )!;
         Assert.Equal(principalBase, principalDerived.BaseType);
         Assert.Equal(
             "Microsoft.EntityFrameworkCore.Scaffolding.CompiledModelTestBase+"
-            + "PrincipalDerived<Microsoft.EntityFrameworkCore.Scaffolding.CompiledModelTestBase+DependentBase<byte?>>",
-            principalDerived.Name);
+                + "PrincipalDerived<Microsoft.EntityFrameworkCore.Scaffolding.CompiledModelTestBase+DependentBase<byte?>>",
+            principalDerived.Name
+        );
         Assert.False(principalDerived.IsOwned());
         Assert.IsType<ConstructorBinding>(principalDerived.ConstructorBinding);
         Assert.Equal(ChangeTrackingStrategy.Snapshot, principalDerived.GetChangeTrackingStrategy());
-        Assert.Equal("PrincipalDerived<DependentBase<byte?>>", principalDerived.GetDiscriminatorValue());
+        Assert.Equal(
+            "PrincipalDerived<DependentBase<byte?>>",
+            principalDerived.GetDiscriminatorValue()
+        );
 
         Assert.Equal(2, principalDerived.GetDeclaredNavigations().Count());
         var dependentNavigation = principalDerived.GetDeclaredNavigations().First();
@@ -398,7 +475,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.True(collectionOwnedType.IsOwned());
         Assert.Null(collectionOwnedType.BaseType);
         Assert.IsType<ConstructorBinding>(collectionOwnedType.ConstructorBinding);
-        Assert.Equal(ChangeTrackingStrategy.Snapshot, collectionOwnedType.GetChangeTrackingStrategy());
+        Assert.Equal(
+            ChangeTrackingStrategy.Snapshot,
+            collectionOwnedType.GetChangeTrackingStrategy()
+        );
 
         var collectionOwnership = ownedCollectionNavigation.ForeignKey;
         Assert.Same(collectionOwnership, collectionOwnedType.FindOwnership());
@@ -424,11 +504,19 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Equal("Deriveds", derivedSkipNavigation.Inverse.Name);
         Assert.Same(principalBase.GetSkipNavigations().Single(), derivedSkipNavigation.Inverse);
 
-        Assert.Same(derivedSkipNavigation, derivedSkipNavigation.ForeignKey.GetReferencingSkipNavigations().Single());
         Assert.Same(
-            derivedSkipNavigation.Inverse, derivedSkipNavigation.Inverse.ForeignKey.GetReferencingSkipNavigations().Single());
+            derivedSkipNavigation,
+            derivedSkipNavigation.ForeignKey.GetReferencingSkipNavigations().Single()
+        );
+        Assert.Same(
+            derivedSkipNavigation.Inverse,
+            derivedSkipNavigation.Inverse.ForeignKey.GetReferencingSkipNavigations().Single()
+        );
 
-        Assert.Equal(new[] { derivedSkipNavigation.Inverse, derivedSkipNavigation }, principalDerived.GetSkipNavigations());
+        Assert.Equal(
+            new[] { derivedSkipNavigation.Inverse, derivedSkipNavigation },
+            principalDerived.GetSkipNavigations()
+        );
 
         var joinType = derivedSkipNavigation.JoinEntityType;
 
@@ -464,7 +552,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Same(dependentNavigation.Inverse, dependentForeignKey.DependentToPrincipal);
         Assert.Same(dependentNavigation, dependentForeignKey.PrincipalToDependent);
         Assert.Equal(DeleteBehavior.ClientNoAction, dependentForeignKey.DeleteBehavior);
-        Assert.Equal(new[] { "PrincipalId", "PrincipalAlternateId" }, dependentForeignKey.Properties.Select(p => p.Name));
+        Assert.Equal(
+            new[] { "PrincipalId", "PrincipalAlternateId" },
+            dependentForeignKey.Properties.Select(p => p.Name)
+        );
         Assert.Same(principalKey, dependentForeignKey.PrincipalKey);
 
         var dependentBase = dependentNavigation.TargetEntityType;
@@ -472,14 +563,22 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.False(dependentBase.GetIsDiscriminatorMappingComplete());
         var principalDiscriminator = dependentBase.FindDiscriminatorProperty()!;
         Assert.IsType<DiscriminatorValueGenerator>(
-            principalDiscriminator.GetValueGeneratorFactory()!(principalDiscriminator, dependentBase));
+            principalDiscriminator.GetValueGeneratorFactory()!(
+                principalDiscriminator,
+                dependentBase
+            )
+        );
         Assert.Equal(Enum1.One, dependentBase.GetDiscriminatorValue());
 
-        var dependentBaseForeignKey = dependentBase.GetForeignKeys().Single(fk => fk != dependentForeignKey);
+        var dependentBaseForeignKey = dependentBase
+            .GetForeignKeys()
+            .Single(fk => fk != dependentForeignKey);
         var dependentForeignKeyProperty = dependentBaseForeignKey.Properties.Single();
 
         Assert.Equal(
-            new[] { dependentBaseForeignKey, dependentForeignKey }, dependentForeignKeyProperty.GetContainingForeignKeys());
+            new[] { dependentBaseForeignKey, dependentForeignKey },
+            dependentForeignKeyProperty.GetContainingForeignKeys()
+        );
 
         var dependentDerived = dependentBase.GetDerivedTypes().Single();
         Assert.Equal(Enum1.Two, dependentDerived.GetDiscriminatorValue());
@@ -516,66 +615,72 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
         Assert.Equal(
             new[] { derivedSkipNavigation.ForeignKey, collectionOwnership, dependentForeignKey },
-            principalDerived.GetDeclaredReferencingForeignKeys());
+            principalDerived.GetDeclaredReferencingForeignKeys()
+        );
     }
 
     [ConditionalFact]
-    public virtual void ComplexTypes()
-        => Test(
+    public virtual void ComplexTypes() =>
+        Test(
             BuildComplexTypesModel,
             AssertComplexTypes,
             c =>
             {
-                c.Set<PrincipalDerived<DependentBase<byte?>>>().Add(
-                    new PrincipalDerived<DependentBase<byte?>>
-                    {
-                        Id = 1,
-                        AlternateId = new Guid(),
-                        Dependent = new DependentBase<byte?>(1),
-                        Owned = new OwnedType(c) { Principal = new PrincipalBase() }
-                    });
+                c.Set<PrincipalDerived<DependentBase<byte?>>>()
+                    .Add(
+                        new PrincipalDerived<DependentBase<byte?>>
+                        {
+                            Id = 1,
+                            AlternateId = new Guid(),
+                            Dependent = new DependentBase<byte?>(1),
+                            Owned = new OwnedType(c) { Principal = new PrincipalBase() },
+                        }
+                    );
 
                 //c.SaveChanges();
             },
-            options: new CompiledModelCodeGenerationOptions { UseNullableReferenceTypes = true });
+            options: new CompiledModelCodeGenerationOptions { UseNullableReferenceTypes = true }
+        );
 
     protected virtual void BuildComplexTypesModel(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<PrincipalBase>(
-            eb =>
-            {
-                eb.Ignore(e => e.Owned);
-                eb.ComplexProperty(
-                    e => e.Owned, eb =>
-                    {
-                        eb.IsRequired()
-                            .HasField("_ownedField")
-                            .UsePropertyAccessMode(PropertyAccessMode.Field)
-                            .HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues)
-                            .HasPropertyAnnotation("goo", "ber")
-                            .HasTypeAnnotation("go", "brr");
-                        eb.Property(c => c.Details)
-                            .IsUnicode(false)
-                            .IsRequired(false)
-                            .HasField("_details")
-                            .HasSentinel("")
-                            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
-                            .HasMaxLength(64)
-                            .HasPrecision(3, 2)
-                            .IsRowVersion()
-                            .HasAnnotation("foo", "bar");
-                        eb.Ignore(e => e.Context);
-                        eb.ComplexProperty(o => o.Principal).IsRequired();
-                    });
-            });
+        modelBuilder.Entity<PrincipalBase>(eb =>
+        {
+            eb.Ignore(e => e.Owned);
+            eb.ComplexProperty(
+                e => e.Owned,
+                eb =>
+                {
+                    eb.IsRequired()
+                        .HasField("_ownedField")
+                        .UsePropertyAccessMode(PropertyAccessMode.Field)
+                        .HasChangeTrackingStrategy(
+                            ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
+                        )
+                        .HasPropertyAnnotation("goo", "ber")
+                        .HasTypeAnnotation("go", "brr");
+                    eb.Property(c => c.Details)
+                        .IsUnicode(false)
+                        .IsRequired(false)
+                        .HasField("_details")
+                        .HasSentinel("")
+                        .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
+                        .HasMaxLength(64)
+                        .HasPrecision(3, 2)
+                        .IsRowVersion()
+                        .HasAnnotation("foo", "bar");
+                    eb.Ignore(e => e.Context);
+                    eb.ComplexProperty(o => o.Principal).IsRequired();
+                }
+            );
+        });
 
-        modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(
-            eb =>
-            {
-                //eb.ComplexCollection(typeof(OwnedType).Name, "ManyOwned");
-                eb.Ignore(p => p.Dependent);
-                eb.Ignore(p => p.Principals);
-            });
+        modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(eb =>
+        {
+            //eb.ComplexCollection(typeof(OwnedType).Name, "ManyOwned");
+            eb.Ignore(p => p.Dependent);
+            eb.Ignore(p => p.Principals);
+        });
     }
 
     protected virtual void AssertComplexTypes(IModel model)
@@ -583,9 +688,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         var principalBase = model.FindEntityType(typeof(PrincipalBase))!;
 
         var complexProperty = principalBase.GetComplexProperties().Single();
-        Assert.Equal(
-            new[] { "goo" },
-            complexProperty.GetAnnotations().Select(a => a.Name));
+        Assert.Equal(new[] { "goo" }, complexProperty.GetAnnotations().Select(a => a.Name));
         Assert.Equal(nameof(PrincipalBase.Owned), complexProperty.Name);
         Assert.False(complexProperty.IsCollection);
         Assert.False(complexProperty.IsNullable);
@@ -605,10 +708,14 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Null(complexType.FindIndexerPropertyInfo());
         Assert.Equal(
             ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues,
-            complexType.GetChangeTrackingStrategy());
+            complexType.GetChangeTrackingStrategy()
+        );
         Assert.Equal(
             CoreStrings.RuntimeModelMissingData,
-            Assert.Throws<InvalidOperationException>(() => complexType.GetPropertyAccessMode()).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => complexType.GetPropertyAccessMode())
+                .Message
+        );
         Assert.Equal("brr", complexType["go"]);
 
         var detailsProperty = complexType.FindProperty(nameof(OwnedType.Details))!;
@@ -626,46 +733,50 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Assert.Equal(3, detailsProperty.GetPrecision());
         Assert.Equal(2, detailsProperty.GetScale());
         Assert.Equal("", detailsProperty.Sentinel);
-        Assert.Equal(PropertyAccessMode.FieldDuringConstruction, detailsProperty.GetPropertyAccessMode());
+        Assert.Equal(
+            PropertyAccessMode.FieldDuringConstruction,
+            detailsProperty.GetPropertyAccessMode()
+        );
         Assert.Null(detailsProperty.GetValueConverter());
         Assert.NotNull(detailsProperty.GetValueComparer());
         Assert.NotNull(detailsProperty.GetKeyValueComparer());
 
-        var nestedComplexType = complexType.FindComplexProperty(nameof(OwnedType.Principal))!.ComplexType;
+        var nestedComplexType = complexType
+            .FindComplexProperty(nameof(OwnedType.Principal))!
+            .ComplexType;
 
         Assert.Equal(14, nestedComplexType.GetProperties().Count());
 
-        var principalDerived = model.FindEntityType(typeof(PrincipalDerived<DependentBase<byte?>>))!;
+        var principalDerived = model.FindEntityType(
+            typeof(PrincipalDerived<DependentBase<byte?>>)
+        )!;
         Assert.Equal(principalBase, principalDerived.BaseType);
 
-        Assert.Equal(
-            new[] { principalBase, principalDerived },
-            model.GetEntityTypes());
+        Assert.Equal(new[] { principalBase, principalDerived }, model.GetEntityTypes());
     }
 
     public class CustomValueComparer<T> : ValueComparer<T>
     {
         public CustomValueComparer()
-            : base(false)
-        {
-        }
+            : base(false) { }
     }
 
     public class ManyTypesIdConverter : ValueConverter<ManyTypesId, int>
     {
         public ManyTypesIdConverter()
-            : base(v => v.Id, v => new ManyTypesId(v))
-        {
-        }
+            : base(v => v.Id, v => new ManyTypesId(v)) { }
     }
 
     public class NullIntToNullStringConverter : ValueConverter<int?, string?>
     {
         public NullIntToNullStringConverter()
-            : base(v => v == null ? null : v.ToString()!, v => v == null || v == "<null>" ? null : int.Parse(v), convertsNulls: true)
-        {
-        }
+            : base(
+                v => v == null ? null : v.ToString()!,
+                v => v == null || v == "<null>" ? null : int.Parse(v),
+                convertsNulls: true
+            ) { }
     }
+
     public abstract class AbstractBase
     {
         public int Id { get; set; }
@@ -690,7 +801,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
     {
         Default = 0,
         One = 1,
-        Two = 2
+        Two = 2,
     }
 
     public enum Enum8 : sbyte
@@ -698,7 +809,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = sbyte.MinValue,
         Default = 0,
         One = 1,
-        Max = sbyte.MaxValue
+        Max = sbyte.MaxValue,
     }
 
     public enum Enum16 : short
@@ -706,7 +817,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = short.MinValue,
         Default = 0,
         One = 1,
-        Max = short.MaxValue
+        Max = short.MaxValue,
     }
 
     public enum Enum32
@@ -714,7 +825,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = int.MinValue,
         Default = 0,
         One = 1,
-        Max = int.MaxValue
+        Max = int.MaxValue,
     }
 
     public enum Enum64 : long
@@ -722,7 +833,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = long.MinValue,
         Default = 0,
         One = 1,
-        Max = long.MaxValue
+        Max = long.MaxValue,
     }
 
     public enum EnumU8 : byte
@@ -730,7 +841,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = byte.MinValue,
         Default = 0,
         One = 1,
-        Max = byte.MaxValue
+        Max = byte.MaxValue,
     }
 
     public enum EnumU16 : ushort
@@ -738,7 +849,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = ushort.MinValue,
         Default = 0,
         One = 1,
-        Max = ushort.MaxValue
+        Max = ushort.MaxValue,
     }
 
     public enum EnumU32 : uint
@@ -746,7 +857,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = uint.MinValue,
         Default = 0,
         One = 1,
-        Max = uint.MaxValue
+        Max = uint.MaxValue,
     }
 
     public enum EnumU64 : ulong
@@ -754,16 +865,18 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Min = ulong.MinValue,
         Default = 0,
         One = 1,
-        Max = ulong.MaxValue
+        Max = ulong.MaxValue,
     }
 
     public sealed class MyJsonGuidReaderWriter : JsonValueReaderWriter<Guid>
     {
-        public override Guid FromJsonTyped(ref Utf8JsonReaderManager manager, object? existingObject = null)
-            => manager.CurrentReader.GetGuid();
+        public override Guid FromJsonTyped(
+            ref Utf8JsonReaderManager manager,
+            object? existingObject = null
+        ) => manager.CurrentReader.GetGuid();
 
-        public override void ToJsonTyped(Utf8JsonWriter writer, Guid value)
-            => writer.WriteStringValue(value);
+        public override void ToJsonTyped(Utf8JsonWriter writer, Guid value) =>
+            writer.WriteStringValue(value);
     }
 
     public class ManyTypes
@@ -1023,6 +1136,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
     }
 
     public readonly record struct ManyTypesId(int Id);
+
     public class Data
     {
         public byte[]? Blob { get; set; }
@@ -1049,7 +1163,11 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         public IEnumerable<string>? RefTypeEnumerable { get; set; }
 
         private OwnedType _ownedField = null!;
-        public OwnedType Owned { get => _ownedField; set => _ownedField = value; }
+        public OwnedType Owned
+        {
+            get => _ownedField;
+            set => _ownedField = value;
+        }
         public ICollection<PrincipalBase> Deriveds { get; set; } = null!;
     }
 
@@ -1075,9 +1193,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
     public class DependentDerived<TKey> : DependentBase<TKey>
     {
         public DependentDerived(TKey id)
-            : base(id)
-        {
-        }
+            : base(id) { }
 
         private string? Data { get; set; }
     }
@@ -1086,9 +1202,7 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
     {
         private DbContext? _context;
 
-        public OwnedType()
-        {
-        }
+        public OwnedType() { }
 
         public OwnedType(DbContext context)
         {
@@ -1136,7 +1250,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueTypeList)));
                 _valueTypeList = value;
-                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(ValueTypeList)));
+                PropertyChanging?.Invoke(
+                    this,
+                    new PropertyChangingEventArgs(nameof(ValueTypeList))
+                );
             }
         }
 
@@ -1149,7 +1266,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             {
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueTypeArray)));
                 _valueTypeArray = value;
-                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(ValueTypeArray)));
+                PropertyChanging?.Invoke(
+                    this,
+                    new PropertyChangingEventArgs(nameof(ValueTypeArray))
+                );
             }
         }
 
@@ -1158,9 +1278,15 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             get => _valueTypeEnumerable;
             set
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(ValueTypeEnumerable)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(ValueTypeEnumerable))
+                );
                 _valueTypeEnumerable = value;
-                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(ValueTypeEnumerable)));
+                PropertyChanging?.Invoke(
+                    this,
+                    new PropertyChangingEventArgs(nameof(ValueTypeEnumerable))
+                );
             }
         }
 
@@ -1202,9 +1328,15 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             get => _refTypeEnumerable;
             set
             {
-                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(RefTypeEnumerable)));
+                PropertyChanged?.Invoke(
+                    this,
+                    new PropertyChangedEventArgs(nameof(RefTypeEnumerable))
+                );
                 _refTypeEnumerable = value;
-                PropertyChanging?.Invoke(this, new PropertyChangingEventArgs(nameof(RefTypeEnumerable)));
+                PropertyChanging?.Invoke(
+                    this,
+                    new PropertyChangingEventArgs(nameof(RefTypeEnumerable))
+                );
             }
         }
     }
@@ -1214,8 +1346,10 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
     private string _filePath = "";
 
-    protected virtual BuildSource AddReferences(BuildSource build,
-        [CallerFilePath] string filePath = "")
+    protected virtual BuildSource AddReferences(
+        BuildSource build,
+        [CallerFilePath] string filePath = ""
+    )
     {
         _filePath = filePath;
         build.References.Add(BuildReference.ByName("System.Linq"));
@@ -1225,15 +1359,17 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Abstractions"));
         build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Proxies"));
-        build.References.Add(BuildReference.ByName("Microsoft.EntityFrameworkCore.Specification.Tests"));
-        build.References.Add(BuildReference.ByName(typeof(CompiledModelTestBase).Assembly.GetName().Name));
+        build.References.Add(
+            BuildReference.ByName("Microsoft.EntityFrameworkCore.Specification.Tests")
+        );
+        build.References.Add(
+            BuildReference.ByName(typeof(CompiledModelTestBase).Assembly.GetName().Name)
+        );
         build.References.Add(BuildReference.ByName(GetType().Assembly.GetName().Name));
         return build;
     }
 
-    protected virtual void AddDesignTimeServices(IServiceCollection services)
-    {
-    }
+    protected virtual void AddDesignTimeServices(IServiceCollection services) { }
 
     protected virtual void Test(
         Action<ModelBuilder> onModelCreating,
@@ -1244,8 +1380,9 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Action<IServiceCollection>? addServices = null,
         Action<IServiceCollection>? addDesignTimeServices = null,
         string? expectedExceptionMessage = null,
-        [CallerMemberName] string testName = "")
-        => Test<DbContext>(
+        [CallerMemberName] string testName = ""
+    ) =>
+        Test<DbContext>(
             onModelCreating,
             assertModel,
             useContext,
@@ -1254,7 +1391,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             addServices,
             addDesignTimeServices,
             expectedExceptionMessage,
-            testName);
+            testName
+        );
 
     protected virtual (TContext?, IModel?) Test<TContext>(
         Action<ModelBuilder>? onModelCreating = null,
@@ -1265,7 +1403,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         Action<IServiceCollection>? addServices = null,
         Action<IServiceCollection>? addDesignTimeServices = null,
         string? expectedExceptionMessage = null,
-        [CallerMemberName] string testName = "")
+        [CallerMemberName] string testName = ""
+    )
         where TContext : DbContext
     {
         var contextFactory = CreateContextFactory<TContext>(
@@ -1277,7 +1416,8 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
                 onModelCreating?.Invoke(modelBuilder);
             },
             onConfiguring,
-            addServices);
+            addServices
+        );
         var context = contextFactory.CreateContext();
         var model = context.GetService<IDesignTimeModel>().Model;
 
@@ -1285,13 +1425,15 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         options.ModelNamespace ??= "TestNamespace";
         options.ContextType ??= context.GetType();
 
-        var generator = TestHelpers.CreateDesignServiceProvider(
+        var generator = TestHelpers
+            .CreateDesignServiceProvider(
                 context.GetService<IDatabaseProvider>().Name,
                 addDesignTimeServices: services =>
                 {
                     AddDesignTimeServices(services);
                     addDesignTimeServices?.Invoke(services);
-                })
+                }
+            )
             .GetRequiredService<ICompiledModelCodeGeneratorSelector>()
             .Select(options);
 
@@ -1299,16 +1441,16 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         {
             Assert.Equal(
                 expectedExceptionMessage,
-                Assert.Throws<InvalidOperationException>(
-                    () => generator.GenerateModel(
-                        model,
-                        options)).Message);
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => generator.GenerateModel(model, options)
+                    )
+                    .Message
+            );
             return (null, null);
         }
 
-        var scaffoldedFiles = generator.GenerateModel(
-            model,
-            options);
+        var scaffoldedFiles = generator.GenerateModel(model, options);
 
         var compiledModel = CompileModel(scaffoldedFiles, options, context);
         assertModel?.Invoke(compiledModel);
@@ -1318,7 +1460,11 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         if (useContext != null)
         {
             ListLoggerFactory.Clear();
-            TestStore.Initialize(ServiceProvider, contextFactory.CreateContext, c => useContext((TContext)c));
+            TestStore.Initialize(
+                ServiceProvider,
+                contextFactory.CreateContext,
+                c => useContext((TContext)c)
+            );
         }
 
         AssertBaseline(scaffoldedFiles, testName);
@@ -1329,12 +1475,13 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
     private IModel CompileModel(
         IReadOnlyCollection<ScaffoldedFile> scaffoldedFiles,
         CompiledModelCodeGenerationOptions options,
-        DbContext context)
+        DbContext context
+    )
     {
         var build = new BuildSource
         {
             Sources = scaffoldedFiles.ToDictionary(f => f.Path, f => f.Code),
-            NullableReferenceTypes = options.UseNullableReferenceTypes
+            NullableReferenceTypes = options.UseNullableReferenceTypes,
         };
         AddReferences(build);
 
@@ -1344,8 +1491,12 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
         var modelType = assembly.GetType(
             string.IsNullOrEmpty(options.ModelNamespace)
                 ? modelTypeName
-                : options.ModelNamespace + "." + modelTypeName)!;
-        var instancePropertyInfo = modelType.GetProperty("Instance", BindingFlags.Public | BindingFlags.Static)!;
+                : options.ModelNamespace + "." + modelTypeName
+        )!;
+        var instancePropertyInfo = modelType.GetProperty(
+            "Instance",
+            BindingFlags.Public | BindingFlags.Static
+        )!;
         var compiledModel = (IModel)instancePropertyInfo.GetValue(null)!;
 
         var modelRuntimeInitializer = context.GetService<IModelRuntimeInitializer>();
@@ -1355,11 +1506,11 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
 
     private void AssertBaseline(
         IReadOnlyCollection<ScaffoldedFile> scaffoldedFiles,
-        string testName)
+        string testName
+    )
     {
         var testDirectory = Path.GetDirectoryName(_filePath);
-        if (string.IsNullOrEmpty(testDirectory)
-            || !Directory.Exists(testDirectory))
+        if (string.IsNullOrEmpty(testDirectory) || !Directory.Exists(testDirectory))
         {
             return;
         }
@@ -1374,12 +1525,14 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             return;
         }
 
-        var shouldRewrite = Environment.GetEnvironmentVariable("EF_TEST_REWRITE_BASELINES")?.ToUpper() is "1" or "TRUE";
+        var shouldRewrite =
+            Environment.GetEnvironmentVariable("EF_TEST_REWRITE_BASELINES")?.ToUpper()
+                is "1"
+                    or "TRUE";
         foreach (var file in scaffoldedFiles)
         {
             var fullFilePath = Path.Combine(baselinesDirectory, file.Path);
-            if (!File.Exists(fullFilePath)
-                || shouldRewrite)
+            if (!File.Exists(fullFilePath) || shouldRewrite)
             {
                 File.WriteAllText(fullFilePath, file.Code);
             }
@@ -1387,7 +1540,11 @@ public abstract class CompiledModelTestBase : NonSharedModelTestBase
             {
                 try
                 {
-                    Assert.Equal(File.ReadAllText(fullFilePath), file.Code, ignoreLineEndingDifferences: true);
+                    Assert.Equal(
+                        File.ReadAllText(fullFilePath),
+                        file.Code,
+                        ignoreLineEndingDifferences: true
+                    );
                 }
                 catch (Exception ex)
                 {

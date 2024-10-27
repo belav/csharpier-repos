@@ -9,7 +9,8 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class RelationalQueryableMethodTranslatingExpressionVisitorFactory : IQueryableMethodTranslatingExpressionVisitorFactory
+public class RelationalQueryableMethodTranslatingExpressionVisitorFactory
+    : IQueryableMethodTranslatingExpressionVisitorFactory
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -19,7 +20,8 @@ public class RelationalQueryableMethodTranslatingExpressionVisitorFactory : IQue
     /// </summary>
     public RelationalQueryableMethodTranslatingExpressionVisitorFactory(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
-        RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies)
+        RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         RelationalDependencies = relationalDependencies;
@@ -41,9 +43,12 @@ public class RelationalQueryableMethodTranslatingExpressionVisitorFactory : IQue
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual QueryableMethodTranslatingExpressionVisitor Create(QueryCompilationContext queryCompilationContext)
-        => new RelationalQueryableMethodTranslatingExpressionVisitor(
+    public virtual QueryableMethodTranslatingExpressionVisitor Create(
+        QueryCompilationContext queryCompilationContext
+    ) =>
+        new RelationalQueryableMethodTranslatingExpressionVisitor(
             Dependencies,
             RelationalDependencies,
-            queryCompilationContext);
+            queryCompilationContext
+        );
 }

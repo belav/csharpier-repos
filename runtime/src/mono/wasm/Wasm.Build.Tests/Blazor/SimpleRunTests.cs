@@ -5,10 +5,10 @@ using System.IO;
 using System.Linq;
 using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.Playwright;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Sdk;
-using Microsoft.Playwright;
 
 #nullable enable
 
@@ -35,11 +35,31 @@ public class SimpleRunTests : BlazorWasmTestBase
     }
 
     [Theory]
-    [InlineData("Debug", /*appendRID*/ true, /*useArtifacts*/ false)]
-    [InlineData("Debug", /*appendRID*/ true, /*useArtifacts*/ true)]
-    [InlineData("Debug", /*appendRID*/ false, /*useArtifacts*/ true)]
-    [InlineData("Debug", /*appendRID*/ false, /*useArtifacts*/ false)]
-    public async Task BlazorBuildAndRunForDifferentOutputPaths(string config, bool appendRID, bool useArtifacts)
+    [InlineData(
+        "Debug", /*appendRID*/
+        true, /*useArtifacts*/
+        false
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        true, /*useArtifacts*/
+        true
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        false, /*useArtifacts*/
+        true
+    )]
+    [InlineData(
+        "Debug", /*appendRID*/
+        false, /*useArtifacts*/
+        false
+    )]
+    public async Task BlazorBuildAndRunForDifferentOutputPaths(
+        string config,
+        bool appendRID,
+        bool useArtifacts
+    )
     {
         string id = $"{config}_{GetRandomId()}";
         string projectFile = CreateWasmTemplateProject(id, "blazorwasm");
@@ -47,14 +67,18 @@ public class SimpleRunTests : BlazorWasmTestBase
 
         string extraPropertiesForDBP = "";
         if (appendRID)
-            extraPropertiesForDBP += "<AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>";
+            extraPropertiesForDBP +=
+                "<AppendRuntimeIdentifierToOutputPath>true</AppendRuntimeIdentifierToOutputPath>";
         if (useArtifacts)
-            extraPropertiesForDBP += "<UseArtifactsOutput>true</UseArtifactsOutput><ArtifactsPath>.</ArtifactsPath>";
+            extraPropertiesForDBP +=
+                "<UseArtifactsOutput>true</UseArtifactsOutput><ArtifactsPath>.</ArtifactsPath>";
 
         string projectDirectory = Path.GetDirectoryName(projectFile)!;
         if (!string.IsNullOrEmpty(extraPropertiesForDBP))
-            AddItemsPropertiesToProject(Path.Combine(projectDirectory, "Directory.Build.props"),
-                                        extraPropertiesForDBP);
+            AddItemsPropertiesToProject(
+                Path.Combine(projectDirectory, "Directory.Build.props"),
+                extraPropertiesForDBP
+            );
 
         var buildArgs = new BuildArgs(projectName, config, false, id, null);
         buildArgs = ExpandBuildArgs(buildArgs);
@@ -64,12 +88,14 @@ public class SimpleRunTests : BlazorWasmTestBase
         {
             buildOptions = buildOptions with
             {
-                BinFrameworkDir = Path.Combine(projectDirectory,
-                                               "bin",
-                                               id,
-                                               config.ToLower(),
-                                               "wwwroot",
-                                               "_framework")
+                BinFrameworkDir = Path.Combine(
+                    projectDirectory,
+                    "bin",
+                    id,
+                    config.ToLower(),
+                    "wwwroot",
+                    "_framework"
+                ),
             };
         }
         BlazorBuild(buildOptions);
@@ -88,11 +114,19 @@ public class SimpleRunTests : BlazorWasmTestBase
         if (aot)
             AddItemsPropertiesToProject(projectFile, "<RunAOTCompilation>true</RunAOTCompilation>");
 
-        BlazorPublish(new BlazorBuildOptions(
-            id,
-            config,
-            aot ? NativeFilesType.AOT
-                : (config == "Release" ? NativeFilesType.Relinked : NativeFilesType.FromRuntimePack)));
+        BlazorPublish(
+            new BlazorBuildOptions(
+                id,
+                config,
+                aot
+                    ? NativeFilesType.AOT
+                    : (
+                        config == "Release"
+                            ? NativeFilesType.Relinked
+                            : NativeFilesType.FromRuntimePack
+                    )
+            )
+        );
         await BlazorRunForPublishWithWebServer(new BlazorRunOptions() { Config = config });
     }
 }

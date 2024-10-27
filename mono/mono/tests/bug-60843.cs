@@ -15,7 +15,8 @@ class A : Attribute
         Assert(y[1] == C<int>.E2.B);
     }
 
-    public static object AttributeTest (Type t) {
+    public static object AttributeTest(Type t)
+    {
         var cas = t.GetCustomAttributes(false);
         Assert(cas.Length == 1);
         Assert(cas[0] is A);
@@ -25,25 +26,34 @@ class A : Attribute
 
     private static int AssertCount = 0;
 
-    public static void Assert (
-        bool b, 
-        [CallerFilePath] string sourceFile = null, 
+    public static void Assert(
+        bool b,
+        [CallerFilePath] string sourceFile = null,
         [CallerLineNumber] int lineNumber = 0
-    ) {
+    )
+    {
         AssertCount++;
 
-        if (!b) {
+        if (!b)
+        {
             Console.Error.WriteLine($"Assert failed at {sourceFile}:{lineNumber}");
             Environment.Exit(AssertCount);
         }
     }
 }
- 
+
 public class C<T>
 {
     [A(X = C<int>.E.V)]
-    public enum E { V }
+    public enum E
+    {
+        V,
+    }
 
-    [A(X = new [] { C<int>.E2.A, C<int>.E2.B })]
-    public enum E2 { A, B }
+    [A(X = new[] { C<int>.E2.A, C<int>.E2.B })]
+    public enum E2
+    {
+        A,
+        B,
+    }
 }

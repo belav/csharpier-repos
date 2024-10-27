@@ -5,7 +5,5 @@
 namespace System.Security
 {
     // The attribute is not portable, but is needed to improve perf of interop calls on desktop.
-    internal class SuppressUnmanagedCodeSecurityAttribute : Attribute
-    {
-    }
+    internal class SuppressUnmanagedCodeSecurityAttribute : Attribute { }
 }

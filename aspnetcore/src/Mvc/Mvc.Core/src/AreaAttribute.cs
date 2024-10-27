@@ -9,7 +9,11 @@ namespace Microsoft.AspNetCore.Mvc;
 /// <summary>
 /// Specifies the area containing a controller or action.
 /// </summary>
-[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method, AllowMultiple = false, Inherited = true)]
+[AttributeUsage(
+    AttributeTargets.Class | AttributeTargets.Method,
+    AllowMultiple = false,
+    Inherited = true
+)]
 public class AreaAttribute : RouteValueAttribute
 {
     /// <summary>

@@ -4,9 +4,13 @@
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class RangeVariableSymbolReferenceFinder : AbstractMemberScopedReferenceFinder<IRangeVariableSymbol>
+    internal sealed class RangeVariableSymbolReferenceFinder
+        : AbstractMemberScopedReferenceFinder<IRangeVariableSymbol>
     {
-        protected override bool TokensMatch(FindReferencesDocumentState state, SyntaxToken token, string name)
-            => IdentifiersMatch(state.SyntaxFacts, name, token);
+        protected override bool TokensMatch(
+            FindReferencesDocumentState state,
+            SyntaxToken token,
+            string name
+        ) => IdentifiersMatch(state.SyntaxFacts, name, token);
     }
 }

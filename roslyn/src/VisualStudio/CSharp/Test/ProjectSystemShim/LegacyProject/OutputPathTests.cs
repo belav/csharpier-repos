@@ -24,14 +24,18 @@ namespace Roslyn.VisualStudio.CSharp.UnitTests.ProjectSystemShim.LegacyProject
         {
             using var environment = new TestEnvironment();
 
-            var hierarchyWithRefPath =
-                environment.CreateHierarchy(
-                    "WithRefPath",
-                    @"Z:\WithRefPath.dll",
-                    expectedRefPath,
-                    "CSharp");
+            var hierarchyWithRefPath = environment.CreateHierarchy(
+                "WithRefPath",
+                @"Z:\WithRefPath.dll",
+                expectedRefPath,
+                "CSharp"
+            );
 
-            var project = CSharpHelpers.CreateCSharpProject(environment, "WithRefPath", hierarchyWithRefPath);
+            var project = CSharpHelpers.CreateCSharpProject(
+                environment,
+                "WithRefPath",
+                hierarchyWithRefPath
+            );
             var workspaceProject = environment.Workspace.CurrentSolution.Projects.Single();
 
             Assert.Equal(expectedRefPath, workspaceProject.OutputRefFilePath);

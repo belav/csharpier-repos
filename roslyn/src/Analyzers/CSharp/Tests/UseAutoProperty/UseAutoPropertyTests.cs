@@ -21,8 +21,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseAutoProperty;
 public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
     : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest(logger)
 {
-    internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-        => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
+    internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+        Workspace workspace
+    ) => (new CSharpUseAutoPropertyAnalyzer(), GetCSharpUseAutoPropertyCodeFixProvider());
 
     [Fact]
     public async Task TestSingleGetterFromField()
@@ -47,7 +48,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -77,7 +79,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -103,7 +106,9 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """, new TestParameters(TestOptions.RegularPreview));
+            """,
+            new TestParameters(TestOptions.RegularPreview)
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -125,7 +130,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 }
             }
             struct MutableInt { public int Value; }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -153,7 +159,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 MutableInt? P { get; }
             }
             struct MutableInt { public int Value; }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -179,7 +186,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int? P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -205,7 +213,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int? P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -228,7 +237,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 }
             }
             struct MutableInt { public int Value; }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -249,7 +259,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 }
             }
             struct MutableInt { public int Value; }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -277,7 +288,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 MutableInt P { get; }
             }
             struct MutableInt { public int Value; }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -298,7 +310,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 }
             }
             struct MutableInt { public int Value { get; set; } }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -318,7 +331,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -344,7 +358,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 ErrorType P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -364,7 +379,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -390,7 +406,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 ErrorType? P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/28511")]
@@ -416,7 +433,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 ErrorType[] P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -443,7 +461,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public int P { get; private set; }
             }
             """,
-        CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5));
+            CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+        );
     }
 
     [Fact]
@@ -463,7 +482,11 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+            """,
+            new TestParameters(
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            )
+        );
     }
 
     [Fact]
@@ -489,7 +512,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; } = 1;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -509,7 +533,11 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """, new TestParameters(CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)));
+            """,
+            new TestParameters(
+                CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp5)
+            )
+        );
     }
 
     [Fact]
@@ -535,7 +563,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -555,7 +584,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -586,7 +616,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -612,7 +643,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -632,7 +664,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -663,7 +696,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -684,7 +718,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -705,7 +740,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -731,7 +767,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -757,7 +794,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -777,7 +815,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -802,7 +841,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     M(ref i);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -827,7 +867,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     M(ref this.i);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -852,7 +893,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     M(out i);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -877,7 +919,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     M(in i);
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25429")]
@@ -902,7 +945,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     ref int x = ref i;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -929,7 +973,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     ref int x = ref Class.i;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -972,7 +1017,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     ref int y = ref j;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -992,7 +1038,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1012,7 +1059,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25379")]
@@ -1032,7 +1080,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1060,7 +1109,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1088,7 +1138,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1116,7 +1167,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1149,7 +1201,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1170,7 +1223,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1206,7 +1260,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1242,7 +1297,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     this.P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1278,7 +1334,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1314,7 +1371,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1350,7 +1408,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1383,7 +1442,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     Action<int> x = _ => P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1422,7 +1482,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1455,7 +1516,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     Action x = () => P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1494,7 +1556,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1533,7 +1596,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     };
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1568,7 +1632,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/30108")]
@@ -1597,7 +1662,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     void F() => P = 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1626,7 +1692,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     bool F() => P == 1;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1638,7 +1705,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public int [|P|] { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1650,7 +1718,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public int [|P|] { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1669,7 +1738,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1691,7 +1761,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1714,7 +1785,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1740,7 +1812,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 (int, string) P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1766,7 +1839,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 (int a, string b) P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1786,7 +1860,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1812,7 +1887,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 (int a, string) P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1838,7 +1914,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 (int, string) P { get; } = (1, "hello");
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1863,7 +1940,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23216")]
@@ -1902,13 +1980,15 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int Q { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23735")]
     public async Task ExplicitInterfaceImplementationGetterOnly()
     {
-        await TestMissingInRegularAndScriptAsync("""
+        await TestMissingInRegularAndScriptAsync(
+            """
             namespace RoslynSandbox
             {
                 public interface IFoo
@@ -1931,13 +2011,15 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/23735")]
     public async Task ExplicitInterfaceImplementationGetterAndSetter()
     {
-        await TestMissingInRegularAndScriptAsync("""
+        await TestMissingInRegularAndScriptAsync(
+            """
             namespace RoslynSandbox
             {
                 public interface IFoo
@@ -1961,7 +2043,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -1983,7 +2066,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2005,7 +2089,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; } = 1;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2029,7 +2114,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 int P { get; set; } = 1;
                 void M() { P = 2; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2052,7 +2138,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2071,7 +2158,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2092,7 +2180,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 int P { get; set; }
                 void M() { P = 1; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2111,7 +2200,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; } = 1;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2133,7 +2223,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2155,7 +2246,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int P { get; set; } = 1;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25401")]
@@ -2186,7 +2278,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public int P { protected get; set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25401")]
@@ -2217,7 +2310,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public int P { get; protected set; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2239,7 +2333,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public object Bar { get; } = new object();
                 public int Baz => 0;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2261,7 +2356,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public object Bar { get; } = new object(); // prop comment
                 public int Baz => 0;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2285,7 +2381,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public object Bar { get; } = new object(); // prop comment
                 public int Baz => 0;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/26858")]
@@ -2311,7 +2408,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public object Bar { get; } = new object(); // prop comment
                 public int Baz => 0;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2340,7 +2438,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2369,7 +2468,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2399,7 +2499,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2429,7 +2530,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2458,7 +2560,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2487,7 +2590,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2517,7 +2621,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2547,7 +2652,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int j;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2578,7 +2684,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2613,7 +2720,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 int P { get; }
 
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/27675")]
@@ -2645,7 +2753,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 int P { get; }
                 #endregion
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2665,7 +2774,9 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
             	public object O { get; }
             }
-            """, new TestParameters(options: Option(FormattingOptions2.UseTabs, true)));
+            """,
+            new TestParameters(options: Option(FormattingOptions2.UseTabs, true))
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2685,7 +2796,9 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public object O { get; }
             }
-            """, new TestParameters(options: Option(FormattingOptions2.UseTabs, false)));
+            """,
+            new TestParameters(options: Option(FormattingOptions2.UseTabs, false))
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2725,7 +2838,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             </AnalyzerConfigDocument>
                 </Project>
             </Workspace>
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/40622")]
@@ -2765,7 +2879,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             </AnalyzerConfigDocument>
                 </Project>
             </Workspace>
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34783")]
@@ -2786,7 +2901,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2807,7 +2923,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 public int P { get; private set; }
                 public void SetP(int value) => P = value;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2828,7 +2945,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                 int P { get; set; }
                 public void SetP(int value) => P = value;
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/47999")]
@@ -2847,7 +2965,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public readonly int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact]
@@ -2866,7 +2985,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public readonly int P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38286")]
@@ -2886,7 +3006,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 int* P { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/38286")]
@@ -2907,7 +3028,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     }
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/25408")]
@@ -2947,7 +3069,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 public int Value { get; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32597")]
@@ -2969,7 +3092,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     c.s1 = (ulong)r3 << 32 | r2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/32597")]
@@ -3008,7 +3132,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
                     c.s1 = (ulong)r3 << 32 | r2;
                 }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71032")]
@@ -3035,7 +3160,8 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
             {
                 public required string Action { get; init; }
             }
-            """);
+            """
+        );
     }
 
     [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/71032")]
@@ -3056,6 +3182,7 @@ public sealed class UseAutoPropertyTests(ITestOutputHelper logger)
 
                 private void SetAction(string newAction) => _action = newAction;
             }
-            """);
+            """
+        );
     }
 }

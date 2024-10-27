@@ -8,11 +8,9 @@ public class JsonEntityBasicForReference
     private int _id;
     private string _name;
 
-    public int Id
-        => _id;
+    public int Id => _id;
 
-    public string Name
-        => _name;
+    public string Name => _name;
 
     public int? ParentId { get; set; }
     public JsonEntityBasic Parent { get; set; }

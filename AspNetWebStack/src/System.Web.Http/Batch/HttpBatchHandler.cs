@@ -50,31 +50,22 @@ namespace System.Web.Http.Batch
         /// <remarks>This property is internal and settable only for unit testing purposes.</remarks>
         internal IExceptionLogger ExceptionLogger
         {
-            get
-            {
-                return _server.ExceptionLogger;
-            }
-            set
-            {
-                _server.ExceptionLogger = value;
-            }
+            get { return _server.ExceptionLogger; }
+            set { _server.ExceptionLogger = value; }
         }
 
         /// <remarks>This property is internal and settable only for unit testing purposes.</remarks>
         internal IExceptionHandler ExceptionHandler
         {
-            get
-            {
-                return _server.ExceptionHandler;
-            }
-            set
-            {
-                _server.ExceptionHandler = value;
-            }
+            get { return _server.ExceptionHandler; }
+            set { _server.ExceptionHandler = value; }
         }
 
         /// <inheritdoc/>
-        protected sealed override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected sealed override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             if (request == null)
             {
@@ -105,10 +96,16 @@ namespace System.Web.Http.Batch
 
             Debug.Assert(exceptionInfo.SourceException != null);
 
-            ExceptionContext exceptionContext = new ExceptionContext(exceptionInfo.SourceException,
-                ExceptionCatchBlocks.HttpBatchHandler, request);
+            ExceptionContext exceptionContext = new ExceptionContext(
+                exceptionInfo.SourceException,
+                ExceptionCatchBlocks.HttpBatchHandler,
+                request
+            );
             await ExceptionLogger.LogAsync(exceptionContext, cancellationToken);
-            HttpResponseMessage response = await ExceptionHandler.HandleAsync(exceptionContext, cancellationToken);
+            HttpResponseMessage response = await ExceptionHandler.HandleAsync(
+                exceptionContext,
+                cancellationToken
+            );
 
             if (response == null)
             {
@@ -124,6 +121,9 @@ namespace System.Web.Http.Batch
         /// <param name="request">The batch request.</param>
         /// <param name="cancellationToken">The token to monitor for cancellation requests.</param>
         /// <returns>The batch response.</returns>
-        public abstract Task<HttpResponseMessage> ProcessBatchAsync(HttpRequestMessage request, CancellationToken cancellationToken);
+        public abstract Task<HttpResponseMessage> ProcessBatchAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        );
     }
 }

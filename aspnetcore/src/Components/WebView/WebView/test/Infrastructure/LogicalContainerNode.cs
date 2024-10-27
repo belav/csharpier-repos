@@ -3,6 +3,4 @@
 
 namespace Microsoft.AspNetCore.Components.WebView.Document;
 
-internal class LogicalContainerNode : ContainerNode
-{
-}
+internal class LogicalContainerNode : ContainerNode { }

@@ -16,16 +16,19 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatefulCallerAllocatedBufferType param);
         void MethodRef(ref StatefulCallerAllocatedBufferType param);
         StatefulCallerAllocatedBufferType Return();
+
         [PreserveSig]
         StatefulCallerAllocatedBufferType ReturnPreserveSig();
     }
 
     [NativeMarshalling(typeof(StatefulCallerAllocatedBufferTypeMarshaller))]
-    internal class StatefulCallerAllocatedBufferType
-    {
-    }
+    internal class StatefulCallerAllocatedBufferType { }
 
-    [CustomMarshaller(typeof(StatefulCallerAllocatedBufferType), MarshalMode.Default, typeof(StatefulCallerAllocatedBufferTypeMarshaller))]
+    [CustomMarshaller(
+        typeof(StatefulCallerAllocatedBufferType),
+        MarshalMode.Default,
+        typeof(StatefulCallerAllocatedBufferTypeMarshaller)
+    )]
     internal struct StatefulCallerAllocatedBufferTypeMarshaller
     {
         public static int BufferSize => 64;

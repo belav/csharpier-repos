@@ -17,19 +17,25 @@ namespace GitHub_24185
         {
             try
             {
-                throw new AggregateException(new Exception("A random exception1"), new Exception("A random exception2"));
+                throw new AggregateException(
+                    new Exception("A random exception1"),
+                    new Exception("A random exception2")
+                );
             }
             catch (Exception e)
             {
                 // Each expression in this condition checks that `e` is not null and checks its type.
                 // This information should be calculated once and propagated by assertion propagation.
-                if (!(e is AggregateException) ||
-                    !((((AggregateException)e).InnerExceptions[0] is ArgumentException)
-                    || ((AggregateException)e).InnerExceptions[0] is AggregateException))
+                if (
+                    !(e is AggregateException)
+                    || !(
+                        (((AggregateException)e).InnerExceptions[0] is ArgumentException)
+                        || ((AggregateException)e).InnerExceptions[0] is AggregateException
+                    )
+                )
                 {
                     return 100;
                 }
-
             }
             return 0;
         }

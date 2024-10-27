@@ -15,7 +15,10 @@ internal interface ICodeLensMemberFinder : ILanguageService
     /// <summary>
     /// Returns members in the document that are valid code lens locations.
     /// </summary>
-    Task<ImmutableArray<CodeLensMember>> GetCodeLensMembersAsync(Document document, CancellationToken cancellationToken);
+    Task<ImmutableArray<CodeLensMember>> GetCodeLensMembersAsync(
+        Document document,
+        CancellationToken cancellationToken
+    );
 }
 
 /// <summary>

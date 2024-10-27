@@ -10,20 +10,30 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void Ctor_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("type", () => new AssociatedMetadataTypeTypeDescriptionProvider(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "type",
+                () => new AssociatedMetadataTypeTypeDescriptionProvider(null)
+            );
         }
 
         [Fact]
         public void Ctor_NullAssociatedMetadataType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("associatedMetadataType", () => new AssociatedMetadataTypeTypeDescriptionProvider(typeof(string), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "associatedMetadataType",
+                () => new AssociatedMetadataTypeTypeDescriptionProvider(typeof(string), null)
+            );
         }
 
         [Fact]
         public void GetTypeDescriptor_MetadataHasFieldsNotPresentOnClass_ThrowsInvalidOperationException()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithInvalidMetadata));
-            Assert.Throws<InvalidOperationException>(() => provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null));
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithInvalidMetadata)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => provider.GetTypeDescriptor(typeof(ClassWithInvalidMetadata), null)
+            );
         }
 
         [Fact]
@@ -32,11 +42,21 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadata));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadata), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadata)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadata),
+                    null
+                );
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
                 Assert.Equal(1, attributes.Count);
-                Assert.Equal("typeName", Assert.IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)]).ConverterTypeName);
+                Assert.Equal(
+                    "typeName",
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
+                );
             }
         }
 
@@ -46,12 +66,27 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadataOnAnotherClass)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    null
+                );
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
                 Assert.Equal(2, attributes.Count);
-                Assert.Equal(typeof(ClassWithMetadata), Assert.IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)]).MetadataClassType);
-                Assert.Equal("typeName", Assert.IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)]).ConverterTypeName);
+                Assert.Equal(
+                    typeof(ClassWithMetadata),
+                    Assert
+                        .IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)])
+                        .MetadataClassType
+                );
+                Assert.Equal(
+                    "typeName",
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
+                );
             }
         }
 
@@ -61,12 +96,30 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass), typeof(ClassWithAttributes));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    typeof(ClassWithAttributes)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    null
+                );
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
                 Assert.Equal(2, attributes.Count);
-                Assert.Equal(typeof(ClassWithMetadata), Assert.IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)]).MetadataClassType);
-                Assert.Equal(EditorBrowsableState.Always, Assert.IsType<EditorBrowsableAttribute>(attributes[typeof(EditorBrowsableAttribute)]).State);
+                Assert.Equal(
+                    typeof(ClassWithMetadata),
+                    Assert
+                        .IsType<MetadataTypeAttribute>(attributes[typeof(MetadataTypeAttribute)])
+                        .MetadataClassType
+                );
+                Assert.Equal(
+                    EditorBrowsableState.Always,
+                    Assert
+                        .IsType<EditorBrowsableAttribute>(
+                            attributes[typeof(EditorBrowsableAttribute)]
+                        )
+                        .State
+                );
             }
         }
 
@@ -76,10 +129,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadata), typeof(ClassWithMetadata));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadata));
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadata),
+                    typeof(ClassWithMetadata)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadata)
+                );
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
-                Assert.Equal("typeName", Assert.IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)]).ConverterTypeName);
+                Assert.Equal(
+                    "typeName",
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
+                );
             }
         }
 
@@ -89,10 +152,19 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithSelfAssociatedMetadata));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithSelfAssociatedMetadata));
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithSelfAssociatedMetadata)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithSelfAssociatedMetadata)
+                );
                 AttributeCollection attributes = typeDescriptor.GetAttributes();
-                Assert.Equal("typeName", Assert.IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)]).ConverterTypeName);
+                Assert.Equal(
+                    "typeName",
+                    Assert
+                        .IsType<TypeConverterAttribute>(attributes[typeof(TypeConverterAttribute)])
+                        .ConverterTypeName
+                );
             }
         }
 
@@ -102,11 +174,20 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadata));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadata), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadata)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadata),
+                    null
+                );
                 PropertyDescriptorCollection properties = typeDescriptor.GetProperties();
-                PropertyDescriptor firstNameProperty = properties[nameof(ClassWithMetadata.FirstName)];
-                PropertyDescriptor lastNameProperty = properties[nameof(ClassWithMetadata.LastName)];
+                PropertyDescriptor firstNameProperty = properties[
+                    nameof(ClassWithMetadata.FirstName)
+                ];
+                PropertyDescriptor lastNameProperty = properties[
+                    nameof(ClassWithMetadata.LastName)
+                ];
 
                 Assert.Equal("First name", firstNameProperty.DisplayName);
                 Assert.Equal(typeof(ClassWithMetadata), firstNameProperty.ComponentType);
@@ -128,11 +209,22 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadata));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadata), null);
-                PropertyDescriptorCollection properties = typeDescriptor.GetProperties(new Attribute[] { new RequiredAttribute() });
-                PropertyDescriptor firstNameProperty = properties[nameof(ClassWithMetadata.FirstName)];
-                PropertyDescriptor lastNameProperty = properties[nameof(ClassWithMetadata.LastName)];
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadata)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadata),
+                    null
+                );
+                PropertyDescriptorCollection properties = typeDescriptor.GetProperties(
+                    new Attribute[] { new RequiredAttribute() }
+                );
+                PropertyDescriptor firstNameProperty = properties[
+                    nameof(ClassWithMetadata.FirstName)
+                ];
+                PropertyDescriptor lastNameProperty = properties[
+                    nameof(ClassWithMetadata.LastName)
+                ];
 
                 Assert.Equal("First name", firstNameProperty.DisplayName);
                 Assert.Equal(typeof(ClassWithMetadata), firstNameProperty.ComponentType);
@@ -152,16 +244,29 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [InlineData(typeof(ClassWithSelfAssociatedMetadata), "Last name")]
         [InlineData(typeof(ClassWithMetadata), "LastName")]
         [InlineData(typeof(EmptyClass), "LastName")]
-        public void GetTypeDescriptorGetProperties_WithAssociatedMetadataType_ReturnsExpected(Type associatedMetadataType, string expectedLastName)
+        public void GetTypeDescriptorGetProperties_WithAssociatedMetadataType_ReturnsExpected(
+            Type associatedMetadataType,
+            string expectedLastName
+        )
         {
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadata), associatedMetadataType);
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadata), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadata),
+                    associatedMetadataType
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadata),
+                    null
+                );
                 PropertyDescriptorCollection properties = typeDescriptor.GetProperties();
-                PropertyDescriptor firstNameProperty = properties[nameof(ClassWithMetadata.FirstName)];
-                PropertyDescriptor lastNameProperty = properties[nameof(ClassWithMetadata.LastName)];
+                PropertyDescriptor firstNameProperty = properties[
+                    nameof(ClassWithMetadata.FirstName)
+                ];
+                PropertyDescriptor lastNameProperty = properties[
+                    nameof(ClassWithMetadata.LastName)
+                ];
 
                 Assert.Equal("First name", firstNameProperty.DisplayName);
                 Assert.Equal(typeof(ClassWithMetadata), firstNameProperty.ComponentType);
@@ -183,20 +288,35 @@ namespace System.ComponentModel.DataAnnotations.Tests
             // Perform multiple times to test static caching behaviour.
             for (int i = 0; i < 2; i++)
             {
-                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null);
+                var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                    typeof(ClassWithMetadataOnAnotherClass)
+                );
+                ICustomTypeDescriptor typeDescriptor = provider.GetTypeDescriptor(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    null
+                );
                 PropertyDescriptorCollection properties = typeDescriptor.GetProperties();
-                PropertyDescriptor firstNameProperty = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
-                PropertyDescriptor lastNameProperty = properties[nameof(ClassWithMetadataOnAnotherClass.LastName)];
+                PropertyDescriptor firstNameProperty = properties[
+                    nameof(ClassWithMetadataOnAnotherClass.FirstName)
+                ];
+                PropertyDescriptor lastNameProperty = properties[
+                    nameof(ClassWithMetadataOnAnotherClass.LastName)
+                ];
 
                 Assert.Equal("First name", firstNameProperty.DisplayName);
-                Assert.Equal(typeof(ClassWithMetadataOnAnotherClass), firstNameProperty.ComponentType);
+                Assert.Equal(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    firstNameProperty.ComponentType
+                );
                 Assert.Equal(typeof(string), firstNameProperty.PropertyType);
                 Assert.True(firstNameProperty.IsReadOnly);
                 Assert.False(firstNameProperty.SupportsChangeEvents);
 
                 Assert.Equal("Last name", lastNameProperty.DisplayName);
-                Assert.Equal(typeof(ClassWithMetadataOnAnotherClass), lastNameProperty.ComponentType);
+                Assert.Equal(
+                    typeof(ClassWithMetadataOnAnotherClass),
+                    lastNameProperty.ComponentType
+                );
                 Assert.Equal(typeof(string), lastNameProperty.PropertyType);
                 Assert.False(lastNameProperty.IsReadOnly);
                 Assert.False(lastNameProperty.SupportsChangeEvents);
@@ -206,23 +326,32 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_GetValue_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
-            var component = new ClassWithMetadataOnAnotherClass
-            {
-                FirstName = "value"
-            };
+            var component = new ClassWithMetadataOnAnotherClass { FirstName = "value" };
             Assert.Equal("value", descriptor.GetValue(component));
         }
 
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_SetValue_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
             var component = new ClassWithMetadataOnAnotherClass();
             descriptor.SetValue(component, "value");
@@ -233,14 +362,17 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_ResetValue_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
-            var component = new ClassWithMetadataOnAnotherClass
-            {
-                FirstName = "value"
-            };
+            var component = new ClassWithMetadataOnAnotherClass { FirstName = "value" };
             descriptor.ResetValue(component);
             Assert.Equal("value", descriptor.GetValue(component));
             Assert.Equal("value", component.FirstName);
@@ -249,9 +381,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_CanResetValue_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
             var component = new ClassWithMetadataOnAnotherClass();
             Assert.False(descriptor.CanResetValue(component));
@@ -260,9 +398,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_ShouldSerializeValue_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
             var component = new ClassWithMetadataOnAnotherClass();
             Assert.True(descriptor.ShouldSerializeValue(component));
@@ -271,9 +415,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_AddValueChanged_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
             var component = new ClassWithMetadataOnAnotherClass();
             int callCount = 0;
@@ -286,9 +436,15 @@ namespace System.ComponentModel.DataAnnotations.Tests
         [Fact]
         public void GetTypeDescriptorGetPropertiesWrappedPropertyDescriptor_RemoveValueChanged_Success()
         {
-            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(typeof(ClassWithMetadataOnAnotherClass));
-            PropertyDescriptorCollection properties = provider.GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null).GetProperties();
-            PropertyDescriptor descriptor = properties[nameof(ClassWithMetadataOnAnotherClass.FirstName)];
+            var provider = new AssociatedMetadataTypeTypeDescriptionProvider(
+                typeof(ClassWithMetadataOnAnotherClass)
+            );
+            PropertyDescriptorCollection properties = provider
+                .GetTypeDescriptor(typeof(ClassWithMetadataOnAnotherClass), null)
+                .GetProperties();
+            PropertyDescriptor descriptor = properties[
+                nameof(ClassWithMetadataOnAnotherClass.FirstName)
+            ];
 
             var component = new ClassWithMetadataOnAnotherClass();
             int callCount = 0;
@@ -332,13 +488,9 @@ namespace System.ComponentModel.DataAnnotations.Tests
             public string LastName { get; set; }
         }
 
-        public class EmptyClass
-        {
-        }
+        public class EmptyClass { }
 
         [EditorBrowsable(EditorBrowsableState.Always)]
-        public class ClassWithAttributes
-        {
-        }
+        public class ClassWithAttributes { }
     }
 }

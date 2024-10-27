@@ -41,9 +41,7 @@ public class FormPipeReader
     /// </summary>
     /// <param name="pipeReader">The <see cref="PipeReader"/> to read from.</param>
     public FormPipeReader(PipeReader pipeReader)
-        : this(pipeReader, Encoding.UTF8)
-    {
-    }
+        : this(pipeReader, Encoding.UTF8) { }
 
     /// <summary>
     /// Initializes a new instance of <see cref="FormPipeReader"/>.
@@ -55,7 +53,9 @@ public class FormPipeReader
         // https://learn.microsoft.com/en-us/dotnet/core/compatibility/syslib-warnings/syslib0001
         if (encoding is Encoding { CodePage: 65000 })
         {
-            throw new ArgumentException("UTF7 is unsupported and insecure. Please select a different encoding.");
+            throw new ArgumentException(
+                "UTF7 is unsupported and insecure. Please select a different encoding."
+            );
         }
 
         _pipeReader = pipeReader;
@@ -88,7 +88,9 @@ public class FormPipeReader
     /// </summary>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/>.</param>
     /// <returns>The collection containing the parsed HTTP form body.</returns>
-    public async Task<Dictionary<string, StringValues>> ReadFormAsync(CancellationToken cancellationToken = default)
+    public async Task<Dictionary<string, StringValues>> ReadFormAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         KeyValueAccumulator accumulator = default;
         while (true)
@@ -116,7 +118,9 @@ public class FormPipeReader
 
                 if (!buffer.IsEmpty)
                 {
-                    throw new InvalidOperationException("End of body before form was fully parsed.");
+                    throw new InvalidOperationException(
+                        "End of body before form was fully parsed."
+                    );
                 }
                 break;
             }
@@ -131,29 +135,27 @@ public class FormPipeReader
     internal void ParseFormValues(
         ref ReadOnlySequence<byte> buffer,
         ref KeyValueAccumulator accumulator,
-        bool isFinalBlock)
+        bool isFinalBlock
+    )
     {
         if (buffer.IsSingleSegment)
         {
-            ParseFormValuesFast(buffer.FirstSpan,
-                ref accumulator,
-                isFinalBlock,
-                out var consumed);
+            ParseFormValuesFast(buffer.FirstSpan, ref accumulator, isFinalBlock, out var consumed);
 
             buffer = buffer.Slice(consumed);
             return;
         }
 
-        ParseValuesSlow(ref buffer,
-            ref accumulator,
-            isFinalBlock);
+        ParseValuesSlow(ref buffer, ref accumulator, isFinalBlock);
     }
 
     // Fast parsing for single span in ReadOnlySequence
-    private void ParseFormValuesFast(ReadOnlySpan<byte> span,
+    private void ParseFormValuesFast(
+        ReadOnlySpan<byte> span,
         ref KeyValueAccumulator accumulator,
         bool isFinalBlock,
-        out int consumed)
+        out int consumed
+    )
     {
         ReadOnlySpan<byte> key;
         ReadOnlySpan<byte> value;
@@ -234,7 +236,8 @@ public class FormPipeReader
     private void ParseValuesSlow(
         ref ReadOnlySequence<byte> buffer,
         ref KeyValueAccumulator accumulator,
-        bool isFinalBlock)
+        bool isFinalBlock
+    )
     {
         var sequenceReader = new SequenceReader<byte>(buffer);
         ReadOnlySequence<byte> keyValuePair;
@@ -251,7 +254,10 @@ public class FormPipeReader
                 if (!isFinalBlock)
                 {
                     // +2 to account for '&' and '='
-                    if ((sequenceReader.Length - consumedBytes) > (long)KeyLengthLimit + (long)ValueLengthLimit + 2)
+                    if (
+                        (sequenceReader.Length - consumedBytes)
+                        > (long)KeyLengthLimit + (long)ValueLengthLimit + 2
+                    )
                     {
                         ThrowKeyOrValueTooLargeException();
                     }
@@ -265,7 +271,12 @@ public class FormPipeReader
 
             if (keyValuePair.IsSingleSegment)
             {
-                ParseFormValuesFast(keyValuePair.FirstSpan, ref accumulator, isFinalBlock: true, out var segmentConsumed);
+                ParseFormValuesFast(
+                    keyValuePair.FirstSpan,
+                    ref accumulator,
+                    isFinalBlock: true,
+                    out var segmentConsumed
+                );
                 Debug.Assert(segmentConsumed == keyValuePair.FirstSpan.Length);
                 consumedBytes = sequenceReader.Consumed;
                 consumed = sequenceReader.Position;
@@ -320,7 +331,9 @@ public class FormPipeReader
                 CultureInfo.CurrentCulture,
                 Resources.FormPipeReader_KeyOrValueTooLarge,
                 KeyLengthLimit,
-                ValueLengthLimit));
+                ValueLengthLimit
+            )
+        );
     }
 
     private void ThrowKeyTooLargeException()
@@ -329,7 +342,9 @@ public class FormPipeReader
             string.Format(
                 CultureInfo.CurrentCulture,
                 Resources.FormPipeReader_KeyTooLarge,
-                KeyLengthLimit));
+                KeyLengthLimit
+            )
+        );
     }
 
     private void ThrowValueTooLargeException()
@@ -338,7 +353,9 @@ public class FormPipeReader
             string.Format(
                 CultureInfo.CurrentCulture,
                 Resources.FormPipeReader_ValueTooLarge,
-                ValueLengthLimit));
+                ValueLengthLimit
+            )
+        );
     }
 
     [SkipLocalsInit]
@@ -373,7 +390,11 @@ public class FormPipeReader
     }
 
     // Check that key/value constraints are met and appends value to accumulator.
-    private void AppendAndVerify(ref KeyValueAccumulator accumulator, string decodedKey, string decodedValue)
+    private void AppendAndVerify(
+        ref KeyValueAccumulator accumulator,
+        string decodedKey,
+        string decodedValue
+    )
     {
         accumulator.Append(decodedKey, decodedValue);
 
@@ -395,7 +416,10 @@ public class FormPipeReader
 
             // We need to create a Span from a ReadOnlySpan. This cast is safe because the memory is still held by the pipe
             // We will also create a string from it by the end of the function.
-            var span = MemoryMarshal.CreateSpan(ref MemoryMarshal.GetReference(readOnlySpan), readOnlySpan.Length);
+            var span = MemoryMarshal.CreateSpan(
+                ref MemoryMarshal.GetReference(readOnlySpan),
+                readOnlySpan.Length
+            );
 
             try
             {

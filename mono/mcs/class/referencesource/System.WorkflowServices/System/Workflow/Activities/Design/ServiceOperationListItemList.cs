@@ -10,10 +10,7 @@ namespace System.Workflow.Activities.Design
     {
         protected override string GeneratedNameFormatResource
         {
-            get
-            {
-                return SR2.GeneratedOperationNameFormat;
-            }
+            get { return SR2.GeneratedOperationNameFormat; }
         }
 
         protected override ServiceOperationListItem CreateObject(string name)

@@ -63,18 +63,29 @@ namespace R2RDump
 
             if (_leftDumper.Reader.Composite && _rightDumper.Reader.Composite)
             {
-                HashSet<string> allComponentAssemblies = new HashSet<string>(_leftDumper.Reader.ManifestReferenceAssemblies.Keys);
-                allComponentAssemblies.UnionWith(_rightDumper.Reader.ManifestReferenceAssemblies.Keys);
+                HashSet<string> allComponentAssemblies = new HashSet<string>(
+                    _leftDumper.Reader.ManifestReferenceAssemblies.Keys
+                );
+                allComponentAssemblies.UnionWith(
+                    _rightDumper.Reader.ManifestReferenceAssemblies.Keys
+                );
                 foreach (string assemblyName in allComponentAssemblies.OrderBy(name => name))
                 {
-                    int leftModuleIndex = _leftDumper.Reader.ManifestReferenceAssemblies[assemblyName];
-                    int rightModuleIndex = _rightDumper.Reader.ManifestReferenceAssemblies[assemblyName];
+                    int leftModuleIndex = _leftDumper.Reader.ManifestReferenceAssemblies[
+                        assemblyName
+                    ];
+                    int rightModuleIndex = _rightDumper.Reader.ManifestReferenceAssemblies[
+                        assemblyName
+                    ];
                     DiffMethodsForModule(leftModuleIndex, rightModuleIndex);
                 }
             }
         }
 
-        private IEnumerable<ReadyToRunMethod> TryGetMethods(ReadyToRunReader reader, int moduleIndex)
+        private IEnumerable<ReadyToRunMethod> TryGetMethods(
+            ReadyToRunReader reader,
+            int moduleIndex
+        )
         {
             List<ReadyToRunMethod> methods = new List<ReadyToRunMethod>();
             switch (moduleIndex)
@@ -99,20 +110,51 @@ namespace R2RDump
 
         private void DiffMethodsForModule(int leftModuleIndex, int rightModuleIndex)
         {
-            IEnumerable<ReadyToRunMethod> leftSectionMethods = TryGetMethods(_leftDumper.Reader, leftModuleIndex);
-            IEnumerable<ReadyToRunMethod> rightSectionMethods = TryGetMethods(_rightDumper.Reader, rightModuleIndex);
+            IEnumerable<ReadyToRunMethod> leftSectionMethods = TryGetMethods(
+                _leftDumper.Reader,
+                leftModuleIndex
+            );
+            IEnumerable<ReadyToRunMethod> rightSectionMethods = TryGetMethods(
+                _rightDumper.Reader,
+                rightModuleIndex
+            );
 
-            Dictionary<string, ReadyToRunMethod> leftMethods = new Dictionary<string, ReadyToRunMethod>(leftSectionMethods
-                .Select(method => new KeyValuePair<string, ReadyToRunMethod>(method.SignatureString, method)));
-            Dictionary<string, ReadyToRunMethod> rightMethods = new Dictionary<string, ReadyToRunMethod>(rightSectionMethods
-                .Select(method => new KeyValuePair<string, ReadyToRunMethod>(method.SignatureString, method)));
-            Dictionary<string, MethodPair> commonMethods = new Dictionary<string, MethodPair>(leftMethods
-                .Select(kvp => new KeyValuePair<string, MethodPair>(kvp.Key,
-                    new MethodPair(kvp.Value, rightMethods.TryGetValue(kvp.Key, out ReadyToRunMethod rightMethod) ? rightMethod : null)))
-                .Where(kvp => kvp.Value.RightMethod != null));
+            Dictionary<string, ReadyToRunMethod> leftMethods = new Dictionary<
+                string,
+                ReadyToRunMethod
+            >(
+                leftSectionMethods.Select(method => new KeyValuePair<string, ReadyToRunMethod>(
+                    method.SignatureString,
+                    method
+                ))
+            );
+            Dictionary<string, ReadyToRunMethod> rightMethods = new Dictionary<
+                string,
+                ReadyToRunMethod
+            >(
+                rightSectionMethods.Select(method => new KeyValuePair<string, ReadyToRunMethod>(
+                    method.SignatureString,
+                    method
+                ))
+            );
+            Dictionary<string, MethodPair> commonMethods = new Dictionary<string, MethodPair>(
+                leftMethods
+                    .Select(kvp => new KeyValuePair<string, MethodPair>(
+                        kvp.Key,
+                        new MethodPair(
+                            kvp.Value,
+                            rightMethods.TryGetValue(kvp.Key, out ReadyToRunMethod rightMethod)
+                                ? rightMethod
+                                : null
+                        )
+                    ))
+                    .Where(kvp => kvp.Value.RightMethod != null)
+            );
             if (_leftDumper.Model.DiffHideSameDisasm)
             {
-                commonMethods = new Dictionary<string, MethodPair>(HideMethodsWithSameDisassembly(commonMethods));
+                commonMethods = new Dictionary<string, MethodPair>(
+                    HideMethodsWithSameDisassembly(commonMethods)
+                );
             }
             DumpCommonMethods(_leftDumper, leftModuleIndex, commonMethods);
             DumpCommonMethods(_rightDumper, rightModuleIndex, commonMethods);
@@ -123,8 +165,12 @@ namespace R2RDump
         /// </summary>
         private void DiffTitle()
         {
-            _writer.WriteLine($@"Left file:  {_leftDumper.Reader.Filename} ({_leftDumper.Reader.Image.Length} B)");
-            _writer.WriteLine($@"Right file: {_rightDumper.Reader.Filename} ({_rightDumper.Reader.Image.Length} B)");
+            _writer.WriteLine(
+                $@"Left file:  {_leftDumper.Reader.Filename} ({_leftDumper.Reader.Image.Length} B)"
+            );
+            _writer.WriteLine(
+                $@"Right file: {_rightDumper.Reader.Filename} ({_rightDumper.Reader.Image.Length} B)"
+            );
             _writer.WriteLine();
         }
 
@@ -133,7 +179,11 @@ namespace R2RDump
         /// </summary>
         private void DiffPESections()
         {
-            ShowDiff(GetPESectionMap(_leftDumper.Reader), GetPESectionMap(_rightDumper.Reader), "PE sections");
+            ShowDiff(
+                GetPESectionMap(_leftDumper.Reader),
+                GetPESectionMap(_rightDumper.Reader),
+                "PE sections"
+            );
         }
 
         /// <summary>
@@ -141,13 +191,20 @@ namespace R2RDump
         /// </summary>
         private void DiffR2RSections()
         {
-            ShowDiff(GetR2RSectionMap(_leftDumper.Reader), GetR2RSectionMap(_rightDumper.Reader), "R2R sections");
+            ShowDiff(
+                GetR2RSectionMap(_leftDumper.Reader),
+                GetR2RSectionMap(_rightDumper.Reader),
+                "R2R sections"
+            );
         }
 
         private void DiffImportSections()
         {
-            Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> leftImports = GetImports(_leftDumper.Reader);
-            Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> rightImports = GetImports(_rightDumper.Reader);
+            Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> leftImports = GetImports(
+                _leftDumper.Reader
+            );
+            Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> rightImports =
+                GetImports(_rightDumper.Reader);
             HashSet<string> commonKeys = new HashSet<string>(leftImports.Keys);
             commonKeys.IntersectWith(rightImports.Keys);
 
@@ -180,30 +237,58 @@ namespace R2RDump
         /// </summary>
         private void DiffR2RMethods()
         {
-            ShowMethodDiff(GetR2RMethodMap(_leftDumper.Reader, AllModules), GetR2RMethodMap(_rightDumper.Reader, AllModules), "R2R methods");
+            ShowMethodDiff(
+                GetR2RMethodMap(_leftDumper.Reader, AllModules),
+                GetR2RMethodMap(_rightDumper.Reader, AllModules),
+                "R2R methods"
+            );
 
             if (_leftDumper.Reader.Composite && _rightDumper.Reader.Composite)
             {
-                HashSet<string> allComponentAssemblies = new HashSet<string>(_leftDumper.Reader.ManifestReferenceAssemblies.Keys);
-                allComponentAssemblies.UnionWith(_rightDumper.Reader.ManifestReferenceAssemblies.Keys);
+                HashSet<string> allComponentAssemblies = new HashSet<string>(
+                    _leftDumper.Reader.ManifestReferenceAssemblies.Keys
+                );
+                allComponentAssemblies.UnionWith(
+                    _rightDumper.Reader.ManifestReferenceAssemblies.Keys
+                );
                 foreach (string assemblyName in allComponentAssemblies.OrderBy(name => name))
                 {
-                    if (!_leftDumper.Reader.ManifestReferenceAssemblies.TryGetValue(assemblyName, out int leftModuleIndex))
+                    if (
+                        !_leftDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
+                            assemblyName,
+                            out int leftModuleIndex
+                        )
+                    )
                     {
                         leftModuleIndex = InvalidModule;
                     }
-                    if (!_rightDumper.Reader.ManifestReferenceAssemblies.TryGetValue(assemblyName, out int rightModuleIndex))
+                    if (
+                        !_rightDumper.Reader.ManifestReferenceAssemblies.TryGetValue(
+                            assemblyName,
+                            out int rightModuleIndex
+                        )
+                    )
                     {
                         rightModuleIndex = InvalidModule;
                     }
-                    Dictionary<string, int> leftMap = GetR2RMethodMap(_leftDumper.Reader, leftModuleIndex);
-                    Dictionary<string, int> rightMap = GetR2RMethodMap(_rightDumper.Reader, rightModuleIndex);
+                    Dictionary<string, int> leftMap = GetR2RMethodMap(
+                        _leftDumper.Reader,
+                        leftModuleIndex
+                    );
+                    Dictionary<string, int> rightMap = GetR2RMethodMap(
+                        _rightDumper.Reader,
+                        rightModuleIndex
+                    );
                     ShowMethodDiff(leftMap, rightMap, $"{assemblyName}: component R2R methods");
                 }
             }
         }
 
-        private void ShowMethodDiff(Dictionary<string, int> leftMethods, Dictionary<string, int> rightMethods, string diffName)
+        private void ShowMethodDiff(
+            Dictionary<string, int> leftMethods,
+            Dictionary<string, int> rightMethods,
+            string diffName
+        )
         {
             Dictionary<string, int> empty = new Dictionary<string, int>();
             Dictionary<string, int> leftOnly = new Dictionary<string, int>();
@@ -213,21 +298,35 @@ namespace R2RDump
 
             foreach (KeyValuePair<string, int> left in leftMethods)
             {
-                (rightMethods.ContainsKey(left.Key) ? leftCommon : leftOnly).Add(left.Key, left.Value);
+                (rightMethods.ContainsKey(left.Key) ? leftCommon : leftOnly).Add(
+                    left.Key,
+                    left.Value
+                );
             }
 
             foreach (KeyValuePair<string, int> right in rightMethods)
             {
-                (leftMethods.ContainsKey(right.Key) ? rightCommon : rightOnly).Add(right.Key, right.Value);
+                (leftMethods.ContainsKey(right.Key) ? rightCommon : rightOnly).Add(
+                    right.Key,
+                    right.Value
+                );
             }
 
             string statTitle = $"LEFT COUNT | RIGHT COUNT | LEFT SIZE | RIGHT SIZE | {diffName}";
             _writer.WriteLine(statTitle);
             _writer.WriteLine(new string('-', statTitle.Length));
-            _writer.WriteLine($"{leftOnly.Count,10} | {"---",11} | {leftOnly.Sum(m => m.Value),9} | {"---",10} | LEFT-ONLY METHODS");
-            _writer.WriteLine($"{"---",10} | {rightOnly.Count,11} | {"---",9} | {rightOnly.Sum(m => m.Value),10} | RIGHT-ONLY METHODS");
-            _writer.WriteLine($"{leftCommon.Count,10} | {rightCommon.Count,11} | {leftCommon.Sum(m => m.Value),9} | {rightCommon.Sum(m => m.Value),10} | METHODS IN BOTH");
-            _writer.WriteLine($"{leftMethods.Count,10} | {rightMethods.Count,11} | {leftMethods.Sum(m => m.Value),9} | {rightMethods.Sum(m => m.Value),10} | (total)");
+            _writer.WriteLine(
+                $"{leftOnly.Count, 10} | {"---", 11} | {leftOnly.Sum(m => m.Value), 9} | {"---", 10} | LEFT-ONLY METHODS"
+            );
+            _writer.WriteLine(
+                $"{"---", 10} | {rightOnly.Count, 11} | {"---", 9} | {rightOnly.Sum(m => m.Value), 10} | RIGHT-ONLY METHODS"
+            );
+            _writer.WriteLine(
+                $"{leftCommon.Count, 10} | {rightCommon.Count, 11} | {leftCommon.Sum(m => m.Value), 9} | {rightCommon.Sum(m => m.Value), 10} | METHODS IN BOTH"
+            );
+            _writer.WriteLine(
+                $"{leftMethods.Count, 10} | {rightMethods.Count, 11} | {leftMethods.Sum(m => m.Value), 9} | {rightMethods.Sum(m => m.Value), 10} | (total)"
+            );
             _writer.WriteLine();
 
             ShowDiff(leftOnly, empty, diffName + " / left only");
@@ -241,7 +340,11 @@ namespace R2RDump
         /// <param name="leftObjects">Dictionary of left object sizes keyed by their names</param>
         /// <param name="rightObjects">Dictionary of right object sizes keyed by their names</param>
         /// <param name="diffName">Logical name of the diffing operation to display in the header line</param>
-        private void ShowDiff(Dictionary<string, int> leftObjects, Dictionary<string, int> rightObjects, string diffName)
+        private void ShowDiff(
+            Dictionary<string, int> leftObjects,
+            Dictionary<string, int> rightObjects,
+            string diffName
+        )
         {
             Dictionary<string, int> allObjects = new Dictionary<string, int>();
             foreach (KeyValuePair<string, int> left in leftObjects)
@@ -254,13 +357,29 @@ namespace R2RDump
                 allObjects.TryGetValue(right.Key, out int previousValue);
                 allObjects[right.Key] = previousValue + right.Value;
             }
-            ShowDiff(leftObjects, rightObjects, allObjects.OrderByDescending(kvp => kvp.Value).Select(kvp => kvp.Key), diffName + " by delta");
-            ShowDiff(leftObjects, rightObjects, allObjects.OrderBy(kvp => kvp.Key).Select(kvp => kvp.Key), diffName + " by name");
+            ShowDiff(
+                leftObjects,
+                rightObjects,
+                allObjects.OrderByDescending(kvp => kvp.Value).Select(kvp => kvp.Key),
+                diffName + " by delta"
+            );
+            ShowDiff(
+                leftObjects,
+                rightObjects,
+                allObjects.OrderBy(kvp => kvp.Key).Select(kvp => kvp.Key),
+                diffName + " by name"
+            );
         }
 
-        private void ShowDiff(Dictionary<string, int> leftObjects, Dictionary<string, int> rightObjects, IEnumerable<string> orderedKeys, string diffName)
+        private void ShowDiff(
+            Dictionary<string, int> leftObjects,
+            Dictionary<string, int> rightObjects,
+            IEnumerable<string> orderedKeys,
+            string diffName
+        )
         {
-            string title = $@" LEFT_SIZE RIGHT_SIZE       DIFF  {diffName} ({orderedKeys.Count()} ELEMENTS)";
+            string title =
+                $@" LEFT_SIZE RIGHT_SIZE       DIFF  {diffName} ({orderedKeys.Count()} ELEMENTS)";
 
             _writer.WriteLine(title);
             _writer.WriteLine(new string('-', title.Length));
@@ -280,7 +399,7 @@ namespace R2RDump
                 StringBuilder line = new StringBuilder();
                 if (inLeft)
                 {
-                    line.Append($"{leftSize,10}");
+                    line.Append($"{leftSize, 10}");
                 }
                 else
                 {
@@ -288,7 +407,7 @@ namespace R2RDump
                 }
                 if (inRight)
                 {
-                    line.Append($"{rightSize,11}");
+                    line.Append($"{rightSize, 11}");
                 }
                 else
                 {
@@ -296,7 +415,7 @@ namespace R2RDump
                 }
                 if (leftSize != rightSize)
                 {
-                    line.Append($"{rightSize - leftSize,11}");
+                    line.Append($"{rightSize - leftSize, 11}");
                 }
                 else
                 {
@@ -306,7 +425,9 @@ namespace R2RDump
                 line.Append(key);
                 _writer.WriteLine(line);
             }
-            _writer.WriteLine($@"{leftTotal,10} {rightTotal,10} {(rightTotal - leftTotal),10}  <TOTAL>");
+            _writer.WriteLine(
+                $@"{leftTotal, 10} {rightTotal, 10} {(rightTotal - leftTotal), 10}  <TOTAL>"
+            );
 
             _writer.WriteLine();
         }
@@ -337,7 +458,11 @@ namespace R2RDump
         {
             Dictionary<string, int> sectionMap = new Dictionary<string, int>();
 
-            foreach (KeyValuePair<ReadyToRunSectionType, ReadyToRunSection> typeAndSection in reader.ReadyToRunHeader.Sections)
+            foreach (
+                KeyValuePair<ReadyToRunSectionType, ReadyToRunSection> typeAndSection in reader
+                    .ReadyToRunHeader
+                    .Sections
+            )
             {
                 string name = typeAndSection.Key.ToString();
                 sectionMap.Add(name, typeAndSection.Value.Size);
@@ -346,7 +471,11 @@ namespace R2RDump
             return sectionMap;
         }
 
-        private static ReadyToRunSectionType[] s_methodSections = new[] { ReadyToRunSectionType.MethodDefEntryPoints, ReadyToRunSectionType.InstanceMethodEntryPoints };
+        private static ReadyToRunSectionType[] s_methodSections = new[]
+        {
+            ReadyToRunSectionType.MethodDefEntryPoints,
+            ReadyToRunSectionType.InstanceMethodEntryPoints,
+        };
 
         /// <summary>
         /// Read the R2R method map for a given R2R image.
@@ -368,9 +497,16 @@ namespace R2RDump
         /// </summary>
         /// <param name="dumper">Output dumper to use</param>
         /// <param name="signatureFilter">Set of common signatures of methods to dump</param>
-        private void DumpCommonMethods(Dumper dumper, int moduleIndex, Dictionary<string, MethodPair> signatureFilter)
+        private void DumpCommonMethods(
+            Dumper dumper,
+            int moduleIndex,
+            Dictionary<string, MethodPair> signatureFilter
+        )
         {
-            IEnumerable<ReadyToRunMethod> filteredMethods = TryGetMethods(dumper.Reader, moduleIndex)
+            IEnumerable<ReadyToRunMethod> filteredMethods = TryGetMethods(
+                    dumper.Reader,
+                    moduleIndex
+                )
                 .Where(method => signatureFilter.ContainsKey(method.SignatureString))
                 .OrderBy(method => method.SignatureString);
 
@@ -380,7 +516,9 @@ namespace R2RDump
             }
         }
 
-        private static Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> GetImports(ReadyToRunReader reader)
+        private static Dictionary<string, ReadyToRunImportSection.ImportSectionEntry> GetImports(
+            ReadyToRunReader reader
+        )
         {
             var result = new Dictionary<string, ReadyToRunImportSection.ImportSectionEntry>();
             var signatureOptions = new SignatureFormattingOptions() { Naked = true };
@@ -399,21 +537,36 @@ namespace R2RDump
         /// </summary>
         /// <param name="commonMethods">Enumeration of common methods to filter</param>
         /// <returns>Filtered method enumeration</returns>
-        private IEnumerable<KeyValuePair<string, MethodPair>> HideMethodsWithSameDisassembly(IEnumerable<KeyValuePair<string, MethodPair>> commonMethods)
+        private IEnumerable<KeyValuePair<string, MethodPair>> HideMethodsWithSameDisassembly(
+            IEnumerable<KeyValuePair<string, MethodPair>> commonMethods
+        )
         {
             bool first = true;
             foreach (KeyValuePair<string, MethodPair> commonMethod in commonMethods)
             {
-                bool match = (commonMethod.Value.LeftMethod.RuntimeFunctions.Count == commonMethod.Value.RightMethod.RuntimeFunctions.Count);
+                bool match = (
+                    commonMethod.Value.LeftMethod.RuntimeFunctions.Count
+                    == commonMethod.Value.RightMethod.RuntimeFunctions.Count
+                );
                 if (match)
                 {
-                    for (int rtfIndex = 0; match && rtfIndex < commonMethod.Value.LeftMethod.RuntimeFunctions.Count; rtfIndex++)
+                    for (
+                        int rtfIndex = 0;
+                        match && rtfIndex < commonMethod.Value.LeftMethod.RuntimeFunctions.Count;
+                        rtfIndex++
+                    )
                     {
-                        RuntimeFunction leftRuntimeFunction = commonMethod.Value.LeftMethod.RuntimeFunctions[rtfIndex];
-                        RuntimeFunction rightRuntimeFunction = commonMethod.Value.RightMethod.RuntimeFunctions[rtfIndex];
+                        RuntimeFunction leftRuntimeFunction = commonMethod
+                            .Value
+                            .LeftMethod
+                            .RuntimeFunctions[rtfIndex];
+                        RuntimeFunction rightRuntimeFunction = commonMethod
+                            .Value
+                            .RightMethod
+                            .RuntimeFunctions[rtfIndex];
                         int leftOffset = 0;
                         int rightOffset = 0;
-                        for (; ;)
+                        for (; ; )
                         {
                             bool leftAtEnd = (leftOffset >= leftRuntimeFunction.Size);
                             bool rightAtEnd = (rightOffset >= rightRuntimeFunction.Size);
@@ -425,12 +578,18 @@ namespace R2RDump
                                 }
                                 break;
                             }
-                            leftOffset += _leftDumper.Disassembler.GetInstruction(leftRuntimeFunction,
+                            leftOffset += _leftDumper.Disassembler.GetInstruction(
+                                leftRuntimeFunction,
                                 _leftDumper.Reader.GetOffset(leftRuntimeFunction.StartAddress),
-                                leftOffset, out string leftInstruction);
-                            rightOffset += _rightDumper.Disassembler.GetInstruction(rightRuntimeFunction,
+                                leftOffset,
+                                out string leftInstruction
+                            );
+                            rightOffset += _rightDumper.Disassembler.GetInstruction(
+                                rightRuntimeFunction,
                                 _rightDumper.Reader.GetOffset(rightRuntimeFunction.StartAddress),
-                                rightOffset, out string rightInstruction);
+                                rightOffset,
+                                out string rightInstruction
+                            );
                             if (leftInstruction != rightInstruction)
                             {
                                 match = false;
@@ -443,7 +602,9 @@ namespace R2RDump
                 {
                     if (first)
                     {
-                        _writer.WriteLine("Methods with identical disassembly skipped in common method diff:");
+                        _writer.WriteLine(
+                            "Methods with identical disassembly skipped in common method diff:"
+                        );
                         first = false;
                     }
                     _writer.WriteLine(commonMethod.Key);

@@ -9,8 +9,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 {
     internal abstract partial class AbstractRenameCommandHandler : ICommandHandler<SaveCommandArgs>
     {
-        public CommandState GetCommandState(SaveCommandArgs args)
-            => GetCommandState();
+        public CommandState GetCommandState(SaveCommandArgs args) => GetCommandState();
 
         public bool ExecuteCommand(SaveCommandArgs args, CommandExecutionContext context)
         {

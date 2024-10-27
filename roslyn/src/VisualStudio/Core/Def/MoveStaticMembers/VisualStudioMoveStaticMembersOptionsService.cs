@@ -39,15 +39,27 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public VisualStudioMoveStaticMembersOptionsService(
             IGlyphService glyphService,
-            IUIThreadOperationExecutor uiThreadOperationExecutor)
+            IUIThreadOperationExecutor uiThreadOperationExecutor
+        )
         {
             _glyphService = glyphService;
             _uiThreadOperationExecutor = uiThreadOperationExecutor;
         }
 
-        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(Document document, INamedTypeSymbol selectedType, ImmutableArray<ISymbol> selectedNodeSymbols)
+        public MoveStaticMembersOptions GetMoveMembersToTypeOptions(
+            Document document,
+            INamedTypeSymbol selectedType,
+            ImmutableArray<ISymbol> selectedNodeSymbols
+        )
         {
-            var viewModel = GetViewModel(document, selectedType, selectedNodeSymbols, History, _glyphService, _uiThreadOperationExecutor);
+            var viewModel = GetViewModel(
+                document,
+                selectedType,
+                selectedNodeSymbols,
+                History,
+                _glyphService,
+                _uiThreadOperationExecutor
+            );
 
             var dialog = new MoveStaticMembersDialog(viewModel);
 
@@ -56,35 +68,51 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             if (result.GetValueOrDefault())
             {
                 UpdateHistory(viewModel);
-                return GenerateOptions(document.Project.Language, viewModel, result.GetValueOrDefault());
+                return GenerateOptions(
+                    document.Project.Language,
+                    viewModel,
+                    result.GetValueOrDefault()
+                );
             }
 
             return MoveStaticMembersOptions.Cancelled;
         }
 
         // internal for testing purposes
-        internal static MoveStaticMembersOptions GenerateOptions(string language, MoveStaticMembersDialogViewModel viewModel, bool dialogResult)
+        internal static MoveStaticMembersOptions GenerateOptions(
+            string language,
+            MoveStaticMembersDialogViewModel viewModel,
+            bool dialogResult
+        )
         {
             if (dialogResult)
             {
                 // if the destination name contains extra namespaces, we want the last one as that is the real type name
                 var typeName = viewModel.DestinationName.TypeName.Split('.').Last();
-                var newFileName = Path.ChangeExtension(typeName, language == LanguageNames.CSharp ? ".cs" : ".vb");
-                var selectedMembers = viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm => vm.Symbol);
+                var newFileName = Path.ChangeExtension(
+                    typeName,
+                    language == LanguageNames.CSharp ? ".cs" : ".vb"
+                );
+                var selectedMembers =
+                    viewModel.MemberSelectionViewModel.CheckedMembers.SelectAsArray(vm =>
+                        vm.Symbol
+                    );
 
                 if (viewModel.DestinationName.IsNew)
                 {
                     return new MoveStaticMembersOptions(
                         newFileName,
                         viewModel.DestinationName.TypeName,
-                        selectedMembers);
+                        selectedMembers
+                    );
                 }
 
                 RoslynDebug.AssertNotNull(viewModel.DestinationName.NamedType);
 
                 return new MoveStaticMembersOptions(
                     viewModel.DestinationName.NamedType,
-                    selectedMembers);
+                    selectedMembers
+                );
             }
 
             return MoveStaticMembersOptions.Cancelled;
@@ -97,26 +125,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             ImmutableArray<ISymbol> selectedNodeSymbols,
             LinkedList<INamedTypeSymbol> history,
             IGlyphService? glyphService,
-            IUIThreadOperationExecutor uiThreadOperationExecutor)
+            IUIThreadOperationExecutor uiThreadOperationExecutor
+        )
         {
-            var membersInType = selectedType.GetMembers().
-               WhereAsArray(member => MemberAndDestinationValidator.IsMemberValid(member) && member.IsStatic);
+            var membersInType = selectedType
+                .GetMembers()
+                .WhereAsArray(member =>
+                    MemberAndDestinationValidator.IsMemberValid(member) && member.IsStatic
+                );
 
-            var memberViewModels = membersInType
-                .SelectAsArray(member =>
-                    new SymbolViewModel<ISymbol>(member, glyphService)
-                    {
-                        // The member(s) user selected will be checked at the beginning.
-                        IsChecked = selectedNodeSymbols.Any(SymbolEquivalenceComparer.Instance.Equals, member),
-                    });
+            var memberViewModels = membersInType.SelectAsArray(
+                member => new SymbolViewModel<ISymbol>(member, glyphService)
+                {
+                    // The member(s) user selected will be checked at the beginning.
+                    IsChecked = selectedNodeSymbols.Any(
+                        SymbolEquivalenceComparer.Instance.Equals,
+                        member
+                    ),
+                }
+            );
 
             using var cancellationTokenSource = new CancellationTokenSource();
-            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(membersInType, document.Project, cancellationTokenSource.Token);
+            var memberToDependentsMap = SymbolDependentsBuilder.FindMemberToDependentsMap(
+                membersInType,
+                document.Project,
+                cancellationTokenSource.Token
+            );
 
-            var existingTypes = selectedType.ContainingNamespace.GetAllTypes(cancellationTokenSource.Token).ToImmutableArray();
+            var existingTypes = selectedType
+                .ContainingNamespace.GetAllTypes(cancellationTokenSource.Token)
+                .ToImmutableArray();
             var existingTypeNames = existingTypes.SelectAsArray(t => t.ToDisplayString());
             var candidateName = selectedType.Name + "Helpers";
-            var defaultTypeName = NameGenerator.GenerateUniqueName(candidateName, name => !existingTypeNames.Contains(name));
+            var defaultTypeName = NameGenerator.GenerateUniqueName(
+                candidateName,
+                name => !existingTypeNames.Contains(name)
+            );
 
             var containingNamespaceDisplay = selectedType.ContainingNamespace.IsGlobalNamespace
                 ? string.Empty
@@ -125,21 +169,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             var selectMembersViewModel = new StaticMemberSelectionViewModel(
                 uiThreadOperationExecutor,
                 memberViewModels,
-                memberToDependentsMap);
+                memberToDependentsMap
+            );
 
             var availableTypeNames = MakeTypeNameItems(
                 selectedType.ContainingNamespace,
                 selectedType,
                 document,
                 history,
-                cancellationTokenSource.Token);
+                cancellationTokenSource.Token
+            );
 
             return new MoveStaticMembersDialogViewModel(
                 selectMembersViewModel,
                 defaultTypeName,
                 availableTypeNames,
                 containingNamespaceDisplay,
-                document.GetRequiredLanguageService<ISyntaxFactsService>());
+                document.GetRequiredLanguageService<ISyntaxFactsService>()
+            );
         }
 
         private void UpdateHistory(MoveStaticMembersDialogViewModel viewModel)
@@ -168,26 +215,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.MoveStaticMembe
             INamedTypeSymbol currentType,
             Document currentDocument,
             LinkedList<INamedTypeSymbol> history,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return currentNamespace.GetAllTypes(cancellationToken)
+            return currentNamespace
+                .GetAllTypes(cancellationToken)
                 // only take symbols that are the same kind of type (class, module)
                 // and remove non-static types only when the current type is static
-                .Where(t => t.TypeKind == currentType.TypeKind && (t.IsStaticType() || !currentType.IsStaticType()))
+                .Where(t =>
+                    t.TypeKind == currentType.TypeKind
+                    && (t.IsStaticType() || !currentType.IsStaticType())
+                )
                 .SelectMany(t =>
                 {
                     // for partially declared classes, we may want multiple entries for a single type.
                     // filter to those actually in a real file, and that is not our current location.
-                    return t.Locations
-                        .Where(l => l.IsInSource &&
-                            (currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath))
-                        .Select(l => new TypeNameItem(
-                            history.Contains(t),
-                            GetFile(l),
-                            t));
+                    return t
+                        .Locations.Where(l =>
+                            l.IsInSource
+                            && (
+                                currentType.Name != t.Name || GetFile(l) != currentDocument.FilePath
+                            )
+                        )
+                        .Select(l => new TypeNameItem(history.Contains(t), GetFile(l), t));
                 })
-            .ToImmutableArrayOrEmpty()
-            .Sort(comparison: TypeNameItem.CompareTo);
+                .ToImmutableArrayOrEmpty()
+                .Sort(comparison: TypeNameItem.CompareTo);
         }
     }
 }

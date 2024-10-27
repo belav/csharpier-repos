@@ -31,119 +31,144 @@ using System.Runtime.Serialization;
 
 namespace System.Net
 {
-	[Serializable]
-	public class HttpWebResponse : WebResponse, ISerializable, IDisposable
-	{
-		const string EXCEPTION_MESSAGE = "System.Net.HttpWebResponse is not supported on the current platform.";
-		
-		public HttpWebResponse() { } // Added for NS2.1, it's empty in CoreFX too
+    [Serializable]
+    public class HttpWebResponse : WebResponse, ISerializable, IDisposable
+    {
+        const string EXCEPTION_MESSAGE =
+            "System.Net.HttpWebResponse is not supported on the current platform.";
 
-		[Obsolete ("Serialization is obsoleted for this type", false)]
-		protected HttpWebResponse (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public HttpWebResponse() { } // Added for NS2.1, it's empty in CoreFX too
 
-		public string CharacterSet {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [Obsolete("Serialization is obsoleted for this type", false)]
+        protected HttpWebResponse(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public string ContentEncoding {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string CharacterSet
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override long ContentLength {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string ContentEncoding
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override string ContentType {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override long ContentLength
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public virtual CookieCollection Cookies {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-			set { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override string ContentType
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override WebHeaderCollection Headers {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public virtual CookieCollection Cookies
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+            set { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		[MonoTODO]
-		public override bool IsMutuallyAuthenticated {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override WebHeaderCollection Headers
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public DateTime LastModified {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        [MonoTODO]
+        public override bool IsMutuallyAuthenticated
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public virtual string Method {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public DateTime LastModified
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public Version ProtocolVersion {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public virtual string Method
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override Uri ResponseUri {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public Version ProtocolVersion
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string Server {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public override Uri ResponseUri
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public virtual HttpStatusCode StatusCode {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public string Server
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public virtual string StatusDescription {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public virtual HttpStatusCode StatusCode
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public override bool SupportsHeaders {
-			get { throw new PlatformNotSupportedException (EXCEPTION_MESSAGE); }
-		}
+        public virtual string StatusDescription
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		public string GetResponseHeader (string headerName)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public override bool SupportsHeaders
+        {
+            get { throw new PlatformNotSupportedException(EXCEPTION_MESSAGE); }
+        }
 
-		internal void ReadAll ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public string GetResponseHeader(string headerName)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public override Stream GetResponseStream ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        internal void ReadAll()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		void ISerializable.GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public override Stream GetResponseStream()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		protected override void GetObjectData (SerializationInfo serializationInfo, StreamingContext streamingContext)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        void ISerializable.GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		public override void Close ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        protected override void GetObjectData(
+            SerializationInfo serializationInfo,
+            StreamingContext streamingContext
+        )
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		void IDisposable.Dispose ()
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
+        public override void Close()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
 
-		protected override void Dispose (bool disposing)
-		{
-			throw new PlatformNotSupportedException (EXCEPTION_MESSAGE);
-		}
-	}
+        void IDisposable.Dispose()
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            throw new PlatformNotSupportedException(EXCEPTION_MESSAGE);
+        }
+    }
 }

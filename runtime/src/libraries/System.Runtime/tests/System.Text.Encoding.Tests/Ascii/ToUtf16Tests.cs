@@ -13,7 +13,10 @@ namespace System.Text.Tests
         [Fact]
         public static void EmptyInputs()
         {
-            Assert.Equal(OperationStatus.Done, Ascii.ToUtf16(ReadOnlySpan<byte>.Empty, Span<char>.Empty, out int charsWritten));
+            Assert.Equal(
+                OperationStatus.Done,
+                Ascii.ToUtf16(ReadOnlySpan<byte>.Empty, Span<char>.Empty, out int charsWritten)
+            );
             Assert.Equal(0, charsWritten);
         }
 
@@ -43,7 +46,10 @@ namespace System.Text.Tests
 
                 // First, validate that the workhorse saw the incoming data as all-ASCII.
 
-                Assert.Equal(OperationStatus.Done, Ascii.ToUtf16(asciiSpan.Slice(i), utf16Span.Slice(i), out int charsWritten));
+                Assert.Equal(
+                    OperationStatus.Done,
+                    Ascii.ToUtf16(asciiSpan.Slice(i), utf16Span.Slice(i), out int charsWritten)
+                );
                 Assert.Equal(256 - i, charsWritten);
 
                 // Then, validate that the data was transcoded properly.
@@ -87,7 +93,10 @@ namespace System.Text.Tests
 
                 asciiSpan[i] |= (byte)0x80;
 
-                Assert.Equal(OperationStatus.InvalidData, Ascii.ToUtf16(asciiSpan, utf16Span, out int charsWritten));
+                Assert.Equal(
+                    OperationStatus.InvalidData,
+                    Ascii.ToUtf16(asciiSpan, utf16Span, out int charsWritten)
+                );
                 Assert.Equal(i, charsWritten);
 
                 // Next, validate that the ASCII data was transcoded properly.

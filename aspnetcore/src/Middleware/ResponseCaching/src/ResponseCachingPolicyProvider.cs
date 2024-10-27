@@ -38,7 +38,12 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         // Verify request cache-control parameters
         if (!StringValues.IsNullOrEmpty(cacheControl))
         {
-            if (HeaderUtilities.ContainsCacheDirective(cacheControl, CacheControlHeaderValue.NoCacheString))
+            if (
+                HeaderUtilities.ContainsCacheDirective(
+                    cacheControl,
+                    CacheControlHeaderValue.NoCacheString
+                )
+            )
             {
                 context.Logger.RequestWithNoCacheNotCacheable();
                 return false;
@@ -47,7 +52,12 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         else
         {
             // Support for legacy HTTP 1.0 cache directive
-            if (HeaderUtilities.ContainsCacheDirective(requestHeaders.Pragma, CacheControlHeaderValue.NoCacheString))
+            if (
+                HeaderUtilities.ContainsCacheDirective(
+                    requestHeaders.Pragma,
+                    CacheControlHeaderValue.NoCacheString
+                )
+            )
             {
                 context.Logger.RequestWithPragmaNoCacheNotCacheable();
                 return false;
@@ -60,7 +70,10 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
     public bool AllowCacheStorage(ResponseCachingContext context)
     {
         // Check request no-store
-        return !HeaderUtilities.ContainsCacheDirective(context.HttpContext.Request.Headers.CacheControl, CacheControlHeaderValue.NoStoreString);
+        return !HeaderUtilities.ContainsCacheDirective(
+            context.HttpContext.Request.Headers.CacheControl,
+            CacheControlHeaderValue.NoStoreString
+        );
     }
 
     public bool IsResponseCacheable(ResponseCachingContext context)
@@ -68,21 +81,36 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         var responseCacheControlHeader = context.HttpContext.Response.Headers.CacheControl;
 
         // Only cache pages explicitly marked with public
-        if (!HeaderUtilities.ContainsCacheDirective(responseCacheControlHeader, CacheControlHeaderValue.PublicString))
+        if (
+            !HeaderUtilities.ContainsCacheDirective(
+                responseCacheControlHeader,
+                CacheControlHeaderValue.PublicString
+            )
+        )
         {
             context.Logger.ResponseWithoutPublicNotCacheable();
             return false;
         }
 
         // Check response no-store
-        if (HeaderUtilities.ContainsCacheDirective(responseCacheControlHeader, CacheControlHeaderValue.NoStoreString))
+        if (
+            HeaderUtilities.ContainsCacheDirective(
+                responseCacheControlHeader,
+                CacheControlHeaderValue.NoStoreString
+            )
+        )
         {
             context.Logger.ResponseWithNoStoreNotCacheable();
             return false;
         }
 
         // Check no-cache
-        if (HeaderUtilities.ContainsCacheDirective(responseCacheControlHeader, CacheControlHeaderValue.NoCacheString))
+        if (
+            HeaderUtilities.ContainsCacheDirective(
+                responseCacheControlHeader,
+                CacheControlHeaderValue.NoCacheString
+            )
+        )
         {
             context.Logger.ResponseWithNoCacheNotCacheable();
             return false;
@@ -99,14 +127,22 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
 
         // Do not cache responses varying by *
         var varyHeader = response.Headers.Vary;
-        if (varyHeader.Count == 1 && string.Equals(varyHeader, "*", StringComparison.OrdinalIgnoreCase))
+        if (
+            varyHeader.Count == 1
+            && string.Equals(varyHeader, "*", StringComparison.OrdinalIgnoreCase)
+        )
         {
             context.Logger.ResponseWithVaryStarNotCacheable();
             return false;
         }
 
         // Check private
-        if (HeaderUtilities.ContainsCacheDirective(responseCacheControlHeader, CacheControlHeaderValue.PrivateString))
+        if (
+            HeaderUtilities.ContainsCacheDirective(
+                responseCacheControlHeader,
+                CacheControlHeaderValue.PrivateString
+            )
+        )
         {
             context.Logger.ResponseWithPrivateNotCacheable();
             return false;
@@ -122,11 +158,16 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         // Check response freshness
         if (!context.ResponseDate.HasValue)
         {
-            if (!context.ResponseSharedMaxAge.HasValue &&
-                !context.ResponseMaxAge.HasValue &&
-                context.ResponseTime!.Value >= context.ResponseExpires)
+            if (
+                !context.ResponseSharedMaxAge.HasValue
+                && !context.ResponseMaxAge.HasValue
+                && context.ResponseTime!.Value >= context.ResponseExpires
+            )
             {
-                context.Logger.ExpirationExpiresExceeded(context.ResponseTime.Value, context.ResponseExpires.Value);
+                context.Logger.ExpirationExpiresExceeded(
+                    context.ResponseTime.Value,
+                    context.ResponseExpires.Value
+                );
                 return false;
             }
         }
@@ -137,7 +178,10 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
             // Validate shared max age
             if (age >= context.ResponseSharedMaxAge)
             {
-                context.Logger.ExpirationSharedMaxAgeExceeded(age, context.ResponseSharedMaxAge.Value);
+                context.Logger.ExpirationSharedMaxAgeExceeded(
+                    age,
+                    context.ResponseSharedMaxAge.Value
+                );
                 return false;
             }
             else if (!context.ResponseSharedMaxAge.HasValue)
@@ -153,7 +197,10 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
                     // Validate expiration
                     if (context.ResponseTime.Value >= context.ResponseExpires)
                     {
-                        context.Logger.ExpirationExpiresExceeded(context.ResponseTime.Value, context.ResponseExpires.Value);
+                        context.Logger.ExpirationExpiresExceeded(
+                            context.ResponseTime.Value,
+                            context.ResponseExpires.Value
+                        );
                         return false;
                     }
                 }
@@ -170,7 +217,13 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         var requestCacheControlHeaders = context.HttpContext.Request.Headers.CacheControl;
 
         // Add min-fresh requirements
-        if (HeaderUtilities.TryParseSeconds(requestCacheControlHeaders, CacheControlHeaderValue.MinFreshString, out var minFresh))
+        if (
+            HeaderUtilities.TryParseSeconds(
+                requestCacheControlHeaders,
+                CacheControlHeaderValue.MinFreshString,
+                out var minFresh
+            )
+        )
         {
             age += minFresh.Value;
             context.Logger.ExpirationMinFreshAdded(minFresh.Value);
@@ -178,7 +231,11 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
 
         // Validate shared max age, this overrides any max age settings for shared caches
         TimeSpan? cachedSharedMaxAge;
-        HeaderUtilities.TryParseSeconds(cachedCacheControlHeaders, CacheControlHeaderValue.SharedMaxAgeString, out cachedSharedMaxAge);
+        HeaderUtilities.TryParseSeconds(
+            cachedCacheControlHeaders,
+            CacheControlHeaderValue.SharedMaxAgeString,
+            out cachedSharedMaxAge
+        );
 
         if (age >= cachedSharedMaxAge)
         {
@@ -189,26 +246,50 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
         else if (!cachedSharedMaxAge.HasValue)
         {
             TimeSpan? requestMaxAge;
-            HeaderUtilities.TryParseSeconds(requestCacheControlHeaders, CacheControlHeaderValue.MaxAgeString, out requestMaxAge);
+            HeaderUtilities.TryParseSeconds(
+                requestCacheControlHeaders,
+                CacheControlHeaderValue.MaxAgeString,
+                out requestMaxAge
+            );
 
             TimeSpan? cachedMaxAge;
-            HeaderUtilities.TryParseSeconds(cachedCacheControlHeaders, CacheControlHeaderValue.MaxAgeString, out cachedMaxAge);
+            HeaderUtilities.TryParseSeconds(
+                cachedCacheControlHeaders,
+                CacheControlHeaderValue.MaxAgeString,
+                out cachedMaxAge
+            );
 
-            var lowestMaxAge = cachedMaxAge < requestMaxAge ? cachedMaxAge : requestMaxAge ?? cachedMaxAge;
+            var lowestMaxAge =
+                cachedMaxAge < requestMaxAge ? cachedMaxAge : requestMaxAge ?? cachedMaxAge;
             // Validate max age
             if (age >= lowestMaxAge)
             {
                 // Must revalidate or proxy revalidate
-                if (HeaderUtilities.ContainsCacheDirective(cachedCacheControlHeaders, CacheControlHeaderValue.MustRevalidateString)
-                    || HeaderUtilities.ContainsCacheDirective(cachedCacheControlHeaders, CacheControlHeaderValue.ProxyRevalidateString))
+                if (
+                    HeaderUtilities.ContainsCacheDirective(
+                        cachedCacheControlHeaders,
+                        CacheControlHeaderValue.MustRevalidateString
+                    )
+                    || HeaderUtilities.ContainsCacheDirective(
+                        cachedCacheControlHeaders,
+                        CacheControlHeaderValue.ProxyRevalidateString
+                    )
+                )
                 {
                     context.Logger.ExpirationMustRevalidate(age, lowestMaxAge.Value);
                     return false;
                 }
 
                 TimeSpan? requestMaxStale;
-                var maxStaleExist = HeaderUtilities.ContainsCacheDirective(requestCacheControlHeaders, CacheControlHeaderValue.MaxStaleString);
-                HeaderUtilities.TryParseSeconds(requestCacheControlHeaders, CacheControlHeaderValue.MaxStaleString, out requestMaxStale);
+                var maxStaleExist = HeaderUtilities.ContainsCacheDirective(
+                    requestCacheControlHeaders,
+                    CacheControlHeaderValue.MaxStaleString
+                );
+                HeaderUtilities.TryParseSeconds(
+                    requestCacheControlHeaders,
+                    CacheControlHeaderValue.MaxStaleString,
+                    out requestMaxStale
+                );
 
                 // Request allows stale values with no age limit
                 if (maxStaleExist && !requestMaxStale.HasValue)
@@ -220,7 +301,11 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
                 // Request allows stale values with age limit
                 if (requestMaxStale.HasValue && age - lowestMaxAge < requestMaxStale)
                 {
-                    context.Logger.ExpirationMaxStaleSatisfied(age, lowestMaxAge.Value, requestMaxStale.Value);
+                    context.Logger.ExpirationMaxStaleSatisfied(
+                        age,
+                        lowestMaxAge.Value,
+                        requestMaxStale.Value
+                    );
                     return true;
                 }
 
@@ -231,8 +316,13 @@ internal sealed class ResponseCachingPolicyProvider : IResponseCachingPolicyProv
             {
                 // Validate expiration
                 DateTimeOffset expires;
-                if (HeaderUtilities.TryParseDate(context.CachedResponseHeaders.Expires.ToString(), out expires) &&
-                    context.ResponseTime!.Value >= expires)
+                if (
+                    HeaderUtilities.TryParseDate(
+                        context.CachedResponseHeaders.Expires.ToString(),
+                        out expires
+                    )
+                    && context.ResponseTime!.Value >= expires
+                )
                 {
                     context.Logger.ExpirationExpiresExceeded(context.ResponseTime.Value, expires);
                     return false;

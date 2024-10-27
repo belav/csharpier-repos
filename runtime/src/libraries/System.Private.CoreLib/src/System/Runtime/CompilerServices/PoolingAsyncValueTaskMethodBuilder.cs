@@ -12,7 +12,8 @@ namespace System.Runtime.CompilerServices
     public struct PoolingAsyncValueTaskMethodBuilder
     {
         /// <summary>Sentinel object used to indicate that the builder completed synchronously and successfully.</summary>
-        private static readonly StateMachineBox s_syncSuccessSentinel = PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.s_syncSuccessSentinel;
+        private static readonly StateMachineBox s_syncSuccessSentinel =
+            PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.s_syncSuccessSentinel;
 
         /// <summary>The wrapped state machine box.</summary>
         /// <remarks>
@@ -73,7 +74,8 @@ namespace System.Runtime.CompilerServices
                 // "work" but in a degraded mode, as we don't know the TStateMachine type here, and thus we use a box around
                 // the interface instead.
 
-                StateMachineBox? box = m_task ??= PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
+                StateMachineBox? box = m_task ??=
+                    PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
                 return new ValueTask(box, box.Version);
             }
         }
@@ -83,10 +85,17 @@ namespace System.Runtime.CompilerServices
         /// <typeparam name="TStateMachine">The type of the state machine.</typeparam>
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
-        public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : INotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.AwaitOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>Schedules the state machine to proceed to the next action when the specified awaiter completes.</summary>
         /// <typeparam name="TAwaiter">The type of the awaiter.</typeparam>
@@ -94,10 +103,17 @@ namespace System.Runtime.CompilerServices
         /// <param name="awaiter">The awaiter.</param>
         /// <param name="stateMachine">The state machine.</param>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
+        public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(
+            ref TAwaiter awaiter,
+            ref TStateMachine stateMachine
+        )
             where TAwaiter : ICriticalNotifyCompletion
             where TStateMachine : IAsyncStateMachine =>
-            PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(ref awaiter, ref stateMachine, ref m_task);
+            PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.AwaitUnsafeOnCompleted(
+                ref awaiter,
+                ref stateMachine,
+                ref m_task
+            );
 
         /// <summary>
         /// Gets an object that may be used to uniquely identify this builder to the debugger.
@@ -108,6 +124,7 @@ namespace System.Runtime.CompilerServices
         /// when no other threads are in the middle of accessing this or other members that lazily initialize the box.
         /// </remarks>
         internal object ObjectIdForDebugger =>
-            m_task ??= PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
+            m_task ??=
+                PoolingAsyncValueTaskMethodBuilder<VoidTaskResult>.CreateWeaklyTypedStateMachineBox();
     }
 }

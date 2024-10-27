@@ -17,7 +17,7 @@ internal sealed class TrivialMatcher : Matcher
     {
         _endpoint = endpoint;
 
-        _candidates = new Candidate[] { new Candidate(endpoint), };
+        _candidates = new Candidate[] { new Candidate(endpoint) };
     }
 
     public sealed override Task MatchAsync(HttpContext httpContext)

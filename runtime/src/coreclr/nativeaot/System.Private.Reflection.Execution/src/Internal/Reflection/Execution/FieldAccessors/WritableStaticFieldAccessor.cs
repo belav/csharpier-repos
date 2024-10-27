@@ -3,17 +3,17 @@
 
 using System;
 using System.Reflection;
-
 using Internal.Runtime.Augments;
 
 namespace Internal.Reflection.Execution.FieldAccessors
 {
     internal abstract class WritableStaticFieldAccessor : StaticFieldAccessor
     {
-        protected WritableStaticFieldAccessor(IntPtr cctorContext, RuntimeTypeHandle fieldTypeHandle)
-            : base(cctorContext, fieldTypeHandle)
-        {
-        }
+        protected WritableStaticFieldAccessor(
+            IntPtr cctorContext,
+            RuntimeTypeHandle fieldTypeHandle
+        )
+            : base(cctorContext, fieldTypeHandle) { }
 
         protected abstract override object GetFieldBypassCctor();
 

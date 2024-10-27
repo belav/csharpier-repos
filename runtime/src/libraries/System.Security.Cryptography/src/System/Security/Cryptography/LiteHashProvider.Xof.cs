@@ -10,7 +10,11 @@ namespace System.Security.Cryptography
 {
     internal static partial class LiteHashProvider
     {
-        internal static void XofStream(string hashAlgorithmId, Stream source, Span<byte> destination)
+        internal static void XofStream(
+            string hashAlgorithmId,
+            Stream source,
+            Span<byte> destination
+        )
         {
             LiteXof hash = CreateXof(hashAlgorithmId);
             int written = ProcessStream(hash, source, destination);
@@ -30,7 +34,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -45,7 +50,8 @@ namespace System.Security.Cryptography
             string hashAlgorithmId,
             int outputLength,
             Stream source,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -61,7 +67,9 @@ namespace System.Security.Cryptography
             T hash,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken) where T : ILiteHash
+            CancellationToken cancellationToken
+        )
+            where T : ILiteHash
         {
             using (hash)
             {
@@ -72,7 +80,13 @@ namespace System.Security.Cryptography
 
                 try
                 {
-                    while ((read = await source.ReadAsync(rented, cancellationToken).ConfigureAwait(false)) > 0)
+                    while (
+                        (
+                            read = await source
+                                .ReadAsync(rented, cancellationToken)
+                                .ConfigureAwait(false)
+                        ) > 0
+                    )
                     {
                         maxRead = Math.Max(maxRead, read);
                         hash.Append(rented.AsSpan(0, read));

@@ -3,8 +3,8 @@
 
 using System.IO;
 using System.Runtime.InteropServices;
-using Xunit;
 using System.Tests;
+using Xunit;
 
 namespace System.IO.Tests
 {
@@ -26,11 +26,16 @@ namespace System.IO.Tests
         [InlineData(HResults.ERROR_FILE_INVALID)]
         public static void Fom_HR(int hr)
         {
-            var fileLoadException = Marshal.GetExceptionForHR(hr, new IntPtr(-1)) as FileLoadException;
+            var fileLoadException =
+                Marshal.GetExceptionForHR(hr, new IntPtr(-1)) as FileLoadException;
             Assert.NotNull(fileLoadException);
 
             // Don't validate the message.  Currently .NET Native does not produce HR-specific messages
-            ExceptionHelpers.ValidateExceptionProperties(fileLoadException, hResult: hr, validateMessage: false);
+            ExceptionHelpers.ValidateExceptionProperties(
+                fileLoadException,
+                hResult: hr,
+                validateMessage: false
+            );
             Assert.Null(fileLoadException.FileName);
         }
     }

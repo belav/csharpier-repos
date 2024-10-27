@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,22 +31,22 @@ using System;
 
 namespace System.Data.Linq.Mapping
 {
-	[AttributeUsage (AttributeTargets.Property|AttributeTargets.Field, AllowMultiple = false)]
-	public sealed class ColumnAttribute : DataAttribute
-	{
+    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
+    public sealed class ColumnAttribute : DataAttribute
+    {
         public ColumnAttribute()
         {
             CanBeNull = true;
         }
 
-		public AutoSync AutoSync { get; set; }
-		public bool CanBeNull { get; set; }
-		public string DbType { get; set; }
-		public string Expression { get; set; }
-		public bool IsDbGenerated { get; set; }
-		public bool IsDiscriminator { get; set; }
-		public bool IsPrimaryKey { get; set; }
-		public bool IsVersion { get; set; }
-		public UpdateCheck UpdateCheck { get; set; }
-	}
+        public AutoSync AutoSync { get; set; }
+        public bool CanBeNull { get; set; }
+        public string DbType { get; set; }
+        public string Expression { get; set; }
+        public bool IsDbGenerated { get; set; }
+        public bool IsDiscriminator { get; set; }
+        public bool IsPrimaryKey { get; set; }
+        public bool IsVersion { get; set; }
+        public UpdateCheck UpdateCheck { get; set; }
+    }
 }

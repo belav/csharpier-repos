@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,253 +32,265 @@ using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.UI.WebControls {
+namespace MonoTests.System.Web.UI.WebControls
+{
+    public class TestTableItemStyle : TableItemStyle
+    {
+        public TestTableItemStyle()
+            : base() { }
 
-	public class TestTableItemStyle : TableItemStyle {
+        public TestTableItemStyle(StateBag bag)
+            : base(bag) { }
 
-		public TestTableItemStyle ()
-			: base ()
-		{
-		}
+        public bool Empty
+        {
+            get { return base.IsEmpty; }
+        }
 
-		public TestTableItemStyle (StateBag bag)
-			: base (bag)
-		{
-		}
+        public StateBag StateBag
+        {
+            get { return base.ViewState; }
+        }
 
-		public bool Empty {
-			get { return base.IsEmpty; }
-		}
+        public bool SetBitCalledFlag = false;
+        public int SetBitCalledValue = 0;
 
-		public StateBag StateBag {
-			get { return base.ViewState; }
-		}
+        protected internal override void SetBit(int bit)
+        {
+            SetBitCalledFlag = true;
+            SetBitCalledValue = bit;
+            base.SetBit(bit);
+        }
+    }
 
-		public bool SetBitCalledFlag = false;
-		public int SetBitCalledValue = 0;
-		protected internal override void SetBit (int bit) {
-			SetBitCalledFlag = true;
-			SetBitCalledValue = bit;
-			base.SetBit (bit);
-		}
-	}
+    [TestFixture]
+    public class TableItemStyleTest
+    {
+        private void DefaultProperties(TestTableItemStyle tis)
+        {
+            Assert.AreEqual(0, tis.StateBag.Count, "ViewState.Count");
 
-	[TestFixture]
-	public class TableItemStyleTest {
+            Assert.AreEqual(HorizontalAlign.NotSet, tis.HorizontalAlign, "HorizontalAlign");
+            Assert.AreEqual(VerticalAlign.NotSet, tis.VerticalAlign, "VerticalAlign");
+            Assert.IsTrue(tis.Wrap, "Wrap");
 
-		private void DefaultProperties (TestTableItemStyle tis)
-		{
-			Assert.AreEqual (0, tis.StateBag.Count, "ViewState.Count");
+            Assert.AreEqual(0, tis.StateBag.Count, "ViewState.Count-2");
+            tis.Reset();
+            Assert.AreEqual(0, tis.StateBag.Count, "Reset");
+        }
 
-			Assert.AreEqual (HorizontalAlign.NotSet, tis.HorizontalAlign, "HorizontalAlign");
-			Assert.AreEqual (VerticalAlign.NotSet, tis.VerticalAlign, "VerticalAlign");
-			Assert.IsTrue (tis.Wrap, "Wrap");
+        private void NullProperties(TestTableItemStyle tis)
+        {
+            Assert.IsTrue(tis.Empty, "Empty");
 
-			Assert.AreEqual (0, tis.StateBag.Count, "ViewState.Count-2");
-			tis.Reset ();
-			Assert.AreEqual (0, tis.StateBag.Count, "Reset");
-		}
+            tis.HorizontalAlign = HorizontalAlign.NotSet;
+            Assert.AreEqual(HorizontalAlign.NotSet, tis.HorizontalAlign, "HorizontalAlign");
+            Assert.IsFalse(tis.Empty, "!Empty");
+            tis.VerticalAlign = VerticalAlign.NotSet;
+            Assert.AreEqual(VerticalAlign.NotSet, tis.VerticalAlign, "VerticalAlign");
+            tis.Wrap = true;
+            Assert.IsTrue(tis.Wrap, "Wrap");
 
-		private void NullProperties (TestTableItemStyle tis)
-		{
-			Assert.IsTrue (tis.Empty, "Empty");
+            Assert.AreEqual(3, tis.StateBag.Count, "ViewState.Count-1");
+            tis.Reset();
+            Assert.AreEqual(0, tis.StateBag.Count, "Reset");
+            Assert.IsTrue(tis.Empty, "Empty/Reset");
+        }
 
-			tis.HorizontalAlign = HorizontalAlign.NotSet;
-			Assert.AreEqual (HorizontalAlign.NotSet, tis.HorizontalAlign, "HorizontalAlign");
-			Assert.IsFalse (tis.Empty, "!Empty");
-			tis.VerticalAlign = VerticalAlign.NotSet;
-			Assert.AreEqual (VerticalAlign.NotSet, tis.VerticalAlign, "VerticalAlign");
-			tis.Wrap = true;
-			Assert.IsTrue (tis.Wrap, "Wrap");
+        [Test]
+        public void Constructor_Default()
+        {
+            TestTableItemStyle tis = new TestTableItemStyle();
+            DefaultProperties(tis);
+            NullProperties(tis);
+        }
 
-			Assert.AreEqual (3, tis.StateBag.Count, "ViewState.Count-1");
-			tis.Reset ();
-			Assert.AreEqual (0, tis.StateBag.Count, "Reset");
-			Assert.IsTrue (tis.Empty, "Empty/Reset");
-		}
+        [Test]
+        public void Constructor_StateBag_Null()
+        {
+            TestTableItemStyle tis = new TestTableItemStyle(null);
+            Assert.IsNotNull(tis.StateBag, "StateBag");
+            DefaultProperties(tis);
+            NullProperties(tis);
+        }
 
-		[Test]
-		public void Constructor_Default ()
-		{
-			TestTableItemStyle tis = new TestTableItemStyle ();
-			DefaultProperties (tis);
-			NullProperties (tis);
-		}
+        [Test]
+        public void Constructor_StateBag()
+        {
+            TestTableItemStyle tis = new TestTableItemStyle(new StateBag());
+            Assert.IsNotNull(tis.StateBag, "StateBag");
+            DefaultProperties(tis);
+            NullProperties(tis);
+        }
 
-		[Test]
-		public void Constructor_StateBag_Null ()
-		{
-			TestTableItemStyle tis = new TestTableItemStyle (null);
-			Assert.IsNotNull (tis.StateBag, "StateBag");
-			DefaultProperties (tis);
-			NullProperties (tis);
-		}
+        [Test]
+        // LAMESPEC: documented as ArgumentException
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void HorizontalAlign_Invalid()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.HorizontalAlign = (HorizontalAlign)Int32.MinValue;
+        }
 
-		[Test]
-		public void Constructor_StateBag ()
-		{
-			TestTableItemStyle tis = new TestTableItemStyle (new StateBag ());
-			Assert.IsNotNull (tis.StateBag, "StateBag");
-			DefaultProperties (tis);
-			NullProperties (tis);
-		}
+        [Test]
+        // LAMESPEC: documented as ArgumentException
+        [ExpectedException(typeof(ArgumentOutOfRangeException))]
+        public void VerticalAlign_Invalid()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.VerticalAlign = (VerticalAlign)Int32.MinValue;
+        }
 
-		[Test]
-		// LAMESPEC: documented as ArgumentException
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void HorizontalAlign_Invalid ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.HorizontalAlign = (HorizontalAlign)Int32.MinValue;
-		}
+        [Test]
+        public void AddAttributesToRender_Null_WebControl()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.AddAttributesToRender(null, new TableRow());
+            // no exception
+        }
 
-		[Test]
-		// LAMESPEC: documented as ArgumentException
-		[ExpectedException (typeof (ArgumentOutOfRangeException))]
-		public void VerticalAlign_Invalid ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.VerticalAlign = (VerticalAlign)Int32.MinValue;
-		}
+        [Test]
+        public void AddAttributesToRender_HtmlTextWriter_Null()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            tis.AddAttributesToRender(writer, null);
+            Assert.AreEqual(String.Empty, writer.InnerWriter.ToString(), "empty");
+        }
 
-		[Test]
-		public void AddAttributesToRender_Null_WebControl ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.AddAttributesToRender (null, new TableRow ());
-			// no exception
-		}
+        [Test]
+        public void AddAttributesToRender()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            HtmlTextWriter writer = new HtmlTextWriter(new StringWriter());
+            tis.AddAttributesToRender(writer, new Table());
+            Assert.AreEqual(String.Empty, writer.InnerWriter.ToString(), "empty");
+        }
 
-		[Test]
-		public void AddAttributesToRender_HtmlTextWriter_Null ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			tis.AddAttributesToRender (writer, null);
-			Assert.AreEqual (String.Empty, writer.InnerWriter.ToString (), "empty");
-		}
+        private TableItemStyle GetTableItemStyle()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.HorizontalAlign = HorizontalAlign.Justify;
+            tis.VerticalAlign = VerticalAlign.Bottom;
+            tis.Wrap = false;
+            return tis;
+        }
 
-		[Test]
-		public void AddAttributesToRender ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			HtmlTextWriter writer = new HtmlTextWriter (new StringWriter ());
-			tis.AddAttributesToRender (writer, new Table ());
-			Assert.AreEqual (String.Empty, writer.InnerWriter.ToString (), "empty");
-		}
+        private void CheckTableStyle(TableItemStyle tis)
+        {
+            Assert.AreEqual(HorizontalAlign.Justify, tis.HorizontalAlign, "HorizontalAlign");
+            Assert.AreEqual(VerticalAlign.Bottom, tis.VerticalAlign, "VerticalAlign");
+            Assert.IsFalse(tis.Wrap, "Wrap");
+        }
 
-		private TableItemStyle GetTableItemStyle ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.HorizontalAlign = HorizontalAlign.Justify;
-			tis.VerticalAlign = VerticalAlign.Bottom;
-			tis.Wrap = false;
-			return tis;
-		}
+        [Test]
+        public void CopyFrom_Null()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            tis.CopyFrom(null);
+            CheckTableStyle(tis);
+        }
 
-		private void CheckTableStyle (TableItemStyle tis)
-		{
-			Assert.AreEqual (HorizontalAlign.Justify, tis.HorizontalAlign, "HorizontalAlign");
-			Assert.AreEqual (VerticalAlign.Bottom, tis.VerticalAlign, "VerticalAlign");
-			Assert.IsFalse (tis.Wrap, "Wrap");
-		}
+        [Test]
+        public void CopyFrom_Self()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            tis.CopyFrom(tis);
+            CheckTableStyle(tis);
+        }
 
-		[Test]
-		public void CopyFrom_Null ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			tis.CopyFrom (null);
-			CheckTableStyle (tis);
-		}
+        [Test]
+        public void CopyFrom_Empty()
+        {
+            TestTableItemStyle tis = new TestTableItemStyle();
+            tis.CopyFrom(new TableItemStyle());
+            DefaultProperties(tis);
+        }
 
-		[Test]
-		public void CopyFrom_Self ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			tis.CopyFrom (tis);
-			CheckTableStyle (tis);
-		}
+        [Test]
+        public void CopyFrom()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.HorizontalAlign = HorizontalAlign.Left;
+            tis.VerticalAlign = VerticalAlign.Top;
+            tis.Wrap = true;
 
-		[Test]
-		public void CopyFrom_Empty ()
-		{
-			TestTableItemStyle tis = new TestTableItemStyle ();
-			tis.CopyFrom (new TableItemStyle ());
-			DefaultProperties (tis);
-		}
+            tis.CopyFrom(GetTableItemStyle());
+            CheckTableStyle(tis);
+        }
 
-		[Test]
-		public void CopyFrom ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.HorizontalAlign = HorizontalAlign.Left;
-			tis.VerticalAlign = VerticalAlign.Top;
-			tis.Wrap = true;
+        [Test]
+        public void MergeWith_Null()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            tis.MergeWith(null);
+            CheckTableStyle(tis);
+        }
 
-			tis.CopyFrom (GetTableItemStyle ());
-			CheckTableStyle (tis);
-		}
+        [Test]
+        public void MergeWith_Self()
+        {
+            TableItemStyle tis = GetTableItemStyle();
+            tis.MergeWith(tis);
+            CheckTableStyle(tis);
+        }
 
-		[Test]
-		public void MergeWith_Null ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			tis.MergeWith (null);
-			CheckTableStyle (tis);
-		}
+        [Test]
+        public void MergeWith_Empty()
+        {
+            TestTableItemStyle tis = new TestTableItemStyle();
+            tis.MergeWith(new TableItemStyle());
+            DefaultProperties(tis);
+        }
 
-		[Test]
-		public void MergeWith_Self ()
-		{
-			TableItemStyle tis = GetTableItemStyle ();
-			tis.MergeWith (tis);
-			CheckTableStyle (tis);
-		}
+        [Test]
+        public void MergeWith()
+        {
+            TableItemStyle tis = new TableItemStyle();
+            tis.HorizontalAlign = HorizontalAlign.Left;
+            tis.VerticalAlign = VerticalAlign.Top;
+            tis.Wrap = true;
 
-		[Test]
-		public void MergeWith_Empty ()
-		{
-			TestTableItemStyle tis = new TestTableItemStyle ();
-			tis.MergeWith (new TableItemStyle ());
-			DefaultProperties (tis);
-		}
+            tis.MergeWith(GetTableItemStyle());
 
-		[Test]
-		public void MergeWith ()
-		{
-			TableItemStyle tis = new TableItemStyle ();
-			tis.HorizontalAlign = HorizontalAlign.Left;
-			tis.VerticalAlign = VerticalAlign.Top;
-			tis.Wrap = true;
+            Assert.AreEqual(HorizontalAlign.Left, tis.HorizontalAlign, "HorizontalAlign");
+            Assert.AreEqual(VerticalAlign.Top, tis.VerticalAlign, "VerticalAlign");
+            Assert.IsTrue(tis.Wrap, "Wrap");
+        }
 
-			tis.MergeWith (GetTableItemStyle ());
+        [Test]
+        public void SetBitCalledWhenSetProperty()
+        {
+            TestTableItemStyle s = new TestTableItemStyle();
 
-			Assert.AreEqual (HorizontalAlign.Left, tis.HorizontalAlign, "HorizontalAlign");
-			Assert.AreEqual (VerticalAlign.Top, tis.VerticalAlign, "VerticalAlign");
-			Assert.IsTrue (tis.Wrap, "Wrap");
-		}
+            s.SetBitCalledFlag = false;
+            s.HorizontalAlign = HorizontalAlign.Right;
+            Assert.IsTrue(s.SetBitCalledFlag, "SetBit() was not called : HorizontalAlign");
+            Assert.AreEqual(
+                0x10000,
+                s.SetBitCalledValue,
+                "SetBit() was called with wrong argument : HorizontalAlign"
+            );
 
-		[Test]
-		public void SetBitCalledWhenSetProperty () {
-			TestTableItemStyle s = new TestTableItemStyle ();
+            s.SetBitCalledFlag = false;
+            s.VerticalAlign = VerticalAlign.Bottom;
+            Assert.IsTrue(s.SetBitCalledFlag, "SetBit() was not called : VerticalAlign");
+            Assert.AreEqual(
+                0x20000,
+                s.SetBitCalledValue,
+                "SetBit() was called with wrong argument : VerticalAlign"
+            );
 
-			s.SetBitCalledFlag = false;
-			s.HorizontalAlign = HorizontalAlign.Right;
-			Assert.IsTrue (s.SetBitCalledFlag, "SetBit() was not called : HorizontalAlign");
-			Assert.AreEqual (0x10000, s.SetBitCalledValue, "SetBit() was called with wrong argument : HorizontalAlign");
-
-			s.SetBitCalledFlag = false;
-			s.VerticalAlign = VerticalAlign.Bottom;
-			Assert.IsTrue (s.SetBitCalledFlag, "SetBit() was not called : VerticalAlign");
-			Assert.AreEqual (0x20000, s.SetBitCalledValue, "SetBit() was called with wrong argument : VerticalAlign");
-
-			s.SetBitCalledFlag = false;
-			s.Wrap = false;
-			Assert.IsTrue (s.SetBitCalledFlag, "SetBit() was not called : Wrap");
-			Assert.AreEqual (0x40000, s.SetBitCalledValue, "SetBit() was called with wrong argument : Wrap");
-		}
-	}
+            s.SetBitCalledFlag = false;
+            s.Wrap = false;
+            Assert.IsTrue(s.SetBitCalledFlag, "SetBit() was not called : Wrap");
+            Assert.AreEqual(
+                0x40000,
+                s.SetBitCalledValue,
+                "SetBit() was called with wrong argument : Wrap"
+            );
+        }
+    }
 }

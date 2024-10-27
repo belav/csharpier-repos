@@ -33,7 +33,10 @@ namespace System.Web.Http.Owin
             IOwinRequest request = null;
 
             // Act & Assert
-            Assert.ThrowsArgumentNull(() => OwinRequestExtensions.DisableBuffering(request), "request");
+            Assert.ThrowsArgumentNull(
+                () => OwinRequestExtensions.DisableBuffering(request),
+                "request"
+            );
         }
 
         [Fact]
@@ -51,8 +54,13 @@ namespace System.Web.Http.Owin
         public void DisableBuffering_IfServerDisableResponseBufferingIsAbsent_DoesNotThrow()
         {
             // Arrange
-            Mock<IDictionary<string, object>> environmentMock = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
-            IDictionary<string, object> environment = CreateStubEnvironment(null, hasDisableBufferingAction: false);
+            Mock<IDictionary<string, object>> environmentMock = new Mock<
+                IDictionary<string, object>
+            >(MockBehavior.Strict);
+            IDictionary<string, object> environment = CreateStubEnvironment(
+                null,
+                hasDisableBufferingAction: false
+            );
             IOwinRequest request = CreateStubRequest(environment);
 
             // Act & Assert
@@ -131,7 +139,10 @@ namespace System.Web.Http.Owin
         public void GetContentLength_IfContentLengthHeaderValuesIsMultiple_ReturnsNull()
         {
             // Arrange
-            IHeaderDictionary headers = CreateStubHeaders("Content-Length", new string[] { "123", "456" });
+            IHeaderDictionary headers = CreateStubHeaders(
+                "Content-Length",
+                new string[] { "123", "456" }
+            );
             IOwinRequest request = CreateStubRequest(headers);
 
             // Act
@@ -187,7 +198,10 @@ namespace System.Web.Http.Owin
         public void GetContentLength_IfValid_ReturnsValue()
         {
             int expected = 123;
-            IHeaderDictionary headers = CreateStubHeaders("Content-Length", new string[] { expected.ToString() });
+            IHeaderDictionary headers = CreateStubHeaders(
+                "Content-Length",
+                new string[] { expected.ToString() }
+            );
             IOwinRequest request = CreateStubRequest(headers);
 
             // Act
@@ -198,15 +212,25 @@ namespace System.Web.Http.Owin
             Assert.Equal(expected, length.Value);
         }
 
-        private static IDictionary<string, object> CreateStubEnvironment(object disableBufferingAction)
+        private static IDictionary<string, object> CreateStubEnvironment(
+            object disableBufferingAction
+        )
         {
             return CreateStubEnvironment(disableBufferingAction, hasDisableBufferingAction: true);
         }
 
-        private static IDictionary<string, object> CreateStubEnvironment(object disableBufferingAction, bool hasDisableBufferingAction)
+        private static IDictionary<string, object> CreateStubEnvironment(
+            object disableBufferingAction,
+            bool hasDisableBufferingAction
+        )
         {
-            Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(MockBehavior.Strict);
-            mock.Setup(d => d.TryGetValue("server.DisableRequestBuffering", out disableBufferingAction)).Returns(hasDisableBufferingAction);
+            Mock<IDictionary<string, object>> mock = new Mock<IDictionary<string, object>>(
+                MockBehavior.Strict
+            );
+            mock.Setup(d =>
+                    d.TryGetValue("server.DisableRequestBuffering", out disableBufferingAction)
+                )
+                .Returns(hasDisableBufferingAction);
             return mock.Object;
         }
 

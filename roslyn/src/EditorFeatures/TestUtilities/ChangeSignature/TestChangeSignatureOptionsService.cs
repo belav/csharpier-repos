@@ -14,32 +14,50 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Editor.UnitTests.ChangeSignature
 {
-    [ExportWorkspaceService(typeof(IChangeSignatureOptionsService), ServiceLayer.Test), Shared, PartNotDiscoverable]
+    [
+        ExportWorkspaceService(typeof(IChangeSignatureOptionsService), ServiceLayer.Test),
+        Shared,
+        PartNotDiscoverable
+    ]
     internal class TestChangeSignatureOptionsService : IChangeSignatureOptionsService
     {
         public AddedParameterOrExistingIndex[]? UpdatedSignature = null;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public TestChangeSignatureOptionsService()
-        {
-        }
+        public TestChangeSignatureOptionsService() { }
 
         ChangeSignatureOptionsResult IChangeSignatureOptionsService.GetChangeSignatureOptions(
             Document document,
             int positionForTypeBinding,
             ISymbol symbol,
-            ParameterConfiguration parameters)
+            ParameterConfiguration parameters
+        )
         {
             var list = parameters.ToListOfParameters();
-            var updateParameters = UpdatedSignature != null
-                ? UpdatedSignature.Select(item => item.IsExisting ? list[item.OldIndex ?? -1] : item.GetAddedParameter(document)).ToImmutableArray()
-                : new ImmutableArray<Parameter>();
-            return new ChangeSignatureOptionsResult(new SignatureChange(
+            var updateParameters =
+                UpdatedSignature != null
+                    ? UpdatedSignature
+                        .Select(item =>
+                            item.IsExisting
+                                ? list[item.OldIndex ?? -1]
+                                : item.GetAddedParameter(document)
+                        )
+                        .ToImmutableArray()
+                    : new ImmutableArray<Parameter>();
+            return new ChangeSignatureOptionsResult(
+                new SignatureChange(
                     parameters,
                     UpdatedSignature == null
-                    ? parameters
-                    : ParameterConfiguration.Create(updateParameters, parameters.ThisParameter != null, selectedIndex: 0)), previewChanges: false);
+                        ? parameters
+                        : ParameterConfiguration.Create(
+                            updateParameters,
+                            parameters.ThisParameter != null,
+                            selectedIndex: 0
+                        )
+                ),
+                previewChanges: false
+            );
         }
     }
 }

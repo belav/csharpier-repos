@@ -12,9 +12,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
     /// <summary>
     /// Base type for all wrappers that involve wrapping a comma-separated list of items.
     /// </summary>
-    internal abstract partial class AbstractSeparatedSyntaxListWrapper<
-        TListSyntax,
-        TListItemSyntax>
+    internal abstract partial class AbstractSeparatedSyntaxListWrapper<TListSyntax, TListItemSyntax>
         : AbstractSyntaxWrapper
         where TListSyntax : SyntaxNode
         where TListItemSyntax : SyntaxNode
@@ -35,9 +33,7 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
         public abstract bool Supports_WrapLongGroup_UnwrapFirst { get; }
 
         protected AbstractSeparatedSyntaxListWrapper(IIndentationService indentationService)
-            : base(indentationService)
-        {
-        }
+            : base(indentationService) { }
 
         protected abstract bool ShouldMoveCloseBraceToNewLine { get; }
         protected abstract bool ShouldMoveOpenBraceToNewLine(SyntaxWrappingOptions options);
@@ -45,12 +41,25 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
         protected abstract SyntaxToken FirstToken(TListSyntax listSyntax);
         protected abstract SyntaxToken LastToken(TListSyntax listSyntax);
         protected abstract TListSyntax? TryGetApplicableList(SyntaxNode node);
-        protected abstract SeparatedSyntaxList<TListItemSyntax> GetListItems(TListSyntax listSyntax);
+        protected abstract SeparatedSyntaxList<TListItemSyntax> GetListItems(
+            TListSyntax listSyntax
+        );
         protected abstract bool PositionIsApplicable(
-            SyntaxNode root, int position, SyntaxNode declaration, bool containsSyntaxError, TListSyntax listSyntax);
+            SyntaxNode root,
+            int position,
+            SyntaxNode declaration,
+            bool containsSyntaxError,
+            TListSyntax listSyntax
+        );
 
         public override async Task<ICodeActionComputer?> TryCreateComputerAsync(
-            Document document, int position, SyntaxNode declaration, SyntaxWrappingOptions options, bool containsSyntaxError, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            SyntaxNode declaration,
+            SyntaxWrappingOptions options,
+            bool containsSyntaxError,
+            CancellationToken cancellationToken
+        )
         {
             var listSyntax = TryGetApplicableList(declaration);
             if (listSyntax == null || listSyntax.Span.IsEmpty)
@@ -59,10 +68,17 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             var firstToken = FirstToken(listSyntax);
             var lastToken = LastToken(listSyntax);
 
-            if (firstToken.IsMissing || lastToken.IsMissing || firstToken.Span.IsEmpty || lastToken.Span.IsEmpty)
+            if (
+                firstToken.IsMissing
+                || lastToken.IsMissing
+                || firstToken.Span.IsEmpty
+                || lastToken.Span.IsEmpty
+            )
                 return null;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (!PositionIsApplicable(root, position, declaration, containsSyntaxError, listSyntax))
                 return null;
 
@@ -76,14 +92,27 @@ namespace Microsoft.CodeAnalysis.Wrapping.SeparatedSyntaxList
             }
 
             var containsUnformattableContent = await ContainsUnformattableContentAsync(
-                document, listItems.GetWithSeparators(), cancellationToken).ConfigureAwait(false);
+                    document,
+                    listItems.GetWithSeparators(),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (containsUnformattableContent)
                 return null;
 
-            var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await document
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
             return new SeparatedSyntaxListCodeActionComputer(
-                this, document, sourceText, options, listSyntax, listItems, cancellationToken);
+                this,
+                document,
+                sourceText,
+                options,
+                listSyntax,
+                listItems,
+                cancellationToken
+            );
         }
     }
 }

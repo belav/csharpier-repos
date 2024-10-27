@@ -7,24 +7,24 @@ extern alias slowautomation;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
-using slowautomation::System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Input;
 using Roslyn.Utilities;
+using slowautomation::System.Windows.Automation;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
 {
     internal class AutomationDelegatingListView : ListView
     {
-        protected override bool IsItemItsOwnContainerOverride(object item)
-            => item is AutomationDelegatingListViewItem;
+        protected override bool IsItemItsOwnContainerOverride(object item) =>
+            item is AutomationDelegatingListViewItem;
 
-        protected override DependencyObject GetContainerForItemOverride()
-            => new AutomationDelegatingListViewItem();
+        protected override DependencyObject GetContainerForItemOverride() =>
+            new AutomationDelegatingListViewItem();
 
-        protected override AutomationPeer OnCreateAutomationPeer()
-            => new AutomationDelegatingListViewAutomationPeer(this);
+        protected override AutomationPeer OnCreateAutomationPeer() =>
+            new AutomationDelegatingListViewAutomationPeer(this);
 
         protected override void OnGotKeyboardFocus(KeyboardFocusChangedEventArgs e)
         {
@@ -39,14 +39,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
     internal class AutomationDelegatingListViewAutomationPeer : FrameworkElementAutomationPeer
     {
         public AutomationDelegatingListViewAutomationPeer(AutomationDelegatingListView listView)
-            : base(listView)
-        {
-        }
+            : base(listView) { }
 
         protected override List<AutomationPeer>? GetChildrenCore()
         {
             List<AutomationPeer>? results = null;
-            var peersToProcess = new Queue<AutomationPeer>(base.GetChildrenCore() ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>());
+            var peersToProcess = new Queue<AutomationPeer>(
+                base.GetChildrenCore() ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
+            );
             while (peersToProcess.Count > 0)
             {
                 var peer = peersToProcess.Dequeue();
@@ -57,7 +57,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 }
                 else
                 {
-                    foreach (var childPeer in peer.GetChildren() ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>())
+                    foreach (
+                        var childPeer in peer.GetChildren()
+                            ?? SpecializedCollections.EmptyEnumerable<AutomationPeer>()
+                    )
                     {
                         peersToProcess.Enqueue(childPeer);
                     }
@@ -67,14 +70,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             return results;
         }
 
-        protected override AutomationControlType GetAutomationControlTypeCore()
-            => AutomationControlType.List;
+        protected override AutomationControlType GetAutomationControlTypeCore() =>
+            AutomationControlType.List;
     }
 
     internal class AutomationDelegatingListViewItem : ListViewItem
     {
-        protected override AutomationPeer OnCreateAutomationPeer()
-            => new AutomationDelegatingListViewItemAutomationPeer(this);
+        protected override AutomationPeer OnCreateAutomationPeer() =>
+            new AutomationDelegatingListViewItemAutomationPeer(this);
     }
 
     internal class AutomationDelegatingListViewItemAutomationPeer : ListBoxItemWrapperAutomationPeer
@@ -83,7 +86,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
         private readonly RadioButtonAutomationPeer? radioButtonItem;
         private readonly TextBlockAutomationPeer? textBlockItem;
 
-        public AutomationDelegatingListViewItemAutomationPeer(AutomationDelegatingListViewItem listViewItem)
+        public AutomationDelegatingListViewItemAutomationPeer(
+            AutomationDelegatingListViewItem listViewItem
+        )
             : base(listViewItem)
         {
             checkBoxItem = this.GetChildren()?.OfType<CheckBoxAutomationPeer>().SingleOrDefault();
@@ -95,7 +100,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 return;
             }
 
-            radioButtonItem = this.GetChildren()?.OfType<RadioButtonAutomationPeer>().SingleOrDefault();
+            radioButtonItem = this.GetChildren()
+                ?.OfType<RadioButtonAutomationPeer>()
+                .SingleOrDefault();
             if (radioButtonItem != null)
             {
                 var toggleButton = ((RadioButton)radioButtonItem.Owner);
@@ -113,7 +120,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             RaisePropertyChangedEvent(
                 TogglePatternIdentifiers.ToggleStateProperty,
                 oldValue: ConvertToToggleState(!checkBox.IsChecked),
-                newValue: ConvertToToggleState(checkBox.IsChecked));
+                newValue: ConvertToToggleState(checkBox.IsChecked)
+            );
         }
 
         private void RadioButton_CheckChanged(object sender, RoutedEventArgs e)
@@ -123,16 +131,20 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
             RaisePropertyChangedEvent(
                 SelectionItemPatternIdentifiers.IsSelectedProperty,
                 oldValue: true,
-                newValue: true);
+                newValue: true
+            );
         }
 
         private static ToggleState ConvertToToggleState(bool? value)
         {
             switch (value)
             {
-                case true: return ToggleState.On;
-                case false: return ToggleState.Off;
-                default: return ToggleState.Indeterminate;
+                case true:
+                    return ToggleState.On;
+                case false:
+                    return ToggleState.Off;
+                default:
+                    return ToggleState.Indeterminate;
             }
         }
 
@@ -160,10 +172,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 : base.GetPattern(patternInterface);
         }
 
-        protected override string GetNameCore()
-            => GetAutomationPeer()?.GetName() ?? string.Empty;
+        protected override string GetNameCore() => GetAutomationPeer()?.GetName() ?? string.Empty;
 
-        private AutomationPeer? GetAutomationPeer()
-            => checkBoxItem ?? radioButtonItem ?? (AutomationPeer?)textBlockItem;
+        private AutomationPeer? GetAutomationPeer() =>
+            checkBoxItem ?? radioButtonItem ?? (AutomationPeer?)textBlockItem;
     }
 }

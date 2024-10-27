@@ -55,9 +55,15 @@ namespace Internal.JitInterface
             return this;
         }
 
-        public override MethodDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public override MethodDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
-            MethodDesc realInstantiateSignature = _wrappedMethod.InstantiateSignature(typeInstantiation, methodInstantiation);
+            MethodDesc realInstantiateSignature = _wrappedMethod.InstantiateSignature(
+                typeInstantiation,
+                methodInstantiation
+            );
             if (realInstantiateSignature != _wrappedMethod)
                 return _factory.GetUnboxingMethod(realInstantiateSignature);
 
@@ -79,7 +85,9 @@ namespace Internal.JitInterface
 
         protected override int ComputeHashCode()
         {
-            throw new NotSupportedException("This method may not be stored as it is expected to only be used transiently in the JIT");
+            throw new NotSupportedException(
+                "This method may not be stored as it is expected to only be used transiently in the JIT"
+            );
         }
 
         int IJitHashableOnly.GetJitVisibleHashCode() => _jitVisibleHashCode;

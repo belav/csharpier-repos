@@ -16,14 +16,14 @@ public class Runtime_71632
             Problem(1);
             return 101;
         }
-        catch (InvalidCastException) {}
+        catch (InvalidCastException) { }
 
         try
         {
             Problem2(1);
             return 102;
         }
-        catch (InvalidCastException) {}
+        catch (InvalidCastException) { }
 
         return 100;
     }

@@ -27,10 +27,15 @@ namespace System.ComponentModel.Composition.AttributedModel
         private IEnumerable<ImportDefinition> _imports;
         private HashSet<string> _contractNamesOnNonInterfaces;
 
-        public AttributedPartCreationInfo(Type type, PartCreationPolicyAttribute partCreationPolicy, bool ignoreConstructorImports, ICompositionElement origin)
+        public AttributedPartCreationInfo(
+            Type type,
+            PartCreationPolicyAttribute partCreationPolicy,
+            bool ignoreConstructorImports,
+            ICompositionElement origin
+        )
         {
             Assumes.NotNull(type);
-            
+
             this._type = type;
             this._ignoreConstructorImports = ignoreConstructorImports;
             this._partCreationPolicy = partCreationPolicy;
@@ -75,10 +80,7 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         public bool IsDisposalRequired
         {
-            get
-            {
-                return typeof(IDisposable).IsAssignableFrom(this.GetPartType());
-            }
+            get { return typeof(IDisposable).IsAssignableFrom(this.GetPartType()); }
         }
 
         public bool IsPartDiscoverable()
@@ -110,8 +112,7 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         private bool HasExports()
         {
-            return GetExportMembers(this._type).Any() ||
-                   GetInheritedExports(this._type).Any();
+            return GetExportMembers(this._type).Any() || GetInheritedExports(this._type).Any();
         }
 
         private bool AllExportsHaveMatchingArity()
@@ -122,7 +123,10 @@ namespace System.ComponentModel.Composition.AttributedModel
                 int partGenericArity = this._type.GetPureGenericArity();
 
                 // each member should have the same arity
-                foreach (MemberInfo member in GetExportMembers(this._type).Concat(GetInheritedExports(this._type)))
+                foreach (
+                    MemberInfo member in GetExportMembers(this._type)
+                        .Concat(GetInheritedExports(this._type))
+                )
                 {
                     if (member.MemberType == MemberTypes.Method)
                     {
@@ -145,7 +149,6 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             return isArityMatched;
         }
-
 
         string ICompositionElement.DisplayName
         {
@@ -173,17 +176,22 @@ namespace System.ComponentModel.Composition.AttributedModel
             {
                 if (this._partCreationPolicy == null)
                 {
-                    this._partCreationPolicy = this._type.GetFirstAttribute<PartCreationPolicyAttribute>() ?? PartCreationPolicyAttribute.Default;
+                    this._partCreationPolicy =
+                        this._type.GetFirstAttribute<PartCreationPolicyAttribute>()
+                        ?? PartCreationPolicyAttribute.Default;
                 }
 
                 // A Part is not allowed to be marked as NewScope at this time.
-                if(this._partCreationPolicy.CreationPolicy == CreationPolicy.NewScope)
+                if (this._partCreationPolicy.CreationPolicy == CreationPolicy.NewScope)
                 {
                     throw new ComposablePartException(
-                        String.Format(CultureInfo.CurrentCulture,
+                        String.Format(
+                            CultureInfo.CurrentCulture,
                             Strings.InvalidPartCreationPolicyOnPart,
-                            this._partCreationPolicy.CreationPolicy),
-                        this._origin);
+                            this._partCreationPolicy.CreationPolicy
+                        ),
+                        this._origin
+                    );
                 }
 
                 return this._partCreationPolicy.CreationPolicy;
@@ -200,7 +208,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             }
 
             // Only deal with non-static constructors
-            BindingFlags flags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            BindingFlags flags =
+                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
 
             ConstructorInfo[] constructors = type.GetConstructors(flags);
 
@@ -267,50 +276,91 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             this._contractNamesOnNonInterfaces = new HashSet<string>();
 
-            // GetExportMembers should only contain the type itself along with the members declared on it, 
+            // GetExportMembers should only contain the type itself along with the members declared on it,
             // it should not contain any base types, members on base types or interfaces on the type.
             foreach (MemberInfo member in GetExportMembers(this._type))
             {
                 foreach (ExportAttribute exportAttribute in member.GetAttributes<ExportAttribute>())
                 {
-                    var attributedExportDefinition = this.CreateExportDefinition(member, exportAttribute);
+                    var attributedExportDefinition = this.CreateExportDefinition(
+                        member,
+                        exportAttribute
+                    );
 
-                    if (exportAttribute.GetType() == CompositionServices.InheritedExportAttributeType)
+                    if (
+                        exportAttribute.GetType()
+                        == CompositionServices.InheritedExportAttributeType
+                    )
                     {
-                        // Any InheritedExports on the type itself are contributed during this pass 
+                        // Any InheritedExports on the type itself are contributed during this pass
                         // and we need to do the book keeping for those.
-                        if (!this._contractNamesOnNonInterfaces.Contains(attributedExportDefinition.ContractName))
+                        if (
+                            !this._contractNamesOnNonInterfaces.Contains(
+                                attributedExportDefinition.ContractName
+                            )
+                        )
                         {
-                            exports.Add(new ReflectionMemberExportDefinition(member.ToLazyMember(), attributedExportDefinition, this));
-                            this._contractNamesOnNonInterfaces.Add(attributedExportDefinition.ContractName);
+                            exports.Add(
+                                new ReflectionMemberExportDefinition(
+                                    member.ToLazyMember(),
+                                    attributedExportDefinition,
+                                    this
+                                )
+                            );
+                            this._contractNamesOnNonInterfaces.Add(
+                                attributedExportDefinition.ContractName
+                            );
                         }
                     }
                     else
                     {
-                        exports.Add(new ReflectionMemberExportDefinition(member.ToLazyMember(), attributedExportDefinition, this));
+                        exports.Add(
+                            new ReflectionMemberExportDefinition(
+                                member.ToLazyMember(),
+                                attributedExportDefinition,
+                                this
+                            )
+                        );
                     }
                 }
             }
 
             // GetInheritedExports should only contain InheritedExports on base types or interfaces.
-            // The order of types returned here is important because it is used as a 
-            // priority list of which InhertedExport to choose if multiple exists with 
+            // The order of types returned here is important because it is used as a
+            // priority list of which InhertedExport to choose if multiple exists with
             // the same contract name. Therefore ensure that we always return the types
             // in the hiearchy from most derived to the lowest base type, followed
             // by all the interfaces that this type implements.
             foreach (Type type in GetInheritedExports(this._type))
             {
-                foreach (InheritedExportAttribute exportAttribute in type.GetAttributes<InheritedExportAttribute>())
+                foreach (
+                    InheritedExportAttribute exportAttribute in type.GetAttributes<InheritedExportAttribute>()
+                )
                 {
-                    var attributedExportDefinition = this.CreateExportDefinition(type, exportAttribute);
+                    var attributedExportDefinition = this.CreateExportDefinition(
+                        type,
+                        exportAttribute
+                    );
 
-                    if (!this._contractNamesOnNonInterfaces.Contains(attributedExportDefinition.ContractName))
+                    if (
+                        !this._contractNamesOnNonInterfaces.Contains(
+                            attributedExportDefinition.ContractName
+                        )
+                    )
                     {
-                        exports.Add(new ReflectionMemberExportDefinition(type.ToLazyMember(), attributedExportDefinition, this));
+                        exports.Add(
+                            new ReflectionMemberExportDefinition(
+                                type.ToLazyMember(),
+                                attributedExportDefinition,
+                                this
+                            )
+                        );
 
                         if (!type.IsInterface)
                         {
-                            this._contractNamesOnNonInterfaces.Add(attributedExportDefinition.ContractName);
+                            this._contractNamesOnNonInterfaces.Add(
+                                attributedExportDefinition.ContractName
+                            );
                         }
                     }
                 }
@@ -321,19 +371,36 @@ namespace System.ComponentModel.Composition.AttributedModel
             return exports;
         }
 
-        private AttributedExportDefinition CreateExportDefinition(MemberInfo member, ExportAttribute exportAttribute)
+        private AttributedExportDefinition CreateExportDefinition(
+            MemberInfo member,
+            ExportAttribute exportAttribute
+        )
         {
             string contractName = null;
             Type typeIdentityType = null;
-            member.GetContractInfoFromExport(exportAttribute, out typeIdentityType, out contractName);
+            member.GetContractInfoFromExport(
+                exportAttribute,
+                out typeIdentityType,
+                out contractName
+            );
 
-            return new AttributedExportDefinition(this, member, exportAttribute, typeIdentityType, contractName);
+            return new AttributedExportDefinition(
+                this,
+                member,
+                exportAttribute,
+                typeIdentityType,
+                contractName
+            );
         }
 
         private IEnumerable<MemberInfo> GetExportMembers(Type type)
         {
-            BindingFlags flags = BindingFlags.DeclaredOnly | BindingFlags.Public |
-                BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static;
+            BindingFlags flags =
+                BindingFlags.DeclaredOnly
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance
+                | BindingFlags.Static;
 
             // If the type is abstract only find local static exports
             if (type.IsAbstract)
@@ -345,7 +412,7 @@ namespace System.ComponentModel.Composition.AttributedModel
                 yield return type;
             }
 
-            // Walk the fields 
+            // Walk the fields
             foreach (var member in type.GetFields(flags))
             {
                 if (IsExport(member))
@@ -354,7 +421,7 @@ namespace System.ComponentModel.Composition.AttributedModel
                 }
             }
 
-            // Walk the properties 
+            // Walk the properties
             foreach (var member in type.GetProperties(flags))
             {
                 if (IsExport(member))
@@ -363,7 +430,7 @@ namespace System.ComponentModel.Composition.AttributedModel
                 }
             }
 
-            // Walk the methods 
+            // Walk the methods
             foreach (var member in type.GetMethods(flags))
             {
                 if (IsExport(member))
@@ -381,8 +448,8 @@ namespace System.ComponentModel.Composition.AttributedModel
                 yield break;
             }
 
-            // The order of types returned here is important because it is used as a 
-            // priority list of which InhertedExport to choose if multiple exists with 
+            // The order of types returned here is important because it is used as a
+            // priority list of which InhertedExport to choose if multiple exists with
             // the same contract name. Therefore ensure that we always return the types
             // in the hiearchy from most derived to the lowest base type, followed
             // by all the interfaces that this type implements.
@@ -393,11 +460,14 @@ namespace System.ComponentModel.Composition.AttributedModel
             {
                 yield break;
             }
-            
+
             // Stopping at object instead of null to help with performance. It is a noticable performance
             // gain (~5%) if we don't have to try and pull the attributes we know don't exist on object.
             // We also need the null check in case we're passed a type that doesn't live in the runtime context.
-            while (currentType != null && currentType.UnderlyingSystemType != CompositionServices.ObjectType)
+            while (
+                currentType != null
+                && currentType.UnderlyingSystemType != CompositionServices.ObjectType
+            )
             {
                 if (IsInheritedExport(currentType))
                 {
@@ -431,7 +501,8 @@ namespace System.ComponentModel.Composition.AttributedModel
 
             foreach (MemberInfo member in GetImportMembers(this._type))
             {
-                ReflectionMemberImportDefinition importDefinition = AttributedModelDiscovery.CreateMemberImportDefinition(member, this);
+                ReflectionMemberImportDefinition importDefinition =
+                    AttributedModelDiscovery.CreateMemberImportDefinition(member, this);
                 imports.Add(importDefinition);
             }
 
@@ -441,7 +512,8 @@ namespace System.ComponentModel.Composition.AttributedModel
             {
                 foreach (ParameterInfo parameter in constructor.GetParameters())
                 {
-                    ReflectionParameterImportDefinition importDefinition = AttributedModelDiscovery.CreateParameterImportDefinition(parameter, this);
+                    ReflectionParameterImportDefinition importDefinition =
+                        AttributedModelDiscovery.CreateParameterImportDefinition(parameter, this);
                     imports.Add(importDefinition);
                 }
             }
@@ -469,7 +541,10 @@ namespace System.ComponentModel.Composition.AttributedModel
                 // Stopping at object instead of null to help with performance. It is a noticable performance
                 // gain (~5%) if we don't have to try and pull the attributes we know don't exist on object.
                 // We also need the null check in case we're passed a type that doesn't live in the runtime context.
-                while (baseType != null && baseType.UnderlyingSystemType != CompositionServices.ObjectType)
+                while (
+                    baseType != null
+                    && baseType.UnderlyingSystemType != CompositionServices.ObjectType
+                )
                 {
                     foreach (MemberInfo member in GetDeclaredOnlyImportMembers(baseType))
                     {
@@ -482,9 +557,13 @@ namespace System.ComponentModel.Composition.AttributedModel
 
         private IEnumerable<MemberInfo> GetDeclaredOnlyImportMembers(Type type)
         {
-            BindingFlags flags = BindingFlags.DeclaredOnly | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance;
+            BindingFlags flags =
+                BindingFlags.DeclaredOnly
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.Instance;
 
-            // Walk the fields 
+            // Walk the fields
             foreach (var member in type.GetFields(flags))
             {
                 if (IsImport(member))
@@ -493,7 +572,7 @@ namespace System.ComponentModel.Composition.AttributedModel
                 }
             }
 
-            // Walk the properties 
+            // Walk the properties
             foreach (var member in type.GetProperties(flags))
             {
                 if (IsImport(member))

@@ -16,31 +16,46 @@ namespace SharedTypes.ComInterfaces
         void MethodOut(out StatefulAllShapesType param);
         void MethodRef(ref StatefulAllShapesType param);
         StatefulAllShapesType Return();
+
         [PreserveSig]
         StatefulAllShapesType ReturnPreserveSig();
     }
 
     [NativeMarshalling(typeof(AllStatefulMarshallerShapes))]
-    internal class StatefulAllShapesType
-    {
-    }
+    internal class StatefulAllShapesType { }
 
-    internal unsafe struct StatefulAllShapesNative
-    {
-    }
+    internal unsafe struct StatefulAllShapesNative { }
 
-    [CustomMarshaller(typeof(StatefulAllShapesType), MarshalMode.Default, typeof(AllStatefulMarshallerShapes))]
+    [CustomMarshaller(
+        typeof(StatefulAllShapesType),
+        MarshalMode.Default,
+        typeof(AllStatefulMarshallerShapes)
+    )]
     internal unsafe ref struct AllStatefulMarshallerShapes
     {
-        public static ref nint GetPinnableReference(StatefulAllShapesType managed) => throw new NotImplementedException();
-        public ref nint GetPinnableReference() => throw new NotImplementedException("This is not currently used anywhere");
+        public static ref nint GetPinnableReference(StatefulAllShapesType managed) =>
+            throw new NotImplementedException();
+
+        public ref nint GetPinnableReference() =>
+            throw new NotImplementedException("This is not currently used anywhere");
+
         public static int BufferSize => sizeof(StatefulAllShapesNative);
-        public void FromManaged(StatefulAllShapesType managed, Span<byte> buffer) => throw new NotImplementedException();
-        public void FromManaged(StatefulAllShapesType managed) => throw new NotImplementedException();
+
+        public void FromManaged(StatefulAllShapesType managed, Span<byte> buffer) =>
+            throw new NotImplementedException();
+
+        public void FromManaged(StatefulAllShapesType managed) =>
+            throw new NotImplementedException();
+
         public StatefulAllShapesNative* ToUnmanaged() => throw new NotImplementedException();
-        public void FromUnmanaged(StatefulAllShapesNative* unmanaged) => throw new NotImplementedException();
+
+        public void FromUnmanaged(StatefulAllShapesNative* unmanaged) =>
+            throw new NotImplementedException();
+
         public StatefulAllShapesType ToManaged() => throw new NotImplementedException();
+
         public StatefulAllShapesType ToManagedFinally() => throw new NotImplementedException();
+
         public void Free() => throw new NotImplementedException();
     }
 }

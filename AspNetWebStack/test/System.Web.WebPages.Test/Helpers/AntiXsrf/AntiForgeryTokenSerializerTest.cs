@@ -12,41 +12,105 @@ namespace System.Web.Helpers.AntiXsrf.Test
 {
     public class AntiForgeryTokenSerializerTest
     {
-        private static readonly AntiForgeryTokenSerializer _testSerializer = new AntiForgeryTokenSerializer(cryptoSystem: CreateIdentityTransformCryptoSystem());
+        private static readonly AntiForgeryTokenSerializer _testSerializer =
+            new AntiForgeryTokenSerializer(cryptoSystem: CreateIdentityTransformCryptoSystem());
 
-        private static readonly BinaryBlob _claimUid = new BinaryBlob(256, new byte[] { 0x6F, 0x16, 0x48, 0xE9, 0x72, 0x49, 0xAA, 0x58, 0x75, 0x40, 0x36, 0xA6, 0x7E, 0x24, 0x8C, 0xF0, 0x44, 0xF0, 0x7E, 0xCF, 0xB0, 0xED, 0x38, 0x75, 0x56, 0xCE, 0x02, 0x9A, 0x4F, 0x9A, 0x40, 0xE0 });
-        private static readonly BinaryBlob _securityToken = new BinaryBlob(128, new byte[] { 0x70, 0x5E, 0xED, 0xCC, 0x7D, 0x42, 0xF1, 0xD6, 0xB3, 0xB9, 0x8A, 0x59, 0x36, 0x25, 0xBB, 0x4C });
+        private static readonly BinaryBlob _claimUid = new BinaryBlob(
+            256,
+            new byte[]
+            {
+                0x6F,
+                0x16,
+                0x48,
+                0xE9,
+                0x72,
+                0x49,
+                0xAA,
+                0x58,
+                0x75,
+                0x40,
+                0x36,
+                0xA6,
+                0x7E,
+                0x24,
+                0x8C,
+                0xF0,
+                0x44,
+                0xF0,
+                0x7E,
+                0xCF,
+                0xB0,
+                0xED,
+                0x38,
+                0x75,
+                0x56,
+                0xCE,
+                0x02,
+                0x9A,
+                0x4F,
+                0x9A,
+                0x40,
+                0xE0,
+            }
+        );
+        private static readonly BinaryBlob _securityToken = new BinaryBlob(
+            128,
+            new byte[]
+            {
+                0x70,
+                0x5E,
+                0xED,
+                0xCC,
+                0x7D,
+                0x42,
+                0xF1,
+                0xD6,
+                0xB3,
+                0xB9,
+                0x8A,
+                0x59,
+                0x36,
+                0x25,
+                0xBB,
+                0x4C,
+            }
+        );
 
         [Theory]
         [InlineData(
             "01" // Version
-            + "705EEDCC7D42F1D6B3B9" // SecurityToken
-            // (WRONG!) Stream ends too early
-            )]
+                + "705EEDCC7D42F1D6B3B9" // SecurityToken
+        // (WRONG!) Stream ends too early
+        )]
         [InlineData(
             "01" // Version
-            + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
-            + "01" // IsSessionToken
-            + "00" // (WRONG!) Too much data in stream
-            )]
+                + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
+                + "01" // IsSessionToken
+                + "00" // (WRONG!) Too much data in stream
+        )]
         [InlineData(
             "02" // (WRONG! - must be 0x01) Version
-            + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
-            + "01" // IsSessionToken
-            )]
+                + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
+                + "01" // IsSessionToken
+        )]
         [InlineData(
             "01" // Version
-            + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
-            + "00" // IsSessionToken
-            + "00" // IsClaimsBased
-            + "05" // Username length header
-            + "0000" // (WRONG!) Too little data in stream
-            )]
+                + "705EEDCC7D42F1D6B3B98A593625BB4C" // SecurityToken
+                + "00" // IsSessionToken
+                + "00" // IsClaimsBased
+                + "05" // Username length header
+                + "0000" // (WRONG!) Too little data in stream
+        )]
         public void Deserialize_BadToken(string serializedToken)
         {
             // Act & assert
-            var ex = Assert.Throws<HttpAntiForgeryException>(() => _testSerializer.Deserialize(serializedToken));
-            Assert.Equal(@"The anti-forgery token could not be decrypted. If this application is hosted by a Web Farm or cluster, ensure that all machines are running the same version of ASP.NET Web Pages and that the <machineKey> configuration specifies explicit encryption and validation keys. AutoGenerate cannot be used in a cluster.", ex.Message);
+            var ex = Assert.Throws<HttpAntiForgeryException>(
+                () => _testSerializer.Deserialize(serializedToken)
+            );
+            Assert.Equal(
+                @"The anti-forgery token could not be decrypted. If this application is hosted by a Web Farm or cluster, ensure that all machines are running the same version of ASP.NET Web Pages and that the <machineKey> configuration specifies explicit encryption and validation keys. AutoGenerate cannot be used in a cluster.",
+                ex.Message
+            );
         }
 
         [Fact]
@@ -67,7 +131,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 SecurityToken = _securityToken,
                 IsSessionToken = false,
                 ClaimUid = _claimUid,
-                AdditionalData = "€47"
+                AdditionalData = "€47",
             };
 
             // Act & assert - serialization
@@ -98,7 +162,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 SecurityToken = _securityToken,
                 IsSessionToken = false,
                 Username = "Jérôme",
-                AdditionalData = "€47"
+                AdditionalData = "€47",
             };
 
             // Act & assert - serialization
@@ -122,7 +186,7 @@ namespace System.Web.Helpers.AntiXsrf.Test
             AntiForgeryToken token = new AntiForgeryToken()
             {
                 SecurityToken = _securityToken,
-                IsSessionToken = true
+                IsSessionToken = true,
             };
 
             // Act & assert - serialization
@@ -149,7 +213,11 @@ namespace System.Web.Helpers.AntiXsrf.Test
             List<byte> bytes = new List<byte>();
             for (int i = 0; i < hex.Length; i += 2)
             {
-                byte b = Byte.Parse(hex.Substring(i, 2), NumberStyles.AllowHexSpecifier, CultureInfo.InvariantCulture);
+                byte b = Byte.Parse(
+                    hex.Substring(i, 2),
+                    NumberStyles.AllowHexSpecifier,
+                    CultureInfo.InvariantCulture
+                );
                 bytes.Add(b);
             }
             return bytes.ToArray();
@@ -158,8 +226,12 @@ namespace System.Web.Helpers.AntiXsrf.Test
         private static ICryptoSystem CreateIdentityTransformCryptoSystem()
         {
             Mock<MockableCryptoSystem> mockCryptoSystem = new Mock<MockableCryptoSystem>();
-            mockCryptoSystem.Setup(o => o.Protect(It.IsAny<byte[]>())).Returns<byte[]>(HexUtil.HexEncode);
-            mockCryptoSystem.Setup(o => o.Unprotect(It.IsAny<string>())).Returns<string>(HexUtil.HexDecode);
+            mockCryptoSystem
+                .Setup(o => o.Protect(It.IsAny<byte[]>()))
+                .Returns<byte[]>(HexUtil.HexEncode);
+            mockCryptoSystem
+                .Setup(o => o.Unprotect(It.IsAny<string>()))
+                .Returns<string>(HexUtil.HexDecode);
             return mockCryptoSystem.Object;
         }
 

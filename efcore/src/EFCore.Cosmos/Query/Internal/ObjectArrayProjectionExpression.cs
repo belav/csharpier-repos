@@ -24,7 +24,8 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     public ObjectArrayProjectionExpression(
         INavigation navigation,
         Expression accessExpression,
-        EntityProjectionExpression? innerProjection = null)
+        EntityProjectionExpression? innerProjection = null
+    )
     {
         var targetType = navigation.TargetEntityType;
         Type = typeof(IEnumerable<>).MakeGenericType(targetType.ClrType);
@@ -34,15 +35,20 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
         {
             throw new InvalidOperationException(
                 CosmosStrings.NavigationPropertyIsNotAnEmbeddedEntity(
-                    navigation.DeclaringEntityType.DisplayName(), navigation.Name));
+                    navigation.DeclaringEntityType.DisplayName(),
+                    navigation.Name
+                )
+            );
         }
 
         Navigation = navigation;
         AccessExpression = accessExpression;
-        InnerProjection = innerProjection
+        InnerProjection =
+            innerProjection
             ?? new EntityProjectionExpression(
                 targetType,
-                new RootReferenceExpression(targetType, ""));
+                new RootReferenceExpression(targetType, "")
+            );
     }
 
     /// <summary>
@@ -51,8 +57,7 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -116,8 +121,9 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     /// </summary>
     public virtual ObjectArrayProjectionExpression Update(
         Expression accessExpression,
-        EntityProjectionExpression innerProjection)
-        => accessExpression != AccessExpression || innerProjection != InnerProjection
+        EntityProjectionExpression innerProjection
+    ) =>
+        accessExpression != AccessExpression || innerProjection != InnerProjection
             ? new ObjectArrayProjectionExpression(Navigation, accessExpression, innerProjection)
             : this;
 
@@ -127,8 +133,8 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => expressionPrinter.Append(ToString());
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        expressionPrinter.Append(ToString());
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -136,8 +142,7 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string ToString()
-        => $"{AccessExpression}[\"{Name}\"]";
+    public override string ToString() => $"{AccessExpression}[\"{Name}\"]";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -145,15 +150,17 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override bool Equals(object obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is ObjectArrayProjectionExpression arrayProjectionExpression
-                && Equals(arrayProjectionExpression));
+    public override bool Equals(object obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is ObjectArrayProjectionExpression arrayProjectionExpression
+                && Equals(arrayProjectionExpression)
+        );
 
-    private bool Equals(ObjectArrayProjectionExpression objectArrayProjectionExpression)
-        => AccessExpression.Equals(objectArrayProjectionExpression.AccessExpression)
-            && InnerProjection.Equals(objectArrayProjectionExpression.InnerProjection);
+    private bool Equals(ObjectArrayProjectionExpression objectArrayProjectionExpression) =>
+        AccessExpression.Equals(objectArrayProjectionExpression.AccessExpression)
+        && InnerProjection.Equals(objectArrayProjectionExpression.InnerProjection);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -161,6 +168,5 @@ public class ObjectArrayProjectionExpression : Expression, IPrintableExpression,
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override int GetHashCode()
-        => HashCode.Combine(AccessExpression, InnerProjection);
+    public override int GetHashCode() => HashCode.Combine(AccessExpression, InnerProjection);
 }

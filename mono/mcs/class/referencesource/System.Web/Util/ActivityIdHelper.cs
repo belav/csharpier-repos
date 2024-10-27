@@ -1,20 +1,24 @@
 ﻿//------------------------------------------------------------------------------
 // <copyright file="ActivityIdHelper.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.Util {
+namespace System.Web.Util
+{
     using System;
     using System.Diagnostics.Tracing;
     using System.Runtime.CompilerServices;
     using System.Threading;
 
-    internal sealed class ActivityIdHelper {
-
+    internal sealed class ActivityIdHelper
+    {
         private delegate Guid GetCurrentDelegate();
         private delegate void SetAndDestroyDelegate(Guid activityId);
-        private delegate void SetAndPreserveDelegate(Guid activityId, out Guid oldActivityThatWillContinue);
+        private delegate void SetAndPreserveDelegate(
+            Guid activityId,
+            out Guid oldActivityThatWillContinue
+        );
 
         // Note to callers: this field can be null.
         internal static readonly ActivityIdHelper Instance = GetSingleton();
@@ -27,37 +31,65 @@ namespace System.Web.Util {
         private readonly SetAndPreserveDelegate _setAndPreserveDel;
 
         // use the factory to create an instance of this type
-        private ActivityIdHelper(GetCurrentDelegate getCurrentDel, SetAndDestroyDelegate setAndDestroyDel, SetAndPreserveDelegate setAndPreserveDel) {
+        private ActivityIdHelper(
+            GetCurrentDelegate getCurrentDel,
+            SetAndDestroyDelegate setAndDestroyDel,
+            SetAndPreserveDelegate setAndPreserveDel
+        )
+        {
             _getCurrentDel = getCurrentDel;
             _setAndDestroyDel = setAndDestroyDel;
             _setAndPreserveDel = setAndPreserveDel;
         }
 
         // Gets the current thread's activity ID.
-        public Guid CurrentThreadActivityId {
+        public Guid CurrentThreadActivityId
+        {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get { return _getCurrentDel(); }
         }
 
-        private static ActivityIdHelper GetSingleton() {
-            try {
+        private static ActivityIdHelper GetSingleton()
+        {
+            try
+            {
                 // The mscorlib APIs we depend on weren't added until Blue, so we can't
                 // take a direct dependency. Need to light up instead.
 
-                var getCurrentDel = (GetCurrentDelegate)Delegate.CreateDelegate(
-                    typeof(GetCurrentDelegate), typeof(EventSource), "get_CurrentThreadActivityId", ignoreCase: false, throwOnBindFailure: false);
+                var getCurrentDel = (GetCurrentDelegate)
+                    Delegate.CreateDelegate(
+                        typeof(GetCurrentDelegate),
+                        typeof(EventSource),
+                        "get_CurrentThreadActivityId",
+                        ignoreCase: false,
+                        throwOnBindFailure: false
+                    );
 
-                var setAndDestroyDel = (SetAndDestroyDelegate)Delegate.CreateDelegate(
-                    typeof(SetAndDestroyDelegate), typeof(EventSource), "SetCurrentThreadActivityId", ignoreCase: false, throwOnBindFailure: false);
+                var setAndDestroyDel = (SetAndDestroyDelegate)
+                    Delegate.CreateDelegate(
+                        typeof(SetAndDestroyDelegate),
+                        typeof(EventSource),
+                        "SetCurrentThreadActivityId",
+                        ignoreCase: false,
+                        throwOnBindFailure: false
+                    );
 
-                var setAndPreserveDel = (SetAndPreserveDelegate)Delegate.CreateDelegate(
-                    typeof(SetAndPreserveDelegate), typeof(EventSource), "SetCurrentThreadActivityId", ignoreCase: false, throwOnBindFailure: false);
+                var setAndPreserveDel = (SetAndPreserveDelegate)
+                    Delegate.CreateDelegate(
+                        typeof(SetAndPreserveDelegate),
+                        typeof(EventSource),
+                        "SetCurrentThreadActivityId",
+                        ignoreCase: false,
+                        throwOnBindFailure: false
+                    );
 
-                if (getCurrentDel != null && setAndDestroyDel != null && setAndPreserveDel != null) {
+                if (getCurrentDel != null && setAndDestroyDel != null && setAndPreserveDel != null)
+                {
                     return new ActivityIdHelper(getCurrentDel, setAndDestroyDel, setAndPreserveDel);
                 }
             }
-            catch {
+            catch
+            {
                 // exceptions are not fatal; we just won't be able to call the new APIs
             }
 
@@ -66,13 +98,18 @@ namespace System.Web.Util {
 
         // Disposes of the thread's existing activity ID, then sets the new activity ID on this thread.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetCurrentThreadActivityId(Guid activityId) {
+        public void SetCurrentThreadActivityId(Guid activityId)
+        {
             _setAndDestroyDel(activityId);
         }
 
         // Suspends (but does not dispose of) the thread's existing activity ID, then sets a new activity ID on this thread.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public void SetCurrentThreadActivityId(Guid activityId, out Guid oldActivityThatWillContinue) {
+        public void SetCurrentThreadActivityId(
+            Guid activityId,
+            out Guid oldActivityThatWillContinue
+        )
+        {
             _setAndPreserveDel(activityId, out oldActivityThatWillContinue);
         }
 
@@ -85,11 +122,11 @@ namespace System.Web.Util {
         // see it show up as a bottleneck when developing MVC 2. The below implementation has
         // measurably better performance characteristics than calling the other Guid ctors.
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static unsafe Guid UnsafeCreateNewActivityId() {
+        public static unsafe Guid UnsafeCreateNewActivityId()
+        {
             Guid guidCopy = _baseGuid;
             *(long*)(&guidCopy) ^= Interlocked.Increment(ref _counter); // operate on the copy, not the original
             return guidCopy;
         }
-
     }
 }

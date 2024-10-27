@@ -21,14 +21,17 @@ namespace System.Web.WebPages.Administration.PackageManager
         private static readonly string[] _sourceFileExtensions = new[] { ".cs", ".vb" };
 
         /// <summary>
-        /// Keys taken from the 4.0 RedistList. 
+        /// Keys taken from the 4.0 RedistList.
         /// </summary>
-        private static readonly string[] _knownPublicKeys = new[] { "b03f5f7f11d50a3a", "b77a5c561934e089", "31bf3856ad364e35" };
+        private static readonly string[] _knownPublicKeys = new[]
+        {
+            "b03f5f7f11d50a3a",
+            "b77a5c561934e089",
+            "31bf3856ad364e35",
+        };
 
         public WebProjectSystem(string root)
-            : base(root)
-        {
-        }
+            : base(root) { }
 
         public string ProjectName
         {
@@ -91,12 +94,18 @@ namespace System.Web.WebPages.Administration.PackageManager
         public void AddFrameworkReference(string name)
         {
             // Before we add a framework assembly to web.config, verify that it exists in the GAC. This is important because a website would be completely unusable if the assembly reference
-            // does not exist and is added to web.config. Since the assembly name may be a partial name, We use the ResolveAssemblyReference task in Msbuild to identify a full name and if it is 
-            // installed in the GAC. 
+            // does not exist and is added to web.config. Since the assembly name may be a partial name, We use the ResolveAssemblyReference task in Msbuild to identify a full name and if it is
+            // installed in the GAC.
             var fullName = ResolvePartialAssemblyName(name);
             if (fullName == null)
             {
-                throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, PackageManagerResources.UnknownFrameworkReference, name));
+                throw new InvalidOperationException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        PackageManagerResources.UnknownFrameworkReference,
+                        name
+                    )
+                );
             }
             AddReferencesToConfig(this, fullName);
         }
@@ -106,7 +115,8 @@ namespace System.Web.WebPages.Administration.PackageManager
             if (IsUnderAppCode(path))
             {
                 // There is an invisible folder called Generated___Files under app code that we want to exclude from our search
-                return base.GetDirectories(path).Except(_generatedFilesFolder, StringComparer.OrdinalIgnoreCase);
+                return base.GetDirectories(path)
+                    .Except(_generatedFilesFolder, StringComparer.OrdinalIgnoreCase);
             }
             return base.GetDirectories(path);
         }
@@ -126,16 +136,24 @@ namespace System.Web.WebPages.Administration.PackageManager
         }
 
         /// <summary>
-        /// Uses ResolveAssemblyReference to calculate a full name from a partial assembly name. 
+        /// Uses ResolveAssemblyReference to calculate a full name from a partial assembly name.
         /// </summary>
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes",
-            Justification = "We never want to throw from this method. If Assembly.Load fails, the only message we want to display is that package could not be installed.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "We never want to throw from this method. If Assembly.Load fails, the only message we want to display is that package could not be installed."
+        )]
         internal static string ResolvePartialAssemblyName(string name)
         {
             foreach (var key in _knownPublicKeys)
             {
-                var assemblyFullName = String.Format(CultureInfo.InvariantCulture, "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
-                                                     name, VersionUtility.DefaultTargetFrameworkVersion, key);
+                var assemblyFullName = String.Format(
+                    CultureInfo.InvariantCulture,
+                    "{0}, Version={1}, Culture=neutral, PublicKeyToken={2}",
+                    name,
+                    VersionUtility.DefaultTargetFrameworkVersion,
+                    key
+                );
 
                 try
                 {
@@ -170,13 +188,15 @@ namespace System.Web.WebPages.Administration.PackageManager
 
             var assemblies = GetOrCreateChild(document.Root, "system.web/compilation/assemblies");
 
-            // Get the name of the existing references 
+            // Get the name of the existing references
             // References are stored in the format <add assembly="System.Web.Abstractions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31BF3856AD364E35" />
-            bool existingAssembly = (from item in assemblies.Elements()
-                                     where !String.IsNullOrEmpty(item.GetOptionalAttributeValue("assembly"))
-                                     let assemblyName = new AssemblyName(item.Attribute("assembly").Value).Name
-                                     where String.Equals(assemblyName, references, StringComparison.OrdinalIgnoreCase)
-                                     select item).Any();
+            bool existingAssembly = (
+                from item in assemblies.Elements()
+                where !String.IsNullOrEmpty(item.GetOptionalAttributeValue("assembly"))
+                let assemblyName = new AssemblyName(item.Attribute("assembly").Value).Name
+                where String.Equals(assemblyName, references, StringComparison.OrdinalIgnoreCase)
+                select item
+            ).Any();
 
             if (!existingAssembly)
             {
@@ -185,7 +205,11 @@ namespace System.Web.WebPages.Administration.PackageManager
             }
         }
 
-        private static void SaveDocument(IFileSystem fileSystem, string webConfigPath, XDocument document)
+        private static void SaveDocument(
+            IFileSystem fileSystem,
+            string webConfigPath,
+            XDocument document
+        )
         {
             using (MemoryStream stream = new MemoryStream())
             {
@@ -217,12 +241,18 @@ namespace System.Web.WebPages.Administration.PackageManager
 
         private static bool IsUnderAppCode(string path)
         {
-            return path.StartsWith(AppCodeFolder + Path.DirectorySeparatorChar, StringComparison.OrdinalIgnoreCase);
+            return path.StartsWith(
+                AppCodeFolder + Path.DirectorySeparatorChar,
+                StringComparison.OrdinalIgnoreCase
+            );
         }
 
         private static bool IsSourceFile(string path)
         {
-            return _sourceFileExtensions.Contains(Path.GetExtension(path), StringComparer.OrdinalIgnoreCase);
+            return _sourceFileExtensions.Contains(
+                Path.GetExtension(path),
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 }

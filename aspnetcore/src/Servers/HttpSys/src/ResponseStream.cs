@@ -32,9 +32,16 @@ internal sealed class ResponseStream : Stream
 
     public override void SetLength(long value) => _innerStream.SetLength(value);
 
-    public override int Read(byte[] buffer, int offset, int count) => _innerStream.Read(buffer, offset, count);
+    public override int Read(byte[] buffer, int offset, int count) =>
+        _innerStream.Read(buffer, offset, count);
 
-    public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+    public override IAsyncResult BeginRead(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    )
     {
         return _innerStream.BeginRead(buffer, offset, count, callback, state);
     }
@@ -43,6 +50,7 @@ internal sealed class ResponseStream : Stream
     {
         return _innerStream.EndRead(asyncResult);
     }
+
     public override void Flush()
     {
         _onStart().GetAwaiter().GetResult();
@@ -61,18 +69,30 @@ internal sealed class ResponseStream : Stream
         _innerStream.Write(buffer, offset, count);
     }
 
-    public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
-        => await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
+    public override async Task WriteAsync(
+        byte[] buffer,
+        int offset,
+        int count,
+        CancellationToken cancellationToken
+    ) => await WriteAsync(buffer.AsMemory(offset, count), cancellationToken);
 
-    public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+    public override async ValueTask WriteAsync(
+        ReadOnlyMemory<byte> buffer,
+        CancellationToken cancellationToken
+    )
     {
         await _onStart();
         await _innerStream.WriteAsync(buffer, cancellationToken);
     }
 
-    public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
-        => TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
+    public override IAsyncResult BeginWrite(
+        byte[] buffer,
+        int offset,
+        int count,
+        AsyncCallback? callback,
+        object? state
+    ) =>
+        TaskToApm.Begin(WriteAsync(buffer, offset, count, CancellationToken.None), callback, state);
 
-    public override void EndWrite(IAsyncResult asyncResult)
-        => TaskToApm.End(asyncResult);
+    public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 }

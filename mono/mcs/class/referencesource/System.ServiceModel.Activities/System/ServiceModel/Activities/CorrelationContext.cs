@@ -10,14 +10,9 @@ namespace System.ServiceModel.Activities
 
     // These are information passed from ContextMessageProperty.
     [DataContract]
-    class CorrelationContext 
+    class CorrelationContext
     {
         [DataMember]
-        public IDictionary<string, string> Context
-        {
-            get;
-            set;
-        }
-      
+        public IDictionary<string, string> Context { get; set; }
     }
 }

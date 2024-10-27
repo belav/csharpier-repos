@@ -15,7 +15,8 @@ namespace Microsoft.AspNetCore.SignalR;
 /// <summary>
 /// Handles incoming connections and implements the SignalR Hub Protocol.
 /// </summary>
-public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
+public class HubConnectionHandler<THub> : ConnectionHandler
+    where THub : Hub
 {
     private readonly HubLifetimeManager<THub> _lifetimeManager;
     private readonly ILoggerFactory _loggerFactory;
@@ -44,13 +45,14 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
     /// <param name="userIdProvider">The user ID provider used to get the user ID from a hub connection.</param>
     /// <param name="serviceScopeFactory">The service scope factory.</param>
     /// <remarks>This class is typically created via dependency injection.</remarks>
-    public HubConnectionHandler(HubLifetimeManager<THub> lifetimeManager,
-                                IHubProtocolResolver protocolResolver,
-                                IOptions<HubOptions> globalHubOptions,
-                                IOptions<HubOptions<THub>> hubOptions,
-                                ILoggerFactory loggerFactory,
-                                IUserIdProvider userIdProvider,
-                                IServiceScopeFactory serviceScopeFactory
+    public HubConnectionHandler(
+        HubLifetimeManager<THub> lifetimeManager,
+        IHubProtocolResolver protocolResolver,
+        IOptions<HubOptions> globalHubOptions,
+        IOptions<HubOptions<THub>> hubOptions,
+        ILoggerFactory loggerFactory,
+        IUserIdProvider userIdProvider,
+        IServiceScopeFactory serviceScopeFactory
     )
     {
         _protocolResolver = protocolResolver;
@@ -70,7 +72,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
             _maximumMessageSize = _hubOptions.MaximumReceiveMessageSize;
             _enableDetailedErrors = _hubOptions.EnableDetailedErrors ?? _enableDetailedErrors;
             _maxParallelInvokes = _hubOptions.MaximumParallelInvocationsPerClient;
-            disableImplicitFromServiceParameters = _hubOptions.DisableImplicitFromServicesParameters;
+            disableImplicitFromServiceParameters =
+                _hubOptions.DisableImplicitFromServicesParameters;
             _statefulReconnectBufferSize = _hubOptions.StatefulReconnectBufferSize;
 
             if (_hubOptions.HubFilters != null)
@@ -83,7 +86,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
             _maximumMessageSize = _globalHubOptions.MaximumReceiveMessageSize;
             _enableDetailedErrors = _globalHubOptions.EnableDetailedErrors ?? _enableDetailedErrors;
             _maxParallelInvokes = _globalHubOptions.MaximumParallelInvocationsPerClient;
-            disableImplicitFromServiceParameters = _globalHubOptions.DisableImplicitFromServicesParameters;
+            disableImplicitFromServiceParameters =
+                _globalHubOptions.DisableImplicitFromServicesParameters;
             _statefulReconnectBufferSize = _globalHubOptions.StatefulReconnectBufferSize;
 
             if (_globalHubOptions.HubFilters != null)
@@ -99,7 +103,8 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
             disableImplicitFromServiceParameters,
             new Logger<DefaultHubDispatcher<THub>>(loggerFactory),
             hubFilters,
-            lifetimeManager);
+            lifetimeManager
+        );
     }
 
     /// <inheritdoc />
@@ -108,19 +113,32 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
         // We check to see if HubOptions<THub> are set because those take precedence over global hub options.
         // Then set the keepAlive and handshakeTimeout values to the defaults in HubOptionsSetup when they were explicitly set to null.
 
-        var supportedProtocols = _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
+        var supportedProtocols =
+            _hubOptions.SupportedProtocols ?? _globalHubOptions.SupportedProtocols;
         if (supportedProtocols == null || supportedProtocols.Count == 0)
         {
             throw new InvalidOperationException("There are no supported protocols");
         }
 
-        var handshakeTimeout = _hubOptions.HandshakeTimeout ?? _globalHubOptions.HandshakeTimeout ?? HubOptionsSetup.DefaultHandshakeTimeout;
+        var handshakeTimeout =
+            _hubOptions.HandshakeTimeout
+            ?? _globalHubOptions.HandshakeTimeout
+            ?? HubOptionsSetup.DefaultHandshakeTimeout;
 
         var contextOptions = new HubConnectionContextOptions()
         {
-            KeepAliveInterval = _hubOptions.KeepAliveInterval ?? _globalHubOptions.KeepAliveInterval ?? HubOptionsSetup.DefaultKeepAliveInterval,
-            ClientTimeoutInterval = _hubOptions.ClientTimeoutInterval ?? _globalHubOptions.ClientTimeoutInterval ?? HubOptionsSetup.DefaultClientTimeoutInterval,
-            StreamBufferCapacity = _hubOptions.StreamBufferCapacity ?? _globalHubOptions.StreamBufferCapacity ?? HubOptionsSetup.DefaultStreamBufferCapacity,
+            KeepAliveInterval =
+                _hubOptions.KeepAliveInterval
+                ?? _globalHubOptions.KeepAliveInterval
+                ?? HubOptionsSetup.DefaultKeepAliveInterval,
+            ClientTimeoutInterval =
+                _hubOptions.ClientTimeoutInterval
+                ?? _globalHubOptions.ClientTimeoutInterval
+                ?? HubOptionsSetup.DefaultClientTimeoutInterval,
+            StreamBufferCapacity =
+                _hubOptions.StreamBufferCapacity
+                ?? _globalHubOptions.StreamBufferCapacity
+                ?? HubOptionsSetup.DefaultStreamBufferCapacity,
             MaximumReceiveMessageSize = _maximumMessageSize,
             TimeProvider = TimeProvider,
             MaximumParallelInvocations = _maxParallelInvokes,
@@ -129,10 +147,23 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
 
         Log.ConnectedStarting(_logger);
 
-        var connectionContext = new HubConnectionContext(connection, contextOptions, _loggerFactory);
+        var connectionContext = new HubConnectionContext(
+            connection,
+            contextOptions,
+            _loggerFactory
+        );
 
-        var resolvedSupportedProtocols = (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList();
-        if (!await connectionContext.HandshakeAsync(handshakeTimeout, resolvedSupportedProtocols, _protocolResolver, _userIdProvider, _enableDetailedErrors))
+        var resolvedSupportedProtocols =
+            (supportedProtocols as IReadOnlyList<string>) ?? supportedProtocols.ToList();
+        if (
+            !await connectionContext.HandshakeAsync(
+                handshakeTimeout,
+                resolvedSupportedProtocols,
+                _protocolResolver,
+                _userIdProvider,
+                _enableDetailedErrors
+            )
+        )
         {
             return;
         }
@@ -231,13 +262,21 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
         }
     }
 
-    private async Task SendCloseAsync(HubConnectionContext connection, Exception? exception, bool allowReconnect)
+    private async Task SendCloseAsync(
+        HubConnectionContext connection,
+        Exception? exception,
+        bool allowReconnect
+    )
     {
         var closeMessage = CloseMessage.Empty;
 
         if (exception != null)
         {
-            var errorMessage = ErrorMessageHelper.BuildErrorMessage("Connection closed with an error.", exception, _enableDetailedErrors);
+            var errorMessage = ErrorMessageHelper.BuildErrorMessage(
+                "Connection closed with an error.",
+                exception,
+                _enableDetailedErrors
+            );
             closeMessage = new CloseMessage(errorMessage, allowReconnect);
         }
         else if (allowReconnect)
@@ -319,7 +358,9 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
                             }
                             else if (overLength)
                             {
-                                throw new InvalidDataException($"The maximum message size of {maxMessageSize}B was exceeded. The message size can be configured in AddHubOptions.");
+                                throw new InvalidDataException(
+                                    $"The maximum message size of {maxMessageSize}B was exceeded. The message size can be configured in AddHubOptions."
+                                );
                             }
                             else
                             {
@@ -342,7 +383,9 @@ public class HubConnectionHandler<THub> : ConnectionHandler where THub : Hub
                 {
                     if (!buffer.IsEmpty)
                     {
-                        throw new InvalidDataException("Connection terminated while reading a message.");
+                        throw new InvalidDataException(
+                            "Connection terminated while reading a message."
+                        );
                     }
                     break;
                 }

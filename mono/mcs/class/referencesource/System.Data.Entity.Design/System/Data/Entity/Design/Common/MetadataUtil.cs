@@ -8,18 +8,18 @@
 //---------------------------------------------------------------------
 
 using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Text;
-using System.Data.Metadata.Edm;
-using System.Xml;
-using System.Data.Common;
-using System.Reflection;
-using System.IO;
-using System.Diagnostics;
 using System.Collections;
+using System.Collections.Generic;
+using System.Data.Common;
+using System.Data.Metadata.Edm;
+using System.Data.SqlClient;
+using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Xml;
 
 namespace System.Data.Entity.Design.Common
 {
@@ -46,22 +46,28 @@ namespace System.Data.Entity.Design.Common
             IServiceProvider serviceProvider = factory as IServiceProvider;
             if (serviceProvider == null)
             {
-                throw MetadataUtil.ProviderIncompatible(System.Data.Entity.Design.Strings.EntityClient_DoesNotImplementIServiceProvider(
-                    factory.GetType().ToString()));
+                throw MetadataUtil.ProviderIncompatible(
+                    System.Data.Entity.Design.Strings.EntityClient_DoesNotImplementIServiceProvider(
+                        factory.GetType().ToString()
+                    )
+                );
             }
 
-            DbProviderServices providerServices = serviceProvider.GetService(typeof(DbProviderServices)) as DbProviderServices;
+            DbProviderServices providerServices =
+                serviceProvider.GetService(typeof(DbProviderServices)) as DbProviderServices;
             if (providerServices == null)
             {
                 throw MetadataUtil.ProviderIncompatible(
                     System.Data.Entity.Design.Strings.EntityClient_ReturnedNullOnProviderMethod(
                         "GetService",
-                        factory.GetType().ToString()));
+                        factory.GetType().ToString()
+                    )
+                );
             }
             return providerServices;
         }
 
-        static internal ProviderIncompatibleException ProviderIncompatible(string error)
+        internal static ProviderIncompatibleException ProviderIncompatible(string error)
         {
             ProviderIncompatibleException e = new ProviderIncompatibleException(error);
             return e;
@@ -115,7 +121,10 @@ namespace System.Data.Entity.Design.Common
 
         // separate implementation from IsNullOrEmptyOrWhiteSpace(string, int) because that one will
         // pick up the jit optimization to avoid boundary checks and the this won't is unknown (most likely not)
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")] // referenced by System.Data.Entity.Design.dll
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )] // referenced by System.Data.Entity.Design.dll
         internal static bool IsNullOrEmptyOrWhiteSpace(string value, int offset, int length)
         {
             // don't use Trim(), which will copy the string, which may be large, just to test for emptyness
@@ -151,8 +160,13 @@ namespace System.Data.Entity.Design.Common
         // effects: Converts the list to a list of strings, sorts its (if
         // toSort is true) and then converts to a string separated by
         // "separator" with "nullValue" used for null values.
-        private static void ToSeparatedStringPrivate(StringBuilder stringBuilder, IEnumerable list, string separator,
-                                                     string nullValue, bool toSort)
+        private static void ToSeparatedStringPrivate(
+            StringBuilder stringBuilder,
+            IEnumerable list,
+            string separator,
+            string nullValue,
+            bool toSort
+        )
         {
             if (null == list)
             {
@@ -196,7 +210,10 @@ namespace System.Data.Entity.Design.Common
 
         internal static string FormatInvariant(string format, params object[] args)
         {
-            Debug.Assert(args.Length > 0, "Formatting utilities must be called with at least one argument");
+            Debug.Assert(
+                args.Length > 0,
+                "Formatting utilities must be called with at least one argument"
+            );
             return String.Format(CultureInfo.InvariantCulture, format, args);
         }
 
@@ -205,7 +222,10 @@ namespace System.Data.Entity.Design.Common
         /// </summary>
         /// <param name="text">text that make have characters troublesome in xml</param>
         /// <returns>text with troublesome characters replaced with equivalent entities</returns>
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")] // referenced by System.Data.Entity.Design.dll
+        [System.Diagnostics.CodeAnalysis.SuppressMessage(
+            "Microsoft.Performance",
+            "CA1811:AvoidUncalledPrivateCode"
+        )] // referenced by System.Data.Entity.Design.dll
         internal static string Entityize(string text)
         {
             if (string.IsNullOrEmpty(text))
@@ -216,7 +236,11 @@ namespace System.Data.Entity.Design.Common
             return text.Replace("\'", "&apos;").Replace("\"", "&quot;");
         }
 
-        internal static bool TrySplitExtendedMetadataPropertyName(string name, out string xmlNamespaceUri, out string attributeName)
+        internal static bool TrySplitExtendedMetadataPropertyName(
+            string name,
+            out string xmlNamespaceUri,
+            out string attributeName
+        )
         {
             int pos = name.LastIndexOf(':');
             if (pos < 0 || name.Length <= pos + 1)
@@ -232,12 +256,13 @@ namespace System.Data.Entity.Design.Common
             return true;
         }
 
-        static private readonly Type StackOverflowType = typeof(System.StackOverflowException);
-        static private readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
-        static private readonly Type ThreadAbortType = typeof(System.Threading.ThreadAbortException);
-        static private readonly Type NullReferenceType = typeof(System.NullReferenceException);
-        static private readonly Type AccessViolationType = typeof(System.AccessViolationException);
-        static private readonly Type SecurityType = typeof(System.Security.SecurityException);
+        private static readonly Type StackOverflowType = typeof(System.StackOverflowException);
+        private static readonly Type OutOfMemoryType = typeof(System.OutOfMemoryException);
+        private static readonly Type ThreadAbortType =
+            typeof(System.Threading.ThreadAbortException);
+        private static readonly Type NullReferenceType = typeof(System.NullReferenceException);
+        private static readonly Type AccessViolationType = typeof(System.AccessViolationException);
+        private static readonly Type SecurityType = typeof(System.Security.SecurityException);
 
         internal static bool IsCatchableExceptionType(Exception e)
         {
@@ -245,12 +270,14 @@ namespace System.Data.Entity.Design.Common
             Debug.Assert(e != null, "Unexpected null exception!");
             Type type = e.GetType();
 
-            return ((type != StackOverflowType) &&
-                     (type != OutOfMemoryType) &&
-                     (type != ThreadAbortType) &&
-                     (type != NullReferenceType) &&
-                     (type != AccessViolationType) &&
-                     !SecurityType.IsAssignableFrom(type));
+            return (
+                (type != StackOverflowType)
+                && (type != OutOfMemoryType)
+                && (type != ThreadAbortType)
+                && (type != NullReferenceType)
+                && (type != AccessViolationType)
+                && !SecurityType.IsAssignableFrom(type)
+            );
         }
 
         /// <summary>
@@ -258,7 +285,9 @@ namespace System.Data.Entity.Design.Common
         /// </summary>
         /// <param name="errors"></param>
         /// <returns></returns>
-        static internal string CombineErrorMessage(IEnumerable<System.Data.Metadata.Edm.EdmSchemaError> errors)
+        static internal string CombineErrorMessage(
+            IEnumerable<System.Data.Metadata.Edm.EdmSchemaError> errors
+        )
         {
             Debug.Assert(errors != null);
             StringBuilder sb = new StringBuilder(System.Environment.NewLine);
@@ -271,7 +300,6 @@ namespace System.Data.Entity.Design.Common
                     sb.Append(System.Environment.NewLine);
                 }
                 sb.Append(error.ToString());
-
             }
             Debug.Assert(count != 0, "Empty Error List");
             return sb.ToString();

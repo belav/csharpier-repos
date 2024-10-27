@@ -22,6 +22,6 @@ namespace System.Text
         /// <summary>
         /// Trim from both the beginning and the end of the string.
         /// </summary>
-        Both = Head | Tail
+        Both = Head | Tail,
     }
 }

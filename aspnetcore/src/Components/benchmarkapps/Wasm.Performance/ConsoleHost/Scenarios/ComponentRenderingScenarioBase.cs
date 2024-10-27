@@ -21,7 +21,9 @@ internal abstract class ComponentRenderingScenarioBase : CommandLineApplication
 
         OnExecute(() =>
         {
-            var numCycles = cyclesOption.HasValue() ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture) : 1;
+            var numCycles = cyclesOption.HasValue()
+                ? int.Parse(cyclesOption.Value(), CultureInfo.InvariantCulture)
+                : 1;
 
             var serviceCollection = new ServiceCollection();
             PopulateServiceCollection(serviceCollection);
@@ -35,7 +37,9 @@ internal abstract class ComponentRenderingScenarioBase : CommandLineApplication
 
             var duration = DateTime.Now - startTime;
             var durationPerCycle = (duration / numCycles).TotalMilliseconds;
-            Console.WriteLine($"{Name}: {durationPerCycle:F1}ms per cycle (cycles tested: {numCycles})");
+            Console.WriteLine(
+                $"{Name}: {durationPerCycle:F1}ms per cycle (cycles tested: {numCycles})"
+            );
 
             return 0;
         });

@@ -32,12 +32,17 @@ namespace System
         // This option tweaks the coercion rules to match classic inconsistencies.
         internal enum CheckArgumentSemantics
         {
-            ArraySet,            // Throws InvalidCastException
-            DynamicInvoke,       // Throws ArgumentException
-            SetFieldDirect,      // Throws ArgumentException - other than that, like DynamicInvoke except that enums and integers cannot be intermingled, and null cannot substitute for default(valuetype).
+            ArraySet, // Throws InvalidCastException
+            DynamicInvoke, // Throws ArgumentException
+            SetFieldDirect, // Throws ArgumentException - other than that, like DynamicInvoke except that enums and integers cannot be intermingled, and null cannot substitute for default(valuetype).
         }
 
-        internal static object? CheckArgument(object? srcObject, EETypePtr dstEEType, CheckArgumentSemantics semantics, BinderBundle? binderBundle)
+        internal static object? CheckArgument(
+            object? srcObject,
+            EETypePtr dstEEType,
+            CheckArgumentSemantics semantics,
+            BinderBundle? binderBundle
+        )
         {
             // Methods with ByRefLike types in signatures should be filtered out earlier
             Debug.Assert(!dstEEType.IsByRefLike);
@@ -52,7 +57,11 @@ namespace System
                 else if (dstEEType.IsValueType && !dstEEType.IsNullable)
                 {
                     if (semantics == CheckArgumentSemantics.SetFieldDirect)
-                        throw CreateChangeTypeException(typeof(object).TypeHandle.ToEETypePtr(), dstEEType, semantics);
+                        throw CreateChangeTypeException(
+                            typeof(object).TypeHandle.ToEETypePtr(),
+                            dstEEType,
+                            semantics
+                        );
                     return Runtime.RuntimeImports.RhNewObject(dstEEType);
                 }
                 else
@@ -64,10 +73,18 @@ namespace System
             {
                 EETypePtr srcEEType = srcObject.GetEETypePtr();
 
-                if (srcEEType.RawValue == dstEEType.RawValue ||
-                    RuntimeImports.AreTypesAssignable(srcEEType, dstEEType) ||
-                    (dstEEType.IsInterface && srcObject is Runtime.InteropServices.IDynamicInterfaceCastable castable
-                        && castable.IsInterfaceImplemented(new RuntimeTypeHandle(dstEEType), throwIfNotImplemented: false)))
+                if (
+                    srcEEType.RawValue == dstEEType.RawValue
+                    || RuntimeImports.AreTypesAssignable(srcEEType, dstEEType)
+                    || (
+                        dstEEType.IsInterface
+                        && srcObject is Runtime.InteropServices.IDynamicInterfaceCastable castable
+                        && castable.IsInterfaceImplemented(
+                            new RuntimeTypeHandle(dstEEType),
+                            throwIfNotImplemented: false
+                        )
+                    )
+                )
                 {
                     return srcObject;
                 }
@@ -76,10 +93,20 @@ namespace System
             }
         }
 
-        internal static object? CheckArgumentConversions(object srcObject, EETypePtr dstEEType, CheckArgumentSemantics semantics, BinderBundle? binderBundle)
+        internal static object? CheckArgumentConversions(
+            object srcObject,
+            EETypePtr dstEEType,
+            CheckArgumentSemantics semantics,
+            BinderBundle? binderBundle
+        )
         {
             object? dstObject;
-            Exception exception = ConvertOrWidenPrimitivesEnumsAndPointersIfPossible(srcObject, dstEEType, semantics, out dstObject);
+            Exception exception = ConvertOrWidenPrimitivesEnumsAndPointersIfPossible(
+                srcObject,
+                dstEEType,
+                semantics,
+                out dstObject
+            );
             if (exception == null)
                 return dstObject;
 
@@ -96,11 +123,19 @@ namespace System
         }
 
         // Special coersion rules for primitives, enums and pointer.
-        private static Exception ConvertOrWidenPrimitivesEnumsAndPointersIfPossible(object srcObject, EETypePtr dstEEType, CheckArgumentSemantics semantics, out object? dstObject)
+        private static Exception ConvertOrWidenPrimitivesEnumsAndPointersIfPossible(
+            object srcObject,
+            EETypePtr dstEEType,
+            CheckArgumentSemantics semantics,
+            out object? dstObject
+        )
         {
             EETypePtr srcEEType = srcObject.GetEETypePtr();
 
-            if (semantics == CheckArgumentSemantics.SetFieldDirect && (srcEEType.IsEnum || dstEEType.IsEnum))
+            if (
+                semantics == CheckArgumentSemantics.SetFieldDirect
+                && (srcEEType.IsEnum || dstEEType.IsEnum)
+            )
             {
                 dstObject = null;
                 return CreateChangeTypeException(srcEEType, dstEEType, semantics);
@@ -108,7 +143,12 @@ namespace System
 
             if (dstEEType.IsPointer || dstEEType.IsFunctionPointer)
             {
-                Exception exception = ConvertPointerIfPossible(srcObject, dstEEType, semantics, out object dstPtr);
+                Exception exception = ConvertPointerIfPossible(
+                    srcObject,
+                    dstEEType,
+                    semantics,
+                    out object dstPtr
+                );
                 if (exception != null)
                 {
                     dstObject = null;
@@ -144,12 +184,16 @@ namespace System
 
                 case CorElementType.ELEMENT_TYPE_I1:
                     sbyte sbyteValue = Convert.ToSByte(srcObject);
-                    dstObject = dstEEType.IsEnum ? Enum.ToObject(dstEEType, sbyteValue) : sbyteValue;
+                    dstObject = dstEEType.IsEnum
+                        ? Enum.ToObject(dstEEType, sbyteValue)
+                        : sbyteValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_I2:
                     short shortValue = Convert.ToInt16(srcObject);
-                    dstObject = dstEEType.IsEnum ? Enum.ToObject(dstEEType, shortValue) : shortValue;
+                    dstObject = dstEEType.IsEnum
+                        ? Enum.ToObject(dstEEType, shortValue)
+                        : shortValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_I4:
@@ -169,7 +213,9 @@ namespace System
 
                 case CorElementType.ELEMENT_TYPE_U2:
                     ushort ushortValue = Convert.ToUInt16(srcObject);
-                    dstObject = dstEEType.IsEnum ? Enum.ToObject(dstEEType, ushortValue) : ushortValue;
+                    dstObject = dstEEType.IsEnum
+                        ? Enum.ToObject(dstEEType, ushortValue)
+                        : ushortValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_U4:
@@ -179,7 +225,9 @@ namespace System
 
                 case CorElementType.ELEMENT_TYPE_U8:
                     ulong ulongValue = Convert.ToUInt64(srcObject);
-                    dstObject = dstEEType.IsEnum ? Enum.ToObject(dstEEType, (long)ulongValue) : ulongValue;
+                    dstObject = dstEEType.IsEnum
+                        ? Enum.ToObject(dstEEType, (long)ulongValue)
+                        : ulongValue;
                     break;
 
                 case CorElementType.ELEMENT_TYPE_R4:
@@ -205,7 +253,11 @@ namespace System
                     break;
 
                 default:
-                    Debug.Fail("Unexpected CorElementType: " + dstCorElementType + ": Not a valid widening target.");
+                    Debug.Fail(
+                        "Unexpected CorElementType: "
+                            + dstCorElementType
+                            + ": Not a valid widening target."
+                    );
                     dstObject = null;
                     return CreateChangeTypeException(srcEEType, dstEEType, semantics);
             }
@@ -214,7 +266,12 @@ namespace System
             return null;
         }
 
-        private static Exception ConvertPointerIfPossible(object srcObject, EETypePtr dstEEType, CheckArgumentSemantics semantics, out object dstPtr)
+        private static Exception ConvertPointerIfPossible(
+            object srcObject,
+            EETypePtr dstEEType,
+            CheckArgumentSemantics semantics,
+            out object dstPtr
+        )
         {
             if (srcObject is IntPtr or UIntPtr)
             {
@@ -224,7 +281,13 @@ namespace System
 
             if (srcObject is Pointer srcPointer)
             {
-                if (dstEEType == typeof(void*).TypeHandle.ToEETypePtr() || RuntimeImports.AreTypesAssignable(pSourceType: srcPointer.GetPointerType().TypeHandle.ToEETypePtr(), pTargetType: dstEEType))
+                if (
+                    dstEEType == typeof(void*).TypeHandle.ToEETypePtr()
+                    || RuntimeImports.AreTypesAssignable(
+                        pSourceType: srcPointer.GetPointerType().TypeHandle.ToEETypePtr(),
+                        pTargetType: dstEEType
+                    )
+                )
                 {
                     dstPtr = srcPointer.GetPointerValue();
                     return null;
@@ -235,7 +298,11 @@ namespace System
             return CreateChangeTypeException(srcObject.GetEETypePtr(), dstEEType, semantics);
         }
 
-        private static Exception CreateChangeTypeException(EETypePtr srcEEType, EETypePtr dstEEType, CheckArgumentSemantics semantics)
+        private static Exception CreateChangeTypeException(
+            EETypePtr srcEEType,
+            EETypePtr dstEEType,
+            CheckArgumentSemantics semantics
+        )
         {
             switch (semantics)
             {
@@ -250,15 +317,33 @@ namespace System
             }
         }
 
-        internal static ArgumentException CreateChangeTypeArgumentException(EETypePtr srcEEType, EETypePtr dstEEType, bool destinationIsByRef = false)
-            => CreateChangeTypeArgumentException(srcEEType, Type.GetTypeFromHandle(new RuntimeTypeHandle(dstEEType)), destinationIsByRef);
+        internal static ArgumentException CreateChangeTypeArgumentException(
+            EETypePtr srcEEType,
+            EETypePtr dstEEType,
+            bool destinationIsByRef = false
+        ) =>
+            CreateChangeTypeArgumentException(
+                srcEEType,
+                Type.GetTypeFromHandle(new RuntimeTypeHandle(dstEEType)),
+                destinationIsByRef
+            );
 
-        internal static ArgumentException CreateChangeTypeArgumentException(EETypePtr srcEEType, Type dstType, bool destinationIsByRef = false)
+        internal static ArgumentException CreateChangeTypeArgumentException(
+            EETypePtr srcEEType,
+            Type dstType,
+            bool destinationIsByRef = false
+        )
         {
             object? destinationTypeName = dstType;
             if (destinationIsByRef)
                 destinationTypeName += "&";
-            return new ArgumentException(SR.Format(SR.Arg_ObjObjEx, Type.GetTypeFromHandle(new RuntimeTypeHandle(srcEEType)), destinationTypeName));
+            return new ArgumentException(
+                SR.Format(
+                    SR.Arg_ObjObjEx,
+                    Type.GetTypeFromHandle(new RuntimeTypeHandle(srcEEType)),
+                    destinationTypeName
+                )
+            );
         }
 
         private static InvalidCastException CreateChangeTypeInvalidCastException()

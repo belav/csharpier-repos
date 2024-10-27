@@ -21,7 +21,8 @@ public class ServiceProvidersEventData : EventData
     public ServiceProvidersEventData(
         EventDefinitionBase eventDefinition,
         Func<EventDefinitionBase, EventData, string> messageGenerator,
-        ICollection<IServiceProvider> serviceProviders)
+        ICollection<IServiceProvider> serviceProviders
+    )
         : base(eventDefinition, messageGenerator)
     {
         ServiceProviders = serviceProviders;

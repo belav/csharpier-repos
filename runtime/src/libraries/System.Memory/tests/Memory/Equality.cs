@@ -67,7 +67,9 @@ namespace System.MemoryTests
             var left = new Memory<int>(new int[0]);
             var right = new Memory<int>(new int[0]);
 
-            Memory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(new int[1] { 123 }).Slice(0, 0);
+            Memory<int> memoryFromNonEmptyArrayButWithZeroLength = new Memory<int>(
+                new int[1] { 123 }
+            ).Slice(0, 0);
 
             Assert.False(left.Equals(right));
             Assert.False(right.Equals(left));
@@ -98,7 +100,9 @@ namespace System.MemoryTests
             Assert.False(readOnlyMemory.Equals(new object()));
 
             Assert.False(memory.Equals((object)(new Memory<byte>(new byte[] { 1, 2 }))));
-            Assert.False(readOnlyMemory.Equals((object)(new ReadOnlyMemory<byte>(new byte[] { 1, 2 }))));
+            Assert.False(
+                readOnlyMemory.Equals((object)(new ReadOnlyMemory<byte>(new byte[] { 1, 2 })))
+            );
 
             Assert.True(memory.Equals(readOnlyMemoryAsObject));
             Assert.True(readOnlyMemory.Equals(memoryAsObject));
@@ -171,8 +175,8 @@ namespace System.MemoryTests
         [Fact]
         public static void EqualityThroughInterface_ComparesRangeNotContent()
         {
-            Memory<int> baseline = new Memory<int>(new [] { 1, 2, 3, 4, 5, 6 }, 2, 3);
-            Memory<int> duplicate = new Memory<int>(new [] { 1, 2, 3, 4, 5, 6 }, 2, 3);
+            Memory<int> baseline = new Memory<int>(new[] { 1, 2, 3, 4, 5, 6 }, 2, 3);
+            Memory<int> duplicate = new Memory<int>(new[] { 1, 2, 3, 4, 5, 6 }, 2, 3);
             IEquatable<Memory<int>> baselineAsEquatable = baseline;
             IEquatable<Memory<int>> duplicateAsEquatable = duplicate;
 
@@ -206,7 +210,22 @@ namespace System.MemoryTests
         public static void EqualityThroughInterface_Chars()
         {
             char[] array = { 'H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd', '!' };
-            char[] anotherArray = { 'H', 'e', 'l', 'l', 'o', ',', ' ', 'w', 'o', 'r', 'l', 'd', '!' };
+            char[] anotherArray =
+            {
+                'H',
+                'e',
+                'l',
+                'l',
+                'o',
+                ',',
+                ' ',
+                'w',
+                'o',
+                'r',
+                'l',
+                'd',
+                '!',
+            };
 
             Memory<char> baseline = new Memory<char>(array, 2, 3);
             IEquatable<Memory<char>> baselineAsEquatable = baseline;
@@ -226,7 +245,11 @@ namespace System.MemoryTests
 
         [Theory]
         [MemberData(nameof(ValidArraySegments))]
-        public static void MemoryReferencingSameMemoryAreEqualInEveryAspect(byte[] bytes, int start, int length)
+        public static void MemoryReferencingSameMemoryAreEqualInEveryAspect(
+            byte[] bytes,
+            int start,
+            int length
+        )
         {
             var memory = new Memory<byte>(bytes, start, length);
             var pointingToSameMemory = new Memory<byte>(bytes, start, length);
@@ -283,7 +306,11 @@ namespace System.MemoryTests
 
         [Theory]
         [MemberData(nameof(ValidArraySegments))]
-        public static void RangedMemoryEquivalenceAndImplicitCastsAreEqual(byte[] bytes, int start, int length)
+        public static void RangedMemoryEquivalenceAndImplicitCastsAreEqual(
+            byte[] bytes,
+            int start,
+            int length
+        )
         {
             var memory = new Memory<byte>(bytes, start, length);
             var readOnlyMemory = new ReadOnlyMemory<byte>(bytes, start, length);
@@ -331,15 +358,20 @@ namespace System.MemoryTests
             {
                 return new List<object[]>
                 {
-                    new object[] { new byte[1] { 0 }, 0, 1},
-                    new object[] { new byte[2] { 0, 0 }, 0, 2},
-                    new object[] { new byte[2] { 0, 0 }, 0, 1},
-                    new object[] { new byte[2] { 0, 0 }, 1, 1},
-                    new object[] { new byte[3] { 0, 0, 0 }, 0, 3},
-                    new object[] { new byte[3] { 0, 0, 0 }, 0, 2},
-                    new object[] { new byte[3] { 0, 0, 0 }, 1, 2},
-                    new object[] { new byte[3] { 0, 0, 0 }, 1, 1},
-                    new object[] { Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray(), 0, 100000 }
+                    new object[] { new byte[1] { 0 }, 0, 1 },
+                    new object[] { new byte[2] { 0, 0 }, 0, 2 },
+                    new object[] { new byte[2] { 0, 0 }, 0, 1 },
+                    new object[] { new byte[2] { 0, 0 }, 1, 1 },
+                    new object[] { new byte[3] { 0, 0, 0 }, 0, 3 },
+                    new object[] { new byte[3] { 0, 0, 0 }, 0, 2 },
+                    new object[] { new byte[3] { 0, 0, 0 }, 1, 2 },
+                    new object[] { new byte[3] { 0, 0, 0 }, 1, 1 },
+                    new object[]
+                    {
+                        Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray(),
+                        0,
+                        100000,
+                    },
                 };
             }
         }
@@ -353,7 +385,7 @@ namespace System.MemoryTests
                     new object[] { new byte[1] { 0 } },
                     new object[] { new byte[2] { 0, 0 } },
                     new object[] { new byte[3] { 0, 0, 0 } },
-                    new object[] { Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray() }
+                    new object[] { Enumerable.Range(0, 100000).Select(i => (byte)i).ToArray() },
                 };
             }
         }

@@ -29,7 +29,10 @@ public static class CookiePolicyAppBuilderExtensions
     /// <param name="app">The <see cref="IApplicationBuilder"/> to add the handler to.</param>
     /// <param name="options">A <see cref="CookiePolicyOptions"/> that specifies options for the handler.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public static IApplicationBuilder UseCookiePolicy(this IApplicationBuilder app, CookiePolicyOptions options)
+    public static IApplicationBuilder UseCookiePolicy(
+        this IApplicationBuilder app,
+        CookiePolicyOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);

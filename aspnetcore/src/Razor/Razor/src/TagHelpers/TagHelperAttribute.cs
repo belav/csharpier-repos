@@ -18,9 +18,7 @@ public class TagHelperAttribute : IHtmlContentContainer
     /// </summary>
     /// <param name="name">The <see cref="Name"/> of the attribute.</param>
     public TagHelperAttribute(string name)
-        : this(name, value: null, valueStyle: HtmlAttributeValueStyle.Minimized)
-    {
-    }
+        : this(name, value: null, valueStyle: HtmlAttributeValueStyle.Minimized) { }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttribute"/> with the specified <paramref name="name"/>
@@ -29,9 +27,7 @@ public class TagHelperAttribute : IHtmlContentContainer
     /// <param name="name">The <see cref="Name"/> of the attribute.</param>
     /// <param name="value">The <see cref="Value"/> of the attribute.</param>
     public TagHelperAttribute(string name, object value)
-        : this(name, value, valueStyle: HtmlAttributeValueStyle.DoubleQuotes)
-    {
-    }
+        : this(name, value, valueStyle: HtmlAttributeValueStyle.DoubleQuotes) { }
 
     /// <summary>
     /// Instantiates a new instance of <see cref="TagHelperAttribute"/> with the specified <paramref name="name"/>,
@@ -70,11 +66,10 @@ public class TagHelperAttribute : IHtmlContentContainer
     /// <remarks><see cref="Name"/> is compared case-insensitively.</remarks>
     public bool Equals(TagHelperAttribute other)
     {
-        return
-            other != null &&
-            string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase) &&
-            ValueStyle == other.ValueStyle &&
-            (ValueStyle == HtmlAttributeValueStyle.Minimized || Equals(Value, other.Value));
+        return other != null
+            && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase)
+            && ValueStyle == other.ValueStyle
+            && (ValueStyle == HtmlAttributeValueStyle.Minimized || Equals(Value, other.Value));
     }
 
     /// <inheritdoc />

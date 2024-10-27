@@ -17,7 +17,7 @@ namespace TestStackOverflow3
 
         private unsafe void Execute(string arg1 = "")
         {
-            long* bar = stackalloc long [1000];
+            long* bar = stackalloc long[1000];
             ctr++;
             if (ctr % 50 == 0)
                 Console.WriteLine("Call number {0} to the Execute method", ctr);
@@ -29,4 +29,3 @@ namespace TestStackOverflow3
         }
     }
 }
-

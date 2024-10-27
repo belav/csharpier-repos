@@ -7,16 +7,23 @@ namespace System.IO.Tests
 {
     public class PathTests_Join : PathTestsBase
     {
-        public static TheoryData<string, string> TestData_JoinOnePath = new TheoryData<string, string>
+        public static TheoryData<string, string> TestData_JoinOnePath = new TheoryData<
+            string,
+            string
+        >
         {
             { "", "" },
             { Sep, Sep },
             { AltSep, AltSep },
             { "a", "a" },
-            { null, "" }
+            { null, "" },
         };
 
-        public static TheoryData<string, string, string> TestData_JoinTwoPaths = new TheoryData<string, string, string>
+        public static TheoryData<string, string, string> TestData_JoinTwoPaths = new TheoryData<
+            string,
+            string,
+            string
+        >
         {
             { "", "", "" },
             { Sep, "", Sep },
@@ -37,9 +44,9 @@ namespace System.IO.Tests
             { $"a{Sep}", $"{AltSep}a", $"a{Sep}{AltSep}a" },
             { $"a{AltSep}", $"{AltSep}a", $"a{AltSep}{AltSep}a" },
             { "a", $"a{AltSep}", $"a{Sep}a{AltSep}" },
-            { null, null, ""},
-            { null, "a", "a"},
-            { "a", null, "a"}
+            { null, null, "" },
+            { null, "a", "a" },
+            { "a", null, "a" },
         };
 
         [Theory, MemberData(nameof(TestData_JoinTwoPaths))]
@@ -70,33 +77,34 @@ namespace System.IO.Tests
             }
         }
 
-        public static TheoryData<string, string, string, string> TestData_JoinThreePaths = new TheoryData<string, string, string, string>
-        {
-            { "", "", "", "" },
-            { Sep, Sep, Sep, $"{Sep}{Sep}{Sep}" },
-            { AltSep, AltSep, AltSep, $"{AltSep}{AltSep}{AltSep}" },
-            { "a", "", "", "a" },
-            { "", "a", "", "a" },
-            { "", "", "a", "a" },
-            { "a", "", "a", $"a{Sep}a" },
-            { "a", "a", "", $"a{Sep}a" },
-            { "", "a", "a", $"a{Sep}a" },
-            { "a", "a", "a", $"a{Sep}a{Sep}a" },
-            { "a", Sep, "a", $"a{Sep}a" },
-            { $"a{Sep}", "", "a", $"a{Sep}a" },
-            { $"a{Sep}", "a", "", $"a{Sep}a" },
-            { "", $"a{Sep}", "a", $"a{Sep}a" },
-            { "a", "", $"{Sep}a", $"a{Sep}a" },
-            { $"a{AltSep}", "", "a", $"a{AltSep}a" },
-            { $"a{AltSep}", "a", "", $"a{AltSep}a" },
-            { "", $"a{AltSep}", "a", $"a{AltSep}a" },
-            { "a", "", $"{AltSep}a", $"a{AltSep}a" },
-            { null, null, null, "" },
-            { "a", null, null, "a" },
-            { null, "a", null, "a" },
-            { null, null, "a", "a" },
-            { "a", null, "a", $"a{Sep}a" }
-        };
+        public static TheoryData<string, string, string, string> TestData_JoinThreePaths =
+            new TheoryData<string, string, string, string>
+            {
+                { "", "", "", "" },
+                { Sep, Sep, Sep, $"{Sep}{Sep}{Sep}" },
+                { AltSep, AltSep, AltSep, $"{AltSep}{AltSep}{AltSep}" },
+                { "a", "", "", "a" },
+                { "", "a", "", "a" },
+                { "", "", "a", "a" },
+                { "a", "", "a", $"a{Sep}a" },
+                { "a", "a", "", $"a{Sep}a" },
+                { "", "a", "a", $"a{Sep}a" },
+                { "a", "a", "a", $"a{Sep}a{Sep}a" },
+                { "a", Sep, "a", $"a{Sep}a" },
+                { $"a{Sep}", "", "a", $"a{Sep}a" },
+                { $"a{Sep}", "a", "", $"a{Sep}a" },
+                { "", $"a{Sep}", "a", $"a{Sep}a" },
+                { "a", "", $"{Sep}a", $"a{Sep}a" },
+                { $"a{AltSep}", "", "a", $"a{AltSep}a" },
+                { $"a{AltSep}", "a", "", $"a{AltSep}a" },
+                { "", $"a{AltSep}", "a", $"a{AltSep}a" },
+                { "a", "", $"{AltSep}a", $"a{AltSep}a" },
+                { null, null, null, "" },
+                { "a", null, null, "a" },
+                { null, "a", null, "a" },
+                { null, null, "a", "a" },
+                { "a", null, "a", $"a{Sep}a" },
+            };
 
         [Theory, MemberData(nameof(TestData_JoinThreePaths))]
         public void JoinThreePaths(string path1, string path2, string path3, string expected)
@@ -126,67 +134,77 @@ namespace System.IO.Tests
             }
         }
 
-        public static TheoryData<string, string, string, string, string> TestData_JoinFourPaths = new TheoryData<string, string, string, string, string>
-        {
-            { "", "", "", "", "" },
-            { Sep, Sep, Sep, Sep, $"{Sep}{Sep}{Sep}{Sep}" },
-            { AltSep, AltSep, AltSep, AltSep, $"{AltSep}{AltSep}{AltSep}{AltSep}" },
-            { "a", "", "", "", "a" },
-            { "", "a", "", "", "a" },
-            { "", "", "a", "", "a" },
-            { "", "", "", "a", "a" },
-            { "a", "b", "", "", $"a{Sep}b" },
-            { "a", "", "b", "", $"a{Sep}b" },
-            { "a", "", "", "b", $"a{Sep}b" },
-            { "a", "b", "c", "", $"a{Sep}b{Sep}c" },
-            { "a", "b", "", "c", $"a{Sep}b{Sep}c" },
-            { "a", "", "b", "c", $"a{Sep}b{Sep}c" },
-            { "", "a", "b", "c", $"a{Sep}b{Sep}c" },
-            { "a", "b", "c", "d", $"a{Sep}b{Sep}c{Sep}d" },
-            { "a", Sep, "b", "", $"a{Sep}b" },
-            { "a", Sep, "", "b", $"a{Sep}b" },
-            { "a", "", Sep, "b", $"a{Sep}b" },
-            { $"a{Sep}", "b", "", "", $"a{Sep}b" },
-            { $"a{Sep}", "", "b", "", $"a{Sep}b" },
-            { $"a{Sep}", "", "", "b", $"a{Sep}b" },
-            { "", $"a{Sep}", "b", "", $"a{Sep}b" },
-            { "", $"a{Sep}", "", "b", $"a{Sep}b" },
-            { "", "", $"a{Sep}", "b", $"a{Sep}b" },
-            { "a", $"{Sep}b", "", "", $"a{Sep}b" },
-            { "a", "", $"{Sep}b", "", $"a{Sep}b" },
-            { "a", "", "", $"{Sep}b", $"a{Sep}b" },
-            { $"{Sep}a", "", "", "", $"{Sep}a" },
-            { "", $"{Sep}a", "", "", $"{Sep}a" },
-            { "", "", $"{Sep}a", "", $"{Sep}a" },
-            { "", "", "", $"{Sep}a", $"{Sep}a" },
-            { $"{Sep}a", "b", "", "", $"{Sep}a{Sep}b" },
-            { "", $"{Sep}a", "b", "", $"{Sep}a{Sep}b" },
-            { "", "", $"{Sep}a", "b", $"{Sep}a{Sep}b" },
-            { $"a{Sep}", $"{Sep}b", "", "", $"a{Sep}{Sep}b" },
-            { $"a{Sep}", "", $"{Sep}b", "", $"a{Sep}{Sep}b" },
-            { $"a{Sep}", "", "", $"{Sep}b", $"a{Sep}{Sep}b" },
-            { $"a{AltSep}", "b", "", "", $"a{AltSep}b" },
-            { $"a{AltSep}", "", "b", "", $"a{AltSep}b" },
-            { $"a{AltSep}", "", "", "b", $"a{AltSep}b" },
-            { "", $"a{AltSep}", "b", "", $"a{AltSep}b" },
-            { "", $"a{AltSep}", "", "b", $"a{AltSep}b" },
-            { "", "", $"a{AltSep}", "b", $"a{AltSep}b" },
-            { "a", $"{AltSep}b", "", "", $"a{AltSep}b" },
-            { "a", "", $"{AltSep}b", "", $"a{AltSep}b" },
-            { "a", "", "", $"{AltSep}b", $"a{AltSep}b" },
-            { null, null, null, null, "" },
-            { "a", null, null, null, "a" },
-            { null, "a", null, null, "a" },
-            { null, null, "a", null, "a" },
-            { null, null, null, "a", "a" },
-            { "a", null, "b", null, $"a{Sep}b" },
-            { "a", null, null, "b", $"a{Sep}b" }
-        };
+        public static TheoryData<string, string, string, string, string> TestData_JoinFourPaths =
+            new TheoryData<string, string, string, string, string>
+            {
+                { "", "", "", "", "" },
+                { Sep, Sep, Sep, Sep, $"{Sep}{Sep}{Sep}{Sep}" },
+                { AltSep, AltSep, AltSep, AltSep, $"{AltSep}{AltSep}{AltSep}{AltSep}" },
+                { "a", "", "", "", "a" },
+                { "", "a", "", "", "a" },
+                { "", "", "a", "", "a" },
+                { "", "", "", "a", "a" },
+                { "a", "b", "", "", $"a{Sep}b" },
+                { "a", "", "b", "", $"a{Sep}b" },
+                { "a", "", "", "b", $"a{Sep}b" },
+                { "a", "b", "c", "", $"a{Sep}b{Sep}c" },
+                { "a", "b", "", "c", $"a{Sep}b{Sep}c" },
+                { "a", "", "b", "c", $"a{Sep}b{Sep}c" },
+                { "", "a", "b", "c", $"a{Sep}b{Sep}c" },
+                { "a", "b", "c", "d", $"a{Sep}b{Sep}c{Sep}d" },
+                { "a", Sep, "b", "", $"a{Sep}b" },
+                { "a", Sep, "", "b", $"a{Sep}b" },
+                { "a", "", Sep, "b", $"a{Sep}b" },
+                { $"a{Sep}", "b", "", "", $"a{Sep}b" },
+                { $"a{Sep}", "", "b", "", $"a{Sep}b" },
+                { $"a{Sep}", "", "", "b", $"a{Sep}b" },
+                { "", $"a{Sep}", "b", "", $"a{Sep}b" },
+                { "", $"a{Sep}", "", "b", $"a{Sep}b" },
+                { "", "", $"a{Sep}", "b", $"a{Sep}b" },
+                { "a", $"{Sep}b", "", "", $"a{Sep}b" },
+                { "a", "", $"{Sep}b", "", $"a{Sep}b" },
+                { "a", "", "", $"{Sep}b", $"a{Sep}b" },
+                { $"{Sep}a", "", "", "", $"{Sep}a" },
+                { "", $"{Sep}a", "", "", $"{Sep}a" },
+                { "", "", $"{Sep}a", "", $"{Sep}a" },
+                { "", "", "", $"{Sep}a", $"{Sep}a" },
+                { $"{Sep}a", "b", "", "", $"{Sep}a{Sep}b" },
+                { "", $"{Sep}a", "b", "", $"{Sep}a{Sep}b" },
+                { "", "", $"{Sep}a", "b", $"{Sep}a{Sep}b" },
+                { $"a{Sep}", $"{Sep}b", "", "", $"a{Sep}{Sep}b" },
+                { $"a{Sep}", "", $"{Sep}b", "", $"a{Sep}{Sep}b" },
+                { $"a{Sep}", "", "", $"{Sep}b", $"a{Sep}{Sep}b" },
+                { $"a{AltSep}", "b", "", "", $"a{AltSep}b" },
+                { $"a{AltSep}", "", "b", "", $"a{AltSep}b" },
+                { $"a{AltSep}", "", "", "b", $"a{AltSep}b" },
+                { "", $"a{AltSep}", "b", "", $"a{AltSep}b" },
+                { "", $"a{AltSep}", "", "b", $"a{AltSep}b" },
+                { "", "", $"a{AltSep}", "b", $"a{AltSep}b" },
+                { "a", $"{AltSep}b", "", "", $"a{AltSep}b" },
+                { "a", "", $"{AltSep}b", "", $"a{AltSep}b" },
+                { "a", "", "", $"{AltSep}b", $"a{AltSep}b" },
+                { null, null, null, null, "" },
+                { "a", null, null, null, "a" },
+                { null, "a", null, null, "a" },
+                { null, null, "a", null, "a" },
+                { null, null, null, "a", "a" },
+                { "a", null, "b", null, $"a{Sep}b" },
+                { "a", null, null, "b", $"a{Sep}b" },
+            };
 
         [Theory, MemberData(nameof(TestData_JoinFourPaths))]
-        public void JoinFourPaths(string path1, string path2, string path3, string path4, string expected)
+        public void JoinFourPaths(
+            string path1,
+            string path2,
+            string path3,
+            string path4,
+            string expected
+        )
         {
-            Assert.Equal(expected, Path.Join(path1.AsSpan(), path2.AsSpan(), path3.AsSpan(), path4.AsSpan()));
+            Assert.Equal(
+                expected,
+                Path.Join(path1.AsSpan(), path2.AsSpan(), path3.AsSpan(), path4.AsSpan())
+            );
             Assert.Equal(expected, Path.Join(path1, path2, path3, path4));
         }
 
@@ -221,15 +239,30 @@ namespace System.IO.Tests
         }
 
         [Theory, MemberData(nameof(TestData_JoinFourPaths))]
-        public void JoinStringArray_4(string path1, string path2, string path3, string path4, string expected)
+        public void JoinStringArray_4(
+            string path1,
+            string path2,
+            string path3,
+            string path4,
+            string expected
+        )
         {
             Assert.Equal(expected, Path.Join(new string[] { path1, path2, path3, path4 }));
         }
 
         [Theory, MemberData(nameof(TestData_JoinFourPaths))]
-        public void JoinStringArray_8(string path1, string path2, string path3, string path4, string fourJoined)
+        public void JoinStringArray_8(
+            string path1,
+            string path2,
+            string path3,
+            string path4,
+            string fourJoined
+        )
         {
-            Assert.Equal(Path.Join(fourJoined, fourJoined), Path.Join(new string[] { path1, path2, path3, path4, path1, path2, path3, path4 }));
+            Assert.Equal(
+                Path.Join(fourJoined, fourJoined),
+                Path.Join(new string[] { path1, path2, path3, path4, path1, path2, path3, path4 })
+            );
         }
     }
 }

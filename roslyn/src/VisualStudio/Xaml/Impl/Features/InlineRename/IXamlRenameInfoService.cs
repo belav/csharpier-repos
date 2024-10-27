@@ -11,6 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor.Xaml.Features.InlineRename
 {
     internal interface IXamlRenameInfoService
     {
-        Task<IXamlRenameInfo> GetRenameInfoAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<IXamlRenameInfo> GetRenameInfoAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

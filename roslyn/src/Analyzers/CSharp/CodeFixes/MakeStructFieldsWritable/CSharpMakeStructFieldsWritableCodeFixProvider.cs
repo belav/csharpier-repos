@@ -18,21 +18,29 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.MakeStructFieldsWritable), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.MakeStructFieldsWritable
+        ),
+        Shared
+    ]
     internal class CSharpMakeStructFieldsWritableCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpMakeStructFieldsWritableCodeFixProvider()
-        {
-        }
+        public CSharpMakeStructFieldsWritableCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(IDEDiagnosticIds.MakeStructFieldsWritable);
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.MakeStructFieldsWritable);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
-            RegisterCodeFix(context, CSharpAnalyzersResources.Make_readonly_fields_writable, nameof(CSharpAnalyzersResources.Make_readonly_fields_writable));
+            RegisterCodeFix(
+                context,
+                CSharpAnalyzersResources.Make_readonly_fields_writable,
+                nameof(CSharpAnalyzersResources.Make_readonly_fields_writable)
+            );
             return Task.CompletedTask;
         }
 
@@ -40,7 +48,9 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
             Document document,
             ImmutableArray<Diagnostic> diagnostics,
             SyntaxEditor editor,
-            CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -51,18 +61,21 @@ namespace Microsoft.CodeAnalysis.CSharp.MakeStructFieldsWritable
                     continue;
                 }
 
-                var fieldDeclarations = structDeclaration.Members
-                    .OfType<FieldDeclarationSyntax>();
+                var fieldDeclarations = structDeclaration.Members.OfType<FieldDeclarationSyntax>();
 
                 foreach (var fieldDeclaration in fieldDeclarations)
                 {
                     var fieldDeclarationModifiers = editor.Generator.GetModifiers(fieldDeclaration);
                     var containsReadonlyModifier =
-                        (fieldDeclarationModifiers & DeclarationModifiers.ReadOnly) == DeclarationModifiers.ReadOnly;
+                        (fieldDeclarationModifiers & DeclarationModifiers.ReadOnly)
+                        == DeclarationModifiers.ReadOnly;
 
                     if (containsReadonlyModifier)
                     {
-                        editor.SetModifiers(fieldDeclaration, fieldDeclarationModifiers.WithIsReadOnly(false));
+                        editor.SetModifiers(
+                            fieldDeclaration,
+                            fieldDeclarationModifiers.WithIsReadOnly(false)
+                        );
                     }
                 }
             }

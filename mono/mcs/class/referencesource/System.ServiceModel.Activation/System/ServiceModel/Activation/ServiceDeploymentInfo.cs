@@ -9,7 +9,11 @@ namespace System.ServiceModel.Activation
 
     class ServiceDeploymentInfo
     {
-        public ServiceDeploymentInfo(string virtualPath,  ServiceHostFactoryBase serviceHostFactory, string serviceType)
+        public ServiceDeploymentInfo(
+            string virtualPath,
+            ServiceHostFactoryBase serviceHostFactory,
+            string serviceType
+        )
         {
             this.VirtualPath = virtualPath;
             this.ServiceHostFactory = serviceHostFactory;
@@ -17,28 +21,12 @@ namespace System.ServiceModel.Activation
             this.MessageHandledByRoute = false;
         }
 
-        public bool MessageHandledByRoute
-        {
-            get;
-            set;
-        }
+        public bool MessageHandledByRoute { get; set; }
 
-        public string VirtualPath
-        {
-            get;
-            private set;
-        }
+        public string VirtualPath { get; private set; }
 
-        public string ServiceType 
-        {
-            get;
-            private set; 
-        }
+        public string ServiceType { get; private set; }
 
-        public ServiceHostFactoryBase ServiceHostFactory
-        {
-            get;
-            private set;
-        }        
+        public ServiceHostFactoryBase ServiceHostFactory { get; private set; }
     }
 }

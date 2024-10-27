@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.PatternMatching
             return matches.Count > 0 ? matches[0] : null;
         }
 
-        public static bool Matches(this PatternMatcher matcher, [NotNullWhen(true)] string? candidate)
-            => matcher.GetFirstMatch(candidate) != null;
+        public static bool Matches(
+            this PatternMatcher matcher,
+            [NotNullWhen(true)] string? candidate
+        ) => matcher.GetFirstMatch(candidate) != null;
     }
 }

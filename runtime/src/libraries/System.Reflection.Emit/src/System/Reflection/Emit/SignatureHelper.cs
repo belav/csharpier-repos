@@ -11,15 +11,23 @@ namespace System.Reflection.Emit
     // TODO: Only support simple signatures. More complex signatures (generics, array, byref, pointers etc) will be added.
     internal static class MetadataSignatureHelper
     {
-        internal static BlobBuilder LocalSignatureEncoder(List<LocalBuilder> locals, ModuleBuilderImpl module)
+        internal static BlobBuilder LocalSignatureEncoder(
+            List<LocalBuilder> locals,
+            ModuleBuilderImpl module
+        )
         {
             BlobBuilder localSignature = new();
-            LocalVariablesEncoder encoder = new BlobEncoder(localSignature).LocalVariableSignature(locals.Count);
+            LocalVariablesEncoder encoder = new BlobEncoder(localSignature).LocalVariableSignature(
+                locals.Count
+            );
 
-            foreach(LocalBuilder local in locals)
+            foreach (LocalBuilder local in locals)
             {
-                WriteSignatureForType(encoder.AddVariable().Type(local.LocalType.IsByRef, local.IsPinned),
-                    local.LocalType.IsByRef ? local.LocalType.GetElementType()! : local.LocalType, module);
+                WriteSignatureForType(
+                    encoder.AddVariable().Type(local.LocalType.IsByRef, local.IsPinned),
+                    local.LocalType.IsByRef ? local.LocalType.GetElementType()! : local.LocalType,
+                    module
+                );
             }
 
             return localSignature;
@@ -28,40 +36,67 @@ namespace System.Reflection.Emit
         internal static BlobBuilder FieldSignatureEncoder(Type fieldType, ModuleBuilderImpl module)
         {
             BlobBuilder fieldSignature = new();
-            WriteSignatureForType(new BlobEncoder(fieldSignature).Field().Type(), fieldType, module);
+            WriteSignatureForType(
+                new BlobEncoder(fieldSignature).Field().Type(),
+                fieldType,
+                module
+            );
 
             return fieldSignature;
         }
 
-        internal static BlobBuilder ConstructorSignatureEncoder(ParameterInfo[]? parameters, ModuleBuilderImpl module)
+        internal static BlobBuilder ConstructorSignatureEncoder(
+            ParameterInfo[]? parameters,
+            ModuleBuilderImpl module
+        )
         {
             BlobBuilder constructorSignature = new();
 
             parameters ??= Array.Empty<ParameterInfo>();
 
-            new BlobEncoder(constructorSignature).
-                MethodSignature(isInstanceMethod: true).
-                Parameters(parameters.Length, out ReturnTypeEncoder retType, out ParametersEncoder parameterEncoder);
+            new BlobEncoder(constructorSignature)
+                .MethodSignature(isInstanceMethod: true)
+                .Parameters(
+                    parameters.Length,
+                    out ReturnTypeEncoder retType,
+                    out ParametersEncoder parameterEncoder
+                );
 
             retType.Void();
 
-            WriteParametersSignature(module, Array.ConvertAll(parameters, p => p.ParameterType), parameterEncoder);
+            WriteParametersSignature(
+                module,
+                Array.ConvertAll(parameters, p => p.ParameterType),
+                parameterEncoder
+            );
 
             return constructorSignature;
         }
 
-        internal static BlobBuilder GetTypeSpecificationSignature(Type type, ModuleBuilderImpl module)
+        internal static BlobBuilder GetTypeSpecificationSignature(
+            Type type,
+            ModuleBuilderImpl module
+        )
         {
             BlobBuilder typeSpecSignature = new();
-            WriteSignatureForType(new BlobEncoder(typeSpecSignature).TypeSpecificationSignature(), type, module);
+            WriteSignatureForType(
+                new BlobEncoder(typeSpecSignature).TypeSpecificationSignature(),
+                type,
+                module
+            );
 
             return typeSpecSignature;
         }
 
-        internal static BlobBuilder GetMethodSpecificationSignature(Type[] genericArguments, ModuleBuilderImpl module)
+        internal static BlobBuilder GetMethodSpecificationSignature(
+            Type[] genericArguments,
+            ModuleBuilderImpl module
+        )
         {
             BlobBuilder methodSpecSignature = new();
-            GenericTypeArgumentsEncoder encoder = new BlobEncoder(methodSpecSignature).MethodSpecificationSignature(genericArguments.Length);
+            GenericTypeArgumentsEncoder encoder = new BlobEncoder(
+                methodSpecSignature
+            ).MethodSpecificationSignature(genericArguments.Length);
 
             foreach (Type argument in genericArguments)
             {
@@ -71,15 +106,29 @@ namespace System.Reflection.Emit
             return methodSpecSignature;
         }
 
-        internal static BlobBuilder MethodSignatureEncoder(ModuleBuilderImpl module, Type[]? parameters,
-            Type? returnType, SignatureCallingConvention convention, int genParamCount, bool isInstance)
+        internal static BlobBuilder MethodSignatureEncoder(
+            ModuleBuilderImpl module,
+            Type[]? parameters,
+            Type? returnType,
+            SignatureCallingConvention convention,
+            int genParamCount,
+            bool isInstance
+        )
         {
             // Encoding return type and parameters.
             BlobBuilder methodSignature = new();
 
-            new BlobEncoder(methodSignature).
-                MethodSignature(convention: convention, genericParameterCount: genParamCount, isInstanceMethod: isInstance).
-                Parameters((parameters == null) ? 0 : parameters.Length, out ReturnTypeEncoder retEncoder, out ParametersEncoder parEncoder);
+            new BlobEncoder(methodSignature)
+                .MethodSignature(
+                    convention: convention,
+                    genericParameterCount: genParamCount,
+                    isInstanceMethod: isInstance
+                )
+                .Parameters(
+                    (parameters == null) ? 0 : parameters.Length,
+                    out ReturnTypeEncoder retEncoder,
+                    out ParametersEncoder parEncoder
+                );
 
             if (returnType != null && returnType != module.GetTypeFromCoreAssembly(CoreTypeId.Void))
             {
@@ -95,24 +144,43 @@ namespace System.Reflection.Emit
             return methodSignature;
         }
 
-        private static void WriteParametersSignature(ModuleBuilderImpl module, Type[]? parameters, ParametersEncoder parameterEncoder)
+        private static void WriteParametersSignature(
+            ModuleBuilderImpl module,
+            Type[]? parameters,
+            ParametersEncoder parameterEncoder
+        )
         {
             if (parameters != null) // If parameters null, just keep the ParametersEncoder empty
             {
                 foreach (Type parameter in parameters)
                 {
-                    WriteSignatureForType(parameterEncoder.AddParameter().Type(), parameter, module);
+                    WriteSignatureForType(
+                        parameterEncoder.AddParameter().Type(),
+                        parameter,
+                        module
+                    );
                 }
             }
         }
 
-        internal static BlobBuilder PropertySignatureEncoder(PropertyBuilderImpl property, ModuleBuilderImpl module)
+        internal static BlobBuilder PropertySignatureEncoder(
+            PropertyBuilderImpl property,
+            ModuleBuilderImpl module
+        )
         {
             BlobBuilder propertySignature = new();
 
-            new BlobEncoder(propertySignature).
-                PropertySignature(isInstanceProperty: property.CallingConventions.HasFlag(CallingConventions.HasThis)).
-                Parameters(property.ParameterTypes == null ? 0 : property.ParameterTypes.Length, out ReturnTypeEncoder retType, out ParametersEncoder paramEncoder);
+            new BlobEncoder(propertySignature)
+                .PropertySignature(
+                    isInstanceProperty: property.CallingConventions.HasFlag(
+                        CallingConventions.HasThis
+                    )
+                )
+                .Parameters(
+                    property.ParameterTypes == null ? 0 : property.ParameterTypes.Length,
+                    out ReturnTypeEncoder retType,
+                    out ParametersEncoder paramEncoder
+                );
 
             WriteSignatureForType(retType.Type(), property.PropertyType, module);
             WriteParametersSignature(module, property.ParameterTypes, paramEncoder);
@@ -120,7 +188,11 @@ namespace System.Reflection.Emit
             return propertySignature;
         }
 
-        private static void WriteSignatureForType(SignatureTypeEncoder signature, Type type, ModuleBuilderImpl module)
+        private static void WriteSignatureForType(
+            SignatureTypeEncoder signature,
+            Type type,
+            ModuleBuilderImpl module
+        )
         {
             if (type.IsArray)
             {
@@ -132,9 +204,16 @@ namespace System.Reflection.Emit
                 }
                 else
                 {
-                    signature.Array(out SignatureTypeEncoder elTypeSignature, out ArrayShapeEncoder arrayEncoder);
+                    signature.Array(
+                        out SignatureTypeEncoder elTypeSignature,
+                        out ArrayShapeEncoder arrayEncoder
+                    );
                     WriteSimpleSignature(elTypeSignature, elementType, module);
-                    arrayEncoder.Shape(type.GetArrayRank(), ImmutableArray.Create<int>(), ImmutableArray.Create<int>(new int[rank]));
+                    arrayEncoder.Shape(
+                        type.GetArrayRank(),
+                        ImmutableArray.Create<int>(),
+                        ImmutableArray.Create<int>(new int[rank])
+                    );
                 }
             }
             else if (type.IsPointer)
@@ -151,12 +230,17 @@ namespace System.Reflection.Emit
                 Type[] genericArguments = type.GetGenericArguments();
 
                 GenericTypeArgumentsEncoder encoder = signature.GenericInstantiation(
-                    module.GetTypeHandle(type.GetGenericTypeDefinition()), genericArguments.Length, type.IsValueType);
+                    module.GetTypeHandle(type.GetGenericTypeDefinition()),
+                    genericArguments.Length,
+                    type.IsValueType
+                );
                 foreach (Type gType in genericArguments)
                 {
                     if (gType.IsGenericMethodParameter)
                     {
-                        encoder.AddArgument().GenericMethodTypeParameter(gType.GenericParameterPosition);
+                        encoder
+                            .AddArgument()
+                            .GenericMethodTypeParameter(gType.GenericParameterPosition);
                     }
                     else if (gType.IsGenericParameter)
                     {
@@ -182,7 +266,11 @@ namespace System.Reflection.Emit
             }
         }
 
-        private static void WriteSimpleSignature(SignatureTypeEncoder signature, Type type, ModuleBuilderImpl module)
+        private static void WriteSimpleSignature(
+            SignatureTypeEncoder signature,
+            Type type,
+            ModuleBuilderImpl module
+        )
         {
             CoreTypeId? typeId = module.GetTypeIdFromCoreTypes(type);
 

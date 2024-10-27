@@ -31,7 +31,7 @@ namespace Newtonsoft.Json.Tests.TestObjects
     public enum EnumA
     {
         [EnumMember(Value = "value_a")]
-        ValueA
+        ValueA,
     }
 }
 #endif

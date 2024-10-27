@@ -10,6 +10,7 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// Prefer <c>namespace N { }</c>
         /// </summary>
         BlockScoped,
+
         /// <summary>
         /// Prefer <c>namespace N;</c>
         /// </summary>

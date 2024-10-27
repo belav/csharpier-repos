@@ -14,9 +14,11 @@ namespace System.IdentityModel.Protocols.WSTrust
 #pragma warning disable 1591
         public const string NamespaceURI = "http://docs.oasis-open.org/ws-sx/ws-trust/200512";
         public const string Prefix = "trust";
-        public const string SchemaLocation = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/ws-trust-1.3.xsd";
+        public const string SchemaLocation =
+            "http://docs.oasis-open.org/ws-sx/ws-trust/200512/ws-trust-1.3.xsd";
 
-        public const string Schema = @"<?xml version='1.0' encoding='utf-8'?>
+        public const string Schema =
+            @"<?xml version='1.0' encoding='utf-8'?>
 <xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema'
            xmlns:trust='http://docs.oasis-open.org/ws-sx/ws-trust/200512'
            targetNamespace='http://docs.oasis-open.org/ws-sx/ws-trust/200512'
@@ -52,27 +54,43 @@ namespace System.IdentityModel.Protocols.WSTrust
 
         public static class Actions
         {
-            public const string Issue = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue";
-            public const string IssueFinalResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTRC/IssueFinal";
-            public const string IssueResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Issue";
+            public const string Issue =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Issue";
+            public const string IssueFinalResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTRC/IssueFinal";
+            public const string IssueResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Issue";
 
-            public const string Renew = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Renew";
-            public const string RenewFinalResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/RenewFinal";
-            public const string RenewResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Renew";
+            public const string Renew =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Renew";
+            public const string RenewFinalResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/RenewFinal";
+            public const string RenewResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Renew";
 
-            public const string Validate = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Validate";
-            public const string ValidateFinalResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/ValidateFinal";
-            public const string ValidateResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Validate";
+            public const string Validate =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Validate";
+            public const string ValidateFinalResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/ValidateFinal";
+            public const string ValidateResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Validate";
 
-            public const string Cancel = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Cancel";
-            public const string CancelFinalResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/CancelFinal";
-            public const string CancelResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Cancel";
+            public const string Cancel =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/Cancel";
+            public const string CancelFinalResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/CancelFinal";
+            public const string CancelResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/Cancel";
 
-            public const string RequestSecurityContextToken = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT";
-            public const string RequestSecurityContextTokenResponse = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT";
+            public const string RequestSecurityContextToken =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT";
+            public const string RequestSecurityContextTokenResponse =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT";
 
-            public const string RequestSecurityContextTokenCancel = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT-Cancel";
-            public const string RequestSecurityContextTokenResponseCancel = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT-Cancel";
+            public const string RequestSecurityContextTokenCancel =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RST/SCT-Cancel";
+            public const string RequestSecurityContextTokenResponseCancel =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/RSTR/SCT-Cancel";
         }
 
         public static class AttributeNames
@@ -121,7 +139,8 @@ namespace System.IdentityModel.Protocols.WSTrust
             public const string RequestType = "RequestType";
             public const string RequestSecurityTokenResponse = "RequestSecurityTokenResponse";
             public const string RequestSecurityToken = "RequestSecurityToken";
-            public const string RequestSecurityTokenResponseCollection = "RequestSecurityTokenResponseCollection";
+            public const string RequestSecurityTokenResponseCollection =
+                "RequestSecurityTokenResponseCollection";
             public const string RequestedSecurityToken = "RequestedSecurityToken";
             public const string RequestedProofToken = "RequestedProofToken";
             public const string RequestKeySize = "RequestKeySize";
@@ -135,7 +154,7 @@ namespace System.IdentityModel.Protocols.WSTrust
             public const string Status = "Status";
             public const string TokenType = "TokenType";
             public const string UseKey = "UseKey";
-            public const string ValidateTarget = "ValidateTarget";                    
+            public const string ValidateTarget = "ValidateTarget";
         }
 
         public static class FaultCodeValues
@@ -157,14 +176,17 @@ namespace System.IdentityModel.Protocols.WSTrust
         {
             public const string Issue = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Issue";
             public const string Renew = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Renew";
-            public const string Validate = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Validate";
+            public const string Validate =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Validate";
             public const string Cancel = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Cancel";
         }
 
         public static class KeyTypes
         {
-            public const string Asymmetric = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey";
-            public const string Symmetric = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/SymmetricKey";
+            public const string Asymmetric =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/PublicKey";
+            public const string Symmetric =
+                "http://docs.oasis-open.org/ws-sx/ws-trust/200512/SymmetricKey";
             public const string Bearer = "http://docs.oasis-open.org/ws-sx/ws-trust/200512/Bearer";
         }
 

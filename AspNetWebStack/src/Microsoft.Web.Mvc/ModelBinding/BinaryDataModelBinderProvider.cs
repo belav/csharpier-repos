@@ -15,26 +15,45 @@ namespace Microsoft.Web.Mvc.ModelBinding
         private static readonly ModelBinderProvider[] _providers = new ModelBinderProvider[]
         {
             new SimpleModelBinderProvider(typeof(byte[]), new ByteArrayExtensibleModelBinder()),
-            new SimpleModelBinderProvider(typeof(Binary), new LinqBinaryExtensibleModelBinder())
+            new SimpleModelBinderProvider(typeof(Binary), new LinqBinaryExtensibleModelBinder()),
         };
 
-        public override IExtensibleModelBinder GetBinder(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+        public override IExtensibleModelBinder GetBinder(
+            ControllerContext controllerContext,
+            ExtensibleModelBindingContext bindingContext
+        )
         {
-            return (from provider in _providers
-                    let binder = provider.GetBinder(controllerContext, bindingContext)
-                    where binder != null
-                    select binder).FirstOrDefault();
+            return (
+                from provider in _providers
+                let binder = provider.GetBinder(controllerContext, bindingContext)
+                where binder != null
+                select binder
+            ).FirstOrDefault();
         }
 
         // This is essentially a clone of the ByteArrayModelBinder from core
         private class ByteArrayExtensibleModelBinder : IExtensibleModelBinder
         {
-            [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "We want to ignore when the data is corrupted")]
-            [SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)", Justification = "The target object should make the correct culture determination, not this method.")]
-            public bool BindModel(ControllerContext controllerContext, ExtensibleModelBindingContext bindingContext)
+            [SuppressMessage(
+                "Microsoft.Design",
+                "CA1031:DoNotCatchGeneralExceptionTypes",
+                Justification = "We want to ignore when the data is corrupted"
+            )]
+            [SuppressMessage(
+                "Microsoft.Globalization",
+                "CA1304:SpecifyCultureInfo",
+                MessageId = "System.Web.Mvc.ValueProviderResult.ConvertTo(System.Type)",
+                Justification = "The target object should make the correct culture determination, not this method."
+            )]
+            public bool BindModel(
+                ControllerContext controllerContext,
+                ExtensibleModelBindingContext bindingContext
+            )
             {
                 ModelBinderUtil.ValidateBindingContext(bindingContext);
-                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(bindingContext.ModelName);
+                ValueProviderResult valueProviderResult = bindingContext.ValueProvider.GetValue(
+                    bindingContext.ModelName
+                );
 
                 // case 1: there was no <input ... /> element containing this data
                 if (valueProviderResult == null)

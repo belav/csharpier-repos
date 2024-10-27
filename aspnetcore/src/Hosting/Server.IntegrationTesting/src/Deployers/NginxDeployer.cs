@@ -21,9 +21,7 @@ public class NginxDeployer : SelfHostDeployer
     private Socket _portSelector;
 
     public NginxDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
-        : base(deploymentParameters, loggerFactory)
-    {
-    }
+        : base(deploymentParameters, loggerFactory) { }
 
     public override async Task<DeploymentResult> DeployAsync()
     {
@@ -31,9 +29,9 @@ public class NginxDeployer : SelfHostDeployer
         {
             _configFile = Path.GetTempFileName();
 
-            var uri = string.IsNullOrEmpty(DeploymentParameters.ApplicationBaseUriHint) ?
-                new Uri("http://localhost:0") :
-                new Uri(DeploymentParameters.ApplicationBaseUriHint);
+            var uri = string.IsNullOrEmpty(DeploymentParameters.ApplicationBaseUriHint)
+                ? new Uri("http://localhost:0")
+                : new Uri(DeploymentParameters.ApplicationBaseUriHint);
 
             if (uri.Port == 0)
             {
@@ -42,7 +40,11 @@ public class NginxDeployer : SelfHostDeployer
                 {
                     // This works with nginx 1.9.1 and later using the reuseport flag, available on Ubuntu 16.04.
                     // Keep it open so nobody else claims the port
-                    _portSelector = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+                    _portSelector = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    );
                     _portSelector.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                     builder.Port = ((IPEndPoint)_portSelector.LocalEndPoint).Port;
                 }
@@ -55,8 +57,10 @@ public class NginxDeployer : SelfHostDeployer
 
             var redirectUri = TestUriHelper.BuildTestUri(ServerType.Nginx);
 
-            if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
-                    && DeploymentParameters.ApplicationType == ApplicationType.Standalone)
+            if (
+                DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr
+                && DeploymentParameters.ApplicationType == ApplicationType.Standalone
+            )
             {
                 // Publish is required to get the correct files in the output directory
                 DeploymentParameters.PublishApplicationBeforeDeployment = true;
@@ -78,10 +82,14 @@ public class NginxDeployer : SelfHostDeployer
             using (var httpClient = new HttpClient())
             {
                 httpClient.Timeout = TimeSpan.FromSeconds(200);
-                var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return httpClient.GetAsync(redirectUri);
-                }, Logger, exitToken);
+                var response = await RetryHelper.RetryRequest(
+                    () =>
+                    {
+                        return httpClient.GetAsync(redirectUri);
+                    },
+                    Logger,
+                    exitToken
+                );
 
                 if (!response.IsSuccessStatusCode)
                 {
@@ -94,13 +102,15 @@ public class NginxDeployer : SelfHostDeployer
                 DeploymentParameters,
                 applicationBaseUri: uri.ToString(),
                 contentRoot: DeploymentParameters.ApplicationPath,
-                hostShutdownToken: exitToken);
+                hostShutdownToken: exitToken
+            );
         }
     }
 
     private static string GetUserName()
     {
-        var retVal = Environment.GetEnvironmentVariable("LOGNAME")
+        var retVal =
+            Environment.GetEnvironmentVariable("LOGNAME")
             ?? Environment.GetEnvironmentVariable("USER")
             ?? Environment.GetEnvironmentVariable("USERNAME");
 
@@ -111,14 +121,12 @@ public class NginxDeployer : SelfHostDeployer
 
         if (!OperatingSystem.IsWindows())
         {
-            using (var process = new Process
-            {
-                StartInfo =
-                    {
-                        FileName = "whoami",
-                        RedirectStandardOutput = true,
-                    }
-            })
+            using (
+                var process = new Process
+                {
+                    StartInfo = { FileName = "whoami", RedirectStandardOutput = true },
+                }
+            )
             {
                 process.Start();
                 process.WaitForExit(10_000);
@@ -133,16 +141,25 @@ public class NginxDeployer : SelfHostDeployer
     {
         using (Logger.BeginScope("SetupNginx"))
         {
-            var userName = GetUserName() ?? throw new InvalidOperationException("Could not identify the current username");
+            var userName =
+                GetUserName()
+                ?? throw new InvalidOperationException("Could not identify the current username");
             // copy nginx.conf template and replace pertinent information
-            var pidFile = Path.Combine(DeploymentParameters.ApplicationPath, $"{Guid.NewGuid()}.nginx.pid");
+            var pidFile = Path.Combine(
+                DeploymentParameters.ApplicationPath,
+                $"{Guid.NewGuid()}.nginx.pid"
+            );
             var errorLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.error.log");
             var accessLog = Path.Combine(DeploymentParameters.ApplicationPath, "nginx.access.log");
-            DeploymentParameters.ServerConfigTemplateContent = DeploymentParameters.ServerConfigTemplateContent
-                .Replace("[user]", userName)
+            DeploymentParameters.ServerConfigTemplateContent = DeploymentParameters
+                .ServerConfigTemplateContent.Replace("[user]", userName)
                 .Replace("[errorlog]", errorLog)
                 .Replace("[accesslog]", accessLog)
-                .Replace("[listenPort]", originalUri.Port.ToString(CultureInfo.InvariantCulture) + (_portSelector != null ? " reuseport" : ""))
+                .Replace(
+                    "[listenPort]",
+                    originalUri.Port.ToString(CultureInfo.InvariantCulture)
+                        + (_portSelector != null ? " reuseport" : "")
+                )
                 .Replace("[redirectUri]", redirectUri)
                 .Replace("[pidFile]", pidFile);
             Logger.LogDebug("Using PID file: {pidFile}", pidFile);
@@ -150,7 +167,10 @@ public class NginxDeployer : SelfHostDeployer
             Logger.LogDebug("Using Access Log file: {accessLog}", pidFile);
             if (Logger.IsEnabled(LogLevel.Trace))
             {
-                Logger.LogTrace($"Config File Content:{Environment.NewLine}===START CONFIG==={Environment.NewLine}{{configContent}}{Environment.NewLine}===END CONFIG===", DeploymentParameters.ServerConfigTemplateContent);
+                Logger.LogTrace(
+                    $"Config File Content:{Environment.NewLine}===START CONFIG==={Environment.NewLine}{{configContent}}{Environment.NewLine}===END CONFIG===",
+                    DeploymentParameters.ServerConfigTemplateContent
+                );
             }
             File.WriteAllText(_configFile, DeploymentParameters.ServerConfigTemplateContent);
 
@@ -163,7 +183,7 @@ public class NginxDeployer : SelfHostDeployer
                 RedirectStandardError = true,
                 RedirectStandardOutput = true,
                 // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
-                RedirectStandardInput = true
+                RedirectStandardInput = true,
             };
 
             using (var runNginx = new Process() { StartInfo = startInfo })
@@ -205,7 +225,7 @@ public class NginxDeployer : SelfHostDeployer
                     RedirectStandardError = true,
                     RedirectStandardOutput = true,
                     // Trying a work around for https://github.com/aspnet/Hosting/issues/140.
-                    RedirectStandardInput = true
+                    RedirectStandardInput = true,
                 };
 
                 using (var runNginx = new Process() { StartInfo = startInfo })

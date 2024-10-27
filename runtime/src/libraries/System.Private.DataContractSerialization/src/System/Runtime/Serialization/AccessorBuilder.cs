@@ -22,23 +22,43 @@ namespace System.Runtime.Serialization
         private delegate void StructSetDelegate<T, TArg>(ref T obj, TArg value);
         private delegate TResult StructGetDelegate<T, out TResult>(ref T obj);
 
-        private static readonly MethodInfo s_createGetterInternal = typeof(FastInvokerBuilder).GetMethod(nameof(CreateGetterInternal), BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static)!;
-        private static readonly MethodInfo s_createSetterInternal = typeof(FastInvokerBuilder).GetMethod(nameof(CreateSetterInternal), BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static)!;
-        private static readonly MethodInfo s_make = typeof(FastInvokerBuilder).GetMethod(nameof(Make), BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static)!;
+        private static readonly MethodInfo s_createGetterInternal =
+            typeof(FastInvokerBuilder).GetMethod(
+                nameof(CreateGetterInternal),
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+            )!;
+        private static readonly MethodInfo s_createSetterInternal =
+            typeof(FastInvokerBuilder).GetMethod(
+                nameof(CreateSetterInternal),
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+            )!;
+        private static readonly MethodInfo s_make = typeof(FastInvokerBuilder).GetMethod(
+            nameof(Make),
+            BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static
+        )!;
 
         [RequiresDynamicCode(DataContract.SerializerAOTWarning)]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "The call to MakeGenericMethod is safe due to the fact that we are preserving the constructors of type which is what Make() is doing.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "The call to MakeGenericMethod is safe due to the fact that we are preserving the constructors of type which is what Make() is doing."
+        )]
         public static Func<object> GetMakeNewInstanceFunc(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)]
-            Type type)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type type
+        )
         {
             Func<object> make = s_make.MakeGenericMethod(type).CreateDelegate<Func<object>>();
             return make;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "The call to MakeGenericMethod is safe due to the fact that FastInvokerBuilder.CreateGetterInternal<T, T1> is not annotated.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "The call to MakeGenericMethod is safe due to the fact that FastInvokerBuilder.CreateGetterInternal<T, T1> is not annotated."
+        )]
         public static Getter CreateGetter(MemberInfo memberInfo)
         {
             if (memberInfo is PropertyInfo propInfo)
@@ -46,7 +66,10 @@ namespace System.Runtime.Serialization
                 Type declaringType = propInfo.DeclaringType!;
                 Type propertyType = propInfo.PropertyType!;
 
-                if (declaringType.IsGenericType && declaringType.GetGenericTypeDefinition() == typeof(KeyValue<,>))
+                if (
+                    declaringType.IsGenericType
+                    && declaringType.GetGenericTypeDefinition() == typeof(KeyValue<,>)
+                )
                 {
                     if (propInfo.Name == "Key")
                     {
@@ -66,10 +89,15 @@ namespace System.Runtime.Serialization
 
                 // If either of the arguments to MakeGenericMethod is a valuetype, this is going to cause JITting.
                 // Only JIT if dynamic code is supported.
-                if (RuntimeFeature.IsDynamicCodeSupported || (!declaringType.IsValueType && !propertyType.IsValueType))
+                if (
+                    RuntimeFeature.IsDynamicCodeSupported
+                    || (!declaringType.IsValueType && !propertyType.IsValueType)
+                )
                 {
 #pragma warning disable IL3050 // AOT compiling should recognize that this call is gated by RuntimeFeature.IsDynamicCodeSupported.
-                    var createGetterGeneric = s_createGetterInternal.MakeGenericMethod(declaringType, propertyType).CreateDelegate<Func<PropertyInfo, Getter>>();
+                    var createGetterGeneric = s_createGetterInternal
+                        .MakeGenericMethod(declaringType, propertyType)
+                        .CreateDelegate<Func<PropertyInfo, Getter>>();
 #pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
                     return createGetterGeneric(propInfo);
                 }
@@ -88,12 +116,21 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                throw new InvalidOperationException(SR.Format(SR.InvalidMember, DataContract.GetClrTypeFullName(memberInfo.DeclaringType!), memberInfo.Name));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.InvalidMember,
+                        DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
+                        memberInfo.Name
+                    )
+                );
             }
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2060:MakeGenericMethod",
-            Justification = "The call to MakeGenericMethod is safe due to the fact that FastInvokerBuilder.CreateSetterInternal<T, T1> is not annotated.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2060:MakeGenericMethod",
+            Justification = "The call to MakeGenericMethod is safe due to the fact that FastInvokerBuilder.CreateSetterInternal<T, T1> is not annotated."
+        )]
         public static Setter CreateSetter(MemberInfo memberInfo)
         {
             if (memberInfo is PropertyInfo propInfo)
@@ -103,7 +140,10 @@ namespace System.Runtime.Serialization
                     Type declaringType = propInfo.DeclaringType!;
                     Type propertyType = propInfo.PropertyType!;
 
-                    if (declaringType.IsGenericType && declaringType.GetGenericTypeDefinition() == typeof(KeyValue<,>))
+                    if (
+                        declaringType.IsGenericType
+                        && declaringType.GetGenericTypeDefinition() == typeof(KeyValue<,>)
+                    )
                     {
                         if (propInfo.Name == "Key")
                         {
@@ -123,10 +163,15 @@ namespace System.Runtime.Serialization
 
                     // If either of the arguments to MakeGenericMethod is a valuetype, this is going to cause JITting.
                     // Only JIT if dynamic code is supported.
-                    if (RuntimeFeature.IsDynamicCodeSupported || (!declaringType.IsValueType && !propertyType.IsValueType))
+                    if (
+                        RuntimeFeature.IsDynamicCodeSupported
+                        || (!declaringType.IsValueType && !propertyType.IsValueType)
+                    )
                     {
 #pragma warning disable IL3050 // AOT compiling should recognize that this call is gated by RuntimeFeature.IsDynamicCodeSupported.
-                        var createSetterGeneric = s_createSetterInternal.MakeGenericMethod(propInfo.DeclaringType!, propInfo.PropertyType).CreateDelegate<Func<PropertyInfo, Setter>>();
+                        var createSetterGeneric = s_createSetterInternal
+                            .MakeGenericMethod(propInfo.DeclaringType!, propInfo.PropertyType)
+                            .CreateDelegate<Func<PropertyInfo, Setter>>();
 #pragma warning restore IL3050 // Calling members annotated with 'RequiresDynamicCodeAttribute' may break functionality when AOT compiling.
                         return createSetterGeneric(propInfo);
                     }
@@ -140,7 +185,9 @@ namespace System.Runtime.Serialization
                 }
                 else
                 {
-                    throw new InvalidOperationException(SR.Format(SR.NoSetMethodForProperty, propInfo.DeclaringType, propInfo.Name));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.NoSetMethodForProperty, propInfo.DeclaringType, propInfo.Name)
+                    );
                 }
             }
             else if (memberInfo is FieldInfo fieldInfo)
@@ -152,21 +199,32 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                throw new InvalidOperationException(SR.Format(SR.InvalidMember, DataContract.GetClrTypeFullName(memberInfo.DeclaringType!), memberInfo.Name));
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.InvalidMember,
+                        DataContract.GetClrTypeFullName(memberInfo.DeclaringType!),
+                        memberInfo.Name
+                    )
+                );
             }
         }
 
-        private static object Make<T>() where T : new()
+        private static object Make<T>()
+            where T : new()
         {
             var t = new T();
             return t;
         }
 
-        private static Getter CreateGetterInternal<DeclaringType, PropertyType>(PropertyInfo propInfo)
+        private static Getter CreateGetterInternal<DeclaringType, PropertyType>(
+            PropertyInfo propInfo
+        )
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<StructGetDelegate<DeclaringType, PropertyType>>();
+                var getMethod = propInfo.GetMethod!.CreateDelegate<
+                    StructGetDelegate<DeclaringType, PropertyType>
+                >();
 
                 return (obj) =>
                 {
@@ -176,7 +234,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var getMethod = propInfo.GetMethod!.CreateDelegate<Func<DeclaringType, PropertyType>>();
+                var getMethod = propInfo.GetMethod!.CreateDelegate<
+                    Func<DeclaringType, PropertyType>
+                >();
 
                 return (obj) =>
                 {
@@ -185,11 +245,15 @@ namespace System.Runtime.Serialization
             }
         }
 
-        private static Setter CreateSetterInternal<DeclaringType, PropertyType>(PropertyInfo propInfo)
+        private static Setter CreateSetterInternal<DeclaringType, PropertyType>(
+            PropertyInfo propInfo
+        )
         {
             if (typeof(DeclaringType).IsValueType)
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<StructSetDelegate<DeclaringType, PropertyType>>();
+                var setMethod = propInfo.SetMethod!.CreateDelegate<
+                    StructSetDelegate<DeclaringType, PropertyType>
+                >();
 
                 return (ref object obj, object? val) =>
                 {
@@ -200,7 +264,9 @@ namespace System.Runtime.Serialization
             }
             else
             {
-                var setMethod = propInfo.SetMethod!.CreateDelegate<Action<DeclaringType, PropertyType>>();
+                var setMethod = propInfo.SetMethod!.CreateDelegate<
+                    Action<DeclaringType, PropertyType>
+                >();
 
                 return (ref object obj, object? val) =>
                 {

@@ -33,14 +33,8 @@ public class ResponseHeaders
     /// </summary>
     public CacheControlHeaderValue? CacheControl
     {
-        get
-        {
-            return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.CacheControl, value);
-        }
+        get { return Headers.Get<CacheControlHeaderValue>(HeaderNames.CacheControl); }
+        set { Headers.Set(HeaderNames.CacheControl, value); }
     }
 
     /// <summary>
@@ -48,14 +42,8 @@ public class ResponseHeaders
     /// </summary>
     public ContentDispositionHeaderValue? ContentDisposition
     {
-        get
-        {
-            return Headers.Get<ContentDispositionHeaderValue>(HeaderNames.ContentDisposition);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentDisposition, value);
-        }
+        get { return Headers.Get<ContentDispositionHeaderValue>(HeaderNames.ContentDisposition); }
+        set { Headers.Set(HeaderNames.ContentDisposition, value); }
     }
 
     /// <summary>
@@ -63,14 +51,8 @@ public class ResponseHeaders
     /// </summary>
     public long? ContentLength
     {
-        get
-        {
-            return Headers.ContentLength;
-        }
-        set
-        {
-            Headers.ContentLength = value;
-        }
+        get { return Headers.ContentLength; }
+        set { Headers.ContentLength = value; }
     }
 
     /// <summary>
@@ -78,14 +60,8 @@ public class ResponseHeaders
     /// </summary>
     public ContentRangeHeaderValue? ContentRange
     {
-        get
-        {
-            return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentRange, value);
-        }
+        get { return Headers.Get<ContentRangeHeaderValue>(HeaderNames.ContentRange); }
+        set { Headers.Set(HeaderNames.ContentRange, value); }
     }
 
     /// <summary>
@@ -93,14 +69,8 @@ public class ResponseHeaders
     /// </summary>
     public MediaTypeHeaderValue? ContentType
     {
-        get
-        {
-            return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ContentType, value);
-        }
+        get { return Headers.Get<MediaTypeHeaderValue>(HeaderNames.ContentType); }
+        set { Headers.Set(HeaderNames.ContentType, value); }
     }
 
     /// <summary>
@@ -108,14 +78,8 @@ public class ResponseHeaders
     /// </summary>
     public DateTimeOffset? Date
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.Date);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.Date, value);
-        }
+        get { return Headers.GetDate(HeaderNames.Date); }
+        set { Headers.SetDate(HeaderNames.Date, value); }
     }
 
     /// <summary>
@@ -123,14 +87,8 @@ public class ResponseHeaders
     /// </summary>
     public EntityTagHeaderValue? ETag
     {
-        get
-        {
-            return Headers.Get<EntityTagHeaderValue>(HeaderNames.ETag);
-        }
-        set
-        {
-            Headers.Set(HeaderNames.ETag, value);
-        }
+        get { return Headers.Get<EntityTagHeaderValue>(HeaderNames.ETag); }
+        set { Headers.Set(HeaderNames.ETag, value); }
     }
 
     /// <summary>
@@ -138,14 +96,8 @@ public class ResponseHeaders
     /// </summary>
     public DateTimeOffset? Expires
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.Expires);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.Expires, value);
-        }
+        get { return Headers.GetDate(HeaderNames.Expires); }
+        set { Headers.SetDate(HeaderNames.Expires, value); }
     }
 
     /// <summary>
@@ -153,14 +105,8 @@ public class ResponseHeaders
     /// </summary>
     public DateTimeOffset? LastModified
     {
-        get
-        {
-            return Headers.GetDate(HeaderNames.LastModified);
-        }
-        set
-        {
-            Headers.SetDate(HeaderNames.LastModified, value);
-        }
+        get { return Headers.GetDate(HeaderNames.LastModified); }
+        set { Headers.SetDate(HeaderNames.LastModified, value); }
     }
 
     /// <summary>
@@ -176,10 +122,7 @@ public class ResponseHeaders
             }
             return null;
         }
-        set
-        {
-            Headers.Set(HeaderNames.Location, value == null ? null : UriHelper.Encode(value));
-        }
+        set { Headers.Set(HeaderNames.Location, value == null ? null : UriHelper.Encode(value)); }
     }
 
     /// <summary>
@@ -187,14 +130,8 @@ public class ResponseHeaders
     /// </summary>
     public IList<SetCookieHeaderValue> SetCookie
     {
-        get
-        {
-            return Headers.SetCookie.GetList<SetCookieHeaderValue>();
-        }
-        set
-        {
-            Headers.SetList(HeaderNames.SetCookie, value);
-        }
+        get { return Headers.SetCookie.GetList<SetCookieHeaderValue>(); }
+        set { Headers.SetList(HeaderNames.SetCookie, value); }
     }
 
     /// <summary>
@@ -205,7 +142,9 @@ public class ResponseHeaders
     /// The given type must have a static TryParse method.</typeparam>
     /// <param name="name">The name of the header to retrieve.</param>
     /// <returns>The value of the header.</returns>
-    public T? Get<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>(string name)
+    public T? Get<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>(
+        string name
+    )
     {
         return Headers.Get<T>(name);
     }
@@ -218,7 +157,9 @@ public class ResponseHeaders
     /// The given type must have a static TryParseList method.</typeparam>
     /// <param name="name">The name of the header to retrieve.</param>
     /// <returns>List of values of the header.</returns>
-    public IList<T> GetList<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T>(string name)
+    public IList<T> GetList<
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] T
+    >(string name)
     {
         return Headers.GetList<T>(name);
     }

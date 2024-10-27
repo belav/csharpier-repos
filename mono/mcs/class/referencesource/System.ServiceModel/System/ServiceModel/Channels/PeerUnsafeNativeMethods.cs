@@ -19,15 +19,16 @@ namespace System.ServiceModel.Channels
     {
         [DllImport("ws2_32.dll", SetLastError = true, EntryPoint = "WSAIoctl")]
         internal static extern int WSAIoctl(
-                [In] IntPtr socketHandle,
-                [In] int ioControlCode,
-                [In] IntPtr inBuffer,
-                [In] int inBufferSize,
-                [Out] IntPtr outBuffer,
-                [In] int outBufferSize,
-                [Out] out int bytesTransferred,
-                [In] IntPtr overlapped,
-                [In] IntPtr completionRoutine);
+            [In] IntPtr socketHandle,
+            [In] int ioControlCode,
+            [In] IntPtr inBuffer,
+            [In] int inBufferSize,
+            [Out] IntPtr outBuffer,
+            [In] int outBufferSize,
+            [Out] out int bytesTransferred,
+            [In] IntPtr overlapped,
+            [In] IntPtr completionRoutine
+        );
     }
 
     [Serializable, StructLayout(LayoutKind.Sequential)]
@@ -36,10 +37,18 @@ namespace System.ServiceModel.Channels
         IntPtr sockAddr;
         int sockAddrLength;
 
-        public IntPtr SockAddr { get { return sockAddr; } }
-        public int SockAddrLength { get { return sockAddrLength; } }
+        public IntPtr SockAddr
+        {
+            get { return sockAddr; }
+        }
+        public int SockAddrLength
+        {
+            get { return sockAddrLength; }
+        }
 
-        public void InitializeFromCriticalAllocHandleSocketAddress(CriticalAllocHandleSocketAddress sockAddr)
+        public void InitializeFromCriticalAllocHandleSocketAddress(
+            CriticalAllocHandleSocketAddress sockAddr
+        )
         {
             this.sockAddr = (IntPtr)sockAddr;
             this.sockAddrLength = sockAddr.Size;
@@ -55,8 +64,14 @@ namespace System.ServiceModel.Channels
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = maxAddresses)]
         SocketAddress[] addresses;
 
-        public SocketAddress[] Addresses { get { return addresses; } }
-        public int Count { get { return count; } }
+        public SocketAddress[] Addresses
+        {
+            get { return addresses; }
+        }
+        public int Count
+        {
+            get { return count; }
+        }
 
         public SocketAddressList(SocketAddress[] addresses, int count)
         {
@@ -64,7 +79,11 @@ namespace System.ServiceModel.Channels
             this.count = count;
         }
 
-        public static ReadOnlyCollection<IPAddress> SortAddresses(Socket socket, IPAddress listenAddress, ReadOnlyCollection<IPAddress> addresses)
+        public static ReadOnlyCollection<IPAddress> SortAddresses(
+            Socket socket,
+            IPAddress listenAddress,
+            ReadOnlyCollection<IPAddress> addresses
+        )
         {
             ReadOnlyCollection<IPAddress> sortedAddresses = null;
 
@@ -84,20 +103,24 @@ namespace System.ServiceModel.Channels
                     // Invoke ioctl to sort the addresses
                     int realOutputBufferSize;
                     int error = UnsafeNativeMethods.ERROR_SUCCESS;
-                    int errorCode = PeerWinsock.WSAIoctl(socket.Handle,
-                                                         unchecked((int)IOControlCode.AddressListSort),
-                                                         (IntPtr)inputBuffer,
-                                                         inputBuffer.Size,
-                                                         (IntPtr)outputBuffer,
-                                                         outputBuffer.Size,
-                                                         out realOutputBufferSize,
-                                                         IntPtr.Zero,
-                                                         IntPtr.Zero);
+                    int errorCode = PeerWinsock.WSAIoctl(
+                        socket.Handle,
+                        unchecked((int)IOControlCode.AddressListSort),
+                        (IntPtr)inputBuffer,
+                        inputBuffer.Size,
+                        (IntPtr)outputBuffer,
+                        outputBuffer.Size,
+                        out realOutputBufferSize,
+                        IntPtr.Zero,
+                        IntPtr.Zero
+                    );
                     if (errorCode == -1)
                     {
                         // Get the Win32 error code before doing anything else
                         error = Marshal.GetLastWin32Error();
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SocketException(error));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SocketException(error)
+                        );
                     }
 
                     // Marshal the sorted SOCKET_ADDRESS_LIST into IPAddresses
@@ -105,8 +128,10 @@ namespace System.ServiceModel.Channels
                 }
                 finally
                 {
-                    if (inputBuffer != null) inputBuffer.Dispose();
-                    if (outputBuffer != null) outputBuffer.Dispose();
+                    if (inputBuffer != null)
+                        inputBuffer.Dispose();
+                    if (outputBuffer != null)
+                        outputBuffer.Dispose();
                 }
             }
             return sortedAddresses;
@@ -120,6 +145,7 @@ namespace System.ServiceModel.Channels
         short sin6_family;
         ushort sin6_port;
         uint sin6_flowinfo;
+
         [MarshalAs(UnmanagedType.ByValArray, SizeConst = addrByteCount)]
         byte[] sin6_addr;
         uint sin6_scope_id;
@@ -150,7 +176,7 @@ namespace System.ServiceModel.Channels
                 for (int i = v4Index; i < addrByteCount; i++)
                     this.sin6_addr[i] = v4AddressBytes[i - v4Index];
 
-                this.sin6_scope_id = 0;     // V4 address doesn't have a scope ID
+                this.sin6_scope_id = 0; // V4 address doesn't have a scope ID
             }
 
             this.sin6_family = (short)AddressFamily.InterNetworkV6;
@@ -158,8 +184,14 @@ namespace System.ServiceModel.Channels
             this.sin6_flowinfo = 0;
         }
 
-        public short Family { get { return this.sin6_family; } }
-        public uint FlowInfo { get { return this.sin6_flowinfo; } }
+        public short Family
+        {
+            get { return this.sin6_family; }
+        }
+        public uint FlowInfo
+        {
+            get { return this.sin6_flowinfo; }
+        }
 
         // Returns true if the address is a v4-mapped v6 address
         // Adapted from ws2ipdef.w's IN6_IS_ADDR_V4MAPPED macro
@@ -167,7 +199,7 @@ namespace System.ServiceModel.Channels
         {
             get
             {
-                // A v4-mapped v6 address will have the last 4 bytes contain the IPv4 address. 
+                // A v4-mapped v6 address will have the last 4 bytes contain the IPv4 address.
                 // The preceding 2 bytes contain 0xFFFF. All others are 0.
                 if (sin6_addr[v4MapIndex] != 0xff || sin6_addr[v4MapIndex + 1] != 0xff)
                     return false;
@@ -180,7 +212,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public ushort Port { get { return this.sin6_port; } }
+        public ushort Port
+        {
+            get { return this.sin6_port; }
+        }
 
         // Converts a sockaddr_in6 to IPAddress
         // A v4 mapped v6 address is converted to a v4 address
@@ -193,12 +228,12 @@ namespace System.ServiceModel.Channels
 
             if (IsV4Mapped)
             {
-                byte[] addr = 
+                byte[] addr =
                 {
                     this.sin6_addr[v4Index],
                     this.sin6_addr[v4Index + 1],
                     this.sin6_addr[v4Index + 2],
-                    this.sin6_addr[v4Index + 3] 
+                    this.sin6_addr[v4Index + 3],
                 };
                 return new IPAddress(addr);
             }
@@ -215,10 +250,18 @@ namespace System.ServiceModel.Channels
         int size;
         CriticalAllocHandleSocketAddress[] socketHandles;
 
-        public int Count { get { return count; } }
-        public int Size { get { return size; } }
+        public int Count
+        {
+            get { return count; }
+        }
+        public int Size
+        {
+            get { return size; }
+        }
 
-        public static CriticalAllocHandleSocketAddressList FromAddressList(ICollection<IPAddress> addresses)
+        public static CriticalAllocHandleSocketAddressList FromAddressList(
+            ICollection<IPAddress> addresses
+        )
         {
             if (addresses == null)
             {
@@ -226,19 +269,28 @@ namespace System.ServiceModel.Channels
             }
             int count = addresses.Count;
 
-            CriticalAllocHandleSocketAddress[] socketHandles = new CriticalAllocHandleSocketAddress[SocketAddressList.maxAddresses];
-            SocketAddressList socketAddressList = new SocketAddressList(new SocketAddress[SocketAddressList.maxAddresses], count);
+            CriticalAllocHandleSocketAddress[] socketHandles = new CriticalAllocHandleSocketAddress[
+                SocketAddressList.maxAddresses
+            ];
+            SocketAddressList socketAddressList = new SocketAddressList(
+                new SocketAddress[SocketAddressList.maxAddresses],
+                count
+            );
             int i = 0;
             foreach (IPAddress address in addresses)
             {
-                if (i == SocketAddressList.maxAddresses) break; // due to Marshalling fixed sized array of SocketAddresses.
+                if (i == SocketAddressList.maxAddresses)
+                    break; // due to Marshalling fixed sized array of SocketAddresses.
                 socketHandles[i] = CriticalAllocHandleSocketAddress.FromIPAddress(address);
-                socketAddressList.Addresses[i].InitializeFromCriticalAllocHandleSocketAddress(socketHandles[i]);
+                socketAddressList
+                    .Addresses[i]
+                    .InitializeFromCriticalAllocHandleSocketAddress(socketHandles[i]);
                 ++i;
             }
 
             int size = Marshal.SizeOf(socketAddressList);
-            CriticalAllocHandleSocketAddressList result = CriticalAllocHandleSocketAddressList.FromSize(size);
+            CriticalAllocHandleSocketAddressList result =
+                CriticalAllocHandleSocketAddressList.FromSize(size);
             result.count = count;
             result.socketHandles = socketHandles;
             Marshal.StructureToPtr(socketAddressList, result, false);
@@ -247,9 +299,13 @@ namespace System.ServiceModel.Channels
 
         public static CriticalAllocHandleSocketAddressList FromAddressCount(int count)
         {
-            SocketAddressList socketAddressList = new SocketAddressList(new SocketAddress[SocketAddressList.maxAddresses], 0);
+            SocketAddressList socketAddressList = new SocketAddressList(
+                new SocketAddress[SocketAddressList.maxAddresses],
+                0
+            );
             int size = Marshal.SizeOf(socketAddressList);
-            CriticalAllocHandleSocketAddressList result = CriticalAllocHandleSocketAddressList.FromSize(size);
+            CriticalAllocHandleSocketAddressList result =
+                CriticalAllocHandleSocketAddressList.FromSize(size);
             result.count = count;
             Marshal.StructureToPtr(socketAddressList, result, false);
             return result;
@@ -257,7 +313,8 @@ namespace System.ServiceModel.Channels
 
         static new CriticalAllocHandleSocketAddressList FromSize(int size)
         {
-            CriticalAllocHandleSocketAddressList result = new CriticalAllocHandleSocketAddressList();
+            CriticalAllocHandleSocketAddressList result =
+                new CriticalAllocHandleSocketAddressList();
             RuntimeHelpers.PrepareConstrainedRegions();
             try { }
             finally
@@ -270,15 +327,27 @@ namespace System.ServiceModel.Channels
 
         public ReadOnlyCollection<IPAddress> ToAddresses()
         {
-            SocketAddressList socketAddressList = (SocketAddressList)Marshal.PtrToStructure(this, typeof(SocketAddressList));
+            SocketAddressList socketAddressList = (SocketAddressList)
+                Marshal.PtrToStructure(this, typeof(SocketAddressList));
             IPAddress[] addresses = new IPAddress[socketAddressList.Count];
             for (int i = 0; i < addresses.Length; i++)
             {
-                if (!(socketAddressList.Addresses[i].SockAddrLength == Marshal.SizeOf(typeof(sockaddr_in6))))
+                if (
+                    !(
+                        socketAddressList.Addresses[i].SockAddrLength
+                        == Marshal.SizeOf(typeof(sockaddr_in6))
+                    )
+                )
                 {
-                    throw Fx.AssertAndThrow("sockAddressLength in SOCKET_ADDRESS expected to be valid");
+                    throw Fx.AssertAndThrow(
+                        "sockAddressLength in SOCKET_ADDRESS expected to be valid"
+                    );
                 }
-                sockaddr_in6 sockAddr = (sockaddr_in6)Marshal.PtrToStructure(socketAddressList.Addresses[i].SockAddr, typeof(sockaddr_in6));
+                sockaddr_in6 sockAddr = (sockaddr_in6)
+                    Marshal.PtrToStructure(
+                        socketAddressList.Addresses[i].SockAddr,
+                        typeof(sockaddr_in6)
+                    );
                 addresses[i] = sockAddr.ToIPAddress();
             }
 
@@ -290,7 +359,10 @@ namespace System.ServiceModel.Channels
     {
         int size;
 
-        public int Size { get { return size; } }
+        public int Size
+        {
+            get { return size; }
+        }
 
         public static CriticalAllocHandleSocketAddress FromIPAddress(IPAddress input)
         {

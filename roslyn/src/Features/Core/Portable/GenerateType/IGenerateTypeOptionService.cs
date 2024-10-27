@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.GenerateType
             Document document,
             INotificationService notificationService,
             IProjectManagementService projectManagementService,
-            ISyntaxFactsService syntaxFactsService);
+            ISyntaxFactsService syntaxFactsService
+        );
     }
 }

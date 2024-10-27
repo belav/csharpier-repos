@@ -5,12 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq.Expressions;
-
 using Moq.Expressions.Visitors;
 
 namespace Moq
 {
-
     /* Unmerged change from project 'Moq(netstandard2.0)'
     Before:
         internal sealed class ExpressionComparer : IEqualityComparer<Expression>
@@ -38,7 +36,6 @@ namespace Moq
         [ThreadStatic]
         static int quoteDepth = 0;
 
-
         /* Unmerged change from project 'Moq(netstandard2.0)'
         Before:
                 private ExpressionComparer()
@@ -59,9 +56,7 @@ namespace Moq
         After:
                 ExpressionComparer()
         */
-        ExpressionComparer()
-        {
-        }
+        ExpressionComparer() { }
 
         public bool Equals(Expression x, Expression y)
         {
@@ -140,9 +135,15 @@ namespace Moq
                     case ExpressionType.Power:
                         return this.EqualsBinary((BinaryExpression)x, (BinaryExpression)y);
                     case ExpressionType.TypeIs:
-                        return this.EqualsTypeBinary((TypeBinaryExpression)x, (TypeBinaryExpression)y);
+                        return this.EqualsTypeBinary(
+                            (TypeBinaryExpression)x,
+                            (TypeBinaryExpression)y
+                        );
                     case ExpressionType.Conditional:
-                        return this.EqualsConditional((ConditionalExpression)x, (ConditionalExpression)y);
+                        return this.EqualsConditional(
+                            (ConditionalExpression)x,
+                            (ConditionalExpression)y
+                        );
                     case ExpressionType.Constant:
                         return EqualsConstant((ConstantExpression)x, (ConstantExpression)y);
                     case ExpressionType.Parameter:
@@ -150,7 +151,10 @@ namespace Moq
                     case ExpressionType.MemberAccess:
                         return this.EqualsMember((MemberExpression)x, (MemberExpression)y);
                     case ExpressionType.Call:
-                        return this.EqualsMethodCall((MethodCallExpression)x, (MethodCallExpression)y);
+                        return this.EqualsMethodCall(
+                            (MethodCallExpression)x,
+                            (MethodCallExpression)y
+                        );
                     case ExpressionType.Lambda:
                         return this.EqualsLambda((LambdaExpression)x, (LambdaExpression)y);
                     case ExpressionType.New:
@@ -161,9 +165,15 @@ namespace Moq
                     case ExpressionType.Index:
                         return this.EqualsIndex((IndexExpression)x, (IndexExpression)y);
                     case ExpressionType.Invoke:
-                        return this.EqualsInvocation((InvocationExpression)x, (InvocationExpression)y);
+                        return this.EqualsInvocation(
+                            (InvocationExpression)x,
+                            (InvocationExpression)y
+                        );
                     case ExpressionType.MemberInit:
-                        return this.EqualsMemberInit((MemberInitExpression)x, (MemberInitExpression)y);
+                        return this.EqualsMemberInit(
+                            (MemberInitExpression)x,
+                            (MemberInitExpression)y
+                        );
                     case ExpressionType.ListInit:
                         return this.EqualsListInit((ListInitExpression)x, (ListInitExpression)y);
                 }
@@ -203,7 +213,11 @@ namespace Moq
             */
         }
 
-        static bool Equals<T>(ReadOnlyCollection<T> x, ReadOnlyCollection<T> y, Func<T, T, bool> comparer)
+        static bool Equals<T>(
+            ReadOnlyCollection<T> x,
+            ReadOnlyCollection<T> y,
+            Func<T, T, bool> comparer
+        )
         {
             if (x.Count != y.Count)
             {
@@ -244,8 +258,10 @@ namespace Moq
 
         bool EqualsBinary(BinaryExpression x, BinaryExpression y)
         {
-            return x.Method == y.Method && this.Equals(x.Left, y.Left) && this.Equals(x.Right, y.Right) &&
-                this.Equals(x.Conversion, y.Conversion);
+            return x.Method == y.Method
+                && this.Equals(x.Left, y.Left)
+                && this.Equals(x.Right, y.Right)
+                && this.Equals(x.Conversion, y.Conversion);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -271,7 +287,9 @@ namespace Moq
 
         bool EqualsConditional(ConditionalExpression x, ConditionalExpression y)
         {
-            return this.Equals(x.Test, y.Test) && this.Equals(x.IfTrue, y.IfTrue) && this.Equals(x.IfFalse, y.IfFalse);
+            return this.Equals(x.Test, y.Test)
+                && this.Equals(x.IfTrue, y.IfTrue)
+                && this.Equals(x.IfFalse, y.IfFalse);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -377,7 +395,8 @@ namespace Moq
 
         bool EqualsInvocation(InvocationExpression x, InvocationExpression y)
         {
-            return this.Equals(x.Expression, y.Expression) && Equals(x.Arguments, y.Arguments, this.Equals);
+            return this.Equals(x.Expression, y.Expression)
+                && Equals(x.Arguments, y.Arguments, this.Equals);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -403,8 +422,9 @@ namespace Moq
 
         bool EqualsLambda(LambdaExpression x, LambdaExpression y)
         {
-            return x.GetType() == y.GetType() && this.Equals(x.Body, y.Body) &&
-                Equals(x.Parameters, y.Parameters, this.EqualsParameter);
+            return x.GetType() == y.GetType()
+                && this.Equals(x.Body, y.Body)
+                && Equals(x.Parameters, y.Parameters, this.EqualsParameter);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -430,8 +450,8 @@ namespace Moq
 
         bool EqualsListInit(ListInitExpression x, ListInitExpression y)
         {
-            return this.EqualsNew(x.NewExpression, y.NewExpression) &&
-                Equals(x.Initializers, y.Initializers, this.EqualsElementInit);
+            return this.EqualsNew(x.NewExpression, y.NewExpression)
+                && Equals(x.Initializers, y.Initializers, this.EqualsElementInit);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -487,9 +507,18 @@ namespace Moq
             {
                 return x.BindingType switch
                 {
-                    MemberBindingType.Assignment => this.EqualsMemberAssignment((MemberAssignment)x, (MemberAssignment)y),
-                    MemberBindingType.MemberBinding => this.EqualsMemberMemberBinding((MemberMemberBinding)x, (MemberMemberBinding)y),
-                    MemberBindingType.ListBinding => this.EqualsMemberListBinding((MemberListBinding)x, (MemberListBinding)y),
+                    MemberBindingType.Assignment => this.EqualsMemberAssignment(
+                        (MemberAssignment)x,
+                        (MemberAssignment)y
+                    ),
+                    MemberBindingType.MemberBinding => this.EqualsMemberMemberBinding(
+                        (MemberMemberBinding)x,
+                        (MemberMemberBinding)y
+                    ),
+                    MemberBindingType.ListBinding => this.EqualsMemberListBinding(
+                        (MemberListBinding)x,
+                        (MemberListBinding)y
+                    ),
                     _ => throw new ArgumentOutOfRangeException(nameof(x)),
                 };
             }
@@ -546,8 +575,8 @@ namespace Moq
 
         bool EqualsMemberInit(MemberInitExpression x, MemberInitExpression y)
         {
-            return this.EqualsNew(x.NewExpression, y.NewExpression) &&
-                Equals(x.Bindings, y.Bindings, this.EqualsMemberBinding);
+            return this.EqualsNew(x.NewExpression, y.NewExpression)
+                && Equals(x.Bindings, y.Bindings, this.EqualsMemberBinding);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:
@@ -625,8 +654,9 @@ namespace Moq
 
         bool EqualsMethodCall(MethodCallExpression x, MethodCallExpression y)
         {
-            return x.Method == y.Method && this.Equals(x.Object, y.Object) &&
-                Equals(x.Arguments, y.Arguments, this.Equals);
+            return x.Method == y.Method
+                && this.Equals(x.Object, y.Object)
+                && Equals(x.Arguments, y.Arguments, this.Equals);
 
             /* Unmerged change from project 'Moq(netstandard2.0)'
             Before:

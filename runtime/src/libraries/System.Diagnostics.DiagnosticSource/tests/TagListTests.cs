@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Xunit;
 
 namespace System.Diagnostics.Tests
 {
@@ -18,7 +18,9 @@ namespace System.Diagnostics.Tests
                 ValidateTags(in tagList, i);
                 Assert.False(tagList.IsReadOnly);
 
-                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[tagList.Count];
+                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[
+                    tagList.Count
+                ];
                 tagList.CopyTo(array);
                 TagList list = new TagList(array.AsSpan());
                 ValidateTags(in tagList, i);
@@ -28,11 +30,7 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void TestInlineInitialization()
         {
-            TagList list = new TagList
-            {
-                { "Some Key", "Some Value" },
-                { "Some Other Key", 42 }
-            };
+            TagList list = new TagList { { "Some Key", "Some Value" }, { "Some Other Key", 42 } };
             Assert.Equal("Some Key", list[0].Key);
             Assert.Equal("Some Value", list[0].Value);
             Assert.Equal("Some Other Key", list[1].Key);
@@ -57,7 +55,9 @@ namespace System.Diagnostics.Tests
             for (int i = 0; i < 30; i++)
             {
                 CreateTagList(i, out TagList tagList);
-                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[tagList.Count];
+                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[
+                    tagList.Count
+                ];
                 tagList.CopyTo(array);
 
                 for (int j = 0; j < array.Length; j++)
@@ -66,8 +66,20 @@ namespace System.Diagnostics.Tests
                     Assert.Equal(j, tagList.IndexOf(array[j]));
                 }
 
-                Assert.False(tagList.Contains(new KeyValuePair<string, object?>("Not Exist Key", "Not Exist Value")));
-                Assert.Equal(-1, tagList.IndexOf(new KeyValuePair<string, object?>("Not Exist Other Key", "Not Exist Other Value")));
+                Assert.False(
+                    tagList.Contains(
+                        new KeyValuePair<string, object?>("Not Exist Key", "Not Exist Value")
+                    )
+                );
+                Assert.Equal(
+                    -1,
+                    tagList.IndexOf(
+                        new KeyValuePair<string, object?>(
+                            "Not Exist Other Key",
+                            "Not Exist Other Value"
+                        )
+                    )
+                );
             }
         }
 
@@ -77,7 +89,9 @@ namespace System.Diagnostics.Tests
             for (int i = 0; i < 20; i++)
             {
                 CreateTagList(i, out TagList tagList);
-                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[tagList.Count];
+                KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[
+                    tagList.Count
+                ];
                 tagList.CopyTo(array.AsSpan());
                 ValidateTags(tagList, array);
                 array = new KeyValuePair<string, object?>[tagList.Count];
@@ -161,7 +175,7 @@ namespace System.Diagnostics.Tests
 
             for (int i = 1; i < 10; i++)
             {
-                list.Insert(2, new KeyValuePair<string, object?>("Key!200" +i , i * 200));
+                list.Insert(2, new KeyValuePair<string, object?>("Key!200" + i, i * 200));
                 Assert.Equal(4 + i, list.Count);
                 Assert.Equal("Key!200" + i, list[2].Key);
                 Assert.Equal(i * 200, list[2].Value);
@@ -175,7 +189,10 @@ namespace System.Diagnostics.Tests
             // Test first with up to 8 tags
             for (int i = 1; i <= 8; i++)
             {
-                KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>("k" + i, "v" + i);
+                KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>(
+                    "k" + i,
+                    "v" + i
+                );
                 list.Add(kvp);
                 Assert.Equal(i, list.Count);
                 Assert.True(list.Contains(kvp));
@@ -187,7 +204,10 @@ namespace System.Diagnostics.Tests
             int count = list.Count;
             for (int i = 1; i <= 8; i++)
             {
-                KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>("k" + i, "v" + i);
+                KeyValuePair<string, object?> kvp = new KeyValuePair<string, object?>(
+                    "k" + i,
+                    "v" + i
+                );
                 Assert.True(list.Remove(kvp));
                 Assert.Equal(count - i, list.Count);
                 Assert.False(list.Contains(kvp));
@@ -199,9 +219,18 @@ namespace System.Diagnostics.Tests
             // Now we want to test more than 8 tags and test RemoveAt too
             for (int i = 1; i <= 20; i++)
             {
-                KeyValuePair<string, object?> kvp1 = new KeyValuePair<string, object?>("k-" + i, "v" + i);
-                KeyValuePair<string, object?> kvp2 = new KeyValuePair<string, object?>("k-" + i * 100, "v" + i * 100);
-                KeyValuePair<string, object?> kvp3 = new KeyValuePair<string, object?>("k-" + i * 1000, "v" + i * 1000);
+                KeyValuePair<string, object?> kvp1 = new KeyValuePair<string, object?>(
+                    "k-" + i,
+                    "v" + i
+                );
+                KeyValuePair<string, object?> kvp2 = new KeyValuePair<string, object?>(
+                    "k-" + i * 100,
+                    "v" + i * 100
+                );
+                KeyValuePair<string, object?> kvp3 = new KeyValuePair<string, object?>(
+                    "k-" + i * 1000,
+                    "v" + i * 1000
+                );
 
                 // We add 3 then remove 2.
                 list.Add(kvp1);
@@ -234,10 +263,12 @@ namespace System.Diagnostics.Tests
         public void TestEnumerator(int count)
         {
             CreateTagList(count, out TagList tagList);
-            KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[tagList.Count];
+            KeyValuePair<string, object?>[] array = new KeyValuePair<string, object?>[
+                tagList.Count
+            ];
             tagList.CopyTo(array);
 
-                Assert.Equal(count, tagList.Count);
+            Assert.Equal(count, tagList.Count);
             int i = 0;
             foreach (KeyValuePair<string, object?> kvp in tagList)
             {
@@ -281,7 +312,11 @@ namespace System.Diagnostics.Tests
         [Fact]
         public void TestNegativeCases()
         {
-            TagList list = new TagList { new KeyValuePair<string, object?>("1", 1), new KeyValuePair<string, object?>("2", 2) } ;
+            TagList list = new TagList
+            {
+                new KeyValuePair<string, object?>("1", 1),
+                new KeyValuePair<string, object?>("2", 2),
+            };
             KeyValuePair<string, object?> kvp = default;
 
             Assert.Throws<ArgumentOutOfRangeException>(() => kvp = list[2]);
@@ -318,8 +353,8 @@ namespace System.Diagnostics.Tests
             Assert.Equal(tagsCount, tagList.Count);
             for (int i = 0; i < tagList.Count; i++)
             {
-                Assert.Equal("Key"+i, tagList[i].Key);
-                Assert.Equal("Value"+i, tagList[i].Value);
+                Assert.Equal("Key" + i, tagList[i].Key);
+                Assert.Equal("Value" + i, tagList[i].Value);
             }
         }
 
@@ -333,5 +368,3 @@ namespace System.Diagnostics.Tests
         }
     }
 }
-
-

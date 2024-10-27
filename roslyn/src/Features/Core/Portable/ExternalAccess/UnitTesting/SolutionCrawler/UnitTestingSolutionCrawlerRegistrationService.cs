@@ -18,8 +18,15 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 {
-    [ExportWorkspaceService(typeof(IUnitTestingSolutionCrawlerRegistrationService), ServiceLayer.Host), Shared]
-    internal partial class UnitTestingSolutionCrawlerRegistrationService : IUnitTestingSolutionCrawlerRegistrationService
+    [
+        ExportWorkspaceService(
+            typeof(IUnitTestingSolutionCrawlerRegistrationService),
+            ServiceLayer.Host
+        ),
+        Shared
+    ]
+    internal partial class UnitTestingSolutionCrawlerRegistrationService
+        : IUnitTestingSolutionCrawlerRegistrationService
     {
         private const string Default = "*";
 
@@ -27,9 +34,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         private readonly UnitTestingSolutionCrawlerProgressReporter _progressReporter = new();
 
         private readonly IAsynchronousOperationListener _listener;
-        private readonly Dictionary<(string workspaceKind, SolutionServices services), UnitTestingWorkCoordinator> _documentWorkCoordinatorMap = new();
+        private readonly Dictionary<
+            (string workspaceKind, SolutionServices services),
+            UnitTestingWorkCoordinator
+        > _documentWorkCoordinatorMap = new();
 
-        private ImmutableDictionary<string, ImmutableArray<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>>> _analyzerProviders;
+        private ImmutableDictionary<
+            string,
+            ImmutableArray<
+                Lazy<
+                    IUnitTestingIncrementalAnalyzerProvider,
+                    UnitTestingIncrementalAnalyzerProviderMetadata
+                >
+            >
+        > _analyzerProviders;
 
         /// <summary>
         /// The last solution we've heard about from the <see cref="ILegacySolutionEventsListener"/>.  This is used by
@@ -41,10 +59,19 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public UnitTestingSolutionCrawlerRegistrationService(
-            [ImportMany] IEnumerable<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> analyzerProviders,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            [ImportMany]
+                IEnumerable<
+                Lazy<
+                    IUnitTestingIncrementalAnalyzerProvider,
+                    UnitTestingIncrementalAnalyzerProviderMetadata
+                >
+            > analyzerProviders,
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
-            _analyzerProviders = analyzerProviders.GroupBy(kv => kv.Metadata.Name).ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray());
+            _analyzerProviders = analyzerProviders
+                .GroupBy(kv => kv.Metadata.Name)
+                .ToImmutableDictionary(g => g.Key, g => g.ToImmutableArray());
             AssertAnalyzerProviders(_analyzerProviders);
 
             _listener = listenerProvider.GetListener(FeatureAttribute.SolutionCrawlerUnitTesting);
@@ -65,7 +92,12 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             lock (_gate)
             {
                 _lastReportedSolution = solution;
-                if (!_documentWorkCoordinatorMap.TryGetValue((workspaceKind, solutionServices), out coordinator))
+                if (
+                    !_documentWorkCoordinatorMap.TryGetValue(
+                        (workspaceKind, solutionServices),
+                        out coordinator
+                    )
+                )
                 {
                     coordinator = new UnitTestingWorkCoordinator(
                         _listener,
@@ -73,7 +105,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                         initializeLazily: true,
 #endif
-                        new UnitTestingRegistration(this, correlationId, workspaceKind, solutionServices, _progressReporter));
+                        new UnitTestingRegistration(
+                            this,
+                            correlationId,
+                            workspaceKind,
+                            solutionServices,
+                            _progressReporter
+                        )
+                    );
 
                     _documentWorkCoordinatorMap.Add((workspaceKind, solutionServices), coordinator);
                 }
@@ -115,26 +154,45 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             }
         }
 
-        public void AddAnalyzerProvider(IUnitTestingIncrementalAnalyzerProvider provider, UnitTestingIncrementalAnalyzerProviderMetadata metadata)
+        public void AddAnalyzerProvider(
+            IUnitTestingIncrementalAnalyzerProvider provider,
+            UnitTestingIncrementalAnalyzerProviderMetadata metadata
+        )
         {
             // now update all existing work coordinator
             lock (_gate)
             {
-                var lazyProvider = new Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>(() => provider, metadata);
+                var lazyProvider = new Lazy<
+                    IUnitTestingIncrementalAnalyzerProvider,
+                    UnitTestingIncrementalAnalyzerProviderMetadata
+                >(() => provider, metadata);
 
                 // update existing map for future solution crawler registration - no need for interlock but this makes add or update easier
-                ImmutableInterlocked.AddOrUpdate(ref _analyzerProviders, metadata.Name, n => ImmutableArray.Create(lazyProvider), (n, v) => v.Add(lazyProvider));
+                ImmutableInterlocked.AddOrUpdate(
+                    ref _analyzerProviders,
+                    metadata.Name,
+                    n => ImmutableArray.Create(lazyProvider),
+                    (n, v) => v.Add(lazyProvider)
+                );
 
                 // assert map integrity
                 AssertAnalyzerProviders(_analyzerProviders);
 
                 // find existing coordinator to update
                 var lazyProviders = _analyzerProviders[metadata.Name];
-                foreach (var ((workspaceKind, solutionServices), coordinator) in _documentWorkCoordinatorMap)
+                foreach (
+                    var (
+                        (workspaceKind, solutionServices),
+                        coordinator
+                    ) in _documentWorkCoordinatorMap
+                )
                 {
                     Contract.ThrowIfNull(workspaceKind);
 
-                    if (!TryGetProvider(workspaceKind, lazyProviders, out var picked) || picked != lazyProvider)
+                    if (
+                        !TryGetProvider(workspaceKind, lazyProviders, out var picked)
+                        || picked != lazyProvider
+                    )
                     {
                         // check whether new provider belong to current workspace
                         continue;
@@ -147,19 +205,31 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                             , metadata.HighPriorityForActiveFile
 #endif
-                            );
+                        );
                     }
                 }
             }
         }
 
-        public void Reanalyze(string? workspaceKind, SolutionServices services, IUnitTestingIncrementalAnalyzer analyzer, IEnumerable<ProjectId>? projectIds, IEnumerable<DocumentId>? documentIds, bool highPriority)
+        public void Reanalyze(
+            string? workspaceKind,
+            SolutionServices services,
+            IUnitTestingIncrementalAnalyzer analyzer,
+            IEnumerable<ProjectId>? projectIds,
+            IEnumerable<DocumentId>? documentIds,
+            bool highPriority
+        )
         {
             Contract.ThrowIfNull(workspaceKind);
 
             lock (_gate)
             {
-                if (!_documentWorkCoordinatorMap.TryGetValue((workspaceKind, services), out var coordinator))
+                if (
+                    !_documentWorkCoordinatorMap.TryGetValue(
+                        (workspaceKind, services),
+                        out var coordinator
+                    )
+                )
                 {
                     // this can happen if solution crawler is already unregistered from workspace.
                     // one of those example will be VS shutting down so roslyn package is disposed but there is a pending
@@ -175,19 +245,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #if false // Not used in unit testing crawling
                         , highPriority
 #endif
-                        );
+                    );
                     return;
                 }
 
-                coordinator.Reanalyze(analyzer, new UnitTestingReanalyzeScope(projectIds, documentIds)
+                coordinator.Reanalyze(
+                    analyzer,
+                    new UnitTestingReanalyzeScope(projectIds, documentIds)
 #if false // Not used in unit testing crawling
                     , highPriority
 #endif
-                    );
+                );
             }
         }
 
-        private IEnumerable<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> GetAnalyzerProviders(string workspaceKind)
+        private IEnumerable<
+            Lazy<
+                IUnitTestingIncrementalAnalyzerProvider,
+                UnitTestingIncrementalAnalyzerProviderMetadata
+            >
+        > GetAnalyzerProviders(string workspaceKind)
         {
             foreach (var (_, lazyProviders) in _analyzerProviders)
             {
@@ -208,8 +285,18 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
         private static bool TryGetProvider(
             string kind,
-            ImmutableArray<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>> lazyProviders,
-            [NotNullWhen(true)] out Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>? lazyProvider)
+            ImmutableArray<
+                Lazy<
+                    IUnitTestingIncrementalAnalyzerProvider,
+                    UnitTestingIncrementalAnalyzerProviderMetadata
+                >
+            > lazyProviders,
+            [NotNullWhen(true)]
+                out Lazy<
+                IUnitTestingIncrementalAnalyzerProvider,
+                UnitTestingIncrementalAnalyzerProviderMetadata
+            >? lazyProvider
+        )
         {
             // set out param
             lazyProvider = null;
@@ -246,7 +333,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 
         [Conditional("DEBUG")]
         private static void AssertAnalyzerProviders(
-            ImmutableDictionary<string, ImmutableArray<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>>> analyzerProviders)
+            ImmutableDictionary<
+                string,
+                ImmutableArray<
+                    Lazy<
+                        IUnitTestingIncrementalAnalyzerProvider,
+                        UnitTestingIncrementalAnalyzerProviderMetadata
+                    >
+                >
+            > analyzerProviders
+        )
         {
 #if DEBUG
             // make sure there is duplicated provider defined for same workspace.
@@ -272,8 +368,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
 #endif
         }
 
-        private static bool IsDefaultProvider(UnitTestingIncrementalAnalyzerProviderMetadata providerMetadata)
-            => providerMetadata.WorkspaceKinds == null || providerMetadata.WorkspaceKinds.Count == 0;
+        private static bool IsDefaultProvider(
+            UnitTestingIncrementalAnalyzerProviderMetadata providerMetadata
+        ) => providerMetadata.WorkspaceKinds == null || providerMetadata.WorkspaceKinds.Count == 0;
 
         internal TestAccessor GetTestAccessor()
         {
@@ -284,13 +381,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
         {
             private readonly UnitTestingSolutionCrawlerRegistrationService _solutionCrawlerRegistrationService;
 
-            internal TestAccessor(UnitTestingSolutionCrawlerRegistrationService solutionCrawlerRegistrationService)
+            internal TestAccessor(
+                UnitTestingSolutionCrawlerRegistrationService solutionCrawlerRegistrationService
+            )
             {
                 _solutionCrawlerRegistrationService = solutionCrawlerRegistrationService;
             }
 
-            internal ref ImmutableDictionary<string, ImmutableArray<Lazy<IUnitTestingIncrementalAnalyzerProvider, UnitTestingIncrementalAnalyzerProviderMetadata>>> AnalyzerProviders
-                => ref _solutionCrawlerRegistrationService._analyzerProviders;
+            internal ref ImmutableDictionary<
+                string,
+                ImmutableArray<
+                    Lazy<
+                        IUnitTestingIncrementalAnalyzerProvider,
+                        UnitTestingIncrementalAnalyzerProviderMetadata
+                    >
+                >
+            > AnalyzerProviders => ref _solutionCrawlerRegistrationService._analyzerProviders;
 
 #if false // Not used in unit testing crawling
             internal bool TryGetWorkCoordinator(Workspace workspace, [NotNullWhen(true)] out UnitTestingWorkCoordinator? coordinator)
@@ -324,14 +430,16 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.UnitTesting.SolutionCrawler
             int correlationId,
             string workspaceKind,
             SolutionServices solutionServices,
-            UnitTestingSolutionCrawlerProgressReporter progressReporter)
+            UnitTestingSolutionCrawlerProgressReporter progressReporter
+        )
         {
             private readonly UnitTestingSolutionCrawlerRegistrationService _owner = owner;
 
             public readonly int CorrelationId = correlationId;
             public readonly string WorkspaceKind = workspaceKind;
             public readonly SolutionServices Services = solutionServices;
-            public readonly UnitTestingSolutionCrawlerProgressReporter ProgressReporter = progressReporter;
+            public readonly UnitTestingSolutionCrawlerProgressReporter ProgressReporter =
+                progressReporter;
 
             public Solution GetSolutionToAnalyze()
             {

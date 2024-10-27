@@ -10,6 +10,12 @@ public class ConstraintsTestHelper
         var parameterName = "fake";
         var values = new RouteValueDictionary() { { parameterName, value } };
         var routeDirection = RouteDirection.IncomingRequest;
-        return constraint.Match(httpContext: null, route: null, parameterName, values, routeDirection);
+        return constraint.Match(
+            httpContext: null,
+            route: null,
+            parameterName,
+            values,
+            routeDirection
+        );
     }
 }

@@ -27,11 +27,17 @@ namespace BenchmarksGame
 {
     public class pidigits
     {
-        BigInteger q = new BigInteger(), r = new BigInteger(), s = new BigInteger(), t = new BigInteger();
-        BigInteger u = new BigInteger(), v = new BigInteger(), w = new BigInteger();
+        BigInteger q = new BigInteger(),
+            r = new BigInteger(),
+            s = new BigInteger(),
+            t = new BigInteger();
+        BigInteger u = new BigInteger(),
+            v = new BigInteger(),
+            w = new BigInteger();
 
         int i;
-        StringBuilder strBuf = new StringBuilder(40), lastBuf = null;
+        StringBuilder strBuf = new StringBuilder(40),
+            lastBuf = null;
         int n;
 
         pidigits(int n)
@@ -87,10 +93,13 @@ namespace BenchmarksGame
             {
                 if (i % 10 != 0)
                     for (int j = 10 - (i % 10); j > 0; j--)
-                    { strBuf.Append(" "); }
+                    {
+                        strBuf.Append(" ");
+                    }
                 strBuf.Append("\t:");
                 strBuf.Append(i);
-                if (verbose) Console.WriteLine(strBuf);
+                if (verbose)
+                    Console.WriteLine(strBuf);
                 lastBuf = strBuf;
                 strBuf = new StringBuilder(40);
             }

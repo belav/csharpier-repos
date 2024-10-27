@@ -24,7 +24,8 @@ namespace System.Security.Cryptography.Tests
             // Since the CNG PKCS8 import will re-write these keys with Q=(0,0)
             // in the PrivateKeyInfo, we want to make sure that the Attributes
             // are kept.
-            const string base64 = @"
+            const string base64 =
+                @"
 MIIBQgIBADCCAQMGByqGSM49AgEwgfcCAQEwLAYHKoZIzj0BAQIhAP////8AAAAB
 AAAAAAAAAAAAAAAA////////////////MFsEIP////8AAAABAAAAAAAAAAAAAAAA
 ///////////////8BCBaxjXYqjqT57PrvVV2mIa8ZR0GsMxTsPY7zjw+J9JgSwMV
@@ -35,14 +36,17 @@ AAAA//////////+85vqtpxeehPO5ysL8YyVRAgEBBCcwJQIBAQQgcKEsLbFoRe1W
 
             T key = CreateKey();
             key.ImportPkcs8PrivateKey(Convert.FromBase64String(base64), out _);
-            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(() => Exercise(key));
+            CryptographicException ex = Assert.ThrowsAny<CryptographicException>(
+                () => Exercise(key)
+            );
             Assert.Equal(NTE_PERM, ex.HResult);
         }
 
         [Fact]
         public void ReadWriteNistP521Pkcs8_LimitedPrivate()
         {
-            const string base64 = @"
+            const string base64 =
+                @"
 MGACAQAwEAYHKoZIzj0CAQYFK4EEACMESTBHAgEBBEIBpV+HhaVzC67h1rPTAQaf
 f9ZNiwTM6lfv1ZYeaPM/q0NUUWbKZVPNOP9xPRKJxpi9fQhrVeAbW9XtJ+NjA3ax
 FmY=";
@@ -53,7 +57,8 @@ FmY=";
         [Fact]
         public void ReadNistP521EncryptedPkcs8_Pbes2_Aes128_LimitedPrivateKey()
         {
-            const string base64 = @"
+            const string base64 =
+                @"
 MIHLMFcGCSqGSIb3DQEFDTBKMCkGCSqGSIb3DQEFDDAcBAiS8R2OYS+H4wICCAAw
 DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEEB8zZ4/4VXlh4WPKYssZeNEEcBsA
 EHOyooViqm3L/Zn04q+v1yzY+OvegfeTDpvSHCepckKEYklMB2K/O47PlH+jojKo
@@ -66,15 +71,18 @@ PFzVQfJ396S+yx4IIC4=";
                 new PbeParameters(
                     PbeEncryptionAlgorithm.TripleDes3KeyPkcs12,
                     HashAlgorithmName.SHA1,
-                    12321),
+                    12321
+                ),
                 EccTestData.GetNistP521Key2(),
-                CanDeriveNewPublicKey);
+                CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
         public void ReadNistP521EncryptedPkcs8_Pbes2_Aes128_LimitedPrivateKey_PasswordBytes()
         {
-            const string base64 = @"
+            const string base64 =
+                @"
 MIHLMFcGCSqGSIb3DQEFDTBKMCkGCSqGSIb3DQEFDDAcBAiS8R2OYS+H4wICCAAw
 DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEEB8zZ4/4VXlh4WPKYssZeNEEcBsA
 EHOyooViqm3L/Zn04q+v1yzY+OvegfeTDpvSHCepckKEYklMB2K/O47PlH+jojKo
@@ -84,25 +92,25 @@ PFzVQfJ396S+yx4IIC4=";
             ReadWriteBase64EncryptedPkcs8(
                 base64,
                 "qwerty"u8.ToArray(),
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes256Cbc,
-                    HashAlgorithmName.SHA1,
-                    12321),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA1, 12321),
                 EccTestData.GetNistP521Key2(),
-                CanDeriveNewPublicKey);
+                CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
         public void ReadWriteNistP256ECPrivateKey_LimitedPrivateKey()
         {
-            const string base64 = @"
+            const string base64 =
+                @"
 MDECAQEEIHChLC2xaEXtVv9oz8IaRys/BNfWhRv2NJ8tfVs0UrOKoAoGCCqGSM49
 AwEH";
 
             ReadWriteBase64ECPrivateKey(
                 base64,
                 EccTestData.GetNistP256ReferenceKey(),
-                CanDeriveNewPublicKey);
+                CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -118,7 +126,8 @@ axfR8uEsQkf4vOblY6RA8ncDfYEt6zOg9KE5RdiYwpZP40Li/hp/m47n60p8D54W
 K84zV2sxXs7LtkBoN79R9QIhAP////8AAAAA//////////+85vqtpxeehPO5ysL8
 YyVRAgEB",
                 EccTestData.GetNistP256ReferenceKeyExplicit(),
-                SupportsExplicitCurves && CanDeriveNewPublicKey);
+                SupportsExplicitCurves && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -134,7 +143,8 @@ AMSdNgiG5wSTamZ44ROdJreBn36QBEEEaxfR8uEsQkf4vOblY6RA8ncDfYEt6zOg
 AAAA//////////+85vqtpxeehPO5ysL8YyVRAgEBBCcwJQIBAQQgcKEsLbFoRe1W
 /2jPwhpHKz8E19aFG/Y0ny19WzRSs4o=",
                 EccTestData.GetNistP256ReferenceKeyExplicit(),
-                SupportsExplicitCurves && CanDeriveNewPublicKey);
+                SupportsExplicitCurves && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -152,12 +162,10 @@ U4vrY201zbeyqVRsabSaru/xQwDUHA++FmiJuY8p0T3y7u0pKtPkdGTBnYjWqcDc
 BSJFRM1hEoL4pr7fCtb4mdnEoWGIG6O7SYr92M3TAxFcYEEMSUJi7TxEAmPAKpYe
 hjy6jYfLa1BCJhvq+WbNc7zEb2MfXVhnImaG+XTqXI0c",
                 "test",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes128Cbc,
-                    HashAlgorithmName.SHA256,
-                    1234),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes128Cbc, HashAlgorithmName.SHA256, 1234),
                 EccTestData.GetNistP256ReferenceKeyExplicit(),
-                SupportsExplicitCurves && CanDeriveNewPublicKey);
+                SupportsExplicitCurves && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -166,7 +174,8 @@ hjy6jYfLa1BCJhvq+WbNc7zEb2MfXVhnImaG+XTqXI0c",
             ReadWriteBase64ECPrivateKey(
                 "MCYCAQEEFMXZRFR94RXbJYjcb966O0c+nE2WoAsGCSskAwMCCAEBAQ==",
                 EccTestData.BrainpoolP160r1Key1,
-                SupportsBrainpool && CanDeriveNewPublicKey);
+                SupportsBrainpool && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -177,7 +186,8 @@ hjy6jYfLa1BCJhvq+WbNc7zEb2MfXVhnImaG+XTqXI0c",
 MDYCAQAwFAYHKoZIzj0CAQYJKyQDAwIIAQEBBBswGQIBAQQUxdlEVH3hFdsliNxv
 3ro7Rz6cTZY=",
                 EccTestData.BrainpoolP160r1Key1,
-                SupportsBrainpool && CanDeriveNewPublicKey);
+                SupportsBrainpool && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -190,12 +200,10 @@ DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEEKU1rOHbrpBkttHYwlM7e8gEQBNB
 7CJfOdSzyntp2X212/dU3Tu6pa1BEh6hdfljYPnBNRbrSFjzavRhjUoOOEzLgaqr
 heDtThcoFBJUsNhEHrc=",
                 "chicken",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes192Cbc,
-                    HashAlgorithmName.SHA384,
-                    4096),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes192Cbc, HashAlgorithmName.SHA384, 4096),
                 EccTestData.BrainpoolP160r1Key1,
-                SupportsBrainpool && CanDeriveNewPublicKey);
+                SupportsBrainpool && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -204,7 +212,8 @@ heDtThcoFBJUsNhEHrc=",
             ReadWriteBase64ECPrivateKey(
                 "MCMCAQEEFQPBmVrfrowFGNwT3+YwS7AQF+akEqAHBgUrgQQAAQ==",
                 EccTestData.Sect163k1Key1,
-                SupportsSect163k1Explicit && CanDeriveNewPublicKey);
+                SupportsSect163k1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -215,7 +224,8 @@ heDtThcoFBJUsNhEHrc=",
 MDMCAQAwEAYHKoZIzj0CAQYFK4EEAAEEHDAaAgEBBBUDwZla366MBRjcE9/mMEuw
 EBfmpBI=",
                 EccTestData.Sect163k1Key1,
-                SupportsSect163k1 && CanDeriveNewPublicKey);
+                SupportsSect163k1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -229,7 +239,8 @@ AAAAAAABBBUAAAAAAAAAAAAAAAAAAAAAAAAAAAEEKwQC/hPAU3u8EayqB9eT3k5t
 XlyU7ugCiQcPsF04/1gyHy6ABTbVOMzao9kCFQQAAAAAAAAAAAACAQii4MwNmfil
 7wIBAg==",
                 EccTestData.Sect163k1Key1Explicit,
-                SupportsSect163k1Explicit && CanDeriveNewPublicKey);
+                SupportsSect163k1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -243,7 +254,8 @@ AAAAAAAAAAAAAAAAAAABBCsEAv4TwFN7vBGsqgfXk95ObV5clO7oAokHD7BdOP9Y
 Mh8ugAU21TjM2qPZAhUEAAAAAAAAAAAAAgEIouDMDZn4pe8CAQIEHDAaAgEBBBUD
 wZla366MBRjcE9/mMEuwEBfmpBI=",
                 EccTestData.Sect163k1Key1Explicit,
-                SupportsSect163k1Explicit && CanDeriveNewPublicKey);
+                SupportsSect163k1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -256,12 +268,10 @@ DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEENKfCUCiZgnSk3NJ1fYNsfsEQEiv
 8tmNavm0fpTJFrAikkaj4BOwz87uce+AoMHaI9kH0dHR4oX5L4euffHY9NwYjywd
 2OTmoam/Bux6qv2V1vM=",
                 "dinner",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes256Cbc,
-                    HashAlgorithmName.SHA256,
-                    7),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 7),
                 EccTestData.Sect163k1Key1,
-                SupportsSect163k1 && CanDeriveNewPublicKey);
+                SupportsSect163k1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -277,12 +287,10 @@ NU0YrkKbg2TyKi62Uh410kgwE/IHqbfoeQZl9P7MDIrah1hR9yk6DTeJE8WRI2BX
 d4sHylN7CUBYGVAtZ7fHwK0CsyggK/7/IoexhoaTUvzXi3xS8rEjY+5w8OcweCnr
 RVA9DXUNz5+yUlfGzgErHYGwRLaLCACU6+WAC34Kkyk=",
                 "test",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes256Cbc,
-                    HashAlgorithmName.SHA256,
-                    7),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 7),
                 EccTestData.Sect163k1Key1Explicit,
-                SupportsSect163k1Explicit && CanDeriveNewPublicKey);
+                SupportsSect163k1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -293,7 +301,8 @@ RVA9DXUNz5+yUlfGzgErHYGwRLaLCACU6+WAC34Kkyk=",
 MDICAQEEJAC08a4ef9zUsOggU8CKkIhSsmIx5sAWcPzGw+osXT/tQO3wN6AHBgUr
 gQQAEA==",
                 EccTestData.Sect283k1Key1,
-                SupportsSect283k1 && CanDeriveNewPublicKey);
+                SupportsSect283k1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -307,7 +316,8 @@ yJQ13lJCBBUAyVF9BtUkDTz/OMdLILbNTW+d1NkDFQDSwPsVdghg3vHu9NaW5naH
 VhUXVAQrBAevaZiVRhA9eTKfzD10iA8zu+gDywHsIyEbWWat6h0/h/fqWEiu8LfK
 nwIVBAAAAAAAAAAAAAHmD8iCHMdNrq/BAgEC",
                 EccTestData.C2pnb163v1Key1Explicit,
-                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -321,7 +331,8 @@ JA08/zjHSyC2zU1vndTZAxUA0sD7FXYIYN7x7vTWluZ2h1YVF1QEKwQHr2mYlUYQ
 PXkyn8w9dIgPM7voA8sB7CMhG1lmreodP4f36lhIrvC3yp8CFQQAAAAAAAAAAAAB
 5g/IghzHTa6vwQIBAgQcMBoCAQEEFQD00koUBxIvRFlnvh2TwAk6ZTZ5hg==",
                 EccTestData.C2pnb163v1Key1Explicit,
-                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -337,12 +348,10 @@ cIB+jp8kGPDQckBBp+R4i2qPYRSKzANEHegDeu9s24IQk2+B3b5uqynkVJa2z+Dp
 fyL21cPvHEx04p39oKmWh7S5M6FjHAu/9eGHQtiJ/QKisMgE1ICf+OmO6nfFhNnZ
 AerBJbccwFJfDAXP+eW3qWtaMgulL0gUYZQ7FcXH+z5CAWwdarLOCDZGqvQFtZ16",
                 "meow",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes256Cbc,
-                    HashAlgorithmName.SHA256,
-                    7),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes256Cbc, HashAlgorithmName.SHA256, 7),
                 EccTestData.C2pnb163v1Key1Explicit,
-                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1Explicit && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -353,7 +362,8 @@ AerBJbccwFJfDAXP+eW3qWtaMgulL0gUYZQ7FcXH+z5CAWwdarLOCDZGqvQFtZ16",
 MEICAQAwEAYHKoZIzj0CAQYFK4EEABAEKzApAgEBBCQAtPGuHn/c1LDoIFPAipCI
 UrJiMebAFnD8xsPqLF0/7UDt8Dc=",
                 EccTestData.Sect283k1Key1,
-                SupportsSect283k1 && CanDeriveNewPublicKey);
+                SupportsSect283k1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -366,12 +376,10 @@ DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEEAkgh22WW899Po2QL5+Yz4gEUKHh
 /hrl7Ia0jUr5dJ++pEOwWgpdvn8zV+6pt2d0w8D3DAJaJNEqgpaqH6uHS/tYJxWS
 vW82QOEXDhi1gO24nhx2gUeqVTHjhFq14blAu5l5",
                 "Enter PEM pass phrase",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes192Cbc,
-                    HashAlgorithmName.SHA384,
-                    4096),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes192Cbc, HashAlgorithmName.SHA384, 4096),
                 EccTestData.Sect283k1Key1,
-                SupportsSect283k1 && CanDeriveNewPublicKey);
+                SupportsSect283k1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -380,7 +388,8 @@ vW82QOEXDhi1gO24nhx2gUeqVTHjhFq14blAu5l5",
             ReadWriteBase64ECPrivateKey(
                 "MCYCAQEEFQD00koUBxIvRFlnvh2TwAk6ZTZ5hqAKBggqhkjOPQMAAQ==",
                 EccTestData.C2pnb163v1Key1,
-                SupportsC2pnb163v1 && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -391,7 +400,8 @@ vW82QOEXDhi1gO24nhx2gUeqVTHjhFq14blAu5l5",
 MDYCAQAwEwYHKoZIzj0CAQYIKoZIzj0DAAEEHDAaAgEBBBUA9NJKFAcSL0RZZ74d
 k8AJOmU2eYY=",
                 EccTestData.C2pnb163v1Key1,
-                SupportsC2pnb163v1 && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1 && CanDeriveNewPublicKey
+            );
         }
 
         [Fact]
@@ -404,12 +414,10 @@ DAYIKoZIhvcNAgkFADAdBglghkgBZQMEAQIEEKWBssmLHI618uBvF0PA4VoEQIDy
 4luj/sC8xYPCCDX8YQ6ppmkq+5aBw9Rwxrp/1wsrkDUhrU1wCN3eV1sFu+OCEdzQ
 1N8AhXsRbbNjXWKX25U=",
                 "sleepy",
-                new PbeParameters(
-                    PbeEncryptionAlgorithm.Aes192Cbc,
-                    HashAlgorithmName.SHA512,
-                    1024),
+                new PbeParameters(PbeEncryptionAlgorithm.Aes192Cbc, HashAlgorithmName.SHA512, 1024),
                 EccTestData.C2pnb163v1Key1,
-                SupportsC2pnb163v1 && CanDeriveNewPublicKey);
+                SupportsC2pnb163v1 && CanDeriveNewPublicKey
+            );
         }
     }
 }

@@ -21,10 +21,12 @@ namespace UnsafeTesting
             Console.WriteLine($"No Vectors          : {NoVectors}");
             float ManualVectors = LengthSquaredUnsafeReadUnaligned();
             Console.WriteLine($"Manual Vectors      : {ManualVectors}");
-            if ((Math.Abs(UnsafeAs - ManualVectors) > Single.Epsilon) ||
-                (Math.Abs(UnsafeRead - ManualVectors) > Single.Epsilon) ||
-                (Math.Abs(UnsafeReadUnaligned - ManualVectors) > Single.Epsilon) ||
-                (Math.Abs(NoVectors - ManualVectors) > Single.Epsilon))
+            if (
+                (Math.Abs(UnsafeAs - ManualVectors) > Single.Epsilon)
+                || (Math.Abs(UnsafeRead - ManualVectors) > Single.Epsilon)
+                || (Math.Abs(UnsafeReadUnaligned - ManualVectors) > Single.Epsilon)
+                || (Math.Abs(NoVectors - ManualVectors) > Single.Epsilon)
+            )
             {
                 Console.WriteLine("FAIL");
                 return -1;
@@ -113,7 +115,9 @@ namespace UnsafeTesting
 
         public float LengthSquaredUnsafeReadUnaligned()
         {
-            Vector4 q = Unsafe.ReadUnaligned<Vector4>(ref Unsafe.As<QuaternionStruct, byte>(ref this));
+            Vector4 q = Unsafe.ReadUnaligned<Vector4>(
+                ref Unsafe.As<QuaternionStruct, byte>(ref this)
+            );
 
             return q.LengthSquared();
         }
@@ -144,7 +148,12 @@ namespace UnsafeTesting
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private static Vector4 ToVector4(QuaternionStruct quaternionStruct)
         {
-            return new Vector4(quaternionStruct.X, quaternionStruct.Y, quaternionStruct.Z, quaternionStruct.W);
+            return new Vector4(
+                quaternionStruct.X,
+                quaternionStruct.Y,
+                quaternionStruct.Z,
+                quaternionStruct.W
+            );
         }
     }
 }

@@ -21,8 +21,9 @@ public class TestFilter
     public enum TermKind
     {
         FullyQualifiedName,
-        DisplayName
+        DisplayName,
     }
+
     public sealed class NameClause : ISearchClause
     {
         public NameClause(TermKind kind, string filter, bool substring)
@@ -42,7 +43,7 @@ public class TestFilter
             {
                 TermKind.FullyQualifiedName => fullyQualifiedName,
                 TermKind.DisplayName => displayName,
-                _ => throw new InvalidOperationException()
+                _ => throw new InvalidOperationException(),
             };
 
             if (Substring)
@@ -109,8 +110,8 @@ public class TestFilter
             _inner = inner;
         }
 
-        public bool IsMatch(string fullyQualifiedName, string displayName, string[] traits)
-            => !_inner.IsMatch(fullyQualifiedName, displayName, traits);
+        public bool IsMatch(string fullyQualifiedName, string displayName, string[] traits) =>
+            !_inner.IsMatch(fullyQualifiedName, displayName, traits);
 
         public override string ToString()
         {
@@ -134,10 +135,11 @@ public class TestFilter
     private readonly int _stripeCount = 1;
     private int _shouldRunQuery = -1;
 
-    public TestFilter(string? filterString, Dictionary<string, string>? testExclusionTable) :
-        this(filterString == null ? Array.Empty<string>() : new string[]{filterString}, testExclusionTable)
-    {
-    }
+    public TestFilter(string? filterString, Dictionary<string, string>? testExclusionTable)
+        : this(
+            filterString == null ? Array.Empty<string>() : new string[] { filterString },
+            testExclusionTable
+        ) { }
 
     public TestFilter(string[] filterArgs, Dictionary<string, string>? testExclusionTable)
     {
@@ -156,14 +158,18 @@ public class TestFilter
             }
         }
 
-        var stripeEnvironment = Environment.GetEnvironmentVariable("TEST_HARNESS_STRIPE_TO_EXECUTE");
+        var stripeEnvironment = Environment.GetEnvironmentVariable(
+            "TEST_HARNESS_STRIPE_TO_EXECUTE"
+        );
         if (!string.IsNullOrEmpty(stripeEnvironment) && stripeEnvironment != ".0.1")
         {
             var stripes = stripeEnvironment.Split('.');
             if (stripes.Length == 3)
             {
-                Console.WriteLine($"Test striping enabled via TEST_HARNESS_STRIPE_TO_EXECUTE environment"
-                                  + $" variable set to '{stripeEnvironment}'");
+                Console.WriteLine(
+                    $"Test striping enabled via TEST_HARNESS_STRIPE_TO_EXECUTE environment"
+                        + $" variable set to '{stripeEnvironment}'"
+                );
                 _stripe = int.Parse(stripes[1]);
                 _stripeCount = int.Parse(stripes[2]);
             }
@@ -173,12 +179,14 @@ public class TestFilter
         {
             if (filterString.IndexOfAny(new[] { '!', '(', ')', '~', '=' }) != -1)
             {
-                throw new ArgumentException("Complex test filter expressions are not supported today."
-                                          + " The only filters currently supported are the simple forms"
-                                          + " supported in 'dotnet test --filter' (substrings of the"
-                                          + " test's fully qualified name). If further filtering options"
-                                          + " are desired, file an issue on dotnet/runtime for support.",
-                                            nameof(filterArgs));
+                throw new ArgumentException(
+                    "Complex test filter expressions are not supported today."
+                        + " The only filters currently supported are the simple forms"
+                        + " supported in 'dotnet test --filter' (substrings of the"
+                        + " test's fully qualified name). If further filtering options"
+                        + " are desired, file an issue on dotnet/runtime for support.",
+                    nameof(filterArgs)
+                );
             }
             _filter = new NameClause(TermKind.FullyQualifiedName, filterString, substring: true);
         }
@@ -191,10 +199,17 @@ public class TestFilter
         _testExclusionTable = testExclusionTable;
     }
 
-    public bool ShouldRunTest(string fullyQualifiedName, string displayName, string[]? traits = null)
+    public bool ShouldRunTest(
+        string fullyQualifiedName,
+        string displayName,
+        string[]? traits = null
+    )
     {
         bool shouldRun;
-        if (_testExclusionTable is not null && _testExclusionTable.ContainsKey(displayName.Replace("\\", "/")))
+        if (
+            _testExclusionTable is not null
+            && _testExclusionTable.ContainsKey(displayName.Replace("\\", "/"))
+        )
         {
             shouldRun = false;
         }
@@ -204,7 +219,11 @@ public class TestFilter
         }
         else
         {
-            shouldRun = _filter.IsMatch(fullyQualifiedName, displayName, traits ?? Array.Empty<string>());
+            shouldRun = _filter.IsMatch(
+                fullyQualifiedName,
+                displayName,
+                traits ?? Array.Empty<string>()
+            );
         }
 
         if (shouldRun)
@@ -223,8 +242,8 @@ public class TestFilter
         string trueDisplayName = testDisplayName.Replace("\\", "/");
 
         return _testExclusionTable.ContainsKey(trueDisplayName)
-               ? _testExclusionTable[trueDisplayName]
-               : string.Empty;
+            ? _testExclusionTable[trueDisplayName]
+            : string.Empty;
     }
 
     // GH dotnet/runtime issue #91562: Some tests are purposefully not run for a number
@@ -250,11 +269,15 @@ public class TestFilter
 
         // Try reading the exclusion list as a base64-encoded semicolon-delimited string as a commmand-line arg.
         string[] arguments = Environment.GetCommandLineArgs();
-        string? testExclusionListArg = arguments.FirstOrDefault(arg => arg.StartsWith("--exclusion-list="));
+        string? testExclusionListArg = arguments.FirstOrDefault(arg =>
+            arg.StartsWith("--exclusion-list=")
+        );
 
         if (!string.IsNullOrEmpty(testExclusionListArg))
         {
-            string testExclusionListPathFromCommandLine = testExclusionListArg.Substring("--exclusion-list=".Length);
+            string testExclusionListPathFromCommandLine = testExclusionListArg.Substring(
+                "--exclusion-list=".Length
+            );
             ReadExclusionListToTable(testExclusionListPathFromCommandLine, output);
         }
 
@@ -268,11 +291,13 @@ public class TestFilter
         return output;
     }
 
-    private static void ReadExclusionListToTable(string exclusionListPath,
-                                                 Dictionary<string, string> table)
+    private static void ReadExclusionListToTable(
+        string exclusionListPath,
+        Dictionary<string, string> table
+    )
     {
         IEnumerable<string[]> excludedTestsWithReasons = File.ReadAllLines(exclusionListPath)
-                                                             .Select(t => t.Split(','));
+            .Select(t => t.Split(','));
 
         foreach (string[] testInfo in excludedTestsWithReasons)
         {

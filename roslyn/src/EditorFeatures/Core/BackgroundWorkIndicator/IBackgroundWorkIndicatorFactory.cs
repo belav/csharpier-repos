@@ -31,6 +31,10 @@ internal interface IBackgroundWorkIndicatorFactory : IWorkspaceService
     /// name="cancelOnFocusLost"/>.
     /// </remarks>
     IBackgroundWorkIndicatorContext Create(
-        ITextView textView, SnapshotSpan applicableToSpan,
-        string description, bool cancelOnEdit = true, bool cancelOnFocusLost = true);
+        ITextView textView,
+        SnapshotSpan applicableToSpan,
+        string description,
+        bool cancelOnEdit = true,
+        bool cancelOnFocusLost = true
+    );
 }

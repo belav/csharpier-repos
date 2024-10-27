@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Runtime_55253
 {
     [Fact]
@@ -17,10 +18,14 @@ public class Runtime_55253
     }
 
     static uint AsUInt32() => AsUInt16();
+
     static uint AsUInt16() => AsUInt8();
+
     static uint AsUInt8() => 255;
 
     static int AsInt32() => AsInt16();
+
     static short AsInt16() => AsInt8();
+
     static sbyte AsInt8() => -1;
 }

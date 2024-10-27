@@ -53,7 +53,9 @@ public static class MultipartSectionConverterExtensions
     /// </summary>
     /// <param name="section">The section from which to retrieve</param>
     /// <returns>A <see cref="ContentDispositionHeaderValue"/> if the header was found, null otherwise</returns>
-    public static ContentDispositionHeaderValue? GetContentDispositionHeader(this MultipartSection section)
+    public static ContentDispositionHeaderValue? GetContentDispositionHeader(
+        this MultipartSection section
+    )
     {
         if (!ContentDispositionHeaderValue.TryParse(section.ContentDisposition, out var header))
         {

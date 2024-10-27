@@ -10,6 +10,6 @@ namespace System.DirectoryServices
     {
         None = -1,
         HexString = 0,
-        Standard = 1
+        Standard = 1,
     }
 }

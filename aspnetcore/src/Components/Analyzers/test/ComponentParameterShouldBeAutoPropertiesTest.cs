@@ -12,7 +12,8 @@ public class ComponentParameterShouldBeAutoPropertiesTest : DiagnosticVerifier
     [Fact]
     public void IsAutoProperty_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Components
 
 public class C
@@ -30,7 +31,8 @@ public string MyProp2 { set; get; }
     [Fact]
     public void HaveSameSemanticAsAutoProperty_NoDiagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Components
 
 public class C
@@ -73,7 +75,8 @@ public string MyProp3
     [Fact]
     public void HaveLogicInSetter_Diagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Components
 
 public class C
@@ -97,22 +100,23 @@ public string MyProp
 private void DoSomething() { }
 }
 " + ComponentsTestDeclarations.Source;
-        VerifyCSharpDiagnostic(source, new DiagnosticResult
-        {
-            Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
-            Message = "Component parameter 'C.MyProp' should be auto property",
-            Locations = new[]
+        VerifyCSharpDiagnostic(
+            source,
+            new DiagnosticResult
             {
-                new DiagnosticResultLocation("Test0.cs", 9, 15),
-            },
-            Severity = CodeAnalysis.DiagnosticSeverity.Warning,
-        });
+                Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
+                Message = "Component parameter 'C.MyProp' should be auto property",
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15) },
+                Severity = CodeAnalysis.DiagnosticSeverity.Warning,
+            }
+        );
     }
 
     [Fact]
     public void HaveLogicInGetter_Diagnostic()
     {
-        var source = @"
+        var source =
+            @"
 using Microsoft.AspNetCore.Components
 
 public class C
@@ -136,17 +140,18 @@ public string MyProp
 private void DoSomething() { }
 }
 " + ComponentsTestDeclarations.Source;
-        VerifyCSharpDiagnostic(source, new DiagnosticResult
-        {
-            Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
-            Message = "Component parameter 'C.MyProp' should be auto property",
-            Locations = new[]
+        VerifyCSharpDiagnostic(
+            source,
+            new DiagnosticResult
             {
-                new DiagnosticResultLocation("Test0.cs", 9, 15),
-            },
-            Severity = CodeAnalysis.DiagnosticSeverity.Warning,
-        });
+                Id = DiagnosticDescriptors.ComponentParametersShouldBeAutoProperties.Id,
+                Message = "Component parameter 'C.MyProp' should be auto property",
+                Locations = new[] { new DiagnosticResultLocation("Test0.cs", 9, 15) },
+                Severity = CodeAnalysis.DiagnosticSeverity.Warning,
+            }
+        );
     }
 
-    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() => new ComponentParameterAnalyzer();
+    protected override DiagnosticAnalyzer GetCSharpDiagnosticAnalyzer() =>
+        new ComponentParameterAnalyzer();
 }

@@ -13,9 +13,8 @@ namespace System.ComponentModel
         /// Initializes a new instance of the <see cref='System.ComponentModel.HandledEventArgs'/> class with
         /// handled set to <see langword='false'/>.
         /// </summary>
-        public HandledEventArgs() : this(false)
-        {
-        }
+        public HandledEventArgs()
+            : this(false) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref='System.ComponentModel.HandledEventArgs'/> class with

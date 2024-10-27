@@ -97,7 +97,9 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
         }
         catch (Exception ex)
         {
-            Console.WriteLine($"Unexpected exception in {nameof(TcpConnection)}.{nameof(StartAsync)}: " + ex);
+            Console.WriteLine(
+                $"Unexpected exception in {nameof(TcpConnection)}.{nameof(StartAsync)}: " + ex
+            );
         }
         finally
         {
@@ -105,6 +107,7 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
             _application.Input.Complete(sendError);
         }
     }
+
     private async Task DoReceive()
     {
         Exception error = null;
@@ -117,10 +120,12 @@ public class TcpConnection : ConnectionContext, IConnectionInherentKeepAliveFeat
         {
             error = new ConnectionResetException(ex.Message, ex);
         }
-        catch (SocketException ex) when (ex.SocketErrorCode == SocketError.OperationAborted ||
-                                         ex.SocketErrorCode == SocketError.ConnectionAborted ||
-                                         ex.SocketErrorCode == SocketError.Interrupted ||
-                                         ex.SocketErrorCode == SocketError.InvalidArgument)
+        catch (SocketException ex)
+            when (ex.SocketErrorCode == SocketError.OperationAborted
+                || ex.SocketErrorCode == SocketError.ConnectionAborted
+                || ex.SocketErrorCode == SocketError.Interrupted
+                || ex.SocketErrorCode == SocketError.InvalidArgument
+            )
         {
             if (!_aborted)
             {

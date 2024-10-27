@@ -2,7 +2,6 @@
 // All rights reserved. Licensed under the BSD 3-Clause License; see License.txt.
 
 using System;
-
 using Xunit;
 
 namespace Moq.Tests
@@ -84,16 +83,10 @@ namespace Moq.Tests
             Assert.Throws<ArgumentException>(() => Mock.Get("foo"));
         }
 
-        public class FooBase
-        {
-        }
+        public class FooBase { }
 
-        public class Foo : FooBase
-        {
-        }
+        public class Foo : FooBase { }
 
-        public interface IFoo
-        {
-        }
+        public interface IFoo { }
     }
 }

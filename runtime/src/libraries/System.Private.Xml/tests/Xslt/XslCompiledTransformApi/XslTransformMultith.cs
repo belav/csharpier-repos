@@ -14,13 +14,15 @@ namespace System.Xml.XslCompiledTransformApiTests
     public class SameInstanceXslTransformTestCase : XsltApiTestCaseBase2
     {
         // Variables from init string
-        protected string _strPath;                    // Path of the data files
+        protected string _strPath; // Path of the data files
 
         // Other global variables
         public XslCompiledTransform xsltSameInstance; // Used for same instance testing of XsltArgumentList
 
         private ITestOutputHelper _output;
-        public SameInstanceXslTransformTestCase(ITestOutputHelper output) : base(output)
+
+        public SameInstanceXslTransformTestCase(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
             Init(null);
@@ -35,14 +37,19 @@ namespace System.Xml.XslCompiledTransformApiTests
     }
 
     //[TestCase(Name = "Same instance testing: Transform() - READER")]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class SameInstanceXslTransformReader : SameInstanceXslTransformTestCase
     {
-        private XPathDocument _xd;           // Loads XML file
-        private XmlReader _xrData;           // Loads XML File
+        private XPathDocument _xd; // Loads XML file
+        private XmlReader _xrData; // Loads XML File
 
         private ITestOutputHelper _output;
-        public SameInstanceXslTransformReader(ITestOutputHelper output) : base(output)
+
+        public SameInstanceXslTransformReader(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -71,7 +78,13 @@ namespace System.Xml.XslCompiledTransformApiTests
             {
                 StringWriter sw = new StringWriter();
                 xsltSameInstance.Transform(_xrData, null, sw);
-                _output.WriteLine("Transform: Thread " + args + "\tIteration " + i + "\tDone with READER transform...");
+                _output.WriteLine(
+                    "Transform: Thread "
+                        + args
+                        + "\tIteration "
+                        + i
+                        + "\tDone with READER transform..."
+                );
             }
             return 1;
         }
@@ -102,7 +115,10 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             using (new AllowDefaultResolverContext())
             {
-                Load("QFE505_multith_customer_repro_with_or_expr.xsl", "QFE505_multith_customer_repro_with_or_expr.xml");
+                Load(
+                    "QFE505_multith_customer_repro_with_or_expr.xsl",
+                    "QFE505_multith_customer_repro_with_or_expr.xml"
+                );
 
                 CThreads rThreads = new CThreads(_output);
                 rThreads.Add(new ThreadFunc(Transform), "1");
@@ -319,14 +335,19 @@ namespace System.Xml.XslCompiledTransformApiTests
     }
 
     //[TestCase(Name = "Same instance testing: Transform() - TEXTWRITER")]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class SameInstanceXslTransformWriter : SameInstanceXslTransformTestCase
     {
         private XPathDocument _xd; // Loads XML file
         private XmlReader _xrData; // Loads XML file
 
         private ITestOutputHelper _output;
-        public SameInstanceXslTransformWriter(ITestOutputHelper output) : base(output)
+
+        public SameInstanceXslTransformWriter(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -389,7 +410,10 @@ namespace System.Xml.XslCompiledTransformApiTests
         {
             using (new AllowDefaultResolverContext())
             {
-                Load("QFE505_multith_customer_repro_with_or_expr.xsl", "QFE505_multith_customer_repro_with_or_expr.xml");
+                Load(
+                    "QFE505_multith_customer_repro_with_or_expr.xsl",
+                    "QFE505_multith_customer_repro_with_or_expr.xml"
+                );
 
                 CThreads rThreads = new CThreads(_output);
                 rThreads.Add(new ThreadFunc(Transform), "1");

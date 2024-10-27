@@ -5,7 +5,8 @@
 // <owner current="true" primary="true">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Xml {
+namespace System.Xml
+{
     using System.Collections;
     using System.Diagnostics;
 #if !SILVERLIGHT
@@ -22,7 +23,8 @@ namespace System.Xml {
 #if !SILVERLIGHT
     [Serializable]
 #endif
-    public class XmlQualifiedName {
+    public class XmlQualifiedName
+    {
 #if !SILVERLIGHT
         delegate int HashCodeOfStringDelegate(string s, int sLen, long additionalEntropy);
         static HashCodeOfStringDelegate hashCodeDelegate = null;
@@ -33,7 +35,7 @@ namespace System.Xml {
 #if !SILVERLIGHT
         [NonSerialized]
 #endif
-        Int32  hash;
+        Int32 hash;
 
         /// <include file='doc\XmlQualifiedName.uex' path='docs/doc[@for="XmlQualifiedName.Empty"]/*' />
         /// <devdoc>
@@ -45,20 +47,23 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName() : this(string.Empty, string.Empty) {}
+        public XmlQualifiedName()
+            : this(string.Empty, string.Empty) { }
 
         /// <include file='doc\XmlQualifiedName.uex' path='docs/doc[@for="XmlQualifiedName.XmlQualifiedName1"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName(string name) : this(name, string.Empty) {}
+        public XmlQualifiedName(string name)
+            : this(name, string.Empty) { }
 
         /// <include file='doc\XmlQualifiedName.uex' path='docs/doc[@for="XmlQualifiedName.XmlQualifiedName2"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlQualifiedName(string name, string ns) {
-            this.ns   = ns   == null ? string.Empty : ns;
+        public XmlQualifiedName(string name, string ns)
+        {
+            this.ns = ns == null ? string.Empty : ns;
             this.name = name == null ? string.Empty : name;
         }
 
@@ -66,7 +71,8 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Namespace {
+        public string Namespace
+        {
             get { return ns; }
         }
 
@@ -74,7 +80,8 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public string Name {
+        public string Name
+        {
             get { return name; }
         }
 
@@ -82,17 +89,22 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override int GetHashCode() {
-            if(hash == 0) {
+        public override int GetHashCode()
+        {
+            if (hash == 0)
+            {
 #if !SILVERLIGHT
-                if (hashCodeDelegate == null) {
+                if (hashCodeDelegate == null)
+                {
                     hashCodeDelegate = GetHashCodeDelegate();
                 }
 
                 hash = hashCodeDelegate(Name, Name.Length, 0);
 #else
 
-                hash = Name.GetHashCode() /*+ Namespace.GetHashCode()*/; // for perf reasons we are not taking ns's hashcode.
+                hash =
+                    Name.GetHashCode() /*+ Namespace.GetHashCode()*/
+                ; // for perf reasons we are not taking ns's hashcode.
 #endif
             }
             return hash;
@@ -102,7 +114,8 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public bool IsEmpty {
+        public bool IsEmpty
+        {
             get { return Name.Length == 0 && Namespace.Length == 0; }
         }
 
@@ -110,23 +123,27 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override string ToString() {
-            return Namespace.Length == 0 ? Name : string.Concat(Namespace, ":" , Name);
+        public override string ToString()
+        {
+            return Namespace.Length == 0 ? Name : string.Concat(Namespace, ":", Name);
         }
 
         /// <include file='doc\XmlQualifiedName.uex' path='docs/doc[@for="XmlQualifiedName.Equals"]/*' />
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public override bool Equals(object other) {
+        public override bool Equals(object other)
+        {
             XmlQualifiedName qname;
 
-            if ((object) this == other) {
+            if ((object)this == other)
+            {
                 return true;
             }
 
             qname = other as XmlQualifiedName;
-            if (qname != null) {
+            if (qname != null)
+            {
                 return (Name == qname.Name && Namespace == qname.Namespace);
             }
             return false;
@@ -136,11 +153,12 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool operator ==(XmlQualifiedName a, XmlQualifiedName b) {
-            if ((object) a == (object) b)
+        public static bool operator ==(XmlQualifiedName a, XmlQualifiedName b)
+        {
+            if ((object)a == (object)b)
                 return true;
 
-            if ((object) a == null || (object) b == null)
+            if ((object)a == null || (object)b == null)
                 return false;
 
             return (a.Name == b.Name && a.Namespace == b.Namespace);
@@ -150,7 +168,8 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static bool operator !=(XmlQualifiedName a, XmlQualifiedName b) {
+        public static bool operator !=(XmlQualifiedName a, XmlQualifiedName b)
+        {
             return !(a == b);
         }
 
@@ -158,7 +177,8 @@ namespace System.Xml {
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public static string ToString(string name, string ns) {
+        public static string ToString(string name, string ns)
+        {
             return ns == null || ns.Length == 0 ? name : ns + ":" + name;
         }
 
@@ -167,17 +187,25 @@ namespace System.Xml {
 #if !MOBILE
         [ReflectionPermission(SecurityAction.Assert, Unrestricted = true)]
 #endif
-        private static HashCodeOfStringDelegate GetHashCodeDelegate() {
-             // If we are using randomized hashing and we find the Marving hash method, we use that
-             // Otherwise, we use the old string hashing function.
- 
-             if (!IsRandomizedHashingDisabled())
-             {
-                MethodInfo getHashCodeMethodInfo = typeof(String).GetMethod("InternalMarvin32HashString", BindingFlags.NonPublic | BindingFlags.Static);
-                 if (getHashCodeMethodInfo != null)
-                 {
-                    return (HashCodeOfStringDelegate)Delegate.CreateDelegate(typeof(HashCodeOfStringDelegate), getHashCodeMethodInfo);
-                 }
+        private static HashCodeOfStringDelegate GetHashCodeDelegate()
+        {
+            // If we are using randomized hashing and we find the Marving hash method, we use that
+            // Otherwise, we use the old string hashing function.
+
+            if (!IsRandomizedHashingDisabled())
+            {
+                MethodInfo getHashCodeMethodInfo = typeof(String).GetMethod(
+                    "InternalMarvin32HashString",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
+                if (getHashCodeMethodInfo != null)
+                {
+                    return (HashCodeOfStringDelegate)
+                        Delegate.CreateDelegate(
+                            typeof(HashCodeOfStringDelegate),
+                            getHashCodeMethodInfo
+                        );
+                }
                 // This will fall through and return a delegate to the old hash function
                 Debug.Assert(false, "Randomized hashing is not supported.");
             }
@@ -185,100 +213,142 @@ namespace System.Xml {
         }
 
 #if MONO
-        static bool IsRandomizedHashingDisabled () 
+        static bool IsRandomizedHashingDisabled()
         {
             return false;
         }
 #else
         [SecuritySafeCritical]
         [RegistryPermission(SecurityAction.Assert, Unrestricted = true)]
-        private static bool IsRandomizedHashingDisabled() {
+        private static bool IsRandomizedHashingDisabled()
+        {
             const string regValueName = "DisableRandomizedHashingOnXmlQualifiedName";
             bool disableHashing = false; // default value
-            if (!ReadBoolFromXmlRegistrySettings(Registry.CurrentUser, regValueName, ref disableHashing)) {
-                ReadBoolFromXmlRegistrySettings(Registry.LocalMachine, regValueName, ref disableHashing);
+            if (
+                !ReadBoolFromXmlRegistrySettings(
+                    Registry.CurrentUser,
+                    regValueName,
+                    ref disableHashing
+                )
+            )
+            {
+                ReadBoolFromXmlRegistrySettings(
+                    Registry.LocalMachine,
+                    regValueName,
+                    ref disableHashing
+                );
             }
             return disableHashing;
         }
 
         [SecurityCritical]
-        private static bool ReadBoolFromXmlRegistrySettings(RegistryKey hive, string regValueName, ref bool value) {
+        private static bool ReadBoolFromXmlRegistrySettings(
+            RegistryKey hive,
+            string regValueName,
+            ref bool value
+        )
+        {
             const string regValuePath = @"SOFTWARE\Microsoft\.NETFramework\XML";
-            try {
-                using (RegistryKey xmlRegKey = hive.OpenSubKey(regValuePath, false)) {
-                    if (xmlRegKey != null) {
-                        if (xmlRegKey.GetValueKind(regValueName) == RegistryValueKind.DWord) {
+            try
+            {
+                using (RegistryKey xmlRegKey = hive.OpenSubKey(regValuePath, false))
+                {
+                    if (xmlRegKey != null)
+                    {
+                        if (xmlRegKey.GetValueKind(regValueName) == RegistryValueKind.DWord)
+                        {
                             value = ((int)xmlRegKey.GetValue(regValueName)) == 1;
                             return true;
                         }
                     }
                 }
             }
-            catch { /* use the default if we couldn't read the key */ }
+            catch
+            { /* use the default if we couldn't read the key */
+            }
             return false;
         }
 #endif
+
         private static int GetHashCodeOfString(string s, int length, long additionalEntropy)
         {
             // This is the fallback method for calling the regular hashcode method
             return s.GetHashCode();
         }
-		
+
         // --------- Some useful internal stuff -----------------
-        internal void Init(string name, string ns) {
+        internal void Init(string name, string ns)
+        {
             Debug.Assert(name != null && ns != null);
             this.name = name;
             this.ns = ns;
             this.hash = 0;
         }
-        
-        internal void SetNamespace(string ns) {
+
+        internal void SetNamespace(string ns)
+        {
             Debug.Assert(ns != null);
             this.ns = ns; //Not changing hash since ns is not used to compute hashcode
         }
 
-        internal void Verify() {
+        internal void Verify()
+        {
             XmlConvert.VerifyNCName(name);
-            if (ns.Length != 0) {
+            if (ns.Length != 0)
+            {
                 XmlConvert.ToUri(ns);
             }
         }
 
-        internal void Atomize(XmlNameTable nameTable) {
+        internal void Atomize(XmlNameTable nameTable)
+        {
             Debug.Assert(name != null);
             name = nameTable.Add(name);
             ns = nameTable.Add(ns);
         }
 
-        internal static XmlQualifiedName Parse(string s, IXmlNamespaceResolver nsmgr, out string prefix) {
+        internal static XmlQualifiedName Parse(
+            string s,
+            IXmlNamespaceResolver nsmgr,
+            out string prefix
+        )
+        {
             string localName;
             ValidateNames.ParseQNameThrow(s, out prefix, out localName);
 
             string uri = nsmgr.LookupNamespace(prefix);
-            if (uri == null) {
-                if (prefix.Length != 0) {
+            if (uri == null)
+            {
+                if (prefix.Length != 0)
+                {
                     throw new XmlException(Res.Xml_UnknownNs, prefix);
                 }
-                else { //Re-map namespace of empty prefix to string.Empty when there is no default namespace declared
+                else
+                { //Re-map namespace of empty prefix to string.Empty when there is no default namespace declared
                     uri = string.Empty;
                 }
             }
             return new XmlQualifiedName(localName, uri);
         }
 
-        internal XmlQualifiedName Clone() {
+        internal XmlQualifiedName Clone()
+        {
             return (XmlQualifiedName)MemberwiseClone();
         }
 
-        internal static int Compare(XmlQualifiedName a, XmlQualifiedName b) {
-            if (null == a) {
+        internal static int Compare(XmlQualifiedName a, XmlQualifiedName b)
+        {
+            if (null == a)
+            {
                 return (null == b) ? 0 : -1;
-            }   
-            if (null == b) {
+            }
+            if (null == b)
+            {
                 return 1;
             }
             int i = String.CompareOrdinal(a.Namespace, b.Namespace);
-            if (i == 0) {
+            if (i == 0)
+            {
                 i = String.CompareOrdinal(a.Name, b.Name);
             }
             return i;
@@ -286,4 +356,3 @@ namespace System.Xml {
 #endif
     }
 }
-

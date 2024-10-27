@@ -27,70 +27,82 @@
 //
 
 using System;
-using System.IO;
 using System.Drawing;
 using System.Drawing.Text;
+using System.IO;
 using System.Runtime.InteropServices;
 using System.Security;
 using System.Security.Permissions;
 using NUnit.Framework;
 
-namespace MonoCasTests.System.Drawing.Text {
+namespace MonoCasTests.System.Drawing.Text
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class PrivateFontCollectionCas
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Constructor()
+        {
+            PrivateFontCollection pfc = new PrivateFontCollection();
+            Assert.IsNotNull(pfc.Families);
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class PrivateFontCollectionCas {
+        // TODO - tests for AddFontFile
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Constructor ()
-		{
-			PrivateFontCollection pfc = new PrivateFontCollection ();
-			Assert.IsNotNull (pfc.Families);
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.Deny, UnmanagedCode = true)]
+        public void AddMemoryFont_Deny_UnmanagedCode()
+        {
+            Assert.Throws<SecurityException>(
+                () => new PrivateFontCollection().AddMemoryFont(IntPtr.Zero, 1024)
+            );
+        }
 
-		// TODO - tests for AddFontFile
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_PermitOnly_UnmanagedCode()
+        {
+            Assert.Throws<ArgumentException>(
+                () => new PrivateFontCollection().AddMemoryFont(IntPtr.Zero, 1024)
+            );
+        }
 
-		[Test]
-		[SecurityPermission (SecurityAction.Deny, UnmanagedCode = true)]
-		public void AddMemoryFont_Deny_UnmanagedCode () 
-		{
-			Assert.Throws<SecurityException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
-		}
+        // yes, that fails with FileNotFoundException ;-)
 
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_PermitOnly_UnmanagedCode ()
-		{
-			Assert.Throws<ArgumentException> (() => new PrivateFontCollection ().AddMemoryFont (IntPtr.Zero, 1024));
-		}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_NegativeLength()
+        {
+            IntPtr ptr = Marshal.AllocHGlobal(1024);
+            try
+            {
+                Assert.Throws<FileNotFoundException>(
+                    () => new PrivateFontCollection().AddMemoryFont(ptr, -1024)
+                );
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
 
-		// yes, that fails with FileNotFoundException ;-)
-
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_NegativeLength ()
-		{
-			IntPtr ptr = Marshal.AllocHGlobal (1024);
-			try {
-				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, -1024));
-			}
-			finally {
-				Marshal.FreeHGlobal (ptr);
-			}
-		}
-
-		[Test]
-		[SecurityPermission (SecurityAction.PermitOnly, UnmanagedCode = true)]
-		public void AddMemoryFont_InvalidData ()
-		{
-			IntPtr ptr = Marshal.AllocHGlobal (1024);
-			try {
-				Assert.Throws<FileNotFoundException> (() => new PrivateFontCollection ().AddMemoryFont (ptr, 1024));
-			}
-			finally {
-				Marshal.FreeHGlobal (ptr);
-			}
-		}
-	}
+        [Test]
+        [SecurityPermission(SecurityAction.PermitOnly, UnmanagedCode = true)]
+        public void AddMemoryFont_InvalidData()
+        {
+            IntPtr ptr = Marshal.AllocHGlobal(1024);
+            try
+            {
+                Assert.Throws<FileNotFoundException>(
+                    () => new PrivateFontCollection().AddMemoryFont(ptr, 1024)
+                );
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(ptr);
+            }
+        }
+    }
 }

@@ -28,72 +28,76 @@
 //
 
 using System;
+using System.Collections;
 using System.Data;
 using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 using System.Web.UI.HtmlControls;
-using System.Collections;
+using System.Web.UI.WebControls;
 
 namespace GHTTests.System_Web_dll.System_Web_UI_WebControls
 {
-	public class Repeater_ItemDataBound
-		: GHTBaseWeb 
-	{
-		protected System.Web.UI.WebControls.Repeater Repeater1;
-		protected GHTWebControls.GHTSubTest GHTSubTest1;
-		protected System.Web.UI.WebControls.HyperLink HyperLink1;
-		#region Web Form Designer generated code
-		override protected void OnInit(EventArgs e) 
-		{
-			//
-			// CODEGEN: This call is required by the ASP.NET Web Form Designer.
-			//
-			InitializeComponent();
-			base.OnInit(e);
-		}
-		
-		/// <summary>
-		/// Required method for Designer support - do not modify
-		/// the contents of this method with the code editor.
-		/// </summary>
-		private void InitializeComponent() 
-		{    
-			this.Load += new System.EventHandler(this.Page_Load);
-			this.Repeater1.ItemDataBound += new RepeaterItemEventHandler(Repeater1_ItemDataBound);
+    public class Repeater_ItemDataBound : GHTBaseWeb
+    {
+        protected System.Web.UI.WebControls.Repeater Repeater1;
+        protected GHTWebControls.GHTSubTest GHTSubTest1;
+        protected System.Web.UI.WebControls.HyperLink HyperLink1;
 
-		}
-		#endregion
+        #region Web Form Designer generated code
+        override protected void OnInit(EventArgs e)
+        {
+            //
+            // CODEGEN: This call is required by the ASP.NET Web Form Designer.
+            //
+            InitializeComponent();
+            base.OnInit(e);
+        }
 
-		private void Page_Load(object sender, System.EventArgs e) 
-		{
-			//Put user code to initialize the page here
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            this.Load += new System.EventHandler(this.Page_Load);
+            this.Repeater1.ItemDataBound += new RepeaterItemEventHandler(Repeater1_ItemDataBound);
+        }
+        #endregion
 
-			System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
-			GHTTestBegin(frm);
+        private void Page_Load(object sender, System.EventArgs e)
+        {
+            //Put user code to initialize the page here
 
-			GHTActiveSubTest = GHTSubTest1;
-			try 
-			{
-				( (HyperLink)frm.FindControl("HyperLink1") ).Text = "changed text";
+            System.Web.UI.HtmlControls.HtmlForm frm = (HtmlForm)this.FindControl("Form1");
+            GHTTestBegin(frm);
 
-				Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
-				Repeater1.DataBind();
-				GHTSubTestAddResult(Repeater1.DataMember);
-			}
-			catch (Exception ex) 
-			{
-				GHTSubTestUnexpectedExceptionCaught(ex);
-			}
+            GHTActiveSubTest = GHTSubTest1;
+            try
+            {
+                ((HyperLink)frm.FindControl("HyperLink1")).Text = "changed text";
 
-			GHTTestEnd();
-		}
+                Repeater1.DataSource = GHTTests.GHDataSources.DSArrayList();
+                Repeater1.DataBind();
+                GHTSubTestAddResult(Repeater1.DataMember);
+            }
+            catch (Exception ex)
+            {
+                GHTSubTestUnexpectedExceptionCaught(ex);
+            }
 
-		private void Repeater1_ItemDataBound(object sender, System.Web.UI.WebControls.RepeaterItemEventArgs e)
-		{
-			if (e.Item.ItemType == ListItemType.Item || e.Item.ItemType == ListItemType.AlternatingItem)
-				( (HyperLink)e.Item.FindControl("hl_name") ).Text = "hehe";
+            GHTTestEnd();
+        }
 
-		}
-	}
+        private void Repeater1_ItemDataBound(
+            object sender,
+            System.Web.UI.WebControls.RepeaterItemEventArgs e
+        )
+        {
+            if (
+                e.Item.ItemType == ListItemType.Item
+                || e.Item.ItemType == ListItemType.AlternatingItem
+            )
+                ((HyperLink)e.Item.FindControl("hl_name")).Text = "hehe";
+        }
+    }
 }

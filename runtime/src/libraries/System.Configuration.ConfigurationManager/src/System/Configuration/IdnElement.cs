@@ -10,11 +10,17 @@ namespace System.Configuration
     {
         internal const UriIdnScope EnabledDefaultValue = UriIdnScope.None;
 
-        private readonly ConfigurationPropertyCollection _properties = new ConfigurationPropertyCollection();
+        private readonly ConfigurationPropertyCollection _properties =
+            new ConfigurationPropertyCollection();
 
-        private readonly ConfigurationProperty _enabled =
-            new ConfigurationProperty(CommonConfigurationStrings.Enabled, typeof(UriIdnScope),
-                EnabledDefaultValue, new UriIdnScopeTypeConverter(), null, ConfigurationPropertyOptions.None);
+        private readonly ConfigurationProperty _enabled = new ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            typeof(UriIdnScope),
+            EnabledDefaultValue,
+            new UriIdnScopeTypeConverter(),
+            null,
+            ConfigurationPropertyOptions.None
+        );
 
         public IdnElement()
         {
@@ -23,13 +29,13 @@ namespace System.Configuration
 
         protected internal override ConfigurationPropertyCollection Properties
         {
-            get
-            {
-                return _properties;
-            }
+            get { return _properties; }
         }
 
-        [ConfigurationProperty(CommonConfigurationStrings.Enabled, DefaultValue = EnabledDefaultValue)]
+        [ConfigurationProperty(
+            CommonConfigurationStrings.Enabled,
+            DefaultValue = EnabledDefaultValue
+        )]
         public UriIdnScope Enabled
         {
             get { return (UriIdnScope)this[_enabled]; }
@@ -47,7 +53,11 @@ namespace System.Configuration
                 return base.CanConvertFrom(context, sourceType);
             }
 
-            public override object ConvertFrom(ITypeDescriptorContext context, CultureInfo culture, object value)
+            public override object ConvertFrom(
+                ITypeDescriptorContext context,
+                CultureInfo culture,
+                object value
+            )
             {
                 if (value is string s)
                 {

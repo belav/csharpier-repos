@@ -19,15 +19,26 @@ internal sealed unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposabl
     private readonly AsyncCallback? _callback;
     private readonly CancellationTokenRegistration _cancellationRegistration;
 
-    internal RequestStreamAsyncResult(RequestStream requestStream, object? userState, AsyncCallback? callback, byte[] buffer, int offset, int size, uint dataAlreadyRead, CancellationTokenRegistration cancellationRegistration)
+    internal RequestStreamAsyncResult(
+        RequestStream requestStream,
+        object? userState,
+        AsyncCallback? callback,
+        byte[] buffer,
+        int offset,
+        int size,
+        uint dataAlreadyRead,
+        CancellationTokenRegistration cancellationRegistration
+    )
     {
         _requestStream = requestStream;
         _tcs = new TaskCompletionSource<int>(userState);
         _callback = callback;
         _dataAlreadyRead = dataAlreadyRead;
         var boundHandle = requestStream.RequestContext.Server.RequestQueue.BoundHandle;
-        _overlapped = new SafeNativeOverlapped(boundHandle,
-            boundHandle.AllocateNativeOverlapped(IOCallback, this, buffer));
+        _overlapped = new SafeNativeOverlapped(
+            boundHandle,
+            boundHandle.AllocateNativeOverlapped(IOCallback, this, buffer)
+        );
         _pinnedBuffer = (Marshal.UnsafeAddrOfPinnedArrayElement(buffer, offset));
         _size = size;
         _cancellationRegistration = cancellationRegistration;
@@ -63,8 +74,16 @@ internal sealed unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposabl
         IOCompleted(this, errorCode, numBytes);
     }
 
-    [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Redirecting to callback")]
-    private static void IOCompleted(RequestStreamAsyncResult asyncResult, uint errorCode, uint numBytes)
+    [SuppressMessage(
+        "Microsoft.Design",
+        "CA1031:DoNotCatchGeneralExceptionTypes",
+        Justification = "Redirecting to callback"
+    )]
+    private static void IOCompleted(
+        RequestStreamAsyncResult asyncResult,
+        uint errorCode,
+        uint numBytes
+    )
     {
         try
         {
@@ -74,9 +93,14 @@ internal sealed unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposabl
                 // numBytes returns 1 to let us know there's data available. Don't count it against the request body size yet.
                 asyncResult.Complete(0, errorCode);
             }
-            else if (errorCode != ErrorCodes.ERROR_SUCCESS && errorCode != ErrorCodes.ERROR_HANDLE_EOF)
+            else if (
+                errorCode != ErrorCodes.ERROR_SUCCESS
+                && errorCode != ErrorCodes.ERROR_HANDLE_EOF
+            )
             {
-                asyncResult.Fail(new IOException(string.Empty, new HttpSysException((int)errorCode)));
+                asyncResult.Fail(
+                    new IOException(string.Empty, new HttpSysException((int)errorCode))
+                );
             }
             else
             {
@@ -90,9 +114,14 @@ internal sealed unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposabl
         }
     }
 
-    private static unsafe void Callback(uint errorCode, uint numBytes, NativeOverlapped* nativeOverlapped)
+    private static unsafe void Callback(
+        uint errorCode,
+        uint numBytes,
+        NativeOverlapped* nativeOverlapped
+    )
     {
-        var asyncResult = (RequestStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+        var asyncResult = (RequestStreamAsyncResult)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode, numBytes);
     }
 
@@ -139,7 +168,11 @@ internal sealed unsafe class RequestStreamAsyncResult : IAsyncResult, IDisposabl
         }
     }
 
-    [SuppressMessage("Microsoft.Usage", "CA2216:DisposableTypesShouldDeclareFinalizer", Justification = "The disposable resource referenced does have a finalizer.")]
+    [SuppressMessage(
+        "Microsoft.Usage",
+        "CA2216:DisposableTypesShouldDeclareFinalizer",
+        Justification = "The disposable resource referenced does have a finalizer."
+    )]
     public void Dispose()
     {
         Dispose(true);

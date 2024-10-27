@@ -47,5 +47,8 @@ namespace System.Data.Objects
     /// </summary>
     /// <param name="sender">The ObjectContext responsable for materializing the object.</param>
     /// <param name="e">EventArgs containing a reference to the materialized object.</param>
-    public delegate void ObjectMaterializedEventHandler(object sender, ObjectMaterializedEventArgs e);
+    public delegate void ObjectMaterializedEventHandler(
+        object sender,
+        ObjectMaterializedEventArgs e
+    );
 }

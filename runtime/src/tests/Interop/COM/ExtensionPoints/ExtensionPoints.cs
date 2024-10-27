@@ -3,9 +3,7 @@
 
 using System;
 using System.Runtime.InteropServices;
-
 using COM;
-
 using TestLibrary;
 using Xunit;
 
@@ -23,20 +21,53 @@ public class ExtensionPoints
         }
 
         public virtual unsafe void* PostAlloc(void* pActual) => pActual;
-        public virtual unsafe void* PreFree(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed)
+
+        public virtual unsafe void* PreFree(
+            void* pRequest,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        )
         {
             _called++;
             return pRequest;
         }
 
         public virtual void PostFree([MarshalAs(UnmanagedType.Bool)] bool fSpyed) { }
-        public virtual unsafe nuint PreRealloc(void* pRequest, nuint cbRequest, void** ppNewRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed) => cbRequest;
-        public virtual unsafe void* PostRealloc(void* pActual, [MarshalAs(UnmanagedType.Bool)] bool fSpyed) => pActual;
-        public virtual unsafe void* PreGetSize(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed) => pRequest;
-        public virtual nuint PostGetSize(nuint cbActual, [MarshalAs(UnmanagedType.Bool)] bool fSpyed) => cbActual;
-        public virtual unsafe void* PreDidAlloc(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed) => pRequest;
-        public virtual unsafe int PostDidAlloc(void* pRequest, [MarshalAs(UnmanagedType.Bool)] bool fSpyed, int fActual) => fActual;
+
+        public virtual unsafe nuint PreRealloc(
+            void* pRequest,
+            nuint cbRequest,
+            void** ppNewRequest,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        ) => cbRequest;
+
+        public virtual unsafe void* PostRealloc(
+            void* pActual,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        ) => pActual;
+
+        public virtual unsafe void* PreGetSize(
+            void* pRequest,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        ) => pRequest;
+
+        public virtual nuint PostGetSize(
+            nuint cbActual,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        ) => cbActual;
+
+        public virtual unsafe void* PreDidAlloc(
+            void* pRequest,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed
+        ) => pRequest;
+
+        public virtual unsafe int PostDidAlloc(
+            void* pRequest,
+            [MarshalAs(UnmanagedType.Bool)] bool fSpyed,
+            int fActual
+        ) => fActual;
+
         public virtual void PreHeapMinimize() { }
+
         public virtual void PostHeapMinimize() { }
     }
 
@@ -49,7 +80,7 @@ public class ExtensionPoints
         Assert.Equal(0, result);
         try
         {
-            var arr = new [] { "", "", "", "", null };
+            var arr = new[] { "", "", "", "", null };
 
             // The goal of this test is to trigger paths in which CoTaskMemAlloc
             // will be implicitly used and validate that the registered managed
@@ -58,7 +89,8 @@ public class ExtensionPoints
             //
             // Casting the function pointer to one in which an IL stub will be
             // used to marshal the string[].
-            var fptr = (delegate*unmanaged<string[], int>)(delegate*unmanaged<char**, int>)&ArrayLen;
+            var fptr = (delegate* unmanaged<string[], int>)
+                (delegate* unmanaged<char**, int>)&ArrayLen;
             int len = fptr(arr);
             Assert.Equal(arr.Length - 1, len);
 

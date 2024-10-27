@@ -4,13 +4,13 @@
 namespace System.ServiceModel
 {
     using System;
+    using System.Collections;
+    using System.IO;
     using System.ServiceModel.Channels;
+    using System.Text;
     using System.Xml;
     using System.Xml.Schema;
     using System.Xml.Serialization;
-    using System.Collections;
-    using System.Text;
-    using System.IO;
 
     [XmlSchemaProvider("GetSchema")]
     [XmlRoot(AddressingStrings.EndpointReference, Namespace = Addressing10Strings.Namespace)]
@@ -47,12 +47,18 @@ namespace System.ServiceModel
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {
-            this.address = EndpointAddress.ReadFrom(AddressingVersion.WSAddressing10, XmlDictionaryReader.CreateDictionaryReader(reader));
+            this.address = EndpointAddress.ReadFrom(
+                AddressingVersion.WSAddressing10,
+                XmlDictionaryReader.CreateDictionaryReader(reader)
+            );
         }
 
         void IXmlSerializable.WriteXml(XmlWriter writer)
         {
-            this.address.WriteContentsTo(AddressingVersion.WSAddressing10, XmlDictionaryWriter.CreateDictionaryWriter(writer));
+            this.address.WriteContentsTo(
+                AddressingVersion.WSAddressing10,
+                XmlDictionaryWriter.CreateDictionaryWriter(writer)
+            );
         }
 
         static XmlQualifiedName EprType
@@ -60,18 +66,25 @@ namespace System.ServiceModel
             get
             {
                 if (eprType == null)
-                    eprType = new XmlQualifiedName(AddressingStrings.EndpointReferenceType, Addressing10Strings.Namespace);
+                    eprType = new XmlQualifiedName(
+                        AddressingStrings.EndpointReferenceType,
+                        Addressing10Strings.Namespace
+                    );
                 return eprType;
             }
         }
 
         static XmlSchema GetEprSchema()
         {
-            using (XmlTextReader reader = new XmlTextReader(new StringReader(Schema)) { DtdProcessing = DtdProcessing.Prohibit })
+            using (
+                XmlTextReader reader = new XmlTextReader(new StringReader(Schema))
+                {
+                    DtdProcessing = DtdProcessing.Prohibit,
+                }
+            )
             {
                 return XmlSchema.Read(reader, null);
             }
-
         }
 
         public static XmlQualifiedName GetSchema(XmlSchemaSet xmlSchemaSet)
@@ -114,7 +127,7 @@ namespace System.ServiceModel
         }
 
         const string Schema =
-@"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:wsa='http://www.w3.org/2005/08/addressing' targetNamespace='http://www.w3.org/2005/08/addressing' blockDefault='#all' elementFormDefault='qualified' finalDefault='' attributeFormDefault='unqualified'>
+            @"<xs:schema xmlns:xs='http://www.w3.org/2001/XMLSchema' xmlns:wsa='http://www.w3.org/2005/08/addressing' targetNamespace='http://www.w3.org/2005/08/addressing' blockDefault='#all' elementFormDefault='qualified' finalDefault='' attributeFormDefault='unqualified'>
     
     <!-- Constructs from the WS-Addressing Core -->
 

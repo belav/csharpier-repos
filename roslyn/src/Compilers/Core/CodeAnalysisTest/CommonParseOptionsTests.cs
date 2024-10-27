@@ -28,7 +28,8 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 "Kind",
                 "Language",
                 "PreprocessorSymbolNames",
-                "SpecifiedKind");
+                "SpecifiedKind"
+            );
         }
     }
 }

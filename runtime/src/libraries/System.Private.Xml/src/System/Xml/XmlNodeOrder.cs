@@ -8,6 +8,6 @@ namespace System.Xml
         Before,
         After,
         Same,
-        Unknown
+        Unknown,
     }
 }

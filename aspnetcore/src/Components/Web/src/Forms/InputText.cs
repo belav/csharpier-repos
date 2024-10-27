@@ -26,7 +26,8 @@ public class InputText : InputBase<string?>
     /// May be <see langword="null"/> if accessed before the component is rendered.
     /// </para>
     /// </summary>
-    [DisallowNull] public ElementReference? Element { get; protected set; }
+    [DisallowNull]
+    public ElementReference? Element { get; protected set; }
 
     /// <inheritdoc />
     protected override void BuildRenderTree(RenderTreeBuilder builder)
@@ -36,14 +37,26 @@ public class InputText : InputBase<string?>
         builder.AddAttributeIfNotNullOrEmpty(2, "name", NameAttributeValue);
         builder.AddAttributeIfNotNullOrEmpty(3, "class", CssClass);
         builder.AddAttribute(4, "value", CurrentValueAsString);
-        builder.AddAttribute(5, "onchange", EventCallback.Factory.CreateBinder<string?>(this, __value => CurrentValueAsString = __value, CurrentValueAsString));
+        builder.AddAttribute(
+            5,
+            "onchange",
+            EventCallback.Factory.CreateBinder<string?>(
+                this,
+                __value => CurrentValueAsString = __value,
+                CurrentValueAsString
+            )
+        );
         builder.SetUpdatesAttributeName("value");
         builder.AddElementReferenceCapture(6, __inputReference => Element = __inputReference);
         builder.CloseElement();
     }
 
     /// <inheritdoc />
-    protected override bool TryParseValueFromString(string? value, out string? result, [NotNullWhen(false)] out string? validationErrorMessage)
+    protected override bool TryParseValueFromString(
+        string? value,
+        out string? result,
+        [NotNullWhen(false)] out string? validationErrorMessage
+    )
     {
         result = value;
         validationErrorMessage = null;

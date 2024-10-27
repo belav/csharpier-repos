@@ -9,7 +9,9 @@ using Xunit;
 
 namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
 {
-    public class AdditionalProbingPath : DependencyResolutionBase, IClassFixture<AdditionalProbingPath.SharedTestState>
+    public class AdditionalProbingPath
+        : DependencyResolutionBase,
+            IClassFixture<AdditionalProbingPath.SharedTestState>
     {
         private readonly SharedTestState sharedState;
 
@@ -23,16 +25,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false)]
         public void CommandLine(bool dependencyExists)
         {
-            string probePath = dependencyExists ? sharedState.AdditionalProbingPath : sharedState.Location;
+            string probePath = dependencyExists
+                ? sharedState.AdditionalProbingPath
+                : sharedState.Location;
             TestApp app = sharedState.FrameworkReferenceApp;
-            CommandResult result = sharedState.DotNetWithNetCoreApp.Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
+            CommandResult result = sharedState
+                .DotNetWithNetCoreApp.Exec(
+                    Constants.AdditionalProbingPath.CommandLineArgument,
+                    probePath,
+                    app.AppDll
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
 
             result.Should().HaveUsedAdditionalProbingPath(probePath);
             if (dependencyExists)
             {
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.HaveResolvedAssembly(sharedState.DependencyPath)
                     .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
             }
@@ -40,8 +51,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 // Specifying additional probing paths triggers file existence checking, so execution
                 // should fail on the first dependency that doesn't exist.
-                result.Should().Fail()
-                    .And.ErrorWithMissingAssembly(Path.GetFileName(app.DepsJson), SharedTestState.DependencyName, SharedTestState.DependencyVersion);
+                result
+                    .Should()
+                    .Fail()
+                    .And.ErrorWithMissingAssembly(
+                        Path.GetFileName(app.DepsJson),
+                        SharedTestState.DependencyName,
+                        SharedTestState.DependencyVersion
+                    );
             }
         }
 
@@ -51,10 +68,16 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             // Host should replace |arch| and |tfm| with actual architecture and TFM
             string probePath = Path.Combine(sharedState.AdditionalProbingPath, "|arch|", "|tfm|");
             TestApp app = sharedState.FrameworkReferenceApp;
-            sharedState.DotNetWithNetCoreApp.Exec(Constants.AdditionalProbingPath.CommandLineArgument, probePath, app.AppDll)
+            sharedState
+                .DotNetWithNetCoreApp.Exec(
+                    Constants.AdditionalProbingPath.CommandLineArgument,
+                    probePath,
+                    app.AppDll
+                )
                 .EnableTracingAndCaptureOutputs()
                 .Execute()
-                .Should().Pass()
+                .Should()
+                .Pass()
                 .And.HaveUsedAdditionalProbingPath(sharedState.AdditionalProbingPath_ArchTfm)
                 .And.HaveResolvedAssembly(sharedState.DependencyPath_ArchTfm)
                 .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory_ArchTfm);
@@ -65,19 +88,25 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
         [InlineData(false)]
         public void RuntimeConfigSetting(bool dependencyExists)
         {
-            string probePath = dependencyExists ? sharedState.AdditionalProbingPath : sharedState.Location;
+            string probePath = dependencyExists
+                ? sharedState.AdditionalProbingPath
+                : sharedState.Location;
             TestApp app = sharedState.FrameworkReferenceApp.Copy();
-            RuntimeConfig.FromFile(app.RuntimeConfigJson)
+            RuntimeConfig
+                .FromFile(app.RuntimeConfigJson)
                 .WithAdditionalProbingPath(probePath)
                 .Save();
-            CommandResult result = sharedState.DotNetWithNetCoreApp.Exec(app.AppDll)
+            CommandResult result = sharedState
+                .DotNetWithNetCoreApp.Exec(app.AppDll)
                 .EnableTracingAndCaptureOutputs()
                 .Execute();
 
             result.Should().HaveUsedAdditionalProbingPath(probePath);
             if (dependencyExists)
             {
-                result.Should().Pass()
+                result
+                    .Should()
+                    .Pass()
                     .And.HaveResolvedAssembly(sharedState.DependencyPath)
                     .And.HaveResolvedNativeLibraryPath(sharedState.NativeDependencyDirectory);
             }
@@ -85,8 +114,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             {
                 // Specifying additional probing paths triggers file existence checking, so execution
                 // should fail on the first dependency that doesn't exist.
-                result.Should().Fail()
-                    .And.ErrorWithMissingAssembly(Path.GetFileName(app.DepsJson), SharedTestState.DependencyName, SharedTestState.DependencyVersion);
+                result
+                    .Should()
+                    .Fail()
+                    .And.ErrorWithMissingAssembly(
+                        Path.GetFileName(app.DepsJson),
+                        SharedTestState.DependencyName,
+                        SharedTestState.DependencyVersion
+                    );
             }
         }
 
@@ -111,30 +146,60 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             public SharedTestState()
             {
                 DotNetWithNetCoreApp = DotNet("WithNetCoreApp")
-                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(TestContext.MicrosoftNETCoreAppVersion)
+                    .AddMicrosoftNETCoreAppFrameworkMockCoreClr(
+                        TestContext.MicrosoftNETCoreAppVersion
+                    )
                     .Build();
 
-                string nativeDependencyRelPath = $"{TestContext.TargetRID}/{Binaries.GetSharedLibraryFileNameForCurrentPlatform("native")}";
-                FrameworkReferenceApp = CreateFrameworkReferenceApp(MicrosoftNETCoreApp, TestContext.MicrosoftNETCoreAppVersion, b => b
-                    .WithProject(DependencyName, DependencyVersion, p => p
-                        .WithAssemblyGroup(null, g => g
-                            .WithAsset($"{DependencyName}.dll", f => f.NotOnDisk()))
-                        .WithNativeLibraryGroup(TestContext.TargetRID, g => g
-                            .WithAsset(nativeDependencyRelPath, f => f.NotOnDisk()))));
-                RuntimeConfig.FromFile(FrameworkReferenceApp.RuntimeConfigJson)
+                string nativeDependencyRelPath =
+                    $"{TestContext.TargetRID}/{Binaries.GetSharedLibraryFileNameForCurrentPlatform("native")}";
+                FrameworkReferenceApp = CreateFrameworkReferenceApp(
+                    MicrosoftNETCoreApp,
+                    TestContext.MicrosoftNETCoreAppVersion,
+                    b =>
+                        b.WithProject(
+                            DependencyName,
+                            DependencyVersion,
+                            p =>
+                                p.WithAssemblyGroup(
+                                        null,
+                                        g =>
+                                            g.WithAsset($"{DependencyName}.dll", f => f.NotOnDisk())
+                                    )
+                                    .WithNativeLibraryGroup(
+                                        TestContext.TargetRID,
+                                        g =>
+                                            g.WithAsset(nativeDependencyRelPath, f => f.NotOnDisk())
+                                    )
+                        )
+                );
+                RuntimeConfig
+                    .FromFile(FrameworkReferenceApp.RuntimeConfigJson)
                     .WithTfm(TestContext.Tfm)
                     .Save();
 
                 AdditionalProbingPath = Path.Combine(Location, "probe");
-                (DependencyPath, NativeDependencyDirectory) = AddDependencies(AdditionalProbingPath);
+                (DependencyPath, NativeDependencyDirectory) = AddDependencies(
+                    AdditionalProbingPath
+                );
 
-                AdditionalProbingPath_ArchTfm = Path.Combine(AdditionalProbingPath, TestContext.BuildArchitecture, TestContext.Tfm);
-                (DependencyPath_ArchTfm, NativeDependencyDirectory_ArchTfm) = AddDependencies(AdditionalProbingPath_ArchTfm);
+                AdditionalProbingPath_ArchTfm = Path.Combine(
+                    AdditionalProbingPath,
+                    TestContext.BuildArchitecture,
+                    TestContext.Tfm
+                );
+                (DependencyPath_ArchTfm, NativeDependencyDirectory_ArchTfm) = AddDependencies(
+                    AdditionalProbingPath_ArchTfm
+                );
 
                 (string, string) AddDependencies(string probeDir)
                 {
                     // Probing will look under <library_name>/<library_version>
-                    string dependencyDir = Path.Combine(probeDir, DependencyName, DependencyVersion);
+                    string dependencyDir = Path.Combine(
+                        probeDir,
+                        DependencyName,
+                        DependencyVersion
+                    );
                     Directory.CreateDirectory(dependencyDir);
 
                     // Create the assembly dependency
@@ -142,7 +207,10 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
                     File.WriteAllText(dependencyPath, string.Empty);
 
                     // Create the native dependency
-                    string nativeDependencyPath = Path.Combine(dependencyDir, nativeDependencyRelPath);
+                    string nativeDependencyPath = Path.Combine(
+                        dependencyDir,
+                        nativeDependencyRelPath
+                    );
                     string nativeDependencyDir = Path.GetDirectoryName(nativeDependencyPath);
                     Directory.CreateDirectory(nativeDependencyDir);
                     File.WriteAllText(nativeDependencyPath, string.Empty);

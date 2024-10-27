@@ -28,7 +28,8 @@ public interface ISqlServerUpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
         int commandPosition,
-        out bool requiresTransaction);
+        out bool requiresTransaction
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -39,6 +40,12 @@ public interface ISqlServerUpdateSqlGenerator : IUpdateSqlGenerator
     ResultSetMapping AppendBulkInsertOperation(
         StringBuilder commandStringBuilder,
         IReadOnlyList<IReadOnlyModificationCommand> modificationCommands,
-        int commandPosition)
-        => AppendBulkInsertOperation(commandStringBuilder, modificationCommands, commandPosition, out _);
+        int commandPosition
+    ) =>
+        AppendBulkInsertOperation(
+            commandStringBuilder,
+            modificationCommands,
+            commandPosition,
+            out _
+        );
 }

@@ -6,6 +6,7 @@
 using System;
 using System.Runtime.CompilerServices;
 using Xunit;
+
 public class BringUpTest_BinaryRMW
 {
     const int Pass = 100;
@@ -23,7 +24,9 @@ public class BringUpTest_BinaryRMW
     {
         int x = 12;
         BinaryRMW(ref x, 17);
-        if (x == 31) return Pass;
-        else return Fail;
+        if (x == 31)
+            return Pass;
+        else
+            return Fail;
     }
 }

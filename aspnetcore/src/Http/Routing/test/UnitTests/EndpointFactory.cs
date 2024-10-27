@@ -15,7 +15,8 @@ internal static class EndpointFactory
         object requiredValues = null,
         int order = 0,
         string displayName = null,
-        params object[] metadata)
+        params object[] metadata
+    )
     {
         var routePattern = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
 
@@ -26,13 +27,15 @@ internal static class EndpointFactory
         RoutePattern routePattern = null,
         int order = 0,
         string displayName = null,
-        IList<object> metadata = null)
+        IList<object> metadata = null
+    )
     {
         return new RouteEndpoint(
             TestConstants.EmptyRequestDelegate,
             routePattern,
             order,
             new EndpointMetadataCollection(metadata ?? Array.Empty<object>()),
-            displayName);
+            displayName
+        );
     }
 }

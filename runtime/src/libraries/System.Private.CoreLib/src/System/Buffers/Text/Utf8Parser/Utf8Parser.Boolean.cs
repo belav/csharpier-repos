@@ -26,15 +26,24 @@ namespace System.Buffers.Text
         /// <exceptions>
         /// <cref>System.FormatException</cref> if the format is not valid for this data type.
         /// </exceptions>
-        public static bool TryParse(ReadOnlySpan<byte> source, out bool value, out int bytesConsumed, char standardFormat = default)
+        public static bool TryParse(
+            ReadOnlySpan<byte> source,
+            out bool value,
+            out int bytesConsumed,
+            char standardFormat = default
+        )
         {
-            if (!(standardFormat == default(char) || standardFormat == 'G' || standardFormat == 'l'))
+            if (
+                !(standardFormat == default(char) || standardFormat == 'G' || standardFormat == 'l')
+            )
                 ThrowHelper.ThrowFormatException_BadFormatSpecifier();
 
             if (source.Length >= 4)
             {
                 int dw = BinaryPrimitives.ReadInt32LittleEndian(source) & ~0x20202020;
-                if (dw == 0x45555254 /* 'EURT' */)
+                if (
+                    dw == 0x45555254 /* 'EURT' */
+                )
                 {
                     bytesConsumed = 4;
                     value = true;
@@ -43,7 +52,10 @@ namespace System.Buffers.Text
 
                 if (source.Length > 4)
                 {
-                    if (dw == 0x534c4146 /* 'SLAF' */ && (source[4] & ~0x20) == 'E')
+                    if (
+                        dw == 0x534c4146 /* 'SLAF' */
+                        && (source[4] & ~0x20) == 'E'
+                    )
                     {
                         bytesConsumed = 5;
                         value = false;

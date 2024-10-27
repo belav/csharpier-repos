@@ -11,10 +11,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -31,54 +31,51 @@ using System.Web;
 
 namespace System.Web.Management
 {
-        public sealed class WebApplicationInformation
-        {
+    public sealed class WebApplicationInformation
+    {
 #pragma warning disable 0649
-                string application_domain, application_path, application_virtual_path, machine_name, trust_level;
+        string application_domain,
+            application_path,
+            application_virtual_path,
+            machine_name,
+            trust_level;
 #pragma warning restore 0649
 
-                internal WebApplicationInformation ()
-                {
-                }
-                
-                public string ApplicationDomain {
-                        get {
-                                return application_domain;
-                        }
-                }
+        internal WebApplicationInformation() { }
 
-                public string ApplicationPath {
-                        get {
-                                return application_path;
-                        }
-                }
-
-                public string ApplicationVirtualPath {
-                        get {
-                                return application_virtual_path;
-                        }
-                }
-
-                public string MachineName {
-                        get {
-                                return machine_name;
-                        }
-                }
-
-                public string TrustLevel {
-                        get {
-                                return trust_level;
-                        }
-                }
-
-                public void FormatToString (WebEventFormatter formatter)
-                {
-                        throw new NotImplementedException ();
-                }
-                
-                public override string ToString ()
-                {
-                        throw new NotImplementedException ();
-                }
+        public string ApplicationDomain
+        {
+            get { return application_domain; }
         }
+
+        public string ApplicationPath
+        {
+            get { return application_path; }
+        }
+
+        public string ApplicationVirtualPath
+        {
+            get { return application_virtual_path; }
+        }
+
+        public string MachineName
+        {
+            get { return machine_name; }
+        }
+
+        public string TrustLevel
+        {
+            get { return trust_level; }
+        }
+
+        public void FormatToString(WebEventFormatter formatter)
+        {
+            throw new NotImplementedException();
+        }
+
+        public override string ToString()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }

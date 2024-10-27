@@ -18,11 +18,13 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes.ErrorCases
         {
             get
             {
-                throw new Exception($"Exception thrown in FixableDiagnosticIds of {nameof(ExceptionInFixableDiagnosticIds)}");
+                throw new Exception(
+                    $"Exception thrown in FixableDiagnosticIds of {nameof(ExceptionInFixableDiagnosticIds)}"
+                );
             }
         }
 
-        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context)
-            => Task.FromResult(true);
+        public sealed override Task RegisterCodeFixesAsync(CodeFixContext context) =>
+            Task.FromResult(true);
     }
 }

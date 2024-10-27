@@ -12,14 +12,16 @@ public class UrlRewriteApplicationTests
     [Fact]
     public void ApplyRule_AssertStopProcessingFlagWillTerminateOnNoAction()
     {
-        var xml = new StringReader(@"<rewrite>
+        var xml = new StringReader(
+            @"<rewrite>
                 <rules>
                 <rule name=""Test"" stopProcessing=""true"">
                 <match url = ""(.*)""/>
                 <action type = ""None""/>
                 </rule>
                 </rules>
-                </rewrite>");
+                </rewrite>"
+        );
         var rules = new UrlRewriteFileParser().Parse(xml, false);
 
         Assert.Equal(1, rules.Count);
@@ -31,14 +33,16 @@ public class UrlRewriteApplicationTests
     [Fact]
     public void ApplyRule_AssertNoTerminateFlagWillNotTerminateOnNoAction()
     {
-        var xml = new StringReader(@"<rewrite>
+        var xml = new StringReader(
+            @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url = ""(.*)"" ignoreCase=""false"" />
                 <action type = ""None""/>
                 </rule>
                 </rules>
-                </rewrite>");
+                </rewrite>"
+        );
         var rules = new UrlRewriteFileParser().Parse(xml, false);
 
         Assert.Equal(1, rules.Count);
@@ -50,7 +54,8 @@ public class UrlRewriteApplicationTests
     [Fact]
     public void ApplyRule_TrackAllCaptures()
     {
-        var xml = new StringReader(@"<rewrite>
+        var xml = new StringReader(
+            @"<rewrite>
                 <rules>
                 <rule name=""Test"">
                 <match url = ""(.*)"" ignoreCase=""false"" />
@@ -60,7 +65,8 @@ public class UrlRewriteApplicationTests
                 <action type = ""None""/>
                 </rule>
                 </rules>
-                </rewrite>");
+                </rewrite>"
+        );
         var rules = new UrlRewriteFileParser().Parse(xml, false);
 
         Assert.Equal(1, rules.Count);

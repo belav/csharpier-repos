@@ -19,11 +19,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpOptionsSerializationService()
-        {
-        }
+        public CSharpOptionsSerializationService() { }
 
-        public override void WriteTo(CompilationOptions options, ObjectWriter writer, CancellationToken cancellationToken)
+        public override void WriteTo(
+            CompilationOptions options,
+            ObjectWriter writer,
+            CancellationToken cancellationToken
+        )
         {
             WriteCompilationOptionsTo(options, writer, cancellationToken);
 
@@ -42,36 +44,97 @@ namespace Microsoft.CodeAnalysis.CSharp.Serialization
             writer.WriteValue(options.PreprocessorSymbolNames.ToArray());
         }
 
-        public override CompilationOptions ReadCompilationOptionsFrom(ObjectReader reader, CancellationToken cancellationToken)
+        public override CompilationOptions ReadCompilationOptionsFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
             ReadCompilationOptionsFrom(
                 reader,
-                out var outputKind, out var reportSuppressedDiagnostics, out var moduleName, out var mainTypeName, out var scriptClassName,
-                out var optimizationLevel, out var checkOverflow, out var cryptoKeyContainer, out var cryptoKeyFile, out var cryptoPublicKey,
-                out var delaySign, out var platform, out var generalDiagnosticOption, out var warningLevel, out var specificDiagnosticOptions,
-                out var concurrentBuild, out var deterministic, out var publicSign, out var metadataImportOptions,
-                out var xmlReferenceResolver, out var sourceReferenceResolver, out var metadataReferenceResolver, out var assemblyIdentityComparer,
-                out var strongNameProvider, cancellationToken);
+                out var outputKind,
+                out var reportSuppressedDiagnostics,
+                out var moduleName,
+                out var mainTypeName,
+                out var scriptClassName,
+                out var optimizationLevel,
+                out var checkOverflow,
+                out var cryptoKeyContainer,
+                out var cryptoKeyFile,
+                out var cryptoPublicKey,
+                out var delaySign,
+                out var platform,
+                out var generalDiagnosticOption,
+                out var warningLevel,
+                out var specificDiagnosticOptions,
+                out var concurrentBuild,
+                out var deterministic,
+                out var publicSign,
+                out var metadataImportOptions,
+                out var xmlReferenceResolver,
+                out var sourceReferenceResolver,
+                out var metadataReferenceResolver,
+                out var assemblyIdentityComparer,
+                out var strongNameProvider,
+                cancellationToken
+            );
 
             var usings = reader.ReadArray<string>();
             var allowUnsafe = reader.ReadBoolean();
             var nullableContextOptions = (NullableContextOptions)reader.ReadByte();
 
             return new CSharpCompilationOptions(
-                outputKind, reportSuppressedDiagnostics, moduleName, mainTypeName, scriptClassName, usings, optimizationLevel, checkOverflow, allowUnsafe,
-                cryptoKeyContainer, cryptoKeyFile, cryptoPublicKey, delaySign, platform, generalDiagnosticOption, warningLevel, specificDiagnosticOptions, concurrentBuild,
-                deterministic, xmlReferenceResolver, sourceReferenceResolver, metadataReferenceResolver, assemblyIdentityComparer, strongNameProvider, publicSign,
-                metadataImportOptions, nullableContextOptions);
+                outputKind,
+                reportSuppressedDiagnostics,
+                moduleName,
+                mainTypeName,
+                scriptClassName,
+                usings,
+                optimizationLevel,
+                checkOverflow,
+                allowUnsafe,
+                cryptoKeyContainer,
+                cryptoKeyFile,
+                cryptoPublicKey,
+                delaySign,
+                platform,
+                generalDiagnosticOption,
+                warningLevel,
+                specificDiagnosticOptions,
+                concurrentBuild,
+                deterministic,
+                xmlReferenceResolver,
+                sourceReferenceResolver,
+                metadataReferenceResolver,
+                assemblyIdentityComparer,
+                strongNameProvider,
+                publicSign,
+                metadataImportOptions,
+                nullableContextOptions
+            );
         }
 
-        public override ParseOptions ReadParseOptionsFrom(ObjectReader reader, CancellationToken cancellationToken)
+        public override ParseOptions ReadParseOptionsFrom(
+            ObjectReader reader,
+            CancellationToken cancellationToken
+        )
         {
-            ReadParseOptionsFrom(reader, out var kind, out var documentationMode, out var features, cancellationToken);
+            ReadParseOptionsFrom(
+                reader,
+                out var kind,
+                out var documentationMode,
+                out var features,
+                cancellationToken
+            );
 
             var languageVersion = (LanguageVersion)reader.ReadInt32();
             var preprocessorSymbolNames = reader.ReadArray<string>();
 
-            var options = new CSharpParseOptions(languageVersion, documentationMode, kind, preprocessorSymbolNames);
+            var options = new CSharpParseOptions(
+                languageVersion,
+                documentationMode,
+                kind,
+                preprocessorSymbolNames
+            );
             return options.WithFeatures(features);
         }
     }

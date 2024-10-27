@@ -16,15 +16,19 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ConstVarField1()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 class var {}
 
 class C 
 { 
     const var a = null;
 }
-");
-            var fieldA = compilation.GlobalNamespace.GetMember<TypeSymbol>("C").GetMember<FieldSymbol>("a");
+"
+            );
+            var fieldA = compilation
+                .GlobalNamespace.GetMember<TypeSymbol>("C")
+                .GetMember<FieldSymbol>("a");
             var typeVar = compilation.GlobalNamespace.GetMember<TypeSymbol>("var");
 
             Assert.Equal(typeVar, fieldA.Type);
@@ -33,15 +37,19 @@ class C
         [Fact]
         public void ConstVarField2()
         {
-            var compilation = CreateCompilation(@"
+            var compilation = CreateCompilation(
+                @"
 using var = System.Int32;
 
 class C 
 { 
     const var a = 123;
 }
-");
-            var fieldA = compilation.GlobalNamespace.GetMember<TypeSymbol>("C").GetMember<FieldSymbol>("a");
+"
+            );
+            var fieldA = compilation
+                .GlobalNamespace.GetMember<TypeSymbol>("C")
+                .GetMember<FieldSymbol>("a");
 
             Assert.Equal(SpecialType.System_Int32, fieldA.Type.SpecialType);
         }
@@ -49,19 +57,26 @@ class C
         [Fact]
         public void ImplicitlyTypedVariableAssignedArrayInitializer()
         {
-            string text = @"
+            string text =
+                @"
 var array = { 1, 2 };
 ";
-            CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Script).VerifyDiagnostics(
-                // (2,5): error CS0820: Cannot initialize an implicitly-typed variable with an array initializer
-                // var array = { 1, 2 };
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableAssignedArrayInitializer, "array = { 1, 2 }"));
+            CreateCompilationWithMscorlib45(text, parseOptions: TestOptions.Script)
+                .VerifyDiagnostics(
+                    // (2,5): error CS0820: Cannot initialize an implicitly-typed variable with an array initializer
+                    // var array = { 1, 2 };
+                    Diagnostic(
+                        ErrorCode.ERR_ImplicitlyTypedVariableAssignedArrayInitializer,
+                        "array = { 1, 2 }"
+                    )
+                );
         }
 
         [Fact]
         public void ImplicitlyTypedVariableCircularReferenceViaMemberAccess()
         {
-            string text = @"
+            string text =
+                @"
 class Program
 {
     static void Main(string[] args)
@@ -70,16 +85,23 @@ class Program
         var y = x.Goo(y);
     }
 }";
-            CreateCompilation(text).VerifyDiagnostics(
-                // (6,23): error CS0841: Cannot use local variable 'x' before it is declared
-                //         var x = y.Goo(x);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x").WithArguments("x").WithLocation(6, 23),
-                // (6,17): error CS0841: Cannot use local variable 'y' before it is declared
-                //         var x = y.Goo(x);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y").WithArguments("y").WithLocation(6, 17),
-                // (7,23): error CS0841: Cannot use local variable 'y' before it is declared
-                //         var y = x.Goo(y);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y").WithArguments("y").WithLocation(7, 23)
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (6,23): error CS0841: Cannot use local variable 'x' before it is declared
+                    //         var x = y.Goo(x);
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x")
+                        .WithArguments("x")
+                        .WithLocation(6, 23),
+                    // (6,17): error CS0841: Cannot use local variable 'y' before it is declared
+                    //         var x = y.Goo(x);
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y")
+                        .WithArguments("y")
+                        .WithLocation(6, 17),
+                    // (7,23): error CS0841: Cannot use local variable 'y' before it is declared
+                    //         var y = x.Goo(y);
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y")
+                        .WithArguments("y")
+                        .WithLocation(7, 23)
                 );
         }
 
@@ -88,7 +110,8 @@ class Program
         public void VarTypeConflictsWithAlias()
         {
             string alias = @"using var = var;";
-            string text = @"
+            string text =
+                @"
 class @var { }
  
 class B
@@ -102,15 +125,19 @@ class B
 ";
             // If there's no alias to conflict with the type var, then compilation fails
             // because 1 cannot be converted to var.
-            CreateCompilation(text).VerifyDiagnostics(
-                // (8,17): error CS0029: Cannot implicitly convert type 'int' to 'var'
-                //         var a = 1;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "var"));
+            CreateCompilation(text)
+                .VerifyDiagnostics(
+                    // (8,17): error CS0029: Cannot implicitly convert type 'int' to 'var'
+                    //         var a = 1;
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "1").WithArguments("int", "var")
+                );
 
             // However, once the alias is introduced, the local becomes implicitly typed
             // and everything works.
             var verifier = CompileAndVerify(alias + text, expectedOutput: "1");
-            verifier.VerifyIL("B.Main", @"
+            verifier.VerifyIL(
+                "B.Main",
+                @"
 {
   // Code size        7 (0x7)
   .maxstack  1
@@ -118,13 +145,15 @@ class B
   IL_0001:  call       ""void System.Console.WriteLine(int)""
   IL_0006:  ret
 }
-");
+"
+            );
         }
 
         [Fact]
         public void VarBeforeCSharp3()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M()
@@ -149,11 +178,21 @@ class D
 }
 ";
 
-            CreateCompilation(source, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)).VerifyDiagnostics();
-            CreateCompilation(source, parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp2)).VerifyDiagnostics(
-                // (6,9): error CS8023: Feature 'implicitly typed local variable' is not available in C# 2. Please use language version 3 or greater.
-                //         var v = 1;
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion2, "var").WithArguments("implicitly typed local variable", "3"));
+            CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp3)
+                )
+                .VerifyDiagnostics();
+            CreateCompilation(
+                    source,
+                    parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp2)
+                )
+                .VerifyDiagnostics(
+                    // (6,9): error CS8023: Feature 'implicitly typed local variable' is not available in C# 2. Please use language version 3 or greater.
+                    //         var v = 1;
+                    Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion2, "var")
+                        .WithArguments("implicitly typed local variable", "3")
+                );
         }
     }
 }

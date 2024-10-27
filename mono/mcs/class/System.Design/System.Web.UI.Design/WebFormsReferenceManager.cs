@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,28 +32,24 @@
 using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Globalization;
 using System.Drawing;
+using System.Globalization;
 using System.Web.UI.WebControls;
 
 namespace System.Web.UI.Design
 {
-	public abstract class WebFormsReferenceManager
-	{
-		protected WebFormsReferenceManager ()
-		{
-		}
+    public abstract class WebFormsReferenceManager
+    {
+        protected WebFormsReferenceManager() { }
 
-		public abstract ICollection GetRegisterDirectives ();
+        public abstract ICollection GetRegisterDirectives();
 
-		public abstract string GetTagPrefix (Type objectType);
+        public abstract string GetTagPrefix(Type objectType);
 
-		public abstract Type GetType (string tagPrefix, string tagName);
+        public abstract Type GetType(string tagPrefix, string tagName);
 
-		public abstract string GetUserControlPath (string tagPrefix, string tagName);
+        public abstract string GetUserControlPath(string tagPrefix, string tagName);
 
-		public abstract string RegisterTagPrefix (Type objectType);
-
-	}
+        public abstract string RegisterTagPrefix(Type objectType);
+    }
 }
-

@@ -12,7 +12,9 @@ namespace System.Activities.Runtime
     /// Evaluates a new-fast-path (SkipArgumentsResolution and Not UseOldFastPath) expression
     /// </summary>
     [DataContract]
-    internal class ExecuteSynchronousExpressionWorkItem : ActivityExecutionWorkItem, ActivityInstanceMap.IActivityReference
+    internal class ExecuteSynchronousExpressionWorkItem
+        : ActivityExecutionWorkItem,
+            ActivityInstanceMap.IActivityReference
     {
         private ActivityWithResult expressionActivity;
 
@@ -68,12 +70,24 @@ namespace System.Activities.Runtime
         /// <param name="instanceId">The ActivityInstanceID to use for expressionActivity</param>
         /// <param name="resultLocation">Location where the result of expressionActivity should be placed</param>
         /// <param name="nextArgumentWorkItem">WorkItem to execute after this one</param>
-        public void Initialize(ActivityInstance parentInstance, ActivityWithResult expressionActivity, long instanceId, Location resultLocation, ResolveNextArgumentWorkItem nextArgumentWorkItem)
+        public void Initialize(
+            ActivityInstance parentInstance,
+            ActivityWithResult expressionActivity,
+            long instanceId,
+            Location resultLocation,
+            ResolveNextArgumentWorkItem nextArgumentWorkItem
+        )
         {
             this.Reinitialize(parentInstance);
 
-            Fx.Assert(resultLocation != null, "We should only use this work item when we are resolving arguments/variables and therefore have a result location.");
-            Fx.Assert(expressionActivity.IsFastPath, "Should only use this work item for fast path expressions");
+            Fx.Assert(
+                resultLocation != null,
+                "We should only use this work item when we are resolving arguments/variables and therefore have a result location."
+            );
+            Fx.Assert(
+                expressionActivity.IsFastPath,
+                "Should only use this work item for fast path expressions"
+            );
 
             this.expressionActivity = expressionActivity;
             this.instanceId = instanceId;
@@ -118,7 +132,12 @@ namespace System.Activities.Runtime
 
             try
             {
-                executor.ExecuteInResolutionContextUntyped(this.ActivityInstance, this.expressionActivity, this.instanceId, this.resultLocation);
+                executor.ExecuteInResolutionContextUntyped(
+                    this.ActivityInstance,
+                    this.expressionActivity,
+                    this.instanceId,
+                    this.resultLocation
+                );
             }
             catch (Exception e)
             {
@@ -134,7 +153,12 @@ namespace System.Activities.Runtime
                     executor.ScheduleItem(this.nextArgumentWorkItem);
                 }
 
-                executor.ScheduleExpressionFaultPropagation(this.expressionActivity, this.instanceId, this.ActivityInstance, e);
+                executor.ScheduleExpressionFaultPropagation(
+                    this.expressionActivity,
+                    this.instanceId,
+                    this.ActivityInstance,
+                    e
+                );
                 return true;
             }
             finally
@@ -160,13 +184,22 @@ namespace System.Activities.Runtime
         /// </summary>
         /// <param name="activity">The persisted activity reference</param>
         /// <param name="instanceMap">The map containing persisted activity references</param>
-        void ActivityInstanceMap.IActivityReference.Load(Activity activity, ActivityInstanceMap instanceMap)
+        void ActivityInstanceMap.IActivityReference.Load(
+            Activity activity,
+            ActivityInstanceMap instanceMap
+        )
         {
             ActivityWithResult activityWithResult = activity as ActivityWithResult;
             if (activityWithResult == null)
             {
                 throw FxTrace.Exception.AsError(
-                    new ValidationException(SR.ActivityTypeMismatch(activity.DisplayName, typeof(ActivityWithResult).Name)));
+                    new ValidationException(
+                        SR.ActivityTypeMismatch(
+                            activity.DisplayName,
+                            typeof(ActivityWithResult).Name
+                        )
+                    )
+                );
             }
 
             this.expressionActivity = activityWithResult;
@@ -190,7 +223,9 @@ namespace System.Activities.Runtime
 
         private void EvaluateNextArgument(ActivityExecutor executor)
         {
-            if (executor.HasPendingTrackingRecords && this.nextArgumentWorkItem.CanExecuteUserCode())
+            if (
+                executor.HasPendingTrackingRecords && this.nextArgumentWorkItem.CanExecuteUserCode()
+            )
             {
                 // Need to schedule a separate work item so we flush tracking before we continue.
                 // This ensures consistent ordering of tracking output and user code.
@@ -234,12 +269,18 @@ namespace System.Activities.Runtime
             }
         }
 
-        private void TrackState(ActivityExecutor executor, ActivityInstanceState state, ref ActivityInfo activityInfo)
+        private void TrackState(
+            ActivityExecutor executor,
+            ActivityInstanceState state,
+            ref ActivityInfo activityInfo
+        )
         {
             if (executor.ShouldTrackActivity(this.expressionActivity.DisplayName))
             {
                 this.EnsureActivityInfo(ref activityInfo);
-                executor.AddTrackingRecord(new ActivityStateRecord(executor.WorkflowInstanceId, activityInfo, state));
+                executor.AddTrackingRecord(
+                    new ActivityStateRecord(executor.WorkflowInstanceId, activityInfo, state)
+                );
             }
         }
     }

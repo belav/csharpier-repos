@@ -44,8 +44,10 @@ namespace System.Net.NetworkInformation
                 throw new NetworkInformationException(SR.net_PInvokeError);
             }
 
-            _destinationUnreachableMessagesReceived = (long)statistics.DestinationUnreachableMessagesReceived;
-            _destinationUnreachableMessagesSent = (long)statistics.DestinationUnreachableMessagesSent;
+            _destinationUnreachableMessagesReceived = (long)
+                statistics.DestinationUnreachableMessagesReceived;
+            _destinationUnreachableMessagesSent = (long)
+                statistics.DestinationUnreachableMessagesSent;
             _echoRepliesReceived = (long)statistics.EchoRepliesReceived;
             _echoRepliesSent = (long)statistics.EchoRepliesSent;
             _echoRequestsReceived = (long)statistics.EchoRequestsReceived;
@@ -74,84 +76,180 @@ namespace System.Net.NetworkInformation
             _timeExceededMessagesSent = (long)statistics.TimeExceededMessagesSent;
         }
 
-        public override long DestinationUnreachableMessagesReceived { get { return _destinationUnreachableMessagesReceived; } }
+        public override long DestinationUnreachableMessagesReceived
+        {
+            get { return _destinationUnreachableMessagesReceived; }
+        }
 
-        public override long DestinationUnreachableMessagesSent { get { return _destinationUnreachableMessagesSent; } }
+        public override long DestinationUnreachableMessagesSent
+        {
+            get { return _destinationUnreachableMessagesSent; }
+        }
 
-        public override long EchoRepliesReceived { get { return _echoRepliesReceived; } }
+        public override long EchoRepliesReceived
+        {
+            get { return _echoRepliesReceived; }
+        }
 
-        public override long EchoRepliesSent { get { return _echoRepliesSent; } }
+        public override long EchoRepliesSent
+        {
+            get { return _echoRepliesSent; }
+        }
 
-        public override long EchoRequestsReceived { get { return _echoRequestsReceived; } }
+        public override long EchoRequestsReceived
+        {
+            get { return _echoRequestsReceived; }
+        }
 
-        public override long EchoRequestsSent { get { return _echoRequestsSent; } }
+        public override long EchoRequestsSent
+        {
+            get { return _echoRequestsSent; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long ErrorsReceived { get { throw new PlatformNotSupportedException(); } }
+        public override long ErrorsReceived
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long ErrorsSent { get { throw new PlatformNotSupportedException(); } }
+        public override long ErrorsSent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long MessagesReceived { get { throw new PlatformNotSupportedException(); } }
+        public override long MessagesReceived
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
         [UnsupportedOSPlatform("freebsd")]
-        public override long MessagesSent { get { throw new PlatformNotSupportedException(); } }
+        public override long MessagesSent
+        {
+            get { throw new PlatformNotSupportedException(); }
+        }
 
-        public override long ParameterProblemsReceived { get { return _parameterProblemsReceived; } }
+        public override long ParameterProblemsReceived
+        {
+            get { return _parameterProblemsReceived; }
+        }
 
-        public override long ParameterProblemsSent { get { return _parameterProblemsSent; } }
+        public override long ParameterProblemsSent
+        {
+            get { return _parameterProblemsSent; }
+        }
 
-        public override long RedirectsReceived { get { return _redirectsReceived; } }
+        public override long RedirectsReceived
+        {
+            get { return _redirectsReceived; }
+        }
 
-        public override long RedirectsSent { get { return _redirectsSent; } }
+        public override long RedirectsSent
+        {
+            get { return _redirectsSent; }
+        }
 
-        public override long TimeExceededMessagesReceived { get { return _timeExceededMessagesReceived; } }
+        public override long TimeExceededMessagesReceived
+        {
+            get { return _timeExceededMessagesReceived; }
+        }
 
-        public override long TimeExceededMessagesSent { get { return _timeExceededMessagesSent; } }
+        public override long TimeExceededMessagesSent
+        {
+            get { return _timeExceededMessagesSent; }
+        }
 
-        public override long MembershipQueriesReceived { get { return _membershipQueriesReceived; } }
+        public override long MembershipQueriesReceived
+        {
+            get { return _membershipQueriesReceived; }
+        }
 
-        public override long MembershipQueriesSent { get { return _membershipQueriesSent; } }
+        public override long MembershipQueriesSent
+        {
+            get { return _membershipQueriesSent; }
+        }
 
-        public override long MembershipReductionsReceived { get { return _membershipReductionsReceived; } }
+        public override long MembershipReductionsReceived
+        {
+            get { return _membershipReductionsReceived; }
+        }
 
-        public override long MembershipReductionsSent { get { return _membershipReductionsSent; } }
+        public override long MembershipReductionsSent
+        {
+            get { return _membershipReductionsSent; }
+        }
 
-        public override long MembershipReportsReceived { get { return _membershipReportsReceived; } }
+        public override long MembershipReportsReceived
+        {
+            get { return _membershipReportsReceived; }
+        }
 
-        public override long MembershipReportsSent { get { return _membershipReportsSent; } }
+        public override long MembershipReportsSent
+        {
+            get { return _membershipReportsSent; }
+        }
 
-        public override long NeighborAdvertisementsReceived { get { return _neighborAdvertisementsReceived; } }
+        public override long NeighborAdvertisementsReceived
+        {
+            get { return _neighborAdvertisementsReceived; }
+        }
 
-        public override long NeighborAdvertisementsSent { get { return _neighborAdvertisementsSent; } }
+        public override long NeighborAdvertisementsSent
+        {
+            get { return _neighborAdvertisementsSent; }
+        }
 
-        public override long NeighborSolicitsReceived { get { return _neighborSolicitsReceived; } }
+        public override long NeighborSolicitsReceived
+        {
+            get { return _neighborSolicitsReceived; }
+        }
 
-        public override long NeighborSolicitsSent { get { return _neighborSolicitsSent; } }
+        public override long NeighborSolicitsSent
+        {
+            get { return _neighborSolicitsSent; }
+        }
 
-        public override long PacketTooBigMessagesReceived { get { return _packetTooBigMessagesReceived; } }
+        public override long PacketTooBigMessagesReceived
+        {
+            get { return _packetTooBigMessagesReceived; }
+        }
 
-        public override long PacketTooBigMessagesSent { get { return _packetTooBigMessagesSent; } }
+        public override long PacketTooBigMessagesSent
+        {
+            get { return _packetTooBigMessagesSent; }
+        }
 
-        public override long RouterAdvertisementsReceived { get { return _routerAdvertisementsReceived; } }
+        public override long RouterAdvertisementsReceived
+        {
+            get { return _routerAdvertisementsReceived; }
+        }
 
-        public override long RouterAdvertisementsSent { get { return _routerAdvertisementsSent; } }
+        public override long RouterAdvertisementsSent
+        {
+            get { return _routerAdvertisementsSent; }
+        }
 
-        public override long RouterSolicitsReceived { get { return _routerSolicitsReceived; } }
+        public override long RouterSolicitsReceived
+        {
+            get { return _routerSolicitsReceived; }
+        }
 
-        public override long RouterSolicitsSent { get { return _routerSolicitsSent; } }
+        public override long RouterSolicitsSent
+        {
+            get { return _routerSolicitsSent; }
+        }
     }
 }

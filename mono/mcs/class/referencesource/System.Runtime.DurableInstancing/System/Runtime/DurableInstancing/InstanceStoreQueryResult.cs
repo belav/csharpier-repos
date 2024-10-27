@@ -7,8 +7,6 @@ namespace System.Runtime.DurableInstancing
     [Fx.Tag.XamlVisible(false)]
     public abstract class InstanceStoreQueryResult
     {
-        protected InstanceStoreQueryResult()
-        {
-        }
+        protected InstanceStoreQueryResult() { }
     }
 }

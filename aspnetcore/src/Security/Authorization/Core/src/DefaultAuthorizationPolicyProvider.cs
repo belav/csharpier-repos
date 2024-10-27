@@ -49,7 +49,10 @@ public class DefaultAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     /// <returns>The fallback authorization policy.</returns>
     public Task<AuthorizationPolicy?> GetFallbackPolicyAsync()
     {
-        if (_cachedFallbackPolicy == null || _cachedFallbackPolicy.Result != _options.FallbackPolicy)
+        if (
+            _cachedFallbackPolicy == null
+            || _cachedFallbackPolicy.Result != _options.FallbackPolicy
+        )
         {
             _cachedFallbackPolicy = Task.FromResult(_options.FallbackPolicy);
         }
@@ -74,6 +77,7 @@ public class DefaultAuthorizationPolicyProvider : IAuthorizationPolicyProvider
     /// <summary>
     /// Determines if policies from this provider can be cached, which is true only for this type.
     /// </summary>
-    public virtual bool AllowsCachingPolicies => GetType() == typeof(DefaultAuthorizationPolicyProvider);
+    public virtual bool AllowsCachingPolicies =>
+        GetType() == typeof(DefaultAuthorizationPolicyProvider);
 #endif
 }

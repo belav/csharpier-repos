@@ -29,91 +29,93 @@ using System.IO;
 using System.Text;
 using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
-
 #if MONOTOUCH
 using MonoTouch;
 #endif
 
 namespace Mono.Btls
 {
-	static class MonoBtlsError
-	{
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static int mono_btls_error_peek_error ();
+    static class MonoBtlsError
+    {
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern int mono_btls_error_peek_error();
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static int mono_btls_error_get_error ();
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern int mono_btls_error_get_error();
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static void mono_btls_error_clear_error ();
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern void mono_btls_error_clear_error();
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static int mono_btls_error_peek_error_line (out IntPtr file, out int line);
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern int mono_btls_error_peek_error_line(out IntPtr file, out int line);
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static int mono_btls_error_get_error_line (out IntPtr file, out int line);
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern int mono_btls_error_get_error_line(out IntPtr file, out int line);
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static void mono_btls_error_get_error_string_n (int error, IntPtr buf, int len);
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern void mono_btls_error_get_error_string_n(int error, IntPtr buf, int len);
 
-		[DllImport (MonoBtlsObject.BTLS_DYLIB)]
-		extern static int mono_btls_error_get_reason (int error);
+        [DllImport(MonoBtlsObject.BTLS_DYLIB)]
+        static extern int mono_btls_error_get_reason(int error);
 
-		public static int PeekError ()
-		{
-			return mono_btls_error_peek_error ();
-		}
+        public static int PeekError()
+        {
+            return mono_btls_error_peek_error();
+        }
 
-		public static int GetError ()
-		{
-			return mono_btls_error_get_error ();
-		}
+        public static int GetError()
+        {
+            return mono_btls_error_get_error();
+        }
 
-		public static void ClearError ()
-		{
-			mono_btls_error_clear_error ();
-		}
+        public static void ClearError()
+        {
+            mono_btls_error_clear_error();
+        }
 
-		public static string GetErrorString (int error)
-		{
-			var size = 1024;
-			var buffer = Marshal.AllocHGlobal (size);
-			if (buffer == IntPtr.Zero)
-				throw new OutOfMemoryException ();
-			try {
-				mono_btls_error_get_error_string_n (error, buffer, size);
-				return Marshal.PtrToStringAnsi (buffer);
-			} finally {
-				Marshal.FreeHGlobal (buffer);
-			}
-		}
+        public static string GetErrorString(int error)
+        {
+            var size = 1024;
+            var buffer = Marshal.AllocHGlobal(size);
+            if (buffer == IntPtr.Zero)
+                throw new OutOfMemoryException();
+            try
+            {
+                mono_btls_error_get_error_string_n(error, buffer, size);
+                return Marshal.PtrToStringAnsi(buffer);
+            }
+            finally
+            {
+                Marshal.FreeHGlobal(buffer);
+            }
+        }
 
-		public static int PeekError (out string file, out int line)
-		{
-			IntPtr filePtr;
-			var error = mono_btls_error_peek_error_line (out filePtr, out line);
-			if (filePtr != IntPtr.Zero)
-				file = Marshal.PtrToStringAnsi (filePtr);
-			else
-				file = null;
-			return error;
-		}
+        public static int PeekError(out string file, out int line)
+        {
+            IntPtr filePtr;
+            var error = mono_btls_error_peek_error_line(out filePtr, out line);
+            if (filePtr != IntPtr.Zero)
+                file = Marshal.PtrToStringAnsi(filePtr);
+            else
+                file = null;
+            return error;
+        }
 
-		public static int GetError (out string file, out int line)
-		{
-			IntPtr filePtr;
-			var error = mono_btls_error_get_error_line (out filePtr, out line);
-			if (filePtr != IntPtr.Zero)
-				file = Marshal.PtrToStringAnsi (filePtr);
-			else
-				file = null;
-			return error;
-		}
+        public static int GetError(out string file, out int line)
+        {
+            IntPtr filePtr;
+            var error = mono_btls_error_get_error_line(out filePtr, out line);
+            if (filePtr != IntPtr.Zero)
+                file = Marshal.PtrToStringAnsi(filePtr);
+            else
+                file = null;
+            return error;
+        }
 
-		public static int GetErrorReason (int error)
-		{
-			return mono_btls_error_get_reason (error);
-		}
-	}
+        public static int GetErrorReason(int error)
+        {
+            return mono_btls_error_get_reason(error);
+        }
+    }
 }
 #endif

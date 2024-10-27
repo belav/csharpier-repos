@@ -7,7 +7,11 @@ namespace Microsoft.Extensions.Configuration.Xml
 {
     internal sealed class XmlConfigurationElementTextContent
     {
-        public XmlConfigurationElementTextContent(string textContent, int? linePosition, int? lineNumber)
+        public XmlConfigurationElementTextContent(
+            string textContent,
+            int? linePosition,
+            int? lineNumber
+        )
         {
             ThrowHelper.ThrowIfNull(textContent);
 

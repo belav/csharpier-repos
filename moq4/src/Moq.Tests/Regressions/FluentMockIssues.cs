@@ -3,7 +3,6 @@
 
 using System;
 using System.Runtime.Serialization;
-
 using Xunit;
 
 namespace Moq.Tests.Regressions
@@ -41,15 +40,23 @@ namespace Moq.Tests.Regressions
         [Fact]
         public void SerializableTypesNotImplementingISerializableProperlyNotMockable()
         {
-            var mock = new Mock<IContainingSerializableProperties> { DefaultValue = DefaultValue.Mock };
+            var mock = new Mock<IContainingSerializableProperties>
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             // c.Serializable can't be mocked in a standard way as it doesn't implement the ISerializable properly
-            Assert.Throws<ArgumentException>(() => mock.SetupGet(c => c.Serializable.SomeString).Returns("blah"));
+            Assert.Throws<ArgumentException>(
+                () => mock.SetupGet(c => c.Serializable.SomeString).Returns("blah")
+            );
         }
 
         [Fact]
         public void SerializableTypesNotImplementingISerializableProperlySetToDefaultValue()
         {
-            var mock = new Mock<IContainingSerializableProperties> { DefaultValue = DefaultValue.Mock };
+            var mock = new Mock<IContainingSerializableProperties>
+            {
+                DefaultValue = DefaultValue.Mock,
+            };
             mock.SetupGet(c => c.SomeString).Returns("blah");
 
             Assert.Equal("blah", mock.Object.SomeString);
@@ -65,9 +72,7 @@ namespace Moq.Tests.Regressions
         [Serializable]
         public abstract class SerializableWithoutDeserializationConstructor : ISerializable
         {
-            public virtual void GetObjectData(SerializationInfo info, StreamingContext context)
-            {
-            }
+            public virtual void GetObjectData(SerializationInfo info, StreamingContext context) { }
 
             public virtual string SomeString { get; set; }
         }

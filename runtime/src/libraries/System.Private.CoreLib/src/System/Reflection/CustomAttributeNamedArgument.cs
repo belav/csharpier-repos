@@ -5,10 +5,18 @@ using System.Diagnostics.CodeAnalysis;
 
 namespace System.Reflection
 {
-    public readonly partial struct CustomAttributeNamedArgument : IEquatable<CustomAttributeNamedArgument>
+    public readonly partial struct CustomAttributeNamedArgument
+        : IEquatable<CustomAttributeNamedArgument>
     {
-        public static bool operator ==(CustomAttributeNamedArgument left, CustomAttributeNamedArgument right) => left.Equals(right);
-        public static bool operator !=(CustomAttributeNamedArgument left, CustomAttributeNamedArgument right) => !left.Equals(right);
+        public static bool operator ==(
+            CustomAttributeNamedArgument left,
+            CustomAttributeNamedArgument right
+        ) => left.Equals(right);
+
+        public static bool operator !=(
+            CustomAttributeNamedArgument left,
+            CustomAttributeNamedArgument right
+        ) => !left.Equals(right);
 
         private readonly MemberInfo _memberInfo;
         private readonly CustomAttributeTypedArgument _value;
@@ -21,14 +29,17 @@ namespace System.Reflection
             {
                 FieldInfo field => field.FieldType,
                 PropertyInfo property => property.PropertyType,
-                _ => throw new ArgumentException(SR.Argument_InvalidMemberForNamedArgument)
+                _ => throw new ArgumentException(SR.Argument_InvalidMemberForNamedArgument),
             };
 
             _memberInfo = memberInfo;
             _value = new CustomAttributeTypedArgument(type, value);
         }
 
-        public CustomAttributeNamedArgument(MemberInfo memberInfo, CustomAttributeTypedArgument typedArgument)
+        public CustomAttributeNamedArgument(
+            MemberInfo memberInfo,
+            CustomAttributeTypedArgument typedArgument
+        )
         {
             ArgumentNullException.ThrowIfNull(memberInfo);
 
@@ -56,13 +67,10 @@ namespace System.Reflection
         /// <param name="other">An instance to compare with this instance.</param>
         /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
         public bool Equals(CustomAttributeNamedArgument other) =>
-            _memberInfo == other._memberInfo &&
-            _value == other._value;
+            _memberInfo == other._memberInfo && _value == other._value;
 
         internal Type ArgumentType =>
-            _memberInfo is FieldInfo fi ?
-                fi.FieldType :
-                ((PropertyInfo)_memberInfo).PropertyType;
+            _memberInfo is FieldInfo fi ? fi.FieldType : ((PropertyInfo)_memberInfo).PropertyType;
 
         public MemberInfo MemberInfo => _memberInfo;
         public CustomAttributeTypedArgument TypedValue => _value;

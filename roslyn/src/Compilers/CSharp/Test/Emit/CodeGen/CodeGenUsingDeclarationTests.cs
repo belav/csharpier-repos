@@ -12,10 +12,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.CodeGen
 {
     public class CodeGenUsingDeclarationTests : EmitMetadataTestBase
     {
-        [ConditionalFact(typeof(WindowsOnly), Reason = ConditionalSkipReason.NativePdbRequiresDesktop)]
+        [ConditionalFact(
+            typeof(WindowsOnly),
+            Reason = ConditionalSkipReason.NativePdbRequiresDesktop
+        )]
         public void UsingVariableVarEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -28,7 +32,10 @@ class C2
         using var c1 = new C1(); 
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       19 (0x13)
   .maxstack  1
@@ -53,13 +60,17 @@ class C2
   }
   // sequence point: }
   IL_0012:  ret
-}", sequencePoints: "C2.Main", source: source);
+}",
+                    sequencePoints: "C2.Main",
+                    source: source
+                );
         }
 
         [Fact]
         public void UsingVariableEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -74,7 +85,10 @@ class C2
         c1.Method1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       25 (0x19)
   .maxstack  1
@@ -96,13 +110,15 @@ class C2
     IL_0017:  endfinally
   }
   IL_0018:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void UsingVariableTypedVariable()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -117,7 +133,10 @@ class C2
         c1.Method1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       25 (0x19)
   .maxstack  1
@@ -139,13 +158,15 @@ class C2
     IL_0017:  endfinally
   }
   IL_0018:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void PreexistingVariablesUsingDeclarationEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -161,7 +182,10 @@ class C2
         using var c1 = new C1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       29 (0x1d)
   .maxstack  1
@@ -183,13 +207,15 @@ class C2
     IL_001b:  endfinally
   }
   IL_001c:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void TwoUsingVarsInARow()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -204,7 +230,10 @@ class C2
         using C1 o2 = new C1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -238,13 +267,15 @@ class C2
     IL_0021:  endfinally
   }
   IL_0022:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void UsingVarSandwich()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -260,7 +291,10 @@ class C2
         using C1 o2 = new C1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       41 (0x29)
   .maxstack  1
@@ -296,13 +330,15 @@ class C2
     IL_0027:  endfinally
   }
   IL_0028:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void InsideOfUsingVarInCorrectOrder()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -319,7 +355,10 @@ class C2
         o1.M();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       47 (0x2f)
   .maxstack  1
@@ -357,13 +396,15 @@ class C2
     IL_002d:  endfinally
   }
   IL_002e:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void AsPartOfLabelStatement()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -380,7 +421,10 @@ class C2
         using C1 o3 = new C1();
     }
 }";
-            CompileAndVerify(source, expectedOutput: "Dispose; Dispose; Dispose; ").VerifyIL("C2.Main", @"
+            CompileAndVerify(source, expectedOutput: "Dispose; Dispose; Dispose; ")
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       51 (0x33)
   .maxstack  1
@@ -429,13 +473,15 @@ class C2
   }
   IL_0032:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void AsPartOfMultipleLabelStatements()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -461,7 +507,13 @@ class C2
         Console.Write(""End; "");
     }
 }";
-            CompileAndVerify(source, expectedOutput: "Start; Middle1; Middle2; End; Dispose; Dispose; Dispose; ").VerifyIL("C2.Main", @"
+            CompileAndVerify(
+                    source,
+                    expectedOutput: "Start; Middle1; Middle2; End; Dispose; Dispose; Dispose; "
+                )
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       91 (0x5b)
   .maxstack  1
@@ -518,13 +570,15 @@ class C2
   }
   IL_005a:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void InsideTryCatchFinallyBlocks()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -550,7 +604,13 @@ class C2
         }
     }
 }";
-            CompileAndVerify(source, expectedOutput: "Dispose Try; Dispose Catch; Dispose Finally; ").VerifyIL("C2.Main", @"
+            CompileAndVerify(
+                    source,
+                    expectedOutput: "Dispose Try; Dispose Catch; Dispose Finally; "
+                )
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       96 (0x60)
   .maxstack  3
@@ -626,13 +686,15 @@ class C2
   }
   IL_005f:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void InsideTryCatchFinallyBlocksAsync()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -670,7 +732,8 @@ class C2
         }
     }
 }";
-            string expectedOutput = @"
+            string expectedOutput =
+                @"
 Created Try
 Dispose Async Try
 Created Catch
@@ -678,7 +741,11 @@ Dispose Async Catch
 Created Finally
 Dispose Async Finally
 ";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
 
             CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
@@ -686,7 +753,8 @@ Dispose Async Finally
         [Fact]
         public void UsingDeclarationUsingPatternIntersectionEmitTest()
         {
-            var source = @"
+            var source =
+                @"
     using System;
     ref struct S1
     {
@@ -708,9 +776,13 @@ Dispose Async Finally
         }
     }";
 
-            var output = @"This method has run.
+            var output =
+                @"This method has run.
 This object has been properly disposed.";
-            CompileAndVerify(source, expectedOutput: output).VerifyIL("Program.Main", @"
+            CompileAndVerify(source, expectedOutput: output)
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size       26 (0x1a)
   .maxstack  1
@@ -731,13 +803,15 @@ This object has been properly disposed.";
   }
   IL_0019:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void UsingVariableUsingPatternIntersectionTwoDisposeMethodsEmitTest()
         {
-            var source = @"
+            var source =
+                @"
     using System;
     class C1 : IDisposable
     {
@@ -763,9 +837,13 @@ This object has been properly disposed.";
         }
     }";
 
-            var output = @"This method has run.
+            var output =
+                @"This method has run.
 This object has been disposed by IDisposable.Dispose().";
-            CompileAndVerify(source, expectedOutput: output).VerifyIL("Program.Main", @"
+            CompileAndVerify(source, expectedOutput: output)
+                .VerifyIL(
+                    "Program.Main",
+                    @"
 {
   // Code size       25 (0x19)
   .maxstack  1
@@ -787,13 +865,15 @@ This object has been disposed by IDisposable.Dispose().";
     IL_0017:  endfinally
   }
   IL_0018:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void UsingDeclarationUsingPatternExtensionMethod()
         {
-            var source = @"
+            var source =
+                @"
     using System;
     ref struct S1
     {
@@ -817,14 +897,17 @@ This object has been disposed by IDisposable.Dispose().";
             comp.VerifyDiagnostics(
                 // (17,13): error CS1674: 'S1': type used in a using statement must be implicitly convertible to 'System.IDisposable'.
                 //             using S1 s1 = new S1();
-                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using S1 s1 = new S1();").WithArguments("S1").WithLocation(17, 13)
-                );
+                Diagnostic(ErrorCode.ERR_NoConvToIDisp, "using S1 s1 = new S1();")
+                    .WithArguments("S1")
+                    .WithLocation(17, 13)
+            );
         }
 
         [Fact]
         public void MultipleUsingVarEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -837,7 +920,10 @@ class C2
         using C1 o1 = new C1(), o2 = new C1();
     }
 }";
-            CompileAndVerify(source).VerifyIL("C2.Main", @"
+            CompileAndVerify(source)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       35 (0x23)
   .maxstack  1
@@ -871,13 +957,15 @@ class C2
     IL_0021:  endfinally
   }
   IL_0022:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void MultipleUsingVarPrecedingCodeEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -902,12 +990,16 @@ class C2
         using C1 o1 = new C1(""second""), o2 = new C1(""third"");
     }
 }";
-            var output = @"Object first has been created.
+            var output =
+                @"Object first has been created.
 Object second has been created.
 Object third has been created.
 Object third has been disposed.
 Object second has been disposed.";
-            CompileAndVerify(source, expectedOutput: output).VerifyIL("C2.Main", @"
+            CompileAndVerify(source, expectedOutput: output)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       60 (0x3c)
   .maxstack  1
@@ -946,13 +1038,15 @@ Object second has been disposed.";
     IL_003a:  endfinally
   }
   IL_003b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void MultipleUsingVarFollowingCodeEmitTest()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -977,12 +1071,16 @@ class C2
         o0.M();
     }
 }";
-            var output = @"Object first has been created.
+            var output =
+                @"Object first has been created.
 Object second has been created.
 Object third has been created.
 Object second has been disposed.
 Object first has been disposed.";
-            CompileAndVerify(source, expectedOutput: output).VerifyIL("C2.Main", @"
+            CompileAndVerify(source, expectedOutput: output)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       60 (0x3c)
   .maxstack  1
@@ -1021,13 +1119,15 @@ Object first has been disposed.";
     IL_003a:  endfinally
   }
   IL_003b:  ret
-}");
+}"
+                );
         }
 
         [Fact]
         public void JumpBackOverUsingDeclaration()
         {
-            string source = @"
+            string source =
+                @"
 using System;
 class C1 : IDisposable
 {
@@ -1056,11 +1156,15 @@ class C2
         }
     }
 }";
-            var output = @"Disposed first
+            var output =
+                @"Disposed first
 Disposed first
 Disposed first
 Disposed first";
-            CompileAndVerify(source, expectedOutput: output).VerifyIL("C2.Main", @"
+            CompileAndVerify(source, expectedOutput: output)
+                .VerifyIL(
+                    "C2.Main",
+                    @"
 {
   // Code size       36 (0x24)
   .maxstack  3
@@ -1093,13 +1197,15 @@ Disposed first";
   }
   IL_0023:  ret
 }
-");
+"
+                );
         }
 
         [Fact]
         public void UsingVariableFromAwaitExpressionDisposesOnlyIfAwaitSucceeds()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 
@@ -1140,7 +1246,8 @@ class C
         [Fact]
         public void UsingDeclarationAsync()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -1159,7 +1266,11 @@ class C2
         await using C1 c = new C1();
     }
 }";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
 
             CompileAndVerify(compilation, expectedOutput: "Dispose async");
         }
@@ -1167,7 +1278,8 @@ class C2
         [Fact]
         public void UsingDeclarationAsyncExplicit()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -1186,7 +1298,11 @@ class C2
         await using C1 c = new C1();
     }
 }";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
 
             CompileAndVerify(compilation, expectedOutput: "Dispose async");
         }
@@ -1194,7 +1310,8 @@ class C2
         [Fact]
         public void UsingDeclarationAsyncWithMultipleDeclarations()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -1222,7 +1339,8 @@ class C2
         Console.WriteLine(""After declarations"");
     }
 }";
-            string expectedOutput = @"
+            string expectedOutput =
+                @"
 Created first
 Created second
 Created third
@@ -1231,14 +1349,19 @@ Dispose async third
 Dispose async second
 Dispose async first
 ";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
         [Fact]
         public void UsingDeclarationAsyncWithMultipleInARow()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -1268,7 +1391,8 @@ class C2
         Console.WriteLine(""After declarations"");
     }
 }";
-            string expectedOutput = @"
+            string expectedOutput =
+                @"
 Created first
 Created second
 Created third
@@ -1278,14 +1402,19 @@ Dispose async second
 Dispose async first
 ";
 
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
             CompileAndVerify(compilation, expectedOutput: expectedOutput);
         }
 
         [Fact]
         public void UsingDeclarationWithNull()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IDisposable
@@ -1314,7 +1443,11 @@ class C3
         Console.Write(""After declarations; "");
     }
 }";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe).VerifyDiagnostics();
+            var compilation = CreateCompilationWithTasksExtensions(
+                    new[] { source, IAsyncDisposableDefinition },
+                    options: TestOptions.DebugExe
+                )
+                .VerifyDiagnostics();
 
             CompileAndVerify(compilation, expectedOutput: "After declarations; ");
         }
@@ -1322,7 +1455,8 @@ class C3
         [Fact]
         public void UsingDeclarationAsyncMissingValueTask()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1 : IAsyncDisposable
@@ -1341,19 +1475,24 @@ class C2
     }
 }";
 
-            var comp = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition });
+            var comp = CreateCompilationWithTasksExtensions(
+                new[] { source, IAsyncDisposableDefinition }
+            );
             comp.MakeTypeMissing(WellKnownType.System_Threading_Tasks_ValueTask);
             comp.VerifyDiagnostics(
                 // (16,9): error CS0518: Predefined type 'System.Threading.Tasks.ValueTask' is not defined or imported
                 //         await using C1 c1 = new C1();
-                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "await").WithArguments("System.Threading.Tasks.ValueTask").WithLocation(16, 9)
-                );
+                Diagnostic(ErrorCode.ERR_PredefinedTypeNotFound, "await")
+                    .WithArguments("System.Threading.Tasks.ValueTask")
+                    .WithLocation(16, 9)
+            );
         }
 
         [Fact]
         public void UsingDeclarationAsync_WithOptionalParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1
@@ -1372,7 +1511,10 @@ class C2
         await using C1 c = new C1();
     }
 }";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithTasksExtensions(
+                new[] { source, IAsyncDisposableDefinition },
+                options: TestOptions.DebugExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: "Dispose async 1");
         }
@@ -1380,7 +1522,8 @@ class C2
         [Fact]
         public void UsingDeclarationAsync_WithParamsParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Threading.Tasks;
 class C1
@@ -1399,7 +1542,10 @@ class C2
         await using C1 c = new C1();
     }
 }";
-            var compilation = CreateCompilationWithTasksExtensions(new[] { source, IAsyncDisposableDefinition }, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithTasksExtensions(
+                new[] { source, IAsyncDisposableDefinition },
+                options: TestOptions.DebugExe
+            );
 
             CompileAndVerify(compilation, expectedOutput: "Dispose async 0");
         }

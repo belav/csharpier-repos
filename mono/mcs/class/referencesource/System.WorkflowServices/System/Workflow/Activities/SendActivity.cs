@@ -28,65 +28,83 @@ namespace System.Workflow.Activities
     [DesignerAttribute(typeof(SendActivityDesigner), typeof(IDesigner))]
     [ToolboxBitmap(typeof(SendActivity), "Design.Resources.SendActivity.png")]
     [ActivityValidator(typeof(SendActivityValidator))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class SendActivity : Activity
     {
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty AfterResponseEvent =
-            DependencyProperty.Register("AfterResponse",
+        public static readonly DependencyProperty AfterResponseEvent = DependencyProperty.Register(
+            "AfterResponse",
             typeof(EventHandler<SendActivityEventArgs>),
-            typeof(SendActivity));
+            typeof(SendActivity)
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        public static readonly DependencyProperty BeforeSendEvent =
-            DependencyProperty.Register("BeforeSend",
+        public static readonly DependencyProperty BeforeSendEvent = DependencyProperty.Register(
+            "BeforeSend",
             typeof(EventHandler<SendActivityEventArgs>),
-            typeof(SendActivity));
+            typeof(SendActivity)
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         public static readonly DependencyProperty CustomAddressProperty =
-            DependencyProperty.Register("CustomAddress",
-            typeof(string),
-            typeof(SendActivity),
-            new PropertyMetadata(null));
+            DependencyProperty.Register(
+                "CustomAddress",
+                typeof(string),
+                typeof(SendActivity),
+                new PropertyMetadata(null)
+            );
 
         public const string ReturnValuePropertyName = "(ReturnValue)";
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ChannelTokenProperty =
-            DependencyProperty.Register("ChannelToken",
-            typeof(ChannelToken),
-            typeof(SendActivity),
-            new PropertyMetadata(null, DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ChannelToken",
+                typeof(ChannelToken),
+                typeof(SendActivity),
+                new PropertyMetadata(null, DependencyPropertyOptions.Metadata)
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ParameterBindingsProperty =
-            DependencyProperty.Register("ParameterBindings",
-            typeof(WorkflowParameterBindingCollection),
-            typeof(SendActivity),
-            new PropertyMetadata(DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly));
+            DependencyProperty.Register(
+                "ParameterBindings",
+                typeof(WorkflowParameterBindingCollection),
+                typeof(SendActivity),
+                new PropertyMetadata(
+                    DependencyPropertyOptions.Metadata | DependencyPropertyOptions.ReadOnly
+                )
+            );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty ServiceOperationInfoProperty =
-            DependencyProperty.Register("ServiceOperationInfo",
-            typeof(TypedOperationInfo),
-            typeof(SendActivity),
-            new PropertyMetadata(DependencyPropertyOptions.Metadata));
+            DependencyProperty.Register(
+                "ServiceOperationInfo",
+                typeof(TypedOperationInfo),
+                typeof(SendActivity),
+                new PropertyMetadata(DependencyPropertyOptions.Metadata)
+            );
 
         [NonSerialized]
         private SendOperationInfoHelper operationHelper;
 
         public SendActivity()
         {
-            base.SetReadOnlyPropertyValue(SendActivity.ParameterBindingsProperty,
-                new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                SendActivity.ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         public SendActivity(String name)
             : base(name)
         {
-            base.SetReadOnlyPropertyValue(SendActivity.ParameterBindingsProperty,
-                new WorkflowParameterBindingCollection(this));
+            base.SetReadOnlyPropertyValue(
+                SendActivity.ParameterBindingsProperty,
+                new WorkflowParameterBindingCollection(this)
+            );
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1713:EventsShouldNotHaveBeforeOrAfterPrefix")]
@@ -96,14 +114,8 @@ namespace System.Workflow.Activities
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public event EventHandler<SendActivityEventArgs> AfterResponse
         {
-            add
-            {
-                base.AddHandler(SendActivity.AfterResponseEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(SendActivity.AfterResponseEvent, value);
-            }
+            add { base.AddHandler(SendActivity.AfterResponseEvent, value); }
+            remove { base.RemoveHandler(SendActivity.AfterResponseEvent, value); }
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1713:EventsShouldNotHaveBeforeOrAfterPrefix")]
@@ -113,14 +125,8 @@ namespace System.Workflow.Activities
         [DesignerSerializationVisibility(DesignerSerializationVisibility.Visible)]
         public event EventHandler<SendActivityEventArgs> BeforeSend
         {
-            add
-            {
-                base.AddHandler(SendActivity.BeforeSendEvent, value);
-            }
-            remove
-            {
-                base.RemoveHandler(SendActivity.BeforeSendEvent, value);
-            }
+            add { base.AddHandler(SendActivity.BeforeSendEvent, value); }
+            remove { base.RemoveHandler(SendActivity.BeforeSendEvent, value); }
         }
 
         [DefaultValue(null)]
@@ -130,14 +136,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.Send_ChannelToken_Description)]
         public ChannelToken ChannelToken
         {
-            get
-            {
-                return (ChannelToken) this.GetValue(SendActivity.ChannelTokenProperty);
-            }
-            set
-            {
-                this.SetValue(SendActivity.ChannelTokenProperty, value);
-            }
+            get { return (ChannelToken)this.GetValue(SendActivity.ChannelTokenProperty); }
+            set { this.SetValue(SendActivity.ChannelTokenProperty, value); }
         }
 
         [Browsable(false)]
@@ -150,20 +150,35 @@ namespace System.Workflow.Activities
                 {
 #pragma warning suppress 56503
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)));
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
+                        )
+                    );
                 }
 
-                return SendActivity.GetContext(this, this.ChannelToken, this.ServiceOperationInfo.ContractType);
+                return SendActivity.GetContext(
+                    this,
+                    this.ChannelToken,
+                    this.ServiceOperationInfo.ContractType
+                );
             }
             set
             {
                 if (this.ServiceOperationInfo == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)));
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
+                        )
+                    );
                 }
 
-                SendActivity.SetContext(this, this.ChannelToken, this.ServiceOperationInfo.ContractType, value);
+                SendActivity.SetContext(
+                    this,
+                    this.ChannelToken,
+                    this.ServiceOperationInfo.ContractType,
+                    value
+                );
             }
         }
 
@@ -172,15 +187,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.Send_CustomAddress_Description)]
         public string CustomAddress
         {
-            get
-            {
-                return (string) GetValue(CustomAddressProperty);
-            }
-
-            set
-            {
-                SetValue(CustomAddressProperty, value);
-            }
+            get { return (string)GetValue(CustomAddressProperty); }
+            set { SetValue(CustomAddressProperty, value); }
         }
 
         [Browsable(false)]
@@ -189,7 +197,11 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return ((WorkflowParameterBindingCollection)(base.GetValue(SendActivity.ParameterBindingsProperty)));
+                return (
+                    (WorkflowParameterBindingCollection)(
+                        base.GetValue(SendActivity.ParameterBindingsProperty)
+                    )
+                );
             }
         }
 
@@ -201,25 +213,35 @@ namespace System.Workflow.Activities
         {
             get
             {
-                return ((TypedOperationInfo)(base.GetValue(SendActivity.ServiceOperationInfoProperty)));
+                return (
+                    (TypedOperationInfo)(base.GetValue(SendActivity.ServiceOperationInfoProperty))
+                );
             }
             set
             {
-                OperationInfoBase currentValue = ((OperationInfoBase)(base.GetValue(SendActivity.ServiceOperationInfoProperty)));
+                OperationInfoBase currentValue = (
+                    (OperationInfoBase)(base.GetValue(SendActivity.ServiceOperationInfoProperty))
+                );
                 if (value != null && currentValue != value)
                 {
-                    DependencyProperty ParentDependencyObjectProperty =
-                        DependencyProperty.FromName("ParentDependencyObject", typeof(DependencyObject));
+                    DependencyProperty ParentDependencyObjectProperty = DependencyProperty.FromName(
+                        "ParentDependencyObject",
+                        typeof(DependencyObject)
+                    );
 
-                    Activity currentParent = value.GetValue(ParentDependencyObjectProperty) as Activity;
+                    Activity currentParent =
+                        value.GetValue(ParentDependencyObjectProperty) as Activity;
 
                     if (currentParent != null)
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
                             "value",
-                            SR2.GetString(SR2.Error_OperationIsAlreadyAssociatedWithActivity,
-                            value,
-                            currentParent.QualifiedName));
+                            SR2.GetString(
+                                SR2.Error_OperationIsAlreadyAssociatedWithActivity,
+                                value,
+                                currentParent.QualifiedName
+                            )
+                        );
                     }
 
                     if (currentValue != null)
@@ -233,7 +255,9 @@ namespace System.Workflow.Activities
                 if (this.DesignMode)
                 {
                     Activity rootActivity = this.RootActivity;
-                    rootActivity.RemoveProperty(DynamicContractTypeBuilder.DynamicContractTypesProperty);
+                    rootActivity.RemoveProperty(
+                        DynamicContractTypeBuilder.DynamicContractTypesProperty
+                    );
                 }
 
                 base.SetValue(SendActivity.ServiceOperationInfoProperty, value);
@@ -248,7 +272,9 @@ namespace System.Workflow.Activities
                 {
                     if (this.UserData.Contains(typeof(SendOperationInfoHelper)))
                     {
-                        this.operationHelper = this.UserData[typeof(SendOperationInfoHelper)] as SendOperationInfoHelper;
+                        this.operationHelper =
+                            this.UserData[typeof(SendOperationInfoHelper)]
+                            as SendOperationInfoHelper;
                     }
                 }
 
@@ -262,9 +288,11 @@ namespace System.Workflow.Activities
             }
         }
 
-        public static IDictionary<string, string> GetContext(Activity activity,
+        public static IDictionary<string, string> GetContext(
+            Activity activity,
             ChannelToken endpoint,
-            Type contractType)
+            Type contractType
+        )
         {
             if (activity == null)
             {
@@ -282,10 +310,12 @@ namespace System.Workflow.Activities
             return GetContext(activity, endpoint.Name, endpoint.OwnerActivityName, contractType);
         }
 
-        public static IDictionary<string, string> GetContext(Activity activity,
+        public static IDictionary<string, string> GetContext(
+            Activity activity,
             string endpointName,
             string ownerActivityName,
-            Type contractType)
+            Type contractType
+        )
         {
             if (activity == null)
             {
@@ -293,15 +323,22 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(endpointName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("endpointName",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "endpointName",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
             if (contractType == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
             }
 
-            LogicalChannel logicalChannel = ChannelToken.GetLogicalChannel(activity, endpointName, ownerActivityName, contractType);
+            LogicalChannel logicalChannel = ChannelToken.GetLogicalChannel(
+                activity,
+                endpointName,
+                ownerActivityName,
+                contractType
+            );
             if (logicalChannel != null)
             {
                 return logicalChannel.Context;
@@ -310,10 +347,12 @@ namespace System.Workflow.Activities
             return null;
         }
 
-        public static void SetContext(Activity activity,
+        public static void SetContext(
+            Activity activity,
             ChannelToken endpoint,
             Type contractType,
-            IDictionary<string, string> context)
+            IDictionary<string, string> context
+        )
         {
             if (activity == null)
             {
@@ -331,11 +370,13 @@ namespace System.Workflow.Activities
             SetContext(activity, endpoint.Name, endpoint.OwnerActivityName, contractType, context);
         }
 
-        public static void SetContext(Activity activity,
+        public static void SetContext(
+            Activity activity,
             string endpointName,
             string ownerActivityName,
             Type contractType,
-            IDictionary<string, string> context)
+            IDictionary<string, string> context
+        )
         {
             if (activity == null)
             {
@@ -343,15 +384,22 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(endpointName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("endpointName",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "endpointName",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
             if (contractType == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contractType");
             }
 
-            LogicalChannel logicalChannel = ChannelToken.GetLogicalChannel(activity, endpointName, ownerActivityName, contractType);
+            LogicalChannel logicalChannel = ChannelToken.GetLogicalChannel(
+                activity,
+                endpointName,
+                ownerActivityName,
+                contractType
+            );
             if (logicalChannel != null)
             {
                 if (context != null)
@@ -365,38 +413,66 @@ namespace System.Workflow.Activities
             }
         }
 
-        protected internal override ActivityExecutionStatus Execute(ActivityExecutionContext executionContext)
+        protected internal override ActivityExecutionStatus Execute(
+            ActivityExecutionContext executionContext
+        )
         {
             TypedOperationInfo serviceOperationInfo = this.ServiceOperationInfo;
             if (serviceOperationInfo == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
+                    )
+                );
             }
 
             MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(executionContext);
             if (methodInfo == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_MethodInfoNotAvailable, this.Name)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_MethodInfoNotAvailable, this.Name)
+                    )
+                );
             }
 
             ChannelToken channelToken = this.ChannelToken;
 
-            LogicalChannel logicalChannel = ChannelToken.Register(this, channelToken, serviceOperationInfo.ContractType);
+            LogicalChannel logicalChannel = ChannelToken.Register(
+                this,
+                channelToken,
+                serviceOperationInfo.ContractType
+            );
             if (!logicalChannel.Initialized)
             {
                 logicalChannel.Initialize(channelToken.EndpointName, this.CustomAddress);
             }
 
-            using (ChannelManagerService.ChannelTicket leasedChannel = ChannelManagerService.Take(executionContext, this.WorkflowInstanceId, logicalChannel))
+            using (
+                ChannelManagerService.ChannelTicket leasedChannel = ChannelManagerService.Take(
+                    executionContext,
+                    this.WorkflowInstanceId,
+                    logicalChannel
+                )
+            )
             {
-                using (OperationContextScope scope = new OperationContextScope((IContextChannel) leasedChannel.Channel))
+                using (
+                    OperationContextScope scope = new OperationContextScope(
+                        (IContextChannel)leasedChannel.Channel
+                    )
+                )
                 {
-                    EventHandler<SendActivityEventArgs>[] invocationList = this.GetInvocationList<EventHandler<SendActivityEventArgs>>(SendActivity.BeforeSendEvent);
+                    EventHandler<SendActivityEventArgs>[] invocationList = this.GetInvocationList<
+                        EventHandler<SendActivityEventArgs>
+                    >(SendActivity.BeforeSendEvent);
                     if (invocationList != null && invocationList.Length > 0)
                     {
-                        base.RaiseGenericEvent(SendActivity.BeforeSendEvent, this, new SendActivityEventArgs(this));
+                        base.RaiseGenericEvent(
+                            SendActivity.BeforeSendEvent,
+                            this,
+                            new SendActivityEventArgs(this)
+                        );
                     }
 
                     SendOperationInfoHelper helper = this.OperationHelper;
@@ -405,8 +481,12 @@ namespace System.Workflow.Activities
                     object[] parameters = helper.GetInputs(this, bindings);
                     object returnValue = null;
 
-                    bool isSessionless = ChannelManagerHelpers.IsSessionlessContract(logicalChannel.ContractType);
-                    bool hasContext = (logicalChannel.Context != null && logicalChannel.Context.Count > 0);
+                    bool isSessionless = ChannelManagerHelpers.IsSessionlessContract(
+                        logicalChannel.ContractType
+                    );
+                    bool hasContext = (
+                        logicalChannel.Context != null && logicalChannel.Context.Count > 0
+                    );
                     bool fatalException = false;
 
                     if (!isSessionless && hasContext)
@@ -416,7 +496,11 @@ namespace System.Workflow.Activities
 
                     try
                     {
-                        returnValue = this.InvokeOperation(methodInfo, leasedChannel.Channel, parameters);
+                        returnValue = this.InvokeOperation(
+                            methodInfo,
+                            leasedChannel.Channel,
+                            parameters
+                        );
                     }
                     catch (Exception exception)
                     {
@@ -428,8 +512,7 @@ namespace System.Workflow.Activities
                     }
                     finally
                     {
-                        if (!fatalException &&
-                            !hasContext && !isSessionless && !helper.IsOneWay)
+                        if (!fatalException && !hasContext && !isSessionless && !helper.IsOneWay)
                         {
                             ChannelManagerService.UpdateLogicalChannelContext(logicalChannel);
                         }
@@ -437,10 +520,16 @@ namespace System.Workflow.Activities
 
                     helper.PopulateOutputs(this, bindings, parameters, returnValue);
 
-                    invocationList = this.GetInvocationList<EventHandler<SendActivityEventArgs>>(SendActivity.AfterResponseEvent);
+                    invocationList = this.GetInvocationList<EventHandler<SendActivityEventArgs>>(
+                        SendActivity.AfterResponseEvent
+                    );
                     if (invocationList != null && invocationList.Length > 0)
                     {
-                        base.RaiseGenericEvent(SendActivity.AfterResponseEvent, this, new SendActivityEventArgs(this));
+                        base.RaiseGenericEvent(
+                            SendActivity.AfterResponseEvent,
+                            this,
+                            new SendActivityEventArgs(this)
+                        );
                     }
                 }
             }
@@ -455,7 +544,7 @@ namespace System.Workflow.Activities
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("properties");
             }
 
-            if (((IComponent) this).Site == null)
+            if (((IComponent)this).Site == null)
             {
                 return;
             }
@@ -463,7 +552,7 @@ namespace System.Workflow.Activities
             TypedOperationInfo serviceOperationInfo = this.ServiceOperationInfo;
             if (serviceOperationInfo != null)
             {
-                MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(((IComponent) this).Site);
+                MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(((IComponent)this).Site);
                 if (methodInfo != null)
                 {
                     ArrayList paramInfo = new ArrayList(methodInfo.GetParameters());
@@ -476,9 +565,12 @@ namespace System.Workflow.Activities
                     {
                         if (param.ParameterType != null)
                         {
-                            PropertyDescriptor prop =
-                                new ParameterInfoBasedPropertyDescriptor(typeof(ReceiveActivity),
-                                param, true, DesignOnlyAttribute.Yes);
+                            PropertyDescriptor prop = new ParameterInfoBasedPropertyDescriptor(
+                                typeof(ReceiveActivity),
+                                param,
+                                true,
+                                DesignOnlyAttribute.Yes
+                            );
 
                             properties[prop.Name] = prop;
                         }
@@ -494,18 +586,28 @@ namespace System.Workflow.Activities
             if (serviceOperationInfo == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, this.Name)
+                    )
+                );
             }
 
             OperationParameterInfoCollection parameters = null;
 
-            Activity definitionRoot = base.RootActivity.GetValue(Activity.WorkflowDefinitionProperty) as Activity;
+            Activity definitionRoot =
+                base.RootActivity.GetValue(Activity.WorkflowDefinitionProperty) as Activity;
             if (definitionRoot != null)
             {
-                SendActivity definition = definitionRoot.GetActivityByName(this.QualifiedName, true) as SendActivity;
-                if ((definition != null) && definition.UserData.Contains(typeof(OperationParameterInfoCollection)))
+                SendActivity definition =
+                    definitionRoot.GetActivityByName(this.QualifiedName, true) as SendActivity;
+                if (
+                    (definition != null)
+                    && definition.UserData.Contains(typeof(OperationParameterInfoCollection))
+                )
                 {
-                    parameters = definition.UserData[typeof(OperationParameterInfoCollection)] as OperationParameterInfoCollection;
+                    parameters =
+                        definition.UserData[typeof(OperationParameterInfoCollection)]
+                        as OperationParameterInfoCollection;
                 }
             }
 
@@ -533,41 +635,60 @@ namespace System.Workflow.Activities
             Guid workflowInstanceId = this.WorkflowInstanceId;
             string qualifiedName = this.QualifiedName;
 
-            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Verbose, 0,
+            System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                TraceEventType.Verbose,
+                0,
                 "Workflow Instance {0}, send activity {1} - invoking operation",
-                workflowInstanceId, qualifiedName);
+                workflowInstanceId,
+                qualifiedName
+            );
 
             try
             {
-                object retVal = operation.ReflectedType.InvokeMember(operation.Name,
+                object retVal = operation.ReflectedType.InvokeMember(
+                    operation.Name,
                     BindingFlags.Instance | BindingFlags.Public | BindingFlags.InvokeMethod,
                     null,
                     channel,
                     parameters,
-                    CultureInfo.InvariantCulture);
+                    CultureInfo.InvariantCulture
+                );
 
-                System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Verbose, 0,
+                System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                    TraceEventType.Verbose,
+                    0,
                     "Workflow Instance {0}, send activity {1} - operation invoke succeeded",
-                    workflowInstanceId, qualifiedName);
+                    workflowInstanceId,
+                    qualifiedName
+                );
 
                 return retVal;
-
             }
             catch (TargetInvocationException e)
             {
                 if (e.InnerException != null)
                 {
-                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 0,
+                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                        TraceEventType.Error,
+                        0,
                         "Workflow Instance {0}, send activity {1} - operation invoke failed with error: {2}",
-                        workflowInstanceId, qualifiedName, e.InnerException.Message);
+                        workflowInstanceId,
+                        qualifiedName,
+                        e.InnerException.Message
+                    );
 
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(e.InnerException);
                 }
                 else
                 {
-                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(TraceEventType.Error, 0,
+                    System.Workflow.Runtime.WorkflowTrace.Runtime.TraceEvent(
+                        TraceEventType.Error,
+                        0,
                         "Workflow Instance {0}, send activity {1} - operation invoke failed with error: {2}",
-                        workflowInstanceId, qualifiedName, e.Message);
+                        workflowInstanceId,
+                        qualifiedName,
+                        e.Message
+                    );
 
                     throw;
                 }
@@ -599,14 +720,20 @@ namespace System.Workflow.Activities
                 if (serviceOperationInfo == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, activity.Name)));
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_ServiceOperationInfoNotSpecified, activity.Name)
+                        )
+                    );
                 }
 
                 MethodInfo methodInfo = serviceOperationInfo.GetMethodInfo(serviceProvider);
                 if (methodInfo == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                        new InvalidOperationException(SR2.GetString(SR2.Error_MethodInfoNotAvailable, activity.Name)));
+                        new InvalidOperationException(
+                            SR2.GetString(SR2.Error_MethodInfoNotAvailable, activity.Name)
+                        )
+                    );
                 }
 
                 if (methodInfo.ReturnType != null && methodInfo.ReturnType != typeof(void))
@@ -616,15 +743,22 @@ namespace System.Workflow.Activities
 
                 foreach (ParameterInfo parameter in methodInfo.GetParameters())
                 {
-                    if (parameter.ParameterType.IsByRef ||
-                        parameter.IsOut || (parameter.IsIn && parameter.IsOut))
+                    if (
+                        parameter.ParameterType.IsByRef
+                        || parameter.IsOut
+                        || (parameter.IsIn && parameter.IsOut)
+                    )
                     {
-                        outputParameters.Add(new KeyValuePair<int, string>(parameter.Position, parameter.Name));
+                        outputParameters.Add(
+                            new KeyValuePair<int, string>(parameter.Position, parameter.Name)
+                        );
                     }
 
                     if (!parameter.IsOut || (parameter.IsIn && parameter.IsOut))
                     {
-                        inputParameters.Add(new KeyValuePair<int, string>(parameter.Position, parameter.Name));
+                        inputParameters.Add(
+                            new KeyValuePair<int, string>(parameter.Position, parameter.Name)
+                        );
                     }
                 }
 
@@ -632,26 +766,31 @@ namespace System.Workflow.Activities
 
                 this.operationName = serviceOperationInfo.Name;
 
-                object[] operationContractAttribs = methodInfo.GetCustomAttributes(typeof(OperationContractAttribute), true);
+                object[] operationContractAttribs = methodInfo.GetCustomAttributes(
+                    typeof(OperationContractAttribute),
+                    true
+                );
 
                 if (operationContractAttribs != null && operationContractAttribs.Length > 0)
                 {
                     if (operationContractAttribs[0] is OperationContractAttribute)
                     {
-                        this.isOneWay = ((OperationContractAttribute) operationContractAttribs[0]).IsOneWay;
+                        this.isOneWay = (
+                            (OperationContractAttribute)operationContractAttribs[0]
+                        ).IsOneWay;
                     }
                 }
             }
 
             public bool IsOneWay
             {
-                get
-                {
-                    return this.isOneWay;
-                }
+                get { return this.isOneWay; }
             }
 
-            public object[] GetInputs(SendActivity activity, WorkflowParameterBindingCollection bindings)
+            public object[] GetInputs(
+                SendActivity activity,
+                WorkflowParameterBindingCollection bindings
+            )
             {
                 if (activity == null)
                 {
@@ -673,10 +812,15 @@ namespace System.Workflow.Activities
                         else
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR2.GetString(SR2.Error_ParameterBindingMissing,
-                                parameterInfo.Value,
-                                this.operationName,
-                                activity.Name)));
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.Error_ParameterBindingMissing,
+                                        parameterInfo.Value,
+                                        this.operationName,
+                                        activity.Name
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -684,7 +828,12 @@ namespace System.Workflow.Activities
                 return inputs;
             }
 
-            public void PopulateOutputs(SendActivity activity, WorkflowParameterBindingCollection bindings, object[] outputs, object returnValue)
+            public void PopulateOutputs(
+                SendActivity activity,
+                WorkflowParameterBindingCollection bindings,
+                object[] outputs,
+                object returnValue
+            )
             {
                 if (activity == null)
                 {
@@ -708,8 +857,15 @@ namespace System.Workflow.Activities
                         else
                         {
                             throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                                new InvalidOperationException(SR2.GetString(SR2.Error_ParameterBindingMissing,
-                                parameterInfo.Value, this.operationName, activity.Name)));
+                                new InvalidOperationException(
+                                    SR2.GetString(
+                                        SR2.Error_ParameterBindingMissing,
+                                        parameterInfo.Value,
+                                        this.operationName,
+                                        activity.Name
+                                    )
+                                )
+                            );
                         }
                     }
                 }
@@ -723,10 +879,15 @@ namespace System.Workflow.Activities
                     else
                     {
                         throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                            new InvalidOperationException(SR2.GetString(SR2.Error_ParameterBindingMissing,
-                            SendActivity.ReturnValuePropertyName,
-                            this.operationName,
-                            activity.Name)));
+                            new InvalidOperationException(
+                                SR2.GetString(
+                                    SR2.Error_ParameterBindingMissing,
+                                    SendActivity.ReturnValuePropertyName,
+                                    this.operationName,
+                                    activity.Name
+                                )
+                            )
+                        );
                     }
                 }
             }

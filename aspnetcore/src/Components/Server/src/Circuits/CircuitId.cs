@@ -37,10 +37,10 @@ internal readonly struct CircuitId : IEquatable<CircuitId>
             return Secret == null;
         }
 
-        return
-            CryptographicOperations.FixedTimeEquals(
-                MemoryMarshal.AsBytes(Secret.AsSpan()),
-                MemoryMarshal.AsBytes(other.Secret.AsSpan()));
+        return CryptographicOperations.FixedTimeEquals(
+            MemoryMarshal.AsBytes(Secret.AsSpan()),
+            MemoryMarshal.AsBytes(other.Secret.AsSpan())
+        );
     }
 
     public override bool Equals(object obj)

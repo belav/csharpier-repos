@@ -17,7 +17,11 @@ internal static partial class Interop
 
         internal const int NS_ALL = 0;
 
-        [LibraryImport(Libraries.Ws2_32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
+        [LibraryImport(
+            Libraries.Ws2_32,
+            SetLastError = true,
+            StringMarshalling = StringMarshalling.Utf16
+        )]
         internal static unsafe partial int GetAddrInfoExW(
             string pName,
             string? pServiceName,
@@ -28,7 +32,8 @@ internal static partial class Interop
             IntPtr timeout,
             NativeOverlapped* lpOverlapped,
             delegate* unmanaged<int, int, NativeOverlapped*, void> lpCompletionRoutine,
-            IntPtr* lpNameHandle);
+            IntPtr* lpNameHandle
+        );
 
         [LibraryImport(Libraries.Ws2_32)]
         internal static unsafe partial int GetAddrInfoExCancel(IntPtr* lpHandle);
@@ -44,11 +49,11 @@ internal static partial class Interop
             internal int ai_socktype;
             internal int ai_protocol;
             internal nuint ai_addrlen;
-            internal IntPtr ai_canonname;    // Ptr to the canonical name - check for NULL
-            internal byte* ai_addr;          // Ptr to the sockaddr structure
-            internal IntPtr ai_blob;         // Unused ptr to blob data about provider
+            internal IntPtr ai_canonname; // Ptr to the canonical name - check for NULL
+            internal byte* ai_addr; // Ptr to the sockaddr structure
+            internal IntPtr ai_blob; // Unused ptr to blob data about provider
             internal IntPtr ai_bloblen;
-            internal IntPtr ai_provider;     // Unused ptr to the namespace provider guid
+            internal IntPtr ai_provider; // Unused ptr to the namespace provider guid
             internal AddressInfoEx* ai_next; // Next structure in linked list
         }
     }

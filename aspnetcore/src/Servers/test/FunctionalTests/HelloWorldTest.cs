@@ -4,8 +4,8 @@
 using System;
 using System.Net;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.AspNetCore.InternalTesting;
+using Microsoft.AspNetCore.Server.IntegrationTesting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Testing;
 using Xunit;
@@ -18,12 +18,17 @@ public class HelloWorldTests : LoggedTest
 {
     private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
 
-    public HelloWorldTests(ITestOutputHelper output) : base(output)
-    {
-    }
+    public HelloWorldTests(ITestOutputHelper output)
+        : base(output) { }
 
-    public static TestMatrix TestVariants
-        => TestMatrix.ForServers(ServerType.IISExpress, ServerType.Kestrel, ServerType.Nginx, ServerType.HttpSys)
+    public static TestMatrix TestVariants =>
+        TestMatrix
+            .ForServers(
+                ServerType.IISExpress,
+                ServerType.Kestrel,
+                ServerType.Nginx,
+                ServerType.HttpSys
+            )
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels()
@@ -34,21 +39,28 @@ public class HelloWorldTests : LoggedTest
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/45378")]
     public async Task HelloWorld(TestVariant variant)
     {
-        var testName = $"HelloWorld_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
-        using (StartLog(out var loggerFactory,
-            variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
-            testName))
+        var testName =
+            $"HelloWorld_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+        using (
+            StartLog(
+                out var loggerFactory,
+                variant.Server == ServerType.Nginx ? LogLevel.Trace : LogLevel.Debug, // https://github.com/aspnet/ServerTests/issues/144
+                testName
+            )
+        )
         {
             var logger = loggerFactory.CreateLogger("HelloWorld");
 
             var deploymentParameters = new DeploymentParameters(variant)
             {
-                ApplicationPath = Helpers.GetApplicationPath()
+                ApplicationPath = Helpers.GetApplicationPath(),
             };
 
             if (variant.Server == ServerType.Nginx)
             {
-                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent("nginx.conf");
+                deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent(
+                    "nginx.conf"
+                );
             }
 
             if (variant.Server == ServerType.IISExpress)
@@ -56,21 +68,34 @@ public class HelloWorldTests : LoggedTest
                 deploymentParameters.EnvironmentVariables[DebugEnvironmentVariable] = "console";
             }
 
-            using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
+            using (
+                var deployer = IISApplicationDeployerFactory.Create(
+                    deploymentParameters,
+                    loggerFactory
+                )
+            )
             {
                 var deploymentResult = await deployer.DeployAsync();
 
                 // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return deploymentResult.HttpClient.GetAsync(string.Empty);
-                }, logger, deploymentResult.HostShutdownToken);
+                var response = await RetryHelper.RetryRequest(
+                    () =>
+                    {
+                        return deploymentResult.HttpClient.GetAsync(string.Empty);
+                    },
+                    logger,
+                    deploymentResult.HostShutdownToken
+                );
 
                 var responseText = await response.Content.ReadAsStringAsync();
                 try
                 {
-                    string expectedName = Enum.GetName(typeof(RuntimeArchitecture), variant.Architecture);
-                    expectedName = char.ToUpperInvariant(expectedName[0]) + expectedName.Substring(1);
+                    string expectedName = Enum.GetName(
+                        typeof(RuntimeArchitecture),
+                        variant.Architecture
+                    );
+                    expectedName =
+                        char.ToUpperInvariant(expectedName[0]) + expectedName.Substring(1);
                     Assert.Equal($"Hello World {expectedName}", responseText);
                 }
                 catch (XunitException)
@@ -111,8 +136,9 @@ public class HelloWorldTests : LoggedTest
         }
     }
 
-    public static TestMatrix SelfHostTestVariants
-        => TestMatrix.ForServers(ServerType.Kestrel, ServerType.HttpSys)
+    public static TestMatrix SelfHostTestVariants =>
+        TestMatrix
+            .ForServers(ServerType.Kestrel, ServerType.HttpSys)
             .WithTfms(Tfm.Default)
             .WithApplicationTypes(ApplicationType.Portable)
             .WithAllHostingModels()
@@ -123,14 +149,15 @@ public class HelloWorldTests : LoggedTest
     [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/42380")]
     public async Task ApplicationException(TestVariant variant)
     {
-        var testName = $"ApplicationException_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
+        var testName =
+            $"ApplicationException_{variant.Server}_{variant.Tfm}_{variant.Architecture}_{variant.ApplicationType}";
         using (StartLog(out var loggerFactory, LogLevel.Debug, testName))
         {
             var logger = loggerFactory.CreateLogger("ApplicationException");
 
             var deploymentParameters = new DeploymentParameters(variant)
             {
-                ApplicationPath = Helpers.GetApplicationPath()
+                ApplicationPath = Helpers.GetApplicationPath(),
             };
 
             var output = string.Empty;
@@ -147,10 +174,16 @@ public class HelloWorldTests : LoggedTest
                 var deploymentResult = await deployer.DeployAsync();
 
                 // Request to base address and check if various parts of the body are rendered & measure the cold startup time.
-                using (var response = await RetryHelper.RetryRequest(() =>
-                {
-                    return deploymentResult.HttpClient.GetAsync("/throwexception");
-                }, logger, deploymentResult.HostShutdownToken))
+                using (
+                    var response = await RetryHelper.RetryRequest(
+                        () =>
+                        {
+                            return deploymentResult.HttpClient.GetAsync("/throwexception");
+                        },
+                        logger,
+                        deploymentResult.HostShutdownToken
+                    )
+                )
                 {
                     Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
 

@@ -5,7 +5,6 @@ using System;
 using System.IO;
 using System.IO.Tests;
 using System.Threading.Tasks;
-
 using Xunit;
 using Xunit.Abstractions;
 
@@ -13,9 +12,17 @@ namespace System.Net.Http.Functional.Tests
 {
     public class StreamContentTest : StandaloneStreamConformanceTests
     {
-        protected override Task<Stream> CreateReadOnlyStreamCore(byte[]? initialData) => initialData is null ? Task.FromResult<Stream>(null) : new StreamContent(new MemoryStream(initialData)).ReadAsStreamAsync();
-        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[]? initialData) => Task.FromResult<Stream>(null);
-        protected override Task<Stream> CreateReadWriteStreamCore(byte[]? initialData) => Task.FromResult<Stream>(null);
+        protected override Task<Stream> CreateReadOnlyStreamCore(byte[]? initialData) =>
+            initialData is null
+                ? Task.FromResult<Stream>(null)
+                : new StreamContent(new MemoryStream(initialData)).ReadAsStreamAsync();
+
+        protected override Task<Stream> CreateWriteOnlyStreamCore(byte[]? initialData) =>
+            Task.FromResult<Stream>(null);
+
+        protected override Task<Stream> CreateReadWriteStreamCore(byte[]? initialData) =>
+            Task.FromResult<Stream>(null);
+
         protected override bool CanSetLength => false;
 
         [Fact]
@@ -23,7 +30,9 @@ namespace System.Net.Http.Functional.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new StreamContent(null));
             Assert.Throws<ArgumentNullException>(() => new StreamContent(null, 0));
-            Assert.Throws<ArgumentOutOfRangeException>(() => new StreamContent(new MemoryStream(), 0));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => new StreamContent(new MemoryStream(), 0)
+            );
         }
 
         [Fact]
@@ -70,7 +79,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var source = new MockStream(new byte[10]);
             var content = new StreamContent(source);
-            Assert.Throws<ArgumentNullException>(() => { Task t = content.CopyToAsync(null); });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = content.CopyToAsync(null);
+            });
         }
 
         [Fact]
@@ -118,7 +130,10 @@ namespace System.Net.Http.Functional.Tests
 
             // Note that the InvalidOperationException is thrown in CopyToAsync(). It is not thrown inside the task.
             var destination2 = new MemoryStream();
-            Assert.Throws<InvalidOperationException>(() => { Task t = content.CopyToAsync(destination2); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Task t = content.CopyToAsync(destination2);
+            });
         }
 
         [Fact]
@@ -181,7 +196,9 @@ namespace System.Net.Http.Functional.Tests
         [Theory]
         [InlineData(true)]
         [InlineData(false)]
-        public async Task ContentReadStream_GetPropertyPartiallyConsumed_ReturnOriginalStream(bool readStreamAsync)
+        public async Task ContentReadStream_GetPropertyPartiallyConsumed_ReturnOriginalStream(
+            bool readStreamAsync
+        )
         {
             int consumed = 4;
             var source = new MockStream(new byte[10]);
@@ -239,9 +256,7 @@ namespace System.Net.Http.Functional.Tests
             }
 
             public MockStream(byte[] data)
-                : this(data, true, true)
-            {
-            }
+                : this(data, true, true) { }
 
             public MockStream(byte[] data, bool canSeek, bool canRead)
                 : base(data)

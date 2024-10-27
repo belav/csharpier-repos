@@ -7,12 +7,16 @@ namespace Microsoft.AspNetCore.InternalTesting;
 
 // We include a collection and assembly fixture to verify that they both still work.
 [Collection("MyCollection")]
-[TestCaseOrderer("Microsoft.AspNetCore.InternalTesting.AlphabeticalOrderer", "Microsoft.AspNetCore.InternalTesting.Tests")]
+[TestCaseOrderer(
+    "Microsoft.AspNetCore.InternalTesting.AlphabeticalOrderer",
+    "Microsoft.AspNetCore.InternalTesting.Tests"
+)]
 public class AssemblyFixtureTest
 {
     public AssemblyFixtureTest(
         TestAssemblyFixture assemblyFixture,
-        TestCollectionFixture collectionFixture)
+        TestCollectionFixture collectionFixture
+    )
     {
         AssemblyFixture = assemblyFixture;
         CollectionFixture = collectionFixture;
@@ -43,6 +47,4 @@ public class AssemblyFixtureTest
 }
 
 [CollectionDefinition("MyCollection", DisableParallelization = true)]
-public class MyCollection : ICollectionFixture<TestCollectionFixture>
-{
-}
+public class MyCollection : ICollectionFixture<TestCollectionFixture> { }

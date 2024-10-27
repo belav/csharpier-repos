@@ -3,9 +3,9 @@
 // -----------------------------------------------------------------------
 using System;
 using System.ComponentModel.Composition.Primitives;
+using System.Reflection;
 using Microsoft.Internal;
 using Microsoft.Internal.Collections;
-using System.Reflection;
 
 namespace System.ComponentModel.Composition.ReflectionModel
 {
@@ -54,7 +54,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
         public bool IsPartCreator { get; private set; }
 
-        public Type ContractType { get { return this._contractType; } }
+        public Type ContractType
+        {
+            get { return this._contractType; }
+        }
 
         public Func<Export, object> CastExport
         {
@@ -86,12 +89,11 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             if (type.IsGenericType && type.GetGenericTypeDefinition() == baseGenericTypeDefinition)
             {
-                    return true;
+                return true;
             }
 
             return IsGenericDescendentOf(type.BaseType, baseGenericTypeDefinition);
         }
-
 
         public static bool IsDescendentOf(Type type, Type baseType)
         {
@@ -117,7 +119,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                 {
                     if (!_isOpenGeneric)
                     {
-                        this._castSingleValue = ExportServices.CreateStronglyTypedLazyFactory(arguments[0].UnderlyingSystemType, null);
+                        this._castSingleValue = ExportServices.CreateStronglyTypedLazyFactory(
+                            arguments[0].UnderlyingSystemType,
+                            null
+                        );
                     }
                     return arguments[0];
                 }
@@ -127,32 +132,47 @@ namespace System.ComponentModel.Composition.ReflectionModel
                     this.MetadataViewType = arguments[1];
                     if (!_isOpenGeneric)
                     {
-                        this._castSingleValue = ExportServices.CreateStronglyTypedLazyFactory(arguments[0].UnderlyingSystemType, arguments[1].UnderlyingSystemType);
+                        this._castSingleValue = ExportServices.CreateStronglyTypedLazyFactory(
+                            arguments[0].UnderlyingSystemType,
+                            arguments[1].UnderlyingSystemType
+                        );
                     }
                     return arguments[0];
                 }
 
-                if(genericType != null && IsDescendentOf(genericType, ExportFactoryOfTType))
+                if (genericType != null && IsDescendentOf(genericType, ExportFactoryOfTType))
                 {
                     this.IsPartCreator = true;
                     if (arguments.Length == 1)
                     {
                         if (!_isOpenGeneric)
                         {
-                            this._castSingleValue = new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(arguments[0].UnderlyingSystemType, null);
+                            this._castSingleValue = new ExportFactoryCreator(
+                                genericType
+                            ).CreateStronglyTypedExportFactoryFactory(
+                                arguments[0].UnderlyingSystemType,
+                                null
+                            );
                         }
                     }
                     else if (arguments.Length == 2)
                     {
                         if (!_isOpenGeneric)
                         {
-                            this._castSingleValue = new ExportFactoryCreator(genericType).CreateStronglyTypedExportFactoryFactory(arguments[0].UnderlyingSystemType, arguments[1].UnderlyingSystemType);
+                            this._castSingleValue = new ExportFactoryCreator(
+                                genericType
+                            ).CreateStronglyTypedExportFactoryFactory(
+                                arguments[0].UnderlyingSystemType,
+                                arguments[1].UnderlyingSystemType
+                            );
                         }
                         this.MetadataViewType = arguments[1];
                     }
                     else
                     {
-                        throw ExceptionBuilder.ExportFactory_TooManyGenericParameters(genericType.FullName);
+                        throw ExceptionBuilder.ExportFactory_TooManyGenericParameters(
+                            genericType.FullName
+                        );
                     }
                     return arguments[0];
                 }

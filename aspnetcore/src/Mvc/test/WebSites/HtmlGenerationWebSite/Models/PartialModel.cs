@@ -3,6 +3,4 @@
 
 namespace HtmlGenerationWebSite.Models;
 
-public class PartialModel
-{
-}
+public class PartialModel { }

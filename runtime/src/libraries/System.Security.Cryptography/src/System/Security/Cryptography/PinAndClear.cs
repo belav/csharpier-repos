@@ -14,9 +14,7 @@ namespace System.Security.Cryptography
         {
             return new PinAndClear
             {
-                _gcHandle = GCHandle.Alloc(
-                    data,
-                    GCHandleType.Pinned),
+                _gcHandle = GCHandle.Alloc(data, GCHandleType.Pinned),
                 _data = data,
             };
         }

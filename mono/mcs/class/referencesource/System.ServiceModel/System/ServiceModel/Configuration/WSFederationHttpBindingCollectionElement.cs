@@ -7,12 +7,15 @@ namespace System.ServiceModel.Configuration
     using System.Configuration;
     using System.Globalization;
 
-    public partial class WSFederationHttpBindingCollectionElement : StandardBindingCollectionElement<WSFederationHttpBinding, WSFederationHttpBindingElement>
+    public partial class WSFederationHttpBindingCollectionElement
+        : StandardBindingCollectionElement<WSFederationHttpBinding, WSFederationHttpBindingElement>
     {
         internal static WSFederationHttpBindingCollectionElement GetBindingCollectionElement()
         {
-            return (WSFederationHttpBindingCollectionElement)ConfigurationHelpers.GetBindingCollectionElement(ConfigurationStrings.WSFederationHttpBindingCollectionElementName);
+            return (WSFederationHttpBindingCollectionElement)
+                ConfigurationHelpers.GetBindingCollectionElement(
+                    ConfigurationStrings.WSFederationHttpBindingCollectionElementName
+                );
         }
-
     }
 }

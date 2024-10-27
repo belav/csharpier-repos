@@ -19,11 +19,14 @@ namespace Microsoft.CodeAnalysis.CSharp
     /// <summary>
     /// The synthesized type added to a compilation to hold captured variables for closures.
     /// </summary>
-    internal sealed class SynthesizedClosureEnvironment : SynthesizedContainer, ISynthesizedMethodBodyImplementationSymbol
+    internal sealed class SynthesizedClosureEnvironment
+        : SynthesizedContainer,
+            ISynthesizedMethodBodyImplementationSymbol
     {
         private readonly MethodSymbol _topLevelMethod;
         internal readonly SyntaxNode ScopeSyntaxOpt;
         internal readonly int ClosureOrdinal;
+
         /// <summary>
         /// The closest method/lambda that this frame is originally from. Null if nongeneric static closure.
         /// Useful because this frame's type parameters are constructed from this method and all methods containing this method.
@@ -44,7 +47,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             bool isStruct,
             SyntaxNode scopeSyntaxOpt,
             DebugId methodId,
-            DebugId closureId)
+            DebugId closureId
+        )
             : base(MakeName(scopeSyntaxOpt, methodId, closureId), containingMethod)
         {
             TypeKind = isStruct ? TypeKind.Struct : TypeKind.Class;
@@ -53,31 +57,51 @@ namespace Microsoft.CodeAnalysis.CSharp
             Constructor = isStruct ? null : new SynthesizedClosureEnvironmentConstructor(this);
             this.ClosureOrdinal = closureId.Ordinal;
 
-            // static lambdas technically have the class scope so the scope syntax is null 
+            // static lambdas technically have the class scope so the scope syntax is null
             if (scopeSyntaxOpt == null)
             {
                 StaticConstructor = new SynthesizedStaticConstructor(this);
                 var cacheVariableName = GeneratedNames.MakeCachedFrameInstanceFieldName();
-                SingletonCache = new SynthesizedLambdaCacheFieldSymbol(this, this, cacheVariableName, topLevelMethod, isReadOnly: true, isStatic: true);
+                SingletonCache = new SynthesizedLambdaCacheFieldSymbol(
+                    this,
+                    this,
+                    cacheVariableName,
+                    topLevelMethod,
+                    isReadOnly: true,
+                    isStatic: true
+                );
             }
 
             AssertIsClosureScopeSyntax(scopeSyntaxOpt);
             this.ScopeSyntaxOpt = scopeSyntaxOpt;
         }
 
-        internal void AddHoistedField(LambdaCapturedVariable captured) => _membersBuilder.Add(captured);
+        internal void AddHoistedField(LambdaCapturedVariable captured) =>
+            _membersBuilder.Add(captured);
 
-        private static string MakeName(SyntaxNode scopeSyntaxOpt, DebugId methodId, DebugId closureId)
+        private static string MakeName(
+            SyntaxNode scopeSyntaxOpt,
+            DebugId methodId,
+            DebugId closureId
+        )
         {
             if (scopeSyntaxOpt == null)
             {
                 // Display class is shared among static non-generic lambdas across generations, method ordinal is -1 in that case.
                 // A new display class of a static generic lambda is created for each method and each generation.
-                return GeneratedNames.MakeStaticLambdaDisplayClassName(methodId.Ordinal, methodId.Generation);
+                return GeneratedNames.MakeStaticLambdaDisplayClassName(
+                    methodId.Ordinal,
+                    methodId.Generation
+                );
             }
 
             Debug.Assert(methodId.Ordinal >= 0);
-            return GeneratedNames.MakeLambdaDisplayClassName(methodId.Ordinal, methodId.Generation, closureId.Ordinal, closureId.Generation);
+            return GeneratedNames.MakeLambdaDisplayClassName(
+                methodId.Ordinal,
+                methodId.Generation,
+                closureId.Ordinal,
+                closureId.Generation
+            );
         }
 
         [Conditional("DEBUG")]
@@ -85,7 +109,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // See C# specification, chapter 3.7 Scopes.
 
-            // static lambdas technically have the class scope so the scope syntax is null 
+            // static lambdas technically have the class scope so the scope syntax is null
             if (syntaxOpt == null)
             {
                 return;
@@ -121,10 +145,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// All fields should have already been added as synthesized members on the
         /// <see cref="CommonPEModuleBuilder" />, so we don't want to duplicate them here.
         /// </summary>
-        internal override IEnumerable<FieldSymbol> GetFieldsToEmit()
-            => (object)SingletonCache != null
-            ? SpecializedCollections.SingletonEnumerable(SingletonCache)
-            : SpecializedCollections.EmptyEnumerable<FieldSymbol>();
+        internal override IEnumerable<FieldSymbol> GetFieldsToEmit() =>
+            (object)SingletonCache != null
+                ? SpecializedCollections.SingletonEnumerable(SingletonCache)
+                : SpecializedCollections.EmptyEnumerable<FieldSymbol>();
 
         // display classes for static lambdas do not have any data and can be serialized.
         public override bool IsSerializable => (object)SingletonCache != null;
@@ -143,6 +167,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         internal override bool IsRecord => false;
         internal override bool IsRecordStruct => false;
+
         internal override bool HasPossibleWellKnownCloneMethod() => false;
     }
 }

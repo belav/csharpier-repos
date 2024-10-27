@@ -15,7 +15,11 @@ namespace System.Formats.Tar.Tests
         {
             using (TempDirectory root = new TempDirectory())
             {
-                string originalFileName = GetTarFilePath(CompressionMethod.Uncompressed, TestTarFormat.ustar, "specialfiles");
+                string originalFileName = GetTarFilePath(
+                    CompressionMethod.Uncompressed,
+                    TestTarFormat.ustar,
+                    "specialfiles"
+                );
 
                 string archive = Path.Join(root.Path, "input.tar");
                 string destination = Path.Join(root.Path, "dir");
@@ -25,7 +29,10 @@ namespace System.Formats.Tar.Tests
 
                 Directory.CreateDirectory(destination);
 
-                await Assert.ThrowsAsync<InvalidOperationException>(() => TarFile.ExtractToDirectoryAsync(archive, destination, overwriteFiles: false));
+                await Assert.ThrowsAsync<InvalidOperationException>(
+                    () =>
+                        TarFile.ExtractToDirectoryAsync(archive, destination, overwriteFiles: false)
+                );
 
                 Assert.Equal(0, Directory.GetFileSystemEntries(destination).Count());
             }

@@ -13,46 +13,49 @@ namespace Microsoft.EntityFrameworkCore.Storage.Internal;
 public class SqlServerDatabaseCreatorTest
 {
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_retries_if_no_proccess_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(233, async: false);
+    public Task Create_checks_for_existence_and_retries_if_no_proccess_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(233, async: false);
 
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_retries_if_timeout_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(-2, async: false);
+    public Task Create_checks_for_existence_and_retries_if_timeout_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(-2, async: false);
 
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_retries_if_cannot_open_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(4060, async: false);
+    public Task Create_checks_for_existence_and_retries_if_cannot_open_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(4060, async: false);
 
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_retries_if_cannot_attach_file_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(1832, async: false);
+    public Task Create_checks_for_existence_and_retries_if_cannot_attach_file_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(1832, async: false);
 
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_retries_if_cannot_open_file_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(5120, async: false);
+    public Task Create_checks_for_existence_and_retries_if_cannot_open_file_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(5120, async: false);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_retries_if_no_proccess_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(233, async: true);
+    public Task CreateAsync_checks_for_existence_and_retries_if_no_proccess_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(233, async: true);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_retries_if_timeout_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(-2, async: true);
+    public Task CreateAsync_checks_for_existence_and_retries_if_timeout_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(-2, async: true);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_open_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(4060, async: true);
+    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_open_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(4060, async: true);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_attach_file_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(1832, async: true);
+    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_attach_file_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(1832, async: true);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_open_file_until_it_passes()
-        => Create_checks_for_existence_and_retries_until_it_passes(5120, async: true);
+    public Task CreateAsync_checks_for_existence_and_retries_if_cannot_open_file_until_it_passes() =>
+        Create_checks_for_existence_and_retries_until_it_passes(5120, async: true);
 
-    private async Task Create_checks_for_existence_and_retries_until_it_passes(int errorNumber, bool async)
+    private async Task Create_checks_for_existence_and_retries_until_it_passes(
+        int errorNumber,
+        bool async
+    )
     {
         var customServices = new ServiceCollection()
             .AddScoped<ISqlServerConnection, FakeSqlServerConnection>()
@@ -61,12 +64,14 @@ public class SqlServerDatabaseCreatorTest
 
         var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(customServices);
 
-        var connection = (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+        var connection = (FakeSqlServerConnection)
+            contextServices.GetRequiredService<ISqlServerConnection>();
 
         connection.ErrorNumber = errorNumber;
         connection.FailureCount = 2;
 
-        var creator = (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+        var creator = (SqlServerDatabaseCreator)
+            contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
         creator.RetryDelay = TimeSpan.FromMilliseconds(1);
         creator.RetryTimeout = TimeSpan.FromMinutes(5);
@@ -84,12 +89,12 @@ public class SqlServerDatabaseCreatorTest
     }
 
     [ConditionalFact]
-    public Task Create_checks_for_existence_and_ultimately_gives_up_waiting()
-        => Create_checks_for_existence_and_ultimately_gives_up_waiting_test(async: false);
+    public Task Create_checks_for_existence_and_ultimately_gives_up_waiting() =>
+        Create_checks_for_existence_and_ultimately_gives_up_waiting_test(async: false);
 
     [ConditionalFact]
-    public Task CreateAsync_checks_for_existence_and_ultimately_gives_up_waiting()
-        => Create_checks_for_existence_and_ultimately_gives_up_waiting_test(async: true);
+    public Task CreateAsync_checks_for_existence_and_ultimately_gives_up_waiting() =>
+        Create_checks_for_existence_and_ultimately_gives_up_waiting_test(async: true);
 
     private async Task Create_checks_for_existence_and_ultimately_gives_up_waiting_test(bool async)
     {
@@ -100,13 +105,15 @@ public class SqlServerDatabaseCreatorTest
 
         var contextServices = SqlServerTestHelpers.Instance.CreateContextServices(customServices);
 
-        var connection = (FakeSqlServerConnection)contextServices.GetRequiredService<ISqlServerConnection>();
+        var connection = (FakeSqlServerConnection)
+            contextServices.GetRequiredService<ISqlServerConnection>();
 
         connection.ErrorNumber = 233;
         connection.FailureCount = 100;
         connection.FailDelay = 50;
 
-        var creator = (SqlServerDatabaseCreator)contextServices.GetRequiredService<IRelationalDatabaseCreator>();
+        var creator = (SqlServerDatabaseCreator)
+            contextServices.GetRequiredService<IRelationalDatabaseCreator>();
 
         creator.RetryDelay = TimeSpan.FromMilliseconds(5);
         creator.RetryTimeout = TimeSpan.FromMilliseconds(100);
@@ -125,7 +132,10 @@ public class SqlServerDatabaseCreatorTest
     {
         private readonly IDbContextOptions _options;
 
-        public FakeSqlServerConnection(IDbContextOptions options, RelationalConnectionDependencies dependencies)
+        public FakeSqlServerConnection(
+            IDbContextOptions options,
+            RelationalConnectionDependencies dependencies
+        )
             : base(dependencies)
         {
             _options = options;
@@ -147,7 +157,10 @@ public class SqlServerDatabaseCreatorTest
             return true;
         }
 
-        public override async Task<bool> OpenAsync(CancellationToken cancellationToken, bool errorsExpected = false)
+        public override async Task<bool> OpenAsync(
+            CancellationToken cancellationToken,
+            bool errorsExpected = false
+        )
         {
             if (++OpenCount < FailureCount)
             {
@@ -158,14 +171,13 @@ public class SqlServerDatabaseCreatorTest
             return await Task.FromResult(true);
         }
 
-        public override ISqlServerConnection CreateMasterConnection()
-            => new FakeSqlServerConnection(_options, Dependencies);
+        public override ISqlServerConnection CreateMasterConnection() =>
+            new FakeSqlServerConnection(_options, Dependencies);
     }
 
     private class FakeRelationalCommandBuilderFactory : IRelationalCommandBuilderFactory
     {
-        public IRelationalCommandBuilder Create()
-            => new FakeRelationalCommandBuilder();
+        public IRelationalCommandBuilder Create() => new FakeRelationalCommandBuilder();
     }
 
     private class FakeRelationalCommandBuilder : IRelationalCommandBuilder
@@ -173,8 +185,7 @@ public class SqlServerDatabaseCreatorTest
         private readonly List<IRelationalParameter> _parameters = new();
         public IndentedStringBuilder Instance { get; } = new();
 
-        public IReadOnlyList<IRelationalParameter> Parameters
-            => _parameters;
+        public IReadOnlyList<IRelationalParameter> Parameters => _parameters;
 
         public IRelationalCommandBuilder AddParameter(IRelationalParameter parameter)
         {
@@ -190,11 +201,9 @@ public class SqlServerDatabaseCreatorTest
             return this;
         }
 
-        public IRelationalTypeMappingSource TypeMappingSource
-            => null;
+        public IRelationalTypeMappingSource TypeMappingSource => null;
 
-        public IRelationalCommand Build()
-            => new FakeRelationalCommand();
+        public IRelationalCommand Build() => new FakeRelationalCommand();
 
         public IRelationalCommandBuilder Append(string value)
         {
@@ -224,8 +233,7 @@ public class SqlServerDatabaseCreatorTest
             return this;
         }
 
-        public int CommandTextLength
-            => Instance.Length;
+        public int CommandTextLength => Instance.Length;
     }
 
     private class FakeRelationalCommand : IRelationalCommand
@@ -234,40 +242,40 @@ public class SqlServerDatabaseCreatorTest
 
         public IReadOnlyList<IRelationalParameter> Parameters { get; }
 
-        public IReadOnlyDictionary<string, object> ParameterValues
-            => throw new NotImplementedException();
+        public IReadOnlyDictionary<string, object> ParameterValues =>
+            throw new NotImplementedException();
 
-        public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject)
-            => 0;
+        public int ExecuteNonQuery(RelationalCommandParameterObject parameterObject) => 0;
 
         public Task<int> ExecuteNonQueryAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
-            => Task.FromResult(0);
+            CancellationToken cancellationToken = default
+        ) => Task.FromResult(0);
 
-        public RelationalDataReader ExecuteReader(RelationalCommandParameterObject parameterObject)
-            => throw new NotImplementedException();
+        public RelationalDataReader ExecuteReader(
+            RelationalCommandParameterObject parameterObject
+        ) => throw new NotImplementedException();
 
         public Task<RelationalDataReader> ExecuteReaderAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
         public DbCommand CreateDbCommand(
             RelationalCommandParameterObject parameterObject,
             Guid commandId,
-            DbCommandMethod commandMethod)
-            => throw new NotImplementedException();
+            DbCommandMethod commandMethod
+        ) => throw new NotImplementedException();
 
-        public object ExecuteScalar(RelationalCommandParameterObject parameterObject)
-            => throw new NotImplementedException();
+        public object ExecuteScalar(RelationalCommandParameterObject parameterObject) =>
+            throw new NotImplementedException();
 
         public Task<object> ExecuteScalarAsync(
             RelationalCommandParameterObject parameterObject,
-            CancellationToken cancellationToken = default)
-            => throw new NotImplementedException();
+            CancellationToken cancellationToken = default
+        ) => throw new NotImplementedException();
 
-        public void PopulateFrom(IRelationalCommandTemplate commandTemplate)
-            => throw new NotImplementedException();
+        public void PopulateFrom(IRelationalCommandTemplate commandTemplate) =>
+            throw new NotImplementedException();
     }
 }

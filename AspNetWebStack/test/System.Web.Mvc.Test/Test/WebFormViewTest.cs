@@ -15,19 +15,19 @@ namespace System.Web.Mvc.Test
             Assert.ThrowsArgumentNullOrEmpty(
                 () => new WebFormView(new ControllerContext(), String.Empty, "~/master"),
                 "viewPath"
-                );
+            );
 
             // Act & Assert
             Assert.ThrowsArgumentNullOrEmpty(
                 () => new WebFormView(new ControllerContext(), null, "~/master"),
                 "viewPath"
-                );
+            );
 
             // Act & Assert
             Assert.ThrowsArgumentNull(
                 () => new WebFormView(null, "view path", "~/master"),
                 "controllerContext"
-                );
+            );
         }
 
         [Fact]
@@ -63,7 +63,7 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 () => view.Render(context, null),
                 "The view at 'view path' must derive from ViewPage, ViewPage<TModel>, ViewUserControl, or ViewUserControl<TModel>."
-                );
+            );
         }
 
         [Fact]
@@ -76,7 +76,12 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = new ControllerContext();
             StubViewPage viewPage = new StubViewPage();
             activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewPage);
-            WebFormView view = new WebFormView(controllerContext, "view path", "master path", activator.Object);
+            WebFormView view = new WebFormView(
+                controllerContext,
+                "view path",
+                "master path",
+                activator.Object
+            );
             view.BuildManager = buildManager;
 
             // Act
@@ -97,7 +102,12 @@ namespace System.Web.Mvc.Test
             ControllerContext controllerContext = new ControllerContext();
             StubViewPage viewPage = new StubViewPage();
             activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewPage);
-            WebFormView view = new WebFormView(controllerContext, "view path", null, activator.Object);
+            WebFormView view = new WebFormView(
+                controllerContext,
+                "view path",
+                null,
+                activator.Object
+            );
             view.BuildManager = buildManager;
 
             // Act
@@ -113,7 +123,10 @@ namespace System.Web.Mvc.Test
         {
             // Arrange
             ViewContext context = new Mock<ViewContext>().Object;
-            MockBuildManager buildManagerMock = new MockBuildManager("view path", typeof(StubViewUserControl));
+            MockBuildManager buildManagerMock = new MockBuildManager(
+                "view path",
+                typeof(StubViewUserControl)
+            );
             WebFormView view = new WebFormView(new ControllerContext(), "view path", "master path");
             view.BuildManager = buildManagerMock;
 
@@ -121,7 +134,7 @@ namespace System.Web.Mvc.Test
             Assert.Throws<InvalidOperationException>(
                 () => view.Render(context, null),
                 "A master name cannot be specified when the view is a ViewUserControl."
-                );
+            );
         }
 
         [Fact]
@@ -133,8 +146,18 @@ namespace System.Web.Mvc.Test
             Mock<IViewPageActivator> activator = new Mock<IViewPageActivator>(MockBehavior.Strict);
             ControllerContext controllerContext = new ControllerContext();
             StubViewUserControl viewUserControl = new StubViewUserControl();
-            activator.Setup(l => l.Create(controllerContext, typeof(object))).Returns(viewUserControl);
-            WebFormView view = new WebFormView(controllerContext, "view path", null, activator.Object) { BuildManager = buildManager };
+            activator
+                .Setup(l => l.Create(controllerContext, typeof(object)))
+                .Returns(viewUserControl);
+            WebFormView view = new WebFormView(
+                controllerContext,
+                "view path",
+                null,
+                activator.Object
+            )
+            {
+                BuildManager = buildManager,
+            };
 
             // Act
             view.Render(context, null);

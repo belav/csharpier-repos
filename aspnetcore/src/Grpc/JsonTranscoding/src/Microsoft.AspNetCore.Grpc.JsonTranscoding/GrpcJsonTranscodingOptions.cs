@@ -19,15 +19,25 @@ public sealed class GrpcJsonTranscodingOptions
     public GrpcJsonTranscodingOptions()
     {
         _unaryOptions = new Lazy<JsonSerializerOptions>(
-            () => JsonConverterHelper.CreateSerializerOptions(new JsonContext(JsonSettings, TypeRegistry, DescriptorRegistry)),
-            LazyThreadSafetyMode.ExecutionAndPublication);
+            () =>
+                JsonConverterHelper.CreateSerializerOptions(
+                    new JsonContext(JsonSettings, TypeRegistry, DescriptorRegistry)
+                ),
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
         _serverStreamingOptions = new Lazy<JsonSerializerOptions>(
-            () => JsonConverterHelper.CreateSerializerOptions(new JsonContext(JsonSettings, TypeRegistry, DescriptorRegistry), isStreamingOptions: true),
-            LazyThreadSafetyMode.ExecutionAndPublication);
+            () =>
+                JsonConverterHelper.CreateSerializerOptions(
+                    new JsonContext(JsonSettings, TypeRegistry, DescriptorRegistry),
+                    isStreamingOptions: true
+                ),
+            LazyThreadSafetyMode.ExecutionAndPublication
+        );
     }
 
     internal JsonSerializerOptions UnarySerializerOptions => _unaryOptions.Value;
-    internal JsonSerializerOptions ServerStreamingSerializerOptions => _serverStreamingOptions.Value;
+    internal JsonSerializerOptions ServerStreamingSerializerOptions =>
+        _serverStreamingOptions.Value;
 
     // Registry is set by DI during startup.
     internal DescriptorRegistry DescriptorRegistry { get; set; } = default!;

@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Http.Features;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 
-internal sealed partial class QuicConnectionContext : IProtocolErrorCodeFeature, ITlsConnectionFeature
+internal sealed partial class QuicConnectionContext
+    : IProtocolErrorCodeFeature,
+        ITlsConnectionFeature
 {
     private X509Certificate2? _clientCert;
     private Task<X509Certificate2?>? _clientCertTask;

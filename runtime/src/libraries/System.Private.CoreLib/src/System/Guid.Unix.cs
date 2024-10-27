@@ -26,7 +26,6 @@ namespace System
 
             const byte ClockSeqHiAndReservedMask = 0xC0;
             const byte ClockSeqHiAndReservedValue = 0x80;
-
             // Modify bits indicating the type of the GUID
 
             unchecked
@@ -34,7 +33,9 @@ namespace System
                 // time_hi_and_version
                 Unsafe.AsRef(in g._c) = (short)((g._c & ~VersionMask) | RandomGuidVersion);
                 // clock_seq_hi_and_reserved
-                Unsafe.AsRef(in g._d) = (byte)((g._d & ~ClockSeqHiAndReservedMask) | ClockSeqHiAndReservedValue);
+                Unsafe.AsRef(in g._d) = (byte)(
+                    (g._d & ~ClockSeqHiAndReservedMask) | ClockSeqHiAndReservedValue
+                );
             }
 
             return g;

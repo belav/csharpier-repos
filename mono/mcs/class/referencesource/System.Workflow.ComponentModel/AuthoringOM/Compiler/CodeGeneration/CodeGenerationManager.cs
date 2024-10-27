@@ -1,13 +1,15 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.ComponentModel.Design.Serialization;
     using System.Collections;
     using System.Collections.Generic;
+    using System.ComponentModel.Design.Serialization;
 
     #region CodeGenerationManager
 
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class CodeGenerationManager : IServiceProvider
     {
         private Hashtable hashOfGenerators = new Hashtable();
@@ -52,7 +54,12 @@ namespace System.Workflow.ComponentModel.Compiler
             List<ActivityCodeGenerator> generators = new List<ActivityCodeGenerator>();
 
             // Return validators for other types such as Bind, XmolDocument, etc.
-            foreach (ActivityCodeGenerator generator in ComponentDispenser.CreateComponents(type, typeof(ActivityCodeGeneratorAttribute)))
+            foreach (
+                ActivityCodeGenerator generator in ComponentDispenser.CreateComponents(
+                    type,
+                    typeof(ActivityCodeGeneratorAttribute)
+                )
+            )
             {
                 generators.Add(generator);
             }

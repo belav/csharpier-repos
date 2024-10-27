@@ -270,6 +270,6 @@ namespace System.Xml
         UnicodeChars16TextWithEndElement = UnicodeChars16Text + 1,
         UnicodeChars32TextWithEndElement = UnicodeChars32Text + 1,
         QNameDictionaryTextWithEndElement = QNameDictionaryText + 1,
-        MaxText = QNameDictionaryTextWithEndElement
+        MaxText = QNameDictionaryTextWithEndElement,
     }
 }

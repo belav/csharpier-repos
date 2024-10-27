@@ -20,7 +20,17 @@ namespace System.Web.Mvc.Test
 
             // Act & assert
             Assert.ThrowsArgumentNull(
-                delegate { new ActionExecutedContext(controllerContext, actionDescriptor, canceled, exception); }, "actionDescriptor");
+                delegate
+                {
+                    new ActionExecutedContext(
+                        controllerContext,
+                        actionDescriptor,
+                        canceled,
+                        exception
+                    );
+                },
+                "actionDescriptor"
+            );
         }
 
         [Fact]
@@ -33,7 +43,12 @@ namespace System.Web.Mvc.Test
             Exception exception = new Exception();
 
             // Act
-            ActionExecutedContext actionExecutedContext = new ActionExecutedContext(controllerContext, actionDescriptor, canceled, exception);
+            ActionExecutedContext actionExecutedContext = new ActionExecutedContext(
+                controllerContext,
+                actionDescriptor,
+                canceled,
+                exception
+            );
 
             // Assert
             Assert.Equal(actionDescriptor, actionExecutedContext.ActionDescriptor);
@@ -48,7 +63,12 @@ namespace System.Web.Mvc.Test
             ActionExecutedContext actionExecutedContext = new Mock<ActionExecutedContext>().Object;
 
             // Act & assert
-            MemberHelper.TestPropertyWithDefaultInstance(actionExecutedContext, "Result", new ViewResult(), EmptyResult.Instance);
+            MemberHelper.TestPropertyWithDefaultInstance(
+                actionExecutedContext,
+                "Result",
+                new ViewResult(),
+                EmptyResult.Instance
+            );
         }
     }
 }

@@ -11,7 +11,8 @@ internal static class ChunkWriter
     public static int BeginChunkBytes(int dataCount, Span<byte> span)
     {
         // Determine the most-significant non-zero nibble
-        int total, shift;
+        int total,
+            shift;
         var count = dataCount;
         total = (count > 0xffff) ? 0x10 : 0x00;
         count >>= total;

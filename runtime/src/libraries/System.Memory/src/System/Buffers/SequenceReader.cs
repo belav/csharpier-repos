@@ -6,7 +6,8 @@ using System.Runtime.CompilerServices;
 
 namespace System.Buffers
 {
-    public ref partial struct SequenceReader<T> where T : unmanaged, IEquatable<T>
+    public ref partial struct SequenceReader<T>
+        where T : unmanaged, IEquatable<T>
     {
         private SequencePosition _currentPosition;
         private SequencePosition _nextPosition;
@@ -57,8 +58,8 @@ namespace System.Buffers
         /// <summary>
         /// The current position in the <see cref="Sequence"/>.
         /// </summary>
-        public readonly SequencePosition Position
-            => Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
+        public readonly SequencePosition Position =>
+            Sequence.GetPosition(CurrentSpanIndex, _currentPosition);
 
         /// <summary>
         /// The current segment in the <see cref="Sequence"/> as a span.
@@ -287,7 +288,9 @@ namespace System.Buffers
             if (!Sequence.IsSingleSegment)
             {
                 SequencePosition previousNextPosition = _nextPosition;
-                while (Sequence.TryGet(ref _nextPosition, out ReadOnlyMemory<T> memory, advance: true))
+                while (
+                    Sequence.TryGet(ref _nextPosition, out ReadOnlyMemory<T> memory, advance: true)
+                )
                 {
                     _currentPosition = previousNextPosition;
                     if (memory.Length > 0)
@@ -314,7 +317,10 @@ namespace System.Buffers
         public void Advance(long count)
         {
             const long TooBigOrNegative = unchecked((long)0xFFFFFFFF80000000);
-            if ((count & TooBigOrNegative) == 0 && CurrentSpan.Length - CurrentSpanIndex > (int)count)
+            if (
+                (count & TooBigOrNegative) == 0
+                && CurrentSpan.Length - CurrentSpanIndex > (int)count
+            )
             {
                 CurrentSpanIndex += (int)count;
                 Consumed += count;

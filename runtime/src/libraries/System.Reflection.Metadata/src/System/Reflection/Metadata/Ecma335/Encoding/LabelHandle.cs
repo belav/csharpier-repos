@@ -22,10 +22,14 @@ namespace System.Reflection.Metadata.Ecma335
         public bool IsNil => Id == 0;
 
         public bool Equals(LabelHandle other) => Id == other.Id;
-        public override bool Equals([NotNullWhen(true)] object? obj) => obj is LabelHandle labelHandle && Equals(labelHandle);
+
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            obj is LabelHandle labelHandle && Equals(labelHandle);
+
         public override int GetHashCode() => Id.GetHashCode();
 
         public static bool operator ==(LabelHandle left, LabelHandle right) => left.Equals(right);
+
         public static bool operator !=(LabelHandle left, LabelHandle right) => !left.Equals(right);
     }
 }

@@ -31,13 +31,16 @@ public class TempDataFilterPageApplicationModelProviderTest
     {
         // Arrange
         var type = typeof(TestPageModel_PrivateSet);
-        var expected = $"The '{type.FullName}.Test' property with TempDataAttribute is invalid. A property using TempDataAttribute must have a public getter and setter.";
+        var expected =
+            $"The '{type.FullName}.Test' property with TempDataAttribute is invalid. A property using TempDataAttribute must have a public getter and setter.";
 
         var provider = CreateProvider();
         var context = CreateProviderContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -46,15 +49,18 @@ public class TempDataFilterPageApplicationModelProviderTest
     {
         // Arrange
         var type = typeof(TestPageModel_InvalidProperties);
-        var expected = $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.ModelState' of type '{typeof(ModelStateDictionary)}'." +
-            Environment.NewLine +
-            $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.TimeZone' of type '{typeof(TimeZoneInfo)}'.";
+        var expected =
+            $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.ModelState' of type '{typeof(ModelStateDictionary)}'."
+            + Environment.NewLine
+            + $"TempData serializer '{typeof(DefaultTempDataSerializer)}' cannot serialize property '{type}.TimeZone' of type '{typeof(TimeZoneInfo)}'.";
 
         var provider = CreateProvider();
         var context = CreateProviderContext(type);
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(() => provider.OnProvidersExecuting(context));
+        var ex = Assert.Throws<InvalidOperationException>(
+            () => provider.OnProvidersExecuting(context)
+        );
         Assert.Equal(expected, ex.Message);
     }
 
@@ -86,14 +92,20 @@ public class TempDataFilterPageApplicationModelProviderTest
         provider.OnProvidersExecuting(context);
 
         // Assert
-        var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(Assert.Single(context.PageApplicationModel.Filters));
+        var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(
+            Assert.Single(context.PageApplicationModel.Filters)
+        );
         Assert.Collection(
             filter.Properties,
             property =>
             {
                 Assert.Equal("Test2", property.Key);
-                Assert.Equal(type.GetProperty(nameof(TestPageModel_OneTempDataProperty.Test2)), property.PropertyInfo);
-            });
+                Assert.Equal(
+                    type.GetProperty(nameof(TestPageModel_OneTempDataProperty.Test2)),
+                    property.PropertyInfo
+                );
+            }
+        );
     }
 
     [Fact]
@@ -108,21 +120,31 @@ public class TempDataFilterPageApplicationModelProviderTest
         provider.OnProvidersExecuting(context);
 
         // Assert
-        var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(Assert.Single(context.PageApplicationModel.Filters));
+        var filter = Assert.IsType<PageSaveTempDataPropertyFilterFactory>(
+            Assert.Single(context.PageApplicationModel.Filters)
+        );
         Assert.Collection(
             filter.Properties,
             property =>
             {
                 Assert.Equal("Test2", property.Key);
-            });
+            }
+        );
     }
 
     private static PageApplicationModelProviderContext CreateProviderContext(Type handlerType)
     {
         var descriptor = new CompiledPageActionDescriptor();
-        var context = new PageApplicationModelProviderContext(descriptor, typeof(TestPage).GetTypeInfo())
+        var context = new PageApplicationModelProviderContext(
+            descriptor,
+            typeof(TestPage).GetTypeInfo()
+        )
         {
-            PageApplicationModel = new PageApplicationModel(descriptor, handlerType.GetTypeInfo(), Array.Empty<object>()),
+            PageApplicationModel = new PageApplicationModel(
+                descriptor,
+                handlerType.GetTypeInfo(),
+                Array.Empty<object>()
+            ),
         };
 
         return context;

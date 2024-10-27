@@ -29,55 +29,53 @@
 
 
 using System;
+using System.Collections;
 using System.ComponentModel;
 using System.ComponentModel.Design;
-using System.Windows.Forms;
 using System.Drawing;
 using System.Drawing.Design;
-using System.Collections;
-
-
+using System.Windows.Forms;
 
 namespace System.Windows.Forms.Design
 {
+    public class ScrollableControlDesigner : ParentControlDesigner
+    {
+        public ScrollableControlDesigner() { }
 
-	public class ScrollableControlDesigner : ParentControlDesigner
-	{
+        private const int HTHSCROLL = 6;
+        private const int HTVSCROLL = 7;
 
-		public ScrollableControlDesigner ()
-		{
-		}
+        protected override bool GetHitTest(Point pt)
+        {
+            if (base.GetHitTest(pt))
+            {
+                return true;
+            }
 
-		private const int HTHSCROLL = 6;
-		private const int HTVSCROLL = 7;
+            // Check if the user has clicked on the scroll bars and forward the message to
+            // the ScrollableControl. (Don't filter out the scrolling.). Keep in mind that scrollbars
+            // will be shown only if ScrollableControl.AutoScroll = true
+            //
+            if (this.Control is ScrollableControl && ((ScrollableControl)Control).AutoScroll)
+            {
+                int hitTestResult = (int)
+                    Native.SendMessage(
+                        this.Control.Handle,
+                        Native.Msg.WM_NCHITTEST,
+                        IntPtr.Zero,
+                        (IntPtr)Native.LParam(pt.X, pt.Y)
+                    );
+                if (hitTestResult == HTHSCROLL || hitTestResult == HTVSCROLL)
+                    return true;
+            }
+            return false;
+        }
 
-		protected override bool GetHitTest (Point pt)
-		{
-			if (base.GetHitTest (pt)) {
-				return true;
-			}
-
-			// Check if the user has clicked on the scroll bars and forward the message to
-			// the ScrollableControl. (Don't filter out the scrolling.). Keep in mind that scrollbars
-			// will be shown only if ScrollableControl.AutoScroll = true
-			//
-			if (this.Control is ScrollableControl && ((ScrollableControl)Control).AutoScroll) {
-				int hitTestResult = (int) Native.SendMessage (this.Control.Handle,
-																	 Native.Msg.WM_NCHITTEST,
-																	 IntPtr.Zero,
-																	(IntPtr) Native.LParam (pt.X, pt.Y));
-				if (hitTestResult == HTHSCROLL || hitTestResult == HTVSCROLL)
-					return true;
-			}
-			return false;
-		}
-
-
-		protected override void WndProc (ref Message m)
-		{
-			base.WndProc (ref m);
-			if (m.Msg == (int)Native.Msg.WM_HSCROLL || m.Msg == (int)Native.Msg.WM_VSCROLL)
-				this.DefWndProc (ref m);
-		}
-	}
+        protected override void WndProc(ref Message m)
+        {
+            base.WndProc(ref m);
+            if (m.Msg == (int)Native.Msg.WM_HSCROLL || m.Msg == (int)Native.Msg.WM_VSCROLL)
+                this.DefWndProc(ref m);
+        }
+    }
 }

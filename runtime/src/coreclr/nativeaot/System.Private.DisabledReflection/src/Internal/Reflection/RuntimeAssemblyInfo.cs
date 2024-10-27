@@ -4,7 +4,6 @@
 using System;
 using System.Collections.Generic;
 using System.Reflection;
-
 using Internal.Reflection.Core.NonPortable;
 
 namespace Internal.Reflection
@@ -28,6 +27,7 @@ namespace Internal.Reflection
             return _moduleType.GetHashCode();
         }
 
-        public override IEnumerable<CustomAttributeData> CustomAttributes => new List<CustomAttributeData>();
+        public override IEnumerable<CustomAttributeData> CustomAttributes =>
+            new List<CustomAttributeData>();
     }
 }

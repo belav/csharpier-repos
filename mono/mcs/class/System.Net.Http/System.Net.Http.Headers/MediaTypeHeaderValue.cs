@@ -30,162 +30,170 @@ using System.Collections.Generic;
 
 namespace System.Net.Http.Headers
 {
-	public class MediaTypeHeaderValue : ICloneable
-	{
-		internal List<NameValueHeaderValue> parameters;
-		internal string media_type;
+    public class MediaTypeHeaderValue : ICloneable
+    {
+        internal List<NameValueHeaderValue> parameters;
+        internal string media_type;
 
-		public MediaTypeHeaderValue (string mediaType)
-		{
-			MediaType = mediaType;
-		}
+        public MediaTypeHeaderValue(string mediaType)
+        {
+            MediaType = mediaType;
+        }
 
-		protected MediaTypeHeaderValue (MediaTypeHeaderValue source)
-		{
-			if (source == null)
-				throw new ArgumentNullException ("source");
+        protected MediaTypeHeaderValue(MediaTypeHeaderValue source)
+        {
+            if (source == null)
+                throw new ArgumentNullException("source");
 
-			media_type = source.media_type;
-			if (source.parameters != null) {
-				foreach (var item in source.parameters)
-					Parameters.Add (new NameValueHeaderValue (item));
-			}
-		}
+            media_type = source.media_type;
+            if (source.parameters != null)
+            {
+                foreach (var item in source.parameters)
+                    Parameters.Add(new NameValueHeaderValue(item));
+            }
+        }
 
-		internal MediaTypeHeaderValue ()
-		{
-		}
+        internal MediaTypeHeaderValue() { }
 
-		public string CharSet {
-			get {
-				if (parameters == null)
-					return null;
+        public string CharSet
+        {
+            get
+            {
+                if (parameters == null)
+                    return null;
 
-				var found = parameters.Find (l => string.Equals (l.Name, "charset", StringComparison.OrdinalIgnoreCase));
-				if (found == null)
-					return null;
+                var found = parameters.Find(l =>
+                    string.Equals(l.Name, "charset", StringComparison.OrdinalIgnoreCase)
+                );
+                if (found == null)
+                    return null;
 
-				return found.Value;
-			}
+                return found.Value;
+            }
+            set
+            {
+                if (parameters == null)
+                    parameters = new List<NameValueHeaderValue>();
 
-			set {
-				if (parameters == null)
-					parameters = new List<NameValueHeaderValue> ();
+                parameters.SetValue("charset", value);
+            }
+        }
 
-				parameters.SetValue ("charset", value);
-			}
-		}
+        public string MediaType
+        {
+            get { return media_type; }
+            set
+            {
+                if (value == null)
+                    throw new ArgumentNullException("MediaType");
 
-		public string MediaType {
-			get {
-				return media_type;
-			}
-			set {
-				if (value == null)
-					throw new ArgumentNullException ("MediaType");
+                string temp;
+                var token = TryParseMediaType(new Lexer(value), out temp);
+                if (token == null || token.Value.Kind != Token.Type.End)
+                    throw new FormatException();
 
-				string temp;
-				var token = TryParseMediaType (new Lexer (value), out temp);
-				if (token == null || token.Value.Kind != Token.Type.End)
-					throw new FormatException ();
+                media_type = temp;
+            }
+        }
 
-				media_type = temp;
-			}
-		}
+        public ICollection<NameValueHeaderValue> Parameters
+        {
+            get { return parameters ?? (parameters = new List<NameValueHeaderValue>()); }
+        }
 
-		public ICollection<NameValueHeaderValue> Parameters {
-			get {
-				return parameters ?? (parameters = new List<NameValueHeaderValue> ());
-			}
-		}
+        object ICloneable.Clone()
+        {
+            return new MediaTypeHeaderValue(this);
+        }
 
-		object ICloneable.Clone ()
-		{
-			return new MediaTypeHeaderValue (this);
-		}
+        public override bool Equals(object obj)
+        {
+            var source = obj as MediaTypeHeaderValue;
+            if (source == null)
+                return false;
 
-		public override bool Equals (object obj)
-		{
-			var source = obj as MediaTypeHeaderValue;
-			if (source == null)
-				return false;
+            return string.Equals(source.media_type, media_type, StringComparison.OrdinalIgnoreCase)
+                && source.parameters.SequenceEqual(parameters);
+        }
 
-			return string.Equals (source.media_type, media_type, StringComparison.OrdinalIgnoreCase) &&
-				source.parameters.SequenceEqual (parameters);
-		}
+        public override int GetHashCode()
+        {
+            return media_type.ToLowerInvariant().GetHashCode()
+                ^ HashCodeCalculator.Calculate(parameters);
+        }
 
-		public override int GetHashCode ()
-		{
-			return media_type.ToLowerInvariant ().GetHashCode () ^ HashCodeCalculator.Calculate (parameters);
-		}
+        public static MediaTypeHeaderValue Parse(string input)
+        {
+            MediaTypeHeaderValue value;
+            if (TryParse(input, out value))
+                return value;
 
-		public static MediaTypeHeaderValue Parse (string input)
-		{
-			MediaTypeHeaderValue value;
-			if (TryParse (input, out value))
-				return value;
+            throw new FormatException(input);
+        }
 
-			throw new FormatException (input);
-		}
+        public override string ToString()
+        {
+            if (parameters == null)
+                return media_type;
 
-		public override string ToString ()
-		{
-			if (parameters == null)
-				return media_type;
+            return media_type + CollectionExtensions.ToString(parameters);
+        }
 
-			return media_type + CollectionExtensions.ToString (parameters);
-		}
-		
-		public static bool TryParse (string input, out MediaTypeHeaderValue parsedValue)
-		{
-			parsedValue = null;
+        public static bool TryParse(string input, out MediaTypeHeaderValue parsedValue)
+        {
+            parsedValue = null;
 
-			var lexer = new Lexer (input);
+            var lexer = new Lexer(input);
 
-			string media;
-			List<NameValueHeaderValue> parameters = null;
-			var token = TryParseMediaType (lexer, out media);
-			if (token == null)
-				return false;
+            string media;
+            List<NameValueHeaderValue> parameters = null;
+            var token = TryParseMediaType(lexer, out media);
+            if (token == null)
+                return false;
 
-			switch (token.Value.Kind) {
-			case Token.Type.SeparatorSemicolon:
-				Token t;
-				if (!NameValueHeaderValue.TryParseParameters (lexer, out parameters, out t) || t != Token.Type.End)
-					return false;
-				break;
-			case Token.Type.End:
-				break;
-			default:
-				return false;
-			}
+            switch (token.Value.Kind)
+            {
+                case Token.Type.SeparatorSemicolon:
+                    Token t;
+                    if (
+                        !NameValueHeaderValue.TryParseParameters(lexer, out parameters, out t)
+                        || t != Token.Type.End
+                    )
+                        return false;
+                    break;
+                case Token.Type.End:
+                    break;
+                default:
+                    return false;
+            }
 
-			parsedValue = new MediaTypeHeaderValue () {
-				media_type = media,
-				parameters = parameters
-			};
+            parsedValue = new MediaTypeHeaderValue()
+            {
+                media_type = media,
+                parameters = parameters,
+            };
 
-			return true;
-		}
+            return true;
+        }
 
-		internal static Token? TryParseMediaType (Lexer lexer, out string media)
-		{
-			media = null;
+        internal static Token? TryParseMediaType(Lexer lexer, out string media)
+        {
+            media = null;
 
-			var token = lexer.Scan ();
-			if (token != Token.Type.Token)
-				return null;
+            var token = lexer.Scan();
+            if (token != Token.Type.Token)
+                return null;
 
-			if (lexer.Scan () != Token.Type.SeparatorSlash)
-				return null;
+            if (lexer.Scan() != Token.Type.SeparatorSlash)
+                return null;
 
-			var token2 = lexer.Scan ();
-			if (token2 != Token.Type.Token)
-				return null;
+            var token2 = lexer.Scan();
+            if (token2 != Token.Type.Token)
+                return null;
 
-			media = lexer.GetStringValue (token) + "/" + lexer.GetStringValue (token2);
+            media = lexer.GetStringValue(token) + "/" + lexer.GetStringValue(token2);
 
-			return lexer.Scan ();
-		}
-	}
+            return lexer.Scan();
+        }
+    }
 }

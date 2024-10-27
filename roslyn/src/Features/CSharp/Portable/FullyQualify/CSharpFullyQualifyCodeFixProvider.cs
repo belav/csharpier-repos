@@ -11,7 +11,13 @@ using Microsoft.CodeAnalysis.Diagnostics;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FullyQualify), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.FullyQualify
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
     internal sealed class CSharpFullyQualifyCodeFixProvider : AbstractFullyQualifyCodeFixProvider
     {
@@ -41,12 +47,21 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
         private const string CS0308 = nameof(CS0308);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpFullyQualifyCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpFullyQualifyCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds { get; } =
-            ImmutableArray.Create(CS0103, CS0104, CS0246, CS0305, CS0308, IDEDiagnosticIds.UnboundIdentifierId);
+            ImmutableArray.Create(
+                CS0103,
+                CS0104,
+                CS0246,
+                CS0305,
+                CS0308,
+                IDEDiagnosticIds.UnboundIdentifierId
+            );
     }
 }

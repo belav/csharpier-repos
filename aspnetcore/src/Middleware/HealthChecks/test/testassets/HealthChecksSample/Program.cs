@@ -10,15 +10,15 @@ public class Program
     static Program()
     {
         _scenarios = new Dictionary<string, Type>(StringComparer.OrdinalIgnoreCase)
-            {
-                { "", typeof(BasicStartup) },
-                { "basic", typeof(BasicStartup) },
-                { "writer", typeof(CustomWriterStartup) },
-                { "liveness", typeof(LivenessProbeStartup) },
-                { "port", typeof(ManagementPortStartup) },
-                { "db", typeof(DbHealthStartup) },
-                { "dbcontext", typeof(DbContextHealthStartup) },
-            };
+        {
+            { "", typeof(BasicStartup) },
+            { "basic", typeof(BasicStartup) },
+            { "writer", typeof(CustomWriterStartup) },
+            { "liveness", typeof(LivenessProbeStartup) },
+            { "port", typeof(ManagementPortStartup) },
+            { "db", typeof(DbHealthStartup) },
+            { "dbcontext", typeof(DbContextHealthStartup) },
+        };
     }
 
     public static Task Main(string[] args)
@@ -45,17 +45,16 @@ public class Program
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseConfiguration(config)
-                .ConfigureLogging(builder =>
-                {
-                    builder.SetMinimumLevel(LogLevel.Trace);
-                    builder.AddConfiguration(config);
-                    builder.AddConsole();
-                })
-                .UseKestrel()
-                .UseStartup(startupType);
+                    .UseConfiguration(config)
+                    .ConfigureLogging(builder =>
+                    {
+                        builder.SetMinimumLevel(LogLevel.Trace);
+                        builder.AddConfiguration(config);
+                        builder.AddConsole();
+                    })
+                    .UseKestrel()
+                    .UseStartup(startupType);
             })
             .Build();
     }
-
 }

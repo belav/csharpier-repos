@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="Calendar.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 using System;
@@ -10,17 +10,16 @@ using System.ComponentModel;
 using System.ComponentModel.Design;
 using System.Drawing;
 using System.Drawing.Design;
+using System.Security.Permissions;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Design.WebControls;
 using System.Web.UI.HtmlControls;
 using System.Web.UI.WebControls;
 using WebCntrls = System.Web.UI.WebControls;
-using System.Security.Permissions;
 
 namespace System.Web.UI.MobileControls
 {
-
     /*
      * Mobile Calendar class.
      * The Calendar control allows developers to easily add date picking
@@ -34,13 +33,23 @@ namespace System.Web.UI.MobileControls
         DefaultEvent("SelectionChanged"),
         DefaultProperty("SelectedDate"),
         Designer(typeof(System.Web.UI.Design.MobileControls.CalendarDesigner)),
-        DesignerAdapter(typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerCalendarAdapter)),
+        DesignerAdapter(
+            typeof(System.Web.UI.Design.MobileControls.Adapters.DesignerCalendarAdapter)
+        ),
         ToolboxData("<{0}:Calendar runat=\"server\"></{0}:Calendar>"),
         ToolboxItem("System.Web.UI.Design.WebControlToolboxItem, " + AssemblyRef.SystemDesign)
     ]
-    [AspNetHostingPermission(SecurityAction.LinkDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(SecurityAction.InheritanceDemand, Level=AspNetHostingPermissionLevel.Minimal)]
-    [Obsolete("The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231.")]
+    [AspNetHostingPermission(
+        SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [Obsolete(
+        "The System.Web.Mobile.dll assembly has been deprecated and should no longer be used. For information about how to develop ASP.NET mobile applications, see http://go.microsoft.com/fwlink/?LinkId=157231."
+    )]
     public class Calendar : MobileControl, IPostBackEventHandler
     {
         private WebCntrls.Calendar _webCalendar;
@@ -50,7 +59,8 @@ namespace System.Web.UI.MobileControls
         private static readonly Object EventSelectionChanged = new Object();
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.Calendar"]/*' />
-        public Calendar() : base()
+        public Calendar()
+            : base()
         {
             _webCalendar = CreateWebCalendar();
             _webCalendar.Visible = false;
@@ -60,8 +70,7 @@ namespace System.Web.UI.MobileControls
             // the aggregated control.  For more details about the mechanism,
             // please see the comment in the constructor of
             // Mobile.UI.AdRotator.
-            EventHandler eventHandler =
-                new EventHandler(WebSelectionChanged);
+            EventHandler eventHandler = new EventHandler(WebSelectionChanged);
 
             _webCalendar.SelectionChanged += eventHandler;
         }
@@ -79,7 +88,7 @@ namespace System.Web.UI.MobileControls
         // used mostly for the complex HTML specific rendering (like the one
         // rendered by WebForms Calendar), can be set via the property that
         // exposed the aggregated WebForms Calendar directly.
-        // 
+        //
         // Most properties are got and set directly from the original Calendar
         // control.  For event properties, event references are stored locally
         // as they cannot be returned from the aggregated child control.
@@ -93,10 +102,7 @@ namespace System.Web.UI.MobileControls
         ]
         public WebCntrls.Calendar WebCalendar
         {
-            get
-            {
-                return _webCalendar;
-            }
+            get { return _webCalendar; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.FirstDayOfWeek"]/*' />
@@ -108,14 +114,8 @@ namespace System.Web.UI.MobileControls
         ]
         public FirstDayOfWeek FirstDayOfWeek
         {
-            get
-            {
-                return _webCalendar.FirstDayOfWeek;
-            }
-            set
-            {
-                _webCalendar.FirstDayOfWeek = value;
-            }
+            get { return _webCalendar.FirstDayOfWeek; }
+            set { _webCalendar.FirstDayOfWeek = value; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.SelectedDate"]/*' />
@@ -126,27 +126,15 @@ namespace System.Web.UI.MobileControls
         ]
         public DateTime SelectedDate
         {
-            get
-            {
-                return _webCalendar.SelectedDate;
-            }
-            set
-            {
-                _webCalendar.SelectedDate = value;
-            }
+            get { return _webCalendar.SelectedDate; }
+            set { _webCalendar.SelectedDate = value; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.SelectedDates"]/*' />
-        [
-            Browsable(false),
-            DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden),
-        ]   
+        [Browsable(false), DesignerSerializationVisibility(DesignerSerializationVisibility.Hidden)]
         public SelectedDatesCollection SelectedDates
         {
-            get
-            {
-                return _webCalendar.SelectedDates;
-            }
+            get { return _webCalendar.SelectedDates; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.SelectionMode"]/*' />
@@ -158,14 +146,8 @@ namespace System.Web.UI.MobileControls
         ]
         public CalendarSelectionMode SelectionMode
         {
-            get
-            {
-                return _webCalendar.SelectionMode;
-            }
-            set
-            {
-                _webCalendar.SelectionMode = value;
-            }
+            get { return _webCalendar.SelectionMode; }
+            set { _webCalendar.SelectionMode = value; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.ShowDayHeader"]/*' />
@@ -177,14 +159,8 @@ namespace System.Web.UI.MobileControls
         ]
         public bool ShowDayHeader
         {
-            get
-            {
-                return _webCalendar.ShowDayHeader;
-            }
-            set
-            {
-                _webCalendar.ShowDayHeader = value;
-            }
+            get { return _webCalendar.ShowDayHeader; }
+            set { _webCalendar.ShowDayHeader = value; }
         }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.VisibleDate"]/*' />
@@ -195,15 +171,9 @@ namespace System.Web.UI.MobileControls
         ]
         public DateTime VisibleDate
         {
-            get
-            {
-                return _webCalendar.VisibleDate;
-            }
-            set
-            {
-                _webCalendar.VisibleDate = value;
-            }
-        } 
+            get { return _webCalendar.VisibleDate; }
+            set { _webCalendar.VisibleDate = value; }
+        }
 
         /// <include file='doc\Calendar.uex' path='docs/doc[@for="Calendar.CalendarEntryText"]/*' />
         [
@@ -216,13 +186,10 @@ namespace System.Web.UI.MobileControls
         {
             get
             {
-                String s = (String) ViewState["CalendarEntryText"];
-                return((s != null) ? s : String.Empty);
+                String s = (String)ViewState["CalendarEntryText"];
+                return ((s != null) ? s : String.Empty);
             }
-            set
-            {
-                ViewState["CalendarEntryText"] = value;
-            }
+            set { ViewState["CalendarEntryText"] = value; }
         }
 
         /////////////////////////////////////////////////////////////////////
@@ -241,14 +208,8 @@ namespace System.Web.UI.MobileControls
         ]
         public event EventHandler SelectionChanged
         {
-            add
-            {
-                Events.AddHandler(EventSelectionChanged, value);
-            }
-            remove
-            {
-                Events.RemoveHandler(EventSelectionChanged, value);
-            }
+            add { Events.AddHandler(EventSelectionChanged, value); }
+            remove { Events.RemoveHandler(EventSelectionChanged, value); }
         }
 
         // protected method (which can be overridden by subclasses) for
@@ -294,9 +255,10 @@ namespace System.Web.UI.MobileControls
         }
 
         #region IPostBackEventHandler implementation
-        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument) {
+        void IPostBackEventHandler.RaisePostBackEvent(String eventArgument)
+        {
             RaisePostBackEvent(eventArgument);
         }
-        #endregion 
+        #endregion
     }
 }

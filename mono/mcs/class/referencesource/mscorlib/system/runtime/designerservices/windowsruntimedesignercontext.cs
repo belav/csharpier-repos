@@ -1,11 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Security;
+using System.Diagnostics.Contracts;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
-using System.Runtime.CompilerServices;
-using System.Reflection;
-using System.Diagnostics.Contracts;
+using System.Security;
 using StackCrawlMark = System.Threading.StackCrawlMark;
 
 namespace System.Runtime.DesignerServices
@@ -23,10 +23,22 @@ namespace System.Runtime.DesignerServices
         [SecurityCritical]
         [ResourceExposure(ResourceScope.AppDomain)]
         [SuppressUnmanagedCodeSecurity]
-        internal static extern IntPtr CreateDesignerContext([MarshalAs(UnmanagedType.LPArray, ArraySubType = UnmanagedType.LPWStr, SizeParamIndex = 1)] string[] paths, int count, bool shared);
+        internal static extern IntPtr CreateDesignerContext(
+            [MarshalAs(
+                UnmanagedType.LPArray,
+                ArraySubType = UnmanagedType.LPWStr,
+                SizeParamIndex = 1
+            )]
+                string[] paths,
+            int count,
+            bool shared
+        );
 
         [SecurityCritical]
-        internal static IntPtr CreateDesignerContext(IEnumerable<string> paths, [MarshalAs(UnmanagedType.Bool)] bool shared)
+        internal static IntPtr CreateDesignerContext(
+            IEnumerable<string> paths,
+            [MarshalAs(UnmanagedType.Bool)] bool shared
+        )
         {
             List<string> pathList = new List<string>(paths);
             string[] pathArray = pathList.ToArray();
@@ -35,11 +47,15 @@ namespace System.Runtime.DesignerServices
                 // Each path has to be absolute path - check it
                 if (path == null)
                 {
-                    throw new ArgumentNullException(Environment.GetResourceString("ArgumentNull_Path"));
+                    throw new ArgumentNullException(
+                        Environment.GetResourceString("ArgumentNull_Path")
+                    );
                 }
                 if (System.IO.Path.IsRelative(path))
                 {
-                    throw new ArgumentException(Environment.GetResourceString("Argument_AbsolutePathRequired"));
+                    throw new ArgumentException(
+                        Environment.GetResourceString("Argument_AbsolutePathRequired")
+                    );
                 }
             }
             return CreateDesignerContext(pathArray, pathArray.Length, shared);
@@ -50,7 +66,10 @@ namespace System.Runtime.DesignerServices
         [SecurityCritical]
         [ResourceExposure(ResourceScope.AppDomain)]
         [SuppressUnmanagedCodeSecurity]
-        internal static extern void SetCurrentContext([MarshalAs(UnmanagedType.Bool)] bool isDesignerContext, IntPtr context);
+        internal static extern void SetCurrentContext(
+            [MarshalAs(UnmanagedType.Bool)] bool isDesignerContext,
+            IntPtr context
+        );
 
         private static object s_lock = new object();
         private static IntPtr s_sharedContext;
@@ -60,7 +79,11 @@ namespace System.Runtime.DesignerServices
 
         // This private constructor is called either by the public constructor or by the debugger via FuncEval.
         [SecurityCritical]
-        private WindowsRuntimeDesignerContext(IEnumerable<string> paths, string name, bool designModeRequired)
+        private WindowsRuntimeDesignerContext(
+            IEnumerable<string> paths,
+            string name,
+            bool designModeRequired
+        )
         {
             if (name == null)
                 throw new ArgumentNullException("name");
@@ -87,7 +110,7 @@ namespace System.Runtime.DesignerServices
             lock (s_lock)
             {
                 if (s_sharedContext == IntPtr.Zero)
-                    InitializeSharedContext(new string[] {});
+                    InitializeSharedContext(new string[] { });
             }
 
             m_contextObject = CreateDesignerContext(paths, false);
@@ -96,8 +119,7 @@ namespace System.Runtime.DesignerServices
         // This is the public constructor that may be used when running in a process in DesignMode.
         [SecurityCritical]
         public WindowsRuntimeDesignerContext(IEnumerable<string> paths, string name)
-            : this(paths, name, true)
-        {}
+            : this(paths, name, true) { }
 
         [SecurityCritical]
         public static void InitializeSharedContext(IEnumerable<string> paths)
@@ -136,7 +158,7 @@ namespace System.Runtime.DesignerServices
             }
         }
 
-        // Locate an assembly by the long form of the assembly name. 
+        // Locate an assembly by the long form of the assembly name.
         // eg. "Toolbox.dll, version=1.1.10.1220, locale=en, publickey=1234567890123456789012345678901234567890"
         [SecurityCritical]
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
@@ -146,7 +168,13 @@ namespace System.Runtime.DesignerServices
             Contract.Ensures(!Contract.Result<Assembly>().ReflectionOnly);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyName, null, ref stackMark, m_contextObject, false /*forIntrospection*/);
+            return RuntimeAssembly.InternalLoad(
+                assemblyName,
+                null,
+                ref stackMark,
+                m_contextObject,
+                false /*forIntrospection*/
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)] // Methods containing StackCrawlMark local var has to be marked non-inlineable
@@ -160,15 +188,22 @@ namespace System.Runtime.DesignerServices
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
 
             return RuntimeTypeHandle.GetTypeByName(
-                typeName, false /*throwOnError*/, false /*ignoreCase*/, false /*reflectionOnly*/, ref stackMark, m_contextObject, false /*loadTypeFromPartialName*/);
+                typeName,
+                false /*throwOnError*/
+                ,
+                false /*ignoreCase*/
+                ,
+                false /*reflectionOnly*/
+                ,
+                ref stackMark,
+                m_contextObject,
+                false /*loadTypeFromPartialName*/
+            );
         }
 
         public string Name
         {
-            get
-            {
-                return m_name;
-            }
+            get { return m_name; }
         }
     }
 #endif

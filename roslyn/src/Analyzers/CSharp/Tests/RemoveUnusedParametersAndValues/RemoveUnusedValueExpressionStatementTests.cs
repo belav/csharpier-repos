@@ -20,21 +20,34 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
     public partial class RemoveUnusedValueExpressionStatementTests : RemoveUnusedValuesTestsBase
     {
         public RemoveUnusedValueExpressionStatementTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        private protected override OptionsCollection PreferNone
-            => Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.None));
+        private protected override OptionsCollection PreferNone =>
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.DiscardVariable,
+                    NotificationOption2.None
+                )
+            );
 
-        private protected override OptionsCollection PreferDiscard
-            => Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.DiscardVariable, NotificationOption2.Silent));
+        private protected override OptionsCollection PreferDiscard =>
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.DiscardVariable,
+                    NotificationOption2.Silent
+                )
+            );
 
-        private protected override OptionsCollection PreferUnusedLocal
-            => Option(CSharpCodeStyleOptions.UnusedValueExpressionStatement,
-                   new CodeStyleOption2<UnusedValuePreference>(UnusedValuePreference.UnusedLocalVariable, NotificationOption2.Silent));
+        private protected override OptionsCollection PreferUnusedLocal =>
+            Option(
+                CSharpCodeStyleOptions.UnusedValueExpressionStatement,
+                new CodeStyleOption2<UnusedValuePreference>(
+                    UnusedValuePreference.UnusedLocalVariable,
+                    NotificationOption2.Silent
+                )
+            );
 
         [Fact]
         public async Task ExpressionStatement_Suppressed()
@@ -50,7 +63,9 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
                     int M2() => 0;
                 }
-                """, options: PreferNone);
+                """,
+                options: PreferNone
+            );
         }
 
         [Fact]
@@ -79,8 +94,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
                     int M2() => 0;
                 }
-                """, options: PreferDiscard,
-    parseOptions: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.CSharp6));
+                """,
+                options: PreferDiscard,
+                parseOptions: CSharpParseOptions.Default.WithLanguageVersion(
+                    LanguageVersion.CSharp6
+                )
+            );
         }
 
         [Theory]
@@ -99,13 +118,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
 
                     int M2() => 0;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory]
         [InlineData(nameof(PreferDiscard), "_")]
         [InlineData(nameof(PreferUnusedLocal), "var unused")]
-        public async Task ExpressionStatement_NonConstantPrimitiveTypeValue(string optionName, string fix)
+        public async Task ExpressionStatement_NonConstantPrimitiveTypeValue(
+            string optionName,
+            string fix
+        )
         {
             await TestInRegularAndScriptAsync(
                 """
@@ -119,7 +143,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.RemoveUnusedParametersA
                     int M2() => 0;
                 }
                 """,
-$@"class C
+                $@"class C
 {{
     void M()
     {{
@@ -127,7 +151,9 @@ $@"class C
     }}
 
     int M2() => 0;
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Theory]
@@ -147,7 +173,7 @@ $@"class C
                     C M2() => new C();
                 }
                 """,
-$@"class C
+                $@"class C
 {{
     void M()
     {{
@@ -155,7 +181,9 @@ $@"class C
     }}
 
     C M2() => new C();
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Theory]
@@ -172,7 +200,9 @@ $@"class C
                         [|1|];
                     }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory]
@@ -191,7 +221,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory]
@@ -208,7 +240,9 @@ $@"class C
                         [|M2()|];
                     }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/33073")]
@@ -227,7 +261,9 @@ $@"class C
 
                     UndefinedType M2() => null;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/33073")]
@@ -247,7 +283,9 @@ $@"class C
                         [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
                     }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/33073")]
@@ -267,7 +305,9 @@ $@"class C
                         [|await Task.Delay(0, CancellationToken.None).ConfigureAwait(false)|];
                     }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory]
@@ -286,7 +326,9 @@ $@"class C
 
                     void M2() { }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory]
@@ -295,7 +337,7 @@ $@"class C
         public async Task ExpressionStatement_AssignmentExpression(string op)
         {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
-$@"class C
+                $@"class C
 {{
     void M(int x)
     {{
@@ -303,7 +345,8 @@ $@"class C
     }}
 
     int M2() => 0;
-}}");
+}}"
+            );
         }
 
         [Theory]
@@ -314,14 +357,15 @@ $@"class C
         public async Task ExpressionStatement_IncrementOrDecrement(string incrementOrDecrement)
         {
             await TestMissingInRegularAndScriptWithAllOptionsAsync(
-$@"class C
+                $@"class C
 {{
     int M(int x)
     {{
         [|{incrementOrDecrement}|];
         return x;
     }}
-}}");
+}}"
+            );
         }
 
         [Fact]
@@ -351,7 +395,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact]
@@ -381,7 +427,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact]
@@ -417,7 +465,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact]
@@ -459,13 +509,20 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Theory]
         [InlineData(nameof(PreferDiscard), "_", "_", "_")]
         [InlineData(nameof(PreferUnusedLocal), "var unused", "var unused", "var unused3")]
-        public async Task ExpressionStatement_FixAll(string optionName, string fix1, string fix2, string fix3)
+        public async Task ExpressionStatement_FixAll(
+            string optionName,
+            string fix1,
+            string fix2,
+            string fix3
+        )
         {
             await TestInRegularAndScriptAsync(
                 """
@@ -487,7 +544,7 @@ $@"class C
                     int M2() => 0;
                 }
                 """,
-$@"class C
+                $@"class C
 {{
     public C()
     {{
@@ -503,7 +560,9 @@ $@"class C
     }}
 
     int M2() => 0;
-}}", optionName);
+}}",
+                optionName
+            );
         }
 
         [Fact]
@@ -535,7 +594,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferDiscard);
+                """,
+                options: PreferDiscard
+            );
         }
 
         [Fact]
@@ -566,7 +627,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferDiscard);
+                """,
+                options: PreferDiscard
+            );
         }
 
         [Fact]
@@ -598,7 +661,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Fact]
@@ -629,7 +694,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, options: PreferUnusedLocal);
+                """,
+                options: PreferUnusedLocal
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32942")]
@@ -644,7 +711,9 @@ $@"class C
                     void M() => [|M2()|];
                     int M2() => 0;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32942")]
@@ -663,7 +732,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/32942")]
@@ -685,7 +756,9 @@ $@"class C
 
                     int M2() => 0;
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
 
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/43648")]
@@ -708,7 +781,9 @@ $@"class C
                             [|returnValue.Add(dynamicValue)|];
                     }
                 }
-                """, optionName);
+                """,
+                optionName
+            );
         }
     }
 }

@@ -3,8 +3,8 @@
 
 
 using System;
-using System.Runtime.CompilerServices;
 using System.Numerics;
+using System.Runtime.CompilerServices;
 using Xunit;
 
 // This test is a repro case for DevDiv VSO bug 288222.
@@ -32,7 +32,7 @@ public class Program
             Vector2 v = new Vector2(x, y);
             float[] array = new float[4];
             MyCopyTo(new CopyToDelegate(v.CopyTo), array, 2);
-            
+
             if ((array[2] != x) || (array[3] != y))
             {
                 Console.WriteLine("Failed with wrong values");
@@ -42,7 +42,7 @@ public class Program
         catch (Exception e)
         {
             Console.WriteLine("Failed with exception: " + e.Message);
-            return -1;   
+            return -1;
         }
 
         Console.WriteLine("Pass");

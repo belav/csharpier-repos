@@ -51,7 +51,8 @@ public sealed record MigrationsScaffolderDependencies
         IOperationReporter operationReporter,
         IDatabaseProvider databaseProvider,
         ISnapshotModelProcessor snapshotModelProcessor,
-        IMigrator migrator)
+        IMigrator migrator
+    )
     {
         CurrentContext = currentContext;
         Model = model;

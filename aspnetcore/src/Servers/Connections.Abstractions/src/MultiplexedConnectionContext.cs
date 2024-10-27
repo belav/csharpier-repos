@@ -18,7 +18,9 @@ public abstract class MultiplexedConnectionContext : BaseConnectionContext, IAsy
     /// </summary>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public abstract ValueTask<ConnectionContext?> AcceptAsync(CancellationToken cancellationToken = default);
+    public abstract ValueTask<ConnectionContext?> AcceptAsync(
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     /// Creates an outbound connection
@@ -26,5 +28,8 @@ public abstract class MultiplexedConnectionContext : BaseConnectionContext, IAsy
     /// <param name="features"></param>
     /// <param name="cancellationToken"></param>
     /// <returns></returns>
-    public abstract ValueTask<ConnectionContext> ConnectAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default);
+    public abstract ValueTask<ConnectionContext> ConnectAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    );
 }

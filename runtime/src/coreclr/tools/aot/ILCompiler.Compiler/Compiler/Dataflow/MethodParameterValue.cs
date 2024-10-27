@@ -8,13 +8,16 @@ using ILLink.Shared.TypeSystemProxy;
 
 namespace ILLink.Shared.TrimAnalysis
 {
-
     /// <summary>
     /// A value that came from a method parameter - such as the result of a ldarg.
     /// </summary>
     internal partial record MethodParameterValue
     {
-        public MethodParameterValue(ParameterProxy param, DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes, bool overrideIsThis = false)
+        public MethodParameterValue(
+            ParameterProxy param,
+            DynamicallyAccessedMemberTypes dynamicallyAccessedMemberTypes,
+            bool overrideIsThis = false
+        )
         {
             StaticType = param.ParameterType;
             Parameter = param;

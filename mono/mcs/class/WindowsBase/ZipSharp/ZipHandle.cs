@@ -9,24 +9,20 @@ using System.Runtime.InteropServices;
 
 namespace zipsharp
 {
-	class ZipHandle : SafeHandle
-	{
-		public override bool IsInvalid {
-			get {
-				return handle == IntPtr.Zero;
-			}
-		}
+    class ZipHandle : SafeHandle
+    {
+        public override bool IsInvalid
+        {
+            get { return handle == IntPtr.Zero; }
+        }
 
-		public ZipHandle ()
-			: base (IntPtr.Zero, true)
-		{
-			
-		}
+        public ZipHandle()
+            : base(IntPtr.Zero, true) { }
 
-		protected override bool ReleaseHandle()
-		{
-			NativeZip.CloseArchive (this);
-			return true;
-		}
-	}
+        protected override bool ReleaseHandle()
+        {
+            NativeZip.CloseArchive(this);
+            return true;
+        }
+    }
 }

@@ -30,10 +30,7 @@ namespace System.Reflection.Metadata
         /// <exception cref="ArgumentOutOfRangeException"><paramref name="length"/> is negative.</exception>
         /// <exception cref="PlatformNotSupportedException">The current platform is not little-endian.</exception>
         public BlobReader(byte* buffer, int length)
-            : this(MemoryBlock.CreateChecked(buffer, length))
-        {
-
-        }
+            : this(MemoryBlock.CreateChecked(buffer, length)) { }
 
         internal BlobReader(MemoryBlock block)
         {
@@ -91,10 +88,7 @@ namespace System.Reflection.Metadata
         /// <exception cref="BadImageFormatException">Offset is set outside the bounds of underlying reader.</exception>
         public int Offset
         {
-            get
-            {
-                return (int)(_currentPointer - _block.Pointer);
-            }
+            get { return (int)(_currentPointer - _block.Pointer); }
             set
             {
                 if (unchecked((uint)value) > (uint)_block.Length)
@@ -164,7 +158,10 @@ namespace System.Reflection.Metadata
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private void CheckBounds(int offset, int byteCount)
         {
-            if (unchecked((ulong)(uint)offset + (uint)byteCount) > (ulong)(_endPointer - _currentPointer))
+            if (
+                unchecked((ulong)(uint)offset + (uint)byteCount)
+                > (ulong)(_endPointer - _currentPointer)
+            )
             {
                 Throw.OutOfBounds();
             }
@@ -325,7 +322,15 @@ namespace System.Reflection.Metadata
                         (int)(ptr[0] | (ptr[1] << 8) | (ptr[2] << 16) | (ptr[3] << 24)),
                         (short)(ptr[4] | (ptr[5] << 8)),
                         (short)(ptr[6] | (ptr[7] << 8)),
-                        ptr[8], ptr[9], ptr[10], ptr[11], ptr[12], ptr[13], ptr[14], ptr[15]);
+                        ptr[8],
+                        ptr[9],
+                        ptr[10],
+                        ptr[11],
+                        ptr[12],
+                        ptr[13],
+                        ptr[14],
+                        ptr[15]
+                    );
                 }
             }
         }
@@ -348,7 +353,6 @@ namespace System.Reflection.Metadata
             {
                 throw new BadImageFormatException(SR.ValueTooLarge);
             }
-
             unchecked
             {
                 return new decimal(
@@ -356,7 +360,8 @@ namespace System.Reflection.Metadata
                     (int)(ptr[5] | (ptr[6] << 8) | (ptr[7] << 16) | (ptr[8] << 24)),
                     (int)(ptr[9] | (ptr[10] << 8) | (ptr[11] << 16) | (ptr[12] << 24)),
                     isNegative: (*ptr & 0x80) != 0,
-                    scale: scale);
+                    scale: scale
+                );
             }
         }
 
@@ -434,13 +439,24 @@ namespace System.Reflection.Metadata
         /// <exception cref="BadImageFormatException"><paramref name="byteCount"/> bytes not available.</exception>
         public void ReadBytes(int byteCount, byte[] buffer, int bufferOffset)
         {
-            Marshal.Copy((IntPtr)GetCurrentPointerAndAdvance(byteCount), buffer, bufferOffset, byteCount);
+            Marshal.Copy(
+                (IntPtr)GetCurrentPointerAndAdvance(byteCount),
+                buffer,
+                bufferOffset,
+                byteCount
+            );
         }
 
         internal string ReadUtf8NullTerminated()
         {
             int bytesRead;
-            string value = _block.PeekUtf8NullTerminated(this.Offset, null, MetadataStringDecoder.DefaultUTF8, out bytesRead, '\0');
+            string value = _block.PeekUtf8NullTerminated(
+                this.Offset,
+                null,
+                MetadataStringDecoder.DefaultUTF8,
+                out bytesRead,
+                '\0'
+            );
             _currentPointer += bytesRead;
             return value;
         }
@@ -616,7 +632,8 @@ namespace System.Reflection.Metadata
             return new EntityHandle(tokenType | (value >> 2));
         }
 
-        private static ReadOnlySpan<uint> CorEncodeTokenArray => [TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0];
+        private static ReadOnlySpan<uint> CorEncodeTokenArray =>
+            [TokenTypeIds.TypeDef, TokenTypeIds.TypeRef, TokenTypeIds.TypeSpec, 0];
 
         /// <summary>
         /// Reads a #Blob heap handle encoded as a compressed integer.

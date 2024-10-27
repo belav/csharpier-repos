@@ -47,7 +47,15 @@ namespace System.ServiceModel.Syndication.Tests
 
             if (actual != expected)
             {
-                string message = "-- Expected -" + Environment.NewLine + expected + Environment.NewLine + "-- Actual -" + Environment.NewLine + actual + Environment.NewLine;
+                string message =
+                    "-- Expected -"
+                    + Environment.NewLine
+                    + expected
+                    + Environment.NewLine
+                    + "-- Actual -"
+                    + Environment.NewLine
+                    + actual
+                    + Environment.NewLine;
                 throw new NotSupportedException(message);
             }
         }
@@ -55,6 +63,7 @@ namespace System.ServiceModel.Syndication.Tests
         public List<AllowableDifference> AllowableDifferences { get; set; } = null;
 
         public XmlDiff Diff { get; set; }
+
         public bool Compare(string source, string target, out string diffNode)
         {
             diffNode = string.Empty;
@@ -68,7 +77,9 @@ namespace System.ServiceModel.Syndication.Tests
                 XmlDocument diffDoc = new XmlDocument();
                 diffDoc.LoadXml(Diff.ToXml());
                 XmlNodeList totalFailures = diffDoc.SelectNodes("/Root/Node/Diff[@DiffType]");
-                XmlNodeList attrFailures = diffDoc.SelectNodes("/Root/Node/Diff[@DiffType=6]|/Root/Node/Diff[@DiffType=5]|/Root/Node/Diff[@DiffType=1]");
+                XmlNodeList attrFailures = diffDoc.SelectNodes(
+                    "/Root/Node/Diff[@DiffType=6]|/Root/Node/Diff[@DiffType=5]|/Root/Node/Diff[@DiffType=1]"
+                );
 
                 if (attrFailures.Count == totalFailures.Count)
                 {
@@ -105,23 +116,30 @@ namespace System.ServiceModel.Syndication.Tests
             XmlAttribute diffType;
             if ((diffType = failedNode.Attributes["DiffType"]) != null)
             {
-                if (diffType.Value == "1") return true;
+                if (diffType.Value == "1")
+                    return true;
             }
-            if (failedNode.ChildNodes.Count < 2) throw new ArgumentException("Unexpected node structure", "failedNode");
-            if (AllowableDifferences == null) return false;
+            if (failedNode.ChildNodes.Count < 2)
+                throw new ArgumentException("Unexpected node structure", "failedNode");
+            if (AllowableDifferences == null)
+                return false;
 
             // XmlDiff flags closing tags as different when the open tags were different
             // this flags those since they aren't interesting failures
-            if (failedNode.ChildNodes[0].InnerText.StartsWith("</") &&
-                failedNode.ChildNodes[1].InnerText.StartsWith("</"))
+            if (
+                failedNode.ChildNodes[0].InnerText.StartsWith("</")
+                && failedNode.ChildNodes[1].InnerText.StartsWith("</")
+            )
             {
                 return true;
             }
 
             foreach (AllowableDifference diff in AllowableDifferences)
             {
-                if (failedNode.ChildNodes[0].InnerText == diff.File1Value &&
-                    failedNode.ChildNodes[1].InnerText == diff.File2Value)
+                if (
+                    failedNode.ChildNodes[0].InnerText == diff.File1Value
+                    && failedNode.ChildNodes[1].InnerText == diff.File2Value
+                )
                 {
                     return true;
                 }

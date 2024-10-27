@@ -1,7 +1,7 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexCompilationInfo.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 #if !SILVERLIGHT
@@ -10,26 +10,30 @@ using System;
 using System.Runtime.Serialization;
 using System.Runtime.Versioning;
 
-namespace System.Text.RegularExpressions {
- 
+namespace System.Text.RegularExpressions
+{
     /// <devdoc>
     ///    <para>
     ///       [To be supplied]
     ///    </para>
     /// </devdoc>
-    [ Serializable() ] 
-    public class RegexCompilationInfo { 
-        private String           pattern;
-        private RegexOptions     options;
-        private String           name;
-        private String           nspace;
-        private bool             isPublic;
+    [Serializable()]
+    public class RegexCompilationInfo
+    {
+        private String pattern;
+        private RegexOptions options;
+        private String name;
+        private String nspace;
+        private bool isPublic;
 
         [OptionalField(VersionAdded = 2)]
-        private TimeSpan         matchTimeout;
+        private TimeSpan matchTimeout;
 
         [OnDeserializing]
-        private void InitMatchTimeoutDefaultForOldVersionDeserialization(StreamingContext unusedContext) {
+        private void InitMatchTimeoutDefaultForOldVersionDeserialization(
+            StreamingContext unusedContext
+        )
+        {
             matchTimeout = Regex.DefaultMatchTimeout;
         }
 
@@ -38,11 +42,24 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public RegexCompilationInfo(String pattern, RegexOptions options, String name, String fullnamespace, bool ispublic)
-            : this(pattern, options, name, fullnamespace, ispublic, Regex.DefaultMatchTimeout) {            
-        }
+        public RegexCompilationInfo(
+            String pattern,
+            RegexOptions options,
+            String name,
+            String fullnamespace,
+            bool ispublic
+        )
+            : this(pattern, options, name, fullnamespace, ispublic, Regex.DefaultMatchTimeout) { }
 
-        public RegexCompilationInfo(String pattern, RegexOptions options, String name, String fullnamespace, bool ispublic, TimeSpan matchTimeout) {
+        public RegexCompilationInfo(
+            String pattern,
+            RegexOptions options,
+            String name,
+            String fullnamespace,
+            bool ispublic,
+            TimeSpan matchTimeout
+        )
+        {
             Pattern = pattern;
             Name = name;
             Namespace = fullnamespace;
@@ -56,9 +73,11 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public String Pattern {
+        public String Pattern
+        {
             get { return pattern; }
-            set { 
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("value");
                 pattern = value;
@@ -70,9 +89,10 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public RegexOptions Options {
+        public RegexOptions Options
+        {
             get { return options; }
-            set { options = value;}
+            set { options = value; }
         }
 
         /// <devdoc>
@@ -80,15 +100,22 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public String Name {
+        public String Name
+        {
             get { return name; }
-            set { 
-                if (value == null) {
+            set
+            {
+                if (value == null)
+                {
                     throw new ArgumentNullException("value");
                 }
-				
-                if (value.Length == 0) {
-                	throw new ArgumentException(SR.GetString(SR.InvalidNullEmptyArgument, "value"), "value");					
+
+                if (value.Length == 0)
+                {
+                    throw new ArgumentException(
+                        SR.GetString(SR.InvalidNullEmptyArgument, "value"),
+                        "value"
+                    );
                 }
 
                 name = value;
@@ -100,9 +127,11 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public String Namespace {
+        public String Namespace
+        {
             get { return nspace; }
-            set { 
+            set
+            {
                 if (value == null)
                     throw new ArgumentNullException("value");
                 nspace = value;
@@ -114,18 +143,23 @@ namespace System.Text.RegularExpressions {
         ///       [To be supplied]
         ///    </para>
         /// </devdoc>
-        public bool IsPublic {
+        public bool IsPublic
+        {
             get { return isPublic; }
-            set { isPublic = value;}
+            set { isPublic = value; }
         }
 
-        public TimeSpan MatchTimeout {
+        public TimeSpan MatchTimeout
+        {
             get { return matchTimeout; }
-            set { Regex.ValidateMatchTimeout(value); matchTimeout = value; }
+            set
+            {
+                Regex.ValidateMatchTimeout(value);
+                matchTimeout = value;
+            }
         }
     }
 }
 
 
 #endif
-

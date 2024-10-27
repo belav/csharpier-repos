@@ -60,7 +60,9 @@ public class RouteView : IComponent
 
         if (RouteData == null)
         {
-            throw new InvalidOperationException($"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}.");
+            throw new InvalidOperationException(
+                $"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteData)}."
+            );
         }
 
         _renderHandle.Render(Render);
@@ -71,17 +73,31 @@ public class RouteView : IComponent
     /// Renders the component.
     /// </summary>
     /// <param name="builder">The <see cref="RenderTreeBuilder"/>.</param>
-    [UnconditionalSuppressMessage("Trimming", "IL2111", Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated.")]
-    [UnconditionalSuppressMessage("Trimming", "IL2118", Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated.")]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2111",
+        Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated."
+    )]
+    [UnconditionalSuppressMessage(
+        "Trimming",
+        "IL2118",
+        Justification = "Layout components are preserved because the LayoutAttribute constructor parameter is correctly annotated."
+    )]
     protected virtual void Render(RenderTreeBuilder builder)
     {
-        var pageLayoutType = _layoutAttributeCache
-            .GetOrAdd(RouteData.PageType, static type => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType)
-            ?? DefaultLayout;
+        var pageLayoutType =
+            _layoutAttributeCache.GetOrAdd(
+                RouteData.PageType,
+                static type => type.GetCustomAttribute<LayoutAttribute>()?.LayoutType
+            ) ?? DefaultLayout;
 
         builder.OpenComponent<LayoutView>(0);
         builder.AddComponentParameter(1, nameof(LayoutView.Layout), pageLayoutType);
-        builder.AddComponentParameter(2, nameof(LayoutView.ChildContent), (RenderFragment)RenderPageWithParameters);
+        builder.AddComponentParameter(
+            2,
+            nameof(LayoutView.ChildContent),
+            (RenderFragment)RenderPageWithParameters
+        );
         builder.CloseComponent();
     }
 

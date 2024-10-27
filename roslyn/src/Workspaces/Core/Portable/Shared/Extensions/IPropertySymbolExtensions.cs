@@ -12,7 +12,10 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 {
     internal static partial class IPropertySymbolExtensions
     {
-        public static IPropertySymbol RenameParameters(this IPropertySymbol property, ImmutableArray<string> parameterNames)
+        public static IPropertySymbol RenameParameters(
+            this IPropertySymbol property,
+            ImmutableArray<string> parameterNames
+        )
         {
             var parameterList = property.Parameters;
             if (parameterList.Select(p => p.Name).SequenceEqual(parameterNames))
@@ -34,17 +37,23 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 parameters,
                 property.GetMethod,
                 property.SetMethod,
-                property.IsIndexer);
+                property.IsIndexer
+            );
         }
 
         public static IPropertySymbol RemoveInaccessibleAttributesAndAttributesOfTypes(
-            this IPropertySymbol property, ISymbol accessibleWithin, params INamedTypeSymbol[] attributesToRemove)
+            this IPropertySymbol property,
+            ISymbol accessibleWithin,
+            params INamedTypeSymbol[] attributesToRemove
+        )
         {
             // Many static predicates use the same state argument in this method
             var arg = (attributesToRemove, accessibleWithin);
 
-            var someParameterHasAttribute = property.Parameters
-                .Any(static (p, arg) => p.GetAttributes().Any(ShouldRemoveAttribute, arg), arg);
+            var someParameterHasAttribute = property.Parameters.Any(
+                static (p, arg) => p.GetAttributes().Any(ShouldRemoveAttribute, arg),
+                arg
+            );
             if (!someParameterHasAttribute)
                 return property;
 
@@ -57,24 +66,41 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
                 property.RefKind,
                 property.ExplicitInterfaceImplementations,
                 property.Name,
-                property.Parameters.SelectAsArray(static (p, arg) =>
-                    CodeGenerationSymbolFactory.CreateParameterSymbol(
-                        p.GetAttributes().WhereAsArray(static (a, arg) => !ShouldRemoveAttribute(a, arg), arg),
-                        p.RefKind, p.IsParams, p.Type, p.Name, p.IsOptional,
-                        p.HasExplicitDefaultValue, p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null), arg),
+                property.Parameters.SelectAsArray(
+                    static (p, arg) =>
+                        CodeGenerationSymbolFactory.CreateParameterSymbol(
+                            p.GetAttributes()
+                                .WhereAsArray(
+                                    static (a, arg) => !ShouldRemoveAttribute(a, arg),
+                                    arg
+                                ),
+                            p.RefKind,
+                            p.IsParams,
+                            p.Type,
+                            p.Name,
+                            p.IsOptional,
+                            p.HasExplicitDefaultValue,
+                            p.HasExplicitDefaultValue ? p.ExplicitDefaultValue : null
+                        ),
+                    arg
+                ),
                 property.GetMethod,
                 property.SetMethod,
-                property.IsIndexer);
+                property.IsIndexer
+            );
 
-            static bool ShouldRemoveAttribute(AttributeData a, (INamedTypeSymbol[] attributesToRemove, ISymbol accessibleWithin) arg)
-                => arg.attributesToRemove.Any(attr => attr.Equals(a.AttributeClass)) ||
-                a.AttributeClass?.IsAccessibleWithin(arg.accessibleWithin) == false;
+            static bool ShouldRemoveAttribute(
+                AttributeData a,
+                (INamedTypeSymbol[] attributesToRemove, ISymbol accessibleWithin) arg
+            ) =>
+                arg.attributesToRemove.Any(attr => attr.Equals(a.AttributeClass))
+                || a.AttributeClass?.IsAccessibleWithin(arg.accessibleWithin) == false;
         }
 
-        public static bool IsWritableInConstructor(this IPropertySymbol property)
-            => property.SetMethod != null || ContainsBackingField(property);
+        public static bool IsWritableInConstructor(this IPropertySymbol property) =>
+            property.SetMethod != null || ContainsBackingField(property);
 
-        private static bool ContainsBackingField(IPropertySymbol property)
-            => property.GetBackingFieldIfAny() != null;
+        private static bool ContainsBackingField(IPropertySymbol property) =>
+            property.GetBackingFieldIfAny() != null;
     }
 }

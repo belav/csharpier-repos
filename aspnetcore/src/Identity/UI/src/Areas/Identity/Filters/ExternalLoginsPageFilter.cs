@@ -8,14 +8,20 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Identity.UI.Areas.Identity.Filters;
 
-internal sealed class ExternalLoginsPageFilter<TUser> : IAsyncPageFilter where TUser : class
+internal sealed class ExternalLoginsPageFilter<TUser> : IAsyncPageFilter
+    where TUser : class
 {
-    public async Task OnPageHandlerExecutionAsync(PageHandlerExecutingContext context, PageHandlerExecutionDelegate next)
+    public async Task OnPageHandlerExecutionAsync(
+        PageHandlerExecutingContext context,
+        PageHandlerExecutionDelegate next
+    )
     {
         var result = await next();
         if (result.Result is PageResult page)
         {
-            var signInManager = context.HttpContext.RequestServices.GetRequiredService<SignInManager<TUser>>();
+            var signInManager = context.HttpContext.RequestServices.GetRequiredService<
+                SignInManager<TUser>
+            >();
             var schemes = await signInManager.GetExternalAuthenticationSchemesAsync();
             var hasExternalLogins = schemes.Any();
 

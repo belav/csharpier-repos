@@ -17,10 +17,7 @@ internal sealed class IISRewriteMap
 
     public string? this[string key]
     {
-        get
-        {
-            return _map.TryGetValue(key, out var value) ? value : null;
-        }
+        get { return _map.TryGetValue(key, out var value) ? value : null; }
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(key);

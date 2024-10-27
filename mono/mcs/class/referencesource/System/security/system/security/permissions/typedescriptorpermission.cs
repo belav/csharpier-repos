@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 // TypeDescriptorPermission.cs
 //
@@ -11,26 +11,25 @@
 namespace System.Security.Permissions
 {
     using System;
+    using System.Diagnostics.Contracts;
+    using System.Globalization;
     using System.IO;
-    using System.Text;
+    using System.Reflection;
     using System.Runtime.InteropServices;
     using System.Runtime.Remoting;
     using System.Security;
-    using System.Reflection;
-    using System.Globalization;
-    using System.Diagnostics.Contracts;
+    using System.Text;
 
     [Flags]
     [Serializable]
     public enum TypeDescriptorPermissionFlags
     {
         NoFlags = 0,
-        RestrictedRegistrationAccess = 1
+        RestrictedRegistrationAccess = 1,
     }
 
     [Serializable]
-    sealed public class TypeDescriptorPermission
-           : CodeAccessPermission, IUnrestrictedPermission
+    public sealed class TypeDescriptorPermission : CodeAccessPermission, IUnrestrictedPermission
     {
         private TypeDescriptorPermissionFlags m_flags;
 
@@ -75,7 +74,6 @@ namespace System.Security.Permissions
             m_flags = TypeDescriptorPermissionFlags.NoFlags;
         }
 
-
         public TypeDescriptorPermissionFlags Flags
         {
             set
@@ -83,13 +81,8 @@ namespace System.Security.Permissions
                 VerifyAccess(value);
                 m_flags = value;
             }
-
-            get
-            {
-                return m_flags;
-            }
+            get { return m_flags; }
         }
-
 
         //
         // CodeAccessPermission implementation
@@ -120,7 +113,13 @@ namespace System.Security.Permissions
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Argument_WrongType), this.GetType().FullName));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Argument_WrongType),
+                        this.GetType().FullName
+                    )
+                );
             }
         }
 
@@ -138,7 +137,13 @@ namespace System.Security.Permissions
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Argument_WrongType), this.GetType().FullName));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Argument_WrongType),
+                        this.GetType().FullName
+                    )
+                );
             }
         }
 
@@ -158,7 +163,13 @@ namespace System.Security.Permissions
             }
             catch (InvalidCastException)
             {
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Argument_WrongType), this.GetType().FullName));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Argument_WrongType),
+                        this.GetType().FullName
+                    )
+                );
             }
         }
 
@@ -170,14 +181,25 @@ namespace System.Security.Permissions
         private void VerifyAccess(TypeDescriptorPermissionFlags type)
         {
             if ((type & ~TypeDescriptorPermissionFlags.RestrictedRegistrationAccess) != 0)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Arg_EnumIllegalVal), (int)type));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Arg_EnumIllegalVal),
+                        (int)type
+                    )
+                );
             Contract.EndContractBlock();
         }
 
         public override SecurityElement ToXml()
         {
             SecurityElement securityElement = new SecurityElement("IPermission");
-            securityElement.AddAttribute("class", this.GetType().FullName + ", " + this.GetType().Module.Assembly.FullName.Replace('\"', '\''));
+            securityElement.AddAttribute(
+                "class",
+                this.GetType().FullName
+                    + ", "
+                    + this.GetType().Module.Assembly.FullName.Replace('\"', '\'')
+            );
             securityElement.AddAttribute("version", "1");
             if (!IsUnrestricted())
                 securityElement.AddAttribute("Flags", m_flags.ToString());
@@ -193,11 +215,20 @@ namespace System.Security.Permissions
                 throw new ArgumentNullException("securityElement");
 
             string className = securityElement.Attribute("class");
-            if (className == null || className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) == -1)
-                throw new ArgumentException(SR.GetString(SR.Argument_InvalidClassAttribute), "securityElement");
+            if (
+                className == null
+                || className.IndexOf(this.GetType().FullName, StringComparison.Ordinal) == -1
+            )
+                throw new ArgumentException(
+                    SR.GetString(SR.Argument_InvalidClassAttribute),
+                    "securityElement"
+                );
 
             string unrestricted = securityElement.Attribute("Unrestricted");
-            if (unrestricted != null && String.Compare(unrestricted, "true", StringComparison.OrdinalIgnoreCase) == 0)
+            if (
+                unrestricted != null
+                && String.Compare(unrestricted, "true", StringComparison.OrdinalIgnoreCase) == 0
+            )
             {
                 m_flags = TypeDescriptorPermissionFlags.RestrictedRegistrationAccess;
                 return;
@@ -207,7 +238,8 @@ namespace System.Security.Permissions
             String strFlags = securityElement.Attribute("Flags");
             if (strFlags != null)
             {
-                TypeDescriptorPermissionFlags flags = (TypeDescriptorPermissionFlags)Enum.Parse(typeof(TypeDescriptorPermissionFlags), strFlags);
+                TypeDescriptorPermissionFlags flags = (TypeDescriptorPermissionFlags)
+                    Enum.Parse(typeof(TypeDescriptorPermissionFlags), strFlags);
                 VerifyFlags(flags);
                 m_flags = flags;
             }
@@ -216,7 +248,13 @@ namespace System.Security.Permissions
         internal static void VerifyFlags(TypeDescriptorPermissionFlags flags)
         {
             if ((flags & ~TypeDescriptorPermissionFlags.RestrictedRegistrationAccess) != 0)
-                throw new ArgumentException(String.Format(CultureInfo.CurrentCulture, SR.GetString(SR.Arg_EnumIllegalVal), (int)flags));
+                throw new ArgumentException(
+                    String.Format(
+                        CultureInfo.CurrentCulture,
+                        SR.GetString(SR.Arg_EnumIllegalVal),
+                        (int)flags
+                    )
+                );
         }
     }
 }

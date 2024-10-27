@@ -3,16 +3,14 @@
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class MusicStoreSqlServerTest : MusicStoreTestBase<MusicStoreSqlServerTest.MusicStoreSqlServerFixture>
+public class MusicStoreSqlServerTest
+    : MusicStoreTestBase<MusicStoreSqlServerTest.MusicStoreSqlServerFixture>
 {
     public MusicStoreSqlServerTest(MusicStoreSqlServerFixture fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public class MusicStoreSqlServerFixture : MusicStoreFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqlServerTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
     }
 }

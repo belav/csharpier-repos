@@ -5,7 +5,10 @@ namespace System.Collections.Generic;
 
 internal static class AsyncEnumerableExtensions
 {
-    public static async Task<T> FirstOrDefault<T>(this IAsyncEnumerator<T> values, Func<T, bool> filter)
+    public static async Task<T> FirstOrDefault<T>(
+        this IAsyncEnumerator<T> values,
+        Func<T, bool> filter
+    )
     {
         while (await values.MoveNextAsync())
         {

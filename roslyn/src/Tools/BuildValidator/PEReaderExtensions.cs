@@ -29,7 +29,10 @@ namespace BuildValidator
                 return;
 
             PEMemoryBlock peImage = peReader.GetEntireImage();
-            BlobReader exportTableHeader = peImage.GetReader(peReader.GetOffset(exportTable.RelativeVirtualAddress), exportTable.Size);
+            BlobReader exportTableHeader = peImage.GetReader(
+                peReader.GetOffset(exportTable.RelativeVirtualAddress),
+                exportTable.Size
+            );
             if (exportTableHeader.Length == 0)
             {
                 return;
@@ -59,34 +62,49 @@ namespace BuildValidator
             int ordinalTableRVA = exportTableHeader.ReadInt32();
 
             int[] addressTable = new int[addressEntryCount];
-            BlobReader addressTableReader = peImage.GetReader(peReader.GetOffset(addressTableRVA), sizeof(int) * addressEntryCount);
+            BlobReader addressTableReader = peImage.GetReader(
+                peReader.GetOffset(addressTableRVA),
+                sizeof(int) * addressEntryCount
+            );
             for (int entryIndex = 0; entryIndex < addressEntryCount; entryIndex++)
             {
                 addressTable[entryIndex] = addressTableReader.ReadInt32();
             }
 
             ushort[] ordinalTable = new ushort[namePointerCount];
-            BlobReader ordinalTableReader = peImage.GetReader(peReader.GetOffset(ordinalTableRVA), sizeof(ushort) * namePointerCount);
+            BlobReader ordinalTableReader = peImage.GetReader(
+                peReader.GetOffset(ordinalTableRVA),
+                sizeof(ushort) * namePointerCount
+            );
             for (int entryIndex = 0; entryIndex < namePointerCount; entryIndex++)
             {
                 ushort ordinalIndex = ordinalTableReader.ReadUInt16();
                 ordinalTable[entryIndex] = ordinalIndex;
             }
 
-            BlobReader namePointerReader = peImage.GetReader(peReader.GetOffset(namePointerRVA), sizeof(int) * namePointerCount);
+            BlobReader namePointerReader = peImage.GetReader(
+                peReader.GetOffset(namePointerRVA),
+                sizeof(int) * namePointerCount
+            );
             for (int entryIndex = 0; entryIndex < namePointerCount; entryIndex++)
             {
                 int nameRVA = namePointerReader.ReadInt32();
                 if (nameRVA != 0)
                 {
                     int nameOffset = peReader.GetOffset(nameRVA);
-                    BlobReader nameReader = peImage.GetReader(nameOffset, peImage.Length - nameOffset);
+                    BlobReader nameReader = peImage.GetReader(
+                        nameOffset,
+                        peImage.Length - nameOffset
+                    );
                     StringBuilder nameBuilder = new StringBuilder();
-                    for (byte ascii; (ascii = nameReader.ReadByte()) != 0;)
+                    for (byte ascii; (ascii = nameReader.ReadByte()) != 0; )
                     {
                         nameBuilder.Append((char)ascii);
                     }
-                    _namedExportRva.Add(nameBuilder.ToString(), addressTable[ordinalTable[entryIndex]]);
+                    _namedExportRva.Add(
+                        nameBuilder.ToString(),
+                        addressTable[ordinalTable[entryIndex]]
+                    );
                 }
             }
         }
@@ -96,7 +114,8 @@ namespace BuildValidator
             return new PEExportTable(peReader);
         }
 
-        public bool TryGetValue(string exportName, out int rva) => _namedExportRva.TryGetValue(exportName, out rva);
+        public bool TryGetValue(string exportName, out int rva) =>
+            _namedExportRva.TryGetValue(exportName, out rva);
     }
 
     public static class PEReaderExtensions
@@ -111,7 +130,9 @@ namespace BuildValidator
             int index = reader.PEHeaders.GetContainingSectionIndex(rva);
             if (index == -1)
             {
-                throw new BadImageFormatException("Failed to convert invalid RVA to offset: " + rva);
+                throw new BadImageFormatException(
+                    "Failed to convert invalid RVA to offset: " + rva
+                );
             }
             SectionHeader containingSection = reader.PEHeaders.SectionHeaders[index];
             return rva - containingSection.VirtualAddress + containingSection.PointerToRawData;

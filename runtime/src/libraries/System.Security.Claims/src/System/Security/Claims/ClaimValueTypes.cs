@@ -40,7 +40,8 @@ namespace System.Security.Claims
         public const string KeyInfo = XmlSignatureConstantsNamespace + "KeyInfo";
         public const string RsaKeyValue = XmlSignatureConstantsNamespace + "RSAKeyValue";
 
-        private const string XQueryOperatorsNameSpace = "http://www.w3.org/TR/2002/WD-xquery-operators-20020816";
+        private const string XQueryOperatorsNameSpace =
+            "http://www.w3.org/TR/2002/WD-xquery-operators-20020816";
 
         public const string DaytimeDuration = XQueryOperatorsNameSpace + "#dayTimeDuration";
         public const string YearMonthDuration = XQueryOperatorsNameSpace + "#yearMonthDuration";

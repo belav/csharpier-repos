@@ -16,16 +16,13 @@ namespace Microsoft.Web.Mvc.Test
         public void GetValueProvider_CorrectlyRetainsOrRemovesKeys()
         {
             // Arrange
-            string[] expectedRetainedKeys = new[]
-            {
-                "retainMe"
-            };
+            string[] expectedRetainedKeys = new[] { "retainMe" };
 
             TempDataDictionary tempData = new TempDataDictionary
             {
                 { "retainMe", "retainMeValue" },
                 { "removeMe", "removeMeValue" },
-                { "previouslyRemoved", "previouslyRemovedValue" }
+                { "previouslyRemoved", "previouslyRemovedValue" },
             };
             object dummy = tempData["previouslyRemoved"]; // mark value for removal
 
@@ -47,9 +44,15 @@ namespace Microsoft.Web.Mvc.Test
             Mock<ITempDataProvider> mockTempDataProvider = new Mock<ITempDataProvider>();
             string[] retainedKeys = null;
             mockTempDataProvider
-                .Setup(o => o.SaveTempData(controllerContext, It.IsAny<IDictionary<string, object>>()))
+                .Setup(o =>
+                    o.SaveTempData(controllerContext, It.IsAny<IDictionary<string, object>>())
+                )
                 .Callback(
-                    delegate(ControllerContext cc, IDictionary<string, object> d) { retainedKeys = d.Keys.ToArray(); });
+                    delegate(ControllerContext cc, IDictionary<string, object> d)
+                    {
+                        retainedKeys = d.Keys.ToArray();
+                    }
+                );
 
             tempData.Save(controllerContext, mockTempDataProvider.Object);
             Assert.Equal(expectedRetainedKeys, retainedKeys);
@@ -75,15 +78,10 @@ namespace Microsoft.Web.Mvc.Test
         {
             return new ControllerContext
             {
-                Controller = new EmptyController
-                {
-                    TempData = tempData
-                }
+                Controller = new EmptyController { TempData = tempData },
             };
         }
 
-        private sealed class EmptyController : Controller
-        {
-        }
+        private sealed class EmptyController : Controller { }
     }
 }

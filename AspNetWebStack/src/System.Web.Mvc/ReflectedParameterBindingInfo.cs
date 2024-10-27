@@ -36,8 +36,11 @@ namespace System.Web.Mvc
                                 CultureInfo.CurrentCulture,
                                 MvcResources.ReflectedParameterBindingInfo_MultipleConverterAttributes,
                                 parameterInfo.Name,
-                                parameterInfo.Member));
-                    });
+                                parameterInfo.Member
+                            )
+                        );
+                    }
+                );
 
                 return binder;
             }
@@ -60,7 +63,8 @@ namespace System.Web.Mvc
 
         private void ReadSettingsFromBindAttribute()
         {
-            BindAttribute attr = (BindAttribute)Attribute.GetCustomAttribute(_parameterInfo, typeof(BindAttribute));
+            BindAttribute attr = (BindAttribute)
+                Attribute.GetCustomAttribute(_parameterInfo, typeof(BindAttribute));
             if (attr == null)
             {
                 return;

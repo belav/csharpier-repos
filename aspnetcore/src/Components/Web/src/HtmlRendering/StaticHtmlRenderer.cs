@@ -18,7 +18,9 @@ namespace Microsoft.AspNetCore.Components.HtmlRendering.Infrastructure;
 /// </summary>
 public partial class StaticHtmlRenderer : Renderer
 {
-    private static readonly Task CanceledRenderTask = Task.FromCanceled(new CancellationToken(canceled: true));
+    private static readonly Task CanceledRenderTask = Task.FromCanceled(
+        new CancellationToken(canceled: true)
+    );
     private readonly NavigationManager? _navigationManager;
 
     /// <summary>
@@ -43,7 +45,8 @@ public partial class StaticHtmlRenderer : Renderer
     /// <returns>An <see cref="HtmlRootComponent"/> that can be used to obtain the rendered HTML.</returns>
     public HtmlRootComponent BeginRenderingComponent(
         [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type componentType,
-        ParameterView initialParameters)
+        ParameterView initialParameters
+    )
     {
         var component = InstantiateComponent(componentType);
         return BeginRenderingComponent(component, initialParameters);
@@ -57,22 +60,25 @@ public partial class StaticHtmlRenderer : Renderer
     /// <returns>An <see cref="HtmlRootComponent"/> that can be used to obtain the rendered HTML.</returns>
     public HtmlRootComponent BeginRenderingComponent(
         IComponent component,
-        ParameterView initialParameters)
+        ParameterView initialParameters
+    )
     {
         var componentId = AssignRootComponentId(component);
         var quiescenceTask = RenderRootComponentAsync(componentId, initialParameters);
 
         if (quiescenceTask.IsFaulted)
         {
-            ExceptionDispatchInfo.Capture(quiescenceTask.Exception.InnerException ?? quiescenceTask.Exception).Throw();
+            ExceptionDispatchInfo
+                .Capture(quiescenceTask.Exception.InnerException ?? quiescenceTask.Exception)
+                .Throw();
         }
 
         return new HtmlRootComponent(this, componentId, quiescenceTask);
     }
 
     /// <inheritdoc/>
-    protected override void HandleException(Exception exception)
-        => ExceptionDispatchInfo.Capture(exception).Throw();
+    protected override void HandleException(Exception exception) =>
+        ExceptionDispatchInfo.Capture(exception).Throw();
 
     /// <inheritdoc/>
     protected override Task UpdateDisplayAsync(in RenderBatch renderBatch)
@@ -93,6 +99,6 @@ public partial class StaticHtmlRenderer : Renderer
         return CanceledRenderTask;
     }
 
-    internal new ArrayRange<RenderTreeFrame> GetCurrentRenderTreeFrames(int componentId)
-        => base.GetCurrentRenderTreeFrames(componentId);
+    internal new ArrayRange<RenderTreeFrame> GetCurrentRenderTreeFrames(int componentId) =>
+        base.GetCurrentRenderTreeFrames(componentId);
 }

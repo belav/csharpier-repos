@@ -1,18 +1,22 @@
-namespace System {
+namespace System
+{
     using System;
     using System.Collections;
     using System.Globalization;
- 
+
     [Serializable]
-    internal class InvariantComparer : IComparer {
+    internal class InvariantComparer : IComparer
+    {
         private CompareInfo m_compareInfo;
         internal static readonly InvariantComparer Default = new InvariantComparer();
-        
-        internal InvariantComparer() {
+
+        internal InvariantComparer()
+        {
             m_compareInfo = CultureInfo.InvariantCulture.CompareInfo;
         }
-  
-        public int Compare(Object a, Object b) {
+
+        public int Compare(Object a, Object b)
+        {
             String sa = a as String;
             String sb = b as String;
             if (sa != null && sb != null)
@@ -22,4 +26,3 @@ namespace System {
         }
     }
 }
-

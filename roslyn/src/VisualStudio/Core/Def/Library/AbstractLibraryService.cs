@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Library
             Guid libraryId,
             __SymbolToolLanguage preferredLanguage,
             SymbolDisplayFormat typeDisplayFormat,
-            SymbolDisplayFormat memberDisplayFormat)
+            SymbolDisplayFormat memberDisplayFormat
+        )
         {
             this.LibraryId = libraryId;
             this.PreferredLanguage = preferredLanguage;

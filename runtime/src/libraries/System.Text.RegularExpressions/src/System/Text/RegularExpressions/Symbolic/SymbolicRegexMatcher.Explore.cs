@@ -14,7 +14,13 @@ namespace System.Text.RegularExpressions.Symbolic
     {
         /// <inheritdoc cref="Regex.Explore(bool, bool, bool, bool, bool)"/>
         [ExcludeFromCodeCoverage(Justification = "Currently only used for testing")]
-        public override void Explore(bool includeDotStarred, bool includeReverse, bool includeOriginal, bool exploreDfa, bool exploreNfa)
+        public override void Explore(
+            bool includeDotStarred,
+            bool includeReverse,
+            bool includeOriginal,
+            bool exploreDfa,
+            bool exploreNfa
+        )
         {
             lock (this)
             {
@@ -39,12 +45,22 @@ namespace System.Text.RegularExpressions.Symbolic
                         // Don't dequeue yet, because a transition might fail
                         MatchingState<TSet> state = toExplore.Peek();
                         // Include the special minterm for the last end-of-line if the state is sensitive to it
-                        int maxMinterm = state.StartsWithLineAnchor ? _minterms!.Length : _minterms!.Length - 1;
+                        int maxMinterm = state.StartsWithLineAnchor
+                            ? _minterms!.Length
+                            : _minterms!.Length - 1;
                         // Explore successor states for each minterm
                         for (int mintermId = 0; mintermId <= maxMinterm; ++mintermId)
                         {
                             int offset = DeltaOffset(state.Id, mintermId);
-                            if (!TryCreateNewTransition(state, mintermId, offset, true, out MatchingState<TSet>? nextState))
+                            if (
+                                !TryCreateNewTransition(
+                                    state,
+                                    mintermId,
+                                    offset,
+                                    true,
+                                    out MatchingState<TSet>? nextState
+                                )
+                            )
                                 goto DfaLimitReached;
                             EnqueueIfUnseen(nextState, seen, toExplore);
                         }
@@ -53,7 +69,7 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
                 }
 
-            DfaLimitReached:
+                DfaLimitReached:
                 if (exploreNfa && toExplore.Count > 0)
                 {
                     // DFA states are broken up into NFA states when they are alternations
@@ -64,12 +80,25 @@ namespace System.Text.RegularExpressions.Symbolic
                         // Remove state from seen so that it can be added back in if necessary
                         seen.Remove(dfaState);
                         // Enqueue all elements of a top level alternation or the state itself
-                        ForEachNfaState(dfaState.Node, dfaState.PrevCharKind, (this, seen, toExplore),
-                            static (int nfaId, (SymbolicRegexMatcher<TSet> Matcher, HashSet<MatchingState<TSet>> Seen, Queue<MatchingState<TSet>> ToExplore) args) =>
+                        ForEachNfaState(
+                            dfaState.Node,
+                            dfaState.PrevCharKind,
+                            (this, seen, toExplore),
+                            static (
+                                int nfaId,
+                                (
+                                    SymbolicRegexMatcher<TSet> Matcher,
+                                    HashSet<MatchingState<TSet>> Seen,
+                                    Queue<MatchingState<TSet>> ToExplore
+                                ) args
+                            ) =>
                             {
-                                MatchingState<TSet>? coreState = args.Matcher.GetState(args.Matcher.GetCoreStateId(nfaId));
+                                MatchingState<TSet>? coreState = args.Matcher.GetState(
+                                    args.Matcher.GetCoreStateId(nfaId)
+                                );
                                 EnqueueIfUnseen(coreState, args.Seen, args.ToExplore);
-                            });
+                            }
+                        );
                     }
 
                     while (toExplore.Count > 0)
@@ -77,22 +106,36 @@ namespace System.Text.RegularExpressions.Symbolic
                         // NFA transitions can't fail, so its safe to dequeue here
                         MatchingState<TSet> state = toExplore.Dequeue();
                         // Include the special minterm for the last end-of-line if the state is sensitive to it
-                        int maxMinterm = state.StartsWithLineAnchor ? _minterms.Length : _minterms.Length - 1;
+                        int maxMinterm = state.StartsWithLineAnchor
+                            ? _minterms.Length
+                            : _minterms.Length - 1;
                         // Explore successor states for each minterm
                         for (int mintermId = 0; mintermId <= maxMinterm; ++mintermId)
                         {
                             int nfaOffset = DeltaOffset(_nfaIdByCoreId[state.Id], mintermId);
-                            int[] nextNfaStates = CreateNewNfaTransition(_nfaIdByCoreId[state.Id], mintermId, nfaOffset);
+                            int[] nextNfaStates = CreateNewNfaTransition(
+                                _nfaIdByCoreId[state.Id],
+                                mintermId,
+                                nfaOffset
+                            );
                             foreach (int nextNfaState in nextNfaStates)
                             {
-                                EnqueueIfUnseen(GetState(GetCoreStateId(nextNfaState)), seen, toExplore);
+                                EnqueueIfUnseen(
+                                    GetState(GetCoreStateId(nextNfaState)),
+                                    seen,
+                                    toExplore
+                                );
                             }
                         }
                     }
                 }
             }
 
-            static void EnqueueAll(MatchingState<TSet>[] states, HashSet<MatchingState<TSet>> seen, Queue<MatchingState<TSet>> toExplore)
+            static void EnqueueAll(
+                MatchingState<TSet>[] states,
+                HashSet<MatchingState<TSet>> seen,
+                Queue<MatchingState<TSet>> toExplore
+            )
             {
                 foreach (MatchingState<TSet> state in states)
                 {
@@ -100,7 +143,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            static void EnqueueIfUnseen(MatchingState<TSet> state, HashSet<MatchingState<TSet>> seen, Queue<MatchingState<TSet>> queue)
+            static void EnqueueIfUnseen(
+                MatchingState<TSet> state,
+                HashSet<MatchingState<TSet>> seen,
+                Queue<MatchingState<TSet>> queue
+            )
             {
                 if (seen.Add(state))
                 {

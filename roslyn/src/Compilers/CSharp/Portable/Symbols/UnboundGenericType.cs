@@ -28,9 +28,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             int n = original.Arity;
             NamedTypeSymbol originalContainingType = original.ContainingType;
 
-            var constructedFrom = ((object)originalContainingType == null) ?
-                original :
-                original.AsMember(originalContainingType.IsGenericType ? originalContainingType.AsUnboundGenericType() : originalContainingType);
+            var constructedFrom =
+                ((object)originalContainingType == null)
+                    ? original
+                    : original.AsMember(
+                        originalContainingType.IsGenericType
+                            ? originalContainingType.AsUnboundGenericType()
+                            : originalContainingType
+                    );
             if (n == 0)
             {
                 return constructedFrom;
@@ -39,30 +44,44 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var typeArguments = UnboundArgumentErrorTypeSymbol.CreateTypeArguments(
                 constructedFrom.TypeParameters,
                 n,
-                new CSDiagnosticInfo(ErrorCode.ERR_UnexpectedUnboundGenericName));
+                new CSDiagnosticInfo(ErrorCode.ERR_UnexpectedUnboundGenericName)
+            );
             return constructedFrom.Construct(typeArguments, unbound: true);
         }
     }
 
     internal sealed class UnboundArgumentErrorTypeSymbol : ErrorTypeSymbol
     {
-        public static ImmutableArray<TypeWithAnnotations> CreateTypeArguments(ImmutableArray<TypeParameterSymbol> typeParameters, int n, DiagnosticInfo errorInfo)
+        public static ImmutableArray<TypeWithAnnotations> CreateTypeArguments(
+            ImmutableArray<TypeParameterSymbol> typeParameters,
+            int n,
+            DiagnosticInfo errorInfo
+        )
         {
             var result = ArrayBuilder<TypeWithAnnotations>.GetInstance();
             for (int i = 0; i < n; i++)
             {
                 string name = (i < typeParameters.Length) ? typeParameters[i].Name : string.Empty;
-                result.Add(TypeWithAnnotations.Create(new UnboundArgumentErrorTypeSymbol(name, errorInfo)));
+                result.Add(
+                    TypeWithAnnotations.Create(new UnboundArgumentErrorTypeSymbol(name, errorInfo))
+                );
             }
             return result.ToImmutableAndFree();
         }
 
-        public static readonly ErrorTypeSymbol Instance = new UnboundArgumentErrorTypeSymbol(string.Empty, new CSDiagnosticInfo(ErrorCode.ERR_UnexpectedUnboundGenericName));
+        public static readonly ErrorTypeSymbol Instance = new UnboundArgumentErrorTypeSymbol(
+            string.Empty,
+            new CSDiagnosticInfo(ErrorCode.ERR_UnexpectedUnboundGenericName)
+        );
 
         private readonly string _name;
         private readonly DiagnosticInfo _errorInfo;
 
-        private UnboundArgumentErrorTypeSymbol(string name, DiagnosticInfo errorInfo, TupleExtraData? tupleData = null)
+        private UnboundArgumentErrorTypeSymbol(
+            string name,
+            DiagnosticInfo errorInfo,
+            TupleExtraData? tupleData = null
+        )
             : base(tupleData)
         {
             _name = name;
@@ -76,10 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override string Name
         {
-            get
-            {
-                return _name;
-            }
+            get { return _name; }
         }
 
         internal override bool MangleName
@@ -96,10 +112,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         internal override DiagnosticInfo ErrorInfo
         {
-            get
-            {
-                return _errorInfo;
-            }
+            get { return _errorInfo; }
         }
 
         internal override bool Equals(TypeSymbol t2, TypeCompareKind comparison)
@@ -110,14 +123,14 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             }
 
             UnboundArgumentErrorTypeSymbol? other = t2 as UnboundArgumentErrorTypeSymbol;
-            return (object?)other != null && string.Equals(other._name, _name, StringComparison.Ordinal) && object.Equals(other._errorInfo, _errorInfo);
+            return (object?)other != null
+                && string.Equals(other._name, _name, StringComparison.Ordinal)
+                && object.Equals(other._errorInfo, _errorInfo);
         }
 
         public override int GetHashCode()
         {
-            return _errorInfo == null
-                ? _name.GetHashCode()
-                : Hash.Combine(_name, _errorInfo.Code);
+            return _errorInfo == null ? _name.GetHashCode() : Hash.Combine(_name, _errorInfo.Code);
         }
     }
 }

@@ -17,15 +17,7 @@ public class AcceptedResultTests
 {
     public static TheoryData<object> ValuesData
     {
-        get
-        {
-            return new TheoryData<object>
-                {
-                    null,
-                    "Test string",
-                    new object(),
-                };
-        }
+        get { return new TheoryData<object> { null, "Test string", new object() }; }
     }
 
     [Theory]
@@ -49,7 +41,8 @@ public class AcceptedResultTests
         var formatter = CreateMockFormatter();
         var httpContext = GetHttpContext(formatter);
         object actual = null;
-        formatter.Setup(f => f.WriteAsync(It.IsAny<OutputFormatterWriteContext>()))
+        formatter
+            .Setup(f => f.WriteAsync(It.IsAny<OutputFormatterWriteContext>()))
             .Callback((OutputFormatterWriteContext context) => actual = context.Object)
             .Returns(Task.FromResult(0));
 
@@ -104,10 +97,7 @@ public class AcceptedResultTests
     {
         var routeData = new RouteData();
         routeData.Routers.Add(Mock.Of<IRouter>());
-        return new ActionContext(
-            httpContext,
-            routeData,
-            new ActionDescriptor());
+        return new ActionContext(httpContext, routeData, new ActionDescriptor());
     }
 
     private static HttpContext GetHttpContext(Mock<IOutputFormatter> formatter)
@@ -119,11 +109,10 @@ public class AcceptedResultTests
 
     private static Mock<IOutputFormatter> CreateMockFormatter()
     {
-        var formatter = new Mock<IOutputFormatter>
-        {
-            CallBase = true
-        };
-        formatter.Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>())).Returns(true);
+        var formatter = new Mock<IOutputFormatter> { CallBase = true };
+        formatter
+            .Setup(f => f.CanWriteResult(It.IsAny<OutputFormatterWriteContext>()))
+            .Returns(true);
 
         return formatter;
     }
@@ -133,11 +122,14 @@ public class AcceptedResultTests
         var options = Options.Create(new MvcOptions());
         options.Value.OutputFormatters.Add(formatter.Object);
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<ObjectResult>>(new ObjectResultExecutor(
-            new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
-            new TestHttpResponseStreamWriterFactory(),
-            NullLoggerFactory.Instance,
-            options));
+        services.AddSingleton<IActionResultExecutor<ObjectResult>>(
+            new ObjectResultExecutor(
+                new DefaultOutputFormatterSelector(options, NullLoggerFactory.Instance),
+                new TestHttpResponseStreamWriterFactory(),
+                NullLoggerFactory.Instance,
+                options
+            )
+        );
 
         return services.BuildServiceProvider();
     }

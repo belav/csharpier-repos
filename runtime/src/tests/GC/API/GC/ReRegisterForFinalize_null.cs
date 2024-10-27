@@ -25,7 +25,6 @@ public class Test_ReRegisterForFinalize_null
         return false;
     }
 
-
     public static int Main()
     {
         Test_ReRegisterForFinalize_null t = new Test_ReRegisterForFinalize_null();

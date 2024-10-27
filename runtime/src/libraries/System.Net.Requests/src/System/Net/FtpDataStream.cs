@@ -23,9 +23,14 @@ namespace System.Net
 
         private const int DefaultCloseTimeout = -1;
 
-        internal FtpDataStream(NetworkStream networkStream, FtpWebRequest request, TriState writeOnly)
+        internal FtpDataStream(
+            NetworkStream networkStream,
+            FtpWebRequest request,
+            TriState writeOnly
+        )
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this);
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this);
 
             _readable = true;
             _writeable = true;
@@ -59,7 +64,8 @@ namespace System.Net
         //TODO: Add this to FxCopBaseline.cs once https://github.com/dotnet/roslyn/issues/15728 is fixed
         void ICloseEx.CloseEx(CloseExState closeState)
         {
-            if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"state = {closeState}");
+            if (NetEventSource.Log.IsEnabled())
+                NetEventSource.Info(this, $"state = {closeState}");
 
             lock (this)
             {
@@ -93,8 +99,7 @@ namespace System.Net
                     FtpWebResponse? response = webException.Response as FtpWebResponse;
                     if (response != null)
                     {
-                        if (!_isFullyRead
-                            && response.StatusCode == FtpStatusCode.ConnectionClosed)
+                        if (!_isFullyRead && response.StatusCode == FtpStatusCode.ConnectionClosed)
                             doThrow = false;
                     }
                 }
@@ -115,47 +120,28 @@ namespace System.Net
 
         public override bool CanRead
         {
-            get
-            {
-                return _readable;
-            }
+            get { return _readable; }
         }
 
         public override bool CanSeek
         {
-            get
-            {
-                return _networkStream.CanSeek;
-            }
+            get { return _networkStream.CanSeek; }
         }
 
         public override bool CanWrite
         {
-            get
-            {
-                return _writeable;
-            }
+            get { return _writeable; }
         }
 
         public override long Length
         {
-            get
-            {
-                return _networkStream.Length;
-            }
+            get { return _networkStream.Length; }
         }
 
         public override long Position
         {
-            get
-            {
-                return _networkStream.Position;
-            }
-
-            set
-            {
-                _networkStream.Position = value;
-            }
+            get { return _networkStream.Position; }
+            set { _networkStream.Position = value; }
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -267,13 +253,25 @@ namespace System.Net
             catch { }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             CheckError();
             LazyAsyncResult userResult = new LazyAsyncResult(this, state, callback);
             try
             {
-                _networkStream.BeginRead(buffer, offset, size, new AsyncCallback(AsyncReadCallback), userResult);
+                _networkStream.BeginRead(
+                    buffer,
+                    offset,
+                    size,
+                    new AsyncCallback(AsyncReadCallback),
+                    userResult
+                );
             }
             catch
             {
@@ -302,7 +300,13 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int size, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             CheckError();
             try
@@ -340,34 +344,19 @@ namespace System.Net
 
         public override bool CanTimeout
         {
-            get
-            {
-                return _networkStream.CanTimeout;
-            }
+            get { return _networkStream.CanTimeout; }
         }
 
         public override int ReadTimeout
         {
-            get
-            {
-                return _networkStream.ReadTimeout;
-            }
-            set
-            {
-                _networkStream.ReadTimeout = value;
-            }
+            get { return _networkStream.ReadTimeout; }
+            set { _networkStream.ReadTimeout = value; }
         }
 
         public override int WriteTimeout
         {
-            get
-            {
-                return _networkStream.WriteTimeout;
-            }
-            set
-            {
-                _networkStream.WriteTimeout = value;
-            }
+            get { return _networkStream.WriteTimeout; }
+            set { _networkStream.WriteTimeout = value; }
         }
 
         internal void SetSocketTimeoutOption(int timeout)

@@ -23,17 +23,22 @@ namespace MS.Internal.Xml.XPath
         Merge = 0x10,
     };
 
-
     // Turn off DebuggerDisplayAttribute. in subclasses of Query.
     // Calls to Current in the XPathNavigator.DebuggerDisplayProxy may change state or throw
     [DebuggerDisplay("{ToString()}")]
     internal abstract class Query : ResettableIterator
     {
         public Query() { }
-        protected Query(Query other) : base(other) { }
+
+        protected Query(Query other)
+            : base(other) { }
 
         // -- XPathNodeIterator --
-        public override bool MoveNext() { return Advance() != null; }
+        public override bool MoveNext()
+        {
+            return Advance() != null;
+        }
+
         public override int Count
         {
             get
@@ -44,7 +49,8 @@ namespace MS.Internal.Xml.XPath
                     Query clone = (Query)this.Clone();
                     clone.Reset();
                     count = 0;
-                    while (clone.MoveNext()) count++;
+                    while (clone.MoveNext())
+                        count++;
                 }
                 return count;
             }
@@ -61,9 +67,15 @@ namespace MS.Internal.Xml.XPath
             throw XPathException.Create(SR.Xp_InvalidPattern);
         }
 
-        public virtual double XsltDefaultPriority { get { return 0.5; } }
+        public virtual double XsltDefaultPriority
+        {
+            get { return 0.5; }
+        }
         public abstract XPathResultType StaticType { get; }
-        public virtual QueryProps Properties { get { return QueryProps.Merge; } }
+        public virtual QueryProps Properties
+        {
+            get { return QueryProps.Merge; }
+        }
 
         // ----------------- Helper methods -------------
         [return: NotNullIfNotNull(nameof(input))]
@@ -164,9 +176,10 @@ namespace MS.Internal.Xml.XPath
                 string baseUriR = copy.BaseURI;
                 int cmpBase = string.CompareOrdinal(baseUriL, baseUriR);
                 cmp = (
-                    cmpBase < 0 ? XmlNodeOrder.Before :
-                    cmpBase > 0 ? XmlNodeOrder.After :
-                    /*default*/   XmlNodeOrder.Unknown
+                    cmpBase < 0 ? XmlNodeOrder.Before
+                    : cmpBase > 0 ? XmlNodeOrder.After
+                    :
+                    /*default*/XmlNodeOrder.Unknown
                 );
             }
             return cmp;
@@ -177,6 +190,7 @@ namespace MS.Internal.Xml.XPath
         // This is source for multiple bugs or additional type casts.
         // To fix all of them in one change in v.2 we internally use one more value:
         public const XPathResultType XPathResultType_Navigator = (XPathResultType)4;
+
         // The biggest challenge in this change is preserve backward compatibility with v.1.1
         // To achieve this in all places where we accept from or report to user XPathResultType.
         // On my best knowledge this happens only in XsltContext.ResolveFunction() / IXsltContextFunction.ReturnType
@@ -184,10 +198,14 @@ namespace MS.Internal.Xml.XPath
 
         protected static XPathResultType GetXPathType(object value)
         {
-            if (value is XPathNodeIterator) return XPathResultType.NodeSet;
-            if (value is string) return XPathResultType.String;
-            if (value is double) return XPathResultType.Number;
-            if (value is bool) return XPathResultType.Boolean;
+            if (value is XPathNodeIterator)
+                return XPathResultType.NodeSet;
+            if (value is string)
+                return XPathResultType.String;
+            if (value is double)
+                return XPathResultType.Number;
+            if (value is bool)
+                return XPathResultType.Boolean;
             Debug.Assert(value is XPathNavigator, "Unknown value type");
             return XPathResultType_Navigator;
         }

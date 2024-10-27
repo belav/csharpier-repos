@@ -22,23 +22,35 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     internal static class SymbolContainment
     {
-        public static async Task<IEnumerable<SyntaxNode>> GetContainedSyntaxNodesAsync(Document document, CancellationToken cancellationToken)
+        public static async Task<IEnumerable<SyntaxNode>> GetContainedSyntaxNodesAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var progressionLanguageService = document.GetLanguageService<IProgressionLanguageService>();
+            var progressionLanguageService =
+                document.GetLanguageService<IProgressionLanguageService>();
             if (progressionLanguageService == null)
             {
                 return SpecializedCollections.EmptyEnumerable<SyntaxNode>();
             }
 
-            var syntaxTree = await document.GetSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxTree = await document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var root = await syntaxTree.GetRootAsync(cancellationToken).ConfigureAwait(false);
             return progressionLanguageService.GetTopLevelNodesFromDocument(root, cancellationToken);
         }
 
-        public static async Task<ImmutableArray<ISymbol>> GetContainedSymbolsAsync(Document document, CancellationToken cancellationToken)
+        public static async Task<ImmutableArray<ISymbol>> GetContainedSymbolsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
-            var syntaxNodes = await GetContainedSyntaxNodesAsync(document, cancellationToken).ConfigureAwait(false);
-            var semanticModel = await document.GetSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxNodes = await GetContainedSyntaxNodesAsync(document, cancellationToken)
+                .ConfigureAwait(false);
+            var semanticModel = await document
+                .GetSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             using var _ = ArrayBuilder<ISymbol>.GetInstance(out var symbols);
 
             foreach (var syntaxNode in syntaxNodes)
@@ -46,9 +58,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 cancellationToken.ThrowIfCancellationRequested();
 
                 var symbol = semanticModel.GetDeclaredSymbol(syntaxNode, cancellationToken);
-                if (symbol != null &&
-                    !string.IsNullOrEmpty(symbol.Name) &&
-                    IsTopLevelSymbol(symbol))
+                if (
+                    symbol != null
+                    && !string.IsNullOrEmpty(symbol.Name)
+                    && IsTopLevelSymbol(symbol)
+                )
                 {
                     symbols.Add(symbol);
                 }

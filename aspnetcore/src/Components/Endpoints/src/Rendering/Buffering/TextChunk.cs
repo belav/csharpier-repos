@@ -51,7 +51,11 @@ internal readonly struct TextChunk
         _intValue = value;
     }
 
-    public Task WriteToAsync(TextWriter writer, string charArraySegments, ref StringBuilder? tempBuffer)
+    public Task WriteToAsync(
+        TextWriter writer,
+        string charArraySegments,
+        ref StringBuilder? tempBuffer
+    )
     {
         switch (_type)
         {
@@ -60,7 +64,9 @@ internal readonly struct TextChunk
             case TextChunkType.Char:
                 return writer.WriteAsync(_charValue);
             case TextChunkType.CharArraySegment:
-                return writer.WriteAsync(charArraySegments.AsMemory(_charArraySegmentStart, _charArraySegmentLength));
+                return writer.WriteAsync(
+                    charArraySegments.AsMemory(_charArraySegmentStart, _charArraySegmentLength)
+                );
             case TextChunkType.Int:
                 // The same technique could be used to optimize writing other
                 // nonstring types, but currently only int is often used
@@ -73,5 +79,11 @@ internal readonly struct TextChunk
         }
     }
 
-    private enum TextChunkType { Int, String, Char, CharArraySegment };
+    private enum TextChunkType
+    {
+        Int,
+        String,
+        Char,
+        CharArraySegment,
+    };
 }

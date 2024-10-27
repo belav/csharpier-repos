@@ -5,17 +5,15 @@
 
 using System;
 using System.Collections.Generic;
+using System.Numerics;
 using System.Runtime.CompilerServices;
 using System.Runtime.Intrinsics;
 using System.Runtime.Intrinsics.X86;
-using System.Numerics;
 using Xunit;
 
 public class TestClass
 {
-    public struct S1
-    {
-    }
+    public struct S1 { }
 
     static short s_short_8 = 5;
     static int s_int_9 = -2;
@@ -28,15 +26,13 @@ public class TestClass
     {
         unchecked
         {
-            p_short_161 = 15|4;
-            if ((long_59 *= 15>>4)!= (long_59 |= 15^4))
-            {
-            }
+            p_short_161 = 15 | 4;
+            if ((long_59 *= 15 >> 4) != (long_59 |= 15 ^ 4)) { }
             else
             {
                 Vector128.CreateScalarUnsafe(Vector256.Sum(v256_int_90));
             }
-            return 15|4;
+            return 15 | 4;
         }
     }
 
@@ -44,7 +40,7 @@ public class TestClass
     {
         unchecked
         {
-            uint_64 = Method4(out s_short_8, s1_99, 15<4, ref s_int_9);
+            uint_64 = Method4(out s_short_8, s1_99, 15 < 4, ref s_int_9);
             return;
         }
     }

@@ -17,7 +17,10 @@ public class Program
 
     struct Bytes
     {
-        public byte b1, b2, b3, b4;
+        public byte b1,
+            b2,
+            b3,
+            b4;
 
         public Bytes(int dummy)
         {

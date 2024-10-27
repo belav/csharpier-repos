@@ -20,8 +20,16 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_CodeTypeReference_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, new CodeExpression[0] };
-            yield return new object[] { new CodeTypeReference(), new CodeExpression[] { new CodePrimitiveExpression() } };
-            yield return new object[] { new CodeTypeReference(typeof(int)), new CodeExpression[] { new CodePrimitiveExpression("Value") } };
+            yield return new object[]
+            {
+                new CodeTypeReference(),
+                new CodeExpression[] { new CodePrimitiveExpression() },
+            };
+            yield return new object[]
+            {
+                new CodeTypeReference(typeof(int)),
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
+            };
         }
 
         [Theory]
@@ -29,20 +37,37 @@ namespace System.CodeDom.Tests
         public void Ctor_Type_Parameters(CodeTypeReference type, CodeExpression[] parameters)
         {
             var objectCreate = new CodeObjectCreateExpression(type, parameters);
-            Assert.Equal((type ?? new CodeTypeReference("")).BaseType, objectCreate.CreateType.BaseType);
+            Assert.Equal(
+                (type ?? new CodeTypeReference("")).BaseType,
+                objectCreate.CreateType.BaseType
+            );
             Assert.Equal(parameters, objectCreate.Parameters.Cast<CodeExpression>());
         }
 
         public static IEnumerable<object[]> Ctor_String_ParamsCodeExpression_TestData()
         {
             yield return new object[] { null, new CodeExpression[0], "System.Void" };
-            yield return new object[] { "", new CodeExpression[] { new CodePrimitiveExpression() }, "System.Void" };
-            yield return new object[] { "Int32", new CodeExpression[] { new CodePrimitiveExpression("Value") }, "Int32" };
+            yield return new object[]
+            {
+                "",
+                new CodeExpression[] { new CodePrimitiveExpression() },
+                "System.Void",
+            };
+            yield return new object[]
+            {
+                "Int32",
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
+                "Int32",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_String_ParamsCodeExpression_TestData))]
-        public void Ctor_Type_Parameters_ExpectedBaseType(string type, CodeExpression[] parameters, string expectedBaseType)
+        public void Ctor_Type_Parameters_ExpectedBaseType(
+            string type,
+            CodeExpression[] parameters,
+            string expectedBaseType
+        )
         {
             var objectCreate = new CodeObjectCreateExpression(type, parameters);
             Assert.Equal(expectedBaseType, objectCreate.CreateType.BaseType);
@@ -52,13 +77,27 @@ namespace System.CodeDom.Tests
         public static IEnumerable<object[]> Ctor_Type_ParamsCodeExpression_TestData()
         {
             yield return new object[] { typeof(int), new CodeExpression[0], "System.Int32" };
-            yield return new object[] { typeof(List<>), new CodeExpression[] { new CodePrimitiveExpression() }, "System.Collections.Generic.List`1" };
-            yield return new object[] { typeof(void), new CodeExpression[] { new CodePrimitiveExpression("Value") }, "System.Void" };
+            yield return new object[]
+            {
+                typeof(List<>),
+                new CodeExpression[] { new CodePrimitiveExpression() },
+                "System.Collections.Generic.List`1",
+            };
+            yield return new object[]
+            {
+                typeof(void),
+                new CodeExpression[] { new CodePrimitiveExpression("Value") },
+                "System.Void",
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Type_ParamsCodeExpression_TestData))]
-        public void Ctor_Type_String(Type type, CodeExpression[] parameters, string expectedBaseType)
+        public void Ctor_Type_String(
+            Type type,
+            CodeExpression[] parameters,
+            string expectedBaseType
+        )
         {
             var objectCreate = new CodeObjectCreateExpression(type, parameters);
             Assert.Equal(expectedBaseType, objectCreate.CreateType.BaseType);
@@ -68,9 +107,18 @@ namespace System.CodeDom.Tests
         [Fact]
         public void Ctor_NullParameters_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression(new CodeTypeReference(), null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression("System.Int32", null));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression(typeof(int), null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression(new CodeTypeReference(), null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression("System.Int32", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression(typeof(int), null)
+            );
         }
 
         [Fact]
@@ -78,9 +126,18 @@ namespace System.CodeDom.Tests
         {
             CodeExpression[] parameters = new CodeExpression[] { null };
 
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression(new CodeTypeReference(), parameters));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression("System.Int32", parameters));
-            AssertExtensions.Throws<ArgumentNullException>("value", () => new CodeObjectCreateExpression(typeof(int), parameters));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression(new CodeTypeReference(), parameters)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression("System.Int32", parameters)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "value",
+                () => new CodeObjectCreateExpression(typeof(int), parameters)
+            );
         }
 
         [Theory]
@@ -89,7 +146,10 @@ namespace System.CodeDom.Tests
         {
             var objectCreate = new CodeObjectCreateExpression();
             objectCreate.CreateType = value;
-            Assert.Equal((value ?? new CodeTypeReference("")).BaseType, objectCreate.CreateType.BaseType);
+            Assert.Equal(
+                (value ?? new CodeTypeReference("")).BaseType,
+                objectCreate.CreateType.BaseType
+            );
         }
 
         [Fact]
@@ -99,11 +159,17 @@ namespace System.CodeDom.Tests
 
             CodeExpression expression1 = new CodePrimitiveExpression("Value1");
             objectCreate.Parameters.Add(expression1);
-            Assert.Equal(new CodeExpression[] { expression1 }, objectCreate.Parameters.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1 },
+                objectCreate.Parameters.Cast<CodeExpression>()
+            );
 
             CodeExpression expression2 = new CodePrimitiveExpression("Value2");
             objectCreate.Parameters.Add(expression2);
-            Assert.Equal(new CodeExpression[] { expression1, expression2 }, objectCreate.Parameters.Cast<CodeExpression>());
+            Assert.Equal(
+                new CodeExpression[] { expression1, expression2 },
+                objectCreate.Parameters.Cast<CodeExpression>()
+            );
         }
     }
 }

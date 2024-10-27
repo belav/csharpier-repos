@@ -12,10 +12,8 @@ namespace System.Data.Common
     {
         private BigInteger[] _values = default!; // Late-initialized
 
-        internal BigIntegerStorage(DataColumn column) :
-            base(column, typeof(BigInteger), BigInteger.Zero, StorageType.BigInteger)
-        {
-        }
+        internal BigIntegerStorage(DataColumn column)
+            : base(column, typeof(BigInteger), BigInteger.Zero, StorageType.BigInteger) { }
 
         public override object Aggregate(int[] records, AggregateType kind)
         {
@@ -61,35 +59,117 @@ namespace System.Data.Common
         // supported implicit casts
         internal static BigInteger ConvertToBigInteger(object value, IFormatProvider formatProvider)
         {
-            if (value.GetType() == typeof(BigInteger)) { return (BigInteger)value; }
-            else if (value.GetType() == typeof(string)) { return BigInteger.Parse((string)value, formatProvider); }
-            else if (value.GetType() == typeof(long)) { return (long)value; }
-            else if (value.GetType() == typeof(int)) { return (int)value; }
-            else if (value.GetType() == typeof(short)) { return (short)value; }
-            else if (value.GetType() == typeof(sbyte)) { return (sbyte)value; }
-            else if (value.GetType() == typeof(ulong)) { return (ulong)value; }
-            else if (value.GetType() == typeof(uint)) { return (uint)value; }
-            else if (value.GetType() == typeof(ushort)) { return (ushort)value; }
-            else if (value.GetType() == typeof(byte)) { return (byte)value; }
-            else { throw ExceptionBuilder.ConvertFailed(value.GetType(), typeof(System.Numerics.BigInteger)); }
+            if (value.GetType() == typeof(BigInteger))
+            {
+                return (BigInteger)value;
+            }
+            else if (value.GetType() == typeof(string))
+            {
+                return BigInteger.Parse((string)value, formatProvider);
+            }
+            else if (value.GetType() == typeof(long))
+            {
+                return (long)value;
+            }
+            else if (value.GetType() == typeof(int))
+            {
+                return (int)value;
+            }
+            else if (value.GetType() == typeof(short))
+            {
+                return (short)value;
+            }
+            else if (value.GetType() == typeof(sbyte))
+            {
+                return (sbyte)value;
+            }
+            else if (value.GetType() == typeof(ulong))
+            {
+                return (ulong)value;
+            }
+            else if (value.GetType() == typeof(uint))
+            {
+                return (uint)value;
+            }
+            else if (value.GetType() == typeof(ushort))
+            {
+                return (ushort)value;
+            }
+            else if (value.GetType() == typeof(byte))
+            {
+                return (byte)value;
+            }
+            else
+            {
+                throw ExceptionBuilder.ConvertFailed(
+                    value.GetType(),
+                    typeof(System.Numerics.BigInteger)
+                );
+            }
         }
 
-        internal static object ConvertFromBigInteger(BigInteger value, Type type, IFormatProvider formatProvider)
+        internal static object ConvertFromBigInteger(
+            BigInteger value,
+            Type type,
+            IFormatProvider formatProvider
+        )
         {
-            if (type == typeof(string)) { return value.ToString("D", formatProvider); }
-            else if (type == typeof(sbyte)) { return checked((sbyte)value); }
-            else if (type == typeof(short)) { return checked((short)value); }
-            else if (type == typeof(int)) { return checked((int)value); }
-            else if (type == typeof(long)) { return checked((long)value); }
-            else if (type == typeof(byte)) { return checked((byte)value); }
-            else if (type == typeof(ushort)) { return checked((ushort)value); }
-            else if (type == typeof(uint)) { return checked((uint)value); }
-            else if (type == typeof(ulong)) { return checked((ulong)value); }
-            else if (type == typeof(float)) { return checked((float)value); }
-            else if (type == typeof(double)) { return checked((double)value); }
-            else if (type == typeof(decimal)) { return checked((decimal)value); }
-            else if (type == typeof(System.Numerics.BigInteger)) { return value; }
-            else { throw ExceptionBuilder.ConvertFailed(typeof(System.Numerics.BigInteger), type); }
+            if (type == typeof(string))
+            {
+                return value.ToString("D", formatProvider);
+            }
+            else if (type == typeof(sbyte))
+            {
+                return checked((sbyte)value);
+            }
+            else if (type == typeof(short))
+            {
+                return checked((short)value);
+            }
+            else if (type == typeof(int))
+            {
+                return checked((int)value);
+            }
+            else if (type == typeof(long))
+            {
+                return checked((long)value);
+            }
+            else if (type == typeof(byte))
+            {
+                return checked((byte)value);
+            }
+            else if (type == typeof(ushort))
+            {
+                return checked((ushort)value);
+            }
+            else if (type == typeof(uint))
+            {
+                return checked((uint)value);
+            }
+            else if (type == typeof(ulong))
+            {
+                return checked((ulong)value);
+            }
+            else if (type == typeof(float))
+            {
+                return checked((float)value);
+            }
+            else if (type == typeof(double))
+            {
+                return checked((double)value);
+            }
+            else if (type == typeof(decimal))
+            {
+                return checked((decimal)value);
+            }
+            else if (type == typeof(System.Numerics.BigInteger))
+            {
+                return value;
+            }
+            else
+            {
+                throw ExceptionBuilder.ConvertFailed(typeof(System.Numerics.BigInteger), type);
+            }
         }
 
         public override object ConvertValue(object? value)
@@ -154,7 +234,10 @@ namespace System.Data.Common
         [RequiresUnreferencedCode(DataSet.RequiresUnreferencedCodeMessage)]
         public override string ConvertObjectToXml(object value)
         {
-            return ((BigInteger)value).ToString("D", System.Globalization.CultureInfo.InvariantCulture);
+            return ((BigInteger)value).ToString(
+                "D",
+                System.Globalization.CultureInfo.InvariantCulture
+            );
         }
 
         protected override object GetEmptyStorage(int recordCount)
@@ -162,7 +245,12 @@ namespace System.Data.Common
             return new BigInteger[recordCount];
         }
 
-        protected override void CopyValue(int record, object store, BitArray nullbits, int storeIndex)
+        protected override void CopyValue(
+            int record,
+            object store,
+            BitArray nullbits,
+            int storeIndex
+        )
         {
             BigInteger[] typedStore = (BigInteger[])store;
             typedStore[storeIndex] = _values[record];

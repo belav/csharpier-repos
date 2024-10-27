@@ -12,10 +12,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_Simple()
         {
             string content = "-----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..44,
                 expectedBase64: 21..25,
-                expectedLabel: 11..15);
+                expectedLabel: 11..15
+            );
             Assert.Equal("TEST", content[fields.Label]);
             Assert.Equal(content, content[fields.Location]);
             Assert.Equal("Zm9v", content[fields.Base64Data]);
@@ -26,20 +28,24 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_IncompletePreebPrefixed()
         {
             string content = "-----BEGIN FAIL -----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            AssertPemFound(content,
+            AssertPemFound(
+                content,
                 expectedLocation: 16..60,
                 expectedBase64: 37..41,
-                expectedLabel: 27..31);
+                expectedLabel: 27..31
+            );
         }
 
         [Fact]
         public void Find_Success_CompletePreebPrefixedDifferentLabel()
         {
             string content = "-----BEGIN FAIL----- -----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 21..65,
                 expectedBase64: 42..46,
-                expectedLabel: 32..36);
+                expectedLabel: 32..36
+            );
 
             Assert.Equal("TEST", content[fields.Label]);
         }
@@ -48,10 +54,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_CompletePreebPrefixedSameLabel()
         {
             string content = "-----BEGIN TEST----- -----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 21..65,
                 expectedBase64: 42..46,
-                expectedLabel: 32..36);
+                expectedLabel: 32..36
+            );
 
             Assert.Equal("TEST", content[fields.Label]);
         }
@@ -60,10 +68,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_PreebEndingOverlap()
         {
             string content = "-----BEGIN TEST -----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 16..60,
                 expectedBase64: 37..41,
-                expectedLabel: 27..31);
+                expectedLabel: 27..31
+            );
 
             Assert.Equal("TEST", content[fields.Label]);
             Assert.Equal(3, fields.DecodedDataLength);
@@ -74,10 +84,12 @@ namespace System.Security.Cryptography.Tests
         {
             string label = new string('A', 275);
             string content = $"-----BEGIN {label}-----\nZm9v\n-----END {label}-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..586,
                 expectedBase64: 292..296,
-                expectedLabel: 11..286);
+                expectedLabel: 11..286
+            );
 
             Assert.Equal(label, content[fields.Label]);
         }
@@ -86,10 +98,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_Minimum()
         {
             string content = "-----BEGIN ----------END -----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..30,
                 expectedBase64: 16..16,
-                expectedLabel: 11..11);
+                expectedLabel: 11..11
+            );
             Assert.Equal(0, fields.DecodedDataLength);
         }
 
@@ -97,40 +111,48 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_PrecedingContentAndWhitespaceBeforePreeb()
         {
             string content = "boop   -----BEGIN TEST-----\nZm9v\n-----END TEST-----";
-            AssertPemFound(content,
+            AssertPemFound(
+                content,
                 expectedLocation: 7..51,
                 expectedBase64: 28..32,
-                expectedLabel: 18..22);
+                expectedLabel: 18..22
+            );
         }
 
         [Fact]
         public void Find_Success_TrailingWhitespaceAfterPosteb()
         {
             string content = "-----BEGIN TEST-----\nZm9v\n-----END TEST-----    ";
-            AssertPemFound(content,
+            AssertPemFound(
+                content,
                 expectedLocation: 0..44,
                 expectedBase64: 21..25,
-                expectedLabel: 11..15);
+                expectedLabel: 11..15
+            );
         }
 
         [Fact]
         public void Find_Success_EmptyLabel()
         {
             string content = "-----BEGIN -----\nZm9v\n-----END -----";
-            AssertPemFound(content,
+            AssertPemFound(
+                content,
                 expectedLocation: 0..36,
                 expectedBase64: 17..21,
-                expectedLabel: 11..11);
+                expectedLabel: 11..11
+            );
         }
 
         [Fact]
         public void Find_Success_EmptyContent_OneLine()
         {
             string content = "-----BEGIN EMPTY----------END EMPTY-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..40,
                 expectedBase64: 21..21,
-                expectedLabel: 11..16);
+                expectedLabel: 11..16
+            );
             Assert.Equal(0, fields.DecodedDataLength);
         }
 
@@ -138,10 +160,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_EmptyContent_ManyLinesOfWhitespace()
         {
             string content = "-----BEGIN EMPTY-----\n\t\n\t\n\t  \n-----END EMPTY-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..49,
                 expectedBase64: 30..30,
-                expectedLabel: 11..16);
+                expectedLabel: 11..16
+            );
             Assert.Equal(0, fields.DecodedDataLength);
         }
 
@@ -173,20 +197,24 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_SingleLetterLabel()
         {
             string content = "-----BEGIN H-----\nZm9v\n-----END H-----";
-            AssertPemFound(content,
+            AssertPemFound(
+                content,
                 expectedLocation: 0..38,
                 expectedBase64: 18..22,
-                expectedLabel: 11..12);
+                expectedLabel: 11..12
+            );
         }
 
         [Fact]
         public void Find_Success_LabelCharacterBoundaries()
         {
             string content = $"-----BEGIN !PANIC~~~-----\nAHHH\n-----END !PANIC~~~-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..54,
                 expectedBase64: 26..30,
-                expectedLabel: 11..20);
+                expectedLabel: 11..20
+            );
         }
 
         [Theory]
@@ -197,10 +225,12 @@ namespace System.Security.Cryptography.Tests
         public void Find_Success_WhiteSpaceBeforePreebSeparatesFromPriorContent(string whiteSpace)
         {
             string content = $"blah{whiteSpace}-----BEGIN TEST-----\nZn9v\n-----END TEST-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 5..49,
                 expectedBase64: 26..30,
-                expectedLabel: 16..20);
+                expectedLabel: 16..20
+            );
         }
 
         [Theory]
@@ -208,29 +238,36 @@ namespace System.Security.Cryptography.Tests
         [InlineData("\n")]
         [InlineData("\r")]
         [InlineData("\t")]
-        public void Find_Success_WhiteSpaceAfterPpostebSeparatesFromSubsequentContent(string whiteSpace)
+        public void Find_Success_WhiteSpaceAfterPpostebSeparatesFromSubsequentContent(
+            string whiteSpace
+        )
         {
             string content = $"-----BEGIN TEST-----\nZn9v\n-----END TEST-----{whiteSpace}blah";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..44,
                 expectedBase64: 21..25,
-                expectedLabel: 11..15);
+                expectedLabel: 11..15
+            );
         }
 
         [Fact]
         public void Find_Success_Base64SurroundingWhiteSpaceStripped()
         {
             string content = $"-----BEGIN A-----\r\n Zm9v\n\r \t-----END A-----";
-            PemFields fields = AssertPemFound(content,
+            PemFields fields = AssertPemFound(
+                content,
                 expectedLocation: 0..43,
                 expectedBase64: 20..24,
-                expectedLabel: 11..12);
+                expectedLabel: 11..12
+            );
         }
 
         [Fact]
         public void Find_Success_FindsPemAfterPemWithInvalidBase64()
         {
-            string content = @"
+            string content =
+                @"
 -----BEGIN TEST-----
 $$$$
 -----END TEST-----
@@ -245,7 +282,8 @@ Zm9v
         [Fact]
         public void Find_Success_FindsPemAfterPemWithInvalidLabel()
         {
-            string content = @"
+            string content =
+                @"
 -----BEGIN ------
 YmFy
 -----END ------
@@ -265,15 +303,19 @@ Zm9v
 
             for (int i = 0; i < 100; i++)
             {
-                builder.Append($"-----BEGIN CERTIFICATE-----\n${i:000}\n-----END CERTIFICATE-----\n");
+                builder.Append(
+                    $"-----BEGIN CERTIFICATE-----\n${i:000}\n-----END CERTIFICATE-----\n"
+                );
             }
 
             builder.Append($"-----BEGIN CERTIFICATE-----\nZm9v\n-----END CERTIFICATE-----");
 
-            AssertPemFound(builder.ToString(),
+            AssertPemFound(
+                builder.ToString(),
                 expectedLocation: 5900..5958,
                 expectedBase64: 5928..5932,
-                expectedLabel: 5911..5922);
+                expectedLabel: 5911..5922
+            );
         }
 
         [Fact]
@@ -285,7 +327,8 @@ Zm9v
         [Fact]
         public void Find_Fail_InvalidBase64_MultipleInvalid_WithSurroundingText()
         {
-            string content = @"
+            string content =
+                @"
 CN=Intermediate1
 -----BEGIN CERTIFICATE-----
 MII
@@ -336,7 +379,6 @@ MII
             string content = "boop\nbeep-----BEGIN TEST-----\nZm9v\n-----END TEST-----";
             AssertNoPemFound(content);
         }
-
 
         [Theory]
         [InlineData("\u200A")] // hair space
@@ -428,7 +470,8 @@ MII
             ReadOnlySpan<char> input,
             Range expectedLocation,
             Range expectedBase64,
-            Range expectedLabel)
+            Range expectedLabel
+        )
         {
             PemFields fields = FindPem(input);
             Assert.Equal(expectedBase64, fields.Base64Data);
@@ -449,7 +492,11 @@ MII
 
         protected override void AssertNoPemFound(ReadOnlySpan<char> input)
         {
-            AssertExtensions.Throws<ArgumentException, char>("pemData", input, x => PemEncoding.Find(x));
+            AssertExtensions.Throws<ArgumentException, char>(
+                "pemData",
+                input,
+                x => PemEncoding.Find(x)
+            );
         }
     }
 

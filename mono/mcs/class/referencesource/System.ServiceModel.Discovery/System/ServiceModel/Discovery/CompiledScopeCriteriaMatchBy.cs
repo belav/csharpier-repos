@@ -6,6 +6,6 @@ namespace System.ServiceModel.Discovery
     enum CompiledScopeCriteriaMatchBy
     {
         StartsWith,
-        Exact
+        Exact,
     }
 }
