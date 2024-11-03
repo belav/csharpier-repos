@@ -756,7 +756,7 @@ internal class T4 {{ }}
 
 {AsyncBuilderCode("B1", "T1").Replace("public class B1", "public class B1")}
 {AsyncBuilderCode("B2", "T2").Replace("public class B2", "internal class B2")}
-{AsyncBuilderCode("B3", "T3") .Replace("public class B3", "public class B3") .Replace("public T3 Task =>", "internal T3 Task =>")}
+{AsyncBuilderCode("B3", "T3").Replace("public class B3", "public class B3").Replace("public T3 Task =>", "internal T3 Task =>")}
 {AsyncBuilderCode("B4", "T4").Replace("public class B4", "internal class B4")}
 
 class Program
@@ -1197,8 +1197,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public MyTask Task", "public object Task")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public MyTask<T> Task", "public object Task")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public MyTask Task", "public object Task")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public MyTask<T> Task", "public object Task")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1322,8 +1322,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public static MyTaskMethodBuilder Create()", accessibility + " static MyTaskMethodBuilder Create()")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public static MyTaskMethodBuilder<T> Create()", accessibility + " static MyTaskMethodBuilder<T> Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public static MyTaskMethodBuilder Create()", accessibility + " static MyTaskMethodBuilder Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public static MyTaskMethodBuilder<T> Create()", accessibility + " static MyTaskMethodBuilder<T> Create()")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1381,8 +1381,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public static MyTaskMethodBuilder Create()", "public MyTaskMethodBuilder Create()")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public static MyTaskMethodBuilder<T> Create()", "public MyTaskMethodBuilder<T> Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public static MyTaskMethodBuilder Create()", "public MyTaskMethodBuilder Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public static MyTaskMethodBuilder<T> Create()", "public MyTaskMethodBuilder<T> Create()")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1441,8 +1441,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public static MyTaskMethodBuilder Create()", "public static MyTaskMethodBuilder Create(int i)")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public static MyTaskMethodBuilder<T> Create()", "public static MyTaskMethodBuilder<T> Create(int i)")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public static MyTaskMethodBuilder Create()", "public static MyTaskMethodBuilder Create(int i)")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public static MyTaskMethodBuilder<T> Create()", "public static MyTaskMethodBuilder<T> Create(int i)")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1501,8 +1501,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public static MyTaskMethodBuilder Create()", "public static MyTaskMethodBuilder Create<U>()")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public static MyTaskMethodBuilder<T> Create()", "public static MyTaskMethodBuilder<T> Create<U>()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public static MyTaskMethodBuilder Create()", "public static MyTaskMethodBuilder Create<U>()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public static MyTaskMethodBuilder<T> Create()", "public static MyTaskMethodBuilder<T> Create<U>()")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1632,8 +1632,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public class MyTaskMethodBuilder", "internal class MyTaskMethodBuilder")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public class MyTaskMethodBuilder<T>", "internal class MyTaskMethodBuilder<T>")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public class MyTaskMethodBuilder", "internal class MyTaskMethodBuilder")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public class MyTaskMethodBuilder<T>", "internal class MyTaskMethodBuilder<T>")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1665,8 +1665,8 @@ class C
     [AsyncMethodBuilder(typeof(MyTaskMethodBuilder<>))]
     public static async MyTask<int> M() {{ System.Console.Write(""M ""); await F(); return await G(3); }}
 
-    {AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public class MyTaskMethodBuilder", "private class MyTaskMethodBuilder")}
-    {AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public class MyTaskMethodBuilder<T>", "private class MyTaskMethodBuilder<T>")}
+    {AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public class MyTaskMethodBuilder", "private class MyTaskMethodBuilder")}
+    {AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public class MyTaskMethodBuilder<T>", "private class MyTaskMethodBuilder<T>")}
 }}
 
 {AwaitableTypeCode("MyTask")}
@@ -1704,8 +1704,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public static MyTaskMethodBuilder Create()", "internal static MyTaskMethodBuilder Create()")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public static MyTaskMethodBuilder<T> Create()", "internal static MyTaskMethodBuilder<T> Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public static MyTaskMethodBuilder Create()", "internal static MyTaskMethodBuilder Create()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public static MyTaskMethodBuilder<T> Create()", "internal static MyTaskMethodBuilder<T> Create()")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -1944,8 +1944,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public MyTask Task =>", "internal MyTask Task =>")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public MyTask<T> Task =>", "internal MyTask<T> Task =>")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public MyTask Task =>", "internal MyTask Task =>")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public MyTask<T> Task =>", "internal MyTask<T> Task =>")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2003,8 +2003,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public MyTask Task => _task;", "public static MyTask Task => throw null;")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public MyTask<T> Task => _task;", "public static MyTask<T> Task => throw null;")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public MyTask Task => _task;", "public static MyTask Task => throw null;")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public MyTask<T> Task => _task;", "public static MyTask<T> Task => throw null;")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2062,8 +2062,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public MyTask Task => _task;", "public static MyTask Task = null;")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public MyTask<T> Task => _task;", "public MyTask<T> Task = null;")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public MyTask Task => _task;", "public static MyTask Task = null;")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public MyTask<T> Task => _task;", "public MyTask<T> Task = null;")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2121,8 +2121,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void SetException", "internal void SetException")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void SetException", "internal void SetException")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void SetException", "internal void SetException")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void SetException", "internal void SetException")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2243,8 +2243,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void SetException(System.Exception e)", "public void SetException()")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void SetException(System.Exception e)", "public void SetException()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void SetException(System.Exception e)", "public void SetException()")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void SetException(System.Exception e)", "public void SetException()")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2302,8 +2302,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void SetResult", "internal void SetResult")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void SetResult", "internal void SetResult")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void SetResult", "internal void SetResult")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void SetResult", "internal void SetResult")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2361,8 +2361,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void AwaitOnCompleted", "internal void AwaitOnCompleted")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void AwaitOnCompleted", "internal void AwaitOnCompleted")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void AwaitOnCompleted", "internal void AwaitOnCompleted")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void AwaitOnCompleted", "internal void AwaitOnCompleted")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2420,8 +2420,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void AwaitUnsafeOnCompleted", "internal void AwaitUnsafeOnCompleted")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void AwaitUnsafeOnCompleted", "internal void AwaitUnsafeOnCompleted")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void AwaitUnsafeOnCompleted", "internal void AwaitUnsafeOnCompleted")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void AwaitUnsafeOnCompleted", "internal void AwaitUnsafeOnCompleted")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2479,8 +2479,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void Start", "internal void Start")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void Start", "internal void Start")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void Start", "internal void Start")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void Start", "internal void Start")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2538,8 +2538,8 @@ class C
 {AwaitableTypeCode("MyTask")}
 {AwaitableTypeCode("MyTask", "T")}
 
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask") .Replace("public void SetStateMachine", "internal void SetStateMachine")}
-{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T") .Replace("public void SetStateMachine", "internal void SetStateMachine")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask").Replace("public void SetStateMachine", "internal void SetStateMachine")}
+{AsyncBuilderCode("MyTaskMethodBuilder", "MyTask", "T").Replace("public void SetStateMachine", "internal void SetStateMachine")}
 {AsyncMethodBuilderAttribute}
 ";
             var compilation = CreateCompilationWithMscorlib45(
@@ -2733,7 +2733,7 @@ using System.Threading.Tasks;
 [AsyncMethodBuilder(null)] internal class MyTaskType {{ }}
 
 // Make the builder factory and the builder internal as well
-{AsyncBuilderCode("MyTaskTypeBuilder", "MyTaskType") .Replace("public class MyTaskType", "internal class MyTaskType")}
+{AsyncBuilderCode("MyTaskTypeBuilder", "MyTaskType").Replace("public class MyTaskType", "internal class MyTaskType")}
 
 class C
 {{

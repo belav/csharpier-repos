@@ -1099,11 +1099,11 @@ using System;
 }|]
 ",
                     $@"
-#pragma warning disable {UserDiagnosticAnalyzer .Decsciptor .Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
+#pragma warning disable {UserDiagnosticAnalyzer.Decsciptor.Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
 class Class
 {{
 }}
-#pragma warning restore {UserDiagnosticAnalyzer .Decsciptor .Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
+#pragma warning restore {UserDiagnosticAnalyzer.Decsciptor.Id} // {UserDiagnosticAnalyzer.Decsciptor.Title}
 "
                 );
             }
