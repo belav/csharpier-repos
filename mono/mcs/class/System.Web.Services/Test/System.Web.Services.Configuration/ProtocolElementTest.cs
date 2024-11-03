@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,30 +32,30 @@ using System;
 using System.Web.Services.Configuration;
 using NUnit.Framework;
 
-namespace MonoTests.System.Web.Services {
-	[TestFixture]
-	public class ProtocolElementTest
-	{
-		[Test]
-		public void Ctors ()
-		{
-			ProtocolElement el = new ProtocolElement ();
+namespace MonoTests.System.Web.Services
+{
+    [TestFixture]
+    public class ProtocolElementTest
+    {
+        [Test]
+        public void Ctors()
+        {
+            ProtocolElement el = new ProtocolElement();
 
-			Assert.AreEqual (WebServiceProtocols.Unknown, el.Name, "A1");
+            Assert.AreEqual(WebServiceProtocols.Unknown, el.Name, "A1");
 
-			el = new ProtocolElement (WebServiceProtocols.HttpPost);
+            el = new ProtocolElement(WebServiceProtocols.HttpPost);
 
-			Assert.AreEqual (WebServiceProtocols.HttpPost, el.Name, "A2");
-		}
+            Assert.AreEqual(WebServiceProtocols.HttpPost, el.Name, "A2");
+        }
 
-		[Test]
-		public void GetSet ()
-		{
-			ProtocolElement el = new ProtocolElement ();
+        [Test]
+        public void GetSet()
+        {
+            ProtocolElement el = new ProtocolElement();
 
-			el.Name = WebServiceProtocols.HttpGet;
-			Assert.AreEqual (WebServiceProtocols.HttpGet, el.Name, "A1");
-		}
-	}
+            el.Name = WebServiceProtocols.HttpGet;
+            Assert.AreEqual(WebServiceProtocols.HttpGet, el.Name, "A1");
+        }
+    }
 }
-

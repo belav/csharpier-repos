@@ -36,7 +36,7 @@ namespace System.Resources.Extensions.Tests
                 ["double"] = 3.14159,
                 ["decimal"] = 3.141596536897931m,
                 ["DateTime"] = new DateTime(2000, 1, 1, 0, 0, 1, DateTimeKind.Unspecified),
-                ["TimeSpan"] = TimeSpan.FromDays(1)
+                ["TimeSpan"] = TimeSpan.FromDays(1),
             };
 
         public static IReadOnlyDictionary<string, object> PrimitiveAsString { get; } =
@@ -44,8 +44,10 @@ namespace System.Resources.Extensions.Tests
 
         public static IReadOnlyDictionary<string, object> BinaryFormatted
         {
-            get => PlatformDetection.IsDrawingSupported ?
-                  BinaryFormattedDrawing : BinaryFormattedWithoutDrawing;
+            get =>
+                PlatformDetection.IsDrawingSupported
+                    ? BinaryFormattedDrawing
+                    : BinaryFormattedWithoutDrawing;
         }
         public static Dictionary<string, object> BinaryFormattedWithoutDrawing { get; } =
             new Dictionary<string, object>()
@@ -54,12 +56,12 @@ namespace System.Resources.Extensions.Tests
                 ["point_bin"] = new Point(4, 8),
                 ["array_int_bin"] = new int[] { 1, 2, 3, 4, 5, 6 },
                 ["list_int_bin"] = new List<int>() { 1, 2, 3, 4, 5, 6 },
-                ["stack_Point_bin"] = new Stack<Point>(new [] { new Point(4, 8), new Point(2, 5) }),
+                ["stack_Point_bin"] = new Stack<Point>(new[] { new Point(4, 8), new Point(2, 5) }),
                 ["dict_string_string_bin"] = new Dictionary<string, string>()
                 {
                     { "key1", "value1" },
-                    { "key2", "value2" }
-                }
+                    { "key2", "value2" },
+                },
             };
 
         public static Dictionary<string, object> BinaryFormattedWithoutDrawingNoType { get; } =
@@ -67,40 +69,48 @@ namespace System.Resources.Extensions.Tests
 
         public static IReadOnlyDictionary<string, object> BinaryFormattedDrawing
         {
-            get => new Dictionary<string, object>(BinaryFormattedWithoutDrawing)
-            {
-                ["bitmap_bin"] = new Bitmap(Path.Combine("bitmaps", "almogaver24bits.bmp")),
-                ["font_bin"] = SystemFonts.DefaultFont
-            };
+            get =>
+                new Dictionary<string, object>(BinaryFormattedWithoutDrawing)
+                {
+                    ["bitmap_bin"] = new Bitmap(Path.Combine("bitmaps", "almogaver24bits.bmp")),
+                    ["font_bin"] = SystemFonts.DefaultFont,
+                };
         }
 
         public static IReadOnlyDictionary<string, object> ByteArrayConverter
         {
             // ImageConverter is part of System.Windows.Extensions.
-            get => PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows ?
-                ByteArrayConverterDrawing : ByteArrayConverterWithoutDrawing;
+            get =>
+                PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows
+                    ? ByteArrayConverterDrawing
+                    : ByteArrayConverterWithoutDrawing;
         }
 
         public static Dictionary<string, object> ByteArrayConverterWithoutDrawing { get; } =
             new Dictionary<string, object>()
             {
-                ["myResourceType_bytes"] = new MyResourceType(new byte[] { 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89 })
+                ["myResourceType_bytes"] = new MyResourceType(
+                    new byte[] { 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89 }
+                ),
             };
 
         public static IReadOnlyDictionary<string, object> ByteArrayConverterDrawing
         {
-            get => new Dictionary<string, object>(ByteArrayConverterWithoutDrawing)
-            {
-                ["bitmap_bytes"] = new Bitmap(Path.Combine("bitmaps", "almogaver24bits.bmp")),
-                ["icon_bytes"] = new Icon(Path.Combine("bitmaps", "32x32_one_entry_4bit.ico"))
-            };
+            get =>
+                new Dictionary<string, object>(ByteArrayConverterWithoutDrawing)
+                {
+                    ["bitmap_bytes"] = new Bitmap(Path.Combine("bitmaps", "almogaver24bits.bmp")),
+                    ["icon_bytes"] = new Icon(Path.Combine("bitmaps", "32x32_one_entry_4bit.ico")),
+                };
         }
 
         public static IReadOnlyDictionary<string, object> StringConverter
         {
             // ImageFormatConverter is part of System.Windows.Extensions.
-            get => PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows ?
-                StringConverterDrawing : StringConverterWithoutDrawing;
+            get =>
+                PlatformDetection.IsDrawingSupported && PlatformDetection.IsWindows
+                    ? StringConverterDrawing
+                    : StringConverterWithoutDrawing;
         }
 
         public static Dictionary<string, object> StringConverterWithoutDrawing { get; } =
@@ -112,37 +122,51 @@ namespace System.Resources.Extensions.Tests
                 ["size_string"] = new Size(4, 8),
                 ["sizeF_string"] = new SizeF(4.2f, 8.5f),
                 ["cultureInfo_string"] = new CultureInfo("en-US"),
-                ["enum_string"] = DayOfWeek.Friday
+                ["enum_string"] = DayOfWeek.Friday,
             };
 
         public static IReadOnlyDictionary<string, object> StringConverterDrawing
         {
-            get => new Dictionary<string, object>(StringConverterWithoutDrawing)
-            {
-                ["imageFormat_string"] = ImageFormat.Png,
-                ["font_string"] = SystemFonts.DefaultFont
-            };
+            get =>
+                new Dictionary<string, object>(StringConverterWithoutDrawing)
+                {
+                    ["imageFormat_string"] = ImageFormat.Png,
+                    ["font_string"] = SystemFonts.DefaultFont,
+                };
         }
 
         public static IReadOnlyDictionary<string, (Type type, Stream stream)> Activator
         {
-            get => PlatformDetection.IsDrawingSupported ?
-                ActivatorDrawing : ActivatorWithoutDrawing;
+            get =>
+                PlatformDetection.IsDrawingSupported ? ActivatorDrawing : ActivatorWithoutDrawing;
         }
 
-        public static Dictionary<string, (Type type, Stream stream)> ActivatorWithoutDrawing { get; } =
+        public static Dictionary<
+            string,
+            (Type type, Stream stream)
+        > ActivatorWithoutDrawing { get; } =
             new Dictionary<string, (Type type, Stream stream)>()
             {
-                ["myResourceType_stream"] = (typeof(MyResourceType), new MemoryStream(new byte[] { 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89 }))
+                ["myResourceType_stream"] = (
+                    typeof(MyResourceType),
+                    new MemoryStream(new byte[] { 0xAB, 0xCD, 0xEF, 0x01, 0x23, 0x45, 0x67, 0x89 })
+                ),
             };
 
         public static IReadOnlyDictionary<string, (Type type, Stream stream)> ActivatorDrawing
         {
-            get => new Dictionary<string, (Type type, Stream stream)>(ActivatorWithoutDrawing)
-            {
-                ["icon_stream"] = (typeof(Icon), File.OpenRead(Path.Combine("bitmaps", "32x32_one_entry_4bit.ico"))),
-                ["bitmap_stream"] = (typeof(Bitmap), File.OpenRead(Path.Combine("bitmaps", "almogaver24bits.bmp")))
-            };
+            get =>
+                new Dictionary<string, (Type type, Stream stream)>(ActivatorWithoutDrawing)
+                {
+                    ["icon_stream"] = (
+                        typeof(Icon),
+                        File.OpenRead(Path.Combine("bitmaps", "32x32_one_entry_4bit.ico"))
+                    ),
+                    ["bitmap_stream"] = (
+                        typeof(Bitmap),
+                        File.OpenRead(Path.Combine("bitmaps", "almogaver24bits.bmp"))
+                    ),
+                };
         }
 
         public static string GetStringValue(object value)
@@ -152,13 +176,12 @@ namespace System.Resources.Extensions.Tests
             return converter.ConvertToInvariantString(value);
         }
 
-
         // Copied from  FormatterServices.cs
         internal static string GetClrTypeFullName(Type type)
         {
-            return type.IsArray ?
-                GetClrTypeFullNameForArray(type) :
-                GetClrTypeFullNameForNonArrayTypes(type);
+            return type.IsArray
+                ? GetClrTypeFullNameForArray(type)
+                : GetClrTypeFullNameForNonArrayTypes(type);
         }
 
         private static string GetClrTypeFullNameForArray(Type type)
@@ -166,9 +189,7 @@ namespace System.Resources.Extensions.Tests
             int rank = type.GetArrayRank();
             Debug.Assert(rank >= 1);
             string typeName = GetClrTypeFullName(type.GetElementType());
-            return rank == 1 ?
-                typeName + "[]" :
-                typeName + "[" + new string(',', rank - 1) + "]";
+            return rank == 1 ? typeName + "[]" : typeName + "[" + new string(',', rank - 1) + "]";
         }
 
         private static string GetClrTypeFullNameForNonArrayTypes(Type type)
@@ -204,7 +225,12 @@ namespace System.Resources.Extensions.Tests
                 attributedType = attributedType.GetElementType();
             }
 
-            foreach (Attribute first in attributedType.GetCustomAttributes(typeof(TypeForwardedFromAttribute), false))
+            foreach (
+                Attribute first in attributedType.GetCustomAttributes(
+                    typeof(TypeForwardedFromAttribute),
+                    false
+                )
+            )
             {
                 return ((TypeForwardedFromAttribute)first).AssemblyFullName;
             }
@@ -239,12 +265,16 @@ namespace System.Resources.Extensions.Tests
 
                 foreach (var pair in PrimitiveAsString)
                 {
-                    writer.AddResource(pair.Key, GetStringValue(pair.Value), GetSerializationTypeName(pair.Value.GetType()));
+                    writer.AddResource(
+                        pair.Key,
+                        GetStringValue(pair.Value),
+                        GetSerializationTypeName(pair.Value.GetType())
+                    );
                 }
 
                 var formatter = new BinaryFormatter()
                 {
-                    Binder = new TypeNameManglingSerializationBinder()
+                    Binder = new TypeNameManglingSerializationBinder(),
                 };
 
                 foreach (var pair in BinaryFormattedWithoutDrawing)
@@ -252,7 +282,11 @@ namespace System.Resources.Extensions.Tests
                     using (MemoryStream memoryStream = new MemoryStream())
                     {
                         formatter.Serialize(memoryStream, pair.Value);
-                        writer.AddBinaryFormattedResource(pair.Key, memoryStream.ToArray(), GetSerializationTypeName(pair.Value.GetType()));
+                        writer.AddBinaryFormattedResource(
+                            pair.Key,
+                            memoryStream.ToArray(),
+                            GetSerializationTypeName(pair.Value.GetType())
+                        );
                     }
                 }
 
@@ -269,17 +303,30 @@ namespace System.Resources.Extensions.Tests
                 {
                     TypeConverter converter = TypeDescriptor.GetConverter(pair.Value.GetType());
                     byte[] buffer = (byte[])converter.ConvertTo(pair.Value, typeof(byte[]));
-                    writer.AddTypeConverterResource(pair.Key, buffer, GetSerializationTypeName(pair.Value.GetType()));
+                    writer.AddTypeConverterResource(
+                        pair.Key,
+                        buffer,
+                        GetSerializationTypeName(pair.Value.GetType())
+                    );
                 }
 
                 foreach (var pair in StringConverterWithoutDrawing)
                 {
-                    writer.AddResource(pair.Key, GetStringValue(pair.Value), GetSerializationTypeName(pair.Value.GetType()));
+                    writer.AddResource(
+                        pair.Key,
+                        GetStringValue(pair.Value),
+                        GetSerializationTypeName(pair.Value.GetType())
+                    );
                 }
 
                 foreach (var pair in ActivatorWithoutDrawing)
                 {
-                    writer.AddActivatorResource(pair.Key, pair.Value.stream, GetSerializationTypeName(pair.Value.type), false);
+                    writer.AddActivatorResource(
+                        pair.Key,
+                        pair.Value.stream,
+                        GetSerializationTypeName(pair.Value.type),
+                        false
+                    );
                 }
 
                 writer.Generate();
@@ -287,21 +334,29 @@ namespace System.Resources.Extensions.Tests
         }
 
         /// <summary>
-        /// An approximation of ResXSerializationBinder's behavior (without retargeting) 
+        /// An approximation of ResXSerializationBinder's behavior (without retargeting)
         /// </summary>
         internal class TypeNameManglingSerializationBinder : SerializationBinder
         {
             static readonly string s_coreAssemblyName = typeof(object).Assembly.FullName;
-            static readonly string s_mscorlibAssemblyName = "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
+            static readonly string s_mscorlibAssemblyName =
+                "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089";
 
-            public override void BindToName(Type serializedType, out string assemblyName, out string typeName)
+            public override void BindToName(
+                Type serializedType,
+                out string assemblyName,
+                out string typeName
+            )
             {
                 typeName = null;
                 // Apply type-forwarded from here, so that we mimic what would happen in ResXWriter which runs in VS on desktop
                 string assemblyQualifiedTypeName = GetSerializationTypeName(serializedType);
 
                 // workaround for https://github.com/dotnet/runtime/issues/31289
-                assemblyQualifiedTypeName = assemblyQualifiedTypeName.Replace(s_coreAssemblyName, s_mscorlibAssemblyName);
+                assemblyQualifiedTypeName = assemblyQualifiedTypeName.Replace(
+                    s_coreAssemblyName,
+                    s_mscorlibAssemblyName
+                );
 
                 // The logic below is intentionally incorrect. Generic type names like System.Collections.Generic.List`1[[System.String, ...]]
                 // will be split on the first comma, causing unbalanced [[ and ]] in the resulting substrings. This is for compatibility
@@ -312,7 +367,13 @@ namespace System.Resources.Extensions.Tests
                 {
                     assemblyName = assemblyQualifiedTypeName.Substring(pos + 1).TrimStart();
                     string newTypeName = assemblyQualifiedTypeName.Substring(0, pos);
-                    if (!string.Equals(newTypeName, serializedType.FullName, StringComparison.InvariantCulture))
+                    if (
+                        !string.Equals(
+                            newTypeName,
+                            serializedType.FullName,
+                            StringComparison.InvariantCulture
+                        )
+                    )
                     {
                         typeName = newTypeName;
                     }
@@ -324,7 +385,9 @@ namespace System.Resources.Extensions.Tests
             public override Type BindToType(string assemblyName, string typeName)
             {
                 // We should never be using this binder during Deserialization
-                throw new NotSupportedException($"{nameof(TypeNameManglingSerializationBinder)}.{nameof(BindToType)} should not be used during testing.");
+                throw new NotSupportedException(
+                    $"{nameof(TypeNameManglingSerializationBinder)}.{nameof(BindToType)} should not be used during testing."
+                );
             }
         }
     }

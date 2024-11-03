@@ -8,7 +8,11 @@ internal static partial class Interop
 {
     internal static partial class Sys
     {
-        [LibraryImport(Libraries.SystemNative, EntryPoint = "SystemNative_SearchPath", StringMarshalling = StringMarshalling.Utf8)]
+        [LibraryImport(
+            Libraries.SystemNative,
+            EntryPoint = "SystemNative_SearchPath",
+            StringMarshalling = StringMarshalling.Utf8
+        )]
         internal static partial string? SearchPath(NSSearchPathDirectory folderId);
 
         internal enum NSSearchPathDirectory
@@ -22,7 +26,7 @@ internal static partial class Interop
             NSApplicationSupportDirectory = 14,
             NSMoviesDirectory = 17,
             NSMusicDirectory = 18,
-            NSPicturesDirectory = 19
+            NSPicturesDirectory = 19,
         }
     }
 }

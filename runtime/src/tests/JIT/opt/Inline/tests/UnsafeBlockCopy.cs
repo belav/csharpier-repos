@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-public class Test_UnsafeBlockCopy 
+public class Test_UnsafeBlockCopy
 {
     static int SIZE = 100;
 
@@ -13,7 +13,7 @@ public class Test_UnsafeBlockCopy
     public static unsafe int TestEntryPoint()
     {
         byte* source = stackalloc byte[SIZE];
-        byte* dest   = stackalloc byte[SIZE];
+        byte* dest = stackalloc byte[SIZE];
 
         for (int i = 0; i < SIZE; i++)
         {
@@ -21,7 +21,7 @@ public class Test_UnsafeBlockCopy
             dest[i] = 0;
         }
 
-        Unsafe.CopyBlock(dest, source, (uint) SIZE);
+        Unsafe.CopyBlock(dest, source, (uint)SIZE);
 
         bool result = true;
 

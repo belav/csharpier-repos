@@ -10,26 +10,60 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public void TestInvalidArguments()
         {
-            Assert.Throws<ArgumentNullException>(() => { new DataflowBlockOptions().TaskScheduler = null; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new DataflowBlockOptions().MaxMessagesPerTask = -2; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new DataflowBlockOptions().MaxMessagesPerTask = 0; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new DataflowBlockOptions().BoundedCapacity = -2; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new DataflowBlockOptions().BoundedCapacity = 0; });
-            Assert.Throws<ArgumentNullException>(() => { new DataflowBlockOptions().NameFormat = null; });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DataflowBlockOptions().TaskScheduler = null;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().MaxMessagesPerTask = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().MaxMessagesPerTask = 0;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().BoundedCapacity = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new DataflowBlockOptions().BoundedCapacity = 0;
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DataflowBlockOptions().NameFormat = null;
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = -2; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = 0; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new ExecutionDataflowBlockOptions().MaxDegreeOfParallelism = 0;
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new GroupingDataflowBlockOptions().MaxNumberOfGroups = -2; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { new GroupingDataflowBlockOptions().MaxNumberOfGroups = 0; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new GroupingDataflowBlockOptions().MaxNumberOfGroups = -2;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new GroupingDataflowBlockOptions().MaxNumberOfGroups = 0;
+            });
         }
 
         [Fact]
         public void TestDefaultValues()
         {
-            Action<DataflowBlockOptions> verifyBaseDefaults = dbo => {
+            Action<DataflowBlockOptions> verifyBaseDefaults = dbo =>
+            {
                 Assert.Equal(expected: TaskScheduler.Default, actual: dbo.TaskScheduler);
-                Assert.Equal(expected: DataflowBlockOptions.Unbounded, actual: dbo.MaxMessagesPerTask);
+                Assert.Equal(
+                    expected: DataflowBlockOptions.Unbounded,
+                    actual: dbo.MaxMessagesPerTask
+                );
                 Assert.Equal(expected: DataflowBlockOptions.Unbounded, actual: dbo.BoundedCapacity);
                 Assert.Equal(expected: CancellationToken.None, actual: dbo.CancellationToken);
                 Assert.Equal(expected: -1, actual: DataflowBlockOptions.Unbounded);
@@ -58,24 +92,59 @@ namespace System.Threading.Tasks.Dataflow.Tests
 
             foreach (int value in new[] { 2, int.MaxValue, DataflowBlockOptions.Unbounded })
             {
-                SetAndTest(dbo, (o,v) => o.MaxMessagesPerTask = v, o => o.MaxMessagesPerTask, value);
-                SetAndTest(dbo, (o,v) => o.BoundedCapacity = v, o => o.BoundedCapacity, value);
-                SetAndTest(edbo, (o,v) => o.MaxDegreeOfParallelism = v, o => o.MaxDegreeOfParallelism, value);
-                SetAndTest(gdbo, (o,v) => o.MaxNumberOfGroups = v, o => o.MaxNumberOfGroups, value);
+                SetAndTest(
+                    dbo,
+                    (o, v) => o.MaxMessagesPerTask = v,
+                    o => o.MaxMessagesPerTask,
+                    value
+                );
+                SetAndTest(dbo, (o, v) => o.BoundedCapacity = v, o => o.BoundedCapacity, value);
+                SetAndTest(
+                    edbo,
+                    (o, v) => o.MaxDegreeOfParallelism = v,
+                    o => o.MaxDegreeOfParallelism,
+                    value
+                );
+                SetAndTest(
+                    gdbo,
+                    (o, v) => o.MaxNumberOfGroups = v,
+                    o => o.MaxNumberOfGroups,
+                    value
+                );
             }
-            SetAndTest(gdbo, (o,v) => o.MaxNumberOfGroups = v, o => o.MaxNumberOfGroups, long.MaxValue);
+            SetAndTest(
+                gdbo,
+                (o, v) => o.MaxNumberOfGroups = v,
+                o => o.MaxNumberOfGroups,
+                long.MaxValue
+            );
 
-            foreach (TaskScheduler value in new[] { new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler, TaskScheduler.Default })
+            foreach (
+                TaskScheduler value in new[]
+                {
+                    new ConcurrentExclusiveSchedulerPair().ConcurrentScheduler,
+                    TaskScheduler.Default,
+                }
+            )
             {
-                SetAndTest(dbo, (o,v) => o.TaskScheduler = v, o => o.TaskScheduler, value);
+                SetAndTest(dbo, (o, v) => o.TaskScheduler = v, o => o.TaskScheduler, value);
             }
 
-            foreach (CancellationToken value in new[] { new CancellationToken(false), new CancellationToken(true), new CancellationTokenSource().Token })
+            foreach (
+                CancellationToken value in new[]
+                {
+                    new CancellationToken(false),
+                    new CancellationToken(true),
+                    new CancellationTokenSource().Token,
+                }
+            )
             {
-                SetAndTest(dbo, (o,v) => o.CancellationToken = v, o => o.CancellationToken, value);
+                SetAndTest(dbo, (o, v) => o.CancellationToken = v, o => o.CancellationToken, value);
             }
 
-            foreach (string value in new[] { "none", "foo {0}", "foo {0} bar {1}", "kaboom {0} {1} {2}" })
+            foreach (
+                string value in new[] { "none", "foo {0}", "foo {0} bar {1}", "kaboom {0} {1} {2}" }
+            )
             {
                 SetAndTest(dbo, (o, v) => o.NameFormat = v, o => o.NameFormat, value);
             }
@@ -91,7 +160,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
             }
         }
 
-        private void SetAndTest<T, TValue>(T source, Action<T, TValue> setter, Func<T, TValue> getter, TValue value)
+        private void SetAndTest<T, TValue>(
+            T source,
+            Action<T, TValue> setter,
+            Func<T, TValue> getter,
+            TValue value
+        )
         {
             setter(source, value);
             Assert.Equal(expected: value, actual: getter(source));

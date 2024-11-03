@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.IO;
 using System.Diagnostics.Tracing;
+using System.IO;
 using System.Threading;
 using Tracing.Tests.Common;
 using Xunit;
@@ -16,10 +16,14 @@ namespace Tracing.Tests
         internal int _enables;
         internal int _disables;
 
-        public EnableDisableEventSource() : base(true) { }
+        public EnableDisableEventSource()
+            : base(true) { }
 
         [Event(1)]
-        internal void TestEvent() { this.WriteEvent(1); }
+        internal void TestEvent()
+        {
+            this.WriteEvent(1);
+        }
 
         [NonEvent]
         protected override void OnEventCommand(EventCommandEventArgs command)
@@ -40,7 +44,7 @@ namespace Tracing.Tests
             }
         }
     }
-    
+
     internal sealed class EnableDisableListener : EventListener
     {
         private EventSource? _target;
@@ -77,13 +81,13 @@ namespace Tracing.Tests
         public static int TestEntryPoint()
         {
             bool pass = false;
-            using(var source = new EnableDisableEventSource())
+            using (var source = new EnableDisableEventSource())
             {
                 // Testing three scenarios:
                 //      listener1 calls EnableEvents but never calls DisableEvents
                 //      listener2 calls EnableEvents and calls DisableEvents outside of Dispose
                 //      listener3 calls EnableEvents and calls DisableEvents inside of Dispose
-                // 
+                //
                 // We should get an Enable and Disable for all of them
                 using (var listener1 = new EnableDisableListener())
                 using (var listener2 = new EnableDisableListener())
@@ -100,7 +104,9 @@ namespace Tracing.Tests
                     return 100;
                 }
 
-                Console.WriteLine($"Unexpected enable/disable count _enables={source._enables} _disables={source._disables}");
+                Console.WriteLine(
+                    $"Unexpected enable/disable count _enables={source._enables} _disables={source._disables}"
+                );
                 return -1;
             }
         }

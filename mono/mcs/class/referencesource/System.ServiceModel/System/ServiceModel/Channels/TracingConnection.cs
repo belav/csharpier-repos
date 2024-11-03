@@ -7,8 +7,8 @@ namespace System.ServiceModel.Channels
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
-    using System.Threading;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Threading;
 
     class TracingConnection : DelegatingConnection
     {
@@ -25,9 +25,9 @@ namespace System.ServiceModel.Channels
         public TracingConnection(IConnection connection, bool inheritCurrentActivity)
             : base(connection)
         {
-            this.activity = inheritCurrentActivity ?
-                ServiceModelActivity.CreateActivity(DiagnosticTraceBase.ActivityId, false) :
-                ServiceModelActivity.CreateActivity();
+            this.activity = inheritCurrentActivity
+                ? ServiceModelActivity.CreateActivity(DiagnosticTraceBase.ActivityId, false)
+                : ServiceModelActivity.CreateActivity();
             Fx.Assert(this.activity != null, "");
             if (DiagnosticUtility.ShouldUseActivity && !inheritCurrentActivity)
             {
@@ -98,7 +98,11 @@ namespace System.ServiceModel.Channels
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
-                ServiceModelActivity.Start(this.activity, SR.GetString(SR.ActivityReceiveBytes, name), ActivityType.ReceiveBytes);
+                ServiceModelActivity.Start(
+                    this.activity,
+                    SR.GetString(SR.ActivityReceiveBytes, name),
+                    ActivityType.ReceiveBytes
+                );
             }
         }
 
@@ -106,11 +110,23 @@ namespace System.ServiceModel.Channels
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
-                ServiceModelActivity.Start(this.activity, SR.GetString(SR.ActivityReceiveBytes, uri.ToString()), ActivityType.ReceiveBytes);
+                ServiceModelActivity.Start(
+                    this.activity,
+                    SR.GetString(SR.ActivityReceiveBytes, uri.ToString()),
+                    ActivityType.ReceiveBytes
+                );
             }
         }
 
-        public override AsyncCompletionResult BeginWrite(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, WaitCallback callback, object state)
+        public override AsyncCompletionResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            WaitCallback callback,
+            object state
+        )
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
@@ -126,7 +142,13 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout)
+        public override void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout
+        )
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
@@ -134,7 +156,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public override void Write(byte[] buffer, int offset, int size, bool immediate, TimeSpan timeout, BufferManager bufferManager)
+        public override void Write(
+            byte[] buffer,
+            int offset,
+            int size,
+            bool immediate,
+            TimeSpan timeout,
+            BufferManager bufferManager
+        )
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
@@ -156,12 +185,28 @@ namespace System.ServiceModel.Channels
             tracingData.ExecuteCallback();
         }
 
-        public override AsyncCompletionResult BeginRead(int offset, int size, TimeSpan timeout, System.Threading.WaitCallback callback, object state)
+        public override AsyncCompletionResult BeginRead(
+            int offset,
+            int size,
+            TimeSpan timeout,
+            System.Threading.WaitCallback callback,
+            object state
+        )
         {
             using (ServiceModelActivity.BoundOperation(this.activity))
             {
-                TracingConnectionState completion = new TracingConnectionState(callback, this.activity, state);
-                return base.BeginRead(offset, size, timeout, TracingConnection.Callback, completion);
+                TracingConnectionState completion = new TracingConnectionState(
+                    callback,
+                    this.activity,
+                    state
+                );
+                return base.BeginRead(
+                    offset,
+                    size,
+                    timeout,
+                    TracingConnection.Callback,
+                    completion
+                );
             }
         }
 
@@ -197,7 +242,11 @@ namespace System.ServiceModel.Channels
             WaitCallback callback;
             ServiceModelActivity activity;
 
-            internal TracingConnectionState(WaitCallback callback, ServiceModelActivity activity, object state)
+            internal TracingConnectionState(
+                WaitCallback callback,
+                ServiceModelActivity activity,
+                object state
+            )
             {
                 this.activity = activity;
                 this.callback = callback;

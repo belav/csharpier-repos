@@ -23,7 +23,8 @@ public static class DeveloperExceptionPageExtensions
     {
         ArgumentNullException.ThrowIfNull(app);
 
-        app.Properties["analysis.NextMiddlewareName"] = "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware";
+        app.Properties["analysis.NextMiddlewareName"] =
+            "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware";
         return app.UseMiddleware<DeveloperExceptionPageMiddlewareImpl>();
     }
 
@@ -38,12 +39,14 @@ public static class DeveloperExceptionPageExtensions
     /// </remarks>
     public static IApplicationBuilder UseDeveloperExceptionPage(
         this IApplicationBuilder app,
-        DeveloperExceptionPageOptions options)
+        DeveloperExceptionPageOptions options
+    )
     {
         ArgumentNullException.ThrowIfNull(app);
         ArgumentNullException.ThrowIfNull(options);
 
-        app.Properties["analysis.NextMiddlewareName"] = "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware";
+        app.Properties["analysis.NextMiddlewareName"] =
+            "Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware";
         return app.UseMiddleware<DeveloperExceptionPageMiddlewareImpl>(Options.Create(options));
     }
 }

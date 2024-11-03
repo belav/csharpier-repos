@@ -4,12 +4,12 @@
 
 namespace System.ServiceModel.Discovery
 {
+    using System.Runtime;
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Description;
     using System.ServiceModel.Dispatcher;
-    using System.Runtime;
-    using System.Xml;        
+    using System.Xml;
 
     [Fx.Tag.XamlVisible(false)]
     public class DynamicEndpoint : ServiceEndpoint
@@ -35,22 +35,21 @@ namespace System.ServiceModel.Discovery
             if (this.ValidateAndInsertDiscoveryClientBindingElement(binding))
             {
                 this.FindCriteria.ContractTypeNames.Add(
-                            new XmlQualifiedName(contract.Name, contract.Namespace));    
+                    new XmlQualifiedName(contract.Name, contract.Namespace)
+                );
             }
             else
-            {                
+            {
                 throw FxTrace.Exception.Argument(
                     "binding",
-                    SR.DiscoveryClientBindingElementPresentInDynamicEndpoint);
+                    SR.DiscoveryClientBindingElementPresentInDynamicEndpoint
+                );
             }
         }
 
         public DiscoveryEndpointProvider DiscoveryEndpointProvider
         {
-            get
-            {
-                return this.discoveryClientBindingElement.DiscoveryEndpointProvider;
-            }
+            get { return this.discoveryClientBindingElement.DiscoveryEndpointProvider; }
             set
             {
                 if (value == null)
@@ -64,10 +63,7 @@ namespace System.ServiceModel.Discovery
 
         public FindCriteria FindCriteria
         {
-            get
-            {
-                return this.discoveryClientBindingElement.FindCriteria;
-            }
+            get { return this.discoveryClientBindingElement.FindCriteria; }
             set
             {
                 if (value == null)
@@ -80,8 +76,8 @@ namespace System.ServiceModel.Discovery
         }
 
         internal bool ValidateAndInsertDiscoveryClientBindingElement(Binding binding)
-        {            
-            CustomBinding customBinding = new CustomBinding(binding);            
+        {
+            CustomBinding customBinding = new CustomBinding(binding);
 
             if (customBinding.Elements.Find<DiscoveryClientBindingElement>() == null)
             {
@@ -92,7 +88,7 @@ namespace System.ServiceModel.Discovery
             else
             {
                 return false;
-            }                      
-        }        
+            }
+        }
     }
 }

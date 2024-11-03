@@ -25,7 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
     /// <summary>
     /// Root type for both document and workspace diagnostic pull requests.
     /// </summary>
-    internal abstract class AbstractPullDiagnosticHandler<TDiagnosticsParams, TReport> : ILspServiceRequestHandler<TDiagnosticsParams, TReport[]?>
+    internal abstract class AbstractPullDiagnosticHandler<TDiagnosticsParams, TReport>
+        : ILspServiceRequestHandler<TDiagnosticsParams, TReport[]?>
         where TReport : VSInternalDiagnosticReport
     {
         private readonly IXamlPullDiagnosticService _xamlDiagnosticService;
@@ -41,7 +42,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
         /// <summary>
         /// Retrieve the previous results we reported.
         /// </summary>
-        protected abstract VSInternalDiagnosticParams[]? GetPreviousResults(TDiagnosticsParams diagnosticsParams);
+        protected abstract VSInternalDiagnosticParams[]? GetPreviousResults(
+            TDiagnosticsParams diagnosticsParams
+        );
 
         /// <summary>
         /// Returns all the documents that should be processed.
@@ -50,16 +53,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
 
         /// <summary>
         /// Creates the <see cref="VSInternalDiagnosticReport"/> instance we'll report back to clients to let them know our
-        /// progress. 
+        /// progress.
         /// </summary>
-        protected abstract TReport CreateReport(TextDocumentIdentifier? identifier, VSDiagnostic[]? diagnostics, string? resultId);
+        protected abstract TReport CreateReport(
+            TextDocumentIdentifier? identifier,
+            VSDiagnostic[]? diagnostics,
+            string? resultId
+        );
 
         protected AbstractPullDiagnosticHandler(IXamlPullDiagnosticService xamlDiagnosticService)
         {
             _xamlDiagnosticService = xamlDiagnosticService;
         }
 
-        public async Task<TReport[]?> HandleRequestAsync(TDiagnosticsParams diagnosticsParams, RequestContext context, CancellationToken cancellationToken)
+        public async Task<TReport[]?> HandleRequestAsync(
+            TDiagnosticsParams diagnosticsParams,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -80,7 +91,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
                         if (document == null)
                         {
                             // We can no longer get this document, return null for both diagnostics and resultId
-                            progress.Report(CreateReport(previousResult.TextDocument, diagnostics: null, resultId: null));
+                            progress.Report(
+                                CreateReport(
+                                    previousResult.TextDocument,
+                                    diagnostics: null,
+                                    resultId: null
+                                )
+                            );
                         }
                         else
                         {
@@ -94,21 +111,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             // Go through the documents that we need to process and call XamlPullDiagnosticService to get the diagnostic report
             foreach (var document in GetDocuments(context))
             {
-                var text = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+                var text = await document
+                    .GetValueTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 var documentId = ProtocolConversions.DocumentToTextDocumentIdentifier(document);
 
-                // If we can get a previousId of the document, use it, 
+                // If we can get a previousId of the document, use it,
                 // otherwise use null as the previousId to pass into the XamlPullDiagnosticService
-                var previousResultId = documentToPreviousResultId.TryGetValue(document, out var id) ? id : null;
+                var previousResultId = documentToPreviousResultId.TryGetValue(document, out var id)
+                    ? id
+                    : null;
 
                 // Call XamlPullDiagnosticService to get the diagnostic report for this document.
                 // We will compute what to report inside XamlPullDiagnosticService, for example, whether we should keep using the previousId or use a new resultId,
                 // and the handler here just return the result get from XamlPullDiagnosticService.
-                var diagnosticReport = await _xamlDiagnosticService.GetDiagnosticReportAsync(document, previousResultId, cancellationToken).ConfigureAwait(false);
-                progress.Report(CreateReport(
-                            documentId,
-                            ConvertToVSDiagnostics(diagnosticReport.Diagnostics, document, text),
-                            diagnosticReport.ResultId));
+                var diagnosticReport = await _xamlDiagnosticService
+                    .GetDiagnosticReportAsync(document, previousResultId, cancellationToken)
+                    .ConfigureAwait(false);
+                progress.Report(
+                    CreateReport(
+                        documentId,
+                        ConvertToVSDiagnostics(diagnosticReport.Diagnostics, document, text),
+                        diagnosticReport.ResultId
+                    )
+                );
             }
 
             return progress.GetFlattenedValues();
@@ -117,7 +143,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
         /// <summary>
         /// Convert XamlDiagnostics to VSDiagnostics
         /// </summary>
-        private static VSDiagnostic[]? ConvertToVSDiagnostics(ImmutableArray<XamlDiagnostic>? xamlDiagnostics, Document document, SourceText text)
+        private static VSDiagnostic[]? ConvertToVSDiagnostics(
+            ImmutableArray<XamlDiagnostic>? xamlDiagnostics,
+            Document document,
+            SourceText text
+        )
         {
             if (xamlDiagnostics == null)
             {
@@ -125,29 +155,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml.Implementation.LanguageSe
             }
 
             var project = document.Project;
-            return xamlDiagnostics.Value.Select(d => new VSDiagnostic()
-            {
-                Code = d.Code,
-                Message = d.Message ?? string.Empty,
-                ExpandedMessage = d.ExtendedMessage,
-                Severity = ConvertDiagnosticSeverity(d.Severity),
-                Range = ProtocolConversions.TextSpanToRange(new TextSpan(d.Offset, d.Length), text),
-                Tags = ConvertTags(d),
-                Source = d.Tool,
-                CodeDescription = ProtocolConversions.HelpLinkToCodeDescription(d.GetHelpLinkUri()),
-                Projects =
-                [
-                    new VSDiagnosticProjectInformation
-                    {
-                        ProjectIdentifier = project.Id.Id.ToString(),
-                        ProjectName = project.Name,
-                    },
-                ],
-            }).ToArray();
+            return xamlDiagnostics
+                .Value.Select(d => new VSDiagnostic()
+                {
+                    Code = d.Code,
+                    Message = d.Message ?? string.Empty,
+                    ExpandedMessage = d.ExtendedMessage,
+                    Severity = ConvertDiagnosticSeverity(d.Severity),
+                    Range = ProtocolConversions.TextSpanToRange(
+                        new TextSpan(d.Offset, d.Length),
+                        text
+                    ),
+                    Tags = ConvertTags(d),
+                    Source = d.Tool,
+                    CodeDescription = ProtocolConversions.HelpLinkToCodeDescription(
+                        d.GetHelpLinkUri()
+                    ),
+                    Projects =
+                    [
+                        new VSDiagnosticProjectInformation
+                        {
+                            ProjectIdentifier = project.Id.Id.ToString(),
+                            ProjectName = project.Name,
+                        },
+                    ],
+                })
+                .ToArray();
         }
 
-        private static LSP.DiagnosticSeverity ConvertDiagnosticSeverity(XamlDiagnosticSeverity severity)
-            => severity switch
+        private static LSP.DiagnosticSeverity ConvertDiagnosticSeverity(
+            XamlDiagnosticSeverity severity
+        ) =>
+            severity switch
             {
                 // Hidden is translated in ConvertTags to pass along appropriate _ms tags
                 // that will hide the item in a client that knows about those tags.

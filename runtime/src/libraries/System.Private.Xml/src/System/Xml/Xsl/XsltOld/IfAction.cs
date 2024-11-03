@@ -14,7 +14,7 @@ namespace System.Xml.Xsl.XsltOld
         {
             ConditionIf,
             ConditionWhen,
-            ConditionOtherwise
+            ConditionOtherwise,
         }
 
         private readonly ConditionType _type;
@@ -80,10 +80,13 @@ namespace System.Xml.Xsl.XsltOld
 
                     processor.PushActionFrame(frame);
                     frame.State = ProcessingChildren;
-                    break;                              // Allow children to run
+                    break; // Allow children to run
 
                 case ProcessingChildren:
-                    if (_type == ConditionType.ConditionWhen || _type == ConditionType.ConditionOtherwise)
+                    if (
+                        _type == ConditionType.ConditionWhen
+                        || _type == ConditionType.ConditionOtherwise
+                    )
                     {
                         Debug.Assert(frame.Container != null);
                         frame.Exit();

@@ -14,25 +14,27 @@ public class WrapperTests
     [InlineData("/1/", 0)]
     [InlineData("/2/", -1)]
     [InlineData("/1/1/", -1)]
-    public void CompareTo_works(string value, int expected)
-        => Assert.Equal(expected, HierarchyId.Parse("/1/").CompareTo(HierarchyId.Parse(value)));
+    public void CompareTo_works(string value, int expected) =>
+        Assert.Equal(expected, HierarchyId.Parse("/1/").CompareTo(HierarchyId.Parse(value)));
 
     [ConditionalTheory]
     [InlineData(null, false)]
     [InlineData("/", false)]
     [InlineData("/1/", true)]
-    public void Equals_works(string value, bool expected)
-        => Assert.Equal(expected, HierarchyId.Parse("/1/").Equals(HierarchyId.Parse(value)));
+    public void Equals_works(string value, bool expected) =>
+        Assert.Equal(expected, HierarchyId.Parse("/1/").Equals(HierarchyId.Parse(value)));
 
     [ConditionalFact]
-    public void GetAncestor_returns_null_when_too_high()
-        => Assert.Null(HierarchyId.Parse("/1/").GetAncestor(2));
+    public void GetAncestor_returns_null_when_too_high() =>
+        Assert.Null(HierarchyId.Parse("/1/").GetAncestor(2));
 
     [ConditionalFact]
-    public void GetReparentedValue_returns_null_when_newRoot_is_null()
-        => Assert.Null(HierarchyId.Parse("/1/").GetReparentedValue(HierarchyId.GetRoot(), newRoot: null));
+    public void GetReparentedValue_returns_null_when_newRoot_is_null() =>
+        Assert.Null(
+            HierarchyId.Parse("/1/").GetReparentedValue(HierarchyId.GetRoot(), newRoot: null)
+        );
 
     [ConditionalFact]
-    public void IsDescendantOf_returns_false_when_parent_is_null()
-        => Assert.False(HierarchyId.Parse("/1/").IsDescendantOf(null));
+    public void IsDescendantOf_returns_false_when_parent_is_null() =>
+        Assert.False(HierarchyId.Parse("/1/").IsDescendantOf(null));
 }

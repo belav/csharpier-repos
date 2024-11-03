@@ -28,20 +28,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", "NSwagClient" },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", outputPath },
             {
-                { "ClassName", "NSwagClient" },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", outputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName=NSwagClient"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName=NSwagClient"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -51,7 +51,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -72,10 +74,10 @@ public class GetOpenApiReferenceMetadataTest
         var @namespace = "Console.Client";
         var outputPath = Path.Combine("obj", $"NSwagClient.cs");
         var inputMetadata = new Dictionary<string, string>
-            {
-                { "CodeGenerator", "NSwagCSharp" },
-                { "ClassName", className },
-            };
+        {
+            { "CodeGenerator", "NSwagCSharp" },
+            { "ClassName", className },
+        };
 
         var task = new GetOpenApiReferenceMetadata
         {
@@ -86,20 +88,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", outputPath },
             {
-                { "ClassName", className },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", outputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName={className}"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -109,7 +111,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -130,10 +134,10 @@ public class GetOpenApiReferenceMetadataTest
         var @namespace = "NotConsole.NotClient";
         var outputPath = Path.Combine("obj", "NSwagClient.cs");
         var inputMetadata = new Dictionary<string, string>
-            {
-                { "CodeGenerator", "NSwagCSharp" },
-                { "Namespace", @namespace },
-            };
+        {
+            { "CodeGenerator", "NSwagCSharp" },
+            { "Namespace", @namespace },
+        };
 
         var task = new GetOpenApiReferenceMetadata
         {
@@ -144,20 +148,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", "NSwagClient" },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", outputPath },
             {
-                { "ClassName", "NSwagClient" },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", outputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName=NSwagClient"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName=NSwagClient"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -167,7 +171,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -188,10 +194,10 @@ public class GetOpenApiReferenceMetadataTest
         var @namespace = "Console.Client";
         var outputPath = Path.Combine(Path.GetTempPath(), $"{className}.cs");
         var inputMetadata = new Dictionary<string, string>
-            {
-                { "CodeGenerator", "NSwagCSharp" },
-                { "OutputPath", outputPath }
-            };
+        {
+            { "CodeGenerator", "NSwagCSharp" },
+            { "OutputPath", outputPath },
+        };
 
         var task = new GetOpenApiReferenceMetadata
         {
@@ -202,20 +208,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", outputPath },
             {
-                { "ClassName", className },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", outputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={outputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName={className}"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -225,7 +231,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -243,18 +251,26 @@ public class GetOpenApiReferenceMetadataTest
         // Arrange
         var identity1 = Path.Combine("TestProjects", "files", "NSwag.json");
         var identity2 = Path.Combine("TestProjects", "files", "swashbuckle.json");
-        var error1 = Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", "OpenApiReference", identity1);
-        var error2 = Resources.FormatInvalidEmptyMetadataValue("CodeGenerator", "OpenApiProjectReference", identity2);
+        var error1 = Resources.FormatInvalidEmptyMetadataValue(
+            "CodeGenerator",
+            "OpenApiReference",
+            identity1
+        );
+        var error2 = Resources.FormatInvalidEmptyMetadataValue(
+            "CodeGenerator",
+            "OpenApiProjectReference",
+            identity2
+        );
         var @namespace = "Console.Client";
         var inputMetadata1 = new Dictionary<string, string>
-            {
-                { "ExtraMetadata", "this is extra" },
-            };
+        {
+            { "ExtraMetadata", "this is extra" },
+        };
         var inputMetadata2 = new Dictionary<string, string>
-            {
-                { "Options", "-quiet" },
-                { "SourceProject", "ConsoleProject.csproj" },
-            };
+        {
+            { "Options", "-quiet" },
+            { "SourceProject", "ConsoleProject.csproj" },
+        };
 
         var buildEngine = new MockBuildEngine();
         var task = new GetOpenApiReferenceMetadata
@@ -263,9 +279,9 @@ public class GetOpenApiReferenceMetadataTest
             Extension = ".cs",
             Inputs = new[]
             {
-                    new TaskItem(identity1, inputMetadata1),
-                    new TaskItem(identity2, inputMetadata2),
-                },
+                new TaskItem(identity1, inputMetadata1),
+                new TaskItem(identity2, inputMetadata2),
+            },
             Namespace = @namespace,
             OutputDirectory = "obj",
         };
@@ -292,15 +308,15 @@ public class GetOpenApiReferenceMetadataTest
         var error = Resources.FormatDuplicateFileOutputPaths(Path.Combine("obj", "NSwagClient.cs"));
         var @namespace = "Console.Client";
         var inputMetadata1 = new Dictionary<string, string>
-            {
-                { "CodeGenerator", codeGenerator },
-                { "ExtraMetadata", "this is extra" },
-            };
+        {
+            { "CodeGenerator", codeGenerator },
+            { "ExtraMetadata", "this is extra" },
+        };
         var inputMetadata2 = new Dictionary<string, string>
-            {
-                { "CodeGenerator", codeGenerator },
-                { "Options", "-quiet" },
-            };
+        {
+            { "CodeGenerator", codeGenerator },
+            { "Options", "-quiet" },
+        };
 
         var buildEngine = new MockBuildEngine();
         var task = new GetOpenApiReferenceMetadata
@@ -309,9 +325,9 @@ public class GetOpenApiReferenceMetadataTest
             Extension = ".cs",
             Inputs = new[]
             {
-                    new TaskItem(identity, inputMetadata1),
-                    new TaskItem(identity, inputMetadata2),
-                },
+                new TaskItem(identity, inputMetadata1),
+                new TaskItem(identity, inputMetadata2),
+            },
             Namespace = @namespace,
             OutputDirectory = "obj",
         };
@@ -338,10 +354,10 @@ public class GetOpenApiReferenceMetadataTest
         var outputPath = $"{className}.cs";
         var expectedOutputPath = Path.Combine("bin", outputPath);
         var inputMetadata = new Dictionary<string, string>
-            {
-                { "CodeGenerator", "NSwagCSharp" },
-                { "OutputPath", outputPath }
-            };
+        {
+            { "CodeGenerator", "NSwagCSharp" },
+            { "OutputPath", outputPath },
+        };
 
         var task = new GetOpenApiReferenceMetadata
         {
@@ -352,20 +368,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", expectedOutputPath },
             {
-                { "ClassName", className },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", expectedOutputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName={className}"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -375,7 +391,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -394,17 +412,20 @@ public class GetOpenApiReferenceMetadataTest
     [InlineData("aa\u2005bb\u2005cc.cs", "aa_bb_cc")] // UnicodeCategory.SpaceSeparator (four-per-em space)
     [InlineData("aa\u0096\u0096bb.cs", "aa__bb")] // UnicodeCategory.Control (start of guarded area)
     [InlineData("aa\uFF1C\uFF1C\uFF1Cbb.cs", "aa___bb")] // UnicodeCategory.MathSymbol (fullwidth less-than sign)
-    public void Execute_SetsClassName_BasedOnSanitizedOutputPath(string outputPath, string className)
+    public void Execute_SetsClassName_BasedOnSanitizedOutputPath(
+        string outputPath,
+        string className
+    )
     {
         // Arrange
         var identity = Path.Combine("TestProjects", "files", "NSwag.json");
         var @namespace = "Console.Client";
         var expectedOutputPath = Path.Combine("bin", outputPath);
         var inputMetadata = new Dictionary<string, string>
-            {
-                { "CodeGenerator", "NSwagCSharp" },
-                { "OutputPath", outputPath }
-            };
+        {
+            { "CodeGenerator", "NSwagCSharp" },
+            { "OutputPath", outputPath },
+        };
 
         var task = new GetOpenApiReferenceMetadata
         {
@@ -415,20 +436,20 @@ public class GetOpenApiReferenceMetadataTest
         };
 
         var expectedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className },
+            { "CodeGenerator", "NSwagCSharp" },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity },
+            { "OutputPath", expectedOutputPath },
             {
-                { "ClassName", className },
-                { "CodeGenerator", "NSwagCSharp" },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity },
-                { "OutputPath", expectedOutputPath },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity}|FirstForGenerator=true|" +
-                    $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity}|ClassName={className}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity}|FirstForGenerator=true|"
+                    + $"CodeGenerator=NSwagCSharp|OutputPath={expectedOutputPath}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity}|ClassName={className}"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -438,7 +459,9 @@ public class GetOpenApiReferenceMetadataTest
         Assert.False(task.Log.HasLoggedErrors);
         var output = Assert.Single(task.Outputs);
         Assert.Equal(identity, output.ItemSpec);
-        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+        var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+            output.CloneCustomMetadata()
+        );
 
         // The dictionary CloneCustomMetadata returns doesn't provide a useful KeyValuePair enumerator.
         var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
@@ -460,9 +483,15 @@ public class GetOpenApiReferenceMetadataTest
         var className3 = "swashbuckleClient";
         var codeGenerator13 = "NSwagCSharp";
         var codeGenerator2 = "NSwagTypeScript";
-        var inputMetadata1 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator13 } };
+        var inputMetadata1 = new Dictionary<string, string>
+        {
+            { "CodeGenerator", codeGenerator13 },
+        };
         var inputMetadata2 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator2 } };
-        var inputMetadata3 = new Dictionary<string, string> { { "CodeGenerator", codeGenerator13 } };
+        var inputMetadata3 = new Dictionary<string, string>
+        {
+            { "CodeGenerator", codeGenerator13 },
+        };
         var @namespace = "Console.Client";
         var outputPath1 = Path.Combine("obj", $"{className12}.cs");
         var outputPath2 = Path.Combine("obj", $"{className12}.ts");
@@ -473,59 +502,59 @@ public class GetOpenApiReferenceMetadataTest
             Extension = ".cs",
             Inputs = new[]
             {
-                    new TaskItem(identity12, inputMetadata1),
-                    new TaskItem(identity12, inputMetadata2),
-                    new TaskItem(identity3, inputMetadata3),
-                },
+                new TaskItem(identity12, inputMetadata1),
+                new TaskItem(identity12, inputMetadata2),
+                new TaskItem(identity3, inputMetadata3),
+            },
             Namespace = @namespace,
             OutputDirectory = "obj",
         };
 
         var expectedMetadata1 = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className12 },
+            { "CodeGenerator", codeGenerator13 },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity12 },
+            { "OutputPath", outputPath1 },
             {
-                { "ClassName", className12 },
-                { "CodeGenerator", codeGenerator13 },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity12 },
-                { "OutputPath", outputPath1 },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity12}|FirstForGenerator=true|" +
-                    $"CodeGenerator={codeGenerator13}|OutputPath={outputPath1}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity12}|ClassName={className12}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity12}|FirstForGenerator=true|"
+                    + $"CodeGenerator={codeGenerator13}|OutputPath={outputPath1}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity12}|ClassName={className12}"
+            },
+        };
         var expectedMetadata2 = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className12 },
+            { "CodeGenerator", codeGenerator2 },
+            { "FirstForGenerator", "true" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity12 },
+            { "OutputPath", outputPath2 },
             {
-                { "ClassName", className12 },
-                { "CodeGenerator", codeGenerator2 },
-                { "FirstForGenerator", "true" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity12 },
-                { "OutputPath", outputPath2 },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity12}|FirstForGenerator=true|" +
-                    $"CodeGenerator={codeGenerator2}|OutputPath={outputPath2}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity12}|ClassName={className12}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity12}|FirstForGenerator=true|"
+                    + $"CodeGenerator={codeGenerator2}|OutputPath={outputPath2}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity12}|ClassName={className12}"
+            },
+        };
         var expectedMetadata3 = new SortedDictionary<string, string>(StringComparer.Ordinal)
+        {
+            { "ClassName", className3 },
+            { "CodeGenerator", codeGenerator13 },
+            { "FirstForGenerator", "false" },
+            { "Namespace", @namespace },
+            { "OriginalItemSpec", identity3 },
+            { "OutputPath", outputPath3 },
             {
-                { "ClassName", className3 },
-                { "CodeGenerator", codeGenerator13 },
-                { "FirstForGenerator", "false" },
-                { "Namespace", @namespace },
-                { "OriginalItemSpec", identity3 },
-                { "OutputPath", outputPath3 },
-                {
-                    "SerializedMetadata",
-                    $"Identity={identity3}|FirstForGenerator=false|" +
-                    $"CodeGenerator={codeGenerator13}|OutputPath={outputPath3}|Namespace={@namespace}|" +
-                    $"OriginalItemSpec={identity3}|ClassName={className3}"
-                },
-            };
+                "SerializedMetadata",
+                $"Identity={identity3}|FirstForGenerator=false|"
+                    + $"CodeGenerator={codeGenerator13}|OutputPath={outputPath3}|Namespace={@namespace}|"
+                    + $"OriginalItemSpec={identity3}|ClassName={className3}"
+            },
+        };
 
         // Act
         var result = task.Execute();
@@ -538,7 +567,9 @@ public class GetOpenApiReferenceMetadataTest
             output =>
             {
                 Assert.Equal(identity12, output.ItemSpec);
-                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                    output.CloneCustomMetadata()
+                );
                 var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
                 foreach (var key in metadata.Keys)
                 {
@@ -550,7 +581,9 @@ public class GetOpenApiReferenceMetadataTest
             output =>
             {
                 Assert.Equal(identity12, output.ItemSpec);
-                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                    output.CloneCustomMetadata()
+                );
                 var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
                 foreach (var key in metadata.Keys)
                 {
@@ -562,7 +595,9 @@ public class GetOpenApiReferenceMetadataTest
             output =>
             {
                 Assert.Equal(identity3, output.ItemSpec);
-                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(output.CloneCustomMetadata());
+                var metadata = Assert.IsAssignableFrom<IDictionary<string, string>>(
+                    output.CloneCustomMetadata()
+                );
                 var orderedMetadata = new SortedDictionary<string, string>(StringComparer.Ordinal);
                 foreach (var key in metadata.Keys)
                 {
@@ -570,6 +605,7 @@ public class GetOpenApiReferenceMetadataTest
                 }
 
                 Assert.Equal(expectedMetadata3, orderedMetadata);
-            });
+            }
+        );
     }
 }

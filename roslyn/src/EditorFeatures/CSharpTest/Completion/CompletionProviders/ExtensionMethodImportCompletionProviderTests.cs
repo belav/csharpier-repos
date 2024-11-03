@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
 {
     [UseExportProvider]
     [Trait(Traits.Feature, Traits.Features.Completion)]
-    public class ExtensionMethodImportCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExtensionMethodImportCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
         public ExtensionMethodImportCompletionProviderTests()
         {
@@ -29,17 +30,19 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             ForceExpandedCompletionIndexCreation = true;
         }
 
-        internal override Type GetCompletionProviderType()
-            => typeof(ExtensionMethodImportCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExtensionMethodImportCompletionProvider);
 
         public enum ReferenceType
         {
             None,
             Project,
-            Metadata
+            Metadata,
         }
 
-        private static IEnumerable<object[]> CombineWithReferenceTypeData(IEnumerable<List<object>> data)
+        private static IEnumerable<object[]> CombineWithReferenceTypeData(
+            IEnumerable<List<object>> data
+        )
         {
             foreach (var refKind in Enum.GetValues(typeof(ReferenceType)))
             {
@@ -51,11 +54,17 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             }
         }
 
-        public static IEnumerable<object[]> ReferenceTypeData
-            => (new[] { ReferenceType.None, ReferenceType.Project, ReferenceType.Metadata }).Select(refType => new[] { (object)refType });
+        public static IEnumerable<object[]> ReferenceTypeData =>
+            (new[] { ReferenceType.None, ReferenceType.Project, ReferenceType.Metadata }).Select(
+                refType => new[] { (object)refType }
+            );
 
-        public static IEnumerable<object[]> AllTypeKindsWithReferenceTypeData
-            => CombineWithReferenceTypeData((new[] { "class", "struct", "interface", "enum", "abstract class" }).Select(kind => new List<object>() { kind }));
+        public static IEnumerable<object[]> AllTypeKindsWithReferenceTypeData =>
+            CombineWithReferenceTypeData(
+                (new[] { "class", "struct", "interface", "enum", "abstract class" }).Select(
+                    kind => new List<object>() { kind }
+                )
+            );
 
         private static IEnumerable<List<object>> BuiltInTypes
         {
@@ -77,25 +86,46 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionPr
             }
         }
 
-        private static string GetMarkup(string current, string referenced, ReferenceType refType,
-                                        string currentLanguage = LanguageNames.CSharp,
-                                        string referencedLanguage = LanguageNames.CSharp)
-            => refType switch
+        private static string GetMarkup(
+            string current,
+            string referenced,
+            ReferenceType refType,
+            string currentLanguage = LanguageNames.CSharp,
+            string referencedLanguage = LanguageNames.CSharp
+        ) =>
+            refType switch
             {
-                ReferenceType.None => CreateMarkupForSingleProject(current, referenced, currentLanguage),
-                ReferenceType.Project => GetMarkupWithReference(current, referenced, currentLanguage, referencedLanguage, true),
-                ReferenceType.Metadata => GetMarkupWithReference(current, referenced, currentLanguage, referencedLanguage, false),
+                ReferenceType.None => CreateMarkupForSingleProject(
+                    current,
+                    referenced,
+                    currentLanguage
+                ),
+                ReferenceType.Project => GetMarkupWithReference(
+                    current,
+                    referenced,
+                    currentLanguage,
+                    referencedLanguage,
+                    true
+                ),
+                ReferenceType.Metadata => GetMarkupWithReference(
+                    current,
+                    referenced,
+                    currentLanguage,
+                    referencedLanguage,
+                    false
+                ),
                 _ => null,
             };
 
-        public static IEnumerable<object[]> BuiltInTypesWithReferenceTypeData
-            => CombineWithReferenceTypeData(BuiltInTypes);
+        public static IEnumerable<object[]> BuiltInTypesWithReferenceTypeData =>
+            CombineWithReferenceTypeData(BuiltInTypes);
 
         [MemberData(nameof(BuiltInTypesWithReferenceTypeData))]
         [Theory]
         public async Task TestPredefinedType(string type1, string type2, ReferenceType refType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 namespace Foo
@@ -106,7 +136,8 @@ namespace Foo
             => true;
     }}
 }}";
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -123,10 +154,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -163,10 +195,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -203,10 +236,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -243,10 +277,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -283,15 +318,18 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
         [Theory]
-        public async Task UsingAliasInDeclaration_RegularTypeWithSameSimpleName(ReferenceType refType)
+        public async Task UsingAliasInDeclaration_RegularTypeWithSameSimpleName(
+            ReferenceType refType
+        )
         {
             var file1 = """
                 using DataTime = System.Exception;
@@ -322,10 +360,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -362,11 +401,12 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 displayTextSuffix: "<>",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                displayTextSuffix: "<>",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -403,17 +443,19 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(AllTypeKindsWithReferenceTypeData))]
         [Theory]
         public async Task RegularType(string typeKind, ReferenceType refType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 public {typeKind} MyType {{ }}
@@ -442,17 +484,19 @@ namespace Foo
                 """;
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(AllTypeKindsWithReferenceTypeData))]
         [Theory]
         public async Task ObjectType(string typeKind, ReferenceType refType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 public {typeKind} MyType {{ }}
@@ -481,25 +525,26 @@ namespace Foo
                 """;
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
-        public static IEnumerable<object[]> TupleWithRefTypeData => CombineWithReferenceTypeData(
-            (new[]
-            {
-                "(int, int)",
-                "(int, (int, int))",
-                "(string a, string b)"
-            }).Select(tuple => new List<object>() { tuple }));
+        public static IEnumerable<object[]> TupleWithRefTypeData =>
+            CombineWithReferenceTypeData(
+                (new[] { "(int, int)", "(int, (int, int))", "(string a, string b)" }).Select(
+                    tuple => new List<object>() { tuple }
+                )
+            );
 
         [MemberData(nameof(TupleWithRefTypeData))]
         [Theory]
         public async Task ValueTupleType(string tupleType, ReferenceType refType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 namespace Foo
@@ -510,7 +555,8 @@ namespace Foo
             => true;
     }}
 }}";
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -525,20 +571,27 @@ namespace Baz
 }}";
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
-        public static IEnumerable<object[]> DerivableTypeKindsWithReferenceTypeData
-            => CombineWithReferenceTypeData((new[] { "class", "interface", "abstract class" }).Select(kind => new List<object>() { kind }));
+        public static IEnumerable<object[]> DerivableTypeKindsWithReferenceTypeData =>
+            CombineWithReferenceTypeData(
+                (new[] { "class", "interface", "abstract class" }).Select(kind => new List<object>()
+                {
+                    kind,
+                })
+            );
 
         [MemberData(nameof(DerivableTypeKindsWithReferenceTypeData))]
         [Theory]
         public async Task RegularTypeAsBase(string baseType, ReferenceType refType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 public {baseType} MyBase {{ }}
@@ -569,19 +622,19 @@ namespace Foo
                 """;
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
-        public static IEnumerable<object[]> BounedGenericTypeWithRefTypeData => CombineWithReferenceTypeData(
-            (new[]
-            {
-                "IEnumerable<string>",
-                "List<string>",
-                "string[]"
-            }).Select(tuple => new List<object>() { tuple }));
+        public static IEnumerable<object[]> BounedGenericTypeWithRefTypeData =>
+            CombineWithReferenceTypeData(
+                (new[] { "IEnumerable<string>", "List<string>", "string[]" }).Select(
+                    tuple => new List<object>() { tuple }
+                )
+            );
 
         [MemberData(nameof(BounedGenericTypeWithRefTypeData))]
         [Theory]
@@ -600,7 +653,8 @@ namespace Foo
                     }
                 }
                 """;
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -616,19 +670,19 @@ namespace Baz
 }}";
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
-        public static IEnumerable<object[]> TypeParameterWithRefTypeData => CombineWithReferenceTypeData(
-            (new[]
-            {
-                "IEnumerable<string>",
-                "int",
-                "Bat",
-                "Bat"
-            }).Select(tuple => new List<object>() { tuple }));
+
+        public static IEnumerable<object[]> TypeParameterWithRefTypeData =>
+            CombineWithReferenceTypeData(
+                (new[] { "IEnumerable<string>", "int", "Bat", "Bat" }).Select(
+                    tuple => new List<object>() { tuple }
+                )
+            );
 
         [MemberData(nameof(TypeParameterWithRefTypeData))]
         [Theory]
@@ -646,7 +700,8 @@ namespace Baz
                     }
                 }
                 """;
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 using System.Collections.Generic;
 
@@ -664,11 +719,12 @@ namespace Baz
 }}";
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 displayTextSuffix: "<>",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                displayTextSuffix: "<>",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -705,9 +761,10 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemIsAbsentAsync(
-                 markup,
-                 "ExtentionMethod",
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                inlineDescription: "Foo"
+            );
         }
 
         [Fact]
@@ -742,10 +799,11 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, ReferenceType.None);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodInternal,     // This is based on declared accessibility
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodInternal, // This is based on declared accessibility
+                inlineDescription: "Foo"
+            );
         }
 
         // SymbolTreeInfo explicitly ignores non-public types from metadata(likely for perf reasons). So we don't need to test internals in PE reference
@@ -781,10 +839,11 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, refType);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodInternal,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodInternal,
+                inlineDescription: "Foo"
+            );
         }
 
         [MemberData(nameof(ReferenceTypeData))]
@@ -824,10 +883,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, refType);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData("(1 + 1)")]
@@ -847,7 +907,8 @@ namespace Baz
                     }
                 }
                 """;
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -863,10 +924,11 @@ namespace Baz
             var markup = GetMarkup(file2, file1, ReferenceType.None);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         public static IEnumerable<object[]> VBBuiltInTypes
@@ -875,24 +937,32 @@ namespace Baz
             {
                 var predefinedTypes = new List<(string vbType, string csType)>
                 {
-                    ( "Boolean", "bool" ),
-                    ( "Byte", "byte" ),
-                    ( "Char", "char" ),
-                    ( "Date", "DateTime" ),
-                    ( "Integer", "int" ),
-                    ( "String", "string" ),
-                    ( "Object", "object" ),
-                    ( "Short", "short" ),
-
+                    ("Boolean", "bool"),
+                    ("Byte", "byte"),
+                    ("Char", "char"),
+                    ("Date", "DateTime"),
+                    ("Integer", "int"),
+                    ("String", "string"),
+                    ("Object", "object"),
+                    ("Short", "short"),
                 };
 
-                var arraySuffixes = new (string vbSuffix, string csSuffix)[] { ("", ""), ("()", "[]"), ("(,)", "[,]") };
+                var arraySuffixes = new (string vbSuffix, string csSuffix)[]
+                {
+                    ("", ""),
+                    ("()", "[]"),
+                    ("(,)", "[,]"),
+                };
 
                 foreach (var type in predefinedTypes)
                 {
                     foreach (var suffix in arraySuffixes)
                     {
-                        yield return new object[] { type.vbType + suffix.vbSuffix, type.csType + suffix.csSuffix };
+                        yield return new object[]
+                        {
+                            type.vbType + suffix.vbSuffix,
+                            type.csType + suffix.csSuffix,
+                        };
                     }
                 }
             }
@@ -902,7 +972,8 @@ namespace Baz
         [Theory]
         public async Task ExtensionMethodDelcaredInVBSource(string vbType, string csType)
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 Imports System
 Imports System.Runtime.CompilerServices
 
@@ -914,7 +985,8 @@ Namespace NS
         End Function
     End Module
 End Namespace";
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -927,13 +999,20 @@ namespace Baz
         }}
     }}
 }}";
-            var markup = GetMarkup(file2, file1, ReferenceType.Project, currentLanguage: LanguageNames.CSharp, referencedLanguage: LanguageNames.VisualBasic);
+            var markup = GetMarkup(
+                file2,
+                file1,
+                ReferenceType.Project,
+                currentLanguage: LanguageNames.CSharp,
+                referencedLanguage: LanguageNames.VisualBasic
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "NS");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "NS"
+            );
         }
 
         [Fact]
@@ -964,13 +1043,19 @@ namespace Baz
                     }
                 }
                 """;
-            var markup = CreateMarkupForProjecWithVBProjectReference(file2, file1, sourceLanguage: LanguageNames.CSharp, rootNamespace: "Root");
+            var markup = CreateMarkupForProjecWithVBProjectReference(
+                file2,
+                file1,
+                sourceLanguage: LanguageNames.CSharp,
+                rootNamespace: "Root"
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Root");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Root"
+            );
         }
 
         [Fact]
@@ -1001,12 +1086,13 @@ namespace Baz
                     }
                 }
                 """;
-            var markup = CreateMarkupForProjecWithVBProjectReference(file2, file1, sourceLanguage: LanguageNames.CSharp);
+            var markup = CreateMarkupForProjecWithVBProjectReference(
+                file2,
+                file1,
+                sourceLanguage: LanguageNames.CSharp
+            );
 
-            await VerifyImportItemIsAbsentAsync(
-                 markup,
-                 "ExtentionMethod",
-                 inlineDescription: "");
+            await VerifyImportItemIsAbsentAsync(markup, "ExtentionMethod", inlineDescription: "");
         }
 
         [Fact]
@@ -1042,16 +1128,21 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, ReferenceType.None);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod",
-                 glyph: (int)Glyph.ExtensionMethodInternal,     // This is based on declared accessibility
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod",
+                glyph: (int)Glyph.ExtensionMethodInternal, // This is based on declared accessibility
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData("int", "Int32Method", "Foo")]
         [InlineData("string", "StringMethod", "Bar")]
         [Theory]
-        public async Task TestIdenticalAliases(string type, string expectedMethodname, string expectedNamespace)
+        public async Task TestIdenticalAliases(
+            string type,
+            string expectedMethodname,
+            string expectedNamespace
+        )
         {
             var file1 = """
                 using X = System.String;
@@ -1076,7 +1167,8 @@ namespace Baz
                     }
                 }
                 """;
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -1092,10 +1184,11 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, ReferenceType.None);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 expectedMethodname,
-                 glyph: (int)Glyph.ExtensionMethodInternal,
-                 inlineDescription: expectedNamespace);
+                markup,
+                expectedMethodname,
+                glyph: (int)Glyph.ExtensionMethodInternal,
+                inlineDescription: expectedNamespace
+            );
         }
 
         [InlineData("int")]
@@ -1118,7 +1211,8 @@ namespace Baz
                     }
                 }
                 """;
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -1134,10 +1228,11 @@ namespace Baz
 
             var markup = GetMarkup(file2, file1, ReferenceType.None);
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtMethod",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtMethod",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [Fact]
@@ -1170,10 +1265,7 @@ namespace Baz
                 }
                 """;
             var markup = GetMarkup(file2, file1, ReferenceType.None);
-            await VerifyImportItemIsAbsentAsync(
-                 markup,
-                 "ExtMethod",
-                 inlineDescription: "Foo");
+            await VerifyImportItemIsAbsentAsync(markup, "ExtMethod", inlineDescription: "Foo");
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42325")]
@@ -1218,25 +1310,31 @@ namespace Baz
             var markup = CreateMarkupForSingleProject(currentFile, file1, LanguageNames.CSharp);
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod1",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod1",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod2",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod2",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData(ReferenceType.Project, "public")]
         [InlineData(ReferenceType.Project, "internal")]
-        [InlineData(ReferenceType.Metadata, "public")]  // We don't support internal extension method from non-source references.
+        [InlineData(ReferenceType.Metadata, "public")] // We don't support internal extension method from non-source references.
         [Theory, WorkItem("https://github.com/dotnet/roslyn/issues/42325")]
-        public async Task TestExtensionMethodsInConflictingTypes(ReferenceType refType, string accessibility)
+        public async Task TestExtensionMethodsInConflictingTypes(
+            ReferenceType refType,
+            string accessibility
+        )
         {
-            var refDoc = $@"
+            var refDoc =
+                $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
 
 namespace Foo
@@ -1273,22 +1371,34 @@ namespace Foo
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod1",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod1",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod2",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod2",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/42325")]
@@ -1333,28 +1443,40 @@ namespace Foo
                 }
                 """;
 
-            var markup = CreateMarkupForProjectWithMultupleProjectReferences(srcDoc, LanguageNames.CSharp, LanguageNames.CSharp, [refDoc1, refDoc2]);
+            var markup = CreateMarkupForProjectWithMultupleProjectReferences(
+                srcDoc,
+                LanguageNames.CSharp,
+                LanguageNames.CSharp,
+                [refDoc1, refDoc2]
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod1",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod1",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 "ExtentionMethod2",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                "ExtentionMethod2",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData("", "", false)]
         [InlineData("", "public", true)]
         [InlineData("public", "", false)]
         [Theory]
-        public async Task TestCSharpDefaultAccessibility(string containerAccessibility, string methodAccessibility, bool isAvailable)
+        public async Task TestCSharpDefaultAccessibility(
+            string containerAccessibility,
+            string methodAccessibility,
+            bool isAvailable
+        )
         {
-            var file1 = $@"
+            var file1 =
+                $@"
 using System;
 
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
@@ -1367,7 +1489,8 @@ namespace Foo
             => true;
     }}
 }}";
-            var file2 = $@"
+            var file2 =
+                $@"
 using System;
 
 namespace Baz
@@ -1381,22 +1504,30 @@ namespace Baz
     }}
 }}";
 
-            var markup = GetMarkupWithReference(file2, file1, LanguageNames.CSharp, LanguageNames.CSharp, isProjectReference: true);
+            var markup = GetMarkupWithReference(
+                file2,
+                file1,
+                LanguageNames.CSharp,
+                LanguageNames.CSharp,
+                isProjectReference: true
+            );
 
             if (isAvailable)
             {
                 await VerifyImportItemExistsAsync(
-                     markup,
-                     "ExtentionMethod",
-                     glyph: (int)Glyph.ExtensionMethodPublic,
-                     inlineDescription: "Foo");
+                    markup,
+                    "ExtentionMethod",
+                    glyph: (int)Glyph.ExtensionMethodPublic,
+                    inlineDescription: "Foo"
+                );
             }
             else
             {
                 await VerifyImportItemIsAbsentAsync(
-                     markup,
-                     "ExtentionMethod",
-                     inlineDescription: "Foo");
+                    markup,
+                    "ExtentionMethod",
+                    inlineDescription: "Foo"
+                );
             }
         }
 
@@ -1409,9 +1540,14 @@ namespace Baz
         [InlineData(ReferenceType.Metadata, "[,]", "ExtentionMethod4")]
         [InlineData(ReferenceType.Metadata, "[][,]", "ExtentionMethod5")]
         [Theory]
-        public async Task TestExtensionMethodsForSimpleArrayType(ReferenceType refType, string rank, string expectedName)
+        public async Task TestExtensionMethodsForSimpleArrayType(
+            ReferenceType refType,
+            string rank,
+            string expectedName
+        )
         {
-            var refDoc = $@"
+            var refDoc =
+                $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
 
 namespace Foo
@@ -1434,7 +1570,8 @@ namespace Foo
             => true;
     }}
 }}";
-            var srcDoc = $@"
+            var srcDoc =
+                $@"
 namespace Baz
 {{
     public class Bat
@@ -1448,16 +1585,27 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 expectedName,
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                expectedName,
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData(ReferenceType.Project, "[]", "ExtentionMethod2")]
@@ -1469,9 +1617,14 @@ namespace Baz
         [InlineData(ReferenceType.Metadata, "[,]", "ExtentionMethod4")]
         [InlineData(ReferenceType.Metadata, "[][,]", "ExtentionMethod5")]
         [Theory]
-        public async Task TestExtensionMethodsForGenericArrayType(ReferenceType refType, string rank, string expectedName)
+        public async Task TestExtensionMethodsForGenericArrayType(
+            ReferenceType refType,
+            string rank,
+            string expectedName
+        )
         {
-            var refDoc = $@"
+            var refDoc =
+                $@"
 [assembly: System.Runtime.CompilerServices.InternalsVisibleTo(""Project1"")]
 
 namespace Foo
@@ -1494,7 +1647,8 @@ namespace Foo
             => true;
     }}
 }}";
-            var srcDoc = $@"
+            var srcDoc =
+                $@"
 namespace Baz
 {{
     public class Bat
@@ -1508,17 +1662,28 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
             await VerifyImportItemExistsAsync(
-                 markup,
-                 expectedName,
-                 displayTextSuffix: "<>",
-                 glyph: (int)Glyph.ExtensionMethodPublic,
-                 inlineDescription: "Foo");
+                markup,
+                expectedName,
+                displayTextSuffix: "<>",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -1557,8 +1722,18 @@ namespace Baz
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
@@ -1566,17 +1741,19 @@ namespace Baz
                 markup,
                 "ExtentionMethod",
                 glyph: (int)Glyph.ExtensionMethodPublic,
-                inlineDescription: "NS2");
+                inlineDescription: "NS2"
+            );
         }
 
         [InlineData(ReferenceType.Project, "(int,int)")]
-        [InlineData(ReferenceType.Project, "(int,int,int,int,int,int,int,int,int,int)")]    // more than 8 tuple elements
+        [InlineData(ReferenceType.Project, "(int,int,int,int,int,int,int,int,int,int)")] // more than 8 tuple elements
         [InlineData(ReferenceType.Metadata, "(int,int)")]
-        [InlineData(ReferenceType.Metadata, "(int,int,int,int,int,int,int,int,int,int)")]   // more than 8 tuple elements
+        [InlineData(ReferenceType.Metadata, "(int,int,int,int,int,int,int,int,int,int)")] // more than 8 tuple elements
         [Theory]
         public async Task TestTupleArray(ReferenceType refType, string tupleType)
         {
-            var refDoc = $@"
+            var refDoc =
+                $@"
 using System;
 
 namespace NS2
@@ -1586,7 +1763,8 @@ namespace NS2
         public static bool ExtentionMethod(this {tupleType}[] x) => false;
     }}
 }}";
-            var srcDoc = $@"
+            var srcDoc =
+                $@"
 namespace NS1
 {{
     public class C
@@ -1600,8 +1778,18 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
@@ -1609,17 +1797,25 @@ namespace NS1
                 markup,
                 "ExtentionMethod",
                 glyph: (int)Glyph.ExtensionMethodPublic,
-                inlineDescription: "NS2");
+                inlineDescription: "NS2"
+            );
         }
 
         [InlineData(ReferenceType.Project, "(int[],int[])")]
-        [InlineData(ReferenceType.Project, "(int[],int[],int[],int[],int[],int[],int[],int[],int[],int[])")] // more than 8 tuple elements
+        [InlineData(
+            ReferenceType.Project,
+            "(int[],int[],int[],int[],int[],int[],int[],int[],int[],int[])"
+        )] // more than 8 tuple elements
         [InlineData(ReferenceType.Metadata, "(int[],int[])")]
-        [InlineData(ReferenceType.Metadata, "(int[],int[],int[],int[],int[],int[],int[],int[],int[],int[])")] // more than 8 tuple elements
+        [InlineData(
+            ReferenceType.Metadata,
+            "(int[],int[],int[],int[],int[],int[],int[],int[],int[],int[])"
+        )] // more than 8 tuple elements
         [Theory]
         public async Task TestArrayTuple(ReferenceType refType, string tupleType)
         {
-            var refDoc = $@"
+            var refDoc =
+                $@"
 using System;
 
 namespace NS2
@@ -1629,7 +1825,8 @@ namespace NS2
         public static bool ExtentionMethod(this {tupleType} x) => false;
     }}
 }}";
-            var srcDoc = $@"
+            var srcDoc =
+                $@"
 namespace NS1
 {{
     public class C
@@ -1643,8 +1840,18 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
@@ -1652,7 +1859,8 @@ namespace NS1
                 markup,
                 "ExtentionMethod",
                 glyph: (int)Glyph.ExtensionMethodPublic,
-                inlineDescription: "NS2");
+                inlineDescription: "NS2"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -1686,8 +1894,18 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
@@ -1697,7 +1915,8 @@ namespace NS1
                 displayTextSuffix: "<>",
                 glyph: (int)Glyph.ExtensionMethodPublic,
                 inlineDescription: "NS2",
-                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod<int>()");
+                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod<int>()"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -1736,8 +1955,18 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
@@ -1746,7 +1975,8 @@ namespace NS1
                 "ExtentionMethod",
                 glyph: (int)Glyph.ExtensionMethodPublic,
                 inlineDescription: "NS2",
-                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod() (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.overloads_})");
+                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod() (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.overloads_})"
+            );
 
             await VerifyImportItemExistsAsync(
                 markup,
@@ -1754,7 +1984,8 @@ namespace NS1
                 displayTextSuffix: "<>",
                 glyph: (int)Glyph.ExtensionMethodPublic,
                 inlineDescription: "NS2",
-                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod<T>(T a) (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.generic_overloads})");
+                expectedDescriptionOrNull: $"({CSharpFeaturesResources.extension}) bool int.ExtentionMethod<T>(T a) (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.generic_overloads})"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -1791,16 +2022,27 @@ namespace NS1
 
             var markup = refType switch
             {
-                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
-                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp),
+                ReferenceType.Project => CreateMarkupForProjectWithProjectReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
+                ReferenceType.Metadata => CreateMarkupForProjectWithMetadataReference(
+                    srcDoc,
+                    refDoc,
+                    LanguageNames.CSharp,
+                    LanguageNames.CSharp
+                ),
                 _ => null,
             };
 
             await VerifyImportItemExistsAsync(
-                    markup,
-                    "Bar",
-                    glyph: (int)Glyph.ExtensionMethodPublic,
-                    inlineDescription: "Foo");
+                markup,
+                "Bar",
+                glyph: (int)Glyph.ExtensionMethodPublic,
+                inlineDescription: "Foo"
+            );
         }
 
         [InlineData(ReferenceType.Project)]
@@ -1837,25 +2079,39 @@ namespace NS1
 
             var (markup, shouldContainItem) = refType switch
             {
-                ReferenceType.Project => (CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp), true),
-                ReferenceType.Metadata => (CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp), false),
+                ReferenceType.Project => (
+                    CreateMarkupForProjectWithProjectReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    true
+                ),
+                ReferenceType.Metadata => (
+                    CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    false
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
             if (shouldContainItem)
             {
                 await VerifyImportItemExistsAsync(
-                        markup,
-                        "Bar",
-                        glyph: (int)Glyph.ExtensionMethodPublic,
-                        inlineDescription: "Foo");
+                    markup,
+                    "Bar",
+                    glyph: (int)Glyph.ExtensionMethodPublic,
+                    inlineDescription: "Foo"
+                );
             }
             else
             {
-                await VerifyImportItemIsAbsentAsync(
-                        markup,
-                        "Bar",
-                        inlineDescription: "Foo");
+                await VerifyImportItemIsAbsentAsync(markup, "Bar", inlineDescription: "Foo");
             }
         }
 
@@ -1897,26 +2153,48 @@ namespace NS1
 
             var (markup, shouldContainItem) = (refType, hideAdvanced) switch
             {
-                (ReferenceType.Project, _) => (CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp), true),
-                (ReferenceType.Metadata, true) => (CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp), false),
-                (ReferenceType.Metadata, false) => (CreateMarkupForProjectWithMetadataReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp), true),
+                (ReferenceType.Project, _) => (
+                    CreateMarkupForProjectWithProjectReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    true
+                ),
+                (ReferenceType.Metadata, true) => (
+                    CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    false
+                ),
+                (ReferenceType.Metadata, false) => (
+                    CreateMarkupForProjectWithMetadataReference(
+                        srcDoc,
+                        refDoc,
+                        LanguageNames.CSharp,
+                        LanguageNames.CSharp
+                    ),
+                    true
+                ),
                 _ => throw ExceptionUtilities.Unreachable(),
             };
 
             if (shouldContainItem)
             {
                 await VerifyImportItemExistsAsync(
-                        markup,
-                        "Bar",
-                        glyph: (int)Glyph.ExtensionMethodPublic,
-                        inlineDescription: "Foo");
+                    markup,
+                    "Bar",
+                    glyph: (int)Glyph.ExtensionMethodPublic,
+                    inlineDescription: "Foo"
+                );
             }
             else
             {
-                await VerifyImportItemIsAbsentAsync(
-                        markup,
-                        "Bar",
-                        inlineDescription: "Foo");
+                await VerifyImportItemIsAbsentAsync(markup, "Bar", inlineDescription: "Foo");
             }
         }
 
@@ -1952,40 +2230,50 @@ namespace NS1
                 """;
 
             var expected = $$"""
-            using AA;
+                using AA;
 
-            public class C
-            {
-            }
-            namespace AA
-            {
-                public static class Ext
+                public class C
                 {
-                    public static int ToInt(this C c)
-                        => 1;
                 }
-            }
-
-            namespace BB
-            {
-                public class B
+                namespace AA
                 {
-                    public void M()
+                    public static class Ext
                     {
-                        var c = new C();
-                        c.ToInt(){{commitChar}}
+                        public static int ToInt(this C c)
+                            => 1;
                     }
                 }
-            }
-            """;
-            await VerifyProviderCommitAsync(markup, "ToInt", expected, commitChar: commitChar, sourceCodeKind: SourceCodeKind.Regular);
+
+                namespace BB
+                {
+                    public class B
+                    {
+                        public void M()
+                        {
+                            var c = new C();
+                            c.ToInt(){{commitChar}}
+                        }
+                    }
+                }
+                """;
+            await VerifyProviderCommitAsync(
+                markup,
+                "ToInt",
+                expected,
+                commitChar: commitChar,
+                sourceCodeKind: SourceCodeKind.Regular
+            );
         }
 
         [InlineData("int", true, "int a")]
         [InlineData("int[]", true, "int a, int b")]
         [InlineData("bool", false, null)]
         [Theory]
-        public async Task TestTargetTypedCompletion(string targetType, bool matchTargetType, string expectedParameterList)
+        public async Task TestTargetTypedCompletion(
+            string targetType,
+            bool matchTargetType,
+            string expectedParameterList
+        )
         {
             var refDoc = """
                 using System;
@@ -2000,7 +2288,8 @@ namespace NS1
                     }
                 }
                 """;
-            var srcDoc = $@"
+            var srcDoc =
+                $@"
 namespace NS1
 {{
     public class C
@@ -2013,18 +2302,21 @@ namespace NS1
 }}";
 
             ShowTargetTypedCompletionFilter = true;
-            var markup = CreateMarkupForProjectWithProjectReference(srcDoc, refDoc, LanguageNames.CSharp, LanguageNames.CSharp);
+            var markup = CreateMarkupForProjectWithProjectReference(
+                srcDoc,
+                refDoc,
+                LanguageNames.CSharp,
+                LanguageNames.CSharp
+            );
 
             string expectedDescription = null;
-            var expectedFilters = new List<CompletionFilter>()
-            {
-                FilterSet.ExtensionMethodFilter
-            };
+            var expectedFilters = new List<CompletionFilter>() { FilterSet.ExtensionMethodFilter };
 
             if (matchTargetType)
             {
                 expectedFilters.Add(FilterSet.TargetTypedFilter);
-                expectedDescription = $"({CSharpFeaturesResources.extension}) {targetType} int.ExtentionMethod({expectedParameterList}) (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.overloads_})";
+                expectedDescription =
+                    $"({CSharpFeaturesResources.extension}) {targetType} int.ExtentionMethod({expectedParameterList}) (+{NonBreakingSpaceString}2{NonBreakingSpaceString}{FeaturesResources.overloads_})";
             }
 
             await VerifyImportItemExistsAsync(
@@ -2032,13 +2324,41 @@ namespace NS1
                 "ExtentionMethod",
                 expectedFilters: expectedFilters,
                 inlineDescription: "NS2",
-                expectedDescriptionOrNull: expectedDescription);
+                expectedDescriptionOrNull: expectedDescription
+            );
         }
 
-        private Task VerifyImportItemExistsAsync(string markup, string expectedItem, string inlineDescription, int? glyph = null, string displayTextSuffix = null, string expectedDescriptionOrNull = null, List<CompletionFilter> expectedFilters = null)
-            => VerifyItemExistsAsync(markup, expectedItem, displayTextSuffix: displayTextSuffix, glyph: glyph, inlineDescription: inlineDescription, expectedDescriptionOrNull: expectedDescriptionOrNull, isComplexTextEdit: true, matchingFilters: expectedFilters);
+        private Task VerifyImportItemExistsAsync(
+            string markup,
+            string expectedItem,
+            string inlineDescription,
+            int? glyph = null,
+            string displayTextSuffix = null,
+            string expectedDescriptionOrNull = null,
+            List<CompletionFilter> expectedFilters = null
+        ) =>
+            VerifyItemExistsAsync(
+                markup,
+                expectedItem,
+                displayTextSuffix: displayTextSuffix,
+                glyph: glyph,
+                inlineDescription: inlineDescription,
+                expectedDescriptionOrNull: expectedDescriptionOrNull,
+                isComplexTextEdit: true,
+                matchingFilters: expectedFilters
+            );
 
-        private Task VerifyImportItemIsAbsentAsync(string markup, string expectedItem, string inlineDescription, string displayTextSuffix = null)
-            => VerifyItemIsAbsentAsync(markup, expectedItem, displayTextSuffix: displayTextSuffix, inlineDescription: inlineDescription);
+        private Task VerifyImportItemIsAbsentAsync(
+            string markup,
+            string expectedItem,
+            string inlineDescription,
+            string displayTextSuffix = null
+        ) =>
+            VerifyItemIsAbsentAsync(
+                markup,
+                expectedItem,
+                displayTextSuffix: displayTextSuffix,
+                inlineDescription: inlineDescription
+            );
     }
 }

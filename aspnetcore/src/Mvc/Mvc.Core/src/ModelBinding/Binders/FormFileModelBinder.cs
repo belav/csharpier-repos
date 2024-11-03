@@ -38,7 +38,10 @@ public partial class FormFileModelBinder : IModelBinder
         _logger.AttemptingToBindModel(bindingContext);
 
         var createFileCollection = bindingContext.ModelType == typeof(IFormFileCollection);
-        if (!createFileCollection && !ModelBindingHelper.CanGetCompatibleCollection<IFormFile>(bindingContext))
+        if (
+            !createFileCollection
+            && !ModelBindingHelper.CanGetCompatibleCollection<IFormFile>(bindingContext)
+        )
         {
             // Silently fail if unable to create an instance or use the current instance.
             return;
@@ -66,13 +69,24 @@ public partial class FormFileModelBinder : IModelBinder
         // If ParameterBinder incorrectly overrode ModelName, fall back to OriginalModelName prefix. Comparisons
         // are tedious because e.g. top-level parameter or property is named Blah and it contains a BlahBlah
         // property. OriginalModelName may be null in tests.
-        if (postedFiles.Count == 0 &&
-            bindingContext.OriginalModelName != null &&
-            !string.Equals(modelName, bindingContext.OriginalModelName, StringComparison.Ordinal) &&
-            !modelName.StartsWith(bindingContext.OriginalModelName + "[", StringComparison.Ordinal) &&
-            !modelName.StartsWith(bindingContext.OriginalModelName + ".", StringComparison.Ordinal))
+        if (
+            postedFiles.Count == 0
+            && bindingContext.OriginalModelName != null
+            && !string.Equals(modelName, bindingContext.OriginalModelName, StringComparison.Ordinal)
+            && !modelName.StartsWith(
+                bindingContext.OriginalModelName + "[",
+                StringComparison.Ordinal
+            )
+            && !modelName.StartsWith(
+                bindingContext.OriginalModelName + ".",
+                StringComparison.Ordinal
+            )
+        )
         {
-            modelName = ModelNames.CreatePropertyModelName(bindingContext.OriginalModelName, modelName);
+            modelName = ModelNames.CreatePropertyModelName(
+                bindingContext.OriginalModelName,
+                modelName
+            );
             await GetFormFilesAsync(modelName, bindingContext, postedFiles);
         }
 
@@ -118,15 +132,9 @@ public partial class FormFileModelBinder : IModelBinder
 
         // We need to add a ValidationState entry because the modelName might be non-standard. Otherwise
         // the entry we create in model state might not be marked as valid.
-        bindingContext.ValidationState.Add(value, new ValidationStateEntry()
-        {
-            Key = modelName,
-        });
+        bindingContext.ValidationState.Add(value, new ValidationStateEntry() { Key = modelName });
 
-        bindingContext.ModelState.SetModelValue(
-            modelName,
-            rawValue: null,
-            attemptedValue: null);
+        bindingContext.ModelState.SetModelValue(modelName, rawValue: null, attemptedValue: null);
 
         bindingContext.Result = ModelBindingResult.Success(value);
         _logger.DoneAttemptingToBindModel(bindingContext);
@@ -135,7 +143,8 @@ public partial class FormFileModelBinder : IModelBinder
     private async Task GetFormFilesAsync(
         string modelName,
         ModelBindingContext bindingContext,
-        ICollection<IFormFile> postedFiles)
+        ICollection<IFormFile> postedFiles
+    )
     {
         var request = bindingContext.HttpContext.Request;
         if (request.HasFormContentType)
@@ -170,9 +179,7 @@ public partial class FormFileModelBinder : IModelBinder
     private sealed class FileCollection : ReadOnlyCollection<IFormFile>, IFormFileCollection
     {
         public FileCollection(List<IFormFile> list)
-            : base(list)
-        {
-        }
+            : base(list) { }
 
         public IFormFile? this[string name] => GetFile(name);
 
@@ -208,7 +215,12 @@ public partial class FormFileModelBinder : IModelBinder
 
     private static partial class Log
     {
-        [LoggerMessage(21, LogLevel.Debug, "No files found in the request to bind the model to.", EventName = "NoFilesFoundInRequest")]
+        [LoggerMessage(
+            21,
+            LogLevel.Debug,
+            "No files found in the request to bind the model to.",
+            EventName = "NoFilesFoundInRequest"
+        )]
         public static partial void NoFilesFoundInRequest(ILogger logger);
     }
 }

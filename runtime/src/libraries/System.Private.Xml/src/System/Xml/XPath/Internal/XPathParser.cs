@@ -102,9 +102,10 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    _scanner.Kind == XPathScanner.LexKind.Eq ? Operator.Op.EQ :
-                    _scanner.Kind == XPathScanner.LexKind.Ne ? Operator.Op.NE :
-                    /*default :*/                                  Operator.Op.INVALID
+                    _scanner.Kind == XPathScanner.LexKind.Eq ? Operator.Op.EQ
+                    : _scanner.Kind == XPathScanner.LexKind.Ne ? Operator.Op.NE
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -124,11 +125,12 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    _scanner.Kind == XPathScanner.LexKind.Lt ? Operator.Op.LT :
-                    _scanner.Kind == XPathScanner.LexKind.Le ? Operator.Op.LE :
-                    _scanner.Kind == XPathScanner.LexKind.Gt ? Operator.Op.GT :
-                    _scanner.Kind == XPathScanner.LexKind.Ge ? Operator.Op.GE :
-                    /*default :*/                                  Operator.Op.INVALID
+                    _scanner.Kind == XPathScanner.LexKind.Lt ? Operator.Op.LT
+                    : _scanner.Kind == XPathScanner.LexKind.Le ? Operator.Op.LE
+                    : _scanner.Kind == XPathScanner.LexKind.Gt ? Operator.Op.GT
+                    : _scanner.Kind == XPathScanner.LexKind.Ge ? Operator.Op.GE
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -148,9 +150,10 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    _scanner.Kind == XPathScanner.LexKind.Plus ? Operator.Op.PLUS :
-                    _scanner.Kind == XPathScanner.LexKind.Minus ? Operator.Op.MINUS :
-                    /*default :*/                                     Operator.Op.INVALID
+                    _scanner.Kind == XPathScanner.LexKind.Plus ? Operator.Op.PLUS
+                    : _scanner.Kind == XPathScanner.LexKind.Minus ? Operator.Op.MINUS
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -170,10 +173,11 @@ namespace MS.Internal.Xml.XPath
             do
             {
                 Operator.Op op = (
-                    _scanner.Kind == XPathScanner.LexKind.Star ? Operator.Op.MUL :
-                    TestOp("div") ? Operator.Op.DIV :
-                    TestOp("mod") ? Operator.Op.MOD :
-                    /*default :*/                                     Operator.Op.INVALID
+                    _scanner.Kind == XPathScanner.LexKind.Star ? Operator.Op.MUL
+                    : TestOp("div") ? Operator.Op.DIV
+                    : TestOp("mod") ? Operator.Op.MOD
+                    :
+                    /*default :*/Operator.Op.INVALID
                 );
                 if (op == Operator.Op.INVALID)
                 {
@@ -224,11 +228,13 @@ namespace MS.Internal.Xml.XPath
         }
 
         private bool IsNodeType =>
-            _scanner.Prefix.Length == 0 &&
-            (_scanner.Name == "node" ||
-             _scanner.Name == "text" ||
-             _scanner.Name == "processing-instruction" ||
-             _scanner.Name == "comment");
+            _scanner.Prefix.Length == 0
+            && (
+                _scanner.Name == "node"
+                || _scanner.Name == "text"
+                || _scanner.Name == "processing-instruction"
+                || _scanner.Name == "comment"
+            );
 
         //>> PathOp   ::= '/' | '//'
         //>> PathExpr ::= LocationPath |
@@ -247,7 +253,9 @@ namespace MS.Internal.Xml.XPath
                 else if (_scanner.Kind == XPathScanner.LexKind.SlashSlash)
                 {
                     NextLex();
-                    opnd = ParseRelativeLocationPath(new Axis(Axis.AxisType.DescendantOrSelf, opnd));
+                    opnd = ParseRelativeLocationPath(
+                        new Axis(Axis.AxisType.DescendantOrSelf, opnd)
+                    );
                 }
             }
             else
@@ -302,7 +310,9 @@ namespace MS.Internal.Xml.XPath
             else if (_scanner.Kind == XPathScanner.LexKind.SlashSlash)
             {
                 NextLex();
-                return ParseRelativeLocationPath(new Axis(Axis.AxisType.DescendantOrSelf, new Root()));
+                return ParseRelativeLocationPath(
+                    new Axis(Axis.AxisType.DescendantOrSelf, new Root())
+                );
             }
             else
             {
@@ -331,8 +341,7 @@ namespace MS.Internal.Xml.XPath
                 {
                     break;
                 }
-            }
-            while (true);
+            } while (true);
 
             return opnd;
         }
@@ -340,12 +349,12 @@ namespace MS.Internal.Xml.XPath
         private static bool IsStep(XPathScanner.LexKind lexKind)
         {
             return (
-                lexKind == XPathScanner.LexKind.Dot ||
-                lexKind == XPathScanner.LexKind.DotDot ||
-                lexKind == XPathScanner.LexKind.At ||
-                lexKind == XPathScanner.LexKind.Axe ||
-                lexKind == XPathScanner.LexKind.Star ||
-                lexKind == XPathScanner.LexKind.Name          // NodeTest is also Name
+                lexKind == XPathScanner.LexKind.Dot
+                || lexKind == XPathScanner.LexKind.DotDot
+                || lexKind == XPathScanner.LexKind.At
+                || lexKind == XPathScanner.LexKind.Axe
+                || lexKind == XPathScanner.LexKind.Star
+                || lexKind == XPathScanner.LexKind.Name // NodeTest is also Name
             );
         }
 
@@ -354,7 +363,7 @@ namespace MS.Internal.Xml.XPath
         {
             AstNode opnd;
             if (XPathScanner.LexKind.Dot == _scanner.Kind)
-            {         //>> '.'
+            { //>> '.'
                 NextLex();
                 opnd = new Axis(Axis.AxisType.Self, qyInput);
             }
@@ -364,23 +373,25 @@ namespace MS.Internal.Xml.XPath
                 opnd = new Axis(Axis.AxisType.Parent, qyInput);
             }
             else
-            {                                                          //>> ( AxisName '::' | '@' )? NodeTest Predicate*
+            { //>> ( AxisName '::' | '@' )? NodeTest Predicate*
                 Axis.AxisType axisType = Axis.AxisType.Child;
                 switch (_scanner.Kind)
                 {
-                    case XPathScanner.LexKind.At:                               //>> '@'
+                    case XPathScanner.LexKind.At: //>> '@'
                         axisType = Axis.AxisType.Attribute;
                         NextLex();
                         break;
-                    case XPathScanner.LexKind.Axe:                              //>> AxisName '::'
+                    case XPathScanner.LexKind.Axe: //>> AxisName '::'
                         axisType = GetAxis();
                         NextLex();
                         break;
                 }
                 XPathNodeType nodeType = (
-                    axisType == Axis.AxisType.Attribute ? XPathNodeType.Attribute :
-                    //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why it's this way but otherwise Axes doesn't work
-                    /* default: */                        XPathNodeType.Element
+                    axisType == Axis.AxisType.Attribute
+                        ? XPathNodeType.Attribute
+                        :
+                        //                    axisType == Axis.AxisType.Namespace ? XPathNodeType.Namespace : // No Idea why it's this way but otherwise Axes doesn't work
+                        /* default: */XPathNodeType.Element
                 );
 
                 opnd = ParseNodeTest(qyInput, axisType, nodeType);
@@ -396,7 +407,8 @@ namespace MS.Internal.Xml.XPath
         //>> NodeTest ::= NameTest | 'comment ()' | 'text ()' | 'node ()' | 'processing-instruction ('  Literal ? ')'
         private Axis ParseNodeTest(AstNode? qyInput, Axis.AxisType axisType, XPathNodeType nodeType)
         {
-            string nodeName, nodePrefix;
+            string nodeName,
+                nodePrefix;
 
             switch (_scanner.Kind)
             {
@@ -406,11 +418,13 @@ namespace MS.Internal.Xml.XPath
                         nodePrefix = string.Empty;
                         nodeName = string.Empty;
                         nodeType = (
-                            _scanner.Name == "comment" ? XPathNodeType.Comment :
-                            _scanner.Name == "text" ? XPathNodeType.Text :
-                            _scanner.Name == "node" ? XPathNodeType.All :
-                            _scanner.Name == "processing-instruction" ? XPathNodeType.ProcessingInstruction :
-                            /* default: */ XPathNodeType.Root
+                            _scanner.Name == "comment" ? XPathNodeType.Comment
+                            : _scanner.Name == "text" ? XPathNodeType.Text
+                            : _scanner.Name == "node" ? XPathNodeType.All
+                            : _scanner.Name == "processing-instruction"
+                                ? XPathNodeType.ProcessingInstruction
+                            :
+                            /* default: */XPathNodeType.Root
                         );
                         Debug.Assert(nodeType != XPathNodeType.Root);
                         NextLex();
@@ -452,11 +466,11 @@ namespace MS.Internal.Xml.XPath
         }
 
         private bool IsPrimaryExpr =>
-            _scanner.Kind == XPathScanner.LexKind.String ||
-            _scanner.Kind == XPathScanner.LexKind.Number ||
-            _scanner.Kind == XPathScanner.LexKind.Dollar ||
-            _scanner.Kind == XPathScanner.LexKind.LParens ||
-            _scanner.Kind == XPathScanner.LexKind.Name && _scanner.CanBeFunction && !IsNodeType;
+            _scanner.Kind == XPathScanner.LexKind.String
+            || _scanner.Kind == XPathScanner.LexKind.Number
+            || _scanner.Kind == XPathScanner.LexKind.Dollar
+            || _scanner.Kind == XPathScanner.LexKind.LParens
+            || _scanner.Kind == XPathScanner.LexKind.Name && _scanner.CanBeFunction && !IsNodeType;
 
         //>> PrimaryExpr ::= Literal | Number | VariableReference | '(' Expr ')' | FunctionCall
         private AstNode ParsePrimaryExpr(AstNode? qyInput)
@@ -527,7 +541,11 @@ namespace MS.Internal.Xml.XPath
                     int argCount = argList.Count;
                     if (argCount < pi.Minargs)
                     {
-                        throw XPathException.Create(SR.Xp_InvalidNumArgs, name, _scanner.SourceText);
+                        throw XPathException.Create(
+                            SR.Xp_InvalidNumArgs,
+                            name,
+                            _scanner.SourceText
+                        );
                     }
                     if (pi.FType == Function.FunctionType.FuncConcat)
                     {
@@ -545,26 +563,40 @@ namespace MS.Internal.Xml.XPath
                     {
                         if (pi.Maxargs < argCount)
                         {
-                            throw XPathException.Create(SR.Xp_InvalidNumArgs, name, _scanner.SourceText);
+                            throw XPathException.Create(
+                                SR.Xp_InvalidNumArgs,
+                                name,
+                                _scanner.SourceText
+                            );
                         }
                         if (pi.ArgTypes.Length < argCount)
                         {
-                            argCount = pi.ArgTypes.Length;    // argument we have the type specified (can be < pi.Minargs)
+                            argCount = pi.ArgTypes.Length; // argument we have the type specified (can be < pi.Minargs)
                         }
                         for (int i = 0; i < argCount; i++)
                         {
                             AstNode arg = (AstNode)argList[i];
                             if (
-                                pi.ArgTypes[i] != XPathResultType.Any &&
-                                pi.ArgTypes[i] != arg.ReturnType
+                                pi.ArgTypes[i] != XPathResultType.Any
+                                && pi.ArgTypes[i] != arg.ReturnType
                             )
                             {
                                 switch (pi.ArgTypes[i])
                                 {
                                     case XPathResultType.NodeSet:
-                                        if (!(arg is Variable) && !(arg is Function && arg.ReturnType == XPathResultType.Any))
+                                        if (
+                                            !(arg is Variable)
+                                            && !(
+                                                arg is Function
+                                                && arg.ReturnType == XPathResultType.Any
+                                            )
+                                        )
                                         {
-                                            throw XPathException.Create(SR.Xp_InvalidArgumentType, name, _scanner.SourceText);
+                                            throw XPathException.Create(
+                                                SR.Xp_InvalidArgumentType,
+                                                name,
+                                                _scanner.SourceText
+                                            );
                                         }
                                         break;
                                     case XPathResultType.String:
@@ -615,7 +647,10 @@ namespace MS.Internal.Xml.XPath
                 case XPathScanner.LexKind.Slash:
                     NextLex();
                     opnd = new Root();
-                    if (_scanner.Kind == XPathScanner.LexKind.Eof || _scanner.Kind == XPathScanner.LexKind.Union)
+                    if (
+                        _scanner.Kind == XPathScanner.LexKind.Eof
+                        || _scanner.Kind == XPathScanner.LexKind.Union
+                    )
                     {
                         return opnd;
                     }
@@ -711,11 +746,11 @@ namespace MS.Internal.Xml.XPath
             Axis.AxisType axisType = Axis.AxisType.Child;
             switch (_scanner.Kind)
             {
-                case XPathScanner.LexKind.At:                               //>> '@'
+                case XPathScanner.LexKind.At: //>> '@'
                     axisType = Axis.AxisType.Attribute;
                     NextLex();
                     break;
-                case XPathScanner.LexKind.Axe:                              //>> AxisName '::'
+                case XPathScanner.LexKind.Axe: //>> AxisName '::'
                     axisType = GetAxis();
                     if (axisType != Axis.AxisType.Child && axisType != Axis.AxisType.Attribute)
                     {
@@ -725,8 +760,10 @@ namespace MS.Internal.Xml.XPath
                     break;
             }
             XPathNodeType nodeType = (
-                axisType == Axis.AxisType.Attribute ? XPathNodeType.Attribute :
-                /* default: */                        XPathNodeType.Element
+                axisType == Axis.AxisType.Attribute
+                    ? XPathNodeType.Attribute
+                    :
+                    /* default: */XPathNodeType.Element
             );
 
             opnd = ParseNodeTest(qyInput, axisType, nodeType);
@@ -762,9 +799,9 @@ namespace MS.Internal.Xml.XPath
         private bool TestOp(string op)
         {
             return (
-                _scanner.Kind == XPathScanner.LexKind.Name &&
-                _scanner.Prefix.Length == 0 &&
-                _scanner.Name.Equals(op)
+                _scanner.Kind == XPathScanner.LexKind.Name
+                && _scanner.Prefix.Length == 0
+                && _scanner.Name.Equals(op)
             );
         }
 
@@ -781,9 +818,23 @@ namespace MS.Internal.Xml.XPath
         private static readonly XPathResultType[] s_temparray2 = { XPathResultType.NodeSet };
         private static readonly XPathResultType[] s_temparray3 = { XPathResultType.Any };
         private static readonly XPathResultType[] s_temparray4 = { XPathResultType.String };
-        private static readonly XPathResultType[] s_temparray5 = { XPathResultType.String, XPathResultType.String };
-        private static readonly XPathResultType[] s_temparray6 = { XPathResultType.String, XPathResultType.Number, XPathResultType.Number };
-        private static readonly XPathResultType[] s_temparray7 = { XPathResultType.String, XPathResultType.String, XPathResultType.String };
+        private static readonly XPathResultType[] s_temparray5 =
+        {
+            XPathResultType.String,
+            XPathResultType.String,
+        };
+        private static readonly XPathResultType[] s_temparray6 =
+        {
+            XPathResultType.String,
+            XPathResultType.Number,
+            XPathResultType.Number,
+        };
+        private static readonly XPathResultType[] s_temparray7 =
+        {
+            XPathResultType.String,
+            XPathResultType.String,
+            XPathResultType.String,
+        };
         private static readonly XPathResultType[] s_temparray8 = { XPathResultType.Boolean };
         private static readonly XPathResultType[] s_temparray9 = { XPathResultType.Number };
 
@@ -794,12 +845,29 @@ namespace MS.Internal.Xml.XPath
             private readonly int _maxargs;
             private readonly XPathResultType[] _argTypes;
 
-            public Function.FunctionType FType { get { return _ftype; } }
-            public int Minargs { get { return _minargs; } }
-            public int Maxargs { get { return _maxargs; } }
-            public XPathResultType[] ArgTypes { get { return _argTypes; } }
+            public Function.FunctionType FType
+            {
+                get { return _ftype; }
+            }
+            public int Minargs
+            {
+                get { return _minargs; }
+            }
+            public int Maxargs
+            {
+                get { return _maxargs; }
+            }
+            public XPathResultType[] ArgTypes
+            {
+                get { return _argTypes; }
+            }
 
-            internal ParamInfo(Function.FunctionType ftype, int minargs, int maxargs, XPathResultType[] argTypes)
+            internal ParamInfo(
+                Function.FunctionType ftype,
+                int minargs,
+                int maxargs,
+                XPathResultType[] argTypes
+            )
             {
                 _ftype = ftype;
                 _minargs = minargs;
@@ -808,41 +876,92 @@ namespace MS.Internal.Xml.XPath
             }
         } //ParamInfo
 
-        private static readonly Dictionary<string, ParamInfo> s_functionTable = CreateFunctionTable();
+        private static readonly Dictionary<string, ParamInfo> s_functionTable =
+            CreateFunctionTable();
+
         private static Dictionary<string, ParamInfo> CreateFunctionTable()
         {
             Dictionary<string, ParamInfo> table = new Dictionary<string, ParamInfo>(36);
             table.Add("last", new ParamInfo(Function.FunctionType.FuncLast, 0, 0, s_temparray1));
-            table.Add("position", new ParamInfo(Function.FunctionType.FuncPosition, 0, 0, s_temparray1));
+            table.Add(
+                "position",
+                new ParamInfo(Function.FunctionType.FuncPosition, 0, 0, s_temparray1)
+            );
             table.Add("name", new ParamInfo(Function.FunctionType.FuncName, 0, 1, s_temparray2));
-            table.Add("namespace-uri", new ParamInfo(Function.FunctionType.FuncNameSpaceUri, 0, 1, s_temparray2));
-            table.Add("local-name", new ParamInfo(Function.FunctionType.FuncLocalName, 0, 1, s_temparray2));
+            table.Add(
+                "namespace-uri",
+                new ParamInfo(Function.FunctionType.FuncNameSpaceUri, 0, 1, s_temparray2)
+            );
+            table.Add(
+                "local-name",
+                new ParamInfo(Function.FunctionType.FuncLocalName, 0, 1, s_temparray2)
+            );
             table.Add("count", new ParamInfo(Function.FunctionType.FuncCount, 1, 1, s_temparray2));
             table.Add("id", new ParamInfo(Function.FunctionType.FuncID, 1, 1, s_temparray3));
-            table.Add("string", new ParamInfo(Function.FunctionType.FuncString, 0, 1, s_temparray3));
-            table.Add("concat", new ParamInfo(Function.FunctionType.FuncConcat, 2, 100, s_temparray4));
-            table.Add("starts-with", new ParamInfo(Function.FunctionType.FuncStartsWith, 2, 2, s_temparray5));
-            table.Add("contains", new ParamInfo(Function.FunctionType.FuncContains, 2, 2, s_temparray5));
-            table.Add("substring-before", new ParamInfo(Function.FunctionType.FuncSubstringBefore, 2, 2, s_temparray5));
-            table.Add("substring-after", new ParamInfo(Function.FunctionType.FuncSubstringAfter, 2, 2, s_temparray5));
-            table.Add("substring", new ParamInfo(Function.FunctionType.FuncSubstring, 2, 3, s_temparray6));
-            table.Add("string-length", new ParamInfo(Function.FunctionType.FuncStringLength, 0, 1, s_temparray4));
-            table.Add("normalize-space", new ParamInfo(Function.FunctionType.FuncNormalize, 0, 1, s_temparray4));
-            table.Add("translate", new ParamInfo(Function.FunctionType.FuncTranslate, 3, 3, s_temparray7));
-            table.Add("boolean", new ParamInfo(Function.FunctionType.FuncBoolean, 1, 1, s_temparray3));
+            table.Add(
+                "string",
+                new ParamInfo(Function.FunctionType.FuncString, 0, 1, s_temparray3)
+            );
+            table.Add(
+                "concat",
+                new ParamInfo(Function.FunctionType.FuncConcat, 2, 100, s_temparray4)
+            );
+            table.Add(
+                "starts-with",
+                new ParamInfo(Function.FunctionType.FuncStartsWith, 2, 2, s_temparray5)
+            );
+            table.Add(
+                "contains",
+                new ParamInfo(Function.FunctionType.FuncContains, 2, 2, s_temparray5)
+            );
+            table.Add(
+                "substring-before",
+                new ParamInfo(Function.FunctionType.FuncSubstringBefore, 2, 2, s_temparray5)
+            );
+            table.Add(
+                "substring-after",
+                new ParamInfo(Function.FunctionType.FuncSubstringAfter, 2, 2, s_temparray5)
+            );
+            table.Add(
+                "substring",
+                new ParamInfo(Function.FunctionType.FuncSubstring, 2, 3, s_temparray6)
+            );
+            table.Add(
+                "string-length",
+                new ParamInfo(Function.FunctionType.FuncStringLength, 0, 1, s_temparray4)
+            );
+            table.Add(
+                "normalize-space",
+                new ParamInfo(Function.FunctionType.FuncNormalize, 0, 1, s_temparray4)
+            );
+            table.Add(
+                "translate",
+                new ParamInfo(Function.FunctionType.FuncTranslate, 3, 3, s_temparray7)
+            );
+            table.Add(
+                "boolean",
+                new ParamInfo(Function.FunctionType.FuncBoolean, 1, 1, s_temparray3)
+            );
             table.Add("not", new ParamInfo(Function.FunctionType.FuncNot, 1, 1, s_temparray8));
             table.Add("true", new ParamInfo(Function.FunctionType.FuncTrue, 0, 0, s_temparray8));
             table.Add("false", new ParamInfo(Function.FunctionType.FuncFalse, 0, 0, s_temparray8));
             table.Add("lang", new ParamInfo(Function.FunctionType.FuncLang, 1, 1, s_temparray4));
-            table.Add("number", new ParamInfo(Function.FunctionType.FuncNumber, 0, 1, s_temparray3));
+            table.Add(
+                "number",
+                new ParamInfo(Function.FunctionType.FuncNumber, 0, 1, s_temparray3)
+            );
             table.Add("sum", new ParamInfo(Function.FunctionType.FuncSum, 1, 1, s_temparray2));
             table.Add("floor", new ParamInfo(Function.FunctionType.FuncFloor, 1, 1, s_temparray9));
-            table.Add("ceiling", new ParamInfo(Function.FunctionType.FuncCeiling, 1, 1, s_temparray9));
+            table.Add(
+                "ceiling",
+                new ParamInfo(Function.FunctionType.FuncCeiling, 1, 1, s_temparray9)
+            );
             table.Add("round", new ParamInfo(Function.FunctionType.FuncRound, 1, 1, s_temparray9));
             return table;
         }
 
         private static readonly Dictionary<string, Axis.AxisType> s_AxesTable = CreateAxesTable();
+
         private static Dictionary<string, Axis.AxisType> CreateAxesTable()
         {
             Dictionary<string, Axis.AxisType> table = new Dictionary<string, Axis.AxisType>(13);

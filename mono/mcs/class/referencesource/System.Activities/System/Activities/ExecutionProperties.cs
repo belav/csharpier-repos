@@ -22,7 +22,11 @@ namespace System.Activities
         ExecutionPropertyManager properties;
         IdSpace currentIdSpace;
 
-        internal ExecutionProperties(ActivityContext currentContext, ActivityInstance scope, ExecutionPropertyManager properties)
+        internal ExecutionProperties(
+            ActivityContext currentContext,
+            ActivityInstance scope,
+            ExecutionPropertyManager properties
+        )
         {
             this.context = currentContext;
             this.scope = scope;
@@ -36,10 +40,7 @@ namespace System.Activities
 
         public bool IsEmpty
         {
-            get
-            {
-                return (this.properties == null);
-            }
+            get { return (this.properties == null); }
         }
 
         static IEnumerable<KeyValuePair<string, object>> EmptyKeyValues
@@ -54,7 +55,10 @@ namespace System.Activities
             }
         }
 
-        [Fx.Tag.InheritThrows(From = "Register", FromDeclaringType = typeof(IPropertyRegistrationCallback))]
+        [Fx.Tag.InheritThrows(
+            From = "Register",
+            FromDeclaringType = typeof(IPropertyRegistrationCallback)
+        )]
         public void Add(string name, object property)
         {
             Add(name, property, false, false);
@@ -66,7 +70,12 @@ namespace System.Activities
             Add(name, property, false, onlyVisibleToPublicChildren);
         }
 
-        internal void Add(string name, object property, bool skipValidations, bool onlyVisibleToPublicChildren)
+        internal void Add(
+            string name,
+            object property,
+            bool skipValidations,
+            bool onlyVisibleToPublicChildren
+        )
         {
             if (!skipValidations)
             {
@@ -89,11 +98,14 @@ namespace System.Activities
                 this.properties.ThrowIfAlreadyDefined(name, this.scope);
             }
 
-            IPropertyRegistrationCallback registrationCallback = property as IPropertyRegistrationCallback;
+            IPropertyRegistrationCallback registrationCallback =
+                property as IPropertyRegistrationCallback;
 
             if (registrationCallback != null)
             {
-                registrationCallback.Register(new RegistrationContext(this.properties, this.currentIdSpace));
+                registrationCallback.Register(
+                    new RegistrationContext(this.properties, this.currentIdSpace)
+                );
             }
 
             if (this.properties == null)
@@ -102,7 +114,7 @@ namespace System.Activities
             }
             else if (!this.properties.IsOwner(this.scope))
             {
-                // 
+                //
                 this.properties = new ExecutionPropertyManager(this.scope, this.properties);
             }
 
@@ -110,14 +122,20 @@ namespace System.Activities
 
             if (onlyVisibleToPublicChildren)
             {
-                Fx.Assert(this.currentIdSpace != null, "We should never call OnlyVisibleToPublicChildren when we don't have a currentIdSpace");
+                Fx.Assert(
+                    this.currentIdSpace != null,
+                    "We should never call OnlyVisibleToPublicChildren when we don't have a currentIdSpace"
+                );
                 visibility = this.currentIdSpace;
             }
 
             this.properties.Add(name, property, visibility);
         }
 
-        [Fx.Tag.InheritThrows(From = "Unregister", FromDeclaringType = typeof(IPropertyRegistrationCallback))]
+        [Fx.Tag.InheritThrows(
+            From = "Unregister",
+            FromDeclaringType = typeof(IPropertyRegistrationCallback)
+        )]
         public bool Remove(string name)
         {
             return Remove(name, false);
@@ -145,7 +163,10 @@ namespace System.Activities
                     {
                         Handle handleProperty = property as Handle;
 
-                        if (handleProperty == null || !handleProperty.CanBeRemovedWithExecutingChildren)
+                        if (
+                            handleProperty == null
+                            || !handleProperty.CanBeRemovedWithExecutingChildren
+                        )
                         {
                             ThrowIfChildrenAreExecuting();
                         }
@@ -153,11 +174,14 @@ namespace System.Activities
 
                     this.properties.Remove(name);
 
-                    IPropertyRegistrationCallback registrationCallback = property as IPropertyRegistrationCallback;
+                    IPropertyRegistrationCallback registrationCallback =
+                        property as IPropertyRegistrationCallback;
 
                     if (registrationCallback != null)
                     {
-                        registrationCallback.Unregister(new RegistrationContext(this.properties, this.currentIdSpace));
+                        registrationCallback.Unregister(
+                            new RegistrationContext(this.properties, this.currentIdSpace)
+                        );
                     }
 
                     return true;
@@ -226,7 +250,9 @@ namespace System.Activities
         {
             if (this.scope.HasChildren)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.CannotAddOrRemoveWithChildren));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.CannotAddOrRemoveWithChildren)
+                );
             }
         }
 
@@ -234,11 +260,10 @@ namespace System.Activities
         {
             if (this.context.IsDisposed)
             {
-                throw FxTrace.Exception.AsError(new InvalidOperationException(SR.AECForPropertiesHasBeenDisposed));
+                throw FxTrace.Exception.AsError(
+                    new InvalidOperationException(SR.AECForPropertiesHasBeenDisposed)
+                );
             }
         }
-
     }
 }
-
-

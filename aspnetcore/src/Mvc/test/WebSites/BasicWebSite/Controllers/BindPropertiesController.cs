@@ -22,7 +22,15 @@ public class BindPropertiesController : Controller
     [BindNever]
     public string BindNeverProperty { get; set; }
 
-    public object Action() => new { Name, Id, IdFromRoute, CustomBound, BindNeverProperty };
+    public object Action() =>
+        new
+        {
+            Name,
+            Id,
+            IdFromRoute,
+            CustomBound,
+            BindNeverProperty,
+        };
 
     private class CustomBoundModelBinder : IModelBinder
     {

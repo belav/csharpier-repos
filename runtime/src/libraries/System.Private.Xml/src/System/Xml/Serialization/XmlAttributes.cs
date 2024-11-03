@@ -42,31 +42,40 @@ namespace System.Xml.Serialization
         private XmlAnyAttributeAttribute? _xmlAnyAttribute;
         private readonly XmlChoiceIdentifierAttribute? _xmlChoiceIdentifier;
 
-
         /// <devdoc>
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
-        public XmlAttributes()
-        {
-        }
+        public XmlAttributes() { }
 
         internal XmlAttributeFlags XmlFlags
         {
             get
             {
                 XmlAttributeFlags flags = 0;
-                if (_xmlElements.Count > 0) flags |= XmlAttributeFlags.Elements;
-                if (_xmlArrayItems.Count > 0) flags |= XmlAttributeFlags.ArrayItems;
-                if (_xmlAnyElements.Count > 0) flags |= XmlAttributeFlags.AnyElements;
-                if (_xmlArray != null) flags |= XmlAttributeFlags.Array;
-                if (_xmlAttribute != null) flags |= XmlAttributeFlags.Attribute;
-                if (_xmlText != null) flags |= XmlAttributeFlags.Text;
-                if (_xmlEnum != null) flags |= XmlAttributeFlags.Enum;
-                if (_xmlRoot != null) flags |= XmlAttributeFlags.Root;
-                if (_xmlType != null) flags |= XmlAttributeFlags.Type;
-                if (_xmlAnyAttribute != null) flags |= XmlAttributeFlags.AnyAttribute;
-                if (_xmlChoiceIdentifier != null) flags |= XmlAttributeFlags.ChoiceIdentifier;
-                if (_xmlns) flags |= XmlAttributeFlags.XmlnsDeclarations;
+                if (_xmlElements.Count > 0)
+                    flags |= XmlAttributeFlags.Elements;
+                if (_xmlArrayItems.Count > 0)
+                    flags |= XmlAttributeFlags.ArrayItems;
+                if (_xmlAnyElements.Count > 0)
+                    flags |= XmlAttributeFlags.AnyElements;
+                if (_xmlArray != null)
+                    flags |= XmlAttributeFlags.Array;
+                if (_xmlAttribute != null)
+                    flags |= XmlAttributeFlags.Attribute;
+                if (_xmlText != null)
+                    flags |= XmlAttributeFlags.Text;
+                if (_xmlEnum != null)
+                    flags |= XmlAttributeFlags.Enum;
+                if (_xmlRoot != null)
+                    flags |= XmlAttributeFlags.Root;
+                if (_xmlType != null)
+                    flags |= XmlAttributeFlags.Type;
+                if (_xmlAnyAttribute != null)
+                    flags |= XmlAttributeFlags.AnyAttribute;
+                if (_xmlChoiceIdentifier != null)
+                    flags |= XmlAttributeFlags.ChoiceIdentifier;
+                if (_xmlns)
+                    flags |= XmlAttributeFlags.XmlnsDeclarations;
                 return flags;
             }
         }
@@ -98,7 +107,11 @@ namespace System.Xml.Serialization
                 }
                 else if (attrs[i] is XmlAnyElementAttribute any)
                 {
-                    if (string.IsNullOrEmpty(any.Name) && any.GetNamespaceSpecified() && any.Namespace == null)
+                    if (
+                        string.IsNullOrEmpty(any.Name)
+                        && any.GetNamespaceSpecified()
+                        && any.Namespace == null
+                    )
                     {
                         // ignore duplicate wildcards
                         wildcard = any;
@@ -176,7 +189,8 @@ namespace System.Xml.Serialization
         internal static object? GetAttr(MemberInfo memberInfo, Type attrType)
         {
             object[] attrs = memberInfo.GetCustomAttributes(attrType, false);
-            if (attrs.Length == 0) return null;
+            if (attrs.Length == 0)
+                return null;
             return attrs[0];
         }
 

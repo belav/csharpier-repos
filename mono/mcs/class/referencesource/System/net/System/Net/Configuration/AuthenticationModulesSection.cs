@@ -6,8 +6,8 @@
 
 namespace System.Net.Configuration
 {
-    using System.Configuration;
     using System.Collections.Generic;
+    using System.Configuration;
     using System.Globalization;
     using System.Net;
     using System.Threading;
@@ -26,13 +26,19 @@ namespace System.Net.Configuration
             if (EvaluationContext.IsMachineLevel)
                 return;
 
-            try {
+            try
+            {
                 ExceptionHelper.UnmanagedPermission.Demand();
-            } catch (Exception exception) {
+            }
+            catch (Exception exception)
+            {
                 throw new ConfigurationErrorsException(
-                              SR.GetString(SR.net_config_section_permission, 
-                                           ConfigurationStrings.AuthenticationModulesSectionName),
-                              exception);
+                    SR.GetString(
+                        SR.net_config_section_permission,
+                        ConfigurationStrings.AuthenticationModulesSectionName
+                    ),
+                    exception
+                );
             }
         }
 
@@ -46,15 +52,20 @@ namespace System.Net.Configuration
         {
 #if !FEATURE_PAL // Security
             this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(NegotiateClient).AssemblyQualifiedName));
+                new AuthenticationModuleElement(typeof(NegotiateClient).AssemblyQualifiedName)
+            );
             this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(KerberosClient).AssemblyQualifiedName));
+                new AuthenticationModuleElement(typeof(KerberosClient).AssemblyQualifiedName)
+            );
             this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(NtlmClient).AssemblyQualifiedName));
+                new AuthenticationModuleElement(typeof(NtlmClient).AssemblyQualifiedName)
+            );
             this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(DigestClient).AssemblyQualifiedName));
+                new AuthenticationModuleElement(typeof(DigestClient).AssemblyQualifiedName)
+            );
             this.AuthenticationModules.Add(
-                new AuthenticationModuleElement(typeof(BasicClient).AssemblyQualifiedName));
+                new AuthenticationModuleElement(typeof(BasicClient).AssemblyQualifiedName)
+            );
 #endif // !FEATURE_PAL // Security
         }
 
@@ -65,9 +76,12 @@ namespace System.Net.Configuration
 
         ConfigurationPropertyCollection properties = new ConfigurationPropertyCollection();
 
-        readonly ConfigurationProperty authenticationModules =
-            new ConfigurationProperty(null, typeof(AuthenticationModuleElementCollection), null,
-                    ConfigurationPropertyOptions.IsDefaultCollection);
+        readonly ConfigurationProperty authenticationModules = new ConfigurationProperty(
+            null,
+            typeof(AuthenticationModuleElementCollection),
+            null,
+            ConfigurationPropertyOptions.IsDefaultCollection
+        );
     }
 
     internal sealed class AuthenticationModulesSectionInternal
@@ -77,7 +91,9 @@ namespace System.Net.Configuration
             if (section.AuthenticationModules.Count > 0)
             {
                 this.authenticationModules = new List<Type>(section.AuthenticationModules.Count);
-                foreach(AuthenticationModuleElement authenticationModuleElement in section.AuthenticationModules)
+                foreach (
+                    AuthenticationModuleElement authenticationModuleElement in section.AuthenticationModules
+                )
                 {
                     Type type = null;
 
@@ -88,14 +104,24 @@ namespace System.Net.Configuration
                         // verify that its of the proper type of object
                         if (!typeof(IAuthenticationModule).IsAssignableFrom(type))
                         {
-                            throw new InvalidCastException(SR.GetString(SR.net_invalid_cast, type.FullName, "IAuthenticationModule"));
+                            throw new InvalidCastException(
+                                SR.GetString(
+                                    SR.net_invalid_cast,
+                                    type.FullName,
+                                    "IAuthenticationModule"
+                                )
+                            );
                         }
                     }
                     catch (Exception exception)
                     {
-                        if (NclUtilities.IsFatal(exception)) throw;
+                        if (NclUtilities.IsFatal(exception))
+                            throw;
 
-                        throw new ConfigurationErrorsException(SR.GetString(SR.net_config_authenticationmodules), exception);
+                        throw new ConfigurationErrorsException(
+                            SR.GetString(SR.net_config_authenticationmodules),
+                            exception
+                        );
                     }
 
                     this.authenticationModules.Add(type);
@@ -129,11 +155,14 @@ namespace System.Net.Configuration
             }
         }
 
-        static internal AuthenticationModulesSectionInternal GetSection()
+        internal static AuthenticationModulesSectionInternal GetSection()
         {
             lock (AuthenticationModulesSectionInternal.ClassSyncObject)
             {
-                AuthenticationModulesSection section = PrivilegedConfigurationManager.GetSection(ConfigurationStrings.AuthenticationModulesSectionPath) as AuthenticationModulesSection;
+                AuthenticationModulesSection section =
+                    PrivilegedConfigurationManager.GetSection(
+                        ConfigurationStrings.AuthenticationModulesSectionPath
+                    ) as AuthenticationModulesSection;
                 if (section == null)
                     return null;
 

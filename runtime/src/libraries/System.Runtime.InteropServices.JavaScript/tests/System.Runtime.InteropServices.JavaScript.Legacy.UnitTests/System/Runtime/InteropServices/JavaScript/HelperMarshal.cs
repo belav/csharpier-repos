@@ -7,32 +7,38 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 {
     public static class HelperMarshal
     {
-        internal const string INTEROP_CLASS = "[System.Runtime.InteropServices.JavaScript.Legacy.Tests]System.Runtime.InteropServices.JavaScript.Tests.HelperMarshal:";
+        internal const string INTEROP_CLASS =
+            "[System.Runtime.InteropServices.JavaScript.Legacy.Tests]System.Runtime.InteropServices.JavaScript.Tests.HelperMarshal:";
         internal static int _i32Value;
+
         private static void InvokeI32(int a, int b)
         {
             _i32Value = a + b;
         }
 
         internal static float _f32Value;
+
         private static void InvokeFloat(float f)
         {
             _f32Value = f;
         }
 
         internal static double _f64Value;
+
         private static void InvokeDouble(double d)
         {
             _f64Value = d;
         }
 
         internal static long _i64Value;
+
         private static void InvokeLong(long l)
         {
             _i64Value = l;
         }
 
         internal static byte[] _byteBuffer;
+
         private static void MarshalArrayBuffer(ArrayBuffer buffer)
         {
             using (var bytes = new Uint8Array(buffer))
@@ -45,12 +51,14 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _stringResource;
+
         private static void InvokeString(string s)
         {
             _stringResource = s;
         }
 
         internal static string _stringResource2;
+
         private static void InvokeString2(string s)
         {
             _stringResource2 = s;
@@ -73,6 +81,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _marshaledString;
+
         private static string InvokeMarshalString()
         {
             _marshaledString = "Hic Sunt Dracones";
@@ -80,6 +89,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _object1;
+
         private static object InvokeObj1(object obj)
         {
             _object1 = obj;
@@ -87,6 +97,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _object2;
+
         private static object InvokeObj2(object obj)
         {
             _object2 = obj;
@@ -94,6 +105,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object _marshaledObject;
+
         private static object InvokeMarshalObj()
         {
             _marshaledObject = new object();
@@ -120,7 +132,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             return double.Pi;
         }
 
-        internal static int _valOne, _valTwo;
+        internal static int _valOne,
+            _valTwo;
+
         private static void ManipulateObject(JSObject obj)
         {
             _valOne = (int)obj.Invoke("inc");
@@ -128,6 +142,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object[] _jsObjects;
+
         private static void MinipulateObjTypes(JSObject obj)
         {
             _jsObjects = new object[4];
@@ -138,30 +153,35 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _jsAddFunctionResult;
+
         private static void UseFunction(JSObject obj)
         {
             _jsAddFunctionResult = (int)obj.Invoke("call", null, 10, 20);
         }
 
         internal static int _jsAddAsFunctionResult;
+
         private static void UseAsFunction(Function func)
         {
             _jsAddAsFunctionResult = (int)func.Call(null, 20, 30);
         }
 
         internal static int _intValue;
+
         private static void InvokeInt(int value)
         {
             _intValue = value;
         }
 
         internal static IntPtr _intPtrValue;
+
         private static void InvokeIntPtr(IntPtr i)
         {
             _intPtrValue = i;
         }
 
         internal static IntPtr _marshaledIntPtrValue;
+
         private static IntPtr InvokeMarshalIntPtr()
         {
             _marshaledIntPtrValue = (IntPtr)42;
@@ -169,6 +189,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static object[] _jsProperties;
+
         private static void RetrieveObjectProperties(JSObject obj)
         {
             _jsProperties = new object[4];
@@ -195,18 +216,21 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static byte[] _taByte;
+
         private static void GetTypedArrayByte(JSObject obj)
         {
             _taByte = ((Uint8Array)obj.GetObjectProperty("dracones")).ToArray();
         }
 
         private static Function _sumFunction;
+
         private static void CreateFunctionSum()
         {
             _sumFunction = new Function("a", "b", "return a + b");
         }
 
         internal static int _sumValue = 0;
+
         private static void CallFunctionSum()
         {
             if (_sumFunction == null)
@@ -215,16 +239,17 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         private static Function _mathMinFunction;
+
         private static void CreateFunctionApply()
         {
             var math = (JSObject)Runtime.GetGlobalObject("Math");
             if (math == null)
                 throw new Exception("Runtime.GetGlobalObject(Math) returned null");
             _mathMinFunction = (Function)math.GetObjectProperty("min");
-
         }
 
         internal static int _minValue = 0;
+
         private static void CallFunctionApply()
         {
             if (_mathMinFunction == null)
@@ -233,28 +258,33 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static Uri _blobURL;
+
         public static void SetBlobUrl(string blobUrl)
         {
             _blobURL = new Uri(blobUrl);
         }
 
         internal static Uri _blobURI;
+
         public static void SetBlobAsUri(Uri blobUri)
         {
             _blobURI = blobUri;
         }
 
         internal static uint _uintValue;
+
         private static void InvokeUInt(uint value)
         {
             _uintValue = value;
         }
 
         internal static TestEnum _enumValue;
+
         private static void SetEnumValue(TestEnum value)
         {
             _enumValue = value;
         }
+
         private static TestEnum GetEnumValue()
         {
             return _enumValue;
@@ -266,6 +296,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _functionResultValue;
+
         private static Func<int, int, int> CreateFunctionDelegate()
         {
             return (a, b) =>
@@ -277,7 +308,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         internal static int _functionActionResultValue;
         internal static int _functionActionResultValueOfAction;
-        private static Func<int, int, Action<int,int>> CreateFunctionDelegateWithAction()
+
+        private static Func<int, int, Action<int, int>> CreateFunctionDelegateWithAction()
         {
             return (a, b) =>
             {
@@ -290,7 +322,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static int _actionResultValue;
-        private static Action<int,int> CreateActionDelegate()
+
+        private static Action<int, int> CreateActionDelegate()
         {
             return (a1, a2) =>
             {
@@ -321,6 +354,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         delegate void Del(string message);
         internal static string _delMethodResultValue;
+
         private static Del CreateDelegateMethod()
         {
             // Instantiate the delegate.
@@ -330,6 +364,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         delegate string Del2(string message);
         internal static string _delMethodStringResultValue;
+
         private static Del2 CreateDelegateMethodReturnString()
         {
             // Instantiate the delegate.
@@ -338,21 +373,29 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         internal static string _delegateCallResult;
+
         private static Del CreateDelegateFromAnonymousMethod_VoidString()
         {
             // Instantiate the delegate.
-            Del handler = delegate(string name) { _delegateCallResult = $"Notification received for: {name}"; };
+            Del handler = delegate(string name)
+            {
+                _delegateCallResult = $"Notification received for: {name}";
+            };
             return handler;
         }
 
         private static Del CreateDelegateFromLambda_VoidString()
         {
             // Instantiate the delegate.
-            Del handler = (string name) => { _delegateCallResult = $"Notification received for: {name}"; };
+            Del handler = (string name) =>
+            {
+                _delegateCallResult = $"Notification received for: {name}";
+            };
             return handler;
         }
 
-        public static void DelegateMethod_VoidString(string name) => _delegateCallResult = $"Notification received for: {name}";
+        public static void DelegateMethod_VoidString(string name) =>
+            _delegateCallResult = $"Notification received for: {name}";
 
         private static Del CreateDelegateFromMethod_VoidString()
         {
@@ -361,8 +404,8 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             return handler;
         }
 
-        private static Action<string> CreateActionT_VoidString()
-            => (string name) => _delegateCallResult = $"Notification received for: {name}";
+        private static Action<string> CreateActionT_VoidString() =>
+            (string name) => _delegateCallResult = $"Notification received for: {name}";
 
         static void Hello(string s)
         {
@@ -375,9 +418,12 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
         }
 
         delegate void CustomDelStr(string s);
+
         private static CustomDelStr CreateCustomMultiCastDelegate_VoidString()
         {
-            CustomDelStr hiDel, mornDel, multiDel;
+            CustomDelStr hiDel,
+                mornDel,
+                multiDel;
             hiDel = Hello;
             mornDel = GoodMorning;
             multiDel = hiDel + mornDel;
@@ -387,7 +433,9 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
 
         private static Action<string> CreateMultiCastAction_VoidString()
         {
-            Action<string> hiDel, mornDel, multiDel;
+            Action<string> hiDel,
+                mornDel,
+                multiDel;
             hiDel = Hello;
             mornDel = GoodMorning;
             multiDel = hiDel + mornDel;
@@ -409,6 +457,7 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 };
             };
         }
+
         private static Func<Array, Action<Array>> CreateFunctionAcceptingArray()
         {
             return (buffer) =>
@@ -421,43 +470,44 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             };
         }
 
-        public static Task SynchronousTask() 
+        public static Task SynchronousTask()
         {
             return Task.CompletedTask;
         }
 
-        public static async Task AsynchronousTask() 
+        public static async Task AsynchronousTask()
         {
             await Task.Yield();
         }
 
-        public static Task<int> SynchronousTaskInt(int i) 
+        public static Task<int> SynchronousTaskInt(int i)
         {
             return Task.FromResult(i);
         }
 
-        public static async Task<int> AsynchronousTaskInt(int i) 
+        public static async Task<int> AsynchronousTaskInt(int i)
         {
             await Task.Yield();
             return i;
         }
 
-        public static Task FailedSynchronousTask() 
+        public static Task FailedSynchronousTask()
         {
             return Task.FromException(new Exception());
         }
 
-        public static async Task FailedAsynchronousTask() 
+        public static async Task FailedAsynchronousTask()
         {
             await Task.Yield();
             throw new Exception();
         }
     }
 
-    public enum TestEnum : uint {
+    public enum TestEnum : uint
+    {
         FirstValue = 1,
         Zero = 0,
         Five = 5,
-        BigValue = 0xFFFFFFFEu
+        BigValue = 0xFFFFFFFEu,
     }
 }

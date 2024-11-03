@@ -8,8 +8,8 @@
 
 /* The Computer Language Benchmarks Game
    http://benchmarksgame.alioth.debian.org/
- * 
- * regex-dna program contributed by Isaac Gouy 
+ *
+ * regex-dna program contributed by Isaac Gouy
  * converted from regex-dna program
  *
 */
@@ -52,7 +52,8 @@ namespace BenchmarksGame
             int codeLength = sequence.Length;
 
             // regex match
-            string[] variants = {
+            string[] variants =
+            {
                 "agggtaaa|tttaccct",
                 "[cgt]gggtaaa|tttaccc[acg]",
                 "a[act]ggtaaa|tttacc[agt]t",
@@ -61,7 +62,7 @@ namespace BenchmarksGame
                 "aggg[acg]aaa|ttt[cgt]ccct",
                 "agggt[cgt]aa|tt[acg]accct",
                 "agggta[cgt]a|t[acg]taccct",
-                "agggtaa[cgt]|[acg]ttaccct"
+                "agggtaa[cgt]|[acg]ttaccct",
             };
 
             int count;
@@ -70,18 +71,20 @@ namespace BenchmarksGame
                 count = 0;
                 r = new Regex(v, RegexOptions.Compiled);
 
-                for (Match m = r.Match(sequence); m.Success; m = m.NextMatch()) count++;
+                for (Match m = r.Match(sequence); m.Success; m = m.NextMatch())
+                    count++;
                 if (verbose)
                     Console.WriteLine("{0} {1}", v, count);
             }
 
             // regex substitution
-            IUB[] codes = {
+            IUB[] codes =
+            {
                 new IUB("tHa[Nt]", "<4>"),
                 new IUB("aND|caN|Ha[DS]|WaS", "<3>"),
                 new IUB("a[NSt]|BY", "<2>"),
                 new IUB("<[^>]*>", "|"),
-                new IUB("\\|[^|][^|]*\\|" , "-")
+                new IUB("\\|[^|][^|]*\\|", "-"),
             };
 
             foreach (IUB iub in codes)

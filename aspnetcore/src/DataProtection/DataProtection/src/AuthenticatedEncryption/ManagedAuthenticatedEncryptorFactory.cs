@@ -41,7 +41,8 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
     [return: NotNullIfNotNull("configuration")]
     internal ManagedAuthenticatedEncryptor? CreateAuthenticatedEncryptorInstance(
         ISecret secret,
-        ManagedAuthenticatedEncryptorConfiguration? configuration)
+        ManagedAuthenticatedEncryptorConfiguration? configuration
+    )
     {
         if (configuration == null)
         {
@@ -52,15 +53,20 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
             keyDerivationKey: new Secret(secret),
             symmetricAlgorithmFactory: GetSymmetricBlockCipherAlgorithmFactory(configuration),
             symmetricAlgorithmKeySizeInBytes: configuration.EncryptionAlgorithmKeySize / 8,
-            validationAlgorithmFactory: GetKeyedHashAlgorithmFactory(configuration));
+            validationAlgorithmFactory: GetKeyedHashAlgorithmFactory(configuration)
+        );
     }
 
-    private Func<KeyedHashAlgorithm> GetKeyedHashAlgorithmFactory(ManagedAuthenticatedEncryptorConfiguration configuration)
+    private Func<KeyedHashAlgorithm> GetKeyedHashAlgorithmFactory(
+        ManagedAuthenticatedEncryptorConfiguration configuration
+    )
     {
         // basic argument checking
         if (configuration.ValidationAlgorithmType == null)
         {
-            throw Error.Common_PropertyCannotBeNullOrEmpty(nameof(configuration.ValidationAlgorithmType));
+            throw Error.Common_PropertyCannotBeNullOrEmpty(
+                nameof(configuration.ValidationAlgorithmType)
+            );
         }
 
         typeof(KeyedHashAlgorithm).AssertIsAssignableFrom(configuration.ValidationAlgorithmType);
@@ -75,21 +81,29 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
         }
         else
         {
-            return AlgorithmActivator.CreateFactory<KeyedHashAlgorithm>(configuration.ValidationAlgorithmType);
+            return AlgorithmActivator.CreateFactory<KeyedHashAlgorithm>(
+                configuration.ValidationAlgorithmType
+            );
         }
     }
 
-    private Func<SymmetricAlgorithm> GetSymmetricBlockCipherAlgorithmFactory(ManagedAuthenticatedEncryptorConfiguration configuration)
+    private Func<SymmetricAlgorithm> GetSymmetricBlockCipherAlgorithmFactory(
+        ManagedAuthenticatedEncryptorConfiguration configuration
+    )
     {
         // basic argument checking
         if (configuration.EncryptionAlgorithmType == null)
         {
-            throw Error.Common_PropertyCannotBeNullOrEmpty(nameof(configuration.EncryptionAlgorithmType));
+            throw Error.Common_PropertyCannotBeNullOrEmpty(
+                nameof(configuration.EncryptionAlgorithmType)
+            );
         }
         typeof(SymmetricAlgorithm).AssertIsAssignableFrom(configuration.EncryptionAlgorithmType);
         if (configuration.EncryptionAlgorithmKeySize < 0)
         {
-            throw Error.Common_PropertyMustBeNonNegative(nameof(configuration.EncryptionAlgorithmKeySize));
+            throw Error.Common_PropertyMustBeNonNegative(
+                nameof(configuration.EncryptionAlgorithmKeySize)
+            );
         }
 
         _logger.UsingManagedSymmetricAlgorithm(configuration.EncryptionAlgorithmType.FullName!);
@@ -100,7 +114,9 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
         }
         else
         {
-            return AlgorithmActivator.CreateFactory<SymmetricAlgorithm>(configuration.EncryptionAlgorithmType);
+            return AlgorithmActivator.CreateFactory<SymmetricAlgorithm>(
+                configuration.EncryptionAlgorithmType
+            );
         }
     }
 
@@ -112,10 +128,25 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
         /// <summary>
         /// Creates a factory that wraps a call to <see cref="Activator.CreateInstance{T}"/>.
         /// </summary>
-        [UnconditionalSuppressMessage("AOT", "IL3050", Justification = "MakeGenericType is safe to use because implementation is either a KeyedHashAlgorithm or SymmetricAlgorithm type.")]
-        public static Func<T> CreateFactory<T>([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicParameterlessConstructor)] Type implementation) where T : class
+        [UnconditionalSuppressMessage(
+            "AOT",
+            "IL3050",
+            Justification = "MakeGenericType is safe to use because implementation is either a KeyedHashAlgorithm or SymmetricAlgorithm type."
+        )]
+        public static Func<T> CreateFactory<T>(
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicParameterlessConstructor
+            )]
+                Type implementation
+        )
+            where T : class
         {
-            return ((IActivator<T>)Activator.CreateInstance(typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation))!).Creator;
+            return (
+                (IActivator<T>)
+                    Activator.CreateInstance(
+                        typeof(AlgorithmActivatorCore<>).MakeGenericType(implementation)
+                    )!
+            ).Creator;
         }
 
         private interface IActivator<out T>
@@ -123,7 +154,8 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
             Func<T> Creator { get; }
         }
 
-        private sealed class AlgorithmActivatorCore<T> : IActivator<T> where T : new()
+        private sealed class AlgorithmActivatorCore<T> : IActivator<T>
+            where T : new()
         {
             public Func<T> Creator { get; } = Activator.CreateInstance<T>;
         }

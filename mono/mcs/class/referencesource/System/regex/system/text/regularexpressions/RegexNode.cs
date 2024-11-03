@@ -1,14 +1,14 @@
 //------------------------------------------------------------------------------
 // <copyright file="RegexNode.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
 // This RegexNode class is internal to the Regex package.
 // It is built into a parsed tree for a regular expression.
 
 // Implementation notes:
-// 
+//
 // Since the node tree is a temporary data structure only used
 // during compilation of the regexp to integer codes, it's
 // designed for clarity and convenience rather than
@@ -40,16 +40,17 @@
 // Two integers (for the looping constructs) are stored in
 // _operands, an an object (either a string or a set)
 // is stored in _data
- 
 
-namespace System.Text.RegularExpressions {
 
+namespace System.Text.RegularExpressions
+{
     using System.Collections;
     using System.Collections.Generic;
     using System.Diagnostics;
     using System.Globalization;
 
-    internal sealed class RegexNode {
+    internal sealed class RegexNode
+    {
         /*
          * RegexNode types
          */
@@ -60,31 +61,31 @@ namespace System.Text.RegularExpressions {
         //    static final int Notonerep  = RegexCode.Notonerep;  // c,n      .{n}
         //    static final int Setrep     = RegexCode.Setrep;     // set,n    \d {n}
 
-        internal const int Oneloop    = RegexCode.Oneloop;    // c,n      a*
+        internal const int Oneloop = RegexCode.Oneloop; // c,n      a*
         internal const int Notoneloop = RegexCode.Notoneloop; // c,n      .*
-        internal const int Setloop    = RegexCode.Setloop;    // set,n    \d*
+        internal const int Setloop = RegexCode.Setloop; // set,n    \d*
 
-        internal const int Onelazy    = RegexCode.Onelazy;    // c,n      a*?
+        internal const int Onelazy = RegexCode.Onelazy; // c,n      a*?
         internal const int Notonelazy = RegexCode.Notonelazy; // c,n      .*?
-        internal const int Setlazy    = RegexCode.Setlazy;    // set,n    \d*?
+        internal const int Setlazy = RegexCode.Setlazy; // set,n    \d*?
 
-        internal const int One        = RegexCode.One;        // char     a
-        internal const int Notone     = RegexCode.Notone;     // char     . [^a]
-        internal const int Set        = RegexCode.Set;        // set      [a-z] \w \s \d
+        internal const int One = RegexCode.One; // char     a
+        internal const int Notone = RegexCode.Notone; // char     . [^a]
+        internal const int Set = RegexCode.Set; // set      [a-z] \w \s \d
 
-        internal const int Multi      = RegexCode.Multi;      // string   abcdef
-        internal const int Ref        = RegexCode.Ref;        // index    \1
+        internal const int Multi = RegexCode.Multi; // string   abcdef
+        internal const int Ref = RegexCode.Ref; // index    \1
 
-        internal const int Bol        = RegexCode.Bol;        //          ^
-        internal const int Eol        = RegexCode.Eol;        //          $
-        internal const int Boundary   = RegexCode.Boundary;   //          \b
-        internal const int Nonboundary= RegexCode.Nonboundary;//          \B
-        internal const int ECMABoundary   = RegexCode.ECMABoundary;    // \b
-        internal const int NonECMABoundary= RegexCode.NonECMABoundary; // \B
-        internal const int Beginning  = RegexCode.Beginning;  //          \A
-        internal const int Start      = RegexCode.Start;      //          \G
-        internal const int EndZ       = RegexCode.EndZ;       //          \Z
-        internal const int End        = RegexCode.End;        //          \z
+        internal const int Bol = RegexCode.Bol; //          ^
+        internal const int Eol = RegexCode.Eol; //          $
+        internal const int Boundary = RegexCode.Boundary; //          \b
+        internal const int Nonboundary = RegexCode.Nonboundary; //          \B
+        internal const int ECMABoundary = RegexCode.ECMABoundary; // \b
+        internal const int NonECMABoundary = RegexCode.NonECMABoundary; // \B
+        internal const int Beginning = RegexCode.Beginning; //          \A
+        internal const int Start = RegexCode.Start; //          \G
+        internal const int EndZ = RegexCode.EndZ; //          \Z
+        internal const int End = RegexCode.End; //          \z
 
         // (note: End               = 21;)
 
@@ -93,85 +94,93 @@ namespace System.Text.RegularExpressions {
 
         // concat and alternate take n children, and can run forward or backwards
 
-        internal const int Nothing    = 22;                   //          []
-        internal const int Empty      = 23;                   //          ()
+        internal const int Nothing = 22; //          []
+        internal const int Empty = 23; //          ()
 
-        internal const int Alternate  = 24;                   //          a|b
-        internal const int Concatenate= 25;                   //          ab
+        internal const int Alternate = 24; //          a|b
+        internal const int Concatenate = 25; //          ab
 
-        internal const int Loop       = 26;                   // m,x      * + ? {,}
-        internal const int Lazyloop   = 27;                   // m,x      *? +? ?? {,}?
+        internal const int Loop = 26; // m,x      * + ? {,}
+        internal const int Lazyloop = 27; // m,x      *? +? ?? {,}?
 
-        internal const int Capture    = 28;                   // n        ()
-        internal const int Group      = 29;                   //          (?:)
-        internal const int Require    = 30;                   //          (?=) (?<=)
-        internal const int Prevent    = 31;                   //          (?!) (?<!)
-        internal const int Greedy     = 32;                   //          (?>) (?<)
-        internal const int Testref    = 33;                   //          (?(n) | )
-        internal const int Testgroup  = 34;                   //          (?(...) | )
+        internal const int Capture = 28; // n        ()
+        internal const int Group = 29; //          (?:)
+        internal const int Require = 30; //          (?=) (?<=)
+        internal const int Prevent = 31; //          (?!) (?<!)
+        internal const int Greedy = 32; //          (?>) (?<)
+        internal const int Testref = 33; //          (?(n) | )
+        internal const int Testgroup = 34; //          (?(...) | )
 
         /*
          * RegexNode data members
-         * 
+         *
          */
 
-        internal int            _type;
+        internal int _type;
 
-        internal List<RegexNode>      _children;
+        internal List<RegexNode> _children;
 
-        internal String         _str;
-        internal char           _ch;
-        internal int            _m;
-        internal int            _n;
-        internal RegexOptions   _options;
+        internal String _str;
+        internal char _ch;
+        internal int _m;
+        internal int _n;
+        internal RegexOptions _options;
 
-        internal RegexNode   _next;
+        internal RegexNode _next;
 
-        internal RegexNode(int type, RegexOptions options) {
+        internal RegexNode(int type, RegexOptions options)
+        {
             _type = type;
             _options = options;
         }
 
-        internal RegexNode(int type, RegexOptions options, char ch) {
+        internal RegexNode(int type, RegexOptions options, char ch)
+        {
             _type = type;
             _options = options;
             _ch = ch;
         }
 
-        internal RegexNode(int type, RegexOptions options, String str) {
+        internal RegexNode(int type, RegexOptions options, String str)
+        {
             _type = type;
             _options = options;
             _str = str;
         }
 
-        internal RegexNode(int type, RegexOptions options, int m) {
+        internal RegexNode(int type, RegexOptions options, int m)
+        {
             _type = type;
             _options = options;
             _m = m;
         }
 
-        internal RegexNode(int type, RegexOptions options, int m, int n) {
+        internal RegexNode(int type, RegexOptions options, int m, int n)
+        {
             _type = type;
             _options = options;
             _m = m;
             _n = n;
         }
 
-        internal bool UseOptionR() {
-            return(_options & RegexOptions.RightToLeft) != 0;
+        internal bool UseOptionR()
+        {
+            return (_options & RegexOptions.RightToLeft) != 0;
         }
 
-        internal RegexNode ReverseLeft() {
-            if (UseOptionR() && _type == Concatenate && _children != null) {
+        internal RegexNode ReverseLeft()
+        {
+            if (UseOptionR() && _type == Concatenate && _children != null)
+            {
                 _children.Reverse(0, _children.Count);
             }
 
             return this;
         }
 
-
         // Pass type as OneLazy or OneLoop
-        internal void MakeRep(int type, int min, int max) {
+        internal void MakeRep(int type, int min, int max)
+        {
             _type += (type - One);
             _m = min;
             _n = max;
@@ -182,10 +191,12 @@ namespace System.Text.RegularExpressions {
          *
          * Removes redundant nodes from the subtree, and returns a reduced subtree.
          */
-        internal RegexNode Reduce() {
+        internal RegexNode Reduce()
+        {
             RegexNode n;
 
-            switch (Type()) {
+            switch (Type())
+            {
                 case Alternate:
                     n = ReduceAlternation();
                     break;
@@ -216,18 +227,19 @@ namespace System.Text.RegularExpressions {
             return n;
         }
 
-
         /*
          * StripEnation:
          *
          * Simple optimization. If a concatenation or alternation has only
          * one child strip out the intermediate node. If it has zero children,
          * turn it into an empty.
-         * 
+         *
          */
 
-        internal RegexNode StripEnation(int emptyType) {
-            switch (ChildCount()) {
+        internal RegexNode StripEnation(int emptyType)
+        {
+            switch (ChildCount())
+            {
                 case 0:
                     return new RegexNode(emptyType, _options);
                 case 1:
@@ -244,7 +256,8 @@ namespace System.Text.RegularExpressions {
          * serve no function, so strip them out.
          */
 
-        internal RegexNode ReduceGroup() {
+        internal RegexNode ReduceGroup()
+        {
             RegexNode u;
 
             for (u = this; u.Type() == Group; )
@@ -260,7 +273,8 @@ namespace System.Text.RegularExpressions {
          * too lumpy
          */
 
-        internal RegexNode ReduceRep() {
+        internal RegexNode ReduceRep()
+        {
             RegexNode u;
             RegexNode child;
             int type;
@@ -272,18 +286,24 @@ namespace System.Text.RegularExpressions {
             min = _m;
             max = _n;
 
-            for (;;) {
+            for (; ; )
+            {
                 if (u.ChildCount() == 0)
                     break;
 
                 child = u.Child(0);
 
                 // multiply reps of the same type only
-                if (child.Type() != type) {
+                if (child.Type() != type)
+                {
                     int childType = child.Type();
 
-                    if (!(childType >= Oneloop && childType <= Setloop && type == Loop ||
-                          childType >= Onelazy && childType <= Setlazy && type == Lazyloop))
+                    if (
+                        !(
+                            childType >= Oneloop && childType <= Setloop && type == Loop
+                            || childType >= Onelazy && childType <= Setlazy && type == Lazyloop
+                        )
+                    )
                         break;
                 }
 
@@ -309,19 +329,23 @@ namespace System.Text.RegularExpressions {
          * or empty, it's transformed accordingly.
          */
 
-        internal RegexNode ReduceSet() {
+        internal RegexNode ReduceSet()
+        {
             // Extract empty-set, one and not-one case as special
 
-            if (RegexCharClass.IsEmpty(_str)) {
+            if (RegexCharClass.IsEmpty(_str))
+            {
                 _type = Nothing;
                 _str = null;
             }
-            else if (RegexCharClass.IsSingleton(_str)) {
+            else if (RegexCharClass.IsSingleton(_str))
+            {
                 _ch = RegexCharClass.SingletonChar(_str);
                 _str = null;
                 _type += (One - Set);
             }
-            else if (RegexCharClass.IsSingletonInverse(_str)) {
+            else if (RegexCharClass.IsSingletonInverse(_str))
+            {
                 _ch = RegexCharClass.SingletonChar(_str);
                 _str = null;
                 _type += (Notone - Set);
@@ -343,7 +367,8 @@ namespace System.Text.RegularExpressions {
          * <
 */
 
-        internal RegexNode ReduceAlternation() {
+        internal RegexNode ReduceAlternation()
+        {
             // Combine adjacent sets/chars
 
             bool wasLastSet;
@@ -362,71 +387,87 @@ namespace System.Text.RegularExpressions {
             lastNodeCannotMerge = false;
             optionsLast = 0;
 
-            for (i = 0, j = 0; i < _children.Count; i++, j++) {
+            for (i = 0, j = 0; i < _children.Count; i++, j++)
+            {
                 at = _children[i];
 
                 if (j < i)
                     _children[j] = at;
 
-                for (;;) {
-                    if (at._type == Alternate) {
+                for (; ; )
+                {
+                    if (at._type == Alternate)
+                    {
                         for (int k = 0; k < at._children.Count; k++)
                             at._children[k]._next = this;
 
                         _children.InsertRange(i + 1, at._children);
                         j--;
                     }
-                    else if (at._type == Set || at._type == One) {
+                    else if (at._type == Set || at._type == One)
+                    {
                         // Cannot merge sets if L or I options differ, or if either are negated.
-                        optionsAt = at._options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
+                        optionsAt =
+                            at._options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
 
-
-                        if (at._type == Set) {
-                            if (!wasLastSet || optionsLast != optionsAt || lastNodeCannotMerge || !RegexCharClass.IsMergeable(at._str)) {
+                        if (at._type == Set)
+                        {
+                            if (
+                                !wasLastSet
+                                || optionsLast != optionsAt
+                                || lastNodeCannotMerge
+                                || !RegexCharClass.IsMergeable(at._str)
+                            )
+                            {
                                 wasLastSet = true;
                                 lastNodeCannotMerge = !RegexCharClass.IsMergeable(at._str);
                                 optionsLast = optionsAt;
                                 break;
                             }
                         }
-                        else if (!wasLastSet || optionsLast != optionsAt || lastNodeCannotMerge) {
+                        else if (!wasLastSet || optionsLast != optionsAt || lastNodeCannotMerge)
+                        {
                             wasLastSet = true;
                             lastNodeCannotMerge = false;
                             optionsLast = optionsAt;
                             break;
                         }
 
-                        
                         // The last node was a Set or a One, we're a Set or One and our options are the same.
                         // Merge the two nodes.
                         j--;
                         prev = _children[j];
-                        
+
                         RegexCharClass prevCharClass;
-                        if (prev._type == RegexNode.One) {
+                        if (prev._type == RegexNode.One)
+                        {
                             prevCharClass = new RegexCharClass();
                             prevCharClass.AddChar(prev._ch);
                         }
-                        else {
+                        else
+                        {
                             prevCharClass = RegexCharClass.Parse(prev._str);
                         }
-                        
-                        if (at._type == RegexNode.One) {
+
+                        if (at._type == RegexNode.One)
+                        {
                             prevCharClass.AddChar(at._ch);
                         }
-                        else {
+                        else
+                        {
                             RegexCharClass atCharClass = RegexCharClass.Parse(at._str);
                             prevCharClass.AddCharClass(atCharClass);
                         }
-                        
+
                         prev._type = RegexNode.Set;
-                        prev._str  = prevCharClass.ToStringClass();
-                        
+                        prev._str = prevCharClass.ToStringClass();
                     }
-                    else if (at._type == RegexNode.Nothing) {
+                    else if (at._type == RegexNode.Nothing)
+                    {
                         j--;
                     }
-                    else {
+                    else
+                    {
                         wasLastSet = false;
                         lastNodeCannotMerge = false;
                     }
@@ -448,7 +489,8 @@ namespace System.Text.RegularExpressions {
          * (?:abc)(?:def) -> abcdef
          */
 
-        internal RegexNode ReduceConcatenation() {
+        internal RegexNode ReduceConcatenation()
+        {
             // Eliminate empties and concat adjacent strings/chars
 
             bool wasLastString;
@@ -463,7 +505,8 @@ namespace System.Text.RegularExpressions {
             wasLastString = false;
             optionsLast = 0;
 
-            for (i = 0, j = 0; i < _children.Count; i++, j++) {
+            for (i = 0, j = 0; i < _children.Count; i++, j++)
+            {
                 RegexNode at;
                 RegexNode prev;
 
@@ -472,20 +515,27 @@ namespace System.Text.RegularExpressions {
                 if (j < i)
                     _children[j] = at;
 
-                if (at._type == RegexNode.Concatenate &&
-                    ((at._options & RegexOptions.RightToLeft) == (_options & RegexOptions.RightToLeft))) {
+                if (
+                    at._type == RegexNode.Concatenate
+                    && (
+                        (at._options & RegexOptions.RightToLeft)
+                        == (_options & RegexOptions.RightToLeft)
+                    )
+                )
+                {
                     for (int k = 0; k < at._children.Count; k++)
                         at._children[k]._next = this;
 
                     _children.InsertRange(i + 1, at._children);
                     j--;
                 }
-                else if (at._type == RegexNode.Multi ||
-                         at._type == RegexNode.One) {
+                else if (at._type == RegexNode.Multi || at._type == RegexNode.One)
+                {
                     // Cannot merge strings if L or I options differ
                     optionsAt = at._options & (RegexOptions.RightToLeft | RegexOptions.IgnoreCase);
 
-                    if (!wasLastString || optionsLast != optionsAt) {
+                    if (!wasLastString || optionsLast != optionsAt)
+                    {
                         wasLastString = true;
                         optionsLast = optionsAt;
                         continue;
@@ -493,29 +543,33 @@ namespace System.Text.RegularExpressions {
 
                     prev = _children[--j];
 
-                    if (prev._type == RegexNode.One) {
+                    if (prev._type == RegexNode.One)
+                    {
                         prev._type = RegexNode.Multi;
                         prev._str = Convert.ToString(prev._ch, CultureInfo.InvariantCulture);
                     }
 
-                    if ((optionsAt & RegexOptions.RightToLeft) == 0) {
+                    if ((optionsAt & RegexOptions.RightToLeft) == 0)
+                    {
                         if (at._type == RegexNode.One)
                             prev._str += at._ch.ToString();
                         else
                             prev._str += at._str;
                     }
-                    else {
+                    else
+                    {
                         if (at._type == RegexNode.One)
                             prev._str = at._ch.ToString() + prev._str;
                         else
                             prev._str = at._str + prev._str;
                     }
-
                 }
-                else if (at._type == RegexNode.Empty) {
+                else if (at._type == RegexNode.Empty)
+                {
                     j--;
                 }
-                else {
+                else
+                {
                     wasLastString = false;
                 }
             }
@@ -526,7 +580,8 @@ namespace System.Text.RegularExpressions {
             return StripEnation(RegexNode.Empty);
         }
 
-        internal RegexNode MakeQuantifier(bool lazy, int min, int max) {
+        internal RegexNode MakeQuantifier(bool lazy, int min, int max)
+        {
             RegexNode result;
 
             if (min == 0 && max == 0)
@@ -535,7 +590,8 @@ namespace System.Text.RegularExpressions {
             if (min == 1 && max == 1)
                 return this;
 
-            switch (_type) {
+            switch (_type)
+            {
                 case RegexNode.One:
                 case RegexNode.Notone:
                 case RegexNode.Set:
@@ -544,13 +600,19 @@ namespace System.Text.RegularExpressions {
                     return this;
 
                 default:
-                    result = new RegexNode(lazy ? RegexNode.Lazyloop : RegexNode.Loop, _options, min, max);
+                    result = new RegexNode(
+                        lazy ? RegexNode.Lazyloop : RegexNode.Loop,
+                        _options,
+                        min,
+                        max
+                    );
                     result.AddChild(this);
                     return result;
             }
         }
 
-        internal void AddChild(RegexNode newChild) {
+        internal void AddChild(RegexNode newChild)
+        {
             RegexNode reducedChild;
 
             if (_children == null)
@@ -561,36 +623,66 @@ namespace System.Text.RegularExpressions {
             _children.Add(reducedChild);
             reducedChild._next = this;
         }
-        internal RegexNode Child(int i) {
+
+        internal RegexNode Child(int i)
+        {
             return _children[i];
         }
 
-        internal int ChildCount() {
+        internal int ChildCount()
+        {
             return _children == null ? 0 : _children.Count;
         }
 
-        internal int Type() {
+        internal int Type()
+        {
             return _type;
         }
 
 #if DBG
-        internal static String[] TypeStr = new String[] {
-            "Onerep", "Notonerep", "Setrep",
-            "Oneloop", "Notoneloop", "Setloop",
-            "Onelazy", "Notonelazy", "Setlazy",
-            "One", "Notone", "Set",
-            "Multi", "Ref",
-            "Bol", "Eol", "Boundary", "Nonboundary",
-            "ECMABoundary", "NonECMABoundary",
-            "Beginning", "Start", "EndZ", "End",
-            "Nothing", "Empty",
-            "Alternate", "Concatenate",
-            "Loop", "Lazyloop",
-            "Capture", "Group", "Require", "Prevent", "Greedy",
-            "Testref", "Testgroup"};
+        internal static String[] TypeStr = new String[]
+        {
+            "Onerep",
+            "Notonerep",
+            "Setrep",
+            "Oneloop",
+            "Notoneloop",
+            "Setloop",
+            "Onelazy",
+            "Notonelazy",
+            "Setlazy",
+            "One",
+            "Notone",
+            "Set",
+            "Multi",
+            "Ref",
+            "Bol",
+            "Eol",
+            "Boundary",
+            "Nonboundary",
+            "ECMABoundary",
+            "NonECMABoundary",
+            "Beginning",
+            "Start",
+            "EndZ",
+            "End",
+            "Nothing",
+            "Empty",
+            "Alternate",
+            "Concatenate",
+            "Loop",
+            "Lazyloop",
+            "Capture",
+            "Group",
+            "Require",
+            "Prevent",
+            "Greedy",
+            "Testref",
+            "Testgroup",
+        };
 
-        internal String Description() {
-
+        internal String Description()
+        {
             StringBuilder ArgSb = new StringBuilder();
 
             ArgSb.Append(TypeStr[_type]);
@@ -610,7 +702,8 @@ namespace System.Text.RegularExpressions {
             if ((_options & RegexOptions.ECMAScript) != 0)
                 ArgSb.Append("-E");
 
-            switch (_type) {
+            switch (_type)
+            {
                 case Oneloop:
                 case Notoneloop:
                 case Onelazy:
@@ -620,7 +713,13 @@ namespace System.Text.RegularExpressions {
                     ArgSb.Append("(Ch = " + RegexCharClass.CharDescription(_ch) + ")");
                     break;
                 case Capture:
-                    ArgSb.Append("(index = " + _m.ToString(CultureInfo.InvariantCulture) + ", unindex = " + _n.ToString(CultureInfo.InvariantCulture) + ")");
+                    ArgSb.Append(
+                        "(index = "
+                            + _m.ToString(CultureInfo.InvariantCulture)
+                            + ", unindex = "
+                            + _n.ToString(CultureInfo.InvariantCulture)
+                            + ")"
+                    );
                     break;
                 case Ref:
                 case Testref:
@@ -636,7 +735,8 @@ namespace System.Text.RegularExpressions {
                     break;
             }
 
-            switch (_type) {
+            switch (_type)
+            {
                 case Oneloop:
                 case Notoneloop:
                 case Onelazy:
@@ -645,8 +745,18 @@ namespace System.Text.RegularExpressions {
                 case Setlazy:
                 case Loop:
                 case Lazyloop:
-                    ArgSb.Append("(Min = " + _m.ToString(CultureInfo.InvariantCulture) + ", Max = " + (_n == Int32.MaxValue ? "inf" : Convert.ToString(_n, CultureInfo.InvariantCulture)) + ")");
-		    break;
+                    ArgSb.Append(
+                        "(Min = "
+                            + _m.ToString(CultureInfo.InvariantCulture)
+                            + ", Max = "
+                            + (
+                                _n == Int32.MaxValue
+                                    ? "inf"
+                                    : Convert.ToString(_n, CultureInfo.InvariantCulture)
+                            )
+                            + ")"
+                    );
+                    break;
             }
 
             return ArgSb.ToString();
@@ -654,7 +764,8 @@ namespace System.Text.RegularExpressions {
 
         internal const String Space = "                                ";
 
-        internal void Dump() {
+        internal void Dump()
+        {
             List<int> Stack = new List<int>();
             RegexNode CurNode;
             int CurChild;
@@ -664,8 +775,10 @@ namespace System.Text.RegularExpressions {
 
             Debug.WriteLine(CurNode.Description());
 
-            for (;;) {
-                if (CurNode._children != null && CurChild < CurNode._children.Count) {
+            for (; ; )
+            {
+                if (CurNode._children != null && CurChild < CurNode._children.Count)
+                {
                     Stack.Add(CurChild + 1);
                     CurNode = CurNode._children[CurChild];
                     CurChild = 0;
@@ -676,7 +789,8 @@ namespace System.Text.RegularExpressions {
 
                     Debug.WriteLine(Space.Substring(0, Depth) + CurNode.Description());
                 }
-                else {
+                else
+                {
                     if (Stack.Count == 0)
                         break;
 
@@ -687,7 +801,5 @@ namespace System.Text.RegularExpressions {
             }
         }
 #endif
-
     }
-
 }

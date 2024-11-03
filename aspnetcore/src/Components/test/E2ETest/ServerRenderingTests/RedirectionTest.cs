@@ -11,17 +11,17 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
-public class RedirectionTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class RedirectionTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     private IWebElement _originalH1Element;
 
     public RedirectionTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
     public override async Task InitializeAsync()
     {
@@ -169,7 +169,9 @@ public class RedirectionTest : ServerTestBase<BasicTestAppServerSiteFixture<Razo
     public void RedirectEnhancedNonBlazorGetToInternal()
     {
         // See above for why enhanced nav doesn't support preserving the hash
-        Browser.Exists(By.LinkText("Enhanced GET to non-Blazor endpoint with internal redirection")).Click();
+        Browser
+            .Exists(By.LinkText("Enhanced GET to non-Blazor endpoint with internal redirection"))
+            .Click();
         Browser.Equal("Scroll to hash", () => _originalH1Element.Text);
         Assert.EndsWith("/subdir/nav/scroll-to-hash", Browser.Url);
 
@@ -182,7 +184,9 @@ public class RedirectionTest : ServerTestBase<BasicTestAppServerSiteFixture<Razo
     [Fact]
     public void RedirectEnhancedNonBlazorGetToExternal()
     {
-        Browser.Exists(By.LinkText("Enhanced GET to non-Blazor endpoint with external redirection")).Click();
+        Browser
+            .Exists(By.LinkText("Enhanced GET to non-Blazor endpoint with external redirection"))
+            .Click();
         Browser.Contains("microsoft.com", () => Browser.Url);
     }
 

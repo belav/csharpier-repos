@@ -28,7 +28,11 @@ public class HubConnectionStartBenchmark
         try
         {
             HandshakeProtocol.WriteResponseMessage(HandshakeResponseMessage.Empty, writer);
-            _handshakeResponseResult = new ReadResult(new ReadOnlySequence<byte>(writer.ToArray()), false, false);
+            _handshakeResponseResult = new ReadResult(
+                new ReadOnlySequence<byte>(writer.ToArray()),
+                false,
+                false
+            );
         }
         finally
         {
@@ -44,7 +48,9 @@ public class HubConnectionStartBenchmark
         {
             var connection = new DefaultConnectionContext();
             // prevents keep alive time being activated
-            connection.Features.Set<IConnectionInherentKeepAliveFeature>(new TestConnectionInherentKeepAliveFeature());
+            connection.Features.Set<IConnectionInherentKeepAliveFeature>(
+                new TestConnectionInherentKeepAliveFeature()
+            );
             connection.Transport = _pipe;
             return new ValueTask<ConnectionContext>(connection);
         });

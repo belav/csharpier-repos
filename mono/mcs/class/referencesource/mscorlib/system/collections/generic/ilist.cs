@@ -1,32 +1,32 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 /*============================================================
 **
 ** Interface:  IList
-** 
+**
 ** <OWNER>kimhamil</OWNER>
 **
 **
 ** Purpose: Base interface for all generic lists.
 **
-** 
+**
 ===========================================================*/
-namespace System.Collections.Generic {
-    
+namespace System.Collections.Generic
+{
     using System;
     using System.Collections;
-    using System.Runtime.CompilerServices;
     using System.Diagnostics.Contracts;
+    using System.Runtime.CompilerServices;
 
     // An IList is an ordered collection of objects.  The exact ordering
     // is up to the implementation of the list, ranging from a sorted
-    // order to insertion order.  
+    // order to insertion order.
 
     // Note that T[] : IList<T>, and we want to ensure that if you use
-    // IList<YourValueType>, we ensure a YourValueType[] can be used 
+    // IList<YourValueType>, we ensure a YourValueType[] can be used
     // without jitting.  Hence the TypeDependencyAttribute on SZArrayHelper.
     // This is a special hack internally though - see VM\compile.cpp.
     // The same attribute is on IEnumerable<T> and ICollection<T>.
@@ -37,21 +37,18 @@ namespace System.Collections.Generic {
     public interface IList<T> : ICollection<T>
     {
         // The Item property provides methods to read and edit entries in the List.
-        T this[int index] {
-            get;
-            set;
-        }
-    
+        T this[int index] { get; set; }
+
         // Returns the index of a particular item, if it is in the list.
         // Returns -1 if the item isn't in the list.
         int IndexOf(T item);
-    
+
         // Inserts value into the list at position index.
-        // index must be non-negative and less than or equal to the 
+        // index must be non-negative and less than or equal to the
         // number of elements in the list.  If index equals the number
         // of items in the list, then value is appended to the end.
         void Insert(int index, T item);
-        
+
         // Removes the item at position index.
         void RemoveAt(int index);
     }
@@ -60,23 +57,26 @@ namespace System.Collections.Generic {
     [ContractClassFor(typeof(IList<>))]
     internal abstract class IListContract<T> : IList<T>
     {
-        T IList<T>.this[int index] {
-            get {
+        T IList<T>.this[int index]
+        {
+            get
+            {
                 //Contract.Requires(index >= 0);
                 //Contract.Requires(index < ((ICollection<T>)this).Count);
                 return default(T);
             }
-            set {
+            set
+            {
                 //Contract.Requires(index >= 0);
                 //Contract.Requires(index < ((ICollection<T>)this).Count);
             }
         }
-        
+
         IEnumerator System.Collections.IEnumerable.GetEnumerator()
         {
             return default(IEnumerator);
         }
-        
+
         IEnumerator<T> IEnumerable<T>.GetEnumerator()
         {
             return default(IEnumerator<T>);
@@ -103,7 +103,7 @@ namespace System.Collections.Generic {
             //Contract.Requires(index < ((ICollection<T>)this).Count);
             //Contract.Ensures(((ICollection<T>)this).Count == Contract.OldValue(((ICollection<T>)this).Count) - 1);  // Not threadsafe
         }
-        
+
         #region ICollection<T> Members
 
         void ICollection<T>.Add(T value)
@@ -111,14 +111,14 @@ namespace System.Collections.Generic {
             //Contract.Ensures(((ICollection<T>)this).Count == Contract.OldValue(((ICollection<T>)this).Count) + 1);  // Not threadsafe
         }
 
-        bool ICollection<T>.IsReadOnly {
+        bool ICollection<T>.IsReadOnly
+        {
             get { return default(bool); }
         }
 
-        int ICollection<T>.Count {
-            get {
-                return default(int);
-            }
+        int ICollection<T>.Count
+        {
+            get { return default(int); }
         }
 
         void ICollection<T>.Clear()

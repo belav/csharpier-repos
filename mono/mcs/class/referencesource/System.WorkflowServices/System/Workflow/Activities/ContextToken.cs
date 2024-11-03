@@ -21,28 +21,40 @@ namespace System.Workflow.Activities
     using System.Xml;
 
     [DesignerSerializer(typeof(DependencyObjectCodeDomSerializer), typeof(CodeDomSerializer))]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public sealed class ContextToken : DependencyObject, IPropertyValueProvider
     {
         public const string RootContextName = "(RootContext)";
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
-        internal static readonly DependencyProperty NameProperty =
-            DependencyProperty.Register("Name",
+        internal static readonly DependencyProperty NameProperty = DependencyProperty.Register(
+            "Name",
             typeof(string),
             typeof(ContextToken),
-            new PropertyMetadata(null,
-            DependencyPropertyOptions.Metadata,
-            new Attribute[] { new BrowsableAttribute(false) }));
+            new PropertyMetadata(
+                null,
+                DependencyPropertyOptions.Metadata,
+                new Attribute[] { new BrowsableAttribute(false) }
+            )
+        );
 
         [SuppressMessage("Microsoft.Security", "CA2104:DoNotDeclareReadOnlyMutableReferenceTypes")]
         internal static readonly DependencyProperty OwnerActivityNameProperty =
-            DependencyProperty.Register("OwnerActivityName",
-            typeof(string),
-            typeof(ContextToken),
-            new PropertyMetadata(null,
-            DependencyPropertyOptions.Metadata,
-            new Attribute[] { new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)) }));
+            DependencyProperty.Register(
+                "OwnerActivityName",
+                typeof(string),
+                typeof(ContextToken),
+                new PropertyMetadata(
+                    null,
+                    DependencyPropertyOptions.Metadata,
+                    new Attribute[]
+                    {
+                        new TypeConverterAttribute(typeof(PropertyValueProviderTypeConverter)),
+                    }
+                )
+            );
 
         public ContextToken()
         {
@@ -53,8 +65,10 @@ namespace System.Workflow.Activities
         {
             if (string.IsNullOrEmpty(name))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("name",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "name",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
             this.Name = name;
         }
@@ -64,14 +78,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.ContextToken_Name_Description)]
         public string Name
         {
-            get
-            {
-                return (string) GetValue(NameProperty);
-            }
-            set
-            {
-                SetValue(NameProperty, value);
-            }
+            get { return (string)GetValue(NameProperty); }
+            set { SetValue(NameProperty, value); }
         }
 
         [DefaultValue(null)]
@@ -79,15 +87,8 @@ namespace System.Workflow.Activities
         [SR2Description(SR2DescriptionAttribute.ContextToken_OwnerActivityName_Description)]
         public string OwnerActivityName
         {
-            get
-            {
-                return (string) GetValue(OwnerActivityNameProperty);
-            }
-
-            set
-            {
-                SetValue(OwnerActivityNameProperty, value);
-            }
+            get { return (string)GetValue(OwnerActivityNameProperty); }
+            set { SetValue(OwnerActivityNameProperty, value); }
         }
 
         internal bool IsRootContext
@@ -98,7 +99,13 @@ namespace System.Workflow.Activities
                 {
                     return false;
                 }
-                if (string.Compare(this.Name, ContextToken.RootContextName, StringComparison.Ordinal) != 0)
+                if (
+                    string.Compare(
+                        this.Name,
+                        ContextToken.RootContextName,
+                        StringComparison.Ordinal
+                    ) != 0
+                )
                 {
                     return false;
                 }
@@ -110,10 +117,21 @@ namespace System.Workflow.Activities
         {
             StringCollection names = new StringCollection();
 
-            if (string.Equals(context.PropertyDescriptor.Name, "OwnerActivityName", StringComparison.Ordinal))
+            if (
+                string.Equals(
+                    context.PropertyDescriptor.Name,
+                    "OwnerActivityName",
+                    StringComparison.Ordinal
+                )
+            )
             {
-                ISelectionService selectionService = context.GetService(typeof(ISelectionService)) as ISelectionService;
-                if (selectionService != null && selectionService.SelectionCount == 1 && selectionService.PrimarySelection is Activity)
+                ISelectionService selectionService =
+                    context.GetService(typeof(ISelectionService)) as ISelectionService;
+                if (
+                    selectionService != null
+                    && selectionService.SelectionCount == 1
+                    && selectionService.PrimarySelection is Activity
+                )
                 {
                     // add empty string as an option
                     //
@@ -134,9 +152,11 @@ namespace System.Workflow.Activities
             return names;
         }
 
-        internal static ReceiveContext GetReceiveContext(Activity activity,
+        internal static ReceiveContext GetReceiveContext(
+            Activity activity,
             string contextName,
-            string ownerActivityName)
+            string ownerActivityName
+        )
         {
             if (activity == null)
             {
@@ -144,8 +164,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("contextToken",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "contextToken",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             Activity contextActivity = activity.ContextActivity;
@@ -154,7 +176,10 @@ namespace System.Workflow.Activities
             if (contextActivity == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -187,11 +212,15 @@ namespace System.Workflow.Activities
             if (owner == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
-                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty) as ReceiveContextCollection;
+                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty)
+                as ReceiveContextCollection;
             if (collection == null)
             {
                 return null;
@@ -219,18 +248,25 @@ namespace System.Workflow.Activities
             if (contextActivity == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
-                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty) as ReceiveContextCollection;
+                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty)
+                as ReceiveContextCollection;
             if (collection == null)
             {
                 return null;
@@ -266,7 +302,12 @@ namespace System.Workflow.Activities
             }
             else
             {
-                RegisterReceiveContext(activity, workflowId, contextToken.Name, contextToken.OwnerActivityName);
+                RegisterReceiveContext(
+                    activity,
+                    workflowId,
+                    contextToken.Name,
+                    contextToken.OwnerActivityName
+                );
             }
         }
 
@@ -287,10 +328,12 @@ namespace System.Workflow.Activities
             yield break;
         }
 
-        static void RegisterReceiveContext(ReceiveActivity activity,
+        static void RegisterReceiveContext(
+            ReceiveActivity activity,
             Guid workflowId,
             string contextName,
-            string ownerActivityName)
+            string ownerActivityName
+        )
         {
             if (activity == null)
             {
@@ -298,8 +341,10 @@ namespace System.Workflow.Activities
             }
             if (string.IsNullOrEmpty(contextName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("contextName",
-                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    "contextName",
+                    SR2.GetString(SR2.Error_ArgumentValueNullOrEmptyString)
+                );
             }
 
             Activity contextActivity = activity.ContextActivity;
@@ -308,7 +353,10 @@ namespace System.Workflow.Activities
             if (contextActivity == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             if (string.IsNullOrEmpty(ownerActivityName))
@@ -341,15 +389,22 @@ namespace System.Workflow.Activities
             if (owner == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
-                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty) as ReceiveContextCollection;
+                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty)
+                as ReceiveContextCollection;
             if (collection == null)
             {
                 collection = new ReceiveContextCollection();
-                owner.SetValue(ReceiveContextCollection.ReceiveContextCollectionProperty, collection);
+                owner.SetValue(
+                    ReceiveContextCollection.ReceiveContextCollectionProperty,
+                    collection
+                );
             }
 
             if (!collection.Contains(contextName))
@@ -369,22 +424,32 @@ namespace System.Workflow.Activities
             if (contextActivity == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             Activity owner = contextActivity.RootActivity;
             if (owner == null)
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
-                    new InvalidOperationException(SR2.GetString(SR2.Error_ContextOwnerActivityMissing)));
+                    new InvalidOperationException(
+                        SR2.GetString(SR2.Error_ContextOwnerActivityMissing)
+                    )
+                );
             }
 
             ReceiveContextCollection collection =
-                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty) as ReceiveContextCollection;
+                owner.GetValue(ReceiveContextCollection.ReceiveContextCollectionProperty)
+                as ReceiveContextCollection;
             if (collection == null)
             {
                 collection = new ReceiveContextCollection();
-                owner.SetValue(ReceiveContextCollection.ReceiveContextCollectionProperty, collection);
+                owner.SetValue(
+                    ReceiveContextCollection.ReceiveContextCollectionProperty,
+                    collection
+                );
             }
 
             if (!collection.Contains(ContextToken.RootContextName))

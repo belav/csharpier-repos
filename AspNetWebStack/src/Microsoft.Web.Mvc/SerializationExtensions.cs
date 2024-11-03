@@ -14,9 +14,19 @@ namespace Microsoft.Web.Mvc
             return SerializeInternal(htmlHelper, name, null, useViewData: true);
         }
 
-        internal static MvcHtmlString Serialize(this HtmlHelper htmlHelper, string name, MvcSerializer serializer)
+        internal static MvcHtmlString Serialize(
+            this HtmlHelper htmlHelper,
+            string name,
+            MvcSerializer serializer
+        )
         {
-            return SerializeInternal(htmlHelper, name, null, useViewData: true, serializer: serializer);
+            return SerializeInternal(
+                htmlHelper,
+                name,
+                null,
+                useViewData: true,
+                serializer: serializer
+            );
         }
 
         public static MvcHtmlString Serialize(this HtmlHelper htmlHelper, string name, object data)
@@ -24,17 +34,39 @@ namespace Microsoft.Web.Mvc
             return SerializeInternal(htmlHelper, name, data, useViewData: false);
         }
 
-        internal static MvcHtmlString Serialize(this HtmlHelper htmlHelper, string name, object data, MvcSerializer serializer)
+        internal static MvcHtmlString Serialize(
+            this HtmlHelper htmlHelper,
+            string name,
+            object data,
+            MvcSerializer serializer
+        )
         {
-            return SerializeInternal(htmlHelper, name, data, useViewData: false, serializer: serializer);
+            return SerializeInternal(
+                htmlHelper,
+                name,
+                data,
+                useViewData: false,
+                serializer: serializer
+            );
         }
 
-        private static MvcHtmlString SerializeInternal(HtmlHelper htmlHelper, string name, object data, bool useViewData)
+        private static MvcHtmlString SerializeInternal(
+            HtmlHelper htmlHelper,
+            string name,
+            object data,
+            bool useViewData
+        )
         {
             return SerializeInternal(htmlHelper, name, data, useViewData, null);
         }
 
-        private static MvcHtmlString SerializeInternal(HtmlHelper htmlHelper, string name, object data, bool useViewData, MvcSerializer serializer)
+        private static MvcHtmlString SerializeInternal(
+            HtmlHelper htmlHelper,
+            string name,
+            object data,
+            bool useViewData,
+            MvcSerializer serializer
+        )
         {
             if (htmlHelper == null)
             {

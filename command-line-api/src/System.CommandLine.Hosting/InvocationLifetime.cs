@@ -3,12 +3,10 @@
 
 using System.Threading;
 using System.Threading.Tasks;
-
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
-
 #if NETSTANDARD2_0
 using IHostEnvironment = Microsoft.Extensions.Hosting.IHostingEnvironment;
 using IHostApplicationLifetime = Microsoft.Extensions.Hosting.IApplicationLifetime;
@@ -26,16 +24,17 @@ namespace System.CommandLine.Hosting
             IOptions<InvocationLifetimeOptions> options,
             IHostEnvironment environment,
             IHostApplicationLifetime applicationLifetime,
-            ILoggerFactory loggerFactory = null)
+            ILoggerFactory loggerFactory = null
+        )
         {
             Options = options?.Value ?? throw new ArgumentNullException(nameof(options));
-            Environment = environment
-                ?? throw new ArgumentNullException(nameof(environment));
-            ApplicationLifetime = applicationLifetime
-                ?? throw new ArgumentNullException(nameof(applicationLifetime));
+            Environment = environment ?? throw new ArgumentNullException(nameof(environment));
+            ApplicationLifetime =
+                applicationLifetime ?? throw new ArgumentNullException(nameof(applicationLifetime));
 
-            Logger = (loggerFactory ?? NullLoggerFactory.Instance)
-                .CreateLogger("Microsoft.Hosting.Lifetime");
+            Logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger(
+                "Microsoft.Hosting.Lifetime"
+            );
         }
 
         public InvocationLifetimeOptions Options { get; }
@@ -47,22 +46,31 @@ namespace System.CommandLine.Hosting
         {
             if (!Options.SuppressStatusMessages)
             {
-                appStartedReg = ApplicationLifetime.ApplicationStarted.Register(state =>
-                {
-                    ((InvocationLifetime)state).OnApplicationStarted();
-                }, this);
-                appStoppingReg = ApplicationLifetime.ApplicationStopping.Register(state =>
-                {
-                    ((InvocationLifetime)state).OnApplicationStopping();
-                }, this);
+                appStartedReg = ApplicationLifetime.ApplicationStarted.Register(
+                    state =>
+                    {
+                        ((InvocationLifetime)state).OnApplicationStarted();
+                    },
+                    this
+                );
+                appStoppingReg = ApplicationLifetime.ApplicationStopping.Register(
+                    state =>
+                    {
+                        ((InvocationLifetime)state).OnApplicationStopping();
+                    },
+                    this
+                );
             }
 
             // The token comes from HostingAction.InvokeAsync
             // and it's the invocation cancellation token.
-            invokeCancelReg = cancellationToken.Register(state =>
-            {
-                ((InvocationLifetime)state).OnInvocationCancelled();
-            }, this);
+            invokeCancelReg = cancellationToken.Register(
+                state =>
+                {
+                    ((InvocationLifetime)state).OnInvocationCancelled();
+                },
+                this
+            );
 
             return Task.CompletedTask;
         }

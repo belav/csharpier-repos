@@ -13,9 +13,12 @@ public class Program
 
         Bacon defaultBacon = new Bacon(-180, 180, true, false, 300f, 0.1f, 0.1f, "Foo", false);
         currentFoo = new Foo();
-        try {
+        try
+        {
             currentFoo.GetBar().m_Bacon = defaultBacon;
-        } catch (NullReferenceException) {
+        }
+        catch (NullReferenceException)
+        {
             return 100;
         }
         return 101;
@@ -25,12 +28,12 @@ public class Program
 public class Foo
 {
     private Bar m_Bar;
+
     public Bar GetBar()
     {
         return m_Bar;
     }
 }
-
 
 public class Bar
 {
@@ -40,10 +43,11 @@ public class Bar
 public struct Bacon
 {
     public float Value;
+
     public enum FooEnum
     {
         One,
-        Two
+        Two,
     };
 
     public FooEnum m_FooEnum;
@@ -75,9 +79,16 @@ public struct Bacon
     int m_i2;
 
     public Bacon(
-        float minValue, float maxValue, bool wrap, bool rangeLocked,
-        float maxSpeed, float accelTime, float decelTime,
-        string name, bool invert)
+        float minValue,
+        float maxValue,
+        bool wrap,
+        bool rangeLocked,
+        float maxSpeed,
+        float accelTime,
+        float decelTime,
+        string name,
+        bool invert
+    )
     {
         m_f4 = minValue;
         m_f5 = maxValue;

@@ -10,7 +10,7 @@ using System;
 namespace System.IdentityModel.Tokens
 {
     /// <summary>
-    /// Used in the RST to indicated the desired algorithm used to compute key based on 
+    /// Used in the RST to indicated the desired algorithm used to compute key based on
     /// the combined entropies from both token requestor and token issuer.
     /// </summary>
     public static class ComputedKeyAlgorithms

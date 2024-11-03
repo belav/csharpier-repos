@@ -14,8 +14,8 @@
 
 namespace Castle.DynamicProxy.Tests.Interfaces
 {
-	public interface IGenericWithProperty<T>
-	{
-		object SomeProperty { get; set; }
-	}
+    public interface IGenericWithProperty<T>
+    {
+        object SomeProperty { get; set; }
+    }
 }

@@ -15,10 +15,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -34,73 +34,80 @@ using System.Configuration;
 
 namespace System.Web.Configuration
 {
-	[ConfigurationCollection (typeof (HttpModuleAction), CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap)]
-	public sealed class HttpModuleActionCollection : ConfigurationElementCollection
-	{
-		static ConfigurationPropertyCollection properties;
+    [ConfigurationCollection(
+        typeof(HttpModuleAction),
+        CollectionType = ConfigurationElementCollectionType.AddRemoveClearMap
+    )]
+    public sealed class HttpModuleActionCollection : ConfigurationElementCollection
+    {
+        static ConfigurationPropertyCollection properties;
 
-		static HttpModuleActionCollection ()
-		{
-			properties = new ConfigurationPropertyCollection ();
-		}
+        static HttpModuleActionCollection()
+        {
+            properties = new ConfigurationPropertyCollection();
+        }
 
-		public HttpModuleActionCollection ()
-		{
-		}
-			
-		public void Add (HttpModuleAction httpModule)
-		{
-			BaseAdd (httpModule);
-		}
+        public HttpModuleActionCollection() { }
 
-		public void Clear ()
-		{
-			BaseClear ();
-		}
+        public void Add(HttpModuleAction httpModule)
+        {
+            BaseAdd(httpModule);
+        }
 
-		protected override ConfigurationElement CreateNewElement ()
-		{
-			return new HttpModuleAction ();
-		}
+        public void Clear()
+        {
+            BaseClear();
+        }
 
-		protected override object GetElementKey (ConfigurationElement element)
-		{
-			return ((HttpModuleAction)element).Name;
-		}
+        protected override ConfigurationElement CreateNewElement()
+        {
+            return new HttpModuleAction();
+        }
 
-		public int IndexOf (HttpModuleAction action)
-		{
-			return BaseIndexOf (action);
-		}
+        protected override object GetElementKey(ConfigurationElement element)
+        {
+            return ((HttpModuleAction)element).Name;
+        }
 
-		public void Remove (string name)
-		{
-			BaseRemove (name);
-		}
+        public int IndexOf(HttpModuleAction action)
+        {
+            return BaseIndexOf(action);
+        }
 
-		public void Remove (HttpModuleAction action)
-		{
-			BaseRemove (action.Name);
-		}
+        public void Remove(string name)
+        {
+            BaseRemove(name);
+        }
 
-		public void RemoveAt (int index)
-		{
-			BaseRemoveAt (index);
-		}
+        public void Remove(HttpModuleAction action)
+        {
+            BaseRemove(action.Name);
+        }
 
-		protected override bool IsElementRemovable (ConfigurationElement element)
-		{
-			return base.IsElementRemovable (element);
-		}
+        public void RemoveAt(int index)
+        {
+            BaseRemoveAt(index);
+        }
 
-		protected internal override ConfigurationPropertyCollection Properties {
-			get { return properties; }
-		}
+        protected override bool IsElementRemovable(ConfigurationElement element)
+        {
+            return base.IsElementRemovable(element);
+        }
 
-		public HttpModuleAction this[int index] {
-			get { return (HttpModuleAction)BaseGet (index); }
-			set { if (BaseGet (index) != null) BaseRemoveAt (index); BaseAdd (index, value); }
-		}
-	}
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return properties; }
+        }
+
+        public HttpModuleAction this[int index]
+        {
+            get { return (HttpModuleAction)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                    BaseRemoveAt(index);
+                BaseAdd(index, value);
+            }
+        }
+    }
 }
-

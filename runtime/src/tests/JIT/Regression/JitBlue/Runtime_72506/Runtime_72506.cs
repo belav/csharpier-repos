@@ -17,7 +17,10 @@ public class Runtime_72506
         AssertEqual(Vector256.Create(1f).ToString(), "<1, 1, 1, 1, 1, 1, 1, 1>");
         AssertEqual(Vector256.CreateScalar(1f).ToString(), "<1, 0, 0, 0, 0, 0, 0, 0>");
         AssertEqual(Vector256.CreateScalarUnsafe(1f).ToScalar().ToString(), "1");
-        AssertEqual(Vector256.Create(0.0f, 1, 2, 3, 4, 5, 6, 7).ToString(), "<0, 1, 2, 3, 4, 5, 6, 7>");
+        AssertEqual(
+            Vector256.Create(0.0f, 1, 2, 3, 4, 5, 6, 7).ToString(),
+            "<0, 1, 2, 3, 4, 5, 6, 7>"
+        );
 
         // double
         AssertEqual(Vector256.Create(1.0).ToString(), "<1, 1, 1, 1>");
@@ -26,10 +29,21 @@ public class Runtime_72506
         AssertEqual(Vector256.Create(0.0, 1, 2, 3).ToString(), "<0, 1, 2, 3>");
 
         // ushort
-        AssertEqual(Vector256.Create((ushort)1).ToString(), "<1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1>");
-        AssertEqual(Vector256.CreateScalar((ushort)1).ToString(), "<1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0>");
+        AssertEqual(
+            Vector256.Create((ushort)1).ToString(),
+            "<1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1>"
+        );
+        AssertEqual(
+            Vector256.CreateScalar((ushort)1).ToString(),
+            "<1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0>"
+        );
         AssertEqual(Vector256.CreateScalarUnsafe((ushort)1).ToScalar().ToString(), "1");
-        AssertEqual(Vector256.Create((ushort)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15).ToString(), "<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>");
+        AssertEqual(
+            Vector256
+                .Create((ushort)0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15)
+                .ToString(),
+            "<0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15>"
+        );
 
         // long
         AssertEqual(Vector256.Create((long)1).ToString(), "<1, 1, 1, 1>");

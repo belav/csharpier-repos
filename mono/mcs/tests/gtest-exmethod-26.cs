@@ -1,29 +1,31 @@
 // Compiler options: -r:gtest-exmethod-26-lib.dll
 
 using System;
-using Test2;
 using test;
+using Test2;
 
 namespace test
 {
-	internal static class TypeExtensions
-	{
-		public static bool IsNullable (this Type t)
-		{
-			return true;
-		}
-	}
+    internal static class TypeExtensions
+    {
+        public static bool IsNullable(this Type t)
+        {
+            return true;
+        }
+    }
 }
+
 namespace testmono
 {
-	class MainClass
-	{
-		public static void Main ()
-		{
-			string s = "";
-			if (s.GetType ().IsNullable ()) {
-				Console.WriteLine ("aaa");
-			}
-		}
-	}
+    class MainClass
+    {
+        public static void Main()
+        {
+            string s = "";
+            if (s.GetType().IsNullable())
+            {
+                Console.WriteLine("aaa");
+            }
+        }
+    }
 }

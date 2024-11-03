@@ -4,8 +4,8 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
@@ -14,7 +14,8 @@ namespace System.Web.UI.WebControls.WebParts {
     // at a time.  As a result, it is most useful when an IWebPartParameters consumer connects
     // to a provider via a transformer, like RowToParametersTransformer.  Alternatively, the
     // provider WebPart could specify AllowsMultipleConnections=false for the ConnectionPoint.
-    public interface IWebPartParameters {
+    public interface IWebPartParameters
+    {
         PropertyDescriptorCollection Schema { get; }
         void GetParametersData(ParametersCallback callback);
         void SetConsumerSchema(PropertyDescriptorCollection schema);

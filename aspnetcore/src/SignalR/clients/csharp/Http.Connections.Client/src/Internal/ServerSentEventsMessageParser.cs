@@ -24,7 +24,12 @@ internal sealed class ServerSentEventsMessageParser
     private InternalParseState _internalParserState = InternalParseState.ReadMessagePayload;
     private readonly List<byte[]> _data = new List<byte[]>();
 
-    public ParseResult ParseMessage(ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined, out byte[]? message)
+    public ParseResult ParseMessage(
+        ReadOnlySequence<byte> buffer,
+        out SequencePosition consumed,
+        out SequencePosition examined,
+        out byte[]? message
+    )
     {
         consumed = buffer.Start;
         examined = buffer.End;
@@ -70,7 +75,6 @@ internal sealed class ServerSentEventsMessageParser
             {
                 _internalParserState = InternalParseState.ReadEndOfMessage;
             }
-
             // To ensure that the \n was preceded by a \r
             // since messages can't contain \n.
             // data: foo\n\bar should be encoded as
@@ -78,7 +82,9 @@ internal sealed class ServerSentEventsMessageParser
             // data: bar\r\n
             else if (line[line.Length - SseLineEnding.Length] != ByteCR)
             {
-                throw new FormatException("Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'");
+                throw new FormatException(
+                    "Unexpected '\\n' in message. A '\\n' character can only be used as part of the newline sequence '\\r\\n'"
+                );
             }
             else
             {
@@ -185,6 +191,6 @@ internal sealed class ServerSentEventsMessageParser
     {
         ReadMessagePayload,
         ReadEndOfMessage,
-        Error
+        Error,
     }
 }

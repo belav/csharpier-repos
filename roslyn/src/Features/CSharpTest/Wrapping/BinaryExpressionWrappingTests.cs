@@ -18,20 +18,32 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
     [Trait(Traits.Feature, Traits.Features.CodeActionsWrapping)]
     public class BinaryExpressionWrappingTests : AbstractWrappingTests
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpWrappingCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpWrappingCodeRefactoringProvider();
 
-        private TestParameters EndOfLine
-            => new(options: Option(CodeStyleOptions2.OperatorPlacementWhenWrapping, OperatorPlacementWhenWrappingPreference.EndOfLine));
+        private TestParameters EndOfLine =>
+            new(
+                options: Option(
+                    CodeStyleOptions2.OperatorPlacementWhenWrapping,
+                    OperatorPlacementWhenWrappingPreference.EndOfLine
+                )
+            );
 
-        private TestParameters BeginningOfLine
-            => new(options: Option(CodeStyleOptions2.OperatorPlacementWhenWrapping, OperatorPlacementWhenWrappingPreference.BeginningOfLine));
+        private TestParameters BeginningOfLine =>
+            new(
+                options: Option(
+                    CodeStyleOptions2.OperatorPlacementWhenWrapping,
+                    OperatorPlacementWhenWrappingPreference.BeginningOfLine
+                )
+            );
 
-        private Task TestEndOfLine(string markup, string expected)
-            => TestInRegularAndScript1Async(markup, expected, EndOfLine);
+        private Task TestEndOfLine(string markup, string expected) =>
+            TestInRegularAndScript1Async(markup, expected, EndOfLine);
 
-        private Task TestBeginningOfLine(string markup, string expected)
-            => TestInRegularAndScript1Async(markup, expected, BeginningOfLine);
+        private Task TestBeginningOfLine(string markup, string expected) =>
+            TestInRegularAndScript1Async(markup, expected, BeginningOfLine);
 
         [Fact]
         public async Task TestMissingWithSyntaxError()
@@ -43,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         if ([||]i && (j && )
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -57,7 +70,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -71,7 +85,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -85,7 +100,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -100,7 +116,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -115,7 +132,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -138,7 +156,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -161,7 +180,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -184,7 +204,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -207,7 +228,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -230,7 +252,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -253,7 +276,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -268,8 +292,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Wrapping
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Bar() {
         if (i &&
@@ -277,7 +301,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -292,8 +317,8 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Bar() {
         if (i
@@ -301,7 +326,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -316,8 +342,8 @@ class C {
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Bar() {
         if (i &&
@@ -326,7 +352,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -341,8 +368,8 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Bar() {
         if (i
@@ -351,7 +378,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -369,8 +397,8 @@ class C {
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Bar() {
         if (
@@ -381,7 +409,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         if (
@@ -389,7 +417,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -407,8 +436,8 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Bar() {
         if (
@@ -419,7 +448,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         if (
@@ -427,7 +456,8 @@ class C {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -459,7 +489,8 @@ class C {
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -475,8 +506,8 @@ class C {
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Bar() {
         if (a &&
@@ -485,14 +516,15 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         if (a && b) {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -508,15 +540,16 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Bar() {
         if (a && b) {
         }
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -530,8 +563,8 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Goo() {
         var v = a
@@ -540,7 +573,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         var v = a
@@ -548,7 +581,8 @@ class C {
                 && c;
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -562,8 +596,8 @@ class C {
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Goo() {
         var v = a &&
@@ -572,7 +606,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Goo() {
         var v = a &&
@@ -580,7 +614,8 @@ class C {
                 c;
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -592,21 +627,22 @@ class C {
                     bool v = [||]a && b && c;
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     bool v = a
         && b
         && c;
 }
 """,
-"""
+                """
 class C {
     bool v = a
              && b
              && c;
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -618,21 +654,22 @@ class C {
                     bool v = [||]a && b && c;
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     bool v = a &&
         b &&
         c;
 }
 """,
-"""
+                """
 class C {
     bool v = a &&
              b &&
              c;
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -646,8 +683,8 @@ class C {
                     }
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     void Bar() {
         var goo = "now" +
@@ -657,7 +694,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         var goo = "now" +
@@ -666,7 +703,8 @@ class C {
                   "time";
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -680,8 +718,8 @@ class C {
                     }
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     void Bar() {
         var goo = "now"
@@ -691,7 +729,7 @@ class C {
     }
 }
 """,
-"""
+                """
 class C {
     void Bar() {
         var goo = "now"
@@ -700,7 +738,8 @@ class C {
                   + "time";
     }
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -723,7 +762,8 @@ class C {
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -746,7 +786,8 @@ class C {
                         }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -759,15 +800,16 @@ class C {
                         [||]a && b && c;
                 }
                 """,
-BeginningOfLine,
-"""
+                BeginningOfLine,
+                """
 class C {
     bool v =
         a
         && b
         && c;
 }
-""");
+"""
+            );
         }
 
         [Fact]
@@ -780,15 +822,16 @@ class C {
                         [||]a && b && c;
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C {
     bool v =
         a &&
         b &&
         c;
 }
-""");
+"""
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/34127")]
@@ -801,21 +844,22 @@ class C {
                     bool v = [||]a + b + c + d == x * y * z;
                 }
                 """,
-EndOfLine,
-"""
+                EndOfLine,
+                """
 class C
 {
     bool v = a + b + c + d ==
         x * y * z;
 }
 """,
-"""
+                """
 class C
 {
     bool v = a + b + c + d ==
              x * y * z;
 }
-""");
+"""
+            );
         }
     }
 }

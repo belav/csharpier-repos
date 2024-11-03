@@ -1,10 +1,10 @@
-// Copyright (c) Microsoft Corporation. All rights reserved. 
-//  
-// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND, 
-// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED 
-// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE. 
-// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE 
-// AND INFORMATION REMAINS WITH THE USER. 
+// Copyright (c) Microsoft Corporation. All rights reserved.
+//
+// THIS CODE AND INFORMATION IS PROVIDED "AS IS" WITHOUT WARRANTY OF ANY KIND,
+// WHETHER EXPRESSED OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE IMPLIED
+// WARRANTIES OF MERCHANTABILITY AND/OR FITNESS FOR A PARTICULAR PURPOSE.
+// THE ENTIRE RISK OF USE OR RESULTS IN CONNECTION WITH THE USE OF THIS CODE
+// AND INFORMATION REMAINS WITH THE USER.
 
 
 /*********************************************************************
@@ -16,25 +16,25 @@
 namespace System.Workflow.ComponentModel.Compiler
 {
     using System;
-    using System.Collections;
-    using System.Collections.Specialized;
-    using System.Collections.Generic;
     using System.CodeDom;
     using System.CodeDom.Compiler;
+    using System.Collections;
+    using System.Collections.Generic;
+    using System.Collections.Specialized;
+    using System.ComponentModel;
+    using System.Diagnostics.CodeAnalysis;
+    using System.IO;
+    using System.Reflection;
+    using System.Security;
     using System.Workflow.ComponentModel;
     using Microsoft.CSharp;
     using Microsoft.VisualBasic;
-    using System.Reflection;
     using Microsoft.Win32;
-    using System.Security;
-    using System.ComponentModel;
-    using System.IO;
-    using System.Diagnostics.CodeAnalysis;
 
     internal enum SupportedLanguages
     {
         VB,
-        CSharp
+        CSharp,
     }
 
     internal static class CompilerHelpers
@@ -51,7 +51,10 @@ namespace System.Workflow.ComponentModel.Compiler
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static CodeDomProvider CreateCodeProviderInstance(Type type, string compilerVersion)
+        internal static CodeDomProvider CreateCodeProviderInstance(
+            Type type,
+            string compilerVersion
+        )
         {
             CodeDomProvider provider = null;
             if (string.IsNullOrEmpty(compilerVersion))
@@ -68,7 +71,8 @@ namespace System.Workflow.ComponentModel.Compiler
                 //otherwise pass the compiler version parameter into it
                 Dictionary<string, string> options = new Dictionary<string, string>();
                 options.Add(CompilerHelpers.CompilerVersionKeyword, compilerVersion);
-                provider = (CodeDomProvider)Activator.CreateInstance(type, new object[] { options });
+                provider = (CodeDomProvider)
+                    Activator.CreateInstance(type, new object[] { options });
             }
 
             return provider;
@@ -109,7 +113,10 @@ namespace System.Workflow.ComponentModel.Compiler
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static CodeDomProvider GetCodeDomProvider(SupportedLanguages language, string compilerVersion)
+        internal static CodeDomProvider GetCodeDomProvider(
+            SupportedLanguages language,
+            string compilerVersion
+        )
         {
             if (language == SupportedLanguages.CSharp)
             {
@@ -125,7 +132,9 @@ namespace System.Workflow.ComponentModel.Compiler
         internal static SupportedLanguages GetSupportedLanguage(IServiceProvider serviceProvider)
         {
             SupportedLanguages supportedLanguage = SupportedLanguages.CSharp;
-            IWorkflowCompilerOptionsService workflowCompilerOptions = serviceProvider.GetService(typeof(IWorkflowCompilerOptionsService)) as IWorkflowCompilerOptionsService;
+            IWorkflowCompilerOptionsService workflowCompilerOptions =
+                serviceProvider.GetService(typeof(IWorkflowCompilerOptionsService))
+                as IWorkflowCompilerOptionsService;
             if (workflowCompilerOptions != null)
                 supportedLanguage = GetSupportedLanguage(workflowCompilerOptions.Language);
             return supportedLanguage;
@@ -135,9 +144,14 @@ namespace System.Workflow.ComponentModel.Compiler
         internal static SupportedLanguages GetSupportedLanguage(string language)
         {
             SupportedLanguages supportedLanguage = SupportedLanguages.CSharp;
-            if (!String.IsNullOrEmpty(language) &&
-                (string.Compare(language, "VB", StringComparison.OrdinalIgnoreCase) == 0 ||
-                string.Compare(language, "VisualBasic", StringComparison.OrdinalIgnoreCase) == 0))
+            if (
+                !String.IsNullOrEmpty(language)
+                && (
+                    string.Compare(language, "VB", StringComparison.OrdinalIgnoreCase) == 0
+                    || string.Compare(language, "VisualBasic", StringComparison.OrdinalIgnoreCase)
+                        == 0
+                )
+            )
                 supportedLanguage = SupportedLanguages.VB;
             return supportedLanguage;
         }

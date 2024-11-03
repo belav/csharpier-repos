@@ -16,9 +16,7 @@ public sealed class BeforeViewPageEventData : EventData
     /// <summary>
     /// The name of the event.
     /// </summary>
-    public const string EventName = EventNamespace +
-        "Razor." +
-        "BeforeViewPage";
+    public const string EventName = EventNamespace + "Razor." + "BeforeViewPage";
 
     /// <summary>
     /// Initializes a new instance of <see cref="BeforeViewPageEventData"/>.
@@ -27,7 +25,12 @@ public sealed class BeforeViewPageEventData : EventData
     /// <param name="viewContext">The view context.</param>
     /// <param name="actionDescriptor">The action.</param>
     /// <param name="httpContext">The http context.</param>
-    public BeforeViewPageEventData(IRazorPage page, ViewContext viewContext, ActionDescriptor actionDescriptor, HttpContext httpContext)
+    public BeforeViewPageEventData(
+        IRazorPage page,
+        ViewContext viewContext,
+        ActionDescriptor actionDescriptor,
+        HttpContext httpContext
+    )
     {
         Page = page;
         ViewContext = viewContext;
@@ -59,14 +62,15 @@ public sealed class BeforeViewPageEventData : EventData
     protected override int Count => 4;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(Page), Page),
-        1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-        2 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        3 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(Page), Page),
+            1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
+            2 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            3 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }
 
 /// <summary>
@@ -77,9 +81,7 @@ public sealed class AfterViewPageEventData : EventData
     /// <summary>
     /// The name of the event.
     /// </summary>
-    public const string EventName = EventNamespace +
-        "Razor." +
-        "AfterViewPage";
+    public const string EventName = EventNamespace + "Razor." + "AfterViewPage";
 
     /// <summary>
     /// Initializes a new instance of <see cref="AfterViewPageEventData"/>.
@@ -88,7 +90,12 @@ public sealed class AfterViewPageEventData : EventData
     /// <param name="viewContext">The view context.</param>
     /// <param name="actionDescriptor">The action.</param>
     /// <param name="httpContext">The http context.</param>
-    public AfterViewPageEventData(IRazorPage page, ViewContext viewContext, ActionDescriptor actionDescriptor, HttpContext httpContext)
+    public AfterViewPageEventData(
+        IRazorPage page,
+        ViewContext viewContext,
+        ActionDescriptor actionDescriptor,
+        HttpContext httpContext
+    )
     {
         Page = page;
         ViewContext = viewContext;
@@ -120,12 +127,13 @@ public sealed class AfterViewPageEventData : EventData
     protected override int Count => 4;
 
     /// <inheritdoc/>
-    protected override KeyValuePair<string, object> this[int index] => index switch
-    {
-        0 => new KeyValuePair<string, object>(nameof(Page), Page),
-        1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
-        2 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
-        3 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
-        _ => throw new ArgumentOutOfRangeException(nameof(index))
-    };
+    protected override KeyValuePair<string, object> this[int index] =>
+        index switch
+        {
+            0 => new KeyValuePair<string, object>(nameof(Page), Page),
+            1 => new KeyValuePair<string, object>(nameof(ViewContext), ViewContext),
+            2 => new KeyValuePair<string, object>(nameof(ActionDescriptor), ActionDescriptor),
+            3 => new KeyValuePair<string, object>(nameof(HttpContext), HttpContext),
+            _ => throw new ArgumentOutOfRangeException(nameof(index)),
+        };
 }

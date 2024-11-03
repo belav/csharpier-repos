@@ -4,20 +4,20 @@
 namespace System.ServiceModel.ComIntegration
 {
     using System;
-    using System.ServiceModel.Dispatcher;
-    using System.ServiceModel.Description;
-    using System.Collections.Generic;
     using System.Collections;
+    using System.Collections.Generic;
     using System.Diagnostics;
     using System.EnterpriseServices;
     using System.Reflection;
+    using System.Runtime;
     using System.Runtime.InteropServices;
     using System.ServiceModel;
     using System.ServiceModel.Configuration;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
+    using System.ServiceModel.Dispatcher;
     using System.Transactions;
     using SR = System.ServiceModel.SR;
-    using System.ServiceModel.Diagnostics;
-    using System.Runtime;
 
     // The values of the enum are reflected from the values in the
     // COM+ Admin SDK.
@@ -25,20 +25,21 @@ namespace System.ServiceModel.ComIntegration
     enum Bitness
     {
         Bitness32 = 0x01,
-        Bitness64 = 0x02
+        Bitness64 = 0x02,
     }
 
     enum ThreadingModel
     {
         MTA,
-        STA
+        STA,
     }
 
     enum HostingMode
     {
-        ComPlus,             // Living in a DllHost.exe
+        ComPlus, // Living in a DllHost.exe
         WebHostOutOfProcess, // From webhost to dllhost.exe
-        WebHostInProcess     // Inside webhost
+        WebHostInProcess // Inside webhost
+        ,
     }
 
     class ServiceInfo
@@ -61,15 +62,10 @@ namespace System.ServiceModel.ComIntegration
         string serviceName;
         Dictionary<Guid, List<Type>> udts;
 
-
         public string ServiceName
         {
-            get
-            {
-                return serviceName;
-            }
+            get { return serviceName; }
         }
-
 
         // NOTE: Construction of this thing is quite inefficient-- it
         //       has several nested loops that could probably be
@@ -77,11 +73,13 @@ namespace System.ServiceModel.ComIntegration
         //       it turns out to be a performance problem, for the
         //       sake of simplicity.
         //
-        public ServiceInfo(Guid clsid,
-                            ServiceElement service,
-                            ComCatalogObject application,
-                            ComCatalogObject classObject,
-                            HostingMode hostingMode)
+        public ServiceInfo(
+            Guid clsid,
+            ServiceElement service,
+            ComCatalogObject application,
+            ComCatalogObject classObject,
+            HostingMode hostingMode
+        )
         {
             // Simple things...
             //
@@ -117,9 +115,15 @@ namespace System.ServiceModel.ComIntegration
                     this.isolationLevel = IsolationLevel.Serializable;
                     break;
                 default:
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(
-                        SR.GetString(SR.InvalidIsolationLevelValue,
-                                     this.clsid, adminIsolationLevel)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(
+                                SR.InvalidIsolationLevelValue,
+                                this.clsid,
+                                adminIsolationLevel
+                            )
+                        )
+                    );
             }
 
             // Threading Model
@@ -141,7 +145,7 @@ namespace System.ServiceModel.ComIntegration
             }
 
             // Object Pool settings
-            // 
+            //
 
             if (objectPoolingEnabled)
             {
@@ -152,14 +156,11 @@ namespace System.ServiceModel.ComIntegration
             // Security Settings
             //
             bool appSecurityEnabled;
-            appSecurityEnabled = (bool)application.GetValue(
-                "ApplicationAccessChecksEnabled");
+            appSecurityEnabled = (bool)application.GetValue("ApplicationAccessChecksEnabled");
             if (appSecurityEnabled)
             {
-
                 bool classSecurityEnabled;
-                classSecurityEnabled = (bool)classObject.GetValue(
-                    "ComponentAccessChecksEnabled");
+                classSecurityEnabled = (bool)classObject.GetValue("ComponentAccessChecksEnabled");
                 if (classSecurityEnabled)
                 {
                     this.checkRoles = true;
@@ -197,19 +198,27 @@ namespace System.ServiceModel.ComIntegration
                             break;
                         }
                     }
-                    if (duplicate) continue;
+                    if (duplicate)
+                        continue;
 
                     foreach (ComCatalogObject interfaceObject in interfaces)
                     {
                         Guid otherInterfaceID;
-                        if (DiagnosticUtility.Utility.TryCreateGuid((string)interfaceObject.GetValue("IID"), out otherInterfaceID))
+                        if (
+                            DiagnosticUtility.Utility.TryCreateGuid(
+                                (string)interfaceObject.GetValue("IID"),
+                                out otherInterfaceID
+                            )
+                        )
                         {
                             if (otherInterfaceID == iid)
                             {
-                                contract = new ContractInfo(iid,
-                                                            endpoint,
-                                                            interfaceObject,
-                                                            application);
+                                contract = new ContractInfo(
+                                    iid,
+                                    endpoint,
+                                    interfaceObject,
+                                    application
+                                );
                                 break;
                             }
                         }
@@ -218,10 +227,15 @@ namespace System.ServiceModel.ComIntegration
 
                 if (contract == null)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(Error.ListenerInitFailed(
-                        SR.GetString(SR.EndpointNotAnIID,
-                                     clsid.ToString("B").ToUpperInvariant(),
-                                     endpoint.Contract)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        Error.ListenerInitFailed(
+                            SR.GetString(
+                                SR.EndpointNotAnIID,
+                                clsid.ToString("B").ToUpperInvariant(),
+                                endpoint.Contract
+                            )
+                        )
+                    );
                 }
                 this.contracts.Add(contract);
             }
@@ -260,7 +274,6 @@ namespace System.ServiceModel.ComIntegration
         {
             get { return this.checkRoles; }
         }
-
 
         public ThreadingModel ThreadingModel
         {
@@ -326,7 +339,6 @@ namespace System.ServiceModel.ComIntegration
             if (null == ret)
                 return new Type[0];
 
-
             return ret.ToArray();
         }
 
@@ -338,7 +350,6 @@ namespace System.ServiceModel.ComIntegration
             if (!udts[assemblyId].Contains(udt))
                 udts[assemblyId].Add(udt);
         }
-
     }
 
     class ContractInfo
@@ -348,10 +359,12 @@ namespace System.ServiceModel.ComIntegration
         string[] interfaceRoleMembers;
         List<OperationInfo> operations;
 
-        public ContractInfo(Guid iid,
-                            ServiceEndpointElement endpoint,
-                            ComCatalogObject interfaceObject,
-                            ComCatalogObject application)
+        public ContractInfo(
+            Guid iid,
+            ServiceEndpointElement endpoint,
+            ComCatalogObject interfaceObject,
+            ComCatalogObject application
+        )
         {
             this.name = endpoint.Contract;
             this.iid = iid;
@@ -360,8 +373,7 @@ namespace System.ServiceModel.ComIntegration
             //
             ComCatalogCollection roles;
             roles = interfaceObject.GetCollection("RolesForInterface");
-            this.interfaceRoleMembers = CatalogUtil.GetRoleMembers(application,
-                                                                   roles);
+            this.interfaceRoleMembers = CatalogUtil.GetRoleMembers(application, roles);
 
             // Operations
             //
@@ -371,8 +383,7 @@ namespace System.ServiceModel.ComIntegration
             methods = interfaceObject.GetCollection("MethodsForInterface");
             foreach (ComCatalogObject method in methods)
             {
-                this.operations.Add(new OperationInfo(method,
-                                                      application));
+                this.operations.Add(new OperationInfo(method, application));
             }
         }
 
@@ -402,8 +413,7 @@ namespace System.ServiceModel.ComIntegration
         string name;
         string[] methodRoleMembers;
 
-        public OperationInfo(ComCatalogObject methodObject,
-                             ComCatalogObject application)
+        public OperationInfo(ComCatalogObject methodObject, ComCatalogObject application)
         {
             this.name = (string)methodObject.GetValue("Name");
 
@@ -411,8 +421,7 @@ namespace System.ServiceModel.ComIntegration
             //
             ComCatalogCollection roles;
             roles = methodObject.GetCollection("RolesForMethod");
-            this.methodRoleMembers = CatalogUtil.GetRoleMembers(application,
-                                                                roles);
+            this.methodRoleMembers = CatalogUtil.GetRoleMembers(application, roles);
         }
 
         public string Name

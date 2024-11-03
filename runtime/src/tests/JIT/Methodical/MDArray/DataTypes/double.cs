@@ -8,50 +8,168 @@ using Xunit;
 public struct VT
 {
     public double[,] double2darr;
-    public double[, ,] double3darr;
+    public double[,,] double3darr;
     public double[,] double2darr_b;
-    public double[, ,] double3darr_b;
+    public double[,,] double3darr_b;
 }
 
 public class CL
 {
-    public double[,] double2darr = { { 0, -1 }, { 0, 0 } };
-    public double[, ,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    public double[,] double2darr_b = { { 0, 1 }, { 0, 0 } };
-    public double[, ,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public double[,] double2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    public double[,,] double3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    public double[,] double2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    public double[,,] double3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 }
 
 public class doubleMDArrTest
 {
-
-    static double[,] double2darr = { { 0, -1 }, { 0, 0 } };
-    static double[, ,] double3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    static double[,] double2darr_b = { { 0, 1 }, { 0, 0 } };
-    static double[, ,] double3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static double[,] double2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    static double[,,] double3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    static double[,] double2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    static double[,,] double3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 
     static double[][,] ja1 = new double[2][,];
-    static double[][, ,] ja2 = new double[2][, ,];
+    static double[][,,] ja2 = new double[2][,,];
     static double[][,] ja1_b = new double[2][,];
-    static double[][, ,] ja2_b = new double[2][, ,];
+    static double[][,,] ja2_b = new double[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.double2darr = new double[,] { { 0, -1 }, { 0, 0 } };
-        vt1.double3darr = new double[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        vt1.double2darr_b = new double[,] { { 0, 1 }, { 0, 0 } };
-        vt1.double3darr_b = new double[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        vt1.double2darr = new double[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        vt1.double3darr = new double[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        vt1.double2darr_b = new double[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        vt1.double3darr_b = new double[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new double[,] { { 0, -1 }, { 0, 0 } };
-        ja2[1] = new double[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        ja1_b[0] = new double[,] { { 0, 1 }, { 0, 0 } };
-        ja2_b[1] = new double[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        ja1[0] = new double[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        ja2[1] = new double[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        ja1_b[0] = new double[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        ja2_b[1] = new double[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         double result = -1;
 
@@ -1082,8 +1200,5 @@ public class doubleMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

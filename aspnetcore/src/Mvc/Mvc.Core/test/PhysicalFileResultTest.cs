@@ -19,7 +19,8 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var fileResult = new PhysicalFileResult(path, contentType)
         {
@@ -37,9 +38,7 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
     private class TestPhysicalFileResultExecutor : PhysicalFileResultExecutor
     {
         public TestPhysicalFileResultExecutor(ILoggerFactory loggerFactory)
-            : base(loggerFactory)
-        {
-        }
+            : base(loggerFactory) { }
 
         protected override FileMetadata GetFileInfo(string path)
         {
@@ -48,7 +47,15 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
             {
                 Exists = true,
                 Length = 34,
-                LastModified = new DateTimeOffset(lastModified.Year, lastModified.Month, lastModified.Day, lastModified.Hour, lastModified.Minute, lastModified.Second, TimeSpan.FromSeconds(0))
+                LastModified = new DateTimeOffset(
+                    lastModified.Year,
+                    lastModified.Month,
+                    lastModified.Day,
+                    lastModified.Hour,
+                    lastModified.Minute,
+                    lastModified.Second,
+                    TimeSpan.FromSeconds(0)
+                ),
             };
         }
     }
@@ -56,7 +63,10 @@ public class PhysicalFileResultTest : PhysicalFileResultTestBase
     private static IServiceProvider CreateServices()
     {
         var services = new ServiceCollection();
-        services.AddSingleton<IActionResultExecutor<PhysicalFileResult>, TestPhysicalFileResultExecutor>();
+        services.AddSingleton<
+            IActionResultExecutor<PhysicalFileResult>,
+            TestPhysicalFileResultExecutor
+        >();
         services.AddSingleton<ILoggerFactory>(NullLoggerFactory.Instance);
         return services.BuildServiceProvider();
     }

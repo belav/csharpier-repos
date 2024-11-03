@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using Xunit;
 
 #pragma warning disable 219
@@ -16,6 +16,7 @@ public class Test_b19679
         Console.WriteLine(a0);
         return 100;
     }
+
     public int RunTest1()
     {
         long a1 = 1;
@@ -23,6 +24,7 @@ public class Test_b19679
         Console.WriteLine(a1);
         return 100;
     }
+
     public int RunTest2()
     {
         long a2 = 2;
@@ -30,6 +32,7 @@ public class Test_b19679
         Console.WriteLine(a2);
         return 100;
     }
+
     public int RunTest3()
     {
         long a3 = 3;
@@ -37,6 +40,7 @@ public class Test_b19679
         Console.WriteLine(a3);
         return 100;
     }
+
     public int RunTest4()
     {
         long a4 = 4;
@@ -44,6 +48,7 @@ public class Test_b19679
         Console.WriteLine(a4);
         return 100;
     }
+
     public int RunTest5()
     {
         long a5 = 5;
@@ -51,6 +56,7 @@ public class Test_b19679
         Console.WriteLine(a5);
         return 100;
     }
+
     public int RunTest6()
     {
         long a6 = 6;
@@ -58,6 +64,7 @@ public class Test_b19679
         Console.WriteLine(a6);
         return 100;
     }
+
     public int RunTest7()
     {
         long a7 = 7;
@@ -65,6 +72,7 @@ public class Test_b19679
         Console.WriteLine(a7);
         return 100;
     }
+
     public int RunTest8()
     {
         long a8 = 8;
@@ -72,6 +80,7 @@ public class Test_b19679
         Console.WriteLine(a8);
         return 100;
     }
+
     public int RunTest9()
     {
         long a9 = 9;
@@ -79,6 +88,7 @@ public class Test_b19679
         Console.WriteLine(a9);
         return 100;
     }
+
     public int RunTest10()
     {
         long a10 = 10;
@@ -86,6 +96,7 @@ public class Test_b19679
         Console.WriteLine(a10);
         return 100;
     }
+
     public int RunTest11()
     {
         long a11 = 11;
@@ -93,6 +104,7 @@ public class Test_b19679
         Console.WriteLine(a11);
         return 100;
     }
+
     public int RunTest12()
     {
         long a12 = 12;
@@ -100,6 +112,7 @@ public class Test_b19679
         Console.WriteLine(a12);
         return 100;
     }
+
     public int RunTest13()
     {
         long a13 = 13;
@@ -107,6 +120,7 @@ public class Test_b19679
         Console.WriteLine(a13);
         return 100;
     }
+
     public int RunTest14()
     {
         long a14 = 14;
@@ -114,6 +128,7 @@ public class Test_b19679
         Console.WriteLine(a14);
         return 100;
     }
+
     public int RunTest15()
     {
         long a15 = 15;
@@ -121,6 +136,7 @@ public class Test_b19679
         Console.WriteLine(a15);
         return 100;
     }
+
     public int RunTest16()
     {
         long a16 = 16;
@@ -128,6 +144,7 @@ public class Test_b19679
         Console.WriteLine(a16);
         return 100;
     }
+
     public int RunTest17()
     {
         long a17 = 17;
@@ -135,6 +152,7 @@ public class Test_b19679
         Console.WriteLine(a17);
         return 100;
     }
+
     public int RunTest18()
     {
         long a18 = 18;
@@ -142,6 +160,7 @@ public class Test_b19679
         Console.WriteLine(a18);
         return 100;
     }
+
     public int RunTest19()
     {
         long a19 = 19;
@@ -149,6 +168,7 @@ public class Test_b19679
         Console.WriteLine(a19);
         return 100;
     }
+
     public int RunTest20()
     {
         long a20 = 20;
@@ -156,6 +176,7 @@ public class Test_b19679
         Console.WriteLine(a20);
         return 100;
     }
+
     public int RunTest21()
     {
         long a21 = 21;
@@ -163,6 +184,7 @@ public class Test_b19679
         Console.WriteLine(a21);
         return 100;
     }
+
     public int RunTest22()
     {
         long a22 = 22;
@@ -170,6 +192,7 @@ public class Test_b19679
         Console.WriteLine(a22);
         return 100;
     }
+
     public int RunTest23()
     {
         long a23 = 23;
@@ -177,6 +200,7 @@ public class Test_b19679
         Console.WriteLine(a23);
         return 100;
     }
+
     public int RunTest24()
     {
         long a24 = 24;
@@ -184,6 +208,7 @@ public class Test_b19679
         Console.WriteLine(a24);
         return 100;
     }
+
     public int RunTest25()
     {
         long a25 = 25;
@@ -191,6 +216,7 @@ public class Test_b19679
         Console.WriteLine(a25);
         return 100;
     }
+
     public int RunTest26()
     {
         long a26 = 26;
@@ -198,6 +224,7 @@ public class Test_b19679
         Console.WriteLine(a26);
         return 100;
     }
+
     public int RunTest27()
     {
         long a27 = 27;
@@ -205,6 +232,7 @@ public class Test_b19679
         Console.WriteLine(a27);
         return 100;
     }
+
     public int RunTest28()
     {
         long a28 = 28;
@@ -212,6 +240,7 @@ public class Test_b19679
         Console.WriteLine(a28);
         return 100;
     }
+
     public int RunTest29()
     {
         long a29 = 29;
@@ -219,6 +248,7 @@ public class Test_b19679
         Console.WriteLine(a29);
         return 100;
     }
+
     public int RunTest30()
     {
         long a30 = 30;
@@ -226,6 +256,7 @@ public class Test_b19679
         Console.WriteLine(a30);
         return 100;
     }
+
     public int RunTest31()
     {
         long a31 = 31;
@@ -233,6 +264,7 @@ public class Test_b19679
         Console.WriteLine(a31);
         return 100;
     }
+
     public int RunTest32()
     {
         long a32 = 32;
@@ -240,6 +272,7 @@ public class Test_b19679
         Console.WriteLine(a32);
         return 100;
     }
+
     public int RunTest33()
     {
         long a33 = 33;
@@ -247,6 +280,7 @@ public class Test_b19679
         Console.WriteLine(a33);
         return 100;
     }
+
     public int RunTest34()
     {
         long a34 = 34;
@@ -254,6 +288,7 @@ public class Test_b19679
         Console.WriteLine(a34);
         return 100;
     }
+
     public int RunTest35()
     {
         long a35 = 35;
@@ -261,6 +296,7 @@ public class Test_b19679
         Console.WriteLine(a35);
         return 100;
     }
+
     public int RunTest36()
     {
         long a36 = 36;
@@ -268,6 +304,7 @@ public class Test_b19679
         Console.WriteLine(a36);
         return 100;
     }
+
     public int RunTest37()
     {
         long a37 = 37;
@@ -275,6 +312,7 @@ public class Test_b19679
         Console.WriteLine(a37);
         return 100;
     }
+
     public int RunTest38()
     {
         long a38 = 38;
@@ -282,6 +320,7 @@ public class Test_b19679
         Console.WriteLine(a38);
         return 100;
     }
+
     public int RunTest39()
     {
         long a39 = 39;
@@ -289,6 +328,7 @@ public class Test_b19679
         Console.WriteLine(a39);
         return 100;
     }
+
     public int RunTest40()
     {
         long a40 = 40;
@@ -296,6 +336,7 @@ public class Test_b19679
         Console.WriteLine(a40);
         return 100;
     }
+
     public int RunTest41()
     {
         long a41 = 41;
@@ -303,6 +344,7 @@ public class Test_b19679
         Console.WriteLine(a41);
         return 100;
     }
+
     public int RunTest42()
     {
         long a42 = 42;
@@ -310,6 +352,7 @@ public class Test_b19679
         Console.WriteLine(a42);
         return 100;
     }
+
     public int RunTest43()
     {
         long a43 = 43;
@@ -317,6 +360,7 @@ public class Test_b19679
         Console.WriteLine(a43);
         return 100;
     }
+
     public int RunTest44()
     {
         long a44 = 44;
@@ -324,6 +368,7 @@ public class Test_b19679
         Console.WriteLine(a44);
         return 100;
     }
+
     public int RunTest45()
     {
         long a45 = 45;
@@ -331,6 +376,7 @@ public class Test_b19679
         Console.WriteLine(a45);
         return 100;
     }
+
     public int RunTest46()
     {
         long a46 = 46;
@@ -338,6 +384,7 @@ public class Test_b19679
         Console.WriteLine(a46);
         return 100;
     }
+
     public int RunTest47()
     {
         long a47 = 47;
@@ -345,6 +392,7 @@ public class Test_b19679
         Console.WriteLine(a47);
         return 100;
     }
+
     public int RunTest48()
     {
         long a48 = 48;
@@ -352,6 +400,7 @@ public class Test_b19679
         Console.WriteLine(a48);
         return 100;
     }
+
     public int RunTest49()
     {
         long a49 = 49;
@@ -359,6 +408,7 @@ public class Test_b19679
         Console.WriteLine(a49);
         return 100;
     }
+
     public int RunTest50()
     {
         long a50 = 50;
@@ -366,6 +416,7 @@ public class Test_b19679
         Console.WriteLine(a50);
         return 100;
     }
+
     public int RunTest51()
     {
         long a51 = 51;
@@ -373,6 +424,7 @@ public class Test_b19679
         Console.WriteLine(a51);
         return 100;
     }
+
     public int RunTest52()
     {
         long a52 = 52;
@@ -380,6 +432,7 @@ public class Test_b19679
         Console.WriteLine(a52);
         return 100;
     }
+
     public int RunTest53()
     {
         long a53 = 53;
@@ -387,6 +440,7 @@ public class Test_b19679
         Console.WriteLine(a53);
         return 100;
     }
+
     public int RunTest54()
     {
         long a54 = 54;
@@ -394,6 +448,7 @@ public class Test_b19679
         Console.WriteLine(a54);
         return 100;
     }
+
     public int RunTest55()
     {
         long a55 = 55;
@@ -401,6 +456,7 @@ public class Test_b19679
         Console.WriteLine(a55);
         return 100;
     }
+
     public int RunTest56()
     {
         long a56 = 56;
@@ -408,6 +464,7 @@ public class Test_b19679
         Console.WriteLine(a56);
         return 100;
     }
+
     public int RunTest57()
     {
         long a57 = 57;
@@ -415,6 +472,7 @@ public class Test_b19679
         Console.WriteLine(a57);
         return 100;
     }
+
     public int RunTest58()
     {
         long a58 = 58;
@@ -422,6 +480,7 @@ public class Test_b19679
         Console.WriteLine(a58);
         return 100;
     }
+
     public int RunTest59()
     {
         long a59 = 59;
@@ -429,6 +488,7 @@ public class Test_b19679
         Console.WriteLine(a59);
         return 100;
     }
+
     public int RunTest60()
     {
         long a60 = 60;
@@ -436,6 +496,7 @@ public class Test_b19679
         Console.WriteLine(a60);
         return 100;
     }
+
     public int RunTest61()
     {
         long a61 = 61;
@@ -443,6 +504,7 @@ public class Test_b19679
         Console.WriteLine(a61);
         return 100;
     }
+
     public int RunTest62()
     {
         long a62 = 62;
@@ -450,6 +512,7 @@ public class Test_b19679
         Console.WriteLine(a62);
         return 100;
     }
+
     public int RunTest63()
     {
         long a63 = 63;
@@ -457,6 +520,7 @@ public class Test_b19679
         Console.WriteLine(a63);
         return 100;
     }
+
     public int RunTest64()
     {
         long a64 = 64;
@@ -464,6 +528,7 @@ public class Test_b19679
         Console.WriteLine(a64);
         return 100;
     }
+
     public int RunTest65()
     {
         long a65 = 65;
@@ -471,6 +536,7 @@ public class Test_b19679
         Console.WriteLine(a65);
         return 100;
     }
+
     public int RunTest66()
     {
         long a66 = 66;
@@ -478,6 +544,7 @@ public class Test_b19679
         Console.WriteLine(a66);
         return 100;
     }
+
     public int RunTest67()
     {
         long a67 = 67;
@@ -485,6 +552,7 @@ public class Test_b19679
         Console.WriteLine(a67);
         return 100;
     }
+
     public int RunTest68()
     {
         long a68 = 68;
@@ -492,6 +560,7 @@ public class Test_b19679
         Console.WriteLine(a68);
         return 100;
     }
+
     public int RunTest69()
     {
         long a69 = 69;
@@ -499,6 +568,7 @@ public class Test_b19679
         Console.WriteLine(a69);
         return 100;
     }
+
     public int RunTest70()
     {
         long a70 = 70;
@@ -506,6 +576,7 @@ public class Test_b19679
         Console.WriteLine(a70);
         return 100;
     }
+
     public int RunTest71()
     {
         long a71 = 71;
@@ -513,6 +584,7 @@ public class Test_b19679
         Console.WriteLine(a71);
         return 100;
     }
+
     public int RunTest72()
     {
         long a72 = 72;
@@ -520,6 +592,7 @@ public class Test_b19679
         Console.WriteLine(a72);
         return 100;
     }
+
     public int RunTest73()
     {
         long a73 = 73;
@@ -527,6 +600,7 @@ public class Test_b19679
         Console.WriteLine(a73);
         return 100;
     }
+
     public int RunTest74()
     {
         long a74 = 74;
@@ -534,6 +608,7 @@ public class Test_b19679
         Console.WriteLine(a74);
         return 100;
     }
+
     public int RunTest75()
     {
         long a75 = 75;
@@ -541,6 +616,7 @@ public class Test_b19679
         Console.WriteLine(a75);
         return 100;
     }
+
     public int RunTest76()
     {
         long a76 = 76;
@@ -548,6 +624,7 @@ public class Test_b19679
         Console.WriteLine(a76);
         return 100;
     }
+
     public int RunTest77()
     {
         long a77 = 77;
@@ -555,6 +632,7 @@ public class Test_b19679
         Console.WriteLine(a77);
         return 100;
     }
+
     public int RunTest78()
     {
         long a78 = 78;
@@ -562,6 +640,7 @@ public class Test_b19679
         Console.WriteLine(a78);
         return 100;
     }
+
     public int RunTest79()
     {
         long a79 = 79;
@@ -569,6 +648,7 @@ public class Test_b19679
         Console.WriteLine(a79);
         return 100;
     }
+
     public int RunTest80()
     {
         long a80 = 80;
@@ -576,6 +656,7 @@ public class Test_b19679
         Console.WriteLine(a80);
         return 100;
     }
+
     public int RunTest81()
     {
         long a81 = 81;
@@ -583,6 +664,7 @@ public class Test_b19679
         Console.WriteLine(a81);
         return 100;
     }
+
     public int RunTest82()
     {
         long a82 = 82;
@@ -590,6 +672,7 @@ public class Test_b19679
         Console.WriteLine(a82);
         return 100;
     }
+
     public int RunTest83()
     {
         long a83 = 83;
@@ -597,6 +680,7 @@ public class Test_b19679
         Console.WriteLine(a83);
         return 100;
     }
+
     public int RunTest84()
     {
         long a84 = 84;
@@ -604,6 +688,7 @@ public class Test_b19679
         Console.WriteLine(a84);
         return 100;
     }
+
     public int RunTest85()
     {
         long a85 = 85;
@@ -611,6 +696,7 @@ public class Test_b19679
         Console.WriteLine(a85);
         return 100;
     }
+
     public int RunTest86()
     {
         long a86 = 86;
@@ -618,6 +704,7 @@ public class Test_b19679
         Console.WriteLine(a86);
         return 100;
     }
+
     public int RunTest87()
     {
         long a87 = 87;
@@ -625,6 +712,7 @@ public class Test_b19679
         Console.WriteLine(a87);
         return 100;
     }
+
     public int RunTest88()
     {
         long a88 = 88;
@@ -632,6 +720,7 @@ public class Test_b19679
         Console.WriteLine(a88);
         return 100;
     }
+
     public int RunTest89()
     {
         long a89 = 89;
@@ -639,6 +728,7 @@ public class Test_b19679
         Console.WriteLine(a89);
         return 100;
     }
+
     public int RunTest90()
     {
         long a90 = 90;
@@ -646,6 +736,7 @@ public class Test_b19679
         Console.WriteLine(a90);
         return 100;
     }
+
     public int RunTest91()
     {
         long a91 = 91;
@@ -653,6 +744,7 @@ public class Test_b19679
         Console.WriteLine(a91);
         return 100;
     }
+
     public int RunTest92()
     {
         long a92 = 92;
@@ -660,6 +752,7 @@ public class Test_b19679
         Console.WriteLine(a92);
         return 100;
     }
+
     public int RunTest93()
     {
         long a93 = 93;
@@ -667,6 +760,7 @@ public class Test_b19679
         Console.WriteLine(a93);
         return 100;
     }
+
     public int RunTest94()
     {
         long a94 = 94;
@@ -674,6 +768,7 @@ public class Test_b19679
         Console.WriteLine(a94);
         return 100;
     }
+
     public int RunTest95()
     {
         long a95 = 95;
@@ -681,6 +776,7 @@ public class Test_b19679
         Console.WriteLine(a95);
         return 100;
     }
+
     public int RunTest96()
     {
         long a96 = 96;
@@ -688,6 +784,7 @@ public class Test_b19679
         Console.WriteLine(a96);
         return 100;
     }
+
     public int RunTest97()
     {
         long a97 = 97;
@@ -695,6 +792,7 @@ public class Test_b19679
         Console.WriteLine(a97);
         return 100;
     }
+
     public int RunTest98()
     {
         long a98 = 98;
@@ -702,6 +800,7 @@ public class Test_b19679
         Console.WriteLine(a98);
         return 100;
     }
+
     public int RunTest99()
     {
         long a99 = 99;
@@ -709,6 +808,7 @@ public class Test_b19679
         Console.WriteLine(a99);
         return 100;
     }
+
     public int RunTest100()
     {
         long a100 = 100;
@@ -716,6 +816,7 @@ public class Test_b19679
         Console.WriteLine(a100);
         return 100;
     }
+
     public int RunTest101()
     {
         long a101 = 101;
@@ -723,6 +824,7 @@ public class Test_b19679
         Console.WriteLine(a101);
         return 100;
     }
+
     public int RunTest102()
     {
         long a102 = 102;
@@ -730,6 +832,7 @@ public class Test_b19679
         Console.WriteLine(a102);
         return 100;
     }
+
     public int RunTest103()
     {
         long a103 = 103;
@@ -737,6 +840,7 @@ public class Test_b19679
         Console.WriteLine(a103);
         return 100;
     }
+
     public int RunTest104()
     {
         long a104 = 104;
@@ -744,6 +848,7 @@ public class Test_b19679
         Console.WriteLine(a104);
         return 100;
     }
+
     public int RunTest105()
     {
         long a105 = 105;
@@ -751,6 +856,7 @@ public class Test_b19679
         Console.WriteLine(a105);
         return 100;
     }
+
     public int RunTest106()
     {
         long a106 = 106;
@@ -758,6 +864,7 @@ public class Test_b19679
         Console.WriteLine(a106);
         return 100;
     }
+
     public int RunTest107()
     {
         long a107 = 107;
@@ -765,6 +872,7 @@ public class Test_b19679
         Console.WriteLine(a107);
         return 100;
     }
+
     public int RunTest108()
     {
         long a108 = 108;
@@ -772,6 +880,7 @@ public class Test_b19679
         Console.WriteLine(a108);
         return 100;
     }
+
     public int RunTest109()
     {
         long a109 = 109;
@@ -779,6 +888,7 @@ public class Test_b19679
         Console.WriteLine(a109);
         return 100;
     }
+
     public int RunTest110()
     {
         long a110 = 110;
@@ -786,6 +896,7 @@ public class Test_b19679
         Console.WriteLine(a110);
         return 100;
     }
+
     public int RunTest111()
     {
         long a111 = 111;
@@ -793,6 +904,7 @@ public class Test_b19679
         Console.WriteLine(a111);
         return 100;
     }
+
     public int RunTest112()
     {
         long a112 = 112;
@@ -800,6 +912,7 @@ public class Test_b19679
         Console.WriteLine(a112);
         return 100;
     }
+
     public int RunTest113()
     {
         long a113 = 113;
@@ -807,6 +920,7 @@ public class Test_b19679
         Console.WriteLine(a113);
         return 100;
     }
+
     public int RunTest114()
     {
         long a114 = 114;
@@ -814,6 +928,7 @@ public class Test_b19679
         Console.WriteLine(a114);
         return 100;
     }
+
     public int RunTest115()
     {
         long a115 = 115;
@@ -821,6 +936,7 @@ public class Test_b19679
         Console.WriteLine(a115);
         return 100;
     }
+
     public int RunTest116()
     {
         long a116 = 116;
@@ -828,6 +944,7 @@ public class Test_b19679
         Console.WriteLine(a116);
         return 100;
     }
+
     public int RunTest117()
     {
         long a117 = 117;
@@ -835,6 +952,7 @@ public class Test_b19679
         Console.WriteLine(a117);
         return 100;
     }
+
     public int RunTest118()
     {
         long a118 = 118;
@@ -842,6 +960,7 @@ public class Test_b19679
         Console.WriteLine(a118);
         return 100;
     }
+
     public int RunTest119()
     {
         long a119 = 119;
@@ -849,6 +968,7 @@ public class Test_b19679
         Console.WriteLine(a119);
         return 100;
     }
+
     public int RunTest120()
     {
         long a120 = 120;
@@ -856,6 +976,7 @@ public class Test_b19679
         Console.WriteLine(a120);
         return 100;
     }
+
     public int RunTest121()
     {
         long a121 = 121;
@@ -863,6 +984,7 @@ public class Test_b19679
         Console.WriteLine(a121);
         return 100;
     }
+
     public int RunTest122()
     {
         long a122 = 122;
@@ -870,6 +992,7 @@ public class Test_b19679
         Console.WriteLine(a122);
         return 100;
     }
+
     public int RunTest123()
     {
         long a123 = 123;
@@ -877,6 +1000,7 @@ public class Test_b19679
         Console.WriteLine(a123);
         return 100;
     }
+
     public int RunTest124()
     {
         long a124 = 124;
@@ -884,6 +1008,7 @@ public class Test_b19679
         Console.WriteLine(a124);
         return 100;
     }
+
     public int RunTest125()
     {
         long a125 = 125;
@@ -891,6 +1016,7 @@ public class Test_b19679
         Console.WriteLine(a125);
         return 100;
     }
+
     public int RunTest126()
     {
         long a126 = 126;
@@ -898,6 +1024,7 @@ public class Test_b19679
         Console.WriteLine(a126);
         return 100;
     }
+
     public int RunTest127()
     {
         long a127 = 127;
@@ -905,6 +1032,7 @@ public class Test_b19679
         Console.WriteLine(a127);
         return 100;
     }
+
     public int RunTest128()
     {
         long a128 = 128;
@@ -912,6 +1040,7 @@ public class Test_b19679
         Console.WriteLine(a128);
         return 100;
     }
+
     public int RunTest129()
     {
         long a129 = 129;
@@ -919,6 +1048,7 @@ public class Test_b19679
         Console.WriteLine(a129);
         return 100;
     }
+
     public int RunTest130()
     {
         long a130 = 130;
@@ -926,6 +1056,7 @@ public class Test_b19679
         Console.WriteLine(a130);
         return 100;
     }
+
     public int RunTest131()
     {
         long a131 = 131;
@@ -933,6 +1064,7 @@ public class Test_b19679
         Console.WriteLine(a131);
         return 100;
     }
+
     public int RunTest132()
     {
         long a132 = 132;
@@ -940,6 +1072,7 @@ public class Test_b19679
         Console.WriteLine(a132);
         return 100;
     }
+
     public int RunTest133()
     {
         long a133 = 133;
@@ -947,6 +1080,7 @@ public class Test_b19679
         Console.WriteLine(a133);
         return 100;
     }
+
     public int RunTest134()
     {
         long a134 = 134;
@@ -954,6 +1088,7 @@ public class Test_b19679
         Console.WriteLine(a134);
         return 100;
     }
+
     public int RunTest135()
     {
         long a135 = 135;
@@ -961,6 +1096,7 @@ public class Test_b19679
         Console.WriteLine(a135);
         return 100;
     }
+
     public int RunTest136()
     {
         long a136 = 136;
@@ -968,6 +1104,7 @@ public class Test_b19679
         Console.WriteLine(a136);
         return 100;
     }
+
     public int RunTest137()
     {
         long a137 = 137;
@@ -975,6 +1112,7 @@ public class Test_b19679
         Console.WriteLine(a137);
         return 100;
     }
+
     public int RunTest138()
     {
         long a138 = 138;
@@ -982,6 +1120,7 @@ public class Test_b19679
         Console.WriteLine(a138);
         return 100;
     }
+
     public int RunTest139()
     {
         long a139 = 139;
@@ -989,6 +1128,7 @@ public class Test_b19679
         Console.WriteLine(a139);
         return 100;
     }
+
     public int RunTest140()
     {
         long a140 = 140;
@@ -996,6 +1136,7 @@ public class Test_b19679
         Console.WriteLine(a140);
         return 100;
     }
+
     public int RunTest141()
     {
         long a141 = 141;
@@ -1003,6 +1144,7 @@ public class Test_b19679
         Console.WriteLine(a141);
         return 100;
     }
+
     public int RunTest142()
     {
         long a142 = 142;
@@ -1010,6 +1152,7 @@ public class Test_b19679
         Console.WriteLine(a142);
         return 100;
     }
+
     public int RunTest143()
     {
         long a143 = 143;
@@ -1017,6 +1160,7 @@ public class Test_b19679
         Console.WriteLine(a143);
         return 100;
     }
+
     public int RunTest144()
     {
         long a144 = 144;
@@ -1024,6 +1168,7 @@ public class Test_b19679
         Console.WriteLine(a144);
         return 100;
     }
+
     public int RunTest145()
     {
         long a145 = 145;
@@ -1031,6 +1176,7 @@ public class Test_b19679
         Console.WriteLine(a145);
         return 100;
     }
+
     public int RunTest146()
     {
         long a146 = 146;
@@ -1038,6 +1184,7 @@ public class Test_b19679
         Console.WriteLine(a146);
         return 100;
     }
+
     public int RunTest147()
     {
         long a147 = 147;
@@ -1045,6 +1192,7 @@ public class Test_b19679
         Console.WriteLine(a147);
         return 100;
     }
+
     public int RunTest148()
     {
         long a148 = 148;
@@ -1052,6 +1200,7 @@ public class Test_b19679
         Console.WriteLine(a148);
         return 100;
     }
+
     public int RunTest149()
     {
         long a149 = 149;
@@ -1059,6 +1208,7 @@ public class Test_b19679
         Console.WriteLine(a149);
         return 100;
     }
+
     public int RunTest150()
     {
         long a150 = 150;
@@ -1066,6 +1216,7 @@ public class Test_b19679
         Console.WriteLine(a150);
         return 100;
     }
+
     public int RunTest151()
     {
         long a151 = 151;
@@ -1073,6 +1224,7 @@ public class Test_b19679
         Console.WriteLine(a151);
         return 100;
     }
+
     public int RunTest152()
     {
         long a152 = 152;
@@ -1080,6 +1232,7 @@ public class Test_b19679
         Console.WriteLine(a152);
         return 100;
     }
+
     public int RunTest153()
     {
         long a153 = 153;
@@ -1087,6 +1240,7 @@ public class Test_b19679
         Console.WriteLine(a153);
         return 100;
     }
+
     public int RunTest154()
     {
         long a154 = 154;
@@ -1094,6 +1248,7 @@ public class Test_b19679
         Console.WriteLine(a154);
         return 100;
     }
+
     public int RunTest155()
     {
         long a155 = 155;
@@ -1101,6 +1256,7 @@ public class Test_b19679
         Console.WriteLine(a155);
         return 100;
     }
+
     public int RunTest156()
     {
         long a156 = 156;
@@ -1108,6 +1264,7 @@ public class Test_b19679
         Console.WriteLine(a156);
         return 100;
     }
+
     public int RunTest157()
     {
         long a157 = 157;
@@ -1115,6 +1272,7 @@ public class Test_b19679
         Console.WriteLine(a157);
         return 100;
     }
+
     public int RunTest158()
     {
         long a158 = 158;
@@ -1122,6 +1280,7 @@ public class Test_b19679
         Console.WriteLine(a158);
         return 100;
     }
+
     public int RunTest159()
     {
         long a159 = 159;
@@ -1129,6 +1288,7 @@ public class Test_b19679
         Console.WriteLine(a159);
         return 100;
     }
+
     public int RunTest160()
     {
         long a160 = 160;
@@ -1136,6 +1296,7 @@ public class Test_b19679
         Console.WriteLine(a160);
         return 100;
     }
+
     public int RunTest161()
     {
         long a161 = 161;
@@ -1143,6 +1304,7 @@ public class Test_b19679
         Console.WriteLine(a161);
         return 100;
     }
+
     public int RunTest162()
     {
         long a162 = 162;
@@ -1150,6 +1312,7 @@ public class Test_b19679
         Console.WriteLine(a162);
         return 100;
     }
+
     public int RunTest163()
     {
         long a163 = 163;
@@ -1157,6 +1320,7 @@ public class Test_b19679
         Console.WriteLine(a163);
         return 100;
     }
+
     public int RunTest164()
     {
         long a164 = 164;
@@ -1164,6 +1328,7 @@ public class Test_b19679
         Console.WriteLine(a164);
         return 100;
     }
+
     public int RunTest165()
     {
         long a165 = 165;
@@ -1171,6 +1336,7 @@ public class Test_b19679
         Console.WriteLine(a165);
         return 100;
     }
+
     public int RunTest166()
     {
         long a166 = 166;
@@ -1178,6 +1344,7 @@ public class Test_b19679
         Console.WriteLine(a166);
         return 100;
     }
+
     public int RunTest167()
     {
         long a167 = 167;
@@ -1185,6 +1352,7 @@ public class Test_b19679
         Console.WriteLine(a167);
         return 100;
     }
+
     public int RunTest168()
     {
         long a168 = 168;
@@ -1192,6 +1360,7 @@ public class Test_b19679
         Console.WriteLine(a168);
         return 100;
     }
+
     public int RunTest169()
     {
         long a169 = 169;
@@ -1199,6 +1368,7 @@ public class Test_b19679
         Console.WriteLine(a169);
         return 100;
     }
+
     public int RunTest170()
     {
         long a170 = 170;
@@ -1206,6 +1376,7 @@ public class Test_b19679
         Console.WriteLine(a170);
         return 100;
     }
+
     public int RunTest171()
     {
         long a171 = 171;
@@ -1213,6 +1384,7 @@ public class Test_b19679
         Console.WriteLine(a171);
         return 100;
     }
+
     public int RunTest172()
     {
         long a172 = 172;
@@ -1220,6 +1392,7 @@ public class Test_b19679
         Console.WriteLine(a172);
         return 100;
     }
+
     public int RunTest173()
     {
         long a173 = 173;
@@ -1227,6 +1400,7 @@ public class Test_b19679
         Console.WriteLine(a173);
         return 100;
     }
+
     public int RunTest174()
     {
         long a174 = 174;
@@ -1234,6 +1408,7 @@ public class Test_b19679
         Console.WriteLine(a174);
         return 100;
     }
+
     public int RunTest175()
     {
         long a175 = 175;
@@ -1241,6 +1416,7 @@ public class Test_b19679
         Console.WriteLine(a175);
         return 100;
     }
+
     public int RunTest176()
     {
         long a176 = 176;
@@ -1248,6 +1424,7 @@ public class Test_b19679
         Console.WriteLine(a176);
         return 100;
     }
+
     public int RunTest177()
     {
         long a177 = 177;
@@ -1255,6 +1432,7 @@ public class Test_b19679
         Console.WriteLine(a177);
         return 100;
     }
+
     public int RunTest178()
     {
         long a178 = 178;
@@ -1262,6 +1440,7 @@ public class Test_b19679
         Console.WriteLine(a178);
         return 100;
     }
+
     public int RunTest179()
     {
         long a179 = 179;
@@ -1269,6 +1448,7 @@ public class Test_b19679
         Console.WriteLine(a179);
         return 100;
     }
+
     public int RunTest180()
     {
         long a180 = 180;
@@ -1276,6 +1456,7 @@ public class Test_b19679
         Console.WriteLine(a180);
         return 100;
     }
+
     public int RunTest181()
     {
         long a181 = 181;
@@ -1283,6 +1464,7 @@ public class Test_b19679
         Console.WriteLine(a181);
         return 100;
     }
+
     public int RunTest182()
     {
         long a182 = 182;
@@ -1290,6 +1472,7 @@ public class Test_b19679
         Console.WriteLine(a182);
         return 100;
     }
+
     public int RunTest183()
     {
         long a183 = 183;
@@ -1297,6 +1480,7 @@ public class Test_b19679
         Console.WriteLine(a183);
         return 100;
     }
+
     public int RunTest184()
     {
         long a184 = 184;
@@ -1304,6 +1488,7 @@ public class Test_b19679
         Console.WriteLine(a184);
         return 100;
     }
+
     public int RunTest185()
     {
         long a185 = 185;
@@ -1311,6 +1496,7 @@ public class Test_b19679
         Console.WriteLine(a185);
         return 100;
     }
+
     public int RunTest186()
     {
         long a186 = 186;
@@ -1318,6 +1504,7 @@ public class Test_b19679
         Console.WriteLine(a186);
         return 100;
     }
+
     public int RunTest187()
     {
         long a187 = 187;
@@ -1325,6 +1512,7 @@ public class Test_b19679
         Console.WriteLine(a187);
         return 100;
     }
+
     public int RunTest188()
     {
         long a188 = 188;
@@ -1332,6 +1520,7 @@ public class Test_b19679
         Console.WriteLine(a188);
         return 100;
     }
+
     public int RunTest189()
     {
         long a189 = 189;
@@ -1339,6 +1528,7 @@ public class Test_b19679
         Console.WriteLine(a189);
         return 100;
     }
+
     public int RunTest190()
     {
         long a190 = 190;
@@ -1346,6 +1536,7 @@ public class Test_b19679
         Console.WriteLine(a190);
         return 100;
     }
+
     public int RunTest191()
     {
         long a191 = 191;
@@ -1353,6 +1544,7 @@ public class Test_b19679
         Console.WriteLine(a191);
         return 100;
     }
+
     public int RunTest192()
     {
         long a192 = 192;
@@ -1360,6 +1552,7 @@ public class Test_b19679
         Console.WriteLine(a192);
         return 100;
     }
+
     public int RunTest193()
     {
         long a193 = 193;
@@ -1367,6 +1560,7 @@ public class Test_b19679
         Console.WriteLine(a193);
         return 100;
     }
+
     public int RunTest194()
     {
         long a194 = 194;
@@ -1374,6 +1568,7 @@ public class Test_b19679
         Console.WriteLine(a194);
         return 100;
     }
+
     public int RunTest195()
     {
         long a195 = 195;
@@ -1381,6 +1576,7 @@ public class Test_b19679
         Console.WriteLine(a195);
         return 100;
     }
+
     public int RunTest196()
     {
         long a196 = 196;
@@ -1388,6 +1584,7 @@ public class Test_b19679
         Console.WriteLine(a196);
         return 100;
     }
+
     public int RunTest197()
     {
         long a197 = 197;
@@ -1395,6 +1592,7 @@ public class Test_b19679
         Console.WriteLine(a197);
         return 100;
     }
+
     public int RunTest198()
     {
         long a198 = 198;
@@ -1402,6 +1600,7 @@ public class Test_b19679
         Console.WriteLine(a198);
         return 100;
     }
+
     public int RunTest199()
     {
         long a199 = 199;
@@ -1409,6 +1608,7 @@ public class Test_b19679
         Console.WriteLine(a199);
         return 100;
     }
+
     public int RunTest200()
     {
         long a200 = 200;
@@ -1416,6 +1616,7 @@ public class Test_b19679
         Console.WriteLine(a200);
         return 100;
     }
+
     public int RunTest201()
     {
         long a201 = 201;
@@ -1423,6 +1624,7 @@ public class Test_b19679
         Console.WriteLine(a201);
         return 100;
     }
+
     public int RunTest202()
     {
         long a202 = 202;
@@ -1430,6 +1632,7 @@ public class Test_b19679
         Console.WriteLine(a202);
         return 100;
     }
+
     public int RunTest203()
     {
         long a203 = 203;
@@ -1437,6 +1640,7 @@ public class Test_b19679
         Console.WriteLine(a203);
         return 100;
     }
+
     public int RunTest204()
     {
         long a204 = 204;
@@ -1444,6 +1648,7 @@ public class Test_b19679
         Console.WriteLine(a204);
         return 100;
     }
+
     public int RunTest205()
     {
         long a205 = 205;
@@ -1451,6 +1656,7 @@ public class Test_b19679
         Console.WriteLine(a205);
         return 100;
     }
+
     public int RunTest206()
     {
         long a206 = 206;
@@ -1458,6 +1664,7 @@ public class Test_b19679
         Console.WriteLine(a206);
         return 100;
     }
+
     public int RunTest207()
     {
         long a207 = 207;
@@ -1465,6 +1672,7 @@ public class Test_b19679
         Console.WriteLine(a207);
         return 100;
     }
+
     public int RunTest208()
     {
         long a208 = 208;
@@ -1472,6 +1680,7 @@ public class Test_b19679
         Console.WriteLine(a208);
         return 100;
     }
+
     public int RunTest209()
     {
         long a209 = 209;
@@ -1479,6 +1688,7 @@ public class Test_b19679
         Console.WriteLine(a209);
         return 100;
     }
+
     public int RunTest210()
     {
         long a210 = 210;
@@ -1486,6 +1696,7 @@ public class Test_b19679
         Console.WriteLine(a210);
         return 100;
     }
+
     public int RunTest211()
     {
         long a211 = 211;
@@ -1493,6 +1704,7 @@ public class Test_b19679
         Console.WriteLine(a211);
         return 100;
     }
+
     public int RunTest212()
     {
         long a212 = 212;
@@ -1500,6 +1712,7 @@ public class Test_b19679
         Console.WriteLine(a212);
         return 100;
     }
+
     public int RunTest213()
     {
         long a213 = 213;
@@ -1507,6 +1720,7 @@ public class Test_b19679
         Console.WriteLine(a213);
         return 100;
     }
+
     public int RunTest214()
     {
         long a214 = 214;
@@ -1514,6 +1728,7 @@ public class Test_b19679
         Console.WriteLine(a214);
         return 100;
     }
+
     public int RunTest215()
     {
         long a215 = 215;
@@ -1521,6 +1736,7 @@ public class Test_b19679
         Console.WriteLine(a215);
         return 100;
     }
+
     public int RunTest216()
     {
         long a216 = 216;
@@ -1528,6 +1744,7 @@ public class Test_b19679
         Console.WriteLine(a216);
         return 100;
     }
+
     public int RunTest217()
     {
         long a217 = 217;
@@ -1535,6 +1752,7 @@ public class Test_b19679
         Console.WriteLine(a217);
         return 100;
     }
+
     public int RunTest218()
     {
         long a218 = 218;
@@ -1542,6 +1760,7 @@ public class Test_b19679
         Console.WriteLine(a218);
         return 100;
     }
+
     public int RunTest219()
     {
         long a219 = 219;
@@ -1549,6 +1768,7 @@ public class Test_b19679
         Console.WriteLine(a219);
         return 100;
     }
+
     public int RunTest220()
     {
         long a220 = 220;
@@ -1556,6 +1776,7 @@ public class Test_b19679
         Console.WriteLine(a220);
         return 100;
     }
+
     public int RunTest221()
     {
         long a221 = 221;
@@ -1563,6 +1784,7 @@ public class Test_b19679
         Console.WriteLine(a221);
         return 100;
     }
+
     public int RunTest222()
     {
         long a222 = 222;
@@ -1570,6 +1792,7 @@ public class Test_b19679
         Console.WriteLine(a222);
         return 100;
     }
+
     public int RunTest223()
     {
         long a223 = 223;
@@ -1577,6 +1800,7 @@ public class Test_b19679
         Console.WriteLine(a223);
         return 100;
     }
+
     public int RunTest224()
     {
         long a224 = 224;
@@ -1584,6 +1808,7 @@ public class Test_b19679
         Console.WriteLine(a224);
         return 100;
     }
+
     public int RunTest225()
     {
         long a225 = 225;
@@ -1591,6 +1816,7 @@ public class Test_b19679
         Console.WriteLine(a225);
         return 100;
     }
+
     public int RunTest226()
     {
         long a226 = 226;
@@ -1598,6 +1824,7 @@ public class Test_b19679
         Console.WriteLine(a226);
         return 100;
     }
+
     public int RunTest227()
     {
         long a227 = 227;
@@ -1605,6 +1832,7 @@ public class Test_b19679
         Console.WriteLine(a227);
         return 100;
     }
+
     public int RunTest228()
     {
         long a228 = 228;
@@ -1612,6 +1840,7 @@ public class Test_b19679
         Console.WriteLine(a228);
         return 100;
     }
+
     public int RunTest229()
     {
         long a229 = 229;
@@ -1619,6 +1848,7 @@ public class Test_b19679
         Console.WriteLine(a229);
         return 100;
     }
+
     public int RunTest230()
     {
         long a230 = 230;
@@ -1626,6 +1856,7 @@ public class Test_b19679
         Console.WriteLine(a230);
         return 100;
     }
+
     public int RunTest231()
     {
         long a231 = 231;
@@ -1633,6 +1864,7 @@ public class Test_b19679
         Console.WriteLine(a231);
         return 100;
     }
+
     public int RunTest232()
     {
         long a232 = 232;
@@ -1640,6 +1872,7 @@ public class Test_b19679
         Console.WriteLine(a232);
         return 100;
     }
+
     public int RunTest233()
     {
         long a233 = 233;
@@ -1647,6 +1880,7 @@ public class Test_b19679
         Console.WriteLine(a233);
         return 100;
     }
+
     public int RunTest234()
     {
         long a234 = 234;
@@ -1654,6 +1888,7 @@ public class Test_b19679
         Console.WriteLine(a234);
         return 100;
     }
+
     public int RunTest235()
     {
         long a235 = 235;
@@ -1661,6 +1896,7 @@ public class Test_b19679
         Console.WriteLine(a235);
         return 100;
     }
+
     public int RunTest236()
     {
         long a236 = 236;
@@ -1668,6 +1904,7 @@ public class Test_b19679
         Console.WriteLine(a236);
         return 100;
     }
+
     public int RunTest237()
     {
         long a237 = 237;
@@ -1675,6 +1912,7 @@ public class Test_b19679
         Console.WriteLine(a237);
         return 100;
     }
+
     public int RunTest238()
     {
         long a238 = 238;
@@ -1682,6 +1920,7 @@ public class Test_b19679
         Console.WriteLine(a238);
         return 100;
     }
+
     public int RunTest239()
     {
         long a239 = 239;
@@ -1689,6 +1928,7 @@ public class Test_b19679
         Console.WriteLine(a239);
         return 100;
     }
+
     public int RunTest240()
     {
         long a240 = 240;
@@ -1696,6 +1936,7 @@ public class Test_b19679
         Console.WriteLine(a240);
         return 100;
     }
+
     public int RunTest241()
     {
         long a241 = 241;
@@ -1703,6 +1944,7 @@ public class Test_b19679
         Console.WriteLine(a241);
         return 100;
     }
+
     public int RunTest242()
     {
         long a242 = 242;
@@ -1710,6 +1952,7 @@ public class Test_b19679
         Console.WriteLine(a242);
         return 100;
     }
+
     public int RunTest243()
     {
         long a243 = 243;
@@ -1717,6 +1960,7 @@ public class Test_b19679
         Console.WriteLine(a243);
         return 100;
     }
+
     public int RunTest244()
     {
         long a244 = 244;
@@ -1724,6 +1968,7 @@ public class Test_b19679
         Console.WriteLine(a244);
         return 100;
     }
+
     public int RunTest245()
     {
         long a245 = 245;
@@ -1731,6 +1976,7 @@ public class Test_b19679
         Console.WriteLine(a245);
         return 100;
     }
+
     public int RunTest246()
     {
         long a246 = 246;
@@ -1738,6 +1984,7 @@ public class Test_b19679
         Console.WriteLine(a246);
         return 100;
     }
+
     public int RunTest247()
     {
         long a247 = 247;
@@ -1745,6 +1992,7 @@ public class Test_b19679
         Console.WriteLine(a247);
         return 100;
     }
+
     public int RunTest248()
     {
         long a248 = 248;
@@ -1752,6 +2000,7 @@ public class Test_b19679
         Console.WriteLine(a248);
         return 100;
     }
+
     public int RunTest249()
     {
         long a249 = 249;
@@ -1759,6 +2008,7 @@ public class Test_b19679
         Console.WriteLine(a249);
         return 100;
     }
+
     public int RunTest250()
     {
         long a250 = 250;
@@ -1766,6 +2016,7 @@ public class Test_b19679
         Console.WriteLine(a250);
         return 100;
     }
+
     public int RunTest251()
     {
         long a251 = 251;
@@ -1773,6 +2024,7 @@ public class Test_b19679
         Console.WriteLine(a251);
         return 100;
     }
+
     public int RunTest252()
     {
         long a252 = 252;
@@ -1780,6 +2032,7 @@ public class Test_b19679
         Console.WriteLine(a252);
         return 100;
     }
+
     public int RunTest253()
     {
         long a253 = 253;
@@ -1787,6 +2040,7 @@ public class Test_b19679
         Console.WriteLine(a253);
         return 100;
     }
+
     public int RunTest254()
     {
         long a254 = 254;
@@ -1794,6 +2048,7 @@ public class Test_b19679
         Console.WriteLine(a254);
         return 100;
     }
+
     public int RunTest255()
     {
         long a255 = 255;
@@ -1801,6 +2056,7 @@ public class Test_b19679
         Console.WriteLine(a255);
         return 100;
     }
+
     public int RunTest256()
     {
         long a256 = 256;
@@ -1808,6 +2064,7 @@ public class Test_b19679
         Console.WriteLine(a256);
         return 100;
     }
+
     public int RunTest257()
     {
         long a257 = 257;
@@ -1815,6 +2072,7 @@ public class Test_b19679
         Console.WriteLine(a257);
         return 100;
     }
+
     public int RunTest258()
     {
         long a258 = 258;
@@ -1822,6 +2080,7 @@ public class Test_b19679
         Console.WriteLine(a258);
         return 100;
     }
+
     public int RunTest259()
     {
         long a259 = 259;
@@ -1829,6 +2088,7 @@ public class Test_b19679
         Console.WriteLine(a259);
         return 100;
     }
+
     public int RunTest260()
     {
         long a260 = 260;
@@ -1836,6 +2096,7 @@ public class Test_b19679
         Console.WriteLine(a260);
         return 100;
     }
+
     public int RunTest261()
     {
         long a261 = 261;
@@ -1843,6 +2104,7 @@ public class Test_b19679
         Console.WriteLine(a261);
         return 100;
     }
+
     public int RunTest262()
     {
         long a262 = 262;
@@ -1850,6 +2112,7 @@ public class Test_b19679
         Console.WriteLine(a262);
         return 100;
     }
+
     public int RunTest263()
     {
         long a263 = 263;
@@ -1857,6 +2120,7 @@ public class Test_b19679
         Console.WriteLine(a263);
         return 100;
     }
+
     public int RunTest264()
     {
         long a264 = 264;
@@ -1864,6 +2128,7 @@ public class Test_b19679
         Console.WriteLine(a264);
         return 100;
     }
+
     public int RunTest265()
     {
         long a265 = 265;
@@ -1871,6 +2136,7 @@ public class Test_b19679
         Console.WriteLine(a265);
         return 100;
     }
+
     public int RunTest266()
     {
         long a266 = 266;
@@ -1878,6 +2144,7 @@ public class Test_b19679
         Console.WriteLine(a266);
         return 100;
     }
+
     public int RunTest267()
     {
         long a267 = 267;
@@ -1885,6 +2152,7 @@ public class Test_b19679
         Console.WriteLine(a267);
         return 100;
     }
+
     public int RunTest268()
     {
         long a268 = 268;
@@ -1892,6 +2160,7 @@ public class Test_b19679
         Console.WriteLine(a268);
         return 100;
     }
+
     public int RunTest269()
     {
         long a269 = 269;
@@ -1899,6 +2168,7 @@ public class Test_b19679
         Console.WriteLine(a269);
         return 100;
     }
+
     public int RunTest270()
     {
         long a270 = 270;
@@ -1906,6 +2176,7 @@ public class Test_b19679
         Console.WriteLine(a270);
         return 100;
     }
+
     public int RunTest271()
     {
         long a271 = 271;
@@ -1913,6 +2184,7 @@ public class Test_b19679
         Console.WriteLine(a271);
         return 100;
     }
+
     public int RunTest272()
     {
         long a272 = 272;
@@ -1920,6 +2192,7 @@ public class Test_b19679
         Console.WriteLine(a272);
         return 100;
     }
+
     public int RunTest273()
     {
         long a273 = 273;
@@ -1927,6 +2200,7 @@ public class Test_b19679
         Console.WriteLine(a273);
         return 100;
     }
+
     public int RunTest274()
     {
         long a274 = 274;
@@ -1934,6 +2208,7 @@ public class Test_b19679
         Console.WriteLine(a274);
         return 100;
     }
+
     public int RunTest275()
     {
         long a275 = 275;
@@ -1941,6 +2216,7 @@ public class Test_b19679
         Console.WriteLine(a275);
         return 100;
     }
+
     public int RunTest276()
     {
         long a276 = 276;
@@ -1948,6 +2224,7 @@ public class Test_b19679
         Console.WriteLine(a276);
         return 100;
     }
+
     public int RunTest277()
     {
         long a277 = 277;
@@ -1955,6 +2232,7 @@ public class Test_b19679
         Console.WriteLine(a277);
         return 100;
     }
+
     public int RunTest278()
     {
         long a278 = 278;
@@ -1962,6 +2240,7 @@ public class Test_b19679
         Console.WriteLine(a278);
         return 100;
     }
+
     public int RunTest279()
     {
         long a279 = 279;
@@ -1969,6 +2248,7 @@ public class Test_b19679
         Console.WriteLine(a279);
         return 100;
     }
+
     public int RunTest280()
     {
         long a280 = 280;
@@ -1976,6 +2256,7 @@ public class Test_b19679
         Console.WriteLine(a280);
         return 100;
     }
+
     public int RunTest281()
     {
         long a281 = 281;
@@ -1983,6 +2264,7 @@ public class Test_b19679
         Console.WriteLine(a281);
         return 100;
     }
+
     public int RunTest282()
     {
         long a282 = 282;
@@ -1990,6 +2272,7 @@ public class Test_b19679
         Console.WriteLine(a282);
         return 100;
     }
+
     public int RunTest283()
     {
         long a283 = 283;
@@ -1997,6 +2280,7 @@ public class Test_b19679
         Console.WriteLine(a283);
         return 100;
     }
+
     public int RunTest284()
     {
         long a284 = 284;
@@ -2004,6 +2288,7 @@ public class Test_b19679
         Console.WriteLine(a284);
         return 100;
     }
+
     public int RunTest285()
     {
         long a285 = 285;
@@ -2011,6 +2296,7 @@ public class Test_b19679
         Console.WriteLine(a285);
         return 100;
     }
+
     public int RunTest286()
     {
         long a286 = 286;
@@ -2018,6 +2304,7 @@ public class Test_b19679
         Console.WriteLine(a286);
         return 100;
     }
+
     public int RunTest287()
     {
         long a287 = 287;
@@ -2025,6 +2312,7 @@ public class Test_b19679
         Console.WriteLine(a287);
         return 100;
     }
+
     public int RunTest288()
     {
         long a288 = 288;
@@ -2032,6 +2320,7 @@ public class Test_b19679
         Console.WriteLine(a288);
         return 100;
     }
+
     public int RunTest289()
     {
         long a289 = 289;
@@ -2039,6 +2328,7 @@ public class Test_b19679
         Console.WriteLine(a289);
         return 100;
     }
+
     public int RunTest290()
     {
         long a290 = 290;
@@ -2046,6 +2336,7 @@ public class Test_b19679
         Console.WriteLine(a290);
         return 100;
     }
+
     public int RunTest291()
     {
         long a291 = 291;
@@ -2053,6 +2344,7 @@ public class Test_b19679
         Console.WriteLine(a291);
         return 100;
     }
+
     public int RunTest292()
     {
         long a292 = 292;
@@ -2060,6 +2352,7 @@ public class Test_b19679
         Console.WriteLine(a292);
         return 100;
     }
+
     public int RunTest293()
     {
         long a293 = 293;
@@ -2067,6 +2360,7 @@ public class Test_b19679
         Console.WriteLine(a293);
         return 100;
     }
+
     public int RunTest294()
     {
         long a294 = 294;
@@ -2074,6 +2368,7 @@ public class Test_b19679
         Console.WriteLine(a294);
         return 100;
     }
+
     public int RunTest295()
     {
         long a295 = 295;
@@ -2081,6 +2376,7 @@ public class Test_b19679
         Console.WriteLine(a295);
         return 100;
     }
+
     public int RunTest296()
     {
         long a296 = 296;
@@ -2088,6 +2384,7 @@ public class Test_b19679
         Console.WriteLine(a296);
         return 100;
     }
+
     public int RunTest297()
     {
         long a297 = 297;
@@ -2095,6 +2392,7 @@ public class Test_b19679
         Console.WriteLine(a297);
         return 100;
     }
+
     public int RunTest298()
     {
         long a298 = 298;
@@ -2102,6 +2400,7 @@ public class Test_b19679
         Console.WriteLine(a298);
         return 100;
     }
+
     public int RunTest299()
     {
         long a299 = 299;
@@ -2109,6 +2408,7 @@ public class Test_b19679
         Console.WriteLine(a299);
         return 100;
     }
+
     public int RunTest300()
     {
         long a300 = 300;
@@ -2116,6 +2416,7 @@ public class Test_b19679
         Console.WriteLine(a300);
         return 100;
     }
+
     public int RunTest301()
     {
         long a301 = 301;
@@ -2123,6 +2424,7 @@ public class Test_b19679
         Console.WriteLine(a301);
         return 100;
     }
+
     public int RunTest302()
     {
         long a302 = 302;
@@ -2130,6 +2432,7 @@ public class Test_b19679
         Console.WriteLine(a302);
         return 100;
     }
+
     public int RunTest303()
     {
         long a303 = 303;
@@ -2137,6 +2440,7 @@ public class Test_b19679
         Console.WriteLine(a303);
         return 100;
     }
+
     public int RunTest304()
     {
         long a304 = 304;
@@ -2144,6 +2448,7 @@ public class Test_b19679
         Console.WriteLine(a304);
         return 100;
     }
+
     public int RunTest305()
     {
         long a305 = 305;
@@ -2151,6 +2456,7 @@ public class Test_b19679
         Console.WriteLine(a305);
         return 100;
     }
+
     public int RunTest306()
     {
         long a306 = 306;
@@ -2158,6 +2464,7 @@ public class Test_b19679
         Console.WriteLine(a306);
         return 100;
     }
+
     public int RunTest307()
     {
         long a307 = 307;
@@ -2165,6 +2472,7 @@ public class Test_b19679
         Console.WriteLine(a307);
         return 100;
     }
+
     public int RunTest308()
     {
         long a308 = 308;
@@ -2172,6 +2480,7 @@ public class Test_b19679
         Console.WriteLine(a308);
         return 100;
     }
+
     public int RunTest309()
     {
         long a309 = 309;
@@ -2179,6 +2488,7 @@ public class Test_b19679
         Console.WriteLine(a309);
         return 100;
     }
+
     public int RunTest310()
     {
         long a310 = 310;
@@ -2186,6 +2496,7 @@ public class Test_b19679
         Console.WriteLine(a310);
         return 100;
     }
+
     public int RunTest311()
     {
         long a311 = 311;
@@ -2193,6 +2504,7 @@ public class Test_b19679
         Console.WriteLine(a311);
         return 100;
     }
+
     public int RunTest312()
     {
         long a312 = 312;
@@ -2200,6 +2512,7 @@ public class Test_b19679
         Console.WriteLine(a312);
         return 100;
     }
+
     public int RunTest313()
     {
         long a313 = 313;
@@ -2207,6 +2520,7 @@ public class Test_b19679
         Console.WriteLine(a313);
         return 100;
     }
+
     public int RunTest314()
     {
         long a314 = 314;
@@ -2214,6 +2528,7 @@ public class Test_b19679
         Console.WriteLine(a314);
         return 100;
     }
+
     public int RunTest315()
     {
         long a315 = 315;
@@ -2221,6 +2536,7 @@ public class Test_b19679
         Console.WriteLine(a315);
         return 100;
     }
+
     public int RunTest316()
     {
         long a316 = 316;
@@ -2228,6 +2544,7 @@ public class Test_b19679
         Console.WriteLine(a316);
         return 100;
     }
+
     public int RunTest317()
     {
         long a317 = 317;
@@ -2235,6 +2552,7 @@ public class Test_b19679
         Console.WriteLine(a317);
         return 100;
     }
+
     public int RunTest318()
     {
         long a318 = 318;
@@ -2242,6 +2560,7 @@ public class Test_b19679
         Console.WriteLine(a318);
         return 100;
     }
+
     public int RunTest319()
     {
         long a319 = 319;
@@ -2249,6 +2568,7 @@ public class Test_b19679
         Console.WriteLine(a319);
         return 100;
     }
+
     public int RunTest320()
     {
         long a320 = 320;
@@ -2256,6 +2576,7 @@ public class Test_b19679
         Console.WriteLine(a320);
         return 100;
     }
+
     public int RunTest321()
     {
         long a321 = 321;
@@ -2263,6 +2584,7 @@ public class Test_b19679
         Console.WriteLine(a321);
         return 100;
     }
+
     public int RunTest322()
     {
         long a322 = 322;
@@ -2270,6 +2592,7 @@ public class Test_b19679
         Console.WriteLine(a322);
         return 100;
     }
+
     public int RunTest323()
     {
         long a323 = 323;
@@ -2277,6 +2600,7 @@ public class Test_b19679
         Console.WriteLine(a323);
         return 100;
     }
+
     public int RunTest324()
     {
         long a324 = 324;
@@ -2284,6 +2608,7 @@ public class Test_b19679
         Console.WriteLine(a324);
         return 100;
     }
+
     public int RunTest325()
     {
         long a325 = 325;
@@ -2291,6 +2616,7 @@ public class Test_b19679
         Console.WriteLine(a325);
         return 100;
     }
+
     public int RunTest326()
     {
         long a326 = 326;
@@ -2298,6 +2624,7 @@ public class Test_b19679
         Console.WriteLine(a326);
         return 100;
     }
+
     public int RunTest327()
     {
         long a327 = 327;
@@ -2305,6 +2632,7 @@ public class Test_b19679
         Console.WriteLine(a327);
         return 100;
     }
+
     public int RunTest328()
     {
         long a328 = 328;
@@ -2312,6 +2640,7 @@ public class Test_b19679
         Console.WriteLine(a328);
         return 100;
     }
+
     public int RunTest329()
     {
         long a329 = 329;
@@ -2319,6 +2648,7 @@ public class Test_b19679
         Console.WriteLine(a329);
         return 100;
     }
+
     public int RunTest330()
     {
         long a330 = 330;
@@ -2326,6 +2656,7 @@ public class Test_b19679
         Console.WriteLine(a330);
         return 100;
     }
+
     public int RunTest331()
     {
         long a331 = 331;
@@ -2333,6 +2664,7 @@ public class Test_b19679
         Console.WriteLine(a331);
         return 100;
     }
+
     public int RunTest332()
     {
         long a332 = 332;
@@ -2340,6 +2672,7 @@ public class Test_b19679
         Console.WriteLine(a332);
         return 100;
     }
+
     public int RunTest333()
     {
         long a333 = 333;
@@ -2347,6 +2680,7 @@ public class Test_b19679
         Console.WriteLine(a333);
         return 100;
     }
+
     public int RunTest334()
     {
         long a334 = 334;
@@ -2354,6 +2688,7 @@ public class Test_b19679
         Console.WriteLine(a334);
         return 100;
     }
+
     public int RunTest335()
     {
         long a335 = 335;
@@ -2361,6 +2696,7 @@ public class Test_b19679
         Console.WriteLine(a335);
         return 100;
     }
+
     public int RunTest336()
     {
         long a336 = 336;
@@ -2368,6 +2704,7 @@ public class Test_b19679
         Console.WriteLine(a336);
         return 100;
     }
+
     public int RunTest337()
     {
         long a337 = 337;
@@ -2375,6 +2712,7 @@ public class Test_b19679
         Console.WriteLine(a337);
         return 100;
     }
+
     public int RunTest338()
     {
         long a338 = 338;
@@ -2382,6 +2720,7 @@ public class Test_b19679
         Console.WriteLine(a338);
         return 100;
     }
+
     public int RunTest339()
     {
         long a339 = 339;
@@ -2389,6 +2728,7 @@ public class Test_b19679
         Console.WriteLine(a339);
         return 100;
     }
+
     public int RunTest340()
     {
         long a340 = 340;
@@ -2396,6 +2736,7 @@ public class Test_b19679
         Console.WriteLine(a340);
         return 100;
     }
+
     public int RunTest341()
     {
         long a341 = 341;
@@ -2403,6 +2744,7 @@ public class Test_b19679
         Console.WriteLine(a341);
         return 100;
     }
+
     public int RunTest342()
     {
         long a342 = 342;
@@ -2410,6 +2752,7 @@ public class Test_b19679
         Console.WriteLine(a342);
         return 100;
     }
+
     public int RunTest343()
     {
         long a343 = 343;
@@ -2417,6 +2760,7 @@ public class Test_b19679
         Console.WriteLine(a343);
         return 100;
     }
+
     public int RunTest344()
     {
         long a344 = 344;
@@ -2424,6 +2768,7 @@ public class Test_b19679
         Console.WriteLine(a344);
         return 100;
     }
+
     public int RunTest345()
     {
         long a345 = 345;
@@ -2431,6 +2776,7 @@ public class Test_b19679
         Console.WriteLine(a345);
         return 100;
     }
+
     public int RunTest346()
     {
         long a346 = 346;
@@ -2438,6 +2784,7 @@ public class Test_b19679
         Console.WriteLine(a346);
         return 100;
     }
+
     public int RunTest347()
     {
         long a347 = 347;
@@ -2445,6 +2792,7 @@ public class Test_b19679
         Console.WriteLine(a347);
         return 100;
     }
+
     public int RunTest348()
     {
         long a348 = 348;
@@ -2452,6 +2800,7 @@ public class Test_b19679
         Console.WriteLine(a348);
         return 100;
     }
+
     public int RunTest349()
     {
         long a349 = 349;
@@ -2459,6 +2808,7 @@ public class Test_b19679
         Console.WriteLine(a349);
         return 100;
     }
+
     public int RunTest350()
     {
         long a350 = 350;
@@ -2466,6 +2816,7 @@ public class Test_b19679
         Console.WriteLine(a350);
         return 100;
     }
+
     public int RunTest351()
     {
         long a351 = 351;
@@ -2473,6 +2824,7 @@ public class Test_b19679
         Console.WriteLine(a351);
         return 100;
     }
+
     public int RunTest352()
     {
         long a352 = 352;
@@ -2480,6 +2832,7 @@ public class Test_b19679
         Console.WriteLine(a352);
         return 100;
     }
+
     public int RunTest353()
     {
         long a353 = 353;
@@ -2487,6 +2840,7 @@ public class Test_b19679
         Console.WriteLine(a353);
         return 100;
     }
+
     public int RunTest354()
     {
         long a354 = 354;
@@ -2494,6 +2848,7 @@ public class Test_b19679
         Console.WriteLine(a354);
         return 100;
     }
+
     public int RunTest355()
     {
         long a355 = 355;
@@ -2501,6 +2856,7 @@ public class Test_b19679
         Console.WriteLine(a355);
         return 100;
     }
+
     public int RunTest356()
     {
         long a356 = 356;
@@ -2508,6 +2864,7 @@ public class Test_b19679
         Console.WriteLine(a356);
         return 100;
     }
+
     public int RunTest357()
     {
         long a357 = 357;
@@ -2515,6 +2872,7 @@ public class Test_b19679
         Console.WriteLine(a357);
         return 100;
     }
+
     public int RunTest358()
     {
         long a358 = 358;
@@ -2522,6 +2880,7 @@ public class Test_b19679
         Console.WriteLine(a358);
         return 100;
     }
+
     public int RunTest359()
     {
         long a359 = 359;
@@ -2529,6 +2888,7 @@ public class Test_b19679
         Console.WriteLine(a359);
         return 100;
     }
+
     public int RunTest360()
     {
         long a360 = 360;
@@ -2536,6 +2896,7 @@ public class Test_b19679
         Console.WriteLine(a360);
         return 100;
     }
+
     public int RunTest361()
     {
         long a361 = 361;
@@ -2543,6 +2904,7 @@ public class Test_b19679
         Console.WriteLine(a361);
         return 100;
     }
+
     public int RunTest362()
     {
         long a362 = 362;
@@ -2550,6 +2912,7 @@ public class Test_b19679
         Console.WriteLine(a362);
         return 100;
     }
+
     public int RunTest363()
     {
         long a363 = 363;
@@ -2557,6 +2920,7 @@ public class Test_b19679
         Console.WriteLine(a363);
         return 100;
     }
+
     public int RunTest364()
     {
         long a364 = 364;
@@ -2564,6 +2928,7 @@ public class Test_b19679
         Console.WriteLine(a364);
         return 100;
     }
+
     public int RunTest365()
     {
         long a365 = 365;
@@ -2571,6 +2936,7 @@ public class Test_b19679
         Console.WriteLine(a365);
         return 100;
     }
+
     public int RunTest366()
     {
         long a366 = 366;
@@ -2578,6 +2944,7 @@ public class Test_b19679
         Console.WriteLine(a366);
         return 100;
     }
+
     public int RunTest367()
     {
         long a367 = 367;
@@ -2585,6 +2952,7 @@ public class Test_b19679
         Console.WriteLine(a367);
         return 100;
     }
+
     public int RunTest368()
     {
         long a368 = 368;
@@ -2592,6 +2960,7 @@ public class Test_b19679
         Console.WriteLine(a368);
         return 100;
     }
+
     public int RunTest369()
     {
         long a369 = 369;
@@ -2599,6 +2968,7 @@ public class Test_b19679
         Console.WriteLine(a369);
         return 100;
     }
+
     public int RunTest370()
     {
         long a370 = 370;
@@ -2606,6 +2976,7 @@ public class Test_b19679
         Console.WriteLine(a370);
         return 100;
     }
+
     public int RunTest371()
     {
         long a371 = 371;
@@ -2613,6 +2984,7 @@ public class Test_b19679
         Console.WriteLine(a371);
         return 100;
     }
+
     public int RunTest372()
     {
         long a372 = 372;
@@ -2620,6 +2992,7 @@ public class Test_b19679
         Console.WriteLine(a372);
         return 100;
     }
+
     public int RunTest373()
     {
         long a373 = 373;
@@ -2627,6 +3000,7 @@ public class Test_b19679
         Console.WriteLine(a373);
         return 100;
     }
+
     public int RunTest374()
     {
         long a374 = 374;
@@ -2634,6 +3008,7 @@ public class Test_b19679
         Console.WriteLine(a374);
         return 100;
     }
+
     public int RunTest375()
     {
         long a375 = 375;
@@ -2641,6 +3016,7 @@ public class Test_b19679
         Console.WriteLine(a375);
         return 100;
     }
+
     public int RunTest376()
     {
         long a376 = 376;
@@ -2648,6 +3024,7 @@ public class Test_b19679
         Console.WriteLine(a376);
         return 100;
     }
+
     public int RunTest377()
     {
         long a377 = 377;
@@ -2655,6 +3032,7 @@ public class Test_b19679
         Console.WriteLine(a377);
         return 100;
     }
+
     public int RunTest378()
     {
         long a378 = 378;
@@ -2662,6 +3040,7 @@ public class Test_b19679
         Console.WriteLine(a378);
         return 100;
     }
+
     public int RunTest379()
     {
         long a379 = 379;
@@ -2669,6 +3048,7 @@ public class Test_b19679
         Console.WriteLine(a379);
         return 100;
     }
+
     public int RunTest380()
     {
         long a380 = 380;
@@ -2676,6 +3056,7 @@ public class Test_b19679
         Console.WriteLine(a380);
         return 100;
     }
+
     public int RunTest381()
     {
         long a381 = 381;
@@ -2683,6 +3064,7 @@ public class Test_b19679
         Console.WriteLine(a381);
         return 100;
     }
+
     public int RunTest382()
     {
         long a382 = 382;
@@ -2690,6 +3072,7 @@ public class Test_b19679
         Console.WriteLine(a382);
         return 100;
     }
+
     public int RunTest383()
     {
         long a383 = 383;
@@ -2697,6 +3080,7 @@ public class Test_b19679
         Console.WriteLine(a383);
         return 100;
     }
+
     public int RunTest384()
     {
         long a384 = 384;
@@ -2704,6 +3088,7 @@ public class Test_b19679
         Console.WriteLine(a384);
         return 100;
     }
+
     public int RunTest385()
     {
         long a385 = 385;
@@ -2711,6 +3096,7 @@ public class Test_b19679
         Console.WriteLine(a385);
         return 100;
     }
+
     public int RunTest386()
     {
         long a386 = 386;
@@ -2718,6 +3104,7 @@ public class Test_b19679
         Console.WriteLine(a386);
         return 100;
     }
+
     public int RunTest387()
     {
         long a387 = 387;
@@ -2725,6 +3112,7 @@ public class Test_b19679
         Console.WriteLine(a387);
         return 100;
     }
+
     public int RunTest388()
     {
         long a388 = 388;
@@ -2732,6 +3120,7 @@ public class Test_b19679
         Console.WriteLine(a388);
         return 100;
     }
+
     public int RunTest389()
     {
         long a389 = 389;
@@ -2739,6 +3128,7 @@ public class Test_b19679
         Console.WriteLine(a389);
         return 100;
     }
+
     public int RunTest390()
     {
         long a390 = 390;
@@ -2746,6 +3136,7 @@ public class Test_b19679
         Console.WriteLine(a390);
         return 100;
     }
+
     public int RunTest391()
     {
         long a391 = 391;
@@ -2753,6 +3144,7 @@ public class Test_b19679
         Console.WriteLine(a391);
         return 100;
     }
+
     public int RunTest392()
     {
         long a392 = 392;
@@ -2760,6 +3152,7 @@ public class Test_b19679
         Console.WriteLine(a392);
         return 100;
     }
+
     public int RunTest393()
     {
         long a393 = 393;
@@ -2767,6 +3160,7 @@ public class Test_b19679
         Console.WriteLine(a393);
         return 100;
     }
+
     public int RunTest394()
     {
         long a394 = 394;
@@ -2774,6 +3168,7 @@ public class Test_b19679
         Console.WriteLine(a394);
         return 100;
     }
+
     public int RunTest395()
     {
         long a395 = 395;
@@ -2781,6 +3176,7 @@ public class Test_b19679
         Console.WriteLine(a395);
         return 100;
     }
+
     public int RunTest396()
     {
         long a396 = 396;
@@ -2788,6 +3184,7 @@ public class Test_b19679
         Console.WriteLine(a396);
         return 100;
     }
+
     public int RunTest397()
     {
         long a397 = 397;
@@ -2795,6 +3192,7 @@ public class Test_b19679
         Console.WriteLine(a397);
         return 100;
     }
+
     public int RunTest398()
     {
         long a398 = 398;
@@ -2802,6 +3200,7 @@ public class Test_b19679
         Console.WriteLine(a398);
         return 100;
     }
+
     public int RunTest399()
     {
         long a399 = 399;
@@ -2809,6 +3208,7 @@ public class Test_b19679
         Console.WriteLine(a399);
         return 100;
     }
+
     public int RunTest400_NoInline()
     {
         long a400 = 400;
@@ -2816,6 +3216,7 @@ public class Test_b19679
         Console.WriteLine(a400);
         return 100;
     }
+
     [Fact]
     public static void TestEntryPoint()
     {
@@ -3620,8 +4021,5 @@ public class Test_b19679
         (new Test_b19679()).RunTest399();
 
         (new Test_b19679()).RunTest400_NoInline();
-
     }
 }
-
-

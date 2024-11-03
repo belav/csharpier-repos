@@ -13,16 +13,19 @@ namespace Microsoft.AspNetCore.StaticWebAssets;
 
 internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
 {
-    private static readonly StringComparison _fsComparison = OperatingSystem.IsWindows() ?
-        StringComparison.OrdinalIgnoreCase :
-        StringComparison.Ordinal;
+    private static readonly StringComparison _fsComparison = OperatingSystem.IsWindows()
+        ? StringComparison.OrdinalIgnoreCase
+        : StringComparison.Ordinal;
 
     private static readonly IEqualityComparer<IFileInfo> _nameComparer = new FileNameComparer();
 
     private readonly IFileProvider[] _fileProviders;
     private readonly StaticWebAssetNode _root;
 
-    public ManifestStaticWebAssetFileProvider(StaticWebAssetManifest manifest, Func<string, IFileProvider> fileProviderFactory)
+    public ManifestStaticWebAssetFileProvider(
+        StaticWebAssetManifest manifest,
+        Func<string, IFileProvider> fileProviderFactory
+    )
     {
         _fileProviders = new IFileProvider[manifest.ContentRoots.Length];
 
@@ -55,7 +58,10 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
         {
             files = GetFilesForCandidatePatterns(segments, candidate, files);
 
-            if (candidate.HasChildren() && candidate.Children.TryGetValue(segments[i], out var child))
+            if (
+                candidate.HasChildren()
+                && candidate.Children.TryGetValue(segments[i], out var child)
+            )
             {
                 candidate = child;
             }
@@ -66,7 +72,10 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
             }
         }
 
-        if ((candidate == null || (!candidate.HasChildren() && !candidate.HasPatterns())) && files == null)
+        if (
+            (candidate == null || (!candidate.HasChildren() && !candidate.HasPatterns()))
+            && files == null
+        )
         {
             return NotFoundDirectoryContents.Singleton;
         }
@@ -80,10 +89,16 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                 GetCandidateFilesForNode(candidate, files);
             }
 
-            return new StaticWebAssetsDirectoryContents((files as IEnumerable<IFileInfo>) ?? Array.Empty<IFileInfo>());
+            return new StaticWebAssetsDirectoryContents(
+                (files as IEnumerable<IFileInfo>) ?? Array.Empty<IFileInfo>()
+            );
         }
 
-        HashSet<IFileInfo>? GetFilesForCandidatePatterns(string[] segments, StaticWebAssetNode? candidate, HashSet<IFileInfo>? files)
+        HashSet<IFileInfo>? GetFilesForCandidatePatterns(
+            string[] segments,
+            StaticWebAssetNode? candidate,
+            HashSet<IFileInfo>? files
+        )
         {
             if (candidate != null && candidate.HasPatterns())
             {
@@ -96,8 +111,13 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                     matcher.AddInclude(pattern.Pattern);
                     foreach (var result in contentRoot.GetDirectoryContents(candidateDirectoryPath))
                     {
-                        var fileCandidate = string.IsNullOrEmpty(candidateDirectoryPath) ? result.Name : $"{candidateDirectoryPath}/{result.Name}";
-                        if (result.Exists && (result.IsDirectory || matcher.Match(fileCandidate).HasMatches))
+                        var fileCandidate = string.IsNullOrEmpty(candidateDirectoryPath)
+                            ? result.Name
+                            : $"{candidateDirectoryPath}/{result.Name}";
+                        if (
+                            result.Exists
+                            && (result.IsDirectory || matcher.Match(fileCandidate).HasMatches)
+                        )
                         {
                             files ??= new(_nameComparer);
                             if (!files.Contains(result))
@@ -137,10 +157,14 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                     files.RemoveWhere(f => string.Equals(match.Path, f.Name, _fsComparison));
                     var file = _fileProviders[match.ContentRoot].GetFileInfo(match.Path);
 
-                    files.Add(string.Equals(child.Key, match.Path, _fsComparison) ? file :
-                        // This means that this file was mapped, there is a chance that we added it to the list
-                        // of files by one of the patterns, so we need to replace it with the mapped file.
-                        new StaticWebAssetsFileInfo(child.Key, file));
+                    files.Add(
+                        string.Equals(child.Key, match.Path, _fsComparison)
+                            ? file
+                            :
+                            // This means that this file was mapped, there is a chance that we added it to the list
+                            // of files by one of the patterns, so we need to replace it with the mapped file.
+                            new StaticWebAssetsFileInfo(child.Key, file)
+                    );
                 }
             }
         }
@@ -168,7 +192,10 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                 patterns ??= new();
                 patterns.AddRange(candidate.Patterns);
             }
-            if (candidate.HasChildren() && candidate.Children.TryGetValue(segments[i], out var child))
+            if (
+                candidate.HasChildren()
+                && candidate.Children.TryGetValue(segments[i], out var child)
+            )
             {
                 candidate = child;
             }
@@ -240,8 +267,7 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
     {
         private readonly IEnumerable<IFileInfo> _files;
 
-        public StaticWebAssetsDirectoryContents(IEnumerable<IFileInfo> files) =>
-            _files = files;
+        public StaticWebAssetsDirectoryContents(IEnumerable<IFileInfo> files) => _files = files;
 
         public bool Exists => true;
 
@@ -252,7 +278,9 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
 
     private sealed class StaticWebAssetsDirectoryInfo : IFileInfo
     {
-        private static readonly DateTimeOffset _lastModified = DateTimeOffset.FromUnixTimeSeconds(0);
+        private static readonly DateTimeOffset _lastModified = DateTimeOffset.FromUnixTimeSeconds(
+            0
+        );
 
         public StaticWebAssetsDirectoryInfo(string name)
         {
@@ -271,7 +299,8 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
 
         public string Name { get; }
 
-        public Stream CreateReadStream() => throw new InvalidOperationException("Can not create a stream for a directory.");
+        public Stream CreateReadStream() =>
+            throw new InvalidOperationException("Can not create a stream for a directory.");
     }
 
     private sealed class StaticWebAssetsFileInfo : IFileInfo
@@ -283,6 +312,7 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
             Name = name;
             _source = source;
         }
+
         public bool Exists => _source.Exists;
 
         public long Length => _source.Length;
@@ -300,15 +330,17 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
 
     private sealed class FileNameComparer : IEqualityComparer<IFileInfo>
     {
-        public bool Equals(IFileInfo? x, IFileInfo? y) => string.Equals(x?.Name, y?.Name, _fsComparison);
+        public bool Equals(IFileInfo? x, IFileInfo? y) =>
+            string.Equals(x?.Name, y?.Name, _fsComparison);
 
         public int GetHashCode(IFileInfo obj) => obj.Name.GetHashCode(_fsComparison);
     }
 
     internal sealed class StaticWebAssetManifest
     {
-        internal static readonly StringComparer PathComparer =
-            OperatingSystem.IsWindows() ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
+        internal static readonly StringComparer PathComparer = OperatingSystem.IsWindows()
+            ? StringComparer.OrdinalIgnoreCase
+            : StringComparer.Ordinal;
 
         public string[] ContentRoots { get; set; } = Array.Empty<string>();
 
@@ -318,7 +350,8 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
         {
             return JsonSerializer.Deserialize(
                 manifest,
-                SourceGenerationContext.DefaultWithConverter.StaticWebAssetManifest)!;
+                SourceGenerationContext.DefaultWithConverter.StaticWebAssetManifest
+            )!;
         }
     }
 
@@ -327,10 +360,10 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
     [JsonSerializable(typeof(IDictionary<string, StaticWebAssetNode>))]
     internal sealed partial class SourceGenerationContext : JsonSerializerContext
     {
-        public static readonly SourceGenerationContext DefaultWithConverter = new SourceGenerationContext(new JsonSerializerOptions
-        {
-            Converters = { new OSBasedCaseConverter() }
-        });
+        public static readonly SourceGenerationContext DefaultWithConverter =
+            new SourceGenerationContext(
+                new JsonSerializerOptions { Converters = { new OSBasedCaseConverter() } }
+            );
     }
 
     internal sealed class StaticWebAssetNode
@@ -369,21 +402,32 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
         public string Pattern { get; set; } = null!;
     }
 
-    private sealed class OSBasedCaseConverter : JsonConverter<Dictionary<string, StaticWebAssetNode>>
+    private sealed class OSBasedCaseConverter
+        : JsonConverter<Dictionary<string, StaticWebAssetNode>>
     {
-        public override Dictionary<string, StaticWebAssetNode> Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Dictionary<string, StaticWebAssetNode> Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             // Need to recursively deserialize `Dictionary<string, StaticWebAssetNode>` but can't deserialize
             // that type directly because this converter will call into itself and stackoverflow.
             // Workaround is to deserialize to IDictionary, and then perform custom convert logic on the result.
-            var parsed = JsonSerializer.Deserialize(ref reader, SourceGenerationContext.DefaultWithConverter.IDictionaryStringStaticWebAssetNode)!;
-            var result = new Dictionary<string, StaticWebAssetNode>(StaticWebAssetManifest.PathComparer);
+            var parsed = JsonSerializer.Deserialize(
+                ref reader,
+                SourceGenerationContext.DefaultWithConverter.IDictionaryStringStaticWebAssetNode
+            )!;
+            var result = new Dictionary<string, StaticWebAssetNode>(
+                StaticWebAssetManifest.PathComparer
+            );
             MergeChildren(parsed, result);
             return result;
 
             static void MergeChildren(
                 IDictionary<string, StaticWebAssetNode> newChildren,
-                IDictionary<string, StaticWebAssetNode> existing)
+                IDictionary<string, StaticWebAssetNode> existing
+            )
             {
                 foreach (var (key, value) in newChildren)
                 {
@@ -403,7 +447,9 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
                             {
                                 if (value.Patterns.Length > 0)
                                 {
-                                    var newList = new StaticWebAssetPattern[existingNode.Patterns.Length + value.Patterns.Length];
+                                    var newList = new StaticWebAssetPattern[
+                                        existingNode.Patterns.Length + value.Patterns.Length
+                                    ];
                                     existingNode.Patterns.CopyTo(newList, 0);
                                     value.Patterns.CopyTo(newList, existingNode.Patterns.Length);
                                     existingNode.Patterns = newList;
@@ -430,7 +476,11 @@ internal sealed partial class ManifestStaticWebAssetFileProvider : IFileProvider
             }
         }
 
-        public override void Write(Utf8JsonWriter writer, Dictionary<string, StaticWebAssetNode> value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            Dictionary<string, StaticWebAssetNode> value,
+            JsonSerializerOptions options
+        )
         {
             throw new NotSupportedException();
         }

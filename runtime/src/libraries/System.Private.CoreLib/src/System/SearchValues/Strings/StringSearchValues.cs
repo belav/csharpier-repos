@@ -14,11 +14,13 @@ namespace System.Buffers
 {
     internal static class StringSearchValues
     {
-        private static readonly SearchValues<char> s_asciiLetters =
-            SearchValues.Create("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz");
+        private static readonly SearchValues<char> s_asciiLetters = SearchValues.Create(
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz"
+        );
 
-        private static readonly SearchValues<char> s_allAsciiExceptLowercase =
-            SearchValues.Create("\0\u0001\u0002\u0003\u0004\u0005\u0006\a\b\t\n\v\f\r\u000E\u000F\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~\u007F");
+        private static readonly SearchValues<char> s_allAsciiExceptLowercase = SearchValues.Create(
+            "\0\u0001\u0002\u0003\u0004\u0005\u0006\a\b\t\n\v\f\r\u000E\u000F\u0010\u0011\u0012\u0013\u0014\u0015\u0016\u0017\u0018\u0019\u001A\u001B\u001C\u001D\u001E\u001F !\"#$%&'()*+,-./0123456789:;<=>?@ABCDEFGHIJKLMNOPQRSTUVWXYZ[\\]^_`{|}~\u007F"
+        );
 
         public static SearchValues<string> Create(ReadOnlySpan<string> values, bool ignoreCase)
         {
@@ -34,11 +36,27 @@ namespace System.Buffers
                 ArgumentNullException.ThrowIfNull(value, nameof(values));
                 string normalizedValue = NormalizeIfNeeded(value, ignoreCase);
 
-                AnalyzeValues(new ReadOnlySpan<string>(ref normalizedValue), ref ignoreCase, out bool ascii, out bool asciiLettersOnly, out _, out _);
-                return CreateForSingleValue(normalizedValue, uniqueValues: null, ignoreCase, ascii, asciiLettersOnly);
+                AnalyzeValues(
+                    new ReadOnlySpan<string>(ref normalizedValue),
+                    ref ignoreCase,
+                    out bool ascii,
+                    out bool asciiLettersOnly,
+                    out _,
+                    out _
+                );
+                return CreateForSingleValue(
+                    normalizedValue,
+                    uniqueValues: null,
+                    ignoreCase,
+                    ascii,
+                    asciiLettersOnly
+                );
             }
 
-            var uniqueValues = new HashSet<string>(values.Length, ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
+            var uniqueValues = new HashSet<string>(
+                values.Length,
+                ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
+            );
 
             foreach (string value in values)
             {
@@ -49,7 +67,10 @@ namespace System.Buffers
 
             if (uniqueValues.Contains(string.Empty))
             {
-                return new SingleStringSearchValuesFallback<SearchValues.FalseConst>(string.Empty, uniqueValues);
+                return new SingleStringSearchValuesFallback<SearchValues.FalseConst>(
+                    string.Empty,
+                    uniqueValues
+                );
             }
 
             Span<string> normalizedValues = new string[uniqueValues.Count];
@@ -66,7 +87,11 @@ namespace System.Buffers
             // We may not end up choosing Aho-Corasick as the implementation, but it has a nice property of
             // finding all the unreachable values during the construction stage, so we build the trie early.
             HashSet<string>? unreachableValues = null;
-            var ahoCorasickBuilder = new AhoCorasickBuilder(normalizedValues, ignoreCase, ref unreachableValues);
+            var ahoCorasickBuilder = new AhoCorasickBuilder(
+                normalizedValues,
+                ignoreCase,
+                ref unreachableValues
+            );
 
             if (unreachableValues is not null)
             {
@@ -75,7 +100,12 @@ namespace System.Buffers
                 normalizedValues = RemoveUnreachableValues(normalizedValues, unreachableValues);
             }
 
-            SearchValues<string> searchValues = CreateFromNormalizedValues(normalizedValues, uniqueValues, ignoreCase, ref ahoCorasickBuilder);
+            SearchValues<string> searchValues = CreateFromNormalizedValues(
+                normalizedValues,
+                uniqueValues,
+                ignoreCase,
+                ref ahoCorasickBuilder
+            );
             ahoCorasickBuilder.Dispose();
             return searchValues;
 
@@ -84,7 +114,10 @@ namespace System.Buffers
                 if (ignoreCase && value.AsSpan().ContainsAnyExcept(s_allAsciiExceptLowercase))
                 {
                     string upperCase = string.FastAllocateString(value.Length);
-                    int charsWritten = Ordinal.ToUpperOrdinal(value, new Span<char>(ref upperCase.GetRawStringData(), upperCase.Length));
+                    int charsWritten = Ordinal.ToUpperOrdinal(
+                        value,
+                        new Span<char>(ref upperCase.GetRawStringData(), upperCase.Length)
+                    );
                     Debug.Assert(charsWritten == upperCase.Length);
                     value = upperCase;
                 }
@@ -92,7 +125,10 @@ namespace System.Buffers
                 return value;
             }
 
-            static Span<string> RemoveUnreachableValues(Span<string> values, HashSet<string> unreachableValues)
+            static Span<string> RemoveUnreachableValues(
+                Span<string> values,
+                HashSet<string> unreachableValues
+            )
             {
                 int newCount = 0;
                 foreach (string value in values)
@@ -114,18 +150,43 @@ namespace System.Buffers
             ReadOnlySpan<string> values,
             HashSet<string> uniqueValues,
             bool ignoreCase,
-            ref AhoCorasickBuilder ahoCorasickBuilder)
+            ref AhoCorasickBuilder ahoCorasickBuilder
+        )
         {
-            AnalyzeValues(values, ref ignoreCase, out bool allAscii, out bool asciiLettersOnly, out bool nonAsciiAffectedByCaseConversion, out int minLength);
+            AnalyzeValues(
+                values,
+                ref ignoreCase,
+                out bool allAscii,
+                out bool asciiLettersOnly,
+                out bool nonAsciiAffectedByCaseConversion,
+                out int minLength
+            );
 
             if (values.Length == 1)
             {
                 // We may reach this if we've removed unreachable values and ended up with only 1 remaining.
-                return CreateForSingleValue(values[0], uniqueValues, ignoreCase, allAscii, asciiLettersOnly);
+                return CreateForSingleValue(
+                    values[0],
+                    uniqueValues,
+                    ignoreCase,
+                    allAscii,
+                    asciiLettersOnly
+                );
             }
 
-            if ((Ssse3.IsSupported || AdvSimd.Arm64.IsSupported) &&
-                TryGetTeddyAcceleratedValues(values, uniqueValues, ignoreCase, allAscii, asciiLettersOnly, nonAsciiAffectedByCaseConversion, minLength) is { } searchValues)
+            if (
+                (Ssse3.IsSupported || AdvSimd.Arm64.IsSupported)
+                && TryGetTeddyAcceleratedValues(
+                    values,
+                    uniqueValues,
+                    ignoreCase,
+                    allAscii,
+                    asciiLettersOnly,
+                    nonAsciiAffectedByCaseConversion,
+                    minLength
+                )
+                    is { } searchValues
+            )
             {
                 return searchValues;
             }
@@ -147,22 +208,37 @@ namespace System.Buffers
                     return new MultiStringIgnoreCaseSearchValuesFallback(uniqueValues);
                 }
 
-                return PickAhoCorasickImplementation<CaseInsensitiveUnicode>(ahoCorasick, uniqueValues);
+                return PickAhoCorasickImplementation<CaseInsensitiveUnicode>(
+                    ahoCorasick,
+                    uniqueValues
+                );
             }
 
             if (asciiLettersOnly)
             {
-                return PickAhoCorasickImplementation<CaseInsensitiveAsciiLetters>(ahoCorasick, uniqueValues);
+                return PickAhoCorasickImplementation<CaseInsensitiveAsciiLetters>(
+                    ahoCorasick,
+                    uniqueValues
+                );
             }
 
             return PickAhoCorasickImplementation<CaseInsensitiveAscii>(ahoCorasick, uniqueValues);
 
-            static SearchValues<string> PickAhoCorasickImplementation<TCaseSensitivity>(AhoCorasick ahoCorasick, HashSet<string> uniqueValues)
+            static SearchValues<string> PickAhoCorasickImplementation<TCaseSensitivity>(
+                AhoCorasick ahoCorasick,
+                HashSet<string> uniqueValues
+            )
                 where TCaseSensitivity : struct, ICaseSensitivity
             {
                 return ahoCorasick.ShouldUseAsciiFastScan
-                    ? new StringSearchValuesAhoCorasick<TCaseSensitivity, AhoCorasick.IndexOfAnyAsciiFastScan>(ahoCorasick, uniqueValues)
-                    : new StringSearchValuesAhoCorasick<TCaseSensitivity, AhoCorasick.NoFastScan>(ahoCorasick, uniqueValues);
+                    ? new StringSearchValuesAhoCorasick<
+                        TCaseSensitivity,
+                        AhoCorasick.IndexOfAnyAsciiFastScan
+                    >(ahoCorasick, uniqueValues)
+                    : new StringSearchValuesAhoCorasick<TCaseSensitivity, AhoCorasick.NoFastScan>(
+                        ahoCorasick,
+                        uniqueValues
+                    );
             }
         }
 
@@ -173,7 +249,8 @@ namespace System.Buffers
             bool allAscii,
             bool asciiLettersOnly,
             bool nonAsciiAffectedByCaseConversion,
-            int minLength)
+            int minLength
+        )
         {
             if (minLength == 1)
             {
@@ -226,12 +303,19 @@ namespace System.Buffers
 
             if (!ignoreCase)
             {
-                return PickTeddyImplementation<CaseSensitive, CaseSensitive>(values, uniqueValues, n);
+                return PickTeddyImplementation<CaseSensitive, CaseSensitive>(
+                    values,
+                    uniqueValues,
+                    n
+                );
             }
 
             if (asciiLettersOnly)
             {
-                return PickTeddyImplementation<CaseInsensitiveAsciiLetters, CaseInsensitiveAsciiLetters>(values, uniqueValues, n);
+                return PickTeddyImplementation<
+                    CaseInsensitiveAsciiLetters,
+                    CaseInsensitiveAsciiLetters
+                >(values, uniqueValues, n);
             }
 
             // Even if the whole value isn't ASCII letters only, we can still use a faster approach
@@ -242,8 +326,10 @@ namespace System.Buffers
             foreach (string value in values)
             {
                 ReadOnlySpan<char> slice = value.AsSpan(0, n);
-                asciiStartLettersOnly = asciiStartLettersOnly && !slice.ContainsAnyExcept(s_asciiLetters);
-                asciiStartUnaffectedByCaseConversion = asciiStartUnaffectedByCaseConversion && !slice.ContainsAny(s_asciiLetters);
+                asciiStartLettersOnly =
+                    asciiStartLettersOnly && !slice.ContainsAnyExcept(s_asciiLetters);
+                asciiStartUnaffectedByCaseConversion =
+                    asciiStartUnaffectedByCaseConversion && !slice.ContainsAny(s_asciiLetters);
             }
 
             Debug.Assert(!(asciiStartLettersOnly && asciiStartUnaffectedByCaseConversion));
@@ -251,26 +337,50 @@ namespace System.Buffers
             if (asciiStartUnaffectedByCaseConversion)
             {
                 return nonAsciiAffectedByCaseConversion
-                    ? PickTeddyImplementation<CaseSensitive, CaseInsensitiveUnicode>(values, uniqueValues, n)
-                    : PickTeddyImplementation<CaseSensitive, CaseInsensitiveAscii>(values, uniqueValues, n);
+                    ? PickTeddyImplementation<CaseSensitive, CaseInsensitiveUnicode>(
+                        values,
+                        uniqueValues,
+                        n
+                    )
+                    : PickTeddyImplementation<CaseSensitive, CaseInsensitiveAscii>(
+                        values,
+                        uniqueValues,
+                        n
+                    );
             }
 
             if (nonAsciiAffectedByCaseConversion)
             {
                 return asciiStartLettersOnly
-                    ? PickTeddyImplementation<CaseInsensitiveAsciiLetters, CaseInsensitiveUnicode>(values, uniqueValues, n)
-                    : PickTeddyImplementation<CaseInsensitiveAscii, CaseInsensitiveUnicode>(values, uniqueValues, n);
+                    ? PickTeddyImplementation<CaseInsensitiveAsciiLetters, CaseInsensitiveUnicode>(
+                        values,
+                        uniqueValues,
+                        n
+                    )
+                    : PickTeddyImplementation<CaseInsensitiveAscii, CaseInsensitiveUnicode>(
+                        values,
+                        uniqueValues,
+                        n
+                    );
             }
 
             return asciiStartLettersOnly
-                ? PickTeddyImplementation<CaseInsensitiveAsciiLetters, CaseInsensitiveAscii>(values, uniqueValues, n)
-                : PickTeddyImplementation<CaseInsensitiveAscii, CaseInsensitiveAscii>(values, uniqueValues, n);
+                ? PickTeddyImplementation<CaseInsensitiveAsciiLetters, CaseInsensitiveAscii>(
+                    values,
+                    uniqueValues,
+                    n
+                )
+                : PickTeddyImplementation<CaseInsensitiveAscii, CaseInsensitiveAscii>(
+                    values,
+                    uniqueValues,
+                    n
+                );
         }
 
-        private static SearchValues<string> PickTeddyImplementation<TStartCaseSensitivity, TCaseSensitivity>(
-            ReadOnlySpan<string> values,
-            HashSet<string> uniqueValues,
-            int n)
+        private static SearchValues<string> PickTeddyImplementation<
+            TStartCaseSensitivity,
+            TCaseSensitivity
+        >(ReadOnlySpan<string> values, HashSet<string> uniqueValues, int n)
             where TStartCaseSensitivity : struct, ICaseSensitivity
             where TCaseSensitivity : struct, ICaseSensitivity
         {
@@ -286,14 +396,26 @@ namespace System.Buffers
                 // Different offset selection can noticeably improve throughput (e.g. 2x).
 
                 return n == 2
-                    ? new AsciiStringSearchValuesTeddyBucketizedN2<TStartCaseSensitivity, TCaseSensitivity>(buckets, values, uniqueValues)
-                    : new AsciiStringSearchValuesTeddyBucketizedN3<TStartCaseSensitivity, TCaseSensitivity>(buckets, values, uniqueValues);
+                    ? new AsciiStringSearchValuesTeddyBucketizedN2<
+                        TStartCaseSensitivity,
+                        TCaseSensitivity
+                    >(buckets, values, uniqueValues)
+                    : new AsciiStringSearchValuesTeddyBucketizedN3<
+                        TStartCaseSensitivity,
+                        TCaseSensitivity
+                    >(buckets, values, uniqueValues);
             }
             else
             {
                 return n == 2
-                    ? new AsciiStringSearchValuesTeddyNonBucketizedN2<TStartCaseSensitivity, TCaseSensitivity>(values, uniqueValues)
-                    : new AsciiStringSearchValuesTeddyNonBucketizedN3<TStartCaseSensitivity, TCaseSensitivity>(values, uniqueValues);
+                    ? new AsciiStringSearchValuesTeddyNonBucketizedN2<
+                        TStartCaseSensitivity,
+                        TCaseSensitivity
+                    >(values, uniqueValues)
+                    : new AsciiStringSearchValuesTeddyNonBucketizedN3<
+                        TStartCaseSensitivity,
+                        TCaseSensitivity
+                    >(values, uniqueValues);
             }
         }
 
@@ -302,7 +424,8 @@ namespace System.Buffers
             HashSet<string>? uniqueValues,
             bool ignoreCase,
             bool allAscii,
-            bool asciiLettersOnly)
+            bool asciiLettersOnly
+        )
         {
             // We make use of optimizations that may overflow on 32bit systems for long values.
             int maxLength = IntPtr.Size == 4 ? 1_000_000_000 : int.MaxValue;
@@ -311,31 +434,55 @@ namespace System.Buffers
             {
                 if (!ignoreCase)
                 {
-                    return new SingleStringSearchValuesThreeChars<CaseSensitive>(uniqueValues, value);
+                    return new SingleStringSearchValuesThreeChars<CaseSensitive>(
+                        uniqueValues,
+                        value
+                    );
                 }
 
                 if (asciiLettersOnly)
                 {
-                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveAsciiLetters>(uniqueValues, value);
+                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveAsciiLetters>(
+                        uniqueValues,
+                        value
+                    );
                 }
 
                 if (allAscii)
                 {
-                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveAscii>(uniqueValues, value);
+                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveAscii>(
+                        uniqueValues,
+                        value
+                    );
                 }
 
                 // When ignoring casing, all anchor chars we search for must be ASCII.
-                if (char.IsAscii(value[0]) && value.AsSpan().LastIndexOfAnyInRange((char)0, (char)127) > 0)
+                if (
+                    char.IsAscii(value[0])
+                    && value.AsSpan().LastIndexOfAnyInRange((char)0, (char)127) > 0
+                )
                 {
-                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveUnicode>(uniqueValues, value);
+                    return new SingleStringSearchValuesThreeChars<CaseInsensitiveUnicode>(
+                        uniqueValues,
+                        value
+                    );
                 }
             }
 
-            uniqueValues ??= new HashSet<string>(1, ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal) { value };
+            uniqueValues ??= new HashSet<string>(
+                1,
+                ignoreCase ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
+            )
+            {
+                value,
+            };
 
             return ignoreCase
                 ? new SingleStringSearchValuesFallback<SearchValues.TrueConst>(value, uniqueValues)
-                : new SingleStringSearchValuesFallback<SearchValues.FalseConst>(value, uniqueValues);
+                : new SingleStringSearchValuesFallback<SearchValues.FalseConst>(
+                    value,
+                    uniqueValues
+                );
         }
 
         private static void AnalyzeValues(
@@ -344,7 +491,8 @@ namespace System.Buffers
             out bool allAscii,
             out bool asciiLettersOnly,
             out bool nonAsciiAffectedByCaseConversion,
-            out int minLength)
+            out int minLength
+        )
         {
             allAscii = true;
             asciiLettersOnly = true;
@@ -353,7 +501,8 @@ namespace System.Buffers
             foreach (string value in values)
             {
                 allAscii = allAscii && Ascii.IsValid(value);
-                asciiLettersOnly = asciiLettersOnly && !value.AsSpan().ContainsAnyExcept(s_asciiLetters);
+                asciiLettersOnly =
+                    asciiLettersOnly && !value.AsSpan().ContainsAnyExcept(s_asciiLetters);
                 minLength = Math.Min(minLength, value.Length);
             }
 
@@ -382,7 +531,12 @@ namespace System.Buffers
         {
             foreach (string value in values)
             {
-                int i = value.AsSpan().IndexOfAnyInRange(CharUnicodeInfo.HIGH_SURROGATE_START, CharUnicodeInfo.LOW_SURROGATE_END);
+                int i = value
+                    .AsSpan()
+                    .IndexOfAnyInRange(
+                        CharUnicodeInfo.HIGH_SURROGATE_START,
+                        CharUnicodeInfo.LOW_SURROGATE_END
+                    );
                 if (i < 0)
                 {
                     continue;
@@ -392,7 +546,10 @@ namespace System.Buffers
                 {
                     if (char.IsHighSurrogate(value[i]))
                     {
-                        if ((uint)(i + 1) >= (uint)value.Length || !char.IsLowSurrogate(value[i + 1]))
+                        if (
+                            (uint)(i + 1) >= (uint)value.Length
+                            || !char.IsLowSurrogate(value[i + 1])
+                        )
                         {
                             // High surrogate not followed by a low surrogate.
                             return true;

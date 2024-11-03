@@ -33,7 +33,8 @@ public class OAuthCreatingTicketContext : ResultContext<OAuthOptions>
         OAuthOptions options,
         HttpClient backchannel,
         OAuthTokenResponse tokens,
-        JsonElement user)
+        JsonElement user
+    )
         : base(context, scheme, options)
     {
         ArgumentNullException.ThrowIfNull(backchannel);
@@ -80,7 +81,14 @@ public class OAuthCreatingTicketContext : ResultContext<OAuthOptions>
         get
         {
             int value;
-            if (int.TryParse(TokenResponse.ExpiresIn, NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
+            if (
+                int.TryParse(
+                    TokenResponse.ExpiresIn,
+                    NumberStyles.Integer,
+                    CultureInfo.InvariantCulture,
+                    out value
+                )
+            )
             {
                 return TimeSpan.FromSeconds(value);
             }

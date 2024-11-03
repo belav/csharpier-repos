@@ -122,7 +122,11 @@ public class TicketSerializer : IDataSerializer<AuthenticationTicket>
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(claim);
 
-        WriteWithDefault(writer, claim.Type, claim.Subject?.NameClaimType ?? ClaimsIdentity.DefaultNameClaimType);
+        WriteWithDefault(
+            writer,
+            claim.Type,
+            claim.Subject?.NameClaimType ?? ClaimsIdentity.DefaultNameClaimType
+        );
         writer.Write(claim.Value);
         WriteWithDefault(writer, claim.ValueType, ClaimValueTypes.String);
         WriteWithDefault(writer, claim.Issuer, ClaimsIdentity.DefaultIssuer);

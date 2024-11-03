@@ -7,8 +7,9 @@ namespace System.Activities.Core.Presentation
     using System.Activities.Presentation;
     using System.Activities.Presentation.Metadata;
     using System.Activities.Presentation.Model;
-    using System.Activities.Presentation.View;
     using System.Activities.Presentation.Services;
+    using System.Activities.Presentation.View;
+    using System.Activities.Presentation.View.OutlineView;
     using System.Activities.Statements;
     using System.Collections.ObjectModel;
     using System.Collections.Specialized;
@@ -19,10 +20,9 @@ namespace System.Activities.Core.Presentation
     using System.Windows;
     using System.Windows.Automation;
     using System.Windows.Automation.Peers;
+    using System.Windows.Controls;
     using System.Windows.Input;
     using System.Windows.Threading;
-    using System.Windows.Controls;
-    using System.Activities.Presentation.View.OutlineView;
 
     /// <summary>
     /// Interaction logic for TryCatchDesigner.xaml
@@ -59,10 +59,11 @@ namespace System.Activities.Core.Presentation
 
         public static readonly DependencyProperty SelectedCatchProperty =
             DependencyProperty.Register(
-            "SelectedCatch",
-            typeof(ModelItem),
-            typeof(TryCatchDesigner),
-            new UIPropertyMetadata(null));
+                "SelectedCatch",
+                typeof(ModelItem),
+                typeof(TryCatchDesigner),
+                new UIPropertyMetadata(null)
+            );
 
         static ObservableCollection<Type> mostRecentlyUsedTypes;
         static ObservableCollection<Type> MostRecentlyUsedTypes
@@ -86,50 +87,26 @@ namespace System.Activities.Core.Presentation
 
         public bool ShowTryExpanded
         {
-            get
-            {
-                return (bool)this.GetValue(ShowTryExpandedProperty);
-            }
-            set
-            {
-                this.SetValue(ShowTryExpandedProperty, value);
-            }
+            get { return (bool)this.GetValue(ShowTryExpandedProperty); }
+            set { this.SetValue(ShowTryExpandedProperty, value); }
         }
 
         public bool ShowFinallyExpanded
         {
-            get
-            {
-                return (bool)this.GetValue(ShowFinallyExpandedProperty);
-            }
-            set
-            {
-                this.SetValue(ShowFinallyExpandedProperty, value);
-            }
+            get { return (bool)this.GetValue(ShowFinallyExpandedProperty); }
+            set { this.SetValue(ShowFinallyExpandedProperty, value); }
         }
 
         public bool ShowTypePresenterExpanded
         {
-            get
-            {
-                return (bool)this.GetValue(ShowTypePresenterExpandedProperty);
-            }
-            set
-            {
-                this.SetValue(ShowTypePresenterExpandedProperty, value);
-            }
+            get { return (bool)this.GetValue(ShowTypePresenterExpandedProperty); }
+            set { this.SetValue(ShowTypePresenterExpandedProperty, value); }
         }
 
         ModelItem SelectedCatch
         {
-            get
-            {
-                return (ModelItem)this.GetValue(SelectedCatchProperty);
-            }
-            set
-            {
-                this.SetValue(SelectedCatchProperty, value);
-            }
+            get { return (ModelItem)this.GetValue(SelectedCatchProperty); }
+            set { this.SetValue(SelectedCatchProperty, value); }
         }
 
         TypePresenter typePresenter;
@@ -145,7 +122,11 @@ namespace System.Activities.Core.Presentation
             builder.AddCustomAttributes(type, type.GetProperty("Variables"), BrowsableAttribute.No);
 
             // Make Catches collection's node visible in the document treeview but hide Catches node itself.
-            builder.AddCustomAttributes(type, type.GetProperty("Catches"), new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false });
+            builder.AddCustomAttributes(
+                type,
+                type.GetProperty("Catches"),
+                new ShowPropertyInOutlineViewAttribute() { CurrentPropertyVisible = false }
+            );
         }
 
         [SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -162,13 +143,16 @@ namespace System.Activities.Core.Presentation
             this.Context.Items.Subscribe<Selection>(OnSelectionChanged);
             // at this time, this.ModelItem is already set
             this.ModelItem.PropertyChanged += OnModelItemPropertyChanged;
-            this.ModelItem.Properties[CatchesPropertyName].Collection.CollectionChanged += OnModelItemCollectionChanged;
+            this.ModelItem.Properties[CatchesPropertyName].Collection.CollectionChanged +=
+                OnModelItemCollectionChanged;
 
-            ViewStateService viewStateService = this.Context.Services.GetService<ViewStateService>();
+            ViewStateService viewStateService =
+                this.Context.Services.GetService<ViewStateService>();
 
             foreach (ModelItem modelItem in this.ModelItem.Properties["Catches"].Collection)
             {
-                bool? isExpanded = (bool?)viewStateService.RetrieveViewState(modelItem, ExpandViewStateKey);
+                bool? isExpanded = (bool?)
+                    viewStateService.RetrieveViewState(modelItem, ExpandViewStateKey);
                 if (isExpanded != null && isExpanded.Value)
                 {
                     this.SelectedCatch = modelItem;
@@ -182,7 +166,8 @@ namespace System.Activities.Core.Presentation
         void OnUnloaded(object sender, RoutedEventArgs e)
         {
             this.ModelItem.PropertyChanged -= OnModelItemPropertyChanged;
-            this.ModelItem.Properties[CatchesPropertyName].Collection.CollectionChanged -= OnModelItemCollectionChanged;
+            this.ModelItem.Properties[CatchesPropertyName].Collection.CollectionChanged -=
+                OnModelItemCollectionChanged;
             this.Context.Items.Unsubscribe<Selection>(OnSelectionChanged);
         }
 
@@ -301,29 +286,36 @@ namespace System.Activities.Core.Presentation
             ModelItem oldSelectedCatch = this.SelectedCatch;
             this.SelectedCatch = newSelectedCatch;
 
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                if (oldSelectedCatch != null)
-                {
-                    CatchDesigner oldSelectedCatchDesigner = (CatchDesigner)oldSelectedCatch.View;
-                    if (oldSelectedCatchDesigner != null)
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                (Action)(
+                    () =>
                     {
-                        oldSelectedCatchDesigner.ExpandState = false;
-                        oldSelectedCatchDesigner.PinState = false;
+                        if (oldSelectedCatch != null)
+                        {
+                            CatchDesigner oldSelectedCatchDesigner = (CatchDesigner)
+                                oldSelectedCatch.View;
+                            if (oldSelectedCatchDesigner != null)
+                            {
+                                oldSelectedCatchDesigner.ExpandState = false;
+                                oldSelectedCatchDesigner.PinState = false;
+                            }
+                        }
+                        if (newSelectedCatch != null)
+                        {
+                            CollapseTryView();
+                            CollapseFinallyView();
+                            CatchDesigner newSelectedCatchDesigner = (CatchDesigner)
+                                newSelectedCatch.View;
+                            if (newSelectedCatchDesigner != null)
+                            {
+                                newSelectedCatchDesigner.ExpandState = true;
+                                newSelectedCatchDesigner.PinState = true;
+                            }
+                        }
                     }
-                }
-                if (newSelectedCatch != null)
-                {
-                    CollapseTryView();
-                    CollapseFinallyView();
-                    CatchDesigner newSelectedCatchDesigner = (CatchDesigner)newSelectedCatch.View;
-                    if (newSelectedCatchDesigner != null)
-                    {
-                        newSelectedCatchDesigner.ExpandState = true;
-                        newSelectedCatchDesigner.PinState = true;
-                    }
-                }
-            }));
+                )
+            );
         }
 
         void CreateCatch(Type exceptionType)
@@ -339,11 +331,18 @@ namespace System.Activities.Core.Presentation
                 Type argumentType = typeof(DelegateInArgument<>).MakeGenericType(exceptionType);
                 object exceptionArgument = Activator.CreateInstance(argumentType);
                 DelegateInArgument delegateArgument = exceptionArgument as DelegateInArgument;
-                Fx.Assert(null != delegateArgument, "delegate argument must be of DelegateInArgument type!");
+                Fx.Assert(
+                    null != delegateArgument,
+                    "delegate argument must be of DelegateInArgument type!"
+                );
                 delegateArgument.Name = "exception";
 
-                catchType.GetProperty(PropertyNames.Action).SetValue(catchObject, activityAction, null);
-                activityActionType.GetProperty(PropertyNames.ActionArgument).SetValue(activityAction, exceptionArgument, null);
+                catchType
+                    .GetProperty(PropertyNames.Action)
+                    .SetValue(catchObject, activityAction, null);
+                activityActionType
+                    .GetProperty(PropertyNames.ActionArgument)
+                    .SetValue(activityAction, exceptionArgument, null);
 
                 this.ModelItem.Properties["Catches"].Collection.Add(catchObject);
             }
@@ -420,21 +419,31 @@ namespace System.Activities.Core.Presentation
         void ExpandFinallyView()
         {
             UpdateSelection(null);
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                this.ShowTryExpanded = false;
-                this.ShowFinallyExpanded = true;
-            }));
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                (Action)(
+                    () =>
+                    {
+                        this.ShowTryExpanded = false;
+                        this.ShowFinallyExpanded = true;
+                    }
+                )
+            );
         }
 
         void ExpandTryView()
         {
             UpdateSelection(null);
-            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal, (Action)(() =>
-            {
-                this.ShowFinallyExpanded = false;
-                this.ShowTryExpanded = true;
-            }));
+            this.Dispatcher.BeginInvoke(
+                DispatcherPriority.Normal,
+                (Action)(
+                    () =>
+                    {
+                        this.ShowFinallyExpanded = false;
+                        this.ShowTryExpanded = true;
+                    }
+                )
+            );
         }
 
         void CollapseFinallyView()
@@ -614,7 +623,9 @@ namespace System.Activities.Core.Presentation
             Fx.Assert(catches != null, "Catches.Collection could not be null");
             foreach (ModelItem catchItem in catches)
             {
-                ModelProperty exceptionTypeProperty = catchItem.Properties[ExceptionTypePropertyName];
+                ModelProperty exceptionTypeProperty = catchItem.Properties[
+                    ExceptionTypePropertyName
+                ];
                 Fx.Assert(exceptionTypeProperty != null, "Catch.ExceptionType could not be null");
                 Type exceptionType = exceptionTypeProperty.ComputedValue as Type;
                 Fx.Assert(exceptionType != null, "Catch.ExceptionType.Value could not be null");
@@ -644,9 +655,7 @@ namespace System.Activities.Core.Presentation
     internal class TextBlockWrapperAutomationPeer : TextBlockAutomationPeer
     {
         public TextBlockWrapperAutomationPeer(TextBlockWrapper owner)
-            : base(owner)
-        {
-        }
+            : base(owner) { }
 
         protected override AutomationControlType GetAutomationControlTypeCore()
         {

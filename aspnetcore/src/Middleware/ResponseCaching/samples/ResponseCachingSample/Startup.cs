@@ -15,17 +15,19 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseResponseCaching();
-        app.Run(async (context) =>
-        {
-            context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+        app.Run(
+            async (context) =>
             {
-                Public = true,
-                MaxAge = TimeSpan.FromSeconds(10)
-            };
-            context.Response.Headers.Vary = new string[] { "Accept-Encoding" };
+                context.Response.GetTypedHeaders().CacheControl = new CacheControlHeaderValue()
+                {
+                    Public = true,
+                    MaxAge = TimeSpan.FromSeconds(10),
+                };
+                context.Response.Headers.Vary = new string[] { "Accept-Encoding" };
 
-            await context.Response.WriteAsync("Hello World! " + DateTime.UtcNow);
-        });
+                await context.Response.WriteAsync("Hello World! " + DateTime.UtcNow);
+            }
+        );
     }
 
     public static Task Main(string[] args)
@@ -34,11 +36,12 @@ public class Startup
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            }).Build();
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
+            .Build();
 
         return host.RunAsync();
     }

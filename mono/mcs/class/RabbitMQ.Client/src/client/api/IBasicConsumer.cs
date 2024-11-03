@@ -93,12 +93,14 @@ namespace RabbitMQ.Client
         ///<remarks>
         ///Be aware that acknowledgement may be required. See IModel.BasicAck.
         ///</remarks>
-        void HandleBasicDeliver(string consumerTag,
-                                ulong deliveryTag,
-                                bool redelivered,
-                                string exchange,
-                                string routingKey,
-                                IBasicProperties properties,
-                                byte[] body);
+        void HandleBasicDeliver(
+            string consumerTag,
+            ulong deliveryTag,
+            bool redelivered,
+            string exchange,
+            string routingKey,
+            IBasicProperties properties,
+            byte[] body
+        );
     }
 }

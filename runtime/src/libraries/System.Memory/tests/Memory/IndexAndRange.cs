@@ -29,8 +29,14 @@ namespace System.MemoryTests
             }
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Memory<int> m = memory[range]; });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { ReadOnlyMemory<int> m = roMemory[range]; });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Memory<int> m = memory[range];
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                ReadOnlyMemory<int> m = roMemory[range];
+            });
         }
 
         [Fact]
@@ -50,8 +56,14 @@ namespace System.MemoryTests
             }
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Memory<int> m = a.AsMemory(Index.FromStart(a.Length + 1)); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Memory<int> m = a.AsMemory(range); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Memory<int> m = a.AsMemory(Index.FromStart(a.Length + 1));
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Memory<int> m = a.AsMemory(range);
+            });
 
             string s = "0123456789ABCDEF";
             ReadOnlyMemory<char> roStringMemory = s.AsMemory();
@@ -65,8 +77,14 @@ namespace System.MemoryTests
             }
 
             range = new Range(Index.FromStart(0), Index.FromStart(s.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { ReadOnlyMemory<char> m = s.AsMemory(Index.FromStart(s.Length + 1)); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { ReadOnlyMemory<char> m = s.AsMemory(range); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                ReadOnlyMemory<char> m = s.AsMemory(Index.FromStart(s.Length + 1));
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                ReadOnlyMemory<char> m = s.AsMemory(range);
+            });
 
             Span<int> span = a.AsSpan();
 
@@ -79,8 +97,14 @@ namespace System.MemoryTests
             }
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Span<int> sp = a.AsSpan(Index.FromStart(a.Length + 1)); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Span<int> sp = a.AsSpan(range); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<int> sp = a.AsSpan(Index.FromStart(a.Length + 1));
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<int> sp = a.AsSpan(range);
+            });
 
             ArraySegment<int> segment = new ArraySegment<int>(a);
             for (int i = 0; i < a.Length; i++)
@@ -92,8 +116,14 @@ namespace System.MemoryTests
             }
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Span<int> sp = segment.AsSpan(Index.FromStart(a.Length + 1)); });
-            Assert.Throws<ArgumentOutOfRangeException>(() => { Span<int> sp = segment.AsSpan(range); });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<int> sp = segment.AsSpan(Index.FromStart(a.Length + 1));
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<int> sp = segment.AsSpan(range);
+            });
         }
     }
 }

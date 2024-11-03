@@ -10,7 +10,9 @@ namespace System.IO.Compression
     /// This is the exception that is thrown when a ZLib returns an error code indicating an unrecoverable error.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class ZLibException : IOException, ISerializable
     {
         private readonly string? _zlibErrorContext = string.Empty;
@@ -25,7 +27,13 @@ namespace System.IO.Compression
         /// <param name="zlibErrorContext">A description of the context within zlib where the error occurred (e.g. the function name).</param>
         /// <param name="zlibErrorCode">The error code returned by a ZLib function that caused this exception.</param>
         /// <param name="zlibErrorMessage">The string provided by ZLib as error information (unlocalised).</param>
-        public ZLibException(string? message, string? zlibErrorContext, int zlibErrorCode, string? zlibErrorMessage) : base(message)
+        public ZLibException(
+            string? message,
+            string? zlibErrorContext,
+            int zlibErrorCode,
+            string? zlibErrorMessage
+        )
+            : base(message)
         {
             _zlibErrorContext = zlibErrorContext;
             _zlibErrorCode = (ZLibNative.ErrorCode)zlibErrorCode;
@@ -46,7 +54,8 @@ namespace System.IO.Compression
         /// </summary>
         /// <param name="message">The error message that explains the reason for the exception.</param>
         /// <param name="innerException">The exception that is the cause of the current exception, or a <code>null</code>.</param>
-        public ZLibException(string? message, Exception? innerException) : base(message, innerException) { }
+        public ZLibException(string? message, Exception? innerException)
+            : base(message, innerException) { }
 
         /// <summary>
         /// Initializes a new ZLibException with serialized data.
@@ -54,10 +63,15 @@ namespace System.IO.Compression
         /// <param name="info">The SerializationInfo that holds the serialized object data about the exception being thrown.</param>
         /// <param name="context">The StreamingContext that contains contextual information about the source or destination.</param>
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
 #endif
-        protected ZLibException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected ZLibException(SerializationInfo info, StreamingContext context)
+            : base(info, context)
         {
             _zlibErrorContext = info.GetString("zlibErrorContext");
             _zlibErrorCode = (ZLibNative.ErrorCode)info.GetInt32("zlibErrorCode");
@@ -65,7 +79,11 @@ namespace System.IO.Compression
         }
 
 #if NET8_0_OR_GREATER
-        [Obsolete(Obsoletions.LegacyFormatterImplMessage, DiagnosticId = Obsoletions.LegacyFormatterImplDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.LegacyFormatterImplMessage,
+            DiagnosticId = Obsoletions.LegacyFormatterImplDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
 #endif
         void ISerializable.GetObjectData(SerializationInfo si, StreamingContext context)
         {

@@ -31,15 +31,14 @@ using System.Security.Permissions;
 
 namespace System.Security.Policy
 {
-	[Serializable]
-	[PermissionSetAttribute (SecurityAction.InheritanceDemand, Unrestricted = true)]
-	public abstract class EvidenceBase
-	{
-		[SecurityPermissionAttribute (SecurityAction.Assert, SerializationFormatter = true)]
-		public virtual EvidenceBase Clone ()
-		{
-			throw new NotImplementedException ();
-		}
-	}
+    [Serializable]
+    [PermissionSetAttribute(SecurityAction.InheritanceDemand, Unrestricted = true)]
+    public abstract class EvidenceBase
+    {
+        [SecurityPermissionAttribute(SecurityAction.Assert, SerializationFormatter = true)]
+        public virtual EvidenceBase Clone()
+        {
+            throw new NotImplementedException();
+        }
+    }
 }
-

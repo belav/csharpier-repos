@@ -10,9 +10,9 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Reflection;
 
 [assembly: TestAssembly]
 [module: TestModule]
@@ -100,10 +100,15 @@ internal static class ReflectionTest
 
             public InvokeTests() { }
 
-            public InvokeTests(string message) { _world = message; }
+            public InvokeTests(string message)
+            {
+                _world = message;
+            }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public static string GetHello(string name)
             {
@@ -111,7 +116,9 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public static void GetHelloByRef(string name, out string result)
             {
@@ -119,16 +126,19 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public static string GetHelloGeneric<T>(T obj)
             {
                 return "Hello " + obj;
             }
 
-
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public string GetHelloInstance()
             {
@@ -136,7 +146,9 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public static unsafe string GetHelloPointer(char* ptr)
             {
@@ -144,7 +156,9 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public static unsafe string GetHelloPointerToo(char** ptr)
             {
@@ -152,13 +166,17 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
-            public static unsafe bool* GetPointer(void* ptr, object dummyJustToMakeThisUseSharedThunk)
+            public static unsafe bool* GetPointer(
+                void* ptr,
+                object dummyJustToMakeThisUseSharedThunk
+            )
             {
                 return (bool*)ptr;
             }
-
         }
 
         internal class InvokeTestsGeneric<T>
@@ -166,7 +184,9 @@ internal static class ReflectionTest
             private string _hi = "Hello ";
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public string GetHelloGeneric<U>(U obj)
             {
@@ -174,7 +194,9 @@ internal static class ReflectionTest
             }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public string GetHello(object obj)
             {
@@ -195,7 +217,9 @@ internal static class ReflectionTest
 
             {
                 object? arg = "world";
-                MethodInfo helloMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHello");
+                MethodInfo helloMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHello");
 
                 string result = (string)helloMethod.Invoke(null, new object[] { arg });
                 if (result != "Hello world")
@@ -205,14 +229,18 @@ internal static class ReflectionTest
                 if (result != "Hello world")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloMethod).Invoke(null, new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker.Create(helloMethod).Invoke(null, new Span<object?>(ref arg));
                 if (result != "Hello world")
                     throw new Exception();
             }
 
             {
                 object? arg = 12345;
-                MethodInfo helloGenericMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloGeneric").MakeGenericMethod(typeof(int));
+                MethodInfo helloGenericMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloGeneric")
+                    .MakeGenericMethod(typeof(int));
                 string result = (string)helloGenericMethod.Invoke(null, new object[] { arg });
                 if (result != "Hello 12345")
                     throw new Exception();
@@ -221,14 +249,20 @@ internal static class ReflectionTest
                 if (result != "Hello 12345")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(null, new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (result != "Hello 12345")
                     throw new Exception();
             }
 
             {
                 object? arg = "buddy";
-                MethodInfo helloGenericMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloGeneric").MakeGenericMethod(typeof(string));
+                MethodInfo helloGenericMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloGeneric")
+                    .MakeGenericMethod(typeof(string));
                 string result = (string)helloGenericMethod.Invoke(null, new object[] { arg });
                 if (result != "Hello buddy")
                     throw new Exception();
@@ -237,14 +271,20 @@ internal static class ReflectionTest
                 if (result != "Hello buddy")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(null, new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (result != "Hello buddy")
                     throw new Exception();
             }
 
             {
                 object? arg = typeof(string);
-                MethodInfo helloGenericMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloGeneric").MakeGenericMethod(typeof(Type));
+                MethodInfo helloGenericMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloGeneric")
+                    .MakeGenericMethod(typeof(Type));
                 string result = (string)helloGenericMethod.Invoke(null, new object[] { arg });
                 if (result != "Hello System.String")
                     throw new Exception();
@@ -253,14 +293,19 @@ internal static class ReflectionTest
                 if (result != "Hello System.String")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(null, new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (result != "Hello System.String")
                     throw new Exception();
             }
 
             {
                 object? arg = "world";
-                MethodInfo helloByRefMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloByRef");
+                MethodInfo helloByRefMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloByRef");
                 object[] args = new object[] { arg, null };
 
                 helloByRefMethod.Invoke(null, args);
@@ -274,18 +319,24 @@ internal static class ReflectionTest
             }
 
             {
-                MethodInfo helloPointerMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloPointer");
+                MethodInfo helloPointerMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloPointer");
 
                 string resultNull = (string)helloPointerMethod.Invoke(null, new object[] { null });
                 if (resultNull != "Hello 0")
                     throw new Exception();
 
-                resultNull = (string)MethodInvoker.Create(helloPointerMethod).Invoke(null, arg1: null);
+                resultNull = (string)
+                    MethodInvoker.Create(helloPointerMethod).Invoke(null, arg1: null);
                 if (resultNull != "Hello 0")
                     throw new Exception();
 
                 object? arg = null;
-                resultNull = (string)MethodInvoker.Create(helloPointerMethod).Invoke(null, new Span<object?>(ref arg));
+                resultNull = (string)
+                    MethodInvoker
+                        .Create(helloPointerMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (resultNull != "Hello 0")
                     throw new Exception();
 
@@ -298,13 +349,18 @@ internal static class ReflectionTest
                 if (resultVal != "Hello 42")
                     throw new Exception();
 
-                resultNull = (string)MethodInvoker.Create(helloPointerMethod).Invoke(null, new Span<object?>(ref arg));
+                resultNull = (string)
+                    MethodInvoker
+                        .Create(helloPointerMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (resultVal != "Hello 42")
                     throw new Exception();
             }
 
             {
-                MethodInfo helloPointerTooMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetHelloPointerToo");
+                MethodInfo helloPointerTooMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloPointerToo");
                 object? arg = Pointer.Box((void*)85, typeof(char**));
 
                 string result = (string)helloPointerTooMethod.Invoke(null, new object[] { arg });
@@ -315,13 +371,18 @@ internal static class ReflectionTest
                 if (result != "Hello 85")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloPointerTooMethod).Invoke(null, new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloPointerTooMethod)
+                        .Invoke(null, new Span<object?>(ref arg));
                 if (result != "Hello 85")
                     throw new Exception();
             }
 
             {
-                MethodInfo getPointerMethod = typeof(InvokeTests).GetTypeInfo().GetDeclaredMethod("GetPointer");
+                MethodInfo getPointerMethod = typeof(InvokeTests)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetPointer");
                 object? arg = Pointer.Box((void*)2018, typeof(void*));
                 object[] args = new object[] { arg, null };
 
@@ -333,75 +394,114 @@ internal static class ReflectionTest
                 if (Pointer.Unbox(result) != (void*)2018)
                     throw new Exception();
 
-                result = MethodInvoker.Create(getPointerMethod).Invoke(null, new Span<object?>(args));
+                result = MethodInvoker
+                    .Create(getPointerMethod)
+                    .Invoke(null, new Span<object?>(args));
                 if (Pointer.Unbox(result) != (void*)2018)
                     throw new Exception();
             }
 
             {
-                MethodInfo helloMethod = typeof(InvokeTestsGeneric<string>).GetTypeInfo().GetDeclaredMethod("GetHello");
+                MethodInfo helloMethod = typeof(InvokeTestsGeneric<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHello");
                 object? arg = "world";
 
-                string result = (string)helloMethod.Invoke(new InvokeTestsGeneric<string>(), new object[] { arg });
+                string result = (string)
+                    helloMethod.Invoke(new InvokeTestsGeneric<string>(), new object[] { arg });
                 if (result != "Hello world System.String")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<string>(), arg);
+                result = (string)
+                    MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<string>(), arg);
                 if (result != "Hello world System.String")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<string>(), new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloMethod)
+                        .Invoke(new InvokeTestsGeneric<string>(), new Span<object?>(ref arg));
                 if (result != "Hello world System.String")
                     throw new Exception();
             }
 
             {
-                MethodInfo helloGenericMethod = typeof(InvokeTestsGeneric<string>).GetTypeInfo().GetDeclaredMethod("GetHelloGeneric").MakeGenericMethod(typeof(object));
+                MethodInfo helloGenericMethod = typeof(InvokeTestsGeneric<string>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloGeneric")
+                    .MakeGenericMethod(typeof(object));
                 object? arg = "world";
 
-                string result = (string)helloGenericMethod.Invoke(new InvokeTestsGeneric<string>(), new object[] { arg });
+                string result = (string)
+                    helloGenericMethod.Invoke(
+                        new InvokeTestsGeneric<string>(),
+                        new object[] { arg }
+                    );
                 if (result != "Hello world System.Object")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(new InvokeTestsGeneric<string>(), arg);
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(new InvokeTestsGeneric<string>(), arg);
                 if (result != "Hello world System.Object")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(new InvokeTestsGeneric<string>(), new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(new InvokeTestsGeneric<string>(), new Span<object?>(ref arg));
                 if (result != "Hello world System.Object")
                     throw new Exception();
             }
 
             {
-                MethodInfo helloMethod = typeof(InvokeTestsGeneric<int>).GetTypeInfo().GetDeclaredMethod("GetHello");
+                MethodInfo helloMethod = typeof(InvokeTestsGeneric<int>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHello");
                 object? arg = "world";
 
-                string result = (string)helloMethod.Invoke(new InvokeTestsGeneric<int>(), new object[] { arg });
+                string result = (string)
+                    helloMethod.Invoke(new InvokeTestsGeneric<int>(), new object[] { arg });
                 if (result != "Hello world System.Int32")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<int>(), arg);
+                result = (string)
+                    MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<int>(), arg);
                 if (result != "Hello world System.Int32")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloMethod).Invoke(new InvokeTestsGeneric<int>(), new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloMethod)
+                        .Invoke(new InvokeTestsGeneric<int>(), new Span<object?>(ref arg));
                 if (result != "Hello world System.Int32")
                     throw new Exception();
             }
 
             {
-                MethodInfo helloGenericMethod = typeof(InvokeTestsGeneric<int>).GetTypeInfo().GetDeclaredMethod("GetHelloGeneric").MakeGenericMethod(typeof(double));
+                MethodInfo helloGenericMethod = typeof(InvokeTestsGeneric<int>)
+                    .GetTypeInfo()
+                    .GetDeclaredMethod("GetHelloGeneric")
+                    .MakeGenericMethod(typeof(double));
                 object? arg = 1.0;
 
-                string result = (string)helloGenericMethod.Invoke(new InvokeTestsGeneric<int>(), new object[] { arg });
+                string result = (string)
+                    helloGenericMethod.Invoke(new InvokeTestsGeneric<int>(), new object[] { arg });
                 if (result != "Hello 1 System.Double")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(new InvokeTestsGeneric<int>(), arg);
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(new InvokeTestsGeneric<int>(), arg);
                 if (result != "Hello 1 System.Double")
                     throw new Exception();
 
-                result = (string)MethodInvoker.Create(helloGenericMethod).Invoke(new InvokeTestsGeneric<int>(), new Span<object?>(ref arg));
+                result = (string)
+                    MethodInvoker
+                        .Create(helloGenericMethod)
+                        .Invoke(new InvokeTestsGeneric<int>(), new Span<object?>(ref arg));
                 if (result != "Hello 1 System.Double")
                     throw new Exception();
             }
@@ -422,9 +522,13 @@ internal static class ReflectionTest
             Console.WriteLine(nameof(TestInvokeMemberParamsCornerCase));
 
             // Needs MethodTable for MyStruct[] and the compiler should have created it.
-            typeof(TestInvokeMemberParamsCornerCase).InvokeMember(nameof(Count),
+            typeof(TestInvokeMemberParamsCornerCase).InvokeMember(
+                nameof(Count),
                 BindingFlags.InvokeMethod | BindingFlags.Public | BindingFlags.Static,
-                null, null, new object[] { default(MyStruct) });
+                null,
+                null,
+                new object[] { default(MyStruct) }
+            );
         }
     }
 
@@ -433,7 +537,8 @@ internal static class ReflectionTest
         interface IFoo<T>
         {
             string Format(string s) => "IFoo<" + typeof(T) + ">::Format(" + s + ")";
-            sealed string InstanceMethod(string s) => "IFoo<" + typeof(T) + ">::InstanceMethod(" + s + ")";
+            sealed string InstanceMethod(string s) =>
+                "IFoo<" + typeof(T) + ">::InstanceMethod(" + s + ")";
         }
 
         interface IFoo
@@ -457,43 +562,64 @@ internal static class ReflectionTest
             Console.WriteLine(nameof(TestDefaultInterfaceInvoke));
 
             {
-                var result = (string)typeof(IFoo<string>).GetMethod(nameof(IFoo<int>.Format)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo<string>)
+                        .GetMethod(nameof(IFoo<int>.Format))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IFoo<System.String>::Format(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo<object>).GetMethod(nameof(IFoo<int>.Format)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo<object>)
+                        .GetMethod(nameof(IFoo<int>.Format))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IFoo<System.Object>::Format(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo<int>).GetMethod(nameof(IFoo<int>.Format)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo<int>)
+                        .GetMethod(nameof(IFoo<int>.Format))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IFoo<System.Int32>::Format(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo<Enum>).GetMethod(nameof(IFoo<int>.Format)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo<Enum>)
+                        .GetMethod(nameof(IFoo<int>.Format))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "Foo.IFoo<Enum>::Format(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo).GetMethod(nameof(IFoo.Format)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo)
+                        .GetMethod(nameof(IFoo.Format))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IBar::Format(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo).GetMethod(nameof(IFoo.InstanceMethod)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo)
+                        .GetMethod(nameof(IFoo.InstanceMethod))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IFoo::InstanceMethod(abc)")
                     throw new Exception();
             }
 
             {
-                var result = (string)typeof(IFoo<Enum>).GetMethod(nameof(IFoo<Enum>.InstanceMethod)).Invoke(new Foo(), new object[] { "abc" });
+                var result = (string)
+                    typeof(IFoo<Enum>)
+                        .GetMethod(nameof(IFoo<Enum>.InstanceMethod))
+                        .Invoke(new Foo(), new object[] { "abc" });
                 if (result != "IFoo<System.Enum>::InstanceMethod(abc)")
                     throw new Exception();
             }
@@ -502,22 +628,25 @@ internal static class ReflectionTest
 
     class TestCovariantReturnInvoke
     {
-        interface IFoo
-        {
-        }
+        interface IFoo { }
+
         class Foo : IFoo
         {
             public readonly string State;
+
             public Foo(string state) => State = state;
         }
+
         class Base
         {
             public virtual IFoo GetFoo() => throw new NotImplementedException();
         }
+
         class Derived : Base
         {
             public override Foo GetFoo() => new Foo("Derived");
         }
+
         class SuperDerived : Derived
         {
             public override Foo GetFoo() => new Foo("SuperDerived");
@@ -717,10 +846,15 @@ internal static class ReflectionTest
         {
             private string _who;
 
-            public Greeter(string who) { _who = who; }
+            public Greeter(string who)
+            {
+                _who = who;
+            }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+            [System.Runtime.CompilerServices.MethodImpl(
+                System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+            )]
 #endif
             public string Greet()
             {
@@ -737,7 +871,8 @@ internal static class ReflectionTest
             TypeInfo ti = typeof(Greeter).GetTypeInfo();
             MethodInfo mi = ti.GetDeclaredMethod(nameof(Greeter.Greet));
             {
-                var d = (GetHelloInstanceDelegate)mi.CreateDelegate(typeof(GetHelloInstanceDelegate));
+                var d = (GetHelloInstanceDelegate)
+                    mi.CreateDelegate(typeof(GetHelloInstanceDelegate));
                 if (d(new Greeter("mom")) != "Hello mom")
                     throw new Exception();
             }
@@ -782,7 +917,9 @@ internal static class ReflectionTest
     class TestParameterAttributes
     {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-        [System.Runtime.CompilerServices.MethodImpl(System.Runtime.CompilerServices.MethodImplOptions.NoInlining)]
+        [System.Runtime.CompilerServices.MethodImpl(
+            System.Runtime.CompilerServices.MethodImplOptions.NoInlining
+        )]
 #endif
         public static bool Method([Parameter] ParameterType parameter)
         {
@@ -816,8 +953,7 @@ internal static class ReflectionTest
     class TestPropertyAndEventAttributes
     {
         [Property("MyProperty")]
-        public static int Property
-        {
+        public static int Property {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
@@ -825,8 +961,7 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-            set;
-        }
+            set; }
 
         class PropertyAttribute : Attribute
         {
@@ -866,7 +1001,9 @@ internal static class ReflectionTest
             Console.WriteLine(nameof(TestPropertyAndEventAttributes));
 
             {
-                PropertyInfo property = typeof(TestPropertyAndEventAttributes).GetProperty(nameof(Property));
+                PropertyInfo property = typeof(TestPropertyAndEventAttributes).GetProperty(
+                    nameof(Property)
+                );
                 var attribute = property.GetCustomAttribute<PropertyAttribute>();
                 if (attribute.Value != "MyProperty")
                     throw new Exception();
@@ -896,6 +1033,7 @@ internal static class ReflectionTest
             public Type SomeType { get; set; }
 
             public TypeAttribute() { }
+
             public TypeAttribute(Type someType)
             {
                 SomeType = someType;
@@ -925,7 +1063,8 @@ internal static class ReflectionTest
         {
             Console.WriteLine(nameof(TestAttributeExpressions));
 
-            const string attr1expected = "ReflectionTest+TestAttributeExpressions+FirstNeverUsedType*[,]";
+            const string attr1expected =
+                "ReflectionTest+TestAttributeExpressions+FirstNeverUsedType*[,]";
             TypeAttribute attr1 = typeof(Holder1).GetCustomAttribute<TypeAttribute>();
             if (attr1.SomeType.ToString() != attr1expected)
                 throw new Exception();
@@ -944,7 +1083,8 @@ internal static class ReflectionTest
             if (!exceptionString1.Contains(attr1expected))
                 throw new Exception(exceptionString1);
 
-            const string attr2expected = "ReflectionTest+TestAttributeExpressions+Gen`1[ReflectionTest+TestAttributeExpressions+SecondNeverUsedType]";
+            const string attr2expected =
+                "ReflectionTest+TestAttributeExpressions+Gen`1[ReflectionTest+TestAttributeExpressions+SecondNeverUsedType]";
             TypeAttribute attr2 = typeof(Holder2).GetCustomAttribute<TypeAttribute>();
             if (attr2.SomeType.ToString() != attr2expected)
                 throw new Exception();
@@ -970,7 +1110,10 @@ internal static class ReflectionTest
                 throw new Exception();
 
             TypeAttribute attr4 = typeof(Holder4).GetCustomAttribute<TypeAttribute>();
-            if (attr4.SomeType.ToString() != "ReflectionTest+TestAttributeExpressions+ThirdNeverUsedType")
+            if (
+                attr4.SomeType.ToString()
+                != "ReflectionTest+TestAttributeExpressions+ThirdNeverUsedType"
+            )
                 throw new Exception();
         }
     }
@@ -982,12 +1125,16 @@ internal static class ReflectionTest
             Console.WriteLine(nameof(TestAssemblyAndModuleAttributes));
 
             // Also tests GetExecutingAssembly
-            var assAttr = Assembly.GetExecutingAssembly().GetCustomAttribute<TestAssemblyAttribute>();
+            var assAttr = Assembly
+                .GetExecutingAssembly()
+                .GetCustomAttribute<TestAssemblyAttribute>();
             if (assAttr == null)
                 throw new Exception();
 
             // Also tests GetEntryAssembly
-            var modAttr = Assembly.GetEntryAssembly().ManifestModule.GetCustomAttribute<TestModuleAttribute>();
+            var modAttr = Assembly
+                .GetEntryAssembly()
+                .ManifestModule.GetCustomAttribute<TestModuleAttribute>();
             if (modAttr == null)
                 throw new Exception();
         }
@@ -999,7 +1146,9 @@ internal static class ReflectionTest
         {
             Console.WriteLine(nameof(TestConstructors));
 
-            ConstructorInfo ctor = typeof(ClassToConstruct).GetConstructor(new Type[] { typeof(int) });
+            ConstructorInfo ctor = typeof(ClassToConstruct).GetConstructor(
+                new Type[] { typeof(int) }
+            );
             ClassToConstruct obj = (ClassToConstruct)ctor.Invoke(new object[] { 1 });
             if (obj._i != 1)
                 throw new Exception();
@@ -1026,12 +1175,14 @@ internal static class ReflectionTest
         {
             Console.WriteLine(nameof(TestStringConstructor));
 
-            ConstructorInfo ctor = typeof(string).GetConstructor(new Type[] { typeof(char[]), typeof(int), typeof(int) });
+            ConstructorInfo ctor = typeof(string).GetConstructor(
+                new Type[] { typeof(char[]), typeof(int), typeof(int) }
+            );
             object str = ctor.Invoke(new object[] { new char[] { 'a' }, 0, 1 });
             if ((string)str != "a")
                 throw new Exception();
 
-            str = ConstructorInvoker.Create(ctor).Invoke(new char[] { 'a' }, 0, 1 );
+            str = ConstructorInvoker.Create(ctor).Invoke(new char[] { 'a' }, 0, 1);
             if ((string)str != "a")
                 throw new Exception();
         }
@@ -1042,14 +1193,19 @@ internal static class ReflectionTest
         interface IUnreferenced { }
 
         class UnreferencedBaseType : IUnreferenced { }
+
         class UnreferencedMidType : UnreferencedBaseType { }
+
         class ReferencedDerivedType : UnreferencedMidType { }
 
         static void DoSomething(ReferencedDerivedType d) { }
 
         public static void Run()
         {
-            var mi = typeof(TestTypesInMethodSignatures).GetMethod(nameof(DoSomething), BindingFlags.Static | BindingFlags.NonPublic);
+            var mi = typeof(TestTypesInMethodSignatures).GetMethod(
+                nameof(DoSomething),
+                BindingFlags.Static | BindingFlags.NonPublic
+            );
             Type t = mi.GetParameters()[0].ParameterType;
             int count = 0;
             while (t != typeof(object))
@@ -1145,9 +1301,13 @@ internal static class ReflectionTest
 #endif
 
             {
-                Type byRefLikeType = GetTestType(nameof(TestByRefLikeTypeMethod), nameof(ByRefLike));
+                Type byRefLikeType = GetTestType(
+                    nameof(TestByRefLikeTypeMethod),
+                    nameof(ByRefLike)
+                );
                 MethodInfo toStringMethod = byRefLikeType.GetMethod("ToString");
-                var toString = (ToStringDelegate)toStringMethod.CreateDelegate(typeof(ToStringDelegate));
+                var toString = (ToStringDelegate)
+                    toStringMethod.CreateDelegate(typeof(ToStringDelegate));
 
                 ByRefLike foo = new ByRefLike(123);
                 if (toString(ref foo) != "123")
@@ -1157,7 +1317,9 @@ internal static class ReflectionTest
             {
                 Type byRefLikeGenericType = typeof(ByRefLike<string>);
                 MethodInfo toStringGenericMethod = byRefLikeGenericType.GetMethod("ToString");
-                var toStringGeneric = (ToStringDelegate<string>)toStringGenericMethod.CreateDelegate(typeof(ToStringDelegate<string>));
+                var toStringGeneric =
+                    (ToStringDelegate<string>)
+                        toStringGenericMethod.CreateDelegate(typeof(ToStringDelegate<string>));
 
                 ByRefLike<string> fooGeneric = new ByRefLike<string>("Hello");
                 if (toStringGeneric(ref fooGeneric) != "Hello System.String")
@@ -1167,7 +1329,9 @@ internal static class ReflectionTest
             {
                 Type byRefLikeGenericType = typeof(ByRefLike<object>);
                 MethodInfo toStringGenericMethod = byRefLikeGenericType.GetMethod("ToString");
-                var toStringGeneric = (ToStringDelegate<object>)toStringGenericMethod.CreateDelegate(typeof(ToStringDelegate<object>));
+                var toStringGeneric =
+                    (ToStringDelegate<object>)
+                        toStringGenericMethod.CreateDelegate(typeof(ToStringDelegate<object>));
 
                 ByRefLike<object> fooGeneric = new ByRefLike<object>("Hello");
                 if (toStringGeneric(ref fooGeneric) != "Hello System.Object")
@@ -1280,17 +1444,27 @@ internal static class ReflectionTest
             }
 #endif
 
-            Type neverUsedContainerType = GetTestType(nameof(TestContainment), nameof(NeverUsedContainerType));
-            Type usedNestedType = neverUsedContainerType.GetNestedType(nameof(NeverUsedContainerType.UsedNestedType));
+            Type neverUsedContainerType = GetTestType(
+                nameof(TestContainment),
+                nameof(NeverUsedContainerType)
+            );
+            Type usedNestedType = neverUsedContainerType.GetNestedType(
+                nameof(NeverUsedContainerType.UsedNestedType)
+            );
 
             // Since we called CallMe, it has reflection metadata and it is invokable
-            object o = InvokeTestMethod(usedNestedType, nameof(NeverUsedContainerType.UsedNestedType.CallMe));
+            object o = InvokeTestMethod(
+                usedNestedType,
+                nameof(NeverUsedContainerType.UsedNestedType.CallMe)
+            );
             if ((int)o != 42)
                 throw new Exception();
 
             // We can get a type handle for the nested type (the invoke mapping table needs it)
             if (!HasTypeHandle(usedNestedType))
-                throw new Exception($"{nameof(NeverUsedContainerType.UsedNestedType)} should have an EEType");
+                throw new Exception(
+                    $"{nameof(NeverUsedContainerType.UsedNestedType)} should have an EEType"
+                );
 
             // But the containing type doesn't need an EEType
             if (HasTypeHandle(neverUsedContainerType))
@@ -1300,10 +1474,23 @@ internal static class ReflectionTest
 
     class TestByRefReturnInvoke
     {
-        enum Mine { One = 2018 }
+        enum Mine
+        {
+            One = 2018,
+        }
 
         [StructLayout(LayoutKind.Sequential)]
-        struct BigStruct { public ulong X, Y, Z, W, A, B, C, D; }
+        struct BigStruct
+        {
+            public ulong X,
+                Y,
+                Z,
+                W,
+                A,
+                B,
+                C,
+                D;
+        }
 
         public ref struct ByRefLike { }
 
@@ -1311,14 +1498,19 @@ internal static class ReflectionTest
         {
             private T _value;
 
-            public TestClass(T value) { _value = value; }
+            public TestClass(T value)
+            {
+                _value = value;
+            }
+
             public ref T RefReturningProp
             {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [MethodImpl(MethodImplOptions.NoInlining)]
+                [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
                 get => ref _value;
             }
+
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
@@ -1329,7 +1521,10 @@ internal static class ReflectionTest
         {
             private T _value;
 
-            public TestClass2(T value) { _value = value; }
+            public TestClass2(T value)
+            {
+                _value = value;
+            }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
             [MethodImpl(MethodImplOptions.NoInlining)]
@@ -1341,18 +1536,22 @@ internal static class ReflectionTest
         {
             private int* _value;
 
-            public TestClassIntPointer(int* value) { _value = value; }
+            public TestClassIntPointer(int* value)
+            {
+                _value = value;
+            }
+
             public ref int* RefReturningProp
             {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [MethodImpl(MethodImplOptions.NoInlining)]
+                [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
                 get => ref _value;
             }
             public unsafe ref int* NullRefReturningProp
             {
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
-            [MethodImpl(MethodImplOptions.NoInlining)]
+                [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
                 get => ref *(int**)null;
             }
@@ -1370,14 +1569,31 @@ internal static class ReflectionTest
 
         public static void TestRefReturnMethodInvoke()
         {
-            TestRefReturnInvoke(Mine.One, (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
-            TestRefReturnInvoke("Hello", (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
-            TestRefReturnInvoke(new BigStruct { X = 123, D = 456 }, (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
-            TestRefReturnInvoke(new object(), (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
-            TestRefReturnInvoke((object)null, (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>()));
+            TestRefReturnInvoke(
+                Mine.One,
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
+            TestRefReturnInvoke(
+                "Hello",
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
+            TestRefReturnInvoke(
+                new BigStruct { X = 123, D = 456 },
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
+            TestRefReturnInvoke(
+                new object(),
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
+            TestRefReturnInvoke(
+                (object)null,
+                (p, t) => p.GetGetMethod().Invoke(t, Array.Empty<object>())
+            );
 
             // Regression test
-            MethodInfo mi = typeof(TestClass2<string>).GetMethod(nameof(TestClass2<string>.RefReturningMethod));
+            MethodInfo mi = typeof(TestClass2<string>).GetMethod(
+                nameof(TestClass2<string>.RefReturningMethod)
+            );
             mi.Invoke(new TestClass2<string>("Hello"), new object[] { "Hello" });
         }
 
@@ -1400,7 +1616,9 @@ internal static class ReflectionTest
             int* expected = (int*)0x1122334455667788;
             TestClassIntPointer tc = new TestClassIntPointer(expected);
 
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(nameof(TestClassIntPointer.RefReturningProp));
+            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
+                nameof(TestClassIntPointer.RefReturningProp)
+            );
             object rv = p.GetValue(tc);
             Assert.True(rv is Pointer);
             int* actual = (int*)(Pointer.Unbox(rv));
@@ -1411,7 +1629,9 @@ internal static class ReflectionTest
         {
             TestClassIntPointer tc = new TestClassIntPointer(null);
 
-            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(nameof(TestClassIntPointer.NullRefReturningProp));
+            PropertyInfo p = typeof(TestClassIntPointer).GetProperty(
+                nameof(TestClassIntPointer.NullRefReturningProp)
+            );
             Assert.NotNull(p);
             Assert.Throws<TargetInvocationException>(() => p.GetValue(tc));
         }
@@ -1425,19 +1645,22 @@ internal static class ReflectionTest
 
             ByRefLike brl = new ByRefLike();
             ByRefLike* pBrl = &brl;
-            MethodInfo mi = typeof(TestClass<int>).GetMethod(nameof(TestClass<int>.ByRefLikeRefReturningMethod));
+            MethodInfo mi = typeof(TestClass<int>).GetMethod(
+                nameof(TestClass<int>.ByRefLikeRefReturningMethod)
+            );
             try
             {
                 // Don't use Assert.Throws because that will make a lambda and invalidate the pointer
                 object o = mi.Invoke(null, new object[] { Pointer.Box(pBrl, typeof(ByRefLike*)) });
                 Assert.Fail();
             }
-            catch (NotSupportedException)
-            {
-            }
+            catch (NotSupportedException) { }
         }
 
-        private static void TestRefReturnInvoke<T>(T value, Func<PropertyInfo, TestClass<T>, object> invoker)
+        private static void TestRefReturnInvoke<T>(
+            T value,
+            Func<PropertyInfo, TestClass<T>, object> invoker
+        )
         {
             TestClass<T> tc = new TestClass<T>(value);
 
@@ -1446,7 +1669,9 @@ internal static class ReflectionTest
                 tc.RefReturningProp.ToString();
             }
 
-            PropertyInfo p = typeof(TestClass<T>).GetProperty(nameof(TestClass<T>.RefReturningProp));
+            PropertyInfo p = typeof(TestClass<T>).GetProperty(
+                nameof(TestClass<T>.RefReturningProp)
+            );
             object rv = invoker(p, tc);
             if (rv != null)
             {
@@ -1463,7 +1688,8 @@ internal static class ReflectionTest
             }
         }
 
-        private static void TestRefReturnInvokeNullable<T>(T? nullable) where T : struct
+        private static void TestRefReturnInvokeNullable<T>(T? nullable)
+            where T : struct
         {
             TestClass<T?> tc = new TestClass<T?>(nullable);
 
@@ -1472,7 +1698,9 @@ internal static class ReflectionTest
                 tc.RefReturningProp.ToString();
             }
 
-            PropertyInfo p = typeof(TestClass<T?>).GetProperty(nameof(TestClass<T?>.RefReturningProp));
+            PropertyInfo p = typeof(TestClass<T?>).GetProperty(
+                nameof(TestClass<T?>.RefReturningProp)
+            );
             object rv = p.GetValue(tc);
             if (rv != null)
             {
@@ -1533,7 +1761,10 @@ internal static class ReflectionTest
             public static int Update { get; }
         }
 
-        enum Mine { One }
+        enum Mine
+        {
+            One,
+        }
 
         class PartialCanonTestType<T, U>
         {
@@ -1542,10 +1773,14 @@ internal static class ReflectionTest
 
         static int TestPartialCanon<T>()
         {
-            return (int)typeof(PartialCanonTestType<object, T>).GetMethod("TestMethod").Invoke(new PartialCanonTestType<object, T>(), Array.Empty<object>());
+            return (int)
+                typeof(PartialCanonTestType<object, T>)
+                    .GetMethod("TestMethod")
+                    .Invoke(new PartialCanonTestType<object, T>(), Array.Empty<object>());
         }
 
-        static MethodInfo GetTotallyUnreferencedMethod(Type t) => t.GetMethod(String.Format("Totally{0}", "UnreferencedMethod"));
+        static MethodInfo GetTotallyUnreferencedMethod(Type t) =>
+            t.GetMethod(String.Format("Totally{0}", "UnreferencedMethod"));
 
         public static void Run()
         {
@@ -1571,7 +1806,9 @@ internal static class ReflectionTest
                     if (t == null)
                         throw new Exception(nameof(MyUnusedClass));
 
-                    Console.WriteLine("Totally unreferenced method on a non-generic type (we should not find it)");
+                    Console.WriteLine(
+                        "Totally unreferenced method on a non-generic type (we should not find it)"
+                    );
                     MethodInfo mi = GetTotallyUnreferencedMethod(t);
                     if (mi != null)
                         throw new Exception("UnreferencedMethod");
@@ -1593,7 +1830,9 @@ internal static class ReflectionTest
 
             Console.WriteLine("Generics");
             {
-                MethodInfo mi = typeof(MyGenericUnusedClass<object>).GetMethod(nameof(MyGenericUnusedClass<object>.TheMethod));
+                MethodInfo mi = typeof(MyGenericUnusedClass<object>).GetMethod(
+                    nameof(MyGenericUnusedClass<object>.TheMethod)
+                );
                 if (mi == null)
                     throw new Exception(nameof(MyGenericUnusedClass<object>.TheMethod));
 
@@ -1608,7 +1847,10 @@ internal static class ReflectionTest
 
             Console.WriteLine("Search in system assembly");
             {
-                Type t = Type.GetType("System.Runtime.CompilerServices.SuppressIldasmAttribute", throwOnError: false);
+                Type t = Type.GetType(
+                    "System.Runtime.CompilerServices.SuppressIldasmAttribute",
+                    throwOnError: false
+                );
                 if (t == null)
                     throw new Exception("SuppressIldasmAttribute");
             }
@@ -1616,14 +1858,20 @@ internal static class ReflectionTest
 #if !MULTIMODULE_BUILD
             Console.WriteLine("Search through a forwarder");
             {
-                Type t = Type.GetType("System.Collections.Generic.List`1, System.Collections", throwOnError: false);
+                Type t = Type.GetType(
+                    "System.Collections.Generic.List`1, System.Collections",
+                    throwOnError: false
+                );
                 if (t == null)
                     throw new Exception("List");
             }
 
             Console.WriteLine("Search in mscorlib");
             {
-                Type t = Type.GetType("System.Runtime.CompilerServices.CompilerGlobalScopeAttribute, mscorlib", throwOnError: false);
+                Type t = Type.GetType(
+                    "System.Runtime.CompilerServices.CompilerGlobalScopeAttribute, mscorlib",
+                    throwOnError: false
+                );
                 if (t == null)
                     throw new Exception("CompilerGlobalScopeAttribute");
             }
@@ -1645,7 +1893,9 @@ internal static class ReflectionTest
             {
                 Type objType = typeof(object);
 
-                MethodInfo mi = typeof(LinqTestCase<>).MakeGenericType(objType).GetMethod(nameof(LinqTestCase<object>.Create));
+                MethodInfo mi = typeof(LinqTestCase<>)
+                    .MakeGenericType(objType)
+                    .GetMethod(nameof(LinqTestCase<object>.Create));
 
                 if (mi == null)
                     throw new Exception("GetValues");
@@ -1657,7 +1907,9 @@ internal static class ReflectionTest
             {
                 Type objType = typeof(object);
 
-                PropertyInfo pi = typeof(OtherLinqTestCase<>).MakeGenericType(objType).GetProperty(nameof(OtherLinqTestCase<object>.Update));
+                PropertyInfo pi = typeof(OtherLinqTestCase<>)
+                    .MakeGenericType(objType)
+                    .GetProperty(nameof(OtherLinqTestCase<object>.Update));
 
                 if (pi == null)
                     throw new Exception("GetProperty");
@@ -1669,14 +1921,15 @@ internal static class ReflectionTest
 
     class TestUnreferencedEnum
     {
-        public enum UnreferencedEnum { One }
+        public enum UnreferencedEnum
+        {
+            One,
+        }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void ReferenceEnum(UnreferencedEnum r)
-        {
-        }
+        public static void ReferenceEnum(UnreferencedEnum r) { }
 
         public static void Run()
         {
@@ -1698,10 +1951,22 @@ internal static class ReflectionTest
     {
         public static void Run()
         {
-            Assert.Equal("System.Private.CoreLib", Assembly.Load("System.Private.CoreLib, PublicKeyToken=cccccccccccccccc").GetName().Name);
-            Assert.Equal("System.Console", Assembly.Load("System.Console, PublicKeyToken=cccccccccccccccc").GetName().Name);
+            Assert.Equal(
+                "System.Private.CoreLib",
+                Assembly
+                    .Load("System.Private.CoreLib, PublicKeyToken=cccccccccccccccc")
+                    .GetName()
+                    .Name
+            );
+            Assert.Equal(
+                "System.Console",
+                Assembly.Load("System.Console, PublicKeyToken=cccccccccccccccc").GetName().Name
+            );
 #if !MULTIMODULE_BUILD
-            Assert.Equal("mscorlib", Assembly.Load("mscorlib, PublicKeyToken=cccccccccccccccc").GetName().Name);
+            Assert.Equal(
+                "mscorlib",
+                Assembly.Load("mscorlib, PublicKeyToken=cccccccccccccccc").GetName().Name
+            );
 #endif
         }
     }
@@ -1724,7 +1989,9 @@ internal static class ReflectionTest
         {
             SomeGenericClass<SomeReferenceType>.Cookie = "Hello";
 
-            var inst = Activator.CreateInstance(typeof(OtherGenericClass<>).MakeGenericType(GetSomeReferenceType()));
+            var inst = Activator.CreateInstance(
+                typeof(OtherGenericClass<>).MakeGenericType(GetSomeReferenceType())
+            );
 
             if (inst.ToString() != "Hello")
                 throw new Exception();
@@ -1760,7 +2027,11 @@ internal static class ReflectionTest
         {
             // We don't want the analysis to see what Gen is instantiated with
             // so that we force it to make up an instantiation argument.
-            var t = (Type)typeof(Gen<>).MakeGenericType(s_atom).GetMethod("GetTheThing").Invoke(null, Array.Empty<object>());
+            var t = (Type)
+                typeof(Gen<>)
+                    .MakeGenericType(s_atom)
+                    .GetMethod("GetTheThing")
+                    .Invoke(null, Array.Empty<object>());
             Assert.Equal(typeof(Atom), t.GetElementType());
             Assert.Equal(4, t.GetArrayRank());
         }
@@ -1774,16 +2045,12 @@ internal static class ReflectionTest
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void IsCalledAndReflected()
-        {
-        }
+        public static void IsCalledAndReflected() { }
 
 #if OPTIMIZED_MODE_WITHOUT_SCANNER
         [MethodImpl(MethodImplOptions.NoInlining)]
 #endif
-        public static void IsCalledOnly()
-        {
-        }
+        public static void IsCalledOnly() { }
 
         public static void Run()
         {
@@ -1822,7 +2089,11 @@ internal static class ReflectionTest
                 typeof(GenericType<>).MakeGenericType(typeof(object)).GetMethod("Gimme");
             }
 
-            var t = (Type)s_type.MakeGenericType(typeof(double)).GetMethod("Gimme").Invoke(null, Array.Empty<object>());
+            var t = (Type)
+                s_type
+                    .MakeGenericType(typeof(double))
+                    .GetMethod("Gimme")
+                    .Invoke(null, Array.Empty<object>());
             if (t != typeof(double))
                 throw new Exception();
         }
@@ -1831,16 +2102,20 @@ internal static class ReflectionTest
     class TestStackTraces
     {
         class RefType { }
+
         struct ValType { }
 
         class C1<T>
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static string M1(T c1m1param) => Environment.StackTrace;
+
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static string M2(T c1m2param) => Environment.StackTrace;
+
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static string M3<U>(T c1m3param1, U c1m3param2) => Environment.StackTrace;
+
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static string M4<U>(T c1m4param1, U c1m4param2) => Environment.StackTrace;
         }
@@ -1900,7 +2175,11 @@ internal static class ReflectionTest
             {
                 message1 = ex.Message;
             }
-            if (!message1.Contains("ReflectionTest+TypeConstructionTest+Gen`1[ReflectionTest+TypeConstructionTest+Atom]"))
+            if (
+                !message1.Contains(
+                    "ReflectionTest+TypeConstructionTest+Gen`1[ReflectionTest+TypeConstructionTest+Atom]"
+                )
+            )
                 throw new Exception();
 
             string message2 = "";
@@ -1934,20 +2213,29 @@ internal static class ReflectionTest
         static class TypeWithCodelessMethods
         {
             // "where T: struct" prevents the compiler from coming up with a good T
-            public static void CodelessMethod<T>() where T : struct { }
+            public static void CodelessMethod<T>()
+                where T : struct { }
         }
 
-        static class CodelessType<T> where T : struct
+        static class CodelessType<T>
+            where T : struct
         {
             public static void CodelessMethod() { }
         }
 
         public static void Run()
         {
-            if (typeof(CodelessType<>).GetMethods(BindingFlags.Public | BindingFlags.Static).Length != 1)
+            if (
+                typeof(CodelessType<>).GetMethods(BindingFlags.Public | BindingFlags.Static).Length
+                != 1
+            )
                 throw new Exception();
 
-            if (typeof(TypeWithCodelessMethods).GetMethods(BindingFlags.Public | BindingFlags.Static).Length != 1)
+            if (
+                typeof(TypeWithCodelessMethods)
+                    .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                    .Length != 1
+            )
                 throw new Exception();
         }
     }
@@ -1957,7 +2245,9 @@ internal static class ReflectionTest
         class TestClass
         {
             public static void StaticMethod() { }
+
             public void InstanceMethod() { }
+
             public static void SimplyCalledMethod() { }
         }
 
@@ -2004,13 +2294,16 @@ internal static class ReflectionTest
         abstract class Base
         {
             public virtual void VirtualMethod() { }
+
             public abstract void AbstractMethod();
         }
 
         class Derived : Base, IBar
         {
             public override void AbstractMethod() { }
+
             public override void VirtualMethod() { }
+
             void IFoo.InterfaceMethod() { }
         }
 
@@ -2061,7 +2354,9 @@ internal static class ReflectionTest
         class UnusedClass { }
 
         interface IMessWithYou { }
-        class GenericTypeWithUnsatisfiableConstrains<T> where T : struct, IMessWithYou
+
+        class GenericTypeWithUnsatisfiableConstrains<T>
+            where T : struct, IMessWithYou
         {
             public static int SomeField;
         }
@@ -2072,7 +2367,9 @@ internal static class ReflectionTest
         }
 
         struct Atom1 { }
+
         struct Atom2 { }
+
         struct Atom3 { }
 
         public static void Run()
@@ -2082,8 +2379,15 @@ internal static class ReflectionTest
 #if REFLECTION_FROM_USAGE
             // Merely accessing a field should trigger full reflectability of it when reflection from
             // usage is active.
-            Type classWithTwoFields = GetTestType(nameof(TestFieldMetadata), nameof(ClassWithTwoFields));
-            if ((int)classWithTwoFields.GetField(nameof(ClassWithTwoFields.UsedField)).GetValue(null) != 123)
+            Type classWithTwoFields = GetTestType(
+                nameof(TestFieldMetadata),
+                nameof(ClassWithTwoFields)
+            );
+            if (
+                (int)
+                    classWithTwoFields.GetField(nameof(ClassWithTwoFields.UsedField)).GetValue(null)
+                != 123
+            )
             {
                 throw new Exception();
             }
@@ -2108,13 +2412,19 @@ internal static class ReflectionTest
 
             // The compiler cannot fulfil this instantiation without universal shared code.
             // We should get a working metadata-only type that can be inspected.
-            if (typeof(GenericTypeWithUnsatisfiableConstrains<>).GetField("SomeField").Name != "SomeField")
+            if (
+                typeof(GenericTypeWithUnsatisfiableConstrains<>).GetField("SomeField").Name
+                != "SomeField"
+            )
             {
                 throw new Exception();
             }
 
             // Access a field on a generic type in an obvious way
-            if (typeof(GenericClass<Atom1>).GetField(nameof(GenericClass<Atom1>.SomeField)).Name != "SomeField")
+            if (
+                typeof(GenericClass<Atom1>).GetField(nameof(GenericClass<Atom1>.SomeField)).Name
+                != "SomeField"
+            )
             {
                 throw new Exception();
             }
@@ -2127,7 +2437,10 @@ internal static class ReflectionTest
             GenericClass<Atom3>.SomeField = "1234";
 #if REFLECTION_FROM_USAGE
             // If we're doing reflection from usage, we used the field and we expect it to be reflectable
-            typeof(GenericClass<>).MakeGenericType(GetAtom3()).GetField("SomeField").SetValue(null, "Cookie");
+            typeof(GenericClass<>)
+                .MakeGenericType(GetAtom3())
+                .GetField("SomeField")
+                .SetValue(null, "Cookie");
 #else
             // If we're not doing reflection from usage, the generic instance shouldn't even exist.
             // We only touched the static base of the type, not the whole type.
@@ -2167,9 +2480,11 @@ internal static class ReflectionTest
 
         struct SomeStruct<T> : IHardToGuess { }
 
-        public static void TakeAGuess<T>() where T : struct, IHardToGuess { }
+        public static void TakeAGuess<T>()
+            where T : struct, IHardToGuess { }
 
         class Atom1 { }
+
         class Atom2 { }
 
         static Type s_someStructOverAtom1 = typeof(SomeStruct<Atom1>);
@@ -2184,7 +2499,9 @@ internal static class ReflectionTest
             // of the "struct, interface" constraint on T. But the expected side effect is that the static
             // call above now became reflection-visible and will let the type loader make this
             // work at runtime. All generic instantiations share the same refection visibility.
-            var mi = typeof(TestGenericMethodsHaveSameReflectability).GetMethod(nameof(TakeAGuess)).MakeGenericMethod(s_someStructOverAtom1);
+            var mi = typeof(TestGenericMethodsHaveSameReflectability)
+                .GetMethod(nameof(TakeAGuess))
+                .MakeGenericMethod(s_someStructOverAtom1);
 
             mi.Invoke(null, Array.Empty<object>());
         }
@@ -2228,7 +2545,9 @@ internal static class ReflectionTest
 
         public static void Run()
         {
-            object[] attrs = typeof(Derived).GetMethod(nameof(Derived.VirtualMethodWithAttribute)).GetCustomAttributes(inherit: true);
+            object[] attrs = typeof(Derived)
+                .GetMethod(nameof(Derived.VirtualMethodWithAttribute))
+                .GetCustomAttributes(inherit: true);
             if (attrs.Length != 1 || attrs[0].GetType().Name != nameof(AttAttribute))
             {
                 throw new Exception();
@@ -2254,7 +2573,11 @@ internal static class ReflectionTest
                 throw new Exception();
 
             // Check that we have metadata for the Invoke method to find a matching method
-            Delegate del2 = Delegate.CreateDelegate(typeof(WithDefaultParameter2), typeof(TestInvokeMethodMetadata), nameof(Method));
+            Delegate del2 = Delegate.CreateDelegate(
+                typeof(WithDefaultParameter2),
+                typeof(TestInvokeMethodMetadata),
+                nameof(Method)
+            );
             if (del2.Method.ReturnType != typeof(DateTime))
                 throw new Exception();
         }
@@ -2316,7 +2639,8 @@ internal static class ReflectionTest
             if ((string)returned != nameof(Atom))
                 throw new Exception();
 
-            static MethodInfo Grab<T>() => typeof(MyGenericType<T>).GetMethod(nameof(MyGenericType<T>.MyMethod));
+            static MethodInfo Grab<T>() =>
+                typeof(MyGenericType<T>).GetMethod(nameof(MyGenericType<T>.MyMethod));
         }
     }
 
@@ -2325,11 +2649,13 @@ internal static class ReflectionTest
         class Gen<T, U> { }
 
         struct Atom1 { }
+
         struct Atom2 { }
 
         class GenericType<T>
         {
             public static Gen<T, U> GenericMethod1<U>() => new Gen<T, U>();
+
             public static Gen<T, U> GenericMethod2<U>() => new Gen<T, U>();
         }
 
@@ -2337,9 +2663,13 @@ internal static class ReflectionTest
 
         static object Make<T>(Type t)
         {
-            if (t.IsValueType) throw null;
+            if (t.IsValueType)
+                throw null;
             // AOT safe because we just checked t is not a valuetype
-            return typeof(GenericType<T>).GetMethod("GenericMethod1").MakeGenericMethod(t).Invoke(null, null);
+            return typeof(GenericType<T>)
+                .GetMethod("GenericMethod1")
+                .MakeGenericMethod(t)
+                .Invoke(null, null);
         }
 
         public static void Run()
@@ -2348,7 +2678,13 @@ internal static class ReflectionTest
 
             // This is supposed to be all AOT safe because we're instantiating over a reference type
             // Ideally there would also be no AOT warning.
-            ((MethodInfo)(typeof(GenericType<Atom2>).GetMemberWithSameMetadataDefinitionAs(s_genericMethod2)))
+            (
+                (MethodInfo)(
+                    typeof(GenericType<Atom2>).GetMemberWithSameMetadataDefinitionAs(
+                        s_genericMethod2
+                    )
+                )
+            )
                 .MakeGenericMethod(typeof(object))
                 .Invoke(null, null);
         }
@@ -2357,19 +2693,20 @@ internal static class ReflectionTest
     class TestIsValueTypeWithoutTypeHandle
     {
         [Nothing(
-        ReferenceTypes = new[]
-        {
-            typeof(NonGenericType),
-            typeof(GenericType<int>),
-            typeof(ReferencedBaseType<int>),
-            typeof(GenericWithReferenceBaseType<int>)
-        },
-        ValueTypes = new[]
-        {
-            typeof(GenericStruct<int>),
-            typeof(NonGenericStruct),
-            typeof(Container<int>.GenericEnum)
-        })]
+            ReferenceTypes = new[]
+            {
+                typeof(NonGenericType),
+                typeof(GenericType<int>),
+                typeof(ReferencedBaseType<int>),
+                typeof(GenericWithReferenceBaseType<int>),
+            },
+            ValueTypes = new[]
+            {
+                typeof(GenericStruct<int>),
+                typeof(NonGenericStruct),
+                typeof(Container<int>.GenericEnum),
+            }
+        )]
         public static void Run()
         {
             var ps = MethodBase.GetCurrentMethod().GetCustomAttribute<NothingAttribute>();
@@ -2402,12 +2739,19 @@ internal static class ReflectionTest
         }
 
         public class GenericBaseType<T> { }
+
         public class GenericType<T> : GenericBaseType<T> { }
+
         public class NonGenericType : GenericBaseType<int> { }
+
         public class ReferencedBaseType<T> { }
+
         public class GenericWithReferenceBaseType<T> : ReferencedBaseType<T> { }
+
         public struct GenericStruct<T> { }
+
         public struct NonGenericStruct { }
+
         public class Container<T>
         {
             public enum GenericEnum { }
@@ -2419,7 +2763,8 @@ internal static class ReflectionTest
             public Type[] ValueTypes;
         }
 
-        class G<T> where T : struct { }
+        class G<T>
+            where T : struct { }
     }
 
     class TestMdArrayLoad
@@ -2430,7 +2775,9 @@ internal static class ReflectionTest
 
         public static void Run()
         {
-            var mi = typeof(TestMdArrayLoad).GetMethod(nameof(MakeMdArray)).MakeGenericMethod(typeof(Atom));
+            var mi = typeof(TestMdArrayLoad)
+                .GetMethod(nameof(MakeMdArray))
+                .MakeGenericMethod(typeof(Atom));
             if ((Type)mi.Invoke(null, Array.Empty<object>()) != typeof(Atom[,,]))
                 throw new Exception();
         }
@@ -2440,12 +2787,14 @@ internal static class ReflectionTest
     {
         class Atom { }
 
-        public static Type MakeFnPtrType<T>() => typeof(delegate*<ref T>);
+        public static Type MakeFnPtrType<T>() => typeof(delegate* <ref T>);
 
         public static void Run()
         {
-            var mi = typeof(TestByRefTypeLoad).GetMethod(nameof(MakeFnPtrType)).MakeGenericMethod(typeof(Atom));
-            if ((Type)mi.Invoke(null, Array.Empty<object>()) != typeof(delegate*<ref Atom>))
+            var mi = typeof(TestByRefTypeLoad)
+                .GetMethod(nameof(MakeFnPtrType))
+                .MakeGenericMethod(typeof(Atom));
+            if ((Type)mi.Invoke(null, Array.Empty<object>()) != typeof(delegate* <ref Atom>))
                 throw new Exception();
         }
     }
@@ -2456,6 +2805,7 @@ internal static class ReflectionTest
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static Base GetInstance() => new Base();
+
             public virtual Type GrabType<T>() => typeof(T);
         }
 
@@ -2463,6 +2813,7 @@ internal static class ReflectionTest
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static new Base GetInstance() => new Derived();
+
             public override Type GrabType<T>() => typeof(T);
         }
 
@@ -2483,6 +2834,7 @@ internal static class ReflectionTest
         {
             [MethodImpl(MethodImplOptions.NoInlining)]
             public static Base GetInstance() => null;
+
             public abstract Type GrabType<T>();
         }
 
@@ -2497,9 +2849,7 @@ internal static class ReflectionTest
             {
                 grabType.Compile()();
             }
-            catch (NullReferenceException)
-            {
-            }
+            catch (NullReferenceException) { }
         }
     }
 
@@ -2512,9 +2862,13 @@ internal static class ReflectionTest
 
         class Foo : IDynamicInterfaceCastable
         {
-            public RuntimeTypeHandle GetInterfaceImplementation(RuntimeTypeHandle interfaceType) => throw new NotImplementedException();
+            public RuntimeTypeHandle GetInterfaceImplementation(RuntimeTypeHandle interfaceType) =>
+                throw new NotImplementedException();
 
-            public bool IsInterfaceImplemented(RuntimeTypeHandle interfaceType, bool throwIfNotImplemented)
+            public bool IsInterfaceImplemented(
+                RuntimeTypeHandle interfaceType,
+                bool throwIfNotImplemented
+            )
             {
                 Type t = Type.GetTypeFromHandle(interfaceType);
                 if (t.GetCustomAttribute<MyAttribute>() == null)
@@ -2558,7 +2912,12 @@ internal static class ReflectionTest
         return result;
     }
 
-    private static object InvokeTestMethod(Type type, string methodName, object thisObj = null, params object[] param)
+    private static object InvokeTestMethod(
+        Type type,
+        string methodName,
+        object thisObj = null,
+        params object[] param
+    )
     {
         MethodInfo method = type.GetMethod(methodName);
         if (method == null)
@@ -2580,10 +2939,19 @@ internal static class ReflectionTest
         return true;
     }
 
-    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-        Justification = "That's the point")]
-    public static int CountMethods(this Type t)
-        => t.GetMethods(BindingFlags.Instance | BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly).Length;
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2070:UnrecognizedReflectionPattern",
+        Justification = "That's the point"
+    )]
+    public static int CountMethods(this Type t) =>
+        t.GetMethods(
+            BindingFlags.Instance
+                | BindingFlags.Static
+                | BindingFlags.Public
+                | BindingFlags.NonPublic
+                | BindingFlags.DeclaredOnly
+        ).Length;
 
     class Assert
     {
@@ -2649,11 +3017,16 @@ internal static class ReflectionTest
 }
 
 class TestAssemblyAttribute : Attribute { }
+
 class TestModuleAttribute : Attribute { }
+
 class MyUnusedClass
 {
     public static void UnusedMethod1() { }
+
     public static void TotallyUnreferencedMethod() { }
+
     public static void GenericMethod<T>() { }
 }
+
 class MyClassOnlyReferencedFromTypeGetType { }

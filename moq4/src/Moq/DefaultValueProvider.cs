@@ -30,9 +30,7 @@ namespace Moq
         /// <summary>
         /// Initializes a new instance of the <see cref="DefaultValueProvider"/> class.
         /// </summary>
-        protected DefaultValueProvider()
-        {
-        }
+        protected DefaultValueProvider() { }
 
         /// <summary>
         /// Gets the <see cref="DefaultValue"/> enumeration value that corresponds to this default value provider.
@@ -65,7 +63,10 @@ namespace Moq
         /// <remarks>
         /// Implementations may assume that all parameters have valid, non-<see langword="null"/>, non-<see langword="void"/> values.
         /// </remarks>
-        protected internal virtual object GetDefaultParameterValue(ParameterInfo parameter, Mock mock)
+        protected internal virtual object GetDefaultParameterValue(
+            ParameterInfo parameter,
+            Mock mock
+        )
         {
             Debug.Assert(parameter != null);
             Debug.Assert(parameter.ParameterType != typeof(void));

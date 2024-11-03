@@ -12,48 +12,58 @@ namespace System.ComponentModel
     public enum MaskedTextResultHint
     {
         // Unknown/Uninitialized
-        Unknown                         = 0,
+        Unknown = 0,
 
         ////////// Success (positive values, excluded).  /////////
-        /// WARNING: Do NOT modify the order of the success enum values, they are ordered the way TestString give precedence 
+        /// WARNING: Do NOT modify the order of the success enum values, they are ordered the way TestString give precedence
         /// to the result hint when multiple chars tested giving different success hints.
 
         // The operation Succeeded because a literal, prompt or space char was escaped.
-        CharacterEscaped                = 1,
+        CharacterEscaped = 1,
+
         // The primary operation was not performed because it was not needed and no side effect generated.
-        NoEffect                        = 2,
+        NoEffect = 2,
+
         // The primary operation was not performed but had a side effect (e.g. Delete at an unassigned edit pos produces left-shifting of chars).
-        SideEffect                      = 3,
+        SideEffect = 3,
+
         // The primary operation succeeded.
-        Success                         = 4,
-        
+        Success = 4,
 
         /////////  Failure values (negative values). /////////
-        
+
         // Failure due to mask violation. (values in the range of [-1, -49]
 
         // Input character not ascii.
-        AsciiCharacterExpected          = -1,
+        AsciiCharacterExpected = -1,
+
         // Input character not alpha-numeric ascii.
-        AlphanumericCharacterExpected   = -2,
+        AlphanumericCharacterExpected = -2,
+
         // Input character not a digit.
-        DigitExpected                   = -3,
+        DigitExpected = -3,
+
         // Input character not a letter.
-        LetterExpected                  = -4,
+        LetterExpected = -4,
+
         // Input character not a signed digit.
-        SignedDigitExpected             = -5,
+        SignedDigitExpected = -5,
 
         // Other failures. (values < -50)
-        
+
         // Invalid input
-        InvalidInput                    = -51,
+        InvalidInput = -51,
+
         // Prompt not allowed as input.
-        PromptCharNotAllowed            = -52,
+        PromptCharNotAllowed = -52,
+
         // No more room.
-        UnavailableEditPosition         = -53,
+        UnavailableEditPosition = -53,
+
         // Literal or separator position.
-        NonEditPosition                 = -54,
+        NonEditPosition = -54,
+
         // Position not in the range of indexes.
-        PositionOutOfRange              = -55
+        PositionOutOfRange = -55,
     }
 }

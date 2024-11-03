@@ -9,7 +9,8 @@ namespace Microsoft.AspNetCore.Hosting.Server;
 /// Represents an application.
 /// </summary>
 /// <typeparam name="TContext">The context associated with the application.</typeparam>
-public interface IHttpApplication<TContext> where TContext : notnull
+public interface IHttpApplication<TContext>
+    where TContext : notnull
 {
     /// <summary>
     /// Create a TContext given a collection of HTTP features.

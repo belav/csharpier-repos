@@ -14,18 +14,24 @@ using System.Transactions;
 
 namespace System.Workflow.Runtime.Hosting
 {
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public abstract class WorkflowCommitWorkBatchService : WorkflowRuntimeService
     {
         public delegate void CommitWorkBatchCallback();
 
-        virtual internal protected void CommitWorkBatch(CommitWorkBatchCallback commitWorkBatchCallback)
+        protected internal virtual void CommitWorkBatch(
+            CommitWorkBatchCallback commitWorkBatchCallback
+        )
         {
             Transaction tx = null;
             if (null == Transaction.Current)
                 tx = new CommittableTransaction();
             else
-                tx = Transaction.Current.DependentClone(DependentCloneOption.BlockCommitUntilComplete);
+                tx = Transaction.Current.DependentClone(
+                    DependentCloneOption.BlockCommitUntilComplete
+                );
 
             try
             {
@@ -58,4 +64,3 @@ namespace System.Workflow.Runtime.Hosting
         }
     }
 }
-

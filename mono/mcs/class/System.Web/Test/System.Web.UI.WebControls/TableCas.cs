@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,48 +26,47 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TableCas : AspNetHostingMinimal
+    {
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            TableTest unit = new TableTest();
+            unit.DefaultProperties();
+            unit.NullProperties();
+            unit.CleanProperties();
+            unit.BorderWidth();
+            unit.Render();
+            unit.CreateControlStyle();
+            unit.Rows();
+            unit.ControlsAdd_TableRow();
+            unit.ControlsAdd_TestTableRow();
+            unit.ControlsAddAt_TableRow();
+            unit.ControlsAddAt_TestTableRow();
+            unit.RenderBeginTag_Empty();
+            unit.RenderBeginTag_Attributes();
+            unit.RenderBeginTag_Caption();
+            unit.RenderBeginTag_Caption_Align();
+            unit.RenderBeginTag_Row();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TableCas : AspNetHostingMinimal {
+        // LinkDemand
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			TableTest unit = new TableTest ();
-			unit.DefaultProperties ();
-			unit.NullProperties ();
-			unit.CleanProperties ();
-			unit.BorderWidth ();
-			unit.Render ();
-			unit.CreateControlStyle ();
-			unit.Rows ();
-			unit.ControlsAdd_TableRow ();
-			unit.ControlsAdd_TestTableRow ();
-			unit.ControlsAddAt_TableRow ();
-			unit.ControlsAddAt_TestTableRow ();
-			unit.RenderBeginTag_Empty ();
-			unit.RenderBeginTag_Attributes ();
-			unit.RenderBeginTag_Caption ();
-			unit.RenderBeginTag_Caption_Align ();
-			unit.RenderBeginTag_Row ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (Table); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(Table); }
+        }
+    }
 }

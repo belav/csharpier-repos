@@ -1,11 +1,11 @@
 //------------------------------------------------------------------------------
 // <copyright file="PropertyChangedEventHandler.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.ComponentModel {
-
+namespace System.ComponentModel
+{
     using System;
     using System.Diagnostics;
     using System.Security.Permissions;

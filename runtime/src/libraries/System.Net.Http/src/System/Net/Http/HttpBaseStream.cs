@@ -12,19 +12,30 @@ namespace System.Net.Http
     {
         public sealed override bool CanSeek => false;
 
-        public sealed override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, default), callback, state);
+        public sealed override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(ReadAsync(buffer, offset, count, default), callback, state);
 
         public sealed override int EndRead(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End<int>(asyncResult);
 
-        public sealed override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count, default), callback, state);
+        public sealed override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToAsyncResult.Begin(WriteAsync(buffer, offset, count, default), callback, state);
 
         public sealed override void EndWrite(IAsyncResult asyncResult) =>
             TaskToAsyncResult.End(asyncResult);
 
-        public sealed override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public sealed override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public sealed override void SetLength(long value) => throw new NotSupportedException();
 
@@ -48,7 +59,12 @@ namespace System.Net.Http
             return Read(buffer.AsSpan(offset, count));
         }
 
-        public sealed override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public sealed override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
             return ReadAsync(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
@@ -66,26 +82,40 @@ namespace System.Net.Http
         public sealed override void WriteByte(byte value) =>
             Write(new ReadOnlySpan<byte>(in value));
 
-        public sealed override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public sealed override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
-            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return WriteAsync(new ReadOnlyMemory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
         public override void Flush() => FlushAsync(default).GetAwaiter().GetResult();
 
-        public override Task FlushAsync(CancellationToken cancellationToken) => NopAsync(cancellationToken);
+        public override Task FlushAsync(CancellationToken cancellationToken) =>
+            NopAsync(cancellationToken);
 
         protected static Task NopAsync(CancellationToken cancellationToken) =>
-            cancellationToken.IsCancellationRequested ? Task.FromCanceled(cancellationToken) :
-            Task.CompletedTask;
+            cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
 
         //
         // Methods which must be implemented by derived classes
         //
 
         public abstract override int Read(Span<byte> buffer);
-        public abstract override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken);
-        public abstract override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken);
+        public abstract override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        );
+        public abstract override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        );
     }
 }

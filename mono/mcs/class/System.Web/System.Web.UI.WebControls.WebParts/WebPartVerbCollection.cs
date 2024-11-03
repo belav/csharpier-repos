@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -33,43 +33,41 @@ using System.Reflection;
 
 namespace System.Web.UI.WebControls.WebParts
 {
-	public sealed class WebPartVerbCollection : ReadOnlyCollectionBase
-	{
-		public WebPartVerbCollection ()
-		{			
-		}
+    public sealed class WebPartVerbCollection : ReadOnlyCollectionBase
+    {
+        public WebPartVerbCollection() { }
 
-		public WebPartVerbCollection (ICollection verbs)
-		{
-			InnerList.AddRange (verbs);
-		}
+        public WebPartVerbCollection(ICollection verbs)
+        {
+            InnerList.AddRange(verbs);
+        }
 
-		public WebPartVerbCollection (WebPartVerbCollection existingVerbs, 
-								ICollection verbs)
-		{
-			InnerList.AddRange (existingVerbs.InnerList);
-			InnerList.AddRange (verbs);
-		}
+        public WebPartVerbCollection(WebPartVerbCollection existingVerbs, ICollection verbs)
+        {
+            InnerList.AddRange(existingVerbs.InnerList);
+            InnerList.AddRange(verbs);
+        }
 
-		public static readonly WebPartVerbCollection Empty = new WebPartVerbCollection ();
+        public static readonly WebPartVerbCollection Empty = new WebPartVerbCollection();
 
-		public bool Contains (WebPartVerb value)
-		{
-			return InnerList.Contains (value);
-		}
+        public bool Contains(WebPartVerb value)
+        {
+            return InnerList.Contains(value);
+        }
 
-		public void CopyTo (WebPartVerb [] array, int index)
-		{
-			InnerList.CopyTo (0, array, index, Count);		
-		}
+        public void CopyTo(WebPartVerb[] array, int index)
+        {
+            InnerList.CopyTo(0, array, index, Count);
+        }
 
-		public int IndexOf(WebPartVerb value)
-		{
-			return (InnerList.IndexOf (value));
-		}
+        public int IndexOf(WebPartVerb value)
+        {
+            return (InnerList.IndexOf(value));
+        }
 
-		public WebPartVerb this [int index ] {
-			get { return (WebPartVerb)InnerList [index]; }
-		}
-	}
+        public WebPartVerb this[int index]
+        {
+            get { return (WebPartVerb)InnerList[index]; }
+        }
+    }
 }

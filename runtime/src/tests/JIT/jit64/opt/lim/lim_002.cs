@@ -347,8 +347,6 @@ public class test
             failed_tests++;
         }
 
-
-
         return (failed_tests == 0) ? 100 : 1;
     }
 
@@ -370,7 +368,8 @@ public class test
 
     public static int test_12()
     {
-        int a = 0; int b = 0;
+        int a = 0;
+        int b = 0;
 
         for (int i = 0; i < 10; i++)
         {
@@ -384,7 +383,6 @@ public class test
 
         return a;
     }
-
 
     public static int test_11()
     {
@@ -401,34 +399,39 @@ public class test
         return a;
     }
 
-
     public static int test_10()
     {
-        int a = 0; int b = 0; int c = 0;
+        int a = 0;
+        int b = 0;
+        int c = 0;
 
         int k = 0;
 
         for (int i = 0; i < k; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static int test_09()
     {
-        int a = 0; int b = 0; int c = 0;
+        int a = 0;
+        int b = 0;
+        int c = 0;
 
         for (int i = 0; i < 10; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static int test_08()
     {
@@ -442,20 +445,18 @@ public class test
         return a;
     }
 
-
-
     public static int test_07()
     {
         int a = 0;
 
         for (int i = 0; i < 10; i++)
         {
-            a = 7; a += i;
+            a = 7;
+            a += i;
         }
 
         return a;
     }
-
 
     public static int test_06()
     {
@@ -463,15 +464,12 @@ public class test
 
         for (int i = 0; i < 10; i++)
         {
-            a = 7; a++;
+            a = 7;
+            a++;
         }
 
         return a;
     }
-
-
-
-
 
     public static int test_05()
     {
@@ -479,14 +477,12 @@ public class test
 
         for (int i = 0; i < 10; i++)
         {
-            a++; a++;
+            a++;
+            a++;
         }
 
         return a;
     }
-
-
-
 
     public static int test_04()
     {
@@ -500,20 +496,19 @@ public class test
         return a;
     }
 
-
-
     public static int test_01()
     {
         int a = 0;
 
         for (int i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         return a;
     }
-
 
     public static int test_02()
     {
@@ -521,14 +516,17 @@ public class test
 
         for (int i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         for (int j = 0; j < 10; j++)
         {
-            a = 1; a = 2; a = 3;
+            a = 1;
+            a = 2;
+            a = 3;
         }
-
 
         return a;
     }
@@ -541,19 +539,21 @@ public class test
         {
             for (int i = 0; i < 10; i++)
             {
-                a = 7; a = 8; a = 9;
+                a = 7;
+                a = 8;
+                a = 9;
             }
 
             for (int j = 0; j < 10; j++)
             {
-                a = 1; a = 2; a = 3;
+                a = 1;
+                a = 2;
+                a = 3;
             }
         }
 
         return a;
     }
-
-
 
     public static long test_113()
     {
@@ -573,7 +573,8 @@ public class test
 
     public static long test_112()
     {
-        long a = 0; long b = 0;
+        long a = 0;
+        long b = 0;
 
         for (long i = 0; i < 10; i++)
         {
@@ -587,7 +588,6 @@ public class test
 
         return a;
     }
-
 
     public static long test_111()
     {
@@ -604,34 +604,39 @@ public class test
         return a;
     }
 
-
     public static long test_110()
     {
-        long a = 0; long b = 0; long c = 0;
+        long a = 0;
+        long b = 0;
+        long c = 0;
 
         long k = 0;
 
         for (long i = 0; i < k; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static long test_109()
     {
-        long a = 0; long b = 0; long c = 0;
+        long a = 0;
+        long b = 0;
+        long c = 0;
 
         for (long i = 0; i < 10; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static long test_108()
     {
@@ -645,20 +650,18 @@ public class test
         return a;
     }
 
-
-
     public static long test_107()
     {
         long a = 0;
 
         for (long i = 0; i < 10; i++)
         {
-            a = 7; a += i;
+            a = 7;
+            a += i;
         }
 
         return a;
     }
-
 
     public static long test_106()
     {
@@ -666,15 +669,12 @@ public class test
 
         for (long i = 0; i < 10; i++)
         {
-            a = 7; a++;
+            a = 7;
+            a++;
         }
 
         return a;
     }
-
-
-
-
 
     public static long test_105()
     {
@@ -682,14 +682,12 @@ public class test
 
         for (long i = 0; i < 10; i++)
         {
-            a++; a++;
+            a++;
+            a++;
         }
 
         return a;
     }
-
-
-
 
     public static long test_104()
     {
@@ -703,20 +701,19 @@ public class test
         return a;
     }
 
-
-
     public static long test_101()
     {
         long a = 0;
 
         for (long i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         return a;
     }
-
 
     public static long test_102()
     {
@@ -724,14 +721,17 @@ public class test
 
         for (long i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         for (long j = 0; j < 10; j++)
         {
-            a = 1; a = 2; a = 3;
+            a = 1;
+            a = 2;
+            a = 3;
         }
-
 
         return a;
     }
@@ -744,18 +744,21 @@ public class test
         {
             for (long i = 0; i < 10; i++)
             {
-                a = 7; a = 8; a = 9;
+                a = 7;
+                a = 8;
+                a = 9;
             }
 
             for (long j = 0; j < 10; j++)
             {
-                a = 1; a = 2; a = 3;
+                a = 1;
+                a = 2;
+                a = 3;
             }
         }
 
         return a;
     }
-
 
     public static uint test_213()
     {
@@ -775,7 +778,8 @@ public class test
 
     public static uint test_212()
     {
-        uint a = 0; uint b = 0;
+        uint a = 0;
+        uint b = 0;
 
         for (uint i = 0; i < 10; i++)
         {
@@ -789,7 +793,6 @@ public class test
 
         return a;
     }
-
 
     public static uint test_211()
     {
@@ -806,34 +809,39 @@ public class test
         return a;
     }
 
-
     public static uint test_210()
     {
-        uint a = 0; uint b = 0; uint c = 0;
+        uint a = 0;
+        uint b = 0;
+        uint c = 0;
 
         uint k = 0;
 
         for (uint i = 0; i < k; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static uint test_209()
     {
-        uint a = 0; uint b = 0; uint c = 0;
+        uint a = 0;
+        uint b = 0;
+        uint c = 0;
 
         for (uint i = 0; i < 10; i++)
         {
-            a = 1; b = 2; c = a + b;
+            a = 1;
+            b = 2;
+            c = a + b;
         }
 
         return c;
     }
-
 
     public static uint test_208()
     {
@@ -847,20 +855,18 @@ public class test
         return a;
     }
 
-
-
     public static uint test_207()
     {
         uint a = 0;
 
         for (uint i = 0; i < 10; i++)
         {
-            a = 7; a += i;
+            a = 7;
+            a += i;
         }
 
         return a;
     }
-
 
     public static uint test_206()
     {
@@ -868,15 +874,12 @@ public class test
 
         for (uint i = 0; i < 10; i++)
         {
-            a = 7; a++;
+            a = 7;
+            a++;
         }
 
         return a;
     }
-
-
-
-
 
     public static uint test_205()
     {
@@ -884,14 +887,12 @@ public class test
 
         for (uint i = 0; i < 10; i++)
         {
-            a++; a++;
+            a++;
+            a++;
         }
 
         return a;
     }
-
-
-
 
     public static uint test_204()
     {
@@ -905,20 +906,19 @@ public class test
         return a;
     }
 
-
-
     public static uint test_201()
     {
         uint a = 0;
 
         for (uint i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         return a;
     }
-
 
     public static uint test_202()
     {
@@ -926,14 +926,17 @@ public class test
 
         for (uint i = 0; i < 10; i++)
         {
-            a = 7; a = 8; a = 9;
+            a = 7;
+            a = 8;
+            a = 9;
         }
 
         for (uint j = 0; j < 10; j++)
         {
-            a = 1; a = 2; a = 3;
+            a = 1;
+            a = 2;
+            a = 3;
         }
-
 
         return a;
     }
@@ -946,12 +949,16 @@ public class test
         {
             for (uint i = 0; i < 10; i++)
             {
-                a = 7; a = 8; a = 9;
+                a = 7;
+                a = 8;
+                a = 9;
             }
 
             for (uint j = 0; j < 10; j++)
             {
-                a = 1; a = 2; a = 3;
+                a = 1;
+                a = 2;
+                a = 3;
             }
         }
 

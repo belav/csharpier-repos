@@ -37,7 +37,10 @@ namespace Microsoft.Extensions.DependencyInjection
             // Make sure this is only registered/run once.
             services.TryAddSingleton<IConfigureOptions<NoOpOptions>, SubscriptionActivator>();
 
-            services.TryAddSingleton<IMetricListenerConfigurationFactory, MetricListenerConfigurationFactory>();
+            services.TryAddSingleton<
+                IMetricListenerConfigurationFactory,
+                MetricListenerConfigurationFactory
+            >();
 
             return services;
         }
@@ -48,7 +51,10 @@ namespace Microsoft.Extensions.DependencyInjection
         /// <param name="services">The <see cref="IServiceCollection" /> to add services to.</param>
         /// <param name="configure">A callback to configure the <see cref="IMetricsBuilder"/>.</param>
         /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
-        public static IServiceCollection AddMetrics(this IServiceCollection services, Action<IMetricsBuilder> configure)
+        public static IServiceCollection AddMetrics(
+            this IServiceCollection services,
+            Action<IMetricsBuilder> configure
+        )
         {
             if (configure is null)
             {
@@ -70,7 +76,8 @@ namespace Microsoft.Extensions.DependencyInjection
 
         private sealed class NoOpOptions { }
 
-        private sealed class SubscriptionActivator(MetricsSubscriptionManager manager) : IConfigureOptions<NoOpOptions>
+        private sealed class SubscriptionActivator(MetricsSubscriptionManager manager)
+            : IConfigureOptions<NoOpOptions>
         {
             public void Configure(NoOpOptions options) => manager.Initialize();
         }

@@ -72,11 +72,7 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             {
                 Cpu = "Intel",
                 Memory = 32,
-                Drives = new List<string>
-                {
-                    "DVD",
-                    "SSD"
-                }
+                Drives = new List<string> { "DVD", "SSD" },
             };
 
             JObject o = (JObject)JToken.FromObject(computer);
@@ -100,10 +96,13 @@ namespace Newtonsoft.Json.Tests.Documentation.Samples.Linq
             // ]
             #endregion
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   ""DVD"",
   ""SSD""
-]", a.ToString());
+]",
+                a.ToString()
+            );
         }
     }
 }

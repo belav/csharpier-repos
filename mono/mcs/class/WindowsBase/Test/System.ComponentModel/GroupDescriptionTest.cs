@@ -30,39 +30,39 @@ using NUnit.Framework;
 
 namespace MonoTests.System.ComponentModel
 {
-	[TestFixture]
-	public class GroupDescriptionTest
-	{
-		[Test]
-		public void NamesMatch ()
-		{
-			var gd = new ConcreteGroupDescription ();
-			var obj = new object ();
-			Assert.IsTrue (gd.NamesMatch (obj, obj), "A1");
-			Assert.IsFalse (gd.NamesMatch (new object (), new object ()), "A2");
-		}
+    [TestFixture]
+    public class GroupDescriptionTest
+    {
+        [Test]
+        public void NamesMatch()
+        {
+            var gd = new ConcreteGroupDescription();
+            var obj = new object();
+            Assert.IsTrue(gd.NamesMatch(obj, obj), "A1");
+            Assert.IsFalse(gd.NamesMatch(new object(), new object()), "A2");
+        }
 
-		[Test]
-		public void ShouldSerializeGroupNames ()
-		{
-			var g = new ConcreteGroupDescription ();
-			g.GroupNames.Add ("name");
-			Assert.IsTrue (g.ShouldSerializeGroupNames (), "#A1");
-		}
+        [Test]
+        public void ShouldSerializeGroupNames()
+        {
+            var g = new ConcreteGroupDescription();
+            g.GroupNames.Add("name");
+            Assert.IsTrue(g.ShouldSerializeGroupNames(), "#A1");
+        }
 
-		[Test]
-		public void ShouldSerializeGroupNamesEmpty ()
-		{
-			var g = new ConcreteGroupDescription ();
-			Assert.IsFalse (g.ShouldSerializeGroupNames (), "#A1");
-		}
+        [Test]
+        public void ShouldSerializeGroupNamesEmpty()
+        {
+            var g = new ConcreteGroupDescription();
+            Assert.IsFalse(g.ShouldSerializeGroupNames(), "#A1");
+        }
 
-		class ConcreteGroupDescription : GroupDescription
-		{
-			public override object GroupNameFromItem (object item, int level, CultureInfo culture)
-			{
-				throw new NotSupportedException ();
-			}
-		}
-	}
+        class ConcreteGroupDescription : GroupDescription
+        {
+            public override object GroupNameFromItem(object item, int level, CultureInfo culture)
+            {
+                throw new NotSupportedException();
+            }
+        }
+    }
 }

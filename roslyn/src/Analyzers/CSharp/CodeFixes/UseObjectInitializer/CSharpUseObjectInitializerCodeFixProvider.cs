@@ -13,11 +13,22 @@ using Microsoft.CodeAnalysis.UseObjectInitializer;
 
 namespace Microsoft.CodeAnalysis.CSharp.UseObjectInitializer;
 
-using ObjectInitializerMatch = Match<ExpressionSyntax, StatementSyntax, MemberAccessExpressionSyntax, ExpressionStatementSyntax>;
+using ObjectInitializerMatch = Match<
+    ExpressionSyntax,
+    StatementSyntax,
+    MemberAccessExpressionSyntax,
+    ExpressionStatementSyntax
+>;
 
-[ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.UseObjectInitializer), Shared]
-internal sealed class CSharpUseObjectInitializerCodeFixProvider :
-    AbstractUseObjectInitializerCodeFixProvider<
+[
+    ExportCodeFixProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeFixProviderNames.UseObjectInitializer
+    ),
+    Shared
+]
+internal sealed class CSharpUseObjectInitializerCodeFixProvider
+    : AbstractUseObjectInitializerCodeFixProvider<
         SyntaxKind,
         ExpressionSyntax,
         StatementSyntax,
@@ -26,42 +37,53 @@ internal sealed class CSharpUseObjectInitializerCodeFixProvider :
         ExpressionStatementSyntax,
         LocalDeclarationStatementSyntax,
         VariableDeclaratorSyntax,
-        CSharpUseNamedMemberInitializerAnalyzer>
+        CSharpUseNamedMemberInitializerAnalyzer
+    >
 {
     [ImportingConstructor]
-    [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-    public CSharpUseObjectInitializerCodeFixProvider()
-    {
-    }
+    [SuppressMessage(
+        "RoslynDiagnosticsReliability",
+        "RS0033:Importing constructor should be [Obsolete]",
+        Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+    )]
+    public CSharpUseObjectInitializerCodeFixProvider() { }
 
-    protected override CSharpUseNamedMemberInitializerAnalyzer GetAnalyzer()
-        => CSharpUseNamedMemberInitializerAnalyzer.Allocate();
+    protected override CSharpUseNamedMemberInitializerAnalyzer GetAnalyzer() =>
+        CSharpUseNamedMemberInitializerAnalyzer.Allocate();
 
     protected override StatementSyntax GetNewStatement(
-        StatementSyntax statement, BaseObjectCreationExpressionSyntax objectCreation,
-        ImmutableArray<ObjectInitializerMatch> matches)
+        StatementSyntax statement,
+        BaseObjectCreationExpressionSyntax objectCreation,
+        ImmutableArray<ObjectInitializerMatch> matches
+    )
     {
-        return statement.ReplaceNode(
-            objectCreation,
-            GetNewObjectCreation(objectCreation, matches));
+        return statement.ReplaceNode(objectCreation, GetNewObjectCreation(objectCreation, matches));
     }
 
     private static BaseObjectCreationExpressionSyntax GetNewObjectCreation(
         BaseObjectCreationExpressionSyntax objectCreation,
-        ImmutableArray<ObjectInitializerMatch> matches)
+        ImmutableArray<ObjectInitializerMatch> matches
+    )
     {
         return UseInitializerHelpers.GetNewObjectCreation(
-            objectCreation, CreateExpressions(objectCreation, matches));
+            objectCreation,
+            CreateExpressions(objectCreation, matches)
+        );
     }
 
     private static SeparatedSyntaxList<ExpressionSyntax> CreateExpressions(
         BaseObjectCreationExpressionSyntax objectCreation,
-        ImmutableArray<ObjectInitializerMatch> matches)
+        ImmutableArray<ObjectInitializerMatch> matches
+    )
     {
         using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var nodesAndTokens);
 
         UseInitializerHelpers.AddExistingItems<ObjectInitializerMatch, ExpressionSyntax>(
-            objectCreation, nodesAndTokens, addTrailingComma: true, static (_, e) => e);
+            objectCreation,
+            nodesAndTokens,
+            addTrailingComma: true,
+            static (_, e) => e
+        );
 
         for (var i = 0; i < matches.Length; i++)
         {
@@ -73,12 +95,14 @@ internal sealed class CSharpUseObjectInitializerCodeFixProvider :
             var newTrivia = i == 0 ? trivia.WithoutLeadingBlankLines() : trivia;
 
             var newAssignment = assignment.WithLeft(
-                match.MemberAccessExpression.Name.WithLeadingTrivia(newTrivia));
+                match.MemberAccessExpression.Name.WithLeadingTrivia(newTrivia)
+            );
 
             if (i < matches.Length - 1)
             {
                 nodesAndTokens.Add(newAssignment);
-                var commaToken = SyntaxFactory.Token(SyntaxKind.CommaToken)
+                var commaToken = SyntaxFactory
+                    .Token(SyntaxKind.CommaToken)
                     .WithTriviaFrom(expressionStatement.SemicolonToken);
 
                 nodesAndTokens.Add(commaToken);
@@ -86,7 +110,8 @@ internal sealed class CSharpUseObjectInitializerCodeFixProvider :
             else
             {
                 newAssignment = newAssignment.WithTrailingTrivia(
-                    expressionStatement.GetTrailingTrivia());
+                    expressionStatement.GetTrailingTrivia()
+                );
                 nodesAndTokens.Add(newAssignment);
             }
         }

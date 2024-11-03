@@ -20,7 +20,11 @@ internal class RazorTestAnalyzerLoader
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public RazorTestAnalyzerLoader(IDiagnosticAnalyzerService analyzerService, IDiagnosticService diagnosticService, IGlobalOptionService globalOptionService)
+    public RazorTestAnalyzerLoader(
+        IDiagnosticAnalyzerService analyzerService,
+        IDiagnosticService diagnosticService,
+        IGlobalOptionService globalOptionService
+    )
     {
         _analyzerService = analyzerService;
         _diagnosticService = (DiagnosticService)diagnosticService;
@@ -29,7 +33,10 @@ internal class RazorTestAnalyzerLoader
 
     public void InitializeDiagnosticsServices(Workspace workspace)
     {
-        _globalOptionService.SetGlobalOption(InternalDiagnosticsOptionsStorage.NormalDiagnosticMode, DiagnosticMode.LspPull);
+        _globalOptionService.SetGlobalOption(
+            InternalDiagnosticsOptionsStorage.NormalDiagnosticMode,
+            DiagnosticMode.LspPull
+        );
         _ = ((IIncrementalAnalyzerProvider)_analyzerService).CreateIncrementalAnalyzer(workspace);
         _diagnosticService.Register((IDiagnosticUpdateSource)_analyzerService);
     }

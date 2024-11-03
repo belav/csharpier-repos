@@ -10,9 +10,13 @@ namespace Microsoft.AspNetCore.Components.Web;
 
 internal static class WebEventDescriptorReader
 {
-    private static readonly JsonEncodedText EventHandlerIdKey = JsonEncodedText.Encode("eventHandlerId");
+    private static readonly JsonEncodedText EventHandlerIdKey = JsonEncodedText.Encode(
+        "eventHandlerId"
+    );
     private static readonly JsonEncodedText EventNameKey = JsonEncodedText.Encode("eventName");
-    private static readonly JsonEncodedText EventFieldInfoKey = JsonEncodedText.Encode("eventFieldInfo");
+    private static readonly JsonEncodedText EventFieldInfoKey = JsonEncodedText.Encode(
+        "eventFieldInfo"
+    );
     private static readonly JsonEncodedText ComponentIdKey = JsonEncodedText.Encode("componentId");
     private static readonly JsonEncodedText FieldValueKey = JsonEncodedText.Encode("fieldValue");
 

@@ -9,11 +9,11 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Text;
+using System.Threading;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.Text;
 using Roslyn.Utilities;
-using System.Threading;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
@@ -35,18 +35,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             get
             {
-                return _cache ?? (_cache = new SmallDictionary<NamedTypeSymbol, bool>(Symbols.SymbolEqualityComparer.ConsiderEverything));
+                return _cache
+                    ?? (
+                        _cache = new SmallDictionary<NamedTypeSymbol, bool>(
+                            Symbols.SymbolEqualityComparer.ConsiderEverything
+                        )
+                    );
             }
         }
 
-        public static EmptyStructTypeCache CreateForDev12Compatibility(CSharpCompilation compilation)
-            => new EmptyStructTypeCache(compilation, dev12CompilerCompatibility: true);
+        public static EmptyStructTypeCache CreateForDev12Compatibility(
+            CSharpCompilation compilation
+        ) => new EmptyStructTypeCache(compilation, dev12CompilerCompatibility: true);
 
-        public static EmptyStructTypeCache CreatePrecise()
-            => new EmptyStructTypeCache(null, false);
+        public static EmptyStructTypeCache CreatePrecise() => new EmptyStructTypeCache(null, false);
 
-        public static EmptyStructTypeCache CreateNeverEmpty()
-            => new NeverEmptyStructTypeCache();
+        public static EmptyStructTypeCache CreateNeverEmpty() => new NeverEmptyStructTypeCache();
 
         /// <summary>
         /// Create a cache for computing whether or not a struct type is "empty".
@@ -68,9 +72,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         private sealed class NeverEmptyStructTypeCache : EmptyStructTypeCache
         {
             public NeverEmptyStructTypeCache()
-               : base(null, false)
-            {
-            }
+                : base(null, false) { }
 
             public override bool IsEmptyStructType(TypeSymbol type)
             {
@@ -91,7 +93,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// a list of types that have members (directly or indirectly) of this type.
         /// to remove circularity.
         /// </summary>
-        private bool IsEmptyStructType(TypeSymbol type, ConsList<NamedTypeSymbol> typesWithMembersOfThisType)
+        private bool IsEmptyStructType(
+            TypeSymbol type,
+            ConsList<NamedTypeSymbol> typesWithMembersOfThisType
+        )
         {
             var nts = type as NamedTypeSymbol;
             if ((object)nts == null || !IsTrackableStructType(nts))
@@ -113,13 +118,19 @@ namespace Microsoft.CodeAnalysis.CSharp
             return result;
         }
 
-        private bool CheckStruct(ConsList<NamedTypeSymbol> typesWithMembersOfThisType, NamedTypeSymbol nts)
+        private bool CheckStruct(
+            ConsList<NamedTypeSymbol> typesWithMembersOfThisType,
+            NamedTypeSymbol nts
+        )
         {
-            // Break recursive cycles. If we find a member that contains us, it is considered empty 
+            // Break recursive cycles. If we find a member that contains us, it is considered empty
             if (!typesWithMembersOfThisType.ContainsReference(nts))
             {
                 // Remember that we're in the process of doing this type while checking members.
-                typesWithMembersOfThisType = new ConsList<NamedTypeSymbol>(nts, typesWithMembersOfThisType);
+                typesWithMembersOfThisType = new ConsList<NamedTypeSymbol>(
+                    nts,
+                    typesWithMembersOfThisType
+                );
                 return CheckStructInstanceFields(typesWithMembersOfThisType, nts);
             }
 
@@ -128,18 +139,25 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public static bool IsTrackableStructType(TypeSymbol type)
         {
-            if ((object)type == null) return false;
+            if ((object)type == null)
+                return false;
             var nts = type.OriginalDefinition as NamedTypeSymbol;
-            if ((object)nts == null) return false;
-            return nts.IsStructType() && nts.SpecialType == SpecialType.None && !nts.KnownCircularStruct;
+            if ((object)nts == null)
+                return false;
+            return nts.IsStructType()
+                && nts.SpecialType == SpecialType.None
+                && !nts.KnownCircularStruct;
         }
 
         /// <summary>
         /// Get all instance fields of a struct. They are not necessarily returned in order.
         /// </summary>
-        private bool CheckStructInstanceFields(ConsList<NamedTypeSymbol> typesWithMembersOfThisType, NamedTypeSymbol type)
+        private bool CheckStructInstanceFields(
+            ConsList<NamedTypeSymbol> typesWithMembersOfThisType,
+            NamedTypeSymbol type
+        )
         {
-            // PERF: we get members of the OriginalDefinition to not create substituted members/types 
+            // PERF: we get members of the OriginalDefinition to not create substituted members/types
             //       unless necessary.
             foreach (var member in type.OriginalDefinition.GetMembersUnordered())
             {
@@ -178,7 +196,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         public IEnumerable<FieldSymbol> GetStructFields(NamedTypeSymbol type, bool includeStatic)
         {
-            // PERF: we get members of the OriginalDefinition to not create substituted members/types 
+            // PERF: we get members of the OriginalDefinition to not create substituted members/types
             //       unless necessary.
             foreach (var member in type.OriginalDefinition.GetMembersUnordered())
             {
@@ -208,11 +226,18 @@ namespace Microsoft.CodeAnalysis.CSharp
                         return null;
                     }
 
-                    return (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type)) ? null : field.AsMember(type);
+                    return (field.IsFixedSizeBuffer || ShouldIgnoreStructField(field, field.Type))
+                        ? null
+                        : field.AsMember(type);
 
                 case SymbolKind.Event:
                     var eventSymbol = (EventSymbol)member;
-                    return (!eventSymbol.HasAssociatedField || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)) ? null : eventSymbol.AssociatedField.AsMember(type);
+                    return (
+                        !eventSymbol.HasAssociatedField
+                        || ShouldIgnoreStructField(eventSymbol, eventSymbol.Type)
+                    )
+                        ? null
+                        : eventSymbol.AssociatedField.AsMember(type);
             }
 
             return null;
@@ -220,11 +245,17 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private bool ShouldIgnoreStructField(Symbol member, TypeSymbol memberType)
         {
-            return _dev12CompilerCompatibility &&                             // when we're trying to be compatible with the native compiler, we ignore
-                   ((object)member.ContainingAssembly != _sourceAssembly ||   // imported fields
-                    member.ContainingModule.Ordinal != 0) &&                      //     (an added module is imported)
-                   IsIgnorableType(memberType) &&                                 // of reference type (but not type parameters, looking through arrays)
-                   !IsAccessibleInAssembly(member, _sourceAssembly);          // that are inaccessible to our assembly.
+            return _dev12CompilerCompatibility
+                && // when we're trying to be compatible with the native compiler, we ignore
+                (
+                    (object)member.ContainingAssembly != _sourceAssembly
+                    || // imported fields
+                    member.ContainingModule.Ordinal != 0
+                )
+                && //     (an added module is imported)
+                IsIgnorableType(memberType)
+                && // of reference type (but not type parameters, looking through arrays)
+                !IsAccessibleInAssembly(member, _sourceAssembly); // that are inaccessible to our assembly.
         }
 
         /// <summary>
@@ -257,13 +288,18 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private static bool IsAccessibleInAssembly(Symbol symbol, SourceAssemblySymbol assembly)
         {
-            for (; symbol != null && symbol.Kind != SymbolKind.Namespace; symbol = symbol.ContainingSymbol)
+            for (
+                ;
+                symbol != null && symbol.Kind != SymbolKind.Namespace;
+                symbol = symbol.ContainingSymbol
+            )
             {
                 switch (symbol.DeclaredAccessibility)
                 {
                     case Accessibility.Internal:
                     case Accessibility.ProtectedAndInternal:
-                        if (!assembly.HasInternalAccessTo(symbol.ContainingAssembly)) return false;
+                        if (!assembly.HasInternalAccessTo(symbol.ContainingAssembly))
+                            return false;
                         break;
 
                     case Accessibility.Private:

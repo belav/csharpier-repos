@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Net.Http.Headers;
-
 using Xunit;
 
 namespace System.Net.Http.Tests
@@ -32,10 +31,20 @@ namespace System.Net.Http.Tests
 
             CheckValidParsedValue(" (comment)   p", 0, new ProductInfoHeaderValue("(comment)"), 13);
 
-            CheckValidParsedValue(" Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ", 0,
-                new ProductInfoHeaderValue("Mozilla", "5.0"), 13);
-            CheckValidParsedValue(" Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ", 13,
-                new ProductInfoHeaderValue("(compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"), 13 + 59);
+            CheckValidParsedValue(
+                " Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ",
+                0,
+                new ProductInfoHeaderValue("Mozilla", "5.0"),
+                13
+            );
+            CheckValidParsedValue(
+                " Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0) ",
+                13,
+                new ProductInfoHeaderValue(
+                    "(compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)"
+                ),
+                13 + 59
+            );
         }
 
         [Fact]
@@ -55,7 +64,10 @@ namespace System.Net.Http.Tests
             CheckInvalidParsedValue("((comment)", 0);
             CheckInvalidParsedValue("(comment))", 0);
             CheckInvalidParsedValue("(comment)(comment)", 0);
-            CheckInvalidParsedValue("Mozilla/4.0 (compatible (compatible; MSIE 8.0; Windows NT 6.1; Trident/7.0)", 12);
+            CheckInvalidParsedValue(
+                "Mozilla/4.0 (compatible (compatible; MSIE 8.0; Windows NT 6.1; Trident/7.0)",
+                12
+            );
 
             // "User-Agent" and "Server" don't allow empty values (unlike most other headers supporting lists of values)
             CheckInvalidParsedValue(null, 0);
@@ -66,13 +78,19 @@ namespace System.Net.Http.Tests
 
         #region Helper methods
 
-        private void CheckValidParsedValue(string input, int startIndex, ProductInfoHeaderValue expectedResult,
-            int expectedIndex)
+        private void CheckValidParsedValue(
+            string input,
+            int startIndex,
+            ProductInfoHeaderValue expectedResult,
+            int expectedIndex
+        )
         {
             ProductInfoHeaderParser parser = ProductInfoHeaderParser.MultipleValueParser;
             object result = null;
-            Assert.True(parser.TryParseValue(input, null, ref startIndex, out result),
-                string.Format("TryParse returned false. Input: '{0}'", input));
+            Assert.True(
+                parser.TryParseValue(input, null, ref startIndex, out result),
+                string.Format("TryParse returned false. Input: '{0}'", input)
+            );
             Assert.Equal(expectedIndex, startIndex);
             Assert.Equal(expectedResult, result);
         }
@@ -82,8 +100,10 @@ namespace System.Net.Http.Tests
             ProductInfoHeaderParser parser = ProductInfoHeaderParser.MultipleValueParser;
             object result = null;
             int newIndex = startIndex;
-            Assert.False(parser.TryParseValue(input, null, ref newIndex, out result),
-                string.Format("TryParse returned true. Input: '{0}'", input));
+            Assert.False(
+                parser.TryParseValue(input, null, ref newIndex, out result),
+                string.Format("TryParse returned true. Input: '{0}'", input)
+            );
             Assert.Null(result);
             Assert.Equal(startIndex, newIndex);
         }

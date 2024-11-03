@@ -3,7 +3,6 @@
 
 
 using System;
-
 using Internal.Runtime.CompilerServices;
 
 namespace Internal.TypeSystem

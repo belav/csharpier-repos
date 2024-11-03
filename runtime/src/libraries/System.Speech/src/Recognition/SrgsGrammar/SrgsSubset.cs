@@ -16,16 +16,23 @@ namespace System.Speech.Recognition.SrgsGrammar
     {
         #region Constructors
         public SrgsSubset(string text)
-            : this(text, SubsetMatchingMode.Subsequence)
-        {
-        }
+            : this(text, SubsetMatchingMode.Subsequence) { }
+
         public SrgsSubset(string text, SubsetMatchingMode matchingMode)
         {
             Helpers.ThrowIfEmptyOrNull(text, nameof(text));
 
-            if (matchingMode != SubsetMatchingMode.OrderedSubset && matchingMode != SubsetMatchingMode.Subsequence && matchingMode != SubsetMatchingMode.OrderedSubsetContentRequired && matchingMode != SubsetMatchingMode.SubsequenceContentRequired)
+            if (
+                matchingMode != SubsetMatchingMode.OrderedSubset
+                && matchingMode != SubsetMatchingMode.Subsequence
+                && matchingMode != SubsetMatchingMode.OrderedSubsetContentRequired
+                && matchingMode != SubsetMatchingMode.SubsequenceContentRequired
+            )
             {
-                throw new ArgumentException(SR.Get(SRID.InvalidSubsetAttribute), nameof(matchingMode));
+                throw new ArgumentException(
+                    SR.Get(SRID.InvalidSubsetAttribute),
+                    nameof(matchingMode)
+                );
             }
 
             _matchMode = matchingMode;
@@ -39,13 +46,15 @@ namespace System.Speech.Recognition.SrgsGrammar
         #region public Properties
         public SubsetMatchingMode MatchingMode
         {
-            get
-            {
-                return _matchMode;
-            }
+            get { return _matchMode; }
             set
             {
-                if (value != SubsetMatchingMode.OrderedSubset && value != SubsetMatchingMode.Subsequence && value != SubsetMatchingMode.OrderedSubsetContentRequired && value != SubsetMatchingMode.SubsequenceContentRequired)
+                if (
+                    value != SubsetMatchingMode.OrderedSubset
+                    && value != SubsetMatchingMode.Subsequence
+                    && value != SubsetMatchingMode.OrderedSubsetContentRequired
+                    && value != SubsetMatchingMode.SubsequenceContentRequired
+                )
                 {
                     throw new ArgumentException(SR.Get(SRID.InvalidSubsetAttribute), nameof(value));
                 }
@@ -55,10 +64,7 @@ namespace System.Speech.Recognition.SrgsGrammar
         }
         public string Text
         {
-            get
-            {
-                return _text;
-            }
+            get { return _text; }
             set
             {
                 Helpers.ThrowIfEmptyOrNull(value, nameof(value));

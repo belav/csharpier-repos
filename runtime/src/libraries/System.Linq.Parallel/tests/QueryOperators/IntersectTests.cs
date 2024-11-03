@@ -13,7 +13,13 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<int> RightCounts(int leftCount)
         {
-            return new[] { 0, 1, Math.Max(DuplicateFactor * 2, leftCount), 2 * Math.Max(DuplicateFactor, leftCount * 2) }.Distinct();
+            return new[]
+            {
+                0,
+                1,
+                Math.Max(DuplicateFactor * 2, leftCount),
+                2 * Math.Max(DuplicateFactor, leftCount * 2),
+            }.Distinct();
         }
 
         public static IEnumerable<object[]> IntersectUnorderedData(int[] leftCounts)
@@ -23,7 +29,13 @@ namespace System.Linq.Parallel.Tests
                 foreach (int rightCount in RightCounts(leftCount))
                 {
                     int rightStart = 0 - rightCount / 2;
-                    yield return new object[] { leftCount, rightStart, rightCount, Math.Min(leftCount, (rightCount + 1) / 2) };
+                    yield return new object[]
+                    {
+                        leftCount,
+                        rightStart,
+                        rightCount,
+                        Math.Min(leftCount, (rightCount + 1) / 2),
+                    };
                 }
             }
         }
@@ -37,7 +49,15 @@ namespace System.Linq.Parallel.Tests
                     int rightStart = 0 - rightCount / 2;
                     foreach (object[] left in Sources.Ranges(new[] { leftCount }))
                     {
-                        yield return left.Concat(new object[] { UnorderedSources.Default(rightStart, rightCount), rightCount, Math.Min(leftCount, (rightCount + 1) / 2) }).ToArray();
+                        yield return left.Concat(
+                                new object[]
+                                {
+                                    UnorderedSources.Default(rightStart, rightCount),
+                                    rightCount,
+                                    Math.Min(leftCount, (rightCount + 1) / 2),
+                                }
+                            )
+                            .ToArray();
                     }
                 }
             }
@@ -45,13 +65,27 @@ namespace System.Linq.Parallel.Tests
 
         public static IEnumerable<object[]> IntersectSourceMultipleData(int[] counts)
         {
-            foreach (int leftCount in counts.DefaultIfEmpty(Sources.OuterLoopCount / DuplicateFactor / 2))
+            foreach (
+                int leftCount in counts.DefaultIfEmpty(Sources.OuterLoopCount / DuplicateFactor / 2)
+            )
             {
-                ParallelQuery<int> left = Enumerable.Range(0, leftCount * DuplicateFactor).Select(x => x % leftCount).ToArray().AsParallel().AsOrdered();
+                ParallelQuery<int> left = Enumerable
+                    .Range(0, leftCount * DuplicateFactor)
+                    .Select(x => x % leftCount)
+                    .ToArray()
+                    .AsParallel()
+                    .AsOrdered();
                 foreach (int rightCount in RightCounts(leftCount))
                 {
                     int rightStart = 0 - rightCount / 2;
-                    yield return new object[] { left, leftCount, UnorderedSources.Default(rightStart, rightCount), rightCount, Math.Min(leftCount, (rightCount + 1) / 2) };
+                    yield return new object[]
+                    {
+                        left,
+                        leftCount,
+                        UnorderedSources.Default(rightStart, rightCount),
+                        rightCount,
+                        Math.Min(leftCount, (rightCount + 1) / 2),
+                    };
                 }
             }
         }
@@ -61,7 +95,12 @@ namespace System.Linq.Parallel.Tests
         //
         [Theory]
         [MemberData(nameof(IntersectUnorderedData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Unordered(int leftCount, int rightStart, int rightCount, int count)
+        public static void Intersect_Unordered(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightStart, rightCount);
@@ -75,15 +114,31 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Unordered_Longrunning(int leftCount, int rightStart, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Unordered_Longrunning(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Unordered(leftCount, rightStart, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             _ = leftCount;
             _ = rightCount;
@@ -98,15 +153,31 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Longrunning(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> right, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Longrunning(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> right,
+            int rightCount,
+            int count
+        )
         {
             Intersect(left, leftCount, right, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectUnorderedData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Unordered_NotPipelined(int leftCount, int rightStart, int rightCount, int count)
+        public static void Intersect_Unordered_NotPipelined(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
             ParallelQuery<int> rightQuery = UnorderedSources.Default(rightStart, rightCount);
@@ -117,15 +188,31 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Unordered_NotPipelined_Longrunning(int leftCount, int rightStart, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Unordered_NotPipelined_Longrunning(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Unordered_NotPipelined(leftCount, rightStart, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_NotPipelined(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect_NotPipelined(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             _ = leftCount;
             _ = rightCount;
@@ -137,15 +224,31 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             Intersect_NotPipelined(left, leftCount, rightQuery, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectUnorderedData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Unordered_Distinct(int leftCount, int rightStart, int rightCount, int count)
+        public static void Intersect_Unordered_Distinct(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             _ = count;
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
@@ -153,7 +256,12 @@ namespace System.Linq.Parallel.Tests
             leftCount = Math.Min(DuplicateFactor * 2, leftCount);
             rightCount = Math.Min(DuplicateFactor, (rightCount + 1) / 2);
             IntegerRangeSet seen = new IntegerRangeSet(0, Math.Min(leftCount, rightCount));
-            foreach (int i in leftQuery.Intersect(rightQuery.Select(x => Math.Abs(x) % DuplicateFactor), new ModularCongruenceComparer(DuplicateFactor * 2)))
+            foreach (
+                int i in leftQuery.Intersect(
+                    rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                    new ModularCongruenceComparer(DuplicateFactor * 2)
+                )
+            )
             {
                 seen.Add(i % (DuplicateFactor * 2));
             }
@@ -162,22 +270,43 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Unordered_Distinct_Longrunning(int leftCount, int rightStart, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Unordered_Distinct_Longrunning(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Unordered_Distinct(leftCount, rightStart, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Distinct(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect_Distinct(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
             leftCount = Math.Min(DuplicateFactor * 2, leftCount);
             rightCount = Math.Min(DuplicateFactor, (rightCount + 1) / 2);
             int seen = 0;
-            foreach (int i in leftQuery.Intersect(rightQuery.Select(x => Math.Abs(x) % DuplicateFactor), new ModularCongruenceComparer(DuplicateFactor * 2)))
+            foreach (
+                int i in leftQuery.Intersect(
+                    rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                    new ModularCongruenceComparer(DuplicateFactor * 2)
+                )
+            )
             {
                 Assert.Equal(seen++, i);
             }
@@ -186,15 +315,31 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Distinct_Longrunning(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Distinct_Longrunning(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Distinct(left, leftCount, rightQuery, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectUnorderedData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Unordered_Distinct_NotPipelined(int leftCount, int rightStart, int rightCount, int count)
+        public static void Intersect_Unordered_Distinct_NotPipelined(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             _ = count;
             ParallelQuery<int> leftQuery = UnorderedSources.Default(leftCount);
@@ -202,42 +347,91 @@ namespace System.Linq.Parallel.Tests
             leftCount = Math.Min(DuplicateFactor * 2, leftCount);
             rightCount = Math.Min(DuplicateFactor, (rightCount + 1) / 2);
             IntegerRangeSet seen = new IntegerRangeSet(0, Math.Min(leftCount, rightCount));
-            Assert.All(leftQuery.Intersect(rightQuery.Select(x => Math.Abs(x) % DuplicateFactor), new ModularCongruenceComparer(DuplicateFactor * 2)).ToList(), x => seen.Add(x % (DuplicateFactor * 2)));
+            Assert.All(
+                leftQuery
+                    .Intersect(
+                        rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                        new ModularCongruenceComparer(DuplicateFactor * 2)
+                    )
+                    .ToList(),
+                x => seen.Add(x % (DuplicateFactor * 2))
+            );
             seen.AssertComplete();
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectUnorderedData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Unordered_Distinct_NotPipelined_Longrunning(int leftCount, int rightStart, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectUnorderedData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Unordered_Distinct_NotPipelined_Longrunning(
+            int leftCount,
+            int rightStart,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Unordered_Distinct_NotPipelined(leftCount, rightStart, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Distinct_NotPipelined(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect_Distinct_NotPipelined(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             _ = count;
             ParallelQuery<int> leftQuery = left.Item;
             leftCount = Math.Min(DuplicateFactor * 2, leftCount);
             rightCount = Math.Min(DuplicateFactor, (rightCount + 1) / 2);
             int seen = 0;
-            Assert.All(leftQuery.Intersect(rightQuery.Select(x => Math.Abs(x) % DuplicateFactor), new ModularCongruenceComparer(DuplicateFactor * 2)).ToList(), x => Assert.Equal(seen++, x));
+            Assert.All(
+                leftQuery
+                    .Intersect(
+                        rightQuery.Select(x => Math.Abs(x) % DuplicateFactor),
+                        new ModularCongruenceComparer(DuplicateFactor * 2)
+                    )
+                    .ToList(),
+                x => Assert.Equal(seen++, x)
+            );
             Assert.Equal(Math.Min(leftCount, rightCount), seen);
         }
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Distinct_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> left, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Distinct_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> left,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Distinct_NotPipelined(left, leftCount, rightQuery, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectSourceMultipleData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_Unordered_SourceMultiple(ParallelQuery<int> leftQuery, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect_Unordered_SourceMultiple(
+            ParallelQuery<int> leftQuery,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             // The difference between this test and the previous, is that it's not possible to
             // get non-unique results from ParallelEnumerable.Range()...
@@ -252,15 +446,32 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectSourceMultipleData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_Unordered_SourceMultiple_Longrunning(ParallelQuery<int> leftQuery, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectSourceMultipleData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_Unordered_SourceMultiple_Longrunning(
+            ParallelQuery<int> leftQuery,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             Intersect_Unordered_SourceMultiple(leftQuery, leftCount, rightQuery, rightCount, count);
         }
 
         [Theory]
         [MemberData(nameof(IntersectSourceMultipleData), new[] { 0, 1, 2, 16 })]
-        public static void Intersect_SourceMultiple(ParallelQuery<int> leftQuery, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        public static void Intersect_SourceMultiple(
+            ParallelQuery<int> leftQuery,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             _ = leftCount;
             _ = rightCount;
@@ -271,8 +482,19 @@ namespace System.Linq.Parallel.Tests
 
         [Theory]
         [OuterLoop]
-        [MemberData(nameof(IntersectSourceMultipleData), new int[] { /* Sources.OuterLoopCount */ })]
-        public static void Intersect_SourceMultiple_Longrunning(ParallelQuery<int> leftQuery, int leftCount, ParallelQuery<int> rightQuery, int rightCount, int count)
+        [MemberData(
+            nameof(IntersectSourceMultipleData),
+            new int[]
+            { /* Sources.OuterLoopCount */
+            }
+        )]
+        public static void Intersect_SourceMultiple_Longrunning(
+            ParallelQuery<int> leftQuery,
+            int leftCount,
+            ParallelQuery<int> rightQuery,
+            int rightCount,
+            int count
+        )
         {
             Intersect_SourceMultiple(leftQuery, leftCount, rightQuery, rightCount, count);
         }
@@ -281,8 +503,12 @@ namespace System.Linq.Parallel.Tests
         public static void Intersect_NotSupportedException()
         {
 #pragma warning disable 618
-            Assert.Throws<NotSupportedException>(() => ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1)));
-            Assert.Throws<NotSupportedException>(() => ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1), null));
+            Assert.Throws<NotSupportedException>(
+                () => ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1))
+            );
+            Assert.Throws<NotSupportedException>(
+                () => ParallelEnumerable.Range(0, 1).Intersect(Enumerable.Range(0, 1), null)
+            );
 #pragma warning restore 618
         }
 
@@ -291,20 +517,68 @@ namespace System.Linq.Parallel.Tests
         public static void Intersect_NoDuplicateSettings()
         {
             CancellationToken t = new CancellationTokenSource().Token;
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithCancellation(t).Intersect(ParallelEnumerable.Range(0, 1).WithCancellation(t)));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1).Intersect(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1)));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithExecutionMode(ParallelExecutionMode.Default).Intersect(ParallelEnumerable.Range(0, 1).WithExecutionMode(ParallelExecutionMode.Default)));
-            Assert.Throws<InvalidOperationException>(() => ParallelEnumerable.Range(0, 1).WithMergeOptions(ParallelMergeOptions.Default).Intersect(ParallelEnumerable.Range(0, 1).WithMergeOptions(ParallelMergeOptions.Default)));
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithCancellation(t)
+                        .Intersect(ParallelEnumerable.Range(0, 1).WithCancellation(t))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithDegreeOfParallelism(1)
+                        .Intersect(ParallelEnumerable.Range(0, 1).WithDegreeOfParallelism(1))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithExecutionMode(ParallelExecutionMode.Default)
+                        .Intersect(
+                            ParallelEnumerable
+                                .Range(0, 1)
+                                .WithExecutionMode(ParallelExecutionMode.Default)
+                        )
+            );
+            Assert.Throws<InvalidOperationException>(
+                () =>
+                    ParallelEnumerable
+                        .Range(0, 1)
+                        .WithMergeOptions(ParallelMergeOptions.Default)
+                        .Intersect(
+                            ParallelEnumerable
+                                .Range(0, 1)
+                                .WithMergeOptions(ParallelMergeOptions.Default)
+                        )
+            );
         }
 
         [Fact]
         public static void Intersect_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("first", () => ((ParallelQuery<int>)null).Intersect(ParallelEnumerable.Range(0, 1)));
-            AssertExtensions.Throws<ArgumentNullException>("second", () => ParallelEnumerable.Range(0, 1).Intersect(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "first",
+                () => ((ParallelQuery<int>)null).Intersect(ParallelEnumerable.Range(0, 1))
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "second",
+                () => ParallelEnumerable.Range(0, 1).Intersect(null)
+            );
 
-            AssertExtensions.Throws<ArgumentNullException>("first", () => ((ParallelQuery<int>)null).Intersect(ParallelEnumerable.Range(0, 1), EqualityComparer<int>.Default));
-            AssertExtensions.Throws<ArgumentNullException>("second", () => ParallelEnumerable.Range(0, 1).Intersect(null, EqualityComparer<int>.Default));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "first",
+                () =>
+                    ((ParallelQuery<int>)null).Intersect(
+                        ParallelEnumerable.Range(0, 1),
+                        EqualityComparer<int>.Default
+                    )
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "second",
+                () => ParallelEnumerable.Range(0, 1).Intersect(null, EqualityComparer<int>.Default)
+            );
         }
     }
 }

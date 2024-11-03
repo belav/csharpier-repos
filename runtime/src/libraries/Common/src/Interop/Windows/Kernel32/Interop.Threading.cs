@@ -12,13 +12,24 @@ internal static partial class Interop
         internal const int WAIT_FAILED = unchecked((int)0xFFFFFFFF);
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial uint WaitForMultipleObjectsEx(uint nCount, IntPtr lpHandles, BOOL bWaitAll, uint dwMilliseconds, BOOL bAlertable);
+        internal static partial uint WaitForMultipleObjectsEx(
+            uint nCount,
+            IntPtr lpHandles,
+            BOOL bWaitAll,
+            uint dwMilliseconds,
+            BOOL bAlertable
+        );
 
         [LibraryImport(Libraries.Kernel32)]
         internal static partial uint WaitForSingleObject(IntPtr hHandle, uint dwMilliseconds);
 
         [LibraryImport(Libraries.Kernel32)]
-        internal static partial uint SignalObjectAndWait(IntPtr hObjectToSignal, IntPtr hObjectToWaitOn, uint dwMilliseconds, BOOL bAlertable);
+        internal static partial uint SignalObjectAndWait(
+            IntPtr hObjectToSignal,
+            IntPtr hObjectToWaitOn,
+            uint dwMilliseconds,
+            BOOL bAlertable
+        );
 
         internal const uint CREATE_SUSPENDED = 0x00000004;
         internal const uint STACK_SIZE_PARAM_IS_A_RESERVATION = 0x00010000;
@@ -30,7 +41,8 @@ internal static partial class Interop
             delegate* unmanaged<IntPtr, uint> lpStartAddress,
             IntPtr lpParameter,
             uint dwCreationFlags,
-            out uint lpThreadId);
+            out uint lpThreadId
+        );
 
         [LibraryImport(Libraries.Kernel32)]
         internal static partial uint ResumeThread(SafeWaitHandle hThread);
@@ -41,7 +53,7 @@ internal static partial class Interop
         internal const int DUPLICATE_SAME_ACCESS = 2;
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool DuplicateHandle(
             IntPtr hSourceProcessHandle,
             IntPtr hSourceHandle,
@@ -49,7 +61,8 @@ internal static partial class Interop
             out SafeWaitHandle lpTargetHandle,
             uint dwDesiredAccess,
             [MarshalAs(UnmanagedType.Bool)] bool bInheritHandle,
-            uint dwOptions);
+            uint dwOptions
+        );
 
         internal enum ThreadPriority : int
         {
@@ -61,14 +74,14 @@ internal static partial class Interop
             Highest = 2,
             TimeCritical = 15,
 
-            ErrorReturn = 0x7FFFFFFF
+            ErrorReturn = 0x7FFFFFFF,
         }
 
         [LibraryImport(Libraries.Kernel32)]
         internal static partial ThreadPriority GetThreadPriority(SafeWaitHandle hThread);
 
         [LibraryImport(Libraries.Kernel32)]
-        [return:MarshalAs(UnmanagedType.Bool)]
+        [return: MarshalAs(UnmanagedType.Bool)]
         internal static partial bool SetThreadPriority(SafeWaitHandle hThread, int nPriority);
 
         [LibraryImport(Libraries.Kernel32, SetLastError = true)]

@@ -11,18 +11,19 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
     internal class TrueKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
         public TrueKeywordRecommender()
-            : base(SyntaxKind.TrueKeyword, isValidInPreprocessorContext: true)
-        {
-        }
+            : base(SyntaxKind.TrueKeyword, isValidInPreprocessorContext: true) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsAnyExpressionContext ||
-                context.IsPreProcessorExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.TargetToken.IsUnaryOperatorContext();
+            return context.IsAnyExpressionContext
+                || context.IsPreProcessorExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.TargetToken.IsUnaryOperatorContext();
         }
     }
 }

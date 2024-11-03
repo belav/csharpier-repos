@@ -18,9 +18,7 @@ public class BanksController : Controller
     [HttpGet("Bank/[action]/{id}")]
     public ActionResult Get(int id)
     {
-        return _generator.Generate(
-            Url.Action(),
-            Url.RouteUrl(new { }));
+        return _generator.Generate(Url.Action(), Url.RouteUrl(new { }));
     }
 
     [AcceptVerbs("PUT", Route = "Bank")]
@@ -29,9 +27,7 @@ public class BanksController : Controller
     [HttpPatch("Bank/Update")]
     public ActionResult UpdateBank()
     {
-        return _generator.Generate(
-            Url.Action(),
-            Url.RouteUrl(new { }));
+        return _generator.Generate(Url.Action(), Url.RouteUrl(new { }));
     }
 
     [AcceptVerbs("PUT", "POST")]

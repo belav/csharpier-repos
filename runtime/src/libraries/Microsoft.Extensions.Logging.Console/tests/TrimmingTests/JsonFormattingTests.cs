@@ -1,14 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 class Program
 {
@@ -26,9 +26,16 @@ class Program
                 new[]
                 {
                     new KeyValuePair<string, string>("Logging:Console:FormatterName", "json"),
-                    new KeyValuePair<string, string>("Logging:Console:FormatterOptions:TimestampFormat", "dd/MM/yy"),
-                    new KeyValuePair<string, string>("Logging:Console:FormatterOptions:JsonWriterOptions:Indented", "true"),
-                })
+                    new KeyValuePair<string, string>(
+                        "Logging:Console:FormatterOptions:TimestampFormat",
+                        "dd/MM/yy"
+                    ),
+                    new KeyValuePair<string, string>(
+                        "Logging:Console:FormatterOptions:JsonWriterOptions:Indented",
+                        "true"
+                    ),
+                }
+            )
             .Build();
 
         services.AddLogging(logging =>
@@ -53,11 +60,15 @@ class Program
         }
 
         string consoleOutput = consoleWriter.GetOutput();
-        
+
         // ensure the output contains whitespace between the property and the value
-        if (!consoleOutput.Contains("""
-            "Message": "Hello",
-            """))
+        if (
+            !consoleOutput.Contains(
+                """
+                "Message": "Hello",
+                """
+            )
+        )
         {
             return -1;
         }

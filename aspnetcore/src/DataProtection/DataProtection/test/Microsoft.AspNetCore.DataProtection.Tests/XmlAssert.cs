@@ -11,7 +11,8 @@ namespace Microsoft.AspNetCore.DataProtection;
 /// </summary>
 public static class XmlAssert
 {
-    public static readonly IEqualityComparer<XNode> EqualityComparer = new CallbackBasedEqualityComparer<XNode>(Core.AreEqual);
+    public static readonly IEqualityComparer<XNode> EqualityComparer =
+        new CallbackBasedEqualityComparer<XNode>(Core.AreEqual);
 
     /// <summary>
     /// Asserts that a <see cref="string"/> and an <see cref="XElement"/> are semantically equivalent.
@@ -33,17 +34,23 @@ public static class XmlAssert
 
         if (!Core.AreEqual(expected, actual))
         {
-            Assert.True(false,
-                   "Expected element:" + Environment.NewLine
-                   + expected.ToString() + Environment.NewLine
-                   + "Actual element:" + Environment.NewLine
-                   + actual.ToString());
+            Assert.True(
+                false,
+                "Expected element:"
+                    + Environment.NewLine
+                    + expected.ToString()
+                    + Environment.NewLine
+                    + "Actual element:"
+                    + Environment.NewLine
+                    + actual.ToString()
+            );
         }
     }
 
     private static class Core
     {
-        private static readonly IEqualityComparer<XAttribute> AttributeEqualityComparer = new CallbackBasedEqualityComparer<XAttribute>(AreEqual);
+        private static readonly IEqualityComparer<XAttribute> AttributeEqualityComparer =
+            new CallbackBasedEqualityComparer<XAttribute>(AreEqual);
 
         private static bool AreEqual(XElement expected, XElement actual)
         {
@@ -54,7 +61,9 @@ public static class XmlAssert
 
         private static bool AreEqual(IEnumerable<XNode> expected, IEnumerable<XNode> actual)
         {
-            List<XNode> filteredExpected = expected.Where(ShouldIncludeNodeDuringComparison).ToList();
+            List<XNode> filteredExpected = expected
+                .Where(ShouldIncludeNodeDuringComparison)
+                .ToList();
             List<XNode> filteredActual = actual.Where(ShouldIncludeNodeDuringComparison).ToList();
             return filteredExpected.SequenceEqual(filteredActual, EqualityComparer);
         }
@@ -80,7 +89,10 @@ public static class XmlAssert
             return expected.Value == actual.Value;
         }
 
-        private static bool AreEqual(IEnumerable<XAttribute> expected, IEnumerable<XAttribute> actual)
+        private static bool AreEqual(
+            IEnumerable<XAttribute> expected,
+            IEnumerable<XAttribute> actual
+        )
         {
             List<XAttribute> orderedExpected = expected
                 .Where(ShouldIncludeAttributeDuringComparison)
@@ -97,16 +109,14 @@ public static class XmlAssert
 
         private static bool AreEqual(XAttribute expected, XAttribute actual)
         {
-            return expected.Name == actual.Name
-                && expected.Value == actual.Value;
+            return expected.Name == actual.Name && expected.Value == actual.Value;
         }
 
         private static bool ShouldIncludeAttributeDuringComparison(XAttribute attribute)
         {
             // exclude 'xmlns' attributes since they're already considered in the
             // actual element and attribute names
-            return attribute.Name != (XName)"xmlns"
-                && attribute.Name.Namespace != XNamespace.Xmlns;
+            return attribute.Name != (XName)"xmlns" && attribute.Name.Namespace != XNamespace.Xmlns;
         }
 
         private static bool ShouldIncludeNodeDuringComparison(XNode node)
@@ -116,12 +126,21 @@ public static class XmlAssert
                 return false; // not contextually relevant
             }
 
-            if (node is XText /* includes XCData */ || node is XElement)
+            if (
+                node is XText /* includes XCData */
+                || node is XElement
+            )
             {
                 return true; // relevant
             }
 
-            throw new NotSupportedException(string.Format(CultureInfo.InvariantCulture, "Node of type '{0}' is not supported.", node.GetType().Name));
+            throw new NotSupportedException(
+                string.Format(
+                    CultureInfo.InvariantCulture,
+                    "Node of type '{0}' is not supported.",
+                    node.GetType().Name
+                )
+            );
         }
     }
 

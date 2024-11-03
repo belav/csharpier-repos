@@ -1,4 +1,5 @@
 ﻿namespace AutoMapper.UnitTests.Bug;
+
 public class MultiThreadingIssues
 {
     public class Type1
@@ -43,16 +44,15 @@ public class MultiThreadingIssues
     {
         const int threadCount = 13;
 
-        for(int i = 0; i < threadCount; i++)
+        for (int i = 0; i < threadCount; i++)
         {
-            Task.Factory.StartNew(doMapping).ContinueWith(
-                a =>
+            Task.Factory.StartNew(doMapping)
+                .ContinueWith(a =>
                 {
-                    if(Interlocked.Increment(ref _done) == threadCount)
+                    if (Interlocked.Increment(ref _done) == threadCount)
                     {
                         _allDone.Set();
                     }
-
                 });
         }
 
@@ -63,56 +63,52 @@ public class MultiThreadingIssues
     {
         var source = createSource();
 
-        Debug.WriteLine(@"Mapping {0} on thread {1}", source.GetType(), Thread.CurrentThread.ManagedThreadId);
+        Debug.WriteLine(
+            @"Mapping {0} on thread {1}",
+            source.GetType(),
+            Thread.CurrentThread.ManagedThreadId
+        );
 
-        var config = new MapperConfiguration(cfg => cfg.CreateMap(source.GetType(), typeof(DestType)));
+        var config = new MapperConfiguration(cfg =>
+            cfg.CreateMap(source.GetType(), typeof(DestType))
+        );
 
-        DestType t2 = (DestType)config.CreateMapper().Map(source, source.GetType(), typeof(DestType));
+        DestType t2 = (DestType)
+            config.CreateMapper().Map(source, source.GetType(), typeof(DestType));
     }
 
     static readonly Random _random = new Random();
 
     static object createSource()
     {
-
         int n = _random.Next(0, 4);
 
-        if(n == 0)
+        if (n == 0)
         {
             return new Type1
             {
                 Age = 12,
                 FirstName = @"Fred",
                 LastName = @"Smith",
-                MiddleName = @"G"
+                MiddleName = @"G",
             };
         }
-        if(n == 1)
+        if (n == 1)
         {
-            return new Type1Point1()
-            {
-                FirstName = @"Fred",
-            };
-
+            return new Type1Point1() { FirstName = @"Fred" };
         }
-        if(n == 2)
+        if (n == 2)
         {
-            return new Type1Point2()
-            {
-                FirstName = @"Fred",
-                MiddleName = @"G"
-            };
-
+            return new Type1Point2() { FirstName = @"Fred", MiddleName = @"G" };
         }
-        if(n == 3)
+        if (n == 3)
         {
             return new Type1Point3()
             {
                 FirstName = @"Fred",
                 LastName = @"Smith",
-                MiddleName = @"G"
+                MiddleName = @"G",
             };
-
         }
 
         throw new Exception();
@@ -621,7 +617,8 @@ public class ResolveWithGenericMap
         {
             cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
         });
-        var types = new[]{
+        var types = new[]
+        {
             new[] { typeof(SomeEntityA), typeof(SomeDtoA) },
             new[] { typeof(SomeEntityB), typeof(SomeDtoB) },
             new[] { typeof(SomeEntityC), typeof(SomeDtoC) },
@@ -639,12 +636,18 @@ public class ResolveWithGenericMap
             new[] { typeof(SomeEntityO), typeof(SomeDtoO) },
             new[] { typeof(SomeEntityP), typeof(SomeDtoP) },
         };
-        var tasks =
-            types
+        var tasks = types
             .Concat(types.Select(t => t.Reverse().ToArray()))
-            .Select(t=>(SourceType: sourceType.MakeGenericType(t[0]), DestinationType: destinationType.MakeGenericType(t[1])))
+            .Select(t =>
+                (
+                    SourceType: sourceType.MakeGenericType(t[0]),
+                    DestinationType: destinationType.MakeGenericType(t[1])
+                )
+            )
             .ToArray()
-            .Select(s => Task.Factory.StartNew(() => c.ResolveTypeMap(s.SourceType, s.DestinationType)))
+            .Select(s =>
+                Task.Factory.StartNew(() => c.ResolveTypeMap(s.SourceType, s.DestinationType))
+            )
             .ToArray();
         Task.WaitAll(tasks);
     }
@@ -1153,7 +1156,8 @@ public class ResolveGenericTypeMapThreadingIssues
             cfg.CreateMap(sourceType, destinationType).ForMember("Value", o => o.Ignore());
         });
         var mapper = c.CreateMapper();
-        var types = new[]{
+        var types = new[]
+        {
             new[] { typeof(SomeEntityA), typeof(SomeDtoA) },
             new[] { typeof(SomeEntityB), typeof(SomeDtoB) },
             new[] { typeof(SomeEntityC), typeof(SomeDtoC) },
@@ -1171,12 +1175,18 @@ public class ResolveGenericTypeMapThreadingIssues
             new[] { typeof(SomeEntityO), typeof(SomeDtoO) },
             new[] { typeof(SomeEntityP), typeof(SomeDtoP) },
         };
-        var tasks =
-            types
+        var tasks = types
             .Concat(types.Select(t => t.Reverse().ToArray()))
-            .Select(t=>(SourceType: sourceType.MakeGenericType(t[0]), DestinationType: destinationType.MakeGenericType(t[1])))
+            .Select(t =>
+                (
+                    SourceType: sourceType.MakeGenericType(t[0]),
+                    DestinationType: destinationType.MakeGenericType(t[1])
+                )
+            )
             .ToArray()
-            .Select(s => Task.Factory.StartNew(() => mapper.Map(null, s.SourceType, s.DestinationType)))
+            .Select(s =>
+                Task.Factory.StartNew(() => mapper.Map(null, s.SourceType, s.DestinationType))
+            )
             .ToArray();
         Task.WaitAll(tasks);
     }

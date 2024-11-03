@@ -15,20 +15,20 @@ public class UrlHelperBaseTest
     public static TheoryData GeneratePathFromRoute_HandlesLeadingAndTrailingSlashesData =>
         new TheoryData<string, string, string>
         {
-                {  null, "", "/" },
-                {  null, "/", "/"  },
-                {  null, "Hello", "/Hello" },
-                {  null, "/Hello", "/Hello" },
-                { "/", "", "/" },
-                { "/", "hello", "/hello" },
-                { "/", "/hello", "/hello" },
-                { "/hello", "", "/hello" },
-                { "/hello/", "", "/hello/" },
-                { "/hello", "/", "/hello/" },
-                { "/hello/", "world", "/hello/world" },
-                { "/hello/", "/world", "/hello/world" },
-                { "/hello/", "/world 123", "/hello/world 123" },
-                { "/hello/", "/world%20123", "/hello/world%20123" },
+            { null, "", "/" },
+            { null, "/", "/" },
+            { null, "Hello", "/Hello" },
+            { null, "/Hello", "/Hello" },
+            { "/", "", "/" },
+            { "/", "hello", "/hello" },
+            { "/", "/hello", "/hello" },
+            { "/hello", "", "/hello" },
+            { "/hello/", "", "/hello/" },
+            { "/hello", "/", "/hello/" },
+            { "/hello/", "world", "/hello/world" },
+            { "/hello/", "/world", "/hello/world" },
+            { "/hello/", "/world 123", "/hello/world 123" },
+            { "/hello/", "/world%20123", "/hello/world%20123" },
         };
 
     [Theory]
@@ -36,7 +36,8 @@ public class UrlHelperBaseTest
     public void AppendPathAndFragment_HandlesLeadingAndTrailingSlashes(
         string appBase,
         string virtualPath,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var services = CreateServices();
@@ -44,7 +45,12 @@ public class UrlHelperBaseTest
         var builder = new StringBuilder();
 
         // Act
-        UrlHelperBase.AppendPathAndFragment(builder, httpContext.Request.PathBase, virtualPath, string.Empty);
+        UrlHelperBase.AppendPathAndFragment(
+            builder,
+            httpContext.Request.PathBase,
+            virtualPath,
+            string.Empty
+        );
 
         // Assert
         Assert.Equal(expected, builder.ToString());
@@ -55,7 +61,8 @@ public class UrlHelperBaseTest
     public void AppendPathAndFragment_AppendsFragments(
         string appBase,
         string virtualPath,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var fragmentValue = "fragment-value";
@@ -65,7 +72,12 @@ public class UrlHelperBaseTest
         var builder = new StringBuilder();
 
         // Act
-        UrlHelperBase.AppendPathAndFragment(builder, httpContext.Request.PathBase, virtualPath, fragmentValue);
+        UrlHelperBase.AppendPathAndFragment(
+            builder,
+            httpContext.Request.PathBase,
+            virtualPath,
+            fragmentValue
+        );
 
         // Assert
         Assert.Equal(expected, builder.ToString());
@@ -77,14 +89,22 @@ public class UrlHelperBaseTest
     [InlineData(null, null, null, "Hello", null, "/Hello")]
     [InlineData("/", null, null, "", null, "/")]
     [InlineData("/hello/", null, null, "/world", null, "/hello/world")]
-    [InlineData("/hello/", "https", "myhost", "/world", "fragment-value", "https://myhost/hello/world#fragment-value")]
+    [InlineData(
+        "/hello/",
+        "https",
+        "myhost",
+        "/world",
+        "fragment-value",
+        "https://myhost/hello/world#fragment-value"
+    )]
     public void GenerateUrl_FastAndSlowPathsReturnsExpected(
         string appBase,
         string protocol,
         string host,
         string virtualPath,
         string fragment,
-        string expected)
+        string expected
+    )
     {
         // Arrange
         var services = CreateServices();
@@ -105,17 +125,17 @@ public class UrlHelperBaseTest
         services.AddOptions();
         services.AddLogging();
         services.AddRouting();
-        services
-            .AddSingleton<UrlEncoder>(UrlEncoder.Default);
+        services.AddSingleton<UrlEncoder>(UrlEncoder.Default);
 
         return services.BuildServiceProvider();
     }
 
     private static HttpContext CreateHttpContext(
-       IServiceProvider services,
-       string appRoot,
-       string host,
-       string protocol)
+        IServiceProvider services,
+        string appRoot,
+        string host,
+        string protocol
+    )
     {
         appRoot = string.IsNullOrEmpty(appRoot) ? string.Empty : appRoot;
         host = string.IsNullOrEmpty(host) ? "localhost" : host;
@@ -135,10 +155,8 @@ public class UrlHelperBaseTest
 
     private class TestUrlHelper : UrlHelperBase
     {
-        public TestUrlHelper(ActionContext actionContext) :
-            base(actionContext)
-        {
-        }
+        public TestUrlHelper(ActionContext actionContext)
+            : base(actionContext) { }
 
         public override string Action(UrlActionContext actionContext)
         {
@@ -154,13 +172,10 @@ public class UrlHelperBaseTest
             string protocol,
             string host,
             string virtualPath,
-            string fragment)
+            string fragment
+        )
         {
-            return base.GenerateUrl(
-                protocol,
-                host,
-                virtualPath,
-                fragment);
+            return base.GenerateUrl(protocol, host, virtualPath, fragment);
         }
     }
 }

@@ -3,7 +3,7 @@
 //
 //                       National Institute Of Standards and Technology
 //                                     DTS Version 1.0
-//         
+//
 //                                      Comment Interface
 //
 // Written by: Carmelo Montanez
@@ -23,31 +23,32 @@ namespace nist_dom.fundamental
     /// Summary description for Comment.
     /// </summary>
     [TestFixture]
-    public class CommentTest//,ITest
+    public class CommentTest //,ITest
     {
         public static int i = 1;
-/*
-        public testResults[] RunTests()
-        {
-            testResults[] tests = new testResults[] {core0001CO()};
-  
-            return tests;
-        }
-*/
+
+        /*
+                public testResults[] RunTests()
+                {
+                    testResults[] tests = new testResults[] {core0001CO()};
+          
+                    return tests;
+                }
+        */
         //------------------------ test case core-0001CO ------------------------
         //
-        // Testing feature - A comment is all the characters between the starting 
-        //                   "<!--" and ending "-->" strings. 
+        // Testing feature - A comment is all the characters between the starting
+        //                   "<!--" and ending "-->" strings.
         //
-        // Testing approach - Retrieve the third child in the DOM document.  
-        //                    This node is a comment node and its value is the 
+        // Testing approach - Retrieve the third child in the DOM document.
+        //                    This node is a comment node and its value is the
         //                    content of the node.
         //
         // Semantic Requirements: 1
         //
         //----------------------------------------------------------------------------
 
-	[Test]
+        [Test]
         public void core0001CO()
         {
             string computedValue = "";
@@ -56,23 +57,24 @@ namespace nist_dom.fundamental
 
             testResults results = new testResults("Core0001CO");
 
-            results.description = "A comment is all the characters between the " + "start comment and end comment strings.";
+            results.description =
+                "A comment is all the characters between the "
+                + "start comment and end comment strings.";
             //
             // Retrieve the targeted data and access its nodeValue.
             //
-            testNode = util.getDOMDocument().ChildNodes.Item(2); 
-            computedValue = testNode.Value;//nodeValue;
+            testNode = util.getDOMDocument().ChildNodes.Item(2);
+            computedValue = testNode.Value; //nodeValue;
             //
-            // Write out results 
+            // Write out results
             //
 
             results.expected = expectedValue;
             results.actual = computedValue;
 
-            Assert.AreEqual (results.expected, results.actual);
+            Assert.AreEqual(results.expected, results.actual);
         }
 
         //------------------------ End test case core-0001CO --------------------------
     }
-
 }

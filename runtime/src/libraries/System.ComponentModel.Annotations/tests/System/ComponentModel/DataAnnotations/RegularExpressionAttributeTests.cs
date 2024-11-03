@@ -12,13 +12,31 @@ namespace System.ComponentModel.DataAnnotations.Tests
         protected override IEnumerable<TestCase> ValidValues()
         {
             yield return new TestCase(new RegularExpressionAttribute("SomePattern"), null);
-            yield return new TestCase(new RegularExpressionAttribute("SomePattern") { MatchTimeoutInMilliseconds = -1 }, string.Empty);
-            yield return new TestCase(new RegularExpressionAttribute("defghi") { MatchTimeoutInMilliseconds = 5000 }, "defghi");
-            yield return new TestCase(new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = 10000 }, "bcdefghijklmnopqrstuvwxyz.abcdefghijklmnopqrstuvwxy");
+            yield return new TestCase(
+                new RegularExpressionAttribute("SomePattern") { MatchTimeoutInMilliseconds = -1 },
+                string.Empty
+            );
+            yield return new TestCase(
+                new RegularExpressionAttribute("defghi") { MatchTimeoutInMilliseconds = 5000 },
+                "defghi"
+            );
+            yield return new TestCase(
+                new RegularExpressionAttribute("[^a]+\\.[^z]+")
+                {
+                    MatchTimeoutInMilliseconds = 10000,
+                },
+                "bcdefghijklmnopqrstuvwxyz.abcdefghijklmnopqrstuvwxy"
+            );
 
-            yield return new TestCase(new RegularExpressionAttribute("abc"), new ClassWithValidToString());
+            yield return new TestCase(
+                new RegularExpressionAttribute("abc"),
+                new ClassWithValidToString()
+            );
             yield return new TestCase(new RegularExpressionAttribute("1"), 1);
-            yield return new TestCase(new RegularExpressionAttribute("abc"), new IFormattableImplementor());
+            yield return new TestCase(
+                new RegularExpressionAttribute("abc"),
+                new IFormattableImplementor()
+            );
         }
 
         protected override IEnumerable<TestCase> InvalidValues()
@@ -27,14 +45,44 @@ namespace System.ComponentModel.DataAnnotations.Tests
             yield return new TestCase(new RegularExpressionAttribute("defghi"), "defghijkl");
             yield return new TestCase(new RegularExpressionAttribute("defghi"), "abcdefghi");
             yield return new TestCase(new RegularExpressionAttribute("defghi"), "abcdefghijkl");
-            yield return new TestCase(new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = 10000 } , "aaaaa");
-            yield return new TestCase(new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = 10000 }, "zzzzz");
-            yield return new TestCase(new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = 10000 }, "b.z");
-            yield return new TestCase(new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = 10000 }, "a.y");
+            yield return new TestCase(
+                new RegularExpressionAttribute("[^a]+\\.[^z]+")
+                {
+                    MatchTimeoutInMilliseconds = 10000,
+                },
+                "aaaaa"
+            );
+            yield return new TestCase(
+                new RegularExpressionAttribute("[^a]+\\.[^z]+")
+                {
+                    MatchTimeoutInMilliseconds = 10000,
+                },
+                "zzzzz"
+            );
+            yield return new TestCase(
+                new RegularExpressionAttribute("[^a]+\\.[^z]+")
+                {
+                    MatchTimeoutInMilliseconds = 10000,
+                },
+                "b.z"
+            );
+            yield return new TestCase(
+                new RegularExpressionAttribute("[^a]+\\.[^z]+")
+                {
+                    MatchTimeoutInMilliseconds = 10000,
+                },
+                "a.y"
+            );
 
-            yield return new TestCase(new RegularExpressionAttribute("def"), new ClassWithValidToString());
+            yield return new TestCase(
+                new RegularExpressionAttribute("def"),
+                new ClassWithValidToString()
+            );
             yield return new TestCase(new RegularExpressionAttribute("2"), 1);
-            yield return new TestCase(new RegularExpressionAttribute("def"), new IFormattableImplementor());
+            yield return new TestCase(
+                new RegularExpressionAttribute("def"),
+                new IFormattableImplementor()
+            );
         }
 
         [Theory]
@@ -62,30 +110,51 @@ namespace System.ComponentModel.DataAnnotations.Tests
         public static void Validate_InvalidPattern_ThrowsInvalidOperationException(string pattern)
         {
             var attribute = new RegularExpressionAttribute(pattern);
-            Assert.Throws<InvalidOperationException>(() => attribute.Validate("Any", new ValidationContext(new object())));
+            Assert.Throws<InvalidOperationException>(
+                () => attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         [Theory]
         [InlineData(0)]
         [InlineData(-2)]
-        public static void Validate_InvalidMatchTimeoutInMilliseconds_ThrowsArgumentOutOfRangeException(int timeout)
+        public static void Validate_InvalidMatchTimeoutInMilliseconds_ThrowsArgumentOutOfRangeException(
+            int timeout
+        )
         {
-            RegularExpressionAttribute attribute = new RegularExpressionAttribute("[^a]+\\.[^z]+") { MatchTimeoutInMilliseconds = timeout };
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => attribute.Validate("a", new ValidationContext(new object())));
+            RegularExpressionAttribute attribute = new RegularExpressionAttribute("[^a]+\\.[^z]+")
+            {
+                MatchTimeoutInMilliseconds = timeout,
+            };
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => attribute.Validate("a", new ValidationContext(new object()))
+            );
         }
 
         [Fact]
         public static void Validate_MatchingTimesOut_ThrowsRegexMatchTimeoutException()
         {
-            RegularExpressionAttribute attribute = new RegularExpressionAttribute("(a[ab]+)+$") { MatchTimeoutInMilliseconds = 1 };
-            Assert.Throws<RegexMatchTimeoutException>(() => attribute.Validate("aaaaaaaaaaaaaaaaaaaaaaaaaaaa>", new ValidationContext(new object())));
+            RegularExpressionAttribute attribute = new RegularExpressionAttribute("(a[ab]+)+$")
+            {
+                MatchTimeoutInMilliseconds = 1,
+            };
+            Assert.Throws<RegexMatchTimeoutException>(
+                () =>
+                    attribute.Validate(
+                        "aaaaaaaaaaaaaaaaaaaaaaaaaaaa>",
+                        new ValidationContext(new object())
+                    )
+            );
         }
 
         [Fact]
         public static void Validate_InvalidPattern_ThrowsArgumentException()
         {
             RegularExpressionAttribute attribute = new RegularExpressionAttribute("foo(?<1bar)");
-            Assert.ThrowsAny<ArgumentException>(() => attribute.Validate("Any", new ValidationContext(new object())));
+            Assert.ThrowsAny<ArgumentException>(
+                () => attribute.Validate("Any", new ValidationContext(new object()))
+            );
         }
 
         public class ClassWithValidToString

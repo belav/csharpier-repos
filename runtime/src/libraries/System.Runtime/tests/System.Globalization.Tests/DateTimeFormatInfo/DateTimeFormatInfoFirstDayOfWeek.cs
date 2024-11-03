@@ -10,9 +10,24 @@ namespace System.Globalization.Tests
     {
         public static IEnumerable<object[]> FirstDayOfWeek_Get_TestData()
         {
-            yield return new object[] { DateTimeFormatInfo.InvariantInfo, DayOfWeek.Sunday, "invariant" };
-            yield return new object[] { new CultureInfo("en-US", false).DateTimeFormat, DayOfWeek.Sunday, "en-US" };
-            yield return new object[] { new CultureInfo("fr-FR", false).DateTimeFormat, DayOfWeek.Monday, "fr-FR" };
+            yield return new object[]
+            {
+                DateTimeFormatInfo.InvariantInfo,
+                DayOfWeek.Sunday,
+                "invariant",
+            };
+            yield return new object[]
+            {
+                new CultureInfo("en-US", false).DateTimeFormat,
+                DayOfWeek.Sunday,
+                "en-US",
+            };
+            yield return new object[]
+            {
+                new CultureInfo("fr-FR", false).DateTimeFormat,
+                DayOfWeek.Monday,
+                "fr-FR",
+            };
         }
 
         public static IEnumerable<object[]> FirstDayOfWeek_Get_TestData_HybridGlobalization()
@@ -199,7 +214,7 @@ namespace System.Globalization.Tests
             yield return new object[] { "tr-TR", DayOfWeek.Monday };
             yield return new object[] { "uk-UA", DayOfWeek.Monday };
             yield return new object[] { "vi-VN", DayOfWeek.Monday };
-            yield return new object[] { "zh-CN", DayOfWeek.Monday  };
+            yield return new object[] { "zh-CN", DayOfWeek.Monday };
             yield return new object[] { "zh-Hans-HK", DayOfWeek.Sunday };
             yield return new object[] { "zh-SG", DayOfWeek.Sunday };
             yield return new object[] { "zh-HK", DayOfWeek.Sunday };
@@ -208,12 +223,22 @@ namespace System.Globalization.Tests
 
         [Theory]
         [MemberData(nameof(FirstDayOfWeek_Get_TestData))]
-        public void FirstDayOfWeek(DateTimeFormatInfo format, DayOfWeek expected, string cultureName)
+        public void FirstDayOfWeek(
+            DateTimeFormatInfo format,
+            DayOfWeek expected,
+            string cultureName
+        )
         {
-            Assert.True(expected == format.FirstDayOfWeek, $"Failed for culture: {cultureName}. Expected: {expected}, Actual: {format.FirstDayOfWeek}");
+            Assert.True(
+                expected == format.FirstDayOfWeek,
+                $"Failed for culture: {cultureName}. Expected: {expected}, Actual: {format.FirstDayOfWeek}"
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsHybridGlobalizationOnBrowser))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsHybridGlobalizationOnBrowser)
+        )]
         [MemberData(nameof(FirstDayOfWeek_Get_TestData_HybridGlobalization))]
         public void FirstDayOfWeekHybridGlobalization(string culture, DayOfWeek expected)
         {
@@ -242,13 +267,18 @@ namespace System.Globalization.Tests
         public void FirstDayOfWeek_SetInvalid_ThrowsArgumentOutOfRangeException(DayOfWeek value)
         {
             var format = new DateTimeFormatInfo();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("value", () => format.FirstDayOfWeek = value);
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "value",
+                () => format.FirstDayOfWeek = value
+            );
         }
 
         [Fact]
         public void FirstDayOfWeek_SetReadOnly_ThrowsInvalidOperationException()
         {
-            Assert.Throws<InvalidOperationException>(() => DateTimeFormatInfo.InvariantInfo.FirstDayOfWeek = DayOfWeek.Wednesday);
+            Assert.Throws<InvalidOperationException>(
+                () => DateTimeFormatInfo.InvariantInfo.FirstDayOfWeek = DayOfWeek.Wednesday
+            );
         }
     }
 }

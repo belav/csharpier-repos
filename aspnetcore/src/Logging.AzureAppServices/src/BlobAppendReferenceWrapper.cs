@@ -34,7 +34,7 @@ internal sealed class BlobAppendReferenceWrapper : ICloudAppendBlob
         {
             var message = new HttpRequestMessage(HttpMethod.Put, _appendUri)
             {
-                Content = new ByteArrayContent(data.Array, data.Offset, data.Count)
+                Content = new ByteArrayContent(data.Array, data.Offset, data.Count),
             };
             AddCommonHeaders(message);
 
@@ -50,10 +50,7 @@ internal sealed class BlobAppendReferenceWrapper : ICloudAppendBlob
             {
                 // Set Content-Length to 0 to create "Append Blob"
                 Content = new ByteArrayContent(Array.Empty<byte>()),
-                Headers =
-                {
-                    { "If-None-Match", "*" }
-                }
+                Headers = { { "If-None-Match", "*" } },
             };
 
             AddCommonHeaders(message);
@@ -61,8 +58,10 @@ internal sealed class BlobAppendReferenceWrapper : ICloudAppendBlob
             response = await _client.SendAsync(message, cancellationToken).ConfigureAwait(false);
 
             // If result is 2** or 412 try to append again
-            if (response.IsSuccessStatusCode ||
-                response.StatusCode == HttpStatusCode.PreconditionFailed)
+            if (
+                response.IsSuccessStatusCode
+                || response.StatusCode == HttpStatusCode.PreconditionFailed
+            )
             {
                 // Retry sending data after blob creation
                 response = await AppendDataAsync().ConfigureAwait(false);

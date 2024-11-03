@@ -11,16 +11,16 @@ public class Program
             .ConfigureWebHost(webHostBuilder =>
             {
                 webHostBuilder
-                .ConfigureLogging(factory =>
-                {
-                    factory.AddConsole();
-                    factory.AddFilter("Console", level => level >= LogLevel.Information);
-                    factory.AddDebug();
-                })
-                .UseKestrel()
-                .UseContentRoot(Directory.GetCurrentDirectory())
-                .UseIISIntegration()
-                .UseStartup<Startup>();
+                    .ConfigureLogging(factory =>
+                    {
+                        factory.AddConsole();
+                        factory.AddFilter("Console", level => level >= LogLevel.Information);
+                        factory.AddDebug();
+                    })
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
             })
             .Build()
             .RunAsync();

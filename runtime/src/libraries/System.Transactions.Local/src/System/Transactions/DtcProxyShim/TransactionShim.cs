@@ -15,31 +15,44 @@ internal sealed class TransactionShim
 
     internal ITransaction Transaction { get; set; }
 
-    internal TransactionShim(DtcProxyShimFactory shimFactory, TransactionNotifyShim notifyShim, ITransaction transaction)
+    internal TransactionShim(
+        DtcProxyShimFactory shimFactory,
+        TransactionNotifyShim notifyShim,
+        ITransaction transaction
+    )
     {
         _shimFactory = shimFactory;
         _transactionNotifyShim = notifyShim;
         Transaction = transaction;
     }
 
-    public void Commit()
-        => Transaction.Commit(false, OletxXacttc.XACTTC_ASYNC, 0);
+    public void Commit() => Transaction.Commit(false, OletxXacttc.XACTTC_ASYNC, 0);
 
-    public void Abort()
-        => Transaction.Abort(IntPtr.Zero, false, false);
+    public void Abort() => Transaction.Abort(IntPtr.Zero, false, false);
 
-    public void CreateVoter(OletxPhase1VolatileEnlistmentContainer managedIdentifier, out VoterBallotShim voterBallotShim)
+    public void CreateVoter(
+        OletxPhase1VolatileEnlistmentContainer managedIdentifier,
+        out VoterBallotShim voterBallotShim
+    )
     {
         var voterNotifyShim = new VoterNotifyShim(_shimFactory, managedIdentifier);
         var voterShim = new VoterBallotShim(voterNotifyShim);
-        _shimFactory.VoterFactory.Create(Transaction, voterNotifyShim, out ITransactionVoterBallotAsync2 voterBallot);
+        _shimFactory.VoterFactory.Create(
+            Transaction,
+            voterNotifyShim,
+            out ITransactionVoterBallotAsync2 voterBallot
+        );
         voterShim.VoterBallotAsync2 = voterBallot;
         voterBallotShim = voterShim;
     }
 
     public void Export(byte[] whereabouts, out byte[] cookieBuffer)
     {
-        _shimFactory.ExportFactory.Create((uint)whereabouts.Length, whereabouts, out ITransactionExport export);
+        _shimFactory.ExportFactory.Create(
+            (uint)whereabouts.Length,
+            whereabouts,
+            out ITransactionExport export
+        );
 
         uint cookieSizeULong = 0;
 
@@ -49,7 +62,9 @@ internal sealed class TransactionShim
         var buffer = new byte[cookieSize];
         uint bytesUsed = 0;
 
-        OletxHelper.Retry(() => export.GetTransactionCookie(Transaction, cookieSize, buffer, out bytesUsed));
+        OletxHelper.Retry(
+            () => export.GetTransactionCookie(Transaction, cookieSize, buffer, out bytesUsed)
+        );
 
         cookieBuffer = buffer;
     }
@@ -73,7 +88,11 @@ internal sealed class TransactionShim
             var propagationTokenSize = (int)propagationTokenSizeULong;
             var propagationToken = new byte[propagationTokenSize];
 
-            transmitter.MarshalPropagationToken((uint)propagationTokenSize, propagationToken, out uint propagationTokenSizeUsed);
+            transmitter.MarshalPropagationToken(
+                (uint)propagationTokenSize,
+                propagationToken,
+                out uint propagationTokenSizeUsed
+            );
 
             return propagationToken;
         }
@@ -83,7 +102,10 @@ internal sealed class TransactionShim
         }
     }
 
-    public void Phase0Enlist(object managedIdentifier, out Phase0EnlistmentShim phase0EnlistmentShim)
+    public void Phase0Enlist(
+        object managedIdentifier,
+        out Phase0EnlistmentShim phase0EnlistmentShim
+    )
     {
         var phase0Factory = (ITransactionPhase0Factory)Transaction;
         var phase0NotifyShim = new Phase0NotifyShim(_shimFactory, managedIdentifier);

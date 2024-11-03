@@ -4,11 +4,11 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Text;
 using System.Diagnostics;
 using System.Globalization;
-using System.Workflow.ComponentModel;
 using System.Runtime.Serialization;
+using System.Text;
+using System.Workflow.ComponentModel;
 
 namespace System.Workflow.Runtime
 {
@@ -67,7 +67,7 @@ namespace System.Workflow.Runtime
         {
             this.deliveredMessages = new Queue(copyFromState.Messages);
 
-            // don't copy Subscribers since this gets fixed 
+            // don't copy Subscribers since this gets fixed
             // up at access time based on these tracking context ints
             this.asynchronousListeners.AddRange(copyFromState.AsynchronousListeners.ToArray());
             this.synchronousListeners.AddRange(copyFromState.SynchronousListeners.ToArray());
@@ -77,5 +77,4 @@ namespace System.Workflow.Runtime
             this.dirty = false;
         }
     }
-
 }

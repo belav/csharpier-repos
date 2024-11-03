@@ -4,7 +4,7 @@
 // Method:  Simulate a bouncing ball based on the laws of physics.
 //          The general principles:
 //            The velocity of a falling ball is : (\u00BD) m v^2 = m g d \u00E8 v = sqrt(2 * g * d)
-//            The non-ellastic collision will shoot the ball in 
+//            The non-ellastic collision will shoot the ball in
 //              the opposite direction at       : v2 = e v = e * sqrt(2 * g * d)
 //              Where e is the coeficient of restitution
 //            The height the ball will travel up: d2 = (1/2) g t^2 = v2^2 / (2 * g)
@@ -60,10 +60,7 @@ class Ball
 
     public double Height
     {
-        get
-        {
-            return D;
-        }
+        get { return D; }
     }
 
     public double DistanceTraveled()

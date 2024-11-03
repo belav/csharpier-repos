@@ -4,54 +4,57 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Configuration {
+namespace System.Configuration
+{
     using System;
-    using System.Xml;
-    using System.Configuration;
-    using System.Collections.Specialized;
     using System.Collections;
+    using System.Collections.Specialized;
+    using System.Configuration;
     using System.IO;
     using System.Text;
+    using System.Xml;
 
     // class ConnectionStringsSection
 
     [ConfigurationCollection(typeof(ConnectionStringSettings))]
-    public sealed class ConnectionStringSettingsCollection : ConfigurationElementCollection {
+    public sealed class ConnectionStringSettingsCollection : ConfigurationElementCollection
+    {
         private static ConfigurationPropertyCollection _properties;
 
-        static ConnectionStringSettingsCollection() {
+        static ConnectionStringSettingsCollection()
+        {
             // Property initialization
             _properties = new ConfigurationPropertyCollection();
         }
 
-        protected internal override ConfigurationPropertyCollection Properties {
-            get {
-                return _properties;
-            }
+        protected internal override ConfigurationPropertyCollection Properties
+        {
+            get { return _properties; }
         }
 
         public ConnectionStringSettingsCollection()
-            : base(StringComparer.OrdinalIgnoreCase) {
-        }
-        public ConnectionStringSettings this[int index] {
-            get {
-                return (ConnectionStringSettings)BaseGet(index);
-            }
-            set {
-                if (BaseGet(index) != null) {
+            : base(StringComparer.OrdinalIgnoreCase) { }
+
+        public ConnectionStringSettings this[int index]
+        {
+            get { return (ConnectionStringSettings)BaseGet(index); }
+            set
+            {
+                if (BaseGet(index) != null)
+                {
                     BaseRemoveAt(index);
                 }
                 BaseAdd(index, value);
             }
         }
 
-        new public ConnectionStringSettings this[string name] {
-            get {
-                return (ConnectionStringSettings)BaseGet(name);
-            }
+        public new ConnectionStringSettings this[string name]
+        {
+            get { return (ConnectionStringSettings)BaseGet(name); }
         }
 
-        public int IndexOf(ConnectionStringSettings settings) {
+        public int IndexOf(ConnectionStringSettings settings)
+        {
             return BaseIndexOf(settings);
         }
 
@@ -59,42 +62,53 @@ namespace System.Configuration {
         // basic map and partially like a add remove clear collection
         // Overriding these methods allows for the specific behaviors to be
         // patterened
-        protected override void BaseAdd(int index, ConfigurationElement element) {
-            if (index == -1) {
+        protected override void BaseAdd(int index, ConfigurationElement element)
+        {
+            if (index == -1)
+            {
                 BaseAdd(element, false);
             }
-            else {
+            else
+            {
                 base.BaseAdd(index, element);
             }
         }
-        
-        public void Add(ConnectionStringSettings settings) {
+
+        public void Add(ConnectionStringSettings settings)
+        {
             BaseAdd(settings);
         }
-        
-        public void Remove(ConnectionStringSettings settings) {
-            if (BaseIndexOf(settings) >= 0) {
+
+        public void Remove(ConnectionStringSettings settings)
+        {
+            if (BaseIndexOf(settings) >= 0)
+            {
                 BaseRemove(settings.Key);
             }
         }
 
-        public void RemoveAt(int index) {
+        public void RemoveAt(int index)
+        {
             BaseRemoveAt(index);
         }
 
-        public void Remove(string name) {
+        public void Remove(string name)
+        {
             BaseRemove(name);
         }
 
-        protected override ConfigurationElement CreateNewElement() {
+        protected override ConfigurationElement CreateNewElement()
+        {
             return new ConnectionStringSettings();
         }
 
-        protected override Object GetElementKey(ConfigurationElement element) {
+        protected override Object GetElementKey(ConfigurationElement element)
+        {
             return ((ConnectionStringSettings)element).Key;
         }
-        
-        public void Clear() {
+
+        public void Clear()
+        {
             BaseClear();
         }
     }

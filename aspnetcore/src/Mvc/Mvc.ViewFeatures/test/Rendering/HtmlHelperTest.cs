@@ -12,32 +12,20 @@ public class HtmlHelperTest
         get
         {
             return new TheoryData<object, KeyValuePair<string, object>>
+            {
                 {
-                    {
-                        new
-                        {
-                            selected = true,
-                            SeLeCtEd = false
-                        },
-                        new KeyValuePair<string, object>("selected", false)
-                    },
-                    {
-                        new
-                        {
-                            SeLeCtEd = false,
-                            selected = true
-                        },
-                        new KeyValuePair<string, object>("SeLeCtEd", true)
-                    },
-                    {
-                        new
-                        {
-                            SelECTeD = false,
-                            SeLECTED = true
-                        },
-                        new KeyValuePair<string, object>("SelECTeD", true)
-                    }
-                };
+                    new { selected = true, SeLeCtEd = false },
+                    new KeyValuePair<string, object>("selected", false)
+                },
+                {
+                    new { SeLeCtEd = false, selected = true },
+                    new KeyValuePair<string, object>("SeLeCtEd", true)
+                },
+                {
+                    new { SelECTeD = false, SeLECTED = true },
+                    new KeyValuePair<string, object>("SelECTeD", true)
+                },
+            };
         }
     }
 
@@ -47,15 +35,15 @@ public class HtmlHelperTest
         get
         {
             var data = new TheoryData<object, string>
-                {
-                    { null, string.Empty },
-                    // Dynamic implementation calls the string overload when possible.
-                    { string.Empty, string.Empty },
-                    { "<\">", "HtmlEncode[[<\">]]" },
-                    { "<br />", "HtmlEncode[[<br />]]" },
-                    { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
-                    { new ObjectWithToStringOverride(), "HtmlEncode[[<b>boldFromObject</b>]]" },
-                };
+            {
+                { null, string.Empty },
+                // Dynamic implementation calls the string overload when possible.
+                { string.Empty, string.Empty },
+                { "<\">", "HtmlEncode[[<\">]]" },
+                { "<br />", "HtmlEncode[[<br />]]" },
+                { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
+                { new ObjectWithToStringOverride(), "HtmlEncode[[<b>boldFromObject</b>]]" },
+            };
 
             return data;
         }
@@ -67,14 +55,14 @@ public class HtmlHelperTest
         get
         {
             var data = new TheoryData<object, string>
-                {
-                    { null, string.Empty },
-                    { string.Empty, string.Empty },
-                    { "<\">", "HtmlEncode[[<\">]]" },
-                    { "<br />", "HtmlEncode[[<br />]]" },
-                    { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
-                    { new ObjectWithToStringOverride(), "HtmlEncode[[<b>boldFromObject</b>]]" },
-                };
+            {
+                { null, string.Empty },
+                { string.Empty, string.Empty },
+                { "<\">", "HtmlEncode[[<\">]]" },
+                { "<br />", "HtmlEncode[[<br />]]" },
+                { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
+                { new ObjectWithToStringOverride(), "HtmlEncode[[<b>boldFromObject</b>]]" },
+            };
 
             return data;
         }
@@ -86,14 +74,14 @@ public class HtmlHelperTest
         get
         {
             return new TheoryData<string, string>
-                {
-                    { null, string.Empty },
-                    // String overload does not encode the empty string.
-                    { string.Empty, string.Empty },
-                    { "<\">", "HtmlEncode[[<\">]]" },
-                    { "<br />", "HtmlEncode[[<br />]]" },
-                    { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
-                };
+            {
+                { null, string.Empty },
+                // String overload does not encode the empty string.
+                { string.Empty, string.Empty },
+                { "<\">", "HtmlEncode[[<\">]]" },
+                { "<br />", "HtmlEncode[[<br />]]" },
+                { "<b>bold</b>", "HtmlEncode[[<b>bold</b>]]" },
+            };
         }
     }
 
@@ -103,9 +91,9 @@ public class HtmlHelperTest
         get
         {
             var data = new TheoryData<object, string>
-                {
-                    { new ObjectWithToStringOverride(), "<b>boldFromObject</b>" },
-                };
+            {
+                { new ObjectWithToStringOverride(), "<b>boldFromObject</b>" },
+            };
 
             foreach (var item in RawStringTestData)
             {
@@ -122,13 +110,13 @@ public class HtmlHelperTest
         get
         {
             return new TheoryData<string, string>
-                {
-                    { null, string.Empty },
-                    { string.Empty, string.Empty },
-                    { "<\">", "<\">" },
-                    { "<br />", "<br />" },
-                    { "<b>bold</b>", "<b>bold</b>" },
-                };
+            {
+                { null, string.Empty },
+                { string.Empty, string.Empty },
+                { "<\">", "<\">" },
+                { "<br />", "<br />" },
+                { "<b>bold</b>", "<b>bold</b>" },
+            };
         }
     }
 
@@ -136,7 +124,8 @@ public class HtmlHelperTest
     [MemberData(nameof(IgnoreCaseTestData))]
     public void AnonymousObjectToHtmlAttributes_IgnoresPropertyCase(
         object htmlAttributeObject,
-        KeyValuePair<string, object> expectedEntry)
+        KeyValuePair<string, object> expectedEntry
+    )
     {
         // Act
         var result = HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributeObject);
@@ -166,7 +155,10 @@ public class HtmlHelperTest
 
     [Theory]
     [MemberData(nameof(EncodeDynamicTestData))]
-    public void EncodeDynamic_ReturnsExpectedString_WithBaseHelper(object value, string expectedString)
+    public void EncodeDynamic_ReturnsExpectedString_WithBaseHelper(
+        object value,
+        string expectedString
+    )
     {
         // Arrange
         // Important to preserve these particular variable types. Otherwise may end up testing different runtime
@@ -288,8 +280,7 @@ public class HtmlHelperTest
     public void Contextualize_WorksWithCovariantViewDataDictionary()
     {
         // Arrange
-        var helperToContextualize = DefaultTemplatesUtilities
-            .GetHtmlHelper<BaseModel>(model: null);
+        var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
         var viewContext = DefaultTemplatesUtilities
             .GetHtmlHelper<DerivedModel>(model: null)
@@ -299,8 +290,7 @@ public class HtmlHelperTest
         helperToContextualize.Contextualize(viewContext);
 
         // Assert
-        Assert.IsType<ViewDataDictionary<BaseModel>>(
-            helperToContextualize.ViewData);
+        Assert.IsType<ViewDataDictionary<BaseModel>>(helperToContextualize.ViewData);
 
         Assert.Same(helperToContextualize.ViewContext, viewContext);
     }
@@ -309,19 +299,22 @@ public class HtmlHelperTest
     public void Contextualize_ThrowsIfViewDataDictionariesAreNotCompatible()
     {
         // Arrange
-        var helperToContextualize = DefaultTemplatesUtilities
-            .GetHtmlHelper<BaseModel>(model: null);
+        var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
         var viewContext = DefaultTemplatesUtilities
             .GetHtmlHelper<NonDerivedModel>(model: null)
             .ViewContext;
 
-        var expectedMessage = $"Property '{nameof(ViewContext.ViewData)}' is of type " +
-            $"'{typeof(ViewDataDictionary<NonDerivedModel>).FullName}'," +
-            $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
+        var expectedMessage =
+            $"Property '{nameof(ViewContext.ViewData)}' is of type "
+            + $"'{typeof(ViewDataDictionary<NonDerivedModel>).FullName}',"
+            + $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>("viewContext", () => helperToContextualize.Contextualize(viewContext));
+        var exception = Assert.Throws<ArgumentException>(
+            "viewContext",
+            () => helperToContextualize.Contextualize(viewContext)
+        );
         Assert.Contains(expectedMessage, exception.Message);
     }
 
@@ -329,20 +322,23 @@ public class HtmlHelperTest
     public void Contextualize_ThrowsForNonGenericViewDataDictionaries()
     {
         // Arrange
-        var helperToContextualize = DefaultTemplatesUtilities
-            .GetHtmlHelper<BaseModel>(model: null);
+        var helperToContextualize = DefaultTemplatesUtilities.GetHtmlHelper<BaseModel>(model: null);
 
         var viewContext = DefaultTemplatesUtilities
             .GetHtmlHelper<BaseModel>(model: null)
             .ViewContext;
         viewContext.ViewData = new ViewDataDictionary(viewContext.ViewData);
 
-        var expectedMessage = $"Property '{nameof(ViewContext.ViewData)}' is of type " +
-            $"'{typeof(ViewDataDictionary).FullName}'," +
-            $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
+        var expectedMessage =
+            $"Property '{nameof(ViewContext.ViewData)}' is of type "
+            + $"'{typeof(ViewDataDictionary).FullName}',"
+            + $" but this method requires a value of type '{typeof(ViewDataDictionary<BaseModel>).FullName}'.";
 
         // Act & Assert
-        var exception = Assert.Throws<ArgumentException>("viewContext", () => helperToContextualize.Contextualize(viewContext));
+        var exception = Assert.Throws<ArgumentException>(
+            "viewContext",
+            () => helperToContextualize.Contextualize(viewContext)
+        );
         Assert.Contains(expectedMessage, exception.Message);
     }
 
@@ -351,13 +347,9 @@ public class HtmlHelperTest
         public string Name { get; set; }
     }
 
-    private class DerivedModel : BaseModel
-    {
-    }
+    private class DerivedModel : BaseModel { }
 
-    private class NonDerivedModel
-    {
-    }
+    private class NonDerivedModel { }
 
     [Theory]
     [InlineData("SomeName", "SomeName")]

@@ -35,7 +35,7 @@ namespace System.Activities.Statements
                             {
                                 throw FxTrace.Exception.ArgumentNull("item");
                             }
-                        }
+                        },
                     };
                 }
                 return this.variables;
@@ -50,18 +50,12 @@ namespace System.Activities.Statements
         [DependsOn("Trigger")]
         public Activity Action { get; set; }
 
-        // 
+        //
         [DefaultValue("PickBranch")]
         public string DisplayName
         {
-            get
-            {
-                return this.displayName;
-            }
-            set
-            {
-                this.displayName = value;
-            }
+            get { return this.displayName; }
+            set { this.displayName = value; }
         }
     }
 }

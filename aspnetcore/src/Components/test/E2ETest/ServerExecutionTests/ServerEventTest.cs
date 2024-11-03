@@ -11,10 +11,12 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests;
 
 public class ServerEventTest : EventTest
 {
-    public ServerEventTest(BrowserFixture browserFixture, ToggleExecutionModeServerFixture<Program> serverFixture, ITestOutputHelper output)
-        : base(browserFixture, serverFixture.WithServerExecution(), output)
-    {
-    }
+    public ServerEventTest(
+        BrowserFixture browserFixture,
+        ToggleExecutionModeServerFixture<Program> serverFixture,
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture.WithServerExecution(), output) { }
 
     [Fact]
     public override void EventDuringBatchRendering_CanTriggerDOMEvents()

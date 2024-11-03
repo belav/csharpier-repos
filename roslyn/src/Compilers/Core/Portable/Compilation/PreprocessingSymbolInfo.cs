@@ -2,17 +2,20 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 // See the LICENSE file in the project root for more information.
 
-using Roslyn.Utilities;
 using System;
+using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
     public readonly struct PreprocessingSymbolInfo : IEquatable<PreprocessingSymbolInfo>
     {
-        internal static readonly PreprocessingSymbolInfo None = new PreprocessingSymbolInfo(null, false);
+        internal static readonly PreprocessingSymbolInfo None = new PreprocessingSymbolInfo(
+            null,
+            false
+        );
 
         /// <summary>
-        /// The symbol that was referred to by the identifier, if any. 
+        /// The symbol that was referred to by the identifier, if any.
         /// </summary>
         public IPreprocessingSymbol? Symbol { get; }
 

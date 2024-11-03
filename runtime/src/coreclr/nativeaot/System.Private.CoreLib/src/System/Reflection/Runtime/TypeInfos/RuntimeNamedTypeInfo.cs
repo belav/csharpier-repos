@@ -16,7 +16,9 @@ namespace System.Reflection.Runtime.TypeInfos
     // TypeInfos that represent type definitions (i.e. Foo or Foo<>, but not Foo<int> or arrays/pointers/byrefs.)
     //
     //
-    internal abstract partial class RuntimeNamedTypeInfo : RuntimeTypeDefinitionTypeInfo, IEquatable<RuntimeNamedTypeInfo>
+    internal abstract partial class RuntimeNamedTypeInfo
+        : RuntimeTypeDefinitionTypeInfo,
+            IEquatable<RuntimeNamedTypeInfo>
     {
         protected RuntimeNamedTypeInfo(RuntimeTypeHandle typeHandle)
         {
@@ -25,10 +27,7 @@ namespace System.Reflection.Runtime.TypeInfos
 
         public sealed override bool ContainsGenericParameters
         {
-            get
-            {
-                return IsGenericTypeDefinition;
-            }
+            get { return IsGenericTypeDefinition; }
         }
 
         public sealed override IEnumerable<CustomAttributeData> CustomAttributes
@@ -40,11 +39,17 @@ namespace System.Reflection.Runtime.TypeInfos
 
                 TypeAttributes attributes = Attributes;
                 if (0 != (attributes & TypeAttributes.Import))
-                    yield return new RuntimePseudoCustomAttributeData(typeof(ComImportAttribute), null);
+                    yield return new RuntimePseudoCustomAttributeData(
+                        typeof(ComImportAttribute),
+                        null
+                    );
 
 #pragma warning disable SYSLIB0050 // Legacy serialization infrastructure is obsolete
                 if (0 != (attributes & TypeAttributes.Serializable))
-                    yield return new RuntimePseudoCustomAttributeData(typeof(SerializableAttribute), null);
+                    yield return new RuntimePseudoCustomAttributeData(
+                        typeof(SerializableAttribute),
+                        null
+                    );
 #pragma warning restore SYSLIB0050
             }
         }
@@ -125,19 +130,35 @@ namespace System.Reflection.Runtime.TypeInfos
                 LayoutKind layoutKind;
                 switch (attributes & TypeAttributes.LayoutMask)
                 {
-                    case TypeAttributes.ExplicitLayout: layoutKind = LayoutKind.Explicit; break;
-                    case TypeAttributes.AutoLayout: layoutKind = LayoutKind.Auto; break;
-                    case TypeAttributes.SequentialLayout: layoutKind = LayoutKind.Sequential; break;
-                    default: layoutKind = LayoutKind.Auto;  break;
+                    case TypeAttributes.ExplicitLayout:
+                        layoutKind = LayoutKind.Explicit;
+                        break;
+                    case TypeAttributes.AutoLayout:
+                        layoutKind = LayoutKind.Auto;
+                        break;
+                    case TypeAttributes.SequentialLayout:
+                        layoutKind = LayoutKind.Sequential;
+                        break;
+                    default:
+                        layoutKind = LayoutKind.Auto;
+                        break;
                 }
 
                 CharSet charSet;
                 switch (attributes & TypeAttributes.StringFormatMask)
                 {
-                    case TypeAttributes.AnsiClass: charSet = CharSet.Ansi; break;
-                    case TypeAttributes.AutoClass: charSet = CharSet.Auto; break;
-                    case TypeAttributes.UnicodeClass: charSet = CharSet.Unicode; break;
-                    default: charSet = CharSet.None;  break;
+                    case TypeAttributes.AnsiClass:
+                        charSet = CharSet.Ansi;
+                        break;
+                    case TypeAttributes.AutoClass:
+                        charSet = CharSet.Auto;
+                        break;
+                    case TypeAttributes.UnicodeClass:
+                        charSet = CharSet.Unicode;
+                        break;
+                    default:
+                        charSet = CharSet.None;
+                        break;
                 }
 
                 GetPackSizeAndSize(out int pack, out int size);
@@ -169,18 +190,12 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override RuntimeNamedTypeInfo AnchoringTypeDefinitionForDeclaredMembers
         {
-            get
-            {
-                return this;
-            }
+            get { return this; }
         }
 
         internal sealed override RuntimeTypeHandle InternalTypeHandleIfAvailable
         {
-            get
-            {
-                return _typeHandle;
-            }
+            get { return _typeHandle; }
         }
 
         //
@@ -188,10 +203,7 @@ namespace System.Reflection.Runtime.TypeInfos
         //
         internal sealed override TypeContext TypeContext
         {
-            get
-            {
-                return new TypeContext(this.RuntimeGenericTypeParameters, null);
-            }
+            get { return new TypeContext(this.RuntimeGenericTypeParameters, null); }
         }
 
         /// <summary>
@@ -202,8 +214,11 @@ namespace System.Reflection.Runtime.TypeInfos
 
         private readonly RuntimeTypeHandle _typeHandle;
 
-        private static readonly NamedTypeToGuidTable s_namedTypeToGuidTable = new NamedTypeToGuidTable();
-        private sealed class NamedTypeToGuidTable : ConcurrentUnifier<RuntimeNamedTypeInfo, Tuple<Guid>>
+        private static readonly NamedTypeToGuidTable s_namedTypeToGuidTable =
+            new NamedTypeToGuidTable();
+
+        private sealed class NamedTypeToGuidTable
+            : ConcurrentUnifier<RuntimeNamedTypeInfo, Tuple<Guid>>
         {
             protected sealed override Tuple<Guid> Factory(RuntimeNamedTypeInfo key)
             {

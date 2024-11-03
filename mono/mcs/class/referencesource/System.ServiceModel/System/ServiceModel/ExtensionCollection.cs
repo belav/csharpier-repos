@@ -9,7 +9,9 @@ namespace System.ServiceModel
     using System.Collections.ObjectModel;
     using System.Runtime.Serialization;
 
-    public sealed class ExtensionCollection<T> : SynchronizedCollection<IExtension<T>>, IExtensionCollection<T>
+    public sealed class ExtensionCollection<T>
+        : SynchronizedCollection<IExtension<T>>,
+            IExtensionCollection<T>
         where T : IExtensibleObject<T>
     {
         T owner;
@@ -111,7 +113,9 @@ namespace System.ServiceModel
 
         protected override void SetItem(int index, IExtension<T> item)
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SFxCannotSetExtensionsByIndex)));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new InvalidOperationException(SR.GetString(SR.SFxCannotSetExtensionsByIndex))
+            );
         }
     }
 }

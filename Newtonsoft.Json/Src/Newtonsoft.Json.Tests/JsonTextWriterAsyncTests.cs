@@ -51,9 +51,8 @@ namespace Newtonsoft.Json.Tests
     {
         public class LazyStringWriter : StringWriter
         {
-            public LazyStringWriter(IFormatProvider formatProvider) : base(formatProvider)
-            {
-            }
+            public LazyStringWriter(IFormatProvider formatProvider)
+                : base(formatProvider) { }
 
             public override Task FlushAsync()
             {
@@ -140,7 +139,9 @@ namespace Newtonsoft.Json.Tests
                 await writer.WriteValueAsync((object)null);
 
                 await writer.WritePropertyNameAsync("PropObjectBigInteger");
-                await writer.WriteValueAsync((object)System.Numerics.BigInteger.Parse("123456789012345678901234567890"));
+                await writer.WriteValueAsync(
+                    (object)System.Numerics.BigInteger.Parse("123456789012345678901234567890")
+                );
 
                 await writer.WritePropertyNameAsync("PropUndefined");
                 await writer.WriteUndefinedAsync();
@@ -174,7 +175,8 @@ namespace Newtonsoft.Json.Tests
                 await writer.WriteEndObjectAsync();
             }
 
-            StringAssert.AreEqual(@"{
+            StringAssert.AreEqual(
+                @"{
     ""PropByte"": 1,
     ""PropSByte"": 2,
     ""PropShort"": 3,
@@ -199,7 +201,9 @@ namespace Newtonsoft.Json.Tests
             ]
         ]
     ]
-}", sw.ToString());
+}",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -221,11 +225,14 @@ namespace Newtonsoft.Json.Tests
                 await writer.WriteEndArrayAsync();
             }
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
     {
         ""IncompleteProp"": null
     }
-]", sw.ToString());
+]",
+                sw.ToString()
+            );
         }
 #endif
 
@@ -235,8 +242,10 @@ namespace Newtonsoft.Json.Tests
             FakeArrayPool arrayPool = new FakeArrayPool();
 
             string longString = new string('A', 2000);
-            string longEscapedString = "Hello!" + new string('!', 50) + new string('\n', 1000) + "Good bye!";
-            string longerEscapedString = "Hello!" + new string('!', 2000) + new string('\n', 1000) + "Good bye!";
+            string longEscapedString =
+                "Hello!" + new string('!', 50) + new string('\n', 1000) + "Good bye!";
+            string longerEscapedString =
+                "Hello!" + new string('!', 2000) + new string('\n', 1000) + "Good bye!";
 
             for (int i = 0; i < 1000; i++)
             {
@@ -249,7 +258,9 @@ namespace Newtonsoft.Json.Tests
                     await writer.WriteStartObjectAsync();
 
                     await writer.WritePropertyNameAsync("Prop1");
-                    await writer.WriteValueAsync(new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc));
+                    await writer.WriteValueAsync(
+                        new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)
+                    );
 
                     await writer.WritePropertyNameAsync("Prop2");
                     await writer.WriteValueAsync(longString);
@@ -290,7 +301,9 @@ namespace Newtonsoft.Json.Tests
                     await writer.WriteStartObjectAsync();
 
                     await writer.WritePropertyNameAsync("Prop1");
-                    await writer.WriteValueAsync(new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc));
+                    await writer.WriteValueAsync(
+                        new DateTime(2000, 12, 12, 12, 12, 12, DateTimeKind.Utc)
+                    );
 
                     await writer.WritePropertyNameAsync("Prop2");
                     await writer.WriteValueAsync("This is an escaped \n string!");
@@ -300,9 +313,7 @@ namespace Newtonsoft.Json.Tests
 
                 Assert.Fail();
             }
-            catch
-            {
-            }
+            catch { }
 
             Assert.AreEqual(0, arrayPool.UsedArrays.Count);
             Assert.AreEqual(1, arrayPool.FreeArrays.Count);
@@ -313,13 +324,17 @@ namespace Newtonsoft.Json.Tests
         {
             MemoryStream ms = new MemoryStream();
 
-            using (var streamWriter = new StreamWriter(ms, new UTF8Encoding(false)) { NewLine = "\n" })
-            using (var jsonWriter = new JsonTextWriter(streamWriter)
-            {
-                CloseOutput = true,
-                Indentation = 2,
-                Formatting = Formatting.Indented
-            })
+            using (
+                var streamWriter = new StreamWriter(ms, new UTF8Encoding(false)) { NewLine = "\n" }
+            )
+            using (
+                var jsonWriter = new JsonTextWriter(streamWriter)
+                {
+                    CloseOutput = true,
+                    Indentation = 2,
+                    Formatting = Formatting.Indented,
+                }
+            )
             {
                 await jsonWriter.WriteStartObjectAsync();
                 await jsonWriter.WritePropertyNameAsync("prop");
@@ -407,7 +422,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[""@"",""\r\n\t\f\b?{\\r\\n\""'"",true,10,10.99,0.99,1E-18,0.000000000000000001,null,null,""This is a string."",null,undefined]";
+            string expected =
+                @"[""@"",""\r\n\t\f\b?{\\r\\n\""'"",true,10,10.99,0.99,1E-18,0.000000000000000001,null,null,""This is a string."",null,undefined]";
             string result = sb.ToString();
 
             Assert.AreEqual(expected, result);
@@ -447,14 +463,21 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteValueAsync((decimal?)null);
                 await jsonWriter.WriteValueAsync((decimal?)1.1m);
                 await jsonWriter.WriteValueAsync((DateTime?)null);
-                await jsonWriter.WriteValueAsync((DateTime?)new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc));
+                await jsonWriter.WriteValueAsync(
+                    (DateTime?)
+                        new DateTime(DateTimeUtils.InitialJavaScriptDateTicks, DateTimeKind.Utc)
+                );
                 await jsonWriter.WriteValueAsync((DateTimeOffset?)null);
-                await jsonWriter.WriteValueAsync((DateTimeOffset?)new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero));
+                await jsonWriter.WriteValueAsync(
+                    (DateTimeOffset?)
+                        new DateTimeOffset(DateTimeUtils.InitialJavaScriptDateTicks, TimeSpan.Zero)
+                );
                 await jsonWriter.WriteEndArrayAsync();
             }
 
             string json = sw.ToString();
-            string expected = @"[null,""c"",null,true,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1.1,null,1.1,null,1.1,null,""1970-01-01T00:00:00Z"",null,""1970-01-01T00:00:00+00:00""]";
+            string expected =
+                @"[null,""c"",null,true,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1,null,1.1,null,1.1,null,1.1,null,""1970-01-01T00:00:00Z"",null,""1970-01-01T00:00:00+00:00""]";
 
             Assert.AreEqual(expected, json);
         }
@@ -481,16 +504,19 @@ namespace Newtonsoft.Json.Tests
         [Test]
         public async Task WriteValueObjectWithUnsupportedValueAsync()
         {
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                StringWriter sw = new StringWriter();
-                using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
                 {
-                    await jsonWriter.WriteStartArrayAsync();
-                    await jsonWriter.WriteValueAsync(new Version(1, 1, 1, 1));
-                    await jsonWriter.WriteEndArrayAsync();
-                }
-            }, @"Unsupported type: System.Version. Use the JsonSerializer class to get the object's JSON representation. Path ''.");
+                    StringWriter sw = new StringWriter();
+                    using (JsonTextWriter jsonWriter = new JsonTextWriter(sw))
+                    {
+                        await jsonWriter.WriteStartArrayAsync();
+                        await jsonWriter.WriteValueAsync(new Version(1, 1, 1, 1));
+                        await jsonWriter.WriteEndArrayAsync();
+                    }
+                },
+                @"Unsupported type: System.Version. Use the JsonSerializer class to get the object's JSON representation. Path ''."
+            );
         }
 
         [Test]
@@ -504,12 +530,15 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteStartArrayAsync();
                 await jsonWriter.WriteValueAsync(@"""These pretzels are making me thirsty!""");
                 await jsonWriter.WriteValueAsync("Jeff's house was burninated.");
-                await jsonWriter.WriteValueAsync("1. You don't talk about fight club.\r\n2. You don't talk about fight club.");
+                await jsonWriter.WriteValueAsync(
+                    "1. You don't talk about fight club.\r\n2. You don't talk about fight club."
+                );
                 await jsonWriter.WriteValueAsync("35% of\t statistics\n are made\r up.");
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[""\""These pretzels are making me thirsty!\"""",""Jeff's house was burninated."",""1. You don't talk about fight club.\r\n2. You don't talk about fight club."",""35% of\t statistics\n are made\r up.""]";
+            string expected =
+                @"[""\""These pretzels are making me thirsty!\"""",""Jeff's house was burninated."",""1. You don't talk about fight club.\r\n2. You don't talk about fight club."",""35% of\t statistics\n are made\r up.""]";
             string result = sb.ToString();
 
             Assert.AreEqual(expected, result);
@@ -540,7 +569,8 @@ namespace Newtonsoft.Json.Tests
                 Assert.AreEqual(WriteState.Start, jsonWriter.WriteState);
             }
 
-            string expected = @"{
+            string expected =
+                @"{
   ""CPU"": ""Intel"",
   ""PSU"": ""500W"",
   ""Drives"": [
@@ -579,7 +609,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.CloseAsync();
             }
 
-            string expected = @"{
+            string expected =
+                @"{
   ""CPU"": ""Intel"",
   ""PSU"": ""500W"",
   ""Drives"": [
@@ -631,7 +662,8 @@ namespace Newtonsoft.Json.Tests
             //   ]
             // }
 
-            string expected = @"{
+            string expected =
+                @"{
   ""CPU"": ""Intel"",
   ""PSU"": ""500W"",
   ""Drives"": [
@@ -712,7 +744,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.FlushAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   NaN,
   Infinity,
   -Infinity,
@@ -754,7 +787,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.FlushAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   0.0,
   0.0,
   0.0,
@@ -796,7 +830,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.FlushAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   ""NaN"",
   ""Infinity"",
   ""-Infinity"",
@@ -833,7 +868,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.FlushAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   'NaN',
   'Infinity',
   '-Infinity',
@@ -864,7 +900,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[1,2,3,4,5]  [
+            string expected =
+                @"[1,2,3,4,5]  [
   NaN
 ]";
             string result = sb.ToString();
@@ -891,7 +928,8 @@ namespace Newtonsoft.Json.Tests
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   NaN,[1,2,3,4,5],[1,2,3,4,5],
   NaN
 ]";
@@ -1019,9 +1057,15 @@ namespace Newtonsoft.Json.Tests
             }
 
 #if !(NETSTANDARD2_0 || NETSTANDARD1_3 || NET6_0_OR_GREATER)
-            Assert.AreEqual(@"[0.0,0.0,0.1,1.0,1.000001,1E-06,4.94065645841247E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]", sb.ToString());
+            Assert.AreEqual(
+                @"[0.0,0.0,0.1,1.0,1.000001,1E-06,4.94065645841247E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]",
+                sb.ToString()
+            );
 #else
-            Assert.AreEqual(@"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]", sb.ToString());
+            Assert.AreEqual(
+                @"[0.0,0.0,0.1,1.0,1.000001,1E-06,5E-324,Infinity,-Infinity,NaN,1.7976931348623157E+308,-1.7976931348623157E+308,Infinity,-Infinity,NaN]",
+                sb.ToString()
+            );
 #endif
         }
 
@@ -1031,7 +1075,9 @@ namespace Newtonsoft.Json.Tests
             StringBuilder sb = new StringBuilder();
             StringWriter sw = new StringWriter(sb);
 
-            using (JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented })
+            using (
+                JsonWriter jsonWriter = new JsonTextWriter(sw) { Formatting = Formatting.Indented }
+            )
             {
                 await jsonWriter.WriteStartArrayAsync();
 
@@ -1051,7 +1097,8 @@ namespace Newtonsoft.Json.Tests
 
             Console.WriteLine(sb.ToString());
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   2147483647,
   -2147483648,
   0,
@@ -1062,7 +1109,9 @@ namespace Newtonsoft.Json.Tests
   -9223372036854775808,
   18446744073709551615,
   0
-]", sb.ToString());
+]",
+                sb.ToString()
+            );
         }
 
         [Test]
@@ -1095,10 +1144,23 @@ namespace Newtonsoft.Json.Tests
             {
                 await jsonWriter.WriteTokenAsync(JsonToken.StartArray);
 
-                await ExceptionAssert.ThrowsAsync<FormatException>(async () => { await jsonWriter.WriteTokenAsync(JsonToken.Integer, "three"); }, "Input string was not in a correct format.");
+                await ExceptionAssert.ThrowsAsync<FormatException>(
+                    async () =>
+                    {
+                        await jsonWriter.WriteTokenAsync(JsonToken.Integer, "three");
+                    },
+                    "Input string was not in a correct format."
+                );
 
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () => { await jsonWriter.WriteTokenAsync(JsonToken.Integer); }, @"Value cannot be null.
-Parameter name: value", "Value cannot be null. (Parameter 'value')");
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(
+                    async () =>
+                    {
+                        await jsonWriter.WriteTokenAsync(JsonToken.Integer);
+                    },
+                    @"Value cannot be null.
+Parameter name: value",
+                    "Value cannot be null. (Parameter 'value')"
+                );
             }
         }
 
@@ -1107,8 +1169,14 @@ Parameter name: value", "Value cannot be null. (Parameter 'value')");
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () => { await jsonWriter.WriteTokenAsync(null); });
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () => { await jsonWriter.WriteTokenAsync(null, true); });
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null);
+                });
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null, true);
+                });
             }
         }
 
@@ -1117,10 +1185,15 @@ Parameter name: value", "Value cannot be null. (Parameter 'value')");
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                ArgumentOutOfRangeException ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue));
+                ArgumentOutOfRangeException ex =
+                    await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(
+                        async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue)
+                    );
                 Assert.AreEqual("token", ex.ParamName);
 
-                ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue, "test"));
+                ex = await ExceptionAssert.ThrowsAsync<ArgumentOutOfRangeException>(
+                    async () => await jsonWriter.WriteTokenAsync((JsonToken)int.MinValue, "test")
+                );
                 Assert.AreEqual("token", ex.ParamName);
             }
         }
@@ -1128,21 +1201,24 @@ Parameter name: value", "Value cannot be null. (Parameter 'value')");
         [Test]
         public async Task BadWriteEndArrayAsync()
         {
-            await ExceptionAssert.ThrowsAsync<JsonWriterException>(async () =>
-            {
-                StringBuilder sb = new StringBuilder();
-                StringWriter sw = new StringWriter(sb);
-
-                using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+            await ExceptionAssert.ThrowsAsync<JsonWriterException>(
+                async () =>
                 {
-                    await jsonWriter.WriteStartArrayAsync();
+                    StringBuilder sb = new StringBuilder();
+                    StringWriter sw = new StringWriter(sb);
 
-                    await jsonWriter.WriteValueAsync(0.0);
+                    using (JsonWriter jsonWriter = new JsonTextWriter(sw))
+                    {
+                        await jsonWriter.WriteStartArrayAsync();
 
-                    await jsonWriter.WriteEndArrayAsync();
-                    await jsonWriter.WriteEndArrayAsync();
-                }
-            }, "No token to close. Path ''.");
+                        await jsonWriter.WriteValueAsync(0.0);
+
+                        await jsonWriter.WriteEndArrayAsync();
+                        await jsonWriter.WriteEndArrayAsync();
+                    }
+                },
+                "No token to close. Path ''."
+            );
         }
 
         [Test]
@@ -1183,7 +1259,8 @@ Parameter name: value", "Value cannot be null. (Parameter 'value')");
                 await jsonWriter.WriteEndObjectAsync();
             }
 
-            string expected = @"{
+            string expected =
+                @"{
 _____'propertyName': NaN,
 ??????'prop2': 123
 }";
@@ -1242,7 +1319,8 @@ _____'propertyName': NaN,
                 await jsonWriter.WriteEndArrayAsync();
             }
 
-            string expected = @"[
+            string expected =
+                @"[
   ""SGVsbG8gd29ybGQu"",
   ""SGVsbG8gd29ybGQu"",
   ""SGVsbG8gd29ybGQu"",
@@ -1302,7 +1380,8 @@ _____'propertyName': NaN,
                 Assert.AreEqual("", writer.Path);
             }
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   {
     ""Property1"": [
       1,
@@ -1321,7 +1400,9 @@ _____'propertyName': NaN,
       ]
     )
   }
-]", sb.ToString());
+]",
+                sb.ToString()
+            );
         }
 
         [Test]
@@ -1330,10 +1411,12 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                DateTimeZoneHandling = DateTimeZoneHandling.Utc
+                DateTimeZoneHandling = DateTimeZoneHandling.Utc,
             };
 
-            await writer.WriteValueAsync(new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified));
+            await writer.WriteValueAsync(
+                new DateTime(2000, 1, 1, 1, 1, 1, DateTimeKind.Unspecified)
+            );
 
             Assert.AreEqual(@"""2000-01-01T01:01:01Z""", sw.ToString());
         }
@@ -1344,7 +1427,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                StringEscapeHandling = StringEscapeHandling.EscapeHtml
+                StringEscapeHandling = StringEscapeHandling.EscapeHtml,
             };
 
             string script = @"<script type=""text/javascript"">alert('hi');</script>";
@@ -1353,7 +1436,10 @@ _____'propertyName': NaN,
 
             string json = sw.ToString();
 
-            Assert.AreEqual(@"""\u003cscript type=\u0022text/javascript\u0022\u003ealert(\u0027hi\u0027);\u003c/script\u003e""", json);
+            Assert.AreEqual(
+                @"""\u003cscript type=\u0022text/javascript\u0022\u003ealert(\u0027hi\u0027);\u003c/script\u003e""",
+                json
+            );
 
             JsonTextReader reader = new JsonTextReader(new StringReader(json));
 
@@ -1366,7 +1452,7 @@ _____'propertyName': NaN,
             StringWriter sw = new StringWriter();
             JsonTextWriter writer = new JsonTextWriter(sw)
             {
-                StringEscapeHandling = StringEscapeHandling.EscapeNonAscii
+                StringEscapeHandling = StringEscapeHandling.EscapeNonAscii,
             };
 
             string unicode = "\u5f20";
@@ -1383,10 +1469,7 @@ _____'propertyName': NaN,
             Assert.AreEqual(unicode, reader.ReadAsString());
 
             sw = new StringWriter();
-            writer = new JsonTextWriter(sw)
-            {
-                StringEscapeHandling = StringEscapeHandling.Default
-            };
+            writer = new JsonTextWriter(sw) { StringEscapeHandling = StringEscapeHandling.Default };
 
             await writer.WriteValueAsync(unicode);
 
@@ -1438,7 +1521,8 @@ _____'propertyName': NaN,
 
             await writer.WriteEndAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   '2000-01-01T01:01:01Z',
   '2000-01-01T01:01:01+00:00',
   '\/Date(946688461000)\/',
@@ -1449,7 +1533,9 @@ _____'propertyName': NaN,
   '00:00:00',
   'http://www.google.com/',
   '00000000-0000-0000-0000-000000000000'
-]", sw.ToString());
+]",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1473,10 +1559,13 @@ _____'propertyName': NaN,
 
             await writer.WriteEndAsync();
 
-            StringAssert.AreEqual(@"[
+            StringAssert.AreEqual(
+                @"[
   '2000 a.m.',
   '2000 a.m.'
-]", sw.ToString());
+]",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1488,7 +1577,16 @@ _____'propertyName': NaN,
             {
                 StringWriter swNew = new StringWriter();
                 JsonTextWriter jsonWriter = new JsonTextWriter(new StreamWriter(Stream.Null));
-                await JavaScriptUtils.WriteEscapedJavaScriptStringAsync(swNew, c.ToString(), '"', true, JavaScriptUtils.DoubleQuoteCharEscapeFlags, StringEscapeHandling.Default, jsonWriter, null);
+                await JavaScriptUtils.WriteEscapedJavaScriptStringAsync(
+                    swNew,
+                    c.ToString(),
+                    '"',
+                    true,
+                    JavaScriptUtils.DoubleQuoteCharEscapeFlags,
+                    StringEscapeHandling.Default,
+                    jsonWriter,
+                    null
+                );
 
                 StringWriter swOld = new StringWriter();
                 WriteEscapedJavaScriptStringOld(swOld, c.ToString(), '"', true);
@@ -1498,7 +1596,15 @@ _____'propertyName': NaN,
 
                 if (newText != oldText)
                 {
-                    throw new Exception("Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}".FormatWith(CultureInfo.InvariantCulture, c, (int)c, oldText, newText));
+                    throw new Exception(
+                        "Difference for char '{0}' (value {1}). Old text: {2}, New text: {3}".FormatWith(
+                            CultureInfo.InvariantCulture,
+                            c,
+                            (int)c,
+                            oldText,
+                            newText
+                        )
+                    );
                 }
 
                 c++;
@@ -1507,7 +1613,12 @@ _____'propertyName': NaN,
 
         private const string EscapedUnicodeText = "!";
 
-        private static void WriteEscapedJavaScriptStringOld(TextWriter writer, string s, char delimiter, bool appendDelimiters)
+        private static void WriteEscapedJavaScriptStringOld(
+            TextWriter writer,
+            string s,
+            char delimiter,
+            bool appendDelimiters
+        )
         {
             // leading delimiter
             if (appendDelimiters)
@@ -1645,7 +1756,10 @@ _____'propertyName': NaN,
         public async Task CustomJsonTextWriterTestsAsync()
         {
             StringWriter sw = new StringWriter();
-            CustomJsonTextWriter writer = new CustomAsyncJsonTextWriter(sw) { Formatting = Formatting.Indented };
+            CustomJsonTextWriter writer = new CustomAsyncJsonTextWriter(sw)
+            {
+                Formatting = Formatting.Indented,
+            };
             await writer.WriteStartObjectAsync();
             Assert.AreEqual(WriteState.Object, writer.WriteState);
             await writer.WritePropertyNameAsync("Property1");
@@ -1656,18 +1770,18 @@ _____'propertyName': NaN,
             await writer.WriteEndObjectAsync();
             Assert.AreEqual(WriteState.Start, writer.WriteState);
 
-            StringAssert.AreEqual(@"{{{
+            StringAssert.AreEqual(
+                @"{{{
   ""1ytreporP"": NULL!!!
-}}}", sw.ToString());
+}}}",
+                sw.ToString()
+            );
         }
 
         [Test]
         public async Task QuoteDictionaryNamesAsync()
         {
-            var d = new Dictionary<string, int>
-            {
-                { "a", 1 },
-            };
+            var d = new Dictionary<string, int> { { "a", 1 } };
             var jsonSerializerSettings = new JsonSerializerSettings
             {
                 Formatting = Formatting.Indented,
@@ -1681,24 +1795,35 @@ _____'propertyName': NaN,
                     await writer.CloseAsync();
                 }
 
-                StringAssert.AreEqual(@"{
+                StringAssert.AreEqual(
+                    @"{
   a: 1
-}", stringWriter.ToString());
+}",
+                    stringWriter.ToString()
+                );
             }
         }
 
         [Test]
         public async Task WriteCommentsAsync()
         {
-            string json = @"//comment*//*hi*/
+            string json =
+                @"//comment*//*hi*/
 {//comment
 Name://comment
-true//comment after true" + StringUtils.CarriageReturn + @"
-,//comment after comma" + StringUtils.CarriageReturnLineFeed + @"
-""ExpiryDate""://comment" + StringUtils.LineFeed + @"
+true//comment after true"
+                + StringUtils.CarriageReturn
+                + @"
+,//comment after comma"
+                + StringUtils.CarriageReturnLineFeed
+                + @"
+""ExpiryDate""://comment"
+                + StringUtils.LineFeed
+                + @"
 new
-" + StringUtils.LineFeed +
-                          @"Constructor
+"
+                + StringUtils.LineFeed
+                + @"Constructor
 (//comment
 null//comment
 ),
@@ -1719,7 +1844,8 @@ null//comment
 
             await w.WriteTokenAsync(r, true);
 
-            StringAssert.AreEqual(@"/*comment*//*hi*/*/{/*comment*/
+            StringAssert.AreEqual(
+                @"/*comment*//*hi*/*/{/*comment*/
   ""Name"": /*comment*/ true/*comment after true*//*comment after comma*/,
   ""ExpiryDate"": /*comment*/ new Constructor(
     /*comment*/,
@@ -1732,7 +1858,9 @@ null//comment
     ""Small""
     /*comment*/
   ]/*comment*/
-}/*comment *//*comment 1 */", sw.ToString());
+}/*comment *//*comment 1 */",
+                sw.ToString()
+            );
         }
 
         [Test]
@@ -1806,16 +1934,13 @@ null//comment
 
         private class NoOverridesDerivedJsonTextWriter : JsonTextWriter
         {
-            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter) : base(textWriter)
-            {
-            }
+            public NoOverridesDerivedJsonTextWriter(TextWriter textWriter)
+                : base(textWriter) { }
         }
 
         private class MinimalOverridesDerivedJsonWriter : JsonWriter
         {
-            public override void Flush()
-            {
-            }
+            public override void Flush() { }
         }
 
         [Test]
@@ -1962,15 +2087,18 @@ null//comment
             JsonTextWriter writer = new JsonTextWriter(new ThrowingWriter(' '));
             writer.Formatting = Formatting.Indented;
             await writer.WriteStartObjectAsync();
-            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(async () => await writer.WritePropertyNameAsync("aa"));
+            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+                async () => await writer.WritePropertyNameAsync("aa")
+            );
         }
-
 
         [Test]
         public async Task FailureOnStartWriteObject()
         {
             JsonTextWriter writer = new JsonTextWriter(new ThrowingWriter('{'));
-            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(async () => await writer.WriteStartObjectAsync());
+            await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+                async () => await writer.WriteStartObjectAsync()
+            );
         }
 
         public class ThrowingWriter : TextWriter
@@ -2021,16 +2149,22 @@ null//comment
 
     public class CustomAsyncJsonTextWriter : CustomJsonTextWriter
     {
-        public CustomAsyncJsonTextWriter(TextWriter textWriter) : base(textWriter)
-        {
-        }
+        public CustomAsyncJsonTextWriter(TextWriter textWriter)
+            : base(textWriter) { }
 
-        public override Task WritePropertyNameAsync(string name, CancellationToken cancellationToken = default(CancellationToken))
+        public override Task WritePropertyNameAsync(
+            string name,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return WritePropertyNameAsync(name, true, cancellationToken);
         }
 
-        public override async Task WritePropertyNameAsync(string name, bool escape, CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task WritePropertyNameAsync(
+            string name,
+            bool escape,
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             await SetWriteStateAsync(JsonToken.PropertyName, name, cancellationToken);
 
@@ -2049,21 +2183,27 @@ null//comment
             await _writer.WriteAsync(':');
         }
 
-        public override async Task WriteNullAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task WriteNullAsync(
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             await SetWriteStateAsync(JsonToken.Null, null, cancellationToken);
 
             await _writer.WriteAsync("NULL!!!");
         }
 
-        public override async Task WriteStartObjectAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public override async Task WriteStartObjectAsync(
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             await SetWriteStateAsync(JsonToken.StartObject, null, cancellationToken);
 
             await _writer.WriteAsync("{{{");
         }
 
-        public override Task WriteEndObjectAsync(CancellationToken cancellationToken = default(CancellationToken))
+        public override Task WriteEndObjectAsync(
+            CancellationToken cancellationToken = default(CancellationToken)
+        )
         {
             return SetWriteStateAsync(JsonToken.EndObject, null, cancellationToken);
         }

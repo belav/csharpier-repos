@@ -1,23 +1,26 @@
 //------------------------------------------------------------------------------
 // <copyright file="XmlNodeType.cs" company="Microsoft">
 //     Copyright (c) Microsoft Corporation.  All rights reserved.
-// </copyright>                                                                
+// </copyright>
 // <owner current="true" primary="true">helenak</owner>
 //------------------------------------------------------------------------------
 
 
-namespace System.Xml {
+namespace System.Xml
+{
     /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType"]/*' />
     /// <devdoc>
     ///    Specifies the type of node.
     /// </devdoc>
-    public enum XmlNodeType {
+    public enum XmlNodeType
+    {
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.None"]/*' />
         /// <devdoc>
         ///    For XPathNavigator, cursor is not positioned
         ///    on a node.
         /// </devdoc>
         None,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Element"]/*' />
         /// <devdoc>
         ///    <para>
@@ -32,6 +35,7 @@ namespace System.Xml {
         ///    DocumentFragment, EntityReference, and Element nodes.
         /// </devdoc>
         Element,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Attribute"]/*' />
         /// <devdoc>
         ///    <para>
@@ -48,6 +52,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Attribute,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Text"]/*' />
         /// <devdoc>
         ///    <para>
@@ -61,6 +66,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Text,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.CDATA"]/*' />
         /// <devdoc>
         ///    A CDATA section.
@@ -71,6 +77,7 @@ namespace System.Xml {
         ///    EntityReference, and Element nodes.
         /// </devdoc>
         CDATA,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.EntityReference"]/*' />
         /// <devdoc>
         ///    <para>A reference to an entity.</para>
@@ -82,6 +89,7 @@ namespace System.Xml {
         ///       Element, and EntityReference nodes.</para>
         /// </devdoc>
         EntityReference,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Entity"]/*' />
         /// <devdoc>
         ///    <para>An entity declaration.</para>
@@ -91,6 +99,7 @@ namespace System.Xml {
         ///       child of the DocumentType node.</para>
         /// </devdoc>
         Entity,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.ProcessingInstruction"]/*' />
         /// <devdoc>
         ///    <para>
@@ -106,6 +115,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         ProcessingInstruction,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Comment"]/*' />
         /// <devdoc>
         ///    <para>
@@ -121,6 +131,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Comment,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Document"]/*' />
         /// <devdoc>
         ///    <para>
@@ -134,6 +145,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Document,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.DocumentType"]/*' />
         /// <devdoc>
         ///    <para>
@@ -148,6 +160,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         DocumentType,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.DocumentFragment"]/*' />
         /// <devdoc>
         ///    <para>
@@ -162,6 +175,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         DocumentFragment,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Notation"]/*' />
         /// <devdoc>
         ///    <para>
@@ -176,6 +190,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Notation,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.Whitespace"]/*' />
         /// <devdoc>
         ///    <para>
@@ -183,6 +198,7 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         Whitespace,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.SignificantWhitespace"]/*' />
         /// <devdoc>
         ///    <para>
@@ -190,19 +206,22 @@ namespace System.Xml {
         ///    </para>
         /// </devdoc>
         SignificantWhitespace,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.EndElement"]/*' />
         /// <devdoc>
         ///    <para>Returned when XmlReader gets to the end of an element.</para>
         ///    <para>Example XML: &lt;/foo&gt;</para>
         /// </devdoc>
         EndElement,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.EndEntity"]/*' />
         /// <devdoc>
-        ///    <para>Returned when XmlReader gets to the end of the entity 
+        ///    <para>Returned when XmlReader gets to the end of the entity
         ///       replacement as a result of a call to <see cref='System.Xml.XmlReader.ResolveEntity'/>
         ///       .</para>
         /// </devdoc>
         EndEntity,
+
         /// <include file='doc\XmlNodeType.uex' path='docs/doc[@for="XmlNodeType.XmlDeclaration"]/*' />
         /// <devdoc>
         ///    <para>
@@ -212,11 +231,11 @@ namespace System.Xml {
         ///       Example XML: &lt;?xml version='1.0'?&gt;;
         ///    </para>
         ///    <para>
-        ///        This has to be the first node in the document. It can have no children. 
-        ///        It is a child of the root node. It can have attributes that provide version 
+        ///        This has to be the first node in the document. It can have no children.
+        ///        It is a child of the root node. It can have attributes that provide version
         ///        and encoding information.
         ///    </para>
         /// </devdoc>
-        XmlDeclaration
+        XmlDeclaration,
     }
 }

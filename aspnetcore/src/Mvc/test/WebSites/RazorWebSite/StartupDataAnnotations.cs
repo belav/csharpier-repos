@@ -16,11 +16,13 @@ public class StartupDataAnnotations
         services
             .AddMvc()
             .AddViewLocalization()
-            .AddDataAnnotationsLocalization((options) =>
-            {
-                options.DataAnnotationLocalizerProvider =
-                    (modelType, stringLocalizerFactory) => stringLocalizerFactory.Create(typeof(SingleType));
-            });
+            .AddDataAnnotationsLocalization(
+                (options) =>
+                {
+                    options.DataAnnotationLocalizerProvider = (modelType, stringLocalizerFactory) =>
+                        stringLocalizerFactory.Create(typeof(SingleType));
+                }
+            );
     }
 
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -31,18 +33,14 @@ public class StartupDataAnnotations
 
         app.UseRouting();
 
-        app.UseRequestLocalization(new RequestLocalizationOptions
-        {
-            DefaultRequestCulture = new RequestCulture("en-US", "en-US"),
-            SupportedCultures = new List<CultureInfo>
-                {
-                    new CultureInfo("en-US")
-                },
-            SupportedUICultures = new List<CultureInfo>
-                {
-                    new CultureInfo("en-US")
-                }
-        });
+        app.UseRequestLocalization(
+            new RequestLocalizationOptions
+            {
+                DefaultRequestCulture = new RequestCulture("en-US", "en-US"),
+                SupportedCultures = new List<CultureInfo> { new CultureInfo("en-US") },
+                SupportedUICultures = new List<CultureInfo> { new CultureInfo("en-US") },
+            }
+        );
 
         app.UseEndpoints(endpoints =>
         {

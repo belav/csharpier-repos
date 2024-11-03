@@ -15,21 +15,28 @@ namespace Microsoft.CodeAnalysis.CodeLens
     internal readonly record struct ReferenceCount(
         [property: DataMember(Order = 0)] int Count,
         [property: DataMember(Order = 1)] bool IsCapped,
-        [property: DataMember(Order = 2)] string Version)
+        [property: DataMember(Order = 2)] string Version
+    )
     {
         public string GetDescription()
         {
-            var referenceWord = Count == 1
-                ? FeaturesResources._0_reference_unquoted
-                : FeaturesResources._0_references_unquoted;
+            var referenceWord =
+                Count == 1
+                    ? FeaturesResources._0_reference_unquoted
+                    : FeaturesResources._0_references_unquoted;
 
             var description = string.Format(referenceWord, GetCappedReferenceCountString());
             return description;
         }
 
-        public string GetToolTip(string? codeElementKind)
-            => string.Format(FeaturesResources.This_0_has_1_references, codeElementKind, GetCappedReferenceCountString());
+        public string GetToolTip(string? codeElementKind) =>
+            string.Format(
+                FeaturesResources.This_0_has_1_references,
+                codeElementKind,
+                GetCappedReferenceCountString()
+            );
 
-        private string GetCappedReferenceCountString() => $"{Count}{(IsCapped ? "+" : string.Empty)}";
+        private string GetCappedReferenceCountString() =>
+            $"{Count}{(IsCapped ? "+" : string.Empty)}";
     }
 }

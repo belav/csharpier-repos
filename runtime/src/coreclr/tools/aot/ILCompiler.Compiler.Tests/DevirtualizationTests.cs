@@ -2,10 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Generic;
-
 using Internal.IL;
 using Internal.TypeSystem;
-
 using Xunit;
 
 namespace ILCompiler.Compiler.Tests
@@ -17,13 +15,22 @@ namespace ILCompiler.Compiler.Tests
 
         public DevirtualizationTests()
         {
-            var target = new TargetDetails(TargetArchitecture.X64, TargetOS.Windows, TargetAbi.NativeAot);
-            _context = new CompilerTypeSystemContext(target, SharedGenericsMode.CanonicalReferenceTypes, DelegateFeature.All);
+            var target = new TargetDetails(
+                TargetArchitecture.X64,
+                TargetOS.Windows,
+                TargetAbi.NativeAot
+            );
+            _context = new CompilerTypeSystemContext(
+                target,
+                SharedGenericsMode.CanonicalReferenceTypes,
+                DelegateFeature.All
+            );
 
-            _context.InputFilePaths = new Dictionary<string, string> {
+            _context.InputFilePaths = new Dictionary<string, string>
+            {
                 { "Test.CoreLib", @"Test.CoreLib.dll" },
                 { "ILCompiler.Compiler.Tests.Assets", @"ILCompiler.Compiler.Tests.Assets.dll" },
-                };
+            };
             _context.ReferenceFilePaths = new Dictionary<string, string>();
 
             _context.SetSystemModule(_context.GetModuleForSimpleName("Test.CoreLib"));
@@ -35,8 +42,11 @@ namespace ILCompiler.Compiler.Tests
             CompilationModuleGroup compilationGroup = new SingleFileCompilationModuleGroup();
 
             CompilationBuilder builder = new RyuJitCompilationBuilder(_context, compilationGroup);
-            IILScanner scanner = builder.GetILScannerBuilder()
-                .UseCompilationRoots(new ICompilationRootProvider[] { new SingleMethodRootProvider(method) })
+            IILScanner scanner = builder
+                .GetILScannerBuilder()
+                .UseCompilationRoots(
+                    new ICompilationRootProvider[] { new SingleMethodRootProvider(method) }
+                )
                 .ToILScanner();
 
             return scanner.Scan().GetDevirtualizationManager();
@@ -46,7 +56,9 @@ namespace ILCompiler.Compiler.Tests
         public void TestDevirtualizeSimple()
         {
             MetadataType testType = _testModule.GetType("Devirtualization", "DevirtualizeSimple");
-            DevirtualizationManager scanDevirt = GetDevirtualizationManagerFromScan(testType.GetMethod("Run", null));
+            DevirtualizationManager scanDevirt = GetDevirtualizationManagerFromScan(
+                testType.GetMethod("Run", null)
+            );
 
             MethodDesc implMethod = testType.GetNestedType("Derived").GetMethod("Virtual", null);
 
@@ -62,7 +74,9 @@ namespace ILCompiler.Compiler.Tests
         public void TestDevirtualizeAbstract()
         {
             MetadataType testType = _testModule.GetType("Devirtualization", "DevirtualizeAbstract");
-            DevirtualizationManager scanDevirt = GetDevirtualizationManagerFromScan(testType.GetMethod("Run", null));
+            DevirtualizationManager scanDevirt = GetDevirtualizationManagerFromScan(
+                testType.GetMethod("Run", null)
+            );
 
             Assert.False(scanDevirt.IsEffectivelySealed(testType.GetNestedType("Abstract")));
         }

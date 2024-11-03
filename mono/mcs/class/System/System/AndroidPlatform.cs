@@ -38,30 +38,37 @@ using Mono.Btls;
 #endif
 #endif
 
-namespace System {
+namespace System
+{
+    internal static class AndroidPlatform
+    {
+        delegate int GetInterfaceAddressesDelegate(out IntPtr ifap);
+        delegate void FreeInterfaceAddressesDelegate(IntPtr ifap);
 
-	internal static class AndroidPlatform {
-		delegate int GetInterfaceAddressesDelegate (out IntPtr ifap);
-		delegate void FreeInterfaceAddressesDelegate (IntPtr ifap);
-		
 #if SECURITY_DEP
-		static readonly Converter<List <byte[]>, bool> trustEvaluateSsl;
-		static readonly Func<long, bool, byte[]> certStoreLookup;
+        static readonly Converter<List<byte[]>, bool> trustEvaluateSsl;
+        static readonly Func<long, bool, byte[]> certStoreLookup;
 #endif  // SECURITY_DEP
-		static readonly Func<IWebProxy> getDefaultProxy;
-		static readonly GetInterfaceAddressesDelegate getInterfaceAddresses;
-		static readonly FreeInterfaceAddressesDelegate freeInterfaceAddresses;
+        static readonly Func<IWebProxy> getDefaultProxy;
+        static readonly GetInterfaceAddressesDelegate getInterfaceAddresses;
+        static readonly FreeInterfaceAddressesDelegate freeInterfaceAddresses;
 
-		static AndroidPlatform ()
-		{
-			var t = Type.GetType ("Android.Runtime.AndroidEnvironment, Mono.Android", throwOnError:true);
+        static AndroidPlatform()
+        {
+            var t = Type.GetType(
+                "Android.Runtime.AndroidEnvironment, Mono.Android",
+                throwOnError: true
+            );
 #if SECURITY_DEP
-			trustEvaluateSsl = (Converter<List<byte[]>, bool>)
-				Delegate.CreateDelegate (typeof (Converter<List<byte[]>, bool>),
-							t,
-							"TrustEvaluateSsl",
-							ignoreCase:false,
-							throwOnBindFailure:true);
+            trustEvaluateSsl =
+                (Converter<List<byte[]>, bool>)
+                    Delegate.CreateDelegate(
+                        typeof(Converter<List<byte[]>, bool>),
+                        t,
+                        "TrustEvaluateSsl",
+                        ignoreCase: false,
+                        throwOnBindFailure: true
+                    );
 #if MONO_FEATURE_BTLS
 			certStoreLookup = (Func<long, bool, byte[]>)
 				Delegate.CreateDelegate (typeof (Func<long, bool, byte[]>),
@@ -70,32 +77,45 @@ namespace System {
 							ignoreCase:false,
 							throwOnBindFailure:true);
 #endif  // MONO_FEATURE_BTLS
-			SystemDependencyProvider.Initialize ();
+            SystemDependencyProvider.Initialize();
 #endif  // SECURITY_DEP
-			getDefaultProxy = (Func<IWebProxy>)Delegate.CreateDelegate (
-				typeof (Func<IWebProxy>), t, "GetDefaultProxy",
-				ignoreCase:false,
-				throwOnBindFailure:true);
+            getDefaultProxy =
+                (Func<IWebProxy>)
+                    Delegate.CreateDelegate(
+                        typeof(Func<IWebProxy>),
+                        t,
+                        "GetDefaultProxy",
+                        ignoreCase: false,
+                        throwOnBindFailure: true
+                    );
 
-			getInterfaceAddresses = (GetInterfaceAddressesDelegate)Delegate.CreateDelegate (
-				typeof (GetInterfaceAddressesDelegate), t, "GetInterfaceAddresses",
-				ignoreCase: false,
-				throwOnBindFailure: false);
-			
-			freeInterfaceAddresses = (FreeInterfaceAddressesDelegate)Delegate.CreateDelegate (
-				typeof (FreeInterfaceAddressesDelegate), t, "FreeInterfaceAddresses",
-				ignoreCase: false,
-				throwOnBindFailure: false);
-		}
+            getInterfaceAddresses = (GetInterfaceAddressesDelegate)
+                Delegate.CreateDelegate(
+                    typeof(GetInterfaceAddressesDelegate),
+                    t,
+                    "GetInterfaceAddresses",
+                    ignoreCase: false,
+                    throwOnBindFailure: false
+                );
+
+            freeInterfaceAddresses = (FreeInterfaceAddressesDelegate)
+                Delegate.CreateDelegate(
+                    typeof(FreeInterfaceAddressesDelegate),
+                    t,
+                    "FreeInterfaceAddresses",
+                    ignoreCase: false,
+                    throwOnBindFailure: false
+                );
+        }
 
 #if SECURITY_DEP
-		internal static bool TrustEvaluateSsl (X509CertificateCollection collection)
-		{
-			var certsRawData = new List <byte[]> (collection.Count);
-			foreach (var cert in collection)
-				certsRawData.Add (cert.GetRawCertData ());
-			return trustEvaluateSsl (certsRawData);
-		}
+        internal static bool TrustEvaluateSsl(X509CertificateCollection collection)
+        {
+            var certsRawData = new List<byte[]>(collection.Count);
+            foreach (var cert in collection)
+                certsRawData.Add(cert.GetRawCertData());
+            return trustEvaluateSsl(certsRawData);
+        }
 
 #if MONO_FEATURE_BTLS
 		internal static MonoBtlsX509 CertStoreLookup (MonoBtlsX509Name name)
@@ -118,27 +138,27 @@ namespace System {
 #endif  // MONO_FEATURE_BTLS
 #endif  // SECURITY_DEP
 
-		internal static IWebProxy GetDefaultProxy ()
-		{
-			return getDefaultProxy ();
-		}
+        internal static IWebProxy GetDefaultProxy()
+        {
+            return getDefaultProxy();
+        }
 
-		internal static int GetInterfaceAddresses (out IntPtr ifap)
-		{
-			ifap = IntPtr.Zero;
-			if (getInterfaceAddresses == null)
-				return -1;
+        internal static int GetInterfaceAddresses(out IntPtr ifap)
+        {
+            ifap = IntPtr.Zero;
+            if (getInterfaceAddresses == null)
+                return -1;
 
-			return getInterfaceAddresses (out ifap);
-		}
+            return getInterfaceAddresses(out ifap);
+        }
 
-		internal static void FreeInterfaceAddresses (IntPtr ifap)
-		{
-			if (freeInterfaceAddresses == null)
-				return;
+        internal static void FreeInterfaceAddresses(IntPtr ifap)
+        {
+            if (freeInterfaceAddresses == null)
+                return;
 
-			freeInterfaceAddresses (ifap);
-		}
-	}
+            freeInterfaceAddresses(ifap);
+        }
+    }
 }
 #endif  // MONODROID

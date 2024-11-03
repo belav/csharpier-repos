@@ -88,9 +88,17 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             fixed (byte* ptr = Encoding.ASCII.GetBytes(ascii))
             {
-                var ptrResult = StringTable.TextEqualsASCII(str, new ReadOnlySpan<byte>(ptr, ascii.Length));
+                var ptrResult = StringTable.TextEqualsASCII(
+                    str,
+                    new ReadOnlySpan<byte>(ptr, ascii.Length)
+                );
                 var sbResult = StringTable.TextEquals(str, new StringBuilder(ascii));
-                var substrResult = StringTable.TextEquals(str, "xxx" + ascii + "yyy", 3, ascii.Length);
+                var substrResult = StringTable.TextEquals(
+                    str,
+                    "xxx" + ascii + "yyy",
+                    3,
+                    ascii.Length
+                );
                 Assert.Equal(substrResult, sbResult);
                 Assert.Equal(ptrResult, sbResult);
                 return ptrResult;

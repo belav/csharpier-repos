@@ -9,8 +9,8 @@ namespace System.ServiceModel
     using System.IdentityModel.Claims;
     using System.IdentityModel.Policy;
     using System.Net.Security;
-    using System.ServiceModel.Security.Tokens;
     using System.ServiceModel.Channels;
+    using System.ServiceModel.Security.Tokens;
 
     public interface IContextChannel : IChannel, IExtensibleObject<IContextChannel>
     {

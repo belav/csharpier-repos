@@ -1,5 +1,5 @@
 //
-// ClientTargetSectionTest.cs 
+// ClientTargetSectionTest.cs
 //	- unit tests for System.Web.Configuration.ClientTargetSection
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,27 +28,25 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Configuration;
-using System.Web.Configuration;
 using System.Web;
+using System.Web.Configuration;
 using System.Web.Security;
+using NUnit.Framework;
 
-namespace MonoTests.System.Web.Configuration {
+namespace MonoTests.System.Web.Configuration
+{
+    [TestFixture]
+    public class ClientTargetSectionTest
+    {
+        [Test]
+        public void Defaults()
+        {
+            ClientTargetSection c = new ClientTargetSection();
 
-	[TestFixture]
-	public class ClientTargetSectionTest  {
-
-		[Test]
-		public void Defaults ()
-		{
-			ClientTargetSection c = new ClientTargetSection ();
-
-			Assert.IsNotNull (c.ClientTargets, "A1");
-			Assert.AreEqual (typeof (ClientTargetCollection), c.ClientTargets.GetType(), "A2");
-		}
-	}
+            Assert.IsNotNull(c.ClientTargets, "A1");
+            Assert.AreEqual(typeof(ClientTargetCollection), c.ClientTargets.GetType(), "A2");
+        }
+    }
 }
-

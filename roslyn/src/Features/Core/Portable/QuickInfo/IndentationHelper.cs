@@ -11,7 +11,7 @@ using Microsoft.CodeAnalysis.Text;
 
 namespace Microsoft.CodeAnalysis.QuickInfo
 {
-    // Reproduces logic in IProjectionBufferFactoryServiceExtensions (editor layer) 
+    // Reproduces logic in IProjectionBufferFactoryServiceExtensions (editor layer)
     // Used for tests currently, but probably needed for other non-vs-editor API consumers.
     internal static class IndentationHelper
     {
@@ -27,7 +27,8 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         public static ImmutableArray<ClassifiedSpan> GetSpansWithAlignedIndentation(
             SourceText text,
             ImmutableArray<ClassifiedSpan> classifiedSpans,
-            int tabSize)
+            int tabSize
+        )
         {
             if (!classifiedSpans.IsDefault && classifiedSpans.Length > 0)
             {
@@ -45,19 +46,34 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     var startLineNumber = text.Lines.GetLineFromPosition(span.Start).LineNumber;
                     var endLineNumber = text.Lines.GetLineFromPosition(span.End).LineNumber;
 
-                    for (var lineNumber = startLineNumber; lineNumber <= endLineNumber; lineNumber++)
+                    for (
+                        var lineNumber = startLineNumber;
+                        lineNumber <= endLineNumber;
+                        lineNumber++
+                    )
                     {
                         var line = text.Lines[lineNumber];
-                        var lineOffsetOfColumn = line.GetLineOffsetFromColumn(indentationColumn, tabSize);
+                        var lineOffsetOfColumn = line.GetLineOffsetFromColumn(
+                            indentationColumn,
+                            tabSize
+                        );
 
-                        var deletion = TextSpan.FromBounds(line.Start, line.Start + lineOffsetOfColumn);
+                        var deletion = TextSpan.FromBounds(
+                            line.Start,
+                            line.Start + lineOffsetOfColumn
+                        );
 
                         if (deletion.Start > span.Start)
                         {
-                            var spanBeforeDeletion = TextSpan.FromBounds(span.Start, Math.Min(span.End, deletion.Start));
+                            var spanBeforeDeletion = TextSpan.FromBounds(
+                                span.Start,
+                                Math.Min(span.End, deletion.Start)
+                            );
                             if (spanBeforeDeletion.Length > 0)
                             {
-                                adjustedClassifiedSpans.Add(new ClassifiedSpan(spanClassificationType, spanBeforeDeletion));
+                                adjustedClassifiedSpans.Add(
+                                    new ClassifiedSpan(spanClassificationType, spanBeforeDeletion)
+                                );
                             }
                         }
 
@@ -69,7 +85,9 @@ namespace Microsoft.CodeAnalysis.QuickInfo
 
                     if (span.Length > 0)
                     {
-                        adjustedClassifiedSpans.Add(new ClassifiedSpan(spanClassificationType, span));
+                        adjustedClassifiedSpans.Add(
+                            new ClassifiedSpan(spanClassificationType, span)
+                        );
                     }
                 }
 
@@ -84,12 +102,15 @@ namespace Microsoft.CodeAnalysis.QuickInfo
         private static int DetermineIndentationColumn(
             SourceText text,
             ImmutableArray<ClassifiedSpan> spans,
-            int tabSize)
+            int tabSize
+        )
         {
             int? indentationColumn = null;
             foreach (var span in spans)
             {
-                var startLineNumber = text.Lines.GetLineFromPosition(span.TextSpan.Start).LineNumber;
+                var startLineNumber = text
+                    .Lines.GetLineFromPosition(span.TextSpan.Start)
+                    .LineNumber;
                 var endLineNumber = text.Lines.GetLineFromPosition(span.TextSpan.End).LineNumber;
 
                 // If the span starts after the first non-whitespace of the first line, we'll
@@ -106,8 +127,12 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                 //
                 // Without throwing out the first line in the example above, the indentation column
                 // used will be 4, rather than 8.
-                var startLineFirstNonWhitespace = text.Lines[startLineNumber].GetFirstNonWhitespacePosition();
-                if (startLineFirstNonWhitespace.HasValue && startLineFirstNonWhitespace.Value < span.TextSpan.Start)
+                var startLineFirstNonWhitespace = text.Lines[startLineNumber]
+                    .GetFirstNonWhitespacePosition();
+                if (
+                    startLineFirstNonWhitespace.HasValue
+                    && startLineFirstNonWhitespace.Value < span.TextSpan.Start
+                )
                 {
                     startLineNumber++;
                 }
@@ -121,7 +146,10 @@ namespace Microsoft.CodeAnalysis.QuickInfo
                     }
 
                     indentationColumn = indentationColumn.HasValue
-                        ? Math.Min(indentationColumn.Value, line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize))
+                        ? Math.Min(
+                            indentationColumn.Value,
+                            line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize)
+                        )
                         : line.GetColumnOfFirstNonWhitespaceCharacterOrEndOfLine(tabSize);
                 }
             }

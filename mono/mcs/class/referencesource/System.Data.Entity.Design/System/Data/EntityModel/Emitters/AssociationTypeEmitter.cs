@@ -10,10 +10,9 @@
 using System;
 using System.CodeDom;
 using System.Data;
-using System.Data.Metadata.Edm;
 using System.Data.EntityModel.SchemaObjectModel;
+using System.Data.Metadata.Edm;
 using System.Diagnostics;
-
 
 namespace System.Data.EntityModel.Emitters
 {
@@ -23,10 +22,7 @@ namespace System.Data.EntityModel.Emitters
     internal sealed class AssociationTypeEmitter : SchemaTypeEmitter
     {
         public AssociationTypeEmitter(ClientApiGenerator generator, AssociationType associationType)
-            : base(generator, associationType)
-        {
-        }
-
+            : base(generator, associationType) { }
 
         public override CodeTypeDeclarationCollection EmitApiClass()
         {
@@ -37,16 +33,17 @@ namespace System.Data.EntityModel.Emitters
 
             Generator.CompileUnit.AssemblyCustomAttributes.Add(
                 AttributeEmitter.EmitSimpleAttribute(
-                Utils.FQAdoFrameworkDataClassesName("EdmRelationshipAttribute"),
-                Item.NamespaceName,  //it is ok to use the c namespace because relationships aren't backed by clr objects
-                Item.Name,
-                end1.Name,
-                GetMultiplicityCodeExpression(end1.RelationshipMultiplicity),
-                GetEndTypeCodeExpression(end1),
-                end2.Name,
-                GetMultiplicityCodeExpression(end2.RelationshipMultiplicity),
-                GetEndTypeCodeExpression(end2)
-                ));
+                    Utils.FQAdoFrameworkDataClassesName("EdmRelationshipAttribute"),
+                    Item.NamespaceName, //it is ok to use the c namespace because relationships aren't backed by clr objects
+                    Item.Name,
+                    end1.Name,
+                    GetMultiplicityCodeExpression(end1.RelationshipMultiplicity),
+                    GetEndTypeCodeExpression(end1),
+                    end2.Name,
+                    GetMultiplicityCodeExpression(end2.RelationshipMultiplicity),
+                    GetEndTypeCodeExpression(end2)
+                )
+            );
 
             // this method doesn't actually create a new type, just a new assembly level attribute for each end
             return new CodeTypeDeclarationCollection();
@@ -54,7 +51,11 @@ namespace System.Data.EntityModel.Emitters
 
         private CodeTypeOfExpression GetEndTypeCodeExpression(AssociationEndMember end)
         {
-            return new CodeTypeOfExpression(Generator.GetFullyQualifiedTypeReference(((RefType)end.TypeUsage.EdmType).ElementType));
+            return new CodeTypeOfExpression(
+                Generator.GetFullyQualifiedTypeReference(
+                    ((RefType)end.TypeUsage.EdmType).ElementType
+                )
+            );
         }
 
         private CodeExpression GetMultiplicityCodeExpression(RelationshipMultiplicity multiplicity)
@@ -63,16 +64,15 @@ namespace System.Data.EntityModel.Emitters
             // [System.Data.Objects.DataClasses.EdmRelationshipRoleAttribute("CustomerOrder", "Customer", global::System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(Customer))]
             string roleMultiplicity = multiplicity.ToString();
             CodeExpression roleMultiplicityExpression = Emitter.EmitEnumMemberExpression(
-                TypeReference.AdoFrameworkMetadataEdmType("RelationshipMultiplicity"), roleMultiplicity);
+                TypeReference.AdoFrameworkMetadataEdmType("RelationshipMultiplicity"),
+                roleMultiplicity
+            );
             return roleMultiplicityExpression;
         }
 
         internal new AssociationType Item
         {
-            get
-            {
-                return base.Item as AssociationType;
-            }
+            get { return base.Item as AssociationType; }
         }
     }
 }

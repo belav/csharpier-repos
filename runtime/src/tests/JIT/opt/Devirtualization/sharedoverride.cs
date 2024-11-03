@@ -6,8 +6,8 @@ using Xunit;
 
 public class Base
 {
-    public virtual int Foo(int x) 
-    { 
+    public virtual int Foo(int x)
+    {
         return x + 1;
     }
 }
@@ -19,7 +19,7 @@ public class Base
 
 public class Derived<T> : Base
 {
-    public override sealed int Foo(int x)
+    public sealed override int Foo(int x)
     {
         if (typeof(T) == typeof(string))
         {
@@ -29,7 +29,7 @@ public class Derived<T> : Base
         {
             return x + 31;
         }
-        else 
+        else
         {
             return x + 22;
         }
@@ -48,7 +48,7 @@ public class Test_sharedoverride
         var ds = new Derived<string>();
         var dx = new Derived<object>();
         var di = new Derived<int>();
-        var b  = new Base();
+        var b = new Base();
 
         int resultD = ds.Foo(1) + dx.Foo(1) + di.Foo(1) + b.Foo(1);
 

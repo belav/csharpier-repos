@@ -1,7 +1,7 @@
 using System;
-using System.Runtime.InteropServices;
-using System.Runtime.CompilerServices;
 using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 
 //TODO add to a typeref
 //TODO is Bla<D> a memberref?
@@ -16,50 +16,46 @@ using System.ComponentModel;
 //TODO add to an interfaceimpl
 
 
-[assembly: Generic (14)]
-[module: Generic (80)]
-
+[assembly: Generic(14)]
+[module: Generic(80)]
 
 [AttributeUsage(AttributeTargets.All)]
 public sealed class GenericAttribute : Attribute
 {
-	public GenericAttribute () {}
-	public GenericAttribute (int x) {}
+    public GenericAttribute() { }
+
+    public GenericAttribute(int x) { }
 }
 
-public interface IFace {}
+public interface IFace { }
 
+public class Foo : IFace { }
 
-public class Foo : IFace
-{}
-
-public class Foo<T> 
+public class Foo<T>
 {
-	[Generic (70)]
-	public void Bla<D> () {}
-
+    [Generic(70)]
+    public void Bla<D>() { }
 }
-
 
 public delegate int Del();
 
-[Generic (30)]
+[Generic(30)]
 public class Class
 {
-	[Generic (20)]
-	int field;
+    [Generic(20)]
+    int field;
 
-	int Foo ([Generic (50)] int d) { return d; }
+    int Foo([Generic(50)] int d)
+    {
+        return d;
+    }
 
-	[Generic (100)]
-	public int Bla { get; set; }
+    [Generic(100)]
+    public int Bla { get; set; }
 
-	[Generic (110)]
-	public event Del Zzz;
+    [Generic(110)]
+    public event Del Zzz;
 
-	[Generic (10)]
-	public static void Main ()
-	{
-	
-	}
+    [Generic(10)]
+    public static void Main() { }
 }

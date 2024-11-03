@@ -30,10 +30,9 @@
 
 namespace System.Windows.Forms
 {
-
-	public enum Orientation
-	{
-		Horizontal	= 0,
-		Vertical	= 1,
-	}
+    public enum Orientation
+    {
+        Horizontal = 0,
+        Vertical = 1,
+    }
 }

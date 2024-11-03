@@ -21,14 +21,12 @@ public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvi
         {
             var underlyingModelType = typeof(TModel).UnwrapNullableType().UnwrapEnumType();
 
-            if (underlyingModelType == typeof(long)
-                || underlyingModelType == typeof(ulong))
+            if (underlyingModelType == typeof(long) || underlyingModelType == typeof(ulong))
             {
                 return new ConverterMappingHints(precision: 20, scale: 0);
             }
 
-            if (underlyingModelType == typeof(float)
-                || underlyingModelType == typeof(double))
+            if (underlyingModelType == typeof(float) || underlyingModelType == typeof(double))
             {
                 return new ConverterMappingHints(precision: 38, scale: 17);
             }
@@ -44,9 +42,7 @@ public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvi
     ///     See <see href="https://aka.ms/efcore-docs-value-converters">EF Core value converters</see> for more information and examples.
     /// </remarks>
     public CastingConverter()
-        : this(null)
-    {
-    }
+        : this(null) { }
 
     /// <summary>
     ///     Creates a new instance of this converter.
@@ -58,21 +54,23 @@ public class CastingConverter<TModel, TProvider> : ValueConverter<TModel, TProvi
         : base(
             Convert<TModel, TProvider>(),
             Convert<TProvider, TModel>(),
-            DefaultHints?.With(mappingHints) ?? mappingHints)
-    {
-    }
+            DefaultHints?.With(mappingHints) ?? mappingHints
+        ) { }
 
     /// <summary>
     ///     A <see cref="ValueConverterInfo" /> for the default use of this converter.
     /// </summary>
-    public static ValueConverterInfo DefaultInfo { get; }
-        = new(typeof(TModel), typeof(TProvider), i => new CastingConverter<TModel, TProvider>(i.MappingHints), DefaultHints);
+    public static ValueConverterInfo DefaultInfo { get; } =
+        new(
+            typeof(TModel),
+            typeof(TProvider),
+            i => new CastingConverter<TModel, TProvider>(i.MappingHints),
+            DefaultHints
+        );
 
     private static Expression<Func<TIn, TOut>> Convert<TIn, TOut>()
     {
         var param = Expression.Parameter(typeof(TIn), "v");
-        return Expression.Lambda<Func<TIn, TOut>>(
-            Expression.Convert(param, typeof(TOut)),
-            param);
+        return Expression.Lambda<Func<TIn, TOut>>(Expression.Convert(param, typeof(TOut)), param);
     }
 }

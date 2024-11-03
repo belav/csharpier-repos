@@ -24,7 +24,9 @@ namespace System.Threading.Channels
 
             if (options.SingleReader)
             {
-                return new SingleConsumerUnboundedChannel<T>(!options.AllowSynchronousContinuations);
+                return new SingleConsumerUnboundedChannel<T>(
+                    !options.AllowSynchronousContinuations
+                );
             }
 
             return new UnboundedChannel<T>(!options.AllowSynchronousContinuations);
@@ -45,7 +47,12 @@ namespace System.Threading.Channels
                 throw new ArgumentOutOfRangeException(nameof(capacity));
             }
 
-            return new BoundedChannel<T>(capacity, BoundedChannelFullMode.Wait, runContinuationsAsynchronously: true, itemDropped: null);
+            return new BoundedChannel<T>(
+                capacity,
+                BoundedChannelFullMode.Wait,
+                runContinuationsAsynchronously: true,
+                itemDropped: null
+            );
         }
 
         /// <summary>Creates a channel subject to the provided options.</summary>
@@ -62,14 +69,22 @@ namespace System.Threading.Channels
         /// <param name="options">Options that guide the behavior of the channel.</param>
         /// <param name="itemDropped">Delegate that will be called when item is being dropped from channel. See <see cref="BoundedChannelFullMode"/>.</param>
         /// <returns>The created channel.</returns>
-        public static Channel<T> CreateBounded<T>(BoundedChannelOptions options, Action<T>? itemDropped)
+        public static Channel<T> CreateBounded<T>(
+            BoundedChannelOptions options,
+            Action<T>? itemDropped
+        )
         {
             if (options is null)
             {
                 throw new ArgumentNullException(nameof(options));
             }
 
-            return new BoundedChannel<T>(options.Capacity, options.FullMode, !options.AllowSynchronousContinuations, itemDropped);
+            return new BoundedChannel<T>(
+                options.Capacity,
+                options.FullMode,
+                !options.AllowSynchronousContinuations,
+                itemDropped
+            );
         }
     }
 }

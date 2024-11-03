@@ -31,7 +31,10 @@ internal static class ClosedGenericMatcher
     /// <c>typeof(KeyValuePair{,})</c>, and <paramref name="queryType"/> is
     /// <c>typeof(KeyValuePair{string, object})</c>.
     /// </remarks>
-    public static Type? ExtractGenericInterface([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)]  Type queryType, Type interfaceType)
+    public static Type? ExtractGenericInterface(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type queryType,
+        Type interfaceType
+    )
     {
 #if !NET8_0_OR_GREATER
         ArgumentNullThrowHelper.ThrowIfNull(queryType);
@@ -58,12 +61,13 @@ internal static class ClosedGenericMatcher
 
     private static bool IsGenericInstantiation(Type candidate, Type interfaceType)
     {
-        return
-            candidate.IsGenericType &&
-            candidate.GetGenericTypeDefinition() == interfaceType;
+        return candidate.IsGenericType && candidate.GetGenericTypeDefinition() == interfaceType;
     }
 
-    private static Type? GetGenericInstantiation([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type queryType, Type interfaceType)
+    private static Type? GetGenericInstantiation(
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.Interfaces)] Type queryType,
+        Type interfaceType
+    )
     {
         Type? bestMatch = null;
         var interfaces = queryType.GetInterfaces();
@@ -75,7 +79,9 @@ internal static class ClosedGenericMatcher
                 {
                     bestMatch = @interface;
                 }
-                else if (StringComparer.Ordinal.Compare(@interface.FullName, bestMatch.FullName) < 0)
+                else if (
+                    StringComparer.Ordinal.Compare(@interface.FullName, bestMatch.FullName) < 0
+                )
                 {
                     bestMatch = @interface;
                 }

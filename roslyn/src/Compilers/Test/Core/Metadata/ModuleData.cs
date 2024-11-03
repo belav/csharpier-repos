@@ -62,7 +62,13 @@ namespace Roslyn.Test.Utilities
         public string FullName => Id.FullName;
         public Guid Mvid => Id.Mvid;
 
-        public ModuleData(string netModuleName, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule, bool isCorLib)
+        public ModuleData(
+            string netModuleName,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule,
+            bool isCorLib
+        )
         {
             this.Id = new ModuleDataId(netModuleName, netModuleName, GetMvid(image));
             this.Kind = OutputKind.NetModule;
@@ -72,7 +78,14 @@ namespace Roslyn.Test.Utilities
             this.IsCorLib = isCorLib;
         }
 
-        public ModuleData(AssemblyIdentity identity, OutputKind kind, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule, bool isCorLib)
+        public ModuleData(
+            AssemblyIdentity identity,
+            OutputKind kind,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule,
+            bool isCorLib
+        )
         {
             this.Id = new ModuleDataId(identity.Name, identity.GetDisplayName(), GetMvid(image));
             this.Kind = kind;
@@ -82,7 +95,14 @@ namespace Roslyn.Test.Utilities
             this.IsCorLib = isCorLib;
         }
 
-        public ModuleData(ModuleDataId id, OutputKind kind, ImmutableArray<byte> image, ImmutableArray<byte> pdb, bool inMemoryModule, bool isCorLib)
+        public ModuleData(
+            ModuleDataId id,
+            OutputKind kind,
+            ImmutableArray<byte> image,
+            ImmutableArray<byte> pdb,
+            bool inMemoryModule,
+            bool isCorLib
+        )
         {
             this.Id = id;
             this.Kind = kind;

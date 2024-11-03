@@ -32,7 +32,8 @@ internal static partial class Interop
                 return array;
             }
 
-            internal unsafe ReadOnlySpan<byte> DangerousAsSpan() => new ReadOnlySpan<byte>((void*)pbData, (int)cbData);
+            internal unsafe ReadOnlySpan<byte> DangerousAsSpan() =>
+                new ReadOnlySpan<byte>((void*)pbData, (int)cbData);
         }
     }
 }

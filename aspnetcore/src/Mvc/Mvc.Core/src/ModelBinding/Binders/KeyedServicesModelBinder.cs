@@ -28,13 +28,16 @@ internal class KeyedServicesModelBinder : IModelBinder
             return Task.CompletedTask;
         }
 
-        var model = _isOptional ?
-            keyedServices.GetKeyedService(bindingContext.ModelType, _key) :
-            keyedServices.GetRequiredKeyedService(bindingContext.ModelType, _key);
+        var model = _isOptional
+            ? keyedServices.GetKeyedService(bindingContext.ModelType, _key)
+            : keyedServices.GetRequiredKeyedService(bindingContext.ModelType, _key);
 
         if (model != null)
         {
-            bindingContext.ValidationState.Add(model, new ValidationStateEntry() { SuppressValidation = true });
+            bindingContext.ValidationState.Add(
+                model,
+                new ValidationStateEntry() { SuppressValidation = true }
+            );
         }
 
         bindingContext.Result = ModelBindingResult.Success(model);

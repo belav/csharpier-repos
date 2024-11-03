@@ -23,6 +23,7 @@ namespace System.ComponentModel.Composition.Hosting
     {
         // narrow lock
         private readonly ReadWriteLock? _stateLock;
+
         // wide lock
         private static readonly object _compositionLock = new object();
 
@@ -53,10 +54,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         public bool IsThreadSafe
         {
-            get
-            {
-                return _isThreadSafe;
-            }
+            get { return _isThreadSafe; }
         }
 
         private void EnterCompositionLock()
@@ -138,9 +136,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         private sealed class EmptyLockHolder : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 }

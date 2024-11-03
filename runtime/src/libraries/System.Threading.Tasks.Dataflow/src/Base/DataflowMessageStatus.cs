@@ -42,6 +42,6 @@ namespace System.Threading.Tasks.Dataflow
         /// Indicates that the <see cref="ITargetBlock{TInput}"/> declined the message.  The <see cref="ISourceBlock{TOutput}"/> still owns the message.
         /// Additionally, the <see cref="ITargetBlock{TInput}"/> will decline all future messages sent by the source.
         /// </summary>
-        DecliningPermanently = 0x4
+        DecliningPermanently = 0x4,
     }
 }

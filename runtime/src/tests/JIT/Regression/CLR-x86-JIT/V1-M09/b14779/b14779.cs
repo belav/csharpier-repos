@@ -6,7 +6,6 @@ using System;
 using System.Globalization;
 using Xunit;
 
-
 namespace DefaultNamespace
 {
     public class cinfo
@@ -19,6 +18,7 @@ namespace DefaultNamespace
             VTestIsPrintable();
             VTestIsTitleCase();
         }
+
         internal static void VTestIsPrintable()
         {
             for (char ch = '\x0'; ch <= '\x255'; ch++)

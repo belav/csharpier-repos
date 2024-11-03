@@ -2,10 +2,7 @@
 {
     public static class Terminal
     {
-        public static void Render(
-            this ITerminal terminal,
-            TextSpan span,
-            Region region = null)
+        public static void Render(this ITerminal terminal, TextSpan span, Region region = null)
         {
             if (terminal is IRenderable t)
             {
@@ -18,7 +15,8 @@
         public static void Render(
             this ITerminal terminal,
             FormattableString value,
-            Region region = null)
+            Region region = null
+        )
         {
             if (terminal is IRenderable t)
             {
@@ -33,7 +31,8 @@
         public static ITerminal GetTerminal(
             this IConsole console,
             bool preferVirtualTerminal = true,
-            OutputMode outputMode = OutputMode.Auto)
+            OutputMode outputMode = OutputMode.Auto
+        )
         {
             if (console == null)
             {
@@ -52,13 +51,13 @@
 
             ITerminal terminal;
 
-            if (preferVirtualTerminal &&
-                VirtualTerminalMode.TryEnable() is VirtualTerminalMode virtualTerminalMode &&
-                virtualTerminalMode.IsEnabled)
+            if (
+                preferVirtualTerminal
+                && VirtualTerminalMode.TryEnable() is VirtualTerminalMode virtualTerminalMode
+                && virtualTerminalMode.IsEnabled
+            )
             {
-                terminal = new VirtualTerminal(
-                    console,
-                    virtualTerminalMode);
+                terminal = new VirtualTerminal(console, virtualTerminalMode);
             }
             else
             {

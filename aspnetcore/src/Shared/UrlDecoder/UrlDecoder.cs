@@ -15,13 +15,18 @@ internal sealed class UrlDecoder
     /// <param name="destination">The byte span where unescaped url path is copied to.</param>
     /// <param name="isFormEncoding">Whether we are doing form encoding or not.</param>
     /// <returns>The length of the byte sequence of the unescaped url path.</returns>
-    public static int DecodeRequestLine(ReadOnlySpan<byte> source, Span<byte> destination, bool isFormEncoding)
+    public static int DecodeRequestLine(
+        ReadOnlySpan<byte> source,
+        Span<byte> destination,
+        bool isFormEncoding
+    )
     {
         if (destination.Length < source.Length)
         {
             throw new ArgumentException(
                 "Length of the destination byte span is less than the source.",
-                nameof(destination));
+                nameof(destination)
+            );
         }
 
         // This requires the destination span to be larger or equal to source span
@@ -93,7 +98,12 @@ internal sealed class UrlDecoder
     /// <param name="destinationIndex">The place to write to</param>
     /// <param name="buffer">The byte array</param>
     /// <param name="isFormEncoding">Whether we are doing form encodoing</param>
-    private static bool DecodeCore(ref int sourceIndex, ref int destinationIndex, Span<byte> buffer, bool isFormEncoding)
+    private static bool DecodeCore(
+        ref int sourceIndex,
+        ref int destinationIndex,
+        Span<byte> buffer,
+        bool isFormEncoding
+    )
     {
         // preserves the original head. if the percent-encodings cannot be interpreted as sequence of UTF-8 octets,
         // bytes from this till the last scanned one will be copied to the memory pointed by writer.
@@ -115,7 +125,9 @@ internal sealed class UrlDecoder
             return true;
         }
 
-        int byte2 = 0, byte3 = 0, byte4 = 0;
+        int byte2 = 0,
+            byte3 = 0,
+            byte4 = 0;
 
         // anticipate more bytes
         int currentDecodeBits;
@@ -306,9 +318,10 @@ internal sealed class UrlDecoder
         }
 
         var value = buffer[scan++];
-        var isHex = ((value >= '0') && (value <= '9')) ||
-                     ((value >= 'A') && (value <= 'F')) ||
-                     ((value >= 'a') && (value <= 'f'));
+        var isHex =
+            ((value >= '0') && (value <= '9'))
+            || ((value >= 'A') && (value <= 'F'))
+            || ((value >= 'a') && (value <= 'f'));
 
         if (!isHex)
         {
@@ -521,7 +534,10 @@ internal sealed class UrlDecoder
             return false;
         }
 
-        if (!System.Text.Rune.TryCreate(currentDecodeBits, out var rune) || !rune.TryEncodeToUtf16(buffer.Slice(destinationIndex), out var charsWritten))
+        if (
+            !System.Text.Rune.TryCreate(currentDecodeBits, out var rune)
+            || !rune.TryEncodeToUtf16(buffer.Slice(destinationIndex), out var charsWritten)
+        )
         {
             // Reasons for this failure could be:
             // Value is in the range of 0xD800-0xDFFF UTF-16 surrogates that are not allowed in UTF-8
@@ -604,22 +620,263 @@ internal sealed class UrlDecoder
     }
 
     private static ReadOnlySpan<sbyte> CharToHexLookup =>
-    [
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 15
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 31
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 47
-            0x0, 0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9,  -1,  -1,  -1,  -1,  -1,  -1, // 63
-             -1, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 79
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 95
-             -1, 0xa, 0xb, 0xc, 0xd, 0xe, 0xf,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 111
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 127
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 143
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 159
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 175
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 191
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 207
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 223
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1, // 239
-             -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1,  -1  // 255
-    ];
+        [
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 15
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 31
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 47
+            0x0,
+            0x1,
+            0x2,
+            0x3,
+            0x4,
+            0x5,
+            0x6,
+            0x7,
+            0x8,
+            0x9,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 63
+            -1,
+            0xA,
+            0xB,
+            0xC,
+            0xD,
+            0xE,
+            0xF,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 79
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 95
+            -1,
+            0xa,
+            0xb,
+            0xc,
+            0xd,
+            0xe,
+            0xf,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 111
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 127
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 143
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 159
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 175
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 191
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 207
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 223
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1, // 239
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1,
+            -1 // 255
+            ,
+        ];
 }

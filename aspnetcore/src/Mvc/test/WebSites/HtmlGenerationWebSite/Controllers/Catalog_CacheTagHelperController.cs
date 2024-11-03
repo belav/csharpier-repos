@@ -76,7 +76,8 @@ public class Catalog_CacheTagHelperController : Controller
     public IActionResult UpdateProducts(
         [FromServices] ProductsService productService,
         string category,
-        [FromBody] List<Product> products)
+        [FromBody] List<Product> products
+    )
     {
         productService.UpdateProducts(category, products);
         return Ok();

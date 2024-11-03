@@ -43,38 +43,38 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     private static readonly Func<Mode, Mode, int> Compare = (a, b) => a - b;
     private StringWriter _stringWriter;
 
-    private static readonly ModeAttributes<Mode>[] ModeDetails = new[] {
-            // Regular src with file version alone
-            new ModeAttributes<Mode>(Mode.AppendVersion, new[] { AppendVersionAttributeName }),
-            // Globbed src (include only)
-            new ModeAttributes<Mode>(Mode.GlobbedSrc, new [] { SrcIncludeAttributeName }),
-            // Globbed src (include & exclude)
-            new ModeAttributes<Mode>(Mode.GlobbedSrc, new [] { SrcIncludeAttributeName, SrcExcludeAttributeName }),
-            // Fallback with static src
-            new ModeAttributes<Mode>(Mode.Fallback,
-                new[]
-                {
-                    FallbackSrcAttributeName,
-                    FallbackTestExpressionAttributeName
-                }),
-            // Fallback with globbed src (include only)
-            new ModeAttributes<Mode>(
-                Mode.Fallback,
-                new[]
-                {
-                    FallbackSrcIncludeAttributeName,
-                    FallbackTestExpressionAttributeName
-                }),
-            // Fallback with globbed src (include & exclude)
-            new ModeAttributes<Mode>(
-                Mode.Fallback,
-                new[]
-                {
-                    FallbackSrcIncludeAttributeName,
-                    FallbackSrcExcludeAttributeName,
-                    FallbackTestExpressionAttributeName
-                }),
-        };
+    private static readonly ModeAttributes<Mode>[] ModeDetails = new[]
+    {
+        // Regular src with file version alone
+        new ModeAttributes<Mode>(Mode.AppendVersion, new[] { AppendVersionAttributeName }),
+        // Globbed src (include only)
+        new ModeAttributes<Mode>(Mode.GlobbedSrc, new[] { SrcIncludeAttributeName }),
+        // Globbed src (include & exclude)
+        new ModeAttributes<Mode>(
+            Mode.GlobbedSrc,
+            new[] { SrcIncludeAttributeName, SrcExcludeAttributeName }
+        ),
+        // Fallback with static src
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[] { FallbackSrcAttributeName, FallbackTestExpressionAttributeName }
+        ),
+        // Fallback with globbed src (include only)
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[] { FallbackSrcIncludeAttributeName, FallbackTestExpressionAttributeName }
+        ),
+        // Fallback with globbed src (include & exclude)
+        new ModeAttributes<Mode>(
+            Mode.Fallback,
+            new[]
+            {
+                FallbackSrcIncludeAttributeName,
+                FallbackSrcExcludeAttributeName,
+                FallbackTestExpressionAttributeName,
+            }
+        ),
+    };
 
     /// <summary>
     /// Creates a new <see cref="ScriptTagHelper"/>.
@@ -93,7 +93,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         IFileVersionProvider fileVersionProvider,
         HtmlEncoder htmlEncoder,
         JavaScriptEncoder javaScriptEncoder,
-        IUrlHelperFactory urlHelperFactory)
+        IUrlHelperFactory urlHelperFactory
+    )
         : base(urlHelperFactory, htmlEncoder)
     {
         HostingEnvironment = hostingEnvironment;
@@ -247,8 +248,12 @@ public class ScriptTagHelper : UrlResolutionTagHelper
                 var existingAttribute = output.Attributes[index];
                 output.Attributes[index] = new TagHelperAttribute(
                     existingAttribute.Name,
-                    FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, Src),
-                    existingAttribute.ValueStyle);
+                    FileVersionProvider.AddFileVersionToPath(
+                        ViewContext.HttpContext.Request.PathBase,
+                        Src
+                    ),
+                    existingAttribute.ValueStyle
+                );
             }
         }
 
@@ -277,9 +282,7 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         }
     }
 
-    private void BuildGlobbedScriptTags(
-        TagHelperAttributeList attributes,
-        TagHelperContent builder)
+    private void BuildGlobbedScriptTags(TagHelperAttributeList attributes, TagHelperContent builder)
     {
         EnsureGlobbingUrlBuilder();
 
@@ -304,14 +307,19 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     {
         EnsureGlobbingUrlBuilder();
 
-        var fallbackSrcs = GlobbingUrlBuilder.BuildUrlList(FallbackSrc, FallbackSrcInclude, FallbackSrcExclude);
+        var fallbackSrcs = GlobbingUrlBuilder.BuildUrlList(
+            FallbackSrc,
+            FallbackSrcInclude,
+            FallbackSrcExclude
+        );
         if (fallbackSrcs.Count > 0)
         {
             // Build the <script> tag that checks the test method and if it fails, renders the extra script.
-            builder.AppendHtml(Environment.NewLine)
-                   .AppendHtml("<script>(")
-                   .AppendHtml(FallbackTestExpression)
-                   .AppendHtml("||document.write(\"");
+            builder
+                .AppendHtml(Environment.NewLine)
+                .AppendHtml("<script>(")
+                .AppendHtml(FallbackTestExpression)
+                .AppendHtml("||document.write(\"");
 
             foreach (var src in fallbackSrcs)
             {
@@ -327,9 +335,18 @@ public class ScriptTagHelper : UrlResolutionTagHelper
                 for (var i = 0; i < attributesCount; i++)
                 {
                     var attribute = attributes[i];
-                    if (!attribute.Name.Equals(SrcAttributeName, StringComparison.OrdinalIgnoreCase))
+                    if (
+                        !attribute.Name.Equals(SrcAttributeName, StringComparison.OrdinalIgnoreCase)
+                    )
                     {
-                        if (SuppressFallbackIntegrity && string.Equals(IntegrityAttributeName, attribute.Name, StringComparison.OrdinalIgnoreCase))
+                        if (
+                            SuppressFallbackIntegrity
+                            && string.Equals(
+                                IntegrityAttributeName,
+                                attribute.Name,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                        )
                         {
                             continue;
                         }
@@ -346,7 +363,12 @@ public class ScriptTagHelper : UrlResolutionTagHelper
 
                 if (addSrc)
                 {
-                    WriteVersionedSrc(SrcAttributeName, src, HtmlAttributeValueStyle.DoubleQuotes, StringWriter);
+                    WriteVersionedSrc(
+                        SrcAttributeName,
+                        src,
+                        HtmlAttributeValueStyle.DoubleQuotes,
+                        StringWriter
+                    );
                 }
 
                 StringWriter.Write("></script>");
@@ -366,7 +388,10 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     {
         if (AppendVersion == true)
         {
-            srcValue = FileVersionProvider.AddFileVersionToPath(ViewContext.HttpContext.Request.PathBase, srcValue);
+            srcValue = FileVersionProvider.AddFileVersionToPath(
+                ViewContext.HttpContext.Request.PathBase,
+                srcValue
+            );
         }
 
         return srcValue;
@@ -376,7 +401,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         string srcName,
         string srcValue,
         HtmlAttributeValueStyle valueStyle,
-        IHtmlContentBuilder builder)
+        IHtmlContentBuilder builder
+    )
     {
         srcValue = GetVersionedSrc(srcValue);
 
@@ -389,7 +415,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         string srcName,
         string srcValue,
         HtmlAttributeValueStyle valueStyle,
-        TextWriter writer)
+        TextWriter writer
+    )
     {
         srcValue = GetVersionedSrc(srcValue);
 
@@ -405,7 +432,8 @@ public class ScriptTagHelper : UrlResolutionTagHelper
             GlobbingUrlBuilder = new GlobbingUrlBuilder(
                 HostingEnvironment.WebRootFileProvider,
                 Cache,
-                ViewContext.HttpContext.Request.PathBase);
+                ViewContext.HttpContext.Request.PathBase
+            );
         }
     }
 
@@ -413,14 +441,16 @@ public class ScriptTagHelper : UrlResolutionTagHelper
     {
         if (FileVersionProvider == null)
         {
-            FileVersionProvider = ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
+            FileVersionProvider =
+                ViewContext.HttpContext.RequestServices.GetRequiredService<IFileVersionProvider>();
         }
     }
 
     private void BuildScriptTag(
         string src,
         TagHelperAttributeList attributes,
-        TagHelperContent builder)
+        TagHelperContent builder
+    )
     {
         builder.AppendHtml("<script");
 
@@ -445,7 +475,12 @@ public class ScriptTagHelper : UrlResolutionTagHelper
 
         if (addSrc)
         {
-            AppendVersionedSrc(SrcAttributeName, src, HtmlAttributeValueStyle.DoubleQuotes, builder);
+            AppendVersionedSrc(
+                SrcAttributeName,
+                src,
+                HtmlAttributeValueStyle.DoubleQuotes,
+                builder
+            );
         }
 
         builder.AppendHtml("></script>");
@@ -467,6 +502,6 @@ public class ScriptTagHelper : UrlResolutionTagHelper
         /// Rendering a fallback block if primary javascript fails to load. Will also do globbing for both the
         /// primary and fallback srcs if the appropriate properties are set.
         /// </summary>
-        Fallback = 2
+        Fallback = 2,
     }
 }

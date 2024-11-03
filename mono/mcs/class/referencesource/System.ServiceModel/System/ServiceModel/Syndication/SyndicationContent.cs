@@ -6,21 +6,21 @@ namespace System.ServiceModel.Syndication
 {
     using System;
     using System.Collections.Generic;
+    using System.Diagnostics.CodeAnalysis;
+    using System.Runtime.CompilerServices;
+    using System.Runtime.Serialization;
     using System.Text;
     using System.Xml;
     using System.Xml.Serialization;
-    using System.Runtime.Serialization;
-    using System.Diagnostics.CodeAnalysis;
-    using System.Runtime.CompilerServices;
 
-    [TypeForwardedFrom("System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35")]
+    [TypeForwardedFrom(
+        "System.ServiceModel.Web, Version=3.5.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35"
+    )]
     public abstract class SyndicationContent
     {
         Dictionary<XmlQualifiedName, string> attributeExtensions;
 
-        protected SyndicationContent()
-        {
-        }
+        protected SyndicationContent() { }
 
         protected SyndicationContent(SyndicationContent source)
         {
@@ -39,10 +39,7 @@ namespace System.ServiceModel.Syndication
             }
         }
 
-        public abstract string Type
-        {
-            get;
-        }
+        public abstract string Type { get; }
 
         public static TextSyndicationContent CreateHtmlContent(string content)
         {
@@ -66,12 +63,23 @@ namespace System.ServiceModel.Syndication
 
         public static XmlSyndicationContent CreateXmlContent(object dataContractObject)
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, dataContractObject, (DataContractSerializer) null);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                dataContractObject,
+                (DataContractSerializer)null
+            );
         }
 
-        public static XmlSyndicationContent CreateXmlContent(object dataContractObject, XmlObjectSerializer dataContractSerializer)
+        public static XmlSyndicationContent CreateXmlContent(
+            object dataContractObject,
+            XmlObjectSerializer dataContractSerializer
+        )
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, dataContractObject, dataContractSerializer);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                dataContractObject,
+                dataContractSerializer
+            );
         }
 
         public static XmlSyndicationContent CreateXmlContent(XmlReader xmlReader)
@@ -79,9 +87,16 @@ namespace System.ServiceModel.Syndication
             return new XmlSyndicationContent(xmlReader);
         }
 
-        public static XmlSyndicationContent CreateXmlContent(object xmlSerializerObject, XmlSerializer serializer)
+        public static XmlSyndicationContent CreateXmlContent(
+            object xmlSerializerObject,
+            XmlSerializer serializer
+        )
         {
-            return new XmlSyndicationContent(Atom10Constants.XmlMediaType, xmlSerializerObject, serializer);
+            return new XmlSyndicationContent(
+                Atom10Constants.XmlMediaType,
+                xmlSerializerObject,
+                serializer
+            );
         }
 
         public abstract SyndicationContent Clone();
@@ -94,7 +109,9 @@ namespace System.ServiceModel.Syndication
             }
             if (string.IsNullOrEmpty(outerElementName))
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(SR.GetString(SR.OuterElementNameNotSpecified));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                    SR.GetString(SR.OuterElementNameNotSpecified)
+                );
             }
             writer.WriteStartElement(outerElementName, outerElementNamespace);
             writer.WriteAttributeString(Atom10Constants.TypeTag, string.Empty, this.Type);

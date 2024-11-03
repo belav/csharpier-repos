@@ -21,10 +21,9 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     /// </summary>
     public SqlServerSqlNullabilityProcessor(
         RelationalParameterBasedSqlProcessorDependencies dependencies,
-        bool useRelationalNulls)
-        : base(dependencies, useRelationalNulls)
-    {
-    }
+        bool useRelationalNulls
+    )
+        : base(dependencies, useRelationalNulls) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,13 +34,22 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     protected override SqlExpression VisitCustomSqlExpression(
         SqlExpression sqlExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
-        => sqlExpression switch
+        out bool nullable
+    ) =>
+        sqlExpression switch
         {
-            SqlServerAggregateFunctionExpression aggregateFunctionExpression
-                => VisitSqlServerAggregateFunction(aggregateFunctionExpression, allowOptimizedExpansion, out nullable),
+            SqlServerAggregateFunctionExpression aggregateFunctionExpression =>
+                VisitSqlServerAggregateFunction(
+                    aggregateFunctionExpression,
+                    allowOptimizedExpansion,
+                    out nullable
+                ),
 
-            _ => base.VisitCustomSqlExpression(sqlExpression, allowOptimizedExpansion, out nullable)
+            _ => base.VisitCustomSqlExpression(
+                sqlExpression,
+                allowOptimizedExpansion,
+                out nullable
+            ),
         };
 
     /// <summary>
@@ -53,7 +61,8 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     protected virtual SqlExpression VisitSqlServerAggregateFunction(
         SqlServerAggregateFunctionExpression aggregateFunctionExpression,
         bool allowOptimizedExpansion,
-        out bool nullable)
+        out bool nullable
+    )
     {
         nullable = aggregateFunctionExpression.IsNullable;
 
@@ -101,7 +110,8 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
         return arguments is not null || orderings is not null
             ? aggregateFunctionExpression.Update(
                 arguments ?? aggregateFunctionExpression.Arguments,
-                orderings ?? aggregateFunctionExpression.Orderings)
+                orderings ?? aggregateFunctionExpression.Orderings
+            )
             : aggregateFunctionExpression;
     }
 
@@ -111,6 +121,5 @@ public class SqlServerSqlNullabilityProcessor : SqlNullabilityProcessor
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override bool PreferExistsToInWithCoalesce
-        => true;
+    protected override bool PreferExistsToInWithCoalesce => true;
 }

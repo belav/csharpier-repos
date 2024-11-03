@@ -31,14 +31,8 @@ namespace System.Workflow.Activities.Rules
 
         public override object Value
         {
-            get
-            {
-                return literal;
-            }
-            set
-            {
-                throw new InvalidOperationException(Messages.CannotWriteToExpression);
-            }
+            get { return literal; }
+            set { throw new InvalidOperationException(Messages.CannotWriteToExpression); }
         }
     }
 
@@ -64,7 +58,11 @@ namespace System.Workflow.Activities.Rules
                 if (!fieldInfo.IsStatic && targetObject == null)
                 {
                     // Accessing a non-static field from null target.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullField, fieldInfo.Name);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.TargetEvaluatedNullField,
+                        fieldInfo.Name
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = fieldInfo;
                     throw exception;
@@ -78,7 +76,11 @@ namespace System.Workflow.Activities.Rules
                 if (!fieldInfo.IsStatic && targetObject == null)
                 {
                     // Accessing a non-static field from null target.
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullField, fieldInfo.Name);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.TargetEvaluatedNullField,
+                        fieldInfo.Name
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = fieldInfo;
                     throw exception;
@@ -95,7 +97,11 @@ namespace System.Workflow.Activities.Rules
         private object targetObject;
         private object[] indexerArguments;
 
-        public RulePropertyResult(PropertyInfo propertyInfo, object targetObject, object[] indexerArguments)
+        public RulePropertyResult(
+            PropertyInfo propertyInfo,
+            object targetObject,
+            object[] indexerArguments
+        )
         {
             if (propertyInfo == null)
                 throw new ArgumentNullException("propertyInfo");
@@ -112,7 +118,11 @@ namespace System.Workflow.Activities.Rules
 #pragma warning disable 56503
                 if (!propertyInfo.GetGetMethod(true).IsStatic && targetObject == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullProperty, propertyInfo.Name);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.TargetEvaluatedNullProperty,
+                        propertyInfo.Name
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = propertyInfo;
                     throw exception;
@@ -127,18 +137,26 @@ namespace System.Workflow.Activities.Rules
                     // if there is no inner exception, leave it untouched
                     if (e.InnerException == null)
                         throw;
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.Error_PropertyGet,
-                        RuleDecompiler.DecompileType(propertyInfo.ReflectedType), propertyInfo.Name, e.InnerException.Message);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Error_PropertyGet,
+                        RuleDecompiler.DecompileType(propertyInfo.ReflectedType),
+                        propertyInfo.Name,
+                        e.InnerException.Message
+                    );
                     throw new TargetInvocationException(message, e.InnerException);
                 }
 #pragma warning restore 56503
             }
-
             set
             {
                 if (!propertyInfo.GetSetMethod(true).IsStatic && targetObject == null)
                 {
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.TargetEvaluatedNullProperty, propertyInfo.Name);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.TargetEvaluatedNullProperty,
+                        propertyInfo.Name
+                    );
                     RuleEvaluationException exception = new RuleEvaluationException(message);
                     exception.Data[RuleUserDataKeys.ErrorObject] = propertyInfo;
                     throw exception;
@@ -153,11 +171,15 @@ namespace System.Workflow.Activities.Rules
                     // if there is no inner exception, leave it untouched
                     if (e.InnerException == null)
                         throw;
-                    string message = string.Format(CultureInfo.CurrentCulture, Messages.Error_PropertySet,
-                        RuleDecompiler.DecompileType(propertyInfo.ReflectedType), propertyInfo.Name, e.InnerException.Message);
+                    string message = string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.Error_PropertySet,
+                        RuleDecompiler.DecompileType(propertyInfo.ReflectedType),
+                        propertyInfo.Name,
+                        e.InnerException.Message
+                    );
                     throw new TargetInvocationException(message, e.InnerException);
                 }
-
             }
         }
     }
@@ -180,15 +202,8 @@ namespace System.Workflow.Activities.Rules
 
         public override object Value
         {
-            get
-            {
-                return targetArray.GetValue(indexerArguments);
-            }
-
-            set
-            {
-                targetArray.SetValue(value, indexerArguments);
-            }
+            get { return targetArray.GetValue(indexerArguments); }
+            set { targetArray.SetValue(value, indexerArguments); }
         }
     }
     #endregion
@@ -196,7 +211,7 @@ namespace System.Workflow.Activities.Rules
     #region RuleExecution Class
     public class RuleExecution
     {
-        private bool halted;    // "Halt" was executed?
+        private bool halted; // "Halt" was executed?
         private Activity activity;
         private object thisObject;
         private RuleValidation validation;
@@ -212,9 +227,13 @@ namespace System.Workflow.Activities.Rules
                 throw new ArgumentNullException("thisObject");
             if (validation.ThisType != thisObject.GetType())
                 throw new InvalidOperationException(
-                    string.Format(CultureInfo.CurrentCulture, Messages.ValidationMismatch,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
+                        Messages.ValidationMismatch,
                         RuleDecompiler.DecompileType(validation.ThisType),
-                        RuleDecompiler.DecompileType(thisObject.GetType())));
+                        RuleDecompiler.DecompileType(thisObject.GetType())
+                    )
+                );
 
             this.validation = validation;
             this.activity = thisObject as Activity;
@@ -223,7 +242,11 @@ namespace System.Workflow.Activities.Rules
         }
 
         [SuppressMessage("Microsoft.Naming", "CA1720:AvoidTypeNamesInParameters", MessageId = "1#")]
-        public RuleExecution(RuleValidation validation, object thisObject, ActivityExecutionContext activityExecutionContext)
+        public RuleExecution(
+            RuleValidation validation,
+            object thisObject,
+            ActivityExecutionContext activityExecutionContext
+        )
             : this(validation, thisObject)
         {
             this.activityExecutionContext = activityExecutionContext;
@@ -317,7 +340,9 @@ namespace System.Workflow.Activities.Rules
     /// Contains the name and condition result of a rule that has caused one or more actions to execute.
     /// </summary>
     [Serializable]
-    [Obsolete("The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*")]
+    [Obsolete(
+        "The System.Workflow.* types are deprecated.  Instead, please use the new types from System.Activities.*"
+    )]
     public class RuleActionTrackingEvent
     {
         private string ruleName;
@@ -351,7 +376,12 @@ namespace System.Workflow.Activities.Rules
     {
         #region Rule Set Executor
 
-        internal static IList<RuleState> Preprocess(RuleChainingBehavior behavior, ICollection<Rule> rules, RuleValidation validation, Tracer tracer)
+        internal static IList<RuleState> Preprocess(
+            RuleChainingBehavior behavior,
+            ICollection<Rule> rules,
+            RuleValidation validation,
+            Tracer tracer
+        )
         {
             // start by taking the active rules and make them into a list sorted by priority
             List<RuleState> orderedRules = new List<RuleState>(rules.Count);
@@ -370,7 +400,12 @@ namespace System.Workflow.Activities.Rules
             return orderedRules;
         }
 
-        internal static void ExecuteRuleSet(IList<RuleState> orderedRules, RuleExecution ruleExecution, Tracer tracer, string trackingKey)
+        internal static void ExecuteRuleSet(
+            IList<RuleState> orderedRules,
+            RuleExecution ruleExecution,
+            Tracer tracer,
+            string trackingKey
+        )
         {
             // keep track of rule execution
             long[] executionCount = new long[orderedRules.Count];
@@ -378,7 +413,8 @@ namespace System.Workflow.Activities.Rules
             // clear the halted flag
             ruleExecution.Halted = false;
 
-            ActivityExecutionContext activityExecutionContext = ruleExecution.ActivityExecutionContext;
+            ActivityExecutionContext activityExecutionContext =
+                ruleExecution.ActivityExecutionContext;
 
             // loop until we hit the end of the list
             int current = 0;
@@ -397,14 +433,18 @@ namespace System.Workflow.Activities.Rules
                     if (tracer != null)
                         tracer.RuleResult(currentRuleState.Rule.Name, result);
                     if (activityExecutionContext != null && currentRuleState.Rule.Name != null)
-                        activityExecutionContext.TrackData(trackingKey, new RuleActionTrackingEvent(currentRuleState.Rule.Name, result));
+                        activityExecutionContext.TrackData(
+                            trackingKey,
+                            new RuleActionTrackingEvent(currentRuleState.Rule.Name, result)
+                        );
 
-                    ICollection<RuleAction> actions = (result) ?
-                        currentRuleState.Rule.thenActions :
-                        currentRuleState.Rule.elseActions;
-                    ICollection<int> activeRules = result ?
-                        currentRuleState.ThenActionsActiveRules :
-                        currentRuleState.ElseActionsActiveRules;
+                    ICollection<RuleAction> actions =
+                        (result)
+                            ? currentRuleState.Rule.thenActions
+                            : currentRuleState.Rule.elseActions;
+                    ICollection<int> activeRules = result
+                        ? currentRuleState.ThenActionsActiveRules
+                        : currentRuleState.ElseActionsActiveRules;
 
                     // are there any actions to be performed?
                     if ((actions != null) && (actions.Count > 0))
@@ -437,7 +477,13 @@ namespace System.Workflow.Activities.Rules
                                 if (satisfied[updatedRuleIndex])
                                 {
                                     // evaluate at least once, or repeatedly if appropriate
-                                    if ((executionCount[updatedRuleIndex] == 0) || (rs.Rule.ReevaluationBehavior == RuleReevaluationBehavior.Always))
+                                    if (
+                                        (executionCount[updatedRuleIndex] == 0)
+                                        || (
+                                            rs.Rule.ReevaluationBehavior
+                                            == RuleReevaluationBehavior.Always
+                                        )
+                                    )
                                     {
                                         if (tracer != null)
                                             tracer.TraceUpdate(ruleName, rs.Rule.Name);
@@ -449,7 +495,6 @@ namespace System.Workflow.Activities.Rules
                             }
                         }
                         continue;
-
                     }
                 }
                 ++current;
@@ -464,8 +509,12 @@ namespace System.Workflow.Activities.Rules
             internal ICollection<string> elseSideEffects;
         }
 
-
-        private static void AnalyzeRules(RuleChainingBehavior behavior, List<RuleState> ruleStates, RuleValidation validation, Tracer tracer)
+        private static void AnalyzeRules(
+            RuleChainingBehavior behavior,
+            List<RuleState> ruleStates,
+            RuleValidation validation,
+            Tracer tracer
+        )
         {
             int i;
             int numRules = ruleStates.Count;
@@ -485,23 +534,40 @@ namespace System.Workflow.Activities.Rules
 
                 if (ruleSymbols[i].thenSideEffects != null)
                 {
-                    currentRuleState.ThenActionsActiveRules = AnalyzeSideEffects(ruleSymbols[i].thenSideEffects, ruleSymbols);
+                    currentRuleState.ThenActionsActiveRules = AnalyzeSideEffects(
+                        ruleSymbols[i].thenSideEffects,
+                        ruleSymbols
+                    );
 
                     if ((currentRuleState.ThenActionsActiveRules != null) && (tracer != null))
-                        tracer.TraceThenTriggers(currentRuleState.Rule.Name, currentRuleState.ThenActionsActiveRules, ruleStates);
+                        tracer.TraceThenTriggers(
+                            currentRuleState.Rule.Name,
+                            currentRuleState.ThenActionsActiveRules,
+                            ruleStates
+                        );
                 }
 
                 if (ruleSymbols[i].elseSideEffects != null)
                 {
-                    currentRuleState.ElseActionsActiveRules = AnalyzeSideEffects(ruleSymbols[i].elseSideEffects, ruleSymbols);
+                    currentRuleState.ElseActionsActiveRules = AnalyzeSideEffects(
+                        ruleSymbols[i].elseSideEffects,
+                        ruleSymbols
+                    );
 
                     if ((currentRuleState.ElseActionsActiveRules != null) && (tracer != null))
-                        tracer.TraceElseTriggers(currentRuleState.Rule.Name, currentRuleState.ElseActionsActiveRules, ruleStates);
+                        tracer.TraceElseTriggers(
+                            currentRuleState.Rule.Name,
+                            currentRuleState.ElseActionsActiveRules,
+                            ruleStates
+                        );
                 }
             }
         }
 
-        private static ICollection<int> AnalyzeSideEffects(ICollection<string> sideEffects, RuleSymbolInfo[] ruleSymbols)
+        private static ICollection<int> AnalyzeSideEffects(
+            ICollection<string> sideEffects,
+            RuleSymbolInfo[] ruleSymbols
+        )
         {
             Dictionary<int, object> affectedRules = new Dictionary<int, object>();
 
@@ -524,9 +590,15 @@ namespace System.Workflow.Activities.Rules
                             if (dependency.EndsWith("*", StringComparison.Ordinal))
                             {
                                 // Strip the trailing "/*" from the dependency
-                                string stripDependency = dependency.Substring(0, dependency.Length - 2);
+                                string stripDependency = dependency.Substring(
+                                    0,
+                                    dependency.Length - 2
+                                );
                                 // Strip the trailing "*" from the side-effect
-                                string stripSideEffect = sideEffect.Substring(0, sideEffect.Length - 1);
+                                string stripSideEffect = sideEffect.Substring(
+                                    0,
+                                    sideEffect.Length - 1
+                                );
 
                                 string shortString;
                                 string longString;
@@ -551,11 +623,22 @@ namespace System.Workflow.Activities.Rules
                             }
                             else
                             {
-                                string stripSideEffect = sideEffect.Substring(0, sideEffect.Length - 1);
+                                string stripSideEffect = sideEffect.Substring(
+                                    0,
+                                    sideEffect.Length - 1
+                                );
                                 string stripDependency = dependency;
                                 if (stripDependency.EndsWith("/", StringComparison.Ordinal))
-                                    stripDependency = stripDependency.Substring(0, stripDependency.Length - 1);
-                                if (stripDependency.StartsWith(stripSideEffect, StringComparison.Ordinal))
+                                    stripDependency = stripDependency.Substring(
+                                        0,
+                                        stripDependency.Length - 1
+                                    );
+                                if (
+                                    stripDependency.StartsWith(
+                                        stripSideEffect,
+                                        StringComparison.Ordinal
+                                    )
+                                )
                                 {
                                     match = true;
                                     break;
@@ -571,7 +654,10 @@ namespace System.Workflow.Activities.Rules
                             if (dependency.EndsWith("*", StringComparison.Ordinal))
                             {
                                 // Strip the trailing "/*"
-                                string stripDependency = dependency.Substring(0, dependency.Length - 2);
+                                string stripDependency = dependency.Substring(
+                                    0,
+                                    dependency.Length - 2
+                                );
 
                                 string shortString;
                                 string longString;
@@ -617,7 +703,12 @@ namespace System.Workflow.Activities.Rules
             return affectedRules.Keys;
         }
 
-        private static RuleSymbolInfo AnalyzeRule(RuleChainingBehavior behavior, Rule rule, RuleValidation validator, Tracer tracer)
+        private static RuleSymbolInfo AnalyzeRule(
+            RuleChainingBehavior behavior,
+            Rule rule,
+            RuleValidation validator,
+            Tracer tracer
+        )
         {
             RuleSymbolInfo rsi = new RuleSymbolInfo();
 
@@ -648,15 +739,24 @@ namespace System.Workflow.Activities.Rules
             return rsi;
         }
 
-        private static ICollection<string> GetActionSideEffects(RuleChainingBehavior behavior, IList<RuleAction> actions, RuleValidation validation)
+        private static ICollection<string> GetActionSideEffects(
+            RuleChainingBehavior behavior,
+            IList<RuleAction> actions,
+            RuleValidation validation
+        )
         {
             // Man, I wish there were a Set<T> class...
             Dictionary<string, object> symbols = new Dictionary<string, object>();
 
             foreach (RuleAction action in actions)
             {
-                if ((behavior == RuleChainingBehavior.Full) ||
-                    ((behavior == RuleChainingBehavior.UpdateOnly) && (action is RuleUpdateAction)))
+                if (
+                    (behavior == RuleChainingBehavior.Full)
+                    || (
+                        (behavior == RuleChainingBehavior.UpdateOnly)
+                        && (action is RuleUpdateAction)
+                    )
+                )
                 {
                     ICollection<string> sideEffects = action.GetSideEffects(validation);
                     if (sideEffects != null)
@@ -683,7 +783,9 @@ namespace System.Workflow.Activities.Rules
             if (expectedType == null)
             {
                 // oops ... not a boolean, so error
-                InvalidOperationException exception = new InvalidOperationException(Messages.ConditionMustBeBoolean);
+                InvalidOperationException exception = new InvalidOperationException(
+                    Messages.ConditionMustBeBoolean
+                );
                 exception.Data[RuleUserDataKeys.ErrorObject] = expression;
                 throw exception;
             }
@@ -703,17 +805,24 @@ namespace System.Workflow.Activities.Rules
 
             // not a standard conversion, see if it's an implicit user defined conversions
             ValidationError error;
-            MethodInfo conversion = RuleValidation.FindImplicitConversion(operandType, toType, out error);
+            MethodInfo conversion = RuleValidation.FindImplicitConversion(
+                operandType,
+                toType,
+                out error
+            );
             if (conversion == null)
             {
                 if (error != null)
                     throw new RuleEvaluationException(error.ErrorText);
 
                 throw new RuleEvaluationException(
-                    string.Format(CultureInfo.CurrentCulture,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
                         Messages.CastIncompatibleTypes,
                         RuleDecompiler.DecompileType(operandType),
-                        RuleDecompiler.DecompileType(toType)));
+                        RuleDecompiler.DecompileType(toType)
+                    )
+                );
             }
 
             // now we have a method, need to do the conversion S -> Sx -> Tx -> T
@@ -724,19 +833,29 @@ namespace System.Workflow.Activities.Rules
             if (AdjustValueStandard(operandType, operandValue, sx, out intermediateResult1))
             {
                 // we are happy with the first conversion, so call the user's static method
-                object intermediateResult2 = conversion.Invoke(null, new object[] { intermediateResult1 });
+                object intermediateResult2 = conversion.Invoke(
+                    null,
+                    new object[] { intermediateResult1 }
+                );
                 object intermediateResult3;
                 if (AdjustValueStandard(tx, intermediateResult2, toType, out intermediateResult3))
                     return intermediateResult3;
             }
             throw new RuleEvaluationException(
-                string.Format(CultureInfo.CurrentCulture,
+                string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.CastIncompatibleTypes,
                     RuleDecompiler.DecompileType(operandType),
-                    RuleDecompiler.DecompileType(toType)));
+                    RuleDecompiler.DecompileType(toType)
+                )
+            );
         }
 
-        internal static object AdjustTypeWithCast(Type operandType, object operandValue, Type toType)
+        internal static object AdjustTypeWithCast(
+            Type operandType,
+            object operandValue,
+            Type toType
+        )
         {
             // if no conversion required, we are done
             if (operandType == toType)
@@ -750,17 +869,24 @@ namespace System.Workflow.Activities.Rules
 
             // now it's time for implicit and explicit user defined conversions
             ValidationError error;
-            MethodInfo conversion = RuleValidation.FindExplicitConversion(operandType, toType, out error);
+            MethodInfo conversion = RuleValidation.FindExplicitConversion(
+                operandType,
+                toType,
+                out error
+            );
             if (conversion == null)
             {
                 if (error != null)
                     throw new RuleEvaluationException(error.ErrorText);
 
                 throw new RuleEvaluationException(
-                    string.Format(CultureInfo.CurrentCulture,
+                    string.Format(
+                        CultureInfo.CurrentCulture,
                         Messages.CastIncompatibleTypes,
                         RuleDecompiler.DecompileType(operandType),
-                        RuleDecompiler.DecompileType(toType)));
+                        RuleDecompiler.DecompileType(toType)
+                    )
+                );
             }
 
             // now we have a method, need to do the conversion S -> Sx -> Tx -> T
@@ -771,21 +897,31 @@ namespace System.Workflow.Activities.Rules
             if (AdjustValueStandard(operandType, operandValue, sx, out intermediateResult1))
             {
                 // we are happy with the first conversion, so call the user's static method
-                object intermediateResult2 = conversion.Invoke(null, new object[] { intermediateResult1 });
+                object intermediateResult2 = conversion.Invoke(
+                    null,
+                    new object[] { intermediateResult1 }
+                );
                 object intermediateResult3;
                 if (AdjustValueStandard(tx, intermediateResult2, toType, out intermediateResult3))
                     return intermediateResult3;
             }
             throw new RuleEvaluationException(
-                string.Format(CultureInfo.CurrentCulture,
+                string.Format(
+                    CultureInfo.CurrentCulture,
                     Messages.CastIncompatibleTypes,
                     RuleDecompiler.DecompileType(operandType),
-                    RuleDecompiler.DecompileType(toType)));
+                    RuleDecompiler.DecompileType(toType)
+                )
+            );
         }
 
-
         [SuppressMessage("Microsoft.Maintainability", "CA1502:AvoidExcessiveComplexity")]
-        private static bool AdjustValueStandard(Type operandType, object operandValue, Type toType, out object converted)
+        private static bool AdjustValueStandard(
+            Type operandType,
+            object operandValue,
+            Type toType,
+            out object converted
+        )
         {
             // assume it's the same for now
             converted = operandValue;
@@ -800,7 +936,11 @@ namespace System.Workflow.Activities.Rules
                     if (!ConditionHelper.IsNullableValueType(toType))
                     {
                         // value type and null, so no conversion possible
-                        string message = string.Format(CultureInfo.CurrentCulture, Messages.CannotCastNullToValueType, RuleDecompiler.DecompileType(toType));
+                        string message = string.Format(
+                            CultureInfo.CurrentCulture,
+                            Messages.CannotCastNullToValueType,
+                            RuleDecompiler.DecompileType(toType)
+                        );
                         throw new InvalidCastException(message);
                     }
 
@@ -808,7 +948,12 @@ namespace System.Workflow.Activities.Rules
                     // however, we may need to call the implicit conversion operator if the types are not compatible
                     converted = Activator.CreateInstance(toType);
                     ValidationError error;
-                    return RuleValidation.StandardImplicitConversion(operandType, toType, null, out error);
+                    return RuleValidation.StandardImplicitConversion(
+                        operandType,
+                        toType,
+                        null,
+                        out error
+                    );
                 }
 
                 // not a value type, so null is valid
@@ -833,7 +978,10 @@ namespace System.Workflow.Activities.Rules
                 {
                     // strip off the enum representation
                     currentType = Enum.GetUnderlyingType(currentType);
-                    ArithmeticLiteral literal = ArithmeticLiteral.MakeLiteral(currentType, operandValue);
+                    ArithmeticLiteral literal = ArithmeticLiteral.MakeLiteral(
+                        currentType,
+                        operandValue
+                    );
                     operandValue = literal.Value;
                 }
 
@@ -842,12 +990,14 @@ namespace System.Workflow.Activities.Rules
 
                 if (resultType.IsEnum)
                 {
-                    // Enum.ToObject may throw if currentType is not type SByte, 
+                    // Enum.ToObject may throw if currentType is not type SByte,
                     // Int16, Int32, Int64, Byte, UInt16, UInt32, or UInt64.
                     // So we adjust currentValue to the underlying type (which may throw if out of range)
                     Type underlyingType = Enum.GetUnderlyingType(resultType);
                     object adjusted;
-                    if (AdjustValueStandard(currentType, operandValue, underlyingType, out adjusted))
+                    if (
+                        AdjustValueStandard(currentType, operandValue, underlyingType, out adjusted)
+                    )
                     {
                         converted = Enum.ToObject(resultType, adjusted);
                         if (resultNullable)
@@ -876,7 +1026,10 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            converted = ((IConvertible)c).ToType(resultType, CultureInfo.CurrentCulture);
+                            converted = ((IConvertible)c).ToType(
+                                resultType,
+                                CultureInfo.CurrentCulture
+                            );
                         }
                         if (resultNullable)
                             converted = Activator.CreateInstance(toType, converted);
@@ -891,7 +1044,10 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            converted = ((IConvertible)f).ToType(resultType, CultureInfo.CurrentCulture);
+                            converted = ((IConvertible)f).ToType(
+                                resultType,
+                                CultureInfo.CurrentCulture
+                            );
                         }
                         if (resultNullable)
                             converted = Activator.CreateInstance(toType, converted);
@@ -906,7 +1062,10 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            converted = ((IConvertible)d).ToType(resultType, CultureInfo.CurrentCulture);
+                            converted = ((IConvertible)d).ToType(
+                                resultType,
+                                CultureInfo.CurrentCulture
+                            );
                         }
                         if (resultNullable)
                             converted = Activator.CreateInstance(toType, converted);
@@ -921,7 +1080,10 @@ namespace System.Workflow.Activities.Rules
                         }
                         else
                         {
-                            converted = ((IConvertible)d).ToType(resultType, CultureInfo.CurrentCulture);
+                            converted = ((IConvertible)d).ToType(
+                                resultType,
+                                CultureInfo.CurrentCulture
+                            );
                         }
                         if (resultNullable)
                             converted = Activator.CreateInstance(toType, converted);

@@ -4,49 +4,63 @@
 using System;
 using System.Runtime.CompilerServices;
 
-public sealed class ReRegisterForFinalizeTest {
+public sealed class ReRegisterForFinalizeTest
+{
     private LargeObject lo;
     private uint size = 0;
 
-    public ReRegisterForFinalizeTest(uint size ) {
+    public ReRegisterForFinalizeTest(uint size)
+    {
         this.size = size;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public void CreateLargeObject() {
+    public void CreateLargeObject()
+    {
         lo = new LargeObject(size, true);
         GC.ReRegisterForFinalize(lo);
     }
-    
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public void DestroyLargeObject() {
+    public void DestroyLargeObject()
+    {
         lo = null;
     }
 
-    public bool RunTests() {
-        try {
+    public bool RunTests()
+    {
+        try
+        {
             CreateLargeObject();
-        } catch (OutOfMemoryException) {
+        }
+        catch (OutOfMemoryException)
+        {
             Console.WriteLine("Large Memory Machine required");
             return true;
-        } catch (Exception e) {
+        }
+        catch (Exception e)
+        {
             Console.WriteLine("Unexpected Exception:");
             Console.WriteLine(e);
             return false;
         }
-        
+
         DestroyLargeObject();
         GC.Collect();
         GC.WaitForPendingFinalizers();
         GC.Collect();
 
-        return (LargeObject.FinalizedCount==2);
+        return (LargeObject.FinalizedCount == 2);
     }
 
-    public static int Main(string[] args) {
-        ReRegisterForFinalizeTest test = new ReRegisterForFinalizeTest(MemCheck.ParseSizeMBAndLimitByAvailableMem(args));
+    public static int Main(string[] args)
+    {
+        ReRegisterForFinalizeTest test = new ReRegisterForFinalizeTest(
+            MemCheck.ParseSizeMBAndLimitByAvailableMem(args)
+        );
 
-        if (test.RunTests()) {
+        if (test.RunTests())
+        {
             Console.WriteLine("Test passed");
             return 100;
         }

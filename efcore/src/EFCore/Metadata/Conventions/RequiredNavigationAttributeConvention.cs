@@ -12,26 +12,27 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-conventions">Model building conventions</see> for more information and examples.
 /// </remarks>
-public class RequiredNavigationAttributeConvention :
-    NavigationAttributeConventionBase<RequiredAttribute>,
-    INavigationAddedConvention,
-    ISkipNavigationAddedConvention,
-    IForeignKeyPrincipalEndChangedConvention
+public class RequiredNavigationAttributeConvention
+    : NavigationAttributeConventionBase<RequiredAttribute>,
+        INavigationAddedConvention,
+        ISkipNavigationAddedConvention,
+        IForeignKeyPrincipalEndChangedConvention
 {
     /// <summary>
     ///     Creates a new instance of <see cref="RequiredNavigationAttributeConvention" />.
     /// </summary>
     /// <param name="dependencies">Parameter object containing dependencies for this convention.</param>
-    public RequiredNavigationAttributeConvention(ProviderConventionSetBuilderDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public RequiredNavigationAttributeConvention(
+        ProviderConventionSetBuilderDependencies dependencies
+    )
+        : base(dependencies) { }
 
     /// <inheritdoc />
     public override void ProcessNavigationAdded(
         IConventionNavigationBuilder navigationBuilder,
         RequiredAttribute attribute,
-        IConventionContext<IConventionNavigationBuilder> context)
+        IConventionContext<IConventionNavigationBuilder> context
+    )
     {
         ProcessNavigation(navigationBuilder);
         context.StopProcessingIfChanged(navigationBuilder.Metadata.Builder);
@@ -42,17 +43,16 @@ public class RequiredNavigationAttributeConvention :
         IConventionForeignKeyBuilder relationshipBuilder,
         IEnumerable<RequiredAttribute>? dependentToPrincipalAttributes,
         IEnumerable<RequiredAttribute>? principalToDependentAttributes,
-        IConventionContext<IConventionForeignKeyBuilder> context)
+        IConventionContext<IConventionForeignKeyBuilder> context
+    )
     {
         var fk = relationshipBuilder.Metadata;
-        if (dependentToPrincipalAttributes != null
-            && dependentToPrincipalAttributes.Any())
+        if (dependentToPrincipalAttributes != null && dependentToPrincipalAttributes.Any())
         {
             ProcessNavigation(fk.DependentToPrincipal!.Builder);
         }
 
-        if (principalToDependentAttributes != null
-            && principalToDependentAttributes.Any())
+        if (principalToDependentAttributes != null && principalToDependentAttributes.Any())
         {
             ProcessNavigation(fk.PrincipalToDependent!.Builder);
         }
@@ -84,6 +84,6 @@ public class RequiredNavigationAttributeConvention :
     public override void ProcessSkipNavigationAdded(
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         RequiredAttribute attribute,
-        IConventionContext<IConventionSkipNavigationBuilder> context)
-        => Dependencies.Logger.RequiredAttributeOnSkipNavigation(skipNavigationBuilder.Metadata);
+        IConventionContext<IConventionSkipNavigationBuilder> context
+    ) => Dependencies.Logger.RequiredAttributeOnSkipNavigation(skipNavigationBuilder.Metadata);
 }

@@ -20,18 +20,24 @@ public class SampleRateLimiterPolicy : IRateLimiterPolicy<string>
         };
     }
 
-    public Func<OnRejectedContext, CancellationToken, ValueTask>? OnRejected { get => _onRejected; }
+    public Func<OnRejectedContext, CancellationToken, ValueTask>? OnRejected
+    {
+        get => _onRejected;
+    }
 
     // Use a sliding window limiter allowing 1 request every 10 seconds
     public RateLimitPartition<string> GetPartition(HttpContext httpContext)
     {
-        return RateLimitPartition.GetSlidingWindowLimiter<string>(string.Empty, key => new SlidingWindowRateLimiterOptions
-        {
-            PermitLimit = 1,
-            QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
-            QueueLimit = 1,
-            Window = TimeSpan.FromSeconds(5),
-            SegmentsPerWindow = 1
-        });
+        return RateLimitPartition.GetSlidingWindowLimiter<string>(
+            string.Empty,
+            key => new SlidingWindowRateLimiterOptions
+            {
+                PermitLimit = 1,
+                QueueProcessingOrder = QueueProcessingOrder.OldestFirst,
+                QueueLimit = 1,
+                Window = TimeSpan.FromSeconds(5),
+                SegmentsPerWindow = 1,
+            }
+        );
     }
 }

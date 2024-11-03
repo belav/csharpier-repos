@@ -11,7 +11,8 @@ namespace System.Runtime.Caching
     internal static class Dbg
     {
 #if DEBUG
-        private static readonly bool s_tracingEnabled = Environment.GetEnvironmentVariable("DOTNET_SYSTEM_RUNTIME_CACHING_TRACING") == "true";
+        private static readonly bool s_tracingEnabled =
+            Environment.GetEnvironmentVariable("DOTNET_SYSTEM_RUNTIME_CACHING_TRACING") == "true";
 #endif
 
         [Conditional("DEBUG")]
@@ -24,9 +25,14 @@ namespace System.Runtime.Caching
             }
 
             string exceptionMessage =
-                e is null ? null :
-                e is ExternalException ee ? "Exception " + e + Environment.NewLine + "_hr=0x" + ee.ErrorCode.ToString("x", CultureInfo.InvariantCulture) :
-                "Exception " + e;
+                e is null ? null
+                : e is ExternalException ee
+                    ? "Exception "
+                        + e
+                        + Environment.NewLine
+                        + "_hr=0x"
+                        + ee.ErrorCode.ToString("x", CultureInfo.InvariantCulture)
+                : "Exception " + e;
 
             if (string.IsNullOrEmpty(message) & exceptionMessage != null)
             {
@@ -34,13 +40,15 @@ namespace System.Runtime.Caching
                 exceptionMessage = null;
             }
 
-            string output = string.Format(CultureInfo.InvariantCulture,
-                 "[{0}] {1} {2}{3}{4}",
-                 Environment.CurrentManagedThreadId,
-                 tagName,
-                 message,
-                 Environment.NewLine,
-                 exceptionMessage != null ? exceptionMessage + Environment.NewLine : "");
+            string output = string.Format(
+                CultureInfo.InvariantCulture,
+                "[{0}] {1} {2}{3}{4}",
+                Environment.CurrentManagedThreadId,
+                tagName,
+                message,
+                Environment.NewLine,
+                exceptionMessage != null ? exceptionMessage + Environment.NewLine : ""
+            );
             Debug.WriteLine(output);
 #endif
         }

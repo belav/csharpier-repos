@@ -12,8 +12,8 @@ namespace System.ServiceModel.Security
     using System.ServiceModel;
     using System.ServiceModel.Channels;
     using System.ServiceModel.Diagnostics;
-    using System.Xml;
     using System.ServiceModel.Diagnostics.Application;
+    using System.Xml;
 
     // IssuanceTokenProviderBase is a base class for token providers that fetch tokens from
     // another party.
@@ -27,14 +27,18 @@ namespace System.ServiceModel.Security
 
         // if an issuer is explicitly specified it will be used otherwise target is the issuer
         EndpointAddress issuerAddress;
+
         // the target service's address and via
         EndpointAddress targetAddress;
         Uri via = null;
 
         // This controls whether the token provider caches the service tokens it obtains
         bool cacheServiceTokens = defaultClientCacheTokens;
+
         // This is a fudge factor that controls how long the client can use a service token
-        int serviceTokenValidityThresholdPercentage = defaultServiceTokenValidityThresholdPercentage;
+        int serviceTokenValidityThresholdPercentage =
+            defaultServiceTokenValidityThresholdPercentage;
+
         // the maximum time that the client is willing to cache service tokens
         TimeSpan maxServiceTokenCachingTime;
 
@@ -50,7 +54,8 @@ namespace System.ServiceModel.Security
             : base()
         {
             this.cacheServiceTokens = defaultClientCacheTokens;
-            this.serviceTokenValidityThresholdPercentage = defaultServiceTokenValidityThresholdPercentage;
+            this.serviceTokenValidityThresholdPercentage =
+                defaultServiceTokenValidityThresholdPercentage;
             this.maxServiceTokenCachingTime = DefaultClientMaxTokenCachingTime;
             this.standardsManager = null;
         }
@@ -58,10 +63,7 @@ namespace System.ServiceModel.Security
         // settings
         public EndpointAddress IssuerAddress
         {
-            get
-            {
-                return this.issuerAddress;
-            }
+            get { return this.issuerAddress; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -71,10 +73,7 @@ namespace System.ServiceModel.Security
 
         public EndpointAddress TargetAddress
         {
-            get
-            {
-                return this.targetAddress;
-            }
+            get { return this.targetAddress; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -84,10 +83,7 @@ namespace System.ServiceModel.Security
 
         public bool CacheServiceTokens
         {
-            get
-            {
-                return this.cacheServiceTokens;
-            }
+            get { return this.cacheServiceTokens; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -99,23 +95,31 @@ namespace System.ServiceModel.Security
         {
             get
             {
-                Fx.Assert(TimeSpan.Parse(defaultClientMaxTokenCachingTimeString, CultureInfo.InvariantCulture) == TimeSpan.MaxValue, "TimeSpan value not correct");
+                Fx.Assert(
+                    TimeSpan.Parse(
+                        defaultClientMaxTokenCachingTimeString,
+                        CultureInfo.InvariantCulture
+                    ) == TimeSpan.MaxValue,
+                    "TimeSpan value not correct"
+                );
                 return TimeSpan.MaxValue;
             }
         }
 
         public int ServiceTokenValidityThresholdPercentage
         {
-            get
-            {
-                return this.serviceTokenValidityThresholdPercentage;
-            }
+            get { return this.serviceTokenValidityThresholdPercentage; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= 0 || value > 100)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.ValueMustBeInRange, 1, 100)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.ValueMustBeInRange, 1, 100)
+                        )
+                    );
                 }
                 this.serviceTokenValidityThresholdPercentage = value;
             }
@@ -123,10 +127,7 @@ namespace System.ServiceModel.Security
 
         public SecurityAlgorithmSuite SecurityAlgorithmSuite
         {
-            get
-            {
-                return this.algorithmSuite;
-            }
+            get { return this.algorithmSuite; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -136,28 +137,34 @@ namespace System.ServiceModel.Security
 
         public TimeSpan MaxServiceTokenCachingTime
         {
-            get
-            {
-                return this.maxServiceTokenCachingTime;
-            }
+            get { return this.maxServiceTokenCachingTime; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
                 if (value <= TimeSpan.Zero)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            SR.GetString(SR.TimeSpanMustbeGreaterThanTimeSpanZero)
+                        )
+                    );
                 }
 
                 if (TimeoutHelper.IsTooLarge(value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("value", value,
-                        SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "value",
+                            value,
+                            SR.GetString(SR.SFxTimeoutOutOfRangeTooBig)
+                        )
+                    );
                 }
 
                 this.maxServiceTokenCachingTime = value;
             }
         }
-
 
         public SecurityStandardsManager StandardsManager
         {
@@ -176,10 +183,7 @@ namespace System.ServiceModel.Security
 
         public ChannelProtectionRequirements ApplicationProtectionRequirements
         {
-            get
-            {
-                return this.applicationProtectionRequirements;
-            }
+            get { return this.applicationProtectionRequirements; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -189,10 +193,7 @@ namespace System.ServiceModel.Security
 
         public Uri Via
         {
-            get
-            {
-                return this.via;
-            }
+            get { return this.via; }
             set
             {
                 this.CommunicationObject.ThrowIfDisposedOrImmutable();
@@ -202,10 +203,7 @@ namespace System.ServiceModel.Security
 
         public override bool SupportsTokenCancellation
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         protected Object ThisLock
@@ -218,25 +216,13 @@ namespace System.ServiceModel.Security
             get { return true; }
         }
 
-        protected abstract MessageVersion MessageVersion
-        {
-            get;
-        }
+        protected abstract MessageVersion MessageVersion { get; }
 
-        protected abstract bool RequiresManualReplyAddressing
-        {
-            get;
-        }
+        protected abstract bool RequiresManualReplyAddressing { get; }
 
-        public abstract XmlDictionaryString RequestSecurityTokenAction
-        {
-            get;
-        }
+        public abstract XmlDictionaryString RequestSecurityTokenAction { get; }
 
-        public abstract XmlDictionaryString RequestSecurityTokenResponseAction
-        {
-            get;
-        }
+        public abstract XmlDictionaryString RequestSecurityTokenResponseAction { get; }
 
         protected string SecurityContextTokenUri
         {
@@ -252,7 +238,13 @@ namespace System.ServiceModel.Security
             CommunicationState state = this.CommunicationObject.State;
             if (state == CommunicationState.Created)
             {
-                Exception e = new InvalidOperationException(SR.GetString(SR.CommunicationObjectCannotBeUsed, this.GetType().ToString(), state.ToString()));
+                Exception e = new InvalidOperationException(
+                    SR.GetString(
+                        SR.CommunicationObjectCannotBeUsed,
+                        this.GetType().ToString(),
+                        state.ToString()
+                    )
+                );
                 throw TraceUtility.ThrowHelperError(e, Guid.Empty, this);
             }
         }
@@ -268,11 +260,19 @@ namespace System.ServiceModel.Security
         {
             if (this.targetAddress == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.TargetAddressIsNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.TargetAddressIsNotSet, this.GetType())
+                    )
+                );
             }
             if (this.SecurityAlgorithmSuite == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException(SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new InvalidOperationException(
+                        SR.GetString(SR.SecurityAlgorithmSuiteNotSet, this.GetType())
+                    )
+                );
             }
             this.sctUri = this.StandardsManager.SecureConversationDriver.TokenTypeUri;
         }
@@ -280,12 +280,16 @@ namespace System.ServiceModel.Security
         // helper methods
         protected void EnsureEndpointAddressDoesNotRequireEncryption(EndpointAddress target)
         {
-            if (this.ApplicationProtectionRequirements == null
-                  || this.ApplicationProtectionRequirements.OutgoingEncryptionParts == null)
+            if (
+                this.ApplicationProtectionRequirements == null
+                || this.ApplicationProtectionRequirements.OutgoingEncryptionParts == null
+            )
             {
                 return;
             }
-            MessagePartSpecification channelEncryptionParts = this.ApplicationProtectionRequirements.OutgoingEncryptionParts.ChannelParts;
+            MessagePartSpecification channelEncryptionParts = this.ApplicationProtectionRequirements
+                .OutgoingEncryptionParts
+                .ChannelParts;
             if (channelEncryptionParts == null)
             {
                 return;
@@ -295,7 +299,16 @@ namespace System.ServiceModel.Security
                 AddressHeader header = target.Headers[i];
                 if (channelEncryptionParts.IsHeaderIncluded(header.Name, header.Namespace))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.SecurityNegotiationCannotProtectConfidentialEndpointHeader, target, header.Name, header.Namespace)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new SecurityNegotiationException(
+                            SR.GetString(
+                                SR.SecurityNegotiationCannotProtectConfidentialEndpointHeader,
+                                target,
+                                header.Name,
+                                header.Namespace
+                            )
+                        )
+                    );
                 }
             }
         }
@@ -309,11 +322,23 @@ namespace System.ServiceModel.Security
                 return serviceToken.ValidTo;
             }
 
-            TimeSpan interval = serviceToken.ValidTo.ToUniversalTime() - serviceToken.ValidFrom.ToUniversalTime();
+            TimeSpan interval =
+                serviceToken.ValidTo.ToUniversalTime() - serviceToken.ValidFrom.ToUniversalTime();
             long serviceTokenTicksInterval = interval.Ticks;
-            long effectiveTicksInterval = Convert.ToInt64((double)this.ServiceTokenValidityThresholdPercentage / 100.0 * (double)serviceTokenTicksInterval, NumberFormatInfo.InvariantInfo);
-            DateTime effectiveExpirationTime = TimeoutHelper.Add(serviceToken.ValidFrom.ToUniversalTime(), new TimeSpan(effectiveTicksInterval));
-            DateTime maxCachingTime = TimeoutHelper.Add(serviceToken.ValidFrom.ToUniversalTime(), this.MaxServiceTokenCachingTime);
+            long effectiveTicksInterval = Convert.ToInt64(
+                (double)this.ServiceTokenValidityThresholdPercentage
+                    / 100.0
+                    * (double)serviceTokenTicksInterval,
+                NumberFormatInfo.InvariantInfo
+            );
+            DateTime effectiveExpirationTime = TimeoutHelper.Add(
+                serviceToken.ValidFrom.ToUniversalTime(),
+                new TimeSpan(effectiveTicksInterval)
+            );
+            DateTime maxCachingTime = TimeoutHelper.Add(
+                serviceToken.ValidFrom.ToUniversalTime(),
+                this.MaxServiceTokenCachingTime
+            );
             if (effectiveExpirationTime <= maxCachingTime)
             {
                 return effectiveExpirationTime;
@@ -332,7 +357,11 @@ namespace System.ServiceModel.Security
 
         SecurityToken GetCurrentServiceToken()
         {
-            if (this.CacheServiceTokens && this.cachedToken != null && IsServiceTokenTimeValid(cachedToken))
+            if (
+                this.CacheServiceTokens
+                && this.cachedToken != null
+                && IsServiceTokenTimeValid(cachedToken)
+            )
             {
                 return this.cachedToken;
             }
@@ -342,12 +371,16 @@ namespace System.ServiceModel.Security
             }
         }
 
-        static protected void ThrowIfFault(Message message, EndpointAddress target)
+        protected static void ThrowIfFault(Message message, EndpointAddress target)
         {
             SecurityUtils.ThrowIfNegotiationFault(message, target);
         }
 
-        protected override IAsyncResult BeginGetTokenCore(TimeSpan timeout, AsyncCallback callback, object state)
+        protected override IAsyncResult BeginGetTokenCore(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             this.CommunicationObject.ThrowIfClosedOrNotOpen();
             IAsyncResult asyncResult;
@@ -356,7 +389,11 @@ namespace System.ServiceModel.Security
                 SecurityToken token = GetCurrentServiceToken();
                 if (token != null)
                 {
-                    SecurityTraceRecordHelper.TraceUsingCachedServiceToken(this, token, this.targetAddress);
+                    SecurityTraceRecordHelper.TraceUsingCachedServiceToken(
+                        this,
+                        token,
+                        this.targetAddress
+                    );
                     asyncResult = new CompletedAsyncResult<SecurityToken>(token, callback, state);
                 }
                 else
@@ -388,7 +425,11 @@ namespace System.ServiceModel.Security
                 result = GetCurrentServiceToken();
                 if (result != null)
                 {
-                    SecurityTraceRecordHelper.TraceUsingCachedServiceToken(this, result, this.targetAddress);
+                    SecurityTraceRecordHelper.TraceUsingCachedServiceToken(
+                        this,
+                        result,
+                        this.targetAddress
+                    );
                 }
             }
             if (result == null)
@@ -413,17 +454,46 @@ namespace System.ServiceModel.Security
         }
 
         // Negotiation state creation methods
-        protected abstract bool CreateNegotiationStateCompletesSynchronously(EndpointAddress target, Uri via);
-        protected abstract IAsyncResult BeginCreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout, AsyncCallback callback, object state);
-        protected abstract T CreateNegotiationState(EndpointAddress target, Uri via, TimeSpan timeout);
+        protected abstract bool CreateNegotiationStateCompletesSynchronously(
+            EndpointAddress target,
+            Uri via
+        );
+        protected abstract IAsyncResult BeginCreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
+        protected abstract T CreateNegotiationState(
+            EndpointAddress target,
+            Uri via,
+            TimeSpan timeout
+        );
         protected abstract T EndCreateNegotiationState(IAsyncResult result);
 
         // Negotiation message processing methods
-        protected abstract BodyWriter GetFirstOutgoingMessageBody(T negotiationState, out MessageProperties properties);
-        protected abstract BodyWriter GetNextOutgoingMessageBody(Message incomingMessage, T negotiationState);
-        protected abstract bool WillInitializeChannelFactoriesCompleteSynchronously(EndpointAddress target);
-        protected abstract void InitializeChannelFactories(EndpointAddress target, TimeSpan timeout);
-        protected abstract IAsyncResult BeginInitializeChannelFactories(EndpointAddress target, TimeSpan timeout, AsyncCallback callback, object state);
+        protected abstract BodyWriter GetFirstOutgoingMessageBody(
+            T negotiationState,
+            out MessageProperties properties
+        );
+        protected abstract BodyWriter GetNextOutgoingMessageBody(
+            Message incomingMessage,
+            T negotiationState
+        );
+        protected abstract bool WillInitializeChannelFactoriesCompleteSynchronously(
+            EndpointAddress target
+        );
+        protected abstract void InitializeChannelFactories(
+            EndpointAddress target,
+            TimeSpan timeout
+        );
+        protected abstract IAsyncResult BeginInitializeChannelFactories(
+            EndpointAddress target,
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        );
         protected abstract void EndInitializeChannelFactories(IAsyncResult result);
         protected abstract IRequestChannel CreateClientChannel(EndpointAddress target, Uri via);
 
@@ -444,17 +514,16 @@ namespace System.ServiceModel.Security
                 // if we are on HTTP, we need to explicitly add a reply-to header for interop
                 nextMessage.Headers.ReplyTo = EndpointAddress.AnonymousAddress;
             }
-
         }
 
         /*
         *   Negotiation consists of the following steps (some may be async in the async case):
-        *   1. Create negotiation state 
-        *   2. Initialize channel factories 
-        *   3. Create an channel 
+        *   1. Create negotiation state
+        *   2. Initialize channel factories
+        *   3. Create an channel
         *   4. Open the channel
         *   5. Create the next message to send to server
-        *   6. Send the message and get reply 
+        *   6. Send the message and get reply
         *   8. Process incoming message and get next outgoing message.
         *   9. If no outgoing message, then negotiation is over. Go to step 11.
         *   10. Goto step 6
@@ -471,17 +540,27 @@ namespace System.ServiceModel.Security
             int legs = 1;
             try
             {
-                negotiationState = this.CreateNegotiationState(this.targetAddress, this.via, timeoutHelper.RemainingTime());
+                negotiationState = this.CreateNegotiationState(
+                    this.targetAddress,
+                    this.via,
+                    timeoutHelper.RemainingTime()
+                );
                 InitializeNegotiationState(negotiationState);
-                this.InitializeChannelFactories(negotiationState.RemoteAddress, timeoutHelper.RemainingTime());
+                this.InitializeChannelFactories(
+                    negotiationState.RemoteAddress,
+                    timeoutHelper.RemainingTime()
+                );
                 rstChannel = this.CreateClientChannel(negotiationState.RemoteAddress, this.via);
                 rstChannel.Open(timeoutHelper.RemainingTime());
                 Message nextOutgoingMessage = null;
                 Message incomingMessage = null;
                 SecurityToken serviceToken = null;
-                for (;;)
+                for (; ; )
                 {
-                    nextOutgoingMessage = this.GetNextOutgoingMessage(incomingMessage, negotiationState);
+                    nextOutgoingMessage = this.GetNextOutgoingMessage(
+                        incomingMessage,
+                        negotiationState
+                    );
                     if (incomingMessage != null)
                     {
                         incomingMessage.Close();
@@ -493,23 +572,40 @@ namespace System.ServiceModel.Security
                             EventTraceActivity eventTraceActivity = null;
                             if (TD.MessageSentToTransportIsEnabled())
                             {
-                                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(nextOutgoingMessage);
+                                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                                    nextOutgoingMessage
+                                );
                             }
 
-                            TraceUtility.ProcessOutgoingMessage(nextOutgoingMessage, eventTraceActivity);
+                            TraceUtility.ProcessOutgoingMessage(
+                                nextOutgoingMessage,
+                                eventTraceActivity
+                            );
                             timeLeft = timeoutHelper.RemainingTime();
                             incomingMessage = rstChannel.Request(nextOutgoingMessage, timeLeft);
                             if (incomingMessage == null)
                             {
-                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new CommunicationException(SR.GetString(SR.FailToRecieveReplyFromNegotiation)));
+                                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                    new CommunicationException(
+                                        SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                    )
+                                );
                             }
 
-                            if (eventTraceActivity == null && TD.MessageReceivedFromTransportIsEnabled())
+                            if (
+                                eventTraceActivity == null
+                                && TD.MessageReceivedFromTransportIsEnabled()
+                            )
                             {
-                                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(incomingMessage);
+                                eventTraceActivity = EventTraceActivityHelper.TryExtractActivity(
+                                    incomingMessage
+                                );
                             }
 
-                            TraceUtility.ProcessIncomingMessage(incomingMessage, eventTraceActivity);
+                            TraceUtility.ProcessIncomingMessage(
+                                incomingMessage,
+                                eventTraceActivity
+                            );
                         }
                         legs += 2;
                     }
@@ -517,7 +613,12 @@ namespace System.ServiceModel.Security
                     {
                         if (!negotiationState.IsNegotiationCompleted)
                         {
-                            throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoNegotiationMessageToSend)), incomingMessage);
+                            throw TraceUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.NoNegotiationMessageToSend)
+                                ),
+                                incomingMessage
+                            );
                         }
 
                         try
@@ -544,7 +645,11 @@ namespace System.ServiceModel.Security
                         rstChannel = null;
                         this.ValidateAndCacheServiceToken(negotiationState);
                         serviceToken = negotiationState.ServiceToken;
-                        SecurityTraceRecordHelper.TraceEndSecurityNegotiation(this, serviceToken, this.targetAddress);
+                        SecurityTraceRecordHelper.TraceEndSecurityNegotiation(
+                            this,
+                            serviceToken,
+                            this.targetAddress
+                        );
                         break;
                     }
                 }
@@ -559,10 +664,16 @@ namespace System.ServiceModel.Security
 
                 if (e is TimeoutException)
                 {
-                    e = new TimeoutException(SR.GetString(SR.ClientSecurityNegotiationTimeout, timeout, legs, timeLeft), e);
+                    e = new TimeoutException(
+                        SR.GetString(SR.ClientSecurityNegotiationTimeout, timeout, legs, timeLeft),
+                        e
+                    );
                 }
-                EndpointAddress temp = (negotiationState == null) ? null : negotiationState.RemoteAddress;
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(WrapExceptionIfRequired(e, temp, this.issuerAddress));
+                EndpointAddress temp =
+                    (negotiationState == null) ? null : negotiationState.RemoteAddress;
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    WrapExceptionIfRequired(e, temp, this.issuerAddress)
+                );
             }
             finally
             {
@@ -593,22 +704,42 @@ namespace System.ServiceModel.Security
             MessageProperties nextMessageProperties = null;
             if (incomingMessage == null)
             {
-                nextMessageBody = this.GetFirstOutgoingMessageBody(negotiationState, out nextMessageProperties);
+                nextMessageBody = this.GetFirstOutgoingMessageBody(
+                    negotiationState,
+                    out nextMessageProperties
+                );
             }
             else
             {
-                nextMessageBody = this.GetNextOutgoingMessageBody(incomingMessage, negotiationState);
+                nextMessageBody = this.GetNextOutgoingMessageBody(
+                    incomingMessage,
+                    negotiationState
+                );
             }
             if (nextMessageBody != null)
             {
                 Message nextMessage;
                 if (incomingMessage == null)
                 {
-                    nextMessage = Message.CreateMessage(this.MessageVersion, ActionHeader.Create(this.RequestSecurityTokenAction, this.MessageVersion.Addressing), nextMessageBody);
+                    nextMessage = Message.CreateMessage(
+                        this.MessageVersion,
+                        ActionHeader.Create(
+                            this.RequestSecurityTokenAction,
+                            this.MessageVersion.Addressing
+                        ),
+                        nextMessageBody
+                    );
                 }
                 else
                 {
-                    nextMessage = Message.CreateMessage(this.MessageVersion, ActionHeader.Create(this.RequestSecurityTokenResponseAction, this.MessageVersion.Addressing), nextMessageBody);
+                    nextMessage = Message.CreateMessage(
+                        this.MessageVersion,
+                        ActionHeader.Create(
+                            this.RequestSecurityTokenResponseAction,
+                            this.MessageVersion.Addressing
+                        ),
+                        nextMessageBody
+                    );
                 }
                 if (nextMessageProperties != null)
                 {
@@ -636,7 +767,11 @@ namespace System.ServiceModel.Security
             }
         }
 
-        protected IAsyncResult BeginNegotiation(TimeSpan timeout, AsyncCallback callback, object state)
+        protected IAsyncResult BeginNegotiation(
+            TimeSpan timeout,
+            AsyncCallback callback,
+            object state
+        )
         {
             ThrowIfClosedOrCreated();
             SecurityTraceRecordHelper.TraceBeginSecurityNegotiation(this, this.targetAddress);
@@ -662,35 +797,53 @@ namespace System.ServiceModel.Security
                 SymmetricSecurityKey symmetricKey = issuedKeys[0] as SymmetricSecurityKey;
                 if (symmetricKey != null)
                 {
-                    if (this.SecurityAlgorithmSuite.IsSymmetricKeyLengthSupported(symmetricKey.KeySize))
+                    if (
+                        this.SecurityAlgorithmSuite.IsSymmetricKeyLengthSupported(
+                            symmetricKey.KeySize
+                        )
+                    )
                     {
                         return;
                     }
                     else
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.InvalidIssuedTokenKeySize, symmetricKey.KeySize)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.InvalidIssuedTokenKeySize, symmetricKey.KeySize)
+                            )
+                        );
                     }
                 }
             }
             else
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.CannotObtainIssuedTokenKeySize)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityNegotiationException(
+                        SR.GetString(SR.CannotObtainIssuedTokenKeySize)
+                    )
+                );
             }
         }
 
         static bool ShouldWrapException(Exception e)
         {
-            return (e is System.ComponentModel.Win32Exception
+            return (
+                e is System.ComponentModel.Win32Exception
                 || e is XmlException
                 || e is InvalidOperationException
                 || e is ArgumentException
                 || e is QuotaExceededException
                 || e is System.Security.SecurityException
                 || e is System.Security.Cryptography.CryptographicException
-                || e is SecurityTokenException);
+                || e is SecurityTokenException
+            );
         }
 
-        static Exception WrapExceptionIfRequired(Exception e, EndpointAddress targetAddress, EndpointAddress issuerAddress)
+        static Exception WrapExceptionIfRequired(
+            Exception e,
+            EndpointAddress targetAddress,
+            EndpointAddress issuerAddress
+        )
         {
             if (ShouldWrapException(e))
             {
@@ -717,11 +870,21 @@ namespace System.ServiceModel.Security
                 // => issuerUri != null
                 if (targetUri != null)
                 {
-                    e = new SecurityNegotiationException(SR.GetString(SR.SoapSecurityNegotiationFailedForIssuerAndTarget, issuerUri, targetUri), e);
+                    e = new SecurityNegotiationException(
+                        SR.GetString(
+                            SR.SoapSecurityNegotiationFailedForIssuerAndTarget,
+                            issuerUri,
+                            targetUri
+                        ),
+                        e
+                    );
                 }
                 else
                 {
-                    e = new SecurityNegotiationException(SR.GetString(SR.SoapSecurityNegotiationFailed), e);
+                    e = new SecurityNegotiationException(
+                        SR.GetString(SR.SoapSecurityNegotiationFailed),
+                        e
+                    );
                 }
             }
             return e;
@@ -741,11 +904,21 @@ namespace System.ServiceModel.Security
 
         class SecurityNegotiationAsyncResult : AsyncResult
         {
-            static AsyncCallback createNegotiationStateCallback = Fx.ThunkCallback(new AsyncCallback(CreateNegotiationStateCallback));
-            static AsyncCallback initializeChannelFactoriesCallback = Fx.ThunkCallback(new AsyncCallback(InitializeChannelFactoriesCallback));
-            static AsyncCallback closeChannelCallback = Fx.ThunkCallback(new AsyncCallback(CloseChannelCallback));
-            static AsyncCallback sendRequestCallback = Fx.ThunkCallback(new AsyncCallback(SendRequestCallback));
-            static AsyncCallback openChannelCallback = Fx.ThunkCallback(new AsyncCallback(OpenChannelCallback));
+            static AsyncCallback createNegotiationStateCallback = Fx.ThunkCallback(
+                new AsyncCallback(CreateNegotiationStateCallback)
+            );
+            static AsyncCallback initializeChannelFactoriesCallback = Fx.ThunkCallback(
+                new AsyncCallback(InitializeChannelFactoriesCallback)
+            );
+            static AsyncCallback closeChannelCallback = Fx.ThunkCallback(
+                new AsyncCallback(CloseChannelCallback)
+            );
+            static AsyncCallback sendRequestCallback = Fx.ThunkCallback(
+                new AsyncCallback(SendRequestCallback)
+            );
+            static AsyncCallback openChannelCallback = Fx.ThunkCallback(
+                new AsyncCallback(OpenChannelCallback)
+            );
 
             TimeSpan timeout;
             TimeoutHelper timeoutHelper;
@@ -758,7 +931,12 @@ namespace System.ServiceModel.Security
             EndpointAddress issuer;
             Uri via;
 
-            public SecurityNegotiationAsyncResult(IssuanceTokenProviderBase<T> tokenProvider, TimeSpan timeout, AsyncCallback callback, object state)
+            public SecurityNegotiationAsyncResult(
+                IssuanceTokenProviderBase<T> tokenProvider,
+                TimeSpan timeout,
+                AsyncCallback callback,
+                object state
+            )
                 : base(callback, state)
             {
                 this.timeout = timeout;
@@ -779,7 +957,9 @@ namespace System.ServiceModel.Security
                     {
                         throw;
                     }
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(this.OnSyncNegotiationFailure(e));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        this.OnSyncNegotiationFailure(e)
+                    );
                 }
                 if (completeSelf)
                 {
@@ -790,18 +970,35 @@ namespace System.ServiceModel.Security
 
             bool StartNegotiation()
             {
-                if (this.tokenProvider.CreateNegotiationStateCompletesSynchronously(this.target, this.via))
+                if (
+                    this.tokenProvider.CreateNegotiationStateCompletesSynchronously(
+                        this.target,
+                        this.via
+                    )
+                )
                 {
-                    this.negotiationState = this.tokenProvider.CreateNegotiationState(target, this.via, timeoutHelper.RemainingTime());
+                    this.negotiationState = this.tokenProvider.CreateNegotiationState(
+                        target,
+                        this.via,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 else
                 {
-                    IAsyncResult createStateResult = this.tokenProvider.BeginCreateNegotiationState(target, this.via, timeoutHelper.RemainingTime(), createNegotiationStateCallback, this);
+                    IAsyncResult createStateResult = this.tokenProvider.BeginCreateNegotiationState(
+                        target,
+                        this.via,
+                        timeoutHelper.RemainingTime(),
+                        createNegotiationStateCallback,
+                        this
+                    );
                     if (!createStateResult.CompletedSynchronously)
                     {
                         return false;
                     }
-                    this.negotiationState = this.tokenProvider.EndCreateNegotiationState(createStateResult);
+                    this.negotiationState = this.tokenProvider.EndCreateNegotiationState(
+                        createStateResult
+                    );
                 }
                 return this.OnCreateStateComplete();
             }
@@ -812,7 +1009,8 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)result.AsyncState;
+                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)
+                    result.AsyncState;
                 bool completeSelf = false;
                 Exception completionException = null;
                 try
@@ -847,13 +1045,25 @@ namespace System.ServiceModel.Security
 
             bool InitializeChannelFactories()
             {
-                if (this.tokenProvider.WillInitializeChannelFactoriesCompleteSynchronously(negotiationState.RemoteAddress))
+                if (
+                    this.tokenProvider.WillInitializeChannelFactoriesCompleteSynchronously(
+                        negotiationState.RemoteAddress
+                    )
+                )
                 {
-                    this.tokenProvider.InitializeChannelFactories(negotiationState.RemoteAddress, timeoutHelper.RemainingTime());
+                    this.tokenProvider.InitializeChannelFactories(
+                        negotiationState.RemoteAddress,
+                        timeoutHelper.RemainingTime()
+                    );
                 }
                 else
                 {
-                    IAsyncResult result = this.tokenProvider.BeginInitializeChannelFactories(negotiationState.RemoteAddress, timeoutHelper.RemainingTime(), initializeChannelFactoriesCallback, this);
+                    IAsyncResult result = this.tokenProvider.BeginInitializeChannelFactories(
+                        negotiationState.RemoteAddress,
+                        timeoutHelper.RemainingTime(),
+                        initializeChannelFactoriesCallback,
+                        this
+                    );
                     if (!result.CompletedSynchronously)
                     {
                         return false;
@@ -870,7 +1080,8 @@ namespace System.ServiceModel.Security
                     return;
                 }
 
-                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)result.AsyncState;
+                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)
+                    result.AsyncState;
                 bool completeSelf = false;
                 Exception completionException = null;
                 try
@@ -899,14 +1110,21 @@ namespace System.ServiceModel.Security
 
             bool OnChannelFactoriesInitialized()
             {
-                this.rstChannel = this.tokenProvider.CreateClientChannel(negotiationState.RemoteAddress, this.via);
+                this.rstChannel = this.tokenProvider.CreateClientChannel(
+                    negotiationState.RemoteAddress,
+                    this.via
+                );
                 this.nextOutgoingMessage = null;
                 return this.OnRequestChannelCreated();
             }
 
             bool OnRequestChannelCreated()
             {
-                IAsyncResult result = rstChannel.BeginOpen(timeoutHelper.RemainingTime(), openChannelCallback, this);
+                IAsyncResult result = rstChannel.BeginOpen(
+                    timeoutHelper.RemainingTime(),
+                    openChannelCallback,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return false;
@@ -921,7 +1139,8 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)result.AsyncState;
+                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)
+                    result.AsyncState;
                 bool completeSelf = false;
                 Exception completionException = null;
                 try
@@ -968,14 +1187,18 @@ namespace System.ServiceModel.Security
                     IAsyncResult result = null;
                     try
                     {
-                        result = this.rstChannel.BeginRequest(this.nextOutgoingMessage, timeoutHelper.RemainingTime(), sendRequestCallback, this);
+                        result = this.rstChannel.BeginRequest(
+                            this.nextOutgoingMessage,
+                            timeoutHelper.RemainingTime(),
+                            sendRequestCallback,
+                            this
+                        );
 
                         if (!result.CompletedSynchronously)
                         {
                             closeMessage = false;
                             return false;
                         }
-
 
                         incomingMessage = rstChannel.EndRequest(result);
                     }
@@ -991,7 +1214,11 @@ namespace System.ServiceModel.Security
                     {
                         if (incomingMessage == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.FailToRecieveReplyFromNegotiation)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                )
+                            );
                         }
                         return this.DoNegotiation(incomingMessage);
                     }
@@ -1004,7 +1231,8 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)result.AsyncState;
+                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)
+                    result.AsyncState;
                 bool completeSelf = false;
                 Exception completionException = null;
                 try
@@ -1026,7 +1254,11 @@ namespace System.ServiceModel.Security
                     {
                         if (incomingMessage == null)
                         {
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.FailToRecieveReplyFromNegotiation)));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new SecurityNegotiationException(
+                                    SR.GetString(SR.FailToRecieveReplyFromNegotiation)
+                                )
+                            );
                         }
                         completeSelf = self.DoNegotiation(incomingMessage);
                     }
@@ -1053,7 +1285,10 @@ namespace System.ServiceModel.Security
 
             bool DoNegotiation(Message incomingMessage)
             {
-                this.nextOutgoingMessage = this.tokenProvider.GetNextOutgoingMessage(incomingMessage, this.negotiationState);
+                this.nextOutgoingMessage = this.tokenProvider.GetNextOutgoingMessage(
+                    incomingMessage,
+                    this.negotiationState
+                );
                 if (this.nextOutgoingMessage != null)
                 {
                     return SendRequest();
@@ -1062,7 +1297,12 @@ namespace System.ServiceModel.Security
                 {
                     if (!negotiationState.IsNegotiationCompleted)
                     {
-                        throw TraceUtility.ThrowHelperError(new SecurityNegotiationException(SR.GetString(SR.NoNegotiationMessageToSend)), incomingMessage);
+                        throw TraceUtility.ThrowHelperError(
+                            new SecurityNegotiationException(
+                                SR.GetString(SR.NoNegotiationMessageToSend)
+                            ),
+                            incomingMessage
+                        );
                     }
                     return this.CloseRequestChannel();
                 }
@@ -1070,7 +1310,11 @@ namespace System.ServiceModel.Security
 
             bool CloseRequestChannel()
             {
-                IAsyncResult result = rstChannel.BeginClose(timeoutHelper.RemainingTime(), closeChannelCallback, this);
+                IAsyncResult result = rstChannel.BeginClose(
+                    timeoutHelper.RemainingTime(),
+                    closeChannelCallback,
+                    this
+                );
                 if (!result.CompletedSynchronously)
                 {
                     return false;
@@ -1085,7 +1329,8 @@ namespace System.ServiceModel.Security
                 {
                     return;
                 }
-                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)result.AsyncState;
+                SecurityNegotiationAsyncResult self = (SecurityNegotiationAsyncResult)
+                    result.AsyncState;
                 bool completeSelf = false;
                 Exception completionException = null;
                 try
@@ -1120,7 +1365,10 @@ namespace System.ServiceModel.Security
                 EndpointAddress pinnedEpr = null;
                 try
                 {
-                    pinnedEpr = (this.negotiationState == null) ? null : this.negotiationState.RemoteAddress;
+                    pinnedEpr =
+                        (this.negotiationState == null)
+                            ? null
+                            : this.negotiationState.RemoteAddress;
                     Cleanup();
                 }
                 catch (CommunicationException ex)
@@ -1128,13 +1376,22 @@ namespace System.ServiceModel.Security
                     DiagnosticUtility.TraceHandledException(ex, TraceEventType.Information);
                 }
 
-                return IssuanceTokenProviderBase<T>.WrapExceptionIfRequired(e, pinnedEpr, this.issuer);
+                return IssuanceTokenProviderBase<T>.WrapExceptionIfRequired(
+                    e,
+                    pinnedEpr,
+                    this.issuer
+                );
             }
 
             Exception OnSyncNegotiationFailure(Exception e)
             {
-                EndpointAddress pinnedTarget = (this.negotiationState == null) ? null : this.negotiationState.RemoteAddress;
-                return IssuanceTokenProviderBase<T>.WrapExceptionIfRequired(e, pinnedTarget, this.issuer);
+                EndpointAddress pinnedTarget =
+                    (this.negotiationState == null) ? null : this.negotiationState.RemoteAddress;
+                return IssuanceTokenProviderBase<T>.WrapExceptionIfRequired(
+                    e,
+                    pinnedTarget,
+                    this.issuer
+                );
             }
 
             void OnNegotiationComplete()
@@ -1149,7 +1406,8 @@ namespace System.ServiceModel.Security
 
             public static SecurityToken End(IAsyncResult result)
             {
-                SecurityNegotiationAsyncResult self = AsyncResult.End<SecurityNegotiationAsyncResult>(result);
+                SecurityNegotiationAsyncResult self =
+                    AsyncResult.End<SecurityNegotiationAsyncResult>(result);
                 return self.serviceToken;
             }
         }

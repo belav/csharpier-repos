@@ -51,6 +51,6 @@ namespace Newtonsoft.Json
         /// <summary>
         /// Time zone information should be preserved when converting.
         /// </summary>
-        RoundtripKind = 3
+        RoundtripKind = 3,
     }
 }

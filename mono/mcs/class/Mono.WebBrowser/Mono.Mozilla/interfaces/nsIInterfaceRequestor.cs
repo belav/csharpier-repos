@@ -7,10 +7,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -26,33 +26,34 @@
 //
 
 using System;
-using System.Runtime.InteropServices;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Text;
 
-namespace Mono.Mozilla {
+namespace Mono.Mozilla
+{
+    [Guid("033A1470-8B2A-11d3-AF88-00A024FFC08C")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [ComImport()]
+    internal interface nsIInterfaceRequestor
+    {
+        #region nsIInterfaceRequestor
+        [PreserveSigAttribute]
+        [MethodImpl(MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
+        int getInterface([MarshalAs(UnmanagedType.LPStruct)] Guid uuid, out IntPtr result);
 
-	[Guid ("033A1470-8B2A-11d3-AF88-00A024FFC08C")]
-	[InterfaceType (ComInterfaceType.InterfaceIsIUnknown)]
-	[ComImport ()]
-	internal interface nsIInterfaceRequestor {
+        #endregion
+    }
 
-#region nsIInterfaceRequestor
-		[PreserveSigAttribute]
-		[MethodImpl (MethodImplOptions.InternalCall, MethodCodeType = MethodCodeType.Runtime)]
-		int getInterface (
-				[MarshalAs (UnmanagedType.LPStruct)]   Guid uuid,
-				  out IntPtr result);
-
-#endregion
-	}
-
-
-	internal class nsInterfaceRequestor {
-		public static nsIInterfaceRequestor GetProxy (Mono.WebBrowser.IWebBrowser control, nsIInterfaceRequestor obj)
-		{
-			object o = Base.GetProxyForObject (control, typeof(nsIInterfaceRequestor).GUID, obj);
-			return o as nsIInterfaceRequestor;
-		}
-	}
+    internal class nsInterfaceRequestor
+    {
+        public static nsIInterfaceRequestor GetProxy(
+            Mono.WebBrowser.IWebBrowser control,
+            nsIInterfaceRequestor obj
+        )
+        {
+            object o = Base.GetProxyForObject(control, typeof(nsIInterfaceRequestor).GUID, obj);
+            return o as nsIInterfaceRequestor;
+        }
+    }
 }

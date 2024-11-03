@@ -2,22 +2,20 @@
 // Copyright (c) Microsoft Corporation.  All rights reserved.
 //------------------------------------------------------------
 
-namespace System.ServiceModel.Description 
+namespace System.ServiceModel.Description
 {
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Dispatcher;
-    using System.Runtime.Serialization;
-    using System.Collections.ObjectModel;
     using System.Collections.Generic;
+    using System.Collections.ObjectModel;
+    using System.Runtime.Serialization;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Dispatcher;
 
     public class UseRequestHeadersForMetadataAddressBehavior : IServiceBehavior
     {
         Dictionary<string, int> defaultPortsByScheme;
 
-        public UseRequestHeadersForMetadataAddressBehavior()
-        {
-        }
+        public UseRequestHeadersForMetadataAddressBehavior() { }
 
         public IDictionary<string, int> DefaultPortsByScheme
         {
@@ -31,16 +29,21 @@ namespace System.ServiceModel.Description
             }
         }
 
-        void IServiceBehavior.Validate(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-        }
-        
-        void IServiceBehavior.AddBindingParameters(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase, Collection<ServiceEndpoint> endpoints, BindingParameterCollection bindingParameters)
-        {
-        }
+        void IServiceBehavior.Validate(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        ) { }
 
-        void IServiceBehavior.ApplyDispatchBehavior(ServiceDescription serviceDescription, ServiceHostBase serviceHostBase)
-        {
-        }
+        void IServiceBehavior.AddBindingParameters(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase,
+            Collection<ServiceEndpoint> endpoints,
+            BindingParameterCollection bindingParameters
+        ) { }
+
+        void IServiceBehavior.ApplyDispatchBehavior(
+            ServiceDescription serviceDescription,
+            ServiceHostBase serviceHostBase
+        ) { }
     }
 }

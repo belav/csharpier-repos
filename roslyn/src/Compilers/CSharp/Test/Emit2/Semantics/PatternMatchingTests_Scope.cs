@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         public void ScopeOfLocalFunction()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -63,22 +63,31 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             compilation.VerifyDiagnostics(
                 // (14,52): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when TakeOutParam(true, out var x14):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14").WithArguments("x14").WithLocation(14, 52),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(14, 52),
                 // (24,40): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(1 is var x14):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14").WithArguments("x14").WithLocation(24, 40));
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(24, 40)
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_ExpressionStatement_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -170,34 +179,52 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
             compilation.VerifyDiagnostics(
-    // (14,31): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(14, 31),
-    // (16,27): error CS0128: A local variable or function named 'x1' is already defined in this scope
-    //         Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(16, 27),
-    // (21,15): error CS0841: Cannot use local variable 'x2' before it is declared
-    //         Dummy(x2, true is var x2);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(21, 15),
-    // (26,27): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         Dummy(true is var x3, x3);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(26, 27),
-    // (33,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
-    //         Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(33, 27),
-    // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (59,48): error CS0128: A local variable or function named 'x8' is already defined in this scope
-    //         Dummy(true is var x8, x8, false is var x8, x8);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(59, 48),
-    // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
-    //         Dummy(x11);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11").WithArguments("x11").WithLocation(79, 15)
-                );
+                // (14,31): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 31),
+                // (16,27): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                //         Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 27),
+                // (21,15): error CS0841: Cannot use local variable 'x2' before it is declared
+                //         Dummy(x2, true is var x2);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(21, 15),
+                // (26,27): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         Dummy(true is var x3, x3);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(26, 27),
+                // (33,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                //         Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(33, 27),
+                // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (59,48): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                //         Dummy(true is var x8, x8, false is var x8, x8);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(59, 48),
+                // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
+                //         Dummy(x11);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(79, 15)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -262,7 +289,8 @@ public class X
         [Fact]
         public void ScopeOfPatternVariables_ExpressionStatement_02()
         {
-            var text = @"
+            var text =
+                @"
 public class Cls
 {
     public static void Main()
@@ -276,7 +304,11 @@ public class Cls
         return null;
     }
 }";
-            var compilation = CreateCompilation(text, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                text,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: "2").VerifyDiagnostics();
 
@@ -293,7 +325,8 @@ public class Cls
         [Fact]
         public void ScopeOfPatternVariables_ExpressionStatement_03()
         {
-            var text = @"
+            var text =
+                @"
 public class Cls
 {
     public static void Main()
@@ -322,7 +355,11 @@ public class Cls
         return x;
     }
 }";
-            var compilation = CreateCompilation(text, options: TestOptions.ReleaseExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                text,
+                options: TestOptions.ReleaseExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: "12").VerifyDiagnostics();
 
@@ -341,7 +378,7 @@ public class Cls
         public void ScopeOfPatternVariables_ExpressionStatement_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -364,8 +401,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (15,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(15, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(15, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -380,7 +419,7 @@ public class X
         public void ScopeOfPatternVariables_ExpressionStatement_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -400,13 +439,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 Dummy(11 is var x1, x1);
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -422,7 +466,7 @@ Dummy(11 is var x1, x1);
         public void PatternVariableOrder()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -443,18 +487,22 @@ public class X
             compilation.VerifyDiagnostics(
                 // (13,25): error CS0128: A local variable named 'i' is already defined in this scope
                 //               o2 is int @i && @i > 10);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "@i").WithArguments("i").WithLocation(13, 25),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "@i")
+                    .WithArguments("i")
+                    .WithLocation(13, 25),
                 // (13,31): error CS0165: Use of unassigned local variable 'i'
                 //               o2 is int @i && @i > 10);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "@i").WithArguments("i").WithLocation(13, 31)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "@i")
+                    .WithArguments("i")
+                    .WithLocation(13, 31)
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_ReturnStatement_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -546,43 +594,61 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
             compilation.VerifyDiagnostics(
-    // (14,38): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             return Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(14, 38),
-    // (16,34): error CS0128: A local variable or function named 'x1' is already defined in this scope
-    //         return Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(16, 34),
-    // (14,13): warning CS0162: Unreachable code detected
-    //             return Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(14, 13),
-    // (21,22): error CS0841: Cannot use local variable 'x2' before it is declared
-    //         return Dummy(x2, true is var x2);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(21, 22),
-    // (26,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         return Dummy(true is var x3, x3);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(26, 34),
-    // (33,34): error CS0128: A local variable or function named 'x4' is already defined in this scope
-    //         return Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(33, 34),
-    // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (39,9): warning CS0162: Unreachable code detected
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(39, 9),
-    // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (59,55): error CS0128: A local variable or function named 'x8' is already defined in this scope
-    //         return Dummy(true is var x8, x8, false is var x8, x8);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(59, 55),
-    // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
-    //         Dummy(x11);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11").WithArguments("x11").WithLocation(79, 15),
-    // (86,9): warning CS0162: Unreachable code detected
-    //         Dummy(x12);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(86, 9)
-                );
+                // (14,38): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             return Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 38),
+                // (16,34): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                //         return Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 34),
+                // (14,13): warning CS0162: Unreachable code detected
+                //             return Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "return").WithLocation(14, 13),
+                // (21,22): error CS0841: Cannot use local variable 'x2' before it is declared
+                //         return Dummy(x2, true is var x2);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(21, 22),
+                // (26,34): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         return Dummy(true is var x3, x3);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(26, 34),
+                // (33,34): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                //         return Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(33, 34),
+                // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (39,9): warning CS0162: Unreachable code detected
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(39, 9),
+                // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (59,55): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                //         return Dummy(true is var x8, x8, false is var x8, x8);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(59, 55),
+                // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
+                //         Dummy(x11);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(79, 15),
+                // (86,9): warning CS0162: Unreachable code detected
+                //         Dummy(x12);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(86, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -645,7 +711,7 @@ public class X
         public void ScopeOfPatternVariables_ReturnStatement_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -669,14 +735,24 @@ public class X
             compilation.VerifyDiagnostics(
                 // (15,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(15, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(15, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").Single();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl);
             VerifyNotInScope(model, x1Ref);
         }
@@ -685,7 +761,7 @@ public class X
         public void ScopeOfPatternVariables_ReturnStatement_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -705,19 +781,37 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ReturnStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (ReturnStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 return Dummy(11 is var x1, x1);
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
-                tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(id => id.Identifier.ValueText == "SpeculateHere")
+                    .Single()
+                    .SpanStart,
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").ToArray();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .ToArray();
             Assert.Equal(1, x1Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
             Assert.Equal("System.Int32", model.GetTypeInfo(x1Ref[0]).Type.ToTestDisplayString());
@@ -727,7 +821,7 @@ return Dummy(11 is var x1, x1);
         public void ScopeOfPatternVariables_ThrowStatement_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -819,40 +913,58 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
             compilation.VerifyDiagnostics(
-    // (14,37): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             throw Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(14, 37),
-    // (16,33): error CS0128: A local variable or function named 'x1' is already defined in this scope
-    //         throw Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(16, 33),
-    // (21,21): error CS0841: Cannot use local variable 'x2' before it is declared
-    //         throw Dummy(x2, true is var x2);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(21, 21),
-    // (26,33): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         throw Dummy(true is var x3, x3);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(26, 33),
-    // (33,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
-    //         throw Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(33, 33),
-    // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (39,9): warning CS0162: Unreachable code detected
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(39, 9),
-    // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(39, 13),
-    // (59,54): error CS0128: A local variable or function named 'x8' is already defined in this scope
-    //         throw Dummy(true is var x8, x8, false is var x8, x8);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(59, 54),
-    // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
-    //         Dummy(x11);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11").WithArguments("x11").WithLocation(79, 15),
-    // (86,9): warning CS0162: Unreachable code detected
-    //         Dummy(x12);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(86, 9)
-                );
+                // (14,37): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             throw Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 37),
+                // (16,33): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                //         throw Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 33),
+                // (21,21): error CS0841: Cannot use local variable 'x2' before it is declared
+                //         throw Dummy(x2, true is var x2);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(21, 21),
+                // (26,33): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         throw Dummy(true is var x3, x3);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(26, 33),
+                // (33,33): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                //         throw Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(33, 33),
+                // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (39,9): warning CS0162: Unreachable code detected
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(39, 9),
+                // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
+                // (59,54): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                //         throw Dummy(true is var x8, x8, false is var x8, x8);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(59, 54),
+                // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
+                //         Dummy(x11);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(79, 15),
+                // (86,9): warning CS0162: Unreachable code detected
+                //         Dummy(x12);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(86, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -915,7 +1027,7 @@ public class X
         public void ScopeOfPatternVariables_ThrowStatement_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -938,14 +1050,24 @@ public class X
             compilation.VerifyDiagnostics(
                 // (15,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(15, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(15, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").Single();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl);
             VerifyNotInScope(model, x1Ref);
         }
@@ -954,7 +1076,7 @@ public class X
         public void ScopeOfPatternVariables_TrowStatement_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -974,19 +1096,37 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ThrowStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (ThrowStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 throw Dummy(11 is var x1, x1);
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
-                tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(id => id.Identifier.ValueText == "SpeculateHere")
+                    .Single()
+                    .SpanStart,
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").ToArray();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .ToArray();
             Assert.Equal(1, x1Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
             Assert.Equal("System.Int32", model.GetTypeInfo(x1Ref[0]).Type.ToTestDisplayString());
@@ -996,7 +1136,7 @@ throw Dummy(11 is var x1, x1);
         public void ScopeOfPatternVariables_If_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -1117,40 +1257,60 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (110,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(110, 13),
-    // (36,17): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x3 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(36, 17),
-    // (46,25): error CS0128: A local variable named 'x4' is already defined in this scope
-    //         if (true is var x4)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(46, 25),
-    // (52,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         if (true is var x5)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(52, 25),
-    // (58,13): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         if (x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(58, 13),
-    // (66,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(66, 17),
-    // (83,19): error CS0841: Cannot use local variable 'x9' before it is declared
-    //             Dummy(x9);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(83, 19),
-    // (84,29): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             if (true is var x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(84, 29),
-    // (91,13): error CS0103: The name 'y10' does not exist in the current context
-    //         if (y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(91, 13),
-    // (109,13): error CS0103: The name 'y12' does not exist in the current context
-    //         if (y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(109, 13),
-    // (110,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(110, 17)
-                );
+                // (110,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(110, 13),
+                // (36,17): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x3 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(36, 17),
+                // (46,25): error CS0128: A local variable named 'x4' is already defined in this scope
+                //         if (true is var x4)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(46, 25),
+                // (52,25): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         if (true is var x5)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(52, 25),
+                // (58,13): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         if (x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(58, 13),
+                // (66,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(66, 17),
+                // (83,19): error CS0841: Cannot use local variable 'x9' before it is declared
+                //             Dummy(x9);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(83, 19),
+                // (84,29): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             if (true is var x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(84, 29),
+                // (91,13): error CS0103: The name 'y10' does not exist in the current context
+                //         if (y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(91, 13),
+                // (109,13): error CS0103: The name 'y12' does not exist in the current context
+                //         if (y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 13),
+                // (110,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(110, 17)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1218,7 +1378,7 @@ public class X
         public void ScopeOfPatternVariables_If_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -1242,8 +1402,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (17,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(17, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(17, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1258,7 +1420,7 @@ public class X
         public void ScopeOfPatternVariables_If_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -1278,13 +1440,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (IfStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (IfStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 if (Dummy(11 is var x1, x1));
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -1300,7 +1467,7 @@ if (Dummy(11 is var x1, x1));
         public void ScopeOfPatternVariables_Lambda_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -1397,55 +1564,83 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(17, 27),
                 // (12,23): error CS0103: The name 'let' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(12, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(12, 23),
                 // (12,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 23),
                 // (12,27): error CS0103: The name 'x1' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 27),
                 // (12,32): error CS0103: The name 'o' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(12, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(12, 32),
                 // (12,27): warning CS0162: Unreachable code detected
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x1").WithLocation(12, 27),
                 // (17,23): error CS0103: The name 'let' does not exist in the current context
                 //         return (o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(17, 23),
                 // (17,23): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(17, 23),
                 // (17,36): error CS0103: The name 'o' does not exist in the current context
                 //         return (o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(17, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(17, 36),
                 // (17,27): warning CS0162: Unreachable code detected
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(17, 27),
                 // (27,49): error CS0841: Cannot use local variable 'x4' before it is declared
                 //         Dummy((System.Func<object, bool>) (o => x4 && o is int x4));
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(27, 49),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(27, 49),
                 // (33,74): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                                                o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(33, 74),
+                //                                                                o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(33, 74),
                 // (44,15): error CS0103: The name 'x7' does not exist in the current context
                 //         Dummy(x7, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(44, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(44, 15),
                 // (45,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(45, 15),
+                //         Dummy(x7,
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(45, 15),
                 // (47,15): error CS0103: The name 'x7' does not exist in the current context
                 //               x7);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(47, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(47, 15),
                 // (48,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(48, 15),
+                //         Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(48, 15),
                 // (82,15): error CS0841: Cannot use local variable 'x12' before it is declared
                 //               x12);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12").WithArguments("x12").WithLocation(82, 15)
-                );
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(82, 15)
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular7_3);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular7_3
+            );
             compilation.VerifyDiagnostics(
                 // (12,27): error CS1002: ; expected
                 //         return (o) => let x1 = o;
@@ -1455,65 +1650,97 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(17, 27),
                 // (12,23): error CS0103: The name 'let' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(12, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(12, 23),
                 // (12,23): error CS0201: Only assignment, call, increment, decrement, and new object expressions can be used as a statement
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 23),
                 // (12,27): error CS0103: The name 'x1' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(12, 27),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 27),
                 // (12,32): error CS0103: The name 'o' does not exist in the current context
                 //         return (o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(12, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(12, 32),
                 // (12,27): warning CS0162: Unreachable code detected
                 //         return (o) => let x1 = o;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "x1").WithLocation(12, 27),
                 // (17,23): error CS0103: The name 'let' does not exist in the current context
                 //         return (o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(17, 23),
                 // (17,23): error CS0201: Only assignment, call, increment, decrement, and new object expressions can be used as a statement
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(17, 23),
                 // (17,36): error CS0103: The name 'o' does not exist in the current context
                 //         return (o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(17, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(17, 36),
                 // (17,27): warning CS0162: Unreachable code detected
                 //         return (o) => let var x2 = o;
                 Diagnostic(ErrorCode.WRN_UnreachableCode, "var").WithLocation(17, 27),
                 // (27,49): error CS0841: Cannot use local variable 'x4' before it is declared
                 //         Dummy((System.Func<object, bool>) (o => x4 && o is int x4));
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(27, 49),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(27, 49),
                 // (33,74): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                                                o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(33, 74),
+                //                                                                o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(33, 74),
                 // (44,15): error CS0103: The name 'x7' does not exist in the current context
                 //         Dummy(x7, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(44, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(44, 15),
                 // (45,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(45, 15),
+                //         Dummy(x7,
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(45, 15),
                 // (47,15): error CS0103: The name 'x7' does not exist in the current context
                 //               x7);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(47, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(47, 15),
                 // (48,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(48, 15),
+                //         Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(48, 15),
                 // (59,58): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //               (System.Func<object, bool>) (o => o is int x9 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(59, 58),
+                //               (System.Func<object, bool>) (o => o is int x9 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(59, 58),
                 // (65,58): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         Dummy((System.Func<object, bool>) (o => o is int x10 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10").WithArguments("x10").WithLocation(65, 58),
+                //         Dummy((System.Func<object, bool>) (o => o is int x10 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10")
+                    .WithArguments("x10")
+                    .WithLocation(65, 58),
                 // (74,58): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         Dummy((System.Func<object, bool>) (o => o is int x11 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11").WithArguments("x11").WithLocation(74, 58),
+                //         Dummy((System.Func<object, bool>) (o => o is int x11 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(74, 58),
                 // (80,58): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         Dummy((System.Func<object, bool>) (o => o is int x12 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12").WithArguments("x12").WithLocation(80, 58),
+                //         Dummy((System.Func<object, bool>) (o => o is int x12 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(80, 58),
                 // (82,15): error CS0841: Cannot use local variable 'x12' before it is declared
                 //               x12);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12").WithArguments("x12").WithLocation(82, 15)
-                );
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(82, 15)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1586,7 +1813,7 @@ public class X
         public void ScopeOfPatternVariables_Query_01()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -1722,98 +1949,160 @@ public class X
             compilation.VerifyDiagnostics(
                 // (25,26): error CS0103: The name 'z2' does not exist in the current context
                 //                          z2;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(25, 26),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                    .WithArguments("z2")
+                    .WithLocation(25, 26),
                 // (27,15): error CS0103: The name 'z2' does not exist in the current context
-                //         Dummy(z2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2").WithArguments("z2").WithLocation(27, 15),
+                //         Dummy(z2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z2")
+                    .WithArguments("z2")
+                    .WithLocation(27, 15),
                 // (35,32): error CS0103: The name 'z3' does not exist in the current context
                 //                                z3};
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(35, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                    .WithArguments("z3")
+                    .WithLocation(35, 32),
                 // (37,15): error CS0103: The name 'z3' does not exist in the current context
-                //         Dummy(z3); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3").WithArguments("z3").WithLocation(37, 15),
+                //         Dummy(z3);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z3")
+                    .WithArguments("z3")
+                    .WithLocation(37, 15),
                 // (45,35): error CS0103: The name 'v4' does not exist in the current context
-                //                                   v4 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(45, 35),
+                //                                   v4
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(45, 35),
                 // (47,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                                   u4 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4").WithArguments("u4").WithLocation(47, 35),
+                //                                   u4
+                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(47, 35),
                 // (49,32): error CS0103: The name 'u4' does not exist in the current context
                 //                                u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(49, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(49, 32),
                 // (49,36): error CS0103: The name 'v4' does not exist in the current context
                 //                                u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(49, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(49, 36),
                 // (52,15): error CS0103: The name 'u4' does not exist in the current context
-                //         Dummy(u4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(52, 15),
+                //         Dummy(u4);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(52, 15),
                 // (53,15): error CS0103: The name 'v4' does not exist in the current context
-                //         Dummy(v4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(53, 15),
+                //         Dummy(v4);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(53, 15),
                 // (61,35): error CS0103: The name 'v5' does not exist in the current context
-                //                                   v5 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(61, 35),
+                //                                   v5
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(61, 35),
                 // (63,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                                   u5 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5").WithArguments("u5").WithLocation(63, 35),
+                //                                   u5
+                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(63, 35),
                 // (66,32): error CS0103: The name 'u5' does not exist in the current context
                 //                                u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(66, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(66, 32),
                 // (66,36): error CS0103: The name 'v5' does not exist in the current context
                 //                                u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(66, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(66, 36),
                 // (69,15): error CS0103: The name 'u5' does not exist in the current context
-                //         Dummy(u5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(69, 15),
+                //         Dummy(u5);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(69, 15),
                 // (70,15): error CS0103: The name 'v5' does not exist in the current context
-                //         Dummy(v5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(70, 15),
+                //         Dummy(v5);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(70, 15),
                 // (78,26): error CS0103: The name 'z6' does not exist in the current context
                 //                          z6;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(78, 26),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                    .WithArguments("z6")
+                    .WithLocation(78, 26),
                 // (80,15): error CS0103: The name 'z6' does not exist in the current context
-                //         Dummy(z6); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6").WithArguments("z6").WithLocation(80, 15),
+                //         Dummy(z6);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z6")
+                    .WithArguments("z6")
+                    .WithLocation(80, 15),
                 // (87,27): error CS0103: The name 'u7' does not exist in the current context
                 //                           u7,
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(87, 27),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                    .WithArguments("u7")
+                    .WithLocation(87, 27),
                 // (89,27): error CS0103: The name 'z7' does not exist in the current context
-                //                           z7   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(89, 27),
+                //                           z7
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                    .WithArguments("z7")
+                    .WithLocation(89, 27),
                 // (91,26): error CS0103: The name 'z7' does not exist in the current context
                 //                          z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(91, 26),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                    .WithArguments("z7")
+                    .WithLocation(91, 26),
                 // (91,31): error CS0103: The name 'u7' does not exist in the current context
                 //                          z7 + u7;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(91, 31),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                    .WithArguments("u7")
+                    .WithLocation(91, 31),
                 // (93,15): error CS0103: The name 'z7' does not exist in the current context
-                //         Dummy(z7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7").WithArguments("z7").WithLocation(93, 15),
+                //         Dummy(z7);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z7")
+                    .WithArguments("z7")
+                    .WithLocation(93, 15),
                 // (94,15): error CS0103: The name 'u7' does not exist in the current context
-                //         Dummy(u7); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7").WithArguments("u7").WithLocation(94, 15),
+                //         Dummy(u7);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u7")
+                    .WithArguments("u7")
+                    .WithLocation(94, 15),
                 // (102,15): error CS0103: The name 'z8' does not exist in the current context
-                //         Dummy(z8); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z8").WithArguments("z8").WithLocation(102, 15),
+                //         Dummy(z8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z8")
+                    .WithArguments("z8")
+                    .WithLocation(102, 15),
                 // (112,25): error CS0103: The name 'z9' does not exist in the current context
-                //                         z9;   
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(112, 25),
+                //                         z9;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                    .WithArguments("z9")
+                    .WithLocation(112, 25),
                 // (109,25): error CS0103: The name 'u9' does not exist in the current context
                 //                         u9
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(109, 25),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                    .WithArguments("u9")
+                    .WithLocation(109, 25),
                 // (114,15): error CS0103: The name 'z9' does not exist in the current context
-                //         Dummy(z9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9").WithArguments("z9").WithLocation(114, 15),
+                //         Dummy(z9);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "z9")
+                    .WithArguments("z9")
+                    .WithLocation(114, 15),
                 // (115,15): error CS0103: The name 'u9' does not exist in the current context
-                //         Dummy(u9); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9").WithArguments("u9").WithLocation(115, 15),
+                //         Dummy(u9);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u9")
+                    .WithArguments("u9")
+                    .WithLocation(115, 15),
                 // (121,24): error CS1931: The range variable 'y10' conflicts with a previous declaration of 'y10'
                 //                   from y10 in new[] { 1 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y10").WithArguments("y10").WithLocation(121, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(121, 24),
                 // (128,23): error CS1931: The range variable 'y11' conflicts with a previous declaration of 'y11'
                 //                   let y11 = x1 + 1
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y11").WithArguments("y11").WithLocation(128, 23)
-                );
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y11")
+                    .WithArguments("y11")
+                    .WithLocation(128, 23)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -1979,7 +2268,7 @@ public class X
         public void ScopeOfPatternVariables_Query_03()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2029,42 +2318,66 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
                 // (18,35): error CS0103: The name 'v4' does not exist in the current context
-                //                                   v4 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(18, 35),
+                //                                   v4
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(18, 35),
                 // (20,35): error CS1938: The name 'u4' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                                   u4 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4").WithArguments("u4").WithLocation(20, 35),
+                //                                   u4
+                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(20, 35),
                 // (22,32): error CS0103: The name 'u4' does not exist in the current context
                 //                                u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(22, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(22, 32),
                 // (22,36): error CS0103: The name 'v4' does not exist in the current context
                 //                                u4, v4 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(22, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(22, 36),
                 // (25,15): error CS0103: The name 'u4' does not exist in the current context
-                //         Dummy(u4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4").WithArguments("u4").WithLocation(25, 15),
+                //         Dummy(u4);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u4")
+                    .WithArguments("u4")
+                    .WithLocation(25, 15),
                 // (26,15): error CS0103: The name 'v4' does not exist in the current context
-                //         Dummy(v4); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4").WithArguments("v4").WithLocation(26, 15),
+                //         Dummy(v4);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v4")
+                    .WithArguments("v4")
+                    .WithLocation(26, 15),
                 // (35,35): error CS0103: The name 'v5' does not exist in the current context
-                //                                   v5 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(35, 35),
+                //                                   v5
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(35, 35),
                 // (37,35): error CS1938: The name 'u5' is not in scope on the right side of 'equals'.  Consider swapping the expressions on either side of 'equals'.
-                //                                   u5 
-                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5").WithArguments("u5").WithLocation(37, 35),
+                //                                   u5
+                Diagnostic(ErrorCode.ERR_QueryInnerKey, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(37, 35),
                 // (40,32): error CS0103: The name 'u5' does not exist in the current context
                 //                                u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(40, 32),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(40, 32),
                 // (40,36): error CS0103: The name 'v5' does not exist in the current context
                 //                                u5, v5 };
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(40, 36),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(40, 36),
                 // (43,15): error CS0103: The name 'u5' does not exist in the current context
-                //         Dummy(u5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5").WithArguments("u5").WithLocation(43, 15),
+                //         Dummy(u5);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "u5")
+                    .WithArguments("u5")
+                    .WithLocation(43, 15),
                 // (44,15): error CS0103: The name 'v5' does not exist in the current context
-                //         Dummy(v5); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5").WithArguments("v5").WithLocation(44, 15)
-                );
+                //         Dummy(v5);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "v5")
+                    .WithArguments("v5")
+                    .WithLocation(44, 15)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2127,7 +2440,7 @@ public class X
         public void ScopeOfPatternVariables_Query_05()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2166,51 +2479,83 @@ public class X
             compilation.VerifyDiagnostics(
                 // (16,47): error CS0128: A local variable or function named 'y1' is already defined in this scope
                 //         var res = from x1 in new[] { 1 is var y1 ? y1 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1").WithArguments("y1").WithLocation(16, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(16, 47),
                 // (18,47): error CS0128: A local variable or function named 'y3' is already defined in this scope
                 //                   join x3 in new[] { 3 is var y3 ? y3 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3").WithArguments("y3").WithLocation(18, 47)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(18, 47)
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular7_3);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular7_3
+            );
             compilation.VerifyDiagnostics(
                 // (16,47): error CS0128: A local variable or function named 'y1' is already defined in this scope
                 //         var res = from x1 in new[] { 1 is var y1 ? y1 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1").WithArguments("y1").WithLocation(16, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(16, 47),
                 // (17,47): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { 2 is var y2 ? y2 : 0}
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2").WithArguments("y2").WithLocation(17, 47),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(17, 47),
                 // (18,47): error CS0128: A local variable or function named 'y3' is already defined in this scope
                 //                   join x3 in new[] { 3 is var y3 ? y3 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3").WithArguments("y3").WithLocation(18, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(18, 47),
                 // (19,36): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                        on 4 is var y4 ? y4 : 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4").WithArguments("y4").WithLocation(19, 36),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(19, 36),
                 // (20,43): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                           equals 5 is var y5 ? y5 : 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5").WithArguments("y5").WithLocation(20, 43),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
+                    .WithArguments("y5")
+                    .WithLocation(20, 43),
                 // (21,34): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   where 6 is var y6 && y6 == 1
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6").WithArguments("y6").WithLocation(21, 34),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
+                    .WithArguments("y6")
+                    .WithLocation(21, 34),
                 // (22,36): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   orderby 7 is var y7 && y7 > 0, 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7").WithArguments("y7").WithLocation(22, 36),
+                //                   orderby 7 is var y7 && y7 > 0,
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
+                    .WithArguments("y7")
+                    .WithLocation(22, 36),
                 // (23,36): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                           8 is var y8 && y8 > 0 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8").WithArguments("y8").WithLocation(23, 36),
+                //                           8 is var y8 && y8 > 0
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
+                    .WithArguments("y8")
+                    .WithLocation(23, 36),
                 // (25,32): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   by 10 is var y10 && y10 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10").WithArguments("y10").WithLocation(25, 32),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(25, 32),
                 // (24,34): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   group 9 is var y9 && y9 > 0 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9").WithArguments("y9").WithLocation(24, 34),
+                //                   group 9 is var y9 && y9 > 0
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
+                    .WithArguments("y9")
+                    .WithLocation(24, 34),
                 // (27,39): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   let x11 = 11 is var y11 && y11 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11").WithArguments("y11").WithLocation(27, 39),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11")
+                    .WithArguments("y11")
+                    .WithLocation(27, 39),
                 // (28,36): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   select 12 is var y12 && y12 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12").WithArguments("y12").WithLocation(28, 36)
-                );
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(28, 36)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2219,7 +2564,11 @@ public class X
             {
                 var id = "y" + i;
                 var yDecl = GetPatternDeclarations(tree, id).Single();
-                var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).ToArray();
+                var yRef = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(name => name.Identifier.ValueText == id)
+                    .ToArray();
                 Assert.Equal(3, yRef.Length);
 
                 switch (i)
@@ -2255,7 +2604,7 @@ public class X
         public void ScopeOfPatternVariables_Query_06()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2302,51 +2651,83 @@ public class X
             compilation.VerifyDiagnostics(
                 // (26,47): error CS0128: A local variable or function named 'y1' is already defined in this scope
                 //                   from x1 in new[] { 1 is var y1 ? y1 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1").WithArguments("y1").WithLocation(26, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(26, 47),
                 // (28,47): error CS0128: A local variable or function named 'y3' is already defined in this scope
                 //                   join x3 in new[] { 3 is var y3 ? y3 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3").WithArguments("y3").WithLocation(28, 47)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(28, 47)
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular7_3);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular7_3
+            );
             compilation.VerifyDiagnostics(
                 // (26,47): error CS0128: A local variable or function named 'y1' is already defined in this scope
                 //                   from x1 in new[] { 1 is var y1 ? y1 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1").WithArguments("y1").WithLocation(26, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(26, 47),
                 // (27,47): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { 2 is var y2 ? y2 : 0}
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2").WithArguments("y2").WithLocation(27, 47),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(27, 47),
                 // (28,47): error CS0128: A local variable or function named 'y3' is already defined in this scope
                 //                   join x3 in new[] { 3 is var y3 ? y3 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3").WithArguments("y3").WithLocation(28, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(28, 47),
                 // (29,36): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                        on 4 is var y4 ? y4 : 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4").WithArguments("y4").WithLocation(29, 36),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(29, 36),
                 // (30,43): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                           equals 5 is var y5 ? y5 : 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5").WithArguments("y5").WithLocation(30, 43),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
+                    .WithArguments("y5")
+                    .WithLocation(30, 43),
                 // (31,34): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   where 6 is var y6 && y6 == 1
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6").WithArguments("y6").WithLocation(31, 34),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
+                    .WithArguments("y6")
+                    .WithLocation(31, 34),
                 // (32,36): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   orderby 7 is var y7 && y7 > 0, 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7").WithArguments("y7").WithLocation(32, 36),
+                //                   orderby 7 is var y7 && y7 > 0,
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
+                    .WithArguments("y7")
+                    .WithLocation(32, 36),
                 // (33,36): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                           8 is var y8 && y8 > 0 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8").WithArguments("y8").WithLocation(33, 36),
+                //                           8 is var y8 && y8 > 0
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
+                    .WithArguments("y8")
+                    .WithLocation(33, 36),
                 // (35,32): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   by 10 is var y10 && y10 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10").WithArguments("y10").WithLocation(35, 32),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(35, 32),
                 // (34,34): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   group 9 is var y9 && y9 > 0 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9").WithArguments("y9").WithLocation(34, 34),
+                //                   group 9 is var y9 && y9 > 0
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
+                    .WithArguments("y9")
+                    .WithLocation(34, 34),
                 // (37,39): error CS0136: A local or parameter named 'y11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   let x11 = 11 is var y11 && y11 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11").WithArguments("y11").WithLocation(37, 39),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y11")
+                    .WithArguments("y11")
+                    .WithLocation(37, 39),
                 // (38,36): error CS0136: A local or parameter named 'y12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   select 12 is var y12 && y12 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12").WithArguments("y12").WithLocation(38, 36)
-                );
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(38, 36)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2355,7 +2736,11 @@ public class X
             {
                 var id = "y" + i;
                 var yDecl = GetPatternDeclarations(tree, id).ToArray();
-                var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).ToArray();
+                var yRef = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(name => name.Identifier.ValueText == id)
+                    .ToArray();
                 Assert.Equal(2, yDecl.Length);
                 Assert.Equal(2, yRef.Length);
 
@@ -2383,7 +2768,7 @@ public class X
         public void ScopeOfPatternVariables_Query_07()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2410,15 +2795,21 @@ public class X
             compilation.VerifyDiagnostics(
                 // (18,47): error CS0128: A local variable named 'y3' is already defined in this scope
                 //                   join x3 in new[] { 3 is var y3 ? y3 : 0}
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3").WithArguments("y3").WithLocation(18, 47)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(18, 47)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
             const string id = "y3";
             var yDecl = GetPatternDeclarations(tree, id).ToArray();
-            var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).ToArray();
+            var yRef = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(name => name.Identifier.ValueText == id)
+                .ToArray();
             Assert.Equal(2, yDecl.Length);
             Assert.Equal(2, yRef.Length);
             // Since the name is declared twice in the same scope,
@@ -2431,7 +2822,7 @@ public class X
         public void ScopeOfPatternVariables_Query_08()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2464,17 +2855,25 @@ public class X
             compilation.VerifyDiagnostics(
                 // (19,24): error CS1931: The range variable 'y1' conflicts with a previous declaration of 'y1'
                 //                   from y1 in new[] { 1 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y1").WithArguments("y1").WithLocation(19, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(19, 24),
                 // (20,24): error CS1931: The range variable 'y2' conflicts with a previous declaration of 'y2'
                 //                   join y2 in new[] { 0 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y2").WithArguments("y2").WithLocation(20, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(20, 24),
                 // (22,23): error CS1931: The range variable 'y3' conflicts with a previous declaration of 'y3'
                 //                   let y3 = 0
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y3").WithArguments("y3").WithLocation(22, 23),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(22, 23),
                 // (25,24): error CS1931: The range variable 'y4' conflicts with a previous declaration of 'y4'
                 //                   into y4
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y4").WithArguments("y4").WithLocation(25, 24)
-                );
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(25, 24)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2483,7 +2882,11 @@ public class X
             {
                 var id = "y" + i;
                 var yDecl = GetPatternDeclarations(tree, id).Single();
-                var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).Single();
+                var yRef = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(name => name.Identifier.ValueText == id)
+                    .Single();
                 VerifyModelForDeclarationOrVarSimplePattern(model, yDecl);
                 VerifyNotAPatternLocal(model, yRef);
             }
@@ -2494,7 +2897,7 @@ public class X
         public void ScopeOfPatternVariables_Query_09()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2531,20 +2934,30 @@ public class X
             compilation.VerifyDiagnostics(
                 // (14,24): error CS1931: The range variable 'y1' conflicts with a previous declaration of 'y1'
                 //         var res = from y1 in new[] { 0 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y1").WithArguments("y1").WithLocation(14, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(14, 24),
                 // (15,24): error CS1931: The range variable 'y2' conflicts with a previous declaration of 'y2'
                 //                   join y2 in new[] { 0 }
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y2").WithArguments("y2").WithLocation(15, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(15, 24),
                 // (17,23): error CS1931: The range variable 'y3' conflicts with a previous declaration of 'y3'
                 //                   let y3 = 0
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y3").WithArguments("y3").WithLocation(17, 23),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(17, 23),
                 // (20,24): error CS1931: The range variable 'y4' conflicts with a previous declaration of 'y4'
                 //                   into y4
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y4").WithArguments("y4").WithLocation(20, 24),
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(20, 24),
                 // (23,24): error CS1931: The range variable 'y5' conflicts with a previous declaration of 'y5'
-                //                   join y5 in new[] { Dummy(1 is var y1, 
-                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y5").WithArguments("y5").WithLocation(23, 24)
-                );
+                //                   join y5 in new[] { Dummy(1 is var y1,
+                Diagnostic(ErrorCode.ERR_QueryRangeVariableOverrides, "y5")
+                    .WithArguments("y5")
+                    .WithLocation(23, 24)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2553,7 +2966,11 @@ public class X
             {
                 var id = "y" + i;
                 var yDecl = GetPatternDeclarations(tree, id).Single();
-                var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).Single();
+                var yRef = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(name => name.Identifier.ValueText == id)
+                    .Single();
 
                 switch (i)
                 {
@@ -2579,7 +2996,7 @@ public class X
         public void ScopeOfPatternVariables_Query_10()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2672,35 +3089,55 @@ public class X
             compilation.VerifyDiagnostics(
                 // (15,47): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   from x2 in new[] { 1 is var y1 ? y1 : 1 }
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1").WithArguments("y1").WithLocation(15, 47),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(15, 47),
                 // (23,36): error CS0136: A local or parameter named 'y2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                        on 2 is var y2 ? y2 : 0 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2").WithArguments("y2").WithLocation(23, 36),
+                //                        on 2 is var y2 ? y2 : 0
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(23, 36),
                 // (33,40): error CS0136: A local or parameter named 'y3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                        equals 3 is var y3 ? y3 : 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y3").WithArguments("y3").WithLocation(33, 40),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y3")
+                    .WithArguments("y3")
+                    .WithLocation(33, 40),
                 // (40,34): error CS0136: A local or parameter named 'y4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   where 4 is var y4 && y4 == 1
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4").WithArguments("y4").WithLocation(40, 34),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y4")
+                    .WithArguments("y4")
+                    .WithLocation(40, 34),
                 // (47,36): error CS0136: A local or parameter named 'y5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   orderby 5 is var y5 && y5 > 1, 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5").WithArguments("y5").WithLocation(47, 36),
+                //                   orderby 5 is var y5 && y5 > 1,
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y5")
+                    .WithArguments("y5")
+                    .WithLocation(47, 36),
                 // (56,36): error CS0136: A local or parameter named 'y6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                           6 is var y6 && y6 > 1 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6").WithArguments("y6").WithLocation(56, 36),
+                //                           6 is var y6 && y6 > 1
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y6")
+                    .WithArguments("y6")
+                    .WithLocation(56, 36),
                 // (63,34): error CS0136: A local or parameter named 'y7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                   group 7 is var y7 && y7 == 3 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7").WithArguments("y7").WithLocation(63, 34),
+                //                   group 7 is var y7 && y7 == 3
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y7")
+                    .WithArguments("y7")
+                    .WithLocation(63, 34),
                 // (71,31): error CS0136: A local or parameter named 'y8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   by 8 is var y8 && y8 == 3;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8").WithArguments("y8").WithLocation(71, 31),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y8")
+                    .WithArguments("y8")
+                    .WithLocation(71, 31),
                 // (77,37): error CS0136: A local or parameter named 'y9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   let x4 = 9 is var y9 && y9 > 0
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9").WithArguments("y9").WithLocation(77, 37),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y9")
+                    .WithArguments("y9")
+                    .WithLocation(77, 37),
                 // (84,36): error CS0136: A local or parameter named 'y10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                   select 10 is var y10 && y10 > 0;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10").WithArguments("y10").WithLocation(84, 36)
-                );
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(84, 36)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2709,7 +3146,11 @@ public class X
             {
                 var id = "y" + i;
                 var yDecl = GetPatternDeclarations(tree, id).Single();
-                var yRef = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(name => name.Identifier.ValueText == id).ToArray();
+                var yRef = tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(name => name.Identifier.ValueText == id)
+                    .ToArray();
                 Assert.Equal(i == 10 ? 1 : 2, yRef.Length);
 
                 switch (i)
@@ -2738,7 +3179,7 @@ public class X
         public void ScopeOfPatternVariables_Query_11()
         {
             var source =
-@"
+                @"
 using System.Linq;
 
 public class X
@@ -2772,18 +3213,28 @@ public class X
             compilation.VerifyDiagnostics(
                 // (26,45): error CS0128: A local variable or function named 'y2' is already defined in this scope
                 //                               x1 + 1 is var y2)
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y2").WithArguments("y2").WithLocation(26, 45)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(26, 45)
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular7_3);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular7_3
+            );
             compilation.VerifyDiagnostics(
                 // (17,47): error CS0136: A local or parameter named 'y1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                               where x1 is var y1
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1").WithArguments("y1").WithLocation(17, 47),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "y1")
+                    .WithArguments("y1")
+                    .WithLocation(17, 47),
                 // (26,45): error CS0128: A local variable or function named 'y2' is already defined in this scope
                 //                               x1 + 1 is var y2)
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y2").WithArguments("y2").WithLocation(26, 45)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "y2")
+                    .WithArguments("y2")
+                    .WithLocation(26, 45)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -2803,7 +3254,7 @@ public class X
         public void ScopeOfPatternVariables_ExpressionBodiedLocalFunctions_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -2899,44 +3350,68 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(18, 33),
                 // (12,29): error CS0103: The name 'let' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(12, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(12, 29),
                 // (12,29): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         void f(object o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 29),
                 // (12,33): error CS0103: The name 'x1' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(12, 33),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 33),
                 // (12,38): error CS0103: The name 'o' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(12, 38),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(12, 38),
                 // (18,29): error CS0103: The name 'let' does not exist in the current context
                 //         void f(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(18, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(18, 29),
                 // (18,29): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         void f(object o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(18, 29),
                 // (18,42): error CS0103: The name 'o' does not exist in the current context
                 //         void f(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(18, 42),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(18, 42),
                 // (30,30): error CS0841: Cannot use local variable 'x4' before it is declared
                 //         bool f (object o) => x4 && o is int x4;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(30, 30),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(30, 30),
                 // (37,52): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                          o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(37, 52),
+                //                                          o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(37, 52),
                 // (51,15): error CS0103: The name 'x7' does not exist in the current context
                 //         Dummy(x7, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(51, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(51, 15),
                 // (55,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(55, 15)
-                );
+                //         Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(55, 15)
+            );
 
-            compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular7_3);
+            compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular7_3
+            );
             compilation.VerifyDiagnostics(
                 // (12,29): error CS0103: The name 'let' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(12, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(12, 29),
                 // (12,29): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         void f(object o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(12, 29),
@@ -2945,13 +3420,19 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "x1").WithLocation(12, 33),
                 // (12,33): error CS0103: The name 'x1' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(12, 33),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 33),
                 // (12,38): error CS0103: The name 'o' does not exist in the current context
                 //         void f(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(12, 38),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(12, 38),
                 // (18,29): error CS0103: The name 'let' does not exist in the current context
                 //         void f(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(18, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(18, 29),
                 // (18,29): error CS0201: Only assignment, call, increment, decrement, await, and new object expressions can be used as a statement
                 //         void f(object o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(18, 29),
@@ -2960,26 +3441,40 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(18, 33),
                 // (18,42): error CS0103: The name 'o' does not exist in the current context
                 //         void f(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(18, 42),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(18, 42),
                 // (30,30): error CS0841: Cannot use local variable 'x4' before it is declared
                 //         bool f (object o) => x4 && o is int x4;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(30, 30),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(30, 30),
                 // (37,52): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                          o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(37, 52),
+                //                                          o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(37, 52),
                 // (51,15): error CS0103: The name 'x7' does not exist in the current context
                 //         Dummy(x7, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(51, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(51, 15),
                 // (55,15): error CS0103: The name 'x7' does not exist in the current context
-                //         Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(55, 15),
+                //         Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(55, 15),
                 // (63,39): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         bool f (object o) => o is int x11 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11").WithArguments("x11").WithLocation(63, 39),
+                //         bool f (object o) => o is int x11 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(63, 39),
                 // (70,39): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         bool f (object o) => o is int x12 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12").WithArguments("x12").WithLocation(70, 39)
-                );
+                //         bool f (object o) => o is int x12 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(70, 39)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3033,7 +3528,7 @@ public class X
         public void ExpressionBodiedLocalFunctions_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3055,15 +3550,18 @@ public class X
 }
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
-            CompileAndVerify(compilation, expectedOutput: @"1
-True");
+            CompileAndVerify(
+                compilation,
+                expectedOutput: @"1
+True"
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_ExpressionBodiedFunctions_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3102,16 +3600,24 @@ public class X
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "x1").WithLocation(9, 33),
                 // (9,36): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
                 //     void Test1(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=").WithArguments("=").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=")
+                    .WithArguments("=")
+                    .WithLocation(9, 36),
                 // (9,36): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
                 //     void Test1(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=").WithArguments("=").WithLocation(9, 36),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=")
+                    .WithArguments("=")
+                    .WithLocation(9, 36),
                 // (9,39): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     void Test1(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(9, 39),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(9, 39),
                 // (9,39): error CS1519: Invalid token ';' in class, record, struct, or interface member declaration
                 //     void Test1(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";").WithArguments(";").WithLocation(9, 39),
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, ";")
+                    .WithArguments(";")
+                    .WithLocation(9, 39),
                 // (11,33): error CS1002: ; expected
                 //     void Test2(object o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(11, 33),
@@ -3120,35 +3626,51 @@ public class X
                 Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(11, 33),
                 // (11,42): error CS0103: The name 'o' does not exist in the current context
                 //     void Test2(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(11, 42),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(11, 42),
                 // (9,29): error CS0103: The name 'let' does not exist in the current context
                 //     void Test1(object o) => let x1 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(9, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(9, 29),
                 // (9,29): error CS0201: Only assignment, call, increment, decrement, and new object expressions can be used as a statement
                 //     void Test1(object o) => let x1 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(9, 29),
                 // (11,29): error CS0103: The name 'let' does not exist in the current context
                 //     void Test2(object o) => let var x2 = o;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(11, 29),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(11, 29),
                 // (11,29): error CS0201: Only assignment, call, increment, decrement, and new object expressions can be used as a statement
                 //     void Test2(object o) => let var x2 = o;
                 Diagnostic(ErrorCode.ERR_IllegalStatement, "let").WithLocation(11, 29),
                 // (15,29): error CS0841: Cannot use local variable 'x4' before it is declared
                 //     bool Test4(object o) => x4 && o is int x4;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(15, 29),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(15, 29),
                 // (18,52): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                                          o2 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(18, 52),
+                //                                          o2 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(18, 52),
                 // (24,28): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test72() => Dummy(x7, 2); 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(24, 28),
+                //     void Test72() => Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(24, 28),
                 // (25,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(25, 27),
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(25, 27),
                 // (27,41): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //     bool Test11(object x11) => 1 is int x11 && 
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11").WithArguments("x11").WithLocation(27, 41)
-                );
+                //     bool Test11(object x11) => 1 is int x11 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(27, 41)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3190,7 +3712,7 @@ public class X
         public void ScopeOfPatternVariables_ExpressionBodiedProperties_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3224,46 +3746,66 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (9,23): error CS1002: ; expected
-    //     bool Test1 => let x1 = 11;
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "x1").WithLocation(9, 23),
-    // (9,26): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
-    //     bool Test1 => let x1 = 11;
-    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=").WithArguments("=").WithLocation(9, 26),
-    // (9,26): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
-    //     bool Test1 => let x1 = 11;
-    Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=").WithArguments("=").WithLocation(9, 26),
-    // (11,29): error CS1002: ; expected
-    //     bool this[int o] => let var x2 = o;
-    Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(11, 29),
-    // (11,29): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
-    //     bool this[int o] => let var x2 = o;
-    Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(11, 29),
-    // (11,38): error CS0103: The name 'o' does not exist in the current context
-    //     bool this[int o] => let var x2 = o;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "o").WithArguments("o").WithLocation(11, 38),
-    // (9,19): error CS0103: The name 'let' does not exist in the current context
-    //     bool Test1 => let x1 = 11;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(9, 19),
-    // (11,25): error CS0103: The name 'let' does not exist in the current context
-    //     bool this[int o] => let var x2 = o;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "let").WithArguments("let").WithLocation(11, 25),
-    // (15,19): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     bool Test4 => x4 && 4 is int x4;
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(15, 19),
-    // (18,29): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                   52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(18, 29),
-    // (24,26): error CS0103: The name 'x7' does not exist in the current context
-    //     bool Test72 => Dummy(x7, 2); 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(24, 26),
-    // (25,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(25, 27),
-    // (27,39): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //     bool this[object x11] => 1 is int x11 && 
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11").WithArguments("x11").WithLocation(27, 39)
-                );
+                // (9,23): error CS1002: ; expected
+                //     bool Test1 => let x1 = 11;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "x1").WithLocation(9, 23),
+                // (9,26): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
+                //     bool Test1 => let x1 = 11;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=")
+                    .WithArguments("=")
+                    .WithLocation(9, 26),
+                // (9,26): error CS1519: Invalid token '=' in class, record, struct, or interface member declaration
+                //     bool Test1 => let x1 = 11;
+                Diagnostic(ErrorCode.ERR_InvalidMemberDecl, "=")
+                    .WithArguments("=")
+                    .WithLocation(9, 26),
+                // (11,29): error CS1002: ; expected
+                //     bool this[int o] => let var x2 = o;
+                Diagnostic(ErrorCode.ERR_SemicolonExpected, "var").WithLocation(11, 29),
+                // (11,29): error CS0825: The contextual keyword 'var' may only appear within a local variable declaration or in script code
+                //     bool this[int o] => let var x2 = o;
+                Diagnostic(ErrorCode.ERR_TypeVarNotFound, "var").WithLocation(11, 29),
+                // (11,38): error CS0103: The name 'o' does not exist in the current context
+                //     bool this[int o] => let var x2 = o;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "o")
+                    .WithArguments("o")
+                    .WithLocation(11, 38),
+                // (9,19): error CS0103: The name 'let' does not exist in the current context
+                //     bool Test1 => let x1 = 11;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(9, 19),
+                // (11,25): error CS0103: The name 'let' does not exist in the current context
+                //     bool this[int o] => let var x2 = o;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "let")
+                    .WithArguments("let")
+                    .WithLocation(11, 25),
+                // (15,19): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     bool Test4 => x4 && 4 is int x4;
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(15, 19),
+                // (18,29): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                   52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(18, 29),
+                // (24,26): error CS0103: The name 'x7' does not exist in the current context
+                //     bool Test72 => Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(24, 26),
+                // (25,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(25, 27),
+                // (27,39): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //     bool this[object x11] => 1 is int x11 &&
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(27, 39)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3305,7 +3847,7 @@ public class X
         public void ScopeOfPatternVariables_FieldInitializers_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3334,25 +3876,37 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (10,18): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     bool Test4 = x4 && 4 is int x4;
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(10, 18),
-    // (13,28): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                  52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(13, 28),
-    // (19,25): error CS0103: The name 'x7' does not exist in the current context
-    //     bool Test72 = Dummy(x7, 2); 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(19, 25),
-    // (20,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(20, 27),
-    // (22,41): error CS0103: The name 'x8' does not exist in the current context
-    //     bool Test81 = 8 is int x8, Test82 = x8 > 0;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(22, 41),
-    // (23,19): error CS0103: The name 'x9' does not exist in the current context
-    //     bool Test91 = x9 > 0, Test92 = 9 is int x9;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x9").WithArguments("x9").WithLocation(23, 19)
-                );
+                // (10,18): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     bool Test4 = x4 && 4 is int x4;
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(10, 18),
+                // (13,28): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                  52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(13, 28),
+                // (19,25): error CS0103: The name 'x7' does not exist in the current context
+                //     bool Test72 = Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(19, 25),
+                // (20,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(20, 27),
+                // (22,41): error CS0103: The name 'x8' does not exist in the current context
+                //     bool Test81 = 8 is int x8, Test82 = x8 > 0;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(22, 41),
+                // (23,19): error CS0103: The name 'x9' does not exist in the current context
+                //     bool Test91 = x9 > 0, Test92 = 9 is int x9;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(23, 19)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3400,7 +3954,7 @@ public class X
         public void ScopeOfPatternVariables_FieldInitializers_02()
         {
             var source =
-@"
+                @"
 public enum X
 {
     Test3 = 3 is int x3 ? x3 : 0,
@@ -3419,28 +3973,42 @@ public enum X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugDll);
             compilation.VerifyDiagnostics(
-    // (6,13): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     Test4 = x4 && 4 is int x4 ? 1 : 0,
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(6, 13),
-    // (9,23): error CS0128: A local variable named 'x5' is already defined in this scope
-    //             52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(9, 23),
-    // (12,14): error CS0133: The expression being assigned to 'X.Test61' must be constant
-    //     Test61 = 6 is int x6 && x6 > 0 ? 1 : 0, Test62 = 6 is int x6 && x6 > 0 ? 1 : 0,
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0 ? 1 : 0").WithArguments("X.Test61").WithLocation(12, 14),
-    // (12,54): error CS0133: The expression being assigned to 'X.Test62' must be constant
-    //     Test61 = 6 is int x6 && x6 > 0 ? 1 : 0, Test62 = 6 is int x6 && x6 > 0 ? 1 : 0,
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0 ? 1 : 0").WithArguments("X.Test62").WithLocation(12, 54),
-    // (14,14): error CS0133: The expression being assigned to 'X.Test71' must be constant
-    //     Test71 = 7 is int x7 && x7 > 0 ? 1 : 0, 
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "7 is int x7 && x7 > 0 ? 1 : 0").WithArguments("X.Test71").WithLocation(14, 14),
-    // (15,14): error CS0103: The name 'x7' does not exist in the current context
-    //     Test72 = x7, 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(15, 14),
-    // (4,13): error CS0133: The expression being assigned to 'X.Test3' must be constant
-    //     Test3 = 3 is int x3 ? x3 : 0,
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "3 is int x3 ? x3 : 0").WithArguments("X.Test3").WithLocation(4, 13)
-                );
+                // (6,13): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     Test4 = x4 && 4 is int x4 ? 1 : 0,
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(6, 13),
+                // (9,23): error CS0128: A local variable named 'x5' is already defined in this scope
+                //             52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(9, 23),
+                // (12,14): error CS0133: The expression being assigned to 'X.Test61' must be constant
+                //     Test61 = 6 is int x6 && x6 > 0 ? 1 : 0, Test62 = 6 is int x6 && x6 > 0 ? 1 : 0,
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0 ? 1 : 0")
+                    .WithArguments("X.Test61")
+                    .WithLocation(12, 14),
+                // (12,54): error CS0133: The expression being assigned to 'X.Test62' must be constant
+                //     Test61 = 6 is int x6 && x6 > 0 ? 1 : 0, Test62 = 6 is int x6 && x6 > 0 ? 1 : 0,
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0 ? 1 : 0")
+                    .WithArguments("X.Test62")
+                    .WithLocation(12, 54),
+                // (14,14): error CS0133: The expression being assigned to 'X.Test71' must be constant
+                //     Test71 = 7 is int x7 && x7 > 0 ? 1 : 0,
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "7 is int x7 && x7 > 0 ? 1 : 0")
+                    .WithArguments("X.Test71")
+                    .WithLocation(14, 14),
+                // (15,14): error CS0103: The name 'x7' does not exist in the current context
+                //     Test72 = x7,
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(15, 14),
+                // (4,13): error CS0133: The expression being assigned to 'X.Test3' must be constant
+                //     Test3 = 3 is int x3 ? x3 : 0,
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "3 is int x3 ? x3 : 0")
+                    .WithArguments("X.Test3")
+                    .WithLocation(4, 13)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3477,7 +4045,7 @@ public enum X
         public void ScopeOfPatternVariables_FieldInitializers_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3503,31 +4071,47 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (8,24): error CS0133: The expression being assigned to 'X.Test3' must be constant
-    //     const bool Test3 = 3 is int x3 && x3 > 0;
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "3 is int x3 && x3 > 0").WithArguments("X.Test3").WithLocation(8, 24),
-    // (10,24): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     const bool Test4 = x4 && 4 is int x4;
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(10, 24),
-    // (13,34): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                        52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(13, 34),
-    // (16,25): error CS0133: The expression being assigned to 'X.Test61' must be constant
-    //     const bool Test61 = 6 is int x6 && x6 > 0, Test62 = 6 is int x6 && x6 > 0;
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0").WithArguments("X.Test61").WithLocation(16, 25),
-    // (16,57): error CS0133: The expression being assigned to 'X.Test62' must be constant
-    //     const bool Test61 = 6 is int x6 && x6 > 0, Test62 = 6 is int x6 && x6 > 0;
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0").WithArguments("X.Test62").WithLocation(16, 57),
-    // (18,25): error CS0133: The expression being assigned to 'X.Test71' must be constant
-    //     const bool Test71 = 7 is int x7 && x7 > 0; 
-    Diagnostic(ErrorCode.ERR_NotConstantExpression, "7 is int x7 && x7 > 0").WithArguments("X.Test71").WithLocation(18, 25),
-    // (19,25): error CS0103: The name 'x7' does not exist in the current context
-    //     const bool Test72 = x7 > 2; 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(19, 25),
-    // (20,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(20, 27)
-                );
+                // (8,24): error CS0133: The expression being assigned to 'X.Test3' must be constant
+                //     const bool Test3 = 3 is int x3 && x3 > 0;
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "3 is int x3 && x3 > 0")
+                    .WithArguments("X.Test3")
+                    .WithLocation(8, 24),
+                // (10,24): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     const bool Test4 = x4 && 4 is int x4;
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(10, 24),
+                // (13,34): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                        52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(13, 34),
+                // (16,25): error CS0133: The expression being assigned to 'X.Test61' must be constant
+                //     const bool Test61 = 6 is int x6 && x6 > 0, Test62 = 6 is int x6 && x6 > 0;
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0")
+                    .WithArguments("X.Test61")
+                    .WithLocation(16, 25),
+                // (16,57): error CS0133: The expression being assigned to 'X.Test62' must be constant
+                //     const bool Test61 = 6 is int x6 && x6 > 0, Test62 = 6 is int x6 && x6 > 0;
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "6 is int x6 && x6 > 0")
+                    .WithArguments("X.Test62")
+                    .WithLocation(16, 57),
+                // (18,25): error CS0133: The expression being assigned to 'X.Test71' must be constant
+                //     const bool Test71 = 7 is int x7 && x7 > 0;
+                Diagnostic(ErrorCode.ERR_NotConstantExpression, "7 is int x7 && x7 > 0")
+                    .WithArguments("X.Test71")
+                    .WithLocation(18, 25),
+                // (19,25): error CS0103: The name 'x7' does not exist in the current context
+                //     const bool Test72 = x7 > 2;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(19, 25),
+                // (20,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(20, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3565,7 +4149,7 @@ public class X
         public void ScopeOfPatternVariables_PropertyInitializers_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3591,19 +4175,27 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (10,25): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     bool Test4 {get;} = x4 && 4 is int x4;
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(10, 25),
-    // (13,28): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                  52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(13, 28),
-    // (19,32): error CS0103: The name 'x7' does not exist in the current context
-    //     bool Test72 {get;} = Dummy(x7, 2); 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(19, 32),
-    // (20,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(20, 27)
-                );
+                // (10,25): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     bool Test4 {get;} = x4 && 4 is int x4;
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(10, 25),
+                // (13,28): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                  52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(13, 28),
+                // (19,32): error CS0103: The name 'x7' does not exist in the current context
+                //     bool Test72 {get;} = Dummy(x7, 2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(19, 32),
+                // (20,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(20, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3641,7 +4233,7 @@ public class X
         public void ScopeOfPatternVariables_ParameterDefault_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3676,31 +4268,47 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (8,25): error CS1736: Default parameter value for 'p' must be a compile-time constant
-    //     void Test3(bool p = 3 is int x3 && x3 > 0)
-    Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "3 is int x3 && x3 > 0").WithArguments("p").WithLocation(8, 25),
-    // (11,25): error CS0841: Cannot use local variable 'x4' before it is declared
-    //     void Test4(bool p = x4 && 4 is int x4)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(11, 25),
-    // (15,35): error CS0128: A local variable or function named 'x5' is already defined in this scope
-    //                         52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(15, 35),
-    // (19,27): error CS1736: Default parameter value for 'p1' must be a compile-time constant
-    //     void Test61(bool p1 = 6 is int x6 && x6 > 0, bool p2 = 6 is int x6 && x6 > 0)
-    Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "6 is int x6 && x6 > 0").WithArguments("p1").WithLocation(19, 27),
-    // (19,60): error CS1736: Default parameter value for 'p2' must be a compile-time constant
-    //     void Test61(bool p1 = 6 is int x6 && x6 > 0, bool p2 = 6 is int x6 && x6 > 0)
-    Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "6 is int x6 && x6 > 0").WithArguments("p2").WithLocation(19, 60),
-    // (22,26): error CS1736: Default parameter value for 'p' must be a compile-time constant
-    //     void Test71(bool p = 7 is int x7 && x7 > 0)
-    Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "7 is int x7 && x7 > 0").WithArguments("p").WithLocation(22, 26),
-    // (26,26): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test72(bool p = x7 > 2)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(26, 26),
-    // (29,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(29, 27)
-                );
+                // (8,25): error CS1736: Default parameter value for 'p' must be a compile-time constant
+                //     void Test3(bool p = 3 is int x3 && x3 > 0)
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "3 is int x3 && x3 > 0")
+                    .WithArguments("p")
+                    .WithLocation(8, 25),
+                // (11,25): error CS0841: Cannot use local variable 'x4' before it is declared
+                //     void Test4(bool p = x4 && 4 is int x4)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(11, 25),
+                // (15,35): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                //                         52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(15, 35),
+                // (19,27): error CS1736: Default parameter value for 'p1' must be a compile-time constant
+                //     void Test61(bool p1 = 6 is int x6 && x6 > 0, bool p2 = 6 is int x6 && x6 > 0)
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "6 is int x6 && x6 > 0")
+                    .WithArguments("p1")
+                    .WithLocation(19, 27),
+                // (19,60): error CS1736: Default parameter value for 'p2' must be a compile-time constant
+                //     void Test61(bool p1 = 6 is int x6 && x6 > 0, bool p2 = 6 is int x6 && x6 > 0)
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "6 is int x6 && x6 > 0")
+                    .WithArguments("p2")
+                    .WithLocation(19, 60),
+                // (22,26): error CS1736: Default parameter value for 'p' must be a compile-time constant
+                //     void Test71(bool p = 7 is int x7 && x7 > 0)
+                Diagnostic(ErrorCode.ERR_DefaultValueMustBeConstant, "7 is int x7 && x7 > 0")
+                    .WithArguments("p")
+                    .WithLocation(22, 26),
+                // (26,26): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test72(bool p = x7 > 2)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(26, 26),
+                // (29,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(29, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3738,7 +4346,7 @@ public class X
         public void ScopeOfPatternVariables_Attribute_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3769,29 +4377,42 @@ class Test : System.Attribute
             compilation.VerifyDiagnostics(
                 // (8,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(p = 3 is int x3 && x3 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "3 is int x3 && x3 > 0").WithLocation(8, 15),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "3 is int x3 && x3 > 0")
+                    .WithLocation(8, 15),
                 // (9,15): error CS0841: Cannot use local variable 'x4' before it is declared
                 //     [Test(p = x4 && 4 is int x4)]
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(9, 15),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(9, 15),
                 // (11,25): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //               52 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(11, 25),
+                //               52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(11, 25),
                 // (13,53): error CS0128: A local variable or function named 'x6' is already defined in this scope
                 //     [Test(p1 = 6 is int x6 && x6 > 0, p2 = 6 is int x6 && x6 > 0)]
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(13, 53),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(13, 53),
                 // (13,16): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(p1 = 6 is int x6 && x6 > 0, p2 = 6 is int x6 && x6 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "6 is int x6 && x6 > 0").WithLocation(13, 16),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "6 is int x6 && x6 > 0")
+                    .WithLocation(13, 16),
                 // (14,15): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(p = 7 is int x7 && x7 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "7 is int x7 && x7 > 0").WithLocation(14, 15),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "7 is int x7 && x7 > 0")
+                    .WithLocation(14, 15),
                 // (15,15): error CS0103: The name 'x7' does not exist in the current context
                 //     [Test(p = x7 > 2)]
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(15, 15),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(15, 15),
                 // (16,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(16, 27)
-                );
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(16, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3829,7 +4450,7 @@ class Test : System.Attribute
         public void ScopeOfPatternVariables_Attribute_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3859,29 +4480,42 @@ class Test : System.Attribute
             compilation.VerifyDiagnostics(
                 // (8,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(3 is int x3 && x3 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "3 is int x3 && x3 > 0").WithLocation(8, 11),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "3 is int x3 && x3 > 0")
+                    .WithLocation(8, 11),
                 // (9,11): error CS0841: Cannot use local variable 'x4' before it is declared
                 //     [Test(x4 && 4 is int x4)]
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(9, 11),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(9, 11),
                 // (11,21): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //           52 is int x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(11, 21),
+                //           52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(11, 21),
                 // (13,43): error CS0128: A local variable or function named 'x6' is already defined in this scope
                 //     [Test(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)]
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(13, 43),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(13, 43),
                 // (13,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "6 is int x6 && x6 > 0").WithLocation(13, 11),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "6 is int x6 && x6 > 0")
+                    .WithLocation(13, 11),
                 // (14,11): error CS0182: An attribute argument must be a constant expression, typeof expression or array creation expression of an attribute parameter type
                 //     [Test(7 is int x7 && x7 > 0)]
-                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "7 is int x7 && x7 > 0").WithLocation(14, 11),
+                Diagnostic(ErrorCode.ERR_BadAttributeArgument, "7 is int x7 && x7 > 0")
+                    .WithLocation(14, 11),
                 // (15,11): error CS0103: The name 'x7' does not exist in the current context
                 //     [Test(x7 > 2)]
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(15, 11),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(15, 11),
                 // (16,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(16, 27)
-                );
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(16, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -3919,7 +4553,7 @@ class Test : System.Attribute
         public void ScopeOfPatternVariables_ConstructorInitializers_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -3958,22 +4592,32 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,16): error CS0841: Cannot use local variable 'x4' before it is declared
-    //         : this(x4 && 4 is int x4)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(13, 16),
-    // (18,26): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(18, 26),
-    // (23,48): error CS0128: A local variable named 'x6' is already defined in this scope
-    //         : this(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(23, 48),
-    // (30,16): error CS0103: The name 'x7' does not exist in the current context
-    //         : this(x7, 2)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(30, 16),
-    // (32,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(32, 27)
-                );
+                // (13,16): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         : this(x4 && 4 is int x4)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(13, 16),
+                // (18,26): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(18, 26),
+                // (23,48): error CS0128: A local variable named 'x6' is already defined in this scope
+                //         : this(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(23, 48),
+                // (30,16): error CS0103: The name 'x7' does not exist in the current context
+                //         : this(x7, 2)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(30, 16),
+                // (32,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(32, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4011,7 +4655,7 @@ public class X
         public void ScopeOfPatternVariables_ConstructorInitializers_02()
         {
             var source =
-@"
+                @"
 public class X : Y
 {
     public static void Main()
@@ -4054,22 +4698,32 @@ public class Y
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,16): error CS0841: Cannot use local variable 'x4' before it is declared
-    //         : base(x4 && 4 is int x4)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(13, 16),
-    // (18,26): error CS0128: A local variable named 'x5' is already defined in this scope
-    //                52 is int x5 && 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(18, 26),
-    // (23,48): error CS0128: A local variable named 'x6' is already defined in this scope
-    //         : base(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(23, 48),
-    // (30,16): error CS0103: The name 'x7' does not exist in the current context
-    //         : base(x7, 2)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(30, 16),
-    // (32,27): error CS0103: The name 'x7' does not exist in the current context
-    //     void Test73() { Dummy(x7, 3); } 
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(32, 27)
-                );
+                // (13,16): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         : base(x4 && 4 is int x4)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(13, 16),
+                // (18,26): error CS0128: A local variable named 'x5' is already defined in this scope
+                //                52 is int x5 &&
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(18, 26),
+                // (23,48): error CS0128: A local variable named 'x6' is already defined in this scope
+                //         : base(6 is int x6 && x6 > 0, 6 is int x6 && x6 > 0)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(23, 48),
+                // (30,16): error CS0103: The name 'x7' does not exist in the current context
+                //         : base(x7, 2)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(30, 16),
+                // (32,27): error CS0103: The name 'x7' does not exist in the current context
+                //     void Test73() { Dummy(x7, 3); }
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(32, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4107,7 +4761,7 @@ public class Y
         public void ScopeOfPatternVariables_ConstructorInitializers_03()
         {
             var source =
-@"using System;
+                @"using System;
 public class X
 {
     public static void Main()
@@ -4131,15 +4785,17 @@ class D
             compilation.VerifyDiagnostics(
                 // (15,27): error CS0165: Use of unassigned local variable 'x'
                 //         Console.WriteLine(x);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x").WithLocation(15, 27)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
+                    .WithArguments("x")
+                    .WithLocation(15, 27)
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_ConstructorInitializers_04()
         {
             var source =
-@"using System;
+                @"using System;
 public class X
 {
     public static void Main()
@@ -4166,15 +4822,17 @@ class C
             compilation.VerifyDiagnostics(
                 // (15,27): error CS0165: Use of unassigned local variable 'x'
                 //         Console.WriteLine(x);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x").WithArguments("x").WithLocation(15, 27)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x")
+                    .WithArguments("x")
+                    .WithLocation(15, 27)
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_ConstructorInitializers_07()
         {
             var source =
-@"
+                @"
 public class X : Y
 {
     public static void Main()
@@ -4204,18 +4862,27 @@ public class Y
     public Y(params object[] x) {}
 }
 ";
-            var compilation = CreateCompilationWithMscorlib45(source, options: TestOptions.DebugExe);
+            var compilation = CreateCompilationWithMscorlib45(
+                source,
+                options: TestOptions.DebugExe
+            );
             compilation.VerifyDiagnostics(
                 // (9,25): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         : base(3 is int x3)
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(9, 25),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(9, 25),
                 // (15,13): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         int x4 = 1;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(15, 13),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(15, 13),
                 // (21,24): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //     => Dummy(52 is int x5, x5);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(21, 24)
-                );
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(21, 24)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4239,7 +4906,7 @@ public class Y
         public void ScopeOfPatternVariables_SwitchLabelGuard_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -4446,58 +5113,92 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
             compilation.VerifyDiagnostics(
-    // (30,31): error CS0841: Cannot use local variable 'x2' before it is declared
-    //             case 0 when Dummy(x2, true is var x2):
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(30, 31),
-    // (40,43): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 0 when Dummy(true is var x3, x3):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(40, 43),
-    // (51,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 0 when Dummy(true is var x4, x4):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(51, 43),
-    // (62,43): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 0 when Dummy(true is var x5, x5):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(62, 43),
-    // (102,64): error CS0128: A local variable named 'x8' is already defined in this scope
-    //             case 0 when Dummy(true is var x8, x8, false is var x8, x8):
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(102, 64),
-    // (112,31): error CS0841: Cannot use local variable 'x9' before it is declared
-    //             case 0 when Dummy(x9):
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(112, 31),
-    // (119,43): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 1 when Dummy(true is var x9, x9):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(119, 43),
-    // (144,17): error CS0103: The name 'x11' does not exist in the current context
-    //         switch (x11 ? val : 0)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(144, 17),
-    // (146,31): error CS0103: The name 'x11' does not exist in the current context
-    //             case 0 when Dummy(x11):
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(146, 31),
-    // (147,23): error CS0103: The name 'x11' does not exist in the current context
-    //                 Dummy(x11, 0);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(147, 23),
-    // (157,17): error CS0103: The name 'x12' does not exist in the current context
-    //         switch (x12 ? val : 0)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(157, 17),
-    // (162,31): error CS0103: The name 'x12' does not exist in the current context
-    //             case 1 when Dummy(x12):
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(162, 31),
-    // (163,23): error CS0103: The name 'x12' does not exist in the current context
-    //                 Dummy(x12, 1);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(163, 23),
-    // (175,43): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 1 when Dummy(true is var x13, x13):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13").WithArguments("x13").WithLocation(175, 43),
-    // (185,43): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             case 1 when Dummy(true is var x14, x14):
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14").WithArguments("x14").WithLocation(185, 43),
-    // (198,43): error CS0128: A local variable named 'x15' is already defined in this scope
-    //             case 1 when Dummy(true is var x15, x15):
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(198, 43),
-    // (198,48): error CS0165: Use of unassigned local variable 'x15'
-    //             case 1 when Dummy(true is var x15, x15):
-    Diagnostic(ErrorCode.ERR_UseDefViolation, "x15").WithArguments("x15").WithLocation(198, 48)
-                );
+                // (30,31): error CS0841: Cannot use local variable 'x2' before it is declared
+                //             case 0 when Dummy(x2, true is var x2):
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(30, 31),
+                // (40,43): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 0 when Dummy(true is var x3, x3):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(40, 43),
+                // (51,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 0 when Dummy(true is var x4, x4):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(51, 43),
+                // (62,43): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 0 when Dummy(true is var x5, x5):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(62, 43),
+                // (102,64): error CS0128: A local variable named 'x8' is already defined in this scope
+                //             case 0 when Dummy(true is var x8, x8, false is var x8, x8):
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(102, 64),
+                // (112,31): error CS0841: Cannot use local variable 'x9' before it is declared
+                //             case 0 when Dummy(x9):
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(112, 31),
+                // (119,43): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 1 when Dummy(true is var x9, x9):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(119, 43),
+                // (144,17): error CS0103: The name 'x11' does not exist in the current context
+                //         switch (x11 ? val : 0)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(144, 17),
+                // (146,31): error CS0103: The name 'x11' does not exist in the current context
+                //             case 0 when Dummy(x11):
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(146, 31),
+                // (147,23): error CS0103: The name 'x11' does not exist in the current context
+                //                 Dummy(x11, 0);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(147, 23),
+                // (157,17): error CS0103: The name 'x12' does not exist in the current context
+                //         switch (x12 ? val : 0)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(157, 17),
+                // (162,31): error CS0103: The name 'x12' does not exist in the current context
+                //             case 1 when Dummy(x12):
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(162, 31),
+                // (163,23): error CS0103: The name 'x12' does not exist in the current context
+                //                 Dummy(x12, 1);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(163, 23),
+                // (175,43): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 1 when Dummy(true is var x13, x13):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(175, 43),
+                // (185,43): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             case 1 when Dummy(true is var x14, x14):
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(185, 43),
+                // (198,43): error CS0128: A local variable named 'x15' is already defined in this scope
+                //             case 1 when Dummy(true is var x15, x15):
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(198, 43),
+                // (198,48): error CS0165: Use of unassigned local variable 'x15'
+                //             case 1 when Dummy(true is var x15, x15):
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(198, 48)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4508,7 +5209,12 @@ public class X
             Assert.Equal(6, x1Ref.Length);
             for (int i = 0; i < x1Decl.Length; i++)
             {
-                VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl[i], x1Ref[i * 2], x1Ref[i * 2 + 1]);
+                VerifyModelForDeclarationOrVarSimplePattern(
+                    model,
+                    x1Decl[i],
+                    x1Ref[i * 2],
+                    x1Ref[i * 2 + 1]
+                );
             }
 
             var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -4573,7 +5279,13 @@ public class X
             var x13Ref = GetReferences(tree, "x13").ToArray();
             Assert.Equal(2, x13Decl.Length);
             Assert.Equal(5, x13Ref.Length);
-            VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[0], x13Ref[0], x13Ref[1], x13Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePattern(
+                model,
+                x13Decl[0],
+                x13Ref[0],
+                x13Ref[1],
+                x13Ref[2]
+            );
             VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[1], x13Ref[3], x13Ref[4]);
 
             var x14Decl = GetPatternDeclarations(tree, "x14").ToArray();
@@ -4598,7 +5310,7 @@ public class X
         public void ScopeOfPatternVariables_SwitchLabelPattern_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -4833,71 +5545,115 @@ public class X
             compilation.VerifyDiagnostics(
                 // (30,31): error CS0841: Cannot use local variable 'x2' before it is declared
                 //             case 0 when Dummy(x2):
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(30, 31),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(30, 31),
                 // (32,23): error CS0165: Use of unassigned local variable 'x2'
                 //                 Dummy(x2);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(32, 23),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(32, 23),
                 // (41,22): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x3 when Dummy(x3):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(41, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(41, 22),
                 // (52,22): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x4 when Dummy(x4):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(52, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(52, 22),
                 // (65,22): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x5 when Dummy(x5):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(65, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(65, 22),
                 // (106,49): error CS0128: A local variable named 'x8' is already defined in this scope
                 //                     when Dummy(x8, false is var x8, x8):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(106, 49),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(106, 49),
                 // (116,31): error CS0841: Cannot use local variable 'x9' before it is declared
                 //             case 0 when Dummy(x9):
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(116, 31),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(116, 31),
                 // (123,22): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x9 when Dummy(x9):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(123, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(123, 22),
                 // (148,17): error CS0103: The name 'x11' does not exist in the current context
                 //         switch (x11 ? val : 0)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(148, 17),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(148, 17),
                 // (150,31): error CS0103: The name 'x11' does not exist in the current context
                 //             case 0 when Dummy(x11):
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(150, 31),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(150, 31),
                 // (151,23): error CS0103: The name 'x11' does not exist in the current context
                 //                 Dummy(x11, 0);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(151, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(151, 23),
                 // (161,17): error CS0103: The name 'x12' does not exist in the current context
                 //         switch (x12 ? val : 0)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(161, 17),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(161, 17),
                 // (166,31): error CS0103: The name 'x12' does not exist in the current context
                 //             case 1 when Dummy(x12):
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(166, 31),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(166, 31),
                 // (167,23): error CS0103: The name 'x12' does not exist in the current context
                 //                 Dummy(x12, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(167, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(167, 23),
                 // (179,22): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x13 when Dummy(x13):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13").WithArguments("x13").WithLocation(179, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(179, 22),
                 // (189,22): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case int x14 when Dummy(x14):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14").WithArguments("x14").WithLocation(189, 22),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(189, 22),
                 // (202,23): error CS0128: A local variable named 'x15' is already defined in this scope
                 //             case long x15 when Dummy(x15):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(202, 23),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(202, 23),
                 // (202,38): error CS0165: Use of unassigned local variable 'x15'
                 //             case long x15 when Dummy(x15):
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x15").WithArguments("x15").WithLocation(202, 38),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(202, 38),
                 // (213,43): error CS0128: A local variable named 'x16' is already defined in this scope
                 //             case 1 when Dummy(true is var x16, x16):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x16").WithArguments("x16").WithLocation(213, 43),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x16")
+                    .WithArguments("x16")
+                    .WithLocation(213, 43),
                 // (213,48): error CS0165: Use of unassigned local variable 'x16'
                 //             case 1 when Dummy(true is var x16, x16):
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x16").WithArguments("x16").WithLocation(213, 48),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x16")
+                    .WithArguments("x16")
+                    .WithLocation(213, 48),
                 // (224,22): error CS0128: A local variable named 'x17' is already defined in this scope
                 //             case int x17 when Dummy(x17):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x17").WithArguments("x17").WithLocation(224, 22),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x17")
+                    .WithArguments("x17")
+                    .WithLocation(224, 22),
                 // (224,37): error CS0165: Use of unassigned local variable 'x17'
                 //             case int x17 when Dummy(x17):
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x17").WithArguments("x17").WithLocation(224, 37)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x17")
+                    .WithArguments("x17")
+                    .WithLocation(224, 37)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -4908,7 +5664,12 @@ public class X
             Assert.Equal(6, x1Ref.Length);
             for (int i = 0; i < x1Decl.Length; i++)
             {
-                VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl[i], x1Ref[i * 2], x1Ref[i * 2 + 1]);
+                VerifyModelForDeclarationOrVarSimplePattern(
+                    model,
+                    x1Decl[i],
+                    x1Ref[i * 2],
+                    x1Ref[i * 2 + 1]
+                );
             }
 
             var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -4973,7 +5734,13 @@ public class X
             var x13Ref = GetReferences(tree, "x13").ToArray();
             Assert.Equal(2, x13Decl.Length);
             Assert.Equal(5, x13Ref.Length);
-            VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[0], x13Ref[0], x13Ref[1], x13Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePattern(
+                model,
+                x13Decl[0],
+                x13Ref[0],
+                x13Ref[1],
+                x13Ref[2]
+            );
             VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[1], x13Ref[3], x13Ref[4]);
 
             var x14Decl = GetPatternDeclarations(tree, "x14").ToArray();
@@ -5018,7 +5785,7 @@ public class X
         public void ScopeOfPatternVariables_Switch_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5169,44 +5936,68 @@ public class X
             compilation.VerifyDiagnostics(
                 // (27,26): error CS0128: A local variable or function named 'x4' is already defined in this scope
                 //         switch (4 is var x4 ? x4 : 0)
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(27, 26),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(27, 26),
                 // (37,26): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //         switch (5 is var x5 ? x5 : 0)
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(37, 26),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(37, 26),
                 // (47,17): error CS0841: Cannot use local variable 'x6' before it is declared
                 //         switch (x6 + 6 is var x6 ? x6 : 0)
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(47, 17),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(47, 17),
                 // (60,21): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                 var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(60, 21),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(60, 21),
                 // (71,23): error CS0841: Cannot use local variable 'x9' before it is declared
                 //                 Dummy(x9, 0);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(71, 23),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(71, 23),
                 // (72,34): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //                 switch (9 is var x9 ? x9 : 0)
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(72, 34),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(72, 34),
                 // (85,17): error CS0103: The name 'y10' does not exist in the current context
                 //         switch (y10 + 10 is var x10 ? x10 : 0)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 17),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 17),
                 // (87,25): error CS0841: Cannot use local variable 'y10' before it is declared
                 //             case 0 when y10:
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y10").WithArguments("y10").WithLocation(87, 25),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(87, 25),
                 // (89,18): error CS0841: Cannot use local variable 'y10' before it is declared
                 //             case y10:
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y10").WithArguments("y10").WithLocation(89, 18),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(89, 18),
                 // (89,18): error CS0150: A constant value is expected
                 //             case y10:
                 Diagnostic(ErrorCode.ERR_ConstantExpected, "y10").WithLocation(89, 18),
                 // (112,28): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                   2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(112, 28),
+                //                   2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(112, 28),
                 // (125,25): error CS0841: Cannot use local variable 'y15' before it is declared
                 //             case 0 when y15 > 0:
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y15").WithArguments("y15").WithLocation(125, 25),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y15")
+                    .WithArguments("y15")
+                    .WithLocation(125, 25),
                 // (127,18): error CS0841: Cannot use local variable 'y15' before it is declared
-                //             case y15: 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y15").WithArguments("y15").WithLocation(127, 18)
-                );
+                //             case y15:
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "y15")
+                    .WithArguments("y15")
+                    .WithLocation(127, 18)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5245,7 +6036,13 @@ public class X
             Assert.Equal(2, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[0], x9Ref[0]);
-            VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[1], x9Ref[1], x9Ref[2], x9Ref[3]);
+            VerifyModelForDeclarationOrVarSimplePattern(
+                model,
+                x9Decl[1],
+                x9Ref[1],
+                x9Ref[2],
+                x9Ref[3]
+            );
 
             var y10Ref = GetReferences(tree, "y10").ToArray();
             Assert.Equal(4, y10Ref.Length);
@@ -5272,7 +6069,7 @@ public class X
         public void ScopeOfPatternVariables_Switch_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5298,8 +6095,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (19,15): error CS0103: The name 'x1' does not exist in the current context
                 //         Dummy(x1, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(19, 15)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(19, 15)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5314,7 +6113,7 @@ public class X
         public void ScopeOfPatternVariables_Switch_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5334,13 +6133,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (SwitchStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (SwitchStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 switch (Dummy(11 is var x1, x1)) {}
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -5356,7 +6160,7 @@ switch (Dummy(11 is var x1, x1)) {}
         public void ScopeOfPatternVariables_Using_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5464,37 +6268,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,34): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         using (Dummy(true is var x4, x4))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 34),
-    // (35,22): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         using (Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 22),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             using (Dummy(true is var x9, x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 38),
-    // (68,22): error CS0103: The name 'y10' does not exist in the current context
-    //         using (Dummy(y10 is var x10, x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 22),
-    // (86,22): error CS0103: The name 'y12' does not exist in the current context
-    //         using (Dummy(y12 is var x12, x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 22),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,31): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                      2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 31)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,34): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         using (Dummy(true is var x4, x4))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 34),
+                // (35,22): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         using (Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 22),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,38): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             using (Dummy(true is var x9, x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 38),
+                // (68,22): error CS0103: The name 'y10' does not exist in the current context
+                //         using (Dummy(y10 is var x10, x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 22),
+                // (86,22): error CS0103: The name 'y12' does not exist in the current context
+                //         using (Dummy(y12 is var x12, x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 22),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,31): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                      2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 31)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5563,7 +6385,7 @@ public class X
         public void ScopeOfPatternVariables_Using_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5671,37 +6493,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         using (var d = Dummy(true is var x4, x4))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 42),
-    // (35,30): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         using (var d = Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 30),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             using (var e = Dummy(true is var x9, x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 46),
-    // (68,30): error CS0103: The name 'y10' does not exist in the current context
-    //         using (var d = Dummy(y10 is var x10, x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 30),
-    // (86,30): error CS0103: The name 'y12' does not exist in the current context
-    //         using (var d = Dummy(y12 is var x12, x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 30),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,39): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                              2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 39)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         using (var d = Dummy(true is var x4, x4))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 42),
+                // (35,30): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         using (var d = Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 30),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             using (var e = Dummy(true is var x9, x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 46),
+                // (68,30): error CS0103: The name 'y10' does not exist in the current context
+                //         using (var d = Dummy(y10 is var x10, x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 30),
+                // (86,30): error CS0103: The name 'y12' does not exist in the current context
+                //         using (var d = Dummy(y12 is var x12, x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 30),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,39): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                              2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 39)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5770,7 +6610,7 @@ public class X
         public void ScopeOfPatternVariables_Using_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -5878,37 +6718,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         using (System.IDisposable d = Dummy(true is var x4, x4))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 57),
-    // (35,45): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         using (System.IDisposable d = Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 45),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             using (System.IDisposable c = Dummy(true is var x9, x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 61),
-    // (68,45): error CS0103: The name 'y10' does not exist in the current context
-    //         using (System.IDisposable d = Dummy(y10 is var x10, x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 45),
-    // (86,45): error CS0103: The name 'y12' does not exist in the current context
-    //         using (System.IDisposable d = Dummy(y12 is var x12, x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 45),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,54): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                                             2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 54)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,57): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         using (System.IDisposable d = Dummy(true is var x4, x4))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 57),
+                // (35,45): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         using (System.IDisposable d = Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 45),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,61): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             using (System.IDisposable c = Dummy(true is var x9, x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 61),
+                // (68,45): error CS0103: The name 'y10' does not exist in the current context
+                //         using (System.IDisposable d = Dummy(y10 is var x10, x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 45),
+                // (86,45): error CS0103: The name 'y12' does not exist in the current context
+                //         using (System.IDisposable d = Dummy(y12 is var x12, x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 45),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,54): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                                             2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 54)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -5977,7 +6835,7 @@ public class X
         public void ScopeOfPatternVariables_Using_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6007,17 +6865,25 @@ public class X
             compilation.VerifyDiagnostics(
                 // (12,43): error CS0128: A local variable named 'x1' is already defined in this scope
                 //         using (var x1 = Dummy(true is var x1, x1))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(12, 43),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 43),
                 // (12,47): error CS0841: Cannot use local variable 'x1' before it is declared
                 //         using (var x1 = Dummy(true is var x1, x1))
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(12, 47),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 47),
                 // (20,58): error CS0128: A local variable named 'x2' is already defined in this scope
                 //         using (System.IDisposable x2 = Dummy(true is var x2, x2))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 58),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 58),
                 // (20,62): error CS0165: Use of unassigned local variable 'x2'
                 //         using (System.IDisposable x2 = Dummy(true is var x2, x2))
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(20, 62)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 62)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6041,7 +6907,7 @@ public class X
         public void ScopeOfPatternVariables_Using_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6089,16 +6955,22 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,35): error CS0128: A local variable named 'x1' is already defined in this scope
-    //                                   x1 = Dummy(x1))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 35),
-    // (22,58): error CS0128: A local variable named 'x2' is already defined in this scope
-    //                                   d2 = Dummy(true is var x2, x2))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(22, 58),
-    // (39,46): error CS0841: Cannot use local variable 'x4' before it is declared
-    //         using (System.IDisposable d1 = Dummy(x4), 
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(39, 46)
-                );
+                // (13,35): error CS0128: A local variable named 'x1' is already defined in this scope
+                //                                   x1 = Dummy(x1))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 35),
+                // (22,58): error CS0128: A local variable named 'x2' is already defined in this scope
+                //                                   d2 = Dummy(true is var x2, x2))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(22, 58),
+                // (39,46): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         using (System.IDisposable d1 = Dummy(x4),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(39, 46)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6130,7 +7002,7 @@ public class X
         public void ScopeOfPatternVariables_LocalDeclarationStmt_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6172,16 +7044,22 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (19,35): error CS0128: A local variable named 'x4' is already defined in this scope
-    //         var d = Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(19, 35),
-    // (24,23): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         var d = Dummy(x6 && true is var x6);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(24, 23),
-    // (36,32): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                       2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(36, 32)
-                );
+                // (19,35): error CS0128: A local variable named 'x4' is already defined in this scope
+                //         var d = Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(19, 35),
+                // (24,23): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         var d = Dummy(x6 && true is var x6);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(24, 23),
+                // (36,32): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                       2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(36, 32)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6217,7 +7095,7 @@ public class X
         public void ScopeOfPatternVariables_LocalDeclarationStmt_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6259,16 +7137,22 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (19,38): error CS0128: A local variable named 'x4' is already defined in this scope
-    //         object d = Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(19, 38),
-    // (24,26): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         object d = Dummy(x6 && true is var x6);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(24, 26),
-    // (36,35): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                          2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(36, 35)
-                );
+                // (19,38): error CS0128: A local variable named 'x4' is already defined in this scope
+                //         object d = Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(19, 38),
+                // (24,26): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         object d = Dummy(x6 && true is var x6);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(24, 26),
+                // (36,35): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                          2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(36, 35)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6304,7 +7188,7 @@ public class X
         public void ScopeOfPatternVariables_LocalDeclarationStmt_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6330,19 +7214,27 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,36): error CS0128: A local variable named 'x1' is already defined in this scope
-    //                  Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 36),
-    // (13,40): error CS0841: Cannot use local variable 'x1' before it is declared
-    //                  Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(13, 40),
-    // (20,39): error CS0128: A local variable named 'x2' is already defined in this scope
-    //                     Dummy(true is var x2, x2);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 39),
-    // (20,43): error CS0165: Use of unassigned local variable 'x2'
-    //                     Dummy(true is var x2, x2);
-    Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(20, 43)
-                );
+                // (13,36): error CS0128: A local variable named 'x1' is already defined in this scope
+                //                  Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 36),
+                // (13,40): error CS0841: Cannot use local variable 'x1' before it is declared
+                //                  Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 40),
+                // (20,39): error CS0128: A local variable named 'x2' is already defined in this scope
+                //                     Dummy(true is var x2, x2);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 39),
+                // (20,43): error CS0165: Use of unassigned local variable 'x2'
+                //                     Dummy(true is var x2, x2);
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 43)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6366,7 +7258,7 @@ public class X
         public void ScopeOfPatternVariables_LocalDeclarationStmt_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6403,16 +7295,22 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,16): error CS0128: A local variable named 'x1' is already defined in this scope
-    //                x1 = Dummy(x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 16),
-    // (20,39): error CS0128: A local variable named 'x2' is already defined in this scope
-    //                d2 = Dummy(true is var x2, x2);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 39),
-    // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
-    //         object d1 = Dummy(x4), 
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(31, 27)
-                );
+                // (13,16): error CS0128: A local variable named 'x1' is already defined in this scope
+                //                x1 = Dummy(x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 16),
+                // (20,39): error CS0128: A local variable named 'x2' is already defined in this scope
+                //                d2 = Dummy(true is var x2, x2);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 39),
+                // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
+                //         object d1 = Dummy(x4),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(31, 27)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6444,7 +7342,7 @@ public class X
         public void ScopeOfPatternVariables_LocalDeclarationStmt_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6464,13 +7362,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y1 = Dummy(11 is var x1, x1);
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -6481,14 +7384,17 @@ var y1 = Dummy(11 is var x1, x1);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
             Assert.Equal("System.Int32", model.GetTypeInfo(x1Ref[0]).Type.ToTestDisplayString());
 
-            Assert.Equal("System.Int64 y1", model.LookupSymbols(x1Ref[0].SpanStart, name: "y1").Single().ToTestDisplayString());
+            Assert.Equal(
+                "System.Int64 y1",
+                model.LookupSymbols(x1Ref[0].SpanStart, name: "y1").Single().ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void ScopeOfPatternVariables_LocalDeclarationStmt_06()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6508,11 +7414,14 @@ public class X
             compilation.VerifyDiagnostics(
                 // (11,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 //             var d = true is var x1;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var d = true is var x1;").WithLocation(11, 13),
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var d = true is var x1;")
+                    .WithLocation(11, 13),
                 // (13,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(13, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6522,7 +7431,11 @@ public class X
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl);
             VerifyNotInScope(model, x1Ref);
 
-            var d = tree.GetRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>().Where(id => id.Identifier.ValueText == "d").Single();
+            var d = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Where(id => id.Identifier.ValueText == "d")
+                .Single();
             Assert.Equal("System.Boolean d", model.GetDeclaredSymbol(d).ToTestDisplayString());
         }
 
@@ -6531,7 +7444,7 @@ public class X
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6571,44 +7484,94 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (19,37): error CS0128: A local variable named 'x4' is already defined in this scope
                 //         var (d, dd) = ((true is var x4), x4);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(19, 37),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(19, 37),
                 // (24,24): error CS0841: Cannot use local variable 'x6' before it is declared
                 //         var (d, dd) = (x6 && (true is var x6), 1);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(24, 24),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(24, 24),
                 // (36,33): error CS0128: A local variable named 'x14' is already defined in this scope
-                //                       (2 is var x14), 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(36, 33)
-                );
+                //                       (2 is var x14),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(36, 33)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").Single();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
 
-            var x4Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x4").Single();
-            var x4Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x4").ToArray();
+            var x4Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x4")
+                .Single();
+            var x4Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x4")
+                .ToArray();
             Assert.Equal(2, x4Ref.Length);
             VerifyNotAPatternLocal(model, x4Ref[0]);
             VerifyNotAPatternLocal(model, x4Ref[1]);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x4Decl);
 
-            var x6Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x6").Single();
-            var x6Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x6").Single();
+            var x6Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x6")
+                .Single();
+            var x6Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x6")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x6Decl, x6Ref);
 
-            var x8Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x8").Single();
-            var x8Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x8").ToArray();
+            var x8Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x8")
+                .Single();
+            var x8Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x8")
+                .ToArray();
             Assert.Equal(2, x8Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x8Decl, x8Ref);
 
-            var x14Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x14").ToArray();
-            var x14Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x14").Single();
+            var x14Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x14")
+                .ToArray();
+            var x14Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x14")
+                .Single();
             Assert.Equal(2, x14Decl.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x14Decl[0], x14Ref);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x14Decl[1]);
@@ -6619,7 +7582,7 @@ public class X
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6659,45 +7622,94 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                                                              options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (19,47): error CS0128: A local variable named 'x4' is already defined in this scope
                 //         (object d, object dd) = ((true is var x4), x4);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(19, 47),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(19, 47),
                 // (24,34): error CS0841: Cannot use local variable 'x6' before it is declared
                 //         (object d, object dd) = (x6 && (true is var x6), 1);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(24, 34),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(24, 34),
                 // (36,33): error CS0128: A local variable named 'x14' is already defined in this scope
-                //                       (2 is var x14), 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(36, 33)
-                );
+                //                       (2 is var x14),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(36, 33)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").Single();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
 
-            var x4Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x4").Single();
-            var x4Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x4").ToArray();
+            var x4Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x4")
+                .Single();
+            var x4Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x4")
+                .ToArray();
             Assert.Equal(2, x4Ref.Length);
             VerifyNotAPatternLocal(model, x4Ref[0]);
             VerifyNotAPatternLocal(model, x4Ref[1]);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x4Decl);
 
-            var x6Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x6").Single();
-            var x6Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x6").Single();
+            var x6Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x6")
+                .Single();
+            var x6Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x6")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x6Decl, x6Ref);
 
-            var x8Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x8").Single();
-            var x8Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x8").ToArray();
+            var x8Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x8")
+                .Single();
+            var x8Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x8")
+                .ToArray();
             Assert.Equal(2, x8Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x8Decl, x8Ref);
 
-            var x14Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x14").ToArray();
-            var x14Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x14").Single();
+            var x14Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x14")
+                .ToArray();
+            var x14Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x14")
+                .Single();
             Assert.Equal(2, x14Decl.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x14Decl[0], x14Ref);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x14Decl[1]);
@@ -6708,7 +7720,7 @@ public class X
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6732,22 +7744,33 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                                                              options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (13,37): error CS0128: A local variable named 'x1' is already defined in this scope
                 //                       ((true is var x1), x1);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 37),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 37),
                 // (13,42): error CS0841: Cannot use local variable 'x1' before it is declared
                 //                       ((true is var x1), x1);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(13, 42),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 42),
                 // (20,40): error CS0128: A local variable named 'x2' is already defined in this scope
                 //                          ((true is var x2), x2);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 40),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 40),
                 // (20,45): error CS0165: Use of unassigned local variable 'x2'
                 //                          ((true is var x2), x2);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(20, 45)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 45)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6772,7 +7795,7 @@ public class X
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6807,22 +7830,33 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                                                              options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (12,53): error CS0128: A local variable named 'x1' is already defined in this scope
-                //         (object d, object x1) = (Dummy((true is var x1), x1), 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(12, 53),
+                //         (object d, object x1) = (Dummy((true is var x1), x1),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 53),
                 // (12,58): error CS0165: Use of unassigned local variable 'x1'
-                //         (object d, object x1) = (Dummy((true is var x1), x1), 
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(12, 58),
+                //         (object d, object x1) = (Dummy((true is var x1), x1),
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(12, 58),
                 // (20,40): error CS0128: A local variable named 'x2' is already defined in this scope
                 //                     Dummy((true is var x2), x2));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 40),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 40),
                 // (31,41): error CS0841: Cannot use local variable 'x4' before it is declared
-                //         (object d1, object d2) = (Dummy(x4), 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(31, 41)
-                );
+                //         (object d1, object d2) = (Dummy(x4),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(31, 41)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -6835,20 +7869,44 @@ public class X
             VerifyNotAPatternLocal(model, x1Ref[2]);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x1Decl);
 
-            var x2Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x2").ToArray();
-            var x2Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x2").ToArray();
+            var x2Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x2")
+                .ToArray();
+            var x2Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x2")
+                .ToArray();
             Assert.Equal(2, x2Decl.Length);
             Assert.Equal(2, x2Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x2Decl[0], x2Ref);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x2Decl[1]);
 
-            var x3Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x3").Single();
-            var x3Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x3").ToArray();
+            var x3Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x3")
+                .Single();
+            var x3Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x3")
+                .ToArray();
             Assert.Equal(2, x3Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x3Decl, x3Ref);
 
-            var x4Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x4").Single();
-            var x4Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x4").ToArray();
+            var x4Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x4")
+                .Single();
+            var x4Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x4")
+                .ToArray();
             Assert.Equal(2, x4Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x4Decl, x4Ref);
         }
@@ -6858,7 +7916,7 @@ public class X
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6871,17 +7929,32 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                                                              options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (ExpressionStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (ExpressionStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var (y1, dd) = ((123 is var x1), x1);
-");
+"
+                );
 
-            bool success = model.TryGetSpeculativeSemanticModel(tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "SpeculateHere").Single().SpanStart, statement, out model);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(id => id.Identifier.ValueText == "SpeculateHere")
+                    .Single()
+                    .SpanStart,
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -6892,7 +7965,10 @@ var (y1, dd) = ((123 is var x1), x1);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
             Assert.Equal("System.Int32", model.GetTypeInfo(x1Ref[0]).Type.ToTestDisplayString());
 
-            Assert.Equal("System.Boolean y1", model.LookupSymbols(x1Ref[0].SpanStart, name: "y1").Single().ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean y1",
+                model.LookupSymbols(x1Ref[0].SpanStart, name: "y1").Single().ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -6900,7 +7976,7 @@ var (y1, dd) = ((123 is var x1), x1);
         public void ScopeOfPatternVariables_DeconstructionDeclarationStmt_06()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -6916,24 +7992,41 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source,
-                                                              options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (13,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(13, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").ToArray();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .ToArray();
             Assert.Equal(2, x1Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref[0]);
             VerifyNotInScope(model, x1Ref[1]);
 
-            var d = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(id => id.Identifier.ValueText == "d").Single();
+            var d = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(id => id.Identifier.ValueText == "d")
+                .Single();
             Assert.Equal("System.Boolean d", model.GetDeclaredSymbol(d).ToTestDisplayString());
         }
 
@@ -6941,7 +8034,7 @@ public class X
         public void ScopeOfPatternVariables_While_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7049,37 +8142,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,28): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         while (true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 28),
-    // (35,16): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         while (x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 16),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             while (true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 32),
-    // (68,16): error CS0103: The name 'y10' does not exist in the current context
-    //         while (y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 16),
-    // (86,16): error CS0103: The name 'y12' does not exist in the current context
-    //         while (y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 16),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,31): error CS0128: A local variable or function named 'x14' is already defined in this scope
-    //                      2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 31)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,28): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         while (true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 28),
+                // (35,16): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         while (x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 16),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             while (true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 32),
+                // (68,16): error CS0103: The name 'y10' does not exist in the current context
+                //         while (y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 16),
+                // (86,16): error CS0103: The name 'y12' does not exist in the current context
+                //         while (y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 16),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,31): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                //                      2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 31)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7144,7 +8255,7 @@ public class X
         public void ScopeOfPatternVariables_While_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7168,8 +8279,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (17,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(17, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(17, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7184,7 +8297,7 @@ public class X
         public void ScopeOfPatternVariables_While_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7204,13 +8317,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (WhileStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (WhileStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 while (Dummy(11 is var x1, x1)) ;
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -7226,7 +8344,7 @@ while (Dummy(11 is var x1, x1)) ;
         public void ScopeOfPatternVariables_Do_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7347,61 +8465,95 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (97,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(97, 13),
-    // (14,19): error CS0841: Cannot use local variable 'x1' before it is declared
-    //             Dummy(x1);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(14, 19),
-    // (22,19): error CS0841: Cannot use local variable 'x2' before it is declared
-    //             Dummy(x2);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(22, 19),
-    // (33,28): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         while (true is var x4 && x4);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(33, 28),
-    // (32,19): error CS0841: Cannot use local variable 'x4' before it is declared
-    //             Dummy(x4);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(32, 19),
-    // (40,16): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         while (x6 && true is var x6);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(40, 16),
-    // (39,19): error CS0841: Cannot use local variable 'x6' before it is declared
-    //             Dummy(x6);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(39, 19),
-    // (47,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(47, 17),
-    // (56,19): error CS0841: Cannot use local variable 'x8' before it is declared
-    //             Dummy(x8);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x8").WithArguments("x8").WithLocation(56, 19),
-    // (59,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(59, 34),
-    // (66,19): error CS0841: Cannot use local variable 'x9' before it is declared
-    //             Dummy(x9);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(66, 19),
-    // (69,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             while (true is var x9 && x9); // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(69, 32),
-    // (68,23): error CS0841: Cannot use local variable 'x9' before it is declared
-    //                 Dummy(x9);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(68, 23),
-    // (81,16): error CS0103: The name 'y10' does not exist in the current context
-    //         while (y10 is var x10);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(81, 16),
-    // (98,16): error CS0103: The name 'y12' does not exist in the current context
-    //         while (y12 is var x12);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(98, 16),
-    // (97,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(97, 17),
-    // (115,31): error CS0128: A local variable or function named 'x14' is already defined in this scope
-    //                      2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(115, 31),
-    // (112,19): error CS0841: Cannot use local variable 'x14' before it is declared
-    //             Dummy(x14);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x14").WithArguments("x14").WithLocation(112, 19)
-                );
+                // (97,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(97, 13),
+                // (14,19): error CS0841: Cannot use local variable 'x1' before it is declared
+                //             Dummy(x1);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 19),
+                // (22,19): error CS0841: Cannot use local variable 'x2' before it is declared
+                //             Dummy(x2);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(22, 19),
+                // (33,28): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         while (true is var x4 && x4);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(33, 28),
+                // (32,19): error CS0841: Cannot use local variable 'x4' before it is declared
+                //             Dummy(x4);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(32, 19),
+                // (40,16): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         while (x6 && true is var x6);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(40, 16),
+                // (39,19): error CS0841: Cannot use local variable 'x6' before it is declared
+                //             Dummy(x6);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(39, 19),
+                // (47,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(47, 17),
+                // (56,19): error CS0841: Cannot use local variable 'x8' before it is declared
+                //             Dummy(x8);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(56, 19),
+                // (59,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(59, 34),
+                // (66,19): error CS0841: Cannot use local variable 'x9' before it is declared
+                //             Dummy(x9);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(66, 19),
+                // (69,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             while (true is var x9 && x9); // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(69, 32),
+                // (68,23): error CS0841: Cannot use local variable 'x9' before it is declared
+                //                 Dummy(x9);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(68, 23),
+                // (81,16): error CS0103: The name 'y10' does not exist in the current context
+                //         while (y10 is var x10);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(81, 16),
+                // (98,16): error CS0103: The name 'y12' does not exist in the current context
+                //         while (y12 is var x12);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(98, 16),
+                // (97,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(97, 17),
+                // (115,31): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                //                      2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(115, 31),
+                // (112,19): error CS0841: Cannot use local variable 'x14' before it is declared
+                //             Dummy(x14);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(112, 19)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7466,7 +8618,7 @@ public class X
         public void ScopeOfPatternVariables_Do_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7491,8 +8643,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (18,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(18, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(18, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7507,7 +8661,7 @@ public class X
         public void ScopeOfPatternVariables_Do_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7527,13 +8681,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (DoStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (DoStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 do {} while (Dummy(11 is var x1, x1));
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -7549,7 +8708,7 @@ do {} while (Dummy(11 is var x1, x1));
         public void ScopeOfPatternVariables_For_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7683,40 +8842,58 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-    //              Dummy(x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(53, 17),
-    // (65,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-    // (65,9): warning CS0162: Unreachable code detected
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-    // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //                  Dummy(true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(76, 36),
-    // (85,20): error CS0103: The name 'y10' does not exist in the current context
-    //              Dummy(y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-    // (107,20): error CS0103: The name 'y12' does not exist in the current context
-    //              Dummy(y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-    // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                    2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29)
-                );
+                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
+                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(34, 32),
+                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                //              Dummy(x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(42, 20),
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(53, 17),
+                // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(65, 34),
+                // (65,9): warning CS0162: Unreachable code detected
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
+                // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //                  Dummy(true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(76, 36),
+                // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                //              Dummy(y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 20),
+                // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                //              Dummy(y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(107, 20),
+                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 17),
+                // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                    2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(124, 29)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -7781,7 +8958,7 @@ public class X
         public void ScopeOfPatternVariables_For_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -7915,37 +9092,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-    //              Dummy(x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(53, 17),
-    // (65,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-    // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //                  Dummy(true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(76, 36),
-    // (85,20): error CS0103: The name 'y10' does not exist in the current context
-    //              Dummy(y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-    // (107,20): error CS0103: The name 'y12' does not exist in the current context
-    //              Dummy(y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-    // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                    2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29)
-                );
+                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
+                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(34, 32),
+                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                //              Dummy(x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(42, 20),
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(53, 17),
+                // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(65, 34),
+                // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //                  Dummy(true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(76, 36),
+                // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                //              Dummy(y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 20),
+                // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                //              Dummy(y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(107, 20),
+                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 17),
+                // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                    2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(124, 29)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8010,7 +9205,7 @@ public class X
         public void ScopeOfPatternVariables_For_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -8144,58 +9339,86 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-    // (16,19): error CS0103: The name 'x1' does not exist in the current context
-    //             Dummy(x1);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(16, 19),
-    // (25,19): error CS0103: The name 'x2' does not exist in the current context
-    //             Dummy(x2);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x2").WithArguments("x2").WithLocation(25, 19),
-    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-    //              Dummy(x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-    // (44,19): error CS0103: The name 'x6' does not exist in the current context
-    //             Dummy(x6);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x6").WithArguments("x6").WithLocation(44, 19),
-    // (63,19): error CS0103: The name 'x8' does not exist in the current context
-    //             Dummy(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(63, 19),
-    // (65,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-    // (65,9): warning CS0162: Unreachable code detected
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-    // (74,19): error CS0103: The name 'x9' does not exist in the current context
-    //             Dummy(x9);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x9").WithArguments("x9").WithLocation(74, 19),
-    // (78,23): error CS0103: The name 'x9' does not exist in the current context
-    //                 Dummy(x9);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x9").WithArguments("x9").WithLocation(78, 23),
-    // (71,14): warning CS0162: Unreachable code detected
-    //              Dummy(true is var x9 && x9)
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(71, 14),
-    // (85,20): error CS0103: The name 'y10' does not exist in the current context
-    //              Dummy(y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-    // (107,20): error CS0103: The name 'y12' does not exist in the current context
-    //              Dummy(y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-    // (124,29): error CS0128: A local variable or function named 'x14' is already defined in this scope
-    //                    2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29),
-    // (128,19): error CS0103: The name 'x14' does not exist in the current context
-    //             Dummy(x14);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x14").WithArguments("x14").WithLocation(128, 19)
-                );
+                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
+                // (16,19): error CS0103: The name 'x1' does not exist in the current context
+                //             Dummy(x1);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 19),
+                // (25,19): error CS0103: The name 'x2' does not exist in the current context
+                //             Dummy(x2);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(25, 19),
+                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(34, 32),
+                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                //              Dummy(x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(42, 20),
+                // (44,19): error CS0103: The name 'x6' does not exist in the current context
+                //             Dummy(x6);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(44, 19),
+                // (63,19): error CS0103: The name 'x8' does not exist in the current context
+                //             Dummy(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(63, 19),
+                // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(65, 34),
+                // (65,9): warning CS0162: Unreachable code detected
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
+                // (74,19): error CS0103: The name 'x9' does not exist in the current context
+                //             Dummy(x9);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(74, 19),
+                // (78,23): error CS0103: The name 'x9' does not exist in the current context
+                //                 Dummy(x9);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(78, 23),
+                // (71,14): warning CS0162: Unreachable code detected
+                //              Dummy(true is var x9 && x9)
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "Dummy").WithLocation(71, 14),
+                // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                //              Dummy(y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 20),
+                // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                //              Dummy(y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(107, 20),
+                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 17),
+                // (124,29): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                //                    2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(124, 29),
+                // (128,19): error CS0103: The name 'x14' does not exist in the current context
+                //             Dummy(x14);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(128, 19)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8268,7 +9491,7 @@ public class X
         public void ScopeOfPatternVariables_For_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -8402,40 +9625,58 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-    //              Dummy(x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(53, 17),
-    // (65,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-    // (65,9): warning CS0162: Unreachable code detected
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-    // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //                  Dummy(true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(76, 36),
-    // (85,20): error CS0103: The name 'y10' does not exist in the current context
-    //              Dummy(y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-    // (107,20): error CS0103: The name 'y12' does not exist in the current context
-    //              Dummy(y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-    // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                    2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29)
-                );
+                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
+                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(34, 32),
+                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                //              Dummy(x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(42, 20),
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(53, 17),
+                // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(65, 34),
+                // (65,9): warning CS0162: Unreachable code detected
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
+                // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //                  Dummy(true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(76, 36),
+                // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                //              Dummy(y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 20),
+                // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                //              Dummy(y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(107, 20),
+                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 17),
+                // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                    2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(124, 29)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8500,7 +9741,7 @@ public class X
         public void ScopeOfPatternVariables_For_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -8634,40 +9875,58 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-    //              Dummy(x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(53, 17),
-    // (65,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-    // (65,9): warning CS0162: Unreachable code detected
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-    // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //                  Dummy(true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(76, 36),
-    // (85,20): error CS0103: The name 'y10' does not exist in the current context
-    //              Dummy(y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-    // (107,20): error CS0103: The name 'y12' does not exist in the current context
-    //              Dummy(y12 is var x12)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-    // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                    2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29)
-                );
+                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
+                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(34, 32),
+                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                //              Dummy(x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(42, 20),
+                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(53, 17),
+                // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(65, 34),
+                // (65,9): warning CS0162: Unreachable code detected
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
+                // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //                  Dummy(true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(76, 36),
+                // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                //              Dummy(y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(85, 20),
+                // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                //              Dummy(y12 is var x12)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(107, 20),
+                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(109, 17),
+                // (124,29): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                    2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(124, 29)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -8732,7 +9991,7 @@ public class X
         public void ScopeOfPatternVariables_For_06()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -8872,118 +10131,192 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (13,32): error CS0128: A local variable or function named 'x1' is already defined in this scope
-    //              Dummy(true is var x1 && x1)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 32),
-    // (13,38): error CS0841: Cannot use local variable 'x1' before it is declared
-    //              Dummy(true is var x1 && x1)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(13, 38),
-    // (21,32): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x2 && x2)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2").WithArguments("x2").WithLocation(21, 32),
-    // (20,18): warning CS0219: The variable 'x2' is assigned but its value is never used
-    //         for (var x2 = true;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x2").WithArguments("x2").WithLocation(20, 18),
-    // (29,32): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x3 && x3)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(29, 32),
-    // (28,18): warning CS0219: The variable 'x3' is assigned but its value is never used
-    //         for (var x3 = true;;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x3").WithArguments("x3").WithLocation(28, 18),
-    // (37,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(37, 32),
-    // (37,38): error CS0165: Use of unassigned local variable 'x4'
-    //              Dummy(true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_UseDefViolation, "x4").WithArguments("x4").WithLocation(37, 38),
-    // (45,32): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x5 && x5)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(45, 32),
-    // (44,19): warning CS0219: The variable 'x5' is assigned but its value is never used
-    //         for (bool x5 = true;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(44, 19),
-    // (53,32): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x6 && x6)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6").WithArguments("x6").WithLocation(53, 32),
-    // (52,19): warning CS0219: The variable 'x6' is assigned but its value is never used
-    //         for (bool x6 = true;;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x6").WithArguments("x6").WithLocation(52, 19),
-    // (61,32): error CS0128: A local variable or function named 'x7' is already defined in this scope
-    //              Dummy(true is var x7 && x7)
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x7").WithArguments("x7").WithLocation(61, 32),
-    // (69,37): error CS0128: A local variable or function named 'x8' is already defined in this scope
-    //              b2 = Dummy(true is var x8 && x8);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(69, 37),
-    // (70,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x8 && x8);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8").WithArguments("x8").WithLocation(70, 32),
-    // (71,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x8 && x8))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8").WithArguments("x8").WithLocation(71, 32),
-    // (77,23): error CS0841: Cannot use local variable 'x9' before it is declared
-    //         for (bool b = x9, 
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(77, 23),
-    // (79,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x9 && x9);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(79, 32),
-    // (80,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x9 && x9))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(80, 32),
-    // (86,22): error CS0103: The name 'x10' does not exist in the current context
-    //         for (var b = x10;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x10").WithArguments("x10").WithLocation(86, 22),
-    // (88,32): error CS0128: A local variable or function named 'x10' is already defined in this scope
-    //              Dummy(true is var x10 && x10);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x10").WithArguments("x10").WithLocation(88, 32),
-    // (89,32): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x10 && x10))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10").WithArguments("x10").WithLocation(89, 32),
-    // (95,23): error CS0103: The name 'x11' does not exist in the current context
-    //         for (bool b = x11;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(95, 23),
-    // (97,32): error CS0128: A local variable or function named 'x11' is already defined in this scope
-    //              Dummy(true is var x11 && x11);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x11").WithArguments("x11").WithLocation(97, 32),
-    // (98,32): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x11 && x11))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11").WithArguments("x11").WithLocation(98, 32),
-    // (104,20): error CS0103: The name 'x12' does not exist in the current context
-    //         for (Dummy(x12);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(104, 20),
-    // (105,20): error CS0841: Cannot use local variable 'x12' before it is declared
-    //              Dummy(x12) &&
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12").WithArguments("x12").WithLocation(105, 20),
-    // (107,32): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //              Dummy(true is var x12 && x12))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12").WithArguments("x12").WithLocation(107, 32),
-    // (113,22): error CS0103: The name 'x13' does not exist in the current context
-    //         for (var b = x13;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x13").WithArguments("x13").WithLocation(113, 22),
-    // (114,20): error CS0103: The name 'x13' does not exist in the current context
-    //              Dummy(x13);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x13").WithArguments("x13").WithLocation(114, 20),
-    // (116,32): error CS0128: A local variable or function named 'x13' is already defined in this scope
-    //              Dummy(true is var x13 && x13))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x13").WithArguments("x13").WithLocation(116, 32),
-    // (122,23): error CS0103: The name 'x14' does not exist in the current context
-    //         for (bool b = x14;
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x14").WithArguments("x14").WithLocation(122, 23),
-    // (123,20): error CS0103: The name 'x14' does not exist in the current context
-    //              Dummy(x14);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x14").WithArguments("x14").WithLocation(123, 20),
-    // (125,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
-    //              Dummy(true is var x14 && x14))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(125, 32),
-    // (131,20): error CS0103: The name 'x15' does not exist in the current context
-    //         for (Dummy(x15);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x15").WithArguments("x15").WithLocation(131, 20),
-    // (132,20): error CS0103: The name 'x15' does not exist in the current context
-    //              Dummy(x15);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x15").WithArguments("x15").WithLocation(132, 20),
-    // (133,20): error CS0841: Cannot use local variable 'x15' before it is declared
-    //              Dummy(x15),
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x15").WithArguments("x15").WithLocation(133, 20)
-                );
+                // (13,32): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                //              Dummy(true is var x1 && x1)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 32),
+                // (13,38): error CS0841: Cannot use local variable 'x1' before it is declared
+                //              Dummy(true is var x1 && x1)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 38),
+                // (21,32): error CS0136: A local or parameter named 'x2' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x2 && x2)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(21, 32),
+                // (20,18): warning CS0219: The variable 'x2' is assigned but its value is never used
+                //         for (var x2 = true;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(20, 18),
+                // (29,32): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x3 && x3)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(29, 32),
+                // (28,18): warning CS0219: The variable 'x3' is assigned but its value is never used
+                //         for (var x3 = true;;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(28, 18),
+                // (37,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(37, 32),
+                // (37,38): error CS0165: Use of unassigned local variable 'x4'
+                //              Dummy(true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(37, 38),
+                // (45,32): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x5 && x5)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(45, 32),
+                // (44,19): warning CS0219: The variable 'x5' is assigned but its value is never used
+                //         for (bool x5 = true;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(44, 19),
+                // (53,32): error CS0136: A local or parameter named 'x6' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x6 && x6)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(53, 32),
+                // (52,19): warning CS0219: The variable 'x6' is assigned but its value is never used
+                //         for (bool x6 = true;;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(52, 19),
+                // (61,32): error CS0128: A local variable or function named 'x7' is already defined in this scope
+                //              Dummy(true is var x7 && x7)
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(61, 32),
+                // (69,37): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                //              b2 = Dummy(true is var x8 && x8);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(69, 37),
+                // (70,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x8 && x8);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(70, 32),
+                // (71,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x8 && x8))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(71, 32),
+                // (77,23): error CS0841: Cannot use local variable 'x9' before it is declared
+                //         for (bool b = x9,
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(77, 23),
+                // (79,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x9 && x9);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(79, 32),
+                // (80,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x9 && x9))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(80, 32),
+                // (86,22): error CS0103: The name 'x10' does not exist in the current context
+                //         for (var b = x10;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x10")
+                    .WithArguments("x10")
+                    .WithLocation(86, 22),
+                // (88,32): error CS0128: A local variable or function named 'x10' is already defined in this scope
+                //              Dummy(true is var x10 && x10);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x10")
+                    .WithArguments("x10")
+                    .WithLocation(88, 32),
+                // (89,32): error CS0136: A local or parameter named 'x10' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x10 && x10))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x10")
+                    .WithArguments("x10")
+                    .WithLocation(89, 32),
+                // (95,23): error CS0103: The name 'x11' does not exist in the current context
+                //         for (bool b = x11;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(95, 23),
+                // (97,32): error CS0128: A local variable or function named 'x11' is already defined in this scope
+                //              Dummy(true is var x11 && x11);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(97, 32),
+                // (98,32): error CS0136: A local or parameter named 'x11' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x11 && x11))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(98, 32),
+                // (104,20): error CS0103: The name 'x12' does not exist in the current context
+                //         for (Dummy(x12);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(104, 20),
+                // (105,20): error CS0841: Cannot use local variable 'x12' before it is declared
+                //              Dummy(x12) &&
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(105, 20),
+                // (107,32): error CS0136: A local or parameter named 'x12' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //              Dummy(true is var x12 && x12))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(107, 32),
+                // (113,22): error CS0103: The name 'x13' does not exist in the current context
+                //         for (var b = x13;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(113, 22),
+                // (114,20): error CS0103: The name 'x13' does not exist in the current context
+                //              Dummy(x13);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(114, 20),
+                // (116,32): error CS0128: A local variable or function named 'x13' is already defined in this scope
+                //              Dummy(true is var x13 && x13))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(116, 32),
+                // (122,23): error CS0103: The name 'x14' does not exist in the current context
+                //         for (bool b = x14;
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(122, 23),
+                // (123,20): error CS0103: The name 'x14' does not exist in the current context
+                //              Dummy(x14);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(123, 20),
+                // (125,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                //              Dummy(true is var x14 && x14))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(125, 32),
+                // (131,20): error CS0103: The name 'x15' does not exist in the current context
+                //         for (Dummy(x15);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(131, 20),
+                // (132,20): error CS0103: The name 'x15' does not exist in the current context
+                //              Dummy(x15);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(132, 20),
+                // (133,20): error CS0841: Cannot use local variable 'x15' before it is declared
+                //              Dummy(x15),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(133, 20)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9092,7 +10425,7 @@ public class X
         public void ScopeOfPatternVariables_For_07()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -9118,15 +10451,23 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
             compilation.VerifyDiagnostics(
                 // (13,20): error CS0841: Cannot use local variable 'x1' before it is declared
                 //              Dummy(x1),
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1").WithArguments("x1").WithLocation(13, 20),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(13, 20),
                 // (22,32): error CS0128: A local variable or function named 'x2' is already defined in this scope
                 //              Dummy(true is var x2 && x2))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(22, 32)
-                );
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(22, 32)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9148,7 +10489,7 @@ public class X
         public void ScopeOfPatternVariables_Foreach_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -9265,40 +10606,60 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,45): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         foreach (var i in Dummy(true is var x4 && x4))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 45),
-    // (35,33): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         foreach (var i in Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 33),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,50): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             foreach (var i2 in Dummy(true is var x9 && x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 50),
-    // (68,33): error CS0103: The name 'y10' does not exist in the current context
-    //         foreach (var i in Dummy(y10 is var x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 33),
-    // (86,33): error CS0103: The name 'y12' does not exist in the current context
-    //         foreach (var i in Dummy(y12 is var x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 33),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,42): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                                 2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 42),
-    // (108,22): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         foreach (var x15 in 
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15").WithArguments("x15").WithLocation(108, 22)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,45): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         foreach (var i in Dummy(true is var x4 && x4))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 45),
+                // (35,33): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         foreach (var i in Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 33),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,50): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             foreach (var i2 in Dummy(true is var x9 && x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 50),
+                // (68,33): error CS0103: The name 'y10' does not exist in the current context
+                //         foreach (var i in Dummy(y10 is var x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 33),
+                // (86,33): error CS0103: The name 'y12' does not exist in the current context
+                //         foreach (var i in Dummy(y12 is var x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 33),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,42): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                                 2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 42),
+                // (108,22): error CS0136: A local or parameter named 'x15' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         foreach (var x15 in
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(108, 22)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9369,7 +10730,7 @@ public class X
         public void ScopeOfPatternVariables_Lock_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -9477,37 +10838,55 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,33): error CS0128: A local variable named 'x4' is already defined in this scope
-    //         lock (Dummy(true is var x4 && x4))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(29, 33),
-    // (35,21): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         lock (Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 21),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (60,19): error CS0841: Cannot use local variable 'x9' before it is declared
-    //             Dummy(x9);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(60, 19),
-    // (61,37): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             lock (Dummy(true is var x9 && x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 37),
-    // (68,21): error CS0103: The name 'y10' does not exist in the current context
-    //         lock (Dummy(y10 is var x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 21),
-    // (86,21): error CS0103: The name 'y12' does not exist in the current context
-    //         lock (Dummy(y12 is var x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 21),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,30): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                     2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 30)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,33): error CS0128: A local variable named 'x4' is already defined in this scope
+                //         lock (Dummy(true is var x4 && x4))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 33),
+                // (35,21): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         lock (Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 21),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (60,19): error CS0841: Cannot use local variable 'x9' before it is declared
+                //             Dummy(x9);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(60, 19),
+                // (61,37): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             lock (Dummy(true is var x9 && x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 37),
+                // (68,21): error CS0103: The name 'y10' does not exist in the current context
+                //         lock (Dummy(y10 is var x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 21),
+                // (86,21): error CS0103: The name 'y12' does not exist in the current context
+                //         lock (Dummy(y12 is var x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 21),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,30): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                     2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 30)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9551,7 +10930,13 @@ public class X
             Assert.Equal(2, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[0], x9Ref[0]);
-            VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[1], x9Ref[1], x9Ref[2], x9Ref[3]);
+            VerifyModelForDeclarationOrVarSimplePattern(
+                model,
+                x9Decl[1],
+                x9Ref[1],
+                x9Ref[2],
+                x9Ref[3]
+            );
 
             var y10Ref = GetReferences(tree, "y10").ToArray();
             Assert.Equal(2, y10Ref.Length);
@@ -9573,7 +10958,7 @@ public class X
         public void ScopeOfPatternVariables_Lock_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -9597,8 +10982,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (17,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(17, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(17, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9613,7 +11000,7 @@ public class X
         public void ScopeOfPatternVariables_Lock_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -9633,13 +11020,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LockStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (LockStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 lock (Dummy(11 is var x1, x1));
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -9655,7 +11047,7 @@ lock (Dummy(11 is var x1, x1));
         public void ScopeOfPatternVariables_Fixed_01()
         {
             var source =
-@"
+                @"
 public unsafe class X
 {
     public static void Main()
@@ -9761,39 +11153,60 @@ public unsafe class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true)
+            );
             compilation.VerifyDiagnostics(
-    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-    // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         fixed (int* p = Dummy(true is var x4 && x4))
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 43),
-    // (35,31): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         fixed (int* p = Dummy(x6 && true is var x6))
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 31),
-    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-    // (53,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-    // (61,48): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             fixed (int* p2 = Dummy(true is var x9 && x9)) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 48),
-    // (68,31): error CS0103: The name 'y10' does not exist in the current context
-    //         fixed (int* p = Dummy(y10 is var x10))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 31),
-    // (86,31): error CS0103: The name 'y12' does not exist in the current context
-    //         fixed (int* p = Dummy(y12 is var x12))
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 31),
-    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-    //             var y12 = 12;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-    // (99,40): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                               2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 40)
-                );
+                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
+                // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         fixed (int* p = Dummy(true is var x4 && x4))
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(29, 43),
+                // (35,31): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         fixed (int* p = Dummy(x6 && true is var x6))
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(35, 31),
+                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(43, 17),
+                // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(53, 34),
+                // (61,48): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             fixed (int* p2 = Dummy(true is var x9 && x9)) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(61, 48),
+                // (68,31): error CS0103: The name 'y10' does not exist in the current context
+                //         fixed (int* p = Dummy(y10 is var x10))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(68, 31),
+                // (86,31): error CS0103: The name 'y12' does not exist in the current context
+                //         fixed (int* p = Dummy(y12 is var x12))
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(86, 31),
+                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                //             var y12 = 12;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                    .WithArguments("y12")
+                    .WithLocation(87, 17),
+                // (99,40): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                               2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 40)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9858,7 +11271,7 @@ public unsafe class X
         public void ScopeOfPatternVariables_Fixed_02()
         {
             var source =
-@"
+                @"
 public unsafe class X
 {
     public static void Main()
@@ -9905,24 +11318,37 @@ public unsafe class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true));
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true)
+            );
             compilation.VerifyDiagnostics(
-    // (14,44): error CS0128: A local variable named 'x1' is already defined in this scope
-    //                          Dummy(true is var x1 && x1))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(14, 44),
-    // (14,50): error CS0165: Use of unassigned local variable 'x1'
-    //                          Dummy(true is var x1 && x1))
-    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(14, 50),
-    // (23,21): error CS0128: A local variable named 'x2' is already defined in this scope
-    //                     x2 = Dummy())
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(23, 21),
-    // (32,43): error CS0128: A local variable named 'x3' is already defined in this scope
-    //                     p = Dummy(true is var x3 && x3))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(32, 43),
-    // (41,44): error CS0128: A local variable named 'x4' is already defined in this scope
-    //                     p2 = Dummy(true is var x4 && x4))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(41, 44)
-                );
+                // (14,44): error CS0128: A local variable named 'x1' is already defined in this scope
+                //                          Dummy(true is var x1 && x1))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 44),
+                // (14,50): error CS0165: Use of unassigned local variable 'x1'
+                //                          Dummy(true is var x1 && x1))
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 50),
+                // (23,21): error CS0128: A local variable named 'x2' is already defined in this scope
+                //                     x2 = Dummy())
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(23, 21),
+                // (32,43): error CS0128: A local variable named 'x3' is already defined in this scope
+                //                     p = Dummy(true is var x3 && x3))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(32, 43),
+                // (41,44): error CS0128: A local variable named 'x4' is already defined in this scope
+                //                     p2 = Dummy(true is var x4 && x4))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(41, 44)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -9958,7 +11384,7 @@ public unsafe class X
         public void ScopeOfPatternVariables_Yield_01()
         {
             var source =
-@"
+                @"
 using System.Collections;
 
 public class X
@@ -10043,34 +11469,52 @@ public class X
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
             compilation.VerifyDiagnostics(
-    // (16,44): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             yield return Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(16, 44),
-    // (18,40): error CS0128: A local variable or function named 'x1' is already defined in this scope
-    //         yield return Dummy(true is var x1, x1);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(18, 40),
-    // (23,28): error CS0841: Cannot use local variable 'x2' before it is declared
-    //         yield return Dummy(x2, true is var x2);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(23, 28),
-    // (28,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         yield return Dummy(true is var x3, x3);
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(28, 40),
-    // (35,40): error CS0128: A local variable or function named 'x4' is already defined in this scope
-    //         yield return Dummy(true is var x4, x4);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(35, 40),
-    // (41,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(41, 13),
-    // (41,13): warning CS0219: The variable 'x5' is assigned but its value is never used
-    //         var x5 = 11;
-    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(41, 13),
-    // (61,61): error CS0128: A local variable or function named 'x8' is already defined in this scope
-    //         yield return Dummy(true is var x8, x8, false is var x8, x8);
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(61, 61),
-    // (72,15): error CS0841: Cannot use local variable 'x11' before it is declared
-    //         Dummy(x11);
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11").WithArguments("x11").WithLocation(72, 15)
-                );
+                // (16,44): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             yield return Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 44),
+                // (18,40): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                //         yield return Dummy(true is var x1, x1);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(18, 40),
+                // (23,28): error CS0841: Cannot use local variable 'x2' before it is declared
+                //         yield return Dummy(x2, true is var x2);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(23, 28),
+                // (28,40): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         yield return Dummy(true is var x3, x3);
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(28, 40),
+                // (35,40): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                //         yield return Dummy(true is var x4, x4);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(35, 40),
+                // (41,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(41, 13),
+                // (41,13): warning CS0219: The variable 'x5' is assigned but its value is never used
+                //         var x5 = 11;
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(41, 13),
+                // (61,61): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                //         yield return Dummy(true is var x8, x8, false is var x8, x8);
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(61, 61),
+                // (72,15): error CS0841: Cannot use local variable 'x11' before it is declared
+                //         Dummy(x11);
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(72, 15)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -10132,7 +11576,7 @@ public class X
         public void ScopeOfPatternVariables_Yield_02()
         {
             var source =
-@"
+                @"
 using System.Collections;
 
 public class X
@@ -10157,8 +11601,10 @@ public class X
             compilation.VerifyDiagnostics(
                 // (17,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(17, 9)
-                );
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(17, 9)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -10173,7 +11619,7 @@ public class X
         public void ScopeOfPatternVariables_Yield_03()
         {
             var source =
-@"
+                @"
 using System.Collections;
 
 public class X
@@ -10196,13 +11642,18 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (YieldStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (YieldStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 yield return (Dummy(11 is var x1, x1));
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
                 GetReferences(tree, "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -10218,7 +11669,7 @@ yield return (Dummy(11 is var x1, x1));
         public void ScopeOfPatternVariables_Catch_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -10336,31 +11787,47 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
             compilation.VerifyDiagnostics(
-    // (25,33): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //         catch when (true is var x4 && x4)
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(25, 33),
-    // (34,21): error CS0841: Cannot use local variable 'x6' before it is declared
-    //         catch when (x6 && true is var x6)
-    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(34, 21),
-    // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             var x7 = 12;
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(45, 17),
-    // (58,34): error CS0103: The name 'x8' does not exist in the current context
-    //         System.Console.WriteLine(x8);
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(58, 34),
-    // (68,37): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-    //             catch when (true is var x9 && x9) // 2
-    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(68, 37),
-    // (78,21): error CS0103: The name 'y10' does not exist in the current context
-    //         catch when (y10 is var x10)
-    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(78, 21),
-    // (99,36): error CS0128: A local variable named 'x14' is already defined in this scope
-    //                           2 is var x14, 
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 36),
-    // (110,36): error CS0128: A local variable named 'x15' is already defined in this scope
-    //               when (Dummy(1 is var x15, x15))
-    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(110, 36)
-                );
+                // (25,33): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //         catch when (true is var x4 && x4)
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(25, 33),
+                // (34,21): error CS0841: Cannot use local variable 'x6' before it is declared
+                //         catch when (x6 && true is var x6)
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                    .WithArguments("x6")
+                    .WithLocation(34, 21),
+                // (45,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             var x7 = 12;
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                    .WithArguments("x7")
+                    .WithLocation(45, 17),
+                // (58,34): error CS0103: The name 'x8' does not exist in the current context
+                //         System.Console.WriteLine(x8);
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(58, 34),
+                // (68,37): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                //             catch when (true is var x9 && x9) // 2
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(68, 37),
+                // (78,21): error CS0103: The name 'y10' does not exist in the current context
+                //         catch when (y10 is var x10)
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                    .WithArguments("y10")
+                    .WithLocation(78, 21),
+                // (99,36): error CS0128: A local variable named 'x14' is already defined in this scope
+                //                           2 is var x14,
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(99, 36),
+                // (110,36): error CS0128: A local variable named 'x15' is already defined in this scope
+                //               when (Dummy(1 is var x15, x15))
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(110, 36)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -10424,7 +11891,7 @@ public class X
         public void ScopeOfPatternVariables_LabeledStatement_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -10517,10 +11984,14 @@ a:      Dummy(true is var x12, x12);
 
             compilation.VerifyDiagnostics(
                 // b:          Dummy(true is var x1, x1);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(14, 31),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(14, 31),
                 // (16,27): error CS0128: A local variable or function named 'x1' is already defined in this scope
                 // c:      Dummy(true is var x1, x1);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(16, 27),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(16, 27),
                 // (12,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x1, x1);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(12, 1),
@@ -10532,90 +12003,157 @@ a:      Dummy(true is var x12, x12);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "c").WithLocation(16, 1),
                 // (21,15): error CS0841: Cannot use local variable 'x2' before it is declared
                 //         Dummy(x2, true is var x2);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(21, 15),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(21, 15),
                 // (26,27): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 // a:      Dummy(true is var x3, x3);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(26, 27),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(26, 27),
                 // (26,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x3, x3);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(26, 1),
                 // (33,27): error CS0128: A local variable or function named 'x4' is already defined in this scope
                 // a:      Dummy(true is var x4, x4);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(33, 27),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(33, 27),
                 // (33,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x4, x4);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(33, 1),
                 // (39,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
                 //         var x5 = 11;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(39, 13),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
                 // (38,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x5, x5);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(38, 1),
                 // (39,13): warning CS0219: The variable 'x5' is assigned but its value is never used
                 //         var x5 = 11;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(39, 13),
+                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(39, 13),
                 // (59,48): error CS0128: A local variable or function named 'x8' is already defined in this scope
                 // a:      Dummy(true is var x8, x8, false is var x8, x8);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(59, 48),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(59, 48),
                 // (59,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x8, x8, false is var x8, x8);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(59, 1),
                 // (65,1): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 // a:          Dummy(true is var x9, x9);
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "a:          Dummy(true is var x9, x9);").WithLocation(65, 1),
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "a:          Dummy(true is var x9, x9);")
+                    .WithLocation(65, 1),
                 // (65,1): warning CS0164: This label has not been referenced
                 // a:          Dummy(true is var x9, x9);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(65, 1),
                 // (73,1): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 // a:                      Dummy(true is var x10, x10);
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "a:                      Dummy(true is var x10, x10);").WithLocation(73, 1),
+                Diagnostic(
+                        ErrorCode.ERR_BadEmbeddedStmt,
+                        "a:                      Dummy(true is var x10, x10);"
+                    )
+                    .WithLocation(73, 1),
                 // (73,1): warning CS0164: This label has not been referenced
                 // a:                      Dummy(true is var x10, x10);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(73, 1),
                 // (79,15): error CS0841: Cannot use local variable 'x11' before it is declared
                 //         Dummy(x11);
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11").WithArguments("x11").WithLocation(79, 15),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(79, 15),
                 // (80,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x11, x11);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(80, 1),
                 // (85,1): warning CS0164: This label has not been referenced
                 // a:      Dummy(true is var x12, x12);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(85, 1)
-                );
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").ToArray();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").ToArray();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .ToArray();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .ToArray();
             Assert.Equal(3, x1Decl.Length);
             Assert.Equal(3, x1Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl[0], x1Ref[0], x1Ref[2]);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl[1], x1Ref[1]);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x1Decl[2]);
 
-            var x2Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x2").Single();
-            var x2Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x2").Single();
+            var x2Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x2")
+                .Single();
+            var x2Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x2")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x2Decl, x2Ref);
 
-            var x3Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x3").Single();
-            var x3Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x3").Single();
+            var x3Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x3")
+                .Single();
+            var x3Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x3")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x3Decl, x3Ref);
 
-            var x4Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x4").Single();
-            var x4Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x4").ToArray();
+            var x4Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x4")
+                .Single();
+            var x4Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x4")
+                .ToArray();
             Assert.Equal(2, x4Ref.Length);
             VerifyNotAPatternLocal(model, x4Ref[0]);
             VerifyNotAPatternLocal(model, x4Ref[1]);
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x4Decl);
 
-            var x5Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x5").Single();
-            var x5Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x5").ToArray();
+            var x5Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x5")
+                .Single();
+            var x5Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x5")
+                .ToArray();
             Assert.Equal(2, x5Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x5Decl, x5Ref);
 
-            var x8Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x8").ToArray();
-            var x8Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x8").ToArray();
+            var x8Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x8")
+                .ToArray();
+            var x8Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x8")
+                .ToArray();
             Assert.Equal(2, x8Decl.Length);
             Assert.Equal(2, x8Ref.Length);
             for (int i = 0; i < x8Decl.Length; i++)
@@ -10624,21 +12162,53 @@ a:      Dummy(true is var x12, x12);
             }
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x8Decl[1]);
 
-            var x9Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x9").Single();
-            var x9Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x9").Single();
+            var x9Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x9")
+                .Single();
+            var x9Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x9")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl, x9Ref);
 
-            var x10Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x10").Single();
-            var x10Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x10").Single();
+            var x10Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x10")
+                .Single();
+            var x10Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x10")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x10Decl, x10Ref);
 
-            var x11Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x11").Single();
-            var x11Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x11").ToArray();
+            var x11Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x11")
+                .Single();
+            var x11Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x11")
+                .ToArray();
             Assert.Equal(2, x11Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x11Decl, x11Ref);
 
-            var x12Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x12").Single();
-            var x12Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x12").ToArray();
+            var x12Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x12")
+                .Single();
+            var x12Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x12")
+                .ToArray();
             Assert.Equal(2, x12Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x12Decl, x12Ref);
         }
@@ -10647,7 +12217,7 @@ a:      Dummy(true is var x12, x12);
         public void ScopeOfPatternVariables_LabeledStatement_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -10670,20 +12240,31 @@ a:          Dummy(true is var x1);
             compilation.VerifyDiagnostics(
                 // (13,1): error CS1023: Embedded statement cannot be a declaration or labeled statement
                 // a:          Dummy(true is var x1);
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "a:          Dummy(true is var x1);").WithLocation(13, 1),
+                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "a:          Dummy(true is var x1);")
+                    .WithLocation(13, 1),
                 // (15,9): error CS0103: The name 'x1' does not exist in the current context
                 //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(15, 9),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(15, 9),
                 // (13,1): warning CS0164: This label has not been referenced
                 // a:          Dummy(true is var x1);
                 Diagnostic(ErrorCode.WRN_UnreferencedLabel, "a").WithLocation(13, 1)
-                );
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").Single();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .Single();
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl);
             VerifyNotInScope(model, x1Ref);
         }
@@ -10692,7 +12273,7 @@ a:          Dummy(true is var x1);
         public void ScopeOfPatternVariables_LabeledStatement_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -10712,19 +12293,37 @@ public class X
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LabeledStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (LabeledStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 a: b: c:Dummy(11 is var x1, x1);
-");
+"
+                );
 
             bool success = model.TryGetSpeculativeSemanticModel(
-                tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "SpeculateHere").Single().SpanStart,
-                statement, out model);
+                tree.GetRoot()
+                    .DescendantNodes()
+                    .OfType<IdentifierNameSyntax>()
+                    .Where(id => id.Identifier.ValueText == "SpeculateHere")
+                    .Single()
+                    .SpanStart,
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
 
-            var x1Decl = tree.GetRoot().DescendantNodes().OfType<SingleVariableDesignationSyntax>().Where(p => p.Identifier.ValueText == "x1").Single();
-            var x1Ref = tree.GetRoot().DescendantNodes().OfType<IdentifierNameSyntax>().Where(id => id.Identifier.ValueText == "x1").ToArray();
+            var x1Decl = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<SingleVariableDesignationSyntax>()
+                .Where(p => p.Identifier.ValueText == "x1")
+                .Single();
+            var x1Ref = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<IdentifierNameSyntax>()
+                .Where(id => id.Identifier.ValueText == "x1")
+                .ToArray();
             Assert.Equal(1, x1Ref.Length);
             VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl, x1Ref);
             Assert.Equal("System.Int32", model.GetTypeInfo(x1Ref[0]).Type.ToTestDisplayString());
@@ -10734,7 +12333,7 @@ a: b: c:Dummy(11 is var x1, x1);
         public void Scope_SwitchLabelGuard_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -10940,61 +12539,99 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             compilation.VerifyDiagnostics(
                 // (32,31): error CS0841: Cannot use local variable 'x2' before it is declared
                 //             case 0 when Dummy(x2, Dummy(Data is var x2)):
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(32, 31),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                    .WithArguments("x2")
+                    .WithLocation(32, 31),
                 // (42,49): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(Dummy(Data is var x3), x3):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(42, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                    .WithArguments("x3")
+                    .WithLocation(42, 49),
                 // (53,49): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(Dummy(Data is var x4), x4):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(53, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                    .WithArguments("x4")
+                    .WithLocation(53, 49),
                 // (64,49): error CS0136: A local or parameter named 'x5' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 0 when Dummy(Dummy(Data is var x5), x5):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5").WithArguments("x5").WithLocation(64, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x5")
+                    .WithArguments("x5")
+                    .WithLocation(64, 49),
                 // (104,76): error CS0128: A local variable named 'x8' is already defined in this scope
                 //             case 0 when Dummy(Dummy(Data is var x8), x8, Dummy(Data is var x8), x8):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(104, 76),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                    .WithArguments("x8")
+                    .WithLocation(104, 76),
                 // (114,31): error CS0841: Cannot use local variable 'x9' before it is declared
                 //             case 0 when Dummy(x9):
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(114, 31),
+                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(114, 31),
                 // (121,49): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(Dummy(Data is var x9), x9):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(121, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                    .WithArguments("x9")
+                    .WithLocation(121, 49),
                 // (146,17): error CS0103: The name 'x11' does not exist in the current context
                 //         switch (x11 ? val : 0)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(146, 17),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(146, 17),
                 // (148,31): error CS0103: The name 'x11' does not exist in the current context
                 //             case 0 when Dummy(x11):
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(148, 31),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(148, 31),
                 // (149,23): error CS0103: The name 'x11' does not exist in the current context
                 //                 Dummy(x11, 0);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11").WithArguments("x11").WithLocation(149, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x11")
+                    .WithArguments("x11")
+                    .WithLocation(149, 23),
                 // (159,17): error CS0103: The name 'x12' does not exist in the current context
                 //         switch (x12 ? val : 0)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(159, 17),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(159, 17),
                 // (164,31): error CS0103: The name 'x12' does not exist in the current context
                 //             case 1 when Dummy(x12):
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(164, 31),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(164, 31),
                 // (165,23): error CS0103: The name 'x12' does not exist in the current context
                 //                 Dummy(x12, 1);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12").WithArguments("x12").WithLocation(165, 23),
+                Diagnostic(ErrorCode.ERR_NameNotInContext, "x12")
+                    .WithArguments("x12")
+                    .WithLocation(165, 23),
                 // (177,49): error CS0136: A local or parameter named 'x13' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(Dummy(Data is var x13), x13):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13").WithArguments("x13").WithLocation(177, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x13")
+                    .WithArguments("x13")
+                    .WithLocation(177, 49),
                 // (187,49): error CS0136: A local or parameter named 'x14' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
                 //             case 1 when Dummy(Dummy(Data is var x14), x14):
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14").WithArguments("x14").WithLocation(187, 49),
+                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x14")
+                    .WithArguments("x14")
+                    .WithLocation(187, 49),
                 // (200,49): error CS0128: A local variable named 'x15' is already defined in this scope
                 //             case 1 when Dummy(Dummy(Data is var x15), x15):
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15").WithArguments("x15").WithLocation(200, 49),
+                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(200, 49),
                 // (200,55): error CS0165: Use of unassigned local variable 'x15'
                 //             case 1 when Dummy(Dummy(Data is var x15), x15):
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x15").WithArguments("x15").WithLocation(200, 55)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x15")
+                    .WithArguments("x15")
+                    .WithLocation(200, 55)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -11005,7 +12642,12 @@ public class X
             Assert.Equal(6, x1Ref.Length);
             for (int i = 0; i < x1Decl.Length; i++)
             {
-                VerifyModelForDeclarationOrVarSimplePattern(model, x1Decl[i], x1Ref[i * 2], x1Ref[i * 2 + 1]);
+                VerifyModelForDeclarationOrVarSimplePattern(
+                    model,
+                    x1Decl[i],
+                    x1Ref[i * 2],
+                    x1Ref[i * 2 + 1]
+                );
             }
 
             var x2Decl = GetPatternDeclarations(tree, "x2").Single();
@@ -11070,7 +12712,13 @@ public class X
             var x13Ref = GetReferences(tree, "x13").ToArray();
             Assert.Equal(2, x13Decl.Length);
             Assert.Equal(5, x13Ref.Length);
-            VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[0], x13Ref[0], x13Ref[1], x13Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePattern(
+                model,
+                x13Decl[0],
+                x13Ref[0],
+                x13Ref[1],
+                x13Ref[2]
+            );
             VerifyModelForDeclarationOrVarSimplePattern(model, x13Decl[1], x13Ref[3], x13Ref[4]);
 
             var x14Decl = GetPatternDeclarations(tree, "x14").ToArray();
@@ -11095,7 +12743,7 @@ public class X
         public void Scope_SwitchLabelGuard_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11122,7 +12770,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11138,7 +12790,7 @@ public class X
         public void Scope_SwitchLabelGuard_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11170,7 +12822,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11186,7 +12842,7 @@ public class X
         public void Scope_SwitchLabelGuard_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11220,7 +12876,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11236,7 +12896,7 @@ public class X
         public void Scope_SwitchLabelGuard_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11263,7 +12923,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11279,7 +12943,7 @@ public class X
         public void Scope_SwitchLabelGuard_06()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11306,7 +12970,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11322,7 +12990,7 @@ public class X
         public void Scope_SwitchLabelGuard_07()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11352,7 +13020,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11368,7 +13040,7 @@ public class X
         public void Scope_SwitchLabelGuard_08()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11395,7 +13067,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             CompileAndVerify(compilation, expectedOutput: @"2").VerifyDiagnostics();
 
@@ -11411,7 +13087,7 @@ public class X
         public void Scope_SwitchLabelGuard_09()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11439,26 +13115,39 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput:
-@"2
-True").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"2
+True"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
 
             var yRef = GetReferences(tree, "y1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString()
+            );
 
             var zRef = GetReferences(tree, "z1").Single();
-            Assert.Equal("System.Boolean", compilation.GetSemanticModel(tree).GetTypeInfo(zRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean",
+                compilation.GetSemanticModel(tree).GetTypeInfo(zRef).Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void Scope_SwitchLabelGuard_10()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11486,28 +13175,45 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"2
-True").VerifyDiagnostics();
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"2
+True"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
 
             var xRef = GetReferences(tree, "x1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString()
+            );
 
             var yRef = GetReferences(tree, "y1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString()
+            );
 
             var zRef = GetReferences(tree, "z1").Single();
-            Assert.Equal("System.Boolean", compilation.GetSemanticModel(tree).GetTypeInfo(zRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean",
+                compilation.GetSemanticModel(tree).GetTypeInfo(zRef).Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void Scope_SwitchLabelGuard_11()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11536,24 +13242,36 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput: "True").VerifyDiagnostics(
-                // (17,17): warning CS0162: Unreachable code detected
-                //                 System.Console.WriteLine(y1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(17, 17));
+            CompileAndVerify(compilation, expectedOutput: "True")
+                .VerifyDiagnostics(
+                    // (17,17): warning CS0162: Unreachable code detected
+                    //                 System.Console.WriteLine(y1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(17, 17)
+                );
 
             var tree = compilation.SyntaxTrees.Single();
 
             var xRef = GetReferences(tree, "x1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString()
+            );
 
             var yRefs = GetReferences(tree, "y1");
             Assert.Equal(2, yRefs.Count());
 
             foreach (var yRef in yRefs)
             {
-                Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString());
+                Assert.Equal(
+                    "System.Int32",
+                    compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString()
+                );
             }
         }
 
@@ -11561,7 +13279,7 @@ public class X
         public void Scope_SwitchLabelGuard_12()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11598,21 +13316,36 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"123
-True").VerifyDiagnostics(
-                // (19,21): warning CS0162: Unreachable code detected
-                //                     System.Console.WriteLine(y1);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(19, 21));
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"123
+True"
+                )
+                .VerifyDiagnostics(
+                    // (19,21): warning CS0162: Unreachable code detected
+                    //                     System.Console.WriteLine(y1);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(19, 21)
+                );
 
             var tree = compilation.SyntaxTrees.Single();
 
             var xRef = GetReferences(tree, "x1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(xRef).Type.ToTestDisplayString()
+            );
 
             var yRef = GetReferences(tree, "y1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(yRef).Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -11620,7 +13353,7 @@ True").VerifyDiagnostics(
         public void Scope_SwitchLabelGuard_13()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11654,23 +13387,37 @@ public class X
             var compilation = CreateCompilation(
                 source: source,
                 options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"2
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"2
 2
 1
-False").VerifyDiagnostics();
+False"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
 
             var y1Ref = GetReferences(tree, "y1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(y1Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(y1Ref).Type.ToTestDisplayString()
+            );
 
             var z0Ref = GetReferences(tree, "z0").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(z0Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(z0Ref).Type.ToTestDisplayString()
+            );
 
             var z1Ref = GetReferences(tree, "z1").Single();
-            Assert.Equal("System.Boolean", compilation.GetSemanticModel(tree).GetTypeInfo(z1Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean",
+                compilation.GetSemanticModel(tree).GetTypeInfo(z1Ref).Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
@@ -11678,7 +13425,7 @@ False").VerifyDiagnostics();
         public void Scope_SwitchLabelGuard_14()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static int Data = 2;
@@ -11713,34 +13460,51 @@ public class X
             var compilation = CreateCompilation(
                 source: source,
                 options: TestOptions.DebugExe,
-                parseOptions: TestOptions.Regular);
+                parseOptions: TestOptions.Regular
+            );
 
-            CompileAndVerify(compilation, expectedOutput: @"2
+            CompileAndVerify(
+                    compilation,
+                    expectedOutput: @"2
 2
 2
 True
-False").VerifyDiagnostics();
+False"
+                )
+                .VerifyDiagnostics();
 
             var tree = compilation.SyntaxTrees.Single();
 
             var y1Ref = GetReferences(tree, "y1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(y1Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(y1Ref).Type.ToTestDisplayString()
+            );
 
             var z0Ref = GetReferences(tree, "z0").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(z0Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(z0Ref).Type.ToTestDisplayString()
+            );
 
             var z1Ref = GetReferences(tree, "z1").Single();
-            Assert.Equal("System.Int32", compilation.GetSemanticModel(tree).GetTypeInfo(z1Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Int32",
+                compilation.GetSemanticModel(tree).GetTypeInfo(z1Ref).Type.ToTestDisplayString()
+            );
 
             var z2Ref = GetReferences(tree, "z2").Single();
-            Assert.Equal("System.Boolean", compilation.GetSemanticModel(tree).GetTypeInfo(z2Ref).Type.ToTestDisplayString());
+            Assert.Equal(
+                "System.Boolean",
+                compilation.GetSemanticModel(tree).GetTypeInfo(z2Ref).Type.ToTestDisplayString()
+            );
         }
 
         [Fact]
         public void Scope_DeclaratorArguments_01()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -11780,25 +13544,42 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.WRN_UnreferencedVar
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.WRN_UnreferencedVar,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (19,35): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //         int d,e(Dummy(true is var x4, x4));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(19, 35),
-                // (24,23): error CS0841: Cannot use local variable 'x6' before it is declared
-                //         int d,e(Dummy(x6 && true is var x6));
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(24, 23),
-                // (30,34): error CS0165: Use of unassigned local variable 'x8'
-                //         System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x8").WithArguments("x8").WithLocation(30, 34),
-                // (36,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                       2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(36, 32)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (19,35): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //         int d,e(Dummy(true is var x4, x4));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(19, 35),
+                    // (24,23): error CS0841: Cannot use local variable 'x6' before it is declared
+                    //         int d,e(Dummy(x6 && true is var x6));
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(24, 23),
+                    // (30,34): error CS0165: Use of unassigned local variable 'x8'
+                    //         System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 34),
+                    // (36,32): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                       2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(36, 32)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -11840,7 +13621,7 @@ public class X
         public void Scope_DeclaratorArguments_02()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -11871,31 +13652,51 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.WRN_UnreferencedVar
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.WRN_UnreferencedVar,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (12,13): error CS0818: Implicitly-typed variables must be initialized
-                //         var d, x1( 
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer, "d").WithLocation(12, 13),
-                // (13,36): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //                  Dummy(true is var x1, x1));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 36),
-                // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //                     Dummy(true is var x2, x2));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 39),
-                // (21,15): error CS0165: Use of unassigned local variable 'x2'
-                //         Dummy(x2);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(21, 15),
-                // (27,39): error CS0128: A local variable or function named 'x3' is already defined in this scope
-                //                     Dummy(true is var x3, x3));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(27, 39),
-                // (28,15): error CS0165: Use of unassigned local variable 'x3'
-                //         Dummy(x3);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x3").WithArguments("x3").WithLocation(28, 15)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (12,13): error CS0818: Implicitly-typed variables must be initialized
+                    //         var d, x1(
+                    Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer, "d")
+                        .WithLocation(12, 13),
+                    // (13,36): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //                  Dummy(true is var x1, x1));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 36),
+                    // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //                     Dummy(true is var x2, x2));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(20, 39),
+                    // (21,15): error CS0165: Use of unassigned local variable 'x2'
+                    //         Dummy(x2);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(21, 15),
+                    // (27,39): error CS0128: A local variable or function named 'x3' is already defined in this scope
+                    //                     Dummy(true is var x3, x3));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(27, 39),
+                    // (28,15): error CS0165: Use of unassigned local variable 'x3'
+                    //         Dummy(x3);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(28, 15)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -11930,7 +13731,7 @@ public class X
         public void Scope_DeclaratorArguments_03()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -11965,26 +13766,43 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_CloseParenExpected
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_CloseParenExpected,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (13,16): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //                x1(  Dummy(x1));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 16),
-                // (14,15): error CS0165: Use of unassigned local variable 'x1'
-                //         Dummy(x1);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(14, 15),
-                // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //                  d2(Dummy(true is var x2, x2));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 39),
-                // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
-                //         object d1,e(Dummy(x4)], 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(31, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (13,16): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //                x1(  Dummy(x1));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 16),
+                    // (14,15): error CS0165: Use of unassigned local variable 'x1'
+                    //         Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(14, 15),
+                    // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //                  d2(Dummy(true is var x2, x2));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(20, 39),
+                    // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
+                    //         object d1,e(Dummy(x4)],
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(31, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12021,7 +13839,7 @@ public class X
         public void Scope_DeclaratorArguments_04()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12056,33 +13874,54 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_CloseParenExpected
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_CloseParenExpected,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (13,16): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //                x1 = Dummy(x1);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 16),
-                // (13,27): error CS0165: Use of unassigned local variable 'x1'
-                //                x1 = Dummy(x1);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(13, 27),
-                // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //                d2 = Dummy(true is var x2, x2);
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 39),
-                // (20,43): error CS0165: Use of unassigned local variable 'x2'
-                //                d2 = Dummy(true is var x2, x2);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x2").WithArguments("x2").WithLocation(20, 43),
-                // (26,27): error CS0165: Use of unassigned local variable 'x3'
-                //                d2 = Dummy(x3);
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x3").WithArguments("x3").WithLocation(26, 27),
-                // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
-                //         object d1 = Dummy(x4), 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(31, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (13,16): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //                x1 = Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 16),
+                    // (13,27): error CS0165: Use of unassigned local variable 'x1'
+                    //                x1 = Dummy(x1);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 27),
+                    // (20,39): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //                d2 = Dummy(true is var x2, x2);
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(20, 39),
+                    // (20,43): error CS0165: Use of unassigned local variable 'x2'
+                    //                d2 = Dummy(true is var x2, x2);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(20, 43),
+                    // (26,27): error CS0165: Use of unassigned local variable 'x3'
+                    //                d2 = Dummy(x3);
+                    Diagnostic(ErrorCode.ERR_UseDefViolation, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(26, 27),
+                    // (31,27): error CS0841: Cannot use local variable 'x4' before it is declared
+                    //         object d1 = Dummy(x4),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(31, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12119,7 +13958,7 @@ public class X
         public void Scope_DeclaratorArguments_05()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12134,16 +13973,27 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
 
-            var statement = (LocalDeclarationStatementSyntax)SyntaxFactory.ParseStatement(@"
+            var statement = (LocalDeclarationStatementSyntax)
+                SyntaxFactory.ParseStatement(
+                    @"
 var y, y1(Dummy(3 is var x1, x1));
-");
+"
+                );
 
-            bool success = model.TryGetSpeculativeSemanticModel(GetReferences(tree, "SpeculateHere").Single().SpanStart, statement, out model);
+            bool success = model.TryGetSpeculativeSemanticModel(
+                GetReferences(tree, "SpeculateHere").Single().SpanStart,
+                statement,
+                out model
+            );
             Assert.True(success);
             Assert.NotNull(model);
             tree = statement.SyntaxTree;
@@ -12164,7 +14014,7 @@ var y, y1(Dummy(3 is var x1, x1));
         public void Scope_DeclaratorArguments_06()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12180,22 +14030,38 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.WRN_UnreferencedVar
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.WRN_UnreferencedVar,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (11,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //             var d,e(string.Empty is var x1 && x1 != null);
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var d,e(string.Empty is var x1 && x1 != null);").WithLocation(11, 13),
-                // (11,17): error CS0818: Implicitly-typed variables must be initialized
-                //             var d,e(string.Empty is var x1 && x1 != null);
-                Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer, "d").WithLocation(11, 17),
-                // (13,9): error CS0103: The name 'x1' does not exist in the current context
-                //         x1++;
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x1").WithArguments("x1").WithLocation(13, 9)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (11,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //             var d,e(string.Empty is var x1 && x1 != null);
+                    Diagnostic(
+                            ErrorCode.ERR_BadEmbeddedStmt,
+                            "var d,e(string.Empty is var x1 && x1 != null);"
+                        )
+                        .WithLocation(11, 13),
+                    // (11,17): error CS0818: Implicitly-typed variables must be initialized
+                    //             var d,e(string.Empty is var x1 && x1 != null);
+                    Diagnostic(ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer, "d")
+                        .WithLocation(11, 17),
+                    // (13,9): error CS0103: The name 'x1' does not exist in the current context
+                    //         x1++;
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 9)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12208,7 +14074,11 @@ public class X
             VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x1Decl, x1Ref[0]);
             VerifyNotInScope(model, x1Ref[1]);
 
-            var e = tree.GetRoot().DescendantNodes().OfType<VariableDeclaratorSyntax>().Where(id => id.Identifier.ValueText == "e").Single();
+            var e = tree.GetRoot()
+                .DescendantNodes()
+                .OfType<VariableDeclaratorSyntax>()
+                .Where(id => id.Identifier.ValueText == "e")
+                .Single();
             var symbol = (ILocalSymbol)model.GetDeclaredSymbol(e);
             Assert.Equal("var e", symbol.ToTestDisplayString());
             Assert.True(symbol.Type.IsErrorType());
@@ -12219,7 +14089,7 @@ public class X
         public void Scope_DeclaratorArguments_07()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12240,7 +14110,11 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -12261,7 +14135,7 @@ public class X
         public void Scope_DeclaratorArguments_08()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12393,48 +14267,76 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_UseDefViolation
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_UseDefViolation,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(109, 13),
-                // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //              Dummy(true is var x4 && x4)
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(34, 32),
-                // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
-                //              Dummy(x6 && true is var x6)
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(42, 20),
-                // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(53, 17),
-                // (65,34): error CS0103: The name 'x8' does not exist in the current context
-                //         System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(65, 34),
-                // (65,9): warning CS0162: Unreachable code detected
-                //         System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
-                // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //                  Dummy(true is var x9 && x9) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(76, 36),
-                // (85,20): error CS0103: The name 'y10' does not exist in the current context
-                //              Dummy(y10 is var x10)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(85, 20),
-                // (107,20): error CS0103: The name 'y12' does not exist in the current context
-                //              Dummy(y12 is var x12)
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(107, 20),
-                // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(109, 17),
-                // (124,29): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                    2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(124, 29)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (109,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(109, 13),
+                    // (34,32): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //              Dummy(true is var x4 && x4)
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(34, 32),
+                    // (42,20): error CS0841: Cannot use local variable 'x6' before it is declared
+                    //              Dummy(x6 && true is var x6)
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(42, 20),
+                    // (53,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(53, 17),
+                    // (65,34): error CS0103: The name 'x8' does not exist in the current context
+                    //         System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(65, 34),
+                    // (65,9): warning CS0162: Unreachable code detected
+                    //         System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.WRN_UnreachableCode, "System").WithLocation(65, 9),
+                    // (76,36): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //                  Dummy(true is var x9 && x9) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(76, 36),
+                    // (85,20): error CS0103: The name 'y10' does not exist in the current context
+                    //              Dummy(y10 is var x10)
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(85, 20),
+                    // (107,20): error CS0103: The name 'y12' does not exist in the current context
+                    //              Dummy(y12 is var x12)
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(107, 20),
+                    // (109,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(109, 17),
+                    // (124,29): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                    2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(124, 29)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12457,7 +14359,12 @@ public class X
             Assert.Equal(3, x4Ref.Length);
             AssertContainedInDeclaratorArguments(x4Decl);
             VerifyNotAPatternLocal(model, x4Ref[0]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x4Decl, x4Ref[1], x4Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x4Decl,
+                x4Ref[1],
+                x4Ref[2]
+            );
 
             var x6Decl = GetPatternDeclarations(tree, "x6").Single();
             var x6Ref = GetReferences(tree, "x6").ToArray();
@@ -12476,7 +14383,12 @@ public class X
             var x8Ref = GetReferences(tree, "x8").ToArray();
             Assert.Equal(3, x8Ref.Length);
             AssertContainedInDeclaratorArguments(x8Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x8Decl, x8Ref[0], x8Ref[1]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x8Decl,
+                x8Ref[0],
+                x8Ref[1]
+            );
             VerifyNotInScope(model, x8Ref[2]);
 
             var x9Decl = GetPatternDeclarations(tree, "x9").ToArray();
@@ -12484,8 +14396,18 @@ public class X
             Assert.Equal(2, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             AssertContainedInDeclaratorArguments(x9Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[0], x9Ref[0], x9Ref[1]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[1], x9Ref[2], x9Ref[3]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[0],
+                x9Ref[0],
+                x9Ref[1]
+            );
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[1],
+                x9Ref[2],
+                x9Ref[3]
+            );
 
             var y10Ref = GetReferences(tree, "y10").ToArray();
             Assert.Equal(2, y10Ref.Length);
@@ -12508,7 +14430,7 @@ public class X
         public void Scope_DeclaratorArguments_09()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12552,42 +14474,69 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_CloseParenExpected
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_CloseParenExpected,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (13,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //              Dummy(true is var x4 && x4)
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(13, 32),
-                // (21,32): error CS0128: A local variable or function named 'x7' is already defined in this scope
-                //              Dummy(true is var x7 && x7)
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x7").WithArguments("x7").WithLocation(21, 32),
-                // (20,19): warning CS0219: The variable 'x7' is assigned but its value is never used
-                //         for (bool x7 = true, b(
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x7").WithArguments("x7").WithLocation(20, 19),
-                // (29,37): error CS0128: A local variable or function named 'x8' is already defined in this scope
-                //                b2(Dummy(true is var x8 && x8));
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8").WithArguments("x8").WithLocation(29, 37),
-                // (30,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //              Dummy(true is var x8 && x8);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8").WithArguments("x8").WithLocation(30, 32),
-                // (31,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //              Dummy(true is var x8 && x8))
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8").WithArguments("x8").WithLocation(31, 32),
-                // (37,23): error CS0841: Cannot use local variable 'x9' before it is declared
-                //         for (bool b = x9, 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(37, 23),
-                // (39,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //              Dummy(true is var x9 && x9);
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(39, 32),
-                // (40,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //              Dummy(true is var x9 && x9))
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(40, 32)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (13,32): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //              Dummy(true is var x4 && x4)
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(13, 32),
+                    // (21,32): error CS0128: A local variable or function named 'x7' is already defined in this scope
+                    //              Dummy(true is var x7 && x7)
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(21, 32),
+                    // (20,19): warning CS0219: The variable 'x7' is assigned but its value is never used
+                    //         for (bool x7 = true, b(
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(20, 19),
+                    // (29,37): error CS0128: A local variable or function named 'x8' is already defined in this scope
+                    //                b2(Dummy(true is var x8 && x8));
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(29, 37),
+                    // (30,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //              Dummy(true is var x8 && x8);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(30, 32),
+                    // (31,32): error CS0136: A local or parameter named 'x8' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //              Dummy(true is var x8 && x8))
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(31, 32),
+                    // (37,23): error CS0841: Cannot use local variable 'x9' before it is declared
+                    //         for (bool b = x9,
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(37, 23),
+                    // (39,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //              Dummy(true is var x9 && x9);
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(39, 32),
+                    // (40,32): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //              Dummy(true is var x9 && x9))
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(40, 32)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12611,7 +14560,12 @@ public class X
             Assert.Equal(4, x8Ref.Length);
             AssertContainedInDeclaratorArguments(x8Decl[0]);
             AssertContainedInDeclaratorArguments(x8Decl[1]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x8Decl[0], x8Ref[0], x8Ref[1]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x8Decl[0],
+                x8Ref[0],
+                x8Ref[1]
+            );
             VerifyModelForDeclarationOrVarPatternDuplicateInSameScope(model, x8Decl[1]);
             VerifyModelForDeclarationOrVarSimplePattern(model, x8Decl[2], x8Ref[2]);
             VerifyModelForDeclarationOrVarSimplePattern(model, x8Decl[3], x8Ref[3]);
@@ -12621,7 +14575,12 @@ public class X
             Assert.Equal(3, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             AssertContainedInDeclaratorArguments(x9Decl[0]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[0], x9Ref[0], x9Ref[1]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[0],
+                x9Ref[0],
+                x9Ref[1]
+            );
             VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[1], x9Ref[2]);
             VerifyModelForDeclarationOrVarSimplePattern(model, x9Decl[2], x9Ref[3]);
         }
@@ -12630,7 +14589,7 @@ public class X
         public void Scope_DeclaratorArguments_10()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12736,48 +14695,76 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                                        (int)ErrorCode.ERR_FixedMustInit,
-                                        (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
-                                        (int)ErrorCode.ERR_UseDefViolation
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                (int)ErrorCode.ERR_FixedMustInit,
+                (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
+                (int)ErrorCode.ERR_UseDefViolation,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         using (var d,e(Dummy(true is var x4, x4)))
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 42),
-                // (35,30): error CS0841: Cannot use local variable 'x6' before it is declared
-                //         using (var d,e(Dummy(x6 && true is var x6)))
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 30),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-                // (53,34): error CS0103: The name 'x8' does not exist in the current context
-                //         System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-                // (61,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             using (var e,b(Dummy(true is var x9, x9))) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 46),
-                // (68,30): error CS0103: The name 'y10' does not exist in the current context
-                //         using (var d,e(Dummy(y10 is var x10, x10)))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 30),
-                // (86,30): error CS0103: The name 'y12' does not exist in the current context
-                //         using (var d,e(Dummy(y12 is var x12, x12)))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 30),
-                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-                // (99,39): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                              2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 39)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(87, 13),
+                    // (29,42): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //         using (var d,e(Dummy(true is var x4, x4)))
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(29, 42),
+                    // (35,30): error CS0841: Cannot use local variable 'x6' before it is declared
+                    //         using (var d,e(Dummy(x6 && true is var x6)))
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(35, 30),
+                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(43, 17),
+                    // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                    //         System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(53, 34),
+                    // (61,46): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             using (var e,b(Dummy(true is var x9, x9))) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(61, 46),
+                    // (68,30): error CS0103: The name 'y10' does not exist in the current context
+                    //         using (var d,e(Dummy(y10 is var x10, x10)))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(68, 30),
+                    // (86,30): error CS0103: The name 'y12' does not exist in the current context
+                    //         using (var d,e(Dummy(y12 is var x12, x12)))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(86, 30),
+                    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(87, 17),
+                    // (99,39): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                              2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(99, 39)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12800,7 +14787,12 @@ public class X
             Assert.Equal(3, x4Ref.Length);
             AssertContainedInDeclaratorArguments(x4Decl);
             VerifyNotAPatternLocal(model, x4Ref[0]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x4Decl, x4Ref[1], x4Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x4Decl,
+                x4Ref[1],
+                x4Ref[2]
+            );
 
             var x6Decl = GetPatternDeclarations(tree, "x6").Single();
             var x6Ref = GetReferences(tree, "x6").ToArray();
@@ -12819,7 +14811,12 @@ public class X
             var x8Ref = GetReferences(tree, "x8").ToArray();
             Assert.Equal(3, x8Ref.Length);
             AssertContainedInDeclaratorArguments(x8Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x8Decl, x8Ref[0], x8Ref[1]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x8Decl,
+                x8Ref[0],
+                x8Ref[1]
+            );
             VerifyNotInScope(model, x8Ref[2]);
 
             var x9Decl = GetPatternDeclarations(tree, "x9").ToArray();
@@ -12827,8 +14824,18 @@ public class X
             Assert.Equal(2, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             AssertContainedInDeclaratorArguments(x9Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[0], x9Ref[0], x9Ref[1]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[1], x9Ref[2], x9Ref[3]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[0],
+                x9Ref[0],
+                x9Ref[1]
+            );
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[1],
+                x9Ref[2],
+                x9Ref[3]
+            );
 
             var x10Decl = GetPatternDeclarations(tree, "x10").Single();
             var x10Ref = GetReferences(tree, "x10").Single();
@@ -12856,7 +14863,7 @@ public class X
         public void Scope_DeclaratorArguments_11()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12882,23 +14889,36 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
-                                        (int)ErrorCode.ERR_FixedMustInit,
-                                        (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
-                                        (int)ErrorCode.ERR_UseDefViolation
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_ImplicitlyTypedVariableMultipleDeclarator,
+                (int)ErrorCode.ERR_FixedMustInit,
+                (int)ErrorCode.ERR_ImplicitlyTypedVariableWithNoInitializer,
+                (int)ErrorCode.ERR_UseDefViolation,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (12,43): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //         using (var d,x1(Dummy(true is var x1, x1)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(12, 43),
-                // (20,58): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //         using (System.IDisposable d,x2(Dummy(true is var x2, x2)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(20, 58)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (12,43): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //         using (var d,x1(Dummy(true is var x1, x1)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(12, 43),
+                    // (20,58): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //         using (System.IDisposable d,x2(Dummy(true is var x2, x2)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(20, 58)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -12925,7 +14945,7 @@ public class X
         public void Scope_DeclaratorArguments_12()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -12971,26 +14991,41 @@ public class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_FixedMustInit,
-                                        (int)ErrorCode.ERR_UseDefViolation,
-                                        (int)ErrorCode.ERR_CloseParenExpected
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_FixedMustInit,
+                (int)ErrorCode.ERR_UseDefViolation,
+                (int)ErrorCode.ERR_CloseParenExpected,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (13,35): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //                                   x1 = Dummy(x1))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(13, 35),
-                // (22,58): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //                                     d2(Dummy(true is var x2, x2)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(22, 58),
-                // (39,46): error CS0841: Cannot use local variable 'x4' before it is declared
-                //         using (System.IDisposable d1 = Dummy(x4), 
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(39, 46)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (13,35): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //                                   x1 = Dummy(x1))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(13, 35),
+                    // (22,58): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //                                     d2(Dummy(true is var x2, x2)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(22, 58),
+                    // (39,46): error CS0841: Cannot use local variable 'x4' before it is declared
+                    //         using (System.IDisposable d1 = Dummy(x4),
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(39, 46)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13027,7 +15062,7 @@ public class X
         public void Scope_DeclaratorArguments_13()
         {
             var source =
-@"
+                @"
 public unsafe class X
 {
     public static void Main()
@@ -13133,46 +15168,74 @@ public unsafe class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true), parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_FixedMustInit,
-                                        (int)ErrorCode.ERR_UseDefViolation
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_FixedMustInit,
+                (int)ErrorCode.ERR_UseDefViolation,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;").WithLocation(87, 13),
-                // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         fixed (int* p,e(Dummy(true is var x4 && x4)))
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4").WithArguments("x4").WithLocation(29, 43),
-                // (35,31): error CS0841: Cannot use local variable 'x6' before it is declared
-                //         fixed (int* p,e(Dummy(x6 && true is var x6)))
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6").WithArguments("x6").WithLocation(35, 31),
-                // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             var x7 = 12;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7").WithArguments("x7").WithLocation(43, 17),
-                // (53,34): error CS0103: The name 'x8' does not exist in the current context
-                //         System.Console.WriteLine(x8);
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x8").WithArguments("x8").WithLocation(53, 34),
-                // (61,48): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             fixed (int* p2,b(Dummy(true is var x9 && x9))) // 2
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9").WithArguments("x9").WithLocation(61, 48),
-                // (68,31): error CS0103: The name 'y10' does not exist in the current context
-                //         fixed (int* p,e(Dummy(y10 is var x10)))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y10").WithArguments("y10").WithLocation(68, 31),
-                // (86,31): error CS0103: The name 'y12' does not exist in the current context
-                //         fixed (int* p,e(Dummy(y12 is var x12)))
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "y12").WithArguments("y12").WithLocation(86, 31),
-                // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
-                //             var y12 = 12;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12").WithArguments("y12").WithLocation(87, 17),
-                // (99,40): error CS0128: A local variable or function named 'x14' is already defined in this scope
-                //                               2 is var x14, 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14").WithArguments("x14").WithLocation(99, 40)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (87,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "var y12 = 12;")
+                        .WithLocation(87, 13),
+                    // (29,43): error CS0136: A local or parameter named 'x4' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //         fixed (int* p,e(Dummy(true is var x4 && x4)))
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(29, 43),
+                    // (35,31): error CS0841: Cannot use local variable 'x6' before it is declared
+                    //         fixed (int* p,e(Dummy(x6 && true is var x6)))
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(35, 31),
+                    // (43,17): error CS0136: A local or parameter named 'x7' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             var x7 = 12;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(43, 17),
+                    // (53,34): error CS0103: The name 'x8' does not exist in the current context
+                    //         System.Console.WriteLine(x8);
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x8")
+                        .WithArguments("x8")
+                        .WithLocation(53, 34),
+                    // (61,48): error CS0136: A local or parameter named 'x9' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             fixed (int* p2,b(Dummy(true is var x9 && x9))) // 2
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(61, 48),
+                    // (68,31): error CS0103: The name 'y10' does not exist in the current context
+                    //         fixed (int* p,e(Dummy(y10 is var x10)))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y10")
+                        .WithArguments("y10")
+                        .WithLocation(68, 31),
+                    // (86,31): error CS0103: The name 'y12' does not exist in the current context
+                    //         fixed (int* p,e(Dummy(y12 is var x12)))
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(86, 31),
+                    // (87,17): warning CS0219: The variable 'y12' is assigned but its value is never used
+                    //             var y12 = 12;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "y12")
+                        .WithArguments("y12")
+                        .WithLocation(87, 17),
+                    // (99,40): error CS0128: A local variable or function named 'x14' is already defined in this scope
+                    //                               2 is var x14,
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x14")
+                        .WithArguments("x14")
+                        .WithLocation(99, 40)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13195,7 +15258,12 @@ public unsafe class X
             Assert.Equal(3, x4Ref.Length);
             AssertContainedInDeclaratorArguments(x4Decl);
             VerifyNotAPatternLocal(model, x4Ref[0]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x4Decl, x4Ref[1], x4Ref[2]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x4Decl,
+                x4Ref[1],
+                x4Ref[2]
+            );
 
             var x6Decl = GetPatternDeclarations(tree, "x6").Single();
             var x6Ref = GetReferences(tree, "x6").ToArray();
@@ -13214,7 +15282,12 @@ public unsafe class X
             var x8Ref = GetReferences(tree, "x8").ToArray();
             Assert.Equal(3, x8Ref.Length);
             AssertContainedInDeclaratorArguments(x8Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x8Decl, x8Ref[0], x8Ref[1]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x8Decl,
+                x8Ref[0],
+                x8Ref[1]
+            );
             VerifyNotInScope(model, x8Ref[2]);
 
             var x9Decl = GetPatternDeclarations(tree, "x9").ToArray();
@@ -13222,8 +15295,18 @@ public unsafe class X
             Assert.Equal(2, x9Decl.Length);
             Assert.Equal(4, x9Ref.Length);
             AssertContainedInDeclaratorArguments(x9Decl);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[0], x9Ref[0], x9Ref[1]);
-            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(model, x9Decl[1], x9Ref[2], x9Ref[3]);
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[0],
+                x9Ref[0],
+                x9Ref[1]
+            );
+            VerifyModelForDeclarationOrVarSimplePatternWithoutDataFlow(
+                model,
+                x9Decl[1],
+                x9Ref[2],
+                x9Ref[3]
+            );
 
             var y10Ref = GetReferences(tree, "y10").ToArray();
             Assert.Equal(2, y10Ref.Length);
@@ -13246,7 +15329,7 @@ public unsafe class X
         public void Scope_DeclaratorArguments_14()
         {
             var source =
-@"
+                @"
 public unsafe class X
 {
     public static void Main()
@@ -13293,29 +15376,46 @@ public unsafe class X
     }
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true), parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                        (int)ErrorCode.ERR_SyntaxError,
-                                        (int)ErrorCode.ERR_UnexpectedToken,
-                                        (int)ErrorCode.WRN_UnreferencedVar,
-                                        (int)ErrorCode.ERR_FixedMustInit,
-                                        (int)ErrorCode.ERR_UseDefViolation,
-                                        (int)ErrorCode.ERR_CloseParenExpected
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_BadVarDecl,
+                (int)ErrorCode.ERR_SyntaxError,
+                (int)ErrorCode.ERR_UnexpectedToken,
+                (int)ErrorCode.WRN_UnreferencedVar,
+                (int)ErrorCode.ERR_FixedMustInit,
+                (int)ErrorCode.ERR_UseDefViolation,
+                (int)ErrorCode.ERR_CloseParenExpected,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (14,44): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //                          Dummy(true is var x1 && x1)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(14, 44),
-                // (23,21): error CS0128: A local variable or function named 'x2' is already defined in this scope
-                //                     x2 = Dummy())
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2").WithArguments("x2").WithLocation(23, 21),
-                // (32,43): error CS0128: A local variable or function named 'x3' is already defined in this scope
-                //                       p(Dummy(true is var x3 && x3)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3").WithArguments("x3").WithLocation(32, 43),
-                // (41,44): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //                       p2(Dummy(true is var x4 && x4)))
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(41, 44)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (14,44): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //                          Dummy(true is var x1 && x1)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(14, 44),
+                    // (23,21): error CS0128: A local variable or function named 'x2' is already defined in this scope
+                    //                     x2 = Dummy())
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(23, 21),
+                    // (32,43): error CS0128: A local variable or function named 'x3' is already defined in this scope
+                    //                       p(Dummy(true is var x3 && x3)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(32, 43),
+                    // (41,44): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //                       p2(Dummy(true is var x4 && x4)))
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(41, 44)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13356,7 +15456,7 @@ public unsafe class X
         public void Scope_DeclaratorArguments_15()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -13380,16 +15480,27 @@ public class X
     bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_CStyleArray,
-                                        (int)ErrorCode.ERR_ArraySizeInDeclaration,
-                                        (int)ErrorCode.WRN_UnreferencedField
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_CStyleArray,
+                (int)ErrorCode.ERR_ArraySizeInDeclaration,
+                (int)ErrorCode.WRN_UnreferencedField,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (20,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(20, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (20,27): error CS0103: The name 'x7' does not exist in the current context
+                    //     void Test73() { Dummy(x7, 3); }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(20, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13433,7 +15544,7 @@ public class X
         public void Scope_DeclaratorArguments_16()
         {
             var source =
-@"
+                @"
 public unsafe struct X
 {
     public static void Main()
@@ -13458,26 +15569,43 @@ public unsafe struct X
     bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true), parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_CStyleArray,
-                                        (int)ErrorCode.ERR_ArraySizeInDeclaration,
-                                        (int)ErrorCode.WRN_UnreferencedField,
-                                        (int)ErrorCode.ERR_NoImplicitConv
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_CStyleArray,
+                (int)ErrorCode.ERR_ArraySizeInDeclaration,
+                (int)ErrorCode.WRN_UnreferencedField,
+                (int)ErrorCode.ERR_NoImplicitConv,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (10,18): error CS0841: Cannot use local variable 'x4' before it is declared
-                //     bool Test4  [x4 && 4 is var x4];
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4").WithArguments("x4").WithLocation(10, 18),
-                // (13,28): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //                  52 is var x5 && 
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(13, 28),
-                // (20,25): error CS0103: The name 'x7' does not exist in the current context
-                //     bool Test72  [Dummy(x7, 2)]; 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(20, 25),
-                // (21,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(21, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (10,18): error CS0841: Cannot use local variable 'x4' before it is declared
+                    //     bool Test4  [x4 && 4 is var x4];
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(10, 18),
+                    // (13,28): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                    //                  52 is var x5 &&
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(13, 28),
+                    // (20,25): error CS0103: The name 'x7' does not exist in the current context
+                    //     bool Test72  [Dummy(x7, 2)];
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(20, 25),
+                    // (21,27): error CS0103: The name 'x7' does not exist in the current context
+                    //     void Test73() { Dummy(x7, 3); }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(21, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13521,7 +15649,7 @@ public unsafe struct X
         public void Scope_DeclaratorArguments_17()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -13546,15 +15674,26 @@ public class X
     bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_CStyleArray,
-                                        (int)ErrorCode.ERR_ArraySizeInDeclaration
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_CStyleArray,
+                (int)ErrorCode.ERR_ArraySizeInDeclaration,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (21,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(21, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (21,27): error CS0103: The name 'x7' does not exist in the current context
+                    //     void Test73() { Dummy(x7, 3); }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(21, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13598,7 +15737,7 @@ public class X
         public void Scope_DeclaratorArguments_18()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -13623,17 +15762,28 @@ public class X
     bool Dummy(params object[] x) {return true;}
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe, parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_CStyleArray,
-                                        (int)ErrorCode.ERR_ArraySizeInDeclaration,
-                                        (int)ErrorCode.ERR_EventNotDelegate,
-                                        (int)ErrorCode.WRN_UnreferencedEvent
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe,
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_CStyleArray,
+                (int)ErrorCode.ERR_ArraySizeInDeclaration,
+                (int)ErrorCode.ERR_EventNotDelegate,
+                (int)ErrorCode.WRN_UnreferencedEvent,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (21,27): error CS0103: The name 'x7' does not exist in the current context
-                //     void Test73() { Dummy(x7, 3); } 
-                Diagnostic(ErrorCode.ERR_NameNotInContext, "x7").WithArguments("x7").WithLocation(21, 27)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (21,27): error CS0103: The name 'x7' does not exist in the current context
+                    //     void Test73() { Dummy(x7, 3); }
+                    Diagnostic(ErrorCode.ERR_NameNotInContext, "x7")
+                        .WithArguments("x7")
+                        .WithLocation(21, 27)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13677,7 +15827,7 @@ public class X
         public void Scope_DeclaratorArguments_19()
         {
             var source =
-@"
+                @"
 public unsafe struct X
 {
     public static void Main()
@@ -13687,20 +15837,32 @@ public unsafe struct X
     fixed bool d[2], Test3 (string.Empty is var x3);
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true), parseOptions: TestOptions.Regular);
-            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl,
-                                      };
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular
+            );
+            int[] exclude = new int[] { (int)ErrorCode.ERR_BadVarDecl };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (8,28): error CS1003: Syntax error, '[' expected
-                //     fixed bool d[2], Test3 (string.Empty is var x3);
-                Diagnostic(ErrorCode.ERR_SyntaxError, "(").WithArguments("[").WithLocation(8, 28),
-                // (8,51): error CS1003: Syntax error, ']' expected
-                //     fixed bool d[2], Test3 (string.Empty is var x3);
-                Diagnostic(ErrorCode.ERR_SyntaxError, ")").WithArguments("]").WithLocation(8, 51),
-                // (8,29): error CS0029: Cannot implicitly convert type 'bool' to 'int'
-                //     fixed bool d[2], Test3 (string.Empty is var x3);
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty is var x3").WithArguments("bool", "int").WithLocation(8, 29)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (8,28): error CS1003: Syntax error, '[' expected
+                    //     fixed bool d[2], Test3 (string.Empty is var x3);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, "(")
+                        .WithArguments("[")
+                        .WithLocation(8, 28),
+                    // (8,51): error CS1003: Syntax error, ']' expected
+                    //     fixed bool d[2], Test3 (string.Empty is var x3);
+                    Diagnostic(ErrorCode.ERR_SyntaxError, ")")
+                        .WithArguments("]")
+                        .WithLocation(8, 51),
+                    // (8,29): error CS0029: Cannot implicitly convert type 'bool' to 'int'
+                    //     fixed bool d[2], Test3 (string.Empty is var x3);
+                    Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty is var x3")
+                        .WithArguments("bool", "int")
+                        .WithLocation(8, 29)
                 );
 
             var tree = compilation.SyntaxTrees.Single();
@@ -13715,7 +15877,7 @@ public unsafe struct X
         public void Scope_DeclaratorArguments_20()
         {
             var source =
-@"
+                @"
 public unsafe struct X
 {
     public static void Main()
@@ -13725,13 +15887,19 @@ public unsafe struct X
     fixed bool Test3[string.Empty is var x3];
 }
 ";
-            var compilation = CreateCompilation(source, options: TestOptions.DebugExe.WithAllowUnsafe(true), parseOptions: TestOptions.Regular);
+            var compilation = CreateCompilation(
+                source,
+                options: TestOptions.DebugExe.WithAllowUnsafe(true),
+                parseOptions: TestOptions.Regular
+            );
 
             compilation.VerifyDiagnostics(
                 // (8,22): error CS0029: Cannot implicitly convert type 'bool' to 'int'
                 //     fixed bool Test3[string.Empty is var x3];
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty is var x3").WithArguments("bool", "int").WithLocation(8, 22)
-                );
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "string.Empty is var x3")
+                    .WithArguments("bool", "int")
+                    .WithLocation(8, 22)
+            );
 
             var tree = compilation.SyntaxTrees.Single();
             var model = compilation.GetSemanticModel(tree);
@@ -13744,7 +15912,8 @@ public unsafe struct X
         [Fact]
         public void DeclarationInsideNameof()
         {
-            string source = @"
+            string source =
+                @"
 class Program
 {
     static void Main(int i)
@@ -13759,14 +15928,19 @@ class Program
             comp.VerifyDiagnostics(
                 // (6,27): error CS8081: Expression does not have a name.
                 //         string s = nameof(M(i is var x1, x1)).ToString();
-                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(i is var x1, x1)").WithLocation(6, 27),
+                Diagnostic(ErrorCode.ERR_ExpressionHasNoName, "M(i is var x1, x1)")
+                    .WithLocation(6, 27),
                 // (7,21): error CS0029: Cannot implicitly convert type 'int' to 'string'
                 //         string s1 = x1;
-                Diagnostic(ErrorCode.ERR_NoImplicitConv, "x1").WithArguments("int", "string").WithLocation(7, 21),
+                Diagnostic(ErrorCode.ERR_NoImplicitConv, "x1")
+                    .WithArguments("int", "string")
+                    .WithLocation(7, 21),
                 // (7,21): error CS0165: Use of unassigned local variable 'x1'
                 //         string s1 = x1;
-                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1").WithArguments("x1").WithLocation(7, 21)
-                );
+                Diagnostic(ErrorCode.ERR_UseDefViolation, "x1")
+                    .WithArguments("x1")
+                    .WithLocation(7, 21)
+            );
 
             var tree = comp.SyntaxTrees.First();
             var model = comp.GetSemanticModel(tree);
@@ -13783,7 +15957,7 @@ class Program
         public void ScopeOfPatternVariables_ArrayDeclarationInvalidDimensions()
         {
             var source =
-@"
+                @"
 public class X
 {
     public static void Main()
@@ -13864,105 +16038,155 @@ public class X
 ";
             var compilation = CreateCompilation(source, options: TestOptions.DebugExe);
 
-            int[] exclude = new int[] { (int)ErrorCode.ERR_NoImplicitConv, (int)ErrorCode.WRN_UnreferencedVar };
+            int[] exclude = new int[]
+            {
+                (int)ErrorCode.ERR_NoImplicitConv,
+                (int)ErrorCode.WRN_UnreferencedVar,
+            };
 
-            compilation.GetDiagnostics().Where(d => !exclude.Contains(d.Code)).Verify(
-                // (10,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x1, x1] _1;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]").WithLocation(10, 12),
-                // (12,16): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //             int[true is var x1, x1] _2;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]").WithLocation(12, 16),
-                // (12,29): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //             int[true is var x1, x1] _2;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1").WithArguments("x1").WithLocation(12, 29),
-                // (14,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x1, x1] _3;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]").WithLocation(14, 12),
-                // (14,25): error CS0128: A local variable or function named 'x1' is already defined in this scope
-                //         int[true is var x1, x1] _3;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1").WithArguments("x1").WithLocation(14, 25),
-                // (19,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x2, true is var x2] _4;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x2, true is var x2]").WithLocation(19, 12),
-                // (19,13): error CS0841: Cannot use local variable 'x2' before it is declared
-                //         int[x2, true is var x2] _4;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2").WithArguments("x2").WithLocation(19, 13),
-                // (24,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x3, x3] _5;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x3, x3]").WithLocation(24, 12),
-                // (24,25): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
-                //         int[true is var x3, x3] _5;
-                Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3").WithArguments("x3").WithLocation(24, 25),
-                // (29,13): warning CS0219: The variable 'x4' is assigned but its value is never used
-                //         var x4 = 11;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x4").WithArguments("x4").WithLocation(29, 13),
-                // (30,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x4] _6;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x4]").WithLocation(30, 12),
-                // (31,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x4, x4] _7;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x4, x4]").WithLocation(31, 12),
-                // (31,25): error CS0128: A local variable or function named 'x4' is already defined in this scope
-                //         int[true is var x4, x4] _7;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4").WithArguments("x4").WithLocation(31, 25),
-                // (36,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x5, x5] _8;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x5, x5]").WithLocation(36, 12),
-                // (37,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
-                //         var x5 = 11;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5").WithArguments("x5").WithLocation(37, 13),
-                // (37,13): warning CS0219: The variable 'x5' is assigned but its value is never used
-                //         var x5 = 11;
-                Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5").WithArguments("x5").WithLocation(37, 13),
-                // (38,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x5] _9;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x5]").WithLocation(38, 12),
-                // (43,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x6, x6, false is var x6, x6] _10;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x6, x6, false is var x6, x6]").WithLocation(43, 12),
-                // (43,46): error CS0128: A local variable or function named 'x6' is already defined in this scope
-                //         int[true is var x6, x6, false is var x6, x6] _10;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6").WithArguments("x6").WithLocation(43, 46),
-                // (49,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //             int[true is var x7, x7] _11;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "int[true is var x7, x7] _11;").WithLocation(49, 13),
-                // (49,16): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //             int[true is var x7, x7] _11;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x7, x7]").WithLocation(49, 16),
-                // (57,25): error CS1023: Embedded statement cannot be a declaration or labeled statement
-                //                         int[true is var x8, x8] _12;
-                Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "int[true is var x8, x8] _12;").WithLocation(57, 25),
-                // (57,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //                         int[true is var x8, x8] _12;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x8, x8]").WithLocation(57, 28),
-                // (63,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x9] _13;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x9]").WithLocation(63, 12),
-                // (63,13): error CS0841: Cannot use local variable 'x9' before it is declared
-                //         int[x9] _13;
-                Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9").WithArguments("x9").WithLocation(63, 13),
-                // (64,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x9, x9] _13;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x9, x9]").WithLocation(64, 12),
-                // (64,33): error CS0128: A local variable or function named '_13' is already defined in this scope
-                //         int[true is var x9, x9] _13;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "_13").WithArguments("_13").WithLocation(64, 33),
-                // (69,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x10, x10] _14;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x10, x10]").WithLocation(69, 12),
-                // (70,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x10] _15;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x10]").WithLocation(70, 12),
-                // (75,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[true is var x11, x11] x11;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x11, x11]").WithLocation(75, 12),
-                // (75,35): error CS0128: A local variable or function named 'x11' is already defined in this scope
-                //         int[true is var x11, x11] x11;
-                Diagnostic(ErrorCode.ERR_LocalDuplicate, "x11").WithArguments("x11").WithLocation(75, 35),
-                // (76,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
-                //         int[x11] _16;
-                Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x11]").WithLocation(76, 12)
+            compilation
+                .GetDiagnostics()
+                .Where(d => !exclude.Contains(d.Code))
+                .Verify(
+                    // (10,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x1, x1] _1;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]")
+                        .WithLocation(10, 12),
+                    // (12,16): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //             int[true is var x1, x1] _2;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]")
+                        .WithLocation(12, 16),
+                    // (12,29): error CS0136: A local or parameter named 'x1' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //             int[true is var x1, x1] _2;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(12, 29),
+                    // (14,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x1, x1] _3;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x1, x1]")
+                        .WithLocation(14, 12),
+                    // (14,25): error CS0128: A local variable or function named 'x1' is already defined in this scope
+                    //         int[true is var x1, x1] _3;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x1")
+                        .WithArguments("x1")
+                        .WithLocation(14, 25),
+                    // (19,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x2, true is var x2] _4;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x2, true is var x2]")
+                        .WithLocation(19, 12),
+                    // (19,13): error CS0841: Cannot use local variable 'x2' before it is declared
+                    //         int[x2, true is var x2] _4;
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x2")
+                        .WithArguments("x2")
+                        .WithLocation(19, 13),
+                    // (24,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x3, x3] _5;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x3, x3]")
+                        .WithLocation(24, 12),
+                    // (24,25): error CS0136: A local or parameter named 'x3' cannot be declared in this scope because that name is used in an enclosing local scope to define a local or parameter
+                    //         int[true is var x3, x3] _5;
+                    Diagnostic(ErrorCode.ERR_LocalIllegallyOverrides, "x3")
+                        .WithArguments("x3")
+                        .WithLocation(24, 25),
+                    // (29,13): warning CS0219: The variable 'x4' is assigned but its value is never used
+                    //         var x4 = 11;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(29, 13),
+                    // (30,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x4] _6;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x4]").WithLocation(30, 12),
+                    // (31,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x4, x4] _7;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x4, x4]")
+                        .WithLocation(31, 12),
+                    // (31,25): error CS0128: A local variable or function named 'x4' is already defined in this scope
+                    //         int[true is var x4, x4] _7;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x4")
+                        .WithArguments("x4")
+                        .WithLocation(31, 25),
+                    // (36,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x5, x5] _8;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x5, x5]")
+                        .WithLocation(36, 12),
+                    // (37,13): error CS0128: A local variable or function named 'x5' is already defined in this scope
+                    //         var x5 = 11;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(37, 13),
+                    // (37,13): warning CS0219: The variable 'x5' is assigned but its value is never used
+                    //         var x5 = 11;
+                    Diagnostic(ErrorCode.WRN_UnreferencedVarAssg, "x5")
+                        .WithArguments("x5")
+                        .WithLocation(37, 13),
+                    // (38,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x5] _9;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x5]").WithLocation(38, 12),
+                    // (43,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x6, x6, false is var x6, x6] _10;
+                    Diagnostic(
+                            ErrorCode.ERR_ArraySizeInDeclaration,
+                            "[true is var x6, x6, false is var x6, x6]"
+                        )
+                        .WithLocation(43, 12),
+                    // (43,46): error CS0128: A local variable or function named 'x6' is already defined in this scope
+                    //         int[true is var x6, x6, false is var x6, x6] _10;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x6")
+                        .WithArguments("x6")
+                        .WithLocation(43, 46),
+                    // (49,13): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //             int[true is var x7, x7] _11;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "int[true is var x7, x7] _11;")
+                        .WithLocation(49, 13),
+                    // (49,16): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //             int[true is var x7, x7] _11;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x7, x7]")
+                        .WithLocation(49, 16),
+                    // (57,25): error CS1023: Embedded statement cannot be a declaration or labeled statement
+                    //                         int[true is var x8, x8] _12;
+                    Diagnostic(ErrorCode.ERR_BadEmbeddedStmt, "int[true is var x8, x8] _12;")
+                        .WithLocation(57, 25),
+                    // (57,28): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //                         int[true is var x8, x8] _12;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x8, x8]")
+                        .WithLocation(57, 28),
+                    // (63,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x9] _13;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x9]").WithLocation(63, 12),
+                    // (63,13): error CS0841: Cannot use local variable 'x9' before it is declared
+                    //         int[x9] _13;
+                    Diagnostic(ErrorCode.ERR_VariableUsedBeforeDeclaration, "x9")
+                        .WithArguments("x9")
+                        .WithLocation(63, 13),
+                    // (64,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x9, x9] _13;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x9, x9]")
+                        .WithLocation(64, 12),
+                    // (64,33): error CS0128: A local variable or function named '_13' is already defined in this scope
+                    //         int[true is var x9, x9] _13;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "_13")
+                        .WithArguments("_13")
+                        .WithLocation(64, 33),
+                    // (69,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x10, x10] _14;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x10, x10]")
+                        .WithLocation(69, 12),
+                    // (70,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x10] _15;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x10]")
+                        .WithLocation(70, 12),
+                    // (75,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[true is var x11, x11] x11;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[true is var x11, x11]")
+                        .WithLocation(75, 12),
+                    // (75,35): error CS0128: A local variable or function named 'x11' is already defined in this scope
+                    //         int[true is var x11, x11] x11;
+                    Diagnostic(ErrorCode.ERR_LocalDuplicate, "x11")
+                        .WithArguments("x11")
+                        .WithLocation(75, 35),
+                    // (76,12): error CS0270: Array size cannot be specified in a variable declaration (try initializing with a 'new' expression)
+                    //         int[x11] _16;
+                    Diagnostic(ErrorCode.ERR_ArraySizeInDeclaration, "[x11]").WithLocation(76, 12)
                 );
 
             var tree = compilation.SyntaxTrees.Single();

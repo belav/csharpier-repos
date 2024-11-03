@@ -18,6 +18,5 @@ internal class WrappedException : Exception
 
     public string Type { get; }
 
-    public override string ToString()
-        => _stackTrace;
+    public override string ToString() => _stackTrace;
 }

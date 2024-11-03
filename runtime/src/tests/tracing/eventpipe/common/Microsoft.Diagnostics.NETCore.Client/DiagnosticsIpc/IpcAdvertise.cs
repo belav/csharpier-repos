@@ -2,8 +2,8 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using System.Linq;
 using System.IO;
+using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
@@ -13,9 +13,9 @@ namespace Microsoft.Diagnostics.NETCore.Client
     /**
      * ==ADVERTISE PROTOCOL==
      * Before standard IPC Protocol communication can occur on a client-mode connection
-     * the runtime must advertise itself over the connection. ALL SUBSEQUENT COMMUNICATION 
+     * the runtime must advertise itself over the connection. ALL SUBSEQUENT COMMUNICATION
      * IS STANDARD DIAGNOSTICS IPC PROTOCOL COMMUNICATION.
-     * 
+     *
      * The flow for Advertise is a one-way burst of 34 bytes consisting of
      * 8 bytes  - "ADVR_V1\0" (ASCII chars + null byte)
      * 16 bytes - CLR Instance Cookie (little-endian)
@@ -45,14 +45,15 @@ namespace Microsoft.Diagnostics.NETCore.Client
             int totalRead = 0;
             do
             {
-                int read = await stream.ReadAsync(buffer, totalRead, buffer.Length - totalRead, token).ConfigureAwait(false);
+                int read = await stream
+                    .ReadAsync(buffer, totalRead, buffer.Length - totalRead, token)
+                    .ConfigureAwait(false);
                 if (0 == read)
                 {
                     throw new EndOfStreamException();
                 }
                 totalRead += read;
-            }
-            while (totalRead < buffer.Length);
+            } while (totalRead < buffer.Length);
 
             int index = 0;
             byte[] magic = new byte[Magic_V1.Length];
@@ -79,7 +80,12 @@ namespace Microsoft.Diagnostics.NETCore.Client
             return new IpcAdvertise(magic, cookie, pid, future);
         }
 
-        public static async Task SerializeAsync(Stream stream, Guid runtimeInstanceCookie, ulong processId, CancellationToken token)
+        public static async Task SerializeAsync(
+            Stream stream,
+            Guid runtimeInstanceCookie,
+            ulong processId,
+            CancellationToken token
+        )
         {
             int index = 0;
             byte[] buffer = new byte[IpcAdvertiseV1SizeInBytes];

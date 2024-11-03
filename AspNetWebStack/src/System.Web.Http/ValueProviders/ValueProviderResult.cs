@@ -15,9 +15,7 @@ namespace System.Web.Http.ValueProviders
         private CultureInfo _instanceCulture;
 
         // default constructor so that subclassed types can set the properties themselves
-        protected ValueProviderResult()
-        {
-        }
+        protected ValueProviderResult() { }
 
         public ValueProviderResult(object rawValue, string attemptedValue, CultureInfo culture)
         {
@@ -43,7 +41,11 @@ namespace System.Web.Http.ValueProviders
 
         public object RawValue { get; protected set; }
 
-        private static object ConvertSimpleType(CultureInfo culture, object value, Type destinationType)
+        private static object ConvertSimpleType(
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             if (value == null || destinationType.IsInstanceOfType(value))
             {
@@ -79,24 +81,36 @@ namespace System.Web.Http.ValueProviders
                     return ConvertSimpleType(culture, value, underlyingType);
                 }
 
-                throw Error.InvalidOperation(SRResources.ValueProviderResult_NoConverterExists, value.GetType(), destinationType);
+                throw Error.InvalidOperation(
+                    SRResources.ValueProviderResult_NoConverterExists,
+                    value.GetType(),
+                    destinationType
+                );
             }
 
             try
             {
                 return canConvertFrom
-                           ? converter.ConvertFrom(null, culture, value)
-                           : converter.ConvertTo(null, culture, value, destinationType);
+                    ? converter.ConvertFrom(null, culture, value)
+                    : converter.ConvertTo(null, culture, value, destinationType);
             }
             catch (Exception ex)
             {
-                throw Error.InvalidOperation(ex, SRResources.ValueProviderResult_ConversionThrew, value.GetType(), destinationType);
+                throw Error.InvalidOperation(
+                    ex,
+                    SRResources.ValueProviderResult_ConversionThrew,
+                    value.GetType(),
+                    destinationType
+                );
             }
         }
 
         public object ConvertTo(Type type)
         {
-            return ConvertTo(type, null /* culture */);
+            return ConvertTo(
+                type,
+                null /* culture */
+            );
         }
 
         public virtual object ConvertTo(Type type, CultureInfo culture)
@@ -122,7 +136,11 @@ namespace System.Web.Http.ValueProviders
             return UnwrapPossibleListType(cultureToUse, value, type);
         }
 
-        private static object UnwrapPossibleListType(CultureInfo culture, object value, Type destinationType)
+        private static object UnwrapPossibleListType(
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
             // array conversion results in four cases, as below
             IList valueAsList = value as IList;
@@ -132,10 +150,17 @@ namespace System.Web.Http.ValueProviders
                 if (valueAsList != null)
                 {
                     // case 1: both destination + source type are lists, so convert each element
-                    IList converted = Array.CreateInstance(destinationElementType, valueAsList.Count);
+                    IList converted = Array.CreateInstance(
+                        destinationElementType,
+                        valueAsList.Count
+                    );
                     for (int i = 0; i < valueAsList.Count; i++)
                     {
-                        converted[i] = ConvertSimpleType(culture, valueAsList[i], destinationElementType);
+                        converted[i] = ConvertSimpleType(
+                            culture,
+                            valueAsList[i],
+                            destinationElementType
+                        );
                     }
                     return converted;
                 }

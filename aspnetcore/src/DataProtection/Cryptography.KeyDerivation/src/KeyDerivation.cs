@@ -25,7 +25,13 @@ public static class KeyDerivation
     /// <remarks>
     /// The PBKDF2 algorithm is specified in RFC 2898.
     /// </remarks>
-    public static byte[] Pbkdf2(string password, byte[] salt, KeyDerivationPrf prf, int iterationCount, int numBytesRequested)
+    public static byte[] Pbkdf2(
+        string password,
+        byte[] salt,
+        KeyDerivationPrf prf,
+        int iterationCount,
+        int numBytesRequested
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(password);
         ArgumentNullThrowHelper.ThrowIfNull(salt);
@@ -38,6 +44,12 @@ public static class KeyDerivation
         ArgumentOutOfRangeThrowHelper.ThrowIfNegativeOrZero(iterationCount);
         ArgumentOutOfRangeThrowHelper.ThrowIfNegativeOrZero(numBytesRequested);
 
-        return Pbkdf2Util.Pbkdf2Provider.DeriveKey(password, salt, prf, iterationCount, numBytesRequested);
+        return Pbkdf2Util.Pbkdf2Provider.DeriveKey(
+            password,
+            salt,
+            prf,
+            iterationCount,
+            numBytesRequested
+        );
     }
 }

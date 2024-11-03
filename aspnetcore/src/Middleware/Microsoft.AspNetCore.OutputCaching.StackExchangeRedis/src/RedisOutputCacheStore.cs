@@ -19,7 +19,10 @@ using StackExchange.Redis;
 
 namespace Microsoft.AspNetCore.OutputCaching.StackExchangeRedis;
 
-internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBufferStore, IDisposable
+internal partial class RedisOutputCacheStore
+    : IOutputCacheStore,
+        IOutputCacheBufferStore,
+        IDisposable
 {
     private readonly RedisOutputCacheOptions _options;
     private readonly ILogger _logger;
@@ -27,7 +30,10 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
     private readonly RedisKey _tagKeyPrefix;
     private readonly RedisKey _tagMasterKey;
     private readonly RedisKey[] _tagMasterKeyArray; // for use with Lua if needed (to avoid array allocs)
-    private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(initialCount: 1, maxCount: 1);
+    private readonly SemaphoreSlim _connectionLock = new SemaphoreSlim(
+        initialCount: 1,
+        maxCount: 1
+    );
     private readonly CancellationTokenSource _disposalCancellation = new();
 
     private bool _disposed;
@@ -35,12 +41,14 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
     private long _lastConnectTicks = DateTimeOffset.UtcNow.Ticks;
     private long _firstErrorTimeTicks;
     private long _previousErrorTimeTicks;
-    private bool _useMultiExec, _use62Features;
+    private bool _useMultiExec,
+        _use62Features;
 
     internal bool GarbageCollectionEnabled { get; set; } = true;
 
     // Never reconnect within 60 seconds of the last attempt to connect or reconnect.
     private readonly TimeSpan ReconnectMinInterval = TimeSpan.FromSeconds(60);
+
     // Only reconnect if errors have occurred for at least the last 30 seconds.
     // This count resets if there are no errors for 30 seconds
     private readonly TimeSpan ReconnectErrorThreshold = TimeSpan.FromSeconds(30);
@@ -51,11 +59,12 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
     /// <param name="optionsAccessor">The configuration options.</param>
     public RedisOutputCacheStore(IOptions<RedisOutputCacheOptions> optionsAccessor) // TODO: OC-specific options?
         : this(optionsAccessor, NullLoggerFactory.Instance.CreateLogger<RedisOutputCacheStore>())
-    {
-    }
+    { }
 
 #if DEBUG
-    internal async ValueTask<string> GetConfigurationInfoAsync(CancellationToken cancellationToken = default)
+    internal async ValueTask<string> GetConfigurationInfoAsync(
+        CancellationToken cancellationToken = default
+    )
     {
         await ConnectAsync(cancellationToken).ConfigureAwait(false);
         return $"redis output-cache; MULTI/EXEC: {_useMultiExec}, v6.2+: {_use62Features}";
@@ -67,7 +76,10 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
     /// </summary>
     /// <param name="optionsAccessor">The configuration options.</param>
     /// <param name="logger">The logger.</param>
-    internal RedisOutputCacheStore(IOptions<RedisOutputCacheOptions> optionsAccessor, ILogger logger)
+    internal RedisOutputCacheStore(
+        IOptions<RedisOutputCacheOptions> optionsAccessor,
+        ILogger logger
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(optionsAccessor);
         ArgumentNullThrowHelper.ThrowIfNull(logger);
@@ -85,7 +97,12 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         _tagMasterKey = (RedisKey)Encoding.UTF8.GetBytes(_options.InstanceName + "__MSOCT");
         _tagMasterKeyArray = new[] { _tagMasterKey };
 
-        _ = Task.Factory.StartNew(RunGarbageCollectionLoopAsync, default, TaskCreationOptions.LongRunning, TaskScheduler.Current);
+        _ = Task.Factory.StartNew(
+            RunGarbageCollectionLoopAsync,
+            default,
+            TaskCreationOptions.LongRunning,
+            TaskScheduler.Current
+        );
     }
 
     private async Task RunGarbageCollectionLoopAsync()
@@ -102,7 +119,11 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
                 {
                     if (GarbageCollectionEnabled)
                     {
-                        await ExecuteGarbageCollectionAsync(GetExpirationTimestamp(TimeSpan.Zero), _disposalCancellation.Token).ConfigureAwait(false);
+                        await ExecuteGarbageCollectionAsync(
+                                GetExpirationTimestamp(TimeSpan.Zero),
+                                _disposalCancellation.Token
+                            )
+                            .ConfigureAwait(false);
                     }
                 }
                 catch (OperationCanceledException) when (_disposed)
@@ -123,14 +144,26 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         }
     }
 
-    internal async ValueTask<long?> ExecuteGarbageCollectionAsync(long keepValuesGreaterThan, CancellationToken cancellationToken = default)
+    internal async ValueTask<long?> ExecuteGarbageCollectionAsync(
+        long keepValuesGreaterThan,
+        CancellationToken cancellationToken = default
+    )
     {
         var cache = await ConnectAsync(CancellationToken.None).ConfigureAwait(false);
 
         var gcKey = _tagMasterKey.Append("GC");
         var gcLifetime = TimeSpan.FromMinutes(5);
         // value is purely placeholder; it is the existence that matters
-        if (!await cache.StringSetAsync(gcKey, DateTime.UtcNow.ToString(CultureInfo.InvariantCulture), gcLifetime, when: When.NotExists).ConfigureAwait(false))
+        if (
+            !await cache
+                .StringSetAsync(
+                    gcKey,
+                    DateTime.UtcNow.ToString(CultureInfo.InvariantCulture),
+                    gcLifetime,
+                    when: When.NotExists
+                )
+                .ConfigureAwait(false)
+        )
         {
             return null; // competition from another node; not even "nothing"
         }
@@ -144,9 +177,20 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
             // for the individual tag sorted-sets, and also the master sorted-set
             const int EXTEND_EVERY = 250; // some non-trivial number of work
             int extendCountdown = EXTEND_EVERY;
-            await foreach (var entry in cache.SortedSetScanAsync(_tagMasterKey).WithCancellation(cancellationToken))
+            await foreach (
+                var entry in cache
+                    .SortedSetScanAsync(_tagMasterKey)
+                    .WithCancellation(cancellationToken)
+            )
             {
-                await cache.SortedSetRemoveRangeByScoreAsync(GetTagKey((string)entry.Element!), start: 0, stop: keepValuesGreaterThan, flags: GarbageCollectionFlags).ConfigureAwait(false);
+                await cache
+                    .SortedSetRemoveRangeByScoreAsync(
+                        GetTagKey((string)entry.Element!),
+                        start: 0,
+                        stop: keepValuesGreaterThan,
+                        flags: GarbageCollectionFlags
+                    )
+                    .ConfigureAwait(false);
                 if (--extendCountdown <= 0)
                 {
                     await cache.KeyExpireAsync(gcKey, gcLifetime).ConfigureAwait(false);
@@ -154,7 +198,13 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
                 }
             }
             // paying latency on the final master-tag purge: is fine
-            return await cache.SortedSetRemoveRangeByScoreAsync(_tagMasterKey, start: 0, stop: keepValuesGreaterThan).ConfigureAwait(false);
+            return await cache
+                .SortedSetRemoveRangeByScoreAsync(
+                    _tagMasterKey,
+                    start: 0,
+                    stop: keepValuesGreaterThan
+                )
+                .ConfigureAwait(false);
         }
         finally
         {
@@ -162,7 +212,10 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         }
     }
 
-    async ValueTask IOutputCacheStore.EvictByTagAsync(string tag, CancellationToken cancellationToken)
+    async ValueTask IOutputCacheStore.EvictByTagAsync(
+        string tag,
+        CancellationToken cancellationToken
+    )
     {
         var cache = await ConnectAsync(cancellationToken).ConfigureAwait(false);
         Debug.Assert(cache is not null);
@@ -172,20 +225,27 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         const CommandFlags DeleteFlags = CommandFlags.FireAndForget;
 
         var tagKey = GetTagKey(tag);
-        await foreach (var entry in cache.SortedSetScanAsync(tagKey).WithCancellation(cancellationToken))
+        await foreach (
+            var entry in cache.SortedSetScanAsync(tagKey).WithCancellation(cancellationToken)
+        )
         {
-            await cache.KeyDeleteAsync(GetValueKey((string)entry.Element!), DeleteFlags).ConfigureAwait(false);
-            await cache.SortedSetRemoveAsync(tagKey, entry.Element, DeleteFlags).ConfigureAwait(false);
+            await cache
+                .KeyDeleteAsync(GetValueKey((string)entry.Element!), DeleteFlags)
+                .ConfigureAwait(false);
+            await cache
+                .SortedSetRemoveAsync(tagKey, entry.Element, DeleteFlags)
+                .ConfigureAwait(false);
         }
     }
 
-    private RedisKey GetValueKey(string key)
-        => _valueKeyPrefix.Append(key);
+    private RedisKey GetValueKey(string key) => _valueKeyPrefix.Append(key);
 
-    private RedisKey GetTagKey(string tag)
-        => _tagKeyPrefix.Append(tag);
+    private RedisKey GetTagKey(string tag) => _tagKeyPrefix.Append(tag);
 
-    async ValueTask<byte[]?> IOutputCacheStore.GetAsync(string key, CancellationToken cancellationToken)
+    async ValueTask<byte[]?> IOutputCacheStore.GetAsync(
+        string key,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(key);
 
@@ -203,7 +263,11 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         }
     }
 
-    async ValueTask<bool> IOutputCacheBufferStore.TryGetAsync(string key, PipeWriter destination, CancellationToken cancellationToken)
+    async ValueTask<bool> IOutputCacheBufferStore.TryGetAsync(
+        string key,
+        PipeWriter destination,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullThrowHelper.ThrowIfNull(key);
         ArgumentNullThrowHelper.ThrowIfNull(destination);
@@ -234,13 +298,31 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         }
     }
 
-    ValueTask IOutputCacheStore.SetAsync(string key, byte[] value, string[]? tags, TimeSpan validFor, CancellationToken cancellationToken)
+    ValueTask IOutputCacheStore.SetAsync(
+        string key,
+        byte[] value,
+        string[]? tags,
+        TimeSpan validFor,
+        CancellationToken cancellationToken
+    )
     {
         ArgumentNullException.ThrowIfNull(value);
-        return ((IOutputCacheBufferStore)this).SetAsync(key, new ReadOnlySequence<byte>(value), tags.AsMemory(), validFor, cancellationToken);
+        return ((IOutputCacheBufferStore)this).SetAsync(
+            key,
+            new ReadOnlySequence<byte>(value),
+            tags.AsMemory(),
+            validFor,
+            cancellationToken
+        );
     }
 
-    async ValueTask IOutputCacheBufferStore.SetAsync(string key, ReadOnlySequence<byte> value, ReadOnlyMemory<string> tags, TimeSpan validFor, CancellationToken cancellationToken)
+    async ValueTask IOutputCacheBufferStore.SetAsync(
+        string key,
+        ReadOnlySequence<byte> value,
+        ReadOnlyMemory<string> tags,
+        TimeSpan validFor,
+        CancellationToken cancellationToken
+    )
     {
         var cache = await ConnectAsync(cancellationToken).ConfigureAwait(false);
         Debug.Assert(cache is not null);
@@ -280,23 +362,46 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
                 var tag = tags.Span[i];
                 if (_use62Features)
                 {
-                    await cache.SortedSetAddAsync(_tagMasterKey, tag, expiryTimestamp, SortedSetWhen.GreaterThan, TagCommandFlags).ConfigureAwait(false);
+                    await cache
+                        .SortedSetAddAsync(
+                            _tagMasterKey,
+                            tag,
+                            expiryTimestamp,
+                            SortedSetWhen.GreaterThan,
+                            TagCommandFlags
+                        )
+                        .ConfigureAwait(false);
                 }
                 else
                 {
                     // semantic equivalent of ZADD GT
                     const string ZADD_GT = """
-                    local oldScore = tonumber(redis.call('ZSCORE', KEYS[1], ARGV[2]))
-                    if oldScore == nil or oldScore < tonumber(ARGV[1]) then
-                        redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
-                    end
-                    """;
+                        local oldScore = tonumber(redis.call('ZSCORE', KEYS[1], ARGV[2]))
+                        if oldScore == nil or oldScore < tonumber(ARGV[1]) then
+                            redis.call('ZADD', KEYS[1], ARGV[1], ARGV[2])
+                        end
+                        """;
 
                     // note we're not sharing an ARGV array between tags here because then we'd need to wait on latency to avoid conflicts;
                     // in reality most caches have very limited tags (if any), so this is not perceived as an issue
-                    await cache.ScriptEvaluateAsync(ZADD_GT, _tagMasterKeyArray, new RedisValue[] { expiryTimestamp, tag }, TagCommandFlags).ConfigureAwait(false);
+                    await cache
+                        .ScriptEvaluateAsync(
+                            ZADD_GT,
+                            _tagMasterKeyArray,
+                            new RedisValue[] { expiryTimestamp, tag },
+                            TagCommandFlags
+                        )
+                        .ConfigureAwait(false);
                 }
-                await cache.SortedSetAddAsync(GetTagKey(tag), key, expiryTimestamp, SortedSetWhen.Always, TagCommandFlags).ConfigureAwait(false);
+                await cache
+                    .SortedSetAddAsync(
+                        GetTagKey(tag),
+                        key,
+                        expiryTimestamp,
+                        SortedSetWhen.Always,
+                        TagCommandFlags
+                    )
+                    .ConfigureAwait(false);
             }
         }
     }
@@ -321,6 +426,7 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
         }
         return ConnectSlowAsync(token);
     }
+
     private async ValueTask<IDatabase> ConnectSlowAsync(CancellationToken token)
     {
         await _connectionLock.WaitAsync(token).ConfigureAwait(false);
@@ -332,11 +438,15 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
                 IConnectionMultiplexer connection;
                 if (_options.ConnectionMultiplexerFactory is null)
                 {
-                    connection = await ConnectionMultiplexer.ConnectAsync(_options.GetConfiguredOptions("asp.net OC")).ConfigureAwait(false);
+                    connection = await ConnectionMultiplexer
+                        .ConnectAsync(_options.GetConfiguredOptions("asp.net OC"))
+                        .ConfigureAwait(false);
                 }
                 else
                 {
-                    connection = await _options.ConnectionMultiplexerFactory().ConfigureAwait(false);
+                    connection = await _options
+                        .ConnectionMultiplexerFactory()
+                        .ConfigureAwait(false);
                 }
 
                 PrepareConnection(connection);
@@ -365,7 +475,9 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
 
     private void OnRedisError(Exception exception, IDatabase cache)
     {
-        if (_options.UseForceReconnect && (exception is RedisConnectionException or SocketException))
+        if (
+            _options.UseForceReconnect && (exception is RedisConnectionException or SocketException)
+        )
         {
             var utcNow = DateTimeOffset.UtcNow;
             var previousConnectTime = ReadTimeTicks(ref _lastConnectTicks);
@@ -387,11 +499,12 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
             }
 
             TimeSpan elapsedSinceFirstError = utcNow - firstErrorTime;
-            TimeSpan elapsedSinceMostRecentError = utcNow - ReadTimeTicks(ref _previousErrorTimeTicks);
+            TimeSpan elapsedSinceMostRecentError =
+                utcNow - ReadTimeTicks(ref _previousErrorTimeTicks);
 
             bool shouldReconnect =
-                    elapsedSinceFirstError >= ReconnectErrorThreshold // Make sure we gave the multiplexer enough time to reconnect on its own if it could.
-                    && elapsedSinceMostRecentError <= ReconnectErrorThreshold; // Make sure we aren't working on stale data (e.g. if there was a gap in errors, don't reconnect yet).
+                elapsedSinceFirstError >= ReconnectErrorThreshold // Make sure we gave the multiplexer enough time to reconnect on its own if it could.
+                && elapsedSinceMostRecentError <= ReconnectErrorThreshold; // Make sure we aren't working on stale data (e.g. if there was a gap in errors, don't reconnect yet).
 
             // Update the previousErrorTime timestamp to be now (e.g. this reconnect request).
             WriteTimeTicks(ref _previousErrorTimeTicks, utcNow);
@@ -419,7 +532,9 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
 
     private void ValidateServerFeatures(IConnectionMultiplexer connection)
     {
-        int serverCount = 0, standaloneCount = 0, v62_Count = 0;
+        int serverCount = 0,
+            standaloneCount = 0,
+            v62_Count = 0;
         foreach (var ep in connection.GetEndPoints())
         {
             var server = connection.GetServer(ep);
@@ -443,7 +558,9 @@ internal partial class RedisOutputCacheStore : IOutputCacheStore, IOutputCacheBu
 
     private void TryRegisterProfiler(IConnectionMultiplexer connection)
     {
-        _ = connection ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
+        _ =
+            connection
+            ?? throw new InvalidOperationException($"{nameof(connection)} cannot be null.");
 
         if (_options.ProfilingSession is not null)
         {

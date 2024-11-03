@@ -53,16 +53,23 @@ namespace System.Management
                     return false;
                 }
 
-                return ((int)s_switchesRegKey.GetValue(c_WMIDisableCOMSecurity, -1 /* default */) == 1);
+                return (
+                    (int)
+                        s_switchesRegKey.GetValue(
+                            c_WMIDisableCOMSecurity,
+                            -1 /* default */
+                        ) == 1
+                );
             }
-
             // ignore exceptions so that we don't crash the process if we can't read the switch value
             catch (Exception e)
             {
-                if (e is StackOverflowException ||
-                    e is OutOfMemoryException ||
-                    e is System.Threading.ThreadAbortException ||
-                    e is AccessViolationException)
+                if (
+                    e is StackOverflowException
+                    || e is OutOfMemoryException
+                    || e is System.Threading.ThreadAbortException
+                    || e is AccessViolationException
+                )
                     throw;
             }
             finally
@@ -80,151 +87,336 @@ namespace System.Management
     internal static class WmiNetUtilsHelper
     {
         internal delegate int ResetSecurity(IntPtr hToken);
-        internal delegate int SetSecurity([In][Out] ref bool pNeedtoReset, [In][Out] ref IntPtr pHandle);
-        internal delegate int BlessIWbemServices([MarshalAs(UnmanagedType.Interface)] IWbemServices pIUnknown,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                        IntPtr password,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority,
-                                                                        int impersonationLevel,
-                                                                        int authenticationLevel);
-        internal delegate int BlessIWbemServicesObject([MarshalAs(UnmanagedType.IUnknown)] object pIUnknown,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                        IntPtr password,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority,
-                                                                        int impersonationLevel,
-                                                                        int authenticationLevel);
+        internal delegate int SetSecurity(
+            [In] [Out] ref bool pNeedtoReset,
+            [In] [Out] ref IntPtr pHandle
+        );
+        internal delegate int BlessIWbemServices(
+            [MarshalAs(UnmanagedType.Interface)] IWbemServices pIUnknown,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            IntPtr password,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority,
+            int impersonationLevel,
+            int authenticationLevel
+        );
+        internal delegate int BlessIWbemServicesObject(
+            [MarshalAs(UnmanagedType.IUnknown)] object pIUnknown,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            IntPtr password,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority,
+            int impersonationLevel,
+            int authenticationLevel
+        );
 
-        internal delegate int GetPropertyHandle(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszPropertyName, [Out] out int pType, [Out] out int plHandle);
-        internal delegate int WritePropertyValue(int vFunc, IntPtr pWbemClassObject, [In] int lHandle, [In] int lNumBytes, [In][MarshalAs(UnmanagedType.LPWStr)] string str);
-        internal delegate int GetQualifierSet(int vFunc, IntPtr pWbemClassObject, [Out] out IntPtr ppQualSet);
-        internal delegate int Get(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] int lFlags, [In][Out] ref object pVal, [In][Out] ref int pType, [In][Out] ref int plFlavor);
-        internal delegate int Put(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] int lFlags, [In] ref object pVal, [In] int Type);
-        internal delegate int Delete(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName);
-        internal delegate int GetNames(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszQualifierName, [In] int lFlags, [In] ref object pQualifierVal, [Out][MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]  out string[] pNames);
-        internal delegate int BeginEnumeration(int vFunc, IntPtr pWbemClassObject, [In] int lEnumFlags);
-        internal delegate int Next(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [In][Out][MarshalAs(UnmanagedType.BStr)]  ref string strName, [In][Out] ref object pVal, [In][Out] ref int pType, [In][Out] ref int plFlavor);
+        internal delegate int GetPropertyHandle(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszPropertyName,
+            [Out] out int pType,
+            [Out] out int plHandle
+        );
+        internal delegate int WritePropertyValue(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lHandle,
+            [In] int lNumBytes,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string str
+        );
+        internal delegate int GetQualifierSet(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [Out] out IntPtr ppQualSet
+        );
+        internal delegate int Get(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] int lFlags,
+            [In] [Out] ref object pVal,
+            [In] [Out] ref int pType,
+            [In] [Out] ref int plFlavor
+        );
+        internal delegate int Put(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] int lFlags,
+            [In] ref object pVal,
+            [In] int Type
+        );
+        internal delegate int Delete(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName
+        );
+        internal delegate int GetNames(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszQualifierName,
+            [In] int lFlags,
+            [In] ref object pQualifierVal,
+            [Out]
+            [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
+                out string[] pNames
+        );
+        internal delegate int BeginEnumeration(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lEnumFlags
+        );
+        internal delegate int Next(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [In] [Out] [MarshalAs(UnmanagedType.BStr)] ref string strName,
+            [In] [Out] ref object pVal,
+            [In] [Out] ref int pType,
+            [In] [Out] ref int plFlavor
+        );
         internal delegate int EndEnumeration(int vFunc, IntPtr pWbemClassObject);
-        internal delegate int GetPropertyQualifierSet(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszProperty, [Out] out IntPtr ppQualSet);
+        internal delegate int GetPropertyQualifierSet(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszProperty,
+            [Out] out IntPtr ppQualSet
+        );
         internal delegate int Clone(int vFunc, IntPtr pWbemClassObject, [Out] out IntPtr ppCopy);
-        internal delegate int GetObjectText(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out][MarshalAs(UnmanagedType.BStr)]  out string pstrObjectText);
-        internal delegate int SpawnDerivedClass(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out] out IntPtr ppNewClass);
-        internal delegate int SpawnInstance(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out] out IntPtr ppNewInstance);
-        internal delegate int CompareTo(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [In] IntPtr pCompareTo);
-        internal delegate int GetPropertyOrigin(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [Out][MarshalAs(UnmanagedType.BStr)]  out string pstrClassName);
-        internal delegate int InheritsFrom(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string strAncestor);
-        internal delegate int GetMethod(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] int lFlags, [Out]out IntPtr ppInSignature, [Out] out IntPtr ppOutSignature);
-        internal delegate int PutMethod(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] int lFlags, [In] IntPtr pInSignature, [In] IntPtr pOutSignature);
-        internal delegate int DeleteMethod(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName);
-        internal delegate int BeginMethodEnumeration(int vFunc, IntPtr pWbemClassObject, [In] int lEnumFlags);
-        internal delegate int NextMethod(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out][MarshalAs(UnmanagedType.BStr)] out string pstrName, [Out] out IntPtr ppInSignature, [Out] out IntPtr ppOutSignature);
+        internal delegate int GetObjectText(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrObjectText
+        );
+        internal delegate int SpawnDerivedClass(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out] out IntPtr ppNewClass
+        );
+        internal delegate int SpawnInstance(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out] out IntPtr ppNewInstance
+        );
+        internal delegate int CompareTo(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [In] IntPtr pCompareTo
+        );
+        internal delegate int GetPropertyOrigin(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrClassName
+        );
+        internal delegate int InheritsFrom(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string strAncestor
+        );
+        internal delegate int GetMethod(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] int lFlags,
+            [Out] out IntPtr ppInSignature,
+            [Out] out IntPtr ppOutSignature
+        );
+        internal delegate int PutMethod(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] int lFlags,
+            [In] IntPtr pInSignature,
+            [In] IntPtr pOutSignature
+        );
+        internal delegate int DeleteMethod(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName
+        );
+        internal delegate int BeginMethodEnumeration(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lEnumFlags
+        );
+        internal delegate int NextMethod(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrName,
+            [Out] out IntPtr ppInSignature,
+            [Out] out IntPtr ppOutSignature
+        );
         internal delegate int EndMethodEnumeration(int vFunc, IntPtr pWbemClassObject);
-        internal delegate int GetMethodQualifierSet(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszMethod, [Out] out IntPtr ppQualSet);
-        internal delegate int GetMethodOrigin(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszMethodName, [Out][MarshalAs(UnmanagedType.BStr)]  out string pstrClassName);
-        internal delegate int QualifierSet_Get(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] int lFlags, [In][Out] ref object pVal, [In][Out] ref int plFlavor);
-        internal delegate int QualifierSet_Put(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName, [In] ref object pVal, [In] int lFlavor);
-        internal delegate int QualifierSet_Delete(int vFunc, IntPtr pWbemClassObject, [In][MarshalAs(UnmanagedType.LPWStr)]  string wszName);
-        internal delegate int QualifierSet_GetNames(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out][MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]  out string[] pNames);
-        internal delegate int QualifierSet_BeginEnumeration(int vFunc, IntPtr pWbemClassObject, [In] int lFlags);
-        internal delegate int QualifierSet_Next(int vFunc, IntPtr pWbemClassObject, [In] int lFlags, [Out][MarshalAs(UnmanagedType.BStr)]  out string pstrName, [Out] out object pVal, [Out] out int plFlavor);
+        internal delegate int GetMethodQualifierSet(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethod,
+            [Out] out IntPtr ppQualSet
+        );
+        internal delegate int GetMethodOrigin(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszMethodName,
+            [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrClassName
+        );
+        internal delegate int QualifierSet_Get(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] int lFlags,
+            [In] [Out] ref object pVal,
+            [In] [Out] ref int plFlavor
+        );
+        internal delegate int QualifierSet_Put(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName,
+            [In] ref object pVal,
+            [In] int lFlavor
+        );
+        internal delegate int QualifierSet_Delete(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.LPWStr)] string wszName
+        );
+        internal delegate int QualifierSet_GetNames(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out]
+            [MarshalAs(UnmanagedType.SafeArray, SafeArraySubType = VarEnum.VT_BSTR)]
+                out string[] pNames
+        );
+        internal delegate int QualifierSet_BeginEnumeration(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags
+        );
+        internal delegate int QualifierSet_Next(
+            int vFunc,
+            IntPtr pWbemClassObject,
+            [In] int lFlags,
+            [Out] [MarshalAs(UnmanagedType.BStr)] out string pstrName,
+            [Out] out object pVal,
+            [Out] out int plFlavor
+        );
         internal delegate int QualifierSet_EndEnumeration(int vFunc, IntPtr pWbemClassObject);
-        internal delegate int GetCurrentApartmentType(int vFunc, IntPtr pComThreadingInfo, [Out] out APTTYPE aptType);
+        internal delegate int GetCurrentApartmentType(
+            int vFunc,
+            IntPtr pComThreadingInfo,
+            [Out] out APTTYPE aptType
+        );
         internal delegate void VerifyClientKey();
-        internal delegate int GetDemultiplexedStub([In, MarshalAs(UnmanagedType.IUnknown)]object pIUnknown, [In]bool isLocal, [Out, MarshalAs(UnmanagedType.IUnknown)]out object ppIUnknown);
-        internal delegate int CreateInstanceEnumWmi([In][MarshalAs(UnmanagedType.BStr)]  string strFilter,
-                                                                                           [In] int lFlags,
-                                                                                           [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                                           [Out][MarshalAs(UnmanagedType.Interface)]  out IEnumWbemClassObject ppEnum,
-                                                                                           [In] int impLevel,
-                                                                                           [In] int authnLevel,
-                                                                                           [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                                           [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                                           [In]IntPtr strPassword,
-                                                                                           [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                                           );
-        internal delegate int CreateClassEnumWmi([In][MarshalAs(UnmanagedType.BStr)]  string strSuperclass,
-                                                                                       [In] int lFlags,
-                                                                                       [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                                       [Out][MarshalAs(UnmanagedType.Interface)]  out IEnumWbemClassObject ppEnum,
-                                                                                       [In] int impLevel,
-                                                                                       [In] int authnLevel,
-                                                                                       [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                                       [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                                       [In]IntPtr strPassword,
-                                                                                       [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                                       );
-        internal delegate int ExecQueryWmi([In][MarshalAs(UnmanagedType.BStr)]  string strQueryLanguage,
-                                                                           [In][MarshalAs(UnmanagedType.BStr)]  string strQuery,
-                                                                           [In] int lFlags,
-                                                                           [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                           [Out][MarshalAs(UnmanagedType.Interface)]  out IEnumWbemClassObject ppEnum,
-                                                                           [In] int impLevel,
-                                                                           [In] int authnLevel,
-                                                                           [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                           [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                           [In]IntPtr strPassword,
-                                                                           [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                           );
-        internal delegate int ExecNotificationQueryWmi([In][MarshalAs(UnmanagedType.BStr)]  string strQueryLanguage,
-                                                                                                [In][MarshalAs(UnmanagedType.BStr)]  string strQuery,
-                                                                                                [In] int lFlags,
-                                                                                                [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                                                [Out][MarshalAs(UnmanagedType.Interface)]  out IEnumWbemClassObject ppEnum,
-                                                                                                [In] int impLevel,
-                                                                                                [In] int authnLevel,
-                                                                                                [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                                                [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                                                [In]IntPtr strPassword,
-                                                                                                [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                                                );
-        internal delegate int PutInstanceWmi([In] IntPtr pInst,
-                                                                            [In] int lFlags,
-                                                                            [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                            [In] IntPtr ppCallResult,
-                                                                            [In] int impLevel,
-                                                                            [In] int authnLevel,
-                                                                            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                            [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                            [In]IntPtr strPassword,
-                                                                            [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                            );
-        internal delegate int PutClassWmi([In] IntPtr pObject,
-                                                                        [In] int lFlags,
-                                                                        [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                        [In] IntPtr ppCallResult,
-                                                                        [In] int impLevel,
-                                                                        [In] int authnLevel,
-                                                                        [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                        [In]IntPtr strPassword,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                        );
+        internal delegate int GetDemultiplexedStub(
+            [In, MarshalAs(UnmanagedType.IUnknown)] object pIUnknown,
+            [In] bool isLocal,
+            [Out, MarshalAs(UnmanagedType.IUnknown)] out object ppIUnknown
+        );
+        internal delegate int CreateInstanceEnumWmi(
+            [In] [MarshalAs(UnmanagedType.BStr)] string strFilter,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
+        internal delegate int CreateClassEnumWmi(
+            [In] [MarshalAs(UnmanagedType.BStr)] string strSuperclass,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
+        internal delegate int ExecQueryWmi(
+            [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strQuery,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
+        internal delegate int ExecNotificationQueryWmi(
+            [In] [MarshalAs(UnmanagedType.BStr)] string strQueryLanguage,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strQuery,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
+        internal delegate int PutInstanceWmi(
+            [In] IntPtr pInst,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [In] IntPtr ppCallResult,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
+        internal delegate int PutClassWmi(
+            [In] IntPtr pObject,
+            [In] int lFlags,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [In] IntPtr ppCallResult,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemServices pCurrentNamespace,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
         internal delegate int CloneEnumWbemClassObject(
-                                                                [Out][MarshalAs(UnmanagedType.Interface)]  out IEnumWbemClassObject ppEnum,
-                                                                [In] int impLevel,
-                                                                [In] int authnLevel,
-                                                                [In] [MarshalAs(UnmanagedType.Interface)] IEnumWbemClassObject pCurrentEnumWbemClassObject,
-                                                                [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                [In]IntPtr strPassword,
-                                                                [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority
-                                                                );
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IEnumWbemClassObject ppEnum,
+            [In] int impLevel,
+            [In] int authnLevel,
+            [In]
+            [MarshalAs(UnmanagedType.Interface)]
+                IEnumWbemClassObject pCurrentEnumWbemClassObject,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority
+        );
         internal delegate int ConnectServerWmi(
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strNetworkResource,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strUser,
-                                                                        [In]  IntPtr strPassword,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strLocale,
-                                                                        [In] int lSecurityFlags,
-                                                                        [In][MarshalAs(UnmanagedType.BStr)]  string strAuthority,
-                                                                        [In][MarshalAs(UnmanagedType.Interface)]  IWbemContext pCtx,
-                                                                        [Out][MarshalAs(UnmanagedType.Interface)]  out IWbemServices ppNamespace,
-                                                                        int impersonationLevel,
-                                                                        int authenticationLevel);
+            [In] [MarshalAs(UnmanagedType.BStr)] string strNetworkResource,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strUser,
+            [In] IntPtr strPassword,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strLocale,
+            [In] int lSecurityFlags,
+            [In] [MarshalAs(UnmanagedType.BStr)] string strAuthority,
+            [In] [MarshalAs(UnmanagedType.Interface)] IWbemContext pCtx,
+            [Out] [MarshalAs(UnmanagedType.Interface)] out IWbemServices ppNamespace,
+            int impersonationLevel,
+            int authenticationLevel
+        );
 
         internal delegate IntPtr GetErrorInfo();
 
-        internal delegate int Initialize([In]bool AllowIManagementObjectQI);
-
-
-
+        internal delegate int Initialize([In] bool AllowIManagementObjectQI);
 
         // 'Apartment Type' returned by IComThreadingInfo::GetCurrentApartmentType()
         internal enum APTTYPE
@@ -233,8 +425,9 @@ namespace System.Management
             APTTYPE_STA = 0,
             APTTYPE_MTA = 1,
             APTTYPE_NA = 2,
-            APTTYPE_MAINSTA = 3
+            APTTYPE_MAINSTA = 3,
         }
+
         internal static ResetSecurity ResetSecurity_f;
         internal static SetSecurity SetSecurity_f;
         internal static BlessIWbemServices BlessIWbemServices_f;
@@ -289,10 +482,15 @@ namespace System.Management
 
         static WmiNetUtilsHelper()
         {
-            RegistryKey netFrameworkSubKey = Registry.LocalMachine.OpenSubKey(@"SOFTWARE\Microsoft\.NETFramework\");
-            string netFrameworkInstallRoot = (string)netFrameworkSubKey?.GetValue(RuntimeInformation.ProcessArchitecture == Architecture.Arm64 ?
-                "InstallRootArm64" :
-                "InstallRoot");
+            RegistryKey netFrameworkSubKey = Registry.LocalMachine.OpenSubKey(
+                @"SOFTWARE\Microsoft\.NETFramework\"
+            );
+            string netFrameworkInstallRoot = (string)
+                netFrameworkSubKey?.GetValue(
+                    RuntimeInformation.ProcessArchitecture == Architecture.Arm64
+                        ? "InstallRootArm64"
+                        : "InstallRoot"
+                );
 
             if (netFrameworkInstallRoot == null)
             {
@@ -307,133 +505,324 @@ namespace System.Management
             string wminet_utilsPath = Path.Combine(
                 netFrameworkInstallRoot,
                 CompatSwitches.DotNetVersion, // The same value is hard coded on Environment.Version and quirks for WMI
-                "wminet_utils.dll");
+                "wminet_utils.dll"
+            );
 
             IntPtr hModule = Interop.Kernel32.LoadLibrary(wminet_utilsPath);
             if (hModule == IntPtr.Zero)
             {
                 // This is unlikely, so having the TypeInitializationException wrapping it is fine.
-                throw new Win32Exception(Marshal.GetLastPInvokeError(), SR.Format(SR.LoadLibraryFailed, wminet_utilsPath));
+                throw new Win32Exception(
+                    Marshal.GetLastPInvokeError(),
+                    SR.Format(SR.LoadLibraryFailed, wminet_utilsPath)
+                );
             }
 
-            if (LoadDelegate(ref ResetSecurity_f, hModule, "ResetSecurity") &&
-                LoadDelegate(ref SetSecurity_f, hModule, "SetSecurity") &&
-                LoadDelegate(ref BlessIWbemServices_f, hModule, "BlessIWbemServices") &&
-                LoadDelegate(ref BlessIWbemServicesObject_f, hModule, "BlessIWbemServicesObject") &&
-                LoadDelegate(ref GetPropertyHandle_f27, hModule, "GetPropertyHandle") &&
-                LoadDelegate(ref WritePropertyValue_f28, hModule, "WritePropertyValue") &&
-                LoadDelegate(ref Clone_f12, hModule, "Clone") &&
-                LoadDelegate(ref VerifyClientKey_f, hModule, "VerifyClientKey") &&
-                LoadDelegate(ref GetQualifierSet_f, hModule, "GetQualifierSet") &&
-                LoadDelegate(ref Get_f, hModule, "Get") &&
-                LoadDelegate(ref Put_f, hModule, "Put") &&
-                LoadDelegate(ref Delete_f, hModule, "Delete") &&
-                LoadDelegate(ref GetNames_f, hModule, "GetNames") &&
-                LoadDelegate(ref BeginEnumeration_f, hModule, "BeginEnumeration") &&
-                LoadDelegate(ref Next_f, hModule, "Next") &&
-                LoadDelegate(ref EndEnumeration_f, hModule, "EndEnumeration") &&
-                LoadDelegate(ref GetPropertyQualifierSet_f, hModule, "GetPropertyQualifierSet") &&
-                LoadDelegate(ref Clone_f, hModule, "Clone") &&
-                LoadDelegate(ref GetObjectText_f, hModule, "GetObjectText") &&
-                LoadDelegate(ref SpawnDerivedClass_f, hModule, "SpawnDerivedClass") &&
-                LoadDelegate(ref SpawnInstance_f, hModule, "SpawnInstance") &&
-                LoadDelegate(ref CompareTo_f, hModule, "CompareTo") &&
-                LoadDelegate(ref GetPropertyOrigin_f, hModule, "GetPropertyOrigin") &&
-                LoadDelegate(ref InheritsFrom_f, hModule, "InheritsFrom") &&
-                LoadDelegate(ref GetMethod_f, hModule, "GetMethod") &&
-                LoadDelegate(ref PutMethod_f, hModule, "PutMethod") &&
-                LoadDelegate(ref DeleteMethod_f, hModule, "DeleteMethod") &&
-                LoadDelegate(ref BeginMethodEnumeration_f, hModule, "BeginMethodEnumeration") &&
-                LoadDelegate(ref NextMethod_f, hModule, "NextMethod") &&
-                LoadDelegate(ref EndMethodEnumeration_f, hModule, "EndMethodEnumeration") &&
-                LoadDelegate(ref GetMethodQualifierSet_f, hModule, "GetMethodQualifierSet") &&
-                LoadDelegate(ref GetMethodOrigin_f, hModule, "GetMethodOrigin") &&
-                LoadDelegate(ref QualifierGet_f, hModule, "QualifierSet_Get") &&
-                LoadDelegate(ref QualifierPut_f, hModule, "QualifierSet_Put") &&
-                LoadDelegate(ref QualifierDelete_f, hModule, "QualifierSet_Delete") &&
-                LoadDelegate(ref QualifierGetNames_f, hModule, "QualifierSet_GetNames") &&
-                LoadDelegate(ref QualifierBeginEnumeration_f, hModule, "QualifierSet_BeginEnumeration") &&
-                LoadDelegate(ref QualifierNext_f, hModule, "QualifierSet_Next") &&
-                LoadDelegate(ref QualifierEndEnumeration_f, hModule, "QualifierSet_EndEnumeration") &&
-                LoadDelegate(ref GetCurrentApartmentType_f, hModule, "GetCurrentApartmentType") &&
-                LoadDelegate(ref GetDemultiplexedStub_f, hModule, "GetDemultiplexedStub") &&
-                LoadDelegate(ref CreateInstanceEnumWmi_f, hModule, "CreateInstanceEnumWmi") &&
-                LoadDelegate(ref CreateClassEnumWmi_f, hModule, "CreateClassEnumWmi") &&
-                LoadDelegate(ref ExecQueryWmi_f, hModule, "ExecQueryWmi") &&
-                LoadDelegate(ref ExecNotificationQueryWmi_f, hModule, "ExecNotificationQueryWmi") &&
-                LoadDelegate(ref PutInstanceWmi_f, hModule, "PutInstanceWmi") &&
-                LoadDelegate(ref PutClassWmi_f, hModule, "PutClassWmi") &&
-                LoadDelegate(ref CloneEnumWbemClassObject_f, hModule, "CloneEnumWbemClassObject") &&
-                LoadDelegate(ref ConnectServerWmi_f, hModule, "ConnectServerWmi") &&
-                LoadDelegate(ref GetErrorInfo_f, hModule, "GetErrorInfo") &&
-                LoadDelegate(ref Initialize_f, hModule, "Initialize"))
+            if (
+                LoadDelegate(ref ResetSecurity_f, hModule, "ResetSecurity")
+                && LoadDelegate(ref SetSecurity_f, hModule, "SetSecurity")
+                && LoadDelegate(ref BlessIWbemServices_f, hModule, "BlessIWbemServices")
+                && LoadDelegate(ref BlessIWbemServicesObject_f, hModule, "BlessIWbemServicesObject")
+                && LoadDelegate(ref GetPropertyHandle_f27, hModule, "GetPropertyHandle")
+                && LoadDelegate(ref WritePropertyValue_f28, hModule, "WritePropertyValue")
+                && LoadDelegate(ref Clone_f12, hModule, "Clone")
+                && LoadDelegate(ref VerifyClientKey_f, hModule, "VerifyClientKey")
+                && LoadDelegate(ref GetQualifierSet_f, hModule, "GetQualifierSet")
+                && LoadDelegate(ref Get_f, hModule, "Get")
+                && LoadDelegate(ref Put_f, hModule, "Put")
+                && LoadDelegate(ref Delete_f, hModule, "Delete")
+                && LoadDelegate(ref GetNames_f, hModule, "GetNames")
+                && LoadDelegate(ref BeginEnumeration_f, hModule, "BeginEnumeration")
+                && LoadDelegate(ref Next_f, hModule, "Next")
+                && LoadDelegate(ref EndEnumeration_f, hModule, "EndEnumeration")
+                && LoadDelegate(ref GetPropertyQualifierSet_f, hModule, "GetPropertyQualifierSet")
+                && LoadDelegate(ref Clone_f, hModule, "Clone")
+                && LoadDelegate(ref GetObjectText_f, hModule, "GetObjectText")
+                && LoadDelegate(ref SpawnDerivedClass_f, hModule, "SpawnDerivedClass")
+                && LoadDelegate(ref SpawnInstance_f, hModule, "SpawnInstance")
+                && LoadDelegate(ref CompareTo_f, hModule, "CompareTo")
+                && LoadDelegate(ref GetPropertyOrigin_f, hModule, "GetPropertyOrigin")
+                && LoadDelegate(ref InheritsFrom_f, hModule, "InheritsFrom")
+                && LoadDelegate(ref GetMethod_f, hModule, "GetMethod")
+                && LoadDelegate(ref PutMethod_f, hModule, "PutMethod")
+                && LoadDelegate(ref DeleteMethod_f, hModule, "DeleteMethod")
+                && LoadDelegate(ref BeginMethodEnumeration_f, hModule, "BeginMethodEnumeration")
+                && LoadDelegate(ref NextMethod_f, hModule, "NextMethod")
+                && LoadDelegate(ref EndMethodEnumeration_f, hModule, "EndMethodEnumeration")
+                && LoadDelegate(ref GetMethodQualifierSet_f, hModule, "GetMethodQualifierSet")
+                && LoadDelegate(ref GetMethodOrigin_f, hModule, "GetMethodOrigin")
+                && LoadDelegate(ref QualifierGet_f, hModule, "QualifierSet_Get")
+                && LoadDelegate(ref QualifierPut_f, hModule, "QualifierSet_Put")
+                && LoadDelegate(ref QualifierDelete_f, hModule, "QualifierSet_Delete")
+                && LoadDelegate(ref QualifierGetNames_f, hModule, "QualifierSet_GetNames")
+                && LoadDelegate(
+                    ref QualifierBeginEnumeration_f,
+                    hModule,
+                    "QualifierSet_BeginEnumeration"
+                )
+                && LoadDelegate(ref QualifierNext_f, hModule, "QualifierSet_Next")
+                && LoadDelegate(
+                    ref QualifierEndEnumeration_f,
+                    hModule,
+                    "QualifierSet_EndEnumeration"
+                )
+                && LoadDelegate(ref GetCurrentApartmentType_f, hModule, "GetCurrentApartmentType")
+                && LoadDelegate(ref GetDemultiplexedStub_f, hModule, "GetDemultiplexedStub")
+                && LoadDelegate(ref CreateInstanceEnumWmi_f, hModule, "CreateInstanceEnumWmi")
+                && LoadDelegate(ref CreateClassEnumWmi_f, hModule, "CreateClassEnumWmi")
+                && LoadDelegate(ref ExecQueryWmi_f, hModule, "ExecQueryWmi")
+                && LoadDelegate(ref ExecNotificationQueryWmi_f, hModule, "ExecNotificationQueryWmi")
+                && LoadDelegate(ref PutInstanceWmi_f, hModule, "PutInstanceWmi")
+                && LoadDelegate(ref PutClassWmi_f, hModule, "PutClassWmi")
+                && LoadDelegate(ref CloneEnumWbemClassObject_f, hModule, "CloneEnumWbemClassObject")
+                && LoadDelegate(ref ConnectServerWmi_f, hModule, "ConnectServerWmi")
+                && LoadDelegate(ref GetErrorInfo_f, hModule, "GetErrorInfo")
+                && LoadDelegate(ref Initialize_f, hModule, "Initialize")
+            )
             {
                 // All required delegates were loaded.
                 Initialize_f(CompatSwitches.AllowIManagementObjectQI);
             }
             else
             {
-                LoadPlatformNotSupportedDelegates(SR.Format(SR.PlatformNotSupported_FrameworkUpdatedRequired, wminet_utilsPath));
+                LoadPlatformNotSupportedDelegates(
+                    SR.Format(SR.PlatformNotSupported_FrameworkUpdatedRequired, wminet_utilsPath)
+                );
             }
         }
-        private static bool LoadDelegate<TDelegate>(ref TDelegate delegate_f, IntPtr hModule, string procName) where TDelegate : class
+
+        private static bool LoadDelegate<TDelegate>(
+            ref TDelegate delegate_f,
+            IntPtr hModule,
+            string procName
+        )
+            where TDelegate : class
         {
             IntPtr procAddr = Interop.Kernel32.GetProcAddress(hModule, procName);
-            return procAddr != IntPtr.Zero &&
-                (delegate_f = Marshal.GetDelegateForFunctionPointer<TDelegate>(procAddr)) != null;
+            return procAddr != IntPtr.Zero
+                && (delegate_f = Marshal.GetDelegateForFunctionPointer<TDelegate>(procAddr))
+                    != null;
         }
 
         private static void LoadPlatformNotSupportedDelegates(string exceptionMessage)
         {
             ResetSecurity_f = (_) => throw new PlatformNotSupportedException(exceptionMessage);
-            SetSecurity_f = (ref bool _, ref IntPtr __) => throw new PlatformNotSupportedException(exceptionMessage);
-            BlessIWbemServices_f = (_, __, ___, ____, _____, ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            BlessIWbemServicesObject_f = (_, __, ___, ____, _____, ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetPropertyHandle_f27 = (int _, IntPtr __, string ___, out int ____, out int _____) => throw new PlatformNotSupportedException(exceptionMessage);
-            WritePropertyValue_f28 = (_, __, ___, ____, _____) => throw new PlatformNotSupportedException(exceptionMessage);
-            Clone_f12 = (int _, IntPtr __, out IntPtr ___) => throw new PlatformNotSupportedException(exceptionMessage);
+            SetSecurity_f = (ref bool _, ref IntPtr __) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            BlessIWbemServices_f = (_, __, ___, ____, _____, ______) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            BlessIWbemServicesObject_f = (_, __, ___, ____, _____, ______) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetPropertyHandle_f27 = (int _, IntPtr __, string ___, out int ____, out int _____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            WritePropertyValue_f28 = (_, __, ___, ____, _____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            Clone_f12 = (int _, IntPtr __, out IntPtr ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
             VerifyClientKey_f = () => throw new PlatformNotSupportedException(exceptionMessage);
-            GetQualifierSet_f = (int _, IntPtr __, out IntPtr ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            Get_f = (int _, IntPtr __, string ___, int ____, ref object _____, ref int ______, ref int _______) => throw new PlatformNotSupportedException(exceptionMessage);
-            Put_f = (int _, IntPtr __, string ___, int ____, ref object _____, int ______) => throw new PlatformNotSupportedException(exceptionMessage);
+            GetQualifierSet_f = (int _, IntPtr __, out IntPtr ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            Get_f = (
+                int _,
+                IntPtr __,
+                string ___,
+                int ____,
+                ref object _____,
+                ref int ______,
+                ref int _______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            Put_f = (int _, IntPtr __, string ___, int ____, ref object _____, int ______) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
             Delete_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetNames_f = (int _, IntPtr __, string ___, int ____, ref object _____, out string[] ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            BeginEnumeration_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            Next_f = (int _, IntPtr __, int ___, ref string ____, ref object _____, ref int ______, ref int _______) => throw new PlatformNotSupportedException(exceptionMessage);
+            GetNames_f = (
+                int _,
+                IntPtr __,
+                string ___,
+                int ____,
+                ref object _____,
+                out string[] ______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            BeginEnumeration_f = (_, __, ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            Next_f = (
+                int _,
+                IntPtr __,
+                int ___,
+                ref string ____,
+                ref object _____,
+                ref int ______,
+                ref int _______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
             EndEnumeration_f = (_, __) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetPropertyQualifierSet_f = (int _, IntPtr __, string ___, out IntPtr ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            Clone_f = (int _, IntPtr __, out IntPtr ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetObjectText_f = (int _, IntPtr __, int ___, out string ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            SpawnDerivedClass_f = (int _, IntPtr __, int ___, out IntPtr ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            SpawnInstance_f = (int _, IntPtr __, int ___, out IntPtr ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            CompareTo_f = (_, __, ___, ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetPropertyOrigin_f = (int _, IntPtr __, string ___, out string ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            InheritsFrom_f = (int _, IntPtr __, string ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetMethod_f = (int _, IntPtr __, string ___, int ____, out IntPtr _____, out IntPtr ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            PutMethod_f = (_, __, ___, ____, _____, ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            DeleteMethod_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            BeginMethodEnumeration_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            NextMethod_f = (int _, IntPtr __, int ___, out string ____, out IntPtr _____, out IntPtr ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            EndMethodEnumeration_f = (_, __) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetMethodQualifierSet_f = (int _, IntPtr __, string ___, out IntPtr ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetMethodOrigin_f = (int _, IntPtr __, string ___, out string ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierGet_f = (int _, IntPtr __, string ___, int ____, ref object _____, ref int ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierPut_f = (int _, IntPtr __, string ___, ref object ____, int _____) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierDelete_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierGetNames_f = (int _, IntPtr __, int ___, out string[] ____) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierBeginEnumeration_f = (_, __, ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierNext_f = (int _, IntPtr __, int ___, out string ____, out object _____, out int ______) => throw new PlatformNotSupportedException(exceptionMessage);
-            QualifierEndEnumeration_f = (_, __) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetCurrentApartmentType_f = (int _, IntPtr __, out APTTYPE ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            GetDemultiplexedStub_f = (object _, bool __, out object ___) => throw new PlatformNotSupportedException(exceptionMessage);
-            CreateInstanceEnumWmi_f = (string _, int __, IWbemContext ___, out IEnumWbemClassObject ____, int _____, int ______, IWbemServices _______, string ________, IntPtr _________, string __________) => throw new PlatformNotSupportedException(exceptionMessage);
-            CreateClassEnumWmi_f = (string _, int __, IWbemContext ___, out IEnumWbemClassObject ____, int _____, int ______, IWbemServices _______, string ________, IntPtr _________, string __________) => throw new PlatformNotSupportedException(exceptionMessage);
-            ExecQueryWmi_f = (string _, string __, int ___, IWbemContext ____, out IEnumWbemClassObject _____, int ______, int _______, IWbemServices ________, string _________, IntPtr __________, string ___________) => throw new PlatformNotSupportedException(exceptionMessage);
-            ExecNotificationQueryWmi_f = (string _, string __, int ___, IWbemContext ____, out IEnumWbemClassObject _____, int ______, int _______, IWbemServices ________, string _________, IntPtr __________, string ___________) => throw new PlatformNotSupportedException(exceptionMessage);
-            PutInstanceWmi_f = (_, __, ___, ____, _____, ______, _______, ________, _________, __________) => throw new PlatformNotSupportedException(exceptionMessage);
-            PutClassWmi_f = (_, __, ___, ____, _____, ______, _______, ________, _________, __________) => throw new PlatformNotSupportedException(exceptionMessage);
-            CloneEnumWbemClassObject_f = (out IEnumWbemClassObject _, int __, int ____, IEnumWbemClassObject _____, string ______, IntPtr _______, string ________) => throw new PlatformNotSupportedException(exceptionMessage);
-            ConnectServerWmi_f = (string _, string __, IntPtr ___, string ____, int _____, string ______, IWbemContext _______, out IWbemServices ________, int _________, int __________) => throw new PlatformNotSupportedException(exceptionMessage);
+            GetPropertyQualifierSet_f = (int _, IntPtr __, string ___, out IntPtr ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            Clone_f = (int _, IntPtr __, out IntPtr ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetObjectText_f = (int _, IntPtr __, int ___, out string ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            SpawnDerivedClass_f = (int _, IntPtr __, int ___, out IntPtr ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            SpawnInstance_f = (int _, IntPtr __, int ___, out IntPtr ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            CompareTo_f = (_, __, ___, ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetPropertyOrigin_f = (int _, IntPtr __, string ___, out string ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            InheritsFrom_f = (int _, IntPtr __, string ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetMethod_f = (
+                int _,
+                IntPtr __,
+                string ___,
+                int ____,
+                out IntPtr _____,
+                out IntPtr ______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            PutMethod_f = (_, __, ___, ____, _____, ______) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            DeleteMethod_f = (_, __, ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            BeginMethodEnumeration_f = (_, __, ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            NextMethod_f = (
+                int _,
+                IntPtr __,
+                int ___,
+                out string ____,
+                out IntPtr _____,
+                out IntPtr ______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            EndMethodEnumeration_f = (_, __) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetMethodQualifierSet_f = (int _, IntPtr __, string ___, out IntPtr ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetMethodOrigin_f = (int _, IntPtr __, string ___, out string ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierGet_f = (
+                int _,
+                IntPtr __,
+                string ___,
+                int ____,
+                ref object _____,
+                ref int ______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierPut_f = (int _, IntPtr __, string ___, ref object ____, int _____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierDelete_f = (_, __, ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierGetNames_f = (int _, IntPtr __, int ___, out string[] ____) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierBeginEnumeration_f = (_, __, ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierNext_f = (
+                int _,
+                IntPtr __,
+                int ___,
+                out string ____,
+                out object _____,
+                out int ______
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            QualifierEndEnumeration_f = (_, __) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetCurrentApartmentType_f = (int _, IntPtr __, out APTTYPE ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            GetDemultiplexedStub_f = (object _, bool __, out object ___) =>
+                throw new PlatformNotSupportedException(exceptionMessage);
+            CreateInstanceEnumWmi_f = (
+                string _,
+                int __,
+                IWbemContext ___,
+                out IEnumWbemClassObject ____,
+                int _____,
+                int ______,
+                IWbemServices _______,
+                string ________,
+                IntPtr _________,
+                string __________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            CreateClassEnumWmi_f = (
+                string _,
+                int __,
+                IWbemContext ___,
+                out IEnumWbemClassObject ____,
+                int _____,
+                int ______,
+                IWbemServices _______,
+                string ________,
+                IntPtr _________,
+                string __________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            ExecQueryWmi_f = (
+                string _,
+                string __,
+                int ___,
+                IWbemContext ____,
+                out IEnumWbemClassObject _____,
+                int ______,
+                int _______,
+                IWbemServices ________,
+                string _________,
+                IntPtr __________,
+                string ___________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            ExecNotificationQueryWmi_f = (
+                string _,
+                string __,
+                int ___,
+                IWbemContext ____,
+                out IEnumWbemClassObject _____,
+                int ______,
+                int _______,
+                IWbemServices ________,
+                string _________,
+                IntPtr __________,
+                string ___________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            PutInstanceWmi_f = (
+                _,
+                __,
+                ___,
+                ____,
+                _____,
+                ______,
+                _______,
+                ________,
+                _________,
+                __________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            PutClassWmi_f = (
+                _,
+                __,
+                ___,
+                ____,
+                _____,
+                ______,
+                _______,
+                ________,
+                _________,
+                __________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            CloneEnumWbemClassObject_f = (
+                out IEnumWbemClassObject _,
+                int __,
+                int ____,
+                IEnumWbemClassObject _____,
+                string ______,
+                IntPtr _______,
+                string ________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
+            ConnectServerWmi_f = (
+                string _,
+                string __,
+                IntPtr ___,
+                string ____,
+                int _____,
+                string ______,
+                IWbemContext _______,
+                out IWbemServices ________,
+                int _________,
+                int __________
+            ) => throw new PlatformNotSupportedException(exceptionMessage);
             GetErrorInfo_f = () => throw new PlatformNotSupportedException(exceptionMessage);
             Initialize_f = (_) => throw new PlatformNotSupportedException(exceptionMessage);
         }
@@ -487,6 +876,7 @@ namespace System.Management
         private ConnectionOptions options;
         internal event IdentifierChangedEventHandler IdentifierChanged;
         internal bool IsDefaulted; //used to tell whether the current scope has been created from the default
+
         //scope or not - this information is used to tell whether it can be overridden
         //when a new path is set or not.
 
@@ -497,8 +887,7 @@ namespace System.Management
         }
 
         //Called when IdentifierChanged() event fires
-        private void HandleIdentifierChange(object sender,
-            IdentifierChangedEventArgs args)
+        private void HandleIdentifierChange(object sender, IdentifierChangedEventArgs args)
         {
             // Since our object has changed we had better signal to ourself that
             // an connection needs to be established
@@ -516,17 +905,16 @@ namespace System.Management
         // that the scope path is indeed a namespace path, we perform this validation.
         private ManagementPath prvpath
         {
-            get
-            {
-                return validatedPath;
-            }
+            get { return validatedPath; }
             set
             {
                 if (value != null)
                 {
                     string pathValue = value.Path;
                     if (!ManagementPath.IsValidNamespaceSyntax(pathValue))
-                        ManagementException.ThrowWithExtendedInfo((ManagementStatus)tag_WBEMSTATUS.WBEM_E_INVALID_NAMESPACE);
+                        ManagementException.ThrowWithExtendedInfo(
+                            (ManagementStatus)tag_WBEMSTATUS.WBEM_E_INVALID_NAMESPACE
+                        );
                 }
 
                 validatedPath = value;
@@ -592,15 +980,15 @@ namespace System.Management
         /// </remarks>
         public bool IsConnected
         {
-            get
-            {
-                return (null != wbemServices);
-            }
+            get { return (null != wbemServices); }
         }
 
         //Internal constructor
-        internal ManagementScope(ManagementPath path, IWbemServices wbemServices,
-            ConnectionOptions options)
+        internal ManagementScope(
+            ManagementPath path,
+            IWbemServices wbemServices,
+            ConnectionOptions options
+        )
         {
             if (null != path)
                 this.Path = path;
@@ -623,7 +1011,10 @@ namespace System.Management
             return ManagementScope._Clone(scope, null);
         }
 
-        internal static ManagementScope _Clone(ManagementScope scope, IdentifierChangedEventHandler handler)
+        internal static ManagementScope _Clone(
+            ManagementScope scope,
+            IdentifierChangedEventHandler handler
+        )
         {
             ManagementScope scopeTmp = new ManagementScope(null, null, null);
 
@@ -632,13 +1023,18 @@ namespace System.Management
             if (handler != null)
                 scopeTmp.IdentifierChanged = handler;
             else if (scope != null)
-                scopeTmp.IdentifierChanged = new IdentifierChangedEventHandler(scope.HandleIdentifierChange);
+                scopeTmp.IdentifierChanged = new IdentifierChangedEventHandler(
+                    scope.HandleIdentifierChange
+                );
 
             // Set scope path.
             if (scope == null)
             {
                 // No path specified. Default.
-                scopeTmp.prvpath = ManagementPath._Clone(ManagementPath.DefaultPath, new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange));
+                scopeTmp.prvpath = ManagementPath._Clone(
+                    ManagementPath.DefaultPath,
+                    new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange)
+                );
                 scopeTmp.IsDefaulted = true;
 
                 scopeTmp.wbemServices = null;
@@ -649,19 +1045,28 @@ namespace System.Management
                 if (scope.prvpath == null)
                 {
                     // No path specified. Default.
-                    scopeTmp.prvpath = ManagementPath._Clone(ManagementPath.DefaultPath, new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange));
+                    scopeTmp.prvpath = ManagementPath._Clone(
+                        ManagementPath.DefaultPath,
+                        new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange)
+                    );
                     scopeTmp.IsDefaulted = true;
                 }
                 else
                 {
                     // Use scope-supplied path.
-                    scopeTmp.prvpath = ManagementPath._Clone(scope.prvpath, new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange));
+                    scopeTmp.prvpath = ManagementPath._Clone(
+                        scope.prvpath,
+                        new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange)
+                    );
                     scopeTmp.IsDefaulted = scope.IsDefaulted;
                 }
 
                 scopeTmp.wbemServices = scope.wbemServices;
                 if (scope.options != null)
-                    scopeTmp.options = ConnectionOptions._Clone(scope.options, new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange));
+                    scopeTmp.options = ConnectionOptions._Clone(
+                        scope.options,
+                        new IdentifierChangedEventHandler(scopeTmp.HandleIdentifierChange)
+                    );
             }
 
             return scopeTmp;
@@ -687,8 +1092,8 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New ManagementScope()
         ///    </code>
         /// </example>
-        public ManagementScope() :
-            this(new ManagementPath(ManagementPath.DefaultPath.Path))
+        public ManagementScope()
+            : this(new ManagementPath(ManagementPath.DefaultPath.Path))
         {
             //Flag that this scope uses the default path
             IsDefaulted = true;
@@ -707,7 +1112,8 @@ namespace System.Management
         /// Dim s As New ManagementScope(p)
         ///    </code>
         /// </example>
-        public ManagementScope(ManagementPath path) : this(path, (ConnectionOptions)null) { }
+        public ManagementScope(ManagementPath path)
+            : this(path, (ConnectionOptions)null) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope
@@ -720,7 +1126,9 @@ namespace System.Management
         ///    <code lang='VB'>Dim s As New ManagementScope("\\MyServer\root\default")
         ///    </code>
         /// </example>
-        public ManagementScope(string path) : this(new ManagementPath(path), (ConnectionOptions)null) { }
+        public ManagementScope(string path)
+            : this(new ManagementPath(path), (ConnectionOptions)null) { }
+
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
         ///    with the specified options.</para>
@@ -739,7 +1147,8 @@ namespace System.Management
         /// Dim s As New ManagementScope("\\MyServer\root\default", opt);
         ///    </code>
         /// </example>
-        public ManagementScope(string path, ConnectionOptions options) : this(new ManagementPath(path), options) { }
+        public ManagementScope(string path, ConnectionOptions options)
+            : this(new ManagementPath(path), options) { }
 
         /// <summary>
         /// <para>Initializes a new instance of the <see cref='System.Management.ManagementScope'/> class representing the specified scope path,
@@ -766,13 +1175,19 @@ namespace System.Management
         public ManagementScope(ManagementPath path, ConnectionOptions options)
         {
             if (null != path)
-                this.prvpath = ManagementPath._Clone(path, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                this.prvpath = ManagementPath._Clone(
+                    path,
+                    new IdentifierChangedEventHandler(HandleIdentifierChange)
+                );
             else
                 this.prvpath = ManagementPath._Clone(null);
 
             if (null != options)
             {
-                this.options = ConnectionOptions._Clone(options, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                this.options = ConnectionOptions._Clone(
+                    options,
+                    new IdentifierChangedEventHandler(HandleIdentifierChange)
+                );
             }
             else
                 this.options = null;
@@ -807,16 +1222,24 @@ namespace System.Management
         {
             get
             {
-                return options ??= ConnectionOptions._Clone(null, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                return options ??= ConnectionOptions._Clone(
+                    null,
+                    new IdentifierChangedEventHandler(HandleIdentifierChange)
+                );
             }
             set
             {
                 if (null != value)
                 {
                     if (null != options)
-                        options.IdentifierChanged -= new IdentifierChangedEventHandler(HandleIdentifierChange);
+                        options.IdentifierChanged -= new IdentifierChangedEventHandler(
+                            HandleIdentifierChange
+                        );
 
-                    options = ConnectionOptions._Clone((ConnectionOptions)value, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    options = ConnectionOptions._Clone(
+                        (ConnectionOptions)value,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
 
                     //the options property has changed so act like we fired the event
                     HandleIdentifierChange(this, null);
@@ -843,20 +1266,22 @@ namespace System.Management
         /// </example>
         public ManagementPath Path
         {
-            get
-            {
-                return prvpath ??= ManagementPath._Clone(null);
-            }
+            get { return prvpath ??= ManagementPath._Clone(null); }
             set
             {
                 if (null != value)
                 {
                     if (null != prvpath)
-                        prvpath.IdentifierChanged -= new IdentifierChangedEventHandler(HandleIdentifierChange);
+                        prvpath.IdentifierChanged -= new IdentifierChangedEventHandler(
+                            HandleIdentifierChange
+                        );
 
                     IsDefaulted = false; //someone is specifically setting the scope path so it's not defaulted any more
 
-                    prvpath = ManagementPath._Clone((ManagementPath)value, new IdentifierChangedEventHandler(HandleIdentifierChange));
+                    prvpath = ManagementPath._Clone(
+                        (ManagementPath)value,
+                        new IdentifierChangedEventHandler(HandleIdentifierChange)
+                    );
 
                     //the path property has changed so act like we fired the event
                     HandleIdentifierChange(this, null);
@@ -927,7 +1352,6 @@ namespace System.Management
             if (null == prvpath)
                 throw new InvalidOperationException();
 
-
             /*
              * If we're not connected yet, this is the time to do it... We lock
              * the state to prevent 2 threads simultaneously doing the same
@@ -947,7 +1371,9 @@ namespace System.Management
                             //
                             // Ensure we are able to trap exceptions from worker thread.
                             //
-                            ThreadDispatch disp = new ThreadDispatch(new ThreadDispatch.ThreadWorkerMethodWithParam(InitializeGuts));
+                            ThreadDispatch disp = new ThreadDispatch(
+                                new ThreadDispatch.ThreadWorkerMethodWithParam(InitializeGuts)
+                            );
                             disp.Parameter = this;
                             disp.Start();
                         }
@@ -967,7 +1393,9 @@ namespace System.Management
                 threadParam.Options = new ConnectionOptions();
             }
 
-            string nsPath = threadParam.prvpath.GetNamespacePath((int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY);
+            string nsPath = threadParam.prvpath.GetNamespacePath(
+                (int)tag_WBEM_GET_TEXT_FLAGS.WBEMPATH_GET_SERVER_AND_NAMESPACE_ONLY
+            );
 
             // If no namespace specified, fill in the default one
             if ((null == nsPath) || (0 == nsPath.Length))
@@ -976,7 +1404,10 @@ namespace System.Management
                 // path here as we do NOT want to trigger an
                 // IdentifierChanged event as a result of this set
 
-                nsPath = threadParam.prvpath.SetNamespacePath(ManagementPath.DefaultPath.Path, out _);
+                nsPath = threadParam.prvpath.SetNamespacePath(
+                    ManagementPath.DefaultPath.Path,
+                    out _
+                );
             }
 
             int status = (int)ManagementStatus.NoError;
@@ -985,16 +1416,22 @@ namespace System.Management
             //If we're on XP or higher, always use the "max_wait" flag to avoid hanging
             if (Environment.OSVersion.Platform == PlatformID.Win32NT)
             {
-
-                if (((Environment.OSVersion.Version.Major == 5) && (Environment.OSVersion.Version.Minor >= 1)) || (Environment.OSVersion.Version.Major >= 6))
+                if (
+                    (
+                        (Environment.OSVersion.Version.Major == 5)
+                        && (Environment.OSVersion.Version.Minor >= 1)
+                    ) || (Environment.OSVersion.Version.Major >= 6)
+                )
                 {
-                    threadParam.options.Flags |= (int)tag_WBEM_CONNECT_OPTIONS.WBEM_FLAG_CONNECT_USE_MAX_WAIT;
+                    threadParam.options.Flags |= (int)
+                        tag_WBEM_CONNECT_OPTIONS.WBEM_FLAG_CONNECT_USE_MAX_WAIT;
                 }
             }
 
             try
             {
-                status = GetSecuredConnectHandler().ConnectNSecureIWbemServices(nsPath, ref threadParam.wbemServices);
+                status = GetSecuredConnectHandler()
+                    .ConnectNSecureIWbemServices(nsPath, ref threadParam.wbemServices);
             }
             catch (COMException e)
             {
@@ -1015,48 +1452,72 @@ namespace System.Management
         {
             return new SecurityHandler(this);
         }
+
         internal SecuredConnectHandler GetSecuredConnectHandler()
         {
             return new SecuredConnectHandler(this);
         }
-        internal SecuredIEnumWbemClassObjectHandler GetSecuredIEnumWbemClassObjectHandler(IEnumWbemClassObject pEnumWbemClassObject)
+
+        internal SecuredIEnumWbemClassObjectHandler GetSecuredIEnumWbemClassObjectHandler(
+            IEnumWbemClassObject pEnumWbemClassObject
+        )
         {
             return new SecuredIEnumWbemClassObjectHandler(this, pEnumWbemClassObject);
         }
-        internal SecuredIWbemServicesHandler GetSecuredIWbemServicesHandler(IWbemServices pWbemServiecs)
+
+        internal SecuredIWbemServicesHandler GetSecuredIWbemServicesHandler(
+            IWbemServices pWbemServiecs
+        )
         {
             return new SecuredIWbemServicesHandler(this, pWbemServiecs);
         }
-
-    }//ManagementScope
+    } //ManagementScope
 
     internal sealed class SecuredIEnumWbemClassObjectHandler
     {
         private readonly IEnumWbemClassObject pEnumWbemClassObjectsecurityHelper;
         private readonly ManagementScope scope;
-        internal SecuredIEnumWbemClassObjectHandler(ManagementScope theScope, IEnumWbemClassObject pEnumWbemClassObject)
+
+        internal SecuredIEnumWbemClassObjectHandler(
+            ManagementScope theScope,
+            IEnumWbemClassObject pEnumWbemClassObject
+        )
         {
             this.scope = theScope;
             pEnumWbemClassObjectsecurityHelper = pEnumWbemClassObject;
         }
+
         internal int Reset_()
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pEnumWbemClassObjectsecurityHelper.Reset_();
             return status;
         }
-        internal int Next_(int lTimeout, uint uCount, IWbemClassObject_DoNotMarshal[] ppOutParams, ref uint puReturned)
+
+        internal int Next_(
+            int lTimeout,
+            uint uCount,
+            IWbemClassObject_DoNotMarshal[] ppOutParams,
+            ref uint puReturned
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pEnumWbemClassObjectsecurityHelper.Next_(lTimeout, uCount, ppOutParams, out puReturned);
+            status = pEnumWbemClassObjectsecurityHelper.Next_(
+                lTimeout,
+                uCount,
+                ppOutParams,
+                out puReturned
+            );
             return status;
         }
+
         internal int NextAsync_(uint uCount, IWbemObjectSink pSink)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pEnumWbemClassObjectsecurityHelper.NextAsync_(uCount, pSink);
             return status;
         }
+
         internal int Clone_(ref IEnumWbemClassObject ppEnum)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1070,11 +1531,13 @@ namespace System.Management
                     pEnumWbemClassObjectsecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
+
         internal int Skip_(int lTimeout, uint nCount)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1082,7 +1545,6 @@ namespace System.Management
             return status;
         }
     }
-
 
     internal sealed class SecuredConnectHandler
     {
@@ -1092,6 +1554,7 @@ namespace System.Management
         {
             this.scope = theScope;
         }
+
         internal int ConnectNSecureIWbemServices(string path, ref IWbemServices pServices)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
@@ -1118,7 +1581,8 @@ namespace System.Management
                         scope.Options.GetContext(),
                         out pServices,
                         (int)scope.Options.Impersonation,
-                        (int)scope.Options.Authentication);
+                        (int)scope.Options.Authentication
+                    );
                     System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
                 }
                 finally
@@ -1138,12 +1602,19 @@ namespace System.Management
     {
         private readonly IWbemServices pWbemServiecsSecurityHelper;
         private readonly ManagementScope scope;
+
         internal SecuredIWbemServicesHandler(ManagementScope theScope, IWbemServices pWbemServiecs)
         {
             this.scope = theScope;
             pWbemServiecsSecurityHelper = pWbemServiecs;
         }
-        internal int OpenNamespace_(string strNamespace, int lFlags, ref IWbemServices ppWorkingNamespace, IntPtr ppCallResult)
+
+        internal int OpenNamespace_(
+            string strNamespace,
+            int lFlags,
+            ref IWbemServices ppWorkingNamespace,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_NOT_SUPPORTED;
             //This should go through WMINET_utils layer and ppWorkingNamespace should be secured. See implementation of CreateInstanceEnum method.
@@ -1156,32 +1627,63 @@ namespace System.Management
             status = pWbemServiecsSecurityHelper.CancelAsyncCall_(pSink);
             return status;
         }
+
         internal int QueryObjectSink_(int lFlags, ref IWbemObjectSink ppResponseHandler)
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.QueryObjectSink_(lFlags, out ppResponseHandler);
             return status;
         }
-        internal int GetObject_(string strObjectPath, int lFlags, IWbemContext pCtx, ref IWbemClassObjectFreeThreaded ppObject, IntPtr ppCallResult)
+
+        internal int GetObject_(
+            string strObjectPath,
+            int lFlags,
+            IWbemContext pCtx,
+            ref IWbemClassObjectFreeThreaded ppObject,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.GetObject_(strObjectPath, lFlags, pCtx, out ppObject, ppCallResult);
+            status = pWbemServiecsSecurityHelper.GetObject_(
+                strObjectPath,
+                lFlags,
+                pCtx,
+                out ppObject,
+                ppCallResult
+            );
             return status;
         }
 
-        internal int GetObjectAsync_(string strObjectPath, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+        internal int GetObjectAsync_(
+            string strObjectPath,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.GetObjectAsync_(strObjectPath, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.GetObjectAsync_(
+                strObjectPath,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int PutClass_(IWbemClassObjectFreeThreaded pObject, int lFlags, IWbemContext pCtx, IntPtr ppCallResult)
+
+        internal int PutClass_(
+            IWbemClassObjectFreeThreaded pObject,
+            int lFlags,
+            IWbemContext pCtx,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.PutClassWmi_f(pObject,
+                status = WmiNetUtilsHelper.PutClassWmi_f(
+                    pObject,
                     lFlags,
                     pCtx,
                     ppCallResult,
@@ -1190,36 +1692,72 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
-        internal int PutClassAsync_(IWbemClassObjectFreeThreaded pObject, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int PutClassAsync_(
+            IWbemClassObjectFreeThreaded pObject,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.PutClassAsync_(pObject, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.PutClassAsync_(
+                pObject,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int DeleteClass_(string strClass, int lFlags, IWbemContext pCtx, IntPtr ppCallResult)
+
+        internal int DeleteClass_(
+            string strClass,
+            int lFlags,
+            IWbemContext pCtx,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             status = pWbemServiecsSecurityHelper.DeleteClass_(strClass, lFlags, pCtx, ppCallResult);
             return status;
         }
-        internal int DeleteClassAsync_(string strClass, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int DeleteClassAsync_(
+            string strClass,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.DeleteClassAsync_(strClass, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.DeleteClassAsync_(
+                strClass,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int CreateClassEnum_(string strSuperClass, int lFlags, IWbemContext pCtx, ref IEnumWbemClassObject ppEnum)
+
+        internal int CreateClassEnum_(
+            string strSuperClass,
+            int lFlags,
+            IWbemContext pCtx,
+            ref IEnumWbemClassObject ppEnum
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.CreateClassEnumWmi_f(strSuperClass,
+                status = WmiNetUtilsHelper.CreateClassEnumWmi_f(
+                    strSuperClass,
                     lFlags,
                     pCtx,
                     out ppEnum,
@@ -1228,24 +1766,43 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
-        internal int CreateClassEnumAsync_(string strSuperClass, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int CreateClassEnumAsync_(
+            string strSuperClass,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.CreateClassEnumAsync_(strSuperClass, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.CreateClassEnumAsync_(
+                strSuperClass,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int PutInstance_(IWbemClassObjectFreeThreaded pInst, int lFlags, IWbemContext pCtx, IntPtr ppCallResult)
+
+        internal int PutInstance_(
+            IWbemClassObjectFreeThreaded pInst,
+            int lFlags,
+            IWbemContext pCtx,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.PutInstanceWmi_f(pInst,
+                status = WmiNetUtilsHelper.PutInstanceWmi_f(
+                    pInst,
                     lFlags,
                     pCtx,
                     ppCallResult,
@@ -1254,37 +1811,77 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
-            return status;
-        }
-        internal int PutInstanceAsync_(IWbemClassObjectFreeThreaded pInst, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
-        {
-            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.PutInstanceAsync_(pInst, lFlags, pCtx, pResponseHandler);
-            return status;
-        }
-        internal int DeleteInstance_(string strObjectPath, int lFlags, IWbemContext pCtx, IntPtr ppCallResult)
-        {
-            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.DeleteInstance_(strObjectPath, lFlags, pCtx, ppCallResult);
-            return status;
-        }
-        internal int DeleteInstanceAsync_(string strObjectPath, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
-        {
-            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.DeleteInstanceAsync_(strObjectPath, lFlags, pCtx, pResponseHandler);
             return status;
         }
 
-        internal int CreateInstanceEnum_(string strFilter, int lFlags, IWbemContext pCtx, ref IEnumWbemClassObject ppEnum)
+        internal int PutInstanceAsync_(
+            IWbemClassObjectFreeThreaded pInst,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
+        {
+            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
+            status = pWbemServiecsSecurityHelper.PutInstanceAsync_(
+                pInst,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
+            return status;
+        }
+
+        internal int DeleteInstance_(
+            string strObjectPath,
+            int lFlags,
+            IWbemContext pCtx,
+            IntPtr ppCallResult
+        )
+        {
+            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
+            status = pWbemServiecsSecurityHelper.DeleteInstance_(
+                strObjectPath,
+                lFlags,
+                pCtx,
+                ppCallResult
+            );
+            return status;
+        }
+
+        internal int DeleteInstanceAsync_(
+            string strObjectPath,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
+        {
+            int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
+            status = pWbemServiecsSecurityHelper.DeleteInstanceAsync_(
+                strObjectPath,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
+            return status;
+        }
+
+        internal int CreateInstanceEnum_(
+            string strFilter,
+            int lFlags,
+            IWbemContext pCtx,
+            ref IEnumWbemClassObject ppEnum
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.CreateInstanceEnumWmi_f(strFilter,
+                status = WmiNetUtilsHelper.CreateInstanceEnumWmi_f(
+                    strFilter,
                     lFlags,
                     pCtx,
                     out ppEnum,
@@ -1293,24 +1890,44 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
-        internal int CreateInstanceEnumAsync_(string strFilter, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int CreateInstanceEnumAsync_(
+            string strFilter,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.CreateInstanceEnumAsync_(strFilter, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.CreateInstanceEnumAsync_(
+                strFilter,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int ExecQuery_(string strQueryLanguage, string strQuery, int lFlags, IWbemContext pCtx, ref IEnumWbemClassObject ppEnum)
+
+        internal int ExecQuery_(
+            string strQueryLanguage,
+            string strQuery,
+            int lFlags,
+            IWbemContext pCtx,
+            ref IEnumWbemClassObject ppEnum
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.ExecQueryWmi_f(strQueryLanguage,
+                status = WmiNetUtilsHelper.ExecQueryWmi_f(
+                    strQueryLanguage,
                     strQuery,
                     lFlags,
                     pCtx,
@@ -1320,24 +1937,46 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
-        internal int ExecQueryAsync_(string strQueryLanguage, string strQuery, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int ExecQueryAsync_(
+            string strQueryLanguage,
+            string strQuery,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.ExecQueryAsync_(strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.ExecQueryAsync_(
+                strQueryLanguage,
+                strQuery,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int ExecNotificationQuery_(string strQueryLanguage, string strQuery, int lFlags, IWbemContext pCtx, ref IEnumWbemClassObject ppEnum)
+
+        internal int ExecNotificationQuery_(
+            string strQueryLanguage,
+            string strQuery,
+            int lFlags,
+            IWbemContext pCtx,
+            ref IEnumWbemClassObject ppEnum
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                status = WmiNetUtilsHelper.ExecNotificationQueryWmi_f(strQueryLanguage,
+                status = WmiNetUtilsHelper.ExecNotificationQueryWmi_f(
+                    strQueryLanguage,
                     strQuery,
                     lFlags,
                     pCtx,
@@ -1347,31 +1986,76 @@ namespace System.Management
                     pWbemServiecsSecurityHelper,
                     scope.Options.Username,
                     password,
-                    scope.Options.Authority);
+                    scope.Options.Authority
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
             }
             return status;
         }
-        internal int ExecNotificationQueryAsync_(string strQueryLanguage, string strQuery, int lFlags, IWbemContext pCtx, IWbemObjectSink pResponseHandler)
+
+        internal int ExecNotificationQueryAsync_(
+            string strQueryLanguage,
+            string strQuery,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.ExecNotificationQueryAsync_(strQueryLanguage, strQuery, lFlags, pCtx, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.ExecNotificationQueryAsync_(
+                strQueryLanguage,
+                strQuery,
+                lFlags,
+                pCtx,
+                pResponseHandler
+            );
             return status;
         }
-        internal int ExecMethod_(string strObjectPath, string strMethodName, int lFlags, IWbemContext pCtx, IWbemClassObjectFreeThreaded pInParams, ref IWbemClassObjectFreeThreaded ppOutParams, IntPtr ppCallResult)
+
+        internal int ExecMethod_(
+            string strObjectPath,
+            string strMethodName,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemClassObjectFreeThreaded pInParams,
+            ref IWbemClassObjectFreeThreaded ppOutParams,
+            IntPtr ppCallResult
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.ExecMethod_(strObjectPath, strMethodName, lFlags, pCtx, pInParams, out ppOutParams, ppCallResult);
+            status = pWbemServiecsSecurityHelper.ExecMethod_(
+                strObjectPath,
+                strMethodName,
+                lFlags,
+                pCtx,
+                pInParams,
+                out ppOutParams,
+                ppCallResult
+            );
             return status;
         }
-        internal int ExecMethodAsync_(string strObjectPath, string strMethodName, int lFlags, IWbemContext pCtx, IWbemClassObjectFreeThreaded pInParams, IWbemObjectSink pResponseHandler)
+
+        internal int ExecMethodAsync_(
+            string strObjectPath,
+            string strMethodName,
+            int lFlags,
+            IWbemContext pCtx,
+            IWbemClassObjectFreeThreaded pInParams,
+            IWbemObjectSink pResponseHandler
+        )
         {
             int status = (int)tag_WBEMSTATUS.WBEM_E_FAILED;
-            status = pWbemServiecsSecurityHelper.ExecMethodAsync_(strObjectPath, strMethodName, lFlags, pCtx, pInParams, pResponseHandler);
+            status = pWbemServiecsSecurityHelper.ExecMethodAsync_(
+                strObjectPath,
+                strMethodName,
+                lFlags,
+                pCtx,
+                pInParams,
+                pResponseHandler
+            );
             return status;
         }
     }
-
 
     internal sealed class SecurityHandler
     {
@@ -1402,24 +2086,21 @@ namespace System.Management
                     WmiNetUtilsHelper.ResetSecurity_f(handle);
                 }
             }
-
         }
-
 
         internal void Secure(IWbemServices services)
         {
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                int status = WmiNetUtilsHelper.BlessIWbemServices_f
-                    (
+                int status = WmiNetUtilsHelper.BlessIWbemServices_f(
                     services,
                     scope.Options.Username,
                     password,
                     scope.Options.Authority,
                     (int)scope.Options.Impersonation,
                     (int)scope.Options.Authentication
-                    );
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
                 if (status < 0)
                 {
@@ -1437,15 +2118,14 @@ namespace System.Management
             if (null != scope)
             {
                 IntPtr password = scope.Options.GetPassword();
-                int status = WmiNetUtilsHelper.BlessIWbemServicesObject_f
-                    (
+                int status = WmiNetUtilsHelper.BlessIWbemServicesObject_f(
                     unknown,
                     scope.Options.Username,
                     password,
                     scope.Options.Authority,
                     (int)scope.Options.Impersonation,
                     (int)scope.Options.Authentication
-                    );
+                );
                 System.Runtime.InteropServices.Marshal.ZeroFreeBSTR(password);
                 if (status < 0)
                 {
@@ -1453,17 +2133,13 @@ namespace System.Management
                 }
             }
         }
-
-
     } //SecurityHandler
-
 
     /// <summary>
     /// Converts a String to a ManagementScope
     /// </summary>
     internal sealed class ManagementScopeConverter : ExpandableObjectConverter
     {
-
         /// <summary>
         /// Determines if this converter can convert an object in the given source type to the native type of the converter.
         /// </summary>
@@ -1510,9 +2186,13 @@ namespace System.Management
         /// <param name='value'>The Object to convert.</param>
         /// <param name='destinationType'>The Type to convert the value parameter to.</param>
         /// <returns>An Object that represents the converted value.</returns>
-        public override object ConvertTo(ITypeDescriptorContext context, CultureInfo culture, object value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext context,
+            CultureInfo culture,
+            object value,
+            Type destinationType
+        )
         {
-
             if (destinationType == null)
             {
                 throw new ArgumentNullException(nameof(destinationType));
@@ -1521,7 +2201,9 @@ namespace System.Management
             if (value is ManagementScope && destinationType == typeof(InstanceDescriptor))
             {
                 ManagementScope obj = ((ManagementScope)(value));
-                ConstructorInfo ctor = typeof(ManagementScope).GetConstructor(new Type[] { typeof(string) });
+                ConstructorInfo ctor = typeof(ManagementScope).GetConstructor(
+                    new Type[] { typeof(string) }
+                );
                 if (ctor != null)
                 {
                     return new InstanceDescriptor(ctor, new object[] { obj.Path.Path });

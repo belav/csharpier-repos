@@ -23,7 +23,10 @@ namespace System.Web.Http
         [InlineData("RegularConfig/GetParameterRulesCount_RequestConfig", 3)]
         [InlineData("SpecialConfig/GetServicesCount_RequestConfig", 1)]
         [InlineData("RegularConfig/GetServicesCount_RequestConfig", 0)]
-        public async Task ControllerConfigurationSettings_ArePropagatedTo_ControllerAndRequest(string requestUrl, int count)
+        public async Task ControllerConfigurationSettings_ArePropagatedTo_ControllerAndRequest(
+            string requestUrl,
+            int count
+        )
         {
             HttpConfiguration config = new HttpConfiguration();
             config.Routes.MapHttpRoute("Default", "{controller}/{action}");

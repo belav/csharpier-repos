@@ -17,20 +17,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.RemoveUnusedLocalFunction), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.RemoveUnusedLocalFunction
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
     internal class CSharpRemoveUnusedLocalFunctionCodeFixProvider : SyntaxEditorBasedCodeFixProvider
     {
         private const string CS8321 = nameof(CS8321); // The local function 'X' is declared but never used
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpRemoveUnusedLocalFunctionCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpRemoveUnusedLocalFunctionCodeFixProvider() { }
 
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-            => ImmutableArray.Create(CS8321);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(CS8321);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -38,12 +46,20 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
                 CodeAction.Create(
                     CSharpCodeFixesResources.Remove_unused_function,
                     GetDocumentUpdater(context),
-                    nameof(CSharpCodeFixesResources.Remove_unused_function)),
-                context.Diagnostics);
+                    nameof(CSharpCodeFixesResources.Remove_unused_function)
+                ),
+                context.Diagnostics
+            );
             return Task.CompletedTask;
         }
 
-        protected override Task FixAllAsync(Document document, ImmutableArray<Diagnostic> diagnostics, SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        protected override Task FixAllAsync(
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var root = editor.OriginalRoot;
 
@@ -51,14 +67,21 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnusedLocalFunction
             // all inner local functions before processing outer local functions.  If we don't
             // do this, then SyntaxEditor will fail if it tries to remove an inner local function
             // after already removing the outer one.
-            var localFunctions = diagnostics.OrderBy(static (d1, d2) => d2.Location.SourceSpan.Start - d1.Location.SourceSpan.Start)
-                                            .Select(d => root.FindToken(d.Location.SourceSpan.Start))
-                                            .Select(t => t.GetAncestor<LocalFunctionStatementSyntax>());
+            var localFunctions = diagnostics
+                .OrderBy(
+                    static (d1, d2) => d2.Location.SourceSpan.Start - d1.Location.SourceSpan.Start
+                )
+                .Select(d => root.FindToken(d.Location.SourceSpan.Start))
+                .Select(t => t.GetAncestor<LocalFunctionStatementSyntax>());
 
             foreach (var localFunction in localFunctions)
             {
                 if (localFunction != null)
-                    editor.RemoveNode(localFunction.Parent is GlobalStatementSyntax globalStatement ? globalStatement : localFunction);
+                    editor.RemoveNode(
+                        localFunction.Parent is GlobalStatementSyntax globalStatement
+                            ? globalStatement
+                            : localFunction
+                    );
             }
 
             return Task.CompletedTask;

@@ -16,17 +16,64 @@ public class ComplexPropertyEntryTest
         var entity = context.Add(CreateYogurt()).Entity;
         var entry = context.GetService<IStateManager>().GetOrCreateEntry(entity);
 
-        Assert.Same(entry, context.Entry(entity).ComplexProperty(e => e.Culture).GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty<Culture>("Culture").GetInfrastructure());
+        Assert.Same(
+            entry,
+            context.Entry(entity).ComplexProperty(e => e.Culture).GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry(entity).ComplexProperty<Culture>("Culture").GetInfrastructure()
+        );
         Assert.Same(entry, context.Entry(entity).ComplexProperty("Culture").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("Culture").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("Culture").GetInfrastructure());
+        Assert.Same(
+            entry,
+            context.Entry((object)entity).ComplexProperty("Culture").GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry((object)entity).ComplexProperty("Culture").GetInfrastructure()
+        );
 
-        Assert.Same(entry, context.Entry(entity).ComplexProperty(e => e.Culture).ComplexProperty(e => e.License).GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty<Culture>("Culture").ComplexProperty(e => e.License).GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty("Culture").ComplexProperty("License").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").GetInfrastructure());
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.Culture)
+                .ComplexProperty(e => e.License)
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty<Culture>("Culture")
+                .ComplexProperty(e => e.License)
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
     }
 
     [ConditionalFact]
@@ -35,17 +82,64 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var entity = context.Add(CreateYogurt()).Entity;
 
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name);
-        Assert.Equal("Culture", context.Entry(entity).ComplexProperty<Culture>("Culture").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty(e => e.Culture).Metadata.Name
+        );
+        Assert.Equal(
+            "Culture",
+            context.Entry(entity).ComplexProperty<Culture>("Culture").Metadata.Name
+        );
         Assert.Equal("Culture", context.Entry(entity).ComplexProperty("Culture").Metadata.Name);
-        Assert.Equal("Culture", context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name);
-        Assert.Equal("Culture", context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name);
+        Assert.Equal(
+            "Culture",
+            context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name
+        );
+        Assert.Equal(
+            "Culture",
+            context.Entry((object)entity).ComplexProperty("Culture").Metadata.Name
+        );
 
-        Assert.Equal("License", context.Entry(entity).ComplexProperty(e => e.Culture).ComplexProperty(e => e.License).Metadata.Name);
-        Assert.Equal("License", context.Entry(entity).ComplexProperty<Culture>("Culture").ComplexProperty(e => e.License).Metadata.Name);
-        Assert.Equal("License", context.Entry(entity).ComplexProperty("Culture").ComplexProperty("License").Metadata.Name);
-        Assert.Equal("License", context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").Metadata.Name);
-        Assert.Equal("License", context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").Metadata.Name);
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.Culture)
+                .ComplexProperty(e => e.License)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty<Culture>("Culture")
+                .ComplexProperty(e => e.License)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
     }
 
     [ConditionalFact]
@@ -54,25 +148,88 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var entity = context.Add(CreateYogurt()).Entity;
 
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty(e => e.Culture).Property(e => e.Rating).Metadata.Name);
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty<Culture>("Culture").Property(e => e.Rating).Metadata.Name);
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty("Culture").Property("Rating").Metadata.Name);
-        Assert.Equal("Rating", context.Entry((object)entity).ComplexProperty("Culture").Property("Rating").Metadata.Name);
-        Assert.Equal("Rating", context.Entry((object)entity).ComplexProperty("Culture").Property("Rating").Metadata.Name);
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.Culture)
+                .Property(e => e.Rating)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry(entity)
+                .ComplexProperty<Culture>("Culture")
+                .Property(e => e.Rating)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context.Entry(entity).ComplexProperty("Culture").Property("Rating").Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .Property("Rating")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .Property("Rating")
+                .Metadata.Name
+        );
 
         Assert.Equal(
             "Charge",
-            context.Entry(entity).ComplexProperty(e => e.Culture).ComplexProperty(e => e.License).Property(e => e.Charge).Metadata.Name);
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.Culture)
+                .ComplexProperty(e => e.License)
+                .Property(e => e.Charge)
+                .Metadata.Name
+        );
         Assert.Equal(
             "Charge",
-            context.Entry(entity).ComplexProperty<Culture>("Culture").ComplexProperty(e => e.License).Property(e => e.Charge).Metadata
-                .Name);
+            context
+                .Entry(entity)
+                .ComplexProperty<Culture>("Culture")
+                .ComplexProperty(e => e.License)
+                .Property(e => e.Charge)
+                .Metadata.Name
+        );
         Assert.Equal(
-            "Charge", context.Entry(entity).ComplexProperty("Culture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            "Charge",
+            context
+                .Entry(entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
         Assert.Equal(
-            "Charge", context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            "Charge",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
         Assert.Equal(
-            "Charge", context.Entry((object)entity).ComplexProperty("Culture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            "Charge",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("Culture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
     }
 
     [ConditionalFact]
@@ -83,7 +240,8 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Rating", nameof(Culture), "int", "string"),
-            Assert.Throws<ArgumentException>(() => complexEntry.Property<string>("Rating")).Message);
+            Assert.Throws<ArgumentException>(() => complexEntry.Property<string>("Rating")).Message
+        );
     }
 
     [ConditionalFact]
@@ -94,13 +252,28 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -109,14 +282,20 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.Culture);
 
-        var modified = complexEntry.Properties.Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        var modified = complexEntry
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Empty(modified);
 
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry.Properties.Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        modified = complexEntry
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Equal(new List<string> { "Species", "Subspecies" }, modified);
     }
@@ -128,14 +307,9 @@ public class ComplexPropertyEntryTest
         var complexEntry = context.Add(CreateYogurt()).ComplexProperty(e => e.Culture);
 
         Assert.Equal(
-            new List<string>
-            {
-                "Rating",
-                "Species",
-                "Subspecies",
-                "Validation"
-            },
-            complexEntry.Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Rating", "Species", "Subspecies", "Validation" },
+            complexEntry.Properties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -146,13 +320,19 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("License", "Culture", "License", "string"),
-            Assert.Throws<ArgumentException>(() => complexEntry.ComplexProperty<string>("License")).Message);
+            Assert
+                .Throws<ArgumentException>(() => complexEntry.ComplexProperty<string>("License"))
+                .Message
+        );
 
         var nestedComplexEntry = complexEntry.ComplexProperty(e => e.License);
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Tag", "License", "Tag", "string"),
-            Assert.Throws<ArgumentException>(() => nestedComplexEntry.ComplexProperty<string>("Tag")).Message);
+            Assert
+                .Throws<ArgumentException>(() => nestedComplexEntry.ComplexProperty<string>("Tag"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -162,14 +342,38 @@ public class ComplexPropertyEntryTest
         var complexEntry = context.Add(CreateYogurt()).ComplexProperty(e => e.Culture);
 
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty<int>("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -180,13 +384,15 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             new List<string> { "License", "Manufacturer" },
-            complexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            complexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         var nestedComplexEntry = complexEntry.ComplexProperty(e => e.License);
 
         Assert.Equal(
             new List<string> { "Tag", "Tog" },
-            nestedComplexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            nestedComplexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -196,18 +402,67 @@ public class ComplexPropertyEntryTest
         var entity = context.Add(CreateYogurt()).Entity;
         var entry = context.GetService<IStateManager>().GetOrCreateEntry(entity);
 
-        Assert.Same(entry, context.Entry(entity).ComplexProperty(e => e.FieldCulture).GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty("FieldCulture").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("FieldCulture").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("FieldCulture").GetInfrastructure());
-
-        Assert.Same(entry, context.Entry(entity).ComplexProperty(e => e.FieldCulture).ComplexProperty(e => e.License).GetInfrastructure());
         Assert.Same(
-            entry, context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").ComplexProperty(e => e.License).GetInfrastructure());
-        Assert.Same(entry, context.Entry(entity).ComplexProperty("FieldCulture").ComplexProperty("License").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").GetInfrastructure());
-        Assert.Same(entry, context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").GetInfrastructure());
+            entry,
+            context.Entry(entity).ComplexProperty(e => e.FieldCulture).GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry(entity).ComplexProperty("FieldCulture").GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry((object)entity).ComplexProperty("FieldCulture").GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context.Entry((object)entity).ComplexProperty("FieldCulture").GetInfrastructure()
+        );
+
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.FieldCulture)
+                .ComplexProperty(e => e.License)
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty<FieldCulture>("FieldCulture")
+                .ComplexProperty(e => e.License)
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry(entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
+        Assert.Same(
+            entry,
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .GetInfrastructure()
+        );
     }
 
     [ConditionalFact]
@@ -216,18 +471,67 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var entity = context.Add(CreateYogurt()).Entity;
 
-        Assert.Equal("FieldCulture", context.Entry(entity).ComplexProperty(e => e.FieldCulture).Metadata.Name);
-        Assert.Equal("FieldCulture", context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").Metadata.Name);
-        Assert.Equal("FieldCulture", context.Entry(entity).ComplexProperty("FieldCulture").Metadata.Name);
-        Assert.Equal("FieldCulture", context.Entry((object)entity).ComplexProperty("FieldCulture").Metadata.Name);
-        Assert.Equal("FieldCulture", context.Entry((object)entity).ComplexProperty("FieldCulture").Metadata.Name);
-
-        Assert.Equal("License", context.Entry(entity).ComplexProperty(e => e.FieldCulture).ComplexProperty(e => e.License).Metadata.Name);
         Assert.Equal(
-            "License", context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").ComplexProperty(e => e.License).Metadata.Name);
-        Assert.Equal("License", context.Entry(entity).ComplexProperty("FieldCulture").ComplexProperty("License").Metadata.Name);
-        Assert.Equal("License", context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").Metadata.Name);
-        Assert.Equal("License", context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").Metadata.Name);
+            "FieldCulture",
+            context.Entry(entity).ComplexProperty(e => e.FieldCulture).Metadata.Name
+        );
+        Assert.Equal(
+            "FieldCulture",
+            context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").Metadata.Name
+        );
+        Assert.Equal(
+            "FieldCulture",
+            context.Entry(entity).ComplexProperty("FieldCulture").Metadata.Name
+        );
+        Assert.Equal(
+            "FieldCulture",
+            context.Entry((object)entity).ComplexProperty("FieldCulture").Metadata.Name
+        );
+        Assert.Equal(
+            "FieldCulture",
+            context.Entry((object)entity).ComplexProperty("FieldCulture").Metadata.Name
+        );
+
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.FieldCulture)
+                .ComplexProperty(e => e.License)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty<FieldCulture>("FieldCulture")
+                .ComplexProperty(e => e.License)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry(entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "License",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Metadata.Name
+        );
     }
 
     [ConditionalFact]
@@ -236,28 +540,88 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var entity = context.Add(CreateYogurt()).Entity;
 
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty(e => e.FieldCulture).Property(e => e.Rating).Metadata.Name);
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").Property(e => e.Rating).Metadata.Name);
-        Assert.Equal("Rating", context.Entry(entity).ComplexProperty("FieldCulture").Property("Rating").Metadata.Name);
-        Assert.Equal("Rating", context.Entry((object)entity).ComplexProperty("FieldCulture").Property("Rating").Metadata.Name);
-        Assert.Equal("Rating", context.Entry((object)entity).ComplexProperty("FieldCulture").Property("Rating").Metadata.Name);
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.FieldCulture)
+                .Property(e => e.Rating)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry(entity)
+                .ComplexProperty<FieldCulture>("FieldCulture")
+                .Property(e => e.Rating)
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context.Entry(entity).ComplexProperty("FieldCulture").Property("Rating").Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .Property("Rating")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Rating",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .Property("Rating")
+                .Metadata.Name
+        );
 
         Assert.Equal(
             "Charge",
-            context.Entry(entity).ComplexProperty(e => e.FieldCulture).ComplexProperty(e => e.License).Property(e => e.Charge).Metadata
-                .Name);
+            context
+                .Entry(entity)
+                .ComplexProperty(e => e.FieldCulture)
+                .ComplexProperty(e => e.License)
+                .Property(e => e.Charge)
+                .Metadata.Name
+        );
         Assert.Equal(
             "Charge",
-            context.Entry(entity).ComplexProperty<FieldCulture>("FieldCulture").ComplexProperty(e => e.License).Property(e => e.Charge)
-                .Metadata.Name);
-        Assert.Equal(
-            "Charge", context.Entry(entity).ComplexProperty("FieldCulture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            context
+                .Entry(entity)
+                .ComplexProperty<FieldCulture>("FieldCulture")
+                .ComplexProperty(e => e.License)
+                .Property(e => e.Charge)
+                .Metadata.Name
+        );
         Assert.Equal(
             "Charge",
-            context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            context
+                .Entry(entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
         Assert.Equal(
             "Charge",
-            context.Entry((object)entity).ComplexProperty("FieldCulture").ComplexProperty("License").Property("Charge").Metadata.Name);
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
+        Assert.Equal(
+            "Charge",
+            context
+                .Entry((object)entity)
+                .ComplexProperty("FieldCulture")
+                .ComplexProperty("License")
+                .Property("Charge")
+                .Metadata.Name
+        );
     }
 
     [ConditionalFact]
@@ -268,7 +632,8 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Rating", nameof(FieldCulture), "int", "string"),
-            Assert.Throws<ArgumentException>(() => complexEntry.Property<string>("Rating")).Message);
+            Assert.Throws<ArgumentException>(() => complexEntry.Property<string>("Rating")).Message
+        );
     }
 
     [ConditionalFact]
@@ -279,13 +644,28 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
             CoreStrings.PropertyNotFound("Chimp", complexEntry.Metadata.ComplexType.DisplayName()),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.Property<int>("Chimp").Metadata.Name).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.Property<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -294,14 +674,20 @@ public class ComplexPropertyEntryTest
         using var context = new YogurtContext();
         var complexEntry = context.Attach(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
-        var modified = complexEntry.Properties.Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        var modified = complexEntry
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Empty(modified);
 
         complexEntry.Property(e => e.Species).CurrentValue = "S";
         complexEntry.Property(e => e.Subspecies).CurrentValue = "SS";
 
-        modified = complexEntry.Properties.Where(e => e.IsModified).Select(e => e.Metadata.Name).ToList();
+        modified = complexEntry
+            .Properties.Where(e => e.IsModified)
+            .Select(e => e.Metadata.Name)
+            .ToList();
 
         Assert.Equal(new List<string> { "Species", "Subspecies" }, modified);
     }
@@ -313,14 +699,9 @@ public class ComplexPropertyEntryTest
         var complexEntry = context.Add(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
         Assert.Equal(
-            new List<string>
-            {
-                "Rating",
-                "Species",
-                "Subspecies",
-                "Validation"
-            },
-            complexEntry.Properties.Select(e => e.Metadata.Name).ToList());
+            new List<string> { "Rating", "Species", "Subspecies", "Validation" },
+            complexEntry.Properties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
     [ConditionalFact]
@@ -330,14 +711,25 @@ public class ComplexPropertyEntryTest
         var complexEntry = context.Add(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
         Assert.Equal(
-            CoreStrings.WrongGenericPropertyType("License", "FieldCulture", "FieldLicense", "string"),
-            Assert.Throws<ArgumentException>(() => complexEntry.ComplexProperty<string>("License")).Message);
+            CoreStrings.WrongGenericPropertyType(
+                "License",
+                "FieldCulture",
+                "FieldLicense",
+                "string"
+            ),
+            Assert
+                .Throws<ArgumentException>(() => complexEntry.ComplexProperty<string>("License"))
+                .Message
+        );
 
         var nestedComplexEntry = complexEntry.ComplexProperty(e => e.License);
 
         Assert.Equal(
             CoreStrings.WrongGenericPropertyType("Tag", "FieldLicense", "FieldTag", "string"),
-            Assert.Throws<ArgumentException>(() => nestedComplexEntry.ComplexProperty<string>("Tag")).Message);
+            Assert
+                .Throws<ArgumentException>(() => nestedComplexEntry.ComplexProperty<string>("Tag"))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -347,14 +739,38 @@ public class ComplexPropertyEntryTest
         var complexEntry = context.Add(CreateYogurt()).ComplexProperty(e => e.FieldCulture);
 
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty("Chimp").Metadata.Name
+                )
+                .Message
+        );
         Assert.Equal(
-            CoreStrings.ComplexPropertyNotFound(complexEntry.Metadata.ComplexType.DisplayName(), "Chimp"),
-            Assert.Throws<InvalidOperationException>(() => complexEntry.ComplexProperty<int>("Chimp").Metadata.Name).Message);
+            CoreStrings.ComplexPropertyNotFound(
+                complexEntry.Metadata.ComplexType.DisplayName(),
+                "Chimp"
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => complexEntry.ComplexProperty<int>("Chimp").Metadata.Name
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -365,17 +781,19 @@ public class ComplexPropertyEntryTest
 
         Assert.Equal(
             new List<string> { "License", "Manufacturer" },
-            complexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            complexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
 
         var nestedComplexEntry = complexEntry.ComplexProperty(e => e.License);
 
         Assert.Equal(
             new List<string> { "Tag", "Tog" },
-            nestedComplexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList());
+            nestedComplexEntry.ComplexProperties.Select(e => e.Metadata.Name).ToList()
+        );
     }
 
-    private static Yogurt CreateYogurt()
-        => new()
+    private static Yogurt CreateYogurt() =>
+        new()
         {
             Id = Guid.NewGuid(),
             Culture = new Culture
@@ -385,18 +803,18 @@ public class ComplexPropertyEntryTest
                     Charge = 1.0m,
                     Tag = new Tag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new Tog { Text = "To1" }
+                    Tog = new Tog { Text = "To1" },
                 },
                 Manufacturer = new Manufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new Tag { Text = "Ta2" },
-                    Tog = new Tog { Text = "To2" }
+                    Tog = new Tog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
             FieldCulture = new FieldCulture
             {
@@ -405,18 +823,18 @@ public class ComplexPropertyEntryTest
                     Charge = 1.0m,
                     Tag = new FieldTag { Text = "Ta1" },
                     Title = "Ti1",
-                    Tog = new FieldTog { Text = "To1" }
+                    Tog = new FieldTog { Text = "To1" },
                 },
                 Manufacturer = new FieldManufacturer
                 {
                     Name = "M1",
                     Rating = 7,
                     Tag = new FieldTag { Text = "Ta2" },
-                    Tog = new FieldTog { Text = "To2" }
+                    Tog = new FieldTog { Text = "To2" },
                 },
                 Rating = 8,
                 Species = "S1",
-                Validation = false
+                Validation = false,
             },
         };
 
@@ -429,59 +847,72 @@ public class ComplexPropertyEntryTest
 
     private class YogurtContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(GetType().FullName!);
 
-        protected internal override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Yogurt>(
-                b =>
-                {
-                    b.ComplexProperty(
-                        e => e.Culture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
+        protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Yogurt>(b =>
+            {
+                b.ComplexProperty(
+                    e => e.Culture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
 
-                    b.ComplexProperty(
-                        e => e.FieldCulture, b =>
-                        {
-                            b.ComplexProperty(
-                                e => e.License, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                            b.ComplexProperty(
-                                e => e.Manufacturer, b =>
-                                {
-                                    b.ComplexProperty(e => e.Tag);
-                                    b.ComplexProperty(e => e.Tog);
-                                });
-                        });
-                });
+                b.ComplexProperty(
+                    e => e.FieldCulture,
+                    b =>
+                    {
+                        b.ComplexProperty(
+                            e => e.License,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                        b.ComplexProperty(
+                            e => e.Manufacturer,
+                            b =>
+                            {
+                                b.ComplexProperty(e => e.Tag);
+                                b.ComplexProperty(e => e.Tog);
+                            }
+                        );
+                    }
+                );
+            });
     }
 
     private struct Culture
     {
         public string Species { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
         public string? Subspecies { get; set; }
         public int Rating { get; set; }
+
         // ReSharper disable once UnusedAutoPropertyAccessor.Local
-        public bool? Validation  { get; set; }
+        public bool? Validation { get; set; }
         public Manufacturer Manufacturer { get; set; }
         public License License { get; set; }
     }

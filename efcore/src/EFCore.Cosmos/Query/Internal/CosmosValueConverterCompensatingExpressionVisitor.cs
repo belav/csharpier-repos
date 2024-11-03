@@ -20,7 +20,8 @@ public class CosmosValueConverterCompensatingExpressionVisitor : ExpressionVisit
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public CosmosValueConverterCompensatingExpressionVisitor(
-        ISqlExpressionFactory sqlExpressionFactory)
+        ISqlExpressionFactory sqlExpressionFactory
+    )
     {
         _sqlExpressionFactory = sqlExpressionFactory;
     }
@@ -31,18 +32,22 @@ public class CosmosValueConverterCompensatingExpressionVisitor : ExpressionVisit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitExtension(Expression extensionExpression)
-        => extensionExpression switch
+    protected override Expression VisitExtension(Expression extensionExpression) =>
+        extensionExpression switch
         {
-            ShapedQueryExpression shapedQueryExpression => VisitShapedQueryExpression(shapedQueryExpression),
+            ShapedQueryExpression shapedQueryExpression => VisitShapedQueryExpression(
+                shapedQueryExpression
+            ),
             ReadItemExpression readItemExpression => readItemExpression,
             SelectExpression selectExpression => VisitSelect(selectExpression),
-            SqlConditionalExpression sqlConditionalExpression => VisitSqlConditional(sqlConditionalExpression),
-            _ => base.VisitExtension(extensionExpression)
+            SqlConditionalExpression sqlConditionalExpression => VisitSqlConditional(
+                sqlConditionalExpression
+            ),
+            _ => base.VisitExtension(extensionExpression),
         };
 
-    private Expression VisitShapedQueryExpression(ShapedQueryExpression shapedQueryExpression)
-        => shapedQueryExpression.UpdateQueryExpression(Visit(shapedQueryExpression.QueryExpression));
+    private Expression VisitShapedQueryExpression(ShapedQueryExpression shapedQueryExpression) =>
+        shapedQueryExpression.UpdateQueryExpression(Visit(shapedQueryExpression.QueryExpression));
 
     private Expression VisitSelect(SelectExpression selectExpression)
     {
@@ -59,7 +64,9 @@ public class CosmosValueConverterCompensatingExpressionVisitor : ExpressionVisit
         var fromExpression = (RootReferenceExpression)Visit(selectExpression.FromExpression);
         changed |= fromExpression != selectExpression.FromExpression;
 
-        var predicate = TryCompensateForBoolWithValueConverter((SqlExpression)Visit(selectExpression.Predicate));
+        var predicate = TryCompensateForBoolWithValueConverter(
+            (SqlExpression)Visit(selectExpression.Predicate)
+        );
         changed |= predicate != selectExpression.Predicate;
 
         var orderings = new List<OrderingExpression>();
@@ -74,13 +81,22 @@ public class CosmosValueConverterCompensatingExpressionVisitor : ExpressionVisit
         var offset = (SqlExpression)Visit(selectExpression.Offset);
 
         return changed
-            ? selectExpression.Update(projections, fromExpression, predicate, orderings, limit, offset)
+            ? selectExpression.Update(
+                projections,
+                fromExpression,
+                predicate,
+                orderings,
+                limit,
+                offset
+            )
             : selectExpression;
     }
 
     private Expression VisitSqlConditional(SqlConditionalExpression sqlConditionalExpression)
     {
-        var test = TryCompensateForBoolWithValueConverter((SqlExpression)Visit(sqlConditionalExpression.Test));
+        var test = TryCompensateForBoolWithValueConverter(
+            (SqlExpression)Visit(sqlConditionalExpression.Test)
+        );
         var ifTrue = (SqlExpression)Visit(sqlConditionalExpression.IfTrue);
         var ifFalse = (SqlExpression)Visit(sqlConditionalExpression.IfFalse);
 
@@ -89,26 +105,36 @@ public class CosmosValueConverterCompensatingExpressionVisitor : ExpressionVisit
 
     private SqlExpression TryCompensateForBoolWithValueConverter(SqlExpression sqlExpression)
     {
-        if (sqlExpression is KeyAccessExpression keyAccessExpression
+        if (
+            sqlExpression is KeyAccessExpression keyAccessExpression
             && keyAccessExpression.TypeMapping!.ClrType == typeof(bool)
-            && keyAccessExpression.TypeMapping!.Converter != null)
+            && keyAccessExpression.TypeMapping!.Converter != null
+        )
         {
             return _sqlExpressionFactory.Equal(
                 sqlExpression,
-                _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping));
+                _sqlExpressionFactory.Constant(true, sqlExpression.TypeMapping)
+            );
         }
 
         if (sqlExpression is SqlUnaryExpression sqlUnaryExpression)
         {
             return sqlUnaryExpression.Update(
-                TryCompensateForBoolWithValueConverter(sqlUnaryExpression.Operand));
+                TryCompensateForBoolWithValueConverter(sqlUnaryExpression.Operand)
+            );
         }
 
-        if (sqlExpression is SqlBinaryExpression { OperatorType: ExpressionType.AndAlso or ExpressionType.OrElse } sqlBinaryExpression)
+        if (
+            sqlExpression is SqlBinaryExpression
+            {
+                OperatorType: ExpressionType.AndAlso or ExpressionType.OrElse
+            } sqlBinaryExpression
+        )
         {
             return sqlBinaryExpression.Update(
                 TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Left),
-                TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right));
+                TryCompensateForBoolWithValueConverter(sqlBinaryExpression.Right)
+            );
         }
 
         return sqlExpression;

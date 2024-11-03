@@ -14,7 +14,7 @@ namespace System.ServiceModel.Dispatcher
         Gt,
         Ge,
         Lt,
-        Le
+        Le,
     }
 
     /// <summary>
@@ -25,9 +25,7 @@ namespace System.ServiceModel.Dispatcher
         protected RelationOperator op;
 
         internal RelationOpcode(RelationOperator op)
-            : this(OpcodeID.Relation, op)
-        {
-        }
+            : this(OpcodeID.Relation, op) { }
 
         protected RelationOpcode(OpcodeID id, RelationOperator op)
             : base(id)
@@ -54,7 +52,8 @@ namespace System.ServiceModel.Dispatcher
             Value[] values = context.Values;
             while (argX.basePtr <= argX.endPtr)
             {
-                values[argY.basePtr].Update(context, values[argY.basePtr].CompareTo(ref values[argX.basePtr], op));
+                values[argY.basePtr]
+                    .Update(context, values[argY.basePtr].CompareTo(ref values[argX.basePtr], op));
                 argX.basePtr++;
                 argY.basePtr++;
             }
@@ -78,16 +77,11 @@ namespace System.ServiceModel.Dispatcher
         {
             this.flags |= OpcodeFlags.Literal;
         }
+
 #if NO
-        internal abstract ValueDataType DataType
-        {
-            get;
-        }
+        internal abstract ValueDataType DataType { get; }
 #endif
-        internal abstract object Literal
-        {
-            get;
-        }
+        internal abstract object Literal { get; }
 
 #if DEBUG_FILTER
         public override string ToString()
@@ -107,21 +101,16 @@ namespace System.ServiceModel.Dispatcher
             Fx.Assert(null != literal, "");
             this.literal = literal;
         }
+
 #if NO
         internal override ValueDataType DataType
         {
-            get
-            {
-                return ValueDataType.String;
-            }
+            get { return ValueDataType.String; }
         }
 #endif
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 
         internal override void Add(Opcode op)
@@ -180,21 +169,16 @@ namespace System.ServiceModel.Dispatcher
         {
             this.literal = literal;
         }
+
 #if NO
         internal override ValueDataType DataType
         {
-            get
-            {
-                return ValueDataType.Double;
-            }
+            get { return ValueDataType.Double; }
         }
 #endif
         internal override object Literal
         {
-            get
-            {
-                return this.literal;
-            }
+            get { return this.literal; }
         }
 
         internal override void Add(Opcode op)
@@ -255,10 +239,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal override int Count
         {
-            get
-            {
-                return this.literals.Count;
-            }
+            get { return this.literals.Count; }
         }
 
         internal override QueryBranch this[object literal]
@@ -272,10 +253,7 @@ namespace System.ServiceModel.Dispatcher
                 }
                 return null;
             }
-            set
-            {
-                this.literals[literal] = value;
-            }
+            set { this.literals[literal] = value; }
         }
 
         internal override void CollectXPathFilters(ICollection<MessageFilter> filters)
@@ -336,9 +314,7 @@ namespace System.ServiceModel.Dispatcher
     internal class StringEqualsBranchOpcode : QueryConditionalBranchOpcode
     {
         internal StringEqualsBranchOpcode()
-            : base(OpcodeID.StringEqualsBranch, new StringBranchIndex())
-        {
-        }
+            : base(OpcodeID.StringEqualsBranch, new StringBranchIndex()) { }
 
         internal override LiteralRelationOpcode ValidateOpcode(Opcode opcode)
         {
@@ -383,9 +359,7 @@ namespace System.ServiceModel.Dispatcher
     internal class NumberEqualsBranchOpcode : QueryConditionalBranchOpcode
     {
         internal NumberEqualsBranchOpcode()
-            : base(OpcodeID.NumberEqualsBranch, new NumberBranchIndex())
-        {
-        }
+            : base(OpcodeID.NumberEqualsBranch, new NumberBranchIndex()) { }
 
         internal override LiteralRelationOpcode ValidateOpcode(Opcode opcode)
         {

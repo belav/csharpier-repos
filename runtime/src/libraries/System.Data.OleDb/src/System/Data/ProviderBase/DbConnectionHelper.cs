@@ -11,14 +11,16 @@ namespace System.Data.OleDb
 {
     public sealed partial class OleDbConnection : DbConnection
     {
-        private static readonly DbConnectionFactory _connectionFactory = OleDbConnectionFactory.SingletonInstance;
+        private static readonly DbConnectionFactory _connectionFactory =
+            OleDbConnectionFactory.SingletonInstance;
 
         private DbConnectionOptions? _userConnectionOptions;
         private DbConnectionPoolGroup? _poolGroup;
         private DbConnectionInternal _innerConnection;
-        private int _closeCount;          // used to distinguish between different uses of this object, so we don't have to maintain a list of it's children
+        private int _closeCount; // used to distinguish between different uses of this object, so we don't have to maintain a list of it's children
 
-        public OleDbConnection() : base()
+        public OleDbConnection()
+            : base()
         {
             GC.SuppressFinalize(this);
             _innerConnection = DbConnectionClosedNeverOpened.SingletonInstance;
@@ -45,10 +47,7 @@ namespace System.Data.OleDb
 
         private static DbConnectionFactory ConnectionFactory
         {
-            get
-            {
-                return _connectionFactory;
-            }
+            get { return _connectionFactory; }
         }
 
         internal DbConnectionOptions? ConnectionOptions
@@ -64,7 +63,11 @@ namespace System.Data.OleDb
         {
             bool hidePassword = InnerConnection.ShouldHidePassword;
             DbConnectionOptions? connectionOptions = UserConnectionOptions;
-            return ((null != connectionOptions) ? connectionOptions.UsersConnectionString(hidePassword) : "");
+            return (
+                (null != connectionOptions)
+                    ? connectionOptions.UsersConnectionString(hidePassword)
+                    : ""
+            );
         }
 
         private void ConnectionString_Set(string? value)
@@ -77,7 +80,8 @@ namespace System.Data.OleDb
         private void ConnectionString_Set(DbConnectionPoolKey key)
         {
             DbConnectionOptions? connectionOptions = null;
-            System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup = ConnectionFactory.GetConnectionPoolGroup(key, null, ref connectionOptions);
+            System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup =
+                ConnectionFactory.GetConnectionPoolGroup(key, null, ref connectionOptions);
             DbConnectionInternal connectionInternal = InnerConnection;
             bool flag = connectionInternal.AllowSetConnectionString;
             if (flag)
@@ -86,7 +90,10 @@ namespace System.Data.OleDb
                 // NOTE: There's a race condition with multiple threads changing
                 //       ConnectionString and any thread throws an exception
                 // Closed->Busy: prevent Open during set_ConnectionString
-                flag = SetInnerConnectionFrom(DbConnectionClosedBusy.SingletonInstance, connectionInternal);
+                flag = SetInnerConnectionFrom(
+                    DbConnectionClosedBusy.SingletonInstance,
+                    connectionInternal
+                );
                 if (flag)
                 {
                     _userConnectionOptions = connectionOptions;
@@ -108,18 +115,12 @@ namespace System.Data.OleDb
 
         internal DbConnectionInternal InnerConnection
         {
-            get
-            {
-                return _innerConnection;
-            }
+            get { return _innerConnection; }
         }
 
         internal System.Data.ProviderBase.DbConnectionPoolGroup? PoolGroup
         {
-            get
-            {
-                return _poolGroup;
-            }
+            get { return _poolGroup; }
             set
             {
                 // when a poolgroup expires and the connection eventually activates, the pool entry will be replaced
@@ -130,10 +131,7 @@ namespace System.Data.OleDb
 
         internal DbConnectionOptions? UserConnectionOptions
         {
-            get
-            {
-                return _userConnectionOptions;
-            }
+            get { return _userConnectionOptions; }
         }
 
         internal void AddWeakReference(object value, int tag)
@@ -207,7 +205,10 @@ namespace System.Data.OleDb
                 }
 
                 // Allow enlisting in a different transaction if the enlisted transaction has completed.
-                if (enlistedTransaction.TransactionInformation.Status == SysTx.TransactionStatus.Active)
+                if (
+                    enlistedTransaction.TransactionInformation.Status
+                    == SysTx.TransactionStatus.Active
+                )
                 {
                     throw ADP.TransactionPresent();
                 }
@@ -236,7 +237,13 @@ namespace System.Data.OleDb
         {
             // NOTE: This is virtual because not all providers may choose to support
             //       returning schema data
-            return InnerConnection.GetSchema(ConnectionFactory, PoolGroup!, this, collectionName, restrictionValues);
+            return InnerConnection.GetSchema(
+                ConnectionFactory,
+                PoolGroup!,
+                this,
+                collectionName,
+                restrictionValues
+            );
         }
 
         internal void NotifyWeakReference(int message)
@@ -246,7 +253,10 @@ namespace System.Data.OleDb
 
         internal void PermissionDemand()
         {
-            Debug.Assert(DbConnectionClosedConnecting.SingletonInstance == _innerConnection, "not connecting");
+            Debug.Assert(
+                DbConnectionClosedConnecting.SingletonInstance == _innerConnection,
+                "not connecting"
+            );
 
             System.Data.ProviderBase.DbConnectionPoolGroup? poolGroup = PoolGroup;
             DbConnectionOptions? connectionOptions = poolGroup?.ConnectionOptions;
@@ -279,7 +289,9 @@ namespace System.Data.OleDb
             {
                 // Increment the close count whenever we switch to Closed
                 unchecked
-                { _closeCount++; }
+                {
+                    _closeCount++;
+                }
             }
 
             _innerConnection = to;
@@ -288,7 +300,10 @@ namespace System.Data.OleDb
             {
                 OnStateChange(DbConnectionInternal.StateChangeOpen);
             }
-            else if (ConnectionState.Open == originalState && ConnectionState.Closed == currentState)
+            else if (
+                ConnectionState.Open == originalState
+                && ConnectionState.Closed == currentState
+            )
             {
                 OnStateChange(DbConnectionInternal.StateChangeClosed);
             }
@@ -312,7 +327,10 @@ namespace System.Data.OleDb
             Debug.Assert(null != from, "from null InnerConnection");
             Debug.Assert(null != to, "to null InnerConnection");
 
-            bool result = (from == Interlocked.CompareExchange<DbConnectionInternal>(ref _innerConnection, to, from));
+            bool result = (
+                from
+                == Interlocked.CompareExchange<DbConnectionInternal>(ref _innerConnection, to, from)
+            );
             return result;
         }
 

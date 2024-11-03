@@ -23,25 +23,36 @@ namespace Roslyn.Test.Utilities
 {
     public static class DesktopTestHelpers
     {
-        public static IEnumerable<Type> GetAllTypesImplementingGivenInterface(Assembly assembly, Type interfaceType)
+        public static IEnumerable<Type> GetAllTypesImplementingGivenInterface(
+            Assembly assembly,
+            Type interfaceType
+        )
         {
             if (assembly == null || interfaceType == null || !interfaceType.IsInterface)
             {
-                throw new ArgumentException("interfaceType is not an interface.", nameof(interfaceType));
+                throw new ArgumentException(
+                    "interfaceType is not an interface.",
+                    nameof(interfaceType)
+                );
             }
 
-            return assembly.GetTypes().Where((t) =>
-            {
-                // simplest way to get types that implement mef type
-                // we might need to actually check whether type export the interface type later
-                if (t.IsAbstract)
-                {
-                    return false;
-                }
+            return assembly
+                .GetTypes()
+                .Where(
+                    (t) =>
+                    {
+                        // simplest way to get types that implement mef type
+                        // we might need to actually check whether type export the interface type later
+                        if (t.IsAbstract)
+                        {
+                            return false;
+                        }
 
-                var candidate = t.GetInterface(interfaceType.ToString());
-                return candidate != null && candidate.Equals(interfaceType);
-            }).ToList();
+                        var candidate = t.GetInterface(interfaceType.ToString());
+                        return candidate != null && candidate.Equals(interfaceType);
+                    }
+                )
+                .ToList();
         }
 
         public static IEnumerable<Type> GetAllTypesSubclassingType(Assembly assembly, Type type)
@@ -51,15 +62,21 @@ namespace Roslyn.Test.Utilities
                 throw new ArgumentException("Invalid arguments");
             }
 
-            return (from t in assembly.GetTypes()
-                    where !t.IsAbstract
-                    where type.IsAssignableFrom(t)
-                    select t).ToList();
+            return (
+                from t in assembly.GetTypes()
+                where !t.IsAbstract
+                where type.IsAssignableFrom(t)
+                select t
+            ).ToList();
         }
 
-        public static TempFile CreateCSharpAnalyzerAssemblyWithTestAnalyzer(TempDirectory dir, string assemblyName)
+        public static TempFile CreateCSharpAnalyzerAssemblyWithTestAnalyzer(
+            TempDirectory dir,
+            string assemblyName
+        )
         {
-            var analyzerSource = @"
+            var analyzerSource =
+                @"
 using System;
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
@@ -80,24 +97,40 @@ public class TestAnalyzer : DiagnosticAnalyzer
 
             var analyzerCompilation = CSharpCompilation.Create(
                 assemblyName,
-                new SyntaxTree[] { SyntaxFactory.ParseSyntaxTree(SourceText.From(analyzerSource, encoding: null, SourceHashAlgorithms.Default)) },
+                new SyntaxTree[]
+                {
+                    SyntaxFactory.ParseSyntaxTree(
+                        SourceText.From(
+                            analyzerSource,
+                            encoding: null,
+                            SourceHashAlgorithms.Default
+                        )
+                    ),
+                },
                 new MetadataReference[]
                 {
                     NetStandard20.mscorlib,
                     NetStandard20.netstandard,
                     NetStandard20.SystemRuntime,
                     MetadataReference.CreateFromFile(immutable.Path),
-                    MetadataReference.CreateFromFile(analyzer.Path)
+                    MetadataReference.CreateFromFile(analyzer.Path),
                 },
-                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary));
+                new CSharpCompilationOptions(OutputKind.DynamicallyLinkedLibrary)
+            );
 
-            return dir.CreateFile(assemblyName + ".dll").WriteAllBytes(analyzerCompilation.EmitToArray());
+            return dir.CreateFile(assemblyName + ".dll")
+                .WriteAllBytes(analyzerCompilation.EmitToArray());
         }
 
         public static string? GetMSBuildDirectory()
         {
             var vsVersion = Environment.GetEnvironmentVariable("VisualStudioVersion") ?? "14.0";
-            using (var key = Registry.LocalMachine.OpenSubKey($@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}", false))
+            using (
+                var key = Registry.LocalMachine.OpenSubKey(
+                    $@"SOFTWARE\Microsoft\MSBuild\ToolsVersions\{vsVersion}",
+                    false
+                )
+            )
             {
                 if (key != null)
                 {

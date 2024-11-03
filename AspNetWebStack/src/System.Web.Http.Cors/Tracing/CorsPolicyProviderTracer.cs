@@ -18,7 +18,10 @@ namespace System.Web.Http.Cors.Tracing
         private ITraceWriter _traceWriter;
         private const string MethodName = "GetCorsPolicyAsync";
 
-        public CorsPolicyProviderTracer(ICorsPolicyProvider innerPolicyProvider, ITraceWriter traceWriter)
+        public CorsPolicyProviderTracer(
+            ICorsPolicyProvider innerPolicyProvider,
+            ITraceWriter traceWriter
+        )
         {
             Contract.Assert(innerPolicyProvider != null);
             Contract.Assert(traceWriter != null);
@@ -27,7 +30,10 @@ namespace System.Web.Http.Cors.Tracing
             _traceWriter = traceWriter;
         }
 
-        public Task<CorsPolicy> GetCorsPolicyAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        public Task<CorsPolicy> GetCorsPolicyAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return _traceWriter.TraceBeginEndAsync<CorsPolicy>(
                 request,
@@ -37,21 +43,30 @@ namespace System.Web.Http.Cors.Tracing
                 MethodName,
                 beginTrace: (tr) =>
                 {
-                    tr.Message = String.Format(CultureInfo.CurrentCulture, SRResources.TraceCorsRequestContext, request.GetCorsRequestContext());
+                    tr.Message = String.Format(
+                        CultureInfo.CurrentCulture,
+                        SRResources.TraceCorsRequestContext,
+                        request.GetCorsRequestContext()
+                    );
                 },
                 execute: () => _innerPolicyProvider.GetCorsPolicyAsync(request, cancellationToken),
                 endTrace: (tr, policy) =>
                 {
                     if (policy != null)
                     {
-                        tr.Message = String.Format(CultureInfo.CurrentCulture, SRResources.TraceEndPolicyReturned, policy);
+                        tr.Message = String.Format(
+                            CultureInfo.CurrentCulture,
+                            SRResources.TraceEndPolicyReturned,
+                            policy
+                        );
                     }
                     else
                     {
                         tr.Message = SRResources.TraceEndNoPolicyReturned;
                     }
                 },
-                errorTrace: null);
+                errorTrace: null
+            );
         }
     }
 }

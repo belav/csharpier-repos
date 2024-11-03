@@ -15,13 +15,10 @@ public class Startup
         var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                .UseKestrel()
-                .UseIISIntegration()
-                .UseStartup<Startup>();
-            }).Build();
+                webHostBuilder.UseKestrel().UseIISIntegration().UseStartup<Startup>();
+            })
+            .Build();
 
         return host.RunAsync();
     }
 }
-

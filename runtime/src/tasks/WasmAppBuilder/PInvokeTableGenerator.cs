@@ -6,15 +6,16 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Reflection;
 using Microsoft.Build.Framework;
 using Microsoft.Build.Utilities;
 
 internal sealed class PInvokeTableGenerator
 {
-    private readonly Dictionary<Assembly, bool> _assemblyDisableRuntimeMarshallingAttributeCache = new();
+    private readonly Dictionary<Assembly, bool> _assemblyDisableRuntimeMarshallingAttributeCache =
+        new();
 
     private TaskLoggingHelper Log { get; set; }
     private readonly Func<string, string> _fixupSymbolName;
@@ -52,9 +53,15 @@ internal sealed class PInvokeTableGenerator
             }
 
             if (Utils.CopyIfDifferent(tmpFileName, outputPath, useHash: false))
-                Log.LogMessage(MessageImportance.Low, $"Generating pinvoke table to '{outputPath}'.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Generating pinvoke table to '{outputPath}'."
+                );
             else
-                Log.LogMessage(MessageImportance.Low, $"PInvoke table in {outputPath} is unchanged.");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"PInvoke table in {outputPath} is unchanged."
+                );
         }
         finally
         {
@@ -64,9 +71,12 @@ internal sealed class PInvokeTableGenerator
         return signatures;
     }
 
-    private void EmitPInvokeTable(StreamWriter w, Dictionary<string, string> modules, List<PInvoke> pinvokes)
+    private void EmitPInvokeTable(
+        StreamWriter w,
+        Dictionary<string, string> modules,
+        List<PInvoke> pinvokes
+    )
     {
-
         foreach (var pinvoke in pinvokes)
         {
             if (modules.ContainsKey(pinvoke.Module))
@@ -78,26 +88,33 @@ internal sealed class PInvokeTableGenerator
             {
                 // WasmLinkage means we needs to import the module
                 modules.Add(pinvoke.Module, pinvoke.Module);
-                Log.LogMessage(MessageImportance.Low, $"Adding module {pinvoke.Module} for WasmImportLinkage");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Adding module {pinvoke.Module} for WasmImportLinkage"
+                );
             }
             else if (pinvoke.Module == "*" || pinvoke.Module == "__Internal")
             {
                 // Special case for __Internal and * modules to indicate static linking wihtout specifying the module
                 modules.Add(pinvoke.Module, pinvoke.Module);
-                Log.LogMessage(MessageImportance.Low, $"Adding module {pinvoke.Module} for static linking");
+                Log.LogMessage(
+                    MessageImportance.Low,
+                    $"Adding module {pinvoke.Module} for static linking"
+                );
             }
         }
 
         w.WriteLine(
             $"""
             // GENERATED FILE, DO NOT MODIFY");
-
-            """);
+            
+            """
+        );
 
         var pinvokesGroupedByEntryPoint = pinvokes
-                                            .Where(l => modules.ContainsKey(l.Module))
-                                            .OrderBy(l => l.EntryPoint)
-                                            .GroupBy(CEntryPoint);
+            .Where(l => modules.ContainsKey(l.Module))
+            .OrderBy(l => l.EntryPoint)
+            .GroupBy(CEntryPoint);
         var comparer = new PInvokeComparer();
         foreach (IGrouping<string, PInvoke> group in pinvokesGroupedByEntryPoint)
         {
@@ -105,12 +122,25 @@ internal sealed class PInvokeTableGenerator
             PInvoke first = candidates[0];
             if (ShouldTreatAsVariadic(candidates))
             {
-                string imports = string.Join(Environment.NewLine,
-                                            candidates.Select(
-                                                p => $"    {p.Method} (in [{p.Method.DeclaringType?.Assembly.GetName().Name}] {p.Method.DeclaringType})"));
-                Log.LogWarning(null, "WASM0001", "", "", 0, 0, 0, 0, $"Found a native function ({first.EntryPoint}) with varargs in {first.Module}." +
-                                 " Calling such functions is not supported, and will fail at runtime." +
-                                $" Managed DllImports: {Environment.NewLine}{imports}");
+                string imports = string.Join(
+                    Environment.NewLine,
+                    candidates.Select(p =>
+                        $"    {p.Method} (in [{p.Method.DeclaringType?.Assembly.GetName().Name}] {p.Method.DeclaringType})"
+                    )
+                );
+                Log.LogWarning(
+                    null,
+                    "WASM0001",
+                    "",
+                    "",
+                    0,
+                    0,
+                    0,
+                    0,
+                    $"Found a native function ({first.EntryPoint}) with varargs in {first.Module}."
+                        + " Calling such functions is not supported, and will fail at runtime."
+                        + $" Managed DllImports: {Environment.NewLine}{imports}"
+                );
 
                 foreach (var c in candidates)
                     c.Skip = true;
@@ -136,8 +166,16 @@ internal sealed class PInvokeTableGenerator
                 .Where(l => l.Module == module && !l.Skip)
                 .OrderBy(l => l.EntryPoint)
                 .GroupBy(d => d.EntryPoint)
-                .Select(l => $"{{\"{EscapeLiteral(l.Key)}\", {CEntryPoint(l.First())}}}, "
-                    + "// " + string.Join(", ", l.Select(c => c.Method.DeclaringType!.Module!.Assembly!.GetName()!.Name!).Distinct().OrderBy(n => n)))
+                .Select(l =>
+                    $"{{\"{EscapeLiteral(l.Key)}\", {CEntryPoint(l.First())}}}, "
+                    + "// "
+                    + string.Join(
+                        ", ",
+                        l.Select(c => c.Method.DeclaringType!.Module!.Assembly!.GetName()!.Name!)
+                            .Distinct()
+                            .OrderBy(n => n)
+                    )
+                )
                 .Append("{NULL, NULL}");
 
             w.Write(
@@ -145,22 +183,27 @@ internal sealed class PInvokeTableGenerator
                 static PinvokeImport {{_fixupSymbolName(module)}}_imports [] = {
                     {{string.Join("\n    ", assemblies_pinvokes)}}
                 };
-
-                """);
+                
+                """
+            );
         }
 
         w.Write(
             $$"""
 
             static void *pinvoke_tables[] = {
-                {{string.Join(", ", modules.Keys.Select(m => $"(void*){_fixupSymbolName(m)}_imports"))}}
+                {{string.Join(
+                ", ",
+                modules.Keys.Select(m => $"(void*){_fixupSymbolName(m)}_imports")
+            )}}
             };
 
             static char *pinvoke_names[] =  {
                 {{string.Join(", ", modules.Keys.Select(m => $"\"{EscapeLiteral(m)}\""))}}
             };
-
-            """);
+            
+            """
+        );
 
         static bool ShouldTreatAsVariadic(PInvoke[] candidates)
         {
@@ -173,9 +216,11 @@ internal sealed class PInvokeTableGenerator
 
             int firstNumArgs = first.Method.GetParameters().Length;
             return candidates
-                        .Skip(1)
-                        .Any(c => !TryIsMethodGetParametersUnsupported(c.Method, out _) &&
-                                    c.Method.GetParameters().Length != firstNumArgs);
+                .Skip(1)
+                .Any(c =>
+                    !TryIsMethodGetParametersUnsupported(c.Method, out _)
+                    && c.Method.GetParameters().Length != firstNumArgs
+                );
         }
     }
 
@@ -189,19 +234,23 @@ internal sealed class PInvokeTableGenerator
         return _fixupSymbolName(pinvoke.EntryPoint);
     }
 
-    private static string MapType(Type t) => t.Name switch
-    {
-        "Void" => "void",
-        nameof(Double) => "double",
-        nameof(Single) => "float",
-        nameof(Int64) => "int64_t",
-        nameof(UInt64) => "uint64_t",
-        _ => "int"
-    };
+    private static string MapType(Type t) =>
+        t.Name switch
+        {
+            "Void" => "void",
+            nameof(Double) => "double",
+            nameof(Single) => "float",
+            nameof(Int64) => "int64_t",
+            nameof(UInt64) => "uint64_t",
+            _ => "int",
+        };
 
     // FIXME: System.Reflection.MetadataLoadContext can't decode function pointer types
     // https://github.com/dotnet/runtime/issues/43791
-    private static bool TryIsMethodGetParametersUnsupported(MethodInfo method, [NotNullWhen(true)] out string? reason)
+    private static bool TryIsMethodGetParametersUnsupported(
+        MethodInfo method,
+        [NotNullWhen(true)] out string? reason
+    )
     {
         try
         {
@@ -235,15 +284,23 @@ internal sealed class PInvokeTableGenerator
         {
             // Don't use method.ToString() or any of it's parameters, or return type
             // because at least one of those are unsupported, and will throw
-            Log.LogWarning(null, "WASM0001", "", "", 0, 0, 0, 0,
-                    $"Skipping pinvoke '{pinvoke.Method.DeclaringType!.FullName}::{pinvoke.Method.Name}' because '{reason}'.");
+            Log.LogWarning(
+                null,
+                "WASM0001",
+                "",
+                "",
+                0,
+                0,
+                0,
+                0,
+                $"Skipping pinvoke '{pinvoke.Method.DeclaringType!.FullName}::{pinvoke.Method.Name}' because '{reason}'."
+            );
 
             pinvoke.Skip = true;
             return null;
         }
 
-        return
-            $$"""
+        return $$"""
             {{(pinvoke.WasmLinkage ? $"__attribute__((import_module(\"{EscapeLiteral(pinvoke.Module)}\"),import_name(\"{EscapeLiteral(pinvoke.EntryPoint)}\")))" : "")}}
             {{(pinvoke.WasmLinkage ? "extern " : "")}}{{MapType(method.ReturnType)}} {{CEntryPoint(pinvoke)}} ({{
                 string.Join(", ", method.GetParameters().Select(p => MapType(p.ParameterType)))
@@ -253,13 +310,16 @@ internal sealed class PInvokeTableGenerator
 
     private string CEntryPoint(PInvokeCallback export)
     {
-        if (export.EntryPoint is not null) {
+        if (export.EntryPoint is not null)
+        {
             return _fixupSymbolName(export.EntryPoint);
         }
 
         var method = export.Method;
         // EntryPoint wasn't specified generate a name for the entry point
-        return _fixupSymbolName($"wasm_native_to_interp_{method.DeclaringType!.Module!.Assembly!.GetName()!.Name!}_{method.DeclaringType.Name}_{method.Name}");
+        return _fixupSymbolName(
+            $"wasm_native_to_interp_{method.DeclaringType!.Module!.Assembly!.GetName()!.Name!}_{method.DeclaringType.Name}_{method.Name}"
+        );
     }
 
     private string DelegateKey(PInvokeCallback export)
@@ -337,7 +397,9 @@ internal sealed class PInvokeTableGenerator
                 sb.Append($"  {MapType(method.ReturnType)} res;\n");
 
             //sb.Append($"  printf(\"{entry_name} called\\n\");\n");
-            sb.Append($"  ((WasmInterpEntrySig_{cb_index})wasm_native_to_interp_ftndescs [{cb_index}].func) (");
+            sb.Append(
+                $"  ((WasmInterpEntrySig_{cb_index})wasm_native_to_interp_ftndescs [{cb_index}].func) ("
+            );
             if (!is_void)
             {
                 sb.Append("(int*)&res, ");
@@ -370,8 +432,9 @@ internal sealed class PInvokeTableGenerator
             static const char *wasm_native_to_interp_map[] = {
                 {{string.Join(", ", callbacks.Select(DelegateKey))}}
             };
-
-            """);
+            
+            """
+        );
     }
 
     private bool HasAssemblyDisableRuntimeMarshallingAttribute(Assembly assembly)

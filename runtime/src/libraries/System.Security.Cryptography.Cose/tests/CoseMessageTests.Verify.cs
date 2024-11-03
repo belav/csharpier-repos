@@ -1,6 +1,6 @@
-﻿using Xunit;
+﻿using System.Formats.Cbor;
 using Test.Cryptography;
-using System.Formats.Cbor;
+using Xunit;
 using static System.Security.Cryptography.Cose.Tests.CoseTestHelpers;
 
 namespace System.Security.Cryptography.Cose.Tests
@@ -10,7 +10,12 @@ namespace System.Security.Cryptography.Cose.Tests
         internal abstract bool UseDetachedContent { get; }
         internal abstract CoseMessage Decode(byte[] cborPayload);
         internal abstract byte[] Sign(byte[] content, CoseSigner signer);
-        internal abstract bool Verify(CoseMessage msg, AsymmetricAlgorithm key, byte[] content, byte[]? associatedData = null);
+        internal abstract bool Verify(
+            CoseMessage msg,
+            AsymmetricAlgorithm key,
+            byte[] content,
+            byte[]? associatedData = null
+        );
 
         [Fact]
         public void VerifyReturnsTrueAfterAttemptWithWrongContent()
@@ -27,8 +32,14 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] encodedMsg = Sign(correctContent, GetCoseSigner(DefaultKey, DefaultHash));
             CoseMessage msg = Decode(encodedMsg);
 
-            Assert.False(Verify(msg, DefaultKey, wrongContent), "Calling Verify with the wrong content");
-            Assert.True(Verify(msg, DefaultKey, s_sampleContent), "Calling Verify with the correct content");
+            Assert.False(
+                Verify(msg, DefaultKey, wrongContent),
+                "Calling Verify with the wrong content"
+            );
+            Assert.True(
+                Verify(msg, DefaultKey, s_sampleContent),
+                "Calling Verify with the correct content"
+            );
         }
 
         [Fact]
@@ -46,8 +57,14 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] encodedMsg = Sign(correctContent, GetCoseSigner(DefaultKey, DefaultHash));
             CoseMessage msg = Decode(encodedMsg);
 
-            Assert.True(Verify(msg, DefaultKey, s_sampleContent), "Calling Verify with the correct content");
-            Assert.False(Verify(msg, DefaultKey, wrongContent), "Calling Verify with the wrong content");
+            Assert.True(
+                Verify(msg, DefaultKey, s_sampleContent),
+                "Calling Verify with the correct content"
+            );
+            Assert.False(
+                Verify(msg, DefaultKey, wrongContent),
+                "Calling Verify with the wrong content"
+            );
         }
 
         [Fact]
@@ -61,7 +78,9 @@ namespace System.Security.Cryptography.Cose.Tests
             byte[] encodedMsg = Sign(s_sampleContent, GetCoseSigner(DefaultKey, DefaultHash));
             CoseMessage msg = Decode(encodedMsg);
 
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() => Verify(msg, DefaultKey, null!));
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
+                () => Verify(msg, DefaultKey, null!)
+            );
             Assert.True(ex.ParamName == "content" || ex.ParamName == "detachedContent");
         }
 

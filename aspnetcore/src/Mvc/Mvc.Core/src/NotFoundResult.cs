@@ -18,7 +18,6 @@ public class NotFoundResult : StatusCodeResult
     /// <summary>
     /// Creates a new <see cref="NotFoundResult"/> instance.
     /// </summary>
-    public NotFoundResult() : base(DefaultStatusCode)
-    {
-    }
+    public NotFoundResult()
+        : base(DefaultStatusCode) { }
 }

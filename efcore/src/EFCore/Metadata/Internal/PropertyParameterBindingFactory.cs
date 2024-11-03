@@ -20,8 +20,8 @@ public class PropertyParameterBindingFactory : IPropertyParameterBindingFactory
     public virtual ParameterBinding? FindParameter(
         IEntityType entityType,
         Type parameterType,
-        string parameterName)
-        => FindParameter(entityType.GetProperties(), parameterType, parameterName);
+        string parameterName
+    ) => FindParameter(entityType.GetProperties(), parameterType, parameterName);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,8 +32,8 @@ public class PropertyParameterBindingFactory : IPropertyParameterBindingFactory
     public virtual ParameterBinding? FindParameter(
         IComplexType complexType,
         Type parameterType,
-        string parameterName)
-        => FindParameter(complexType.GetProperties(), parameterType, parameterName);
+        string parameterName
+    ) => FindParameter(complexType.GetProperties(), parameterType, parameterName);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -44,7 +44,8 @@ public class PropertyParameterBindingFactory : IPropertyParameterBindingFactory
     private static ParameterBinding? FindParameter(
         IEnumerable<IProperty> properties,
         Type parameterType,
-        string parameterName)
+        string parameterName
+    )
     {
         var candidateNames = GetCandidatePropertyNames(parameterName);
 
@@ -78,7 +79,7 @@ public class PropertyParameterBindingFactory : IPropertyParameterBindingFactory
             "_" + parameterName,
             "_" + pascalized,
             "m_" + parameterName,
-            "m_" + pascalized
+            "m_" + pascalized,
         };
     }
 }

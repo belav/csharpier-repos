@@ -17,7 +17,7 @@ namespace System.Web.Http.WebHost
         // Regression test for Codeplex-2103
         //
         // When batching is used in web host, we need to wrap the HttpRequestMessages in an HttpContextBase
-        // adapter and pass system to system.web. In 2103 there were bugs in this wrapper, and we weren't 
+        // adapter and pass system to system.web. In 2103 there were bugs in this wrapper, and we weren't
         // following the contract with respect to %-encoding.
         [Fact]
         public async Task WebHost_Batching_WithSpecialCharactersInUrl()
@@ -26,12 +26,16 @@ namespace System.Web.Http.WebHost
             var handler = new SuccessMessageHandler();
 
             var routeCollection = new HostedHttpRouteCollection(new RouteCollection(), "/");
-            routeCollection.Add("default", routeCollection.CreateRoute(
-                "values/  space",
-                defaults: null,
-                constraints: null,
-                dataTokens: null,
-                handler: handler));
+            routeCollection.Add(
+                "default",
+                routeCollection.CreateRoute(
+                    "values/  space",
+                    defaults: null,
+                    constraints: null,
+                    dataTokens: null,
+                    handler: handler
+                )
+            );
 
             var configuration = new HttpConfiguration(routeCollection);
 
@@ -42,8 +46,10 @@ namespace System.Web.Http.WebHost
             {
                 Content = new MultipartContent("mixed")
                 {
-                    new HttpMessageContent(new HttpRequestMessage(HttpMethod.Post, "http://contoso.com/values/  space"))
-                }
+                    new HttpMessageContent(
+                        new HttpRequestMessage(HttpMethod.Post, "http://contoso.com/values/  space")
+                    ),
+                },
             };
 
             // Arrange
@@ -58,7 +64,10 @@ namespace System.Web.Http.WebHost
         {
             public bool IsCalled { get; private set; }
 
-            protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+            protected override Task<HttpResponseMessage> SendAsync(
+                HttpRequestMessage request,
+                CancellationToken cancellationToken
+            )
             {
                 IsCalled = true;
                 return Task.FromResult(request.CreateResponse(HttpStatusCode.OK));

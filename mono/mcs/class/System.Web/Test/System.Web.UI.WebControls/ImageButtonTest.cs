@@ -28,346 +28,354 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
-using System.IO;
+using System.Collections;
 using System.Globalization;
+using System.IO;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
-using MonoTests.SystemWeb.Framework;
 using MonoTests.stand_alone.WebHarness;
-using System.Collections;
+using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	class PokerImageButton : ImageButton {
-		public PokerImageButton ()
-		{
-			TrackViewState ();
-		}
+    class PokerImageButton : ImageButton
+    {
+        public PokerImageButton()
+        {
+            TrackViewState();
+        }
 
-		public object SaveState ()
-		{
-			return SaveViewState ();
-		}
+        public object SaveState()
+        {
+            return SaveViewState();
+        }
 
-		public void LoadState (object o)
-		{
-			LoadViewState (o);
-		}
+        public void LoadState(object o)
+        {
+            LoadViewState(o);
+        }
 
-		public string Render ()
-		{
-			StringWriter sw = new StringWriter ();
-			sw.NewLine = "\n";
-			HtmlTextWriter writer = new HtmlTextWriter (sw);
-			base.Render (writer);
-			return writer.InnerWriter.ToString ();
-		}
-		public new string Text
-		{
-			get
-			{
-				return base.Text;
-			}
-			set
-			{
-				base.Text = value;
-			}
-		}
+        public string Render()
+        {
+            StringWriter sw = new StringWriter();
+            sw.NewLine = "\n";
+            HtmlTextWriter writer = new HtmlTextWriter(sw);
+            base.Render(writer);
+            return writer.InnerWriter.ToString();
+        }
 
+        public new string Text
+        {
+            get { return base.Text; }
+            set { base.Text = value; }
+        }
 
-		public new void RaisePostBackEvent (string eventArgument)
-		{
-			base.RaisePostBackEvent (eventArgument);
-		}
+        public new void RaisePostBackEvent(string eventArgument)
+        {
+            base.RaisePostBackEvent(eventArgument);
+        }
 
-		protected override void RaisePostDataChangedEvent ()
-		{
-			base.RaisePostDataChangedEvent ();
-		}
-	}
+        protected override void RaisePostDataChangedEvent()
+        {
+            base.RaisePostDataChangedEvent();
+        }
+    }
 
-	[TestFixture]
-	public class ImageButtonTest {
-		
-		[Test]
-		[Category("NotWorking")]
-		public void ImageButton_DefaultValues ()
-		{
-			ImageButton b = new ImageButton ();
-			Assert.AreEqual (true, b.CausesValidation, "CausesValidation");
-			Assert.AreEqual (string.Empty, b.CommandArgument, "CommandArgument");
-			Assert.AreEqual (string.Empty, b.CommandName, "CommandName");
-			Assert.AreEqual (string.Empty, b.ValidationGroup, "ValidationGroup");
-			Assert.AreEqual (string.Empty, b.AppRelativeTemplateSourceDirectory, "AppRelativeTemplateSourceDirectory");
-			Assert.AreEqual (string.Empty, b.DescriptionUrl, "DescriptionUrl");
-			Assert.AreEqual (true, b.EnableTheming, "EnableTheming");
-			Assert.AreEqual (false, b.GenerateEmptyAlternateText, "GenerateEmptyAlternateText");
-			Assert.AreEqual (string.Empty, b.PostBackUrl, "PostBackUrl");
-			Assert.AreEqual (string.Empty, b.OnClientClick, "OnClientClick");
-		}
+    [TestFixture]
+    public class ImageButtonTest
+    {
+        [Test]
+        [Category("NotWorking")]
+        public void ImageButton_DefaultValues()
+        {
+            ImageButton b = new ImageButton();
+            Assert.AreEqual(true, b.CausesValidation, "CausesValidation");
+            Assert.AreEqual(string.Empty, b.CommandArgument, "CommandArgument");
+            Assert.AreEqual(string.Empty, b.CommandName, "CommandName");
+            Assert.AreEqual(string.Empty, b.ValidationGroup, "ValidationGroup");
+            Assert.AreEqual(
+                string.Empty,
+                b.AppRelativeTemplateSourceDirectory,
+                "AppRelativeTemplateSourceDirectory"
+            );
+            Assert.AreEqual(string.Empty, b.DescriptionUrl, "DescriptionUrl");
+            Assert.AreEqual(true, b.EnableTheming, "EnableTheming");
+            Assert.AreEqual(false, b.GenerateEmptyAlternateText, "GenerateEmptyAlternateText");
+            Assert.AreEqual(string.Empty, b.PostBackUrl, "PostBackUrl");
+            Assert.AreEqual(string.Empty, b.OnClientClick, "OnClientClick");
+        }
 
-		[Test]
-		public void ImageButton_AssignedValues ()
-		{
-			ImageButton b = new ImageButton ();
-			Assert.AreEqual (string.Empty, b.ValidationGroup, "ValidationGroup#1");
-			b.ValidationGroup = "test";
-			Assert.AreEqual ("test", b.ValidationGroup, "ValidationGroup#2");
-			// NOTE:  Default is wrong! 
-			// Assert.AreEqual (string.Empty, b.AppRelativeTemplateSourceDirectory, "AppRelativeTemplateSourceDirectory#1");
-			b.AppRelativeTemplateSourceDirectory = "~/test";
-			Assert.AreEqual ("~/test", b.AppRelativeTemplateSourceDirectory, "AppRelativeTemplateSourceDirectory#2");
-			Assert.AreEqual (string.Empty, b.DescriptionUrl, "DescriptionUrl#1");
-			b.DescriptionUrl = "test";
-			Assert.AreEqual ("test", b.DescriptionUrl, "DescriptionUrl#2");
-			Assert.AreEqual (true, b.EnableTheming, "EnableTheming#1");
-			b.EnableTheming  = false;
-			Assert.AreEqual (false, b.EnableTheming, "EnableTheming#2");
-		}
+        [Test]
+        public void ImageButton_AssignedValues()
+        {
+            ImageButton b = new ImageButton();
+            Assert.AreEqual(string.Empty, b.ValidationGroup, "ValidationGroup#1");
+            b.ValidationGroup = "test";
+            Assert.AreEqual("test", b.ValidationGroup, "ValidationGroup#2");
+            // NOTE:  Default is wrong!
+            // Assert.AreEqual (string.Empty, b.AppRelativeTemplateSourceDirectory, "AppRelativeTemplateSourceDirectory#1");
+            b.AppRelativeTemplateSourceDirectory = "~/test";
+            Assert.AreEqual(
+                "~/test",
+                b.AppRelativeTemplateSourceDirectory,
+                "AppRelativeTemplateSourceDirectory#2"
+            );
+            Assert.AreEqual(string.Empty, b.DescriptionUrl, "DescriptionUrl#1");
+            b.DescriptionUrl = "test";
+            Assert.AreEqual("test", b.DescriptionUrl, "DescriptionUrl#2");
+            Assert.AreEqual(true, b.EnableTheming, "EnableTheming#1");
+            b.EnableTheming = false;
+            Assert.AreEqual(false, b.EnableTheming, "EnableTheming#2");
+        }
 
+        [Test]
+        [Category("NunitWeb")]
+        public void AppRelativeTemplateSourceDirectory()
+        {
+            WebTest t = new WebTest(
+                PageInvoker.CreateOnLoad(AppRelativeTemplateSourceDirectory_Load)
+            );
+            t.Run();
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void AppRelativeTemplateSourceDirectory ()
-		{
-			WebTest t = new WebTest (PageInvoker.CreateOnLoad (AppRelativeTemplateSourceDirectory_Load));
-			t.Run ();
-		}
-	
-		public static void AppRelativeTemplateSourceDirectory_Load (Page p)
-		{
-			PokerImageButton i = new PokerImageButton ();
-			i.ID = "I";
-			Assert.AreEqual ("~/", i.AppRelativeTemplateSourceDirectory, "AppRelativeTemplateSourceDirectory");
-		}
+        public static void AppRelativeTemplateSourceDirectory_Load(Page p)
+        {
+            PokerImageButton i = new PokerImageButton();
+            i.ID = "I";
+            Assert.AreEqual(
+                "~/",
+                i.AppRelativeTemplateSourceDirectory,
+                "AppRelativeTemplateSourceDirectory"
+            );
+        }
 
-		[Test]
-		public void DescriptionUrl ()
-		{
-			PokerImageButton i = new PokerImageButton ();
-			i.DescriptionUrl = "URLDescription";
-			string html = i.Render ();
-			if (html.IndexOf ("longdesc=\"URLDescription\"") == -1)
-				Assert.Fail ("DescriptionUrl Failed");
-		}
+        [Test]
+        public void DescriptionUrl()
+        {
+            PokerImageButton i = new PokerImageButton();
+            i.DescriptionUrl = "URLDescription";
+            string html = i.Render();
+            if (html.IndexOf("longdesc=\"URLDescription\"") == -1)
+                Assert.Fail("DescriptionUrl Failed");
+        }
 
-		[Test]
-		public void OnClientClick ()
-		{
-			PokerImageButton b = new PokerImageButton ();
-			b.OnClientClick = "MyMethod";
-			string html = b.Render ();
-			if (html.IndexOf ("onclick=\"MyMethod;\"") == -1)
-				Assert.Fail ("OnClientClick#1");
-		}
+        [Test]
+        public void OnClientClick()
+        {
+            PokerImageButton b = new PokerImageButton();
+            b.OnClientClick = "MyMethod";
+            string html = b.Render();
+            if (html.IndexOf("onclick=\"MyMethod;\"") == -1)
+                Assert.Fail("OnClientClick#1");
+        }
 
-		[Test] // Bug #463939
-		public void OnClientClickEmpty ()
-		{
-			PokerImageButton b = new PokerImageButton ();
-			string html = b.Render ();
-			Assert.AreEqual (-1, html.IndexOf ("onclick=\""), "#A1");
+        [Test] // Bug #463939
+        public void OnClientClickEmpty()
+        {
+            PokerImageButton b = new PokerImageButton();
+            string html = b.Render();
+            Assert.AreEqual(-1, html.IndexOf("onclick=\""), "#A1");
 
-			b.OnClientClick = String.Empty;
-			html = b.Render ();
-			Assert.AreEqual (-1, html.IndexOf ("onclick=\""), "#A2");
+            b.OnClientClick = String.Empty;
+            html = b.Render();
+            Assert.AreEqual(-1, html.IndexOf("onclick=\""), "#A2");
 
-			b.OnClientClick = null;
-			html = b.Render ();
-			Assert.AreEqual (-1, html.IndexOf ("onclick=\""), "#A3");
-		}
-		
-		[Test]
-		[Category ("NunitWeb")]
-		public void PostBackUrl ()
-		{
-			WebTest test = new WebTest (PageInvoker.CreateOnLoad (PostBackUrl_load));
-			string html = HtmlDiff.GetControlFromPageHtml (test.Run ());
-			if (html.IndexOf ("onclick") == -1)
-				Assert.Fail ("PostBack script not created");
-			if (html.IndexOf ("MyURL.aspx") == -1)
-				Assert.Fail ("PostBack page URL not set");
-			if (html.IndexOf ("~/MyURL.aspx") != -1)
-				Assert.Fail ("PostBack page URL is not resolved");
-		}
-		
-		public static void PostBackUrl_load (Page p)
-		{
-			PokerImageButton b = new PokerImageButton ();
-			p.Form.Controls.Add (new LiteralControl(HtmlDiff.BEGIN_TAG));
-			p.Form.Controls.Add (b);
-			p.Form.Controls.Add (new LiteralControl (HtmlDiff.END_TAG));
-			b.PostBackUrl = "~/MyURL.aspx";
-		}
+            b.OnClientClick = null;
+            html = b.Render();
+            Assert.AreEqual(-1, html.IndexOf("onclick=\""), "#A3");
+        }
 
-		[Test]
-		[Category ("NunitWeb")]
-		public void ValidationGroup ()
-		{
-			WebTest.CopyResource (GetType (), "NoEventValidation.aspx", "NoEventValidation.aspx");
-			WebTest t = new WebTest ("NoEventValidation.aspx");
-			t.Invoker = PageInvoker.CreateOnLoad (ValidationGroup_Load);
-			string html = HtmlDiff.GetControlFromPageHtml (t.Run ());
-			if (html.IndexOf ("onclick") == -1)
-				Assert.Fail ("Validation script not created");
-			if (html.IndexOf ("MyValidationGroup") == -1)
-				Assert.Fail ("Validation group not set fail");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        public void PostBackUrl()
+        {
+            WebTest test = new WebTest(PageInvoker.CreateOnLoad(PostBackUrl_load));
+            string html = HtmlDiff.GetControlFromPageHtml(test.Run());
+            if (html.IndexOf("onclick") == -1)
+                Assert.Fail("PostBack script not created");
+            if (html.IndexOf("MyURL.aspx") == -1)
+                Assert.Fail("PostBack page URL not set");
+            if (html.IndexOf("~/MyURL.aspx") != -1)
+                Assert.Fail("PostBack page URL is not resolved");
+        }
 
-		public static void ValidationGroup_Load(Page p)
-		{
-			PokerImageButton b = new PokerImageButton ();
-			b.ValidationGroup = "MyValidationGroup";
-			TextBox tb = new TextBox ();
-			tb.ID = "tb";
-			tb.ValidationGroup = "MyValidationGroup";
-			RequiredFieldValidator v = new RequiredFieldValidator ();
-			v.ControlToValidate = "tb";
-			v.ValidationGroup = "MyValidationGroup";
-			p.Form.Controls.Add (tb);
-			p.Form.Controls.Add (v);
-			p.Form.Controls.Add (new LiteralControl (HtmlDiff.BEGIN_TAG));
-			p.Form.Controls.Add (b);
-			p.Form.Controls.Add (new LiteralControl (HtmlDiff.END_TAG));
-		}
+        public static void PostBackUrl_load(Page p)
+        {
+            PokerImageButton b = new PokerImageButton();
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.BEGIN_TAG));
+            p.Form.Controls.Add(b);
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.END_TAG));
+            b.PostBackUrl = "~/MyURL.aspx";
+        }
 
-		[Test]
-		public void Text ()
-		{
-			string origHtml = "<input type=\"image\" src=\"\" alt=\"MyText\" />";
-			PokerImageButton b = new PokerImageButton ();
-			b.Text = "MyText";
-			string html = b.Render ();
-			HtmlDiff.AssertAreEqual (origHtml, html, "Text#1");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        public void ValidationGroup()
+        {
+            WebTest.CopyResource(GetType(), "NoEventValidation.aspx", "NoEventValidation.aspx");
+            WebTest t = new WebTest("NoEventValidation.aspx");
+            t.Invoker = PageInvoker.CreateOnLoad(ValidationGroup_Load);
+            string html = HtmlDiff.GetControlFromPageHtml(t.Run());
+            if (html.IndexOf("onclick") == -1)
+                Assert.Fail("Validation script not created");
+            if (html.IndexOf("MyValidationGroup") == -1)
+                Assert.Fail("Validation group not set fail");
+        }
 
-		[Test]
-		[Category("NunitWeb")]
-		public void RaisePostBackEvent ()
-		{
-			WebTest.CopyResource (GetType (), "NoEventValidation.aspx", "NoEventValidation.aspx");
-			WebTest t = new WebTest ("NoEventValidation.aspx");
-			t.Invoker = PageInvoker.CreateOnLoad (RaisePostBackEvent_Load);
-			t.Run ();
-			ArrayList eventlist = t.UserData as ArrayList;
-			if (eventlist == null)
-				Assert.Fail ("User data does not been created fail");
+        public static void ValidationGroup_Load(Page p)
+        {
+            PokerImageButton b = new PokerImageButton();
+            b.ValidationGroup = "MyValidationGroup";
+            TextBox tb = new TextBox();
+            tb.ID = "tb";
+            tb.ValidationGroup = "MyValidationGroup";
+            RequiredFieldValidator v = new RequiredFieldValidator();
+            v.ControlToValidate = "tb";
+            v.ValidationGroup = "MyValidationGroup";
+            p.Form.Controls.Add(tb);
+            p.Form.Controls.Add(v);
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.BEGIN_TAG));
+            p.Form.Controls.Add(b);
+            p.Form.Controls.Add(new LiteralControl(HtmlDiff.END_TAG));
+        }
 
-			Assert.AreEqual ("Click", eventlist[0], "Event Flow #0");
-			Assert.AreEqual ("Command", eventlist[1], "Event Flow #1");
-		}
+        [Test]
+        public void Text()
+        {
+            string origHtml = "<input type=\"image\" src=\"\" alt=\"MyText\" />";
+            PokerImageButton b = new PokerImageButton();
+            b.Text = "MyText";
+            string html = b.Render();
+            HtmlDiff.AssertAreEqual(origHtml, html, "Text#1");
+        }
 
-		public static void RaisePostBackEvent_Load (Page p)
-		{
-			PokerImageButton b = new PokerImageButton ();
-			p.Form.Controls.Add (b);
-			b.Click += new ImageClickEventHandler (b_Click);
-			b.Command += new CommandEventHandler (b_Command);
-			b.RaisePostBackEvent ("Click");
-		}
+        [Test]
+        [Category("NunitWeb")]
+        public void RaisePostBackEvent()
+        {
+            WebTest.CopyResource(GetType(), "NoEventValidation.aspx", "NoEventValidation.aspx");
+            WebTest t = new WebTest("NoEventValidation.aspx");
+            t.Invoker = PageInvoker.CreateOnLoad(RaisePostBackEvent_Load);
+            t.Run();
+            ArrayList eventlist = t.UserData as ArrayList;
+            if (eventlist == null)
+                Assert.Fail("User data does not been created fail");
 
-		static void b_Command (object sender, CommandEventArgs e)
-		{
-			if (WebTest.CurrentTest.UserData == null) {
-				ArrayList list = new ArrayList ();
-				list.Add ("Command");
-				WebTest.CurrentTest.UserData = list;
-			}
-			else {
-				ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
-				if (list == null)
-					throw new NullReferenceException ();
-				list.Add ("Command");
-				WebTest.CurrentTest.UserData = list;
-			}
-		}
+            Assert.AreEqual("Click", eventlist[0], "Event Flow #0");
+            Assert.AreEqual("Command", eventlist[1], "Event Flow #1");
+        }
 
-		static void b_Click (object sender, ImageClickEventArgs e)
-		{
-			if (WebTest.CurrentTest.UserData == null) {
-				ArrayList list = new ArrayList ();
-				list.Add ("Click");
-				WebTest.CurrentTest.UserData = list;
-			}
-			else {
-				ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
-				if (list == null)
-					throw new NullReferenceException ();
-				list.Add ("Click");
-				WebTest.CurrentTest.UserData = list;
-			}
-		}
+        public static void RaisePostBackEvent_Load(Page p)
+        {
+            PokerImageButton b = new PokerImageButton();
+            p.Form.Controls.Add(b);
+            b.Click += new ImageClickEventHandler(b_Click);
+            b.Command += new CommandEventHandler(b_Command);
+            b.RaisePostBackEvent("Click");
+        }
 
+        static void b_Command(object sender, CommandEventArgs e)
+        {
+            if (WebTest.CurrentTest.UserData == null)
+            {
+                ArrayList list = new ArrayList();
+                list.Add("Command");
+                WebTest.CurrentTest.UserData = list;
+            }
+            else
+            {
+                ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
+                if (list == null)
+                    throw new NullReferenceException();
+                list.Add("Command");
+                WebTest.CurrentTest.UserData = list;
+            }
+        }
 
-		[Test]
-		public void ImageButton_Render ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+        static void b_Click(object sender, ImageClickEventArgs e)
+        {
+            if (WebTest.CurrentTest.UserData == null)
+            {
+                ArrayList list = new ArrayList();
+                list.Add("Click");
+                WebTest.CurrentTest.UserData = list;
+            }
+            else
+            {
+                ArrayList list = WebTest.CurrentTest.UserData as ArrayList;
+                if (list == null)
+                    throw new NullReferenceException();
+                list.Add("Click");
+                WebTest.CurrentTest.UserData = list;
+            }
+        }
 
-			ImageButton b = new ImageButton ();			
-			b.RenderControl (tw);				
-			
-			Assert.AreEqual (true, sw.ToString().IndexOf ("<input") != -1, "A1");
-			Assert.AreEqual (true, sw.ToString().IndexOf ("type=\"image\"") != -1, "A2");
-		}
+        [Test]
+        public void ImageButton_Render()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-		[Test]
-		public void ImageButton_ViewState ()
-		{
-			PokerImageButton p = new PokerImageButton ();
+            ImageButton b = new ImageButton();
+            b.RenderControl(tw);
 
-			p.CommandArgument = "arg";
-			Assert.AreEqual (p.CommandArgument, "arg", "A1");
-			p.CommandName = "cmd";
-			Assert.AreEqual (p.CommandName, "cmd", "A2");
-			p.ValidationGroup = "VG1";
-			Assert.AreEqual (p.ValidationGroup, "VG1", "A3");
+            Assert.AreEqual(true, sw.ToString().IndexOf("<input") != -1, "A1");
+            Assert.AreEqual(true, sw.ToString().IndexOf("type=\"image\"") != -1, "A2");
+        }
 
-			object state = p.SaveState ();
+        [Test]
+        public void ImageButton_ViewState()
+        {
+            PokerImageButton p = new PokerImageButton();
 
-			PokerImageButton copy = new PokerImageButton ();
-			copy.LoadState (state);
+            p.CommandArgument = "arg";
+            Assert.AreEqual(p.CommandArgument, "arg", "A1");
+            p.CommandName = "cmd";
+            Assert.AreEqual(p.CommandName, "cmd", "A2");
+            p.ValidationGroup = "VG1";
+            Assert.AreEqual(p.ValidationGroup, "VG1", "A3");
 
-			Assert.AreEqual (copy.CommandArgument, "arg", "A4");
-			Assert.AreEqual (copy.CommandName, "cmd", "A5");
-			Assert.AreEqual (copy.ValidationGroup, "VG1", "A6");
+            object state = p.SaveState();
 
-		}
+            PokerImageButton copy = new PokerImageButton();
+            copy.LoadState(state);
 
-		[Test]
-		public void RenderName ()
-		{
-			StringWriter sw = new StringWriter ();
-			HtmlTextWriter tw = new HtmlTextWriter (sw);
+            Assert.AreEqual(copy.CommandArgument, "arg", "A4");
+            Assert.AreEqual(copy.CommandName, "cmd", "A5");
+            Assert.AreEqual(copy.ValidationGroup, "VG1", "A6");
+        }
 
-			Page page = new Page ();
-			page.EnableEventValidation = false;
-			ImageButton b = new ImageButton ();			
-			page.Controls.Add (b);
-			page.RenderControl (tw);
-			Assert.AreEqual (true, sw.ToString().IndexOf ("<input") != -1, "A1");
-			Assert.AreEqual (true, sw.ToString().IndexOf ("type=\"image\"") != -1, "A2");
-			Assert.AreEqual (true, sw.ToString().IndexOf ("name=\"") != -1, "A3");
-		}
-		[Test]
-		[ExpectedException (typeof (NotSupportedException))]
-		public void GenerateEmptyAlternateText_Exception ()
-		{
-			ImageButton b = new ImageButton ();
-			b.GenerateEmptyAlternateText = true;
-		}
+        [Test]
+        public void RenderName()
+        {
+            StringWriter sw = new StringWriter();
+            HtmlTextWriter tw = new HtmlTextWriter(sw);
 
-		[TestFixtureTearDown]
-		public void TearDown ()
-		{
-			WebTest.Unload ();
-		}
+            Page page = new Page();
+            page.EnableEventValidation = false;
+            ImageButton b = new ImageButton();
+            page.Controls.Add(b);
+            page.RenderControl(tw);
+            Assert.AreEqual(true, sw.ToString().IndexOf("<input") != -1, "A1");
+            Assert.AreEqual(true, sw.ToString().IndexOf("type=\"image\"") != -1, "A2");
+            Assert.AreEqual(true, sw.ToString().IndexOf("name=\"") != -1, "A3");
+        }
 
-	}
+        [Test]
+        [ExpectedException(typeof(NotSupportedException))]
+        public void GenerateEmptyAlternateText_Exception()
+        {
+            ImageButton b = new ImageButton();
+            b.GenerateEmptyAlternateText = true;
+        }
+
+        [TestFixtureTearDown]
+        public void TearDown()
+        {
+            WebTest.Unload();
+        }
+    }
 }
-
-

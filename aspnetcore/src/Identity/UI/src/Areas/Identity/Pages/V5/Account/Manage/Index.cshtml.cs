@@ -62,14 +62,13 @@ public abstract class IndexModel : PageModel
     public virtual Task<IActionResult> OnPostAsync() => throw new NotImplementedException();
 }
 
-internal sealed class IndexModel<TUser> : IndexModel where TUser : class
+internal sealed class IndexModel<TUser> : IndexModel
+    where TUser : class
 {
     private readonly UserManager<TUser> _userManager;
     private readonly SignInManager<TUser> _signInManager;
 
-    public IndexModel(
-        UserManager<TUser> userManager,
-        SignInManager<TUser> signInManager)
+    public IndexModel(UserManager<TUser> userManager, SignInManager<TUser> signInManager)
     {
         _userManager = userManager;
         _signInManager = signInManager;
@@ -82,10 +81,7 @@ internal sealed class IndexModel<TUser> : IndexModel where TUser : class
 
         Username = userName;
 
-        Input = new InputModel
-        {
-            PhoneNumber = phoneNumber
-        };
+        Input = new InputModel { PhoneNumber = phoneNumber };
     }
 
     public override async Task<IActionResult> OnGetAsync()

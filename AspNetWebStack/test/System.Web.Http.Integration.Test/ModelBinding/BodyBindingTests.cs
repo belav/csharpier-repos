@@ -23,7 +23,11 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             string formUrlEncodedString = "Id=101&Name=testFirstNameTooLong";
-            StringContent stringContent = new StringContent(formUrlEncodedString, Encoding.UTF8, "application/x-www-form-urlencoded");
+            StringContent stringContent = new StringContent(
+                formUrlEncodedString,
+                Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -37,8 +41,10 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.Equal(HttpStatusCode.BadRequest, response.StatusCode);
-            Assert.Equal("Failed to bind customer.RequiredValue. The errors are:\nErrorMessage: The RequiredValue property is required.\nFailed to bind customer.Name. The errors are:\nErrorMessage: The field Name must be a string with a maximum length of 6.\n",
-                await response.Content.ReadAsStringAsync());
+            Assert.Equal(
+                "Failed to bind customer.RequiredValue. The errors are:\nErrorMessage: The RequiredValue property is required.\nFailed to bind customer.Name. The errors are:\nErrorMessage: The field Name must be a string with a maximum length of 6.\n",
+                await response.Content.ReadAsStringAsync()
+            );
         }
 
         [Fact]
@@ -46,7 +52,11 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             string formUrlEncodedString = "Id=111&Name=John&RequiredValue=9";
-            StringContent stringContent = new StringContent(formUrlEncodedString, Encoding.UTF8, "application/x-www-form-urlencoded");
+            StringContent stringContent = new StringContent(
+                formUrlEncodedString,
+                Encoding.UTF8,
+                "application/x-www-form-urlencoded"
+            );
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -69,7 +79,11 @@ namespace System.Web.Http.ModelBinding
         public async Task Body_OptionalParameter_Throws(string actionName)
         {
             // Arrange
-            StringContent stringContent = new StringContent(@"""string value""", Encoding.UTF8, "application/json");
+            StringContent stringContent = new StringContent(
+                @"""string value""",
+                Encoding.UTF8,
+                "application/json"
+            );
             HttpRequestMessage request = new HttpRequestMessage()
             {
                 RequestUri = new Uri(BaseAddress + "ModelBinding/" + actionName),
@@ -83,7 +97,14 @@ namespace System.Web.Http.ModelBinding
 
             // Assert
             Assert.Equal(HttpStatusCode.InternalServerError, response.StatusCode);
-            Assert.Equal(String.Format(SRResources.OptionalBodyParameterNotSupported, "value", typeof(FormatterParameterBinding).Name), error["ExceptionMessage"]);
+            Assert.Equal(
+                String.Format(
+                    SRResources.OptionalBodyParameterNotSupported,
+                    "value",
+                    typeof(FormatterParameterBinding).Name
+                ),
+                error["ExceptionMessage"]
+            );
         }
 
         [Theory]
@@ -93,7 +114,8 @@ namespace System.Web.Http.ModelBinding
         {
             // Arrange
             StringContent stringContent = new StringContent(String.Empty);
-            stringContent.Headers.ContentType = mediaType != null ? new MediaTypeHeaderValue(mediaType) : null;
+            stringContent.Headers.ContentType =
+                mediaType != null ? new MediaTypeHeaderValue(mediaType) : null;
 
             HttpRequestMessage request = new HttpRequestMessage()
             {
@@ -116,16 +138,22 @@ namespace System.Web.Http.ModelBinding
         [InlineData("PostComplexType", "application/xml")]
         [InlineData("PostComplexTypeFromBody", "application/json")]
         [InlineData("PostComplexTypeFromBody", "application/xml")]
-        public async Task Body_Binds_ComplexType_Type_Key_Value_Read(string action, string mediaType)
+        public async Task Body_Binds_ComplexType_Type_Key_Value_Read(
+            string action,
+            string mediaType
+        )
         {
             // Arrange
             ModelBindOrder expectedItem = new ModelBindOrder()
             {
                 ItemName = "Bike",
                 Quantity = 1,
-                Customer = new ModelBindCustomer { Name = "Fred" }
+                Customer = new ModelBindCustomer { Name = "Fred" },
             };
-            var formatter = new MediaTypeFormatterCollection().FindWriter(typeof(ModelBindOrder), new MediaTypeHeaderValue(mediaType));
+            var formatter = new MediaTypeFormatterCollection().FindWriter(
+                typeof(ModelBindOrder),
+                new MediaTypeHeaderValue(mediaType)
+            );
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<ModelBindOrder>(expectedItem, formatter),
@@ -146,16 +174,22 @@ namespace System.Web.Http.ModelBinding
         [InlineData("PostComplexType", "application/xml")]
         [InlineData("PostComplexTypeFromBody", "application/json")]
         [InlineData("PostComplexTypeFromBody", "application/xml")]
-        public async Task Body_Binds_ComplexType_Type_Whole_Body_Read(string action, string mediaType)
+        public async Task Body_Binds_ComplexType_Type_Whole_Body_Read(
+            string action,
+            string mediaType
+        )
         {
             // Arrange
             ModelBindOrder expectedItem = new ModelBindOrder()
             {
                 ItemName = "Bike",
                 Quantity = 1,
-                Customer = new ModelBindCustomer { Name = "Fred" }
+                Customer = new ModelBindCustomer { Name = "Fred" },
             };
-            var formatter = new MediaTypeFormatterCollection().FindWriter(typeof(ModelBindOrder), new MediaTypeHeaderValue(mediaType));
+            var formatter = new MediaTypeFormatterCollection().FindWriter(
+                typeof(ModelBindOrder),
+                new MediaTypeHeaderValue(mediaType)
+            );
             HttpRequestMessage request = new HttpRequestMessage
             {
                 Content = new ObjectContent<ModelBindOrder>(expectedItem, formatter),

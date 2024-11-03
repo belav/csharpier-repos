@@ -34,10 +34,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoStruct>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<TodoStruct>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.Equal("Write even more tests!", body!.Name);
         Assert.True(body!.IsComplete);
@@ -65,10 +73,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<Todo>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<Todo>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -86,7 +102,7 @@ public partial class HttpResultsHelperTests
             Id = 1,
             IsComplete = true,
             Name = "Write even more tests!",
-            Child = "With type hierarchies!"
+            Child = "With type hierarchies!",
         };
         var responseBodyStream = new MemoryStream();
         var httpContext = CreateHttpContext(responseBodyStream);
@@ -98,10 +114,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoChild>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<TodoChild>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -120,7 +144,7 @@ public partial class HttpResultsHelperTests
             Id = 1,
             IsComplete = true,
             Name = "Write even more tests!",
-            Child = "With type hierarchies!"
+            Child = "With type hierarchies!",
         };
         var responseBodyStream = new MemoryStream();
         var httpContext = CreateHttpContext(responseBodyStream);
@@ -132,10 +156,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync<Todo>(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync<Todo>(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoChild>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<TodoChild>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -146,7 +178,9 @@ public partial class HttpResultsHelperTests
     [Theory]
     [InlineData(true)]
     [InlineData(false)]
-    public async Task WriteResultAsJsonAsync_Works_UsingBaseType_ForChildTypes_WithJsonPolymorphism(bool useJsonContext)
+    public async Task WriteResultAsJsonAsync_Works_UsingBaseType_ForChildTypes_WithJsonPolymorphism(
+        bool useJsonContext
+    )
     {
         // Arrange
         var value = new TodoJsonChild()
@@ -154,7 +188,7 @@ public partial class HttpResultsHelperTests
             Id = 1,
             IsComplete = true,
             Name = "Write even more tests!",
-            Child = "With type hierarchies!"
+            Child = "With type hierarchies!",
         };
         var responseBodyStream = new MemoryStream();
         var httpContext = CreateHttpContext(responseBodyStream);
@@ -166,10 +200,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync<JsonTodo>(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync<JsonTodo>(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<TodoJsonChild>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<TodoJsonChild>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.NotNull(body);
         Assert.Equal("Write even more tests!", body!.Name);
@@ -194,10 +236,18 @@ public partial class HttpResultsHelperTests
         }
 
         // Act
-        await HttpResultsHelper.WriteResultAsJsonAsync(httpContext, NullLogger.Instance, value, jsonSerializerOptions: serializerOptions);
+        await HttpResultsHelper.WriteResultAsJsonAsync(
+            httpContext,
+            NullLogger.Instance,
+            value,
+            jsonSerializerOptions: serializerOptions
+        );
 
         // Assert
-        var body = JsonSerializer.Deserialize<JsonTodo[]>(responseBodyStream.ToArray(), serializerOptions);
+        var body = JsonSerializer.Deserialize<JsonTodo[]>(
+            responseBodyStream.ToArray(),
+            serializerOptions
+        );
 
         Assert.Equal(3, body.Length);
 
@@ -220,24 +270,33 @@ public partial class HttpResultsHelperTests
 
     private static async IAsyncEnumerable<JsonTodo> GetTodosAsync()
     {
-        yield return new JsonTodo() { Id = 1, IsComplete = true, Name = "One" };
+        yield return new JsonTodo()
+        {
+            Id = 1,
+            IsComplete = true,
+            Name = "One",
+        };
 
         // ensure this is async
         await Task.Yield();
 
-        yield return new JsonTodo() { Id = 2, IsComplete = false, Name = "Two" };
-        yield return new TodoJsonChild() { Id = 3, IsComplete = true, Name = "Three", Child = "ThreeChild" };
+        yield return new JsonTodo()
+        {
+            Id = 2,
+            IsComplete = false,
+            Name = "Two",
+        };
+        yield return new TodoJsonChild()
+        {
+            Id = 3,
+            IsComplete = true,
+            Name = "Three",
+            Child = "ThreeChild",
+        };
     }
 
-    private static DefaultHttpContext CreateHttpContext(Stream stream)
-        => new()
-        {
-            RequestServices = CreateServices(),
-            Response =
-            {
-                Body = stream,
-            },
-        };
+    private static DefaultHttpContext CreateHttpContext(Stream stream) =>
+        new() { RequestServices = CreateServices(), Response = { Body = stream } };
 
     private static IServiceProvider CreateServices()
     {
@@ -252,8 +311,7 @@ public partial class HttpResultsHelperTests
     [JsonSerializable(typeof(TodoStruct))]
     [JsonSerializable(typeof(IAsyncEnumerable<JsonTodo>))]
     [JsonSerializable(typeof(JsonTodo[]))]
-    private partial class TestJsonContext : JsonSerializerContext
-    { }
+    private partial class TestJsonContext : JsonSerializerContext { }
 
     private class Todo
     {
@@ -264,9 +322,7 @@ public partial class HttpResultsHelperTests
 
     private struct TodoStruct
     {
-        public TodoStruct()
-        {
-        }
+        public TodoStruct() { }
 
         public int Id { get; set; }
         public string Name { get; set; } = "Todo";
@@ -279,9 +335,7 @@ public partial class HttpResultsHelperTests
     }
 
     [JsonDerivedType(typeof(TodoJsonChild), nameof(TodoJsonChild))]
-    private class JsonTodo : Todo
-    {
-    }
+    private class JsonTodo : Todo { }
 
     private class TodoJsonChild : JsonTodo
     {

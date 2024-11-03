@@ -13,21 +13,50 @@ internal enum SpacePlacementWithinParentheses
     Expressions = 1,
     TypeCasts = 1 << 1,
     ControlFlowStatements = 1 << 2,
-    All = (1 << 3) - 1
+    All = (1 << 3) - 1,
 }
 
 internal static partial class Extensions
 {
-    public static SpacePlacementWithinParentheses ToSpacingWithinParentheses(this SpacePlacement placement)
-        => (placement.HasFlag(SpacePlacement.WithinExpressionParentheses) ? SpacePlacementWithinParentheses.Expressions : 0) |
-           (placement.HasFlag(SpacePlacement.WithinCastParentheses) ? SpacePlacementWithinParentheses.TypeCasts : 0) |
-           (placement.HasFlag(SpacePlacement.WithinOtherParentheses) ? SpacePlacementWithinParentheses.ControlFlowStatements : 0);
+    public static SpacePlacementWithinParentheses ToSpacingWithinParentheses(
+        this SpacePlacement placement
+    ) =>
+        (
+            placement.HasFlag(SpacePlacement.WithinExpressionParentheses)
+                ? SpacePlacementWithinParentheses.Expressions
+                : 0
+        )
+        | (
+            placement.HasFlag(SpacePlacement.WithinCastParentheses)
+                ? SpacePlacementWithinParentheses.TypeCasts
+                : 0
+        )
+        | (
+            placement.HasFlag(SpacePlacement.WithinOtherParentheses)
+                ? SpacePlacementWithinParentheses.ControlFlowStatements
+                : 0
+        );
 
-    public static SpacePlacement ToSpacePlacement(this SpacePlacementWithinParentheses placement)
-        => (placement.HasFlag(SpacePlacementWithinParentheses.Expressions) ? SpacePlacement.WithinExpressionParentheses : 0) |
-           (placement.HasFlag(SpacePlacementWithinParentheses.TypeCasts) ? SpacePlacement.WithinCastParentheses : 0) |
-           (placement.HasFlag(SpacePlacementWithinParentheses.ControlFlowStatements) ? SpacePlacement.WithinOtherParentheses : 0);
+    public static SpacePlacement ToSpacePlacement(this SpacePlacementWithinParentheses placement) =>
+        (
+            placement.HasFlag(SpacePlacementWithinParentheses.Expressions)
+                ? SpacePlacement.WithinExpressionParentheses
+                : 0
+        )
+        | (
+            placement.HasFlag(SpacePlacementWithinParentheses.TypeCasts)
+                ? SpacePlacement.WithinCastParentheses
+                : 0
+        )
+        | (
+            placement.HasFlag(SpacePlacementWithinParentheses.ControlFlowStatements)
+                ? SpacePlacement.WithinOtherParentheses
+                : 0
+        );
 
-    public static SpacePlacementWithinParentheses WithFlagValue(this SpacePlacementWithinParentheses flags, SpacePlacementWithinParentheses flag, bool value)
-        => (flags & ~flag) | (value ? flag : 0);
+    public static SpacePlacementWithinParentheses WithFlagValue(
+        this SpacePlacementWithinParentheses flags,
+        SpacePlacementWithinParentheses flag,
+        bool value
+    ) => (flags & ~flag) | (value ? flag : 0);
 }

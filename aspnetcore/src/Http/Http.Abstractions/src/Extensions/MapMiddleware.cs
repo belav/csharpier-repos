@@ -41,7 +41,13 @@ public class MapMiddleware
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        if (context.Request.Path.StartsWithSegments(_options.PathMatch, out var matchedPath, out var remainingPath))
+        if (
+            context.Request.Path.StartsWithSegments(
+                _options.PathMatch,
+                out var matchedPath,
+                out var remainingPath
+            )
+        )
         {
             if (!_options.PreserveMatchedPathSegment)
             {
@@ -52,7 +58,11 @@ public class MapMiddleware
         return _next(context);
     }
 
-    private async Task InvokeCore(HttpContext context, PathString matchedPath, PathString remainingPath)
+    private async Task InvokeCore(
+        HttpContext context,
+        PathString matchedPath,
+        PathString remainingPath
+    )
     {
         var path = context.Request.Path;
         var pathBase = context.Request.PathBase;
