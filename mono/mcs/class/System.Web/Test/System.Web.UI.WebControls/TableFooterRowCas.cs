@@ -1,5 +1,5 @@
 //
-// TableFooterRowCas.cs 
+// TableFooterRowCas.cs
 //	- CAS unit tests for System.Web.UI.WebControls.TableFooterRow
 //
 // Author:
@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,31 +28,29 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Security.Permissions;
 using System.Web;
 using System.Web.UI.WebControls;
-
 using MonoTests.System.Web.UI.WebControls;
+using NUnit.Framework;
 
-namespace MonoCasTests.System.Web.UI.WebControls {
+namespace MonoCasTests.System.Web.UI.WebControls
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class TableFooterRowCas : TableRowCas
+    {
+        public override TableRowTest GetUnitTests()
+        {
+            return new TableFooterRowTest();
+        }
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class TableFooterRowCas: TableRowCas {
+        // LinkDemand
 
-		public override TableRowTest GetUnitTests ()
-		{
-			return new TableFooterRowTest ();
-		}
-
-		// LinkDemand
-
-		public override Type Type {
-			get { return typeof (TableFooterRow); }
-		}
-	}
+        public override Type Type
+        {
+            get { return typeof(TableFooterRow); }
+        }
+    }
 }
-

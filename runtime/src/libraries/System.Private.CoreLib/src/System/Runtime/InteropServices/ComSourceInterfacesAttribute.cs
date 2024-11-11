@@ -24,14 +24,35 @@ namespace System.Runtime.InteropServices
             Value = sourceInterface1.FullName + "\0" + sourceInterface2.FullName;
         }
 
-        public ComSourceInterfacesAttribute(Type sourceInterface1, Type sourceInterface2, Type sourceInterface3)
+        public ComSourceInterfacesAttribute(
+            Type sourceInterface1,
+            Type sourceInterface2,
+            Type sourceInterface3
+        )
         {
-            Value = sourceInterface1.FullName + "\0" + sourceInterface2.FullName + "\0" + sourceInterface3.FullName;
+            Value =
+                sourceInterface1.FullName
+                + "\0"
+                + sourceInterface2.FullName
+                + "\0"
+                + sourceInterface3.FullName;
         }
 
-        public ComSourceInterfacesAttribute(Type sourceInterface1, Type sourceInterface2, Type sourceInterface3, Type sourceInterface4)
+        public ComSourceInterfacesAttribute(
+            Type sourceInterface1,
+            Type sourceInterface2,
+            Type sourceInterface3,
+            Type sourceInterface4
+        )
         {
-            Value = sourceInterface1.FullName + "\0" + sourceInterface2.FullName + "\0" + sourceInterface3.FullName + "\0" + sourceInterface4.FullName;
+            Value =
+                sourceInterface1.FullName
+                + "\0"
+                + sourceInterface2.FullName
+                + "\0"
+                + sourceInterface3.FullName
+                + "\0"
+                + sourceInterface4.FullName;
         }
 
         public string Value { get; }

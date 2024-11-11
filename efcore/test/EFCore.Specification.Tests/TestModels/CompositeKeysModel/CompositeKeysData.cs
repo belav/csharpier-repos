@@ -36,92 +36,92 @@ public abstract class CompositeKeysData : ISetSource
                 Id1 = "L0",
                 Id2 = 1,
                 Name = "L1 01",
-                Date = new DateTime(2001, 1, 1)
+                Date = new DateTime(2001, 1, 1),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 2,
                 Name = "L1 02",
-                Date = new DateTime(2002, 2, 2)
+                Date = new DateTime(2002, 2, 2),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 3,
                 Name = "L1 03",
-                Date = new DateTime(2003, 3, 3)
+                Date = new DateTime(2003, 3, 3),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 4,
                 Name = "L1 04",
-                Date = new DateTime(2004, 4, 4)
+                Date = new DateTime(2004, 4, 4),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 5,
                 Name = "L1 05",
-                Date = new DateTime(2005, 5, 5)
+                Date = new DateTime(2005, 5, 5),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 1,
                 Name = "L1 06",
-                Date = new DateTime(2006, 6, 6)
+                Date = new DateTime(2006, 6, 6),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 2,
                 Name = "L1 07",
-                Date = new DateTime(2007, 7, 7)
+                Date = new DateTime(2007, 7, 7),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 3,
                 Name = "L1 08",
-                Date = new DateTime(2008, 8, 8)
+                Date = new DateTime(2008, 8, 8),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 4,
                 Name = "L1 09",
-                Date = new DateTime(2009, 9, 9)
+                Date = new DateTime(2009, 9, 9),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 5,
                 Name = "L1 10",
-                Date = new DateTime(2010, 10, 10)
+                Date = new DateTime(2010, 10, 10),
             },
             new()
             {
                 Id1 = "L2",
                 Id2 = 1,
                 Name = "L1 11",
-                Date = new DateTime(2009, 11, 11)
+                Date = new DateTime(2009, 11, 11),
             },
             new()
             {
                 Id1 = "L2",
                 Id2 = 2,
                 Name = "L1 12",
-                Date = new DateTime(2008, 12, 12)
+                Date = new DateTime(2008, 12, 12),
             },
             new()
             {
                 Id1 = "L2",
                 Id2 = 3,
                 Name = "L1 13",
-                Date = new DateTime(2007, 1, 1)
-            }
+                Date = new DateTime(2007, 1, 1),
+            },
         };
 
         foreach (var l1 in result)
@@ -144,78 +144,78 @@ public abstract class CompositeKeysData : ISetSource
                 Id1 = "L0",
                 Id2 = 1,
                 Name = "L2 01",
-                Date = new DateTime(2010, 10, 10)
+                Date = new DateTime(2010, 10, 10),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 2,
                 Name = "L2 02",
-                Date = new DateTime(2002, 2, 2)
+                Date = new DateTime(2002, 2, 2),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 3,
                 Name = "L2 03",
-                Date = new DateTime(2008, 8, 8)
+                Date = new DateTime(2008, 8, 8),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 4,
                 Name = "L2 04",
-                Date = new DateTime(2004, 4, 4)
+                Date = new DateTime(2004, 4, 4),
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 5,
                 Name = "L2 05",
-                Date = new DateTime(2006, 6, 6)
+                Date = new DateTime(2006, 6, 6),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 1,
                 Name = "L2 06",
-                Date = new DateTime(2005, 5, 5)
+                Date = new DateTime(2005, 5, 5),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 2,
                 Name = "L2 07",
-                Date = new DateTime(2007, 7, 7)
+                Date = new DateTime(2007, 7, 7),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 3,
                 Name = "L2 08",
-                Date = new DateTime(2003, 3, 3)
+                Date = new DateTime(2003, 3, 3),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 4,
                 Name = "L2 09",
-                Date = new DateTime(2009, 9, 9)
+                Date = new DateTime(2009, 9, 9),
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 5,
                 Name = "L2 10",
-                Date = new DateTime(2001, 1, 1)
+                Date = new DateTime(2001, 1, 1),
             },
             new()
             {
                 Id1 = "L2",
                 Id2 = 1,
                 Name = "L2 11",
-                Date = new DateTime(2000, 1, 1)
-            }
+                Date = new DateTime(2000, 1, 1),
+            },
         };
 
         foreach (var l2 in result)
@@ -237,62 +237,62 @@ public abstract class CompositeKeysData : ISetSource
             {
                 Id1 = "L0",
                 Id2 = 1,
-                Name = "L3 01"
+                Name = "L3 01",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 2,
-                Name = "L3 02"
+                Name = "L3 02",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 3,
-                Name = "L3 03"
+                Name = "L3 03",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 4,
-                Name = "L3 04"
+                Name = "L3 04",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 5,
-                Name = "L3 05"
+                Name = "L3 05",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 1,
-                Name = "L3 06"
+                Name = "L3 06",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 2,
-                Name = "L3 07"
+                Name = "L3 07",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 3,
-                Name = "L3 08"
+                Name = "L3 08",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 4,
-                Name = "L3 09"
+                Name = "L3 09",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 5,
-                Name = "L3 10"
-            }
+                Name = "L3 10",
+            },
         };
 
         foreach (var l3 in result)
@@ -314,62 +314,62 @@ public abstract class CompositeKeysData : ISetSource
             {
                 Id1 = "L0",
                 Id2 = 1,
-                Name = "L4 01"
+                Name = "L4 01",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 2,
-                Name = "L4 02"
+                Name = "L4 02",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 3,
-                Name = "L4 03"
+                Name = "L4 03",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 4,
-                Name = "L4 04"
+                Name = "L4 04",
             },
             new()
             {
                 Id1 = "L0",
                 Id2 = 5,
-                Name = "L4 05"
+                Name = "L4 05",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 1,
-                Name = "L4 06"
+                Name = "L4 06",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 2,
-                Name = "L4 07"
+                Name = "L4 07",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 3,
-                Name = "L4 08"
+                Name = "L4 08",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 4,
-                Name = "L4 09"
+                Name = "L4 09",
             },
             new()
             {
                 Id1 = "L1",
                 Id2 = 5,
-                Name = "L4 10"
-            }
+                Name = "L4 10",
+            },
         };
 
         foreach (var l4 in result)
@@ -385,7 +385,8 @@ public abstract class CompositeKeysData : ISetSource
         IReadOnlyList<CompositeOne> l1s,
         IReadOnlyList<CompositeTwo> l2s,
         IReadOnlyList<CompositeThree> l3s,
-        IReadOnlyList<CompositeFour> l4s)
+        IReadOnlyList<CompositeFour> l4s
+    )
     {
         l1s[0].OneToOne_Required_PK1 = l2s[0];
         l1s[1].OneToOne_Required_PK1 = l2s[1];
@@ -422,16 +423,11 @@ public abstract class CompositeKeysData : ISetSource
             l2s[6],
             l2s[7],
             l2s[8],
-            l2s[9]
+            l2s[9],
         };
 
         l1s[0].OneToMany_Required1.Add(l2s[10]);
-        l1s[0].OneToMany_Required_Self1 = new List<CompositeOne>
-        {
-            l1s[0],
-            l1s[1],
-            l1s[11]
-        };
+        l1s[0].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[0], l1s[1], l1s[11] };
         l1s[1].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[2], l1s[12] };
         l1s[2].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[3] };
         l1s[3].OneToMany_Required_Self1 = new List<CompositeOne> { l1s[4] };
@@ -478,15 +474,10 @@ public abstract class CompositeKeysData : ISetSource
             l3s[6],
             l3s[7],
             l3s[8],
-            l3s[9]
+            l3s[9],
         };
 
-        l2s[0].OneToMany_Required_Self2 = new List<CompositeTwo>
-        {
-            l2s[0],
-            l2s[1],
-            l2s[10]
-        };
+        l2s[0].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[0], l2s[1], l2s[10] };
         l2s[1].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[2] };
         l2s[2].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[3] };
         l2s[3].OneToMany_Required_Self2 = new List<CompositeTwo> { l2s[4] };
@@ -531,7 +522,7 @@ public abstract class CompositeKeysData : ISetSource
             l4s[6],
             l4s[7],
             l4s[8],
-            l4s[9]
+            l4s[9],
         };
 
         l3s[0].OneToMany_Required_Self3 = new List<CompositeThree> { l3s[0], l3s[1] };
@@ -561,7 +552,8 @@ public abstract class CompositeKeysData : ISetSource
         IReadOnlyList<CompositeOne> l1s,
         IReadOnlyList<CompositeTwo> l2s,
         IReadOnlyList<CompositeThree> l3s,
-        IReadOnlyList<CompositeFour> l4s)
+        IReadOnlyList<CompositeFour> l4s
+    )
     {
         l2s[0].OneToOne_Required_PK_Inverse2 = l1s[0];
         l2s[1].OneToOne_Required_PK_Inverse2 = l1s[1];
@@ -784,7 +776,8 @@ public abstract class CompositeKeysData : ISetSource
         IReadOnlyList<CompositeOne> l1s,
         IReadOnlyList<CompositeTwo> l2s,
         IReadOnlyList<CompositeThree> l3s,
-        IReadOnlyList<CompositeFour> l4s)
+        IReadOnlyList<CompositeFour> l4s
+    )
     {
         l1s[0].OneToOne_Optional_PK1 = l2s[0];
         l1s[2].OneToOne_Optional_PK1 = l2s[2];
@@ -804,7 +797,7 @@ public abstract class CompositeKeysData : ISetSource
             l2s[3],
             l2s[5],
             l2s[7],
-            l2s[9]
+            l2s[9],
         };
 
         l1s[1].OneToMany_Optional_Self1 = new List<CompositeOne> { l1s[0] };
@@ -831,12 +824,7 @@ public abstract class CompositeKeysData : ISetSource
         l2s[6].OneToOne_Optional_FK2 = l3s[2];
         l2s[8].OneToOne_Optional_FK2 = l3s[0];
 
-        l2s[0].OneToMany_Optional2 = new List<CompositeThree>
-        {
-            l3s[1],
-            l3s[5],
-            l3s[9]
-        };
+        l2s[0].OneToMany_Optional2 = new List<CompositeThree> { l3s[1], l3s[5], l3s[9] };
         l2s[1].OneToMany_Optional2 = new List<CompositeThree> { l3s[3], l3s[7] };
 
         l2s[1].OneToMany_Optional_Self2 = new List<CompositeTwo> { l2s[0] };
@@ -869,7 +857,7 @@ public abstract class CompositeKeysData : ISetSource
             l4s[3],
             l4s[5],
             l4s[7],
-            l4s[9]
+            l4s[9],
         };
 
         l3s[1].OneToMany_Optional_Self3 = new List<CompositeThree> { l3s[0] };
@@ -895,7 +883,8 @@ public abstract class CompositeKeysData : ISetSource
         IReadOnlyList<CompositeOne> l1s,
         IReadOnlyList<CompositeTwo> l2s,
         IReadOnlyList<CompositeThree> l3s,
-        IReadOnlyList<CompositeFour> l4s)
+        IReadOnlyList<CompositeFour> l4s
+    )
     {
         l2s[0].OneToOne_Optional_PK_Inverse2 = l1s[0];
         l2s[2].OneToOne_Optional_PK_Inverse2 = l1s[2];

@@ -13,11 +13,16 @@ namespace System.Xml.XslCompiledTransformApiTests
 {
     //[TestCase(Name = "XsltSettings-Retail", Desc = "This testcase tests the different settings on XsltSettings and the corresponding behavior in retail mode", Param = "Retail")]
     //[TestCase(Name = "XsltSettings-Debug", Desc = "This testcase tests the different settings on XsltSettings and the corresponding behavior in debug mode", Param = "Debug")]
-    [ConditionalClass(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+    [ConditionalClass(
+        typeof(PlatformDetection),
+        nameof(PlatformDetection.IsReflectionEmitSupported)
+    )]
     public class CXsltSettings : XsltApiTestCaseBase2
     {
         private ITestOutputHelper _output;
-        public CXsltSettings(ITestOutputHelper output) : base(output)
+
+        public CXsltSettings(ITestOutputHelper output)
+            : base(output)
         {
             _output = output;
         }
@@ -58,10 +63,21 @@ namespace System.Xml.XslCompiledTransformApiTests
         //[Variation(id = 11, Desc = "Test the combination of script and document function with EnableScript, only script should work", Pri = 2, Params = new object[] { "XsltSettings.xml", "XsltSettings3.xsl", false, true })]
         [InlineData(11, "XsltSettings.xml", "XsltSettings3.xsl", false, true)]
         [Theory]
-        public void XsltSettings1_1_ContainsScript(object param0, object param1, object param2, object param3, object param4)
+        public void XsltSettings1_1_ContainsScript(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4
+        )
         {
-            var e = Assert.ThrowsAny<XsltException>(() => XsltSettings1_1(param0, param1, param2, param3, param4));
-            Assert.Equal("Compiling JScript/CSharp scripts is not supported", e.InnerException.Message);
+            var e = Assert.ThrowsAny<XsltException>(
+                () => XsltSettings1_1(param0, param1, param2, param3, param4)
+            );
+            Assert.Equal(
+                "Compiling JScript/CSharp scripts is not supported",
+                e.InnerException.Message
+            );
         }
 
         //[Variation(id = 15, Desc = "Test 1 with Default settings, should fail", Pri = 1, Params = new object[] { "XsltSettings.xml", "XsltSettings1.xsl", false, true, false, false })]
@@ -73,10 +89,23 @@ namespace System.Xml.XslCompiledTransformApiTests
         //[Variation(id = 20, Desc = "Test 10 with TrustedXslt override, should work", Pri = 1, Params = new object[] { "XsltSettings.xml", "XsltSettings3.xsl", false, false, true, true })]
         [InlineData(20, "XsltSettings.xml", "XsltSettings3.xsl", false, false, true, true)]
         [Theory]
-        public void XsltSettings1_2_ContainsScript(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void XsltSettings1_2_ContainsScript(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
-            var e = Assert.ThrowsAny<XsltException>(() => XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6));
-            Assert.Equal("Compiling JScript/CSharp scripts is not supported", e.InnerException.Message);
+            var e = Assert.ThrowsAny<XsltException>(
+                () => XsltSettings1_2(param0, param1, param2, param3, param4, param5, param6)
+            );
+            Assert.Equal(
+                "Compiling JScript/CSharp scripts is not supported",
+                e.InnerException.Message
+            );
         }
 
         //[Variation(id = 5, Desc = "Test the document function with EnableDocumentFunction, should work", Pri = 0, Params = new object[] { "XsltSettings.xml", "XsltSettings2.xsl", true, false })]
@@ -84,7 +113,13 @@ namespace System.Xml.XslCompiledTransformApiTests
         //[Variation(id = 8, Desc = "Test the document function with TrustedXslt, should work", Pri = 1, Params = new object[] { "XsltSettings.xml", "XsltSettings2.xsl", true, true })]
         [InlineData(8, "XsltSettings.xml", "XsltSettings2.xsl", true, true)]
         [Theory]
-        public void XsltSettings1_1_ExternalURI(object param0, object param1, object param2, object param3, object param4)
+        public void XsltSettings1_1_ExternalURI(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4
+        )
         {
             using (new AllowDefaultResolverContext())
             {
@@ -95,7 +130,15 @@ namespace System.Xml.XslCompiledTransformApiTests
         //[Variation(id = 18, Desc = "Test 6 with EnableDocumentFunction override, should work", Pri = 1, Params = new object[] { "XsltSettings.xml", "XsltSettings2.xsl", false, false, true, false })]
         [InlineData(18, "XsltSettings.xml", "XsltSettings2.xsl", false, false, true, false)]
         [Theory]
-        public void XsltSettings1_2_ExternalURI(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void XsltSettings1_2_ExternalURI(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
             using (new AllowDefaultResolverContext())
             {
@@ -127,7 +170,13 @@ namespace System.Xml.XslCompiledTransformApiTests
 
          */
         [Theory]
-        public void XsltSettings1_1(object param0, object param1, object param2, object param3, object param4)
+        public void XsltSettings1_1(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4
+        )
         {
             Init(param1.ToString(), param2.ToString());
 
@@ -200,7 +249,15 @@ namespace System.Xml.XslCompiledTransformApiTests
 
          */
         [Theory]
-        public void XsltSettings1_2(object param0, object param1, object param2, object param3, object param4, object param5, object param6)
+        public void XsltSettings1_2(
+            object param0,
+            object param1,
+            object param2,
+            object param3,
+            object param4,
+            object param5,
+            object param6
+        )
         {
             Init(param1.ToString(), param2.ToString());
 
@@ -272,7 +329,9 @@ namespace System.Xml.XslCompiledTransformApiTests
             try
             {
                 StringWriter sw = Transform();
-                _output.WriteLine("Execution of the scripts was allowed even when XsltSettings.EnableScript is false");
+                _output.WriteLine(
+                    "Execution of the scripts was allowed even when XsltSettings.EnableScript is false"
+                );
                 Assert.Fail();
             }
             catch (XsltException ex)
@@ -311,8 +370,14 @@ namespace System.Xml.XslCompiledTransformApiTests
             // \p{Pi} any kind of opening quote https://www.compart.com/en/unicode/category/Pi
             // \p{Pf} any kind of closing quote https://www.compart.com/en/unicode/category/Pf
             // \p{Po} any kind of punctuation character that is not a dash, bracket, quote or connector https://www.compart.com/en/unicode/category/Po
-            Assert.Matches(@"[\p{Pi}\p{Po}]" + Regex.Escape("document()") + @"[\p{Pf}\p{Po}]", e.Message);
-            Assert.Matches(@"\b" + Regex.Escape("XsltSettings.EnableDocumentFunction") + @"\b", e.Message);
+            Assert.Matches(
+                @"[\p{Pi}\p{Po}]" + Regex.Escape("document()") + @"[\p{Pf}\p{Po}]",
+                e.Message
+            );
+            Assert.Matches(
+                @"\b" + Regex.Escape("XsltSettings.EnableDocumentFunction") + @"\b",
+                e.Message
+            );
         }
     }
 }

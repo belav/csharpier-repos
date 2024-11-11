@@ -5,28 +5,33 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections;
-    using System.ServiceModel.Channels;
-    using System.ServiceModel;
-    using System.ServiceModel.Description;
     using System.Collections.Generic;
     using System.Collections.ObjectModel;
-    using System.Reflection;
-    using System.Xml;
-    using System.ServiceModel.Diagnostics;
     using System.Net;
+    using System.Reflection;
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.ServiceModel.Description;
+    using System.ServiceModel.Diagnostics;
     using System.ServiceModel.Dispatcher;
     using System.ServiceModel.Web;
+    using System.Xml;
 
     class ContentTypeSettingClientMessageFormatter : IClientMessageFormatter
     {
         IClientMessageFormatter innerFormatter;
         string outgoingContentType;
 
-        public ContentTypeSettingClientMessageFormatter(string outgoingContentType, IClientMessageFormatter innerFormatter)
+        public ContentTypeSettingClientMessageFormatter(
+            string outgoingContentType,
+            IClientMessageFormatter innerFormatter
+        )
         {
             if (outgoingContentType == null)
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("outgoingContentType");
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull(
+                    "outgoingContentType"
+                );
             }
             if (innerFormatter == null)
             {
@@ -61,7 +66,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("contentType");
             }
-            if (OperationContext.Current != null && OperationContext.Current.HasOutgoingMessageProperties)
+            if (
+                OperationContext.Current != null
+                && OperationContext.Current.HasOutgoingMessageProperties
+            )
             {
                 if (string.IsNullOrEmpty(WebOperationContext.Current.OutgoingRequest.ContentType))
                 {
@@ -75,7 +83,7 @@ namespace System.ServiceModel.Dispatcher
                 HttpRequestMessageProperty httpProperty;
                 if (prop != null)
                 {
-                    httpProperty = (HttpRequestMessageProperty) prop;
+                    httpProperty = (HttpRequestMessageProperty)prop;
                 }
                 else
                 {

@@ -28,15 +28,23 @@ namespace System.ComponentModel
         /// Gets a value indicating whether this converter can convert an object
         /// to the given destination type using the context.
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
-            return destinationType == typeof(InstanceDescriptor) || base.CanConvertTo(context, destinationType);
+            return destinationType == typeof(InstanceDescriptor)
+                || base.CanConvertTo(context, destinationType);
         }
 
         /// <summary>
         /// Converts the given value object to a <see cref='System.DateTime'/> object.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string text)
             {
@@ -53,7 +61,8 @@ namespace System.ComponentModel
 
                     if (culture != null)
                     {
-                        formatInfo = (DateTimeFormatInfo?)culture.GetFormat(typeof(DateTimeFormatInfo));
+                        formatInfo = (DateTimeFormatInfo?)
+                            culture.GetFormat(typeof(DateTimeFormatInfo));
                     }
 
                     if (formatInfo != null)
@@ -67,7 +76,10 @@ namespace System.ComponentModel
                 }
                 catch (FormatException e)
                 {
-                    throw new FormatException(SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(DateTime)), e);
+                    throw new FormatException(
+                        SR.Format(SR.ConvertInvalidPrimitive, (string)value, nameof(DateTime)),
+                        e
+                    );
                 }
             }
 
@@ -78,7 +90,12 @@ namespace System.ComponentModel
         /// Converts the given value object to a <see cref='System.DateTime'/>
         /// object using the arguments.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string) && value is DateTime)
             {
@@ -90,7 +107,8 @@ namespace System.ComponentModel
 
                 culture ??= CultureInfo.CurrentCulture;
 
-                DateTimeFormatInfo? formatInfo = (DateTimeFormatInfo?)culture.GetFormat(typeof(DateTimeFormatInfo));
+                DateTimeFormatInfo? formatInfo = (DateTimeFormatInfo?)
+                    culture.GetFormat(typeof(DateTimeFormatInfo));
 
                 if (culture == CultureInfo.InvariantCulture)
                 {
@@ -129,8 +147,28 @@ namespace System.ComponentModel
                 }
 
                 return new InstanceDescriptor(
-                    typeof(DateTime).GetConstructor(new Type[] { typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int), typeof(int) }),
-                    new object[] { dt.Year, dt.Month, dt.Day, dt.Hour, dt.Minute, dt.Second, dt.Millisecond }
+                    typeof(DateTime).GetConstructor(
+                        new Type[]
+                        {
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                            typeof(int),
+                        }
+                    ),
+                    new object[]
+                    {
+                        dt.Year,
+                        dt.Month,
+                        dt.Day,
+                        dt.Hour,
+                        dt.Minute,
+                        dt.Second,
+                        dt.Millisecond,
+                    }
                 );
             }
 

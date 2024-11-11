@@ -12,16 +12,17 @@ using NUnit.Framework;
 
 namespace MonoTests.System.Xml
 {
-	[TestFixture]
-	public class XmlSchemaExceptionTests
-	{
-		[Test]
-		public void Bug599689_ToStringMatchesDotNet ()
-		{
-			Assert.AreEqual ("System.Xml.Schema.XmlSchemaException: Test",
-				new XmlSchemaException ("Test").ToString (),
-				"Novell bug #599689 (https://bugzilla.novell.com/show_bug.cgi?id=599689) not fixed.");
-		}
-	}
+    [TestFixture]
+    public class XmlSchemaExceptionTests
+    {
+        [Test]
+        public void Bug599689_ToStringMatchesDotNet()
+        {
+            Assert.AreEqual(
+                "System.Xml.Schema.XmlSchemaException: Test",
+                new XmlSchemaException("Test").ToString(),
+                "Novell bug #599689 (https://bugzilla.novell.com/show_bug.cgi?id=599689) not fixed."
+            );
+        }
+    }
 }
-

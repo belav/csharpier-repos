@@ -33,6 +33,7 @@ public class ViewContext : ActionContext
     {
         ViewData = new ViewDataDictionary(new EmptyModelMetadataProvider(), ModelState);
     }
+
 #nullable enable
 
     /// <summary>
@@ -50,7 +51,8 @@ public class ViewContext : ActionContext
         ViewDataDictionary viewData,
         ITempDataDictionary tempData,
         TextWriter writer,
-        HtmlHelperOptions htmlHelperOptions)
+        HtmlHelperOptions htmlHelperOptions
+    )
         : base(actionContext)
     {
         ArgumentNullException.ThrowIfNull(actionContext);
@@ -85,7 +87,8 @@ public class ViewContext : ActionContext
         ViewContext viewContext,
         IView view,
         ViewDataDictionary viewData,
-        TextWriter writer)
+        TextWriter writer
+    )
         : base(viewContext)
     {
         ArgumentNullException.ThrowIfNull(viewContext);
@@ -118,7 +121,6 @@ public class ViewContext : ActionContext
     public virtual FormContext FormContext
     {
         get => _formContext;
-
         set
         {
             ArgumentNullException.ThrowIfNull(value);

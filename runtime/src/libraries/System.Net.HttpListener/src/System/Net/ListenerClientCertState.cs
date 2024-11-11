@@ -7,6 +7,6 @@ namespace System.Net
     {
         NotInitialized,
         InProgress,
-        Completed
+        Completed,
     }
 }

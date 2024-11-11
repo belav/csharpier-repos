@@ -15,12 +15,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
 
         private new void UsingExpression(string text, params DiagnosticDescription[] expectedErrors)
         {
-            UsingExpression(text, options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview), expectedErrors);
+            UsingExpression(
+                text,
+                options: CSharpParseOptions.Default.WithLanguageVersion(LanguageVersion.Preview),
+                expectedErrors
+            );
         }
 
-        public PatternParsingTests_ListPatterns(ITestOutputHelper output) : base(output)
-        {
-        }
+        public PatternParsingTests_ListPatterns(ITestOutputHelper output)
+            : base(output) { }
 
         [Fact]
         public void ListPattern_00()
@@ -96,13 +99,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ListPattern_02()
         {
-            UsingExpression(@"c is [ 1, prop: 0 ]",
+            UsingExpression(
+                @"c is [ 1, prop: 0 ]",
                 // (1,15): error CS1003: Syntax error, ',' expected
                 // c is [ 1, prop: 0 ]
                 Diagnostic(ErrorCode.ERR_SyntaxError, ":").WithArguments(",").WithLocation(1, 15),
                 // (1,17): error CS1003: Syntax error, ',' expected
                 // c is [ 1, prop: 0 ]
-                Diagnostic(ErrorCode.ERR_SyntaxError, "0").WithArguments(",").WithLocation(1, 17));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "0").WithArguments(",").WithLocation(1, 17)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -146,10 +151,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ListPattern_03()
         {
-            UsingExpression(@"c is [ , ]",
+            UsingExpression(
+                @"c is [ , ]",
                 // (1,8): error CS8504: Pattern missing
                 // c is [ , ]
-                Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 8));
+                Diagnostic(ErrorCode.ERR_MissingPattern, ",").WithLocation(1, 8)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -178,10 +185,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ListPattern_04()
         {
-            UsingExpression(@"c is ()[]",
+            UsingExpression(
+                @"c is ()[]",
                 // (1,1): error CS1073: Unexpected token '['
                 // c is ()[]
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "c is ()").WithArguments("[").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "c is ()")
+                    .WithArguments("[")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -205,10 +216,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void ListPattern_05()
         {
-            UsingExpression(@"c is {}[]",
+            UsingExpression(
+                @"c is {}[]",
                 // (1,1): error CS1073: Unexpected token '['
                 // c is {}[]
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "c is {}").WithArguments("[").WithLocation(1, 1));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "c is {}")
+                    .WithArguments("[")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -526,7 +541,8 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_04()
         {
-            UsingExpression(@"c is ....",
+            UsingExpression(
+                @"c is ....",
                 // (1,6): error CS8635: Unexpected character sequence '...'
                 // c is ....
                 Diagnostic(ErrorCode.ERR_TripleDotNotAllowed, "").WithLocation(1, 6)
@@ -765,10 +781,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_11()
         {
-            UsingExpression(@"c is [var x ..]",
-                    // (1,13): error CS1003: Syntax error, ',' expected
-                    // c is {var x ..}
-                    Diagnostic(ErrorCode.ERR_SyntaxError, "..").WithArguments(",").WithLocation(1, 13));
+            UsingExpression(
+                @"c is [var x ..]",
+                // (1,13): error CS1003: Syntax error, ',' expected
+                // c is {var x ..}
+                Diagnostic(ErrorCode.ERR_SyntaxError, "..").WithArguments(",").WithLocation(1, 13)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -802,10 +820,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_12()
         {
-            UsingExpression(@"c is var x ..",
-                    // (1,12): error CS1073: Unexpected token '..'
-                    // c is var x ..
-                    Diagnostic(ErrorCode.ERR_UnexpectedToken, "..").WithArguments("..").WithLocation(1, 12));
+            UsingExpression(
+                @"c is var x ..",
+                // (1,12): error CS1073: Unexpected token '..'
+                // c is var x ..
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..")
+                    .WithArguments("..")
+                    .WithLocation(1, 12)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -833,10 +855,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_13()
         {
-            UsingExpression(@"c is [[]..]",
+            UsingExpression(
+                @"c is [[]..]",
                 // (1,9): error CS1003: Syntax error, ',' expected
                 // c is {{}..}
-                Diagnostic(ErrorCode.ERR_SyntaxError, "..").WithArguments(",").WithLocation(1, 9));
+                Diagnostic(ErrorCode.ERR_SyntaxError, "..").WithArguments(",").WithLocation(1, 9)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -867,13 +891,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_14()
         {
-            UsingExpression(@"c is not p ..",
+            UsingExpression(
+                @"c is not p ..",
                 // (1,13): error CS1001: Identifier expected
                 // c is not p ..
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 13),
                 // (1,14): error CS1001: Identifier expected
                 // c is not p ..
-                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_IdentifierExpected, "").WithLocation(1, 14)
+            );
 
             N(SyntaxKind.IsPatternExpression);
             {
@@ -940,10 +966,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_16()
         {
-            UsingExpression(@"c is [..] ..",
+            UsingExpression(
+                @"c is [..] ..",
                 // (1,11): error CS1073: Unexpected token '..'
                 // c is [..] ..
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..").WithArguments("..").WithLocation(1, 11));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..")
+                    .WithArguments("..")
+                    .WithLocation(1, 11)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -972,13 +1002,17 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_17()
         {
-            UsingExpression(@"c is a .. or b ..",
+            UsingExpression(
+                @"c is a .. or b ..",
                 // (1,9): error CS1001: Identifier expected
                 // c is a .. or b ..
                 Diagnostic(ErrorCode.ERR_IdentifierExpected, ".").WithLocation(1, 9),
                 // (1,16): error CS1073: Unexpected token '..'
                 // c is a .. or b ..
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..").WithArguments("..").WithLocation(1, 16));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..")
+                    .WithArguments("..")
+                    .WithLocation(1, 16)
+            );
 
             N(SyntaxKind.RangeExpression);
             {
@@ -1025,10 +1059,14 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void SlicePattern_18()
         {
-            UsingExpression(@"c is (var x) .. > 0",
+            UsingExpression(
+                @"c is (var x) .. > 0",
                 // (1,14): error CS1073: Unexpected token '..'
                 // c is (var x) .. > 0
-                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..").WithArguments("..").WithLocation(1, 14));
+                Diagnostic(ErrorCode.ERR_UnexpectedToken, "..")
+                    .WithArguments("..")
+                    .WithLocation(1, 14)
+            );
 
             N(SyntaxKind.GreaterThanExpression);
             {
@@ -1100,4 +1138,3 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         }
     }
 }
-

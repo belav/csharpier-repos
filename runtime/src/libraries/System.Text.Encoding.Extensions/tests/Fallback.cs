@@ -1,9 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using Xunit;
 using System;
 using System.Text;
+using Xunit;
 
 namespace EncodingTests
 {
@@ -15,21 +15,61 @@ namespace EncodingTests
         [Fact]
         public static void TestEncoderReplacementFallback()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("us-ascii", new EncoderReplacementFallback("(unknown)"), new DecoderReplacementFallback(""));
-            byte[] encodedBytes = new byte[asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)];
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "us-ascii",
+                new EncoderReplacementFallback("(unknown)"),
+                new DecoderReplacementFallback("")
+            );
+            byte[] encodedBytes = new byte[
+                asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)
+            ];
 
-            int numberOfEncodedBytes = asciiEncoding.GetBytes(s_asciiInputStringWithFallback, 0, s_asciiInputStringWithFallback.Length, encodedBytes, 0);
+            int numberOfEncodedBytes = asciiEncoding.GetBytes(
+                s_asciiInputStringWithFallback,
+                0,
+                s_asciiInputStringWithFallback.Length,
+                encodedBytes,
+                0
+            );
 
             Assert.Equal(
-                    encodedBytes,
-                    new byte[] {0x28, 0x75, 0x6E, 0x6B, 0x6E, 0x6F, 0x77, 0x6E, 0x29, 0x58, 0x28, 0x75, 0x6E, 0x6B, 0x6E, 0x6F, 0x77, 0x6E, 0x29 });
+                encodedBytes,
+                new byte[]
+                {
+                    0x28,
+                    0x75,
+                    0x6E,
+                    0x6B,
+                    0x6E,
+                    0x6F,
+                    0x77,
+                    0x6E,
+                    0x29,
+                    0x58,
+                    0x28,
+                    0x75,
+                    0x6E,
+                    0x6B,
+                    0x6E,
+                    0x6F,
+                    0x77,
+                    0x6E,
+                    0x29,
+                }
+            );
 
             string decodedString = asciiEncoding.GetString(encodedBytes);
             Assert.Equal("(unknown)X(unknown)", decodedString);
 
             // Test when the fallback will not occur
             encodedBytes = new byte[asciiEncoding.GetByteCount(s_asciiInputStringWinNoFallback)];
-            numberOfEncodedBytes = asciiEncoding.GetBytes(s_asciiInputStringWinNoFallback, 0, s_asciiInputStringWinNoFallback.Length, encodedBytes, 0);
+            numberOfEncodedBytes = asciiEncoding.GetBytes(
+                s_asciiInputStringWinNoFallback,
+                0,
+                s_asciiInputStringWinNoFallback.Length,
+                encodedBytes,
+                0
+            );
             Assert.Equal("abc"u8.ToArray(), encodedBytes);
             decodedString = asciiEncoding.GetString(encodedBytes);
             Assert.Equal(decodedString, s_asciiInputStringWinNoFallback);
@@ -38,52 +78,78 @@ namespace EncodingTests
         [Fact]
         public static void TestDecoderReplacementFallback()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("us-ascii", new EncoderReplacementFallback("(unknown)"), new DecoderReplacementFallback("Error"));
-            Assert.Equal("ErrorxError", asciiEncoding.GetString(new byte [] { 0xAA, (byte)'x', 0xAB }));
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "us-ascii",
+                new EncoderReplacementFallback("(unknown)"),
+                new DecoderReplacementFallback("Error")
+            );
+            Assert.Equal(
+                "ErrorxError",
+                asciiEncoding.GetString(new byte[] { 0xAA, (byte)'x', 0xAB })
+            );
         }
 
         [Fact]
         public static void TestEncoderExceptionFallback()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("us-ascii", new EncoderExceptionFallback(), new DecoderExceptionFallback());
-            Assert.Throws<EncoderFallbackException>(() => asciiEncoding.GetByteCount(s_asciiInputStringWithFallback));
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            );
+            Assert.Throws<EncoderFallbackException>(
+                () => asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)
+            );
         }
 
         [Fact]
         public static void TestDecoderExceptionFallback()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("us-ascii", new EncoderExceptionFallback(), new DecoderExceptionFallback());
-            Assert.Throws<DecoderFallbackException>(() => asciiEncoding.GetString(new byte [] { 0xAA, (byte)'x', 0xAB }));
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "us-ascii",
+                new EncoderExceptionFallback(),
+                new DecoderExceptionFallback()
+            );
+            Assert.Throws<DecoderFallbackException>(
+                () => asciiEncoding.GetString(new byte[] { 0xAA, (byte)'x', 0xAB })
+            );
         }
 
         [Fact]
         public static void TestCustomFallback()
         {
-            Encoding asciiEncoding = Encoding.GetEncoding("us-ascii", new EncoderCustomFallback(), new DecoderReplacementFallback(""));
-            byte[] encodedBytes = new byte[asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)];
+            Encoding asciiEncoding = Encoding.GetEncoding(
+                "us-ascii",
+                new EncoderCustomFallback(),
+                new DecoderReplacementFallback("")
+            );
+            byte[] encodedBytes = new byte[
+                asciiEncoding.GetByteCount(s_asciiInputStringWithFallback)
+            ];
 
-            int numberOfEncodedBytes = asciiEncoding.GetBytes(s_asciiInputStringWithFallback, 0, s_asciiInputStringWithFallback.Length, encodedBytes, 0);
+            int numberOfEncodedBytes = asciiEncoding.GetBytes(
+                s_asciiInputStringWithFallback,
+                0,
+                s_asciiInputStringWithFallback.Length,
+                encodedBytes,
+                0
+            );
 
-            Assert.Equal(
-                    encodedBytes,
-                    new byte[] {(byte) 'a', 0x58, (byte) 'b'});
+            Assert.Equal(encodedBytes, new byte[] { (byte)'a', 0x58, (byte)'b' });
 
             string decodedString = asciiEncoding.GetString(encodedBytes);
             Assert.Equal("aXb", decodedString);
         }
     }
 
-
     // a simple fallback class which fallback using the character sequence 'a', 'b', 'c',...etc.
     internal sealed class EncoderCustomFallback : EncoderFallback
     {
-        public EncoderCustomFallback()
-        {
-        }
+        public EncoderCustomFallback() { }
 
         public string DefaultString
         {
-             get { return " "; }
+            get { return " "; }
         }
 
         public override EncoderFallbackBuffer CreateFallbackBuffer()

@@ -1,9 +1,10 @@
 using System;
 using System.Collections.Generic;
-using System.Text;
-using System.Text.RegularExpressions;
 using System.Diagnostics;
 using System.Globalization;
+using System.Text;
+using System.Text.RegularExpressions;
+
 namespace System.Management.Instrumentation
 {
     #region CommonUMPAttributes
@@ -11,81 +12,67 @@ namespace System.Management.Instrumentation
 
     /// <summary>
     /// This attribute declares a class to be exposed as a management
-    /// interface.   
-    /// 
+    /// interface.
+    ///
     /// It declares the noun to expose in Monad and
-    /// optionally the XML Namespace to expose the class 
+    /// optionally the XML Namespace to expose the class
     /// through WMI.NET and WS-Management.
-    /// 
+    ///
     /// </summary>
-    /// 
+    ///
 
-    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false,Inherited=false)]
+    [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementEntityAttribute : Attribute
+    public sealed class ManagementEntityAttribute : Attribute
     {
-        public ManagementEntityAttribute()
-        {
-        }
+        public ManagementEntityAttribute() { }
 
         public string Name
         {
             get { return _nounName; }
-            set
-            {
-                _nounName = value;
-            }
+            set { _nounName = value; }
         }
 
         public bool External
         {
             get { return _isExternalClass; }
-            set
-            {
-                _isExternalClass = value;
-            }
+            set { _isExternalClass = value; }
         }
         public bool Singleton
         {
             get { return _isSingleton; }
-            set
-            {
-                _isSingleton = value;
-            }
+            set { _isSingleton = value; }
         }
-            
 
         private string _nounName;
-        private bool   _isExternalClass = false;
+        private bool _isExternalClass = false;
         private bool _isSingleton = false;
 
-/*
-        /// <summary>
-        /// Reference to the Type which acts as a factory for instances
-        /// of this class.
-        /// </summary>
-        /// 
-        public Type Factory
-        {
-            get { return _factory; }
-            set { _factory = value; }
-        }
-        private Type _factory;
-
-        public Type FactoryFor
-        {
-            get { return _factoryfor; }
-            set { _factoryfor = value; }
-        }
-        private Type _factoryfor;
-*/
+        /*
+                /// <summary>
+                /// Reference to the Type which acts as a factory for instances
+                /// of this class.
+                /// </summary>
+                ///
+                public Type Factory
+                {
+                    get { return _factory; }
+                    set { _factory = value; }
+                }
+                private Type _factory;
+        
+                public Type FactoryFor
+                {
+                    get { return _factoryfor; }
+                    set { _factoryfor = value; }
+                }
+                private Type _factoryfor;
+        */
     }
-
-
 
     #endregion CommonUMPAttributes
     /// <remarks>
-    /// WMI is able to deal with Decoupled and Hosted providers. 
+    /// WMI is able to deal with Decoupled and Hosted providers.
     /// UserHosted for component loaded inproc to the client is not allowed for .NET extension providers.
 
     public enum ManagementHostingModel
@@ -93,12 +80,12 @@ namespace System.Management.Instrumentation
         Decoupled,
         NetworkService,
         LocalService,
-        LocalSystem
+        LocalSystem,
     }
 
     [AttributeUsage(AttributeTargets.Assembly)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class WmiConfigurationAttribute : Attribute
+    public sealed class WmiConfigurationAttribute : Attribute
     {
         private string _Scope = null;
         private string _SecurityRestriction = null;
@@ -107,8 +94,8 @@ namespace System.Management.Instrumentation
         private string _HostingGroup = null;
         private bool _IdentifyLevel = true;
 
-        public WmiConfigurationAttribute(string scope) 
-        { 
+        public WmiConfigurationAttribute(string scope)
+        {
             string namespaceName = scope;
             if (namespaceName != null)
                 namespaceName = namespaceName.Replace('/', '\\');
@@ -116,15 +103,20 @@ namespace System.Management.Instrumentation
             if (namespaceName == null || namespaceName.Length == 0)
                 namespaceName = "root\\default";
 
-
             bool once = true;
             foreach (string namespacePart in namespaceName.Split('\\'))
             {
-                if (namespacePart.Length == 0
-                    || (once && String.Compare(namespacePart, "root", StringComparison.OrdinalIgnoreCase) != 0)  // Must start with 'root'
+                if (
+                    namespacePart.Length == 0
+                    || (
+                        once
+                        && String.Compare(namespacePart, "root", StringComparison.OrdinalIgnoreCase)
+                            != 0
+                    ) // Must start with 'root'
                     || !Regex.Match(namespacePart, @"^[a-z,A-Z]").Success // All parts must start with letter
                     || Regex.Match(namespacePart, @"_$").Success // Must not end with an underscore
-                    || Regex.Match(namespacePart, @"[^a-z,A-Z,0-9,_,\u0080-\uFFFF]").Success) // Only letters, digits, or underscores
+                    || Regex.Match(namespacePart, @"[^a-z,A-Z,0-9,_,\u0080-\uFFFF]").Success
+                ) // Only letters, digits, or underscores
                 {
                     //ManagementException.ThrowWithExtendedInfo(ManagementStatus.InvalidNamespace);
                 }
@@ -132,7 +124,6 @@ namespace System.Management.Instrumentation
             }
 
             _Scope = namespaceName;
-
         }
 
         /// <remarks>
@@ -165,6 +156,7 @@ namespace System.Management.Instrumentation
             get { return _HostingGroup; }
             set { _HostingGroup = value; }
         }
+
         /// <remarks>
         /// Scope of the assembly in the target instrumentation space
         /// In WMI speak is the namespace
@@ -178,12 +170,12 @@ namespace System.Management.Instrumentation
     /// This is the base class for all attribute which can be applied
     /// to members of the Automation class.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// The Exception member tells Monad which exception coming from the
     /// member can be treated as non-fatal errors for the pipeline.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.All)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public abstract class ManagementMemberAttribute : Attribute
@@ -191,7 +183,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The exceptions that can be thrown by the member.
         /// </summary>
-        /// 
+        ///
         public string Name
         {
             get { return _Name; }
@@ -208,23 +200,21 @@ namespace System.Management.Instrumentation
     /// 3) Using a factory to get an instance [Factory]
     /// For any particular NOUN, there can only be ONE way to get instances.
     /// </summary>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    public abstract class ManagementNewInstanceAttribute : ManagementMemberAttribute
-    {
-    }
+    public abstract class ManagementNewInstanceAttribute : ManagementMemberAttribute { }
 
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementBindAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementBindAttribute : ManagementNewInstanceAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public ManagementBindAttribute() { }
 
         public Type Schema
@@ -237,32 +227,31 @@ namespace System.Management.Instrumentation
 
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementCreateAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementCreateAttribute : ManagementNewInstanceAttribute
     {
         ///// <summary>
-        ///// Declares the type that the output should be 
+        ///// Declares the type that the output should be
         ///// treated as even if the return value is of
         ///// type System.Object.
         ///// </summary>
-        /////         
+        /////
     }
-
 
     /// <summary>
     /// This attribute determines how one would remove a real object
     /// </summary>
-    /// 
-    /// 
+    ///
+    ///
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementRemoveAttribute : ManagementMemberAttribute
+    public sealed class ManagementRemoveAttribute : ManagementMemberAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public Type Schema
         {
             get { return _schema; }
@@ -274,30 +263,31 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// This attribute defines the enumerator of instances of the class
     /// </summary>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Constructor | AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementEnumeratorAttribute : ManagementNewInstanceAttribute
+    public sealed class ManagementEnumeratorAttribute : ManagementNewInstanceAttribute
     {
-/*        /// <summary>
-        /// Declares the member as an enumerator for other classes.  The other
-        /// Type must specify the Factory property of the AutomationAttribute to
-        /// be this Type.
-        /// </summary>
-        /// 
-        public Type FactoryFor
-        {
-            get { return _factoryFor; }
-            set { _factoryFor = value; }
-        }
-        private Type _factoryFor;
-
-*/        /// <summary>
-        /// Declares the type that the output should be 
+        /*        /// <summary>
+                /// Declares the member as an enumerator for other classes.  The other
+                /// Type must specify the Factory property of the AutomationAttribute to
+                /// be this Type.
+                /// </summary>
+                ///
+                public Type FactoryFor
+                {
+                    get { return _factoryFor; }
+                    set { _factoryFor = value; }
+                }
+                private Type _factoryFor;
+        
+        */
+        /// <summary>
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public Type Schema
         {
             get { return _schema; }
@@ -309,17 +299,17 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Exposes a method or property as a Probe
     /// </summary>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementProbeAttribute : ManagementMemberAttribute
+    public sealed class ManagementProbeAttribute : ManagementMemberAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public Type Schema
         {
             get { return _schema; }
@@ -332,32 +322,30 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Exposes a method as a task.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// The TaskAttribute is placed on a method to expose it as a management task.
-    /// 
+    ///
     /// If the task enumerates manageable objects, the task declaration should set
     /// the Enumeration option to true.
-    /// 
+    ///
     /// ISSUE-2005/06/08-jeffjon
     /// Does the task need a Schema parameter or should we have a separate Probe
     /// attribute?
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Method, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementTaskAttribute : ManagementMemberAttribute
+    public sealed class ManagementTaskAttribute : ManagementMemberAttribute
     {
-        public ManagementTaskAttribute()
-        {
-        }
+        public ManagementTaskAttribute() { }
 
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public Type Schema
         {
             get { return _schema; }
@@ -372,31 +360,30 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// This attribute defines the ID (key) property of the class.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// For Monad, this property is used to do filtering of enumerations.
-    /// 
+    ///
     /// If used on a parameter, then the attribute must also exist on a property in
     /// the class.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementKeyAttribute : ManagementMemberAttribute
+    public sealed class ManagementKeyAttribute : ManagementMemberAttribute
     {
-        public ManagementKeyAttribute()
-        {
-        }
+        public ManagementKeyAttribute() { }
     }
 
-
-    [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
+    [AttributeUsage(
+        AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter,
+        AllowMultiple = false
+    )]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementReferenceAttribute : Attribute
+    public sealed class ManagementReferenceAttribute : Attribute
     {
-        public ManagementReferenceAttribute()
-        {
-        }
+        public ManagementReferenceAttribute() { }
+
         public string Type
         {
             get { return _Type; }
@@ -412,21 +399,25 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Defines a property as the storage for configuration data.
     /// </summary>
-    /// 
-    public enum ManagementConfigurationType { Apply, OnCommit };
+    ///
+    public enum ManagementConfigurationType
+    {
+        Apply,
+        OnCommit,
+    };
 
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementConfigurationAttribute : ManagementMemberAttribute
+    public sealed class ManagementConfigurationAttribute : ManagementMemberAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
 
-        public ManagementConfigurationAttribute() 
+        public ManagementConfigurationAttribute()
         {
             updateMode = ManagementConfigurationType.Apply;
         }
@@ -442,30 +433,27 @@ namespace System.Management.Instrumentation
             get { return _schema; }
             set { _schema = value; }
         }
-        private ManagementConfigurationType updateMode; 
+        private ManagementConfigurationType updateMode;
         private Type _schema;
-
     }
 
     [AttributeUsage(AttributeTargets.Method)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementCommitAttribute : ManagementMemberAttribute
-    {
-    }
+    public sealed class ManagementCommitAttribute : ManagementMemberAttribute { }
+
     /// <summary>
     /// This attribute defines the naming (user friendly name) of method parameters
     /// </summary>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = false)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
-    sealed public class ManagementNameAttribute : Attribute
+    public sealed class ManagementNameAttribute : Attribute
     {
-
         public ManagementNameAttribute(string name)
         {
             _Name = name;
-
         }
+
         public string Name
         {
             get { return _Name; }
@@ -481,11 +469,11 @@ namespace System.Management.Instrumentation
     public class FactoryAttribute : NewInstanceAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public FactoryAttribute() { }
         public FactoryAttribute(Type t) { }
 
@@ -502,11 +490,11 @@ namespace System.Management.Instrumentation
     public class FactoryForAttribute : ManagementMemberAttribute
     {
         /// <summary>
-        /// Declares the type that the output should be 
+        /// Declares the type that the output should be
         /// treated as even if the return value is of
         /// type System.Object.
         /// </summary>
-        /// 
+        ///
         public FactoryForAttribute(Type t) { }
 
         public Type Schema
@@ -523,11 +511,11 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Constraints the member/option to a minimum and/or maximum length.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// This can be used for strings or collections.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class ValidateLengthAttribute : Attribute
@@ -535,7 +523,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The minimum length
         /// </summary>
-        /// 
+        ///
         public int Min
         {
             get { return _min; }
@@ -546,7 +534,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The maximum length
         /// </summary>
-        /// 
+        ///
         public int Max
         {
             get { return _max; }
@@ -558,11 +546,11 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Constraints the member/option to a range of values.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// This can be used for strings or collections.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class ValidateRangeAttribute : Attribute
@@ -570,15 +558,15 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// Defines the range for the constraint
         /// </summary>
-        /// 
+        ///
         /// <param name="lower">
         /// The minimum of the range.
         /// </param>
-        /// 
+        ///
         /// <param name="upper">
         /// The maximum of the range.
         /// </param>
-        /// 
+        ///
         public ValidateRangeAttribute(object lower, object upper)
         {
             this._lower = lower;
@@ -588,7 +576,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The lower bound for the range
         /// </summary>
-        /// 
+        ///
         public object Lower
         {
             get { return _lower; }
@@ -599,7 +587,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The upper bound for the range
         /// </summary>
-        /// 
+        ///
         public object Upper
         {
             get { return _upper; }
@@ -611,11 +599,11 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Constraints the member/option to a pattern represented by a regular expression
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// This can be used for strings or collections.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class ValidatePatternAttribute : Attribute
@@ -623,11 +611,11 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// Defines the pattern for the constraint
         /// </summary>
-        /// 
+        ///
         /// <param name="pattern">
         /// The minimum of the range.
         /// </param>
-        /// 
+        ///
         public ValidatePatternAttribute(string pattern)
         {
             this._pattern = pattern;
@@ -636,7 +624,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The pattern which defines the constraint
         /// </summary>
-        /// 
+        ///
         public string Pattern
         {
             get { return _pattern; }
@@ -647,7 +635,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The options for the regular expression defined by the pattern.
         /// </summary>
-        /// 
+        ///
         public RegexOptions Options
         {
             get { return _options; }
@@ -659,11 +647,11 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Constraints the member/option to a number of values.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// This can be used for strings or collections.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class ValidateCountAttribute : Attribute
@@ -671,15 +659,15 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// Defines the minimum and maximum number of elements.
         /// </summary>
-        /// 
+        ///
         /// <param name="minimum">
         /// The minimum minimum number of elements.
         /// </param>
-        /// 
+        ///
         /// <param name="maximum">
         /// The maximum number of elements.
         /// </param>
-        /// 
+        ///
         public ValidateCountAttribute(int minimum, int maximum)
         {
         }
@@ -687,20 +675,20 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The minimum number of elements
         /// </summary>
-        /// 
+        ///
         public int Minimum;
 
         /// <summary>
         /// The maximum number of elements
         /// </summary>
-        /// 
+        ///
         public int Maximum;
     }
     
     /// <summary>
     /// Constraints the member/option to a set of values.
     /// </summary>
-    /// 
+    ///
     
         [AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = true)]
         [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
@@ -709,11 +697,11 @@ namespace System.Management.Instrumentation
             /// <summary>
             /// Defines the range for the constraint
             /// </summary>
-            /// 
+            ///
             /// <param name="validValues">
             /// The valid values for the set.
             /// </param>
-            /// 
+            ///
             public ValidateSetAttribute(params string[] validValues)
             {
             }
@@ -721,7 +709,7 @@ namespace System.Management.Instrumentation
             /// <summary>
             /// The valid values for the set.
             /// </summary>
-            /// 
+            ///
             public string[] ValidValues
             {
                 get { return null; }
@@ -732,7 +720,7 @@ namespace System.Management.Instrumentation
             /// If true, the values are compared in a case-insensitive way.
             /// If false, the set is constrained to exact matches.
             /// </summary>
-            /// 
+            ///
             public bool IgnoreCase
             {
                 get { return _ignoreCase; }
@@ -745,12 +733,12 @@ namespace System.Management.Instrumentation
     /// <summary>
     /// Specifies the options for a task.
     /// </summary>
-    /// 
+    ///
     /// <remarks>
     /// When placed on a parameter of a task method, this attribute
     /// describes the options for the parameter.
     /// </remarks>
-    /// 
+    ///
     [AttributeUsage(AttributeTargets.Parameter, AllowMultiple = true)]
     [System.Security.Permissions.HostProtection(MayLeakOnAbort = true)]
     public class ManagementTaskOptionAttribute : Attribute
@@ -758,13 +746,13 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// If true, the option must be specified.
         /// </summary>
-        /// 
+        ///
         /// <remarks>
         /// If false, and the InitialValue is not specified, then
-        /// an initial value will be deduced using the "default" 
+        /// an initial value will be deduced using the "default"
         /// keyword in C#.
         /// </remarks>
-        /// 
+        ///
         public bool Mandatory
         {
             get { return _mandatory; }
@@ -775,7 +763,7 @@ namespace System.Management.Instrumentation
         /// <summary>
         /// The initial value of the parameter. Used if Mandatory=false.
         /// </summary>
-        /// 
+        ///
         public object InitialValue
         {
             get { return _initialValue; }
@@ -787,7 +775,7 @@ namespace System.Management.Instrumentation
         /// Monad specific - provides mapping of the pipeline object
         /// to the parameter value.
         /// </summary>
-        /// 
+        ///
         public bool ValueFromPipeline
         {
             get { return _valueFromPipeline; }
@@ -807,6 +795,6 @@ namespace System.Management.Instrumentation
         }
         private bool _valueFromPipelineByPropertyName;
 
-    }    
+    }
     */
 };

@@ -31,7 +31,6 @@ namespace System.Xml.Schema
 
         private const int StackIncrement = 10;
 
-
         private const int SchemaOrderNone = 0;
         private const int SchemaOrderMany = 1;
         private const int SchemaOrderSequence = 2;
@@ -43,7 +42,6 @@ namespace System.Xml.Schema
         private const int SchemaContentText = 2;
         private const int SchemaContentMixed = 3;
         private const int SchemaContentElement = 4;
-
 
         private sealed class DeclBaseInfo
         {
@@ -113,28 +111,28 @@ namespace System.Xml.Schema
         private sealed class ElementContent
         {
             // for <ElementType ...
-            internal SchemaElementDecl? _ElementDecl;          // Element Information
+            internal SchemaElementDecl? _ElementDecl; // Element Information
 
-            internal int _ContentAttr;              // content attribute
-            internal int _OrderAttr;                // order attribute
+            internal int _ContentAttr; // content attribute
+            internal int _OrderAttr; // order attribute
 
-            internal bool _MasterGroupRequired;      // In a situation like <!ELEMENT root (e1)> e1 has to have a ()
-            internal bool _ExistTerminal;            // when there exist a terminal, we need to addOrder before
+            internal bool _MasterGroupRequired; // In a situation like <!ELEMENT root (e1)> e1 has to have a ()
+            internal bool _ExistTerminal; // when there exist a terminal, we need to addOrder before
 
             // we can add another terminal
-            internal bool _AllowDataType;            // must have textOnly if we have datatype
-            internal bool _HasDataType;              // got data type
+            internal bool _AllowDataType; // must have textOnly if we have datatype
+            internal bool _HasDataType; // got data type
 
             // for <element ...
-            internal bool _HasType;                  // user must have a type attribute in <element ...
+            internal bool _HasType; // user must have a type attribute in <element ...
             internal bool _EnumerationRequired;
             internal uint _MinVal;
-            internal uint _MaxVal;                   // -1 means infinity
+            internal uint _MaxVal; // -1 means infinity
 
-            internal uint _MaxLength;                // dt:maxLength
-            internal uint _MinLength;                // dt:minLength
+            internal uint _MaxLength; // dt:maxLength
+            internal uint _MinLength; // dt:minLength
 
-            internal Hashtable? _AttDefList;               // a list of current AttDefs for the <ElementType ...
+            internal Hashtable? _AttDefList; // a list of current AttDefs for the <ElementType ...
             // only the used one will be added
         };
 
@@ -146,17 +144,17 @@ namespace System.Xml.Schema
             // used to store name & prefix for the AttributeType
             internal XmlQualifiedName? _Name;
             internal string? _Prefix;
-            internal bool _Required;                  // true:  when the attribute required="yes"
+            internal bool _Required; // true:  when the attribute required="yes"
 
             // used for both AttributeType and attribute
             internal uint _MinVal;
-            internal uint _MaxVal;                   // -1 means infinity
+            internal uint _MaxVal; // -1 means infinity
 
-            internal uint _MaxLength;                 // dt:maxLength
-            internal uint _MinLength;                 // dt:minLength
+            internal uint _MaxLength; // dt:maxLength
+            internal uint _MinLength; // dt:minLength
 
             // used for datatype
-            internal bool _EnumerationRequired;       // when we have dt:value then we must have dt:type="enumeration"
+            internal bool _EnumerationRequired; // when we have dt:value then we must have dt:type="enumeration"
             internal bool _HasDataType;
 
             // used for <attribute ...
@@ -172,19 +170,29 @@ namespace System.Xml.Schema
 
         private sealed class XdrAttributeEntry
         {
-            internal SchemaNames.Token _Attribute;     // possible attribute names
+            internal SchemaNames.Token _Attribute; // possible attribute names
             internal int _SchemaFlags;
             internal XmlSchemaDatatype? _Datatype;
-            internal XdrBuildFunction _BuildFunc;     // Corresponding build functions for attribute value
+            internal XdrBuildFunction _BuildFunc; // Corresponding build functions for attribute value
 
-            internal XdrAttributeEntry(SchemaNames.Token a, XmlTokenizedType ttype, XdrBuildFunction build)
+            internal XdrAttributeEntry(
+                SchemaNames.Token a,
+                XmlTokenizedType ttype,
+                XdrBuildFunction build
+            )
             {
                 _Attribute = a;
                 _Datatype = XmlSchemaDatatype.FromXmlTokenizedType(ttype);
                 _SchemaFlags = 0;
                 _BuildFunc = build;
             }
-            internal XdrAttributeEntry(SchemaNames.Token a, XmlTokenizedType ttype, int schemaFlags, XdrBuildFunction build)
+
+            internal XdrAttributeEntry(
+                SchemaNames.Token a,
+                XmlTokenizedType ttype,
+                int schemaFlags,
+                XdrBuildFunction build
+            )
             {
                 _Attribute = a;
                 _Datatype = XmlSchemaDatatype.FromXmlTokenizedType(ttype);
@@ -199,21 +207,23 @@ namespace System.Xml.Schema
         //
         private sealed class XdrEntry
         {
-            internal SchemaNames.Token _Name;               // the name of the object it is comparing to
-            internal int[]? _NextStates;         // possible next states
-            internal XdrAttributeEntry[]? _Attributes;         // allowed attributes
-            internal XdrInitFunction? _InitFunc;           // "init" functions in XdrBuilder
-            internal XdrBeginChildFunction? _BeginChildFunc;     // "begin" functions in XdrBuilder for BeginChildren
-            internal XdrEndChildFunction? _EndChildFunc;       // "end" functions in XdrBuilder for EndChildren
-            internal bool _AllowText;          // whether text content is allowed
+            internal SchemaNames.Token _Name; // the name of the object it is comparing to
+            internal int[]? _NextStates; // possible next states
+            internal XdrAttributeEntry[]? _Attributes; // allowed attributes
+            internal XdrInitFunction? _InitFunc; // "init" functions in XdrBuilder
+            internal XdrBeginChildFunction? _BeginChildFunc; // "begin" functions in XdrBuilder for BeginChildren
+            internal XdrEndChildFunction? _EndChildFunc; // "end" functions in XdrBuilder for EndChildren
+            internal bool _AllowText; // whether text content is allowed
 
-            internal XdrEntry(SchemaNames.Token n,
-                              int[]? states,
-                              XdrAttributeEntry[]? attributes,
-                              XdrInitFunction? init,
-                              XdrBeginChildFunction? begin,
-                              XdrEndChildFunction? end,
-                              bool fText)
+            internal XdrEntry(
+                SchemaNames.Token n,
+                int[]? states,
+                XdrAttributeEntry[]? attributes,
+                XdrInitFunction? init,
+                XdrBeginChildFunction? begin,
+                XdrEndChildFunction? end,
+                bool fText
+            )
             {
                 _Name = n;
                 _NextStates = states;
@@ -225,7 +235,6 @@ namespace System.Xml.Schema
             }
         };
 
-
         /////////////////////////////////////////////////////////////////////////////
         // Data structures for XML-Data Reduced (XDR Schema)
         //
@@ -235,7 +244,14 @@ namespace System.Xml.Schema
         //
         private static readonly int[] s_XDR_Root_Element = { XdrSchema };
         private static readonly int[] s_XDR_Root_SubElements = { XdrElementType, XdrAttributeType };
-        private static readonly int[] s_XDR_ElementType_SubElements = { XdrElement, XdrGroup, XdrAttributeType, XdrAttribute, XdrElementDatatype };
+        private static readonly int[] s_XDR_ElementType_SubElements =
+        {
+            XdrElement,
+            XdrGroup,
+            XdrAttributeType,
+            XdrAttribute,
+            XdrElementDatatype,
+        };
         private static readonly int[] s_XDR_AttributeType_SubElements = { XdrAttributeDatatype };
         private static readonly int[] s_XDR_Group_SubElements = { XdrElement, XdrGroup };
 
@@ -244,119 +260,294 @@ namespace System.Xml.Schema
         //
         private static readonly XdrAttributeEntry[] s_XDR_Root_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaName, XmlTokenizedType.CDATA, new XdrBuildFunction(XDR_BuildRoot_Name) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaId,   XmlTokenizedType.QName, new XdrBuildFunction(XDR_BuildRoot_ID) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaName,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildRoot_Name)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaId,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildRoot_ID)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_ElementType_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaName,         XmlTokenizedType.QName, SchemaFlagsNs,  new XdrBuildFunction(XDR_BuildElementType_Name) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaContent,      XmlTokenizedType.QName,    new XdrBuildFunction(XDR_BuildElementType_Content) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaModel,        XmlTokenizedType.QName,    new XdrBuildFunction(XDR_BuildElementType_Model) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaOrder,        XmlTokenizedType.QName,    new XdrBuildFunction(XDR_BuildElementType_Order) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtType,       XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtType) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtValues,     XmlTokenizedType.NMTOKENS, new XdrBuildFunction(XDR_BuildElementType_DtValues) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMaxLength,  XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtMaxLength) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMinLength,  XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtMinLength) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaName,
+                XmlTokenizedType.QName,
+                SchemaFlagsNs,
+                new XdrBuildFunction(XDR_BuildElementType_Name)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaContent,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildElementType_Content)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaModel,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildElementType_Model)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaOrder,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildElementType_Order)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtType,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtType)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtValues,
+                XmlTokenizedType.NMTOKENS,
+                new XdrBuildFunction(XDR_BuildElementType_DtValues)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMaxLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtMaxLength)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMinLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtMinLength)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_AttributeType_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaName,         XmlTokenizedType.QName,     new XdrBuildFunction(XDR_BuildAttributeType_Name) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaRequired,     XmlTokenizedType.QName,     new XdrBuildFunction(XDR_BuildAttributeType_Required) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDefault,      XmlTokenizedType.CDATA,     new XdrBuildFunction(XDR_BuildAttributeType_Default) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtType,       XmlTokenizedType.QName,     new XdrBuildFunction(XDR_BuildAttributeType_DtType) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtValues,     XmlTokenizedType.NMTOKENS,  new XdrBuildFunction(XDR_BuildAttributeType_DtValues) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMaxLength,  XmlTokenizedType.CDATA,     new XdrBuildFunction(XDR_BuildAttributeType_DtMaxLength) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMinLength,  XmlTokenizedType.CDATA,     new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaName,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttributeType_Name)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaRequired,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttributeType_Required)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDefault,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttributeType_Default)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtType,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtType)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtValues,
+                XmlTokenizedType.NMTOKENS,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtValues)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMaxLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtMaxLength)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMinLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Element_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaType,      XmlTokenizedType.QName, SchemaFlagsNs,  new XdrBuildFunction(XDR_BuildElement_Type) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaMinOccurs, XmlTokenizedType.CDATA,     new XdrBuildFunction(XDR_BuildElement_MinOccurs) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaMaxOccurs, XmlTokenizedType.CDATA,     new XdrBuildFunction(XDR_BuildElement_MaxOccurs) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaType,
+                XmlTokenizedType.QName,
+                SchemaFlagsNs,
+                new XdrBuildFunction(XDR_BuildElement_Type)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaMinOccurs,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElement_MinOccurs)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaMaxOccurs,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElement_MaxOccurs)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Attribute_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaType,       XmlTokenizedType.QName,   new XdrBuildFunction(XDR_BuildAttribute_Type) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaRequired,   XmlTokenizedType.QName,   new XdrBuildFunction(XDR_BuildAttribute_Required) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDefault,    XmlTokenizedType.CDATA,   new XdrBuildFunction(XDR_BuildAttribute_Default) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaType,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttribute_Type)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaRequired,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttribute_Required)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDefault,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttribute_Default)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_Group_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaOrder,     XmlTokenizedType.QName,   new XdrBuildFunction(XDR_BuildGroup_Order) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaMinOccurs, XmlTokenizedType.CDATA,   new XdrBuildFunction(XDR_BuildGroup_MinOccurs) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaMaxOccurs, XmlTokenizedType.CDATA,   new XdrBuildFunction(XDR_BuildGroup_MaxOccurs) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaOrder,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildGroup_Order)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaMinOccurs,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildGroup_MinOccurs)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaMaxOccurs,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildGroup_MaxOccurs)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_ElementDataType_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtType,        XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtType) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtValues,      XmlTokenizedType.NMTOKENS, new XdrBuildFunction(XDR_BuildElementType_DtValues) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMaxLength,   XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtMaxLength) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMinLength,   XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildElementType_DtMinLength) )
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtType,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtType)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtValues,
+                XmlTokenizedType.NMTOKENS,
+                new XdrBuildFunction(XDR_BuildElementType_DtValues)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMaxLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtMaxLength)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMinLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildElementType_DtMinLength)
+            ),
         };
 
         private static readonly XdrAttributeEntry[] s_XDR_AttributeDataType_Attributes =
         {
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtType,        XmlTokenizedType.QName,    new XdrBuildFunction(XDR_BuildAttributeType_DtType) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtValues,      XmlTokenizedType.NMTOKENS, new XdrBuildFunction(XDR_BuildAttributeType_DtValues) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMaxLength,   XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildAttributeType_DtMaxLength) ),
-            new XdrAttributeEntry(SchemaNames.Token.SchemaDtMinLength,   XmlTokenizedType.CDATA,    new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength) )
-};
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtType,
+                XmlTokenizedType.QName,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtType)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtValues,
+                XmlTokenizedType.NMTOKENS,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtValues)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMaxLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtMaxLength)
+            ),
+            new XdrAttributeEntry(
+                SchemaNames.Token.SchemaDtMinLength,
+                XmlTokenizedType.CDATA,
+                new XdrBuildFunction(XDR_BuildAttributeType_DtMinLength)
+            ),
+        };
+
         //
         // Schema entries
         //
         private static readonly XdrEntry[] s_schemaEntries =
         {
-            new XdrEntry( SchemaNames.Token.Empty,     s_XDR_Root_Element, null,
-                          null,
-                          null,
-                          null,
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrRoot,     s_XDR_Root_SubElements, s_XDR_Root_Attributes,
-                          new XdrInitFunction(XDR_InitRoot),
-                          new XdrBeginChildFunction(XDR_BeginRoot),
-                          new XdrEndChildFunction(XDR_EndRoot),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrElementType,    s_XDR_ElementType_SubElements, s_XDR_ElementType_Attributes,
-                          new XdrInitFunction(XDR_InitElementType),
-                          new XdrBeginChildFunction(XDR_BeginElementType),
-                          new XdrEndChildFunction(XDR_EndElementType),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrAttributeType,  s_XDR_AttributeType_SubElements, s_XDR_AttributeType_Attributes,
-                          new XdrInitFunction(XDR_InitAttributeType),
-                          new XdrBeginChildFunction(XDR_BeginAttributeType),
-                          new XdrEndChildFunction(XDR_EndAttributeType),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrElement,        null, s_XDR_Element_Attributes,
-                          new XdrInitFunction(XDR_InitElement),
-                          null,
-                          new XdrEndChildFunction(XDR_EndElement),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrAttribute,      null, s_XDR_Attribute_Attributes,
-                          new XdrInitFunction(XDR_InitAttribute),
-                          new XdrBeginChildFunction(XDR_BeginAttribute),
-                          new XdrEndChildFunction(XDR_EndAttribute),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrGroup,          s_XDR_Group_SubElements, s_XDR_Group_Attributes,
-                          new XdrInitFunction(XDR_InitGroup),
-                          null,
-                          new XdrEndChildFunction(XDR_EndGroup),
-                          false),
-            new XdrEntry( SchemaNames.Token.XdrDatatype,       null, s_XDR_ElementDataType_Attributes,
-                          new XdrInitFunction(XDR_InitElementDtType),
-                          null,
-                          new XdrEndChildFunction(XDR_EndElementDtType),
-                          true),
-            new XdrEntry( SchemaNames.Token.XdrDatatype,       null, s_XDR_AttributeDataType_Attributes,
-                          new XdrInitFunction(XDR_InitAttributeDtType),
-                          null,
-                          new XdrEndChildFunction(XDR_EndAttributeDtType),
-                          true)
+            new XdrEntry(
+                SchemaNames.Token.Empty,
+                s_XDR_Root_Element,
+                null,
+                null,
+                null,
+                null,
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrRoot,
+                s_XDR_Root_SubElements,
+                s_XDR_Root_Attributes,
+                new XdrInitFunction(XDR_InitRoot),
+                new XdrBeginChildFunction(XDR_BeginRoot),
+                new XdrEndChildFunction(XDR_EndRoot),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrElementType,
+                s_XDR_ElementType_SubElements,
+                s_XDR_ElementType_Attributes,
+                new XdrInitFunction(XDR_InitElementType),
+                new XdrBeginChildFunction(XDR_BeginElementType),
+                new XdrEndChildFunction(XDR_EndElementType),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrAttributeType,
+                s_XDR_AttributeType_SubElements,
+                s_XDR_AttributeType_Attributes,
+                new XdrInitFunction(XDR_InitAttributeType),
+                new XdrBeginChildFunction(XDR_BeginAttributeType),
+                new XdrEndChildFunction(XDR_EndAttributeType),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrElement,
+                null,
+                s_XDR_Element_Attributes,
+                new XdrInitFunction(XDR_InitElement),
+                null,
+                new XdrEndChildFunction(XDR_EndElement),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrAttribute,
+                null,
+                s_XDR_Attribute_Attributes,
+                new XdrInitFunction(XDR_InitAttribute),
+                new XdrBeginChildFunction(XDR_BeginAttribute),
+                new XdrEndChildFunction(XDR_EndAttribute),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrGroup,
+                s_XDR_Group_SubElements,
+                s_XDR_Group_Attributes,
+                new XdrInitFunction(XDR_InitGroup),
+                null,
+                new XdrEndChildFunction(XDR_EndGroup),
+                false
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrDatatype,
+                null,
+                s_XDR_ElementDataType_Attributes,
+                new XdrInitFunction(XDR_InitElementDtType),
+                null,
+                new XdrEndChildFunction(XDR_EndElementDtType),
+                true
+            ),
+            new XdrEntry(
+                SchemaNames.Token.XdrDatatype,
+                null,
+                s_XDR_AttributeDataType_Attributes,
+                new XdrInitFunction(XDR_InitAttributeDtType),
+                null,
+                new XdrEndChildFunction(XDR_EndAttributeDtType),
+                true
+            ),
         };
 
         private readonly SchemaInfo _SchemaInfo;
@@ -394,13 +585,14 @@ namespace System.Xml.Schema
         private XmlResolver? _xmlResolver;
 
         internal XdrBuilder(
-                           XmlReader reader,
-                           XmlNamespaceManager curmgr,
-                           SchemaInfo sinfo,
-                           string? targetNamspace,
-                           XmlNameTable nameTable,
-                           SchemaNames schemaNames,
-                           ValidationEventHandler? eventhandler)
+            XmlReader reader,
+            XmlNamespaceManager curmgr,
+            SchemaInfo sinfo,
+            string? targetNamspace,
+            XmlNameTable nameTable,
+            SchemaNames schemaNames,
+            ValidationEventHandler? eventhandler
+        )
         {
             _SchemaInfo = sinfo;
             _TargetNamespace = targetNamspace;
@@ -421,7 +613,10 @@ namespace System.Xml.Schema
 
         internal override bool ProcessElement(string prefix, string name, string ns)
         {
-            XmlQualifiedName qname = new XmlQualifiedName(name, XmlSchemaDatatype.XdrCanonizeUri(ns, _NameTable, _SchemaNames));
+            XmlQualifiedName qname = new XmlQualifiedName(
+                name,
+                XmlSchemaDatatype.XdrCanonizeUri(ns, _NameTable, _SchemaNames)
+            );
             if (GetNextState(qname))
             {
                 Push();
@@ -435,7 +630,10 @@ namespace System.Xml.Schema
             {
                 if (!IsSkipableElement(qname))
                 {
-                    SendValidationEvent(SR.Sch_UnsupportedElement, XmlQualifiedName.ToString(name, prefix));
+                    SendValidationEvent(
+                        SR.Sch_UnsupportedElement,
+                        XmlQualifiedName.ToString(name, prefix)
+                    );
                 }
                 return false;
             }
@@ -445,7 +643,10 @@ namespace System.Xml.Schema
         // It is fine to suppress the SxS warning.
         internal override void ProcessAttribute(string prefix, string name, string ns, string value)
         {
-            XmlQualifiedName qname = new XmlQualifiedName(name, XmlSchemaDatatype.XdrCanonizeUri(ns, _NameTable, _SchemaNames));
+            XmlQualifiedName qname = new XmlQualifiedName(
+                name,
+                XmlSchemaDatatype.XdrCanonizeUri(ns, _NameTable, _SchemaNames)
+            );
             for (int i = 0; i < _CurState._Attributes!.Length; i++)
             {
                 XdrAttributeEntry a = _CurState._Attributes[i];
@@ -455,12 +656,16 @@ namespace System.Xml.Schema
                     if (a._Datatype!.TokenizedType == XmlTokenizedType.QName)
                     {
                         string prefixValue;
-                        XmlQualifiedName qnameValue = XmlQualifiedName.Parse(value, _CurNsMgr, out prefixValue);
+                        XmlQualifiedName qnameValue = XmlQualifiedName.Parse(
+                            value,
+                            _CurNsMgr,
+                            out prefixValue
+                        );
                         qnameValue.Atomize(_NameTable);
                         if (prefixValue.Length != 0)
                         {
                             if (a._Attribute != SchemaNames.Token.SchemaType)
-                            {    // <attribute type= || <element type=
+                            { // <attribute type= || <element type=
                                 throw new XmlException(SR.Xml_UnexpectedToken, "NAME");
                             }
                         }
@@ -476,7 +681,11 @@ namespace System.Xml.Schema
                     }
                     else
                     {
-                        buildFunc(this, a._Datatype.ParseValue(value, _NameTable, _CurNsMgr), string.Empty);
+                        buildFunc(
+                            this,
+                            a._Datatype.ParseValue(value, _NameTable, _CurNsMgr),
+                            string.Empty
+                        );
                     }
                     return;
                 }
@@ -491,17 +700,16 @@ namespace System.Xml.Schema
             // Check non-supported attribute
             if (!IsSkipableAttribute(qname))
             {
-                SendValidationEvent(SR.Sch_UnsupportedAttribute,
-                                    XmlQualifiedName.ToString(qname.Name, prefix));
+                SendValidationEvent(
+                    SR.Sch_UnsupportedAttribute,
+                    XmlQualifiedName.ToString(qname.Name, prefix)
+                );
             }
         }
 
         internal XmlResolver? XmlResolver
         {
-            set
-            {
-                _xmlResolver = value;
-            }
+            set { _xmlResolver = value; }
         }
 
         private bool LoadSchema(string uri)
@@ -524,14 +732,23 @@ namespace System.Xml.Schema
                 Stream stm = (Stream)_xmlResolver.GetEntity(ruri, null, null)!;
                 reader = new XmlTextReader(ruri.ToString(), stm, _NameTable);
                 schemaInfo = new SchemaInfo();
-                Parser parser = new Parser(SchemaType.XDR, _NameTable, _SchemaNames, _validationEventHandler);
+                Parser parser = new Parser(
+                    SchemaType.XDR,
+                    _NameTable,
+                    _SchemaNames,
+                    _validationEventHandler
+                );
                 parser.XmlResolver = _xmlResolver;
                 parser.Parse(reader, uri);
                 schemaInfo = parser.XdrSchema;
             }
             catch (XmlException e)
             {
-                SendValidationEvent(SR.Sch_CannotLoadSchema, new string[] { uri, e.Message }, XmlSeverityType.Warning);
+                SendValidationEvent(
+                    SR.Sch_CannotLoadSchema,
+                    new string[] { uri, e.Message },
+                    XmlSeverityType.Warning
+                );
                 schemaInfo = null;
             }
             finally
@@ -548,9 +765,17 @@ namespace System.Xml.Schema
 
         internal static bool IsXdrSchema(string uri)
         {
-            return uri.Length >= x_schema.Length &&
-                   0 == string.Compare(uri, 0, x_schema, 0, x_schema.Length, StringComparison.Ordinal) &&
-                   !uri.StartsWith("x-schema:#", StringComparison.Ordinal);
+            return uri.Length >= x_schema.Length
+                && 0
+                    == string.Compare(
+                        uri,
+                        0,
+                        x_schema,
+                        0,
+                        x_schema.Length,
+                        StringComparison.Ordinal
+                    )
+                && !uri.StartsWith("x-schema:#", StringComparison.Ordinal);
         }
 
         internal override bool IsContentParsed()
@@ -640,9 +865,7 @@ namespace System.Xml.Schema
             builder._XdrPrefix = prefix;
         }
 
-        private static void XDR_BuildRoot_ID(XdrBuilder builder, object obj, string prefix)
-        {
-        }
+        private static void XDR_BuildRoot_ID(XdrBuilder builder, object obj, string prefix) { }
 
         private static void XDR_BeginRoot(XdrBuilder builder)
         {
@@ -650,7 +873,9 @@ namespace System.Xml.Schema
             { // inline xdr schema
                 if (builder._XdrName != null)
                 {
-                    builder._TargetNamespace = builder._NameTable.Add($"x-schema:#{builder._XdrName}");
+                    builder._TargetNamespace = builder._NameTable.Add(
+                        $"x-schema:#{builder._XdrName}"
+                    );
                 }
                 else
                 {
@@ -682,7 +907,10 @@ namespace System.Xml.Schema
                 {
                     builder._UndefinedAttributeTypes._Attdef = (SchemaAttDef)ad.Clone();
                     builder._UndefinedAttributeTypes._Attdef.Name = gname;
-                    builder.XDR_CheckAttributeDefault(builder._UndefinedAttributeTypes, builder._UndefinedAttributeTypes._Attdef);
+                    builder.XDR_CheckAttributeDefault(
+                        builder._UndefinedAttributeTypes,
+                        builder._UndefinedAttributeTypes._Attdef
+                    );
                 }
                 else
                 {
@@ -694,10 +922,12 @@ namespace System.Xml.Schema
 
             foreach (SchemaElementDecl? ed in builder._UndeclaredElements.Values)
             {
-                builder.SendValidationEvent(SR.Sch_UndeclaredElement, XmlQualifiedName.ToString(ed!.Name.Name, ed.Prefix));
+                builder.SendValidationEvent(
+                    SR.Sch_UndeclaredElement,
+                    XmlQualifiedName.ToString(ed!.Name.Name, ed.Prefix)
+                );
             }
         }
-
 
         //
         // XDR ElementType
@@ -730,7 +960,10 @@ namespace System.Xml.Schema
 
             if (builder._SchemaInfo.ElementDecls.ContainsKey(qname))
             {
-                builder.SendValidationEvent(SR.Sch_DupElementDecl, XmlQualifiedName.ToString(qname.Name, prefix));
+                builder.SendValidationEvent(
+                    SR.Sch_DupElementDecl,
+                    XmlQualifiedName.ToString(qname.Name, prefix)
+                );
             }
 
             builder._ElementDef._ElementDecl!.Name = qname;
@@ -742,22 +975,40 @@ namespace System.Xml.Schema
             }
         }
 
-        private static void XDR_BuildElementType_Content(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_Content(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._ElementDef._ContentAttr = builder.GetContent((XmlQualifiedName)obj);
         }
 
-        private static void XDR_BuildElementType_Model(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_Model(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._contentValidator!.IsOpen = builder.GetModel((XmlQualifiedName)obj);
         }
 
-        private static void XDR_BuildElementType_Order(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_Order(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
-            builder._ElementDef._OrderAttr = builder._GroupDef._Order = builder.GetOrder((XmlQualifiedName)obj);
+            builder._ElementDef._OrderAttr = builder._GroupDef._Order = builder.GetOrder(
+                (XmlQualifiedName)obj
+            );
         }
 
-        private static void XDR_BuildElementType_DtType(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_DtType(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._ElementDef._HasDataType = true;
             string s = ((string)obj).Trim();
@@ -777,18 +1028,30 @@ namespace System.Xml.Schema
             }
         }
 
-        private static void XDR_BuildElementType_DtValues(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_DtValues(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._ElementDef._EnumerationRequired = true;
             builder._ElementDef._ElementDecl!.Values = new List<string>((string[])obj);
         }
 
-        private static void XDR_BuildElementType_DtMaxLength(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_DtMaxLength(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             ParseDtMaxLength(ref builder._ElementDef._MaxLength, obj, builder);
         }
 
-        private static void XDR_BuildElementType_DtMinLength(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElementType_DtMinLength(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             ParseDtMinLength(ref builder._ElementDef._MinLength, obj, builder);
         }
@@ -843,7 +1106,6 @@ namespace System.Xml.Schema
                 }
             }
 
-
             //save the model value from the base
             bool tempOpen = builder._contentValidator!.IsOpen;
             ElementContent def = builder._ElementDef;
@@ -855,7 +1117,9 @@ namespace System.Xml.Schema
                     builder._contentValidator = null;
                     break;
                 case SchemaContentElement:
-                    builder._contentValidator = new ParticleContentValidator(XmlSchemaContentType.ElementOnly);
+                    builder._contentValidator = new ParticleContentValidator(
+                        XmlSchemaContentType.ElementOnly
+                    );
                     if (def._OrderAttr == SchemaOrderNone)
                     {
                         builder._GroupDef._Order = SchemaOrderSequence;
@@ -884,13 +1148,12 @@ namespace System.Xml.Schema
                     break;
             }
 
-
             if (def._ContentAttr == SchemaContentMixed || def._ContentAttr == SchemaContentElement)
             {
                 builder._contentValidator!.Start();
                 builder._contentValidator.OpenGroup();
             }
-        cleanup:
+            cleanup:
             if (code != null)
             {
                 builder.SendValidationEvent(code, msg);
@@ -974,33 +1237,41 @@ namespace System.Xml.Schema
             if (ed!.Datatype != null)
             {
                 XmlTokenizedType ttype = ed.Datatype.TokenizedType;
-                if (ttype == XmlTokenizedType.ENUMERATION &&
-                    !builder._ElementDef._EnumerationRequired)
+                if (
+                    ttype == XmlTokenizedType.ENUMERATION
+                    && !builder._ElementDef._EnumerationRequired
+                )
                 {
                     builder.SendValidationEvent(SR.Sch_MissDtvaluesAttribute);
                 }
 
-                if (ttype != XmlTokenizedType.ENUMERATION &&
-                    builder._ElementDef._EnumerationRequired)
+                if (
+                    ttype != XmlTokenizedType.ENUMERATION
+                    && builder._ElementDef._EnumerationRequired
+                )
                 {
                     builder.SendValidationEvent(SR.Sch_RequireEnumeration);
                 }
             }
 
-            CompareMinMaxLength(builder._ElementDef._MinLength, builder._ElementDef._MaxLength, builder);
+            CompareMinMaxLength(
+                builder._ElementDef._MinLength,
+                builder._ElementDef._MaxLength,
+                builder
+            );
             ed.MaxLength = (long)builder._ElementDef._MaxLength;
             ed.MinLength = (long)builder._ElementDef._MinLength;
 
             if (builder._contentValidator != null)
             {
-                builder._ElementDef._ElementDecl!.ContentValidator = builder._contentValidator.Finish(true);
+                builder._ElementDef._ElementDecl!.ContentValidator =
+                    builder._contentValidator.Finish(true);
                 builder._contentValidator = null;
             }
 
             builder._ElementDef._ElementDecl = null;
             builder._ElementDef._AttDefList = null;
         }
-
 
         //
         // XDR AttributeType
@@ -1027,7 +1298,11 @@ namespace System.Xml.Schema
             ad._MinLength = uint.MaxValue;
         }
 
-        private static void XDR_BuildAttributeType_Name(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_Name(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             XmlQualifiedName qname = (XmlQualifiedName)obj;
 
@@ -1036,57 +1311,89 @@ namespace System.Xml.Schema
             builder._AttributeDef._AttDef!.Name = qname;
 
             if (builder._ElementDef._ElementDecl != null)
-            {  // Local AttributeType
+            { // Local AttributeType
                 if (builder._ElementDef._AttDefList![qname] == null)
                 {
                     builder._ElementDef._AttDefList.Add(qname, builder._AttributeDef._AttDef);
                 }
                 else
                 {
-                    builder.SendValidationEvent(SR.Sch_DupAttribute, XmlQualifiedName.ToString(qname.Name, prefix));
+                    builder.SendValidationEvent(
+                        SR.Sch_DupAttribute,
+                        XmlQualifiedName.ToString(qname.Name, prefix)
+                    );
                 }
             }
             else
-            {  // Global AttributeType
+            { // Global AttributeType
                 // Global AttributeTypes are URN qualified so that we can look them up across schemas.
                 qname = new XmlQualifiedName(qname.Name, builder._TargetNamespace);
                 builder._AttributeDef._AttDef.Name = qname;
-                if (!builder._SchemaInfo.AttributeDecls.TryAdd(qname, builder._AttributeDef._AttDef))
+                if (
+                    !builder._SchemaInfo.AttributeDecls.TryAdd(qname, builder._AttributeDef._AttDef)
+                )
                 {
-                    builder.SendValidationEvent(SR.Sch_DupAttribute, XmlQualifiedName.ToString(qname.Name, prefix));
+                    builder.SendValidationEvent(
+                        SR.Sch_DupAttribute,
+                        XmlQualifiedName.ToString(qname.Name, prefix)
+                    );
                 }
             }
         }
 
-        private static void XDR_BuildAttributeType_Required(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_Required(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._AttributeDef._Required = IsYes(obj, builder);
         }
 
-        private static void XDR_BuildAttributeType_Default(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_Default(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._AttributeDef._Default = obj;
         }
 
-        private static void XDR_BuildAttributeType_DtType(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_DtType(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             XmlQualifiedName qname = (XmlQualifiedName)obj;
             builder._AttributeDef._HasDataType = true;
             builder._AttributeDef._AttDef!.Datatype = builder.CheckDatatype(qname.Name)!;
         }
 
-        private static void XDR_BuildAttributeType_DtValues(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_DtValues(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._AttributeDef._EnumerationRequired = true;
             builder._AttributeDef._AttDef!.Values = new List<string>((string[])obj);
         }
 
-        private static void XDR_BuildAttributeType_DtMaxLength(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_DtMaxLength(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             ParseDtMaxLength(ref builder._AttributeDef._MaxLength, obj, builder);
         }
 
-        private static void XDR_BuildAttributeType_DtMinLength(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttributeType_DtMinLength(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             ParseDtMinLength(ref builder._AttributeDef._MinLength, obj, builder);
         }
@@ -1102,17 +1409,26 @@ namespace System.Xml.Schema
         private static void XDR_EndAttributeType(XdrBuilder builder)
         {
             string? code = null;
-            if (builder._AttributeDef._HasDataType && builder._AttributeDef._AttDef!.Datatype != null)
+            if (
+                builder._AttributeDef._HasDataType
+                && builder._AttributeDef._AttDef!.Datatype != null
+            )
             {
                 XmlTokenizedType ttype = builder._AttributeDef._AttDef.Datatype.TokenizedType;
 
-                if (ttype == XmlTokenizedType.ENUMERATION && !builder._AttributeDef._EnumerationRequired)
+                if (
+                    ttype == XmlTokenizedType.ENUMERATION
+                    && !builder._AttributeDef._EnumerationRequired
+                )
                 {
                     code = SR.Sch_MissDtvaluesAttribute;
                     goto cleanup;
                 }
 
-                if (ttype != XmlTokenizedType.ENUMERATION && builder._AttributeDef._EnumerationRequired)
+                if (
+                    ttype != XmlTokenizedType.ENUMERATION
+                    && builder._AttributeDef._EnumerationRequired
+                )
                 {
                     code = SR.Sch_RequireEnumeration;
                     goto cleanup;
@@ -1127,13 +1443,19 @@ namespace System.Xml.Schema
             }
             else
             {
-                builder._AttributeDef._AttDef!.Datatype = XmlSchemaDatatype.FromXmlTokenizedType(XmlTokenizedType.CDATA)!;
+                builder._AttributeDef._AttDef!.Datatype = XmlSchemaDatatype.FromXmlTokenizedType(
+                    XmlTokenizedType.CDATA
+                )!;
             }
 
             //
             // constraints
             //
-            CompareMinMaxLength(builder._AttributeDef._MinLength, builder._AttributeDef._MaxLength, builder);
+            CompareMinMaxLength(
+                builder._AttributeDef._MinLength,
+                builder._AttributeDef._MaxLength,
+                builder
+            );
             builder._AttributeDef._AttDef.MaxLength = builder._AttributeDef._MaxLength;
             builder._AttributeDef._AttDef.MinLength = builder._AttributeDef._MinLength;
 
@@ -1142,19 +1464,24 @@ namespace System.Xml.Schema
             //
             if (builder._AttributeDef._Default != null)
             {
-                builder._AttributeDef._AttDef.DefaultValueRaw = builder._AttributeDef._AttDef.DefaultValueExpanded = (string)builder._AttributeDef._Default;
+                builder._AttributeDef._AttDef.DefaultValueRaw = builder
+                    ._AttributeDef
+                    ._AttDef
+                    .DefaultValueExpanded = (string)builder._AttributeDef._Default;
                 builder.CheckDefaultAttValue(builder._AttributeDef._AttDef);
             }
 
-            XdrBuilder.SetAttributePresence(builder._AttributeDef._AttDef, builder._AttributeDef._Required);
+            XdrBuilder.SetAttributePresence(
+                builder._AttributeDef._AttDef,
+                builder._AttributeDef._Required
+            );
 
-        cleanup:
+            cleanup:
             if (code != null)
             {
                 builder.SendValidationEvent(code);
             }
         }
-
 
         //
         // XDR Element
@@ -1162,9 +1489,11 @@ namespace System.Xml.Schema
 
         private static void XDR_InitElement(XdrBuilder builder, object obj)
         {
-            if (builder._ElementDef._HasDataType ||
-                (builder._ElementDef._ContentAttr == SchemaContentEmpty) ||
-                (builder._ElementDef._ContentAttr == SchemaContentText))
+            if (
+                builder._ElementDef._HasDataType
+                || (builder._ElementDef._ContentAttr == SchemaContentEmpty)
+                || (builder._ElementDef._ContentAttr == SchemaContentText)
+            )
             {
                 builder.SendValidationEvent(SR.Sch_ElementNotAllowed);
             }
@@ -1199,16 +1528,23 @@ namespace System.Xml.Schema
             builder._contentValidator!.AddName(qname, null);
         }
 
-        private static void XDR_BuildElement_MinOccurs(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElement_MinOccurs(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._ElementDef._MinVal = ParseMinOccurs(obj, builder);
         }
 
-        private static void XDR_BuildElement_MaxOccurs(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildElement_MaxOccurs(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._ElementDef._MaxVal = ParseMaxOccurs(obj, builder);
         }
-
 
         //    private static void XDR_BeginElement(XdrBuilder builder)
         //  {
@@ -1220,16 +1556,17 @@ namespace System.Xml.Schema
         {
             if (builder._ElementDef._HasType)
             {
-                HandleMinMax(builder._contentValidator,
-                             builder._ElementDef._MinVal,
-                             builder._ElementDef._MaxVal);
+                HandleMinMax(
+                    builder._contentValidator,
+                    builder._ElementDef._MinVal,
+                    builder._ElementDef._MaxVal
+                );
             }
             else
             {
                 builder.SendValidationEvent(SR.Sch_MissAttribute);
             }
         }
-
 
         //
         // XDR Attribute
@@ -1247,7 +1584,11 @@ namespace System.Xml.Schema
             builder._BaseDecl._Prefix = prefix;
         }
 
-        private static void XDR_BuildAttribute_Required(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttribute_Required(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             if (IsYes(obj, builder))
             {
@@ -1255,7 +1596,11 @@ namespace System.Xml.Schema
             }
         }
 
-        private static void XDR_BuildAttribute_Default(XdrBuilder builder, object obj, string prefix)
+        private static void XDR_BuildAttribute_Default(
+            XdrBuilder builder,
+            object obj,
+            string prefix
+        )
         {
             builder._BaseDecl!._Default = obj;
         }
@@ -1294,7 +1639,10 @@ namespace System.Xml.Schema
                 }
                 else if (prefix.Length != 0)
                 {
-                    builder.SendValidationEvent(SR.Sch_UndeclaredAttribute, XmlQualifiedName.ToString(qname.Name, prefix));
+                    builder.SendValidationEvent(
+                        SR.Sch_UndeclaredAttribute,
+                        XmlQualifiedName.ToString(qname.Name, prefix)
+                    );
                 }
             }
 
@@ -1327,15 +1675,16 @@ namespace System.Xml.Schema
             builder._BaseDecl!.Reset();
         }
 
-
         //
         // XDR Group
         //
 
         private static void XDR_InitGroup(XdrBuilder builder, object obj)
         {
-            if (builder._ElementDef._ContentAttr == SchemaContentEmpty ||
-                builder._ElementDef._ContentAttr == SchemaContentText)
+            if (
+                builder._ElementDef._ContentAttr == SchemaContentEmpty
+                || builder._ElementDef._ContentAttr == SchemaContentText
+            )
             {
                 builder.SendValidationEvent(SR.Sch_GroupDisabled);
             }
@@ -1359,7 +1708,10 @@ namespace System.Xml.Schema
         private static void XDR_BuildGroup_Order(XdrBuilder builder, object obj, string prefix)
         {
             builder._GroupDef._Order = builder.GetOrder((XmlQualifiedName)obj);
-            if (builder._ElementDef._ContentAttr == SchemaContentMixed && builder._GroupDef._Order != SchemaOrderMany)
+            if (
+                builder._ElementDef._ContentAttr == SchemaContentMixed
+                && builder._GroupDef._Order != SchemaOrderMany
+            )
             {
                 builder.SendValidationEvent(SR.Sch_MixedMany);
             }
@@ -1376,7 +1728,6 @@ namespace System.Xml.Schema
             builder._GroupDef._MaxVal = ParseMaxOccurs(obj, builder);
             builder._GroupDef._HasMaxAttr = true;
         }
-
 
         //    private static void XDR_BeginGroup(XdrBuilder builder)
         //    {
@@ -1398,20 +1749,23 @@ namespace System.Xml.Schema
                 builder._contentValidator.AddStar();
             }
 
-            if (SchemaOrderMany == builder._GroupDef._Order &&
-                builder._GroupDef._HasMaxAttr &&
-                builder._GroupDef._MaxVal != uint.MaxValue)
+            if (
+                SchemaOrderMany == builder._GroupDef._Order
+                && builder._GroupDef._HasMaxAttr
+                && builder._GroupDef._MaxVal != uint.MaxValue
+            )
             {
                 builder.SendValidationEvent(SR.Sch_ManyMaxOccurs);
             }
 
-            HandleMinMax(builder._contentValidator,
-                         builder._GroupDef._MinVal,
-                         builder._GroupDef._MaxVal);
+            HandleMinMax(
+                builder._contentValidator,
+                builder._GroupDef._MinVal,
+                builder._GroupDef._MaxVal
+            );
 
             builder.PopGroupInfo();
         }
-
 
         //
         // DataType
@@ -1464,11 +1818,17 @@ namespace System.Xml.Schema
                 {
                     XmlTokenizedType ttype = builder._AttributeDef._AttDef.Datatype.TokenizedType;
 
-                    if (ttype == XmlTokenizedType.ENUMERATION && !builder._AttributeDef._EnumerationRequired)
+                    if (
+                        ttype == XmlTokenizedType.ENUMERATION
+                        && !builder._AttributeDef._EnumerationRequired
+                    )
                     {
                         code = SR.Sch_MissDtvaluesAttribute;
                     }
-                    else if (ttype != XmlTokenizedType.ENUMERATION && builder._AttributeDef._EnumerationRequired)
+                    else if (
+                        ttype != XmlTokenizedType.ENUMERATION
+                        && builder._AttributeDef._EnumerationRequired
+                    )
                     {
                         code = SR.Sch_RequireEnumeration;
                     }
@@ -1490,7 +1850,11 @@ namespace System.Xml.Schema
             {
                 for (int i = 0; i < _CurState._NextStates.Length; i++)
                 {
-                    if (_SchemaNames.TokenToQName[(int)s_schemaEntries[_CurState._NextStates[i]]._Name].Equals(qname))
+                    if (
+                        _SchemaNames
+                            .TokenToQName[(int)s_schemaEntries[_CurState._NextStates[i]]._Name]
+                            .Equals(qname)
+                    )
                     {
                         _NextState = s_schemaEntries[_CurState._NextStates[i]];
                         return true;
@@ -1508,8 +1872,10 @@ namespace System.Xml.Schema
                 return true;
 
             // skip description && extends
-            if (_SchemaNames.TokenToQName[(int)SchemaNames.Token.XdrDescription].Equals(qname) ||
-                _SchemaNames.TokenToQName[(int)SchemaNames.Token.XdrExtends].Equals(qname))
+            if (
+                _SchemaNames.TokenToQName[(int)SchemaNames.Token.XdrDescription].Equals(qname)
+                || _SchemaNames.TokenToQName[(int)SchemaNames.Token.XdrExtends].Equals(qname)
+            )
                 return true;
 
             return false;
@@ -1519,20 +1885,24 @@ namespace System.Xml.Schema
         {
             string ns = qname.Namespace;
             if (
-                ns.Length != 0 &&
-                !Ref.Equal(ns, _SchemaNames.NsXdr) &&
-                !Ref.Equal(ns, _SchemaNames.NsDataType)
-             )
+                ns.Length != 0
+                && !Ref.Equal(ns, _SchemaNames.NsXdr)
+                && !Ref.Equal(ns, _SchemaNames.NsDataType)
+            )
             {
                 return true;
             }
 
-            if (Ref.Equal(ns, _SchemaNames.NsDataType) &&
-                _CurState._Name == SchemaNames.Token.XdrDatatype &&
-                (_SchemaNames.QnDtMax.Equals(qname) ||
-                 _SchemaNames.QnDtMin.Equals(qname) ||
-                 _SchemaNames.QnDtMaxExclusive.Equals(qname) ||
-                 _SchemaNames.QnDtMinExclusive.Equals(qname)))
+            if (
+                Ref.Equal(ns, _SchemaNames.NsDataType)
+                && _CurState._Name == SchemaNames.Token.XdrDatatype
+                && (
+                    _SchemaNames.QnDtMax.Equals(qname)
+                    || _SchemaNames.QnDtMin.Equals(qname)
+                    || _SchemaNames.QnDtMaxExclusive.Equals(qname)
+                    || _SchemaNames.QnDtMinExclusive.Equals(qname)
+                )
+            )
             {
                 return true;
             }
@@ -1614,8 +1984,10 @@ namespace System.Xml.Schema
             uint cVal = uint.MaxValue;
             string s = (string)obj;
 
-            if (!s.Equals("*") &&
-                (!ParseInteger(s, ref cVal) || (cVal != uint.MaxValue && cVal != 1)))
+            if (
+                !s.Equals("*")
+                && (!ParseInteger(s, ref cVal) || (cVal != uint.MaxValue && cVal != 1))
+            )
             {
                 builder.SendValidationEvent(SR.Sch_MaxOccursInvalid);
             }
@@ -1629,12 +2001,12 @@ namespace System.Xml.Schema
                 if (cMax == uint.MaxValue)
                 {
                     if (cMin == 0)
-                        pContent.AddStar();           // minOccurs="0" and maxOccurs="infinite"
+                        pContent.AddStar(); // minOccurs="0" and maxOccurs="infinite"
                     else
-                        pContent.AddPlus();           // minOccurs="1" and maxOccurs="infinite"
+                        pContent.AddPlus(); // minOccurs="1" and maxOccurs="infinite"
                 }
                 else if (cMin == 0)
-                {                 // minOccurs="0" and maxOccurs="1")
+                { // minOccurs="0" and maxOccurs="1")
                     pContent.AddQMark();
                 }
             }
@@ -1676,7 +2048,12 @@ namespace System.Xml.Schema
 
         private static bool ParseInteger(string str, ref uint n)
         {
-            return uint.TryParse(str, NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite, NumberFormatInfo.InvariantInfo, out n);
+            return uint.TryParse(
+                str,
+                NumberStyles.AllowLeadingWhite | NumberStyles.AllowTrailingWhite,
+                NumberFormatInfo.InvariantInfo,
+                out n
+            );
         }
 
         private void XDR_CheckAttributeDefault(DeclBaseInfo decl, SchemaAttDef pAttdef)
@@ -1724,7 +2101,9 @@ namespace System.Xml.Schema
                 content = SchemaContentEmpty;
                 _ElementDef._AllowDataType = false;
             }
-            else if (_SchemaNames.TokenToQName[(int)SchemaNames.Token.SchemaElementOnly].Equals(qname))
+            else if (
+                _SchemaNames.TokenToQName[(int)SchemaNames.Token.SchemaElementOnly].Equals(qname)
+            )
             {
                 content = SchemaContentElement;
                 _ElementDef._AllowDataType = false;
@@ -1770,8 +2149,13 @@ namespace System.Xml.Schema
                 {
                     if (_ElementDef._ElementDecl!.IsIdDeclared)
                     {
-                        SendValidationEvent(SR.Sch_IdAttrDeclared,
-                                            XmlQualifiedName.ToString(_ElementDef._ElementDecl.Name.Name, _ElementDef._ElementDecl.Prefix));
+                        SendValidationEvent(
+                            SR.Sch_IdAttrDeclared,
+                            XmlQualifiedName.ToString(
+                                _ElementDef._ElementDecl.Name.Name,
+                                _ElementDef._ElementDecl.Prefix
+                            )
+                        );
                     }
                     _ElementDef._ElementDecl.IsIdDeclared = true;
                 }
@@ -1783,7 +2167,18 @@ namespace System.Xml.Schema
         private void CheckDefaultAttValue(SchemaAttDef attDef)
         {
             string str = (attDef.DefaultValueRaw).Trim();
-            XdrValidator.CheckDefaultValue(str, attDef, _SchemaInfo, _CurNsMgr, _NameTable, null, _validationEventHandler, _reader.BaseURI, _positionInfo.LineNumber, _positionInfo.LinePosition);
+            XdrValidator.CheckDefaultValue(
+                str,
+                attDef,
+                _SchemaInfo,
+                _CurNsMgr,
+                _NameTable,
+                null,
+                _validationEventHandler,
+                _reader.BaseURI,
+                _positionInfo.LineNumber,
+                _positionInfo.LinePosition
+            );
         }
 
         private static bool IsGlobal(int flags)
@@ -1793,7 +2188,16 @@ namespace System.Xml.Schema
 
         private void SendValidationEvent(string? code, string?[]? args, XmlSeverityType severity)
         {
-            SendValidationEvent(new XmlSchemaException(code, args, _reader.BaseURI, _positionInfo.LineNumber, _positionInfo.LinePosition), severity);
+            SendValidationEvent(
+                new XmlSchemaException(
+                    code,
+                    args,
+                    _reader.BaseURI,
+                    _positionInfo.LineNumber,
+                    _positionInfo.LinePosition
+                ),
+                severity
+            );
         }
 
         private void SendValidationEvent(string? code)
@@ -1803,7 +2207,16 @@ namespace System.Xml.Schema
 
         private void SendValidationEvent(string? code, string? msg)
         {
-            SendValidationEvent(new XmlSchemaException(code, msg, _reader.BaseURI, _positionInfo.LineNumber, _positionInfo.LinePosition), XmlSeverityType.Error);
+            SendValidationEvent(
+                new XmlSchemaException(
+                    code,
+                    msg,
+                    _reader.BaseURI,
+                    _positionInfo.LineNumber,
+                    _positionInfo.LinePosition
+                ),
+                XmlSeverityType.Error
+            );
         }
 
         private void SendValidationEvent(XmlSchemaException e, XmlSeverityType severity)

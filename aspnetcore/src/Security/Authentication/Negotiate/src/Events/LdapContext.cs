@@ -18,7 +18,8 @@ public class LdapContext : ResultContext<NegotiateOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         NegotiateOptions options,
-        LdapSettings settings)
+        LdapSettings settings
+    )
         : base(context, scheme, options)
     {
         LdapSettings = settings;

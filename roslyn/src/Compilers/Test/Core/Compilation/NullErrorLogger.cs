@@ -11,12 +11,17 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
     {
         internal static ErrorLogger Instance => new NullErrorLogger();
 
-        public override void LogDiagnostic(Diagnostic diagnostic, SuppressionInfo? suppressionInfo)
-        {
-        }
+        public override void LogDiagnostic(
+            Diagnostic diagnostic,
+            SuppressionInfo? suppressionInfo
+        ) { }
 
-        public override void AddAnalyzerDescriptorsAndExecutionTime(ImmutableArray<(DiagnosticDescriptor Descriptor, DiagnosticDescriptorErrorLoggerInfo Info)> descriptors, double totalAnalyzerExecutionTime)
-        {
-        }
+        public override void AddAnalyzerDescriptorsAndExecutionTime(
+            ImmutableArray<(
+                DiagnosticDescriptor Descriptor,
+                DiagnosticDescriptorErrorLoggerInfo Info
+            )> descriptors,
+            double totalAnalyzerExecutionTime
+        ) { }
     }
 }

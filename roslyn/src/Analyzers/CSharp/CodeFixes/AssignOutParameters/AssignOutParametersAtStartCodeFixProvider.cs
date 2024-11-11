@@ -16,16 +16,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.AssignOutParametersAtStart), Shared]
-    internal class AssignOutParametersAtStartCodeFixProvider : AbstractAssignOutParametersCodeFixProvider
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.AssignOutParametersAtStart
+        ),
+        Shared
+    ]
+    internal class AssignOutParametersAtStartCodeFixProvider
+        : AbstractAssignOutParametersCodeFixProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public AssignOutParametersAtStartCodeFixProvider()
-        {
-        }
+        public AssignOutParametersAtStartCodeFixProvider() { }
 
-        protected override void TryRegisterFix(CodeFixContext context, Document document, SyntaxNode container, SyntaxNode location)
+        protected override void TryRegisterFix(
+            CodeFixContext context,
+            Document document,
+            SyntaxNode container,
+            SyntaxNode location
+        )
         {
             // Don't offer if we're already the starting statement of the container. This case will
             // be handled by the AssignOutParametersAboveReturnCodeFixProvider class.
@@ -40,10 +50,12 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 return;
             }
 
-            if (location is StatementSyntax statement &&
-                statement.Parent is BlockSyntax block &&
-                block.Statements[0] == statement &&
-                block.Parent == container)
+            if (
+                location is StatementSyntax statement
+                && statement.Parent is BlockSyntax block
+                && block.Statements[0] == statement
+                && block.Parent == container
+            )
             {
                 return;
             }
@@ -52,21 +64,28 @@ namespace Microsoft.CodeAnalysis.CSharp.AssignOutParameters
                 CodeAction.Create(
                     CSharpCodeFixesResources.Assign_out_parameters_at_start,
                     GetDocumentUpdater(context),
-                    nameof(CSharpCodeFixesResources.Assign_out_parameters_at_start)),
-                context.Diagnostics);
+                    nameof(CSharpCodeFixesResources.Assign_out_parameters_at_start)
+                ),
+                context.Diagnostics
+            );
         }
 
         protected override void AssignOutParameters(
-            SyntaxEditor editor, SyntaxNode container,
-            MultiDictionary<SyntaxNode, (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)>.ValueSet values,
-            CancellationToken cancellationToken)
+            SyntaxEditor editor,
+            SyntaxNode container,
+            MultiDictionary<
+                SyntaxNode,
+                (SyntaxNode exprOrStatement, ImmutableArray<IParameterSymbol> unassignedParameters)
+            >.ValueSet values,
+            CancellationToken cancellationToken
+        )
         {
             var generator = editor.Generator;
-            var unassignedParameters =
-                values.SelectMany(t => t.unassignedParameters)
-                      .Distinct()
-                      .OrderBy(p => p.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken).SpanStart)
-                      .ToImmutableArray();
+            var unassignedParameters = values
+                .SelectMany(t => t.unassignedParameters)
+                .Distinct()
+                .OrderBy(p => p.DeclaringSyntaxReferences[0].GetSyntax(cancellationToken).SpanStart)
+                .ToImmutableArray();
 
             var statements = GenerateAssignmentStatements(generator, unassignedParameters);
             var originalStatements = generator.GetStatements(container).ToImmutableArray();

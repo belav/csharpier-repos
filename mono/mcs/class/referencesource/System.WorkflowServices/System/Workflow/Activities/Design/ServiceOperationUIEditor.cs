@@ -6,27 +6,36 @@ namespace System.Workflow.Activities.Design
 {
     using System;
     using System.Collections.Generic;
-    using System.Text;
-    using System.Drawing.Design;
     using System.ComponentModel;
     using System.ComponentModel.Design;
+    using System.Diagnostics;
+    using System.Drawing.Design;
+    using System.ServiceModel;
+    using System.Text;
+    using System.Windows.Forms;
     using System.Windows.Forms.Design;
     using System.Workflow.ComponentModel;
     using System.Workflow.ComponentModel.Design;
-    using System.Diagnostics;
-    using System.ServiceModel;
-    using System.Windows.Forms;
 
     internal class ServiceOperationUIEditor : UITypeEditor
     {
-
-        public static bool TryPickOperation(IServiceProvider serviceProvider, Activity activity, OperationInfoBase currentOperation, out OperationInfoBase selectedOperation)
+        public static bool TryPickOperation(
+            IServiceProvider serviceProvider,
+            Activity activity,
+            OperationInfoBase currentOperation,
+            out OperationInfoBase selectedOperation
+        )
         {
             selectedOperation = null;
             bool isReceiveActivity = activity is ReceiveActivity;
             try
             {
-                using (OperationPickerDialog operationPicker = new OperationPickerDialog(serviceProvider, isReceiveActivity))
+                using (
+                    OperationPickerDialog operationPicker = new OperationPickerDialog(
+                        serviceProvider,
+                        isReceiveActivity
+                    )
+                )
                 {
                     Walker activityTreeWalker = new Walker();
                     Type allowedActivityType = null;
@@ -40,7 +49,10 @@ namespace System.Workflow.Activities.Design
                         allowedActivityType = typeof(SendActivity);
                     }
 
-                    activityTreeWalker.FoundActivity += delegate(Walker walker, WalkerEventArgs eventArgs)
+                    activityTreeWalker.FoundActivity += delegate(
+                        Walker walker,
+                        WalkerEventArgs eventArgs
+                    )
                     {
                         Activity foundActivity = eventArgs.CurrentActivity;
                         if (!(allowedActivityType.IsAssignableFrom(foundActivity.GetType())))
@@ -58,7 +70,10 @@ namespace System.Workflow.Activities.Design
                             ReceiveActivity reciveActivity = foundActivity as ReceiveActivity;
                             if (reciveActivity.ServiceOperationInfo != null)
                             {
-                                operationPicker.AddServiceOperation(reciveActivity.ServiceOperationInfo, reciveActivity);
+                                operationPicker.AddServiceOperation(
+                                    reciveActivity.ServiceOperationInfo,
+                                    reciveActivity
+                                );
                             }
                         }
                         if (foundActivity is SendActivity)
@@ -66,18 +81,26 @@ namespace System.Workflow.Activities.Design
                             SendActivity sendActivity = foundActivity as SendActivity;
                             if (sendActivity.ServiceOperationInfo != null)
                             {
-                                operationPicker.AddServiceOperation(sendActivity.ServiceOperationInfo, sendActivity);
+                                operationPicker.AddServiceOperation(
+                                    sendActivity.ServiceOperationInfo,
+                                    sendActivity
+                                );
                             }
                         }
                     };
                     activityTreeWalker.Walk(activity.RootActivity);
-                    OperationInfoBase currentServiceOperationInfo = currentOperation as OperationInfoBase;
+                    OperationInfoBase currentServiceOperationInfo =
+                        currentOperation as OperationInfoBase;
                     if (currentServiceOperationInfo != null)
                     {
                         operationPicker.SelectedOperation = currentServiceOperationInfo;
                     }
                     DialogResult dialogResult = operationPicker.ShowDialog();
-                    if ((operationPicker.SelectedOperation != null) && (dialogResult == DialogResult.OK) && !operationPicker.SelectedOperation.Equals(currentServiceOperationInfo))
+                    if (
+                        (operationPicker.SelectedOperation != null)
+                        && (dialogResult == DialogResult.OK)
+                        && !operationPicker.SelectedOperation.Equals(currentServiceOperationInfo)
+                    )
                     {
                         selectedOperation = operationPicker.SelectedOperation.Clone();
                         return true;
@@ -86,14 +109,25 @@ namespace System.Workflow.Activities.Design
             }
             catch (Exception e)
             {
-                DesignerHelpers.ShowMessage(serviceProvider, e.Message, DR.GetString(DR.WorkflowDesignerTitle), MessageBoxButtons.OK,
-                    MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                DesignerHelpers.ShowMessage(
+                    serviceProvider,
+                    e.Message,
+                    DR.GetString(DR.WorkflowDesignerTitle),
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error,
+                    MessageBoxDefaultButton.Button1
+                );
                 throw;
             }
 
             return false;
         }
-        public override object EditValue(ITypeDescriptorContext context, IServiceProvider provider, object value)
+
+        public override object EditValue(
+            ITypeDescriptorContext context,
+            IServiceProvider provider,
+            object value
+        )
         {
             if (context == null)
             {
@@ -105,7 +139,14 @@ namespace System.Workflow.Activities.Design
             }
 
             OperationInfoBase pickedServiceOperation = null;
-            if (TryPickOperation(provider, (Activity) context.Instance, (OperationInfoBase) value, out pickedServiceOperation))
+            if (
+                TryPickOperation(
+                    provider,
+                    (Activity)context.Instance,
+                    (OperationInfoBase)value,
+                    out pickedServiceOperation
+                )
+            )
             {
                 return pickedServiceOperation;
             }
@@ -113,9 +154,7 @@ namespace System.Workflow.Activities.Design
             {
                 return base.EditValue(context, provider, value);
             }
-
         }
-
 
         public override UITypeEditorEditStyle GetEditStyle(ITypeDescriptorContext context)
         {

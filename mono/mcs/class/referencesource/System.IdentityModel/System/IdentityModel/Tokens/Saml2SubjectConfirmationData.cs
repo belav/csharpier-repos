@@ -8,16 +8,17 @@ namespace System.IdentityModel.Tokens
 {
     using System;
     using System.Collections.ObjectModel;
-    
+
     /// <summary>
-    /// Represents the SubjectConfirmationData element and the associated 
+    /// Represents the SubjectConfirmationData element and the associated
     /// KeyInfoConfirmationDataType defined in [Saml2Core, 2.4.1.2-2.4.1.3].
     /// </summary>
     public class Saml2SubjectConfirmationData
     {
         private string address;
         private Saml2Id inResponseTo;
-        private Collection<SecurityKeyIdentifier> keyIdentifiers = new Collection<SecurityKeyIdentifier>();
+        private Collection<SecurityKeyIdentifier> keyIdentifiers =
+            new Collection<SecurityKeyIdentifier>();
         private DateTime? notBefore;
         private DateTime? notOnOrAfter;
         private Uri recipient;
@@ -25,29 +26,20 @@ namespace System.IdentityModel.Tokens
         /// <summary>
         /// Initializes an instance of <see cref="Saml2SubjectConfirmationData"/>.
         /// </summary>
-        public Saml2SubjectConfirmationData()
-        {
-        }
+        public Saml2SubjectConfirmationData() { }
 
         /// <summary>
-        /// Gets or sets the network address/location from which an attesting entity can present the 
+        /// Gets or sets the network address/location from which an attesting entity can present the
         /// assertion. [Saml2Core, 2.4.1.2]
         /// </summary>
         public string Address
         {
-            get 
-            { 
-                return this.address; 
-            }
-
-            set
-            {
-                this.address = XmlUtil.NormalizeEmptyString(value);
-            }
+            get { return this.address; }
+            set { this.address = XmlUtil.NormalizeEmptyString(value); }
         }
 
         /// <summary>
-        /// Gets or sets the <see cref="Saml2Id"/> of a SAML protocol message in response to which an attesting entity can 
+        /// Gets or sets the <see cref="Saml2Id"/> of a SAML protocol message in response to which an attesting entity can
         /// present the assertion. [Saml2Core, 2.4.1.2]
         /// </summary>
         public Saml2Id InResponseTo
@@ -83,21 +75,20 @@ namespace System.IdentityModel.Tokens
         }
 
         /// <summary>
-        /// Gets or sets a URI specifying the entity or location to which an attesting entity can present 
+        /// Gets or sets a URI specifying the entity or location to which an attesting entity can present
         /// the assertion. [Saml2Core, 2.4.1.2]
         /// </summary>
         public Uri Recipient
         {
-            get 
-            { 
-                return this.recipient; 
-            }
-
+            get { return this.recipient; }
             set
             {
                 if (null != value && !value.IsAbsoluteUri)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument("value", SR.GetString(SR.ID0013));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgument(
+                        "value",
+                        SR.GetString(SR.ID0013)
+                    );
                 }
 
                 this.recipient = value;

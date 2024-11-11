@@ -2,12 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 namespace System.Threading.Tasks;
+
 #if TESTUTILS
 public
 #else
 internal
 #endif
-    static class TaskExtensions
+static class TaskExtensions
 {
     public static async Task OrThrowIfOtherFails(this Task task, Task otherTask)
     {

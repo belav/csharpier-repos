@@ -30,6 +30,7 @@ namespace System.Net.Http
 
         /// <summary>Cached string for the last Date header received on this connection.</summary>
         private string? _lastDateHeaderValue;
+
         /// <summary>Cached string for the last Server header received on this connection.</summary>
         private string? _lastServerHeaderValue;
 
@@ -46,9 +47,9 @@ namespace System.Net.Http
             {
                 // While requests may report HTTP/1.0 as the protocol, we treat all HTTP/1.X connections as HTTP/1.1.
                 string protocol =
-                    this is HttpConnection ? "1.1" :
-                    this is Http2Connection ? "2" :
-                    "3";
+                    this is HttpConnection ? "1.1"
+                    : this is Http2Connection ? "2"
+                    : "3";
 
                 _connectionMetrics = new ConnectionMetrics(
                     metrics,
@@ -56,7 +57,8 @@ namespace System.Net.Http
                     pool.IsSecure ? "https" : "http",
                     pool.OriginAuthority.HostValue,
                     pool.IsDefaultPort ? null : pool.OriginAuthority.Port,
-                    remoteEndPoint?.Address?.ToString());
+                    remoteEndPoint?.Address?.ToString()
+                );
 
                 _connectionMetrics.ConnectionEstablished();
             }
@@ -71,24 +73,50 @@ namespace System.Net.Http
                 string host = pool.OriginAuthority.HostValue;
                 int port = pool.OriginAuthority.Port;
 
-                if (this is HttpConnection) HttpTelemetry.Log.Http11ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
-                else if (this is Http2Connection) HttpTelemetry.Log.Http20ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
-                else HttpTelemetry.Log.Http30ConnectionEstablished(Id, scheme, host, port, remoteEndPoint);
+                if (this is HttpConnection)
+                    HttpTelemetry.Log.Http11ConnectionEstablished(
+                        Id,
+                        scheme,
+                        host,
+                        port,
+                        remoteEndPoint
+                    );
+                else if (this is Http2Connection)
+                    HttpTelemetry.Log.Http20ConnectionEstablished(
+                        Id,
+                        scheme,
+                        host,
+                        port,
+                        remoteEndPoint
+                    );
+                else
+                    HttpTelemetry.Log.Http30ConnectionEstablished(
+                        Id,
+                        scheme,
+                        host,
+                        port,
+                        remoteEndPoint
+                    );
             }
         }
 
         public void MarkConnectionAsClosed()
         {
-            _connectionMetrics?.ConnectionClosed(durationMs: Environment.TickCount64 - _creationTickCount);
+            _connectionMetrics?.ConnectionClosed(
+                durationMs: Environment.TickCount64 - _creationTickCount
+            );
 
             if (HttpTelemetry.Log.IsEnabled())
             {
                 // Only decrement the connection count if we counted this connection
                 if (_httpTelemetryMarkedConnectionAsOpened)
                 {
-                    if (this is HttpConnection) HttpTelemetry.Log.Http11ConnectionClosed(Id);
-                    else if (this is Http2Connection) HttpTelemetry.Log.Http20ConnectionClosed(Id);
-                    else HttpTelemetry.Log.Http30ConnectionClosed(Id);
+                    if (this is HttpConnection)
+                        HttpTelemetry.Log.Http11ConnectionClosed(Id);
+                    else if (this is Http2Connection)
+                        HttpTelemetry.Log.Http20ConnectionClosed(Id);
+                    else
+                        HttpTelemetry.Log.Http30ConnectionClosed(Id);
                 }
             }
         }
@@ -105,14 +133,34 @@ namespace System.Net.Http
         }
 
         /// <summary>Uses <see cref="HeaderDescriptor.GetHeaderValue"/>, but first special-cases several known headers for which we can use caching.</summary>
-        public string GetResponseHeaderValueWithCaching(HeaderDescriptor descriptor, ReadOnlySpan<byte> value, Encoding? valueEncoding)
+        public string GetResponseHeaderValueWithCaching(
+            HeaderDescriptor descriptor,
+            ReadOnlySpan<byte> value,
+            Encoding? valueEncoding
+        )
         {
-            return
-                descriptor.Equals(KnownHeaders.Date) ? GetOrAddCachedValue(ref _lastDateHeaderValue, descriptor, value, valueEncoding) :
-                descriptor.Equals(KnownHeaders.Server) ? GetOrAddCachedValue(ref _lastServerHeaderValue, descriptor, value, valueEncoding) :
-                descriptor.GetHeaderValue(value, valueEncoding);
+            return descriptor.Equals(KnownHeaders.Date)
+                    ? GetOrAddCachedValue(
+                        ref _lastDateHeaderValue,
+                        descriptor,
+                        value,
+                        valueEncoding
+                    )
+                : descriptor.Equals(KnownHeaders.Server)
+                    ? GetOrAddCachedValue(
+                        ref _lastServerHeaderValue,
+                        descriptor,
+                        value,
+                        valueEncoding
+                    )
+                : descriptor.GetHeaderValue(value, valueEncoding);
 
-            static string GetOrAddCachedValue([NotNull] ref string? cache, HeaderDescriptor descriptor, ReadOnlySpan<byte> value, Encoding? encoding)
+            static string GetOrAddCachedValue(
+                [NotNull] ref string? cache,
+                HeaderDescriptor descriptor,
+                ReadOnlySpan<byte> value,
+                Encoding? encoding
+            )
             {
                 string? lastValue = cache;
                 if (lastValue is null || !Ascii.Equals(value, lastValue))
@@ -131,12 +179,13 @@ namespace System.Net.Http
             if (stream is SslStream sslStream)
             {
                 Trace(
-                    $"{this}. Id:{Id}, " +
-                    $"SslProtocol:{sslStream.SslProtocol}, NegotiatedApplicationProtocol:{sslStream.NegotiatedApplicationProtocol}, " +
-                    $"NegotiatedCipherSuite:{sslStream.NegotiatedCipherSuite}, CipherAlgorithm:{sslStream.CipherAlgorithm}, CipherStrength:{sslStream.CipherStrength}, " +
-                    $"HashAlgorithm:{sslStream.HashAlgorithm}, HashStrength:{sslStream.HashStrength}, " +
-                    $"KeyExchangeAlgorithm:{sslStream.KeyExchangeAlgorithm}, KeyExchangeStrength:{sslStream.KeyExchangeStrength}, " +
-                    $"LocalCertificate:{sslStream.LocalCertificate}, RemoteCertificate:{sslStream.RemoteCertificate}");
+                    $"{this}. Id:{Id}, "
+                        + $"SslProtocol:{sslStream.SslProtocol}, NegotiatedApplicationProtocol:{sslStream.NegotiatedApplicationProtocol}, "
+                        + $"NegotiatedCipherSuite:{sslStream.NegotiatedCipherSuite}, CipherAlgorithm:{sslStream.CipherAlgorithm}, CipherStrength:{sslStream.CipherStrength}, "
+                        + $"HashAlgorithm:{sslStream.HashAlgorithm}, HashStrength:{sslStream.HashStrength}, "
+                        + $"KeyExchangeAlgorithm:{sslStream.KeyExchangeAlgorithm}, KeyExchangeStrength:{sslStream.KeyExchangeStrength}, "
+                        + $"LocalCertificate:{sslStream.LocalCertificate}, RemoteCertificate:{sslStream.RemoteCertificate}"
+                );
             }
             else
             {
@@ -156,13 +205,23 @@ namespace System.Net.Http
 
         internal static int ParseStatusCode(ReadOnlySpan<byte> value)
         {
-            byte status1, status2, status3;
-            if (value.Length != 3 ||
-                !IsDigit(status1 = value[0]) ||
-                !IsDigit(status2 = value[1]) ||
-                !IsDigit(status3 = value[2]))
+            byte status1,
+                status2,
+                status3;
+            if (
+                value.Length != 3
+                || !IsDigit(status1 = value[0])
+                || !IsDigit(status2 = value[1])
+                || !IsDigit(status3 = value[2])
+            )
             {
-                throw new HttpRequestException(HttpRequestError.InvalidResponse, SR.Format(SR.net_http_invalid_response_status_code, Encoding.ASCII.GetString(value)));
+                throw new HttpRequestException(
+                    HttpRequestError.InvalidResponse,
+                    SR.Format(
+                        SR.net_http_invalid_response_status_code,
+                        Encoding.ASCII.GetString(value)
+                    )
+                );
             }
 
             return 100 * (status1 - '0') + 10 * (status2 - '0') + (status3 - '0');
@@ -181,8 +240,14 @@ namespace System.Net.Http
             }
             else
             {
-                task.AsTask().ContinueWith(static t => _ = t.Exception,
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+                task.AsTask()
+                    .ContinueWith(
+                        static t => _ = t.Exception,
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously
+                            | TaskContinuationOptions.OnlyOnFaulted,
+                        TaskScheduler.Default
+                    );
             }
         }
 
@@ -198,15 +263,22 @@ namespace System.Net.Http
             }
             else
             {
-                task.ContinueWith(static (t, state) => LogFaulted((HttpConnectionBase)state!, t), this,
-                    CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously | TaskContinuationOptions.OnlyOnFaulted, TaskScheduler.Default);
+                task.ContinueWith(
+                    static (t, state) => LogFaulted((HttpConnectionBase)state!, t),
+                    this,
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously
+                        | TaskContinuationOptions.OnlyOnFaulted,
+                    TaskScheduler.Default
+                );
             }
 
             static void LogFaulted(HttpConnectionBase connection, Task task)
             {
                 Debug.Assert(task.IsFaulted);
                 Exception? e = task.Exception!.InnerException; // Access Exception even if not tracing, to avoid TaskScheduler.UnobservedTaskException firing
-                if (NetEventSource.Log.IsEnabled()) connection.Trace($"Exception from asynchronous processing: {e}");
+                if (NetEventSource.Log.IsEnabled())
+                    connection.Trace($"Exception from asynchronous processing: {e}");
             }
         }
 

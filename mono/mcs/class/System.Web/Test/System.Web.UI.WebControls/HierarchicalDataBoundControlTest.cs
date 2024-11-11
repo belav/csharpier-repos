@@ -29,230 +29,239 @@
 
 
 
-using NUnit.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Drawing;
+using System.IO;
+using System.Reflection;
 using System.Text;
+using System.Text.RegularExpressions;
+using System.Threading;
 using System.Web;
 using System.Web.UI;
 using System.Web.UI.Adapters;
 using System.Web.UI.WebControls;
 using System.Web.UI.WebControls.Adapters;
-using System.IO;
-using System.Drawing;
-using System.Threading;
-using MyWebControl = System.Web.UI.WebControls;
-using System.Collections;
-using MonoTests.SystemWeb.Framework;
 using MonoTests.stand_alone.WebHarness;
-using System.Text.RegularExpressions;
-using System.Reflection;
+using MonoTests.SystemWeb.Framework;
+using NUnit.Framework;
+using MyWebControl = System.Web.UI.WebControls;
 
 namespace MonoTests.System.Web.UI.WebControls
 {
-	[Serializable]
-	[TestFixture]
-	public class HierarchicalDataBoundControlTest
-	{
-		class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
-		{
-			private StringBuilder dataBindTrace;
-			public string DataBindTrace {
-				get { return dataBindTrace.ToString (); }
-			}
+    [Serializable]
+    [TestFixture]
+    public class HierarchicalDataBoundControlTest
+    {
+        class MyHierarchicalDataBoundControl : HierarchicalDataBoundControl
+        {
+            private StringBuilder dataBindTrace;
+            public string DataBindTrace
+            {
+                get { return dataBindTrace.ToString(); }
+            }
 
-			public override void DataBind () {
-				dataBindTrace = new StringBuilder ();
-				dataBindTrace.Append("[Start DataBind]");
-				base.DataBind ();
-				dataBindTrace.Append ("[End DataBind]");
-			}
+            public override void DataBind()
+            {
+                dataBindTrace = new StringBuilder();
+                dataBindTrace.Append("[Start DataBind]");
+                base.DataBind();
+                dataBindTrace.Append("[End DataBind]");
+            }
 
-			protected override void PerformSelect () {
-				dataBindTrace.Append ("[Start PerformSelect]");
-				base.PerformSelect ();
-				dataBindTrace.Append ("[End PerformSelect]");
-			}
+            protected override void PerformSelect()
+            {
+                dataBindTrace.Append("[Start PerformSelect]");
+                base.PerformSelect();
+                dataBindTrace.Append("[End PerformSelect]");
+            }
 
-			protected internal override void PerformDataBinding () {
-				dataBindTrace.Append ("[Start PerformDataBinding]");
-				base.PerformDataBinding ();
-				dataBindTrace.Append ("[End PerformDataBinding]");
-			}
+            protected internal override void PerformDataBinding()
+            {
+                dataBindTrace.Append("[Start PerformDataBinding]");
+                base.PerformDataBinding();
+                dataBindTrace.Append("[End PerformDataBinding]");
+            }
 
-			public HierarchicalDataSourceView GetData (string path) {
-				dataBindTrace.Append ("[Start GetData]");
-				return base.GetData (path);
-			}
+            public HierarchicalDataSourceView GetData(string path)
+            {
+                dataBindTrace.Append("[Start GetData]");
+                return base.GetData(path);
+            }
 
-			protected override void OnDataBinding (EventArgs e) {
-				dataBindTrace.Append ("[Start OnDataBinding]");
-				base.OnDataBinding (e);
-				dataBindTrace.Append ("[End OnDataBinding]");
-			}
+            protected override void OnDataBinding(EventArgs e)
+            {
+                dataBindTrace.Append("[Start OnDataBinding]");
+                base.OnDataBinding(e);
+                dataBindTrace.Append("[End OnDataBinding]");
+            }
 
-			protected override void OnDataBound (EventArgs e) {
-				dataBindTrace.Append ("[Start OnDataBound]");
-				base.OnDataBound (e);
-				dataBindTrace.Append ("[End OnDataBound]");
-			}
+            protected override void OnDataBound(EventArgs e)
+            {
+                dataBindTrace.Append("[Start OnDataBound]");
+                base.OnDataBound(e);
+                dataBindTrace.Append("[End OnDataBound]");
+            }
 
-			internal void DoValidateDataSource (object dataSource)
-			{
-				ValidateDataSource (dataSource);
-			}
+            internal void DoValidateDataSource(object dataSource)
+            {
+                ValidateDataSource(dataSource);
+            }
 
-			internal ControlAdapter controlAdapter;
-			protected override global::System.Web.UI.Adapters.ControlAdapter ResolveAdapter ()
-			{
-				return controlAdapter;
-			}
-		}
-		
-		[Test]
-		public void HierarchicalDataBoundControl_DataBindFlow () {
-			Page p = new Page ();
-			MyHierarchicalDataBoundControl hc = new MyHierarchicalDataBoundControl ();
-			p.Controls.Add (hc);
-			hc.DataBind ();
-			string expected = "[Start DataBind][Start PerformSelect][Start OnDataBinding][End OnDataBinding][Start PerformDataBinding][End PerformDataBinding][Start OnDataBound][End OnDataBound][End PerformSelect][End DataBind]";
-			Assert.AreEqual (expected, hc.DataBindTrace, "DataBindFlow");
-		}
+            internal ControlAdapter controlAdapter;
 
-		[Test]
-		public void HierarchicalDataBoundControl_ValidateDataSource_Null ()
-		{
-			MyHierarchicalDataBoundControl hc = new MyHierarchicalDataBoundControl ();
-			hc.DoValidateDataSource (null);
-		}
+            protected override global::System.Web.UI.Adapters.ControlAdapter ResolveAdapter()
+            {
+                return controlAdapter;
+            }
+        }
 
-		class MyHierarchicalDataBoundControlAdapter : HierarchicalDataBoundControlAdapter
-		{
-			internal bool perform_data_binding_called;
-			protected internal override void PerformDataBinding ()
-			{
-				perform_data_binding_called = true;
-			}
-		}
-		
-		class MyControlAdapter : ControlAdapter
-		{
-		}
+        [Test]
+        public void HierarchicalDataBoundControl_DataBindFlow()
+        {
+            Page p = new Page();
+            MyHierarchicalDataBoundControl hc = new MyHierarchicalDataBoundControl();
+            p.Controls.Add(hc);
+            hc.DataBind();
+            string expected =
+                "[Start DataBind][Start PerformSelect][Start OnDataBinding][End OnDataBinding][Start PerformDataBinding][End PerformDataBinding][Start OnDataBound][End OnDataBound][End PerformSelect][End DataBind]";
+            Assert.AreEqual(expected, hc.DataBindTrace, "DataBindFlow");
+        }
 
-		[Test]
-		[Category ("NotDotNet")] // .NET doesn't use ResolveAdapter in this case
-		public void PerformDataBinding_UsesAdapter ()
-		{
-			MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl ();
-			MyHierarchicalDataBoundControlAdapter a = new MyHierarchicalDataBoundControlAdapter();;
-			c.controlAdapter = a;
-			c.DataBind ();
-			Assert.IsTrue (a.perform_data_binding_called, "PerformDataBinding_UsesAdapter");
-		}
+        [Test]
+        public void HierarchicalDataBoundControl_ValidateDataSource_Null()
+        {
+            MyHierarchicalDataBoundControl hc = new MyHierarchicalDataBoundControl();
+            hc.DoValidateDataSource(null);
+        }
 
-		[Test]
-		public void PerformDataBinding_WorksWithControlAdapter ()
-		{
-			MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl ();
-			MyControlAdapter a = new MyControlAdapter();
-			c.controlAdapter = a;
-			c.DataBind ();
-		}
+        class MyHierarchicalDataBoundControlAdapter : HierarchicalDataBoundControlAdapter
+        {
+            internal bool perform_data_binding_called;
 
-		public class TestHierarchy : IHierarchicalEnumerable
-		{
-			List<TestNode> list;
-			
-			public TestHierarchy (List<TestNode> source)
-			{
-			    list = source;
-			}
+            protected internal override void PerformDataBinding()
+            {
+                perform_data_binding_called = true;
+            }
+        }
 
-			public IHierarchyData GetHierarchyData (object enumeratedItem)
-			{
-			    return enumeratedItem as TestNode;
-			}
+        class MyControlAdapter : ControlAdapter { }
 
-			public IEnumerator GetEnumerator ()
-			{
-				return list.GetEnumerator ();
-			}
-		}
+        [Test]
+        [Category("NotDotNet")] // .NET doesn't use ResolveAdapter in this case
+        public void PerformDataBinding_UsesAdapter()
+        {
+            MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl();
+            MyHierarchicalDataBoundControlAdapter a = new MyHierarchicalDataBoundControlAdapter();
+            ;
+            c.controlAdapter = a;
+            c.DataBind();
+            Assert.IsTrue(a.perform_data_binding_called, "PerformDataBinding_UsesAdapter");
+        }
 
-		public class TestNode : IHierarchyData
-		{
-			string name;
-			TestNode parent;
-			List<TestNode> childNodes;
+        [Test]
+        public void PerformDataBinding_WorksWithControlAdapter()
+        {
+            MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl();
+            MyControlAdapter a = new MyControlAdapter();
+            c.controlAdapter = a;
+            c.DataBind();
+        }
 
-			public TestNode (string name, TestNode parent, List<TestNode> children)
-			{
-				this.name = name;
-				this.parent = parent;
-				this.childNodes = children;
-			}
+        public class TestHierarchy : IHierarchicalEnumerable
+        {
+            List<TestNode> list;
 
-			public string Name
-			{
-				get { return name; }
-			}
+            public TestHierarchy(List<TestNode> source)
+            {
+                list = source;
+            }
 
-			public IHierarchicalEnumerable GetChildren ()
-			{
-			    return new TestHierarchy (childNodes);
-			}
+            public IHierarchyData GetHierarchyData(object enumeratedItem)
+            {
+                return enumeratedItem as TestNode;
+            }
 
-			public IHierarchyData GetParent ()
-			{
-			    return parent;
-			}
+            public IEnumerator GetEnumerator()
+            {
+                return list.GetEnumerator();
+            }
+        }
 
-			public bool HasChildren
-			{
-			    get 
-			    {
-				if (childNodes == null)
-				    return false;
+        public class TestNode : IHierarchyData
+        {
+            string name;
+            TestNode parent;
+            List<TestNode> childNodes;
 
-				return childNodes.Count > 0; 
-			    }
-			}
+            public TestNode(string name, TestNode parent, List<TestNode> children)
+            {
+                this.name = name;
+                this.parent = parent;
+                this.childNodes = children;
+            }
 
-			public object Item
-			{
-			    get { return this; }
-			}
+            public string Name
+            {
+                get { return name; }
+            }
 
-			public string Path
-			{
-			    get
-			    {
-				TestNode node = this;
-				string s = name;
-				while ((node = (TestNode)node.GetParent ()) != null)
-				    s = node.Name + ": " + s;
-				return s.Trim ();
-			    }
-			}
+            public IHierarchicalEnumerable GetChildren()
+            {
+                return new TestHierarchy(childNodes);
+            }
 
-			public string Type
-			{
-			    get { return this.ToString (); }
-			}
-		}
-		
-		[Test]
-		public void TestIHierarchicalEnumerableDataSource ()
-		{
-			List<TestNode> list = new List<TestNode> ();
-			list.Add (new TestNode ("test", null, null));
-			TestHierarchy hierarchy = new TestHierarchy (list);
-			MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl ();
-			c.DataSource = hierarchy;
-			c.DataBind ();
-			HierarchicalDataSourceView view = c.GetData ("");
-			Assert.IsNotNull (view);
-		}
-	}
+            public IHierarchyData GetParent()
+            {
+                return parent;
+            }
+
+            public bool HasChildren
+            {
+                get
+                {
+                    if (childNodes == null)
+                        return false;
+
+                    return childNodes.Count > 0;
+                }
+            }
+
+            public object Item
+            {
+                get { return this; }
+            }
+
+            public string Path
+            {
+                get
+                {
+                    TestNode node = this;
+                    string s = name;
+                    while ((node = (TestNode)node.GetParent()) != null)
+                        s = node.Name + ": " + s;
+                    return s.Trim();
+                }
+            }
+
+            public string Type
+            {
+                get { return this.ToString(); }
+            }
+        }
+
+        [Test]
+        public void TestIHierarchicalEnumerableDataSource()
+        {
+            List<TestNode> list = new List<TestNode>();
+            list.Add(new TestNode("test", null, null));
+            TestHierarchy hierarchy = new TestHierarchy(list);
+            MyHierarchicalDataBoundControl c = new MyHierarchicalDataBoundControl();
+            c.DataSource = hierarchy;
+            c.DataBind();
+            HierarchicalDataSourceView view = c.GetData("");
+            Assert.IsNotNull(view);
+        }
+    }
 }
-

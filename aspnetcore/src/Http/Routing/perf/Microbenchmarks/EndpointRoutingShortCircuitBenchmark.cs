@@ -6,9 +6,9 @@ using BenchmarkDotNet.Attributes;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.AspNetCore.Routing.ShortCircuit;
-using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Microsoft.Extensions.Primitives;
@@ -24,7 +24,11 @@ public class EndpointRoutingShortCircuitBenchmark
     public void Setup()
     {
         var routingMetrics = new RoutingMetrics(new TestMeterFactory());
-        var normalEndpoint = new Endpoint(context => Task.CompletedTask, new EndpointMetadataCollection(), "normal");
+        var normalEndpoint = new Endpoint(
+            context => Task.CompletedTask,
+            new EndpointMetadataCollection(),
+            "normal"
+        );
 
         _normalEndpointMiddleware = new EndpointRoutingMiddleware(
             new BenchmarkMatcherFactory(normalEndpoint),
@@ -34,9 +38,14 @@ public class EndpointRoutingShortCircuitBenchmark
             new DiagnosticListener("benchmark"),
             Options.Create(new RouteOptions()),
             routingMetrics,
-            context => Task.CompletedTask);
+            context => Task.CompletedTask
+        );
 
-        var shortCircuitEndpoint = new Endpoint(context => Task.CompletedTask, new EndpointMetadataCollection(new ShortCircuitMetadata(200)), "shortcircuit");
+        var shortCircuitEndpoint = new Endpoint(
+            context => Task.CompletedTask,
+            new EndpointMetadataCollection(new ShortCircuitMetadata(200)),
+            "shortcircuit"
+        );
 
         _shortCircuitEndpointMiddleware = new EndpointRoutingMiddleware(
             new BenchmarkMatcherFactory(shortCircuitEndpoint),
@@ -46,7 +55,8 @@ public class EndpointRoutingShortCircuitBenchmark
             new DiagnosticListener("benchmark"),
             Options.Create(new RouteOptions()),
             routingMetrics,
-            context => Task.CompletedTask);
+            context => Task.CompletedTask
+        );
     }
 
     [Benchmark]
@@ -106,6 +116,7 @@ internal class BenchmarkEndpointRouteBuilder : IEndpointRouteBuilder
         throw new NotImplementedException();
     }
 }
+
 internal class BenchmarkEndpointDataSource : EndpointDataSource
 {
     public override IReadOnlyList<Endpoint> Endpoints => throw new NotImplementedException();

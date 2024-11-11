@@ -25,7 +25,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Syntax
 
         public CrefParameterSyntax Update(SyntaxToken refKindKeyword, TypeSyntax type)
         {
-            return this.Update(refKindKeyword: refKindKeyword, readOnlyKeyword: this.ReadOnlyKeyword, type: type);
+            return this.Update(
+                refKindKeyword: refKindKeyword,
+                readOnlyKeyword: this.ReadOnlyKeyword,
+                type: type
+            );
         }
     }
 }

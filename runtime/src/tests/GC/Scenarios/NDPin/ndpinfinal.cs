@@ -8,20 +8,19 @@
 /*          Finalize
 /******************************************************************/
 
-namespace DefaultNamespace {
-
+namespace DefaultNamespace
+{
     using System;
     using System.Collections.Generic;
     using System.Runtime.CompilerServices;
     using System.Runtime.InteropServices;
-
 
     internal class NDPinFinal
     {
         internal Object p;
         internal GCHandle handle;
 
-        internal NDPinFinal (Object p, GCHandle h)
+        internal NDPinFinal(Object p, GCHandle h)
         {
             this.p = p;
             handle = h;
@@ -44,18 +43,16 @@ namespace DefaultNamespace {
         internal static int cFinalObj = 0;
         internal static int cCreatObj = 0;
 
-
-        public static void CreateObj(int iObj) {
-
+        public static void CreateObj(int iObj)
+        {
             pinList = new Object[iObj];
             m_o = new int[100];
             for (int i = 0; i < iObj; i++)
             {
                 m_o = new int[100];
-                m_n = new NDPinFinal (m_o, GCHandle.Alloc(m_o, GCHandleType.Pinned));
+                m_n = new NDPinFinal(m_o, GCHandle.Alloc(m_o, GCHandleType.Pinned));
             }
         }
-
 
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void RemoveN()
@@ -63,11 +60,10 @@ namespace DefaultNamespace {
             m_n = null;
         }
 
-
         [MethodImplAttribute(MethodImplOptions.NoInlining)]
         public static void RemovePinList(int iObj)
         {
-            for ( int i=0; i< iObj; i++ )
+            for (int i = 0; i < iObj; i++)
             {
                 pinList[i] = null;
             }
@@ -92,35 +88,35 @@ namespace DefaultNamespace {
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
-            
+
             RemovePinList(iObj);
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
             GC.Collect();
-           
-            if( cFinalObj == cCreatObj )
+
+            if (cFinalObj == cCreatObj)
             {
                 return true;
             }
             else
             {
-                Console.Write(cCreatObj-cFinalObj);
-                Console.WriteLine (" objects have been finalized!" );
+                Console.Write(cCreatObj - cFinalObj);
+                Console.WriteLine(" objects have been finalized!");
                 return false;
             }
         }
 
-        public static int Main( String [] args )
+        public static int Main(String[] args)
         {
             int iObj = 1000;
             Console.WriteLine("Test should return with ExitCode 100 ...");
 
-            if( args.Length >= 1 )
+            if (args.Length >= 1)
             {
                 try
                 {
-                    iObj = Int32.Parse( args[0] );
+                    iObj = Int32.Parse(args[0]);
                 }
                 catch (FormatException)
                 {
@@ -138,7 +134,6 @@ namespace DefaultNamespace {
 
             Console.WriteLine("Test Failed!");
             return 1;
-
         }
     }
 }

@@ -33,7 +33,11 @@ namespace System.IdentityModel.Selectors
             {
                 // warning 56506: Parameter 'token' to this public method must be validated:  A null-dereference can occur here.
 #pragma warning suppress 56506
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(SR.GetString(SR.CannotValidateSecurityTokenType, this, token.GetType())));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(
+                        SR.GetString(SR.CannotValidateSecurityTokenType, this, token.GetType())
+                    )
+                );
             }
 
             EventTraceActivity eventTraceActivity = null;
@@ -41,28 +45,39 @@ namespace System.IdentityModel.Selectors
 
             if (TD.TokenValidationStartedIsEnabled())
             {
-                eventTraceActivity = eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                eventTraceActivity =
+                    eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
                 tokenType = tokenType ?? token.GetType().ToString();
                 TD.TokenValidationStarted(eventTraceActivity, tokenType, token.Id);
             }
 
-            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = ValidateTokenCore(token);
+            ReadOnlyCollection<IAuthorizationPolicy> authorizationPolicies = ValidateTokenCore(
+                token
+            );
             if (authorizationPolicies == null)
             {
-                string errorMsg = SR.GetString(SR.CannotValidateSecurityTokenType, this, token.GetType());
+                string errorMsg = SR.GetString(
+                    SR.CannotValidateSecurityTokenType,
+                    this,
+                    token.GetType()
+                );
                 if (TD.TokenValidationFailureIsEnabled())
                 {
-                    eventTraceActivity = eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                    eventTraceActivity =
+                        eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
                     tokenType = tokenType ?? token.GetType().ToString();
                     TD.TokenValidationFailure(eventTraceActivity, tokenType, token.Id, errorMsg);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new SecurityTokenValidationException(errorMsg));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new SecurityTokenValidationException(errorMsg)
+                );
             }
 
             if (TD.TokenValidationSuccessIsEnabled())
             {
-                eventTraceActivity = eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
+                eventTraceActivity =
+                    eventTraceActivity ?? EventTraceActivity.GetFromThreadOrCreate();
                 tokenType = tokenType ?? token.GetType().ToString();
                 TD.TokenValidationSuccess(eventTraceActivity, tokenType, token.Id);
             }
@@ -71,6 +86,8 @@ namespace System.IdentityModel.Selectors
         }
 
         protected abstract bool CanValidateTokenCore(SecurityToken token);
-        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(SecurityToken token);
+        protected abstract ReadOnlyCollection<IAuthorizationPolicy> ValidateTokenCore(
+            SecurityToken token
+        );
     }
 }

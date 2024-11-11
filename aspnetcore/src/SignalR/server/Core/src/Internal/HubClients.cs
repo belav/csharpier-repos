@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed class HubClients<THub> : IHubClients where THub : Hub
+internal sealed class HubClients<THub> : IHubClients
+    where THub : Hub
 {
     private readonly HubLifetimeManager<THub> _lifetimeManager;
 
@@ -21,6 +22,7 @@ internal sealed class HubClients<THub> : IHubClients where THub : Hub
     }
 
     IClientProxy IHubClients<IClientProxy>.Client(string connectionId) => Client(connectionId);
+
     public ISingleClientProxy Client(string connectionId)
     {
         return new SingleClientProxy<THub>(_lifetimeManager, connectionId);

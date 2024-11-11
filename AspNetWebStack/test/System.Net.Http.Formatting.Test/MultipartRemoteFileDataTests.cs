@@ -14,7 +14,8 @@ namespace System.Net.Http
             // Arrange, Act & Assert
             Assert.ThrowsArgumentNull(
                 () => new MultipartRemoteFileData(null, "http://some/path/to", "Name"),
-                "headers");
+                "headers"
+            );
         }
 
         [Fact]
@@ -22,9 +23,12 @@ namespace System.Net.Http
         {
             // Arrange
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
-            
+
             // Act and Assert
-            Assert.ThrowsArgumentNull(() => new MultipartRemoteFileData(headers, null, "Name"), "location");
+            Assert.ThrowsArgumentNull(
+                () => new MultipartRemoteFileData(headers, null, "Name"),
+                "location"
+            );
         }
 
         [Fact]
@@ -34,8 +38,10 @@ namespace System.Net.Http
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
             // Act and Assert
-            Assert.ThrowsArgumentNull(() => new MultipartRemoteFileData(headers, "http://some/path/to", null),
-                "fileName");
+            Assert.ThrowsArgumentNull(
+                () => new MultipartRemoteFileData(headers, "http://some/path/to", null),
+                "fileName"
+            );
         }
 
         [Fact]
@@ -47,7 +53,11 @@ namespace System.Net.Http
             string fileName = "Name";
 
             // Act
-            MultipartRemoteFileData fileData = new MultipartRemoteFileData(headers, remoteFileURL, fileName);
+            MultipartRemoteFileData fileData = new MultipartRemoteFileData(
+                headers,
+                remoteFileURL,
+                fileName
+            );
 
             // Assert
             Assert.Same(headers, fileData.Headers);

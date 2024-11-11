@@ -14,9 +14,7 @@ namespace System.ServiceModel.Configuration
     public sealed partial class ComMethodElement : ConfigurationElement
     {
         public ComMethodElement()
-            : base()
-        {
-        }
+            : base() { }
 
         public ComMethodElement(string method)
             : this()
@@ -24,7 +22,10 @@ namespace System.ServiceModel.Configuration
             this.ExposedMethod = method;
         }
 
-        [ConfigurationProperty(ConfigurationStrings.ExposedMethod, Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired)]
+        [ConfigurationProperty(
+            ConfigurationStrings.ExposedMethod,
+            Options = ConfigurationPropertyOptions.IsKey | ConfigurationPropertyOptions.IsRequired
+        )]
         [StringValidator(MinLength = 1)]
         public string ExposedMethod
         {
@@ -39,10 +40,5 @@ namespace System.ServiceModel.Configuration
                 base[ConfigurationStrings.ExposedMethod] = value;
             }
         }
-
-
-
     }
-
-
 }

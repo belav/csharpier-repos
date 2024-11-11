@@ -34,7 +34,11 @@ namespace System.Net.Http
 #else
         internal
 #endif
-            Task SerializeToStreamAsync(Stream stream, TransportContext? context, CancellationToken cancellationToken)
+        Task SerializeToStreamAsync(
+            Stream stream,
+            TransportContext? context,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(stream != null);
 
@@ -48,15 +52,29 @@ namespace System.Net.Http
             Task copyTask = _content.CopyToAsync(stream, BufferSize, cancellationToken);
             if (copyTask.IsCompleted)
             {
-                try { _content.Dispose(); } catch { } // same as StreamToStreamCopy behavior
+                try
+                {
+                    _content.Dispose();
+                }
+                catch { } // same as StreamToStreamCopy behavior
             }
             else
             {
-                copyTask = copyTask.ContinueWith((t, s) =>
-                {
-                    try { ((Stream)s!).Dispose(); } catch { }
-                    t.GetAwaiter().GetResult();
-                }, _content, CancellationToken.None, TaskContinuationOptions.ExecuteSynchronously, TaskScheduler.Default);
+                copyTask = copyTask.ContinueWith(
+                    (t, s) =>
+                    {
+                        try
+                        {
+                            ((Stream)s!).Dispose();
+                        }
+                        catch { }
+                        t.GetAwaiter().GetResult();
+                    },
+                    _content,
+                    CancellationToken.None,
+                    TaskContinuationOptions.ExecuteSynchronously,
+                    TaskScheduler.Default
+                );
             }
             return copyTask;
         }

@@ -8,7 +8,12 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal partial class BoundSequencePoint
     {
-        public static BoundStatement Create(SyntaxNode? syntax, TextSpan? part, BoundStatement statement, bool hasErrors = false)
+        public static BoundStatement Create(
+            SyntaxNode? syntax,
+            TextSpan? part,
+            BoundStatement statement,
+            bool hasErrors = false
+        )
         {
             if (part.HasValue)
             {
@@ -22,16 +27,30 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        public static BoundStatement Create(SyntaxNode? syntax, BoundStatement? statementOpt, bool hasErrors = false, bool wasCompilerGenerated = false)
+        public static BoundStatement Create(
+            SyntaxNode? syntax,
+            BoundStatement? statementOpt,
+            bool hasErrors = false,
+            bool wasCompilerGenerated = false
+        )
         {
             // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
-            return new BoundSequencePoint(syntax!, statementOpt, hasErrors) { WasCompilerGenerated = wasCompilerGenerated };
+            return new BoundSequencePoint(syntax!, statementOpt, hasErrors)
+            {
+                WasCompilerGenerated = wasCompilerGenerated,
+            };
         }
 
-        public static BoundStatement CreateHidden(BoundStatement? statementOpt = null, bool hasErrors = false)
+        public static BoundStatement CreateHidden(
+            BoundStatement? statementOpt = null,
+            bool hasErrors = false
+        )
         {
             // A bound sequence point is permitted to have a null syntax to make a hidden sequence point.
-            return new BoundSequencePoint(null!, statementOpt, hasErrors) { WasCompilerGenerated = true };
+            return new BoundSequencePoint(null!, statementOpt, hasErrors)
+            {
+                WasCompilerGenerated = true,
+            };
         }
     }
 }

@@ -35,9 +35,7 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     /// <param name="url">The URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     public RedirectResult([StringSyntax(StringSyntaxAttribute.Uri)] string url, bool permanent)
-        : this(url, permanent, preserveMethod: false)
-    {
-    }
+        : this(url, permanent, preserveMethod: false) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RedirectResult"/> class with the values
@@ -46,7 +44,11 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     /// <param name="url">The URL to redirect to.</param>
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
-    public RedirectResult([StringSyntax(StringSyntaxAttribute.Uri)] string url, bool permanent, bool preserveMethod)
+    public RedirectResult(
+        [StringSyntax(StringSyntaxAttribute.Uri)] string url,
+        bool permanent,
+        bool preserveMethod
+    )
     {
         ArgumentNullException.ThrowIfNull(url);
 
@@ -98,7 +100,9 @@ public class RedirectResult : ActionResult, IKeepTempDataResult
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        var executor = context.HttpContext.RequestServices.GetRequiredService<IActionResultExecutor<RedirectResult>>();
+        var executor = context.HttpContext.RequestServices.GetRequiredService<
+            IActionResultExecutor<RedirectResult>
+        >();
         return executor.ExecuteAsync(context, this);
     }
 }

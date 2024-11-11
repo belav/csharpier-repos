@@ -28,6 +28,6 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
         Switch,
         Range,
         Unary,
-        Primary
+        Primary,
     }
 }

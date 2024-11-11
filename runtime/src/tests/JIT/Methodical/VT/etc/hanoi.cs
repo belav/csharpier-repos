@@ -42,7 +42,8 @@ namespace JitTest_hanoi_etc_cs
             }
             else
             {
-                CI F, T;
+                CI F,
+                    T;
                 F.index = from.index;
                 T.index = 3 - from.index - to.index;
                 int c = move(F, T, num - 1);
@@ -66,7 +67,8 @@ namespace JitTest_hanoi_etc_cs
                 s_cols[0][i] = NUM - i;
             test();
 
-            CI F, T;
+            CI F,
+                T;
             F.index = 0;
             T.index = 1;
         }

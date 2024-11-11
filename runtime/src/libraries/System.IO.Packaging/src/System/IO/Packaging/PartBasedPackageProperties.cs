@@ -51,14 +51,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Creator
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Creator);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Creator, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Creator); }
+            set { RecordNewBinding(PackageXmlEnum.Creator, value); }
         }
 
         /// <value>
@@ -66,14 +60,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Title
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Title);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Title, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Title); }
+            set { RecordNewBinding(PackageXmlEnum.Title, value); }
         }
 
         /// <value>
@@ -81,14 +69,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Subject
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Subject);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Subject, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Subject); }
+            set { RecordNewBinding(PackageXmlEnum.Subject, value); }
         }
 
         /// <value>
@@ -97,14 +79,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Category
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Category);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Category, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Category); }
+            set { RecordNewBinding(PackageXmlEnum.Category, value); }
         }
 
         /// <value>
@@ -114,14 +90,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Keywords
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Keywords);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Keywords, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Keywords); }
+            set { RecordNewBinding(PackageXmlEnum.Keywords, value); }
         }
 
         /// <value>
@@ -129,14 +99,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Description
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Description);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Description, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Description); }
+            set { RecordNewBinding(PackageXmlEnum.Description, value); }
         }
 
         /// <value>
@@ -153,10 +117,7 @@ namespace System.IO.Packaging
 
                 return contentType;
             }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.ContentType, value);
-            }
+            set { RecordNewBinding(PackageXmlEnum.ContentType, value); }
         }
 
         /// <value>
@@ -165,14 +126,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? ContentStatus
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.ContentStatus);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.ContentStatus, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.ContentStatus); }
+            set { RecordNewBinding(PackageXmlEnum.ContentStatus, value); }
         }
 
         /// <value>
@@ -180,14 +135,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Version
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Version);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Version, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Version); }
+            set { RecordNewBinding(PackageXmlEnum.Version, value); }
         }
 
         /// <value>
@@ -197,14 +146,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Revision
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Revision);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Revision, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Revision); }
+            set { RecordNewBinding(PackageXmlEnum.Revision, value); }
         }
 
         /// <value>
@@ -212,14 +155,8 @@ namespace System.IO.Packaging
         /// </value>
         public override Nullable<DateTime> Created
         {
-            get
-            {
-                return GetDateTimePropertyValue(PackageXmlEnum.Created);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Created, value);
-            }
+            get { return GetDateTimePropertyValue(PackageXmlEnum.Created); }
+            set { RecordNewBinding(PackageXmlEnum.Created, value); }
         }
 
         /// <value>
@@ -227,14 +164,8 @@ namespace System.IO.Packaging
         /// </value>
         public override Nullable<DateTime> Modified
         {
-            get
-            {
-                return GetDateTimePropertyValue(PackageXmlEnum.Modified);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Modified, value);
-            }
+            get { return GetDateTimePropertyValue(PackageXmlEnum.Modified); }
+            set { RecordNewBinding(PackageXmlEnum.Modified, value); }
         }
 
         /// <value>
@@ -245,14 +176,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? LastModifiedBy
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.LastModifiedBy);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.LastModifiedBy, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.LastModifiedBy); }
+            set { RecordNewBinding(PackageXmlEnum.LastModifiedBy, value); }
         }
 
         /// <value>
@@ -260,14 +185,8 @@ namespace System.IO.Packaging
         /// </value>
         public override Nullable<DateTime> LastPrinted
         {
-            get
-            {
-                return GetDateTimePropertyValue(PackageXmlEnum.LastPrinted);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.LastPrinted, value);
-            }
+            get { return GetDateTimePropertyValue(PackageXmlEnum.LastPrinted); }
+            set { RecordNewBinding(PackageXmlEnum.LastPrinted, value); }
         }
 
         /// <value>
@@ -275,14 +194,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Language
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Language);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Language, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Language); }
+            set { RecordNewBinding(PackageXmlEnum.Language, value); }
         }
 
         /// <value>
@@ -290,14 +203,8 @@ namespace System.IO.Packaging
         /// </value>
         public override string? Identifier
         {
-            get
-            {
-                return (string?)GetPropertyValue(PackageXmlEnum.Identifier);
-            }
-            set
-            {
-                RecordNewBinding(PackageXmlEnum.Identifier, value);
-            }
+            get { return (string?)GetPropertyValue(PackageXmlEnum.Identifier); }
+            set { RecordNewBinding(PackageXmlEnum.Identifier, value); }
         }
 
         #endregion Public Properties
@@ -363,14 +270,25 @@ namespace System.IO.Packaging
         // situation: recording a binding to implement a value assignment.
         private void RecordNewBinding(PackageXmlEnum propertyenum, object? value)
         {
-            RecordNewBinding(propertyenum, value, false /* not invoked at construction */, null);
+            RecordNewBinding(
+                propertyenum,
+                value,
+                false /* not invoked at construction */
+                ,
+                null
+            );
         }
 
         // Set new property value.
         // Null value is passed for deleting a property.
         // While initializing, we are not assigning new values, and so the dirty flag should
         // stay untouched.
-        private void RecordNewBinding(PackageXmlEnum propertyenum, object? value, bool initializing, XmlReader? reader)
+        private void RecordNewBinding(
+            PackageXmlEnum propertyenum,
+            object? value,
+            bool initializing,
+            XmlReader? reader
+        )
         {
             // If we are reading values from the package, reader cannot be null
             Debug.Assert(!initializing || reader != null);
@@ -386,8 +304,12 @@ namespace System.IO.Packaging
                 // Parsing should detect redundant entries.
                 if (initializing)
                 {
-                    throw new XmlException(SR.Format(SR.DuplicateCorePropertyName, reader!.Name),
-                        null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                    throw new XmlException(
+                        SR.Format(SR.DuplicateCorePropertyName, reader!.Name),
+                        null,
+                        ((IXmlLineInfo)reader).LineNumber,
+                        ((IXmlLineInfo)reader).LinePosition
+                    );
                 }
 
                 // Nullable<DateTime> values can be checked against null
@@ -443,13 +365,18 @@ namespace System.IO.Packaging
             PackagePart? propertiesPart;
             Uri propertiesPartUri = PackUriHelper.ResolvePartUri(
                 PackUriHelper.PackageRootUri,
-                corePropertiesRelationship.TargetUri);
+                corePropertiesRelationship.TargetUri
+            );
 
             if (!_package.PartExists(propertiesPartUri))
                 throw new FileFormatException(SR.DanglingMetadataRelationship);
 
             propertiesPart = _package.GetPart(propertiesPartUri);
-            if (!propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(s_coreDocumentPropertiesContentType))
+            if (
+                !propertiesPart.ValidatedContentType.AreTypeAndSubTypeEqual(
+                    s_coreDocumentPropertiesContentType
+                )
+            )
             {
                 throw new FileFormatException(SR.WrongContentTypeForPropertyPart);
             }
@@ -461,8 +388,11 @@ namespace System.IO.Packaging
         private PackageRelationship? GetCorePropertiesRelationship()
         {
             PackageRelationship? propertiesPartRelationship = null;
-            foreach (PackageRelationship rel
-                in _package.GetRelationshipsByType(CoreDocumentPropertiesRelationshipType))
+            foreach (
+                PackageRelationship rel in _package.GetRelationshipsByType(
+                    CoreDocumentPropertiesRelationshipType
+                )
+            )
             {
                 if (propertiesPartRelationship != null)
                 {
@@ -491,19 +421,33 @@ namespace System.IO.Packaging
                 //Note: After the previous method call the reader should be at the first tag in the markup.
                 //MoveToContent - Skips over the following - ProcessingInstruction, DocumentType, Comment, Whitespace, or SignificantWhitespace
                 //If the reader is currently at a content node then this function call is a no-op
-                if (reader.MoveToContent() != XmlNodeType.Element
-                    || (object)reader.NamespaceURI != PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.PackageCorePropertiesNamespace)
-                    || (object)reader.LocalName != PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.CoreProperties))
+                if (
+                    reader.MoveToContent() != XmlNodeType.Element
+                    || (object)reader.NamespaceURI
+                        != PackageXmlStringTable.GetXmlStringAsObject(
+                            PackageXmlEnum.PackageCorePropertiesNamespace
+                        )
+                    || (object)reader.LocalName
+                        != PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.CoreProperties)
+                )
                 {
-                    throw new XmlException(SR.CorePropertiesElementExpected,
-                        null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                    throw new XmlException(
+                        SR.CorePropertiesElementExpected,
+                        null,
+                        ((IXmlLineInfo)reader).LineNumber,
+                        ((IXmlLineInfo)reader).LinePosition
+                    );
                 }
 
                 // The schema is closed and defines no attributes on the root element.
                 if (PackagingUtilities.GetNonXmlnsAttributeCount(reader) != 0)
                 {
-                    throw new XmlException(SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
-                        null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                    throw new XmlException(
+                        SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
+                        null,
+                        ((IXmlLineInfo)reader).LineNumber,
+                        ((IXmlLineInfo)reader).LinePosition
+                    );
                 }
 
                 // Iterate through property elements until EOF. Note the proper closing of all
@@ -521,15 +465,23 @@ namespace System.IO.Packaging
                     // Any content markup that is not an element here is unexpected.
                     if (reader.NodeType != XmlNodeType.Element)
                     {
-                        throw new XmlException(SR.PropertyStartTagExpected,
-                            null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                        throw new XmlException(
+                            SR.PropertyStartTagExpected,
+                            null,
+                            ((IXmlLineInfo)reader).LineNumber,
+                            ((IXmlLineInfo)reader).LinePosition
+                        );
                     }
 
                     // Any element below the root should open at level 1 exclusively.
                     if (reader.Depth != 1)
                     {
-                        throw new XmlException(SR.NoStructuredContentInsideProperties,
-                            null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                        throw new XmlException(
+                            SR.NoStructuredContentInsideProperties,
+                            null,
+                            ((IXmlLineInfo)reader).LineNumber,
+                            ((IXmlLineInfo)reader).LinePosition
+                        );
                     }
 
                     attributesCount = PackagingUtilities.GetNonXmlnsAttributeCount(reader);
@@ -539,19 +491,31 @@ namespace System.IO.Packaging
                     PackageXmlEnum xmlStringIndex = PackageXmlStringTable.GetEnumOf(localName);
                     string? valueType = PackageXmlStringTable.GetValueType(xmlStringIndex);
 
-                    if (Array.IndexOf(s_validProperties, xmlStringIndex) == -1)  // An unexpected element is an error.
+                    if (Array.IndexOf(s_validProperties, xmlStringIndex) == -1) // An unexpected element is an error.
                     {
                         throw new XmlException(
                             SR.Format(SR.InvalidPropertyNameInCorePropertiesPart, reader.LocalName),
-                            null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                            null,
+                            ((IXmlLineInfo)reader).LineNumber,
+                            ((IXmlLineInfo)reader).LinePosition
+                        );
                     }
 
                     // Any element not in the valid core properties namespace is unexpected.
                     // The following is an object comparison, not a string comparison.
-                    if ((object)reader.NamespaceURI != PackageXmlStringTable.GetXmlStringAsObject(PackageXmlStringTable.GetXmlNamespace(xmlStringIndex)))
+                    if (
+                        (object)reader.NamespaceURI
+                        != PackageXmlStringTable.GetXmlStringAsObject(
+                            PackageXmlStringTable.GetXmlNamespace(xmlStringIndex)
+                        )
+                    )
                     {
-                        throw new XmlException(SR.UnknownNamespaceInCorePropertiesPart,
-                            null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                        throw new XmlException(
+                            SR.UnknownNamespaceInCorePropertiesPart,
+                            null,
+                            ((IXmlLineInfo)reader).LineNumber,
+                            ((IXmlLineInfo)reader).LinePosition
+                        );
                     }
 
                     if (valueType == "String")
@@ -559,35 +523,63 @@ namespace System.IO.Packaging
                         // The schema is closed and defines no attributes on this type of element.
                         if (attributesCount != 0)
                         {
-                            throw new XmlException(SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
-                                null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                            throw new XmlException(
+                                SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
+                                null,
+                                ((IXmlLineInfo)reader).LineNumber,
+                                ((IXmlLineInfo)reader).LinePosition
+                            );
                         }
 
-                        RecordNewBinding(xmlStringIndex, GetStringData(reader), true /*initializing*/, reader);
+                        RecordNewBinding(
+                            xmlStringIndex,
+                            GetStringData(reader),
+                            true /*initializing*/
+                            ,
+                            reader
+                        );
                     }
                     else if (valueType == "DateTime")
                     {
-                        int allowedAttributeCount = (object)reader.NamespaceURI ==
-                                                            PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.DublinCoreTermsNamespace)
-                                                        ? 1 : 0;
+                        int allowedAttributeCount =
+                            (object)reader.NamespaceURI
+                            == PackageXmlStringTable.GetXmlStringAsObject(
+                                PackageXmlEnum.DublinCoreTermsNamespace
+                            )
+                                ? 1
+                                : 0;
 
                         // The schema is closed and defines no attributes on this type of element.
                         if (attributesCount != allowedAttributeCount)
                         {
-                            throw new XmlException(SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
-                                null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                            throw new XmlException(
+                                SR.Format(SR.PropertyWrongNumbOfAttribsDefinedOn, reader.Name),
+                                null,
+                                ((IXmlLineInfo)reader).LineNumber,
+                                ((IXmlLineInfo)reader).LinePosition
+                            );
                         }
 
                         if (allowedAttributeCount != 0)
                         {
-                            ValidateXsiType(reader,
-                                PackageXmlStringTable.GetXmlStringAsObject(PackageXmlEnum.DublinCoreTermsNamespace),
-                                W3cdtf);
+                            ValidateXsiType(
+                                reader,
+                                PackageXmlStringTable.GetXmlStringAsObject(
+                                    PackageXmlEnum.DublinCoreTermsNamespace
+                                ),
+                                W3cdtf
+                            );
                         }
 
-                        RecordNewBinding(xmlStringIndex, GetDateData(reader), true /*initializing*/, reader);
+                        RecordNewBinding(
+                            xmlStringIndex,
+                            GetDateData(reader),
+                            true /*initializing*/
+                            ,
+                            reader
+                        );
                     }
-                    else  // An unexpected element is an error.
+                    else // An unexpected element is an error.
                     {
                         Debug.Fail("Unknown value type for properties");
                     }
@@ -602,14 +594,20 @@ namespace System.IO.Packaging
         internal static void ValidateXsiType(XmlReader reader, object ns, string name)
         {
             // Get the value of xsi;type
-            string? typeValue = reader.GetAttribute(PackageXmlStringTable.GetXmlString(PackageXmlEnum.Type),
-                                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespace));
+            string? typeValue = reader.GetAttribute(
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.Type),
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespace)
+            );
 
             // Missing xsi:type
             if (typeValue == null)
             {
-                throw new XmlException(SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
-                    null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
+                    null,
+                    ((IXmlLineInfo)reader).LineNumber,
+                    ((IXmlLineInfo)reader).LinePosition
+                );
             }
 
             int index = typeValue.IndexOf(':');
@@ -617,18 +615,28 @@ namespace System.IO.Packaging
             // The value of xsi:type is not a qualified name
             if (index == -1)
             {
-                throw new XmlException(SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
-                    null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
+                    null,
+                    ((IXmlLineInfo)reader).LineNumber,
+                    ((IXmlLineInfo)reader).LinePosition
+                );
             }
 
             // Check the following conditions
             //  The namespace of the prefix (string before ":") matches "ns"
             //  The name (string after ":") matches "name"
-            if (!object.ReferenceEquals(ns, reader.LookupNamespace(typeValue.Substring(0, index)))
-                    || !name.AsSpan().SequenceEqual(typeValue.AsSpan(index + 1)))
+            if (
+                !object.ReferenceEquals(ns, reader.LookupNamespace(typeValue.Substring(0, index)))
+                || !name.AsSpan().SequenceEqual(typeValue.AsSpan(index + 1))
+            )
             {
-                throw new XmlException(SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
-                    null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                throw new XmlException(
+                    SR.Format(SR.UnknownDCDateTimeXsiType, reader.Name),
+                    null,
+                    ((IXmlLineInfo)reader).LineNumber,
+                    ((IXmlLineInfo)reader).LinePosition
+                );
             }
         }
 
@@ -645,8 +653,12 @@ namespace System.IO.Packaging
             // If there is any content in the element, it should be text content and nothing else.
             if (reader.NodeType != XmlNodeType.Text)
             {
-                throw new XmlException(SR.NoStructuredContentInsideProperties,
-                    null, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                throw new XmlException(
+                    SR.NoStructuredContentInsideProperties,
+                    null,
+                    ((IXmlLineInfo)reader).LineNumber,
+                    ((IXmlLineInfo)reader).LinePosition
+                );
             }
 
             return reader.Value;
@@ -663,12 +675,21 @@ namespace System.IO.Packaging
                 // Note: No more than 7 second decimals are accepted by the
                 // list of formats given. There currently is no method that
                 // would perform XSD-compliant parsing.
-                dateTime = DateTime.ParseExact(data, s_dateTimeFormats, CultureInfo.InvariantCulture, DateTimeStyles.None);
+                dateTime = DateTime.ParseExact(
+                    data,
+                    s_dateTimeFormats,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None
+                );
             }
             catch (FormatException exc)
             {
-                throw new XmlException(SR.XsdDateTimeExpected,
-                    exc, ((IXmlLineInfo)reader).LineNumber, ((IXmlLineInfo)reader).LinePosition);
+                throw new XmlException(
+                    SR.XsdDateTimeExpected,
+                    exc,
+                    ((IXmlLineInfo)reader).LineNumber,
+                    ((IXmlLineInfo)reader).LinePosition
+                );
             }
             return dateTime;
         }
@@ -684,7 +705,10 @@ namespace System.IO.Packaging
 
             zipStream = _propertyPart.GetStream(FileMode.Create, FileAccess.Write);
             Stream writerStream = new IgnoreFlushAndCloseStream(zipStream);
-            _xmlWriter = XmlWriter.Create(writerStream, new XmlWriterSettings { Encoding = System.Text.Encoding.UTF8 });
+            _xmlWriter = XmlWriter.Create(
+                writerStream,
+                new XmlWriterSettings { Encoding = System.Text.Encoding.UTF8 }
+            );
             WriteXmlStartTagsForPackageProperties();
         }
 
@@ -702,7 +726,10 @@ namespace System.IO.Packaging
             // outside of this class.
             // In write-only mode, it is impossible to perform this check, and the external creation
             // scenario will result in an exception being thrown.
-            if (_package.FileOpenAccess == FileAccess.Read || _package.FileOpenAccess == FileAccess.ReadWrite)
+            if (
+                _package.FileOpenAccess == FileAccess.Read
+                || _package.FileOpenAccess == FileAccess.ReadWrite
+            )
             {
                 _propertyPart = GetPropertyPart();
                 if (_propertyPart != null)
@@ -720,14 +747,21 @@ namespace System.IO.Packaging
         [MemberNotNull(nameof(_propertyPart))]
         private void CreatePropertyPart()
         {
-            _propertyPart = _package.CreatePart(GeneratePropertyPartUri(), s_coreDocumentPropertiesContentType.ToString());
-            _package.CreateRelationship(_propertyPart.Uri, TargetMode.Internal,
-                CoreDocumentPropertiesRelationshipType);
+            _propertyPart = _package.CreatePart(
+                GeneratePropertyPartUri(),
+                s_coreDocumentPropertiesContentType.ToString()
+            );
+            _package.CreateRelationship(
+                _propertyPart.Uri,
+                TargetMode.Internal,
+                CoreDocumentPropertiesRelationshipType
+            );
         }
 
         private static Uri GeneratePropertyPartUri()
         {
-            string propertyPartName = DefaultPropertyPartNamePrefix
+            string propertyPartName =
+                DefaultPropertyPartNamePrefix
                 + Guid.NewGuid().ToString(GuidStorageFormatString)
                 + DefaultPropertyPartNameExtension;
 
@@ -741,25 +775,35 @@ namespace System.IO.Packaging
             _xmlWriter.WriteStartDocument();
 
             // <coreProperties
-            _xmlWriter.WriteStartElement(PackageXmlStringTable.GetXmlString(PackageXmlEnum.CoreProperties),              // local name
-                                         PackageXmlStringTable.GetXmlString(PackageXmlEnum.PackageCorePropertiesNamespace));                                      // namespace
+            _xmlWriter.WriteStartElement(
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.CoreProperties), // local name
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.PackageCorePropertiesNamespace)
+            ); // namespace
 
             // xmlns:dc
-            _xmlWriter.WriteAttributeString(PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCorePropertiesNamespacePrefix),
-                                            null,
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCorePropertiesNamespace));
+            _xmlWriter.WriteAttributeString(
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
+                PackageXmlStringTable.GetXmlString(
+                    PackageXmlEnum.DublinCorePropertiesNamespacePrefix
+                ),
+                null,
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCorePropertiesNamespace)
+            );
 
             // xmlns:dcterms
-            _xmlWriter.WriteAttributeString(PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublincCoreTermsNamespacePrefix),
-                                            null,
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCoreTermsNamespace));
+            _xmlWriter.WriteAttributeString(
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublincCoreTermsNamespacePrefix),
+                null,
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCoreTermsNamespace)
+            );
             // xmlns:xsi
-            _xmlWriter.WriteAttributeString(PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespacePrefix),
-                                            null,
-                                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespace));
+            _xmlWriter.WriteAttributeString(
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlNamespacePrefix),
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespacePrefix),
+                null,
+                PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespace)
+            );
         }
 
         // Write the property elements and clear _dirty.
@@ -774,27 +818,42 @@ namespace System.IO.Packaging
 
                 PackageXmlEnum propertyNamespace = PackageXmlStringTable.GetXmlNamespace(entry.Key);
 
-                _xmlWriter.WriteStartElement(PackageXmlStringTable.GetXmlString(entry.Key),
-                                                PackageXmlStringTable.GetXmlString(propertyNamespace));
+                _xmlWriter.WriteStartElement(
+                    PackageXmlStringTable.GetXmlString(entry.Key),
+                    PackageXmlStringTable.GetXmlString(propertyNamespace)
+                );
 
                 if (entry.Value is Nullable<DateTime>)
                 {
                     if (propertyNamespace == PackageXmlEnum.DublinCoreTermsNamespace)
                     {
                         // xsi:type=
-                        _xmlWriter.WriteStartAttribute(PackageXmlStringTable.GetXmlString(PackageXmlEnum.Type),
-                                                        PackageXmlStringTable.GetXmlString(PackageXmlEnum.XmlSchemaInstanceNamespace));
+                        _xmlWriter.WriteStartAttribute(
+                            PackageXmlStringTable.GetXmlString(PackageXmlEnum.Type),
+                            PackageXmlStringTable.GetXmlString(
+                                PackageXmlEnum.XmlSchemaInstanceNamespace
+                            )
+                        );
 
                         // "dcterms:W3CDTF"
-                        _xmlWriter.WriteQualifiedName(W3cdtf,
-                                                        PackageXmlStringTable.GetXmlString(PackageXmlEnum.DublinCoreTermsNamespace));
+                        _xmlWriter.WriteQualifiedName(
+                            W3cdtf,
+                            PackageXmlStringTable.GetXmlString(
+                                PackageXmlEnum.DublinCoreTermsNamespace
+                            )
+                        );
 
                         _xmlWriter.WriteEndAttribute();
                     }
 
                     // Use sortable ISO 8601 date/time pattern. Include second fractions down to the 100-nanosecond interval,
                     // which is the definition of a "tick" for the DateTime type.
-                    _xmlWriter.WriteString(XmlConvert.ToString(((Nullable<DateTime>)entry.Value).Value.ToUniversalTime(), "yyyy-MM-ddTHH:mm:ss.fffffffZ"));
+                    _xmlWriter.WriteString(
+                        XmlConvert.ToString(
+                            ((Nullable<DateTime>)entry.Value).Value.ToUniversalTime(),
+                            "yyyy-MM-ddTHH:mm:ss.fffffffZ"
+                        )
+                    );
                 }
                 else
                 {
@@ -835,7 +894,10 @@ namespace System.IO.Packaging
         // Table of objects from the closed set of literals defined below.
         // (Uses object comparison rather than string comparison.)
         private const int NumCoreProperties = 16;
-        private readonly Dictionary<PackageXmlEnum, object> _propertyDictionary = new Dictionary<PackageXmlEnum, object>(NumCoreProperties);
+        private readonly Dictionary<PackageXmlEnum, object> _propertyDictionary = new Dictionary<
+            PackageXmlEnum,
+            object
+        >(NumCoreProperties);
         private bool _dirty;
 
         // This System.Xml.NameTable makes sure that we use the same references to strings
@@ -844,35 +906,37 @@ namespace System.IO.Packaging
         private readonly NameTable _nameTable;
 
         // Literals.
-        private static readonly ContentType s_coreDocumentPropertiesContentType
-            = new ContentType("application/vnd.openxmlformats-package.core-properties+xml");
-        private const string CoreDocumentPropertiesRelationshipType
-            = "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties";
+        private static readonly ContentType s_coreDocumentPropertiesContentType = new ContentType(
+            "application/vnd.openxmlformats-package.core-properties+xml"
+        );
+        private const string CoreDocumentPropertiesRelationshipType =
+            "http://schemas.openxmlformats.org/package/2006/relationships/metadata/core-properties";
 
         private const string DefaultPropertyPartNamePrefix =
             "/package/services/metadata/core-properties/";
         private const string W3cdtf = "W3CDTF";
         private const string DefaultPropertyPartNameExtension = ".psmdcp";
-        private const string GuidStorageFormatString = @"N";     // N - simple format without adornments
+        private const string GuidStorageFormatString = @"N"; // N - simple format without adornments
 
-        private static readonly PackageXmlEnum[] s_validProperties = new PackageXmlEnum[] {
-                                                                                PackageXmlEnum.Creator,
-                                                                                PackageXmlEnum.Identifier,
-                                                                                PackageXmlEnum.Title,
-                                                                                PackageXmlEnum.Subject,
-                                                                                PackageXmlEnum.Description,
-                                                                                PackageXmlEnum.Language,
-                                                                                PackageXmlEnum.Created,
-                                                                                PackageXmlEnum.Modified,
-                                                                                PackageXmlEnum.ContentType,
-                                                                                PackageXmlEnum.Keywords,
-                                                                                PackageXmlEnum.Category,
-                                                                                PackageXmlEnum.Version,
-                                                                                PackageXmlEnum.LastModifiedBy,
-                                                                                PackageXmlEnum.ContentStatus,
-                                                                                PackageXmlEnum.Revision,
-                                                                                PackageXmlEnum.LastPrinted
-                                                                                };
+        private static readonly PackageXmlEnum[] s_validProperties = new PackageXmlEnum[]
+        {
+            PackageXmlEnum.Creator,
+            PackageXmlEnum.Identifier,
+            PackageXmlEnum.Title,
+            PackageXmlEnum.Subject,
+            PackageXmlEnum.Description,
+            PackageXmlEnum.Language,
+            PackageXmlEnum.Created,
+            PackageXmlEnum.Modified,
+            PackageXmlEnum.ContentType,
+            PackageXmlEnum.Keywords,
+            PackageXmlEnum.Category,
+            PackageXmlEnum.Version,
+            PackageXmlEnum.LastModifiedBy,
+            PackageXmlEnum.ContentStatus,
+            PackageXmlEnum.Revision,
+            PackageXmlEnum.LastPrinted,
+        };
 
         // Array of formats to supply to XmlConvert.ToDateTime or DateTime.ParseExact.
         // xsd:DateTime requires full date time in sortable (ISO 8601) format.
@@ -881,56 +945,50 @@ namespace System.IO.Packaging
         // IMPORTANT: Second fractions are recognized only down to 1 tenth of a microsecond because this is the resolution
         // of the DateTime type. The Xml standard, however, allows any number of decimals; but XmlConvert only offers
         // this very awkward API with an explicit pattern enumeration.
-        private static readonly string[] s_dateTimeFormats = new string[] {
+        private static readonly string[] s_dateTimeFormats = new string[]
+        {
             "yyyy-MM-ddTHH:mm:ss",
             "yyyy-MM-ddTHH:mm:ssZ",
             "yyyy-MM-ddTHH:mm:sszzz",
             @"\-yyyy-MM-ddTHH:mm:ss",
             @"\-yyyy-MM-ddTHH:mm:ssZ",
             @"\-yyyy-MM-ddTHH:mm:sszzz",
-
             "yyyy-MM-ddTHH:mm:ss.ff",
             "yyyy-MM-ddTHH:mm:ss.fZ",
             "yyyy-MM-ddTHH:mm:ss.fzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.f",
             @"\-yyyy-MM-ddTHH:mm:ss.fZ",
             @"\-yyyy-MM-ddTHH:mm:ss.fzzz",
-
             "yyyy-MM-ddTHH:mm:ss.ff",
             "yyyy-MM-ddTHH:mm:ss.ffZ",
             "yyyy-MM-ddTHH:mm:ss.ffzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.ff",
             @"\-yyyy-MM-ddTHH:mm:ss.ffZ",
             @"\-yyyy-MM-ddTHH:mm:ss.ffzzz",
-
             "yyyy-MM-ddTHH:mm:ss.fff",
             "yyyy-MM-ddTHH:mm:ss.fffZ",
             "yyyy-MM-ddTHH:mm:ss.fffzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.fff",
             @"\-yyyy-MM-ddTHH:mm:ss.fffZ",
             @"\-yyyy-MM-ddTHH:mm:ss.fffzzz",
-
             "yyyy-MM-ddTHH:mm:ss.ffff",
             "yyyy-MM-ddTHH:mm:ss.ffffZ",
             "yyyy-MM-ddTHH:mm:ss.ffffzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.ffff",
             @"\-yyyy-MM-ddTHH:mm:ss.ffffZ",
             @"\-yyyy-MM-ddTHH:mm:ss.ffffzzz",
-
             "yyyy-MM-ddTHH:mm:ss.fffff",
             "yyyy-MM-ddTHH:mm:ss.fffffZ",
             "yyyy-MM-ddTHH:mm:ss.fffffzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.fffff",
             @"\-yyyy-MM-ddTHH:mm:ss.fffffZ",
             @"\-yyyy-MM-ddTHH:mm:ss.fffffzzz",
-
             "yyyy-MM-ddTHH:mm:ss.ffffff",
             "yyyy-MM-ddTHH:mm:ss.ffffffZ",
             "yyyy-MM-ddTHH:mm:ss.ffffffzzz",
             @"\-yyyy-MM-ddTHH:mm:ss.ffffff",
             @"\-yyyy-MM-ddTHH:mm:ss.ffffffZ",
             @"\-yyyy-MM-ddTHH:mm:ss.ffffffzzz",
-
             "yyyy-MM-ddTHH:mm:ss.fffffff",
             "yyyy-MM-ddTHH:mm:ss.fffffffZ",
             "yyyy-MM-ddTHH:mm:ss.fffffffzzz",

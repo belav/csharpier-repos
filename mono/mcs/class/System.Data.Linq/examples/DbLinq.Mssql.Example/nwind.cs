@@ -3,46 +3,80 @@
 //#########################################################################
 
 using System;
-using System.Diagnostics;
 using System.Collections.Generic;
-using System.Text;
-using System.Linq;
 //using System.Data.Linq;
 using System.Data.Linq.Mapping;
+using System.Diagnostics;
+using System.Linq;
+using System.Text;
 using DbLinq.Linq;
 using DbLinq.SqlServer;
 
 namespace nwind
 {
-
     /// <summary>
     /// This class represents Microsoft database Northwind.
     /// </summary>
     public partial class Northwind : DataContext
     {
         public Northwind(string connStr)
-            : base(new System.Data.SqlClient.SqlConnection(connStr), new SqlServerVendor())
-        {
-        }
+            : base(new System.Data.SqlClient.SqlConnection(connStr), new SqlServerVendor()) { }
 
         //these fields represent tables in database and are
         //ordered - parent tables first, child tables next. Do not change the order.
-        public Table<Categories> Categories { get { return GetTable<Categories>(); } }
-        public Table<CustomerCustomerDemo> CustomerCustomerDemos { get { return GetTable<CustomerCustomerDemo>(); } }
-        public Table<CustomerDemographics> CustomerDemographics { get { return GetTable<CustomerDemographics>(); } }
-        public Table<Customers> Customers { get { return GetTable<Customers>(); } }
-        public Table<Employees> Employees { get { return GetTable<Employees>(); } }
-        public Table<EmployeeTerritories> EmployeeTerritories { get { return GetTable<EmployeeTerritories>(); } }
-        public Table<OrderDetails> OrderDetails { get { return GetTable<OrderDetails>(); } }
-        public Table<Orders> Orders { get { return GetTable<Orders>(); } }
-        public Table<Products> Products { get { return GetTable<Products>(); } }
-        public Table<Region> Regions { get { return GetTable<Region>(); } }
-        public Table<Shippers> Shippers { get { return GetTable<Shippers>(); } }
-        public Table<Suppliers> Suppliers { get { return GetTable<Suppliers>(); } }
-        public Table<Territories> Territories { get { return GetTable<Territories>(); } }
+        public Table<Categories> Categories
+        {
+            get { return GetTable<Categories>(); }
+        }
+        public Table<CustomerCustomerDemo> CustomerCustomerDemos
+        {
+            get { return GetTable<CustomerCustomerDemo>(); }
+        }
+        public Table<CustomerDemographics> CustomerDemographics
+        {
+            get { return GetTable<CustomerDemographics>(); }
+        }
+        public Table<Customers> Customers
+        {
+            get { return GetTable<Customers>(); }
+        }
+        public Table<Employees> Employees
+        {
+            get { return GetTable<Employees>(); }
+        }
+        public Table<EmployeeTerritories> EmployeeTerritories
+        {
+            get { return GetTable<EmployeeTerritories>(); }
+        }
+        public Table<OrderDetails> OrderDetails
+        {
+            get { return GetTable<OrderDetails>(); }
+        }
+        public Table<Orders> Orders
+        {
+            get { return GetTable<Orders>(); }
+        }
+        public Table<Products> Products
+        {
+            get { return GetTable<Products>(); }
+        }
+        public Table<Region> Regions
+        {
+            get { return GetTable<Region>(); }
+        }
+        public Table<Shippers> Shippers
+        {
+            get { return GetTable<Shippers>(); }
+        }
+        public Table<Suppliers> Suppliers
+        {
+            get { return GetTable<Suppliers>(); }
+        }
+        public Table<Territories> Territories
+        {
+            get { return GetTable<Territories>(); }
+        }
     }
-
-
 
     [Table(Name = "dbo.Categories")]
     public partial class Categories : IModified
@@ -63,12 +97,15 @@ namespace nwind
 
         protected System.Data.Linq.Binary _Picture;
 
-
         #region costructors
-        public Categories()
-        {
-        }
-        public Categories(int CategoryID, string CategoryName, string Description, System.Data.Linq.Binary Picture)
+        public Categories() { }
+
+        public Categories(
+            int CategoryID,
+            string CategoryName,
+            string Description,
+            System.Data.Linq.Binary Picture
+        )
         {
             this._CategoryID = CategoryID;
             this._CategoryName = CategoryName;
@@ -80,39 +117,57 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "CategoryID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "CategoryID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int CategoryID
         {
             get { return _CategoryID; }
-            set { _CategoryID = value; _isModified_ = true; }
+            set
+            {
+                _CategoryID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CategoryName", DbType = "NVarChar(15) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string CategoryName
         {
             get { return _CategoryName; }
-            set { _CategoryName = value; _isModified_ = true; }
+            set
+            {
+                _CategoryName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Description", DbType = "NText", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Description
         {
             get { return _Description; }
-            set { _Description = value; _isModified_ = true; }
+            set
+            {
+                _Description = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Picture", DbType = "Image", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.Data.Linq.Binary Picture
         {
             get { return _Picture; }
-            set { _Picture = value; _isModified_ = true; }
+            set
+            {
+                _Picture = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -123,6 +178,7 @@ namespace nwind
         {
             return _CategoryID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Categories o2 = obj as Categories;
@@ -138,10 +194,7 @@ namespace nwind
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.CustomerCustomerDemo")]
     public partial class CustomerCustomerDemo : IModified
@@ -153,16 +206,13 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected string _CustomerID;
 
         protected string _CustomerTypeID;
 
-
         #region costructors
-        public CustomerCustomerDemo()
-        {
-        }
+        public CustomerCustomerDemo() { }
+
         public CustomerCustomerDemo(string CustomerID, string CustomerTypeID)
         {
             this._CustomerID = CustomerID;
@@ -178,16 +228,23 @@ namespace nwind
         public string CustomerID
         {
             get { return _CustomerID; }
-            set { _CustomerID = value; _isModified_ = true; }
+            set
+            {
+                _CustomerID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CustomerTypeID", DbType = "NChar(10) NOT NULL", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
         public string CustomerTypeID
         {
             get { return _CustomerTypeID; }
-            set { _CustomerTypeID = value; _isModified_ = true; }
+            set
+            {
+                _CustomerTypeID = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -198,6 +255,7 @@ namespace nwind
         {
             return _CustomerID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             CustomerCustomerDemo o2 = obj as CustomerCustomerDemo;
@@ -211,7 +269,11 @@ namespace nwind
 
         private System.Data.Linq.EntityRef<CustomerDemographics> _CustomerDemographics;
 
-        [Association(Storage = "_CustomerDemographics", ThisKey = "CustomerTypeID", Name = "FK_CustomerCustomerDemo")]
+        [Association(
+            Storage = "_CustomerDemographics",
+            ThisKey = "CustomerTypeID",
+            Name = "FK_CustomerCustomerDemo"
+        )]
         [DebuggerNonUserCode]
         public CustomerDemographics CustomerDemographics
         {
@@ -219,20 +281,20 @@ namespace nwind
             set { this._CustomerDemographics.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Customers> _Customers;
 
-        [Association(Storage = "_Customers", ThisKey = "CustomerID", Name = "FK_CustomerCustomerDemo_Customers")]
+        [Association(
+            Storage = "_Customers",
+            ThisKey = "CustomerID",
+            Name = "FK_CustomerCustomerDemo_Customers"
+        )]
         [DebuggerNonUserCode]
         public Customers Customers
         {
             get { return this._Customers.Entity; }
             set { this._Customers.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.CustomerDemographics")]
     public partial class CustomerDemographics : IModified
@@ -244,16 +306,13 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected string _CustomerTypeID;
 
         protected string _CustomerDesc;
 
-
         #region costructors
-        public CustomerDemographics()
-        {
-        }
+        public CustomerDemographics() { }
+
         public CustomerDemographics(string CustomerTypeID, string CustomerDesc)
         {
             this._CustomerTypeID = CustomerTypeID;
@@ -269,16 +328,23 @@ namespace nwind
         public string CustomerTypeID
         {
             get { return _CustomerTypeID; }
-            set { _CustomerTypeID = value; _isModified_ = true; }
+            set
+            {
+                _CustomerTypeID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CustomerDesc", DbType = "NText", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string CustomerDesc
         {
             get { return _CustomerDesc; }
-            set { _CustomerDesc = value; _isModified_ = true; }
+            set
+            {
+                _CustomerDesc = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -289,6 +355,7 @@ namespace nwind
         {
             return _CustomerTypeID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             CustomerDemographics o2 = obj as CustomerDemographics;
@@ -299,15 +366,16 @@ namespace nwind
         #endregion
 
 
-        [Association(Storage = "null", OtherKey = "CustomerTypeID", Name = "FK_CustomerCustomerDemo")]
+        [Association(
+            Storage = "null",
+            OtherKey = "CustomerTypeID",
+            Name = "FK_CustomerCustomerDemo"
+        )]
         public EntityMSet<CustomerCustomerDemo> CustomerCustomerDemo
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.Customers")]
     public partial class Customers : IModified
@@ -318,7 +386,6 @@ namespace nwind
             get { return _isModified_; }
             set { _isModified_ = value; }
         }
-
 
         protected string _CustomerID;
 
@@ -342,12 +409,22 @@ namespace nwind
 
         protected string _Fax;
 
-
         #region costructors
-        public Customers()
-        {
-        }
-        public Customers(string CustomerID, string CompanyName, string ContactName, string ContactTitle, string Address, string City, string Region, string PostalCode, string Country, string Phone, string Fax)
+        public Customers() { }
+
+        public Customers(
+            string CustomerID,
+            string CompanyName,
+            string ContactName,
+            string ContactTitle,
+            string Address,
+            string City,
+            string Region,
+            string PostalCode,
+            string Country,
+            string Phone,
+            string Fax
+        )
         {
             this._CustomerID = CustomerID;
             this._CompanyName = CompanyName;
@@ -371,97 +448,131 @@ namespace nwind
         public string CustomerID
         {
             get { return _CustomerID; }
-            set { _CustomerID = value; _isModified_ = true; }
+            set
+            {
+                _CustomerID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CompanyName", DbType = "NVarChar(40) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string CompanyName
         {
             get { return _CompanyName; }
-            set { _CompanyName = value; _isModified_ = true; }
+            set
+            {
+                _CompanyName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ContactName", DbType = "NVarChar(30)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ContactName
         {
             get { return _ContactName; }
-            set { _ContactName = value; _isModified_ = true; }
+            set
+            {
+                _ContactName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ContactTitle", DbType = "NVarChar(30)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ContactTitle
         {
             get { return _ContactTitle; }
-            set { _ContactTitle = value; _isModified_ = true; }
+            set
+            {
+                _ContactTitle = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Address", DbType = "NVarChar(60)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Address
         {
             get { return _Address; }
-            set { _Address = value; _isModified_ = true; }
+            set
+            {
+                _Address = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "City", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string City
         {
             get { return _City; }
-            set { _City = value; _isModified_ = true; }
+            set
+            {
+                _City = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Region", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Region
         {
             get { return _Region; }
-            set { _Region = value; _isModified_ = true; }
+            set
+            {
+                _Region = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "PostalCode", DbType = "NVarChar(10)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string PostalCode
         {
             get { return _PostalCode; }
-            set { _PostalCode = value; _isModified_ = true; }
+            set
+            {
+                _PostalCode = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Country", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Country
         {
             get { return _Country; }
-            set { _Country = value; _isModified_ = true; }
+            set
+            {
+                _Country = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Phone", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Phone
         {
             get { return _Phone; }
-            set { _Phone = value; _isModified_ = true; }
+            set
+            {
+                _Phone = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Fax", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Fax
         {
             get { return _Fax; }
-            set { _Fax = value; _isModified_ = true; }
+            set
+            {
+                _Fax = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -472,6 +583,7 @@ namespace nwind
         {
             return _CustomerID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Customers o2 = obj as Customers;
@@ -482,7 +594,11 @@ namespace nwind
         #endregion
 
 
-        [Association(Storage = "null", OtherKey = "CustomerID", Name = "FK_CustomerCustomerDemo_Customers")]
+        [Association(
+            Storage = "null",
+            OtherKey = "CustomerID",
+            Name = "FK_CustomerCustomerDemo_Customers"
+        )]
         public EntityMSet<CustomerCustomerDemo> CustomerCustomerDemo
         {
             get { return null; } //TODO L212
@@ -493,10 +609,7 @@ namespace nwind
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.Employees")]
     public partial class Employees : IModified
@@ -545,12 +658,29 @@ namespace nwind
 
         protected string _PhotoPath;
 
-
         #region costructors
-        public Employees()
-        {
-        }
-        public Employees(int EmployeeID, string LastName, string FirstName, string Title, string TitleOfCourtesy, System.DateTime? BirthDate, System.DateTime? HireDate, string Address, string City, string Region, string PostalCode, string Country, string HomePhone, string Extension, System.Data.Linq.Binary Photo, string Notes, int? ReportsTo, string PhotoPath)
+        public Employees() { }
+
+        public Employees(
+            int EmployeeID,
+            string LastName,
+            string FirstName,
+            string Title,
+            string TitleOfCourtesy,
+            System.DateTime? BirthDate,
+            System.DateTime? HireDate,
+            string Address,
+            string City,
+            string Region,
+            string PostalCode,
+            string Country,
+            string HomePhone,
+            string Extension,
+            System.Data.Linq.Binary Photo,
+            string Notes,
+            int? ReportsTo,
+            string PhotoPath
+        )
         {
             this._EmployeeID = EmployeeID;
             this._LastName = LastName;
@@ -576,165 +706,225 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "EmployeeID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "EmployeeID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int EmployeeID
         {
             get { return _EmployeeID; }
-            set { _EmployeeID = value; _isModified_ = true; }
+            set
+            {
+                _EmployeeID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "LastName", DbType = "NVarChar(20) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string LastName
         {
             get { return _LastName; }
-            set { _LastName = value; _isModified_ = true; }
+            set
+            {
+                _LastName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "FirstName", DbType = "NVarChar(10) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string FirstName
         {
             get { return _FirstName; }
-            set { _FirstName = value; _isModified_ = true; }
+            set
+            {
+                _FirstName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Title", DbType = "NVarChar(30)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Title
         {
             get { return _Title; }
-            set { _Title = value; _isModified_ = true; }
+            set
+            {
+                _Title = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "TitleOfCourtesy", DbType = "NVarChar(25)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string TitleOfCourtesy
         {
             get { return _TitleOfCourtesy; }
-            set { _TitleOfCourtesy = value; _isModified_ = true; }
+            set
+            {
+                _TitleOfCourtesy = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "BirthDate", DbType = "DateTime", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.DateTime? BirthDate
         {
             get { return _BirthDate; }
-            set { _BirthDate = value; _isModified_ = true; }
+            set
+            {
+                _BirthDate = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "HireDate", DbType = "DateTime", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.DateTime? HireDate
         {
             get { return _HireDate; }
-            set { _HireDate = value; _isModified_ = true; }
+            set
+            {
+                _HireDate = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Address", DbType = "NVarChar(60)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Address
         {
             get { return _Address; }
-            set { _Address = value; _isModified_ = true; }
+            set
+            {
+                _Address = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "City", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string City
         {
             get { return _City; }
-            set { _City = value; _isModified_ = true; }
+            set
+            {
+                _City = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Region", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Region
         {
             get { return _Region; }
-            set { _Region = value; _isModified_ = true; }
+            set
+            {
+                _Region = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "PostalCode", DbType = "NVarChar(10)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string PostalCode
         {
             get { return _PostalCode; }
-            set { _PostalCode = value; _isModified_ = true; }
+            set
+            {
+                _PostalCode = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Country", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Country
         {
             get { return _Country; }
-            set { _Country = value; _isModified_ = true; }
+            set
+            {
+                _Country = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "HomePhone", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string HomePhone
         {
             get { return _HomePhone; }
-            set { _HomePhone = value; _isModified_ = true; }
+            set
+            {
+                _HomePhone = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Extension", DbType = "NVarChar(4)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Extension
         {
             get { return _Extension; }
-            set { _Extension = value; _isModified_ = true; }
+            set
+            {
+                _Extension = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Photo", DbType = "Image", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.Data.Linq.Binary Photo
         {
             get { return _Photo; }
-            set { _Photo = value; _isModified_ = true; }
+            set
+            {
+                _Photo = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Notes", DbType = "NText", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Notes
         {
             get { return _Notes; }
-            set { _Notes = value; _isModified_ = true; }
+            set
+            {
+                _Notes = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ReportsTo", DbType = "Int", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? ReportsTo
         {
             get { return _ReportsTo; }
-            set { _ReportsTo = value; _isModified_ = true; }
+            set
+            {
+                _ReportsTo = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "PhotoPath", DbType = "NVarChar(255)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string PhotoPath
         {
             get { return _PhotoPath; }
-            set { _PhotoPath = value; _isModified_ = true; }
+            set
+            {
+                _PhotoPath = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -745,6 +935,7 @@ namespace nwind
         {
             return _EmployeeID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Employees o2 = obj as Employees;
@@ -761,7 +952,11 @@ namespace nwind
             get { return null; } //TODO L212
         }
 
-        [Association(Storage = "null", OtherKey = "EmployeeID", Name = "FK_EmployeeTerritories_Employees")]
+        [Association(
+            Storage = "null",
+            OtherKey = "EmployeeID",
+            Name = "FK_EmployeeTerritories_Employees"
+        )]
         public EntityMSet<EmployeeTerritories> EmployeeTerritories
         {
             get { return null; } //TODO L212
@@ -775,17 +970,18 @@ namespace nwind
 
         private System.Data.Linq.EntityRef<Employees> _Employees;
 
-        [Association(Storage = "_Employees", ThisKey = "ReportsTo", Name = "FK_Employees_Employees")]
+        [Association(
+            Storage = "_Employees",
+            ThisKey = "ReportsTo",
+            Name = "FK_Employees_Employees"
+        )]
         [DebuggerNonUserCode]
         public Employees ReportsToEmployees
         {
             get { return this._Employees.Entity; }
             set { this._Employees.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.EmployeeTerritories")]
     public partial class EmployeeTerritories : IModified
@@ -797,16 +993,13 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected int _EmployeeID;
 
         protected string _TerritoryID;
 
-
         #region costructors
-        public EmployeeTerritories()
-        {
-        }
+        public EmployeeTerritories() { }
+
         public EmployeeTerritories(int EmployeeID, string TerritoryID)
         {
             this._EmployeeID = EmployeeID;
@@ -822,16 +1015,23 @@ namespace nwind
         public int EmployeeID
         {
             get { return _EmployeeID; }
-            set { _EmployeeID = value; _isModified_ = true; }
+            set
+            {
+                _EmployeeID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "TerritoryID", DbType = "NVarChar(20) NOT NULL", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
         public string TerritoryID
         {
             get { return _TerritoryID; }
-            set { _TerritoryID = value; _isModified_ = true; }
+            set
+            {
+                _TerritoryID = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -842,6 +1042,7 @@ namespace nwind
         {
             return _EmployeeID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             EmployeeTerritories o2 = obj as EmployeeTerritories;
@@ -855,7 +1056,11 @@ namespace nwind
 
         private System.Data.Linq.EntityRef<Employees> _Employees;
 
-        [Association(Storage = "_Employees", ThisKey = "EmployeeID", Name = "FK_EmployeeTerritories_Employees")]
+        [Association(
+            Storage = "_Employees",
+            ThisKey = "EmployeeID",
+            Name = "FK_EmployeeTerritories_Employees"
+        )]
         [DebuggerNonUserCode]
         public Employees Employees
         {
@@ -863,20 +1068,20 @@ namespace nwind
             set { this._Employees.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Territories> _Territories;
 
-        [Association(Storage = "_Territories", ThisKey = "TerritoryID", Name = "FK_EmployeeTerritories_Territories")]
+        [Association(
+            Storage = "_Territories",
+            ThisKey = "TerritoryID",
+            Name = "FK_EmployeeTerritories_Territories"
+        )]
         [DebuggerNonUserCode]
         public Territories Territories
         {
             get { return this._Territories.Entity; }
             set { this._Territories.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.Order Details")]
     public partial class OrderDetails : IModified
@@ -888,7 +1093,6 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected int _OrderID;
 
         protected int _ProductID;
@@ -899,12 +1103,16 @@ namespace nwind
 
         protected System.Single _Discount;
 
-
         #region costructors
-        public OrderDetails()
-        {
-        }
-        public OrderDetails(int OrderID, int ProductID, decimal UnitPrice, short Quantity, System.Single Discount)
+        public OrderDetails() { }
+
+        public OrderDetails(
+            int OrderID,
+            int ProductID,
+            decimal UnitPrice,
+            short Quantity,
+            System.Single Discount
+        )
         {
             this._OrderID = OrderID;
             this._ProductID = ProductID;
@@ -922,43 +1130,59 @@ namespace nwind
         public int OrderID
         {
             get { return _OrderID; }
-            set { _OrderID = value; _isModified_ = true; }
+            set
+            {
+                _OrderID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ProductID", DbType = "Int NOT NULL", IsPrimaryKey = true)]
         [DebuggerNonUserCode]
         public int ProductID
         {
             get { return _ProductID; }
-            set { _ProductID = value; _isModified_ = true; }
+            set
+            {
+                _ProductID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "UnitPrice", DbType = "Money NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public decimal UnitPrice
         {
             get { return _UnitPrice; }
-            set { _UnitPrice = value; _isModified_ = true; }
+            set
+            {
+                _UnitPrice = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Quantity", DbType = "SmallInt NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public short Quantity
         {
             get { return _Quantity; }
-            set { _Quantity = value; _isModified_ = true; }
+            set
+            {
+                _Quantity = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Discount", DbType = "Real NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public System.Single Discount
         {
             get { return _Discount; }
-            set { _Discount = value; _isModified_ = true; }
+            set
+            {
+                _Discount = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -969,6 +1193,7 @@ namespace nwind
         {
             return _OrderID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             OrderDetails o2 = obj as OrderDetails;
@@ -990,20 +1215,20 @@ namespace nwind
             set { this._Orders.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Products> _Products;
 
-        [Association(Storage = "_Products", ThisKey = "ProductID", Name = "FK_Order_Details_Products")]
+        [Association(
+            Storage = "_Products",
+            ThisKey = "ProductID",
+            Name = "FK_Order_Details_Products"
+        )]
         [DebuggerNonUserCode]
         public Products Products
         {
             get { return this._Products.Entity; }
             set { this._Products.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.Orders")]
     public partial class Orders : IModified
@@ -1044,12 +1269,25 @@ namespace nwind
 
         protected string _ShipCountry;
 
-
         #region costructors
-        public Orders()
-        {
-        }
-        public Orders(int OrderID, string CustomerID, int? EmployeeID, System.DateTime? OrderDate, System.DateTime? RequiredDate, System.DateTime? ShippedDate, int? ShipVia, decimal? Freight, string ShipName, string ShipAddress, string ShipCity, string ShipRegion, string ShipPostalCode, string ShipCountry)
+        public Orders() { }
+
+        public Orders(
+            int OrderID,
+            string CustomerID,
+            int? EmployeeID,
+            System.DateTime? OrderDate,
+            System.DateTime? RequiredDate,
+            System.DateTime? ShippedDate,
+            int? ShipVia,
+            decimal? Freight,
+            string ShipName,
+            string ShipAddress,
+            string ShipCity,
+            string ShipRegion,
+            string ShipPostalCode,
+            string ShipCountry
+        )
         {
             this._OrderID = OrderID;
             this._CustomerID = CustomerID;
@@ -1071,129 +1309,177 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "OrderID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "OrderID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int OrderID
         {
             get { return _OrderID; }
-            set { _OrderID = value; _isModified_ = true; }
+            set
+            {
+                _OrderID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CustomerID", DbType = "NChar(5)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string CustomerID
         {
             get { return _CustomerID; }
-            set { _CustomerID = value; _isModified_ = true; }
+            set
+            {
+                _CustomerID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "EmployeeID", DbType = "Int", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? EmployeeID
         {
             get { return _EmployeeID; }
-            set { _EmployeeID = value; _isModified_ = true; }
+            set
+            {
+                _EmployeeID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "OrderDate", DbType = "DateTime", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.DateTime? OrderDate
         {
             get { return _OrderDate; }
-            set { _OrderDate = value; _isModified_ = true; }
+            set
+            {
+                _OrderDate = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "RequiredDate", DbType = "DateTime", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.DateTime? RequiredDate
         {
             get { return _RequiredDate; }
-            set { _RequiredDate = value; _isModified_ = true; }
+            set
+            {
+                _RequiredDate = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShippedDate", DbType = "DateTime", CanBeNull = true)]
         [DebuggerNonUserCode]
         public System.DateTime? ShippedDate
         {
             get { return _ShippedDate; }
-            set { _ShippedDate = value; _isModified_ = true; }
+            set
+            {
+                _ShippedDate = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipVia", DbType = "Int", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? ShipVia
         {
             get { return _ShipVia; }
-            set { _ShipVia = value; _isModified_ = true; }
+            set
+            {
+                _ShipVia = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Freight", DbType = "Money", CanBeNull = true)]
         [DebuggerNonUserCode]
         public decimal? Freight
         {
             get { return _Freight; }
-            set { _Freight = value; _isModified_ = true; }
+            set
+            {
+                _Freight = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipName", DbType = "NVarChar(40)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipName
         {
             get { return _ShipName; }
-            set { _ShipName = value; _isModified_ = true; }
+            set
+            {
+                _ShipName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipAddress", DbType = "NVarChar(60)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipAddress
         {
             get { return _ShipAddress; }
-            set { _ShipAddress = value; _isModified_ = true; }
+            set
+            {
+                _ShipAddress = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipCity", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipCity
         {
             get { return _ShipCity; }
-            set { _ShipCity = value; _isModified_ = true; }
+            set
+            {
+                _ShipCity = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipRegion", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipRegion
         {
             get { return _ShipRegion; }
-            set { _ShipRegion = value; _isModified_ = true; }
+            set
+            {
+                _ShipRegion = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipPostalCode", DbType = "NVarChar(10)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipPostalCode
         {
             get { return _ShipPostalCode; }
-            set { _ShipPostalCode = value; _isModified_ = true; }
+            set
+            {
+                _ShipPostalCode = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ShipCountry", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ShipCountry
         {
             get { return _ShipCountry; }
-            set { _ShipCountry = value; _isModified_ = true; }
+            set
+            {
+                _ShipCountry = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1204,6 +1490,7 @@ namespace nwind
         {
             return _OrderID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Orders o2 = obj as Orders;
@@ -1230,7 +1517,6 @@ namespace nwind
             set { this._Customers.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Employees> _Employees;
 
         [Association(Storage = "_Employees", ThisKey = "EmployeeID", Name = "FK_Orders_Employees")]
@@ -1241,7 +1527,6 @@ namespace nwind
             set { this._Employees.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Shippers> _Shippers;
 
         [Association(Storage = "_Shippers", ThisKey = "ShipVia", Name = "FK_Orders_Shippers")]
@@ -1251,10 +1536,7 @@ namespace nwind
             get { return this._Shippers.Entity; }
             set { this._Shippers.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.Products")]
     public partial class Products : IModified
@@ -1287,12 +1569,21 @@ namespace nwind
 
         protected System.Boolean _Discontinued;
 
-
         #region costructors
-        public Products()
-        {
-        }
-        public Products(int ProductID, string ProductName, int? SupplierID, int? CategoryID, string QuantityPerUnit, decimal? UnitPrice, short? UnitsInStock, short? UnitsOnOrder, short? ReorderLevel, System.Boolean Discontinued)
+        public Products() { }
+
+        public Products(
+            int ProductID,
+            string ProductName,
+            int? SupplierID,
+            int? CategoryID,
+            string QuantityPerUnit,
+            decimal? UnitPrice,
+            short? UnitsInStock,
+            short? UnitsOnOrder,
+            short? ReorderLevel,
+            System.Boolean Discontinued
+        )
         {
             this._ProductID = ProductID;
             this._ProductName = ProductName;
@@ -1310,93 +1601,129 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "ProductID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "ProductID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int ProductID
         {
             get { return _ProductID; }
-            set { _ProductID = value; _isModified_ = true; }
+            set
+            {
+                _ProductID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ProductName", DbType = "NVarChar(40) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string ProductName
         {
             get { return _ProductName; }
-            set { _ProductName = value; _isModified_ = true; }
+            set
+            {
+                _ProductName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "SupplierID", DbType = "Int", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? SupplierID
         {
             get { return _SupplierID; }
-            set { _SupplierID = value; _isModified_ = true; }
+            set
+            {
+                _SupplierID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CategoryID", DbType = "Int", CanBeNull = true)]
         [DebuggerNonUserCode]
         public int? CategoryID
         {
             get { return _CategoryID; }
-            set { _CategoryID = value; _isModified_ = true; }
+            set
+            {
+                _CategoryID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "QuantityPerUnit", DbType = "NVarChar(20)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string QuantityPerUnit
         {
             get { return _QuantityPerUnit; }
-            set { _QuantityPerUnit = value; _isModified_ = true; }
+            set
+            {
+                _QuantityPerUnit = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "UnitPrice", DbType = "Money", CanBeNull = true)]
         [DebuggerNonUserCode]
         public decimal? UnitPrice
         {
             get { return _UnitPrice; }
-            set { _UnitPrice = value; _isModified_ = true; }
+            set
+            {
+                _UnitPrice = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "UnitsInStock", DbType = "SmallInt", CanBeNull = true)]
         [DebuggerNonUserCode]
         public short? UnitsInStock
         {
             get { return _UnitsInStock; }
-            set { _UnitsInStock = value; _isModified_ = true; }
+            set
+            {
+                _UnitsInStock = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "UnitsOnOrder", DbType = "SmallInt", CanBeNull = true)]
         [DebuggerNonUserCode]
         public short? UnitsOnOrder
         {
             get { return _UnitsOnOrder; }
-            set { _UnitsOnOrder = value; _isModified_ = true; }
+            set
+            {
+                _UnitsOnOrder = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ReorderLevel", DbType = "SmallInt", CanBeNull = true)]
         [DebuggerNonUserCode]
         public short? ReorderLevel
         {
             get { return _ReorderLevel; }
-            set { _ReorderLevel = value; _isModified_ = true; }
+            set
+            {
+                _ReorderLevel = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Discontinued", DbType = "Bit NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public System.Boolean Discontinued
         {
             get { return _Discontinued; }
-            set { _Discontinued = value; _isModified_ = true; }
+            set
+            {
+                _Discontinued = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1407,6 +1734,7 @@ namespace nwind
         {
             return _ProductID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Products o2 = obj as Products;
@@ -1425,7 +1753,11 @@ namespace nwind
 
         private System.Data.Linq.EntityRef<Categories> _Categories;
 
-        [Association(Storage = "_Categories", ThisKey = "CategoryID", Name = "FK_Products_Categories")]
+        [Association(
+            Storage = "_Categories",
+            ThisKey = "CategoryID",
+            Name = "FK_Products_Categories"
+        )]
         [DebuggerNonUserCode]
         public Categories Categories
         {
@@ -1433,20 +1765,20 @@ namespace nwind
             set { this._Categories.Entity = value; }
         }
 
-
         private System.Data.Linq.EntityRef<Suppliers> _Suppliers;
 
-        [Association(Storage = "_Suppliers", ThisKey = "SupplierID", Name = "FK_Products_Suppliers")]
+        [Association(
+            Storage = "_Suppliers",
+            ThisKey = "SupplierID",
+            Name = "FK_Products_Suppliers"
+        )]
         [DebuggerNonUserCode]
         public Suppliers Suppliers
         {
             get { return this._Suppliers.Entity; }
             set { this._Suppliers.Entity = value; }
         }
-
     }
-
-
 
     [Table(Name = "dbo.Region")]
     public partial class Region : IModified
@@ -1458,16 +1790,13 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected int _RegionID;
 
         protected string _RegionDescription;
 
-
         #region costructors
-        public Region()
-        {
-        }
+        public Region() { }
+
         public Region(int RegionID, string RegionDescription)
         {
             this._RegionID = RegionID;
@@ -1483,16 +1812,23 @@ namespace nwind
         public int RegionID
         {
             get { return _RegionID; }
-            set { _RegionID = value; _isModified_ = true; }
+            set
+            {
+                _RegionID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "RegionDescription", DbType = "NChar(50) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string RegionDescription
         {
             get { return _RegionDescription; }
-            set { _RegionDescription = value; _isModified_ = true; }
+            set
+            {
+                _RegionDescription = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1503,6 +1839,7 @@ namespace nwind
         {
             return _RegionID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Region o2 = obj as Region;
@@ -1518,10 +1855,7 @@ namespace nwind
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.Shippers")]
     public partial class Shippers : IModified
@@ -1540,11 +1874,9 @@ namespace nwind
 
         protected string _Phone;
 
-
         #region costructors
-        public Shippers()
-        {
-        }
+        public Shippers() { }
+
         public Shippers(int ShipperID, string CompanyName, string Phone)
         {
             this._ShipperID = ShipperID;
@@ -1556,30 +1888,45 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "ShipperID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "ShipperID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int ShipperID
         {
             get { return _ShipperID; }
-            set { _ShipperID = value; _isModified_ = true; }
+            set
+            {
+                _ShipperID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CompanyName", DbType = "NVarChar(40) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string CompanyName
         {
             get { return _CompanyName; }
-            set { _CompanyName = value; _isModified_ = true; }
+            set
+            {
+                _CompanyName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Phone", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Phone
         {
             get { return _Phone; }
-            set { _Phone = value; _isModified_ = true; }
+            set
+            {
+                _Phone = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1590,6 +1937,7 @@ namespace nwind
         {
             return _ShipperID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Shippers o2 = obj as Shippers;
@@ -1605,10 +1953,7 @@ namespace nwind
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.Suppliers")]
     public partial class Suppliers : IModified
@@ -1645,12 +1990,23 @@ namespace nwind
 
         protected string _HomePage;
 
-
         #region costructors
-        public Suppliers()
-        {
-        }
-        public Suppliers(int SupplierID, string CompanyName, string ContactName, string ContactTitle, string Address, string City, string Region, string PostalCode, string Country, string Phone, string Fax, string HomePage)
+        public Suppliers() { }
+
+        public Suppliers(
+            int SupplierID,
+            string CompanyName,
+            string ContactName,
+            string ContactTitle,
+            string Address,
+            string City,
+            string Region,
+            string PostalCode,
+            string Country,
+            string Phone,
+            string Fax,
+            string HomePage
+        )
         {
             this._SupplierID = SupplierID;
             this._CompanyName = CompanyName;
@@ -1670,111 +2026,153 @@ namespace nwind
 
         #region properties - accessors
 
-        [Column(Name = "SupplierID", DbType = "Int NOT NULL IDENTITY", IsPrimaryKey = true, IsDbGenerated = true)]
+        [Column(
+            Name = "SupplierID",
+            DbType = "Int NOT NULL IDENTITY",
+            IsPrimaryKey = true,
+            IsDbGenerated = true
+        )]
         [DebuggerNonUserCode]
         public int SupplierID
         {
             get { return _SupplierID; }
-            set { _SupplierID = value; _isModified_ = true; }
+            set
+            {
+                _SupplierID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "CompanyName", DbType = "NVarChar(40) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string CompanyName
         {
             get { return _CompanyName; }
-            set { _CompanyName = value; _isModified_ = true; }
+            set
+            {
+                _CompanyName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ContactName", DbType = "NVarChar(30)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ContactName
         {
             get { return _ContactName; }
-            set { _ContactName = value; _isModified_ = true; }
+            set
+            {
+                _ContactName = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "ContactTitle", DbType = "NVarChar(30)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string ContactTitle
         {
             get { return _ContactTitle; }
-            set { _ContactTitle = value; _isModified_ = true; }
+            set
+            {
+                _ContactTitle = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Address", DbType = "NVarChar(60)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Address
         {
             get { return _Address; }
-            set { _Address = value; _isModified_ = true; }
+            set
+            {
+                _Address = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "City", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string City
         {
             get { return _City; }
-            set { _City = value; _isModified_ = true; }
+            set
+            {
+                _City = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Region", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Region
         {
             get { return _Region; }
-            set { _Region = value; _isModified_ = true; }
+            set
+            {
+                _Region = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "PostalCode", DbType = "NVarChar(10)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string PostalCode
         {
             get { return _PostalCode; }
-            set { _PostalCode = value; _isModified_ = true; }
+            set
+            {
+                _PostalCode = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Country", DbType = "NVarChar(15)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Country
         {
             get { return _Country; }
-            set { _Country = value; _isModified_ = true; }
+            set
+            {
+                _Country = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Phone", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Phone
         {
             get { return _Phone; }
-            set { _Phone = value; _isModified_ = true; }
+            set
+            {
+                _Phone = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "Fax", DbType = "NVarChar(24)", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string Fax
         {
             get { return _Fax; }
-            set { _Fax = value; _isModified_ = true; }
+            set
+            {
+                _Fax = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "HomePage", DbType = "NText", CanBeNull = true)]
         [DebuggerNonUserCode]
         public string HomePage
         {
             get { return _HomePage; }
-            set { _HomePage = value; _isModified_ = true; }
+            set
+            {
+                _HomePage = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1785,6 +2183,7 @@ namespace nwind
         {
             return _SupplierID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Suppliers o2 = obj as Suppliers;
@@ -1800,10 +2199,7 @@ namespace nwind
         {
             get { return null; } //TODO L212
         }
-
     }
-
-
 
     [Table(Name = "dbo.Territories")]
     public partial class Territories : IModified
@@ -1815,18 +2211,15 @@ namespace nwind
             set { _isModified_ = value; }
         }
 
-
         protected string _TerritoryID;
 
         protected string _TerritoryDescription;
 
         protected int _RegionID;
 
-
         #region costructors
-        public Territories()
-        {
-        }
+        public Territories() { }
+
         public Territories(string TerritoryID, string TerritoryDescription, int RegionID)
         {
             this._TerritoryID = TerritoryID;
@@ -1843,25 +2236,35 @@ namespace nwind
         public string TerritoryID
         {
             get { return _TerritoryID; }
-            set { _TerritoryID = value; _isModified_ = true; }
+            set
+            {
+                _TerritoryID = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "TerritoryDescription", DbType = "NChar(50) NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public string TerritoryDescription
         {
             get { return _TerritoryDescription; }
-            set { _TerritoryDescription = value; _isModified_ = true; }
+            set
+            {
+                _TerritoryDescription = value;
+                _isModified_ = true;
+            }
         }
-
 
         [Column(Name = "RegionID", DbType = "Int NOT NULL", CanBeNull = false)]
         [DebuggerNonUserCode]
         public int RegionID
         {
             get { return _RegionID; }
-            set { _RegionID = value; _isModified_ = true; }
+            set
+            {
+                _RegionID = value;
+                _isModified_ = true;
+            }
         }
 
         #endregion
@@ -1872,6 +2275,7 @@ namespace nwind
         {
             return _TerritoryID.GetHashCode();
         }
+
         public override bool Equals(object obj)
         {
             Territories o2 = obj as Territories;
@@ -1882,7 +2286,11 @@ namespace nwind
         #endregion
 
 
-        [Association(Storage = "null", OtherKey = "TerritoryID", Name = "FK_EmployeeTerritories_Territories")]
+        [Association(
+            Storage = "null",
+            OtherKey = "TerritoryID",
+            Name = "FK_EmployeeTerritories_Territories"
+        )]
         public EntityMSet<EmployeeTerritories> EmployeeTerritories
         {
             get { return null; } //TODO L212
@@ -1897,7 +2305,5 @@ namespace nwind
             get { return this._Region.Entity; }
             set { this._Region.Entity = value; }
         }
-
     }
-
 }

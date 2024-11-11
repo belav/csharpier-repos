@@ -19,7 +19,9 @@ namespace SharedTypes.ComInterfaces
     internal partial class IFloatImpl : IFloat
     {
         float _data;
+
         public float Get() => _data;
+
         public void Set(float value) => _data = value;
     }
 }

@@ -13,14 +13,16 @@ namespace System.Security.Cryptography
         public PbeParameters(
             PbeEncryptionAlgorithm encryptionAlgorithm,
             HashAlgorithmName hashAlgorithm,
-            int iterationCount)
+            int iterationCount
+        )
         {
             if (iterationCount < 1)
             {
                 throw new ArgumentOutOfRangeException(
                     nameof(iterationCount),
                     iterationCount,
-                    SR.ArgumentOutOfRange_NeedPosNum);
+                    SR.ArgumentOutOfRange_NeedPosNum
+                );
             }
 
             EncryptionAlgorithm = encryptionAlgorithm;

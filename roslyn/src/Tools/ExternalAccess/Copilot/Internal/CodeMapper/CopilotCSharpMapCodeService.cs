@@ -26,7 +26,12 @@ internal sealed class CSharpMapCodeService : IMapCodeService
         _service = service;
     }
 
-    public Task<ImmutableArray<TextChange>?> MapCodeAsync(Document document, ImmutableArray<string> contents, ImmutableArray<(Document, TextSpan)> focusLocations, CancellationToken cancellationToken)
+    public Task<ImmutableArray<TextChange>?> MapCodeAsync(
+        Document document,
+        ImmutableArray<string> contents,
+        ImmutableArray<(Document, TextSpan)> focusLocations,
+        CancellationToken cancellationToken
+    )
     {
         return _service.MapCodeAsync(document, contents, focusLocations, cancellationToken);
     }

@@ -22,13 +22,13 @@ internal abstract class TestContext<TEntity> : DbContext
         bool useChangeDetection = false,
         bool checkEquality = true,
         ChangeTrackingStrategy? changeTrackingStrategy = null,
-        bool ignoreNonVirtualNavigations = false)
+        bool ignoreNonVirtualNavigations = false
+    )
     {
-        _internalServiceProvider
-            = new ServiceCollection()
-                .AddEntityFrameworkInMemoryDatabase()
-                .AddEntityFrameworkProxies()
-                .BuildServiceProvider(validateScopes: true);
+        _internalServiceProvider = new ServiceCollection()
+            .AddEntityFrameworkInMemoryDatabase()
+            .AddEntityFrameworkProxies()
+            .BuildServiceProvider(validateScopes: true);
 
         _dbName = dbName;
         _useLazyLoadingProxies = useLazyLoading;
@@ -42,14 +42,13 @@ internal abstract class TestContext<TEntity> : DbContext
     {
         if (_useLazyLoadingProxies)
         {
-            optionsBuilder.UseLazyLoadingProxies(
-                b =>
+            optionsBuilder.UseLazyLoadingProxies(b =>
+            {
+                if (_ignoreNonVirtualNavigations)
                 {
-                    if (_ignoreNonVirtualNavigations)
-                    {
-                        b.IgnoreNonVirtualNavigations();
-                    }
-                });
+                    b.IgnoreNonVirtualNavigations();
+                }
+            });
         }
 
         if (_useChangeDetectionProxies)

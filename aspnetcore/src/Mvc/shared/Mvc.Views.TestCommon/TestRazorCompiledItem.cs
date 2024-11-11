@@ -13,7 +13,11 @@ public class TestRazorCompiledItem : RazorCompiledItem
         return CreateForPage(type: null, identifier, metadata);
     }
 
-    public static RazorCompiledItem CreateForPage(Type type, string identifier, object[] metadata = null)
+    public static RazorCompiledItem CreateForPage(
+        Type type,
+        string identifier,
+        object[] metadata = null
+    )
     {
         return new TestRazorCompiledItem(type, "mvc.1.0.razor-page", identifier, metadata);
     }
@@ -23,7 +27,11 @@ public class TestRazorCompiledItem : RazorCompiledItem
         return CreateForView(type: null, identifier, metadata);
     }
 
-    public static RazorCompiledItem CreateForView(Type type, string identifier, object[] metadata = null)
+    public static RazorCompiledItem CreateForView(
+        Type type,
+        string identifier,
+        object[] metadata = null
+    )
     {
         return new TestRazorCompiledItem(type, "mvc.1.0.razor-page", identifier, metadata);
     }

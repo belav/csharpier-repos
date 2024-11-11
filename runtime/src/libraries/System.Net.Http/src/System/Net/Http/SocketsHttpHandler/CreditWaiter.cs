@@ -18,8 +18,10 @@ namespace System.Net.Http
 
         /// <summary>Cancellation token for the current wait operation.</summary>
         private CancellationToken _cancellationToken;
+
         /// <summary>Cancellation registration for the current wait operation.</summary>
         private CancellationTokenRegistration _registration;
+
         /// <summary><see cref="IValueTaskSource"/> implementation.</summary>
         private ManualResetValueTaskSourceCore<int> _source;
 
@@ -27,6 +29,7 @@ namespace System.Net.Http
 
         /// <summary>Amount of credit desired by this waiter.</summary>
         public int Amount;
+
         /// <summary>Next waiter in a list of waiters.</summary>
         public CreditWaiter? Next;
 
@@ -51,11 +54,18 @@ namespace System.Net.Http
         private void RegisterCancellation(CancellationToken cancellationToken)
         {
             _cancellationToken = cancellationToken;
-            _registration = cancellationToken.UnsafeRegister(static (s, cancellationToken) =>
-            {
-                // The callback will only fire if cancellation owns the right to complete the instance.
-                ((CreditWaiter)s!)._source.SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new OperationCanceledException(cancellationToken)));
-            }, this);
+            _registration = cancellationToken.UnsafeRegister(
+                static (s, cancellationToken) =>
+                {
+                    // The callback will only fire if cancellation owns the right to complete the instance.
+                    ((CreditWaiter)s!)._source.SetException(
+                        ExceptionDispatchInfo.SetCurrentStackTrace(
+                            new OperationCanceledException(cancellationToken)
+                        )
+                    );
+                },
+                this
+            );
         }
 
         /// <summary>Wraps the instance as a <see cref="ValueTask{TResult}"/> to make it awaitable.</summary>
@@ -80,7 +90,14 @@ namespace System.Net.Http
         {
             if (UnregisterAndOwnCompletion())
             {
-                _source.SetException(ExceptionDispatchInfo.SetCurrentStackTrace(new ObjectDisposedException(nameof(CreditManager), SR.net_http_disposed_while_in_use)));
+                _source.SetException(
+                    ExceptionDispatchInfo.SetCurrentStackTrace(
+                        new ObjectDisposedException(
+                            nameof(CreditManager),
+                            SR.net_http_disposed_while_in_use
+                        )
+                    )
+                );
             }
         }
 
@@ -94,11 +111,16 @@ namespace System.Net.Http
             // the same, and (c) can be checked via CanBeCanceled.
             _registration.Unregister() || !_cancellationToken.CanBeCanceled;
 
-        int IValueTaskSource<int>.GetResult(short token) =>
-            _source.GetResult(token);
+        int IValueTaskSource<int>.GetResult(short token) => _source.GetResult(token);
+
         ValueTaskSourceStatus IValueTaskSource<int>.GetStatus(short token) =>
             _source.GetStatus(token);
-        void IValueTaskSource<int>.OnCompleted(Action<object?> continuation, object? state, short token, ValueTaskSourceOnCompletedFlags flags) =>
-            _source.OnCompleted(continuation, state, token, flags);
+
+        void IValueTaskSource<int>.OnCompleted(
+            Action<object?> continuation,
+            object? state,
+            short token,
+            ValueTaskSourceOnCompletedFlags flags
+        ) => _source.OnCompleted(continuation, state, token, flags);
     }
 }

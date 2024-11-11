@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,82 +27,86 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
+using System.IO;
 using System.Net;
 using System.Net.Sockets;
-using System.Text;
-using System.IO;
 using System.Reflection;
 using System.Security.Permissions;
+using System.Text;
 
 namespace System.Web.Mail
 {
-	// CAS
-	[Obsolete ("The recommended alternative is System.Net.Mail.SmtpClient. http://go.microsoft.com/fwlink/?linkid=14202")]
-    	public class SmtpMail
-	{
-		static string smtpServer = "localhost";
-		
-		// Constructor
-		SmtpMail ()
-		{
-			/* empty */
-		}
+    // CAS
+    [Obsolete(
+        "The recommended alternative is System.Net.Mail.SmtpClient. http://go.microsoft.com/fwlink/?linkid=14202"
+    )]
+    public class SmtpMail
+    {
+        static string smtpServer = "localhost";
 
-		// Properties
-		public static string SmtpServer {
-			get { return smtpServer; } 
-			set { smtpServer = value; }
-		}
-		
-		// Medium (not Minimal) here
-		// http://msdn.microsoft.com/library/en-us/dnpag2/html/paght000017.asp
-		[AspNetHostingPermission (SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Medium)]
-		public static void Send (MailMessage message) 
-		{
-		   		   		    
-		    try {
-			
-			// wrap the MailMessage in a MailMessage wrapper for easier
-			// access to properties and to add some functionality
-			MailMessageWrapper messageWrapper = new MailMessageWrapper( message );
-			
-			SmtpClient smtp = new SmtpClient (smtpServer);
-			
-			smtp.Send (messageWrapper);
-		       
-			smtp.Close ();
-		    
-		    } catch (SmtpException ex) {
-			// LAMESPEC:
-			// .NET sdk throws HttpException
-			// for some reason so to be compatible
-			// we have to do it to :(
-			throw new HttpException (ex.Message, ex);
-		    
-		    } catch (IOException ex) {
-			
-			throw new HttpException (ex.Message, ex);
-			
-		    } catch (FormatException ex) {
-			
-			throw new HttpException (ex.Message, ex);
-		    
-		    } catch (SocketException ex) {
-			
-			throw new HttpException (ex.Message, ex);
-			
-		    }
-		    
-		}
-		
-		public static void Send (string from, string to, string subject, string messageText) 
-		{
-			MailMessage message = new MailMessage ();
-			message.From = from;
-			message.To = to;
-			message.Subject = subject;
-			message.Body = messageText;
-			Send (message);
-		}
-	}
+        // Constructor
+        SmtpMail()
+        {
+            /* empty */
+        }
+
+        // Properties
+        public static string SmtpServer
+        {
+            get { return smtpServer; }
+            set { smtpServer = value; }
+        }
+
+        // Medium (not Minimal) here
+        // http://msdn.microsoft.com/library/en-us/dnpag2/html/paght000017.asp
+        [AspNetHostingPermission(
+            SecurityAction.Demand,
+            Level = AspNetHostingPermissionLevel.Medium
+        )]
+        public static void Send(MailMessage message)
+        {
+            try
+            {
+                // wrap the MailMessage in a MailMessage wrapper for easier
+                // access to properties and to add some functionality
+                MailMessageWrapper messageWrapper = new MailMessageWrapper(message);
+
+                SmtpClient smtp = new SmtpClient(smtpServer);
+
+                smtp.Send(messageWrapper);
+
+                smtp.Close();
+            }
+            catch (SmtpException ex)
+            {
+                // LAMESPEC:
+                // .NET sdk throws HttpException
+                // for some reason so to be compatible
+                // we have to do it to :(
+                throw new HttpException(ex.Message, ex);
+            }
+            catch (IOException ex)
+            {
+                throw new HttpException(ex.Message, ex);
+            }
+            catch (FormatException ex)
+            {
+                throw new HttpException(ex.Message, ex);
+            }
+            catch (SocketException ex)
+            {
+                throw new HttpException(ex.Message, ex);
+            }
+        }
+
+        public static void Send(string from, string to, string subject, string messageText)
+        {
+            MailMessage message = new MailMessage();
+            message.From = from;
+            message.To = to;
+            message.Subject = subject;
+            message.Body = messageText;
+            Send(message);
+        }
+    }
 }

@@ -85,9 +85,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         public void MinimumLevel_Setter_Throws_With_Bad_Level(TraceLevel level)
         {
             // Arrange & Act & Assert
-            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() => { new SystemDiagnosticsTraceWriter().MinimumLevel = level; });
+            ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().MinimumLevel = level;
+            });
             Assert.Equal("value", exception.ParamName);
-            Assert.Contains("The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.", exception.Message);
+            Assert.Contains(
+                "The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.",
+                exception.Message
+            );
             Assert.Equal(level, exception.ActualValue);
         }
 
@@ -99,10 +105,8 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             // Act & Assert
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                                                () => writer.Trace(new HttpRequestMessage(),
-                                                                    null,
-                                                                    TraceLevel.Info,
-                                                                    (tr) => { }));
+                () => writer.Trace(new HttpRequestMessage(), null, TraceLevel.Info, (tr) => { })
+            );
             Assert.Equal("category", exception.ParamName);
         }
 
@@ -114,10 +118,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             // Act & Assert
             ArgumentNullException exception = Assert.Throws<ArgumentNullException>(
-                                                () => writer.Trace(new HttpRequestMessage(),
-                                                                    "MyCategory",
-                                                                    TraceLevel.Info,
-                                                                    traceAction: null));
+                () =>
+                    writer.Trace(
+                        new HttpRequestMessage(),
+                        "MyCategory",
+                        TraceLevel.Info,
+                        traceAction: null
+                    )
+            );
             Assert.Equal("traceAction", exception.ParamName);
         }
 
@@ -131,12 +139,13 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             // Act & Assert
             ArgumentOutOfRangeException exception = Assert.Throws<ArgumentOutOfRangeException>(
-                                                () => writer.Trace(new HttpRequestMessage(),
-                                                                    "MyCategory",
-                                                                    level,
-                                                                    (tr) => { }));
+                () => writer.Trace(new HttpRequestMessage(), "MyCategory", level, (tr) => { })
+            );
             Assert.Equal("level", exception.ParamName);
-            Assert.Contains("The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.", exception.Message);
+            Assert.Contains(
+                "The TraceLevel property must be a value between TraceLevel.Off and TraceLevel.Fatal, inclusive.",
+                exception.Message
+            );
             Assert.Equal(level, exception.ActualValue);
         }
 
@@ -149,14 +158,17 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             // Act
             writer.Info(request, "TestCategory", "TestMessage");
 
             // Assert
-            Assert.Equal("Message='TestMessage'", ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages[0]);
+            Assert.Equal(
+                "Message='TestMessage'",
+                ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages[0]
+            );
         }
 
         [Theory]
@@ -165,7 +177,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         [InlineData(TraceLevel.Warn, TraceEventType.Warning)]
         [InlineData(TraceLevel.Error, TraceEventType.Error)]
         [InlineData(TraceLevel.Fatal, TraceEventType.Critical)]
-        public void Trace_Writes_Correct_EventType_To_TraceListeners(TraceLevel level, TraceEventType diagnosticLevel)
+        public void Trace_Writes_Correct_EventType_To_TraceListeners(
+            TraceLevel level,
+            TraceEventType diagnosticLevel
+        )
         {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
@@ -174,14 +189,25 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             // Act
-            writer.Trace(request, "TestCategory", level, (tr) => { tr.Message = "TestMessage"; });
+            writer.Trace(
+                request,
+                "TestCategory",
+                level,
+                (tr) =>
+                {
+                    tr.Message = "TestMessage";
+                }
+            );
 
             // Assert
-            Assert.Equal(diagnosticLevel, ((TestTraceListener)writer.TraceSource.Listeners[0]).TraceEventType);
+            Assert.Equal(
+                diagnosticLevel,
+                ((TestTraceListener)writer.TraceSource.Listeners[0]).TraceEventType
+            );
         }
 
         [Theory]
@@ -190,7 +216,9 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         [InlineData(TraceLevel.Warn)]
         [InlineData(TraceLevel.Error)]
         [InlineData(TraceLevel.Fatal)]
-        public void Trace_Verbose_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(TraceLevel level)
+        public void Trace_Verbose_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(
+            TraceLevel level
+        )
         {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
@@ -200,26 +228,33 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(request, "TestCategory", level, (tr) =>
-            {
-                tr.Message = "TestMessage";
-                tr.Operation = "TestOperation";
-                tr.Operator = "TestOperator";
-                tr.Status = HttpStatusCode.Accepted;
-                tr.Exception = exception;
-            });
+            writer.Trace(
+                request,
+                "TestCategory",
+                level,
+                (tr) =>
+                {
+                    tr.Message = "TestMessage";
+                    tr.Operation = "TestOperation";
+                    tr.Operator = "TestOperator";
+                    tr.Status = HttpStatusCode.Accepted;
+                    tr.Exception = exception;
+                }
+            );
 
             // Assert
-            string expected = String.Format("Level={0}, Kind=Trace, Category='TestCategory', Id={1}, Message='TestMessage', Operation=TestOperator.TestOperation, Status=202 (Accepted), Exception={2}",
-                                                level.ToString(),
-                                                request.GetCorrelationId().ToString(),
-                                                exception.ToString());
+            string expected = String.Format(
+                "Level={0}, Kind=Trace, Category='TestCategory', Id={1}, Message='TestMessage', Operation=TestOperator.TestOperation, Status=202 (Accepted), Exception={2}",
+                level.ToString(),
+                request.GetCorrelationId().ToString(),
+                exception.ToString()
+            );
 
             string actual = ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages[0].Trim();
             string timePrefix = "] ";
@@ -233,7 +268,9 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         [InlineData(TraceLevel.Warn)]
         [InlineData(TraceLevel.Error)]
         [InlineData(TraceLevel.Fatal)]
-        public void Trace_Brief_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(TraceLevel level)
+        public void Trace_Brief_Writes_Correct_Message_To_TraceListeners_With_All_Fields_Set(
+            TraceLevel level
+        )
         {
             // Arrange
             SystemDiagnosticsTraceWriter writer = CreateTraceWriter();
@@ -242,23 +279,29 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(request, "TestCategory", level, (tr) =>
-            {
-                tr.Message = "TestMessage";
-                tr.Operation = "TestOperation";
-                tr.Operator = "TestOperator";
-                tr.Status = HttpStatusCode.Accepted;
-                tr.Exception = exception;
-            });
+            writer.Trace(
+                request,
+                "TestCategory",
+                level,
+                (tr) =>
+                {
+                    tr.Message = "TestMessage";
+                    tr.Operation = "TestOperation";
+                    tr.Operator = "TestOperator";
+                    tr.Status = HttpStatusCode.Accepted;
+                    tr.Exception = exception;
+                }
+            );
 
             // Assert
-            string expected = "Message='TestMessage', Operation=TestOperator.TestOperation, Status=202 (Accepted), Exception=System.InvalidOperationException: TestException";
+            string expected =
+                "Message='TestMessage', Operation=TestOperator.TestOperation, Status=202 (Accepted), Exception=System.InvalidOperationException: TestException";
             string actual = ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages[0].Trim();
             Assert.Equal(expected, actual);
         }
@@ -273,7 +316,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
@@ -282,8 +325,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             writer.Info(request, "TestCategory", String.Empty);
 
             // Assert
-            string expected = String.Format("Level=Info, Kind=Trace, Category='TestCategory', Id={0}",
-                                            request.GetCorrelationId().ToString());
+            string expected = String.Format(
+                "Level=Info, Kind=Trace, Category='TestCategory', Id={0}",
+                request.GetCorrelationId().ToString()
+            );
 
             string actual = ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages[0].Trim();
             string timePrefix = "] ";
@@ -300,7 +345,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
@@ -323,7 +368,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
@@ -343,13 +388,22 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
 
             // Act
-            writer.Trace(request, "TestCategory", TraceLevel.Info, (tr) => { tr.Kind = TraceKind.Begin; tr.Message = "TestMessage"; });
+            writer.Trace(
+                request,
+                "TestCategory",
+                TraceLevel.Info,
+                (tr) =>
+                {
+                    tr.Kind = TraceKind.Begin;
+                    tr.Message = "TestMessage";
+                }
+            );
 
             // Assert
             Assert.Equal(0, ((TestTraceListener)writer.TraceSource.Listeners[0]).Messages.Count);
@@ -370,7 +424,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception = new InvalidOperationException("TestException");
@@ -392,26 +446,33 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
-            HttpResponseMessage response = request.CreateErrorResponse(HttpStatusCode.BadRequest, "bad request");
+            HttpResponseMessage response = request.CreateErrorResponse(
+                HttpStatusCode.BadRequest,
+                "bad request"
+            );
             HttpResponseException responseException = new HttpResponseException(response);
 
             // Act
             writer.Error(request, "TestCategory", responseException);
 
             // Assert
-            Assert.Equal(TraceEventType.Warning, ((TestTraceListener)writer.TraceSource.Listeners[0]).TraceEventType);
+            Assert.Equal(
+                TraceEventType.Warning,
+                ((TestTraceListener)writer.TraceSource.Listeners[0]).TraceEventType
+            );
         }
 
         [Fact]
         void Format_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception =
-                Assert.Throws<ArgumentNullException>(
-                () => { new SystemDiagnosticsTraceWriter().Format(null); });
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().Format(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }
@@ -428,7 +489,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             InvalidOperationException exception;
@@ -448,33 +509,40 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 Operation = "TestOperation",
                 Operator = "TestOperator",
                 Status = HttpStatusCode.Accepted,
-                Exception = exception
+                Exception = exception,
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(traceRecord);
+            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
+                traceRecord
+            );
 
             // Assert
-            AssertContainsExactly(formattedTrace,
-                                new Dictionary<string, string>
-                                    {
-                                        { "Level", level.ToString() },
-                                        { "Kind", TraceKind.Trace.ToString() },
-                                        { "Category", "'TestCategory'"},
-                                        { "Id", request.GetCorrelationId().ToString() },
-                                        { "Message", "'TestMessage'" },
-                                        { "Operation", "TestOperator.TestOperation" },
-                                        { "Status", "202 (Accepted)" },
-                                        { "Exception", exception.ToString() },
-                                    });
-
+            AssertContainsExactly(
+                formattedTrace,
+                new Dictionary<string, string>
+                {
+                    { "Level", level.ToString() },
+                    { "Kind", TraceKind.Trace.ToString() },
+                    { "Category", "'TestCategory'" },
+                    { "Id", request.GetCorrelationId().ToString() },
+                    { "Message", "'TestMessage'" },
+                    { "Operation", "TestOperator.TestOperation" },
+                    { "Status", "202 (Accepted)" },
+                    { "Exception", exception.ToString() },
+                }
+            );
         }
 
         [Fact]
         public void Format_Builds_Trace_With_Null_Fields()
         {
             // Arrange
-            TraceRecord traceRecord = new TraceRecord(request: null, category: null, level: TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request: null,
+                category: null,
+                level: TraceLevel.Info
+            )
             {
                 Message = null,
                 Operation = null,
@@ -482,17 +550,20 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             };
 
             // Act
-            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(traceRecord);
+            string formattedTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
+                traceRecord
+            );
 
             // Assert
-            AssertContainsExactly(formattedTrace,
-                                new Dictionary<string, string>
-                                    {
-                                        { "Level", TraceLevel.Info.ToString() },
-                                        { "Kind", TraceKind.Trace.ToString() },
-                                        { "Id", new Guid().ToString() }
-                                    });
-
+            AssertContainsExactly(
+                formattedTrace,
+                new Dictionary<string, string>
+                {
+                    { "Level", TraceLevel.Info.ToString() },
+                    { "Kind", TraceKind.Trace.ToString() },
+                    { "Id", new Guid().ToString() },
+                }
+            );
         }
 
         [Fact]
@@ -502,21 +573,32 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.Begin,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
+                traceRecord
+            );
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Request received, Method=GET, Url=http://localhost/, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Request received, Method=GET, Url=http://localhost/, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -527,21 +609,32 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.End,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.Format(
+                traceRecord
+            );
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Sending response, Method=GET, Url=http://localhost/, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Sending response, Method=GET, Url=http://localhost/, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -549,9 +642,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         void FormatRequestEnvelope_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception =
-                Assert.Throws<ArgumentNullException>(
-                () => { new SystemDiagnosticsTraceWriter().FormatRequestEnvelope(null); });
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().FormatRequestEnvelope(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }
@@ -563,21 +657,33 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.Begin,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Request received, Method=GET, Url=http://localhost/, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Request received, Method=GET, Url=http://localhost/, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -588,7 +694,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             Exception exception = null;
@@ -601,22 +707,33 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 exception = ex;
             }
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.Begin,
                 Message = "EnvelopeMessage",
-                Exception = exception
+                Exception = exception,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Request received, Method=GET, Url=http://localhost/, Id={0}, Message='EnvelopeMessage', Exception={1}",
-                                                traceRecord.RequestId.ToString(),
-                                                exception.ToString().Trim());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Request received, Method=GET, Url=http://localhost/, Id={0}, Message='EnvelopeMessage', Exception={1}",
+                traceRecord.RequestId.ToString(),
+                exception.ToString().Trim()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -624,18 +741,30 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         public void FormatRequestEnvelope_Verbose_Builds_Correct_Begin_Trace_With_Null_Fields()
         {
             // Arrange
-            TraceRecord traceRecord = new TraceRecord(request: null, category: null, level: TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request: null,
+                category: null,
+                level: TraceLevel.Info
+            )
             {
                 Kind = TraceKind.Begin,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Request received, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Request received, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -646,22 +775,34 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.End,
-                Status = HttpStatusCode.Accepted
+                Status = HttpStatusCode.Accepted,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Sending response, Status=202 (Accepted), Method=GET, Url=http://localhost/, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Sending response, Status=202 (Accepted), Method=GET, Url=http://localhost/, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -672,7 +813,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             Exception exception = null;
@@ -685,24 +826,35 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 exception = ex;
             }
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Info
+            )
             {
                 Kind = TraceKind.End,
                 Status = HttpStatusCode.Accepted,
                 Message = "EnvelopeMessage",
-                Exception = exception
+                Exception = exception,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Sending response, Status=202 (Accepted), Method=GET, Url=http://localhost/, Id={0}, Message={1}, Exception={2}",
-                                                    traceRecord.RequestId.ToString(),
-                                                    "'EnvelopeMessage'",
-                                                    exception.ToString().Trim());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Sending response, Status=202 (Accepted), Method=GET, Url=http://localhost/, Id={0}, Message={1}, Exception={2}",
+                traceRecord.RequestId.ToString(),
+                "'EnvelopeMessage'",
+                exception.ToString().Trim()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -710,18 +862,30 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         public void FormatRequestEnvelope_Verbose_Builds_Correct_End_Trace_With_Null_Fields()
         {
             // Arrange
-            TraceRecord traceRecord = new TraceRecord(request: null, category: null, level: TraceLevel.Info)
+            TraceRecord traceRecord = new TraceRecord(
+                request: null,
+                category: null,
+                level: TraceLevel.Info
+            )
             {
                 Kind = TraceKind.End,
             };
 
             // Act
-            string actualTrace = new SystemDiagnosticsTraceWriter() { IsVerbose = true }.FormatRequestEnvelope(traceRecord);
+            string actualTrace = new SystemDiagnosticsTraceWriter()
+            {
+                IsVerbose = true,
+            }.FormatRequestEnvelope(traceRecord);
 
             // Assert
             string timePrefix = "] ";
-            actualTrace = actualTrace.Substring(actualTrace.IndexOf(timePrefix) + timePrefix.Length);
-            string expectedTrace = String.Format("Sending response, Id={0}", traceRecord.RequestId.ToString());
+            actualTrace = actualTrace.Substring(
+                actualTrace.IndexOf(timePrefix) + timePrefix.Length
+            );
+            string expectedTrace = String.Format(
+                "Sending response, Id={0}",
+                traceRecord.RequestId.ToString()
+            );
             Assert.Equal(expectedTrace, actualTrace);
         }
 
@@ -729,9 +893,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         void TranslateHttpResponseException_Throws_With_Null_TraceRecord()
         {
             // Arrange & Act & Assert
-            ArgumentNullException exception =
-                Assert.Throws<ArgumentNullException>(
-                    () => { new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(null); });
+            ArgumentNullException exception = Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(null);
+            });
 
             Assert.Equal("traceRecord", exception.ParamName);
         }
@@ -743,12 +908,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest))
+                Exception = new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.BadRequest)
+                ),
             };
 
             // Act
@@ -765,14 +932,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.BadRequest))
+                Exception = new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.BadRequest)
+                ),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -788,14 +956,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.Moved))
+                Exception = new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.Moved)
+                ),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -811,14 +980,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(new HttpResponseMessage(HttpStatusCode.InternalServerError))
+                Exception = new HttpResponseException(
+                    new HttpResponseMessage(HttpStatusCode.InternalServerError)
+                ),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -834,18 +1004,20 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             HttpError httpError = new HttpError();
             HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.BadRequest);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -861,7 +1033,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             Exception exception = null;
@@ -879,13 +1051,15 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             httpError[MessageDetailKey] = "ExpectedDetailMessage";
 
             HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.BadRequest);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
             TraceRecord traceRecord = new TraceRecord(request, "MyCategory", TraceLevel.Error)
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -893,14 +1067,17 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
 
-            AssertContainsExactly(traceRecord.Message, new Dictionary<string, string>()
-            {
-                { "UserMessage", "'ExpectedUserMessage'" },
-                { "MessageDetail", "'ExpectedDetailMessage'" },
-                { "ExceptionType", "'System.InvalidOperationException'" },
-                { "ExceptionMessage", "'ExpectedExceptionMessage'" },
-                { "StackTrace", exception.StackTrace.Trim() }
-            });
+            AssertContainsExactly(
+                traceRecord.Message,
+                new Dictionary<string, string>()
+                {
+                    { "UserMessage", "'ExpectedUserMessage'" },
+                    { "MessageDetail", "'ExpectedDetailMessage'" },
+                    { "ExceptionType", "'System.InvalidOperationException'" },
+                    { "ExceptionMessage", "'ExpectedExceptionMessage'" },
+                    { "StackTrace", exception.StackTrace.Trim() },
+                }
+            );
         }
 
         [Fact]
@@ -910,7 +1087,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             Exception exception1 = null;
@@ -949,13 +1126,19 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             httpError[MessageDetailKey] = "ExpectedDetailMessage";
 
             HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.BadRequest);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Error)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Error
+            )
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
-
 
             // Act
             new SystemDiagnosticsTraceWriter().TranslateHttpResponseException(traceRecord);
@@ -963,24 +1146,23 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             // Assert
             Assert.Equal(TraceLevel.Warn, traceRecord.Level);
 
-            AssertContainsExactly(traceRecord.Message, new Dictionary<string, string>()
-            {
-                { "UserMessage", "'ExpectedUserMessage'" },
-                { "MessageDetail", "'ExpectedDetailMessage'" },
-
-                { "ExceptionType", "'System.InvalidOperationException'" },
-                { "ExceptionMessage", "'ExpectedExceptionMessage1'" },
-                { "StackTrace", exception1.StackTrace.Trim() },
-
-                { "ExceptionType[1]", "'System.NotImplementedException'" },
-                { "ExceptionMessage[1]", "'ExpectedExceptionMessage2'" },
-                { "StackTrace[1]", exception2.StackTrace.Trim() },
-
-                { "ExceptionType[2]", "'System.NotSupportedException'" },
-                { "ExceptionMessage[2]", "'ExpectedExceptionMessage3'" },
-                { "StackTrace[2]", exception3.StackTrace.Trim() }
-
-            });
+            AssertContainsExactly(
+                traceRecord.Message,
+                new Dictionary<string, string>()
+                {
+                    { "UserMessage", "'ExpectedUserMessage'" },
+                    { "MessageDetail", "'ExpectedDetailMessage'" },
+                    { "ExceptionType", "'System.InvalidOperationException'" },
+                    { "ExceptionMessage", "'ExpectedExceptionMessage1'" },
+                    { "StackTrace", exception1.StackTrace.Trim() },
+                    { "ExceptionType[1]", "'System.NotImplementedException'" },
+                    { "ExceptionMessage[1]", "'ExpectedExceptionMessage2'" },
+                    { "StackTrace[1]", exception2.StackTrace.Trim() },
+                    { "ExceptionType[2]", "'System.NotSupportedException'" },
+                    { "ExceptionMessage[2]", "'ExpectedExceptionMessage3'" },
+                    { "StackTrace[2]", exception3.StackTrace.Trim() },
+                }
+            );
         }
 
         [Fact]
@@ -990,7 +1172,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             var ex500 = new HttpResponseException(HttpStatusCode.InternalServerError);
@@ -1001,12 +1183,21 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             var aggregate = new AggregateException(ex500, ex503IsWithinMe, ex401);
 
             HttpError httpError = new HttpError(aggregate, includeErrorDetail: true);
-            HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.ServiceUnavailable);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            HttpResponseMessage errorResponse = request.CreateResponse(
+                HttpStatusCode.ServiceUnavailable
+            );
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Error)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Error
+            )
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
 
             // Act
@@ -1024,7 +1215,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             ModelStateDictionary modelStateDictionary = new ModelStateDictionary();
@@ -1040,11 +1231,18 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             HttpError httpError = new HttpError(modelStateDictionary, includeErrorDetail: true);
             HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.BadRequest);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Error)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Error
+            )
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
 
             // Act
@@ -1055,11 +1253,14 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             string message = ExtractModelStateErrorString(traceRecord.Message);
 
-            AssertContainsExactly(message, new Dictionary<string, string>()
-            {
-                { "key1", "[modelState1.Error1, modelState1.Error2]" },
-                { "key2", "[modelState2.Error1, modelState2.Error2]" },
-            });
+            AssertContainsExactly(
+                message,
+                new Dictionary<string, string>()
+                {
+                    { "key1", "[modelState1.Error1, modelState1.Error2]" },
+                    { "key2", "[modelState2.Error1, modelState2.Error2]" },
+                }
+            );
         }
 
         [Fact]
@@ -1069,7 +1270,7 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             HttpRequestMessage request = new HttpRequestMessage
             {
                 RequestUri = new Uri("http://localhost"),
-                Method = HttpMethod.Get
+                Method = HttpMethod.Get,
             };
 
             Exception exception = null;
@@ -1084,11 +1285,18 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
 
             HttpError httpError = new HttpError();
             HttpResponseMessage errorResponse = request.CreateResponse(HttpStatusCode.BadRequest);
-            errorResponse.Content = new ObjectContent<HttpError>(httpError, new JsonMediaTypeFormatter());
+            errorResponse.Content = new ObjectContent<HttpError>(
+                httpError,
+                new JsonMediaTypeFormatter()
+            );
 
-            TraceRecord traceRecord = new TraceRecord(request, "System.Web.Http.Request", TraceLevel.Error)
+            TraceRecord traceRecord = new TraceRecord(
+                request,
+                "System.Web.Http.Request",
+                TraceLevel.Error
+            )
             {
-                Exception = new HttpResponseException(errorResponse)
+                Exception = new HttpResponseException(errorResponse),
             };
 
             // Act
@@ -1099,7 +1307,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
             Assert.Equal(string.Empty, traceRecord.Message);
         }
 
-        private static void AssertContainsExactly(string trace, IDictionary<string, string> expected)
+        private static void AssertContainsExactly(
+            string trace,
+            IDictionary<string, string> expected
+        )
         {
             IDictionary<string, string> actual = ParseTrace(trace);
             Assert.Equal(expected.Count, actual.Count);
@@ -1181,7 +1392,10 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
         {
             private List<string> _messages = new List<string>();
 
-            public IList<string> Messages { get { return _messages; } }
+            public IList<string> Messages
+            {
+                get { return _messages; }
+            }
 
             public string SourceName { get; set; }
 
@@ -1199,7 +1413,13 @@ namespace System.Web.Http.Tracing.Diagnostics.Test
                 Write(message + Environment.NewLine);
             }
 
-            public override void TraceEvent(TraceEventCache eventCache, string source, TraceEventType eventType, int id, string message)
+            public override void TraceEvent(
+                TraceEventCache eventCache,
+                string source,
+                TraceEventType eventType,
+                int id,
+                string message
+            )
             {
                 _messages.Add(message);
                 SourceName = source;

@@ -22,14 +22,10 @@ namespace System.Xml.Serialization
         [GeneratedRegex("[(][(](?<cast>[^)]+)[)](?<arg>[^)]+)[)]")]
         private static partial Regex Regex2();
 
-        private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(
-            () =>
-            {
-                return typeof(IList).GetMethod(
-                    "get_Item",
-                    new Type[] { typeof(int) }
-                )!;
-            });
+        private static readonly Lazy<MethodInfo> s_iListGetItemMethod = new Lazy<MethodInfo>(() =>
+        {
+            return typeof(IList).GetMethod("get_Item", new Type[] { typeof(int) })!;
+        });
 
         public string Source;
         public readonly string Arg;
@@ -39,8 +35,13 @@ namespace System.Xml.Serialization
         public readonly Type? Type;
         public readonly CodeGenerator ILG;
 
-        public SourceInfo(string source, string? arg, MemberInfo? memberInfo,
-            [DynamicallyAccessedMembers(TrimmerConstants.AllMethods)] Type? type, CodeGenerator ilg)
+        public SourceInfo(
+            string source,
+            string? arg,
+            MemberInfo? memberInfo,
+            [DynamicallyAccessedMembers(TrimmerConstants.AllMethods)] Type? type,
+            CodeGenerator ilg
+        )
         {
             this.Source = source;
             this.Arg = arg ?? source;
@@ -109,7 +110,7 @@ namespace System.Xml.Serialization
                         "get_Item",
                         CodeGenerator.InstanceBindingFlags,
                         new Type[] { typeof(int) }
-                        )!;
+                    )!;
 
                     if (get_Item == null && typeof(IList).IsAssignableFrom(varType))
                     {
@@ -126,9 +127,20 @@ namespace System.Xml.Serialization
                         ILG.Ldloca(localTmp);
                         ConvertNullableValue(eType, elementType!);
                     }
-                    else if ((elementType != null) && !(eType.IsAssignableFrom(elementType) || elementType.IsAssignableFrom(eType)))
+                    else if (
+                        (elementType != null)
+                        && !(
+                            eType.IsAssignableFrom(elementType)
+                            || elementType.IsAssignableFrom(eType)
+                        )
+                    )
                     {
-                        throw new CodeGeneratorConversionException(eType, elementType, asAddress, "IsNotAssignableFrom");
+                        throw new CodeGeneratorConversionException(
+                            eType,
+                            elementType,
+                            asAddress,
+                            "IsNotAssignableFrom"
+                        );
                     }
                     else
                     {
@@ -146,7 +158,9 @@ namespace System.Xml.Serialization
                 Type varType;
                 if (Arg.StartsWith("o.@", StringComparison.Ordinal) || MemberInfo != null)
                 {
-                    var = ILG.GetVariable(Arg.StartsWith("o.@", StringComparison.Ordinal) ? "o" : Arg);
+                    var = ILG.GetVariable(
+                        Arg.StartsWith("o.@", StringComparison.Ordinal) ? "o" : Arg
+                    );
                     varType = CodeGenerator.GetVariableType(var);
                     if (varType.IsValueType)
                         ILG.LoadAddress(var);
@@ -158,8 +172,10 @@ namespace System.Xml.Serialization
                     var = ILG.GetVariable(Arg);
                     varType = CodeGenerator.GetVariableType(var);
 
-                    if (CodeGenerator.IsNullableGenericType(varType) &&
-                        varType.GetGenericArguments()[0] == elementType)
+                    if (
+                        CodeGenerator.IsNullableGenericType(varType)
+                        && varType.GetGenericArguments()[0] == elementType
+                    )
                     {
                         ILG.LoadAddress(var);
                         ConvertNullableValue(varType, elementType);
@@ -175,8 +191,10 @@ namespace System.Xml.Serialization
 
                 if (MemberInfo != null)
                 {
-                    Type memberType = (MemberInfo is FieldInfo) ?
-                        ((FieldInfo)MemberInfo).FieldType : ((PropertyInfo)MemberInfo).PropertyType;
+                    Type memberType =
+                        (MemberInfo is FieldInfo)
+                            ? ((FieldInfo)MemberInfo).FieldType
+                            : ((PropertyInfo)MemberInfo).PropertyType;
                     if (CodeGenerator.IsNullableGenericType(memberType))
                     {
                         ILG.LoadMemberAddress(MemberInfo);
@@ -194,7 +212,9 @@ namespace System.Xml.Serialization
                     if (match.Success)
                     {
                         Debug.Assert(match.Groups["arg"].Value == Arg);
-                        Debug.Assert(match.Groups["cast"].Value == CodeIdentifier.GetCSharpName(Type!));
+                        Debug.Assert(
+                            match.Groups["cast"].Value == CodeIdentifier.GetCSharpName(Type!)
+                        );
                         if (asAddress)
                             ILG.ConvertAddress(varType, Type!);
                         else
@@ -218,17 +238,25 @@ namespace System.Xml.Serialization
         }
 
         private void ConvertNullableValue(
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods
-                | DynamicallyAccessedMemberTypes.NonPublicMethods)] Type nullableType, Type targetType)
+            [DynamicallyAccessedMembers(
+                DynamicallyAccessedMemberTypes.PublicMethods
+                    | DynamicallyAccessedMemberTypes.NonPublicMethods
+            )]
+                Type nullableType,
+            Type targetType
+        )
         {
-            System.Diagnostics.Debug.Assert(targetType == nullableType || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0]));
+            System.Diagnostics.Debug.Assert(
+                targetType == nullableType
+                    || targetType.IsAssignableFrom(nullableType.GetGenericArguments()[0])
+            );
             if (targetType != nullableType)
             {
                 MethodInfo Nullable_get_Value = nullableType.GetMethod(
                     "get_Value",
                     CodeGenerator.InstanceBindingFlags,
                     Type.EmptyTypes
-                    )!;
+                )!;
                 ILG.Call(Nullable_get_Value);
                 if (targetType != null)
                 {

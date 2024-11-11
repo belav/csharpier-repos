@@ -16,10 +16,18 @@ internal class TestMatcher : Matcher
         _isHandled = isHandled;
 
         setEndpointCallback ??= static c =>
-            {
-                c.Request.RouteValues = new RouteValueDictionary(new { controller = "Home", action = "Index" });
-                c.SetEndpoint(new Endpoint(TestConstants.EmptyRequestDelegate, EndpointMetadataCollection.Empty, "Test endpoint"));
-            };
+        {
+            c.Request.RouteValues = new RouteValueDictionary(
+                new { controller = "Home", action = "Index" }
+            );
+            c.SetEndpoint(
+                new Endpoint(
+                    TestConstants.EmptyRequestDelegate,
+                    EndpointMetadataCollection.Empty,
+                    "Test endpoint"
+                )
+            );
+        };
         _setEndpointCallback = setEndpointCallback;
     }
 

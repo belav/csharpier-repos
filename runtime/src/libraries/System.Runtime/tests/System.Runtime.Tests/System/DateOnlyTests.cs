@@ -99,7 +99,7 @@ namespace System.Tests
             Assert.Equal(DateOnly.MaxValue.DayNumber, dateOnly.DayNumber);
 
             DateTime dt = DateTime.Today;
-            int dayNumber = (int) (dt.Ticks / TimeSpan.TicksPerDay);
+            int dayNumber = (int)(dt.Ticks / TimeSpan.TicksPerDay);
             dateOnly = DateOnly.FromDayNumber(dayNumber);
             Assert.Equal(dt.Year, dateOnly.Year);
             Assert.Equal(dt.Month, dateOnly.Month);
@@ -107,18 +107,19 @@ namespace System.Tests
             Assert.Equal(dayNumber, dateOnly.DayNumber);
 
             Assert.Throws<ArgumentOutOfRangeException>(() => DateOnly.FromDayNumber(-1));
-            Assert.Throws<ArgumentOutOfRangeException>(() => DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => DateOnly.FromDayNumber(DateOnly.MaxValue.DayNumber + 1)
+            );
         }
 
         [Fact]
         public static void DayOfWeekAndDayOfYearTest()
         {
             DateTime dt = DateTime.Today;
-            DateOnly dateOnly = DateOnly.FromDayNumber((int) (dt.Ticks / TimeSpan.TicksPerDay));
+            DateOnly dateOnly = DateOnly.FromDayNumber((int)(dt.Ticks / TimeSpan.TicksPerDay));
             Assert.Equal(dt.DayOfWeek, dateOnly.DayOfWeek);
             Assert.Equal(dt.DayOfYear, dateOnly.DayOfYear);
         }
-
 
         [Fact]
         public static void AddDaysTest()
@@ -158,7 +159,7 @@ namespace System.Tests
             }
 
             DateTime dt = DateTime.Today;
-            dateOnly = DateOnly.FromDayNumber((int) (dt.Ticks / TimeSpan.TicksPerDay));
+            dateOnly = DateOnly.FromDayNumber((int)(dt.Ticks / TimeSpan.TicksPerDay));
 
             Assert.Equal(dt.Year, dateOnly.Year);
             Assert.Equal(dt.Month, dateOnly.Month);
@@ -197,7 +198,7 @@ namespace System.Tests
             }
 
             DateTime dt = DateTime.Today;
-            dateOnly = DateOnly.FromDayNumber((int) (dt.Ticks / TimeSpan.TicksPerDay));
+            dateOnly = DateOnly.FromDayNumber((int)(dt.Ticks / TimeSpan.TicksPerDay));
 
             Assert.Equal(dt.Year, dateOnly.Year);
             Assert.Equal(dt.Month, dateOnly.Month);
@@ -261,7 +262,6 @@ namespace System.Tests
             Assert.Equal(20, dt.Second);
             Assert.Equal(DateTimeKind.Unspecified, dt.Kind);
 
-
             dt = dateOnly.ToDateTime(new TimeOnly(23, 59, 59), DateTimeKind.Utc);
             Assert.Equal(dateOnly.Year, dt.Year);
             Assert.Equal(dateOnly.Month, dt.Month);
@@ -323,7 +323,8 @@ namespace System.Tests
 
         // Arabic cultures uses zero width characters in the date formatting which cause a problem with the DateTime parsing in general.
         // We still test these cultures parsing but with ParseExact instead.
-        internal static bool IsNotArabicCulture => !CultureInfo.CurrentCulture.Name.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+        internal static bool IsNotArabicCulture =>
+            !CultureInfo.CurrentCulture.Name.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
 
         [ConditionalFact(nameof(IsNotArabicCulture))]
         public static void BasicFormatParseTest()
@@ -341,34 +342,111 @@ namespace System.Tests
 
             s = dateOnly.ToString(CultureInfo.InvariantCulture);
             parsedDateOnly = DateOnly.Parse(s, CultureInfo.InvariantCulture);
-            Assert.True(DateOnly.TryParse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDateOnly1));
+            Assert.True(
+                DateOnly.TryParse(
+                    s.AsSpan(),
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsedDateOnly1
+                )
+            );
             Assert.Equal(dateOnly, parsedDateOnly);
             Assert.Equal(dateOnly, parsedDateOnly1);
             parsedDateOnly = DateOnly.Parse(s.AsSpan(), CultureInfo.InvariantCulture);
-            Assert.True(DateOnly.TryParse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedDateOnly1));
+            Assert.True(
+                DateOnly.TryParse(
+                    s.AsSpan(),
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsedDateOnly1
+                )
+            );
             Assert.Equal(dateOnly, parsedDateOnly);
             Assert.Equal(dateOnly, parsedDateOnly1);
 
-            Assert.False(DateOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out parsedDateOnly1));
-            Assert.Throws<ArgumentException>(() => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
-            Assert.False(DateOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out parsedDateOnly1));
-            Assert.Throws<ArgumentException>(() => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal));
-            Assert.False(DateOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out parsedDateOnly1));
-            Assert.Throws<ArgumentException>(() => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
-            Assert.False(DateOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault, out parsedDateOnly1));
-            Assert.Throws<ArgumentException>(() => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault));
+            Assert.False(
+                DateOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal,
+                    out parsedDateOnly1
+                )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.AdjustToUniversal
+                    )
+            );
+            Assert.False(
+                DateOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeLocal,
+                    out parsedDateOnly1
+                )
+            );
+            Assert.Throws<ArgumentException>(
+                () => DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
+            );
+            Assert.False(
+                DateOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal,
+                    out parsedDateOnly1
+                )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+            );
+            Assert.False(
+                DateOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.NoCurrentDateDefault,
+                    out parsedDateOnly1
+                )
+            );
+            Assert.Throws<ArgumentException>(
+                () =>
+                    DateOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.NoCurrentDateDefault
+                    )
+            );
 
             s = "     " + s + "     ";
-            parsedDateOnly = DateOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces);
+            parsedDateOnly = DateOnly.Parse(
+                s,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AllowWhiteSpaces
+            );
             Assert.Equal(dateOnly, parsedDateOnly);
-            parsedDateOnly = DateOnly.Parse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces);
+            parsedDateOnly = DateOnly.Parse(
+                s.AsSpan(),
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AllowWhiteSpaces
+            );
             Assert.Equal(dateOnly, parsedDateOnly);
         }
 
         [ConditionalFact(nameof(IsNotArabicCulture))]
         public static void FormatParseTest()
         {
-            string[] patterns = new string[] { CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern, CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern, "d", "D", "o", "r" };
+            string[] patterns = new string[]
+            {
+                CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern,
+                CultureInfo.CurrentCulture.DateTimeFormat.LongDatePattern,
+                "d",
+                "D",
+                "o",
+                "r",
+            };
 
             DateOnly dateOnly = DateOnly.FromDateTime(DateTime.Today);
 
@@ -385,11 +463,25 @@ namespace System.Tests
                 Assert.Equal(dateOnly, parsedDateOnly1);
 
                 parsedDateOnly = DateOnly.Parse(formattedDate, CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParse(formattedDate, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                Assert.True(
+                    DateOnly.TryParse(
+                        formattedDate,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
                 parsedDateOnly = DateOnly.Parse(formattedDate.AsSpan(), CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParse(formattedDate.AsSpan(), CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                Assert.True(
+                    DateOnly.TryParse(
+                        formattedDate.AsSpan(),
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
 
@@ -398,16 +490,46 @@ namespace System.Tests
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
                 parsedDateOnly = DateOnly.ParseExact(formattedDate.AsSpan(), format.AsSpan());
-                Assert.True(DateOnly.TryParseExact(formattedDate.AsSpan(), format.AsSpan(), out parsedDateOnly1));
+                Assert.True(
+                    DateOnly.TryParseExact(
+                        formattedDate.AsSpan(),
+                        format.AsSpan(),
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
 
-                parsedDateOnly = DateOnly.ParseExact(formattedDate, format, CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParseExact(formattedDate, format, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                parsedDateOnly = DateOnly.ParseExact(
+                    formattedDate,
+                    format,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    DateOnly.TryParseExact(
+                        formattedDate,
+                        format,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
-                parsedDateOnly = DateOnly.ParseExact(formattedDate.AsSpan(), format.AsSpan(), CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParseExact(formattedDate.AsSpan(), format.AsSpan(), CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                parsedDateOnly = DateOnly.ParseExact(
+                    formattedDate.AsSpan(),
+                    format.AsSpan(),
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    DateOnly.TryParseExact(
+                        formattedDate.AsSpan(),
+                        format.AsSpan(),
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
 
@@ -416,16 +538,42 @@ namespace System.Tests
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
                 parsedDateOnly = DateOnly.ParseExact(formattedDate.AsSpan(), patterns);
-                Assert.True(DateOnly.TryParseExact(formattedDate.AsSpan(), patterns, out parsedDateOnly1));
+                Assert.True(
+                    DateOnly.TryParseExact(formattedDate.AsSpan(), patterns, out parsedDateOnly1)
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
 
-                parsedDateOnly = DateOnly.ParseExact(formattedDate, patterns, CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParseExact(formattedDate, patterns, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                parsedDateOnly = DateOnly.ParseExact(
+                    formattedDate,
+                    patterns,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    DateOnly.TryParseExact(
+                        formattedDate,
+                        patterns,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
-                parsedDateOnly = DateOnly.ParseExact(formattedDate.AsSpan(), patterns, CultureInfo.CurrentCulture);
-                Assert.True(DateOnly.TryParseExact(formattedDate.AsSpan(), patterns, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedDateOnly1));
+                parsedDateOnly = DateOnly.ParseExact(
+                    formattedDate.AsSpan(),
+                    patterns,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    DateOnly.TryParseExact(
+                        formattedDate.AsSpan(),
+                        patterns,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedDateOnly1
+                    )
+                );
                 Assert.Equal(dateOnly, parsedDateOnly);
                 Assert.Equal(dateOnly, parsedDateOnly1);
             }
@@ -529,8 +677,12 @@ namespace System.Tests
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r"));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O"));
-                Assert.Throws<FormatException>(() => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "u"));
-                Assert.Throws<FormatException>(() => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "hh-ss"));
+                Assert.Throws<FormatException>(
+                    () => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "u")
+                );
+                Assert.Throws<FormatException>(
+                    () => dateOnly.TryFormat(stackalloc char[100], out charsWritten, "hh-ss")
+                );
                 Assert.Throws<FormatException>(() => $"{dateOnly:u}");
                 Assert.Throws<FormatException>(() => $"{dateOnly:hh-ss}");
             }
@@ -545,11 +697,17 @@ namespace System.Tests
                 Assert.Equal(10, charsWritten);
                 Assert.True(dateOnly.TryFormat(buffer, out charsWritten, "R", null));
                 Assert.Equal(16, charsWritten);
-                Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, default, null));
+                Assert.False(
+                    dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, default, null)
+                );
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r", null));
                 Assert.False(dateOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O", null));
-                Assert.Throws<FormatException>(() => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "u", null));
-                Assert.Throws<FormatException>(() => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "hh-ss", null));
+                Assert.Throws<FormatException>(
+                    () => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "u", null)
+                );
+                Assert.Throws<FormatException>(
+                    () => dateOnly.TryFormat(stackalloc byte[100], out charsWritten, "hh-ss", null)
+                );
                 Assert.Throws<FormatException>(() => $"{dateOnly:u}");
                 Assert.Throws<FormatException>(() => $"{dateOnly:hh-ss}");
             }

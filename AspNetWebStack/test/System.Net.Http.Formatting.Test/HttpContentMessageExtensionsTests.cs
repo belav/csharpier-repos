@@ -136,7 +136,7 @@ namespace System.Net.Http
                         @"X-Frame-Options: SAMEORIGIN",
                         @"Expires: -1",
                         @"Content-Type: text/html; charset=ISO-8859-1",
-                    }
+                    },
                 };
             }
         }
@@ -167,11 +167,17 @@ namespace System.Net.Http
             }
 
             StringContent content = new StringContent(message);
-            content.Headers.ContentType = isRequest ? ParserData.HttpRequestMediaType : ParserData.HttpResponseMediaType;
+            content.Headers.ContentType = isRequest
+                ? ParserData.HttpRequestMediaType
+                : ParserData.HttpResponseMediaType;
             return content;
         }
 
-        private static HttpContent CreateContent(bool isRequest, IEnumerable<string> header, string body)
+        private static HttpContent CreateContent(
+            bool isRequest,
+            IEnumerable<string> header,
+            string body
+        )
         {
             StringBuilder message = new StringBuilder();
             foreach (string h in header)
@@ -187,7 +193,9 @@ namespace System.Net.Http
             }
 
             StringContent content = new StringContent(message.ToString());
-            content.Headers.ContentType = isRequest ? ParserData.HttpRequestMediaType : ParserData.HttpResponseMediaType;
+            content.Headers.ContentType = isRequest
+                ? ParserData.HttpRequestMediaType
+                : ParserData.HttpResponseMediaType;
             return content;
         }
 
@@ -199,15 +207,24 @@ namespace System.Net.Http
             Assert.Equal(ParserData.HttpMessageEntity, entity);
         }
 
-        private static async Task ValidateRequestMessageAsync(HttpRequestMessage request, bool hasEntity)
+        private static async Task ValidateRequestMessageAsync(
+            HttpRequestMessage request,
+            bool hasEntity
+        )
         {
             Assert.NotNull(request);
             Assert.Equal(Version.Parse("1.2"), request.Version);
             Assert.Equal(ParserData.HttpMethod, request.Method.ToString());
             Assert.Equal(ParserData.HttpRequestUri, request.RequestUri);
             Assert.Equal(ParserData.HttpHostName, request.Headers.Host);
-            Assert.True(request.Headers.Contains("N1"), "request did not contain expected N1 header.");
-            Assert.True(request.Headers.Contains("N2"), "request did not contain expected N2 header.");
+            Assert.True(
+                request.Headers.Contains("N1"),
+                "request did not contain expected N1 header."
+            );
+            Assert.True(
+                request.Headers.Contains("N2"),
+                "request did not contain expected N2 header."
+            );
 
             if (hasEntity)
             {
@@ -215,14 +232,23 @@ namespace System.Net.Http
             }
         }
 
-        private static async Task ValidateResponseMessageAsync(HttpResponseMessage response, bool hasEntity)
+        private static async Task ValidateResponseMessageAsync(
+            HttpResponseMessage response,
+            bool hasEntity
+        )
         {
             Assert.NotNull(response);
             Assert.Equal(new Version("1.2"), response.Version);
             Assert.Equal(ParserData.HttpStatus, response.StatusCode);
             Assert.Equal(ParserData.HttpReasonPhrase, response.ReasonPhrase);
-            Assert.True(response.Headers.Contains("N1"), "Response did not contain expected N1 header.");
-            Assert.True(response.Headers.Contains("N2"), "Response did not contain expected N2 header.");
+            Assert.True(
+                response.Headers.Contains("N1"),
+                "Response did not contain expected N1 header."
+            );
+            Assert.True(
+                response.Headers.Contains("N2"),
+                "Response did not contain expected N2 header."
+            );
 
             if (hasEntity)
             {
@@ -233,77 +259,142 @@ namespace System.Net.Http
         [Fact]
         public void ReadAsHttpRequestMessageAsync_VerifyArguments()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentMessageExtensions.ReadAsHttpRequestMessageAsync(null), "content");
-            Assert.ThrowsArgument(() => new ByteArrayContent(new byte[] { }).ReadAsHttpRequestMessageAsync(), "content");
-            Assert.ThrowsArgument(() => new StringContent(String.Empty).ReadAsHttpRequestMessageAsync(), "content");
-            Assert.ThrowsArgument(() => new StringContent(String.Empty, Encoding.UTF8, "application/http").ReadAsHttpRequestMessageAsync(), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentMessageExtensions.ReadAsHttpRequestMessageAsync(null),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () => new ByteArrayContent(new byte[] { }).ReadAsHttpRequestMessageAsync(),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () => new StringContent(String.Empty).ReadAsHttpRequestMessageAsync(),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () =>
+                    new StringContent(
+                        String.Empty,
+                        Encoding.UTF8,
+                        "application/http"
+                    ).ReadAsHttpRequestMessageAsync(),
+                "content"
+            );
 
-            Assert.ThrowsArgument(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpResponseMediaType;
-                content.ReadAsHttpRequestMessageAsync();
-            }, "content");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpResponseMediaType;
+                    content.ReadAsHttpRequestMessageAsync();
+                },
+                "content"
+            );
 
-            Assert.ThrowsArgumentNull(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpRequestMediaType;
-                content.ReadAsHttpRequestMessageAsync(null);
-            }, "uriScheme");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpRequestMediaType;
+                    content.ReadAsHttpRequestMessageAsync(null);
+                },
+                "uriScheme"
+            );
 
-            Assert.ThrowsArgument(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpRequestMediaType;
-                content.ReadAsHttpRequestMessageAsync("i n v a l i d");
-            }, "uriScheme");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpRequestMediaType;
+                    content.ReadAsHttpRequestMessageAsync("i n v a l i d");
+                },
+                "uriScheme"
+            );
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpRequestMediaType;
-                content.ReadAsHttpRequestMessageAsync(Uri.UriSchemeHttp, ParserData.MinBufferSize - 1);
-            }, "bufferSize", ParserData.MinBufferSize.ToString(), ParserData.MinBufferSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpRequestMediaType;
+                    content.ReadAsHttpRequestMessageAsync(
+                        Uri.UriSchemeHttp,
+                        ParserData.MinBufferSize - 1
+                    );
+                },
+                "bufferSize",
+                ParserData.MinBufferSize.ToString(),
+                ParserData.MinBufferSize - 1
+            );
         }
 
         [Fact]
         public void ReadAsHttpResponseMessageAsync_VerifyArguments()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentMessageExtensions.ReadAsHttpResponseMessageAsync(null), "content");
-            Assert.ThrowsArgument(() => new ByteArrayContent(new byte[] { }).ReadAsHttpResponseMessageAsync(), "content");
-            Assert.ThrowsArgument(() => new StringContent(String.Empty).ReadAsHttpResponseMessageAsync(), "content");
-            Assert.ThrowsArgument(() => new StringContent(String.Empty, Encoding.UTF8, "application/http").ReadAsHttpResponseMessageAsync(), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentMessageExtensions.ReadAsHttpResponseMessageAsync(null),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () => new ByteArrayContent(new byte[] { }).ReadAsHttpResponseMessageAsync(),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () => new StringContent(String.Empty).ReadAsHttpResponseMessageAsync(),
+                "content"
+            );
+            Assert.ThrowsArgument(
+                () =>
+                    new StringContent(
+                        String.Empty,
+                        Encoding.UTF8,
+                        "application/http"
+                    ).ReadAsHttpResponseMessageAsync(),
+                "content"
+            );
 
-            Assert.ThrowsArgument(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpRequestMediaType;
-                content.ReadAsHttpResponseMessageAsync();
-            }, "content");
+            Assert.ThrowsArgument(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpRequestMediaType;
+                    content.ReadAsHttpResponseMessageAsync();
+                },
+                "content"
+            );
 
-            Assert.ThrowsArgumentGreaterThanOrEqualTo(() =>
-            {
-                HttpContent content = new StringContent(String.Empty);
-                content.Headers.ContentType = ParserData.HttpResponseMediaType;
-                content.ReadAsHttpResponseMessageAsync(ParserData.MinBufferSize - 1);
-            }, "bufferSize", ParserData.MinBufferSize.ToString(), ParserData.MinBufferSize - 1);
+            Assert.ThrowsArgumentGreaterThanOrEqualTo(
+                () =>
+                {
+                    HttpContent content = new StringContent(String.Empty);
+                    content.Headers.ContentType = ParserData.HttpResponseMediaType;
+                    content.ReadAsHttpResponseMessageAsync(ParserData.MinBufferSize - 1);
+                },
+                "bufferSize",
+                ParserData.MinBufferSize.ToString(),
+                ParserData.MinBufferSize - 1
+            );
         }
 
         [Fact]
         public void IsHttpRequestMessageContentVerifyArguments()
         {
-            Assert.ThrowsArgumentNull(() => HttpContentMessageExtensions.IsHttpRequestMessageContent(null), "content");
+            Assert.ThrowsArgumentNull(
+                () => HttpContentMessageExtensions.IsHttpRequestMessageContent(null),
+                "content"
+            );
         }
 
         [Fact]
         public void IsHttpResponseMessageContentVerifyArguments()
         {
-            Assert.ThrowsArgumentNull(() =>
-            {
-                HttpContent content = null;
-                HttpContentMessageExtensions.IsHttpResponseMessageContent(content);
-            }, "content");
+            Assert.ThrowsArgumentNull(
+                () =>
+                {
+                    HttpContent content = null;
+                    HttpContentMessageExtensions.IsHttpResponseMessageContent(content);
+                },
+                "content"
+            );
         }
 
         [Theory]
@@ -326,7 +417,6 @@ namespace System.Net.Http
         public void IsHttpResponseMessageContent(HttpContent notHttpMessageContent)
         {
             Assert.False(notHttpMessageContent.IsHttpResponseMessageContent());
-
         }
 
         [Fact]
@@ -357,7 +447,9 @@ namespace System.Net.Http
         public async Task ReadAsHttpRequestMessageAsync_WithHttpsUriScheme_ReturnsUriWithHttps()
         {
             HttpContent content = CreateContent(isRequest: true, hasEntity: true);
-            HttpRequestMessage httpRequest = await content.ReadAsHttpRequestMessageAsync(Uri.UriSchemeHttps);
+            HttpRequestMessage httpRequest = await content.ReadAsHttpRequestMessageAsync(
+                Uri.UriSchemeHttps
+            );
             Assert.Equal(ParserData.HttpsRequestUri, httpRequest.RequestUri);
         }
 
@@ -380,31 +472,35 @@ namespace System.Net.Http
         [Fact]
         public Task ReadAsHttpRequestMessageAsync_NoHostHeader_Throws()
         {
-            string[] request = new[] {
-                @"GET / HTTP/1.1",
-            };
+            string[] request = new[] { @"GET / HTTP/1.1" };
 
             HttpContent content = CreateContent(true, request, null);
-            return Assert.ThrowsAsync<InvalidOperationException>(() => content.ReadAsHttpRequestMessageAsync());
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => content.ReadAsHttpRequestMessageAsync()
+            );
         }
 
         [Fact]
         public Task ReadAsHttpRequestMessageAsync_TwoHostHeaders_Throws()
         {
-            string[] request = new[] {
+            string[] request = new[]
+            {
                 @"GET / HTTP/1.1",
                 @"Host: somehost.com",
                 @"Host: otherhost.com",
             };
 
             HttpContent content = CreateContent(true, request, null);
-            return Assert.ThrowsAsync<InvalidOperationException>(() => content.ReadAsHttpRequestMessageAsync());
+            return Assert.ThrowsAsync<InvalidOperationException>(
+                () => content.ReadAsHttpRequestMessageAsync()
+            );
         }
 
         [Fact]
         public async Task ReadAsHttpRequestMessageAsync_SortHeaders()
         {
-            string[] request = new[] {
+            string[] request = new[]
+            {
                 @"GET / HTTP/1.1",
                 @"Host: somehost.com",
                 @"Content-Language: xx",
@@ -416,14 +512,17 @@ namespace System.Net.Http
             Assert.Equal("xx", httpRequest.Content.Headers.ContentLanguage.ToString());
 
             IEnumerable<string> requestHeaderValues;
-            Assert.True(httpRequest.Headers.TryGetValues("request-header", out requestHeaderValues));
+            Assert.True(
+                httpRequest.Headers.TryGetValues("request-header", out requestHeaderValues)
+            );
             Assert.Equal("zz", requestHeaderValues.First());
         }
 
         [Fact]
         public async Task ReadAsHttpResponseMessageAsync_SortHeaders()
         {
-            string[] response = new[] {
+            string[] response = new[]
+            {
                 @"HTTP/1.1 200 OK",
                 @"Content-Language: xx",
                 @"Response-Header: zz",
@@ -434,32 +533,44 @@ namespace System.Net.Http
             Assert.Equal("xx", httpResponse.Content.Headers.ContentLanguage.ToString());
 
             IEnumerable<string> ResponseHeaderValues;
-            Assert.True(httpResponse.Headers.TryGetValues("Response-header", out ResponseHeaderValues));
+            Assert.True(
+                httpResponse.Headers.TryGetValues("Response-header", out ResponseHeaderValues)
+            );
             Assert.Equal("zz", ResponseHeaderValues.First());
         }
 
         [Fact]
         public Task ReadAsHttpResponseMessageAsync_Throws_TheHeaderSizeExceededTheDefaultLimit()
         {
-            string[] response = new[] {
+            string[] response = new[]
+            {
                 @"HTTP/1.1 200 OK",
-                String.Format("Set-Cookie: {0}={1}", new String('a', 16 * 1024), new String('b', 16 * 1024))
+                String.Format(
+                    "Set-Cookie: {0}={1}",
+                    new String('a', 16 * 1024),
+                    new String('b', 16 * 1024)
+                ),
             };
 
             return Assert.ThrowsAsync<InvalidOperationException>(() =>
-                {
-                    HttpContent content = CreateContent(false, response, "sample body");
-                    return content.ReadAsHttpResponseMessageAsync();
-                });
+            {
+                HttpContent content = CreateContent(false, response, "sample body");
+                return content.ReadAsHttpResponseMessageAsync();
+            });
         }
 
         [Fact]
         public Task ReadAsHttpRequestMessageAsync_Throws_TheHeaderSizeExceededTheDefaultLimit()
         {
-            string[] request = new[] {
+            string[] request = new[]
+            {
                 @"GET / HTTP/1.1",
                 @"Host: msdn.microsoft.com",
-                String.Format("Cookie: {0}={1}", new String('a', 16 * 1024), new String('b', 16 * 1024))
+                String.Format(
+                    "Cookie: {0}={1}",
+                    new String('a', 16 * 1024),
+                    new String('b', 16 * 1024)
+                ),
             };
 
             return Assert.ThrowsAsync<InvalidOperationException>(() =>
@@ -472,9 +583,14 @@ namespace System.Net.Http
         [Fact]
         public Task ReadAsHttpResponseMessageAsync_LargeHeaderSize()
         {
-            string[] response = new[] {
+            string[] response = new[]
+            {
                 @"HTTP/1.1 200 OK",
-                String.Format("Set-Cookie: {0}={1}", new String('a', 16 * 1024), new String('b', 16 * 1024))
+                String.Format(
+                    "Set-Cookie: {0}={1}",
+                    new String('a', 16 * 1024),
+                    new String('b', 16 * 1024)
+                ),
             };
 
             HttpContent content = CreateContent(false, response, "sample body");
@@ -484,15 +600,24 @@ namespace System.Net.Http
         [Fact]
         public async Task ReadAsHttpRequestMessageAsync_LargeHeaderSize()
         {
-            string cookieValue = string.Format("{0}={1}", new String('a', 16 * 1024), new String('b', 16 * 1024));
-            string[] request = new[] {
+            string cookieValue = string.Format(
+                "{0}={1}",
+                new String('a', 16 * 1024),
+                new String('b', 16 * 1024)
+            );
+            string[] request = new[]
+            {
                 @"GET / HTTP/1.1",
                 @"Host: msdn.microsoft.com",
                 string.Format("Cookie: {0}", cookieValue),
             };
 
             HttpContent content = CreateContent(true, request, "sample body");
-            var httpRequestMessage = await content.ReadAsHttpRequestMessageAsync(Uri.UriSchemeHttp, 64 * 1024, 64 * 1024);
+            var httpRequestMessage = await content.ReadAsHttpRequestMessageAsync(
+                Uri.UriSchemeHttp,
+                64 * 1024,
+                64 * 1024
+            );
 
             Assert.Equal(HttpMethod.Get, httpRequestMessage.Method);
             Assert.Equal("/", httpRequestMessage.RequestUri.PathAndQuery);
@@ -505,8 +630,16 @@ namespace System.Net.Http
         [Fact]
         public async Task ReadAsHttpRequestMessageAsync_LargeHttpRequestLine()
         {
-            string requestPath = string.Format("/myurl?{0}={1}", new string('a', 4 * 1024), new string('b', 4 * 1024));
-            string cookieValue = string.Format("{0}={1}", new String('a', 4 * 1024), new String('b', 4 * 1024));
+            string requestPath = string.Format(
+                "/myurl?{0}={1}",
+                new string('a', 4 * 1024),
+                new string('b', 4 * 1024)
+            );
+            string cookieValue = string.Format(
+                "{0}={1}",
+                new String('a', 4 * 1024),
+                new String('b', 4 * 1024)
+            );
             string[] request = new[]
             {
                 string.Format("GET {0} HTTP/1.1", requestPath),
@@ -518,7 +651,8 @@ namespace System.Net.Http
             var httpRequestMessage = await content.ReadAsHttpRequestMessageAsync(
                 Uri.UriSchemeHttp,
                 bufferSize: 64 * 1024,
-                maxHeaderSize: 64 * 1024);
+                maxHeaderSize: 64 * 1024
+            );
 
             Assert.Equal(HttpMethod.Get, httpRequestMessage.Method);
             Assert.Equal(requestPath, httpRequestMessage.RequestUri.PathAndQuery);
@@ -580,7 +714,11 @@ namespace System.Net.Http
         [PropertyData("ServerRoundTripData")]
         public async Task RoundtripServerResponse(IEnumerable<string> message)
         {
-            HttpContent content = CreateContent(false, message, @"<html><head><title>Object moved</title></head><body><h2>Object moved to <a href=""/en-us/"">here</a>.</h2></body></html>");
+            HttpContent content = CreateContent(
+                false,
+                message,
+                @"<html><head><title>Object moved</title></head><body><h2>Object moved to <a href=""/en-us/"">here</a>.</h2></body></html>"
+            );
             HttpResponseMessage httpResponse = await content.ReadAsHttpResponseMessageAsync();
             HttpMessageContent httpMessageContent = new HttpMessageContent(httpResponse);
 
@@ -599,7 +737,9 @@ namespace System.Net.Http
             cts.Cancel();
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
-            return Assert.ThrowsAsync<OperationCanceledException>(() => content.ReadAsHttpRequestMessageAsync(cts.Token));
+            return Assert.ThrowsAsync<OperationCanceledException>(
+                () => content.ReadAsHttpRequestMessageAsync(cts.Token)
+            );
         }
 
         [Fact]
@@ -610,7 +750,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(
-                () => content.ReadAsHttpRequestMessageAsync("http", cts.Token));
+                () => content.ReadAsHttpRequestMessageAsync("http", cts.Token)
+            );
         }
 
         [Fact]
@@ -621,7 +762,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(
-                () => content.ReadAsHttpRequestMessageAsync("http", 1024, cts.Token));
+                () => content.ReadAsHttpRequestMessageAsync("http", 1024, cts.Token)
+            );
         }
 
         [Fact]
@@ -632,7 +774,8 @@ namespace System.Net.Http
             HttpContent content = CreateContent(isRequest: true, hasEntity: false);
 
             return Assert.ThrowsAsync<OperationCanceledException>(
-                () => content.ReadAsHttpRequestMessageAsync("http", 1024, 1024, cts.Token));
+                () => content.ReadAsHttpRequestMessageAsync("http", 1024, 1024, cts.Token)
+            );
         }
     }
 }

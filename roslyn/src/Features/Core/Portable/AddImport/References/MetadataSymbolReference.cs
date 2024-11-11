@@ -23,7 +23,8 @@ namespace Microsoft.CodeAnalysis.AddImport
             AbstractAddImportFeatureService<TSimpleNameSyntax> provider,
             SymbolResult<INamespaceOrTypeSymbol> symbolResult,
             ProjectId referenceProjectId,
-            PortableExecutableReference reference) : SymbolReference(provider, symbolResult)
+            PortableExecutableReference reference
+        ) : SymbolReference(provider, symbolResult)
         {
             private readonly ProjectId _referenceProjectId = referenceProjectId;
             private readonly PortableExecutableReference _reference = reference;
@@ -35,46 +36,74 @@ namespace Microsoft.CodeAnalysis.AddImport
             protected override bool ShouldAddWithExistingImport(Document document) => true;
 
             protected override (string description, bool hasExistingImport) GetDescription(
-                Document document, CodeCleanupOptions options, SyntaxNode node,
-                SemanticModel semanticModel, CancellationToken cancellationToken)
+                Document document,
+                CodeCleanupOptions options,
+                SyntaxNode node,
+                SemanticModel semanticModel,
+                CancellationToken cancellationToken
+            )
             {
-                var (description, hasExistingImport) = base.GetDescription(document, options, node, semanticModel, cancellationToken);
+                var (description, hasExistingImport) = base.GetDescription(
+                    document,
+                    options,
+                    node,
+                    semanticModel,
+                    cancellationToken
+                );
                 if (description == null)
                 {
                     return (null, false);
                 }
 
-                return (string.Format(FeaturesResources.Add_reference_to_0, Path.GetFileName(_reference.FilePath)),
-                        hasExistingImport);
+                return (
+                    string.Format(
+                        FeaturesResources.Add_reference_to_0,
+                        Path.GetFileName(_reference.FilePath)
+                    ),
+                    hasExistingImport
+                );
             }
 
             protected override AddImportFixData GetFixData(
-                Document document, ImmutableArray<TextChange> textChanges, string description,
-                ImmutableArray<string> tags, CodeActionPriority priority)
+                Document document,
+                ImmutableArray<TextChange> textChanges,
+                string description,
+                ImmutableArray<string> tags,
+                CodeActionPriority priority
+            )
             {
                 return AddImportFixData.CreateForMetadataSymbol(
-                    textChanges, description, tags, priority,
-                    _referenceProjectId, _reference.FilePath);
+                    textChanges,
+                    description,
+                    tags,
+                    priority,
+                    _referenceProjectId,
+                    _reference.FilePath
+                );
             }
 
             // Adding metadata references should be considered lower pri than anything else.
-            protected override CodeActionPriority GetPriority(Document document)
-                => CodeActionPriority.Low;
+            protected override CodeActionPriority GetPriority(Document document) =>
+                CodeActionPriority.Low;
 
-            protected override ImmutableArray<string> GetTags(Document document)
-                => WellKnownTagArrays.AddReference;
+            protected override ImmutableArray<string> GetTags(Document document) =>
+                WellKnownTagArrays.AddReference;
 
             public override bool Equals(object obj)
             {
                 var reference = obj as MetadataSymbolReference;
-                return base.Equals(reference) &&
-                    StringComparer.OrdinalIgnoreCase.Equals(_reference.FilePath, reference._reference.FilePath);
+                return base.Equals(reference)
+                    && StringComparer.OrdinalIgnoreCase.Equals(
+                        _reference.FilePath,
+                        reference._reference.FilePath
+                    );
             }
 
-            public override int GetHashCode()
-                => Hash.Combine(
+            public override int GetHashCode() =>
+                Hash.Combine(
                     base.GetHashCode(),
-                    StringComparer.OrdinalIgnoreCase.GetHashCode(_reference.FilePath));
+                    StringComparer.OrdinalIgnoreCase.GetHashCode(_reference.FilePath)
+                );
         }
     }
 }

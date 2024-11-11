@@ -2,12 +2,11 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-
-using Internal.Text;
 using System.Diagnostics;
 using System.Reflection;
 using System.Reflection.Metadata;
 using Internal.ReadyToRunConstants;
+using Internal.Text;
 using Internal.TypeSystem;
 using Internal.TypeSystem.Ecma;
 
@@ -17,7 +16,8 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
     {
         private MetadataReader _metadata;
 
-        public TypeGenericInfoMapNode(EcmaModule module) : base (module)
+        public TypeGenericInfoMapNode(EcmaModule module)
+            : base(module)
         {
             _metadata = module.MetadataReader;
         }
@@ -36,7 +36,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             // This node does not trigger generation of other nodes.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             ObjectDataBuilder builder = new ObjectDataBuilder(factory, relocsOnly);
             builder.AddSymbol(this);
@@ -56,11 +61,22 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 foreach (var genericParameterHandle in typeDefinition.GetGenericParameters())
                 {
                     var genericParameter = _metadata.GetGenericParameter(genericParameterHandle);
-                    if ((genericParameter.Attributes & GenericParameterAttributes.VarianceMask) != GenericParameterAttributes.None)
+                    if (
+                        (genericParameter.Attributes & GenericParameterAttributes.VarianceMask)
+                        != GenericParameterAttributes.None
+                    )
                         hasVariance = true;
 
-                    if ((genericParameter.Attributes & (GenericParameterAttributes.SpecialConstraintMask | (GenericParameterAttributes)GenericConstraints.AcceptByRefLike)) != default(GenericParameterAttributes) ||
-                        (genericParameter.GetConstraints().Count > 0))
+                    if (
+                        (
+                            genericParameter.Attributes
+                            & (
+                                GenericParameterAttributes.SpecialConstraintMask
+                                | (GenericParameterAttributes)GenericConstraints.AcceptByRefLike
+                            )
+                        ) != default(GenericParameterAttributes)
+                        || (genericParameter.GetConstraints().Count > 0)
+                    )
                     {
                         hasConstraints = true;
                     }
@@ -70,18 +86,31 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 switch (typeDefinition.GetGenericParameters().Count)
                 {
                     case 0:
-                        count = ReadyToRunGenericInfoGenericCount.Zero; break;
+                        count = ReadyToRunGenericInfoGenericCount.Zero;
+                        break;
                     case 1:
-                        count = ReadyToRunGenericInfoGenericCount.One; break;
+                        count = ReadyToRunGenericInfoGenericCount.One;
+                        break;
                     case 2:
-                        count = ReadyToRunGenericInfoGenericCount.Two; break;
+                        count = ReadyToRunGenericInfoGenericCount.Two;
+                        break;
                     default:
-                        count = ReadyToRunGenericInfoGenericCount.MoreThanTwo; break;
+                        count = ReadyToRunGenericInfoGenericCount.MoreThanTwo;
+                        break;
                 }
 
-                genericInfo = (ReadyToRunTypeGenericInfo)count |
-                              (hasVariance ? ReadyToRunTypeGenericInfo.HasVariance : default(ReadyToRunTypeGenericInfo)) |
-                              (hasConstraints ? ReadyToRunTypeGenericInfo.HasConstraints : default(ReadyToRunTypeGenericInfo));
+                genericInfo =
+                    (ReadyToRunTypeGenericInfo)count
+                    | (
+                        hasVariance
+                            ? ReadyToRunTypeGenericInfo.HasVariance
+                            : default(ReadyToRunTypeGenericInfo)
+                    )
+                    | (
+                        hasConstraints
+                            ? ReadyToRunTypeGenericInfo.HasConstraints
+                            : default(ReadyToRunTypeGenericInfo)
+                    );
 
                 curByte |= (byte)genericInfo;
                 usedBits += 4;

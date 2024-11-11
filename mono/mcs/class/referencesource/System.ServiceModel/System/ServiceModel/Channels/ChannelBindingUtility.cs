@@ -5,7 +5,6 @@ namespace System.ServiceModel.Channels
 {
     using System;
     using System.Collections;
-    using System.Threading;
     using System.Net;
     using System.Net.Security;
     using System.Runtime;
@@ -15,26 +14,23 @@ namespace System.ServiceModel.Channels
     using System.Security;
     using System.Security.Authentication.ExtendedProtection;
     using System.Security.Authentication.ExtendedProtection.Configuration;
+    using System.Threading;
 
     static class ChannelBindingUtility
     {
-        static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(PolicyEnforcement.Never);
+        static ExtendedProtectionPolicy disabledPolicy = new ExtendedProtectionPolicy(
+            PolicyEnforcement.Never
+        );
         static ExtendedProtectionPolicy defaultPolicy = disabledPolicy;
 
         public static ExtendedProtectionPolicy DisabledPolicy
         {
-            get
-            {
-                return disabledPolicy;
-            }
+            get { return disabledPolicy; }
         }
 
         public static ExtendedProtectionPolicy DefaultPolicy
         {
-            get
-            {
-                return defaultPolicy;
-            }
+            get { return defaultPolicy; }
         }
 
         public static bool IsDefaultPolicy(ExtendedProtectionPolicy policy)
@@ -42,7 +38,10 @@ namespace System.ServiceModel.Channels
             return Object.ReferenceEquals(policy, defaultPolicy);
         }
 
-        public static void CopyFrom(ExtendedProtectionPolicyElement source, ExtendedProtectionPolicyElement destination)
+        public static void CopyFrom(
+            ExtendedProtectionPolicyElement source,
+            ExtendedProtectionPolicyElement destination
+        )
         {
             destination.PolicyEnforcement = source.PolicyEnforcement;
             destination.ProtectionScenario = source.ProtectionScenario;
@@ -55,7 +54,10 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static void InitializeFrom(ExtendedProtectionPolicy source, ExtendedProtectionPolicyElement destination)
+        public static void InitializeFrom(
+            ExtendedProtectionPolicy source,
+            ExtendedProtectionPolicyElement destination
+        )
         {
             if (!IsDefaultPolicy(source))
             {
@@ -75,7 +77,9 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        public static ExtendedProtectionPolicy BuildPolicy(ExtendedProtectionPolicyElement configurationPolicy)
+        public static ExtendedProtectionPolicy BuildPolicy(
+            ExtendedProtectionPolicyElement configurationPolicy
+        )
         {
             //using this pattern allows us to have a different default policy
             //than the NCL team chooses.
@@ -114,23 +118,36 @@ namespace System.ServiceModel.Channels
             return DuplicatedChannelBinding.CreateCopy(source);
         }
 
-        public static void TryAddToMessage(ChannelBinding channelBindingToken, Message message, bool messagePropertyOwnsCleanup)
+        public static void TryAddToMessage(
+            ChannelBinding channelBindingToken,
+            Message message,
+            bool messagePropertyOwnsCleanup
+        )
         {
             if (channelBindingToken != null)
             {
-                ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(channelBindingToken, messagePropertyOwnsCleanup);
+                ChannelBindingMessageProperty property = new ChannelBindingMessageProperty(
+                    channelBindingToken,
+                    messagePropertyOwnsCleanup
+                );
                 property.AddTo(message);
                 property.Dispose(); //message.Properties.Add() creates a copy...
             }
         }
 
         //does not validate the ExtendedProtectionPolicy.CustomServiceNames collections on the policies
-        public static bool AreEqual(ExtendedProtectionPolicy policy1, ExtendedProtectionPolicy policy2)
+        public static bool AreEqual(
+            ExtendedProtectionPolicy policy1,
+            ExtendedProtectionPolicy policy2
+        )
         {
             Fx.Assert(policy1 != null, "policy1 param cannot be null");
             Fx.Assert(policy2 != null, "policy2 param cannot be null");
 
-            if (policy1.PolicyEnforcement == PolicyEnforcement.Never && policy2.PolicyEnforcement == PolicyEnforcement.Never)
+            if (
+                policy1.PolicyEnforcement == PolicyEnforcement.Never
+                && policy2.PolicyEnforcement == PolicyEnforcement.Never
+            )
             {
                 return true;
             }
@@ -192,35 +209,46 @@ namespace System.ServiceModel.Channels
             [SecurityCritical]
             int size;
 
-            DuplicatedChannelBinding()
-            {
-
-            }
+            DuplicatedChannelBinding() { }
 
             public override int Size
             {
-                [Fx.Tag.SecurityNote(Critical = "Used when referencing raw native memory",
-                    Safe = "All inputs are validated during initization")]
+                [Fx.Tag.SecurityNote(
+                    Critical = "Used when referencing raw native memory",
+                    Safe = "All inputs are validated during initization"
+                )]
                 [SecuritySafeCritical]
                 get { return this.size; }
             }
 
-            [Fx.Tag.SecurityNote(Critical = "Invokes unsafe code.",
-                Safe = "Unsafe code is effectively encapsulated, all inputs are validated.")]
+            [Fx.Tag.SecurityNote(
+                Critical = "Invokes unsafe code.",
+                Safe = "Unsafe code is effectively encapsulated, all inputs are validated."
+            )]
             [SecuritySafeCritical]
             internal static ChannelBinding CreateCopy(ChannelBinding source)
             {
-                Fx.Assert(source != null, "source ChannelBinding should have been checked for null previously");
+                Fx.Assert(
+                    source != null,
+                    "source ChannelBinding should have been checked for null previously"
+                );
 
                 if (source.IsInvalid || source.IsClosed)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(source.GetType().FullName));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ObjectDisposedException(source.GetType().FullName)
+                    );
                 }
 
                 if (source.Size <= 0)
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("source.Size", source.Size,
-                        SR.GetString(SR.ValueMustBePositive)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentOutOfRangeException(
+                            "source.Size",
+                            source.Size,
+                            SR.GetString(SR.ValueMustBePositive)
+                        )
+                    );
                 }
 
                 //Instantiate the SafeHandle before trying to allocate the native memory
@@ -256,7 +284,7 @@ namespace System.ServiceModel.Channels
             {
                 Fx.Assert(bytesToAllocate > 0, "bytesToAllocate must be positive");
 
-                //this protects us from problems like an appdomain shutdown occuring 
+                //this protects us from problems like an appdomain shutdown occuring
                 //after allocating the native memory but before the handle gets set (which would result in a memory leak)
                 RuntimeHelpers.PrepareConstrainedRegions();
                 try { }

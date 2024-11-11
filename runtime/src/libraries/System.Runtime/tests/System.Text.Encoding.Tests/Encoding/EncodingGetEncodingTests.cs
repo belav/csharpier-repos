@@ -14,16 +14,28 @@ namespace System.Text.Tests
         [Fact]
         public void GetEncoding_String_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("name", () => Encoding.GetEncoding(null));
-            AssertExtensions.Throws<ArgumentException>("name", () => Encoding.GetEncoding("no-such-encoding-name"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => Encoding.GetEncoding(null)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => Encoding.GetEncoding("no-such-encoding-name")
+            );
         }
 
         [Fact]
         public void GetEncoding_Int_Invalid()
         {
             // Codepage is out of range
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("codepage", () => Encoding.GetEncoding(-1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("codepage", () => Encoding.GetEncoding(65536));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "codepage",
+                () => Encoding.GetEncoding(-1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "codepage",
+                () => Encoding.GetEncoding(65536)
+            );
 
             // Codepage doesn't exist
             AssertExtensions.Throws<ArgumentException>("codepage", () => Encoding.GetEncoding(42));
@@ -44,16 +56,16 @@ namespace System.Text.Tests
 
         private static CodePageMapping[] s_mapping = new CodePageMapping[]
         {
-            new CodePageMapping("ANSI_X3.4-1968", 20127 ),
-            new CodePageMapping("ANSI_X3.4-1986", 20127 ),
-            new CodePageMapping("ascii", 20127 ),
-            new CodePageMapping("cp367", 20127 ),
-            new CodePageMapping("cp819", 28591 ),
-            new CodePageMapping("csASCII", 20127 ),
-            new CodePageMapping("csISOLatin1", 28591 ),
-            new CodePageMapping("csUnicode11UTF7", 65000 ),
-            new CodePageMapping("IBM367", 20127 ),
-            new CodePageMapping("ibm819", 28591 ),
+            new CodePageMapping("ANSI_X3.4-1968", 20127),
+            new CodePageMapping("ANSI_X3.4-1986", 20127),
+            new CodePageMapping("ascii", 20127),
+            new CodePageMapping("cp367", 20127),
+            new CodePageMapping("cp819", 28591),
+            new CodePageMapping("csASCII", 20127),
+            new CodePageMapping("csISOLatin1", 28591),
+            new CodePageMapping("csUnicode11UTF7", 65000),
+            new CodePageMapping("IBM367", 20127),
+            new CodePageMapping("ibm819", 28591),
             new CodePageMapping("ISO-10646-UCS-2", 1200),
             new CodePageMapping("iso-8859-1", 28591),
             new CodePageMapping("iso-ir-100", 28591),
@@ -85,7 +97,7 @@ namespace System.Text.Tests
             new CodePageMapping("x-unicode-1-1-utf-7", 65000),
             new CodePageMapping("x-unicode-1-1-utf-8", 65001),
             new CodePageMapping("x-unicode-2-0-utf-7", 65000),
-            new CodePageMapping("x-unicode-2-0-utf-8", 65001)
+            new CodePageMapping("x-unicode-2-0-utf-8", 65001),
         };
 
         [Fact]
@@ -148,7 +160,7 @@ namespace System.Text.Tests
             new CodePageToWebNameMapping(20127, "us-ascii"),
             new CodePageToWebNameMapping(28591, "iso-8859-1"),
             new CodePageToWebNameMapping(65000, "utf-7"),
-            new CodePageToWebNameMapping(65001, "utf-8")
+            new CodePageToWebNameMapping(65001, "utf-8"),
         };
     }
 }

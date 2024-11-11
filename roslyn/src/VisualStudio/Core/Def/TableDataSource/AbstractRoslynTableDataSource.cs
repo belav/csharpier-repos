@@ -4,8 +4,8 @@
 
 using System.Collections.Immutable;
 using Microsoft.CodeAnalysis;
-using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.Editor.Shared.Utilities;
+using Microsoft.CodeAnalysis.Shared.Extensions;
 using Microsoft.CodeAnalysis.SolutionCrawler;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
@@ -13,15 +13,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.TableDataSource
     /// <summary>
     /// A version of ITableDataSource who knows how to connect them to Roslyn solution crawler for live information.
     /// </summary>
-    internal abstract class AbstractRoslynTableDataSource<TItem, TData> : AbstractTableDataSource<TItem, TData>
+    internal abstract class AbstractRoslynTableDataSource<TItem, TData>
+        : AbstractTableDataSource<TItem, TData>
         where TItem : TableItem
         where TData : notnull
     {
-        public AbstractRoslynTableDataSource(Workspace workspace, IThreadingContext threadingContext)
-            : base(workspace, threadingContext)
-            => ConnectToSolutionCrawlerService(workspace);
+        public AbstractRoslynTableDataSource(
+            Workspace workspace,
+            IThreadingContext threadingContext
+        )
+            : base(workspace, threadingContext) => ConnectToSolutionCrawlerService(workspace);
 
-        protected ImmutableArray<DocumentId> GetDocumentsWithSameFilePath(Solution solution, DocumentId documentId)
+        protected ImmutableArray<DocumentId> GetDocumentsWithSameFilePath(
+            Solution solution,
+            DocumentId documentId
+        )
         {
             var document = solution.GetTextDocument(documentId);
             if (document == null)

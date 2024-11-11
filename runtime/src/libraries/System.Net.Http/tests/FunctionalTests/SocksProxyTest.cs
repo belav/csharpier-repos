@@ -13,11 +13,13 @@ namespace System.Net.Http.Functional.Tests
 {
     public abstract class SocksProxyTest : HttpClientHandlerTestBase
     {
-        public SocksProxyTest(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest(ITestOutputHelper helper)
+            : base(helper) { }
 
-        private static string[] Hosts(string socksScheme) => socksScheme == "socks5"
-            ? new[] { "localhost", "127.0.0.1", "::1" }
-            : new[] { "localhost", "127.0.0.1" };
+        private static string[] Hosts(string socksScheme) =>
+            socksScheme == "socks5"
+                ? new[] { "localhost", "127.0.0.1", "::1" }
+                : new[] { "localhost", "127.0.0.1" };
 
         public static IEnumerable<object[]> TestLoopbackAsync_MemberData() =>
             from scheme in new[] { "socks4", "socks4a", "socks5" }
@@ -38,8 +40,12 @@ namespace System.Net.Http.Functional.Tests
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 async uri =>
                 {
-                    await using var proxy = useAuth ? new LoopbackSocksServer("DOTNET", "424242") : new LoopbackSocksServer();
-                    using HttpClientHandler handler = CreateHttpClientHandler(allowAllCertificates: true);
+                    await using var proxy = useAuth
+                        ? new LoopbackSocksServer("DOTNET", "424242")
+                        : new LoopbackSocksServer();
+                    using HttpClientHandler handler = CreateHttpClientHandler(
+                        allowAllCertificates: true
+                    );
                     using HttpClient client = CreateHttpClient(handler);
 
                     handler.Proxy = new WebProxy($"{scheme}://127.0.0.1:{proxy.Port}");
@@ -51,7 +57,12 @@ namespace System.Net.Http.Functional.Tests
 
                     uri = new UriBuilder(uri) { Host = host }.Uri;
 
-                    HttpRequestMessage request = CreateRequest(HttpMethod.Get, uri, UseVersion, exactVersion: true);
+                    HttpRequestMessage request = CreateRequest(
+                        HttpMethod.Get,
+                        uri,
+                        UseVersion,
+                        exactVersion: true
+                    );
 
                     using HttpResponseMessage response = await client.SendAsync(TestAsync, request);
                     string responseString = await response.Content.ReadAsStringAsync();
@@ -61,50 +72,136 @@ namespace System.Net.Http.Functional.Tests
                 options: new GenericLoopbackOptions
                 {
                     UseSsl = useSsl,
-                    Address = host == "::1" ? IPAddress.IPv6Loopback : IPAddress.Loopback
-                });
+                    Address = host == "::1" ? IPAddress.IPv6Loopback : IPAddress.Loopback,
+                }
+            );
         }
 
         public static IEnumerable<object[]> TestExceptionalAsync_MemberData()
         {
             foreach (string scheme in new[] { "socks4", "socks4a" })
             {
-                yield return new object[] { scheme, "[::1]", false, null, "SOCKS4 does not support IPv6 addresses." };
-                yield return new object[] { scheme, "localhost", true, null, "Failed to authenticate with the SOCKS server." };
-                yield return new object[] { scheme, "localhost", true, new NetworkCredential("bad_username", "bad_password"), "Failed to authenticate with the SOCKS server." };
-                yield return new object[] { scheme, "localhost", true, new NetworkCredential(new string('a', 256), "foo"), "Encoding the UserName took more than the maximum of 255 bytes." };
+                yield return new object[]
+                {
+                    scheme,
+                    "[::1]",
+                    false,
+                    null,
+                    "SOCKS4 does not support IPv6 addresses.",
+                };
+                yield return new object[]
+                {
+                    scheme,
+                    "localhost",
+                    true,
+                    null,
+                    "Failed to authenticate with the SOCKS server.",
+                };
+                yield return new object[]
+                {
+                    scheme,
+                    "localhost",
+                    true,
+                    new NetworkCredential("bad_username", "bad_password"),
+                    "Failed to authenticate with the SOCKS server.",
+                };
+                yield return new object[]
+                {
+                    scheme,
+                    "localhost",
+                    true,
+                    new NetworkCredential(new string('a', 256), "foo"),
+                    "Encoding the UserName took more than the maximum of 255 bytes.",
+                };
             }
 
-            yield return new object[] { "socks4", new string('a', 256), false, null, "Failed to resolve the destination host to an IPv4 address." };
+            yield return new object[]
+            {
+                "socks4",
+                new string('a', 256),
+                false,
+                null,
+                "Failed to resolve the destination host to an IPv4 address.",
+            };
 
             foreach (string scheme in new[] { "socks4a", "socks5" })
             {
-                yield return new object[] { scheme, new string('a', 256), false, null, "Encoding the host took more than the maximum of 255 bytes." };
+                yield return new object[]
+                {
+                    scheme,
+                    new string('a', 256),
+                    false,
+                    null,
+                    "Encoding the host took more than the maximum of 255 bytes.",
+                };
             }
 
-            yield return new object[] { "socks5", "localhost", true, null, "SOCKS server did not return a suitable authentication method." };
-            yield return new object[] { "socks5", "localhost", true, new NetworkCredential("bad_username", "bad_password"), "Failed to authenticate with the SOCKS server." };
-            yield return new object[] { "socks5", "localhost", true, new NetworkCredential(new string('a', 256), "foo"), "Encoding the UserName took more than the maximum of 255 bytes." };
-            yield return new object[] { "socks5", "localhost", true, new NetworkCredential("foo", new string('a', 256)), "Encoding the Password took more than the maximum of 255 bytes." };
+            yield return new object[]
+            {
+                "socks5",
+                "localhost",
+                true,
+                null,
+                "SOCKS server did not return a suitable authentication method.",
+            };
+            yield return new object[]
+            {
+                "socks5",
+                "localhost",
+                true,
+                new NetworkCredential("bad_username", "bad_password"),
+                "Failed to authenticate with the SOCKS server.",
+            };
+            yield return new object[]
+            {
+                "socks5",
+                "localhost",
+                true,
+                new NetworkCredential(new string('a', 256), "foo"),
+                "Encoding the UserName took more than the maximum of 255 bytes.",
+            };
+            yield return new object[]
+            {
+                "socks5",
+                "localhost",
+                true,
+                new NetworkCredential("foo", new string('a', 256)),
+                "Encoding the Password took more than the maximum of 255 bytes.",
+            };
         }
 
         [Theory]
         [MemberData(nameof(TestExceptionalAsync_MemberData))]
-        public async Task TestExceptionalAsync(string scheme, string host, bool useAuth, ICredentials? credentials, string exceptionMessage)
+        public async Task TestExceptionalAsync(
+            string scheme,
+            string host,
+            bool useAuth,
+            ICredentials? credentials,
+            string exceptionMessage
+        )
         {
-            var proxy = useAuth ? new LoopbackSocksServer("DOTNET", "424242") : new LoopbackSocksServer();
+            var proxy = useAuth
+                ? new LoopbackSocksServer("DOTNET", "424242")
+                : new LoopbackSocksServer();
             using HttpClientHandler handler = CreateHttpClientHandler();
             using HttpClient client = CreateHttpClient(handler);
 
             handler.Proxy = new WebProxy($"{scheme}://127.0.0.1:{proxy.Port}")
             {
-                Credentials = credentials
+                Credentials = credentials,
             };
 
-            HttpRequestMessage request = CreateRequest(HttpMethod.Get, new Uri($"http://{host}/"), UseVersion, exactVersion: true);
+            HttpRequestMessage request = CreateRequest(
+                HttpMethod.Get,
+                new Uri($"http://{host}/"),
+                UseVersion,
+                exactVersion: true
+            );
 
             // SocksException is not public
-            var exception = await Assert.ThrowsAnyAsync<HttpRequestException>(() => client.SendAsync(TestAsync, request));
+            var exception = await Assert.ThrowsAnyAsync<HttpRequestException>(
+                () => client.SendAsync(TestAsync, request)
+            );
             var innerException = exception.InnerException;
             Assert.Equal(exceptionMessage, innerException.Message);
             Assert.Equal("SocksException", innerException.GetType().Name);
@@ -120,19 +217,25 @@ namespace System.Net.Http.Functional.Tests
         }
     }
 
-
     [SkipOnPlatform(TestPlatforms.Browser, "UseProxy not supported on Browser")]
     public sealed class SocksProxyTest_Http1_Async : SocksProxyTest
     {
-        public SocksProxyTest_Http1_Async(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http1_Async(ITestOutputHelper helper)
+            : base(helper) { }
+
         protected override Version UseVersion => HttpVersion.Version11;
     }
 
     [SkipOnPlatform(TestPlatforms.Browser, "UseProxy not supported on Browser")]
-    [SkipOnPlatform(TestPlatforms.Android, "The sync Send method is not supported on mobile platforms")]
+    [SkipOnPlatform(
+        TestPlatforms.Android,
+        "The sync Send method is not supported on mobile platforms"
+    )]
     public sealed class SocksProxyTest_Http1_Sync : SocksProxyTest
     {
-        public SocksProxyTest_Http1_Sync(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http1_Sync(ITestOutputHelper helper)
+            : base(helper) { }
+
         protected override Version UseVersion => HttpVersion.Version11;
         protected override bool TestAsync => false;
     }
@@ -140,7 +243,9 @@ namespace System.Net.Http.Functional.Tests
     [SkipOnPlatform(TestPlatforms.Browser, "UseProxy not supported on Browser")]
     public sealed class SocksProxyTest_Http2 : SocksProxyTest
     {
-        public SocksProxyTest_Http2(ITestOutputHelper helper) : base(helper) { }
+        public SocksProxyTest_Http2(ITestOutputHelper helper)
+            : base(helper) { }
+
         protected override Version UseVersion => HttpVersion.Version20;
     }
 }

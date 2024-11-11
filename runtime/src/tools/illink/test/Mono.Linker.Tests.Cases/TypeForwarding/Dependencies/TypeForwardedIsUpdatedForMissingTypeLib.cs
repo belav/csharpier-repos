@@ -1,6 +1,4 @@
 namespace Mono.Linker.Tests.Cases.TypeForwarding
 {
-	public class C1
-	{
-	}
+    public class C1 { }
 }

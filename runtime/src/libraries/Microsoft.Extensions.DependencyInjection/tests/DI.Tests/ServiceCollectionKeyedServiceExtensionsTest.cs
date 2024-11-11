@@ -19,33 +19,134 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 var serviceType = typeof(IFakeService);
                 var implementationType = typeof(FakeService);
-                return new TheoryData<Action<IServiceCollection>, Type, object, Type, ServiceLifetime>
+                return new TheoryData<
+                    Action<IServiceCollection>,
+                    Type,
+                    object,
+                    Type,
+                    ServiceLifetime
+                >
                 {
-                    { collection => collection.AddKeyedTransient(serviceType, "some-key-1", implementationType), serviceType, "some-key-1", implementationType, ServiceLifetime.Transient },
-                    { collection => collection.AddKeyedTransient<IFakeService, FakeService>("some-key-2"), serviceType, "some-key-2", implementationType, ServiceLifetime.Transient },
-                    { collection => collection.AddKeyedTransient<IFakeService>("some-key-3"), serviceType, "some-key-3", serviceType, ServiceLifetime.Transient },
-                    { collection => collection.AddKeyedTransient(implementationType, "some-key-4"), implementationType, "some-key-4", implementationType, ServiceLifetime.Transient },
-
-                    { collection => collection.AddKeyedScoped(serviceType, "some-key-5", implementationType), serviceType, "some-key-5", implementationType, ServiceLifetime.Scoped },
-                    { collection => collection.AddKeyedScoped<IFakeService, FakeService>("some-key-6"), serviceType, "some-key-6", implementationType, ServiceLifetime.Scoped },
-                    { collection => collection.AddKeyedScoped<IFakeService>("some-key-7"), serviceType, "some-key-7", serviceType, ServiceLifetime.Scoped },
-                    { collection => collection.AddKeyedScoped(implementationType, "some-key-8"), implementationType, "some-key-8", implementationType, ServiceLifetime.Scoped },
-
-                    { collection => collection.AddKeyedSingleton(serviceType, "some-key-9", implementationType), serviceType, "some-key-9", implementationType, ServiceLifetime.Singleton },
-                    { collection => collection.AddKeyedSingleton<IFakeService, FakeService>("some-key-10"), serviceType, "some-key-10", implementationType, ServiceLifetime.Singleton },
-                    { collection => collection.AddKeyedSingleton<IFakeService>("some-key-12"), serviceType, "some-key-12", serviceType, ServiceLifetime.Singleton },
-                    { collection => collection.AddKeyedSingleton(serviceType: implementationType, "some-key-13"), implementationType, "some-key-13", implementationType, ServiceLifetime.Singleton },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient(
+                                serviceType,
+                                "some-key-1",
+                                implementationType
+                            ),
+                        serviceType,
+                        "some-key-1",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient<IFakeService, FakeService>("some-key-2"),
+                        serviceType,
+                        "some-key-2",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection => collection.AddKeyedTransient<IFakeService>("some-key-3"),
+                        serviceType,
+                        "some-key-3",
+                        serviceType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient(implementationType, "some-key-4"),
+                        implementationType,
+                        "some-key-4",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedScoped(
+                                serviceType,
+                                "some-key-5",
+                                implementationType
+                            ),
+                        serviceType,
+                        "some-key-5",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedScoped<IFakeService, FakeService>("some-key-6"),
+                        serviceType,
+                        "some-key-6",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection => collection.AddKeyedScoped<IFakeService>("some-key-7"),
+                        serviceType,
+                        "some-key-7",
+                        serviceType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection => collection.AddKeyedScoped(implementationType, "some-key-8"),
+                        implementationType,
+                        "some-key-8",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton(
+                                serviceType,
+                                "some-key-9",
+                                implementationType
+                            ),
+                        serviceType,
+                        "some-key-9",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton<IFakeService, FakeService>("some-key-10"),
+                        serviceType,
+                        "some-key-10",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection => collection.AddKeyedSingleton<IFakeService>("some-key-12"),
+                        serviceType,
+                        "some-key-12",
+                        serviceType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton(
+                                serviceType: implementationType,
+                                "some-key-13"
+                            ),
+                        implementationType,
+                        "some-key-13",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
                 };
             }
         }
 
         [Theory]
         [MemberData(nameof(AddImplementationTypeData))]
-        public void AddWithTypeAddsServiceWithRightLifecyle(Action<IServiceCollection> addTypeAction,
-                                                            Type expectedServiceType,
-                                                            object expectedKey,
-                                                            Type expectedImplementationType,
-                                                            ServiceLifetime lifeCycle)
+        public void AddWithTypeAddsServiceWithRightLifecyle(
+            Action<IServiceCollection> addTypeAction,
+            Type expectedServiceType,
+            object expectedKey,
+            Type expectedImplementationType,
+            ServiceLifetime lifeCycle
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
@@ -69,19 +170,116 @@ namespace Microsoft.Extensions.DependencyInjection
                 var implementationType = typeof(FakeService);
                 var objectType = typeof(object);
 
-                return new TheoryData<Action<IServiceCollection>, Type, object, Type, ServiceLifetime>
+                return new TheoryData<
+                    Action<IServiceCollection>,
+                    Type,
+                    object,
+                    Type,
+                    ServiceLifetime
+                >
                 {
-                    { collection => collection.AddKeyedTransient(serviceType, "some-key-1", (s,k) => new FakeService()), serviceType, "some-key-1", objectType, ServiceLifetime.Transient },
-                    { collection => collection.AddKeyedTransient<IFakeService>("some-key-2", (s,k) => new FakeService()), serviceType, "some-key-2", serviceType, ServiceLifetime.Transient },
-                    { collection => collection.AddKeyedTransient<IFakeService, FakeService>("some-key-3", (s,k) => new FakeService()), serviceType, "some-key-3", implementationType, ServiceLifetime.Transient },
-
-                    { collection => collection.AddKeyedScoped(serviceType, "some-key-4", (s,k) => new FakeService()), serviceType, "some-key-4", objectType, ServiceLifetime.Scoped },
-                    { collection => collection.AddKeyedScoped<IFakeService>("some-key-5", (s,k) => new FakeService()), serviceType, "some-key-5", serviceType, ServiceLifetime.Scoped },
-                    { collection => collection.AddKeyedScoped<IFakeService, FakeService>("some-key-6", (s,k) => new FakeService()), serviceType, "some-key-6", implementationType, ServiceLifetime.Scoped },
-
-                    { collection => collection.AddKeyedSingleton(serviceType, "some-key-7", (s,k) => new FakeService()), serviceType, "some-key-7", objectType, ServiceLifetime.Singleton },
-                    { collection => collection.AddKeyedSingleton<IFakeService>("some-key-8", (s,k) => new FakeService()), serviceType, "some-key-8", serviceType, ServiceLifetime.Singleton },
-                    { collection => collection.AddKeyedSingleton<IFakeService, FakeService>("some-key-9", (s,k) => new FakeService()), serviceType, "some-key-9", implementationType, ServiceLifetime.Singleton },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient(
+                                serviceType,
+                                "some-key-1",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-1",
+                        objectType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient<IFakeService>(
+                                "some-key-2",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-2",
+                        serviceType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedTransient<IFakeService, FakeService>(
+                                "some-key-3",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-3",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedScoped(
+                                serviceType,
+                                "some-key-4",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-4",
+                        objectType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedScoped<IFakeService>(
+                                "some-key-5",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-5",
+                        serviceType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedScoped<IFakeService, FakeService>(
+                                "some-key-6",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-6",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton(
+                                serviceType,
+                                "some-key-7",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-7",
+                        objectType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton<IFakeService>(
+                                "some-key-8",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-8",
+                        serviceType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton<IFakeService, FakeService>(
+                                "some-key-9",
+                                (s, k) => new FakeService()
+                            ),
+                        serviceType,
+                        "some-key-9",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
                 };
             }
         }
@@ -93,7 +291,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type serviceType,
             object? serviceKey,
             Type implementationType,
-            ServiceLifetime lifeCycle)
+            ServiceLifetime lifeCycle
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
@@ -115,8 +314,14 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 return new TheoryData<Action<IServiceCollection>>
                 {
-                    { collection => collection.AddKeyedSingleton<IFakeService>("service", _instance) },
-                    { collection => collection.AddKeyedSingleton(typeof(IFakeService), "service", _instance) },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton<IFakeService>("service", _instance)
+                    },
+                    {
+                        collection =>
+                            collection.AddKeyedSingleton(typeof(IFakeService), "service", _instance)
+                    },
                 };
             }
         }
@@ -164,22 +369,113 @@ namespace Microsoft.Extensions.DependencyInjection
             {
                 var serviceType = typeof(IFakeService);
                 var implementationType = typeof(FakeService);
-                return new TheoryData<Action<IServiceCollection>, Type, object, Type, ServiceLifetime>
+                return new TheoryData<
+                    Action<IServiceCollection>,
+                    Type,
+                    object,
+                    Type,
+                    ServiceLifetime
+                >
                 {
-                    { collection => collection.TryAddKeyedTransient(serviceType, "key-1", implementationType), serviceType, "key-1", implementationType, ServiceLifetime.Transient },
-                    { collection => collection.TryAddKeyedTransient<IFakeService, FakeService>("key-2"), serviceType, "key-2", implementationType, ServiceLifetime.Transient },
-                    { collection => collection.TryAddKeyedTransient<IFakeService>("key-3"), serviceType, "key-3", serviceType, ServiceLifetime.Transient },
-                    { collection => collection.TryAddKeyedTransient(implementationType, "key-4"), implementationType, "key-4", implementationType, ServiceLifetime.Transient },
-
-                    { collection => collection.TryAddKeyedScoped(serviceType, "key-1", implementationType), serviceType, "key-1", implementationType, ServiceLifetime.Scoped },
-                    { collection => collection.TryAddKeyedScoped<IFakeService, FakeService>("key-2"), serviceType, "key-2", implementationType, ServiceLifetime.Scoped },
-                    { collection => collection.TryAddKeyedScoped<IFakeService>("key-3"), serviceType, "key-3", serviceType, ServiceLifetime.Scoped },
-                    { collection => collection.TryAddKeyedScoped(implementationType, "key-4"), implementationType, "key-4", implementationType, ServiceLifetime.Scoped },
-
-                    { collection => collection.TryAddKeyedSingleton(serviceType, "key-5", implementationType), serviceType, "key-5", implementationType, ServiceLifetime.Singleton },
-                    { collection => collection.TryAddKeyedSingleton<IFakeService, FakeService>("key-6"), serviceType, "key-6", implementationType, ServiceLifetime.Singleton },
-                    { collection => collection.TryAddKeyedSingleton<IFakeService>("key-7"), serviceType, "key-7", serviceType, ServiceLifetime.Singleton },
-                    { collection => collection.TryAddKeyedSingleton(service: implementationType, "key-8"), implementationType, "key-8", implementationType, ServiceLifetime.Singleton },
+                    {
+                        collection =>
+                            collection.TryAddKeyedTransient(
+                                serviceType,
+                                "key-1",
+                                implementationType
+                            ),
+                        serviceType,
+                        "key-1",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedTransient<IFakeService, FakeService>("key-2"),
+                        serviceType,
+                        "key-2",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection => collection.TryAddKeyedTransient<IFakeService>("key-3"),
+                        serviceType,
+                        "key-3",
+                        serviceType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection => collection.TryAddKeyedTransient(implementationType, "key-4"),
+                        implementationType,
+                        "key-4",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedScoped(serviceType, "key-1", implementationType),
+                        serviceType,
+                        "key-1",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedScoped<IFakeService, FakeService>("key-2"),
+                        serviceType,
+                        "key-2",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection => collection.TryAddKeyedScoped<IFakeService>("key-3"),
+                        serviceType,
+                        "key-3",
+                        serviceType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection => collection.TryAddKeyedScoped(implementationType, "key-4"),
+                        implementationType,
+                        "key-4",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedSingleton(
+                                serviceType,
+                                "key-5",
+                                implementationType
+                            ),
+                        serviceType,
+                        "key-5",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedSingleton<IFakeService, FakeService>("key-6"),
+                        serviceType,
+                        "key-6",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection => collection.TryAddKeyedSingleton<IFakeService>("key-7"),
+                        serviceType,
+                        "key-7",
+                        serviceType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        collection =>
+                            collection.TryAddKeyedSingleton(service: implementationType, "key-8"),
+                        implementationType,
+                        "key-8",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
                 };
             }
         }
@@ -191,7 +487,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             object expectedServiceKey,
             Type expectedImplementationType,
-            ServiceLifetime expectedLifetime)
+            ServiceLifetime expectedLifetime
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
@@ -218,12 +515,16 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedImplementationType,
             ServiceLifetime expectedLifetime
 #pragma warning restore xUnit1026
-            )
+        )
         {
             // Arrange
             var collection = new ServiceCollection
             {
-                ServiceDescriptor.KeyedTransient(expectedServiceType, expectedServiceKey, expectedServiceType)
+                ServiceDescriptor.KeyedTransient(
+                    expectedServiceType,
+                    expectedServiceKey,
+                    expectedServiceType
+                ),
             };
 
             // Act
@@ -263,16 +564,64 @@ namespace Microsoft.Extensions.DependencyInjection
                 var implementationType = typeof(FakeService);
                 return new TheoryData<ServiceDescriptor, Type, object, Type, ServiceLifetime>
                 {
-                    { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>("service1"), serviceType, "service1", implementationType, ServiceLifetime.Transient },
-                    { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>("service2", (s,k) => new FakeService()), serviceType, "service2", implementationType, ServiceLifetime.Transient },
-
-                    { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>("service3"), serviceType, "service3", implementationType, ServiceLifetime.Scoped },
-                    { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>("service4", (s,k) => new FakeService()), serviceType, "service4", implementationType, ServiceLifetime.Scoped },
-
-                    { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>("service5"), serviceType, "service5", implementationType, ServiceLifetime.Singleton },
-                    { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>("service6", (s,k) => new FakeService()), serviceType, "service6", implementationType, ServiceLifetime.Singleton },
-
-                    { ServiceDescriptor.KeyedSingleton<IFakeService>("service6", _instance), serviceType, "service6", implementationType, ServiceLifetime.Singleton },
+                    {
+                        ServiceDescriptor.KeyedTransient<IFakeService, FakeService>("service1"),
+                        serviceType,
+                        "service1",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        ServiceDescriptor.KeyedTransient<IFakeService, FakeService>(
+                            "service2",
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        "service2",
+                        implementationType,
+                        ServiceLifetime.Transient
+                    },
+                    {
+                        ServiceDescriptor.KeyedScoped<IFakeService, FakeService>("service3"),
+                        serviceType,
+                        "service3",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        ServiceDescriptor.KeyedScoped<IFakeService, FakeService>(
+                            "service4",
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        "service4",
+                        implementationType,
+                        ServiceLifetime.Scoped
+                    },
+                    {
+                        ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>("service5"),
+                        serviceType,
+                        "service5",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>(
+                            "service6",
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        "service6",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
+                    {
+                        ServiceDescriptor.KeyedSingleton<IFakeService>("service6", _instance),
+                        serviceType,
+                        "service6",
+                        implementationType,
+                        ServiceLifetime.Singleton
+                    },
                 };
             }
         }
@@ -284,7 +633,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             object expectedKey,
             Type expectedImplementationType,
-            ServiceLifetime expectedLifetime)
+            ServiceLifetime expectedLifetime
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
@@ -300,7 +650,6 @@ namespace Microsoft.Extensions.DependencyInjection
             Assert.Equal(expectedLifetime, d.Lifetime);
         }
 
-
         [Theory]
         [MemberData(nameof(TryAddEnumerableImplementationTypeData))]
         public void TryAddEnumerable_DoesNotAddDuplicate(
@@ -308,7 +657,8 @@ namespace Microsoft.Extensions.DependencyInjection
             Type expectedServiceType,
             object expectedKey,
             Type expectedImplementationType,
-            ServiceLifetime expectedLifetime)
+            ServiceLifetime expectedLifetime
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
@@ -336,14 +686,57 @@ namespace Microsoft.Extensions.DependencyInjection
 
                 return new TheoryData<ServiceDescriptor, Type, Type>
                 {
-                    { ServiceDescriptor.KeyedTransient<IFakeService>(key, (s,k) => new FakeService()), serviceType, serviceType },
-                    { ServiceDescriptor.KeyedTransient(serviceType, key, (s,k) => new FakeService()), serviceType, objectType },
-
-                    { ServiceDescriptor.KeyedScoped<IFakeService>(key, (s,k) => new FakeService()), serviceType, serviceType },
-                    { ServiceDescriptor.KeyedScoped(serviceType, key, (s,k) => new FakeService()), serviceType, objectType },
-
-                    { ServiceDescriptor.KeyedSingleton<IFakeService>(key, (s,k) => new FakeService()), serviceType, serviceType },
-                    { ServiceDescriptor.KeyedSingleton(serviceType, key, (s,k) => new FakeService()), serviceType, objectType },
+                    {
+                        ServiceDescriptor.KeyedTransient<IFakeService>(
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        serviceType
+                    },
+                    {
+                        ServiceDescriptor.KeyedTransient(
+                            serviceType,
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        objectType
+                    },
+                    {
+                        ServiceDescriptor.KeyedScoped<IFakeService>(
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        serviceType
+                    },
+                    {
+                        ServiceDescriptor.KeyedScoped(
+                            serviceType,
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        objectType
+                    },
+                    {
+                        ServiceDescriptor.KeyedSingleton<IFakeService>(
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        serviceType
+                    },
+                    {
+                        ServiceDescriptor.KeyedSingleton(
+                            serviceType,
+                            key,
+                            (s, k) => new FakeService()
+                        ),
+                        serviceType,
+                        objectType
+                    },
                 };
             }
         }
@@ -353,13 +746,20 @@ namespace Microsoft.Extensions.DependencyInjection
         public void TryAddEnumerable_ThrowsWhenAddingIndistinguishableImplementationType(
             ServiceDescriptor descriptor,
             Type serviceType,
-            Type implementationType)
+            Type implementationType
+        )
         {
             // Arrange
             var collection = new ServiceCollection();
 
-            AssertExtensions.ThrowsContains<ArgumentException>(() => collection.TryAddEnumerable(descriptor), 
-                string.Format(@"Implementation type cannot be '{0}' because it is indistinguishable from other services registered for '{1}'.", implementationType, serviceType));
+            AssertExtensions.ThrowsContains<ArgumentException>(
+                () => collection.TryAddEnumerable(descriptor),
+                string.Format(
+                    @"Implementation type cannot be '{0}' because it is indistinguishable from other services registered for '{1}'.",
+                    implementationType,
+                    serviceType
+                )
+            );
         }
 
         [Fact]
@@ -367,8 +767,18 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var collection = new ServiceCollection();
-            var descriptor1 = new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient);
-            var descriptor2 = new ServiceDescriptor(typeof(IFakeOuterService), "key1", typeof(FakeOuterService), ServiceLifetime.Transient);
+            var descriptor1 = new ServiceDescriptor(
+                typeof(IFakeService),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Transient
+            );
+            var descriptor2 = new ServiceDescriptor(
+                typeof(IFakeOuterService),
+                "key1",
+                typeof(FakeOuterService),
+                ServiceLifetime.Transient
+            );
             var descriptors = new[] { descriptor1, descriptor2 };
 
             // Act
@@ -383,8 +793,18 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var collection = new ServiceCollection();
-            var descriptor1 = new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient);
-            var descriptor2 = new ServiceDescriptor(typeof(IFakeOuterService), "key1", typeof(FakeOuterService), ServiceLifetime.Transient);
+            var descriptor1 = new ServiceDescriptor(
+                typeof(IFakeService),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Transient
+            );
+            var descriptor2 = new ServiceDescriptor(
+                typeof(IFakeOuterService),
+                "key1",
+                typeof(FakeOuterService),
+                ServiceLifetime.Transient
+            );
             collection.Add(descriptor1);
 
             // Act
@@ -399,11 +819,26 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             // Arrange
             var collection = new ServiceCollection();
-            var descriptor1 = new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient);
-            var descriptor2 = new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient);
+            var descriptor1 = new ServiceDescriptor(
+                typeof(IFakeService),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Transient
+            );
+            var descriptor2 = new ServiceDescriptor(
+                typeof(IFakeService),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Transient
+            );
             collection.Add(descriptor1);
             collection.Add(descriptor2);
-            var descriptor3 = new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Singleton);
+            var descriptor3 = new ServiceDescriptor(
+                typeof(IFakeService),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Singleton
+            );
 
             // Act
             collection.Replace(descriptor3);
@@ -416,12 +851,27 @@ namespace Microsoft.Extensions.DependencyInjection
         public void RemoveAll_RemovesAllServicesWithMatchingServiceType()
         {
             // Arrange
-            var descriptor = new ServiceDescriptor(typeof(IFakeServiceInstance), "key1", typeof(FakeService), ServiceLifetime.Transient);
+            var descriptor = new ServiceDescriptor(
+                typeof(IFakeServiceInstance),
+                "key1",
+                typeof(FakeService),
+                ServiceLifetime.Transient
+            );
             var collection = new ServiceCollection
             {
                 descriptor,
-                new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient),
-                new ServiceDescriptor(typeof(IFakeService), "key1", typeof(FakeService), ServiceLifetime.Transient)
+                new ServiceDescriptor(
+                    typeof(IFakeService),
+                    "key1",
+                    typeof(FakeService),
+                    ServiceLifetime.Transient
+                ),
+                new ServiceDescriptor(
+                    typeof(IFakeService),
+                    "key1",
+                    typeof(FakeService),
+                    ServiceLifetime.Transient
+                ),
             };
 
             // Act
@@ -443,9 +893,19 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new TheoryData<ServiceDescriptor>
                 {
                     { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>(key) },
-                    { ServiceDescriptor.KeyedTransient<IFakeService>(key, (sp, key) => new FakeService()) },
+                    {
+                        ServiceDescriptor.KeyedTransient<IFakeService>(
+                            key,
+                            (sp, key) => new FakeService()
+                        )
+                    },
                     { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>(key) },
-                    { ServiceDescriptor.KeyedScoped<IFakeService>(key, (sp, key) => new FakeService()) },
+                    {
+                        ServiceDescriptor.KeyedScoped<IFakeService>(
+                            key,
+                            (sp, key) => new FakeService()
+                        )
+                    },
                     { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>(key) },
                     { ServiceDescriptor.KeyedSingleton<IFakeService>(key, new FakeService()) },
                 };
@@ -457,9 +917,15 @@ namespace Microsoft.Extensions.DependencyInjection
         public void NullServiceKey_IsKeyedServiceFalse(ServiceDescriptor serviceDescriptor)
         {
             Assert.False(serviceDescriptor.IsKeyedService);
-            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.KeyedImplementationInstance);
-            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.KeyedImplementationType);
-            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.KeyedImplementationFactory);
+            Assert.Throws<InvalidOperationException>(
+                () => serviceDescriptor.KeyedImplementationInstance
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => serviceDescriptor.KeyedImplementationType
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => serviceDescriptor.KeyedImplementationFactory
+            );
         }
 
         public static TheoryData NotNullServiceKeyData
@@ -474,9 +940,19 @@ namespace Microsoft.Extensions.DependencyInjection
                 return new TheoryData<ServiceDescriptor>
                 {
                     { ServiceDescriptor.KeyedTransient<IFakeService, FakeService>(key) },
-                    { ServiceDescriptor.KeyedTransient<IFakeService>(key, (sp, key) => new FakeService()) },
+                    {
+                        ServiceDescriptor.KeyedTransient<IFakeService>(
+                            key,
+                            (sp, key) => new FakeService()
+                        )
+                    },
                     { ServiceDescriptor.KeyedScoped<IFakeService, FakeService>(key) },
-                    { ServiceDescriptor.KeyedScoped<IFakeService>(key, (sp, key) => new FakeService()) },
+                    {
+                        ServiceDescriptor.KeyedScoped<IFakeService>(
+                            key,
+                            (sp, key) => new FakeService()
+                        )
+                    },
                     { ServiceDescriptor.KeyedSingleton<IFakeService, FakeService>(key) },
                     { ServiceDescriptor.KeyedSingleton<IFakeService>(key, new FakeService()) },
                 };
@@ -488,7 +964,9 @@ namespace Microsoft.Extensions.DependencyInjection
         public void NotNullServiceKey_IsKeyedServiceTrue(ServiceDescriptor serviceDescriptor)
         {
             Assert.True(serviceDescriptor.IsKeyedService);
-            Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationInstance);
+            Assert.Throws<InvalidOperationException>(
+                () => serviceDescriptor.ImplementationInstance
+            );
             Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationType);
             Assert.Throws<InvalidOperationException>(() => serviceDescriptor.ImplementationFactory);
         }

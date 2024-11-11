@@ -10,8 +10,8 @@ public class X
 
     static string[,] G()
     {
-        string[,] strings = new string[3,3];
-        strings[0,0] = s;
+        string[,] strings = new string[3, 3];
+        strings[0, 0] = s;
         return strings;
     }
 
@@ -19,7 +19,7 @@ public class X
     [Fact]
     public static int TestEntryPoint()
     {
-        int c = G()[0,0].GetHashCode();
+        int c = G()[0, 0].GetHashCode();
         int v = s.GetHashCode();
         return c == v ? 100 : -1;
     }

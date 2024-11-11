@@ -12,59 +12,58 @@ using System;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Xml;
 using System.Xml;
-
 using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.Xml {
+namespace MonoTests.System.Security.Cryptography.Xml
+{
+    [TestFixture]
+    public class KeyInfoNodeTest
+    {
+        [Test]
+        public void NewKeyNode()
+        {
+            string test = "<Test></Test>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(test);
 
-	[TestFixture]
-	public class KeyInfoNodeTest {
+            KeyInfoNode node1 = new KeyInfoNode();
+            node1.Value = doc.DocumentElement;
+            XmlElement xel = node1.GetXml();
 
-		[Test]
-		public void NewKeyNode () 
-		{
-			string test = "<Test></Test>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (test);
+            KeyInfoNode node2 = new KeyInfoNode(node1.Value);
+            node2.LoadXml(xel);
 
-			KeyInfoNode node1 = new KeyInfoNode ();
-			node1.Value = doc.DocumentElement;
-			XmlElement xel = node1.GetXml ();
+            Assert.AreEqual((node1.GetXml().OuterXml), (node2.GetXml().OuterXml), "node1==node2");
+        }
 
-			KeyInfoNode node2 = new KeyInfoNode (node1.Value);
-			node2.LoadXml (xel);
+        [Test]
+        public void ImportKeyNode()
+        {
+            // Note: KeyValue is a valid KeyNode
+            string value = "<KeyName xmlns=\"http://www.w3.org/2000/09/xmldsig#\">Mono::</KeyName>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(value);
 
-			Assert.AreEqual ((node1.GetXml ().OuterXml), (node2.GetXml ().OuterXml), "node1==node2");
-		}
+            KeyInfoNode node1 = new KeyInfoNode();
+            node1.LoadXml(doc.DocumentElement);
 
-		[Test]
-		public void ImportKeyNode () 
-		{
-			// Note: KeyValue is a valid KeyNode
-			string value = "<KeyName xmlns=\"http://www.w3.org/2000/09/xmldsig#\">Mono::</KeyName>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (value);
+            string s = (node1.GetXml().OuterXml);
+            Assert.AreEqual(value, s, "Node");
+        }
 
-			KeyInfoNode node1 = new KeyInfoNode ();
-			node1.LoadXml (doc.DocumentElement);
+        // well there's no invalid value - unless you read the doc ;-)
+        [Test]
+        public void InvalidKeyNode()
+        {
+            string bad = "<Test></Test>";
+            XmlDocument doc = new XmlDocument();
+            doc.LoadXml(bad);
 
-			string s = (node1.GetXml ().OuterXml);
-			Assert.AreEqual (value, s, "Node");
-		}
-
-		// well there's no invalid value - unless you read the doc ;-)
-		[Test]
-		public void InvalidKeyNode () 
-		{
-			string bad = "<Test></Test>";
-			XmlDocument doc = new XmlDocument ();
-			doc.LoadXml (bad);
-
-			KeyInfoNode node1 = new KeyInfoNode ();
-			// LAMESPEC: No ArgumentNullException is thrown if value == null
-			node1.LoadXml (null);
-			Assert.IsNull (node1.Value, "Value==null");
-		}
-	}
+            KeyInfoNode node1 = new KeyInfoNode();
+            // LAMESPEC: No ArgumentNullException is thrown if value == null
+            node1.LoadXml(null);
+            Assert.IsNull(node1.Value, "Value==null");
+        }
+    }
 }
 #endif

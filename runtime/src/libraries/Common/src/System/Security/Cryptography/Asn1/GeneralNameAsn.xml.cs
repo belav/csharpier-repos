@@ -29,7 +29,9 @@ namespace System.Security.Cryptography.Asn1
             {
                 if (usedTags.TryGetValue(tag, out string? existing))
                 {
-                    throw new InvalidOperationException($"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'");
+                    throw new InvalidOperationException(
+                        $"Tag '{tag}' is in use by both '{existing}' and '{fieldName}'"
+                    );
                 }
 
                 usedTags.Add(tag, fieldName);
@@ -65,7 +67,11 @@ namespace System.Security.Cryptography.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                writer.WriteCharacterString(UniversalTagNumber.IA5String, Rfc822Name, new Asn1Tag(TagClass.ContextSpecific, 1));
+                writer.WriteCharacterString(
+                    UniversalTagNumber.IA5String,
+                    Rfc822Name,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                );
                 wroteValue = true;
             }
 
@@ -74,7 +80,11 @@ namespace System.Security.Cryptography.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                writer.WriteCharacterString(UniversalTagNumber.IA5String, DnsName, new Asn1Tag(TagClass.ContextSpecific, 2));
+                writer.WriteCharacterString(
+                    UniversalTagNumber.IA5String,
+                    DnsName,
+                    new Asn1Tag(TagClass.ContextSpecific, 2)
+                );
                 wroteValue = true;
             }
 
@@ -85,8 +95,12 @@ namespace System.Security.Cryptography.Asn1
 
                 // Validator for tag constraint for X400Address
                 {
-                    if (!Asn1Tag.TryDecode(X400Address.Value.Span, out Asn1Tag validateTag, out _) ||
-                        !validateTag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3)))
+                    if (
+                        !Asn1Tag.TryDecode(X400Address.Value.Span, out Asn1Tag validateTag, out _)
+                        || !validateTag.HasSameClassAndValue(
+                            new Asn1Tag(TagClass.ContextSpecific, 3)
+                        )
+                    )
                     {
                         throw new CryptographicException();
                     }
@@ -135,7 +149,11 @@ namespace System.Security.Cryptography.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                writer.WriteCharacterString(UniversalTagNumber.IA5String, Uri, new Asn1Tag(TagClass.ContextSpecific, 6));
+                writer.WriteCharacterString(
+                    UniversalTagNumber.IA5String,
+                    Uri,
+                    new Asn1Tag(TagClass.ContextSpecific, 6)
+                );
                 wroteValue = true;
             }
 
@@ -144,7 +162,10 @@ namespace System.Security.Cryptography.Asn1
                 if (wroteValue)
                     throw new CryptographicException();
 
-                writer.WriteOctetString(IPAddress.Value.Span, new Asn1Tag(TagClass.ContextSpecific, 7));
+                writer.WriteOctetString(
+                    IPAddress.Value.Span,
+                    new Asn1Tag(TagClass.ContextSpecific, 7)
+                );
                 wroteValue = true;
             }
 
@@ -155,7 +176,10 @@ namespace System.Security.Cryptography.Asn1
 
                 try
                 {
-                    writer.WriteObjectIdentifier(RegisteredId, new Asn1Tag(TagClass.ContextSpecific, 8));
+                    writer.WriteObjectIdentifier(
+                        RegisteredId,
+                        new Asn1Tag(TagClass.ContextSpecific, 8)
+                    );
                 }
                 catch (ArgumentException e)
                 {
@@ -170,7 +194,10 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static GeneralNameAsn Decode(ReadOnlyMemory<byte> encoded, AsnEncodingRules ruleSet)
+        internal static GeneralNameAsn Decode(
+            ReadOnlyMemory<byte> encoded,
+            AsnEncodingRules ruleSet
+        )
         {
             try
             {
@@ -186,7 +213,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        internal static void Decode(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out GeneralNameAsn decoded)
+        internal static void Decode(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out GeneralNameAsn decoded
+        )
         {
             try
             {
@@ -198,7 +229,11 @@ namespace System.Security.Cryptography.Asn1
             }
         }
 
-        private static void DecodeCore(ref AsnValueReader reader, ReadOnlyMemory<byte> rebind, out GeneralNameAsn decoded)
+        private static void DecodeCore(
+            ref AsnValueReader reader,
+            ReadOnlyMemory<byte> rebind,
+            out GeneralNameAsn decoded
+        )
         {
             decoded = default;
             Asn1Tag tag = reader.PeekTag();
@@ -210,57 +245,87 @@ namespace System.Security.Cryptography.Asn1
             if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 0)))
             {
                 System.Security.Cryptography.Asn1.OtherNameAsn tmpOtherName;
-                System.Security.Cryptography.Asn1.OtherNameAsn.Decode(ref reader, new Asn1Tag(TagClass.ContextSpecific, 0), rebind, out tmpOtherName);
+                System.Security.Cryptography.Asn1.OtherNameAsn.Decode(
+                    ref reader,
+                    new Asn1Tag(TagClass.ContextSpecific, 0),
+                    rebind,
+                    out tmpOtherName
+                );
                 decoded.OtherName = tmpOtherName;
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 1)))
             {
-                decoded.Rfc822Name = reader.ReadCharacterString(UniversalTagNumber.IA5String, new Asn1Tag(TagClass.ContextSpecific, 1));
+                decoded.Rfc822Name = reader.ReadCharacterString(
+                    UniversalTagNumber.IA5String,
+                    new Asn1Tag(TagClass.ContextSpecific, 1)
+                );
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 2)))
             {
-                decoded.DnsName = reader.ReadCharacterString(UniversalTagNumber.IA5String, new Asn1Tag(TagClass.ContextSpecific, 2));
+                decoded.DnsName = reader.ReadCharacterString(
+                    UniversalTagNumber.IA5String,
+                    new Asn1Tag(TagClass.ContextSpecific, 2)
+                );
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 3)))
             {
                 tmpSpan = reader.ReadEncodedValue();
-                decoded.X400Address = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.X400Address = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 4)))
             {
                 explicitReader = reader.ReadSequence(new Asn1Tag(TagClass.ContextSpecific, 4));
                 tmpSpan = explicitReader.ReadEncodedValue();
-                decoded.DirectoryName = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                decoded.DirectoryName = rebindSpan.Overlaps(tmpSpan, out offset)
+                    ? rebind.Slice(offset, tmpSpan.Length)
+                    : tmpSpan.ToArray();
                 explicitReader.ThrowIfNotEmpty();
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 5)))
             {
                 System.Security.Cryptography.Asn1.EdiPartyNameAsn tmpEdiPartyName;
-                System.Security.Cryptography.Asn1.EdiPartyNameAsn.Decode(ref reader, new Asn1Tag(TagClass.ContextSpecific, 5), rebind, out tmpEdiPartyName);
+                System.Security.Cryptography.Asn1.EdiPartyNameAsn.Decode(
+                    ref reader,
+                    new Asn1Tag(TagClass.ContextSpecific, 5),
+                    rebind,
+                    out tmpEdiPartyName
+                );
                 decoded.EdiPartyName = tmpEdiPartyName;
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 6)))
             {
-                decoded.Uri = reader.ReadCharacterString(UniversalTagNumber.IA5String, new Asn1Tag(TagClass.ContextSpecific, 6));
+                decoded.Uri = reader.ReadCharacterString(
+                    UniversalTagNumber.IA5String,
+                    new Asn1Tag(TagClass.ContextSpecific, 6)
+                );
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 7)))
             {
-
-                if (reader.TryReadPrimitiveOctetString(out tmpSpan, new Asn1Tag(TagClass.ContextSpecific, 7)))
+                if (
+                    reader.TryReadPrimitiveOctetString(
+                        out tmpSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 7)
+                    )
+                )
                 {
-                    decoded.IPAddress = rebindSpan.Overlaps(tmpSpan, out offset) ? rebind.Slice(offset, tmpSpan.Length) : tmpSpan.ToArray();
+                    decoded.IPAddress = rebindSpan.Overlaps(tmpSpan, out offset)
+                        ? rebind.Slice(offset, tmpSpan.Length)
+                        : tmpSpan.ToArray();
                 }
                 else
                 {
-                    decoded.IPAddress = reader.ReadOctetString(new Asn1Tag(TagClass.ContextSpecific, 7));
+                    decoded.IPAddress = reader.ReadOctetString(
+                        new Asn1Tag(TagClass.ContextSpecific, 7)
+                    );
                 }
-
             }
             else if (tag.HasSameClassAndValue(new Asn1Tag(TagClass.ContextSpecific, 8)))
             {
-                decoded.RegisteredId = reader.ReadObjectIdentifier(new Asn1Tag(TagClass.ContextSpecific, 8));
+                decoded.RegisteredId = reader.ReadObjectIdentifier(
+                    new Asn1Tag(TagClass.ContextSpecific, 8)
+                );
             }
             else
             {

@@ -38,7 +38,10 @@ namespace Microsoft.Win32.RegistryTests
             TestRegistryKey.DeleteValue(valueName);
         }
 
-        public static IEnumerable<object[]> TestValueTypes { get { return TestData.TestValueTypes; } }
+        public static IEnumerable<object[]> TestValueTypes
+        {
+            get { return TestData.TestValueTypes; }
+        }
 
         [Theory]
         [MemberData(nameof(TestValueTypes))]
@@ -79,7 +82,7 @@ namespace Microsoft.Win32.RegistryTests
             {
                 "This is a public",
                 "broadcast intend to test",
-                "lot of things. one of which"
+                "lot of things. one of which",
             };
 
             TestRegistryKey.SetValue(valueName, expected);

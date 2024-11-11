@@ -95,7 +95,8 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         private TryLockResult LazyInitializeOrEnter()
         {
-            StaticsInitializationStage stage = (StaticsInitializationStage)Volatile.Read(ref s_staticsInitializationStage);
+            StaticsInitializationStage stage = (StaticsInitializationStage)
+                Volatile.Read(ref s_staticsInitializationStage);
             switch (stage)
             {
                 case StaticsInitializationStage.Complete:
@@ -120,7 +121,8 @@ namespace System.Threading
                             Thread.SpinWait(1);
                         }
 
-                        stage = (StaticsInitializationStage)Volatile.Read(ref s_staticsInitializationStage);
+                        stage = (StaticsInitializationStage)
+                            Volatile.Read(ref s_staticsInitializationStage);
                         if (stage == StaticsInitializationStage.Complete)
                         {
                             goto case StaticsInitializationStage.Complete;
@@ -155,10 +157,12 @@ namespace System.Threading
             // construction, update the stage first to avoid infinite recursion
             switch (
                 (StaticsInitializationStage)
-                Interlocked.CompareExchange(
-                    ref s_staticsInitializationStage,
-                    (int)StaticsInitializationStage.Started,
-                    (int)StaticsInitializationStage.NotStarted))
+                    Interlocked.CompareExchange(
+                        ref s_staticsInitializationStage,
+                        (int)StaticsInitializationStage.Started,
+                        (int)StaticsInitializationStage.NotStarted
+                    )
+            )
             {
                 case StaticsInitializationStage.Started:
                     return false;
@@ -181,7 +185,10 @@ namespace System.Threading
                 throw;
             }
 
-            Volatile.Write(ref s_staticsInitializationStage, (int)StaticsInitializationStage.Complete);
+            Volatile.Write(
+                ref s_staticsInitializationStage,
+                (int)StaticsInitializationStage.Complete
+            );
             return true;
         }
 
@@ -203,9 +210,11 @@ namespace System.Threading
             private uint _id;
 
             public ThreadId(uint id) => _id = id;
+
             public uint Id => _id;
             public bool IsInitialized => _id != 0;
-            public static ThreadId Current_NoInitialize => new ThreadId((uint)ManagedThreadId.CurrentManagedThreadIdUnchecked);
+            public static ThreadId Current_NoInitialize =>
+                new ThreadId((uint)ManagedThreadId.CurrentManagedThreadIdUnchecked);
 
             public void InitializeForCurrentThread()
             {
@@ -219,7 +228,7 @@ namespace System.Threading
         {
             NotStarted,
             Started,
-            Complete
+            Complete,
         }
     }
 }

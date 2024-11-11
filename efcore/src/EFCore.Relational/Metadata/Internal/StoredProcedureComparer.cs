@@ -10,11 +10,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 // Sealed for perf
-public sealed class StoredProcedureComparer : IEqualityComparer<IStoredProcedure>, IComparer<IStoredProcedure>
+public sealed class StoredProcedureComparer
+    : IEqualityComparer<IStoredProcedure>,
+        IComparer<IStoredProcedure>
 {
-    private StoredProcedureComparer()
-    {
-    }
+    private StoredProcedureComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -81,14 +81,16 @@ public sealed class StoredProcedureComparer : IEqualityComparer<IStoredProcedure
             return result;
         }
 
-        result = x.Parameters.Zip(y.Parameters, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
+        result = x
+            .Parameters.Zip(y.Parameters, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
             .FirstOrDefault(r => r != 0);
         if (result != 0)
         {
             return result;
         }
 
-        return x.ResultColumns.Zip(y.ResultColumns, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
+        return x
+            .ResultColumns.Zip(y.ResultColumns, (xc, yc) => StringComparer.Ordinal.Compare(xc, yc))
             .FirstOrDefault(r => r != 0);
     }
 
@@ -98,14 +100,16 @@ public sealed class StoredProcedureComparer : IEqualityComparer<IStoredProcedure
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public bool Equals(IStoredProcedure? x, IStoredProcedure? y)
-        => ReferenceEquals(x, y)
-            || (x is not null
-                && y is not null
-                && x.EntityType == y.EntityType
-                && x.GetStoreIdentifier() == y.GetStoreIdentifier()
-                && x.Parameters.SequenceEqual(y.Parameters)
-                && x.ResultColumns.SequenceEqual(y.ResultColumns));
+    public bool Equals(IStoredProcedure? x, IStoredProcedure? y) =>
+        ReferenceEquals(x, y)
+        || (
+            x is not null
+            && y is not null
+            && x.EntityType == y.EntityType
+            && x.GetStoreIdentifier() == y.GetStoreIdentifier()
+            && x.Parameters.SequenceEqual(y.Parameters)
+            && x.ResultColumns.SequenceEqual(y.ResultColumns)
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -113,6 +117,5 @@ public sealed class StoredProcedureComparer : IEqualityComparer<IStoredProcedure
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public int GetHashCode(IStoredProcedure obj)
-        => obj.GetStoreIdentifier().GetHashCode();
+    public int GetHashCode(IStoredProcedure obj) => obj.GetStoreIdentifier().GetHashCode();
 }

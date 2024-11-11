@@ -29,38 +29,39 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using Cadenza;
 using NUnit.Framework;
 
-using Cadenza;
+namespace Cadenza.Tests
+{
+    public abstract class BaseRocksFixture
+    {
+        public void AssertAreSame<T>(IEnumerable<T> expected, IEnumerable<T> data)
+        {
+            Assert.IsTrue(data.SequenceEqual(expected));
+        }
 
-namespace Cadenza.Tests {
+        public static void AssertThrows<TException>(Action action)
+        {
+            try
+            {
+                action();
+            }
+            catch (Exception e)
+            {
+                if (e.GetType() != typeof(TException))
+                    throw new InvalidOperationException(
+                        string.Format(
+                            "invalid exception type!  Expected {0}, got {1}.",
+                            typeof(TException).FullName,
+                            e.GetType().FullName
+                        ),
+                        e
+                    );
+            }
+        }
 
-	public abstract class BaseRocksFixture {
-
-		public void AssertAreSame<T> (IEnumerable<T> expected, IEnumerable<T> data)
-		{
-			Assert.IsTrue (data.SequenceEqual (expected));
-		}
-
-		public static void AssertThrows<TException> (Action action)
-		{
-			try {
-				action ();
-			}
-			catch (Exception e)
-			{
-				if (e.GetType () != typeof (TException))
-					throw new InvalidOperationException (
-							string.Format ("invalid exception type!  Expected {0}, got {1}.",
-								typeof (TException).FullName, e.GetType().FullName),
-							e);
-			}
-		}
-
-		// Exists so that you can use a variable and shut up the compiler.
-		public static void Ignore<T>(T value)
-		{
-		}
-	}
+        // Exists so that you can use a variable and shut up the compiler.
+        public static void Ignore<T>(T value) { }
+    }
 }

@@ -16,8 +16,28 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="controllerName"></param>
         /// <param name="routeValues"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters"), SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression"), SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Need to be sure the passed-in argument is of type Controller::Action")]
-        public static string ResourceUrl(this UrlHelper url, string controllerName, object routeValues)
+        [
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1055:UriReturnValuesShouldNotBeStrings",
+                Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1006:DoNotNestGenericTypesInMemberSignatures",
+                Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1011:ConsiderPassingBaseTypesAsParameters",
+                Justification = "Need to be sure the passed-in argument is of type Controller::Action"
+            )
+        ]
+        public static string ResourceUrl(
+            this UrlHelper url,
+            string controllerName,
+            object routeValues
+        )
         {
             return url.ResourceUrl(controllerName, routeValues, ActionType.Retrieve);
         }
@@ -30,8 +50,29 @@ namespace Microsoft.Web.Mvc.Resources
         /// <param name="routeValues"></param>
         /// <param name="actionType"></param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Design", "CA1055:UriReturnValuesShouldNotBeStrings", Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters"), SuppressMessage("Microsoft.Design", "CA1006:DoNotNestGenericTypesInMemberSignatures", Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression"), SuppressMessage("Microsoft.Design", "CA1011:ConsiderPassingBaseTypesAsParameters", Justification = "Need to be sure the passed-in argument is of type Controller::Action")]
-        public static string ResourceUrl(this UrlHelper url, string controllerName, object routeValues, ActionType actionType)
+        [
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1055:UriReturnValuesShouldNotBeStrings",
+                Justification = "The return value is not a regular URL since it may contain ~/ ASP.NET-specific characters"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1006:DoNotNestGenericTypesInMemberSignatures",
+                Justification = "This is an Extension Method which allows the user to provide a strongly-typed argument via Expression"
+            ),
+            SuppressMessage(
+                "Microsoft.Design",
+                "CA1011:ConsiderPassingBaseTypesAsParameters",
+                Justification = "Need to be sure the passed-in argument is of type Controller::Action"
+            )
+        ]
+        public static string ResourceUrl(
+            this UrlHelper url,
+            string controllerName,
+            object routeValues,
+            ActionType actionType
+        )
         {
             switch (actionType)
             {

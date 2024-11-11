@@ -10,10 +10,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,25 +32,25 @@ using System.ServiceModel.Dispatcher;
 
 namespace System.ServiceModel.Discovery
 {
-	public class DiscoveryMessageSequenceGenerator
-	{
-		public DiscoveryMessageSequenceGenerator ()
-			: this (AppDomain.CurrentDomain.Id, null) // not sure what should be used for instanceId; multiple instances share the same Id
-		{
-		}
+    public class DiscoveryMessageSequenceGenerator
+    {
+        public DiscoveryMessageSequenceGenerator()
+            : this(AppDomain.CurrentDomain.Id, null) // not sure what should be used for instanceId; multiple instances share the same Id
+        { }
 
-		public DiscoveryMessageSequenceGenerator (long instanceId, Uri sequenceId)
-		{
-			instance_id = instanceId;
-			sequence_id = sequenceId;
-		}
+        public DiscoveryMessageSequenceGenerator(long instanceId, Uri sequenceId)
+        {
+            instance_id = instanceId;
+            sequence_id = sequenceId;
+        }
 
-		long instance_id, message_count;
-		Uri sequence_id;
+        long instance_id,
+            message_count;
+        Uri sequence_id;
 
-		public DiscoveryMessageSequence Next ()
-		{
-			return new DiscoveryMessageSequence (instance_id, sequence_id, ++message_count);
-		}
-	}
+        public DiscoveryMessageSequence Next()
+        {
+            return new DiscoveryMessageSequence(instance_id, sequence_id, ++message_count);
+        }
+    }
 }

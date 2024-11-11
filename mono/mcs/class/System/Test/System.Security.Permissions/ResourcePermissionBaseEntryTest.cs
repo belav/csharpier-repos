@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,44 +27,50 @@
 // WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 //
 
-using NUnit.Framework;
 using System;
 using System.Security.Permissions;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Permissions {
+namespace MonoTests.System.Security.Permissions
+{
+    [TestFixture]
+    public class ResourcePermissionBaseEntryTest
+    {
+        [Test]
+        public void Constructor_Default()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry();
+            Assert.AreEqual(0, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual(0, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
 
-	[TestFixture]
-	public class ResourcePermissionBaseEntryTest {
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void Constructor_Null()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry(0, null);
+        }
 
-		[Test]
-		public void Constructor_Default () 
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry ();
-			Assert.AreEqual (0, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (0, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
+        [Test]
+        public void Constructor_Negative()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry(
+                Int32.MinValue,
+                new string[1]
+            );
+            Assert.AreEqual(Int32.MinValue, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual(1, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void Constructor_Null ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (0, null);
-		}
-
-		[Test]
-		public void Constructor_Negative ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MinValue, new string [1]);
-			Assert.AreEqual (Int32.MinValue, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (1, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
-
-		[Test]
-		public void Constructor_IntString ()
-		{
-			ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry (Int32.MaxValue, new string [10]);
-			Assert.AreEqual (Int32.MaxValue, rpbe.PermissionAccess, "PermissionAccess");
-			Assert.AreEqual (10, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
-		}
-	}
+        [Test]
+        public void Constructor_IntString()
+        {
+            ResourcePermissionBaseEntry rpbe = new ResourcePermissionBaseEntry(
+                Int32.MaxValue,
+                new string[10]
+            );
+            Assert.AreEqual(Int32.MaxValue, rpbe.PermissionAccess, "PermissionAccess");
+            Assert.AreEqual(10, rpbe.PermissionAccessPath.Length, "PermissionAccessPath");
+        }
+    }
 }

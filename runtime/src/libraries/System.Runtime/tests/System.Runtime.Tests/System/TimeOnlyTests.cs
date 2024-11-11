@@ -35,7 +35,10 @@ namespace System.Tests
             Assert.Equal(0, to.Millisecond);
             Assert.Equal(0, to.Microsecond);
             Assert.Equal(0, to.Nanosecond);
-            Assert.Equal(new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks, to.Ticks);
+            Assert.Equal(
+                new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks,
+                to.Ticks
+            );
 
             to = new TimeOnly(10, 20, 30);
             Assert.Equal(10, to.Hour);
@@ -44,7 +47,10 @@ namespace System.Tests
             Assert.Equal(0, to.Millisecond);
             Assert.Equal(0, to.Microsecond);
             Assert.Equal(0, to.Nanosecond);
-            Assert.Equal(new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks, to.Ticks);
+            Assert.Equal(
+                new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks,
+                to.Ticks
+            );
 
             to = new TimeOnly(23, 59, 59, 999);
             Assert.Equal(23, to.Hour);
@@ -53,7 +59,10 @@ namespace System.Tests
             Assert.Equal(999, to.Millisecond);
             Assert.Equal(0, to.Microsecond);
             Assert.Equal(0, to.Nanosecond);
-            Assert.Equal(new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks, to.Ticks);
+            Assert.Equal(
+                new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond).Ticks,
+                to.Ticks
+            );
 
             to = new TimeOnly(23, 59, 59, 999, 999);
             Assert.Equal(23, to.Hour);
@@ -62,7 +71,19 @@ namespace System.Tests
             Assert.Equal(999, to.Millisecond);
             Assert.Equal(999, to.Microsecond);
             Assert.Equal(0, to.Nanosecond);
-            Assert.Equal(new DateTime(1, 1, 1, to.Hour, to.Minute, to.Second, to.Millisecond, to.Microsecond).Ticks, to.Ticks);
+            Assert.Equal(
+                new DateTime(
+                    1,
+                    1,
+                    1,
+                    to.Hour,
+                    to.Minute,
+                    to.Second,
+                    to.Millisecond,
+                    to.Microsecond
+                ).Ticks,
+                to.Ticks
+            );
 
             DateTime dt = DateTime.Now;
             to = new TimeOnly(dt.TimeOfDay.Ticks);
@@ -79,11 +100,26 @@ namespace System.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, -2));
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, 10, 60));
             Assert.Throws<ArgumentOutOfRangeException>(() => new TimeOnly(10, 10, -3));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecond", () => new TimeOnly(10, 10, 10, 1000));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("millisecond", () => new TimeOnly(10, 10, 10, -4));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("microsecond", () => new TimeOnly(10, 10, 10, 10, 1000));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("microsecond", () => new TimeOnly(10, 10, 10, 10, -4));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () => new TimeOnly(TimeOnly.MaxValue.Ticks + 1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecond",
+                () => new TimeOnly(10, 10, 10, 1000)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "millisecond",
+                () => new TimeOnly(10, 10, 10, -4)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "microsecond",
+                () => new TimeOnly(10, 10, 10, 10, 1000)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "microsecond",
+                () => new TimeOnly(10, 10, 10, 10, -4)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "ticks",
+                () => new TimeOnly(TimeOnly.MaxValue.Ticks + 1)
+            );
             AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () => new TimeOnly(-1));
         }
 
@@ -118,10 +154,16 @@ namespace System.Tests
         [InlineData(12, 59, 31, 1)]
         [InlineData(14, 2, 29, 2)]
         [InlineData(1, 13, 1, 100)]
-        public static void DeconstructionTest_Hour_Minute_Second_Millisecond(int hour, int minute, int second, int millisecond)
+        public static void DeconstructionTest_Hour_Minute_Second_Millisecond(
+            int hour,
+            int minute,
+            int second,
+            int millisecond
+        )
         {
             var time = new TimeOnly(hour, minute, second, millisecond);
-            (int obtainedHour, int obtainedMinute, int obtainedSecond, int obtainedMillisecond) = time;
+            (int obtainedHour, int obtainedMinute, int obtainedSecond, int obtainedMillisecond) =
+                time;
 
             Assert.Equal(hour, obtainedHour);
             Assert.Equal(minute, obtainedMinute);
@@ -133,10 +175,22 @@ namespace System.Tests
         [InlineData(12, 59, 31, 1, 7)]
         [InlineData(14, 2, 29, 2, 3)]
         [InlineData(1, 13, 1, 100, 2)]
-        public static void DeconstructionTest_Hour_Minute_Second_Millisecond_Microsecond(int hour, int minute, int second, int millisecond, int microsecond)
+        public static void DeconstructionTest_Hour_Minute_Second_Millisecond_Microsecond(
+            int hour,
+            int minute,
+            int second,
+            int millisecond,
+            int microsecond
+        )
         {
             var time = new TimeOnly(hour, minute, second, millisecond, microsecond);
-            (int obtainedHour, int obtainedMinute, int obtainedSecond, int obtainedMillisecond, int obtainedMicrosecond) = time;
+            (
+                int obtainedHour,
+                int obtainedMinute,
+                int obtainedSecond,
+                int obtainedMillisecond,
+                int obtainedMicrosecond
+            ) = time;
 
             Assert.Equal(hour, obtainedHour);
             Assert.Equal(minute, obtainedMinute);
@@ -149,7 +203,13 @@ namespace System.Tests
         public static void DeconstructionTest_Hour_Minute_Second_Millisecond_Microsecond_Now()
         {
             var time = TimeOnly.FromDateTime(DateTime.Now);
-            (int obtainedHour, int obtainedMinute, int obtainedSecond, int obtainedMillisecond, int obtainedMicrosecond) = time;
+            (
+                int obtainedHour,
+                int obtainedMinute,
+                int obtainedSecond,
+                int obtainedMillisecond,
+                int obtainedMicrosecond
+            ) = time;
 
             Assert.Equal(time.Hour, obtainedHour);
             Assert.Equal(time.Minute, obtainedMinute);
@@ -283,9 +343,9 @@ namespace System.Tests
             TimeOnly to2 = new TimeOnly(14, 0);
 
             Assert.Equal(new TimeSpan(3, 29, 20), to2 - to1);
-            Assert.Equal(new TimeSpan(20,30, 40), to1 - to2);
+            Assert.Equal(new TimeSpan(20, 30, 40), to1 - to2);
             Assert.Equal(TimeSpan.Zero, to1 - to1);
-            Assert.Equal(new TimeSpan(2,0, 0), new TimeOnly(1, 0) - new TimeOnly(23, 0));
+            Assert.Equal(new TimeSpan(2, 0, 0), new TimeOnly(1, 0) - new TimeOnly(23, 0));
         }
 
         [Fact]
@@ -299,8 +359,14 @@ namespace System.Tests
 
             Assert.Equal(TimeOnly.MaxValue, TimeOnly.FromTimeSpan(TimeOnly.MaxValue.ToTimeSpan()));
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () => TimeOnly.FromTimeSpan(new TimeSpan(24, 0, 0)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("ticks", () => TimeOnly.FromTimeSpan(new TimeSpan(-1, 0, 0)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "ticks",
+                () => TimeOnly.FromTimeSpan(new TimeSpan(24, 0, 0))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "ticks",
+                () => TimeOnly.FromTimeSpan(new TimeSpan(-1, 0, 0))
+            );
         }
 
         [Fact]
@@ -357,7 +423,8 @@ namespace System.Tests
 
         // Arabic cultures uses zero width characters in the date formatting which cause a problem with the DateTime parsing in general.
         // We still test these cultures parsing but with ParseExact instead.
-        internal static bool IsNotArabicCulture => !CultureInfo.CurrentCulture.Name.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
+        internal static bool IsNotArabicCulture =>
+            !CultureInfo.CurrentCulture.Name.StartsWith("ar", StringComparison.OrdinalIgnoreCase);
 
         [ConditionalFact(nameof(IsNotArabicCulture))]
         public static void BasicFormatParseTest()
@@ -381,33 +448,114 @@ namespace System.Tests
 
             s = timeOnly.ToString(pattern, CultureInfo.InvariantCulture);
             parsedTimeOnly = TimeOnly.Parse(s, CultureInfo.InvariantCulture);
-            Assert.True(TimeOnly.TryParse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedTimeOnly1));
+            Assert.True(
+                TimeOnly.TryParse(
+                    s.AsSpan(),
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsedTimeOnly1
+                )
+            );
             Assert.Equal(timeOnly, parsedTimeOnly);
             Assert.Equal(timeOnly, parsedTimeOnly1);
             parsedTimeOnly = TimeOnly.Parse(s.AsSpan(), CultureInfo.InvariantCulture);
-            Assert.True(TimeOnly.TryParse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.None, out parsedTimeOnly1));
+            Assert.True(
+                TimeOnly.TryParse(
+                    s.AsSpan(),
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.None,
+                    out parsedTimeOnly1
+                )
+            );
             Assert.Equal(parsedTimeOnly, parsedTimeOnly1);
 
-            Assert.False(TimeOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal, out parsedTimeOnly1));
-            AssertExtensions.Throws<ArgumentException>("style", () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AdjustToUniversal));
-            Assert.False(TimeOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out parsedTimeOnly1));
-            AssertExtensions.Throws<ArgumentException>("style", () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal));
-            Assert.False(TimeOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out parsedTimeOnly1));
-            AssertExtensions.Throws<ArgumentException>("style", () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal));
-            Assert.False(TimeOnly.TryParse(s, CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault, out parsedTimeOnly1));
-            AssertExtensions.Throws<ArgumentException>("style", () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.NoCurrentDateDefault));
+            Assert.False(
+                TimeOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AdjustToUniversal,
+                    out parsedTimeOnly1
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () =>
+                    TimeOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.AdjustToUniversal
+                    )
+            );
+            Assert.False(
+                TimeOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeLocal,
+                    out parsedTimeOnly1
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () => TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal)
+            );
+            Assert.False(
+                TimeOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.AssumeUniversal,
+                    out parsedTimeOnly1
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () =>
+                    TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal)
+            );
+            Assert.False(
+                TimeOnly.TryParse(
+                    s,
+                    CultureInfo.InvariantCulture,
+                    DateTimeStyles.NoCurrentDateDefault,
+                    out parsedTimeOnly1
+                )
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "style",
+                () =>
+                    TimeOnly.Parse(
+                        s,
+                        CultureInfo.InvariantCulture,
+                        DateTimeStyles.NoCurrentDateDefault
+                    )
+            );
 
             s = "     " + s + "     ";
-            parsedTimeOnly = TimeOnly.Parse(s, CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces);
+            parsedTimeOnly = TimeOnly.Parse(
+                s,
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AllowWhiteSpaces
+            );
             Assert.Equal(timeOnly, parsedTimeOnly);
-            parsedTimeOnly = TimeOnly.Parse(s.AsSpan(), CultureInfo.InvariantCulture, DateTimeStyles.AllowWhiteSpaces);
+            parsedTimeOnly = TimeOnly.Parse(
+                s.AsSpan(),
+                CultureInfo.InvariantCulture,
+                DateTimeStyles.AllowWhiteSpaces
+            );
             Assert.Equal(timeOnly, parsedTimeOnly);
         }
 
         [ConditionalFact(nameof(IsNotArabicCulture))]
         public static void FormatParseTest()
         {
-            string[] patterns = new string[] { CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern, CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern, "t", "T", "o", "r" };
+            string[] patterns = new string[]
+            {
+                CultureInfo.CurrentCulture.DateTimeFormat.ShortTimePattern,
+                CultureInfo.CurrentCulture.DateTimeFormat.LongTimePattern,
+                "t",
+                "T",
+                "o",
+                "r",
+            };
 
             TimeOnly timeOnly = TimeOnly.FromDateTime(DateTime.Now);
 
@@ -424,11 +572,25 @@ namespace System.Tests
                 Assert.Equal(timeOnly, parsedTimeOnly1);
 
                 parsedTimeOnly = TimeOnly.Parse(formattedTime, CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParse(formattedTime, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                Assert.True(
+                    TimeOnly.TryParse(
+                        formattedTime,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
                 parsedTimeOnly = TimeOnly.Parse(formattedTime.AsSpan(), CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParse(formattedTime.AsSpan(), CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                Assert.True(
+                    TimeOnly.TryParse(
+                        formattedTime.AsSpan(),
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
 
@@ -437,16 +599,46 @@ namespace System.Tests
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
                 parsedTimeOnly = TimeOnly.ParseExact(formattedTime.AsSpan(), format.AsSpan());
-                Assert.True(TimeOnly.TryParseExact(formattedTime.AsSpan(), format.AsSpan(), out parsedTimeOnly1));
+                Assert.True(
+                    TimeOnly.TryParseExact(
+                        formattedTime.AsSpan(),
+                        format.AsSpan(),
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
 
-                parsedTimeOnly = TimeOnly.ParseExact(formattedTime, format, CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParseExact(formattedTime, format, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                parsedTimeOnly = TimeOnly.ParseExact(
+                    formattedTime,
+                    format,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    TimeOnly.TryParseExact(
+                        formattedTime,
+                        format,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
-                parsedTimeOnly = TimeOnly.ParseExact(formattedTime.AsSpan(), format.AsSpan(), CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParseExact(formattedTime.AsSpan(), format.AsSpan(), CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                parsedTimeOnly = TimeOnly.ParseExact(
+                    formattedTime.AsSpan(),
+                    format.AsSpan(),
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    TimeOnly.TryParseExact(
+                        formattedTime.AsSpan(),
+                        format.AsSpan(),
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
 
@@ -455,16 +647,42 @@ namespace System.Tests
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
                 parsedTimeOnly = TimeOnly.ParseExact(formattedTime.AsSpan(), patterns);
-                Assert.True(TimeOnly.TryParseExact(formattedTime.AsSpan(), patterns, out parsedTimeOnly1));
+                Assert.True(
+                    TimeOnly.TryParseExact(formattedTime.AsSpan(), patterns, out parsedTimeOnly1)
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
 
-                parsedTimeOnly = TimeOnly.ParseExact(formattedTime, patterns, CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParseExact(formattedTime, patterns, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                parsedTimeOnly = TimeOnly.ParseExact(
+                    formattedTime,
+                    patterns,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    TimeOnly.TryParseExact(
+                        formattedTime,
+                        patterns,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
-                parsedTimeOnly = TimeOnly.ParseExact(formattedTime.AsSpan(), patterns, CultureInfo.CurrentCulture);
-                Assert.True(TimeOnly.TryParseExact(formattedTime.AsSpan(), patterns, CultureInfo.CurrentCulture, DateTimeStyles.None, out parsedTimeOnly1));
+                parsedTimeOnly = TimeOnly.ParseExact(
+                    formattedTime.AsSpan(),
+                    patterns,
+                    CultureInfo.CurrentCulture
+                );
+                Assert.True(
+                    TimeOnly.TryParseExact(
+                        formattedTime.AsSpan(),
+                        patterns,
+                        CultureInfo.CurrentCulture,
+                        DateTimeStyles.None,
+                        out parsedTimeOnly1
+                    )
+                );
                 Assert.Equal(timeOnly, parsedTimeOnly);
                 Assert.Equal(timeOnly, parsedTimeOnly1);
             }
@@ -538,7 +756,9 @@ namespace System.Tests
         [Fact]
         public static void AllCulturesTest()
         {
-            TimeOnly timeOnly = new TimeOnly((DateTime.Now.TimeOfDay.Ticks / TimeSpan.TicksPerMinute) * TimeSpan.TicksPerMinute);
+            TimeOnly timeOnly = new TimeOnly(
+                (DateTime.Now.TimeOfDay.Ticks / TimeSpan.TicksPerMinute) * TimeSpan.TicksPerMinute
+            );
             foreach (CultureInfo ci in CultureInfo.GetCultures(CultureTypes.SpecificCultures))
             {
                 if (string.IsNullOrEmpty(ci.DateTimeFormat.TimeSeparator))
@@ -585,8 +805,12 @@ namespace System.Tests
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "r"));
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out charsWritten, "O"));
 
-                Assert.Throws<FormatException>(() => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "u"));
-                Assert.Throws<FormatException>(() => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "dd-yyyy"));
+                Assert.Throws<FormatException>(
+                    () => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "u")
+                );
+                Assert.Throws<FormatException>(
+                    () => timeOnly.TryFormat(stackalloc char[100], out charsWritten, "dd-yyyy")
+                );
                 Assert.Throws<FormatException>(() => $"{timeOnly:u}");
                 Assert.Throws<FormatException>(() => $"{timeOnly:dd-yyyy}");
             }
@@ -614,8 +838,12 @@ namespace System.Tests
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out bytesWritten, "r"));
                 Assert.False(timeOnly.TryFormat(buffer.Slice(0, 3), out bytesWritten, "O"));
 
-                Assert.Throws<FormatException>(() => timeOnly.TryFormat(new byte[100], out bytesWritten, "u"));
-                Assert.Throws<FormatException>(() => timeOnly.TryFormat(new byte[100], out bytesWritten, "dd-yyyy"));
+                Assert.Throws<FormatException>(
+                    () => timeOnly.TryFormat(new byte[100], out bytesWritten, "u")
+                );
+                Assert.Throws<FormatException>(
+                    () => timeOnly.TryFormat(new byte[100], out bytesWritten, "dd-yyyy")
+                );
                 Assert.Throws<FormatException>(() => $"{timeOnly:u}");
                 Assert.Throws<FormatException>(() => $"{timeOnly:dd-yyyy}");
             }

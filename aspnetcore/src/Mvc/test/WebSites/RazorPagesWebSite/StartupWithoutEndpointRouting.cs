@@ -11,8 +11,11 @@ public class StartupWithoutEndpointRouting
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie(options => options.LoginPath = "/Login");
-        services.AddMvc(options => options.EnableEndpointRouting = false)
+        services
+            .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(options => options.LoginPath = "/Login");
+        services
+            .AddMvc(options => options.EnableEndpointRouting = false)
             .AddMvcLocalization()
             .AddRazorPagesOptions(options =>
             {
@@ -32,17 +35,15 @@ public class StartupWithoutEndpointRouting
 
         app.UseStaticFiles();
 
-        var supportedCultures = new[]
-        {
-                new CultureInfo("en-US"),
-                new CultureInfo("fr-FR"),
-            };
+        var supportedCultures = new[] { new CultureInfo("en-US"), new CultureInfo("fr-FR") };
 
-        app.UseRequestLocalization(new RequestLocalizationOptions
-        {
-            SupportedCultures = supportedCultures,
-            SupportedUICultures = supportedCultures
-        });
+        app.UseRequestLocalization(
+            new RequestLocalizationOptions
+            {
+                SupportedCultures = supportedCultures,
+                SupportedUICultures = supportedCultures,
+            }
+        );
 
         app.UseMvc();
     }

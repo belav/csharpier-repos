@@ -4,9 +4,11 @@
 
 using System;
 using Xunit;
+
 public class CMain
 {
     public static int Count = 0;
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -28,8 +30,8 @@ public class CMain
 
 public class Gen<T>
 {
-
     public static T x;
+
     static Gen()
     {
         CMain.Count++;

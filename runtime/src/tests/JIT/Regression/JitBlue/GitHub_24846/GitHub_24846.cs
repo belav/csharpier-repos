@@ -5,7 +5,7 @@ using System;
 using System.Runtime.CompilerServices;
 using Xunit;
 
-unsafe public class GitHub_24846
+public unsafe class GitHub_24846
 {
     internal static void TestCopy(byte* destination, byte* source)
     {
@@ -23,7 +23,10 @@ unsafe public class GitHub_24846
         int returnVal = 100;
         var destination = new byte[1];
         var source = new byte[1];
-        fixed (byte* destPtr = &destination[0], srcPtr = &source[0])
+        fixed (
+            byte* destPtr = &destination[0],
+                srcPtr = &source[0]
+        )
         {
             try
             {
@@ -58,4 +61,3 @@ unsafe public class GitHub_24846
         return returnVal;
     }
 }
-

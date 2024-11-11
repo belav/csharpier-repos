@@ -5,17 +5,16 @@
 namespace System.ServiceModel.Dispatcher
 {
     using System.Collections.Generic;
+    using System.Diagnostics;
     using System.Runtime;
     using System.Runtime.Diagnostics;
     using System.ServiceModel.Diagnostics;
     using System.Threading;
     using System.Workflow.Runtime;
     using System.Workflow.Runtime.Hosting;
-    using System.Diagnostics;
 
     class WorkflowInstanceLifetimeManagerExtension : IExtension<ServiceHostBase>
     {
-
         readonly Action<object> cachedInstanceExpirationTimerCallback;
         TimeSpan cachedInstanceExpiration;
         bool hasPersistenceService;
@@ -25,7 +24,11 @@ namespace System.ServiceModel.Dispatcher
         object lockObject;
         WorkflowRuntime workflowRuntime;
 
-        public WorkflowInstanceLifetimeManagerExtension(WorkflowRuntime workflowRuntime, TimeSpan cachedInstanceExpiration, bool hasPersistenceService)
+        public WorkflowInstanceLifetimeManagerExtension(
+            WorkflowRuntime workflowRuntime,
+            TimeSpan cachedInstanceExpiration,
+            bool hasPersistenceService
+        )
         {
             this.workflowRuntime = workflowRuntime;
             this.cachedInstanceExpiration = cachedInstanceExpiration;
@@ -33,7 +36,6 @@ namespace System.ServiceModel.Dispatcher
             this.lockObject = new object();
             this.cachedInstanceExpirationTimerCallback = new Action<object>(this.OnTimer);
             this.hasPersistenceService = hasPersistenceService;
-
 
             RegisterEvents();
         }
@@ -44,7 +46,7 @@ namespace System.ServiceModel.Dispatcher
         public void CleanUp(Guid instanceId)
         {
             //If no WorkflowInstance actively running for this InstanceId;
-            //This will be last opportunity to cleanup their record; to avoid 
+            //This will be last opportunity to cleanup their record; to avoid
             //growth of this HashTable.
             InstanceRecord instanceRecord;
 
@@ -64,15 +66,9 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner)
-        {
+        void IExtension<ServiceHostBase>.Attach(ServiceHostBase owner) { }
 
-        }
-
-        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner)
-        {
-
-        }
+        void IExtension<ServiceHostBase>.Detach(ServiceHostBase owner) { }
 
         public bool IsInstanceInMemory(Guid instanceId)
         {
@@ -94,7 +90,12 @@ namespace System.ServiceModel.Dispatcher
             CancelTimer(instanceId, false);
         }
 
-        public void NotifyWorkflowActivationComplete(Guid instanceId, WaitCallback callback, object state, bool fireImmediatelyIfDontExist)
+        public void NotifyWorkflowActivationComplete(
+            Guid instanceId,
+            WaitCallback callback,
+            object state,
+            bool fireImmediatelyIfDontExist
+        )
         {
             bool instanceFound;
             InstanceRecord instanceRecord;
@@ -136,7 +137,11 @@ namespace System.ServiceModel.Dispatcher
                     }
                     else
                     {
-                        instanceRecord.UnloadTimer = new IOThreadTimer(this.cachedInstanceExpirationTimerCallback, instanceId, true);
+                        instanceRecord.UnloadTimer = new IOThreadTimer(
+                            this.cachedInstanceExpirationTimerCallback,
+                            instanceId,
+                            true
+                        );
                     }
                     instanceRecord.UnloadTimer.Set(this.cachedInstanceExpiration);
                 }
@@ -176,7 +181,7 @@ namespace System.ServiceModel.Dispatcher
 
         void OnTimer(object state)
         {
-            Guid instanceId = (Guid) state;
+            Guid instanceId = (Guid)state;
 
             try
             {
@@ -190,11 +195,18 @@ namespace System.ServiceModel.Dispatcher
 
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        string traceText = SR2.GetString(SR2.AutoAbortingInactiveInstance, instanceId);
-                        TraceUtility.TraceEvent(TraceEventType.Information,
-                            TraceCode.WorkflowDurableInstanceAborted, SR.GetString(SR.TraceCodeWorkflowDurableInstanceAborted),
+                        string traceText = SR2.GetString(
+                            SR2.AutoAbortingInactiveInstance,
+                            instanceId
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.WorkflowDurableInstanceAborted,
+                            SR.GetString(SR.TraceCodeWorkflowDurableInstanceAborted),
                             new StringTraceRecord("InstanceDetail", traceText),
-                            this, null);
+                            this,
+                            null
+                        );
                     }
                 }
             }
@@ -206,11 +218,18 @@ namespace System.ServiceModel.Dispatcher
 
                     if (DiagnosticUtility.ShouldTraceInformation)
                     {
-                        string traceText = SR2.GetString(SR2.AutoAbortingInactiveInstance, instanceId);
-                        TraceUtility.TraceEvent(TraceEventType.Information,
-                            TraceCode.WorkflowDurableInstanceAborted, SR.GetString(SR.TraceCodeWorkflowDurableInstanceAborted),
+                        string traceText = SR2.GetString(
+                            SR2.AutoAbortingInactiveInstance,
+                            instanceId
+                        );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Information,
+                            TraceCode.WorkflowDurableInstanceAborted,
+                            SR.GetString(SR.TraceCodeWorkflowDurableInstanceAborted),
                             new StringTraceRecord("InstanceDetail", traceText),
-                            this, null);
+                            this,
+                            null
+                        );
                     }
                 }
                 catch (Exception e)
@@ -270,7 +289,12 @@ namespace System.ServiceModel.Dispatcher
 
             lock (this.lockObject)
             {
-                if (!this.instanceRecordMap.TryGetValue(args.WorkflowInstance.InstanceId, out instanceRecord))
+                if (
+                    !this.instanceRecordMap.TryGetValue(
+                        args.WorkflowInstance.InstanceId,
+                        out instanceRecord
+                    )
+                )
                 {
                     instanceRecord = new InstanceRecord();
                     this.instanceRecordMap.Add(args.WorkflowInstance.InstanceId, instanceRecord);
@@ -290,7 +314,12 @@ namespace System.ServiceModel.Dispatcher
 
             lock (this.lockObject)
             {
-                if (!this.instanceRecordMap.TryGetValue(args.WorkflowInstance.InstanceId, out instanceRecord))
+                if (
+                    !this.instanceRecordMap.TryGetValue(
+                        args.WorkflowInstance.InstanceId,
+                        out instanceRecord
+                    )
+                )
                 {
                     instanceRecord = new InstanceRecord();
                     this.instanceRecordMap.Add(args.WorkflowInstance.InstanceId, instanceRecord);
@@ -344,50 +373,26 @@ namespace System.ServiceModel.Dispatcher
 
             public WaitCallback Callback
             {
-                get
-                {
-                    return this.instanceActivationCompletedCallBack;
-                }
-                set
-                {
-                    this.instanceActivationCompletedCallBack = value;
-                }
+                get { return this.instanceActivationCompletedCallBack; }
+                set { this.instanceActivationCompletedCallBack = value; }
             }
 
             public object CallbackState
             {
-                get
-                {
-                    return this.callbackState;
-                }
-                set
-                {
-                    this.callbackState = value;
-                }
+                get { return this.callbackState; }
+                set { this.callbackState = value; }
             }
 
             public bool InstanceLoadedOrStarted
             {
-                get
-                {
-                    return this.loadedOrStarted;
-                }
-                set
-                {
-                    this.loadedOrStarted = value;
-                }
+                get { return this.loadedOrStarted; }
+                set { this.loadedOrStarted = value; }
             }
 
             public IOThreadTimer UnloadTimer
             {
-                get
-                {
-                    return this.unloadTimer;
-                }
-                set
-                {
-                    this.unloadTimer = value;
-                }
+                get { return this.unloadTimer; }
+                set { this.unloadTimer = value; }
             }
         }
     }

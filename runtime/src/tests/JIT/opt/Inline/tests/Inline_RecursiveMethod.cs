@@ -21,6 +21,7 @@ public class ReturnStruct
         }
         return teststruct;
     }
+
     [Fact]
     public static int TestEntryPoint()
     {
@@ -48,5 +49,3 @@ public class ReturnStruct
         return iret;
     }
 }
-
-

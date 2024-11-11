@@ -27,21 +27,22 @@ public class CosmosDbContextOptionsExtensionsTests
             dbContextOption =>
             {
                 dbContextOption.EnableDetailedErrors();
-            });
+            }
+        );
 
         var services = serviceCollection.BuildServiceProvider(validateScopes: true);
 
-        using (var serviceScope = services
-                   .GetRequiredService<IServiceScopeFactory>()
-                   .CreateScope())
+        using (var serviceScope = services.GetRequiredService<IServiceScopeFactory>().CreateScope())
         {
-            var coreOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CoreOptionsExtension>();
+            var coreOptions = serviceScope
+                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<CoreOptionsExtension>();
 
             Assert.True(coreOptions.DetailedErrorsEnabled);
 
-            var cosmosOptions = serviceScope.ServiceProvider
-                .GetRequiredService<DbContextOptions<ApplicationDbContext>>().GetExtension<CosmosOptionsExtension>();
+            var cosmosOptions = serviceScope
+                .ServiceProvider.GetRequiredService<DbContextOptions<ApplicationDbContext>>()
+                .GetExtension<CosmosOptionsExtension>();
 
             Assert.Equal(new TimeSpan(0, 5, 50), cosmosOptions.IdleTcpConnectionTimeout);
             Assert.Equal(new TimeSpan(0, 2, 45), cosmosOptions.OpenTcpConnectionTimeout);
@@ -58,26 +59,52 @@ public class CosmosDbContextOptionsExtensionsTests
         Test(o => o.Region("FakeRegion"), o => Assert.Equal("FakeRegion", o.Region));
         Test(
             o => o.PreferredRegions(new[] { Regions.AustraliaCentral, Regions.EastAsia }),
-            o => Assert.Equal(new[] { Regions.AustraliaCentral, Regions.EastAsia }, o.PreferredRegions));
-        Test(o => o.ConnectionMode(ConnectionMode.Direct), o => Assert.Equal(ConnectionMode.Direct, o.ConnectionMode));
-        Test(o => o.GatewayModeMaxConnectionLimit(3), o => Assert.Equal(3, o.GatewayModeMaxConnectionLimit));
-        Test(o => o.MaxRequestsPerTcpConnection(3), o => Assert.Equal(3, o.MaxRequestsPerTcpConnection));
-        Test(o => o.MaxTcpConnectionsPerEndpoint(3), o => Assert.Equal(3, o.MaxTcpConnectionsPerEndpoint));
+            o =>
+                Assert.Equal(
+                    new[] { Regions.AustraliaCentral, Regions.EastAsia },
+                    o.PreferredRegions
+                )
+        );
+        Test(
+            o => o.ConnectionMode(ConnectionMode.Direct),
+            o => Assert.Equal(ConnectionMode.Direct, o.ConnectionMode)
+        );
+        Test(
+            o => o.GatewayModeMaxConnectionLimit(3),
+            o => Assert.Equal(3, o.GatewayModeMaxConnectionLimit)
+        );
+        Test(
+            o => o.MaxRequestsPerTcpConnection(3),
+            o => Assert.Equal(3, o.MaxRequestsPerTcpConnection)
+        );
+        Test(
+            o => o.MaxTcpConnectionsPerEndpoint(3),
+            o => Assert.Equal(3, o.MaxTcpConnectionsPerEndpoint)
+        );
         Test(o => o.LimitToEndpoint(), o => Assert.True(o.LimitToEndpoint));
-        Test(o => o.ContentResponseOnWriteEnabled(), o => Assert.True(o.EnableContentResponseOnWrite));
+        Test(
+            o => o.ContentResponseOnWriteEnabled(),
+            o => Assert.True(o.EnableContentResponseOnWrite)
+        );
 
         var webProxy = new WebProxy();
         Test(o => o.WebProxy(webProxy), o => Assert.Same(webProxy, o.WebProxy));
         Test(
             o => o.ExecutionStrategy(d => new CosmosExecutionStrategy(d)),
-            o => Assert.IsType<CosmosExecutionStrategy>(o.ExecutionStrategyFactory(null)));
-        Test(o => o.RequestTimeout(TimeSpan.FromMinutes(3)), o => Assert.Equal(TimeSpan.FromMinutes(3), o.RequestTimeout));
+            o => Assert.IsType<CosmosExecutionStrategy>(o.ExecutionStrategyFactory(null))
+        );
+        Test(
+            o => o.RequestTimeout(TimeSpan.FromMinutes(3)),
+            o => Assert.Equal(TimeSpan.FromMinutes(3), o.RequestTimeout)
+        );
         Test(
             o => o.OpenTcpConnectionTimeout(TimeSpan.FromMinutes(3)),
-            o => Assert.Equal(TimeSpan.FromMinutes(3), o.OpenTcpConnectionTimeout));
+            o => Assert.Equal(TimeSpan.FromMinutes(3), o.OpenTcpConnectionTimeout)
+        );
         Test(
             o => o.IdleTcpConnectionTimeout(TimeSpan.FromMinutes(3)),
-            o => Assert.Equal(TimeSpan.FromMinutes(3), o.IdleTcpConnectionTimeout));
+            o => Assert.Equal(TimeSpan.FromMinutes(3), o.IdleTcpConnectionTimeout)
+        );
         var httpClientFactory = () => new HttpClient();
         Test(
             o => o.HttpClientFactory(httpClientFactory),
@@ -86,41 +113,50 @@ public class CosmosDbContextOptionsExtensionsTests
     }
 
     [ConditionalFact]
-    public void Throws_for_invalid_values()
-        => Throws<ArgumentOutOfRangeException>(o => o.ConnectionMode((ConnectionMode)958410610));
+    public void Throws_for_invalid_values() =>
+        Throws<ArgumentOutOfRangeException>(o => o.ConnectionMode((ConnectionMode)958410610));
 
     private void Test(
         Action<CosmosDbContextOptionsBuilder> cosmosOptionsAction,
-        Action<CosmosOptionsExtension> extensionAssert)
+        Action<CosmosOptionsExtension> extensionAssert
+    )
     {
         var options = new DbContextOptionsBuilder().UseCosmos(
             "serviceEndPoint",
             "authKeyOrResourceToken",
             "databaseName",
-            cosmosOptionsAction);
+            cosmosOptionsAction
+        );
 
-        var extension = options
-            .Options.FindExtension<CosmosOptionsExtension>();
+        var extension = options.Options.FindExtension<CosmosOptionsExtension>();
 
         extensionAssert(extension);
 
-        var clone = new DbContextOptionsBuilder().UseCosmos(
+        var clone = new DbContextOptionsBuilder()
+            .UseCosmos(
                 "serviceEndPoint",
                 "authKeyOrResourceToken",
                 "databaseName",
-                cosmosOptionsAction)
+                cosmosOptionsAction
+            )
             .Options.FindExtension<CosmosOptionsExtension>();
 
-        Assert.Equal(extension.Info.GetServiceProviderHashCode(), clone.Info.GetServiceProviderHashCode());
+        Assert.Equal(
+            extension.Info.GetServiceProviderHashCode(),
+            clone.Info.GetServiceProviderHashCode()
+        );
         Assert.True(extension.Info.ShouldUseSameServiceProvider(clone.Info));
     }
 
     private void Throws<T>(Action<CosmosDbContextOptionsBuilder> cosmosOptionsAction)
-        where T : Exception
-        => Assert.Throws<T>(
-            () => new DbContextOptionsBuilder().UseCosmos(
-                "serviceEndPoint",
-                "authKeyOrResourceToken",
-                "databaseName",
-                cosmosOptionsAction));
+        where T : Exception =>
+        Assert.Throws<T>(
+            () =>
+                new DbContextOptionsBuilder().UseCosmos(
+                    "serviceEndPoint",
+                    "authKeyOrResourceToken",
+                    "databaseName",
+                    cosmosOptionsAction
+                )
+        );
 }

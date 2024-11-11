@@ -5,9 +5,9 @@ using System.IO.Pipelines;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.InternalTesting;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
-using Microsoft.AspNetCore.InternalTesting;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests;
 
@@ -15,9 +15,13 @@ public class KeepAliveTimeoutTests : LoggedTest
 {
     private static readonly TimeSpan _keepAliveTimeout = TimeSpan.FromSeconds(10);
     private static readonly TimeSpan _longDelay = TimeSpan.FromSeconds(30);
-    private static readonly TimeSpan _shortDelay = TimeSpan.FromSeconds(_longDelay.TotalSeconds / 10);
+    private static readonly TimeSpan _shortDelay = TimeSpan.FromSeconds(
+        _longDelay.TotalSeconds / 10
+    );
 
-    private readonly TaskCompletionSource _firstRequestReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _firstRequestReceived = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
 
     [Fact]
     public async Task ConnectionClosedWhenKeepAliveTimeoutExpires()
@@ -30,15 +34,13 @@ public class KeepAliveTimeoutTests : LoggedTest
             {
                 await connection.TransportConnection.WaitForReadTask;
 
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 await ReceiveResponse(connection, testContext);
 
                 // Min amount of time between requests that triggers a keep-alive timeout.
-                testContext.FakeTimeProvider.Advance(_keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
+                testContext.FakeTimeProvider.Advance(
+                    _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
+                );
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await connection.WaitForConnectionClose();
@@ -59,11 +61,7 @@ public class KeepAliveTimeoutTests : LoggedTest
 
                 for (var i = 0; i < 10; i++)
                 {
-                    await connection.Send(
-                        "GET / HTTP/1.1",
-                        "Host:",
-                        "",
-                        "");
+                    await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                     await ReceiveResponse(connection, testContext);
 
                     // Max amount of time between requests that doesn't trigger a keep-alive timeout.
@@ -86,29 +84,28 @@ public class KeepAliveTimeoutTests : LoggedTest
                 await connection.TransportConnection.WaitForReadTask;
 
                 await connection.Send(
-                        "POST /consume HTTP/1.1",
-                        "Host:",
-                        "Transfer-Encoding: chunked",
-                        "",
-                        "");
+                    "POST /consume HTTP/1.1",
+                    "Host:",
+                    "Transfer-Encoding: chunked",
+                    "",
+                    ""
+                );
 
                 await _firstRequestReceived.Task.DefaultTimeout();
 
-                for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
+                for (
+                    var totalDelay = TimeSpan.Zero;
+                    totalDelay < _longDelay;
+                    totalDelay += _shortDelay
+                )
                 {
-                    await connection.Send(
-                        "1",
-                        "a",
-                        "");
+                    await connection.Send("1", "a", "");
 
                     testContext.FakeTimeProvider.Advance(_shortDelay);
                     testContext.ConnectionManager.OnHeartbeat();
                 }
 
-                await connection.Send(
-                        "0",
-                        "",
-                        "");
+                await connection.Send("0", "", "");
                 await ReceiveResponse(connection, testContext);
             }
         }
@@ -126,15 +123,15 @@ public class KeepAliveTimeoutTests : LoggedTest
             {
                 await connection.TransportConnection.WaitForReadTask;
 
-                await connection.Send(
-                    "GET /longrunning HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET /longrunning HTTP/1.1", "Host:", "", "");
 
                 await _firstRequestReceived.Task.DefaultTimeout();
 
-                for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
+                for (
+                    var totalDelay = TimeSpan.Zero;
+                    totalDelay < _longDelay;
+                    totalDelay += _shortDelay
+                )
                 {
                     testContext.FakeTimeProvider.Advance(_shortDelay);
                     testContext.ConnectionManager.OnHeartbeat();
@@ -144,11 +141,7 @@ public class KeepAliveTimeoutTests : LoggedTest
 
                 await ReceiveResponse(connection, testContext);
 
-                await connection.Send(
-                    "GET / HTTP/1.1",
-                    "Host:",
-                    "",
-                    "");
+                await connection.Send("GET / HTTP/1.1", "Host:", "", "");
                 await ReceiveResponse(connection, testContext);
             }
         }
@@ -166,7 +159,9 @@ public class KeepAliveTimeoutTests : LoggedTest
                 await connection.TransportConnection.WaitForReadTask;
 
                 // Min amount of time between requests that triggers a keep-alive timeout.
-                testContext.FakeTimeProvider.Advance(_keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1));
+                testContext.FakeTimeProvider.Advance(
+                    _keepAliveTimeout + Heartbeat.Interval + TimeSpan.FromTicks(1)
+                );
                 testContext.ConnectionManager.OnHeartbeat();
 
                 await connection.WaitForConnectionClose();
@@ -191,15 +186,21 @@ public class KeepAliveTimeoutTests : LoggedTest
                     "Host:",
                     "Connection: Upgrade",
                     "",
-                    "");
+                    ""
+                );
                 await connection.Receive(
                     "HTTP/1.1 101 Switching Protocols",
                     "Connection: Upgrade",
                     $"Date: {testContext.DateHeaderValue}",
                     "",
-                    "");
+                    ""
+                );
 
-                for (var totalDelay = TimeSpan.Zero; totalDelay < _longDelay; totalDelay += _shortDelay)
+                for (
+                    var totalDelay = TimeSpan.Zero;
+                    totalDelay < _longDelay;
+                    totalDelay += _shortDelay
+                )
                 {
                     testContext.FakeTimeProvider.Advance(_shortDelay);
                     testContext.ConnectionManager.OnHeartbeat();
@@ -212,7 +213,11 @@ public class KeepAliveTimeoutTests : LoggedTest
         }
     }
 
-    private TestServer CreateServer(TestServiceContext context, CancellationToken longRunningCt = default, CancellationToken upgradeCt = default)
+    private TestServer CreateServer(
+        TestServiceContext context,
+        CancellationToken longRunningCt = default,
+        CancellationToken upgradeCt = default
+    )
     {
         // Ensure request headers timeout is started as soon as the tests send requests.
         context.Scheduler = PipeScheduler.Inline;
@@ -223,7 +228,11 @@ public class KeepAliveTimeoutTests : LoggedTest
         return new TestServer(httpContext => App(httpContext, longRunningCt, upgradeCt), context);
     }
 
-    private async Task App(HttpContext httpContext, CancellationToken longRunningCt, CancellationToken upgradeCt)
+    private async Task App(
+        HttpContext httpContext,
+        CancellationToken longRunningCt,
+        CancellationToken upgradeCt
+    )
     {
         var ct = httpContext.RequestAborted;
         var responseStream = httpContext.Response.Body;
@@ -237,7 +246,9 @@ public class KeepAliveTimeoutTests : LoggedTest
         }
         else if (httpContext.Request.Path == "/upgrade")
         {
-            using (var stream = await httpContext.Features.Get<IHttpUpgradeFeature>().UpgradeAsync())
+            using (
+                var stream = await httpContext.Features.Get<IHttpUpgradeFeature>().UpgradeAsync()
+            )
             {
                 await CancellationTokenAsTask(upgradeCt);
 
@@ -256,7 +267,10 @@ public class KeepAliveTimeoutTests : LoggedTest
         await responseStream.WriteAsync(responseBytes, 0, responseBytes.Length);
     }
 
-    private async Task ReceiveResponse(InMemoryConnection connection, TestServiceContext testContext)
+    private async Task ReceiveResponse(
+        InMemoryConnection connection,
+        TestServiceContext testContext
+    )
     {
         await connection.Receive(
             "HTTP/1.1 200 OK",
@@ -267,7 +281,8 @@ public class KeepAliveTimeoutTests : LoggedTest
             "hello, world",
             "0",
             "",
-            "");
+            ""
+        );
     }
 
     private static Task CancellationTokenAsTask(CancellationToken token)

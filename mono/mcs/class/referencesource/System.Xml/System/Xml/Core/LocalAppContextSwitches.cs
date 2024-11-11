@@ -1,7 +1,7 @@
 // ==++==
-// 
+//
 //   Copyright (c) Microsoft Corporation.  All rights reserved.
-// 
+//
 // ==--==
 using System;
 using System.Runtime.CompilerServices;
@@ -16,7 +16,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(@"Switch.System.Xml.DontThrowOnInvalidSurrogatePairs", ref _dontThrowOnInvalidSurrogatePairs);
+                return LocalAppContext.GetCachedSwitchValue(
+                    @"Switch.System.Xml.DontThrowOnInvalidSurrogatePairs",
+                    ref _dontThrowOnInvalidSurrogatePairs
+                );
             }
         }
 
@@ -26,7 +29,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(@"Switch.System.Xml.IgnoreEmptyKeySequences", ref _ignoreEmptyKeySequences);
+                return LocalAppContext.GetCachedSwitchValue(
+                    @"Switch.System.Xml.IgnoreEmptyKeySequences",
+                    ref _ignoreEmptyKeySequences
+                );
             }
         }
 
@@ -36,7 +42,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(@"Switch.System.Xml.IgnoreKindInUtcTimeSerialization", ref _ignoreKindInUtcTimeSerialization);
+                return LocalAppContext.GetCachedSwitchValue(
+                    @"Switch.System.Xml.IgnoreKindInUtcTimeSerialization",
+                    ref _ignoreKindInUtcTimeSerialization
+                );
             }
         }
 
@@ -47,7 +56,10 @@ namespace System
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             get
             {
-                return LocalAppContext.GetCachedSwitchValue(@"Switch.System.Xml.EnableTimeSpanSerialization", ref _enableTimeSpanSerialization);
+                return LocalAppContext.GetCachedSwitchValue(
+                    @"Switch.System.Xml.EnableTimeSpanSerialization",
+                    ref _enableTimeSpanSerialization
+                );
             }
         }
     }

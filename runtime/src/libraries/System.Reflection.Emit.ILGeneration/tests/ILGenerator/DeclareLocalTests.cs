@@ -7,23 +7,27 @@ namespace System.Reflection.Emit.Tests
 {
     public class ILGeneratorDeclareLocal
     {
-        public static Type[] TestData => new Type[]
-        {
-            typeof(int),
-            typeof(object),
-            typeof(TestClassLocal1),
-            typeof(TestStructLocal1),
-            typeof(TestDelegateLocal1),
-            typeof(TestEnumLocal1),
-            typeof(TestExceptionLocal1),
-            typeof(void)
-        };
+        public static Type[] TestData =>
+            new Type[]
+            {
+                typeof(int),
+                typeof(object),
+                typeof(TestClassLocal1),
+                typeof(TestStructLocal1),
+                typeof(TestDelegateLocal1),
+                typeof(TestEnumLocal1),
+                typeof(TestExceptionLocal1),
+                typeof(void),
+            };
 
         [Fact]
         public void Basic()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
             VerifyDeclareLocal(generator);
         }
@@ -32,7 +36,10 @@ namespace System.Reflection.Emit.Tests
         public void BeginScope()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
 
             generator.BeginScope();
@@ -43,7 +50,10 @@ namespace System.Reflection.Emit.Tests
         public void BeginExceptionBlock()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
 
             generator.BeginExceptionBlock();
@@ -54,7 +64,10 @@ namespace System.Reflection.Emit.Tests
         public void BeginCatchBlock()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("PosTest4_Method", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "PosTest4_Method",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
 
             generator.BeginExceptionBlock();
@@ -66,7 +79,10 @@ namespace System.Reflection.Emit.Tests
         public void BeginFinallyBlock()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("PosTest5_Method", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "PosTest5_Method",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
 
             generator.BeginExceptionBlock();
@@ -78,7 +94,10 @@ namespace System.Reflection.Emit.Tests
         public void AbstractPublicMethod()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.Abstract | TypeAttributes.Public);
-            MethodBuilder method = type.DefineMethod("PosTest6_Method", MethodAttributes.Abstract | MethodAttributes.Public);
+            MethodBuilder method = type.DefineMethod(
+                "PosTest6_Method",
+                MethodAttributes.Abstract | MethodAttributes.Public
+            );
             ILGenerator generator = method.GetILGenerator();
             VerifyDeclareLocal(generator);
         }
@@ -87,10 +106,21 @@ namespace System.Reflection.Emit.Tests
         public void DeclareLocal_NullLocalType_ThrowsArgumentNullException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("Method", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "Method",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
-            AssertExtensions.Throws<ArgumentNullException>("localType", () => ilGenerator.DeclareLocal(null));
-            AssertExtensions.Throws<ArgumentNullException>("localType", () => ilGenerator.DeclareLocal(null, false));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localType",
+                () => ilGenerator.DeclareLocal(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "localType",
+                () => ilGenerator.DeclareLocal(null, false)
+            );
         }
 
         [Fact]
@@ -98,7 +128,12 @@ namespace System.Reflection.Emit.Tests
         public void DeclareLocal_TypeCreated_ThrowsInvalidOperationException()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("Method", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = type.DefineMethod(
+                "Method",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
 
@@ -111,7 +146,12 @@ namespace System.Reflection.Emit.Tests
         public void DeclareLocal_GlobalFunctionsCreated_ThrowsInvalidOperationException()
         {
             ModuleBuilder module = Helpers.DynamicModule();
-            MethodBuilder method = module.DefineGlobalMethod("method1", MethodAttributes.Public | MethodAttributes.Static, typeof(Type), new Type[0]);
+            MethodBuilder method = module.DefineGlobalMethod(
+                "method1",
+                MethodAttributes.Public | MethodAttributes.Static,
+                typeof(Type),
+                new Type[0]
+            );
             ILGenerator ilGenerator = method.GetILGenerator();
             ilGenerator.Emit(OpCodes.Ret);
 
@@ -123,7 +163,10 @@ namespace System.Reflection.Emit.Tests
         public void DeclareLocal_Pinned()
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            MethodBuilder method = type.DefineMethod("TestMethod_Pinning", MethodAttributes.Public | MethodAttributes.Static);
+            MethodBuilder method = type.DefineMethod(
+                "TestMethod_Pinning",
+                MethodAttributes.Public | MethodAttributes.Static
+            );
             ILGenerator generator = method.GetILGenerator();
             Assert.True(generator.DeclareLocal(typeof(int).MakeByRefType(), true).IsPinned);
             Assert.True(generator.DeclareLocal(typeof(object), true).IsPinned);
@@ -142,9 +185,16 @@ namespace System.Reflection.Emit.Tests
         }
 
         public class TestClassLocal1 { }
+
         public struct TestStructLocal1 { }
+
         public delegate void TestDelegateLocal1(TestStructLocal1 ts);
-        public enum TestEnumLocal1 { DEFAULT }
+
+        public enum TestEnumLocal1
+        {
+            DEFAULT,
+        }
+
         public class TestExceptionLocal1 : Exception { }
     }
 }

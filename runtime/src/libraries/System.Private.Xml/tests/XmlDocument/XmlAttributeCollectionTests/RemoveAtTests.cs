@@ -19,7 +19,9 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             attr3 = element.Attributes.Append(doc.CreateAttribute("attr3"));
@@ -33,7 +35,9 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             attr3 = element.Attributes.Append(doc.CreateAttribute("attr3"));
@@ -47,7 +51,8 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2;
+            XmlAttribute attr1,
+                attr2;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             element.Attributes.Append(doc.CreateAttribute("attr2"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr3"));
@@ -65,7 +70,9 @@ namespace System.Xml.XmlDocumentTests
         {
             XmlDocument doc = CreateDocumentWithElement();
             XmlElement element = doc.DocumentElement;
-            XmlAttribute attr1, attr2, attr3;
+            XmlAttribute attr1,
+                attr2,
+                attr3;
             attr1 = element.Attributes.Append(doc.CreateAttribute("attr1"));
             attr2 = element.Attributes.Append(doc.CreateAttribute("attr2"));
             attr3 = element.Attributes.Append(doc.CreateAttribute("attr3"));

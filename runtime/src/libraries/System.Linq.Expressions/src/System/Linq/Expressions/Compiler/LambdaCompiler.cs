@@ -45,8 +45,10 @@ namespace System.Linq.Expressions.Compiler
 
         // Currently active LabelTargets and their mapping to IL labels
         private LabelScopeInfo _labelBlock = new LabelScopeInfo(null, LabelScopeKind.Lambda);
+
         // Mapping of labels used for "long" jumps (jumping out and into blocks)
-        private readonly Dictionary<LabelTarget, LabelInfo> _labelInfo = new Dictionary<LabelTarget, LabelInfo>();
+        private readonly Dictionary<LabelTarget, LabelInfo> _labelInfo =
+            new Dictionary<LabelTarget, LabelInfo>();
 
         // The currently active variable scope
         private CompilerScope _scope;
@@ -61,7 +63,8 @@ namespace System.Linq.Expressions.Compiler
         private readonly BoundConstants _boundConstants;
 
         // Free list of locals, so we reuse them rather than creating new ones
-        private readonly KeyedStack<Type, LocalBuilder> _freeLocals = new KeyedStack<Type, LocalBuilder>();
+        private readonly KeyedStack<Type, LocalBuilder> _freeLocals =
+            new KeyedStack<Type, LocalBuilder>();
 
         /// <summary>
         /// Creates a lambda compiler that will compile to a dynamic method
@@ -71,7 +74,12 @@ namespace System.Linq.Expressions.Compiler
             Type[] parameterTypes = GetParameterTypes(lambda, typeof(Closure));
 
             int lambdaMethodIndex = Interlocked.Increment(ref s_lambdaMethodIndex);
-            var method = new DynamicMethod(lambda.Name ?? ("lambda_method" + lambdaMethodIndex.ToString()), lambda.ReturnType, parameterTypes, true);
+            var method = new DynamicMethod(
+                lambda.Name ?? ("lambda_method" + lambdaMethodIndex.ToString()),
+                lambda.ReturnType,
+                parameterTypes,
+                true
+            );
 
             _tree = tree;
             _lambda = lambda;
@@ -104,7 +112,10 @@ namespace System.Linq.Expressions.Compiler
             var scope = tree.Scopes[lambda];
             var hasClosureArgument = scope.NeedsClosure;
 
-            Type[] paramTypes = GetParameterTypes(lambda, hasClosureArgument ? typeof(Closure) : null);
+            Type[] paramTypes = GetParameterTypes(
+                lambda,
+                hasClosureArgument ? typeof(Closure) : null
+            );
 
             method.SetReturnType(lambda.ReturnType);
             method.SetParameters(paramTypes);
@@ -113,7 +124,11 @@ namespace System.Linq.Expressions.Compiler
             int startIndex = hasClosureArgument ? 2 : 1;
             for (int i = 0, n = parameters.Count; i < n; i++)
             {
-                method.DefineParameter(i + startIndex, ParameterAttributes.None, parameters[i].Name);
+                method.DefineParameter(
+                    i + startIndex,
+                    ParameterAttributes.None,
+                    parameters[i].Name
+                );
             }
 
             _tree = tree;
@@ -138,7 +153,8 @@ namespace System.Linq.Expressions.Compiler
         private LambdaCompiler(
             LambdaCompiler parent,
             LambdaExpression lambda,
-            InvocationExpression invocation)
+            InvocationExpression invocation
+        )
         {
             _tree = parent._tree;
             _lambda = lambda;
@@ -224,7 +240,8 @@ namespace System.Linq.Expressions.Compiler
             return VariableBinder.Bind(lambda);
         }
 
-        public LocalBuilder GetLocal(Type type) => _freeLocals.TryPop(type) ?? _ilg.DeclareLocal(type);
+        public LocalBuilder GetLocal(Type type) =>
+            _freeLocals.TryPop(type) ?? _ilg.DeclareLocal(type);
 
         public void FreeLocal(LocalBuilder local)
         {
@@ -262,7 +279,10 @@ namespace System.Linq.Expressions.Compiler
         {
             Debug.Assert(_method is DynamicMethod);
 
-            return _method.CreateDelegate(_lambda.Type, new Closure(_boundConstants.ToArray(), null));
+            return _method.CreateDelegate(
+                _lambda.Type,
+                new Closure(_boundConstants.ToArray(), null)
+            );
         }
 
 #if FEATURE_COMPILE_TO_METHODBUILDER
@@ -272,7 +292,14 @@ namespace System.Linq.Expressions.Compiler
             // conflicts, so choose a long name that is unlikely to conflict.
             // Naming scheme chosen here is similar to what the C# compiler
             // uses.
-            return _typeBuilder.DefineField("<ExpressionCompilerImplementationDetails>{" + System.Threading.Interlocked.Increment(ref s_counter) + "}" + name, type, FieldAttributes.Static | FieldAttributes.Private);
+            return _typeBuilder.DefineField(
+                "<ExpressionCompilerImplementationDetails>{"
+                    + System.Threading.Interlocked.Increment(ref s_counter)
+                    + "}"
+                    + name,
+                type,
+                FieldAttributes.Static | FieldAttributes.Private
+            );
         }
 #endif
 

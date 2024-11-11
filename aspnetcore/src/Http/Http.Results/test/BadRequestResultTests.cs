@@ -30,10 +30,7 @@ public class BadRequestResultTests
     {
         // Arrange
         var result = new BadRequest();
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices() };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -46,15 +43,24 @@ public class BadRequestResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        BadRequest MyApi() { throw new NotImplementedException(); }
+        BadRequest MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var builder = new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0);
+        var builder = new RouteEndpointBuilder(
+            requestDelegate: null,
+            RoutePatternFactory.Parse("/"),
+            order: 0
+        );
 
         // Act
         PopulateMetadata<BadRequest>(((Delegate)MyApi).GetMethodInfo(), builder);
 
         // Assert
-        var producesResponseTypeMetadata = builder.Metadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = builder
+            .Metadata.OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status400BadRequest, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(void), producesResponseTypeMetadata.Type);
     }
@@ -67,15 +73,38 @@ public class BadRequestResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("method", () => PopulateMetadata<BadRequest>(null, new RouteEndpointBuilder(requestDelegate: null, RoutePatternFactory.Parse("/"), order: 0)));
-        Assert.Throws<ArgumentNullException>("builder", () => PopulateMetadata<BadRequest>(((Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull).GetMethodInfo(), null));
+        Assert.Throws<ArgumentNullException>(
+            "method",
+            () =>
+                PopulateMetadata<BadRequest>(
+                    null,
+                    new RouteEndpointBuilder(
+                        requestDelegate: null,
+                        RoutePatternFactory.Parse("/"),
+                        order: 0
+                    )
+                )
+        );
+        Assert.Throws<ArgumentNullException>(
+            "builder",
+            () =>
+                PopulateMetadata<BadRequest>(
+                    (
+                        (Delegate)PopulateMetadata_ThrowsArgumentNullException_WhenMethodOrBuilderAreNull
+                    ).GetMethodInfo(),
+                    null
+                )
+        );
     }
 
     [Fact]

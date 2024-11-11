@@ -7,29 +7,28 @@
 namespace System.Net.Mail
 {
     using System;
-    using System.IO;
     using System.Collections.Specialized;
+    using System.IO;
     using System.Net.Mime;
 
-    internal class MailWriter:BaseWriter
+    internal class MailWriter : BaseWriter
     {
         /// <summary>
         /// ctor.
         /// </summary>
         /// <param name="stream">Underlying stream</param>
         internal MailWriter(Stream stream)
-            : base(stream, true) 
-            // This is the only stream that should encoding leading dots on a line.
-            // This way it is done message wide and only once.
-        {
-        }
+            : base(stream, true)
+        // This is the only stream that should encoding leading dots on a line.
+        // This way it is done message wide and only once.
+        { }
 
         internal override void WriteHeaders(NameValueCollection headers, bool allowUnicode)
         {
             if (headers == null)
                 throw new ArgumentNullException("headers");
 
-            foreach (string key in headers) 
+            foreach (string key in headers)
             {
                 string[] values = headers.GetValues(key);
                 foreach (string value in values)
@@ -48,7 +47,7 @@ namespace System.Net.Mail
         }
 
         /// <summary>
-        /// Called when the current stream is closed.  Allows us to 
+        /// Called when the current stream is closed.  Allows us to
         /// prepare for the next message part.
         /// </summary>
         /// <param name="sender">Sender of the close event</param>
@@ -58,7 +57,7 @@ namespace System.Net.Mail
             System.Diagnostics.Debug.Assert(this.contentStream == sender);
 
             this.contentStream.Flush();
-            
+
             this.contentStream = null;
         }
     }

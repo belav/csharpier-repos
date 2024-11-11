@@ -15,10 +15,21 @@ using Microsoft.CodeAnalysis.Wrapping;
 
 namespace Microsoft.CodeAnalysis.CSharp.Wrapping;
 
-[ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.Wrapping), Shared]
+[
+    ExportCodeRefactoringProvider(
+        LanguageNames.CSharp,
+        Name = PredefinedCodeRefactoringProviderNames.Wrapping
+    ),
+    Shared
+]
 [method: ImportingConstructor]
-[method: SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-internal class CSharpWrappingCodeRefactoringProvider() : AbstractWrappingCodeRefactoringProvider(s_wrappers)
+[method: SuppressMessage(
+    "RoslynDiagnosticsReliability",
+    "RS0033:Importing constructor should be [Obsolete]",
+    Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+)]
+internal class CSharpWrappingCodeRefactoringProvider()
+    : AbstractWrappingCodeRefactoringProvider(s_wrappers)
 {
     private static readonly ImmutableArray<ISyntaxWrapper> s_wrappers =
         ImmutableArray.Create<ISyntaxWrapper>(
@@ -27,8 +38,11 @@ internal class CSharpWrappingCodeRefactoringProvider() : AbstractWrappingCodeRef
             new CSharpBinaryExpressionWrapper(),
             new CSharpChainedExpressionWrapper(),
             new CSharpInitializerExpressionWrapper(),
-            new CSharpCollectionExpressionWrapper());
+            new CSharpCollectionExpressionWrapper()
+        );
 
-    protected override SyntaxWrappingOptions GetWrappingOptions(IOptionsReader options, CodeActionOptions ideOptions)
-        => options.GetCSharpSyntaxWrappingOptions(ideOptions);
+    protected override SyntaxWrappingOptions GetWrappingOptions(
+        IOptionsReader options,
+        CodeActionOptions ideOptions
+    ) => options.GetCSharpSyntaxWrappingOptions(ideOptions);
 }

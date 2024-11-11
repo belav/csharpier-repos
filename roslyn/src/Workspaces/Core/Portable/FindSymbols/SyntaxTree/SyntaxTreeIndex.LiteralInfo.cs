@@ -12,21 +12,21 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     {
         private readonly struct LiteralInfo(BloomFilter literalsFilter)
         {
-            private readonly BloomFilter _literalsFilter = literalsFilter ?? throw new ArgumentNullException(nameof(literalsFilter));
+            private readonly BloomFilter _literalsFilter =
+                literalsFilter ?? throw new ArgumentNullException(nameof(literalsFilter));
 
             /// <summary>
             /// Returns true when the identifier is probably (but not guaranteed) to be within the
             /// syntax tree.  Returns false when the identifier is guaranteed to not be within the
             /// syntax tree.
             /// </summary>
-            public bool ProbablyContainsStringValue(string value)
-                => _literalsFilter.ProbablyContains(value);
+            public bool ProbablyContainsStringValue(string value) =>
+                _literalsFilter.ProbablyContains(value);
 
-            public bool ProbablyContainsInt64Value(long value)
-                => _literalsFilter.ProbablyContains(value);
+            public bool ProbablyContainsInt64Value(long value) =>
+                _literalsFilter.ProbablyContains(value);
 
-            public void WriteTo(ObjectWriter writer)
-                => _literalsFilter.WriteTo(writer);
+            public void WriteTo(ObjectWriter writer) => _literalsFilter.WriteTo(writer);
 
             public static LiteralInfo? TryReadFrom(ObjectReader reader)
             {
@@ -36,9 +36,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 
                     return new LiteralInfo(literalsFilter);
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
 
                 return null;
             }

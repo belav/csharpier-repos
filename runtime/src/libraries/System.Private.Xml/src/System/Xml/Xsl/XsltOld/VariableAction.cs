@@ -50,7 +50,11 @@ namespace System.Xml.Xsl.XsltOld
         }
         internal bool IsGlobal
         {
-            get { return this.varType == VariableType.GlobalVariable || this.varType == VariableType.GlobalParameter; }
+            get
+            {
+                return this.varType == VariableType.GlobalVariable
+                    || this.varType == VariableType.GlobalParameter;
+            }
         }
 
         internal VariableAction(VariableType type)
@@ -64,7 +68,6 @@ namespace System.Xml.Xsl.XsltOld
             this.baseUri = compiler.Input.BaseURI;
             CompileAttributes(compiler);
             CheckRequiredAttribute(this.name, "name");
-
 
             if (compiler.Recurse())
             {
@@ -188,17 +191,27 @@ namespace System.Xml.Xsl.XsltOld
         {
             get { return XPathResultType.Any; }
         }
+
         object IXsltContextVariable.Evaluate(XsltContext xsltContext)
         {
             return ((XsltCompileContext)xsltContext).EvaluateVariable(this);
         }
+
         bool IXsltContextVariable.IsLocal
         {
-            get { return this.varType == VariableType.LocalVariable || this.varType == VariableType.LocalParameter; }
+            get
+            {
+                return this.varType == VariableType.LocalVariable
+                    || this.varType == VariableType.LocalParameter;
+            }
         }
         bool IXsltContextVariable.IsParam
         {
-            get { return this.varType == VariableType.LocalParameter || this.varType == VariableType.GlobalParameter; }
+            get
+            {
+                return this.varType == VariableType.LocalParameter
+                    || this.varType == VariableType.GlobalParameter;
+            }
         }
     }
 }

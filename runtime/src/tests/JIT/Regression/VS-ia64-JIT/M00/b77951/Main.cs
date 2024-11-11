@@ -2,6 +2,7 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using Xunit;
+
 public class Test_Main
 {
     [Fact]
@@ -19,7 +20,7 @@ public class Test_Main
             prop.Item = ii + 1;
         }
 
-        // Successful execution.        
+        // Successful execution.
         return 100;
     }
 }

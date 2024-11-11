@@ -4,7 +4,11 @@
 namespace System.Security.Permissions
 {
 #if NETCOREAPP
-    [Obsolete(Obsoletions.CodeAccessSecurityMessage, DiagnosticId = Obsoletions.CodeAccessSecurityDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+    [Obsolete(
+        Obsoletions.CodeAccessSecurityMessage,
+        DiagnosticId = Obsoletions.CodeAccessSecurityDiagId,
+        UrlFormat = Obsoletions.SharedUrlFormat
+    )]
 #endif
     public enum KeyContainerPermissionFlags
     {
@@ -23,6 +27,6 @@ namespace System.Security.Permissions
         ViewAcl = 0x1000,
         ChangeAcl = 0x2000,
 
-        AllFlags = 0x3337
+        AllFlags = 0x3337,
     }
 }

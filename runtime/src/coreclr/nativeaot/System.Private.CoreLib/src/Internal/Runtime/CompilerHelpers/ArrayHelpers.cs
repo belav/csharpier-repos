@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Runtime;
-
 using Debug = System.Diagnostics.Debug;
 
 namespace Internal.Runtime.CompilerHelpers
@@ -36,7 +35,9 @@ namespace Internal.Runtime.CompilerHelpers
                 for (int i = 0; i < rank; i++)
                 {
                     if (pDimensions[2 * i] != 0)
-                        throw new PlatformNotSupportedException(SR.PlatformNotSupported_NonZeroLowerBound);
+                        throw new PlatformNotSupportedException(
+                            SR.PlatformNotSupported_NonZeroLowerBound
+                        );
 
                     pDimensions[i] = pDimensions[2 * i + 1];
                 }
@@ -49,9 +50,16 @@ namespace Internal.Runtime.CompilerHelpers
         /// Helper for array allocations via `newobj` IL instruction. Dimensions are passed in as block of integers.
         /// The content of the dimensions block may be modified by the helper.
         /// </summary>
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "The compiler ensures that if we have a TypeHandle of a Rank-1 MdArray, we also generated the SzArray.")]
-        public static unsafe Array NewObjArrayRare(IntPtr pEEType, int nDimensions, int* pDimensions)
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "The compiler ensures that if we have a TypeHandle of a Rank-1 MdArray, we also generated the SzArray."
+        )]
+        public static unsafe Array NewObjArrayRare(
+            IntPtr pEEType,
+            int nDimensions,
+            int* pDimensions
+        )
         {
             EETypePtr eeType = new EETypePtr(pEEType);
             Debug.Assert(eeType.IsArray);
@@ -71,7 +79,11 @@ namespace Internal.Runtime.CompilerHelpers
 
                     Array[] arrayOfArrays = (Array[])ret;
                     for (int i = 0; i < arrayOfArrays.Length; i++)
-                        arrayOfArrays[i] = NewObjArrayRare(elementType.RawValue, nDimensions - 1, pDimensions + 1);
+                        arrayOfArrays[i] = NewObjArrayRare(
+                            elementType.RawValue,
+                            nDimensions - 1,
+                            pDimensions + 1
+                        );
                 }
 
                 return ret;
@@ -85,15 +97,22 @@ namespace Internal.Runtime.CompilerHelpers
                 if (rank < nDimensions)
                 {
                     if (pDimensions[0] != 0)
-                        throw new PlatformNotSupportedException(SR.PlatformNotSupported_NonZeroLowerBound);
+                        throw new PlatformNotSupportedException(
+                            SR.PlatformNotSupported_NonZeroLowerBound
+                        );
 
                     pDimensions[0] = pDimensions[1];
                 }
 
                 // Multidimensional array of rank 1 with 0 lower bounds gets actually allocated
                 // as an SzArray. SzArray is castable to MdArray rank 1.
-                Type elementType = Type.GetTypeFromHandle(new RuntimeTypeHandle(eeType.ArrayElementType))!;
-                return RuntimeImports.RhNewArray(elementType.MakeArrayType().TypeHandle.ToEETypePtr(), pDimensions[0]);
+                Type elementType = Type.GetTypeFromHandle(
+                    new RuntimeTypeHandle(eeType.ArrayElementType)
+                )!;
+                return RuntimeImports.RhNewArray(
+                    elementType.MakeArrayType().TypeHandle.ToEETypePtr(),
+                    pDimensions[0]
+                );
             }
         }
     }

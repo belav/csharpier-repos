@@ -21,7 +21,10 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction");
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home/newaction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/home/newaction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
@@ -37,7 +40,8 @@ namespace System.Web.Mvc.Html.Test
             // Assert
             Assert.Equal(
                 @"<a href=""" + AppPathModifier + @"/app/home/" + expectedText + @""">link</a>",
-                result.ToHtmlString());
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -47,7 +51,12 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", null, new { href = "http://foo.com" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                null,
+                new { href = "http://foo.com" }
+            );
 
             // Assert
             Assert.Equal(@"<a href=""http://foo.com"">linktext</a>", html.ToHtmlString());
@@ -60,10 +69,18 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "explicitAction", new { action = "dictionaryAction" }, null);
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "explicitAction",
+                new { action = "dictionaryAction" },
+                null
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home/explicitAction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/home/explicitAction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -76,7 +93,12 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.ActionLink("linktext<&>\"", "new action<&>\"");
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home/new%20action%3C%26%3E%22"">linktext&lt;&amp;&gt;&quot;</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + AppPathModifier
+                    + @"/app/home/new%20action%3C%26%3E%22"">linktext&lt;&amp;&gt;&quot;</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -86,10 +108,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", new RouteValueDictionary(new { controller = "home2" }));
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                new RouteValueDictionary(new { controller = "home2" })
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -99,10 +128,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", new { controller = "home2" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                new { controller = "home2" }
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -115,23 +151,38 @@ namespace System.Web.Mvc.Html.Test
             MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2");
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/home2/newaction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
         [PropertyData("UrlEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
-        public void ActionLinkWithControllerName_UrlEncodesController(string text, string expectedText)
+        public void ActionLinkWithControllerName_UrlEncodesController(
+            string text,
+            string expectedText
+        )
         {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = helper.ActionLink(linkText: "link", actionName: "newAction", controllerName: text);
+            var result = helper.ActionLink(
+                linkText: "link",
+                actionName: "newAction",
+                controllerName: text
+            );
 
             // Assert
             Assert.Equal(
-                @"<a href=""" + AppPathModifier + @"/app/" + expectedText + @"/newAction"">link</a>",
-                result.ToHtmlString());
+                @"<a href="""
+                    + AppPathModifier
+                    + @"/app/"
+                    + expectedText
+                    + @"/newAction"">link</a>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -141,10 +192,21 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", new RouteValueDictionary(new { id = "someid" }), new RouteValueDictionary(new { baz = "baz" }));
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                new RouteValueDictionary(new { id = "someid" }),
+                new RouteValueDictionary(new { baz = "baz" })
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -154,29 +216,51 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
         public void ActionLinkWithControllerNameAndObjectProperties_AttributeEncodes_AddedHtmlAttributes(
             string text,
-            string expectedText)
+            string expectedText
+        )
         {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result =
-                helper.ActionLink("text", "action", "controller", routeValues: null, htmlAttributes: new { attribute = text });
+            var result = helper.ActionLink(
+                "text",
+                "action",
+                "controller",
+                routeValues: null,
+                htmlAttributes: new { attribute = text }
+            );
 
             // Assert
             Assert.Equal(
-                @"<a attribute=""" + expectedText + @""" href=""" + AppPathModifier + @"/app/controller/action"">text</a>",
-                result.ToHtmlString());
+                @"<a attribute="""
+                    + expectedText
+                    + @""" href="""
+                    + AppPathModifier
+                    + @"/app/controller/action"">text</a>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -186,10 +270,21 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", new { id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                new { id = "someid" },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -199,10 +294,20 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", new RouteValueDictionary(new { Controller = "home2", id = "someid" }), new RouteValueDictionary(new { baz = "baz" }));
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                new RouteValueDictionary(new { Controller = "home2", id = "someid" }),
+                new RouteValueDictionary(new { baz = "baz" })
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -212,10 +317,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "http", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "http",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""http://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""http://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -225,10 +344,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "http", "foo.bar.com", "foo", new { id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "http",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""http://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href=""http://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -238,10 +371,25 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", null /* hostName */, "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                null /* hostName */
+                ,
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://localhost" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://localhost"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -251,10 +399,26 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", null /* protocol */, "foo.bar.com", null /* fragment */, new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                null /* protocol */
+                ,
+                "foo.bar.com",
+                null /* fragment */
+                ,
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""http://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""http://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -264,10 +428,27 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", null /* protocol */, null /* hostName */, null /* fragment */, new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                null /* protocol */
+                ,
+                null /* hostName */
+                ,
+                null /* fragment */
+                ,
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -277,10 +458,20 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", new { Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                new { Controller = "home2", id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -290,10 +481,20 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", new { Controller = "home2", id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                new { Controller = "home2", id = "someid" },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -303,10 +504,25 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", "foo.bar.com", null /* fragment */, new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                "foo.bar.com",
+                null /* fragment */
+                ,
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -316,10 +532,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -329,10 +559,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(Uri.UriSchemeHttps, -1);
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -342,10 +586,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(Uri.UriSchemeHttp, -1);
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -355,10 +613,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(Uri.UriSchemeHttp, 32768);
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "https", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "https",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -368,10 +640,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper(Uri.UriSchemeHttp, 32768);
 
             // Act
-            MvcHtmlString html = htmlHelper.ActionLink("linktext", "newaction", "home2", "http", "foo.bar.com", "foo", new { id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.ActionLink(
+                "linktext",
+                "newaction",
+                "home2",
+                "http",
+                "foo.bar.com",
+                "foo",
+                new { id = "someid" },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""http://foo.bar.com:32768" + AppPathModifier + @"/app/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""http://foo.bar.com:32768"
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -382,7 +668,12 @@ namespace System.Web.Mvc.Html.Test
             RouteValueDictionary valuesDictionary = new RouteValueDictionary();
 
             // Act
-            htmlHelper.ActionLink("linkText", "actionName", valuesDictionary, new RouteValueDictionary());
+            htmlHelper.ActionLink(
+                "linkText",
+                "actionName",
+                valuesDictionary,
+                new RouteValueDictionary()
+            );
 
             // Assert
             Assert.Empty(valuesDictionary);
@@ -427,39 +718,228 @@ namespace System.Web.Mvc.Html.Test
             var tests = new[]
             {
                 // ActionLink(string linkText, string actionName)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName")) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName")),
+                },
                 // ActionLink(string linkText, string actionName, object routeValues, object htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", new Object(), null /* htmlAttributes */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.ActionLink(
+                                String.Empty,
+                                "actionName",
+                                new Object(),
+                                null /* htmlAttributes */
+                            )
+                    ),
+                },
                 // ActionLink(string linkText, string actionName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.ActionLink(
+                                String.Empty,
+                                "actionName",
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
                 // ActionLink(string linkText, string actionName, string controllerName)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName")
+                    ),
+                },
                 // ActionLink(string linkText, string actionName, string controllerName, object routeValues, object htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName", new Object(), null /* htmlAttributes */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.ActionLink(
+                                String.Empty,
+                                "actionName",
+                                "controllerName",
+                                new Object(),
+                                null /* htmlAttributes */
+                            )
+                    ),
+                },
                 // ActionLink(string linkText, string actionName, string controllerName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName", new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.ActionLink(
+                                String.Empty,
+                                "actionName",
+                                "controllerName",
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
                 // ActionLink(string linkText, string actionName, string controllerName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.ActionLink(String.Empty, "actionName", "controllerName", null, null, null, new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.ActionLink(
+                                String.Empty,
+                                "actionName",
+                                "controllerName",
+                                null,
+                                null,
+                                null,
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, object routeValues, object htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, new Object(), null /* htmlAttributes */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                new Object(),
+                                null /* htmlAttributes */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName, object routeValues)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, "routeName", null /* routeValues */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                "routeName",
+                                null /* routeValues */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, "routeName", new RouteValueDictionary() /* routeValues */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                "routeName",
+                                new RouteValueDictionary() /* routeValues */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, (string)null /* routeName */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                (string)null /* routeName */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, object routeValues)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, (object)null /* routeValues */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                (object)null /* routeValues */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, RouteValueDictionary routeValues)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, new RouteValueDictionary() /* routeValues */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                new RouteValueDictionary() /* routeValues */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName, object routeValues, object htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, "routeName", new Object(), null /* htmlAttributes */)) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                "routeName",
+                                new Object(),
+                                null /* htmlAttributes */
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, "routeName", new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                "routeName",
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
                 // RouteLink(string linkText, string routeName, string protocol, string hostName, string fragment, RouteValueDictionary routeValues, IDictionary<string, object> htmlAttributes)
-                new { Parameter = "linkText", Action = new Action(() => htmlHelper.RouteLink(String.Empty, "routeName", null, null, null, new RouteValueDictionary(), new RouteValueDictionary())) },
+                new
+                {
+                    Parameter = "linkText",
+                    Action = new Action(
+                        () =>
+                            htmlHelper.RouteLink(
+                                String.Empty,
+                                "routeName",
+                                null,
+                                null,
+                                null,
+                                new RouteValueDictionary(),
+                                new RouteValueDictionary()
+                            )
+                    ),
+                },
             };
 
             // Act & Assert
@@ -476,13 +956,24 @@ namespace System.Web.Mvc.Html.Test
 
             // Arrange
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
-            htmlHelper.RouteCollection.MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
+            htmlHelper.RouteCollection.MapRoute(
+                "MyRouteName",
+                "any/url",
+                new { controller = "Charlie" }
+            );
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "MyRouteName", null /* routeValues */);
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "MyRouteName",
+                null /* routeValues */
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/any/url"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/any/url"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -492,10 +983,26 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), new RouteValueDictionary(new { baz = "baz" }));
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                new RouteValueDictionary(new { baz = "baz" })
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -505,10 +1012,28 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", "http", "foo.bar.com", "foo", new { Action = "newaction", Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                "http",
+                "foo.bar.com",
+                "foo",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""http://foo.bar.com" + AppPathModifier + @"/app/named/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""http://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -518,10 +1043,28 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", "http", "foo.bar.com", "foo", new { Action = "newaction", Controller = "home2", id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                "http",
+                "foo.bar.com",
+                "foo",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""http://foo.bar.com" + AppPathModifier + @"/app/named/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href=""http://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -529,13 +1072,20 @@ namespace System.Web.Mvc.Html.Test
         {
             // Arrange
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
-            htmlHelper.RouteCollection.MapRoute("MyRouteName", "any/url", new { controller = "Charlie" });
+            htmlHelper.RouteCollection.MapRoute(
+                "MyRouteName",
+                "any/url",
+                new { controller = "Charlie" }
+            );
 
             // Act
             MvcHtmlString html = htmlHelper.RouteLink("linktext", "MyRouteName");
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/any/url"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/any/url"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -545,28 +1095,52 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", new { Action = "newaction", Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Theory]
         [PropertyData("AttributeEncodedData_NoHtmlEncode", PropertyType = typeof(EncodedDataSets))]
         public void RouteLinkWithObjectProperties_AttributeEncodes_AddedHtmlAttributes(
             string text,
-            string expectedText)
+            string expectedText
+        )
         {
             // Arrange
             var helper = MvcHelper.GetHtmlHelper();
 
             // Act
-            var result = helper.RouteLink("text", routeValues: null, htmlAttributes: new { attribute = text });
+            var result = helper.RouteLink(
+                "text",
+                routeValues: null,
+                htmlAttributes: new { attribute = text }
+            );
 
             // Assert
             Assert.Equal(
-                @"<a attribute=""" + expectedText + @""" href=""" + AppPathModifier + @"/app/home/oldaction"">text</a>",
-                result.ToHtmlString());
+                @"<a attribute="""
+                    + expectedText
+                    + @""" href="""
+                    + AppPathModifier
+                    + @"/app/home/oldaction"">text</a>",
+                result.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -576,10 +1150,24 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", new { Action = "newaction", Controller = "home2", id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""" + AppPathModifier + @"/app/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -589,10 +1177,29 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", "https", "foo.bar.com", null /* fragment */, new { Action = "newaction", Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                "https",
+                "foo.bar.com",
+                null /* fragment */
+                ,
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/named/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -602,10 +1209,28 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", "https", "foo.bar.com", "foo", new { Action = "newaction", Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                "https",
+                "foo.bar.com",
+                "foo",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""https://foo.bar.com" + AppPathModifier + @"/app/named/home2/newaction/someid#foo"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href=""https://foo.bar.com"
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid#foo"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -615,10 +1240,17 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", new { Action = "newaction" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                new { Action = "newaction" }
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/named/home/newaction"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href=""" + AppPathModifier + @"/app/named/home/newaction"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -628,10 +1260,27 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", new RouteValueDictionary(new { Action = "newaction", Controller = "home2", id = "someid" }), new RouteValueDictionary());
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                new RouteValueDictionary(
+                    new
+                    {
+                        Action = "newaction",
+                        Controller = "home2",
+                        id = "someid",
+                    }
+                ),
+                new RouteValueDictionary()
+            );
 
             // Assert
-            Assert.Equal(@"<a href=""" + AppPathModifier + @"/app/named/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a href="""
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -641,10 +1290,25 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", new { Action = "newaction", Controller = "home2", id = "someid" }, new { baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a baz=""baz"" href=""" + AppPathModifier + @"/app/named/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         [Fact]
@@ -654,10 +1318,25 @@ namespace System.Web.Mvc.Html.Test
             HtmlHelper htmlHelper = MvcHelper.GetHtmlHelper();
 
             // Act
-            MvcHtmlString html = htmlHelper.RouteLink("linktext", "namedroute", new { Action = "newaction", Controller = "home2", id = "someid" }, new { foo_baz = "baz" });
+            MvcHtmlString html = htmlHelper.RouteLink(
+                "linktext",
+                "namedroute",
+                new
+                {
+                    Action = "newaction",
+                    Controller = "home2",
+                    id = "someid",
+                },
+                new { foo_baz = "baz" }
+            );
 
             // Assert
-            Assert.Equal(@"<a foo-baz=""baz"" href=""" + AppPathModifier + @"/app/named/home2/newaction/someid"">linktext</a>", html.ToHtmlString());
+            Assert.Equal(
+                @"<a foo-baz=""baz"" href="""
+                    + AppPathModifier
+                    + @"/app/named/home2/newaction/someid"">linktext</a>",
+                html.ToHtmlString()
+            );
         }
 
         // Class for the ActionLinkProducesLowercaseUrlsAfterRegisteringAnArea test
@@ -665,10 +1344,7 @@ namespace System.Web.Mvc.Html.Test
         {
             public override string AreaName
             {
-                get
-                {
-                    return "MyArea";
-                }
+                get { return "MyArea"; }
             }
 
             public override void RegisterArea(AreaRegistrationContext context)

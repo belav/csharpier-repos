@@ -32,9 +32,7 @@ namespace System.ServiceModel.Channels
         static object trueBool = true;
         static object falseBool = false;
 
-        public MessageProperties()
-        {
-        }
+        public MessageProperties() { }
 
         public MessageProperties(MessageProperties properties)
         {
@@ -44,13 +42,20 @@ namespace System.ServiceModel.Channels
         internal MessageProperties(KeyValuePair<string, object>[] array)
         {
             if (array == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("array"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("array")
+                );
             CopyProperties(array);
         }
 
         void ThrowDisposed()
         {
-            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ObjectDisposedException(string.Empty, SR.GetString(SR.ObjectDisposed, this.GetType().ToString())));
+            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                new ObjectDisposedException(
+                    string.Empty,
+                    SR.GetString(SR.ObjectDisposed, this.GetType().ToString())
+                )
+            );
         }
 
         public object this[string name]
@@ -64,7 +69,9 @@ namespace System.ServiceModel.Channels
 
                 if (!TryGetValue(name, out value))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessagePropertyNotFound, name)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new ArgumentException(SR.GetString(SR.MessagePropertyNotFound, name))
+                    );
                 }
 
                 return value;
@@ -79,10 +86,7 @@ namespace System.ServiceModel.Channels
 
         internal bool CanRecycle
         {
-            get
-            {
-                return properties == null || properties.Length <= MaxRecycledArrayLength;
-            }
+            get { return properties == null || properties.Length <= MaxRecycledArrayLength; }
         }
 
         public int Count
@@ -288,7 +292,9 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (property == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("property"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("property")
+                );
             UpdateProperty(name, property, true);
         }
 
@@ -361,7 +367,7 @@ namespace System.ServiceModel.Channels
                     }
 
                     Property property = properties.properties[i];
-                    
+
                     // this[string] will call CreateCopyOfPropertyValue, so we don't need to repeat that here
                     this[property.Name] = property.Value;
                 }
@@ -369,7 +375,10 @@ namespace System.ServiceModel.Channels
 
             this.Via = properties.Via;
             this.AllowOutputBatching = properties.AllowOutputBatching;
-            this.Security = (properties.Security != null) ? (SecurityMessageProperty)properties.Security.CreateCopy() : null;
+            this.Security =
+                (properties.Security != null)
+                    ? (SecurityMessageProperty)properties.Security.CreateCopy()
+                    : null;
             this.Encoder = properties.Encoder;
         }
 
@@ -401,8 +410,12 @@ namespace System.ServiceModel.Channels
                     Property property = properties.properties[i];
 
                     IMergeEnabledMessageProperty currentValue;
-                    if (!this.TryGetValue<IMergeEnabledMessageProperty>(property.Name, out currentValue) ||
-                        !currentValue.TryMergeWithProperty(property.Value))
+                    if (
+                        !this.TryGetValue<IMergeEnabledMessageProperty>(
+                            property.Name,
+                            out currentValue
+                        ) || !currentValue.TryMergeWithProperty(property.Value)
+                    )
                     {
                         // Merge wasn't possible so copy
                         // this[string] will call CreateCopyOfPropertyValue, so we don't need to repeat that here
@@ -413,7 +426,10 @@ namespace System.ServiceModel.Channels
 
             this.Via = properties.Via;
             this.AllowOutputBatching = properties.AllowOutputBatching;
-            this.Security = (properties.Security != null) ? (SecurityMessageProperty)properties.Security.CreateCopy() : null;
+            this.Security =
+                (properties.Security != null)
+                    ? (SecurityMessageProperty)properties.Security.CreateCopy()
+                    : null;
             this.Encoder = properties.Encoder;
         }
 
@@ -439,7 +455,9 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             int index = FindProperty(name);
             switch (index)
             {
@@ -465,7 +483,9 @@ namespace System.ServiceModel.Channels
                 return propertyValue;
             object copy = messageProperty.CreateCopy();
             if (copy == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessagePropertyReturnedNullCopy)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.MessagePropertyReturnedNullCopy))
+                );
             return copy;
         }
 
@@ -549,7 +569,9 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
 
             int index = FindProperty(name);
             switch (index)
@@ -592,12 +614,14 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        internal TProperty GetValue<TProperty>(string name) where TProperty : class
+        internal TProperty GetValue<TProperty>(string name)
+            where TProperty : class
         {
             return this.GetValue<TProperty>(name, false);
         }
 
-        internal TProperty GetValue<TProperty>(string name, bool ensureTypeMatch) where TProperty : class
+        internal TProperty GetValue<TProperty>(string name, bool ensureTypeMatch)
+            where TProperty : class
         {
             object obj;
             if (!this.TryGetValue(name, out obj))
@@ -611,7 +635,9 @@ namespace System.ServiceModel.Channels
         void UpdateProperty(string name, object value, bool mustNotExist)
         {
             if (name == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("name"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("name")
+                );
             int index = FindProperty(name);
             if (index != NotFoundIndex)
             {
@@ -638,7 +664,9 @@ namespace System.ServiceModel.Channels
                     }
                     if (exists)
                     {
-                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.DuplicateMessageProperty, name)));
+                        throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                            new ArgumentException(SR.GetString(SR.DuplicateMessageProperty, name))
+                        );
                     }
                 }
 
@@ -685,7 +713,9 @@ namespace System.ServiceModel.Channels
                             break;
                         default:
                             Fx.Assert("");
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new InvalidOperationException());
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new InvalidOperationException()
+                            );
                     }
                 }
             }
@@ -722,27 +752,45 @@ namespace System.ServiceModel.Channels
             }
         }
 
-        void ICollection<KeyValuePair<string, object>>.CopyTo(KeyValuePair<string, object>[] array, int index)
+        void ICollection<KeyValuePair<string, object>>.CopyTo(
+            KeyValuePair<string, object>[] array,
+            int index
+        )
         {
             if (disposed)
                 ThrowDisposed();
 
             if (array == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("array"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("array")
+                );
             if (array.Length < propertyCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.GetString(SR.MessagePropertiesArraySize0)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(SR.GetString(SR.MessagePropertiesArraySize0))
+                );
             if (index < 0 || index > array.Length - propertyCount)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException("index", index,
-                                                    SR.GetString(SR.ValueMustBeInRange, 0, array.Length - propertyCount)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        "index",
+                        index,
+                        SR.GetString(SR.ValueMustBeInRange, 0, array.Length - propertyCount)
+                    )
+                );
 
             if (this.via != null)
                 array[index++] = new KeyValuePair<string, object>(ViaKey, via);
 
             if (this.allowOutputBatching != null)
-                array[index++] = new KeyValuePair<string, object>(AllowOutputBatchingKey, allowOutputBatching);
+                array[index++] = new KeyValuePair<string, object>(
+                    AllowOutputBatchingKey,
+                    allowOutputBatching
+                );
 
             if (this.security != null)
-                array[index++] = new KeyValuePair<string, object>(SecurityKey, this.security.CreateCopy());
+                array[index++] = new KeyValuePair<string, object>(
+                    SecurityKey,
+                    this.security.CreateCopy()
+                );
 
             if (this.encoder != null)
                 array[index++] = new KeyValuePair<string, object>(EncoderKey, encoder);
@@ -758,7 +806,10 @@ namespace System.ServiceModel.Channels
                         break;
                     }
 
-                    array[index++] = new KeyValuePair<string, object>(propertyName, CreateCopyOfPropertyValue(properties[i].Value));
+                    array[index++] = new KeyValuePair<string, object>(
+                        propertyName,
+                        CreateCopyOfPropertyValue(properties[i].Value)
+                    );
                 }
             }
         }
@@ -769,7 +820,9 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pair.Value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pair.Value")
+                );
             UpdateProperty(pair.Key, pair.Value, true);
         }
 
@@ -779,9 +832,13 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pair.Value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pair.Value")
+                );
             if (pair.Key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pair.Key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pair.Key")
+                );
             object value;
             if (!TryGetValue(pair.Key, out value))
             {
@@ -798,18 +855,24 @@ namespace System.ServiceModel.Channels
             return ((IEnumerable<KeyValuePair<string, object>>)this).GetEnumerator();
         }
 
-        IEnumerator<KeyValuePair<string, object>> IEnumerable<KeyValuePair<string, object>>.GetEnumerator()
+        IEnumerator<KeyValuePair<string, object>> IEnumerable<
+            KeyValuePair<string, object>
+        >.GetEnumerator()
         {
             if (disposed)
                 ThrowDisposed();
 
-            List<KeyValuePair<string, object>> pairs = new List<KeyValuePair<string, object>>(propertyCount);
+            List<KeyValuePair<string, object>> pairs = new List<KeyValuePair<string, object>>(
+                propertyCount
+            );
 
             if (this.via != null)
                 pairs.Add(new KeyValuePair<string, object>(ViaKey, via));
 
             if (this.allowOutputBatching != null)
-                pairs.Add(new KeyValuePair<string, object>(AllowOutputBatchingKey, allowOutputBatching));
+                pairs.Add(
+                    new KeyValuePair<string, object>(AllowOutputBatchingKey, allowOutputBatching)
+                );
 
             if (this.security != null)
                 pairs.Add(new KeyValuePair<string, object>(SecurityKey, security));
@@ -841,9 +904,13 @@ namespace System.ServiceModel.Channels
                 ThrowDisposed();
 
             if (pair.Value == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pair.Value"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pair.Value")
+                );
             if (pair.Key == null)
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentNullException("pair.Key"));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentNullException("pair.Key")
+                );
 
             object value;
             if (!TryGetValue(pair.Key, out value))

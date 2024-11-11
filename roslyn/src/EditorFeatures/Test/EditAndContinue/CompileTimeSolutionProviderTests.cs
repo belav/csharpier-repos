@@ -37,26 +37,59 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var additionalFilePath = Path.Combine(TempRoot.Root, "a", $"X.{kind}");
             var designTimeFilePath = Path.Combine(TempRoot.Root, "a", $"X.{kind}.g.cs");
 
-            var generator = new TestSourceGenerator() { ExecuteImpl = context => context.AddSource($"a_X_{kind}.g.cs", "") };
-            var sourceGeneratedPathPrefix = Path.Combine(typeof(TestSourceGenerator).Assembly.GetName().Name, typeof(TestSourceGenerator).FullName);
+            var generator = new TestSourceGenerator()
+            {
+                ExecuteImpl = context => context.AddSource($"a_X_{kind}.g.cs", ""),
+            };
+            var sourceGeneratedPathPrefix = Path.Combine(
+                typeof(TestSourceGenerator).Assembly.GetName().Name,
+                typeof(TestSourceGenerator).FullName
+            );
             var analyzerConfigId = DocumentId.CreateNewId(projectId);
             var documentId = DocumentId.CreateNewId(projectId);
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
             var designTimeDocumentId = DocumentId.CreateNewId(projectId);
 
-            var designTimeSolution = workspace.CurrentSolution.
-                AddProject(ProjectInfo.Create(projectId, VersionStamp.Default, "proj", "proj", LanguageNames.CSharp, filePath: projectFilePath)).
-                WithProjectMetadataReferences(projectId, TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20)).
-                AddAnalyzerReference(projectId, new TestGeneratorReference(generator)).
-                AddAdditionalDocument(additionalDocumentId, "additional", SourceText.From(""), filePath: additionalFilePath).
-                AddAnalyzerConfigDocument(analyzerConfigId, "config", SourceText.From(""), filePath: "RazorSourceGenerator.razorencconfig").
-                AddDocument(documentId, "a.cs", "").
-                AddDocument(DocumentInfo.Create(
-                    designTimeDocumentId,
-                    name: "a",
-                    loader: null,
-                    filePath: designTimeFilePath,
-                    isGenerated: true).WithDesignTimeOnly(true));
+            var designTimeSolution = workspace
+                .CurrentSolution.AddProject(
+                    ProjectInfo.Create(
+                        projectId,
+                        VersionStamp.Default,
+                        "proj",
+                        "proj",
+                        LanguageNames.CSharp,
+                        filePath: projectFilePath
+                    )
+                )
+                .WithProjectMetadataReferences(
+                    projectId,
+                    TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20)
+                )
+                .AddAnalyzerReference(projectId, new TestGeneratorReference(generator))
+                .AddAdditionalDocument(
+                    additionalDocumentId,
+                    "additional",
+                    SourceText.From(""),
+                    filePath: additionalFilePath
+                )
+                .AddAnalyzerConfigDocument(
+                    analyzerConfigId,
+                    "config",
+                    SourceText.From(""),
+                    filePath: "RazorSourceGenerator.razorencconfig"
+                )
+                .AddDocument(documentId, "a.cs", "")
+                .AddDocument(
+                    DocumentInfo
+                        .Create(
+                            designTimeDocumentId,
+                            name: "a",
+                            loader: null,
+                            filePath: designTimeFilePath,
+                            isGenerated: true
+                        )
+                        .WithDesignTimeOnly(true)
+                );
 
             var designTimeDocument = designTimeSolution.GetRequiredDocument(designTimeDocumentId);
 
@@ -67,13 +100,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Assert.False(compileTimeSolution.ContainsDocument(designTimeDocumentId));
             Assert.True(compileTimeSolution.ContainsDocument(documentId));
 
-            var sourceGeneratedDoc = (await compileTimeSolution.Projects.Single().GetSourceGeneratedDocumentsAsync()).Single();
+            var sourceGeneratedDoc = (
+                await compileTimeSolution.Projects.Single().GetSourceGeneratedDocumentsAsync()
+            ).Single();
 
-            var compileTimeDocument = await CompileTimeSolutionProvider.TryGetCompileTimeDocumentAsync(designTimeDocument, compileTimeSolution, CancellationToken.None, sourceGeneratedPathPrefix);
+            var compileTimeDocument =
+                await CompileTimeSolutionProvider.TryGetCompileTimeDocumentAsync(
+                    designTimeDocument,
+                    compileTimeSolution,
+                    CancellationToken.None,
+                    sourceGeneratedPathPrefix
+                );
             Assert.Same(sourceGeneratedDoc, compileTimeDocument);
 
-            var actualDesignTimeDocumentIds = await CompileTimeSolutionProvider.GetDesignTimeDocumentsAsync(
-                compileTimeSolution, ImmutableArray.Create(documentId, sourceGeneratedDoc.Id), designTimeSolution, CancellationToken.None, sourceGeneratedPathPrefix);
+            var actualDesignTimeDocumentIds =
+                await CompileTimeSolutionProvider.GetDesignTimeDocumentsAsync(
+                    compileTimeSolution,
+                    ImmutableArray.Create(documentId, sourceGeneratedDoc.Id),
+                    designTimeSolution,
+                    CancellationToken.None,
+                    sourceGeneratedPathPrefix
+                );
 
             AssertEx.Equal(new[] { documentId, designTimeDocumentId }, actualDesignTimeDocumentIds);
         }
@@ -91,37 +138,70 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 // We'll replicate a simple example of how the razor generator handles disabling here so the test
                 // functions similar to the real world
                 var isDisabled = context.AnalyzerConfigOptionsProvider.Select(
-                    (o, ct) => o.GlobalOptions.TryGetValue("build_property.SuppressRazorSourceGenerator", out var value) && bool.Parse(value));
+                    (o, ct) =>
+                        o.GlobalOptions.TryGetValue(
+                            "build_property.SuppressRazorSourceGenerator",
+                            out var value
+                        ) && bool.Parse(value)
+                );
 
-                var sources = context.AdditionalTextsProvider.Combine(isDisabled).Select((pair, ct) =>
-                {
-                    var (additionalText, isDisabledFlag) = pair;
+                var sources = context
+                    .AdditionalTextsProvider.Combine(isDisabled)
+                    .Select(
+                        (pair, ct) =>
+                        {
+                            var (additionalText, isDisabledFlag) = pair;
 
-                    if (isDisabledFlag)
-                        return null;
+                            if (isDisabledFlag)
+                                return null;
 
-                    Interlocked.Increment(ref generatorInvocations);
-                    return "// " + additionalText.GetText(ct)!.ToString();
-                });
+                            Interlocked.Increment(ref generatorInvocations);
+                            return "// " + additionalText.GetText(ct)!.ToString();
+                        }
+                    );
 
-                context.RegisterSourceOutput(sources, (context, s) =>
-                {
-                    if (s != null)
-                        context.AddSource("hint", SourceText.From(s));
-                });
+                context.RegisterSourceOutput(
+                    sources,
+                    (context, s) =>
+                    {
+                        if (s != null)
+                            context.AddSource("hint", SourceText.From(s));
+                    }
+                );
             });
 
             var analyzerConfigId = DocumentId.CreateNewId(projectId);
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
 
-            var analyzerConfigText = "is_global = true\r\nbuild_property.SuppressRazorSourceGenerator = true";
+            var analyzerConfigText =
+                "is_global = true\r\nbuild_property.SuppressRazorSourceGenerator = true";
 
-            workspace.SetCurrentSolution(s => s.
-                AddProject(ProjectInfo.Create(projectId, VersionStamp.Default, "proj", "proj", LanguageNames.CSharp)).
-                AddAnalyzerReference(projectId, new TestGeneratorReference(generator)).
-                AddAdditionalDocument(additionalDocumentId, "additional", SourceText.From(""), filePath: "additional.razor").
-                AddAnalyzerConfigDocument(analyzerConfigId, "config", SourceText.From(analyzerConfigText), filePath: "Z:\\RazorSourceGenerator.razorencconfig"),
-                WorkspaceChangeKind.SolutionAdded);
+            workspace.SetCurrentSolution(
+                s =>
+                    s.AddProject(
+                            ProjectInfo.Create(
+                                projectId,
+                                VersionStamp.Default,
+                                "proj",
+                                "proj",
+                                LanguageNames.CSharp
+                            )
+                        )
+                        .AddAnalyzerReference(projectId, new TestGeneratorReference(generator))
+                        .AddAdditionalDocument(
+                            additionalDocumentId,
+                            "additional",
+                            SourceText.From(""),
+                            filePath: "additional.razor"
+                        )
+                        .AddAnalyzerConfigDocument(
+                            analyzerConfigId,
+                            "config",
+                            SourceText.From(analyzerConfigText),
+                            filePath: "Z:\\RazorSourceGenerator.razorencconfig"
+                        ),
+                WorkspaceChangeKind.SolutionAdded
+            );
 
             // Fetch a compilation first for the base solution; we're doing this because currently if we try to move the
             // cached generator state to a snapshot that has no CompilationTracker at all, we won't update the state.
@@ -141,7 +221,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
                 s => s.AddDocument(documentId, "Test.cs", "// source file"),
                 WorkspaceChangeKind.DocumentAdded,
                 projectId,
-                documentId);
+                documentId
+            );
 
             var compileTimeSolution2 = provider.GetCompileTimeSolution(workspace.CurrentSolution);
             Assert.NotSame(compileTimeSolution1, compileTimeSolution2);

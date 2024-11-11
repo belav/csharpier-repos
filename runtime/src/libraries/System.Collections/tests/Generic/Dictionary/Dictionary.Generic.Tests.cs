@@ -12,23 +12,31 @@ namespace System.Collections.Tests
     /// <summary>
     /// Contains tests that ensure the correctness of the Dictionary class.
     /// </summary>
-    public abstract class Dictionary_Generic_Tests<TKey, TValue> : IDictionary_Generic_Tests<TKey, TValue>
+    public abstract class Dictionary_Generic_Tests<TKey, TValue>
+        : IDictionary_Generic_Tests<TKey, TValue>
     {
         protected override bool Enumerator_Empty_UsesSingletonInstance => true;
         protected override bool Enumerator_Empty_Current_UndefinedOperation_Throws => true;
-        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException => false;
+        protected override bool Enumerator_Empty_ModifiedDuringEnumeration_ThrowsInvalidOperationException =>
+            false;
 
-        protected override ModifyOperation ModifyEnumeratorThrows => ModifyOperation.Add | ModifyOperation.Insert;
+        protected override ModifyOperation ModifyEnumeratorThrows =>
+            ModifyOperation.Add | ModifyOperation.Insert;
 
-        protected override ModifyOperation ModifyEnumeratorAllowed => ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
+        protected override ModifyOperation ModifyEnumeratorAllowed =>
+            ModifyOperation.Overwrite | ModifyOperation.Remove | ModifyOperation.Clear;
 
         #region IDictionary<TKey, TValue Helper Methods
 
-        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory() => new Dictionary<TKey, TValue>();
+        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory() =>
+            new Dictionary<TKey, TValue>();
 
-        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory(IEqualityComparer<TKey> comparer) => new Dictionary<TKey, TValue>(comparer);
+        protected override IDictionary<TKey, TValue> GenericIDictionaryFactory(
+            IEqualityComparer<TKey> comparer
+        ) => new Dictionary<TKey, TValue>(comparer);
 
-        protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType => typeof(ArgumentOutOfRangeException);
+        protected override Type ICollection_Generic_CopyTo_IndexLargerThanArrayCount_ThrowType =>
+            typeof(ArgumentOutOfRangeException);
 
         #endregion
 
@@ -119,7 +127,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_ContainsValue_NotPresent(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             TValue notPresent = CreateTValue(seed++);
             while (dictionary.Values.Contains(notPresent))
@@ -131,7 +140,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_ContainsValue_Present(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             KeyValuePair<TKey, TValue> notPresent = CreateT(seed++);
             while (dictionary.Contains(notPresent))
@@ -144,7 +154,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_ContainsValue_DefaultValueNotPresent(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.False(dictionary.ContainsValue(default(TValue)));
         }
 
@@ -152,7 +163,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_ContainsValue_DefaultValuePresent(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             int seed = 4315;
             TKey notPresent = CreateTKey(seed++);
             while (dictionary.ContainsKey(notPresent))
@@ -193,7 +205,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_RemoveKey_ValidKeyNotContainedInDictionary(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             TValue value;
             TKey missingKey = GetNewKey(dictionary);
 
@@ -206,7 +219,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_RemoveKey_ValidKeyContainedInDictionary(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             TKey missingKey = GetNewKey(dictionary);
             TValue outValue;
             TValue inValue = CreateTValue(count);
@@ -222,7 +236,8 @@ namespace System.Collections.Tests
         [MemberData(nameof(ValidCollectionSizes))]
         public void Dictionary_Generic_RemoveKey_DefaultKeyNotContainedInDictionary(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             TValue outValue;
 
             if (DefaultValueAllowed)
@@ -237,7 +252,9 @@ namespace System.Collections.Tests
             {
                 TValue initValue = CreateTValue(count);
                 outValue = initValue;
-                Assert.Throws<ArgumentNullException>(() => dictionary.Remove(default(TKey), out outValue));
+                Assert.Throws<ArgumentNullException>(
+                    () => dictionary.Remove(default(TKey), out outValue)
+                );
                 Assert.Equal(initValue, outValue);
             }
         }
@@ -248,7 +265,8 @@ namespace System.Collections.Tests
         {
             if (DefaultValueAllowed)
             {
-                Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)(GenericIDictionaryFactory(count));
+                Dictionary<TKey, TValue> dictionary =
+                    (Dictionary<TKey, TValue>)(GenericIDictionaryFactory(count));
                 TKey missingKey = default(TKey);
                 TValue value;
 
@@ -260,7 +278,7 @@ namespace System.Collections.Tests
         [Fact]
         public void Dictionary_Generic_Remove_RemoveFirstEnumerationContinues()
         {
-            Dictionary<TKey,TValue> dict = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(3);
+            Dictionary<TKey, TValue> dict = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(3);
             using (var enumerator = dict.GetEnumerator())
             {
                 enumerator.MoveNext();
@@ -313,7 +331,9 @@ namespace System.Collections.Tests
 
         [Theory]
         [MemberData(nameof(ValidCollectionSizes))]
-        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesInvalidateEnumeration(int count)
+        public void EnsureCapacity_Generic_RequestingLargerCapacity_DoesInvalidateEnumeration(
+            int count
+        )
         {
             var dictionary = (Dictionary<TKey, TValue>)(GenericIDictionaryFactory(count));
             var capacity = dictionary.EnsureCapacity(0);
@@ -328,7 +348,10 @@ namespace System.Collections.Tests
         public void EnsureCapacity_Generic_NegativeCapacityRequested_Throws()
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => dictionary.EnsureCapacity(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => dictionary.EnsureCapacity(-1)
+            );
         }
 
         [Fact]
@@ -343,16 +366,24 @@ namespace System.Collections.Tests
         [InlineData(2)]
         [InlineData(3)]
         [InlineData(4)]
-        public void EnsureCapacity_Generic_DictionaryNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(int requestedCapacity)
+        public void EnsureCapacity_Generic_DictionaryNotInitialized_RequestedNonZero_CapacityIsSetToAtLeastTheRequested(
+            int requestedCapacity
+        )
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            Assert.InRange(dictionary.EnsureCapacity(requestedCapacity), requestedCapacity, int.MaxValue);
+            Assert.InRange(
+                dictionary.EnsureCapacity(requestedCapacity),
+                requestedCapacity,
+                int.MaxValue
+            );
         }
 
         [Theory]
         [InlineData(3)]
         [InlineData(7)]
-        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(int currentCapacity)
+        public void EnsureCapacity_Generic_RequestedCapacitySmallerThanCurrent_CapacityUnchanged(
+            int currentCapacity
+        )
         {
             Dictionary<TKey, TValue> dictionary;
 
@@ -400,7 +431,9 @@ namespace System.Collections.Tests
         [InlineData(1)]
         [InlineData(5)]
         [InlineData(7)]
-        public void EnsureCapacity_Generic_DictionaryNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(int count)
+        public void EnsureCapacity_Generic_DictionaryNotEmpty_RequestedSmallerThanCount_ReturnsAtLeastSizeOfCount(
+            int count
+        )
         {
             var dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.InRange(dictionary.EnsureCapacity(count - 1), count, int.MaxValue);
@@ -442,7 +475,10 @@ namespace System.Collections.Tests
         public void TrimExcess_Generic_NegativeCapacity_Throw()
         {
             var dictionary = new Dictionary<TKey, TValue>();
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => dictionary.TrimExcess(-1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => dictionary.TrimExcess(-1)
+            );
         }
 
         [Theory]
@@ -452,11 +488,17 @@ namespace System.Collections.Tests
         {
             var dictionary = new Dictionary<TKey, TValue>();
             dictionary.Add(GetNewKey(dictionary), CreateTValue(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => dictionary.TrimExcess(0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => dictionary.TrimExcess(0)
+            );
 
             dictionary = new Dictionary<TKey, TValue>(suggestedCapacity);
             dictionary.Add(GetNewKey(dictionary), CreateTValue(0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("capacity", () => dictionary.TrimExcess(0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "capacity",
+                () => dictionary.TrimExcess(0)
+            );
         }
 
         [Fact]
@@ -470,14 +512,16 @@ namespace System.Collections.Tests
         [Theory]
         [InlineData(20)]
         [InlineData(23)]
-        public void TrimExcess_Generic_TrimToLargerThanExistingCapacity_DoesNothing(int suggestedCapacity)
+        public void TrimExcess_Generic_TrimToLargerThanExistingCapacity_DoesNothing(
+            int suggestedCapacity
+        )
         {
             var dictionary = new Dictionary<TKey, TValue>();
             int capacity = dictionary.EnsureCapacity(0);
             dictionary.TrimExcess(suggestedCapacity);
             Assert.Equal(capacity, dictionary.EnsureCapacity(0));
 
-            dictionary = new Dictionary<TKey, TValue>(suggestedCapacity/2);
+            dictionary = new Dictionary<TKey, TValue>(suggestedCapacity / 2);
             capacity = dictionary.EnsureCapacity(0);
             dictionary.TrimExcess(suggestedCapacity);
             Assert.Equal(capacity, dictionary.EnsureCapacity(0));
@@ -498,7 +542,8 @@ namespace System.Collections.Tests
         [InlineData(89)]
         public void TrimExcess_Generic_ClearThenTrimNonEmptyDictionary_SetsCapacityTo3(int count)
         {
-            Dictionary<TKey, TValue> dictionary = (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
+            Dictionary<TKey, TValue> dictionary =
+                (Dictionary<TKey, TValue>)GenericIDictionaryFactory(count);
             Assert.Equal(count, dictionary.Count);
             // The smallest possible capacity size after clearing a dictionary is 3
             dictionary.Clear();
@@ -523,7 +568,9 @@ namespace System.Collections.Tests
         [Theory]
         [InlineData(85)]
         [InlineData(89)]
-        public void TrimExcess_WithArguments_OnDictionaryWithManyElementsRemoved_TrimsToAtLeastRequested(int finalCount)
+        public void TrimExcess_WithArguments_OnDictionaryWithManyElementsRemoved_TrimsToAtLeastRequested(
+            int finalCount
+        )
         {
             const int InitToFinalRatio = 10;
             int initialCount = InitToFinalRatio * finalCount;
@@ -550,7 +597,13 @@ namespace System.Collections.Tests
         [InlineData(1000, 900, 500, 85, 89)]
         [InlineData(1000, 400, 500, 85, 89)]
         [InlineData(1000, 400, 500, 1, 3)]
-        public void TrimExcess_NoArgument_TrimAfterEachBulkAddOrRemove_TrimsToAtLeastCount(int initialCount, int numRemove, int numAdd, int newCount, int newCapacity)
+        public void TrimExcess_NoArgument_TrimAfterEachBulkAddOrRemove_TrimsToAtLeastCount(
+            int initialCount,
+            int numRemove,
+            int numAdd,
+            int newCount,
+            int newCapacity
+        )
         {
             Random random = new Random(32);
             var dictionary = new Dictionary<int, int>();
@@ -614,8 +667,16 @@ namespace System.Collections.Tests
             {
                 dictionary.Add(i.ToString(), 0);
             }
-            var s_64bit = new string[] { "95e85f8e-67a3-4367-974f-dd24d8bb2ca2", "eb3d6fe9-de64-43a9-8f58-bddea727b1ca" };
-            var s_32bit = new string[] { "25b1f130-7517-48e3-96b0-9da44e8bfe0e", "ba5a3625-bc38-4bf1-a707-a3cfe2158bae" };
+            var s_64bit = new string[]
+            {
+                "95e85f8e-67a3-4367-974f-dd24d8bb2ca2",
+                "eb3d6fe9-de64-43a9-8f58-bddea727b1ca",
+            };
+            var s_32bit = new string[]
+            {
+                "25b1f130-7517-48e3-96b0-9da44e8bfe0e",
+                "ba5a3625-bc38-4bf1-a707-a3cfe2158bae",
+            };
             string[] chained = (Environment.Is64BitProcess ? s_64bit : s_32bit).ToArray();
             dictionary.Add(chained[0], 0);
             dictionary.Add(chained[1], 0);
@@ -667,7 +728,10 @@ namespace System.Collections.Tests
 
                 // Then pretend to serialize the dictionary and check the stored Comparer instance
 
-                SerializationInfo si = new SerializationInfo(typeof(Dictionary<string, object>), new FormatterConverter());
+                SerializationInfo si = new SerializationInfo(
+                    typeof(Dictionary<string, object>),
+                    new FormatterConverter()
+                );
                 dict.GetObjectData(si, new StreamingContext(StreamingContextStates.All));
 
                 Assert.Same(expected, si.GetValue("Comparer", typeof(IEqualityComparer<string>)));

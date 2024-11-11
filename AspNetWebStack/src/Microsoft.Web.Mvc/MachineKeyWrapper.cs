@@ -15,10 +15,7 @@ namespace Microsoft.Web.Mvc
 
         public static MachineKeyWrapper Instance
         {
-            get
-            {
-                return _singletonInstance;
-            }
+            get { return _singletonInstance; }
         }
 
         public byte[] Unprotect(string protectedData, params string[] purposes)

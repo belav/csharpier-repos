@@ -35,11 +35,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     public D() : base(1) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                ),
+            };
             var updatedCode = """
                 class B
                 {
@@ -56,7 +78,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WorkItem("https://github.com/dotnet/roslyn/issues/44126")]
@@ -78,11 +105,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     public D() : base(1) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                ),
+            };
             var updatedCode = """
                 class B
                 {
@@ -99,7 +148,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WpfFact]
@@ -116,11 +170,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                ),
+            };
             var updatedCode = """
                 class B
                 {
@@ -133,7 +209,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
 
         [WpfFact]
@@ -146,11 +227,33 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                     public MyAttribute($$int a) { }
                 }
                 """;
-            var updatedSignature = new[] {
+            var updatedSignature = new[]
+            {
                 new AddedParameterOrExistingIndex(0),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "x", CallSiteKind.Value, callSiteValue: "100", isRequired: false, defaultValue: "10"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "y", CallSiteKind.Omitted, isRequired: false, defaultValue: "11"),
-                AddedParameterOrExistingIndex.CreateAdded("System.Int32", "z", CallSiteKind.Value, callSiteValue: "102", isRequired: false, defaultValue: "12")};
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "x",
+                    CallSiteKind.Value,
+                    callSiteValue: "100",
+                    isRequired: false,
+                    defaultValue: "10"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "y",
+                    CallSiteKind.Omitted,
+                    isRequired: false,
+                    defaultValue: "11"
+                ),
+                AddedParameterOrExistingIndex.CreateAdded(
+                    "System.Int32",
+                    "z",
+                    CallSiteKind.Value,
+                    callSiteValue: "102",
+                    isRequired: false,
+                    defaultValue: "12"
+                ),
+            };
 
             // TODO: The = in the attribute is a bug. You cannot specify that the attribute should use : instead in the SyntaxGenerator
             // https://github.com/dotnet/roslyn/issues/43354
@@ -162,7 +265,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ChangeSignature
                 }
                 """;
 
-            await TestChangeSignatureViaCommandAsync(LanguageNames.CSharp, markup, updatedSignature: updatedSignature, expectedUpdatedInvocationDocumentCode: updatedCode);
+            await TestChangeSignatureViaCommandAsync(
+                LanguageNames.CSharp,
+                markup,
+                updatedSignature: updatedSignature,
+                expectedUpdatedInvocationDocumentCode: updatedCode
+            );
         }
     }
 }

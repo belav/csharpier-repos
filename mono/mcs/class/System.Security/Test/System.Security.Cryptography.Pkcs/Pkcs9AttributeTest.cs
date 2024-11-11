@@ -14,10 +14,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -28,118 +28,119 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.Collections;
 using System.Security.Cryptography;
 using System.Security.Cryptography.Pkcs;
+using NUnit.Framework;
 
-namespace MonoTests.System.Security.Cryptography.Pkcs {
+namespace MonoTests.System.Security.Cryptography.Pkcs
+{
+    [TestFixture]
+    public class Pkcs9AttributeObjectTest
+    {
+        static string defaultOid = "1.2.840.113549.1.7.1";
+        static string defaultName = "PKCS 7 Data";
 
-	[TestFixture]
-	public class Pkcs9AttributeObjectTest {
+        [Test]
+        public void ConstructorEmpty()
+        {
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject();
+            Assert.IsNull(a.Oid, "Oid");
+            Assert.IsNull(a.RawData, "RawData");
+        }
 
-		static string defaultOid = "1.2.840.113549.1.7.1";
-		static string defaultName = "PKCS 7 Data";
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorAsnEncodedDataNull()
+        {
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(null);
+        }
 
-		[Test]
-		public void ConstructorEmpty () 
-		{
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject ();
-			Assert.IsNull (a.Oid, "Oid");
-			Assert.IsNull (a.RawData, "RawData");
-		}
+        [Test]
+        public void ConstructorOidArray()
+        {
+            Oid o = new Oid(defaultOid);
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(o, new byte[0]);
+            Assert.AreEqual(defaultName, a.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual(defaultOid, a.Oid.Value, "Oid.Value");
+            Assert.AreEqual(0, a.RawData.Length, "RawData");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorAsnEncodedDataNull () 
-		{
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorOidNullArray()
+        {
+            Oid o = null;
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(o, new byte[0]);
+        }
 
-		[Test]
-		public void ConstructorOidArray () 
-		{
-			Oid o = new Oid (defaultOid);
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (o, new byte[0]);
-			Assert.AreEqual (defaultName, a.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual (defaultOid, a.Oid.Value, "Oid.Value");
-			Assert.AreEqual (0, a.RawData.Length, "RawData");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorOidArrayNull()
+        {
+            Oid o = new Oid(defaultOid);
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(o, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorOidNullArray ()
-		{
-			Oid o = null;
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (o, new byte[0]);
-		}
+        [Test]
+        public void ConstructorStringArray()
+        {
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(defaultOid, new byte[0]);
+            Assert.AreEqual(defaultName, a.Oid.FriendlyName, "Oid.FriendlyName");
+            Assert.AreEqual(defaultOid, a.Oid.Value, "Oid.Value");
+            Assert.AreEqual(0, a.RawData.Length, "RawData");
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorOidArrayNull ()
-		{
-			Oid o = new Oid (defaultOid);
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (o, null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorStringNullArray()
+        {
+            string s = null;
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(s, new byte[0]);
+        }
 
-		[Test]
-		public void ConstructorStringArray ()
-		{
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (defaultOid, new byte[0]);
-			Assert.AreEqual (defaultName, a.Oid.FriendlyName, "Oid.FriendlyName");
-			Assert.AreEqual (defaultOid, a.Oid.Value, "Oid.Value");
-			Assert.AreEqual (0, a.RawData.Length, "RawData");
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void ConstructorStringArrayNull()
+        {
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(defaultOid, null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorStringNullArray ()
-		{
-			string s = null;
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (s, new byte[0]);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentNullException))]
+        public void CopyFrom_Null()
+        {
+            new Pkcs9AttributeObject().CopyFrom(null);
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void ConstructorStringArrayNull ()
-		{
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject (defaultOid, null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CopyFrom_SigningTime_Raw()
+        {
+            Pkcs9SigningTime st = new Pkcs9SigningTime(DateTime.UtcNow);
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject();
+            a.CopyFrom(new AsnEncodedData(st.RawData));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentNullException))]
-		public void CopyFrom_Null ()
-		{
-			new Pkcs9AttributeObject ().CopyFrom (null);
-		}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CopyFrom_SigningTime_OidRaw()
+        {
+            Pkcs9SigningTime st = new Pkcs9SigningTime(DateTime.UtcNow);
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject();
+            a.CopyFrom(new AsnEncodedData(st.Oid, st.RawData));
+        }
 
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CopyFrom_SigningTime_Raw ()
-		{
-			Pkcs9SigningTime st = new Pkcs9SigningTime (DateTime.UtcNow);
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject ();
-			a.CopyFrom (new AsnEncodedData (st.RawData));
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CopyFrom_SigningTime_OidRaw ()
-		{
-			Pkcs9SigningTime st = new Pkcs9SigningTime (DateTime.UtcNow);
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject ();
-			a.CopyFrom (new AsnEncodedData (st.Oid, st.RawData));
-		}
-
-		[Test]
-		[ExpectedException (typeof (ArgumentException))]
-		public void CopyFrom_Self ()
-		{
-			Pkcs9AttributeObject a = new Pkcs9AttributeObject ("1.2.3.4", new byte[2] { 0x05, 0x00 } );
-			a.CopyFrom (new AsnEncodedData (a.Oid, a.RawData));
-		}
-	}
+        [Test]
+        [ExpectedException(typeof(ArgumentException))]
+        public void CopyFrom_Self()
+        {
+            Pkcs9AttributeObject a = new Pkcs9AttributeObject(
+                "1.2.3.4",
+                new byte[2] { 0x05, 0x00 }
+            );
+            a.CopyFrom(new AsnEncodedData(a.Oid, a.RawData));
+        }
+    }
 }
-

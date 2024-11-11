@@ -26,14 +26,15 @@ namespace Microsoft.VisualStudio.Debugger.Clr
     public class DkmClrType
     {
         /// <summary>
-        /// We would accept inherited members for tests purposes comparing to <see cref="TypeHelpers.MemberBindingFlags"/> 
+        /// We would accept inherited members for tests purposes comparing to <see cref="TypeHelpers.MemberBindingFlags"/>
         /// because an actual VS <see cref="GetEvalAttributes(Type)"/> may return attributes from base types.
         /// Therefore, we do not check here for <see cref="BindingFlags.DeclaredOnly"/>.
         /// </summary>
-        private const BindingFlags MemberBindingFlags = BindingFlags.Public |
-                                                         BindingFlags.NonPublic |
-                                                         BindingFlags.Instance |
-                                                         BindingFlags.Static;
+        private const BindingFlags MemberBindingFlags =
+            BindingFlags.Public
+            | BindingFlags.NonPublic
+            | BindingFlags.Instance
+            | BindingFlags.Static;
 
         private readonly DkmClrModuleInstance _module;
         private readonly DkmClrAppDomain _appDomain;
@@ -42,7 +43,12 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private readonly DkmClrObjectFavoritesInfo _favorites;
         private ReadOnlyCollection<DkmClrType> _lazyGenericArguments;
 
-        internal DkmClrType(DkmClrModuleInstance module, DkmClrAppDomain appDomain, Type lmrType, DkmClrObjectFavoritesInfo favorites = null)
+        internal DkmClrType(
+            DkmClrModuleInstance module,
+            DkmClrAppDomain appDomain,
+            Type lmrType,
+            DkmClrObjectFavoritesInfo favorites = null
+        )
         {
             _module = module;
             _appDomain = appDomain;
@@ -51,15 +57,11 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             _favorites = favorites;
         }
 
-        internal DkmClrType(Type lmrType) :
-            this(DkmClrRuntimeInstance.DefaultRuntime, lmrType)
-        {
-        }
+        internal DkmClrType(Type lmrType)
+            : this(DkmClrRuntimeInstance.DefaultRuntime, lmrType) { }
 
-        internal DkmClrType(DkmClrRuntimeInstance runtime, Type lmrType) :
-            this(runtime.DefaultModule, runtime.DefaultAppDomain, lmrType)
-        {
-        }
+        internal DkmClrType(DkmClrRuntimeInstance runtime, Type lmrType)
+            : this(runtime.DefaultModule, runtime.DefaultAppDomain, lmrType) { }
 
         public DkmClrAppDomain AppDomain
         {
@@ -86,17 +88,15 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 _module,
                 _appDomain,
                 _lmrType.MakeGenericType(genericArguments.Select(t => t._lmrType).ToArray()),
-                _favorites);
+                _favorites
+            );
             type._lazyGenericArguments = new ReadOnlyCollection<DkmClrType>(genericArguments);
             return type;
         }
 
         internal DkmClrType MakeArrayType()
         {
-            return new DkmClrType(
-                _module,
-                _appDomain,
-                _lmrType.MakeArrayType());
+            return new DkmClrType(_module, _appDomain, _lmrType.MakeArrayType());
         }
 
         internal DkmClrValue Instantiate(params object[] args)
@@ -107,7 +107,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         internal DkmClrValue Instantiate(
             object[] args,
             string alias,
-            DkmEvaluationResultFlags evalFlags)
+            DkmEvaluationResultFlags evalFlags
+        )
         {
             object value = UnderlyingType.Instantiate(args);
             return new DkmClrValue(
@@ -117,10 +118,12 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 alias: alias,
                 evalFlags: evalFlags,
                 valueFlags: DkmClrValueFlags.None,
-                nativeComPointer: 0);
+                nativeComPointer: 0
+            );
         }
 
-        private static readonly ReadOnlyCollection<DkmClrType> s_emptyTypes = new ReadOnlyCollection<DkmClrType>(new DkmClrType[0]);
+        private static readonly ReadOnlyCollection<DkmClrType> s_emptyTypes =
+            new ReadOnlyCollection<DkmClrType>(new DkmClrType[0]);
 
         public ReadOnlyCollection<DkmClrType> GenericArguments
         {
@@ -129,9 +132,12 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 if (_lazyGenericArguments == null)
                 {
                     var typeArgs = _lmrType.GetGenericArguments();
-                    var genericArgs = (typeArgs.Length == 0)
-                        ? s_emptyTypes
-                        : new ReadOnlyCollection<DkmClrType>(typeArgs.Select(t => DkmClrType.Create(_appDomain, t)).ToArray());
+                    var genericArgs =
+                        (typeArgs.Length == 0)
+                            ? s_emptyTypes
+                            : new ReadOnlyCollection<DkmClrType>(
+                                typeArgs.Select(t => DkmClrType.Create(_appDomain, t)).ToArray()
+                            );
                     Interlocked.CompareExchange(ref _lazyGenericArguments, genericArgs, null);
                 }
                 return _lazyGenericArguments;
@@ -161,10 +167,17 @@ namespace Microsoft.VisualStudio.Debugger.Clr
         private string GetDebuggerDisplay()
         {
             var result = _lmrType.ToString();
-            var proxyAttribute = _evalAttributes.OfType<DkmClrDebuggerTypeProxyAttribute>().FirstOrDefault();
-            result = proxyAttribute != null
-                ? string.Format("{0} (Proxy = {1})", result, proxyAttribute.ProxyType.GetLmrType().ToString())
-                : result;
+            var proxyAttribute = _evalAttributes
+                .OfType<DkmClrDebuggerTypeProxyAttribute>()
+                .FirstOrDefault();
+            result =
+                proxyAttribute != null
+                    ? string.Format(
+                        "{0} (Proxy = {1})",
+                        result,
+                        proxyAttribute.ProxyType.GetLmrType().ToString()
+                    )
+                    : result;
             return result;
         }
 
@@ -175,7 +188,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static System.Type GetProxyType(System.Type type)
         {
-            var attribute = (DebuggerTypeProxyAttribute)type.GetCustomAttributes(typeof(DebuggerTypeProxyAttribute), inherit: false).FirstOrDefault();
+            var attribute = (DebuggerTypeProxyAttribute)
+                type.GetCustomAttributes(typeof(DebuggerTypeProxyAttribute), inherit: false)
+                    .FirstOrDefault();
             if (attribute == null)
             {
                 return null;
@@ -203,7 +218,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             var proxyType = GetProxyType(reflectionType);
             if (proxyType != null)
             {
-                attributes.Add(new DkmClrDebuggerTypeProxyAttribute(new DkmClrType((TypeImpl)proxyType)));
+                attributes.Add(
+                    new DkmClrDebuggerTypeProxyAttribute(new DkmClrType((TypeImpl)proxyType))
+                );
             }
 
             var members = type.GetMembers(MemberBindingFlags).Where(TypeHelpers.IsVisibleMember);
@@ -230,7 +247,10 @@ namespace Microsoft.VisualStudio.Debugger.Clr
             return attributes.ToImmutableAndFree();
         }
 
-        private static ReadOnlyCollection<DkmClrDebuggerBrowsableAttribute> GetBrowsableAttributes(Type type, MemberInfo member)
+        private static ReadOnlyCollection<DkmClrDebuggerBrowsableAttribute> GetBrowsableAttributes(
+            Type type,
+            MemberInfo member
+        )
         {
             var attributes = ArrayBuilder<DkmClrDebuggerBrowsableAttribute>.GetInstance();
             foreach (var attribute in member.GetCustomAttributesData())
@@ -239,14 +259,21 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 if (data.AttributeType == typeof(DebuggerBrowsableAttribute))
                 {
                     var state = (DebuggerBrowsableState)data.ConstructorArguments[0].Value;
-                    attributes.Add(new DkmClrDebuggerBrowsableAttribute(member.Name, ConvertBrowsableState(state)));
+                    attributes.Add(
+                        new DkmClrDebuggerBrowsableAttribute(
+                            member.Name,
+                            ConvertBrowsableState(state)
+                        )
+                    );
                 }
             }
 
             return attributes.ToImmutableAndFree();
         }
 
-        private static DkmClrDebuggerBrowsableAttributeState ConvertBrowsableState(DebuggerBrowsableState state)
+        private static DkmClrDebuggerBrowsableAttributeState ConvertBrowsableState(
+            DebuggerBrowsableState state
+        )
         {
             switch (state)
             {
@@ -263,7 +290,8 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
         private static DkmClrDebuggerDisplayAttribute GetDebuggerDisplayAttribute(System.Type type)
         {
-            var attributeData = type.GetCustomAttributesData().FirstOrDefault(data => data.AttributeType == typeof(DebuggerDisplayAttribute));
+            var attributeData = type.GetCustomAttributesData()
+                .FirstOrDefault(data => data.AttributeType == typeof(DebuggerDisplayAttribute));
             if (attributeData == null)
             {
                 return null;
@@ -271,15 +299,24 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
             return new DkmClrDebuggerDisplayAttribute(type.AssemblyQualifiedName)
             {
-                Name = (string)attributeData.NamedArguments.SingleOrDefault(arg => arg.MemberName == "Name").TypedValue.Value,
+                Name = (string)
+                    attributeData
+                        .NamedArguments.SingleOrDefault(arg => arg.MemberName == "Name")
+                        .TypedValue.Value,
                 Value = (string)attributeData.ConstructorArguments.Single().Value,
-                TypeName = (string)attributeData.NamedArguments.SingleOrDefault(arg => arg.MemberName == "Type").TypedValue.Value,
+                TypeName = (string)
+                    attributeData
+                        .NamedArguments.SingleOrDefault(arg => arg.MemberName == "Type")
+                        .TypedValue.Value,
             };
         }
 
-        private static DkmClrDebuggerVisualizerAttribute[] GetDebuggerVisualizerAttributes(System.Type type)
+        private static DkmClrDebuggerVisualizerAttribute[] GetDebuggerVisualizerAttributes(
+            System.Type type
+        )
         {
-            var attributesData = type.GetCustomAttributesData().Where(data => data.AttributeType == typeof(DebuggerVisualizerAttribute));
+            var attributesData = type.GetCustomAttributesData()
+                .Where(data => data.AttributeType == typeof(DebuggerVisualizerAttribute));
             if (attributesData.Count() == 0)
             {
                 return null;
@@ -296,13 +333,21 @@ namespace Microsoft.VisualStudio.Debugger.Clr
 
                     System.Type argValueType = null;
 
-                    if (string.Equals(argumentType, "System.String", System.StringComparison.Ordinal))
+                    if (
+                        string.Equals(
+                            argumentType,
+                            "System.String",
+                            System.StringComparison.Ordinal
+                        )
+                    )
                     {
                         var typeName = (string)typedArg.Value;
                         var assembly = type.Assembly;
                         argValueType = assembly.GetType(typeName);
                     }
-                    else if (string.Equals(argumentType, "System.Type", System.StringComparison.Ordinal))
+                    else if (
+                        string.Equals(argumentType, "System.Type", System.StringComparison.Ordinal)
+                    )
                     {
                         argValueType = typedArg.Value as System.Type;
                     }
@@ -313,7 +358,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                     }
                     else
                     {
-                        Debug.Fail("Failed to resolve the type of the arguments for DebuggerVisualizer attribute.");
+                        Debug.Fail(
+                            "Failed to resolve the type of the arguments for DebuggerVisualizer attribute."
+                        );
                         return null;
                     }
                 }
@@ -321,7 +368,9 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 // Attribute not recognized.
                 if (argValueTypeBuilder.Count == 0)
                 {
-                    Debug.Fail("Failed to retrieve the visualizer types from a [DebuggerVisualizer] attribute");
+                    Debug.Fail(
+                        "Failed to retrieve the visualizer types from a [DebuggerVisualizer] attribute"
+                    );
                     return null;
                 }
 
@@ -338,9 +387,12 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                 }
                 else
                 {
-                    debuggeeSideVisualizerTypeName = "Microsoft.VisualStudio.DebuggerVisualizers.VisualizerObjectSource";
-                    var vsVersion = System.Environment.GetEnvironmentVariable("VisualStudioVersion") ?? "14.0";
-                    debuggeeSideVisualizerAssemblyName = $"Microsoft.VisualStudio.DebuggerVisualizers, Version={vsVersion}.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
+                    debuggeeSideVisualizerTypeName =
+                        "Microsoft.VisualStudio.DebuggerVisualizers.VisualizerObjectSource";
+                    var vsVersion =
+                        System.Environment.GetEnvironmentVariable("VisualStudioVersion") ?? "14.0";
+                    debuggeeSideVisualizerAssemblyName =
+                        $"Microsoft.VisualStudio.DebuggerVisualizers, Version={vsVersion}.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a";
                 }
 
                 string visualizerDescription = uiSideVisualizerTypeName;
@@ -357,15 +409,20 @@ namespace Microsoft.VisualStudio.Debugger.Clr
                     }
                 }
 
-                builder.Add(new DkmClrDebuggerVisualizerAttribute(
-                    targetMember: null,
-                    uiSideVisualizerTypeName: uiSideVisualizerTypeName,
-                    uiSideVisualizerAssemblyName: uiSideVisualizerAssemblyName,
-                    uiSideVisualizerAssemblyLocation: Evaluation.DkmClrCustomVisualizerAssemblyLocation.Unknown,
-                    debuggeeSideVisualizerTypeName: debuggeeSideVisualizerTypeName,
-                    debuggeeSideVisualizerAssemblyName: debuggeeSideVisualizerAssemblyName,
-                    visualizerDescription: visualizerDescription,
-                    extensionPartId: System.Guid.Empty));
+                builder.Add(
+                    new DkmClrDebuggerVisualizerAttribute(
+                        targetMember: null,
+                        uiSideVisualizerTypeName: uiSideVisualizerTypeName,
+                        uiSideVisualizerAssemblyName: uiSideVisualizerAssemblyName,
+                        uiSideVisualizerAssemblyLocation: Evaluation
+                            .DkmClrCustomVisualizerAssemblyLocation
+                            .Unknown,
+                        debuggeeSideVisualizerTypeName: debuggeeSideVisualizerTypeName,
+                        debuggeeSideVisualizerAssemblyName: debuggeeSideVisualizerAssemblyName,
+                        visualizerDescription: visualizerDescription,
+                        extensionPartId: System.Guid.Empty
+                    )
+                );
             }
 
             return builder.ToArrayAndFree();

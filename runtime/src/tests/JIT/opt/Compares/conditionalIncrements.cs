@@ -9,7 +9,6 @@ using Xunit;
 
 public class ConditionalIncrementTest
 {
-
     [Theory]
     [InlineData(72, 6)]
     [InlineData(32, 5)]
@@ -18,7 +17,7 @@ public class ConditionalIncrementTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #42
         //ARM64-FULL-LINE-NEXT: cinc {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        int result = op1 > 42 ? 6: 5;
+        int result = op1 > 42 ? 6 : 5;
         Assert.Equal(expected, result);
     }
 
@@ -66,7 +65,7 @@ public class ConditionalIncrementTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #43
         //ARM64-FULL-LINE-NEXT: cinc {{w[0-9]+}}, {{w[0-9]+}}, {{ge|lt}}
-        byte result = (byte) (op1 >= 43 ? byte.MinValue : ~byte.MinValue);
+        byte result = (byte)(op1 >= 43 ? byte.MinValue : ~byte.MinValue);
         Assert.Equal(expected, result);
     }
 
@@ -78,7 +77,7 @@ public class ConditionalIncrementTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: cinc {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 <= 44 ? 6 : 5);
+        short result = (short)(op1 <= 44 ? 6 : 5);
         Assert.Equal(expected, result);
     }
 
@@ -90,7 +89,7 @@ public class ConditionalIncrementTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csinc {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 <= 44 ? op1 + 1 : 5);
+        short result = (short)(op1 <= 44 ? op1 + 1 : 5);
         Assert.Equal(expected, result);
     }
 
@@ -102,7 +101,7 @@ public class ConditionalIncrementTest
     {
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csinc {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{gt|le}}
-        short result = (short) (op1 <= 44 ? 1 + op1 : 5);
+        short result = (short)(op1 <= 44 ? 1 + op1 : 5);
         Assert.Equal(expected, result);
     }
 
@@ -164,9 +163,12 @@ public class ConditionalIncrementTest
 
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csinc {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{ge|lt}}
-        if (op1 < 44) {
+        if (op1 < 44)
+        {
             result++;
-        } else {
+        }
+        else
+        {
             result = 5;
         }
         Assert.Equal(expected, result);
@@ -182,9 +184,12 @@ public class ConditionalIncrementTest
 
         //ARM64-FULL-LINE: cmp {{w[0-9]+}}, #44
         //ARM64-FULL-LINE-NEXT: csinc {{w[0-9]+}}, {{w[0-9]+}}, {{w[0-9]+}}, {{ge|lt}}
-        if (op1 < 44) {
+        if (op1 < 44)
+        {
             result = 5;
-        } else {
+        }
+        else
+        {
             result++;
         }
         Assert.Equal(expected, result);

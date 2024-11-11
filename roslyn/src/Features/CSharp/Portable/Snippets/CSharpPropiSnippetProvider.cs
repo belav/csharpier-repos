@@ -18,15 +18,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Snippets
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpPropiSnippetProvider()
-        {
-        }
+        public CSharpPropiSnippetProvider() { }
 
         public override string Identifier => "propi";
 
         public override string Description => CSharpFeaturesResources.init_only_property;
 
-        protected override AccessorDeclarationSyntax? GenerateSetAccessorDeclaration(CSharpSyntaxContext syntaxContext, SyntaxGenerator generator)
-            => SyntaxFactory.AccessorDeclaration(SyntaxKind.InitAccessorDeclaration).WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
+        protected override AccessorDeclarationSyntax? GenerateSetAccessorDeclaration(
+            CSharpSyntaxContext syntaxContext,
+            SyntaxGenerator generator
+        ) =>
+            SyntaxFactory
+                .AccessorDeclaration(SyntaxKind.InitAccessorDeclaration)
+                .WithSemicolonToken(SyntaxFactory.Token(SyntaxKind.SemicolonToken));
     }
 }

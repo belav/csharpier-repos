@@ -7,10 +7,11 @@
 // <owner current="false" primary="false">Microsoft</owner>
 //------------------------------------------------------------------------------
 
-namespace System.Data {
+namespace System.Data
+{
     using System;
-    using System.Diagnostics;
     using System.ComponentModel;
+    using System.Diagnostics;
 
     /// <devdoc>
     ///    <para>
@@ -18,10 +19,15 @@ namespace System.Data {
     ///    </para>
     /// </devdoc>
     [
-    DefaultProperty("ConstraintName"),
-    Editor("Microsoft.VSDesigner.Data.Design.UniqueConstraintEditor, " + AssemblyRef.MicrosoftVSDesigner, "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing),
+        DefaultProperty("ConstraintName"),
+        Editor(
+            "Microsoft.VSDesigner.Data.Design.UniqueConstraintEditor, "
+                + AssemblyRef.MicrosoftVSDesigner,
+            "System.Drawing.Design.UITypeEditor, " + AssemblyRef.SystemDrawing
+        ),
     ]
-    public class UniqueConstraint : Constraint {
+    public class UniqueConstraint : Constraint
+    {
         private DataKey key;
         private Index _constraintIndex;
         internal bool bPrimaryKey = false;
@@ -34,7 +40,8 @@ namespace System.Data {
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and
         /// <see cref='System.Data.DataColumn'/>.</para>
         /// </devdoc>
-        public UniqueConstraint(String name, DataColumn column) {
+        public UniqueConstraint(String name, DataColumn column)
+        {
             DataColumn[] columns = new DataColumn[1];
             columns[0] = column;
             Create(name, columns);
@@ -43,7 +50,8 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified <see cref='System.Data.DataColumn'/>.</para>
         /// </devdoc>
-        public UniqueConstraint(DataColumn column) {
+        public UniqueConstraint(DataColumn column)
+        {
             DataColumn[] columns = new DataColumn[1];
             columns[0] = column;
             Create(null, columns);
@@ -53,7 +61,8 @@ namespace System.Data {
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and array
         ///    of <see cref='System.Data.DataColumn'/> objects.</para>
         /// </devdoc>
-        public UniqueConstraint(String name, DataColumn[] columns) {
+        public UniqueConstraint(String name, DataColumn[] columns)
+        {
             Create(name, columns);
         }
 
@@ -63,7 +72,8 @@ namespace System.Data {
         ///       objects.
         ///    </para>
         /// </devdoc>
-        public UniqueConstraint(DataColumn[] columns) {
+        public UniqueConstraint(DataColumn[] columns)
+        {
             Create(null, columns);
         }
 
@@ -72,7 +82,8 @@ namespace System.Data {
         ///    <para>[To be supplied.]</para>
         /// </devdoc>
         [Browsable(false)]
-        public UniqueConstraint(String name, string[] columnNames, bool isPrimaryKey) {
+        public UniqueConstraint(String name, string[] columnNames, bool isPrimaryKey)
+        {
             this.constraintName = name;
             this.columnNames = columnNames;
             this.bPrimaryKey = isPrimaryKey;
@@ -82,7 +93,8 @@ namespace System.Data {
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and
         /// <see cref='System.Data.DataColumn'/>.</para>
         /// </devdoc>
-        public UniqueConstraint(String name, DataColumn column, bool isPrimaryKey) {
+        public UniqueConstraint(String name, DataColumn column, bool isPrimaryKey)
+        {
             DataColumn[] columns = new DataColumn[1];
             columns[0] = column;
             this.bPrimaryKey = isPrimaryKey;
@@ -92,7 +104,8 @@ namespace System.Data {
         /// <devdoc>
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified <see cref='System.Data.DataColumn'/>.</para>
         /// </devdoc>
-        public UniqueConstraint(DataColumn column, bool isPrimaryKey) {
+        public UniqueConstraint(DataColumn column, bool isPrimaryKey)
+        {
             DataColumn[] columns = new DataColumn[1];
             columns[0] = column;
             this.bPrimaryKey = isPrimaryKey;
@@ -103,7 +116,8 @@ namespace System.Data {
         /// <para>Initializes a new instance of the <see cref='System.Data.UniqueConstraint'/> with the specified name and array
         ///    of <see cref='System.Data.DataColumn'/> objects.</para>
         /// </devdoc>
-        public UniqueConstraint(String name, DataColumn[] columns, bool isPrimaryKey) {
+        public UniqueConstraint(String name, DataColumn[] columns, bool isPrimaryKey)
+        {
             this.bPrimaryKey = isPrimaryKey;
             Create(name, columns);
         }
@@ -114,50 +128,61 @@ namespace System.Data {
         ///       objects.
         ///    </para>
         /// </devdoc>
-        public UniqueConstraint(DataColumn[] columns, bool isPrimaryKey) {
+        public UniqueConstraint(DataColumn[] columns, bool isPrimaryKey)
+        {
             this.bPrimaryKey = isPrimaryKey;
             Create(null, columns);
         }
 
         // design time serialization only
-        internal string[] ColumnNames {
-            get {
-                return key.GetColumnNames();
-            }
+        internal string[] ColumnNames
+        {
+            get { return key.GetColumnNames(); }
         }
 
         // VSTFDEVDIV 895693: please note that there are scenarios where ConstraintIndex is not the same as key.GetSortIndex()
         // Use constraint index only for search operations (and use key.GetSortIndex() when enumeration is needed and/or order is important)
-        internal Index ConstraintIndex {
-            get {
+        internal Index ConstraintIndex
+        {
+            get
+            {
                 AssertConstraintAndKeyIndexes();
                 return _constraintIndex;
             }
         }
 
         [Conditional("DEBUG")]
-        private void AssertConstraintAndKeyIndexes() {
+        private void AssertConstraintAndKeyIndexes()
+        {
             Debug.Assert(null != _constraintIndex, "null UniqueConstraint index");
 
             // ideally, we would like constraintIndex and key.GetSortIndex to share the same index underneath: Debug.Assert(_constraintIndex == key.GetSortIndex)
             // but, due to VSTFDEVDIV #895693 there is a scenario where constraint and key indexes are built from the same list of columns but in a different order
             DataColumn[] sortIndexColumns = new DataColumn[_constraintIndex.IndexFields.Length];
-            for (int i = 0; i < sortIndexColumns.Length; i++) {
+            for (int i = 0; i < sortIndexColumns.Length; i++)
+            {
                 sortIndexColumns[i] = _constraintIndex.IndexFields[i].Column;
             }
-            Debug.Assert(DataKey.ColumnsEqual(key.ColumnsReference, sortIndexColumns), "UniqueConstraint index columns do not match the key sort index");
+            Debug.Assert(
+                DataKey.ColumnsEqual(key.ColumnsReference, sortIndexColumns),
+                "UniqueConstraint index columns do not match the key sort index"
+            );
         }
 
-        internal void ConstraintIndexClear() {
-            if (null != _constraintIndex) {
+        internal void ConstraintIndexClear()
+        {
+            if (null != _constraintIndex)
+            {
                 _constraintIndex.RemoveRef();
                 _constraintIndex = null;
             }
         }
-        
-        internal void ConstraintIndexInitialize() {
+
+        internal void ConstraintIndexInitialize()
+        {
             //Debug.Assert(null == _constraintIndex, "non-null UniqueConstraint index");
-            if (null == _constraintIndex) {
+            if (null == _constraintIndex)
+            {
                 _constraintIndex = key.GetSortIndex();
                 _constraintIndex.AddRef();
             }
@@ -165,26 +190,43 @@ namespace System.Data {
             AssertConstraintAndKeyIndexes();
         }
 
-        internal override void CheckState() {
-           NonVirtualCheckState();
+        internal override void CheckState()
+        {
+            NonVirtualCheckState();
         }
 
-        private  void NonVirtualCheckState() {
+        private void NonVirtualCheckState()
+        {
             key.CheckState();
         }
 
-        internal override void CheckCanAddToCollection(ConstraintCollection constraints) {
-        }
+        internal override void CheckCanAddToCollection(ConstraintCollection constraints) { }
 
-        internal override bool CanBeRemovedFromCollection(ConstraintCollection constraints, bool fThrowException) {
-            if (this.Equals(constraints.Table.primaryKey)) {
-                Debug.Assert(constraints.Table.primaryKey == this, "If the primary key and this are 'Equal', they should also be '=='");
+        internal override bool CanBeRemovedFromCollection(
+            ConstraintCollection constraints,
+            bool fThrowException
+        )
+        {
+            if (this.Equals(constraints.Table.primaryKey))
+            {
+                Debug.Assert(
+                    constraints.Table.primaryKey == this,
+                    "If the primary key and this are 'Equal', they should also be '=='"
+                );
                 if (!fThrowException)
                     return false;
                 else
                     throw ExceptionBuilder.RemovePrimaryKey(constraints.Table);
             }
-            for (ParentForeignKeyConstraintEnumerator cs = new ParentForeignKeyConstraintEnumerator(Table.DataSet, Table); cs.GetNext();) {
+            for (
+                ParentForeignKeyConstraintEnumerator cs = new ParentForeignKeyConstraintEnumerator(
+                    Table.DataSet,
+                    Table
+                );
+                cs.GetNext();
+
+            )
+            {
                 ForeignKeyConstraint constraint = cs.GetForeignKeyConstraint();
                 if (!key.ColumnsEqual(constraint.ParentKey))
                     continue;
@@ -198,47 +240,65 @@ namespace System.Data {
             return true;
         }
 
-        internal override bool CanEnableConstraint() {
+        internal override bool CanEnableConstraint()
+        {
             if (Table.EnforceConstraints)
                 return ConstraintIndex.CheckUnique();
 
             return true;
         }
 
-        internal override bool IsConstraintViolated() {
+        internal override bool IsConstraintViolated()
+        {
             bool result = false;
             Index index = ConstraintIndex;
-            if (index.HasDuplicates) {
-                // 
+            if (index.HasDuplicates)
+            {
+                //
                 object[] uniqueKeys = index.GetUniqueKeyValues();
 
-                for (int i = 0; i < uniqueKeys.Length; i++) {
+                for (int i = 0; i < uniqueKeys.Length; i++)
+                {
                     Range r = index.FindRecords((object[])uniqueKeys[i]);
-                    if (1 < r.Count) {
+                    if (1 < r.Count)
+                    {
                         DataRow[] rows = index.GetRows(r);
-                        string error = ExceptionBuilder.UniqueConstraintViolationText(key.ColumnsReference, (object[])uniqueKeys[i]);
-                        for (int j = 0; j < rows.Length; j++) {
-                            // 
+                        string error = ExceptionBuilder.UniqueConstraintViolationText(
+                            key.ColumnsReference,
+                            (object[])uniqueKeys[i]
+                        );
+                        for (int j = 0; j < rows.Length; j++)
+                        {
+                            //
                             rows[j].RowError = error;
-                            foreach(DataColumn dataColumn in key.ColumnsReference){
+                            foreach (DataColumn dataColumn in key.ColumnsReference)
+                            {
                                 rows[j].SetColumnError(dataColumn, error);
                             }
                         }
                         // SQLBU 20011224: set_RowError for all DataRow with a unique constraint violation
-                        result = true; 
+                        result = true;
                     }
                 }
             }
             return result;
         }
 
-        internal override void CheckConstraint(DataRow row, DataRowAction action) {
-            if (Table.EnforceConstraints &&
-                (action == DataRowAction.Add ||
-                 action == DataRowAction.Change ||
-                 (action == DataRowAction.Rollback && row.tempRecord != -1))) {
-                if (row.HaveValuesChanged(ColumnsReference)) {
-                    if (ConstraintIndex.IsKeyRecordInIndex(row.GetDefaultRecord())) {
+        internal override void CheckConstraint(DataRow row, DataRowAction action)
+        {
+            if (
+                Table.EnforceConstraints
+                && (
+                    action == DataRowAction.Add
+                    || action == DataRowAction.Change
+                    || (action == DataRowAction.Rollback && row.tempRecord != -1)
+                )
+            )
+            {
+                if (row.HaveValuesChanged(ColumnsReference))
+                {
+                    if (ConstraintIndex.IsKeyRecordInIndex(row.GetDefaultRecord()))
+                    {
                         object[] values = row.GetColumnValues(ColumnsReference);
                         throw ExceptionBuilder.ConstraintViolation(ColumnsReference, values);
                     }
@@ -246,21 +306,26 @@ namespace System.Data {
             }
         }
 
-        internal override bool ContainsColumn(DataColumn column) {
+        internal override bool ContainsColumn(DataColumn column)
+        {
             return key.ContainsColumn(column);
         }
 
-        internal override Constraint Clone(DataSet destination) {
+        internal override Constraint Clone(DataSet destination)
+        {
             return Clone(destination, false);
         }
 
-        internal override Constraint Clone(DataSet destination, bool ignorNSforTableLookup) {
+        internal override Constraint Clone(DataSet destination, bool ignorNSforTableLookup)
+        {
             int iDest;
-            if (ignorNSforTableLookup) {
+            if (ignorNSforTableLookup)
+            {
                 iDest = destination.Tables.IndexOf(Table.TableName);
             }
-            else {
-                iDest = destination.Tables.IndexOf(Table.TableName, Table.Namespace, false);// pass false for last param to be backward compatable
+            else
+            {
+                iDest = destination.Tables.IndexOf(Table.TableName, Table.Namespace, false); // pass false for last param to be backward compatable
             }
 
             if (iDest < 0)
@@ -270,7 +335,8 @@ namespace System.Data {
             int keys = ColumnsReference.Length;
             DataColumn[] columns = new DataColumn[keys];
 
-            for (int i = 0; i < keys; i++) {
+            for (int i = 0; i < keys; i++)
+            {
                 DataColumn src = ColumnsReference[i];
                 iDest = table.Columns.IndexOf(src.ColumnName);
                 if (iDest < 0)
@@ -281,18 +347,21 @@ namespace System.Data {
             UniqueConstraint clone = new UniqueConstraint(ConstraintName, columns);
 
             // ...Extended Properties
-            foreach(Object key in this.ExtendedProperties.Keys) {
-               clone.ExtendedProperties[key]=this.ExtendedProperties[key];
+            foreach (Object key in this.ExtendedProperties.Keys)
+            {
+                clone.ExtendedProperties[key] = this.ExtendedProperties[key];
             }
 
             return clone;
         }
 
-        internal UniqueConstraint Clone(DataTable table) {
+        internal UniqueConstraint Clone(DataTable table)
+        {
             int keys = ColumnsReference.Length;
             DataColumn[] columns = new DataColumn[keys];
 
-            for (int i = 0; i < keys; i++) {
+            for (int i = 0; i < keys; i++)
+            {
                 DataColumn src = ColumnsReference[i];
                 int iDest = table.Columns.IndexOf(src.ColumnName);
                 if (iDest < 0)
@@ -303,8 +372,9 @@ namespace System.Data {
             UniqueConstraint clone = new UniqueConstraint(ConstraintName, columns);
 
             // ...Extended Properties
-            foreach(Object key in this.ExtendedProperties.Keys) {
-               clone.ExtendedProperties[key]=this.ExtendedProperties[key];
+            foreach (Object key in this.ExtendedProperties.Keys)
+            {
+                clone.ExtendedProperties[key] = this.ExtendedProperties[key];
             }
 
             return clone;
@@ -314,20 +384,18 @@ namespace System.Data {
         ///    <para>Gets the array of columns that this constraint affects.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.KeyConstraintColumnsDescr),
-        ReadOnly(true)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.KeyConstraintColumnsDescr),
+            ReadOnly(true)
         ]
-        public virtual DataColumn[] Columns {
-            get {
-                return key.ToArray();
-            }
+        public virtual DataColumn[] Columns
+        {
+            get { return key.ToArray(); }
         }
 
-        internal DataColumn[] ColumnsReference {
-            get {
-                return key.ColumnsReference;
-            }
+        internal DataColumn[] ColumnsReference
+        {
+            get { return key.ColumnsReference; }
         }
 
         /// <devdoc>
@@ -335,21 +403,27 @@ namespace System.Data {
         ///       a value indicating whether or not the constraint is on a primary key.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.KeyConstraintIsPrimaryKeyDescr)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.KeyConstraintIsPrimaryKeyDescr)
         ]
-        public bool IsPrimaryKey {
-            get {
-                if (Table == null) {
+        public bool IsPrimaryKey
+        {
+            get
+            {
+                if (Table == null)
+                {
                     return false;
                 }
-                return(this == Table.primaryKey);
+                return (this == Table.primaryKey);
             }
         }
 
-        private void Create(String constraintName, DataColumn[] columns) {
-            for (int i = 0; i < columns.Length; i++) {
-                if (columns[i].Computed) {
+        private void Create(String constraintName, DataColumn[] columns)
+        {
+            for (int i = 0; i < columns.Length; i++)
+            {
+                if (columns[i].Computed)
+                {
                     throw ExceptionBuilder.ExpressionInConstraint(columns[i]);
                 }
             }
@@ -362,43 +436,50 @@ namespace System.Data {
         ///    <para>Compares this constraint to a second to
         ///       determine if both are identical.</para>
         /// </devdoc>
-        public override bool Equals(object key2) {
+        public override bool Equals(object key2)
+        {
             if (!(key2 is UniqueConstraint))
                 return false;
 
             return Key.ColumnsEqual(((UniqueConstraint)key2).Key);
         }
 
-        public override Int32 GetHashCode() {
+        public override Int32 GetHashCode()
+        {
             return base.GetHashCode();
         }
 
-        internal override bool InCollection {
-            set {
+        internal override bool InCollection
+        {
+            set
+            {
                 base.InCollection = value;
-                if (key.ColumnsReference.Length == 1) {
+                if (key.ColumnsReference.Length == 1)
+                {
                     key.ColumnsReference[0].InternalUnique(value);
                 }
             }
         }
 
-        internal DataKey Key {
-            get {
-                return key;
-            }
+        internal DataKey Key
+        {
+            get { return key; }
         }
 
         /// <devdoc>
         ///    <para>Gets the table to which this constraint belongs.</para>
         /// </devdoc>
         [
-        ResCategoryAttribute(Res.DataCategory_Data),
-        ResDescriptionAttribute(Res.ConstraintTableDescr),
-        ReadOnly(true)
+            ResCategoryAttribute(Res.DataCategory_Data),
+            ResDescriptionAttribute(Res.ConstraintTableDescr),
+            ReadOnly(true)
         ]
-        public override DataTable Table {
-            get {
-                if (key.HasValue) {
+        public override DataTable Table
+        {
+            get
+            {
+                if (key.HasValue)
+                {
                     return key.Table;
                 }
                 return null;

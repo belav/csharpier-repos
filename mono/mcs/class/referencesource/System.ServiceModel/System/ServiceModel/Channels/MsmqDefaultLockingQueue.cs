@@ -28,10 +28,16 @@ namespace System.ServiceModel.Channels
             lockMap = new Dictionary<long, TransactionLookupEntry>();
             dtcTransMap = new Dictionary<Guid, List<long>>();
             this.internalStateLock = new object();
-            transactionCompletedHandler = new TransactionCompletedEventHandler(Current_TransactionCompleted);
+            transactionCompletedHandler = new TransactionCompletedEventHandler(
+                Current_TransactionCompleted
+            );
         }
 
-        public override ReceiveResult TryReceive(NativeMsmqMessage message, TimeSpan timeout, MsmqTransactionMode transactionMode)
+        public override ReceiveResult TryReceive(
+            NativeMsmqMessage message,
+            TimeSpan timeout,
+            MsmqTransactionMode transactionMode
+        )
         {
             // ignore the transactionMode
             TimeoutHelper timeoutHelper = new TimeoutHelper(timeout);
@@ -39,7 +45,11 @@ namespace System.ServiceModel.Channels
 
             while (true)
             {
-                int error = PeekLockCore(handle, (MsmqInputMessage)message, timeoutHelper.RemainingTime());
+                int error = PeekLockCore(
+                    handle,
+                    (MsmqInputMessage)message,
+                    timeoutHelper.RemainingTime()
+                );
 
                 if (error == 0)
                 {
@@ -69,7 +79,12 @@ namespace System.ServiceModel.Channels
                     HandleIsStale(handle);
                 }
 
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)), error));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(
+                        SR.GetString(SR.MsmqReceiveError, MsmqError.GetErrorString(error)),
+                        error
+                    )
+                );
             }
         }
 
@@ -94,7 +109,9 @@ namespace System.ServiceModel.Channels
                         return retCode;
                     }
 
-                    int timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(timeoutHelper.RemainingTime());
+                    int timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(
+                        timeoutHelper.RemainingTime()
+                    );
 
                     // no timeout interval if timeout has been set to 0 otherwise a minimum of 100
                     int timeoutIntervalInMilliseconds = (timeoutInMilliseconds == 0) ? 0 : 100;
@@ -104,12 +121,22 @@ namespace System.ServiceModel.Channels
                     {
                         lock (this.receiveLock)
                         {
-                            retCode = UnsafeNativeMethods.MQReceiveMessage(handle.DangerousGetHandle(), timeoutIntervalInMilliseconds,
-                                        UnsafeNativeMethods.MQ_ACTION_RECEIVE, nativePropertiesPointer, null, IntPtr.Zero, IntPtr.Zero, internalTrans);
+                            retCode = UnsafeNativeMethods.MQReceiveMessage(
+                                handle.DangerousGetHandle(),
+                                timeoutIntervalInMilliseconds,
+                                UnsafeNativeMethods.MQ_ACTION_RECEIVE,
+                                nativePropertiesPointer,
+                                null,
+                                IntPtr.Zero,
+                                IntPtr.Zero,
+                                internalTrans
+                            );
                             if (retCode == UnsafeNativeMethods.MQ_ERROR_IO_TIMEOUT)
                             {
                                 // keep trying until we timeout
-                                timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(timeoutHelper.RemainingTime());
+                                timeoutInMilliseconds = TimeoutHelper.ToMilliseconds(
+                                    timeoutHelper.RemainingTime()
+                                );
                                 if (timeoutInMilliseconds == 0)
                                 {
                                     return retCode;
@@ -120,9 +147,9 @@ namespace System.ServiceModel.Channels
                                 BOID boid = new BOID();
                                 internalTrans.Abort(
                                     ref boid, // pboidReason
-                                    0,  // fRetaining
-                                    0   // fAsync
-                                    );
+                                    0, // fRetaining
+                                    0 // fAsync
+                                );
 
                                 return retCode;
                                 // we don't need to release the ITransaction as MSMQ does not increment the ref counter
@@ -142,7 +169,10 @@ namespace System.ServiceModel.Channels
                     {
                         if (!this.lockMap.TryGetValue(message.LookupId.Value, out entry))
                         {
-                            this.lockMap.Add(message.LookupId.Value, new TransactionLookupEntry(message.LookupId.Value, internalTrans));
+                            this.lockMap.Add(
+                                message.LookupId.Value,
+                                new TransactionLookupEntry(message.LookupId.Value, internalTrans)
+                            );
                             receivedMessage = true;
                         }
                         else
@@ -174,33 +204,43 @@ namespace System.ServiceModel.Channels
         {
             TransactionLookupEntry entry;
 
-            if (Transaction.Current != null && Transaction.Current.TransactionInformation.Status != System.Transactions.TransactionStatus.Active)
+            if (
+                Transaction.Current != null
+                && Transaction.Current.TransactionInformation.Status
+                    != System.Transactions.TransactionStatus.Active
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqAmbientTransactionInactive)));
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new MsmqException(SR.GetString(SR.MsmqAmbientTransactionInactive))
+                );
             }
 
             lock (this.internalStateLock)
             {
                 if (!this.lockMap.TryGetValue(lookupId, out entry))
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
+                    );
                 }
 
                 // a failed relock is the same as not having a lock
                 if (entry.MsmqInternalTransaction == null)
                 {
                     this.lockMap.Remove(entry.LookupId);
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId)));
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new MsmqException(SR.GetString(SR.MessageNotInLockedState, lookupId))
+                    );
                 }
             }
 
             if (Transaction.Current == null)
             {
                 entry.MsmqInternalTransaction.Commit(
-                                       0, // fRetaining
-                                       0, // grfTC
-                                       0 // grfRM
-                                       );
+                    0, // fRetaining
+                    0, // grfTC
+                    0 // grfRM
+                );
 
                 lock (this.internalStateLock)
                 {
@@ -218,9 +258,9 @@ namespace System.ServiceModel.Channels
                     BOID boid = new BOID();
                     entry.MsmqInternalTransaction.Abort(
                         ref boid, // pboidReason
-                        0,  // fRetaining
-                        0   // fAsync
-                        );
+                        0, // fRetaining
+                        0 // fAsync
+                    );
                     // null indicates that the associated internal tx was aborted and the message is now
                     // unlocked as far as the native queue manager is concerned
                     entry.MsmqInternalTransaction = null;
@@ -230,14 +270,18 @@ namespace System.ServiceModel.Channels
                         int error = 0;
                         try
                         {
-                            error = base.ReceiveByLookupIdCoreDtcTransacted(handle, lookupId, emptyMessage,
-                                MsmqTransactionMode.CurrentOrThrow, UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT);
+                            error = base.ReceiveByLookupIdCoreDtcTransacted(
+                                handle,
+                                lookupId,
+                                emptyMessage,
+                                MsmqTransactionMode.CurrentOrThrow,
+                                UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT
+                            );
                         }
                         catch (ObjectDisposedException ex)
                         {
                             // ---- with Close
                             MsmqDiagnostics.ExpectedException(ex);
-
                         }
 
                         if (error != 0)
@@ -247,7 +291,9 @@ namespace System.ServiceModel.Channels
                                 HandleIsStale(handle);
                             }
 
-                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new MsmqException(SR.GetString(SR.MsmqCannotReacquireLock), error));
+                            throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                                new MsmqException(SR.GetString(SR.MsmqCannotReacquireLock), error)
+                            );
                         }
                     }
                 }
@@ -255,12 +301,21 @@ namespace System.ServiceModel.Channels
                 List<long> transMsgs;
                 lock (this.internalStateLock)
                 {
-                    if (!this.dtcTransMap.TryGetValue(Transaction.Current.TransactionInformation.DistributedIdentifier, out transMsgs))
+                    if (
+                        !this.dtcTransMap.TryGetValue(
+                            Transaction.Current.TransactionInformation.DistributedIdentifier,
+                            out transMsgs
+                        )
+                    )
                     {
                         transMsgs = new List<long>();
-                        this.dtcTransMap.Add(Transaction.Current.TransactionInformation.DistributedIdentifier, transMsgs);
+                        this.dtcTransMap.Add(
+                            Transaction.Current.TransactionInformation.DistributedIdentifier,
+                            transMsgs
+                        );
                         // only need to attach the tx complete handler once per transaction
-                        Transaction.Current.TransactionCompleted += this.transactionCompletedHandler;
+                        Transaction.Current.TransactionCompleted +=
+                            this.transactionCompletedHandler;
                     }
                     transMsgs.Add(lookupId);
                 }
@@ -287,9 +342,9 @@ namespace System.ServiceModel.Channels
 
                         entry.MsmqInternalTransaction.Abort(
                             ref boid, // pboidReason
-                            0,  // fRetaining
-                            0   // fAsync
-                            );
+                            0, // fRetaining
+                            0 // fAsync
+                        );
                     }
                     this.lockMap.Remove(lookupId);
                 }
@@ -300,18 +355,28 @@ namespace System.ServiceModel.Channels
         {
             e.Transaction.TransactionCompleted -= this.transactionCompletedHandler;
 
-            if (e.Transaction.TransactionInformation.Status == System.Transactions.TransactionStatus.Aborted)
+            if (
+                e.Transaction.TransactionInformation.Status
+                == System.Transactions.TransactionStatus.Aborted
+            )
             {
                 List<long> transMsgs = null;
 
                 lock (this.internalStateLock)
                 {
-                    if (this.dtcTransMap.TryGetValue(e.Transaction.TransactionInformation.DistributedIdentifier, out transMsgs))
+                    if (
+                        this.dtcTransMap.TryGetValue(
+                            e.Transaction.TransactionInformation.DistributedIdentifier,
+                            out transMsgs
+                        )
+                    )
                     {
                         // remove state about all messages locked in this dtc transaction
-                        // if we fail to relock the message, the message will simply go back to the 
+                        // if we fail to relock the message, the message will simply go back to the
                         // queue and any subsequent Complete() calls for the message will throw
-                        this.dtcTransMap.Remove(e.Transaction.TransactionInformation.DistributedIdentifier);
+                        this.dtcTransMap.Remove(
+                            e.Transaction.TransactionInformation.DistributedIdentifier
+                        );
                     }
                 }
 
@@ -324,18 +389,27 @@ namespace System.ServiceModel.Channels
                         // not much we can do in case of failures
                     }
                 }
-
             }
-            else if (e.Transaction.TransactionInformation.Status == System.Transactions.TransactionStatus.Committed)
+            else if (
+                e.Transaction.TransactionInformation.Status
+                == System.Transactions.TransactionStatus.Committed
+            )
             {
                 List<long> transMsgs = null;
 
                 lock (this.internalStateLock)
                 {
-                    if (this.dtcTransMap.TryGetValue(e.Transaction.TransactionInformation.DistributedIdentifier, out transMsgs))
+                    if (
+                        this.dtcTransMap.TryGetValue(
+                            e.Transaction.TransactionInformation.DistributedIdentifier,
+                            out transMsgs
+                        )
+                    )
                     {
                         // remove state about all messages locked in this dtc transaction
-                        this.dtcTransMap.Remove(e.Transaction.TransactionInformation.DistributedIdentifier);
+                        this.dtcTransMap.Remove(
+                            e.Transaction.TransactionInformation.DistributedIdentifier
+                        );
                     }
 
                     if (transMsgs != null)
@@ -387,16 +461,23 @@ namespace System.ServiceModel.Channels
                                     return retCode;
                                 }
 
-                                retCode = UnsafeNativeMethods.MQReceiveMessageByLookupId(handle, lookupId, UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT,
-                                            nativePropertiesPointer, null, IntPtr.Zero, internalTrans);
+                                retCode = UnsafeNativeMethods.MQReceiveMessageByLookupId(
+                                    handle,
+                                    lookupId,
+                                    UnsafeNativeMethods.MQ_LOOKUP_RECEIVE_CURRENT,
+                                    nativePropertiesPointer,
+                                    null,
+                                    IntPtr.Zero,
+                                    internalTrans
+                                );
                                 if (retCode != 0)
                                 {
                                     BOID boid = new BOID();
                                     internalTrans.Abort(
                                         ref boid, // pboidReason
-                                        0,  // fRetaining
-                                        0   // fAsync
-                                        );
+                                        0, // fRetaining
+                                        0 // fAsync
+                                    );
 
                                     return retCode;
                                 }
@@ -446,4 +527,3 @@ namespace System.ServiceModel.Channels
         }
     }
 }
-

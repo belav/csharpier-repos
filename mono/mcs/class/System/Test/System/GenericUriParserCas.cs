@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -27,59 +27,59 @@
 //
 
 
-using NUnit.Framework;
-
 using System;
 using System.IO;
 using System.Reflection;
 using System.Security;
 using System.Security.Permissions;
-
 using MonoTests.System;
+using NUnit.Framework;
 
-namespace MonoCasTests.System {
+namespace MonoCasTests.System
+{
+    [TestFixture]
+    [Category("CAS")]
+    public class GenericUriParserCas
+    {
+        private GenericUriParserTest unit;
 
-	[TestFixture]
-	[Category ("CAS")]
-	public class GenericUriParserCas {
+        [TestFixtureSetUp]
+        public void FixtureSetUp()
+        {
+            unit = new GenericUriParserTest();
+            unit.FixtureSetUp(); // fulltrust
+        }
 
-		private GenericUriParserTest unit;
+        [SetUp]
+        public void SetUp()
+        {
+            if (!SecurityManager.SecurityEnabled)
+                Assert.Ignore("SecurityManager.SecurityEnabled is OFF");
+        }
 
-		[TestFixtureSetUp]
-		public void FixtureSetUp ()
-		{
-			unit = new GenericUriParserTest ();
-			unit.FixtureSetUp (); // fulltrust
-		}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void Deny_Unrestricted()
+        {
+            unit.Generic();
+            unit.Generic_Methods();
+            unit.SecureGeneric();
 
-		[SetUp]
-		public void SetUp ()
-		{
-			if (!SecurityManager.SecurityEnabled)
-				Assert.Ignore ("SecurityManager.SecurityEnabled is OFF");
-		}
+            unit.AllOptions();
+            unit.InvalidOptions();
+        }
 
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void Deny_Unrestricted ()
-		{
-			unit.Generic ();
-			unit.Generic_Methods ();
-			unit.SecureGeneric ();
-
-			unit.AllOptions ();
-			unit.InvalidOptions ();
-		}
-
-		[Test]
-		[PermissionSet (SecurityAction.Deny, Unrestricted = true)]
-		public void LinkDemand_Deny_Unrestricted ()
-		{
-			Type[] types = new Type[1] { typeof (GenericUriParserOptions) };
-			ConstructorInfo ci = typeof (GenericUriParser).GetConstructor (types);
-			Assert.IsNotNull (ci, ".ctor(GenericUriParserOptions)");
-			Assert.IsNotNull (ci.Invoke (new object[1] { GenericUriParserOptions .Default }), "invoke");
-		}
-	}
+        [Test]
+        [PermissionSet(SecurityAction.Deny, Unrestricted = true)]
+        public void LinkDemand_Deny_Unrestricted()
+        {
+            Type[] types = new Type[1] { typeof(GenericUriParserOptions) };
+            ConstructorInfo ci = typeof(GenericUriParser).GetConstructor(types);
+            Assert.IsNotNull(ci, ".ctor(GenericUriParserOptions)");
+            Assert.IsNotNull(
+                ci.Invoke(new object[1] { GenericUriParserOptions.Default }),
+                "invoke"
+            );
+        }
+    }
 }
-

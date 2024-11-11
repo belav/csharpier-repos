@@ -13,7 +13,11 @@ public class MiscMethods
     private int y;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public MiscMethods(int a, int b) {x=a; y=b;}
+    public MiscMethods(int a, int b)
+    {
+        x = a;
+        y = b;
+    }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
     public int Sum(int[] a)
@@ -65,11 +69,11 @@ public class MiscMethods
     {
         Console.WriteLine(s);
     }
- 
+
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public bool InstanceCalls(MiscMethods m)    
+    public bool InstanceCalls(MiscMethods m)
     {
-       return x == m.x && y == m.y;
+        return x == m.x && y == m.y;
     }
 }
 
@@ -79,15 +83,15 @@ public class BringUpTest_InstanceCalls
     const int Fail = -1;
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static bool floatEqual(float x, float y)     
+    public static bool floatEqual(float x, float y)
     {
-        return System.Math.Abs(x-y) <= Single.Epsilon;
+        return System.Math.Abs(x - y) <= Single.Epsilon;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static bool doubleEqual(double x, double y)     
+    public static bool doubleEqual(double x, double y)
     {
-        return System.Math.Abs(x-y) <= Double.Epsilon;
+        return System.Math.Abs(x - y) <= Double.Epsilon;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
@@ -96,10 +100,12 @@ public class BringUpTest_InstanceCalls
         int result = Pass;
 
         int s = m.Sum(a);
-        if (s != 15) result = Fail;
+        if (s != 15)
+            result = Fail;
 
         s = m.Sum(1, 2, 3, 4, 5);
-        if (s != 15) result = Fail;
+        if (s != 15)
+            result = Fail;
 
         return result;
     }
@@ -110,44 +116,55 @@ public class BringUpTest_InstanceCalls
         int result = Pass;
 
         float s = m.Sum(a);
-        if (!floatEqual(s, 15f)) result = Fail;
+        if (!floatEqual(s, 15f))
+            result = Fail;
 
         s = m.Sum(1f, 2f, 3f, 4f, 5f);
-        if (!floatEqual(s, 15f)) result = Fail;
+        if (!floatEqual(s, 15f))
+            result = Fail;
 
         return result;
     }
 
     [MethodImplAttribute(MethodImplOptions.NoInlining)]
-    public static int InstanceCalls(MiscMethods m, double[] a, double v1, double v2, double v3, double v4, double v5)
+    public static int InstanceCalls(
+        MiscMethods m,
+        double[] a,
+        double v1,
+        double v2,
+        double v3,
+        double v4,
+        double v5
+    )
     {
         int result = Pass;
 
         double s1 = m.Sum(a);
         double s2 = m.Sum(v1, v2, v3, v4, v5);
-        if (!doubleEqual(s1, s2)) result = Fail;
+        if (!doubleEqual(s1, s2))
+            result = Fail;
 
         return result;
     }
 
-
     [Fact]
     public static int TestEntryPoint()
     {
-        MiscMethods m = new MiscMethods(10,20);
-        if (!m.InstanceCalls(m)) return Fail;
+        MiscMethods m = new MiscMethods(10, 20);
+        if (!m.InstanceCalls(m))
+            return Fail;
 
         int[] a = new int[5] { 1, 2, 3, 4, 5 };
-        int x = InstanceCalls(m,a);
+        int x = InstanceCalls(m, a);
 
         float[] b = new float[5] { 1f, 2f, 3f, 4f, 5f };
-        int y = InstanceCalls(m,b);
+        int y = InstanceCalls(m, b);
 
         double[] c = new double[5] { 1d, 2d, 3d, 4d, 5d };
-        int z = InstanceCalls(m,c, 1d, 2d, 3d, 4d, 5d);
+        int z = InstanceCalls(m, c, 1d, 2d, 3d, 4d, 5d);
 
         if (x == Pass && y == Pass && z == Pass)
-           return Pass;
-        return Fail;        
+            return Pass;
+        return Fail;
     }
 }

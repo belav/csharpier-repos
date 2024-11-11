@@ -6,12 +6,12 @@
 // @owner=alexgor, deliant, victark
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
-using System.Globalization;
 using System.Diagnostics.CodeAnalysis;
-using System.Collections;
+using System.Globalization;
+using System.Text;
 
 #if Microsoft_CONTROL
 namespace System.Windows.Forms.DataVisualization.Charting
@@ -19,13 +19,18 @@ namespace System.Windows.Forms.DataVisualization.Charting
 namespace System.Web.UI.DataVisualization.Charting
 #endif
 {
-
     /// <summary>
     /// Base class for all chart element collections
     /// </summary>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
     public abstract class ChartElementCollection<T> : Collection<T>, IChartElement, IDisposable
         where T : ChartElement
@@ -51,6 +56,7 @@ namespace System.Web.UI.DataVisualization.Charting
                 Invalidate();
             }
         }
+
         /// <summary>
         /// Gets the CommonElements of the chart.
         /// </summary>
@@ -83,7 +89,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Gets the items as List&lt;T&gt;. Use this property to perform advanced List specific operations (Sorting, etc)
         /// </summary>
-        internal List<T> ItemList 
+        internal List<T> ItemList
         {
             get { return Items as List<T>; }
         }
@@ -121,7 +127,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <summary>
         /// Suspends invalidation
         /// </summary>
-        public virtual void SuspendUpdates() 
+        public virtual void SuspendUpdates()
         {
             _suspendUpdates++;
         }
@@ -131,11 +137,11 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         public virtual void ResumeUpdates()
         {
-            if (_suspendUpdates>0)
+            if (_suspendUpdates > 0)
                 _suspendUpdates--;
 
-            if (_suspendUpdates==0)
-                this.Invalidate(); 
+            if (_suspendUpdates == 0)
+                this.Invalidate();
         }
 
         /// <summary>
@@ -156,19 +162,13 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Deinitializes the specified item.
         /// </summary>
         /// <param name="item">The item.</param>
-        internal virtual void Deinitialize( T item)
-        {
-
-        }
+        internal virtual void Deinitialize(T item) { }
 
         /// <summary>
         /// Initializes the specified item.
         /// </summary>
         /// <param name="item">The item.</param>
-        internal virtual void Initialize(T item)
-        {
-
-        }
+        internal virtual void Initialize(T item) { }
 
         /// <summary>
         /// Removes the element at the specified index of the <see cref="T:System.Collections.ObjectModel.Collection`1"/>.
@@ -228,7 +228,7 @@ namespace System.Web.UI.DataVisualization.Charting
 
         CommonElements IChartElement.Common
         {
-            get{ return this.Common; }
+            get { return this.Common; }
         }
 
         #endregion
@@ -261,7 +261,6 @@ namespace System.Web.UI.DataVisualization.Charting
             GC.SuppressFinalize(this);
         }
         #endregion
-
     }
 
     /// <summary>
@@ -269,13 +268,20 @@ namespace System.Web.UI.DataVisualization.Charting
     /// </summary>
     /// <typeparam name="T"></typeparam>
 #if ASPPERM_35
-	[AspNetHostingPermission(System.Security.Permissions.SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    [AspNetHostingPermission(System.Security.Permissions.SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.InheritanceDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
+    [AspNetHostingPermission(
+        System.Security.Permissions.SecurityAction.LinkDemand,
+        Level = AspNetHostingPermissionLevel.Minimal
+    )]
 #endif
-    public abstract class ChartNamedElementCollection<T> : ChartElementCollection<T>, INameController
+    public abstract class ChartNamedElementCollection<T>
+        : ChartElementCollection<T>,
+            INameController
         where T : ChartNamedElement
     {
-
         #region Fields
         private List<T> _cachedState = null;
         private int _disableDeleteCount = 0;
@@ -316,16 +322,16 @@ namespace System.Web.UI.DataVisualization.Charting
 
                 if (!nameFound && !itemFound)
                     this.Add(value);
-
                 else if (nameFound && !itemFound)
                     this[nameIndex] = value;
-
                 else if (!nameFound && itemFound)
-                    throw new ArgumentException(SR.ExceptionNameAlreadyExistsInCollection(name, this.GetType().Name));
-                    
+                    throw new ArgumentException(
+                        SR.ExceptionNameAlreadyExistsInCollection(name, this.GetType().Name)
+                    );
                 else if (nameFound && itemFound && nameIndex != itemIndex)
-                    throw new ArgumentException(SR.ExceptionNameAlreadyExistsInCollection(name, this.GetType().Name));
-                    
+                    throw new ArgumentException(
+                        SR.ExceptionNameAlreadyExistsInCollection(name, this.GetType().Name)
+                    );
             }
         }
         #endregion
@@ -337,9 +343,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </summary>
         /// <param name="parent">The parent chart element.</param>
         internal ChartNamedElementCollection(IChartElement parent)
-            : base(parent)
-        {
-        }
+            : base(parent) { }
 
         #endregion
 
@@ -361,7 +365,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </returns>
         public virtual bool IsUniqueName(string name)
         {
-            return FindByName(name)==null;
+            return FindByName(name) == null;
         }
 
         /// <summary>
@@ -408,7 +412,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="name">Chart element name.</param>
         internal void VerifyNameReference(string name)
         {
-            if (Chart!=null && !Chart.serializing && !IsNameReferenceValid(name))
+            if (Chart != null && !Chart.serializing && !IsNameReferenceValid(name))
                 throw new ArgumentException(SR.ExceptionNameNotFound(name, this.GetType().Name));
         }
 
@@ -418,9 +422,9 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="name">Chart element name.</param>
         internal bool IsNameReferenceValid(string name)
         {
-            return  String.IsNullOrEmpty(name) || 
-                    name == Constants.NotSetValue ||
-                    IndexOf(name) >= 0;
+            return String.IsNullOrEmpty(name)
+                || name == Constants.NotSetValue
+                || IndexOf(name) >= 0;
         }
 
         /// <summary>
@@ -448,7 +452,9 @@ namespace System.Web.UI.DataVisualization.Charting
             if (String.IsNullOrEmpty(item.Name))
                 item.Name = this.NextUniqueName();
             else if (!IsUniqueName(item.Name))
-                throw new ArgumentException(SR.ExceptionNameAlreadyExistsInCollection(item.Name, this.GetType().Name));
+                throw new ArgumentException(
+                    SR.ExceptionNameAlreadyExistsInCollection(item.Name, this.GetType().Name)
+                );
 
             //If the item references other named references we might need to fix the references
             FixNameReferences(item);
@@ -456,9 +462,11 @@ namespace System.Web.UI.DataVisualization.Charting
             base.InsertItem(index, item);
 
             if (this.Count == 1 && item != null)
-            { 
+            {
                 // First element is added to the list -> fire the NameReferenceChanged event to update all the dependent elements
-                ((INameController)this).OnNameReferenceChanged(new NameReferenceChangedEventArgs(null, item));
+                ((INameController)this).OnNameReferenceChanged(
+                    new NameReferenceChangedEventArgs(null, item)
+                );
             }
         }
 
@@ -472,18 +480,24 @@ namespace System.Web.UI.DataVisualization.Charting
             if (String.IsNullOrEmpty(item.Name))
                 item.Name = this.NextUniqueName();
             else if (!IsUniqueName(item.Name) && IndexOf(item.Name) != index)
-                throw new ArgumentException(SR.ExceptionNameAlreadyExistsInCollection(item.Name, this.GetType().Name));
+                throw new ArgumentException(
+                    SR.ExceptionNameAlreadyExistsInCollection(item.Name, this.GetType().Name)
+                );
 
             //If the item references other named references we might need to fix the references
             FixNameReferences(item);
 
             // Remember the removedElement
-            ChartNamedElement removedElement = index<Count ? this[index] : null;
-            
-            ((INameController)this).OnNameReferenceChanging(new NameReferenceChangedEventArgs(removedElement, item));
+            ChartNamedElement removedElement = index < Count ? this[index] : null;
+
+            ((INameController)this).OnNameReferenceChanging(
+                new NameReferenceChangedEventArgs(removedElement, item)
+            );
             base.SetItem(index, item);
             // Fire the NameReferenceChanged event to update all the dependent elements
-            ((INameController)this).OnNameReferenceChanged(new NameReferenceChangedEventArgs(removedElement, item));
+            ((INameController)this).OnNameReferenceChanged(
+                new NameReferenceChangedEventArgs(removedElement, item)
+            );
         }
 
         /// <summary>
@@ -496,15 +510,19 @@ namespace System.Web.UI.DataVisualization.Charting
             ChartNamedElement removedElement = index < Count ? this[index] : null;
             if (_disableDeleteCount == 0)
             {
-                ((INameController)this).OnNameReferenceChanged(new NameReferenceChangedEventArgs(removedElement, null));
-            }            
+                ((INameController)this).OnNameReferenceChanged(
+                    new NameReferenceChangedEventArgs(removedElement, null)
+                );
+            }
             base.RemoveItem(index);
             if (_disableDeleteCount == 0)
             {
                 // All elements referencing the removed element will be redirected to the first element in collection
                 // Fire the NameReferenceChanged event to update all the dependent elements
                 ChartNamedElement defaultElement = this.Count > 0 ? this[0] : null;
-                ((INameController)this).OnNameReferenceChanged(new NameReferenceChangedEventArgs(removedElement, defaultElement));
+                ((INameController)this).OnNameReferenceChanged(
+                    new NameReferenceChangedEventArgs(removedElement, defaultElement)
+                );
             }
         }
 
@@ -512,7 +530,7 @@ namespace System.Web.UI.DataVisualization.Charting
         /// Fixes the name references of the item.
         /// </summary>
         internal virtual void FixNameReferences(T item)
-        { 
+        {
             //Nothing to fix at the base class...
         }
 
@@ -540,14 +558,8 @@ namespace System.Web.UI.DataVisualization.Charting
         /// </value>
         bool INameController.IsColectionEditing
         {
-            get
-            {
-                return _disableDeleteCount == 0;
-            }
-            set
-            {
-                _disableDeleteCount += value ? 1 : -1;
-            }
+            get { return _disableDeleteCount == 0; }
+            set { _disableDeleteCount += value ? 1 : -1; }
         }
 
         /// <summary>
@@ -582,20 +594,26 @@ namespace System.Web.UI.DataVisualization.Charting
         /// <param name="save">if set to <c>true</c> collection items will be saved.</param>
         /// <param name="changingCallback">The changing callback.</param>
         /// <param name="changedCallback">The changed callback.</param>
-        void INameController.DoSnapshot(bool save, 
-            EventHandler<NameReferenceChangedEventArgs> changingCallback, 
-            EventHandler<NameReferenceChangedEventArgs> changedCallback)
+        void INameController.DoSnapshot(
+            bool save,
+            EventHandler<NameReferenceChangedEventArgs> changingCallback,
+            EventHandler<NameReferenceChangedEventArgs> changedCallback
+        )
         {
             if (save)
             {
                 _cachedState = new List<T>(this);
-                if (changingCallback != null) this.NameReferenceChanging += changingCallback;
-                if (changedCallback  != null) this.NameReferenceChanged += changedCallback;
+                if (changingCallback != null)
+                    this.NameReferenceChanging += changingCallback;
+                if (changedCallback != null)
+                    this.NameReferenceChanged += changedCallback;
             }
             else
             {
-                if (changingCallback != null) this.NameReferenceChanging -= changingCallback;
-                if (changedCallback != null) this.NameReferenceChanged -= changedCallback;
+                if (changingCallback != null)
+                    this.NameReferenceChanging -= changingCallback;
+                if (changedCallback != null)
+                    this.NameReferenceChanged -= changedCallback;
                 _cachedState.Clear();
                 _cachedState = null;
             }
@@ -610,10 +628,6 @@ namespace System.Web.UI.DataVisualization.Charting
             get { return _cachedState; }
         }
 
-
         #endregion
-
-        
     }
-
 }

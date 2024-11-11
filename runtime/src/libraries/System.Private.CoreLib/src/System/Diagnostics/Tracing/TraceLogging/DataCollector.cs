@@ -30,7 +30,7 @@ namespace System.Diagnostics.Tracing
         private GCHandle* pins;
         private byte[]? buffer;
         private int bufferPos;
-        private int bufferNesting;          // We may merge many fields int a single blob.   If we are doing this we increment this.
+        private int bufferNesting; // We may merge many fields int a single blob.   If we are doing this we increment this.
         private bool writingScalars;
 
         internal void Enable(
@@ -39,7 +39,8 @@ namespace System.Diagnostics.Tracing
             EventSource.EventData* datas,
             int dataCount,
             GCHandle* pins,
-            int pinCount)
+            int pinCount
+        )
         {
             this.datasStart = datas;
             this.scratchEnd = scratch + scratchSize;
@@ -300,8 +301,7 @@ namespace System.Diagnostics.Tracing
             do
             {
                 newSize *= 2;
-            }
-            while (newSize < required);
+            } while (newSize < required);
 
             Array.Resize(ref this.buffer, newSize);
         }

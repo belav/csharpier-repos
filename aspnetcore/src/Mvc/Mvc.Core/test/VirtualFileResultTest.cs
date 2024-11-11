@@ -50,7 +50,9 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
     {
         // Arrange
         var webHostFileProvider = Mock.Of<IFileProvider>();
-        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e => e.WebRootFileProvider == webHostFileProvider);
+        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webHostFileProvider
+        );
 
         var result = new VirtualFileResult("some-path", "text/plain");
 
@@ -67,9 +69,14 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
         // Arrange
         var webHostFileProvider = Mock.Of<IFileProvider>();
         var fileProvider = Mock.Of<IFileProvider>();
-        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e => e.WebRootFileProvider == webHostFileProvider);
+        var webHostEnvironment = Mock.Of<IWebHostEnvironment>(e =>
+            e.WebRootFileProvider == webHostFileProvider
+        );
 
-        var result = new VirtualFileResult("some-path", "text/plain") { FileProvider = fileProvider };
+        var result = new VirtualFileResult("some-path", "text/plain")
+        {
+            FileProvider = fileProvider,
+        };
 
         // Act
         var actual = VirtualFileResultExecutor.GetFileProvider(result, webHostEnvironment);
@@ -78,9 +85,17 @@ public class VirtualFileResultTest : VirtualFileResultTestBase
         Assert.Same(fileProvider, actual);
     }
 
-    protected override Task ExecuteAsync(HttpContext httpContext, string path, string contentType, DateTimeOffset? lastModified = null, EntityTagHeaderValue entityTag = null, bool enableRangeProcessing = false)
+    protected override Task ExecuteAsync(
+        HttpContext httpContext,
+        string path,
+        string contentType,
+        DateTimeOffset? lastModified = null,
+        EntityTagHeaderValue entityTag = null,
+        bool enableRangeProcessing = false
+    )
     {
-        var webHostEnvironment = httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
+        var webHostEnvironment =
+            httpContext.RequestServices.GetRequiredService<IWebHostEnvironment>();
         httpContext.RequestServices = new ServiceCollection()
             .AddSingleton(webHostEnvironment)
             .AddTransient<IActionResultExecutor<VirtualFileResult>, VirtualFileResultExecutor>()

@@ -8,19 +8,34 @@ using Xunit;
 namespace System.ComponentModel.Composition.Registration.Tests
 {
     public interface IController { }
+
     public interface IAuthentication { }
+
     public interface IFormsAuthenticationService { }
+
     public interface IMembershipService { }
 
     public class FormsAuthenticationServiceImpl : IFormsAuthenticationService { }
+
     public class MembershipServiceImpl : IMembershipService { }
+
     public class SpecificMembershipServiceImpl : IMembershipService { }
+
     public class HttpDigestAuthentication : IAuthentication { }
 
     public class AmbiguousConstructors
     {
-        public AmbiguousConstructors(string first, int second) { StringArg = first; IntArg = second; }
-        public AmbiguousConstructors(int first, string second) { IntArg = first; StringArg = second; }
+        public AmbiguousConstructors(string first, int second)
+        {
+            StringArg = first;
+            IntArg = second;
+        }
+
+        public AmbiguousConstructors(int first, string second)
+        {
+            IntArg = first;
+            StringArg = second;
+        }
 
         public int IntArg { get; set; }
         public string StringArg { get; set; }
@@ -29,8 +44,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
     public class AmbiguousConstructorsWithAttribute
     {
         [ImportingConstructorAttribute]
-        public AmbiguousConstructorsWithAttribute(string first, int second) { StringArg = first; IntArg = second; }
-        public AmbiguousConstructorsWithAttribute(int first, string second) { IntArg = first; StringArg = second; }
+        public AmbiguousConstructorsWithAttribute(string first, int second)
+        {
+            StringArg = first;
+            IntArg = second;
+        }
+
+        public AmbiguousConstructorsWithAttribute(int first, string second)
+        {
+            IntArg = first;
+            StringArg = second;
+        }
 
         public int IntArg { get; set; }
         public string StringArg { get; set; }
@@ -39,8 +63,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
     public class LongestConstructorWithAttribute
     {
         [ImportingConstructorAttribute]
-        public LongestConstructorWithAttribute(string first, int second) { StringArg = first; IntArg = second; }
-        public LongestConstructorWithAttribute(int first) { IntArg = first; }
+        public LongestConstructorWithAttribute(string first, int second)
+        {
+            StringArg = first;
+            IntArg = second;
+        }
+
+        public LongestConstructorWithAttribute(int first)
+        {
+            IntArg = first;
+        }
 
         public int IntArg { get; set; }
         public string StringArg { get; set; }
@@ -48,14 +80,21 @@ namespace System.ComponentModel.Composition.Registration.Tests
 
     public class LongestConstructorShortestWithAttribute
     {
-        public LongestConstructorShortestWithAttribute(string first, int second) { StringArg = first; IntArg = second; }
+        public LongestConstructorShortestWithAttribute(string first, int second)
+        {
+            StringArg = first;
+            IntArg = second;
+        }
+
         [ImportingConstructorAttribute]
-        public LongestConstructorShortestWithAttribute(int first) { IntArg = first; }
+        public LongestConstructorShortestWithAttribute(int first)
+        {
+            IntArg = first;
+        }
 
         public int IntArg { get; set; }
         public string StringArg { get; set; }
     }
-
 
     public class ConstructorArgs
     {
@@ -78,9 +117,7 @@ namespace System.ComponentModel.Composition.Registration.Tests
             MembershipService = membershipService;
         }
 
-        public AccountController(IAuthentication auth)
-        {
-        }
+        public AccountController(IAuthentication auth) { }
     }
 
     public class HttpRequestValidator
@@ -97,15 +134,16 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public HttpRequestValidator Validator { get; set; }
 
         public ManyConstructorsController() { }
-        public ManyConstructorsController(
-            IFormsAuthenticationService formsService)
+
+        public ManyConstructorsController(IFormsAuthenticationService formsService)
         {
             FormsService = formsService;
         }
 
         public ManyConstructorsController(
             IFormsAuthenticationService formsService,
-            IMembershipService membershipService)
+            IMembershipService membershipService
+        )
         {
             FormsService = formsService;
             MembershipService = MembershipService;
@@ -114,7 +152,8 @@ namespace System.ComponentModel.Composition.Registration.Tests
         public ManyConstructorsController(
             IFormsAuthenticationService formsService,
             IMembershipService membershipService,
-            HttpRequestValidator validator)
+            HttpRequestValidator validator
+        )
         {
             FormsService = formsService;
             MembershipService = membershipService;
@@ -135,17 +174,26 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<HttpRequestValidator>().Export();
             ctx.ForType<ManyConstructorsController>().Export();
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(FormsAuthenticationServiceImpl),
-                typeof(HttpDigestAuthentication),
-                typeof(MembershipServiceImpl),
-                typeof(HttpRequestValidator),
-                typeof(ManyConstructorsController) }, ctx);
+            var catalog = new TypeCatalog(
+                new[]
+                {
+                    typeof(FormsAuthenticationServiceImpl),
+                    typeof(HttpDigestAuthentication),
+                    typeof(MembershipServiceImpl),
+                    typeof(HttpRequestValidator),
+                    typeof(ManyConstructorsController),
+                },
+                ctx
+            );
 
             Assert.True(catalog.Parts.Count() == 5);
 
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            ManyConstructorsController item = container.GetExportedValue<ManyConstructorsController>();
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            ManyConstructorsController item =
+                container.GetExportedValue<ManyConstructorsController>();
 
             Assert.True(item.Validator != null);
             Assert.True(item.FormsService != null);
@@ -160,28 +208,43 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<FormsAuthenticationServiceImpl>().Export<IFormsAuthenticationService>();
             ctx.ForType<HttpDigestAuthentication>().Export<IAuthentication>();
             ctx.ForType<MembershipServiceImpl>().Export<IMembershipService>();
-            ctx.ForType<SpecificMembershipServiceImpl>().Export<IMembershipService>((c) => c.AsContractName("membershipService"));
+            ctx.ForType<SpecificMembershipServiceImpl>()
+                .Export<IMembershipService>((c) => c.AsContractName("membershipService"));
             ctx.ForType<HttpRequestValidator>().Export();
-            ctx.ForType<ManyConstructorsController>().SelectConstructor(null, (pi, import) =>
-           {
-               if (typeof(IMembershipService).IsAssignableFrom(pi.ParameterType))
-               {
-                   import.AsContractName("membershipService");
-               }
-           }).Export();
+            ctx.ForType<ManyConstructorsController>()
+                .SelectConstructor(
+                    null,
+                    (pi, import) =>
+                    {
+                        if (typeof(IMembershipService).IsAssignableFrom(pi.ParameterType))
+                        {
+                            import.AsContractName("membershipService");
+                        }
+                    }
+                )
+                .Export();
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(FormsAuthenticationServiceImpl),
-                typeof(HttpDigestAuthentication),
-                typeof(MembershipServiceImpl),
-                typeof(SpecificMembershipServiceImpl),
-                typeof(HttpRequestValidator),
-                typeof(ManyConstructorsController) }, ctx);
+            var catalog = new TypeCatalog(
+                new[]
+                {
+                    typeof(FormsAuthenticationServiceImpl),
+                    typeof(HttpDigestAuthentication),
+                    typeof(MembershipServiceImpl),
+                    typeof(SpecificMembershipServiceImpl),
+                    typeof(HttpRequestValidator),
+                    typeof(ManyConstructorsController),
+                },
+                ctx
+            );
 
             Assert.True(catalog.Parts.Count() == 6);
 
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            ManyConstructorsController item = container.GetExportedValue<ManyConstructorsController>();
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            ManyConstructorsController item =
+                container.GetExportedValue<ManyConstructorsController>();
 
             Assert.True(item.Validator != null);
             Assert.True(item.FormsService != null);
@@ -198,12 +261,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "IntArg");
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "StringArg");
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(LongestConstructorWithAttribute),
-                typeof(ConstructorArgs) }, ctx);
+            var catalog = new TypeCatalog(
+                new[] { typeof(LongestConstructorWithAttribute), typeof(ConstructorArgs) },
+                ctx
+            );
             Assert.Equal(2, catalog.Parts.Count());
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            LongestConstructorWithAttribute item = container.GetExportedValue<LongestConstructorWithAttribute>();
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            LongestConstructorWithAttribute item =
+                container.GetExportedValue<LongestConstructorWithAttribute>();
             Assert.Equal(10, item.IntArg);
             Assert.Equal("Hello, World", item.StringArg);
         }
@@ -217,12 +285,17 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "IntArg");
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "StringArg");
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(LongestConstructorShortestWithAttribute),
-                typeof(ConstructorArgs) }, ctx);
+            var catalog = new TypeCatalog(
+                new[] { typeof(LongestConstructorShortestWithAttribute), typeof(ConstructorArgs) },
+                ctx
+            );
             Assert.Equal(2, catalog.Parts.Count());
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            LongestConstructorShortestWithAttribute item = container.GetExportedValue<LongestConstructorShortestWithAttribute>();
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            LongestConstructorShortestWithAttribute item =
+                container.GetExportedValue<LongestConstructorShortestWithAttribute>();
             Assert.Equal(10, item.IntArg);
             Assert.Null(item.StringArg);
         }
@@ -236,17 +309,21 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "IntArg");
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "StringArg");
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(AmbiguousConstructorsWithAttribute),
-                typeof(ConstructorArgs) }, ctx);
+            var catalog = new TypeCatalog(
+                new[] { typeof(AmbiguousConstructorsWithAttribute), typeof(ConstructorArgs) },
+                ctx
+            );
             Assert.Equal(2, catalog.Parts.Count());
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            AmbiguousConstructorsWithAttribute item = container.GetExportedValue<AmbiguousConstructorsWithAttribute>();
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            AmbiguousConstructorsWithAttribute item =
+                container.GetExportedValue<AmbiguousConstructorsWithAttribute>();
 
             Assert.Equal(10, item.IntArg);
             Assert.Equal("Hello, World", item.StringArg);
         }
-
 
         [Fact]
         public void AmbiguousConstructor_ShouldFail()
@@ -257,12 +334,18 @@ namespace System.ComponentModel.Composition.Registration.Tests
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "IntArg");
             ctx.ForType<ConstructorArgs>().ExportProperties((m) => m.Name == "StringArg");
 
-            var catalog = new TypeCatalog(new[] {
-                typeof(AmbiguousConstructors),
-                typeof(ConstructorArgs) }, ctx);
+            var catalog = new TypeCatalog(
+                new[] { typeof(AmbiguousConstructors), typeof(ConstructorArgs) },
+                ctx
+            );
             Assert.Equal(2, catalog.Parts.Count());
-            var container = new CompositionContainer(catalog, CompositionOptions.DisableSilentRejection);
-            Assert.Throws<CompositionException>(() => container.GetExportedValue<AmbiguousConstructors>());
+            var container = new CompositionContainer(
+                catalog,
+                CompositionOptions.DisableSilentRejection
+            );
+            Assert.Throws<CompositionException>(
+                () => container.GetExportedValue<AmbiguousConstructors>()
+            );
         }
     }
 }

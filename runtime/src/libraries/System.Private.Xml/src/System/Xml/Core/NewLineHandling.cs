@@ -23,6 +23,6 @@ namespace System.Xml
     {
         Replace = 0,
         Entitize = 1,
-        None = 2
+        None = 2,
     }
 }

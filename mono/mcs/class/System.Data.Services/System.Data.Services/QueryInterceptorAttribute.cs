@@ -28,21 +28,24 @@
 
 using System.Diagnostics;
 
-namespace System.Data.Services {
-	[AttributeUsage (AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
-	public sealed class QueryInterceptorAttribute : Attribute {
-		public QueryInterceptorAttribute (string entitySetName)
-		{
-			if (entitySetName == null)
-				throw new ArgumentNullException ("entitySetName");
+namespace System.Data.Services
+{
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true, Inherited = true)]
+    public sealed class QueryInterceptorAttribute : Attribute
+    {
+        public QueryInterceptorAttribute(string entitySetName)
+        {
+            if (entitySetName == null)
+                throw new ArgumentNullException("entitySetName");
 
-			this.entity_set_name = entitySetName;
-		}
+            this.entity_set_name = entitySetName;
+        }
 
-		private readonly string entity_set_name;
-		public string EntitySetName {
-			[DebuggerStepThrough]
-			get { return entity_set_name; }
-		}
-	}
+        private readonly string entity_set_name;
+        public string EntitySetName
+        {
+            [DebuggerStepThrough]
+            get { return entity_set_name; }
+        }
+    }
 }

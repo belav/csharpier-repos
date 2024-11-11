@@ -11,20 +11,51 @@ namespace System.Reflection.Emit.Tests
         public static IEnumerable<object[]> MakeGenericType_TestData()
         {
             string mscorlibFullName = typeof(int).GetTypeInfo().Assembly.FullName;
-            yield return new object[] { new string[] { "U", "T" }, new Type[] { typeof(string), typeof(int) }, "TestType[[System.String, " + mscorlibFullName + "],[System.Int32, " + mscorlibFullName + "]]" };
+            yield return new object[]
+            {
+                new string[] { "U", "T" },
+                new Type[] { typeof(string), typeof(int) },
+                "TestType[[System.String, "
+                    + mscorlibFullName
+                    + "],[System.Int32, "
+                    + mscorlibFullName
+                    + "]]",
+            };
 
-            string thisAssemblyFullName = typeof(TypeBuilderMakeGenericType).GetTypeInfo().Assembly.FullName;
-            yield return new object[] { new string[] { "U", "T" }, new Type[] { typeof(MakeGenericTypeClass), typeof(MakeGenericTypeInterface) }, "TestType[[System.Reflection.Emit.Tests.MakeGenericTypeClass, " + thisAssemblyFullName + "],[System.Reflection.Emit.Tests.MakeGenericTypeInterface, " + thisAssemblyFullName + "]]" };
+            string thisAssemblyFullName = typeof(TypeBuilderMakeGenericType)
+                .GetTypeInfo()
+                .Assembly.FullName;
+            yield return new object[]
+            {
+                new string[] { "U", "T" },
+                new Type[] { typeof(MakeGenericTypeClass), typeof(MakeGenericTypeInterface) },
+                "TestType[[System.Reflection.Emit.Tests.MakeGenericTypeClass, "
+                    + thisAssemblyFullName
+                    + "],[System.Reflection.Emit.Tests.MakeGenericTypeInterface, "
+                    + thisAssemblyFullName
+                    + "]]",
+            };
 
-            yield return new object[] { new string[] { "U" }, new Type[] { typeof(string) }, "TestType[[System.String, " + mscorlibFullName + "]]" };
+            yield return new object[]
+            {
+                new string[] { "U" },
+                new Type[] { typeof(string) },
+                "TestType[[System.String, " + mscorlibFullName + "]]",
+            };
         }
 
         [Theory]
         [MemberData(nameof(MakeGenericType_TestData))]
-        public void MakeGenericType(string[] genericParams, Type[] typeArguments, string expectedFullName)
+        public void MakeGenericType(
+            string[] genericParams,
+            Type[] typeArguments,
+            string expectedFullName
+        )
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
-            GenericTypeParameterBuilder[] typeGenParam = type.DefineGenericParameters(genericParams);
+            GenericTypeParameterBuilder[] typeGenParam = type.DefineGenericParameters(
+                genericParams
+            );
             Type genericType = type.MakeGenericType(typeArguments);
             Assert.Equal(expectedFullName, genericType.FullName);
         }
@@ -41,7 +72,10 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             type.DefineGenericParameters("T", "U");
-            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () => type.MakeGenericType(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArguments",
+                () => type.MakeGenericType(null)
+            );
         }
 
         [Fact]
@@ -49,10 +83,14 @@ namespace System.Reflection.Emit.Tests
         {
             TypeBuilder type = Helpers.DynamicType(TypeAttributes.NotPublic);
             type.DefineGenericParameters("T", "U");
-            AssertExtensions.Throws<ArgumentNullException>("typeArguments", () => type.MakeGenericType(new Type[] { null, null }));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "typeArguments",
+                () => type.MakeGenericType(new Type[] { null, null })
+            );
         }
     }
 
     public class MakeGenericTypeClass { }
+
     public interface MakeGenericTypeInterface { }
 }

@@ -20,9 +20,13 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             object randomObject = new Object();
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.Equals(randomObject)).Returns(true).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             bool valueReturned = tracer.Equals(randomObject);
@@ -36,9 +40,13 @@ namespace System.Web.Http.Tracing.Tracers
         public void GetHashCode_Calls_Inner()
         {
             // Arrange
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.GetHashCode()).Returns(1).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             int valueReturned = tracer.GetHashCode();
@@ -52,9 +60,13 @@ namespace System.Web.Http.Tracing.Tracers
         public void IsDefaultAttribute_Calls_Inner()
         {
             // Arrange
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.IsDefaultAttribute()).Returns(true).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             bool valueReturned = tracer.IsDefaultAttribute();
@@ -69,9 +81,13 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             object randomObject = new Object();
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.Match(randomObject)).Returns(true).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             bool valueReturned = tracer.Match(randomObject);
@@ -86,9 +102,13 @@ namespace System.Web.Http.Tracing.Tracers
         {
             // Arrange
             object randomObject = new Object();
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.TypeId).Returns(randomObject).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             object valueReturned = tracer.TypeId;
@@ -102,9 +122,13 @@ namespace System.Web.Http.Tracing.Tracers
         public void AllowMultiple_Calls_Inner()
         {
             // Arrange
-            Mock<AuthorizationFilterAttribute> mockAttribute = new Mock<AuthorizationFilterAttribute>();
+            Mock<AuthorizationFilterAttribute> mockAttribute =
+                new Mock<AuthorizationFilterAttribute>();
             mockAttribute.Setup(a => a.AllowMultiple).Returns(true).Verifiable();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttribute.Object, new TestTraceWriter());
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttribute.Object,
+                new TestTraceWriter()
+            );
 
             // Act
             bool valueReturned = tracer.AllowMultiple;
@@ -118,65 +142,144 @@ namespace System.Web.Http.Tracing.Tracers
         public async Task ExecuteAuthorizationFilterAsync_Traces()
         {
             // Arrange
-            Mock<AuthorizationFilterAttribute> mockAttr = new Mock<AuthorizationFilterAttribute>() { CallBase = true };
-            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
+            Mock<AuthorizationFilterAttribute> mockAttr = new Mock<AuthorizationFilterAttribute>()
+            {
+                CallBase = true,
+            };
+            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
+            {
+                CallBase = true,
+            };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
-            mockActionDescriptor.Setup(a => a.GetParameters()).Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(actionDescriptor: mockActionDescriptor.Object);
-            Func<Task<HttpResponseMessage>> continuation = () => Task.FromResult<HttpResponseMessage>(new HttpResponseMessage());
+            mockActionDescriptor
+                .Setup(a => a.GetParameters())
+                .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                actionDescriptor: mockActionDescriptor.Object
+            );
+            Func<Task<HttpResponseMessage>> continuation = () =>
+                Task.FromResult<HttpResponseMessage>(new HttpResponseMessage());
             TestTraceWriter traceWriter = new TestTraceWriter();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttr.Object, traceWriter);
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttr.Object,
+                traceWriter
+            );
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(actionContext.Request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "OnAuthorizationAsync" },
-                new TraceRecord(actionContext.Request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.End,  Operation = "OnAuthorizationAsync" },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.FiltersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "OnAuthorizationAsync",
+                },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.FiltersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.End,
+                    Operation = "OnAuthorizationAsync",
+                },
             };
 
             // Act
             var filter = (IAuthorizationFilter)tracer;
-            await filter.ExecuteAuthorizationFilterAsync(actionContext, CancellationToken.None, continuation);
+            await filter.ExecuteAuthorizationFilterAsync(
+                actionContext,
+                CancellationToken.None,
+                continuation
+            );
 
             // Assert
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
         public async Task ExecuteAuthorizationFilterAsync_Throws_And_Traces_When_Inner_OnException_Throws()
         {
             // Arrange
-            Mock<AuthorizationFilterAttribute> mockAttr = new Mock<AuthorizationFilterAttribute>() { CallBase = true };
+            Mock<AuthorizationFilterAttribute> mockAttr = new Mock<AuthorizationFilterAttribute>()
+            {
+                CallBase = true,
+            };
             InvalidOperationException exception = new InvalidOperationException("test");
             mockAttr.Setup(a => a.OnAuthorization(It.IsAny<HttpActionContext>())).Throws(exception);
-            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>() { CallBase = true };
+            Mock<HttpActionDescriptor> mockActionDescriptor = new Mock<HttpActionDescriptor>()
+            {
+                CallBase = true,
+            };
             mockActionDescriptor.Setup(a => a.ActionName).Returns("test");
-            mockActionDescriptor.Setup(a => a.GetParameters()).Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
-            HttpActionContext actionContext = ContextUtil.CreateActionContext(actionDescriptor: mockActionDescriptor.Object);
-            Func<Task<HttpResponseMessage>> continuation = () => Task.FromResult<HttpResponseMessage>(new HttpResponseMessage());
+            mockActionDescriptor
+                .Setup(a => a.GetParameters())
+                .Returns(new Collection<HttpParameterDescriptor>(new HttpParameterDescriptor[0]));
+            HttpActionContext actionContext = ContextUtil.CreateActionContext(
+                actionDescriptor: mockActionDescriptor.Object
+            );
+            Func<Task<HttpResponseMessage>> continuation = () =>
+                Task.FromResult<HttpResponseMessage>(new HttpResponseMessage());
             TestTraceWriter traceWriter = new TestTraceWriter();
-            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(mockAttr.Object, traceWriter);
+            AuthorizationFilterAttributeTracer tracer = new AuthorizationFilterAttributeTracer(
+                mockAttr.Object,
+                traceWriter
+            );
             TraceRecord[] expectedTraces = new TraceRecord[]
             {
-                new TraceRecord(actionContext.Request, TraceCategories.FiltersCategory, TraceLevel.Info) { Kind = TraceKind.Begin, Operation = "OnAuthorizationAsync" },
-                new TraceRecord(actionContext.Request, TraceCategories.FiltersCategory, TraceLevel.Error) { Kind = TraceKind.End,  Operation = "OnAuthorizationAsync" }
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.FiltersCategory,
+                    TraceLevel.Info
+                )
+                {
+                    Kind = TraceKind.Begin,
+                    Operation = "OnAuthorizationAsync",
+                },
+                new TraceRecord(
+                    actionContext.Request,
+                    TraceCategories.FiltersCategory,
+                    TraceLevel.Error
+                )
+                {
+                    Kind = TraceKind.End,
+                    Operation = "OnAuthorizationAsync",
+                },
             };
 
             // Act
-            Exception thrown =
-                await Assert.ThrowsAsync<InvalidOperationException>(
-                    () => ((IAuthorizationFilter)tracer).ExecuteAuthorizationFilterAsync(actionContext, CancellationToken.None, continuation));
+            Exception thrown = await Assert.ThrowsAsync<InvalidOperationException>(
+                () =>
+                    ((IAuthorizationFilter)tracer).ExecuteAuthorizationFilterAsync(
+                        actionContext,
+                        CancellationToken.None,
+                        continuation
+                    )
+            );
 
             // Assert
             Assert.Same(exception, thrown);
             Assert.Same(exception, traceWriter.Traces[1].Exception);
-            Assert.Equal<TraceRecord>(expectedTraces, traceWriter.Traces, new TraceRecordComparer());
+            Assert.Equal<TraceRecord>(
+                expectedTraces,
+                traceWriter.Traces,
+                new TraceRecordComparer()
+            );
         }
 
         [Fact]
         public void Inner_Property_On_AuthorizationFilterAttributeTracer_Returns_AuthorizationFilterAttribute()
         {
             // Arrange
-            AuthorizationFilterAttribute expectedInner = new Mock<AuthorizationFilterAttribute>().Object;
-            AuthorizationFilterAttributeTracer productUnderTest = new AuthorizationFilterAttributeTracer(expectedInner, new TestTraceWriter());
+            AuthorizationFilterAttribute expectedInner =
+                new Mock<AuthorizationFilterAttribute>().Object;
+            AuthorizationFilterAttributeTracer productUnderTest =
+                new AuthorizationFilterAttributeTracer(expectedInner, new TestTraceWriter());
 
             // Act
             AuthorizationFilterAttribute actualInner = productUnderTest.Inner;
@@ -189,11 +292,15 @@ namespace System.Web.Http.Tracing.Tracers
         public void Decorator_GetInner_On_AuthorizationFilterAttributeTracer_Returns_AuthorizationFilterAttribute()
         {
             // Arrange
-            AuthorizationFilterAttribute expectedInner = new Mock<AuthorizationFilterAttribute>().Object;
-            AuthorizationFilterAttributeTracer productUnderTest = new AuthorizationFilterAttributeTracer(expectedInner, new TestTraceWriter());
+            AuthorizationFilterAttribute expectedInner =
+                new Mock<AuthorizationFilterAttribute>().Object;
+            AuthorizationFilterAttributeTracer productUnderTest =
+                new AuthorizationFilterAttributeTracer(expectedInner, new TestTraceWriter());
 
             // Act
-            AuthorizationFilterAttribute actualInner = Decorator.GetInner(productUnderTest as AuthorizationFilterAttribute);
+            AuthorizationFilterAttribute actualInner = Decorator.GetInner(
+                productUnderTest as AuthorizationFilterAttribute
+            );
 
             // Assert
             Assert.Same(expectedInner, actualInner);

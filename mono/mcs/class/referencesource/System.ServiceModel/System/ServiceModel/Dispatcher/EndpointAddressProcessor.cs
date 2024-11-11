@@ -38,14 +38,8 @@ namespace System.ServiceModel.Dispatcher
 
         internal EndpointAddressProcessor Next
         {
-            get
-            {
-                return this.next;
-            }
-            set
-            {
-                this.next = value;
-            }
+            get { return this.next; }
+            set { this.next = value; }
         }
 
         internal static string GetComparableForm(StringBuilder builder, XmlReader reader)
@@ -78,20 +72,42 @@ namespace System.ServiceModel.Dispatcher
                                 {
                                     continue;
                                 }
-                                if (reader.LocalName == AddressingStrings.IsReferenceParameter && reader.NamespaceURI == Addressing10Strings.Namespace)
+                                if (
+                                    reader.LocalName == AddressingStrings.IsReferenceParameter
+                                    && reader.NamespaceURI == Addressing10Strings.Namespace
+                                )
                                 {
-                                    continue;  // ignore IsReferenceParameter
+                                    continue; // ignore IsReferenceParameter
                                 }
 
                                 string val = reader.Value;
-                                if ((reader.LocalName == TypeLN && reader.NamespaceURI == XsiNs) ||
-                                    (reader.NamespaceURI == SerNs && (reader.LocalName == ItemTypeLN || reader.LocalName == FactoryTypeLN)))
+                                if (
+                                    (reader.LocalName == TypeLN && reader.NamespaceURI == XsiNs)
+                                    || (
+                                        reader.NamespaceURI == SerNs
+                                        && (
+                                            reader.LocalName == ItemTypeLN
+                                            || reader.LocalName == FactoryTypeLN
+                                        )
+                                    )
+                                )
                                 {
-                                    string local, ns;
+                                    string local,
+                                        ns;
                                     XmlUtil.ParseQName(reader, val, out local, out ns);
-                                    val = local + "^" + local.Length.ToString(CultureInfo.InvariantCulture) + ":" + ns + "^" + ns.Length.ToString(CultureInfo.InvariantCulture);
+                                    val =
+                                        local
+                                        + "^"
+                                        + local.Length.ToString(CultureInfo.InvariantCulture)
+                                        + ":"
+                                        + ns
+                                        + "^"
+                                        + ns.Length.ToString(CultureInfo.InvariantCulture);
                                 }
-                                else if (reader.LocalName == XD.UtilityDictionary.IdAttribute.Value && reader.NamespaceURI == XD.UtilityDictionary.Namespace.Value)
+                                else if (
+                                    reader.LocalName == XD.UtilityDictionary.IdAttribute.Value
+                                    && reader.NamespaceURI == XD.UtilityDictionary.Namespace.Value
+                                )
                                 {
                                     // ignore wsu:Id attributes added by security to sign the header
                                     continue;
@@ -118,7 +134,7 @@ namespace System.ServiceModel.Dispatcher
                         }
 
                         if (reader.IsEmptyElement)
-                            builder.Append("></>");  // Should be the same as an empty tag.
+                            builder.Append("></>"); // Should be the same as an empty tag.
                         else
                             builder.Append(">");
                         break;
@@ -185,7 +201,11 @@ namespace System.ServiceModel.Dispatcher
             }
         }
 
-        internal void ProcessHeaders(Message msg, Dictionary<QName, int> qnameLookup, Dictionary<string, HeaderBit[]> headerLookup)
+        internal void ProcessHeaders(
+            Message msg,
+            Dictionary<QName, int> qnameLookup,
+            Dictionary<string, HeaderBit[]> headerLookup
+        )
         {
             string key;
             HeaderBit[] bits;
@@ -195,8 +215,10 @@ namespace System.ServiceModel.Dispatcher
             {
                 qname.name = headers[j].Name;
                 qname.ns = headers[j].Namespace;
-                if (headers.MessageVersion.Addressing == AddressingVersion.WSAddressing10
-                    && !headers[j].IsReferenceParameter)
+                if (
+                    headers.MessageVersion.Addressing == AddressingVersion.WSAddressing10
+                    && !headers[j].IsReferenceParameter
+                )
                 {
                     continue;
                 }
@@ -204,7 +226,7 @@ namespace System.ServiceModel.Dispatcher
                 {
                     builder.Remove(0, builder.Length);
                     XmlReader reader = headers.GetReaderAtHeader(j).ReadSubtree();
-                    reader.Read();  // Needed after call to ReadSubtree
+                    reader.Read(); // Needed after call to ReadSubtree
                     key = GetComparableForm(builder, reader);
 
                     if (headerLookup.TryGetValue(key, out bits))
@@ -278,9 +300,7 @@ namespace System.ServiceModel.Dispatcher
 
         internal class QNameKeyComparer : IComparer<QName>, IEqualityComparer<QName>
         {
-            internal QNameKeyComparer()
-            {
-            }
+            internal QNameKeyComparer() { }
 
             public int Compare(QName x, QName y)
             {

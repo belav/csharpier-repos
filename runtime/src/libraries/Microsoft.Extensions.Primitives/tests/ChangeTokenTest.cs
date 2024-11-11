@@ -45,11 +45,14 @@ namespace Microsoft.Extensions.Primitives
         {
             TestChangeToken token = null;
             var count = 0;
-            ChangeToken.OnChange(() => token = new TestChangeToken(), () =>
-            {
-                count++;
-                throw new Exception();
-            });
+            ChangeToken.OnChange(
+                () => token = new TestChangeToken(),
+                () =>
+                {
+                    count++;
+                    throw new Exception();
+                }
+            );
             Assert.Throws<Exception>(() => token.Changed());
             Assert.Equal(1, count);
             Assert.Throws<Exception>(() => token.Changed());
@@ -75,12 +78,16 @@ namespace Microsoft.Extensions.Primitives
             var count = 0;
             object state = new object();
             object callbackState = null;
-            ChangeToken.OnChange(() => token = new TestChangeToken(), s =>
-            {
-                callbackState = s;
-                count++;
-                throw new Exception();
-            }, state);
+            ChangeToken.OnChange(
+                () => token = new TestChangeToken(),
+                s =>
+                {
+                    callbackState = s;
+                    count++;
+                    throw new Exception();
+                },
+                state
+            );
             Assert.Throws<Exception>(() => token.Changed());
             Assert.Equal(1, count);
             Assert.NotNull(callbackState);
@@ -105,19 +112,26 @@ namespace Microsoft.Extensions.Primitives
             asyncLocal.Value = 1;
 
             // Register Callback
-            cancellationChangeToken.RegisterChangeCallback(al =>
-            {
-                // AsyncLocal not set, when run on clean context
-                // A suppressed flow runs in current context, rather than restoring the captured context
-                Assert.Equal(0, ((AsyncLocal<int>)al).Value);
-                executed = true;
-            }, asyncLocal);
+            cancellationChangeToken.RegisterChangeCallback(
+                al =>
+                {
+                    // AsyncLocal not set, when run on clean context
+                    // A suppressed flow runs in current context, rather than restoring the captured context
+                    Assert.Equal(0, ((AsyncLocal<int>)al).Value);
+                    executed = true;
+                },
+                asyncLocal
+            );
 
             // AsyncLocal should still be set
             Assert.Equal(1, asyncLocal.Value);
 
             // Check AsyncLocal is not restored by running on clean context
-            ExecutionContext.Run(executionContext, cts => ((CancellationTokenSource)cts).Cancel(), cancellationTokenSource);
+            ExecutionContext.Run(
+                executionContext,
+                cts => ((CancellationTokenSource)cts).Cancel(),
+                cancellationTokenSource
+            );
 
             // AsyncLocal should still be set
             Assert.Equal(1, asyncLocal.Value);
@@ -129,10 +143,13 @@ namespace Microsoft.Extensions.Primitives
         {
             var provider = new ResettableChangeTokenProvider();
             var count = 0;
-            var reg = ChangeToken.OnChange(provider.GetChangeToken, () =>
-            {
-                count++;
-            });
+            var reg = ChangeToken.OnChange(
+                provider.GetChangeToken,
+                () =>
+                {
+                    count++;
+                }
+            );
 
             for (int i = 0; i < 5; i++)
             {
@@ -156,11 +173,14 @@ namespace Microsoft.Extensions.Primitives
         {
             var provider = new ResettableChangeTokenProvider();
             var count = 0;
-            var reg = ChangeToken.OnChange<object>(provider.GetChangeToken, state =>
-            {
-                count++;
-            },
-            null);
+            var reg = ChangeToken.OnChange<object>(
+                provider.GetChangeToken,
+                state =>
+                {
+                    count++;
+                },
+                null
+            );
 
             for (int i = 0; i < 5; i++)
             {
@@ -189,7 +209,8 @@ namespace Microsoft.Extensions.Primitives
                 return () =>
                 {
                     var token = provider.GetChangeToken();
-                    if (n++ is 0) provider.Changed();
+                    if (n++ is 0)
+                        provider.Changed();
                     return token;
                 };
             };
@@ -209,12 +230,15 @@ namespace Microsoft.Extensions.Primitives
 
             IDisposable reg = null;
 
-            reg = ChangeToken.OnChange<object>(provider.GetChangeToken, state =>
-            {
-                count++;
-                reg.Dispose();
-            },
-            null);
+            reg = ChangeToken.OnChange<object>(
+                provider.GetChangeToken,
+                state =>
+                {
+                    count++;
+                    reg.Dispose();
+                },
+                null
+            );
 
             provider.Changed();
 
@@ -233,12 +257,15 @@ namespace Microsoft.Extensions.Primitives
 
             IDisposable reg = null;
 
-            reg = ChangeToken.OnChange<object>(provider.GetChangeToken, state =>
-            {
-                count++;
-                reg.Dispose();
-            },
-            null);
+            reg = ChangeToken.OnChange<object>(
+                provider.GetChangeToken,
+                state =>
+                {
+                    count++;
+                    reg.Dispose();
+                },
+                null
+            );
 
             provider.Changed();
 

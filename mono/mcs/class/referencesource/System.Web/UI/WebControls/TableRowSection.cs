@@ -7,17 +7,15 @@
 /*
  */
 
-namespace System.Web.UI.WebControls {
-
+namespace System.Web.UI.WebControls
+{
     using System;
     using System.ComponentModel;
 
-
-    public enum TableRowSection {
-
+    public enum TableRowSection
+    {
         TableHeader = 0,
         TableBody = 1,
-        TableFooter = 2
+        TableFooter = 2,
     }
 }
-

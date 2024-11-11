@@ -41,7 +41,8 @@ public class ViewComponentContext
         IDictionary<string, object?> arguments,
         HtmlEncoder htmlEncoder,
         ViewContext viewContext,
-        TextWriter writer)
+        TextWriter writer
+    )
     {
         ArgumentNullException.ThrowIfNull(viewComponentDescriptor);
         ArgumentNullException.ThrowIfNull(arguments);
@@ -59,7 +60,8 @@ public class ViewComponentContext
             viewContext,
             viewContext.View,
             new ViewDataDictionary<object>(viewContext.ViewData),
-            writer);
+            writer
+        );
     }
 
     /// <summary>

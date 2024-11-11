@@ -76,7 +76,8 @@ public sealed class HeaderPropagationEntryCollection : Collection<HeaderPropagat
     public void Add(
         string inboundHeaderName,
         string outboundHeaderName,
-        Func<HeaderPropagationContext, StringValues> valueFilter)
+        Func<HeaderPropagationContext, StringValues> valueFilter
+    )
     {
         ArgumentNullException.ThrowIfNull(inboundHeaderName);
         ArgumentNullException.ThrowIfNull(outboundHeaderName);

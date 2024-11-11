@@ -13,9 +13,14 @@ namespace Microsoft.CodeAnalysis.Interactive
     /// <summary>
     /// Provides completion items for Interactive Window commands (such as #help, #cls, etc.) at the start of a language buffer.
     /// </summary>
-    internal abstract class AbstractInteractiveWindowCommandCompletionProvider : LSPCompletionProvider
+    internal abstract class AbstractInteractiveWindowCommandCompletionProvider
+        : LSPCompletionProvider
     {
-        protected abstract bool ShouldDisplayCommandCompletions(SyntaxTree tree, int position, CancellationToken cancellationToken);
+        protected abstract bool ShouldDisplayCommandCompletions(
+            SyntaxTree tree,
+            int position,
+            CancellationToken cancellationToken
+        );
         protected abstract string GetCompletionString(string commandName);
 
         public override async Task ProvideCompletionsAsync(CompletionContext context)
@@ -25,7 +30,9 @@ namespace Microsoft.CodeAnalysis.Interactive
             var cancellationToken = context.CancellationToken;
 
             // the provider might be invoked in non-interactive context:
-            var sourceText = await document.GetValueTextAsync(cancellationToken).ConfigureAwait(false);
+            var sourceText = await document
+                .GetValueTextAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (Workspace.TryGetWorkspace(sourceText.Container, out var workspace))
             {
                 if (workspace is InteractiveWindowWorkspace interactiveWorkspace)
@@ -33,7 +40,9 @@ namespace Microsoft.CodeAnalysis.Interactive
                     var window = interactiveWorkspace.Window;
                     if (window != null)
                     {
-                        var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+                        var tree = await document
+                            .GetRequiredSyntaxTreeAsync(cancellationToken)
+                            .ConfigureAwait(false);
 
                         if (ShouldDisplayCommandCompletions(tree, position, cancellationToken))
                         {
@@ -45,8 +54,15 @@ namespace Microsoft.CodeAnalysis.Interactive
                                     foreach (var commandName in command.Names)
                                     {
                                         var completion = GetCompletionString(commandName);
-                                        context.AddItem(CommonCompletionItem.Create(
-                                            completion, displayTextSuffix: "", CompletionItemRules.Default, description: command.Description.ToSymbolDisplayParts(), glyph: Glyph.Intrinsic));
+                                        context.AddItem(
+                                            CommonCompletionItem.Create(
+                                                completion,
+                                                displayTextSuffix: "",
+                                                CompletionItemRules.Default,
+                                                description: command.Description.ToSymbolDisplayParts(),
+                                                glyph: Glyph.Intrinsic
+                                            )
+                                        );
                                     }
                                 }
                             }

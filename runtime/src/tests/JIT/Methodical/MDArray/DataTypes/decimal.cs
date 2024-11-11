@@ -8,50 +8,168 @@ using Xunit;
 public struct VT
 {
     public decimal[,] decimal2darr;
-    public decimal[, ,] decimal3darr;
+    public decimal[,,] decimal3darr;
     public decimal[,] decimal2darr_b;
-    public decimal[, ,] decimal3darr_b;
+    public decimal[,,] decimal3darr_b;
 }
 
 public class CL
 {
-    public decimal[,] decimal2darr = { { 0, -1 }, { 0, 0 } };
-    public decimal[, ,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    public decimal[,] decimal2darr_b = { { 0, 1 }, { 0, 0 } };
-    public decimal[, ,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    public decimal[,] decimal2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    public decimal[,,] decimal3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    public decimal[,] decimal2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    public decimal[,,] decimal3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 }
 
 public class decimalMDArrTest
 {
-
-    static decimal[,] decimal2darr = { { 0, -1 }, { 0, 0 } };
-    static decimal[, ,] decimal3darr = { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-    static decimal[,] decimal2darr_b = { { 0, 1 }, { 0, 0 } };
-    static decimal[, ,] decimal3darr_b = { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+    static decimal[,] decimal2darr =
+    {
+        { 0, -1 },
+        { 0, 0 },
+    };
+    static decimal[,,] decimal3darr =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, -1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
+    static decimal[,] decimal2darr_b =
+    {
+        { 0, 1 },
+        { 0, 0 },
+    };
+    static decimal[,,] decimal3darr_b =
+    {
+        {
+            { 0, 0 },
+        },
+        {
+            { 0, 1 },
+        },
+        {
+            { 0, 0 },
+        },
+    };
 
     static decimal[][,] ja1 = new decimal[2][,];
-    static decimal[][, ,] ja2 = new decimal[2][, ,];
+    static decimal[][,,] ja2 = new decimal[2][,,];
     static decimal[][,] ja1_b = new decimal[2][,];
-    static decimal[][, ,] ja2_b = new decimal[2][, ,];
+    static decimal[][,,] ja2_b = new decimal[2][,,];
 
     [Fact]
     public static int TestEntryPoint()
     {
-
         bool pass = true;
 
         VT vt1;
-        vt1.decimal2darr = new decimal[,] { { 0, -1 }, { 0, 0 } };
-        vt1.decimal3darr = new decimal[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        vt1.decimal2darr_b = new decimal[,] { { 0, 1 }, { 0, 0 } };
-        vt1.decimal3darr_b = new decimal[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        vt1.decimal2darr = new decimal[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        vt1.decimal3darr = new decimal[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        vt1.decimal2darr_b = new decimal[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        vt1.decimal3darr_b = new decimal[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         CL cl1 = new CL();
 
-        ja1[0] = new decimal[,] { { 0, -1 }, { 0, 0 } };
-        ja2[1] = new decimal[,,] { { { 0, 0 } }, { { 0, -1 } }, { { 0, 0 } } };
-        ja1_b[0] = new decimal[,] { { 0, 1 }, { 0, 0 } };
-        ja2_b[1] = new decimal[,,] { { { 0, 0 } }, { { 0, 1 } }, { { 0, 0 } } };
+        ja1[0] = new decimal[,]
+        {
+            { 0, -1 },
+            { 0, 0 },
+        };
+        ja2[1] = new decimal[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, -1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
+        ja1_b[0] = new decimal[,]
+        {
+            { 0, 1 },
+            { 0, 0 },
+        };
+        ja2_b[1] = new decimal[,,]
+        {
+            {
+                { 0, 0 },
+            },
+            {
+                { 0, 1 },
+            },
+            {
+                { 0, 0 },
+            },
+        };
 
         decimal result = -1;
 
@@ -997,8 +1115,5 @@ public class decimalMDArrTest
             Console.WriteLine("PASSED");
             return 100;
         }
-
-
     }
-
 };

@@ -2,24 +2,29 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
+using System.Collections.Generic;
 using System.Diagnostics.Tracing;
 using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Collections.Generic;
+using Microsoft.Diagnostics.NETCore.Client;
 using Microsoft.Diagnostics.Tracing;
 using Tracing.Tests.Common;
-using Microsoft.Diagnostics.NETCore.Client;
 using Xunit;
 
 namespace Tracing.Tests.ProviderValidation
 {
     public sealed class MyEventSource : EventSource
     {
-        private MyEventSource() {}
+        private MyEventSource() { }
+
         public static MyEventSource Log = new MyEventSource();
-        public void MyEvent() { WriteEvent(1, "MyEvent"); }
+
+        public void MyEvent()
+        {
+            WriteEvent(1, "MyEvent");
+        }
     }
 
     public class ProviderValidation
@@ -34,33 +39,45 @@ namespace Tracing.Tests.ProviderValidation
             var providers = new List<EventPipeProvider>()
             {
                 new EventPipeProvider("MyEventSource", EventLevel.Verbose),
-                new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose)
+                new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose),
             };
 
-            bool enableRundown = TestLibrary.Utilities.IsNativeAot? false: true;
+            bool enableRundown = TestLibrary.Utilities.IsNativeAot ? false : true;
 
-            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary.Utilities.IsNativeAot? _expectedEventCountsNativeAOT: _expectedEventCountsCoreCLR;
-            var ret = IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024, enableRundownProvider: enableRundown);
+            Dictionary<string, ExpectedEventCount> _expectedEventCounts = TestLibrary
+                .Utilities
+                .IsNativeAot
+                ? _expectedEventCountsNativeAOT
+                : _expectedEventCountsCoreCLR;
+            var ret = IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024,
+                enableRundownProvider: enableRundown
+            );
             if (ret < 0)
                 return ret;
             else
                 return 100;
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsCoreCLR = new Dictionary<string, ExpectedEventCount>()
-        {
-            { "MyEventSource", new ExpectedEventCount(100_000, 0.30f) },
-            { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
-            { "Microsoft-DotNETCore-SampleProfiler", -1 }
-        };
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsCoreCLR =
+            new Dictionary<string, ExpectedEventCount>()
+            {
+                { "MyEventSource", new ExpectedEventCount(100_000, 0.30f) },
+                { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
+                { "Microsoft-DotNETCore-SampleProfiler", -1 },
+            };
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT = new Dictionary<string, ExpectedEventCount>()
-        {
-            { "MyEventSource", 100_000 },
-            { "Microsoft-DotNETCore-EventPipe", 1 }
-        };
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCountsNativeAOT =
+            new Dictionary<string, ExpectedEventCount>()
+            {
+                { "MyEventSource", 100_000 },
+                { "Microsoft-DotNETCore-EventPipe", 1 },
+            };
 
-        private static Action _eventGeneratingAction = () => 
+        private static Action _eventGeneratingAction = () =>
         {
             for (int i = 0; i < 100_000; i++)
             {

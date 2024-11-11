@@ -20,12 +20,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.EventHookup
     [Trait(Traits.Feature, Traits.Features.EventHookup)]
     public class EventHookupCommandHandlerTests
     {
-        private readonly NamingStylesTestOptionSets _namingOptions = new NamingStylesTestOptionSets(LanguageNames.CSharp);
+        private readonly NamingStylesTestOptionSets _namingOptions = new NamingStylesTestOptionSets(
+            LanguageNames.CSharp
+        );
 
         [WpfFact]
         public async Task HandlerName_EventInThisClass()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -44,7 +47,8 @@ class C
         [WpfFact]
         public async Task HandlerName_EventInThisClass_CamelCaseRule()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -54,7 +58,9 @@ class C
     }
 }";
             using var testState = new EventHookupTestState(
-                EventHookupTestState.GetWorkspaceXml(markup), _namingOptions.MethodNamesAreCamelCase);
+                EventHookupTestState.GetWorkspaceXml(markup),
+                _namingOptions.MethodNamesAreCamelCase
+            );
 
             testState.SendTypeChar('=');
             await testState.WaitForAsynchronousOperationsAsync();
@@ -64,7 +70,8 @@ class C
         [WpfFact]
         public async Task HandlerName_EventOnLocal()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public event System.Action MyEvent;
@@ -88,7 +95,8 @@ class D
         [WpfFact]
         public async Task HandlerName_EventOnFieldOfObject()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public event System.Action MyEvent;
@@ -117,7 +125,8 @@ class E
         [WpfFact]
         public async Task NoHookupOnIntegerPlusEquals()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void Goo()
@@ -134,7 +143,8 @@ class C
             // Make sure that sending the tab works correctly. Note the 4 spaces after the +=
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     void Goo()
@@ -150,7 +160,8 @@ class C
         [WpfFact]
         public async Task HandlerName_DefaultHandlerNameAlreadyExistsWithSameNonStaticState()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public event System.Action MyEvent;
@@ -174,7 +185,8 @@ class C
         [WpfFact]
         public async Task HandlerName_DefaultHandlerNameAlreadyExistsWithDifferentStaticState()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public event System.Action MyEvent;
@@ -198,7 +210,8 @@ class C
         [WpfFact]
         public async Task HandlerName_DefaultHandlerNameAlreadyExistsAsField()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -218,7 +231,8 @@ class C
         [WpfFact]
         public async Task HookupInLambdaInLocalDeclaration()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     public event System.Action MyEvent;
@@ -238,7 +252,8 @@ class C
         [WpfFact]
         public async Task TypingSpacesDoesNotDismiss()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -260,7 +275,8 @@ class C
         [WpfFact]
         public async Task TypingLettersDismisses()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -282,7 +298,8 @@ class C
         [WpfFact]
         public async Task TypingEqualsInSessionDismisses()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -304,7 +321,8 @@ class C
         [WpfFact]
         public async Task CancelViaLeftKey()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -334,7 +352,8 @@ class C
         [WpfFact]
         public async Task CancelViaBackspace()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -361,7 +380,8 @@ class C
         [WpfFact]
         public async Task EventHookupBeforeEventHookup()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -381,7 +401,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -407,7 +428,8 @@ class C
         [WpfFact]
         public async Task EventHookupBeforeComment()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -427,7 +449,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -453,7 +476,8 @@ class C
         [WpfFact]
         public async Task EventHookupInArgument()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -471,7 +495,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -495,7 +520,8 @@ class C
         [WpfFact]
         public async Task HookupInFieldDeclarationSingleLineLambda()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     static event System.Action MyEvent;
@@ -506,7 +532,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     static event System.Action MyEvent;
@@ -523,7 +550,8 @@ class C
         [WpfFact]
         public async Task HookupInFieldDeclarationMultiLineLambda()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     static event System.Action MyEvent;
@@ -537,7 +565,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     static event System.Action MyEvent;
@@ -557,7 +586,8 @@ class C
         [WpfFact]
         public async Task EventHookupInUnformattedPosition1()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -570,7 +600,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -590,7 +621,8 @@ class C
         [WpfFact]
         public async Task EventHookupInUnformattedPosition2()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -615,7 +647,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -641,7 +674,8 @@ class C
         [WpfFact]
         public async Task SessionCancelledByCharacterBeforeEventHookupDeterminationCompleted()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -664,7 +698,8 @@ class C
         [WpfFact]
         public async Task TabBeforeEventHookupDeterminationCompleted()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -684,7 +719,8 @@ class C
             await testState.WaitForAsynchronousOperationsAsync();
             testState.AssertNotShowing();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -705,7 +741,8 @@ class C
         [WpfFact]
         public async Task MoveCaretOutOfSpanBeforeEventHookupDeterminationCompleted()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -728,7 +765,8 @@ class C
         [WpfFact]
         public async Task EnsureNameUniquenessInPartialClasses()
         {
-            var markup = @"
+            var markup =
+                @"
 public partial class C
 {
     event System.Action MyEvent;
@@ -754,7 +792,8 @@ public partial class C
         [WpfFact]
         public async Task EnsureNameUniquenessAgainstBaseClasses()
         {
-            var markup = @"
+            var markup =
+                @"
 class Base
 {
     protected int Console_CancelKeyPress;
@@ -776,7 +815,8 @@ class Program : Base
         [WpfFact]
         public async Task EnsureNameUniquenessAgainstParameters()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -795,7 +835,8 @@ class C
         [WpfFact]
         public async Task DelegateInvokeMethodReturnsNonVoid()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     delegate int D(double d);
@@ -811,7 +852,8 @@ class C
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     delegate int D(double d);
@@ -833,7 +875,8 @@ class C
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/553660")]
         public async Task PlusEqualsInsideComment()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     void M()
@@ -851,7 +894,8 @@ class C
         [WpfFact, WorkItem("http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/951664")]
         public async Task UseInvocationLocationTypeNameWhenEventIsMemberOfBaseType()
         {
-            var markup = @"
+            var markup =
+                @"
 namespace Scenarios
 {
     public class DelegateTest_Generics_NonGenericClass
@@ -874,7 +918,8 @@ class TestClass_T1_S1_4 : Scenarios.DelegateTest_Generics_NonGenericClass
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 namespace Scenarios
 {
     public class DelegateTest_Generics_NonGenericClass
@@ -902,7 +947,8 @@ class TestClass_T1_S1_4 : Scenarios.DelegateTest_Generics_NonGenericClass
         [WpfFact]
         public async Task EventHookupWithQualifiedMethodAccess()
         {
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -911,12 +957,16 @@ class C
         MyEvent +$$
     }
 }";
-            using var testState = EventHookupTestState.CreateTestState(markup, QualifyMethodAccessWithNotification(NotificationOption2.Error));
+            using var testState = EventHookupTestState.CreateTestState(
+                markup,
+                QualifyMethodAccessWithNotification(NotificationOption2.Error)
+            );
             testState.SendTypeChar('=');
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -936,7 +986,8 @@ class C
         [WpfFact]
         public async Task EventHookupRemovesInaccessibleAttributes()
         {
-            var workspaceXml = @"
+            var workspaceXml =
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""A"" CommonReferences=""true"">
         <Document>
@@ -965,12 +1016,16 @@ class D
     </Project>
 </Workspace>";
 
-            using var testState = new EventHookupTestState(XElement.Parse(workspaceXml), options: null);
+            using var testState = new EventHookupTestState(
+                XElement.Parse(workspaceXml),
+                options: null
+            );
             testState.SendTypeChar('=');
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class D
 {
     void M()
@@ -992,7 +1047,8 @@ class D
             // This validates the scenario where the user has stated that they prefer `this.` qualification but the
             // notification level is `Silent`, which means existing violations of the rule won't be flagged but newly
             // generated code will conform appropriately.
-            var markup = @"
+            var markup =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -1001,12 +1057,16 @@ class C
         MyEvent +$$
     }
 }";
-            using var testState = EventHookupTestState.CreateTestState(markup, QualifyMethodAccessWithNotification(NotificationOption2.Silent));
+            using var testState = EventHookupTestState.CreateTestState(
+                markup,
+                QualifyMethodAccessWithNotification(NotificationOption2.Silent)
+            );
             testState.SendTypeChar('=');
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 class C
 {
     event System.Action MyEvent;
@@ -1026,7 +1086,8 @@ class C
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/58474")]
         public async Task EventHookupInTopLevelCode()
         {
-            var markup = @"
+            var markup =
+                @"
 
 System.AppDomain.CurrentDomain.UnhandledException +$$
 
@@ -1036,7 +1097,8 @@ System.AppDomain.CurrentDomain.UnhandledException +$$
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 
 System.AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -1050,7 +1112,8 @@ void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEv
         [WpfFact]
         public async Task EventHookupAtEndOfDocument()
         {
-            var markup = @"
+            var markup =
+                @"
 
 System.AppDomain.CurrentDomain.UnhandledException +$$";
             using var testState = EventHookupTestState.CreateTestState(markup);
@@ -1059,7 +1122,8 @@ System.AppDomain.CurrentDomain.UnhandledException +$$";
             await testState.WaitForAsynchronousOperationsAsync();
             testState.AssertShowing("CurrentDomain_UnhandledException");
 
-            var expectedCode = @"
+            var expectedCode =
+                @"
 
 System.AppDomain.CurrentDomain.UnhandledException +=";
             testState.AssertCodeIs(expectedCode);
@@ -1067,7 +1131,8 @@ System.AppDomain.CurrentDomain.UnhandledException +=";
             testState.SendTab();
             await testState.WaitForAsynchronousOperationsAsync();
 
-            expectedCode = @"
+            expectedCode =
+                @"
 
 System.AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
 
@@ -1081,7 +1146,8 @@ void CurrentDomain_UnhandledException(object sender, System.UnhandledExceptionEv
         [WpfFact, WorkItem("https://github.com/dotnet/roslyn/issues/59935")]
         public async Task HandlerName_EventInGenericClass()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class C
@@ -1105,7 +1171,8 @@ class Generic&lt;T&gt;
         [WpfFact]
         public async Task HandlerName_GlobalAlias01()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class C
@@ -1129,7 +1196,8 @@ class D
         [WpfFact]
         public async Task HandlerName_GlobalAlias02()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class C
@@ -1153,7 +1221,8 @@ class Generic&lt;T&gt;
         [WpfFact]
         public async Task HandlerName_GlobalAlias03()
         {
-            var markup = @"
+            var markup =
+                @"
 class Program
 {
     void Main(string[] args)
@@ -1170,7 +1239,8 @@ class Program
         [WpfFact]
         public async Task HandlerName_InvocationExpression()
         {
-            var markup = @"
+            var markup =
+                @"
 using System;
 
 class C
@@ -1193,7 +1263,12 @@ class C
             testState.AssertShowing("C_MyEvent");
         }
 
-        private static OptionsCollection QualifyMethodAccessWithNotification(NotificationOption2 notification)
-            => new OptionsCollection(LanguageNames.CSharp) { { CodeStyleOptions2.QualifyMethodAccess, true, notification } };
+        private static OptionsCollection QualifyMethodAccessWithNotification(
+            NotificationOption2 notification
+        ) =>
+            new OptionsCollection(LanguageNames.CSharp)
+            {
+                { CodeStyleOptions2.QualifyMethodAccess, true, notification },
+            };
     }
 }

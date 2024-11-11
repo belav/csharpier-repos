@@ -11,7 +11,6 @@ namespace DisabledRuntimeMarshalling.PInvokeAssemblyMarshallingDisabled;
 
 public unsafe class UnmanagedCallersOnly
 {
-
     [Fact]
     public static void UnmanagedCallersOnly_Defined_InDisabledAssembly_WithNonBlittableParameters_Fails()
     {
@@ -20,7 +19,8 @@ public unsafe class UnmanagedCallersOnly
 
         Assert.Throws<InvalidProgramException>(() =>
         {
-            delegate* unmanaged<StructWithShortAndBool, short, bool, bool> cb = &DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged;
+            delegate* unmanaged<StructWithShortAndBool, short, bool, bool> cb =
+                &DisabledRuntimeMarshallingNative.CheckStructWithShortAndBoolManaged;
             cb(new StructWithShortAndBool(s, b), s, b);
         });
     }

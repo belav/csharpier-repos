@@ -4,13 +4,14 @@
 // </copyright>
 //------------------------------------------------------------------------------
 
-namespace System.Web.UI.WebControls.WebParts {
-
+namespace System.Web.UI.WebControls.WebParts
+{
     using System;
     using System.Collections;
     using System.ComponentModel;
 
-    public interface IWebPartTable {
+    public interface IWebPartTable
+    {
         PropertyDescriptorCollection Schema { get; }
         void GetTableData(TableCallback callback);
     }

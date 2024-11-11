@@ -1,28 +1,29 @@
 namespace System.Workflow.ComponentModel.Serialization
 {
     using System;
-    using System.IO;
-    using System.Xml;
-    using System.Diagnostics;
+    using System.CodeDom;
+    using System.CodeDom.Compiler;
     using System.Collections;
     using System.Collections.Generic;
-    using System.Reflection;
-    using System.CodeDom.Compiler;
-    using System.Workflow.ComponentModel.Design;
-    using System.Workflow.ComponentModel.Compiler;
     using System.Collections.Specialized;
-    using System.ComponentModel.Design.Serialization;
-    using System.CodeDom;
     using System.ComponentModel;
-    using System.Globalization;
-    using System.Security.Cryptography;
-    using System.Text.RegularExpressions;
-    using System.Text;
+    using System.ComponentModel.Design.Serialization;
+    using System.Diagnostics;
     using System.Diagnostics.CodeAnalysis;
+    using System.Globalization;
+    using System.IO;
+    using System.Reflection;
+    using System.Security.Cryptography;
+    using System.Text;
+    using System.Text.RegularExpressions;
+    using System.Workflow.ComponentModel.Compiler;
+    using System.Workflow.ComponentModel.Design;
+    using System.Xml;
 
     internal static class StandardXomlKeys
     {
-        internal const string WorkflowXmlNs = "http://schemas.microsoft.com/winfx/2006/xaml/workflow";
+        internal const string WorkflowXmlNs =
+            "http://schemas.microsoft.com/winfx/2006/xaml/workflow";
         internal const string WorkflowPrefix = "wf";
         internal const string CLRNamespaceQualifier = "clr-namespace:";
         internal const string AssemblyNameQualifier = "Assembly=";
@@ -40,18 +41,23 @@ namespace System.Workflow.ComponentModel.Serialization
 
     internal static class WorkflowMarkupSerializationHelpers
     {
-        internal static string[] standardNamespaces = {
-                "System", 
-                "System.Collections", 
-                "System.ComponentModel",
-                "System.ComponentModel.Design",
-                "System.Collections.Generic", 
-                "System.Workflow.ComponentModel",
-                "System.Workflow.Runtime", 
-                "System.Workflow.Activities"
+        internal static string[] standardNamespaces =
+        {
+            "System",
+            "System.Collections",
+            "System.ComponentModel",
+            "System.ComponentModel.Design",
+            "System.Collections.Generic",
+            "System.Workflow.ComponentModel",
+            "System.Workflow.Runtime",
+            "System.Workflow.Activities",
         };
 
-        public static Activity LoadXomlDocument(WorkflowMarkupSerializationManager xomlSerializationManager, XmlReader textReader, string fileName)
+        public static Activity LoadXomlDocument(
+            WorkflowMarkupSerializationManager xomlSerializationManager,
+            XmlReader textReader,
+            string fileName
+        )
         {
             if (xomlSerializationManager == null)
                 throw new ArgumentNullException("xomlSerializationManager");
@@ -60,7 +66,9 @@ namespace System.Workflow.ComponentModel.Serialization
             try
             {
                 xomlSerializationManager.Context.Push(fileName);
-                rootActivity = new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, textReader) as Activity;
+                rootActivity =
+                    new WorkflowMarkupSerializer().Deserialize(xomlSerializationManager, textReader)
+                    as Activity;
             }
             finally
             {
@@ -71,9 +79,18 @@ namespace System.Workflow.ComponentModel.Serialization
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static void ProcessDefTag(WorkflowMarkupSerializationManager serializationManager, XmlReader reader, Activity activity, bool newSegment, string fileName)
+        internal static void ProcessDefTag(
+            WorkflowMarkupSerializationManager serializationManager,
+            XmlReader reader,
+            Activity activity,
+            bool newSegment,
+            string fileName
+        )
         {
-            System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager("System.Workflow.ComponentModel.StringResources", typeof(System.Workflow.ComponentModel.ActivityBind).Assembly);
+            System.Resources.ResourceManager resourceManager = new System.Resources.ResourceManager(
+                "System.Workflow.ComponentModel.StringResources",
+                typeof(System.Workflow.ComponentModel.ActivityBind).Assembly
+            );
             if (reader.NodeType == XmlNodeType.Attribute)
             {
                 switch (reader.LocalName)
@@ -82,7 +99,22 @@ namespace System.Workflow.ComponentModel.Serialization
                         activity.SetValue(WorkflowMarkupSerializer.XClassProperty, reader.Value);
                         break;
                     default:
-                        serializationManager.ReportError(new WorkflowMarkupSerializationException(string.Format(CultureInfo.CurrentCulture, resourceManager.GetString("UnknownDefinitionTag"), new object[] { StandardXomlKeys.Definitions_XmlNs_Prefix, reader.LocalName, StandardXomlKeys.Definitions_XmlNs }), (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1, (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LinePosition : 1));
+                        serializationManager.ReportError(
+                            new WorkflowMarkupSerializationException(
+                                string.Format(
+                                    CultureInfo.CurrentCulture,
+                                    resourceManager.GetString("UnknownDefinitionTag"),
+                                    new object[]
+                                    {
+                                        StandardXomlKeys.Definitions_XmlNs_Prefix,
+                                        reader.LocalName,
+                                        StandardXomlKeys.Definitions_XmlNs,
+                                    }
+                                ),
+                                (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1,
+                                (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LinePosition : 1
+                            )
+                        );
                         break;
                 }
                 return;
@@ -97,102 +129,146 @@ namespace System.Workflow.ComponentModel.Serialization
                 switch (currNodeType)
                 {
                     case XmlNodeType.Element:
+                    {
+                        /*
+                        if (!reader.LocalName.Equals(localName))
                         {
-                            /*
-                            if (!reader.LocalName.Equals(localName))
-                            {
-                                serializationManager.ReportError(new WorkflowMarkupSerializationException(string.Format(resourceManager.GetString("DefnTagsCannotBeNested"), "def", localName, reader.LocalName), reader.LineNumber, reader.LinePosition));
-                                return;
-                            }
-                            */
-
-                            switch (reader.LocalName)
-                            {
-                                case StandardXomlKeys.Definitions_Code_LocalName:
-                                    break;
-
-                                case "Constructor":
-                                default:
-                                    serializationManager.ReportError(new WorkflowMarkupSerializationException(string.Format(CultureInfo.CurrentCulture, resourceManager.GetString("UnknownDefinitionTag"), StandardXomlKeys.Definitions_XmlNs_Prefix, reader.LocalName, StandardXomlKeys.Definitions_XmlNs), (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1, (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LinePosition : 1));
-                                    return;
-                            }
-
-                            // if an empty element do a Reader then exit
-                            if (isEmptyElement)
-                                exitLoop = true;
-                            break;
+                            serializationManager.ReportError(new WorkflowMarkupSerializationException(string.Format(resourceManager.GetString("DefnTagsCannotBeNested"), "def", localName, reader.LocalName), reader.LineNumber, reader.LinePosition));
+                            return;
                         }
+                        */
+
+                        switch (reader.LocalName)
+                        {
+                            case StandardXomlKeys.Definitions_Code_LocalName:
+                                break;
+
+                            case "Constructor":
+                            default:
+                                serializationManager.ReportError(
+                                    new WorkflowMarkupSerializationException(
+                                        string.Format(
+                                            CultureInfo.CurrentCulture,
+                                            resourceManager.GetString("UnknownDefinitionTag"),
+                                            StandardXomlKeys.Definitions_XmlNs_Prefix,
+                                            reader.LocalName,
+                                            StandardXomlKeys.Definitions_XmlNs
+                                        ),
+                                        (reader is IXmlLineInfo)
+                                            ? ((IXmlLineInfo)reader).LineNumber
+                                            : 1,
+                                        (reader is IXmlLineInfo)
+                                            ? ((IXmlLineInfo)reader).LinePosition
+                                            : 1
+                                    )
+                                );
+                                return;
+                        }
+
+                        // if an empty element do a Reader then exit
+                        if (isEmptyElement)
+                            exitLoop = true;
+                        break;
+                    }
 
                     case XmlNodeType.EndElement:
-                        {
-                            //reader.Read();
-                            if (reader.Depth == initialDepth)
-                                exitLoop = true;
-                            break;
-                        }
+                    {
+                        //reader.Read();
+                        if (reader.Depth == initialDepth)
+                            exitLoop = true;
+                        break;
+                    }
 
                     case XmlNodeType.CDATA:
                     case XmlNodeType.Text:
+                    {
+                        //
+
+
+                        int lineNumber =
+                            (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1;
+                        int linePosition =
+                            (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LinePosition : 1;
+                        CodeSnippetTypeMember codeSegment = new CodeSnippetTypeMember(reader.Value);
+                        codeSegment.LinePragma = new CodeLinePragma(
+                            fileName,
+                            Math.Max(lineNumber - 1, 1)
+                        );
+                        codeSegment.UserData[UserDataKeys.CodeSegment_New] = newSegment;
+                        codeSegment.UserData[UserDataKeys.CodeSegment_ColumnNumber] =
+                            linePosition + reader.Name.Length - 1;
+
+                        CodeTypeMemberCollection codeSegments =
+                            activity.GetValue(WorkflowMarkupSerializer.XCodeProperty)
+                            as CodeTypeMemberCollection;
+                        if (codeSegments == null)
                         {
-                            // 
-
-
-                            int lineNumber = (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LineNumber : 1;
-                            int linePosition = (reader is IXmlLineInfo) ? ((IXmlLineInfo)reader).LinePosition : 1;
-                            CodeSnippetTypeMember codeSegment = new CodeSnippetTypeMember(reader.Value);
-                            codeSegment.LinePragma = new CodeLinePragma(fileName, Math.Max(lineNumber - 1, 1));
-                            codeSegment.UserData[UserDataKeys.CodeSegment_New] = newSegment;
-                            codeSegment.UserData[UserDataKeys.CodeSegment_ColumnNumber] = linePosition + reader.Name.Length - 1;
-
-                            CodeTypeMemberCollection codeSegments = activity.GetValue(WorkflowMarkupSerializer.XCodeProperty) as CodeTypeMemberCollection;
-                            if (codeSegments == null)
-                            {
-                                codeSegments = new CodeTypeMemberCollection();
-                                activity.SetValue(WorkflowMarkupSerializer.XCodeProperty, codeSegments);
-                            }
-                            codeSegments.Add(codeSegment);
-                            //}
-                            /*else
-                            {
-                                serializationManager.ReportError( new WorkflowMarkupSerializationException(
-                                                                            string.Format(resourceManager.GetString("IllegalCDataTextScoping"), 
-                                                                                        "def", 
-                                                                                        reader.LocalName,
-                                                                                        (currNodeType == XmlNodeType.CDATA ? resourceManager.GetString("CDATASection") : resourceManager.GetString("TextSection"))), 
-                                                                            reader.LineNumber, 
-                                                                            reader.LinePosition)
-                                                                );
-                            }
-                            */
-                            break;
+                            codeSegments = new CodeTypeMemberCollection();
+                            activity.SetValue(WorkflowMarkupSerializer.XCodeProperty, codeSegments);
                         }
+                        codeSegments.Add(codeSegment);
+                        //}
+                        /*else
+                        {
+                            serializationManager.ReportError( new WorkflowMarkupSerializationException(
+                                                                        string.Format(resourceManager.GetString("IllegalCDataTextScoping"),
+                                                                                    "def",
+                                                                                    reader.LocalName,
+                                                                                    (currNodeType == XmlNodeType.CDATA ? resourceManager.GetString("CDATASection") : resourceManager.GetString("TextSection"))),
+                                                                        reader.LineNumber,
+                                                                        reader.LinePosition)
+                                                            );
+                        }
+                        */
+                        break;
+                    }
                 }
-            }
-            while (!exitLoop && reader.Read());
+            } while (!exitLoop && reader.Read());
         }
 
-        [SuppressMessage("Microsoft.Cryptographic.Standard", "CA5350:MD5CannotBeUsed", 
-            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash.")]
-        internal static CodeNamespaceCollection GenerateCodeFromXomlDocument(Activity rootActivity, string filePath, string rootNamespace, SupportedLanguages language, IServiceProvider serviceProvider)
+        [SuppressMessage(
+            "Microsoft.Cryptographic.Standard",
+            "CA5350:MD5CannotBeUsed",
+            Justification = "Design has been approved.  We are not using MD5 for any security or cryptography purposes but rather as a hash."
+        )]
+        internal static CodeNamespaceCollection GenerateCodeFromXomlDocument(
+            Activity rootActivity,
+            string filePath,
+            string rootNamespace,
+            SupportedLanguages language,
+            IServiceProvider serviceProvider
+        )
         {
             CodeNamespaceCollection codeNamespaces = new CodeNamespaceCollection();
             CodeDomProvider codeDomProvider = CompilerHelpers.GetCodeDomProvider(language);
 
             // generate activity class
-            string activityFullClassName = rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string;
+            string activityFullClassName =
+                rootActivity.GetValue(WorkflowMarkupSerializer.XClassProperty) as string;
             CodeTypeDeclaration activityTypeDeclaration = null;
             if (codeDomProvider != null && !string.IsNullOrEmpty(activityFullClassName))
             {
                 // get class and namespace names
-                string activityNamespaceName, activityClassName;
-                Helpers.GetNamespaceAndClassName(activityFullClassName, out activityNamespaceName, out activityClassName);
+                string activityNamespaceName,
+                    activityClassName;
+                Helpers.GetNamespaceAndClassName(
+                    activityFullClassName,
+                    out activityNamespaceName,
+                    out activityClassName
+                );
                 if (codeDomProvider.IsValidIdentifier(activityClassName))
                 {
-                    DesignerSerializationManager designerSerializationManager = new DesignerSerializationManager(serviceProvider);
+                    DesignerSerializationManager designerSerializationManager =
+                        new DesignerSerializationManager(serviceProvider);
                     using (designerSerializationManager.CreateSession())
                     {
-                        ActivityCodeDomSerializationManager codeDomSerializationManager = new ActivityCodeDomSerializationManager(designerSerializationManager);
-                        TypeCodeDomSerializer typeCodeDomSerializer = codeDomSerializationManager.GetSerializer(rootActivity.GetType(), typeof(TypeCodeDomSerializer)) as TypeCodeDomSerializer;
+                        ActivityCodeDomSerializationManager codeDomSerializationManager =
+                            new ActivityCodeDomSerializationManager(designerSerializationManager);
+                        TypeCodeDomSerializer typeCodeDomSerializer =
+                            codeDomSerializationManager.GetSerializer(
+                                rootActivity.GetType(),
+                                typeof(TypeCodeDomSerializer)
+                            ) as TypeCodeDomSerializer;
 
                         // get all activities
                         bool generateCode = true;
@@ -201,16 +277,24 @@ namespace System.Workflow.ComponentModel.Serialization
                         allActivities.Add(rootActivity);
                         if (rootActivity is CompositeActivity)
                         {
-                            foreach (Activity activity in Helpers.GetNestedActivities((CompositeActivity)rootActivity))
+                            foreach (
+                                Activity activity in Helpers.GetNestedActivities(
+                                    (CompositeActivity)rootActivity
+                                )
+                            )
                             {
                                 if (Helpers.IsActivityLocked(activity))
                                     continue;
-                                if (codeDomProvider.IsValidIdentifier(codeDomSerializationManager.GetName(activity)))
+                                if (
+                                    codeDomProvider.IsValidIdentifier(
+                                        codeDomSerializationManager.GetName(activity)
+                                    )
+                                )
                                 {
                                     // WinOE Bug 14561.  This is to fix a performance problem.  When an activity is added to the activity
                                     // tree at the runtime, it's much faster if the ID of the activity is already set.  The code that
                                     // the CodeDomSerializer generates will add the activity first before it sets the ID for the child
-                                    // activity.  We can change that order by always serializing the children first.  Therefore, we 
+                                    // activity.  We can change that order by always serializing the children first.  Therefore, we
                                     // construct a list where we guarantee that the child will be serialized before its parent.
                                     allActivities.Insert(0, activity);
                                 }
@@ -232,7 +316,11 @@ namespace System.Workflow.ComponentModel.Serialization
                             ((IComponent)rootActivity).Site = dummySite;
 
                             // create activity partial class
-                            activityTypeDeclaration = typeCodeDomSerializer.Serialize(codeDomSerializationManager, rootActivity, allActivities);
+                            activityTypeDeclaration = typeCodeDomSerializer.Serialize(
+                                codeDomSerializationManager,
+                                rootActivity,
+                                allActivities
+                            );
                             activityTypeDeclaration.IsPartial = true;
 
                             // add checksum attribute
@@ -242,15 +330,62 @@ namespace System.Workflow.ComponentModel.Serialization
                                 byte[] checksumBytes = null;
                                 using (StreamReader streamReader = new StreamReader(filePath))
                                     checksumBytes = md5.ComputeHash(streamReader.BaseStream);
-                                string checksum = string.Format(CultureInfo.InvariantCulture, "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}", new object[] { checksumBytes[0].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[1].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[2].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[3].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[4].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[5].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[6].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[7].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[8].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[9].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[10].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[11].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[12].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[13].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[14].ToString("X2", CultureInfo.InvariantCulture), checksumBytes[15].ToString("X2", CultureInfo.InvariantCulture) });
-                                CodeAttributeDeclaration xomlSourceAttribute = new CodeAttributeDeclaration(typeof(WorkflowMarkupSourceAttribute).FullName);
-                                xomlSourceAttribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(filePath)));
-                                xomlSourceAttribute.Arguments.Add(new CodeAttributeArgument(new CodePrimitiveExpression(checksum)));
+                                string checksum = string.Format(
+                                    CultureInfo.InvariantCulture,
+                                    "{0}{1}{2}{3}{4}{5}{6}{7}{8}{9}{10}{11}{12}{13}{14}{15}",
+                                    new object[]
+                                    {
+                                        checksumBytes[0]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[1]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[2]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[3]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[4]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[5]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[6]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[7]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[8]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[9]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[10]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[11]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[12]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[13]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[14]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                        checksumBytes[15]
+                                            .ToString("X2", CultureInfo.InvariantCulture),
+                                    }
+                                );
+                                CodeAttributeDeclaration xomlSourceAttribute =
+                                    new CodeAttributeDeclaration(
+                                        typeof(WorkflowMarkupSourceAttribute).FullName
+                                    );
+                                xomlSourceAttribute.Arguments.Add(
+                                    new CodeAttributeArgument(new CodePrimitiveExpression(filePath))
+                                );
+                                xomlSourceAttribute.Arguments.Add(
+                                    new CodeAttributeArgument(new CodePrimitiveExpression(checksum))
+                                );
                                 activityTypeDeclaration.CustomAttributes.Add(xomlSourceAttribute);
                             }
 
                             // create a new namespace and add activity class into that
-                            CodeNamespace activityCodeNamespace = new CodeNamespace(activityNamespaceName);
+                            CodeNamespace activityCodeNamespace = new CodeNamespace(
+                                activityNamespaceName
+                            );
                             activityCodeNamespace.Types.Add(activityTypeDeclaration);
                             codeNamespaces.Add(activityCodeNamespace);
                         }
@@ -274,14 +409,20 @@ namespace System.Workflow.ComponentModel.Serialization
                         Activity childActivity = (Activity)childActivities.Dequeue();
                         if (childActivity is CompositeActivity)
                         {
-                            foreach (Activity nestedChildActivity in ((CompositeActivity)childActivity).Activities)
+                            foreach (
+                                Activity nestedChildActivity in (
+                                    (CompositeActivity)childActivity
+                                ).Activities
+                            )
                             {
                                 childActivities.Enqueue(nestedChildActivity);
                             }
                         }
 
                         // generate x:Code
-                        CodeTypeMemberCollection codeSegments = childActivity.GetValue(WorkflowMarkupSerializer.XCodeProperty) as CodeTypeMemberCollection;
+                        CodeTypeMemberCollection codeSegments =
+                            childActivity.GetValue(WorkflowMarkupSerializer.XCodeProperty)
+                            as CodeTypeMemberCollection;
                         if (codeSegments != null)
                         {
                             foreach (CodeSnippetTypeMember codeSegmentMember in codeSegments)
@@ -291,7 +432,14 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
 
                 if (language == SupportedLanguages.CSharp)
-                    activityTypeDeclaration.LinePragma = new CodeLinePragma((string)rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty), Math.Max((int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty), 1));
+                    activityTypeDeclaration.LinePragma = new CodeLinePragma(
+                        (string)
+                            rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty),
+                        Math.Max(
+                            (int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty),
+                            1
+                        )
+                    );
 
                 //Now make sure we that we also emit line pragma around the constructor
                 CodeConstructor constructor = null;
@@ -301,7 +449,11 @@ namespace System.Workflow.ComponentModel.Serialization
                     if (constructor == null && typeMember is CodeConstructor)
                         constructor = typeMember as CodeConstructor;
 
-                    if (method == null && typeMember is CodeMemberMethod && typeMember.Name.Equals("InitializeComponent", StringComparison.Ordinal))
+                    if (
+                        method == null
+                        && typeMember is CodeMemberMethod
+                        && typeMember.Name.Equals("InitializeComponent", StringComparison.Ordinal)
+                    )
                         method = typeMember as CodeMemberMethod;
 
                     if (constructor != null && method != null)
@@ -309,14 +461,30 @@ namespace System.Workflow.ComponentModel.Serialization
                 }
 
                 if (constructor != null)
-                    constructor.LinePragma = new CodeLinePragma((string)rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty), Math.Max((int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty), 1));
+                    constructor.LinePragma = new CodeLinePragma(
+                        (string)
+                            rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty),
+                        Math.Max(
+                            (int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty),
+                            1
+                        )
+                    );
 
                 if (method != null && language == SupportedLanguages.CSharp)
-                    method.LinePragma = new CodeLinePragma((string)rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty), Math.Max((int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty), 1));
+                    method.LinePragma = new CodeLinePragma(
+                        (string)
+                            rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty),
+                        Math.Max(
+                            (int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty),
+                            1
+                        )
+                    );
             }
 
             // generate mappings
-            List<String> clrNamespaces = rootActivity.GetValue(WorkflowMarkupSerializer.ClrNamespacesProperty) as List<String>;
+            List<String> clrNamespaces =
+                rootActivity.GetValue(WorkflowMarkupSerializer.ClrNamespacesProperty)
+                as List<String>;
             if (clrNamespaces != null)
             {
                 // foreach namespace add these mappings
@@ -326,8 +494,22 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         if (!String.IsNullOrEmpty(clrNamespace))
                         {
-                            CodeNamespaceImport codeNamespaceImport = new CodeNamespaceImport(clrNamespace);
-                            codeNamespaceImport.LinePragma = new CodeLinePragma((string)rootActivity.GetValue(ActivityCodeDomSerializer.MarkupFileNameProperty), Math.Max((int)rootActivity.GetValue(ActivityMarkupSerializer.StartLineProperty), 1));
+                            CodeNamespaceImport codeNamespaceImport = new CodeNamespaceImport(
+                                clrNamespace
+                            );
+                            codeNamespaceImport.LinePragma = new CodeLinePragma(
+                                (string)
+                                    rootActivity.GetValue(
+                                        ActivityCodeDomSerializer.MarkupFileNameProperty
+                                    ),
+                                Math.Max(
+                                    (int)
+                                        rootActivity.GetValue(
+                                            ActivityMarkupSerializer.StartLineProperty
+                                        ),
+                                    1
+                                )
+                            );
                             codeNamespace.Imports.Add(codeNamespaceImport);
                         }
                     }
@@ -337,7 +519,11 @@ namespace System.Workflow.ComponentModel.Serialization
             return codeNamespaces;
         }
 
-        internal static void FixStandardNamespacesAndRootNamespace(CodeNamespaceCollection codeNamespaces, string rootNS, SupportedLanguages language)
+        internal static void FixStandardNamespacesAndRootNamespace(
+            CodeNamespaceCollection codeNamespaces,
+            string rootNS,
+            SupportedLanguages language
+        )
         {
             // add the standard imports to all the namespaces.
             if (language == SupportedLanguages.VB)
@@ -364,13 +550,17 @@ namespace System.Workflow.ComponentModel.Serialization
                     definedNamespaces.Add(codeNamespaceImport.Namespace, codeNamespaceImport);
 
                 foreach (string standardNS in standardNamespaces)
-                    if (!definedNamespaces.Contains(standardNS))//add only new imports
+                    if (!definedNamespaces.Contains(standardNS)) //add only new imports
                         codeNamespace.Imports.Add(new CodeNamespaceImport(standardNS));
             }
         }
 
         [SuppressMessage("Microsoft.Performance", "CA1811:AvoidUncalledPrivateCode")]
-        internal static void ReapplyRootNamespace(CodeNamespaceCollection codeNamespaces, string rootNS, SupportedLanguages language)
+        internal static void ReapplyRootNamespace(
+            CodeNamespaceCollection codeNamespaces,
+            string rootNS,
+            SupportedLanguages language
+        )
         {
             if (language == SupportedLanguages.VB)
             {
@@ -380,7 +570,9 @@ namespace System.Workflow.ComponentModel.Serialization
                     {
                         if (codeNamespace.Name == null || codeNamespace.Name.Length == 0)
                             codeNamespace.Name = rootNS;
-                        else if (codeNamespace.Name.StartsWith(rootNS + ".", StringComparison.Ordinal))
+                        else if (
+                            codeNamespace.Name.StartsWith(rootNS + ".", StringComparison.Ordinal)
+                        )
                             codeNamespace.Name = rootNS + "." + codeNamespace.Name;
 
                         codeNamespace.UserData.Remove("TruncatedNamespace");
@@ -399,7 +591,9 @@ namespace System.Workflow.ComponentModel.Serialization
             {
                 if (dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty) != null)
                 {
-                    Hashtable dynamicEvents = dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty) as Hashtable;
+                    Hashtable dynamicEvents =
+                        dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty)
+                        as Hashtable;
                     if (dynamicEvents != null && dynamicEvents.ContainsKey(eventName))
                         handler = dynamicEvents[eventName] as string;
                 }
@@ -414,9 +608,13 @@ namespace System.Workflow.ComponentModel.Serialization
             if (!string.IsNullOrEmpty(eventName) && owner != null && dependencyObject != null)
             {
                 if (dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty) == null)
-                    dependencyObject.SetValue(WorkflowMarkupSerializer.EventsProperty, new Hashtable());
+                    dependencyObject.SetValue(
+                        WorkflowMarkupSerializer.EventsProperty,
+                        new Hashtable()
+                    );
 
-                Hashtable dynamicEvents = dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty) as Hashtable;
+                Hashtable dynamicEvents =
+                    dependencyObject.GetValue(WorkflowMarkupSerializer.EventsProperty) as Hashtable;
                 dynamicEvents[eventName] = value;
             }
         }
@@ -424,12 +622,28 @@ namespace System.Workflow.ComponentModel.Serialization
 
         private class DummySite : ISite
         {
-            public IComponent Component { get { return null; } }
-            public IContainer Container { get { return null; } }
-            public bool DesignMode { get { return true; } }
-            public string Name { get { return string.Empty; } set { } }
-            public object GetService(Type type) { return null; }
+            public IComponent Component
+            {
+                get { return null; }
+            }
+            public IContainer Container
+            {
+                get { return null; }
+            }
+            public bool DesignMode
+            {
+                get { return true; }
+            }
+            public string Name
+            {
+                get { return string.Empty; }
+                set { }
+            }
+
+            public object GetService(Type type)
+            {
+                return null;
+            }
         }
     }
-
 }

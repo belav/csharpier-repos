@@ -32,10 +32,10 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     /// Initializes a new instance of <see cref="InferParameterBindingInfoConvention"/>.
     /// </summary>
     /// <param name="modelMetadataProvider">The model metadata provider.</param>
-    public InferParameterBindingInfoConvention(
-        IModelMetadataProvider modelMetadataProvider)
+    public InferParameterBindingInfoConvention(IModelMetadataProvider modelMetadataProvider)
     {
-        _modelMetadataProvider = modelMetadataProvider ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
+        _modelMetadataProvider =
+            modelMetadataProvider ?? throw new ArgumentNullException(nameof(modelMetadataProvider));
     }
 
     /// <summary>
@@ -45,10 +45,13 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
     /// <param name="serviceProviderIsService">The service to determine if the a type is available from the <see cref="IServiceProvider"/>.</param>
     public InferParameterBindingInfoConvention(
         IModelMetadataProvider modelMetadataProvider,
-        IServiceProviderIsService serviceProviderIsService)
+        IServiceProviderIsService serviceProviderIsService
+    )
         : this(modelMetadataProvider)
     {
-        _serviceProviderIsService = serviceProviderIsService ?? throw new ArgumentNullException(nameof(serviceProviderIsService));
+        _serviceProviderIsService =
+            serviceProviderIsService
+            ?? throw new ArgumentNullException(nameof(serviceProviderIsService));
     }
 
     internal bool IsInferForServiceParametersEnabled => _serviceProviderIsService != null;
@@ -89,22 +92,30 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
             }
         }
 
-        var fromBodyParameters = action.Parameters.Where(p => p.BindingInfo!.BindingSource == BindingSource.Body).ToList();
+        var fromBodyParameters = action
+            .Parameters.Where(p => p.BindingInfo!.BindingSource == BindingSource.Body)
+            .ToList();
         if (fromBodyParameters.Count > 1)
         {
-            var parameters = string.Join(Environment.NewLine, fromBodyParameters.Select(p => p.DisplayName));
+            var parameters = string.Join(
+                Environment.NewLine,
+                fromBodyParameters.Select(p => p.DisplayName)
+            );
             var message = Resources.FormatApiController_MultipleBodyParametersFound(
                 action.DisplayName,
                 nameof(FromQueryAttribute),
                 nameof(FromRouteAttribute),
-                nameof(FromBodyAttribute));
+                nameof(FromBodyAttribute)
+            );
 
             message += Environment.NewLine + parameters;
             throw new InvalidOperationException(message);
         }
-        else if (fromBodyParameters.Count == 1 &&
-                  fromBodyParameters[0].BindingInfo!.EmptyBodyBehavior == EmptyBodyBehavior.Default &&
-                  IsOptionalParameter(fromBodyParameters[0]))
+        else if (
+            fromBodyParameters.Count == 1
+            && fromBodyParameters[0].BindingInfo!.EmptyBodyBehavior == EmptyBodyBehavior.Default
+            && IsOptionalParameter(fromBodyParameters[0])
+        )
         {
             fromBodyParameters[0].BindingInfo!.EmptyBodyBehavior = EmptyBodyBehavior.Allow;
         }
@@ -120,7 +131,9 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
                 return BindingSource.Services;
             }
 
-            return metadata.BoundProperties.Any(prop => prop.BindingSource is not null) ? null : BindingSource.Body;
+            return metadata.BoundProperties.Any(prop => prop.BindingSource is not null)
+                ? null
+                : BindingSource.Body;
         }
 
         if (ParameterExistsInAnyRoute(parameter.Action, parameter.ParameterName))
@@ -140,9 +153,11 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
 
         // IServiceProviderIsService will special case IEnumerable<> and always return true
         // so, in this case checking the element type instead
-        if (type.IsConstructedGenericType &&
-            type.GetGenericTypeDefinition() is Type genericDefinition &&
-            genericDefinition == typeof(IEnumerable<>))
+        if (
+            type.IsConstructedGenericType
+            && type.GetGenericTypeDefinition() is Type genericDefinition
+            && genericDefinition == typeof(IEnumerable<>)
+        )
         {
             type = type.GenericTypeArguments[0];
         }
@@ -187,7 +202,8 @@ public class InferParameterBindingInfoConvention : IActionModelConvention
         if (_modelMetadataProvider is ModelMetadataProvider modelMetadataProvider)
         {
             var metadata = modelMetadataProvider.GetMetadataForParameter(parameter.ParameterInfo);
-            return metadata.NullabilityState == NullabilityState.Nullable || metadata.IsNullableValueType;
+            return metadata.NullabilityState == NullabilityState.Nullable
+                || metadata.IsNullableValueType;
         }
         else
         {

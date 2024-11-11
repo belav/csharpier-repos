@@ -15,19 +15,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 {
     internal class DiscardSyntaxClassifier : AbstractSyntaxClassifier
     {
-        public override ImmutableArray<Type> SyntaxNodeTypes { get; } = ImmutableArray.Create(
-            typeof(DiscardDesignationSyntax),
-            typeof(DiscardPatternSyntax),
-            typeof(ParameterSyntax),
-            typeof(IdentifierNameSyntax));
+        public override ImmutableArray<Type> SyntaxNodeTypes { get; } =
+            ImmutableArray.Create(
+                typeof(DiscardDesignationSyntax),
+                typeof(DiscardPatternSyntax),
+                typeof(ParameterSyntax),
+                typeof(IdentifierNameSyntax)
+            );
 
         public override void AddClassifications(
-           SyntaxNode syntax,
-           TextSpan textSpan,
-           SemanticModel semanticModel,
-           ClassificationOptions options,
-           SegmentedList<ClassifiedSpan> result,
-           CancellationToken cancellationToken)
+            SyntaxNode syntax,
+            TextSpan textSpan,
+            SemanticModel semanticModel,
+            ClassificationOptions options,
+            SegmentedList<ClassifiedSpan> result,
+            CancellationToken cancellationToken
+        )
         {
             if (syntax.Kind() is SyntaxKind.DiscardDesignation or SyntaxKind.DiscardPattern)
             {
@@ -42,7 +45,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 
                     if (symbol?.IsDiscard == true)
                     {
-                        result.Add(new ClassifiedSpan(parameter.Identifier.Span, ClassificationTypeNames.Keyword));
+                        result.Add(
+                            new ClassifiedSpan(
+                                parameter.Identifier.Span,
+                                ClassificationTypeNames.Keyword
+                            )
+                        );
                     }
 
                     break;
@@ -52,7 +60,9 @@ namespace Microsoft.CodeAnalysis.CSharp.Classification.Classifiers
 
                     if (symbolInfo.Symbol?.Kind == SymbolKind.Discard)
                     {
-                        result.Add(new ClassifiedSpan(syntax.Span, ClassificationTypeNames.Keyword));
+                        result.Add(
+                            new ClassifiedSpan(syntax.Span, ClassificationTypeNames.Keyword)
+                        );
                     }
 
                     break;

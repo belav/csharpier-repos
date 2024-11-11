@@ -20,7 +20,12 @@ internal interface ICodeAnalysisDiagnosticAnalyzerService : IWorkspaceService
     /// <summary>
     /// Runs all the applicable analyzers on the given project or entire solution if <paramref name="projectId"/> is null.
     /// </summary>
-    Task RunAnalysisAsync(Solution solution, ProjectId? projectId, Action<Project> onAfterProjectAnalyzed, CancellationToken cancellationToken);
+    Task RunAnalysisAsync(
+        Solution solution,
+        ProjectId? projectId,
+        Action<Project> onAfterProjectAnalyzed,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Returns true if <see cref="RunAnalysisAsync(Solution, ProjectId?, Action{Project}, CancellationToken)"/> was invoked
@@ -39,7 +44,10 @@ internal interface ICodeAnalysisDiagnosticAnalyzerService : IWorkspaceService
     /// <remarks>
     /// Note that the returned diagnostics may not be from the latest document snapshot.
     /// </remarks>
-    Task<ImmutableArray<DiagnosticData>> GetLastComputedDocumentDiagnosticsAsync(DocumentId documentId, CancellationToken cancellationToken);
+    Task<ImmutableArray<DiagnosticData>> GetLastComputedDocumentDiagnosticsAsync(
+        DocumentId documentId,
+        CancellationToken cancellationToken
+    );
 
     /// <summary>
     /// Returns analyzer diagnostics without any document location reported on the given <paramref name="projectId"/>> from the last
@@ -49,5 +57,8 @@ internal interface ICodeAnalysisDiagnosticAnalyzerService : IWorkspaceService
     /// <remarks>
     /// Note that the returned diagnostics may not be from the latest project snapshot.
     /// </remarks>
-    Task<ImmutableArray<DiagnosticData>> GetLastComputedProjectDiagnosticsAsync(ProjectId projectId, CancellationToken cancellationToken);
+    Task<ImmutableArray<DiagnosticData>> GetLastComputedProjectDiagnosticsAsync(
+        ProjectId projectId,
+        CancellationToken cancellationToken
+    );
 }

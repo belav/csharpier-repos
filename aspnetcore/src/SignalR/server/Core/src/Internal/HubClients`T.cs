@@ -3,7 +3,8 @@
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal sealed class HubClients<THub, T> : IHubClients<T> where THub : Hub
+internal sealed class HubClients<THub, T> : IHubClients<T>
+    where THub : Hub
 {
     private readonly HubLifetimeManager<THub> _lifetimeManager;
 
@@ -17,17 +18,23 @@ internal sealed class HubClients<THub, T> : IHubClients<T> where THub : Hub
 
     public T AllExcept(IReadOnlyList<string> excludedConnectionIds)
     {
-        return TypedClientBuilder<T>.Build(new AllClientsExceptProxy<THub>(_lifetimeManager, excludedConnectionIds));
+        return TypedClientBuilder<T>.Build(
+            new AllClientsExceptProxy<THub>(_lifetimeManager, excludedConnectionIds)
+        );
     }
 
     public T Client(string connectionId)
     {
-        return TypedClientBuilder<T>.Build(new SingleClientProxy<THub>(_lifetimeManager, connectionId));
+        return TypedClientBuilder<T>.Build(
+            new SingleClientProxy<THub>(_lifetimeManager, connectionId)
+        );
     }
 
     public T Clients(IReadOnlyList<string> connectionIds)
     {
-        return TypedClientBuilder<T>.Build(new MultipleClientProxy<THub>(_lifetimeManager, connectionIds));
+        return TypedClientBuilder<T>.Build(
+            new MultipleClientProxy<THub>(_lifetimeManager, connectionIds)
+        );
     }
 
     public T Group(string groupName)
@@ -37,12 +44,16 @@ internal sealed class HubClients<THub, T> : IHubClients<T> where THub : Hub
 
     public T GroupExcept(string groupName, IReadOnlyList<string> excludedConnectionIds)
     {
-        return TypedClientBuilder<T>.Build(new GroupExceptProxy<THub>(_lifetimeManager, groupName, excludedConnectionIds));
+        return TypedClientBuilder<T>.Build(
+            new GroupExceptProxy<THub>(_lifetimeManager, groupName, excludedConnectionIds)
+        );
     }
 
     public T Groups(IReadOnlyList<string> groupNames)
     {
-        return TypedClientBuilder<T>.Build(new MultipleGroupProxy<THub>(_lifetimeManager, groupNames));
+        return TypedClientBuilder<T>.Build(
+            new MultipleGroupProxy<THub>(_lifetimeManager, groupNames)
+        );
     }
 
     public T User(string userId)

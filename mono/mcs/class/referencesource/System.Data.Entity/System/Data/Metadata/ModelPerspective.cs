@@ -24,9 +24,7 @@ namespace System.Data.Metadata.Edm
         /// </summary>
         /// <param name="metadataWorkspace">runtime metadata container</param>
         internal ModelPerspective(MetadataWorkspace metadataWorkspace)
-            : base(metadataWorkspace, DataSpace.CSpace)
-        {
-        }
+            : base(metadataWorkspace, DataSpace.CSpace) { }
         #endregion
 
         #region Methods
@@ -37,16 +35,29 @@ namespace System.Data.Metadata.Edm
         /// <param name="ignoreCase">true for case-insensitive lookup</param>
         /// <param name="typeUsage">The type usage object to return</param>
         /// <returns>True if the retrieval succeeded</returns>
-        internal override bool TryGetTypeByName(string fullName, bool ignoreCase, out TypeUsage typeUsage )
+        internal override bool TryGetTypeByName(
+            string fullName,
+            bool ignoreCase,
+            out TypeUsage typeUsage
+        )
         {
             EntityUtil.CheckStringArgument(fullName, "fullName");
             typeUsage = null;
             EdmType edmType = null;
-            if (this.MetadataWorkspace.TryGetItem<EdmType>(fullName, ignoreCase, this.TargetDataspace, out edmType))
+            if (
+                this.MetadataWorkspace.TryGetItem<EdmType>(
+                    fullName,
+                    ignoreCase,
+                    this.TargetDataspace,
+                    out edmType
+                )
+            )
             {
                 if (Helper.IsPrimitiveType(edmType))
                 {
-                    typeUsage = this.MetadataWorkspace.GetCanonicalModelTypeUsage(((PrimitiveType)edmType).PrimitiveTypeKind);
+                    typeUsage = this.MetadataWorkspace.GetCanonicalModelTypeUsage(
+                        ((PrimitiveType)edmType).PrimitiveTypeKind
+                    );
                 }
                 else
                 {

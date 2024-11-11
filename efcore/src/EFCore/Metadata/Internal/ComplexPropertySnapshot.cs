@@ -22,7 +22,8 @@ public class ComplexPropertySnapshot
         PropertiesSnapshot? properties,
         List<InternalIndexBuilder>? indexes,
         List<(InternalKeyBuilder, ConfigurationSource?)>? keys,
-        List<RelationshipSnapshot>? relationships)
+        List<RelationshipSnapshot>? relationships
+    )
     {
         ComplexPropertyBuilder = complexPropertyBuilder;
         ComplexTypeBuilder = ComplexProperty.ComplexType.Builder;
@@ -43,8 +44,16 @@ public class ComplexPropertySnapshot
         }
     }
 
-    private InternalComplexPropertyBuilder ComplexPropertyBuilder { [DebuggerStepThrough] get; }
-    private InternalComplexTypeBuilder ComplexTypeBuilder { [DebuggerStepThrough] get; }
+    private InternalComplexPropertyBuilder ComplexPropertyBuilder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
+    private InternalComplexTypeBuilder ComplexTypeBuilder
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -52,13 +61,15 @@ public class ComplexPropertySnapshot
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ComplexProperty ComplexProperty
-        => ComplexPropertyBuilder.Metadata;
+    public virtual ComplexProperty ComplexProperty => ComplexPropertyBuilder.Metadata;
 
-    private ComplexType ComplexType
-        => ComplexTypeBuilder.Metadata;
+    private ComplexType ComplexType => ComplexTypeBuilder.Metadata;
 
-    private PropertiesSnapshot Properties { [DebuggerStepThrough] get; }
+    private PropertiesSnapshot Properties
+    {
+        [DebuggerStepThrough]
+        get;
+    }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -76,11 +87,18 @@ public class ComplexPropertySnapshot
 
         InternalComplexPropertyBuilder? complexPropertyBuilder;
         var configurationSource = ComplexProperty.GetConfigurationSource();
-        if (newProperty != null
-            && (newProperty.GetConfigurationSource().Overrides(configurationSource)
-                || (ComplexProperty.ClrType == newProperty.ClrType
+        if (
+            newProperty != null
+            && (
+                newProperty.GetConfigurationSource().Overrides(configurationSource)
+                || (
+                    ComplexProperty.ClrType == newProperty.ClrType
                     && ComplexProperty.Name == newProperty.Name
-                    && ComplexProperty.GetIdentifyingMemberInfo() == newProperty.GetIdentifyingMemberInfo())))
+                    && ComplexProperty.GetIdentifyingMemberInfo()
+                        == newProperty.GetIdentifyingMemberInfo()
+                )
+            )
+        )
         {
             complexPropertyBuilder = newProperty.Builder;
             newProperty.UpdateConfigurationSource(configurationSource);
@@ -93,7 +111,8 @@ public class ComplexPropertySnapshot
                     ComplexProperty.Name,
                     ComplexType.ClrType,
                     ComplexProperty.IsCollection,
-                    configurationSource)
+                    configurationSource
+                )
                 : typeBaseBuilder.ComplexProperty(
                     ComplexProperty.ClrType,
                     ComplexProperty.Name,
@@ -101,7 +120,8 @@ public class ComplexPropertySnapshot
                     ComplexType.Name,
                     ComplexType.ClrType,
                     ComplexProperty.IsCollection,
-                    configurationSource);
+                    configurationSource
+                );
 
             if (complexPropertyBuilder is null)
             {
@@ -112,34 +132,53 @@ public class ComplexPropertySnapshot
         return MergeConfiguration(complexPropertyBuilder);
     }
 
-    private InternalComplexPropertyBuilder MergeConfiguration(InternalComplexPropertyBuilder complexPropertyBuilder)
+    private InternalComplexPropertyBuilder MergeConfiguration(
+        InternalComplexPropertyBuilder complexPropertyBuilder
+    )
     {
         complexPropertyBuilder.MergeAnnotationsFrom(ComplexProperty);
 
         var oldIsNullableConfigurationSource = ComplexProperty.GetIsNullableConfigurationSource();
         if (oldIsNullableConfigurationSource.HasValue)
         {
-            complexPropertyBuilder.IsRequired(!ComplexProperty.IsNullable, oldIsNullableConfigurationSource.Value);
+            complexPropertyBuilder.IsRequired(
+                !ComplexProperty.IsNullable,
+                oldIsNullableConfigurationSource.Value
+            );
         }
 
-        var oldPropertyAccessModeConfigurationSource = ComplexProperty.GetPropertyAccessModeConfigurationSource();
+        var oldPropertyAccessModeConfigurationSource =
+            ComplexProperty.GetPropertyAccessModeConfigurationSource();
         if (oldPropertyAccessModeConfigurationSource.HasValue)
         {
             complexPropertyBuilder.UsePropertyAccessMode(
-                ((IReadOnlyProperty)ComplexProperty).GetPropertyAccessMode(), oldPropertyAccessModeConfigurationSource.Value);
+                ((IReadOnlyProperty)ComplexProperty).GetPropertyAccessMode(),
+                oldPropertyAccessModeConfigurationSource.Value
+            );
         }
 
         var oldFieldInfoConfigurationSource = ComplexProperty.GetFieldInfoConfigurationSource();
-        if (oldFieldInfoConfigurationSource.HasValue
-            && complexPropertyBuilder.CanSetField(ComplexProperty.FieldInfo, oldFieldInfoConfigurationSource))
+        if (
+            oldFieldInfoConfigurationSource.HasValue
+            && complexPropertyBuilder.CanSetField(
+                ComplexProperty.FieldInfo,
+                oldFieldInfoConfigurationSource
+            )
+        )
         {
-            complexPropertyBuilder.HasField(ComplexProperty.FieldInfo, oldFieldInfoConfigurationSource.Value);
+            complexPropertyBuilder.HasField(
+                ComplexProperty.FieldInfo,
+                oldFieldInfoConfigurationSource.Value
+            );
         }
 
         complexPropertyBuilder.MergeAnnotationsFrom(ComplexProperty);
         if (ComplexProperty.GetIsNullableConfigurationSource() != null)
         {
-            complexPropertyBuilder.IsRequired(!ComplexProperty.IsNullable, ComplexProperty.GetIsNullableConfigurationSource()!.Value);
+            complexPropertyBuilder.IsRequired(
+                !ComplexProperty.IsNullable,
+                ComplexProperty.GetIsNullableConfigurationSource()!.Value
+            );
         }
 
         var complexTypeBuilder = complexPropertyBuilder.Metadata.ComplexType.Builder;
@@ -147,13 +186,18 @@ public class ComplexPropertySnapshot
 
         foreach (var ignoredMember in ComplexType.GetIgnoredMembers())
         {
-            complexTypeBuilder.Ignore(ignoredMember, ComplexType.FindDeclaredIgnoredConfigurationSource(ignoredMember)!.Value);
+            complexTypeBuilder.Ignore(
+                ignoredMember,
+                ComplexType.FindDeclaredIgnoredConfigurationSource(ignoredMember)!.Value
+            );
         }
 
         if (ComplexType.GetChangeTrackingStrategyConfigurationSource() != null)
         {
             complexTypeBuilder.Metadata.SetChangeTrackingStrategy(
-                ComplexType.GetChangeTrackingStrategy(), ComplexType.GetChangeTrackingStrategyConfigurationSource()!.Value);
+                ComplexType.GetChangeTrackingStrategy(),
+                ComplexType.GetChangeTrackingStrategyConfigurationSource()!.Value
+            );
         }
 
         Properties.Attach(complexTypeBuilder);
@@ -162,27 +206,41 @@ public class ComplexPropertySnapshot
         {
             complexTypeBuilder.Metadata.SetConstructorBinding(
                 Create(ComplexType.ConstructorBinding, complexTypeBuilder.Metadata),
-                ComplexType.GetConstructorBindingConfigurationSource()!.Value);
+                ComplexType.GetConstructorBindingConfigurationSource()!.Value
+            );
         }
 
         if (ComplexType.GetServiceOnlyConstructorBindingConfigurationSource() != null)
         {
             complexTypeBuilder.Metadata.SetServiceOnlyConstructorBinding(
                 Create(ComplexType.ServiceOnlyConstructorBinding, complexTypeBuilder.Metadata),
-                ComplexType.GetServiceOnlyConstructorBindingConfigurationSource()!.Value);
+                ComplexType.GetServiceOnlyConstructorBindingConfigurationSource()!.Value
+            );
         }
 
         return complexPropertyBuilder;
     }
 
-    private static InstantiationBinding? Create(InstantiationBinding? instantiationBinding, ComplexType complexType)
-        => instantiationBinding?.With(
-            instantiationBinding.ParameterBindings.Select(binding => Create(binding, complexType)).ToList());
+    private static InstantiationBinding? Create(
+        InstantiationBinding? instantiationBinding,
+        ComplexType complexType
+    ) =>
+        instantiationBinding?.With(
+            instantiationBinding
+                .ParameterBindings.Select(binding => Create(binding, complexType))
+                .ToList()
+        );
 
-    private static ParameterBinding Create(ParameterBinding parameterBinding, ComplexType complexType)
-        => parameterBinding.With(
-            parameterBinding.ConsumedProperties.Select(
-                property =>
+    private static ParameterBinding Create(
+        ParameterBinding parameterBinding,
+        ComplexType complexType
+    ) =>
+        parameterBinding.With(
+            parameterBinding
+                .ConsumedProperties.Select(property =>
                     (IPropertyBase?)complexType.FindProperty(property.Name)
-                    ?? complexType.FindComplexProperty(property.Name)!).ToArray());
+                    ?? complexType.FindComplexProperty(property.Name)!
+                )
+                .ToArray()
+        );
 }

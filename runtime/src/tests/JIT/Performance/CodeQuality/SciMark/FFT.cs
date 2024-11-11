@@ -3,9 +3,9 @@
 /// <license>
 /// This is a port of the SciMark2a Java Benchmark to C# by
 /// Chris Re (cmr28@cornell.edu) and Werner Vogels (vogels@cs.cornell.edu)
-/// 
+///
 /// For details on the original authors see http://math.nist.gov/scimark2
-/// 
+///
 /// This software is likely to burn your processor, bitflip your memory chips
 /// anihilate your screen and corrupt all your disks, so you it at your
 /// own risk.
@@ -21,10 +21,10 @@ namespace SciMark2
     /// but the code is smaller and simpler, and it requires no extra storage.
     /// </P>
     /// </summary>
-    /// 
-    /// <author> 
+    ///
+    /// <author>
     /// Bruce R. Miller bruce.miller@nist.gov,
-    /// Derived from GSL (Gnu Scientific Library), 
+    /// Derived from GSL (Gnu Scientific Library),
     /// GSL's FFT Code by Brian Gough bjg@vvv.lanl.gov
     /// </author>
 
@@ -33,9 +33,10 @@ namespace SciMark2
         public const int DefaultSeed = 20010415;
         public static int Seed = Environment.GetEnvironmentVariable("CORECLR_SEED") switch
         {
-            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) => new System.Random().Next(),
+            string seedStr when seedStr.Equals("random", StringComparison.OrdinalIgnoreCase) =>
+                new System.Random().Next(),
             string seedStr when int.TryParse(seedStr, out int envSeed) => envSeed,
-            _ => DefaultSeed
+            _ => DefaultSeed,
         };
 
         public static double num_flops(int N)
@@ -45,7 +46,6 @@ namespace SciMark2
 
             return (5.0 * Nd - 2) * logN + 2 * (Nd + 1);
         }
-
 
         /// <summary>
         /// Compute Fast Fourier Transform of (complex) data, in place.
@@ -93,7 +93,7 @@ namespace SciMark2
         }
 
         /// <summary>
-        /// Make a random array of n (complex) elements. 
+        /// Make a random array of n (complex) elements.
         /// </summary>
         public static double[] makeRandom(int n)
         {
@@ -185,7 +185,6 @@ namespace SciMark2
             }
         }
 
-
         protected internal static void bitreverse(double[] data)
         {
             /* This is the Goldrader bit-reversal algorithm */
@@ -219,7 +218,7 @@ namespace SciMark2
                     //j = j - k ;
                     j -= k;
 
-                    //k = k / 2 ; 
+                    //k = k / 2 ;
                     k >>= 1;
                 }
                 j += k;

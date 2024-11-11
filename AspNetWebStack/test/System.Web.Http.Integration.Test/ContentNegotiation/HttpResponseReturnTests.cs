@@ -30,10 +30,13 @@ namespace System.Web.Http.ContentNegotiation
         [InlineData("ReturnString")]
         public async Task ActionReturnsHttpResponseMessage(string action)
         {
-            string expectedResponseValue = @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Hello</string>";
+            string expectedResponseValue =
+                @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Hello</string>";
 
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(baseAddress + String.Format("HttpResponseReturn/{0}", action));
+            request.RequestUri = new Uri(
+                baseAddress + String.Format("HttpResponseReturn/{0}", action)
+            );
             request.Headers.Accept.Add(new MediaTypeWithQualityHeaderValue("application/xml"));
             request.Method = HttpMethod.Get;
 
@@ -49,10 +52,13 @@ namespace System.Web.Http.ContentNegotiation
         [InlineData("ReturnHttpResponseMessageAsXml")]
         public async Task ActionReturnsHttpResponseMessageWithExplicitMediaType(string action)
         {
-            string expectedResponseValue = @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Hello</string>";
+            string expectedResponseValue =
+                @"<string xmlns=""http://schemas.microsoft.com/2003/10/Serialization/"">Hello</string>";
 
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(baseAddress + String.Format("HttpResponseReturn/{0}", action));
+            request.RequestUri = new Uri(
+                baseAddress + String.Format("HttpResponseReturn/{0}", action)
+            );
             request.Method = HttpMethod.Get;
 
             HttpResponseMessage response = await httpClient.SendAsync(request);
@@ -68,7 +74,9 @@ namespace System.Web.Http.ContentNegotiation
         public async Task ReturnMultipleSetCookieHeadersShouldWork(string action)
         {
             HttpRequestMessage request = new HttpRequestMessage();
-            request.RequestUri = new Uri(baseAddress + String.Format("HttpResponseReturn/{0}", action));
+            request.RequestUri = new Uri(
+                baseAddress + String.Format("HttpResponseReturn/{0}", action)
+            );
             request.Method = HttpMethod.Get;
             HttpResponseMessage response = await httpClient.SendAsync(request);
             response.EnsureSuccessStatusCode();
@@ -82,7 +90,11 @@ namespace System.Web.Http.ContentNegotiation
             baseAddress = "http://localhost/";
 
             HttpSelfHostConfiguration config = new HttpSelfHostConfiguration(baseAddress);
-            config.Routes.MapHttpRoute("Default", "{controller}/{action}", new { controller = "HttpResponseReturn" });
+            config.Routes.MapHttpRoute(
+                "Default",
+                "{controller}/{action}",
+                new { controller = "HttpResponseReturn" }
+            );
             config.MessageHandlers.Add(new ConvertToStreamMessageHandler());
 
             server = new HttpServer(config);
@@ -109,7 +121,7 @@ namespace System.Web.Http.ContentNegotiation
         {
             HttpResponseMessage response = new HttpResponseMessage()
             {
-                Content = new ObjectContent<string>("Hello", new XmlMediaTypeFormatter())
+                Content = new ObjectContent<string>("Hello", new XmlMediaTypeFormatter()),
             };
             return response;
         }

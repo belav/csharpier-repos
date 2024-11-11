@@ -13,7 +13,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Base
     {
-        public static implicit operator short (Base b)
+        public static implicit operator short(Base b)
         {
             return short.MinValue;
         }
@@ -21,7 +21,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Derived : Base
     {
-        public static implicit operator short (Derived x)
+        public static implicit operator short(Derived x)
         {
             return short.MaxValue;
         }
@@ -47,8 +47,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.conversion.overload002.overload002
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -59,7 +57,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Base
     {
-        public static implicit operator short (Base x)
+        public static implicit operator short(Base x)
         {
             return short.MinValue;
         }
@@ -67,7 +65,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Derived : Base
     {
-        public static implicit operator int (Derived x)
+        public static implicit operator int(Derived x)
         {
             return int.MaxValue;
         }
@@ -93,8 +91,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.conversion.overload004.overload004
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -106,7 +102,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Base
     {
-        public static explicit operator short (Base x)
+        public static explicit operator short(Base x)
         {
             return short.MinValue;
         }
@@ -114,7 +110,7 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
 
     public class Derived : Base
     {
-        public static explicit operator int (Derived x)
+        public static explicit operator int(Derived x)
         {
             return int.MaxValue;
         }
@@ -140,8 +136,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.conversion.overload006.overload006
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -153,15 +147,13 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // <Code>
     public class Base
     {
-        public static implicit operator short (Base x)
+        public static implicit operator short(Base x)
         {
             return short.MinValue;
         }
     }
 
-    public class Derived : Base
-    {
-    }
+    public class Derived : Base { }
 
     public class Test
     {
@@ -183,8 +175,6 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     // </Code>
 }
 
-
-
 namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Operators.Twoclass2operates.conversion.overload007.overload007
 {
     // <Title> Tests overload resolution for 2 class and 2 methods</Title>
@@ -197,20 +187,16 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.overloadResolution.Oper
     public class Base
     {
         public int Field;
+
         public static implicit operator Base(short x)
         {
-            return new Base()
-            {
-                Field = x
-            }
-
-            ;
+            return new Base() { Field = x };
         }
     }
 
     public class Derived
     {
-        public static explicit operator short (Derived x)
+        public static explicit operator short(Derived x)
         {
             return short.MinValue;
         }

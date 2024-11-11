@@ -11,9 +11,12 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
-public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
+public class ComponentRenderingFunctionalTests
+    : IClassFixture<MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting>>
 {
-    public ComponentRenderingFunctionalTests(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
+    public ComponentRenderingFunctionalTests(
+        MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture
+    )
     {
         Factory = fixture;
     }
@@ -39,8 +42,13 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
     public async Task Renders_RoutingComponent()
     {
         // Arrange & Act
-        var client = CreateClient(Factory.WithWebHostBuilder(builder =>
-            builder.ConfigureServices(services => services.AddRazorComponents().AddInteractiveServerComponents())));
+        var client = CreateClient(
+            Factory.WithWebHostBuilder(builder =>
+                builder.ConfigureServices(services =>
+                    services.AddRazorComponents().AddInteractiveServerComponents()
+                )
+            )
+        );
 
         var response = await client.GetAsync("http://localhost/components/routable");
 
@@ -55,7 +63,9 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
     public async Task Redirects_Navigation_Component()
     {
         // Arrange & Act
-        var fixture = Factory.WithWebHostBuilder(builder => builder.ConfigureServices(services => services.AddServerSideBlazor()));
+        var fixture = Factory.WithWebHostBuilder(builder =>
+            builder.ConfigureServices(services => services.AddServerSideBlazor())
+        );
         fixture.ClientOptions.AllowAutoRedirect = false;
         var client = CreateClient(fixture);
 
@@ -70,8 +80,13 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
     public async Task Renders_RoutingComponent_UsingRazorComponents_Prerenderer()
     {
         // Arrange & Act
-        var client = CreateClient(Factory.WithWebHostBuilder(builder =>
-                builder.ConfigureServices(services => services.AddRazorComponents().AddInteractiveServerComponents())));
+        var client = CreateClient(
+            Factory.WithWebHostBuilder(builder =>
+                builder.ConfigureServices(services =>
+                    services.AddRazorComponents().AddInteractiveServerComponents()
+                )
+            )
+        );
 
         var response = await client.GetAsync("http://localhost/components/routable");
 
@@ -86,8 +101,13 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
     public async Task Renders_ThrowingComponent_UsingRazorComponents_Prerenderer()
     {
         // Arrange & Act
-        var client = CreateClient(Factory.WithWebHostBuilder(builder =>
-            builder.ConfigureServices(services => services.AddRazorComponents().AddInteractiveServerComponents())));
+        var client = CreateClient(
+            Factory.WithWebHostBuilder(builder =>
+                builder.ConfigureServices(services =>
+                    services.AddRazorComponents().AddInteractiveServerComponents()
+                )
+            )
+        );
 
         var response = await client.GetAsync("http://localhost/components/throws");
 
@@ -102,7 +122,8 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
     public async Task Renders_AsyncComponent()
     {
         // Arrange & Act
-        var expectedHtml = @"<h1>Weather forecast</h1>
+        var expectedHtml =
+            @"<h1>Weather forecast</h1>
 
 <p>This component demonstrates fetching data from the server.</p>
 
@@ -166,24 +187,23 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
         var htmlDocument = parser.Parse(responseContent);
         var div = htmlDocument.Body.QuerySelector($"#{divId}");
         var content = div.InnerHtml;
-        Assert.Equal(
-            expectedContent.Replace("\r\n", "\n"),
-            content.Replace("\r\n", "\n"));
+        Assert.Equal(expectedContent.Replace("\r\n", "\n"), content.Replace("\r\n", "\n"));
     }
 
     // A simple delegating handler used in setting up test services so that we can configure
     // services that talk back to the TestServer using HttpClient.
-    private class LoopHttpHandler : DelegatingHandler
-    {
-    }
+    private class LoopHttpHandler : DelegatingHandler { }
 
     private HttpClient CreateClient(
-        WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture)
+        WebApplicationFactory<BasicWebSite.StartupWithoutEndpointRouting> fixture
+    )
     {
         var loopHandler = new LoopHttpHandler();
 
         var client = fixture
-            .WithWebHostBuilder(builder => builder.ConfigureServices(ConfigureTestWeatherForecastService))
+            .WithWebHostBuilder(builder =>
+                builder.ConfigureServices(ConfigureTestWeatherForecastService)
+            )
             .CreateClient();
 
         // We configure the inner handler with a handler to this TestServer instance so that calls to the
@@ -193,10 +213,11 @@ public class ComponentRenderingFunctionalTests : IClassFixture<MvcTestFixture<Ba
         void ConfigureTestWeatherForecastService(IServiceCollection services) =>
             // We configure the test service here with an HttpClient that uses this loopback handler to talk
             // to this TestServer instance.
-            services.AddSingleton(new WeatherForecastService(new HttpClient(loopHandler)
-            {
-                BaseAddress = fixture.ClientOptions.BaseAddress
-            }));
+            services.AddSingleton(
+                new WeatherForecastService(
+                    new HttpClient(loopHandler) { BaseAddress = fixture.ClientOptions.BaseAddress }
+                )
+            );
 
         return client;
     }

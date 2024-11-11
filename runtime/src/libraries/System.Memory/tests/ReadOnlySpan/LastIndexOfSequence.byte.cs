@@ -10,7 +10,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMatchAtStart_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 5, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 5, 1, 77 });
             int index = span.LastIndexOf(value);
             Assert.Equal(0, index);
@@ -19,7 +21,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceMultipleMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 1, 2, 3, 1, 2, 3, 1, 2, 3, 1 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 1, 2, 3, 1, 2, 3, 1, 2, 3, 1 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 2, 3 });
             int index = span.LastIndexOf(value);
             Assert.Equal(7, index);
@@ -28,7 +32,33 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceRestart_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 8, 9, 77, 0, 1 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[]
+                {
+                    0,
+                    1,
+                    77,
+                    2,
+                    3,
+                    77,
+                    77,
+                    4,
+                    5,
+                    77,
+                    77,
+                    77,
+                    88,
+                    6,
+                    6,
+                    77,
+                    77,
+                    8,
+                    9,
+                    77,
+                    0,
+                    1,
+                }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 77, 77, 88 });
             int index = span.LastIndexOf(value);
             Assert.Equal(10, index);
@@ -37,7 +67,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNoMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 77, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -46,7 +78,9 @@ namespace System.SpanTests
         [Fact]
         public static void LastIndexOfSequenceNotEvenAHeadMatch_Byte()
         {
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(new byte[] { 100, 77, 88, 99 });
             int index = span.LastIndexOf(value);
             Assert.Equal(-1, index);
@@ -74,7 +108,9 @@ namespace System.SpanTests
         public static void LastIndexOfSequenceZeroLengthValue_Byte()
         {
             // A zero-length value is always "found" at the end of the span.
-            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 });
+            ReadOnlySpan<byte> span = new ReadOnlySpan<byte>(
+                new byte[] { 0, 1, 77, 2, 3, 77, 77, 4, 5, 77, 77, 77, 88, 6, 6, 77, 77, 88, 9 }
+            );
             ReadOnlySpan<byte> value = new ReadOnlySpan<byte>(Array.Empty<byte>());
             int index = span.LastIndexOf(value);
             Assert.Equal(span.Length, index);

@@ -9,7 +9,10 @@ using Xunit;
 
 namespace System.DirectoryServices.Protocols.Tests
 {
-    [ConditionalClass(typeof(DirectoryServicesTestHelpers), nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled))]
+    [ConditionalClass(
+        typeof(DirectoryServicesTestHelpers),
+        nameof(DirectoryServicesTestHelpers.IsWindowsOrLibLdapIsInstalled)
+    )]
     public class LdapConnectionTests
     {
         [Theory]
@@ -33,8 +36,18 @@ namespace System.DirectoryServices.Protocols.Tests
         public static IEnumerable<object[]> Ctor_Identifier_TestData()
         {
             yield return new object[] { new LdapDirectoryIdentifier("server") };
-            yield return new object[] { new LdapDirectoryIdentifier(new string[] { "server", null, "server" }, false, false) };
-            yield return new object[] { new LdapDirectoryIdentifier(new string[] { null }, false, false) };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier(
+                    new string[] { "server", null, "server" },
+                    false,
+                    false
+                ),
+            };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier(new string[] { null }, false, false),
+            };
         }
 
         [Theory]
@@ -51,12 +64,19 @@ namespace System.DirectoryServices.Protocols.Tests
         public static IEnumerable<object[]> Ctor_Identifier_NetworkCredential_TestData()
         {
             yield return new object[] { new LdapDirectoryIdentifier("server"), null };
-            yield return new object[] { new LdapDirectoryIdentifier("server"), new NetworkCredential("username", "password") };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier("server"),
+                new NetworkCredential("username", "password"),
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Identifier_NetworkCredential_TestData))]
-        public void Ctor_Identifier_Credential(LdapDirectoryIdentifier identifier, NetworkCredential credential)
+        public void Ctor_Identifier_Credential(
+            LdapDirectoryIdentifier identifier,
+            NetworkCredential credential
+        )
         {
             var connection = new LdapConnection(identifier, credential);
             Assert.Equal(AuthType.Negotiate, connection.AuthType);
@@ -67,14 +87,33 @@ namespace System.DirectoryServices.Protocols.Tests
 
         public static IEnumerable<object[]> Ctor_Identifier_NetworkCredential_AuthType_TestData()
         {
-            yield return new object[] { new LdapDirectoryIdentifier("server"), null, AuthType.Anonymous };
-            yield return new object[] { new LdapDirectoryIdentifier("server"), new NetworkCredential(), AuthType.Anonymous };
-            yield return new object[] { new LdapDirectoryIdentifier("server"), new NetworkCredential("username", "password"), AuthType.Kerberos };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier("server"),
+                null,
+                AuthType.Anonymous,
+            };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier("server"),
+                new NetworkCredential(),
+                AuthType.Anonymous,
+            };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier("server"),
+                new NetworkCredential("username", "password"),
+                AuthType.Kerberos,
+            };
         }
 
         [Theory]
         [MemberData(nameof(Ctor_Identifier_NetworkCredential_AuthType_TestData))]
-        public void Ctor_Identifier_Credential_AuthType(LdapDirectoryIdentifier identifier, NetworkCredential credential, AuthType authType)
+        public void Ctor_Identifier_Credential_AuthType(
+            LdapDirectoryIdentifier identifier,
+            NetworkCredential credential,
+            AuthType authType
+        )
         {
             var connection = new LdapConnection(identifier, credential, authType);
             Assert.Equal(authType, connection.AuthType);
@@ -86,9 +125,15 @@ namespace System.DirectoryServices.Protocols.Tests
         [Fact]
         public void Ctor_NullIdentifier_ThrowsNullReferenceException()
         {
-            Assert.Throws<NullReferenceException>(() => new LdapConnection((LdapDirectoryIdentifier)null));
-            Assert.Throws<NullReferenceException>(() => new LdapConnection(null, new NetworkCredential()));
-            Assert.Throws<NullReferenceException>(() => new LdapConnection(null, new NetworkCredential(), AuthType.Dpa));
+            Assert.Throws<NullReferenceException>(
+                () => new LdapConnection((LdapDirectoryIdentifier)null)
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new LdapConnection(null, new NetworkCredential())
+            );
+            Assert.Throws<NullReferenceException>(
+                () => new LdapConnection(null, new NetworkCredential(), AuthType.Dpa)
+            );
         }
 
         [Theory]
@@ -96,13 +141,29 @@ namespace System.DirectoryServices.Protocols.Tests
         [InlineData(AuthType.Kerberos + 1)]
         public void Ctor_InvalidAuthType_ThrowsInvalidEnumArgumentException(AuthType authType)
         {
-            AssertExtensions.Throws<InvalidEnumArgumentException>("authType", () => new LdapConnection(new LdapDirectoryIdentifier("server"), new NetworkCredential(), authType));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "authType",
+                () =>
+                    new LdapConnection(
+                        new LdapDirectoryIdentifier("server"),
+                        new NetworkCredential(),
+                        authType
+                    )
+            );
         }
 
         [Fact]
         public void Ctor_InvalidAuthTypeWithCredentials_ThrowsArgumentException()
         {
-            AssertExtensions.Throws<ArgumentException>(null, () => new LdapConnection(new LdapDirectoryIdentifier("server"), new NetworkCredential("username", "password"), AuthType.Anonymous));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () =>
+                    new LdapConnection(
+                        new LdapDirectoryIdentifier("server"),
+                        new NetworkCredential("username", "password"),
+                        AuthType.Anonymous
+                    )
+            );
         }
 
         [Fact]
@@ -115,12 +176,19 @@ namespace System.DirectoryServices.Protocols.Tests
         public static IEnumerable<object[]> AuthType_Anonymous_DoesNotThrowNull_TestData()
         {
             yield return new object[] { new LdapDirectoryIdentifier("server"), null };
-            yield return new object[] { new LdapDirectoryIdentifier("server"), new NetworkCredential() };
+            yield return new object[]
+            {
+                new LdapDirectoryIdentifier("server"),
+                new NetworkCredential(),
+            };
         }
 
         [Theory]
         [MemberData(nameof(AuthType_Anonymous_DoesNotThrowNull_TestData))]
-        public void AuthType_Anonymous_DoesNotThrowNull(LdapDirectoryIdentifier identifier, NetworkCredential credential)
+        public void AuthType_Anonymous_DoesNotThrowNull(
+            LdapDirectoryIdentifier identifier,
+            NetworkCredential credential
+        )
         {
             var connection = new LdapConnection(identifier, credential, AuthType.Anonymous);
             // When calling Bind we make sure that the exception thrown is not that there was a NullReferenceException
@@ -134,7 +202,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void AuthType_SetInvalid_ThrowsInvalidEnumArgumentException(AuthType authType)
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<InvalidEnumArgumentException>("value", () => connection.AuthType = authType);
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "value",
+                () => connection.AuthType = authType
+            );
         }
 
         [Fact]
@@ -157,7 +228,10 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Timeout_SetInvalid_ThrowsArgumentException(long totalSeconds)
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>("value", () => connection.Timeout = TimeSpan.FromSeconds(totalSeconds));
+            AssertExtensions.Throws<ArgumentException>(
+                "value",
+                () => connection.Timeout = TimeSpan.FromSeconds(totalSeconds)
+            );
         }
 
         [Fact]
@@ -174,7 +248,9 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Bind_AnonymouseAuthenticationAndNetworkCredentials_ThrowsInvalidOperationException()
         {
             var connection = new LdapConnection("server") { AuthType = AuthType.Anonymous };
-            Assert.Throws<InvalidOperationException>(() => connection.Bind(new NetworkCredential("name", "password")));
+            Assert.Throws<InvalidOperationException>(
+                () => connection.Bind(new NetworkCredential("name", "password"))
+            );
 
             connection.Credential = new NetworkCredential("name", "password");
             Assert.Throws<InvalidOperationException>(() => connection.Bind());
@@ -187,47 +263,87 @@ namespace System.DirectoryServices.Protocols.Tests
             connection.Dispose();
 
             Assert.Throws<ObjectDisposedException>(() => connection.SendRequest(new AddRequest()));
-            Assert.Throws<ObjectDisposedException>(() => connection.BeginSendRequest(new AddRequest(), PartialResultProcessing.NoPartialResultSupport, null, null));
+            Assert.Throws<ObjectDisposedException>(
+                () =>
+                    connection.BeginSendRequest(
+                        new AddRequest(),
+                        PartialResultProcessing.NoPartialResultSupport,
+                        null,
+                        null
+                    )
+            );
         }
 
         [Fact]
         public void SendRequest_NullRequest_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>("request", () => connection.SendRequest(null));
-            AssertExtensions.Throws<ArgumentNullException>("request", () => connection.BeginSendRequest(null, PartialResultProcessing.NoPartialResultSupport, null, null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "request",
+                () => connection.SendRequest(null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "request",
+                () =>
+                    connection.BeginSendRequest(
+                        null,
+                        PartialResultProcessing.NoPartialResultSupport,
+                        null,
+                        null
+                    )
+            );
         }
 
         [Fact]
         public void SendRequest_DsmlAuthRequest_ThrowsNotSupportedException()
         {
             var connection = new LdapConnection("server");
-            Assert.Throws<NotSupportedException>(() => connection.SendRequest(new DsmlAuthRequest()));
+            Assert.Throws<NotSupportedException>(
+                () => connection.SendRequest(new DsmlAuthRequest())
+            );
         }
 
         [Theory]
         [InlineData(PartialResultProcessing.NoPartialResultSupport - 1)]
         [InlineData(PartialResultProcessing.ReturnPartialResultsAndNotifyCallback + 1)]
-        public void BeginSendRequest_InvalidPartialMode_ThrowsInvalidEnumArgumentException(PartialResultProcessing partialMode)
+        public void BeginSendRequest_InvalidPartialMode_ThrowsInvalidEnumArgumentException(
+            PartialResultProcessing partialMode
+        )
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<InvalidEnumArgumentException>("partialMode", () => connection.BeginSendRequest(new AddRequest(), partialMode, null, null));
+            AssertExtensions.Throws<InvalidEnumArgumentException>(
+                "partialMode",
+                () => connection.BeginSendRequest(new AddRequest(), partialMode, null, null)
+            );
         }
 
         [Theory]
         [InlineData(PartialResultProcessing.ReturnPartialResults)]
         [InlineData(PartialResultProcessing.ReturnPartialResultsAndNotifyCallback)]
-        public void BeginSendRequest_ReturnModeAndSearchRequest_ThrowsInvalidNotSupportedException(PartialResultProcessing partialMode)
+        public void BeginSendRequest_ReturnModeAndSearchRequest_ThrowsInvalidNotSupportedException(
+            PartialResultProcessing partialMode
+        )
         {
             var connection = new LdapConnection("server");
-            Assert.Throws<NotSupportedException>(() => connection.BeginSendRequest(new AddRequest(), partialMode, null, null));
+            Assert.Throws<NotSupportedException>(
+                () => connection.BeginSendRequest(new AddRequest(), partialMode, null, null)
+            );
         }
 
         [Fact]
         public void BeginSendRequest_NotifyCallbackAndNullCallback_ThrowsArgumentException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>("callback", () => connection.BeginSendRequest(new SearchRequest(), PartialResultProcessing.ReturnPartialResultsAndNotifyCallback, null, null));
+            AssertExtensions.Throws<ArgumentException>(
+                "callback",
+                () =>
+                    connection.BeginSendRequest(
+                        new SearchRequest(),
+                        PartialResultProcessing.ReturnPartialResultsAndNotifyCallback,
+                        null,
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -243,14 +359,20 @@ namespace System.DirectoryServices.Protocols.Tests
         public void EndSendRequest_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () => connection.EndSendRequest(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "asyncResult",
+                () => connection.EndSendRequest(null)
+            );
         }
 
         [Fact]
         public void EndSendRequest_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(null, () => connection.EndSendRequest(new CustomAsyncResult()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => connection.EndSendRequest(new CustomAsyncResult())
+            );
         }
 
         [Fact]
@@ -266,14 +388,20 @@ namespace System.DirectoryServices.Protocols.Tests
         public void GetPartialResults_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () => connection.GetPartialResults(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "asyncResult",
+                () => connection.GetPartialResults(null)
+            );
         }
 
         [Fact]
         public void GetPartialResults_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(null, () => connection.GetPartialResults(new CustomAsyncResult()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => connection.GetPartialResults(new CustomAsyncResult())
+            );
         }
 
         [Fact]
@@ -289,14 +417,20 @@ namespace System.DirectoryServices.Protocols.Tests
         public void Abort_NullAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentNullException>("asyncResult", () => connection.Abort(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "asyncResult",
+                () => connection.Abort(null)
+            );
         }
 
         [Fact]
         public void Abort_InvalidAsyncResult_ThrowsArgumentNullException()
         {
             var connection = new LdapConnection("server");
-            AssertExtensions.Throws<ArgumentException>(null, () => connection.Abort(new CustomAsyncResult()));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => connection.Abort(new CustomAsyncResult())
+            );
         }
 
         [Fact]

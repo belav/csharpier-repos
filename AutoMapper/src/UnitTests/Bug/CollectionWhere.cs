@@ -19,22 +19,21 @@ public class CollectionWhere : AutoMapperSpecBase
         public IEnumerable<int> ListProperty { get; set; }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateMap<Source, Destination>();
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateMap<Source, Destination>();
+        });
 
     protected override void Because_of()
     {
-        var source = new Source()
-        {
-            Id = 1,
-            ListProperty = _sourceList,
-        };
+        var source = new Source() { Id = 1, ListProperty = _sourceList };
         _destination = new Destination()
         {
             Id = 2,
-            ListProperty = new List<int>() { 4, 5, 6 }.Where(a=>true).ToArray()
+            ListProperty = new List<int>() { 4, 5, 6 }
+                .Where(a => true)
+                .ToArray(),
         };
         _destination = Mapper.Map<Source, Destination>(source, _destination);
     }

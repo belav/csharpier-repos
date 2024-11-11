@@ -21,15 +21,25 @@ public class AzureAppendBlobTests
         var testMessageHandler = new TestMessageHandler(async message =>
         {
             Assert.Equal(HttpMethod.Put, message.Method);
-            Assert.Equal("https://host/container/blob/path?query=1&comp=appendblock", message.RequestUri.ToString());
+            Assert.Equal(
+                "https://host/container/blob/path?query=1&comp=appendblock",
+                message.RequestUri.ToString()
+            );
             Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
             AssertDefaultHeaders(message);
 
             return new HttpResponseMessage(HttpStatusCode.OK);
         });
 
-        var blob = new BlobAppendReferenceWrapper(_containerUrl, _blobName, new HttpClient(testMessageHandler));
-        await blob.AppendAsync(new ArraySegment<byte>(new byte[] { 0, 2, 3 }), CancellationToken.None);
+        var blob = new BlobAppendReferenceWrapper(
+            _containerUrl,
+            _blobName,
+            new HttpClient(testMessageHandler)
+        );
+        await blob.AppendAsync(
+            new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+            CancellationToken.None
+        );
     }
 
     private static void AssertDefaultHeaders(HttpRequestMessage message)
@@ -51,7 +61,10 @@ public class AzureAppendBlobTests
             if (stage == 0)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1&comp=appendblock", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
                 Assert.Equal(3, message.Content.Headers.ContentLength);
 
@@ -64,7 +77,10 @@ public class AzureAppendBlobTests
             if (stage == 1)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(0, message.Content.Headers.ContentLength);
                 Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
 
@@ -77,7 +93,10 @@ public class AzureAppendBlobTests
             if (stage == 2)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1&comp=appendblock", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
                 Assert.Equal(3, message.Content.Headers.ContentLength);
 
@@ -89,8 +108,15 @@ public class AzureAppendBlobTests
             throw new NotImplementedException();
         });
 
-        var blob = new BlobAppendReferenceWrapper(_containerUrl, _blobName, new HttpClient(testMessageHandler));
-        await blob.AppendAsync(new ArraySegment<byte>(new byte[] { 0, 2, 3 }), CancellationToken.None);
+        var blob = new BlobAppendReferenceWrapper(
+            _containerUrl,
+            _blobName,
+            new HttpClient(testMessageHandler)
+        );
+        await blob.AppendAsync(
+            new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+            CancellationToken.None
+        );
 
         Assert.Equal(3, stage);
     }
@@ -105,7 +131,10 @@ public class AzureAppendBlobTests
             if (stage == 0)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1&comp=appendblock", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
                 Assert.Equal(3, message.Content.Headers.ContentLength);
 
@@ -118,8 +147,18 @@ public class AzureAppendBlobTests
             throw new NotImplementedException();
         });
 
-        var blob = new BlobAppendReferenceWrapper(_containerUrl, _blobName, new HttpClient(testMessageHandler));
-        await Assert.ThrowsAsync<HttpRequestException>(() => blob.AppendAsync(new ArraySegment<byte>(new byte[] { 0, 2, 3 }), CancellationToken.None));
+        var blob = new BlobAppendReferenceWrapper(
+            _containerUrl,
+            _blobName,
+            new HttpClient(testMessageHandler)
+        );
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () =>
+                blob.AppendAsync(
+                    new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+                    CancellationToken.None
+                )
+        );
 
         Assert.Equal(1, stage);
     }
@@ -134,7 +173,10 @@ public class AzureAppendBlobTests
             if (stage == 0)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1&comp=appendblock", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1&comp=appendblock",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(new byte[] { 0, 2, 3 }, await message.Content.ReadAsByteArrayAsync());
                 Assert.Equal(3, message.Content.Headers.ContentLength);
 
@@ -147,7 +189,10 @@ public class AzureAppendBlobTests
             if (stage == 1)
             {
                 Assert.Equal(HttpMethod.Put, message.Method);
-                Assert.Equal("https://host/container/blob/path?query=1", message.RequestUri.ToString());
+                Assert.Equal(
+                    "https://host/container/blob/path?query=1",
+                    message.RequestUri.ToString()
+                );
                 Assert.Equal(0, message.Content.Headers.ContentLength);
                 Assert.Equal(new[] { "*" }, message.Headers.GetValues("If-None-Match"));
 
@@ -160,8 +205,18 @@ public class AzureAppendBlobTests
             throw new NotImplementedException();
         });
 
-        var blob = new BlobAppendReferenceWrapper(_containerUrl, _blobName, new HttpClient(testMessageHandler));
-        await Assert.ThrowsAsync<HttpRequestException>(() => blob.AppendAsync(new ArraySegment<byte>(new byte[] { 0, 2, 3 }), CancellationToken.None));
+        var blob = new BlobAppendReferenceWrapper(
+            _containerUrl,
+            _blobName,
+            new HttpClient(testMessageHandler)
+        );
+        await Assert.ThrowsAsync<HttpRequestException>(
+            () =>
+                blob.AppendAsync(
+                    new ArraySegment<byte>(new byte[] { 0, 2, 3 }),
+                    CancellationToken.None
+                )
+        );
 
         Assert.Equal(2, stage);
     }
@@ -175,7 +230,10 @@ public class AzureAppendBlobTests
             _callback = callback;
         }
 
-        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        protected override async Task<HttpResponseMessage> SendAsync(
+            HttpRequestMessage request,
+            CancellationToken cancellationToken
+        )
         {
             return await _callback(request);
         }

@@ -11,7 +11,6 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
     /// <param name="End">Exclusive</param>
     internal readonly record struct LineSpan(int Start, int End)
     {
-        public static LineSpan FromBounds(int start, int end)
-            => new(start, end);
+        public static LineSpan FromBounds(int start, int end) => new(start, end);
     }
 }

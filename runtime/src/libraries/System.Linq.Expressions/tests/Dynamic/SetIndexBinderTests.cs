@@ -12,13 +12,15 @@ namespace System.Dynamic.Tests
     {
         private class MinimumOverrideSetIndexBinder : SetIndexBinder
         {
-            public MinimumOverrideSetIndexBinder(CallInfo callInfo) : base(callInfo)
-            {
-            }
+            public MinimumOverrideSetIndexBinder(CallInfo callInfo)
+                : base(callInfo) { }
 
             public override DynamicMetaObject FallbackSetIndex(
-                DynamicMetaObject target, DynamicMetaObject[] indexes, DynamicMetaObject value,
-                DynamicMetaObject errorSuggestion)
+                DynamicMetaObject target,
+                DynamicMetaObject[] indexes,
+                DynamicMetaObject value,
+                DynamicMetaObject errorSuggestion
+            )
             {
                 throw new NotSupportedException();
             }
@@ -27,33 +29,39 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ArrayIndexing()
         {
-            int[] array = {-1, -1, -1, -1};
+            int[] array = { -1, -1, -1, -1 };
             dynamic d = array;
             for (int i = 0; i != 4; ++i)
             {
                 d[i] = i;
             }
 
-            Assert.Equal(new[] {0, 1, 2, 3}, array);
+            Assert.Equal(new[] { 0, 1, 2, 3 }, array);
         }
 
         [Fact]
         public void ListIndexing()
         {
-            List<int> list = new List<int> {0, 1, 2, 3};
+            List<int> list = new List<int> { 0, 1, 2, 3 };
             dynamic d = list;
             for (int i = 0; i != 4; ++i)
             {
                 d[i] = i;
             }
 
-            Assert.Equal(new[] {0, 1, 2, 3}, list);
+            Assert.Equal(new[] { 0, 1, 2, 3 }, list);
         }
 
         [Fact]
         public void MultiDimensionalIndexing()
         {
-            int[,] array = new[,] {{-1, -1, -1, -1}, {-1, -1, -1, -1}, {-1, -1, -1, -1}, {-1, -1, -1, -1}};
+            int[,] array = new[,]
+            {
+                { -1, -1, -1, -1 },
+                { -1, -1, -1, -1 },
+                { -1, -1, -1, -1 },
+                { -1, -1, -1, -1 },
+            };
             dynamic d = array;
             for (int i = 0; i != 4; ++i)
             {
@@ -63,7 +71,16 @@ namespace System.Dynamic.Tests
                 }
             }
 
-            Assert.Equal(new[,] {{0, 1, 2, 3}, {1, 2, 3, 4}, {2, 3, 4, 5}, {3, 4, 5, 6}}, array);
+            Assert.Equal(
+                new[,]
+                {
+                    { 0, 1, 2, 3 },
+                    { 1, 2, 3, 4 },
+                    { 2, 3, 4, 5 },
+                    { 3, 4, 5, 6 },
+                },
+                array
+            );
         }
 
         [Fact]
@@ -76,7 +93,13 @@ namespace System.Dynamic.Tests
         [Fact]
         public void TooFewIndices()
         {
-            dynamic d = new[,] { { 0, 1, 2, 3 }, { 1, 2, 3, 4 }, { 2, 3, 4, 5 }, { 3, 4, 5, 6 } };
+            dynamic d = new[,]
+            {
+                { 0, 1, 2, 3 },
+                { 1, 2, 3, 4 },
+                { 2, 3, 4, 5 },
+                { 3, 4, 5, 6 },
+            };
             Assert.Throws<RuntimeBinderException>(() => d[2] = 2);
         }
 
@@ -99,7 +122,10 @@ namespace System.Dynamic.Tests
         [Fact]
         public void NullCallInfo()
         {
-            AssertExtensions.Throws<ArgumentNullException>("callInfo", () => new MinimumOverrideSetIndexBinder(null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "callInfo",
+                () => new MinimumOverrideSetIndexBinder(null)
+            );
         }
 
         [Fact]
@@ -112,22 +138,34 @@ namespace System.Dynamic.Tests
         [Fact]
         public void ReturnTypeObject()
         {
-            Assert.Equal(typeof(object), new MinimumOverrideSetIndexBinder(new CallInfo(0)).ReturnType);
+            Assert.Equal(
+                typeof(object),
+                new MinimumOverrideSetIndexBinder(new CallInfo(0)).ReturnType
+            );
         }
 
         [Fact]
         public void NullTarget()
         {
             var binder = new MinimumOverrideSetIndexBinder(new CallInfo(0));
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("target", () => binder.Bind(null, new[] { arg }));
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "target",
+                () => binder.Bind(null, new[] { arg })
+            );
         }
 
         [Fact]
         public void NullArgs()
         {
             var binder = new MinimumOverrideSetIndexBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
             AssertExtensions.Throws<ArgumentNullException>("args", () => binder.Bind(target, null));
         }
 
@@ -135,9 +173,18 @@ namespace System.Dynamic.Tests
         public void NullArg()
         {
             var binder = new MinimumOverrideSetIndexBinder(new CallInfo(0));
-            var target = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            var arg = new DynamicMetaObject(Expression.Parameter(typeof(object), null), BindingRestrictions.Empty);
-            AssertExtensions.Throws<ArgumentNullException>("args[1]", () => binder.Bind(target, new[] { arg, null, arg }));
+            var target = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            var arg = new DynamicMetaObject(
+                Expression.Parameter(typeof(object), null),
+                BindingRestrictions.Empty
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "args[1]",
+                () => binder.Bind(target, new[] { arg, null, arg })
+            );
         }
     }
 }

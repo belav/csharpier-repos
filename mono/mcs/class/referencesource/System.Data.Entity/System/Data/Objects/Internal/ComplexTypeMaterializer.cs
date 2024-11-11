@@ -7,10 +7,11 @@
 // @backupOwner Microsoft
 //---------------------------------------------------------------------
 
-using System.Data.Metadata.Edm;
 using System.Data.Common;
-using System.Diagnostics;
 using System.Data.Mapping;
+using System.Data.Metadata.Edm;
+using System.Diagnostics;
+
 namespace System.Data.Objects.Internal
 {
     /// <summary>
@@ -29,16 +30,22 @@ namespace System.Data.Objects.Internal
             _workspace = workspace;
         }
 
-        internal object CreateComplex(IExtendedDataRecord record, DataRecordInfo recordInfo, object result)
+        internal object CreateComplex(
+            IExtendedDataRecord record,
+            DataRecordInfo recordInfo,
+            object result
+        )
         {
             Debug.Assert(null != record, "null IExtendedDataRecord");
             Debug.Assert(null != recordInfo, "null DataRecordInfo");
             Debug.Assert(null != recordInfo.RecordType, "null TypeUsage");
             Debug.Assert(null != recordInfo.RecordType.EdmType, "null EdmType");
 
-            Debug.Assert(Helper.IsEntityType(recordInfo.RecordType.EdmType) ||
-                         Helper.IsComplexType(recordInfo.RecordType.EdmType),
-                         "not EntityType or ComplexType");
+            Debug.Assert(
+                Helper.IsEntityType(recordInfo.RecordType.EdmType)
+                    || Helper.IsComplexType(recordInfo.RecordType.EdmType),
+                "not EntityType or ComplexType"
+            );
 
             Plan plan = GetPlan(record, recordInfo);
             if (null == result)
@@ -49,7 +56,11 @@ namespace System.Data.Objects.Internal
             return result;
         }
 
-        private void SetProperties(IExtendedDataRecord record, object result, PlanEdmProperty[] properties)
+        private void SetProperties(
+            IExtendedDataRecord record,
+            object result,
+            PlanEdmProperty[] properties
+        )
         {
             Debug.Assert(null != record, "null IExtendedDataRecord");
             Debug.Assert(null != result, "null object");
@@ -60,7 +71,10 @@ namespace System.Data.Objects.Internal
                 if (null != properties[i].GetExistingComplex)
                 {
                     object existing = properties[i].GetExistingComplex(result);
-                    object obj = CreateComplexRecursive(record.GetValue(properties[i].Ordinal), existing);
+                    object obj = CreateComplexRecursive(
+                        record.GetValue(properties[i].Ordinal),
+                        existing
+                    );
                     if (null == existing)
                     {
                         properties[i].ClrProperty(result, obj);
@@ -68,10 +82,8 @@ namespace System.Data.Objects.Internal
                 }
                 else
                 {
-                    properties[i].ClrProperty(result,
-                        ConvertDBNull(
-                            record.GetValue(
-                                properties[i].Ordinal)));
+                    properties[i]
+                        .ClrProperty(result, ConvertDBNull(record.GetValue(properties[i].Ordinal)));
                 }
             }
         }
@@ -83,7 +95,11 @@ namespace System.Data.Objects.Internal
 
         private object CreateComplexRecursive(object record, object existing)
         {
-            return ((DBNull.Value != record) ? CreateComplexRecursive((IExtendedDataRecord)record, existing) : existing);
+            return (
+                (DBNull.Value != record)
+                    ? CreateComplexRecursive((IExtendedDataRecord)record, existing)
+                    : existing
+            );
         }
 
         private object CreateComplexRecursive(IExtendedDataRecord record, object existing)
@@ -118,11 +134,17 @@ namespace System.Data.Objects.Internal
             Debug.Assert(index != _lastPlanIndex || (null == plans[index]), "index wrapped around");
 
             // create a new plan
-            ObjectTypeMapping mapping = System.Data.Common.Internal.Materialization.Util.GetObjectMapping(recordInfo.RecordType.EdmType, _workspace);
+            ObjectTypeMapping mapping =
+                System.Data.Common.Internal.Materialization.Util.GetObjectMapping(
+                    recordInfo.RecordType.EdmType,
+                    _workspace
+                );
             Debug.Assert(null != mapping, "null ObjectTypeMapping");
 
-            Debug.Assert(Helper.IsComplexType(recordInfo.RecordType.EdmType),
-                         "IExtendedDataRecord is not ComplexType");
+            Debug.Assert(
+                Helper.IsComplexType(recordInfo.RecordType.EdmType),
+                "IExtendedDataRecord is not ComplexType"
+            );
 
             _lastPlanIndex = index;
             plans[index] = new Plan(recordInfo.RecordType, mapping, recordInfo.FieldMetadata);
@@ -135,14 +157,20 @@ namespace System.Data.Objects.Internal
             internal readonly Delegate ClrType;
             internal readonly PlanEdmProperty[] Properties;
 
-            internal Plan(TypeUsage key, ObjectTypeMapping mapping, System.Collections.ObjectModel.ReadOnlyCollection<FieldMetadata> fields)
+            internal Plan(
+                TypeUsage key,
+                ObjectTypeMapping mapping,
+                System.Collections.ObjectModel.ReadOnlyCollection<FieldMetadata> fields
+            )
             {
                 Debug.Assert(null != mapping, "null ObjectTypeMapping");
                 Debug.Assert(null != fields, "null FieldMetadata");
 
                 Key = key;
                 Debug.Assert(!Helper.IsEntityType(mapping.ClrType), "Expecting complex type");
-                ClrType = LightweightCodeGenerator.GetConstructorDelegateForType((ClrComplexType)mapping.ClrType);
+                ClrType = LightweightCodeGenerator.GetConstructorDelegateForType(
+                    (ClrComplexType)mapping.ClrType
+                );
                 Properties = new PlanEdmProperty[fields.Count];
 
                 int lastOrdinal = -1;
@@ -150,11 +178,20 @@ namespace System.Data.Objects.Internal
                 {
                     FieldMetadata field = fields[i];
 
-                    Debug.Assert(unchecked((uint)field.Ordinal) < unchecked((uint)fields.Count), "FieldMetadata.Ordinal out of range of Fields.Count");
-                    Debug.Assert(lastOrdinal < field.Ordinal, "FieldMetadata.Ordinal is not increasing");
+                    Debug.Assert(
+                        unchecked((uint)field.Ordinal) < unchecked((uint)fields.Count),
+                        "FieldMetadata.Ordinal out of range of Fields.Count"
+                    );
+                    Debug.Assert(
+                        lastOrdinal < field.Ordinal,
+                        "FieldMetadata.Ordinal is not increasing"
+                    );
                     lastOrdinal = field.Ordinal;
 
-                    Properties[i] = new PlanEdmProperty(lastOrdinal, mapping.GetPropertyMap(field.FieldType.Name).ClrProperty);
+                    Properties[i] = new PlanEdmProperty(
+                        lastOrdinal,
+                        mapping.GetPropertyMap(field.FieldType.Name).ClrProperty
+                    );
                 }
             }
         }
@@ -172,7 +209,8 @@ namespace System.Data.Objects.Internal
 
                 this.Ordinal = ordinal;
                 this.GetExistingComplex = Helper.IsComplexType(property.TypeUsage.EdmType)
-                    ? LightweightCodeGenerator.GetGetterDelegateForProperty(property) : null;
+                    ? LightweightCodeGenerator.GetGetterDelegateForProperty(property)
+                    : null;
                 this.ClrProperty = LightweightCodeGenerator.GetSetterDelegateForProperty(property);
             }
         }

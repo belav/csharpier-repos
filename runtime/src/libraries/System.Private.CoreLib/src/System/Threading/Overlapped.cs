@@ -16,9 +16,7 @@ namespace System.Threading
         private int _offsetLow;
         private int _offsetHigh;
 
-        public Overlapped()
-        {
-        }
+        public Overlapped() { }
 
         public Overlapped(int offsetLo, int offsetHi, IntPtr hEvent, IAsyncResult? ar)
         {
@@ -28,11 +26,11 @@ namespace System.Threading
             _asyncResult = ar;
         }
 
-        [Obsolete("This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead.")]
+        [Obsolete(
+            "This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead."
+        )]
         public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult? ar)
-            : this(offsetLo, offsetHi, new IntPtr(hEvent), ar)
-        {
-        }
+            : this(offsetLo, offsetHi, new IntPtr(hEvent), ar) { }
 
         public IAsyncResult AsyncResult
         {
@@ -43,16 +41,28 @@ namespace System.Threading
         public int OffsetLow
         {
             get => (_pNativeOverlapped != null) ? _pNativeOverlapped->OffsetLow : _offsetLow;
-            set => ((_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetLow : ref _offsetLow) = value;
+            set =>
+                (
+                    (_pNativeOverlapped != null)
+                        ? ref _pNativeOverlapped->OffsetLow
+                        : ref _offsetLow
+                ) = value;
         }
 
         public int OffsetHigh
         {
             get => (_pNativeOverlapped != null) ? _pNativeOverlapped->OffsetHigh : _offsetHigh;
-            set => ((_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetHigh : ref _offsetHigh) = value;
+            set =>
+                (
+                    (_pNativeOverlapped != null)
+                        ? ref _pNativeOverlapped->OffsetHigh
+                        : ref _offsetHigh
+                ) = value;
         }
 
-        [Obsolete("Overlapped.EventHandle is not 64-bit compatible and has been deprecated. Use EventHandleIntPtr instead.")]
+        [Obsolete(
+            "Overlapped.EventHandle is not 64-bit compatible and has been deprecated. Use EventHandleIntPtr instead."
+        )]
         public int EventHandle
         {
             get => EventHandleIntPtr.ToInt32();
@@ -62,13 +72,19 @@ namespace System.Threading
         public IntPtr EventHandleIntPtr
         {
             get => (_pNativeOverlapped != null) ? _pNativeOverlapped->EventHandle : _eventHandle;
-            set => ((_pNativeOverlapped != null) ? ref _pNativeOverlapped->EventHandle : ref _eventHandle) = value;
+            set =>
+                (
+                    (_pNativeOverlapped != null)
+                        ? ref _pNativeOverlapped->EventHandle
+                        : ref _eventHandle
+                ) = value;
         }
 
-        [Obsolete("This overload is not safe and has been deprecated. Use Pack(IOCompletionCallback?, object?) instead.")]
+        [Obsolete(
+            "This overload is not safe and has been deprecated. Use Pack(IOCompletionCallback?, object?) instead."
+        )]
         [CLSCompliant(false)]
-        public NativeOverlapped* Pack(IOCompletionCallback? iocb)
-            => Pack(iocb, null);
+        public NativeOverlapped* Pack(IOCompletionCallback? iocb) => Pack(iocb, null);
 
         [CLSCompliant(false)]
         public NativeOverlapped* Pack(IOCompletionCallback? iocb, object? userData)
@@ -81,7 +97,10 @@ namespace System.Threading
             if (iocb != null)
             {
                 ExecutionContext? ec = ExecutionContext.Capture();
-                _callback = (ec != null && !ec.IsDefault) ? new IOCompletionCallbackHelper(iocb, ec) : (object)iocb;
+                _callback =
+                    (ec != null && !ec.IsDefault)
+                        ? new IOCompletionCallbackHelper(iocb, ec)
+                        : (object)iocb;
             }
             else
             {
@@ -90,10 +109,11 @@ namespace System.Threading
             return AllocateNativeOverlapped(userData);
         }
 
-        [Obsolete("This overload is not safe and has been deprecated. Use UnsafePack(IOCompletionCallback?, object?) instead.")]
+        [Obsolete(
+            "This overload is not safe and has been deprecated. Use UnsafePack(IOCompletionCallback?, object?) instead."
+        )]
         [CLSCompliant(false)]
-        public NativeOverlapped* UnsafePack(IOCompletionCallback? iocb)
-            => UnsafePack(iocb, null);
+        public NativeOverlapped* UnsafePack(IOCompletionCallback? iocb) => UnsafePack(iocb, null);
 
         [CLSCompliant(false)]
         public NativeOverlapped* UnsafePack(IOCompletionCallback? iocb, object? userData)
@@ -146,8 +166,11 @@ namespace System.Threading
                     }
                 }
 
-                pNativeOverlapped = (NativeOverlapped*)NativeMemory.Alloc(
-                    (nuint)(sizeof(NativeOverlapped) + sizeof(nuint)) + handleCount * (nuint)sizeof(GCHandle));
+                pNativeOverlapped = (NativeOverlapped*)
+                    NativeMemory.Alloc(
+                        (nuint)(sizeof(NativeOverlapped) + sizeof(nuint))
+                            + handleCount * (nuint)sizeof(GCHandle)
+                    );
 
                 GCHandleCountRef(pNativeOverlapped) = 0;
 
@@ -167,13 +190,19 @@ namespace System.Threading
                         object[] objArray = (object[])userData;
                         for (int i = 0; i < objArray.Length; i++)
                         {
-                            GCHandleRef(pNativeOverlapped, (nuint)(i + 1)) = GCHandle.Alloc(objArray[i], GCHandleType.Pinned);
+                            GCHandleRef(pNativeOverlapped, (nuint)(i + 1)) = GCHandle.Alloc(
+                                objArray[i],
+                                GCHandleType.Pinned
+                            );
                             GCHandleCountRef(pNativeOverlapped)++;
                         }
                     }
                     else
                     {
-                        GCHandleRef(pNativeOverlapped, 1) = GCHandle.Alloc(userData, GCHandleType.Pinned);
+                        GCHandleRef(pNativeOverlapped, 1) = GCHandle.Alloc(
+                            userData,
+                            GCHandleType.Pinned
+                        );
                         GCHandleCountRef(pNativeOverlapped)++;
                     }
                 }
@@ -217,11 +246,11 @@ namespace System.Threading
         //
         // The NativeOverlapped structure is followed by GC handle count and inline array of GC handles
         //
-        private static ref nuint GCHandleCountRef(NativeOverlapped* pNativeOverlapped)
-            => ref *(nuint*)(pNativeOverlapped + 1);
+        private static ref nuint GCHandleCountRef(NativeOverlapped* pNativeOverlapped) =>
+            ref *(nuint*)(pNativeOverlapped + 1);
 
-        private static ref GCHandle GCHandleRef(NativeOverlapped* pNativeOverlapped, nuint index)
-            => ref *((GCHandle*)((nuint*)(pNativeOverlapped + 1) + 1) + index);
+        private static ref GCHandle GCHandleRef(NativeOverlapped* pNativeOverlapped, nuint index) =>
+            ref *((GCHandle*)((nuint*)(pNativeOverlapped + 1) + 1) + index);
 
         internal static Overlapped GetOverlappedFromNative(NativeOverlapped* pNativeOverlapped)
         {

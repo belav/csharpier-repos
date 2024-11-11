@@ -10,7 +10,10 @@ namespace Microsoft.CodeAnalysis
 {
     internal abstract class SyntaxInputNode
     {
-        internal abstract ISyntaxInputBuilder GetBuilder(StateTableStore table, bool trackIncrementalSteps);
+        internal abstract ISyntaxInputBuilder GetBuilder(
+            StateTableStore table,
+            bool trackIncrementalSteps
+        );
     }
 
     internal sealed class SyntaxInputNode<T> : SyntaxInputNode, IIncrementalGeneratorNode<T>
@@ -20,7 +23,12 @@ namespace Microsoft.CodeAnalysis
         private readonly IEqualityComparer<T> _comparer;
         private readonly string? _name;
 
-        internal SyntaxInputNode(ISyntaxSelectionStrategy<T> inputNode, Action<SyntaxInputNode, IIncrementalGeneratorOutputNode> registerOutput, IEqualityComparer<T>? comparer = null, string? name = null)
+        internal SyntaxInputNode(
+            ISyntaxSelectionStrategy<T> inputNode,
+            Action<SyntaxInputNode, IIncrementalGeneratorOutputNode> registerOutput,
+            IEqualityComparer<T>? comparer = null,
+            string? name = null
+        )
         {
             _inputNode = inputNode;
             _registerOutput = registerOutput;
@@ -28,17 +36,31 @@ namespace Microsoft.CodeAnalysis
             _name = name;
         }
 
-        public NodeStateTable<T> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<T>? previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<T> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<T>? previousTable,
+            CancellationToken cancellationToken
+        )
         {
-            return (NodeStateTable<T>)graphState.SyntaxStore.GetSyntaxInputTable(this, graphState.GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees));
+            return (NodeStateTable<T>)
+                graphState.SyntaxStore.GetSyntaxInputTable(
+                    this,
+                    graphState.GetLatestStateTableForNode(SharedInputNodes.SyntaxTrees)
+                );
         }
 
-        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) => new SyntaxInputNode<T>(_inputNode, _registerOutput, comparer, _name);
+        public IIncrementalGeneratorNode<T> WithComparer(IEqualityComparer<T> comparer) =>
+            new SyntaxInputNode<T>(_inputNode, _registerOutput, comparer, _name);
 
-        public IIncrementalGeneratorNode<T> WithTrackingName(string name) => new SyntaxInputNode<T>(_inputNode, _registerOutput, _comparer, name);
+        public IIncrementalGeneratorNode<T> WithTrackingName(string name) =>
+            new SyntaxInputNode<T>(_inputNode, _registerOutput, _comparer, name);
 
-        public void RegisterOutput(IIncrementalGeneratorOutputNode output) => _registerOutput(this, output);
+        public void RegisterOutput(IIncrementalGeneratorOutputNode output) =>
+            _registerOutput(this, output);
 
-        internal override ISyntaxInputBuilder GetBuilder(StateTableStore table, bool trackIncrementalSteps) => _inputNode.GetBuilder(table, this, trackIncrementalSteps, _name, _comparer);
+        internal override ISyntaxInputBuilder GetBuilder(
+            StateTableStore table,
+            bool trackIncrementalSteps
+        ) => _inputNode.GetBuilder(table, this, trackIncrementalSteps, _name, _comparer);
     }
 }

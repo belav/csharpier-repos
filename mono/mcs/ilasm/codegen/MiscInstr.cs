@@ -10,16 +10,16 @@
 
 using System;
 
-namespace Mono.ILASM {
-
-        public enum MiscInstr {
-                ldstr,
-                ldc_r4,
-                ldc_r8,
-                ldc_i8,
-                _switch,
-                calli,
-                ldtoken
-        }
+namespace Mono.ILASM
+{
+    public enum MiscInstr
+    {
+        ldstr,
+        ldc_r4,
+        ldc_r8,
+        ldc_i8,
+        _switch,
+        calli,
+        ldtoken,
+    }
 }
-

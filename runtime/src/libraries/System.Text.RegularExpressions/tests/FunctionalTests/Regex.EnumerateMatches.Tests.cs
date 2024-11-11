@@ -26,25 +26,73 @@ namespace System.Text.RegularExpressions.Tests
         public void EnumerateMatches_Ctor_Invalid()
         {
             // Pattern is null
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.EnumerateMatches("input", null));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.EnumerateMatches("input", null, RegexOptions.None));
-            AssertExtensions.Throws<ArgumentNullException>("pattern", () => Regex.EnumerateMatches("input", null, RegexOptions.None, TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => Regex.EnumerateMatches("input", null)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () => Regex.EnumerateMatches("input", null, RegexOptions.None)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pattern",
+                () =>
+                    Regex.EnumerateMatches(
+                        "input",
+                        null,
+                        RegexOptions.None,
+                        TimeSpan.FromSeconds(1)
+                    )
+            );
 
             // Options are invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)(-1)));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)(-1), TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)(-1))
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    Regex.EnumerateMatches(
+                        "input",
+                        "pattern",
+                        (RegexOptions)(-1),
+                        TimeSpan.FromSeconds(1)
+                    )
+            );
 
             // 0x400 is new NonBacktracking mode that is now valid, 0x800 is still invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)0x800));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("options", () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)0x800, TimeSpan.FromSeconds(1)));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () => Regex.EnumerateMatches("input", "pattern", (RegexOptions)0x800)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "options",
+                () =>
+                    Regex.EnumerateMatches(
+                        "input",
+                        "pattern",
+                        (RegexOptions)0x800,
+                        TimeSpan.FromSeconds(1)
+                    )
+            );
 
             // MatchTimeout is invalid
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("matchTimeout", () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "matchTimeout",
+                () => Regex.EnumerateMatches("input", "pattern", RegexOptions.None, TimeSpan.Zero)
+            );
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public void EnumerateMatches_Lookahead(RegexEngine engine)
         {
             if (RegexHelpers.IsNonBacktracking(engine))
@@ -56,19 +104,28 @@ namespace System.Text.RegularExpressions.Tests
             const string Pattern = @"\b(?!un)\w+\b";
             const string Input = "unite one unethical ethics use untie ultimate";
 
-            Regex r = RegexHelpers.GetRegexAsync(engine, Pattern, RegexOptions.IgnoreCase).GetAwaiter().GetResult();
+            Regex r = RegexHelpers
+                .GetRegexAsync(engine, Pattern, RegexOptions.IgnoreCase)
+                .GetAwaiter()
+                .GetResult();
             int count = 0;
             string[] expectedMatches = new[] { "one", "ethics", "use", "ultimate" };
             ReadOnlySpan<char> span = Input.AsSpan();
             foreach (ValueMatch match in r.EnumerateMatches(span))
             {
-                Assert.Equal(expectedMatches[count++], span.Slice(match.Index, match.Length).ToString());
+                Assert.Equal(
+                    expectedMatches[count++],
+                    span.Slice(match.Index, match.Length).ToString()
+                );
             }
             Assert.Equal(4, count);
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public void EnumerateMatches_Lookbehind(RegexEngine engine)
         {
             if (RegexHelpers.IsNonBacktracking(engine))
@@ -80,19 +137,28 @@ namespace System.Text.RegularExpressions.Tests
             const string Pattern = @"(?<=\b20)\d{2}\b";
             const string Input = "2010 1999 1861 2140 2009";
 
-            Regex r = RegexHelpers.GetRegexAsync(engine, Pattern, RegexOptions.IgnoreCase).GetAwaiter().GetResult();
+            Regex r = RegexHelpers
+                .GetRegexAsync(engine, Pattern, RegexOptions.IgnoreCase)
+                .GetAwaiter()
+                .GetResult();
             int count = 0;
             string[] expectedMatches = new[] { "10", "09" };
             ReadOnlySpan<char> span = Input.AsSpan();
             foreach (ValueMatch match in r.EnumerateMatches(span))
             {
-                Assert.Equal(expectedMatches[count++], span.Slice(match.Index, match.Length).ToString());
+                Assert.Equal(
+                    expectedMatches[count++],
+                    span.Slice(match.Index, match.Length).ToString()
+                );
             }
             Assert.Equal(2, count);
         }
 
         [Theory]
-        [MemberData(nameof(RegexHelpers.AvailableEngines_MemberData), MemberType = typeof(RegexHelpers))]
+        [MemberData(
+            nameof(RegexHelpers.AvailableEngines_MemberData),
+            MemberType = typeof(RegexHelpers)
+        )]
         public void EnumerateMatches_CheckIndex(RegexEngine engine)
         {
             const string Pattern = @"e{2}\w\b";
@@ -105,7 +171,10 @@ namespace System.Text.RegularExpressions.Tests
             ReadOnlySpan<char> span = Input.AsSpan();
             foreach (ValueMatch match in r.EnumerateMatches(span))
             {
-                Assert.Equal(expectedMatches[count], span.Slice(match.Index, match.Length).ToString());
+                Assert.Equal(
+                    expectedMatches[count],
+                    span.Slice(match.Index, match.Length).ToString()
+                );
                 Assert.Equal(expectedIndex[count++], match.Index);
             }
         }
@@ -115,16 +184,28 @@ namespace System.Text.RegularExpressions.Tests
     {
         [Theory]
         [MemberData(nameof(Matches_TestData))]
-        public void EnumerateMatches(RegexEngine engine, string pattern, string input, RegexOptions options, CaptureData[] expected)
+        public void EnumerateMatches(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            RegexOptions options,
+            CaptureData[] expected
+        )
         {
-            Regex regexAdvanced = RegexHelpers.GetRegexAsync(engine, pattern, options).GetAwaiter().GetResult();
+            Regex regexAdvanced = RegexHelpers
+                .GetRegexAsync(engine, pattern, options)
+                .GetAwaiter()
+                .GetResult();
             int count = 0;
             ReadOnlySpan<char> span = input.AsSpan();
             foreach (ValueMatch match in regexAdvanced.EnumerateMatches(span))
             {
                 Assert.Equal(expected[count].Index, match.Index);
                 Assert.Equal(expected[count].Length, match.Length);
-                Assert.Equal(expected[count].Value, span.Slice(match.Index, match.Length).ToString());
+                Assert.Equal(
+                    expected[count].Value,
+                    span.Slice(match.Index, match.Length).ToString()
+                );
                 count++;
             }
             Assert.Equal(expected.Length, count);
@@ -135,7 +216,12 @@ namespace System.Text.RegularExpressions.Tests
     {
         [Theory]
         [MemberData(nameof(Match_Count_TestData))]
-        public void EnumerateMatches_Count(RegexEngine engine, string pattern, string input, int expectedCount)
+        public void EnumerateMatches_Count(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            int expectedCount
+        )
         {
             Regex r = RegexHelpers.GetRegexAsync(engine, pattern).GetAwaiter().GetResult();
             int count = 0;
@@ -151,7 +237,14 @@ namespace System.Text.RegularExpressions.Tests
     {
         [Theory]
         [MemberData(nameof(Count_ReturnsExpectedCount_TestData))]
-        public void EnumerateMatches_ReturnsExpectedCount(RegexEngine engine, string pattern, string input, int startat, RegexOptions options, int expectedCount)
+        public void EnumerateMatches_ReturnsExpectedCount(
+            RegexEngine engine,
+            string pattern,
+            string input,
+            int startat,
+            RegexOptions options,
+            int expectedCount
+        )
         {
             Regex r = RegexHelpers.GetRegexAsync(engine, pattern, options).GetAwaiter().GetResult();
 
@@ -164,7 +257,8 @@ namespace System.Text.RegularExpressions.Tests
             }
             Assert.Equal(expectedCount, count);
 
-            bool isDefaultStartAt = startat == ((options & RegexOptions.RightToLeft) != 0 ? input.Length : 0);
+            bool isDefaultStartAt =
+                startat == ((options & RegexOptions.RightToLeft) != 0 ? input.Length : 0);
             if (!isDefaultStartAt)
             {
                 return;
@@ -187,14 +281,27 @@ namespace System.Text.RegularExpressions.Tests
                 case RegexEngine.NonBacktracking:
                     RegexOptions engineOptions = RegexHelpers.OptionsFromEngine(engine);
                     count = 0;
-                    foreach (ValueMatch _ in Regex.EnumerateMatches(input, pattern, options | engineOptions))
+                    foreach (
+                        ValueMatch _ in Regex.EnumerateMatches(
+                            input,
+                            pattern,
+                            options | engineOptions
+                        )
+                    )
                     {
                         count++;
                     }
                     Assert.Equal(expectedCount, count);
 
                     count = 0;
-                    foreach (ValueMatch _ in Regex.EnumerateMatches(input, pattern, options | engineOptions, Regex.InfiniteMatchTimeout))
+                    foreach (
+                        ValueMatch _ in Regex.EnumerateMatches(
+                            input,
+                            pattern,
+                            options | engineOptions,
+                            Regex.InfiniteMatchTimeout
+                        )
+                    )
                     {
                         count++;
                     }

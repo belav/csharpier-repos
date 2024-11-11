@@ -5,8 +5,8 @@ using System;
 using System.IO;
 using System.Reflection;
 using Microsoft.Build.Locator;
-using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.DotNet.OpenApi.Commands;
+using Microsoft.DotNet.Openapi.Tools;
 using Microsoft.Extensions.CommandLineUtils;
 
 namespace Microsoft.DotNet.OpenApi;
@@ -22,7 +22,8 @@ internal sealed class Application : CommandLineApplication
         string workingDirectory,
         IHttpClientWrapper httpClient,
         TextWriter output = null,
-        TextWriter error = null)
+        TextWriter error = null
+    )
     {
         Out = output ?? Out;
         Error = error ?? Error;
@@ -66,7 +67,6 @@ internal sealed class Application : CommandLineApplication
             }
             return 1;
         }
-
         catch (ArgumentException ex)
         {
             // Don't show a call stack when we have unneeded arguments, just print the error message.

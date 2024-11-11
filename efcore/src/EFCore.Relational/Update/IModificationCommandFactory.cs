@@ -30,7 +30,8 @@ public interface IModificationCommandFactory
     /// <param name="modificationCommandParameters">The creation parameters.</param>
     /// <returns>A new <see cref="IModificationCommand" /> instance.</returns>
     IModificationCommand CreateModificationCommand(
-        in ModificationCommandParameters modificationCommandParameters);
+        in ModificationCommandParameters modificationCommandParameters
+    );
 
     /// <summary>
     ///     Creates a new database CUD command.
@@ -38,5 +39,6 @@ public interface IModificationCommandFactory
     /// <param name="modificationCommandParameters">The creation parameters.</param>
     /// <returns>A new <see cref="INonTrackedModificationCommand" /> instance.</returns>
     INonTrackedModificationCommand CreateNonTrackedModificationCommand(
-        in NonTrackedModificationCommandParameters modificationCommandParameters);
+        in NonTrackedModificationCommandParameters modificationCommandParameters
+    );
 }

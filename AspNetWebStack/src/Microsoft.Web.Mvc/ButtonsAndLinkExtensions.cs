@@ -28,7 +28,11 @@ namespace Microsoft.Web.Mvc
         /// <param name="name">The name.</param>
         /// <param name="buttonText">The text for the button face</param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string name, string buttonText)
+        public static MvcHtmlString SubmitButton(
+            this HtmlHelper helper,
+            string name,
+            string buttonText
+        )
         {
             return SubmitButton(helper, name, buttonText, null);
         }
@@ -50,9 +54,18 @@ namespace Microsoft.Web.Mvc
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string name, string buttonText, object htmlAttributes)
+        public static MvcHtmlString SubmitButton(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            object htmlAttributes
+        )
         {
-            return helper.SubmitButton(name, buttonText, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return helper.SubmitButton(
+                name,
+                buttonText,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         /// <summary>
@@ -63,10 +76,24 @@ namespace Microsoft.Web.Mvc
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="htmlAttributes">Dictionary of HTML settings</param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "helper", Justification = "Required for Extension Method")]
-        public static MvcHtmlString SubmitButton(this HtmlHelper helper, string name, string buttonText, IDictionary<string, object> htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "helper",
+            Justification = "Required for Extension Method"
+        )]
+        public static MvcHtmlString SubmitButton(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return MvcHtmlString.Create(ButtonBuilder.SubmitButton(name, buttonText, htmlAttributes).ToString(TagRenderMode.SelfClosing));
+            return MvcHtmlString.Create(
+                ButtonBuilder
+                    .SubmitButton(name, buttonText, htmlAttributes)
+                    .ToString(TagRenderMode.SelfClosing)
+            );
         }
 
         /// <summary>
@@ -76,7 +103,11 @@ namespace Microsoft.Web.Mvc
         /// <param name="name">Name of the button</param>
         /// <param name="imageSrc">The URL for the image</param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitImage(this HtmlHelper helper, string name, string imageSrc)
+        public static MvcHtmlString SubmitImage(
+            this HtmlHelper helper,
+            string name,
+            string imageSrc
+        )
         {
             return helper.SubmitImage(name, imageSrc, null);
         }
@@ -89,9 +120,18 @@ namespace Microsoft.Web.Mvc
         /// <param name="imageSrc">The URL for the image</param>
         /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitImage(this HtmlHelper helper, string name, string imageSrc, object htmlAttributes)
+        public static MvcHtmlString SubmitImage(
+            this HtmlHelper helper,
+            string name,
+            string imageSrc,
+            object htmlAttributes
+        )
         {
-            return helper.SubmitImage(name, imageSrc, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return helper.SubmitImage(
+                name,
+                imageSrc,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         /// <summary>
@@ -102,15 +142,27 @@ namespace Microsoft.Web.Mvc
         /// <param name="imageSrc">The URL for the image</param>
         /// <param name="htmlAttributes">Dictionary of HTML settings</param>
         /// <returns></returns>
-        public static MvcHtmlString SubmitImage(this HtmlHelper helper, string name, string imageSrc, IDictionary<string, object> htmlAttributes)
+        public static MvcHtmlString SubmitImage(
+            this HtmlHelper helper,
+            string name,
+            string imageSrc,
+            IDictionary<string, object> htmlAttributes
+        )
         {
             if (imageSrc == null)
             {
                 throw new ArgumentNullException("imageSrc");
             }
 
-            string resolvedUrl = UrlHelper.GenerateContentUrl(imageSrc, helper.ViewContext.HttpContext);
-            return MvcHtmlString.Create(ButtonBuilder.SubmitImage(name, resolvedUrl, htmlAttributes).ToString(TagRenderMode.SelfClosing));
+            string resolvedUrl = UrlHelper.GenerateContentUrl(
+                imageSrc,
+                helper.ViewContext.HttpContext
+            );
+            return MvcHtmlString.Create(
+                ButtonBuilder
+                    .SubmitImage(name, resolvedUrl, htmlAttributes)
+                    .ToString(TagRenderMode.SelfClosing)
+            );
         }
 
         /// <summary>
@@ -121,9 +173,20 @@ namespace Microsoft.Web.Mvc
         /// <param name="buttonText">The text for the button face</param>
         /// <param name="buttonType">The button type (Button, Submit, or Reset)</param>
         /// <returns></returns>
-        public static MvcHtmlString Button(this HtmlHelper helper, string name, string buttonText, HtmlButtonType buttonType)
+        public static MvcHtmlString Button(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            HtmlButtonType buttonType
+        )
         {
-            return helper.Button(name, buttonText, buttonType, null, (IDictionary<string, object>)null);
+            return helper.Button(
+                name,
+                buttonText,
+                buttonType,
+                null,
+                (IDictionary<string, object>)null
+            );
         }
 
         /// <summary>
@@ -135,9 +198,21 @@ namespace Microsoft.Web.Mvc
         /// <param name="buttonType">The button type (Button, Submit, or Reset)</param>
         /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
         /// <returns></returns>
-        public static MvcHtmlString Button(this HtmlHelper helper, string name, string buttonText, HtmlButtonType buttonType, string onClickMethod)
+        public static MvcHtmlString Button(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            HtmlButtonType buttonType,
+            string onClickMethod
+        )
         {
-            return helper.Button(name, buttonText, buttonType, onClickMethod, (IDictionary<string, object>)null);
+            return helper.Button(
+                name,
+                buttonText,
+                buttonType,
+                onClickMethod,
+                (IDictionary<string, object>)null
+            );
         }
 
         /// <summary>
@@ -150,9 +225,22 @@ namespace Microsoft.Web.Mvc
         /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
         /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
-        public static MvcHtmlString Button(this HtmlHelper helper, string name, string buttonText, HtmlButtonType buttonType, string onClickMethod, object htmlAttributes)
+        public static MvcHtmlString Button(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            HtmlButtonType buttonType,
+            string onClickMethod,
+            object htmlAttributes
+        )
         {
-            return helper.Button(name, buttonText, buttonType, onClickMethod, HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes));
+            return helper.Button(
+                name,
+                buttonText,
+                buttonType,
+                onClickMethod,
+                HtmlHelper.AnonymousObjectToHtmlAttributes(htmlAttributes)
+            );
         }
 
         /// <summary>
@@ -165,10 +253,26 @@ namespace Microsoft.Web.Mvc
         /// <param name="onClickMethod">The method or script routine to call when the button is clicked.</param>
         /// <param name="htmlAttributes">Any attributes you want set on the tag. Use anonymous-type declaration for this: new{class=cssclass}</param>
         /// <returns></returns>
-        [SuppressMessage("Microsoft.Usage", "CA1801:ReviewUnusedParameters", MessageId = "helper", Justification = "This is an Extension Method and requires this argument")]
-        public static MvcHtmlString Button(this HtmlHelper helper, string name, string buttonText, HtmlButtonType buttonType, string onClickMethod, IDictionary<string, object> htmlAttributes)
+        [SuppressMessage(
+            "Microsoft.Usage",
+            "CA1801:ReviewUnusedParameters",
+            MessageId = "helper",
+            Justification = "This is an Extension Method and requires this argument"
+        )]
+        public static MvcHtmlString Button(
+            this HtmlHelper helper,
+            string name,
+            string buttonText,
+            HtmlButtonType buttonType,
+            string onClickMethod,
+            IDictionary<string, object> htmlAttributes
+        )
         {
-            return MvcHtmlString.Create(ButtonBuilder.Button(name, buttonText, buttonType, onClickMethod, htmlAttributes).ToString(TagRenderMode.Normal));
+            return MvcHtmlString.Create(
+                ButtonBuilder
+                    .Button(name, buttonText, buttonType, onClickMethod, htmlAttributes)
+                    .ToString(TagRenderMode.Normal)
+            );
         }
     }
 }

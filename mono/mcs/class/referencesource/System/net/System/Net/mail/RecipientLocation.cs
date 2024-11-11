@@ -11,7 +11,7 @@ namespace System.Net.Mail
     /*
     // Consider removing.
 #if MAKE_MAILCLIENT_PUBLIC
-    internal 
+    internal
 #else
     internal
 #endif

@@ -54,13 +54,11 @@ public class Program
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static IFoo<Program> GetIFoo() => _foo;
 
-
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int TestCov() => GetIFooCov().GetValue();
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static IFooCov<object> GetIFooCov() => _fooCov;
-
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     private static int TestShared<T>() => GetIFooM<T>().GetValue();
@@ -83,7 +81,6 @@ public class Foo2<T> : IFoo<T>
 {
     public int GetValue() => 43;
 }
-
 
 public interface IFooCov<out T>
 {

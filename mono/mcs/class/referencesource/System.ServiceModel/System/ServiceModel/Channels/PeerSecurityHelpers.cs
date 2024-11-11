@@ -60,7 +60,9 @@ namespace System.ServiceModel.Channels
                     using (SHA256Managed sha = new SHA256Managed())
                     {
                         pwdHash = sha.ComputeHash(pwdBytes);
-                        tempBuffer = DiagnosticUtility.Utility.AllocateByteArray(checked(message.Length + pwdHash.Length));
+                        tempBuffer = DiagnosticUtility.Utility.AllocateByteArray(
+                            checked(message.Length + pwdHash.Length)
+                        );
                         Array.Copy(pwdHash, tempBuffer, pwdHash.Length);
                         Array.Copy(message, 0, tempBuffer, pwdHash.Length, message.Length);
 
@@ -125,20 +127,20 @@ namespace System.ServiceModel.Channels
             PeerHashToken request = PeerRequestSecurityTokenResponse.CreateHashTokenFrom(message);
             return request.Validate(claim, password);
         }
-
     }
-
 
     internal class PeerIdentityClaim
     {
         const string resourceValue = "peer";
         const string resourceRight = "peer";
         public const string PeerClaimType = PeerStrings.Namespace + "/peer";
-        static internal Claim Claim()
+
+        internal static Claim Claim()
         {
             return new Claim(PeerClaimType, resourceValue, resourceRight);
         }
-        static internal bool IsMatch(EndpointIdentity identity)
+
+        internal static bool IsMatch(EndpointIdentity identity)
         {
             return identity.IdentityClaim.ClaimType == PeerClaimType;
         }
@@ -146,15 +148,19 @@ namespace System.ServiceModel.Channels
 
     class PeerDoNothingSecurityProtocol : SecurityProtocol
     {
-        public PeerDoNothingSecurityProtocol(SecurityProtocolFactory factory) : base(factory, null, null) { }
-        public override void SecureOutgoingMessage(ref Message message, TimeSpan timeout)
-        {
-        }
+        public PeerDoNothingSecurityProtocol(SecurityProtocolFactory factory)
+            : base(factory, null, null) { }
+
+        public override void SecureOutgoingMessage(ref Message message, TimeSpan timeout) { }
+
         public override void VerifyIncomingMessage(ref Message request, TimeSpan timeout)
         {
             try
             {
-                int i = request.Headers.FindHeader(SecurityJan2004Strings.Security, SecurityJan2004Strings.Namespace);
+                int i = request.Headers.FindHeader(
+                    SecurityJan2004Strings.Security,
+                    SecurityJan2004Strings.Namespace
+                );
                 if (i >= 0)
                 {
                     request.Headers.AddUnderstood(i);
@@ -172,51 +178,51 @@ namespace System.ServiceModel.Channels
             {
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
             }
-
         }
 
-        public override void OnAbort()
-        {
-        }
+        public override void OnAbort() { }
 
-        public override void OnClose(TimeSpan timeout)
-        {
-        }
+        public override void OnClose(TimeSpan timeout) { }
 
-        public override void OnOpen(TimeSpan timeout)
-        {
-        }
+        public override void OnOpen(TimeSpan timeout) { }
     }
 
     class PeerDoNothingSecurityProtocolFactory : SecurityProtocolFactory
     {
-        protected override SecurityProtocol OnCreateSecurityProtocol(EndpointAddress target, Uri via, object listenerSecurityState, TimeSpan timeout)
+        protected override SecurityProtocol OnCreateSecurityProtocol(
+            EndpointAddress target,
+            Uri via,
+            object listenerSecurityState,
+            TimeSpan timeout
+        )
         {
             return new PeerDoNothingSecurityProtocol(this);
         }
 
-        public override void OnAbort()
-        {
-        }
+        public override void OnAbort() { }
 
+        public override void OnOpen(TimeSpan timeout) { }
 
-        public override void OnOpen(TimeSpan timeout)
-        {
-        }
-
-        public override void OnClose(TimeSpan timeout)
-        {
-        }
+        public override void OnClose(TimeSpan timeout) { }
     }
 
     class PeerIdentityVerifier : IdentityVerifier
     {
-        public PeerIdentityVerifier() : base() { }
-        public override bool CheckAccess(EndpointIdentity identity, AuthorizationContext authContext)
+        public PeerIdentityVerifier()
+            : base() { }
+
+        public override bool CheckAccess(
+            EndpointIdentity identity,
+            AuthorizationContext authContext
+        )
         {
             return true;
         }
-        public override bool TryGetIdentity(EndpointAddress reference, out EndpointIdentity identity)
+
+        public override bool TryGetIdentity(
+            EndpointAddress reference,
+            out EndpointIdentity identity
+        )
         {
             if (reference == null)
                 throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("reference");
@@ -242,7 +248,11 @@ namespace System.ServiceModel.Channels
     class PeerX509TokenProvider : X509SecurityTokenProvider
     {
         X509CertificateValidator validator;
-        public PeerX509TokenProvider(X509CertificateValidator validator, X509Certificate2 credential)
+
+        public PeerX509TokenProvider(
+            X509CertificateValidator validator,
+            X509Certificate2 credential
+        )
             : base(credential)
         {
             this.validator = validator;
@@ -264,7 +274,10 @@ namespace System.ServiceModel.Channels
         X509Certificate2 selfCertificate;
         X509CertificateValidator certificateValidator;
 
-        public PeerCertificateClientCredentials(X509Certificate2 selfCertificate, X509CertificateValidator validator)
+        public PeerCertificateClientCredentials(
+            X509Certificate2 selfCertificate,
+            X509CertificateValidator validator
+        )
         {
             this.selfCertificate = selfCertificate;
             this.certificateValidator = validator;
@@ -279,35 +292,62 @@ namespace System.ServiceModel.Channels
         {
             PeerCertificateClientCredentials creds;
 
-            public PeerCertificateClientCredentialsSecurityTokenManager(PeerCertificateClientCredentials creds)
+            public PeerCertificateClientCredentialsSecurityTokenManager(
+                PeerCertificateClientCredentials creds
+            )
             {
                 this.creds = creds;
             }
 
-            public override SecurityTokenSerializer CreateSecurityTokenSerializer(SecurityTokenVersion version)
+            public override SecurityTokenSerializer CreateSecurityTokenSerializer(
+                SecurityTokenVersion version
+            )
             {
                 MessageSecurityTokenVersion messageVersion = (MessageSecurityTokenVersion)version;
-                return new WSSecurityTokenSerializer(messageVersion.SecurityVersion, messageVersion.TrustVersion, messageVersion.SecureConversationVersion, messageVersion.EmitBspRequiredAttributes, null, null, null);
+                return new WSSecurityTokenSerializer(
+                    messageVersion.SecurityVersion,
+                    messageVersion.TrustVersion,
+                    messageVersion.SecureConversationVersion,
+                    messageVersion.EmitBspRequiredAttributes,
+                    null,
+                    null,
+                    null
+                );
             }
 
-            public override SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(SecurityTokenRequirement tokenRequirement, out SecurityTokenResolver outOfBandTokenResolver)
+            public override SecurityTokenAuthenticator CreateSecurityTokenAuthenticator(
+                SecurityTokenRequirement tokenRequirement,
+                out SecurityTokenResolver outOfBandTokenResolver
+            )
             {
-                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new NotSupportedException()
+                );
             }
 
-            public override SecurityTokenProvider CreateSecurityTokenProvider(SecurityTokenRequirement requirement)
+            public override SecurityTokenProvider CreateSecurityTokenProvider(
+                SecurityTokenRequirement requirement
+            )
             {
                 if (requirement == null)
                 {
                     throw DiagnosticUtility.ExceptionUtility.ThrowHelperArgumentNull("requirement");
                 }
-                if (requirement.TokenType == SecurityTokenTypes.X509Certificate && requirement.KeyUsage == SecurityKeyUsage.Signature)
+                if (
+                    requirement.TokenType == SecurityTokenTypes.X509Certificate
+                    && requirement.KeyUsage == SecurityKeyUsage.Signature
+                )
                 {
-                    return new PeerX509TokenProvider(this.creds.certificateValidator, this.creds.selfCertificate);
+                    return new PeerX509TokenProvider(
+                        this.creds.certificateValidator,
+                        this.creds.selfCertificate
+                    );
                 }
                 else
                 {
-                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(new NotSupportedException());
+                    throw DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                        new NotSupportedException()
+                    );
                 }
             }
         }
@@ -320,7 +360,8 @@ namespace System.ServiceModel.Channels
         bool isValid;
         ReadOnlyCollection<SecurityKey> keys;
         internal const string TokenTypeString = PeerStrings.Namespace + "/peerhashtoken";
-        internal const string RequestTypeString = "http://schemas.xmlsoap.org/ws/2005/02/trust/Validate";
+        internal const string RequestTypeString =
+            "http://schemas.xmlsoap.org/ws/2005/02/trust/Validate";
         internal const string Action = "http://schemas.xmlsoap.org/ws/2005/02/trust/RST/Validate";
         public const string PeerNamespace = PeerStrings.Namespace;
         public const string PeerTokenElementName = "PeerHashToken";
@@ -372,10 +413,7 @@ namespace System.ServiceModel.Channels
 
         public static PeerHashToken Invalid
         {
-            get
-            {
-                return invalid;
-            }
+            get { return invalid; }
         }
 
         public override ReadOnlyCollection<SecurityKey> SecurityKeys
@@ -392,18 +430,12 @@ namespace System.ServiceModel.Channels
 
         public Uri Status
         {
-            get
-            {
-                return this.status;
-            }
+            get { return this.status; }
         }
 
         public bool IsValid
         {
-            get
-            {
-                return this.isValid;
-            }
+            get { return this.isValid; }
         }
 
         public bool Validate(Claim claim, string password)
@@ -419,7 +451,11 @@ namespace System.ServiceModel.Channels
         void CheckValidity()
         {
             isValid = this.authenticator != null;
-            status = new Uri(isValid ? PeerRequestSecurityTokenResponse.ValidString : PeerRequestSecurityTokenResponse.InvalidString);
+            status = new Uri(
+                isValid
+                    ? PeerRequestSecurityTokenResponse.ValidString
+                    : PeerRequestSecurityTokenResponse.InvalidString
+            );
         }
 
         public void Write(XmlWriter writer)
@@ -438,16 +474,34 @@ namespace System.ServiceModel.Channels
             {
                 XmlElement element = (XmlElement)node;
 
-                if (element == null || !PeerRequestSecurityToken.CompareWithNS(element.LocalName, element.NamespaceURI, PeerTokenElementName, PeerNamespace))
+                if (
+                    element == null
+                    || !PeerRequestSecurityToken.CompareWithNS(
+                        element.LocalName,
+                        element.NamespaceURI,
+                        PeerTokenElementName,
+                        PeerNamespace
+                    )
+                )
                     continue;
                 if (element.ChildNodes.Count != 1)
                     break;
                 XmlElement authElement = element.ChildNodes[0] as XmlElement;
-                if (authElement == null || !PeerRequestSecurityToken.CompareWithNS(authElement.LocalName, authElement.NamespaceURI, PeerAuthenticatorElementName, PeerNamespace))
+                if (
+                    authElement == null
+                    || !PeerRequestSecurityToken.CompareWithNS(
+                        authElement.LocalName,
+                        authElement.NamespaceURI,
+                        PeerAuthenticatorElementName,
+                        PeerNamespace
+                    )
+                )
                     break;
                 try
                 {
-                    auth = Convert.FromBase64String(XmlHelper.ReadTextElementAsTrimmedString(authElement));
+                    auth = Convert.FromBase64String(
+                        XmlHelper.ReadTextElementAsTrimmedString(authElement)
+                    );
                     break;
                 }
                 catch (ArgumentNullException e)
@@ -469,7 +523,11 @@ namespace System.ServiceModel.Channels
                 return false;
             if (Object.ReferenceEquals(that, this))
                 return true;
-            if (this.authenticator != null && that.authenticator != null && this.authenticator.Length == that.authenticator.Length)
+            if (
+                this.authenticator != null
+                && that.authenticator != null
+                && this.authenticator.Length == that.authenticator.Length
+            )
             {
                 for (int i = 0; i < this.authenticator.Length; i++)
                 {
@@ -489,7 +547,10 @@ namespace System.ServiceModel.Channels
 
     class PeerSecurityTokenSerializer : WSSecurityTokenSerializer
     {
-        public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml(XmlElement element, SecurityTokenReferenceStyle tokenReferenceStyle)
+        public override SecurityKeyIdentifierClause CreateKeyIdentifierClauseFromTokenXml(
+            XmlElement element,
+            SecurityTokenReferenceStyle tokenReferenceStyle
+        )
         {
             return null;
         }
@@ -514,10 +575,7 @@ namespace System.ServiceModel.Channels
 
         public PeerHashToken Token
         {
-            get
-            {
-                return this.token;
-            }
+            get { return this.token; }
         }
 
         public static PeerHashToken CreateHashTokenFrom(Message message)
@@ -528,12 +586,19 @@ namespace System.ServiceModel.Channels
             XmlElement rstXml = rst.RequestSecurityTokenXml;
             if (rstXml != null)
             {
-
                 //find the wrapper element
                 foreach (XmlNode node in rst.RequestSecurityTokenXml.ChildNodes)
                 {
                     XmlElement element = (XmlElement)node;
-                    if (element == null || !PeerRequestSecurityToken.CompareWithNS(element.LocalName, element.NamespaceURI, PeerRequestSecurityToken.RequestedSecurityTokenElementName, TrustFeb2005Strings.Namespace))
+                    if (
+                        element == null
+                        || !PeerRequestSecurityToken.CompareWithNS(
+                            element.LocalName,
+                            element.NamespaceURI,
+                            PeerRequestSecurityToken.RequestedSecurityTokenElementName,
+                            TrustFeb2005Strings.Namespace
+                        )
+                    )
                         continue;
                     token = PeerHashToken.CreateFrom(element);
                 }
@@ -547,8 +612,7 @@ namespace System.ServiceModel.Channels
             return new PeerRequestSecurityToken(token);
         }
 
-
-        internal protected override void OnWriteCustomElements(XmlWriter writer)
+        protected internal override void OnWriteCustomElements(XmlWriter writer)
         {
             if (!(token != null && token.IsValid))
             {
@@ -556,24 +620,38 @@ namespace System.ServiceModel.Channels
             }
             string wstprefix = writer.LookupPrefix(TrustNamespace);
 
-            writer.WriteStartElement(wstprefix, TrustFeb2005Strings.RequestedSecurityToken, TrustFeb2005Strings.Namespace);
+            writer.WriteStartElement(
+                wstprefix,
+                TrustFeb2005Strings.RequestedSecurityToken,
+                TrustFeb2005Strings.Namespace
+            );
             token.Write(writer);
             writer.WriteEndElement();
         }
 
-        internal protected override void OnMakeReadOnly() { }
-        internal static bool CompareWithNS(string first, string firstNS, string second, string secondNS)
+        protected internal override void OnMakeReadOnly() { }
+
+        internal static bool CompareWithNS(
+            string first,
+            string firstNS,
+            string second,
+            string secondNS
+        )
         {
-            return ((String.Compare(first, second, StringComparison.Ordinal) == 0)
-                && (String.Compare(firstNS, secondNS, StringComparison.OrdinalIgnoreCase) == 0));
+            return (
+                (String.Compare(first, second, StringComparison.Ordinal) == 0)
+                && (String.Compare(firstNS, secondNS, StringComparison.OrdinalIgnoreCase) == 0)
+            );
         }
     }
 
     class PeerRequestSecurityTokenResponse : RequestSecurityTokenResponse
     {
         public const string Action = "http://schemas.xmlsoap.org/ws/2005/02/trust/RSTR/Validate";
-        public const string ValidString = "http://schemas.xmlsoap.org/ws/2005/02/trust/status/valid";
-        public const string InvalidString = "http://schemas.xmlsoap.org/ws/2005/02/trust/status/invalid";
+        public const string ValidString =
+            "http://schemas.xmlsoap.org/ws/2005/02/trust/status/valid";
+        public const string InvalidString =
+            "http://schemas.xmlsoap.org/ws/2005/02/trust/status/invalid";
         public const string StatusString = "Status";
         public const string CodeString = "Code";
 
@@ -581,9 +659,7 @@ namespace System.ServiceModel.Channels
         bool isValid = false;
 
         public PeerRequestSecurityTokenResponse()
-            : this(null)
-        {
-        }
+            : this(null) { }
 
         public PeerRequestSecurityTokenResponse(PeerHashToken token)
         {
@@ -605,17 +681,24 @@ namespace System.ServiceModel.Channels
 
         public bool IsValid
         {
-            get
-            {
-                return this.isValid;
-            }
+            get { return this.isValid; }
         }
 
         public static PeerHashToken CreateHashTokenFrom(Message message)
         {
             PeerHashToken token = PeerHashToken.Invalid;
-            RequestSecurityTokenResponse response = RequestSecurityTokenResponse.CreateFrom(message.GetReaderAtBodyContents(), MessageSecurityVersion.Default, new PeerSecurityTokenSerializer());
-            if (String.Compare(response.TokenType, PeerHashToken.TokenTypeString, StringComparison.OrdinalIgnoreCase) != 0)
+            RequestSecurityTokenResponse response = RequestSecurityTokenResponse.CreateFrom(
+                message.GetReaderAtBodyContents(),
+                MessageSecurityVersion.Default,
+                new PeerSecurityTokenSerializer()
+            );
+            if (
+                String.Compare(
+                    response.TokenType,
+                    PeerHashToken.TokenTypeString,
+                    StringComparison.OrdinalIgnoreCase
+                ) != 0
+            )
             {
                 return token;
             }
@@ -624,20 +707,47 @@ namespace System.ServiceModel.Channels
             {
                 foreach (XmlElement child in responseXml.ChildNodes)
                 {
-                    if (PeerRequestSecurityToken.CompareWithNS(child.LocalName, child.NamespaceURI, StatusString, TrustFeb2005Strings.Namespace))
+                    if (
+                        PeerRequestSecurityToken.CompareWithNS(
+                            child.LocalName,
+                            child.NamespaceURI,
+                            StatusString,
+                            TrustFeb2005Strings.Namespace
+                        )
+                    )
                     {
                         if (child.ChildNodes.Count == 1)
                         {
                             XmlElement desc = (child.ChildNodes[0] as XmlElement);
-                            if (PeerRequestSecurityToken.CompareWithNS(desc.LocalName, desc.NamespaceURI, CodeString, TrustFeb2005Strings.Namespace))
+                            if (
+                                PeerRequestSecurityToken.CompareWithNS(
+                                    desc.LocalName,
+                                    desc.NamespaceURI,
+                                    CodeString,
+                                    TrustFeb2005Strings.Namespace
+                                )
+                            )
                             {
                                 string code = XmlHelper.ReadTextElementAsTrimmedString(desc);
-                                if (String.Compare(code, ValidString, StringComparison.OrdinalIgnoreCase) != 0)
+                                if (
+                                    String.Compare(
+                                        code,
+                                        ValidString,
+                                        StringComparison.OrdinalIgnoreCase
+                                    ) != 0
+                                )
                                     break;
                             }
                         }
                     }
-                    else if (PeerRequestSecurityToken.CompareWithNS(child.LocalName, child.NamespaceURI, TrustFeb2005Strings.RequestedSecurityToken, TrustFeb2005Strings.Namespace))
+                    else if (
+                        PeerRequestSecurityToken.CompareWithNS(
+                            child.LocalName,
+                            child.NamespaceURI,
+                            TrustFeb2005Strings.RequestedSecurityToken,
+                            TrustFeb2005Strings.Namespace
+                        )
+                    )
                     {
                         token = PeerHashToken.CreateFrom(child);
                         break;
@@ -647,17 +757,24 @@ namespace System.ServiceModel.Channels
             return token;
         }
 
-        public static RequestSecurityTokenResponse CreateFrom(X509Certificate2 credential, string password)
+        public static RequestSecurityTokenResponse CreateFrom(
+            X509Certificate2 credential,
+            string password
+        )
         {
             PeerHashToken token = new PeerHashToken(credential, password);
             return new PeerRequestSecurityTokenResponse(token);
         }
 
-        internal protected override void OnWriteCustomElements(XmlWriter writer)
+        protected internal override void OnWriteCustomElements(XmlWriter writer)
         {
             string wstprefix = writer.LookupPrefix(TrustFeb2005Strings.Namespace);
 
-            writer.WriteStartElement(wstprefix, TrustFeb2005Strings.TokenType, TrustFeb2005Strings.Namespace);
+            writer.WriteStartElement(
+                wstprefix,
+                TrustFeb2005Strings.TokenType,
+                TrustFeb2005Strings.Namespace
+            );
             writer.WriteString(PeerHashToken.TokenTypeString);
             writer.WriteEndElement();
 
@@ -671,7 +788,11 @@ namespace System.ServiceModel.Channels
             writer.WriteEndElement();
             if (this.IsValid)
             {
-                writer.WriteStartElement(wstprefix, PeerRequestSecurityToken.RequestedSecurityTokenElementName, TrustFeb2005Strings.Namespace);
+                writer.WriteStartElement(
+                    wstprefix,
+                    PeerRequestSecurityToken.RequestedSecurityTokenElementName,
+                    TrustFeb2005Strings.Namespace
+                );
                 this.token.Write(writer);
                 writer.WriteEndElement();
             }
@@ -694,10 +815,15 @@ namespace System.ServiceModel.Channels
         {
             Created,
             Authenticated,
-            Failed
+            Failed,
         }
 
-        public PeerChannelAuthenticatorExtension(PeerSecurityManager securityManager, EventHandler onSucceeded, EventArgs args, string meshId)
+        public PeerChannelAuthenticatorExtension(
+            PeerSecurityManager securityManager,
+            EventHandler onSucceeded,
+            EventArgs args,
+            string meshId
+        )
         {
             this.securityManager = securityManager;
             this.state = PeerAuthState.Created;
@@ -708,31 +834,32 @@ namespace System.ServiceModel.Channels
 
         object ThisLock
         {
-            get
-            {
-                return this.thisLock;
-            }
+            get { return this.thisLock; }
         }
 
         public void Attach(IPeerNeighbor host)
         {
-            Fx.AssertAndThrow(this.securityManager.AuthenticationMode == PeerAuthenticationMode.Password, "Invalid AuthenticationMode!");
+            Fx.AssertAndThrow(
+                this.securityManager.AuthenticationMode == PeerAuthenticationMode.Password,
+                "Invalid AuthenticationMode!"
+            );
             Fx.AssertAndThrow(host != null, "unrecognized host!");
             this.host = host;
             this.timer = new IOThreadTimer(new Action<object>(OnTimeout), null, true);
             this.timer.Set(Timeout);
         }
 
-        static public void OnNeighborClosed(IPeerNeighbor neighbor)
+        public static void OnNeighborClosed(IPeerNeighbor neighbor)
         {
             Fx.Assert(neighbor != null, "Neighbor must have a value");
-            PeerChannelAuthenticatorExtension ext = neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
-            if (ext != null) neighbor.Extensions.Remove(ext);
+            PeerChannelAuthenticatorExtension ext =
+                neighbor.Extensions.Find<PeerChannelAuthenticatorExtension>();
+            if (ext != null)
+                neighbor.Extensions.Remove(ext);
         }
 
         public void Detach(IPeerNeighbor host)
         {
-
             Fx.Assert(host != null, "unrecognized host!");
             if (host.State < PeerNeighborState.Authenticated)
             {
@@ -761,10 +888,18 @@ namespace System.ServiceModel.Channels
             Fx.Assert(host != null, "Cannot initiate security handshake without a host!");
 
             //send the RST message.
-            using (OperationContextScope scope = new OperationContextScope(new OperationContext((ServiceHostBase)null)))
+            using (
+                OperationContextScope scope = new OperationContextScope(
+                    new OperationContext((ServiceHostBase)null)
+                )
+            )
             {
                 PeerHashToken token = this.securityManager.GetSelfToken();
-                Message request = Message.CreateMessage(MessageVersion.Soap12WSAddressing10, TrustFeb2005Strings.RequestSecurityToken, new PeerRequestSecurityToken(token));
+                Message request = Message.CreateMessage(
+                    MessageVersion.Soap12WSAddressing10,
+                    TrustFeb2005Strings.RequestSecurityToken,
+                    new PeerRequestSecurityToken(token)
+                );
                 bool fatal = false;
                 try
                 {
@@ -774,7 +909,11 @@ namespace System.ServiceModel.Channels
                     {
                         throw Fx.AssertAndThrow("SecurityHandshake return empty message!");
                     }
-                    ProcessRstr(neighbor, reply, PeerSecurityManager.FindClaim(ServiceSecurityContext.Current));
+                    ProcessRstr(
+                        neighbor,
+                        reply,
+                        PeerSecurityManager.FindClaim(ServiceSecurityContext.Current)
+                    );
                 }
                 catch (Exception e)
                 {
@@ -789,18 +928,33 @@ namespace System.ServiceModel.Channels
                     {
                         ServiceSecurityContext context = ServiceSecurityContext.Current;
                         ClaimSet claimSet = null;
-                        if (context != null && context.AuthorizationContext != null && context.AuthorizationContext.ClaimSets != null && context.AuthorizationContext.ClaimSets.Count > 0)
+                        if (
+                            context != null
+                            && context.AuthorizationContext != null
+                            && context.AuthorizationContext.ClaimSets != null
+                            && context.AuthorizationContext.ClaimSets.Count > 0
+                        )
                             claimSet = context.AuthorizationContext.ClaimSets[0];
-                        PeerAuthenticationFailureTraceRecord record = new PeerAuthenticationFailureTraceRecord(
-                                                                    meshId,
-                                                                    neighbor.ListenAddress.EndpointAddress.ToString(),
-                                                                    claimSet,
-                                                                    e);
-                        TraceUtility.TraceEvent(TraceEventType.Error,
-                            TraceCode.PeerNodeAuthenticationFailure, SR.GetString(SR.TraceCodePeerNodeAuthenticationFailure),
-                            record, this, null);
+                        PeerAuthenticationFailureTraceRecord record =
+                            new PeerAuthenticationFailureTraceRecord(
+                                meshId,
+                                neighbor.ListenAddress.EndpointAddress.ToString(),
+                                claimSet,
+                                e
+                            );
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.PeerNodeAuthenticationFailure,
+                            SR.GetString(SR.TraceCodePeerNodeAuthenticationFailure),
+                            record,
+                            this,
+                            null
+                        );
                     }
-                    neighbor.Abort(PeerCloseReason.AuthenticationFailure, PeerCloseInitiator.LocalNode);
+                    neighbor.Abort(
+                        PeerCloseReason.AuthenticationFailure,
+                        PeerCloseInitiator.LocalNode
+                    );
                 }
                 finally
                 {
@@ -818,7 +972,12 @@ namespace System.ServiceModel.Channels
 
             lock (ThisLock)
             {
-                if (this.state != PeerAuthState.Created || neighbor == null || neighbor.IsInitiator || neighbor.State != PeerNeighborState.Opened)
+                if (
+                    this.state != PeerAuthState.Created
+                    || neighbor == null
+                    || neighbor.IsInitiator
+                    || neighbor.State != PeerNeighborState.Opened
+                )
                 {
                     OnFailed(neighbor);
                     return null;
@@ -839,13 +998,18 @@ namespace System.ServiceModel.Channels
                     this.state = PeerAuthState.Authenticated;
                     PeerHashToken selfToken = securityManager.GetSelfToken();
                     response = new PeerRequestSecurityTokenResponse(selfToken);
-                    reply = Message.CreateMessage(MessageVersion.Soap12WSAddressing10, TrustFeb2005Strings.RequestSecurityTokenResponse, response);
+                    reply = Message.CreateMessage(
+                        MessageVersion.Soap12WSAddressing10,
+                        TrustFeb2005Strings.RequestSecurityTokenResponse,
+                        response
+                    );
                     OnAuthenticated();
                 }
             }
             catch (Exception e)
             {
-                if (Fx.IsFatal(e)) throw;
+                if (Fx.IsFatal(e))
+                    throw;
                 DiagnosticUtility.TraceHandledException(e, TraceEventType.Information);
                 OnFailed(neighbor);
             }
@@ -854,7 +1018,9 @@ namespace System.ServiceModel.Channels
 
         public void ProcessRstr(IPeerNeighbor neighbor, Message message, Claim claim)
         {
-            PeerHashToken receivedToken = PeerRequestSecurityTokenResponse.CreateHashTokenFrom(message);
+            PeerHashToken receivedToken = PeerRequestSecurityTokenResponse.CreateHashTokenFrom(
+                message
+            );
 
             if (!receivedToken.IsValid)
             {
@@ -912,7 +1078,9 @@ namespace System.ServiceModel.Channels
                         record = new PeerAuthenticationFailureTraceRecord(
                             meshId,
                             remoteUri,
-                            secContext.AuthorizationContext.ClaimSets[0], null);
+                            secContext.AuthorizationContext.ClaimSets[0],
+                            null
+                        );
 
                         if (DiagnosticUtility.ShouldTraceError)
                         {
@@ -922,7 +1090,8 @@ namespace System.ServiceModel.Channels
                                 SR.GetString(SR.TraceCodePeerNodeAuthenticationFailure),
                                 record,
                                 this,
-                                null);
+                                null
+                            );
                         }
                     }
                 }
@@ -931,12 +1100,14 @@ namespace System.ServiceModel.Channels
                     record = new PeerAuthenticationFailureTraceRecord(meshId, remoteUri);
                     if (DiagnosticUtility.ShouldTraceError)
                     {
-                        TraceUtility.TraceEvent(TraceEventType.Error,
-                                                TraceCode.PeerNodeAuthenticationTimeout,
-                                                SR.GetString(SR.TraceCodePeerNodeAuthenticationTimeout),
-                                                record,
-                                                this,
-                                                null);
+                        TraceUtility.TraceEvent(
+                            TraceEventType.Error,
+                            TraceCode.PeerNodeAuthenticationTimeout,
+                            SR.GetString(SR.TraceCodePeerNodeAuthenticationTimeout),
+                            record,
+                            this,
+                            null
+                        );
                     }
                 }
             }
@@ -951,10 +1122,6 @@ namespace System.ServiceModel.Channels
     {
         None = 0,
         Password = 1,
-        MutualCertificate = 2
+        MutualCertificate = 2,
     }
 }
-
-
-
-

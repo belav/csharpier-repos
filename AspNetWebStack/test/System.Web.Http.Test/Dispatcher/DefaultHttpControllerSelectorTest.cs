@@ -21,7 +21,8 @@ namespace System.Web.Http.Dispatcher
         {
             Assert.ThrowsArgumentNull(
                 () => new DefaultHttpControllerSelector(configuration: null),
-                "configuration");
+                "configuration"
+            );
         }
 
         [Theory]
@@ -29,14 +30,19 @@ namespace System.Web.Http.Dispatcher
         [InlineData("Controller", "123")]
         [InlineData("ControLler", "123")]
         [InlineData("CONTROLLER", "ABC")]
-        public void GetControllerName_PicksControllerNameFromRouteData(string controllerKeyName, string controllerName)
+        public void GetControllerName_PicksControllerNameFromRouteData(
+            string controllerKeyName,
+            string controllerName
+        )
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             IHttpRouteData routeData = GetRouteData();
             routeData.Values[controllerKeyName] = controllerName;
             request.SetRouteData(routeData);
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(new HttpConfiguration());
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                new HttpConfiguration()
+            );
 
             // Act
             string selectedControllerName = selector.GetControllerName(request);
@@ -50,7 +56,9 @@ namespace System.Web.Http.Dispatcher
         {
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(new HttpConfiguration());
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                new HttpConfiguration()
+            );
 
             // Act
             string selectedControllerName = selector.GetControllerName(request);
@@ -65,7 +73,9 @@ namespace System.Web.Http.Dispatcher
             // Arrange
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetRouteData(GetRouteData());
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(new HttpConfiguration());
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                new HttpConfiguration()
+            );
 
             // Act
             string selectedControllerName = selector.GetControllerName(request);
@@ -80,12 +90,21 @@ namespace System.Web.Http.Dispatcher
             // Arrange
             HttpConfiguration configuration = new HttpConfiguration();
             Mock<IAssembliesResolver> assemblyResolver = new Mock<IAssembliesResolver>();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
             configuration.Services.Replace(typeof(IAssembliesResolver), assemblyResolver.Object);
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
-            controllerTypeResolver.Setup(c => c.GetControllerTypes(assemblyResolver.Object)).Returns(new Collection<Type> { GetMockControllerType("Sample") }).Verifiable();
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            controllerTypeResolver
+                .Setup(c => c.GetControllerTypes(assemblyResolver.Object))
+                .Returns(new Collection<Type> { GetMockControllerType("Sample") })
+                .Verifiable();
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             HttpRequestMessage request = new HttpRequestMessage();
             IHttpRouteData routeData = GetRouteData();
@@ -106,8 +125,12 @@ namespace System.Web.Http.Dispatcher
         public void SelectController_IsCaseInsensitive(string controllerTypeName)
         {
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
             Type controllerType = GetMockControllerType("Sample");
             controllerTypeResolver
@@ -119,7 +142,9 @@ namespace System.Web.Http.Dispatcher
             routeData.Values["controller"] = controllerTypeName;
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             HttpControllerDescriptor descriptor = selector.SelectController(request);
@@ -133,8 +158,12 @@ namespace System.Web.Http.Dispatcher
         public void SelectController_DoesNotCreateNewInstances_ForSameController()
         {
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
             Type controllerType = GetMockControllerType("Sample");
             controllerTypeResolver
@@ -146,7 +175,9 @@ namespace System.Web.Http.Dispatcher
             routeData.Values["controller"] = "Sample";
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             HttpControllerDescriptor descriptor1 = selector.SelectController(request);
@@ -160,8 +191,12 @@ namespace System.Web.Http.Dispatcher
         public void SelectController_DoesNotCreateNewInstances_ForSameController_DiferentCasedControllerName()
         {
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
             Type controllerType = GetMockControllerType("Sample");
             controllerTypeResolver
@@ -178,7 +213,9 @@ namespace System.Web.Http.Dispatcher
             routeData2.Values["controller"] = "SaMPle";
             request2.SetRouteData(routeData2);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             HttpControllerDescriptor descriptor1 = selector.SelectController(request1);
@@ -191,11 +228,11 @@ namespace System.Web.Http.Dispatcher
         [Fact]
         public void SelectController_Throws_NullRequest()
         {
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(new HttpConfiguration());
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                new HttpConfiguration()
+            );
 
-            Assert.ThrowsArgumentNull(
-                () => selector.SelectController(request: null),
-                "request");
+            Assert.ThrowsArgumentNull(() => selector.SelectController(request: null), "request");
         }
 
         [Fact]
@@ -205,11 +242,12 @@ namespace System.Web.Http.Dispatcher
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetRouteData(GetRouteData());
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
-            var ex = Assert.Throws<HttpResponseException>(
-                () => selector.SelectController(request));
+            var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, ex.Response.StatusCode);
@@ -221,13 +259,24 @@ namespace System.Web.Http.Dispatcher
             HttpConfiguration configuration = new HttpConfiguration();
             HttpRequestMessage request = new HttpRequestMessage();
             var controllerDescriptor = new HttpControllerDescriptor();
-            var action1Descriptor = new ReflectedHttpActionDescriptor() { ControllerDescriptor = controllerDescriptor };
-            var action2Descriptor = new ReflectedHttpActionDescriptor() { ControllerDescriptor = controllerDescriptor };
+            var action1Descriptor = new ReflectedHttpActionDescriptor()
+            {
+                ControllerDescriptor = controllerDescriptor,
+            };
+            var action2Descriptor = new ReflectedHttpActionDescriptor()
+            {
+                ControllerDescriptor = controllerDescriptor,
+            };
             IHttpRouteData routeData = GetRouteData();
-            routeData.Route.DataTokens.Add("actions", new ReflectedHttpActionDescriptor[] { action1Descriptor, action2Descriptor });
+            routeData.Route.DataTokens.Add(
+                "actions",
+                new ReflectedHttpActionDescriptor[] { action1Descriptor, action2Descriptor }
+            );
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             var selectedController = selector.SelectController(request);
@@ -244,7 +293,7 @@ namespace System.Web.Http.Dispatcher
                 ControllerDescriptor = new HttpControllerDescriptor()
                 {
                     ControllerType = GetMockControllerType("Controller1"),
-                }
+                },
             };
 
             var action2Descriptor = new ReflectedHttpActionDescriptor()
@@ -252,28 +301,39 @@ namespace System.Web.Http.Dispatcher
                 ControllerDescriptor = new HttpControllerDescriptor()
                 {
                     ControllerType = GetMockControllerType("Controller2"),
-                }
+                },
             };
 
             IHttpRouteData routeData = GetRouteData();
-            routeData.Route.DataTokens.Add("actions", new ReflectedHttpActionDescriptor[] { action1Descriptor, action2Descriptor });
+            routeData.Route.DataTokens.Add(
+                "actions",
+                new ReflectedHttpActionDescriptor[] { action1Descriptor, action2Descriptor }
+            );
 
             HttpConfiguration configuration = new HttpConfiguration();
             HttpRequestMessage request = new HttpRequestMessage();
             request.SetRouteData(routeData);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             string expectedMessage =
-                "Multiple controller types were found that match the URL. This can happen if attribute routes on multiple " +
-                "controllers match the requested URL." + Environment.NewLine +
-                Environment.NewLine +
-                "The request has found the following matching controller types: " + Environment.NewLine +
-                "FullController1Controller" + Environment.NewLine +
-                "FullController2Controller";
+                "Multiple controller types were found that match the URL. This can happen if attribute routes on multiple "
+                + "controllers match the requested URL."
+                + Environment.NewLine
+                + Environment.NewLine
+                + "The request has found the following matching controller types: "
+                + Environment.NewLine
+                + "FullController1Controller"
+                + Environment.NewLine
+                + "FullController2Controller";
 
             // Act & Assert
-            Assert.Throws<InvalidOperationException>(() => selector.SelectController(request), expectedMessage);
+            Assert.Throws<InvalidOperationException>(
+                () => selector.SelectController(request),
+                expectedMessage
+            );
         }
 
         [Fact]
@@ -282,11 +342,12 @@ namespace System.Web.Http.Dispatcher
             HttpConfiguration configuration = new HttpConfiguration();
             HttpRequestMessage request = new HttpRequestMessage();
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
-            var ex = Assert.Throws<HttpResponseException>(
-                () => selector.SelectController(request));
+            var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, ex.Response.StatusCode);
@@ -299,8 +360,12 @@ namespace System.Web.Http.Dispatcher
         {
             // Arrange
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
             Type controllerType = GetMockControllerType("Sample");
             controllerTypeResolver
@@ -311,7 +376,7 @@ namespace System.Web.Http.Dispatcher
 
             var routeValues = new Dictionary<string, object>(StringComparer.Ordinal)
             {
-                { "controller", "Sample" }
+                { "controller", "Sample" },
             };
 
             var routeData = new Mock<IHttpRouteData>();
@@ -319,7 +384,9 @@ namespace System.Web.Http.Dispatcher
             routeData.SetupGet(rd => rd.Route).Returns((IHttpRoute)null);
             request.SetRouteData(routeData.Object);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             var controller = selector.SelectController(request);
@@ -335,18 +402,22 @@ namespace System.Web.Http.Dispatcher
         {
             // Arrange
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
 
             controllerTypeResolver
                 .Setup(c => c.GetControllerTypes(It.IsAny<IAssembliesResolver>()))
-                .Returns(new Collection<Type> {}); // No controllers here
+                .Returns(new Collection<Type> { }); // No controllers here
 
             HttpRequestMessage request = new HttpRequestMessage();
 
             var routeValues = new Dictionary<string, object>(StringComparer.Ordinal)
             {
-                { "controller", "Sample" }
+                { "controller", "Sample" },
             };
 
             var routeData = new Mock<IHttpRouteData>();
@@ -354,11 +425,12 @@ namespace System.Web.Http.Dispatcher
             routeData.SetupGet(rd => rd.Route).Returns((IHttpRoute)null);
             request.SetRouteData(routeData.Object);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
-            var ex = Assert.Throws<HttpResponseException>(
-                () => selector.SelectController(request));
+            var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, ex.Response.StatusCode);
@@ -368,8 +440,12 @@ namespace System.Web.Http.Dispatcher
         public async Task SelectController_Throws_NotFound_NoMatchingControllerType()
         {
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
             configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             controllerTypeResolver
@@ -382,11 +458,12 @@ namespace System.Web.Http.Dispatcher
             request.SetRouteData(routeData1);
             request.SetConfiguration(configuration);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
-            var ex = Assert.Throws<HttpResponseException>(
-                () => selector.SelectController(request));
+            var ex = Assert.Throws<HttpResponseException>(() => selector.SelectController(request));
 
             // Assert
             Assert.Equal(HttpStatusCode.NotFound, ex.Response.StatusCode);
@@ -399,13 +476,24 @@ namespace System.Web.Http.Dispatcher
         public void SelectController_Throws_DuplicateController()
         {
             HttpConfiguration configuration = new HttpConfiguration();
-            Mock<IHttpControllerTypeResolver> controllerTypeResolver = new Mock<IHttpControllerTypeResolver>();
-            configuration.Services.Replace(typeof(IHttpControllerTypeResolver), controllerTypeResolver.Object);
+            Mock<IHttpControllerTypeResolver> controllerTypeResolver =
+                new Mock<IHttpControllerTypeResolver>();
+            configuration.Services.Replace(
+                typeof(IHttpControllerTypeResolver),
+                controllerTypeResolver.Object
+            );
             configuration.IncludeErrorDetailPolicy = IncludeErrorDetailPolicy.Always;
 
             controllerTypeResolver
                 .Setup(c => c.GetControllerTypes(It.IsAny<IAssembliesResolver>()))
-                .Returns(new Collection<Type> { GetMockControllerType("Sample"), GetMockControllerType("SampLe"), GetMockControllerType("SAmpLE") });
+                .Returns(
+                    new Collection<Type>
+                    {
+                        GetMockControllerType("Sample"),
+                        GetMockControllerType("SampLe"),
+                        GetMockControllerType("SAmpLE"),
+                    }
+                );
 
             HttpRequestMessage request = new HttpRequestMessage();
             IHttpRouteData routeData1 = GetRouteData();
@@ -413,17 +501,21 @@ namespace System.Web.Http.Dispatcher
             request.SetRouteData(routeData1);
             request.SetConfiguration(configuration);
 
-            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(configuration);
+            DefaultHttpControllerSelector selector = new DefaultHttpControllerSelector(
+                configuration
+            );
 
             // Act
             var ex = Assert.Throws<InvalidOperationException>(
-                () => selector.SelectController(request));
+                () => selector.SelectController(request)
+            );
 
             // Assert
             string message = ex.Message;
             Assert.Contains(
                 "Multiple types were found that match the controller named 'Sample'. This can happen if the route that services this request ('') found multiple controllers defined with the same name but differing namespaces, which is not supported.\r\n\r\nThe request for 'Sample' has found the following matching controllers:",
-                message);
+                message
+            );
 
             var duplicateControllers = message.Split(':')[1].Split('\n').Select(str => str.Trim());
             Assert.Contains("FullSampleController", duplicateControllers);

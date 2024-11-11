@@ -14,9 +14,7 @@ namespace Microsoft.Interop
         DisableRuntimeMarshalling = 0x2,
     }
 
-    public sealed record StubEnvironment(
-        Compilation Compilation,
-        EnvironmentFlags EnvironmentFlags)
+    public sealed record StubEnvironment(Compilation Compilation, EnvironmentFlags EnvironmentFlags)
     {
         private Optional<INamedTypeSymbol?> _lcidConversionAttrType;
         public INamedTypeSymbol? LcidConversionAttrType
@@ -27,7 +25,9 @@ namespace Microsoft.Interop
                 {
                     return _lcidConversionAttrType.Value;
                 }
-                _lcidConversionAttrType = new Optional<INamedTypeSymbol?>(Compilation.GetTypeByMetadataName(TypeNames.LCIDConversionAttribute));
+                _lcidConversionAttrType = new Optional<INamedTypeSymbol?>(
+                    Compilation.GetTypeByMetadataName(TypeNames.LCIDConversionAttribute)
+                );
                 return _lcidConversionAttrType.Value;
             }
         }
@@ -41,7 +41,9 @@ namespace Microsoft.Interop
                 {
                     return _suppressGCTransitionAttrType.Value;
                 }
-                _suppressGCTransitionAttrType = new Optional<INamedTypeSymbol?>(Compilation.GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute));
+                _suppressGCTransitionAttrType = new Optional<INamedTypeSymbol?>(
+                    Compilation.GetTypeByMetadataName(TypeNames.SuppressGCTransitionAttribute)
+                );
                 return _suppressGCTransitionAttrType.Value;
             }
         }
@@ -55,7 +57,9 @@ namespace Microsoft.Interop
                 {
                     return _unmanagedCallConvAttrType.Value;
                 }
-                _unmanagedCallConvAttrType = new Optional<INamedTypeSymbol?>(Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute));
+                _unmanagedCallConvAttrType = new Optional<INamedTypeSymbol?>(
+                    Compilation.GetTypeByMetadataName(TypeNames.UnmanagedCallConvAttribute)
+                );
                 return _unmanagedCallConvAttrType.Value;
             }
         }
@@ -69,7 +73,11 @@ namespace Microsoft.Interop
                 {
                     return _defaultDllImportSearchPathsAttrType.Value;
                 }
-                _defaultDllImportSearchPathsAttrType = new Optional<INamedTypeSymbol?>(Compilation.GetTypeByMetadataName(TypeNames.DefaultDllImportSearchPathsAttribute));
+                _defaultDllImportSearchPathsAttrType = new Optional<INamedTypeSymbol?>(
+                    Compilation.GetTypeByMetadataName(
+                        TypeNames.DefaultDllImportSearchPathsAttribute
+                    )
+                );
                 return _defaultDllImportSearchPathsAttrType.Value;
             }
         }

@@ -9,7 +9,6 @@ using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Runtime.Versioning;
 using System.Threading;
-
 using Internal.Reflection.Augments;
 using Internal.Reflection.Core.NonPortable;
 using Internal.Runtime;
@@ -21,7 +20,8 @@ namespace System
     public abstract partial class Type : MemberInfo, IReflect
     {
         [Intrinsic]
-        public static unsafe Type? GetTypeFromHandle(RuntimeTypeHandle handle) => handle.IsNull ? null : GetTypeFromMethodTable(handle.ToMethodTable());
+        public static unsafe Type? GetTypeFromHandle(RuntimeTypeHandle handle) =>
+            handle.IsNull ? null : GetTypeFromMethodTable(handle.ToMethodTable());
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal static unsafe RuntimeType GetTypeFromMethodTable(MethodTable* pMT)
@@ -52,11 +52,14 @@ namespace System
             AllocationLockHolder.AllocationLock.Acquire();
             try
             {
-                ref RuntimeType? runtimeTypeCache = ref Unsafe.AsRef<RuntimeType?>(pMT->WritableData);
+                ref RuntimeType? runtimeTypeCache = ref Unsafe.AsRef<RuntimeType?>(
+                    pMT->WritableData
+                );
                 if (runtimeTypeCache != null)
                     return runtimeTypeCache;
 
-                RuntimeType? type = FrozenObjectHeapManager.Instance.TryAllocateObject<RuntimeType>();
+                RuntimeType? type =
+                    FrozenObjectHeapManager.Instance.TryAllocateObject<RuntimeType>();
                 if (type == null)
                     throw new OutOfMemoryException();
 
@@ -103,28 +106,73 @@ namespace System
 
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
-        public static Type GetType(string typeName) => GetType(typeName, throwOnError: false, ignoreCase: false);
+        public static Type GetType(string typeName) =>
+            GetType(typeName, throwOnError: false, ignoreCase: false);
+
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
-        public static Type GetType(string typeName, bool throwOnError) => GetType(typeName, throwOnError: throwOnError, ignoreCase: false);
+        public static Type GetType(string typeName, bool throwOnError) =>
+            GetType(typeName, throwOnError: throwOnError, ignoreCase: false);
+
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
         public static Type GetType(string typeName, bool throwOnError, bool ignoreCase)
         {
-            return TypeNameParser.GetType(typeName, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            return TypeNameParser.GetType(
+                typeName,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            );
         }
 
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
-        public static Type GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver) => GetType(typeName, assemblyResolver, typeResolver, throwOnError: false, ignoreCase: false);
+        public static Type GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver
+        ) =>
+            GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError: false,
+                ignoreCase: false
+            );
+
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
-        public static Type GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError) => GetType(typeName, assemblyResolver, typeResolver, throwOnError: throwOnError, ignoreCase: false);
+        public static Type GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError
+        ) =>
+            GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError: throwOnError,
+                ignoreCase: false
+            );
+
         [Intrinsic]
         [RequiresUnreferencedCode("The type might be removed")]
-        public static Type GetType(string typeName, Func<AssemblyName, Assembly?>? assemblyResolver, Func<Assembly?, string, bool, Type?>? typeResolver, bool throwOnError, bool ignoreCase)
+        public static Type GetType(
+            string typeName,
+            Func<AssemblyName, Assembly?>? assemblyResolver,
+            Func<Assembly?, string, bool, Type?>? typeResolver,
+            bool throwOnError,
+            bool ignoreCase
+        )
         {
-            return TypeNameParser.GetType(typeName, assemblyResolver, typeResolver, throwOnError: throwOnError, ignoreCase: ignoreCase);
+            return TypeNameParser.GetType(
+                typeName,
+                assemblyResolver,
+                typeResolver,
+                throwOnError: throwOnError,
+                ignoreCase: ignoreCase
+            );
         }
     }
 }

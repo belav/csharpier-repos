@@ -13,18 +13,17 @@ using Xunit.Abstractions;
 namespace Microsoft.AspNetCore.Components.E2ETests.ServerRenderingTests;
 
 [CollectionDefinition(nameof(InteractivityTest), DisableParallelization = true)]
-public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
+public class InteractivityTest
+    : ServerTestBase<BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>>>
 {
     public InteractivityTest(
         BrowserFixture browserFixture,
         BasicTestAppServerSiteFixture<RazorComponentEndpointsStartup<App>> serverFixture,
-        ITestOutputHelper output)
-        : base(browserFixture, serverFixture, output)
-    {
-    }
+        ITestOutputHelper output
+    )
+        : base(browserFixture, serverFixture, output) { }
 
-    public override Task InitializeAsync()
-        => InitializeAsync(BrowserFixture.StreamingContext);
+    public override Task InitializeAsync() => InitializeAsync(BrowserFixture.StreamingContext);
 
     [Fact]
     public void CanRenderInteractiveServerComponent()
@@ -47,7 +46,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
         Navigate($"{ServerPathBase}/interactive?server-shared=3");
 
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-server-shared")).Text);
-        Browser.Equal("True", () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text);
+        Browser.Equal(
+            "True",
+            () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text
+        );
 
         Browser.Click(By.Id("increment-server-shared"));
 
@@ -85,7 +87,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-server-shared")).Text);
         Browser.Equal("0", () => Browser.FindElement(By.Id("count-wasm-shared")).Text);
-        Browser.Equal("True", () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text);
+        Browser.Equal(
+            "True",
+            () => Browser.FindElement(By.Id("is-interactive-server-shared")).Text
+        );
         Browser.Equal("True", () => Browser.FindElement(By.Id("is-interactive-wasm-shared")).Text);
 
         Browser.Click(By.Id("increment-server-shared"));
@@ -101,7 +106,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
     public void CanUseCallSiteRenderMode_Server(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, serverIncrement: 3));
-        Browser.Equal("Call-site interactive components", () => Browser.FindElement(By.TagName("h1")).Text);
+        Browser.Equal(
+            "Call-site interactive components",
+            () => Browser.FindElement(By.TagName("h1")).Text
+        );
 
         if (prerender)
         {
@@ -129,7 +137,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
     public void CanUseCallSiteRenderMode_WebAssembly(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, webAssemblyIncrement: 4));
-        Browser.Equal("Call-site interactive components", () => Browser.FindElement(By.TagName("h1")).Text);
+        Browser.Equal(
+            "Call-site interactive components",
+            () => Browser.FindElement(By.TagName("h1")).Text
+        );
 
         if (prerender)
         {
@@ -157,7 +168,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
     public void CanUseCallSiteRenderMode_ServerAndWebAssembly(bool prerender)
     {
         Navigate(InteractiveCallsiteUrl(prerender, serverIncrement: 10, webAssemblyIncrement: 11));
-        Browser.Equal("Call-site interactive components", () => Browser.FindElement(By.TagName("h1")).Text);
+        Browser.Equal(
+            "Call-site interactive components",
+            () => Browser.FindElement(By.TagName("h1")).Text
+        );
 
         if (prerender)
         {
@@ -201,9 +215,14 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
         // One component
         new[] { AddServerPrerenderedId },
         new[] { AddWebAssemblyPrerenderedId },
-
         // Multiple components, mixing all combinations of Server/WebAssembly and prerendered/non-prerendered
-        new[] { AddServerPrerenderedId, AddWebAssemblyId, AddWebAssemblyPrerenderedId, AddServerId },
+        new[]
+        {
+            AddServerPrerenderedId,
+            AddWebAssemblyId,
+            AddWebAssemblyPrerenderedId,
+            AddServerId,
+        },
     };
 
     [Theory]
@@ -211,7 +230,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
     [InlineData(AddServerPrerenderedId)]
     [InlineData(AddWebAssemblyId)]
     [InlineData(AddWebAssemblyPrerenderedId)]
-    public void DynamicallyAddedSsrComponent_CanBecomeInteractive_AfterEnhancedNavigation(string addCounterLinkId)
+    public void DynamicallyAddedSsrComponent_CanBecomeInteractive_AfterEnhancedNavigation(
+        string addCounterLinkId
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -228,7 +249,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void MultipleDynamicallyAddedSsrComponents_CanBecomeInteractive_AfterEnhancedNavigation(string[] addCounterLinkIds)
+    public void MultipleDynamicallyAddedSsrComponents_CanBecomeInteractive_AfterEnhancedNavigation(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -248,7 +271,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void DynamicallyAddedSsrComponents_CanBecomeInteractive_AfterStreamingRenderingCompletes(string[] addCounterLinkIds)
+    public void DynamicallyAddedSsrComponents_CanBecomeInteractive_AfterStreamingRenderingCompletes(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -270,7 +295,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
             if (addCounterLinkIds[i].Contains("prerendered"))
             {
-                Browser.Equal("False", () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text);
+                Browser.Equal(
+                    "False",
+                    () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text
+                );
                 Browser.Click(By.Id($"increment-{i}"));
                 Browser.Equal("0", () => Browser.FindElement(By.Id($"count-{i}")).Text);
             }
@@ -299,12 +327,17 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void DynamicallyAddedSsrComponents_CanBecomeInteractive_AfterInitialPageLoadCompletes(string[] addCounterLinkIds)
+    public void DynamicallyAddedSsrComponents_CanBecomeInteractive_AfterInitialPageLoadCompletes(
+        string[] addCounterLinkIds
+    )
     {
         // Navigate directly to the page with streaming enabled so that we can defer the page load.
         Navigate($"{ServerPathBase}/streaming-interactivity?ShouldStream=True");
         Browser.Equal("Streaming", () => Browser.FindElement(By.Id("status")).Text);
-        Browser.Equal("loading", () => ((IJavaScriptExecutor)Browser).ExecuteScript("return window.document.readyState;"));
+        Browser.Equal(
+            "loading",
+            () => ((IJavaScriptExecutor)Browser).ExecuteScript("return window.document.readyState;")
+        );
 
         for (var i = 0; i < addCounterLinkIds.Length; i++)
         {
@@ -320,7 +353,10 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
             if (addCounterLinkIds[i].Contains("prerendered"))
             {
-                Browser.Equal("False", () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text);
+                Browser.Equal(
+                    "False",
+                    () => Browser.FindElement(By.Id($"is-interactive-{i}")).Text
+                );
                 Browser.Click(By.Id($"increment-{i}"));
                 Browser.Equal("0", () => Browser.FindElement(By.Id($"count-{i}")).Text);
             }
@@ -353,12 +389,16 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
         {
             browser.Navigate().GoToUrl($"{new Uri(_serverFixture.RootUri, ServerPathBase)}/");
         }
-        ((IJavaScriptExecutor)browser).ExecuteScript("sessionStorage.setItem('enable-classic-initializers', 'true')");
+        ((IJavaScriptExecutor)browser).ExecuteScript(
+            "sessionStorage.setItem('enable-classic-initializers', 'true')"
+        );
     }
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_CanReceiveSsrParameterUpdates_FromEnhancedNavigation(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_CanReceiveSsrParameterUpdates_FromEnhancedNavigation(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -384,7 +424,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_CanReceiveSsrParameterUpdates_FromStreamingRenderingUpdate(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_CanReceiveSsrParameterUpdates_FromStreamingRenderingUpdate(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -420,7 +462,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_GetReinitialized_WhenNoKeyIsProvided_AfterReceivingSsrParameterUpdates_FromEnhancedNavigation(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_GetReinitialized_WhenNoKeyIsProvided_AfterReceivingSsrParameterUpdates_FromEnhancedNavigation(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -463,7 +507,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_GetReinitialized_WhenNoKeyIsProvided_AfterReceivingSsrParameterUpdates_FromStreamingRenderingUpdate(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_GetReinitialized_WhenNoKeyIsProvided_AfterReceivingSsrParameterUpdates_FromStreamingRenderingUpdate(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -517,7 +563,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_CanGetDisposed_FromEnhancedNavigation(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_CanGetDisposed_FromEnhancedNavigation(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -541,7 +589,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void InteractiveRootComponents_CanGetDisposed_FromStreamingRenderingUpdate(string[] addCounterLinkIds)
+    public void InteractiveRootComponents_CanGetDisposed_FromStreamingRenderingUpdate(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -572,7 +622,9 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     [Theory]
     [MemberData(nameof(AddCounterLinkSequences))]
-    public void DynamicallyAddedSsrComponents_CanGetRemoved_BeforeStreamingRenderingCompletes(string[] addCounterLinkIds)
+    public void DynamicallyAddedSsrComponents_CanGetRemoved_BeforeStreamingRenderingCompletes(
+        string[] addCounterLinkIds
+    )
     {
         Navigate($"{ServerPathBase}/streaming-interactivity");
 
@@ -1121,10 +1173,14 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     private void BlockWebAssemblyResourceLoad()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript("sessionStorage.setItem('block-load-boot-resource', 'true')");
+        ((IJavaScriptExecutor)Browser).ExecuteScript(
+            "sessionStorage.setItem('block-load-boot-resource', 'true')"
+        );
 
         // Clear caches so that we can block the resource load
-        ((IJavaScriptExecutor)Browser).ExecuteScript("caches.keys().then(keys => keys.forEach(key => caches.delete(key)))");
+        ((IJavaScriptExecutor)Browser).ExecuteScript(
+            "caches.keys().then(keys => keys.forEach(key => caches.delete(key)))"
+        );
     }
 
     private void UnblockWebAssemblyResourceLoad()
@@ -1134,14 +1190,18 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
 
     private void UseLongWebAssemblyLoadTimeout()
     {
-        ((IJavaScriptExecutor)Browser).ExecuteScript("sessionStorage.setItem('use-long-auto-timeout', 'true')");
+        ((IJavaScriptExecutor)Browser).ExecuteScript(
+            "sessionStorage.setItem('use-long-auto-timeout', 'true')"
+        );
     }
 
     private void ForceWebAssemblyResourceCacheMiss(string resourceHash = null)
     {
         if (resourceHash is not null)
         {
-            ((IJavaScriptExecutor)Browser).ExecuteScript($"localStorage.setItem('blazor-resource-hash:Components.WasmMinimal', '{resourceHash}')");
+            ((IJavaScriptExecutor)Browser).ExecuteScript(
+                $"localStorage.setItem('blazor-resource-hash:Components.WasmMinimal', '{resourceHash}')"
+            );
         }
         else
         {
@@ -1150,9 +1210,14 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
         }
     }
 
-    private string InteractiveCallsiteUrl(bool prerender, int? serverIncrement = default, int? webAssemblyIncrement = default)
+    private string InteractiveCallsiteUrl(
+        bool prerender,
+        int? serverIncrement = default,
+        int? webAssemblyIncrement = default
+    )
     {
-        var result = $"{ServerPathBase}/interactive-callsite?suppress-autostart&prerender={prerender}";
+        var result =
+            $"{ServerPathBase}/interactive-callsite?suppress-autostart&prerender={prerender}";
 
         if (serverIncrement.HasValue)
         {
@@ -1167,11 +1232,11 @@ public class InteractivityTest : ServerTestBase<BasicTestAppServerSiteFixture<Ra
         return result;
     }
 
-    private void AssertBrowserLogContainsMessage(string message)
-        => Browser.True(() => DoesBrowserLogContainMessage(message));
+    private void AssertBrowserLogContainsMessage(string message) =>
+        Browser.True(() => DoesBrowserLogContainMessage(message));
 
-    private void AssertBrowserLogDoesNotContainMessage(string message)
-        => Browser.False(() => DoesBrowserLogContainMessage(message));
+    private void AssertBrowserLogDoesNotContainMessage(string message) =>
+        Browser.False(() => DoesBrowserLogContainMessage(message));
 
     private bool DoesBrowserLogContainMessage(string message)
     {

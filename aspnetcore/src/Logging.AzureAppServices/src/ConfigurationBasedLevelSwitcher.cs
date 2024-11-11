@@ -13,7 +13,11 @@ internal sealed class ConfigurationBasedLevelSwitcher : IConfigureOptions<Logger
     private readonly Type _provider;
     private readonly string _levelKey;
 
-    public ConfigurationBasedLevelSwitcher(IConfiguration configuration, Type provider, string levelKey)
+    public ConfigurationBasedLevelSwitcher(
+        IConfiguration configuration,
+        Type provider,
+        string levelKey
+    )
     {
         _configuration = configuration;
         _provider = provider;

@@ -16,15 +16,15 @@ public class TryParseTypeModelBinderTest
         get
         {
             var data = new TheoryData<Type>
-                {
-                    typeof(byte),
-                    typeof(short),
-                    typeof(int),
-                    typeof(long),
-                    typeof(Guid),
-                    typeof(double),
-                    typeof(DayOfWeek),
-                };
+            {
+                typeof(byte),
+                typeof(short),
+                typeof(int),
+                typeof(long),
+                typeof(Guid),
+                typeof(double),
+                typeof(DayOfWeek),
+            };
 
             // DateTimeOffset doesn't have a TypeConverter in Mono.
             if (!TestPlatformHelper.IsMono)
@@ -38,14 +38,13 @@ public class TryParseTypeModelBinderTest
 
     [Theory]
     [MemberData(nameof(ConvertibleTypeData))]
-    public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(Type destinationType)
+    public async Task BindModel_ReturnsFailure_IfTypeCanBeConverted_AndConversionFails(
+        Type destinationType
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "some-value" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "some-value" } };
 
         var binder = CreateBinder(destinationType);
 
@@ -62,10 +61,7 @@ public class TryParseTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(destinationType);
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", string.Empty }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", string.Empty } };
         var binder = CreateBinder(destinationType);
 
         // Act
@@ -87,9 +83,9 @@ public class TryParseTypeModelBinderTest
         var message = "The value 'not an integer' is not valid.";
         var bindingContext = GetBindingContext(typeof(int));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "not an integer" }
-            };
+        {
+            { "theModelName", "not an integer" },
+        };
 
         var binder = CreateBinder(typeof(int));
 
@@ -113,17 +109,22 @@ public class TryParseTypeModelBinderTest
             var parameter = method.GetParameters()[0]; // IsLovely(int parameter)
 
             return new TheoryData<ModelMetadata>
-                {
-                    metadataProvider.GetMetadataForParameter(parameter),
-                    metadataProvider.GetMetadataForProperty(typeof(MetadataClass), nameof(MetadataClass.Property)),
-                    metadataProvider.GetMetadataForType(typeof(int)),
-                };
+            {
+                metadataProvider.GetMetadataForParameter(parameter),
+                metadataProvider.GetMetadataForProperty(
+                    typeof(MetadataClass),
+                    nameof(MetadataClass.Property)
+                ),
+                metadataProvider.GetMetadataForType(typeof(int)),
+            };
         }
     }
 
     [Theory]
     [MemberData(nameof(IntegerModelMetadataDataSet))]
-    public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(ModelMetadata metadata)
+    public async Task BindModel_EmptyValueProviderResult_ReturnsFailedAndLogsSuccessfully(
+        ModelMetadata metadata
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int));
@@ -147,10 +148,7 @@ public class TryParseTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12" } };
 
         var binder = CreateBinder(typeof(int?));
 
@@ -168,10 +166,7 @@ public class TryParseTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(double?));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "12.5" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "12.5" } };
 
         var binder = CreateBinder(typeof(double?));
 
@@ -186,15 +181,14 @@ public class TryParseTypeModelBinderTest
 
     [Theory]
     [MemberData(nameof(IntegerModelMetadataDataSet))]
-    public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(ModelMetadata metadata)
+    public async Task BindModel_ValidValueProviderResult_ReturnsModelAndLogsSuccessfully(
+        ModelMetadata metadata
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(int));
         bindingContext.ModelMetadata = metadata;
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", "42" }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", "42" } };
 
         var sink = new TestSink();
         var loggerFactory = new TestLoggerFactory(sink, enabled: true);
@@ -218,14 +212,14 @@ public class TryParseTypeModelBinderTest
             // Also does not include float point types  (eg.:  decimal, double, float) because for those we will use
             // NumberStyles.Number that allow thousands operator
             return new TheoryData<Type>
-                {
-                    typeof(int),
-                    typeof(long),
-                    typeof(short),
-                    typeof(uint),
-                    typeof(ulong),
-                    typeof(ushort),
-                };
+            {
+                typeof(int),
+                typeof(long),
+                typeof(short),
+                typeof(uint),
+                typeof(ulong),
+                typeof(ushort),
+            };
         }
     }
 
@@ -236,9 +230,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(type);
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "32,000" }
-            };
+        {
+            { "theModelName", "32,000" },
+        };
 
         var binder = CreateBinder(type);
 
@@ -264,9 +258,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(decimal));
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("fr-FR"))
-            {
-                { "theModelName", "12,5" }
-            };
+        {
+            { "theModelName", "12,5" },
+        };
 
         var binder = CreateBinder(typeof(decimal));
 
@@ -285,9 +279,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(decimal));
         bindingContext.ValueProvider = new SimpleValueProvider(new CultureInfo("en-GB"))
-            {
-                { "theModelName", "12-5" }
-            };
+        {
+            { "theModelName", "12-5" },
+        };
 
         var binder = CreateBinder(typeof(decimal));
 
@@ -309,9 +303,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", new object[] { "Value1" } }
-            };
+        {
+            { "theModelName", new object[] { "Value1" } },
+        };
 
         var binder = CreateBinder(typeof(IntEnum));
 
@@ -330,9 +324,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", new object[] { "1" } }
-            };
+        {
+            { "theModelName", new object[] { "1" } },
+        };
 
         var binder = CreateBinder(typeof(IntEnum));
 
@@ -350,13 +344,13 @@ public class TryParseTypeModelBinderTest
         get
         {
             return new TheoryData<string, int>
-                {
-                    { "0", 0 },
-                    { "1", 1 },
-                    { "13", 13 },
-                    { "Value1", 1 },
-                    { "Value1, Value2", 3 },
-                };
+            {
+                { "0", 0 },
+                { "1", 1 },
+                { "13", 13 },
+                { "Value1", 1 },
+                { "Value1, Value2", 3 },
+            };
         }
     }
 
@@ -367,9 +361,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(IntEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", flagsEnumValue }
-            };
+        {
+            { "theModelName", flagsEnumValue },
+        };
 
         var binder = CreateBinder(typeof(IntEnum));
 
@@ -385,14 +379,16 @@ public class TryParseTypeModelBinderTest
     [Theory]
     [InlineData("32,015")]
     [InlineData("32,128")]
-    public async Task BindModel_CreatesErrorForFormatException_BindsIntEnumModels(string flagsEnumValue)
+    public async Task BindModel_CreatesErrorForFormatException_BindsIntEnumModels(
+        string flagsEnumValue
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(FlagsEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", flagsEnumValue }
-            };
+        {
+            { "theModelName", flagsEnumValue },
+        };
 
         var binder = CreateBinder(typeof(FlagsEnum));
 
@@ -404,7 +400,11 @@ public class TryParseTypeModelBinderTest
         // Assert
         Assert.False(bindingContext.Result.IsModelSet);
         var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-        Assert.Equal($"The value '{flagsEnumValue}' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+        Assert.Equal(
+            $"The value '{flagsEnumValue}' is not valid.",
+            error.ErrorMessage,
+            StringComparer.Ordinal
+        );
         Assert.Null(error.Exception);
     }
 
@@ -416,10 +416,7 @@ public class TryParseTypeModelBinderTest
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(TestTryParseClass));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
         var binder = CreateBinder(typeof(TestTryParseClass));
 
@@ -435,14 +432,13 @@ public class TryParseTypeModelBinderTest
     [Theory]
     [InlineData("10")]
     [InlineData("~~0")]
-    public async Task BindModel_CreatesErrorForFormatException_BindClassWithTryParseMethod(string value)
+    public async Task BindModel_CreatesErrorForFormatException_BindClassWithTryParseMethod(
+        string value
+    )
     {
         // Arrange
         var bindingContext = GetBindingContext(typeof(TestTryParseClass));
-        bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", value }
-            };
+        bindingContext.ValueProvider = new SimpleValueProvider { { "theModelName", value } };
 
         var binder = CreateBinder(typeof(TestTryParseClass));
 
@@ -454,7 +450,11 @@ public class TryParseTypeModelBinderTest
         // Assert
         Assert.False(bindingContext.Result.IsModelSet);
         var error = Assert.Single(bindingContext.ModelState["theModelName"].Errors);
-        Assert.Equal($"The value '{value}' is not valid.", error.ErrorMessage, StringComparer.Ordinal);
+        Assert.Equal(
+            $"The value '{value}' is not valid.",
+            error.ErrorMessage,
+            StringComparer.Ordinal
+        );
         Assert.Null(error.Exception);
     }
 
@@ -466,9 +466,9 @@ public class TryParseTypeModelBinderTest
         // Arrange
         var bindingContext = GetBindingContext(typeof(FlagsEnum));
         bindingContext.ValueProvider = new SimpleValueProvider
-            {
-                { "theModelName", flagsEnumValue }
-            };
+        {
+            { "theModelName", flagsEnumValue },
+        };
 
         var binder = CreateBinder(typeof(FlagsEnum));
 
@@ -485,7 +485,9 @@ public class TryParseTypeModelBinderTest
     public void BindModel_ThrowsInvalidOperationException_WhenTryParseNotFound()
     {
         // Act & assert
-        Assert.Throws<InvalidOperationException>(() => new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance));
+        Assert.Throws<InvalidOperationException>(
+            () => new TryParseModelBinder(typeof(TestClass), NullLoggerFactory.Instance)
+        );
     }
 
     private static DefaultModelBindingContext GetBindingContext(Type modelType)
@@ -495,16 +497,14 @@ public class TryParseTypeModelBinderTest
             ModelMetadata = new EmptyModelMetadataProvider().GetMetadataForType(modelType),
             ModelName = "theModelName",
             ModelState = new ModelStateDictionary(),
-            ValueProvider = new SimpleValueProvider() // empty
+            ValueProvider = new SimpleValueProvider(), // empty
         };
     }
 
     private static IModelBinder CreateBinder(Type modelType, ILoggerFactory loggerFactory = null) =>
         new TryParseModelBinder(modelType, loggerFactory ?? NullLoggerFactory.Instance);
 
-    private sealed class TestClass
-    {
-    }
+    private sealed class TestClass { }
 
     private sealed class TestTryParseClass
     {
@@ -526,7 +526,6 @@ public class TryParseTypeModelBinderTest
             }
 
             return false;
-
         }
     }
 
@@ -544,7 +543,7 @@ public class TryParseTypeModelBinderTest
         Value0 = 0,
         Value1 = 1,
         Value2 = 2,
-        MaxValue = int.MaxValue
+        MaxValue = int.MaxValue,
     }
 
     private class MetadataClass

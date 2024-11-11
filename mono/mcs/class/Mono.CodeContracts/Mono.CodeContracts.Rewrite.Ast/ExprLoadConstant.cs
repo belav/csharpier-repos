@@ -13,10 +13,10 @@
 // distribute, sublicense, and/or sell copies of the Software, and to
 // permit persons to whom the Software is furnished to do so, subject to
 // the following conditions:
-// 
+//
 // The above copyright notice and this permission notice shall be
 // included in all copies or substantial portions of the Software.
-// 
+//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
 // EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
 // MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
@@ -32,33 +32,38 @@ using System.Linq;
 using System.Text;
 using Mono.Cecil;
 
-namespace Mono.CodeContracts.Rewrite.Ast {
-	class ExprLoadConstant : Expr {
+namespace Mono.CodeContracts.Rewrite.Ast
+{
+    class ExprLoadConstant : Expr
+    {
+        public ExprLoadConstant(MethodInfo methodInfo, object value)
+            : base(methodInfo)
+        {
+            this.Value = value;
 
-		public ExprLoadConstant (MethodInfo methodInfo, object value)
-			: base (methodInfo)
-		{
-			this.Value = value;
+            if (value == null)
+            {
+                this.returnType = methodInfo.TypeObject;
+            }
+            else
+            {
+                Type type = value.GetType();
+                this.returnType = methodInfo.Module.Import(type);
+            }
+        }
 
-			if (value == null) {
-				this.returnType = methodInfo.TypeObject;
-			} else {
-				Type type = value.GetType();
-				this.returnType = methodInfo.Module.Import (type);
-			}
-		}
+        private TypeReference returnType;
 
-		private TypeReference returnType;
+        public object Value { get; private set; }
 
-		public object Value { get; private set; }
+        public override ExprType ExprType
+        {
+            get { return ExprType.LoadConstant; }
+        }
 
-		public override ExprType ExprType {
-			get { return ExprType.LoadConstant; }
-		}
-
-		public override TypeReference ReturnType {
-			get { return this.returnType; }
-		}
-
-	}
+        public override TypeReference ReturnType
+        {
+            get { return this.returnType; }
+        }
+    }
 }

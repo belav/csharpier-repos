@@ -18,12 +18,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
     public class MakeTypeAbstractTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
         public MakeTypeAbstractTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpMakeTypeAbstractCodeFixProvider());
+        internal override (DiagnosticAnalyzer?, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpMakeTypeAbstractCodeFixProvider());
 
         [Fact]
         public async Task TestMethod()
@@ -40,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -58,7 +58,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -82,7 +83,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -100,7 +102,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract object P { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -118,7 +121,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract object P { set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -136,7 +140,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract object this[object o] { get; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -154,7 +159,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract object this[object o] { set; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact, WorkItem("https://github.com/dotnet/roslyn/issues/54218")]
@@ -180,7 +186,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 public partial class Goo
                 {
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -192,7 +199,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract event System.EventHandler E { [|add|]; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -204,7 +212,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract event System.EventHandler E { [|remove|]; }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -216,7 +225,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract int [|M|]() => 3;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -228,7 +238,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract int [|P|] => 3;
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -243,7 +254,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                         [|get|] { return 1; }
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -258,7 +270,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                         public abstract void [|Goo|]();
                     }
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -270,7 +283,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void [|M|]();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -288,7 +302,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -306,18 +321,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                 {
                     public abstract void M();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
         public async Task TestRecordStruct()
         {
-            await TestMissingInRegularAndScriptAsync("""
+            await TestMissingInRegularAndScriptAsync(
+                """
                 public record struct Goo
                 {
                     public abstract void [|M|]();
                 }
-                """);
+                """
+            );
         }
 
         [Fact]
@@ -375,7 +393,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.MakeTypeAbstract
                         }
                     }
                 }
-                """);
+                """
+            );
         }
     }
 }

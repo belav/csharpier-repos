@@ -14,7 +14,9 @@ namespace System.CommandLine.Suggest.Tests
 
         public SuggestionShellScriptHandlerTest()
         {
-            _configuration = new SuggestionDispatcher(new TestSuggestionRegistration()).Configuration;
+            _configuration = new SuggestionDispatcher(
+                new TestSuggestionRegistration()
+            ).Configuration;
         }
 
         [Fact]
@@ -24,10 +26,7 @@ namespace System.CommandLine.Suggest.Tests
 
             await _configuration.InvokeAsync("script 123");
 
-            _configuration.Error
-                    .ToString()
-                    .Should()
-                    .Contain("Shell '123' is not supported.");
+            _configuration.Error.ToString().Should().Contain("Shell '123' is not supported.");
         }
 
         [Fact]
@@ -58,7 +57,7 @@ namespace System.CommandLine.Suggest.Tests
             _configuration.Output = new StringWriter();
 
             await _configuration.InvokeAsync("script zsh");
-            
+
             _configuration.Output.ToString().Should().Contain("_dotnet_zsh_complete()");
             _configuration.Output.ToString().Should().NotContain("\r\n");
         }

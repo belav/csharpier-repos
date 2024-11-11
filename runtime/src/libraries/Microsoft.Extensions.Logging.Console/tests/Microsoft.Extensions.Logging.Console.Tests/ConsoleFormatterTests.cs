@@ -20,29 +20,50 @@ namespace Microsoft.Extensions.Logging.Console.Test
     {
         protected const string _loggerName = "test";
         protected const string _state = "This is a test, and {curly braces} are just fine!";
-        protected readonly Func<object, Exception, string> _defaultFormatter = (state, exception) => state.ToString();
+        protected readonly Func<object, Exception, string> _defaultFormatter = (state, exception) =>
+            state.ToString();
 
         protected string GetMessage(List<ConsoleContext> contexts)
         {
             return string.Join("", contexts.Select(c => c.Message));
         }
 
-        internal static (ConsoleLogger Logger, ConsoleSink Sink, ConsoleSink ErrorSink, Func<LogLevel, string> GetLevelPrefix, int WritesPerMsg) SetUp(
+        internal static (
+            ConsoleLogger Logger,
+            ConsoleSink Sink,
+            ConsoleSink ErrorSink,
+            Func<LogLevel, string> GetLevelPrefix,
+            int WritesPerMsg
+        ) SetUp(
             ConsoleLoggerOptions options = null,
             SimpleConsoleFormatterOptions simpleOptions = null,
             ConsoleFormatterOptions systemdOptions = null,
-            JsonConsoleFormatterOptions jsonOptions = null)
+            JsonConsoleFormatterOptions jsonOptions = null
+        )
         {
             // Arrange
             var sink = new ConsoleSink();
             var errorSink = new ConsoleSink();
             var console = new TestConsole(sink);
             var errorConsole = new TestConsole(errorSink);
-            var bufferMode = options == null ? ConsoleLoggerQueueFullMode.Wait : options.QueueFullMode;
-            var maxQueueLength = options == null ? ConsoleLoggerOptions.DefaultMaxQueueLengthValue : options.MaxQueueLength;
-            var consoleLoggerProcessor = new TestLoggerProcessor(console, errorConsole, bufferMode, maxQueueLength);
+            var bufferMode =
+                options == null ? ConsoleLoggerQueueFullMode.Wait : options.QueueFullMode;
+            var maxQueueLength =
+                options == null
+                    ? ConsoleLoggerOptions.DefaultMaxQueueLengthValue
+                    : options.MaxQueueLength;
+            var consoleLoggerProcessor = new TestLoggerProcessor(
+                console,
+                errorConsole,
+                bufferMode,
+                maxQueueLength
+            );
 
-            var formatters = new ConcurrentDictionary<string, ConsoleFormatter>(ConsoleLoggerTest.GetFormatters(simpleOptions, systemdOptions, jsonOptions).ToDictionary(f => f.Name));
+            var formatters = new ConcurrentDictionary<string, ConsoleFormatter>(
+                ConsoleLoggerTest
+                    .GetFormatters(simpleOptions, systemdOptions, jsonOptions)
+                    .ToDictionary(f => f.Name)
+            );
 
             ConsoleFormatter? formatter = null;
             var loggerOptions = options ?? new ConsoleLoggerOptions();
@@ -68,18 +89,33 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 default:
                     throw new ArgumentOutOfRangeException(nameof(loggerOptions.FormatterName));
             }
-            var logger = new ConsoleLogger(_loggerName, consoleLoggerProcessor, formatter, new LoggerExternalScopeProvider(), loggerOptions);
+            var logger = new ConsoleLogger(
+                _loggerName,
+                consoleLoggerProcessor,
+                formatter,
+                new LoggerExternalScopeProvider(),
+                loggerOptions
+            );
 
             return (logger, sink, errorSink, levelAsString, writesPerMsg);
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         public void ConsoleLoggerOptions_TimeStampFormat_IsReloaded()
         {
             // Arrange
-            var monitor = new TestOptionsMonitor(new ConsoleLoggerOptions() { FormatterName = "NonExistentFormatter" });
-            var loggerProvider = new ConsoleLoggerProvider(monitor, ConsoleLoggerTest.GetFormatters());
+            var monitor = new TestOptionsMonitor(
+                new ConsoleLoggerOptions() { FormatterName = "NonExistentFormatter" }
+            );
+            var loggerProvider = new ConsoleLoggerProvider(
+                monitor,
+                ConsoleLoggerTest.GetFormatters()
+            );
             var logger = (ConsoleLogger)loggerProvider.CreateLogger("Name");
 
             // Act & Assert
@@ -87,23 +123,37 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Equal(ConsoleFormatterNames.Simple, logger.Formatter.Name);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         [MemberData(nameof(FormatterNames))]
         public void InvalidLogLevel_Throws(string formatterName)
         {
             // Arrange
-            var t = SetUp(
-                new ConsoleLoggerOptions { FormatterName = formatterName }
-            );
+            var t = SetUp(new ConsoleLoggerOptions { FormatterName = formatterName });
             var logger = (ILogger)t.Logger;
 
             // Act/Assert
-            Assert.Throws<ArgumentOutOfRangeException>(() => logger.Log((LogLevel)8, 0, _state, null, _defaultFormatter));
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => logger.Log((LogLevel)8, 0, _state, null, _defaultFormatter)
+            );
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         [MemberData(nameof(FormatterNamesAndLevels))]
         public void NoMessageOrException_Noop(string formatterName, LogLevel level)
         {
@@ -112,7 +162,9 @@ namespace Microsoft.Extensions.Logging.Console.Test
             var levelPrefix = t.GetLevelPrefix(level);
             var logger = t.Logger;
             var sink = t.Sink;
-            var ex = new Exception("Exception message" + Environment.NewLine + "with a second line");
+            var ex = new Exception(
+                "Exception message" + Environment.NewLine + "with a second line"
+            );
 
             // Act
             Func<object, Exception, string> formatter = (state, exception) => null;
@@ -122,30 +174,50 @@ namespace Microsoft.Extensions.Logging.Console.Test
             Assert.Equal(0, sink.Writes.Count);
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/91538", typeof(PlatformDetection), nameof(PlatformDetection.IsWasmThreadingSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsThreadingSupported)
+        )]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/91538",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsWasmThreadingSupported)
+        )]
         [MemberData(nameof(FormatterNamesAndLevels))]
         public void Log_LogsCorrectTimestamp(string formatterName, LogLevel level)
         {
             // Arrange
             var t = SetUp(
                 new ConsoleLoggerOptions { FormatterName = formatterName },
-                new SimpleConsoleFormatterOptions { TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ", UseUtcTimestamp = false, ColorBehavior = LoggerColorBehavior.Enabled },
-                new ConsoleFormatterOptions { TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ", UseUtcTimestamp = false },
-                new JsonConsoleFormatterOptions {
+                new SimpleConsoleFormatterOptions
+                {
+                    TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
+                    UseUtcTimestamp = false,
+                    ColorBehavior = LoggerColorBehavior.Enabled,
+                },
+                new ConsoleFormatterOptions
+                {
+                    TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
+                    UseUtcTimestamp = false,
+                },
+                new JsonConsoleFormatterOptions
+                {
                     TimestampFormat = "yyyy-MM-ddTHH:mm:sszz ",
                     UseUtcTimestamp = false,
                     JsonWriterOptions = new JsonWriterOptions()
                     {
                         // otherwise escapes for timezone formatting from + to \u002b
                         Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping,
-                        Indented = true
-                    }
-                });
+                        Indented = true,
+                    },
+                }
+            );
             var levelPrefix = t.GetLevelPrefix(level);
             var logger = t.Logger;
             var sink = t.Sink;
-            var ex = new Exception("Exception message" + Environment.NewLine + "with a second line");
+            var ex = new Exception(
+                "Exception message" + Environment.NewLine + "with a second line"
+            );
 
             // Act
             logger.Log(level, 0, _state, ex, _defaultFormatter);
@@ -154,33 +226,42 @@ namespace Microsoft.Extensions.Logging.Console.Test
             switch (formatterName)
             {
                 case ConsoleFormatterNames.Simple:
-                {
-                    Assert.Equal(3, sink.Writes.Count);
-                    Assert.StartsWith(levelPrefix, sink.Writes[1].Message);
-                    Assert.Matches(@"^\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\s$", sink.Writes[0].Message);
-                    var parsedDateTime = DateTimeOffset.Parse(sink.Writes[0].Message.Trim());
-                    Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
-                }
-                break;
+                    {
+                        Assert.Equal(3, sink.Writes.Count);
+                        Assert.StartsWith(levelPrefix, sink.Writes[1].Message);
+                        Assert.Matches(
+                            @"^\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\s$",
+                            sink.Writes[0].Message
+                        );
+                        var parsedDateTime = DateTimeOffset.Parse(sink.Writes[0].Message.Trim());
+                        Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
+                    }
+                    break;
                 case ConsoleFormatterNames.Systemd:
-                {
-                    Assert.Single(sink.Writes);
-                    Assert.StartsWith(levelPrefix, sink.Writes[0].Message);
-                    var regexMatch = Regex.Match(sink.Writes[0].Message, @"^<\d>(\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2})\s[^\s]");
-                    Assert.True(regexMatch.Success);
-                    var parsedDateTime = DateTimeOffset.Parse(regexMatch.Groups[1].Value);
-                    Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
-                }
-                break;
+                    {
+                        Assert.Single(sink.Writes);
+                        Assert.StartsWith(levelPrefix, sink.Writes[0].Message);
+                        var regexMatch = Regex.Match(
+                            sink.Writes[0].Message,
+                            @"^<\d>(\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2})\s[^\s]"
+                        );
+                        Assert.True(regexMatch.Success);
+                        var parsedDateTime = DateTimeOffset.Parse(regexMatch.Groups[1].Value);
+                        Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
+                    }
+                    break;
                 case ConsoleFormatterNames.Json:
-                {
-                    Assert.Single(sink.Writes);
-                    var regexMatch = Regex.Match(sink.Writes[0].Message, @"(\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2})");
-                    Assert.True(regexMatch.Success, sink.Writes[0].Message);
-                    var parsedDateTime = DateTimeOffset.Parse(regexMatch.Groups[1].Value);
-                    Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
-                }
-                break;
+                    {
+                        Assert.Single(sink.Writes);
+                        var regexMatch = Regex.Match(
+                            sink.Writes[0].Message,
+                            @"(\d{4}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2}\D\d{2})"
+                        );
+                        Assert.True(regexMatch.Success, sink.Writes[0].Message);
+                        var parsedDateTime = DateTimeOffset.Parse(regexMatch.Groups[1].Value);
+                        Assert.Equal(DateTimeOffset.Now.Offset, parsedDateTime.Offset);
+                    }
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(formatterName));
             }
@@ -195,8 +276,14 @@ namespace Microsoft.Extensions.Logging.Console.Test
 
         private class NullNameConsoleFormatter : ConsoleFormatter
         {
-            public NullNameConsoleFormatter() : base(null) { }
-            public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter) { }
+            public NullNameConsoleFormatter()
+                : base(null) { }
+
+            public override void Write<TState>(
+                in LogEntry<TState> logEntry,
+                IExternalScopeProvider scopeProvider,
+                TextWriter textWriter
+            ) { }
         }
 
         public static TheoryData<string, LogLevel> FormatterNamesAndLevels
@@ -242,7 +329,6 @@ namespace Microsoft.Extensions.Logging.Console.Test
                 return data;
             }
         }
-
     }
 
     public class TestFormatter : ConsoleFormatter, IDisposable
@@ -250,7 +336,7 @@ namespace Microsoft.Extensions.Logging.Console.Test
         private IDisposable _optionsReloadToken;
 
         public TestFormatter(IOptionsMonitor<SimpleConsoleFormatterOptions> options)
-            : base ("TestFormatter")
+            : base("TestFormatter")
         {
             FormatterOptions = options.CurrentValue;
             ReloadLoggerOptions(options.CurrentValue);
@@ -268,7 +354,12 @@ namespace Microsoft.Extensions.Logging.Console.Test
         }
 
         internal SimpleConsoleFormatterOptions FormatterOptions { get; set; }
-        public override void Write<TState>(in LogEntry<TState> logEntry, IExternalScopeProvider scopeProvider, TextWriter textWriter)
+
+        public override void Write<TState>(
+            in LogEntry<TState> logEntry,
+            IExternalScopeProvider scopeProvider,
+            TextWriter textWriter
+        )
         {
             ;
         }
